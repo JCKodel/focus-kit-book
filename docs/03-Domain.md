@@ -36,6 +36,7 @@ A new concept enters here first, in both languages.
 | brownfield project | projeto brownfield | none until OD-1 | The frozen open-source fork used for `/analyze`. |
 | edition | edição | `en`, `pt` | One language of the book; `en` is the source. |
 | chapter | capítulo | `book/<edition>/NN-<slug>.md` | One file per edition; one delivery. |
+| draft marker | marca de rascunho | `status: draft` | The front matter line of a chapter not yet done; the site shows a banner and a mark in the navigation, and the chapter's delivery removes it. |
 | exercise | exercício | `### Exercise N.M` | A task on the guided project at the end of a chapter; answered in an appendix. |
 | disclosure list | lista de exposição | `FKB_DENYLIST` | The private terms that must never appear in the repository; kept outside it. |
 

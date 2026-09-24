@@ -68,8 +68,8 @@ built, `[x]` done. Edited by conversation in any session.
 * **Verify:** `make verify`, which runs the strict site build, edition
   parity, the em dash check, the prose rules, the link check and the
   disclosure scan. Green before anything is declared done. Created by
-  `site-skeleton` (build, parity, em dash); `disclosure-scan` and
-  `prose-rules` add their checks to it.
+  `site-skeleton` (build, parity, em dash); `disclosure-scan`,
+  `prose-rules` and `link-check` add their checks to it.
 * **Environments:**
   * local: `make serve` for the site, `make book` for PDF and EPUB in
     `output/` (never committed). A delivery leaves both building.
@@ -89,8 +89,10 @@ built, `[x]` done. Edited by conversation in any session.
   this repository, its pages or its commit messages. Created by
   `disclosure-scan`.
 * **Publish policy:** the agent never pushes, tags, releases or uploads.
-  A chapter that is not done carries the draft marker defined by
-  `site-skeleton`, so the site can publish `main` at any time.
+  A chapter that is not done carries the draft marker, the line
+  `status: draft` in its front matter, in both editions; the site shows a
+  banner and a mark in the navigation, and the chapter's delivery removes
+  the line when done. So the site can publish `main` at any time.
 * **Git:** trunk. The agent stages; it never commits or merges.
 
 ## 6. Commit

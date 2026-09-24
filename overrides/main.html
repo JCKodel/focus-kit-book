@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if page.meta and page.meta.status == "draft" %}
+    <div class="admonition warning draft-banner">
+      <p>{{ config.extra.draft_banner }}</p>
+    </div>
+  {% endif %}
+  {{ super() }}
+{% endblock %}

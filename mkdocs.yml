@@ -1,0 +1,57 @@
+site_name: One Page at a Time
+site_url: https://jckodel.github.io/focus-kit-book/
+site_author: J.C. Ködel
+docs_dir: book
+
+theme:
+  name: material
+  custom_dir: overrides
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+extra_css:
+  - assets/site.css
+
+extra:
+  status:
+    draft: Draft
+  draft_banner: "Draft: this chapter is still being written."
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: folder
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: pt
+          name: Português
+          build: true
+          site_name: Uma Página de Cada Vez
+          theme:
+            palette:
+              - media: "(prefers-color-scheme: light)"
+                scheme: default
+                toggle:
+                  icon: material/brightness-7
+                  name: Mudar para o modo escuro
+              - media: "(prefers-color-scheme: dark)"
+                scheme: slate
+                toggle:
+                  icon: material/brightness-4
+                  name: Mudar para o modo claro
+          extra:
+            status:
+              draft: Rascunho
+            draft_banner: "Rascunho: este capítulo ainda está sendo escrito."

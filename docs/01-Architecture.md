@@ -22,11 +22,28 @@ FOCUS does not apply: there is no product code, only content and a few build scr
 ```
 book/en/NN-<slug>.md     English edition, the source (A1-<slug>.md for appendices)
 book/pt/NN-<slug>.md     Portuguese edition, same file names
-book/assets/             images and figures shared by both editions
-scripts/                 build and check scripts
-mkdocs.yml, Makefile     created by site-skeleton
+book/assets/             images and figures shared by both editions; site.css (the draft mark in the navigation)
+overrides/main.html      theme override: the draft banner
+scripts/build.py         strict site build, warnings as findings (rule "build")
+scripts/check_parity.py  the two editions: same chapters, heading levels and status (rule "parity")
+scripts/check_em_dash.py no em dash in any text file (rule "em-dash")
+mkdocs.yml               the site: MkDocs Material, i18n in folder structure, no nav: key
+requirements.txt         mkdocs-material and mkdocs-static-i18n, exact versions
+Makefile                 the targets below
 docs/, work/             the process documents and the deliveries
+.venv/                   created by make from requirements.txt; ignored
+site/                    the built site; ignored
+output/                  PDF and EPUB; ignored
 ```
+
+| Target | Does |
+|---|---|
+| `.venv` | `python3 -m venv .venv` and `pip install -r requirements.txt`; rebuilt when `requirements.txt` changes. Only Python 3 is needed beforehand. |
+| `make serve` | `mkdocs serve`, at `http://127.0.0.1:8000/`, which redirects to `/focus-kit-book/` (the path of `site_url`); Portuguese under `pt/`. |
+| `make build` | `scripts/build.py`: `mkdocs build --strict` into `site/`. |
+| `make verify` | build, then parity, then em dash; stops at the first failing group. |
+
+The navigation comes from the file names in `NN-` order, with each chapter's H1 as its title.
 
 The file name of a chapter is the same in both editions, so parity is checked by name.
 Code of the guided project lives in its own repository (OD-2); the book shows it by quoting a tagged file, never by keeping a copy here.
@@ -42,6 +59,7 @@ Source material for the cases lives in the author's private folders and is never
 Every check prints `file:line: rule: message` and exits non-zero.
 `make verify` runs them all and stops at the first failing group.
 The site build runs with `--strict`, so a broken link or a missing page fails the build.
+MkDocs has its own message format, so `scripts/build.py` rewrites each warning as `file:line: build: message`: the doc file MkDocs names, at the line of the broken link, or line 1 when there is none; a warning that names no file points to `mkdocs.yml:1`.
 
 ## Environments
 

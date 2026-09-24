@@ -8,10 +8,11 @@ A line never leaves; it changes mark.
 When this milestone closes, a chapter written in both languages builds into the website and into PDF and EPUB, `make verify` guards the build, the parity of the editions, the prose and the disclosure list, `main` publishes itself to GitHub Pages, a tag produces a Release, and the brownfield project is chosen.
 
 ```
-[ ] site-skeleton          MkDocs Material bilingual site, one placeholder chapter per edition, draft marker, make serve and make verify (strict build, parity, em dash)
+[x] site-skeleton          MkDocs Material bilingual site, one placeholder chapter per edition, draft marker, make serve and make verify (strict build, parity, em dash)
 [ ] license-and-readme     AGPL-3.0 for scripts and code, CC BY-SA 4.0 for the text; README in English and Portuguese
 [ ] disclosure-scan        make scan against the out-of-repo disclosure list, locally and in Actions, part of make verify
 [ ] prose-rules            the anti-AI prose rules written in docs/04 and checked by make verify
+[ ] link-check             external links in the book checked, part of make verify (the strict build already fails on broken internal links)
 [ ] chapter-template       the chapter shape fixed, proven by chapter 1, Why process, written in both editions
 [ ] pdf-epub               make book produces PDF and EPUB in both editions from the same source
 [ ] pages-and-release      Actions publish the site on push to main and a Release with PDF and EPUB on a v* tag
