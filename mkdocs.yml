@@ -1,6 +1,7 @@
 site_name: One Page at a Time
 site_url: https://jckodel.github.io/focus-kit-book/
 site_author: J.C. Ködel
+copyright: '© 2026 J.C. Ködel · Text: <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> · Code: <a href="https://www.gnu.org/licenses/agpl-3.0.html">AGPL-3.0</a>'
 docs_dir: book
 
 theme:
@@ -39,6 +40,7 @@ plugins:
           name: Português
           build: true
           site_name: Uma Página de Cada Vez
+          copyright: '© 2026 J.C. Ködel · Texto: <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br">CC BY-SA 4.0</a> · Código: <a href="https://www.gnu.org/licenses/agpl-3.0.html">AGPL-3.0</a>'
           theme:
             palette:
               - media: "(prefers-color-scheme: light)"

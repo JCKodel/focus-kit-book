@@ -7,6 +7,7 @@
 * The book: English is the source (`book/en/`), Portuguese the translation (`book/pt/`, Brazilian Portuguese).
   A change to one edition is a change to both, in the same delivery (ADR-0004).
 * The Portuguese edition uses the Portuguese term of docs/03, and no synonym.
+* The README exists in both languages, `README.md` and `README.pt.md`, with the same sections in the same order; a change to one is a change to both, in the same delivery.
 
 ## Writing the book
 

@@ -22,3 +22,10 @@ CC BY-SA 4.0 is also declared one-way compatible with GPLv3 by Creative Commons,
 
 Everything in the repository is copyleft.
 Instructors and companies can use and adapt the book, including in paid workshops, but what they derive stays open under the same license.
+
+## Amendment, 2026-09-24
+
+* The project documents (`docs/`, `work/`) and the READMEs are CC BY-SA 4.0 too: they are prose, and the book quotes them as artifacts.
+* `book/assets/site.css` is code, AGPL-3.0-only, although it lives in `book/`.
+
+`README.md` and `README.pt.md` hold the table of which license covers what; `LICENSE` is the AGPL-3.0 text and `LICENSE-TEXT` the CC BY-SA 4.0 legal code.

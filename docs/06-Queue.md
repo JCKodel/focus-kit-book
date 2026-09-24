@@ -9,7 +9,7 @@ When this milestone closes, a chapter written in both languages builds into the 
 
 ```
 [x] site-skeleton          MkDocs Material bilingual site, one placeholder chapter per edition, draft marker, make serve and make verify (strict build, parity, em dash)
-[ ] license-and-readme     AGPL-3.0 for scripts and code, CC BY-SA 4.0 for the text; README in English and Portuguese
+[x] license-and-readme     AGPL-3.0 for scripts and code, CC BY-SA 4.0 for the text; README in English and Portuguese
 [ ] disclosure-scan        make scan against the out-of-repo disclosure list, locally and in Actions, part of make verify
 [ ] prose-rules            the anti-AI prose rules written in docs/04 and checked by make verify
 [ ] link-check             external links in the book checked, part of make verify (the strict build already fails on broken internal links)

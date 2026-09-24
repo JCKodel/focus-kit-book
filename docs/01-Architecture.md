@@ -31,6 +31,9 @@ mkdocs.yml               the site: MkDocs Material, i18n in folder structure, no
 requirements.txt         mkdocs-material and mkdocs-static-i18n, exact versions
 Makefile                 the targets below
 docs/, work/             the process documents and the deliveries
+README.md, README.pt.md  what the book is, where to read it, how to build and contribute, which license covers what
+LICENSE                  AGPL-3.0 text: scripts, build and site configuration (ADR-0003)
+LICENSE-TEXT             CC BY-SA 4.0 legal code: the book, docs/, work/, the READMEs (ADR-0003)
 .venv/                   created by make from requirements.txt; ignored
 site/                    the built site; ignored
 output/                  PDF and EPUB; ignored
