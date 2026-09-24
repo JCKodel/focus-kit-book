@@ -1,0 +1,2 @@
+description = "focus-kit: the brainstorm command. Reads .agents/skills/brainstorm/SKILL.md."
+prompt = "Read .agents/skills/brainstorm/SKILL.md and follow it. $ARGUMENTS is {{args}}."

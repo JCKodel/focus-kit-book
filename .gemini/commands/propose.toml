@@ -1,0 +1,2 @@
+description = "focus-kit: the propose command. Reads .agents/skills/propose/SKILL.md."
+prompt = "Read .agents/skills/propose/SKILL.md and follow it. $ARGUMENTS is {{args}}."

@@ -1,0 +1,6 @@
+interface:
+  display_name: "focus-kit: apply"
+  short_description: "focus-kit: the apply command. Read SKILL.md."
+
+policy:
+  allow_implicit_invocation: false

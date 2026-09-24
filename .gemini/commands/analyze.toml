@@ -1,0 +1,2 @@
+description = "focus-kit: the analyze command. Reads .agents/skills/analyze/SKILL.md."
+prompt = "Read .agents/skills/analyze/SKILL.md and follow it. $ARGUMENTS is {{args}}."

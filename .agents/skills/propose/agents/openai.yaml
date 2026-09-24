@@ -1,0 +1,6 @@
+interface:
+  display_name: "focus-kit: propose"
+  short_description: "focus-kit: the propose command. Read SKILL.md."
+
+policy:
+  allow_implicit_invocation: false

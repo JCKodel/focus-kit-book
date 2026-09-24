@@ -1,0 +1,6 @@
+interface:
+  display_name: "focus-kit: brainstorm"
+  short_description: "focus-kit: the brainstorm command. Read SKILL.md."
+
+policy:
+  allow_implicit_invocation: false
