@@ -33,7 +33,7 @@ A new concept enters here first, in both languages.
 | worktree | worktree | `git worktree` | A second working directory on its own branch, so agents build in parallel. |
 | case | caso | `ninjobs`, `case-a`, `case-b` | A real project the book draws on; anonymous when private. |
 | guided project | projeto guiado | `clinic` (placeholder, OD-2) | The scheduling app the reader builds through the book. |
-| brownfield project | projeto brownfield | none until OD-1 | The frozen open-source fork used for `/analyze`. |
+| brownfield project | projeto brownfield | `JCKodel/clahub@book-v1` | The frozen open-source fork used for `/analyze`. |
 | edition | edição | `en`, `pt` | One language of the book; `en` is the source. |
 | chapter | capítulo | `book/<edition>/NN-<slug>.md` | One file per edition; one delivery. |
 | draft marker | marca de rascunho | `status: draft` | The front matter line of a chapter not yet done; the site shows a banner and a mark in the navigation, and the chapter's delivery removes it. |

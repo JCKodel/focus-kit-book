@@ -22,7 +22,7 @@ It argues for the method with real cases and measured results, and it doubles as
 * Published as a website on GitHub Pages, updated on every push to `main`, and as PDF and EPUB in both languages on every tagged GitHub Release; the author uploads those to books.kodel.com.br.
 * Every chapter opens with what the reader can do after it, then delivers exactly that, then ends with key points and, from Part II on, exercises.
 * A guided project runs through the book: a neighbourhood clinic or salon scheduling app, built greenfield with `/brainstorm`, in TypeScript, in its own public repository with a tag per chapter.
-  A real open-source project, frozen in a tagged fork, is the brownfield example for `/analyze`.
+  A real open-source project, CLAHub, frozen in the fork `JCKodel/clahub` at tag `book-v1`, is the brownfield example for `/analyze`.
   This repository, a book written with focus-kit, is the non-software example.
 * Cases: Ninjobs by name (the author's product, where the method was born); the author's company projects only as **Case A** (a Power Platform project for a client) and **Case B** (a proposal for a company adoption program), with no names and no business details.
 
@@ -74,7 +74,7 @@ Every decision must answer yes to all of these:
 Nobody closes these alone; an agent never settles them by assumption.
 
 * **OD-1, the brownfield project.** Which open-source project is forked and frozen for `/analyze`.
-  Closed by the author after the `brownfield-research` delivery.
+  Closed on 2026-09-25: CLAHub, `JCKodel/clahub@book-v1` (ADR-0009, amendment).
 * **OD-2, the guided project's name and repository.** A public repository under the author's account; the name is a placeholder (`clinic`) until the author chooses.
 * **OD-3, what each private case may show.** For every passage drawn from Case A or Case B, the author approves the anonymized text before the chapter is done.
 * **OD-4, repointing the kit.** focus-kit's README and `documents.md` point FOCUS at books.kodel.com.br and the earlier FOCUS book.

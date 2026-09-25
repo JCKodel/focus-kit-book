@@ -64,6 +64,7 @@ The navigation comes from the file names in `NN-` order, with each chapter's H1 
 
 The file name of a chapter is the same in both editions, so parity is checked by name.
 Code of the guided project lives in its own repository (OD-2); the book shows it by quoting a tagged file, never by keeping a copy here.
+Code of the brownfield project lives in the fork `JCKodel/clahub`; the book quotes it at tag `book-v1`, never copies it (ADR-0009).
 
 ## Data
 
