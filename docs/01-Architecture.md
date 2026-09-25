@@ -12,7 +12,7 @@ One Markdown file per chapter per edition, built into a bilingual website by MkD
 | Website | MkDocs Material with the static i18n plugin | Bilingual navigation, search, light and dark themes, native Mermaid. Chosen over a GitHub wiki (ADR-0001) and over Quarto (ADR-0002). |
 | PDF and EPUB | pandoc, weasyprint, mermaid-cli | A pipeline the author already runs for books; installed on the author's machine. |
 | Diagrams | Mermaid in the Markdown | Text in the repository, rendered by both outputs. |
-| Automation | GitHub Actions | Pages on push to `main`; Release on a `v*` tag (ADR-0014). |
+| Automation | GitHub Actions | `make verify` on every push; Pages on push to `main`; Release on a `v*` tag (ADR-0014). |
 | Scripts | Make, and Python 3 for checks | Nothing to install beyond what the build already needs. |
 
 ## How the repository is organized
@@ -27,6 +27,9 @@ overrides/main.html      theme override: the draft banner
 scripts/build.py         strict site build, warnings as findings (rule "build")
 scripts/check_parity.py  the two editions: same chapters, heading levels and status (rule "parity")
 scripts/check_em_dash.py no em dash in any text file (rule "em-dash")
+scripts/check_disclosure.py no term of the disclosure list in a file path or text file (rule "disclosure"; ADR-0012)
+scripts/repo_files.py    the files the checks read: tracked, plus untracked and not ignored
+.github/workflows/verify.yml  make verify on every push, the list from the secret DISCLOSURE_DENYLIST
 mkdocs.yml               the site: MkDocs Material, i18n in folder structure, no nav: key
 requirements.txt         mkdocs-material and mkdocs-static-i18n, exact versions
 Makefile                 the targets below
@@ -37,6 +40,7 @@ LICENSE-TEXT             CC BY-SA 4.0 legal code: the book, docs/, work/, the RE
 .venv/                   created by make from requirements.txt; ignored
 site/                    the built site; ignored
 output/                  PDF and EPUB; ignored
+__pycache__/             written by Python when a check imports scripts/repo_files.py; ignored
 ```
 
 | Target | Does |
@@ -44,7 +48,8 @@ output/                  PDF and EPUB; ignored
 | `.venv` | `python3 -m venv .venv` and `pip install -r requirements.txt`; rebuilt when `requirements.txt` changes. Only Python 3 is needed beforehand. |
 | `make serve` | `mkdocs serve`, at `http://127.0.0.1:8000/`, which redirects to `/focus-kit-book/` (the path of `site_url`); Portuguese under `pt/`. |
 | `make build` | `scripts/build.py`: `mkdocs build --strict` into `site/`. |
-| `make verify` | build, then parity, then em dash; stops at the first failing group. |
+| `make verify` | build, then parity, then em dash, then disclosure; stops at the first failing group. |
+| `make scan` | the disclosure scan alone. The list is `FKB_DENYLIST`, or `~/.config/focus-kit-book/denylist.txt`; one entry per line, `#` comments, `re:<pattern>` for a regular expression. Without a list it is skipped locally and fails in Actions (`CI` set). A finding names the file, the line and the entry's number in the list, never the term; a matched part of a path prints as `***`. |
 
 The navigation comes from the file names in `NN-` order, with each chapter's H1 as its title.
 
@@ -69,6 +74,7 @@ MkDocs has its own message format, so `scripts/build.py` rewrites each warning a
 | Name | What runs there | How it is updated |
 |---|---|---|
 | local | `make serve` (site), `make book` (PDF and EPUB into `output/`, never committed) | by hand |
+| GitHub Actions | `make verify` on every push, any branch, with the list from the secret `DISCLOSURE_DENYLIST` | the author sets the secret; runs on push |
 | GitHub Pages | the website, from `main` | Actions, on every push to `main` |
 | GitHub Release | PDF and EPUB, both editions | Actions, on a `v*` tag the author creates; the author uploads them to books.kodel.com.br |
 

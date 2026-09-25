@@ -1,0 +1,21 @@
+name: verify
+
+on: push
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Write the disclosure list
+        env:
+          DISCLOSURE_DENYLIST: ${{ secrets.DISCLOSURE_DENYLIST }}
+        run: printf '%s' "$DISCLOSURE_DENYLIST" > "$RUNNER_TEMP/denylist.txt"
+      - name: make verify
+        run: FKB_DENYLIST="$RUNNER_TEMP/denylist.txt" make verify

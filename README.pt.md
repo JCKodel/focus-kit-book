@@ -18,7 +18,7 @@ Um livro gratuito que leva quem nunca seguiu processo algum a conduzir projetos 
 Você precisa de Python 3 e make.
 
 * `make serve` abre o site em <http://127.0.0.1:8000/>.
-* `make verify` roda as verificações.
+* `make verify` roda as verificações. A varredura de exposição precisa de uma lista que só o autor tem; sem ela, é pulada.
 
 ## Como é escrito
 

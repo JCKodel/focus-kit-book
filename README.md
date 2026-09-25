@@ -18,7 +18,7 @@ A free book that takes a reader who has never followed any process to running wh
 You need Python 3 and make.
 
 * `make serve` opens the site at <http://127.0.0.1:8000/>.
-* `make verify` runs the checks.
+* `make verify` runs the checks. The disclosure scan needs a list only the author has; without it, the scan is skipped.
 
 ## How it is written
 

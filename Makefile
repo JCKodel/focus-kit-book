@@ -1,4 +1,4 @@
-.PHONY: serve build verify
+.PHONY: serve build verify scan
 
 .venv: requirements.txt
 	python3 -m venv .venv
@@ -14,3 +14,7 @@ build: .venv
 verify: build
 	python3 scripts/check_parity.py
 	python3 scripts/check_em_dash.py
+	python3 scripts/check_disclosure.py
+
+scan:
+	python3 scripts/check_disclosure.py
