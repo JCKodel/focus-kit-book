@@ -20,7 +20,11 @@
 * **Evidence.** Every number cites its source: a primary publication, or the case's recorded artifact.
   Every artifact shown (a page, a queue, a command output) comes from a real run.
   The Portuguese edition shows an English prose artifact (a rules file, a page) translated, and says before it that the original is in English; code, commands and their output stay as they ran.
-  An excerpt shown as evidence of how a tool worded something (chapter 3's three excerpts) stays in English, byte for byte, in both editions, and each edition follows it with one sentence in its own language saying what it says.
+  An excerpt shown as evidence of how a tool worded something (chapter 3's three excerpts) stays in English, byte for byte, in both editions; the Portuguese edition follows it with its full translation, and each edition then says in one sentence what it shows.
+* **Context before an excerpt.** A reader who has read only the previous chapters understands every artifact shown without opening anything else (docs/00 product question 5).
+  Before it, the text gives what the artifact is about: the project, the problem it answers, where it comes from.
+  An excerpt is a whole unit that means something on its own (a user story with its scenarios, a requirement, a page's section), never a loose line that leans on the lines around it; when several tools are compared, each shows the same unit.
+* **Teach, do not only show.** After an artifact, one sentence says what the reader should see in it; a term, a name or a choice the reader has not met yet is explained where it appears, or the text says which chapter explains it.
 * **Code** is TypeScript only, quoted from a tag of the guided project's repository with its path.
 * **Private cases** appear only as Case A and Case B; docs/03 §Entities and invariants says what may never appear.
 

@@ -27,7 +27,27 @@ In the run, both were used spec-first: each wrote its spec before the task, and 
 
 ## One feature, three tools
 
-The run gave three tools the same brief on the same four-file TypeScript project: a client can cancel their own appointment up to 24 hours before it starts, a cancelled appointment frees its slot, and a later cancellation is refused with a message that says why.[^spec-driven-run]
+The run started from a small TypeScript project for a clinic, in four files.[^spec-driven-run]
+Its code has an `Appointment` type, with a client name, a start time and the status `booked`, a list of appointments kept in memory, and a `book(clientName, startsAt)` function that adds one to the list.
+It has no way to cancel, no rule about who takes which time slot, and no tests yet.
+
+Each tool got the same brief, word for word, in the steps where its path asks for it:
+
+```markdown
+## Feature
+
+A client can cancel their own appointment up to 24 hours before it starts. A cancelled appointment frees its slot. A cancellation later than that is refused with a message that says why.
+
+## Answers
+
+Storage stays in memory. There is no screen: the feature is a function in the module. The client is identified by `clientName`, with no login. Times are the clinic's local time. Tests use `node --test`. No notification is sent.
+
+## Principles
+
+Keep it simple. TypeScript, strict. Every rule has a test.
+```
+
+When a tool asked something the brief did not answer, the run took the tool's own default, or "the simplest option" when it offered none.
 Each tool followed its default path, each step in a fresh session, and stopped before writing code.
 All three ran on 2026-09-25, with the model `claude-opus-5-5`.
 The third tool is focus-kit, the method this book teaches from chapter 4; here it is one row of the table.
@@ -81,37 +101,85 @@ Every one of those files is something a person has to review before the code is 
 
 The brief holds one rule about time: up to 24 hours before.
 Spec Kit restates it in 8 of its 8 files, OpenSpec in 4 of its 6, focus-kit in its 1.[^rule-count]
-The same case, a cancellation exactly 24 hours before, reads this way in each tool.
+Here is the same part of the decision in each tool: a cancellation made in time is accepted, and one made exactly 24 hours before counts as in time.
 
-Spec Kit, in `spec.md`:
+Spec Kit, in `specs/001-cancel-appointment/spec.md`, the first of its user stories:
 
 ```markdown
+### User Story 1 - Cancel an appointment in good time (Priority: P1)
+
+A client who has booked an appointment finds they can't make it. At least 24 hours before the
+appointment starts, they cancel it. The appointment is marked as cancelled and the client gets
+confirmation that the cancellation went through.
+
+**Why this priority**: This is the core ability the feature exists for. Without it nothing else
+in this spec applies.
+
+**Independent Test**: Book an appointment more than 24 hours in the future, cancel it as the same
+client, and check that it now shows as cancelled.
+
+**Acceptance Scenarios**:
+
+1. **Given** a client has a booked appointment starting 3 days from now, **When** that client
+   cancels it, **Then** the appointment's status becomes "cancelled" and the client is told the
+   cancellation succeeded.
 2. **Given** a client has a booked appointment starting exactly 24 hours from now, **When** that
    client cancels it, **Then** the cancellation is accepted (exactly 24 hours counts as "up to
    24 hours before").
 ```
 
-An acceptance scenario in Given, When, Then form, with a note on how to read "up to".
+A user story, why it has its priority, how to test it on its own, and two scenarios in Given, When, Then form; the second is the 24-hour case.
 
-OpenSpec, in the change's `spec.md`:
+OpenSpec, in the change's `specs/appointment-cancellation/spec.md`, the first of its requirements:
 
 ```markdown
+### Requirement: Client cancels their own appointment with 24 hours' notice
+The system SHALL let a caller cancel an appointment by giving the appointment identifier, the client name, and the current time in clinic local time. The cancellation SHALL succeed when the appointment is booked, belongs to that client name, and starts 24 hours or more after the current time. A successful cancellation SHALL set the appointment's status to `cancelled` and return the appointment. The appointment record SHALL be kept. The system SHALL NOT send any notification.
+
+#### Scenario: Cancelling well ahead of time
+- **WHEN** client "Ana" cancels their booked appointment 48 hours before it starts
+- **THEN** the cancellation succeeds and the appointment's status is `cancelled`
+
 #### Scenario: Cancelling exactly 24 hours ahead
 - **WHEN** client "Ana" cancels their booked appointment exactly 24 hours before it starts
 - **THEN** the cancellation succeeds and the appointment's status is `cancelled`
 ```
 
-A named scenario under a requirement, in WHEN and THEN lines.
+A requirement in sentences with SHALL, then two named scenarios in WHEN and THEN lines; the second is the 24-hour case.
 
-focus-kit, in `work/cancel.md`:
+focus-kit, in `work/cancel.md`, the page's objective and behaviour:
 
 ```markdown
+**Objective.** Staff can cancel an appointment for the client whose name it
+carries, up to 24 hours before it starts. The cancelled appointment frees its
+slot, and a refusal comes back with a message that says why.
+
+**Behaviour.** In the scenarios, "now" is the time the caller passes in.
+- Ada has appointment 1 on 12 March at 10:00. Staff cancel it at 11 March
+  09:00 (25 hours before). The answer is appointment 1 with status cancelled.
 - The same thing at exactly 11 March 10:00 (24 hours before) succeeds too.
+- The same thing at 11 March 10:01 (23 h 59 min before) is refused with
+  `too-late`. The appointment stays booked.
+- Cancelling after the start time has passed is refused with `too-late`.
+- Cancelling appointment 99 when it does not exist is refused with
+  `not-found`.
+- Cancelling appointment 1 with the name "Bob" is refused with
+  `not-your-appointment`. The appointment stays booked. Names are compared
+  exactly as given.
+- Cancelling appointment 1 a second time is refused with `already-cancelled`.
+- When more than one refusal applies, the first in this order wins:
+  `not-found`, `not-your-appointment`, `already-cancelled`, `too-late`.
+- After appointment 1 is cancelled, booking another client for 12 March at
+  10:00 succeeds.
+- A cancelled appointment stays in memory with its number. The next booking
+  still gets the next number.
+- No notification is sent. Nothing is written outside memory.
 ```
 
-One line of the page's scenarios, reusing the example of the line above it.
+The objective in three sentences, then the behaviour as examples with a date and a time; the second is the 24-hour case.
+The page says "staff" where the brief says "client" because the project documents focus-kit wrote before the page named clinic staff as the only user, booking and cancelling for the client.[^spec-driven-run]
 
-The three say the same thing.
+The three decide the same thing.
 The difference is how many other files say it again: a rule written in 8 places is read 8 times in review, and when it changes, it changes in 8 places.
 Böckeler found the same with Spec Kit: its files "*were repetitive, both with each other, and with the code that already existed*", and "*very verbose and tedious to review.*"[^bockeler-2025]
 

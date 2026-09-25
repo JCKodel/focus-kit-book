@@ -34,8 +34,8 @@ scripts/check_disclosure.py no term of the disclosure list in a file path or tex
 scripts/patterns.py      compile_entry: the entry syntax (plain or re:) shared by the prose and disclosure checks
 scripts/markdown.py      front_matter: the fields and the body, shared by parity and the book build; mask: front matter, code and HTML comments as spaces, shared by the prose and link checks
 scripts/repo_files.py    the files the checks read: tracked, plus untracked and not ignored
-pandoc/pdf.css           the PDF: A5, margins, page numbers, the fonts by @font-face
-pandoc/epub.css          the EPUB: no @font-face
+pandoc/pdf.css           the PDF: A5, margins, page numbers, the fonts by @font-face, a wrapped code line starting at the margin
+pandoc/epub.css          the EPUB: no @font-face; a wrapped code line starts at the margin
 pandoc/fonts/            Merriweather (4 styles), Google Sans (variable), Iosevka Term Regular; <Family>-OFL.txt each
 .github/workflows/verify.yml  jobs verify (make verify on every push, the list from the secret DISCLOSURE_DENYLIST), pages (main only) and release (v* tags only), each after verify
 mkdocs.yml               the site: MkDocs Material, i18n in folder structure, footnotes, no nav: key
