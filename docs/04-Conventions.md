@@ -135,6 +135,7 @@ There is no product code to test.
 The checks are the tests: site build (strict), edition parity, em dash, prose rules, links, disclosure scan.
 Each lives in `scripts/` and runs from `make verify`.
 The strict build catches a broken internal link; `links` catches an external URL in either edition, either README or `mkdocs.yml` that answers 404, 410, another 4xx or a 5xx, whose host or connection fails, or that times out. 401, 403 and 429 pass, since the server exists; URLs in code, HTML comments and the front matter, under `site_url`, on `localhost`, `127.0.0.1` and `example.*` are not fetched.
+The disclosure scan also reads every commit message in the history, and the hooks of `make hooks` run it on each commit's staged files and message before the commit exists: a commit message once carried a term of the list, which a scan of the files cannot see.
 The em dash check skips `work/done/spec-driven-run/`: it keeps the output of Spec Kit, OpenSpec and focus-kit byte for byte as the evidence of chapter 3, and no reader of the book reads it there; the disclosure scan still covers it.
 A new check enters only when it names the error it would have caught (docs/05 §7).
 

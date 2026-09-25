@@ -30,14 +30,16 @@ scripts/check_em_dash.py no em dash in any text file but the evidence of work/do
 scripts/check_prose.py   the prose rules of docs/04 in both editions and both READMEs (rule "prose")
 scripts/check_links.py   every external URL in both editions, both READMEs and mkdocs.yml still answers (rule "links")
 scripts/build_book.py    PDF and EPUB of both editions into output/ (rule "book")
-scripts/check_disclosure.py no term of the disclosure list in a file path or text file (rule "disclosure"; ADR-0012)
+scripts/check_disclosure.py no term of the disclosure list in a file path, a text file or a commit message; --staged and --message for the hooks (rule "disclosure"; ADR-0012)
+.githooks/pre-commit     check_disclosure.py --staged: the staged paths and their staged text; POSIX sh, executable
+.githooks/commit-msg     check_disclosure.py --message: the commit message, without git's # lines and the diff below the scissors line of commit -v
 scripts/patterns.py      compile_entry: the entry syntax (plain or re:) shared by the prose and disclosure checks
 scripts/markdown.py      front_matter: the fields and the body, shared by parity and the book build; mask: front matter, code and HTML comments as spaces, shared by the prose and link checks
 scripts/repo_files.py    the files the checks read: tracked, plus untracked and not ignored
 pandoc/pdf.css           the PDF: A5, margins, page numbers, the fonts by @font-face, a wrapped code line starting at the margin
 pandoc/epub.css          the EPUB: no @font-face; a wrapped code line starts at the margin
 pandoc/fonts/            Merriweather (4 styles), Google Sans (variable), Iosevka Term Regular; <Family>-OFL.txt each
-.github/workflows/verify.yml  jobs verify (make verify on every push, the list from the secret DISCLOSURE_DENYLIST), pages (main only) and release (v* tags only), each after verify
+.github/workflows/verify.yml  jobs verify (make verify on every push, the full history, the list from the secret DISCLOSURE_DENYLIST), pages (main only) and release (v* tags only), each after verify
 mkdocs.yml               the site: MkDocs Material, i18n in folder structure, footnotes, no nav: key
 requirements.txt         mkdocs-material and mkdocs-static-i18n, exact versions
 Makefile                 the targets below
@@ -56,9 +58,10 @@ __pycache__/             written by Python when a check imports a module of scri
 | `.venv` | `python3 -m venv .venv` and `pip install -r requirements.txt`; rebuilt when `requirements.txt` changes. Only Python 3 is needed beforehand. |
 | `make serve` | `mkdocs serve`, at `http://127.0.0.1:8000/`, which redirects to `/focus-kit-book/` (the path of `site_url`); Portuguese under `pt/`. |
 | `make build` | `scripts/build.py`: `mkdocs build --strict` into `site/`. |
-| `make verify` | build, then parity, then em dash, then prose, then links, then disclosure; stops at the first failing group. The link check needs the network: offline it is skipped locally and fails in Actions (`CI` set). |
+| `make verify` | build, then parity, then em dash, then prose, then links, then disclosure (files and every commit message, as `make scan`); stops at the first failing group. The link check needs the network: offline it is skipped locally and fails in Actions (`CI` set). |
 | `make book` | `scripts/build_book.py`: for each edition, a PDF and an EPUB in `output/` (`one-page-at-a-time.*`, `uma-pagina-de-cada-vez.*`), then their paths. Needs pandoc and weasyprint; not part of `make verify`. Each file: title page, rights page, table of contents, chapters in `NN-` order, appendices in `A<n>-` order; a draft carries its banner, notes end their chapter. Title and subtitle come from `book/<edition>/index.md`, author, rights and banner from `mkdocs.yml`. |
-| `make scan` | the disclosure scan alone. The list is `FKB_DENYLIST`, or `~/.config/focus-kit-book/denylist.txt`; one entry per line, `#` comments, `re:<pattern>` for a regular expression. Without a list it is skipped locally and fails in Actions (`CI` set). A finding names the file, the line and the entry's number in the list, never the term; a matched part of a path prints as `***`. |
+| `make hooks` | `git config core.hooksPath .githooks`, once per clone: the pre-commit hook refuses a commit whose staged paths or staged text match the list, the commit-msg hook one whose message does. Both refuse every commit when the list is missing. A clean commit prints nothing; `git commit --no-verify` skips them, and `make scan` then finds the commit. |
+| `make scan` | the disclosure scan alone: the files, then the message of every commit in the history (`<sha, 12 chars>:<line>: disclosure: commit message matches list entry <n>`, line 1 the subject); with a list and without `CI`, it also fails while the hooks are off (`Makefile:1: disclosure: hooks are off; run make hooks`). The list is `FKB_DENYLIST`, or `~/.config/focus-kit-book/denylist.txt`; one entry per line, `#` comments, `re:<pattern>` for a regular expression. Without a list it is skipped locally and fails in Actions (`CI` set). A finding names the file, the line and the entry's number in the list, never the term; a matched part of a path prints as `***`. |
 
 The navigation comes from the file names in `NN-` order, with each chapter's H1 as its title.
 

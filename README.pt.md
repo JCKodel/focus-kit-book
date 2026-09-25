@@ -19,6 +19,7 @@ Você precisa de Python 3 e make.
 
 * `make serve` abre o site em <http://127.0.0.1:8000/>.
 * `make verify` roda as verificações. A varredura de exposição precisa de uma lista que só o autor tem; sem ela, é pulada.
+* `make hooks`, rodado uma vez num clone, liga os hooks do git que rodam a varredura de exposição nos arquivos preparados e na mensagem de cada commit. Eles recusam todo commit quando falta a lista, então só o autor, que tem a lista, os liga; com a lista, `make verify` falha até que estejam ligados.
 * `make book` grava o PDF e o EPUB das duas edições em `output/`. Precisa de pandoc e weasyprint:
   * macOS: `brew install pandoc weasyprint`
   * Debian ou Ubuntu: `sudo apt install pandoc weasyprint`

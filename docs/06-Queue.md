@@ -36,6 +36,7 @@ When this milestone closes, a reader can install the kit, document a new or an e
 
 ```
 [x] guided-project-repo    the guided project's public repository, name chosen (OD-2), a tag per chapter
+[x] commit-hooks           pre-commit and commit-msg hooks run the disclosure list on staged files and messages; make verify checks the history's messages
 [ ] install-and-hosts      Chapter 5: install, update, and how each host invokes the commands; Claude Code shown running, Copilot and Codex from their cited documentation, and why the hosts are alike enough that the method does not depend on one
 [ ] the-documents          Chapter 6: docs/00 to 06, ADRs, AGENTS.md, and why documents do the work
 [ ] brainstorm             Chapter 7: /brainstorm on the guided project, and choosing a stack by what the agent knows (the Ninjobs lesson of chapter 4)

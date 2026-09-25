@@ -69,7 +69,8 @@ built, `[x]` done. Edited by conversation in any session.
   parity, the em dash check, the prose rules, the link check and the
   disclosure scan. Green before anything is declared done. Created by
   `site-skeleton` (build, parity, em dash); `disclosure-scan`,
-  `prose-rules` and `link-check` add their checks to it.
+  `prose-rules` and `link-check` add their checks to it; `commit-hooks`
+  adds the commit messages and the hooks to the disclosure scan.
 * **Environments:**
   * local: `make serve` for the site, `make book` for PDF and EPUB in
     `output/` (never committed). A delivery leaves both building.
@@ -92,7 +93,11 @@ built, `[x]` done. Edited by conversation in any session.
   in Actions it comes from the secret `DISCLOSURE_DENYLIST`. No term of
   that list, no private path and no source folder name is ever written in
   this repository, its pages or its commit messages. Created by
-  `disclosure-scan`.
+  `disclosure-scan`. `commit-hooks` adds the check of every commit
+  message to `make verify` and the hooks: a clone that has the list runs
+  `make hooks` once, and from then on a commit whose staged files or
+  message match the list is refused before it exists; `make verify`
+  fails while they are off.
 * **Publish policy:** the agent never pushes, tags, releases or uploads.
   A chapter that is not done carries the draft marker, the line
   `status: draft` in its front matter, in both editions; the site shows a

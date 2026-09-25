@@ -1,4 +1,4 @@
-.PHONY: serve build verify scan book
+.PHONY: serve build verify scan hooks book
 
 .venv: requirements.txt
 	python3 -m venv .venv
@@ -20,6 +20,9 @@ verify: build
 
 scan:
 	python3 scripts/check_disclosure.py
+
+hooks:
+	git config core.hooksPath .githooks
 
 book:
 	python3 scripts/build_book.py
