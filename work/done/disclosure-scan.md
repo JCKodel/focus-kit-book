@@ -91,7 +91,7 @@ Examples on this page and in the proof use made-up entries only (`acme`, `10.0.0
 * [x] One-time audit: every commit message and diff in `git log --all -p` scanned against the author's real list; recorded as "N commits scanned, M findings", with list entry numbers only.
 * [x] `make verify` green locally with the real list, stopping at disclosure when a term is planted.
 * [x] docs/01 and both READMEs updated; docs/06 line marked `[x]`.
-* [ ] Author, after the commit: secret set, push, the `verify` run green in Actions.
+* [x] Author, after the commit: secret set, push, the `verify` run green in Actions (run 36132817580, 2026-09-25).
 
 **What happened.**
 
