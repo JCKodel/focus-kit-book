@@ -14,4 +14,4 @@ The author's approval is a line of the chapter page's Done when.
 
 ## Consequences
 
-Chapter 20 teaches `[?]` from Case A, as a customization this project did not need.
+Chapter 21 teaches `[?]` from Case A, as a customization this project did not need.

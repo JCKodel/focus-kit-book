@@ -38,7 +38,8 @@ A new concept enters here first, in both languages.
 | git-flow | git-flow | `develop`, `feature/*`, `release/*`, `hotfix/*` | A branching model with long-lived branches for teams that ship versions. |
 | worktree | worktree | `git worktree` | A second working directory on its own branch, so agents build in parallel. |
 | case | caso | `ninjobs`, `case-a`, `case-b` | A real project the book draws on; anonymous when private. |
-| guided project | projeto guiado | `clinic` (placeholder, OD-2) | The scheduling app the reader builds through the book. |
+| guided project | projeto guiado | `JCKodel/focus-kit-clinic` | The scheduling app the reader builds through the book. |
+| chapter tag | tag do capítulo | `book-v1/<chapter-slug>` | The annotated tag on the guided project's commit that a chapter quotes; only a chapter that changes the project has one, and a published tag never moves. |
 | brownfield project | projeto brownfield | `JCKodel/clahub@book-v1` | The frozen open-source fork used for `/analyze`. |
 | edition | edição | `en`, `pt` | One language of the book; `en` is the source. |
 | chapter | capítulo | `book/<edition>/NN-<slug>.md` | One file per edition; one delivery. |

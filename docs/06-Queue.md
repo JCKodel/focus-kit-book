@@ -35,8 +35,8 @@ When this milestone closes, a reader who has never followed a process knows why 
 When this milestone closes, a reader can install the kit, document a new or an existing project, and deliver a milestone with `/propose` and `/apply`, following the guided project.
 
 ```
-[ ] guided-project-repo    the guided project's public repository, name chosen (OD-2), a tag per chapter
-[ ] install-and-hosts      Chapter 5: install, update, and how each host invokes the commands
+[x] guided-project-repo    the guided project's public repository, name chosen (OD-2), a tag per chapter
+[ ] install-and-hosts      Chapter 5: install, update, and how each host invokes the commands; Claude Code shown running, Copilot and Codex from their cited documentation, and why the hosts are alike enough that the method does not depend on one
 [ ] the-documents          Chapter 6: docs/00 to 06, ADRs, AGENTS.md, and why documents do the work
 [ ] brainstorm             Chapter 7: /brainstorm on the guided project, and choosing a stack by what the agent knows (the Ninjobs lesson of chapter 4)
 [ ] analyze                Chapter 8: /analyze on the brownfield project
@@ -59,23 +59,24 @@ When this milestone closes, a reader can organize code by feature with errors as
 
 ## M5. Part IV, Git for agents and teams
 
-When this milestone closes, a reader can choose between trunk, a branch per delivery and a worktree per delivery, run agents in parallel, and use the commit as the human review.
+When this milestone closes, a reader can choose between trunk, a branch per delivery and a worktree per delivery, run agents in parallel, use the commit as the human review, and run a team's work on GitHub with pull requests, issues and a Projects board.
 
 ```
 [ ] git-essentials         Chapter 17: commits, branches, merges, trunk and git-flow
 [ ] worktrees              Chapter 18: worktrees and parallel agents, and where parallelism really stops
 [ ] commit-as-review       Chapter 19: the agent stages, the person commits, and why
+[ ] github-for-teams       Chapter 20: pull requests as the team's review, issues, Projects boards, and why the wiki is not docs/ (the agent reads the repository, not the wiki)
 ```
 
 ## M6. Part V, Beyond code
 
-When this milestone closes, a reader can adapt the process to a team's tools, ask the project questions as they would ask a colleague, and use the method on work that is not software.
+When this milestone closes, a reader can adapt the process to a team's tools, including GitHub issues and a Projects board kept in step by the kit, ask the project questions as they would ask a colleague, and use the method on work that is not software.
 
 ```
-[ ] customizing            Chapter 20: extra marks, question deliveries, proof files, a board mirror (Case A)
-[ ] project-as-assistant   Chapter 21: what is pending, how is it going, who is away, answered from the documents
-[ ] beyond-software        Chapter 22: analyses, proposals (Case B) and this book
-[ ] adoption               Chapter 23: taking the method to a team and a company
+[ ] customizing            Chapter 21: extra marks, question deliveries, proof files, a board mirror (Case A), and the queue mirrored to GitHub issues and a Projects board, built and tagged in the guided project
+[ ] project-as-assistant   Chapter 22: what is pending, how is it going, who is away, answered from the documents
+[ ] beyond-software        Chapter 23: analyses, proposals (Case B), codeless projects (Case A), client communication as a source of truth, data work (Ninjobs' database security rules as deliveries), and this book
+[ ] adoption               Chapter 24: taking the method to a team and a company (Case B)
 ```
 
 ## M7. Appendices and launch

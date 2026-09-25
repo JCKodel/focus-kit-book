@@ -19,3 +19,11 @@ FOCUS examples use the same app.
 
 Readers of other languages follow the ideas, not the syntax.
 The name and repository are chosen in `guided-project-repo` (docs/00 OD-2).
+
+## Amendment, 2026-09-25
+
+* The name is `focus-kit-clinic`, the repository `JCKodel/focus-kit-clinic`, public, on `main`.
+* A clinic, not a salon: chapter 3's run already used one.
+* Licenses as ADR-0003, unchanged: code, scripts and configuration AGPL-3.0-only; `docs/`, `work/` and the README CC BY-SA 4.0; focus-kit's installed command files under focus-kit's terms.
+* English only: identifiers, documents and README. The Portuguese edition shows its prose artifacts translated (docs/04 §Evidence); there is no Portuguese copy of the repository.
+* The tag rule: `book-v1/start` is the empty starting point, before chapter 5. A chapter that changes the project ends with the annotated tag `book-v1/<chapter-slug>` on the commit it quotes; a chapter that changes nothing has no tag, and its exercises start from the latest earlier tag. A published tag never moves; a second edition tags `book-v2/*`.

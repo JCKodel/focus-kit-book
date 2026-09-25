@@ -25,7 +25,7 @@
   Before it, the text gives what the artifact is about: the project, the problem it answers, where it comes from.
   An excerpt is a whole unit that means something on its own (a user story with its scenarios, a requirement, a page's section), never a loose line that leans on the lines around it; when several tools are compared, each shows the same unit.
 * **Teach, do not only show.** After an artifact, one sentence says what the reader should see in it; a term, a name or a choice the reader has not met yet is explained where it appears, or the text says which chapter explains it.
-* **Code** is TypeScript only, quoted from a tag of the guided project's repository with its path.
+* **Code** is TypeScript only, quoted from the guided project's repository at a chapter tag `book-v1/<chapter-slug>`, with its path.
 * **Private cases** appear only as Case A and Case B; docs/03 §Entities and invariants says what may never appear.
 
 ## Prose rules

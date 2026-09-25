@@ -98,6 +98,15 @@ built, `[x]` done. Edited by conversation in any session.
   `status: draft` in its front matter, in both editions; the site shows a
   banner and a mark in the navigation, and the chapter's delivery removes
   the line when done. So the site can publish `main` at any time.
+* **Guided project:** `JCKodel/focus-kit-clinic`, worked on locally in the
+  sibling directory `../focus-kit-clinic`. A chapter that changes it ends
+  with the annotated tag `book-v1/<chapter-slug>` on the commit it quotes
+  (message "One Page at a Time, chapter <slug>"); a chapter that changes
+  nothing has no tag. `book-v1/start` is the empty starting point. A
+  published tag never moves. The agent stages there too and never commits,
+  tags or pushes. Order: the author commits and pushes the chapter's tag
+  first, then the chapter's `make verify` can go green, because the link
+  check opens every tag URL the chapter cites.
 * **Git:** trunk. The agent stages; it never commits or merges.
 
 ## 6. Commit

@@ -21,7 +21,7 @@ It argues for the method with real cases and measured results, and it doubles as
   English is the source; Portuguese is the translation, kept in step in the same delivery.
 * Published as a website on GitHub Pages, updated on every push to `main`, and as PDF and EPUB in both languages on every tagged GitHub Release; the author uploads those to books.kodel.com.br.
 * Every chapter opens with what the reader can do after it, then delivers exactly that, then ends with key points and, from Part II on, exercises.
-* A guided project runs through the book: a neighbourhood clinic or salon scheduling app, built greenfield with `/brainstorm`, in TypeScript, in its own public repository with a tag per chapter.
+* A guided project runs through the book: a neighbourhood clinic scheduling app, built greenfield with `/brainstorm`, in TypeScript, in its own public repository `JCKodel/focus-kit-clinic` with a tag per chapter that changes it.
   A real open-source project, CLAHub, frozen in the fork `JCKodel/clahub` at tag `book-v1`, is the brownfield example for `/analyze`.
   This repository, a book written with focus-kit, is the non-software example.
 * Cases: Ninjobs by name (the author's product, where the method was born); the author's company projects only as **Case A** (a Power Platform project for a client) and **Case B** (a proposal for a company adoption program), with no names and no business details.
@@ -33,8 +33,8 @@ It argues for the method with real cases and measured results, and it doubles as
 | I. Foundations | 1 Why process, when AI writes fast · 2 How an agent sees your project · 3 Spec-Driven Development · 4 How focus-kit was born |
 | II. The focus-kit method | 5 Install, and the hosts · 6 The documents · 7 `/brainstorm` · 8 `/analyze` · 9 The queue and milestones · 10 `/propose`, one page · 11 `/apply`: build, verify, prove, never commit · 12 Closing a milestone · 13 The governor, and what the process does not have |
 | III. FOCUS architecture (optional) | 14 Errors as values and vertical slices · 15 The four pieces · 16 Testing, and FOCUS with agents |
-| IV. Git for agents and teams | 17 Essentials: trunk, branches, git-flow · 18 Worktrees and parallel agents · 19 The human commit as the review |
-| V. Beyond code | 20 Customizing the process · 21 The project as an assistant · 22 Projects that are not software · 23 Adoption in teams and companies |
+| IV. Git for agents and teams | 17 Essentials: trunk, branches, git-flow · 18 Worktrees and parallel agents · 19 The human commit as the review · 20 GitHub for teams: pull requests, issues, boards |
+| V. Beyond code | 21 Customizing the process · 22 The project as an assistant · 23 Projects that are not software · 24 Adoption in teams and companies |
 | Appendices | The Ninjobs case · Glossary · Templates · Workshop map · Exercise answers |
 
 The contents are a starting point; chapters are split, merged or moved by conversation, and docs/06 follows.
@@ -53,6 +53,8 @@ The contents are a starting point; chapters are split, merged or moved by conver
 
 * **Value first.** Every chapter opens with what the reader gains.
 * **No filler.** Every sentence carries information; the length is whatever proves the value, never a target.
+* **Any host.** The method works with any coding agent; the book runs one and shows why the others are alike enough.
+* **Beyond code.** The documents are the source of truth for any project, software or not, including what was agreed with a client.
 * **Proven.** Every artifact shown is real and every number has its source.
 * **Safe to publish.** Nothing private reaches the repository.
 * **Beginner to advanced.** No step assumed; no step repeated.
@@ -75,7 +77,8 @@ Nobody closes these alone; an agent never settles them by assumption.
 
 * **OD-1, the brownfield project.** Which open-source project is forked and frozen for `/analyze`.
   Closed on 2026-09-25: CLAHub, `JCKodel/clahub@book-v1` (ADR-0009, amendment).
-* **OD-2, the guided project's name and repository.** A public repository under the author's account; the name is a placeholder (`clinic`) until the author chooses.
+* **OD-2, the guided project's name and repository.** A public repository under the author's account.
+  Closed on 2026-09-25: `JCKodel/focus-kit-clinic`, a clinic (ADR-0008, amendment).
 * **OD-3, what each private case may show.** For every passage drawn from Case A or Case B, the author approves the anonymized text before the chapter is done.
 * **OD-4, repointing the kit.** focus-kit's README and `documents.md` point FOCUS at books.kodel.com.br and the earlier FOCUS book.
   The change is made in the focus-kit repository when this book launches, not here.
