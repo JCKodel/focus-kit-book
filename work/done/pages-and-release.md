@@ -72,16 +72,24 @@ Setup the author does once, before the first push (written here and in the commi
 * [x] docs/01 updated (Automation row, tree line, Environments table); READMEs checked; docs/06 line marked `[x]`.
 The three "Author" items stay unchecked when /apply stages. The author ticks them in a follow-up commit that records the runs, as `disclosure-scan` did. The screenshots are of the live Pages site, not of `make serve`.
 
-* [ ] Author, after the commit: Pages source set to "GitHub Actions", push to `main`, the `verify` and `pages` jobs green and the site showing chapter 1 in both editions at 1280 and 390 pixels wide, saved as `work/done/pages-and-release-<edition>-site-<width>.png`. The run number and date are recorded here.
-* [ ] Author, after that: tag `v0.0.1-test` pushed; `release` green; a pre-release with exactly the four files, whose PDFs `pdffonts` shows with only Merriweather, Google Sans and Iosevka Term embedded. Run number recorded here. Then the Release and the tag are deleted, locally and on GitHub.
+* [x] Author, after the commit: Pages source set to "GitHub Actions", push to `main`, the `verify` and `pages` jobs green and the site showing chapter 1 in both editions at 1280 and 390 pixels wide, saved as `work/done/pages-and-release-<edition>-site-<width>.png`. The run number and date are recorded here.
+* [x] Author, after that: tag `v0.0.1-test` pushed; `release` green; a pre-release with exactly the four files, whose PDFs `pdffonts` shows with only Merriweather, Google Sans and Iosevka Term embedded. Run number recorded here. Then the Release and the tag are deleted, locally and on GitHub.
 * [ ] Author: a push to a branch other than `main` runs `verify` only (seen in the run's job list), and a push with verify red deploys nothing. The red case is shown by the job list of a run where `verify` failed, or left unproved and said so here.
 
 **What happened.**
 
 * `actionlint` 1.7.12, built with `go install` into a scratch folder outside the repository, reports nothing. shellcheck is not installed here, so actionlint did not lint the `run:` scripts; the `release` script avoids an unquoted variable anyway: `--prerelease` goes through `set --` and `"$@"`, checked by hand for `v1.0.0` (none), `v0.0.1-test` and `v1.0.0-rc1` (both `--prerelease`).
-* No container runtime on this machine (no docker, podman or colima), so the `release` install steps were read against the sources instead: the pandoc `.deb` URL `https://github.com/jgm/pandoc/releases/download/3.11/pandoc-3.11-1-amd64.deb` answers 200, and WeasyPrint 69.0's `docs/first_steps.rst`, "Ubuntu >= 20.04", lists for a pip install from wheels: `libpango-1.0-0 libharfbuzz0b libpangoft2-1.0-0 libharfbuzz-subset0`. Those four are the system libraries the step installs. The first `release` run on a tag is the real proof (Author item below).
+* No container runtime on this machine (no docker, podman or colima), so the `release` install steps were read against the sources instead: the pandoc `.deb` URL `https://github.com/jgm/pandoc/releases/download/3.11/pandoc-3.11-1-amd64.deb` answers 200, and WeasyPrint 69.0's `docs/first_steps.rst`, "Ubuntu >= 20.04", lists for a pip install from wheels: `libpango-1.0-0 libharfbuzz0b libpangoft2-1.0-0 libharfbuzz-subset0`. Those four are the system libraries the step installs. The first `release` run on a tag is the real proof: run 36142504735 below.
 * `apt-get update` runs before the `.deb` install, not only before the WeasyPrint libraries, so both installs see a fresh package index.
 * `make book` locally still writes the four files; `make verify` green; `output/` and `site/` stay ignored.
 * READMEs checked: they link to the Releases page, which stays right; no change.
 * docs/01: Automation row, the tree line of `verify.yml` and the Pages and Release rows of the Environments table now name the jobs and their order. No new term, rule or ADR: ADR-0014 already holds the decision.
 * Nothing diverged from the contract.
+
+**After the commit (2026-09-25, commit `cab6349`).**
+
+* Pages source set to "GitHub Actions" with `gh api -X POST repos/JCKodel/focus-kit-book/pages -f build_type=workflow`.
+* Run 36142401825, push to `main`, attempt 1: `verify` red, `pages` and `release` skipped. The link check could not reach `https://www.gnu.org/licenses/agpl-3.0.html` (`mkdocs.yml:4` and `:46`, "Network is unreachable"), a runner network failure: the same links passed in the tag run minutes later. This run is the red case: verify failed and nothing was deployed.
+* Run 36142401825, attempt 2 (failed jobs re-run): `verify` and `pages` green, `release` skipped. <https://jckodel.github.io/focus-kit-book/> and `/pt/` answer 200. Chapter 1 of the live site in `work/done/pages-and-release-<edition>-site-<width>.png`, taken with headless Chrome, 390 by the iframe method of `site-skeleton`.
+* Run 36142504735, tag `v0.0.1-test`: `verify` and `release` green, `pages` skipped. A pre-release with exactly the four files; `pdffonts` on both PDFs lists only Merriweather (regular, bold), Google Sans (regular, bold) and Iosevka Term. The first `gh release delete` ran before the Release existed and failed; the Release and the tag were deleted afterwards, on GitHub and locally.
+* Not yet proved: a push to a branch other than `main` running `verify` only. The tag run shows `pages` skipped off `main`, but a tag is not a branch; the last Author item stays open until such a push.
