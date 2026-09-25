@@ -12,6 +12,7 @@ A new concept enters here first, in both languages.
 | spec-anchored | spec-anchored | none | The spec is kept after the task and used to evolve and maintain the feature; Portuguese first use: "ancorado na especificação". |
 | spec-as-source | spec-as-source | none | The spec is the main source over time; a person edits only the spec, never the code; Portuguese first use: "especificação como fonte". |
 | focus-kit | focus-kit | `focus-kit` | The method this book teaches, and the one-file kit that installs its four commands. |
+| setup file | arquivo de setup | `SETUP.md` | The one file of focus-kit that an agent reads to install or update the kit's commands in a repository, for every host at once. |
 | host | host | `claude-code`, `codex`, `copilot`, `cursor`, `gemini-cli`, `antigravity`, `windsurf` | The program that runs the coding agent. |
 | command | comando | `/brainstorm`, `/analyze`, `/propose`, `/apply` | One of the four steps the kit installs. |
 | project documents | documentos do projeto | `docs/00` to `docs/06` | The project's memory, read before acting. |

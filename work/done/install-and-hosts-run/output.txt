@@ -1,0 +1,13 @@
+I've installed the focus-kit. I wrote all 36 files that SETUP.md lists, copying each one straight out of SETUP.md with a script. Where a file has a `<name>` placeholder, it was replaced with the command's name. I didn't touch any existing files and didn't stage or commit anything.
+
+**Files written:**
+- **Skills (18 files):** in each of `.claude/skills/`, `.agents/skills/` and `.windsurf/skills/`, there's a `SKILL.md` for `brainstorm`, `analyze`, `propose` and `apply`, plus `references/documents.md` under `brainstorm` and `analyze`.
+- **Codex:** `.agents/skills/{brainstorm,analyze,propose,apply}/agents/openai.yaml`
+- **Copilot:** `.github/prompts/{brainstorm,analyze,propose,apply}.prompt.md`
+- **Cursor:** `.cursor/commands/{brainstorm,analyze,propose,apply}.md`
+- **Gemini CLI:** `.gemini/commands/{brainstorm,analyze,propose,apply}.toml`, plus `GEMINI.md` (none existed before, so I created it)
+- **Antigravity:** `.agents/rules/focus-kit.md`
+
+I ran the checks from section 4 of SETUP.md, and they all pass. The file count is right, the only changes are the new files, and every `propose` and `apply` skill still contains `$ARGUMENTS`. There are no em dashes and no leftover `<name>` placeholders.
+
+**Next step:** this repository has no code yet (just the README and licenses), so start a fresh session and run `/brainstorm`.

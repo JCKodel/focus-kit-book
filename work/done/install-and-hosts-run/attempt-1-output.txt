@@ -1,0 +1,12 @@
+I couldn't start the setup. SETUP.md says the 18 files must be written byte-for-byte, and I don't have their exact contents yet.
+
+- **Download blocked:** fetching the raw file with `curl` needs your approval, and that request was blocked.
+- **Summary only:** the web fetch tool gave me a summary, not the exact text. It covers the four commands (`/brainstorm` or `/analyze`, `/propose`, `/apply`), the files under `.claude/skills/`, `.agents/skills/` and `.windsurf/skills/`, and rules like "no commits, stage only."
+
+Writing the files from that summary would mean paraphrasing them, which is what the instructions forbid.
+
+To continue, either:
+1. **Approve the `curl` command** (`curl -sL https://raw.githubusercontent.com/JCKodel/focus-kit/main/SETUP.md`), and I'll read the full file and write everything exactly as specified, or
+2. **Paste the contents of SETUP.md** here.
+
+Once I have it, I'll create the files and stage them without committing, as SETUP.md requires. Since this repo has no code yet, the next step after setup will be `/brainstorm` in a fresh session.
