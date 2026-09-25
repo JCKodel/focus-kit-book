@@ -81,7 +81,7 @@ Um livro gratuito e bilíngue que ensina Spec-Driven Development, o método focu
 - estilo e testes: docs/04 · processo: docs/05 · fila: docs/06
 ```
 
-O capítulo 6 constrói esses documentos para o seu projeto.
+O capítulo 6 explica esses documentos, e o capítulo 7 os escreve para o seu projeto.
 
 **Cada entrega ganha uma sessão nova.**
 Em uma sessão nova, a janela contém o arquivo de regras, os documentos e a página da entrega, e nada que tenha sobrado da anterior.

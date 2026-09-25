@@ -27,6 +27,7 @@ A new concept enters here first, in both languages.
 | verify | verificação | `make verify` | The command that must be green before anything is declared done. |
 | proof | prova | `work/done/<slug>-<step>.png` | Evidence that the result works, failures included. |
 | slot | slot | `docs/05 §5` | A project-specific fact the commands read. |
+| open decision | decisão em aberto | `OD-<n>` | A decision listed in docs/00 that nobody closes alone, so an agent never settles it by assumption. |
 | governor | regulador | none | The question every addition must answer: which concrete error would it have caught? |
 | context window | janela de contexto | none | Everything the model sees in one call. |
 | token | token | none | The unit of text a model reads and counts; a word is one token or a few. |

@@ -79,7 +79,7 @@ A free, bilingual book that teaches Spec-Driven Development, the focus-kit metho
 - style and tests: docs/04 · process: docs/05 · queue: docs/06
 ```
 
-Chapter 6 builds these documents for your project.
+Chapter 6 explains these documents, and chapter 7 writes them for your project.
 
 **Each delivery gets a fresh session.**
 In a fresh session the window holds the rules file, the documents and the page of the delivery, and nothing left over from the previous one.
