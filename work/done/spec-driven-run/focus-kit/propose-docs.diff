@@ -1,0 +1,35 @@
+diff --git a/docs/03-Domain.md b/docs/03-Domain.md
+index b4844a0..b692a56 100644
+--- a/docs/03-Domain.md
++++ b/docs/03-Domain.md
+@@ -9,13 +9,16 @@
+ | Status | `status` | Where the appointment is in its life |
+ | Booked | `"booked"` | The status of an appointment just made; today the only one |
+ | Book | `book` | Make an appointment for a client at a start time |
++| Cancelled | `"cancelled"` | The status of an appointment its client gave up; it no longer takes its slot (from `cancel`) |
++| Cancel | `cancel` | Give up a booked appointment, on behalf of the client whose name it carries (from `cancel`) |
++| Cancellation notice | `CANCELLATION_NOTICE_HOURS` | How long before the start time a cancellation is still accepted: 24 hours (from `cancel`) |
+ 
+ ## Entities
+-**Appointment**: `id: number`, `clientName: string`, `startsAt: Date`, `status: "booked"`.
++**Appointment**: `id: number`, `clientName: string`, `startsAt: Date`, `status: "booked"`. From `cancel`: `status: "booked" | "cancelled"`.
+ 
+ ## Invariants
+ Enforced today:
+ - An appointment number is unique within the running process, starting at 1 and rising by one.
+ - A new appointment's status is booked.
+ 
+-Not enforced yet (milestone 1): a non-empty client name; a start time not in the past; no two appointments in the same slot.
++Not enforced yet (milestone 1): a non-empty client name; a start time not in the past; no two appointments in the same slot; a cancelled appointment does not take its slot; only the client named on an appointment cancels it, and only up to the cancellation notice before it starts.
+diff --git a/docs/06-Queue.md b/docs/06-Queue.md
+index 1e9217c..1c4f5f6 100644
+--- a/docs/06-Queue.md
++++ b/docs/06-Queue.md
+@@ -9,6 +9,6 @@ When it closes, staff can book an appointment, are refused with a readable value
+ [ ] verify              Type-check and a first test; one command says the code is sound
+ [ ] book-validation     Booking with an empty name or a past time returns an error value
+ [ ] no-double-booking   A slot already taken is refused
+-[ ] cancel              An appointment can be cancelled; its status becomes cancelled
++[>] cancel              An appointment can be cancelled; its status becomes cancelled
+ [ ] day-agenda          One day's appointments, in time order
+ ```

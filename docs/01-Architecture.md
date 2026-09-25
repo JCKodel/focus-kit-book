@@ -26,7 +26,7 @@ book/assets/             images shared by both editions, diagrams one per editio
 overrides/main.html      theme override: the draft banner
 scripts/build.py         strict site build, warnings as findings (rule "build")
 scripts/check_parity.py  the two editions: same chapters, heading levels and status (rule "parity")
-scripts/check_em_dash.py no em dash in any text file (rule "em-dash")
+scripts/check_em_dash.py no em dash in any text file but the evidence of work/done/spec-driven-run/ (rule "em-dash")
 scripts/check_prose.py   the prose rules of docs/04 in both editions and both READMEs (rule "prose")
 scripts/check_links.py   every external URL in both editions, both READMEs and mkdocs.yml still answers (rule "links")
 scripts/build_book.py    PDF and EPUB of both editions into output/ (rule "book")
