@@ -27,7 +27,7 @@ When this milestone closes, a reader who has never followed a process knows why 
 [x] how-agents-see         Chapter 2: statelessness, context window, context rot, fresh sessions, from primary sources
 [x] spec-driven-run        Spec Kit, OpenSpec and focus-kit run on the same feature and brief; files, lines and words counted and committed for chapter 3
 [x] spec-driven            Chapter 3: SDD, what Spec Kit and OpenSpec got right and where they weighed too much
-[ ] birth-of-focus-kit     Chapter 4: the Ninjobs restart, and the kit that grew and became one file again
+[x] birth-of-focus-kit     Chapter 4: why Ninjobs left OpenSpec, and the process that became focus-kit
 ```
 
 ## M3. Part II, The focus-kit method
@@ -38,7 +38,7 @@ When this milestone closes, a reader can install the kit, document a new or an e
 [ ] guided-project-repo    the guided project's public repository, name chosen (OD-2), a tag per chapter
 [ ] install-and-hosts      Chapter 5: install, update, and how each host invokes the commands
 [ ] the-documents          Chapter 6: docs/00 to 06, ADRs, AGENTS.md, and why documents do the work
-[ ] brainstorm             Chapter 7: /brainstorm on the guided project
+[ ] brainstorm             Chapter 7: /brainstorm on the guided project, and choosing a stack by what the agent knows (the Ninjobs lesson of chapter 4)
 [ ] analyze                Chapter 8: /analyze on the brownfield project
 [ ] queue-and-milestones   Chapter 9: the queue, the marks, milestones and their paragraphs
 [ ] propose                Chapter 10: /propose, one page, and splitting what does not fit
@@ -53,7 +53,7 @@ When this milestone closes, a reader can organize code by feature with errors as
 
 ```
 [ ] errors-and-slices      Chapter 14: errors as values and vertical slices, the two principles that stand alone
-[ ] four-pieces            Chapter 15: View, Orchestrator, Use Case, Repository, one table and one flow
+[ ] four-pieces            Chapter 15: View, Orchestrator, Use Case, Repository, one table and one flow, and when the four pieces pay their way (the Ninjobs lesson of chapter 4)
 [ ] testing-and-agents     Chapter 16: testing each piece, and how the architecture helps an agent
 ```
 
