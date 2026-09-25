@@ -11,6 +11,7 @@ import re
 import sys
 from pathlib import Path
 
+from patterns import compile_entry
 from repo_files import ROOT, repo_files
 
 DEFAULT_LIST = Path.home() / ".config" / "focus-kit-book" / "denylist.txt"
@@ -19,17 +20,6 @@ MASK = "***"
 
 def list_path():
     return Path(os.environ.get("FKB_DENYLIST") or DEFAULT_LIST)
-
-
-def compile_entry(entry):
-    if entry.startswith("re:"):
-        return re.compile(entry[3:], re.IGNORECASE)
-    pattern = re.escape(entry)
-    if re.match(r"\w", entry[0]):
-        pattern = r"(?<!\w)" + pattern
-    if re.match(r"\w", entry[-1]):
-        pattern = pattern + r"(?!\w)"
-    return re.compile(pattern, re.IGNORECASE)
 
 
 def load(path):

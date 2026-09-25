@@ -14,6 +14,7 @@ build: .venv
 verify: build
 	python3 scripts/check_parity.py
 	python3 scripts/check_em_dash.py
+	python3 scripts/check_prose.py
 	python3 scripts/check_disclosure.py
 
 scan:
