@@ -8,28 +8,23 @@ import re
 import sys
 from pathlib import Path
 
+from markdown import front_matter
+
 ROOT = Path(__file__).resolve().parent.parent
 EN = Path("book/en")
 PT = Path("book/pt")
 
 HEADING = re.compile(r"^ {0,3}(#{1,6})(?:\s|$)")
 FENCE = re.compile(r"^ {0,3}(`{3,}|~{3,})")
-STATUS = re.compile(r"^status:\s*(\S+)\s*$")
 
 
 def read(path):
     """Return (lines, headings, status): headings as (level, line number), status or "none"."""
-    lines = (ROOT / path).read_text(encoding="utf-8").splitlines()
-    start = 0
-    status = "none"
-    if lines and lines[0].strip() == "---":
-        for i in range(1, len(lines)):
-            if lines[i].strip() == "---":
-                start = i + 1
-                break
-            match = STATUS.match(lines[i])
-            if match:
-                status = match.group(1).strip("\"'")
+    text = (ROOT / path).read_text(encoding="utf-8")
+    fields, body = front_matter(text)
+    lines = text.splitlines()
+    start = len(lines) - len(body)
+    status = fields.get("status") or "none"
     headings = []
     fence = None
     for number, line in enumerate(lines[start:], start + 1):

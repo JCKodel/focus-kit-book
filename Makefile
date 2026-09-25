@@ -1,4 +1,4 @@
-.PHONY: serve build verify scan
+.PHONY: serve build verify scan book
 
 .venv: requirements.txt
 	python3 -m venv .venv
@@ -20,3 +20,6 @@ verify: build
 
 scan:
 	python3 scripts/check_disclosure.py
+
+book:
+	python3 scripts/build_book.py

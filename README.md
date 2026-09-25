@@ -19,6 +19,9 @@ You need Python 3 and make.
 
 * `make serve` opens the site at <http://127.0.0.1:8000/>.
 * `make verify` runs the checks. The disclosure scan needs a list only the author has; without it, the scan is skipped.
+* `make book` writes the PDF and the EPUB of both editions to `output/`. It needs pandoc and weasyprint:
+  * macOS: `brew install pandoc weasyprint`
+  * Debian or Ubuntu: `sudo apt install pandoc weasyprint`
 
 ## How it is written
 
@@ -37,5 +40,6 @@ Contributions are accepted under the license of the file they change.
 | What | License | File |
 |---|---|---|
 | The book's text and figures (`book/`), the project documents (`docs/`, `work/`) and these READMEs | CC BY-SA 4.0 | [`LICENSE-TEXT`](LICENSE-TEXT) |
-| Scripts, build and site configuration (`scripts/`, `Makefile`, `mkdocs.yml`, `overrides/`, `book/assets/site.css`) | AGPL-3.0-only | [`LICENSE`](LICENSE) |
+| Scripts, build and site configuration (`scripts/`, `Makefile`, `mkdocs.yml`, `overrides/`, `book/assets/site.css`, `pandoc/*.css`) | AGPL-3.0-only | [`LICENSE`](LICENSE) |
+| The fonts of the PDF (`pandoc/fonts/`): Merriweather, Google Sans, Iosevka Term | SIL Open Font License 1.1 | `pandoc/fonts/<Family>-OFL.txt` |
 | focus-kit's installed command files | AGPL-3.0-only, under focus-kit's terms | [`LICENSE`](LICENSE) |

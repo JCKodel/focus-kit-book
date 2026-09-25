@@ -1,0 +1,113 @@
+/* The PDF: A5, set in the repository's fonts, read by weasyprint. */
+
+@font-face { font-family: "Merriweather"; src: url("fonts/Merriweather-Regular.ttf"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Merriweather"; src: url("fonts/Merriweather-Italic.ttf"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Merriweather"; src: url("fonts/Merriweather-Bold.ttf"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "Merriweather"; src: url("fonts/Merriweather-BoldItalic.ttf"); font-weight: 700; font-style: italic; }
+@font-face { font-family: "Google Sans"; src: url("fonts/GoogleSans-Variable.ttf"); }
+@font-face { font-family: "Iosevka Term"; src: url("fonts/IosevkaTerm-Regular.ttf"); }
+
+@page {
+  size: A5;
+  margin: 18mm 15mm 20mm 15mm;
+  @bottom-center {
+    content: counter(page);
+    font-family: "Google Sans";
+    font-size: 8pt;
+  }
+}
+
+@page front {
+  @bottom-center { content: none; }
+}
+
+html {
+  font-family: "Merriweather";
+  font-size: 9pt;
+  line-height: 1.55;
+  hyphens: auto;
+}
+
+body { margin: 0; }
+
+p { margin: 0 0 0.7em; text-align: justify; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Google Sans";
+  font-weight: 700;
+  line-height: 1.25;
+  hyphens: manual;
+  text-align: left;
+  break-after: avoid;
+}
+
+h1 { font-size: 18pt; margin: 0 0 1.2em; break-before: page; }
+h2 { font-size: 12.5pt; margin: 1.6em 0 0.6em; }
+h3 { font-size: 10.5pt; margin: 1.3em 0 0.5em; }
+
+a { color: #1a4f8b; text-decoration: none; }
+
+code, pre { font-family: "Iosevka Term"; hyphens: manual; }
+code { font-size: 0.95em; }
+
+pre {
+  font-size: 8pt;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #f4f4f2;
+  padding: 0.6em 0.8em;
+  margin: 0 0 0.9em;
+  text-align: left;
+}
+
+img { max-width: 100%; }
+
+figure { margin: 0 0 0.9em; text-align: center; }
+figcaption { font-size: 8pt; font-style: italic; margin-top: 0.3em; }
+
+blockquote { margin: 0 0 0.9em 1em; padding-left: 0.8em; border-left: 2px solid #c8c8c4; }
+
+ul, ol { margin: 0 0 0.7em; padding-left: 1.4em; }
+li { margin-bottom: 0.2em; }
+
+table { border-collapse: collapse; margin: 0 0 0.9em; font-size: 8pt; }
+th, td { border-bottom: 0.5pt solid #c8c8c4; padding: 0.3em 0.5em; text-align: left; }
+
+.draft-banner {
+  border-left: 3px solid #d9a400;
+  background: #fbf4dc;
+  padding: 0.5em 0.8em;
+  margin: 0 0 1.2em;
+}
+.draft-banner p { margin: 0; text-align: left; }
+
+/* Title page, rights page and table of contents carry no page number. */
+
+.title-page, .rights-page, nav#TOC { page: front; }
+
+.title-page { break-after: page; padding-top: 45mm; text-align: center; }
+.title-page h1 { break-before: auto; font-size: 24pt; margin: 0 0 0.6em; text-align: center; }
+.title-page .subtitle { font-family: "Google Sans"; font-size: 12pt; text-align: center; margin: 0 0 3em; }
+.title-page .author { font-size: 11pt; text-align: center; }
+
+.rights-page { break-after: page; padding-top: 120mm; font-size: 8pt; }
+.rights-page p { text-align: left; }
+
+nav#TOC { break-after: page; }
+nav#TOC ul { list-style: none; padding-left: 0; margin: 0; }
+nav#TOC ul ul { padding-left: 1.2em; }
+nav#TOC li { margin: 0.25em 0; }
+nav#TOC > ul > li { margin-top: 0.7em; font-family: "Google Sans"; font-weight: 700; }
+nav#TOC ul ul li { font-family: "Merriweather"; font-weight: 400; }
+nav#TOC a { color: inherit; }
+nav#TOC a::after { content: leader(".") target-counter(attr(href), page); }
+
+/* Notes at the end of their chapter. */
+
+aside.footnotes { font-size: 7.5pt; margin-top: 2em; }
+aside.footnotes hr { border: none; border-top: 0.5pt solid #c8c8c4; width: 30%; margin: 0 0 0.8em; }
+aside.footnotes ol { padding-left: 1.4em; }
+aside.footnotes p { text-align: left; }
+a.footnote-ref sup { font-size: 0.7em; }
+a.footnote-back { font-family: "Iosevka Term"; }

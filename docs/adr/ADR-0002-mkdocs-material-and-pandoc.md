@@ -17,3 +17,8 @@ The pipeline is written anew here, without the private server steps of earlier b
 ## Consequences
 
 Two tools read the same source, so the Markdown avoids features only one of them understands.
+
+## Amendment, 2026-09-25
+
+Mermaid and mermaid-cli are removed from the PDF and EPUB pipeline (delivery `pdf-epub`): the book has no diagram yet, and how diagrams are drawn is decided by the first chapter that has one, on a real diagram.
+pandoc and weasyprint build PDF and EPUB, with the fonts of the PDF kept in the repository (`pandoc/fonts/`).

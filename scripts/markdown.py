@@ -1,6 +1,27 @@
-"""The Markdown masking shared by the checks: what a reader does not read becomes spaces."""
+"""The Markdown reading shared by the scripts: front matter, and the masking of what a reader does not read."""
 
 import re
+
+FIELD = re.compile(r"^([A-Za-z_][\w-]*):\s*(.*?)\s*$")
+
+
+def front_matter(text):
+    """Return (fields, body lines): the `key: value` fields of the front matter and the lines after it.
+
+    Without a closed front matter, fields is empty and the body is every line.
+    Values lose their surrounding quotes; the body starts at line len(lines) - len(body) + 1.
+    """
+    lines = text.splitlines()
+    if not lines or lines[0].strip() != "---":
+        return {}, lines
+    fields = {}
+    for i in range(1, len(lines)):
+        if lines[i].strip() == "---":
+            return fields, lines[i + 1:]
+        match = FIELD.match(lines[i])
+        if match:
+            fields[match.group(1)] = match.group(2).strip("\"'")
+    return {}, lines
 
 
 def blank(text):

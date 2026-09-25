@@ -10,8 +10,8 @@ One Markdown file per chapter per edition, built into a bilingual website by MkD
 |---|---|---|
 | Source | Markdown, one sentence per line | Diffs show sentences; the two editions compare line by line. |
 | Website | MkDocs Material with the static i18n plugin | Bilingual navigation, search, light and dark themes, native Mermaid. Chosen over a GitHub wiki (ADR-0001) and over Quarto (ADR-0002). |
-| PDF and EPUB | pandoc, weasyprint, mermaid-cli | A pipeline the author already runs for books; installed on the author's machine. |
-| Diagrams | Mermaid in the Markdown | Text in the repository, rendered by both outputs. |
+| PDF and EPUB | pandoc and weasyprint, run by `scripts/build_book.py`; fonts from `pandoc/fonts/` | A pipeline the author already runs for books. The PDF is A5 in Merriweather, Google Sans and Iosevka Term, loaded from the repository so any machine sets the same pages; the EPUB carries no fonts, so the reader's device chooses. |
+| Diagrams | not decided | Decided by the first chapter with a diagram, on a real one (ADR-0002, amendment). |
 | Automation | GitHub Actions | `make verify` on every push; Pages on push to `main`; Release on a `v*` tag (ADR-0014). |
 | Scripts | Make, and Python 3 for checks | Nothing to install beyond what the build already needs. |
 
@@ -29,10 +29,14 @@ scripts/check_parity.py  the two editions: same chapters, heading levels and sta
 scripts/check_em_dash.py no em dash in any text file (rule "em-dash")
 scripts/check_prose.py   the prose rules of docs/04 in both editions and both READMEs (rule "prose")
 scripts/check_links.py   every external URL in both editions, both READMEs and mkdocs.yml still answers (rule "links")
+scripts/build_book.py    PDF and EPUB of both editions into output/ (rule "book")
 scripts/check_disclosure.py no term of the disclosure list in a file path or text file (rule "disclosure"; ADR-0012)
 scripts/patterns.py      compile_entry: the entry syntax (plain or re:) shared by the prose and disclosure checks
-scripts/markdown.py      mask: front matter, code and HTML comments as spaces, shared by the prose and link checks
+scripts/markdown.py      front_matter: the fields and the body, shared by parity and the book build; mask: front matter, code and HTML comments as spaces, shared by the prose and link checks
 scripts/repo_files.py    the files the checks read: tracked, plus untracked and not ignored
+pandoc/pdf.css           the PDF: A5, margins, page numbers, the fonts by @font-face
+pandoc/epub.css          the EPUB: no @font-face
+pandoc/fonts/            Merriweather (4 styles), Google Sans (variable), Iosevka Term Regular; <Family>-OFL.txt each
 .github/workflows/verify.yml  make verify on every push, the list from the secret DISCLOSURE_DENYLIST
 mkdocs.yml               the site: MkDocs Material, i18n in folder structure, footnotes, no nav: key
 requirements.txt         mkdocs-material and mkdocs-static-i18n, exact versions
@@ -53,6 +57,7 @@ __pycache__/             written by Python when a check imports a module of scri
 | `make serve` | `mkdocs serve`, at `http://127.0.0.1:8000/`, which redirects to `/focus-kit-book/` (the path of `site_url`); Portuguese under `pt/`. |
 | `make build` | `scripts/build.py`: `mkdocs build --strict` into `site/`. |
 | `make verify` | build, then parity, then em dash, then prose, then links, then disclosure; stops at the first failing group. The link check needs the network: offline it is skipped locally and fails in Actions (`CI` set). |
+| `make book` | `scripts/build_book.py`: for each edition, a PDF and an EPUB in `output/` (`one-page-at-a-time.*`, `uma-pagina-de-cada-vez.*`), then their paths. Needs pandoc and weasyprint; not part of `make verify`. Each file: title page, rights page, table of contents, chapters in `NN-` order, appendices in `A<n>-` order; a draft carries its banner, notes end their chapter. Title and subtitle come from `book/<edition>/index.md`, author, rights and banner from `mkdocs.yml`. |
 | `make scan` | the disclosure scan alone. The list is `FKB_DENYLIST`, or `~/.config/focus-kit-book/denylist.txt`; one entry per line, `#` comments, `re:<pattern>` for a regular expression. Without a list it is skipped locally and fails in Actions (`CI` set). A finding names the file, the line and the entry's number in the list, never the term; a matched part of a path prints as `***`. |
 
 The navigation comes from the file names in `NN-` order, with each chapter's H1 as its title.
@@ -72,6 +77,7 @@ Every check prints `file:line: rule: message` and exits non-zero.
 `make verify` runs them all and stops at the first failing group.
 The site build runs with `--strict`, so a broken link or a missing page fails the build.
 MkDocs has its own message format, so `scripts/build.py` rewrites each warning as `file:line: build: message`: the doc file MkDocs names, at the line of the broken link, or line 1 when there is none; a warning that names no file points to `mkdocs.yml:1`.
+`scripts/build_book.py` does the same for pandoc and weasyprint: a message that names a chapter prints as `book/<edition>/<file>:<line>: book: message`, at the chapter's own line; any other as `Makefile:1: book: message`. A failure is one such line and exit 1; a warning is printed and the build goes on. A missing pandoc or weasyprint prints `Makefile:1: book: <tool> not found; install it (see README)`.
 
 ## Environments
 

@@ -1,0 +1,40 @@
+/* The EPUB: no fonts of its own, so the reader's device chooses. */
+
+body { line-height: 1.5; hyphens: auto; -epub-hyphens: auto; }
+
+p { margin: 0 0 0.7em; }
+
+h1, h2, h3, h4, h5, h6 { font-family: sans-serif; line-height: 1.25; hyphens: manual; -epub-hyphens: none; }
+
+code, pre { font-family: monospace; hyphens: manual; -epub-hyphens: none; }
+
+pre {
+  font-size: 0.85em;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+  background: #f4f4f2;
+  padding: 0.6em 0.8em;
+}
+
+img { max-width: 100%; }
+
+figure { margin: 0 0 0.9em; text-align: center; }
+
+blockquote { margin: 0 0 0.9em 1em; padding-left: 0.8em; border-left: 2px solid #c8c8c4; }
+
+.draft-banner {
+  border-left: 3px solid #d9a400;
+  background: #fbf4dc;
+  padding: 0.5em 0.8em;
+  margin: 0 0 1.2em;
+}
+.draft-banner p { margin: 0; }
+
+section.titlepage { text-align: center; }
+section.titlepage .subtitle { font-family: sans-serif; }
+section.titlepage .rights { page-break-before: always; break-before: page; text-align: left; font-size: 0.8em; }
+
+nav#toc ol { list-style: none; }
+
+aside.footnotes { font-size: 0.85em; }
