@@ -12,7 +12,7 @@ When this milestone closes, a chapter written in both languages builds into the 
 [x] license-and-readme     AGPL-3.0 for scripts and code, CC BY-SA 4.0 for the text; README in English and Portuguese
 [x] disclosure-scan        make scan against the out-of-repo disclosure list, locally and in Actions, part of make verify
 [x] prose-rules            the anti-AI prose rules written in docs/04 and checked by make verify
-[ ] link-check             external links in the book checked, part of make verify (the strict build already fails on broken internal links)
+[x] link-check             external links in the book checked, part of make verify (the strict build already fails on broken internal links)
 [ ] chapter-template       the chapter shape fixed, proven by chapter 1, Why process, written in both editions
 [ ] pdf-epub               make book produces PDF and EPUB in both editions from the same source
 [ ] pages-and-release      Actions publish the site on push to main and a Release with PDF and EPUB on a v* tag

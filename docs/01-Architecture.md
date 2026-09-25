@@ -28,8 +28,10 @@ scripts/build.py         strict site build, warnings as findings (rule "build")
 scripts/check_parity.py  the two editions: same chapters, heading levels and status (rule "parity")
 scripts/check_em_dash.py no em dash in any text file (rule "em-dash")
 scripts/check_prose.py   the prose rules of docs/04 in both editions and both READMEs (rule "prose")
+scripts/check_links.py   every external URL in both editions, both READMEs and mkdocs.yml still answers (rule "links")
 scripts/check_disclosure.py no term of the disclosure list in a file path or text file (rule "disclosure"; ADR-0012)
 scripts/patterns.py      compile_entry: the entry syntax (plain or re:) shared by the prose and disclosure checks
+scripts/markdown.py      mask: front matter, code and HTML comments as spaces, shared by the prose and link checks
 scripts/repo_files.py    the files the checks read: tracked, plus untracked and not ignored
 .github/workflows/verify.yml  make verify on every push, the list from the secret DISCLOSURE_DENYLIST
 mkdocs.yml               the site: MkDocs Material, i18n in folder structure, no nav: key
@@ -50,7 +52,7 @@ __pycache__/             written by Python when a check imports a module of scri
 | `.venv` | `python3 -m venv .venv` and `pip install -r requirements.txt`; rebuilt when `requirements.txt` changes. Only Python 3 is needed beforehand. |
 | `make serve` | `mkdocs serve`, at `http://127.0.0.1:8000/`, which redirects to `/focus-kit-book/` (the path of `site_url`); Portuguese under `pt/`. |
 | `make build` | `scripts/build.py`: `mkdocs build --strict` into `site/`. |
-| `make verify` | build, then parity, then em dash, then prose, then disclosure; stops at the first failing group. |
+| `make verify` | build, then parity, then em dash, then prose, then links, then disclosure; stops at the first failing group. The link check needs the network: offline it is skipped locally and fails in Actions (`CI` set). |
 | `make scan` | the disclosure scan alone. The list is `FKB_DENYLIST`, or `~/.config/focus-kit-book/denylist.txt`; one entry per line, `#` comments, `re:<pattern>` for a regular expression. Without a list it is skipped locally and fails in Actions (`CI` set). A finding names the file, the line and the entry's number in the list, never the term; a matched part of a path prints as `***`. |
 
 The navigation comes from the file names in `NN-` order, with each chapter's H1 as its title.
