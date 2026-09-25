@@ -84,5 +84,5 @@ git push origin book-v1/start
 
 The two Author items stay unchecked when /apply stages:
 
-* [ ] Author, after the commit here: the commands above run; the repository URL recorded here.
-* [ ] Author: `git -C ../focus-kit-clinic ls-remote --tags origin book-v1/start` prints the tag.
+* [x] Author, after the commit here: the commands above run; the repository URL recorded here. <https://github.com/JCKodel/focus-kit-clinic>, public, on `main`; run by the agent at the author's request on 2026-09-25.
+* [x] Author: `git -C ../focus-kit-clinic ls-remote --tags origin book-v1/start` prints the tag: `a4de528730bc569723eb33a5c5c26179cb94e572 refs/tags/book-v1/start`.
