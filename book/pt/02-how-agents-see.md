@@ -11,7 +11,7 @@ O host, o programa que você roda (Claude Code, Codex, Cursor e outros), lê seu
 Cada vez que o host precisa do modelo, ele faz uma chamada: envia texto e recebe uma resposta.
 
 O modelo não guarda nada de uma chamada para a outra.
-A documentação da Anthropic diz isso diretamente: "The Messages API is stateless, which means that you always send the full conversational history to the API" (a API Messages não guarda estado, então você sempre envia o histórico completo da conversa).[^messages-api]
+A documentação da Anthropic diz isso diretamente: "*A API Messages não guarda estado, o que significa que você sempre envia o histórico completo da conversa para a API*".[^messages-api]
 A conversa que você vê na tela é guardada pelo host, que a envia inteira de novo a cada chamada.
 Uma sessão nova começa com a conversa vazia, e o modelo não sabe nada da anterior, por mais longa que ela tenha sido.
 
@@ -39,23 +39,23 @@ Uma sessão longa põe mais coisa na janela, e o modelo usa pior o que está lá
 Essa perda de precisão à medida que o contexto cresce se chama degradação de contexto.
 
 Liu e colegas deram aos modelos uma pergunta e muitos documentos, só um dos quais tinha a resposta, e moveram esse documento ao longo da entrada.
-O desempenho "is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts, even for explicitly long-context models" (costuma ser maior quando a informação relevante está no começo ou no fim da entrada, e cai bastante quando o modelo precisa usar informação que está no meio de um contexto longo, mesmo em modelos feitos para contextos longos).[^liu-2024]
+O desempenho "*costuma ser maior quando a informação relevante está no começo ou no fim do contexto de entrada, e cai bastante quando os modelos precisam acessar informação relevante no meio de contextos longos, mesmo em modelos feitos explicitamente para contextos longos*".[^liu-2024]
 
-A Chroma mediu 18 modelos à medida que a entrada crescia e concluiu que "model performance varies significantly as input length changes, even on simple tasks" (o desempenho varia muito conforme o tamanho da entrada muda, mesmo em tarefas simples) e que "their performance grows increasingly unreliable as input length grows" (o desempenho fica cada vez menos confiável à medida que a entrada cresce).[^chroma-2025]
+A Chroma mediu 18 modelos à medida que a entrada crescia e concluiu que "*o desempenho dos modelos varia muito conforme o tamanho da entrada muda, mesmo em tarefas simples*" e que "*o desempenho deles fica cada vez menos confiável à medida que a entrada cresce*".[^chroma-2025]
 
-A Anthropic descreve o mesmo efeito em todos os modelos: "as the number of tokens in the context window increases, the model's ability to accurately recall information from that context decreases" (à medida que o número de tokens na janela de contexto aumenta, a capacidade do modelo de recuperar com precisão a informação desse contexto diminui).[^anthropic-context-2025]
-Ela trata o contexto como "a finite resource with diminishing marginal returns" (um recurso finito, com retornos marginais decrescentes).[^anthropic-context-2025]
+A Anthropic descreve o mesmo efeito em todos os modelos: "*à medida que o número de tokens na janela de contexto aumenta, a capacidade do modelo de recuperar com precisão a informação desse contexto diminui*".[^anthropic-context-2025]
+Ela trata o contexto como "*um recurso finito, com retornos marginais decrescentes*".[^anthropic-context-2025]
 
 Em uma sessão, isso quer dizer que a instrução que você deu no começo acaba no meio, debaixo de cada arquivo lido e de cada saída de comando que veio depois dela.
 
 ## Quando a janela enche
 
 Uma sessão que dura o bastante chega ao limite.
-O host pode então compactá-la, o que a Anthropic descreve como "taking a conversation nearing the context window limit, summarizing its contents, and reinitiating a new context window with the summary" (pegar uma conversa perto do limite da janela de contexto, resumir o seu conteúdo e recomeçar uma nova janela de contexto com o resumo).[^anthropic-context-2025]
+O host pode então compactá-la, o que a Anthropic descreve como "*pegar uma conversa perto do limite da janela de contexto, resumir o seu conteúdo e recomeçar uma nova janela de contexto com o resumo*".[^anthropic-context-2025]
 
 A compactação deixa a sessão continuar, e custa detalhe.
 Um resumo é mais curto do que o que ele resume, e guarda o que parecia importante quando foi escrito.
-A Anthropic avisa que compactar de forma agressiva demais "can result in the loss of subtle but critical context whose importance only becomes apparent later" (pode fazer perder um contexto sutil, mas crítico, cuja importância só aparece mais tarde).[^anthropic-context-2025]
+A Anthropic avisa que compactar de forma agressiva demais "*pode resultar na perda de um contexto sutil, mas crítico, cuja importância só aparece mais tarde*".[^anthropic-context-2025]
 Uma decisão que você tomou na conversa, e que o agente seguiu até ali, pode ser o detalhe que o resumo deixa de fora.
 
 ## O que isso muda no seu projeto
@@ -66,17 +66,19 @@ Daí saem duas práticas.
 Uma decisão que só existe na conversa some em uma sessão nova e pode se perder em uma compactação.
 Uma decisão em um arquivo é carregada inteira no começo de toda sessão, perto do início da janela.
 O arquivo de regras é a porta de entrada: curto, e diz quais documentos ler antes de agir.
-Este é o começo do arquivo de regras deste livro, a primeira coisa que uma sessão nova no repositório dele lê:
+Este é o começo do arquivo de regras deste livro, a primeira coisa que uma sessão nova no repositório dele lê.
+No repositório ele está em inglês; aqui vai traduzido.
+A língua do arquivo não precisa ser a mesma em que você conversa com o agente.
 
 ```markdown
-# One Page at a Time
+# Uma Página de Cada Vez
 
-A free, bilingual book that teaches Spec-Driven Development, the focus-kit method, the optional FOCUS architecture and git for parallel agents, from beginner to advanced. Prose of the process documents in English; identifiers in English; the book in English (source) and Brazilian Portuguese.
+Um livro gratuito e bilíngue que ensina Spec-Driven Development, o método focus-kit, a arquitetura FOCUS opcional e git para agentes em paralelo, do iniciante ao avançado. Prosa dos documentos de processo em inglês; identificadores em inglês; o livro em inglês (fonte) e português do Brasil.
 
-## Read before acting
-- the product: docs/00 · the vocabulary: docs/03
-- how it is built: docs/01 · the server: docs/02
-- style and tests: docs/04 · process: docs/05 · queue: docs/06
+## Leia antes de agir
+- o produto: docs/00 · o vocabulário: docs/03
+- como é construído: docs/01 · o servidor: docs/02
+- estilo e testes: docs/04 · processo: docs/05 · fila: docs/06
 ```
 
 O capítulo 6 constrói esses documentos para o seu projeto.

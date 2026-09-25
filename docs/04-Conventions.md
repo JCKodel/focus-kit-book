@@ -19,6 +19,7 @@
 * **Anti-AI prose rules**: the patterns that make text read as machine-written, in §Prose rules, checked by `make verify`.
 * **Evidence.** Every number cites its source: a primary publication, or the case's recorded artifact.
   Every artifact shown (a page, a queue, a command output) comes from a real run.
+  The Portuguese edition shows an English prose artifact (a rules file, a page) translated, and says before it that the original is in English; code, commands and their output stay as they ran.
 * **Code** is TypeScript only, quoted from a tag of the guided project's repository with its path.
 * **Private cases** appear only as Case A and Case B; docs/03 §Entities and invariants says what may never appear.
 
@@ -110,7 +111,8 @@ status: draft            only while the chapter is not done; the delivery remove
   The key is lowercase `[a-z0-9-]+`, the same in both editions (`[^metr-2025]`).
   The definition is `[^<key>]: <Author or organization>, "<Title>", <year>. <URL>`, with the title in its original language in both editions.
   A publication without a date carries `accessed YYYY-MM-DD` in place of `<year>` (pt: `acesso em YYYY-MM-DD`).
-  A quotation keeps the publication's words; the Portuguese edition quotes an English source in English and follows it with its translation in parentheses.
+  A quotation is in quotation marks and italic, `"*...*"`.
+  The English edition keeps the publication's words; the Portuguese edition gives only their translation, and the original is at the source in the note.
   For a case, whose repository the reader cannot open, the definition says it is private and how each number was obtained, so the reader knows what is claimed and can repeat the count on their own project; it names no private path: `[^ninjobs-adr-0022]: Ninjobs, a private repository, counted by the author over its history up to 2026-08-29, when its ADR-0022 dropped OpenSpec: ...`
 * `mkdocs.yml` enables the `footnotes` Markdown extension so the site renders them; pandoc reads the same syntax for PDF and EPUB.
 * Appendices (`A<n>-`) are out of this shape until the first appendix delivery fixes theirs.

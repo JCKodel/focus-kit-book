@@ -11,7 +11,7 @@ The host, the program you run (Claude Code, Codex, Cursor and others), reads you
 Each time the host needs the model, it makes a call: it sends text and receives an answer.
 
 The model keeps nothing from one call to the next.
-Anthropic's documentation says so directly: "The Messages API is stateless, which means that you always send the full conversational history to the API."[^messages-api]
+Anthropic's documentation says so directly: "*The Messages API is stateless, which means that you always send the full conversational history to the API.*"[^messages-api]
 The conversation you see on the screen is kept by the host, which sends all of it again with every call.
 A fresh session starts with an empty conversation, and the model knows nothing of the previous one, however long it was.
 
@@ -39,23 +39,23 @@ A long session puts more in the window, and the model uses what is there less we
 This loss of accuracy as the context grows is called context rot.
 
 Liu and colleagues gave models a question and many documents, only one of which held the answer, and moved that document through the input.
-Accuracy "is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts, even for explicitly long-context models."[^liu-2024]
+Accuracy "*is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts, even for explicitly long-context models.*"[^liu-2024]
 
-Chroma measured 18 models as the input grew and found that "model performance varies significantly as input length changes, even on simple tasks", and that "their performance grows increasingly unreliable as input length grows."[^chroma-2025]
+Chroma measured 18 models as the input grew and found that "*model performance varies significantly as input length changes, even on simple tasks*", and that "*their performance grows increasingly unreliable as input length grows.*"[^chroma-2025]
 
-Anthropic describes the same effect in every model: "as the number of tokens in the context window increases, the model's ability to accurately recall information from that context decreases."[^anthropic-context-2025]
-It calls context "a finite resource with diminishing marginal returns."[^anthropic-context-2025]
+Anthropic describes the same effect in every model: "*as the number of tokens in the context window increases, the model's ability to accurately recall information from that context decreases.*"[^anthropic-context-2025]
+It calls context "*a finite resource with diminishing marginal returns.*"[^anthropic-context-2025]
 
 In a session, this means the instruction you gave at the start ends up in the middle, under every file read and every command output that came after it.
 
 ## When the window fills
 
 A session that goes on long enough reaches the limit.
-The host can then compact it, which Anthropic describes as "taking a conversation nearing the context window limit, summarizing its contents, and reinitiating a new context window with the summary."[^anthropic-context-2025]
+The host can then compact it, which Anthropic describes as "*taking a conversation nearing the context window limit, summarizing its contents, and reinitiating a new context window with the summary.*"[^anthropic-context-2025]
 
 Compaction lets the session continue, and it costs detail.
 A summary is shorter than what it summarizes, and it keeps what looked important when it was written.
-Anthropic warns that compacting too aggressively "can result in the loss of subtle but critical context whose importance only becomes apparent later."[^anthropic-context-2025]
+Anthropic warns that compacting too aggressively "*can result in the loss of subtle but critical context whose importance only becomes apparent later.*"[^anthropic-context-2025]
 A decision you made in the conversation, and that the agent followed until then, can be the detail the summary drops.
 
 ## What this changes in your project
