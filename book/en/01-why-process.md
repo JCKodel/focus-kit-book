@@ -59,7 +59,7 @@ The method this book teaches, focus-kit, is built on these three pieces.
 ## Too much process fails too
 
 A process can cost more than it saves: every document is one more thing to write, read and keep true.
-On Ninjobs, my own product, fifteen days, 87 commits and 35 OpenSpec changes produced 37,228 lines of spec for four screens and one domain table.[^ninjobs-adr-0022]
+On [Ninjobs](https://www-ninjobs-app.translate.goog/?_x_tr_sl=pt&_x_tr_tl=en&_x_tr_hl=en), my own product (in Portuguese, linked through Google Translate), fifteen days, 87 commits and 35 OpenSpec changes produced 37,228 lines of spec for four screens and one domain table.[^ninjobs-adr-0022]
 Chapter 4 tells that story and how focus-kit came out of it.
 
 ## Key points
