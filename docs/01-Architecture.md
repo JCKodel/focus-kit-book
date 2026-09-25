@@ -34,7 +34,7 @@ scripts/patterns.py      compile_entry: the entry syntax (plain or re:) shared b
 scripts/markdown.py      mask: front matter, code and HTML comments as spaces, shared by the prose and link checks
 scripts/repo_files.py    the files the checks read: tracked, plus untracked and not ignored
 .github/workflows/verify.yml  make verify on every push, the list from the secret DISCLOSURE_DENYLIST
-mkdocs.yml               the site: MkDocs Material, i18n in folder structure, no nav: key
+mkdocs.yml               the site: MkDocs Material, i18n in folder structure, footnotes, no nav: key
 requirements.txt         mkdocs-material and mkdocs-static-i18n, exact versions
 Makefile                 the targets below
 docs/, work/             the process documents and the deliveries

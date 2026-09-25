@@ -84,13 +84,34 @@ remove the emoji
 
 ## Chapter shape
 
-Fixed by `chapter-template`; until then:
+Every chapter, in both editions, has this shape (terms from docs/03); chapter 1 is the first to follow it:
 
-1. Title.
-2. What you get: at most three sentences.
-3. The content, in sections.
-4. Key points: at most five bullets.
-5. Exercises (Part II onwards), numbered `N.M`, on the guided project.
+```
+---
+status: draft            only while the chapter is not done; the delivery removes the line (docs/05 §5)
+---
+
+# <Title>                H1, the chapter title; the navigation shows it
+
+<opening>                first paragraph, no heading, at most three sentences: what the reader can do after it
+
+## <Section>             the content, in H2 sections (H3 inside when needed); as many as the value takes
+
+## Key points            pt: ## Pontos-chave; at most five bullets; every chapter
+
+## Exercises             pt: ## Exercícios; Part II on only; absent in Part I
+### Exercise N.M         pt: ### Exercício N.M; N the chapter number, M from 1
+
+[^<key>]: <source>       source notes, at the end of the file
+```
+
+* One sentence per line in the source: a convention, not a check (no error it would have caught has happened, docs/05 §7).
+* Source notes: every number and every quoted claim from a publication carries `[^<key>]` at the claim.
+  The key is lowercase `[a-z0-9-]+`, the same in both editions (`[^metr-2025]`).
+  The definition is `[^<key>]: <Author or organization>, "<Title>", <year>. <URL>`, with the title in its original language in both editions.
+  For a case, the definition names the artifact without any path: `[^ninjobs-adr-0022]: Ninjobs, ADR-0022, 2026-08-29.`
+* `mkdocs.yml` enables the `footnotes` Markdown extension so the site renders them; pandoc reads the same syntax for PDF and EPUB.
+* Appendices (`A<n>-`) are out of this shape until the first appendix delivery fixes theirs.
 
 ## Files
 

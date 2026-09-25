@@ -37,7 +37,11 @@ A new concept enters here first, in both languages.
 | edition | edição | `en`, `pt` | One language of the book; `en` is the source. |
 | chapter | capítulo | `book/<edition>/NN-<slug>.md` | One file per edition; one delivery. |
 | draft marker | marca de rascunho | `status: draft` | The front matter line of a chapter not yet done; the site shows a banner and a mark in the navigation, and the chapter's delivery removes it. |
-| exercise | exercício | `### Exercise N.M` | A task on the guided project at the end of a chapter; answered in an appendix. |
+| chapter shape | formato do capítulo | docs/04 §Chapter shape | The fixed order of a chapter: title, opening, sections, key points, exercises. |
+| opening | abertura | none (first paragraph after the H1) | At most three sentences saying what the reader can do after the chapter; it has no heading. |
+| key points | pontos-chave | `## Key points` / `## Pontos-chave` | At most five bullets closing every chapter's content. |
+| exercise | exercício | `## Exercises` / `## Exercícios`, then `### Exercise N.M` / `### Exercício N.M` | A task on the guided project at the end of a chapter, from Part II on; answered in an appendix. |
+| source note | nota de fonte | `[^<key>]` | A footnote that gives the source of a number or a quoted claim; the key is the same in both editions. |
 | disclosure list | lista de exposição | `FKB_DENYLIST` | The private terms that must never appear in the repository; kept outside it. |
 
 ## Entities and invariants

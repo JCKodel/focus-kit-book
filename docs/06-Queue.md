@@ -13,7 +13,7 @@ When this milestone closes, a chapter written in both languages builds into the 
 [x] disclosure-scan        make scan against the out-of-repo disclosure list, locally and in Actions, part of make verify
 [x] prose-rules            the anti-AI prose rules written in docs/04 and checked by make verify
 [x] link-check             external links in the book checked, part of make verify (the strict build already fails on broken internal links)
-[ ] chapter-template       the chapter shape fixed, proven by chapter 1, Why process, written in both editions
+[x] chapter-template       the chapter shape fixed, proven by chapter 1, Why process, written in both editions
 [ ] pdf-epub               make book produces PDF and EPUB in both editions from the same source
 [ ] pages-and-release      Actions publish the site on push to main and a Release with PDF and EPUB on a v* tag
 [ ] brownfield-research    three to five open-source candidates compared; the author picks one (OD-1); fork and tag
