@@ -24,7 +24,9 @@ A new concept enters here first, in both languages.
 | slot | slot | `docs/05 §5` | A project-specific fact the commands read. |
 | governor | regulador | none | The question every addition must answer: which concrete error would it have caught? |
 | context window | janela de contexto | none | Everything the model sees in one call. |
+| token | token | none | The unit of text a model reads and counts; a word is one token or a few. |
 | context rot | degradação de contexto | none | The loss of accuracy as the context grows. |
+| compaction | compactação | none | The host summarizes a conversation near the limit of the context window and continues from the summary; detail is lost. |
 | FOCUS | FOCUS | `view`, `orchestrator`, `use-case`, `repository` | The optional architecture: four pieces, flow in one direction. |
 | Result | Result (erro como valor) | `Result<T, E>` | A failure returned as a value; `throw` is never used for flow. |
 | vertical slice | fatia vertical | `features/<name>/` | Code organized by feature, not by layer. |

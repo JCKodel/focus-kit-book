@@ -24,7 +24,7 @@ When this milestone closes, a chapter written in both languages builds into the 
 When this milestone closes, a reader who has never followed a process knows why a coding agent needs written context, what Spec-Driven Development is, and why focus-kit exists.
 
 ```
-[ ] how-agents-see         Chapter 2: statelessness, context window, context rot, fresh sessions, from primary sources
+[x] how-agents-see         Chapter 2: statelessness, context window, context rot, fresh sessions, from primary sources
 [ ] spec-driven            Chapter 3: SDD, what SpecKit and OpenSpec got right and where they weighed too much
 [ ] birth-of-focus-kit     Chapter 4: the Ninjobs restart, and the kit that grew and became one file again
 ```

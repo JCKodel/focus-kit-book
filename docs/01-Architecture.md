@@ -9,9 +9,9 @@ One Markdown file per chapter per edition, built into a bilingual website by MkD
 | Piece | Choice | Why, when there was an alternative |
 |---|---|---|
 | Source | Markdown, one sentence per line | Diffs show sentences; the two editions compare line by line. |
-| Website | MkDocs Material with the static i18n plugin | Bilingual navigation, search, light and dark themes, native Mermaid. Chosen over a GitHub wiki (ADR-0001) and over Quarto (ADR-0002). |
+| Website | MkDocs Material with the static i18n plugin | Bilingual navigation, search, light and dark themes. Chosen over a GitHub wiki (ADR-0001) and over Quarto (ADR-0002). |
 | PDF and EPUB | pandoc and weasyprint, run by `scripts/build_book.py`; fonts from `pandoc/fonts/` | A pipeline the author already runs for books. The PDF is A5 in Merriweather, Google Sans and Iosevka Term, loaded from the repository so any machine sets the same pages; the EPUB carries no fonts, so the reader's device chooses. |
-| Diagrams | not decided | Decided by the first chapter with a diagram, on a real one (ADR-0002, amendment). |
+| Diagrams | SVG written by hand, one per edition, in `book/assets/` | No tool to install, and the site, the PDF and the EPUB show SVG as they are; Mermaid would bring mermaid-cli and a browser back into the build (ADR-0002, amendment of `how-agents-see`). |
 | Automation | GitHub Actions, one workflow with three jobs | `verify` on every push; `pages` after it on `main`; `release` after it on a `v*` tag, with pandoc 3.11 and WeasyPrint 69.0 as the local build (ADR-0014). |
 | Scripts | Make, and Python 3 for checks | Nothing to install beyond what the build already needs. |
 
@@ -22,7 +22,7 @@ FOCUS does not apply: there is no product code, only content and a few build scr
 ```
 book/en/NN-<slug>.md     English edition, the source (A1-<slug>.md for appendices)
 book/pt/NN-<slug>.md     Portuguese edition, same file names
-book/assets/             images and figures shared by both editions; site.css (the draft mark in the navigation)
+book/assets/             images shared by both editions, diagrams one per edition (NN-<what>.<edition>.svg); site.css (the draft mark in the navigation)
 overrides/main.html      theme override: the draft banner
 scripts/build.py         strict site build, warnings as findings (rule "build")
 scripts/check_parity.py  the two editions: same chapters, heading levels and status (rule "parity")

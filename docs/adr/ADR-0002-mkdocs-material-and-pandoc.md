@@ -22,3 +22,9 @@ Two tools read the same source, so the Markdown avoids features only one of them
 
 Mermaid and mermaid-cli are removed from the PDF and EPUB pipeline (delivery `pdf-epub`): the book has no diagram yet, and how diagrams are drawn is decided by the first chapter that has one, on a real diagram.
 pandoc and weasyprint build PDF and EPUB, with the fonts of the PDF kept in the repository (`pandoc/fonts/`).
+
+## Amendment, 2026-09-25 (how-agents-see)
+
+The book's first diagram, in chapter 2, decides how diagrams are drawn: SVG written by hand, one file per edition in `book/assets/`, with an opaque light background.
+No tool is added: MkDocs, pandoc with weasyprint, and EPUB readers show SVG as they are.
+Mermaid is not brought back, since it would put mermaid-cli and a browser into the build; a generator is not added either, since one diagram does not justify it.

@@ -81,7 +81,10 @@ built, `[x]` done. Edited by conversation in any session.
 * **Proof of a screen:** for toolchain deliveries, a screenshot of the
   rendered site at 1280 and 390 pixels wide, in both editions, saved as
   `work/done/<slug>-<what>.png`; failures are captured too. For chapter
-  deliveries, no screenshot: the proof is verify green.
+  deliveries, no screenshot: the proof is verify green. A chapter that
+  brings a kind of content the build has not shown before (its first
+  diagram, say) also proves it renders: screenshots of the site in light
+  and dark and of the PDF, in both editions.
 * **Disclosure:** the disclosure list lives outside the repository, at
   `~/.config/focus-kit-book/denylist.txt` or the path in `FKB_DENYLIST`;
   in Actions it comes from the secret `DISCLOSURE_DENYLIST`. No term of

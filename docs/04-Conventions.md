@@ -109,6 +109,8 @@ status: draft            only while the chapter is not done; the delivery remove
 * Source notes: every number and every quoted claim from a publication carries `[^<key>]` at the claim.
   The key is lowercase `[a-z0-9-]+`, the same in both editions (`[^metr-2025]`).
   The definition is `[^<key>]: <Author or organization>, "<Title>", <year>. <URL>`, with the title in its original language in both editions.
+  A publication without a date carries `accessed YYYY-MM-DD` in place of `<year>` (pt: `acesso em YYYY-MM-DD`).
+  A quotation keeps the publication's words; the Portuguese edition quotes an English source in English and follows it with its translation in parentheses.
   For a case, whose repository the reader cannot open, the definition says it is private and how each number was obtained, so the reader knows what is claimed and can repeat the count on their own project; it names no private path: `[^ninjobs-adr-0022]: Ninjobs, a private repository, counted by the author over its history up to 2026-08-29, when its ADR-0022 dropped OpenSpec: ...`
 * `mkdocs.yml` enables the `footnotes` Markdown extension so the site renders them; pandoc reads the same syntax for PDF and EPUB.
 * Appendices (`A<n>-`) are out of this shape until the first appendix delivery fixes theirs.
@@ -116,7 +118,8 @@ status: draft            only while the chapter is not done; the delivery remove
 ## Files
 
 * Chapters: `book/<edition>/NN-<slug>.md`; appendices `A<n>-<slug>.md`.
-* Images: `book/assets/NN-<what>.png|svg`; text inside an image is avoided, so one image serves both editions.
+* Images: `book/assets/NN-<what>.png|svg`, with no text inside, so one image serves both editions.
+  A diagram, whose labels are words, is an SVG written by hand, one per edition, `book/assets/NN-<what>.<edition>.svg`, with an opaque light background so it reads in the dark theme and fonts that fall back to a generic family; each edition links its own, `![<alt>](../assets/NN-<what>.<edition>.svg)`, with the alt text in the edition's language, written as a caption, since the PDF and the EPUB print it under the image.
 
 ## Tests
 
