@@ -7,6 +7,10 @@ A new concept enters here first, in both languages.
 | Term | Portuguese | Identifier | Meaning |
 |---|---|---|---|
 | Spec-Driven Development (SDD) | Desenvolvimento Guiado por Especificação | `sdd` | Deciding in writing before building, so the written decision guides the agent. |
+| spec | especificação | none | A written, behaviour-oriented description of what the software must do, in natural language, that guides a coding agent (after Böckeler, 2025). |
+| spec-first | spec-first | none | A spec is written before the task and guides it; kept in English in both editions, with "especificação primeiro" in parentheses on its first use in Portuguese. |
+| spec-anchored | spec-anchored | none | The spec is kept after the task and used to evolve and maintain the feature; Portuguese first use: "ancorado na especificação". |
+| spec-as-source | spec-as-source | none | The spec is the main source over time; a person edits only the spec, never the code; Portuguese first use: "especificação como fonte". |
 | focus-kit | focus-kit | `focus-kit` | The method this book teaches, and the one-file kit that installs its four commands. |
 | host | host | `claude-code`, `codex`, `copilot`, `cursor`, `gemini-cli`, `antigravity`, `windsurf` | The program that runs the coding agent. |
 | command | comando | `/brainstorm`, `/analyze`, `/propose`, `/apply` | One of the four steps the kit installs. |

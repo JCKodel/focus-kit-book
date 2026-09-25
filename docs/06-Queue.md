@@ -25,8 +25,8 @@ When this milestone closes, a reader who has never followed a process knows why 
 
 ```
 [x] how-agents-see         Chapter 2: statelessness, context window, context rot, fresh sessions, from primary sources
-[x] spec-driven-run        SpecKit, OpenSpec and focus-kit run on the same feature and brief; files, lines and words counted and committed for chapter 3
-[ ] spec-driven            Chapter 3: SDD, what SpecKit and OpenSpec got right and where they weighed too much
+[x] spec-driven-run        Spec Kit, OpenSpec and focus-kit run on the same feature and brief; files, lines and words counted and committed for chapter 3
+[x] spec-driven            Chapter 3: SDD, what Spec Kit and OpenSpec got right and where they weighed too much
 [ ] birth-of-focus-kit     Chapter 4: the Ninjobs restart, and the kit that grew and became one file again
 ```
 

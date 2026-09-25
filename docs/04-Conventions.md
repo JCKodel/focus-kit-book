@@ -20,6 +20,7 @@
 * **Evidence.** Every number cites its source: a primary publication, or the case's recorded artifact.
   Every artifact shown (a page, a queue, a command output) comes from a real run.
   The Portuguese edition shows an English prose artifact (a rules file, a page) translated, and says before it that the original is in English; code, commands and their output stay as they ran.
+  An excerpt shown as evidence of how a tool worded something (chapter 3's three excerpts) stays in English, byte for byte, in both editions, and each edition follows it with one sentence in its own language saying what it says.
 * **Code** is TypeScript only, quoted from a tag of the guided project's repository with its path.
 * **Private cases** appear only as Case A and Case B; docs/03 §Entities and invariants says what may never appear.
 
@@ -111,6 +112,7 @@ status: draft            only while the chapter is not done; the delivery remove
   The key is lowercase `[a-z0-9-]+`, the same in both editions (`[^metr-2025]`).
   The definition is `[^<key>]: <Author or organization>, "<Title>", <year>. <URL>`, with the title in its original language in both editions.
   A publication without a date carries `accessed YYYY-MM-DD` in place of `<year>` (pt: `acesso em YYYY-MM-DD`).
+  A tool cited at a tag or a release carries its version in place of `<year>` (`[^spec-kit]: GitHub, "Spec Kit", v1.0.11. <URL>`).
   A quotation is in quotation marks and italic, `"*...*"`.
   The English edition keeps the publication's words; the Portuguese edition gives only their translation, and the original is at the source in the note.
   For a case, whose repository the reader cannot open, the definition says it is private and how each number was obtained, so the reader knows what is claimed and can repeat the count on their own project; it names no private path: `[^ninjobs-adr-0022]: Ninjobs, a private repository, counted by the author over its history up to 2026-08-29, when its ADR-0022 dropped OpenSpec: ...`
@@ -129,7 +131,7 @@ There is no product code to test.
 The checks are the tests: site build (strict), edition parity, em dash, prose rules, links, disclosure scan.
 Each lives in `scripts/` and runs from `make verify`.
 The strict build catches a broken internal link; `links` catches an external URL in either edition, either README or `mkdocs.yml` that answers 404, 410, another 4xx or a 5xx, whose host or connection fails, or that times out. 401, 403 and 429 pass, since the server exists; URLs in code, HTML comments and the front matter, under `site_url`, on `localhost`, `127.0.0.1` and `example.*` are not fetched.
-The em dash check skips `work/done/spec-driven-run/`: it keeps the output of SpecKit, OpenSpec and focus-kit byte for byte as the evidence of chapter 3, and no reader of the book reads it there; the disclosure scan still covers it.
+The em dash check skips `work/done/spec-driven-run/`: it keeps the output of Spec Kit, OpenSpec and focus-kit byte for byte as the evidence of chapter 3, and no reader of the book reads it there; the disclosure scan still covers it.
 A new check enters only when it names the error it would have caught (docs/05 §7).
 
 ## Commit messages
