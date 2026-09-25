@@ -12,7 +12,7 @@ One Markdown file per chapter per edition, built into a bilingual website by MkD
 | Website | MkDocs Material with the static i18n plugin | Bilingual navigation, search, light and dark themes, native Mermaid. Chosen over a GitHub wiki (ADR-0001) and over Quarto (ADR-0002). |
 | PDF and EPUB | pandoc and weasyprint, run by `scripts/build_book.py`; fonts from `pandoc/fonts/` | A pipeline the author already runs for books. The PDF is A5 in Merriweather, Google Sans and Iosevka Term, loaded from the repository so any machine sets the same pages; the EPUB carries no fonts, so the reader's device chooses. |
 | Diagrams | not decided | Decided by the first chapter with a diagram, on a real one (ADR-0002, amendment). |
-| Automation | GitHub Actions | `make verify` on every push; Pages on push to `main`; Release on a `v*` tag (ADR-0014). |
+| Automation | GitHub Actions, one workflow with three jobs | `verify` on every push; `pages` after it on `main`; `release` after it on a `v*` tag, with pandoc 3.11 and WeasyPrint 69.0 as the local build (ADR-0014). |
 | Scripts | Make, and Python 3 for checks | Nothing to install beyond what the build already needs. |
 
 ## How the repository is organized
@@ -37,7 +37,7 @@ scripts/repo_files.py    the files the checks read: tracked, plus untracked and 
 pandoc/pdf.css           the PDF: A5, margins, page numbers, the fonts by @font-face
 pandoc/epub.css          the EPUB: no @font-face
 pandoc/fonts/            Merriweather (4 styles), Google Sans (variable), Iosevka Term Regular; <Family>-OFL.txt each
-.github/workflows/verify.yml  make verify on every push, the list from the secret DISCLOSURE_DENYLIST
+.github/workflows/verify.yml  jobs verify (make verify on every push, the list from the secret DISCLOSURE_DENYLIST), pages (main only) and release (v* tags only), each after verify
 mkdocs.yml               the site: MkDocs Material, i18n in folder structure, footnotes, no nav: key
 requirements.txt         mkdocs-material and mkdocs-static-i18n, exact versions
 Makefile                 the targets below
@@ -85,8 +85,8 @@ MkDocs has its own message format, so `scripts/build.py` rewrites each warning a
 |---|---|---|
 | local | `make serve` (site), `make book` (PDF and EPUB into `output/`, never committed) | by hand |
 | GitHub Actions | `make verify` on every push, any branch, with the list from the secret `DISCLOSURE_DENYLIST` | the author sets the secret; runs on push |
-| GitHub Pages | the website, from `main` | Actions, on every push to `main` |
-| GitHub Release | PDF and EPUB, both editions | Actions, on a `v*` tag the author creates; the author uploads them to books.kodel.com.br |
+| GitHub Pages | the website, from `main` | job `pages`, on every push to `main` once `verify` is green; one deploy at a time, a stale queued one dropped. Pages source set to "GitHub Actions" once by the author |
+| GitHub Release | PDF and EPUB, both editions, under the names of `make book`, so `releases/latest/download/<file>` is the newest | job `release`, on a `v*` tag the author creates, once `verify` is green; a tag with `-` makes a pre-release. The author uploads the files to books.kodel.com.br |
 
 ## Tried and removed on purpose
 

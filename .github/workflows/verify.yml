@@ -19,3 +19,61 @@ jobs:
         run: printf '%s' "$DISCLOSURE_DENYLIST" > "$RUNNER_TEMP/denylist.txt"
       - name: make verify
         run: FKB_DENYLIST="$RUNNER_TEMP/denylist.txt" make verify
+
+  pages:
+    needs: verify
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+      contents: read
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: make build
+        run: make build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
+  release:
+    needs: verify
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Install pandoc 3.11
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/pandoc.deb" https://github.com/jgm/pandoc/releases/download/3.11/pandoc-3.11-1-amd64.deb
+          sudo apt-get update
+          sudo apt-get install -y "$RUNNER_TEMP/pandoc.deb"
+      - name: Install WeasyPrint 69.0
+        run: |
+          sudo apt-get install -y libpango-1.0-0 libharfbuzz0b libpangoft2-1.0-0 libharfbuzz-subset0
+          pip install weasyprint==69.0
+      - name: make book
+        run: make book
+      - name: Create the Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set --
+          case "$GITHUB_REF_NAME" in *-*) set -- --prerelease ;; esac
+          gh release create "$GITHUB_REF_NAME" output/*.pdf output/*.epub --verify-tag --generate-notes --title "$GITHUB_REF_NAME" "$@"
