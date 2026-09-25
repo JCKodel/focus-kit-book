@@ -31,7 +31,7 @@ CHAPTER_LINK = re.compile(r"\]\(((?:[0-9]{2}|A[0-9]+)-[^)#\s]+\.md)(\s+\"[^\"]*\
 PANDOC_PLACE = re.compile(r"\"([^\"]+)\" \(line (\d+), column \d+\)")
 CHAPTER_START = re.compile(r"(?=<h1[ >])")
 NOTES = re.compile(r'<aside id="footnotes[^"]*" class="footnotes[^"]*"[^>]*>.*?<ol[^>]*>\n?(.*?)</ol>\s*</aside>\n?', re.S)
-NOTE_NUMBER = re.compile(r'(<a href="#fn\d+" class="footnote-ref"[^>]*><sup>)\d+(</sup>)')
+NOTE_NUMBER = re.compile(r'(<a\s+href="#fn\d+"\s+class="footnote-ref"[^>]*><sup>)\d+(</sup>)')
 
 
 class Failed(Exception):
