@@ -59,7 +59,7 @@ O método que este livro ensina, o focus-kit, se apoia nessas três peças.
 ## Processo demais também falha
 
 Um processo pode custar mais do que economiza: cada documento é mais uma coisa para escrever, ler e manter verdadeira.
-No Ninjobs, meu próprio produto, quinze dias, 87 commits e 35 changes do OpenSpec produziram 38.823 linhas de spec para quatro telas e uma tabela de domínio.[^ninjobs-adr-0022]
+No Ninjobs, meu próprio produto, quinze dias, 87 commits e 35 changes do OpenSpec produziram 37.228 linhas de spec para quatro telas e uma tabela de domínio.[^ninjobs-adr-0022]
 O capítulo 4 conta essa história e como o focus-kit nasceu dela.
 
 ## Pontos-chave
@@ -72,4 +72,4 @@ O capítulo 4 conta essa história e como o focus-kit nasceu dela.
 
 [^metr-2025]: METR, "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity", 2025. https://arxiv.org/abs/2507.09089
 [^dora-2024]: DORA, "Accelerate State of DevOps Report 2024", 2024. https://dora.dev/research/2024/dora-report/
-[^ninjobs-adr-0022]: Ninjobs, ADR-0022, 2026-08-29.
+[^ninjobs-adr-0022]: Ninjobs, repositório privado, contado pelo autor no histórico até 2026-08-29, quando o ADR-0022 do projeto abandonou o OpenSpec: dias com commit e commits pelo `git log`, changes pelo arquivo do OpenSpec, linhas com `wc -l` sobre todos os arquivos de `openspec/`. As telas e a tabela são as que esse ADR lista.
