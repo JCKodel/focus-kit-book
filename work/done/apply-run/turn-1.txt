@@ -1,0 +1,205 @@
+[tool Bash] cat work/skeleton.md && ls -la && ls docs docs/adr work && git diff docs/06-Queue.md && git branch -a && git worktree list
+
+[tool Bash] for f in docs/01-Architecture.md docs/02-Backend.md docs/04-Conventions.md docs/05-Process.md docs/03-Domain.md docs/adr/*.md; do echo "=== $f"; cat "$f"; done; ls work/done; cat README.md; cat .gitignore 2>/dev/null
+
+[tool Read] docs/01-Architecture.md
+
+[tool Read] docs/02-Backend.md
+
+[tool Read] docs/04-Conventions.md
+
+[tool Read] docs/05-Process.md
+
+[tool Read] docs/adr/ADR-0001-stack.md
+
+[tool Read] docs/adr/ADR-0002-focus-whole.md
+
+[tool Read] docs/adr/ADR-0003-trunk.md
+
+[tool Read] docs/03-Domain.md
+
+[tool Bash] node --version; npm --version; ls -a work/done .github .claude; git -C . ls-files
+
+[tool Bash] node --version
+
+I've read the page and the docs, and I'm now checking whether the tooling (npm install, Playwright) can run in this session.
+
+[tool Bash] npm --version
+
+[tool Write] package.json
+
+[tool Bash] npm install react react-dom hono @hono/node-server
+
+[tool Bash] npm install -D typescript vite @vitejs/plugin-react vitest @playwright/test @biomejs/biome @types/node @types/react @types/react-dom
+
+[tool Bash] npm ls --depth=0
+
+[tool Bash] npx playwright install chromium
+
+[tool Bash] npx biome init
+
+Dependencies and the Chromium browser are installed. Next I'm writing the config and source files.
+
+[tool Read] biome.json
+
+[tool Edit] biome.json
+
+[tool Write] .gitignore
+
+[tool Write] tsconfig.json
+
+[tool Write] src/lib/result.ts
+
+[tool Write] src/server/migrate.server.ts
+
+[tool Write] src/server/database.server.ts
+
+[tool Write] src/features/health/route.server.ts
+
+[tool Write] src/server/main.server.ts
+
+[tool Write] src/server/migrations/.gitkeep
+
+[tool Write] src/features/health/api.ts
+
+[tool Write] src/features/health/useHealth.ts
+
+[tool Write] src/features/health/strings.ts
+
+[tool Write] src/features/health/HealthView.tsx
+
+[tool Write] src/app/strings.ts
+
+[tool Write] src/app/main.tsx
+
+[tool Write] index.html
+
+[tool Write] vite.config.ts
+
+[tool Write] src/server/migrate.server.test.ts
+
+[tool Write] src/server/database.server.test.ts
+
+[tool Write] src/features/health/HealthView.e2e.ts
+
+[tool Write] playwright.config.ts
+
+[tool Bash] npx biome check --write .
+
+Source and tests are written; running `npm run verify` now.
+
+[tool Bash] npm run verify 2>&1 | tail -60
+
+[tool Write] src/server/migrations/0001-broken.sql
+
+[tool Bash] DATABASE_PATH=/tmp/fkc-check/clinic.sqlite PORT=3200 node src/server/main.server.ts; echo "exit=$?"
+
+[tool Bash] npm run server
+
+[tool Bash] rm src/server/migrations/0001-broken.sql
+
+[tool Bash] node -e 'const {DatabaseSync}=require("node:sqlite");const db=new DatabaseSync("data/clinic.sqlite");console.log(db.prepare("SELECT type,name FROM sqlite_master").all(),db.prepare("SELECT * FROM schema_migration").all())'
+
+Failure path checked: exit 1, file named, nothing left behind. Now starting `npm run dev` in the background and taking the proof screenshot.
+
+[tool Bash] npm run dev
+
+[tool Edit] src/features/health/HealthView.e2e.ts
+
+[tool Bash] npm run test:e2e
+
+[tool Edit] src/features/health/HealthView.e2e.ts
+
+[tool Read] work/done/skeleton-390x844.png
+
+The screenshot matches the reference. Now updating the documents.
+
+[tool Edit] docs/02-Backend.md
+
+[tool Edit] docs/02-Backend.md
+
+[tool Edit] docs/02-Backend.md
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Edit] docs/05-Process.md
+
+[tool Edit] docs/05-Process.md
+
+[tool Edit] docs/04-Conventions.md
+
+[tool Edit] docs/06-Queue.md
+
+Now recording what happened in the page and moving it to `work/done/`.
+
+[tool Bash] git mv -f work/skeleton.md work/done/skeleton.md
+
+[tool Bash] mv work/skeleton.md work/done/skeleton.md
+
+[tool Read] work/done/skeleton.md
+
+[tool Read] work/done/skeleton.md
+
+[tool Edit] work/done/skeleton.md
+
+[tool Bash] npm run verify
+
+My revert of the screenshot line left a formatting slip; fixing it and re-running verify.
+
+[tool Edit] src/features/health/HealthView.e2e.ts
+
+[tool Bash] npm run verify
+
+Green. Staging.
+
+[tool Bash] git add -A
+
+[tool Bash] git status --short
+
+The skeleton delivery is built and staged, and `npm run verify` passes (typecheck, lint, 7 Vitest tests, 4 Playwright tests, build). One item is not done: `npm run dev` is not running, because this session was not allowed to start a long-running process.
+
+**What was built:**
+- **Server:** it opens `data/clinic.sqlite`, creating the folder and file if missing, and applies any new migrations. It answers `GET /api/health`.
+- **Migrations:** the migration runner is in `src/server/migrate.server.ts`. The migrations folder ships empty.
+- **Client page:** it shows "Clinic" and one status line: "Checking the server" while waiting, "Server: ok", or "Server: unreachable". `Result` now lives in `src/lib/result.ts`.
+
+**Checks:**
+- **Screenshot:** the "ok" state at 390×844 is saved as `work/done/skeleton-390x844.png` and matches the visual reference.
+- **Failing migration:** I started the server by hand with a deliberately broken migration file. It exited with code 1 and the message `Migration 0001-broken.sql failed: no such table: missing`, and left nothing recorded in the database. I deleted the file afterwards.
+- **Second start:** that a second start applies nothing is proven by a Vitest test only, not by a real restart.
+
+**Things I did that the page didn't specify** (all recorded in the page):
+- I added `@hono/node-server`, which Hono needs to listen on a port in Node.
+- Node 24+ runs the server's TypeScript directly, so the server has no build step and no extra runner.
+- `npm run dev` starts both processes with the shell's `&` instead of a tool like `concurrently`.
+- Opening the database returns a `Result` error instead of throwing.
+- If the migrations folder can't be read, the migration error names the folder, because no file was reached.
+- npm installed the latest major versions, including TypeScript 7 and Vite 8.
+
+**Blocked by permissions:**
+- Starting `npm run dev` in the background, so the "leaves client and server running" item in "Done when" is still unticked.
+- A few multi-part shell commands and `git mv`. I moved the page with plain `mv` instead, which is fine because it wasn't tracked yet.
+
+**Documents:** docs/01, 02, 04 and 05 are updated, the page is moved to `work/done/` with a "What happened" section, and docs/06 shows `[x] skeleton`. No ADR was needed.
+
+Suggested commit message:
+
+```
+Build the skeleton: health page, Hono server, migrations, verify
+
+- Health slice: GET /api/health and a page showing checking, ok, unreachable
+- Server start opens data/clinic.sqlite and applies SQL migrations in order
+- Result moves to src/lib on its second use (migrate)
+- npm run dev runs client and server; npm run verify runs all checks
+- Vitest tests for migrate and database opening; Playwright at 390x844
+
+See work/done/skeleton.md
+```
+
+**Environments:**
+- **local:** the code is at this delivery and `data/clinic.sqlite` exists with no migrations to apply, but nothing is running. Start it with `npm run dev`: the client is at http://localhost:5173 and the server on port 3000.
+- **production:** doesn't exist yet. The `deploy` delivery will create it.

@@ -1,0 +1,51 @@
+> verify
+> npm run typecheck && npm run lint && npm run test && npm run test:e2e && npm run build
+
+
+> typecheck
+> tsc --noEmit
+
+
+> lint
+> biome check .
+
+Checked 18 files in 5ms. No fixes applied.
+
+> test
+> vitest run
+
+
+ RUN  v5.0.2 .
+
+
+ Test Files  2 passed (2)
+      Tests  7 passed (7)
+   Start at  15:21:47
+   Duration  104ms (transform 56%, tests 19%, import 18%, worker 7%)
+
+
+> test:e2e
+> playwright test
+
+
+Running 4 tests using 1 worker
+
+  ✓  1 [phone] › src/features/health/HealthView.e2e.ts:3:1 › shows the server as ok when it answers (113ms)
+  ✓  2 [phone] › src/features/health/HealthView.e2e.ts:10:1 › shows the check while the answer is on its way (101ms)
+  ✓  3 [phone] › src/features/health/HealthView.e2e.ts:20:1 › shows the server as unreachable when it answers with an error (96ms)
+  ✓  4 [phone] › src/features/health/HealthView.e2e.ts:30:1 › shows the server as unreachable when it does not answer (97ms)
+
+  4 passed (1.5s)
+
+> build
+> vite build
+
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 21 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  0.39 kB │ gzip:  0.28 kB
+dist/assets/index-DD_Vn2PP.js  220.36 kB │ gzip: 68.89 kB
+
+✓ built in 52ms

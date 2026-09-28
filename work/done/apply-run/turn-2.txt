@@ -1,0 +1,35 @@
+[tool Read] work/done/skeleton.md
+
+[tool Edit] work/done/skeleton.md
+
+[tool Edit] work/done/skeleton.md
+
+[tool Edit] work/done/skeleton.md
+
+[tool Edit] work/done/skeleton.md
+
+[tool Edit] docs/05-Process.md
+
+[tool Write] <host memory folder of the clinic>/ask-before-unnamed-dependency.md
+
+[tool Write] <host memory folder of the clinic>/apply-page-records-unproven-claims.md
+
+[tool Write] <host memory folder of the clinic>/MEMORY.md
+
+[tool Bash] git add -A
+
+You're right on all five. I've fixed the page and docs/05 and staged them again. Only documents changed, not code, so I didn't rerun verify.
+
+1. **`@hono/node-server`:** I should have stopped and asked before adding it. The page now says it was added without being named and stays only if you approve it. **Do you keep it?** Hono needs it (or a hand-written adapter) to listen on a Node port. If you say no, I'll take it out of `package.json` and docs/01.
+2. **Second start:** "What happened" now says this was proven only by the Vitest test and that the server was never started twice.
+3. **`npm run dev`:** the Done when item is back to the bare checklist line, still unticked. The reason it wasn't run is now in "What happened": the session was headless, `data/clinic.sqlite` was created by the failing start, and no migration is recorded.
+4. **docs/05:** the local environment now says a delivery leaves the code ready to start and names the command, and you start it.
+5. **Ctrl+C:** the page now calls this untested and gives the check: after stopping `npm run dev`, `lsof -i :3000` should print nothing.
+
+I also saved two notes for future `/apply` runs: ask before adding any package the page didn't name, and put every gap in the proof into the page, not just into my reply.
+
+The suggested commit message is unchanged.
+
+**Environments:**
+- **local:** the code is at this delivery and `data/clinic.sqlite` exists with no migrations recorded, but nothing is running. Start it with `npm run dev`.
+- **production:** doesn't exist yet. The `deploy` delivery will create it.

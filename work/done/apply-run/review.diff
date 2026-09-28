@@ -1,0 +1,69 @@
+--- a/docs/05-Process.md
++++ b/docs/05-Process.md
+@@ -58,8 +58,10 @@
+   failure. Green before anything is declared done.
+ * **Environments:**
+   * local: client and server on the developer's machine with a local SQLite
+-    file; a delivery leaves it running with its migrations applied. Command:
+-    `npm run dev` (client and server together; migrations apply at start).
++    file. Command: `npm run dev` (client and server together; migrations
++    apply at start). A delivery leaves the code ready to start and names the
++    command; the person starts it, since the agent may run headless and
++    cannot keep a process running.
+   * production: a machine at the clinic or a free host; created by the
+     `deploy` delivery, which writes its line here.
+ * **Proof of a screen:** Playwright screenshots. Client screens at phone
+--- a/work/done/skeleton.md
++++ b/work/done/skeleton.md
+@@ -120,9 +120,7 @@
+       to `work/done/skeleton-390x844.png`; it is not part of `npm run verify`.
+ * [x] `npm run verify` is green.
+ * [ ] `npm run dev` leaves client and server running locally, with the
+-      SQLite file created. The SQLite file exists (`data/clinic.sqlite`,
+-      created by a server start); the agent's session was not allowed to
+-      start a long-running process, so the person starts `npm run dev`.
++      SQLite file created.
+ * [x] docs/02 lists `GET /api/health` and `schema_migration`; docs/01 and
+       docs/05 name the local command.
+ 
+@@ -137,14 +135,17 @@
+ 
+ **Diverged from the plan, and why.**
+ 
+-* `@hono/node-server` was added next to `hono`: Hono needs an adapter to
+-  listen on a Node port. It is part of "Node with Hono", recorded in docs/01.
++* `@hono/node-server` was added next to `hono` although the page did not
++  name it: Hono needs an adapter to listen on a Node port. The agent should
++  have stopped and asked; it did not. The person approved it at review, so
++  it stays, recorded in docs/01.
+ * The server has no build and no runner such as `tsx`: Node `>=24` runs
+   `.ts` directly by type stripping. Consequence, in docs/01: imports carry
+   `.ts`, and `erasableSyntaxOnly` forbids enums and similar syntax.
+ * `npm run dev` is `node --watch src/server/main.server.ts & vite`, the
+   shell's `&` instead of a tool like `concurrently`, since the page named no
+-  such tool. Ctrl+C stops both, as they share the terminal's process group.
++  such tool. Ctrl+C should stop both, as they share the terminal's process
++  group; this is untested (see What the proof found).
+ * `openDatabase` returns `Result<DatabaseSync, DatabaseOpenFailed>` rather
+   than throwing, so `throw` is not flow in the server start either. It is
+   the third use of `Result` (first: health `api.ts`; second: `migrate`).
+@@ -170,6 +171,19 @@
+ `Migration 0001-broken.sql failed: no such table: missing`, left only
+ `schema_migration` (empty) in the database, and the file was removed.
+ 
++Not proven outside a test:
++
++* "Starting the server a second time applies no migration" is proven only
++  by the Vitest test that runs `migrate` twice on one database. The server
++  was never started twice, since the only real start was the failing one
++  above.
++* `npm run dev` was not run. The agent's session was headless and not
++  allowed to start a long-running process, so the Done when item stays
++  unticked. `data/clinic.sqlite` exists, created by the failing start
++  above, with no migration recorded. The person starts `npm run dev`.
++* "Ctrl+C stops both" is untested. Check: after stopping `npm run dev`,
++  port 3000 is free (`lsof -i :3000` prints nothing).
++
+ **Decisions.** Playwright files are `*.e2e.ts` next to their view, and
+ Playwright starts its own server and Vite on ports 3100 and 5174 with a
+ database in the system temp folder (docs/04). No ADR: every choice sits

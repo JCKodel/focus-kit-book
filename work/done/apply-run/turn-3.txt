@@ -1,0 +1,9 @@
+[tool Edit] work/done/skeleton.md
+
+[tool Bash] git add work/done/skeleton.md
+
+`@hono/node-server` stays. The page now records that you approved it at review, and it's staged. docs/01 already lists it, so nothing else changed. The suggested commit message is the same as before.
+
+**Environments:**
+- **local:** the code is at this delivery and `data/clinic.sqlite` exists, but nothing is running. Start it with `npm run dev`.
+- **production:** doesn't exist yet. The `deploy` delivery will create it.

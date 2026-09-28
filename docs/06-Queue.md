@@ -45,7 +45,7 @@ When this milestone closes, a reader can install the kit, document a new or an e
 [x] two-choices            Chapter 6 gains "The two choices": FOCUS (four pieces, whole / two principles / neither) and git (trunk / branch / worktree) in a paragraph each, so chapters 7 and 8 point back to them; Parts III and IV still teach them
 [x] queue-and-milestones   Chapter 9: the queue, the marks, milestones and their paragraphs
 [x] propose                Chapter 10: /propose, one page, reading it before /apply, and splitting what does not fit
-[ ] apply                  Chapter 11: /apply, verify, proof, documents, stage, never commit
+[x] apply                  Chapter 11: /apply, verify, proof, documents, stage, never commit
 [ ] closing-a-milestone    Chapter 12: the whole-milestone review, findings become queue lines
 [ ] the-governor           Chapter 13: which concrete error would it have caught, and what the process does not have
 ```

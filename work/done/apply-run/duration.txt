@@ -1,0 +1,3 @@
+turn 1: subtype success, duration_ms 299774, num_turns 74, permission_denials 5
+turn 2: subtype success, duration_ms 34538, num_turns 11, permission_denials 0
+turn 3: subtype success, duration_ms 6483, num_turns 3, permission_denials 0

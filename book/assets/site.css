@@ -7,3 +7,9 @@
   -webkit-mask-image: var(--md-status--draft);
   mask-image: var(--md-status--draft);
 }
+
+/* A screenshot (PNG) is often white on white: a thin border shows its edge in the light theme, and a phone-sized one stays small. */
+.md-typeset img[src$=".png"] {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  max-width: 280px;
+}

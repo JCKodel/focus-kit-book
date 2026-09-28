@@ -22,7 +22,7 @@ FOCUS does not apply: there is no product code, only content and a few build scr
 ```
 book/en/NN-<slug>.md     English edition, the source (A1-<slug>.md for appendices)
 book/pt/NN-<slug>.md     Portuguese edition, same file names
-book/assets/             images shared by both editions, diagrams one per edition (NN-<what>.<edition>.svg); site.css (the draft mark in the navigation)
+book/assets/             images shared by both editions, diagrams one per edition (NN-<what>.<edition>.svg); screenshots one for both (NN-<what>.png); site.css (the draft mark in the navigation, a border and a width for PNGs)
 overrides/main.html      theme override: the draft banner
 scripts/build.py         strict site build, warnings as findings (rule "build")
 scripts/check_parity.py  the two editions: same chapters, heading levels and status (rule "parity")
@@ -36,8 +36,8 @@ scripts/check_disclosure.py no term of the disclosure list in a file path, a tex
 scripts/patterns.py      compile_entry: the entry syntax (plain or re:) shared by the prose and disclosure checks
 scripts/markdown.py      front_matter: the fields and the body, shared by parity and the book build; mask: front matter, code and HTML comments as spaces, shared by the prose and link checks
 scripts/repo_files.py    the files the checks read: tracked, plus untracked and not ignored
-pandoc/pdf.css           the PDF: A5, margins, page numbers, the fonts by @font-face, a wrapped code line starting at the margin
-pandoc/epub.css          the EPUB: no @font-face; a wrapped code line starts at the margin
+pandoc/pdf.css           the PDF: A5, margins, page numbers, the fonts by @font-face, a wrapped code line starting at the margin, a border and a width for PNGs
+pandoc/epub.css          the EPUB: no @font-face; a wrapped code line starts at the margin; a border and a width for PNGs
 pandoc/fonts/            Merriweather (4 styles), Google Sans (variable), Iosevka Term Regular; <Family>-OFL.txt each
 .github/workflows/verify.yml  jobs verify (make verify on every push, the full history, the list from the secret DISCLOSURE_DENYLIST), pages (main only) and release (v* tags only), each after verify
 mkdocs.yml               the site: MkDocs Material, i18n in folder structure, footnotes, no nav: key

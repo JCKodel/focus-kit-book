@@ -1,0 +1,9 @@
+Build the skeleton: health page, Hono server, migrations, verify
+
+- Health slice: GET /api/health and a page showing checking, ok, unreachable
+- Server start opens data/clinic.sqlite and applies SQL migrations in order
+- Result moves to src/lib on its second use (migrate)
+- npm run dev runs client and server; npm run verify runs all checks
+- Vitest tests for migrate and database opening; Playwright at 390x844
+
+See work/done/skeleton.md

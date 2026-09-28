@@ -129,6 +129,7 @@ status: draft            only while the chapter is not done; the delivery remove
 * The prologue is `00-<slug>.md`: the prefix only sorts it first, the text calls it the prologue, and it is never called chapter 0.
 * Images: `book/assets/NN-<what>.png|svg`, with no text inside, so one image serves both editions.
   A diagram, whose labels are words, is an SVG written by hand, one per edition, `book/assets/NN-<what>.<edition>.svg`, with an opaque light background so it reads in the dark theme and fonts that fall back to a generic family; each edition links its own, `![<alt>](../assets/NN-<what>.<edition>.svg)`, with the alt text in the edition's language, written as a caption, since the PDF and the EPUB print it under the image.
+  A screenshot of an artifact of a run is shown as it ran, text included: one PNG for both editions, `book/assets/NN-<what>.png`, the same bytes as the copy in the run's record; the alt text is in the edition's language, and the Portuguese edition gives the screenshot's text in a sentence. The stylesheets (`book/assets/site.css`, `pandoc/pdf.css`, `pandoc/epub.css`) give every PNG a thin border, since a screenshot is often white on a white page, and a reduced width, so a phone-sized one keeps its caption on its page.
 
 ## Tests
 
