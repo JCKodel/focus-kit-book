@@ -1,0 +1,30 @@
+[tool Edit] docs/06-Queue.md
+
+I've updated `docs/06-Queue.md` so milestone 1 closes on your sentence. The other documents didn't need changes, because none of them tied the owner's view of the day or deployment to milestone 1.
+
+## Milestone 1: a client books and cancels
+
+```
+[ ] skeleton             empty PWA and server in one project, npm run verify, first screenshot
+[ ] clinic-setup         a setup command creates the clinic and the owner; the owner signs in and out
+[ ] professionals        the owner registers, renames and removes professionals
+[ ] weekly-hours         the owner sets each professional's weekly hours
+[ ] book-appointment     a client sees free slots for 30 days and books with name and phone
+[ ] cancel-appointment   a client cancels up to 24 hours before, or is told why not
+```
+
+## Milestone 2: the owner runs the day
+
+```
+[ ] absences             the owner records a professional's absences, and their slots disappear
+[ ] owner-schedule       the owner sees the day's appointments per professional
+[ ] deploy               the app runs on a clinic machine or a free host, with a backup of the data
+```
+
+Two calls to check:
+- **`deploy` is now in milestone 2.** Your milestone 1 sentence doesn't mention running the app anywhere but locally, so I moved it to sit with the owner's view of the day. If you want the app online by the end of milestone 1, it goes back as that milestone's last line.
+- **`clinic-setup` stays in milestone 1.** The owner has to sign in before registering professionals.
+
+"Absence" isn't in the vocabulary yet. It goes into docs/03 when `/propose absences` defines it. That session will also have to decide what happens to appointments already booked during a new absence.
+
+Next step, in a fresh session: `/propose skeleton`.

@@ -1,0 +1,33 @@
+FOCUS whole and trunk it is. Here are the smaller choices I'll make within your stack, unless you object:
+
+- **Vite** builds the React PWA.
+- **Hono** runs the Node server. It's small and TypeScript-first, and it runs anywhere Node runs.
+- **`node:sqlite`**, the SQLite driver built into Node, reads and writes the database. It needs no native package, so any free host can run it.
+- The **owner's password** is hashed with `node:crypto` (scrypt), and the session travels in an httpOnly cookie. No auth library.
+- **FOCUS in this stack:**
+  - the React component is the View
+  - a hook per feature is the client's Orchestrator
+  - a Hono route is the server's Orchestrator
+  - the Repository is SQL on the server, and on the client a `fetch` wrapper that turns network failures into values
+- **The use cases live in a shared folder that both sides import.** The server enforces the 24-hour rule, and the client uses the same function to decide whether to show the cancel button. That's one function in one place with one test, not a copy.
+
+## 4. Conventions and 5. Process
+
+Defaults, in one block:
+
+- **Languages:** documentation in English, identifiers in English.
+- **Style:** Biome formats and lints in one tool, with TypeScript `strict`.
+- **Tests:** Vitest, with each `x.test.ts` next to the file it tests.
+  - Every use case has unit tests: pure, no database, a fixed clock.
+  - Repositories are tested against an in-memory SQLite.
+  - Screens are tested end to end with Playwright.
+- **Commits:** imperative subject up to 72 characters, scope in parentheses when it helps, and a last line pointing to `work/done/<slug>.md`.
+- **Verify:** `npm run verify`, which runs typecheck + lint + tests + build. It's created by the first delivery.
+- **Proof of a screen:** Playwright screenshots of the client side at phone width (390×844) and of the owner side at phone and desktop width (1280×800), with no design file; the page's Behaviour section is the reference.
+- **Publish policy:** the agent never deploys. You update any environment beyond your own machine.
+
+Three questions this round:
+
+1. **What language are the screens in?** This is the text clients read, not the code. My default: English, with every user-facing string in one file per feature so a translation is a later delivery, not a rewrite.
+2. **Environments:** my default is that milestone 1 runs only locally (`npm run dev`), and "production" (a machine at the clinic or a free host) is a delivery of its own at the end of the milestone. Should it be deployed earlier than that?
+3. **Is there a visual design** (a sketch, a Figma file, a brand colour), or is plain, clean default styling fine for now?

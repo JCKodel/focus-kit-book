@@ -1,0 +1,33 @@
+--- a/docs/06-Queue.md
++++ b/docs/06-Queue.md
+@@ -5,11 +5,8 @@
+ 
+ ## Milestone 1: a client books and cancels
+ 
+-When it closes, the owner has set up the clinic, registered its
+-professionals and their weekly hours, and sees the day's schedule; a client
+-on a phone books a free slot with a name and a phone number and cancels it up
+-to 24 hours before; and the app runs outside the developer's machine with no
+-paid service.
++When it closes, the owner can register professionals and their weekly hours,
++a client can book a free slot, and a client can cancel up to 24 hours before.
+ 
+ ```
+ [ ] skeleton             empty PWA and server in one project, npm run verify, first screenshot
+@@ -18,6 +15,16 @@
+ [ ] weekly-hours         the owner sets each professional's weekly hours
+ [ ] book-appointment     a client sees free slots for 30 days and books with name and phone
+ [ ] cancel-appointment   a client cancels up to 24 hours before, or is told why not
++```
++
++## Milestone 2: the owner runs the day
++
++When it closes, the owner can record a professional's absences, which remove
++their slots, and sees the day's appointments per professional; and the app
++runs outside the developer's machine with no paid service.
++
++```
++[ ] absences             the owner records a professional's absences, and their slots disappear
+ [ ] owner-schedule       the owner sees the day's appointments per professional
+ [ ] deploy               the app runs on a clinic machine or a free host, with a backup of the data
+ ```

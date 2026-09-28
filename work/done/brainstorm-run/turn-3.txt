@@ -1,0 +1,29 @@
+Everything stays as I drafted it: booking code, 30-minute clinic-wide slots, 30 days ahead, "client", and the two open decisions.
+
+## 3. How it is built (docs/01)
+
+What the product needs from the stack:
+- a phone-first web page for clients, with no install and no account
+- a sign-in for one owner
+- a **server that holds the rules**, because a phone can't be trusted to enforce the 24-hour deadline or stop double bookings
+- rules that are easy to test, since every rule has a test
+
+**1. Stack. My recommendation: one TypeScript web app (SvelteKit) with a SQLite database, on one small server.**
+- It's one language and one project, and the rules run on the server as plain functions that Vitest tests in milliseconds.
+- A double booking is impossible at the database level: slots are aligned, so a unique index on (professional, start) over booked appointments settles any race.
+- The owner's sign-in is a hashed password plus a session cookie, about a page of code.
+- The data is one file, and a backup is a copy of that file.
+
+The alternative is a thin page over a hosted backend service (Postgres plus built-in sign-in). You get hosting and auth for free, but the rules would live in SQL functions and be tested in a second language. That's a worse fit for "every rule has a test" and "keep it simple". Does the recommendation hold?
+
+**2. How the code is organized.** The kit offers FOCUS, an architecture in four pieces where data flows one way:
+- the **screen** only shows state and reports what the user did
+- an **orchestrator** turns what the user did into the next state
+- **use cases** hold every business rule as pure functions that take data and return a result or a refusal
+- a **repository** is the only code that talks to the database
+
+Code is grouped by feature (book, cancel, weekly hours…), not by layer, and errors are returned as values instead of thrown.
+
+You can take it whole, take only the two principles (feature folders + errors as values), or take neither. **My recommendation: FOCUS whole.** It maps onto SvelteKit with no extra machinery: the page is the screen, the page's server file is the orchestrator, `rules.ts` holds the use cases and `repository.ts` holds the queries. It also puts the 24-hour rule and the slot rule in pure functions, which is where "every rule has a test" is cheapest.
+
+**3. Git.** In every option the agent never commits or merges; it stages and suggests the message. You can work on the main branch one delivery at a time and review and commit after each. Or each delivery gets its own branch that you merge. Or each delivery gets its own branch in a separate folder, so several agents can build at once. **My recommendation: the main branch**, since you're one person working through one delivery at a time.

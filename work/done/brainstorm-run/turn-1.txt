@@ -1,0 +1,26 @@
+[tool Read] .claude/skills/brainstorm/references/documents.md
+
+[tool Bash] ls -la && cat README.md && ls .claude/skills/brainstorm .claude/skills/brainstorm/references
+
+Your README already tells me a lot: a scheduling app for a neighbourhood clinic, with a customer side and an owner side. I'll use that as the starting point and propose defaults. Tell me where they're wrong, or say "your call" and I'll keep them.
+
+## 1. The product
+
+**My draft, in one sentence:** *A web app where a small neighbourhood clinic's patients book, move and cancel their own appointments, and the clinic's owner sets their availability and sees the day's schedule.*
+
+I need four answers to write docs/00:
+
+1. **What kind of clinic, and how big is it?** My default: one location, a few practitioners (1 to 5), each offering a small list of services with fixed durations (for example "consultation, 30 min"). Does that fit, or is it a single practitioner, or several locations?
+
+2. **How does a patient get in?** My default: they sign in with just an email (a magic link, no password). The clinic only needs a name and a phone number to call them back. The other option is to let people book as guests with no account, which is easier for them but makes cancelling and spotting no-shows harder.
+
+3. **What is it *not*?** My proposed non-goals:
+   - no payments or deposits
+   - no medical records, diagnoses or clinical notes (we store only schedule data, which keeps us out of health-data regulations)
+   - no insurance or billing
+   - no video consultations
+   - no marketplace of clinics: the app serves exactly one clinic
+
+   Should anything come off this list, or go on it?
+
+4. **What does a good decision look like here?** My default values, in order: **simple for the patient** (booking in under a minute on a phone), **trustworthy schedule** (never a double booking, never a slot the owner didn't open), **little work for the owner**, **privacy**, **cheap to run**. When two of them conflict, the one higher on the list wins. Does the order hold?

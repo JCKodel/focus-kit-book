@@ -1,0 +1,39 @@
+That covers docs/00 almost whole. I'm keeping "keep it simple" and "every rule has a test" as values, and "no em dash" as a non-negotiable. For owner sign-in, my call: **one owner account, email and password**, handled by whatever the stack provides, with no sign-up screen. There's one owner per clinic, so the account is created once at setup.
+
+Three gaps are left in the product, and each one changes the vocabulary, so I'm handling both subjects in this round.
+
+## 1. Product gaps
+
+1. **How does a client with no account prove an appointment is theirs when cancelling?** With no notifications, the proof has to appear on screen at booking time. My default: after booking, the client sees a **short booking code** (6 characters) and the device remembers it. To cancel, they enter phone number + code, or tap the appointment the device remembers. Is that OK?
+
+2. **How long is an appointment?** My default: **one fixed length for the whole clinic, 30 minutes**, set by the owner. Weekly hours are cut into slots of that length. The alternatives are a length per professional or per service. Both add a concept, and you said "keep it simple".
+
+3. **How far ahead can clients book?** My default: from the next slot that hasn't started yet up to **30 days ahead**, with no limit on how many appointments one phone number holds.
+
+I'll also record two things as **open decisions**, which no delivery may settle by assumption: what happens to future appointments when the owner removes a professional or changes their hours (my default for now: those appointments stay), and whether the owner can cancel a client's appointment.
+
+## 2. Vocabulary (docs/03)
+
+Here's my draft. Correct any word that isn't how you'd say it:
+
+| Term | In code | Meaning |
+|---|---|---|
+| Clinic | `Clinic` | The one clinic the app serves; holds the time zone and slot length |
+| Owner | `Owner` | The person who runs the clinic and signs in |
+| Professional | `Professional` | Someone clients book with |
+| Weekly hours | `WeeklyHours` | A professional's recurring availability |
+| Working period | `WorkingPeriod` | One weekday + start + end inside the weekly hours |
+| Slot length | `slotMinutes` | The fixed length of every appointment |
+| Slot | `Slot` | A free interval of one professional, derived from weekly hours minus appointments; never stored |
+| Client | `Client` | Whoever books: name + phone, no account |
+| Appointment | `Appointment` | One client, one professional, one start time |
+| Status | `AppointmentStatus` | `booked` or `cancelled` |
+| Booking code | `bookingCode` | The code that proves an appointment belongs to the client |
+| Book | `book` | Create an appointment in a free slot |
+| Cancel | `cancel` | Mark an appointment cancelled, which frees its slot |
+| Cancellation deadline | `cancellationDeadline` | 24 hours before the start; after it, cancel is refused |
+| Clinic time | `clinicTimeZone` | All times are shown and reasoned in this zone |
+| Slot taken | `SlotTaken` | The refusal when two bookings race for one slot |
+| Too late to cancel | `CancellationTooLate` | The refusal after the deadline, with its message |
+
+**4.** Is **"client"** the right word, rather than "patient"? I'm keeping yours because "patient" hints at health data, which is a non-goal.

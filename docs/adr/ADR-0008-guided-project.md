@@ -27,3 +27,8 @@ The name and repository are chosen in `guided-project-repo` (docs/00 OD-2).
 * Licenses as ADR-0003, unchanged: code, scripts and configuration AGPL-3.0-only; `docs/`, `work/` and the README CC BY-SA 4.0; focus-kit's installed command files under focus-kit's terms.
 * English only: identifiers, documents and README. The Portuguese edition shows its prose artifacts translated (docs/04 §Evidence); there is no Portuguese copy of the repository.
 * The tag rule: `book-v1/start` is the empty starting point, before chapter 5. A chapter that changes the project ends with the annotated tag `book-v1/<chapter-slug>` on the commit it quotes; a chapter that changes nothing has no tag, and its exercises start from the latest earlier tag. A published tag never moves; a second edition tags `book-v2/*`.
+
+## Amendment, 2026-09-28
+
+* A small Node server keeps the data in a SQLite file, between the React PWA and the database: the client and the owner share the same appointments, so the rules that keep them right (no double booking, the 24 hour limit) run on the server, where a phone cannot skip them.
+* So the clinic has a docs/02, written by `/brainstorm` in chapter 7 (`brainstorm`).
