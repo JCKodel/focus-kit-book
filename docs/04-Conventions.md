@@ -90,7 +90,7 @@ remove the emoji
 
 ## Chapter shape
 
-Every chapter, in both editions, has this shape (terms from docs/03); chapter 1 is the first to follow it:
+Every chapter, in both editions, has this shape (terms from docs/03); the prologue and every chapter, starting at chapter 1, follow it:
 
 ```
 ---
@@ -126,6 +126,7 @@ status: draft            only while the chapter is not done; the delivery remove
 ## Files
 
 * Chapters: `book/<edition>/NN-<slug>.md`; appendices `A<n>-<slug>.md`.
+* The prologue is `00-<slug>.md`: the prefix only sorts it first, the text calls it the prologue, and it is never called chapter 0.
 * Images: `book/assets/NN-<what>.png|svg`, with no text inside, so one image serves both editions.
   A diagram, whose labels are words, is an SVG written by hand, one per edition, `book/assets/NN-<what>.<edition>.svg`, with an opaque light background so it reads in the dark theme and fonts that fall back to a generic family; each edition links its own, `![<alt>](../assets/NN-<what>.<edition>.svg)`, with the alt text in the edition's language, written as a caption, since the PDF and the EPUB print it under the image.
 

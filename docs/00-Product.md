@@ -30,11 +30,12 @@ It argues for the method with real cases and measured results, and it doubles as
 
 | Part | Chapters |
 |---|---|
+| Prologue | Product, people and process |
 | I. Foundations | 1 Why process, when AI writes fast · 2 How an agent sees your project · 3 Spec-Driven Development · 4 How focus-kit was born |
 | II. The focus-kit method | 5 Install, and the hosts · 6 The documents · 7 `/brainstorm` · 8 `/analyze` · 9 The queue and milestones · 10 `/propose`, one page · 11 `/apply`: build, verify, prove, never commit · 12 Closing a milestone · 13 The governor, and what the process does not have |
 | III. FOCUS architecture (optional) | 14 Exceptions as values and vertical slices · 15 The four pieces · 16 Testing, and FOCUS with agents |
 | IV. Git for agents and teams | 17 Essentials: trunk, branches, git-flow · 18 Worktrees and parallel agents · 19 The human commit as the review · 20 GitHub for teams: pull requests, issues, boards |
-| V. Beyond code | 21 Customizing the process · 22 The project as an assistant · 23 Projects that are not software · 24 Adoption in teams and companies |
+| V. Beyond code | 21 Customizing the process · 22 The project as an assistant · 23 Projects that are not software · 24 What agents cost, and where they pay · 25 Adoption in teams and companies |
 | Appendices | The Ninjobs case · Glossary · Templates · Workshop map · Exercise answers |
 
 The contents are a starting point; chapters are split, merged or moved by conversation, and docs/06 follows.

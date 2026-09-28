@@ -21,9 +21,10 @@ When this milestone closes, a chapter written in both languages builds into the 
 
 ## M2. Part I, Foundations
 
-When this milestone closes, a reader who has never followed a process knows why a coding agent needs written context, what Spec-Driven Development is, and why focus-kit exists.
+When this milestone closes, a reader who has never followed a process knows why product, people and process decide a project built with agents, why a coding agent needs written context, what Spec-Driven Development is, and why focus-kit exists.
 
 ```
+[x] product-people-process Prologue: product, people and process (Marcus Lemonis's three P's) applied to software built with agents, each pointed to the part of the book that answers it; Case B in one sentence
 [x] how-agents-see         Chapter 2: statelessness, context window, context rot, fresh sessions, from primary sources
 [x] spec-driven-run        Spec Kit, OpenSpec and focus-kit run on the same feature and brief; files, lines and words counted and committed for chapter 3
 [x] spec-driven            Chapter 3: SDD, what Spec Kit and OpenSpec got right and where they weighed too much
@@ -78,7 +79,8 @@ When this milestone closes, a reader can adapt the process to a team's tools, in
 [ ] customizing            Chapter 21: extra marks, question deliveries, proof files, a board mirror (Case A), and the queue mirrored to GitHub issues and a Projects board, built and tagged in the guided project
 [ ] project-as-assistant   Chapter 22: what is pending, how is it going, who is away, answered from the documents
 [ ] beyond-software        Chapter 23: analyses, proposals (Case B), codeless projects (Case A), client communication as a source of truth, data work (Ninjobs' database security rules as deliveries), and this book
-[ ] adoption               Chapter 24: taking the method to a team and a company (Case B)
+[ ] cost-and-where         Chapter 24: what coding agents cost, where they pay and where they do not, and how a team decides, with measured numbers
+[ ] adoption               Chapter 25: taking the method to a team and a company (Case B)
 ```
 
 ## M7. Appendices and launch
