@@ -95,19 +95,25 @@ On a repository with code the default is what the code already does.
 | Use Case | the only place for business rules; pure; takes data, returns a Result | IO, framework, domain exception |
 | Repository | fetch and save; the only place an infra exception becomes a Result | business rules |
 
-**Git.** Three answers, and in every one the agent never commits and never
-merges:
+**Git.** A strategy, not a silver bullet: pick the one that fits how the
+project is worked. Three answers, and in every one the page `/propose`
+writes and the build `/apply` makes land in the same commit, and the agent
+never commits and never merges:
 
 * **trunk:** everything on the main branch, one delivery at a time, the
-  person reviews and commits after each. The simplest, and what Ninjobs
-  did;
-* **a branch per delivery:** `/apply` works on a branch named after the
-  slug; the person merges. For teams where a delivery is reviewed by
-  someone else before it lands;
-* **a worktree per delivery:** each `/apply` runs in its own git worktree
-  on its own branch, so several agents build different deliveries at the
-  same time; the person merges. Costs a directory per delivery and merges
-  that can conflict when two deliveries touch the same files.
+  person reviews and commits after each. Only for one person working
+  alone: with two, their deliveries share one branch and one commit
+  carries the other's half-done work. What Ninjobs did;
+* **a branch per delivery:** `/propose` creates a branch named after the
+  slug and writes the page there; `/apply` builds on it; the person merges
+  through a pull request. For sequential work reviewed by pull request;
+* **a worktree per delivery:** `/propose` creates a git worktree on a
+  branch named after the slug and writes the page there; `/apply` runs in
+  it; the person merges. For parallel work: one branch does not touch
+  another, so several agents build different deliveries at the same time.
+  Before running two at once, decide which deliveries can run in parallel
+  and which touch the same files, or their merges conflict. Costs a
+  directory per delivery.
 
 ## The process document (docs/05)
 

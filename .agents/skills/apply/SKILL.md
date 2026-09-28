@@ -12,7 +12,8 @@ Read the page, `AGENTS.md`, docs/01 (architecture), docs/04 (conventions)
 and docs/05 (process). docs/05 holds this project's slots and you follow
 them literally: the verify command, the environments and what a delivery
 leaves up to date in each, how a screen is proven, the publish policy, the
-git strategy. Work where the git strategy says. If the page contradicts a
+git strategy. Work where the git strategy says: on the branch or worktree
+`/propose` created for the slug, if any. If the page contradicts a
 document, stop and say which: the document changes in the same delivery or
 the page is wrong. Do not resolve it silently.
 

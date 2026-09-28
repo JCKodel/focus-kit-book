@@ -18,6 +18,10 @@ reading and no document closes it; give your assessment in prose first, and
 your recommendation first in every question. If it does not fit one page,
 it is two deliveries: say so, propose the split, and write only the first.
 
+Before writing, follow the git strategy of docs/05: with a branch or a
+worktree per delivery, create it, named after the slug, and write there,
+so the page and its build land in the same commit.
+
 Write `work/<slug>.md` in the format docs/05 §The page defines. The
 **Contract** section (data, schema, API, message shapes) is the only one
 that must be exact: a wrong screen is fixed in a session, a wrong column is
