@@ -148,7 +148,8 @@ def prepare(source, names, banner):
             if match.group(1) in names:
                 end = match.end(1)
                 line = line[:end] + "#" + anchor(match.group(1)) + line[end:]
-        if not heading_done and re.match(r"# \S", seen):
+        # The mask blanks a code span, so a title that opens with one is checked on the line itself.
+        if not heading_done and seen.startswith("# ") and re.match(r"# \S", line):
             heading_done = True
             if not line.rstrip().endswith("}"):
                 line = line.rstrip() + " {#" + anchor(source.name) + "}"

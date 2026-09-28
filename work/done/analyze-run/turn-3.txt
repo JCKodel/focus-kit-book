@@ -1,0 +1,25 @@
+[tool Bash] gh issue view 270 -R DamageLabs/clahub
+
+[tool Bash] gh issue view 274 -R DamageLabs/clahub
+
+[tool Bash] gh issue view 268 -R DamageLabs/clahub
+
+[tool Write] docs/06-Queue.md
+
+I read the three issues and rewrote Milestone 1 in `docs/06-Queue.md` from them, keeping your order:
+
+```
+[ ] resign-on-version-bump       owners can require re-signing when a new CLA version is published, with an optional grace period (#270)
+[ ] custom-email-templates       owners customize the subject and body of the new-signature email with variables and a preview (#274)
+[ ] gdpr-export-and-deletion     users download their data as JSON and delete their account (#268)
+```
+
+The milestone paragraph now says what is true when it closes: re-signing is enforced in PR checks, the signing email uses the owner's own template with the default as fallback, and users can export their data and delete their account.
+
+Some parts of the issues conflict with the documented rules or with each other. These are for `/propose` to settle with you:
+
+- **#268 conflicts with two non-negotiables.** It asks to delete the user's audit logs along with their signatures, but ADR-0005 says every change is kept in the audit log and signatures are revoked, not deleted. It also asks to revoke the user's GitHub token, and only owners have one stored.
+- **#274 has two open points.** It suggests Handlebars or Mustache, which would be a new dependency. It also mentions templates for revocation and version-bump emails, but only the new-signature email exists today. That makes it partly depend on #270.
+- **#270 needs one choice.** The switch for requiring re-signing could go on the agreement or on each version, and the choice affects how old signatures are treated.
+
+Next step: `/propose resign-on-version-bump` in a fresh session.

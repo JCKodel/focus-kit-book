@@ -67,7 +67,7 @@ The navigation comes from the file names in `NN-` order, with each chapter's H1 
 
 The file name of a chapter is the same in both editions, so parity is checked by name.
 Code of the guided project lives in its own repository, `JCKodel/focus-kit-clinic` (ADR-0008); the book shows it by quoting a file at a chapter tag, `https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/<chapter-slug>/<path>`, never by keeping a copy here.
-Code of the brownfield project lives in the fork `JCKodel/clahub`; the book quotes it at tag `book-v1`, never copies it (ADR-0009).
+Code of the brownfield project lives in the fork `JCKodel/clahub`; the book quotes the project as upstream left it at tag `book-v1`, and what a chapter added at its chapter tag, `https://github.com/JCKodel/clahub/blob/book-v1-<chapter-slug>/<path>` (`book-v1-analyze` first), never copies it (ADR-0009).
 
 ## Data
 

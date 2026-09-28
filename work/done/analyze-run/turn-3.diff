@@ -1,0 +1,27 @@
+--- a/docs/06-Queue.md
++++ b/docs/06-Queue.md
+@@ -1,14 +1,16 @@
+ # Queue
+ 
+-## Milestone 1: upstream open issues
++## Milestone 1: current signatures, owner emails, personal data
+ 
+-Closes when the three issues open upstream at DamageLabs/clahub are
+-resolved on a branch each, verify green, one page per issue in
+-`work/done/`. The issue text is read at /propose time; the lines below name
+-the issue only.
++Closes when an owner can require contributors to re-sign after a new CLA
++version, with an optional grace period, and PR checks honour it; when the
++notification email sent on signing uses the owner's own subject and body,
++falling back to the default; and when any user can download their personal
++data as one JSON file and delete their account. Source: upstream issues
++DamageLabs/clahub #270, #274 and #268, in that order.
+ 
+ ```
+-[ ] issue-270    resolve upstream issue #270 (https://github.com/DamageLabs/clahub/issues/270)
+-[ ] issue-274    resolve upstream issue #274 (https://github.com/DamageLabs/clahub/issues/274)
+-[ ] issue-268    resolve upstream issue #268 (https://github.com/DamageLabs/clahub/issues/268)
++[ ] resign-on-version-bump       owners can require re-signing when a new CLA version is published, with an optional grace period (#270)
++[ ] custom-email-templates       owners customize the subject and body of the new-signature email with variables and a preview (#274)
++[ ] gdpr-export-and-deletion     users download their data as JSON and delete their account (#268)
+ ```

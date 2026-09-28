@@ -1,0 +1,56 @@
+--- a/docs/01-Architecture.md
++++ b/docs/01-Architecture.md
+@@ -82,9 +82,22 @@
+ 
+ ## Environments
+ 
+-* **Local:** `npm run dev` on port 3000, SQLite file from `DATABASE_URL`,
+-  `.env.local`; webhooks need a tunnel (ngrok). E2E reuses the running dev
+-  server.
++* **Local:** `npm run dev` on port 3000; webhooks need a tunnel (ngrok).
++  Configuration comes from two files read by different tools:
++  * Next.js (`dev`, `build`, `start`) reads `.env.local` (and `.env`).
++  * The Prisma CLI (`db:push`, `migrate`, `db:seed`, `studio`) reads only
++    `.env`: `prisma.config.ts` and `prisma/seed.ts` load it through
++    `import "dotenv/config"`, which ignores `.env.local`.
++  * `DATABASE_URL` is a path relative to the repository root
++    (`file:./clahub.db` in `.env.local.example`); the app and the Prisma CLI
++    both resolve it from there.
++  * Playwright loads `.env.local`, then `.env.test`, without overriding, so
++    locally the E2E run sees the `DATABASE_URL` of `.env.local`. When no dev
++    server is on port 3000, its global setup force-resets and seeds that
++    database; otherwise it reuses the running server and its data.
++
++  Where README, `docs/getting-started.md` and the code disagree, see the
++  open questions below.
+ * **CI (GitHub Actions):** on push and PR to `main`: lint, `tsc --noEmit`,
+   unit tests, build; then Playwright E2E against a fresh `test.db`.
+ * **Production:** https://www.cla-hub.io. `docs/deployment.md` describes a
+@@ -96,6 +109,27 @@
+ 
+ The rate limiter is in memory, so limits are per process.
+ 
++## Open questions
++
++* **Which env file the Prisma CLI reads.** README and
++  `docs/getting-started.md` say to copy `.env.local.example` to `.env.local`
++  and then run `npm run db:push` / `npx prisma db push`. The Prisma CLI reads
++  only `.env`, so with `.env.local` alone `DATABASE_URL` is undefined and the
++  command fails unless the variable is exported in the shell or also written
++  to `.env`. Fix the guides, or make `prisma.config.ts` and `prisma/seed.ts`
++  load `.env.local` too?
++* **`APP_URL` is documented but never read.** README, `.env.local.example`,
++  `.env.docker.example` and `docs/configuration.md` list `APP_URL` as
++  required. The code reads `NEXT_PUBLIC_APP_URL` for check-run and
++  CONTRIBUTING.md links (default `http://localhost:3000`) and `NEXTAUTH_URL`
++  for links in emails (default `https://cla-hub.io`); CI and `.env.test` set
++  `NEXT_PUBLIC_APP_URL`. A self-hoster following the guides gets check runs
++  linking to localhost. Which variable is the one?
++* **Local E2E can reset the development database.** Because `.env.local`
++  wins over `.env.test`, running `npm run test:e2e` locally without a dev
++  server force-resets the database named in `.env.local`, not `test.db`.
++  Intended?
++
+ ## Tried and removed on purpose
+ 
+ * The original Ruby on Rails app on Heroku, with OAuth App webhooks and the

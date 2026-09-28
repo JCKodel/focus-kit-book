@@ -1,0 +1,32 @@
+[tool Read] prisma.config.ts
+
+[tool Read] .env.local.example
+
+[tool Read] .env.test
+
+[tool Read] src/lib/prisma.ts
+
+[tool Read] tests/e2e/global-setup.ts
+
+[tool Bash] cd .; grep -rn "APP_URL\|dotenv\|\.env" src prisma docs/getting-started.md docs/configuration.md docker-entrypoint.sh Dockerfile docker-compose.yml .env.docker.example .gitignore
+
+[tool Read] docs/getting-started.md
+
+Now correcting the Local environment line in docs/01 and recording the disagreements.
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Edit] docs/01-Architecture.md
+
+docs/01 was only half right. The app reads `.env.local`, but Prisma's command-line tool doesn't. I rewrote the Local line in the Environments section of `docs/01-Architecture.md` and added an **Open questions** section at the end of the file. I changed no code or guides.
+
+**What the code does:**
+- **The app** (`npm run dev`, `build`, `start`) reads `.env.local`.
+- **Prisma's command-line tool** (`db:push`, `migrate`, `db:seed`, `studio`) reads only `.env`. Both `prisma.config.ts` and `prisma/seed.ts` load variables with `import "dotenv/config"`, which ignores `.env.local`.
+
+**Open questions recorded:**
+1. **Which file Prisma reads.** The README and `docs/getting-started.md` say to create `.env.local` and then run `db:push`. With only `.env.local`, Prisma never sees `DATABASE_URL`, so that step fails unless the variable is also in `.env` or set in the shell. Either the guides are wrong, or the Prisma config should also load `.env.local`.
+2. **`APP_URL` is documented but never read.** The README, both example env files and `docs/configuration.md` list it as required. The code reads `NEXT_PUBLIC_APP_URL` for check-run and CONTRIBUTING.md links, and `NEXTAUTH_URL` for links in emails. So a self-hoster who follows the guides gets check runs that link to `http://localhost:3000`.
+3. **Local end-to-end tests can wipe the development database.** Playwright loads `.env.local` before `.env.test`, and the value loaded first wins. Running `npm run test:e2e` with no dev server running therefore resets and reseeds the database named in `.env.local`, not `test.db`.
+
+Question 2 looks like a real bug for anyone self-hosting. If you want it fixed, I'd add it to the queue as its own delivery.

@@ -22,3 +22,9 @@ The chapter stays reproducible; updating it is a deliberate new tag.
 * Nothing was loosened: three candidates met every criterion (delivery `brownfield-research`).
 * The chosen project is CLAHub, upstream <https://github.com/DamageLabs/clahub>, at `9d1e666e1d30f271aea9640393229a7cbfbd1b62` (2026-04-13).
 * The fork is `JCKodel/clahub`; the tag `book-v1` on that SHA is the only freeze. The fork's branches may move; the tag does not.
+
+## Amendment, 2026-09-28
+
+* The book's work on the fork happens on a branch `book` created from `book-v1` (delivery `analyze`): first the kit, then `/analyze`'s documents.
+* A chapter that changes the fork ends with a chapter tag on it, `book-v1-<chapter-slug>` (docs/05 §5); chapter 8's is `book-v1-analyze`. The guided project's form, `book-v1/<chapter-slug>`, cannot be used here: git refuses a tag `book-v1/analyze` while the tag `book-v1` exists, and `book-v1` is published, so it does not move.
+* `book-v1` stays the frozen upstream: the chapter tags are on commits after it, never on it.

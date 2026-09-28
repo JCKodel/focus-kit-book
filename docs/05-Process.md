@@ -112,6 +112,13 @@ built, `[x]` done. Edited by conversation in any session.
   tags or pushes. Order: the author commits and pushes the chapter's tag
   first, then the chapter's `make verify` can go green, because the link
   check opens every tag URL the chapter cites.
+* **Brownfield project:** the fork `JCKodel/clahub`, worked on locally in
+  the sibling directory `../clahub`, on the branch `book` created from
+  `book-v1`, the frozen upstream (ADR-0009). A chapter that changes it ends
+  with the annotated tag `book-v1-<chapter-slug>` on the commit it quotes
+  (a hyphen, since git refuses `book-v1/<slug>` beside the tag `book-v1`),
+  with the same message and the same order as the guided project. The
+  agent stages there too and never commits, tags or pushes.
 * **Git:** trunk. The agent stages; it never commits or merges.
 
 ## 6. Commit

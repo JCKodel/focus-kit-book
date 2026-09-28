@@ -1,0 +1,11 @@
+I installed focus-kit into the repo: 36 new files, copied exactly from `SETUP.md` with a script rather than retyped. Nothing else changed: no existing file was edited, nothing was staged, and nothing was committed.
+
+**What I wrote:**
+- **The four command files** (`brainstorm`, `analyze`, `propose`, `apply`), each saved in all three of `.claude/skills/`, `.agents/skills/` and `.windsurf/skills/`. `brainstorm` and `analyze` also get a `references/documents.md` in each folder. That's 18 files.
+- **Codex settings:** `.agents/skills/<name>/agents/openai.yaml`, one per command, so Codex only runs a command when asked. 4 files.
+- **Slash commands for other tools:** `.github/prompts/<name>.prompt.md` for Copilot, `.cursor/commands/<name>.md` for Cursor and `.gemini/commands/<name>.toml` for Gemini CLI. 12 files.
+- **Rules pointers:** `.agents/rules/focus-kit.md` for Antigravity and `GEMINI.md` for Gemini CLI. Neither file existed before, so nothing was overwritten.
+
+**Checks from the setup file's final section, all passed:** the file counts match, every copy of `propose` and `apply` still contains `$ARGUMENTS`, the duplicate `documents.md` files are identical, and none of the files contain an em dash.
+
+**Next step:** this repository already has code, so open a fresh session and run `/analyze`. It will read the codebase and write `docs/00` to `06`, `docs/adr/`, `AGENTS.md` and `CLAUDE.md`. Your `docs/` folder already has content, and `/analyze` is set to show its changes before writing them.
