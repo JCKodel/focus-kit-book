@@ -2,6 +2,7 @@
 
 Depois deste capítulo você consegue dizer o que guarda cada um dos sete documentos do projeto, os ADRs e o `AGENTS.md`, e decidir a qual deles um fato novo pertence.
 Você também consegue explicar por que um agente que os lê em uma sessão nova constrói o que foi decidido.
+E consegue nomear as duas escolhas do kit, o FOCUS e a estratégia de git, as três respostas de cada uma e onde os documentos registram a que você escolher.
 
 ## Um lugar por fato
 
@@ -65,7 +66,7 @@ O docs/01 guarda o desenho em uma frase, a stack com o motivo de cada escolha qu
 O `/apply` o lê para saber onde vai cada peça.
 O docs/02 só existe quando um servidor guarda regras que o cliente não pode duplicar: o esquema, as regras de acesso, as funções que o cliente pode chamar; senão, é uma linha.[^focus-kit-documents]
 O docs/02 deste livro é essa linha, que, traduzida do inglês, diz: "Não há nenhum. O livro é estático; nenhum servidor guarda regras."
-O kit oferece duas escolhas e não impõe nenhuma, e os documentos as registram: a arquitetura, FOCUS ou a do próprio projeto, no docs/01, e a estratégia de git no docs/05; as Partes III e IV as ensinam.
+O docs/01 também registra a resposta à primeira das [duas escolhas](#as-duas-escolhas) do kit, a arquitetura.
 
 ### docs/04, as convenções
 
@@ -96,6 +97,32 @@ O docs/05 também guarda o fluxo da fila ao commit, na §2, e a forma de uma pá
 O docs/06 lista os marcos, cada um com um parágrafo que diz o que é verdade quando ele fecha, e sob cada um uma linha por entrega, em ordem, com uma marca do seu estado.[^focus-kit-documents]
 O capítulo 9 a ensina.
 
+## As duas escolhas
+
+O kit oferece duas escolhas e não impõe nenhuma: a arquitetura e a estratégia de git.[^focus-kit-documents]
+
+O FOCUS, a arquitetura que o kit oferece, são quatro letras, cada uma com o seu próprio valor.[^book-adr-0016]
+Feature-oriented (orientado a funcionalidades): o código se organiza em fatias verticais, uma pasta com tudo de que uma funcionalidade precisa, sem pasta por tecnologia.
+Clean (limpo): toda regra de negócio fica longe do I/O, em uma função pura, então é testada com dados na entrada e um valor na saída.
+Unidirectional (unidirecional): um evento corre em um só sentido até um novo estado, sem nada voltando, então "o que acontece quando este evento chega?" é um teste só.
+Scalable (escalável): toda peça é isolada e testável, então o código se sustenta em qualquer tamanho.
+Atrás da tela, que dispara eventos e renderiza o estado que recebe, ficam três peças: o orquestrador transforma um evento em um novo estado, um caso de uso guarda uma regra, e o repositório busca e salva; só o orquestrador tem dependências injetadas, e elas são os repositórios.
+Só o repositório faz I/O, então só ele captura uma exceção, uma falha esperada como uma conexão perdida, e a devolve como valor, um Result; um erro, um bug, nunca é capturado (o Dart separa as suas classes `Exception` e `Error` do mesmo jeito).[^dart-error-exception]
+O livro chama o princípio de "exceções como valores", onde a área diz "erros como valores", porque um bug nunca é um valor.[^book-adr-0016]
+Nada existe por cerimônia: KISS (keep it simple, mantenha simples), YAGNI (you aren't gonna need it, você não vai precisar disso) e DRY (don't repeat yourself, não se repita) decidem quando uma peça se paga, e uma funcionalidade sem regra não tem caso de uso.
+O kit dá três respostas: o FOCUS inteiro; só os dois princípios, fatias verticais e exceções como valores, na estrutura que a stack favorecer; ou nenhum, as convenções do próprio projeto.[^focus-kit-documents]
+O docs/01 registra a resposta, e um ADR registra o porquê.
+A Parte III ensina o FOCUS.
+
+A estratégia de git é uma estratégia, não uma bala de prata: cada uma das suas três respostas serve a um jeito de trabalhar.[^focus-kit-git]
+Em todas, a página que o `/propose` escreve e a construção que o `/apply` faz entram no mesmo commit, e o agente nunca faz commit nem merge.
+O trunk põe tudo no branch principal, uma entrega de cada vez, e é só para uma pessoa trabalhando sozinha: com duas, as entregas delas dividem um branch, e um commit leva o trabalho pela metade da outra.
+Um branch por entrega faz o `/propose` criar um branch com o nome do slug e escrever a página nele, e o `/apply` construir nele; a pessoa faz o merge por um pull request, um pedido de merge de um branch que alguém revisa antes, então ele serve ao trabalho sequencial revisado desse jeito.
+Uma worktree por entrega dá a cada entrega uma segunda pasta de trabalho no seu próprio branch, criada pelo `/propose`, para que vários agentes construam entregas diferentes ao mesmo tempo sem que um branch mexa no outro.
+Antes de rodar duas ao mesmo tempo, você decide quais entregas podem rodar em paralelo e quais mexem nos mesmos arquivos, senão os merges delas entram em conflito.
+O slot Git do docs/05 registra a resposta, e um ADR registra o porquê; a deste livro é o trunk, no slot Git acima e no ADR-0010 abaixo.
+A Parte IV ensina as três.
+
 ## ADRs
 
 Um ADR (registro de decisão de arquitetura) é um arquivo por decisão, `docs/adr/ADR-NNNN-<slug>.md`, com o contexto, a decisão, as consequências e a data.[^focus-kit-documents]
@@ -121,7 +148,7 @@ O agente prepara e sugere a mensagem; o autor revisa e faz o commit.
 O histórico mais simples. A Parte IV ainda ensina branches e worktrees, a partir dos outros casos.
 ```
 
-O contexto guarda por que a alternativa perdeu (uma worktree é uma segunda pasta de trabalho em que outro agente constrói ao mesmo tempo; a Parte IV a ensina): se o livro ganhar um segundo revisor, uma emenda pode responder a esse motivo em vez de adivinhá-lo.
+O contexto guarda por que a alternativa perdeu (a worktree das [duas escolhas](#as-duas-escolhas)): se o livro ganhar um segundo revisor, uma emenda pode responder a esse motivo em vez de adivinhá-lo.
 
 ## AGENTS.md
 
@@ -187,7 +214,7 @@ O texto de um agente parece certo mesmo quando está errado, então você o conf
 
 * Cada fato de um projeto mora em um lugar: sete documentos numerados, `docs/adr/`, `AGENTS.md` e `work/`, com números fixos porque os comandos os citam.
 * O docs/00 é o produto e as suas decisões em aberto, o docs/03 o vocabulário, o docs/01 e o docs/02 como ele é construído, o docs/04 as convenções, o docs/05 o processo com os slots do projeto, o docs/06 a fila.
-* Um ADR registra uma decisão com o seu motivo e é emendado, nunca reescrito, para que o motivo sobreviva à próxima mudança.
+* Um ADR registra uma decisão com o seu motivo e é emendado, nunca reescrito, para que o motivo sobreviva à próxima mudança; as duas escolhas do kit, o FOCUS (inteiro, os dois princípios, nenhum) e o git (trunk, um branch ou uma worktree por entrega), ficam registradas no docs/01 e no docs/05, cada uma com o seu ADR.
 * O `AGENTS.md` é curto e só aponta: nada nele é o único lugar onde uma regra está escrita, e os comandos não guardam nenhum fato do projeto.
 * Uma entrega que muda comportamento atualiza o documento que é dono dele, na mesma entrega, e toda sessão seguinte segue a mudança; o agente a escreve, e você a conduz e a confere, nunca por confiança.
 
@@ -207,7 +234,15 @@ Guarde-os, para comparar com o que o `/brainstorm` escreve no capítulo 7.
 
 No [`AGENTS.md`](https://github.com/JCKodel/focus-kit-book/blob/6c2713b63af7397ee00142497287b8408a5651b1/AGENTS.md) deste livro, encontre o documento para o qual cada linha aponta, e alguma linha que seja o único lugar onde a sua regra está escrita.
 
-[^focus-kit-documents]: J.C. Ködel, "focus-kit", `SETUP.md` §3.5, o arquivo `references/documents.md`, no commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/focus-kit/blob/26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b/SETUP.md
+### Exercício 6.4
+
+Escolha uma resposta para cada uma das duas escolhas da clínica, com um motivo para cada.
+Guarde-as, para comparar com o briefing da clínica para o `/brainstorm` no capítulo 7.
+
+[^focus-kit-documents]: J.C. Ködel, "focus-kit", `SETUP.md` §3.5, o arquivo `references/documents.md`, e §Choices, no commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/focus-kit/blob/26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b/SETUP.md
 [^focus-kit-commands]: J.C. Ködel, "focus-kit", `SETUP.md` §3.3 e §3.4, os arquivos do `/propose` e do `/apply`, no commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/focus-kit/blob/26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b/SETUP.md
 [^book-docs]: J.C. Ködel, "One Page at a Time", o repositório deste livro no commit 6c2713b63af7397ee00142497287b8408a5651b1: os trechos do docs/00, do docs/03, do docs/05, do ADR-0010 e do `AGENTS.md`. https://github.com/JCKodel/focus-kit-book/tree/6c2713b63af7397ee00142497287b8408a5651b1
+[^dart-error-exception]: Dart, "Error class" e "Exception class", referência da API de `dart:core`, acesso em 2026-09-28: um `Error` é "*uma falha do programa que o programador deveria ter evitado*"; uma `Exception` "*foi feita para ser capturada*". https://api.dart.dev/dart-core/Error-class.html e https://api.dart.dev/dart-core/Exception-class.html
+[^focus-kit-git]: J.C. Ködel, "focus-kit", `SETUP.md` §Choices, as respostas de git, e §3.3, o arquivo do `/propose`, em `main`, acesso em 2026-09-28. https://github.com/JCKodel/focus-kit/blob/main/SETUP.md
+[^book-adr-0016]: J.C. Ködel, "One Page at a Time", o ADR-0016 deste livro, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, de 2026-09-28, na pasta de ADRs em `main`. https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr
 [^book-docs-context]: J.C. Ködel, "One Page at a Time", commit 297af60dedb088bad441555c8bc019a60ce4e612, que corrigiu o capítulo 3 e acrescentou "Context before an excerpt" ao docs/04, https://github.com/JCKodel/focus-kit-book/commit/297af60dedb088bad441555c8bc019a60ce4e612; e a página do capítulo 5, que a cita. https://github.com/JCKodel/focus-kit-book/blob/6c2713b63af7397ee00142497287b8408a5651b1/work/done/install-and-hosts.md

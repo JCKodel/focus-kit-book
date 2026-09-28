@@ -23,7 +23,7 @@ Then it asks one round, of four subjects only:[^focus-kit-analyze]
 
 1. The documentation language. Default: the language of the README.
 2. The product's purpose and audience in your words, only when no README says it.
-3. FOCUS and the git strategy. The default of each is what the code already does, and the agent says what that is.
+3. FOCUS and the git strategy, the [two choices](06-the-documents.md#the-two-choices) of chapter 6. The default of each is what the code already does, and the agent says what that is.
 4. The first milestone: its first deliveries, or where to read them from (issues, a TODO file, a roadmap).
 
 Everything else it decides from what it read and marks as observed: you are not asked what the project already answers.

@@ -33,10 +33,22 @@ A new concept enters here first, in both languages.
 | token | token | none | The unit of text a model reads and counts; a word is one token or a few. |
 | context rot | degradação de contexto | none | The loss of accuracy as the context grows. |
 | compaction | compactação | none | The host summarizes a conversation near the limit of the context window and continues from the summary; detail is lost. |
-| FOCUS | FOCUS | `view`, `orchestrator`, `use-case`, `repository` | The optional architecture: four pieces, flow in one direction. |
-| Result | Result (erro como valor) | `Result<T, E>` | A failure returned as a value; `throw` is never used for flow. |
-| vertical slice | fatia vertical | `features/<name>/` | Code organized by feature, not by layer. |
-| trunk | trunk | `main` | Working on the main branch, one delivery at a time. |
+| FOCUS | FOCUS | `view`, `orchestrator`, `use-case`, `repository`, `driver` | The optional architecture: Feature-oriented (vertical slices), Clean (four pieces, rules in pure use cases), Unidirectional (event, orchestrator, new state), Scalable (every piece isolated and testable, whatever the size); exceptions as values; nothing exists for ceremony (ADR-0016). |
+| view | tela | `view` | The FOCUS piece that fires events and renders the state it receives, nothing else. |
+| orchestrator | orquestrador | `orchestrator` | The FOCUS piece that turns one event into one new state: it validates, fetches, applies rules and formats through use cases, asks repositories to fetch and save, and returns the state; the only piece with injected dependencies, which are repositories (BLoC in Flutter, Mediator in .NET). |
+| use case | caso de uso | `use-case` | A FOCUS piece holding a business rule, a validation or a format as a pure, synchronous function: data in, value out, no repository, no I/O; written only when there is a rule to hold. |
+| repository | repositório | `repository` | The FOCUS piece that fetches and saves; the only code that does I/O and the only code with `try`/`catch`, and it returns every exception as a value. |
+| driver | driver | `driver` | What a repository uses to reach I/O, such as a database engine or an ORM; rarely written for the project. |
+| exception | exceção | `E` of `Result<T, E>` | An expected failure the caller handles, such as no connection or a missing record; it exists only at I/O and is returned as a value (after Dart's `Exception`). |
+| error | erro | none | A program failure the programmer should have avoided, a bug; never caught, it reaches the developer's screen and analytics (after Dart's `Error`). |
+| Result | Result | `Result<T, E>` | A value holding either the data or an exception, handled with an exhaustive switch; `throw` is never used for flow. |
+| exceptions as values | exceções como valores | none | The principle that an exception is returned as a Result, never thrown; better known as "errors as values" (Go, Rust); the book says exception because an error, a bug, is never a value. |
+| vertical slice | fatia vertical | `features/<name>/`, `features/<name>/<sub-feature>/` | Code organized by feature, with no folder per technology or layer (no `controllers/`): one folder holds all a feature needs, and a sub-feature is a subfolder (`authentication/change-password/`). |
+| KISS | KISS | none | Keep it simple: the simplest code that does the job; with YAGNI and DRY, non-negotiable in FOCUS. |
+| YAGNI | YAGNI | none | You aren't gonna need it: nothing is built before a delivery needs it, a FOCUS piece included. |
+| DRY | DRY | none | Don't repeat yourself: each piece of knowledge lives in one place. |
+| trunk | trunk | `main` | Working on the main branch, one delivery at a time; only for one person working alone. |
+| pull request | pull request | none | A request to merge a branch that someone reviews first; how a branch per delivery lands. |
 | git-flow | git-flow | `develop`, `feature/*`, `release/*`, `hotfix/*` | A branching model with long-lived branches for teams that ship versions. |
 | worktree | worktree | `git worktree` | A second working directory on its own branch, so agents build in parallel. |
 | case | caso | `ninjobs`, `case-a`, `case-b` | A real project the book draws on; anonymous when private. |

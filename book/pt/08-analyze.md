@@ -23,7 +23,7 @@ Depois ele faz uma rodada, de quatro assuntos apenas:[^focus-kit-analyze]
 
 1. O idioma da documentação. Padrão: o idioma do README.
 2. O propósito e o público do produto nas suas palavras, só quando nenhum README os diz.
-3. O FOCUS e a estratégia de git. O padrão de cada um é o que o código já faz, e o agente diz o que é.
+3. O FOCUS e a estratégia de git, as [duas escolhas](06-the-documents.md#as-duas-escolhas) do capítulo 6. O padrão de cada um é o que o código já faz, e o agente diz o que é.
 4. O primeiro marco: as primeiras entregas, ou de onde lê-las (issues, um arquivo TODO, um roadmap).
 
 Todo o resto ele decide a partir do que leu e marca como observado: você não é perguntado sobre o que o projeto já responde.

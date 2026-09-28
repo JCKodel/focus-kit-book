@@ -23,7 +23,8 @@ EDITIONS = {
     "en": {"lang": "en", "name": "one-page-at-a-time"},
     "pt": {"lang": "pt-BR", "name": "uma-pagina-de-cada-vez"},
 }
-READ = ["-f", "markdown-tex_math_dollars", "--file-scope", "--toc"]
+# ascii_identifiers: a heading's id drops its accents, as on the site, so one #anchor link works in both.
+READ = ["-f", "markdown-tex_math_dollars+ascii_identifiers", "--file-scope", "--toc"]
 
 YAML_FIELD = re.compile(r"^(\s*)(site_author|copyright|draft_banner):\s*(.*)$")
 LOCALE = re.compile(r"^(\s*)- locale:\s*(\S+)")

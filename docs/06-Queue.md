@@ -41,6 +41,7 @@ When this milestone closes, a reader can install the kit, document a new or an e
 [x] the-documents          Chapter 6: docs/00 to 06, ADRs, AGENTS.md, and why documents do the work
 [x] brainstorm             Chapter 7: /brainstorm on the guided project, and choosing a stack by what the agent knows (the Ninjobs lesson of chapter 4)
 [x] analyze                Chapter 8: /analyze on the brownfield project
+[x] two-choices            Chapter 6 gains "The two choices": FOCUS (four pieces, whole / two principles / neither) and git (trunk / branch / worktree) in a paragraph each, so chapters 7 and 8 point back to them; Parts III and IV still teach them
 [ ] queue-and-milestones   Chapter 9: the queue, the marks, milestones and their paragraphs
 [ ] propose                Chapter 10: /propose, one page, and splitting what does not fit
 [ ] apply                  Chapter 11: /apply, verify, proof, documents, stage, never commit
@@ -50,11 +51,11 @@ When this milestone closes, a reader can install the kit, document a new or an e
 
 ## M4. Part III, FOCUS architecture
 
-When this milestone closes, a reader can organize code by feature with errors as values, and knows when the four pieces pay their way and when they do not.
+When this milestone closes, a reader can organize code by feature with exceptions as values, and knows when the four pieces pay their way and when they do not.
 
 ```
-[ ] errors-and-slices      Chapter 14: errors as values and vertical slices, the two principles that stand alone
-[ ] four-pieces            Chapter 15: View, Orchestrator, Use Case, Repository, one table and one flow, and when the four pieces pay their way (the Ninjobs lesson of chapter 4)
+[ ] errors-and-slices      Chapter 14: exceptions as values and vertical slices, the two principles that stand alone
+[ ] four-pieces            Chapter 15: View, Orchestrator, Use Case, Repository, one table and one flow, and when the four pieces pay their way
 [ ] testing-and-agents     Chapter 16: testing each piece, and how the architecture helps an agent
 ```
 

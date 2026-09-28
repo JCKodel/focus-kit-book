@@ -36,16 +36,12 @@ One rule came later.
 When Ninjobs adopted the kit, its old `/apply` still described things the project had already changed in its documents.[^ninjobs-adr-0026]
 So a command holds no fact of the project: every such fact lives in one place, docs/05, and the command reads it there.
 
-## Two lessons beyond the process
+## A lesson beyond the process
 
 The restart also changed the stack, from Flutter to React.
 The same agent kept missing the design in Flutter and wrote it right in React.
 Flutter could build the project; what the agent had seen in training was the limit.
 Choose a stack by the project's value and by how well the agent knows it; chapter 7 shows how.
-
-Ninjobs was built with FOCUS, the architecture of Part III, applied whole to every feature: showing one field took eight files.[^ninjobs-adr-0022]
-FOCUS stayed useful; applied everywhere it cost more than it gave.
-Chapters 14 and 15 say where it pays.
 
 ## Key points
 
@@ -53,7 +49,7 @@ Chapters 14 and 15 say where it pays.
 * The fix was fewer places: one page per delivery, documents that hold the facts, and commands that only point at them.
 * Deciding and doing happen in separate sessions, and the person commits, never the agent.
 * The governor asks every addition which concrete error it would have caught.
-* Choose a stack the agent knows, and apply an architecture only where it pays.
+* Choose a stack the agent knows.
 
 [^ninjobs-adr-0022]: Ninjobs, a private repository, counted by the author over its history up to 2026-08-29, when its ADR-0022 dropped OpenSpec: days with a commit and commits from `git log`, changes from the OpenSpec archive, lines with `wc -l` over every file under `openspec/`. The screens and the table are the ones that ADR lists. The causes, the rejected alternative and the decision are the ADR's own, paraphrased.
 [^ninjobs-adr-0026]: Ninjobs, a private repository, its ADR-0026, dated 2026-09-21: the date of the public opening and the adoption of focus-kit.

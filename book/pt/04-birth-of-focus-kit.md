@@ -36,16 +36,12 @@ Uma regra veio mais tarde.
 Quando o Ninjobs adotou o kit, o `/apply` antigo ainda descrevia coisas que o projeto já tinha mudado nos documentos.[^ninjobs-adr-0026]
 Por isso um comando não guarda nenhum fato do projeto: todo fato assim mora em um lugar só, o docs/05, e o comando o lê ali.
 
-## Duas lições além do processo
+## Uma lição além do processo
 
 O recomeço também trocou a stack, de Flutter para React.
 O mesmo agente errava o design em Flutter e o acertava em React.
 O Flutter conseguiria construir o projeto; o limite era o que o agente tinha visto no treinamento.
 Escolha uma stack pelo valor do projeto e pelo quanto o agente a conhece; o capítulo 7 mostra como.
-
-O Ninjobs era construído com FOCUS, a arquitetura da Parte III, aplicada inteira a cada funcionalidade: exibir um campo levava oito arquivos.[^ninjobs-adr-0022]
-O FOCUS continuou útil; aplicado em tudo, custava mais do que dava.
-Os capítulos 14 e 15 dizem onde ele se paga.
 
 ## Pontos-chave
 
@@ -53,7 +49,7 @@ Os capítulos 14 e 15 dizem onde ele se paga.
 * A solução foi ter menos lugares: uma página por entrega, documentos que guardam os fatos e comandos que só apontam para eles.
 * Decidir e fazer acontecem em sessões separadas, e quem faz o commit é a pessoa, nunca o agente.
 * O regulador pergunta a cada acréscimo que erro concreto ele teria pegado.
-* Escolha uma stack que o agente conhece, e aplique uma arquitetura só onde ela se paga.
+* Escolha uma stack que o agente conhece.
 
 [^ninjobs-adr-0022]: Ninjobs, repositório privado, contado pelo autor no histórico até 2026-08-29, quando o ADR-0022 do projeto abandonou o OpenSpec: dias com commit e commits pelo `git log`, changes pelo arquivo do OpenSpec, linhas com `wc -l` sobre todos os arquivos de `openspec/`. As telas e a tabela são as que esse ADR lista. As causas, a alternativa recusada e a decisão são as do próprio ADR, parafraseadas.
 [^ninjobs-adr-0026]: Ninjobs, repositório privado, o ADR-0026 do projeto, datado de 2026-09-21: a data da abertura ao público e a adoção do focus-kit.
