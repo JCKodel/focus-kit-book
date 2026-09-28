@@ -42,7 +42,7 @@ When this milestone closes, a reader can install the kit, document a new or an e
 [x] brainstorm             Chapter 7: /brainstorm on the guided project, and choosing a stack by what the agent knows (the Ninjobs lesson of chapter 4)
 [x] analyze                Chapter 8: /analyze on the brownfield project
 [x] two-choices            Chapter 6 gains "The two choices": FOCUS (four pieces, whole / two principles / neither) and git (trunk / branch / worktree) in a paragraph each, so chapters 7 and 8 point back to them; Parts III and IV still teach them
-[ ] queue-and-milestones   Chapter 9: the queue, the marks, milestones and their paragraphs
+[x] queue-and-milestones   Chapter 9: the queue, the marks, milestones and their paragraphs
 [ ] propose                Chapter 10: /propose, one page, and splitting what does not fit
 [ ] apply                  Chapter 11: /apply, verify, proof, documents, stage, never commit
 [ ] closing-a-milestone    Chapter 12: the whole-milestone review, findings become queue lines
