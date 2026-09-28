@@ -1,0 +1,31 @@
+[tool Bash] ls docs docs/adr work 2>/dev/null; cat docs/00*.md docs/03*.md docs/05*.md docs/06*.md; ls work && cat work/*.md
+
+[tool Read] docs/03-Domain.md
+
+[tool Read] docs/01-Architecture.md
+
+[tool Read] docs/02-Backend.md
+
+[tool Bash] ls work/done && cat work/done/clinic-setup.md && head -60 docs/05-Process.md && find src -type f | sort && ls migrations* src/**/migrations 2>/dev/null; cat docs/adr/ADR-0005*.md
+
+[tool Bash] cat src/features/signIn/OwnerView.tsx src/features/signIn/strings.ts && grep -n "checkClinicName" -A8 src/features/clinic/rules.ts | head -20 && cat docs/04-Conventions.md | head -80
+
+I've read docs/00 to 06, the `clinic-setup` page and the owner screen as built. This fits on one page, so there's no need to split it.
+
+**My read:** the owner, once signed in at `/owner`, gets a "Professionals" section under "Signed in as…". It has a list, a field to add a name, and Rename and Remove on each row. docs/03 already describes a professional as "name, active or removed". So removing someone marks them removed rather than deleting the row. That keeps us inside the open decision in docs/00 ("existing appointments stay"). No appointments exist yet anyway. A removed professional disappears from every list and can't be renamed or brought back.
+
+The name rules copy the clinic name: trimmed, 1 to 80 characters. That's the second time this check appears (`checkClinicName` was the first), so the trim-and-length part moves to `src/lib/name.ts`. `requireSession` is also used for the second time here, as the `clinic-setup` page expected. It stays in `session.server.ts`.
+
+Before I write, I need your answer on four things. Each one starts with my recommendation:
+
+1. **Duplicate names: refuse them.** I'd refuse a name that an active professional already has, ignoring case (new code `ProfessionalNameTaken`). The client picks a professional by name, so two "Ana Costa" entries would be impossible to tell apart. A removed professional's name can be used again. The alternative is to allow duplicates and leave it to the owner.
+
+2. **Who can read the list: one public route, `GET /api/professionals`.** It returns the active professionals in alphabetical order. The owner screen uses it now and the booking screen will use it later. docs/02 already lets clients read professionals. Only adding, renaming and removing would need the owner's session. The alternative is an owner-only route now and a second public route in `book-appointment`.
+
+3. **Remove asks for confirmation on the same row.** Tapping "Remove" turns the row into "Remove Ana Costa? Clients will no longer see them." with "Remove" and "Keep" buttons. This matters because removal can't be undone. The alternative is the browser's `confirm()` dialog, which is simpler but looks rough on a phone.
+
+4. **Store the removal time, not a yes/no flag.** The column would be `removed_at` (a UTC instant, empty while the professional is active) rather than `removed 0/1`. It costs the same and records when it happened. This is the one choice that's expensive to change later, because it's a column.
+
+My one other assumption, which you can correct: the list is sorted alphabetically, ignoring case, not in the order people were added.
+
+Answer by number. "All as recommended" works too. Then I'll write `work/professionals.md` and mark the queue line `[>]`.

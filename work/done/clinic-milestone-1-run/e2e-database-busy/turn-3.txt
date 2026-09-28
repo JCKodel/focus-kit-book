@@ -1,0 +1,229 @@
+[tool Bash] cat work/e2e-database-busy.md && git diff docs/06-Queue.md && ls docs work work/done 2>/dev/null && git branch -a && git worktree list
+
+[tool Bash] cat docs/05-Process.md docs/04-Conventions.md && cat docs/02-Backend.md && sed -n 1,400p docs/01-Architecture.md
+
+[tool Bash] cat src/server/database.server.ts; ls src/server; cat src/server/database.server.test.ts 2>/dev/null; grep -rn "DatabaseSync\|openDatabase\|openMigratedDatabase" src e2e tests scripts playwright.config.* 2>/dev/null | grep -v node_modules
+
+[tool Bash] node --version && sed -n 1,20p src/features/signIn/OwnerView.e2e.ts && sed -n 105,150p src/features/signIn/OwnerView.e2e.ts && grep -n "BEGIN\|exec\|transaction" src/server/migrate.server.ts && cat package.json | sed -n 1,30p && cat vitest.config.* 2>/dev/null; grep -n "SQLITE_BUSY\|busy" -r work/done/weekly-hours.md
+
+[tool Bash] grep -n "timeout" node_modules/@types/node/sqlite.d.ts | head; cat src/server/start.server.ts; sed -n 280,300p work/done/weekly-hours.md; cat playwright.config.ts | head -40
+
+Now the code.
+
+[tool Bash] python3 - <<'EOF'
+p='src/server/database.server.ts'
+s=open(p).read()
+s=s.replace('''// Opens the SQLite file, creating its folder and the file when missing.
+export function openDatabase(''','''// How long a connection waits for a lock held by another connection on the
+// same file before failing with SQLITE_BUSY.
+export const busyTimeoutMs = 5000;
+
+// Opens the SQLite file, creating its folder and the file when missing.
+export function openDatabase(''')
+s=s.replace('return ok(new DatabaseSync(path));','return ok(new DatabaseSync(path, { timeout: busyTimeoutMs }));')
+s=s.replace('''// saveClinicAndOwner; second use: replaceWorkingPeriods.
+export''','''// saveClinicAndOwner; second use: replaceWorkingPeriods. IMMEDIATE takes the
+// write lock at the start, where the busy timeout applies; a deferred BEGIN
+// that reads first and writes later fails at once when another connection
+// writes.
+export''')
+s=s.replace('db.exec("BEGIN");','db.exec("BEGIN IMMEDIATE");')
+open(p,'w').write(s)
+p='src/features/signIn/OwnerView.e2e.ts'
+s=open(p).read()
+s=s.replace('import { DatabaseSync } from "node:sqlite";\n','')
+s=s.replace('''} from "../../server/e2eClinic.server.ts";
+''','''} from "../../server/e2eClinic.server.ts";
+''',1)
+s=s.replace('''	const db = new DatabaseSync(e2eDatabasePath);
+	db.prepare(''','''	const opened = openDatabase(e2eDatabasePath);
+	expect(opened.ok).toBe(true);
+	if (!opened.ok) return;
+	const db = opened.value;
+	db.prepare(''')
+s=s.replace('''import { expect, type Page, test } from "@playwright/test";
+''','''import { expect, type Page, test } from "@playwright/test";
+import { openDatabase } from "../../server/database.server.ts";
+''')
+open(p,'w').write(s)
+EOF
+git diff --stat
+
+[tool Read] src/server/database.server.ts
+
+[tool Read] src/features/signIn/OwnerView.e2e.ts
+
+[tool Edit] src/server/database.server.ts
+
+[tool Edit] src/server/database.server.ts
+
+[tool Edit] src/features/signIn/OwnerView.e2e.ts
+
+[tool Edit] src/features/signIn/OwnerView.e2e.ts
+
+[tool Read] src/server/database.server.test.ts
+
+[tool Edit] src/server/database.server.test.ts
+
+[tool Bash] cat >> src/server/database.server.test.ts <<'EOF'
+
+it("waits up to 5000 ms for a lock held by another connection", () => {
+	const db = opened(join(root, "clinic.sqlite"));
+
+	expect(db.prepare("PRAGMA busy_timeout").get()).toEqual({ timeout: 5000 });
+	db.close();
+});
+
+it("lets a write wait for another connection's write, then succeed", async () => {
+	const path = join(root, "clinic.sqlite");
+	const db = opened(path);
+	db.exec("CREATE TABLE t (x INTEGER NOT NULL)");
+	const worker = new Worker(holdWriteLock, {
+		eval: true,
+		workerData: {
+			module: new URL("./database.server.ts", import.meta.url).href,
+			path,
+		},
+	});
+	const exited = once(worker, "exit");
+	await once(worker, "message");
+
+	const started = Date.now();
+	const written = transaction(db, () =>
+		db.prepare("INSERT INTO t (x) VALUES (2)").run(),
+	);
+	const waited = Date.now() - started;
+
+	expect(written.ok).toBe(true);
+	expect(waited).toBeGreaterThanOrEqual(100);
+	expect(await exited).toEqual([0]);
+	expect(db.prepare("SELECT x FROM t ORDER BY x").all()).toEqual([
+		{ x: 1 },
+		{ x: 2 },
+	]);
+	db.close();
+});
+
+it("takes the write lock when the transaction begins", () => {
+	const path = join(root, "clinic.sqlite");
+	const db = opened(path);
+	db.exec("CREATE TABLE t (x INTEGER NOT NULL)");
+	// No busy timeout: fails at once when another connection holds the lock.
+	const other = new DatabaseSync(path);
+
+	const done = transaction(db, () => {
+		expect(() => other.exec("BEGIN IMMEDIATE")).toThrow(/locked/);
+	});
+
+	expect(done.ok).toBe(true);
+	other.close();
+	db.close();
+});
+EOF
+npx vitest run src/server/database.server.test.ts 2>&1 | tail -30
+
+Code changes are in; now adding the three Vitest tests with the Edit tool (a heredoc was blocked), then running them.
+
+[tool Edit] src/server/database.server.test.ts
+
+[tool Bash] npx vitest run src/server/database.server.test.ts 2>&1 | tail -30
+
+All five pass. Checking the new tests actually catch the bug: temporarily removing the timeout and IMMEDIATE.
+
+[tool Edit] src/server/database.server.ts
+
+[tool Edit] src/server/database.server.ts
+
+[tool Bash] npx vitest run src/server/database.server.test.ts 2>&1 | grep -E "✓|×|FAIL|Tests|Error" | head -20
+
+All three fail without the fix, for the right reasons. Restoring.
+
+[tool Edit] src/server/database.server.ts
+
+[tool Edit] src/server/database.server.ts
+
+[tool Bash] npm run verify 2>&1 | tail -30
+
+Verify is green. Now the repeated Playwright run.
+
+[tool Bash] npx playwright test --repeat-each=10 --reporter=line 2>&1 | tail -8; npx playwright test --repeat-each=10 --reporter=line 2>&1 | grep -c "cannot be reached. Try again" 
+
+[tool Bash] npx playwright test --repeat-each=10 --reporter=line 2>&1 | grep -E "passed|failed|flaky|cannot be reached. Try again" | grep -v "›"
+
+Three ten-fold runs, no "cannot be reached" failure. Now the documents.
+
+[tool Read] docs/02-Backend.md
+
+[tool Read] docs/04-Conventions.md
+
+[tool Edit] docs/02-Backend.md
+
+[tool Edit] docs/04-Conventions.md
+
+[tool Read] work/e2e-database-busy.md
+
+[tool Read] work/e2e-database-busy.md
+
+[tool Edit] work/e2e-database-busy.md
+
+[tool Edit] work/e2e-database-busy.md
+
+[tool Edit] work/e2e-database-busy.md
+
+[tool Bash] git mv -f work/e2e-database-busy.md work/done/e2e-database-busy.md 2>/dev/null || mv work/e2e-database-busy.md work/done/e2e-database-busy.md; ls work work/done | grep busy
+
+Moving the page was blocked (shell mv needs approval here). I'll write the page to `work/done/` with the Write tool and leave the old copy for you to delete, then mark docs/06.
+
+[tool Read] work/e2e-database-busy.md
+
+[tool Write] work/done/e2e-database-busy.md
+
+[tool Read] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Bash] npm run lint 2>&1 | tail -3
+
+Now staging.
+
+[tool Bash] git -C . add -A
+
+`e2e-database-busy` is built and `npm run verify` is green. The session couldn't do two of the final steps, because `mv` and `git add -A` need approval and no one was here to give it. **Nothing is staged**, and the old copy of the page is still in `work/`.
+
+**What changed**
+- `src/server/database.server.ts`: `openDatabase` now opens the file with a 5000 ms busy timeout, and `transaction` starts with `BEGIN IMMEDIATE`.
+- `src/features/signIn/OwnerView.e2e.ts`: the "session older than 30 days" test now opens the e2e database through `openDatabase`, so its write waits for the server's lock.
+- `src/server/database.server.test.ts`: three new tests. One checks the timeout is 5000. One uses a worker thread to hold a write lock for 200 ms and checks that a second write waits and then succeeds. One checks that `transaction` takes the write lock as it begins. I ran all three against the old code first and all three failed.
+
+**Proof**
+- I ran `npx playwright test --repeat-each=10` three times, 1150 tests per run (3450 in all). Runs 1 and 3 ended "1150 passed". For run 2 I only searched the output for "The server cannot be reached. Try again." and it wasn't there. Before this change it happened about once in 300 tests.
+- `migrate` still uses a plain `BEGIN`. The page only covers `transaction`, and migrations finish before the server starts, so nothing else is writing at that point. This is noted in the page.
+
+**Documents**
+- docs/02 §Start and migrations now describes the busy timeout and `BEGIN IMMEDIATE`.
+- docs/04 now says a Playwright test that writes to the e2e database opens it with `openDatabase`.
+- docs/06 marks the line `[x]`.
+- The page, with every "Done when" item ticked and a "What happened" section, is written to `work/done/e2e-database-busy.md`. No ADR was needed.
+
+**To finish, run:**
+```
+rm work/e2e-database-busy.md && git add -A
+```
+
+**Suggested commit message:**
+```
+Wait for SQLite locks instead of failing with SQLITE_BUSY
+
+- openDatabase opens the file with a 5000 ms busy timeout
+- transaction begins with BEGIN IMMEDIATE
+- OwnerView.e2e.ts writes to the e2e database through openDatabase
+- Tests: busy_timeout, a worker-thread lock race, the lock taken at BEGIN
+
+See work/done/e2e-database-busy.md
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+```
+
+**Environments**
+- **Local:** the working tree has this delivery, uncommitted, on top of `064d7a9`. There's no migration, so the existing `data/clinic.sqlite` works as it is. Start it with `npm run dev`.
+- **Production:** doesn't exist yet; the `deploy` delivery will create it. Nothing to update.

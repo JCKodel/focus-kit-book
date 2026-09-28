@@ -1,0 +1,41 @@
+[tool Bash] cat src/features/appointments/repository.server.ts src/features/appointments/route.server.ts src/features/appointments/useRemembered.ts && sed -n 140,160p src/features/appointments/rules.ts && cat src/app/main.tsx | head -60
+
+[tool Read] src/features/appointments/api.ts
+
+[tool Write] work/cancel-appointment.md
+
+[tool Edit] work/cancel-appointment.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Bash] grep -c "—" work/cancel-appointment.md; git status --short
+
+I wrote `work/cancel-appointment.md` and marked the line `[>]` in docs/06. The Git strategy is trunk, so both are on `main`, not staged or committed. The page adds no migration and no new term to docs/03.
+
+**What I chose, and why**
+
+1. **Confirming a cancel from "Your appointments":** yes. Tapping "Cancel" asks "Cancel this appointment?" with "Yes, cancel" and "Keep it". A slip on a phone can't be undone once someone else takes the time. The typed form doesn't ask again, because typing the code is already deliberate.
+2. **The typed path:** a button "Cancel with a booking code" between "Your appointments" and "Book an appointment". It opens the form in its own place, and the booking steps stay below it.
+   - **This differs from what I first suggested** ("in place of the booking steps"). Replacing the booking steps would have meant sharing state between two separate parts of the page. Opening the form in place of its own button gives the same result on a phone for less code.
+3. **Removed professional:** the client can still cancel. Existing appointments stay (docs/00), and freeing one hurts nobody.
+4. **Less than 24 hours away:** the appointment shows no "Cancel" button, just "Can no longer be cancelled in the app." The client decides this with the same `cancel` rule the server enforces, which is the example docs/01 gives.
+5. **Appointment no longer booked:** the phone forgets it and says "This appointment is no longer booked." Any successful cancel also removes that appointment from the phone's list.
+6. **Route:** `POST /api/appointments/cancel` with body `{ clientPhone, bookingCode }`. The code stays out of the URL, and so out of access logs.
+7. **Refusals:**
+   - A badly formed phone number or code gets the same `404 AppointmentNotFound` as a wrong one, so someone guessing learns nothing.
+   - A second cancel of the same appointment also gets `404`.
+   - Cancelling after the deadline gets `409 CancellationTooLate`, and so does an appointment that has already started.
+8. **How the code is read:** it ignores case and spaces around it, so `k7mxq2 ` matches `K7MXQ2`. The phone number is compared by its digits only. People type codes in lower case; it costs one pure function with a test.
+9. **Two cancels at once:** the update only changes a row that is still `booked`, so exactly one succeeds and the other gets `404`.
+10. **Too-late message:** "Appointments can be cancelled up to 24 hours before they start. This one can no longer be cancelled in the app." It doesn't say "call the clinic", because whether the owner can cancel is still an open decision.
+11. **No database change:** no migration and no cancellation-time column. The existing status column and unique index already free the slot, and nothing reads a cancellation time yet.
+
+**Out of scope:** a limit on how many guesses someone can make at a code (for `sign-in-limit` / `fake-bookings`, before the app goes public), the owner cancelling, undoing a cancel, and showing past or cancelled appointments to the client.
+
+**Before `/apply`, please read the page and question it:**
+- Can you check every Behaviour line one by one?
+- Is the Contract exact: the route and its answers, the order of the checks, and the repository function signatures?
+- Does Out of scope name anything you assumed was included?
+- Question the choices above first, since I made them on my own.
+
+Ask for every correction here in this conversation. Then open a fresh session and type `/apply cancel-appointment`.

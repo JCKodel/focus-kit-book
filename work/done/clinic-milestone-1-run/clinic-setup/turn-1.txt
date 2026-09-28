@@ -1,0 +1,37 @@
+[tool Bash] ls docs docs/adr work 2>&1; cat docs/00* docs/03* docs/05* docs/06*
+
+[tool Bash] cat docs/01* docs/02* docs/04* docs/adr/*; ls work/done; cat work/done/*; git ls-files | grep -v '^\.claude' | head -80
+
+[tool Read] <host folder of the clinic>/tool-results/bof2ii0x9.txt
+
+[tool Bash] cat package.json src/app/main.tsx src/app/strings.ts src/server/main.server.ts
+
+I've read docs/00 to 06, the ADRs, `work/done/skeleton.md` and the current code. Git is trunk (ADR-0003), so the page will be written on `main` once we agree. Before I write anything, here is how I understand the delivery and the questions I can't settle alone.
+
+## My reading
+
+The queue line is "a setup command creates the clinic and the owner; the owner signs in and out". That fits on one page:
+
+- **The setup command.** It runs once on the server machine. It asks for the clinic's name, time zone, appointment length, and the owner's email and password. It writes the `clinic` and `owner` rows. The password is hashed with scrypt.
+- **Sign-in.** An owner screen with email and password. On success the server creates a row in `session` and sets an httpOnly cookie. The owner can sign out.
+- **Migration `0001-clinic.sql`** creates `clinic`, `owner` and `session`, as docs/02 already plans.
+- **A small "who is signed in" route.** `professionals` will be the second route behind the session check, which is when that check moves out of this slice.
+
+## Questions (my recommendation first each time)
+
+**1. How does the setup command take its values?**
+I recommend `npm run setup` asking for each value in turn, with the password typed twice and not shown on screen. A password passed as a flag stays in the shell history. The alternative is flags (`--name … --time-zone …`), which are easier to script. The command is a thin shell around a pure use case, so tests don't depend on this choice.
+
+**2. What if setup runs a second time, or the owner forgets the password?**
+I recommend that a second run is refused ("The clinic is already set up") and changes nothing. Changing the clinic's settings later is its own delivery, and changing the length touches an open decision in docs/00. A forgotten password then has no fix except deleting the database file. I suggest a queue line `owner-password` (a command that sets a new password) in Milestone 2, before `deploy`. Typing the password twice at setup covers the typo case until then. Do you want that line?
+
+**3. Which appointment lengths are allowed?**
+I recommend whole minutes from 5 to 240, in steps of 5, with 30 as the default. The grid counts from each working period's start (ADR-0005), so the length doesn't need to divide 60. The time zone must be a valid IANA name and is required, with no default. A free host's clock is usually UTC, and guessing wrong would shift every appointment.
+
+**4. Where does the owner sign in, and what do they see?**
+I recommend the path `/owner`, handled by a small switch on the URL in the app shell rather than a router library. Signed out, it shows the sign-in form. Signed in, it shows "Signed in as <email>" and a "Sign out" button, and `professionals` fills that page later. As a small extra, I'd add a public `GET /api/clinic` (name, time zone, length). The home page heading would then show the clinic's real name instead of "Clinic", which the skeleton page set aside for this delivery. `book-appointment` will need that route anyway. Include it, or keep this delivery to setup and sign-in only?
+
+**5. Session lifetime and sign-in attempts.**
+I recommend a session that lasts 30 days from sign-in, with no sliding renewal. The cookie holds a random token and the database stores only its SHA-256 hash, so a copied database file can't be used to sign in. A wrong email and a wrong password get the same refusal. I'd put no limit on attempts in this delivery: locally that is fine, but on a public host it isn't. I suggest a second queue line, `sign-in-limit`, before `deploy`. The `Secure` cookie flag belongs to `deploy` too, since local runs over plain http.
+
+Once you've answered these (or said "go with your recommendations"), I'll add the new terms to docs/03 first (e.g. `ClinicAlreadySetUp`, `SignInRefused`, `NotSignedIn`, `Session`). Then I'll write `work/clinic-setup.md` with the exact schema, password-hash format, cookie and routes, and mark the line `[>]` in docs/06.

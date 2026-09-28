@@ -1,0 +1,42 @@
+[tool Bash] ls docs docs/adr work 2>/dev/null; cat docs/00* docs/03* docs/05* docs/06*
+
+[tool Bash] ls work/done; cat work/done/book-appointment.md; cat docs/01* docs/02*; cat docs/adr/ADR-0004*
+
+[tool Read] <host folder of the clinic>/tool-results/b2sg70ews.txt
+
+[tool Bash] ls src/features/appointments && cat src/features/appointments/remembered.ts src/features/appointments/RememberedView.tsx src/features/appointments/strings.ts && grep -n "export" src/features/appointments/repository.server.ts src/features/appointments/rules.ts && cat docs/adr/ADR-0005*
+
+I've read docs/00, 01, 02, 03, 05, 06, the `book-appointment` page and the appointments code. Here is how I read `cancel-appointment` so far.
+
+**What the documents already settle**
+- **Two ways in:** a Cancel button on each appointment the phone remembers, or typing the phone number and booking code (ADR-0004).
+- **Deadline:** cancelling works while now is at or before the start minus 24 hours (invariant 4). After that the server refuses with `CancellationTooLate`, and the message says why.
+- **Identity:** phone number (digits only) plus booking code. If they match no appointment that is still booked, the answer is `AppointmentNotFound`. This also covers a second cancel of the same appointment.
+- **After a cancel:** the row stays, with status `cancelled`, and the slot is free again. The partial unique index already allows this, so **no migration is needed**.
+- **Server and client:** the server enforces the rule. The client reuses `cancellationDeadline` only to decide whether to show the Cancel button, which is the exact example docs/01 gives.
+
+**What I plan to decide myself (correct me if you disagree)**
+- **Route:** `POST /api/appointments/cancel` with body `{ clientPhone, bookingCode }`. The code goes in the body rather than the URL so it doesn't end up in logs.
+- **Answers:**
+  - `200 { startsAt, timeZone, professional: { id, name } }`
+  - `404 AppointmentNotFound`
+  - `409 CancellationTooLate`
+  - `400 BadRequest`
+- **Code and phone input:** the code is trimmed and upper-cased, so a typed `k7mxq2` still matches. A badly formed phone number or code also answers `AppointmentNotFound`. There's no separate refusal, because there is nothing a guesser should be able to learn from it.
+- **Doing the cancel:** a pure use case `cancel(startsAt, now)`. The update is `WHERE status = 'booked'`, with no `await` between the read and the write, so two cancels racing for one appointment give one success and one `AppointmentNotFound`.
+- **Message for too late:** "Appointments can be cancelled up to 24 hours before they start. This one can no longer be cancelled in the app." I left out "call the clinic", because whether the owner can cancel is still an open decision in docs/00.
+- **Out of scope:** limiting how many guesses someone can make at a code. This belongs with `sign-in-limit` / `fake-bookings`, before the app goes public.
+
+**Questions, each with my recommendation first**
+
+1. **Confirming a cancel from the remembered list.** I recommend a confirmation step: tapping "Cancel" shows "Cancel this appointment?" with the buttons "Yes, cancel" and "Keep it". A slip of the thumb on a phone can't be undone, since someone else can take the slot. The typed form wouldn't ask again, because typing the code is already a deliberate act. Agree?
+
+2. **Where the typed form lives.** I recommend a button "Cancel with a booking code" on the home page, between "Your appointments" and "Book an appointment". It opens the form (Phone number, Booking code, "Cancel appointment", "Back") in place of the booking steps. The people who need this form are the ones whose phone forgot the appointment, so it shouldn't sit below 30 day buttons. Or would you rather have it somewhere else?
+
+3. **Professional removed after booking.** I recommend the client can still cancel. docs/00 says existing appointments stay, and cancelling one hurts nobody. Agree?
+
+4. **Remembered appointments under 24 hours away.** I recommend showing them without a Cancel button, with the short line "Can no longer be cancelled in the app." Agree?
+
+5. **A remembered appointment the server no longer knows as booked** (for example, cancelled from another phone with the code). I recommend the phone drops it from "Your appointments" and shows "This appointment is no longer booked." After any successful cancel, from either path, the phone also forgets that appointment. Agree?
+
+Once you answer (a plain "all as recommended" works), I'll write `work/cancel-appointment.md` and mark the line `[>]` in docs/06. The Git strategy is trunk, so I'll write on `main` without creating a branch.

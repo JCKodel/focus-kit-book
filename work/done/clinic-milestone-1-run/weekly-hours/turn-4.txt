@@ -1,0 +1,34 @@
+[tool Read] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] work/done/weekly-hours.md
+
+[tool Edit] work/done/weekly-hours.md
+
+[tool Bash] git add -A && git status --short docs work
+
+All three are done and staged. Nothing is committed.
+
+**1. Queue line.** I added it to Milestone 1 in docs/06, right after `weekly-hours` and before `book-appointment`:
+```
+[ ] e2e-database-busy    verify never fails because a test writes to the e2e database while the server writes (SQLITE_BUSY)
+```
+It goes there because `npm run verify` should pass reliably before `book-appointment` adds more database writes to the tests. That delivery would make this race more frequent, and it makes a real failure harder to tell from a flaky one. The line says what must hold, not how to fix it. Whether the fix is a busy timeout on the server or that test going through the API is for `/propose` to decide. The page now says the problem was queued under this name.
+
+**2. Commit message**, in the docs/05 format:
+```
+Let the owner set each professional's weekly hours
+
+- Add working_period table and GET/PUT /api/owner/professionals/:id/hours
+- Add setWeeklyHours: 5 minute steps, minimum length, no overlap
+- Add the hours editor under a professional's row, Monday to Sunday
+- Share transaction() and idOf() on their second use
+work/done/weekly-hours.md
+```
+
+**3. Your manual check** is recorded in the page under "What happened", and the last "Done when" item is now ticked.
+
+**Environments:**
+- **local:** you have it running at this version with `npm run dev`.
+- **production:** it doesn't exist yet. The `deploy` delivery creates it, and you publish.

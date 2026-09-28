@@ -1,0 +1,63 @@
+[tool Bash] ls docs docs/adr work 2>/dev/null; cat docs/00* docs/03* docs/05* docs/06*
+
+[tool Bash] cat docs/01* docs/02* docs/04* docs/adr/ADR-0004* docs/adr/ADR-0005*; ls work/done; cat work/done/weekly-hours.md; ls -R src | head -100; ls migrations* db* 2>/dev/null
+
+[tool Read] docs/01-Architecture.md
+
+[tool Read] docs/02-Backend.md
+
+[tool Bash] cat docs/04* docs/adr/ADR-0004* docs/adr/ADR-0005*; ls work/done; find src -type f | sort; cat src/app/main.tsx; ls src/server/migrations
+
+[tool Bash] head -120 work/done/weekly-hours.md; cat src/server/migrations/*.sql; cat package.json; cat src/features/clinic/ClinicView.tsx src/features/clinic/strings.ts
+
+I've read the docs, the finished pages and the code. The page isn't written yet: a few points have more than one reasonable reading, so I need your answers first.
+
+## Assessment
+
+This fits one page, but only just. It's the biggest delivery so far because four things arrive together:
+- slots worked out from the weekly hours in clinic time;
+- the `appointment` table, with the index that stops double booking;
+- the booking itself;
+- the booking code, and what the phone remembers.
+
+The list of remembered appointments with a cancel button belongs to `cancel-appointment`. Here I'd only save the appointment on the phone and show it (see question 2).
+
+Planned contract:
+- **`GET /api/professionals/:id/slots`:** public; answers with the start instants (UTC) of the free slots.
+- **`POST /api/appointments`:** takes `{ professionalId, startsAt, clientName, clientPhone }` and answers `201` with the booking code.
+- **Refusals:** `SlotTaken` (409), `OutsideWorkingHours`, `OutsideBookingWindow` and `ProfessionalNotFound`.
+- **New refusals:** `InvalidClientName` and `InvalidPhoneNumber`. They go into docs/03 first.
+
+## Questions (my recommendation first in each)
+
+1. **Phone number.** I recommend accepting spaces, `+`, `-`, `.` and brackets, then requiring 6 to 15 digits (15 is the international maximum). The database would store **digits only**, which matches invariant 6. The downside: `+351 912…` and `912…` become different numbers, so the client must type it the same way to cancel. Alternatively we keep what they typed for the owner to read, plus a digits-only column for lookups. That's one more column, which pays off only once `owner-schedule` exists.
+
+2. **The phone remembers the appointment.** I recommend saving it now (booking code, phone, professional, start) and showing a read-only "Your appointments" list on the home page, upcoming only. `cancel-appointment` would then add the button. The other option is to only save it now and show nothing until `cancel-appointment`. That's simpler, but step 4 of docs/00 couldn't be checked from the screen.
+
+3. **Booking less than 24 hours ahead.** A slot 3 hours away can be booked but never cancelled in the app. I recommend a line on the confirmation step before booking: "This appointment starts in less than 24 hours and cannot be cancelled in the app." Alternatively we say nothing, and the client finds out in `cancel-appointment`.
+
+4. **A professional with no free slots** (no hours, or everything booked). I recommend keeping them in the list, as `GET /api/professionals` does today, and showing "No free times in the next 30 days." after they're picked. This doesn't change any existing contract. Hiding them would need a new route or a change to that one.
+
+5. **Choosing a time.** I recommend two steps: first the days that have at least one free slot ("Tue 29 Sep"), then that day's times ("09:30", 24-hour clock, the same format as the hours editor). The alternative is one long list of 30 days, which is poor on a phone.
+
+6. **Fake bookings** (an open decision in docs/00). I recommend leaving it open in this delivery. The app only runs locally until `deploy`, and when that happens it becomes a question like `sign-in-limit`. Do you confirm that it stays open, or do you want a line in the queue before `deploy`?
+
+## Choices I'll make unless you object
+
+- **Booking window:** a slot's start is after now and at most now + 30×24h, exactly as invariant 3 says. So the last day may be partly cut off.
+- **Clock changes:**
+  - Slots follow the clock on the wall.
+  - A time that doesn't exist on the spring-forward day is skipped.
+  - A time that happens twice in autumn uses its first occurrence.
+  - Overlaps are compared as instants.
+  - No date library: Node's built-in `Intl` is enough.
+- **Booking code:**
+  - 6 characters from `ABCDEFGHJKMNPQRSTUVWXYZ23456789`, which leaves out the look-alikes 0, O, 1, I and L.
+  - Each code is unique in the database, and a new one is drawn on the rare clash.
+  - The random value is passed into the use case, so the rule stays testable.
+- **Double booking:** the final guard is the partial unique index on `(professional_id, starts_at) WHERE status = 'booked'`. Losing a race answers `409 SlotTaken`, and the screen says "Someone just took this time. Pick another." and reloads the times.
+- **Client name:** trimmed, 1 to 80 characters, reusing `lib/name.ts`.
+- **Hours changed after booking:** the appointment stays, which is the current default in docs/00. Its time is simply no longer offered.
+- **Nothing is written to the owner screen:** that's `owner-schedule`.
+
+Answer 1 to 6 (a plain "yes to all" works too) and correct any of the choices above. Then I'll write `work/book-appointment.md`, add the new terms to docs/03, and mark the line `[>]` in docs/06.

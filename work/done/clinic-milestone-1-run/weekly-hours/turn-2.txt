@@ -1,0 +1,32 @@
+[tool Edit] docs/03-Domain.md
+
+[tool Edit] docs/03-Domain.md
+
+[tool Edit] docs/03-Domain.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Write] work/weekly-hours.md
+
+[tool Bash] grep -n "—" work/weekly-hours.md docs/03-Domain.md docs/06-Queue.md; git status --short
+
+I wrote the page at `work/weekly-hours.md`, on `main` since the project uses trunk. The Contract is the migration `0003-working-period.sql`, two owner routes (`GET` and `PUT /api/owner/professionals/:id/hours`) and one pure use case, `setWeeklyHours`. I also added five terms to docs/03 (`Weekday`, `setWeeklyHours` and the three refusals), tightened its `WorkingPeriod` entry and added invariant 11 ("weekly hours are saved whole"). The line in docs/06 is now `[>]`. No code was written.
+
+**What I chose and why:**
+- **No "No hours yet" mark in the list.** The list comes from the public `GET /api/professionals`. Marking it would mean changing that route's answer or adding a second list route, just for a hint. Opening "Hours" already shows "Closed" for every day.
+- **The whole week is saved at once**, replacing every row in one transaction. The overlap check then sees every period together, and a refused save leaves the previous week untouched.
+- **Several periods per day are allowed.** Two periods may meet exactly (09:00 to 13:00, then 13:00 to 18:00) without counting as an overlap.
+- **Times run from 00:00 to 23:55, in steps of 5 minutes**, stored as `'HH:MM'` text so that text order is time order. No period crosses midnight.
+- **A period shorter than one appointment is refused.** Otherwise the owner would open time that no client ever sees.
+- **The `GET` answer includes `slotMinutes`.** The editor then needs only one request and can state the minimum in its message.
+- **The use case reports which period is wrong.** The server uses it to refuse; the screen runs the same check only to put the message beside that period.
+- **The foreign key is not enforced.** The project doesn't set `PRAGMA foreign_keys`. The page says why that is safe: professionals are never deleted, and the route checks that the professional is active before writing.
+- **"Add period" fills in 09:00 to 17:00**, and Monday is the first day of the week.
+
+**Before you run `/apply`, read the page and question it:**
+- Each Behaviour line should be something you can check.
+- The Contract should be exact. The SQL column names and the route JSON cost the most to change later.
+- Out of scope should name everything you assumed was in, such as copying a day to other days or hiding professionals without hours from clients.
+- Push back on any of the choices above that you'd make differently.
+
+Ask for every correction here. When the page is right, open a fresh session and type `/apply weekly-hours`.

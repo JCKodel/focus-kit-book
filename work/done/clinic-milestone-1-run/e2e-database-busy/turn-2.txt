@@ -1,0 +1,32 @@
+[tool Read] work/done/weekly-hours.md
+
+[tool Bash] grep -n "transaction(" -r src --include=*.ts | grep -v test; sed -n 40,50p docs/04-Conventions.md
+
+[tool Write] work/e2e-database-busy.md
+
+[tool Edit] docs/06-Queue.md
+
+I wrote the page at `work/e2e-database-busy.md` and marked the line `[>]` in docs/06. The project is on trunk, so both are on `main` with nothing staged.
+
+**What I chose and why:**
+
+1. **The timeout goes in `openDatabase`, for every connection.** The race goes both ways: the test's write can block the server, and the server's write can block the test. Setting it once covers the server, `npm run setup`, the queued `owner-password` command and the test itself. The test switches from `new DatabaseSync` to `openDatabase`.
+2. **5000 ms.** A real wait lasts milliseconds. Five seconds is plenty of margin, and blocking the server that long at worst is harmless for one clinic.
+3. **`BEGIN IMMEDIATE` in `transaction()`.** Without it, a transaction that reads before it writes can still fail at once, because SQLite skips the wait in that case to avoid a deadlock. That would bring the same bug back through another path. It's one word in the same file.
+4. **No WAL.** It would break docs/01's "backup is a copy", and that decision belongs to `deploy`.
+5. **The proof is a real wait, not just a setting.**
+   - A Vitest test checks that `PRAGMA busy_timeout` answers 5000.
+   - A second Vitest test uses a worker thread (`node:worker_threads`) that holds a write for about 200 ms. It shows that the other connection waits and succeeds.
+   - `npx playwright test --repeat-each=10` must pass. At the old rate of about 1 failure in 300 tests, those ~900 tests should fail about 3 times if the bug were still there.
+
+   I kept the worker test because the PRAGMA check alone doesn't show that a write actually waits.
+
+**Out of scope, with reasons on the page:** a test-only route to age sessions, running Playwright with one worker, and retries in `query()`.
+
+**Before you run `/apply`, read the page and question it:**
+- Can each Behaviour line be checked?
+- Is "Contract: none" really true? No table, route or message shape should change.
+- Is anything you assumed was included missing from Out of scope?
+- Do you agree with the four choices above?
+
+Ask for any correction here. Once the page is right, open a fresh session and type `/apply e2e-database-busy`.

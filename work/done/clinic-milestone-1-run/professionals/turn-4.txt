@@ -1,0 +1,11 @@
+[tool Edit] work/done/professionals.md
+
+[tool Edit] work/done/professionals.md
+
+[tool Bash] git add work/done/professionals.md
+
+I recorded your manual check in `work/done/professionals.md` and staged it. The last "Done when" item is ticked, so all of them are now. The "What the proof found" section now says you ran `npm run dev`, added, renamed and removed a professional, reloaded, and the list was kept. Nothing is committed.
+
+The commit message I suggested earlier still fits.
+
+**Environments.** Local has this delivery, confirmed by your run. Production doesn't exist yet; the `deploy` delivery will create it. After you commit, `npm run dev` is the command that updates local.

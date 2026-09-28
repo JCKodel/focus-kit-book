@@ -46,7 +46,7 @@ When this milestone closes, a reader can install the kit, document a new or an e
 [x] queue-and-milestones   Chapter 9: the queue, the marks, milestones and their paragraphs
 [x] propose                Chapter 10: /propose, one page, reading it before /apply, and splitting what does not fit
 [x] apply                  Chapter 11: /apply, verify, proof, documents, stage, never commit
-[>] clinic-milestone-1     the guided project's milestone 1 built line by line with /propose and /apply, each page and staged change reviewed and committed by the author, recorded; no chapter
+[x] clinic-milestone-1     the guided project's milestone 1 built line by line with /propose and /apply, each page and staged change reviewed and committed by the author, recorded; no chapter
 [ ] closing-a-milestone    Chapter 12: the whole-milestone review of the clinic's milestone 1 with /code-review, findings become queue lines; Ninjobs' milestone review as the counter-example
 [ ] the-governor           Chapter 13: which concrete error would it have caught, and what the process does not have
 ```

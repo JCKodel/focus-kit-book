@@ -1,0 +1,88 @@
+[tool Read] src/features/clinic/api.ts
+
+[tool Read] src/features/signIn/api.ts
+
+[tool Bash] grep -rn "e2eClinic\|ServerUnreachable" --include=*.ts --include=*.tsx --include=*.md . | grep -v node_modules
+
+[tool Write] src/lib/request.ts
+
+[tool Write] src/features/health/api.ts
+
+[tool Write] src/features/clinic/api.ts
+
+[tool Write] src/features/signIn/api.ts
+
+[tool Edit] src/lib/request.ts
+
+[tool Write] src/lib/request.test.ts
+
+[tool Bash] git mv e2eClinic.ts src/server/e2eClinic.server.ts
+
+[tool Bash] mv e2eClinic.ts src/server/e2eClinic.server.ts
+
+[tool Read] src/server/e2eClinic.server.ts
+
+[tool Read] src/features/signIn/OwnerView.e2e.ts
+
+[tool Read] src/features/clinic/ClinicView.e2e.ts
+
+[tool Read] playwright.config.ts
+
+[tool Edit] src/features/signIn/OwnerView.e2e.ts
+
+[tool Edit] src/features/clinic/ClinicView.e2e.ts
+
+[tool Edit] playwright.config.ts
+
+[tool Edit] src/server/e2eClinic.server.ts
+
+Code moved; running Biome and verify now.
+
+[tool Bash] npx biome check --write . 2>&1 | tail -5
+
+[tool Bash] npm run verify 2>&1 | grep -E "error|Error|failed|✘|passed|Tests |Test Files|built in|Checked" | head -30
+
+Green. Updating docs/01, docs/04 and the page.
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Read] docs/04-Conventions.md
+
+[tool Edit] docs/04-Conventions.md
+
+[tool Read] work/done/clinic-setup.md
+
+[tool Edit] work/done/clinic-setup.md
+
+[tool Edit] work/done/clinic-setup.md
+
+[tool Edit] work/done/clinic-setup.md
+
+[tool Edit] work/done/clinic-setup.md
+
+[tool Bash] git add -A && git status --short | grep -v "^A  src/features\|^A  work/done/.*png"
+
+I made both corrections and recorded your manual check in the page. `npm run verify` passes (69 Vitest tests, 35 Playwright tests, build), and everything is staged. I haven't committed.
+
+1. **Fetch-to-Result moved to `src/lib/request.ts`.** It now holds the fetch function, a helper that reads a text field from the answer, and the only declaration of `ServerUnreachable`. `health/api.ts`, `clinic/api.ts` and `signIn/api.ts` all call it; health behaves as before and its Playwright tests pass unchanged. I added `request.test.ts` to cover the error cases, a network failure and an empty 204 answer. The page names `health/api.ts` as the first use and `clinic/api.ts` as the second. docs/01 lists the file under `lib/` and describes it in "How errors travel".
+2. **The Playwright fixture moved to `src/server/e2eClinic.server.ts`.** It now sits next to `testDatabase.server.ts`. Both are test fixtures used by more than one feature and both use Node modules, so the `.server.ts` suffix keeps client code from importing them. docs/04 states this rule and names both files. `git mv` was refused, so I used `mv`; the old root file was never committed, so nothing shows as deleted.
+3. **Your manual check is recorded.** "What the proof found" now says you ran the setup in a terminal and signed in and out. The last "Done when" item is ticked.
+
+**Suggested commit message:**
+```
+Set up the clinic and let the owner sign in and out
+
+- npm run setup creates the clinic and the owner once, from a terminal or piped answers
+- /owner signs the owner in and out with a scrypt hash and a 30 day session cookie
+- The home heading shows the clinic's name, or says it is not set up yet
+- Migration 0001-clinic.sql adds clinic, owner and session; four new routes
+- Client fetch to Result moves to src/lib/request.ts for every api.ts
+
+See work/done/clinic-setup.md
+```
+
+**Environments**
+- **Local:** you already ran this delivery's setup and dev server. `npm run dev` picks up the corrections on its next start; they change no data.
+- **Production:** doesn't exist yet; the `deploy` delivery creates it.

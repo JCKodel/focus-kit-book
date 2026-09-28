@@ -1,0 +1,31 @@
+[tool Edit] docs/03-Domain.md
+
+[tool Edit] docs/03-Domain.md
+
+[tool Edit] docs/03-Domain.md
+
+[tool Write] work/professionals.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Bash] grep -n "—" work/professionals.md docs/03-Domain.md docs/06-Queue.md; git status --short
+
+I wrote `work/professionals.md` and marked `[>] professionals` in docs/06. I added the new terms to docs/03 first: `addProfessional`, `renameProfessional`, `removeProfessional`, the three refusals `InvalidProfessionalName`, `ProfessionalNameTaken` and `ProfessionalNotFound`, and a new rule that two active professionals never share a name. Nothing is staged or committed, and there is no code yet.
+
+**What I chose, and why:**
+
+1. **Duplicate names are refused**, ignoring case and surrounding spaces. Clients pick a professional by name, so two "Ana Costa" entries would be impossible to tell apart. A removed professional's name can be used again.
+2. **One public route lists professionals: `GET /api/professionals`.** The owner screen uses it now and `book-appointment` will reuse it. docs/02 already lets clients read professionals. Only adding, renaming and removing need the owner's session.
+3. **Removing asks for confirmation on the same row** ("Remove <name>? Clients will no longer see them.", then "Remove" or "Keep"). A removal can't be undone, and this works better on a phone than the browser's `confirm()` dialog.
+4. **A removal time (`removed_at`) instead of a yes/no flag.** It costs the same and records when the professional was removed. The row stays in the database, so appointments stay valid whatever is later decided about removed professionals.
+5. **No database rule against duplicate names.** SQLite's `lower()` only handles plain ASCII letters, so it would disagree with the app's own check on names like "Álvaro". With one owner the risk of two adds colliding is negligible, and a duplicate name breaks no scheduling rule.
+6. **The name check becomes shared.** The clinic name was its first use and professionals are the second, so the trim-and-1-to-80-characters check moves to `src/lib/name.ts`. `checkClinicName` keeps its behaviour and its tests.
+7. **Smaller choices:** the list is alphabetical ignoring case, only one row can be in rename or remove mode at a time, and I wrote the on-screen messages myself.
+
+**Before `/apply`, read the page and question it:**
+- Can each Behaviour line be checked as written?
+- Is the Contract exact? Look at the column, the four routes with their answers and the order the checks run in, and the use-case signatures.
+- Does Out of scope leave out something you assumed was in, like restoring a removed professional or a photo and speciality?
+- Do the choices above hold up?
+
+Ask for every correction here. When the page is right, open a fresh session and type `/apply professionals`.

@@ -1,0 +1,44 @@
+[tool Read] docs/03-Domain.md
+
+[tool Read] docs/06-Queue.md
+
+Adding the new terms to docs/03 first, as the process requires.
+
+[tool Edit] docs/03-Domain.md
+
+[tool Edit] docs/03-Domain.md
+
+[tool Edit] docs/03-Domain.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Write] work/clinic-setup.md
+
+I wrote `work/clinic-setup.md` on `main`, since the project works on trunk. I also edited two documents:
+
+- **docs/03** gets the new terms first: `setUpClinic`, `Session`, `sessionDays`, `signIn`, `signOut` and the ten refusals, plus the Session entity and invariants 8 and 9.
+- **docs/06** now marks `clinic-setup` as `[>]`. I added two lines to Milestone 2, before `deploy`: `owner-password` and `sign-in-limit`.
+
+## What I chose and why
+
+1. **Setup asks each question in turn; it takes no flags.** A password passed as a flag stays in the shell history. The password is typed twice without being shown, because a typo can't be fixed until `owner-password` exists. When the command's input isn't a terminal it reads one answer per line, so a test can feed it answers.
+2. **A second setup is refused and changes nothing.** Editing the clinic later is its own delivery, and changing the appointment length is an open decision in docs/00. `CHECK (id = 1)` on `clinic` and `owner` makes "exactly one" a rule the database itself enforces.
+3. **Appointment length is 5 to 240 minutes in steps of 5, default 30.** The time zone is required and must be a real IANA name, with no default. A free host usually runs on UTC, and a wrong guess would shift every appointment.
+4. **The owner signs in at `/owner`, chosen by a check on the URL in the app shell, not a router library.** The skeleton added a package without asking, and this avoids repeating that. The signed-in screen only shows "Signed in as …" and "Sign out"; `professionals` fills it later.
+5. **I included `GET /api/clinic` and the clinic's name in the home heading.** It's small, the skeleton page left the name for this delivery, and `book-appointment` needs the time zone and length anyway.
+6. **A session lasts 30 fixed days.** The cookie holds a random token and the database keeps only its SHA-256, so a copied database file can't be used to sign in. A wrong email and a wrong password get the same message. Limiting attempts and the `Secure` cookie flag are left for `sign-in-limit` and `deploy`.
+7. **Two pieces of code are shared or placed now:**
+   - Email trimming and lower-casing moves to `src/lib/email.ts`. Setup is the first use and sign-in the second, and a second use is when the project rule moves code to `lib/`.
+   - The password and session code goes in `src/server/`, because docs/01 puts sessions in the server's shell.
+
+## Before `/apply`
+
+Read the page and question it:
+- **Behaviour:** can you check each line?
+- **Contract:** is it exact? It holds the schema, the password-hash string, the cookie lines and the four routes. A mistake there costs a migration.
+- **Out of scope:** does it name something you assumed was in? For example, the home page has no link to `/owner`, and there's no web page for setup.
+- **My own choices:** challenge any of the seven above.
+
+Ask for every correction here in this conversation. When the page is right, open a fresh session and type `/apply clinic-setup`.

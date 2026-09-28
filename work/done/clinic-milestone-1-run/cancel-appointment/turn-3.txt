@@ -1,0 +1,288 @@
+[tool Bash] cat work/cancel-appointment.md && cat docs/05*.md && git diff docs/06-Queue.md && ls docs docs/adr work work/done src/features src/features/*
+
+[tool Bash] cat docs/01*.md docs/02*.md docs/03*.md docs/04*.md
+
+[tool Bash] cd src/features/appointments && for f in rules.ts repository.server.ts route.server.ts api.ts remembered.ts useRemembered.ts RememberedView.tsx strings.ts useBooking.ts BookingView.tsx; do echo "=== $f"; cat -n $f; done
+
+[tool Read] src/features/appointments/rules.ts
+
+[tool Read] src/features/appointments/repository.server.ts
+
+[tool Read] src/features/appointments/route.server.ts
+
+[tool Read] src/features/appointments/api.ts
+
+[tool Read] src/features/appointments/remembered.ts
+
+[tool Read] src/features/appointments/useRemembered.ts
+
+[tool Read] src/features/appointments/RememberedView.tsx
+
+[tool Read] src/features/appointments/strings.ts
+
+[tool Read] src/features/appointments/useBooking.ts
+
+[tool Read] src/features/appointments/BookingView.tsx
+
+[tool Read] src/features/appointments/BookingView.e2e.ts
+
+[tool Read] src/features/appointments/route.server.test.ts
+
+[tool Read] src/features/appointments/repository.server.test.ts
+
+[tool Read] src/features/appointments/remembered.test.ts
+
+[tool Read] src/app/main.tsx
+
+[tool Read] src/lib/request.ts
+
+[tool Read] work/done/book-appointment.md
+
+[tool Read] src/features/appointments/rules.test.ts
+
+[tool Read] src/features/professionals/repository.server.ts
+
+[tool Read] src/server/database.server.ts
+
+[tool Bash] cat package.json playwright.config.ts && grep -rn "screenshot" src --include=*.e2e.ts | head -20
+
+Read the page and docs; they are consistent with each other. Now writing the use cases, repository, route, then client pieces.
+
+[tool Bash] grep -rn "useRemembered\|appointmentsRoute\|remembered.ts" src docs --exclude-dir=node_modules | grep -v "^src/features/appointments/useRemembered.ts"; cat src/lib/result.ts; grep -n "e2eDatabasePath\|export" src/server/e2eClinic.server.ts
+
+Use cases first.
+
+[tool Edit] src/features/appointments/rules.ts
+
+[tool Edit] src/features/appointments/rules.test.ts
+
+[tool Edit] src/features/appointments/rules.test.ts
+
+Repository and its tests.
+
+[tool Edit] src/features/appointments/repository.server.ts
+
+[tool Edit] src/features/appointments/repository.server.ts
+
+[tool Edit] src/features/appointments/repository.server.test.ts
+
+[tool Edit] src/features/appointments/repository.server.test.ts
+
+Now the route.
+
+[tool Edit] src/features/appointments/route.server.ts
+
+[tool Edit] src/features/appointments/route.server.ts
+
+[tool Edit] src/features/appointments/route.server.ts
+
+[tool Edit] src/features/appointments/route.server.ts
+
+[tool Edit] src/features/appointments/route.server.ts
+
+Route tests.
+
+[tool Edit] src/features/appointments/route.server.test.ts
+
+[tool Edit] src/features/appointments/route.server.test.ts
+
+[tool Bash] npx vitest run src/features/appointments 2>&1 | tail -30
+
+Server side green. Now the client: `api.ts`, `remembered.ts`, strings.
+
+[tool Edit] src/features/appointments/api.ts
+
+[tool Edit] src/features/appointments/api.ts
+
+[tool Edit] src/features/appointments/api.ts
+
+[tool Edit] src/features/appointments/remembered.ts
+
+[tool Edit] src/features/appointments/remembered.test.ts
+
+[tool Edit] src/features/appointments/remembered.test.ts
+
+[tool Edit] src/features/appointments/strings.ts
+
+[tool Edit] src/features/appointments/strings.ts
+
+[tool Edit] src/features/appointments/strings.ts
+
+[tool Edit] src/features/appointments/strings.ts
+
+[tool Bash] grep -rn "minHeight: 44" src; ls src/app src/lib
+
+Only `BookingView` has the 44px styles today; `CancelView` is their second use, so I'll move them to a small `styles.ts` in the feature and record it.
+
+[tool Write] src/features/appointments/styles.ts
+
+[tool Edit] src/features/appointments/BookingView.tsx
+
+[tool Edit] src/features/appointments/BookingView.tsx
+
+[tool Write] src/features/appointments/useRemembered.ts
+
+[tool Write] src/features/appointments/RememberedView.tsx
+
+[tool Write] src/features/appointments/useCancel.ts
+
+[tool Write] src/features/appointments/CancelView.tsx
+
+[tool Edit] src/app/main.tsx
+
+[tool Edit] src/app/main.tsx
+
+[tool Edit] src/app/main.tsx
+
+[tool Bash] npm run typecheck 2>&1 | tail -20 && npx biome check --write src 2>&1 | tail -30
+
+[tool Write] src/features/appointments/e2e.server.ts
+
+[tool Edit] src/features/appointments/BookingView.e2e.ts
+
+[tool Edit] src/features/appointments/BookingView.e2e.ts
+
+[tool Edit] src/features/appointments/BookingView.e2e.ts
+
+[tool Write] src/features/appointments/CancelView.e2e.ts
+
+[tool Bash] npx biome check --write src >/dev/null; npm run typecheck 2>&1 | tail -5; npx playwright test --project=phone src/features/appointments 2>&1 | tail -40
+
+All 29 appointment e2e tests pass on the first run. Now taking the six screenshots with a one-off Playwright file, as earlier deliveries did.
+
+[tool Write] src/features/appointments/Shots.e2e.ts
+
+[tool Bash] npx playwright test --project=phone src/features/appointments/Shots.e2e.ts 2>&1 | tail -15; ls work/done | grep cancel
+
+[tool Read] work/done/cancel-appointment-list-390x844.png
+
+[tool Read] work/done/cancel-appointment-confirm-390x844.png
+
+[tool Read] work/done/cancel-appointment-cancelled-390x844.png
+
+The confirmation row wraps badly: "Keep it" drops to its own line with a stray indent. Fixing with a wrapping flex row.
+
+[tool Read] src/features/appointments/RememberedView.tsx
+
+[tool Edit] src/features/appointments/RememberedView.tsx
+
+[tool Edit] src/features/appointments/RememberedView.tsx
+
+[tool Edit] src/features/appointments/RememberedView.tsx
+
+[tool Read] work/done/cancel-appointment-form-390x844.png
+
+[tool Read] work/done/cancel-appointment-no-match-390x844.png
+
+[tool Read] work/done/cancel-appointment-typed-cancelled-390x844.png
+
+Typed-path shots match the page. Retaking all six after the fix.
+
+[tool Bash] npx biome check --write src >/dev/null; npx playwright test --project=phone src/features/appointments/Shots.e2e.ts 2>&1 | tail -3
+
+[tool Read] work/done/cancel-appointment-confirm-390x844.png
+
+Still splits the pair. Grouping the two buttons so they wrap together.
+
+[tool Read] src/features/appointments/RememberedView.tsx
+
+[tool Edit] src/features/appointments/RememberedView.tsx
+
+[tool Edit] src/features/appointments/RememberedView.tsx
+
+[tool Edit] src/features/appointments/RememberedView.tsx
+
+[tool Bash] npx biome check --write src >/dev/null; npx playwright test --project=phone src/features/appointments/Shots.e2e.ts 2>&1 | tail -2
+
+[tool Read] work/done/cancel-appointment-confirm-390x844.png
+
+Clean now. Removing the one-off file and updating the docs.
+
+[tool Bash] rm src/features/appointments/Shots.e2e.ts && grep -n "remembered.ts\|lib/\` \|features/<feature>" docs/01-Architecture.md
+
+[tool Bash] rm src/features/appointments/Shots.e2e.ts
+
+Now docs/01, 02, 03.
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Edit] docs/03-Domain.md
+
+[tool Edit] docs/02-Backend.md
+
+[tool Edit] docs/02-Backend.md
+
+[tool Edit] docs/02-Backend.md
+
+Docs updated. Running the full `npm run verify`.
+
+[tool Bash] npm run verify 2>&1 | grep -E "error|Error|passed|failed|flaky|Test Files|Tests |built in|✗|✘" | tail -30
+
+Verify is green: 238 Vitest, 144 Playwright, build done. Checking the new e2e tests for flakiness.
+
+[tool Bash] npx playwright test --project=phone src/features/appointments/CancelView.e2e.ts --repeat-each=3 2>&1 | tail -3
+
+Stable across 3 repeats (39/39). Now recording what happened in the page.
+
+[tool Read] work/cancel-appointment.md
+
+[tool Edit] work/cancel-appointment.md
+
+[tool Edit] work/cancel-appointment.md
+
+[tool Edit] work/cancel-appointment.md
+
+[tool Edit] work/cancel-appointment.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Bash] mv work/cancel-appointment.md work/done/cancel-appointment.md
+
+[tool Bash] grep -rn "—" src docs work/done/cancel-appointment.md
+
+No em dashes. Staging.
+
+[tool Bash] npm run lint 2>&1 | tail -2 && git add -A && git status --short
+
+`cancel-appointment` is built and staged, and `npm run verify` passes: 238 Vitest tests (24 new) and 144 Playwright tests (13 new), then the build. The 13 new cancel screen tests also passed three runs in a row. Nothing is committed.
+
+**What a client can now do**
+- **From "Your appointments":** each appointment still more than 24 hours away has a "Cancel" button. It asks for confirmation, and then the time is free again for everyone. If the appointment was already cancelled elsewhere, the phone forgets it and says so. If the server says it's too late, the line says why and keeps the appointment.
+- **With "Cancel with a booking code":** the client types the phone number and code. Lower case, spaces around the code and spaces in the phone number all work. A wrong code, blank fields and "too late" each show their message above the form.
+- **Nothing is deleted:** a cancelled appointment keeps its row. If two cancellations of the same appointment race, exactly one succeeds and the other gets "not found".
+
+**Where I went beyond or away from the page** (each one is recorded in the page)
+- **Shared code on its second use.** None of these was named on the page, so I'm stating which use came first:
+  - `styles.ts` holds the form and button styles, first used by `BookingView.tsx`.
+  - `e2e.server.ts` holds the Playwright helpers, first used by `BookingView.e2e.ts`.
+  - `professionalOf` in `api.ts` reads the professional from a server answer, first used when booking.
+  - A small private helper in `remembered.ts` stores the list and notifies the page, first used by `remember`.
+- **"Keep it" after a failed request.** When the server can't be reached from a line, I show "Keep it" next to "Try again" so the client can back out. The page named only "Try again".
+- **Names come from the server.** The "Cancelled" messages use the server's answer, so a professional who was renamed shows their current name.
+- **Screenshots:** I took them with a temporary test file that I deleted afterwards, as in earlier deliveries. They are not part of `CancelView.e2e.ts`, even though the "Done when" item says so.
+
+**Screenshots:** the six shots are in `work/done/cancel-appointment-*-390x844.png`. The first take showed "Keep it" dropping onto its own indented line at phone width. I fixed that so both buttons wrap together under the question, and retook the shots. One thing remains: the line with the 44px "Cancel" button is taller than the lines around it.
+
+**Not ticked:** the last "Done when" item is your manual check in the browser, so I left it open.
+
+Two of my shell commands were blocked because this session can't ask for permission. I used the file reader for those reads instead, and nothing was skipped.
+
+Docs 01, 02 and 03 are updated as the page asked, and no ADR was needed. The page is now in `work/done/`, and the queue line in docs/06 is marked `[x]`.
+
+Suggested commit message:
+
+```
+Let a client cancel an appointment up to 24 hours before it starts
+
+- POST /api/appointments/cancel with phone and code in the body
+- cancel and normalizeBookingCode use cases; the row stays as cancelled
+- Cancel with confirmation on each line of "Your appointments"
+- "Cancel with a booking code" form between the list and the booking steps
+- The phone forgets a cancelled appointment
+
+See work/done/cancel-appointment.md
+```
+
+**Environments**
+- **Local:** has this delivery in the working tree, staged but not committed. Update it with `npm run dev`, then open `http://localhost:5173/` in a 390×844 window.
+- **Production:** doesn't exist yet. The `deploy` delivery will create it.

@@ -1,0 +1,63 @@
+I'll go with my recommendations. Checking the code the page will reference before writing it.
+
+[tool Bash] cat src/lib/name.ts src/lib/id.ts src/lib/result.ts src/features/clinic/repository.server.ts src/features/professionals/repository.server.ts src/features/weeklyHours/repository.server.ts src/server/main.server.ts src/features/professionals/api.ts; sed -n 1,80p src/features/weeklyHours/route.server.ts; cat playwright.config.ts
+
+[tool Bash] cat src/server/e2eClinic.server.ts; sed -n 1,60p src/lib/request.ts; grep -n "Professional\b\|export" src/features/professionals/rules.ts | head; grep -n "export" src/features/weeklyHours/rules.ts src/server/database.server.ts
+
+[tool Bash] sed -n 1,200p src/features/weeklyHours/api.ts | grep -n "400\|refus\|code" | head -20; sed -n 120,200p work/done/weekly-hours.md
+
+Choosing my recommendations. Adding the new terms to docs/03 first, then writing the page.
+
+[tool Edit] docs/03-Domain.md
+
+[tool Edit] docs/03-Domain.md
+
+[tool Write] work/book-appointment.md
+
+[tool Edit] work/book-appointment.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Bash] grep -n "—" work/book-appointment.md docs/03-Domain.md docs/06-Queue.md; git status --short
+
+I wrote the page, `work/book-appointment.md`. The project works on one branch (trunk), so it's on `main`, unstaged, with no code written. I also changed two docs:
+- **docs/03:** three new terms (`InvalidClientName`, `InvalidPhoneNumber`, `RememberedAppointment`) and the rule for storing the client's name and phone.
+- **docs/06:** `book-appointment` is now `[>]`. I also added a new line, `fake-bookings`, just before `deploy`.
+
+## What I chose and why
+
+1. **Phone numbers are stored as digits only, 6 to 15 of them.** This matches invariant 6 (phones are compared by digits) and needs no extra column. The catch is that `+351 912…` and `912…` count as different numbers. To soften that, the booked screen shows the exact digits the client will need later.
+2. **The phone saves the appointment, and the home page lists upcoming ones read-only under "Your appointments".** Without that, step 4 of docs/00 couldn't be checked on screen. The cancel button comes in `cancel-appointment`.
+3. **A warning appears when the time is less than 24 hours away**, because otherwise the client learns they can't cancel only when they try. The check uses a `cancellationDeadline` rule written now, which `cancel-appointment` will then enforce.
+4. **Professionals with no free times stay in the list** and say "No free times in the next 30 days." The public list of professionals doesn't change.
+5. **Booking takes two steps: pick a day, then a time.** Thirty days of times in one list doesn't work on a phone.
+6. **Fake bookings stay an open decision.** The app only runs locally until `deploy`, and the new `fake-bookings` line in the queue makes sure it gets decided before anyone outside can use it. It's one line in the queue, not a decision: undo it if you'd rather not.
+
+## Choices on the page that deserve your eye
+
+- **Three refusals share status `409`:**
+  - `SlotTaken`
+  - `OutsideWorkingHours`
+  - `OutsideBookingWindow`
+
+  The client shows the same message for all three ("This time is no longer free."). The error body still carries the exact code.
+- **Rare booking-code clash:** it answers `500`, and the client's "Try again" draws a new code. I chose that over a retry loop. It should happen about once in 887 million bookings per existing appointment.
+- **Clock changes:**
+  - Slots follow the clock on the wall.
+  - A time skipped when clocks go forward gives no slot.
+  - A time that happens twice when clocks go back uses its first occurrence.
+- **No date library:** time zone conversions use JavaScript's built-in `Intl`.
+- **Booking window:** a slot must start after now and at most exactly 30×24 hours from now, so the last day may be cut short.
+- **New code:**
+  - It goes in a new folder, `src/features/appointments/`, which `cancel-appointment` will add to.
+  - A new migration, `0004-appointment.sql`, creates the appointments table.
+
+Please read the page and question it:
+- Can you check each Behaviour line on screen?
+- Is the Contract exact (the table, the two routes, the use case signatures)?
+- Does Out of scope name anything you assumed would be included?
+- Do you agree with the choices above?
+
+Ask for every correction in this conversation. Only then open a fresh session and type `/apply book-appointment`.

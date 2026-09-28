@@ -1,0 +1,316 @@
+[tool Bash] cat work/weekly-hours.md && ls docs docs/adr work work/done && git diff && git branch -a && git worktree list
+
+[tool Bash] cat AGENTS.md docs/01-Architecture.md docs/04-Conventions.md docs/05-Process.md docs/02-Backend.md
+
+[tool Bash] git ls-files | grep -v '^work/done/.*png' && cat package.json
+
+Now the professionals feature, which is the closest model.
+
+[tool Bash] cd src && for f in features/professionals/{rules.ts,repository.server.ts,route.server.ts,api.ts,useProfessionals.ts,ProfessionalsView.tsx,strings.ts}; do echo "=== $f"; cat -n $f; done
+
+[tool Bash] cd src/features/professionals && for f in rules.ts repository.server.ts route.server.ts api.ts useProfessionals.ts ProfessionalsView.tsx strings.ts; do echo "=== $f"; cat -n $f; done
+
+[tool Read] src/features/professionals/rules.ts
+
+[tool Read] src/features/professionals/repository.server.ts
+
+[tool Read] src/features/professionals/route.server.ts
+
+[tool Read] src/features/professionals/api.ts
+
+[tool Read] src/features/professionals/useProfessionals.ts
+
+[tool Read] src/features/professionals/ProfessionalsView.tsx
+
+[tool Read] src/features/professionals/strings.ts
+
+[tool Read] src/features/professionals/ProfessionalsView.e2e.ts
+
+[tool Read] src/features/professionals/route.server.test.ts
+
+[tool Read] src/features/professionals/repository.server.test.ts
+
+[tool Read] src/lib/request.ts
+
+[tool Read] src/server/main.server.ts
+
+[tool Read] src/features/clinic/repository.server.ts
+
+[tool Read] src/server/migrate.server.test.ts
+
+[tool Read] playwright.config.ts
+
+[tool Bash] grep -rn "screenshot" src playwright.config.ts .gitignore; cat src/server/e2eClinic.server.ts src/lib/result.ts src/server/database.server.ts src/server/testDatabase.server.ts src/server/migrations/0002-professional.sql
+
+[tool Read] work/done/professionals.md
+
+Reading done; next I check docs/03 and docs/00 against the page, then build.
+
+[tool Bash] cat docs/03-Domain.md && grep -n -i -A3 "open\|hours" docs/00-Product.md | head -80 && cat src/server/session.server.ts | head -80 && cat biome.json tsconfig.json
+
+[tool Bash] grep -rn "BEGIN\|ROLLBACK\|isTransaction" src --include=*.ts | grep -v test; cat src/features/signIn/OwnerView.tsx | head -60; cat src/app/main.tsx
+
+[tool Bash] grep -rn -e "BEGIN" -e "ROLLBACK" -e "isTransaction" src; grep -n "padding\|font" index.html src/app/*.tsx
+
+[tool Read] src/server/migrate.server.ts
+
+[tool Bash] grep -rn -e "BadRequest" -e "DatabaseFailed\" }" -e "function " src/features/*/route.server.ts src/server/session.server.ts | grep -v "^.*test"
+
+Building now: migration, rules, repository, route.
+
+[tool Write] src/server/migrations/0003-working-period.sql
+
+[tool Write] src/features/weeklyHours/rules.ts
+
+[tool Write] src/features/weeklyHours/rules.test.ts
+
+[tool Edit] src/server/database.server.ts
+
+[tool Edit] src/features/clinic/repository.server.ts
+
+[tool Edit] src/features/clinic/repository.server.ts
+
+[tool Read] src/server/database.server.test.ts
+
+[tool Edit] src/server/database.server.test.ts
+
+[tool Edit] src/server/database.server.test.ts
+
+[tool Edit] src/server/database.server.test.ts
+
+Writing the repository, `lib/id.ts` and the route next.
+
+[tool Write] src/features/weeklyHours/repository.server.ts
+
+[tool Write] src/lib/id.ts
+
+[tool Write] src/lib/id.test.ts
+
+[tool Edit] src/features/professionals/route.server.ts
+
+[tool Edit] src/features/professionals/route.server.ts
+
+[tool Edit] src/features/weeklyHours/repository.server.ts
+
+[tool Write] src/features/weeklyHours/route.server.ts
+
+[tool Edit] src/features/weeklyHours/route.server.ts
+
+[tool Edit] src/features/weeklyHours/route.server.ts
+
+[tool Edit] src/features/weeklyHours/route.server.ts
+
+[tool Edit] src/features/weeklyHours/route.server.ts
+
+[tool Edit] src/server/main.server.ts
+
+[tool Edit] src/server/main.server.ts
+
+Now the repository and route tests.
+
+[tool Write] src/features/weeklyHours/repository.server.test.ts
+
+[tool Write] src/features/weeklyHours/route.server.test.ts
+
+[tool Edit] src/server/migrate.server.test.ts
+
+[tool Bash] npx biome check --write src >/dev/null; npm run typecheck 2>&1 | tail -20 && npx vitest run 2>&1 | tail -25
+
+Server side is green (153 unit tests). Now the client: api, strings, hook, view.
+
+[tool Write] src/features/weeklyHours/api.ts
+
+[tool Write] src/features/weeklyHours/strings.ts
+
+[tool Write] src/features/weeklyHours/useWeeklyHours.ts
+
+[tool Write] src/features/weeklyHours/WeeklyHoursView.tsx
+
+Now wiring into the professionals section.
+
+[tool Edit] src/features/professionals/useProfessionals.ts
+
+[tool Edit] src/features/professionals/useProfessionals.ts
+
+[tool Edit] src/features/professionals/useProfessionals.ts
+
+[tool Edit] src/features/professionals/useProfessionals.ts
+
+[tool Edit] src/features/professionals/useProfessionals.ts
+
+[tool Edit] src/features/professionals/ProfessionalsView.tsx
+
+[tool Edit] src/features/professionals/ProfessionalsView.tsx
+
+[tool Edit] src/features/professionals/ProfessionalsView.tsx
+
+[tool Edit] src/features/professionals/strings.ts
+
+[tool Edit] src/features/professionals/ProfessionalsView.tsx
+
+[tool Edit] src/features/professionals/ProfessionalsView.tsx
+
+[tool Bash] npx biome check --write src >/dev/null; npm run typecheck 2>&1 | tail -20 && npx biome check . 2>&1 | tail -30
+
+[tool Read] src/features/weeklyHours/WeeklyHoursView.tsx
+
+[tool Bash] grep -n "function period" src/features/weeklyHours/WeeklyHoursView.tsx
+
+Fixing a type narrowing error in the editor view.
+
+[tool Read] src/features/weeklyHours/WeeklyHoursView.tsx
+
+[tool Edit] src/features/weeklyHours/WeeklyHoursView.tsx
+
+[tool Edit] src/features/weeklyHours/WeeklyHoursView.tsx
+
+[tool Bash] npx biome check --write src >/dev/null; npm run typecheck 2>&1 | tail -5 && npx biome check . 2>&1 | tail -30
+
+Unit side clean. Now the Playwright file.
+
+[tool Write] src/features/weeklyHours/WeeklyHoursView.e2e.ts
+
+[tool Edit] playwright.config.ts
+
+[tool Bash] npx biome check --write src playwright.config.ts >/dev/null; npm run typecheck 2>&1 | tail -5; npx playwright test src/features/weeklyHours 2>&1 | tail -60
+
+34 of 36 pass; the failure is my test (Bruno's row is in remove mode, so it has no Hours button). Fixing the test to open Ana's hours instead.
+
+[tool Read] src/features/weeklyHours/WeeklyHoursView.e2e.ts
+
+[tool Edit] src/features/weeklyHours/WeeklyHoursView.e2e.ts
+
+Now the full verify.
+
+[tool Bash] npm run verify 2>&1 | grep -v "✓" | tail -40
+
+A pre-existing professionals test failed at sign-in. Checking whether it's load-related before touching anything.
+
+[tool Bash] head -40 "test-results/features-professionals-Pro-bb42e-nd-keeps-the-list-on-reload-desktop/error-context.md"
+
+[tool Bash] grep -rn "e2eDatabasePath\|DatabaseSync" src --include="*.e2e.ts" ; grep -rn "e2eDatabasePath" src | grep -v "e2eClinic.server.ts"
+
+[tool Read] src/features/signIn/OwnerView.e2e.ts
+
+[tool Bash] for i in 1 2 3; do npx playwright test 2>&1 | grep -E "passed|failed|flaky|✘"; done
+
+[tool Bash] npx playwright test --repeat-each=3 2>&1 | tail -15
+
+1 failure in 345, again a sign-in answering 500. To test the hypothesis, I'll rerun excluding the single test that writes to the database from outside the server.
+
+[tool Bash] npx playwright test --repeat-each=5 --grep-invert "older than 30 days" 2>&1 | tail -4
+
+[tool Bash] npm run verify 2>&1 | grep -v "✓" | tail -25
+
+Verify is green: 153 Vitest, 115 Playwright, build OK. Next, the proof screenshots from a one-off Playwright file, run alone on a fresh database.
+
+[tool Write] src/features/weeklyHours/shots.e2e.ts
+
+[tool Bash] npx playwright test src/features/weeklyHours/shots.e2e.ts --project=phone 2>&1 | tail -5 && rm src/features/weeklyHours/shots.e2e.ts && ls work/done | grep weekly
+
+[tool Read] work/done/weekly-hours-week-390x844.png
+
+[tool Read] work/done/weekly-hours-week-1280x800.png
+
+[tool Read] work/done/weekly-hours-empty-390x844.png
+
+[tool Read] work/done/weekly-hours-overlap-390x844.png
+
+[tool Edit] src/features/weeklyHours/WeeklyHoursView.tsx
+
+[tool Write] src/features/weeklyHours/shots.e2e.ts
+
+[tool Bash] npx playwright test src/features/weeklyHours/shots.e2e.ts --project=phone 2>&1 | tail -3 && rm src/features/weeklyHours/shots.e2e.ts
+
+[tool Read] work/done/weekly-hours-overlap-390x844.png
+
+Final screenshots are good. Now the documents.
+
+[tool Edit] docs/02-Backend.md
+
+[tool Edit] docs/02-Backend.md
+
+[tool Edit] docs/02-Backend.md
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Edit] docs/04-Conventions.md
+
+[tool Edit] docs/03-Domain.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Bash] npm run verify 2>&1 | grep -E "Tests |passed|failed|error|built in" ; npx vitest run src/features/weeklyHours src/lib/id.test.ts src/server/database.server.test.ts 2>&1 | grep -E "Tests "
+
+Verify green again after the style change (153 Vitest, 115 Playwright, build). Writing the page's record and moving it.
+
+[tool Bash] git mv -f work/weekly-hours.md work/done/weekly-hours.md 2>/dev/null || mv work/weekly-hours.md work/done/weekly-hours.md; ls work work/done | grep weekly
+
+[tool Bash] mv work/weekly-hours.md work/done/weekly-hours.md
+
+[tool Read] work/done/weekly-hours.md
+
+[tool Read] work/done/weekly-hours.md
+
+[tool Bash] sed -i '' '189,216s/^\* \[ \]/* [x]/' work/done/weekly-hours.md
+
+[tool Edit] work/done/weekly-hours.md
+
+Ticking the items with edits instead of sed.
+
+[tool Edit] work/done/weekly-hours.md
+
+[tool Edit] work/done/weekly-hours.md
+
+[tool Edit] work/done/weekly-hours.md
+
+[tool Edit] work/done/weekly-hours.md
+
+[tool Edit] work/done/weekly-hours.md
+
+[tool Edit] work/done/weekly-hours.md
+
+[tool Edit] work/done/weekly-hours.md
+
+[tool Edit] work/done/weekly-hours.md
+
+Checking for em dashes, then staging.
+
+[tool Bash] grep -rln "—" src docs work/done/weekly-hours.md playwright.config.ts; git add -A && git status --short
+
+`weekly-hours` is built and staged (`git add -A`). I have not committed. `npm run verify` is green: 153 Vitest tests (34 new), 115 Playwright tests (36 new, each scenario at 390×844 and 1280×800), and the build passes.
+
+**One flaky test, not fixed.** When I ran the whole Playwright suite three times in a row, one owner sign-in failed with "The server cannot be reached", about once in 345 tests. The cause is an existing test in `OwnerView.e2e.ts`, "shows the form for a session older than 30 days". It writes to the shared test database through its own connection, and the server's connection has no busy timeout, so a write that lands at the same moment fails. With that test left out, 565 runs of the suite all passed. Fixing it means changing the server's database setup or that test, which is outside this page. I recorded it in the page; it should probably get its own line in docs/06.
+
+**Changes the page didn't name** (each one is recorded in `work/done/weekly-hours.md`):
+- **Shared transaction helper.** Saving hours is the second place that writes several rows together (the first is `saveClinicAndOwner`), so both now use a new `transaction` helper in `database.server.ts`.
+- **Shared id check.** The check that a route's `:id` is a positive whole number moved from the professionals routes to `src/lib/id.ts`, since the hours routes need it too.
+- **Editor props.** `WeeklyHoursView` also takes `busy` and `section`. That is how it reports "no longer exists" and "session ended" up to the professionals section, which the page asked for.
+- **Rule checked before sending.** The screen checks the hours rule before it saves and sends nothing if a period is refused. So the client treats a `400` from the server as "cannot be reached".
+- **Browser validation off.** The form has `noValidate`; otherwise the browser would block 09:03 with its own bubble instead of the page's message.
+- **Message placement.** A refusal message appears under its period's line, not to its right: on a phone that line already fills the width.
+
+**Proof.** The four screenshots are in `work/done/`. The first take showed two periods of one day touching, so I added a 6px gap and retook them. Nothing else diverged from the page.
+
+**Docs.** docs/01, 02, 03 and 04 are updated, the page is in `work/done/`, and docs/06 shows `[x]`. I ticked every "Done when" item except the manual check with `npm run dev`, which is yours: I can't keep the dev server running in this session.
+
+**Permissions.** Three of my commands were denied (a file read, a repeat-test loop and a `sed`). I did the same work another way each time, so nothing was skipped.
+
+**Suggested commit message:**
+```
+Let the owner set each professional's weekly hours
+
+- Add working_period table and GET/PUT /api/owner/professionals/:id/hours
+- Add setWeeklyHours: 5 minute steps, minimum length, no overlap
+- Add the hours editor under a professional's row, Monday to Sunday
+- Share transaction() and idOf() on their second use
+- See work/done/weekly-hours.md
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+```
+
+**Environments:**
+- **local:** the code is ready but not running here. Start it with `npm run dev`; the new migration applies when it starts. Then sign in at `http://localhost:5173/owner`, set a week with a lunch break, reload, and open "Hours" to see it kept.
+- **production:** doesn't exist yet; the `deploy` delivery creates it, and you publish.

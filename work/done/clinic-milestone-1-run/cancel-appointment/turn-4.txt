@@ -1,0 +1,32 @@
+[tool Read] work/done/cancel-appointment.md
+
+[tool Bash] git status --short
+
+[tool Edit] work/done/cancel-appointment.md
+
+[tool Edit] work/done/cancel-appointment.md
+
+[tool Bash] git add -A && git status --short | grep -v "^[MA]  " ; git diff --cached --stat | tail -1
+
+I recorded your check in `work/done/cancel-appointment.md` and staged the page again. Nothing is committed.
+
+- **Done when:** the last item, your check in the browser, is now ticked, so every item is ticked.
+- **What the proof found:** a new paragraph says you checked it at review. It lists what you did, including the earliest time under 24 hours away: no "Cancel" button, "Can no longer be cancelled in the app.", and the typed form refusing it with the 24 hours message. It ends with "It all worked."
+
+All 31 files are staged. The commit message I suggested before still applies:
+
+```
+Let a client cancel an appointment up to 24 hours before it starts
+
+- POST /api/appointments/cancel with phone and code in the body
+- cancel and normalizeBookingCode use cases; the row stays as cancelled
+- Cancel with confirmation on each line of "Your appointments"
+- "Cancel with a booking code" form between the list and the booking steps
+- The phone forgets a cancelled appointment
+
+See work/done/cancel-appointment.md
+```
+
+**Environments**
+- **Local:** runs this delivery, since you started it with `npm run dev`. The changes are staged, not committed.
+- **Production:** doesn't exist yet. The `deploy` delivery will create it.

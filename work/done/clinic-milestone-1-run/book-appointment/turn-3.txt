@@ -1,0 +1,15 @@
+[tool Bash] grep -n -i -A4 "manual\|npm run dev" work/done/*.md | head -40
+
+[tool Bash] sed -n 188,196p work/done/professionals.md; grep -n -B1 -A4 "The person runs" work/done/weekly-hours.md
+
+[tool Edit] work/book-appointment.md
+
+I added the manual check as the last item of **Done when**, worded like the ones in `professionals` and `weekly-hours`:
+
+> The person runs `npm run dev`, gives a professional weekly hours at `http://localhost:5173/owner`, then opens `http://localhost:5173/` in a 390×844 window, books a time, sees the booking code, reloads and sees the appointment under "Your appointments".
+
+I added one step you didn't mention: giving a professional weekly hours first. Without it, a fresh local database has no free times, so there's nothing to book.
+
+`/apply` can't tick this item: it can't keep `npm run dev` running. So the item stays unticked on the done page until you run the check yourself, as it did for `skeleton`.
+
+Anything else to correct on the page? If not, open a fresh session and type `/apply book-appointment`.

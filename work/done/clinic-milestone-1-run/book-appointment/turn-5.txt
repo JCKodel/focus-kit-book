@@ -1,0 +1,11 @@
+[tool Edit] work/done/book-appointment.md
+
+[tool Edit] work/done/book-appointment.md
+
+[tool Bash] git add work/done/book-appointment.md && git status --short work/
+
+I've recorded your check in the page, and every "Done when" item is now ticked. In `work/done/book-appointment.md`, the last item no longer has the "left to the person" note. Under "What the proof found" there's a new "Checked by the person, at review" paragraph that describes what you did and that it worked, in the same style as `weekly-hours`.
+
+The page is staged again with everything else. The suggested commit message is unchanged, and nothing is committed.
+
+**Environments:** only local exists, and you're already running it with `npm run dev`. There's no production environment until the `deploy` delivery.

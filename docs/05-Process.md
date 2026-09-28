@@ -111,7 +111,11 @@ built, `[x]` done. Edited by conversation in any session.
   published tag never moves. The agent stages there too and never commits,
   tags or pushes. Order: the author commits and pushes the chapter's tag
   first, then the chapter's `make verify` can go green, because the link
-  check opens every tag URL the chapter cites.
+  check opens every tag URL the chapter cites. A delivery of this book
+  that is not a chapter may advance the guided project (the first is
+  `clinic-milestone-1`); the author commits each of its deliveries with
+  the kit's message and no tag, and the next chapter tag includes those
+  commits.
 * **Brownfield project:** the fork `JCKodel/clahub`, worked on locally in
   the sibling directory `../clahub`, on the branch `book` created from
   `book-v1`, the frozen upstream (ADR-0009). A chapter that changes it ends

@@ -1,0 +1,42 @@
+[tool Bash] rm work/e2e-database-busy.md
+
+[tool Bash] git add -A
+
+[tool Bash] git status --short
+
+[tool Write] <host folder of the clinic>/memory/no-commit-trailer.md
+
+[tool Bash] test -f <host folder of the clinic>/memory/MEMORY.md && cat <host folder of the clinic>/memory/MEMORY.md
+
+[tool Write] <host folder of the clinic>/memory/MEMORY.md
+
+I removed `work/e2e-database-busy.md` and ran `git add -A`. Seven files are staged:
+
+```
+M  docs/02-Backend.md
+M  docs/04-Conventions.md
+M  docs/06-Queue.md
+M  src/features/signIn/OwnerView.e2e.ts
+M  src/server/database.server.test.ts
+M  src/server/database.server.ts
+A  work/done/e2e-database-busy.md
+```
+
+Suggested commit message, in the docs/05 format:
+
+```
+Wait for SQLite locks instead of failing with SQLITE_BUSY
+
+- openDatabase opens the file with a 5000 ms busy timeout
+- transaction begins with BEGIN IMMEDIATE
+- OwnerView.e2e.ts writes to the e2e database through openDatabase
+- Tests: busy_timeout, a worker-thread lock race, the lock taken at BEGIN
+
+See work/done/e2e-database-busy.md
+```
+
+I saved a note so future commit suggestions follow docs/05 with no trailer.
+
+**Environments**
+- **Local:** the working tree has this delivery staged but not committed, on top of `064d7a9`. There's no migration, so the existing `data/clinic.sqlite` works as it is. Start it with `npm run dev`.
+- **Production:** doesn't exist yet; the `deploy` delivery will create it.

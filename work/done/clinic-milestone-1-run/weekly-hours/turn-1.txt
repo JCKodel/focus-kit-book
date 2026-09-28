@@ -1,0 +1,49 @@
+[tool Bash] ls docs docs/adr work 2>/dev/null; cat docs/00* docs/03* docs/05* docs/06*
+
+[tool Bash] cat docs/01* docs/02* docs/04*; ls work/done; cat work/done/professionals.md; ls -R src | head -80; ls migrations* server* 2>/dev/null
+
+[tool Bash] cat docs/adr/ADR-0005* ; git ls-files | grep -iE 'migrat|professional' 
+
+Output was truncated; let me read docs/02, docs/04 and the previous page in full.
+
+[tool Read] docs/02-Backend.md
+
+[tool Read] work/done/professionals.md
+
+[tool Read] src/server/migrations/0002-professional.sql
+
+[tool Read] docs/04-Conventions.md
+
+[tool Bash] grep -n -i "pragma\|foreign" -r src/server | head; wc -l src/features/professionals/*.tsx src/features/professionals/strings.ts; cat src/features/professionals/strings.ts
+
+I've read docs/00 to 06, ADR-0005 and the `professionals` page. Nothing is in `work/` yet. The git strategy is trunk, so the page will be written on `main` and I won't create a branch.
+
+**My assessment.** This fits on one page. It adds one table (`working_period`, already listed in docs/02), two owner routes (read and save), one editor in each professional's row on the owner screen, and one pure use case that validates a whole week. The open decision about future appointments when hours change doesn't come up yet because no appointment exists. The current default ("existing appointments stay") keeps applying, and it will matter once `book-appointment` ships. Slots, and what happens around daylight-saving changes, belong to `book-appointment`.
+
+Here is my plan, with a recommendation at the top of each question:
+
+1. **How hours are saved.** I recommend editing the whole week and saving it with one "Save hours" button, which the server stores in one step (`PUT .../hours` with the full list of periods). The alternative is saving each period on its own as it is added or removed. Saving the week at once keeps the overlap check in one place, and the owner never ends up with half a week saved.
+
+2. **Several periods on one day.** I recommend allowing them, for example 09:00 to 13:00 and 14:00 to 18:00 for a lunch break. docs/03 already assumes this ("periods of one professional on one weekday do not overlap"). Two periods that meet exactly (one ends at 13:00, the next starts at 13:00) don't count as overlapping.
+
+3. **Which times are allowed.** I recommend HH:MM from 00:00 to 23:55, in steps of 5 minutes (the same step as the appointment length), with the start before the end. No period can cross midnight.
+
+4. **A period too short for one appointment** (for example 09:00 to 09:20 when appointments are 30 minutes). I recommend refusing it, with a message that says the minimum. Otherwise the owner thinks they opened time that clients will never see. A period that isn't an exact multiple of the length (for example 09:00 to 12:10) is accepted, and the last 10 minutes simply hold no appointment.
+
+5. **Where it appears.** I recommend an "Hours" button in each row, next to "Rename" and "Remove". It opens an editor under the row, and only one row is open at a time, the same rule as today. The editor lists the seven days from Monday to Sunday. Each day shows its periods (a "From" field, a "To" field and a "Remove period" button) and an "Add period" button. "Add period" fills in 09:00 to 17:00. At the bottom are "Save hours" and "Cancel".
+
+6. **A summary in the list.** I recommend not showing a summary of each professional's hours in the row for now. The owner opens "Hours" to see them. The one exception I'd make is a short "No hours yet" next to a professional without periods, because clients won't be able to book that person. Do you want that line, or nothing at all?
+
+7. **New names in docs/03.** I'd add three refusals, all pure and all with tests:
+   - `InvalidWorkingPeriod`: a time in the wrong format or off the 5-minute step, or an end not after the start.
+   - `WorkingPeriodTooShort`: the case in question 4.
+   - `WorkingPeriodsOverlap`: two periods on the same day overlap.
+
+   The server answers with the usual `{ "error": { "code" } }`. The screen runs the same use case before sending, only to show which period is wrong.
+
+Choices I'd make on my own unless you object:
+- Weekdays are stored as ISO numbers (1 is Monday, 7 is Sunday).
+- Times are stored as `'HH:MM'` text in clinic time.
+- Hours can only be read on the owner side, since clients will see slots and not hours.
+
+If you agree with all of this, answer "ok", plus whether you want the "No hours yet" line, and I'll write `work/weekly-hours.md`, update docs/03 and mark the line in docs/06.

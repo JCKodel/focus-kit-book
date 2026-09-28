@@ -1,0 +1,192 @@
+
+> verify
+> npm run typecheck && npm run lint && npm run test && npm run test:e2e && npm run build
+
+
+> typecheck
+> tsc --noEmit
+
+
+> lint
+> biome check .
+
+Checked 99 files in 54ms. No fixes applied.
+
+> test
+> vitest run
+
+
+ RUN  v5.0.2 .
+
+
+ Test Files  25 passed (25)
+      Tests  238 passed (238)
+   Start at  18:39:58
+   Duration  1.10s (tests 67%, transform 17%, import 14%, worker 2%)
+
+
+> test:e2e
+> playwright test
+
+
+Running 144 tests using 5 workers
+
+  ✓    5 [phone] › src/features/health/HealthView.e2e.ts:3:1 › shows the server as ok when it answers (427ms)
+  ✓    3 [phone] › src/features/clinic/ClinicView.e2e.ts:4:1 › shows the clinic's name as the heading (388ms)
+  ✓    7 [phone] › src/features/clinic/ClinicView.e2e.ts:14:1 › shows the home page at any path other than /owner (161ms)
+  ✓    6 [phone] › src/features/health/HealthView.e2e.ts:9:1 › shows the check while the answer is on its way (202ms)
+  ✓    1 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:63:1 › shows the heading, the list, the Name field and Add under Sign out (622ms)
+  ✓    8 [phone] › src/features/clinic/ClinicView.e2e.ts:23:1 › shows Clinic and the not set up line before setup (179ms)
+  ✓    9 [phone] › src/features/health/HealthView.e2e.ts:19:1 › shows the server as unreachable when it answers with an error (182ms)
+  ✓    4 [phone] › src/features/appointments/BookingView.e2e.ts:37:1 › books end to end, shows the code, and remembers it after a reload (914ms)
+  ✓   11 [phone] › src/features/clinic/ClinicView.e2e.ts:39:1 › shows Clinic while the name is on its way (202ms)
+  ✓   12 [phone] › src/features/health/HealthView.e2e.ts:29:1 › shows the server as unreachable when it does not answer (194ms)
+  ✓   10 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:75:1 › says so when there is no professional (406ms)
+  ✓   13 [phone] › src/features/appointments/BookingView.e2e.ts:74:1 › shows no Your appointments before a booking (174ms)
+  ✓   14 [phone] › src/features/clinic/ClinicView.e2e.ts:52:1 › shows Clinic when the server cannot be reached (185ms)
+  ✓   15 [phone] › src/features/signIn/OwnerView.e2e.ts:38:1 › shows the sign-in form when signed out (172ms)
+  ✓    2 [phone] › src/features/appointments/CancelView.e2e.ts:123:1 › books in the app, cancels from Your appointments after confirming, and the time is free again (1.3s)
+  ✓   20 [phone] › src/features/appointments/CancelView.e2e.ts:158:1 › Keep it puts Cancel back and sends nothing (300ms)
+  ✓   19 [phone] › src/features/signIn/OwnerView.e2e.ts:44:1 › signs in with the right email and password (388ms)
+  ✓   16 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:85:1 › adds a trimmed name in its place and empties the field (665ms)
+  ✓   18 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:150:1 › shows Hours between Rename and Remove, and the week under the name, Monday first (687ms)
+  ✓   21 [phone] › src/features/appointments/CancelView.e2e.ts:172:1 › Cancel sits inline after the line, at least 44px tall, and the code button between the sections (299ms)
+  ✓   22 [phone] › src/features/signIn/OwnerView.e2e.ts:52:1 › matches the email in any case and with surrounding spaces (365ms)
+  ✓   26 [phone] › src/features/signIn/OwnerView.e2e.ts:62:1 › refuses a wrong password and keeps the email typed (315ms)
+  ✓   17 [phone] › src/features/appointments/BookingView.e2e.ts:85:1 › Done returns to the professionals, and the booked time is gone for every client (1.2s)
+  ✓   23 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:101:1 › lists alphabetically ignoring case, and keeps the list on reload (667ms)
+  ✓   25 [phone] › src/features/appointments/CancelView.e2e.ts:191:1 › a remembered appointment no longer booked is forgotten with the message (543ms)
+  ✓   24 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:180:1 › opens one row at a time, in hours, rename or remove mode (690ms)
+  ✓   27 [phone] › src/features/signIn/OwnerView.e2e.ts:71:1 › refuses a wrong email with the same message (332ms)
+  ✓   30 [phone] › src/features/appointments/CancelView.e2e.ts:219:1 › a refusal as too late shows on the line, with no Cancel, and the phone keeps it (410ms)
+  ✓   28 [phone] › src/features/appointments/BookingView.e2e.ts:116:1 › lists professionals, days earliest first, and times earliest first, with Back (615ms)
+  ✓   29 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:127:1 › refuses a blank name or one over 80 characters, keeping what was typed (599ms)
+  ✓   32 [phone] › src/features/signIn/OwnerView.e2e.ts:80:1 › stays signed in after a reload (462ms)
+  ✓   33 [phone] › src/features/appointments/CancelView.e2e.ts:241:1 › a failed cancellation from the list says so on the line, and Try again repeats it (322ms)
+  ✓   31 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:204:1 › Add period adds 09:00 to 17:00 at the end of the day, Remove period takes it out, nothing stored (700ms)
+  ✓   34 [phone] › src/features/appointments/BookingView.e2e.ts:148:1 › refuses a bad name and a bad phone beside the field, sending nothing (616ms)
+  ✓   35 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:145:1 › refuses a name another professional has, in any case and with spaces (606ms)
+  ✓   37 [phone] › src/features/appointments/CancelView.e2e.ts:272:1 › disables Yes, cancel and Keep it, or Cancel appointment and Back, while in flight (431ms)
+  ✓   36 [phone] › src/features/signIn/OwnerView.e2e.ts:90:1 › signs out, and the old cookie no longer opens a session (608ms)
+  ✓   42 [phone] › src/features/signIn/OwnerView.e2e.ts:111:1 › shows the form for a session older than 30 days (449ms)
+  ✓   40 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:161:1 › renames a professional into its new place (624ms)
+  ✓   39 [phone] › src/features/appointments/BookingView.e2e.ts:174:1 › a time taken meanwhile says so above the day's times, reloaded (708ms)
+  ✓   41 [phone] › src/features/appointments/CancelView.e2e.ts:292:1 › cancels by typing the phone with spaces and the code in lower case, and forgets it (674ms)
+  ✓   43 [phone] › src/features/signIn/OwnerView.e2e.ts:132:1 › shows the check while the session answer is on its way (151ms)
+  ✓   47 [phone] › src/features/signIn/OwnerView.e2e.ts:144:1 › disables the button while signing in (280ms)
+  ✓   46 [phone] › src/features/appointments/CancelView.e2e.ts:343:1 › Back empties the fields (295ms)
+  ✓   48 [phone] › src/features/signIn/OwnerView.e2e.ts:155:1 › says the server cannot be reached when the session check fails (236ms)
+  ✓   45 [phone] › src/features/appointments/BookingView.e2e.ts:203:1 › a day with no time left shows the days with the message (588ms)
+  ✓   38 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:240:1 › Save hours stores the week, closes the editor, and shows it again in order of start (1.7s)
+  ✓   49 [phone] › src/features/appointments/CancelView.e2e.ts:357:1 › a wrong code says no appointment matches, above the form, keeping what was typed (363ms)
+  ✓   44 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:183:1 › refuses a bad or taken name in the row, which stays open (850ms)
+  ✓   50 [phone] › src/features/signIn/OwnerView.e2e.ts:166:1 › says the server cannot be reached when sign-in fails (281ms)
+  ✓   51 [phone] › src/features/appointments/BookingView.e2e.ts:228:1 › a professional removed meanwhile reloads the list with the message (497ms)
+  ✓   53 [phone] › src/features/appointments/CancelView.e2e.ts:374:1 › blank fields and a code that cannot be one say no appointment matches (449ms)
+  ✓   55 [phone] › src/features/signIn/OwnerView.e2e.ts:181:1 › says the server cannot be reached when sign-out fails (425ms)
+  ✓   52 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:262:1 › accepts back-to-back periods (661ms)
+  ✓   54 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:209:1 › accepts the professional's own name in another case (537ms)
+  ✓   56 [phone] › src/features/appointments/BookingView.e2e.ts:247:1 › a professional with no hours shows no free times (281ms)
+  ✓   57 [phone] › src/features/appointments/CancelView.e2e.ts:388:1 › an appointment under 24 hours away is refused by the typed form, and shows no Cancel when remembered (546ms)
+  ✓   59 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:227:1 › Cancel returns the row to its name, unchanged (542ms)
+  ✓   58 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:278:1 › saving a week with no period is accepted (712ms)
+  ✓   60 [phone] › src/features/appointments/BookingView.e2e.ts:260:1 › says the appointment cannot be cancelled when it starts in less than 24 hours (672ms)
+  ✓   61 [phone] › src/features/appointments/CancelView.e2e.ts:414:1 › a failed typed cancellation keeps what was typed, and Try again cancels (534ms)
+  ✓   65 [phone] › src/features/appointments/BookingView.e2e.ts:289:1 › shows No professionals yet with none (205ms)
+  ✓   62 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:63:1 › shows the heading, the list, the Name field and Add under Sign out (424ms)
+  ✓   66 [phone] › src/features/appointments/BookingView.e2e.ts:299:1 › shows Loading until the professionals and the days answer (312ms)
+  ✓   63 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:244:1 › opens one row at a time (699ms)
+  ✓   67 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:75:1 › says so when there is no professional (318ms)
+  ✓   64 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:297:1 › refuses an empty, off-step or backwards period beside it, keeping what was typed (817ms)
+  ✓   68 [phone] › src/features/appointments/BookingView.e2e.ts:321:1 › says the server cannot be reached, and Try again repeats the request (372ms)
+  ✓   70 [desktop] › src/features/signIn/OwnerView.e2e.ts:38:1 › shows the sign-in form when signed out (196ms)
+  ✓   69 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:273:1 › asks before removing; Keep returns the row unchanged (472ms)
+  ✓   71 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:85:1 › adds a trimmed name in its place and empties the field (470ms)
+  ✓   74 [desktop] › src/features/signIn/OwnerView.e2e.ts:44:1 › signs in with the right email and password (337ms)
+  ✓   72 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:328:1 › refuses a period shorter than the appointment length (652ms)
+  ✓   73 [phone] › src/features/appointments/BookingView.e2e.ts:339:1 › a failed booking keeps what was typed, and Try again books (580ms)
+  ✓   77 [desktop] › src/features/signIn/OwnerView.e2e.ts:52:1 › matches the email in any case and with surrounding spaces (299ms)
+  ✓   75 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:295:1 › removes a professional, for good, and its name can be added again (772ms)
+  ✓   76 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:101:1 › lists alphabetically ignoring case, and keeps the list on reload (683ms)
+  ✓   79 [phone] › src/features/appointments/BookingView.e2e.ts:363:1 › disables Book and Back while a booking is in flight (407ms)
+  ✓   80 [desktop] › src/features/signIn/OwnerView.e2e.ts:62:1 › refuses a wrong password and keeps the email typed (289ms)
+  ✓   78 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:346:1 › refuses overlapping periods beside the later one (603ms)
+  ✓   84 [desktop] › src/features/signIn/OwnerView.e2e.ts:71:1 › refuses a wrong email with the same message (305ms)
+  ✓   83 [phone] › src/features/appointments/BookingView.e2e.ts:380:1 › professional, day and time buttons are full width and at least 44px tall (409ms)
+  ✓   82 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:127:1 › refuses a blank name or one over 80 characters, keeping what was typed (480ms)
+  ✓   81 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:333:1 › renaming one removed in another tab says so and reloads the list (752ms)
+  ✓   86 [desktop] › src/features/signIn/OwnerView.e2e.ts:80:1 › stays signed in after a reload (359ms)
+  ✓   85 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:363:1 › shows a message beside the first refused period only (665ms)
+  ✓   87 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:145:1 › refuses a name another professional has, in any case and with spaces (449ms)
+  ✓   89 [desktop] › src/features/signIn/OwnerView.e2e.ts:90:1 › signs out, and the old cookie no longer opens a session (488ms)
+  ✓   88 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:356:1 › removing one removed in another tab says so and reloads the list (750ms)
+  ✓   90 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:380:1 › Cancel closes the editor and discards every change (682ms)
+  ✓   93 [desktop] › src/features/signIn/OwnerView.e2e.ts:111:1 › shows the form for a session older than 30 days (341ms)
+  ✓   92 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:161:1 › renames a professional into its new place (643ms)
+  ✓   91 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:150:1 › shows Hours between Rename and Remove, and the week under the name, Monday first (647ms)
+  ✓   96 [desktop] › src/features/signIn/OwnerView.e2e.ts:132:1 › shows the check while the session answer is on its way (181ms)
+  ✓   99 [desktop] › src/features/signIn/OwnerView.e2e.ts:144:1 › disables the button while signing in (199ms)
+  ✓   95 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:403:1 › saving the hours of one removed meanwhile says so and reloads the list (614ms)
+  ✓  100 [desktop] › src/features/signIn/OwnerView.e2e.ts:155:1 › says the server cannot be reached when the session check fails (188ms)
+  ✓   94 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:385:1 › after the session ended, add, rename and remove change nothing (798ms)
+  ✓   98 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:180:1 › opens one row at a time, in hours, rename or remove mode (707ms)
+  ✓   97 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:183:1 › refuses a bad or taken name in the row, which stays open (839ms)
+  ✓  102 [desktop] › src/features/signIn/OwnerView.e2e.ts:166:1 › says the server cannot be reached when sign-in fails (271ms)
+  ✓  101 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:422:1 › opening the hours of one removed meanwhile says so and reloads the list (482ms)
+  ✓  103 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:422:1 › shows the loading line until the list answers (444ms)
+  ✓  106 [desktop] › src/features/signIn/OwnerView.e2e.ts:181:1 › says the server cannot be reached when sign-out fails (420ms)
+  ✓  104 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:204:1 › Add period adds 09:00 to 17:00 at the end of the day, Remove period takes it out, nothing stored (615ms)
+  ✓  105 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:209:1 › accepts the professional's own name in another case (546ms)
+  ✓  108 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:434:1 › disables the buttons while an add is in flight (455ms)
+  ✓  107 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:435:1 › after the session ended, saving and opening say so and change nothing (646ms)
+  ✓  110 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:227:1 › Cancel returns the row to its name, unchanged (487ms)
+  ✓  111 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:449:1 › disables Save and Cancel while a rename is in flight (447ms)
+  ✓  112 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:470:1 › shows the loading line until the hours answer (387ms)
+  ✓  114 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:467:1 › disables Remove and Keep while a removal is in flight (418ms)
+  ✓  113 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:244:1 › opens one row at a time (536ms)
+  ✓  115 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:483:1 › disables every button of the editor while a save is in flight (470ms)
+  ✓  109 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:240:1 › Save hours stores the week, closes the editor, and shows it again in order of start (1.3s)
+  ✓  116 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:486:1 › says the server cannot be reached when the list fails (296ms)
+  ✓  117 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:273:1 › asks before removing; Keep returns the row unchanged (482ms)
+  ✓  118 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:503:1 › says the server cannot be reached with Cancel only when the hours cannot be read (419ms)
+  ✓  119 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:262:1 › accepts back-to-back periods (555ms)
+  ✓  120 [phone] › src/features/professionals/ProfessionalsView.e2e.ts:499:1 › keeps the list and what was typed when a change cannot reach the server (735ms)
+  ✓  122 [phone] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:521:1 › says the server cannot be reached at the top when a save fails, keeping what was typed (639ms)
+  ✓  121 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:295:1 › removes a professional, for good, and its name can be added again (749ms)
+  ✓  123 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:278:1 › saving a week with no period is accepted (559ms)
+  ✓  124 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:333:1 › renaming one removed in another tab says so and reloads the list (653ms)
+  ✓  125 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:297:1 › refuses an empty, off-step or backwards period beside it, keeping what was typed (636ms)
+  ✓  127 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:328:1 › refuses a period shorter than the appointment length (505ms)
+  ✓  126 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:356:1 › removing one removed in another tab says so and reloads the list (655ms)
+  ✓  128 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:346:1 › refuses overlapping periods beside the later one (469ms)
+  ✓  129 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:385:1 › after the session ended, add, rename and remove change nothing (682ms)
+  ✓  131 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:422:1 › shows the loading line until the list answers (268ms)
+  ✓  130 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:363:1 › shows a message beside the first refused period only (549ms)
+  ✓  132 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:434:1 › disables the buttons while an add is in flight (399ms)
+  ✓  133 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:380:1 › Cancel closes the editor and discards every change (525ms)
+  ✓  134 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:449:1 › disables Save and Cancel while a rename is in flight (416ms)
+  ✓  135 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:403:1 › saving the hours of one removed meanwhile says so and reloads the list (509ms)
+  ✓  136 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:467:1 › disables Remove and Keep while a removal is in flight (435ms)
+  ✓  137 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:422:1 › opening the hours of one removed meanwhile says so and reloads the list (376ms)
+  ✓  138 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:486:1 › says the server cannot be reached when the list fails (266ms)
+  ✓  139 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:435:1 › after the session ended, saving and opening say so and change nothing (551ms)
+  ✓  140 [desktop] › src/features/professionals/ProfessionalsView.e2e.ts:499:1 › keeps the list and what was typed when a change cannot reach the server (687ms)
+  ✓  141 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:470:1 › shows the loading line until the hours answer (345ms)
+  ✓  142 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:483:1 › disables every button of the editor while a save is in flight (412ms)
+  ✓  143 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:503:1 › says the server cannot be reached with Cancel only when the hours cannot be read (396ms)
+  ✓  144 [desktop] › src/features/weeklyHours/WeeklyHoursView.e2e.ts:521:1 › says the server cannot be reached at the top when a save fails, keeping what was typed (500ms)
+
+  144 passed (21.0s)
+
+> build
+> vite build
+
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 52 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  0.39 kB │ gzip:  0.28 kB
+dist/assets/index-vHZaMuEx.js  252.86 kB │ gzip: 77.76 kB
+
+✓ built in 54ms

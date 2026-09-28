@@ -1,0 +1,19 @@
+[tool Edit] docs/03-Domain.md
+
+[tool Edit] work/clinic-setup.md
+
+[tool Edit] work/clinic-setup.md
+
+[tool Edit] work/clinic-setup.md
+
+[tool Edit] work/clinic-setup.md
+
+[tool Bash] grep -rn "EmptyClinicName" docs work AGENTS.md; grep -n "—" work/clinic-setup.md docs/03-Domain.md docs/06-Queue.md; echo done
+
+I made all three corrections. The old name `EmptyClinicName` no longer appears anywhere in the docs or the page, and there are no em dashes in the files I touched.
+
+1. **Rename.** `EmptyClinicName` is now `InvalidClinicName`, with the term "Invalid name", in docs/03 and in both places on the page: the Behaviour list and the `checkClinicName` signature.
+2. **Same time for both refusals.** A new Contract paragraph under the password hash says sign-in always runs exactly one scrypt check. When the email isn't the owner's, or the clinic isn't set up yet, the password is checked against a fixed hash kept in `password.server.ts`. That hash is made once from a random password when the server starts, and is never stored. The answer is `401 SignInRefused` whatever that check returns. Making the hash at start is my choice: nobody can know its password, so the check can never succeed by accident. The route-test item in Done when now also checks that an unknown email runs the password check once, against the fixed hash.
+3. **Expired session through the route.** The same route-test item adds your case: a session row whose `expires_at` is in the past gets `401 NotSignedIn` from `GET /api/owner/session`, and the row is gone afterwards.
+
+Read the page again with these changes, and ask for anything else here. When it's right, open a fresh session and type `/apply clinic-setup`.

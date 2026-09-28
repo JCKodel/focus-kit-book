@@ -1,0 +1,327 @@
+I'll start by reading the page and the required documents.
+
+[tool Bash] cat work/book-appointment.md && echo ---- && cat docs/05*.md && echo ---- && git diff && git branch -a && git worktree list
+
+[tool Bash] cat docs/01*.md docs/02*.md docs/03*.md docs/04*.md && ls docs/adr && cat docs/adr/*0005* && cat docs/00*.md | sed -n '1,200p'
+
+[tool Read] <host folder of the clinic>/tool-results/bvkkuuuzn.txt
+
+Now the existing code.
+
+[tool Bash] git ls-files | grep -v '^docs\|^work' && cat package.json && ls src/features/*
+
+[tool Bash] cd src && for f in features/weeklyHours/{rules.ts,repository.server.ts,route.server.ts,api.ts,useWeeklyHours.ts,strings.ts,route.server.test.ts,repository.server.test.ts} lib/*.ts server/{database.server.ts,main.server.ts,testDatabase.server.ts,e2eClinic.server.ts,migrate.server.test.ts} server/migrations/*.sql app/main.tsx; do echo "=== $f"; cat $f; done
+
+[tool Bash] cd src && for f in features/weeklyHours/rules.ts features/weeklyHours/repository.server.ts features/weeklyHours/route.server.ts features/weeklyHours/api.ts features/weeklyHours/useWeeklyHours.ts features/weeklyHours/strings.ts lib/result.ts lib/name.ts lib/id.ts lib/request.ts server/database.server.ts server/main.server.ts server/testDatabase.server.ts app/main.tsx; do echo "=== $f"; cat "$f"; done
+
+I'll use the Read tool for files instead.
+
+[tool Read] src/features/weeklyHours/rules.ts
+
+[tool Read] src/features/weeklyHours/repository.server.ts
+
+[tool Read] src/features/weeklyHours/route.server.ts
+
+[tool Read] src/features/weeklyHours/api.ts
+
+[tool Read] src/features/weeklyHours/useWeeklyHours.ts
+
+[tool Read] src/lib/request.ts
+
+[tool Read] src/lib/name.ts
+
+[tool Read] src/lib/id.ts
+
+[tool Read] src/lib/result.ts
+
+[tool Read] src/server/database.server.ts
+
+[tool Read] src/server/main.server.ts
+
+[tool Read] src/app/main.tsx
+
+[tool Read] src/features/professionals/repository.server.ts
+
+[tool Read] src/features/professionals/api.ts
+
+[tool Read] src/features/clinic/repository.server.ts
+
+[tool Read] src/features/clinic/ClinicView.tsx
+
+[tool Read] src/features/clinic/api.ts
+
+[tool Read] src/features/weeklyHours/route.server.test.ts
+
+[tool Read] src/server/testDatabase.server.ts
+
+[tool Read] src/server/migrate.server.test.ts
+
+[tool Read] src/features/weeklyHours/WeeklyHoursView.e2e.ts
+
+[tool Read] src/server/e2eClinic.server.ts
+
+[tool Read] playwright.config.ts
+
+[tool Read] src/features/professionals/ProfessionalsView.tsx
+
+[tool Read] index.html
+
+[tool Read] src/features/professionals/route.server.ts
+
+[tool Read] src/features/professionals/rules.ts
+
+[tool Read] src/features/professionals/useProfessionals.ts
+
+[tool Read] src/features/professionals/strings.ts
+
+[tool Read] src/features/weeklyHours/repository.server.test.ts
+
+[tool Bash] ls work work/done && cat work/done/weekly-hours.md | tail -80 && cat src/features/clinic/useClinic.ts src/features/clinic/strings.ts src/features/clinic/ClinicView.e2e.ts src/features/health/HealthView.tsx biome.json tsconfig.json vite.config.ts
+
+[tool Bash] grep -n '^\*\*\|^## \|^# ' work/done/weekly-hours.md work/done/e2e-database-busy.md && sed -n '/Done when/,/^\*\*Built/p' work/done/weekly-hours.md | head -60
+
+[tool Read] work/done/e2e-database-busy.md
+
+[tool Read] src/features/weeklyHours/WeeklyHoursView.tsx
+
+[tool Bash] grep -rn "screenshot" src playwright.config.ts work/done/professionals.md work/done/clinic-setup.md
+
+I've read the page and the docs, and I've studied the `weeklyHours` slice to use as the pattern. I'm starting on the code now, beginning with the migration and the pure rules.
+
+[tool Write] src/server/migrations/0004-appointment.sql
+
+[tool Write] src/features/appointments/clinicTime.ts
+
+[tool Edit] src/features/appointments/clinicTime.ts
+
+Now the use cases.
+
+[tool Write] src/features/appointments/rules.ts
+
+[tool Edit] src/features/appointments/rules.ts
+
+[tool Write] src/features/appointments/repository.server.ts
+
+Now the route.
+
+[tool Write] src/features/appointments/route.server.ts
+
+[tool Edit] src/server/main.server.ts
+
+[tool Edit] src/server/main.server.ts
+
+[tool Edit] src/lib/name.ts
+
+Server side done. Now the client pieces: `api.ts`, `remembered.ts`, `strings.ts`.
+
+[tool Write] src/features/appointments/api.ts
+
+[tool Write] src/features/appointments/remembered.ts
+
+[tool Edit] src/features/appointments/remembered.ts
+
+[tool Write] src/features/appointments/strings.ts
+
+Now the orchestrator hook.
+
+[tool Write] src/features/appointments/useBooking.ts
+
+[tool Write] src/features/appointments/useRemembered.ts
+
+[tool Write] src/features/appointments/RememberedView.tsx
+
+Now the booking view.
+
+[tool Write] src/features/appointments/BookingView.tsx
+
+[tool Edit] src/app/main.tsx
+
+[tool Edit] src/app/main.tsx
+
+Let me typecheck and lint before writing tests.
+
+[tool Bash] npm run typecheck 2>&1 | tail -30 && npx biome check --write src/features/appointments src/app src/server src/lib 2>&1 | tail -30
+
+Typecheck and lint pass. Now the Vitest tests: rules and clinic time first.
+
+[tool Write] src/features/appointments/rules.test.ts
+
+[tool Write] src/features/appointments/clinicTime.test.ts
+
+[tool Bash] npx vitest run src/features/appointments 2>&1 | tail -40
+
+All 34 pass. Now the repository, route, migration and remembered tests.
+
+[tool Write] src/features/appointments/repository.server.test.ts
+
+[tool Edit] src/server/migrate.server.test.ts
+
+[tool Write] src/features/appointments/route.server.test.ts
+
+[tool Write] src/features/appointments/remembered.test.ts
+
+[tool Bash] npm run typecheck 2>&1 | tail -20 && npx biome check --write src 2>&1 | tail -20 && npx vitest run 2>&1 | tail -30
+
+All 214 Vitest tests pass. Now the Playwright file.
+
+[tool Write] src/features/appointments/BookingView.e2e.ts
+
+[tool Edit] src/features/appointments/BookingView.e2e.ts
+
+[tool Edit] src/features/appointments/BookingView.e2e.ts
+
+[tool Edit] src/features/appointments/BookingView.e2e.ts
+
+[tool Edit] src/features/appointments/BookingView.e2e.ts
+
+[tool Bash] npx biome check --write src 2>&1 | tail -5 && npm run typecheck 2>&1 | tail -10 && npx playwright test src/features/appointments src/features/clinic 2>&1 | tail -60
+
+[tool Read] src/features/appointments/BookingView.e2e.ts
+
+[tool Edit] src/features/appointments/BookingView.e2e.ts
+
+[tool Edit] src/features/appointments/BookingView.e2e.ts
+
+[tool Edit] src/features/appointments/BookingView.e2e.ts
+
+[tool Bash] npx biome check --write src 2>&1 | tail -3 && npm run typecheck 2>&1 | tail -5 && npx playwright test src/features/appointments --repeat-each=3 2>&1 | tail -30
+
+All 48 pass (16 tests × 3). Running the full `npm run verify`.
+
+[tool Bash] npm run verify 2>&1 | grep -v '✓' | tail -40
+
+Verify is green: 214 Vitest, 131 Playwright (16 new), build OK. Now the screenshot proof with a one-off Playwright file on a fresh database, following the precedent of earlier deliveries.
+
+[tool Write] src/features/appointments/screenshots.e2e.ts
+
+[tool Bash] npx playwright test src/features/appointments/screenshots.e2e.ts --project phone 2>&1 | tail -8; rm src/features/appointments/screenshots.e2e.ts; ls work/done | grep book-appointment
+
+[tool Read] work/done/book-appointment-professionals-390x844.png
+
+[tool Read] work/done/book-appointment-days-390x844.png
+
+[tool Read] work/done/book-appointment-times-390x844.png
+
+[tool Read] work/done/book-appointment-form-under-24-hours-390x844.png
+
+[tool Read] work/done/book-appointment-booked-390x844.png
+
+[tool Read] work/done/book-appointment-remembered-390x844.png
+
+[tool Read] src/features/appointments/BookingView.tsx
+
+[tool Edit] src/features/appointments/BookingView.tsx
+
+[tool Edit] src/features/appointments/BookingView.tsx
+
+[tool Read] src/features/appointments/BookingView.tsx
+
+[tool Edit] src/features/appointments/BookingView.tsx
+
+[tool Edit] src/features/appointments/BookingView.tsx
+
+[tool Edit] src/features/appointments/strings.ts
+
+I'll add a check to the list test that "Back" sits above the days, then retake the screenshots.
+
+[tool Edit] src/features/appointments/BookingView.e2e.ts
+
+[tool Bash] git stash list | head -1; git show HEAD:work/done/weekly-hours.md > /dev/null; ls <host folder of the clinic>/ | head -3
+
+Now retaking the screenshots with the same one-off file.
+
+[tool Write] src/features/appointments/screenshots.e2e.ts
+
+[tool Bash] npx playwright test src/features/appointments/screenshots.e2e.ts --project phone 2>&1 | tail -4; rm src/features/appointments/screenshots.e2e.ts
+
+[tool Read] work/done/book-appointment-days-390x844.png
+
+[tool Read] work/done/book-appointment-remembered-390x844.png
+
+[tool Read] work/done/book-appointment-times-390x844.png
+
+Both fixes show in the new screenshots. The 09:30 button looks slightly darker only because the mouse was still hovering over it after the click. Running verify again after the view change.
+
+[tool Bash] npm run verify 2>&1 | grep -v '✓' | grep -E 'passed|failed|Error|error|built|Tests|✘' | head -20
+
+[tool Bash] npm run verify > /tmp/verify.log 2>&1; echo "exit $?"; tail -5 /tmp/verify.log; npx vitest run src/features/appointments src/lib src/server 2>&1 | grep -E 'Tests|Test Files'; npx vitest run src/features/appointments 2>&1 | grep -E 'Tests'
+
+[tool Bash] npm run verify 2>&1 | tail -8
+
+[tool Bash] npx vitest run src/features/appointments 2>&1 | tail -5
+
+Verify is green: 214 Vitest (58 new), 131 Playwright (16 new), build OK. Now the documents: docs/02, docs/03 and docs/01.
+
+[tool Edit] docs/02-Backend.md
+
+[tool Edit] docs/02-Backend.md
+
+[tool Read] docs/03-Domain.md
+
+[tool Edit] docs/03-Domain.md
+
+[tool Edit] docs/03-Domain.md
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Edit] docs/01-Architecture.md
+
+Checking for em dashes in everything this delivery touched.
+
+[tool Bash] grep -rn "—" src/features/appointments docs work/book-appointment.md src/app src/lib/name.ts
+
+No em dashes. Now I'll write "What happened" into the page and tick "Done when".
+
+[tool Read] work/book-appointment.md
+
+[tool Bash] git mv -f work/book-appointment.md work/done/book-appointment.md 2>&1 || mv work/book-appointment.md work/done/book-appointment.md
+
+The page is untracked, so a plain `mv` does the job.
+
+[tool Bash] mv work/book-appointment.md work/done/book-appointment.md
+
+[tool Read] work/done/book-appointment.md
+
+[tool Edit] work/done/book-appointment.md
+
+[tool Edit] work/done/book-appointment.md
+
+[tool Edit] docs/06-Queue.md
+
+Staging everything.
+
+[tool Bash] git add -A && git status --short
+
+`book-appointment` is built and staged, not committed. `npm run verify` passes: typecheck, lint, 214 Vitest tests (58 new), 131 Playwright tests (16 new, phone only) and the build.
+
+**What a client can do now:** on the home page they pick a professional, then a day, then a time. They type a name and a phone number and book. The screen shows a 6-character booking code, and "Your appointments" keeps the booking after a reload. A time taken in the meantime shows "This time is no longer free. Pick another." with the times reloaded. A professional removed in the meantime reloads the list with "This professional is no longer available." The server checks everything again, and a partial unique index stops two bookings of the same slot.
+
+**Changes from the page** (each one is written up in `work/done/book-appointment.md`):
+- **Extra file `useRemembered.ts`:** the page didn't list it. "Your appointments" needs a hook, because a view may not read storage. The list also updates the moment you book, not only after a reload.
+- **"Back" moved above the days and times:** in the first screenshots it sat under 30 day buttons, out of reach on a phone.
+- **"Code" and the code kept together:** a no-break space stops them splitting across lines in "Your appointments".
+- **Day and time labels:** `strings.ts` builds "Tue 29 Sep" itself. `Intl`'s en-GB output depends on the ICU version; newer ones write "Sept".
+- **Extra test file `remembered.test.ts`:** dropping past appointments is a rule, so it gets a test.
+
+**Not done:** I left the last "Done when" item unticked: booking by hand in `npm run dev`. This session can't keep a server running, so that check is yours at review. Playwright already runs the same path against the real server.
+
+**Proof:** six screenshots at 390×844 are in `work/done/book-appointment-*.png`. They came from a one-off Playwright file, deleted after the run, as in earlier deliveries.
+
+**Docs:** docs/02 has the table, the index, the booking code, both routes and the check order. docs/03 has the wall-time rules and the order of `book`'s checks. docs/01 says only `remembered.ts` touches local storage and that `lib/name.ts` now also checks client names. docs/06 is marked `[x]`. No ADR was needed.
+
+A few shell commands were refused because this session can't answer permission prompts. I used simpler commands or the file tools instead, and nothing was skipped.
+
+**Suggested commit message:**
+```
+Let a client book a free slot and keep the booking code
+
+- appointment table with a partial unique index on booked slots
+- freeSlots and book use cases in clinic wall time, DST-safe
+- GET /api/professionals/:id/slots and POST /api/appointments
+- booking screens on the home page, "Your appointments" in local storage
+- docs/01, 02, 03 and the queue updated
+
+See work/done/book-appointment.md
+```
+
+**Environments:** local only; the app has no production environment until the `deploy` delivery. The local code is ready to start but not running. To update and start it, run `npm run dev`; the new `0004-appointment.sql` migration applies when it starts.

@@ -1,0 +1,240 @@
+[tool Bash] cat work/professionals.md && cat docs/01*.md docs/04*.md docs/05*.md && git diff && ls docs docs/adr work work/done 2>/dev/null && git branch -a
+
+[tool Bash] cat docs/02*.md && find src -type f | sort && cat package.json playwright.config.* vite.config.* 2>/dev/null
+
+[tool Bash] for f in src/features/signIn/*.ts* src/features/clinic/rules.ts src/features/clinic/rules.test.ts src/features/clinic/repository.server.ts src/features/clinic/repository.server.test.ts src/features/clinic/route.server.ts src/lib/*.ts src/server/database.server.ts src/server/session.server.ts src/server/main.server.ts src/server/testDatabase.server.ts src/server/e2eClinic.server.ts src/app/main.tsx; do echo "=== $f"; cat "$f"; done
+
+[tool Read] src/features/signIn/OwnerView.tsx
+
+[tool Read] src/features/signIn/useOwner.ts
+
+[tool Read] src/features/signIn/api.ts
+
+[tool Read] src/features/signIn/route.server.ts
+
+[tool Read] src/features/signIn/route.server.test.ts
+
+[tool Read] src/features/signIn/OwnerView.e2e.ts
+
+[tool Read] src/features/signIn/strings.ts
+
+[tool Read] src/features/clinic/rules.ts
+
+[tool Read] src/features/clinic/repository.server.ts
+
+[tool Read] src/features/clinic/repository.server.test.ts
+
+[tool Read] src/lib/request.ts
+
+[tool Read] src/lib/result.ts
+
+[tool Read] src/server/database.server.ts
+
+[tool Read] src/server/session.server.ts
+
+[tool Read] src/server/main.server.ts
+
+[tool Read] src/server/testDatabase.server.ts
+
+[tool Read] src/server/e2eClinic.server.ts
+
+[tool Read] src/features/signIn/repository.server.ts
+
+[tool Read] src/app/main.tsx
+
+[tool Read] src/lib/email.ts
+
+[tool Read] src/lib/email.test.ts
+
+[tool Read] src/features/clinic/route.server.ts
+
+[tool Read] src/features/clinic/ClinicView.e2e.ts
+
+[tool Read] work/done/clinic-setup.md
+
+[tool Read] src/server/migrations/0001-clinic.sql
+
+[tool Read] src/features/clinic/rules.test.ts
+
+Read the page and docs; now writing the code: migration, `lib/name.ts`, the professionals slice, then tests.
+
+[tool Bash] cat index.html; cat biome.json; ls; git status --short
+
+Migration and shared name check:
+
+[tool Write] src/server/migrations/0002-professional.sql
+
+[tool Write] src/lib/name.ts
+
+[tool Write] src/lib/name.test.ts
+
+[tool Edit] src/features/clinic/rules.ts
+
+[tool Edit] src/features/clinic/rules.ts
+
+Now the professionals rules and repository:
+
+[tool Write] src/features/professionals/rules.ts
+
+[tool Write] src/features/professionals/rules.test.ts
+
+[tool Write] src/features/professionals/repository.server.ts
+
+[tool Write] src/features/professionals/repository.server.test.ts
+
+Now the route and its tests:
+
+[tool Write] src/features/professionals/route.server.ts
+
+[tool Write] src/features/professionals/route.server.test.ts
+
+[tool Edit] src/server/main.server.ts
+
+[tool Edit] src/server/main.server.ts
+
+[tool Edit] src/server/session.server.ts
+
+[tool Bash] npx vitest run 2>&1 | tail -30
+
+[tool Read] src/server/migrate.server.test.ts
+
+[tool Edit] src/server/migrate.server.test.ts
+
+Server side green except that expected-list update. Now the client: api, hook, strings, view.
+
+[tool Write] src/features/professionals/api.ts
+
+[tool Write] src/features/professionals/useProfessionals.ts
+
+[tool Write] src/features/professionals/strings.ts
+
+[tool Write] src/features/professionals/ProfessionalsView.tsx
+
+[tool Edit] src/features/signIn/OwnerView.tsx
+
+[tool Edit] src/features/signIn/OwnerView.tsx
+
+[tool Bash] npx biome check --write src >/dev/null 2>&1; npm run typecheck 2>&1 | tail -20; npx biome check . 2>&1 | tail -30; npx vitest run 2>&1 | tail -6
+
+Unit tests, types and lint pass. Now the Playwright tests; the sign-in helper gets its second use, so it moves to the shared e2e fixture.
+
+[tool Edit] src/server/e2eClinic.server.ts
+
+[tool Edit] src/server/e2eClinic.server.ts
+
+[tool Edit] src/features/signIn/OwnerView.e2e.ts
+
+[tool Edit] playwright.config.ts
+
+[tool Write] src/features/professionals/ProfessionalsView.e2e.ts
+
+[tool Bash] f=src/features/professionals/ProfessionalsView.e2e.ts && sed -i '' -e 's/addAndWaitInAnotherTab/addThroughApi/g' -e 's/message_/refusal/g' $f && npx biome check --write src >/dev/null 2>&1; npx biome check . 2>&1 | tail -20 && npm run typecheck 2>&1 | tail -5
+
+Shell editing was blocked; I'll do the renames with the editor instead.
+
+[tool Edit] src/features/professionals/ProfessionalsView.e2e.ts
+
+[tool Edit] src/features/professionals/ProfessionalsView.e2e.ts
+
+[tool Bash] npx biome check --write src 2>&1 | tail -20
+
+[tool Bash] npm run typecheck 2>&1 | tail -10
+
+[tool Bash] npx playwright test --reporter=line 2>&1 | tail -60
+
+All 79 Playwright tests pass at both widths. Now the proof screenshots, with a one-off Playwright file on an emptied table.
+
+[tool Write] src/features/professionals/shots.e2e.ts
+
+[tool Bash] npx playwright test src/features/professionals/shots.e2e.ts --project phone --reporter=line 2>&1 | tail -15
+
+[tool Read] work/done/professionals-list-390x844.png
+
+[tool Read] work/done/professionals-rename-390x844.png
+
+[tool Read] work/done/professionals-remove-390x844.png
+
+[tool Read] work/done/professionals-list-1280x800.png
+
+[tool Read] work/done/professionals-empty-390x844.png
+
+Screenshots match the page: `system-ui`, 16px sides, name field 320px at both widths, rows wrap on the phone. Removing the one-off file and running the full verify.
+
+[tool Bash] rm src/features/professionals/shots.e2e.ts && npm run verify 2>&1 | grep -E "passed|failed|error|Error|Checked|built|✓" | tail -20
+
+[tool Bash] npm run verify > /tmp/verify.log 2>&1; echo "exit $?"; grep -E "Tests |Test Files|Checked" /tmp/verify.log
+
+[tool Bash] npx vitest run 2>&1 | tail -5
+
+Verify is green (typecheck, lint, 119 Vitest, 79 Playwright, build). Now the documents.
+
+[tool Edit] docs/02-Backend.md
+
+[tool Edit] docs/02-Backend.md
+
+[tool Edit] docs/02-Backend.md
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Read] docs/04-Conventions.md
+
+[tool Edit] docs/04-Conventions.md
+
+[tool Read] docs/04-Conventions.md
+
+[tool Edit] docs/04-Conventions.md
+
+Now the page: record what happened, tick the list, move it to `work/done/`.
+
+[tool Bash] git mv -f work/professionals.md work/done/professionals.md 2>/dev/null || mv work/professionals.md work/done/professionals.md; ls work work/done
+
+[tool Bash] mv work/professionals.md work/done/professionals.md
+
+[tool Read] work/done/professionals.md
+
+[tool Edit] work/done/professionals.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] work/done/professionals.md
+
+[tool Bash] grep -rn "—" src docs work/done/professionals.md playwright.config.ts
+
+[tool Bash] npx biome check . 2>&1 | tail -3
+
+[tool Bash] git add -A
+
+[tool Bash] git status --short
+
+The `professionals` delivery is built and staged. I have not committed. `npm run verify` is green: typecheck, lint, 119 Vitest, 79 Playwright and the build.
+
+**What works now.** The signed-in owner screen shows a "Professionals" section under "Sign out". The owner can add, rename and remove professionals. The list is alphabetical, ignoring case. All the refusals, loading, busy and error messages on the page are covered, and there is a message when the professional was removed in another tab or the session has ended. The server enforces every rule, and removing a professional keeps its row.
+
+**Changes the page didn't list:**
+- The Playwright sign-in helper was used a second time, so it moved to `src/server/e2eClinic.server.ts`, and `OwnerView.e2e.ts` now imports it.
+- The desktop (1280×800) Playwright run now includes `ProfessionalsView.e2e.ts` too.
+- All Playwright tests share one database. Each test tags its professionals' names with a random suffix, and the empty list is tested with a mocked empty answer. docs/04 now says so.
+- While any add, rename or remove is in progress, every button in the section is disabled, not just that action's buttons.
+- The rename field has no visible label; screen readers announce it as "New name for <name>".
+
+**Proof.** The five screenshots are in `work/done/`. They match the page: the Name field is 320px wide at both sizes, and on a phone the row buttons wrap below the field or question. Nothing needed fixing.
+
+**Docs.** docs/01, 02 and 04 are updated; the new terms were already in docs/03 before this session. The page is in `work/done/professionals.md` with what happened, and docs/06 is marked `[x]`. I ticked every "Done when" item except the manual check, which is yours.
+
+A few shell commands were blocked by permissions: moving the page with `git mv`, one extra `npm run verify` run to read its exit code, and a batch file rename with `sed`. I moved the page with plain `mv` and made the renames in the editor. `git add -A` stages the move correctly.
+
+Suggested commit message:
+
+```
+Let the owner add, rename and remove professionals
+
+- Migration 0002-professional.sql; removal keeps the row with removed_at
+- Public GET /api/professionals and three owner routes behind requireSession
+- Name check moved to src/lib/name.ts, shared with the clinic name
+- Professionals section on the owner screen, tested at 390 and 1280 wide
+- Playwright sign-in helper moved to e2eClinic.server.ts
+
+work/done/professionals.md
+```
+
+**Environments.** Local has this delivery staged but not run by me. Production doesn't exist yet; the `deploy` delivery creates it. To update local and do the manual check, run `npm run dev`. The new migration applies at start. Then sign in at `http://localhost:5173/owner`, add, rename and remove a professional, and reload to check the list is kept.

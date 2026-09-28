@@ -1,0 +1,38 @@
+[tool Bash] ls docs work 2>/dev/null; cat docs/05*.md docs/06*.md; ls work; grep -rn -i "busy\|e2e\|playwright\|SQLITE_BUSY\|WAL" --include=*.md --include=*.ts --include=*.json . 2>/dev/null | grep -v node_modules | head -60
+
+[tool Bash] ls work/done docs/adr; cat playwright.config.* package.json; ls e2e tests 2>/dev/null; git ls-files | grep -v '^\.claude\|^node_modules' | head -100
+
+[tool Bash] git ls-files src | tail -n +60; cat src/server/e2eClinic.server.ts; ls src/server; cat src/server/db*.ts src/server/database*.ts 2>/dev/null; grep -rn "DatabaseSync\|e2eDatabasePath\|busy\|journal" src | grep -v "^src/.*\.md"
+
+[tool Bash] cat src/server/database.server.ts src/server/start.server.ts; sed -n 100,160p src/features/signIn/OwnerView.e2e.ts; grep -n -i -B2 -A8 "busy\|e2e\|flak" work/done/*.md | head -80
+
+[tool Bash] grep -n -i -B2 -A6 "sqlite\|journal\|backup\|concurren" docs/01-Architecture.md docs/02-Backend.md docs/04-Conventions.md docs/adr/ADR-0001-stack.md | head -120; ls src/**/*.e2e.ts; grep -c "^test(" src/features/*/*.e2e.ts; node --version
+
+I've read the docs, the `weekly-hours` post-mortem and the database code. Before I write the page I need your decision on a few points.
+
+**What's going on.** The test "shows the form for a session older than 30 days" in `OwnerView.e2e.ts` opens its own SQLite connection to the shared e2e database and runs an `UPDATE`. The server's connection is opened in `openDatabase` (`src/server/database.server.ts:18`) without a busy timeout. So when a server write and that test's write overlap, one of them gets `SQLITE_BUSY` straight away, and the owner sees "The server cannot be reached". It was measured at about 1 failure in 300 tests.
+
+The `weekly-hours` page named two fixes. Only one of them works. "The test goes through the API" would need a route that ages a session. That's a test-only door into production code, and the server checks expiry against its own clock, so the browser can't fake it. That leaves the busy timeout. It also helps outside the tests: the setup command, the queued `owner-password` command and a backup copy can all touch the file while the server is running.
+
+**Questions (my recommendation first in each):**
+
+1. **Where the timeout lives.** I recommend setting it in `openDatabase`, so every connection waits: the server, setup, and future commands. The e2e test would then open its connection through `openDatabase` too, instead of `new DatabaseSync` directly. Setting it only on the test's connection isn't enough, because the server's write can still hit the test's lock.
+
+2. **How long to wait.** I recommend 5000 ms. `node:sqlite` is synchronous, so a waiting request blocks the server for up to that long. For one clinic's traffic that's harmless, and a real wait lasts milliseconds.
+
+3. **`BEGIN IMMEDIATE` in `transaction()`.** I recommend yes. A transaction that starts with `BEGIN` and only later writes can still fail with `SQLITE_BUSY` without waiting at all, because SQLite skips the wait there to avoid a deadlock. `BEGIN IMMEDIATE` takes the write lock up front, so the timeout applies. It's a one-word change in the same file.
+
+4. **WAL journal mode (lets reads and writes run at the same time).** I recommend leaving it out of this delivery. It adds `-wal` and `-shm` files next to the database, which breaks docs/01's "backup is a copy". That decision belongs to `deploy`.
+
+5. **Proof.**
+   - A Vitest test that a connection from `openDatabase` reports `PRAGMA busy_timeout` = 5000.
+   - A Vitest test with two connections to a temporary file, where the second connection's write waits for the first connection's transaction and then succeeds. It runs in a worker thread, because a synchronous wait can't be released from the same thread.
+   - As Done when: `npx playwright test --repeat-each=10` (about 900 tests, where today we'd expect about 3 failures) passes with no `SQLITE_BUSY`.
+
+   If the worker-thread test looks like more machinery than it's worth, the fallback is the PRAGMA check plus the repeated run.
+
+**Docs the delivery would update:** docs/02 §Start (the timeout and `BEGIN IMMEDIATE`) and docs/04 (a test that writes to the e2e database opens it through `openDatabase`).
+
+Contract: none. No schema, API or data shape changes.
+
+The project is on trunk (docs/05), so the page goes in `work/` on `main`. Once you've answered, I'll write `work/e2e-database-busy.md` and mark the line `[>]` in docs/06.
