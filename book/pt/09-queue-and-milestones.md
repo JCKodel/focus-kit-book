@@ -32,7 +32,7 @@ O `/propose` troca `[ ]` por `[>]` quando escreve a página (capítulo 10).
 O `/apply` troca `[>]` por `[x]` quando move a página para `work/done/` (capítulo 11).
 Uma linha nunca sai da fila; ela muda de marca, então a fila é também o histórico do que foi entregue.[^focus-kit-documents]
 
-Com trunk, um branch ou uma worktree, a página e a construção entram no mesmo commit, então o `[>]` vive na árvore de trabalho entre os dois comandos.
+No trunk, a página e a construção entram em um commit, então o `[>]` espera na árvore de trabalho entre os dois comandos; em um branch, a página pode ser commitada nele, e a entrega chega ao branch principal em um merge.[^focus-kit-unit-of-work]
 É assim que uma sessão nova que roda o `/apply` sabe que a página existe; a Parte IV ensina o lado do git.
 
 ## Marcos
@@ -123,3 +123,4 @@ O que mais precisou mudar, e o agente mudou?
 [^focus-kit-brainstorm]: J.C. Ködel, "focus-kit", `SETUP.md` §3.1, o arquivo do `/brainstorm`, item 6 da conversa dele, no commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/focus-kit/blob/26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b/SETUP.md
 [^ninjobs-queue]: Ninjobs, repositório privado, o docs/06 dele na última mudança, 2026-09-22, contado pelo autor: linhas com `wc -l`, entregas como as linhas dentro dos blocos de código que começam com uma marca, continuações como as outras linhas não vazias dentro deles.
 [^book-two-choices]: J.C. Ködel, "One Page at a Time", commit 59b5e10fb59bde04b2cd444b38efe50414733446, "As duas escolhas" do capítulo 6. https://github.com/JCKodel/focus-kit-book/commit/59b5e10fb59bde04b2cd444b38efe50414733446
+[^focus-kit-unit-of-work]: J.C. Ködel, "focus-kit", `SETUP.md` §Choices, as respostas de git, no commit e7607c58ad38e70e3496518a58d4237612e21ebc: a página e a construção de uma entrega são uma mudança que se desfaz em um passo. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md

@@ -115,7 +115,7 @@ O docs/01 registra a resposta, e um ADR registra o porquê.
 A Parte III ensina o FOCUS.
 
 A estratégia de git é uma estratégia, não uma bala de prata: cada uma das suas três respostas serve a um jeito de trabalhar.[^focus-kit-git]
-Em todas, a página que o `/propose` escreve e a construção que o `/apply` faz entram no mesmo commit, e o agente nunca faz commit nem merge.
+Em todas, a página que o `/propose` escreve e a construção que o `/apply` faz são uma unidade de trabalho, que se desfaz em um passo: um commit no trunk, um merge do branch nas outras; e o agente nunca faz commit nem merge.[^focus-kit-unit-of-work]
 O trunk põe tudo no branch principal, uma entrega de cada vez, e é só para uma pessoa trabalhando sozinha: com duas, as entregas delas dividem um branch, e um commit leva o trabalho pela metade da outra.
 Um branch por entrega faz o `/propose` criar um branch com o nome do slug e escrever a página nele, e o `/apply` construir nele; a pessoa faz o merge por um pull request, um pedido de merge de um branch que alguém revisa antes, então ele serve ao trabalho sequencial revisado desse jeito.
 Uma worktree por entrega dá a cada entrega uma segunda pasta de trabalho no seu próprio branch, criada pelo `/propose`, para que vários agentes construam entregas diferentes ao mesmo tempo sem que um branch mexa no outro.
@@ -246,3 +246,4 @@ Guarde-as, para comparar com o briefing da clínica para o `/brainstorm` no cap�
 [^focus-kit-git]: J.C. Ködel, "focus-kit", `SETUP.md` §Choices, as respostas de git, e §3.3, o arquivo do `/propose`, em `main`, acesso em 2026-09-28. https://github.com/JCKodel/focus-kit/blob/main/SETUP.md
 [^book-adr-0016]: J.C. Ködel, "One Page at a Time", o ADR-0016 deste livro, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, de 2026-09-28, na pasta de ADRs em `main`. https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr
 [^book-docs-context]: J.C. Ködel, "One Page at a Time", commit 297af60dedb088bad441555c8bc019a60ce4e612, que corrigiu o capítulo 3 e acrescentou "Context before an excerpt" ao docs/04, https://github.com/JCKodel/focus-kit-book/commit/297af60dedb088bad441555c8bc019a60ce4e612; e a página do capítulo 5, que a cita. https://github.com/JCKodel/focus-kit-book/blob/6c2713b63af7397ee00142497287b8408a5651b1/work/done/install-and-hosts.md
+[^focus-kit-unit-of-work]: J.C. Ködel, "focus-kit", `SETUP.md` §Choices, as respostas de git, no commit e7607c58ad38e70e3496518a58d4237612e21ebc: a página e a construção de uma entrega são uma mudança que se desfaz em um passo. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md

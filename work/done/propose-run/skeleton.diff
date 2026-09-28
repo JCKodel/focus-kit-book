@@ -1,0 +1,136 @@
+--- a/work/skeleton.md
++++ b/work/skeleton.md
+@@ -11,17 +11,15 @@
+ * While the answer is on its way, the page shows "Checking the server".
+ * When the server does not answer, or answers with an error, the page shows
+   "Server: unreachable" instead of a blank page or a crash.
+-* At start, the server creates the SQLite file if it is missing, applies
+-  every migration not applied yet, in file name order, and records each one.
++* At start, the server creates the `data/` folder and the SQLite file if they
++  are missing, applies every migration not applied yet, in file name order,
++  and records each one.
+ * Starting the server a second time applies no migration.
+ * A migration that fails is not recorded, leaves the database as it was
+-  before that file, and stops the start with a message naming the file.
++  before that file, and stops the start with exit code 1 and a message
++  naming the file.
+ * `npm run verify` runs typecheck, lint, the Vitest tests, the Playwright
+   tests and the build, and ends with exit code 0.
+-* `npm run verify` fails when a file that is not server code imports a
+-  `*.server.ts` file (ADR-0002).
+-* The page carries a web manifest, so a phone browser offers "Add to home
+-  screen" with the name "Clinic" and the app's icon.
+ 
+ **Contract.**
+ 
+@@ -32,8 +30,8 @@
+ 200  { "status": "ok" }
+ ```
+ 
+-Table, created by the migration runner itself before it reads
+-`src/server/migrations/`, not by a migration file:
++Table, created by the migration runner itself before it reads the folder,
++not by a migration file:
+ 
+ ```sql
+ CREATE TABLE IF NOT EXISTS schema_migration (
+@@ -42,10 +40,27 @@
+ );
+ ```
+ 
+-Migrations: files `src/server/migrations/NNNN-<name>.sql`, four digits, applied
+-in file name order, each in its own transaction together with its
+-`schema_migration` row. This delivery ships the folder empty.
++Migrations: files `NNNN-<name>.sql`, four digits, applied in file name order,
++each in its own transaction together with its `schema_migration` row. Files
++not matching the pattern are ignored. The real folder is
++`src/server/migrations/`; this delivery ships it empty.
+ 
++Migration runner, `src/server/migrate.server.ts`. It takes the folder as a
++parameter, so tests pass a temporary folder of fixture files and the server
++start passes `src/server/migrations/`:
++
++```ts
++function migrate(db: DatabaseSync, folder: string): Result<string[], MigrationFailed>
++// ok: the file names applied in this call, in order; [] when none
++
++type MigrationFailed = { code: "MigrationFailed"; file: string; message: string }
++// file: the file name that failed; message: the SQLite error text
++```
++
++`Result`, in `src/lib/result.ts`, as docs/01 defines it. First use: the
++health `api.ts`; second use: `migrate`. That second use is why it moves to
++`lib/` in this delivery.
++
+ Environment variables of the server:
+ 
+ | Name | Default | Meaning |
+@@ -55,9 +70,6 @@
+ 
+ In development, Vite serves the client and forwards `/api/*` to the server.
+ 
+-Web manifest: `name` "Clinic", `short_name` "Clinic", `start_url` "/",
+-`display` "standalone", icons 192×192 and 512×512 PNG.
+-
+ Node: `engines` `>=24`.
+ 
+ **States.**
+@@ -67,32 +79,46 @@
+ * Error: "Server: unreachable".
+ * Offline: same as error; there is no service worker.
+ 
+-**Visual reference.** No design file. Plain, clean default styling. One
+-client screen at phone width (390×844).
++**Visual reference.** No design file. One client screen at phone width
++(390×844). Plain, clean default styling, which here means the `system-ui`
++font, 16px padding on each side, the heading and the status line
++left-aligned, and no colours beyond the browser defaults. The proof is a
++screenshot you look at, not a pixel baseline.
+ 
+ **Out of scope.**
+ 
++* Web manifest, icons and "Add to home screen": the name and the icon
++  belong to the clinic, which exists only after `clinic-setup`; it gets its
++  own delivery, `install`.
+ * Service worker and offline use: booking needs the network; its own
+   delivery if ever wanted.
++* An automatic check that client code does not import `*.server.ts`: no
++  such import has happened yet (docs/05 §7). The rule lives in docs/01 and
++  ADR-0002 until one does.
++* A `toHaveScreenshot` pixel baseline: without a design file it would only
++  freeze whatever was built, and it breaks with the machine's fonts.
+ * The server serving the built client in one process: `deploy` needs it,
+   `deploy` builds it.
+ * The clinic's real name in the heading: it exists only after
+   `clinic-setup`.
+ * Any business table, sign-in or session: `clinic-setup`.
+-* `src/lib/result.ts`: `Result` lives in the health slice until a second
+-  feature uses it (docs/01); `clinic-setup` is expected to be that second
+-  use.
+ * CI: one developer, one machine; `npm run verify` is the gate.
+ 
+ **Done when.**
+ 
+-* [ ] Repository tests of the migration runner pass against a temporary
+-      SQLite file: applies in order, records, skips applied ones, rolls back
+-      and names a failing file.
+-* [ ] Playwright tests of the three page states pass at 390×844, the "ok"
+-      state with a `toHaveScreenshot` baseline committed next to the test.
+-* [ ] `npm run verify` is green, and fails on a deliberate client import of
+-      a `*.server.ts` file (checked once, then removed).
++* [ ] Vitest tests of `migrate` pass, each against an in-memory SQLite and
++      a temporary folder of fixture `.sql` files: applies in file name
++      order, records each file, skips applied ones, ignores files not
++      matching the pattern, and on a failing file rolls it back, leaves it
++      unrecorded and returns `MigrationFailed` naming it.
++* [ ] One Vitest test, against a temporary directory, shows the server's
++      database opening creates the missing folder and SQLite file.
++* [ ] `migrate` against the real `src/server/migrations/` returns `[]`.
++* [ ] Playwright tests of the three page states pass at 390×844, asserting
++      the texts of Behaviour.
++* [ ] A screenshot of the "ok" state at 390×844 is saved once, as proof,
++      to `work/done/skeleton-390x844.png`; it is not part of `npm run verify`.
++* [ ] `npm run verify` is green.
+ * [ ] `npm run dev` leaves client and server running locally, with the
+       SQLite file created.
+ * [ ] docs/02 lists `GET /api/health` and `schema_migration`; docs/01 and

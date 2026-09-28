@@ -1,0 +1,33 @@
+[tool Write] work/skeleton.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Bash] grep -n "—" work/skeleton.md docs/06-Queue.md; git status --short
+
+I wrote the page at `work/skeleton.md` and changed `skeleton` from `[ ]` to `[>]` in docs/06. I staged and committed nothing, and there's no branch because the project works on `main` (ADR-0003).
+
+**What I chose and why:**
+
+1. **First screen: a page that asks the server `GET /api/health` and shows "Server: ok".** The first screenshot then proves both halves of the app work together, not just the client. It also gives the page real loading and error states ("Checking the server", "Server: unreachable") that Playwright can test. The heading says "Clinic" because the clinic's name only exists after `clinic-setup`.
+2. **The database and migration runner go in `skeleton`, not `clinic-setup`.** `clinic-setup` is already the heaviest delivery in milestone 1: setup command, owner, sessions, password hashing and sign-in screens. The runner needs one small table of its own, `schema_migration`, which is exact on the page. Each migration runs in its own transaction, so a failed one leaves nothing behind and the server stops with the file's name.
+3. **A web manifest and icons, no service worker.** Phones can add the app to the home screen, which is what "PWA" means in docs/01. Booking needs the network anyway, and a service worker would bring cache bugs with nothing gained today.
+4. **The screenshot is a Playwright check inside `npm run verify`,** with the reference image committed next to the test. "Screenshot matches" in Done when then becomes something a machine checks. The only cost is that a second machine or a CI server would need its own reference image.
+
+**Smaller calls:**
+- **Commands:** `npm run dev` starts the client and the server together.
+- **Serving the built client from one process:** left to `deploy`.
+- **Settings:** `PORT` defaults to 3000, and `DATABASE_PATH` to `data/clinic.sqlite`, with `data/` kept out of git.
+- **Node:** version 24 or later.
+- **`Result` type:** stays inside the health feature until a second feature needs it (docs/01).
+
+**One addition you didn't ask for:** `npm run verify` fails when client code imports a `*.server.ts` file. ADR-0002 forbids that import, and without a check the rule relies on memory alone.
+
+**Before `/apply`, read the page and question it:**
+- Can each Behaviour line be checked, as a test or by hand?
+- Is the Contract exact? The `schema_migration` columns and the `NNNN-<name>.sql` file naming are the parts that would cost a migration to change later.
+- Does Out of scope name something you assumed was in, such as offline use or serving the built app from one process?
+- Do you disagree with any of the choices above?
+
+Ask for every correction here, in this conversation. When the page is right, open a fresh session and type `/apply skeleton`.
+
+Still open from before: docs/06 lists `absences` for milestone 2, but docs/00 never mentions absences. It needs a decision in docs/00 before anyone proposes that delivery.

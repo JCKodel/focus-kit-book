@@ -1,0 +1,21 @@
+You are currently using your subscription to power your Claude Code usage
+
+Current session: 30% used · resets Sep 28 at 2:09pm (America/Sao_Paulo)
+Current week (all models): 4% used · resets Oct 3 at 5:59pm (America/Sao_Paulo)
+Current week (Fable): 0% used · resets Oct 3 at 6pm (America/Sao_Paulo)
+
+What's contributing to your limits usage?
+Approximate, based on local sessions on this machine — does not include other devices or claude.ai. Behaviors are independent characteristics, not a breakdown.
+
+Last 24h · 837 requests · 25 sessions
+  35% of your usage was at >150k context
+  26% of your usage was while 4+ sessions ran in parallel
+  Top skills: /apply 32%, /propose 16%, /claude-in-chrome 5%, /artifact-design 1%, /analyze 1%
+  Top MCP servers: claude-in-chrome 7%, plugin:context-mode:context-mode 1%
+
+Last 7d · 9379 requests · 242 sessions
+  48% of your usage was at >150k context
+  13% of your usage was while 4+ sessions ran in parallel
+  Top skills: /apply 47%, /propose 14%, /pptx 2%, /analyze 1%, /claude-in-chrome 1%
+  Top subagents: brainstorm 1%
+  Top MCP servers: claude-in-chrome 15%, plugin:context-mode:context-mode 6%

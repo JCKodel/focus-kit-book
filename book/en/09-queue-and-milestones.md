@@ -32,7 +32,7 @@ A line has one of three marks:[^focus-kit-documents]
 `/apply` turns `[>]` into `[x]` when it moves the page to `work/done/` (chapter 11).
 A line never leaves the queue; it changes mark, so the queue is also the history of what was delivered.[^focus-kit-documents]
 
-With trunk, a branch or a worktree, the page and the build land in the same commit, so `[>]` lives in the working tree between the two commands.
+On trunk the page and the build land in one commit, so `[>]` waits in the working tree between the two commands; on a branch the page may be committed there, and the delivery reaches the main branch in one merge.[^focus-kit-unit-of-work]
 It is how a fresh session running `/apply` knows the page exists; Part IV teaches the git side.
 
 ## Milestones
@@ -122,3 +122,4 @@ What else had to change, and did the agent change it?
 [^focus-kit-brainstorm]: J.C. Ködel, "focus-kit", `SETUP.md` §3.1, the file of `/brainstorm`, item 6 of its conversation, at commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/focus-kit/blob/26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b/SETUP.md
 [^ninjobs-queue]: Ninjobs, a private repository, its docs/06 at its last change, 2026-09-22, counted by the author: lines with `wc -l`, deliveries as the lines inside the code blocks that start with a mark, continuations as the other non-empty lines inside them.
 [^book-two-choices]: J.C. Ködel, "One Page at a Time", commit 59b5e10fb59bde04b2cd444b38efe50414733446, chapter 6's "The two choices". https://github.com/JCKodel/focus-kit-book/commit/59b5e10fb59bde04b2cd444b38efe50414733446
+[^focus-kit-unit-of-work]: J.C. Ködel, "focus-kit", `SETUP.md` §Choices, the git answers, at commit e7607c58ad38e70e3496518a58d4237612e21ebc: a delivery's page and build are one change that reverts in one step. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md

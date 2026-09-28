@@ -1,0 +1,20 @@
+diff --git a/docs/06-Queue.md b/docs/06-Queue.md
+index d1d6436..959d231 100644
+--- a/docs/06-Queue.md
++++ b/docs/06-Queue.md
+@@ -9,7 +9,7 @@ When it closes, the owner can register professionals and their weekly hours,
+ a client can book a free slot, and a client can cancel up to 24 hours before.
+ 
+ ```
+-[ ] skeleton             empty PWA and server in one project, npm run verify, first screenshot
++[>] skeleton             empty PWA and server in one project, npm run verify, first screenshot
+ [ ] clinic-setup         a setup command creates the clinic and the owner; the owner signs in and out
+ [ ] professionals        the owner registers, renames and removes professionals
+ [ ] weekly-hours         the owner sets each professional's weekly hours
+@@ -26,5 +26,6 @@ runs outside the developer's machine with no paid service.
+ ```
+ [ ] absences             the owner records a professional's absences, and their slots disappear
+ [ ] owner-schedule       the owner sees the day's appointments per professional
++[ ] install              web manifest with the clinic's name and icon, so a phone offers "Add to home screen"
+ [ ] deploy               the app runs on a clinic machine or a free host, with a backup of the data
+ ```

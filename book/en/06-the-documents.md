@@ -113,7 +113,7 @@ docs/01 records the answer, and an ADR records why.
 Part III teaches FOCUS.
 
 The git strategy is a strategy, not a silver bullet: its three answers each fit one way of working.[^focus-kit-git]
-In every one, the page `/propose` writes and the build `/apply` makes land in the same commit, and the agent never commits or merges.
+In every one, the page `/propose` writes and the build `/apply` makes are one unit of work, which reverts in one step: one commit on trunk, one merge of the branch otherwise; and the agent never commits or merges.[^focus-kit-unit-of-work]
 Trunk puts everything on the main branch, one delivery at a time, and is only for one person working alone: with two, their deliveries share one branch, and one commit carries the other's half-done work.
 A branch per delivery has `/propose` create a branch named after the slug and write the page there, and `/apply` build on it; the person merges it through a pull request, a request to merge a branch that someone reviews first, so it fits sequential work reviewed that way.
 A worktree per delivery gives each delivery a second working folder on its own branch, created by `/propose`, so several agents build different deliveries at the same time and one branch does not touch another.
@@ -244,3 +244,4 @@ Keep them, to compare with the clinic's brief to `/brainstorm` in chapter 7.
 [^focus-kit-git]: J.C. Ködel, "focus-kit", `SETUP.md` §Choices, the git answers, and §3.3, the file of `/propose`, on `main`, accessed 2026-09-28. https://github.com/JCKodel/focus-kit/blob/main/SETUP.md
 [^book-adr-0016]: J.C. Ködel, "One Page at a Time", this book's ADR-0016, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, dated 2026-09-28, in the ADR folder on `main`. https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr
 [^book-docs-context]: J.C. Ködel, "One Page at a Time", commit 297af60dedb088bad441555c8bc019a60ce4e612, which fixed chapter 3 and added "Context before an excerpt" to docs/04, https://github.com/JCKodel/focus-kit-book/commit/297af60dedb088bad441555c8bc019a60ce4e612; and chapter 5's page, which cites it. https://github.com/JCKodel/focus-kit-book/blob/6c2713b63af7397ee00142497287b8408a5651b1/work/done/install-and-hosts.md
+[^focus-kit-unit-of-work]: J.C. Ködel, "focus-kit", `SETUP.md` §Choices, the git answers, at commit e7607c58ad38e70e3496518a58d4237612e21ebc: a delivery's page and build are one change that reverts in one step. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md

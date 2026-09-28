@@ -1,0 +1,39 @@
+[tool Bash] ls -R docs work 2>/dev/null; ls
+
+[tool Read] docs/00-Product.md
+
+[tool Read] docs/01-Architecture.md
+
+[tool Read] docs/02-Backend.md
+
+[tool Read] docs/03-Domain.md
+
+[tool Read] docs/04-Conventions.md
+
+[tool Read] docs/05-Process.md
+
+[tool Read] docs/06-Queue.md
+
+[tool Bash] cat docs/adr/*.md; ls -la; cat README.md; ls work/done; node --version; git log --stat -3 | head -60
+
+I've read docs/00 to 06, the ADRs and `work/` (only `done/`, which is empty). Git is trunk (ADR-0003), so the page will go on `main` with no branch.
+
+**My read of `skeleton`:** this delivery adds no business rule. It builds the frame every later delivery relies on: one TypeScript project with a Vite React client and a Hono server, Biome, Vitest, Playwright, `npm run verify` and a local run command. It also creates the empty `src/features/`, `src/app/`, `src/server/` and `src/lib/` layout from docs/01, and saves the first screenshot at 390×844. The risk is scope creep: anything that belongs to `clinic-setup` (tables, sign-in) or to a later offline story shouldn't slip in here. The docs leave four points open that change the page.
+
+**1. What does the first screen show?** I recommend a single client page that fetches `GET /api/health` and shows "Server: ok", or a clear message if the server can't be reached. The screenshot then proves the whole path: client, proxy, server, JSON and the `Result` error path. The heading would be a neutral "Clinic", because the clinic's name doesn't exist until `clinic-setup`. The simpler option is a static page with no server call, but then nothing tests the server half until `clinic-setup`.
+
+**2. Where do the database and the migration runner go?** I recommend putting them in `skeleton`: it opens the SQLite file through `node:sqlite` and applies the SQL files in `src/server/migrations/` in order at startup, with a repository test. That means one exact contract item, a bookkeeping table `schema_migration (name TEXT PRIMARY KEY, applied_at TEXT NOT NULL)`, and no business table. `clinic-setup` is already the heaviest line in milestone 1 (setup command, owner, sessions, scrypt, sign-in screens), so moving this out makes it lighter. The other option is to leave all of it to `clinic-setup`, which creates the first real table.
+
+**3. How much PWA?** I recommend a web manifest and one icon, and no service worker. Booking needs the network anyway, and a service worker brings cache bugs with no product benefit today. Offline behaviour would be its own delivery if you ever want it. The other option is a full service worker now, using `vite-plugin-pwa`.
+
+**4. What counts as screenshot proof?** I recommend a Playwright `toHaveScreenshot` assertion whose baseline PNG is committed next to the test and runs inside `npm run verify`. "Screenshot matches" then becomes a mechanical check, which is what "Done when" asks for. The downside is that baselines depend on the machine's fonts; that is fine for one developer and would matter only if CI arrived. The other option is to save the PNGs as proof files without checking them against a baseline.
+
+**Choices I'd make on my own unless you object:**
+- **Node:** version 24 or later declared in `engines` (you have 26).
+- **Commands:** `npm run dev` runs Vite and the server together, with Vite forwarding `/api` to the server. Having the server serve the built client in one process is left to `deploy`.
+- **`lib/result.ts`:** not created yet. It moves to `lib/` on its second use, as docs/01 says, so the health slice would keep its `Result` locally.
+- **SQLite file:** `data/clinic.sqlite`, with `data/` in `.gitignore`.
+
+**Separate from `skeleton`, noticed in passing:** docs/06 milestone 2 includes `absences`, but docs/00 says nothing about absences (not in Mechanics, Rules or Open decisions), and docs/03 has no term for them. Before `/propose absences`, docs/00 needs a line on it. I'm not changing it now.
+
+Answer 1 to 4 (a plain "yes" takes all my recommendations) and I'll write `work/skeleton.md` and mark the line `[>]` in docs/06.
