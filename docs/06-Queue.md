@@ -46,7 +46,8 @@ When this milestone closes, a reader can install the kit, document a new or an e
 [x] queue-and-milestones   Chapter 9: the queue, the marks, milestones and their paragraphs
 [x] propose                Chapter 10: /propose, one page, reading it before /apply, and splitting what does not fit
 [x] apply                  Chapter 11: /apply, verify, proof, documents, stage, never commit
-[ ] closing-a-milestone    Chapter 12: the whole-milestone review, findings become queue lines
+[>] clinic-milestone-1     the guided project's milestone 1 built line by line with /propose and /apply, each page and staged change reviewed and committed by the author, recorded; no chapter
+[ ] closing-a-milestone    Chapter 12: the whole-milestone review of the clinic's milestone 1 with /code-review, findings become queue lines; Ninjobs' milestone review as the counter-example
 [ ] the-governor           Chapter 13: which concrete error would it have caught, and what the process does not have
 ```
 
@@ -73,11 +74,11 @@ When this milestone closes, a reader can choose between trunk, a branch per deli
 
 ## M6. Part V, Beyond code
 
-When this milestone closes, a reader can adapt the process to a team's tools, including GitHub issues and a Projects board kept in step by the kit, ask the project questions as they would ask a colleague, and use the method on work that is not software.
+When this milestone closes, a reader can adapt the process to a team's tools, including GitHub issues and a Projects board kept in step by the kit, ask the project questions as they would ask a colleague, from how it is going to who owes them an answer, and use the method on work that is not software.
 
 ```
 [ ] customizing            Chapter 21: extra marks, question deliveries, proof files, a board mirror (Case A), and the queue mirrored to GitHub issues and a Projects board, built and tagged in the guided project
-[ ] project-as-assistant   Chapter 22: what is pending, how is it going, who is away, answered from the documents
+[ ] project-as-assistant   Chapter 22: the documents as the whole project's memory, for engineering and product alike: what is pending, how is it going, how long each delivery took (queue plus git history), who is away; team and client conversations kept in a free notes folder, so "who owes me answers?" and "what must I ask, and whom?" are answered too (Case A, Case B)
 [ ] beyond-software        Chapter 23: analyses, proposals (Case B), codeless projects (Case A), client communication as a source of truth, data work (Ninjobs' database security rules as deliveries), and this book
 [ ] cost-and-where         Chapter 24: what coding agents cost, where they pay and where they do not, and how a team decides, with measured numbers
 [ ] adoption               Chapter 25: taking the method to a team and a company (Case B)
