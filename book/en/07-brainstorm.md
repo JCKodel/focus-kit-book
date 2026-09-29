@@ -6,7 +6,7 @@ You can also choose a stack by what the project needs and by how well the agent 
 ## What it asks
 
 `/brainstorm` is the command for a repository with no code yet.
-It talks one subject at a time, in this order, and moves on when it could write that document itself:[^focus-kit-brainstorm]
+It talks one subject at a time, in this order, and moves on when it could write that document itself, as its file, `brainstorm/SKILL.md`, says:
 
 1. The product (docs/00): what it is, for whom, what it is not, what a good decision looks like.
 2. The vocabulary (docs/03): the words the product cannot be described without, each with its name in code.
@@ -15,11 +15,11 @@ It talks one subject at a time, in this order, and moves on when it could write 
 5. The process slots (docs/05): the verify command, the environments, how a screen is proven, the publish policy.
 6. The first milestone (docs/06): its first deliveries, one line each, in order.
 
-It asks only what it cannot decide with a sensible default, and it states the default with the question.[^focus-kit-brainstorm]
+It asks only what it cannot decide with a sensible default, and it states the default with the question.
 So "your call" is always a valid answer: the agent keeps its default, and a person who cannot answer a question still gets a good document.
 What you do not know yet, such as a verify command before any code exists, it writes as "created by the first delivery".
 
-When the six subjects are covered, it writes docs/00 to 06, one ADR per decision a later session might undo, `AGENTS.md`, `CLAUDE.md` holding the line `@AGENTS.md`, and an empty `work/done/`.[^focus-kit-brainstorm]
+When the six subjects are covered, it writes docs/00 to 06, one ADR per decision a later session might undo, `AGENTS.md`, `CLAUDE.md` holding the line `@AGENTS.md`, and an empty `work/done/`.
 It writes no code, no configuration and no dependency file: the first delivery does that, with a page of its own.
 
 ## Choosing the stack
@@ -286,6 +286,5 @@ What did the conversation add that you did not write?
 
 Pick a stack for a project of your own by the three questions of this chapter, and say which question decided it.
 
-[^focus-kit-brainstorm]: J.C. Ködel, "focus-kit", the command `.claude/skills/brainstorm/SKILL.md` and `references/documents.md` §Choices, as installed in the guided project at the chapter tag `book-v1/install-and-hosts`, from commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/install-and-hosts/.claude/skills/brainstorm
-[^octoverse]: GitHub, "Octoverse: A new developer joins GitHub every second as AI leads TypeScript to #1", 2025, the latest report on 2026-09-28: monthly contributors on GitHub, August 2025. https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/
-[^brainstorm-run]: This book's `/brainstorm` run on the guided project, 2026-09-28, with Claude Code 2.1.283 and the model `claude-opus-5-5`, from `book-v1/install-and-hosts` to the chapter tag `book-v1/brainstorm`: the brief, the commands, every turn's output, each question and answer, and the fix. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/brainstorm-run/README.md
+[^octoverse]: GitHub, "Octoverse: A new developer joins GitHub every second as AI leads TypeScript to #1", 2025, the latest report on 2026-09-28: monthly contributors on GitHub, August 2025. <https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/>
+[^brainstorm-run]: This book's `/brainstorm` run on the guided project, 2026-09-28, with Claude Code 2.1.283 and the model `claude-opus-5-5`, from `book-v1/install-and-hosts` to the chapter tag `book-v1/brainstorm`: the brief, the commands, every turn's output, each question and answer, and the fix. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/brainstorm-run/README.md>

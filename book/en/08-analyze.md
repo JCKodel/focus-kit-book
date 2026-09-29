@@ -6,7 +6,7 @@ After this chapter you can run `/analyze` on a project that already exists, with
 
 `/analyze` is the command for a repository that already has something in it: code, documents, or both.
 It runs like `/brainstorm` ([chapter 7](07-brainstorm.md)): a fresh session, a default with every question, "your call" as a valid answer, and the same documents at the end.
-What differs is that it reads before it asks, and it reads this, in this order:[^focus-kit-analyze]
+What differs is that it reads before it asks, and its file, `analyze/SKILL.md`, has it read this, in this order:
 
 * the README and any documentation already there;
 * the manifests, such as `package.json`;
@@ -19,7 +19,7 @@ What differs is that it reads before it asks, and it reads this, in this order:[
 
 What the project does not have, it skips: on a project with no code there are no manifests, entry points or tests to read, and the documents describe what the files say.
 From that it infers the stack, how the code is organized, where the business rules live, how errors travel, the verify command and the environments.
-Then it asks one round, of four subjects only:[^focus-kit-analyze]
+Then it asks one round, of four subjects only:
 
 1. The documentation language. Default: the language of the README.
 2. The product's purpose and audience in your words, only when no README says it.
@@ -37,7 +37,7 @@ It shows the diff before it writes, and it changes no code.
 On code with no clear architecture the default for FOCUS is "neither", because the code does not do it, and FOCUS whole would mean rewriting it.
 There is a way between the two, which you give as your answer: the strangler fig, Martin Fowler's name for a gradual replacement of an old system, after a vine that grows around a tree until it stands on its own.[^strangler-fig]
 New code grows beside the old: every new feature is a vertical slice in FOCUS, every part a delivery changes moves into one, and the old code goes away one delivery at a time while the project keeps working.
-Answer the FOCUS question with that, for example "FOCUS whole, as a strangler fig: new features and every part a delivery touches become vertical slices; the rest stays until then.", and `/analyze` writes it into docs/01 and an ADR, so every later `/propose` and `/apply` follows it.[^focus-kit-analyze]
+Answer the FOCUS question with that, for example "FOCUS whole, as a strangler fig: new features and every part a delivery touches become vertical slices; the rest stays until then.", and `/analyze` writes it into docs/01 and an ADR, so every later `/propose` and `/apply` follows it.
 In the run on CLAHub the agent offered the same shape for the two principles alone: new work moves toward feature folders over time.[^analyze-run]
 Part III teaches FOCUS itself.
 
@@ -353,7 +353,6 @@ Which file proves each one?
 Run `/analyze` on a repository of your own.
 Which open questions did it record, and which of them would you have missed?
 
-[^focus-kit-analyze]: J.C. Ködel, "focus-kit", the command `.claude/skills/analyze/SKILL.md`, as installed in the brownfield project's fork at the chapter tag `book-v1-analyze`, from commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/clahub/blob/book-v1-analyze/.claude/skills/analyze/SKILL.md
-[^strangler-fig]: Martin Fowler, "Strangler Fig", 2024. https://martinfowler.com/bliki/StranglerFigApplication.html
-[^brownfield-research]: This book's research delivery for the brownfield project, 2026-09-25: the candidates, how each was measured, the choice, and CLAHub's TypeScript code lines (tests excluded) and passing tests at upstream commit 9d1e666e1d30f271aea9640393229a7cbfbd1b62. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/brownfield-research.md
-[^analyze-run]: This book's `/analyze` run on the brownfield project, 2026-09-28, with Claude Code 2.1.283 and the model `claude-opus-5-5`, from `book-v1` to the chapter tag `book-v1-analyze`: the install of the kit, the brief, the commands, every turn's output, the round and its answer, and the corrections. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/analyze-run/README.md
+[^strangler-fig]: Martin Fowler, "Strangler Fig", 2024. <https://martinfowler.com/bliki/StranglerFigApplication.html>
+[^brownfield-research]: This book's research delivery for the brownfield project, 2026-09-25: the candidates, how each was measured, the choice, and CLAHub's TypeScript code lines (tests excluded) and passing tests at upstream commit 9d1e666e1d30f271aea9640393229a7cbfbd1b62. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/brownfield-research.md>
+[^analyze-run]: This book's `/analyze` run on the brownfield project, 2026-09-28, with Claude Code 2.1.283 and the model `claude-opus-5-5`, from `book-v1` to the chapter tag `book-v1-analyze`: the install of the kit, the brief, the commands, every turn's output, the round and its answer, and the corrections. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/analyze-run/README.md>

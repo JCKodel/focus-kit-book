@@ -7,20 +7,20 @@ After this chapter you can say why, and which failure each rule of focus-kit ans
 
 Ninjobs started with OpenSpec.
 Every feature was a change with its proposal, specs, design and tasks, and every decision was written again in the project's documents and ADRs.
-Before a delivery counted as done, it had to pass 29 checks.[^ninjobs-adr-0022]
-In fifteen days that produced four screens.[^ninjobs-adr-0022]
+Before a delivery counted as done, it had to pass 29 checks.[^ninjobs]
+In fifteen days that produced four screens.[^ninjobs]
 
 ## What went wrong
 
 The process weighed more than the work it served.
 A decision lived in six places that could disagree: the documents, the specs, the changes, the ADRs, an outline and the code.
 Every delivery had to keep them in step, and each one could go stale on its own.
-The checks were costly to satisfy and cheap to bypass, and not one had ever failed on an error in the product.[^ninjobs-adr-0022]
+The checks were costly to satisfy and cheap to bypass, and not one had ever failed on an error in the product.[^ninjobs]
 A leaner OpenSpec would not have helped: the cost was the number of places, not the size of each file.
 
 ## Where it went
 
-On 2026-08-29 I restarted the project with a process small enough to hold in your head.[^ninjobs-adr-0022]
+On 2026-08-29 I restarted the project with a process small enough to hold in your head.[^ninjobs]
 
 * **One page per delivery.** What to build, and what stays out, fits on one page. If it does not fit, it is two deliveries.
 * **Deciding and doing in separate sessions.** `/propose` talks and writes the page; `/apply` builds it in a fresh session, with only the page and the documents.
@@ -29,11 +29,11 @@ On 2026-08-29 I restarted the project with a process small enough to hold in you
 * **The agent never commits.** It stages the work; the person reviews and commits.
 * **The governor.** Anything that wants to come back answers one question: which concrete error would it have caught?
 
-That process carried Ninjobs to its public opening on 2026-09-10.[^ninjobs-adr-0026]
+That process carried Ninjobs to its public opening on 2026-09-10.[^ninjobs]
 I then turned it into focus-kit, the kit this book teaches.
 
 One rule came later.
-When Ninjobs adopted the kit, its old `/apply` still described things the project had already changed in its documents.[^ninjobs-adr-0026]
+When Ninjobs adopted the kit, its old `/apply` still described things the project had already changed in its documents.[^ninjobs]
 So a command holds no fact of the project: every such fact lives in one place, docs/05, and the command reads it there.
 
 ## A lesson beyond the process
@@ -51,5 +51,4 @@ Choose a stack by the project's value and by how well the agent knows it; chapte
 * The governor asks every addition which concrete error it would have caught.
 * Choose a stack the agent knows.
 
-[^ninjobs-adr-0022]: Ninjobs, a private repository, counted by the author over its history up to 2026-08-29, when its ADR-0022 dropped OpenSpec: days with a commit and commits from `git log`, changes from the OpenSpec archive, lines with `wc -l` over every file under `openspec/`. The screens and the table are the ones that ADR lists. The causes, the rejected alternative and the decision are the ADR's own, paraphrased.
-[^ninjobs-adr-0026]: Ninjobs, a private repository, its ADR-0026, dated 2026-09-21: the date of the public opening and the adoption of focus-kit.
+[^ninjobs]: Ninjobs, a private repository, counted by the author over its history up to 2026-08-29, when its ADR-0022 dropped OpenSpec: days with a commit and commits from `git log`, changes from the OpenSpec archive, lines with `wc -l` over every file under `openspec/`. The screens and the table are the ones that ADR lists. The causes, the rejected alternative and the decision are the ADR's own, paraphrased. Its ADR-0026, dated 2026-09-21, gives the date of the public opening and the adoption of focus-kit.

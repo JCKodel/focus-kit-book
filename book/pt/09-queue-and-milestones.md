@@ -5,8 +5,8 @@ Você também consegue ordenar as linhas de um marco e acrescentar ou mudar uma 
 
 ## A linha
 
-O docs/06 guarda os marcos do projeto, cada um com um parágrafo que diz o que é verdade quando ele fecha, e sob cada um uma linha por entrega, em ordem.[^focus-kit-documents]
-Uma linha tem três partes, uma marca, um slug e o que a entrega dá, em uma linha:[^focus-kit-documents]
+Como o `references/documents.md` do kit o define, o docs/06 guarda os marcos do projeto, cada um com um parágrafo que diz o que é verdade quando ele fecha, e sob cada um uma linha por entrega, em ordem.
+Uma linha tem três partes, uma marca, um slug e o que a entrega dá, em uma linha:
 
 ```
 [ ] <slug>    <what it delivers, one line>
@@ -17,12 +17,12 @@ Ele dá nome à página da entrega, `work/<slug>.md`, e é o argumento dos coman
 Você já leu duas filas: a da clínica, que o `/brainstorm` escreveu no [capítulo 7](07-brainstorm.md), em [`book-v1/brainstorm`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/docs/06-Queue.md), e a do CLAHub, que o `/analyze` escreveu no [capítulo 8](08-analyze.md), em [`book-v1-analyze`](https://github.com/JCKodel/clahub/blob/book-v1-analyze/docs/06-Queue.md).
 
 O kit pede uma linha, e o raciocínio vai para a página.
-No Ninjobs eu deixei as linhas crescerem: a fila dele tinha 102 entregas em 1.711 linhas, 1.052 delas continuações de uma linha, decisões que pertenciam às páginas.[^ninjobs-queue]
+No Ninjobs eu deixei as linhas crescerem: a fila dele tinha 102 entregas em 1.711 linhas, 1.052 delas continuações de uma linha, decisões que pertenciam às páginas.[^ninjobs]
 Uma linha que cresce até virar um parágrafo é uma decisão no lugar errado: a página é onde a próxima sessão a procura.
 
 ## As marcas
 
-Uma linha tem uma de três marcas:[^focus-kit-documents]
+Uma linha tem uma de três marcas:
 
 * `[ ]` ainda não definida: a entrega tem uma linha e nenhuma página.
 * `[>]` definida: o `/propose` escreveu a página, `work/<slug>.md`.
@@ -30,9 +30,9 @@ Uma linha tem uma de três marcas:[^focus-kit-documents]
 
 O `/propose` troca `[ ]` por `[>]` quando escreve a página (capítulo 10).
 O `/apply` troca `[>]` por `[x]` quando move a página para `work/done/` (capítulo 11).
-Uma linha nunca sai da fila; ela muda de marca, então a fila é também o histórico do que foi entregue.[^focus-kit-documents]
+Uma linha nunca sai da fila; ela muda de marca, então a fila é também o histórico do que foi entregue.
 
-No trunk, a página e a construção entram em um commit, então o `[>]` espera na árvore de trabalho entre os dois comandos; em um branch, a página pode ser commitada nele, e a entrega chega ao branch principal em um merge.[^focus-kit-unit-of-work]
+No trunk, a página e a construção entram em um commit, então o `[>]` espera na árvore de trabalho entre os dois comandos; em um branch, a página pode ser commitada nele, e a entrega chega ao branch principal em um merge.
 É assim que uma sessão nova que roda o `/apply` sabe que a página existe; a Parte IV ensina o lado do git.
 
 ## Marcos
@@ -41,22 +41,22 @@ O parágrafo de um marco diz o que é verdade quando o marco fecha, em frases qu
 Ele é um teste, e não uma lista das linhas embaixo dele nem um tema: "o dono consegue cadastrar profissionais" dá para conferir, "profissionais" não.
 O parágrafo do marco 1 da clínica, citado no [capítulo 7](07-brainstorm.md), é o exemplo: cada frase é algo que o dono ou um cliente consegue fazer.
 
-Um marco tem de três a oito entregas, a regra do kit para o primeiro marco e um bom tamanho para qualquer um.[^focus-kit-brainstorm]
-As primeiras são o esqueleto em que as outras se apoiam; a primeira linha da clínica, `skeleton`, cria o `npm run verify`, que toda entrega seguinte roda.[^focus-kit-brainstorm]
+Um marco tem de três a oito entregas, a regra do `brainstorm/SKILL.md` do kit para o primeiro marco e um bom tamanho para qualquer um.
+As primeiras são o esqueleto em que as outras se apoiam; a primeira linha da clínica, `skeleton`, cria o `npm run verify`, que toda entrega seguinte roda.
 Depois, cada linha vem depois das linhas de que precisa: um cliente não consegue agendar antes de o dono definir os horários de um profissional.
 Fechar um marco, e revisar o conjunto, é o capítulo 12.
 
 ## Mudando a fila
 
-Nenhum comando é dono da fila.[^focus-kit-documents]
+Nenhum comando é dono da fila.
 Uma ideia nova vira uma linha conversando, em qualquer sessão: você conta ao agente, e ele escreve a linha no marco a que ela pertence, com um slug novo e `[ ]`.
 O parágrafo de um marco ou a descrição de uma linha mudam do mesmo jeito, e o slug fica, já que uma página ou um commit pode já usá-lo.
 Linhas vêm também da revisão de um marco (capítulo 12) e, num projeto existente, das issues dele (capítulo 8).
 Você revisa o diff, como em todo documento ([capítulo 6](06-the-documents.md)).
 
 A fila deste livro é um exemplo.
-Depois que os capítulos 7 e 8 ficaram prontos, pedi ao agente que definisse as duas escolhas do kit no capítulo 6, para que os dois capítulos pudessem apontar para elas.
-Este é o diff do docs/06 nesse commit.[^book-two-choices]
+Depois que os capítulos 7 e 8 ficaram prontos, pedi ao agente que definisse as [duas escolhas](06-the-documents.md#as-duas-escolhas) do kit no capítulo 6, para que os dois capítulos pudessem apontar para elas.
+Este é o diff do docs/06 nesse commit.
 Ele fica como está no repositório, em inglês: a linha nova diz "Capítulo 6 ganha 'As duas escolhas': FOCUS (quatro peças, inteiro / dois princípios / nenhum) e git (trunk / branch / worktree) em um parágrafo cada, para que os capítulos 7 e 8 apontem para elas; as Partes III e IV ainda as ensinam"; no marco 4, "erros como valores" vira "exceções como valores" no parágrafo e na linha `errors-and-slices`, e a linha `four-pieces` perde "(a lição do Ninjobs do capítulo 4)".
 
 ````diff
@@ -119,8 +119,4 @@ Confira o diff: uma linha, um slug novo, `[ ]`, e nenhum raciocínio na linha.
 Peça ao agente que mova `deploy` de volta para o marco 1, e então leia os parágrafos dos dois marcos.
 O que mais precisou mudar, e o agente mudou?
 
-[^focus-kit-documents]: J.C. Ködel, "focus-kit", `SETUP.md` §3.5, o arquivo `references/documents.md`, e §Choices, no commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/focus-kit/blob/26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b/SETUP.md
-[^focus-kit-brainstorm]: J.C. Ködel, "focus-kit", `SETUP.md` §3.1, o arquivo do `/brainstorm`, item 6 da conversa dele, no commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/focus-kit/blob/26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b/SETUP.md
-[^ninjobs-queue]: Ninjobs, repositório privado, o docs/06 dele na última mudança, 2026-09-22, contado pelo autor: linhas com `wc -l`, entregas como as linhas dentro dos blocos de código que começam com uma marca, continuações como as outras linhas não vazias dentro deles.
-[^book-two-choices]: J.C. Ködel, "One Page at a Time", commit 59b5e10fb59bde04b2cd444b38efe50414733446, "As duas escolhas" do capítulo 6. https://github.com/JCKodel/focus-kit-book/commit/59b5e10fb59bde04b2cd444b38efe50414733446
-[^focus-kit-unit-of-work]: J.C. Ködel, "focus-kit", `SETUP.md` §Choices, as respostas de git, no commit e7607c58ad38e70e3496518a58d4237612e21ebc: a página e a construção de uma entrega são uma mudança que se desfaz em um passo. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md
+[^ninjobs]: Ninjobs, repositório privado, o docs/06 dele na última mudança, 2026-09-22, contado pelo autor: linhas com `wc -l`, entregas como as linhas dentro dos blocos de código que começam com uma marca, continuações como as outras linhas não vazias dentro deles.

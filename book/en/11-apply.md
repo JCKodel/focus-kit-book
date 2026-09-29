@@ -5,37 +5,37 @@ You can review that change against the page before committing it, and commit it 
 
 ## What it does
 
-`/apply <slug>` builds the delivery that `work/<slug>.md` describes, completely, in one session: the code, the tests, the proof and the documents.[^focus-kit-apply]
+`/apply <slug>`, whose file is `apply/SKILL.md`, builds the delivery that `work/<slug>.md` describes, completely, in one session: the code, the tests, the proof and the documents.
 It starts in a fresh session ([chapter 2](02-how-agents-see.md)): the page is all it takes from the conversation that wrote it, which is why [chapter 10](10-propose.md) asks you to read the page before this command runs.
 
 ### What it reads
 
-The page, `AGENTS.md`, and three of the project documents: docs/01, the architecture, which says where each piece goes and how errors travel; docs/04, the conventions, which say which tests to write; and docs/05, the process.[^focus-kit-apply]
+The page, `AGENTS.md`, and three of the project documents: docs/01, the architecture, which says where each piece goes and how errors travel; docs/04, the conventions, which say which tests to write; and docs/05, the process.
 docs/05 holds the project's slots, and `/apply` follows them literally: the verify command, the environments and what a delivery leaves in each, how a screen is proven, the publish policy and the git strategy ([chapter 6](06-the-documents.md)).
 On a branch or a worktree, it works on the one `/propose` created for the slug.
 
 ### The page is the scope
 
 What the page asks is what gets built, and nothing around it.
-The kit says it in one line: "*The page is the scope; do not widen it.*"[^focus-kit-apply]
+`apply/SKILL.md` says it in one line: "*The page is the scope; do not widen it.*"
 So `/apply` adds no dependency, layer or tool the page did not name, abstracts only on the second concrete occurrence (and the page says which was the first), and writes no em dash in any text a user reads.
 
 ### When the page contradicts a document
 
 It stops and says which.
-Either the document changes in the same delivery, or the page is wrong; it never picks one silently.[^focus-kit-apply]
+Either the document changes in the same delivery, or the page is wrong; it never picks one silently.
 A silent choice would leave a page and a document that disagree, and the next session would build on whichever it read first.
 
 ### Verify and the proof
 
 It runs the verify command until it is green.
-Then it proves the delivery the way docs/05 says: a screenshot against the reference, a run from end to end, or a check by hand.[^focus-kit-apply]
+Then it proves the delivery the way docs/05 says: a screenshot against the reference, a run from end to end, or a check by hand.
 It lists what diverges from the reference and fixes it, until only what it can justify remains; a failure is part of the proof and is recorded, not hidden.
 
 ### What "done" means
 
 Green is not done.
-Before it stops, `/apply` does all of this:[^focus-kit-apply]
+Before it stops, `/apply` does all of this:
 
 * It writes into the page what happened: what diverged from the plan and why, what was dropped, what the proof found, and the decisions taken, with an ADR if one was needed.
 * It updates the documents the delivery changed: a new term into docs/03, a new rule into the document that owns it, a decision into docs/adr/.
@@ -46,7 +46,7 @@ Before it stops, `/apply` does all of this:[^focus-kit-apply]
 
 ### Why it stops at the stage
 
-`/apply` never commits and never merges, whatever the git strategy.[^focus-kit-apply]
+`/apply` never commits and never merges, whatever the git strategy.
 It stages everything and hands you the message; the commit is yours, and it comes after your review, in the last section of this chapter.
 
 ## The run on the clinic
@@ -340,7 +340,7 @@ This is the diff the review made to the staged files:[^apply-run]
 
 Nothing in the code changed: the review corrected the record, which is what the next person reads.
 Then I committed the staged tree with the suggested message, tagged it `book-v1/apply` and pushed both.
-The page and its build are in that one commit: the unit of work of chapter 10, which reverts in one step.[^focus-kit-unit-of-work]
+The page and its build are in that one commit: the unit of work of chapter 10, which reverts in one step.
 
 The agent never commits because the commit is your review.
 A commit says a person read the change and accepts it; an agent that commits its own work skips the only reader who can say the build is what was wanted.
@@ -370,6 +370,4 @@ Review your staged change with the questions of "Review before you commit", ask 
 
 For each divergence in your page's What happened, say whether it should have been a question on the page before `/apply`.
 
-[^focus-kit-apply]: J.C. Ködel, "focus-kit", `SETUP.md` §3.4, the file of `/apply`, at commit e7607c58ad38e70e3496518a58d4237612e21ebc, installed in the guided project at commit 3f0b47c. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md
-[^focus-kit-unit-of-work]: J.C. Ködel, "focus-kit", `SETUP.md` §Choices, the git answers, at commit e7607c58ad38e70e3496518a58d4237612e21ebc: a delivery's page and build are one change that reverts in one step. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md
-[^apply-run]: This book's `/apply` run on the guided project, 2026-09-28, with Claude Code 2.1.284 and the model `claude-opus-5-5`, from commit 3f0b47c: the command and its permissions, every turn's output, the verify output, the screenshot, the page as the run left it, the review and its diff, and the staged status. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/apply-run/README.md
+[^apply-run]: This book's `/apply` run on the guided project, 2026-09-28, with Claude Code 2.1.284 and the model `claude-opus-5-5`, from commit 3f0b47c: the command and its permissions, every turn's output, the verify output, the screenshot, the page as the run left it, the review and its diff, and the staged status. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/apply-run/README.md>

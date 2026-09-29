@@ -7,7 +7,7 @@ You can cover the page's holes by conversation before `/apply`, and split a deli
 
 Every piece of work in a focus-kit project is a delivery: the smallest change that has value, what other methods call a task or a work item.
 The queue, docs/06, lists the deliveries in order, one line each ([chapter 9](09-queue-and-milestones.md)).
-`/propose` takes one line and turns it into a page, `work/<slug>.md`: what the delivery must do, what it must not do, and how you will know it is done.[^focus-kit-propose]
+`/propose`, whose file is `propose/SKILL.md`, takes one line and turns it into a page, `work/<slug>.md`: what the delivery must do, what it must not do, and how you will know it is done.
 The page fits on one page so that a person can review it, before the build and after it: once `/apply` has built it, the same page also records what happened, what diverged and what was decided, as the clinic's [docs/05 §3](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/docs/05-Process.md) defines it.
 If it does not fit one page, the scope has not been understood yet, and it is two deliveries (the last section of this chapter).
 
@@ -16,17 +16,17 @@ If it does not fit one page, the scope has not been understood yet, and it is tw
 A slug is the delivery's name, in lowercase words joined by hyphens, such as `skeleton` or `book-appointment`.
 It is written once, in the queue line, and from then on it names everything about the delivery: the page `work/<slug>.md`, the argument of `/propose <slug>` and of `/apply <slug>`, and the last line of the commit that closes it, `work/done/<slug>.md`.
 The first lines come from `/brainstorm` or `/analyze`, which write the first milestone ([chapter 7](07-brainstorm.md), [chapter 8](08-analyze.md)); later lines come from a conversation or from a milestone's review ([chapter 9](09-queue-and-milestones.md)).
-If you type `/propose` with no slug, it asks you for one.[^focus-kit-propose]
+If you type `/propose` with no slug, it asks you for one.
 
 ### When the line does not exist
 
 You can also type `/propose` with a slug the queue does not have yet.
-It defines the delivery the same way, adds its line to the queue where it belongs, and tells you it did.[^focus-kit-propose]
+It defines the delivery the same way, adds its line to the queue where it belongs, and tells you it did.
 A new idea therefore reaches the queue and its page in one conversation; you still check, in the diff of docs/06, the milestone and the place where the line landed.
 
 ### How it knows what to do
 
-It reads before it asks.[^focus-kit-propose]
+It reads before it asks.
 The line's one-line description is where it starts; the project documents give it the rest:
 
 * docs/00, the product: who it serves, its rules, what it is not.
@@ -37,18 +37,18 @@ The line's one-line description is where it starts; the project documents give i
 * docs/01, the architecture: where the change lives in the code.
 
 Then it asks, only where there is more than one reading and no document closes it: its assessment first, in prose, and its recommendation first in every question, so "your call" is a valid answer, as with `/brainstorm` ([chapter 7](07-brainstorm.md)).
-It writes the page in the format of docs/05 §3 and turns the line's mark from `[ ]` to `[>]`; a new term goes into docs/03 first, then onto the page.[^focus-kit-propose]
+It writes the page in the format of docs/05 §3 and turns the line's mark from `[ ]` to `[>]`; a new term goes into docs/03 first, then onto the page.
 
 ### Why not do it all in one step
 
-`/propose` never writes, edits or generates code, a migration, a test or configuration, and the kit says why: "*separating deciding from doing is what keeps scope from growing during implementation*".[^focus-kit-propose]
+`/propose` never writes, edits or generates code, a migration, a test or configuration, and `propose/SKILL.md` says why: "*separating deciding from doing is what keeps scope from growing during implementation*".
 An agent that plans and builds in one breath takes its decisions in the middle of the build, where you do not see them; the page puts every decision where you can read it before any code exists.
 `/apply` then starts in a fresh session ([chapter 2](02-how-agents-see.md)), with a clean context, and the page is all it takes from this conversation, so the page has to hold everything the build needs.
 And the order is the cheap one: a hole found on the page costs a turn of conversation, a hole found in the build costs another `/apply` (the numbers are in "Read the page before `/apply`").
 
 ### How you correct the page
 
-You ask the agent, in the same conversation, and it writes the fix: on the page, and in any document the fix touches.[^focus-kit-propose]
+You ask the agent, in the same conversation, and it writes the fix: on the page, and in any document the fix touches.
 You do not edit the page by hand ([chapter 6](06-the-documents.md)): the agent knows which document owns each fact, so a fix that touches the vocabulary or the queue lands there too, and the conversation keeps the reason for the change.
 "Read the page before `/apply`", below, shows a real review, with the request and the diff.
 
@@ -62,20 +62,20 @@ Use plan mode inside a session if it helps you; the page is what outlives the se
 ### The Contract, the one exact section
 
 One section of the page must be exact, the Contract: the data, the schema, the API, the shapes of the messages.
-The kit gives the reason: "*a wrong screen is fixed in a session, a wrong column is a migration*".[^focus-kit-propose]
+`propose/SKILL.md` gives the reason: "*a wrong screen is fixed in a session, a wrong column is a migration*".
 A screen is code you rewrite; a column holds data, and changing it means a migration that carries the data already there.
 
 ### One unit of work
 
 Between the two commands the line reads `[>]`: the page exists and the build does not ([chapter 9](09-queue-and-milestones.md)).
-The page and its build are one unit of work: one change that reverts in one step.[^focus-kit-unit-of-work]
+The page and its build are one unit of work, as the Choices section of the kit's `references/documents.md` says: one change that reverts in one step.
 On trunk they land in one commit, so the page waits uncommitted in the working tree between `/propose` and `/apply`; on a branch or a worktree, the branch may carry several commits, and the delivery reaches the main branch in one merge.
 Part IV teaches the git side; the clinic is on trunk, which is why the run below leaves it uncommitted.
 
 ## The run on the clinic
 
 The run started from the clinic after `book-v1/brainstorm`, at commit [`3f0b47c`](https://github.com/JCKodel/focus-kit-clinic/commit/3f0b47c1868e69970eefadb4f4a34bdcbada67b2), "Update focus-kit to e7607c5": the kit updated as chapter 5 teaches, in a commit of its own, so the update reverts in one step.
-In that version the kit's `/propose` ends by asking you to read the page before `/apply`, and the run shows it.[^focus-kit-propose]
+In that version the kit's `/propose` ends by asking you to read the page before `/apply`, and the run shows it.
 The delivery was the queue's first line, `skeleton`: the empty PWA and server in one project, `npm run verify`, and the first screenshot.
 The brief names the line and gives the rule for everything else:[^propose-run]
 
@@ -243,11 +243,11 @@ Every recommendation of the round is on the page as a decision, and the page rea
 ## Read the page before `/apply`
 
 The page is the record of what the agent understood, and it is what `/apply` will build: a fresh session reads the page and nothing of this conversation.
-It is written to be read by a person, interpreted and completed, not generated and applied in the same breath.[^focus-kit-propose]
+As the end of `propose/SKILL.md` says, it is written to be read by a person, interpreted and completed, not generated and applied in the same breath.
 Read it before `/apply`, and cover every hole by asking the agent, never by editing the page by hand ([chapter 6](06-the-documents.md)): the agent writes the fix where it belongs, on the page and in any document it touches.
 
 The cost decides when to read it.
-A hole found on the page costs one turn of conversation; a hole found after `/apply` costs another `/apply`, the most expensive command.[^focus-kit-propose]
+A hole found on the page costs one turn of conversation; a hole found after `/apply` costs another `/apply`, the most expensive command.
 In my own usage, as Claude Code's `/usage` reported it, `/apply` took 32% and `/propose` 16% over the last 24 hours, and 47% and 14% over the last 7 days.[^claude-usage]
 The figures are approximate and cover all my projects together, but the ratio is what matters: `/apply` costs from twice to more than three times what `/propose` does.
 
@@ -420,10 +420,10 @@ Each hole closed where `/apply` would have had to guess: the import check and th
 
 ## When it does not fit
 
-A scope that does not fit one page is two deliveries: `/propose` says so, proposes the split and writes only the first page, and the second becomes a line in the queue, where it belongs ([chapter 9](09-queue-and-milestones.md)).[^focus-kit-propose]
+A scope that does not fit one page is two deliveries: `/propose` says so, proposes the split and writes only the first page, and the second becomes a line in the queue, where it belongs ([chapter 9](09-queue-and-milestones.md)).
 This book split one on chapter 3, which compares Spec Kit, OpenSpec and focus-kit by what each writes for the same feature.
 The measured run of the tools, with its brief, its pinned versions and its counts, would not fit on the chapter's page, so it became a delivery of its own, `spec-driven-run`.
-This is the diff of this book's docs/06 in its commit:[^book-spec-driven-run]
+This is the diff of this book's docs/06 in its commit:
 
 ````diff
 diff --git a/docs/06-Queue.md b/docs/06-Queue.md
@@ -470,9 +470,6 @@ Ask the agent to cover each hole, and read the diff.
 Ask `/propose` for `book-appointment` and `cancel-appointment` as one delivery.
 Does it propose a split, and where does the second line go?
 
-[^focus-kit-propose]: J.C. Ködel, "focus-kit", `SETUP.md` §3.3, the file of `/propose`, at commit e7607c58ad38e70e3496518a58d4237612e21ebc, installed in the guided project at commit 3f0b47c. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md
-[^focus-kit-unit-of-work]: J.C. Ködel, "focus-kit", `SETUP.md` §Choices, the git answers, at commit e7607c58ad38e70e3496518a58d4237612e21ebc: a delivery's page and build are one change that reverts in one step. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md
-[^propose-run]: This book's `/propose` run on the guided project, 2026-09-28, with Claude Code 2.1.283 and the model `claude-opus-5-5`, from commit 3f0b47c: the brief, the commands, every turn's output, the questions and the answer, the first page, the review and its diff. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/propose-run/README.md
-[^claude-usage]: Claude Code `/usage`, read by the author on 2026-09-28, local sessions on one machine, all projects together; `work/done/propose-run/usage.txt`. The tool calls its figures approximate; the author read it in three projects and got the same figures, so it is not a measure of one project. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/propose-run/usage.txt
-[^book-spec-driven-run]: J.C. Ködel, "One Page at a Time", commit 53109f372125e8aeda200bb2e5bbd1ad7bcc5d61, which recorded chapter 3's run as a delivery of its own. https://github.com/JCKodel/focus-kit-book/commit/53109f372125e8aeda200bb2e5bbd1ad7bcc5d61
-[^claude-code-plan-mode]: Anthropic, "Common workflows", Claude Code documentation, section "Plan before editing", accessed 2026-09-28. https://code.claude.com/docs/en/common-workflows#plan-before-editing
+[^propose-run]: This book's `/propose` run on the guided project, 2026-09-28, with Claude Code 2.1.283 and the model `claude-opus-5-5`, from commit 3f0b47c: the brief, the commands, every turn's output, the questions and the answer, the first page, the review and its diff. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/propose-run/README.md>
+[^claude-usage]: Claude Code `/usage`, read by the author on 2026-09-28, local sessions on one machine, all projects together; `work/done/propose-run/usage.txt`. The tool calls its figures approximate; the author read it in three projects and got the same figures, so it is not a measure of one project. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/propose-run/usage.txt>
+[^claude-code-plan-mode]: Anthropic, "Common workflows", Claude Code documentation, section "Plan before editing", accessed 2026-09-28. <https://code.claude.com/docs/en/common-workflows#plan-before-editing>

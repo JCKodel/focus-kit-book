@@ -97,7 +97,7 @@ No focus-kit, o `/propose` escreve essa página e o `/apply` a constrói em uma 
 * A compactação troca a conversa por um resumo, e um detalhe que importava pode se perder.
 * Mantenha as decisões em arquivos lidos no começo de toda sessão, e dê a cada entrega uma sessão nova, com decidir separado de construir.
 
-[^messages-api]: Anthropic, "Using the Messages API", acesso em 2026-09-25. https://platform.claude.com/docs/en/build-with-claude/working-with-messages
-[^liu-2024]: Liu et al., "Lost in the Middle: How Language Models Use Long Contexts", 2024. https://arxiv.org/abs/2307.03172
-[^chroma-2025]: Chroma, "Context Rot: How Increasing Input Tokens Impacts LLM Performance", 2025. https://research.trychroma.com/context-rot
-[^anthropic-context-2025]: Anthropic, "Effective context engineering for AI agents", 2025. https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+[^messages-api]: Anthropic, "Using the Messages API", acesso em 2026-09-25. <https://platform.claude.com/docs/en/build-with-claude/working-with-messages>
+[^liu-2024]: Liu et al., "Lost in the Middle: How Language Models Use Long Contexts", 2024. <https://arxiv.org/abs/2307.03172>
+[^chroma-2025]: Chroma, "Context Rot: How Increasing Input Tokens Impacts LLM Performance", 2025. <https://research.trychroma.com/context-rot>
+[^anthropic-context-2025]: Anthropic, "Effective context engineering for AI agents", 2025. <https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents>

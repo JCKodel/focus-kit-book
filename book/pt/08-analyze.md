@@ -6,7 +6,7 @@ Depois deste capítulo você consegue rodar o `/analyze` em um projeto que já e
 
 O `/analyze` é o comando para um repositório que já tem alguma coisa: código, documentos, ou os dois.
 Ele funciona como o `/brainstorm` ([capítulo 7](07-brainstorm.md)): uma sessão nova, um padrão em cada pergunta, "your call" (você decide) como resposta válida, e os mesmos documentos no fim.
-A diferença é que ele lê antes de perguntar, e lê isto, nesta ordem:[^focus-kit-analyze]
+A diferença é que ele lê antes de perguntar, e o seu arquivo, `analyze/SKILL.md`, o faz ler isto, nesta ordem:
 
 * o README e toda a documentação que já existe;
 * os manifestos, como o `package.json`;
@@ -19,7 +19,7 @@ A diferença é que ele lê antes de perguntar, e lê isto, nesta ordem:[^focus-
 
 O que o projeto não tem, ele pula: em um projeto sem código não há manifestos, pontos de entrada nem testes para ler, e os documentos descrevem o que os arquivos dizem.
 A partir disso ele deduz a stack, como o código está organizado, onde ficam as regras de negócio, como os erros viajam, o comando de verificação e os ambientes.
-Depois ele faz uma rodada, de quatro assuntos apenas:[^focus-kit-analyze]
+Depois ele faz uma rodada, de quatro assuntos apenas:
 
 1. O idioma da documentação. Padrão: o idioma do README.
 2. O propósito e o público do produto nas suas palavras, só quando nenhum README os diz.
@@ -37,7 +37,7 @@ Ele mostra o diff antes de escrever, e não muda nenhum código.
 Em código sem uma arquitetura clara, o padrão para o FOCUS é "nenhum", porque o código não o segue, e o FOCUS inteiro significaria reescrevê-lo.
 Há um caminho entre os dois, que você dá como resposta: a strangler fig (figueira estranguladora), o nome que Martin Fowler deu à troca gradual de um sistema antigo, por causa de uma trepadeira que cresce em volta de uma árvore até ficar de pé sozinha.[^strangler-fig]
 O código novo cresce ao lado do antigo: toda funcionalidade nova é uma fatia vertical em FOCUS, toda parte que uma entrega muda passa para uma fatia vertical, e o código antigo sai uma entrega de cada vez, enquanto o projeto continua funcionando.
-Responda à pergunta do FOCUS com isso, por exemplo "FOCUS inteiro, como strangler fig: funcionalidades novas e toda parte que uma entrega tocar viram fatias verticais; o resto fica até lá.", e o `/analyze` escreve isso no docs/01 e em um ADR, para que todo `/propose` e `/apply` seguinte o siga.[^focus-kit-analyze]
+Responda à pergunta do FOCUS com isso, por exemplo "FOCUS inteiro, como strangler fig: funcionalidades novas e toda parte que uma entrega tocar viram fatias verticais; o resto fica até lá.", e o `/analyze` escreve isso no docs/01 e em um ADR, para que todo `/propose` e `/apply` seguinte o siga.
 Na execução no CLAHub o agente ofereceu a mesma forma só para os dois princípios: o trabalho novo vai migrando para pastas por funcionalidade com o tempo.[^analyze-run]
 A Parte III ensina o FOCUS em si.
 
@@ -298,7 +298,7 @@ O agente leu a configuração do Prisma, os arquivos de ambiente de exemplo e a 
  * **Production:** https://www.cla-hub.io. `docs/deployment.md` describes a
 ```
 
-O diff fica como o agente o escreveu, em inglês: a linha nova diz que o Next.js lê `.env.local` (e `.env`), que a CLI do Prisma lê só `.env`, porque `prisma.config.ts` e `prisma/seed.ts` o carregam com `import "dotenv/config"`, que o `DATABASE_URL` é relativo à raiz do repositório, e que o Playwright carrega `.env.local` e depois `.env.test` sem sobrescrever, então localmente um teste ponta a ponta sem servidor de desenvolvimento zera e popula o banco do `.env.local`.[^analyze-run]
+O diff fica como o agente o escreveu, em inglês: a linha nova diz que o Next.js lê `.env.local` (e `.env`), que a CLI do Prisma lê só `.env`, porque `prisma.config.ts` e `prisma/seed.ts` o carregam com `import "dotenv/config"`, que o `DATABASE_URL` é relativo à raiz do repositório, e que o Playwright carrega `.env.local` e depois `.env.test` sem sobrescrever, então localmente um teste ponta a ponta sem servidor de desenvolvimento zera e popula o banco do `.env.local`.
 A segunda parte acrescentou a seção de questões em aberto citada acima, com as outras contradições que ele achou enquanto conferia: uma variável que os guias chamam de obrigatória e que nenhum código lê, e uma execução local dos testes ponta a ponta que pode zerar o banco de desenvolvimento; ambas se confirmam no código.
 Os documentos se liam bem antes do pedido, e só abrir o arquivo por trás da afirmação mostrou que ela estava errada.
 
@@ -356,7 +356,6 @@ Qual arquivo prova cada uma?
 Rode o `/analyze` em um repositório seu.
 Quais questões em aberto ele registrou, e quais delas você teria deixado passar?
 
-[^focus-kit-analyze]: J.C. Ködel, "focus-kit", o comando `.claude/skills/analyze/SKILL.md`, como instalado no fork do projeto brownfield na tag do capítulo `book-v1-analyze`, a partir do commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/clahub/blob/book-v1-analyze/.claude/skills/analyze/SKILL.md
-[^strangler-fig]: Martin Fowler, "Strangler Fig", 2024. https://martinfowler.com/bliki/StranglerFigApplication.html
-[^brownfield-research]: A entrega de pesquisa deste livro para o projeto brownfield, 2026-09-25: os candidatos, como cada um foi medido, a escolha, e as linhas de código TypeScript (sem os testes) e os testes que passam do CLAHub no commit do upstream 9d1e666e1d30f271aea9640393229a7cbfbd1b62. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/brownfield-research.md
-[^analyze-run]: A execução do `/analyze` deste livro no projeto brownfield, 2026-09-28, com o Claude Code 2.1.283 e o modelo `claude-opus-5-5`, de `book-v1` até a tag do capítulo `book-v1-analyze`: a instalação do kit, o briefing, os comandos, a saída de cada turno, a rodada e a sua resposta, e as correções. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/analyze-run/README.md
+[^strangler-fig]: Martin Fowler, "Strangler Fig", 2024. <https://martinfowler.com/bliki/StranglerFigApplication.html>
+[^brownfield-research]: A entrega de pesquisa deste livro para o projeto brownfield, 2026-09-25: os candidatos, como cada um foi medido, a escolha, e as linhas de código TypeScript (sem os testes) e os testes que passam do CLAHub no commit do upstream 9d1e666e1d30f271aea9640393229a7cbfbd1b62. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/brownfield-research.md>
+[^analyze-run]: A execução do `/analyze` deste livro no projeto brownfield, 2026-09-28, com o Claude Code 2.1.283 e o modelo `claude-opus-5-5`, de `book-v1` até a tag do capítulo `book-v1-analyze`: a instalação do kit, o briefing, os comandos, a saída de cada turno, a rodada e a sua resposta, e as correções. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/analyze-run/README.md>

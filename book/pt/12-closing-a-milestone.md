@@ -7,7 +7,7 @@ Depois você consegue transformar os achados confirmados em linhas da fila em ve
 
 Cada página de um marco foi lida antes de o `/apply` construí-la, e cada mudança no stage foi revisada antes do commit dela.
 Ninguém olhou o que elas somam.
-O kit fecha essa brecha em uma regra: quando um marco fecha, revise o todo com o que o host oferece, e cada achado confirmado vira uma linha na fila, e não uma correção no meio do marco seguinte.[^focus-kit-closing]
+O kit fecha essa brecha em uma regra, o §8 do documento de processo que ele escreve, o docs/05: quando um marco fecha, revise o todo com o que o host oferece, e cada achado confirmado vira uma linha na fila, e não uma correção no meio do marco seguinte.
 Um processo leve não tem portão entre as entregas, então o risco que ele carrega é a soma: cada entrega certa na sua página, e o todo errado.
 
 Esse olhar é a revisão de marco: o parágrafo do marco conferido no produto, depois uma revisão de tudo o que o marco construiu.
@@ -157,10 +157,10 @@ A tag [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-clini
 
 ## Quando os achados viraram uma entrega só
 
-O Ninjobs escreveu a mesma regra no seu processo em 2026-08-29: cada achado confirmado de uma revisão de marco vira uma linha na fila.[^ninjobs-milestone-review]
-Quando o marco dele fechou, a revisão tinha oito achados, e eu pus os oito em uma entrega só.[^ninjobs-milestone-review]
+O Ninjobs escreveu a mesma regra no seu processo em 2026-08-29: cada achado confirmado de uma revisão de marco vira uma linha na fila.[^ninjobs]
+Quando o marco dele fechou, a revisão tinha oito achados, e eu pus os oito em uma entrega só.[^ninjobs]
 A página dela diz, com as suas próprias palavras, que não cabe em uma página e que vai contra o processo de propósito.
-Ela chegou a 879 linhas.[^ninjobs-milestone-review]
+Ela chegou a 879 linhas.[^ninjobs]
 Quando eu mesmo conferi o resultado, achei falhas que os testes dela não tinham pegado.
 A causa não foi o processo; foi a minha escolha.
 Oito linhas teriam sido oito páginas, cada uma pequena o bastante para ser lida antes de ser construída e conferida depois.
@@ -189,10 +189,9 @@ Rode o `/code-review high` (ou a revisão do seu host) no intervalo do seu marco
 
 Peça ao agente que transforme os seus achados confirmados em linhas, e diga, para cada uma, por que ela pertence ao marco que o agente escolheu.
 
-[^focus-kit-closing]: J.C. Ködel, "focus-kit", `SETUP.md`, o modelo do docs/05, §8 Closing a milestone, no commit e7607c58ad38e70e3496518a58d4237612e21ebc, instalado no projeto guiado no commit 3f0b47c. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md
-[^claude-code-review]: Anthropic, "Code Review", acesso em 2026-09-28. https://code.claude.com/docs/en/code-review
-[^codex-review]: OpenAI, "Developer commands", acesso em 2026-09-28. https://learn.chatgpt.com/docs/developer-commands?surface=cli
-[^copilot-review]: GitHub, "About GitHub Copilot code review", acesso em 2026-09-28. https://docs.github.com/en/copilot/concepts/agents/code-review
-[^clinic-milestone-1-run]: A construção do marco 1 do projeto guiado deste livro, 2026-09-28, com o Claude Code 2.1.284 e o modelo `claude-opus-5-5`: as seis entregas depois do `skeleton`, cada uma com a revisão da página, a revisão do stage e o commit. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/clinic-milestone-1-run/README.md
-[^closing-a-milestone-run]: A revisão do marco 1 do projeto guiado deste livro, 2026-09-28 e 2026-09-29, com o Claude Code 2.1.284 e o modelo `claude-opus-5-5`, no intervalo 3f0b47c...f16f83b: a conferência do parágrafo, o comando e as suas permissões, cada turno, os achados, as decisões, o diff da fila e a mensagem de commit. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/closing-a-milestone-run/README.md
-[^ninjobs-milestone-review]: Ninjobs, um repositório privado: a regra no docs/05 dele, acrescentada em 2026-08-29; a página da entrega que levou os oito achados da revisão de marco dele, contada pelo autor com `wc -l`. O conteúdo dos achados fica de fora.
+[^claude-code-review]: Anthropic, "Code Review", acesso em 2026-09-28. <https://code.claude.com/docs/en/code-review>
+[^codex-review]: OpenAI, "Developer commands", acesso em 2026-09-28. <https://learn.chatgpt.com/docs/developer-commands?surface=cli>
+[^copilot-review]: GitHub, "About GitHub Copilot code review", acesso em 2026-09-28. <https://docs.github.com/en/copilot/concepts/agents/code-review>
+[^clinic-milestone-1-run]: A construção do marco 1 do projeto guiado deste livro, 2026-09-28, com o Claude Code 2.1.284 e o modelo `claude-opus-5-5`: as seis entregas depois do `skeleton`, cada uma com a revisão da página, a revisão do stage e o commit. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/clinic-milestone-1-run/README.md>
+[^closing-a-milestone-run]: A revisão do marco 1 do projeto guiado deste livro, 2026-09-28 e 2026-09-29, com o Claude Code 2.1.284 e o modelo `claude-opus-5-5`, no intervalo 3f0b47c...f16f83b: a conferência do parágrafo, o comando e as suas permissões, cada turno, os achados, as decisões, o diff da fila e a mensagem de commit. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/closing-a-milestone-run/README.md>
+[^ninjobs]: Ninjobs, um repositório privado: a regra no docs/05 dele, acrescentada em 2026-08-29; a página da entrega que levou os oito achados da revisão de marco dele, contada pelo autor com `wc -l`. O conteúdo dos achados fica de fora.

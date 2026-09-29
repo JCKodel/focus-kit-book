@@ -109,9 +109,12 @@ nav#TOC ul ul li { font-family: "Merriweather"; font-weight: 400; }
 nav#TOC a { color: inherit; }
 nav#TOC a::after { content: leader(".") target-counter(attr(href), page); }
 
-/* Notes at the end of their chapter. */
+/* Notes at the end of their chapter: 66% of the body and in italic; a link, a quotation (italic in the source) and code stay upright. */
 
-aside.footnotes { font-size: 7.5pt; margin-top: 2em; }
+aside.footnotes { font-size: 66%; font-style: italic; margin-top: 2em; }
+aside.footnotes a, aside.footnotes em, aside.footnotes code { font-style: normal; }
+/* A URL breaks anywhere and never takes a hyphen that is not in it. */
+aside.footnotes a { hyphens: manual; overflow-wrap: anywhere; }
 aside.footnotes hr { border: none; border-top: 0.5pt solid #c8c8c4; width: 30%; margin: 0 0 0.8em; }
 aside.footnotes ol { padding-left: 1.4em; }
 aside.footnotes p { text-align: left; }

@@ -196,8 +196,8 @@ The run says what each tool writes before the code; it does not say which one bu
 * On one recorded feature, Spec Kit wrote 8 files and 756 lines and OpenSpec 6 and 180, restating one rule in most of them, and every file is something you review.
 * A lighter page per feature is paid for with documents written once per project; the run shows what each tool writes, not which builds better software.
 
-[^bockeler-2025]: Birgitta Böckeler, "Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl", 2025. https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html
-[^spec-kit]: GitHub, "Spec Kit", v1.0.11. https://github.com/github/spec-kit/tree/v1.0.11
-[^openspec]: Fission AI, "OpenSpec", 1.13.2. https://github.com/Fission-AI/OpenSpec/tree/v1.13.2
-[^spec-driven-run]: This book's run of Spec Kit, OpenSpec and focus-kit on one brief, 2026-09-25: the counts, the setting and how to repeat it in the README; each tool's questions and answers in its `questions.md`, in the same folder. https://github.com/JCKodel/focus-kit-book/blob/53109f372125e8aeda200bb2e5bbd1ad7bcc5d61/work/done/spec-driven-run/README.md
+[^bockeler-2025]: Birgitta Böckeler, "Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl", 2025. <https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html>
+[^spec-kit]: GitHub, "Spec Kit", v1.0.11. <https://github.com/github/spec-kit/tree/v1.0.11>
+[^openspec]: Fission AI, "OpenSpec", 1.13.2. <https://github.com/Fission-AI/OpenSpec/tree/v1.13.2>
+[^spec-driven-run]: This book's run of Spec Kit, OpenSpec and focus-kit on one brief, 2026-09-25: the counts, the setting and how to repeat it in the README; each tool's questions and answers in its `questions.md`, in the same folder. <https://github.com/JCKodel/focus-kit-book/blob/53109f372125e8aeda200bb2e5bbd1ad7bcc5d61/work/done/spec-driven-run/README.md>
 [^rule-count]: Counted in the run's folder with `grep -rliE '24 ?h|24-hour|24 hours' <tool>/feature | wc -l`, against the per-feature file count: Spec Kit 8 of 8, OpenSpec 4 of 6, focus-kit 1 of 1.

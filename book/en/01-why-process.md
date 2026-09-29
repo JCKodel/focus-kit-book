@@ -59,7 +59,7 @@ The method this book teaches, focus-kit, is built on these three pieces.
 ## Too much process fails too
 
 A process can cost more than it saves: every document is one more thing to write, read and keep true.
-On Ninjobs (<https://www-ninjobs-app.translate.goog/?_x_tr_sl=pt&_x_tr_tl=en&_x_tr_hl=en>, through Google Translate: the product is in Brazilian Portuguese only), my own product, fifteen days, 87 commits and 35 OpenSpec changes produced 37,228 lines of spec for four screens and one domain table.[^ninjobs-adr-0022]
+On Ninjobs (<https://www-ninjobs-app.translate.goog/?_x_tr_sl=pt&_x_tr_tl=en&_x_tr_hl=en>, through Google Translate: the product is in Brazilian Portuguese only), my own product, fifteen days, 87 commits and 35 OpenSpec changes produced 37,228 lines of spec for four screens and one domain table.[^ninjobs]
 Chapter 4 tells that story and how focus-kit came out of it.
 
 ## Key points
@@ -70,6 +70,6 @@ Chapter 4 tells that story and how focus-kit came out of it.
 * A minimal process gives the agent a decision in writing, one page per delivery and a check before "done".
 * Too much process fails too, when writing the spec becomes the work.
 
-[^metr-2025]: METR, "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity", 2025. https://arxiv.org/abs/2507.09089
-[^dora-2024]: DORA, "Accelerate State of DevOps Report 2024", 2024. https://dora.dev/research/2024/dora-report/
-[^ninjobs-adr-0022]: Ninjobs, a private repository, counted by the author over its history up to 2026-08-29, when its ADR-0022 dropped OpenSpec: days with a commit and commits from `git log`, changes from the OpenSpec archive, lines with `wc -l` over every file under `openspec/`. The screens and the table are the ones that ADR lists.
+[^metr-2025]: METR, "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity", 2025. <https://arxiv.org/abs/2507.09089>
+[^dora-2024]: DORA, "Accelerate State of DevOps Report 2024", 2024. <https://dora.dev/research/2024/dora-report/>
+[^ninjobs]: Ninjobs, a private repository, counted by the author over its history up to 2026-08-29, when its ADR-0022 dropped OpenSpec: days with a commit and commits from `git log`, changes from the OpenSpec archive, lines with `wc -l` over every file under `openspec/`. The screens and the table are the ones that ADR lists.

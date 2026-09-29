@@ -7,7 +7,7 @@ You can then turn the confirmed findings into lines in the queue instead of fixe
 
 Each page of a milestone was read before `/apply` built it, and each staged change was reviewed before its commit.
 Nobody looked at what they add up to.
-The kit closes that gap in one rule: when a milestone closes, review the whole with what the host offers, and each confirmed finding becomes a line in the queue, not a fix in the middle of the next milestone.[^focus-kit-closing]
+The kit closes that gap in one rule, §8 of the process document it writes, docs/05: when a milestone closes, review the whole with what the host offers, and each confirmed finding becomes a line in the queue, not a fix in the middle of the next milestone.
 A light process has no gate between deliveries, so the risk it carries is the sum: every delivery right on its own page, and the whole wrong.
 
 That look is a milestone review: the milestone's paragraph checked on the product, then a review of everything the milestone built.
@@ -156,10 +156,10 @@ The tag [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-cli
 
 ## When the findings became one delivery
 
-Ninjobs wrote the same rule into its process on 2026-08-29: each confirmed finding of a milestone review becomes a line in the queue.[^ninjobs-milestone-review]
-When its milestone closed, the review had eight findings, and I put all eight into one delivery instead.[^ninjobs-milestone-review]
+Ninjobs wrote the same rule into its process on 2026-08-29: each confirmed finding of a milestone review becomes a line in the queue.[^ninjobs]
+When its milestone closed, the review had eight findings, and I put all eight into one delivery instead.[^ninjobs]
 Its page says, in its own words, that it does not fit a page and that it goes against the process on purpose.
-It ran to 879 lines.[^ninjobs-milestone-review]
+It ran to 879 lines.[^ninjobs]
 When I checked the result myself, I found faults its tests had not caught.
 The process was not the cause; my choice was.
 Eight lines would have been eight pages, each small enough to read before it was built and to check after.
@@ -188,10 +188,9 @@ Run `/code-review high` (or your host's review) on the range of your milestone 1
 
 Ask the agent to turn your confirmed findings into lines, and say for each why it belongs in the milestone the agent chose.
 
-[^focus-kit-closing]: J.C. Ködel, "focus-kit", `SETUP.md`, the docs/05 template, §8 Closing a milestone, at commit e7607c58ad38e70e3496518a58d4237612e21ebc, installed in the guided project at commit 3f0b47c. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md
-[^claude-code-review]: Anthropic, "Code Review", accessed 2026-09-28. https://code.claude.com/docs/en/code-review
-[^codex-review]: OpenAI, "Developer commands", accessed 2026-09-28. https://learn.chatgpt.com/docs/developer-commands?surface=cli
-[^copilot-review]: GitHub, "About GitHub Copilot code review", accessed 2026-09-28. https://docs.github.com/en/copilot/concepts/agents/code-review
-[^clinic-milestone-1-run]: This book's build of the guided project's milestone 1, 2026-09-28, with Claude Code 2.1.284 and the model `claude-opus-5-5`: the six deliveries after `skeleton`, each with its page review, its staged review and its commit. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/clinic-milestone-1-run/README.md
-[^closing-a-milestone-run]: This book's review of the guided project's milestone 1, 2026-09-28 and 2026-09-29, with Claude Code 2.1.284 and the model `claude-opus-5-5`, on the range 3f0b47c...f16f83b: the paragraph check, the command and its permissions, every turn, the findings, the decisions, the queue's diff and the commit message. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/closing-a-milestone-run/README.md
-[^ninjobs-milestone-review]: Ninjobs, a private repository: the rule in its docs/05, added on 2026-08-29; the page of the delivery that took the eight findings of its milestone review, counted by the author with `wc -l`. The content of the findings is left out.
+[^claude-code-review]: Anthropic, "Code Review", accessed 2026-09-28. <https://code.claude.com/docs/en/code-review>
+[^codex-review]: OpenAI, "Developer commands", accessed 2026-09-28. <https://learn.chatgpt.com/docs/developer-commands?surface=cli>
+[^copilot-review]: GitHub, "About GitHub Copilot code review", accessed 2026-09-28. <https://docs.github.com/en/copilot/concepts/agents/code-review>
+[^clinic-milestone-1-run]: This book's build of the guided project's milestone 1, 2026-09-28, with Claude Code 2.1.284 and the model `claude-opus-5-5`: the six deliveries after `skeleton`, each with its page review, its staged review and its commit. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/clinic-milestone-1-run/README.md>
+[^closing-a-milestone-run]: This book's review of the guided project's milestone 1, 2026-09-28 and 2026-09-29, with Claude Code 2.1.284 and the model `claude-opus-5-5`, on the range 3f0b47c...f16f83b: the paragraph check, the command and its permissions, every turn, the findings, the decisions, the queue's diff and the commit message. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/closing-a-milestone-run/README.md>
+[^ninjobs]: Ninjobs, a private repository: the rule in its docs/05, added on 2026-08-29; the page of the delivery that took the eight findings of its milestone review, counted by the author with `wc -l`. The content of the findings is left out.

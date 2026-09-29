@@ -22,10 +22,10 @@ FOCUS does not apply: there is no product code, only content and a few build scr
 ```
 book/en/NN-<slug>.md     English edition, the source (A1-<slug>.md for appendices)
 book/pt/NN-<slug>.md     Portuguese edition, same file names
-book/assets/             images shared by both editions, diagrams one per edition (NN-<what>.<edition>.svg); screenshots one for both (NN-<what>.png); site.css (the draft mark in the navigation, a border and a width for PNGs)
+book/assets/             images shared by both editions, diagrams one per edition (NN-<what>.<edition>.svg); screenshots one for both (NN-<what>.png); site.css (the draft mark in the navigation, a border and a width for PNGs, notes at 66%, italic, links, quotations and code upright)
 overrides/main.html      theme override: the draft banner
 scripts/build.py         strict site build, warnings as findings (rule "build")
-scripts/check_parity.py  the two editions: same chapters, heading levels and status (rule "parity")
+scripts/check_parity.py  the two editions: same chapters, heading levels and status, and the same note keys, each cited as many times (rule "parity")
 scripts/check_em_dash.py no em dash in any text file but the evidence of the runs, work/done/*-run/ (rule "em-dash")
 scripts/check_prose.py   the prose rules of docs/04 in both editions and both READMEs (rule "prose")
 scripts/check_links.py   every external URL in both editions, both READMEs and mkdocs.yml still answers (rule "links")
@@ -36,8 +36,8 @@ scripts/check_disclosure.py no term of the disclosure list in a file path, a tex
 scripts/patterns.py      compile_entry: the entry syntax (plain or re:) shared by the prose and disclosure checks
 scripts/markdown.py      front_matter: the fields and the body, shared by parity and the book build; mask: front matter, code and HTML comments as spaces, shared by the prose and link checks
 scripts/repo_files.py    the files the checks read: tracked, plus untracked and not ignored
-pandoc/pdf.css           the PDF: A5, margins, page numbers, the fonts by @font-face, a wrapped code line starting at the margin, a border and a width for PNGs
-pandoc/epub.css          the EPUB: no @font-face; a wrapped code line starts at the margin; a border and a width for PNGs
+pandoc/pdf.css           the PDF: A5, margins, page numbers, the fonts by @font-face, a wrapped code line starting at the margin, a border and a width for PNGs, notes at 66%, italic, links, quotations and code upright
+pandoc/epub.css          the EPUB: no @font-face; a wrapped code line starts at the margin; a border and a width for PNGs; notes at 66%, italic, links, quotations and code upright
 pandoc/fonts/            Merriweather (4 styles), Google Sans (variable), Iosevka Term Regular; <Family>-OFL.txt each
 .github/workflows/verify.yml  jobs verify (make verify on every push, the full history, the list from the secret DISCLOSURE_DENYLIST), pages (main only) and release (v* tags only), each after verify
 mkdocs.yml               the site: MkDocs Material, i18n in folder structure, footnotes, no nav: key
@@ -59,7 +59,7 @@ __pycache__/             written by Python when a check imports a module of scri
 | `make serve` | `mkdocs serve`, at `http://127.0.0.1:8000/`, which redirects to `/focus-kit-book/` (the path of `site_url`); Portuguese under `pt/`. |
 | `make build` | `scripts/build.py`: `mkdocs build --strict` into `site/`. |
 | `make verify` | build, then parity, then em dash, then prose, then links, then disclosure (files and every commit message, as `make scan`); stops at the first failing group. The link check needs the network: offline it is skipped locally and fails in Actions (`CI` set). |
-| `make book` | `scripts/build_book.py`: for each edition, a PDF and an EPUB in `output/` (`one-page-at-a-time.*`, `uma-pagina-de-cada-vez.*`), then their paths. Needs pandoc and weasyprint; not part of `make verify`. Each file: title page, rights page, table of contents, chapters in `NN-` order, appendices in `A<n>-` order; a draft carries its banner, notes end their chapter; a heading's id drops its accents, as MkDocs does, so a link to `NN-<slug>.md#<anchor>` resolves on the site and in the book. Title and subtitle come from `book/<edition>/index.md`, author, rights and banner from `mkdocs.yml`. |
+| `make book` | `scripts/build_book.py`: for each edition, a PDF and an EPUB in `output/` (`one-page-at-a-time.*`, `uma-pagina-de-cada-vez.*`), then their paths. Needs pandoc and weasyprint; not part of `make verify`. Each file: title page, rights page, table of contents, chapters in `NN-` order, appendices in `A<n>-` order; a draft carries its banner, notes end their chapter, one per key, every mention showing its number; a heading's id drops its accents, as MkDocs does, so a link to `NN-<slug>.md#<anchor>` resolves on the site and in the book. Title and subtitle come from `book/<edition>/index.md`, author, rights and banner from `mkdocs.yml`. |
 | `make hooks` | `git config core.hooksPath .githooks`, once per clone: the pre-commit hook refuses a commit whose staged paths or staged text match the list, the commit-msg hook one whose message does. Both refuse every commit when the list is missing. A clean commit prints nothing; `git commit --no-verify` skips them, and `make scan` then finds the commit. |
 | `make scan` | the disclosure scan alone: the files, then the message of every commit in the history (`<sha, 12 chars>:<line>: disclosure: commit message matches list entry <n>`, line 1 the subject); with a list and without `CI`, it also fails while the hooks are off (`Makefile:1: disclosure: hooks are off; run make hooks`). The list is `FKB_DENYLIST`, or `~/.config/focus-kit-book/denylist.txt`; one entry per line, `#` comments, `re:<pattern>` for a regular expression. Without a list it is skipped locally and fails in Actions (`CI` set). A finding names the file, the line and the entry's number in the list, never the term; a matched part of a path prints as `***`. |
 

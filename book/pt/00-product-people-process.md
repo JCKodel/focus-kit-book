@@ -63,4 +63,4 @@ A Parte I é o porquê, a Parte II o processo, a Parte III o código, a Parte IV
 * O processo de uma empresa é seguido porque cada passo tem um propósito; um passo que não pega nenhum erro concreto sai dele.
 * O método é o mesmo para um desenvolvedor e para uma empresa, e este livro também é o material de um programa de adoção (Caso B).
 
-[^lemonis-3ps]: Marcus Lemonis Business Team, "3 Key To Business Success: People, Process & Product", acesso em 2026-09-28. https://marcuslemonis.com/business/3ps-of-business
+[^lemonis-3ps]: Marcus Lemonis Business Team, "3 Key To Business Success: People, Process & Product", acesso em 2026-09-28. <https://marcuslemonis.com/business/3ps-of-business>

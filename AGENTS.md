@@ -12,7 +12,7 @@ A free, bilingual book that teaches Spec-Driven Development, the focus-kit metho
 - Ninjobs appears only through its process artifacts and published numbers, paraphrased; never its infrastructure, credentials, users or commercial plans (docs/03).
 - A change to one edition is a change to both, in the same delivery; English is the source (ADR-0004).
 - Every chapter opens with what the reader can do after it and is as long as proving that takes: no filler, nothing useful cut, no length target (ADR-0015).
-- Every artifact shown is real and every number cites its source (docs/04).
+- Every artifact shown is real and every number says where it comes from; a source note only where the reader gains something to open, or a case's count to repeat (docs/04).
 - The book mentions none of the author's earlier books and copies no text from them (ADR-0005).
 - One delivery = one page in work/<slug>.md: /propose to define, /apply to build.
 - No em dash in any text a user reads.

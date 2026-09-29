@@ -5,8 +5,8 @@ You can also order a milestone's lines, and add or change a line by conversation
 
 ## The line
 
-docs/06 holds the project's milestones, each with a paragraph saying what is true when it closes, and under each one line per delivery, in order.[^focus-kit-documents]
-A line has three parts, a mark, a slug and what the delivery gives, in one line:[^focus-kit-documents]
+As the kit's `references/documents.md` sets it, docs/06 holds the project's milestones, each with a paragraph saying what is true when it closes, and under each one line per delivery, in order.
+A line has three parts, a mark, a slug and what the delivery gives, in one line:
 
 ```
 [ ] <slug>    <what it delivers, one line>
@@ -17,12 +17,12 @@ It names the delivery's page, `work/<slug>.md`, and it is the argument of the co
 You have read two queues already: the clinic's, which `/brainstorm` wrote in [chapter 7](07-brainstorm.md), at [`book-v1/brainstorm`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/docs/06-Queue.md), and CLAHub's, which `/analyze` wrote in [chapter 8](08-analyze.md), at [`book-v1-analyze`](https://github.com/JCKodel/clahub/blob/book-v1-analyze/docs/06-Queue.md).
 
 The kit asks for one line, and the reasoning goes on the page.
-On Ninjobs I let the lines grow: its queue held 102 deliveries in 1,711 lines, 1,052 of them continuations of a line, decisions that belonged on the pages.[^ninjobs-queue]
+On Ninjobs I let the lines grow: its queue held 102 deliveries in 1,711 lines, 1,052 of them continuations of a line, decisions that belonged on the pages.[^ninjobs]
 A line that grows into a paragraph is a decision in the wrong place: the page is where the next session looks for it.
 
 ## The marks
 
-A line has one of three marks:[^focus-kit-documents]
+A line has one of three marks:
 
 * `[ ]` not yet defined: the delivery has a line and no page.
 * `[>]` defined: `/propose` wrote the page, `work/<slug>.md`.
@@ -30,9 +30,9 @@ A line has one of three marks:[^focus-kit-documents]
 
 `/propose` turns `[ ]` into `[>]` when it writes the page (chapter 10).
 `/apply` turns `[>]` into `[x]` when it moves the page to `work/done/` (chapter 11).
-A line never leaves the queue; it changes mark, so the queue is also the history of what was delivered.[^focus-kit-documents]
+A line never leaves the queue; it changes mark, so the queue is also the history of what was delivered.
 
-On trunk the page and the build land in one commit, so `[>]` waits in the working tree between the two commands; on a branch the page may be committed there, and the delivery reaches the main branch in one merge.[^focus-kit-unit-of-work]
+On trunk the page and the build land in one commit, so `[>]` waits in the working tree between the two commands; on a branch the page may be committed there, and the delivery reaches the main branch in one merge.
 It is how a fresh session running `/apply` knows the page exists; Part IV teaches the git side.
 
 ## Milestones
@@ -41,22 +41,22 @@ A milestone's paragraph says what is true when the milestone closes, in sentence
 It is a test, not a list of the lines under it and not a theme: "the owner can register professionals" can be checked, "professionals" cannot.
 The clinic's milestone 1 paragraph, quoted in [chapter 7](07-brainstorm.md), is the example: each sentence is something the owner or a client can do.
 
-A milestone holds three to eight deliveries, the kit's rule for the first milestone and a good size for any.[^focus-kit-brainstorm]
-The first ones are the skeleton the others stand on; the clinic's first line, `skeleton`, creates `npm run verify`, which every later delivery runs.[^focus-kit-brainstorm]
+A milestone holds three to eight deliveries, the rule of the kit's `brainstorm/SKILL.md` for the first milestone and a good size for any.
+The first ones are the skeleton the others stand on; the clinic's first line, `skeleton`, creates `npm run verify`, which every later delivery runs.
 Then each line comes after the lines it needs: a client cannot book before the owner has set a professional's hours.
 Closing a milestone, and reviewing the whole, is chapter 12.
 
 ## Changing the queue
 
-No command owns the queue.[^focus-kit-documents]
+No command owns the queue.
 A new idea becomes a line by conversation, in any session: you tell the agent, and it writes the line in the milestone where it belongs, with a new slug and `[ ]`.
 A milestone's paragraph or a line's description changes the same way, and the slug stays, since a page or a commit may already use it.
 Lines also come from a milestone's review (chapter 12) and, on an existing project, from its issues (chapter 8).
 You review the diff, as with every document ([chapter 6](06-the-documents.md)).
 
 This book's queue is an example.
-After chapters 7 and 8 were done, I asked the agent to define the kit's two choices in chapter 6, so both chapters could point back to them.
-This is the diff of docs/06 in that commit:[^book-two-choices]
+After chapters 7 and 8 were done, I asked the agent to define the kit's [two choices](06-the-documents.md#the-two-choices) in chapter 6, so both chapters could point back to them.
+This is the diff of docs/06 in that commit:
 
 ````diff
 diff --git a/docs/06-Queue.md b/docs/06-Queue.md
@@ -118,8 +118,4 @@ Check the diff: one line, a new slug, `[ ]`, and no reasoning in the line.
 Ask the agent to move `deploy` back to milestone 1, then read the paragraphs of both milestones.
 What else had to change, and did the agent change it?
 
-[^focus-kit-documents]: J.C. Ködel, "focus-kit", `SETUP.md` §3.5, the file `references/documents.md`, and §Choices, at commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/focus-kit/blob/26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b/SETUP.md
-[^focus-kit-brainstorm]: J.C. Ködel, "focus-kit", `SETUP.md` §3.1, the file of `/brainstorm`, item 6 of its conversation, at commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/focus-kit/blob/26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b/SETUP.md
-[^ninjobs-queue]: Ninjobs, a private repository, its docs/06 at its last change, 2026-09-22, counted by the author: lines with `wc -l`, deliveries as the lines inside the code blocks that start with a mark, continuations as the other non-empty lines inside them.
-[^book-two-choices]: J.C. Ködel, "One Page at a Time", commit 59b5e10fb59bde04b2cd444b38efe50414733446, chapter 6's "The two choices". https://github.com/JCKodel/focus-kit-book/commit/59b5e10fb59bde04b2cd444b38efe50414733446
-[^focus-kit-unit-of-work]: J.C. Ködel, "focus-kit", `SETUP.md` §Choices, the git answers, at commit e7607c58ad38e70e3496518a58d4237612e21ebc: a delivery's page and build are one change that reverts in one step. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md
+[^ninjobs]: Ninjobs, a private repository, its docs/06 at its last change, 2026-09-22, counted by the author: lines with `wc -l`, deliveries as the lines inside the code blocks that start with a mark, continuations as the other non-empty lines inside them.

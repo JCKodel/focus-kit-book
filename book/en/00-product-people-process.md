@@ -63,4 +63,4 @@ Part I is why, Part II the process, Part III the code, Part IV the team's git, a
 * A company's process is followed because each step has a purpose; a step that catches no concrete error leaves it.
 * The method is the same for one developer and for a company, and this book is also the material of an adoption program (Case B).
 
-[^lemonis-3ps]: Marcus Lemonis Business Team, "3 Key To Business Success: People, Process & Product", accessed 2026-09-28. https://marcuslemonis.com/business/3ps-of-business
+[^lemonis-3ps]: Marcus Lemonis Business Team, "3 Key To Business Success: People, Process & Product", accessed 2026-09-28. <https://marcuslemonis.com/business/3ps-of-business>

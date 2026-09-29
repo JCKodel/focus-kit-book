@@ -7,7 +7,7 @@ Você também consegue cobrir os buracos da página por conversa antes do `/appl
 
 Todo trabalho em um projeto com o focus-kit é uma entrega: a menor mudança que tem valor, o que outros métodos chamam de tarefa ou item de trabalho.
 A fila, o docs/06, lista as entregas em ordem, uma linha cada ([capítulo 9](09-queue-and-milestones.md)).
-O `/propose` pega uma linha e a transforma em uma página, `work/<slug>.md`: o que a entrega precisa fazer, o que ela não deve fazer, e como você vai saber que ela está feita.[^focus-kit-propose]
+O `/propose`, cujo arquivo é o `propose/SKILL.md`, pega uma linha e a transforma em uma página, `work/<slug>.md`: o que a entrega precisa fazer, o que ela não deve fazer, e como você vai saber que ela está feita.
 A página cabe em uma página para que uma pessoa consiga revisá-la, antes da construção e depois dela: quando o `/apply` a constrói, a mesma página também registra o que aconteceu, o que divergiu e o que foi decidido, como o [§3 do docs/05](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/docs/05-Process.md) da clínica a define.
 Se não cabe em uma página, o escopo ainda não foi entendido, e são duas entregas (a última seção deste capítulo).
 
@@ -16,17 +16,17 @@ Se não cabe em uma página, o escopo ainda não foi entendido, e são duas entr
 Um slug é o nome da entrega, em palavras minúsculas unidas por hífens, como `skeleton` ou `book-appointment`.
 Ele é escrito uma vez, na linha da fila, e dali em diante nomeia tudo o que é da entrega: a página `work/<slug>.md`, o argumento do `/propose <slug>` e do `/apply <slug>`, e a última linha do commit que a fecha, `work/done/<slug>.md`.
 As primeiras linhas vêm do `/brainstorm` ou do `/analyze`, que escrevem o primeiro marco ([capítulo 7](07-brainstorm.md), [capítulo 8](08-analyze.md)); as linhas seguintes vêm de uma conversa ou da revisão de um marco ([capítulo 9](09-queue-and-milestones.md)).
-Se você digita `/propose` sem slug, ele pede um.[^focus-kit-propose]
+Se você digita `/propose` sem slug, ele pede um.
 
 ### Quando a linha não existe
 
 Você também pode digitar `/propose` com um slug que a fila ainda não tem.
-Ele define a entrega do mesmo jeito, acrescenta a linha dela na fila onde ela pertence, e avisa que fez isso.[^focus-kit-propose]
+Ele define a entrega do mesmo jeito, acrescenta a linha dela na fila onde ela pertence, e avisa que fez isso.
 Uma ideia nova chega assim à fila e à sua página em uma conversa só; você ainda confere, no diff do docs/06, o marco e o lugar onde a linha entrou.
 
 ### Como ele sabe o que fazer
 
-Ele lê antes de perguntar.[^focus-kit-propose]
+Ele lê antes de perguntar.
 Ele começa pela descrição que a linha traz na fila; os documentos do projeto dão o resto:
 
 * docs/00, o produto: a quem ele serve, as regras dele, o que ele não é.
@@ -37,18 +37,18 @@ Ele começa pela descrição que a linha traz na fila; os documentos do projeto 
 * docs/01, a arquitetura: onde a mudança mora no código.
 
 Então ele pergunta, só onde há mais de uma leitura e nenhum documento a fecha: primeiro a avaliação dele, em prosa, e a recomendação dele primeiro em cada pergunta, então "your call" (você decide) é uma resposta válida, como no `/brainstorm` ([capítulo 7](07-brainstorm.md)).
-Ele escreve a página no formato do §3 do docs/05 e troca a marca da linha de `[ ]` para `[>]`; um termo novo entra primeiro no docs/03, depois na página.[^focus-kit-propose]
+Ele escreve a página no formato do §3 do docs/05 e troca a marca da linha de `[ ]` para `[>]`; um termo novo entra primeiro no docs/03, depois na página.
 
 ### Por que não fazer tudo em um passo
 
-O `/propose` nunca escreve, edita nem gera código, migration, teste ou configuração, e o kit diz por quê: "*separar decidir de fazer é o que impede o escopo de crescer durante a implementação*".[^focus-kit-propose]
+O `/propose` nunca escreve, edita nem gera código, migration, teste ou configuração, e o `propose/SKILL.md` diz por quê: "*separar decidir de fazer é o que impede o escopo de crescer durante a implementação*".
 Um agente que planeja e constrói no mesmo fôlego toma as decisões no meio da construção, onde você não as vê; a página põe cada decisão onde você consegue lê-la antes de existir qualquer código.
 O `/apply` então começa em uma sessão nova ([capítulo 2](02-how-agents-see.md)), com o contexto limpo, e a página é tudo o que ele leva desta conversa, então a página precisa guardar tudo de que a construção precisa.
 E a ordem é a barata: um buraco achado na página custa um turno de conversa, um buraco achado na construção custa outro `/apply` (os números estão em "Leia a página antes do `/apply`").
 
 ### Como você corrige a página
 
-Você pede ao agente, na mesma conversa, e ele escreve a correção: na página, e em qualquer documento que a correção toque.[^focus-kit-propose]
+Você pede ao agente, na mesma conversa, e ele escreve a correção: na página, e em qualquer documento que a correção toque.
 Você não edita a página à mão ([capítulo 6](06-the-documents.md)): o agente sabe qual documento é dono de cada fato, então uma correção que toca o vocabulário ou a fila entra lá também, e a conversa guarda o motivo da mudança.
 "Leia a página antes do `/apply`", abaixo, mostra uma revisão real, com o pedido e o diff.
 
@@ -62,20 +62,20 @@ Use o modo de plano dentro de uma sessão se ele ajudar você; a página é o qu
 ### O Contract, a única seção exata
 
 Uma seção da página precisa ser exata, o Contract: os dados, o schema, a API, os formatos das mensagens.
-O kit dá o motivo: "*uma tela errada se corrige em uma sessão, uma coluna errada é uma migration*".[^focus-kit-propose]
+O `propose/SKILL.md` dá o motivo: "*uma tela errada se corrige em uma sessão, uma coluna errada é uma migration*".
 Uma tela é código que você reescreve; uma coluna guarda dados, e mudá-la exige uma migration que carregue os dados que já estão lá.
 
 ### Uma unidade de trabalho
 
 Entre os dois comandos a linha fica em `[>]`: a página existe e a construção não ([capítulo 9](09-queue-and-milestones.md)).
-A página e a construção dela são uma unidade de trabalho: uma mudança que se desfaz em um passo.[^focus-kit-unit-of-work]
+A página e a construção dela são uma unidade de trabalho, como diz a seção Choices do `references/documents.md` do kit: uma mudança que se desfaz em um passo.
 No trunk elas entram em um commit, então a página espera sem commit na árvore de trabalho entre o `/propose` e o `/apply`; em um branch ou em uma worktree, o branch pode levar vários commits, e a entrega chega ao branch principal em um merge.
 A Parte IV ensina o lado do git; a clínica está no trunk, e é por isso que a execução abaixo a deixa sem commit.
 
 ## A execução na clínica
 
 A execução partiu da clínica depois de `book-v1/brainstorm`, no commit [`3f0b47c`](https://github.com/JCKodel/focus-kit-clinic/commit/3f0b47c1868e69970eefadb4f4a34bdcbada67b2), "Update focus-kit to e7607c5": o kit atualizado como o capítulo 5 ensina, em um commit só dele, então a atualização se desfaz em um passo.
-Nessa versão o `/propose` do kit termina pedindo que você leia a página antes do `/apply`, e a execução mostra isso.[^focus-kit-propose]
+Nessa versão o `/propose` do kit termina pedindo que você leia a página antes do `/apply`, e a execução mostra isso.
 A entrega foi a primeira linha da fila, `skeleton`: o PWA e o servidor vazios em um projeto, o `npm run verify` e o primeiro screenshot.
 O briefing nomeia a linha e dá a regra para todo o resto; o original está em inglês, e aqui vai traduzido:[^propose-run]
 
@@ -243,11 +243,11 @@ Cada recomendação da rodada está na página como uma decisão, e a página pa
 ## Leia a página antes do `/apply`
 
 A página é o registro do que o agente entendeu, e é o que o `/apply` vai construir: uma sessão nova lê a página e nada desta conversa.
-Ela é escrita para ser lida por uma pessoa, interpretada e completada, não gerada e aplicada no mesmo fôlego.[^focus-kit-propose]
+Como diz o fim do `propose/SKILL.md`, ela é escrita para ser lida por uma pessoa, interpretada e completada, não gerada e aplicada no mesmo fôlego.
 Leia-a antes do `/apply`, e cubra cada buraco pedindo ao agente, nunca editando a página à mão ([capítulo 6](06-the-documents.md)): o agente escreve a correção onde ela pertence, na página e em qualquer documento que ela toque.
 
 O custo decide quando lê-la.
-Um buraco achado na página custa um turno de conversa; um buraco achado depois do `/apply` custa outro `/apply`, o comando mais caro.[^focus-kit-propose]
+Um buraco achado na página custa um turno de conversa; um buraco achado depois do `/apply` custa outro `/apply`, o comando mais caro.
 No meu próprio uso, como o `/usage` do Claude Code o mostrou, o `/apply` levou 32% e o `/propose` 16% nas últimas 24 horas, e 47% e 14% nos últimos 7 dias.[^claude-usage]
 Os números são aproximados e cobrem todos os meus projetos juntos, mas a proporção é o que importa: o `/apply` custa de duas a mais de três vezes o que o `/propose` custa.
 
@@ -421,10 +421,10 @@ Cada buraco fechou onde o `/apply` teria de adivinhar: a checagem de import e o 
 
 ## Quando não cabe
 
-Um escopo que não cabe em uma página são duas entregas: o `/propose` diz isso, propõe a divisão e escreve só a primeira página, e a segunda vira uma linha na fila, onde ela pertence ([capítulo 9](09-queue-and-milestones.md)).[^focus-kit-propose]
+Um escopo que não cabe em uma página são duas entregas: o `/propose` diz isso, propõe a divisão e escreve só a primeira página, e a segunda vira uma linha na fila, onde ela pertence ([capítulo 9](09-queue-and-milestones.md)).
 Este livro dividiu uma no capítulo 3, que compara o Spec Kit, o OpenSpec e o focus-kit pelo que cada um escreve para a mesma funcionalidade.
 A execução medida das ferramentas, com o seu briefing, as suas versões fixadas e as suas contagens, não caberia na página do capítulo, então virou uma entrega própria, `spec-driven-run`.
-Este é o diff do docs/06 deste livro no commit dela:[^book-spec-driven-run]
+Este é o diff do docs/06 deste livro no commit dela:
 
 ````diff
 diff --git a/docs/06-Queue.md b/docs/06-Queue.md
@@ -472,9 +472,6 @@ Peça ao agente que cubra cada buraco, e leia o diff.
 Peça ao `/propose` `book-appointment` e `cancel-appointment` como uma entrega só.
 Ele propõe uma divisão, e onde vai a segunda linha?
 
-[^focus-kit-propose]: J.C. Ködel, "focus-kit", `SETUP.md` §3.3, o arquivo do `/propose`, no commit e7607c58ad38e70e3496518a58d4237612e21ebc, instalado no projeto guiado no commit 3f0b47c. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md
-[^focus-kit-unit-of-work]: J.C. Ködel, "focus-kit", `SETUP.md` §Choices, as respostas de git, no commit e7607c58ad38e70e3496518a58d4237612e21ebc: a página e a construção de uma entrega são uma mudança que se desfaz em um passo. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md
-[^propose-run]: A execução do `/propose` deste livro no projeto guiado, 2026-09-28, com o Claude Code 2.1.283 e o modelo `claude-opus-5-5`, a partir do commit 3f0b47c: o briefing, os comandos, a saída de cada turno, as perguntas e a resposta, a primeira página, a revisão e o diff dela. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/propose-run/README.md
-[^claude-usage]: `/usage` do Claude Code, lido pelo autor em 2026-09-28, sessões locais em uma máquina, todos os projetos juntos; `work/done/propose-run/usage.txt`. A ferramenta chama os números de aproximados; o autor o leu em três projetos e obteve os mesmos números, então não é uma medida de um projeto. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/propose-run/usage.txt
-[^book-spec-driven-run]: J.C. Ködel, "One Page at a Time", commit 53109f372125e8aeda200bb2e5bbd1ad7bcc5d61, que registrou a execução do capítulo 3 como uma entrega própria. https://github.com/JCKodel/focus-kit-book/commit/53109f372125e8aeda200bb2e5bbd1ad7bcc5d61
-[^claude-code-plan-mode]: Anthropic, "Common workflows", documentação do Claude Code, seção "Plan before editing", acesso em 2026-09-28. https://code.claude.com/docs/en/common-workflows#plan-before-editing
+[^propose-run]: A execução do `/propose` deste livro no projeto guiado, 2026-09-28, com o Claude Code 2.1.283 e o modelo `claude-opus-5-5`, a partir do commit 3f0b47c: o briefing, os comandos, a saída de cada turno, as perguntas e a resposta, a primeira página, a revisão e o diff dela. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/propose-run/README.md>
+[^claude-usage]: `/usage` do Claude Code, lido pelo autor em 2026-09-28, sessões locais em uma máquina, todos os projetos juntos; `work/done/propose-run/usage.txt`. A ferramenta chama os números de aproximados; o autor o leu em três projetos e obteve os mesmos números, então não é uma medida de um projeto. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/propose-run/usage.txt>
+[^claude-code-plan-mode]: Anthropic, "Common workflows", documentação do Claude Code, seção "Plan before editing", acesso em 2026-09-28. <https://code.claude.com/docs/en/common-workflows#plan-before-editing>

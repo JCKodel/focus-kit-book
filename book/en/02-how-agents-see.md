@@ -95,7 +95,7 @@ In focus-kit, `/propose` writes that page and `/apply` builds it in a fresh sess
 * Compaction replaces the conversation with a summary, and a detail that mattered can be lost.
 * Keep decisions in files read at the start of every session, and give each delivery a fresh session, with deciding apart from building.
 
-[^messages-api]: Anthropic, "Using the Messages API", accessed 2026-09-25. https://platform.claude.com/docs/en/build-with-claude/working-with-messages
-[^liu-2024]: Liu et al., "Lost in the Middle: How Language Models Use Long Contexts", 2024. https://arxiv.org/abs/2307.03172
-[^chroma-2025]: Chroma, "Context Rot: How Increasing Input Tokens Impacts LLM Performance", 2025. https://research.trychroma.com/context-rot
-[^anthropic-context-2025]: Anthropic, "Effective context engineering for AI agents", 2025. https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+[^messages-api]: Anthropic, "Using the Messages API", accessed 2026-09-25. <https://platform.claude.com/docs/en/build-with-claude/working-with-messages>
+[^liu-2024]: Liu et al., "Lost in the Middle: How Language Models Use Long Contexts", 2024. <https://arxiv.org/abs/2307.03172>
+[^chroma-2025]: Chroma, "Context Rot: How Increasing Input Tokens Impacts LLM Performance", 2025. <https://research.trychroma.com/context-rot>
+[^anthropic-context-2025]: Anthropic, "Effective context engineering for AI agents", 2025. <https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents>

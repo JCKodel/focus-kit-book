@@ -17,7 +17,7 @@
 * **One sentence per line** in the Markdown source.
 * **No em dash** in any text a reader reads, in either edition. Use a comma, a colon, parentheses or a new sentence.
 * **Anti-AI prose rules**: the patterns that make text read as machine-written, in §Prose rules, checked by `make verify`.
-* **Evidence.** Every number cites its source: a primary publication, or the case's recorded artifact.
+* **Evidence.** Every number says where it comes from: a primary publication, a record of this book's runs, or, for a private case, how the author counted it.
   Every artifact shown (a page, a queue, a command output) comes from a real run.
   The Portuguese edition shows an English prose artifact (a rules file, a page) translated, and says before it that the original is in English; code, commands and their output stay as they ran.
   An excerpt shown as evidence of how a tool worded something (chapter 3's three excerpts) stays in English, byte for byte, in both editions; the Portuguese edition follows it with its full translation, and each edition then says in one sentence what it shows.
@@ -112,14 +112,15 @@ status: draft            only while the chapter is not done; the delivery remove
 ```
 
 * One sentence per line in the source: a convention, not a check (no error it would have caught has happened, docs/05 §7).
-* Source notes: every number and every quoted claim from a publication carries `[^<key>]` at the claim.
+* Source notes: a note only where the reader gains something to open (a publication, a tool's documentation, a file of this book's repository or its runs) or a count to repeat. Every number and every quoted claim from such a source carries `[^<key>]` at the claim; a source cited again in the chapter reuses the key, and the PDF and the EPUB print its note once.
+  No note points to a commit, a diff or a file of focus-kit's repository: where the text quotes or states a rule of the kit, the sentence names the file in plain words (`SETUP.md` §3.4, the file of `/apply`).
+  A private case has one note per chapter that uses it, `[^ninjobs]`, `[^case-a]` or `[^case-b]`: the definition says the repository is private and how each number was obtained, so the reader knows what is claimed and can repeat the count on their own project; it names no private path: `[^ninjobs]: Ninjobs, a private repository, counted by the author over its history up to 2026-08-29: ...`
   The key is lowercase `[a-z0-9-]+`, the same in both editions (`[^metr-2025]`).
-  The definition is `[^<key>]: <Author or organization>, "<Title>", <year>. <URL>`, with the title in its original language in both editions.
+  The definition is `[^<key>]: <Author or organization>, "<Title>", <year>. <URL>`, with the title in its original language in both editions; the URL is written in angle brackets, `<https://...>`, so the site, the PDF and the EPUB make it a link.
   A publication without a date carries `accessed YYYY-MM-DD` in place of `<year>` (pt: `acesso em YYYY-MM-DD`).
   A tool cited at a tag or a release carries its version in place of `<year>` (`[^spec-kit]: GitHub, "Spec Kit", v1.0.11. <URL>`).
   A quotation is in quotation marks and italic, `"*...*"`.
   The English edition keeps the publication's words; the Portuguese edition gives only their translation, and the original is at the source in the note.
-  For a case, whose repository the reader cannot open, the definition says it is private and how each number was obtained, so the reader knows what is claimed and can repeat the count on their own project; it names no private path: `[^ninjobs-adr-0022]: Ninjobs, a private repository, counted by the author over its history up to 2026-08-29, when its ADR-0022 dropped OpenSpec: ...`
 * `mkdocs.yml` enables the `footnotes` Markdown extension so the site renders them; pandoc reads the same syntax for PDF and EPUB.
 * Appendices (`A<n>-`) are out of this shape until the first appendix delivery fixes theirs.
 

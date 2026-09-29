@@ -65,7 +65,7 @@ A new concept enters here first, in both languages.
 | opening | abertura | none (first paragraph after the H1) | At most three sentences saying what the reader can do after the chapter; it has no heading. |
 | key points | pontos-chave | `## Key points` / `## Pontos-chave` | At most five bullets closing every chapter's content. |
 | exercise | exercício | `## Exercises` / `## Exercícios`, then `### Exercise N.M` / `### Exercício N.M` | A task on the guided project at the end of a chapter, from Part II on; answered in an appendix. |
-| source note | nota de fonte | `[^<key>]` | A footnote that gives the source of a number or a quoted claim; the key is the same in both editions. |
+| source note | nota de fonte | `[^<key>]` | A footnote that gives the reader something to open, or, for a private case, how its numbers were counted; the key is the same in both editions, and the PDF and the EPUB print it once per chapter. |
 | disclosure list | lista de exposição | `FKB_DENYLIST` | The private terms that must never appear in the repository; kept outside it. |
 
 ## Entities and invariants

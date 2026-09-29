@@ -33,6 +33,8 @@ PANDOC_PLACE = re.compile(r"\"([^\"]+)\" \(line (\d+), column \d+\)")
 CHAPTER_START = re.compile(r"(?=<h1[ >])")
 NOTES = re.compile(r'<aside id="footnotes[^"]*" class="footnotes[^"]*"[^>]*>.*?<ol[^>]*>\n?(.*?)</ol>\s*</aside>\n?', re.S)
 NOTE_NUMBER = re.compile(r'(<a\s+href="#fn\d+"\s+class="footnote-ref"[^>]*><sup>)\d+(</sup>)')
+NOTE_REF = re.compile(r"\[\^([a-z0-9-]+)\](?!:)")
+NOTE_DEFINITION = re.compile(r"^\[\^([a-z0-9-]+)\]: ")
 
 
 class Failed(Exception):
@@ -131,11 +133,18 @@ def anchor(name):
     return "chapter-" + Path(name).stem
 
 
+def note_anchor(name, key):
+    """The id at the start of a note's text, the target of every later mention of its key."""
+    return f"note-{Path(name).stem}-{key}"
+
+
 def prepare(source, names, banner):
     """Return (lines, source line of each line) of a chapter as pandoc reads it.
 
     The front matter goes; a draft gets the banner after its H1; the H1 gets the id `anchor`;
     a link to another chapter of the book without #anchor points to that id.
+    A note keeps its first mention; every later mention of its key becomes a link to that note,
+    showing its number, since pandoc prints one note per mention. Notes number from 1 per chapter.
     """
     text = source.read_text(encoding="utf-8")
     fields, body = front_matter(text)
@@ -143,12 +152,26 @@ def prepare(source, names, banner):
     masked = mask("\n".join(body), keep_targets=True)
     lines, where = [], []
     heading_done = False
+    notes = {}
     for offset, (line, seen) in enumerate(zip(body, masked)):
         number = first + offset
-        for match in reversed(list(CHAPTER_LINK.finditer(seen))):
+        # Edits as (start, end, text) on the columns of seen, applied from the right so none shifts another.
+        edits = []
+        definition = NOTE_DEFINITION.match(seen)
+        if definition:
+            edits.append((definition.end(), definition.end(), f"[]{{#{note_anchor(source.name, definition.group(1))}}}"))
+        for match in NOTE_REF.finditer(seen):
+            key = match.group(1)
+            if key in notes:
+                link = f"[^{notes[key]}^](#{note_anchor(source.name, key)}){{.footnote-ref}}"
+                edits.append((match.start(), match.end(), link))
+            else:
+                notes[key] = len(notes) + 1
+        for match in CHAPTER_LINK.finditer(seen):
             if match.group(1) in names:
-                end = match.end(1)
-                line = line[:end] + "#" + anchor(match.group(1)) + line[end:]
+                edits.append((match.end(1), match.end(1), "#" + anchor(match.group(1))))
+        for start, end, new in sorted(edits, reverse=True):
+            line = line[:start] + new + line[end:]
         # The mask blanks a code span, so a title that opens with one is checked on the line itself.
         if not heading_done and seen.startswith("# ") and re.match(r"# \S", line):
             heading_done = True

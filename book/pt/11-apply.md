@@ -5,37 +5,37 @@ Você consegue revisar essa mudança contra a página antes do commit, e fazer o
 
 ## O que ele faz
 
-O `/apply <slug>` constrói a entrega que `work/<slug>.md` descreve, por inteiro, em uma sessão: o código, os testes, a prova e os documentos.[^focus-kit-apply]
+O `/apply <slug>`, cujo arquivo é o `apply/SKILL.md`, constrói a entrega que `work/<slug>.md` descreve, por inteiro, em uma sessão: o código, os testes, a prova e os documentos.
 Ele começa em uma sessão nova ([capítulo 2](02-how-agents-see.md)): a página é tudo o que ele leva da conversa que a escreveu, e é por isso que o [capítulo 10](10-propose.md) pede que você leia a página antes de este comando rodar.
 
 ### O que ele lê
 
-A página, o `AGENTS.md` e três dos documentos do projeto: o docs/01, a arquitetura, que diz onde cada peça fica e como os erros viajam; o docs/04, as convenções, que dizem quais testes escrever; e o docs/05, o processo.[^focus-kit-apply]
+A página, o `AGENTS.md` e três dos documentos do projeto: o docs/01, a arquitetura, que diz onde cada peça fica e como os erros viajam; o docs/04, as convenções, que dizem quais testes escrever; e o docs/05, o processo.
 O docs/05 guarda os slots do projeto, e o `/apply` os segue ao pé da letra: o comando de verificação, os ambientes e o que uma entrega deixa em cada um, como uma tela é provada, a política de publicação e a estratégia de git ([capítulo 6](06-the-documents.md)).
 Em um branch ou em uma worktree, ele trabalha no que o `/propose` criou para o slug.
 
 ### A página é o escopo
 
 O que a página pede é o que se constrói, e nada em volta.
-O kit diz isso em uma linha: "*a página é o escopo; não o amplie*".[^focus-kit-apply]
+O `apply/SKILL.md` diz isso em uma linha: "*a página é o escopo; não o amplie*".
 Então o `/apply` não acrescenta nenhuma dependência, camada ou ferramenta que a página não nomeou, só abstrai na segunda ocorrência concreta (e a página diz qual foi a primeira), e não escreve travessão em nenhum texto que um usuário lê.
 
 ### Quando a página contradiz um documento
 
 Ele para e diz qual.
-Ou o documento muda na mesma entrega, ou a página está errada; ele nunca escolhe um dos dois em silêncio.[^focus-kit-apply]
+Ou o documento muda na mesma entrega, ou a página está errada; ele nunca escolhe um dos dois em silêncio.
 Uma escolha em silêncio deixaria uma página e um documento que discordam, e a próxima sessão construiria sobre o que lesse primeiro.
 
 ### A verificação e a prova
 
 Ele roda o comando de verificação até ficar verde.
-Depois prova a entrega do jeito que o docs/05 diz: um screenshot contra a referência, uma execução do começo ao fim, ou uma checagem à mão.[^focus-kit-apply]
+Depois prova a entrega do jeito que o docs/05 diz: um screenshot contra a referência, uma execução do começo ao fim, ou uma checagem à mão.
 Ele lista o que diverge da referência e corrige, até sobrar só o que ele consegue justificar; uma falha faz parte da prova e é registrada, não escondida.
 
 ### O que "feito" quer dizer
 
 Verde não é feito.
-Antes de parar, o `/apply` faz tudo isto:[^focus-kit-apply]
+Antes de parar, o `/apply` faz tudo isto:
 
 * Escreve na página o que aconteceu: o que divergiu do plano e por quê, o que foi deixado de fora, o que a prova achou, e as decisões tomadas, com um ADR se precisou de um.
 * Atualiza os documentos que a entrega mudou: um termo novo no docs/03, uma regra nova no documento dono dela, uma decisão no docs/adr/.
@@ -46,7 +46,7 @@ Antes de parar, o `/apply` faz tudo isto:[^focus-kit-apply]
 
 ### Por que ele para no stage
 
-O `/apply` nunca faz commit e nunca faz merge, qualquer que seja a estratégia de git.[^focus-kit-apply]
+O `/apply` nunca faz commit e nunca faz merge, qualquer que seja a estratégia de git.
 Ele põe tudo no stage e entrega a mensagem a você; o commit é seu, e vem depois da sua revisão, na última seção deste capítulo.
 
 ## A execução na clínica
@@ -347,7 +347,7 @@ Este é o diff que a revisão fez nos arquivos do stage:[^apply-run]
 O diff está como rodou, em inglês: no docs/05, o ambiente local passa a dizer que a entrega deixa o código pronto para subir e nomeia o comando, e que a pessoa o sobe, porque o agente pode rodar sem interface; na página, o item do Done when volta a ser só a linha da lista, o `@hono/node-server` passa a dizer que a pessoa o aprovou na revisão, o Ctrl+C passa a ser "não testado", e uma lista nova, "Not proven outside a test", diz o que só um teste provou, por que o `npm run dev` não rodou, e como conferir o Ctrl+C.
 Nada no código mudou: a revisão corrigiu o registro, que é o que a próxima pessoa lê.
 Depois fiz o commit da árvore no stage com a mensagem sugerida, criei a tag `book-v1/apply` e enviei os dois com push.
-A página e a sua construção estão nesse commit único: a unidade de trabalho do capítulo 10, que se desfaz em um passo.[^focus-kit-unit-of-work]
+A página e a sua construção estão nesse commit único: a unidade de trabalho do capítulo 10, que se desfaz em um passo.
 
 O agente nunca faz commit porque o commit é a sua revisão.
 Um commit diz que uma pessoa leu a mudança e a aceita; um agente que faz commit do próprio trabalho pula o único leitor que pode dizer que a construção é o que se queria.
@@ -377,6 +377,4 @@ Revise a sua mudança no stage com as perguntas de "Revise antes do commit", pe�
 
 Para cada divergência no O que aconteceu da sua página, diga se ela deveria ter sido uma pergunta na página antes do `/apply`.
 
-[^focus-kit-apply]: J.C. Ködel, "focus-kit", `SETUP.md` §3.4, o arquivo do `/apply`, no commit e7607c58ad38e70e3496518a58d4237612e21ebc, instalado no projeto guiado no commit 3f0b47c. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md
-[^focus-kit-unit-of-work]: J.C. Ködel, "focus-kit", `SETUP.md` §Choices, as respostas de git, no commit e7607c58ad38e70e3496518a58d4237612e21ebc: a página e a construção de uma entrega são uma mudança que se desfaz em um passo. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md
-[^apply-run]: A execução do `/apply` deste livro no projeto guiado, 2026-09-28, com o Claude Code 2.1.284 e o modelo `claude-opus-5-5`, a partir do commit 3f0b47c: o comando e as suas permissões, a saída de cada turno, a saída da verificação, o screenshot, a página como a execução a deixou, a revisão e o seu diff, e o status do stage. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/apply-run/README.md
+[^apply-run]: A execução do `/apply` deste livro no projeto guiado, 2026-09-28, com o Claude Code 2.1.284 e o modelo `claude-opus-5-5`, a partir do commit 3f0b47c: o comando e as suas permissões, a saída de cada turno, a saída da verificação, o screenshot, a página como a execução a deixou, a revisão e o seu diff, e o status do stage. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/apply-run/README.md>

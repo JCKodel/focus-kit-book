@@ -11,7 +11,7 @@ Open your coding agent at the root of the repository and say:
 Read https://raw.githubusercontent.com/JCKodel/focus-kit/main/SETUP.md and do what it says.
 ```
 
-`SETUP.md` is focus-kit's setup file: one file of instructions that the agent reads and turns into the kit's files.[^focus-kit-setup]
+`SETUP.md` is focus-kit's setup file: one file of instructions that the agent reads and turns into the kit's files.
 If you prefer to read it first, download `SETUP.md` next to the repository and point the agent at the file.
 Nothing is installed on your machine: the agent writes files into the repository, and that is all.
 
@@ -53,13 +53,13 @@ Then `git status --short` showed what appeared:[^claude-code-run]
 ?? GEMINI.md
 ```
 
-These lines hold 36 files (`git status --short --untracked-files=all` lists them one by one): the four commands once in each skills folder, `.claude/skills/`, `.agents/skills/` and `.windsurf/skills/`, and small pointer files for the hosts that need them.[^focus-kit-setup]
+These lines hold 36 files (`git status --short --untracked-files=all` lists them one by one): the four commands once in each skills folder, `.claude/skills/`, `.agents/skills/` and `.windsurf/skills/`, and small pointer files for the hosts that need them.
 Every file came out of the setup file byte for byte.[^claude-code-run]
 The install does not stage or commit; you review the files and commit them yourself.
 
 ## What the install never touches, and how to update
 
-Running the setup file again replaces the kit's files and nothing else.[^focus-kit-setup]
+Running the setup file again replaces the kit's files and nothing else.
 `docs/`, `work/`, `AGENTS.md` and `CLAUDE.md` are the project's: the commands write them, and the setup file never touches them.
 In the clinic, none of them exists yet; chapter 7 writes them.
 
@@ -101,7 +101,7 @@ Cursor, Gemini CLI, Google Antigravity, Windsurf and others are in the table of 
 The hosts differ in folders and in the character that starts a command, and they agree on three facts.
 Each reads a rules file when a session starts, `AGENTS.md` directly or through a pointer; each loads a command from a file in the repository; and each hands the command the word you type after it.
 The method lives in plain files, the rules file of chapter 2 and the project documents a fresh session reads, so switching hosts changes nothing in it.
-Every install writes every host's files, whichever host ran it, so the repository opens ready in any of them.[^focus-kit-setup]
+The setup file writes every host's files, whichever host runs it, so the repository opens ready in any of them.
 
 The kit also offers the FOCUS architecture and a git strategy, and imposes neither; Parts III and IV teach them.
 
@@ -130,12 +130,11 @@ What did the update change, and what did it leave alone?
 Find your host's row in `SETUP.md` §1, open its vendor page, and invoke `/propose` (or your host's equivalent) with a made-up slug.
 The project has no documents yet for the command to read: what does the agent say, and why does that make chapters 6 and 7 come next?
 
-[^focus-kit-setup]: J.C. Ködel, "focus-kit", `SETUP.md` at commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/focus-kit/blob/26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b/SETUP.md
-[^claude-code-run]: This book's install of focus-kit on the guided project, 2026-09-25, with Claude Code 2.1.282, from `book-v1/start` to the chapter tag `book-v1/install-and-hosts`: the command, the report, the file list and the byte-for-byte check in the run's folder. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/install-and-hosts-run/README.md
-[^claude-code-memory]: Anthropic, "How Claude remembers your project", accessed 2026-09-25. https://code.claude.com/docs/en/memory
-[^claude-code-skills]: Anthropic, "Extend Claude with skills", accessed 2026-09-25. https://code.claude.com/docs/en/skills
-[^codex-agents-md]: OpenAI, "Custom instructions with AGENTS.md", accessed 2026-09-25. https://developers.openai.com/codex/guides/agents-md
-[^codex-skills]: OpenAI, "Build skills", accessed 2026-09-25. https://developers.openai.com/codex/skills
-[^copilot-instructions]: GitHub, "Adding repository custom instructions for GitHub Copilot", accessed 2026-09-25. https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions
-[^copilot-skills]: GitHub, "About agent skills", accessed 2026-09-25. https://docs.github.com/en/copilot/concepts/agents/about-agent-skills
-[^copilot-prompt-files]: GitHub, "Your first prompt file", accessed 2026-09-25. https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files/your-first-prompt-file
+[^claude-code-run]: This book's install of focus-kit on the guided project, 2026-09-25, with Claude Code 2.1.282, from `book-v1/start` to the chapter tag `book-v1/install-and-hosts`: the command, the report, the file list and the byte-for-byte check in the run's folder. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/install-and-hosts-run/README.md>
+[^claude-code-memory]: Anthropic, "How Claude remembers your project", accessed 2026-09-25. <https://code.claude.com/docs/en/memory>
+[^claude-code-skills]: Anthropic, "Extend Claude with skills", accessed 2026-09-25. <https://code.claude.com/docs/en/skills>
+[^codex-agents-md]: OpenAI, "Custom instructions with AGENTS.md", accessed 2026-09-25. <https://developers.openai.com/codex/guides/agents-md>
+[^codex-skills]: OpenAI, "Build skills", accessed 2026-09-25. <https://developers.openai.com/codex/skills>
+[^copilot-instructions]: GitHub, "Adding repository custom instructions for GitHub Copilot", accessed 2026-09-25. <https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions>
+[^copilot-skills]: GitHub, "About agent skills", accessed 2026-09-25. <https://docs.github.com/en/copilot/concepts/agents/about-agent-skills>
+[^copilot-prompt-files]: GitHub, "Your first prompt file", accessed 2026-09-25. <https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files/your-first-prompt-file>

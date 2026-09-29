@@ -8,8 +8,8 @@ And you can name the kit's two choices, FOCUS and the git strategy, the three an
 
 A fresh session knows only what is written in files ([chapter 2](02-how-agents-see.md)), and a decision written in several places goes stale in some of them ([chapter 4](04-birth-of-focus-kit.md)).
 So each fact of the project lives in one place, and the agent reads it there.
-focus-kit gives those places a fixed shape: seven numbered documents, `docs/00` to `docs/06`; a folder of decisions, `docs/adr/`; the rules file, `AGENTS.md`; and `work/`, which holds one page per delivery.[^focus-kit-documents]
-The numbers are fixed because the commands cite them; the name after the number is in the documentation language, `00-Product.md` in this book and `00-Produto.md` in a project documented in Portuguese.[^focus-kit-documents]
+focus-kit gives those places a fixed shape, in its file `references/documents.md`: seven numbered documents, `docs/00` to `docs/06`; a folder of decisions, `docs/adr/`; the rules file, `AGENTS.md`; and `work/`, which holds one page per delivery.
+The numbers are fixed because the commands cite them; the name after the number is in the documentation language, `00-Product.md` in this book and `00-Produto.md` in a project documented in Portuguese.
 
 This book is written with focus-kit, so its repository has the same set, and the excerpts below come from it, as it was at one commit.[^book-docs]
 Chapter 7 writes the set for the clinic.
@@ -17,11 +17,11 @@ Chapter 7 writes the set for the clinic.
 ## The seven documents
 
 `/brainstorm` and `/analyze` write the seven documents; `/propose` and `/apply` read them before they act.
-`/propose` reads docs/00, docs/03, docs/05, docs/06 and the pages in `work/`, and docs/01 to see where a change lands; `/apply` reads `AGENTS.md`, docs/01, docs/04 and docs/05.[^focus-kit-commands]
+In their files, `/propose` reads docs/00, docs/03, docs/05, docs/06 and the pages in `work/`, and docs/01 to see where a change lands; `/apply` reads `AGENTS.md`, docs/01, docs/04 and docs/05.
 
 ### docs/00, the product
 
-docs/00 says what the product is and for whom: its purpose in one paragraph, its audience, how it works in the user's words, what it is not, the values decisions are measured against, the product questions and the open decisions.[^focus-kit-documents]
+docs/00 says what the product is and for whom: its purpose in one paragraph, its audience, how it works in the user's words, what it is not, the values decisions are measured against, the product questions and the open decisions.
 Nothing may contradict it without changing it in the same delivery.
 You read it when a decision is in doubt, and `/propose` reads it before it writes a page.
 These are the product questions of this book's docs/00, the checklist every delivery of the book is held to:
@@ -41,13 +41,13 @@ Every decision must answer yes to all of these:
 
 Each question can be answered yes or no about one chapter, so a page can be checked against it: this chapter was read against question 2, sentence by sentence, before it was done.
 
-docs/00 ends with its open decisions: what nobody closes alone, so an agent never settles it by assumption.[^focus-kit-documents]
+docs/00 ends with its open decisions: what nobody closes alone, so an agent never settles it by assumption.
 This book's OD-3 says that the author approves the anonymized text of every passage drawn from a private case before the chapter is done.
 An agent that writes such a passage reads that line and stops to ask, where it would otherwise have judged its own anonymization good enough.
 
 ### docs/03, the domain
 
-docs/03 is one table of the project's terms, then the entities and the rules that always hold for them.[^focus-kit-documents]
+docs/03 is one table of the project's terms, then the entities and the rules that always hold for them.
 The table is also the vocabulary: every page, identifier and test uses its terms, and a new concept enters here before it enters anywhere else.
 This book's table has a column for the Portuguese term, since the book has two editions; this is its header and the row for delivery, the unit of work each page describes:
 
@@ -61,19 +61,19 @@ The row fixes the word, the name files use for it and what it means, so a page t
 
 ### docs/01, the architecture, and docs/02, the backend
 
-docs/01 holds the design in one sentence, the stack with the reason for each choice that had an alternative, how the code is organized, how data is accessed, how errors travel, the environments, and what was tried and removed on purpose, so it is not rebuilt.[^focus-kit-documents]
+docs/01 holds the design in one sentence, the stack with the reason for each choice that had an alternative, how the code is organized, how data is accessed, how errors travel, the environments, and what was tried and removed on purpose, so it is not rebuilt.
 `/apply` reads it to know where each piece goes.
-docs/02 exists only when a server holds rules the client must not duplicate: the schema, the access rules, the functions the client may call; otherwise it is one line.[^focus-kit-documents]
+docs/02 exists only when a server holds rules the client must not duplicate: the schema, the access rules, the functions the client may call; otherwise it is one line.
 This book's docs/02 is that line: "There is none. The book is static; no server holds rules."
 docs/01 also records the answer to the first of the kit's [two choices](#the-two-choices), the architecture.
 
 ### docs/04, the conventions
 
-docs/04 holds the documentation and identifier languages, naming, style and the tool that enforces it, where tests live and the commit message format; section 6 shows one of its rules.[^focus-kit-documents]
+docs/04 holds the documentation and identifier languages, naming, style and the tool that enforces it, where tests live and the commit message format; section 6 shows one of its rules.
 
 ### docs/05, the process
 
-docs/05 is the kit's process template, the same in every project, with one section filled in by the project: §5, "This project", whose entries are the slots, the facts of this project that the commands read.[^focus-kit-documents]
+docs/05 is the kit's process template, the same in every project, with one section filled in by the project: §5, "This project", whose entries are the slots, the facts of this project that the commands read.
 These are two slots of this book's §5, the command that checks a delivery and the git strategy:
 
 ```markdown
@@ -92,12 +92,12 @@ docs/05 also holds the flow from queue to commit, §2, and the shape of a page, 
 
 ### docs/06, the queue
 
-docs/06 lists the milestones, each with a paragraph saying what is true when it closes, and under each one line per delivery, in order, with a mark for its state.[^focus-kit-documents]
+docs/06 lists the milestones, each with a paragraph saying what is true when it closes, and under each one line per delivery, in order, with a mark for its state.
 Chapter 9 teaches it.
 
 ## The two choices
 
-The kit offers two choices and imposes neither: the architecture and the git strategy.[^focus-kit-documents]
+The kit offers two choices, in the Choices section of `references/documents.md`, and imposes neither: the architecture and the git strategy.
 
 FOCUS, the architecture the kit offers, is four letters, each with its own value.[^book-adr-0016]
 Feature-oriented: the code is organized in vertical slices, one folder holding everything a feature needs, with no folder per technology.
@@ -108,12 +108,12 @@ Behind the view, which fires events and renders the state it receives, stand thr
 Only the repository does I/O, so only it catches an exception, an expected failure such as a lost connection, and returns it as a value, a Result; an error, a bug, is never caught (Dart splits its `Exception` and `Error` classes the same way).[^dart-error-exception]
 The book calls the principle "exceptions as values", where the field says "errors as values", because a bug is never a value.[^book-adr-0016]
 Nothing exists for ceremony: KISS (keep it simple), YAGNI (you aren't gonna need it) and DRY (don't repeat yourself) decide when a piece pays its way, and a feature with no rule has no use case.
-The kit gives three answers: FOCUS whole; the two principles only, vertical slices and exceptions as values, in whatever structure the stack favors; or neither, the project's own conventions.[^focus-kit-documents]
+The kit gives three answers: FOCUS whole; the two principles only, vertical slices and exceptions as values, in whatever structure the stack favors; or neither, the project's own conventions.
 docs/01 records the answer, and an ADR records why.
 Part III teaches FOCUS.
 
-The git strategy is a strategy, not a silver bullet: its three answers each fit one way of working.[^focus-kit-git]
-In every one, the page `/propose` writes and the build `/apply` makes are one unit of work, which reverts in one step: one commit on trunk, one merge of the branch otherwise; and the agent never commits or merges.[^focus-kit-unit-of-work]
+The git strategy is a strategy, not a silver bullet: its three answers each fit one way of working.
+In every one, the page `/propose` writes and the build `/apply` makes are one unit of work, which reverts in one step: one commit on trunk, one merge of the branch otherwise; and the agent never commits or merges.
 Trunk puts everything on the main branch, one delivery at a time, and is only for one person working alone: with two, their deliveries share one branch, and one commit carries the other's half-done work.
 A branch per delivery has `/propose` create a branch named after the slug and write the page there, and `/apply` build on it; the person merges it through a pull request, a request to merge a branch that someone reviews first, so it fits sequential work reviewed that way.
 A worktree per delivery gives each delivery a second working folder on its own branch, created by `/propose`, so several agents build different deliveries at the same time and one branch does not touch another.
@@ -123,7 +123,7 @@ Part IV teaches the three.
 
 ## ADRs
 
-An ADR (architecture decision record) is one file per decision, `docs/adr/ADR-NNNN-<slug>.md`, with its context, the decision, its consequences and its date.[^focus-kit-documents]
+An ADR (architecture decision record) is one file per decision, `docs/adr/ADR-NNNN-<slug>.md`, with its context, the decision, its consequences and its date.
 An ADR is amended, never rewritten: when the decision changes, an amendment below it says what changed and when, and the original reason stays above, so the next person who wants to change it again reads why it was so.
 This is this book's ADR-0010, which chose the git strategy of the Git slot above:
 
@@ -181,13 +181,13 @@ This is the rest of it:
 
 Most lines end with the document or the ADR that holds the rule whole: the line reminds the agent at the start of every session, and the owner holds the reason.
 
-The kit's rules for this file are three: sixty lines at most, everything in it points at a document, and nothing in it is the only place a rule is written.[^focus-kit-documents]
+The kit's rules for this file, in `references/documents.md`, are three: sixty lines at most, everything in it points at a document, and nothing in it is the only place a rule is written.
 It is loaded whole into every session, so it stays short, and a rule that lived only here would have no reason written anywhere; Claude Code also reads it through the `CLAUDE.md` of chapter 5.
 
 ## Living documents
 
 When I reviewed chapter 3, its excerpts showed each tool's scenario without the project or the brief it answered, and one was a single line that leaned on the line above it.
-I fixed the chapter, and in the same commit I wrote the fix into docs/04, the conventions, as two rules for every chapter, "Context before an excerpt" and "Teach, do not only show".[^book-docs-context]
+I fixed the chapter, and in the same commit I wrote the fix into docs/04, the conventions, as two rules for every chapter, "Context before an excerpt" and "Teach, do not only show".
 This is the first, as docs/04 holds it:
 
 ```markdown
@@ -197,10 +197,10 @@ This is the first, as docs/04 holds it:
 ```
 
 The rule names the product question it serves, so the reason travels with it.
-Chapter 5 was written after that commit: its page put the clinic and its starting tag before the install report, and its delivery added two sentences introducing the guided project, citing the rule; nobody repeated the request.[^book-docs-context]
+Chapter 5 was written after that commit: its page put the clinic and its starting tag before the install report, and its delivery added two sentences introducing the guided project, citing the rule; nobody repeated the request.
 Every section of this chapter follows the same rule.
 
-That is a living document: a delivery that changes behaviour updates the document that owns it, in the same delivery.[^focus-kit-documents]
+That is a living document: a delivery that changes behaviour updates the document that owns it, in the same delivery.
 The next session reads the change with everything else, and follows it without being told again.
 
 You do not have to edit the documents by hand, and I recommend you do not.
@@ -237,11 +237,6 @@ In this book's [`AGENTS.md`](https://github.com/JCKodel/focus-kit-book/blob/6c27
 Pick an answer to each of the two choices for the clinic, with one reason each.
 Keep them, to compare with the clinic's brief to `/brainstorm` in chapter 7.
 
-[^focus-kit-documents]: J.C. Ködel, "focus-kit", `SETUP.md` §3.5, the file `references/documents.md`, and §Choices, at commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/focus-kit/blob/26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b/SETUP.md
-[^focus-kit-commands]: J.C. Ködel, "focus-kit", `SETUP.md` §3.3 and §3.4, the files of `/propose` and `/apply`, at commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/focus-kit/blob/26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b/SETUP.md
-[^book-docs]: J.C. Ködel, "One Page at a Time", this book's repository at commit 6c2713b63af7397ee00142497287b8408a5651b1: the excerpts of docs/00, docs/03, docs/05, ADR-0010 and `AGENTS.md`. https://github.com/JCKodel/focus-kit-book/tree/6c2713b63af7397ee00142497287b8408a5651b1
-[^dart-error-exception]: Dart, "Error class" and "Exception class", `dart:core` API reference, accessed 2026-09-28: an `Error` is "*a program failure that the programmer should have avoided*"; an `Exception` "*is intended to be caught*". https://api.dart.dev/dart-core/Error-class.html and https://api.dart.dev/dart-core/Exception-class.html
-[^focus-kit-git]: J.C. Ködel, "focus-kit", `SETUP.md` §Choices, the git answers, and §3.3, the file of `/propose`, on `main`, accessed 2026-09-28. https://github.com/JCKodel/focus-kit/blob/main/SETUP.md
-[^book-adr-0016]: J.C. Ködel, "One Page at a Time", this book's ADR-0016, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, dated 2026-09-28, in the ADR folder on `main`. https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr
-[^book-docs-context]: J.C. Ködel, "One Page at a Time", commit 297af60dedb088bad441555c8bc019a60ce4e612, which fixed chapter 3 and added "Context before an excerpt" to docs/04, https://github.com/JCKodel/focus-kit-book/commit/297af60dedb088bad441555c8bc019a60ce4e612; and chapter 5's page, which cites it. https://github.com/JCKodel/focus-kit-book/blob/6c2713b63af7397ee00142497287b8408a5651b1/work/done/install-and-hosts.md
-[^focus-kit-unit-of-work]: J.C. Ködel, "focus-kit", `SETUP.md` §Choices, the git answers, at commit e7607c58ad38e70e3496518a58d4237612e21ebc: a delivery's page and build are one change that reverts in one step. https://github.com/JCKodel/focus-kit/blob/e7607c58ad38e70e3496518a58d4237612e21ebc/SETUP.md
+[^book-docs]: J.C. Ködel, "One Page at a Time", this book's repository at commit 6c2713b63af7397ee00142497287b8408a5651b1: the excerpts of docs/00, docs/03, docs/05, ADR-0010 and `AGENTS.md`. <https://github.com/JCKodel/focus-kit-book/tree/6c2713b63af7397ee00142497287b8408a5651b1>
+[^dart-error-exception]: Dart, "Error class" and "Exception class", `dart:core` API reference, accessed 2026-09-28: an `Error` is "*a program failure that the programmer should have avoided*"; an `Exception` "*is intended to be caught*". <https://api.dart.dev/dart-core/Error-class.html> and <https://api.dart.dev/dart-core/Exception-class.html>
+[^book-adr-0016]: J.C. Ködel, "One Page at a Time", this book's ADR-0016, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, dated 2026-09-28, in the ADR folder on `main`. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>

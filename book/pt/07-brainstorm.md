@@ -6,7 +6,7 @@ Você também consegue escolher uma stack pelo que o projeto precisa e por quant
 ## O que ele pergunta
 
 O `/brainstorm` é o comando para um repositório que ainda não tem código.
-Ele conversa um assunto de cada vez, nesta ordem, e segue adiante quando já conseguiria escrever aquele documento sozinho:[^focus-kit-brainstorm]
+Ele conversa um assunto de cada vez, nesta ordem, e segue adiante quando já conseguiria escrever aquele documento sozinho, como diz o seu arquivo, `brainstorm/SKILL.md`:
 
 1. O produto (docs/00): o que ele é, para quem, o que ele não é, como é uma boa decisão.
 2. O vocabulário (docs/03): as palavras sem as quais o produto não pode ser descrito, cada uma com o seu nome no código.
@@ -15,11 +15,11 @@ Ele conversa um assunto de cada vez, nesta ordem, e segue adiante quando já con
 5. Os slots do processo (docs/05): o comando de verificação, os ambientes, como uma tela é provada, a política de publicação.
 6. O primeiro marco (docs/06): as suas primeiras entregas, uma linha cada, em ordem.
 
-Ele só pergunta o que não consegue decidir com um padrão sensato, e diz o padrão junto com a pergunta.[^focus-kit-brainstorm]
+Ele só pergunta o que não consegue decidir com um padrão sensato, e diz o padrão junto com a pergunta.
 Por isso "your call" é sempre uma resposta válida: o agente fica com o padrão, e quem não sabe responder a uma pergunta ainda recebe um bom documento.
 O que você ainda não sabe, como um comando de verificação antes de existir qualquer código, ele escreve como "criado pela primeira entrega".
 
-Quando os seis assuntos estão cobertos, ele escreve os docs/00 a 06, um ADR por decisão que uma sessão futura poderia desfazer, o `AGENTS.md`, o `CLAUDE.md` com a linha `@AGENTS.md` e uma pasta `work/done/` vazia.[^focus-kit-brainstorm]
+Quando os seis assuntos estão cobertos, ele escreve os docs/00 a 06, um ADR por decisão que uma sessão futura poderia desfazer, o `AGENTS.md`, o `CLAUDE.md` com a linha `@AGENTS.md` e uma pasta `work/done/` vazia.
 Ele não escreve código, nem configuração, nem arquivo de dependências: a primeira entrega faz isso, com uma página própria.
 
 ## Escolher a stack
@@ -291,6 +291,5 @@ O que a conversa acrescentou que você não escreveu?
 
 Escolha uma stack para um projeto seu pelas três perguntas deste capítulo, e diga qual pergunta decidiu.
 
-[^focus-kit-brainstorm]: J.C. Ködel, "focus-kit", o comando `.claude/skills/brainstorm/SKILL.md` e `references/documents.md` §Choices, como instalados no projeto guiado na tag do capítulo `book-v1/install-and-hosts`, a partir do commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/install-and-hosts/.claude/skills/brainstorm
-[^octoverse]: GitHub, "Octoverse: A new developer joins GitHub every second as AI leads TypeScript to #1", 2025, o relatório mais recente em 2026-09-28: contribuidores mensais no GitHub, agosto de 2025. https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/
-[^brainstorm-run]: A execução do `/brainstorm` deste livro no projeto guiado, 2026-09-28, com o Claude Code 2.1.283 e o modelo `claude-opus-5-5`, de `book-v1/install-and-hosts` até a tag do capítulo `book-v1/brainstorm`: o briefing, os comandos, a saída de cada turno, cada pergunta e resposta, e a correção. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/brainstorm-run/README.md
+[^octoverse]: GitHub, "Octoverse: A new developer joins GitHub every second as AI leads TypeScript to #1", 2025, o relatório mais recente em 2026-09-28: contribuidores mensais no GitHub, agosto de 2025. <https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/>
+[^brainstorm-run]: A execução do `/brainstorm` deste livro no projeto guiado, 2026-09-28, com o Claude Code 2.1.283 e o modelo `claude-opus-5-5`, de `book-v1/install-and-hosts` até a tag do capítulo `book-v1/brainstorm`: o briefing, os comandos, a saída de cada turno, cada pergunta e resposta, e a correção. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/brainstorm-run/README.md>

@@ -13,3 +13,15 @@
   border: 1px solid var(--md-default-fg-color--lightest);
   max-width: 280px;
 }
+
+/* Source notes: 66% of the body text and in italic; a link, a quotation (italic in the source) and code stay upright. */
+.md-typeset .footnote {
+  font-size: 0.66em;
+  font-style: italic;
+}
+
+.md-typeset .footnote a,
+.md-typeset .footnote em,
+.md-typeset .footnote code {
+  font-style: normal;
+}

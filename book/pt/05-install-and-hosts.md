@@ -12,7 +12,7 @@ Read https://raw.githubusercontent.com/JCKodel/focus-kit/main/SETUP.md and do wh
 ```
 
 A frase fica em inglês, como o README do focus-kit a dá; ela diz ao agente para ler o `SETUP.md` e fazer o que ele diz.
-O `SETUP.md` é o arquivo de setup do focus-kit: um arquivo de instruções que o agente lê e transforma nos arquivos do kit.[^focus-kit-setup]
+O `SETUP.md` é o arquivo de setup do focus-kit: um arquivo de instruções que o agente lê e transforma nos arquivos do kit.
 Se preferir lê-lo antes, baixe o `SETUP.md` ao lado do repositório e aponte o agente para o arquivo.
 Nada é instalado na sua máquina: o agente escreve arquivos no repositório, e só isso.
 
@@ -72,13 +72,13 @@ Depois, `git status --short` mostrou o que apareceu:[^claude-code-run]
 ?? GEMINI.md
 ```
 
-Essas linhas guardam 36 arquivos (`git status --short --untracked-files=all` os lista um a um): os quatro comandos uma vez em cada pasta de skills, `.claude/skills/`, `.agents/skills/` e `.windsurf/skills/`, e pequenos arquivos que apontam para eles, para os hosts que precisam.[^focus-kit-setup]
+Essas linhas guardam 36 arquivos (`git status --short --untracked-files=all` os lista um a um): os quatro comandos uma vez em cada pasta de skills, `.claude/skills/`, `.agents/skills/` e `.windsurf/skills/`, e pequenos arquivos que apontam para eles, para os hosts que precisam.
 Cada arquivo saiu do arquivo de setup byte a byte.[^claude-code-run]
 A instalação não prepara nem faz commit; você revisa os arquivos e faz o commit.
 
 ## O que a instalação nunca toca, e como atualizar
 
-Rodar o arquivo de setup de novo substitui os arquivos do kit e nada mais.[^focus-kit-setup]
+Rodar o arquivo de setup de novo substitui os arquivos do kit e nada mais.
 `docs/`, `work/`, `AGENTS.md` e `CLAUDE.md` são do projeto: os comandos os escrevem, e o arquivo de setup nunca os toca.
 Na clínica, nenhum deles existe ainda; o capítulo 7 os escreve.
 
@@ -121,7 +121,7 @@ Cursor, Gemini CLI, Google Antigravity, Windsurf e outros estão na tabela da [s
 Os hosts diferem nas pastas e no caractere que inicia um comando, e concordam em três fatos.
 Cada um lê um arquivo de regras quando uma sessão começa, o `AGENTS.md` diretamente ou por um arquivo que aponta para ele; cada um carrega um comando de um arquivo no repositório; e cada um passa ao comando a palavra que você digita depois dele.
 O método mora em arquivos comuns, o arquivo de regras do capítulo 2 e os documentos do projeto que uma sessão nova lê, então trocar de host não muda nada nele.
-Toda instalação escreve os arquivos de todos os hosts, qualquer que seja o host que a rodou, então o repositório abre pronto em qualquer um deles.[^focus-kit-setup]
+O arquivo de setup escreve os arquivos de todos os hosts, qualquer que seja o host que o rode, então o repositório abre pronto em qualquer um deles.
 
 O kit também oferece a arquitetura FOCUS e uma estratégia de git, e não impõe nenhuma das duas; as Partes III e IV as ensinam.
 
@@ -150,12 +150,11 @@ O que a atualização mudou, e o que ela deixou como estava?
 Encontre a linha do seu host na seção 1 do `SETUP.md`, abra a página do fornecedor e chame `/propose` (ou o equivalente no seu host) com um slug inventado.
 O projeto ainda não tem documentos para o comando ler: o que o agente diz, e por que isso faz os capítulos 6 e 7 virem a seguir?
 
-[^focus-kit-setup]: J.C. Ködel, "focus-kit", `SETUP.md` no commit 26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b. https://github.com/JCKodel/focus-kit/blob/26e5e1e4c8fcc6e059075a51db8cad5ed2028f2b/SETUP.md
-[^claude-code-run]: A instalação do focus-kit feita por este livro no projeto guiado, 2026-09-25, com o Claude Code 2.1.282, de `book-v1/start` até a tag do capítulo `book-v1/install-and-hosts`: o comando, o relatório, a lista de arquivos e a verificação byte a byte, na pasta da execução. https://github.com/JCKodel/focus-kit-book/blob/main/work/done/install-and-hosts-run/README.md
-[^claude-code-memory]: Anthropic, "How Claude remembers your project", acesso em 2026-09-25. https://code.claude.com/docs/en/memory
-[^claude-code-skills]: Anthropic, "Extend Claude with skills", acesso em 2026-09-25. https://code.claude.com/docs/en/skills
-[^codex-agents-md]: OpenAI, "Custom instructions with AGENTS.md", acesso em 2026-09-25. https://developers.openai.com/codex/guides/agents-md
-[^codex-skills]: OpenAI, "Build skills", acesso em 2026-09-25. https://developers.openai.com/codex/skills
-[^copilot-instructions]: GitHub, "Adding repository custom instructions for GitHub Copilot", acesso em 2026-09-25. https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions
-[^copilot-skills]: GitHub, "About agent skills", acesso em 2026-09-25. https://docs.github.com/en/copilot/concepts/agents/about-agent-skills
-[^copilot-prompt-files]: GitHub, "Your first prompt file", acesso em 2026-09-25. https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files/your-first-prompt-file
+[^claude-code-run]: A instalação do focus-kit feita por este livro no projeto guiado, 2026-09-25, com o Claude Code 2.1.282, de `book-v1/start` até a tag do capítulo `book-v1/install-and-hosts`: o comando, o relatório, a lista de arquivos e a verificação byte a byte, na pasta da execução. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/install-and-hosts-run/README.md>
+[^claude-code-memory]: Anthropic, "How Claude remembers your project", acesso em 2026-09-25. <https://code.claude.com/docs/en/memory>
+[^claude-code-skills]: Anthropic, "Extend Claude with skills", acesso em 2026-09-25. <https://code.claude.com/docs/en/skills>
+[^codex-agents-md]: OpenAI, "Custom instructions with AGENTS.md", acesso em 2026-09-25. <https://developers.openai.com/codex/guides/agents-md>
+[^codex-skills]: OpenAI, "Build skills", acesso em 2026-09-25. <https://developers.openai.com/codex/skills>
+[^copilot-instructions]: GitHub, "Adding repository custom instructions for GitHub Copilot", acesso em 2026-09-25. <https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions>
+[^copilot-skills]: GitHub, "About agent skills", acesso em 2026-09-25. <https://docs.github.com/en/copilot/concepts/agents/about-agent-skills>
+[^copilot-prompt-files]: GitHub, "Your first prompt file", acesso em 2026-09-25. <https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files/your-first-prompt-file>

@@ -276,8 +276,8 @@ A execução diz o que cada ferramenta escreve antes do código; não diz qual d
 * Em uma funcionalidade registrada, o Spec Kit escreveu 8 arquivos e 756 linhas e o OpenSpec 6 e 180, repetindo uma regra na maioria deles, e cada arquivo é algo que você revisa.
 * Uma página mais leve por funcionalidade se paga com documentos escritos uma vez por projeto; a execução mostra o que cada ferramenta escreve, não qual constrói software melhor.
 
-[^bockeler-2025]: Birgitta Böckeler, "Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl", 2025. https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html
-[^spec-kit]: GitHub, "Spec Kit", v1.0.11. https://github.com/github/spec-kit/tree/v1.0.11
-[^openspec]: Fission AI, "OpenSpec", 1.13.2. https://github.com/Fission-AI/OpenSpec/tree/v1.13.2
-[^spec-driven-run]: A execução deste livro do Spec Kit, do OpenSpec e do focus-kit sobre um briefing, 2026-09-25: as contagens, o ambiente e como repetir no README; as perguntas e respostas de cada ferramenta no seu `questions.md`, na mesma pasta. https://github.com/JCKodel/focus-kit-book/blob/53109f372125e8aeda200bb2e5bbd1ad7bcc5d61/work/done/spec-driven-run/README.md
+[^bockeler-2025]: Birgitta Böckeler, "Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl", 2025. <https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html>
+[^spec-kit]: GitHub, "Spec Kit", v1.0.11. <https://github.com/github/spec-kit/tree/v1.0.11>
+[^openspec]: Fission AI, "OpenSpec", 1.13.2. <https://github.com/Fission-AI/OpenSpec/tree/v1.13.2>
+[^spec-driven-run]: A execução deste livro do Spec Kit, do OpenSpec e do focus-kit sobre um briefing, 2026-09-25: as contagens, o ambiente e como repetir no README; as perguntas e respostas de cada ferramenta no seu `questions.md`, na mesma pasta. <https://github.com/JCKodel/focus-kit-book/blob/53109f372125e8aeda200bb2e5bbd1ad7bcc5d61/work/done/spec-driven-run/README.md>
 [^rule-count]: Contado na pasta da execução com `grep -rliE '24 ?h|24-hour|24 hours' <tool>/feature | wc -l`, contra o número de arquivos por funcionalidade: Spec Kit 8 de 8, OpenSpec 4 de 6, focus-kit 1 de 1.

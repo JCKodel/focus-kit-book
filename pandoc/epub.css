@@ -43,4 +43,8 @@ section.titlepage .rights { page-break-before: always; break-before: page; text-
 
 nav#toc ol { list-style: none; }
 
-aside.footnotes { font-size: 0.85em; }
+/* Notes at the end of their chapter: 66% of the body and in italic; a link, a quotation (italic in the source) and code stay upright. */
+section.footnotes { font-size: 0.66em; font-style: italic; }
+section.footnotes a, section.footnotes em, section.footnotes code { font-style: normal; }
+/* A URL breaks anywhere and never takes a hyphen that is not in it. */
+section.footnotes a { hyphens: manual; -epub-hyphens: none; overflow-wrap: anywhere; }
