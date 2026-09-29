@@ -340,6 +340,9 @@ This is the diff the review made to the staged files:[^apply-run]
 ```
 
 Nothing in the code changed: the review corrected the record, which is what the next person reads.
+One thing it left uncorrected: the Done when item "`npm run dev` leaves client and server running locally" is still unticked in the page I committed, although I had checked it by hand after the run.
+That was my lapse: I should have asked the agent, in the same session, to tick it and to write on the page how it was checked; I did not, and the published tag does not move.
+On yours, ask for that tick and that line before you commit, so the answer to "Is every Done when item ticked, and is each one true?" is yes.
 Then I committed the staged tree with the suggested message, tagged it `book-v1/apply` and pushed both.
 The page and its build are in that one commit: the unit of work of chapter 10, which reverts in one step.
 

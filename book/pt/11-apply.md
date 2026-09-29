@@ -347,6 +347,9 @@ Este é o diff que a revisão fez nos arquivos do stage:[^apply-run]
 
 O diff está como rodou, em inglês: no docs/05, o ambiente local passa a dizer que a entrega deixa o código pronto para subir e nomeia o comando, e que a pessoa o sobe, porque o agente pode rodar sem interface; na página, o item do Done when volta a ser só a linha da lista, o `@hono/node-server` passa a dizer que a pessoa o aprovou na revisão, o Ctrl+C passa a ser "não testado", e uma lista nova, "Not proven outside a test", diz o que só um teste provou, por que o `npm run dev` não rodou, e como conferir o Ctrl+C.
 Nada no código mudou: a revisão corrigiu o registro, que é o que a próxima pessoa lê.
+Uma coisa ela deixou sem corrigir: o item do Done when "`npm run dev` deixa cliente e servidor rodando localmente" continua desmarcado na página do meu commit, embora eu o tivesse conferido à mão depois da execução.
+Foi uma falha minha: eu deveria ter pedido ao agente, na mesma sessão, que marcasse o item e escrevesse na página como ele foi conferido; não pedi, e a tag publicada não se move.
+Na sua, peça essa marca e essa linha antes do commit, para que a resposta a "Cada item do Done when está marcado, e cada um é verdade?" seja sim.
 Depois fiz o commit da árvore no stage com a mensagem sugerida, criei a tag `book-v1/apply` e enviei os dois com push.
 A página e a sua construção estão nesse commit único: a unidade de trabalho do capítulo 10, que se desfaz em um passo.
 
