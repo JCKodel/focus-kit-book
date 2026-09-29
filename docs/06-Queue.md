@@ -59,7 +59,7 @@ When this milestone closes, every confirmed finding of the M3 review is settled:
 
 ```
 [x] ch1-openspec-pointer   Chapter 1: the Ninjobs count of OpenSpec changes and lines of spec says what they are, or points to chapter 3, where OpenSpec is explained, not only to chapter 4; both editions
-[>] ch3-docs-pointer       Chapter 3: the edits to docs/03 and docs/06 say what those documents are, or point to chapter 6; both editions
+[x] ch3-docs-pointer       Chapter 3: the edits to docs/03 and docs/06 say what those documents are, or point to chapter 6; both editions
 [ ] ch4-rule-failures      Chapter 4: every rule of focus-kit names the failure it answers, as the opening promises; "A queue" and "The agent never commits" have none today; both editions
 [>] ch4-adr-docs05         Chapter 4: ADRs and docs/05 are said in a few words where they appear, with a pointer to chapter 6; both editions
 [>] ch5-prompt-file-en     Chapter 5: the English gains the sentence that explains the prompt file's last line, which today exists only in the Portuguese

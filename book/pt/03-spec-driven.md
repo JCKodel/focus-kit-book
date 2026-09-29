@@ -264,7 +264,7 @@ A diferença é quantos outros arquivos dizem isso de novo: uma regra escrita em
 Böckeler encontrou o mesmo no Spec Kit: os arquivos dele "*eram repetitivos, tanto entre si quanto em relação ao código que já existia*" e "*muito prolixos e cansativos de revisar*".[^bockeler-2025]
 
 A linha leve não sai de graça.
-O focus-kit é o que mais escreve uma vez por projeto, 17 arquivos e 277 linhas, e o seu `/propose` ainda editou dois deles, acrescentando 6 linhas e removendo 3 em `docs/03` e `docs/06`.[^spec-driven-run]
+O focus-kit é o que mais escreve uma vez por projeto, 17 arquivos e 277 linhas, e o seu `/propose` ainda editou dois deles, acrescentando 6 linhas e removendo 3 em `docs/03`, o vocabulário do projeto, e `docs/06`, a sua fila; o [capítulo 6](06-the-documents.md) descreve cada documento.[^spec-driven-run]
 A troca é decidir uma vez por projeto, em documentos que você mantém atualizados, e depois escrever uma página por funcionalidade.
 A execução diz o que cada ferramenta escreve antes do código; não diz qual delas constrói software melhor.
 

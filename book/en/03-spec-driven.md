@@ -184,7 +184,7 @@ The difference is how many other files say it again: a rule written in 8 places 
 Böckeler found the same with Spec Kit: its files "*were repetitive, both with each other, and with the code that already existed*", and "*very verbose and tedious to review.*"[^bockeler-2025]
 
 The light row is not free.
-focus-kit writes the most once per project, 17 files and 277 lines, and its `/propose` also edited two of them, adding 6 lines and removing 3 in `docs/03` and `docs/06`.[^spec-driven-run]
+focus-kit writes the most once per project, 17 files and 277 lines, and its `/propose` also edited two of them, adding 6 lines and removing 3 in `docs/03`, the project's vocabulary, and `docs/06`, its queue; [chapter 6](06-the-documents.md) describes every document.[^spec-driven-run]
 The trade is to decide once per project, in documents you keep up to date, and then write one page per feature.
 The run says what each tool writes before the code; it does not say which one builds better software.
 
