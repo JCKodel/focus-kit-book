@@ -24,6 +24,8 @@ A new concept enters here first, in both languages.
 | queue | fila | `docs/06` | Milestones and delivery lines, in order. |
 | mark | marca | `[ ]`, `[>]`, `[x]` | The state of a queue line; a line never leaves the queue. |
 | milestone | marco | `M<n>` | A group of deliveries with a paragraph saying what is true when it closes. |
+| milestone review | revisão de marco | docs/05 §8 | The look at a closed milestone as a whole: its paragraph checked on the product, then a review of everything it built with what the host offers; it fixes nothing. |
+| finding | achado | none | One problem a milestone review reports; the person confirms or rejects it, and a confirmed one becomes a queue line, never a fix in the middle of the next milestone. |
 | fresh session | sessão nova | none | A session with an empty context; it separates deciding from doing. |
 | verify | verificação | `make verify` | The command that must be green before anything is declared done. |
 | proof | prova | `work/done/<slug>-<step>.png` | Evidence that the result works, failures included. |

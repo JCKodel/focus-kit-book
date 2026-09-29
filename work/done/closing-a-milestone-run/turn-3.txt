@@ -1,0 +1,11 @@
+```
+Queue the confirmed findings of the milestone 1 review (docs/06)
+
+- time-zone-names: setup accepts every IANA name, such as US/Eastern
+- slot-taken-retry: a failed reload keeps the refusal and the chosen date
+- routes-table: the Routes table of docs/02 renders whole
+- route-errors: one shared databaseFailed and notFound answer
+- minutes-of: one shared "HH:MM" parser
+```
+
+There are five new lines and docs/05 §6 allows five bullets, so the body has no room for the renumbering of "the owner runs the day" to milestone 3. The diff still shows it.

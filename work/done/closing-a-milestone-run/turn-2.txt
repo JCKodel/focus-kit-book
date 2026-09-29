@@ -1,0 +1,55 @@
+[tool Read] docs/06-Backlog.md
+
+[tool Bash] ls docs work; git status --short
+
+[tool Read] docs/06-Queue.md
+
+[tool Bash] cat docs/05-Process.md; grep -n -i "milestone\|queue\|06" docs/0[0-4]*.md AGENTS.md | head -40; ls work/done
+
+[tool Bash] grep -rn -i "milestone [0-9]" --include=*.md . | grep -v node_modules
+
+[tool Bash] grep -rn -i "milestone [0-9]" docs work AGENTS.md
+
+No fits for these in the existing milestones, so I'm adding a new milestone to docs/06 before "the owner runs the day" and renumbering that one to 3. Nothing else refers to milestone numbers.
+
+[tool Edit] docs/06-Queue.md
+
+[tool Bash] for p in 'function databaseFailed' 'function notFound' 'function minutesOf'; do echo "== $p"; git log --reverse --format='%h %s' -S "$p" | head -2; grep -rln "$p" src; done
+
+[denied]
+
+[tool Bash] git log --reverse --format='%h %s' -S 'function databaseFailed' && grep -rln 'function databaseFailed' src && git log --reverse --format='%h %s' -S 'function notFound' && grep -rln 'function notFound' src
+
+The first copies named in the lines are correct. Now staging.
+
+[tool Bash] git add docs/06-Queue.md && git status --short
+
+I added the five confirmed findings to `docs/06-Queue.md` as `[ ]` lines and staged the file. Nothing in the code was fixed.
+
+**Where they went:** into a new **Milestone 2: what the review of milestone 1 found**, with its own paragraph. The old Milestone 2 ("the owner runs the day") is now Milestone 3. Nothing else refers to milestone numbers, so the renumbering breaks nothing.
+
+**Why a new milestone:**
+- **Not Milestone 1:** it is closed (every line is `[x]`). Its paragraph describes what a client can do, not follow-up fixes.
+- **Not the owner milestone:** none of the findings has to do with absences, the owner's schedule, installing or deploying. docs/05 §8 also says each review finding becomes a queue line, "not a fix in the middle of the next milestone".
+- **Placed before the owner milestone,** so the fixes to milestone 1 are done before new work starts.
+
+**The lines:**
+
+| Finding | Slug | Note |
+|---|---|---|
+| 5 | `time-zone-names` | Setup accepts every IANA name the runtime knows (US/Eastern, Etc/UTC), as docs/03 says. |
+| 6 | `slot-taken-retry` | "Try again" keeps the "no longer free" message and the chosen date. |
+| 7 | `routes-table` | The Routes table of docs/02 renders as one table. |
+| 9 | `route-errors` | Names the first copies, as the abstraction rule asks: `databaseFailed` in `session.server.ts`, `notFound` in `weeklyHours/route.server.ts`. I checked both against git history. |
+| 10 | `minutes-of` | Only the duplicated parser, since you rejected the other half. The first copy is in `weeklyHours/rules.ts`, the second in `appointments/rules.ts`. |
+
+One check was blocked: a combined git history search for all three helpers was denied because the session can't approve permission prompts. I reran it as plain commands for `databaseFailed` and `notFound`. I didn't recheck `minutesOf` in git history; its first copy comes from the review, since `weeklyHours` came before `appointments`.
+
+Suggested commit message:
+
+```
+Queue the confirmed findings of the milestone 1 review
+
+- Add milestone 2 with five lines from the review
+- Renumber "the owner runs the day" to milestone 3
+```

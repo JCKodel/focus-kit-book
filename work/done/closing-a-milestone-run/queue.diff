@@ -1,0 +1,28 @@
+diff --git a/docs/06-Queue.md b/docs/06-Queue.md
+index 760ecff..c729d8b 100644
+--- a/docs/06-Queue.md
++++ b/docs/06-Queue.md
+@@ -18,7 +18,22 @@ a client can book a free slot, and a client can cancel up to 24 hours before.
+ [x] cancel-appointment   a client cancels up to 24 hours before, or is told why not
+ ```
+ 
+-## Milestone 2: the owner runs the day
++## Milestone 2: what the review of milestone 1 found
++
++When it closes, every confirmed finding of the milestone 1 review is
++settled: setup accepts every IANA time zone name, a refused booking keeps
++its message through a failed reload, docs/02 renders whole, and the code
++repeated across features has one shared copy.
++
++```
++[ ] time-zone-names      setup accepts every IANA name the runtime knows, such as US/Eastern and Etc/UTC, as docs/03 says
++[ ] slot-taken-retry     after a refused booking whose slot reload fails, "Try again" keeps the "no longer free" message and the chosen date
++[ ] routes-table         the Routes table of docs/02 renders whole, with the slots and appointments routes as rows
++[ ] route-errors         one shared databaseFailed and one shared notFound answer; the first copies are in session.server.ts and weeklyHours/route.server.ts
++[ ] minutes-of           one shared "HH:MM" parser; the first copy is in weeklyHours/rules.ts, the second in appointments/rules.ts
++```
++
++## Milestone 3: the owner runs the day
+ 
+ When it closes, the owner can record a professional's absences, which remove
+ their slots, and sees the day's appointments per professional; and the app

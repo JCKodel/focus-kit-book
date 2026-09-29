@@ -1,0 +1,64 @@
+```json
+[
+  {
+    "file": "src/server/migrations/0004-appointment.sql",
+    "line": 12,
+    "summary": "The partial unique index on (professional_id, starts_at) only stops two bookings with the exact same start. docs/03 invariant 2 says an appointment stays when the weekly hours change, so slots can partly overlap an existing booking, and the index does not cover that case even though docs/02 says one index on the start is enough.",
+    "failure_scenario": "A booking exists at 09:00 (30 min). The owner moves the period start to 09:15. Two server processes (or a future second connection) each read the booked starts and each book an overlapping start, for example 09:00 is cancelled and rebooked while 09:15 is booked. Neither insert breaks the index because the starts differ, so two booked appointments overlap and invariant 1 is broken. docs/02 lines 25-26 and ADR-0005 say this cannot happen."
+  },
+  {
+    "file": "src/features/appointments/route.server.ts",
+    "line": 155,
+    "summary": "A booking-code clash on the UNIQUE booking_code (cancelled rows count too) is answered as 500 DatabaseFailed, which the client shows as 'The server cannot be reached', even though the booking itself was valid.",
+    "failure_scenario": "drawBookingCode() returns a code already stored (the table keeps every cancelled row, so the chance grows over time). insertAppointment fails, the route returns 500, and api.ts maps that to ServerUnreachable. The client sees a misleading network error for a free slot. A bounded redraw loop on this one constraint would never show the error."
+  },
+  {
+    "file": "src/server/migrate.server.ts",
+    "line": 47,
+    "summary": "migrate builds the pending list outside any lock and then applies each file inside a deferred BEGIN, so two processes that start together (server and `npm run setup`, which docs/02 says runs on the same machine) both apply the same migration.",
+    "failure_scenario": "The server and setup start against a new database at the same time. Both read schema_migration as empty. One process commits 0001-clinic.sql. The other then runs `CREATE TABLE clinic`, gets 'table clinic already exists', and exits with code 1 and 'Migration 0001-clinic.sql failed'. The e2e-database-busy fix (BEGIN IMMEDIATE) was applied to `transaction` but not here."
+  },
+  {
+    "file": "src/features/appointments/repository.server.ts",
+    "line": 54,
+    "summary": "SlotTaken is detected by matching the English text of SQLite's error message instead of the error code and constraint, which breaks silently if SQLite or Node changes the wording or the index gets more columns.",
+    "failure_scenario": "A node:sqlite or SQLite upgrade changes the message format (for example it names the index instead of the columns). The last guard against double booking then answers 500 DatabaseFailed instead of 409 SlotTaken, and the client shows 'server cannot be reached' instead of 'This time is no longer free'. Checking the error's errcode (SQLITE_CONSTRAINT_UNIQUE) would be more robust."
+  },
+  {
+    "file": "src/features/clinic/rules.ts",
+    "line": 49,
+    "summary": "checkTimeZone accepts only the canonical names from Intl.supportedValuesOf, so it refuses valid IANA link names that Intl.DateTimeFormat accepts. This goes against docs/03, where UnknownTimeZone means 'not an IANA name'.",
+    "failure_scenario": "The owner types 'Europe/Kiev', 'Asia/Calcutta', 'US/Eastern' or 'Etc/UTC' at setup. All are valid IANA names that work with formatterOf(). Setup keeps answering UnknownTimeZone. Checking with `new Intl.DateTimeFormat('en', { timeZone })` inside Result-returning code would accept every name the runtime supports."
+  },
+  {
+    "file": "src/features/appointments/useBooking.ts",
+    "line": 291,
+    "summary": "When the slots reload after a refused booking (SlotTaken) fails, 'Try again' calls loadSlots(professional) without the `after` argument, so the 'no longer free' message and the return to the chosen day are lost.",
+    "failure_scenario": "A client submits, the server answers 409, loadSlots(professional, {message: 'SlotTaken', date}) runs, and its fetch fails with failed='slots'. The client taps Try again, which reloads the day list with no message. The client is never told the chosen time was taken and lands on the days step instead of the times of that date."
+  },
+  {
+    "file": "docs/02-Backend.md",
+    "line": 131,
+    "summary": "An empty line between the weekly-hours rows and the new slots/appointments rows splits the Routes table, so the three book-appointment and cancel-appointment routes do not render as table rows.",
+    "failure_scenario": "Rendered Markdown (GitHub or any viewer) ends the table after `PUT /api/owner/professionals/:id/hours`. The rows for `GET /api/professionals/:id/slots`, `POST /api/appointments` and `POST /api/appointments/cancel` show as raw pipe text, so the document that owns the server contract shows these routes wrong."
+  },
+  {
+    "file": "src/features/appointments/rules.ts",
+    "line": 134,
+    "summary": "book() computes freeSlots twice over the whole 30-day window (once with booked emptied, once with it) only to test whether one instant is a member.",
+    "failure_scenario": "Every POST /api/appointments cuts about 30 days × periods × slots twice and runs an O(slots × booked) overlap scan, all synchronously on the request thread, to answer a question about one start. Computing the unbooked slots once, checking membership, then testing only that instant against `booked` does the same job at a fraction of the cost."
+  },
+  {
+    "file": "src/features/appointments/route.server.ts",
+    "line": 70,
+    "summary": "databaseFailed(c) is copied again (it already exists in session.server.ts, professionals/route.server.ts and weeklyHours/route.server.ts, and signIn/clinic inline it), and notFound(c) repeats weeklyHours/route.server.ts. This breaks the AGENTS.md rule on abstraction.",
+    "failure_scenario": "AGENTS.md (included by CLAUDE.md) says: 'Abstraction on the second concrete occurrence, and the delivery says which was the first.' The 500 DatabaseFailed answer now exists in 4 helper copies plus 5 inline copies, so a change to the error envelope has to be made in every one."
+  },
+  {
+    "file": "src/features/appointments/rules.ts",
+    "line": 46,
+    "summary": "minutesOf is an exact copy of the private helper in weeklyHours/rules.ts:24. slotsOf (route.server.ts:100) also loads every active professional to find one by id.",
+    "failure_scenario": "Two copies of the 'HH:MM' parsing have to stay the same (the second occurrence, with no shared helper and no note naming the first, which goes against the AGENTS.md abstraction rule). Separately, every slots GET and booking POST reads the whole professional table where a `WHERE id = ? AND removed_at IS NULL` query would do."
+  }
+]
+```
