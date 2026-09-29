@@ -58,7 +58,7 @@ When this milestone closes, a reader can install the kit, document a new or an e
 When this milestone closes, every confirmed finding of the M3 review is settled: from the Prologue to chapter 13, each chapter explains or points to every term, file and tool it relies on, keeps the promise of its opening, says each thing once, and means the same in both editions; and a reader following the guided project is told to build the rest of milestone 1 with `/propose` and `/apply`, with a tag to compare it against.
 
 ```
-[>] ch1-openspec-pointer   Chapter 1: the Ninjobs count of OpenSpec changes and lines of spec says what they are, or points to chapter 3, where OpenSpec is explained, not only to chapter 4; both editions
+[x] ch1-openspec-pointer   Chapter 1: the Ninjobs count of OpenSpec changes and lines of spec says what they are, or points to chapter 3, where OpenSpec is explained, not only to chapter 4; both editions
 [>] ch3-docs-pointer       Chapter 3: the edits to docs/03 and docs/06 say what those documents are, or point to chapter 6; both editions
 [ ] ch4-rule-failures      Chapter 4: every rule of focus-kit names the failure it answers, as the opening promises; "A queue" and "The agent never commits" have none today; both editions
 [>] ch4-adr-docs05         Chapter 4: ADRs and docs/05 are said in a few words where they appear, with a pointer to chapter 6; both editions

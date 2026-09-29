@@ -59,8 +59,9 @@ O método que este livro ensina, o focus-kit, se apoia nessas três peças.
 ## Processo demais também falha
 
 Um processo pode custar mais do que economiza: cada documento é mais uma coisa para escrever, ler e manter verdadeira.
-No Ninjobs (<https://www.ninjobs.app>), meu próprio produto, quinze dias, 87 commits e 35 changes do OpenSpec produziram 37.228 linhas de spec para quatro telas e uma tabela de domínio.[^ninjobs]
-O capítulo 4 conta essa história e como o focus-kit nasceu dela.
+No Ninjobs (<https://www.ninjobs.app>), meu próprio produto, quinze dias, 87 commits e 35 mudanças do OpenSpec produziram 37.228 linhas de especificação para quatro telas e uma tabela de domínio.[^ninjobs]
+O OpenSpec é uma ferramenta que faz o agente escrever, para cada mudança, uma pasta de documentos, entre eles as especificações, que descrevem o que construir antes do código; o [capítulo 3](03-spec-driven.md) o explica.
+O capítulo 4 conta a história do Ninjobs e como o focus-kit nasceu dela.
 
 ## Pontos-chave
 
