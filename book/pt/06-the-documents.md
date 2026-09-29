@@ -186,6 +186,73 @@ A maioria das linhas termina com o documento ou o ADR que guarda a regra inteira
 As regras do kit para esse arquivo, em `references/documents.md`, são três: sessenta linhas no máximo, tudo nele aponta para um documento, e nada nele é o único lugar onde uma regra está escrita.
 Ele é carregado inteiro em toda sessão, então fica curto, e uma regra que morasse só nele não teria o seu motivo escrito em lugar nenhum; o Claude Code o lê também pelo `CLAUDE.md` do capítulo 5.
 
+## Onde entra um fato novo
+
+Um fato novo tem um dono, e você o encontra fazendo estas perguntas em ordem; a primeira que servir nomeia o documento:
+
+1. É uma escolha entre alternativas, com um motivo que alguém pode querer rever? Um ADR guarda a escolha e o motivo, e o documento que ele governa guarda o resultado, como nas [duas escolhas](#as-duas-escolhas): o docs/01 para a arquitetura, o docs/05 para a estratégia de git.
+2. É o que o produto é, para quem, o que ele não é, um valor, ou algo que ninguém fecha sozinho? docs/00.
+3. É uma palavra, uma entidade, ou uma regra que sempre vale para os dados? docs/03.
+4. É como a coisa é construída: a stack, onde fica o código, o acesso a dados, os erros, os ambientes? docs/01, ou docs/02 quando um servidor guarda a regra.
+5. É como o código ou o texto é escrito: nomes, estilo, testes, commits? docs/04.
+6. É um fato deste projeto que os comandos leem: o comando de verificação, os ambientes, o git? docs/05 §5, um slot.
+7. É trabalho a fazer? O docs/06 guarda a linha dele, e a página em `work/` guarda a entrega.
+
+O `AGENTS.md` nunca é a resposta: quando toda sessão precisa ter um fato em mente, uma linha lá aponta para o dono, como fazem as linhas da seção anterior.
+
+O exemplo é o projeto guiado do capítulo 5, o app de agendamento de uma pequena clínica: os clientes agendam e cancelam pelo celular, e o dono cadastra os profissionais e os horários semanais deles.
+O capítulo 7 roda o `/brainstorm` nele, e os documentos que ele escreve estão no repositório da clínica na tag do capítulo `book-v1/brainstorm`; os trechos abaixo são citados lá.
+No repositório eles estão em inglês, e aqui vão traduzidos.
+Naquela execução o agente perguntou quanto dura um agendamento, propôs uma duração fixa para a clínica inteira, e a resposta foi "your call" (você decide).
+Então o fato a colocar é "todo agendamento dura o mesmo tempo", e ele guarda três fatos, cada um com um dono diferente.
+
+O primeiro é a palavra e a regra, pergunta 3.
+Este é o cabeçalho de [`docs/03-Domain.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/docs/03-Domain.md) e a linha dele para a duração:
+
+```markdown
+| Termo | No código | Significado |
+|---|---|---|
+| Duração do agendamento | `slotMinutes` | A duração fixa de todo agendamento na clínica; 30 por padrão. |
+```
+
+E este é o invariante 2 dele, a regra que a usa:
+
+```markdown
+2. Um agendamento começa em um horário livre: dentro de um dos períodos de
+   trabalho do profissional, na grade de `slotMinutes` contada a partir do
+   início do período, terminando no máximo no fim do período.
+```
+
+A linha dá ao fato um nome que o código e os testes compartilham, e o invariante diz o que sempre vale para todo agendamento guardado.
+
+O segundo é a escolha, pergunta 1, já que uma duração por profissional ou por serviço era a alternativa.
+Esta é a Decision (decisão) de [`docs/adr/ADR-0005-fixed-appointment-length.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/docs/adr/ADR-0005-fixed-appointment-length.md):
+
+```markdown
+## Decisão
+
+Uma duração para a clínica inteira, `slotMinutes`, 30 por padrão, definida na
+configuração da clínica. Os horários semanais são cortados em horários livres
+dessa duração, contados a partir do início de cada período de trabalho. Não
+há serviços.
+```
+
+O Context (contexto) dele nomeia a duração por clínica, por profissional ou por serviço, e dá a simplicidade como motivo, então uma clínica que mais tarde precise de uma duração por profissional emenda este ADR e sabe o que está pesando.
+O resultado da escolha é a linha e o invariante acima: aqui o ADR governa o docs/03.
+
+O terceiro é o que a escolha deixa em aberto, pergunta 2: o dono pode mudar a duração, e ninguém decidiu o que acontece com os agendamentos já marcados.
+Esta é a linha das Open decisions (decisões em aberto) de [`docs/00-Product.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/docs/00-Product.md):
+
+```markdown
+* O que acontece com os agendamentos futuros quando o dono muda a duração do
+  agendamento.
+```
+
+Um agente cuja entrega mexe na duração lê essa linha e pergunta, onde de outro modo teria escolhido uma resposta.
+
+Uma frase de um briefing ou de uma conversa pode guardar vários fatos como esses.
+"Um lugar por fato" quer dizer que cada um deles tem um dono, então uma frase pode cair em três documentos, e nenhum deles repete o que outro guarda.
+
 ## Documentos vivos
 
 Quando revisei o capítulo 3, os trechos dele mostravam o cenário de cada ferramenta sem o projeto nem o pedido a que respondiam, e um era uma linha solta que dependia da linha de cima.
@@ -213,9 +280,9 @@ O texto de um agente parece certo mesmo quando está errado, então você o conf
 ## Pontos-chave
 
 * Cada fato de um projeto mora em um lugar: sete documentos numerados, `docs/adr/`, `AGENTS.md` e `work/`, com números fixos porque os comandos os citam.
-* O docs/00 é o produto e as suas decisões em aberto, o docs/03 o vocabulário, o docs/01 e o docs/02 como ele é construído, o docs/04 as convenções, o docs/05 o processo com os slots do projeto, o docs/06 a fila.
+* O docs/00 é o produto e as suas decisões em aberto, o docs/03 o vocabulário, o docs/01 e o docs/02 como ele é construído, o docs/04 as convenções, o docs/05 o processo com os slots do projeto, onde os comandos leem todo fato do projeto, o docs/06 a fila.
 * Um ADR registra uma decisão com o seu motivo e é emendado, nunca reescrito, para que o motivo sobreviva à próxima mudança; as duas escolhas do kit, o FOCUS (inteiro, os dois princípios, nenhum) e o git (trunk, um branch ou uma worktree por entrega), ficam registradas no docs/01 e no docs/05, cada uma com o seu ADR.
-* O `AGENTS.md` é curto e só aponta: nada nele é o único lugar onde uma regra está escrita, e os comandos não guardam nenhum fato do projeto.
+* Um fato novo vai para o primeiro documento cuja pergunta servir, uma escolha para um ADR antes de tudo; uma frase pode guardar vários fatos, cada um com o seu dono, e o `AGENTS.md` só aponta para eles, nunca é o único lugar onde uma regra está escrita.
 * Uma entrega que muda comportamento atualiza o documento que é dono dele, na mesma entrega, e toda sessão seguinte segue a mudança; o agente a escreve, e você a conduz e a confere, nunca por confiança.
 
 ## Exercícios
@@ -238,6 +305,18 @@ No [`AGENTS.md`](https://github.com/JCKodel/focus-kit-book/blob/6c2713b63af7397e
 
 Escolha uma resposta para cada uma das duas escolhas da clínica, com um motivo para cada.
 Guarde-as, para comparar com o briefing da clínica para o `/brainstorm` no capítulo 7.
+
+### Exercício 6.5
+
+Coloque cada um destes cinco fatos da clínica com as perguntas de [Onde entra um fato novo](#onde-entra-um-fato-novo), e diga se ele guarda mais de um fato:
+
+1. Cada arquivo de teste fica ao lado do arquivo que ele testa.
+2. `SlotTaken` é a recusa quando um agendamento pede um horário que não está livre.
+3. Um cliente não tem conta e prova quem é com um código de agendamento.
+4. O Biome formata e verifica o estilo do código.
+5. O projeto trabalha em trunk.
+
+Depois confira as suas respostas nos documentos da clínica em [`book-v1/brainstorm`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/brainstorm), incluindo o `AGENTS.md` dele.
 
 [^book-docs]: J.C. Ködel, "One Page at a Time", o repositório deste livro no commit 6c2713b63af7397ee00142497287b8408a5651b1: os trechos do docs/00, do docs/03, do docs/05, do ADR-0010 e do `AGENTS.md`. <https://github.com/JCKodel/focus-kit-book/tree/6c2713b63af7397ee00142497287b8408a5651b1>
 [^dart-error-exception]: Dart, "Error class" e "Exception class", referência da API de `dart:core`, acesso em 2026-09-28: um `Error` é "*uma falha do programa que o programador deveria ter evitado*"; uma `Exception` "*foi feita para ser capturada*". <https://api.dart.dev/dart-core/Error-class.html> e <https://api.dart.dev/dart-core/Exception-class.html>

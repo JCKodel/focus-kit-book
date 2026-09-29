@@ -63,7 +63,7 @@ When this milestone closes, every confirmed finding of the M3 review is settled:
 [x] ch4-rule-failures      Chapter 4: every rule of focus-kit names the failure it answers, as the opening promises; "A queue" and "The agent never commits" have none today; both editions
 [x] ch4-adr-docs05         Chapter 4: ADRs and docs/05 are said in a few words where they appear, with a pointer to chapter 6; both editions
 [x] ch5-prompt-file-en     Chapter 5: the English gains the sentence that explains the prompt file's last line, which today exists only in the Portuguese
-[>] ch6-placing-a-fact     Chapter 6: the reader places one new fact in the document that owns it, in the text and in an exercise, as the opening promises; both editions
+[x] ch6-placing-a-fact     Chapter 6: the reader places one new fact in the document that owns it, in the text and in an exercise, as the opening promises; both editions
 [>] ch6-section-reference  Chapter 6: the docs/04 description names "Living documents" instead of "section 6", which reads as docs/04's own section; both editions
 [>] pt-stage-term          Portuguese edition: one term for git's stage from chapter 4 on, where chapters 4 to 6 say "prepara" and chapter 7 on says "coloca em stage"
 [ ] ch8-tag-form           Chapter 8: says why the brownfield project's tag is book-v1-analyze and not the book-v1/<chapter-slug> of chapter 5; both editions

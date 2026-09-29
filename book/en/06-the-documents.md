@@ -184,6 +184,71 @@ Most lines end with the document or the ADR that holds the rule whole: the line 
 The kit's rules for this file, in `references/documents.md`, are three: sixty lines at most, everything in it points at a document, and nothing in it is the only place a rule is written.
 It is loaded whole into every session, so it stays short, and a rule that lived only here would have no reason written anywhere; Claude Code also reads it through the `CLAUDE.md` of chapter 5.
 
+## Where a new fact goes
+
+A new fact has one owner, and you find it by asking these questions in order; the first that fits names the document:
+
+1. Is it a choice between alternatives, with a reason someone may want to revisit? An ADR holds the choice and the reason, and the document it governs holds the result, as in [the two choices](#the-two-choices): docs/01 for the architecture, docs/05 for the git strategy.
+2. Is it what the product is, for whom, what it is not, a value, or something nobody closes alone? docs/00.
+3. Is it a word, an entity, or a rule that always holds for the data? docs/03.
+4. Is it how the thing is built: the stack, where code goes, data access, errors, environments? docs/01, or docs/02 when a server holds the rule.
+5. Is it how code or text is written: naming, style, tests, commits? docs/04.
+6. Is it a fact of this project that the commands read: the verify command, the environments, git? docs/05 §5, a slot.
+7. Is it work to do? docs/06 holds its line, and the page in `work/` holds the delivery.
+
+`AGENTS.md` is never the answer: when every session must keep a fact in mind, a line there points at the owner, as the lines of the previous section do.
+
+The example is the guided project of chapter 5, the scheduling app of a small clinic: clients book and cancel from their phones, and the owner registers the professionals and their weekly hours.
+Chapter 7 runs `/brainstorm` on it, and the documents it writes are in the clinic's repository at the chapter tag `book-v1/brainstorm`; the excerpts below are quoted there.
+In that run the agent asked how long an appointment is, proposed one fixed length for the whole clinic, and the answer was "your call".
+So the fact to place is "every appointment lasts the same length", and it holds three facts, each with a different owner.
+
+The first is the word and the rule, question 3.
+This is the header of [`docs/03-Domain.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/docs/03-Domain.md) and its row for the length:
+
+```markdown
+| Term | In code | Meaning |
+|---|---|---|
+| Appointment length | `slotMinutes` | The fixed length of every appointment in the clinic; 30 by default. |
+```
+
+And this is its invariant 2, the rule that uses it:
+
+```markdown
+2. An appointment starts at a slot: inside one of the professional's working
+   periods, on the grid of `slotMinutes` counted from the period's start,
+   ending no later than the period's end.
+```
+
+The row gives the fact a name that code and tests share, and the invariant says what always holds for every appointment stored.
+
+The second is the choice, question 1, since a length per professional or per service was the alternative.
+This is the Decision of [`docs/adr/ADR-0005-fixed-appointment-length.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/docs/adr/ADR-0005-fixed-appointment-length.md):
+
+```markdown
+## Decision
+
+One length for the whole clinic, `slotMinutes`, 30 by default, set at clinic
+setup. Weekly hours are cut into slots of that length, counted from the start
+of each working period. There are no services.
+```
+
+Its Context names the length per clinic, per professional or per service, and gives simplicity as the reason, so a clinic that later needs a length per professional amends this ADR and knows what it is weighing.
+The result of the choice is the row and the invariant above: the ADR governs docs/03 here.
+
+The third is what the choice leaves open, question 2: the owner can change the length, and nobody decided what happens to the appointments already booked.
+This is the line of the Open decisions of [`docs/00-Product.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/docs/00-Product.md):
+
+```markdown
+* What happens to future appointments when the owner changes the appointment
+  length.
+```
+
+An agent whose delivery touches the length reads this line and asks, where it would otherwise have picked an answer.
+
+One sentence of a brief or of a conversation can hold several facts like these.
+"One place per fact" means each of them has one owner, so a sentence may land in three documents, and none of them repeats what another holds.
+
 ## Living documents
 
 When I reviewed chapter 3, its excerpts showed each tool's scenario without the project or the brief it answered, and one was a single line that leaned on the line above it.
@@ -211,9 +276,9 @@ An agent's text reads as right even when it is wrong, so you check it against wh
 ## Key points
 
 * Each fact of a project lives in one place: seven numbered documents, `docs/adr/`, `AGENTS.md` and `work/`, with numbers fixed because the commands cite them.
-* docs/00 is the product and its open decisions, docs/03 the vocabulary, docs/01 and docs/02 how it is built, docs/04 the conventions, docs/05 the process with the project's slots, docs/06 the queue.
+* docs/00 is the product and its open decisions, docs/03 the vocabulary, docs/01 and docs/02 how it is built, docs/04 the conventions, docs/05 the process with the project's slots, where the commands read every fact of the project, docs/06 the queue.
 * An ADR records one decision with its reason, and is amended, never rewritten, so the reason survives the next change; the kit's two choices, FOCUS (whole, the two principles, neither) and git (trunk, a branch or a worktree per delivery), are recorded in docs/01 and docs/05, each with its ADR.
-* `AGENTS.md` is short and only points: nothing in it is the only place a rule is written, and the commands hold no fact of the project.
+* A new fact goes to the first document whose question fits, a choice to an ADR before anything else; one sentence can hold several facts, each with its own owner, and `AGENTS.md` only points at them, never the only place a rule is written.
 * A delivery that changes behaviour updates the document that owns it, in the same delivery, and every later session follows the change; the agent writes it, and you guide it and check it, never on trust.
 
 ## Exercises
@@ -236,6 +301,18 @@ In this book's [`AGENTS.md`](https://github.com/JCKodel/focus-kit-book/blob/6c27
 
 Pick an answer to each of the two choices for the clinic, with one reason each.
 Keep them, to compare with the clinic's brief to `/brainstorm` in chapter 7.
+
+### Exercise 6.5
+
+Place each of these five facts of the clinic with the questions of [Where a new fact goes](#where-a-new-fact-goes), and say whether it holds more than one fact:
+
+1. Each test file sits next to the file it tests.
+2. `SlotTaken` is the refusal when a booking asks for a time that is not free.
+3. A client has no account and proves who they are with a booking code.
+4. Biome formats and lints the code.
+5. The project works on trunk.
+
+Then check your answers against the clinic's documents at [`book-v1/brainstorm`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/brainstorm), including its `AGENTS.md`.
 
 [^book-docs]: J.C. Ködel, "One Page at a Time", this book's repository at commit 6c2713b63af7397ee00142497287b8408a5651b1: the excerpts of docs/00, docs/03, docs/05, ADR-0010 and `AGENTS.md`. <https://github.com/JCKodel/focus-kit-book/tree/6c2713b63af7397ee00142497287b8408a5651b1>
 [^dart-error-exception]: Dart, "Error class" and "Exception class", `dart:core` API reference, accessed 2026-09-28: an `Error` is "*a program failure that the programmer should have avoided*"; an `Exception` "*is intended to be caught*". <https://api.dart.dev/dart-core/Error-class.html> and <https://api.dart.dev/dart-core/Exception-class.html>
