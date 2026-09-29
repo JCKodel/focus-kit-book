@@ -25,7 +25,13 @@
 
 **Done when.**
 
-* [ ] Both editions changed, same meaning; no other paragraph touched.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed, same meaning; no other paragraph touched.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* The third key point now credits both tools with the decision written before code and the rules written once per project, and only OpenSpec with the question; the same bullet says Spec Kit, on its default path, asked nothing and wrote its answer under "Assumptions". Nothing diverged from the page.
+* The Portuguese keeps "Assumptions" with "(suposições)", as its body does.
+* Finding F1 of the M4 review is settled.

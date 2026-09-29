@@ -192,7 +192,7 @@ The run says what each tool writes before the code; it does not say which one bu
 
 * A spec is a written, behaviour-oriented description of what the software must do, in natural language, that guides a coding agent; Spec-Driven Development writes it before the code.
 * By how long the spec lives, a tool is spec-first (written for the task), spec-anchored (kept to maintain the feature) or spec-as-source (the only thing a person edits).
-* Spec Kit and OpenSpec got three things right: the decision written before code in files the agent reads, rules written once per project, and a question asked before writing.
+* Spec Kit and OpenSpec both wrote the decision before code in files the agent reads, and rules once per project; only OpenSpec asked a question before writing, while Spec Kit, on its default path, asked nothing and wrote its answer under "Assumptions".
 * On one recorded feature, Spec Kit wrote 8 files and 756 lines and OpenSpec 6 and 180, restating one rule in most of them, and every file is something you review.
 * A lighter page per feature is paid for with documents written once per project; the run shows what each tool writes, not which builds better software.
 
