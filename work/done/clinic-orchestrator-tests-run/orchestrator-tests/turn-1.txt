@@ -1,0 +1,30 @@
+[tool Bash] ls docs work docs/adr 2>/dev/null; cat docs/05*.md docs/06*.md
+
+[tool Bash] cat docs/00*.md docs/01*.md docs/03*.md docs/04*.md; ls work/done; find src -type f | sort
+
+[tool Bash] cat package.json; ls; cat vitest.config.* 2>/dev/null; wc -l src/features/*/use*.ts src/features/*/api.ts; git show c54d011 --stat; grep -rn -i "orchestrator\|hook" docs work/done/*.md | grep -v "^docs/01" | head -40
+
+[tool Bash] cat src/features/appointments/useBooking.ts src/features/appointments/useCancel.ts; cat vite.config.ts; cat docs/adr/ADR-0002*.md
+
+`orchestrator-tests` isn't in docs/06, so before I write anything I want to check that I've read it the way you mean it.
+
+**My reading.** In this project an orchestrator is two things (docs/01):
+- **Server orchestrators** (`route.server.ts`). Every one already has a Vitest test through `app.request`.
+- **Client orchestrators** (the `use<Feature>.ts` hooks). None has a unit test. They are covered only by Playwright, through the screen.
+
+The hooks hold about 930 lines of real sequencing: stale answers dropped through `latest.current`, what "Try again" repeats, where a refusal sends the client back to. docs/05 §7 asks which concrete error a new tool would have caught, and here there is one. The `slot-taken-retry` finding from the milestone 1 review is a bug inside `useBooking.ts`: after a refused booking whose slot reload fails, `retry` calls `loadSlots(step.professional)` without the `after` argument, so the message and the chosen date are lost. No test saw it, because reproducing "the POST says SlotTaken, then the GET fails" through Playwright is awkward.
+
+So I read the delivery as: **client orchestrators get Vitest tests with their `api.ts` mocked, and docs/04 gets an "Orchestrator" level.**
+
+Four questions, my recommendation first in each:
+
+1. **How to test a hook.** I recommend adding `@testing-library/react` and `jsdom` as dev dependencies. Only the hook test files would run in jsdom, through a `// @vitest-environment jsdom` line at the top, so the server tests stay in Node and no Vitest config file appears. `vi.mock("./api.ts")` controls the answers. Both packages are free, so ADR-0001 holds.
+   The alternative is to rewrite each hook as a pure reducer and test that with no new dependency. That makes the delivery a refactor of eight hooks, and it would still leave the async part (stale answers, retry) untested, which is where the bug lives.
+
+2. **Which hooks.** I recommend the ones with sequencing: `useBooking`, `useCancel`, `useRemembered`, `useProfessionals`, `useWeeklyHours` and `useOwner`. `useClinic` and `useHealth` (28 and 20 lines, one fetch each) would be left out, since a test there would only repeat the Playwright check. If six hooks is too many Behaviour lines for one page, I'd split: this delivery does the tool, the docs/04 convention and the three `appointments` hooks, and a second one (`owner-orchestrator-tests`) does the owner hooks.
+
+3. **The known bug.** I recommend this delivery does **not** fix it. It stays `slot-taken-retry`'s job. I'd queue `orchestrator-tests` just before `slot-taken-retry` in milestone 2, so that fix arrives with a hook test that fails first. The other option is to put both in this delivery and drop the separate line, but then one page mixes "add tests" with "change behaviour".
+
+4. **Client repositories (`api.ts`).** I recommend leaving them out. They are thin calls to `request`, which is already tested in `src/lib/request.test.ts`.
+
+If you agree, I'll also update milestone 2's closing sentence in docs/06 to say the client orchestrators have tests. Then I'll write `work/orchestrator-tests.md` and mark the line `[>]`. Docs/05 says trunk, so I'll write on `main` with no branch.

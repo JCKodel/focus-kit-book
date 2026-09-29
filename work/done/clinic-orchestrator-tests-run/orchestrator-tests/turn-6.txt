@@ -1,0 +1,38 @@
+[tool Edit] work/orchestrator-tests.md
+
+[tool Edit] work/orchestrator-tests.md
+
+[tool Bash] cp work/orchestrator-tests.md work/done/orchestrator-tests.md
+
+[tool Bash] rm work/orchestrator-tests.md
+
+[tool Bash] git add -A
+
+[tool Bash] git status --short
+
+Staged. Saving your trailer preference so it doesn't come back.
+
+[tool Read] <host folder of the clinic>/memory/MEMORY.md
+
+[tool Write] <host folder of the clinic>/memory/commit-message-no-trailer.md
+
+[tool Write] <host folder of the clinic>/memory/MEMORY.md
+
+The delivery is finished and staged. The page is now at `work/done/orchestrator-tests.md`. It records your manual check under **Proof**, and the manual check is ticked, so every "Done when" item is ticked. `git status` shows everything staged, with the page only at its new path. Nothing is committed.
+
+Here is the commit message in the docs/05 format, with no trailer:
+
+```
+Move each client hook's events into tested plain functions
+
+- Add <name>Events.ts and its Vitest file next to each of the eight hooks
+- Events take their repositories as a parameter and the clock as `now`
+- Hooks keep only state, in-flight publishing and stale-answer guards
+- docs/01 states the rule; docs/04 gains the Orchestrator test level
+
+work/done/orchestrator-tests.md
+```
+
+I saved a note in this project's memory so future suggested commit messages end on the page line with no trailer.
+
+**Environments:** local has this delivery, and you've already run it with `npm run dev`. There is no schema change, and migrations apply at start. Production doesn't exist yet; the `deploy` delivery creates it.

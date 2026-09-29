@@ -1,0 +1,26 @@
+[tool Read] work/done/cancel-appointment.md
+
+Now I'll write the page.
+
+[tool Write] work/orchestrator-tests.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+I wrote the page at `work/orchestrator-tests.md`, on `main` since the project works on trunk. In docs/06, `orchestrator-tests` is now the first line of milestone 2, marked `[>]`. I also changed milestone 2's closing sentence to begin "every client orchestrator has unit tests". No code, test or config was touched.
+
+**What I chose on the two open points, and why:**
+
+1. **An event returns an update, `(current) => State`, not a whole state.** The inputs stay enabled while a request is in flight. Today every answer is merged into the latest state, so something typed during a request survives: a name edited while "Book" is busy, or the "Add" field typed in while a rename saves. A whole state computed at the start of the event would erase those keystrokes. This keeps your "behaves exactly as before", and one Behaviour line proves it.
+2. **A booking event may return the next event to run instead of a state.** After `SlotTaken` or `ProfessionalNotFound` today, the screen briefly shows "Loading" between two requests. A function that returns only once can't publish that middle state; the hook can, by running the next event like any other. As a bonus, `retryOf` ("Try again") becomes a plain function. One test pins today's behaviour there: it retries the slots without the message and date. `slot-taken-retry` will then flip that same test.
+
+The other choices I made on my own are listed on the page under "Choices made without the stakeholder". The one to look at: `remember` now runs before the hook's stale check instead of after. That can't be triggered from the screen, because "Back" is disabled while a booking is busy.
+
+**What to do now:** read the page and question it.
+- **Behaviour:** can each line be checked by one test?
+- **Contract:** there is no data change here. The Contract is the code shape (file names, signatures, `BookingOutcome`) that the tests will be written against. Is it exactly what you want?
+- **Out of scope:** does it leave out anything you assumed was in?
+- **The listed choices:** does any of them need reversing?
+
+Ask for every correction in this conversation. When the page is right, open a fresh session and type `/apply orchestrator-tests`.

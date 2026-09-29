@@ -116,6 +116,44 @@ built, `[x]` done. Edited by conversation in any session.
   `clinic-milestone-1`); the author commits each of its deliveries with
   the kit's message and no tag, and the next chapter tag includes those
   commits.
+  * **A recorded clinic run** (the first is `clinic-milestone-1`, the
+    second `clinic-orchestrator-tests`): each clinic delivery takes five
+    steps, run from the clinic's root, one turn at a time.
+    1. `/propose`, headless, fresh: `claude -p "/propose <slug>"` with the
+       common flags. Every round of questions is answered with
+       `--continue` and `Your call. Say what you chose and why.`, unless
+       the delivery's page gives a brief.
+    2. Page review: the author decides which holes to send; each request
+       goes to the same session with `--continue`, word for word as the
+       author approved it. "None" is a valid review. The page is never
+       edited by hand.
+    3. `/apply`, headless, fresh: `claude -p "/apply <slug>"` with the
+       common flags and `--allowedTools "Bash(npm *)" "Bash(npx *)"
+       "Bash(node *)" "Bash(mkdir *)" "Bash(cp *)" "Bash(git add *)"
+       "Bash(git status *)" "Bash(git diff *)"` `--disallowedTools
+       "Bash(npm run dev*)"`.
+    4. Staged review: as step 2, to the `/apply` session. Nothing in the
+       clinic is edited by hand.
+    5. The author commits with the kit's message, no tag, and pushes.
+
+    Common flags: `--model claude-opus-5-5 --setting-sources project
+    --strict-mcp-config --permission-mode acceptEdits --permission-prompts
+    none --output-format stream-json --verbose`.
+
+    Exits: a denied call is recorded, never retried by another route; a
+    run that cannot finish or a verify that stays red stops the delivery,
+    and the author decides on a second run; a line `/propose` splits off
+    is built in the same delivery only if the page says so; a note the
+    host writes outside the repository is deleted after each delivery.
+
+    The record, `work/done/<slug>-run/`: `README.md` with host version,
+    model, the clinic's first and last commit, the flags and the
+    allowlist, then per clinic delivery the commands, the answers, the
+    author's requests word for word (or "none"), the denied calls, what
+    diverged and the commit; `<clinic slug>/turn-N.txt`, every turn, text
+    blocks byte for byte and tool calls as `[tool <name>] <path or
+    command>`; `verify.txt`, `npm run verify` on the clinic's last commit.
+    Paths are relative to the clinic's root; session ids are left out.
 * **Brownfield project:** the fork `JCKodel/clahub`, worked on locally in
   the sibling directory `../clahub`, on the branch `book` created from
   `book-v1`, the frozen upstream (ADR-0009). A chapter that changes it ends

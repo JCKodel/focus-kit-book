@@ -1,0 +1,16 @@
+[tool Read] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] work/orchestrator-tests.md
+
+[tool Edit] work/orchestrator-tests.md
+
+I made all four corrections:
+
+1. **Manual check:** "Done when" now ends with it. You run `npm run dev` and do three things: book a time and cancel it from "Your appointments", book another and cancel it with the booking code, then sign in at `/owner`, add a professional and set their weekly hours. Each step should behave as before.
+2. **The docs/01 rule:** "Done when" now also requires docs/01 to state the rule itself. A client orchestrator's event functions receive their repositories as a parameter, and the real ones are the default.
+3. **Existing tests:** a new "Done when" line says every existing Vitest and Playwright test passes without changing what it asserts. The Behaviour line that says no `*.e2e.ts` is edited stays, since the two agree.
+4. **docs/06:** the milestone 2 paragraph is rewrapped like the others.
+
+If there's nothing else to correct on the page, open a fresh session and type `/apply orchestrator-tests`.

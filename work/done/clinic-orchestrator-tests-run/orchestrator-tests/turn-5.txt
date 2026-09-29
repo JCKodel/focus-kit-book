@@ -1,0 +1,179 @@
+[tool Bash] cat work/orchestrator-tests.md && git diff docs/06-Queue.md && ls docs work work/done 2>/dev/null
+
+[tool Bash] cat docs/01-Architecture.md docs/04-Conventions.md docs/05-Process.md
+
+[tool Bash] find src -type f | sort && wc -l src/features/*/use*.ts && cat package.json
+
+Let me read all the hooks and their dependencies.
+
+[tool Bash] cd src/features && cat appointments/useBooking.ts appointments/useCancel.ts appointments/useRemembered.ts
+
+[tool Bash] cat professionals/useProfessionals.ts weeklyHours/useWeeklyHours.ts signIn/useOwner.ts clinic/useClinic.ts health/useHealth.ts
+
+[tool Bash] cat appointments/api.ts appointments/remembered.ts professionals/api.ts weeklyHours/api.ts signIn/api.ts clinic/api.ts health/api.ts ../lib/result.ts; grep -n "export" appointments/rules.ts professionals/rules.ts weeklyHours/rules.ts appointments/clinicTime.ts
+
+[tool Bash] cd src && grep -rn "from \"\./use\|from \"\.\./.*use[A-Z]" --include=*.ts --include=*.tsx . ; cat ../vitest.config.* ../vite.config.* 2>/dev/null | head -50; ls ..; grep -n "HoursSection\|useWeeklyHours\|hours\b" features/weeklyHours/WeeklyHoursView.tsx features/professionals/ProfessionalsView.tsx | head -30
+
+[tool Bash] cd src && grep -rnE 'from "\.(\.)?/([a-zA-Z]+/)?use[A-Z]' . ; ls -a ..; cat ../vite.config.ts; grep -n "HoursSection\|useWeeklyHours\|section" features/weeklyHours/WeeklyHoursView.tsx | head -30
+
+[tool Bash] cd . && head -60 src/features/appointments/remembered.test.ts; head -40 src/lib/request.test.ts; cat tsconfig.json biome.json; sed -n 140,175p src/features/appointments/rules.ts; sed -n 1,70p src/features/weeklyHours/rules.ts
+
+Now I have the full picture. Writing the booking events first.
+
+[tool Write] src/features/appointments/bookingEvents.ts
+
+[tool Write] src/features/appointments/useBooking.ts
+
+Keeping `submit`'s type as `() => Promise<void>` like today: make `run` async.
+
+[tool Edit] src/features/appointments/useBooking.ts
+
+[tool Edit] src/features/appointments/useBooking.ts
+
+Now cancel and remembered.
+
+[tool Write] src/features/appointments/cancelEvents.ts
+
+[tool Write] src/features/appointments/useCancel.ts
+
+[tool Write] src/features/appointments/rememberedEvents.ts
+
+[tool Write] src/features/appointments/useRemembered.ts
+
+Now professionals and weekly hours.
+
+[tool Write] src/features/professionals/professionalsEvents.ts
+
+[tool Write] src/features/professionals/useProfessionals.ts
+
+[tool Write] src/features/weeklyHours/weeklyHoursEvents.ts
+
+[tool Write] src/features/weeklyHours/useWeeklyHours.ts
+
+Now owner, clinic, health.
+
+[tool Write] src/features/signIn/ownerEvents.ts
+
+[tool Write] src/features/signIn/useOwner.ts
+
+[tool Write] src/features/clinic/clinicEvents.ts
+
+[tool Write] src/features/clinic/useClinic.ts
+
+[tool Write] src/features/health/healthEvents.ts
+
+[tool Write] src/features/health/useHealth.ts
+
+[tool Bash] npx biome check --write src >/dev/null; npm run typecheck 2>&1 | tail -30; npx biome check src 2>&1 | tail -30
+
+[tool Bash] sed -n 1,12p src/features/weeklyHours/WeeklyHoursView.tsx
+
+Re-export `DraftPeriod` from the hook, and tidy the clinic `if` into braces.
+
+[tool Edit] src/features/weeklyHours/useWeeklyHours.ts
+
+[tool Edit] src/features/clinic/clinicEvents.ts
+
+[tool Bash] npx biome check --write src >/dev/null; npm run typecheck 2>&1 | tail -10; npx biome check src 2>&1 | tail -10; grep -nE 'from "\./(api|rules|remembered)\.ts"|from "\.\./.*/(api|rules|remembered)\.ts"' src/features/*/use*.ts
+
+Now the tests. Let me check the phone rule for valid inputs.
+
+[tool Bash] sed -n 88,118p src/features/appointments/rules.ts; grep -n "ServerUnreachable" src/lib/request.ts | head
+
+[tool Write] src/features/appointments/bookingEvents.test.ts
+
+[tool Write] src/features/appointments/cancelEvents.test.ts
+
+[tool Write] src/features/appointments/rememberedEvents.test.ts
+
+[tool Write] src/features/professionals/professionalsEvents.test.ts
+
+[tool Write] src/features/weeklyHours/weeklyHoursEvents.test.ts
+
+[tool Write] src/features/signIn/ownerEvents.test.ts
+
+[tool Write] src/features/clinic/clinicEvents.test.ts
+
+[tool Write] src/features/health/healthEvents.test.ts
+
+[tool Bash] npx biome check --write src >/dev/null; npm run typecheck 2>&1 | tail -30; npx biome check src 2>&1 | tail -20; npx vitest run src/features 2>&1 | tail -40
+
+All units green (284 tests). Now running the full `npm run verify`, including Playwright.
+
+[tool Bash] npm run verify 2>&1 | tail -30
+
+Verify is green. Checking the diff scope against the "Done when" constraints.
+
+[tool Bash] git status --short && git diff --stat -- package.json package-lock.json '*.e2e.ts' '*View.tsx' '*route.server.ts' '*/strings.ts'; grep -rn "vi.mock\|jsdom\|document\." src/features/*/*Events.test.ts; grep -rn "—" src/features/*/*Events*.ts src/features/*/use*.ts
+
+Now the documents. docs/01 slice and rule:
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Edit] docs/04-Conventions.md
+
+[tool Bash] sed -n '/Done when/,$p' work/done/e2e-database-busy.md
+
+[tool Read] work/done/e2e-database-busy.md
+
+Now recording what happened in the page and ticking Done when.
+
+[tool Read] work/orchestrator-tests.md
+
+[tool Bash] npx vitest run src/features/*/*Events.test.ts 2>&1 | grep -E "Tests|Test Files"
+
+[tool Edit] work/orchestrator-tests.md
+
+[tool Bash] npx vitest run 2>&1 | grep -E "Tests |Test Files"
+
+[tool Edit] work/orchestrator-tests.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Bash] git mv -f work/orchestrator-tests.md work/done/orchestrator-tests.md 2>/dev/null || mv work/orchestrator-tests.md work/done/orchestrator-tests.md; grep -c "—" work/done/orchestrator-tests.md docs/01-Architecture.md docs/04-Conventions.md; npm run lint 2>&1 | tail -2; git add -A && git status --short
+
+The move to `work/done/` was blocked by the permission system. I'll finish the checks and staging that don't need approval.
+
+[tool Bash] grep -c "—" work/orchestrator-tests.md docs/01-Architecture.md docs/04-Conventions.md
+
+[tool Bash] git add -A
+
+[tool Bash] git status --short
+
+The delivery is built and `npm run verify` is green, but the page is not in `work/done/` yet. Moving it with `git mv` was blocked by the permission system: this session can't answer approval prompts. So `work/orchestrator-tests.md` is staged at its old path. Before committing, run:
+
+```
+git mv work/orchestrator-tests.md work/done/orchestrator-tests.md
+```
+
+**What was done**
+- **Events files:** there are eight `<name>Events.ts` files, each with an `<name>Events.test.ts` beside it, 85 new tests in all. The tests use fake repositories and pass `now`; none uses `vi.mock` or a DOM.
+- **Hooks:** each hook now only holds the state, shows the in-flight state and the answer, and keeps its stale-answer guards. No hook imports `api.ts`, `rules.ts` or `remembered.ts`, except `onRememberedChange` in `useRemembered`.
+- **Untouched files:** no view, `strings.ts`, `*.e2e.ts`, route, `package.json` or `package-lock.json` is in the diff. Types that views and `strings.ts` import are re-exported by the hooks.
+- **Tests:** typecheck, Biome, 323 Vitest tests, all 144 unchanged Playwright tests and the build all pass.
+- **Documents:** docs/01 now lists `<name>Events.ts` in the slice and states the rule. docs/04 has the Orchestrator row. docs/06 is marked `[x]`. The page records where the build differed from the plan, for example `readRemembered` is synchronous, so it has no async event pair. Every "Done when" item is ticked except the manual check.
+
+**Still yours to do:** the manual check in the "Done when" list, run with `npm run dev`:
+1. Book a time, then cancel it from "Your appointments".
+2. Book another, then cancel it with the booking code.
+3. Sign in at `/owner`, add a professional and set their weekly hours.
+
+**Suggested commit message**
+```
+Move each client hook's events into tested plain functions
+
+- Add <name>Events.ts and its Vitest file next to each of the eight hooks
+- Events take their repositories as a parameter and the clock as `now`
+- Hooks keep only state, in-flight publishing and stale-answer guards
+- docs/01 states the rule; docs/04 gains the Orchestrator test level
+
+work/done/orchestrator-tests.md
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+```
+
+Nothing is committed.
+
+**Environments:** local has this delivery on disk and ready to start with `npm run dev`; migrations apply at start and there is no schema change. Production doesn't exist yet: the `deploy` delivery creates it.

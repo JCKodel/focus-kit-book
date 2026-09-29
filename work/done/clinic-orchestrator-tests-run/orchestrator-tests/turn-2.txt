@@ -1,0 +1,34 @@
+[tool Bash] cat src/features/appointments/useRemembered.ts src/features/professionals/useProfessionals.ts src/features/weeklyHours/useWeeklyHours.ts src/features/signIn/useOwner.ts src/features/clinic/useClinic.ts src/features/health/useHealth.ts
+
+[tool Bash] cat src/features/*/api.ts src/features/appointments/remembered.ts src/lib/request.ts src/lib/result.ts; cat docs/02*.md | head -80
+
+[tool Bash] grep -n "disabled\|loading" src/features/appointments/BookingView.tsx src/features/professionals/ProfessionalsView.tsx | head -30; head -30 src/features/appointments/remembered.test.ts
+
+Understood. I'll add the line as the first of milestone 2, and each hook's events move into plain functions tested in Node. I read the six hooks against your rule, and two points have more than one reading, and each one decides whether "behaves exactly as before" holds. I'd like to settle them before I write.
+
+**1. "Return the new state" when the person keeps typing during a request.** Today every answer is merged into the *latest* state (`setState((s) => ...)`), and the inputs stay enabled while a request is in flight. Two examples:
+- In the booking form, a client can edit the name while "Book" is busy. If the answer is `SlotTaken`, the edit survives.
+- The owner can type in the "Add" field while a rename is saving. When the rename returns, the typed text survives.
+
+If a function receives the state at the start of the event and returns a whole state, those keystrokes are lost when the answer lands.
+I recommend that an event function **returns the new state as a function of the current one**: `Promise<(current: State) => State>`. The hook publishes it with `setState(update)`, and a test calls `update(state)` and compares. The alternative is to return a whole state and accept that edits typed during a request can be lost, which is a small behaviour change.
+
+**2. Chains inside one event (only in `useBooking`).**
+- `submit` answered `SlotTaken` → reload the slots.
+- A reload answered `ProfessionalNotFound` → reload the professionals.
+
+Today the screen shows the in-between state: after `SlotTaken` it goes from the busy form to "Loading" days, then to the times. A function that returns only once cannot publish that middle state.
+I recommend that **an event function may return, instead of a state, the next event to run**, for example `{ next: "loadSlots", professional, after: { message: "SlotTaken", date } }`. The hook runs it like any other event: in-flight state, then its function. A test then checks "SlotTaken leads to loadSlots with the message and the date", and each step stays separately testable. It also means `retry` becomes a plain function that answers which event to repeat, and that is exactly where `slot-taken-retry` will need a test.
+The alternative is one function that does the whole chain and returns only the end state. It is simpler, but the "Loading" in the middle disappears and the busy form stays on screen until the end.
+
+Choices I'll make on my own unless you object (they'll be listed on the page):
+- **One file per hook, `<name>Events.ts`, next to it** (`bookingEvents.ts`, `cancelEvents.ts`, `rememberedEvents.ts`, ...), with a `<Name>Repositories` type and the real ones as the default last parameter. `remembered.ts` is already taken by the storage repository, hence the suffix.
+- **Every event moves, including those with no call** (`typeName`, `back`, `pickDay`, ...). An event with a call gets two functions: a synchronous `<event>Started(state, ...)` for the in-flight state and the async `<event>(...)`. `now` is a required parameter wherever a use case *or* a repository (`remember`, `forget`, `readRemembered`) needs the clock.
+- **Values the hook works out for display move too:** `days`, `tooLateToCancel`, and the `lines` of `useRemembered`, as functions taking `now`.
+- **`useRemembered`'s four `useState`s become one state object**, so it follows the same pattern as the others.
+- **`useWeeklyHours` does not call `section` from inside the function.** It returns what to report (`"saved"`, `"failed"`, or the refusal) alongside the state, and the hook forwards it.
+- **What stays in the hooks:** the stale-answer guards (the `latest` counter in `useBooking`, the `active` flag in the others) and the `onRememberedChange` subscription. That is holding and publishing state.
+- **No shared "run an event" helper.** The guards differ from hook to hook, and a common helper would be a change of behaviour dressed as a refactor.
+- **Milestone 2's closing sentence in docs/06 gains** "every client orchestrator has unit tests".
+
+Which way on 1 and 2?
