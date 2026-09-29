@@ -40,7 +40,7 @@ A new concept enters here first, in both languages.
 | compaction | compactação | none | The host summarizes a conversation near the limit of the context window and continues from the summary; detail is lost. |
 | FOCUS | FOCUS | `view`, `orchestrator`, `use-case`, `repository`, `driver` | The optional architecture: Feature-oriented (vertical slices), Clean (four pieces, rules in pure use cases), Unidirectional (event, orchestrator, new state), Scalable (every piece isolated and testable, whatever the size); exceptions as values; nothing exists for ceremony (ADR-0016). |
 | view | tela | `view` | The FOCUS piece that fires events and renders the state it receives, nothing else. |
-| orchestrator | orquestrador | `orchestrator` | The FOCUS piece that turns one event into one new state: it validates, fetches, applies rules and formats through use cases, asks repositories to fetch and save, and returns the state; the only piece with injected dependencies, which are repositories (BLoC in Flutter, Mediator in .NET). |
+| orchestrator | orquestrador | `orchestrator` | The FOCUS piece that turns one event into one new state: it validates, fetches, applies rules and formats through use cases, asks repositories to fetch and save, and returns the state; the only piece that receives its dependencies, its repositories or the driver they use, because only there a test passes a second implementation, a fake (BLoC in Flutter, Mediator in .NET). |
 | use case | caso de uso | `use-case` | A FOCUS piece holding a business rule, a validation or a format as a pure, synchronous function: data in, value out, no repository, no I/O; written only when there is a rule to hold. |
 | repository | repositório | `repository` | The FOCUS piece that fetches and saves; the only code that does I/O and the only code with `try`/`catch`, and it returns every exception as a value. |
 | driver | driver | `driver` | What a repository uses to reach I/O, such as a database engine or an ORM; rarely written for the project. |
@@ -55,6 +55,7 @@ A new concept enters here first, in both languages.
 | KISS | KISS | none | Keep it simple: the simplest code that does the job; with YAGNI and DRY, non-negotiable in FOCUS. |
 | YAGNI | YAGNI | none | You aren't gonna need it: nothing is built before a delivery needs it, a FOCUS piece included. |
 | DRY | DRY | none | Don't repeat yourself: each piece of knowledge lives in one place. |
+| fake | falso | none | A second implementation that a test passes in place of the real one, such as a repository that answers what the test sets, or an in-memory database; Portuguese as an adjective: "repositório falso". |
 | unit test | teste unitário | `*.test.ts` | A test that runs one piece of code in the test runner, with no browser, such as a use case called with its data or a repository against an in-memory database. |
 | end-to-end test | teste ponta a ponta | `*.e2e.ts` | A test that drives the running app in a browser, as a user would, through the view, the orchestrators, the server and the database. |
 | stage | stage | `git add` | To mark changes for the next commit; the agent stages, the person reviews and commits. |

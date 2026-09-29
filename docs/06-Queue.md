@@ -87,6 +87,7 @@ When this milestone closes, a reader can organize code by feature with exception
 [x] errors-and-slices      Chapter 14: exceptions as values and vertical slices, the two principles that stand alone
 [x] four-pieces            Chapter 15: View, Orchestrator, Use Case, Repository, one table and one flow, and when the four pieces pay their way
 [x] clinic-orchestrator-tests  The clinic's client orchestrators become plain functions that receive their repositories, each with unit tests with fakes, by a recorded run
+[>] four-pieces-injection  Chapter 15 at the clinic's tested orchestrators: the client orchestrator's two files, and injection only where a test passes a second implementation, a fake
 [ ] testing-and-agents     Chapter 16: testing each piece, and how the architecture helps an agent
 ```
 
@@ -123,6 +124,6 @@ When this milestone closes, version 1 is tagged, the PDF and EPUB are on books.k
 [ ] templates              Appendix: every document template, annotated
 [ ] workshop-map           Appendix: the parts mapped to workshop sessions, with timings and exercises
 [ ] exercise-answers       Appendix: answers to every exercise, linked to the guided project's tags
-[ ] cover                  a cover image per edition for the PDF and the EPUB
+[ ] cover                  make book puts each edition's cover on the PDF's first page (book/assets/cover-<edition>.pdf, A5) and as the EPUB's cover image (book/assets/cover-<edition>.png)
 [ ] launch                 v1 tag and Release; focus-kit's README repointed in its own repository (OD-4)
 ```
