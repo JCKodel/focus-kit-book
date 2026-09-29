@@ -43,7 +43,7 @@ I ran the checks from section 4 of SETUP.md, and they all pass. The file count i
 Tradução:
 
 ```markdown
-Instalei o focus-kit. Escrevi todos os 36 arquivos que o SETUP.md lista, copiando cada um direto do SETUP.md com um script. Onde um arquivo tem o marcador `<name>`, ele foi substituído pelo nome do comando. Não mexi em nenhum arquivo existente e não preparei nem fiz commit de nada.
+Instalei o focus-kit. Escrevi todos os 36 arquivos que o SETUP.md lista, copiando cada um direto do SETUP.md com um script. Onde um arquivo tem o marcador `<name>`, ele foi substituído pelo nome do comando. Não mexi em nenhum arquivo existente e não coloquei nada em stage nem fiz commit.
 
 **Arquivos escritos:**
 - **Skills (18 arquivos):** em cada uma de `.claude/skills/`, `.agents/skills/` e `.windsurf/skills/`, há um `SKILL.md` para `brainstorm`, `analyze`, `propose` e `apply`, mais `references/documents.md` em `brainstorm` e `analyze`.
@@ -74,7 +74,7 @@ Depois, `git status --short` mostrou o que apareceu:[^claude-code-run]
 
 Essas linhas guardam 36 arquivos (`git status --short --untracked-files=all` os lista um a um): os quatro comandos uma vez em cada pasta de skills, `.claude/skills/`, `.agents/skills/` e `.windsurf/skills/`, e pequenos arquivos que apontam para eles, para os hosts que precisam.
 Cada arquivo saiu do arquivo de setup byte a byte.[^claude-code-run]
-A instalação não prepara nem faz commit; você revisa os arquivos e faz o commit.
+A instalação não coloca nada em stage nem faz commit; você revisa os arquivos e faz o commit.
 
 ## O que a instalação nunca toca, e como atualizar
 

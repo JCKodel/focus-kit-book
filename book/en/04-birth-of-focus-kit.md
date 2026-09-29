@@ -26,7 +26,7 @@ On 2026-08-29 I restarted the project with a process small enough to hold in you
 * **Deciding and doing in separate sessions.** `/propose` talks and writes the page; `/apply` builds it in a fresh session, with only the page and the documents: a context that grows loses accuracy ([chapter 2](02-how-agents-see.md)), so the build starts clean, from the written target, without the conversation that decided it.
 * **The documents hold the facts.** The commands only say which documents to read and what never to do.
 * **A queue**, one line per delivery. No formal spec, no archive, no change folder. The outline held each delivery's plan and its reasoning together, so reading the list meant reading everything; the queue keeps one line per delivery, and the page keeps the reasoning.
-* **The agent never commits.** It stages the work; the person reviews and commits. None of the 29 checks had ever caught an error in the product, so the check that looks at the product is the person's review of each commit.
+* **The agent never commits.** It stages the work with `git add`; the person reviews and commits. None of the 29 checks had ever caught an error in the product, so the check that looks at the product is the person's review of each commit.
 * **The governor.** Anything that wants to come back answers one question: which concrete error would it have caught?
 
 That process carried Ninjobs to its public opening on 2026-09-10.[^ninjobs]

@@ -29,8 +29,18 @@
 
 **Done when.**
 
-* [ ] docs/03 has the row, in both languages.
-* [ ] Every listed line changed; `grep -n "prepar" book/pt/*.md` shows no git meaning left.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] docs/03 has the row, in both languages.
+* [x] Every listed line changed; `grep -n "prepar" book/pt/*.md` shows no git meaning left.
+* [x] `make verify` green.
+* [x] `make book` run, and both PDF paths given to the author.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* docs/03 has the row "stage", identifier `git add`, just before "trunk", with the other git terms.
+* Chapter 4: the English reads "It stages the work with `git add`"; the Portuguese "Ele coloca o trabalho em stage com `git add`".
+* Chapter 5, Portuguese: line 46 "não coloquei nada em stage nem fiz commit" (the English reply at line 28 unchanged); line 77 "A instalação não coloca nada em stage nem faz commit", the same form as chapter 7 line 210.
+* Chapter 6, Portuguese: line 88 "O agente coloca em stage; ele nunca faz commit nem merge."; line 144 "O agente coloca em stage e sugere a mensagem; o autor revisa e faz o commit."; line 168 reads exactly as chapter 7 line 181.
+* `grep -n "prepar" book/pt/*.md` finds nothing: no other meaning of "prepar" was in the edition either.
+* Nothing dropped, nothing diverged from the plan. Finding F8 of the M3 review is settled.
+* Proof: `make verify` green; `make book` builds both editions, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.

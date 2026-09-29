@@ -85,7 +85,7 @@ Estes são dois slots da §5 deste livro, o comando que confere uma entrega e a 
   travessão); `disclosure-scan`, `prose-rules` e `link-check` acrescentam
   as suas verificações a ele; `commit-hooks` acrescenta as mensagens de
   commit e os hooks à varredura de divulgação.
-* **Git:** trunk. O agente prepara; ele nunca faz commit nem merge.
+* **Git:** trunk. O agente coloca em stage; ele nunca faz commit nem merge.
 ```
 
 Os nomes entre crases depois de "Criado por" são entregas deste livro, linhas da fila dele, e o slot registra qual delas acrescentou cada verificação.
@@ -141,7 +141,7 @@ Uma worktree por entrega deixaria agentes escreverem capítulos em paralelo, mas
 ## Decisão
 
 Tudo acontece em `main`, uma entrega de cada vez.
-O agente prepara e sugere a mensagem; o autor revisa e faz o commit.
+O agente coloca em stage e sugere a mensagem; o autor revisa e faz o commit.
 
 ## Consequências
 
@@ -165,7 +165,7 @@ Este é o resto dele, no original em inglês e aqui traduzido:
 - O livro não menciona nenhum dos livros anteriores do autor e não copia texto deles (ADR-0005).
 - Uma entrega = uma página em work/<slug>.md: /propose para definir, /apply para construir.
 - Nenhum travessão em texto que um usuário lê.
-- O agente prepara e sugere a mensagem de commit. Ele nunca faz commit.
+- O agente coloca em stage e sugere a mensagem de commit. Ele nunca faz commit.
 
 ## Não reconstruir
 - Uma wiki do GitHub, escrita ou espelhada (ADR-0001).

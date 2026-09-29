@@ -26,7 +26,7 @@ Em 2026-08-29 eu recomecei o projeto com um processo pequeno o bastante para cab
 * **Decidir e fazer em sessões separadas.** O `/propose` conversa e escreve a página; o `/apply` a constrói em uma sessão nova, só com a página e os documentos: um contexto que cresce perde precisão ([capítulo 2](02-how-agents-see.md)), então a construção começa limpa, com o alvo escrito, sem a conversa que o decidiu.
 * **Os documentos guardam os fatos.** Os comandos só dizem quais documentos ler e o que nunca fazer.
 * **Uma fila**, uma linha por entrega. Sem especificação formal, sem arquivamento, sem pasta de change. O roteiro guardava juntos o plano de cada entrega e o seu raciocínio, então ler a lista era ler tudo; a fila guarda uma linha por entrega, e a página guarda o raciocínio.
-* **O agente nunca faz commit.** Ele prepara o trabalho com `git add`; a pessoa revisa e faz o commit. Nenhuma das 29 verificações jamais tinha pegado um erro do produto, então a verificação que olha o produto é a revisão que a pessoa faz de cada commit.
+* **O agente nunca faz commit.** Ele coloca o trabalho em stage com `git add`; a pessoa revisa e faz o commit. Nenhuma das 29 verificações jamais tinha pegado um erro do produto, então a verificação que olha o produto é a revisão que a pessoa faz de cada commit.
 * **O regulador.** Tudo o que quiser voltar responde a uma pergunta: que erro concreto isso teria pegado?
 
 Esse processo levou o Ninjobs à abertura ao público em 2026-09-10.[^ninjobs]
