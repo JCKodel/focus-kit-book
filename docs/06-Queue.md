@@ -114,7 +114,7 @@ When this milestone closes, every confirmed finding of the M4 review is settled:
 [>] ch15-piece-cost        Chapter 15: "When the pieces pay their way" shows a piece that has a job and still costs more than it gives, so a reader can weigh one; both editions
 [>] ch16-unit-test         Chapter 16: the definition of a unit test fits the route test, which drives the route, the use case, the repository and SQLite; both editions
 [>] ch16-it-each           Chapter 16: the text describes the it.each over two refusal codes and an exception as it runs, and says what it.each does; both editions
-[ ] ch16-reading-count     Chapter 16: the key point's 20 of 95 files gets a baseline, or "small" is stated as a description, not a measure; both editions
+[>] ch16-reading-count     Chapter 16: the key point's 20 of 95 files gets a baseline, or "small" is stated as a description, not a measure; both editions
 [ ] clinic-booking-submit  useBooking's submit publishes its in-flight state as an update applied to the current state, as docs/01 says, and passes the state it books with into run, so the shown ref written during render leaves, by a recorded run
 [ ] clinic-hours-save      useWeeklyHours' save publishes its in-flight state as an update applied to the current state, so a time typed or a period added or removed just before Save is kept, by a recorded run
 [ ] clinic-hours-report    the weekly hours editor's reports, saving included, reach the professionals section through one report member of HoursSection and one tested professionals event, so forward, the four callbacks and the copied comment leave; this finishes the clinic's milestone 1.1 line orchestrator-tests, which left forward and the saving report in the hook untested, by a recorded run
