@@ -101,7 +101,7 @@ When this milestone closes, every confirmed finding of the M4 review is settled:
 
 ```
 [x] ch3-key-point-ask      Chapter 3: the key point credits only OpenSpec with a question asked before writing, since the run shows Spec Kit asked nothing on its default path; both editions
-[>] pt-slot-term           Portuguese edition: a slot of the slotMinutes grid gets its own term, apart from "horário livre" (a free slot), in chapter 6's excerpts of invariant 2 and ADR-0005
+[x] pt-slot-term           Portuguese edition: a slot of the slotMinutes grid gets its own term, apart from "horário livre" (a free slot), in chapter 6's excerpts of invariant 2 and ADR-0005
 [>] ch14-feature-boundary  Chapter 14: says what makes one feature, and why the appointments slice holds cancelling while weekly hours and professionals have slices of their own; both editions
 [>] ch14-refusal-io        Chapter 14: the definition of a refusal and its key point fit SlotTaken, the refusal the repository makes when the unique index refuses an insert; both editions
 [>] ch14-catch-all         Chapter 14: says that query catches every thrown value, so a bug inside it becomes DatabaseFailed, and how that squares with "Error: a bug, thrown and never caught"; both editions

@@ -26,7 +26,13 @@
 
 **Done when.**
 
-* [ ] Both excerpts changed; `grep -n "horário livre\|horários livres" book/pt/06-the-documents.md` finds nothing.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both excerpts changed; `grep -n "horário livre\|horários livres" book/pt/06-the-documents.md` finds nothing.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Both sentences changed as written, with no re-wrap: "intervalo" and "intervalos" fit the existing lines. The grep finds nothing in chapter 6; the other "horário(s) livre(s)" of the Portuguese edition stay.
+* Line 314 of chapter 6 ("um horário que não está livre", `SlotTaken`) means a free slot and stays.
+* `make verify` green. Staging and the commit are left to the driver of the M4.1 loop.

@@ -218,7 +218,7 @@ Este é o cabeçalho de [`docs/03-Domain.md`](https://github.com/JCKodel/focus-k
 E este é o invariante 2 dele, a regra que a usa:
 
 ```markdown
-2. Um agendamento começa em um horário livre: dentro de um dos períodos de
+2. Um agendamento começa em um intervalo: dentro de um dos períodos de
    trabalho do profissional, na grade de `slotMinutes` contada a partir do
    início do período, terminando no máximo no fim do período.
 ```
@@ -232,7 +232,7 @@ Esta é a Decision (decisão) de [`docs/adr/ADR-0005-fixed-appointment-length.md
 ## Decisão
 
 Uma duração para a clínica inteira, `slotMinutes`, 30 por padrão, definida na
-configuração da clínica. Os horários semanais são cortados em horários livres
+configuração da clínica. Os horários semanais são cortados em intervalos
 dessa duração, contados a partir do início de cada período de trabalho. Não
 há serviços.
 ```
