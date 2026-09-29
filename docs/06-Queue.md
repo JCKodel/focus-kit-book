@@ -87,7 +87,7 @@ When this milestone closes, a reader can organize code by feature with exception
 [x] errors-and-slices      Chapter 14: exceptions as values and vertical slices, the two principles that stand alone
 [x] four-pieces            Chapter 15: View, Orchestrator, Use Case, Repository, one table and one flow, and when the four pieces pay their way
 [x] clinic-orchestrator-tests  The clinic's client orchestrators become plain functions that receive their repositories, each with unit tests with fakes, by a recorded run
-[>] four-pieces-injection  Chapter 15 at the clinic's tested orchestrators: the client orchestrator's two files, and injection only where a test passes a second implementation, a fake
+[x] four-pieces-injection  Chapter 15 at the clinic's tested orchestrators: the client orchestrator's two files, and injection only where a test passes a second implementation, a fake
 [ ] testing-and-agents     Chapter 16: testing each piece, and how the architecture helps an agent
 ```
 

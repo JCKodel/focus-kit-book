@@ -6,9 +6,9 @@ You can follow one event through them to a new state, and decide for a feature w
 ## The four pieces
 
 Chapter 6 gave FOCUS in one paragraph, in [the two choices](06-the-documents.md#the-two-choices), from this book's ADR-0016;[^book-adr-0016] this chapter shows its pieces in running code.
-Every excerpt below comes from the guided project at its chapter tag [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone), the code chapter 12 left, and is quoted as it ran; code nested inside a function is shown without its outer indentation.
+Every excerpt below comes from the guided project at its chapter tag [`book-v1/four-pieces`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/four-pieces), the code chapter 12 left plus the clinic's first delivery of milestone 2, and is quoted as it ran; code nested inside a function is shown without its outer indentation.
 
-The clinic took FOCUS whole in chapter 7, and its [`docs/01-Architecture.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/docs/01-Architecture.md), in the section "How the code is organized", gives the four pieces in a table:
+The clinic took FOCUS whole in chapter 7, and its [`docs/01-Architecture.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/docs/01-Architecture.md), in the section "How the code is organized", gives the four pieces in a table:
 
 | Piece | Does | Forbids |
 |---|---|---|
@@ -27,6 +27,9 @@ features/<feature>/
   repository.server.ts   server Repository: SQL
   repository.server.test.ts
   api.ts                 client Repository: fetch, network failure becomes a Result
+  <name>Events.ts        client Orchestrator: the hook's state, its initial
+                         value, and what each event does, as plain functions
+  <name>Events.test.ts
   use<Feature>.ts        client Orchestrator: a React hook publishing one state
   <Feature>View.tsx      View
   strings.ts             every text the user reads in this feature
@@ -41,8 +44,10 @@ The Clean of FOCUS is the layers of Clean Architecture[^clean-architecture] with
 
 A clinic slice runs on two sides, the phone's browser and the server, and each side has its own orchestrator and its own repositories.
 
-On the client, the orchestrator is the hook `use<Feature>.ts`.
-Its repositories are `api.ts`, which reaches the network, and, in the booking slice, `remembered.ts`, which reaches the phone's storage.
+On the client, the orchestrator is two files.
+`<name>Events.ts` holds what each event does, as plain functions: the calls to repositories and use cases, in order, and the new state.
+The hook `use<Feature>.ts` is only the React part: it holds the state, publishes the in-flight state and the answer, reads the clock, and drops a stale answer.
+The orchestrator's repositories are `api.ts`, which reaches the network, and, in the booking slice, `remembered.ts`, which reaches the phone's storage.
 The clinic's listing labels only `api.ts` as a repository; this book places `remembered.ts` there too, because it does a repository's job: the section "How data is accessed" of the same docs/01 makes it the only code that touches the phone's storage, and it returns its failure as a `Result`.
 
 On the server, the orchestrator is the route `route.server.ts`, and the repository is `repository.server.ts`, which runs the SQL.
@@ -58,7 +63,7 @@ The view exists only on the client; on the server, the new state an event leads 
 A client books an appointment: the tap on "Book" is the event, and the screen showing the booking code is the new state.
 These are the steps between them.
 
-**1. The view fires the event.** This is the form step of [`src/features/appointments/BookingView.tsx`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/BookingView.tsx):
+**1. The view fires the event.** This is the form step of [`src/features/appointments/BookingView.tsx`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/BookingView.tsx):
 
 ```ts
 case "form": {
@@ -111,36 +116,45 @@ case "form": {
 
 The view renders what `state` holds and hands every change to the hook, as `typeName`, `typePhone`, `back` or `submit`; the tap on "Book" submits the form, and `submitForm` calls `submit` and does nothing else.
 
-**2. The client orchestrator.** This is `submit`, from [`src/features/appointments/useBooking.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/useBooking.ts):
+**2. The client orchestrator.** Its events are plain functions in [`src/features/appointments/bookingEvents.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/bookingEvents.ts); booking takes two, `submitStarted` and `submit`:
 
 ```ts
 // Name and phone are checked here to show the message beside the field
 // and send nothing; the server checks them again.
-const submit = useCallback(async () => {
-	const { step, slots } = state;
-	if (step.kind !== "form" || !slots) return;
+export function submitStarted(state: BookingState): {
+	state: BookingState;
+	send: boolean;
+} {
+	if (state.step.kind !== "form" || !state.slots) return { state, send: false };
 	const name = checkClientName(state.name);
 	const phone = checkClientPhone(state.phone);
-	setState((s) => ({
-		...s,
+	const checked = {
+		...state,
 		nameError: name.ok ? undefined : name.error,
 		phoneError: phone.ok ? undefined : phone.error,
-	}));
-	if (!name.ok || !phone.ok) return;
+	};
+	if (!name.ok || !phone.ok) return { state: checked, send: false };
+	return { state: { ...checked, busy: true, failed: undefined }, send: true };
+}
 
-	setState((s) => ({ ...s, busy: true, failed: undefined }));
-	const call = ++latest.current;
-	const result = await postAppointment({
+// `state` is the one `submitStarted` accepted.
+export async function submit(
+	state: BookingState,
+	now: Date,
+	repositories = bookingRepositories,
+): Promise<BookingOutcome> {
+	const { step, slots } = state;
+	if (step.kind !== "form" || !slots) return { update: (s) => s };
+	const result = await repositories.postAppointment({
 		professionalId: step.professional.id,
 		startsAt: step.startsAt,
 		clientName: state.name,
 		clientPhone: state.phone,
 	});
-	if (call !== latest.current) return;
 	if (result.ok) {
 		const booked = result.value;
 		// A storage failure leaves the code on screen: nothing else to do.
-		remember(
+		repositories.remember(
 			{
 				bookingCode: booked.bookingCode,
 				clientPhone: booked.clientPhone,
@@ -148,34 +162,67 @@ const submit = useCallback(async () => {
 				startsAt: booked.startsAt,
 				timeZone: slots.timeZone,
 			},
-			new Date(),
+			now,
 		);
-		setState((s) => ({
-			...s,
-			step: { kind: "booked", booked, timeZone: slots.timeZone },
-			busy: false,
-			name: "",
-			phone: "",
-		}));
-		return;
+		return {
+			update: (s) => ({
+				...s,
+				step: { kind: "booked", booked, timeZone: slots.timeZone },
+				busy: false,
+				name: "",
+				phone: "",
+			}),
+		};
 	}
 	const code = result.error.code;
 	if (code === "ProfessionalNotFound") {
-		return loadProfessionals("ProfessionalNotFound");
+		return { next: "loadProfessionals", message: "ProfessionalNotFound" };
 	}
 	if (code === "SlotTaken") {
-		return loadSlots(step.professional, {
-			message: "SlotTaken",
-			date: step.date,
-		});
+		return {
+			next: "loadSlots",
+			professional: step.professional,
+			after: { message: "SlotTaken", date: step.date },
+		};
 	}
-	setState((s) => ({ ...s, busy: false, failed: "book" }));
-}, [state, loadProfessionals, loadSlots]);
+	return { update: (s) => ({ ...s, busy: false, failed: "book" }) };
+}
 ```
 
-It calls the use cases `checkClientName` and `checkClientPhone` only to show a message beside a field, sends the booking through the repository `postAppointment`, keeps a copy on the phone through the repository `remember`, and publishes one new state, the step `booked`.
+`submitStarted` checks name and phone with the use cases `checkClientName` and `checkClientPhone`, only to show a message beside a field, and gives the in-flight state, with `busy` set.
+`submit` sends the booking through the repository `postAppointment` and keeps a copy on the phone through the repository `remember`, both reached through `repositories`, with `now` passed in; it returns either an update to the state, the step `booked`, or the next event to run: `loadProfessionals` when the professional is gone, `loadSlots` when the slot was taken.
 
-**3. The client repository.** This is `postAppointment`, from [`src/features/appointments/api.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/api.ts):
+The `submit` the view calls is the hook's, which hands the event to `run`, from [`src/features/appointments/useBooking.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/useBooking.ts):
+
+```ts
+// Any event with a call: its in-flight state, then its answer, which is
+// an update or the next event to run.
+const run = useCallback(async function run(next: BookingNext) {
+	let outcome: Promise<BookingOutcome>;
+	if (next.next === "submit") {
+		const snapshot = shown.current;
+		const started = submitStarted(snapshot);
+		setState(started.state);
+		if (!started.send) return;
+		outcome = submitEvent(snapshot, new Date());
+	} else if (next.next === "loadSlots") {
+		setState((s) => loadSlotsStarted(s, next.professional));
+		outcome = loadSlots(next.professional, next.after);
+	} else {
+		setState((s) => loadProfessionalsStarted(s, next.message));
+		outcome = loadProfessionals();
+	}
+	const call = ++latest.current;
+	const answer = await outcome;
+	if (call !== latest.current) return;
+	if ("update" in answer) setState(answer.update);
+	else await run(answer);
+}, []);
+```
+
+The hook sets the in-flight state, reads `new Date()` and passes it to `submit`, drops an answer that is not the latest, and publishes the update or runs the next event.
+
+**3. The client repository.** This is `postAppointment`, from [`src/features/appointments/api.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/api.ts):
 
 ```ts
 // The client checks name and phone with the same use cases before sending,
@@ -199,7 +246,7 @@ export function postAppointment(
 
 It reaches the network through `request`, from `src/lib/request.ts` in chapter 14, which returns the answer as a `Result`, and it names the two answers it expects as refusals: 404 is `ProfessionalNotFound` and 409 is `SlotTaken`.
 
-**4. The server orchestrator fetches.** The request arrives at [`src/features/appointments/route.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/route.server.ts), whose `slotsOf` reads what a booking is checked against:
+**4. The server orchestrator fetches.** The request arrives at [`src/features/appointments/route.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/route.server.ts), whose `slotsOf` reads what a booking is checked against:
 
 ```ts
 // What both routes read after the body: the active professional, the clinic
@@ -286,7 +333,7 @@ It asks four repository functions, from four slices, for the data: `findActivePr
 In order: the body's shape, `slotsOf`, the use case `book`, whose refusal becomes a status through `refusalStatus` from [chapter 14](14-errors-and-slices.md#exceptions-as-values-in-the-clinic), the booking code, the repository `insertAppointment`, whose SQL is in the same section of chapter 14, and the answer 201.
 `drawBookingCode` draws the code at random in the route, because randomness, like the clock, is the orchestrator's to supply, so no use case stops being pure; the clinic's docs/01 says it of the clock: "*Use cases take the current time as a parameter. No use case reads the clock.*"
 
-**6. The use case decides.** This is `book`, from [`src/features/appointments/rules.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/rules.ts):
+**6. The use case decides.** This is `book`, from [`src/features/appointments/rules.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/rules.ts):
 
 ```ts
 // The appointment to store, checked in order: name, phone, window, hours,
@@ -321,27 +368,50 @@ export function book(
 
 Data comes in, `now` inside `input`, and a `Result` comes out; it calls `checkClientName`, `checkClientPhone` and `freeSlots`, all in `rules.ts`, and no repository.
 
-The way back needs no excerpt: the route answers 201, `postAppointment` returns the booking as a value, `submit` publishes the step `booked`, and the view renders it in its `case "booked"`, with the booking code.
+The way back needs no excerpt: the route answers 201, `postAppointment` returns the booking as a value, `submit` returns the update with the step `booked`, the hook publishes it, and the view renders it in its `case "booked"`, with the booking code.
 
 The flow never goes back the wrong way: the view never sets the state, and a use case never calls a repository.
 So "what happens when this event arrives?" has one answer, and chapter 16 turns it into a test.
 
 ## What the clinic injects
 
-ADR-0016 says the orchestrator is the only piece with injected dependencies, and that those are the repositories.[^book-adr-0016]
-The clinic chose something simpler.
+ADR-0016, as amended, gives the rule: the orchestrator is the only piece that receives its dependencies, and it receives them because a test passes a second implementation.[^book-adr-0016]
+The clinic follows it on both sides.
 
-The server's orchestrator receives the database, the driver, and passes it to each repository function: the route is `appointmentsRoute(db)`, and `slotsOf` and the handler above hand `db` to every repository call.
-The clinic's docs/01 says why:
+The server's orchestrator receives the database, the driver its repositories use, and hands it to each repository function: the route is `appointmentsRoute(db)`, and `slotsOf` and the handler above hand `db` to every repository call.
+Its test passes `memoryDatabase`, the in-memory SQLite of chapter 14, in place of the file, and the clinic's docs/01 says why the route takes the driver:
 
 > "*Server routes that need the database are functions of it (`clinicRoute(db)`), so Vitest drives them through Hono's `app.request` against an in-memory SQLite (`testDatabase.server.ts`).*"
 
-Vitest is the clinic's test runner, `app.request` sends a request to a route without a network, and `testDatabase.server.ts` holds `memoryDatabase`, from chapter 14.
+Vitest is the clinic's test runner, `app.request` sends a request to a route without a network, and `testDatabase.server.ts` holds `memoryDatabase`.
 
-The client's orchestrator injects nothing: `useBooking.ts` imports `postAppointment` from `api.ts` and `remember` from `remembered.ts`.
+The client's orchestrator receives its repositories, named in `bookingEvents.ts`:
 
-This is the clinic's choice, and its reason holds: in a language of plain functions, the one thing its tests swap is the database, so a repository object passed into every orchestrator would be a piece that exists for ceremony, which KISS rules out.
-Chapter 16 shows the tests.
+```ts
+export type BookingRepositories = {
+	fetchProfessionals: typeof fetchProfessionals;
+	fetchSlots: typeof fetchSlots;
+	postAppointment: typeof postAppointment;
+	remember: typeof remember;
+};
+
+export const bookingRepositories: BookingRepositories = {
+	fetchProfessionals,
+	fetchSlots,
+	postAppointment,
+	remember,
+};
+```
+
+`submit`, in step 2, takes `repositories = bookingRepositories`, the real ones by default, so the hook passes none.
+The event tests pass, in their place, repositories that answer what the test sets.
+The clinic's docs/01 says it in the section "How the code is organized":
+
+> "*Its event functions receive their repositories as a parameter, the real ones by default (`<name>Repositories`), and the clock as `now`: no function there reads it.*"
+
+The in-memory SQLite is a fake database and those are fake repositories: a fake is a second implementation that a test passes in place of the real one.
+Nowhere else is anything passed: a use case receives no repository (ADR-0016), and a view or a repository has one implementation, so a parameter there would exist for ceremony, which KISS rules out.
+Chapter 16 shows the tests and their fakes.
 
 ## When the pieces pay their way
 
@@ -349,7 +419,7 @@ A piece exists when it has a job.
 A use case exists when there is a rule: the `health` slice of [chapter 14](14-errors-and-slices.md#vertical-slices) has none, so it has no `rules.ts`.
 A repository exists when there is I/O, an orchestrator when an event leads to a new state, and a view when there is a screen.
 
-The clinic's [ADR-0002](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/docs/adr/ADR-0002-focus-whole.md), the decision to take FOCUS whole, names the cost in its Consequences: "*A slice has more files than a component that fetches on its own; a file appears only when it pays its way.*"
+The clinic's [ADR-0002](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/docs/adr/ADR-0002-focus-whole.md), the decision to take FOCUS whole, names the cost in its Consequences: "*A slice has more files than a component that fetches on its own; a file appears only when it pays its way.*"
 Its Context names what the clinic buys with it: a product that values "*every rule has a test*", and a rule in a pure function is the cheapest place for one.
 
 Where the code already has its own shape, the pieces can cost more than they give.
@@ -363,7 +433,7 @@ KISS, YAGNI and DRY decide, as [chapter 6](06-the-documents.md#the-two-choices) 
 * A piece is written when it has a job, and the "Forbids" column keeps it to that job.
 * In the clinic each side has its own orchestrator and repositories, and both import the same use cases: the server enforces a rule, and the client uses it only to decide what to show.
 * An event flows one way: the view never sets the state, and a use case never calls a repository.
-* The clinic's orchestrators receive the database, or nothing, in place of injected repositories, because the database is the one thing its tests swap.
+* An orchestrator receives its repositories, or the driver they use, because its test passes a second implementation, a fake; no other piece receives a dependency.
 
 ## Exercises
 
@@ -386,7 +456,7 @@ The home page gains a line of help, "Keep your booking code to cancel", written 
 Ask the agent which of the four pieces this needs, and why each other one does not pay its way.
 Nothing is built.
 
-[^book-adr-0016]: J.C. Ködel, "One Page at a Time", this book's ADR-0016, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, dated 2026-09-28, in the ADR folder on `main`. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>
+[^book-adr-0016]: J.C. Ködel, "One Page at a Time", this book's ADR-0016, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, dated 2026-09-28, amended 2026-09-29, in the ADR folder on `main`. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>
 [^bloc]: Bloc, "Bloc State Management Library", documentation, accessed 2026-09-29. <https://bloclibrary.dev/>
 [^mediatr]: Jimmy Bogard, "MediatR: Simple, unambitious mediator implementation in .NET", accessed 2026-09-29. <https://github.com/jbogard/MediatR>
 [^clean-architecture]: Robert C. Martin, "The Clean Architecture", 2012. <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>

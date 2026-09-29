@@ -6,9 +6,9 @@ Você consegue seguir um evento por elas até um novo estado, e decidir, para um
 ## As quatro peças
 
 O capítulo 6 deu o FOCUS em um parágrafo, em [as duas escolhas](06-the-documents.md#as-duas-escolhas), a partir do ADR-0016 deste livro;[^book-adr-0016] este capítulo mostra as peças dele em código que roda.
-Todo excerto abaixo vem do projeto guiado na tag do capítulo [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone), o código que o capítulo 12 deixou, e é citado como rodou; o código aninhado dentro de uma função aparece sem a indentação de fora.
+Todo excerto abaixo vem do projeto guiado na tag do capítulo [`book-v1/four-pieces`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/four-pieces), o código que o capítulo 12 deixou mais a primeira entrega do marco 2 da clínica, e é citado como rodou; o código aninhado dentro de uma função aparece sem a indentação de fora.
 
-A clínica adotou o FOCUS inteiro no capítulo 7, e o [`docs/01-Architecture.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/docs/01-Architecture.md) dela, na seção "How the code is organized", dá as quatro peças em uma tabela.
+A clínica adotou o FOCUS inteiro no capítulo 7, e o [`docs/01-Architecture.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/docs/01-Architecture.md) dela, na seção "How the code is organized", dá as quatro peças em uma tabela.
 O original está em inglês; esta é a tradução:
 
 | Peça | Faz | Proíbe |
@@ -28,6 +28,9 @@ features/<feature>/
   repository.server.ts   Repositório do servidor: SQL
   repository.server.test.ts
   api.ts                 Repositório do cliente: fetch, falha de rede vira um Result
+  <name>Events.ts        Orquestrador do cliente: o estado do hook, o valor
+                         inicial dele e o que cada evento faz, como funções simples
+  <name>Events.test.ts
   use<Feature>.ts        Orquestrador do cliente: um hook do React que publica um estado
   <Feature>View.tsx      Tela
   strings.ts             todo texto que o usuário lê nesta funcionalidade
@@ -42,8 +45,10 @@ O Clean do FOCUS são as camadas da Clean Architecture[^clean-architecture] com 
 
 Uma fatia da clínica roda em dois lados, o navegador do celular e o servidor, e cada lado tem o seu próprio orquestrador e os seus próprios repositórios.
 
-No cliente, o orquestrador é o hook `use<Feature>.ts`.
-Os repositórios dele são `api.ts`, que alcança a rede, e, na fatia do agendamento, `remembered.ts`, que alcança o armazenamento do celular.
+No cliente, o orquestrador são dois arquivos.
+`<name>Events.ts` guarda o que cada evento faz, como funções simples: as chamadas a repositórios e casos de uso, em ordem, e o novo estado.
+O hook `use<Feature>.ts` é só a parte do React: ele guarda o estado, publica o estado em andamento e a resposta, lê o relógio e descarta uma resposta velha.
+Os repositórios do orquestrador são `api.ts`, que alcança a rede, e, na fatia do agendamento, `remembered.ts`, que alcança o armazenamento do celular.
 A listagem da clínica rotula só `api.ts` como repositório; este livro põe `remembered.ts` ali também, porque ele faz o trabalho de um repositório: a seção "How data is accessed" do mesmo docs/01 faz dele o único código que mexe no armazenamento do celular, e ele devolve a sua falha como um `Result`.
 
 No servidor, o orquestrador é a rota `route.server.ts`, e o repositório é `repository.server.ts`, que roda o SQL.
@@ -59,7 +64,7 @@ A tela existe só no cliente; no servidor, o novo estado a que um evento leva é
 Um cliente agenda um horário: o toque em "Book" (agendar) é o evento, e a tela que mostra o código do agendamento é o novo estado.
 Estes são os passos entre os dois.
 
-**1. A tela dispara o evento.** Este é o passo do formulário de [`src/features/appointments/BookingView.tsx`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/BookingView.tsx):
+**1. A tela dispara o evento.** Este é o passo do formulário de [`src/features/appointments/BookingView.tsx`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/BookingView.tsx):
 
 ```ts
 case "form": {
@@ -112,36 +117,45 @@ case "form": {
 
 A tela renderiza o que `state` guarda e entrega toda mudança ao hook, como `typeName`, `typePhone`, `back` ou `submit`; o toque em "Book" envia o formulário, e `submitForm` chama `submit` e não faz mais nada.
 
-**2. O orquestrador do cliente.** Este é `submit`, de [`src/features/appointments/useBooking.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/useBooking.ts):
+**2. O orquestrador do cliente.** Os eventos dele são funções simples em [`src/features/appointments/bookingEvents.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/bookingEvents.ts); agendar usa dois, `submitStarted` e `submit`:
 
 ```ts
 // Name and phone are checked here to show the message beside the field
 // and send nothing; the server checks them again.
-const submit = useCallback(async () => {
-	const { step, slots } = state;
-	if (step.kind !== "form" || !slots) return;
+export function submitStarted(state: BookingState): {
+	state: BookingState;
+	send: boolean;
+} {
+	if (state.step.kind !== "form" || !state.slots) return { state, send: false };
 	const name = checkClientName(state.name);
 	const phone = checkClientPhone(state.phone);
-	setState((s) => ({
-		...s,
+	const checked = {
+		...state,
 		nameError: name.ok ? undefined : name.error,
 		phoneError: phone.ok ? undefined : phone.error,
-	}));
-	if (!name.ok || !phone.ok) return;
+	};
+	if (!name.ok || !phone.ok) return { state: checked, send: false };
+	return { state: { ...checked, busy: true, failed: undefined }, send: true };
+}
 
-	setState((s) => ({ ...s, busy: true, failed: undefined }));
-	const call = ++latest.current;
-	const result = await postAppointment({
+// `state` is the one `submitStarted` accepted.
+export async function submit(
+	state: BookingState,
+	now: Date,
+	repositories = bookingRepositories,
+): Promise<BookingOutcome> {
+	const { step, slots } = state;
+	if (step.kind !== "form" || !slots) return { update: (s) => s };
+	const result = await repositories.postAppointment({
 		professionalId: step.professional.id,
 		startsAt: step.startsAt,
 		clientName: state.name,
 		clientPhone: state.phone,
 	});
-	if (call !== latest.current) return;
 	if (result.ok) {
 		const booked = result.value;
 		// A storage failure leaves the code on screen: nothing else to do.
-		remember(
+		repositories.remember(
 			{
 				bookingCode: booked.bookingCode,
 				clientPhone: booked.clientPhone,
@@ -149,34 +163,67 @@ const submit = useCallback(async () => {
 				startsAt: booked.startsAt,
 				timeZone: slots.timeZone,
 			},
-			new Date(),
+			now,
 		);
-		setState((s) => ({
-			...s,
-			step: { kind: "booked", booked, timeZone: slots.timeZone },
-			busy: false,
-			name: "",
-			phone: "",
-		}));
-		return;
+		return {
+			update: (s) => ({
+				...s,
+				step: { kind: "booked", booked, timeZone: slots.timeZone },
+				busy: false,
+				name: "",
+				phone: "",
+			}),
+		};
 	}
 	const code = result.error.code;
 	if (code === "ProfessionalNotFound") {
-		return loadProfessionals("ProfessionalNotFound");
+		return { next: "loadProfessionals", message: "ProfessionalNotFound" };
 	}
 	if (code === "SlotTaken") {
-		return loadSlots(step.professional, {
-			message: "SlotTaken",
-			date: step.date,
-		});
+		return {
+			next: "loadSlots",
+			professional: step.professional,
+			after: { message: "SlotTaken", date: step.date },
+		};
 	}
-	setState((s) => ({ ...s, busy: false, failed: "book" }));
-}, [state, loadProfessionals, loadSlots]);
+	return { update: (s) => ({ ...s, busy: false, failed: "book" }) };
+}
 ```
 
-Ele chama os casos de uso `checkClientName` e `checkClientPhone` só para mostrar uma mensagem ao lado de um campo, envia o agendamento pelo repositório `postAppointment`, guarda uma cópia no celular pelo repositório `remember`, e publica um novo estado, o passo `booked`.
+`submitStarted` confere nome e telefone com os casos de uso `checkClientName` e `checkClientPhone`, só para mostrar uma mensagem ao lado de um campo, e dá o estado em andamento, com `busy` ligado.
+`submit` envia o agendamento pelo repositório `postAppointment` e guarda uma cópia no celular pelo repositório `remember`, os dois alcançados por `repositories`, com `now` recebido de fora; ele devolve uma atualização do estado, o passo `booked`, ou o próximo evento a rodar: `loadProfessionals` quando o profissional sumiu, `loadSlots` quando o horário foi tomado.
 
-**3. O repositório do cliente.** Este é `postAppointment`, de [`src/features/appointments/api.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/api.ts):
+O `submit` que a tela chama é o do hook, que entrega o evento a `run`, de [`src/features/appointments/useBooking.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/useBooking.ts):
+
+```ts
+// Any event with a call: its in-flight state, then its answer, which is
+// an update or the next event to run.
+const run = useCallback(async function run(next: BookingNext) {
+	let outcome: Promise<BookingOutcome>;
+	if (next.next === "submit") {
+		const snapshot = shown.current;
+		const started = submitStarted(snapshot);
+		setState(started.state);
+		if (!started.send) return;
+		outcome = submitEvent(snapshot, new Date());
+	} else if (next.next === "loadSlots") {
+		setState((s) => loadSlotsStarted(s, next.professional));
+		outcome = loadSlots(next.professional, next.after);
+	} else {
+		setState((s) => loadProfessionalsStarted(s, next.message));
+		outcome = loadProfessionals();
+	}
+	const call = ++latest.current;
+	const answer = await outcome;
+	if (call !== latest.current) return;
+	if ("update" in answer) setState(answer.update);
+	else await run(answer);
+}, []);
+```
+
+O hook põe o estado em andamento, lê `new Date()` e o passa a `submit`, descarta uma resposta que não é a mais recente, e publica a atualização ou roda o próximo evento.
+
+**3. O repositório do cliente.** Este é `postAppointment`, de [`src/features/appointments/api.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/api.ts):
 
 ```ts
 // The client checks name and phone with the same use cases before sending,
@@ -200,7 +247,7 @@ export function postAppointment(
 
 Ele alcança a rede por `request`, de `src/lib/request.ts` no capítulo 14, que devolve a resposta como um `Result`, e nomeia as duas respostas que espera como recusas: 404 é `ProfessionalNotFound` e 409 é `SlotTaken`.
 
-**4. O orquestrador do servidor busca.** A requisição chega a [`src/features/appointments/route.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/route.server.ts), cujo `slotsOf` lê aquilo contra o que um agendamento é conferido:
+**4. O orquestrador do servidor busca.** A requisição chega a [`src/features/appointments/route.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/route.server.ts), cujo `slotsOf` lê aquilo contra o que um agendamento é conferido:
 
 ```ts
 // What both routes read after the body: the active professional, the clinic
@@ -287,7 +334,7 @@ Ele pede os dados a quatro funções de repositório, de quatro fatias: `findAct
 Em ordem: o formato do corpo, `slotsOf`, o caso de uso `book`, cuja recusa vira um status por `refusalStatus` do [capítulo 14](14-errors-and-slices.md#excecoes-como-valores-na-clinica), o código do agendamento, o repositório `insertAppointment`, cujo SQL está na mesma seção do capítulo 14, e a resposta 201.
 `drawBookingCode` sorteia o código na rota, porque o acaso, como o relógio, cabe ao orquestrador fornecer, e assim nenhum caso de uso deixa de ser puro; o docs/01 da clínica diz isso do relógio: "*Casos de uso recebem a hora atual como parâmetro. Nenhum caso de uso lê o relógio.*"
 
-**6. O caso de uso decide.** Este é `book`, de [`src/features/appointments/rules.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/rules.ts):
+**6. O caso de uso decide.** Este é `book`, de [`src/features/appointments/rules.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/rules.ts):
 
 ```ts
 // The appointment to store, checked in order: name, phone, window, hours,
@@ -322,27 +369,50 @@ export function book(
 
 Dados entram, `now` dentro de `input`, e um `Result` sai; ele chama `checkClientName`, `checkClientPhone` e `freeSlots`, todos em `rules.ts`, e nenhum repositório.
 
-A volta não precisa de excerto: a rota responde 201, `postAppointment` devolve o agendamento como valor, `submit` publica o passo `booked`, e a tela o renderiza no seu `case "booked"`, com o código do agendamento.
+A volta não precisa de excerto: a rota responde 201, `postAppointment` devolve o agendamento como valor, `submit` devolve a atualização com o passo `booked`, o hook a publica, e a tela o renderiza no seu `case "booked"`, com o código do agendamento.
 
 O fluxo nunca volta pelo caminho errado: a tela nunca muda o estado, e um caso de uso nunca chama um repositório.
 Então "o que acontece quando este evento chega?" tem uma resposta, e o capítulo 16 a transforma em um teste.
 
 ## O que a clínica injeta
 
-O ADR-0016 diz que o orquestrador é a única peça com dependências injetadas, e que elas são os repositórios.[^book-adr-0016]
-A clínica escolheu algo mais simples.
+O ADR-0016, com a sua emenda, dá a regra: o orquestrador é a única peça que recebe as suas dependências, e ele as recebe porque um teste passa uma segunda implementação.[^book-adr-0016]
+A clínica a segue nos dois lados.
 
-O orquestrador do servidor recebe o banco de dados, o driver, e o passa a cada função de repositório: a rota é `appointmentsRoute(db)`, e `slotsOf` e o handler acima entregam `db` a toda chamada de repositório.
-O docs/01 da clínica diz por quê:
+O orquestrador do servidor recebe o banco de dados, o driver que os repositórios dele usam, e o entrega a cada função de repositório: a rota é `appointmentsRoute(db)`, e `slotsOf` e o handler acima entregam `db` a toda chamada de repositório.
+O teste dele passa `memoryDatabase`, o SQLite em memória do capítulo 14, no lugar do arquivo, e o docs/01 da clínica diz por que a rota recebe o driver:
 
 > "*Rotas do servidor que precisam do banco de dados são funções dele (`clinicRoute(db)`), então o Vitest as conduz pelo `app.request` do Hono contra um SQLite em memória (`testDatabase.server.ts`).*"
 
-O Vitest é o executor de testes da clínica, `app.request` envia uma requisição a uma rota sem rede, e `testDatabase.server.ts` guarda `memoryDatabase`, do capítulo 14.
+O Vitest é o executor de testes da clínica, `app.request` envia uma requisição a uma rota sem rede, e `testDatabase.server.ts` guarda `memoryDatabase`.
 
-O orquestrador do cliente não injeta nada: `useBooking.ts` importa `postAppointment` de `api.ts` e `remember` de `remembered.ts`.
+O orquestrador do cliente recebe os seus repositórios, nomeados em `bookingEvents.ts`:
 
-Essa é a escolha da clínica, e a razão dela se sustenta: em uma linguagem de funções simples, a única coisa que os testes dela trocam é o banco de dados, então um objeto de repositório passado a cada orquestrador seria uma peça que existe por cerimônia, o que o KISS descarta.
-O capítulo 16 mostra os testes.
+```ts
+export type BookingRepositories = {
+	fetchProfessionals: typeof fetchProfessionals;
+	fetchSlots: typeof fetchSlots;
+	postAppointment: typeof postAppointment;
+	remember: typeof remember;
+};
+
+export const bookingRepositories: BookingRepositories = {
+	fetchProfessionals,
+	fetchSlots,
+	postAppointment,
+	remember,
+};
+```
+
+`submit`, no passo 2, recebe `repositories = bookingRepositories`, os reais por padrão, então o hook não passa nenhum.
+Os testes dos eventos passam, no lugar deles, repositórios que respondem o que o teste define.
+O docs/01 da clínica diz isso na seção "How the code is organized"; o original está em inglês, e esta é a tradução:
+
+> "*As funções de evento dele recebem os seus repositórios como parâmetro, os reais por padrão (`<name>Repositories`), e o relógio como `now`: nenhuma função ali o lê.*"
+
+O SQLite em memória é um banco falso, e esses são repositórios falsos: falso, aqui, é uma segunda implementação que um teste passa no lugar da real.
+Em nenhum outro lugar se passa nada: um caso de uso não recebe repositório (ADR-0016), e uma tela ou um repositório tem uma só implementação, então um parâmetro ali existiria por cerimônia, o que o KISS descarta.
+O capítulo 16 mostra os testes e os repositórios falsos deles.
 
 ## Quando as peças se pagam
 
@@ -350,7 +420,7 @@ Uma peça existe quando tem um trabalho.
 Um caso de uso existe quando há uma regra: a fatia `health` do [capítulo 14](14-errors-and-slices.md#fatias-verticais) não tem nenhuma, então não tem `rules.ts`.
 Um repositório existe quando há I/O, um orquestrador quando um evento leva a um novo estado, e uma tela quando há uma tela para mostrar.
 
-O [ADR-0002](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/docs/adr/ADR-0002-focus-whole.md) da clínica, a decisão de adotar o FOCUS inteiro, nomeia o custo nas suas Consequences: "*Uma fatia tem mais arquivos do que um componente que busca os dados sozinho; um arquivo só aparece quando se paga.*"
+O [ADR-0002](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/docs/adr/ADR-0002-focus-whole.md) da clínica, a decisão de adotar o FOCUS inteiro, nomeia o custo nas suas Consequences: "*Uma fatia tem mais arquivos do que um componente que busca os dados sozinho; um arquivo só aparece quando se paga.*"
 O Context dele nomeia o que a clínica compra com isso: um produto que valoriza "*toda regra tem um teste*", e uma regra em uma função pura é o lugar mais barato para um.
 
 Onde o código já tem a sua própria forma, as peças podem custar mais do que dão.
@@ -364,7 +434,7 @@ KISS, YAGNI e DRY decidem, como o [capítulo 6](06-the-documents.md#as-duas-esco
 * Uma peça é escrita quando tem um trabalho, e a coluna "Proíbe" a mantém nesse trabalho.
 * Na clínica cada lado tem o seu orquestrador e os seus repositórios, e os dois importam os mesmos casos de uso: o servidor impõe uma regra, e o cliente a usa só para decidir o que mostrar.
 * Um evento corre em um só sentido: a tela nunca muda o estado, e um caso de uso nunca chama um repositório.
-* Os orquestradores da clínica recebem o banco de dados, ou nada, no lugar de repositórios injetados, porque o banco é a única coisa que os testes dela trocam.
+* Um orquestrador recebe os seus repositórios, ou o driver que eles usam, porque o teste dele passa uma segunda implementação, uma falsa; nenhuma outra peça recebe uma dependência.
 
 ## Exercícios
 
@@ -387,7 +457,7 @@ A página inicial ganha uma linha de ajuda, "Keep your booking code to cancel" (
 Pergunte ao agente de quais das quatro peças isso precisa, e por que cada uma das outras não se paga.
 Nada é construído.
 
-[^book-adr-0016]: J.C. Ködel, "One Page at a Time", o ADR-0016 deste livro, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, de 2026-09-28, na pasta de ADRs em `main`. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>
+[^book-adr-0016]: J.C. Ködel, "One Page at a Time", o ADR-0016 deste livro, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, de 2026-09-28, emendado em 2026-09-29, na pasta de ADRs em `main`. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>
 [^bloc]: Bloc, "Bloc State Management Library", documentação, acesso em 2026-09-29. <https://bloclibrary.dev/>
 [^mediatr]: Jimmy Bogard, "MediatR: Simple, unambitious mediator implementation in .NET", acesso em 2026-09-29. <https://github.com/jbogard/MediatR>
 [^clean-architecture]: Robert C. Martin, "The Clean Architecture", 2012. <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>
