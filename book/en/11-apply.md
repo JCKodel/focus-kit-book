@@ -343,7 +343,16 @@ Nothing in the code changed: the review corrected the record, which is what the 
 One thing it left uncorrected: the Done when item "`npm run dev` leaves client and server running locally" is still unticked in the page I committed, although I had checked it by hand after the run.
 That was my lapse: I should have asked the agent, in the same session, to tick it and to write on the page how it was checked; I did not, and the published tag does not move.
 On yours, ask for that tick and that line before you commit, so the answer to "Is every Done when item ticked, and is each one true?" is yes.
-Then I committed the staged tree with the suggested message, tagged it `book-v1/apply` and pushed both.
+Then I committed the staged tree with the suggested message:
+
+```
+git commit
+```
+
+With no `-m`, git opens an editor for the message; mine opened nano, I pasted the suggested message as the agent gave it, subject, blank line and bullets, saved and closed, and the commit exists when the editor closes.
+Git opens the editor named in `core.editor`, usually vi when none is set; `git config --global core.editor nano`, or `git config --global core.editor "code --wait"` for VS Code, chooses another.
+Chapter 17 teaches the rest of git.
+After that I tagged the commit `book-v1/apply` and pushed both.
 The page and its build are in that one commit: the unit of work of chapter 10, which reverts in one step.
 
 The agent never commits because the commit is your review.

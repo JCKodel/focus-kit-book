@@ -343,7 +343,7 @@ Its reply also named where the issues clash with the documented rules, such as a
 
 ### Exercise 8.1
 
-Clone the fork `JCKodel/clahub` at `book-v1` on a branch of your own, install the kit (chapter 5), commit it, run `/analyze`, and answer it with the brief of this chapter.
+Clone the fork `JCKodel/clahub` at `book-v1` on a branch of your own, install the kit (chapter 5), commit it (chapter 11 shows how), run `/analyze`, and answer it with the brief of this chapter.
 Compare what you get with `book-v1-analyze`: what differs, and is any difference wrong about the code?
 
 ### Exercise 8.2

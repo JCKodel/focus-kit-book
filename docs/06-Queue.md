@@ -73,7 +73,7 @@ When this milestone closes, every confirmed finding of the M3 review is settled:
 [x] ch10-usage-share       Chapter 10: the /usage percentages say what they are a share of, so the ratio drawn from them can be judged; both editions
 [x] headless-runs          Chapters 7, 11 and 12: say the book's runs are headless, what --continue does, and that in an interactive session the reader keeps talking in the same session; both editions
 [x] ch11-unticked-item     Chapter 11: says why the skeleton page was committed with its npm run dev item unticked, against its own question on Done when; both editions
-[ ] ch11-commit-command    Chapter 11: shows the command that commits the staged change with the suggested message; chapter 17 teaches the rest; both editions
+[x] ch11-commit-command    Chapter 11: shows the command that commits the staged change with the suggested message; chapter 17 teaches the rest; both editions
 [ ] milestone-1-bridge     Between chapters 11 and 12: the reader is told to build the rest of the clinic's milestone 1 with /propose and /apply, with a tag to compare against, so M3's paragraph has somewhere to point; both editions
 [>] ch12-numbered-findings Chapter 12: the English list of the ten summaries is numbered, as the decisions and the Portuguese already are
 [>] ch13-unmet-terms       Chapter 13: "spec delta" and "specialized subagent" are explained where they appear, since no earlier chapter meets them; both editions

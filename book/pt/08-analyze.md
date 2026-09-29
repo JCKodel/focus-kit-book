@@ -346,7 +346,7 @@ A resposta dele também apontou onde as issues batem de frente com as regras doc
 
 ### Exercício 8.1
 
-Clone o fork `JCKodel/clahub` em `book-v1` em um branch seu, instale o kit (capítulo 5), faça o commit, rode o `/analyze` e responda com o briefing deste capítulo.
+Clone o fork `JCKodel/clahub` em `book-v1` em um branch seu, instale o kit (capítulo 5), faça o commit (o capítulo 11 mostra como), rode o `/analyze` e responda com o briefing deste capítulo.
 Compare o que você obtiver com `book-v1-analyze`: o que difere, e alguma diferença está errada sobre o código?
 
 ### Exercício 8.2

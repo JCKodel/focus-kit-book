@@ -350,7 +350,16 @@ Nada no código mudou: a revisão corrigiu o registro, que é o que a próxima p
 Uma coisa ela deixou sem corrigir: o item do Done when "`npm run dev` deixa cliente e servidor rodando localmente" continua desmarcado na página do meu commit, embora eu o tivesse conferido à mão depois da execução.
 Foi uma falha minha: eu deveria ter pedido ao agente, na mesma sessão, que marcasse o item e escrevesse na página como ele foi conferido; não pedi, e a tag publicada não se move.
 Na sua, peça essa marca e essa linha antes do commit, para que a resposta a "Cada item do Done when está marcado, e cada um é verdade?" seja sim.
-Depois fiz o commit da árvore no stage com a mensagem sugerida, criei a tag `book-v1/apply` e enviei os dois com push.
+Depois fiz o commit da árvore no stage com a mensagem sugerida:
+
+```
+git commit
+```
+
+Sem `-m`, o git abre um editor para a mensagem; o meu abriu o nano, eu colei a mensagem sugerida como o agente a deu, assunto, linha em branco e tópicos, salvei e fechei, e o commit existe quando o editor fecha.
+O git abre o editor nomeado em `core.editor`, em geral o vi quando nenhum está definido; `git config --global core.editor nano`, ou `git config --global core.editor "code --wait"` para o VS Code, escolhe outro.
+O capítulo 17 ensina o resto do git.
+Em seguida criei a tag `book-v1/apply` no commit e enviei os dois com push.
 A página e a sua construção estão nesse commit único: a unidade de trabalho do capítulo 10, que se desfaz em um passo.
 
 O agente nunca faz commit porque o commit é a sua revisão.
