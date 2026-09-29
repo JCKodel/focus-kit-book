@@ -21,8 +21,16 @@
 
 **Done when.**
 
-* [ ] English block numbered 1 to 10; text after each number unchanged.
-* [ ] Both lead sentences say the numbers were added.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] English block numbered 1 to 10; text after each number unchanged.
+* [x] Both lead sentences say the numbers were added.
+* [x] `make verify` green.
+* [x] `make book` run, and both PDF paths given to the author.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Built as planned: the English block numbers its ten lines `1.` to `10.`; the text after each number matches the previous version byte for byte (checked with a diff after stripping the numbers).
+* The English lead sentence now reads that the summaries are in the run's order, as it printed them except for the numbers, added here so the decisions below can refer to them. The Portuguese one says the original is in English and without numbers, and that here they are translated and numbered for the same reason.
+* Nothing diverged or was dropped. No note, term, case or document other than the two chapters and docs/06 changed; no ADR.
+* Proof: `make verify` green; `make book` built both PDFs.
+* Finding F18 of the M3 review is settled.

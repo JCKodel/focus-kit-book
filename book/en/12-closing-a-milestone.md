@@ -59,19 +59,19 @@ GitHub Copilot reviews pull requests, so there the milestone goes up as one pull
 
 I ran the review headless, from the clinic's root, allowed to run only `git diff`, `git log`, `git show`, `git status`, npm and npx, so an edit would have been refused.[^closing-a-milestone-run]
 It answered with ten findings, each with a file, a line, a summary and a failure scenario.
-These are the ten summaries, as the run printed them, in its order; the scenarios are in the record:[^closing-a-milestone-run]
+These are the ten summaries in the run's order, as it printed them except for the numbers, added here so the decisions below can refer to them; the scenarios are in the record:[^closing-a-milestone-run]
 
 ```
-"summary": "The partial unique index on (professional_id, starts_at) only stops two bookings with the exact same start. docs/03 invariant 2 says an appointment stays when the weekly hours change, so slots can partly overlap an existing booking, and the index does not cover that case even though docs/02 says one index on the start is enough.",
-"summary": "A booking-code clash on the UNIQUE booking_code (cancelled rows count too) is answered as 500 DatabaseFailed, which the client shows as 'The server cannot be reached', even though the booking itself was valid.",
-"summary": "migrate builds the pending list outside any lock and then applies each file inside a deferred BEGIN, so two processes that start together (server and `npm run setup`, which docs/02 says runs on the same machine) both apply the same migration.",
-"summary": "SlotTaken is detected by matching the English text of SQLite's error message instead of the error code and constraint, which breaks silently if SQLite or Node changes the wording or the index gets more columns.",
-"summary": "checkTimeZone accepts only the canonical names from Intl.supportedValuesOf, so it refuses valid IANA link names that Intl.DateTimeFormat accepts. This goes against docs/03, where UnknownTimeZone means 'not an IANA name'.",
-"summary": "When the slots reload after a refused booking (SlotTaken) fails, 'Try again' calls loadSlots(professional) without the `after` argument, so the 'no longer free' message and the return to the chosen day are lost.",
-"summary": "An empty line between the weekly-hours rows and the new slots/appointments rows splits the Routes table, so the three book-appointment and cancel-appointment routes do not render as table rows.",
-"summary": "book() computes freeSlots twice over the whole 30-day window (once with booked emptied, once with it) only to test whether one instant is a member.",
-"summary": "databaseFailed(c) is copied again (it already exists in session.server.ts, professionals/route.server.ts and weeklyHours/route.server.ts, and signIn/clinic inline it), and notFound(c) repeats weeklyHours/route.server.ts. This breaks the AGENTS.md rule on abstraction.",
-"summary": "minutesOf is an exact copy of the private helper in weeklyHours/rules.ts:24. slotsOf (route.server.ts:100) also loads every active professional to find one by id.",
+1. "summary": "The partial unique index on (professional_id, starts_at) only stops two bookings with the exact same start. docs/03 invariant 2 says an appointment stays when the weekly hours change, so slots can partly overlap an existing booking, and the index does not cover that case even though docs/02 says one index on the start is enough.",
+2. "summary": "A booking-code clash on the UNIQUE booking_code (cancelled rows count too) is answered as 500 DatabaseFailed, which the client shows as 'The server cannot be reached', even though the booking itself was valid.",
+3. "summary": "migrate builds the pending list outside any lock and then applies each file inside a deferred BEGIN, so two processes that start together (server and `npm run setup`, which docs/02 says runs on the same machine) both apply the same migration.",
+4. "summary": "SlotTaken is detected by matching the English text of SQLite's error message instead of the error code and constraint, which breaks silently if SQLite or Node changes the wording or the index gets more columns.",
+5. "summary": "checkTimeZone accepts only the canonical names from Intl.supportedValuesOf, so it refuses valid IANA link names that Intl.DateTimeFormat accepts. This goes against docs/03, where UnknownTimeZone means 'not an IANA name'.",
+6. "summary": "When the slots reload after a refused booking (SlotTaken) fails, 'Try again' calls loadSlots(professional) without the `after` argument, so the 'no longer free' message and the return to the chosen day are lost.",
+7. "summary": "An empty line between the weekly-hours rows and the new slots/appointments rows splits the Routes table, so the three book-appointment and cancel-appointment routes do not render as table rows.",
+8. "summary": "book() computes freeSlots twice over the whole 30-day window (once with booked emptied, once with it) only to test whether one instant is a member.",
+9. "summary": "databaseFailed(c) is copied again (it already exists in session.server.ts, professionals/route.server.ts and weeklyHours/route.server.ts, and signIn/clinic inline it), and notFound(c) repeats weeklyHours/route.server.ts. This breaks the AGENTS.md rule on abstraction.",
+10. "summary": "minutesOf is an exact copy of the private helper in weeklyHours/rules.ts:24. slotsOf (route.server.ts:100) also loads every active professional to find one by id.",
 ```
 
 Read them as claims: each names where to look, and none has been checked yet.

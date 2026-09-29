@@ -59,7 +59,7 @@ O GitHub Copilot revisa pull requests, então ali o marco sobe como um pull requ
 
 Rodei a revisão sem interface, na raiz da clínica, com permissão para rodar só `git diff`, `git log`, `git show`, `git status`, npm e npx, então uma edição teria sido recusada.[^closing-a-milestone-run]
 Ela respondeu com dez achados, cada um com um arquivo, uma linha, um resumo e um cenário de falha.
-Estes são os dez resumos, na ordem da execução; o original está em inglês, e aqui vai traduzido, e os cenários estão no registro:[^closing-a-milestone-run]
+Estes são os dez resumos, na ordem da execução; o original está em inglês e sem números, e aqui vão traduzidos e numerados, para que as decisões abaixo possam se referir a eles; os cenários estão no registro:[^closing-a-milestone-run]
 
 ```
 1. O índice único parcial em (professional_id, starts_at) só impede dois agendamentos com exatamente o mesmo início. O invariante 2 do docs/03 diz que um agendamento fica quando os horários semanais mudam, então os horários podem se sobrepor em parte a um agendamento existente, e o índice não cobre esse caso, embora o docs/02 diga que um índice no início basta.
