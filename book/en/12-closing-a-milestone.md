@@ -179,7 +179,7 @@ These exercises use the clinic, by conversation with the agent, never by hand.
 
 ### Exercise 12.1
 
-With your milestone 1 built, check each sentence of its paragraph on your running app, and write down any that does not hold.
+After exercise 11.4, check each sentence of its paragraph on your running app, and write down any that does not hold.
 
 ### Exercise 12.2
 

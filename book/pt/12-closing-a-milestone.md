@@ -180,7 +180,7 @@ Estes exercícios usam a clínica, conversando com o agente, nunca à mão.
 
 ### Exercício 12.1
 
-Com o seu marco 1 construído, confira cada frase do parágrafo dele no seu app rodando, e anote qualquer uma que não valha.
+Depois do exercício 11.4, confira cada frase do parágrafo dele no seu app rodando, e anote qualquer uma que não valha.
 
 ### Exercício 12.2
 

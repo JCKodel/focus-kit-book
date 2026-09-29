@@ -2,6 +2,7 @@
 
 After this chapter you can run `/apply` on a reviewed page in a fresh session and follow what it does, from the page to a staged change.
 You can review that change against the page before committing it, and commit it yourself.
+Then you can build the rest of a milestone the same way, one line at a time.
 
 ## What it does
 
@@ -359,6 +360,31 @@ The agent never commits because the commit is your review.
 A commit says a person read the change and accepts it; an agent that commits its own work skips the only reader who can say the build is what was wanted.
 Part IV comes back to this with the git side: branches, merges, and the commit as review.
 
+## The rest of milestone 1
+
+`skeleton` is the first line of the clinic's milestone 1, and the rest is built the same way.
+For each line, in the queue's order: `/propose <slug>`, read the page and ask for each correction, `/apply <slug>` in a fresh session, review the staged change, and commit it.
+Commit each line before the next one starts, so each `/propose` reads the project the last commit left; these commits get no tag.
+After `skeleton` the lines are `clinic-setup`, `professionals`, `weekly-hours`, `book-appointment` and `cancel-appointment`.
+
+`clinic-setup` adds `npm run setup`, which creates the clinic and its owner.
+So when chapter 12 starts the app with `npm run setup` and `npm run dev`, both commands are already yours.
+
+A line can also enter the milestone while it is being built.
+`/apply weekly-hours` found a sign-in failing about once in 300 Playwright tests: an earlier test wrote to the test database while the server's connection had no busy timeout.[^clinic-milestone-1-run]
+At my request, in the staged review, the agent made it the line `e2e-database-busy` and put it inside milestone 1, before `book-appointment`; it was built with the same steps.
+So my milestone 1 has seven commits, `skeleton` included.
+Your agent may find something else, or nothing, and your queue may differ from mine.
+
+Expect what my build met.[^clinic-milestone-1-run]
+Two of the six pages needed corrections before `/apply`, and four needed none.
+Three staged changes needed corrections: `clinic-setup`, `weekly-hours` and `e2e-database-busy`.
+The permissions of my headless runs refused 25 calls, mostly shell loops printing files and `git mv`; the agent took an allowed way each time, such as reading the files one by one or `mv`, and nothing was run for it from outside its session.
+Twice the suggested commit message ended with a `Co-Authored-By` trailer, which the format of the clinic's docs/05 does not have; I asked for the message again, in the same session, before committing.
+
+Then compare your milestone 1 with the tag [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone).
+Its code is milestone 1 as I built it: its one later commit, from chapter 12, changes only the clinic's docs/06, where it queues what that chapter's review found.
+
 ## Key points
 
 * `/apply <slug>` builds the page in a fresh session, and the page is the scope: no dependency, layer or tool the page did not name.
@@ -383,4 +409,9 @@ Review your staged change with the questions of "Review before you commit", ask 
 
 For each divergence in your page's What happened, say whether it should have been a question on the page before `/apply`.
 
+### Exercise 11.4
+
+Build the rest of your milestone 1, from `clinic-setup` to `cancel-appointment`, one delivery at a time with `/propose` and `/apply`, committing each; then compare your code with [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone).
+
 [^apply-run]: This book's `/apply` run on the guided project, 2026-09-28, with Claude Code 2.1.284 and the model `claude-opus-5-5`, from commit 3f0b47c: the command and its permissions, every turn's output, the verify output, the screenshot, the page as the run left it, the review and its diff, and the staged status. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/apply-run/README.md>
+[^clinic-milestone-1-run]: This book's build of the guided project's milestone 1, 2026-09-28, with Claude Code 2.1.284 and the model `claude-opus-5-5`: the six deliveries after `skeleton`, each with its page review, its staged review and its commit. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/clinic-milestone-1-run/README.md>

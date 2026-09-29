@@ -2,6 +2,7 @@
 
 Depois deste capítulo você consegue rodar o `/apply` em uma página revisada, em uma sessão nova, e acompanhar o que ele faz, da página até uma mudança no stage.
 Você consegue revisar essa mudança contra a página antes do commit, e fazer o commit você mesmo.
+Depois você consegue construir o resto de um marco do mesmo jeito, uma linha de cada vez.
 
 ## O que ele faz
 
@@ -366,6 +367,31 @@ O agente nunca faz commit porque o commit é a sua revisão.
 Um commit diz que uma pessoa leu a mudança e a aceita; um agente que faz commit do próprio trabalho pula o único leitor que pode dizer que a construção é o que se queria.
 A Parte IV volta a isso pelo lado do git: branches, merges, e o commit como revisão.
 
+## O resto do marco 1
+
+O `skeleton` é a primeira linha do marco 1 da clínica, e o resto se constrói do mesmo jeito.
+Para cada linha, na ordem da fila: `/propose <slug>`, leia a página e peça cada correção, `/apply <slug>` em uma sessão nova, revise a mudança no stage, e faça o commit.
+Faça o commit de cada linha antes de começar a seguinte, para que cada `/propose` leia o projeto que o último commit deixou; esses commits não levam tag.
+Depois do `skeleton` as linhas são `clinic-setup`, `professionals`, `weekly-hours`, `book-appointment` e `cancel-appointment`.
+
+O `clinic-setup` acrescenta o `npm run setup`, que cria a clínica e o dono dela.
+Então, quando o capítulo 12 sobe o app com `npm run setup` e `npm run dev`, os dois comandos já são seus.
+
+Uma linha também pode entrar no marco enquanto ele é construído.
+O `/apply weekly-hours` achou um login que falhava cerca de uma vez em 300 testes do Playwright: um teste anterior escrevia no banco de teste enquanto a conexão do servidor não tinha tempo de espera para bloqueio.[^clinic-milestone-1-run]
+A meu pedido, na revisão do stage, o agente o transformou na linha `e2e-database-busy` e a pôs dentro do marco 1, antes do `book-appointment`; ela foi construída com os mesmos passos.
+Por isso o meu marco 1 tem sete commits, contando o `skeleton`.
+O seu agente pode achar outra coisa, ou nada, e a sua fila pode ficar diferente da minha.
+
+Espere o que a minha construção encontrou.[^clinic-milestone-1-run]
+Duas das seis páginas precisaram de correções antes do `/apply`, e quatro não precisaram de nenhuma.
+Três mudanças no stage precisaram de correções: `clinic-setup`, `weekly-hours` e `e2e-database-busy`.
+As permissões das minhas execuções sem interface recusaram 25 chamadas, na maioria laços de shell imprimindo arquivos e `git mv`; o agente tomou um caminho permitido a cada vez, como ler os arquivos um a um ou o `mv`, e ninguém rodou nada por ele de fora da sessão.
+Duas vezes a mensagem de commit sugerida terminou com um trailer `Co-Authored-By`, que o formato do docs/05 da clínica não tem; pedi a mensagem de novo, na mesma sessão, antes do commit.
+
+Depois compare o seu marco 1 com a tag [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone).
+O código dela é o marco 1 como eu o construí: o único commit posterior, do capítulo 12, muda só o docs/06 da clínica, onde põe na fila o que a revisão daquele capítulo achou.
+
 ## Pontos-chave
 
 * O `/apply <slug>` constrói a página em uma sessão nova, e a página é o escopo: nenhuma dependência, camada ou ferramenta que a página não nomeou.
@@ -390,4 +416,9 @@ Revise a sua mudança no stage com as perguntas de "Revise antes do commit", pe�
 
 Para cada divergência no O que aconteceu da sua página, diga se ela deveria ter sido uma pergunta na página antes do `/apply`.
 
+### Exercício 11.4
+
+Construa o resto do seu marco 1, do `clinic-setup` ao `cancel-appointment`, uma entrega de cada vez com `/propose` e `/apply`, fazendo o commit de cada uma; depois compare o seu código com [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone).
+
 [^apply-run]: A execução do `/apply` deste livro no projeto guiado, 2026-09-28, com o Claude Code 2.1.284 e o modelo `claude-opus-5-5`, a partir do commit 3f0b47c: o comando e as suas permissões, a saída de cada turno, a saída da verificação, o screenshot, a página como a execução a deixou, a revisão e o seu diff, e o status do stage. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/apply-run/README.md>
+[^clinic-milestone-1-run]: A construção do marco 1 do projeto guiado deste livro, 2026-09-28, com o Claude Code 2.1.284 e o modelo `claude-opus-5-5`: as seis entregas depois do `skeleton`, cada uma com a revisão da página, a revisão do stage e o commit. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/clinic-milestone-1-run/README.md>
