@@ -89,6 +89,31 @@ When this milestone closes, a reader can organize code by feature with exception
 [x] clinic-orchestrator-tests  The clinic's client orchestrators become plain functions that receive their repositories, each with unit tests with fakes, by a recorded run
 [x] four-pieces-injection  Chapter 15 at the clinic's tested orchestrators: the client orchestrator's two files, and injection only where a test passes a second implementation, a fake
 [x] testing-and-agents     Chapter 16: testing each piece, and how the architecture helps an agent
+[ ] kit-milestone-review   Chapters 7, 8, 9 and 12 follow focus-kit bff8414: the review is the last line of every milestone, a delivery run with /propose and /apply that checks the paragraph clause by clause and reviews the code; each confirmed finding is a line in a new milestone <M>.1 right after, which ends with its own review and may open .2; /brainstorm and /analyze end the first milestone with it; chapter 12's quote of §8 and the clinic's "Milestone 2: what the review of milestone 1 found" follow; both editions
+[x] m4-review              the review of M4 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against the product questions and M4's paragraph; each confirmed finding becomes a line in a new milestone M4.1; §8 gains the review's recipe, m3-review being the first occurrence
+[ ] m4-code-review         /code-review of the clinic's code from book-v1/closing-a-milestone to book-v1/four-pieces; each confirmed finding becomes a line in M4.1
+```
+
+## M4.1. What the review of M4 found
+
+When this milestone closes, every confirmed finding of the M4 review is settled: chapter 3's key points say what its run showed; Part III says what makes one feature and whether a slice may use another slice's code, and its definitions of a refusal, an error, a unit test and injection fit the clinic's code it shows; it shows a piece that has a job and still costs more than it gives; every excerpt can be followed from its text; a reader following the guided project is told to build the code that chapter 15's tag holds; and the Portuguese edition means what the English means.
+
+```
+[ ] ch3-key-point-ask      Chapter 3: the key point credits only OpenSpec with a question asked before writing, since the run shows Spec Kit asked nothing on its default path; both editions
+[ ] pt-slot-term           Portuguese edition: a slot of the slotMinutes grid gets its own term, apart from "horário livre" (a free slot), in chapter 6's excerpts of invariant 2 and ADR-0005
+[ ] ch14-feature-boundary  Chapter 14: says what makes one feature, and why the appointments slice holds cancelling while weekly hours and professionals have slices of their own; both editions
+[ ] ch14-refusal-io        Chapter 14: the definition of a refusal and its key point fit SlotTaken, the refusal the repository makes when the unique index refuses an insert; both editions
+[ ] ch14-catch-all         Chapter 14: says that query catches every thrown value, so a bug inside it becomes DatabaseFailed, and how that squares with "Error: a bug, thrown and never caught"; both editions
+[ ] pt-health-slice        Portuguese edition: chapter 14 calls the server check "fatia de health", as chapter 10 does, not "fatia de saúde", which reads as a slice for medical data
+[ ] ch15-event-delivery    Chapter 15: names the delivery that added the event functions after chapter 12, and tells a reader following the clinic to queue and build it, so their code can match book-v1/four-pieces; both editions
+[ ] ch15-route-io          Chapters 6, 14 and 15: the route that reads the request body squares with "the only place an infra exception becomes a Result" and "only the repository does I/O"; both editions
+[ ] ch15-submit-event      Chapter 15: says the hook's submitEvent is bookingEvents.ts's submit imported under another name, and what shown and latest hold; both editions
+[ ] slice-imports          Chapters 14 and 15: say whether a slice may import another slice's code, as slotsOf imports the repositories of three other slices, and when that code moves to src/lib/ instead; both editions
+[ ] ch15-injection-rule    Chapter 15: the injection rule, its key point and "Nowhere else is anything passed" fit the code, where every repository function receives db; both editions
+[ ] ch15-piece-cost        Chapter 15: "When the pieces pay their way" shows a piece that has a job and still costs more than it gives, so a reader can weigh one; both editions
+[ ] ch16-unit-test         Chapter 16: the definition of a unit test fits the route test, which drives the route, the use case, the repository and SQLite; both editions
+[ ] ch16-it-each           Chapter 16: the text describes the it.each over three refusal codes as it runs, and says what it.each does; both editions
+[ ] ch16-reading-count     Chapter 16: the key point's 20 of 95 files gets a baseline, or "small" is stated as a description, not a measure; both editions
 ```
 
 ## M5. Part IV, Git for agents and teams

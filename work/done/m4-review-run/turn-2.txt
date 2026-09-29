@@ -1,0 +1,18 @@
+[tool Bash] git status --short && git diff docs/06-Queue.md && git diff --cached --stat
+[tool Read] docs/06-Queue.md
+[tool Edit] docs/06-Queue.md
+[tool Bash] git add docs/06-Queue.md && git diff --cached docs/06-Queue.md
+I added the new milestone `M4.1. What the review of M4 found` to `docs/06-Queue.md` and staged the file; the staged diff is shown above.
+
+**What changed:**
+- M4.1 sits right after M4's block and before `## M5`.
+- It has a paragraph starting "When this milestone closes, " and one `[ ]` line for each of the 15 confirmed findings. The lines use the queue's column alignment and the same wording style as M3.1.
+- Where you narrowed a finding (F4, F12, F15), the line asks only for the narrowed part.
+- Two lines cover more than one chapter because the finding does: `ch15-route-io` (chapters 6, 14 and 15) and `slice-imports` (chapters 14 and 15).
+- The two Portuguese findings (`pt-slot-term`, `pt-health-slice`) say "Portuguese edition" and don't end in "both editions", as `pt-stage-term` does in M3.1.
+
+**No finding was already covered.** None of the queue's existing lines deals with any of the 15 findings, so I lengthened no existing line.
+
+**One thing to check before you commit:** `git add docs/06-Queue.md` stages the whole file. Before my edit, the file already had three uncommitted lines at the end of M4, and they are now staged too: `kit-milestone-review`, `m4-review` (marked `[>]`) and `m4-code-review`. They look like part of this `m4-review` delivery, but if you meant to commit them separately, unstage them first.
+
+I changed nothing else and didn't run `make verify`. Since only the queue changed, none of its checks reads that file.
