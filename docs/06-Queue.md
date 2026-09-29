@@ -48,6 +48,7 @@ When this milestone closes, a reader can install the kit, document a new or an e
 [x] apply                  Chapter 11: /apply, verify, proof, documents, stage, never commit
 [x] clinic-milestone-1     the guided project's milestone 1 built line by line with /propose and /apply, each page and staged change reviewed and committed by the author, recorded; no chapter
 [x] closing-a-milestone    Chapter 12: the whole-milestone review of the clinic's milestone 1 with /code-review, findings become queue lines; Ninjobs' milestone review as the counter-example
+[ ] useful-notes           a source note only where the reader gains something to open: a note on a private repository, a diff, a commit or a GitHub blob leaves; a claim cited several times in a chapter prints one note, not one per mention (pandoc prints each reference, 191 notes over 13 chapters); docs/04 and AGENTS.md say the new rule; both editions
 [ ] the-governor           Chapter 13: which concrete error would it have caught, and what the process does not have
 ```
 
