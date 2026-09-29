@@ -206,6 +206,8 @@ consegue cancelar até 24 horas antes.
 ```
 ````
 
+Desde o commit `bff8414` do focus-kit, o `/brainstorm` termina o primeiro marco com mais uma linha, a revisão dele, `m1-review` ([capítulo 12](12-closing-a-milestone.md)).
+Esta execução usou o kit em `26e5e1e`, antes dessa regra, então a sua fila tem uma linha a mais que a de cima.
 O parágrafo é a frase do briefing, e a primeira linha é o esqueleto sobre o qual as outras se apoiam, que cria o `npm run verify`; a próxima seção mostra que a primeira versão deste marco dizia outra coisa.
 
 ## Revise antes do commit

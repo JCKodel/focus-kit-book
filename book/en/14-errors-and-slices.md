@@ -265,7 +265,7 @@ Then say which files would have to change if the rule threw it instead.
 
 ### Exercise 14.3
 
-Milestone 3 brings `absences`.
+Milestone 2 brings `absences`.
 Ask the agent where its files would go, a folder of its own or a subfolder of `weeklyHours`, and which existing files it would touch.
 Decide, and say why; nothing is built.
 

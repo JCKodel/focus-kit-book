@@ -202,6 +202,8 @@ a client can book a free slot, and a client can cancel up to 24 hours before.
 ```
 ````
 
+Since focus-kit's commit `bff8414`, `/brainstorm` ends the first milestone with one more line, its review, `m1-review` ([chapter 12](12-closing-a-milestone.md)).
+This run used the kit at `26e5e1e`, before that rule, so your queue has one line more than the one above.
 The paragraph is the brief's sentence, and the first line is the skeleton the others stand on, which creates `npm run verify`; the next section shows that the first version of this milestone said something else.
 
 ## Review before you commit

@@ -242,6 +242,8 @@ DamageLabs/clahub #270, #274 and #268, in that order.
 ```
 ````
 
+Since focus-kit's commit `bff8414`, `/analyze` ends the first milestone with one more line, its review, `m1-review` ([chapter 12](12-closing-a-milestone.md)).
+This run used the kit at `26e5e1e`, before that rule, so your queue has one line more than the one above.
 Each issue is one delivery with a slug for its page, and the paragraph says what is true when the milestone closes; the next section shows that the first version said much less.
 
 ## Check it against the code

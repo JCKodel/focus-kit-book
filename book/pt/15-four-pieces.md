@@ -6,7 +6,7 @@ Você consegue seguir um evento por elas até um novo estado, e decidir, para um
 ## As quatro peças
 
 O capítulo 6 deu o FOCUS em um parágrafo, em [as duas escolhas](06-the-documents.md#as-duas-escolhas), a partir do ADR-0016 deste livro;[^book-adr-0016] este capítulo mostra as peças dele em código que roda.
-Todo excerto abaixo vem do projeto guiado na tag do capítulo [`book-v1/four-pieces`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/four-pieces), o código que o capítulo 12 deixou mais a primeira entrega do marco 2 da clínica, e é citado como rodou; o código aninhado dentro de uma função aparece sem a indentação de fora.
+Todo excerto abaixo vem do projeto guiado na tag do capítulo [`book-v1/four-pieces`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/four-pieces), o código que o capítulo 12 deixou mais a primeira entrega do marco 1.1 da clínica (o docs/06 dessa tag ainda o chama de marco 2; o capítulo 12 diz por quê), e é citado como rodou; o código aninhado dentro de uma função aparece sem a indentação de fora.
 
 A clínica adotou o FOCUS inteiro no capítulo 7, e o [`docs/01-Architecture.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/docs/01-Architecture.md) dela, na seção "How the code is organized", dá as quatro peças em uma tabela.
 O original está em inglês; esta é a tradução:

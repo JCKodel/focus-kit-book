@@ -1,18 +1,26 @@
 # Closing a milestone
 
 After this chapter you can close a milestone: check its paragraph on the running product, review everything it built with what your host offers, and decide each finding.
-You can then turn the confirmed findings into lines in the queue instead of fixes.
+You can then turn the confirmed findings into lines in a new milestone, `<M>.1`, instead of fixes.
 
 ## Why review the whole
 
 Each page of a milestone was read before `/apply` built it, and each staged change was reviewed before its commit.
 Nobody looked at what they add up to.
-The kit closes that gap in one rule, §8 of the process document it writes, docs/05: when a milestone closes, review the whole with what the host offers, and each confirmed finding becomes a line in the queue, not a fix in the middle of the next milestone.
+The kit closes that gap in one rule, §8 of the process document it writes, docs/05, as it reads since focus-kit's commit `bff8414`.
+The last line of every milestone is its review, `<milestone>-review`, a delivery like the others: `/propose` writes its page, and `/apply` runs it.
+It checks the milestone's paragraph clause by clause against what the deliveries built, and reviews the code with what the host offers.
+It fixes nothing.
+Each confirmed finding becomes a `[ ]` line in a new milestone right after the reviewed one, numbered with `.1` (milestone 1 is followed by 1.1), which ends with its own review; a finding is never a fix in the middle of the next milestone.
 A light process has no gate between deliveries, so the risk it carries is the sum: every delivery right on its own page, and the whole wrong.
 
 That look is a milestone review: the milestone's paragraph checked on the product, then a review of everything the milestone built.
-It fixes nothing.
 Each problem it reports is a finding, and you confirm it or reject it.
+
+The review's page, written by `/propose m1-review` for a milestone 1, names what to look at: the milestone's range of commits, its paragraph, and the host's review command with its level.
+`/apply m1-review` checks the paragraph clause by clause, runs the review, and stops there, because the decisions on the findings are yours.
+The clinic's milestone 1 review ran before the kit made the review a line of the milestone, which is why the clinic's milestone 1 has no such line: I ran it headless, outside any delivery.
+Its steps are the ones `/apply` runs, in the next two sections; the decisions after them are yours in both cases.
 
 ## Check the paragraph
 
@@ -145,6 +153,9 @@ index 760ecff..c729d8b 100644
  their slots, and sees the day's appointments per professional; and the app
 ````
 
+Under the kit's rule since `bff8414`, that new milestone is milestone 1.1, right after milestone 1, and it ends with its own review, `m1.1-review`; "the owner runs the day" keeps the number 2, so nothing renumbers.
+When the clinic updated the kit, its queue was renamed to match: the clinic's [docs/06 at `a3e2470`](https://github.com/JCKodel/focus-kit-clinic/blob/a3e2470/docs/06-Queue.md) has milestone 1.1, ending with `m1.1-review`, and milestone 2, ending with `m2-review`.
+
 Each line says what will be true, not how to fix it, and the two lines about copied code name the first copy, as the abstraction rule asks.
 Each one is a delivery: `/propose` will write its page and `/apply` will build it, like any other.
 
@@ -153,7 +164,7 @@ Nobody reads its scope before it is built, nobody checks it against a page after
 As a line it waits its turn, and gets both.
 
 I asked the same session for the commit message again with one bullet per new line, as the clinic's docs/05 asks, then committed it, created the tag `book-v1/closing-a-milestone` and pushed both.[^closing-a-milestone-run]
-The tag [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone) holds the whole of milestone 1 with its queue of findings, so you can compare your code with it.
+The tag [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone) holds the whole of milestone 1 with its queue of findings, so you can compare your code with it; its queue keeps the names of the diff above, since a tag never moves.
 
 ## When the findings became one delivery
 
@@ -169,9 +180,9 @@ Eight lines would have been eight pages, each small enough to read before it was
 
 * A milestone review looks at what the deliveries add up to, which no review of a single page or staged change can see.
 * Check the paragraph first, on the running product, end to end, once; a claim that fails is a finding.
-* Review the milestone's range with what your host offers (in Claude Code, `/code-review high <before>...<last>`); the review fixes nothing.
+* The review is the milestone's last line, `<milestone>-review`, run with `/propose` and `/apply`: it checks the paragraph, reviews the milestone's range with what your host offers (in Claude Code, `/code-review high <before>...<last>`), and fixes nothing.
 * Decide each finding with its reason, after looking at the code: never trust one blindly, never dismiss one unread.
-* A confirmed finding becomes a line, not a fix: a fix in the middle of the next milestone has no page and no review.
+* A confirmed finding becomes a line in a new milestone `<M>.1`, not a fix: a fix in the middle of the next milestone has no page and no review.
 
 ## Exercises
 
@@ -183,11 +194,12 @@ After exercise 11.4, check each sentence of its paragraph on your running app, a
 
 ### Exercise 12.2
 
-Run `/code-review high` (or your host's review) on the range of your milestone 1, and decide each finding with its reason.
+If your milestone 1 does not end with `m1-review`, ask the agent to add it as its last line.
+Then run `/propose m1-review` and `/apply m1-review`, and decide each finding with its reason.
 
 ### Exercise 12.3
 
-Ask the agent to turn your confirmed findings into lines, and say for each why it belongs in the milestone the agent chose.
+Ask the agent to write your confirmed findings as milestone 1.1, right after milestone 1, with its paragraph and `m1.1-review` as its last line, and check the diff.
 
 [^claude-code-review]: Anthropic, "Code Review", accessed 2026-09-28. <https://code.claude.com/docs/en/code-review>
 [^codex-review]: OpenAI, "Developer commands", accessed 2026-09-28. <https://learn.chatgpt.com/docs/developer-commands?surface=cli>

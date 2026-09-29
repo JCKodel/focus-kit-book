@@ -41,10 +41,13 @@ A milestone's paragraph says what is true when the milestone closes, in sentence
 It is a test, not a list of the lines under it and not a theme: "the owner can register professionals" can be checked, "professionals" cannot.
 The clinic's milestone 1 paragraph, quoted in [chapter 7](07-brainstorm.md), is the example: each sentence is something the owner or a client can do.
 
-A milestone holds three to eight deliveries, the rule of the kit's `brainstorm/SKILL.md` for the first milestone and a good size for any.
+A milestone holds three to eight deliveries, then its review, the rule of the kit's `brainstorm/SKILL.md` for the first milestone and a good size for any.
 The first ones are the skeleton the others stand on; the clinic's first line, `skeleton`, creates `npm run verify`, which every later delivery runs.
 Then each line comes after the lines it needs: a client cannot book before the owner has set a professional's hours.
-Closing a milestone, and reviewing the whole, is chapter 12.
+
+The last line of every milestone is its review, `<milestone>-review`, a delivery like the others, which checks what the milestone adds up to ([chapter 12](12-closing-a-milestone.md)).
+Its confirmed findings become lines in a new milestone right after, numbered with `.1`, so no milestone after it renumbers; that milestone ends with its own review.
+This book's queue, [docs/06](https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md), has two: M3.1, "What the review of M3 found", between M3 and M4, and M4.1, between M4 and M5, which ends with `m4.1-review`; M3.1 was built before the kit made the review a line, so it has none.
 
 ## Changing the queue
 
@@ -96,7 +99,7 @@ I asked the agent for the change and reviewed the diff; nobody edited the queue 
 * docs/06 holds milestones, each with a paragraph, and one line per delivery under it: a mark, a slug and what it delivers, in one line; the reasoning goes on the page.
 * The slug names the page, `work/<slug>.md`, and is the argument of `/propose` and `/apply`.
 * Three marks: `[ ]` not defined, `[>]` the page exists (`/propose`), `[x]` done (`/apply`); a line never leaves, so the queue is also the history.
-* A milestone paragraph is a test a person can check against the product; three to eight deliveries, the skeleton first, then each line after the lines it needs.
+* A milestone paragraph is a test a person can check against the product; three to eight deliveries, the skeleton first, then each line after the lines it needs, and last the milestone's review, whose confirmed findings open `<M>.1`.
 * No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept, and you review the diff.
 
 ## Exercises

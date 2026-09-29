@@ -62,7 +62,7 @@ O segundo agente que leu a página `skeleton` no capítulo 10 não é um subagen
 No código o regulador tem a sua própria regra, escrita no texto do `/apply` e no AGENTS.md que o kit escreve: uma abstração é escrita na segunda ocorrência concreta, e a entrega diz qual foi a primeira.
 Uma cópia não prova que uma versão compartilhada faz falta; duas cópias são o erro que aconteceu.
 
-A revisão do capítulo 12 achou duas repetições assim na clínica, e elas viraram duas linhas do marco 2 dela, na tag [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone); o original está em inglês, e aqui vai traduzido:[^closing-a-milestone-run]
+A revisão do capítulo 12 achou duas repetições assim na clínica, e elas viraram duas linhas do marco 1.1 dela (a tag ainda o chama de marco 2; o capítulo 12 diz por quê), na tag [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone); o original está em inglês, e aqui vai traduzido:[^closing-a-milestone-run]
 
 ```diff
 +[ ] route-errors         uma resposta databaseFailed compartilhada e uma notFound compartilhada; as primeiras cópias estão em session.server.ts e weeklyHours/route.server.ts
@@ -85,7 +85,7 @@ Estes exercícios usam a clínica, conversando com o agente, nunca à mão.
 
 ### Exercício 13.1
 
-Pergunte ao agente quais são a primeira e a segunda cópia por trás das linhas do seu marco 2 que criam uma cópia compartilhada.
+Pergunte ao agente quais são a primeira e a segunda cópia por trás das linhas do seu marco 1.1 que criam uma cópia compartilhada.
 Para uma repetição no seu código com uma cópia só, diga por que ela espera.
 
 ### Exercício 13.2

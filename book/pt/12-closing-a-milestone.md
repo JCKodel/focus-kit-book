@@ -1,18 +1,26 @@
 # Fechando um marco
 
 Depois deste capítulo você consegue fechar um marco: conferir o parágrafo dele no produto rodando, revisar tudo o que ele construiu com o que o seu host oferece e decidir cada achado.
-Depois você consegue transformar os achados confirmados em linhas da fila em vez de correções.
+Depois você consegue transformar os achados confirmados em linhas de um marco novo, `<M>.1`, em vez de correções.
 
 ## Por que revisar o todo
 
 Cada página de um marco foi lida antes de o `/apply` construí-la, e cada mudança no stage foi revisada antes do commit dela.
 Ninguém olhou o que elas somam.
-O kit fecha essa brecha em uma regra, o §8 do documento de processo que ele escreve, o docs/05: quando um marco fecha, revise o todo com o que o host oferece, e cada achado confirmado vira uma linha na fila, e não uma correção no meio do marco seguinte.
+O kit fecha essa brecha em uma regra, o §8 do documento de processo que ele escreve, o docs/05, como ele diz desde o commit `bff8414` do focus-kit.
+A última linha de todo marco é a revisão dele, `<milestone>-review`, uma entrega como as outras: o `/propose` escreve a página dela, e o `/apply` a roda.
+Ela confere o parágrafo do marco cláusula por cláusula contra o que as entregas construíram, e revisa o código com o que o host oferece.
+Ela não corrige nada.
+Cada achado confirmado vira uma linha `[ ]` em um marco novo logo depois do revisado, numerado com `.1` (o marco 1 é seguido pelo 1.1), que termina com a sua própria revisão; um achado nunca é uma correção no meio do marco seguinte.
 Um processo leve não tem portão entre as entregas, então o risco que ele carrega é a soma: cada entrega certa na sua página, e o todo errado.
 
 Esse olhar é a revisão de marco: o parágrafo do marco conferido no produto, depois uma revisão de tudo o que o marco construiu.
-Ela não corrige nada.
 Cada problema que ela aponta é um achado, e você o confirma ou o rejeita.
+
+A página da revisão, escrita pelo `/propose m1-review` para um marco 1, diz o que olhar: o intervalo de commits do marco, o parágrafo dele e o comando de revisão do host com o seu nível.
+O `/apply m1-review` confere o parágrafo cláusula por cláusula, roda a revisão e para ali, porque as decisões sobre os achados são suas.
+A revisão do marco 1 da clínica rodou antes de o kit fazer da revisão uma linha do marco, e por isso o marco 1 da clínica não tem essa linha: eu a rodei sem interface, fora de qualquer entrega.
+Os passos dela são os que o `/apply` roda, nas duas próximas seções; as decisões depois deles são suas nos dois casos.
 
 ## Confira o parágrafo
 
@@ -146,6 +154,9 @@ index 760ecff..c729d8b 100644
 ````
 
 O marco novo se chama "o que a revisão do marco 1 achou", e o parágrafo dele diz, traduzido: "Quando ele fecha, todo achado confirmado da revisão do marco 1 está resolvido: o setup aceita todo nome IANA de fuso horário, um agendamento recusado mantém a sua mensagem durante uma recarga que falha, o docs/02 aparece inteiro, e o código repetido entre as funcionalidades tem uma cópia compartilhada".
+Pela regra do kit desde o `bff8414`, esse marco novo é o marco 1.1, logo depois do marco 1, e ele termina com a sua própria revisão, `m1.1-review`; "o dono comanda o dia" mantém o número 2, então nada é renumerado.
+Quando a clínica atualizou o kit, a fila dela foi renomeada para combinar: o [docs/06 da clínica em `a3e2470`](https://github.com/JCKodel/focus-kit-clinic/blob/a3e2470/docs/06-Queue.md) tem o marco 1.1, que termina com `m1.1-review`, e o marco 2, que termina com `m2-review`.
+
 Cada linha diz o que vai ser verdade, e não como corrigir, e as duas linhas sobre código copiado nomeiam a primeira cópia, como a regra de abstração pede.
 Cada uma é uma entrega: o `/propose` vai escrever a página dela e o `/apply` vai construí-la, como qualquer outra.
 
@@ -154,7 +165,7 @@ Ninguém lê o escopo dela antes de ela ser construída, ninguém a confere cont
 Como linha, ela espera a sua vez e ganha as duas.
 
 Pedi à mesma sessão a mensagem de commit de novo, com um item por linha nova, como o docs/05 da clínica pede; depois fiz o commit, criei a tag `book-v1/closing-a-milestone` e enviei os dois.[^closing-a-milestone-run]
-A tag [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone) guarda o marco 1 inteiro com a sua fila de achados, para você comparar o seu código com ela.
+A tag [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone) guarda o marco 1 inteiro com a sua fila de achados, para você comparar o seu código com ela; a fila dela mantém os nomes do diff acima, já que uma tag nunca se move.
 
 ## Quando os achados viraram uma entrega só
 
@@ -170,9 +181,9 @@ Oito linhas teriam sido oito páginas, cada uma pequena o bastante para ser lida
 
 * Uma revisão de marco olha o que as entregas somam, o que nenhuma revisão de uma página ou de uma mudança no stage consegue ver.
 * Confira o parágrafo primeiro, no produto rodando, do começo ao fim, uma vez; uma afirmação que falha é um achado.
-* Revise o intervalo do marco com o que o seu host oferece (no Claude Code, `/code-review high <antes>...<último>`); a revisão não corrige nada.
+* A revisão é a última linha do marco, `<milestone>-review`, rodada com o `/propose` e o `/apply`: ela confere o parágrafo, revisa o intervalo do marco com o que o seu host oferece (no Claude Code, `/code-review high <antes>...<último>`) e não corrige nada.
 * Decida cada achado com o seu motivo, depois de olhar o código: nunca confie em um às cegas, nunca descarte um sem ler.
-* Um achado confirmado vira uma linha, e não uma correção: uma correção no meio do marco seguinte não tem página nem revisão.
+* Um achado confirmado vira uma linha em um marco novo `<M>.1`, e não uma correção: uma correção no meio do marco seguinte não tem página nem revisão.
 
 ## Exercícios
 
@@ -184,11 +195,12 @@ Depois do exercício 11.4, confira cada frase do parágrafo dele no seu app roda
 
 ### Exercício 12.2
 
-Rode o `/code-review high` (ou a revisão do seu host) no intervalo do seu marco 1, e decida cada achado com o seu motivo.
+Se o seu marco 1 não termina com `m1-review`, peça ao agente que a acrescente como a última linha dele.
+Depois rode o `/propose m1-review` e o `/apply m1-review`, e decida cada achado com o seu motivo.
 
 ### Exercício 12.3
 
-Peça ao agente que transforme os seus achados confirmados em linhas, e diga, para cada uma, por que ela pertence ao marco que o agente escolheu.
+Peça ao agente que escreva os seus achados confirmados como o marco 1.1, logo depois do marco 1, com o seu parágrafo e `m1.1-review` como a última linha, e confira o diff.
 
 [^claude-code-review]: Anthropic, "Code Review", acesso em 2026-09-28. <https://code.claude.com/docs/en/code-review>
 [^codex-review]: OpenAI, "Developer commands", acesso em 2026-09-28. <https://learn.chatgpt.com/docs/developer-commands?surface=cli>

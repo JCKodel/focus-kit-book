@@ -265,7 +265,7 @@ Depois diga quais arquivos teriam de mudar se a regra o lançasse.
 
 ### Exercício 14.3
 
-O marco 3 traz `absences`.
+O marco 2 traz `absences`.
 Pergunte ao agente onde os arquivos dela ficariam, em uma pasta própria ou em uma subpasta de `weeklyHours`, e que arquivos existentes ela tocaria.
 Decida, e diga por quê; nada é construído.
 

@@ -6,7 +6,7 @@ You can follow one event through them to a new state, and decide for a feature w
 ## The four pieces
 
 Chapter 6 gave FOCUS in one paragraph, in [the two choices](06-the-documents.md#the-two-choices), from this book's ADR-0016;[^book-adr-0016] this chapter shows its pieces in running code.
-Every excerpt below comes from the guided project at its chapter tag [`book-v1/four-pieces`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/four-pieces), the code chapter 12 left plus the clinic's first delivery of milestone 2, and is quoted as it ran; code nested inside a function is shown without its outer indentation.
+Every excerpt below comes from the guided project at its chapter tag [`book-v1/four-pieces`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/four-pieces), the code chapter 12 left plus the clinic's first delivery of milestone 1.1 (that tag's docs/06 still calls it milestone 2; chapter 12 says why), and is quoted as it ran; code nested inside a function is shown without its outer indentation.
 
 The clinic took FOCUS whole in chapter 7, and its [`docs/01-Architecture.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/docs/01-Architecture.md), in the section "How the code is organized", gives the four pieces in a table:
 

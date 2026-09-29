@@ -62,7 +62,7 @@ The second agent that read the `skeleton` page in chapter 10 is no specialized s
 In code the governor has its own rule, written in the text of `/apply` and in the AGENTS.md the kit writes: an abstraction is written on the second concrete occurrence, and the delivery says which was the first.
 One copy is no evidence that a shared version is needed; two copies are the error that happened.
 
-The review in chapter 12 found two such repetitions in the clinic, and they became two lines of its milestone 2, at the tag [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone):[^closing-a-milestone-run]
+The review in chapter 12 found two such repetitions in the clinic, and they became two lines of its milestone 1.1 (the tag still calls it milestone 2; chapter 12 says why), at the tag [`book-v1/closing-a-milestone`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone):[^closing-a-milestone-run]
 
 ```diff
 +[ ] route-errors         one shared databaseFailed and one shared notFound answer; the first copies are in session.server.ts and weeklyHours/route.server.ts
@@ -85,7 +85,7 @@ These exercises use the clinic, by conversation with the agent, never by hand.
 
 ### Exercise 13.1
 
-Ask the agent which are the first and the second copy behind your milestone 2 lines that make a shared copy.
+Ask the agent which are the first and the second copy behind your milestone 1.1 lines that make a shared copy.
 For a repetition in your code with one copy only, say why it waits.
 
 ### Exercise 13.2

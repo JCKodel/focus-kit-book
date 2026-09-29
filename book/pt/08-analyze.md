@@ -244,6 +244,8 @@ DamageLabs/clahub #270, #274 e #268, nessa ordem.
 ```
 ````
 
+Desde o commit `bff8414` do focus-kit, o `/analyze` termina o primeiro marco com mais uma linha, a revisão dele, `m1-review` ([capítulo 12](12-closing-a-milestone.md)).
+Esta execução usou o kit em `26e5e1e`, antes dessa regra, então a sua fila tem uma linha a mais que a de cima.
 Cada issue é uma entrega com um slug para a sua página, e o parágrafo diz o que é verdade quando o marco fecha; a próxima seção mostra que a primeira versão dizia bem menos.
 
 ## Confira contra o código

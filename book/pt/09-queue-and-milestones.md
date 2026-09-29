@@ -41,10 +41,13 @@ O parágrafo de um marco diz o que é verdade quando o marco fecha, em frases qu
 Ele é um teste, e não uma lista das linhas embaixo dele nem um tema: "o dono consegue cadastrar profissionais" dá para conferir, "profissionais" não.
 O parágrafo do marco 1 da clínica, citado no [capítulo 7](07-brainstorm.md), é o exemplo: cada frase é algo que o dono ou um cliente consegue fazer.
 
-Um marco tem de três a oito entregas, a regra do `brainstorm/SKILL.md` do kit para o primeiro marco e um bom tamanho para qualquer um.
+Um marco tem de três a oito entregas, depois a sua revisão, a regra do `brainstorm/SKILL.md` do kit para o primeiro marco e um bom tamanho para qualquer um.
 As primeiras são o esqueleto em que as outras se apoiam; a primeira linha da clínica, `skeleton`, cria o `npm run verify`, que toda entrega seguinte roda.
 Depois, cada linha vem depois das linhas de que precisa: um cliente não consegue agendar antes de o dono definir os horários de um profissional.
-Fechar um marco, e revisar o conjunto, é o capítulo 12.
+
+A última linha de todo marco é a revisão dele, `<milestone>-review`, uma entrega como as outras, que confere o que o marco soma ([capítulo 12](12-closing-a-milestone.md)).
+Os achados confirmados dela viram linhas de um marco novo logo depois, numerado com `.1`, então nenhum marco depois dele é renumerado; esse marco termina com a sua própria revisão.
+A fila deste livro, o [docs/06](https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md), tem dois: o M3.1, "What the review of M3 found" (o que a revisão do M3 achou), entre o M3 e o M4, e o M4.1, entre o M4 e o M5, que termina com `m4.1-review`; o M3.1 foi construído antes de o kit fazer da revisão uma linha, então não tem nenhuma.
 
 ## Mudando a fila
 
@@ -97,7 +100,7 @@ Pedi a mudança ao agente e revisei o diff; ninguém editou a fila à mão.
 * O docs/06 guarda marcos, cada um com um parágrafo, e uma linha por entrega sob ele: uma marca, um slug e o que ela entrega, em uma linha; o raciocínio vai para a página.
 * O slug dá nome à página, `work/<slug>.md`, e é o argumento do `/propose` e do `/apply`.
 * Três marcas: `[ ]` não definida, `[>]` a página existe (`/propose`), `[x]` feita (`/apply`); uma linha nunca sai, então a fila é também o histórico.
-* O parágrafo de um marco é um teste que uma pessoa confere no produto; de três a oito entregas, o esqueleto primeiro, depois cada linha após as linhas de que precisa.
+* O parágrafo de um marco é um teste que uma pessoa confere no produto; de três a oito entregas, o esqueleto primeiro, depois cada linha após as linhas de que precisa, e por último a revisão do marco, cujos achados confirmados abrem o `<M>.1`.
 * Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido, e você revisa o diff.
 
 ## Exercícios
