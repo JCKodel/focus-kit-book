@@ -44,9 +44,10 @@ A new concept enters here first, in both languages.
 | use case | caso de uso | `use-case` | A FOCUS piece holding a business rule, a validation or a format as a pure, synchronous function: data in, value out, no repository, no I/O; written only when there is a rule to hold. |
 | repository | repositório | `repository` | The FOCUS piece that fetches and saves; the only code that does I/O and the only code with `try`/`catch`, and it returns every exception as a value. |
 | driver | driver | `driver` | What a repository uses to reach I/O, such as a database engine or an ORM; rarely written for the project. |
-| exception | exceção | `E` of `Result<T, E>` | An expected failure the caller handles, such as no connection or a missing record; it exists only at I/O and is returned as a value (after Dart's `Exception`). |
+| exception | exceção | `E` of a repository's `Result<T, E>` | An expected failure the caller handles, such as no connection or a missing record; it exists only at I/O and is returned as a value (after Dart's `Exception`). |
+| refusal | recusa | `E` of a use case's `Result<T, E>` | The value a rule returns when it says no, such as a phone number with too few digits or a cancellation after the deadline; it travels in a Result like an exception but is not one, since no I/O failed. |
 | error | erro | none | A program failure the programmer should have avoided, a bug; never caught, it reaches the developer's screen and analytics (after Dart's `Error`). |
-| Result | Result | `Result<T, E>` | A value holding either the data or an exception, handled with an exhaustive switch; `throw` is never used for flow. |
+| Result | Result | `Result<T, E>` | A value holding either the data or what stopped it, an exception or a refusal, handled exhaustively (a switch, or a map that must name every case); `throw` is never used for flow. |
 | exceptions as values | exceções como valores | none | The principle that an exception is returned as a Result, never thrown; better known as "errors as values" (Go, Rust); the book says exception because an error, a bug, is never a value. |
 | vertical slice | fatia vertical | `features/<name>/`, `features/<name>/<sub-feature>/` | Code organized by feature, with no folder per technology or layer (no `controllers/`): one folder holds all a feature needs, and a sub-feature is a subfolder (`authentication/change-password/`). |
 | KISS | KISS | none | Keep it simple: the simplest code that does the job; with YAGNI and DRY, non-negotiable in FOCUS. |
