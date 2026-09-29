@@ -70,7 +70,7 @@ O docs/01 também registra a resposta à primeira das [duas escolhas](#as-duas-e
 
 ### docs/04, as convenções
 
-O docs/04 guarda as línguas da documentação e dos identificadores, a nomenclatura, o estilo e a ferramenta que o garante, onde ficam os testes e o formato da mensagem de commit; a seção 6 mostra uma das regras dele.
+O docs/04 guarda as línguas da documentação e dos identificadores, a nomenclatura, o estilo e a ferramenta que o garante, onde ficam os testes e o formato da mensagem de commit; [Documentos vivos](#documentos-vivos), mais adiante, mostra uma das regras dele.
 
 ### docs/05, o processo
 

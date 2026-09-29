@@ -69,7 +69,7 @@ docs/01 also records the answer to the first of the kit's [two choices](#the-two
 
 ### docs/04, the conventions
 
-docs/04 holds the documentation and identifier languages, naming, style and the tool that enforces it, where tests live and the commit message format; section 6 shows one of its rules.
+docs/04 holds the documentation and identifier languages, naming, style and the tool that enforces it, where tests live and the commit message format; [Living documents](#living-documents), below, shows one of its rules.
 
 ### docs/05, the process
 
