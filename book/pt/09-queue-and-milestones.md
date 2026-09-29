@@ -33,7 +33,7 @@ O `/apply` troca `[>]` por `[x]` quando move a página para `work/done/` (capít
 Uma linha nunca sai da fila; ela muda de marca, então a fila é também o histórico do que foi entregue.
 
 No trunk, a página e a construção entram em um commit, então o `[>]` espera na árvore de trabalho entre os dois comandos; em um branch, a página pode ser commitada nele, e a entrega chega ao branch principal em um merge.
-É assim que uma sessão nova que roda o `/apply` sabe que a página existe; a Parte IV ensina o lado do git.
+O `/apply` recebe o slug e lê `work/<slug>.md` da árvore de trabalho, então uma sessão nova encontra a página tenha ela sido commitada ou não; a Parte IV ensina o lado do git.
 
 ## Marcos
 

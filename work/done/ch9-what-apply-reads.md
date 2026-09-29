@@ -22,7 +22,14 @@
 
 **Done when.**
 
-* [ ] Both editions changed, same meaning; no "It" whose antecedent is unclear.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed, same meaning; no "It" whose antecedent is unclear.
+* [x] `make verify` green.
+* [x] `make book` run, and both PDF paths given to the author.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+## What happened
+
+* English: "`/apply` is given the slug and reads `work/<slug>.md` from the working tree, so a fresh session finds the page whether or not the page was committed; Part IV teaches the git side." Portuguese says the same. The subject is `/apply`, so no pronoun is left to resolve.
+* The claim was checked against the kit: `.claude/skills/apply/SKILL.md` opens with "Implement `work/$ARGUMENTS.md`".
+* Nothing diverged from the plan, nothing was dropped, no document changed: no new term, no rule, no decision. F11 of the M3 review is settled.
+* Proof: `make verify` green, `make book` built both PDFs.

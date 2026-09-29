@@ -33,7 +33,7 @@ A line has one of three marks:
 A line never leaves the queue; it changes mark, so the queue is also the history of what was delivered.
 
 On trunk the page and the build land in one commit, so `[>]` waits in the working tree between the two commands; on a branch the page may be committed there, and the delivery reaches the main branch in one merge.
-It is how a fresh session running `/apply` knows the page exists; Part IV teaches the git side.
+`/apply` is given the slug and reads `work/<slug>.md` from the working tree, so a fresh session finds the page whether or not the page was committed; Part IV teaches the git side.
 
 ## Milestones
 

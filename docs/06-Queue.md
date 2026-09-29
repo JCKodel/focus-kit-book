@@ -68,7 +68,7 @@ When this milestone closes, every confirmed finding of the M3 review is settled:
 [x] pt-stage-term          Portuguese edition: one term for git's stage from chapter 4 on, where chapters 4 to 6 say "prepara" and chapter 7 on says "coloca em stage"
 [x] ch8-tag-form           Chapter 8: says why the brownfield project's tag is book-v1-analyze and not the book-v1/<chapter-slug> of chapter 5; both editions
 [x] ch8-accept-edits       Chapter 8: says what acceptEdits is and whether a reader in an interactive session meets the same gap; both editions
-[>] ch9-what-apply-reads   Chapter 9: the sentence whose "It" has no clear antecedent says plainly what tells /apply the page exists; both editions
+[x] ch9-what-apply-reads   Chapter 9: the sentence whose "It" has no clear antecedent says plainly what tells /apply the page exists; both editions
 [>] ch10-unit-of-work      Chapter 10: "One unit of work" points to chapter 9 instead of repeating its paragraph on trunk and the waiting page; both editions
 [ ] ch10-usage-share       Chapter 10: the /usage percentages say what they are a share of, so the ratio drawn from them can be judged; both editions
 [ ] headless-runs          Chapters 10 to 12: say the book's runs are headless, what --continue does, and that in an interactive session the reader keeps talking in the same session; both editions
