@@ -1,0 +1,21 @@
+[tool Bash] git status --short && git diff docs/06-Queue.md
+[tool Read] docs/06-Queue.md
+[tool Edit] docs/06-Queue.md
+[tool Bash] grep -nP '\x{2014}' docs/06-Queue.md; git add docs/06-Queue.md && git diff --cached docs/06-Queue.md
+I've added M3.1 to `docs/06-Queue.md` between M3 and M4, with one `[ ]` line for each of the 19 confirmed findings, and staged the file. The staged diff is above.
+
+- **Existing lines:** none already covered a finding, so no existing line got more words. The closest was `git-essentials` (chapter 17) for F16, but the fix belongs in chapter 11, which has to show the commit command. Chapter 17 can still teach the rest, as you said, so I left its line alone.
+- **Alignment:** `ch12-numbered-findings` is 22 characters, which fills the slug column exactly, like `product-people-process`. The table stays aligned.
+- **`m3-review` line:** the staged diff also includes this line, which was already changed and unstaged before I started. It moves from `[ ]` to `[>]` with a longer description (Prologue to chapter 13, M3's paragraph, milestone M3.1). It's this delivery's own mark, and `git add docs/06-Queue.md` stages it too. If you want only M3.1 staged, run `git restore --staged docs/06-Queue.md` and stage the parts separately.
+- **Not checked:** I haven't run `make verify`. I did check that the file has no em dash. `work/m3-review.md` and `work/done/closing-a-milestone-run/README.md` are untouched and unstaged.
+
+Suggested commit message, if you commit this on its own:
+
+```
+docs(queue): M3.1, the confirmed findings of the M3 review
+
+- a new milestone after M3 with its paragraph and 19 lines, one per confirmed finding
+- m3-review defined: the Prologue to chapter 13 in both editions, against the product questions and M3's paragraph
+
+See work/m3-review.md
+```

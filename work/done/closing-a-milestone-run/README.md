@@ -70,7 +70,7 @@ Turn 3, the correction of the commit message, with the flags of turn 2:
 
 The author committed the staged `docs/06-Queue.md` with `commit-message.txt`, created the annotated tag `book-v1/closing-a-milestone` on it, message "One Page at a Time, chapter closing-a-milestone", and pushed both.
 
-* Commit: COMMIT_SHA, "Queue the confirmed findings of the milestone 1 review (docs/06)".
+* Commit: `c54d011`, "Queue the confirmed findings of the milestone 1 review (docs/06)".
 
 ## Notes of the host
 

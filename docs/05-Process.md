@@ -147,6 +147,9 @@ When a milestone closes, review the whole with what the host offers, and
 each confirmed finding becomes a line in the queue, not a fix in the middle
 of the next milestone.
 
-For a milestone of chapters, the review reads the part end to end in both
-editions and asks the product questions of docs/00, above all: does every
-sentence carry value, and is anything the reader needs missing?
+For a milestone of chapters, the review is a fresh session that reads the
+book from its start to the end of the part, in both editions, and asks the
+product questions of docs/00, above all: does every sentence carry value,
+and is anything the reader needs missing? It checks the milestone's
+paragraph clause by clause against the chapters that teach it, and its
+findings may fall in any chapter it read.

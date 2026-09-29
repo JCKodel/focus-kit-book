@@ -1,0 +1,156 @@
+[tool Read] docs/00-Product.md
+[tool Grep] ^# docs/04-Conventions.md
+[tool Glob] book/*/[01]*.md
+[tool Read] docs/04-Conventions.md
+[tool Read] book/en/00-product-people-process.md
+[tool Read] book/pt/00-product-people-process.md
+[tool Read] book/en/01-why-process.md
+[tool Read] book/pt/01-why-process.md
+[tool Read] book/en/02-how-agents-see.md
+[tool Read] book/pt/02-how-agents-see.md
+[tool Read] book/en/03-spec-driven.md
+[tool Read] book/pt/03-spec-driven.md
+Reading the chapters in order; now at chapter 4 of 13.
+[tool Read] book/en/04-birth-of-focus-kit.md
+[tool Read] book/pt/04-birth-of-focus-kit.md
+[tool Read] book/en/05-install-and-hosts.md
+[tool Read] book/pt/05-install-and-hosts.md
+[tool Read] book/en/06-the-documents.md
+[tool Read] book/pt/06-the-documents.md
+[tool Read] book/en/07-brainstorm.md
+[tool Read] book/pt/07-brainstorm.md
+[tool Read] book/en/08-analyze.md
+[tool Read] book/pt/08-analyze.md
+[tool Read] book/en/09-queue-and-milestones.md
+[tool Read] book/pt/09-queue-and-milestones.md
+Now at chapter 10; chapters 0 to 9 read in both editions.
+[tool Read] book/en/10-propose.md
+[tool Read] book/pt/10-propose.md
+[tool Read] book/en/11-apply.md
+[tool Read] book/pt/11-apply.md
+[tool Read] book/en/12-closing-a-milestone.md
+[tool Read] book/pt/12-closing-a-milestone.md
+[tool Read] book/en/13-the-governor.md
+[tool Read] book/pt/13-the-governor.md
+### F1. Chapter 1 counts "OpenSpec changes" and lines of "spec" before the reader knows what either is
+* Where: `book/en/01-why-process.md:62`, `book/pt/01-why-process.md:62`
+* Question: 5
+* What: The Ninjobs numbers depend on "35 OpenSpec changes" and "37,228 lines of spec". OpenSpec, a "change" and a spec are only explained in chapter 3, but the chapter points the reader to chapter 4 instead.
+* Reader: The reader can't judge whether 37,228 lines for four screens is a lot, because they don't know what those lines are.
+
+### F2. Chapter 3 cites focus-kit's edits to `docs/03` and `docs/06` without saying what those files are
+* Where: `book/en/03-spec-driven.md:187`, `book/pt/03-spec-driven.md:267`
+* Question: 5
+* What: "its `/propose` also edited two of them, adding 6 lines and removing 3 in `docs/03` and `docs/06`". Nothing in chapter 3 names these documents, and the text doesn't say which chapter does (chapter 6).
+* Reader: The reader gets a count of edits to files they can't place, so the "light row is not free" point loses its evidence.
+
+### F3. Chapter 4 promises to say which failure each rule answers, and for several rules it doesn't
+* Where: `book/en/04-birth-of-focus-kit.md:4`, `book/en/04-birth-of-focus-kit.md:28-29`
+* Question: 1 | 2
+* What: The opening promises "which failure each rule of focus-kit answers". "What went wrong" names two failures: decisions living in six places, and checks that caught nothing. Rules such as "A queue" and "The agent never commits" are listed with no failure behind them.
+* Reader: The reader gets the rules without the reasons the chapter said it would give.
+
+### F4. Chapter 4 relies on "ADRs" and "docs/05" with no explanation and no pointer
+* Where: `book/en/04-birth-of-focus-kit.md:9`, `book/en/04-birth-of-focus-kit.md:16`, `book/en/04-birth-of-focus-kit.md:37`, `book/pt/04-birth-of-focus-kit.md:9`
+* Question: 5
+* What: "ADRs" are one of the six places a decision lived. The new rule says every project fact "lives in one place, docs/05". Neither is explained, and the text doesn't point to chapter 6.
+* Reader: The reader can't picture two of the six places or the home of the rule that "came later".
+
+### F5. The Portuguese of chapter 5 explains the Copilot prompt file in a sentence the English doesn't have
+* Where: `book/pt/05-install-and-hosts.md:113`, `book/en/05-install-and-hosts.md:94`
+* Question: 6
+* What: The Portuguese adds "A última linha diz ao agente para ler a skill e segui-la, e que `$ARGUMENTS` é o valor que você digitar". The English only explains `${input:slug}`.
+* Reader: The English reader, reading the source edition, gets less explanation of the artifact than the translation gives.
+
+### F6. Chapter 6 promises the reader can decide where a new fact belongs, but never practises it
+* Where: `book/en/06-the-documents.md:3`, `book/pt/06-the-documents.md:3`
+* Question: 2
+* What: "decide which one a new fact belongs in" is a promised skill. The chapter describes each document, but it never takes one fact and places it, never shows a borderline case (for example docs/01 against docs/03 against an ADR), and no exercise asks for it.
+* Reader: The reader can list the documents but hasn't seen the decision the chapter says they can now make.
+
+### F7. "Section 6 shows one of its rules" is ambiguous
+* Where: `book/en/06-the-documents.md:72`, `book/pt/06-the-documents.md:73`
+* Question: 5
+* What: The sentence is in the docs/04 description, so "section 6" reads as docs/04's own §6. It actually means this chapter's sixth, unnumbered, section, "Living documents".
+* Reader: The reader looks for a numbered section that isn't there.
+
+### F8. The Portuguese uses two different words for "stage" for the same English line
+* Where: `book/pt/04-birth-of-focus-kit.md:29`, `book/pt/06-the-documents.md:168`, `book/pt/07-brainstorm.md:119`, `book/pt/07-brainstorm.md:181`
+* Question: 5 | 6
+* What: The fixed AGENTS.md line "The agent stages and suggests the commit message" is "O agente prepara" in chapter 6. The same line is "O agente coloca em stage" in chapter 7. Chapters 4 and 6 use "prepara" elsewhere, and chapter 7 onward switches to "stage".
+* Reader: The Portuguese reader can't tell that "prepara" and "coloca em stage" are the same git step, which is central to "never commits".
+
+### F9. The CLAHub tag doesn't follow the tag form chapter 5 taught, and the book doesn't say why
+* Where: `book/en/08-analyze.md:166`, `book/en/05-install-and-hosts.md:22`
+* Question: 5
+* What: Chapter 5 says each chapter's tag is `book-v1/<chapter-slug>`. Chapter 8's tag is `book-v1-analyze`, on a different repository, and nothing explains the change of form.
+* Reader: A reader who types `book-v1/analyze`, as taught, finds nothing.
+
+### F10. Chapter 8 explains a gap through `acceptEdits`, a host setting the reader hasn't met
+* Where: `book/en/08-analyze.md:303`, `book/pt/08-analyze.md:306`
+* Question: 5
+* What: "In `acceptEdits`, the least permission the command needs, the host denied the agent both `gh` and the fetch of the issue pages". No chapter explains permission modes, and the text doesn't say what a reader in a normal interactive session would see instead.
+* Reader: The reader can't tell whether the gap will happen to them or how to avoid it.
+
+### F11. One sentence about the `[>]` mark doesn't parse
+* Where: `book/en/09-queue-and-milestones.md:36`, `book/pt/09-queue-and-milestones.md:36`
+* Question: 2
+* What: "It is how a fresh session running `/apply` knows the page exists" follows a sentence about trunk and branches. It's unclear what "It" refers to: the mark, the uncommitted working tree, or the branch.
+* Reader: The reader doesn't learn what `/apply` actually relies on to find the page.
+
+### F12. Chapter 10 repeats chapter 9's paragraph on trunk and the waiting page
+* Where: `book/en/10-propose.md:70-73`, `book/en/09-queue-and-milestones.md:35-36`
+* Question: 2
+* What: "One unit of work" repeats, almost clause for clause, chapter 9's point that `[>]` waits uncommitted on trunk and a branch reaches main in one merge. Both end with "Part IV teaches the git side".
+* Reader: The reader reads the same point twice, against the value "no step repeated".
+
+### F13. The `/usage` percentages don't say what they are a percentage of
+* Where: `book/en/10-propose.md:251-252`, `book/pt/10-propose.md:251-252`
+* Question: 3
+* What: "`/apply` took 32% and `/propose` 16% over the last 24 hours". The text never says whether that is a share of total usage, of a plan limit, or of something else.
+* Reader: The reader can't tell whether "twice to more than three times" is a cost ratio or something else.
+
+### F14. The page, stage and milestone reviews the chapters show were done by an unexplained second agent, fed through CLI flags
+* Where: `book/en/10-propose.md:263`, `book/en/11-apply.md:251-252`, `book/en/12-closing-a-milestone.md:86-87`
+* Question: 2 | 5
+* What: Each chapter teaches that "you validate". Each real review list, though, comes from "a second agent ... the one running this book's `/apply`". The text never says what that agent is, what it was asked, or how a reader alone would produce the same list. It was then sent with `--continue`, which is also unexplained.
+* Reader: The reader sees the result of a review they have no way to reproduce, and can't map the headless flags to their own interactive session.
+
+### F15. The skeleton was committed with a Done when item unticked, and the chapter doesn't address it
+* Where: `book/en/11-apply.md:234`, `book/en/11-apply.md:290`, `book/en/11-apply.md:42`, `book/en/11-apply.md:242`
+* Question: 2
+* What: The chapter says `/apply` "ticks every item of Done when" and asks "Is every Done when item ticked". Its own committed page still shows `* [ ] npm run dev leaves client and server running locally`, even though the author says they then checked it by hand.
+* Reader: The reader can't tell whether an unticked item may be committed, or whether the record should have been updated after the manual check.
+
+### F16. Chapter 11 promises the reader will commit, but never shows how
+* Where: `book/en/11-apply.md:4`, `book/en/11-apply.md:342`
+* Question: 2
+* What: "Then I committed the staged tree with the suggested message, tagged it `book-v1/apply` and pushed both". There's no command for committing with a multi-line suggested message, and git is deferred to Part IV.
+* Reader: A reader new to process is left without the one step the chapter says is theirs.
+
+### F17. Six of milestone 1's seven deliveries are built off the page, between chapters 11 and 12
+* Where: `book/en/12-closing-a-milestone.md:19`, `book/en/12-closing-a-milestone.md:28`, `book/en/12-closing-a-milestone.md:181`
+* Question: paragraph | 5
+* What: Chapter 11 ends with `skeleton`. Chapter 12 opens with "The clinic's milestone 1 closed with seven commits". No text tells the reader to run `/propose` and `/apply` for `clinic-setup` through `cancel-appointment`, there is no tag between `book-v1/apply` and `book-v1/closing-a-milestone`, and `npm run setup` first appears here unexplained. Exercise 12.1 assumes "your milestone 1 built".
+* Reader: The reader following the guided project has only the skeleton and no instruction or checkpoint for building the rest of the milestone that chapter 12 reviews.
+
+### F18. The English findings list has no numbers, but the decisions refer to findings by number
+* Where: `book/en/12-closing-a-milestone.md:64-75`, `book/en/12-closing-a-milestone.md:90-101`
+* Question: 5
+* What: The English shows ten unnumbered `"summary": ...` lines, then decides "1. Rejected ... 10. Confirmed". The Portuguese numbers the summaries.
+* Reader: The English reader has to count lines to match each decision to its finding.
+
+### F19. "Spec delta" and "specialized subagent" name things the reader has never met
+* Where: `book/en/13-the-governor.md:49`, `book/en/13-the-governor.md:53`, `book/pt/13-the-governor.md:49`, `book/pt/13-the-governor.md:53`
+* Question: 5
+* What: Two of the seven things the process "does not have" are "Spec delta" and "Specialized subagent". Neither term appears in any earlier chapter.
+* Reader: The reader can't see what job is being replaced, so the list can't show why nothing is missing.
+
+## Paragraph
+
+a reader can install the kit: ch5 §Install · book-v1/install-and-hosts
+document a new project: ch7 §The run on the clinic · book-v1/brainstorm
+document an existing project: ch8 §The run on CLAHub · book-v1-analyze (JCKodel/clahub)
+with `/propose`: ch10 §The run on the clinic · no tag
+and `/apply`: ch11 §The run on the clinic · book-v1/apply
+deliver a milestone, following the guided project: FINDING F17
