@@ -67,10 +67,9 @@ Uma tela é código que você reescreve; uma coluna guarda dados, e mudá-la exi
 
 ### Uma unidade de trabalho
 
-Entre os dois comandos a linha fica em `[>]`: a página existe e a construção não ([capítulo 9](09-queue-and-milestones.md)).
+Entre os dois comandos a linha fica em `[>]`: a página existe e a construção não; o [capítulo 9](09-queue-and-milestones.md) diz onde a página espera.
 A página e a construção dela são uma unidade de trabalho, como diz a seção Choices do `references/documents.md` do kit: uma mudança que se desfaz em um passo.
-No trunk elas entram em um commit, então a página espera sem commit na árvore de trabalho entre o `/propose` e o `/apply`; em um branch ou em uma worktree, o branch pode levar vários commits, e a entrega chega ao branch principal em um merge.
-A Parte IV ensina o lado do git; a clínica está no trunk, e é por isso que a execução abaixo a deixa sem commit.
+A clínica está no trunk, e é por isso que a execução abaixo deixa a página sem commit.
 
 ## A execução na clínica
 

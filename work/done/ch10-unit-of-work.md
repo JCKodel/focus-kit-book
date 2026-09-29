@@ -22,7 +22,14 @@
 
 **Done when.**
 
-* [ ] Both editions changed; the section says nothing chapter 9 already says, beyond the pointer.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed; the section says nothing chapter 9 already says, beyond the pointer.
+* [x] `make verify` green.
+* [x] `make book` run, and both PDF paths given to the author.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+## What happened
+
+* English: "Between the two commands the line reads `[>]`: the page exists and the build does not; [chapter 9](09-queue-and-milestones.md) says where the page waits." The unit of work sentence is unchanged, and the section ends with "The clinic is on trunk, which is why the run below leaves the page uncommitted." Portuguese says the same.
+* Dropped: the sentence on trunk, the waiting page, a branch and one merge, and "Part IV teaches the git side", both already in chapter 9's paragraph, which ends with that pointer to Part IV.
+* Nothing else diverged from the plan, no document changed: no new term, no rule, no decision. F12 of the M3 review is settled.
+* Proof: `make verify` green, `make book` built both PDFs.

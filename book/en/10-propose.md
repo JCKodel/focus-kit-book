@@ -67,10 +67,9 @@ A screen is code you rewrite; a column holds data, and changing it means a migra
 
 ### One unit of work
 
-Between the two commands the line reads `[>]`: the page exists and the build does not ([chapter 9](09-queue-and-milestones.md)).
+Between the two commands the line reads `[>]`: the page exists and the build does not; [chapter 9](09-queue-and-milestones.md) says where the page waits.
 The page and its build are one unit of work, as the Choices section of the kit's `references/documents.md` says: one change that reverts in one step.
-On trunk they land in one commit, so the page waits uncommitted in the working tree between `/propose` and `/apply`; on a branch or a worktree, the branch may carry several commits, and the delivery reaches the main branch in one merge.
-Part IV teaches the git side; the clinic is on trunk, which is why the run below leaves it uncommitted.
+The clinic is on trunk, which is why the run below leaves the page uncommitted.
 
 ## The run on the clinic
 
