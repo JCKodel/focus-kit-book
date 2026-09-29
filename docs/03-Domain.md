@@ -44,6 +44,8 @@ A new concept enters here first, in both languages.
 | use case | caso de uso | `use-case` | A FOCUS piece holding a business rule, a validation or a format as a pure, synchronous function: data in, value out, no repository, no I/O; written only when there is a rule to hold. |
 | repository | repositório | `repository` | The FOCUS piece that fetches and saves; the only code that does I/O and the only code with `try`/`catch`, and it returns every exception as a value. |
 | driver | driver | `driver` | What a repository uses to reach I/O, such as a database engine or an ORM; rarely written for the project. |
+| event | evento | none | What happened, such as a tap on "Book" or a request arriving, handed to one orchestrator; in FOCUS it flows one way, to a new state. |
+| state | estado | none | What an orchestrator publishes, whole, after an event: on a screen, what the view renders and never changes; on a server, the answer to the request. |
 | exception | exceção | `E` of a repository's `Result<T, E>` | An expected failure the caller handles, such as no connection or a missing record; it exists only at I/O and is returned as a value (after Dart's `Exception`). |
 | refusal | recusa | `E` of a use case's `Result<T, E>` | The value a rule returns when it says no, such as a phone number with too few digits or a cancellation after the deadline; it travels in a Result like an exception but is not one, since no I/O failed. |
 | error | erro | none | A program failure the programmer should have avoided, a bug; never caught, it reaches the developer's screen and analytics (after Dart's `Error`). |
