@@ -55,6 +55,8 @@ A new concept enters here first, in both languages.
 | KISS | KISS | none | Keep it simple: the simplest code that does the job; with YAGNI and DRY, non-negotiable in FOCUS. |
 | YAGNI | YAGNI | none | You aren't gonna need it: nothing is built before a delivery needs it, a FOCUS piece included. |
 | DRY | DRY | none | Don't repeat yourself: each piece of knowledge lives in one place. |
+| unit test | teste unitário | `*.test.ts` | A test that runs one piece of code in the test runner, with no browser, such as a use case called with its data or a repository against an in-memory database. |
+| end-to-end test | teste ponta a ponta | `*.e2e.ts` | A test that drives the running app in a browser, as a user would, through the view, the orchestrators, the server and the database. |
 | stage | stage | `git add` | To mark changes for the next commit; the agent stages, the person reviews and commits. |
 | trunk | trunk | `main` | Working on the main branch, one delivery at a time; only for one person working alone. |
 | pull request | pull request | none | A request to merge a branch that someone reviews first; how a branch per delivery lands. |

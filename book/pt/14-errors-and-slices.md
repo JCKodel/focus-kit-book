@@ -48,7 +48,7 @@ Os três hooks `use*.ts` guardam o estado que cada tela mostra, e `strings.ts` e
 `api.ts` é o lado do cliente de cada chamada ao servidor; `route.server.ts` é o lado do servidor, as rotas HTTP.
 `rules.ts` guarda as regras (os horários livres, um agendamento, o prazo de cancelamento), `repository.server.ts` guarda o SQL, `clinicTime.ts` lê datas no fuso horário da clínica, e `remembered.ts` guarda no celular uma cópia de cada agendamento.
 Um nome terminado em `.server.ts` roda só no servidor, e o código do cliente nunca importa um deles.
-Os arquivos `.test.ts` são testes de unidade, os `.e2e.ts` conduzem as telas em um navegador, e `e2e.server.ts` guarda os passos que eles compartilham.
+Os arquivos `.test.ts` são testes unitários, os `.e2e.ts` conduzem as telas em um navegador, e `e2e.server.ts` guarda os passos que eles compartilham.
 
 Uma mudança no agendamento mexe nesta pasta, e remover o agendamento remove esta pasta.
 A fatia também delimita o que um agente lê em uma entrega sobre agendamento, assunto do capítulo 16.
