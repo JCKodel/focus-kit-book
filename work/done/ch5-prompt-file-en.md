@@ -22,7 +22,13 @@
 
 **Done when.**
 
-* [ ] English sentence added; its meaning is the Portuguese sentence's.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] English sentence added; its meaning is the Portuguese sentence's.
+* [x] `make verify` green.
+* [x] `make book` run, and both PDF paths given to the author.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* `book/en/05-install-and-hosts.md:95`, after the prompt file's code block: "The last line tells the agent to read the skill and follow it, and that `$ARGUMENTS` is the value you type." It says what `book/pt/05-install-and-hosts.md:113` says, clause for clause; the sentence on `${input:slug}` follows it unchanged.
+* The Portuguese is unchanged. Nothing dropped, nothing diverged from the plan. No document changed: host and command are already in docs/03. Finding F5 of the M3 review is settled.
+* Proof: `make verify` green; `make book` builds both editions, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.

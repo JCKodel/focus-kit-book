@@ -91,6 +91,7 @@ agent: 'agent'
 Read `.agents/skills/propose/SKILL.md` and follow it. `$ARGUMENTS` is `${input:slug}`.
 ```
 
+The last line tells the agent to read the skill and follow it, and that `$ARGUMENTS` is the value you type.
 You type `/propose`, and Copilot asks you for the slug, which `${input:slug}` stands for.[^copilot-prompt-files]
 Prompt files work in VS Code, Visual Studio and JetBrains IDEs.[^copilot-prompt-files]
 
