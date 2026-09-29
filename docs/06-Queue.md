@@ -63,7 +63,7 @@ When this milestone closes, every confirmed finding of the M3 review is settled:
 [x] ch4-rule-failures      Chapter 4: every rule of focus-kit names the failure it answers, as the opening promises; "A queue" and "The agent never commits" have none today; both editions
 [x] ch4-adr-docs05         Chapter 4: ADRs and docs/05 are said in a few words where they appear, with a pointer to chapter 6; both editions
 [x] ch5-prompt-file-en     Chapter 5: the English gains the sentence that explains the prompt file's last line, which today exists only in the Portuguese
-[ ] ch6-placing-a-fact     Chapter 6: the reader places one new fact in the document that owns it, in the text and in an exercise, as the opening promises; both editions
+[>] ch6-placing-a-fact     Chapter 6: the reader places one new fact in the document that owns it, in the text and in an exercise, as the opening promises; both editions
 [>] ch6-section-reference  Chapter 6: the docs/04 description names "Living documents" instead of "section 6", which reads as docs/04's own section; both editions
 [>] pt-stage-term          Portuguese edition: one term for git's stage from chapter 4 on, where chapters 4 to 6 say "prepara" and chapter 7 on says "coloca em stage"
 [ ] ch8-tag-form           Chapter 8: says why the brownfield project's tag is book-v1-analyze and not the book-v1/<chapter-slug> of chapter 5; both editions
@@ -108,7 +108,7 @@ When this milestone closes, a reader can adapt the process to a team's tools, in
 [ ] customizing            Chapter 21: extra marks, question deliveries, proof files, a board mirror (Case A), and the queue mirrored to GitHub issues and a Projects board, built and tagged in the guided project
 [ ] project-as-assistant   Chapter 22: the documents as the whole project's memory, for engineering and product alike: what is pending, how is it going, how long each delivery took (queue plus git history), who is away; team and client conversations kept in a free notes folder, so "who owes me answers?" and "what must I ask, and whom?" are answered too (Case A, Case B)
 [ ] beyond-software        Chapter 23: analyses, proposals (Case B), codeless projects (Case A), client communication as a source of truth, data work (Ninjobs' database security rules as deliveries), and this book
-[ ] cost-and-where         Chapter 24: what coding agents cost, where they pay and where they do not, and how a team decides, with measured numbers
+[ ] cost-and-where         Chapter 24: what coding agents cost, where they pay and where they do not, and how a team decides, with measured numbers; Ninjobs after the pivot as the case: tokens per delivery (Claude Code's session logs over the pages done and the commits, same days), why the page and the documents keep each session small, and why cache reads are counted apart
 [ ] adoption               Chapter 25: taking the method to a team and a company (Case B)
 ```
 
@@ -117,7 +117,7 @@ When this milestone closes, a reader can adapt the process to a team's tools, in
 When this milestone closes, version 1 is tagged, the PDF and EPUB are on books.kodel.com.br, and focus-kit points to the book.
 
 ```
-[ ] ninjobs-case           Appendix: the Ninjobs case end to end, with its numbers and their sources
+[ ] ninjobs-case           Appendix: the Ninjobs case end to end, with its numbers and their sources, including the token count after the pivot by kind, model and month, and how it was counted
 [ ] glossary               Appendix: the glossary, generated from docs/03 in both editions
 [ ] templates              Appendix: every document template, annotated
 [ ] workshop-map           Appendix: the parts mapped to workshop sessions, with timings and exercises
