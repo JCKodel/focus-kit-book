@@ -25,7 +25,16 @@
 
 **Done when.**
 
-* [ ] Both editions changed, same meaning; lines 16 and 25 to 30 untouched.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed, same meaning; lines 16 and 25 to 30 untouched.
+* [x] `make verify` green.
+* [x] `make book` run, and both PDF paths given to the author.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* §"How it was", line 9: "ADRs" is followed by ", the architecture decision records, one file per decision." The Portuguese: ", os registros de decisão de arquitetura, um arquivo por decisão.", docs/03's words.
+* §"Where it went", line 37: "docs/05" is followed by ", the process document, whose "This project" section holds them", and the sentence ends with "([chapter 6](06-the-documents.md) describes every document)". The Portuguese keeps "This project" (este projeto), as chapter 6 names the section.
+* A first draft said "holds the facts the commands read" right after "every such fact"; cut to "holds them", since the sentence already says what the facts are.
+* Lines 16 and 25 to 30 untouched in both editions (the diff touches only lines 9 and 37).
+* Nothing dropped. No document changed: docs/03 already holds ADR, project documents and slot, and the slot is named in words. Finding F4 of the M3 review is settled.
+* Proof: `make verify` green; `make book` builds both editions, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.

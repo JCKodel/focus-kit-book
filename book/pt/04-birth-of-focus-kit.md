@@ -6,7 +6,7 @@ Depois deste capítulo você consegue dizer por quê, e a que falha responde cad
 ## Como era
 
 O Ninjobs começou com o OpenSpec.
-Cada funcionalidade era uma change com proposta, especificações, design e tarefas, e cada decisão era escrita de novo nos documentos e nos ADRs do projeto.
+Cada funcionalidade era uma change com proposta, especificações, design e tarefas, e cada decisão era escrita de novo nos documentos e nos ADRs do projeto, os registros de decisão de arquitetura, um arquivo por decisão.
 Antes de uma entrega contar como pronta, ela precisava passar por 29 verificações.[^ninjobs]
 Em quinze dias, isso produziu quatro telas.[^ninjobs]
 
@@ -34,7 +34,7 @@ Depois eu o transformei no focus-kit, o kit que este livro ensina.
 
 Uma regra veio mais tarde.
 Quando o Ninjobs adotou o kit, o `/apply` antigo ainda descrevia coisas que o projeto já tinha mudado nos documentos.[^ninjobs]
-Por isso um comando não guarda nenhum fato do projeto: todo fato assim mora em um lugar só, o docs/05, e o comando o lê ali.
+Por isso um comando não guarda nenhum fato do projeto: todo fato assim mora em um lugar só, o docs/05, o documento de processo, cuja seção "This project" (este projeto) os guarda, e o comando o lê ali (o [capítulo 6](06-the-documents.md) descreve cada documento).
 
 ## Uma lição além do processo
 

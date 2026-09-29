@@ -6,7 +6,7 @@ After this chapter you can say why, and which failure each rule of focus-kit ans
 ## How it was
 
 Ninjobs started with OpenSpec.
-Every feature was a change with its proposal, specs, design and tasks, and every decision was written again in the project's documents and ADRs.
+Every feature was a change with its proposal, specs, design and tasks, and every decision was written again in the project's documents and ADRs, the architecture decision records, one file per decision.
 Before a delivery counted as done, it had to pass 29 checks.[^ninjobs]
 In fifteen days that produced four screens.[^ninjobs]
 
@@ -34,7 +34,7 @@ I then turned it into focus-kit, the kit this book teaches.
 
 One rule came later.
 When Ninjobs adopted the kit, its old `/apply` still described things the project had already changed in its documents.[^ninjobs]
-So a command holds no fact of the project: every such fact lives in one place, docs/05, and the command reads it there.
+So a command holds no fact of the project: every such fact lives in one place, docs/05, the process document, whose "This project" section holds them, and the command reads it there ([chapter 6](06-the-documents.md) describes every document).
 
 ## A lesson beyond the process
 
