@@ -46,11 +46,11 @@ The first rule keeps new warnings from piling up in a report again; the second a
 Each job still gets done, by something the process already has:
 
 * **Formal spec:** the page, `work/<slug>.md`, says what the delivery does, in the words of the person who reads it.
-* **Spec delta:** the documents the delivery changes, in the same delivery, say what changed.
+* **Spec delta:** in OpenSpec, the file of a change that lists only the requirements it adds, changes or removes, merged into the specs when the change is archived;[^openspec-glossary] the OpenSpec change of [chapter 3](03-spec-driven.md) wrote two, each titled "Spec Delta".[^spec-driven-run] In focus-kit, the documents the delivery changes, in the same delivery, say what changed.
 * **Change folder:** the page is the change, in `work/<slug>.md` while it is built and in `work/done/` afterwards.
 * **Numbered tasks:** the Behaviour lines, each one a test or a check.
 * **Gate before implementation:** the person who reads the page before `/apply`.
-* **Specialized subagent:** one agent that reads the documents.
+* **Specialized subagent:** an agent that another agent launches for one narrow role, with its own instructions, such as a planner or a reviewer.[^claude-code-subagents] In focus-kit, one agent that reads the documents.
 * **A tool the deliveries did not ask for:** the governor itself, which keeps it out until a delivery names the error it would have caught.
 
 Two things in this book look like items of that list.
@@ -97,6 +97,9 @@ Keep the check only if the answer names an error from your project's history (`g
 
 For each of the seven items of your clinic's docs/05 §7, say what in your project does its job.
 
+[^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>
+[^spec-driven-run]: This book's run of Spec Kit, OpenSpec and focus-kit on one brief, 2026-09-25: the two spec deltas of OpenSpec's change `add-client-cancellation`. <https://github.com/JCKodel/focus-kit-book/tree/53109f372125e8aeda200bb2e5bbd1ad7bcc5d61/work/done/spec-driven-run/openspec/feature/openspec/changes/add-client-cancellation/specs>
+[^claude-code-subagents]: Anthropic, "Create custom subagents", Claude Code documentation, accessed 2026-09-29. <https://code.claude.com/docs/en/sub-agents>
 [^useful-notes]: This book's delivery `useful-notes`, whose page records chapter 8's mismatch as the error that justified extending the parity check. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/useful-notes.md>
 [^closing-a-milestone-run]: This book's review of the guided project's milestone 1: the findings, the decisions and the queue's diff, from which the two lines are quoted. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/closing-a-milestone-run/README.md>
 [^ninjobs]: Ninjobs, a private repository: its ADR-0022, amendment of 2026-09-02, and the page of that delivery, paraphrased; the date is the amendment's.

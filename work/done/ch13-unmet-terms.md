@@ -24,8 +24,17 @@
 
 **Done when.**
 
-* [ ] Both items explained in both editions, same meaning.
-* [ ] Every new source note gives the reader something to open (docs/04).
-* [ ] `make verify` green, the link check included.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both items explained in both editions, same meaning.
+* [x] Every new source note gives the reader something to open (docs/04).
+* [x] `make verify` green, the link check included.
+* [x] `make book` run, and both PDF paths given to the author.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Built as planned. The "Spec delta" item now says what one is in OpenSpec, then points to the two files titled "Spec Delta" that chapter 3's OpenSpec change wrote, then says what does that job in focus-kit. The "Specialized subagent" item says what one is, then what does that job. Both editions say the same; the Portuguese keeps "Delta de spec" and "Subagente especializado".
+* Sources checked: OpenSpec's glossary at v1.13.2, the version chapter 3 cites, defines a delta spec by its `ADDED`, `MODIFIED` and `REMOVED` sections and says archiving merges them into the main specs, so the reader gains a page to open: new note `[^openspec-glossary]`. The run's two files do use `## ADDED Requirements`. Claude Code's subagents page, "Create custom subagents", answered at a stable URL, and it shows a built-in planning subagent and a code reviewer example: new note `[^claude-code-subagents]`, in the form of the latest Claude Code notes ("Claude Code documentation", accessed 2026-09-29).
+* `[^spec-driven-run]` is defined again in chapter 13, since notes are per chapter; it points to the run's `specs` folder at the same pinned commit chapter 3 uses, not to the README, so the reader opens the two files.
+* Nothing dropped. No term, case, exercise, document or ADR changed besides the two chapters and docs/06.
+* Proof: `make verify` green, the link check included; `make book` built both editions, and the new lines and notes read as intended in both PDFs.
+* Finding F19 of the M3 review is settled.
