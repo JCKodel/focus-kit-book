@@ -89,7 +89,8 @@ When this milestone closes, a reader can organize code by feature with exception
 [x] clinic-orchestrator-tests  The clinic's client orchestrators become plain functions that receive their repositories, each with unit tests with fakes, by a recorded run
 [x] four-pieces-injection  Chapter 15 at the clinic's tested orchestrators: the client orchestrator's two files, and injection only where a test passes a second implementation, a fake
 [x] testing-and-agents     Chapter 16: testing each piece, and how the architecture helps an agent
-[ ] kit-milestone-review   Chapters 7, 8, 9 and 12 follow focus-kit bff8414: the review is the last line of every milestone, a delivery run with /propose and /apply that checks the paragraph clause by clause and reviews the code; each confirmed finding is a line in a new milestone <M>.1 right after, which ends with its own review and may open .2; /brainstorm and /analyze end the first milestone with it; chapter 12's quote of §8 and the clinic's "Milestone 2: what the review of milestone 1 found" follow; both editions
+[x] kit-milestone-review   focus-kit bff8414 reinstalled in the book, the clinic and the fork; each docs/05 says the review is the last line of every milestone and its findings open <M>.1; every open milestone of the three queues ends with its review line; the clinic's findings milestone becomes 1.1 and "the owner runs the day" milestone 2
+[ ] kit-milestone-review-chapters  Chapters 7, 8, 9 and 12 follow focus-kit bff8414: the review is the last line of every milestone, a delivery run with /propose and /apply that checks the paragraph clause by clause and reviews the code; each confirmed finding is a line in a new milestone <M>.1 right after, which ends with its own review and may open .2; /brainstorm and /analyze end the first milestone with it; chapter 12's quote of §8 follows, and chapters 12, 13, 14 and 15 name the clinic's milestones 1.1 and 2 as renamed by kit-milestone-review; both editions
 [x] m4-review              the review of M4 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against the product questions and M4's paragraph; each confirmed finding becomes a line in a new milestone M4.1; §8 gains the review's recipe, m3-review being the first occurrence
 [ ] m4-code-review         /code-review of the clinic's code from book-v1/closing-a-milestone to book-v1/four-pieces; each confirmed finding becomes a line in M4.1
 ```
@@ -114,6 +115,7 @@ When this milestone closes, every confirmed finding of the M4 review is settled:
 [ ] ch16-unit-test         Chapter 16: the definition of a unit test fits the route test, which drives the route, the use case, the repository and SQLite; both editions
 [ ] ch16-it-each           Chapter 16: the text describes the it.each over three refusal codes as it runs, and says what it.each does; both editions
 [ ] ch16-reading-count     Chapter 16: the key point's 20 of 95 files gets a baseline, or "small" is stated as a description, not a measure; both editions
+[ ] m4.1-review            the review of M4.1 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against the product questions and M4.1's paragraph; each confirmed finding becomes a line in a new milestone M4.2
 ```
 
 ## M5. Part IV, Git for agents and teams
@@ -125,6 +127,7 @@ When this milestone closes, a reader can choose between trunk, a branch per deli
 [ ] worktrees              Chapter 18: worktrees and parallel agents, and where parallelism really stops
 [ ] commit-as-review       Chapter 19: the agent stages, the person commits, and why
 [ ] github-for-teams       Chapter 20: pull requests as the team's review, issues, Projects boards, and why the wiki is not docs/ (the agent reads the repository, not the wiki)
+[ ] m5-review              the review of M5 as docs/05 §8 says: the Prologue to chapter 20 read end to end in both editions against the product questions and M5's paragraph; each confirmed finding becomes a line in a new milestone M5.1
 ```
 
 ## M6. Part V, Beyond code
@@ -137,6 +140,7 @@ When this milestone closes, a reader can adapt the process to a team's tools, in
 [ ] beyond-software        Chapter 23: analyses, proposals (Case B), codeless projects (Case A), client communication as a source of truth, data work (Ninjobs' database security rules as deliveries), and this book
 [ ] cost-and-where         Chapter 24: what coding agents cost, where they pay and where they do not, and how a team decides, with measured numbers; Ninjobs after the pivot as the case: tokens per delivery (Claude Code's session logs over the pages done and the commits, same days), why the page and the documents keep each session small, and why cache reads are counted apart
 [ ] adoption               Chapter 25: taking the method to a team and a company (Case B)
+[ ] m6-review              the review of M6 as docs/05 §8 says: the Prologue to chapter 25 read end to end in both editions against the product questions and M6's paragraph; each confirmed finding becomes a line in a new milestone M6.1
 ```
 
 ## M7. Appendices and launch
@@ -150,5 +154,6 @@ When this milestone closes, version 1 is tagged, the PDF and EPUB are on books.k
 [ ] workshop-map           Appendix: the parts mapped to workshop sessions, with timings and exercises
 [ ] exercise-answers       Appendix: answers to every exercise, linked to the guided project's tags
 [ ] cover                  make book puts each edition's cover on the PDF's first page (book/assets/cover-<edition>.pdf, A5) and as the EPUB's cover image (book/assets/cover-<edition>.png)
+[ ] m7-review              the review of M7 as docs/05 §8 says: the whole book and its appendices read end to end in both editions against the product questions and M7's paragraph, before v1 is tagged; each confirmed finding becomes a line in a new milestone M7.1
 [ ] launch                 v1 tag and Release; focus-kit's README repointed in its own repository (OD-4)
 ```

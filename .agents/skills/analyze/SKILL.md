@@ -33,7 +33,7 @@ host's question form when it has one:
   presented in their own words. The default is what the code already does,
   and you say what that is;
 * the first milestone: three to eight deliveries, or where to read them
-  from (issues, a TODO file, a roadmap).
+  from (issues, a TODO file, a roadmap), then its review.
 
 Everything else you decide from the code and mark as observed. Where the
 code contradicts itself, the document records an open question; the person

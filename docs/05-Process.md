@@ -59,7 +59,8 @@ the anonymized text (docs/00 OD-3).
 
 docs/06: one line per delivery, in order, under milestones. The line never
 leaves the queue; it changes mark: `[ ]` not defined, `[>]` defined and not
-built, `[x]` done. Edited by conversation in any session.
+built, `[x]` done. The last line of each milestone is its review (§8). Edited by
+conversation in any session.
 
 ## 5. This project
 
@@ -160,7 +161,10 @@ built, `[x]` done. Edited by conversation in any session.
   with the annotated tag `book-v1-<chapter-slug>` on the commit it quotes
   (a hyphen, since git refuses `book-v1/<slug>` beside the tag `book-v1`),
   with the same message and the same order as the guided project. The
-  agent stages there too and never commits, tags or pushes.
+  agent stages there too and never commits, tags or pushes. A delivery of
+  this book that is not a chapter may change the fork too (the first were
+  the kit's installs); the author commits it on `book` with the fork's
+  message style and no tag.
 * **Git:** trunk. The agent stages; it never commits or merges.
 
 ## 6. Commit
@@ -181,9 +185,19 @@ that happened.
 
 ## 8. Closing a milestone
 
-When a milestone closes, review the whole with what the host offers, and
-each confirmed finding becomes a line in the queue, not a fix in the middle
-of the next milestone.
+The last line of every milestone is its review, `<milestone>-review`, a
+delivery like the others: /propose writes its page, /apply runs it. It
+checks the milestone's paragraph clause by clause against what the
+deliveries built, and reviews the code with what the host offers. A clause
+no delivery answers is a finding. The review fixes nothing; the person
+decides each finding, confirmed or rejected, with a reason.
+
+Each confirmed finding becomes a `[ ]` line in a new milestone placed
+right after the reviewed one, numbered with `.1` (M3 is followed by M3.1),
+with its own paragraph, so the lines wait for /propose and nothing
+renumbers. That milestone ends with its own review, which may open `.2`.
+No confirmed finding, no new milestone. A finding is never a fix in the
+middle of the next milestone.
 
 For a milestone of chapters, the review is a fresh session that reads the
 book from its start to the end of the part, in both editions, and asks the
@@ -232,7 +246,8 @@ names the model, the last chapter and the paragraph.
    author approved them, and the request to write the confirmed findings
    into docs/06 as `## M<n>.1. What the review of M<n> found`, after the
    milestone and before the next, with a paragraph "When this milestone
-   closes, …" and one `[ ]` line per finding, and to stage it. A finding an
+   closes, …", one `[ ]` line per finding, the last one `m<n>.1-review`,
+   and to stage it. A finding an
    existing line covers adds no line; that line gains words only if the
    finding adds something. Flags as turn 1, with `--permission-mode
    acceptEdits --allowedTools "Read" "Edit" "Bash(git add
@@ -253,5 +268,5 @@ names the model, the last chapter and the paragraph.
    the lines).
 
 A milestone that also changed the guided project gets a code review of
-its own, `m<n>-code-review`, a separate delivery whose findings join the
-same `M<n>.1`.
+its own, `m<n>-code-review`, a separate delivery placed right after its
+review, whose findings join the same `M<n>.1`.

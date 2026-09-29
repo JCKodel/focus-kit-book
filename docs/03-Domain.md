@@ -24,8 +24,8 @@ A new concept enters here first, in both languages.
 | queue | fila | `docs/06` | Milestones and delivery lines, in order. |
 | mark | marca | `[ ]`, `[>]`, `[x]` | The state of a queue line; a line never leaves the queue. |
 | milestone | marco | `M<n>` | A group of deliveries with a paragraph saying what is true when it closes. |
-| milestone review | revisão de marco | docs/05 §8 | The look at a closed milestone as a whole: its paragraph checked on the product, then a review of everything it built with what the host offers; it fixes nothing. |
-| finding | achado | none | One problem a milestone review reports; the person confirms or rejects it, and a confirmed one becomes a queue line, never a fix in the middle of the next milestone. |
+| milestone review | revisão de marco | `<milestone>-review`, docs/05 §8 | The last delivery of every milestone: its paragraph checked clause by clause against what the deliveries built, then the code reviewed with what the host offers; it fixes nothing, and its confirmed findings open the milestone `<M>.1` right after. |
+| finding | achado | none | One problem a milestone review reports; the person confirms or rejects it with a reason, and a confirmed one becomes a `[ ]` line in the milestone `<M>.1`, never a fix in the middle of the next milestone. |
 | fresh session | sessão nova | none | A session with an empty context; it separates deciding from doing. |
 | headless | sem interface | `claude -p` | A session run from the terminal, one prompt per call: the host prints the answer and exits, with no one to approve anything; `--continue` sends the next message to the most recent conversation in that directory. The book's runs are headless so every turn is recorded; in an interactive session the reader keeps typing in the same session. |
 | permission mode | modo de permissão | `acceptEdits` | The host setting that decides what the agent does without asking you; what it does not allow, the host asks you to approve, or denies when no one can answer. |

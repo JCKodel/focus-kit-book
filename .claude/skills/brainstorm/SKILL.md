@@ -28,7 +28,8 @@ order. Move on when you could write the section yourself.
    screen is proven, publish policy. What does not exist yet is written as
    "created by the first delivery".
 6. **The first milestone** (docs/06): three to eight deliveries, one line
-   each, in order. The first ones are the skeleton the others stand on.
+   each, in order, then its review. The first ones are the skeleton the
+   others stand on.
 
 Ask only what you cannot decide with a sensible default. State the default
 and ask whether it holds: a person who cannot answer must be able to say
