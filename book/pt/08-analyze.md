@@ -165,6 +165,7 @@ Com essa resposta ele escreveu os documentos, e o `git status --short` mostrou:[
 
 Essas linhas guardam docs/00 a 06, o `AGENTS.md`, o `CLAUDE.md` com a linha `@AGENTS.md`, o `work/done/.gitkeep`, e um ADR cada em `docs/adr/` para as decisões que o código já incorpora (a reescrita em Next.js, SQLite por meio do Prisma, logins do GitHub separados para donos e contribuidores, checks pelo GitHub App, transações com log de auditoria, erros como valores, repositórios identificados por número, cobertura corporativa por domínio de e-mail) e para as escolhas da rodada, FOCUS e git.[^analyze-run]
 Os trechos abaixo são citados na tag do capítulo `book-v1-analyze`, como foram commitados; no repositório eles estão em inglês, e aqui vão traduzidos.
+As tags do capítulo do projeto brownfield levam hífen onde as do projeto guiado levam barra (capítulo 5) porque o fork já tem a tag `book-v1`, o upstream congelado, e o git se recusa a criar uma tag `book-v1/analyze` ao lado dela.
 
 O docs/01 é onde o agente escreveu o que deduziu.
 Na clínica, como o código é organizado foi uma escolha feita na conversa; aqui ela é lida da árvore.

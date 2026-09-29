@@ -164,6 +164,7 @@ With that answer it wrote the documents, and `git status --short` showed:[^analy
 
 These lines hold docs/00 to 06, `AGENTS.md`, `CLAUDE.md` holding the line `@AGENTS.md`, `work/done/.gitkeep`, and an ADR each in `docs/adr/` for the decisions the code already embodies (the rewrite in Next.js, SQLite through Prisma, separate GitHub sign-ins for owners and contributors, checks through the GitHub App, transactions with an audit log, errors as values, repositories identified by number, corporate coverage by email domain) and for the round's choices, FOCUS and git.[^analyze-run]
 The excerpts below are quoted at the chapter tag `book-v1-analyze`, as committed.
+The brownfield project's chapter tags take a hyphen where the guided project's take a slash (chapter 5) because the fork already holds the tag `book-v1`, the frozen upstream, and git refuses to create a tag `book-v1/analyze` beside it.
 
 docs/01 is where the agent wrote what it inferred.
 For the clinic, how the code is organized was a choice made in the conversation; here it is read from the tree.
