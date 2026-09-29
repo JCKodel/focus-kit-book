@@ -9,7 +9,7 @@ A free, bilingual book that teaches Spec-Driven Development, the focus-kit metho
 
 ## Non-negotiables
 - Nothing private enters the repository: private cases are only Case A and Case B, with no name, place, date of meeting, path or business detail; the disclosure scan is green (docs/03, ADR-0012).
-- Ninjobs appears only through its process artifacts and published numbers, paraphrased; never its infrastructure, credentials, users or commercial plans (docs/03).
+- Ninjobs appears only through its process artifacts and published numbers, paraphrased; never its infrastructure, credentials, users or commercial plans; the one exception, its database vendor's name, is in docs/03.
 - A change to one edition is a change to both, in the same delivery; English is the source (ADR-0004).
 - Every chapter opens with what the reader can do after it and is as long as proving that takes: no filler, nothing useful cut, no length target (ADR-0015).
 - Every artifact shown is real and every number says where it comes from; a source note only where the reader gains something to open, or a case's count to repeat (docs/04).

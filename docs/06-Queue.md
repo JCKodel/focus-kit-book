@@ -49,7 +49,8 @@ When this milestone closes, a reader can install the kit, document a new or an e
 [x] clinic-milestone-1     the guided project's milestone 1 built line by line with /propose and /apply, each page and staged change reviewed and committed by the author, recorded; no chapter
 [x] closing-a-milestone    Chapter 12: the whole-milestone review of the clinic's milestone 1 with /code-review, findings become queue lines; Ninjobs' milestone review as the counter-example
 [x] useful-notes           a source note only where the reader gains something to open: notes on a commit or on focus-kit's files leave (the sentence names the file), a private case keeps one note per chapter saying how its numbers were counted; a source cited several times in a chapter prints one note in the PDF and the EPUB, not one per mention (191 notes over 13 chapters); notes smaller and in italic, links upright; parity checks note keys; docs/04, docs/03, docs/01 and AGENTS.md say the new rule; both editions
-[ ] the-governor           Chapter 13: which concrete error would it have caught, and what the process does not have
+[x] the-governor           Chapter 13: which concrete error would it have caught, and what the process does not have
+[ ] m3-review              the review of M3 as docs/05 §8 says: Part II read end to end in both editions against the product questions; each confirmed finding becomes a queue line
 ```
 
 ## M4. Part III, FOCUS architecture

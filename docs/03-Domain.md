@@ -31,7 +31,7 @@ A new concept enters here first, in both languages.
 | proof | prova | `work/done/<slug>-<step>.png` | Evidence that the result works, failures included. |
 | slot | slot | `docs/05 §5` | A project-specific fact the commands read. |
 | open decision | decisão em aberto | `OD-<n>` | A decision listed in docs/00 that nobody closes alone, so an agent never settles it by assumption. |
-| governor | regulador | none | The question every addition must answer: which concrete error would it have caught? |
+| governor | regulador | none | The question every addition to the process must answer, and every step already in it again: which concrete error would it have caught? The answer names an error that happened; a step with none leaves. |
 | context window | janela de contexto | none | Everything the model sees in one call. |
 | token | token | none | The unit of text a model reads and counts; a word is one token or a few. |
 | context rot | degradação de contexto | none | The loss of accuracy as the context grows. |
@@ -74,5 +74,5 @@ A new concept enters here first, in both languages.
 * A chapter opens with what the reader can do after it, in at most three sentences.
 * A chapter is as long as it needs to be to prove the value it opens with: no filler added, no useful content removed to fit a limit.
 * Case A and Case B are never named, dated to a meeting, located, or described by business detail.
-* Ninjobs is named, but only its process artifacts and published numbers appear, paraphrased; never its infrastructure, credentials, users or commercial plans.
+* Ninjobs is named, but only its process artifacts and published numbers appear, paraphrased; never its infrastructure, credentials, users or commercial plans. One exception, approved by the author in `the-governor`: the name of its database vendor, Supabase, where a story needs it; never its servers, projects, schema or configuration.
 * Every number in the book cites where it was measured.
