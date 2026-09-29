@@ -23,10 +23,10 @@ A leaner OpenSpec would not have helped: the cost was the number of places, not 
 On 2026-08-29 I restarted the project with a process small enough to hold in your head.[^ninjobs]
 
 * **One page per delivery.** What to build, and what stays out, fits on one page. If it does not fit, it is two deliveries.
-* **Deciding and doing in separate sessions.** `/propose` talks and writes the page; `/apply` builds it in a fresh session, with only the page and the documents.
+* **Deciding and doing in separate sessions.** `/propose` talks and writes the page; `/apply` builds it in a fresh session, with only the page and the documents: a context that grows loses accuracy ([chapter 2](02-how-agents-see.md)), so the build starts clean, from the written target, without the conversation that decided it.
 * **The documents hold the facts.** The commands only say which documents to read and what never to do.
-* **A queue**, one line per delivery. No formal spec, no archive, no change folder.
-* **The agent never commits.** It stages the work; the person reviews and commits.
+* **A queue**, one line per delivery. No formal spec, no archive, no change folder. The outline held each delivery's plan and its reasoning together, so reading the list meant reading everything; the queue keeps one line per delivery, and the page keeps the reasoning.
+* **The agent never commits.** It stages the work; the person reviews and commits. None of the 29 checks had ever caught an error in the product, so the check that looks at the product is the person's review of each commit.
 * **The governor.** Anything that wants to come back answers one question: which concrete error would it have caught?
 
 That process carried Ninjobs to its public opening on 2026-09-10.[^ninjobs]
@@ -51,4 +51,4 @@ Choose a stack by the project's value and by how well the agent knows it; chapte
 * The governor asks every addition which concrete error it would have caught.
 * Choose a stack the agent knows.
 
-[^ninjobs]: Ninjobs, a private repository, counted by the author over its history up to 2026-08-29, when its ADR-0022 dropped OpenSpec: days with a commit and commits from `git log`, changes from the OpenSpec archive, lines with `wc -l` over every file under `openspec/`. The screens and the table are the ones that ADR lists. The causes, the rejected alternative and the decision are the ADR's own, paraphrased. Its ADR-0026, dated 2026-09-21, gives the date of the public opening and the adoption of focus-kit.
+[^ninjobs]: Ninjobs, a private repository, counted by the author over its history up to 2026-08-29, when its ADR-0022 dropped OpenSpec: days with a commit and commits from `git log`, changes from the OpenSpec archive, lines with `wc -l` over every file under `openspec/`. The screens and the table are the ones that ADR lists. The causes, the rejected alternative and the decision are the ADR's own, paraphrased; the outline that held each plan's reasoning and the clean session with a written target come from the independent reviews that ADR cites, paraphrased too. Its ADR-0026, dated 2026-09-21, gives the date of the public opening and the adoption of focus-kit.
