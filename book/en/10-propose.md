@@ -248,7 +248,9 @@ Read it before `/apply`, and cover every hole by asking the agent, never by edit
 The cost decides when to read it.
 A hole found on the page costs one turn of conversation; a hole found after `/apply` costs another `/apply`, the most expensive command.
 In my own usage, as Claude Code's `/usage` reported it, `/apply` took 32% and `/propose` 16% over the last 24 hours, and 47% and 14% over the last 7 days.[^claude-usage]
-The figures are approximate and cover all my projects together, but the ratio is what matters: `/apply` costs from twice to more than three times what `/propose` does.
+Each figure is the command's share of all my Claude Code usage in that window, counted as the subscription counts usage against its limits; the rest, 52% and 39%, went to work outside the two commands.
+So the ratio compares the totals each command took in a window, not the cost of one run: `/apply` took from twice to more than three times what `/propose` took.
+That is where the usage goes, and why a hole is cheaper to find on the page.
 
 Ask the page these questions:
 

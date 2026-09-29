@@ -248,7 +248,9 @@ Leia-a antes do `/apply`, e cubra cada buraco pedindo ao agente, nunca editando 
 O custo decide quando lê-la.
 Um buraco achado na página custa um turno de conversa; um buraco achado depois do `/apply` custa outro `/apply`, o comando mais caro.
 No meu próprio uso, como o `/usage` do Claude Code o mostrou, o `/apply` levou 32% e o `/propose` 16% nas últimas 24 horas, e 47% e 14% nos últimos 7 dias.[^claude-usage]
-Os números são aproximados e cobrem todos os meus projetos juntos, mas a proporção é o que importa: o `/apply` custa de duas a mais de três vezes o que o `/propose` custa.
+Cada número é a fatia do comando em todo o meu uso do Claude Code naquela janela, contado como a assinatura conta o uso contra os seus limites; o resto, 52% e 39%, foi para trabalho fora dos dois comandos.
+Então a proporção compara os totais que cada comando levou numa janela, não o custo de uma execução: o `/apply` levou de duas a mais de três vezes o que o `/propose` levou.
+É para lá que o uso vai, e é por isso que um buraco sai mais barato achado na página.
 
 Faça estas perguntas à página:
 
