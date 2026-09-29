@@ -1,0 +1,27 @@
+[tool Bash] cd ../focus-kit-book && git status --short && grep -n "M4\|clinic-\|m4.1" docs/06-Queue.md | head -80
+[denied]
+[tool Read] ../focus-kit-book/docs/06-Queue.md
+[tool Read] docs/06-Queue.md
+[tool Edit] ../focus-kit-book/docs/06-Queue.md
+[tool Edit] ../focus-kit-book/docs/06-Queue.md
+[tool Bash] git -C ../focus-kit-book add docs/06-Queue.md
+[tool Bash] git -C ../focus-kit-book diff --cached; git -C ../focus-kit-book status --short
+I've added seven confirmed findings to the book's queue as five lines, plus one clause in M4.1's paragraph, and staged the file. Nothing is committed and nothing in the clinic changed.
+
+**One thing to check before you commit.** The staged diff also flips `m4-code-review` from `[ ]` to `[>]`. I didn't make that change: the file already had `[>]` when I first read it, so staging the whole file picked it up. It fits, since `work/m4-code-review.md` exists, but you should know it's in there. `git status --short` also shows `docs/05-Process.md` modified but not staged and `work/m4-code-review.md` untracked. Neither is mine, and I left both alone.
+
+**Where the lines went.** All five are in M4.1's block, after `ch16-reading-count` and just before `m4.1-review`. They're in the order they can be built:
+1. **`clinic-booking-submit`** (findings 1 and 6): submit publishes an update to the current state and passes the state it books with into `run`, so the `shown` ref goes away.
+2. **`clinic-hours-save`** (finding 2): save publishes an update, so an edit made just before Save is kept.
+3. **`clinic-hours-report`** (findings 3 and 7): the reports go through one `report` member of `HoursSection` and one tested professionals event, so `forward`, the four callbacks and the copied comment go away.
+4. **`clinic-update-type`** (finding 5): the update type and the starter shape are each declared once, with their first occurrence named.
+5. **`clinic-event-shapes`** (finding 4): docs/01 names every shape an event with a call takes. It comes last because it documents the shapes the earlier lines leave behind.
+
+**The paragraph clause** comes just before the one about the Portuguese edition. It says the clinic's orchestrators publish every in-flight state as an update of the current state, send the weekly hours reports through one tested event, declare each repeated type once, and use only the event shapes docs/01 describes.
+
+**Already queued:**
+- **Clinic milestone 1.1:** only findings 3 and 7 are covered by a line there. `orchestrator-tests` promised that every event moves out and gets a test, and it left `forward` and the `saving` report in the hook. So `clinic-hours-report` names that line and says what it left.
+- **Finding 5:** it falls under milestone 1.1's paragraph clause, "the code repeated across features has one shared copy", but no line there covers it. `route-errors` and `minutes-of` deal with other code, so its line names no 1.1 line.
+- **M4.1:** none of the existing lines already covers a finding, so I added no words to them.
+
+**Decision for you:** `ch15-submit-event` asks chapter 15 to explain what `shown` and `latest` hold, but `clinic-booking-submit` removes `shown`. It doesn't cover the finding, so I didn't touch it. Once the clinic line is done, that line's wording should probably follow the code.

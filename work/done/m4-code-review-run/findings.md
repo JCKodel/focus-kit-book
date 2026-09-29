@@ -1,0 +1,102 @@
+# Findings
+
+The nine findings of `/code-review high c54d011...e6653b5`, turn 1, as the run reported them: the JSON block of the response, one block per finding, byte for byte.
+
+## Finding 1
+
+```json
+  {
+    "file": "src/features/appointments/useBooking.ts",
+    "line": 43,
+    "summary": "The in-flight submit state is now a whole state built from `shown.current`, a ref written during render, and published with a non-functional `setState(started.state)`. Before, it was merged with functional updates, so any update not yet rendered is overwritten.",
+    "failure_scenario": "A state update is queued but not yet rendered when submit runs, for example an onChange and a submit in the same tick, or a concurrent render React discards after it has already set `shown.current`. `submitStarted(snapshot)` then replaces the state with the older snapshot and the queued edit is lost. The delivery's own rationale says a whole state computed at the start of an event would erase such edits."
+  }
+```
+
+## Finding 2
+
+```json
+  {
+    "file": "src/features/weeklyHours/useWeeklyHours.ts",
+    "line": 71,
+    "summary": "`save` now publishes `saveStarted(state).state`, a whole state from the render closure, in place of the old functional updates `(s) => ({ ...s, unreachable, refusal })`.",
+    "failure_scenario": "A `typeTime`, `addPeriod` or `removePeriod` update is queued but not yet rendered when Save fires, for example a time input committing on blur in the same tick as the click. `setState(started.state)` replaces it with the stale `periods`, and the edit disappears from the editor."
+  }
+```
+
+## Finding 3
+
+```json
+  {
+    "file": "src/features/weeklyHours/useWeeklyHours.ts",
+    "line": 28,
+    "summary": "The mapping from report to section (`forward`) and the `saving` report stay in the hook with no test. The delivery claims every Behaviour line is covered, including 'A save that is sent reports `saving`'.",
+    "failure_scenario": "Break `forward`, for example by sending `failed` to `section.refused`, or drop `sectionRef.current.saving()`. All 85 new Vitest cases still pass, so the professionals section can stay busy or show the wrong message without any unit test failing."
+  }
+```
+
+## Finding 4
+
+```json
+  {
+    "file": "docs/01-Architecture.md",
+    "line": 69,
+    "summary": "docs/01 now says every event with a call has a `<event>Started` and resolves to an update `(current) => State`. The code has three undocumented exceptions: booking resolves to `BookingOutcome`, weekly hours to `{ update, report }` with `{ state, send }` starters, and remembered has sync `initialRememberedState`/`reread` with no Started.",
+    "failure_scenario": "Breaks the AGENTS.md rule 'Documents are living: a delivery that changes behaviour updates the document that owns it'. The exceptions are written only in work/done, so the next person who follows docs/01 for an orchestrator gets a shape that the two most complex hooks contradict."
+  }
+```
+
+## Finding 5
+
+```json
+  {
+    "file": "src/features/signIn/ownerEvents.ts",
+    "line": 24,
+    "summary": "`type Update = (current: X) => X` is declared again per file (ownerEvents.ts, professionalsEvents.ts, and inline in clinic, health, cancel, remembered and weeklyHours). The `{ state, send }` starter shape is also written twice (`submitStarted` in booking, `saveStarted` in weekly hours). Neither is abstracted, and the delivery does not name a first occurrence.",
+    "failure_scenario": "Breaks AGENTS.md: 'Abstraction on the second concrete occurrence, and the delivery says which was the first.' It also runs against the milestone 2 goal in docs/06 that 'the code repeated across features has one shared copy'. Eight files now repeat the same update-type pattern."
+  }
+```
+
+## Finding 6
+
+```json
+  {
+    "file": "src/features/appointments/useBooking.ts",
+    "line": 35,
+    "summary": "The hook now has two sources of truth for the current state: `retry` reads the `state` closure, while `run` for submit reads the `shown` ref. The ref exists only so `submit` can keep an empty dependency list.",
+    "failure_scenario": "It is harder to reason about which snapshot a booking sends, and writing a ref during render goes against React's rules. A simpler form is `submit = useCallback(() => run({ next: \"submit\" }, state), [state, run])`, passing the snapshot into `run`, which drops `shown` entirely."
+  }
+```
+
+## Finding 7
+
+```json
+  {
+    "file": "src/features/weeklyHours/weeklyHoursEvents.ts",
+    "line": 38,
+    "summary": "`WeeklyHoursReport` plus the hook's `forward` translation layer duplicates the `HoursSection` callback interface. The comment 'What the editor reports to the professionals section...' is copied word for word from useWeeklyHours.ts.",
+    "failure_scenario": "A new report kind now has to be added in three places: the `WeeklyHoursReport` union, `forward`'s if-chain, and `HoursSection` plus the `hours` memo in useProfessionals. A single `report(r: WeeklyHoursReport)` member on `HoursSection`, handled by one professionals event, would remove `forward` and the four separate callbacks."
+  }
+```
+
+## Finding 8
+
+```json
+  {
+    "file": "src/features/professionals/professionalsEvents.ts",
+    "line": 235,
+    "summary": "`hoursRefused` is async for every code, although only `ProfessionalNotFound` needs a call. `NotSignedIn` and other refusals now land a microtask late through `.then(setState)`, and nothing handles a rejection.",
+    "failure_scenario": "The hours editor reports `refused(\"NotSignedIn\")` and then the section's `close` or `saved` runs in the same tick. The delayed `{ busy: false, error }` update lands after them, where before it landed before them. The fix belongs in the event's shape: return a sync update for plain refusals and keep async only for `reloadGone`."
+  }
+```
+
+## Finding 9
+
+```json
+  {
+    "file": "src/features/appointments/bookingEvents.test.ts",
+    "line": 376,
+    "summary": "The test cited as 'the proof that the update is applied to the current state' only calls `loadSlotsStarted`/`loadSlots` directly. It never goes through the hook's `run`, where the submit in-flight state is a whole-state overwrite.",
+    "failure_scenario": "A regression in `useBooking.run`, such as `setState(answer.update(snapshot))` or the whole-state `setState(started.state)`, erases a name typed while the booking is in flight, and this test still passes because it builds the states by hand."
+  }
+```

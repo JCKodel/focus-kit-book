@@ -270,3 +270,49 @@ names the model, the last chapter and the paragraph.
 A milestone that also changed the guided project gets a code review of
 its own, `m<n>-code-review`, a separate delivery placed right after its
 review, whose findings join the same `M<n>.1`.
+
+**The recipe of a milestone's code review** (the first is
+`closing-a-milestone`, chapter 12's review of the clinic's milestone 1;
+the second `m4-code-review`, which wrote it down). The delivery is
+`m<n>-code-review`; its page names the model and the range.
+
+1. The range: from the previous milestone's last chapter tag to this
+   milestone's last chapter tag, three dots, `<from>...<to>`, the form of
+   Claude Code's documentation. The README says how many commits it
+   holds, names any commit of the milestone past the last tag, and says
+   whether it is reviewed and why.
+2. Before the run: the book as step 1 of the recipe above; the guided
+   project on `main`, clean, equal to `origin/main`, with nothing in
+   `src/` past the range's end.
+3. Turn 1, the review, headless, detached, from the guided project's
+   root: `CLAUDE_CODE_DISABLE_AUTO_MEMORY=1 nohup claude -p "/code-review
+   high <range>" --model <model> --setting-sources project
+   --strict-mcp-config --permission-mode default --permission-prompts none
+   --output-format stream-json --verbose --allowedTools "Bash(git diff *)"
+   "Bash(git log *)" "Bash(git show *)" "Bash(git status *)" "Bash(npm *)"
+   "Bash(npx *)"`. The review edits nothing.
+4. The book's `/apply` session checks each finding against the guided
+   project's code and documents and gives its assessment; the author
+   decides each one, `<n>: confirmed|rejected, <reason>`, in one sentence,
+   and approves the request word for word before it is sent. Nothing is
+   fixed.
+5. Turn 2, with `--resume <turn 1's session id>`, from the guided
+   project's root, flags as turn 1 plus `--add-dir ../focus-kit-book`,
+   with `--permission-mode acceptEdits --allowedTools "Read" "Edit"
+   "Bash(git -C ../focus-kit-book add docs/06-Queue.md)" "Bash(git -C
+   ../focus-kit-book diff *)" "Bash(git -C ../focus-kit-book status *)"`:
+   the decisions, word for word, and the request to write each confirmed
+   finding as `[ ] clinic-<slug>  <what the code does afterwards>, by a
+   recorded run` in the book's `M<n>.1`, before `m<n>.1-review`, with one
+   clause in its paragraph, and to stage it. If the milestone review
+   found nothing and `M<n>.1` does not exist, turn 2 creates it as step 6
+   above says. A finding a line of the guided project's own queue covers
+   still gets its line, which names that line and what the finding adds;
+   the guided project's queue is never touched. Corrections are further
+   turns to the same session, recorded.
+6. If `--add-dir` does not allow turn 2, or the session cannot or will not
+   write the lines, a fresh interactive session in the book gets the same
+   request, recorded as a turn. "Already queued" in either queue, denied
+   calls, notes of the host (in both repositories' memory folders) and the
+   record follow steps 6 to 9 above; the README adds the range, the target
+   form and the `--add-dir` check.
