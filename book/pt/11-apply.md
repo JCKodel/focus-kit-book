@@ -255,7 +255,8 @@ Peça ao agente cada correção, na mesma sessão, nunca à mão ([capítulo 6](
 A mesma sessão guarda o raciocínio da construção: ela sabe por que fez cada escolha, o que uma sessão nova teria que adivinhar.
 
 Como no capítulo 10, um segundo agente leu a mudança no stage contra a página e o kit, o que roda o `/apply` deste livro, e listou o que achou; eu conferi cada item e aceitei todos.
-Enviei a lista para a sessão da execução com `--continue`, como estava; o original está em inglês, e aqui vai traduzido:[^apply-run]
+Enviei a lista para a sessão da execução com `--continue`, o jeito sem interface de digitar na mesma sessão ([capítulo 7](07-brainstorm.md)); em uma sessão interativa, você a envia na sessão onde o `/apply` rodou.
+Eu a enviei como estava; o original está em inglês, e aqui vai traduzido:[^apply-run]
 
 ```markdown
 1. **Um pacote que a página não nomeou.** O kit diz para não acrescentar dependência que a página não nomeou. O agente acrescentou `@hono/node-server` sem parar para perguntar; só o registrou no docs/01.

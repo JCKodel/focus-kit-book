@@ -84,7 +84,8 @@ O [capítulo 6](06-the-documents.md) deu a regra: você é o cérebro da operaç
 Aqui isso quer dizer duas coisas: você nunca toma um achado por verdadeiro sem olhar o código, e nunca descarta um sem dizer por quê.
 
 O agente que roda o `/apply` deste livro leu cada achado contra o código e os documentos da clínica e me deu a sua avaliação; eu a conferi e decidi cada um.
-Enviei as decisões para a sessão da revisão com `--continue`, em um pedido que também pedia as linhas, palavra por palavra; o original está em inglês, e aqui vai traduzido:[^closing-a-milestone-run]
+Enviei as decisões para a sessão da revisão com `--continue`, o jeito sem interface de digitar na mesma sessão ([capítulo 7](07-brainstorm.md)); em uma sessão interativa, você as digita na sessão da revisão.
+Eu as enviei em um pedido que também pedia as linhas, palavra por palavra; o original está em inglês, e aqui vai traduzido:[^closing-a-milestone-run]
 
 ```
 As minhas decisões sobre os dez achados:

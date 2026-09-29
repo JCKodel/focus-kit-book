@@ -85,6 +85,9 @@ Answer "your call".
 ```
 
 Open your host at the root of your repository, in a fresh session, and type `/brainstorm`; I ran it headless in Claude Code and answered each round with the brief's sections for the subjects asked, word for word, or "your call".[^brainstorm-run]
+A headless run is Claude Code run from the terminal with `claude -p`, one prompt per call: it prints the answer and exits, with no one there to approve anything.[^claude-code-headless]
+Each answer to a round was a new call with `--continue`, which sends it to the most recent conversation in that directory.[^claude-code-headless]
+The book's runs are headless so every turn is recorded; in an interactive session you just type your answer in the same session.
 It asked in rounds of one or two subjects.
 In the round about how the clinic is built, it wrote:[^brainstorm-run]
 
@@ -288,3 +291,4 @@ Pick a stack for a project of your own by the three questions of this chapter, a
 
 [^octoverse]: GitHub, "Octoverse: A new developer joins GitHub every second as AI leads TypeScript to #1", 2025, the latest report on 2026-09-28: monthly contributors on GitHub, August 2025. <https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/>
 [^brainstorm-run]: This book's `/brainstorm` run on the guided project, 2026-09-28, with Claude Code 2.1.283 and the model `claude-opus-5-5`, from `book-v1/install-and-hosts` to the chapter tag `book-v1/brainstorm`: the brief, the commands, every turn's output, each question and answer, and the fix. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/brainstorm-run/README.md>
+[^claude-code-headless]: Anthropic, "Run Claude Code programmatically", Claude Code documentation, accessed 2026-09-29. <https://code.claude.com/docs/en/headless>

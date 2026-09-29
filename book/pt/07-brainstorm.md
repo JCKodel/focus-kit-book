@@ -86,6 +86,9 @@ Responda "your call".
 ```
 
 Abra o seu host na raiz do seu repositório, em uma sessão nova, e digite `/brainstorm`; eu o rodei sem interface no Claude Code e respondi a cada rodada com as seções do briefing para os assuntos perguntados, palavra por palavra, ou "your call".[^brainstorm-run]
+Uma execução sem interface é o Claude Code rodado no terminal com `claude -p`, um prompt por chamada: ele imprime a resposta e sai, sem ninguém ali para aprovar nada.[^claude-code-headless]
+Cada resposta a uma rodada foi uma nova chamada com `--continue`, que a envia para a conversa mais recente daquele diretório.[^claude-code-headless]
+As execuções do livro são sem interface para que cada turno fique registrado; em uma sessão interativa, você só digita a sua resposta na mesma sessão.
 Ele perguntou em rodadas de um ou dois assuntos.
 Na rodada sobre como a clínica é construída, ele escreveu o que segue; o original está em inglês, e aqui vai traduzido:[^brainstorm-run]
 
@@ -293,3 +296,4 @@ Escolha uma stack para um projeto seu pelas três perguntas deste capítulo, e d
 
 [^octoverse]: GitHub, "Octoverse: A new developer joins GitHub every second as AI leads TypeScript to #1", 2025, o relatório mais recente em 2026-09-28: contribuidores mensais no GitHub, agosto de 2025. <https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/>
 [^brainstorm-run]: A execução do `/brainstorm` deste livro no projeto guiado, 2026-09-28, com o Claude Code 2.1.283 e o modelo `claude-opus-5-5`, de `book-v1/install-and-hosts` até a tag do capítulo `book-v1/brainstorm`: o briefing, os comandos, a saída de cada turno, cada pergunta e resposta, e a correção. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/brainstorm-run/README.md>
+[^claude-code-headless]: Anthropic, "Run Claude Code programmatically", documentação do Claude Code, acesso em 2026-09-29. <https://code.claude.com/docs/en/headless>

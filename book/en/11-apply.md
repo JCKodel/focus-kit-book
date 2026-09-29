@@ -249,7 +249,8 @@ Ask the agent for each correction, in the same session, never by hand ([chapter 
 The same session keeps the reasoning of the build: it knows why it made each choice, which a fresh session would have to guess.
 
 As in chapter 10, a second agent read the staged change against the page and the kit, the one running this book's `/apply`, and listed what it found; I checked each item and took all of them.
-I sent the list to the run's session with `--continue`, as it was:[^apply-run]
+I sent the list to the run's session with `--continue`, the headless way of typing in the same session ([chapter 7](07-brainstorm.md)); interactively, you send it in the session where `/apply` ran.
+I sent it as it was:[^apply-run]
 
 ```markdown
 1. **A package the page didn't name.** The kit says to add no dependency the page did not name. The agent added `@hono/node-server` without stopping to ask; it only recorded it in docs/01.

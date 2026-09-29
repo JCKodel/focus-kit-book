@@ -84,7 +84,8 @@ A finding reads like a fact, and some are not.
 Here that means two things: you never take a finding as true without looking at the code, and you never drop one without saying why.
 
 The agent running this book's `/apply` read each finding against the clinic's code and documents and gave me its assessment; I checked it and decided each one.
-I sent the decisions to the review's session with `--continue`, in one request that also asked for the lines, word for word:[^closing-a-milestone-run]
+I sent the decisions to the review's session with `--continue`, the headless way of typing in the same session ([chapter 7](07-brainstorm.md)); interactively, you type them in the review's session.
+I sent them in one request that also asked for the lines, word for word:[^closing-a-milestone-run]
 
 ```
 My decisions on the ten findings:
