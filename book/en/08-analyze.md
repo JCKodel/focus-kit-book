@@ -301,7 +301,8 @@ The second part added the Open questions section quoted above, with the other co
 The documents read well before the request, and only opening the file behind the statement showed that it was wrong.
 
 The review found a second gap, of input rather than of fact.
-In `acceptEdits`, the least permission the command needs, the host denied the agent both `gh` and the fetch of the issue pages, so it wrote the queue from the issue numbers alone:[^analyze-run]
+`acceptEdits` is a Claude Code permission mode, the setting that decides what the agent does without asking you: in it the agent reads, edits files and runs common file commands, and anything else, such as `gh` or opening a web page, needs your approval.[^claude-code-permission-modes]
+It is the least permission the command needs, and the run used it headless, with no one to answer, so every approval it asked for was denied: the host refused the agent both `gh` and the fetch of the issue pages, and it wrote the queue from the issue numbers alone:[^analyze-run]
 
 ````markdown
 # Queue
@@ -320,7 +321,8 @@ the issue only.
 ```
 ````
 
-The fix allowed one command, `gh issue view`, for one more turn in the same session, with this request:[^analyze-run]
+In an interactive session you would see that question and approve `gh issue view` there, and the gap would not reach you unless you denied it.
+Headless, the fix was that approval given in advance: it allowed one command, `gh issue view`, for one more turn in the same session, with this request:[^analyze-run]
 
 ```markdown
 Read the three issues with gh issue view and rewrite the milestone and its lines from them.
@@ -357,3 +359,4 @@ Which open questions did it record, and which of them would you have missed?
 [^strangler-fig]: Martin Fowler, "Strangler Fig", 2024. <https://martinfowler.com/bliki/StranglerFigApplication.html>
 [^brownfield-research]: This book's research delivery for the brownfield project, 2026-09-25: the candidates, how each was measured, the choice, and CLAHub's TypeScript code lines (tests excluded) and passing tests at upstream commit 9d1e666e1d30f271aea9640393229a7cbfbd1b62. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/brownfield-research.md>
 [^analyze-run]: This book's `/analyze` run on the brownfield project, 2026-09-28, with Claude Code 2.1.283 and the model `claude-opus-5-5`, from `book-v1` to the chapter tag `book-v1-analyze`: the install of the kit, the brief, the commands, every turn's output, the round and its answer, and the corrections. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/analyze-run/README.md>
+[^claude-code-permission-modes]: Anthropic, "Choose a permission mode", Claude Code documentation, accessed 2026-09-29. <https://code.claude.com/docs/en/permission-modes>

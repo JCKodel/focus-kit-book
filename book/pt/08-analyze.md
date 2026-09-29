@@ -304,7 +304,8 @@ A segunda parte acrescentou a seção de questões em aberto citada acima, com a
 Os documentos se liam bem antes do pedido, e só abrir o arquivo por trás da afirmação mostrou que ela estava errada.
 
 A revisão achou uma segunda lacuna, de insumo e não de fato.
-Em `acceptEdits`, a menor permissão de que o comando precisa, o host negou ao agente tanto o `gh` quanto a leitura das páginas das issues, então ele escreveu a fila só com os números das issues; o original está em inglês, e aqui vai traduzido:[^analyze-run]
+`acceptEdits` é um modo de permissão do Claude Code, a configuração que decide o que o agente faz sem perguntar a você: nele o agente lê, edita arquivos e roda comandos comuns de arquivo, e todo o resto, como o `gh` ou abrir uma página da web, precisa da sua aprovação.[^claude-code-permission-modes]
+É a menor permissão de que o comando precisa, e a execução o usou sem interface, sem ninguém para responder, então toda aprovação que o agente pediu foi negada: o host negou a ele tanto o `gh` quanto a leitura das páginas das issues, e ele escreveu a fila só com os números das issues; o original está em inglês, e aqui vai traduzido:[^analyze-run]
 
 ````markdown
 # Fila
@@ -323,7 +324,8 @@ só a issue.
 ```
 ````
 
-A correção liberou um comando, `gh issue view`, por mais um turno na mesma sessão, com este pedido; o original está em inglês, e aqui vai traduzido:[^analyze-run]
+Numa sessão interativa você veria essa pergunta e aprovaria o `gh issue view` ali mesmo, e a lacuna só chegaria até você se você a negasse.
+Sem interface, a correção foi essa aprovação dada de antemão: liberou um comando, `gh issue view`, por mais um turno na mesma sessão, com este pedido; o original está em inglês, e aqui vai traduzido:[^analyze-run]
 
 ```markdown
 Leia as três issues com gh issue view e reescreva o marco e as linhas dele a partir delas.
@@ -360,3 +362,4 @@ Quais questões em aberto ele registrou, e quais delas você teria deixado passa
 [^strangler-fig]: Martin Fowler, "Strangler Fig", 2024. <https://martinfowler.com/bliki/StranglerFigApplication.html>
 [^brownfield-research]: A entrega de pesquisa deste livro para o projeto brownfield, 2026-09-25: os candidatos, como cada um foi medido, a escolha, e as linhas de código TypeScript (sem os testes) e os testes que passam do CLAHub no commit do upstream 9d1e666e1d30f271aea9640393229a7cbfbd1b62. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/brownfield-research.md>
 [^analyze-run]: A execução do `/analyze` deste livro no projeto brownfield, 2026-09-28, com o Claude Code 2.1.283 e o modelo `claude-opus-5-5`, de `book-v1` até a tag do capítulo `book-v1-analyze`: a instalação do kit, o briefing, os comandos, a saída de cada turno, a rodada e a sua resposta, e as correções. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/analyze-run/README.md>
+[^claude-code-permission-modes]: Anthropic, "Choose a permission mode", documentação do Claude Code, acesso em 2026-09-29. <https://code.claude.com/docs/en/permission-modes>

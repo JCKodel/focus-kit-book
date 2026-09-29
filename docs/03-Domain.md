@@ -27,6 +27,7 @@ A new concept enters here first, in both languages.
 | milestone review | revisão de marco | docs/05 §8 | The look at a closed milestone as a whole: its paragraph checked on the product, then a review of everything it built with what the host offers; it fixes nothing. |
 | finding | achado | none | One problem a milestone review reports; the person confirms or rejects it, and a confirmed one becomes a queue line, never a fix in the middle of the next milestone. |
 | fresh session | sessão nova | none | A session with an empty context; it separates deciding from doing. |
+| permission mode | modo de permissão | `acceptEdits` | The host setting that decides what the agent does without asking you; what it does not allow, the host asks you to approve, or denies when no one can answer. |
 | verify | verificação | `make verify` | The command that must be green before anything is declared done. |
 | proof | prova | `work/done/<slug>-<step>.png` | Evidence that the result works, failures included. |
 | slot | slot | `docs/05 §5` | A project-specific fact the commands read. |
