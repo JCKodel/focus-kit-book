@@ -105,7 +105,7 @@ When this milestone closes, every confirmed finding of the M4 review is settled:
 [>] ch14-feature-boundary  Chapter 14: says what makes one feature, and why the appointments slice holds cancelling while weekly hours and professionals have slices of their own; both editions
 [>] ch14-refusal-io        Chapter 14: the definition of a refusal and its key point fit SlotTaken, the refusal the repository makes when the unique index refuses an insert; both editions
 [>] ch14-catch-all         Chapter 14: says that query catches every thrown value, so a bug inside it becomes DatabaseFailed, and how that squares with "Error: a bug, thrown and never caught"; both editions
-[ ] pt-health-slice        Portuguese edition: chapter 14 calls the server check "fatia de health", as chapter 10 does, not "fatia de saúde", which reads as a slice for medical data
+[>] pt-health-slice        Portuguese edition: chapter 14 calls the server check "fatia de health", as chapter 10 does, not "fatia de saúde", which reads as a slice for medical data
 [ ] ch15-event-delivery    Chapter 15: names the delivery that added the event functions after chapter 12, and tells a reader following the clinic to queue and build it, so their code can match book-v1/four-pieces; both editions
 [ ] ch15-route-io          Chapters 6, 14 and 15: the route that reads the request body squares with "the only place an infra exception becomes a Result" and "only the repository does I/O"; both editions
 [ ] ch15-submit-event      Chapter 15: says the hook's submitEvent is bookingEvents.ts's submit imported under another name, and what shown and latest hold; both editions
