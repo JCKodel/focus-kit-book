@@ -58,25 +58,25 @@ When this milestone closes, a reader can install the kit, document a new or an e
 When this milestone closes, every confirmed finding of the M3 review is settled: from the Prologue to chapter 13, each chapter explains or points to every term, file and tool it relies on, keeps the promise of its opening, says each thing once, and means the same in both editions; and a reader following the guided project is told to build the rest of milestone 1 with `/propose` and `/apply`, with a tag to compare it against.
 
 ```
-[ ] ch1-openspec-pointer   Chapter 1: the Ninjobs count of OpenSpec changes and lines of spec says what they are, or points to chapter 3, where OpenSpec is explained, not only to chapter 4; both editions
-[ ] ch3-docs-pointer       Chapter 3: the edits to docs/03 and docs/06 say what those documents are, or point to chapter 6; both editions
+[>] ch1-openspec-pointer   Chapter 1: the Ninjobs count of OpenSpec changes and lines of spec says what they are, or points to chapter 3, where OpenSpec is explained, not only to chapter 4; both editions
+[>] ch3-docs-pointer       Chapter 3: the edits to docs/03 and docs/06 say what those documents are, or point to chapter 6; both editions
 [ ] ch4-rule-failures      Chapter 4: every rule of focus-kit names the failure it answers, as the opening promises; "A queue" and "The agent never commits" have none today; both editions
-[ ] ch4-adr-docs05         Chapter 4: ADRs and docs/05 are said in a few words where they appear, with a pointer to chapter 6; both editions
-[ ] ch5-prompt-file-en     Chapter 5: the English gains the sentence that explains the prompt file's last line, which today exists only in the Portuguese
+[>] ch4-adr-docs05         Chapter 4: ADRs and docs/05 are said in a few words where they appear, with a pointer to chapter 6; both editions
+[>] ch5-prompt-file-en     Chapter 5: the English gains the sentence that explains the prompt file's last line, which today exists only in the Portuguese
 [ ] ch6-placing-a-fact     Chapter 6: the reader places one new fact in the document that owns it, in the text and in an exercise, as the opening promises; both editions
-[ ] ch6-section-reference  Chapter 6: the docs/04 description names "Living documents" instead of "section 6", which reads as docs/04's own section; both editions
-[ ] pt-stage-term          Portuguese edition: one term for git's stage from chapter 4 on, where chapters 4 to 6 say "prepara" and chapter 7 on says "coloca em stage"
+[>] ch6-section-reference  Chapter 6: the docs/04 description names "Living documents" instead of "section 6", which reads as docs/04's own section; both editions
+[>] pt-stage-term          Portuguese edition: one term for git's stage from chapter 4 on, where chapters 4 to 6 say "prepara" and chapter 7 on says "coloca em stage"
 [ ] ch8-tag-form           Chapter 8: says why the brownfield project's tag is book-v1-analyze and not the book-v1/<chapter-slug> of chapter 5; both editions
 [ ] ch8-accept-edits       Chapter 8: says what acceptEdits is and whether a reader in an interactive session meets the same gap; both editions
-[ ] ch9-what-apply-reads   Chapter 9: the sentence whose "It" has no clear antecedent says plainly what tells /apply the page exists; both editions
-[ ] ch10-unit-of-work      Chapter 10: "One unit of work" points to chapter 9 instead of repeating its paragraph on trunk and the waiting page; both editions
+[>] ch9-what-apply-reads   Chapter 9: the sentence whose "It" has no clear antecedent says plainly what tells /apply the page exists; both editions
+[>] ch10-unit-of-work      Chapter 10: "One unit of work" points to chapter 9 instead of repeating its paragraph on trunk and the waiting page; both editions
 [ ] ch10-usage-share       Chapter 10: the /usage percentages say what they are a share of, so the ratio drawn from them can be judged; both editions
 [ ] headless-runs          Chapters 10 to 12: say the book's runs are headless, what --continue does, and that in an interactive session the reader keeps talking in the same session; both editions
 [ ] ch11-unticked-item     Chapter 11: says why the skeleton page was committed with its npm run dev item unticked, against its own question on Done when; both editions
 [ ] ch11-commit-command    Chapter 11: shows the command that commits the staged change with the suggested message; chapter 17 teaches the rest; both editions
 [ ] milestone-1-bridge     Between chapters 11 and 12: the reader is told to build the rest of the clinic's milestone 1 with /propose and /apply, with a tag to compare against, so M3's paragraph has somewhere to point; both editions
-[ ] ch12-numbered-findings Chapter 12: the English list of the ten summaries is numbered, as the decisions and the Portuguese already are
-[ ] ch13-unmet-terms       Chapter 13: "spec delta" and "specialized subagent" are explained where they appear, since no earlier chapter meets them; both editions
+[>] ch12-numbered-findings Chapter 12: the English list of the ten summaries is numbered, as the decisions and the Portuguese already are
+[>] ch13-unmet-terms       Chapter 13: "spec delta" and "specialized subagent" are explained where they appear, since no earlier chapter meets them; both editions
 ```
 
 ## M4. Part III, FOCUS architecture
