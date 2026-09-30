@@ -1,0 +1,90 @@
+# worktrees
+
+**Objective.** After chapter 18 the reader can build two deliveries at the same time in two worktrees, merge them with `--no-ff`, resolve the conflict where they meet and catch a conflict marker before it is committed, and say where parallel agents stop paying: shared files, shared resources, disk, and the one person who reviews and merges.
+
+**Behaviour.**
+
+* The reader can say what a worktree is (an extra working folder of the same repository, on its own branch), create, list and remove one (`git worktree add`, `list`, `remove`), and say why it beats a second clone or switching branches in one folder (one history, no stash, each agent its own folder).
+* The reader can follow the clinic's parallel run: the switch to a worktree per delivery (`git-worktrees`, ADR-0003 amended), two `/propose` sessions started in the same second, each creating its worktree and page, two `/apply` sessions each in its worktree, and the author's two `--no-ff` merges; and read the resulting graph.
+* The reader can say what a conflict is, read its markers in a real one (the two adjacent queue lines of the clinic's docs/06), resolve it, say why docs/01, changed on both branches, merged alone, and leave a merge with `git merge --abort`.
+* The reader can say that git commits conflict markers without a word if the file is staged unresolved (the clinic's `bdb0609`), run `git diff --cached --check` before the merge's commit to catch them, and undo an unpushed bad merge with `git reset --hard <commit before it>`, and why reset there and revert once others have it (chapter 17's rule for rebase, pointed to).
+* The reader can say where parallelism stops, each with the run's evidence: the queue, which every delivery edits, always conflicts (resolvable, keep both marks); files two deliveries both change conflict unless chosen apart beforehand; shared runtime resources collide (port 3100 in use, one verify failed and passed when run again); each worktree costs its own `node_modules` (155M); and the person reviews, commits and merges one at a time, so the agents' time overlaps (155 s of wall time for 277.2 s of work) but the review's does not (not measured, said so).
+* The reader can decide which two deliveries of a queue may run in parallel by the files they touch, and say how to run two in an interactive session (one terminal per worktree).
+
+**Contract.**
+
+Chapter 18, `book/en/18-worktrees.md` and `book/pt/18-worktrees.md`, new:
+
+* Title: "Worktrees and parallel agents" / "Worktrees e agentes em paralelo" (docs/00 §Contents). No part heading.
+* Voice: "you" for instruction; the author's run in the first person ("I ran"). Every git command is one the person runs; the agent runs none but `git worktree add` (by `/propose`, the clinic's ADR-0003), `git add`, `git status` and `git diff`.
+* Chapter tag: `book-v1/worktrees`, annotated, on the clinic's `699ab40`, message "One Page at a Time, chapter worktrees", created and pushed by the author before `/apply`'s `make verify` (the link check opens tag URLs; docs/05 §5). Code, ADR and queue quoted at that tag.
+* Bridge, near the opening: the reader's clone is at `book-v1/four-pieces`; between it and `book-v1/worktrees` are the kit update, the seven clinic fixes the book's M4.1 and M4.2 reviews queued (milestone 1.1 of the tag's docs/06), then `git-worktrees`, `route-errors`, `minutes-of` and two merges. The reader switches a branch of their own to `book-v1/worktrees` for this chapter; building those lines with `/propose` and `/apply` is optional, the tag being what to compare against (chapter 15's form).
+* Sections, in order (headings may be reworded; same structure in both editions):
+  1. Opening, at most three sentences: the Objective.
+  2. What a worktree is: `git worktree add ../<folder> -b <branch> main`, `git worktree list`, `git worktree remove`, `git branch -d`; against a second clone and against switching branches; the clinic's form `../focus-kit-clinic-<slug>` on branch `<slug>`, from ADR-0003's amendment, quoted (its Decision paragraph), with the rule that the agent never commits, merges, resolves a conflict or removes a worktree.
+  3. Two deliveries at once: the clinic's run. `route-errors` and `minutes-of` (their queue lines, one sentence each); two `/propose` started together from the clinic's root, each ran `git worktree add` and wrote its page in its worktree; two `/apply` from each worktree's root, each ran `npm ci` first; the times: `/propose` 128 s from first start to last end against 177.8 s of the four turns added, `/apply` 155 s against 277.2 s. The headless detail (the empty folders made before the sessions, since a session cannot write in an `--add-dir` folder that did not exist when it started) in one sentence. Interactive: one terminal per session, and the host asks you to approve a write in the sibling folder, as chapter 8 says of a permission the mode does not grant (derived from the permission mode, not run; said so).
+  4. Merging, and the conflict. From `merges.txt` part 2 (byte for byte there), fence `text`, each after its command: `git worktree list` (part 1, three lines), `git merge --no-ff route-errors` summary line only as "Merge made by the 'ort' strategy." plus its last stat line, `git merge --no-ff minutes-of` (4 lines), `git diff` with the markers, the resolution in words (both lines kept, both `[x]`, `route-errors` with its new text), `git diff` after, `git add`, `git commit --no-edit`, `git log --oneline --graph -5`. Why the queue conflicted (each branch marked its own line, adjacent) and docs/01 did not (different lines).
+  5. When git commits the markers: part 1's pasted block, `git add` and `git commit --no-edit` before resolving, `bdb0609` with the markers in docs/06, named, not linked (on no branch, never pushed); the guard `git diff --cached --check` and what it prints (`<file>:<line>: leftover conflict marker`, exit non-zero); the undo, `git reset --hard 045c744`, and why reset (nobody else had it). One sentence: in the record the author asked the book's agent to run part 2, against the rule; the chapter shows git's output and the rule stands (chapter 19).
+  6. Where parallelism stops: the five limits of Behaviour, each with its evidence, and the clinic's ADR-0003 consequences quoted where they say it (queue, same files, `node_modules`, shared ports and database); the book's own ADR-0010 (trunk: shared files and one reviewer) pointed to chapter 6, not repeated. A shared port or database per worktree is named as a project's choice, not shown.
+  7. Key points, at most five, one of them: run `git diff --cached --check` before committing a merge.
+  8. Exercises (below).
+* Excerpts: from `work/done/clinic-worktrees-run/merges.txt` and the tag, identical in both editions; the chapter says once that the merge outputs come from the run's record, part 1 copied from the author's terminal, part 2 byte for byte, paths relative to the clinic's root.
+* Numbers, and only these, from the run's README: 128 s and 177.8 s; 155 s and 277.2 s; 155M per worktree; port 3100, one verify stopped and then passed; 12 and 7 files of the two deliveries; one conflicted file, docs/06, while docs/01, changed on both, merged alone; `699ab40`'s `npm run verify`, 336 Vitest and 144 Playwright tests. One source note, `[^clinic-worktrees-run]`, in chapter 15's form (date, host version 2.1.286, model, what the record holds, link to its README on `main`).
+* Chapter 17, both editions: "The clinic and this book, one person each, are on trunk" amended (the clinic on trunk up to `book-v1/four-pieces`, a worktree per delivery since `git-worktrees`, chapter 18); its two plain-text mentions of chapter 18 (the conflict of a merge, the conflict of a revert) become links.
+* docs/03 terms: introduced (entered by this /propose): conflict, conflict marker; worktree refined. Used: worktree, branch, merge, merge commit, revert, tag, chapter tag, delivery, page, queue, mark, unit of work, headless, permission mode, fresh session, guided project, slot. Portuguese: "conflito", "marcador de conflito"; worktree, branch, merge, commit de merge as chapters 6 and 17 use them.
+* Sources (`[^key]`, same keys in both editions):
+  * `[^git-worktree]`: git documentation, `git-worktree`, <https://git-scm.com/docs/git-worktree>.
+  * `[^git-merge]`: git documentation, `git-merge`, "How conflicts are presented" and `--abort`, <https://git-scm.com/docs/git-merge>.
+  * `[^git-diff]`: git documentation, `git-diff`, `--check`, <https://git-scm.com/docs/git-diff>.
+  * `[^clinic-worktrees-run]`: as above.
+  * Clinic commits and files linked in the text, no note (docs/04). No Pro Git quotation on conflicts.
+* Exercises, in your clone at `book-v1/worktrees`, on a branch of your own; git commands you run yourself:
+  * 18.1 Create two worktrees from your branch, `../try-a` on `try-a` and `../try-b` on `try-b`; in each, mark a different one of the clinic's adjacent `[ ]` lines `time-zone-names` and `slot-taken-retry` as `[x]` in docs/06 and commit; merge both into your branch with `--no-ff`, resolve the conflict, and read `git log --oneline --graph`.
+  * 18.2 Repeat the second merge after `git reset --hard` to before it, stage the file with its markers, run `git diff --cached --check`, and say what it prints and why nothing is committed yet; then `git merge --abort`, remove both worktrees and delete both branches.
+  * 18.3 From the tag's docs/06, pick two open lines of milestone 1.1 that two agents could build at the same time, name the files each would touch (from docs/01 and the code), and say which conflicts you would still expect.
+  Answers derived at the tag and recorded in What happened for `exercise-answers`.
+* Documents: docs/03 gains the terms (this /propose). docs/06: `worktrees` `[>]` (this /propose), `[x]` by /apply. docs/00 §Contents already names chapter 18. No ADR.
+
+**Out of scope.**
+
+* Why the person commits and the agent stages, and reviewing a staged change: chapter 19.
+* Pull requests, remote branches, merging on GitHub: chapter 20.
+* A host's own worktree flag or feature: the kit creates the worktree with git on any host (docs/00, not a host reference).
+* Making the clinic's e2e ports or database per worktree: a clinic delivery if the author wants one; the chapter names the choice.
+* A new run or change in the clinic: `clinic-worktrees` is the run; this delivery only tags `699ab40`.
+* Rebase-based conflict resolution, `git rerere`, merge tools, `git stash`: not what a delivery needs (docs/00, not a git manual).
+* Measuring the author's review time: not recorded; the chapter says so.
+
+**Done when.**
+
+* [x] `book-v1/worktrees` on `699ab40` created and pushed by the author before `make verify`.
+* [x] Both editions written, same file name and heading structure, opening with the Objective in at most three sentences; no draft marker.
+* [x] Every fence matches `merges.txt` or the file at the tag, byte for byte, checked by script, both editions.
+* [x] Chapter 17 amended in both editions.
+* [x] Exercise answers derived, not run in the clinic; in What happened.
+* [x] No filler and nothing useful cut; every number cites its source.
+* [x] `make verify` green, the link check and the disclosure scan included.
+* [x] `make book` builds; both PDF paths given to the author.
+* [x] docs/06 line `[x]`, page in `work/done/`, staged, commit message suggested.
+
+**What happened.**
+
+* Written as the Contract says, sections in its order. Headings: "What a worktree is", "Two deliveries at once", "Merging, and the conflict", "When git commits the markers", "Where parallelism stops" (pt: "O que é um worktree", "Duas entregas ao mesmo tempo", "O merge, e o conflito", "Quando o git faz commit dos marcadores", "Onde o paralelismo para"). The bridge opens section 2, after the sentence on which git commands the agent runs; the reader's branch is `mine18`, after `git fetch --tags`.
+* Tag: the author created `book-v1/worktrees` on `699ab40` and pushed it during this /apply, after the chapter was written and before the green `make verify` (the first run failed only on the six tag URLs).
+* Diverged from the page, each to match the source or the rules:
+  * ADR-0003's Decision is shown whole, both paragraphs of the amendment's Decision, in a `markdown` fence. The Portuguese edition shows it translated, saying before it that the original is in English (docs/04 §Evidence, chapter 6's ADR-0010 precedent), so that one fence is not byte for byte in pt; every command fence is, in both editions.
+  * The `route-errors` merge fence is two lines of `merges.txt` part 1, not adjacent (46 and 59); the text says the per-file lines are left out.
+  * `git diff --cached --check` output is not in the record, so the chapter gives its form in prose, `<file>:<line>: leftover conflict marker`, from `[^git-diff]`, and says the run did not use it. A throwaway clone of the clinic in the host's scratch folder (never the clinic) reproduced the merge at `045c744` with `948b94d`: after `git add`, it printed `docs/06-Queue.md:43`, `:46` and `:49: leftover conflict marker`, exit 2, matching the record's "lines 43 to 49"; `git merge --abort` after `git add` restored the tree.
+  * The "resolution with the editor" and everything after the reset were run by the book's agent at the author's request (record, part 2): the chapter keeps "I" for part 1 and the author's runs, writes the resolution impersonally, and gives the one sentence the page asks, pointing to chapter 19.
+  * `npm run verify`'s 336 Vitest and 144 Playwright tests are in the text, after the graph, with the run's note; the note itself carries no count.
+  * Exercise 18.2 asks, besides the page's questions, why `git branch -d` refuses one branch: after `git merge --abort`, `try-b` is not merged, and the scratch run showed `error: the branch 'try-b' is not fully merged`. Added because the exercise as written could not finish with `-d`.
+  * `git branch -d` deleting only a merged branch, and `git worktree add` refusing a branch checked out elsewhere, are stated; the second from `[^git-worktree]`, the first shown by the record (`Deleted branch ... (was ...)` after `--no-ff`) and not given a note.
+  * Portuguese: "de ponta a ponta" matched the prose rule `inflated` ("de ponta"); written "ponta a ponta", as chapters 8 and 16 do. The brief is written `Your call. Diga o que escolheu e por quê.`, as chapter 15's Portuguese edition does.
+* Chapter 17: the two plain mentions of chapter 18 link to `18-worktrees.md#merging-and-the-conflict` (pt `#o-merge-e-o-conflito`); "The clinic and this book, one person each, are on trunk" became the book on trunk, the clinic on trunk up to `book-v1/four-pieces` and a worktree per delivery since `git-worktrees`, linked to chapter 18.
+* Excerpt check, a one-off Python script, not kept (each `text` fence against `merges.txt`, the `markdown` fence against ADR-0003 at `699ab40`): `19 matched, 1 failed`, the failure the translated pt ADR fence above; 18 contiguous, the `route-errors` fence line by line in order, in each edition. The fourth one-off excerpt check (after chapters 15, 16 and 17): a candidate line for a kept check, not this delivery.
+* Exercise answers, derived from the tag and the git documentation; 18.1 and 18.2 were also run in the throwaway clone above, never in the clinic:
+  * 18.1. The first `--no-ff` merge makes a merge commit; the second stops with `CONFLICT (content): Merge conflict in docs/06-Queue.md`, the two lines between markers at lines 40 to 46 of the tag's docs/06, each side with its own `[x]`. Resolved with both `[x]`; the graph shows two merge commits on `mine18`, each joining one one-commit branch.
+  * 18.2. `git reset --hard HEAD^` (the first parent of the second merge) returns to after the first merge; the merge again conflicts; after `git add`, `git diff --cached --check` prints `docs/06-Queue.md:40`, `:43` and `:46: leftover conflict marker` and exits non-zero. Nothing is committed because a merge that stopped makes its commit only on `git commit`; `--check` reads the index and commits nothing. After `git merge --abort` and both `git worktree remove`, `git branch -d try-a` deletes it (merged) and `git branch -d try-b` refuses, `not fully merged`, since the aborted merge never brought it in; `git branch -D try-b` deletes it.
+  * 18.3. Open lines of milestone 1.1: `time-zone-names` (`src/features/clinic/rules.ts`, where `Intl.supportedValuesOf("timeZone")` decides, and `rules.test.ts`), `slot-taken-retry` (`src/features/appointments/bookingEvents.ts`, `retryOf`, and its test; possibly `BookingView.e2e.ts`), `routes-table` (docs/02 only). Any two share no code file; docs/06 still conflicts on their mark lines (the first two are adjacent), docs/01 only if a delivery changes a listing, and verify can still collide on port 3100 when both run it at once. `m1.1-review` is the milestone's review, not a pair candidate.
+* Proof: no screenshot (docs/05, a chapter with no new kind of content). `make verify` green, the link check and the disclosure scan included. `make book` built `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` (and both EPUBs), with the known `user-select` warnings only.
+* Documents: docs/03 gained conflict and conflict marker and refined worktree at /propose; nothing more. docs/06 `[x]`. No ADR.

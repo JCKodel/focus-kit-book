@@ -258,14 +258,14 @@ Uma entrega de vários commits, com merge feito em cada forma, e o que desfazê-
 Com um branch por entrega, faça o merge por commit de merge ou por squash, para que a entrega continue uma unidade de trabalho: a regra do [capítulo 6](06-the-documents.md#as-duas-escolhas), um merge do branch, que o [`[>]` do capítulo 9](09-queue-and-milestones.md#as-marcas) já supõe.
 Um fast-forward ou um rebase só mantém isso quando o branch tinha um commit.
 
-Quando os dois branches mudaram as mesmas linhas, o git não consegue escolher e para com um conflito, que você resolve antes de o merge terminar; o capítulo 18 o ensina, onde entregas paralelas se encontram.
+Quando os dois branches mudaram as mesmas linhas, o git não consegue escolher e para com um conflito, que você resolve antes de o merge terminar; o [capítulo 18](18-worktrees.md#o-merge-e-o-conflito) o ensina, onde entregas paralelas se encontram.
 
 ## Desfazendo uma entrega
 
 O `git revert <commit>` faz um commit novo que desfaz um anterior, e mantém o histórico: a entrega e o desfazer dela ficam os dois ali para ler.[^git-revert]
 
 No trunk, logo depois do `f16f83b`, `git revert f16f83b` desfaria o `cancel-appointment` inteiro, a página incluída, já que são um commit só.
-Commits posteriores que mudam as mesmas linhas fazem o revert parar com um conflito, o mesmo de um merge (capítulo 18).
+Commits posteriores que mudam as mesmas linhas fazem o revert parar com um conflito, o mesmo de um merge ([capítulo 18](18-worktrees.md#o-merge-e-o-conflito)).
 
 Um commit de merge tem dois pais, então é preciso dizer ao git que lado manter.
 `git revert -m 1 846e337` mantém o pai 1, o `main` como estava, e desfaz tudo o que o segundo pai trouxe: os sete commits do #246, em um commit novo.
@@ -303,7 +303,7 @@ Em 2020 ele acrescentou uma nota no topo do post: para software entregue continu
 
 No kit, o git-flow é um branch por entrega cujo branch começa do `develop` e se chama `feature/<slug>`, e o slot Git do docs/05 diz isso.
 Os branches de release e de hotfix são o trabalho de lançamento da equipe, que o kit não modela.
-A clínica e este livro, uma pessoa cada, estão no trunk; o CLAHub, uma equipe que faz merge de pull requests no `main`, é um branch por entrega.
+Este livro, uma pessoa, está no trunk; a clínica também estava até `book-v1/four-pieces`, e desde a sua entrega `git-worktrees` ela constrói um worktree por entrega ([capítulo 18](18-worktrees.md)); o CLAHub, uma equipe que faz merge de pull requests no `main`, é um branch por entrega.
 
 ## Pontos-chave
 

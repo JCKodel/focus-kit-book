@@ -73,7 +73,9 @@ A new concept enters here first, in both languages.
 | trunk | trunk | `main` | Working on the main branch, one delivery at a time; only for one person working alone. |
 | pull request | pull request | none | A request to merge a branch that someone reviews first; how a branch per delivery lands. |
 | git-flow | git-flow | `develop`, `feature/*`, `release/*`, `hotfix/*` | A branching model with long-lived branches for teams that ship versions. |
-| worktree | worktree | `git worktree` | A second working directory on its own branch, so agents build in parallel. |
+| worktree | worktree | `git worktree` | An extra working folder of the same git repository, on its own branch, created with `git worktree add`; it shares the history with the main folder, so agents build different deliveries at the same time, and it costs a folder and its own dependencies. |
+| conflict | conflito | `CONFLICT (content)` | What git reports when both branches of a merge (or a revert) changed the same lines: it stops, merges the rest, and leaves the file for the person to resolve before the merge commit is made; `git merge --abort` returns to before the merge. |
+| conflict marker | marcador de conflito | `<<<<<<<`, `=======`, `>>>>>>>` | The lines git writes into a conflicted file around the two versions; git commits them like any text if the person stages the file unresolved, and `git diff --check` reports any left. |
 | case | caso | `ninjobs`, `case-a`, `case-b` | A real project the book draws on; anonymous when private. |
 | guided project | projeto guiado | `JCKodel/focus-kit-clinic` | The scheduling app the reader builds through the book. |
 | chapter tag | tag do capítulo | `book-v1/<chapter-slug>`, `book-v1-<chapter-slug>` in the fork | The annotated tag on the commit that a chapter quotes, in the guided project or in the brownfield project's fork; only a chapter that changes the project has one, and a published tag never moves. |
