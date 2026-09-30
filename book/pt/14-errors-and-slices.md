@@ -51,7 +51,7 @@ Os três hooks `use*.ts` guardam o estado que cada tela mostra, e `strings.ts` e
 Um nome terminado em `.server.ts` roda só no servidor, e o código do cliente nunca importa um deles.
 Os arquivos `.test.ts` são testes unitários, os `.e2e.ts` conduzem as telas em um navegador, e `e2e.server.ts` guarda os passos que eles compartilham.
 
-Uma funcionalidade é uma coisa que o app guarda, nomeada por um termo do docs/03 do projeto (o agendamento, o profissional, os horários semanais), e a fatia dela guarda toda ação sobre ela.
+Uma funcionalidade é uma coisa que o app guarda, nomeada por um termo do docs/03 do projeto (o agendamento, o profissional, os horários semanais), ou uma coisa que o app faz sem guardar nada, nomeada pelo que faz (a verificação do servidor de `health`); a fatia dela guarda toda ação sobre ela.
 Agendar e cancelar agem os dois sobre o agendamento, então compartilham as regras dele (`rules.ts`), o SQL dele (`repository.server.ts`), as rotas dele (`route.server.ts`), as chamadas dele (`api.ts`) e a lista que o celular lembra (`remembered.ts`): são uma fatia só.
 Os horários semanais e os profissionais são outras coisas que a clínica guarda, cada uma com a sua tabela e a sua tela, então cada uma tem uma fatia própria, `weeklyHours` e `professionals`.
 Uma mudança no agendamento mexe nesta pasta, e remover o agendamento remove esta pasta.
@@ -69,13 +69,14 @@ src/features/health/useHealth.ts
 ```
 
 Ela não tem `rules.ts`, porque não tem regra, nem `repository.server.ts`, porque não guarda nada: um arquivo aparece em uma fatia quando se paga.
+Não guardar nada não a torna menos funcionalidade: ela tem a sua rota, a sua chamada, o seu hook e a sua tela, e por isso a sua fatia.
 
 Aquilo de que o código trata decide onde fica o código que duas funcionalidades usam.
-O código sobre uma coisa que o app guarda fica na fatia dela, e outra fatia importa dali o que precisa, seja uma função de repositório, um tipo, uma chamada do cliente ou uma tela; duas fatias podem importar uma da outra.
+O código sobre uma funcionalidade fica na fatia dela, e outra fatia importa dali o que precisa, seja uma função de repositório, um tipo, uma chamada do cliente ou uma tela; duas fatias podem importar uma da outra.
 `findClinic` e `findActiveProfessionals` são importadas cada uma por `appointments/route.server.ts` e por `weeklyHours/route.server.ts`, um segundo uso, e ficam em `clinic/` e `professionals/`, porque cada uma lê a coisa que a sua fatia guarda.
-O que duas funcionalidades compartilham e não pertence a nenhuma coisa que o app guarda sai das fatias para `src/lib/`: a forma de um valor (`email.ts`, `id.ts`, `name.ts`) ou encanamento (`request.ts`, `result.ts`).
+O que duas funcionalidades compartilham e não pertence a nenhuma funcionalidade sai das fatias para `src/lib/`: a forma de um valor (`email.ts`, `id.ts`, `name.ts`) ou encanamento (`request.ts`, `result.ts`).
 `email.ts`, `id.ts`, `name.ts` e `request.ts` dizem cada um, em um comentário, onde estão o primeiro e o segundo uso, como "First use: health/api.ts (`skeleton`); second use: clinic/api.ts." em `request.ts`; `result.ts` é usado por toda funcionalidade.
-É a regra da segunda ocorrência do [capítulo 13](13-the-governor.md#a-mesma-pergunta-no-codigo), aplicada a pastas: o código que não pertence a nenhuma coisa vai para `lib/` no segundo uso, e não antes.
+É a regra da segunda ocorrência do [capítulo 13](13-the-governor.md#a-mesma-pergunta-no-codigo), aplicada a pastas: o código que não pertence a nenhuma funcionalidade vai para `lib/` no segundo uso, e não antes.
 
 ## Exceção, recusa, erro
 
@@ -294,8 +295,8 @@ O docs/01 da clínica, na seção "How errors travel", dá o caminho que uma fal
 
 ## Pontos-chave
 
-* Uma funcionalidade é uma coisa que o app guarda, com toda ação sobre ela, e a fatia vertical dela é uma pasta, sem pasta por camada; uma mudança na funcionalidade mexe nessa pasta, e remover a funcionalidade remove essa pasta.
-* Um arquivo entra em uma fatia quando se paga; o código sobre uma coisa que o app guarda fica na fatia dela, que as outras fatias importam, e o código que não pertence a nenhuma coisa entra em `lib/` no segundo uso.
+* Uma funcionalidade é uma coisa que o app guarda, ou uma coisa que ele faz sem guardar nada, com toda ação sobre ela, e a fatia vertical dela é uma pasta, sem pasta por camada; uma mudança na funcionalidade mexe nessa pasta, e remover a funcionalidade remove essa pasta.
+* Um arquivo entra em uma fatia quando se paga; o código sobre uma funcionalidade fica na fatia dela, que as outras fatias importam, e o código que não pertence a nenhuma funcionalidade entra em `lib/` no segundo uso.
 * Um erro é um bug, corrigido e nunca capturado; uma exceção é uma falha de fora do programa, capturada na fronteira e devolvida como valor; uma recusa é uma regra dizendo não, no código ou numa restrição do banco; o nome da classe não distingue nenhum deles.
 * Um throw é uma saída que quem chama não vê e o compilador não verifica, então nunca conduz o fluxo.
 * A exceção de uma biblioteca pertence à biblioteca: o código na fronteira a transforma no valor do domínio, e o resto do app não lança nada.

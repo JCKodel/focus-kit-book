@@ -42,10 +42,21 @@ Sentences are found by their quoted text. The line numbers below are from commit
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning; chapter 14 opens with its value, with no filler and nothing useful cut.
-* [ ] No sentence of chapter 14 still defines a feature, or the placement rule, only by "one thing the app keeps".
-* [ ] docs/03's vertical slice row says the same as the chapter.
-* [ ] The health slice's listing was re-run at `book-v1/closing-a-milestone`.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning; chapter 14 opens with its value, with no filler and nothing useful cut.
+* [x] No sentence of chapter 14 still defines a feature, or the placement rule, only by "one thing the app keeps".
+* [x] docs/03's vertical slice row says the same as the chapter.
+* [x] The health slice's listing was re-run at `book-v1/closing-a-milestone`.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author. Left to the batch driver, which builds once at the end of the loop.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Revalidated against the current tree: the earlier M4.2 deliveries moved none of the quoted lines; all were still at 54, 71, 74, 76, 78, 297 and 298 in both editions, and the docs/03 row at line 54.
+* `git ls-tree` at `book-v1/closing-a-milestone` lists the same 6 files under `src/features/health/`, with no `repository.server.ts`.
+* Line 54 took the proposal as written, in both editions.
+* Line 71: the new sentence goes after it, "Keeping nothing does not make it less of a feature: it has its own route, call, hook and screen, and so its own slice." (pt: "Não guardar nada não a torna menos funcionalidade: ela tem a sua rota, a sua chamada, o seu hook e a sua tela, e por isso a sua fatia."). After, not before, so the file list and its missing files are read first. Chosen alone in the batch, the agent's recommendation.
+* "stores nothing" became "keeps nothing" in English; the Portuguese already said "não guarda nada".
+* docs/03's vertical slice row changed as the page says.
+* The first `make verify` failed only on a timeout of an external link in chapter 10 (code.claude.com), unrelated; the second run was green.
+* Nothing dropped; no ADR.

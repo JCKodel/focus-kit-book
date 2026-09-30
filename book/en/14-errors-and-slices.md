@@ -51,7 +51,7 @@ The three `use*.ts` hooks hold the state each screen shows, and `strings.ts` and
 A name ending in `.server.ts` runs only on the server, and client code never imports one.
 The `.test.ts` files are unit tests, the `.e2e.ts` files drive the screens in a browser, and `e2e.server.ts` holds their shared steps.
 
-A feature is one thing the app keeps, named by a term of the project's docs/03 (the appointment, the professional, the weekly hours), and its slice holds every action on it.
+A feature is one thing the app keeps, named by a term of the project's docs/03 (the appointment, the professional, the weekly hours), or one thing the app does that keeps nothing, named by what it does (the server check of `health`); its slice holds every action on it.
 Booking and cancelling both act on the appointment, so they share its rules (`rules.ts`), its SQL (`repository.server.ts`), its routes (`route.server.ts`), its calls (`api.ts`) and the list the phone remembers (`remembered.ts`): they are one slice.
 Weekly hours and professionals are other things the clinic keeps, each with its own table and its own screen, so each has a slice of its own, `weeklyHours` and `professionals`.
 A change to the appointment touches this folder, and removing the appointment removes this folder.
@@ -68,14 +68,15 @@ src/features/health/strings.ts
 src/features/health/useHealth.ts
 ```
 
-It has no `rules.ts`, because it has no rule, and no `repository.server.ts`, because it stores nothing: a file appears in a slice when it pays its way.
+It has no `rules.ts`, because it has no rule, and no `repository.server.ts`, because it keeps nothing: a file appears in a slice when it pays its way.
+Keeping nothing does not make it less of a feature: it has its own route, call, hook and screen, and so its own slice.
 
 What code is about decides where code that two features use lives.
-Code about one thing the app keeps stays in that thing's slice, and another slice imports what it needs from there, be it a repository function, a type, a client call or a view; two slices may import from each other.
+Code about one feature stays in that feature's slice, and another slice imports what it needs from there, be it a repository function, a type, a client call or a view; two slices may import from each other.
 `findClinic` and `findActiveProfessionals` are each imported by `appointments/route.server.ts` and by `weeklyHours/route.server.ts`, a second use, and they stay in `clinic/` and `professionals/`, because each reads the thing its slice keeps.
-What two features share and belongs to no thing the app keeps leaves their slices for `src/lib/`: the shape of a value (`email.ts`, `id.ts`, `name.ts`) or plumbing (`request.ts`, `result.ts`).
+What two features share and belongs to no one feature leaves their slices for `src/lib/`: the shape of a value (`email.ts`, `id.ts`, `name.ts`) or plumbing (`request.ts`, `result.ts`).
 `email.ts`, `id.ts`, `name.ts` and `request.ts` each say in a comment where their first and second uses are, such as "First use: health/api.ts (`skeleton`); second use: clinic/api.ts." in `request.ts`; `result.ts` is used by every feature.
-That is the rule of the second occurrence from [chapter 13](13-the-governor.md#the-same-question-in-code), applied to folders: code that belongs to no one thing moves to `lib/` on its second use, and not before.
+That is the rule of the second occurrence from [chapter 13](13-the-governor.md#the-same-question-in-code), applied to folders: code that belongs to no one feature moves to `lib/` on its second use, and not before.
 
 ## Exception, refusal, error
 
@@ -294,8 +295,8 @@ The clinic's docs/01, in its section "How errors travel", gives the path a failu
 
 ## Key points
 
-* A feature is one thing the app keeps, with every action on it, and its vertical slice is one folder, with no folder per layer; a change to the feature touches that folder, and removing the feature removes it.
-* A file enters a slice when it pays its way; code about one thing the app keeps stays in its slice, which other slices import, and code that belongs to no one thing enters `lib/` on its second use.
+* A feature is one thing the app keeps, or one thing it does that keeps nothing, with every action on it, and its vertical slice is one folder, with no folder per layer; a change to the feature touches that folder, and removing the feature removes it.
+* A file enters a slice when it pays its way; code about one feature stays in its slice, which other slices import, and code that belongs to no one feature enters `lib/` on its second use.
 * An error is a bug, fixed and never caught; an exception is a failure from outside the program, caught at the boundary and returned as a value; a refusal is a rule saying no, in code or in a database constraint; the class name tells none of them apart.
 * A throw is an exit the caller cannot see and the compiler cannot check, so it never steers the flow.
 * A library's exception belongs to the library: the code at the boundary turns it into the domain's value, and the rest of the app throws nothing.
