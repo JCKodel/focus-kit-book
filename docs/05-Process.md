@@ -195,9 +195,17 @@ decides each finding, confirmed or rejected, with a reason.
 Each confirmed finding becomes a `[ ]` line in a new milestone placed
 right after the reviewed one, numbered with `.1` (M3 is followed by M3.1),
 with its own paragraph, so the lines wait for /propose and nothing
-renumbers. That milestone ends with its own review, which may open `.2`.
-No confirmed finding, no new milestone. A finding is never a fix in the
-middle of the next milestone.
+renumbers. No confirmed finding, no new milestone. A finding is never a
+fix in the middle of the next milestone.
+
+A milestone has at most one round of fixes: `.1` is the last. Its review
+reads only what its lines changed, both editions, and confirms only a
+blocking finding: a sentence the book shows to be false, or a step the
+reader cannot follow. Every confirmed finding of that review, and every
+finding it judges real but not blocking, becomes a line at the start of
+the next milestone, before its first chapter; none opens a `.2`. (Rule
+written after M4, whose `.1` review opened M4.2: M4.2 counts as M4's
+last round.)
 
 For a milestone of chapters, the review is a fresh session that reads the
 book from its start to the end of the part, in both editions, and asks the
