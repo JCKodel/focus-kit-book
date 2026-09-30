@@ -37,7 +37,7 @@
 * [x] The ten phrases changed as the Contract says, in both body and source notes.
 * [x] `grep -nwiE "changes?|specs?" book/pt/01-why-process.md book/pt/04-birth-of-focus-kit.md book/pt/13-the-governor.md` finds only Spec Kit, "Spec Delta" in quotes, backticked names and URLs.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author. Left unticked: in the batch, the driver runs `make book` once at the end of the loop and gives the paths.
+* [x] `make book` run, and both PDF paths given to the author. Left unticked: in the batch, the driver runs `make book` once at the end of the loop and gives the paths. Done by the driver on 047d672: both editions build.
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
 
 **What happened.**

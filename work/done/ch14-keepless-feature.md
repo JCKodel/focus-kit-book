@@ -47,7 +47,7 @@ Sentences are found by their quoted text. The line numbers below are from commit
 * [x] docs/03's vertical slice row says the same as the chapter.
 * [x] The health slice's listing was re-run at `book-v1/closing-a-milestone`.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author. Left to the batch driver, which builds once at the end of the loop.
+* [x] `make book` run, and both PDF paths given to the author. Left to the batch driver, which builds once at the end of the loop. Done by the driver on 047d672: both editions build.
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
 
 **What happened.**

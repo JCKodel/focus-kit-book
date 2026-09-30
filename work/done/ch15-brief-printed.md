@@ -46,7 +46,7 @@ Sentences are found by their quoted text. `ch15-uncaught-pieces`, `ch15-view-rul
 * [x] The English brief in chapter 15 is byte for byte the one in `work/done/clinic-orchestrator-tests-run/README.md`.
 * [x] No "answer its questions with the author's brief" or "responda às perguntas dele com o briefing do autor" left in `book/`.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author. Left unticked on purpose: in this batch the driver runs `make book` once at the end of the loop.
+* [x] `make book` run, and both PDF paths given to the author. Left unticked on purpose: in this batch the driver runs `make book` once at the end of the loop. Done by the driver on 047d672: both editions build.
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
 
 **What happened.**

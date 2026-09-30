@@ -28,7 +28,7 @@
 
 * [x] Both editions changed, same meaning; no other paragraph touched.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author. Left for the batch driver, which builds once at the end of the loop.
+* [x] `make book` run, and both PDF paths given to the author. Left for the batch driver, which builds once at the end of the loop. Done by the driver on 047d672: both editions build.
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
 
 **What happened.**

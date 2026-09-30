@@ -39,7 +39,7 @@ Sentences are found by their quoted text. The line numbers below are from commit
 * [x] Every Vitest test the chapter shows fits the definition, as the second Behaviour line lists.
 * [x] The docs/03 `unit test` row matches the chapter's definition.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author. Left unticked: in this batch the driver builds once at the end of the loop.
+* [x] `make book` run, and both PDF paths given to the author. Left unticked: in this batch the driver builds once at the end of the loop. Done by the driver on 047d672: both editions build.
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
 
 **What happened.**

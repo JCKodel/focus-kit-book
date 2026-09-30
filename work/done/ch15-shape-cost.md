@@ -38,7 +38,7 @@ Sentences are found by their quoted text. The other ch15-* lines of M4.2 (`ch15-
 * [x] No "and that job gives more than it costs" or "e esse trabalho dá mais do que custa" left in `book/`.
 * [x] No em dash in the changed lines.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author. Left unticked on purpose: in this batch the driver runs `make book` once at the end of the loop.
+* [x] `make book` run, and both PDF paths given to the author. Left unticked on purpose: in this batch the driver runs `make book` once at the end of the loop. Done by the driver on 047d672: both editions build.
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
 
 **What happened.**

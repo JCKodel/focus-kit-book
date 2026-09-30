@@ -39,7 +39,7 @@ Sentences are found by their quoted text. The line numbers are from commit `cad4
 * [x] The chapter still opens with its value; no filler and nothing useful cut.
 * [x] Every fact the new sentences state is checkable at the linked tag or in the excerpt.
 * [x] `make verify` green, the link check opening the template link.
-* [ ] `make book`, and both PDF paths given to the author to review. Left for the batch driver, which builds once at the end of the loop.
+* [x] `make book`, and both PDF paths given to the author to review. Left for the batch driver, which builds once at the end of the loop. Done by the driver on 047d672: both editions build.
 * [x] F4 marked settled on this page's record.
 
 **What happened.**

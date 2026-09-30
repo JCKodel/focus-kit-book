@@ -46,7 +46,7 @@ Sentences are found by their quoted text; `ch14-keepless-feature`, `ch14-library
 * [x] The claim that every repository's SQL runs in a test against `memoryDatabase` was re-checked at `book-v1/closing-a-milestone`.
 * [x] No logging code is shown, and the text says the clinic does not log yet.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
+* [x] `make book` run, and both PDF paths given to the author. Done by the driver on 047d672: both editions build.
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
 
 **What happened.**

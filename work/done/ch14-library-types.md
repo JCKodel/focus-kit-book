@@ -38,7 +38,7 @@
 * [x] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
 * [x] Every claim about the clinic checked again at `book-v1/closing-a-milestone`.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
+* [x] `make book` run, and both PDF paths given to the author. Done by the driver on 047d672: both editions build.
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
 
 **What happened.**
