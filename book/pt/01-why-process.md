@@ -69,8 +69,8 @@ O capítulo 4 conta a história do Ninjobs e como o focus-kit nasceu dela.
 * Em um ensaio controlado, desenvolvedores experientes ficaram mais lentos com IA e acreditaram que estavam mais rápidos.
 * Sem processo, o agente adivinha o que você não decidiu, aumenta o escopo e declara "pronto" sem prova.
 * Um processo mínimo dá ao agente uma decisão por escrito, uma página por entrega e uma verificação antes do "pronto".
-* Processo demais também falha, quando escrever a spec vira o trabalho.
+* Processo demais também falha, quando escrever a especificação vira o trabalho.
 
 [^metr-2025]: METR, "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity", 2025. <https://arxiv.org/abs/2507.09089>
 [^dora-2024]: DORA, "Accelerate State of DevOps Report 2024", 2024. <https://dora.dev/research/2024/dora-report/>
-[^ninjobs]: Ninjobs, repositório privado, contado pelo autor no histórico até 2026-08-29, quando o ADR-0022 do projeto abandonou o OpenSpec: dias com commit e commits pelo `git log`, changes pelo arquivo do OpenSpec, linhas com `wc -l` sobre todos os arquivos de `openspec/`. As telas e a tabela são as que esse ADR lista.
+[^ninjobs]: Ninjobs, repositório privado, contado pelo autor no histórico até 2026-08-29, quando o ADR-0022 do projeto abandonou o OpenSpec: dias com commit e commits pelo `git log`, mudanças pelo arquivo do OpenSpec, linhas com `wc -l` sobre todos os arquivos de `openspec/`. As telas e a tabela são as que esse ADR lista.

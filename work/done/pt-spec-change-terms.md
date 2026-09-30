@@ -34,8 +34,16 @@
 
 **Done when.**
 
-* [ ] The ten phrases changed as the Contract says, in both body and source notes.
-* [ ] `grep -nwiE "changes?|specs?" book/pt/01-why-process.md book/pt/04-birth-of-focus-kit.md book/pt/13-the-governor.md` finds only Spec Kit, "Spec Delta" in quotes, backticked names and URLs.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] The ten phrases changed as the Contract says, in both body and source notes.
+* [x] `grep -nwiE "changes?|specs?" book/pt/01-why-process.md book/pt/04-birth-of-focus-kit.md book/pt/13-the-governor.md` finds only Spec Kit, "Spec Delta" in quotes, backticked names and URLs.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author. Left unticked: in the batch, the driver runs `make book` once at the end of the loop and gives the paths.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Revalidated against the tree after the earlier M4.2 deliveries: every quoted phrase was still on the line the Contract names, so the page was built as proposed; nothing diverged and nothing was dropped.
+* The ten phrases changed in pt/01, pt/04 and pt/13; the English edition is untouched, so the parity check is unaffected.
+* The grep now finds only "Spec Delta" in quotes, Spec Kit, the link `03-spec-driven.md` and the URL of `[^spec-driven-run]`.
+* `make verify` green, the disclosure scan included. `make book` not run here: the batch driver runs it once at the end of the loop.
+* Applied in a batch with no conversation; no choice was open, so none was taken alone. Finding F1 of the M4.1 review is settled. docs/03 unchanged. No ADR.

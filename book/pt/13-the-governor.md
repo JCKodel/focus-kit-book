@@ -45,8 +45,8 @@ A primeira regra impede que avisos novos se acumulem de novo em um relatório; a
 O §7 do docs/05 lista sete coisas que o processo não tem.
 Cada trabalho continua sendo feito, por algo que o processo já tem:
 
-* **Spec formal:** a página, `work/<slug>.md`, diz o que a entrega faz, nas palavras da pessoa que a lê.
-* **Delta de spec:** no OpenSpec, o arquivo de uma mudança que lista só os requisitos que ela acrescenta, altera ou remove, incorporado às specs quando a mudança é arquivada;[^openspec-glossary] a mudança do OpenSpec no [capítulo 3](03-spec-driven.md) escreveu dois, cada um com o título "Spec Delta".[^spec-driven-run] No focus-kit, os documentos que a entrega muda, na mesma entrega, dizem o que mudou.
+* **Especificação formal:** a página, `work/<slug>.md`, diz o que a entrega faz, nas palavras da pessoa que a lê.
+* **Delta de especificação:** no OpenSpec, o arquivo de uma mudança que lista só os requisitos que ela acrescenta, altera ou remove, incorporado às especificações quando a mudança é arquivada;[^openspec-glossary] a mudança do OpenSpec no [capítulo 3](03-spec-driven.md) escreveu dois, cada um com o título "Spec Delta".[^spec-driven-run] No focus-kit, os documentos que a entrega muda, na mesma entrega, dizem o que mudou.
 * **Pasta de mudança:** a página é a mudança, em `work/<slug>.md` enquanto é construída e em `work/done/` depois.
 * **Tarefas numeradas:** as linhas de Behaviour, cada uma um teste ou uma conferência.
 * **Portão antes da implementação:** a pessoa que lê a página antes do `/apply`.
@@ -98,7 +98,7 @@ Fique com a verificação só se a resposta nomear um erro do histórico do seu 
 Para cada um dos sete itens do §7 do docs/05 da sua clínica, diga o que no seu projeto faz o trabalho dele.
 
 [^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>
-[^spec-driven-run]: A execução deste livro do Spec Kit, do OpenSpec e do focus-kit sobre um briefing, 2026-09-25: os dois deltas de spec da mudança `add-client-cancellation` do OpenSpec. <https://github.com/JCKodel/focus-kit-book/tree/53109f372125e8aeda200bb2e5bbd1ad7bcc5d61/work/done/spec-driven-run/openspec/feature/openspec/changes/add-client-cancellation/specs>
+[^spec-driven-run]: A execução deste livro do Spec Kit, do OpenSpec e do focus-kit sobre um briefing, 2026-09-25: os dois deltas de especificação da mudança `add-client-cancellation` do OpenSpec. <https://github.com/JCKodel/focus-kit-book/tree/53109f372125e8aeda200bb2e5bbd1ad7bcc5d61/work/done/spec-driven-run/openspec/feature/openspec/changes/add-client-cancellation/specs>
 [^claude-code-subagents]: Anthropic, "Create custom subagents", documentação do Claude Code, acesso em 2026-09-29. <https://code.claude.com/docs/en/sub-agents>
 [^useful-notes]: A entrega `useful-notes` deste livro, cuja página registra a diferença do capítulo 8 como o erro que justificou estender a verificação de paridade. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/useful-notes.md>
 [^closing-a-milestone-run]: A revisão do marco 1 do projeto guiado deste livro: os achados, as decisões e o diff da fila, de onde as duas linhas são citadas. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/closing-a-milestone-run/README.md>
