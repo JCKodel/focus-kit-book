@@ -26,7 +26,15 @@
 
 **Done when.**
 
-* [ ] Both editions changed, same meaning; no other paragraph touched.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed, same meaning; no other paragraph touched.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author. Left for the batch driver, which builds once at the end of the loop.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Revalidated against the tree: the key point was still at line 195 (English) and 275 (Portuguese); the constitution sentence still at lines 83 and 84.
+* English now reads "and Spec Kit also wrote rules once per project, in its constitution"; Portuguese "e o Spec Kit também escreveu as regras uma vez por projeto, na sua constituição". The clause on asking is untouched.
+* Decision taken alone (batch, no conversation): keep one sentence and add Spec Kit as the subject of the rules clause, rather than splitting the key point in two; it is the smallest change that credits OpenSpec with nothing the section does not show.
+* No document changed: no new term, rule or decision.
+* `make verify` green. `make book` not run here, by the batch's instruction.

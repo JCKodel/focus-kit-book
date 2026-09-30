@@ -272,7 +272,7 @@ A execução diz o que cada ferramenta escreve antes do código; não diz qual d
 
 * Uma especificação é uma descrição escrita, orientada a comportamento, do que o software precisa fazer, em linguagem natural, que guia um agente de código; o Desenvolvimento Guiado por Especificação a escreve antes do código.
 * Conforme quanto tempo a especificação vive, uma ferramenta é spec-first (escrita para a tarefa), spec-anchored (mantida para cuidar da funcionalidade) ou spec-as-source (a única coisa que uma pessoa edita).
-* O Spec Kit e o OpenSpec escreveram a decisão antes do código em arquivos que o agente lê, e as regras uma vez por projeto; só o OpenSpec fez uma pergunta antes de escrever, enquanto o Spec Kit, no seu caminho padrão, não perguntou nada e escreveu a resposta em "Assumptions" (suposições).
+* O Spec Kit e o OpenSpec escreveram a decisão antes do código em arquivos que o agente lê, e o Spec Kit também escreveu as regras uma vez por projeto, na sua constituição; só o OpenSpec fez uma pergunta antes de escrever, enquanto o Spec Kit, no seu caminho padrão, não perguntou nada e escreveu a resposta em "Assumptions" (suposições).
 * Em uma funcionalidade registrada, o Spec Kit escreveu 8 arquivos e 756 linhas e o OpenSpec 6 e 180, repetindo uma regra na maioria deles, e cada arquivo é algo que você revisa.
 * Uma página mais leve por funcionalidade se paga com documentos escritos uma vez por projeto; a execução mostra o que cada ferramenta escreve, não qual constrói software melhor.
 
