@@ -310,6 +310,7 @@ function slotsOf(
 ```
 
 Ele pede os dados a quatro funções de repositório, de quatro fatias: `findActiveProfessionals` de `professionals`, `findClinic` de `clinic`, `findWorkingPeriods` de `weeklyHours` e `findBookedStarts` de `appointments`.
+Cada uma fica na fatia da coisa que lê, e `slotsOf` a importa de lá, como diz a regra do [capítulo 14](14-errors-and-slices.md#fatias-verticais).
 `now` entra como parâmetro, e o `Result` dele guarda os dados ou a resposta a enviar, montada por `notFound` e `databaseFailed`, dois helpers do mesmo arquivo.
 
 **5. O orquestrador do servidor decide e salva.** Este é o handler `.post("/appointments", ...)`, do mesmo arquivo:

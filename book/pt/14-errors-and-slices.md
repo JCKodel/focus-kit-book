@@ -69,9 +69,12 @@ src/features/health/useHealth.ts
 
 Ela não tem `rules.ts`, porque não tem regra, nem `repository.server.ts`, porque não guarda nada: um arquivo aparece em uma fatia quando se paga.
 
-O que duas funcionalidades já compartilham sai das fatias para `src/lib/`.
+Aquilo de que o código trata decide onde fica o código que duas funcionalidades usam.
+O código sobre uma coisa que o app guarda fica na fatia dela, e outra fatia importa dali o que precisa, seja uma função de repositório, um tipo, uma chamada do cliente ou uma tela; duas fatias podem importar uma da outra.
+`findClinic` e `findActiveProfessionals` são importadas cada uma por `appointments/route.server.ts` e por `weeklyHours/route.server.ts`, um segundo uso, e ficam em `clinic/` e `professionals/`, porque cada uma lê a coisa que a sua fatia guarda.
+O que duas funcionalidades compartilham e não pertence a nenhuma coisa que o app guarda sai das fatias para `src/lib/`: a forma de um valor (`email.ts`, `id.ts`, `name.ts`) ou encanamento (`request.ts`, `result.ts`).
 `email.ts`, `id.ts`, `name.ts` e `request.ts` dizem cada um, em um comentário, onde estão o primeiro e o segundo uso, como "First use: health/api.ts (`skeleton`); second use: clinic/api.ts." em `request.ts`; `result.ts` é usado por toda funcionalidade.
-É a regra da segunda ocorrência do [capítulo 13](13-the-governor.md#a-mesma-pergunta-no-codigo), aplicada a pastas: o código vai para `lib/` no segundo uso, e não antes.
+É a regra da segunda ocorrência do [capítulo 13](13-the-governor.md#a-mesma-pergunta-no-codigo), aplicada a pastas: o código que não pertence a nenhuma coisa vai para `lib/` no segundo uso, e não antes.
 
 ## Exceção, recusa, erro
 
@@ -253,7 +256,7 @@ O docs/01 da clínica, na seção "How errors travel", dá o caminho que uma fal
 ## Pontos-chave
 
 * Uma funcionalidade é uma coisa que o app guarda, com toda ação sobre ela, e a fatia vertical dela é uma pasta, sem pasta por camada; uma mudança na funcionalidade mexe nessa pasta, e remover a funcionalidade remove essa pasta.
-* Um arquivo entra em uma fatia quando se paga, e o código entra em `lib/` no segundo uso.
+* Um arquivo entra em uma fatia quando se paga; o código sobre uma coisa que o app guarda fica na fatia dela, que as outras fatias importam, e o código que não pertence a nenhuma coisa entra em `lib/` no segundo uso.
 * Uma exceção é um I/O que falhou, uma recusa é uma regra dizendo não, no código ou em uma restrição do banco de dados, e nenhuma das duas é lançada.
 * Um erro é um bug: nunca capturado, chega à sua tela e ao seu analytics.
 * Um `Result` tratado com um `Record` sobre os seus casos não compila quando um caso é esquecido.

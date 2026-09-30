@@ -69,9 +69,12 @@ src/features/health/useHealth.ts
 
 It has no `rules.ts`, because it has no rule, and no `repository.server.ts`, because it stores nothing: a file appears in a slice when it pays its way.
 
-What two features already share leaves their slices for `src/lib/`.
+What code is about decides where code that two features use lives.
+Code about one thing the app keeps stays in that thing's slice, and another slice imports what it needs from there, be it a repository function, a type, a client call or a view; two slices may import from each other.
+`findClinic` and `findActiveProfessionals` are each imported by `appointments/route.server.ts` and by `weeklyHours/route.server.ts`, a second use, and they stay in `clinic/` and `professionals/`, because each reads the thing its slice keeps.
+What two features share and belongs to no thing the app keeps leaves their slices for `src/lib/`: the shape of a value (`email.ts`, `id.ts`, `name.ts`) or plumbing (`request.ts`, `result.ts`).
 `email.ts`, `id.ts`, `name.ts` and `request.ts` each say in a comment where their first and second uses are, such as "First use: health/api.ts (`skeleton`); second use: clinic/api.ts." in `request.ts`; `result.ts` is used by every feature.
-That is the rule of the second occurrence from [chapter 13](13-the-governor.md#the-same-question-in-code), applied to folders: code moves to `lib/` on its second use, and not before.
+That is the rule of the second occurrence from [chapter 13](13-the-governor.md#the-same-question-in-code), applied to folders: code that belongs to no one thing moves to `lib/` on its second use, and not before.
 
 ## Exception, refusal, error
 
@@ -253,7 +256,7 @@ The clinic's docs/01, in its section "How errors travel", gives the path a failu
 ## Key points
 
 * A feature is one thing the app keeps, with every action on it, and its vertical slice is one folder, with no folder per layer; a change to the feature touches that folder, and removing the feature removes it.
-* A file enters a slice when it pays its way, and code enters `lib/` on its second use.
+* A file enters a slice when it pays its way; code about one thing the app keeps stays in its slice, which other slices import, and code that belongs to no one thing enters `lib/` on its second use.
 * An exception is I/O that failed, a refusal is a rule saying no, in code or in a database constraint, and neither is thrown.
 * An error is a bug: never caught, it reaches your screen and your analytics.
 * A `Result` handled with a `Record` over its cases fails to compile when a case is forgotten.

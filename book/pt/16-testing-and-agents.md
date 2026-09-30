@@ -332,7 +332,7 @@ Esses turnos rodaram antes de as funções de evento existirem, então contam o 
 
 `cancel-appointment` acrescentou uma funcionalidade dentro de uma fatia que já existia.
 O turno do `/apply` dela leu 20 dos 95 arquivos de `src/` no seu commit pai, `442f88a`.
-15 dos 20 estavam em `src/features/appointments/`, que tinha 17, e os outros cinco eram código compartilhado que ela chama: `src/app/main.tsx`, `src/lib/request.ts`, `src/lib/result.ts`, `src/server/database.server.ts` e `src/features/professionals/repository.server.ts`.
+15 dos 20 estavam em `src/features/appointments/`, que tinha 17, e os outros cinco eram código de fora da fatia que ela chama: `src/app/main.tsx`, `src/lib/request.ts`, `src/lib/result.ts`, `src/server/database.server.ts` e o `src/features/professionals/repository.server.ts` da fatia dos profissionais.
 
 `book-appointment` começou a fatia.
 O turno do `/apply` dela leu 33 dos 77 arquivos de `src/` no seu commit pai, `afc833a`: sem fatia própria ainda, leu as outras fatias, entre elas 9 dos 11 arquivos de `src/features/weeklyHours/`, e disse isso:
@@ -340,7 +340,7 @@ O turno do `/apply` dela leu 33 dos 77 arquivos de `src/` no seu commit pai, `af
 > "I've studied the `weeklyHours` slice to use as the pattern."
 
 Em português: "Estudei a fatia `weeklyHours` para usar como padrão."
-Uma fatia nova copia a forma de uma fatia irmã, e uma entrega dentro de uma fatia lê essa fatia e o código compartilhado que ela chama.
+Uma fatia nova copia a forma de uma fatia irmã, e uma entrega dentro de uma fatia lê essa fatia e o código de fora dela que ela chama.
 
 Os dois turnos rodaram os testes da fatia sozinhos antes da verificação inteira.
 `cancel-appointment` rodou `npx vitest run src/features/appointments` e `npx playwright test --project=phone src/features/appointments`, depois `npm run verify`.

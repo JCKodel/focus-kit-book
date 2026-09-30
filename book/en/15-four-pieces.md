@@ -309,6 +309,7 @@ function slotsOf(
 ```
 
 It asks four repository functions, from four slices, for the data: `findActiveProfessionals` from `professionals`, `findClinic` from `clinic`, `findWorkingPeriods` from `weeklyHours` and `findBookedStarts` from `appointments`.
+Each lives in the slice of the thing it reads, and `slotsOf` imports it from there, as the rule of [chapter 14](14-errors-and-slices.md#vertical-slices) says.
 `now` comes in as a parameter, and its `Result` holds either the data or the answer to send, built by `notFound` and `databaseFailed`, two helpers of the same file.
 
 **5. The server orchestrator decides and saves.** This is the handler `.post("/appointments", ...)`, from the same file:

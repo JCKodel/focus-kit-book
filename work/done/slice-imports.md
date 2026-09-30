@@ -36,11 +36,21 @@
 
 **Done when.**
 
-* [ ] ch14-feature-boundary is applied first.
-* [ ] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
-* [ ] Chapter 14 has five key points.
-* [ ] `grep -n "shared code it calls\|código compartilhado que ela chama" book/*/16-testing-and-agents.md` finds nothing.
-* [ ] The "vertical slice" row of docs/03 updated.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] ch14-feature-boundary is applied first.
+* [x] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
+* [x] Chapter 14 has five key points.
+* [x] `grep -n "shared code it calls\|código compartilhado que ela chama" book/*/16-testing-and-agents.md` finds nothing.
+* [x] The "vertical slice" row of docs/03 updated.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* §"Vertical slices" opens the `lib/` paragraph with the rule: what code is about decides where code two features use lives. Code about one thing the app keeps stays in its slice and other slices import it; `findClinic` and `findActiveProfessionals`, each imported by `appointments/route.server.ts` and `weeklyHours/route.server.ts`, stay in `clinic/` and `professionals/`. What belongs to no thing goes to `src/lib/`, as the shape of a value or plumbing. The closing sentence on chapter 13's rule now says it is code that belongs to no one thing that moves to `lib/` on its second use. The text reuses "one thing the app keeps" from the definition a few paragraphs above instead of restating it.
+* Checked with `git grep` at `book-v1/four-pieces` and `book-v1/closing-a-milestone`: the same imports at both tags.
+* Key point 2 carries the rule, in the words the page gave; chapter 14 keeps five key points. The "vertical slice" row of docs/03 gains the rest of the rule.
+* Chapter 15 adds one sentence after the four repository functions, linking to §"Vertical slices" of chapter 14.
+* Chapter 16: the five files are "code outside the slice that it calls", and the professionals repository is named as the professionals slice's; line 341 says "the code outside it that it calls". Choice taken: the page's "the shells" is not a term the book uses, so the sentence keeps the paths in their order and names only the other slice's repository, rather than introducing a new word. Counts, paths and quote unchanged.
+* Portuguese: "plumbing" is "encanamento".
+* Finding F10 of the M4 review is settled.

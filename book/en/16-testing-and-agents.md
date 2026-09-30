@@ -331,14 +331,14 @@ These turns ran before the event functions existed, so they count the code of mi
 
 `cancel-appointment` added a feature inside a slice that existed.
 Its `/apply` turn read 20 of the 95 files of `src/` at its parent commit, `442f88a`.
-15 of the 20 were in `src/features/appointments/`, which had 17, and the other five were shared code it calls: `src/app/main.tsx`, `src/lib/request.ts`, `src/lib/result.ts`, `src/server/database.server.ts` and `src/features/professionals/repository.server.ts`.
+15 of the 20 were in `src/features/appointments/`, which had 17, and the other five were code outside the slice that it calls: `src/app/main.tsx`, `src/lib/request.ts`, `src/lib/result.ts`, `src/server/database.server.ts` and the professionals slice's `src/features/professionals/repository.server.ts`.
 
 `book-appointment` started the slice.
 Its `/apply` turn read 33 of the 77 files of `src/` at its parent commit, `afc833a`: with no slice of its own yet, it read the other slices, 9 of the 11 files of `src/features/weeklyHours/` among them, and said so:
 
 > "I've studied the `weeklyHours` slice to use as the pattern."
 
-A new slice copies the shape of a sibling slice, and a delivery inside a slice reads that slice and the shared code it calls.
+A new slice copies the shape of a sibling slice, and a delivery inside a slice reads that slice and the code outside it that it calls.
 
 Both turns ran the slice's tests alone before the whole verify.
 `cancel-appointment` ran `npx vitest run src/features/appointments` and `npx playwright test --project=phone src/features/appointments`, then `npm run verify`.
