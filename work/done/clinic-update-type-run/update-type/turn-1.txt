@@ -1,0 +1,39 @@
+[tool Bash] ls docs work docs/adr; cat docs/05*.md docs/06*.md; grep -n -i "update-type" -r docs work
+
+[tool Bash] cat docs/00*.md docs/01*.md docs/03*.md; ls work/done
+
+[tool Bash] grep -rn -i "update-type\|declares the shape\|second occurrence\|Update<\|type Update\|=> State\|send:" src docs work --include=*.ts --include=*.tsx --include=*.md | grep -v node_modules | head -60; cat work/done/hours-save.md
+
+[tool Bash] grep -rn "(current\|update:\|send:\|=> State\|Update\b" src | grep -v "\.test\." ; ls src/features/*; ls src/lib; grep -n -i "update\|shape" work/done/hours-report.md work/done/booking-submit.md work/done/orchestrator-tests.md | head -40
+
+[tool Bash] sed -n 130,160p work/done/hours-report.md; sed -n 225,250p work/done/hours-report.md; sed -n 80,100p src/features/appointments/bookingEvents.ts; sed -n 250,290p src/features/appointments/bookingEvents.ts; sed -n 30,50p src/features/weeklyHours/weeklyHoursEvents.ts; sed -n 130,180p src/features/weeklyHours/weeklyHoursEvents.ts; sed -n 50,70p src/features/professionals/professionalsEvents.ts; sed -n 20,30p src/features/signIn/ownerEvents.ts; cat src/lib/result.ts; cat docs/04*.md | head -80
+
+I've read the docs, the queue and the three earlier pages that postponed this, and I've looked at the code. Here's my assessment before I write anything.
+
+**What `update-type` is.** docs/01 already promises it: "`submitStarted` (appointments) is the first occurrence and `saveStarted` (weeklyHours) the second; a later delivery declares the shape once." `booking-submit`, `hours-save` and `hours-report` each listed it under Out of scope. It isn't in docs/06 yet, so I'd add it to Milestone 1.1 after `hours-report` and before `m1.1-review`. It's a code-only change: no screen, no route, no data change, and nothing different for the owner or the client.
+
+**What the code shows.** There are two shapes, and both have reached their second occurrence:
+
+1. **The starter `{ update, send }`**: its return type is written inline in `submitStarted` (`bookingEvents.ts:258`) and `saveStarted` (`weeklyHoursEvents.ts:138`).
+2. **The update itself, `(current: S) => S`**: this one is further along. Two features declare their own local alias (`type Update` in `professionalsEvents.ts:58` and `ownerEvents.ts:24`). Six more places write it inline: `BookingOutcome`, `WeeklyHoursAnswer`, and the `Promise<(current: X) => X>` answers in `rememberedEvents`, `cancelEvents`, `healthEvents` and `clinicEvents`.
+
+`hours-report` also left docs/01 half-true. It describes an event as either sync (`=> State`) or async (`=> Promise<Update>`), but `hoursReported` answers `Update | Promise<Update>`, which is neither. That page said the fix belongs to this delivery.
+
+**My proposal.** One file, `src/lib/update.ts`, with two types:
+
+```ts
+export type Update<S> = (current: S) => S;
+export type Started<S> = { update: Update<S>; send: boolean };
+```
+
+Every event file would use them instead of its local alias or inline type. This changes types only; no function body changes, and no test changes what it asserts. docs/01 would name every event shape once, including `Update | Promise<Update>`, and point to the file. Neither type goes into docs/03, because they're code shapes, not clinic vocabulary (`WeeklyHoursReport` isn't in docs/03 either). This fits on one page.
+
+Please confirm or correct these before I write the page:
+
+1. **Scope: both types, or only the starter?** I recommend both. `Update<S>` already has two local copies, so the project's own rule (abstract on the second occurrence) applies now. `Started<S>` is built on it, so declaring one without the other would leave half the job. The other option is to declare only `Started<S>` and leave `Update<S>` for a separate line.
+2. **Names and place: `Update<S>` and `Started<S>` in `src/lib/update.ts`?** I recommend this. `Started` matches the `<event>Started` functions that return it, and `lib/` is where docs/01 puts what two features share.
+3. **Replace every inline or local occurrence (8 event files), or only the two aliases and the two starters?** I recommend every occurrence. A shared type that half the files ignore is a third way of writing the same thing, and the review would catch it.
+4. **docs/01 names every event shape, including `hoursReported`'s `Update | Promise<Update>`?** I recommend yes, in this delivery, as `hours-report` said.
+5. **The Milestone 1.1 paragraph gains a clause** for this line, so `m1.1-review` checks it, as the last two deliveries did. I'd do this unless you object.
+
+Git is trunk here, so no branch: I'll write `work/update-type.md` on `main` and mark the line `[>]` once you answer.

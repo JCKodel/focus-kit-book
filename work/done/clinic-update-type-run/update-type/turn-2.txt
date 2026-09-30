@@ -1,0 +1,42 @@
+Your answers settle scope, names aside. I'll check every place the two shapes are written, tests and hooks included, before writing the page.
+
+[tool Bash] grep -rn -E "\(current: [A-Za-z]+\) => [A-Za-z]+|\(s: [A-Za-z]+State\) => |type Update|send: boolean|=> [A-Z][A-Za-z]*State\b" src; echo ---; grep -n "submitStarted" -A6 src/features/appointments/cancelEvents.ts | head -12; echo ---; git log --diff-filter=A --format='%h %s' -- src/features/*/*Events.ts | tail -8; grep -n "lib/" -A8 docs/01-Architecture.md | head -12
+
+[tool Bash] grep -rn -E "\(current: [A-Za-z]+\) => [A-Za-z]+|type Update|send: boolean|Promise<\(|=> [A-Z][A-Za-z]*State\b" src
+
+[tool Bash] grep -rn -E "\(\w+: \w+State\) => \w+State|update: \(" src --include="*.ts" --include="*.tsx"
+
+[tool Bash] grep -n -E "^export (async )?function|^\): |^type |^export type" src/features/appointments/cancelEvents.ts src/features/professionals/professionalsEvents.ts src/features/signIn/ownerEvents.ts src/features/appointments/rememberedEvents.ts
+
+[tool Bash] grep -rn "lib/" src/features/*/*Events.ts src/features/appointments/rules.ts
+
+I have everything I need. There are 12 places in 8 events files that write out one of the two types, and none in tests, hooks or views. I'll write the page and the queue line now.
+
+[tool Write] work/update-type.md
+
+[tool Read] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+I wrote the page at `work/update-type.md` and added the line to docs/06 as `[>] update-type`, right after `hours-report` and before `m1.1-review`. The line says it settles the "one shared copy" clause, and I didn't edit the milestone paragraph because it already has that clause. Git here is trunk, so everything is on `main` and nothing is staged.
+
+**Names and files:**
+- **`Update<S> = (current: S) => S`**: docs/01 already calls this "an update", and the two local copies in `professionalsEvents.ts` and `ownerEvents.ts` are already named `Update`, so those files keep the same word.
+- **`Started<S> = { update: Update<S>; send: boolean }`**: it names what an `<event>Started` function returns, so `submitStarted(state): Started<BookingState>` reads the way it runs. `Starter` would name the function instead of its answer.
+- **One file, `src/lib/update.ts`**: `Started` is built on `Update`, and they're always used together, the way `Result`, `ok` and `err` share `result.ts`. Neither goes into docs/03, since they're code shapes, not clinic words.
+
+**What the search found:** 12 places across 8 events files, all listed in the Contract's table. No test, hook or view writes either type, so no test file changes. The page names `bookingEvents.ts` and `submitStarted` as the first occurrences, as you asked.
+
+**Choices I made on my own:**
+- **docs/01's starter sentence:** besides the `lib/` listing, I also update the sentence that says "a later delivery declares the shape once", because after this delivery it would be false.
+- **Starters that still return a whole state stay as they are.** You named `cancelEvents`' `submitStarted`. There are also `addStarted`, `renameStarted` and `removeStarted` (professionals), `confirmStarted` (remembered), and `submitSignInStarted` and `submitSignOutStarted` (signIn). They go against docs/01's rule that the in-flight state is published as an update. I left them for `m1.1-review` to raise, because changing them would change what those events do.
+
+One command was blocked: a `git log` I ran to confirm which events file was written first. I used the order you gave instead of checking it.
+
+Before running anything, please read the page and question it:
+- Can each Behaviour line be checked?
+- Is the Contract table exact, line by line?
+- Does Out of scope name something you assumed was in?
+- Do you agree with the two choices above?
+
+Ask for every correction here in this conversation. When the page is right, open a fresh session and type `/apply update-type`.

@@ -1,0 +1,168 @@
+[tool Bash] cat work/update-type.md && git diff docs/06-Queue.md && ls docs docs/adr work work/done | head -80
+
+[tool Bash] cat docs/05-Process.md && grep -n -i "starter\|lib/\|update" docs/01-Architecture.md | head -60 && sed -n 1,200p docs/04-Conventions.md | head -120
+
+[tool Bash] ls src/lib && grep -rnE "\(current: \w+\) => \w+|type Update|send: boolean|\bUpdate\b" src/features && grep -n "import" src/features/appointments/rules.ts && cat work/done/hours-report.md | sed -n '/## /,$p' | head -60
+
+[tool Bash] ls src/lib && grep -rnE "\(current: \w+\) => \w+|type Update|send: boolean|\bUpdate\b" src/features; grep -n "import" src/features/appointments/rules.ts
+
+[tool Read] docs/01-Architecture.md
+
+[tool Bash] cd src/features && for f in appointments/bookingEvents.ts weeklyHours/weeklyHoursEvents.ts professionals/professionalsEvents.ts signIn/ownerEvents.ts appointments/rememberedEvents.ts appointments/cancelEvents.ts health/healthEvents.ts clinic/clinicEvents.ts; do echo "== $f"; grep -n "^import\|from \"" $f; done; sed -n 85,95p appointments/bookingEvents.ts; sed -n 250,265p appointments/bookingEvents.ts; sed -n 38,45p weeklyHours/weeklyHoursEvents.ts; sed -n 132,142p weeklyHours/weeklyHoursEvents.ts; sed -n 55,60p professionals/professionalsEvents.ts; sed -n 20,26p signIn/ownerEvents.ts
+
+[tool Bash] cd src/features && grep -n "^import\|^} from\|^\t[a-zA-Z, ]*,$" appointments/bookingEvents.ts weeklyHours/weeklyHoursEvents.ts professionals/professionalsEvents.ts signIn/ownerEvents.ts appointments/rememberedEvents.ts appointments/cancelEvents.ts health/healthEvents.ts clinic/clinicEvents.ts | head -80
+
+Some shell commands need approval that this session can't grant, so I'm switching to the Read tool to open the events files. Then I'll make the type edits.
+
+[tool Read] src/features/appointments/bookingEvents.ts
+
+[tool Read] src/features/appointments/bookingEvents.ts
+
+[tool Read] src/features/appointments/bookingEvents.ts
+
+[tool Read] src/features/weeklyHours/weeklyHoursEvents.ts
+
+[tool Read] src/features/weeklyHours/weeklyHoursEvents.ts
+
+[tool Read] src/features/professionals/professionalsEvents.ts
+
+[tool Read] src/features/signIn/ownerEvents.ts
+
+[tool Read] src/features/appointments/rememberedEvents.ts
+
+[tool Read] src/features/appointments/cancelEvents.ts
+
+[tool Read] src/features/health/healthEvents.ts
+
+[tool Read] src/features/clinic/clinicEvents.ts
+
+Now the edits.
+
+[tool Write] src/lib/update.ts
+
+[tool Edit] src/features/appointments/bookingEvents.ts
+
+[tool Edit] src/features/appointments/bookingEvents.ts
+
+[tool Edit] src/features/appointments/bookingEvents.ts
+
+[tool Edit] src/features/weeklyHours/weeklyHoursEvents.ts
+
+[tool Edit] src/features/weeklyHours/weeklyHoursEvents.ts
+
+[tool Edit] src/features/weeklyHours/weeklyHoursEvents.ts
+
+[tool Edit] src/features/professionals/professionalsEvents.ts
+
+[tool Edit] src/features/professionals/professionalsEvents.ts
+
+[tool Edit] src/features/professionals/professionalsEvents.ts
+
+[tool Edit] src/features/professionals/professionalsEvents.ts
+
+[tool Edit] src/features/signIn/ownerEvents.ts
+
+[tool Edit] src/features/signIn/ownerEvents.ts
+
+[tool Edit] src/features/signIn/ownerEvents.ts
+
+[tool Edit] src/features/appointments/rememberedEvents.ts
+
+[tool Edit] src/features/appointments/rememberedEvents.ts
+
+[tool Edit] src/features/appointments/cancelEvents.ts
+
+[tool Edit] src/features/appointments/cancelEvents.ts
+
+[tool Edit] src/features/health/healthEvents.ts
+
+[tool Edit] src/features/health/healthEvents.ts
+
+[tool Edit] src/features/clinic/clinicEvents.ts
+
+[tool Edit] src/features/clinic/clinicEvents.ts
+
+Now docs/01, then verify.
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Bash] npm run verify 2>&1 | tail -40
+
+[tool Edit] src/features/appointments/bookingEvents.ts
+
+[tool Bash] npm run verify 2>&1 | grep -E "Test Files|Tests |passed|failed|error|✓ built|×" | head -30
+
+Green. Checking the test counts against the last delivery and the "Done when" grep and diff:
+
+[tool Bash] grep -nE "328|144|Vitest|Playwright" work/done/hours-report.md | tail -8; grep -rnE "\(current: \w+\) => \w+|type Update|send: boolean" src/features; echo "grep exit: $?"; git status --short; git diff --stat
+
+[tool Bash] grep -nE "328|144|Vitest|Playwright" work/done/hours-report.md
+
+[tool Bash] grep -rnE "\(current: \w+\) => \w+|type Update|send: boolean" src/features
+
+[tool Bash] git diff -U0 src
+
+Same counts as the last delivery (328 Vitest, 144 Playwright), the grep finds nothing, and only annotations and imports changed. Checking how earlier pages recorded the person's manual check:
+
+[tool Bash] grep -n -A3 "Manual check\|^## \|^\*\*After\|What happened" work/done/hours-report.md
+
+[tool Read] work/done/hours-report.md
+
+Following that precedent, the manual box stays open for you. Writing the page record:
+
+[tool Read] work/update-type.md
+
+[tool Edit] work/update-type.md
+
+[tool Read] work/update-type.md
+
+[tool Edit] work/update-type.md
+
+[tool Edit] work/update-type.md
+
+[tool Edit] work/update-type.md
+
+[tool Edit] work/update-type.md
+
+[tool Edit] work/update-type.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Bash] mv work/update-type.md work/done/update-type.md
+
+[tool Bash] git add -A
+
+[tool Bash] git status --short
+
+I've built `update-type` and staged it; nothing is committed. `npm run verify` passes with the same test counts as the previous delivery: 328 Vitest tests and 144 Playwright tests.
+
+**What changed**
+- New file `src/lib/update.ts` with exactly the two types from the page, `Update<S>` and `Started<S>`.
+- The ten places in the page's table now use those types, spread over 8 events files. The two local `type Update` aliases in `professionalsEvents.ts` and `ownerEvents.ts` are gone. Only type annotations and imports changed; no function body did.
+- The `grep` from "Done when" finds nothing in `src/features`. No test, hook, view, `*.server.ts` file or `package*.json` is in the diff.
+- The only thing that differs from the page is formatting: Biome folded `BookingOutcome` onto one line and moved `saveStarted`'s parameter onto its own line. The page's notes record this.
+- docs/01's `lib/` listing now names `update.ts`, and the starter sentence says the shape is declared once, as `Started` in `src/lib/update.ts`.
+- The page is in `work/done/update-type.md` with its notes written, and docs/06 shows `[x] update-type`.
+
+**Still to do:** the manual-check box in "Done when" is still open because I can't keep a server running from here. Start the app with `npm run dev`, then:
+1. Book and cancel an appointment at 390×844.
+2. On `/owner`, sign in, add a professional and save weekly hours.
+
+Each should behave as before.
+
+The session wouldn't approve some shell commands (loops and chained commands), so I read the files one at a time instead. That didn't affect the work.
+
+**Suggested commit message:**
+```
+Declare the update and starter types once in lib/update.ts
+
+- Update<S> and Started<S> in src/lib/update.ts
+- Every events file uses them; the local Update aliases are gone
+- docs/01 lists update.ts and says the starter shape is declared once
+
+See work/done/update-type.md
+```
+
+**Environments:** local is at the working tree with these changes staged; start it with `npm run dev`. Production doesn't exist yet because the `deploy` delivery hasn't been built, so there's nothing to update there.

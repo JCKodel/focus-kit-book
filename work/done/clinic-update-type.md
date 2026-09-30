@@ -60,17 +60,17 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 
 **Done when.**
 
-* [ ] `clinic-hours-report` was `[x]`, and the clinic clean at its last commit, equal to `origin/main`, before the first run; that commit and the count are in the README.
-* [ ] The clinic delivery (or each part of a split) ran the five steps, each turn recorded; nothing in the clinic edited by hand.
-* [ ] On the clinic's last commit, the count's first grep finds only files in `src/lib/`; `submitStarted` and `saveStarted` return the shared type and write no object type out, and the starter's grep the README recorded finds nothing in `src/features`.
-* [ ] The clinic's page names `bookingEvents.ts` and `submitStarted` as the first occurrences; its docs/01 `lib/` listing names the new file or files.
-* [ ] No test changed what it asserts and none was added; no new dependency in `package.json`; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
-* [ ] The author's manual check recorded in the README.
-* [ ] Each clinic delivery committed by the author, no tag; pushed.
-* [ ] No note of the host left outside the clinic's repository.
-* [ ] `work/done/clinic-update-type-run/` as the Contract says; docs/06 as the Contract says.
-* [ ] `make verify` green in this book, the disclosure scan included.
-* [ ] Page in `work/done/`, only this delivery's paths staged, commit message suggested.
+* [x] `clinic-hours-report` was `[x]`, and the clinic clean at its last commit, equal to `origin/main`, before the first run; that commit and the count are in the README.
+* [x] The clinic delivery (or each part of a split) ran the five steps, each turn recorded; nothing in the clinic edited by hand.
+* [x] On the clinic's last commit, the count's first grep finds only files in `src/lib/`; `submitStarted` and `saveStarted` return the shared type and write no object type out, and the starter's grep the README recorded finds nothing in `src/features`.
+* [x] The clinic's page names `bookingEvents.ts` and `submitStarted` as the first occurrences; its docs/01 `lib/` listing names the new file or files.
+* [x] No test changed what it asserts and none was added; no new dependency in `package.json`; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
+* [ ] The author's manual check recorded in the README: pending, collected at the end of the M4.1 loop.
+* [x] Each clinic delivery committed by the author, no tag; pushed.
+* [x] No note of the host left outside the clinic's repository.
+* [x] `work/done/clinic-update-type-run/` as the Contract says; docs/06 as the Contract says.
+* [x] `make verify` green in this book, the disclosure scan included.
+* [x] Page in `work/done/`, only this delivery's paths staged, commit message suggested.
 
 **Decisions.** Each taken on the recommended option, not asked:
 
@@ -82,3 +82,18 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * The shared types go to `src/lib/`, as the clinic's docs/01 says for code on its second use; their names and files are left to the clinic's agent, which says what it chose.
 * No new test: a type has no behaviour and the typecheck in `npm run verify` proves it; the manual check covers a booking and a save, the two starters.
 * docs/05 is not edited: the recipe exists and needs no sixth name.
+
+## What happened
+
+* The precondition held: `clinic-hours-report` was `[x]`; the clinic was on `main`, clean, at `9f625cb`, equal to `origin/main`, with focus-kit `bff8414`.
+* The count on `9f625cb` found eight files, the same eight as on `a3e2470`; the starter's shape was `{ update: (current: S) => S; send: boolean }` in both starters, found by `grep -rn "send: boolean" src`, so the run went ahead. Both are in the run's README.
+* One clinic delivery, `update-type`, three turns: `/propose` (the slug, the brief) and `/apply`. `/propose` did not split the line and put it in milestone 1.1, after `hours-report` and before `m1.1-review`. Its first turn asked five questions; the brief answered them, and no later round came, so `Your call` was never sent. The page review and the staged review were the author's "None", decided before the run.
+* The clinic's agent chose `Update<S>` and `Started<S>`, both in `src/lib/update.ts`, and said why: docs/01 already calls the function an update, two files already had a local alias named `Update`, and `Started` names what an `<event>Started` function answers. Both local aliases left; the page's table named ten places, and only type annotations and imports changed.
+* Beyond the brief, the clinic's docs/01 also changed its sentence that a later delivery declares the starter shape once, which would otherwise be false. The milestone 1.1 paragraph did not change, since it already has the clause the line settles.
+* Six more starters still return a whole state, left for `m1.1-review` to raise: `addStarted`, `renameStarted`, `removeStarted`, `confirmStarted`, `submitSignInStarted` and `submitSignOutStarted`, besides `cancelEvents`' `submitStarted`. Changing them would change what those events do.
+* Calls denied: five, one in `/propose`, a chain that included a `git log` of when each events file was added, whose order the agent then took from the brief; four in `/apply`, chains and a loop over the events files, after which the agent ran shorter commands and read the files one at a time, a retry by another route inside its session, recorded in the run's README.
+* Every `claude` turn ended with a result of `success` but exited with code 1, standard error holding only `stty: stdin isn't a terminal`; recorded in the README.
+* The suggested commit message carried no trailer; the author committed it as printed: `181286f`, pushed, no tag.
+* `npm run verify` green on `181286f`: 328 Vitest and 144 Playwright, the counts `hours-report` left, and build. No test file, `package.json` or view in the diff.
+* The author's manual check on `npm run dev` is collected at the end of the M4.1 loop; its item stays open.
+* No note of the host outside the repositories: the clinic's auto-memory folder stayed absent and the host's folder gained only the two sessions' transcripts, so nothing was deleted. No ADR, no new term; docs/05 unchanged.
