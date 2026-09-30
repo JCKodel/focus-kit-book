@@ -69,7 +69,12 @@ The staged review went to the same session with `claude -p --continue "<request>
 
 ## The author's manual check
 
-Pending, collected at the end of the M4.1 loop.
+Run on 2026-09-30, collected at the end of the M4.1 loop, on the clinic's commit `6edc9ad`; the setup is in `../clinic-booking-submit-run/README.md`.
+
+* The save and the refused period of `clinic-hours-save`'s check.
+* With Manual Check's hours editor open in one tab, Manual Check was removed in a second tab; Save hours in the first showed "This professional no longer exists." and the list reloaded without it.
+* No console errors.
+* Passed.
 
 ## Files
 

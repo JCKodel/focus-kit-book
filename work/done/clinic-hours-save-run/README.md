@@ -55,7 +55,12 @@ Run from the root of the clinic. Common flags, on every turn:
 
 ## The author's manual check
 
-Pending, collected at the end of the M4.1 loop.
+Run on 2026-09-30, collected at the end of the M4.1 loop, on the clinic's commit `6edc9ad`; the setup is in `../clinic-booking-submit-run/README.md`.
+
+* Saving Monday 09:00 to 08:00 was refused: "Use times from 00:00 to 23:55 in steps of 5 minutes, with To after From."
+* Corrected to 17:00 and saved.
+* After reloading `/owner` and reopening Hours, Monday showed 09:00 to 17:00.
+* Passed.
 
 ## Files
 

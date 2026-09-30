@@ -58,7 +58,7 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * [x] `grep -n "setState(started.state)" src/features/weeklyHours/useWeeklyHours.ts` finds nothing on the clinic's last commit, and the in-flight state is set with a function there, in `submitStarted`'s shape.
 * [x] The new test is in `weeklyHoursEvents.test.ts`; no new dependency in `package.json`.
 * [x] The existing tests pass without changing what they assert; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
-* [ ] The author's manual check recorded in the README: pending, collected at the end of the M4.1 loop.
+* [x] The author's manual check recorded in the README.
 * [x] Each clinic delivery committed by the author, no tag; pushed.
 * [x] No note of the host left outside the clinic's repository.
 * [x] `work/done/clinic-hours-save-run/` as the Contract says; docs/06 as the Contract says.
@@ -86,5 +86,5 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * Every `claude` turn ended with a result of `success` but exited with code 1, standard error holding only `stty: stdin isn't a terminal`; recorded in the README.
 * The suggested commit message carried no trailer; the author committed it as printed.
 * `npm run verify` green on `13dd9c0`: 326 Vitest (two new, a refused save and a sent one, each keeping the time typed after the click), 144 Playwright unchanged, build. Three existing Vitest cases read `update(state)` instead of the old whole state, where the clinic's page planned two; what they assert is the same. No `package.json`, view or `*.e2e.ts` in the diff.
-* The author's manual check on `npm run dev` is collected at the end of the M4.1 loop; its item stays open.
+* The author's manual check on `npm run dev` held, collected at the end of the M4.1 loop on 2026-09-30 on `6edc9ad`, in Chrome driven by Claude in Chrome with the author present: Monday 09:00 to 08:00 refused, corrected to 17:00 and saved, and still 09:00 to 17:00 after a reload.
 * No note of the host outside the repositories: the clinic's auto-memory folder stayed empty and no turn wrote into the host's folder, so nothing was deleted. No ADR, no new term; docs/05 unchanged.

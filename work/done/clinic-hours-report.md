@@ -60,7 +60,7 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * [x] On the clinic's last commit, `grep -nE "forward|saving\(\)|saved\(\)|failed\(\)|refused\(" src/features/weeklyHours/useWeeklyHours.ts` finds nothing, `grep -rnE "hoursSaving|hoursSaved|hoursFailed|hoursRefused" src/` finds nothing, and `grep -rn "What the editor reports" src/` finds one line.
 * [x] The one event's tests are in `professionalsEvents.test.ts`, every report kind covered, `saving` included; no new dependency in `package.json`.
 * [x] The other existing tests pass without changing what they assert; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
-* [ ] The author's manual check recorded in the README: pending, collected at the end of the M4.1 loop.
+* [x] The author's manual check recorded in the README.
 * [x] Each clinic delivery committed by the author, no tag; pushed.
 * [x] No note of the host left outside the clinic's repository.
 * [x] `work/done/clinic-hours-report-run/` as the Contract says; docs/06 as the Contract says.
@@ -91,5 +91,5 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * Every `claude` turn ended with a result of `success` but exited with code 1, standard error holding only `stty: stdin isn't a terminal`; recorded in the README.
 * The suggested commit message carried no trailer; the author committed the second one, after the staged review, as printed: `9f625cb`, pushed, no tag.
 * `npm run verify` green on `9f625cb`: 328 Vitest, where one test of three reports became three tests with the same assertions, 144 Playwright unchanged, build. No `package.json`, view or `*.e2e.ts` in the diff; no module mock.
-* The author's manual check on `npm run dev` is collected at the end of the M4.1 loop; its item stays open.
+* The author's manual check on `npm run dev` held, collected at the end of the M4.1 loop on 2026-09-30 on `6edc9ad`, in Chrome driven by Claude in Chrome with the author present: a save, a refused period, and a professional removed in a second tab, which Save hours answered with "This professional no longer exists." and a reloaded list; no console errors.
 * No note of the host outside the repositories: the clinic's auto-memory folder stayed empty and no turn wrote into the host's folder, so nothing was deleted. No ADR, no new term; docs/05 unchanged.

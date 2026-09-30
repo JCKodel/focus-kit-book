@@ -80,7 +80,12 @@ Run from the root of the clinic. Common flags, on every turn:
 
 ## The author's manual check
 
-Pending, collected at the end of the M4.1 loop.
+Run on 2026-09-30, collected at the end of the M4.1 loop, on the clinic's commit `6edc9ad`; the setup is in `../clinic-booking-submit-run/README.md`.
+
+* The booking of `clinic-booking-submit`'s check, then cancelled from "Your appointments": "Cancelled: Mon 5 Oct at 09:00 with Test. The time is free again."
+* On `/owner`, added a professional, Manual Check, and saved Monday 09:00 to 17:00 hours.
+* It ran in a desktop window, not at the 390x844 the clinic's page asked for.
+* Passed.
 
 ## Files
 

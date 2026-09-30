@@ -59,7 +59,7 @@ Every later round of questions is answered `Your call. Say what you chose and wh
 * [x] `useBooking.ts` has no `shown` ref and no write during render on the clinic's last commit, and the booking's in-flight state is set with a function there.
 * [x] The new test is in `bookingEvents.test.ts`; no new dependency in `package.json`.
 * [x] The existing tests pass without changing what they assert; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
-* [ ] The author's manual check recorded in the README: pending, not reported to this run.
+* [x] The author's manual check recorded in the README.
 * [x] Each clinic delivery committed by the author, no tag; pushed.
 * [x] No note of the host left outside the clinic's repository.
 * [x] `work/done/clinic-booking-submit-run/` as the Contract says; docs/06 as the Contract says.
@@ -84,5 +84,5 @@ Every later round of questions is answered `Your call. Say what you chose and wh
 * The suggested commit message carried a `Co-Authored-By` trailer again; the driver dropped it at commit, by the author's rule.
 * `npm run verify` green on `8e4de46`: 324 Vitest (one new, the name typed after the click kept), 144 Playwright unchanged, build. Three existing Vitest cases read `update(state)` or the event's `state` instead of the old whole state; what they assert is the same. No `package.json`, view or `*.e2e.ts` in the diff.
 * Done when's grep for `shown` was reworded to "no `shown` ref and no write during render": on `8e4de46` the grep still finds the older comment on `latest`, "Only the answer to the latest request is shown", which this page keeps as it is.
-* The author's manual check on `npm run dev` was not reported to this run; its item stays open.
+* The author's manual check on `npm run dev` held, collected at the end of the M4.1 loop on 2026-09-30 on `6edc9ad`, in Chrome driven by Claude in Chrome with the author present: an empty name and phone refused with their messages, a booking with its code shown and listed under "Your appointments". The dev database's forgotten owner password was reset by the driver with the clinic's `hashPassword`, after a backup; the README records it.
 * No note of the host outside the repositories: the clinic's auto-memory folder stayed empty. No ADR, no new term; docs/05 unchanged.

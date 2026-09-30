@@ -48,6 +48,17 @@ Run from the root of the clinic. Common flags, on every turn:
 * Diverged: the starter shape the agent chose is `submitStarted(state)` answering `{ update, send }`; the submit event carries its state as `{ next: "submit", state }`. Three existing Vitest cases changed how they read the result, not what they assert. The agent also added a clause to milestone 1.1's paragraph and a paragraph to the clinic's docs/01 on the starter's update and shape. The suggested commit message carried a `Co-Authored-By` trailer; with the staged review "None", the driver dropped it at commit, by the author's rule.
 * Commit: `8e4de4610f4b86eca911572173bf145a86c3ea79`, "Book with the state the person acted on in useBooking's submit".
 
+## The author's manual check
+
+Run on 2026-09-30, collected at the end of the M4.1 loop with the manual checks of `clinic-update-type`, `clinic-hours-save` and `clinic-hours-report`, which point here for the setup.
+
+* Setup: Chrome, driven by Claude in Chrome at the author's request, the author present, against the clinic's `npm run dev` at `http://localhost:5173`, on the clinic's commit `6edc9ad`, in a desktop window.
+* The owner's password of the dev database was forgotten. The driver reset it with the clinic's own `hashPassword`, writing into `data/clinic.sqlite`, ignored by git, after a backup of that file. Nothing in the clinic's repository changed.
+* Booked with the name Test on Mon 5 Oct at 09:00.
+* Book with an empty name was refused with "Type a name of 1 to 80 characters.", and the phone with "Type a phone number with 6 to 15 digits.".
+* A valid booking showed the booking code and listed it under "Your appointments".
+* Passed.
+
 ## Files
 
 ```

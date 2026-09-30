@@ -65,7 +65,7 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * [x] On the clinic's last commit, the count's first grep finds only files in `src/lib/`; `submitStarted` and `saveStarted` return the shared type and write no object type out, and the starter's grep the README recorded finds nothing in `src/features`.
 * [x] The clinic's page names `bookingEvents.ts` and `submitStarted` as the first occurrences; its docs/01 `lib/` listing names the new file or files.
 * [x] No test changed what it asserts and none was added; no new dependency in `package.json`; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
-* [ ] The author's manual check recorded in the README: pending, collected at the end of the M4.1 loop.
+* [x] The author's manual check recorded in the README.
 * [x] Each clinic delivery committed by the author, no tag; pushed.
 * [x] No note of the host left outside the clinic's repository.
 * [x] `work/done/clinic-update-type-run/` as the Contract says; docs/06 as the Contract says.
@@ -95,5 +95,5 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * Every `claude` turn ended with a result of `success` but exited with code 1, standard error holding only `stty: stdin isn't a terminal`; recorded in the README.
 * The suggested commit message carried no trailer; the author committed it as printed: `181286f`, pushed, no tag.
 * `npm run verify` green on `181286f`: 328 Vitest and 144 Playwright, the counts `hours-report` left, and build. No test file, `package.json` or view in the diff.
-* The author's manual check on `npm run dev` is collected at the end of the M4.1 loop; its item stays open.
+* The author's manual check on `npm run dev` held, collected at the end of the M4.1 loop on 2026-09-30 on `6edc9ad`, in Chrome driven by Claude in Chrome with the author present: a booking cancelled from "Your appointments", and on `/owner` a professional added and Monday's hours saved. It ran in a desktop window, not at the 390x844 the clinic's page asked for.
 * No note of the host outside the repositories: the clinic's auto-memory folder stayed absent and the host's folder gained only the two sessions' transcripts, so nothing was deleted. No ADR, no new term; docs/05 unchanged.
