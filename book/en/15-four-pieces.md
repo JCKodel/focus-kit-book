@@ -438,12 +438,21 @@ Chapter 16 shows the tests and their fakes.
 
 ## When the pieces pay their way
 
-A piece exists when it has a job.
+A piece can exist only when it has a job.
 A use case exists when there is a rule: the `health` slice of [chapter 14](14-errors-and-slices.md#vertical-slices) has none, so it has no `rules.ts`.
 A repository exists when there is I/O, an orchestrator when an event leads to a new state, and a view when there is a screen.
 
 The clinic's [ADR-0002](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/docs/adr/ADR-0002-focus-whole.md), the decision to take FOCUS whole, names the cost in its Consequences: "*A slice has more files than a component that fetches on its own; a file appears only when it pays its way.*"
 Its Context names what the clinic buys with it: a product that values "*every rule has a test*", and a rule in a pure function is the cheapest place for one.
+
+A job is needed, and it is not enough: the health slice's client orchestrator has one and still does not pay its way.
+Its job is real: `check`, in [`healthEvents.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/health/healthEvents.ts), turns the server's answer into `ok` or `unreachable`.
+Its cost, counted with `wc -l` at each tag: at `book-v1/closing-a-milestone` it was one file, `useHealth.ts`, of 20 lines; at `book-v1/four-pieces` it is three, `useHealth.ts` (21), `healthEvents.ts` (16) and `healthEvents.test.ts` (17), 54 lines.
+It also brings an update function that ignores the current state, and a `repositories` parameter that only the test uses.
+Its gain is already given: the two Vitest cases of `healthEvents.test.ts`, "gives ok" and "gives unreachable", assert what [`HealthView.e2e.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/health/HealthView.e2e.ts) asserts, whose four Playwright tests show "Server: ok" once and "Server: unreachable" twice, on a 500 and on no answer.
+The same piece pays in `bookingEvents.ts`, step 2 of [One event, one new state](#one-event-one-new-state): its test "keeps a name typed in flight through a taken slot" proves what no Playwright test at the tag proves.
+Alone, `healthEvents.ts` costs more than it gives.
+The clinic keeps it because [`orchestrator-tests`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/work/done/orchestrator-tests.md), the delivery that wrote it, chose "*Every event moves*", so every hook has one shape: that shape is what the clinic pays for, not the piece.
 
 Where the code already has its own shape, the pieces can cost more than they give.
 On the brownfield project of [chapter 8](08-analyze.md#focus-on-code-without-an-architecture), FOCUS whole meant a large refactor, and the answer was neither.
@@ -453,7 +462,7 @@ KISS, YAGNI and DRY decide, as [chapter 6](06-the-documents.md#the-two-choices) 
 ## Key points
 
 * The view fires events and renders state, the orchestrator turns one event into one new state, a use case holds a rule as a pure function, and the repository is the only piece that fetches and saves.
-* A piece is written when it has a job, and the "Forbids" column keeps it to that job.
+* A piece is written when it has a job and that job gives more than it costs; the "Forbids" column keeps it to that job.
 * In the clinic each side has its own orchestrator and repositories, and both import the same use cases: the server enforces a rule, and the client uses it only to decide what to show.
 * An event flows one way: the view never sets the state, and a use case never calls a repository.
 * A piece receives a dependency only where its test passes a second implementation, a fake: the orchestrator its repositories or the driver they use, and a server repository that driver; a use case and a view receive none, and `now` is passed as data.

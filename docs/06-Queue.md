@@ -110,9 +110,8 @@ When this milestone closes, every confirmed finding of the M4 review is settled:
 [x] ch15-route-io          Chapters 6, 14 and 15: the route that reads the request body squares with "the only place an infra exception becomes a Result" and "only the repository does I/O"; both editions
 [x] ch15-submit-event      Chapter 15: says the hook's submitEvent is bookingEvents.ts's submit imported under another name, and what shown and latest hold; both editions
 [x] slice-imports          Chapters 14, 15 and 16: say whether a slice may import another slice's code, as slotsOf imports the repositories of three other slices, and when that code moves to src/lib/ instead; both editions
-[>] ch14-failure-kinds     Chapter 14: says what an error and an exception are without Dart's classes, why an exception must not steer the flow, and that a library's exception becomes the domain's value at the boundary, so the app has none; both editions
 [x] ch15-injection-rule    Chapter 15: the injection rule, its key point and "Nowhere else is anything passed" fit the code, where every repository function receives db; both editions
-[>] ch15-piece-cost        Chapter 15: "When the pieces pay their way" shows a piece that has a job and still costs more than it gives, so a reader can weigh one; both editions
+[x] ch15-piece-cost        Chapter 15: "When the pieces pay their way" shows a piece that has a job and still costs more than it gives, so a reader can weigh one; both editions
 [>] ch16-unit-test         Chapter 16: the definition of a unit test fits the route test, which drives the route, the use case, the repository and SQLite; both editions
 [>] ch16-it-each           Chapter 16: the text describes the it.each over two refusal codes and an exception as it runs, and says what it.each does; both editions
 [>] ch16-reading-count     Chapter 16: the key point's 20 of 95 files gets a baseline, or "small" is stated as a description, not a measure; both editions
@@ -121,6 +120,7 @@ When this milestone closes, every confirmed finding of the M4 review is settled:
 [>] clinic-hours-report    the weekly hours editor's reports, saving included, reach the professionals section through one report member of HoursSection and one tested professionals event, so forward, the four callbacks and the copied comment leave; this finishes the clinic's milestone 1.1 line orchestrator-tests, which left forward and the saving report in the hook untested, by a recorded run
 [>] clinic-update-type     the update type (current) => State is declared once and shared, and so is the starter shape that submitStarted and saveStarted repeat, each with its first occurrence named, as the clinic's AGENTS.md asks, where today seven files declare the type, by a recorded run
 [>] clinic-event-shapes    the clinic's docs/01 names every shape an event with a call takes once the lines above are done, where today it gives one and the booking's next event, the weekly hours' { update, report } and starter, and the remembered list's plain functions are written only in work/done, by a recorded run
+[>] ch14-failure-kinds     Chapter 14: says what an error and an exception are without Dart's classes, why an exception must not steer the flow, and that a library's exception becomes the domain's value at the boundary, so the app has none; both editions
 [ ] m4.1-review            the review of M4.1 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against the product questions and M4.1's paragraph; each confirmed finding becomes a line in a new milestone M4.2
 ```
 

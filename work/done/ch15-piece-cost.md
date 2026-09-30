@@ -44,9 +44,18 @@ Sentences are found by their quoted text. `ch15-event-delivery`, `ch15-submit-ev
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapter 15 still opens with its value, with no filler and nothing useful cut.
-* [ ] Every count in the new paragraph names its tag, and the method (`wc -l`) is in the text.
-* [ ] No "A piece exists when it has a job" or "Uma peça existe quando tem um trabalho" left in `book/`. Key point 2 in both editions names the job and the weighing.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning. Chapter 15 still opens with its value, with no filler and nothing useful cut.
+* [x] Every count in the new paragraph names its tag, and the method (`wc -l`) is in the text.
+* [x] No "A piece exists when it has a job" or "Uma peça existe quando tem um trabalho" left in `book/`. Key point 2 in both editions names the job and the weighing.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Every quoted sentence was still in both editions; earlier deliveries had moved the section to en/15:439 and pt/15:440, and key point 2 to en/15:456 and pt/15:457.
+* The clinic's numbers were checked at the tags before writing: `useHealth.ts` 20 lines at `book-v1/closing-a-milestone`; 21, 16 and 17 at `book-v1/four-pieces` (commit `e6653b5`), and the test names as quoted.
+* The first sentence takes the page's proposal, "A piece can exist only when it has a job." The new paragraph opens with "A job is needed, and it is not enough", then weighs job, cost, gain, contrast and verdict in the page's order, one sentence per step. The contrast links step 2 by the anchor of "One event, one new state" instead of showing `bookingEvents.ts` again.
+* "*Every event moves*" is translated in the Portuguese text as "*Todo evento se move*", as the chapter does for ADR-0002; the test names stay in English with the translation in parentheses, as chapter 16 does. "fatia `health`" is kept.
+* The paragraph says "every hook" rather than "all eight hooks": the count of hooks is not weighed here (out of scope).
+* Key point 2 takes the page's proposal in both editions. Finding F12 of the M4 review is settled. `make verify` green.

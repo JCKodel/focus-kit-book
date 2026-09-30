@@ -439,12 +439,21 @@ O capítulo 16 mostra os testes e os repositórios falsos deles.
 
 ## Quando as peças se pagam
 
-Uma peça existe quando tem um trabalho.
+Uma peça só pode existir quando tem um trabalho.
 Um caso de uso existe quando há uma regra: a fatia `health` do [capítulo 14](14-errors-and-slices.md#fatias-verticais) não tem nenhuma, então não tem `rules.ts`.
 Um repositório existe quando há I/O, um orquestrador quando um evento leva a um novo estado, e uma tela quando há uma tela para mostrar.
 
 O [ADR-0002](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/docs/adr/ADR-0002-focus-whole.md) da clínica, a decisão de adotar o FOCUS inteiro, nomeia o custo nas suas Consequences: "*Uma fatia tem mais arquivos do que um componente que busca os dados sozinho; um arquivo só aparece quando se paga.*"
 O Context dele nomeia o que a clínica compra com isso: um produto que valoriza "*toda regra tem um teste*", e uma regra em uma função pura é o lugar mais barato para um.
+
+Um trabalho é necessário, e não basta: o orquestrador do cliente da fatia `health` tem um e mesmo assim não se paga.
+O trabalho dele é real: `check`, em [`healthEvents.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/health/healthEvents.ts), transforma a resposta do servidor em `ok` ou `unreachable`.
+O custo dele, contado com `wc -l` em cada tag: em `book-v1/closing-a-milestone` era um arquivo, `useHealth.ts`, de 20 linhas; em `book-v1/four-pieces` são três, `useHealth.ts` (21), `healthEvents.ts` (16) e `healthEvents.test.ts` (17), 54 linhas.
+Ele traz também uma função de atualização que ignora o estado atual, e um parâmetro `repositories` que só o teste usa.
+O ganho dele já é dado: os dois casos do Vitest em `healthEvents.test.ts`, "gives ok" (dá ok) e "gives unreachable" (dá unreachable), afirmam o que [`HealthView.e2e.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/health/HealthView.e2e.ts) afirma, cujos quatro testes do Playwright mostram "Server: ok" uma vez e "Server: unreachable" duas, com um 500 e sem resposta.
+A mesma peça se paga em `bookingEvents.ts`, o passo 2 de [Um evento, um novo estado](#um-evento-um-novo-estado): o teste dele "keeps a name typed in flight through a taken slot" (mantém um nome digitado em andamento apesar de um horário tomado) prova o que nenhum teste do Playwright na tag prova.
+Sozinho, `healthEvents.ts` custa mais do que dá.
+A clínica o mantém porque [`orchestrator-tests`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/work/done/orchestrator-tests.md), a entrega que o escreveu, escolheu "*Todo evento se move*", para que todo hook tenha uma só forma: essa forma é o que a clínica paga, não a peça.
 
 Onde o código já tem a sua própria forma, as peças podem custar mais do que dão.
 No projeto brownfield do [capítulo 8](08-analyze.md#focus-em-codigo-sem-arquitetura), o FOCUS inteiro significava uma refatoração grande, e a resposta foi nenhum.
@@ -454,7 +463,7 @@ KISS, YAGNI e DRY decidem, como o [capítulo 6](06-the-documents.md#as-duas-esco
 ## Pontos-chave
 
 * A tela dispara eventos e renderiza o estado, o orquestrador transforma um evento em um novo estado, um caso de uso guarda uma regra como função pura, e o repositório é a única peça que busca e salva.
-* Uma peça é escrita quando tem um trabalho, e a coluna "Proíbe" a mantém nesse trabalho.
+* Uma peça é escrita quando tem um trabalho e esse trabalho dá mais do que custa; a coluna "Proíbe" a mantém nesse trabalho.
 * Na clínica cada lado tem o seu orquestrador e os seus repositórios, e os dois importam os mesmos casos de uso: o servidor impõe uma regra, e o cliente a usa só para decidir o que mostrar.
 * Um evento corre em um só sentido: a tela nunca muda o estado, e um caso de uso nunca chama um repositório.
 * Uma peça recebe uma dependência só onde o teste dela passa uma segunda implementação, uma falsa: o orquestrador os seus repositórios ou o driver que eles usam, e um repositório do servidor esse driver; um caso de uso e uma tela não recebem nenhuma, e `now` é passado como dado.
