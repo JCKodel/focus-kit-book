@@ -1,0 +1,19 @@
+[tool Bash] ls docs work 2>/dev/null; cat docs/05*.md docs/06*.md; ls work 2>/dev/null && cat work/*.md 2>/dev/null | head -400
+
+[tool Bash] cat docs/00*.md docs/03*.md; ls work/done; cat work/done/book-appointment.md work/done/orchestrator-tests.md
+
+[tool Bash] cat docs/01*.md; ls -R src/features | head -80
+
+[tool Read] <host folder of the clinic>/tool-results/br23g7ev2.txt
+
+[tool Bash] grep -n "submit\|busy" src/features/appointments/bookingEvents.ts src/features/appointments/useBooking.ts src/features/appointments/BookingView.tsx | head -50; git log --oneline | head -20
+
+I read docs/00, 01, 03, 05, 06, the finished pages in `work/done/` and the booking code. There's nothing in flight in `work/`. Before I write anything, one thing needs clearing up.
+
+**`booking-submit` isn't in the queue, and what the name suggests is already built.** `book-appointment` shipped the form, the "Book" button, the checks on name and phone before sending, and the server re-check. `orchestrator-tests` then moved `submit` and `submitStarted` into `bookingEvents.ts` with tests. So I can't tell what this delivery should change, and no document answers it. These are the readings I can see, with my recommendation first:
+
+1. **You mean `slot-taken-retry`** (Milestone 1.1, still `[ ]`). It's the one open line about what happens after pressing "Book". When a booking is refused and the slot reload then fails, "Try again" should keep the "This time is no longer free" message and the chosen date. `orchestrator-tests` already pinned the current behaviour in a test that this fix will flip, so it's small and ready. **This is my recommendation.** I'd write it under the queue's name, `slot-taken-retry`, rather than rename the line.
+2. **A new behaviour of the booking submit** that no line covers yet. Examples: a double tap sending two bookings, the keyboard's "Go" key, or what the form shows while the booking is in flight. If so, tell me what you've seen or want. I'll add a new line to Milestone 1.1, or to a later milestone if it's a feature rather than a review finding (docs/05 §8 keeps findings in their milestone).
+3. **Something on the server side of `POST /api/appointments`**, such as the check order or the booking code draw. Same as above: tell me what's wrong or missing.
+
+Which one is it? If it's 2 or 3, one or two sentences about what a client or the owner would notice is enough to start.

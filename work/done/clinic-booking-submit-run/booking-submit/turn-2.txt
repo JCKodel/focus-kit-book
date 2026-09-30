@@ -1,0 +1,42 @@
+[tool Read] src/features/appointments/useBooking.ts
+
+[tool Read] src/features/appointments/bookingEvents.ts
+
+[tool Bash] grep -n "submitStarted\|submit(" src/features/appointments/bookingEvents.test.ts | head -30; grep -n "save\|Started" src/features/weeklyHours/useWeeklyHours.ts | head -20
+
+[tool Bash] sed -n 265,300p src/features/appointments/bookingEvents.test.ts; grep -n "next: \"submit\"\|retryOf" -r src docs | grep -v "^src/features/appointments/bookingEvents.ts"; grep -n "in-flight\|Started" docs/01-Architecture.md docs/04*.md
+
+Clear enough to write. I'll give the starter the shape `{ update, send }`. The page explains why and lists the choices I made on my own.
+
+[tool Write] work/booking-submit.md
+
+[tool Read] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+I wrote `work/booking-submit.md`. In docs/06, I added `[>] booking-submit` to milestone 1.1 just before `m1.1-review`. I also added a clause to that milestone's paragraph so the review checks this line. docs/05 says to work on trunk, so I made no branch. Nothing is staged or committed, and I wrote no code.
+
+**The shape I chose:** `submitStarted(state)` returns `{ update: (current) => BookingState, send: boolean }`.
+- **Why `send` stays separate:** the hook has to know right away whether to make the call, so that decision can't wait inside an update that React applies later.
+- **Why `update`:** it has the same name and type as the `update` in `BookingOutcome`, so the hook publishes both the same way, with `setState(x.update)`.
+- **What each part reads:** the check reads the state the person acted on, so the server gets exactly what was checked. The update writes onto the current state, so a name typed after the click survives.
+
+The page names this as the first occurrence, with `saveStarted` as the second in a later delivery.
+
+**Choices I made on my own, which you should question:**
+1. **The state travels inside `BookingNext`**, as `{ next: "submit"; state }`, rather than as a second argument to `run`. That keeps `retryOf` pure: it hands over the state it was given.
+2. **`submit`'s callback now depends on `state`**, as `retry`'s already does.
+3. **Three existing tests change how they read the result, not what they claim.** The two `submitStarted` tests read `update(state)` instead of `.state`, and the `retryOf` test for `"book"` now expects the `state` field. You may have expected no existing test to change. Because the return shape changes, these edits can't be avoided.
+4. **The milestone 1.1 paragraph gained a clause** for this line.
+
+I didn't queue lines for `saveStarted` or for declaring the shared shape. Tell me if you want them in the queue now, and in which milestone.
+
+Please read the page and question it:
+- Each Behaviour line should be checkable.
+- The Contract should be exact.
+- Out of scope should name anything you assumed was included.
+- The choices above are mine, not yours.
+
+Ask for any corrections here. Then open a fresh session and type `/apply booking-submit`.

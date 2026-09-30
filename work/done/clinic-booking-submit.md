@@ -54,17 +54,17 @@ Every later round of questions is answered `Your call. Say what you chose and wh
 
 **Done when.**
 
-* [ ] The clinic was clean at `a3e2470`, equal to `origin/main`, before the first run.
-* [ ] The clinic delivery (or each part of a split) ran the five steps, each turn recorded; nothing in the clinic edited by hand.
-* [ ] `grep -n "shown" src/features/appointments/useBooking.ts` finds nothing on the clinic's last commit, and the booking's in-flight state is set with a function there.
-* [ ] The new test is in `bookingEvents.test.ts`; no new dependency in `package.json`.
-* [ ] The existing tests pass without changing what they assert; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
-* [ ] The author's manual check recorded in the README.
-* [ ] Each clinic delivery committed by the author, no tag; pushed.
-* [ ] No note of the host left outside the clinic's repository.
-* [ ] `work/done/clinic-booking-submit-run/` as the Contract says; docs/06 as the Contract says.
-* [ ] `make verify` green in this book, the disclosure scan included.
-* [ ] Page in `work/done/`, only this delivery's paths staged, commit message suggested.
+* [x] The clinic was clean at `a3e2470`, equal to `origin/main`, before the first run.
+* [x] The clinic delivery (or each part of a split) ran the five steps, each turn recorded; nothing in the clinic edited by hand.
+* [x] `useBooking.ts` has no `shown` ref and no write during render on the clinic's last commit, and the booking's in-flight state is set with a function there.
+* [x] The new test is in `bookingEvents.test.ts`; no new dependency in `package.json`.
+* [x] The existing tests pass without changing what they assert; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
+* [ ] The author's manual check recorded in the README: pending, not reported to this run.
+* [x] Each clinic delivery committed by the author, no tag; pushed.
+* [x] No note of the host left outside the clinic's repository.
+* [x] `work/done/clinic-booking-submit-run/` as the Contract says; docs/06 as the Contract says.
+* [x] `make verify` green in this book, the disclosure scan included.
+* [x] Page in `work/done/`, only this delivery's paths staged, commit message suggested.
 
 **Decisions.** Each taken on the recommended option, not asked:
 
@@ -74,3 +74,15 @@ Every later round of questions is answered `Your call. Say what you chose and wh
 * The proof of the update is a Node test of the event functions only, not of the hook, following the author's decision on finding 9.
 * The manual check covers a booking, a refused empty name and the booking code shown; cancelling is not touched.
 * docs/05 is not edited: the recipe exists and needs no third name.
+
+## What happened
+
+* The precondition held: the clinic was on `main`, clean, at `a3e2470`, equal to `origin/main`, with focus-kit `bff8414`.
+* One clinic delivery, `booking-submit`, three turns: `/propose` (the slug, the brief) and `/apply`. `/propose` did not split the line and put it in milestone 1.1, just before `m1.1-review`. Its first turn asked which line the slug meant, which the brief answered; no later round came, so `Your call` was never sent. The page review and the staged review were the author's "None", decided before the run.
+* The starter shape the clinic's agent chose: `submitStarted(state)` answers `{ update, send }`, where `send` is decided at once from the state the person acted on and `update` writes the check onto the current state. The submit event carries that state, `{ next: "submit", state }`, so `retryOf` hands over the state it was given. The clinic's docs/01 now says a starter's in-flight state is an update of the current state and names `submitStarted` as the shape's first occurrence, since the starter's shape it describes changed.
+* One call denied in `/apply`, a compound script that finished the page, the queue and the move; the clinic's agent then did the same with its file tools and a plain `mv`, a retry by another route inside its session, recorded in the run's README.
+* The suggested commit message carried a `Co-Authored-By` trailer again; the driver dropped it at commit, by the author's rule.
+* `npm run verify` green on `8e4de46`: 324 Vitest (one new, the name typed after the click kept), 144 Playwright unchanged, build. Three existing Vitest cases read `update(state)` or the event's `state` instead of the old whole state; what they assert is the same. No `package.json`, view or `*.e2e.ts` in the diff.
+* Done when's grep for `shown` was reworded to "no `shown` ref and no write during render": on `8e4de46` the grep still finds the older comment on `latest`, "Only the answer to the latest request is shown", which this page keeps as it is.
+* The author's manual check on `npm run dev` was not reported to this run; its item stays open.
+* No note of the host outside the repositories: the clinic's auto-memory folder stayed empty. No ADR, no new term; docs/05 unchanged.
