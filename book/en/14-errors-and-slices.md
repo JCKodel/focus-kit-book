@@ -275,6 +275,9 @@ Domain-driven design calls such a translator an anti-corruption layer, whose "*c
 The clinic does it with SQLite, at `book-v1/closing-a-milestone`.
 `git grep node:sqlite -- src` finds `DatabaseSync` imported as a value, outside test files, only in `database.server.ts`, where `query` turns SQLite's failure into `DatabaseFailed`, and in `testDatabase.server.ts`, the tests' in-memory database.
 Every other file that names it, the repositories and the routes among them, imports only its type, to receive and pass the open database; no rule, hook, screen or `api.ts` imports it at all.
+The routes never call it: they hand it to the repositories and to `requireSession`, so SQLite's methods and failures stay behind them.
+A library's type may cross the boundary this way, as a handle passed on and never called, and a new version of SQLite still changes the I/O code alone.
+Replacing SQLite with another library would also change that import in each route, and the compiler would name every one.
 `git grep "UNIQUE constraint"` finds the text of SQLite's `UNIQUE` failure in one file, `appointments/repository.server.ts`, where it becomes `SlotTaken`.
 
 Is every exception outside I/O a bug, then? Almost:
@@ -304,7 +307,7 @@ The clinic's docs/01, in its section "How errors travel", gives the path a failu
 * A file enters a slice when it pays its way; code about one feature stays in its slice, which other slices import, and code that belongs to no one feature enters `lib/` on its second use.
 * An error is a bug, fixed and never caught; an exception is a failure from outside the program, caught at the boundary and returned as a value; a refusal is a rule saying no, in code or in a database constraint; the class name tells none of them apart.
 * A throw is an exit the caller cannot see and the compiler cannot check, so it never steers the flow.
-* A library's exception belongs to the library: the code at the boundary turns it into the domain's value, and the rest of the app throws nothing.
+* A library's exception belongs to the library: the code at the boundary turns it into the domain's value, and the rest of the app throws nothing; a library's type crosses the boundary only as a handle that the code past it passes on and never calls.
 * The catch at the boundary also catches bugs, so every repository runs in a test against SQLite with the real migrations, and the code that turns an exception into an answer logs what it carries.
 * A `Result` handled with a `Record` over its cases fails to compile when a case is forgotten.
 

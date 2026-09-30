@@ -275,6 +275,9 @@ O domain-driven design chama esse tradutor de camada anticorrupção, cujo "*pro
 A clínica faz isso com o SQLite, em `book-v1/closing-a-milestone`.
 `git grep node:sqlite -- src` acha `DatabaseSync` importado como valor, fora dos arquivos de teste, só em `database.server.ts`, onde `query` transforma a falha do SQLite em `DatabaseFailed`, e em `testDatabase.server.ts`, o banco em memória dos testes.
 Todo outro arquivo que o nomeia, os repositórios e as rotas entre eles, importa só o tipo dele, para receber e repassar o banco aberto; nenhuma regra, hook, tela ou `api.ts` o importa.
+As rotas nunca o chamam: elas o entregam aos repositórios e a `requireSession`, então os métodos e as falhas do SQLite ficam atrás deles.
+Um tipo de biblioteca pode cruzar a fronteira assim, como uma alça repassada e nunca chamada, e uma versão nova do SQLite continua mudando só o código de I/O.
+Trocar o SQLite por outra biblioteca mudaria também esse import em cada rota, e o compilador apontaria cada uma.
 `git grep "UNIQUE constraint"` acha o texto da falha de `UNIQUE` do SQLite em um arquivo só, `appointments/repository.server.ts`, onde ele vira `SlotTaken`.
 
 Então toda exceção fora do I/O é um bug? Quase:
@@ -304,7 +307,7 @@ O docs/01 da clínica, na seção "How errors travel", dá o caminho que uma fal
 * Um arquivo entra em uma fatia quando se paga; o código sobre uma funcionalidade fica na fatia dela, que as outras fatias importam, e o código que não pertence a nenhuma funcionalidade entra em `lib/` no segundo uso.
 * Um erro é um bug, corrigido e nunca capturado; uma exceção é uma falha de fora do programa, capturada na fronteira e devolvida como valor; uma recusa é uma regra dizendo não, no código ou numa restrição do banco; o nome da classe não distingue nenhum deles.
 * Um throw é uma saída que quem chama não vê e o compilador não verifica, então nunca conduz o fluxo.
-* A exceção de uma biblioteca pertence à biblioteca: o código na fronteira a transforma no valor do domínio, e o resto do app não lança nada.
+* A exceção de uma biblioteca pertence à biblioteca: o código na fronteira a transforma no valor do domínio, e o resto do app não lança nada; um tipo de biblioteca só cruza a fronteira como uma alça que o código depois dela repassa e nunca chama.
 * O catch na fronteira também captura bugs, então todo repositório roda num teste contra o SQLite com as migrations reais, e o código que transforma uma exceção numa resposta registra o que ela carrega.
 * Um `Result` tratado com um `Record` sobre os seus casos não compila quando um caso é esquecido.
 

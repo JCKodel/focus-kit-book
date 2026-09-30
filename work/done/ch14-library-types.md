@@ -35,8 +35,16 @@
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
-* [ ] Every claim about the clinic checked again at `book-v1/closing-a-milestone`.
-* [ ] `make verify` green.
+* [x] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
+* [x] Every claim about the clinic checked again at `book-v1/closing-a-milestone`.
+* [x] `make verify` green.
 * [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Revalidated against the tree after `ch14-keepless-feature` and `ch14-swallowed-bug`: the quoted sentences and the key point were unchanged, now at lines 271, 277, 278 and 307 of both editions; the new sentences follow line 277.
+* Re-check at `book-v1/closing-a-milestone`: `import type { DatabaseSync }` in the five `route.server.ts`, the five `repository.server.ts`, `migrate.server.ts`, `session.server.ts` and `start.server.ts`; the value import only in `database.server.ts` and `testDatabase.server.ts` outside tests. `git grep "db\.\(prepare\|exec\|close\)"` finds no call in any route; outside tests, the calls are in four repositories, `database.server.ts`, `migrate.server.ts` and `session.server.ts`. `requireSession` is called in three routes (professionals, signIn, weeklyHours), so "they hand it to the repositories and to `requireSession`" holds of the routes together.
+* The English and Portuguese proposals went in as written; the page's wording was already short. Portuguese keeps "alça" for handle, as the page proposed, taken alone in the batch; it is plain Portuguese, not a docs/03 term.
+* Key point: the clause was worded "a library's type crosses the boundary only as a handle that the code past it passes on and never calls", with "a library's type" in place of "its type", so it cannot read as the exception's type.
+* `make book` not run: in this batch the driver builds once at the end of the loop, so that item stays unticked.
