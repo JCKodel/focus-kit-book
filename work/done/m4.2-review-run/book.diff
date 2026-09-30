@@ -1,0 +1,739 @@
+commit 372ea0a291b8d3df84396a49db1c6a53552c90e7
+Author: J.C.Ködel <jckodel@gmail.com>
+Date:   Wed Sep 30 14:22:11 2026 -0300
+
+    docs(pt-spec-change-terms): say "especificação" and "mudança" in pt chapters 1, 4 and 13
+    
+    - ten phrases changed, body and source notes; English edition unchanged
+    - settles finding F1 of the M4.1 review
+    
+    work/done/pt-spec-change-terms.md
+
+diff --git a/book/pt/01-why-process.md b/book/pt/01-why-process.md
+index fba6da3..faaffd7 100644
+--- a/book/pt/01-why-process.md
++++ b/book/pt/01-why-process.md
+@@ -69,8 +69,8 @@ O capítulo 4 conta a história do Ninjobs e como o focus-kit nasceu dela.
+ * Em um ensaio controlado, desenvolvedores experientes ficaram mais lentos com IA e acreditaram que estavam mais rápidos.
+ * Sem processo, o agente adivinha o que você não decidiu, aumenta o escopo e declara "pronto" sem prova.
+ * Um processo mínimo dá ao agente uma decisão por escrito, uma página por entrega e uma verificação antes do "pronto".
+-* Processo demais também falha, quando escrever a spec vira o trabalho.
++* Processo demais também falha, quando escrever a especificação vira o trabalho.
+ 
+ [^metr-2025]: METR, "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity", 2025. <https://arxiv.org/abs/2507.09089>
+ [^dora-2024]: DORA, "Accelerate State of DevOps Report 2024", 2024. <https://dora.dev/research/2024/dora-report/>
+-[^ninjobs]: Ninjobs, repositório privado, contado pelo autor no histórico até 2026-08-29, quando o ADR-0022 do projeto abandonou o OpenSpec: dias com commit e commits pelo `git log`, changes pelo arquivo do OpenSpec, linhas com `wc -l` sobre todos os arquivos de `openspec/`. As telas e a tabela são as que esse ADR lista.
++[^ninjobs]: Ninjobs, repositório privado, contado pelo autor no histórico até 2026-08-29, quando o ADR-0022 do projeto abandonou o OpenSpec: dias com commit e commits pelo `git log`, mudanças pelo arquivo do OpenSpec, linhas com `wc -l` sobre todos os arquivos de `openspec/`. As telas e a tabela são as que esse ADR lista.
+diff --git a/book/pt/04-birth-of-focus-kit.md b/book/pt/04-birth-of-focus-kit.md
+index 8f09dc7..80d2b5a 100644
+--- a/book/pt/04-birth-of-focus-kit.md
++++ b/book/pt/04-birth-of-focus-kit.md
+@@ -6,14 +6,14 @@ Depois deste capítulo você consegue dizer por quê, e a que falha responde cad
+ ## Como era
+ 
+ O Ninjobs começou com o OpenSpec.
+-Cada funcionalidade era uma change com proposta, especificações, design e tarefas, e cada decisão era escrita de novo nos documentos e nos ADRs do projeto, os registros de decisão de arquitetura, um arquivo por decisão.
++Cada funcionalidade era uma mudança com proposta, especificações, design e tarefas, e cada decisão era escrita de novo nos documentos e nos ADRs do projeto, os registros de decisão de arquitetura, um arquivo por decisão.
+ Antes de uma entrega contar como pronta, ela precisava passar por 29 verificações.[^ninjobs]
+ Em quinze dias, isso produziu quatro telas.[^ninjobs]
+ 
+ ## O que deu errado
+ 
+ O processo pesava mais do que o trabalho a que servia.
+-Uma decisão morava em seis lugares que podiam discordar: os documentos, as especificações, as changes, os ADRs, um roteiro e o código.
++Uma decisão morava em seis lugares que podiam discordar: os documentos, as especificações, as mudanças, os ADRs, um roteiro e o código.
+ Toda entrega tinha de mantê-los em acordo, e cada um podia ficar desatualizado sozinho.
+ As verificações eram caras de satisfazer e baratas de contornar, e nenhuma jamais tinha reprovado um erro do produto.[^ninjobs]
+ Um OpenSpec mais enxuto não teria ajudado: o custo estava no número de lugares, e não no tamanho de cada arquivo.
+@@ -25,7 +25,7 @@ Em 2026-08-29 eu recomecei o projeto com um processo pequeno o bastante para cab
+ * **Uma página por entrega.** O que construir, e o que fica de fora, cabe em uma página. Se não cabe, são duas entregas.
+ * **Decidir e fazer em sessões separadas.** O `/propose` conversa e escreve a página; o `/apply` a constrói em uma sessão nova, só com a página e os documentos: um contexto que cresce perde precisão ([capítulo 2](02-how-agents-see.md)), então a construção começa limpa, com o alvo escrito, sem a conversa que o decidiu.
+ * **Os documentos guardam os fatos.** Os comandos só dizem quais documentos ler e o que nunca fazer.
+-* **Uma fila**, uma linha por entrega. Sem especificação formal, sem arquivamento, sem pasta de change. O roteiro guardava juntos o plano de cada entrega e o seu raciocínio, então ler a lista era ler tudo; a fila guarda uma linha por entrega, e a página guarda o raciocínio.
++* **Uma fila**, uma linha por entrega. Sem especificação formal, sem arquivamento, sem pasta de mudança. O roteiro guardava juntos o plano de cada entrega e o seu raciocínio, então ler a lista era ler tudo; a fila guarda uma linha por entrega, e a página guarda o raciocínio.
+ * **O agente nunca faz commit.** Ele coloca o trabalho em stage com `git add`; a pessoa revisa e faz o commit. Nenhuma das 29 verificações jamais tinha pegado um erro do produto, então a verificação que olha o produto é a revisão que a pessoa faz de cada commit.
+ * **O regulador.** Tudo o que quiser voltar responde a uma pergunta: que erro concreto isso teria pegado?
+ 
+@@ -51,4 +51,4 @@ Escolha uma stack pelo valor do projeto e pelo quanto o agente a conhece; o cap
+ * O regulador pergunta a cada acréscimo que erro concreto ele teria pegado.
+ * Escolha uma stack que o agente conhece.
+ 
+-[^ninjobs]: Ninjobs, repositório privado, contado pelo autor no histórico até 2026-08-29, quando o ADR-0022 do projeto abandonou o OpenSpec: dias com commit e commits pelo `git log`, changes pelo arquivo do OpenSpec, linhas com `wc -l` sobre todos os arquivos de `openspec/`. As telas e a tabela são as que esse ADR lista. As causas, a alternativa recusada e a decisão são as do próprio ADR, parafraseadas; o roteiro que guardava o raciocínio de cada plano e a sessão limpa com um alvo escrito vêm dos pareceres independentes que esse ADR cita, também parafraseados. O ADR-0026 do projeto, datado de 2026-09-21, dá a data da abertura ao público e a adoção do focus-kit.
++[^ninjobs]: Ninjobs, repositório privado, contado pelo autor no histórico até 2026-08-29, quando o ADR-0022 do projeto abandonou o OpenSpec: dias com commit e commits pelo `git log`, mudanças pelo arquivo do OpenSpec, linhas com `wc -l` sobre todos os arquivos de `openspec/`. As telas e a tabela são as que esse ADR lista. As causas, a alternativa recusada e a decisão são as do próprio ADR, parafraseadas; o roteiro que guardava o raciocínio de cada plano e a sessão limpa com um alvo escrito vêm dos pareceres independentes que esse ADR cita, também parafraseados. O ADR-0026 do projeto, datado de 2026-09-21, dá a data da abertura ao público e a adoção do focus-kit.
+diff --git a/book/pt/13-the-governor.md b/book/pt/13-the-governor.md
+index c82d80a..142c8b4 100644
+--- a/book/pt/13-the-governor.md
++++ b/book/pt/13-the-governor.md
+@@ -45,8 +45,8 @@ A primeira regra impede que avisos novos se acumulem de novo em um relatório; a
+ O §7 do docs/05 lista sete coisas que o processo não tem.
+ Cada trabalho continua sendo feito, por algo que o processo já tem:
+ 
+-* **Spec formal:** a página, `work/<slug>.md`, diz o que a entrega faz, nas palavras da pessoa que a lê.
+-* **Delta de spec:** no OpenSpec, o arquivo de uma mudança que lista só os requisitos que ela acrescenta, altera ou remove, incorporado às specs quando a mudança é arquivada;[^openspec-glossary] a mudança do OpenSpec no [capítulo 3](03-spec-driven.md) escreveu dois, cada um com o título "Spec Delta".[^spec-driven-run] No focus-kit, os documentos que a entrega muda, na mesma entrega, dizem o que mudou.
++* **Especificação formal:** a página, `work/<slug>.md`, diz o que a entrega faz, nas palavras da pessoa que a lê.
++* **Delta de especificação:** no OpenSpec, o arquivo de uma mudança que lista só os requisitos que ela acrescenta, altera ou remove, incorporado às especificações quando a mudança é arquivada;[^openspec-glossary] a mudança do OpenSpec no [capítulo 3](03-spec-driven.md) escreveu dois, cada um com o título "Spec Delta".[^spec-driven-run] No focus-kit, os documentos que a entrega muda, na mesma entrega, dizem o que mudou.
+ * **Pasta de mudança:** a página é a mudança, em `work/<slug>.md` enquanto é construída e em `work/done/` depois.
+ * **Tarefas numeradas:** as linhas de Behaviour, cada uma um teste ou uma conferência.
+ * **Portão antes da implementação:** a pessoa que lê a página antes do `/apply`.
+@@ -98,7 +98,7 @@ Fique com a verificação só se a resposta nomear um erro do histórico do seu
+ Para cada um dos sete itens do §7 do docs/05 da sua clínica, diga o que no seu projeto faz o trabalho dele.
+ 
+ [^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>
+-[^spec-driven-run]: A execução deste livro do Spec Kit, do OpenSpec e do focus-kit sobre um briefing, 2026-09-25: os dois deltas de spec da mudança `add-client-cancellation` do OpenSpec. <https://github.com/JCKodel/focus-kit-book/tree/53109f372125e8aeda200bb2e5bbd1ad7bcc5d61/work/done/spec-driven-run/openspec/feature/openspec/changes/add-client-cancellation/specs>
++[^spec-driven-run]: A execução deste livro do Spec Kit, do OpenSpec e do focus-kit sobre um briefing, 2026-09-25: os dois deltas de especificação da mudança `add-client-cancellation` do OpenSpec. <https://github.com/JCKodel/focus-kit-book/tree/53109f372125e8aeda200bb2e5bbd1ad7bcc5d61/work/done/spec-driven-run/openspec/feature/openspec/changes/add-client-cancellation/specs>
+ [^claude-code-subagents]: Anthropic, "Create custom subagents", documentação do Claude Code, acesso em 2026-09-29. <https://code.claude.com/docs/en/sub-agents>
+ [^useful-notes]: A entrega `useful-notes` deste livro, cuja página registra a diferença do capítulo 8 como o erro que justificou estender a verificação de paridade. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/useful-notes.md>
+ [^closing-a-milestone-run]: A revisão do marco 1 do projeto guiado deste livro: os achados, as decisões e o diff da fila, de onde as duas linhas são citadas. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/closing-a-milestone-run/README.md>
+
+commit 2eaec435cd8d6476f2e03c0d840772ad707c02e6
+Author: J.C.Ködel <jckodel@gmail.com>
+Date:   Wed Sep 30 14:26:27 2026 -0300
+
+    docs(ch3-key-point-rules): say only Spec Kit wrote rules once per project
+    
+    - Third key point: Spec Kit wrote rules once per project, in its constitution
+    - OpenSpec keeps only the decision written before code; asking clause unchanged
+    - Both editions; settles finding F3 of the M4.1 review
+    
+    work/done/ch3-key-point-rules.md
+
+diff --git a/book/en/03-spec-driven.md b/book/en/03-spec-driven.md
+index 7edb4c7..a16154f 100644
+--- a/book/en/03-spec-driven.md
++++ b/book/en/03-spec-driven.md
+@@ -192,7 +192,7 @@ The run says what each tool writes before the code; it does not say which one bu
+ 
+ * A spec is a written, behaviour-oriented description of what the software must do, in natural language, that guides a coding agent; Spec-Driven Development writes it before the code.
+ * By how long the spec lives, a tool is spec-first (written for the task), spec-anchored (kept to maintain the feature) or spec-as-source (the only thing a person edits).
+-* Spec Kit and OpenSpec both wrote the decision before code in files the agent reads, and rules once per project; only OpenSpec asked a question before writing, while Spec Kit, on its default path, asked nothing and wrote its answer under "Assumptions".
++* Spec Kit and OpenSpec both wrote the decision before code in files the agent reads, and Spec Kit also wrote rules once per project, in its constitution; only OpenSpec asked a question before writing, while Spec Kit, on its default path, asked nothing and wrote its answer under "Assumptions".
+ * On one recorded feature, Spec Kit wrote 8 files and 756 lines and OpenSpec 6 and 180, restating one rule in most of them, and every file is something you review.
+ * A lighter page per feature is paid for with documents written once per project; the run shows what each tool writes, not which builds better software.
+ 
+diff --git a/book/pt/03-spec-driven.md b/book/pt/03-spec-driven.md
+index cc1cef6..b769a25 100644
+--- a/book/pt/03-spec-driven.md
++++ b/book/pt/03-spec-driven.md
+@@ -272,7 +272,7 @@ A execução diz o que cada ferramenta escreve antes do código; não diz qual d
+ 
+ * Uma especificação é uma descrição escrita, orientada a comportamento, do que o software precisa fazer, em linguagem natural, que guia um agente de código; o Desenvolvimento Guiado por Especificação a escreve antes do código.
+ * Conforme quanto tempo a especificação vive, uma ferramenta é spec-first (escrita para a tarefa), spec-anchored (mantida para cuidar da funcionalidade) ou spec-as-source (a única coisa que uma pessoa edita).
+-* O Spec Kit e o OpenSpec escreveram a decisão antes do código em arquivos que o agente lê, e as regras uma vez por projeto; só o OpenSpec fez uma pergunta antes de escrever, enquanto o Spec Kit, no seu caminho padrão, não perguntou nada e escreveu a resposta em "Assumptions" (suposições).
++* O Spec Kit e o OpenSpec escreveram a decisão antes do código em arquivos que o agente lê, e o Spec Kit também escreveu as regras uma vez por projeto, na sua constituição; só o OpenSpec fez uma pergunta antes de escrever, enquanto o Spec Kit, no seu caminho padrão, não perguntou nada e escreveu a resposta em "Assumptions" (suposições).
+ * Em uma funcionalidade registrada, o Spec Kit escreveu 8 arquivos e 756 linhas e o OpenSpec 6 e 180, repetindo uma regra na maioria deles, e cada arquivo é algo que você revisa.
+ * Uma página mais leve por funcionalidade se paga com documentos escritos uma vez por projeto; a execução mostra o que cada ferramenta escreve, não qual constrói software melhor.
+ 
+
+commit b0b4708a476a69cd6f20cc16c013cd709be8545f
+Author: J.C.Ködel <jckodel@gmail.com>
+Date:   Wed Sep 30 14:27:50 2026 -0300
+
+    docs(ch7-agents-fixed-lines): split the clinic's AGENTS.md rules
+    
+    - Chapter 7 links the kit's template: 3 to 6 project rules, 3 fixed lines
+    - Names the clinic's six project lines and the three fixed ones
+    - Says the sixth line names docs/00 in its own words, not in parentheses
+    - Settles finding F4 of the M4.1 review; both editions
+    
+    work/done/ch7-agents-fixed-lines.md
+
+diff --git a/book/en/07-brainstorm.md b/book/en/07-brainstorm.md
+index e436020..c2de136 100644
+--- a/book/en/07-brainstorm.md
++++ b/book/en/07-brainstorm.md
+@@ -162,7 +162,7 @@ diary for the simple case: pick a professional, pick a free time, done.
+ It is the brief's product with the client's lack of an account folded in, and its last sentence is the conversation's: what the app replaces, which tells a later session how small "simple" is here.
+ 
+ Chapter 5 said this chapter writes `AGENTS.md`, the rules file every session reads first.
+-Its non-negotiables are the kit's template with the project's own rules above the three fixed lines.
++Its non-negotiables follow the kit's [template](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/.claude/skills/brainstorm/references/documents.md), which asks for three to six rules of the project's own and then writes three fixed lines in every project: the clinic's six run from "Every business rule" to "An open decision", and the three fixed lines from "One delivery" down.
+ This is [`AGENTS.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/AGENTS.md) §Non-negotiables:
+ 
+ ```markdown
+@@ -181,7 +181,9 @@ This is [`AGENTS.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/b
+ - The agent stages and suggests the commit message. It never commits.
+ ```
+ 
+-Each project line points at the document or ADR that holds its reason, and the booking code comes from a "your call": the agent's answer to how a client with no account proves an appointment is theirs.
++The first five project lines each point, in parentheses, at the document or ADR that holds their reason.
++The sixth names docs/00 in its own words: it makes the open decisions of docs/00, the list chapter 6 quoted a line of, something a session asks about and never settles alone.
++The booking code comes from a "your call": the agent's answer to how a client with no account proves an appointment is theirs.
+ 
+ docs/06 is the queue: milestones, each with a paragraph saying what is true when it closes, and one line per delivery under it (chapter 9 teaches the marks).
+ This is the first milestone of [`docs/06-Queue.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/docs/06-Queue.md):
+diff --git a/book/pt/07-brainstorm.md b/book/pt/07-brainstorm.md
+index cf244ac..e0cdc1d 100644
+--- a/book/pt/07-brainstorm.md
++++ b/book/pt/07-brainstorm.md
+@@ -164,7 +164,7 @@ pronto.
+ É o produto do briefing com a falta de conta do cliente incorporada, e a última frase é da conversa: o que o app substitui, o que diz a uma sessão futura quão pequeno é o "simples" aqui.
+ 
+ O capítulo 5 disse que este capítulo escreve o `AGENTS.md`, o arquivo de regras que toda sessão lê primeiro.
+-Os inegociáveis dele são o modelo do kit com as regras do próprio projeto acima das três linhas fixas.
++Os inegociáveis dele seguem o [modelo](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/.claude/skills/brainstorm/references/documents.md) do kit, que pede de três a seis regras do próprio projeto e depois escreve três linhas fixas em todo projeto: as seis da clínica vão de "Toda regra de negócio" a "Uma decisão em aberto", e as três linhas fixas, de "Uma entrega" para baixo.
+ Esta é a seção Non-negotiables (inegociáveis) do [`AGENTS.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/AGENTS.md):
+ 
+ ```markdown
+@@ -184,7 +184,9 @@ Esta é a seção Non-negotiables (inegociáveis) do [`AGENTS.md`](https://githu
+ - O agente coloca em stage e sugere a mensagem de commit. Ele nunca faz commit.
+ ```
+ 
+-Cada linha do projeto aponta para o documento ou o ADR que guarda o seu motivo, e o código de agendamento vem de um "your call": a resposta do agente para como um cliente sem conta prova que um agendamento é dele.
++As cinco primeiras linhas do projeto apontam, cada uma entre parênteses, para o documento ou o ADR que guarda o seu motivo.
++A sexta nomeia o docs/00 no próprio texto: ela faz das decisões em aberto do docs/00, a lista de que o capítulo 6 citou uma linha, algo que uma sessão pergunta e nunca decide sozinha.
++O código de agendamento vem de um "your call": a resposta do agente para como um cliente sem conta prova que um agendamento é dele.
+ 
+ O docs/06 é a fila: marcos, cada um com um parágrafo que diz o que é verdade quando ele fecha, e uma linha por entrega abaixo dele (o capítulo 9 ensina as marcas).
+ Este é o primeiro marco de [`docs/06-Queue.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/docs/06-Queue.md), com os slugs como estão:
+
+commit 7a8d85df932358093a212ab6525fe2f0ba5d2a6a
+Author: J.C.Ködel <jckodel@gmail.com>
+Date:   Wed Sep 30 14:29:10 2026 -0300
+
+    docs(pt-skeleton-diff): put exit code 1 and data/ in Behaviour, pt ch10
+    
+    - Portuguese summary of the skeleton diff now places each change in the section the diff puts it
+    - settles F5 of the M4.1 review
+    - English edition unchanged
+    
+    work/done/pt-skeleton-diff.md
+
+diff --git a/book/pt/10-propose.md b/book/pt/10-propose.md
+index c11d020..5c3cc0d 100644
+--- a/book/pt/10-propose.md
++++ b/book/pt/10-propose.md
+@@ -417,7 +417,7 @@ Este é o diff da primeira página para a revisada:[^propose-run]
+  * [ ] docs/02 lists `GET /api/health` and `schema_migration`; docs/01 and
+ ````
+ 
+-O diff fica como está no registro, em inglês: ele tira do Behaviour a checagem de import e o manifest; no Contract, a migration que falha passa a sair com código 1, os arquivos fora do padrão são ignorados, e entram a assinatura `migrate(db, folder)` do executor, o erro `MigrationFailed` com o arquivo e a mensagem, e o `Result` em `src/lib/result.ts`; o Visual reference ganha a fonte `system-ui`, 16px de margem e as cores padrão do navegador; o Out of scope ganha o manifest, que vira a entrega `install`, a checagem de import e a base de pixels; e o Done when troca a base por testes Vitest do executor contra uma pasta temporária e um screenshot salvo uma vez como prova.
++O diff fica como está no registro, em inglês: no Behaviour, o servidor passa a criar também a pasta `data/`, a migration que falha passa a interromper o início com código de saída 1, e saem a checagem de import e o manifest; no Contract, os arquivos fora do padrão são ignorados, e entram a assinatura `migrate(db, folder)` do executor, o erro `MigrationFailed` com o arquivo e a mensagem, e o `Result` em `src/lib/result.ts`; o Visual reference ganha a fonte `system-ui`, 16px de margem e as cores padrão do navegador; o Out of scope ganha o manifest, que vira a entrega `install`, a checagem de import e a base de pixels; e o Done when troca a base por testes Vitest do executor contra uma pasta temporária e um screenshot salvo uma vez como prova.
+ Cada buraco fechou onde o `/apply` teria de adivinhar: a checagem de import e o manifest saíram, com os seus motivos no Out of scope; o executor ganhou uma assinatura e um erro exatos no Contract; e o Done when trocou a base de pixels por testes que o `/apply` consegue rodar e um screenshot que você olha.
+ 
+ ## Quando não cabe
+
+commit f0c412eb65cccc8e89675fe877e73ccd873b1623
+Author: J.C.Ködel <jckodel@gmail.com>
+Date:   Wed Sep 30 14:31:50 2026 -0300
+
+    docs(ch14-keepless-feature): let a feature keep nothing, as health does
+    
+    - Chapter 14: a feature is one thing the app keeps, or one it does that keeps nothing
+    - Placement rule and key points 1 and 2 say "one feature", not "one thing"
+    - New sentence: health keeps nothing and is still a slice; "stores" became "keeps"
+    - docs/03 vertical slice row matches; both editions
+    
+    work/done/ch14-keepless-feature.md
+
+diff --git a/book/en/14-errors-and-slices.md b/book/en/14-errors-and-slices.md
+index e375631..4dee7cd 100644
+--- a/book/en/14-errors-and-slices.md
++++ b/book/en/14-errors-and-slices.md
+@@ -51,7 +51,7 @@ The three `use*.ts` hooks hold the state each screen shows, and `strings.ts` and
+ A name ending in `.server.ts` runs only on the server, and client code never imports one.
+ The `.test.ts` files are unit tests, the `.e2e.ts` files drive the screens in a browser, and `e2e.server.ts` holds their shared steps.
+ 
+-A feature is one thing the app keeps, named by a term of the project's docs/03 (the appointment, the professional, the weekly hours), and its slice holds every action on it.
++A feature is one thing the app keeps, named by a term of the project's docs/03 (the appointment, the professional, the weekly hours), or one thing the app does that keeps nothing, named by what it does (the server check of `health`); its slice holds every action on it.
+ Booking and cancelling both act on the appointment, so they share its rules (`rules.ts`), its SQL (`repository.server.ts`), its routes (`route.server.ts`), its calls (`api.ts`) and the list the phone remembers (`remembered.ts`): they are one slice.
+ Weekly hours and professionals are other things the clinic keeps, each with its own table and its own screen, so each has a slice of its own, `weeklyHours` and `professionals`.
+ A change to the appointment touches this folder, and removing the appointment removes this folder.
+@@ -68,14 +68,15 @@ src/features/health/strings.ts
+ src/features/health/useHealth.ts
+ ```
+ 
+-It has no `rules.ts`, because it has no rule, and no `repository.server.ts`, because it stores nothing: a file appears in a slice when it pays its way.
++It has no `rules.ts`, because it has no rule, and no `repository.server.ts`, because it keeps nothing: a file appears in a slice when it pays its way.
++Keeping nothing does not make it less of a feature: it has its own route, call, hook and screen, and so its own slice.
+ 
+ What code is about decides where code that two features use lives.
+-Code about one thing the app keeps stays in that thing's slice, and another slice imports what it needs from there, be it a repository function, a type, a client call or a view; two slices may import from each other.
++Code about one feature stays in that feature's slice, and another slice imports what it needs from there, be it a repository function, a type, a client call or a view; two slices may import from each other.
+ `findClinic` and `findActiveProfessionals` are each imported by `appointments/route.server.ts` and by `weeklyHours/route.server.ts`, a second use, and they stay in `clinic/` and `professionals/`, because each reads the thing its slice keeps.
+-What two features share and belongs to no thing the app keeps leaves their slices for `src/lib/`: the shape of a value (`email.ts`, `id.ts`, `name.ts`) or plumbing (`request.ts`, `result.ts`).
++What two features share and belongs to no one feature leaves their slices for `src/lib/`: the shape of a value (`email.ts`, `id.ts`, `name.ts`) or plumbing (`request.ts`, `result.ts`).
+ `email.ts`, `id.ts`, `name.ts` and `request.ts` each say in a comment where their first and second uses are, such as "First use: health/api.ts (`skeleton`); second use: clinic/api.ts." in `request.ts`; `result.ts` is used by every feature.
+-That is the rule of the second occurrence from [chapter 13](13-the-governor.md#the-same-question-in-code), applied to folders: code that belongs to no one thing moves to `lib/` on its second use, and not before.
++That is the rule of the second occurrence from [chapter 13](13-the-governor.md#the-same-question-in-code), applied to folders: code that belongs to no one feature moves to `lib/` on its second use, and not before.
+ 
+ ## Exception, refusal, error
+ 
+@@ -294,8 +295,8 @@ The clinic's docs/01, in its section "How errors travel", gives the path a failu
+ 
+ ## Key points
+ 
+-* A feature is one thing the app keeps, with every action on it, and its vertical slice is one folder, with no folder per layer; a change to the feature touches that folder, and removing the feature removes it.
+-* A file enters a slice when it pays its way; code about one thing the app keeps stays in its slice, which other slices import, and code that belongs to no one thing enters `lib/` on its second use.
++* A feature is one thing the app keeps, or one thing it does that keeps nothing, with every action on it, and its vertical slice is one folder, with no folder per layer; a change to the feature touches that folder, and removing the feature removes it.
++* A file enters a slice when it pays its way; code about one feature stays in its slice, which other slices import, and code that belongs to no one feature enters `lib/` on its second use.
+ * An error is a bug, fixed and never caught; an exception is a failure from outside the program, caught at the boundary and returned as a value; a refusal is a rule saying no, in code or in a database constraint; the class name tells none of them apart.
+ * A throw is an exit the caller cannot see and the compiler cannot check, so it never steers the flow.
+ * A library's exception belongs to the library: the code at the boundary turns it into the domain's value, and the rest of the app throws nothing.
+diff --git a/book/pt/14-errors-and-slices.md b/book/pt/14-errors-and-slices.md
+index e7d106b..dcb7947 100644
+--- a/book/pt/14-errors-and-slices.md
++++ b/book/pt/14-errors-and-slices.md
+@@ -51,7 +51,7 @@ Os três hooks `use*.ts` guardam o estado que cada tela mostra, e `strings.ts` e
+ Um nome terminado em `.server.ts` roda só no servidor, e o código do cliente nunca importa um deles.
+ Os arquivos `.test.ts` são testes unitários, os `.e2e.ts` conduzem as telas em um navegador, e `e2e.server.ts` guarda os passos que eles compartilham.
+ 
+-Uma funcionalidade é uma coisa que o app guarda, nomeada por um termo do docs/03 do projeto (o agendamento, o profissional, os horários semanais), e a fatia dela guarda toda ação sobre ela.
++Uma funcionalidade é uma coisa que o app guarda, nomeada por um termo do docs/03 do projeto (o agendamento, o profissional, os horários semanais), ou uma coisa que o app faz sem guardar nada, nomeada pelo que faz (a verificação do servidor de `health`); a fatia dela guarda toda ação sobre ela.
+ Agendar e cancelar agem os dois sobre o agendamento, então compartilham as regras dele (`rules.ts`), o SQL dele (`repository.server.ts`), as rotas dele (`route.server.ts`), as chamadas dele (`api.ts`) e a lista que o celular lembra (`remembered.ts`): são uma fatia só.
+ Os horários semanais e os profissionais são outras coisas que a clínica guarda, cada uma com a sua tabela e a sua tela, então cada uma tem uma fatia própria, `weeklyHours` e `professionals`.
+ Uma mudança no agendamento mexe nesta pasta, e remover o agendamento remove esta pasta.
+@@ -69,13 +69,14 @@ src/features/health/useHealth.ts
+ ```
+ 
+ Ela não tem `rules.ts`, porque não tem regra, nem `repository.server.ts`, porque não guarda nada: um arquivo aparece em uma fatia quando se paga.
++Não guardar nada não a torna menos funcionalidade: ela tem a sua rota, a sua chamada, o seu hook e a sua tela, e por isso a sua fatia.
+ 
+ Aquilo de que o código trata decide onde fica o código que duas funcionalidades usam.
+-O código sobre uma coisa que o app guarda fica na fatia dela, e outra fatia importa dali o que precisa, seja uma função de repositório, um tipo, uma chamada do cliente ou uma tela; duas fatias podem importar uma da outra.
++O código sobre uma funcionalidade fica na fatia dela, e outra fatia importa dali o que precisa, seja uma função de repositório, um tipo, uma chamada do cliente ou uma tela; duas fatias podem importar uma da outra.
+ `findClinic` e `findActiveProfessionals` são importadas cada uma por `appointments/route.server.ts` e por `weeklyHours/route.server.ts`, um segundo uso, e ficam em `clinic/` e `professionals/`, porque cada uma lê a coisa que a sua fatia guarda.
+-O que duas funcionalidades compartilham e não pertence a nenhuma coisa que o app guarda sai das fatias para `src/lib/`: a forma de um valor (`email.ts`, `id.ts`, `name.ts`) ou encanamento (`request.ts`, `result.ts`).
++O que duas funcionalidades compartilham e não pertence a nenhuma funcionalidade sai das fatias para `src/lib/`: a forma de um valor (`email.ts`, `id.ts`, `name.ts`) ou encanamento (`request.ts`, `result.ts`).
+ `email.ts`, `id.ts`, `name.ts` e `request.ts` dizem cada um, em um comentário, onde estão o primeiro e o segundo uso, como "First use: health/api.ts (`skeleton`); second use: clinic/api.ts." em `request.ts`; `result.ts` é usado por toda funcionalidade.
+-É a regra da segunda ocorrência do [capítulo 13](13-the-governor.md#a-mesma-pergunta-no-codigo), aplicada a pastas: o código que não pertence a nenhuma coisa vai para `lib/` no segundo uso, e não antes.
++É a regra da segunda ocorrência do [capítulo 13](13-the-governor.md#a-mesma-pergunta-no-codigo), aplicada a pastas: o código que não pertence a nenhuma funcionalidade vai para `lib/` no segundo uso, e não antes.
+ 
+ ## Exceção, recusa, erro
+ 
+@@ -294,8 +295,8 @@ O docs/01 da clínica, na seção "How errors travel", dá o caminho que uma fal
+ 
+ ## Pontos-chave
+ 
+-* Uma funcionalidade é uma coisa que o app guarda, com toda ação sobre ela, e a fatia vertical dela é uma pasta, sem pasta por camada; uma mudança na funcionalidade mexe nessa pasta, e remover a funcionalidade remove essa pasta.
+-* Um arquivo entra em uma fatia quando se paga; o código sobre uma coisa que o app guarda fica na fatia dela, que as outras fatias importam, e o código que não pertence a nenhuma coisa entra em `lib/` no segundo uso.
++* Uma funcionalidade é uma coisa que o app guarda, ou uma coisa que ele faz sem guardar nada, com toda ação sobre ela, e a fatia vertical dela é uma pasta, sem pasta por camada; uma mudança na funcionalidade mexe nessa pasta, e remover a funcionalidade remove essa pasta.
++* Um arquivo entra em uma fatia quando se paga; o código sobre uma funcionalidade fica na fatia dela, que as outras fatias importam, e o código que não pertence a nenhuma funcionalidade entra em `lib/` no segundo uso.
+ * Um erro é um bug, corrigido e nunca capturado; uma exceção é uma falha de fora do programa, capturada na fronteira e devolvida como valor; uma recusa é uma regra dizendo não, no código ou numa restrição do banco; o nome da classe não distingue nenhum deles.
+ * Um throw é uma saída que quem chama não vê e o compilador não verifica, então nunca conduz o fluxo.
+ * A exceção de uma biblioteca pertence à biblioteca: o código na fronteira a transforma no valor do domínio, e o resto do app não lança nada.
+
+commit 65db73141bab1c395d01d9133787d46ebe2e8040
+Author: J.C.Ködel <jckodel@gmail.com>
+Date:   Wed Sep 30 14:34:38 2026 -0300
+
+    docs(ch14-swallowed-bug): say what catches a bug that query swallows
+    
+    - Reason 4: a catch at I/O pays the bug cost once and steers nothing
+    - New paragraph: a memoryDatabase test before shipping, a log once it runs
+    - Says npm run setup prints the message and the routes do not log it yet
+    - New key point on the boundary's catch; both editions
+    
+    work/done/ch14-swallowed-bug.md
+
+diff --git a/book/en/14-errors-and-slices.md b/book/en/14-errors-and-slices.md
+index 4dee7cd..33e5284 100644
+--- a/book/en/14-errors-and-slices.md
++++ b/book/en/14-errors-and-slices.md
+@@ -112,7 +112,7 @@ An exception thrown to steer the program's flow, rather than returned, costs fou
+ 1. A `throw` is an exit the call site does not show. Joel Spolsky wrote in 2003 that exceptions "*are invisible in the source code*" and "*create too many possible exit points for a function*".[^spolsky-exceptions]
+ 2. The signature does not say what can fail, so the compiler cannot check that every case is handled. A `Result` says it in its type, and the `Record` over `BookingRefusal` in the next section fails to compile when a refusal has no status.
+ 3. A throw costs more than a return. In Stephen Toub's benchmark `ExceptionThrowCatch`, published 2024-09-12, 1,000 throws, each caught through 10 async frames, took 123.03 ms on .NET 8 and 54.68 ms on .NET 9.[^toub-net9] Microsoft's ASP.NET Core guidance draws the rule: "*Throwing and catching exceptions is slow relative to other code flow patterns. Because of this, exceptions shouldn't be used to control normal program flow.*"[^aspnet-best-practices] The Framework Design Guidelines say it as "*DO NOT use exceptions for the normal flow of control, if possible.*"[^fdg-exception-throwing]
+-4. A catch wide enough to steer the flow also catches bugs, as `query` in the next section shows: a `TypeError` inside it becomes `DatabaseFailed`.
++4. A catch wide enough to steer the flow also catches bugs, and it pays for them at every place the flow turns. A catch at I/O cannot be avoided, since the library throws, so it pays that cost once, where the library is called, and steers nothing. `query`, in the next section, is such a catch, and a `TypeError` inside it becomes `DatabaseFailed`.
+ 
+ ## Exceptions as values in the clinic
+ 
+@@ -157,6 +157,11 @@ A narrower catch would not tell them apart: SQLite reports a malformed statement
+ The definition of an error says what the code aims for; a catch at I/O is where a bug can be caught by accident.
+ The routes answer `DatabaseFailed` with its code alone and log nothing, so a bug caught there reaches neither your screen nor your analytics.
+ 
++Two things bring it back.
++Before the app ships, a test: every repository's SQL runs in a test against `memoryDatabase`, the in-memory SQLite with the real migrations that [chapter 16](16-testing-and-agents.md#one-rule-five-tests) uses, and the test checks the value it gets back, so a bug inside `run` fails it and shows its message.
++Once the app runs, a log: `DatabaseFailed` carries the `message` of what was thrown, so the code that turns it into an answer logs that message before it answers.
++`npm run setup` already prints it when it cannot read the database; the routes do not log it yet, and your app's should.
++
+ An exception can also become a refusal.
+ In [`src/features/appointments/repository.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/repository.server.ts), a booking's insert can fail in two ways:
+ 
+@@ -300,6 +305,7 @@ The clinic's docs/01, in its section "How errors travel", gives the path a failu
+ * An error is a bug, fixed and never caught; an exception is a failure from outside the program, caught at the boundary and returned as a value; a refusal is a rule saying no, in code or in a database constraint; the class name tells none of them apart.
+ * A throw is an exit the caller cannot see and the compiler cannot check, so it never steers the flow.
+ * A library's exception belongs to the library: the code at the boundary turns it into the domain's value, and the rest of the app throws nothing.
++* The catch at the boundary also catches bugs, so every repository runs in a test against SQLite with the real migrations, and the code that turns an exception into an answer logs what it carries.
+ * A `Result` handled with a `Record` over its cases fails to compile when a case is forgotten.
+ 
+ ## Exercises
+diff --git a/book/pt/14-errors-and-slices.md b/book/pt/14-errors-and-slices.md
+index dcb7947..3988be9 100644
+--- a/book/pt/14-errors-and-slices.md
++++ b/book/pt/14-errors-and-slices.md
+@@ -112,7 +112,7 @@ Uma exceção lançada para conduzir o fluxo do programa, em vez de devolvida, c
+ 1. Um `throw` é uma saída que o ponto da chamada não mostra. Joel Spolsky escreveu em 2003 que as exceções "*são invisíveis no código-fonte*" e "*criam pontos de saída demais para uma função*".[^spolsky-exceptions]
+ 2. A assinatura não diz o que pode falhar, então o compilador não consegue verificar que todo caso foi tratado. Um `Result` diz isso no seu tipo, e o `Record` sobre `BookingRefusal` da próxima seção não compila quando uma recusa fica sem status.
+ 3. Um throw custa mais que um return. No benchmark `ExceptionThrowCatch` de Stephen Toub, publicado em 2024-09-12, 1.000 throws, cada um capturado através de 10 frames assíncronos, levaram 123,03 ms no .NET 8 e 54,68 ms no .NET 9.[^toub-net9] O guia de ASP.NET Core da Microsoft tira a regra: "*lançar e capturar exceções é lento em comparação com outros padrões de fluxo de código. Por isso, exceções não devem ser usadas para controlar o fluxo normal do programa.*"[^aspnet-best-practices] As Framework Design Guidelines dizem assim: "*NÃO use exceções para o fluxo normal de controle, se possível.*"[^fdg-exception-throwing]
+-4. Um catch largo o bastante para conduzir o fluxo também captura bugs, como mostra o `query` da próxima seção: um `TypeError` dentro dele vira `DatabaseFailed`.
++4. Um catch largo o bastante para conduzir o fluxo também captura bugs, e paga por eles em cada lugar onde o fluxo muda. Um catch no I/O não pode ser evitado, já que a biblioteca lança, então paga esse custo uma vez, onde a biblioteca é chamada, e não conduz nada. O `query`, na próxima seção, é um catch assim, e um `TypeError` dentro dele vira `DatabaseFailed`.
+ 
+ ## Exceções como valores na clínica
+ 
+@@ -157,6 +157,11 @@ Uma captura mais estreita não separaria os dois: o SQLite informa um comando ma
+ A definição de erro diz o que o código busca; uma captura no I/O é onde um bug pode ser capturado por acidente.
+ As rotas respondem `DatabaseFailed` só com o código e não registram nada, então um bug capturado ali não chega nem à sua tela nem ao seu analytics.
+ 
++Duas coisas o trazem de volta.
++Antes de o app sair, um teste: o SQL de todo repositório roda num teste contra o `memoryDatabase`, o SQLite em memória com as migrations reais que o [capítulo 16](16-testing-and-agents.md#uma-regra-cinco-testes) usa, e o teste confere o valor que recebe, então um bug dentro de `run` o faz falhar e mostra a mensagem.
++Com o app rodando, um log: `DatabaseFailed` carrega a `message` do que foi lançado, então o código que o transforma numa resposta registra essa mensagem antes de responder.
++O `npm run setup` já a imprime quando não consegue ler o banco; as rotas ainda não a registram, e as do seu app deveriam.
++
+ Uma exceção também pode virar uma recusa.
+ Em [`src/features/appointments/repository.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/repository.server.ts), a inserção de um agendamento pode falhar de dois jeitos:
+ 
+@@ -300,6 +305,7 @@ O docs/01 da clínica, na seção "How errors travel", dá o caminho que uma fal
+ * Um erro é um bug, corrigido e nunca capturado; uma exceção é uma falha de fora do programa, capturada na fronteira e devolvida como valor; uma recusa é uma regra dizendo não, no código ou numa restrição do banco; o nome da classe não distingue nenhum deles.
+ * Um throw é uma saída que quem chama não vê e o compilador não verifica, então nunca conduz o fluxo.
+ * A exceção de uma biblioteca pertence à biblioteca: o código na fronteira a transforma no valor do domínio, e o resto do app não lança nada.
++* O catch na fronteira também captura bugs, então todo repositório roda num teste contra o SQLite com as migrations reais, e o código que transforma uma exceção numa resposta registra o que ela carrega.
+ * Um `Result` tratado com um `Record` sobre os seus casos não compila quando um caso é esquecido.
+ 
+ ## Exercícios
+
+commit 6733c8ffc2e16604b0a616f1df4c04696e3af8e6
+Author: J.C.Ködel <jckodel@gmail.com>
+Date:   Wed Sep 30 14:36:49 2026 -0300
+
+    docs(ch14-library-types): let a library's type cross as a handle
+    
+    - en/pt ch14: routes pass DatabaseSync on and never call it
+    - key point: a library's type crosses only as an uncalled handle
+    
+    work/done/ch14-library-types.md
+
+diff --git a/book/en/14-errors-and-slices.md b/book/en/14-errors-and-slices.md
+index 33e5284..21d67b1 100644
+--- a/book/en/14-errors-and-slices.md
++++ b/book/en/14-errors-and-slices.md
+@@ -275,6 +275,9 @@ Domain-driven design calls such a translator an anti-corruption layer, whose "*c
+ The clinic does it with SQLite, at `book-v1/closing-a-milestone`.
+ `git grep node:sqlite -- src` finds `DatabaseSync` imported as a value, outside test files, only in `database.server.ts`, where `query` turns SQLite's failure into `DatabaseFailed`, and in `testDatabase.server.ts`, the tests' in-memory database.
+ Every other file that names it, the repositories and the routes among them, imports only its type, to receive and pass the open database; no rule, hook, screen or `api.ts` imports it at all.
++The routes never call it: they hand it to the repositories and to `requireSession`, so SQLite's methods and failures stay behind them.
++A library's type may cross the boundary this way, as a handle passed on and never called, and a new version of SQLite still changes the I/O code alone.
++Replacing SQLite with another library would also change that import in each route, and the compiler would name every one.
+ `git grep "UNIQUE constraint"` finds the text of SQLite's `UNIQUE` failure in one file, `appointments/repository.server.ts`, where it becomes `SlotTaken`.
+ 
+ Is every exception outside I/O a bug, then? Almost:
+@@ -304,7 +307,7 @@ The clinic's docs/01, in its section "How errors travel", gives the path a failu
+ * A file enters a slice when it pays its way; code about one feature stays in its slice, which other slices import, and code that belongs to no one feature enters `lib/` on its second use.
+ * An error is a bug, fixed and never caught; an exception is a failure from outside the program, caught at the boundary and returned as a value; a refusal is a rule saying no, in code or in a database constraint; the class name tells none of them apart.
+ * A throw is an exit the caller cannot see and the compiler cannot check, so it never steers the flow.
+-* A library's exception belongs to the library: the code at the boundary turns it into the domain's value, and the rest of the app throws nothing.
++* A library's exception belongs to the library: the code at the boundary turns it into the domain's value, and the rest of the app throws nothing; a library's type crosses the boundary only as a handle that the code past it passes on and never calls.
+ * The catch at the boundary also catches bugs, so every repository runs in a test against SQLite with the real migrations, and the code that turns an exception into an answer logs what it carries.
+ * A `Result` handled with a `Record` over its cases fails to compile when a case is forgotten.
+ 
+diff --git a/book/pt/14-errors-and-slices.md b/book/pt/14-errors-and-slices.md
+index 3988be9..5039182 100644
+--- a/book/pt/14-errors-and-slices.md
++++ b/book/pt/14-errors-and-slices.md
+@@ -275,6 +275,9 @@ O domain-driven design chama esse tradutor de camada anticorrupção, cujo "*pro
+ A clínica faz isso com o SQLite, em `book-v1/closing-a-milestone`.
+ `git grep node:sqlite -- src` acha `DatabaseSync` importado como valor, fora dos arquivos de teste, só em `database.server.ts`, onde `query` transforma a falha do SQLite em `DatabaseFailed`, e em `testDatabase.server.ts`, o banco em memória dos testes.
+ Todo outro arquivo que o nomeia, os repositórios e as rotas entre eles, importa só o tipo dele, para receber e repassar o banco aberto; nenhuma regra, hook, tela ou `api.ts` o importa.
++As rotas nunca o chamam: elas o entregam aos repositórios e a `requireSession`, então os métodos e as falhas do SQLite ficam atrás deles.
++Um tipo de biblioteca pode cruzar a fronteira assim, como uma alça repassada e nunca chamada, e uma versão nova do SQLite continua mudando só o código de I/O.
++Trocar o SQLite por outra biblioteca mudaria também esse import em cada rota, e o compilador apontaria cada uma.
+ `git grep "UNIQUE constraint"` acha o texto da falha de `UNIQUE` do SQLite em um arquivo só, `appointments/repository.server.ts`, onde ele vira `SlotTaken`.
+ 
+ Então toda exceção fora do I/O é um bug? Quase:
+@@ -304,7 +307,7 @@ O docs/01 da clínica, na seção "How errors travel", dá o caminho que uma fal
+ * Um arquivo entra em uma fatia quando se paga; o código sobre uma funcionalidade fica na fatia dela, que as outras fatias importam, e o código que não pertence a nenhuma funcionalidade entra em `lib/` no segundo uso.
+ * Um erro é um bug, corrigido e nunca capturado; uma exceção é uma falha de fora do programa, capturada na fronteira e devolvida como valor; uma recusa é uma regra dizendo não, no código ou numa restrição do banco; o nome da classe não distingue nenhum deles.
+ * Um throw é uma saída que quem chama não vê e o compilador não verifica, então nunca conduz o fluxo.
+-* A exceção de uma biblioteca pertence à biblioteca: o código na fronteira a transforma no valor do domínio, e o resto do app não lança nada.
++* A exceção de uma biblioteca pertence à biblioteca: o código na fronteira a transforma no valor do domínio, e o resto do app não lança nada; um tipo de biblioteca só cruza a fronteira como uma alça que o código depois dela repassa e nunca chama.
+ * O catch na fronteira também captura bugs, então todo repositório roda num teste contra o SQLite com as migrations reais, e o código que transforma uma exceção numa resposta registra o que ela carrega.
+ * Um `Result` tratado com um `Record` sobre os seus casos não compila quando um caso é esquecido.
+ 
+
+commit ae12807f97f3a0db1800117b3acbe56b62ee2eb7
+Author: J.C.Ködel <jckodel@gmail.com>
+Date:   Wed Sep 30 14:39:38 2026 -0300
+
+    docs(ch15-uncaught-pieces): place openDatabase and migrate at start
+    
+    - ch15: start code opens and migrates the database, before any request
+    - ch15: the table's "only" holds among the pieces that serve an event
+    - ch14: link openDatabase and the migration runner to chapter 15
+    
+    work/done/ch15-uncaught-pieces.md
+
+diff --git a/book/en/14-errors-and-slices.md b/book/en/14-errors-and-slices.md
+index 21d67b1..175383f 100644
+--- a/book/en/14-errors-and-slices.md
++++ b/book/en/14-errors-and-slices.md
+@@ -244,6 +244,7 @@ A `Record` over `BookingRefusal` must name every member of that type, so a refus
+ 
+ The clinic catches only where I/O happens: `openDatabase` and `query` in `database.server.ts` (`transaction` runs inside `query`), the migration runner in `migrate.server.ts`, `request` in `src/lib/request.ts` for the network on the client, and `remembered.ts` for the phone's storage.
+ Each route that reads a request body catches too, since the body arrives over the network: a body that cannot be read becomes the answer `BadRequest` on the spot.
++`openDatabase` and the migration runner run once, when the server starts, before any request; [chapter 15](15-four-pieces.md#what-the-clinic-injects) says where they stand among the pieces.
+ 
+ The app itself never throws.
+ Two helpers that only tests run do: `box` in `e2e.server.ts`, when an element is not on screen, and `memoryDatabase`, in [`src/server/testDatabase.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/server/testDatabase.server.ts):
+diff --git a/book/en/15-four-pieces.md b/book/en/15-four-pieces.md
+index 958fde3..7c6057e 100644
+--- a/book/en/15-four-pieces.md
++++ b/book/en/15-four-pieces.md
+@@ -407,6 +407,11 @@ The route's test passes `memoryDatabase`, the in-memory SQLite of chapter 14, in
+ 
+ Vitest is the clinic's test runner, `app.request` sends a request to a route without a network, and `testDatabase.server.ts` holds `memoryDatabase`.
+ 
++That database is opened before the first request arrives, by the server's start code: `openMigratedDatabase`, in [`src/server/start.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/server/start.server.ts), calls `openDatabase` and `migrate`, and `main.server.ts` hands the database it returns to every route that needs it.
++Neither is a piece: no event reaches them, and they run once, at start, to make the driver ready.
++They catch where they do I/O, as a repository does, and return a `Result`; `openMigratedDatabase` turns a failure into a message and exit code 1, because a server with no database has nothing to serve.
++So the table's "only" holds where events are served: of the four pieces, the repository alone turns an infra exception into a `Result`.
++
+ The client's orchestrator receives its repositories, named in `bookingEvents.ts`:
+ 
+ ```ts
+diff --git a/book/pt/14-errors-and-slices.md b/book/pt/14-errors-and-slices.md
+index 5039182..08a10cf 100644
+--- a/book/pt/14-errors-and-slices.md
++++ b/book/pt/14-errors-and-slices.md
+@@ -244,6 +244,7 @@ Um `Record` sobre `BookingRefusal` tem de nomear todo membro desse tipo, então
+ 
+ A clínica captura só onde o I/O acontece: `openDatabase` e `query` em `database.server.ts` (`transaction` roda dentro de `query`), o executor de migrations em `migrate.server.ts`, `request` em `src/lib/request.ts` para a rede no cliente, e `remembered.ts` para o armazenamento do celular.
+ Cada rota que lê o corpo de uma requisição também captura, já que o corpo chega pela rede: um corpo que não pode ser lido vira na hora a resposta `BadRequest`.
++`openDatabase` e o executor de migrations rodam uma vez, quando o servidor parte, antes de qualquer requisição; o [capítulo 15](15-four-pieces.md#o-que-a-clinica-injeta) diz onde eles ficam entre as peças.
+ 
+ O app em si nunca lança.
+ Dois helpers que só os testes rodam lançam: `box` em `e2e.server.ts`, quando um elemento não está na tela, e `memoryDatabase`, em [`src/server/testDatabase.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/server/testDatabase.server.ts):
+diff --git a/book/pt/15-four-pieces.md b/book/pt/15-four-pieces.md
+index 4ece463..7bbcee9 100644
+--- a/book/pt/15-four-pieces.md
++++ b/book/pt/15-four-pieces.md
+@@ -408,6 +408,11 @@ O teste da rota passa `memoryDatabase`, o SQLite em memória do capítulo 14, no
+ 
+ O Vitest é o executor de testes da clínica, `app.request` envia uma requisição a uma rota sem rede, e `testDatabase.server.ts` guarda `memoryDatabase`.
+ 
++Esse banco é aberto antes que chegue a primeira requisição, pelo código de partida do servidor: `openMigratedDatabase`, em [`src/server/start.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/server/start.server.ts), chama `openDatabase` e `migrate`, e `main.server.ts` entrega o banco que ela devolve a cada rota que precisa dele.
++Nenhuma das duas é uma peça: nenhum evento chega a elas, e elas rodam uma vez, na partida, para deixar o driver pronto.
++Elas capturam onde fazem I/O, como faz um repositório, e devolvem um `Result`; `openMigratedDatabase` transforma uma falha numa mensagem e no código de saída 1, porque um servidor sem banco não tem o que servir.
++Então o "único" da tabela vale onde os eventos são servidos: das quatro peças, só o repositório transforma uma exceção de infra num `Result`.
++
+ O orquestrador do cliente recebe os seus repositórios, nomeados em `bookingEvents.ts`:
+ 
+ ```ts
+
+commit ec117c806406e79c2765df67f82eb75a20120422
+Author: J.C.Ködel <jckodel@gmail.com>
+Date:   Wed Sep 30 14:41:33 2026 -0300
+
+    docs(ch15-brief-printed): print the orchestrator-tests brief in ch15
+    
+    - en/pt ch15: the brief for /propose, word for word; pt translated
+    - Later rounds answered with chapter 10's "Your call." rule
+    - Note names the brief among what the run record holds; settles F9
+    
+    work/done/ch15-brief-printed.md
+
+diff --git a/book/en/15-four-pieces.md b/book/en/15-four-pieces.md
+index 7c6057e..8a59742 100644
+--- a/book/en/15-four-pieces.md
++++ b/book/en/15-four-pieces.md
+@@ -15,7 +15,13 @@ If you follow the clinic, add that line as the first of the milestone 1.1 that e
+ [ ] orchestrator-tests   every use<Feature>.ts hook's events move to plain functions with repositories as a parameter, tested in Node
+ ```
+ 
+-Then run `/propose orchestrator-tests`, answer its questions with the author's brief,[^clinic-orchestrator-tests-run] where "milestone 2" is your milestone 1.1, and run `/apply orchestrator-tests` before you read on.
++Then run `/propose orchestrator-tests`; I ran it headless in Claude Code and answered its first round of questions with the author's brief, word for word, where "milestone 2" is your milestone 1.1:[^clinic-orchestrator-tests-run]
++
++```
++Every client orchestrator, each use<Feature>.ts hook, gets unit tests. Move what each event does out of the hook: the calls to repositories and use cases, in their order, and the new state go into plain functions that receive their repositories as a parameter, the real ones by default, and `now` where a use case needs the clock, and return the new state. The hook only holds the state, publishes the in-flight state and publishes what the function returns. The tests pass fake repositories, in Vitest in Node, with no module mock and no new dependency. Server routes do not change. The app behaves exactly as before. Add the line as the first of milestone 2.
++```
++
++Every later round was answered with the rule of chapter 10's brief, `Your call. Say what you chose and why.`; then run `/apply orchestrator-tests` before you read on.
+ 
+ The clinic took FOCUS whole in chapter 7, and its [`docs/01-Architecture.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/docs/01-Architecture.md), in the section "How the code is organized", gives the four pieces in a table:
+ 
+@@ -497,4 +503,4 @@ Nothing is built.
+ [^bloc]: Bloc, "Bloc State Management Library", documentation, accessed 2026-09-29. <https://bloclibrary.dev/>
+ [^mediatr]: Jimmy Bogard, "MediatR: Simple, unambitious mediator implementation in .NET", accessed 2026-09-29. <https://github.com/jbogard/MediatR>
+ [^clean-architecture]: Robert C. Martin, "The Clean Architecture", 2012. <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>
+-[^clinic-orchestrator-tests-run]: This book's build of the guided project's orchestrator tests, 2026-09-29, with Claude Code 2.1.284 and the model `claude-opus-5-5`: every turn, and the `npm run verify` output on the clinic's commit `e6653b5` in `verify.txt`. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/clinic-orchestrator-tests-run/README.md>
++[^clinic-orchestrator-tests-run]: This book's build of the guided project's orchestrator tests, 2026-09-29, with Claude Code 2.1.284 and the model `claude-opus-5-5`: the brief, every turn, and the `npm run verify` output on the clinic's commit `e6653b5` in `verify.txt`. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/clinic-orchestrator-tests-run/README.md>
+diff --git a/book/pt/15-four-pieces.md b/book/pt/15-four-pieces.md
+index 7bbcee9..f7193c7 100644
+--- a/book/pt/15-four-pieces.md
++++ b/book/pt/15-four-pieces.md
+@@ -15,7 +15,13 @@ Se você segue a clínica, adicione essa linha como a primeira do marco 1.1 que
+ [ ] orchestrator-tests   every use<Feature>.ts hook's events move to plain functions with repositories as a parameter, tested in Node
+ ```
+ 
+-Depois rode `/propose orchestrator-tests`, responda às perguntas dele com o briefing do autor,[^clinic-orchestrator-tests-run] em que "milestone 2" é o seu marco 1.1, e rode `/apply orchestrator-tests` antes de seguir a leitura.
++Depois rode `/propose orchestrator-tests`; eu o rodei sem interface no Claude Code e respondi à primeira rodada de perguntas com o briefing do autor, em que "marco 2" é o seu marco 1.1; o original está em inglês, e aqui vai traduzido:[^clinic-orchestrator-tests-run]
++
++```
++Todo orquestrador do cliente, cada hook use<Feature>.ts, ganha testes unitários. Tire do hook o que cada evento faz: as chamadas a repositórios e casos de uso, na ordem delas, e o novo estado vão para funções simples que recebem os seus repositórios como parâmetro, os reais por padrão, e `now` onde um caso de uso precisa do relógio, e devolvem o novo estado. O hook só guarda o estado, publica o estado em andamento e publica o que a função devolve. Os testes passam repositórios falsos, no Vitest em Node, sem mock de módulo e sem dependência nova. As rotas do servidor não mudam. O app se comporta exatamente como antes. Adicione a linha como a primeira do marco 2.
++```
++
++Toda rodada seguinte foi respondida com a regra do briefing do capítulo 10, `Your call. Diga o que escolheu e por quê.`; depois rode `/apply orchestrator-tests` antes de seguir a leitura.
+ 
+ A clínica adotou o FOCUS inteiro no capítulo 7, e o [`docs/01-Architecture.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/docs/01-Architecture.md) dela, na seção "How the code is organized", dá as quatro peças em uma tabela.
+ O original está em inglês; esta é a tradução:
+@@ -498,4 +504,4 @@ Nada é construído.
+ [^bloc]: Bloc, "Bloc State Management Library", documentação, acesso em 2026-09-29. <https://bloclibrary.dev/>
+ [^mediatr]: Jimmy Bogard, "MediatR: Simple, unambitious mediator implementation in .NET", acesso em 2026-09-29. <https://github.com/jbogard/MediatR>
+ [^clean-architecture]: Robert C. Martin, "The Clean Architecture", 2012. <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>
+-[^clinic-orchestrator-tests-run]: A construção dos testes dos orquestradores do projeto guiado deste livro, 2026-09-29, com o Claude Code 2.1.284 e o modelo `claude-opus-5-5`: cada turno, e a saída do `npm run verify` no commit `e6653b5` da clínica em `verify.txt`. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/clinic-orchestrator-tests-run/README.md>
++[^clinic-orchestrator-tests-run]: A construção dos testes dos orquestradores do projeto guiado deste livro, 2026-09-29, com o Claude Code 2.1.284 e o modelo `claude-opus-5-5`: o briefing, cada turno, e a saída do `npm run verify` no commit `e6653b5` da clínica em `verify.txt`. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/clinic-orchestrator-tests-run/README.md>
+
+commit 60fc7d7db00e63105d3a8d6791789b8a76e71746
+Author: J.C.Ködel <jckodel@gmail.com>
+Date:   Wed Sep 30 14:44:41 2026 -0300
+
+    docs(ch15-view-rule): trace tooLateToCancel from the view to rules.ts
+    
+    - en/pt ch15: the view reads state and tooLateToCancel, a boolean
+    - Hook, bookingEvents.ts excerpt with link, then cancellationDeadline
+    - The clinic's "Display only" comment: warns, refuses nothing
+    - Ties it to docs/01's "only to decide what to show"; settles F11
+    
+    work/done/ch15-view-rule.md
+
+diff --git a/book/en/15-four-pieces.md b/book/en/15-four-pieces.md
+index 8a59742..020d2de 100644
+--- a/book/en/15-four-pieces.md
++++ b/book/en/15-four-pieces.md
+@@ -129,7 +129,26 @@ case "form": {
+ }
+ ```
+ 
+-The view renders what `state` holds and hands every change to the hook, as `typeName`, `typePhone`, `back` or `submit`; the tap on "Book" submits the form, and `submitForm` calls `submit` and does nothing else.
++In this step the view reads two values from the hook, `state` and `tooLateToCancel`, and hands every change to the hook, as `typeName`, `typePhone`, `back` or `submit`; the tap on "Book" submits the form, and `submitForm` calls `submit` and does nothing else.
++
++`tooLateToCancel` looks like a business rule in the view, the first thing its "Forbids" names, so follow it back.
++The hook computes it on every render as `tooLateToCancel(state, new Date())`, reading the clock as the hook does.
++The function of that name is in [`src/features/appointments/bookingEvents.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/bookingEvents.ts), the client orchestrator, and is true only on the form step when the appointment's cancellation deadline is already before `now`:
++
++```ts
++// Display only: the server does not refuse such a booking.
++export function tooLateToCancel(state: BookingState, now: Date): boolean {
++	return (
++		state.step.kind === "form" &&
++		cancellationDeadline(state.step.startsAt).getTime() < now.getTime()
++	);
++}
++```
++
++The comment is the clinic's: the line warns the client and refuses nothing, the booking still goes through, and it is cancelling after the deadline that the server refuses.
++The deadline itself is `cancellationDeadline`, in `rules.ts`: 24 hours before the appointment starts, as its comment says, and the use case `cancel`, which the server's route runs when a client cancels, calls it too.
++So the rule is written once, in the use case, and the view holds none: it receives a boolean and shows or hides a line of `strings.ts`.
++This is what the clinic's docs/01 means by the client importing the same use case "only to decide what to show", here in the booking form.
+ 
+ **2. The client orchestrator.** Its events are plain functions in [`src/features/appointments/bookingEvents.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/bookingEvents.ts); booking takes two, `submitStarted` and `submit`:
+ 
+diff --git a/book/pt/15-four-pieces.md b/book/pt/15-four-pieces.md
+index f7193c7..e05c5b3 100644
+--- a/book/pt/15-four-pieces.md
++++ b/book/pt/15-four-pieces.md
+@@ -130,7 +130,26 @@ case "form": {
+ }
+ ```
+ 
+-A tela renderiza o que `state` guarda e entrega toda mudança ao hook, como `typeName`, `typePhone`, `back` ou `submit`; o toque em "Book" envia o formulário, e `submitForm` chama `submit` e não faz mais nada.
++Neste passo a tela lê dois valores do hook, `state` e `tooLateToCancel`, e entrega toda mudança ao hook, como `typeName`, `typePhone`, `back` ou `submit`; o toque em "Book" envia o formulário, e `submitForm` chama `submit` e não faz mais nada.
++
++`tooLateToCancel` parece uma regra de negócio na tela, a primeira coisa que o "Proíbe" dela cita, então siga-o de volta.
++O hook o calcula a cada render como `tooLateToCancel(state, new Date())`, lendo o relógio como o hook faz.
++A função com esse nome está em [`src/features/appointments/bookingEvents.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/bookingEvents.ts), o orquestrador do cliente, e é verdadeira só no passo do formulário quando o prazo de cancelamento do horário já é anterior a `now`:
++
++```ts
++// Display only: the server does not refuse such a booking.
++export function tooLateToCancel(state: BookingState, now: Date): boolean {
++	return (
++		state.step.kind === "form" &&
++		cancellationDeadline(state.step.startsAt).getTime() < now.getTime()
++	);
++}
++```
++
++O comentário é da clínica ("só para exibir: o servidor não recusa um agendamento assim"): a linha avisa o cliente e não recusa nada, o agendamento ainda passa, e o que o servidor recusa é cancelar depois do prazo.
++O prazo em si é `cancellationDeadline`, em `rules.ts`: 24 horas antes de o horário começar, como diz o comentário dele, e o caso de uso `cancel`, que a rota do servidor roda quando um cliente cancela, também o chama.
++Então a regra é escrita uma vez, no caso de uso, e a tela não guarda nenhuma: ela recebe um booleano e mostra ou esconde uma linha de `strings.ts`.
++É isso que o docs/01 da clínica quer dizer com o cliente importar o mesmo caso de uso "só para decidir o que mostrar", aqui no formulário de agendamento.
+ 
+ **2. O orquestrador do cliente.** Os eventos dele são funções simples em [`src/features/appointments/bookingEvents.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/bookingEvents.ts); agendar usa dois, `submitStarted` e `submit`:
+ 
+
+commit 4afe567e3ee92b15d96418b8718251cd0dcf1056
+Author: J.C.Ködel <jckodel@gmail.com>
+Date:   Wed Sep 30 14:45:47 2026 -0300
+
+    docs(ch15-shape-cost): make key point 2 meet the section's verdict
+    
+    - en/pt ch15 key point 2: a job pays alone or through one shape
+    - The shape counts when a delivery chose it, as for healthEvents.ts
+    - Section unchanged; settles F12
+    
+    work/done/ch15-shape-cost.md
+
+diff --git a/book/en/15-four-pieces.md b/book/en/15-four-pieces.md
+index 020d2de..3e44a28 100644
+--- a/book/en/15-four-pieces.md
++++ b/book/en/15-four-pieces.md
+@@ -492,7 +492,7 @@ KISS, YAGNI and DRY decide, as [chapter 6](06-the-documents.md#the-two-choices)
+ ## Key points
+ 
+ * The view fires events and renders state, the orchestrator turns one event into one new state, a use case holds a rule as a pure function, and the repository is the only piece that fetches and saves.
+-* A piece is written when it has a job and that job gives more than it costs; the "Forbids" column keeps it to that job.
++* A piece is written when its job gives more than it costs, alone or through one shape a delivery chose for every hook, as the clinic keeps `healthEvents.ts`; the "Forbids" column keeps it to that job.
+ * In the clinic each side has its own orchestrator and repositories, and both import the same use cases: the server enforces a rule, and the client uses it only to decide what to show.
+ * An event flows one way: the view never sets the state, and a use case never calls a repository.
+ * A piece receives a dependency only where its test passes a second implementation, a fake: the orchestrator its repositories or the driver they use, and a server repository that driver; a use case and a view receive none, and `now` is passed as data.
+diff --git a/book/pt/15-four-pieces.md b/book/pt/15-four-pieces.md
+index e05c5b3..880205f 100644
+--- a/book/pt/15-four-pieces.md
++++ b/book/pt/15-four-pieces.md
+@@ -493,7 +493,7 @@ KISS, YAGNI e DRY decidem, como o [capítulo 6](06-the-documents.md#as-duas-esco
+ ## Pontos-chave
+ 
+ * A tela dispara eventos e renderiza o estado, o orquestrador transforma um evento em um novo estado, um caso de uso guarda uma regra como função pura, e o repositório é a única peça que busca e salva.
+-* Uma peça é escrita quando tem um trabalho e esse trabalho dá mais do que custa; a coluna "Proíbe" a mantém nesse trabalho.
++* Uma peça é escrita quando o trabalho dela dá mais do que custa, sozinho ou por uma só forma que uma entrega escolheu para todo hook, como a clínica mantém `healthEvents.ts`; a coluna "Proíbe" a mantém nesse trabalho.
+ * Na clínica cada lado tem o seu orquestrador e os seus repositórios, e os dois importam os mesmos casos de uso: o servidor impõe uma regra, e o cliente a usa só para decidir o que mostrar.
+ * Um evento corre em um só sentido: a tela nunca muda o estado, e um caso de uso nunca chama um repositório.
+ * Uma peça recebe uma dependência só onde o teste dela passa uma segunda implementação, uma falsa: o orquestrador os seus repositórios ou o driver que eles usam, e um repositório do servidor esse driver; um caso de uso e uma tela não recebem nenhuma, e `now` é passado como dado.
+
+commit 7a91cbe4705eb6d05ae132d500f9db2edab0ae49
+Author: J.C.Ködel <jckodel@gmail.com>
+Date:   Wed Sep 30 14:47:30 2026 -0300
+
+    docs(ch16-unit-test-fakes): let a unit test swap the I/O and the clock
+    
+    - Chapter 16 defines a unit test as running what its piece calls, except I/O and clock
+    - docs/03 unit test row matches the chapter, route with a fake clock
+    - Settles finding F13 of the M4.1 review
+    
+    work/done/ch16-unit-test-fakes.md
+
+diff --git a/book/en/16-testing-and-agents.md b/book/en/16-testing-and-agents.md
+index 32f543a..68316cf 100644
+--- a/book/en/16-testing-and-agents.md
++++ b/book/en/16-testing-and-agents.md
+@@ -21,7 +21,7 @@ The same section ends with the clinic's rule: "*Every rule has a test. A rule wi
+ Vitest runs a test in Node, with no browser.[^vitest]
+ Playwright drives the app in a real browser, as a user would, by clicking and typing.[^playwright]
+ 
+-A test Vitest runs is a unit test: it calls one piece directly, with no server running, and runs whatever that piece calls.
++A test Vitest runs is a unit test: it calls one piece directly, with no server running, and runs the code that piece calls, except the I/O and the clock, which the test may swap.
+ The piece can be a use case with its data, a repository against an in-memory database, a route through `app.request`, which runs the use case and the repository behind it, or an event function with fake repositories.
+ A test Playwright runs is an end-to-end test: it drives the running app through the view, the orchestrators, the server and the database, and its requests cross the network to that server, where a unit test's request never leaves the process.
+ They are the `.test.ts` and `.e2e.ts` files of the appointments slice in [chapter 14](14-errors-and-slices.md#vertical-slices), each beside the file it tests.
+diff --git a/book/pt/16-testing-and-agents.md b/book/pt/16-testing-and-agents.md
+index be0baad..63880f4 100644
+--- a/book/pt/16-testing-and-agents.md
++++ b/book/pt/16-testing-and-agents.md
+@@ -22,7 +22,7 @@ A mesma seção termina com a regra da clínica: "*Toda regra tem um teste. Uma
+ O Vitest roda um teste no Node, sem navegador.[^vitest]
+ O Playwright conduz o app em um navegador de verdade, como um usuário faria, clicando e digitando.[^playwright]
+ 
+-Um teste que o Vitest roda é um teste unitário: ele chama uma peça diretamente, sem servidor rodando, e roda tudo o que essa peça chama.
++Um teste que o Vitest roda é um teste unitário: ele chama uma peça diretamente, sem servidor rodando, e roda o código que essa peça chama, menos o I/O e o relógio, que o teste pode trocar.
+ A peça pode ser um caso de uso com os seus dados, um repositório contra um banco em memória, uma rota por `app.request`, que roda o caso de uso e o repositório por trás dela, ou uma função de evento com repositórios falsos.
+ Um teste que o Playwright roda é um teste ponta a ponta: ele conduz o app rodando pela tela, pelos orquestradores, pelo servidor e pelo banco, e as suas requisições cruzam a rede até esse servidor, enquanto a requisição de um teste unitário nunca sai do processo.
+ São os arquivos `.test.ts` e `.e2e.ts` da fatia dos agendamentos no [capítulo 14](14-errors-and-slices.md#fatias-verticais), cada um ao lado do arquivo que testa.

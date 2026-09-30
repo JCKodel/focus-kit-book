@@ -1,0 +1,211 @@
+commit 21522b81582a8aa7736a761b07f19eddfaab79a3
+Author: J.C.Ködel <jckodel@gmail.com>
+Date:   Wed Sep 30 14:54:32 2026 -0300
+
+    Disable the busy fields of the hours editor and booking form (busy-fields)
+    
+    - From and To in WeeklyHoursView take disabled={busy}, as its buttons do
+    - Name and phone in BookingView take disabled={busy}, as Book and Back do
+    - Two Playwright and two Vitest tests renamed to what they now check
+    - In-flight screenshots at 390x844 and 1280x800
+    
+    work/done/busy-fields.md
+
+diff --git a/src/features/appointments/BookingView.e2e.ts b/src/features/appointments/BookingView.e2e.ts
+index 235a34d..6c270e7 100644
+--- a/src/features/appointments/BookingView.e2e.ts
++++ b/src/features/appointments/BookingView.e2e.ts
+@@ -360,7 +360,7 @@ test("a failed booking keeps what was typed, and Try again books", async ({
+ 	await expect(page.getByRole("heading", { name: "Booked" })).toBeVisible();
+ });
+ 
+-test("disables Book and Back while a booking is in flight", async ({
++test("disables Book, Back, name and phone while a booking is in flight", async ({
+ 	page,
+ }) => {
+ 	const name = tagged("Ana");
+@@ -375,6 +375,8 @@ test("disables Book and Back while a booking is in flight", async ({
+ 
+ 	await expect(button(page, "Book")).toBeDisabled();
+ 	await expect(button(page, "Back")).toBeDisabled();
++	await expect(page.getByLabel("Your name")).toBeDisabled();
++	await expect(page.getByLabel("Phone number")).toBeDisabled();
+ });
+ 
+ test("professional, day and time buttons are full width and at least 44px tall", async ({
+diff --git a/src/features/appointments/BookingView.tsx b/src/features/appointments/BookingView.tsx
+index cda8d98..fbe9cdc 100644
+--- a/src/features/appointments/BookingView.tsx
++++ b/src/features/appointments/BookingView.tsx
+@@ -154,6 +154,7 @@ export function BookingView() {
+ 								id="client-name"
+ 								autoComplete="name"
+ 								value={state.name}
++								disabled={busy}
+ 								onChange={(event) => typeName(event.target.value)}
+ 								style={field}
+ 							/>
+@@ -168,6 +169,7 @@ export function BookingView() {
+ 								type="tel"
+ 								autoComplete="tel"
+ 								value={state.phone}
++								disabled={busy}
+ 								onChange={(event) => typePhone(event.target.value)}
+ 								style={field}
+ 							/>
+diff --git a/src/features/appointments/bookingEvents.test.ts b/src/features/appointments/bookingEvents.test.ts
+index a0468ac..9083d56 100644
+--- a/src/features/appointments/bookingEvents.test.ts
++++ b/src/features/appointments/bookingEvents.test.ts
+@@ -271,13 +271,16 @@ describe("moving between the steps", () => {
+ });
+ 
+ describe("booking", () => {
+-	it("sends the checked form and keeps a name typed after the click", () => {
++	it("sends the checked form and marks it busy", () => {
+ 		const { update, send } = submitStarted(onForm);
+-		expect(send).toBe(true);
+ 
+-		expect(update({ ...onForm, name: "Rita Sousa Lima" })).toMatchObject({
+-			name: "Rita Sousa Lima",
++		expect(send).toBe(true);
++		expect(update(onForm)).toEqual({
++			...onForm,
++			nameError: undefined,
++			phoneError: undefined,
+ 			busy: true,
++			failed: undefined,
+ 		});
+ 	});
+ 
+diff --git a/src/features/weeklyHours/WeeklyHoursView.e2e.ts b/src/features/weeklyHours/WeeklyHoursView.e2e.ts
+index ab7e85b..fe5831b 100644
+--- a/src/features/weeklyHours/WeeklyHoursView.e2e.ts
++++ b/src/features/weeklyHours/WeeklyHoursView.e2e.ts
+@@ -480,7 +480,7 @@ test("shows the loading line until the hours answer", async ({ page }) => {
+ 	await expect(page.getByRole("button", { name: "Save hours" })).toHaveCount(0);
+ });
+ 
+-test("disables every button of the editor while a save is in flight", async ({
++test("disables every button and time input of the editor while a save is in flight", async ({
+ 	page,
+ }) => {
+ 	const name = tagged("Ana");
+@@ -498,6 +498,10 @@ test("disables every button of the editor while a save is in flight", async ({
+ 	await expect(buttons.first()).toBeDisabled();
+ 	for (const button of await buttons.all()) await expect(button).toBeDisabled();
+ 	expect(await buttons.count()).toBe(1 + 7 + 2);
++
++	const times = hours.locator('input[type="time"]');
++	await expect(times).toHaveCount(2);
++	for (const time of await times.all()) await expect(time).toBeDisabled();
+ });
+ 
+ test("says the server cannot be reached with Cancel only when the hours cannot be read", async ({
+diff --git a/src/features/weeklyHours/WeeklyHoursView.tsx b/src/features/weeklyHours/WeeklyHoursView.tsx
+index 186558f..facbd4f 100644
+--- a/src/features/weeklyHours/WeeklyHoursView.tsx
++++ b/src/features/weeklyHours/WeeklyHoursView.tsx
+@@ -86,6 +86,7 @@ export function WeeklyHoursView({ professional, busy, section }: Props) {
+ 							type="time"
+ 							step={300}
+ 							value={p.start}
++							disabled={busy}
+ 							onChange={(event) => typeTime(p.key, "start", event.target.value)}
+ 						/>
+ 					</label>
+@@ -95,6 +96,7 @@ export function WeeklyHoursView({ professional, busy, section }: Props) {
+ 							type="time"
+ 							step={300}
+ 							value={p.end}
++							disabled={busy}
+ 							onChange={(event) => typeTime(p.key, "end", event.target.value)}
+ 						/>
+ 					</label>
+diff --git a/src/features/weeklyHours/weeklyHoursEvents.test.ts b/src/features/weeklyHours/weeklyHoursEvents.test.ts
+index e507f58..0f01be8 100644
+--- a/src/features/weeklyHours/weeklyHoursEvents.test.ts
++++ b/src/features/weeklyHours/weeklyHoursEvents.test.ts
+@@ -133,19 +133,16 @@ describe("saving", () => {
+ 		});
+ 	});
+ 
+-	it("sends the checked week and keeps a time typed after the click", () => {
++	it("sends the checked week and clears its refusal and unreachable", () => {
+ 		const acted = { ...loaded, unreachable: true };
+ 		const { update, send } = saveStarted(acted);
+ 
+-		const current = typeTime(acted, 1, "end", "19:00");
+-
+ 		expect(send).toBe(true);
+-		expect(update(current)).toEqual({
+-			...current,
++		expect(update(acted)).toEqual({
++			...acted,
+ 			unreachable: false,
+ 			refusal: undefined,
+ 		});
+-		expect(update(current).periods[1].end).toBe("19:00");
+ 	});
+ 
+ 	it("refuses the checked week and keeps a time typed after the click", () => {
+
+commit 36d7ad930d5c96bd6dbc87924384ebaed42bc7e1
+Author: J.C.Ködel <jckodel@gmail.com>
+Date:   Wed Sep 30 15:11:56 2026 -0300
+
+    Leave "saving" out of the weekly hours answer's report type (hours-answer)
+    
+    - Declare WeeklyHoursAnswerReport; WeeklyHoursReport is it or "saving"
+    - WeeklyHoursAnswer's report is WeeklyHoursAnswerReport
+    - docs/01 shape 6 names the type and why an answer cannot carry "saving"
+    
+    See work/done/hours-answer.md
+
+diff --git a/docs/01-Architecture.md b/docs/01-Architecture.md
+index ae27e9c..9d2d7e1 100644
+--- a/docs/01-Architecture.md
++++ b/docs/01-Architecture.md
+@@ -148,12 +148,15 @@ it here, with its first occurrence.
+ 6. **Answer that carries a report.**
+    `async <event>(...inputs, repositories): Promise<WeeklyHoursAnswer>`,
+    where `WeeklyHoursAnswer` is
+-   `{ update: Update<WeeklyHoursState>; report?: WeeklyHoursReport }`.
++   `{ update: Update<WeeklyHoursState>; report?: WeeklyHoursAnswerReport }`.
+    Used when an editor inside another section tells that section what
+    happened, because the section holds the busy state, the open row and
+    the messages. The hook publishes the update, then passes the report to
+-   the section; before a save it sends, it reports `saving` itself. Only
+-   occurrence: `load` and `save` in `weeklyHoursEvents.ts`.
++   the section; before a save it sends, it reports `saving` itself. The
++   section takes a `WeeklyHoursReport`, which is a
++   `WeeklyHoursAnswerReport` or `saving`; an answer cannot carry `saving`,
++   which would leave the section busy. Only occurrence: `load` and `save`
++   in `weeklyHoursEvents.ts`.
+ 7. **Report received.**
+    `<event>(report, repositories): Update<S> | Promise<Update<S>>`. Used
+    by the section that receives shape 6's report: the answer is an update
+diff --git a/src/features/weeklyHours/weeklyHoursEvents.ts b/src/features/weeklyHours/weeklyHoursEvents.ts
+index 026de61..c666761 100644
+--- a/src/features/weeklyHours/weeklyHoursEvents.ts
++++ b/src/features/weeklyHours/weeklyHoursEvents.ts
+@@ -35,13 +35,17 @@ export const initialWeeklyHoursState: WeeklyHoursState = {
+ 	nextKey: 0,
+ };
+ 
++// What a load or a save answers. "saving" is not one: only the hook
++// reports it, before a save it sends.
++export type WeeklyHoursAnswerReport = "saved" | "failed" | SectionRefusal;
++
+ // What the editor reports to the professionals section, which holds the busy
+ // state, the open row and the messages above the list.
+-export type WeeklyHoursReport = "saving" | "saved" | "failed" | SectionRefusal;
++export type WeeklyHoursReport = "saving" | WeeklyHoursAnswerReport;
+ 
+ export type WeeklyHoursAnswer = {
+ 	update: Update<WeeklyHoursState>;
+-	report?: WeeklyHoursReport;
++	report?: WeeklyHoursAnswerReport;
+ };
+ 
+ export type WeeklyHoursRepositories = {

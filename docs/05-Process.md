@@ -185,8 +185,8 @@ that happened.
 
 ## 8. Closing a milestone
 
-The last line of every milestone is its review, `<milestone>-review`, a
-delivery like the others: /propose writes its page, /apply runs it. It
+The last line of every milestone but a `.1` is its review,
+`<milestone>-review`, a delivery like the others: /propose writes its page, /apply runs it. It
 checks the milestone's paragraph clause by clause against what the
 deliveries built, and reviews the code with what the host offers. A clause
 no delivery answers is a finding. The review fixes nothing; the person
@@ -198,14 +198,12 @@ with its own paragraph, so the lines wait for /propose and nothing
 renumbers. No confirmed finding, no new milestone. A finding is never a
 fix in the middle of the next milestone.
 
-A milestone has at most one round of fixes: `.1` is the last. Its review
-reads only what its lines changed, both editions, and confirms only a
-blocking finding: a sentence the book shows to be false, or a step the
-reader cannot follow. Every confirmed finding of that review, and every
-finding it judges real but not blocking, becomes a line at the start of
-the next milestone, before its first chapter; none opens a `.2`. (Rule
-written after M4, whose `.1` review opened M4.2: M4.2 counts as M4's
-last round.)
+A milestone has at most one round of fixes: `.1` is the last. A `.1`
+has no review of its own: it closes when its lines are `[x]` with their
+proof, and whatever it missed is found by the review of the next
+milestone. (Rule written after M4, whose `.1` review opened M4.2:
+`m4.2-review` was the last review run under the old rule, and the author
+rejected its four findings to close M4.)
 
 For a milestone of chapters, the review is a fresh session that reads the
 book from its start to the end of the part, in both editions, and asks the
@@ -254,7 +252,7 @@ names the model, the last chapter and the paragraph.
    author approved them, and the request to write the confirmed findings
    into docs/06 as `## M<n>.1. What the review of M<n> found`, after the
    milestone and before the next, with a paragraph "When this milestone
-   closes, …", one `[ ]` line per finding, the last one `m<n>.1-review`,
+   closes, …", one `[ ]` line per finding and no review line,
    and to stage it. A finding an
    existing line covers adds no line; that line gains words only if the
    finding adds something. Flags as turn 1, with `--permission-mode
@@ -316,7 +314,7 @@ the second `m4-code-review`, which wrote it down). The delivery is
    ../focus-kit-book diff *)" "Bash(git -C ../focus-kit-book status *)"`:
    the decisions, word for word, and the request to write each confirmed
    finding as `[ ] clinic-<slug>  <what the code does afterwards>, by a
-   recorded run` in the book's `M<n>.1`, before `m<n>.1-review` (the
+   recorded run` in the book's `M<n>.1`, after its book lines (the
    milestone the review opened: after M4.1 it is M4.2), with one
    clause in its paragraph, and to stage it. Findings that one change
    settles may share one line, as the author decides (first
