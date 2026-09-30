@@ -193,7 +193,7 @@ function fake(repositories: Partial<CancelRepositories>): CancelRepositories {
 ```
 
 `fake` preenche só os repositórios que um teste define, e qualquer outra chamada lança, então um teste falha se o evento chama um repositório que ele não esperava.
-Estes são dois dos seus testes sob `describe("submitting", ...)`:
+Estes são quatro dos seus testes sob `describe("submitting", ...)`, os três primeiros escritos uma vez só:
 
 ```ts
 it.each([
@@ -241,8 +241,9 @@ it("forgets the normalized code and shows the cancellation with the fields empti
 ```
 
 `typed` é o formulário com um telefone e o código `" k7p2qx "` digitados, `now` uma data constante e `cancelled` a resposta do servidor, todas constantes do mesmo arquivo.
-No primeiro teste o `postCancellation` falso responde `CancellationTooLate`, como o servidor responderia, e o teste confere o novo estado, o que foi digitado mantido e a recusa nomeada, sem tela.
-No segundo, `vi.fn` registra cada chamada, então o teste afirma o que foi enviado, que `forget` recebeu o código normalizado `K7P2QX` e `now`, e o novo estado.
+`it.each` roda a função de teste uma vez para cada valor da sua lista, passa o valor como `code` e o põe onde `%s` está no nome,[^vitest-each] então o Vitest roda `keeps what was typed and shows AppointmentNotFound` (mantém o que foi digitado e mostra AppointmentNotFound), o mesmo com `CancellationTooLate` e o mesmo com `ServerUnreachable`: duas recusas, e a exceção que `postCancellation` devolve quando nenhuma resposta utilizável chega.
+Em cada um, o `postCancellation` falso responde o código, como o servidor ou uma requisição que falhou responderia, e o teste confere o novo estado, o que foi digitado mantido e o código nomeado, sem tela.
+No último, `vi.fn` registra cada chamada, então o teste afirma o que foi enviado, que `forget` recebeu o código normalizado `K7P2QX` e `now`, e o novo estado.
 `now` é uma constante porque `submit` o recebe, então nada é falsificado além dos repositórios.
 
 **A tela.** Este é o `test("an appointment under 24 hours away is refused by the typed form, and shows no Cancel when remembered", ...)`, de [`src/features/appointments/CancelView.e2e.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/CancelView.e2e.ts):
@@ -383,6 +384,7 @@ Compare a lista dele com as fatias que ele nomeia e com as contagens de "O que a
 Nada é construído.
 
 [^vitest]: Vitest, "Getting Started", o guia da documentação, acesso em 2026-09-29. <https://vitest.dev/guide/>
+[^vitest-each]: Vitest, "Test", a referência da API, seção `test.each`, a mesma função que `it.each`, acesso em 2026-09-30. <https://vitest.dev/api/#test-each>
 [^playwright]: Playwright, "Installation", a documentação, acesso em 2026-09-29. <https://playwright.dev/docs/intro>
 [^clinic-orchestrator-tests-run]: A construção dos testes dos orquestradores do projeto guiado deste livro, 2026-09-29, com o Claude Code 2.1.284 e o modelo `claude-opus-5-5`: cada turno, e a saída do `npm run verify` no commit `e6653b5` da clínica em `verify.txt`. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/clinic-orchestrator-tests-run>
 [^clinic-milestone-1-run]: A construção do marco 1 do projeto guiado deste livro, 2026-09-28, com o Claude Code 2.1.284 e o modelo `claude-opus-5-5`: cada turno de cada entrega, e as chamadas negadas no README. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/clinic-milestone-1-run>

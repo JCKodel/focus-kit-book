@@ -192,7 +192,7 @@ function fake(repositories: Partial<CancelRepositories>): CancelRepositories {
 ```
 
 `fake` fills in only the repositories a test sets, and any other call throws, so a test fails if the event calls a repository it did not expect.
-These are two of its tests under `describe("submitting", ...)`:
+These are four of its tests under `describe("submitting", ...)`, the first three written once:
 
 ```ts
 it.each([
@@ -240,8 +240,9 @@ it("forgets the normalized code and shows the cancellation with the fields empti
 ```
 
 `typed` is the form with a phone and the code `" k7p2qx "` typed, `now` a constant date and `cancelled` the server's answer, all constants of the same file.
-In the first test the fake `postCancellation` answers `CancellationTooLate`, as the server would, and the test checks the new state, what was typed kept and the refusal named, with no screen.
-In the second, `vi.fn` records each call, so the test asserts what was sent, that `forget` got the normalized code `K7P2QX` and `now`, and the new state.
+`it.each` runs the test function once for each value in its list, passes the value as `code` and puts it where `%s` stands in the name,[^vitest-each] so Vitest runs `keeps what was typed and shows AppointmentNotFound`, the same with `CancellationTooLate`, and the same with `ServerUnreachable`: two refusals, and the exception `postCancellation` returns when no usable answer arrives.
+In each, the fake `postCancellation` answers the code, as the server or a failed request would, and the test checks the new state, what was typed kept and the code named, with no screen.
+In the last, `vi.fn` records each call, so the test asserts what was sent, that `forget` got the normalized code `K7P2QX` and `now`, and the new state.
 `now` is a constant because `submit` receives it, so nothing is faked but the repositories.
 
 **The screen.** This is `test("an appointment under 24 hours away is refused by the typed form, and shows no Cancel when remembered", ...)`, from [`src/features/appointments/CancelView.e2e.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/CancelView.e2e.ts):
@@ -381,6 +382,7 @@ Compare its list with the slices it names and with the counts of "What the slice
 Nothing is built.
 
 [^vitest]: Vitest, "Getting Started", the documentation's guide, accessed 2026-09-29. <https://vitest.dev/guide/>
+[^vitest-each]: Vitest, "Test", the API reference, section `test.each`, the same function as `it.each`, accessed 2026-09-30. <https://vitest.dev/api/#test-each>
 [^playwright]: Playwright, "Installation", the documentation, accessed 2026-09-29. <https://playwright.dev/docs/intro>
 [^clinic-orchestrator-tests-run]: This book's build of the guided project's orchestrator tests, 2026-09-29, with Claude Code 2.1.284 and the model `claude-opus-5-5`: every turn, and the `npm run verify` output on the clinic's commit `e6653b5` in `verify.txt`. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/clinic-orchestrator-tests-run>
 [^clinic-milestone-1-run]: This book's build of the guided project's milestone 1, 2026-09-28, with Claude Code 2.1.284 and the model `claude-opus-5-5`: every turn of each delivery, and the denied calls in the README. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/clinic-milestone-1-run>

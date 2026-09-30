@@ -37,10 +37,19 @@ Sentences are found by their quoted text. The line numbers below are from commit
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapter 16 still opens with its value, with no filler and nothing useful cut.
-* [ ] `grep -n "In the first test the fake\|No primeiro teste o" book/*/16-testing-and-agents.md` finds nothing.
-* [ ] `grep -n "two of its tests\|dois dos seus testes" book/*/16-testing-and-agents.md` finds nothing.
-* [ ] `[^vitest-each]` is in both editions, and its link opens Vitest's `test.each` section.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning. Chapter 16 still opens with its value, with no filler and nothing useful cut.
+* [x] `grep -n "In the first test the fake\|No primeiro teste o" book/*/16-testing-and-agents.md` finds nothing.
+* [x] `grep -n "two of its tests\|dois dos seus testes" book/*/16-testing-and-agents.md` finds nothing.
+* [x] `[^vitest-each]` is in both editions, and its link opens Vitest's `test.each` section.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* §"A test for each piece", "The client's event": the intro line now counts four tests, the first three written once.
+* The "first test" sentence became two, tightened from the proposal: the first says what `it.each` does and names the three runs, then says `AppointmentNotFound` and `CancellationTooLate` are refusals and `ServerUnreachable` the exception `postCancellation` returns when no usable answer arrives (the Behaviour's wording). The second says what each run checks. In Portuguese the first test name keeps its translation in parentheses, as the `request` list does; the other two are said as "o mesmo com".
+* Choice taken: "In the second, `vi.fn` ..." became "In the last, ..." ("No último, ..."), since with `it.each` counted as three the fourth test is no longer the second.
+* `[^vitest-each]` placed after `[^vitest]` in both editions. Checked on 2026-09-30: the page's title is "Test | Vitest", the anchor `#test-each` exists, and its section says "Alias: it.each".
+* The excerpt, docs/03 and the exercises are unchanged.
+* Finding F14 of the M4 review is settled.
