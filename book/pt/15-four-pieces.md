@@ -130,7 +130,26 @@ case "form": {
 }
 ```
 
-A tela renderiza o que `state` guarda e entrega toda mudança ao hook, como `typeName`, `typePhone`, `back` ou `submit`; o toque em "Book" envia o formulário, e `submitForm` chama `submit` e não faz mais nada.
+Neste passo a tela lê dois valores do hook, `state` e `tooLateToCancel`, e entrega toda mudança ao hook, como `typeName`, `typePhone`, `back` ou `submit`; o toque em "Book" envia o formulário, e `submitForm` chama `submit` e não faz mais nada.
+
+`tooLateToCancel` parece uma regra de negócio na tela, a primeira coisa que o "Proíbe" dela cita, então siga-o de volta.
+O hook o calcula a cada render como `tooLateToCancel(state, new Date())`, lendo o relógio como o hook faz.
+A função com esse nome está em [`src/features/appointments/bookingEvents.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/bookingEvents.ts), o orquestrador do cliente, e é verdadeira só no passo do formulário quando o prazo de cancelamento do horário já é anterior a `now`:
+
+```ts
+// Display only: the server does not refuse such a booking.
+export function tooLateToCancel(state: BookingState, now: Date): boolean {
+	return (
+		state.step.kind === "form" &&
+		cancellationDeadline(state.step.startsAt).getTime() < now.getTime()
+	);
+}
+```
+
+O comentário é da clínica ("só para exibir: o servidor não recusa um agendamento assim"): a linha avisa o cliente e não recusa nada, o agendamento ainda passa, e o que o servidor recusa é cancelar depois do prazo.
+O prazo em si é `cancellationDeadline`, em `rules.ts`: 24 horas antes de o horário começar, como diz o comentário dele, e o caso de uso `cancel`, que a rota do servidor roda quando um cliente cancela, também o chama.
+Então a regra é escrita uma vez, no caso de uso, e a tela não guarda nenhuma: ela recebe um booleano e mostra ou esconde uma linha de `strings.ts`.
+É isso que o docs/01 da clínica quer dizer com o cliente importar o mesmo caso de uso "só para decidir o que mostrar", aqui no formulário de agendamento.
 
 **2. O orquestrador do cliente.** Os eventos dele são funções simples em [`src/features/appointments/bookingEvents.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/bookingEvents.ts); agendar usa dois, `submitStarted` e `submit`:
 

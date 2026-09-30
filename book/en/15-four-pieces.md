@@ -129,7 +129,26 @@ case "form": {
 }
 ```
 
-The view renders what `state` holds and hands every change to the hook, as `typeName`, `typePhone`, `back` or `submit`; the tap on "Book" submits the form, and `submitForm` calls `submit` and does nothing else.
+In this step the view reads two values from the hook, `state` and `tooLateToCancel`, and hands every change to the hook, as `typeName`, `typePhone`, `back` or `submit`; the tap on "Book" submits the form, and `submitForm` calls `submit` and does nothing else.
+
+`tooLateToCancel` looks like a business rule in the view, the first thing its "Forbids" names, so follow it back.
+The hook computes it on every render as `tooLateToCancel(state, new Date())`, reading the clock as the hook does.
+The function of that name is in [`src/features/appointments/bookingEvents.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/bookingEvents.ts), the client orchestrator, and is true only on the form step when the appointment's cancellation deadline is already before `now`:
+
+```ts
+// Display only: the server does not refuse such a booking.
+export function tooLateToCancel(state: BookingState, now: Date): boolean {
+	return (
+		state.step.kind === "form" &&
+		cancellationDeadline(state.step.startsAt).getTime() < now.getTime()
+	);
+}
+```
+
+The comment is the clinic's: the line warns the client and refuses nothing, the booking still goes through, and it is cancelling after the deadline that the server refuses.
+The deadline itself is `cancellationDeadline`, in `rules.ts`: 24 hours before the appointment starts, as its comment says, and the use case `cancel`, which the server's route runs when a client cancels, calls it too.
+So the rule is written once, in the use case, and the view holds none: it receives a boolean and shows or hides a line of `strings.ts`.
+This is what the clinic's docs/01 means by the client importing the same use case "only to decide what to show", here in the booking form.
 
 **2. The client orchestrator.** Its events are plain functions in [`src/features/appointments/bookingEvents.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/bookingEvents.ts); booking takes two, `submitStarted` and `submit`:
 

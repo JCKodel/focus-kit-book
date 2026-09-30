@@ -39,10 +39,22 @@
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapter 15 opens with its value, with no filler and nothing useful cut.
-* [ ] The excerpt matches `git show book-v1/four-pieces:src/features/appointments/bookingEvents.ts` lines 107-113, byte for byte.
-* [ ] `grep -n "tooLateToCancel" book/*/15-four-pieces.md` finds it in the prose of both editions, not only in the view's excerpt.
-* [ ] Every number in the new text (the 24 hours) says where it comes from: `rules.ts`'s comment.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning. Chapter 15 opens with its value, with no filler and nothing useful cut.
+* [x] The excerpt matches `git show book-v1/four-pieces:src/features/appointments/bookingEvents.ts` lines 107-113, byte for byte.
+* [x] `grep -n "tooLateToCancel" book/*/15-four-pieces.md` finds it in the prose of both editions, not only in the view's excerpt.
+* [x] Every number in the new text (the 24 hours) says where it comes from: `rules.ts`'s comment.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author. Left unticked on purpose: in this batch the driver runs `make book` once at the end of the loop.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Revalidated against `main` at `ec117c8`: `ch15-brief-printed` and `ch15-uncaught-pieces` had moved the paragraph to en:132 and pt:133, and the hook's clock sentence to en:64; the text was as the page quotes it. The clinic's lines (useBooking.ts:110, bookingEvents.ts:6-10 and 107-113, rules.ts:145-148, BookingView.tsx:35-49) are as the page says.
+* The paragraph now says the view reads `state` and `tooLateToCancel`; a new paragraph follows the value back, hook, `bookingEvents.ts` with the excerpt and its link, `rules.ts`, in the page's order.
+* Taken alone, since the batch ran without conversation: the page says "the use case the server's `cancel` also uses", but at the tag `cancel` is itself a use case in `rules.ts` (line 152) that calls `cancellationDeadline`, and `route.server.ts:194` runs it. The text says that: "the use case `cancel`, which the server's route runs when a client cancels, calls it too".
+* Taken alone: the new paragraph opens by naming the view's "Forbids" ("looks like a business rule in the view"), so the reader knows why the value is followed; the Portuguese glosses the English comment in parentheses, as the chapter glosses "Book".
+* "Two values" is scoped to the printed step ("In this step"), since the view also takes `days` from the hook for another step.
+* `bookingEvents.ts` is now linked twice, in the new paragraph as the page asks and again at step 2 a few lines below; step 2 is outside this page's files, so it was left for the author to decide.
+* The excerpt was checked against the tag by `diff`, in both editions.
+* F11 is settled by this delivery; `findings.md` is a run record and is not edited, as done for F9 and F10.
+* No document changed: no new term, rule or decision.
