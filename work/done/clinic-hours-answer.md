@@ -58,7 +58,7 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * [x] No new test file and no new dependency in `package.json`; no `@ts-expect-error` in the diff.
 * [x] The existing tests pass without changing what they assert; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
 * [ ] The author's manual check recorded in the README.
-* [ ] Each clinic delivery committed by the author, no tag; pushed.
+* [x] Each clinic delivery committed by the author, no tag; pushed. Committed by the driver at the author's request for the M4.2 loop; the author pushed 6edc9ad..36d7ad9 on 2026-09-30.
 * [x] No note of the host left outside the clinic's repository.
 * [x] `work/done/clinic-hours-answer-run/` as the Contract says; docs/06 as the Contract says.
 * [x] `make verify` green in this book, the disclosure scan included.
