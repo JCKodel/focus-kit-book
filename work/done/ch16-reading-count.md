@@ -44,13 +44,22 @@ Sentences are found by their quoted text. The line numbers below are from commit
 * The counts and the wording of en:333-341: `slice-imports` owns lines 334 and 341, and the other lines stay.
 * Percentages. The chapter gives counts as "N of M", and so does this page.
 
+**What happened.**
+
+* Recount: all six turns, by the method above, give the table's counts: 14 of 15, 26 of 49, 25 of 63, 4 of 77, 33 of 77 and 20 of 95. No difference. The shell prints that count, beyond `Read` calls, are eight files in `weekly-hours`, one in `e2e-database-busy` (`src/server/start.server.ts`), four in `book-appointment` and one in `cancel-appointment` (`src/lib/result.ts`); every loop is denied in the README and counts nothing.
+* §"What the slice gives an agent": the new paragraph sits between "A new slice copies the shape ..." and the tests paragraph, tightened from the proposal: "like `book-appointment`'s 33 of 77" became "as `book-appointment` did with 33 of 77" ("como `book-appointment` fez com 33 de 77"), and "the slice itself" became "the slice".
+* Choice taken: the four new counts carry `[^clinic-milestone-1-run]` once, on the paragraph's first sentence, which introduces all four; the note is unchanged.
+* In Portuguese, "Os dois turnos da fatia do agendamento" became "da fatia dos agendamentos", the name the section already uses two paragraphs above ("as duas entregas da fatia dos agendamentos").
+* Opener and key point 5 as the page says, both editions; chapter 16 keeps five key points. The first `make verify` exited red once with no rule line (a transient external-link check); the rerun is green.
+* Finding F15 of the M4 review is settled.
+
 **Done when.**
 
-* [ ] The six counts are recounted by the method above and match the table, or the difference is recorded here.
-* [ ] Both editions changed with the same meaning. Chapter 16 still opens with its value, with no filler and nothing useful cut, and every number is sourced.
-* [ ] `grep -n "reading small\|leitura de um agente" book/*/16-testing-and-agents.md` finds nothing.
-* [ ] `grep -n "Both turns ran\|Os dois turnos rodaram" book/*/16-testing-and-agents.md` finds nothing.
-* [ ] Chapter 16 has five key points.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] The six counts are recounted by the method above and match the table, or the difference is recorded here.
+* [x] Both editions changed with the same meaning. Chapter 16 still opens with its value, with no filler and nothing useful cut, and every number is sourced.
+* [x] `grep -n "reading small\|leitura de um agente" book/*/16-testing-and-agents.md` finds nothing.
+* [x] `grep -n "Both turns ran\|Os dois turnos rodaram" book/*/16-testing-and-agents.md` finds nothing.
+* [x] Chapter 16 has five key points.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author. Run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.

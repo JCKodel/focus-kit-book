@@ -1,7 +1,7 @@
 # Testes, e FOCUS com agentes
 
 Depois deste capítulo você consegue dizer que teste guarda cada peça do FOCUS e o que ele troca, e seguir uma regra da clínica por um teste em cada nível, incluindo o teste do orquestrador do cliente com os seus repositórios falsos.
-Você também consegue dizer, com o registro da própria clínica, como uma fatia e os seus testes mantêm pequena a leitura de um agente e dizem a ele quando terminou.
+Você também consegue dizer, com o registro da própria clínica, como uma fatia limita o que um agente lê e como os testes dela dizem a ele quando terminou.
 
 ## Um teste para cada peça
 
@@ -344,7 +344,14 @@ O turno do `/apply` dela leu 33 dos 77 arquivos de `src/` no seu commit pai, `af
 Em português: "Estudei a fatia `weeklyHours` para usar como padrão."
 Uma fatia nova copia a forma de uma fatia irmã, e uma entrega dentro de uma fatia lê essa fatia e o código de fora dela que ela chama.
 
-Os dois turnos rodaram os testes da fatia sozinhos antes da verificação inteira.
+A mesma contagem nos outros quatro turnos de `/apply` do marco dá com o que comparar.[^clinic-milestone-1-run]
+`clinic-setup`, a primeira entrega sobre o esqueleto, leu 14 dos 15 arquivos.
+`professionals` leu 26 de 49 e `weekly-hours` 25 de 63, cada uma começando a sua fatia, como `book-appointment` fez com 33 de 77.
+`e2e-database-busy`, uma correção de como o servidor abre o SQLite, leu 4 de 77.
+O registro não tem uma execução da mesma entrega sem fatias.
+O que ele mostra é que uma entrega lê mais ou menos o quanto toca, e que a fatia limita para onde essa leitura vai: para a fatia e o código que ela chama, ou para uma fatia irmã, para copiar.
+
+Os dois turnos da fatia dos agendamentos rodaram os testes da fatia sozinhos antes da verificação inteira.
 `cancel-appointment` rodou `npx vitest run src/features/appointments` e `npx playwright test --project=phone src/features/appointments`, depois `npm run verify`.
 `book-appointment` rodou `npx vitest run src/features/appointments` e `npx playwright test src/features/appointments src/features/clinic`, depois `npm run verify`.
 Os testes da própria fatia dizem ao agente em segundos se ele terminou a fatia, e a verificação depois diz que nada mais quebrou.
@@ -360,7 +367,7 @@ O nome de um teste é uma frase da regra, como "is too late one millisecond afte
 * Um teste troca só o I/O e o relógio, porque das quatro peças só os repositórios fazem I/O, só o orquestrador os recebe, e só o orquestrador lê o relógio.
 * Um repositório falso responde o que o teste define, e qualquer chamada que o teste não esperava lança, então o teste afirma que repositório foi chamado, com o quê, e o novo estado.
 * Uma regra seguida por todos os níveis mostra o que cada nível prova que os outros não provam: o limite, a linha, a resposta do servidor, o estado do cliente e o que o cliente vê.
-* Uma fatia mantém pequena a leitura de um agente, 20 de 95 arquivos para uma entrega dentro dela, e os testes dela, rodados sozinhos, dizem ao agente quando a fatia está feita.
+* Uma fatia limita onde um agente lê: a entrega dentro de uma leu 20 de 95 arquivos, as que começaram uma fatia de 25 de 63 a 33 de 77, e uma correção no código compartilhado 4 de 77; os testes da fatia, rodados sozinhos, dizem ao agente quando terminou.
 
 ## Exercícios
 

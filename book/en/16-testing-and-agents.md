@@ -1,7 +1,7 @@
 # Testing, and FOCUS with agents
 
 After this chapter you can say which test guards each FOCUS piece and what it swaps, and follow one rule of the clinic through a test at every level, the client orchestrator's test with its fakes included.
-You can also say, with the clinic's own record, how a slice and its tests keep an agent's reading small and tell it when it is done.
+You can also say, with the clinic's own record, how a slice bounds what an agent reads and how its tests tell it when it is done.
 
 ## A test for each piece
 
@@ -342,7 +342,14 @@ Its `/apply` turn read 33 of the 77 files of `src/` at its parent commit, `afc83
 
 A new slice copies the shape of a sibling slice, and a delivery inside a slice reads that slice and the code outside it that it calls.
 
-Both turns ran the slice's tests alone before the whole verify.
+The same count over the milestone's other four `/apply` turns gives something to compare with.[^clinic-milestone-1-run]
+`clinic-setup`, the first delivery on the skeleton, read 14 of the 15 files.
+`professionals` read 26 of 49 and `weekly-hours` 25 of 63, each starting its slice, as `book-appointment` did with 33 of 77.
+`e2e-database-busy`, a fix to how the server opens SQLite, read 4 of 77.
+The record has no run of the same delivery without slices.
+What it shows is that a delivery reads about as much as it touches, and that the slice bounds where that reading goes: to the slice and the code it calls, or to a sibling slice to copy.
+
+The two turns of the appointments slice ran the slice's tests alone before the whole verify.
 `cancel-appointment` ran `npx vitest run src/features/appointments` and `npx playwright test --project=phone src/features/appointments`, then `npm run verify`.
 `book-appointment` ran `npx vitest run src/features/appointments` and `npx playwright test src/features/appointments src/features/clinic`, then `npm run verify`.
 The slice's own tests tell the agent in seconds whether it is done with the slice, and verify then tells it that nothing else broke.
@@ -358,7 +365,7 @@ A test's name is a sentence of the rule, such as "is too late one millisecond af
 * A test swaps only I/O and the clock, because of the four pieces only the repositories do I/O, only the orchestrator receives them, and only the orchestrator reads the clock.
 * A fake repository answers what the test sets, and any call the test did not expect throws, so the test asserts which repository was called, with what, and the new state.
 * One rule followed through every level shows what each level proves that the others do not: the boundary, the row, the server's answer, the client's state, and what the client sees.
-* A slice keeps an agent's reading small, 20 of 95 files for a delivery inside one, and its tests, run alone, tell the agent when the slice is done.
+* A slice bounds where an agent reads: the delivery inside one read 20 of 95 files, the ones that started a slice 25 of 63 to 33 of 77, and a fix to shared code 4 of 77; the slice's tests, run alone, tell the agent when it is done.
 
 ## Exercises
 
