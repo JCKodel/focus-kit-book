@@ -57,7 +57,7 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * [x] On the clinic's last commit, the type of `WeeklyHoursAnswer`'s `report` in `src/features/weeklyHours/weeklyHoursEvents.ts` holds no "saving", and `WeeklyHoursReport` is that type or "saving".
 * [x] No new test file and no new dependency in `package.json`; no `@ts-expect-error` in the diff.
 * [x] The existing tests pass without changing what they assert; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
-* [ ] The author's manual check recorded in the README.
+* [x] The author's manual check recorded in the README.
 * [x] Each clinic delivery committed by the author, no tag; pushed. Committed by the driver at the author's request for the M4.2 loop; the author pushed 6edc9ad..36d7ad9 on 2026-09-30.
 * [x] No note of the host left outside the clinic's repository.
 * [x] `work/done/clinic-hours-answer-run/` as the Contract says; docs/06 as the Contract says.
@@ -75,7 +75,7 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * The clinic's docs/01 changes in shape 6, because the answer's report type it names changes.
 * The manual check is `clinic-hours-save`'s: a save, a refused period and a reload, since the change touches the save's types.
 * docs/05 is not edited: the recipe exists.
-* The start commit is `21522b8`, the local commit `busy-fields` left, committed and not pushed: the author decided for the M4.2 loop that HEAD at `21522b8` with a clean tree satisfies "equal to `origin/main`", and that he pushes both commits at the end.
+* The start commit is `21522b8`, the local commit `busy-fields` left, committed and not pushed: the author decided for the M4.2 loop that HEAD at `21522b8` with a clean tree satisfies "equal to `origin/main`", and that the author pushes both commits at the end.
 * The brief gains one sentence at its end, "When /apply stages, use plain git add -A and git status --short, without -C.", by the author's batch override, since `busy-fields`' `git -C . add -A` was denied; the brief above is the text sent.
 * By the author's batch override, the book's session committed in the clinic with the kit's message as printed, no tag, no push.
 

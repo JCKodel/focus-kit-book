@@ -61,7 +61,13 @@ Run from the root of the clinic. Common flags, on every turn:
 
 ## The author's manual check
 
-Pending, collected at the end of the M4.2 loop: on `npm run dev`, the owner saves a professional's hours, a period too short is refused with its message beside it and nothing is sent, and the hours read back after a reload are the ones saved.
+Run on 2026-09-30, collected at the end of the M4.2 loop, on the clinic's commit `36d7ad9`, in the same session as `../clinic-busy-fields-run/README.md`, whose setup it shares.
+
+* Saving Tuesday 09:00 to 08:00 was refused, the message beside the period: "Use times from 00:00 to 23:55 in steps of 5 minutes, with To after From."
+* Corrected to 17:00 and saved; the editor closed and the professionals section took clicks again.
+* After reloading `/owner` and reopening Hours, Tuesday showed 09:00 to 17:00.
+* The page asked for a period too short and for nothing sent; the check used a period with To before From and did not watch the network.
+* Passed.
 
 ## Files
 

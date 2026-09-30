@@ -58,7 +58,7 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * [x] On the clinic's last commit, `grep -c "disabled={busy}"` counts two more in `src/features/weeklyHours/WeeklyHoursView.tsx` and two more in `src/features/appointments/BookingView.tsx` than on `6edc9ad`, on the time, name and phone inputs.
 * [x] The two in-flight Playwright tests assert those inputs disabled; `grep -n "keeps a name typed after the click\|keeps a time typed after the click"` finds nothing in `src/` on the clinic's last commit. (It finds the refused-save test, which the brief keeps; the two tests the brief names are gone. See What happened.)
 * [x] No file under `src/` other than the two views and the four test files in the diff; no new dependency in `package.json`; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
-* [ ] The author's manual check recorded in the README.
+* [x] The author's manual check recorded in the README.
 * [x] Each clinic delivery committed by the author, no tag; pushed. Committed by the driver at the author's request for the M4.2 loop; the author pushed 6edc9ad..36d7ad9 on 2026-09-30.
 * [x] No note of the host left outside the clinic's repository.
 * [x] `work/done/clinic-busy-fields-run/` as the Contract says; docs/06 as the Contract says.

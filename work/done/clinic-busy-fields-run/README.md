@@ -64,7 +64,14 @@ The staged review went to the same session with `claude -p --continue "<request>
 
 ## The author's manual check
 
-Pending, collected at the end of the M4.2 loop: on `npm run dev`, a save, a refused period and a booking behave as before.
+Run on 2026-09-30, collected at the end of the M4.2 loop, on the clinic's commit `36d7ad9`, which holds this run's `21522b8`; the setup is in `../clinic-booking-submit-run/README.md`, and the owner's session was still open, so no password was typed.
+
+* Booked with the name Test and the phone 5511900000000 on Tue 6 Oct at 09:00: the booking code showed and the booking was listed under "Your appointments".
+* Saving Tuesday 09:00 to 08:00 was refused: "Use times from 00:00 to 23:55 in steps of 5 minutes, with To after From."
+* Corrected to 17:00 and saved; the editor closed.
+* After reloading `/owner` and reopening Hours, Tuesday showed 09:00 to 17:00.
+* The in-flight disabling was not seen by hand: the local server answers too fast; Playwright proves it.
+* Passed.
 
 ## Files
 
