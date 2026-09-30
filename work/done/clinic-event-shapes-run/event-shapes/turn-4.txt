@@ -1,0 +1,41 @@
+[tool Bash] git mv work/event-shapes.md work/done/event-shapes.md
+
+The page was never tracked (it showed as `??` in git status), so `git mv` can't move it. A plain `mv` does the same job, and `git add -A` will record the file at its new path.
+
+[tool Bash] mv work/event-shapes.md work/done/event-shapes.md
+
+[tool Bash] npm run verify
+
+Verify is green: 328 Vitest, 144 Playwright, build ok. Staging, then checking the stat before ticking that box.
+
+[tool Bash] git add -A && git diff --cached --stat
+
+Only the three expected files, nothing in `src/`. The page appears as a new file rather than a rename because it was never committed. Now updating the page.
+
+[tool Edit] work/done/event-shapes.md
+
+[tool Edit] work/done/event-shapes.md
+
+[tool Bash] git add -A && git status --short
+
+The delivery is finished and staged, and every "Done when" box is ticked.
+
+- **Move:** `git mv` failed because `/propose` never committed the page, so git didn't know the file. I moved it with a plain `mv` instead. Git will show it as a new file in `work/done/` rather than a rename.
+- **Verify:** `npm run verify` passed: typecheck, Biome, 328 Vitest tests, 144 Playwright tests and the build. Those are the same counts as `update-type`.
+- **Staged:** only `docs/01-Architecture.md`, `docs/06-Queue.md` and `work/done/event-shapes.md`, with nothing in `src/`.
+- **Page:** I ticked the verify and `git diff --stat` boxes and updated "What happened" with the test results and the reason for the plain `mv`.
+
+**Commit message:**
+```
+Name every event shape in docs/01 (event-shapes)
+
+- docs/01: new "Event shapes" subsection, eight shapes with first occurrences
+- docs/01: the orchestrator bullet points to it
+- docs/06: event-shapes marked done
+
+See work/done/event-shapes.md
+```
+
+Nothing is committed; that's yours to do.
+
+**Environments:** local is up to date and unchanged, since no code changed. Start it with `npm run dev`. Production doesn't exist yet; the `deploy` delivery creates it, and you publish.

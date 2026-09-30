@@ -1,0 +1,50 @@
+Scope is settled: documentation only. I'll run your grep, read every event function, and check `orchestrator-tests.md` to work out which file holds each shape's first occurrence.
+
+[tool Bash] grep -nE "^export (async )?function" src/features/*/*Events.ts; cat work/done/orchestrator-tests.md
+
+[tool Bash] cd src/features && cat appointments/bookingEvents.ts appointments/rememberedEvents.ts weeklyHours/weeklyHoursEvents.ts
+
+[tool Bash] cat appointments/cancelEvents.ts professionals/professionalsEvents.ts signIn/ownerEvents.ts clinic/clinicEvents.ts health/healthEvents.ts
+
+[tool Bash] cat appointments/useBooking.ts appointments/useRemembered.ts weeklyHours/useWeeklyHours.ts health/useHealth.ts
+
+[tool Bash] cd . && grep -rnE "Started|BookingOutcome|report|update" docs/0*.md AGENTS.md | grep -v "^docs/06" ; grep -n "^#" docs/01-Architecture.md; git log --oneline -3 -- docs/01-Architecture.md
+
+[tool Bash] grep -rnE "Started|BookingOutcome|report|update" docs/0[0-5]*.md AGENTS.md; grep -n "^#" docs/01-Architecture.md
+
+[tool Read] docs/01-Architecture.md
+
+[tool Read] src/features/professionals/useProfessionals.ts
+
+[tool Read] src/features/appointments/useCancel.ts
+
+[tool Write] work/event-shapes.md
+
+The page is written; now adding the queue line in docs/06.
+
+[tool Edit] docs/06-Queue.md
+
+I've written `work/event-shapes.md` on main (docs/05 says trunk, so no branch). `event-shapes` wasn't in the queue, so I added it to docs/06 as `[>]`, right after `update-type` and before `m1.1-review`. No file in `src/` changed.
+
+**What the page asks for.** Your grep finds 57 functions. Every one of them sorts into one of 8 numbered shapes, except `daysOf`, `tooLateToCancel` and `linesOf`, which only work out values to show. Each shape says its signature, when it's used, how the hook publishes it, and its first occurrence as a function in a file. The page has a table assigning all 57 functions, so `/apply` can check the text against the code.
+
+**Where it goes in docs/01, and why.** A new `### Event shapes` subsection at the end of "How the code is organized: FOCUS", just before "How data is accessed". The shapes belong to the Orchestrator row of that section, and that's where someone building an orchestrator is already reading. The orchestrator bullet shrinks to a pointer to the subsection, so the shapes are written in one place only. The rest of the bullet stays word for word.
+
+**A correction to last turn.** The three problems I raised in `useOwner` and `useCancel` aren't problems:
+- `open`, `close`, `submitSignInStarted` and `submitSignOutStarted` don't read the state, so publishing their value comes to the same thing as publishing an update.
+- `useCancel` sends the state the person acted on, which is what docs/01 asks for.
+
+The page describes both as variants of shapes 1 and 2. Nothing new needs queuing.
+
+**What to question when you read the page:**
+- **Choices I made on my own:**
+  - The eight events files were all created in one commit, so "first occurrence" follows the file order of `orchestrator-tests`, the same order `update-type` used. By feature age, `professionals` would come first.
+  - `hoursReported` is its own shape 7. You didn't list it, but it's the only function that answers `Update | Promise<Update>`.
+- **The milestone 1.1 paragraph isn't edited**, since you asked only for the queue line. Without a clause there, `m1.1-review` won't check this delivery. Tell me if you want the clause added.
+- **Contract:** it holds the exact new docs/01 text. Check that each shape reads correctly on its own.
+- **Out of scope:** it says no shape is made uniform, and that which hooks have no stale-answer guard stays another question.
+- **Done when:** check that each line is something you can verify mechanically.
+
+My first `grep` of the docs was blocked because it included a `git log`, and this session can't approve a permission prompt. I reran the `grep` without git. Nothing I wrote depends on that `git log`.
+
+Ask for every correction here. Then open a fresh session and type `/apply event-shapes`.

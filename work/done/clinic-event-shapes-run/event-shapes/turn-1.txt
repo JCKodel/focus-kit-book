@@ -1,0 +1,41 @@
+[tool Bash] ls docs work 2>/dev/null; cat docs/05*.md docs/06*.md; ls work
+
+[tool Bash] cat docs/00*.md docs/01*.md docs/03*.md; ls docs/adr work/done; git log --oneline | head -20
+
+[tool Bash] cat work/done/update-type.md; cat src/lib/update.ts; ls src/features/*/ ; wc -l src/features/*/*Events.ts
+
+[tool Bash] cd src/features && grep -nE "^export (async )?function|^export type|^export const|^\s*\)?: " */*Events.ts | grep -v test
+
+[tool Bash] grep -nE "set[A-Z]?\w*\(|Started|reread|retryOf|hoursReported" */use*.ts | head -60; sed -n 60,80p appointments/rememberedEvents.ts; sed -n 215,231p professionals/professionalsEvents.ts; sed -n 76,95p appointments/bookingEvents.ts
+
+I've read docs 00, 01, 03, 05 and 06, the `update-type` page and every `*Events.ts` file. Nothing is written yet.
+
+**How I read the slug.** `event-shapes` isn't in the queue. The closest thing is a line in the Out of scope section of `work/done/update-type.md`: "docs/01 naming every event shape (sync, async, `Update | Promise<Update>`, `{ update, report }`, `BookingOutcome`): another delivery." So I read it as: docs/01 names every shape an event function can answer, so the next events file picks one from the list instead of inventing another.
+
+**What's in the code today.** Eight events files use these shapes:
+
+1. A plain event, `(state, ...inputs) => State`, such as `typeName` and `pickDay`. Some take no state: `open()` and `close()` in cancel.
+2. A starter that returns a whole `State` (9 of them), such as `addStarted` and `loadSlotsStarted`.
+3. A starter that returns `Started<S>`: `submitStarted` in booking and `saveStarted` in weekly hours.
+4. An async event that returns `Promise<Update<S>>`, the common case.
+5. `Promise<BookingOutcome>`: an update, or the next event to run (`BookingNext`).
+6. `Promise<WeeklyHoursAnswer>`: `{ update, report? }`, where the report goes to the professionals section.
+7. `hoursReported`, which returns `Update | Promise<Update>`.
+8. Readers that aren't events: `daysOf`, `tooLateToCancel`, `retryOf`, `linesOf`.
+
+**One thing I found.** docs/01 says "the in-flight state is published the same way, as an update of the current state". Three hooks don't do that:
+
+- `useOwner` publishes `setState(submitSignInStarted())` and `setState(submitSignOutStarted(email))`, a whole state.
+- `useCancel` publishes `setState(openEvent())`, also a whole state.
+- `useCancel` also sends `state.phone` and `state.code` taken from the render, not from the state that was checked.
+
+This is the same class of bug that `booking-submit` and `hours-save` fixed. It can lose a keystroke typed just before submitting.
+
+**Questions, my recommendation first in each:**
+
+1. **Scope: documentation only?** I recommend yes. This delivery would add one table to docs/01 with each shape, when to use it, and its first occurrence, and change no code. The three hooks above would each become their own line in milestone 1.1, since each one changes what an event does. That's how `update-type` handled its whole-state starters. The alternative is to fix them here too, but then this page mixes documentation and behaviour, and I don't think it fits on one page.
+2. **Placement:** milestone 1.1, just before `m1.1-review`, so the review has the list to check against. I'd also add one clause to the milestone paragraph, "and docs/01 names every shape an event answers", so the review checks it. Agree?
+3. **The three hook findings:** should I queue them now as new `[ ]` lines, for example `cancel-publish` and `owner-publish`? Or should I leave them for `m1.1-review` to raise as findings, as docs/05 §8 intends? I recommend queuing them now: they're already confirmed against docs/01, and waiting only postpones them.
+4. **Is a whole-state starter allowed?** Should the table list it as a valid shape (a starter that ignores what was typed meanwhile, fine when there's no form input), or as a shape to remove? I recommend listing it as allowed only when the hook publishes it as an update, `setState((s) => addStarted(s))`, which most hooks already do. That makes the `useOwner` and `useCancel` cases the only exceptions, and the queued lines fix them.
+
+Once you've answered, I'll write `work/event-shapes.md` on main (docs/05 says trunk, so no branch) and mark the queue line.

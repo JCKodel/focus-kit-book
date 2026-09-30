@@ -1,0 +1,102 @@
+[tool Bash] cat work/event-shapes.md && git diff docs/06-Queue.md && ls docs docs/adr work work/done | head -80
+
+[tool Read] docs/01-Architecture.md
+
+[tool Read] docs/05-Process.md
+
+[tool Bash] grep -nE "^export (async )?function" src/features/*/*Events.ts | wc -l; grep -nE -A4 "^export (async )?function" src/features/*/*Events.ts | grep -vE "^\S+-\s*(//|\*)" ; cat src/lib/update.ts
+
+[tool Bash] grep -nE "^export " src/features/*/*Events.ts | grep -v function; ls src/features/*/use*.ts; wc -l src/features/*/use*.ts
+
+[tool Bash] for f in src/features/*/use*.ts; do echo "=== $f"; cat "$f"; done; sed -n 78,93p src/features/appointments/bookingEvents.ts; sed -n 40,46p src/features/weeklyHours/weeklyHoursEvents.ts
+
+Checking the page's function-to-shape table against the hooks (a shell loop was blocked for needing approval, so I'm reading the files directly).
+
+[tool Read] src/features/appointments/useBooking.ts
+
+[tool Read] src/features/appointments/useCancel.ts
+
+[tool Read] src/features/appointments/useRemembered.ts
+
+[tool Read] src/features/clinic/useClinic.ts
+
+[tool Read] src/features/health/useHealth.ts
+
+[tool Read] src/features/professionals/useProfessionals.ts
+
+[tool Read] src/features/signIn/useOwner.ts
+
+[tool Read] src/features/weeklyHours/useWeeklyHours.ts
+
+[tool Read] src/features/appointments/bookingEvents.ts
+
+[tool Read] src/features/weeklyHours/weeklyHoursEvents.ts
+
+[tool Read] src/features/appointments/bookingEvents.ts
+
+All shapes match. Quick check of the first-occurrence order claim from `orchestrator-tests`:
+
+[tool Bash] grep -nE "Events\.ts" work/done/orchestrator-tests.md | head -20; git log --diff-filter=A --format=%h -- src/features/appointments/bookingEvents.ts src/features/health/healthEvents.ts
+
+Order confirmed, one commit. Now editing docs/01.
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Edit] docs/01-Architecture.md
+
+Now verify (runs in the background while I write the page).
+
+[tool Bash] npm run verify > /tmp/verify-event-shapes.log 2>&1; echo "exit $?" >> /tmp/verify-event-shapes.log
+
+[tool Bash] grep -n "—" docs/01-Architecture.md work/event-shapes.md; grep -c "" docs/01-Architecture.md; awk 'length > 76 {print FILENAME": "FNR": "length}' docs/01-Architecture.md | head; tail -30 work/done/update-type.md
+
+`npm run verify` was blocked: this session can't approve commands, so the green-verify step has to be run by you. Continuing with the rest.
+
+[tool Read] work/done/update-type.md
+
+[tool Read] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Read] work/done/update-type.md
+
+[tool Edit] work/event-shapes.md
+
+[tool Bash] git -C . mv work/event-shapes.md work/done/event-shapes.md
+
+The move and staging are blocked too, so I'll correct the page to say what really happened and leave it where it is.
+
+[tool Edit] work/event-shapes.md
+
+[tool Edit] work/event-shapes.md
+
+The documentation for event-shapes is written, but not finished: this session couldn't approve commands, so `npm run verify`, the move of the page to `work/done/` and `git add -A` were all refused.
+
+**What changed:**
+- **docs/01:** the orchestrator bullet now points to a new `### Event shapes` subsection, which holds the page's text word for word. It sits between "Code moves to `lib/`..." and `## How data is accessed`.
+- **docs/06:** the `event-shapes` line is now `[x]`.
+- **work/event-shapes.md:** the "Done when" boxes are ticked and a "What happened" section is added. Two boxes stay open, verify and `git diff --stat`, because I couldn't run them.
+
+**What the check found:** I read every event function's signature and how its hook uses it. Each one matches the shape the page's table gives it, so the new docs/01 text needed no correction. The only error is the page's count: the grep finds 55 functions, not 57. The page's total was off because shape 2 has 14 functions, not 16. The table itself lists all 55. docs/01 doesn't state a count, so no document changes for it. This is written up under "What happened".
+
+**For you to run:**
+```
+npm run verify          # expect 328 Vitest and 144 Playwright tests, as in update-type
+git mv work/event-shapes.md work/done/event-shapes.md
+git add -A
+git diff --cached --stat    # expect only docs/01, docs/06 and the page's move
+```
+Once verify is green, tick its box in the page. Tick the `git diff --stat` box once the stat shows only those files.
+
+**Suggested commit message:**
+```
+Name every event shape in docs/01 (event-shapes)
+
+- docs/01: new "Event shapes" subsection, eight shapes with first occurrences
+- docs/01: the orchestrator bullet points to it
+- docs/06: event-shapes marked done
+
+See work/done/event-shapes.md
+```
+
+**Environments:** local is unchanged, since no code changed. Start it with `npm run dev`. Production doesn't exist yet; the `deploy` delivery creates it, and you publish.

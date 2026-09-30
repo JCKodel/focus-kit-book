@@ -68,17 +68,17 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 
 **Done when.**
 
-* [ ] `clinic-update-type` was `[x]`, and the clinic clean at its last commit, equal to `origin/main`, before the first run; that commit and the inventory are in the README.
-* [ ] The clinic delivery (or each part of a split) ran the five steps, each turn recorded; nothing in the clinic edited by hand.
-* [ ] On the clinic's last commit, `git diff --stat <start commit> HEAD -- src` prints nothing.
-* [ ] The inventory taken again on the clinic's last commit: every event it lists takes a shape the clinic's docs/01 names, each shape with when it is used and the file of its first occurrence.
-* [ ] No test added or changed; no new dependency in `package.json`; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
-* [ ] The author's check recorded in the README: docs/01 read against the events files.
-* [ ] Each clinic delivery committed by the author, no tag; pushed.
-* [ ] No note of the host left outside the clinic's repository.
-* [ ] `work/done/clinic-event-shapes-run/` as the Contract says; docs/06 as the Contract says.
-* [ ] `make verify` green in this book, the disclosure scan included.
-* [ ] Page in `work/done/`, only this delivery's paths staged, commit message suggested.
+* [x] `clinic-update-type` was `[x]`, and the clinic clean at its last commit, equal to `origin/main`, before the first run; that commit and the inventory are in the README.
+* [x] The clinic delivery (or each part of a split) ran the five steps, each turn recorded; nothing in the clinic edited by hand.
+* [x] On the clinic's last commit, `git diff --stat <start commit> HEAD -- src` prints nothing.
+* [x] The inventory taken again on the clinic's last commit: every event it lists takes a shape the clinic's docs/01 names, each shape with when it is used and the file of its first occurrence.
+* [x] No test added or changed; no new dependency in `package.json`; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
+* [ ] The author's check recorded in the README: docs/01 read against the events files; pending, collected at the end of the M4.1 loop.
+* [x] Each clinic delivery committed by the author, no tag; pushed.
+* [x] No note of the host left outside the clinic's repository.
+* [x] `work/done/clinic-event-shapes-run/` as the Contract says; docs/06 as the Contract says.
+* [x] `make verify` green in this book, the disclosure scan included.
+* [x] Page in `work/done/`, only this delivery's paths staged, commit message suggested.
 
 **Decisions.** Each taken on the recommended option, not asked:
 
@@ -91,3 +91,18 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * Every event is covered, not only those with a call: the no-call shape without the state is a second exception docs/01 does not state, and naming it costs one clause.
 * No manual check on `npm run dev`: nothing a user sees changes; the author's check is reading docs/01 against the events files.
 * docs/05 is not edited: the recipe exists and needs no seventh name.
+
+## What happened
+
+* The precondition held: `clinic-update-type` was `[x]`; the clinic was on `main`, clean, at `181286f`, equal to `origin/main`, with focus-kit `bff8414`.
+* The inventory on `181286f` found 55 exported functions: three values worked out to show and 52 events in eight shapes, one more than expected. `hoursReported`, which `clinic-hours-report` left answering `Update | Promise<Update>`, is a shape of its own, a report received, and was not expected; the weekly hours' `load` answers `WeeklyHoursAnswer`, so it belongs with the report shape, not the loads at mount. No expected shape left. The list and its groups are in the run's README.
+* One clinic delivery, `event-shapes`, four turns: `/propose` (the slug, the brief), `/apply` and one staged review. `/propose` did not split the line and put it in milestone 1.1, after `update-type` and before `m1.1-review`. Its first turn asked four questions; the brief answered them and no later round came, so `Your call` was never sent. The page review was the author's "None".
+* The clinic's docs/01 has a new `### Event shapes` subsection with the eight shapes, each with when it is used and its first occurrence, following the order `orchestrator-tests` wrote the files in, since all eight came in one commit; the orchestrator bullet points to it. On `6edc9ad` the same grep prints the same 55 functions, and each takes a shape the subsection names.
+* The milestone 1.1 paragraph did not change, as the brief asked only for the line; the clinic's agent noted that without a clause there, `m1.1-review` does not check this delivery.
+* `/apply` stopped short: four of its calls were denied, `npm run verify` redirected to a file and `git mv` of the page among them, so nothing was staged. The book's session ran `npm run verify` on the unstaged tree: green. The author then sent one staged review, with `Bash(git mv *)` added to the allowed tools for that turn only, a deviation from docs/05 §5 recorded in the README. `git mv` failed because the page was never committed, and the agent moved it with a plain `mv`, which `acceptEdits` allowed; it ran verify, staged, and printed the same message. Verify on the staged tree, rerun by the book's session: green.
+* Calls denied: five, one in `/propose` (a chain with a `git log`, rerun without it) and four in `/apply`; recorded in the README.
+* Every `claude` turn ended with a result of `success` but exited with code 1, standard error holding only `stty: stdin isn't a terminal`; recorded in the README.
+* The suggested commit message carried no trailer; the author committed it as printed: `6edc9ad`, pushed, no tag. The diff is docs/01, docs/06 and the clinic's page; nothing in `src/` or `package.json`.
+* `npm run verify` green on `6edc9ad`: 328 Vitest and 144 Playwright, the counts `update-type` left, and build.
+* The author's check, docs/01 read against the events files, is collected at the end of the M4.1 loop; its item stays open.
+* No note of the host outside the repositories: the clinic's auto-memory folder was there and empty before the run and stayed empty, and the host's folder gained only the two sessions' transcripts, so nothing was deleted. No ADR, no new term; docs/05 unchanged; docs/06's line keeps its text.
