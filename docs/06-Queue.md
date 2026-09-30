@@ -144,7 +144,7 @@ When this milestone closes, every confirmed finding of the M4.1 review is settle
 [x] ch16-unit-test-fakes   Chapter 16: the definition of a unit test fits the event tests' fake repositories and the stubbed localStorage and fetch, where today it says a unit test "runs whatever that piece calls"; both editions
 [x] clinic-busy-fields     the weekly hours editor's time inputs and the booking form's name and phone are disabled while a save or a booking is in flight, as the add, remove and submit buttons already are, so the screen shows only what was sent and a successful save closes no unsent edit, and the booking test that keeps a name typed after the click changes to match, by a recorded run
 [x] clinic-hours-answer    load answers only a refusal or nothing and save only "saved", "failed" or a refusal, and "saving" is a report only useWeeklyHours makes, so no answer can leave the professionals section busy for good, where today WeeklyHoursAnswer's report allows "saving", by a recorded run
-[ ] m4.2-review            the review of M4.2 as docs/05 §8 says for a last round of fixes: only what M4.2's lines changed, both editions, against M4.2's paragraph; each confirmed finding, blocking or not, becomes a line at the start of M5, and no M4.3 opens
+[>] m4.2-review            the review of M4.2 as docs/05 §8 says for a last round of fixes: only what M4.2's lines changed, both editions, against M4.2's paragraph; each confirmed finding, blocking or not, becomes a line at the start of M5, and no M4.3 opens
 ```
 
 ## M5. Part IV, Git for agents and teams
