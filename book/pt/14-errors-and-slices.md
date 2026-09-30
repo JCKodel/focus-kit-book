@@ -129,6 +129,11 @@ export function query<T>(run: () => T): Result<T, DatabaseFailed> {
 
 Este é o único `try`/`catch` dentro do qual o SQL de um repositório roda, e ele transforma a exceção do banco em um valor.
 
+`query` captura todo valor lançado, não só os do banco, então um bug dentro de `run`, como um `TypeError` ou um comando malformado, também vira `DatabaseFailed`.
+Uma captura mais estreita não separaria os dois: o SQLite informa um comando malformado com o mesmo código de uma tabela ausente ou de um arquivo travado, `ERR_SQLITE_ERROR`.[^node-sqlite-error]
+A definição de erro diz o que o código busca; uma captura no I/O é onde um bug pode ser capturado por acidente.
+As rotas respondem `DatabaseFailed` só com o código e não registram nada, então um bug capturado ali não chega nem à sua tela nem ao seu analytics.
+
 Uma exceção também pode virar uma recusa.
 Em [`src/features/appointments/repository.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/repository.server.ts), a inserção de um agendamento pode falhar de dois jeitos:
 
@@ -278,3 +283,4 @@ Decida, e diga por quê; nada é construído.
 [^go-errors]: Rob Pike, "Errors are values", The Go Blog, 2015. <https://go.dev/blog/errors-are-values>
 [^rust-result]: The Rust Programming Language, "Recoverable Errors with Result", capítulo 9.2, acesso em 2026-09-29. <https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html>
 [^book-adr-0016]: J.C. Ködel, "One Page at a Time", o ADR-0016 deste livro, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, de 2026-09-28, na pasta de ADRs em `main`. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>
+[^node-sqlite-error]: Node.js, "Errors", referência da API, `ERR_SQLITE_ERROR`, acesso em 2026-09-30: "*um erro foi retornado pelo SQLite*". <https://nodejs.org/api/errors.html#err_sqlite_error>

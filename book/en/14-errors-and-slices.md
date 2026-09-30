@@ -129,6 +129,11 @@ export function query<T>(run: () => T): Result<T, DatabaseFailed> {
 
 This is the one `try`/`catch` a repository's SQL runs inside, and it turns the database's exception into a value.
 
+`query` catches every thrown value, not only the database's, so a bug inside `run`, such as a `TypeError` or a malformed statement, becomes `DatabaseFailed` too.
+A narrower catch would not tell them apart: SQLite reports a malformed statement with the same code as a missing table or a locked file, `ERR_SQLITE_ERROR`.[^node-sqlite-error]
+The definition of an error says what the code aims for; a catch at I/O is where a bug can be caught by accident.
+The routes answer `DatabaseFailed` with its code alone and log nothing, so a bug caught there reaches neither your screen nor your analytics.
+
 An exception can also become a refusal.
 In [`src/features/appointments/repository.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/repository.server.ts), a booking's insert can fail in two ways:
 
@@ -278,3 +283,4 @@ Decide, and say why; nothing is built.
 [^go-errors]: Rob Pike, "Errors are values", The Go Blog, 2015. <https://go.dev/blog/errors-are-values>
 [^rust-result]: The Rust Programming Language, "Recoverable Errors with Result", chapter 9.2, accessed 2026-09-29. <https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html>
 [^book-adr-0016]: J.C. Ködel, "One Page at a Time", this book's ADR-0016, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, dated 2026-09-28, in the ADR folder on `main`. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>
+[^node-sqlite-error]: Node.js, "Errors", API reference, `ERR_SQLITE_ERROR`, accessed 2026-09-30: "*An error was returned from SQLite.*" <https://nodejs.org/api/errors.html#err_sqlite_error>

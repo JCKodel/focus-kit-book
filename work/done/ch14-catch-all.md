@@ -36,8 +36,16 @@
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
-* [ ] The claim about `ERR_SQLITE_ERROR` has its footnote in both editions.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
+* [x] The claim about `ERR_SQLITE_ERROR` has its footnote in both editions.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* The paragraph went in as four lines after the anchor sentence, in both editions, one sentence per line. Tightened from the proposal: "a `TypeError` or a malformed statement" became "such as a `TypeError` or a malformed statement", the third sentence joins its halves with a semicolon, and the last says "a bug caught there".
+* The footnote went last, after `[^book-adr-0016]`, since its first reference follows that one. Access date 2026-09-30; the quote was checked on nodejs.org, and `prepare("SELEC 1")` and a missing table both throw `ERR_SQLITE_ERROR` on the local Node.
+* Diverged: the page asked the Portuguese footnote to keep the quote in English "as `[^dart-core]` does", but `[^dart-core]` translates its quotes and keeps only the titles in English. The Portuguese follows `[^dart-core]`: title "Errors" in English, the quote translated.
+* The routes' claim was checked at `book-v1/closing-a-milestone`: every `DatabaseFailed` answer in the five `route.server.ts` files is the code alone, and no route logs.
+* Finding F5 of the M4 review is settled.
