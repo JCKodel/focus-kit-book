@@ -6,7 +6,16 @@ Você consegue seguir um evento por elas até um novo estado, e decidir, para um
 ## As quatro peças
 
 O capítulo 6 deu o FOCUS em um parágrafo, em [as duas escolhas](06-the-documents.md#as-duas-escolhas), a partir do ADR-0016 deste livro;[^book-adr-0016] este capítulo mostra as peças dele em código que roda.
-Todo excerto abaixo vem do projeto guiado na tag do capítulo [`book-v1/four-pieces`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/four-pieces), o código que o capítulo 12 deixou mais a primeira entrega do marco 1.1 da clínica (o docs/06 dessa tag ainda o chama de marco 2; o capítulo 12 diz por quê), e é citado como rodou; o código aninhado dentro de uma função aparece sem a indentação de fora.
+Todo excerto abaixo vem do projeto guiado na tag do capítulo [`book-v1/four-pieces`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/four-pieces), o código que o capítulo 12 deixou mais a entrega [`orchestrator-tests`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/work/done/orchestrator-tests.md) do marco 1.1 da clínica (o docs/06 dessa tag ainda o chama de marco 2; o capítulo 12 diz por quê), e é citado como rodou; o código aninhado dentro de uma função aparece sem a indentação de fora.
+
+A `orchestrator-tests` não é um achado da revisão: o autor pôs a linha dela no marco 1.1 porque o capítulo 16 precisava de orquestradores do cliente com testes.
+Se você segue a clínica, adicione essa linha como a primeira do marco 1.1 que o exercício 12.3 escreveu, como a fila da clínica a tem, e acrescente "every client orchestrator has unit tests" (todo orquestrador do cliente tem testes unitários) ao parágrafo desse marco:
+
+```
+[ ] orchestrator-tests   every use<Feature>.ts hook's events move to plain functions with repositories as a parameter, tested in Node
+```
+
+Depois rode `/propose orchestrator-tests`, responda às perguntas dele com o briefing do autor,[^clinic-orchestrator-tests-run] em que "milestone 2" é o seu marco 1.1, e rode `/apply orchestrator-tests` antes de seguir a leitura.
 
 A clínica adotou o FOCUS inteiro no capítulo 7, e o [`docs/01-Architecture.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/docs/01-Architecture.md) dela, na seção "How the code is organized", dá as quatro peças em uma tabela.
 O original está em inglês; esta é a tradução:
@@ -461,3 +470,4 @@ Nada é construído.
 [^bloc]: Bloc, "Bloc State Management Library", documentação, acesso em 2026-09-29. <https://bloclibrary.dev/>
 [^mediatr]: Jimmy Bogard, "MediatR: Simple, unambitious mediator implementation in .NET", acesso em 2026-09-29. <https://github.com/jbogard/MediatR>
 [^clean-architecture]: Robert C. Martin, "The Clean Architecture", 2012. <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>
+[^clinic-orchestrator-tests-run]: A construção dos testes dos orquestradores do projeto guiado deste livro, 2026-09-29, com o Claude Code 2.1.284 e o modelo `claude-opus-5-5`: cada turno, e a saída do `npm run verify` no commit `e6653b5` da clínica em `verify.txt`. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/clinic-orchestrator-tests-run/README.md>

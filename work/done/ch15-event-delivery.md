@@ -42,8 +42,18 @@
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapter 15 opens with its value, with no filler and nothing useful cut.
-* [ ] The line in the code block matches the clinic's `docs/06-Queue.md` at `book-v1/four-pieces`, byte for byte.
-* [ ] `make verify` green, the link to `orchestrator-tests.md` at the tag included.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning. Chapter 15 opens with its value, with no filler and nothing useful cut.
+* [x] The line in the code block matches the clinic's `docs/06-Queue.md` at `book-v1/four-pieces`, byte for byte.
+* [x] `make verify` green, the link to `orchestrator-tests.md` at the tag included.
+* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Line 9 names the delivery and links its page at the tag; it keeps "of milestone 1.1" ("do marco 1.1") after the name, since the parenthesis "still calls it milestone 2" needs that antecedent.
+* The new paragraph opens with "`orchestrator-tests` is not a finding of the review" rather than "That line", which had no antecedent once line 9 names a delivery, not a line.
+* The printed line carries `[ ]`, as the page asked, since the reader adds it unbuilt; the clinic's queue at `book-v1/four-pieces` has `[x]`. Everything after the mark matches that queue byte for byte.
+* Added, not in the page: "where "milestone 2" is your milestone 1.1", because the brief ends with "Add the line as the first of milestone 2" and a reader's queue, after exercise 12.3, calls it milestone 1.1.
+* The Portuguese edition keeps the clause in English, since it goes into the reader's queue, with its translation in parentheses as exercise 15.3 does; "brief" is "briefing", as chapter 13's Portuguese note has it.
+* The note repeats chapter 16's text; its link opens the run's `README.md` (`blob/main/...`), where the brief is. `make verify` green, both links included.
+* Finding F7 of the M4 review is settled for chapter 15.
