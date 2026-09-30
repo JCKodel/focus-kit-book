@@ -133,7 +133,7 @@ When this milestone closes, every confirmed finding of the M4.1 review is settle
 [x] pt-spec-change-terms   Portuguese edition: chapters 1, 4 and 13 say "mudança" and "especificação", the terms chapter 3 taught, where today they say "change", "spec" and "specs" with no gloss
 [x] ch3-key-point-rules    Chapter 3: the key point says of OpenSpec's once-per-project files only what the section shows, where today it credits OpenSpec with rules written once per project; both editions
 [x] ch7-agents-fixed-lines Chapter 7: says which lines of the clinic's AGENTS.md non-negotiables are the kit's fixed lines and which the project's, where today it says "three fixed lines", four follow, and "An open decision in docs/00 is asked, never assumed." fits neither; both editions
-[>] pt-skeleton-diff       Portuguese edition: chapter 10's summary of the skeleton diff puts exit code 1 in Behaviour, where the diff has it, and names the data/ folder the server now creates
+[x] pt-skeleton-diff       Portuguese edition: chapter 10's summary of the skeleton diff puts exit code 1 in Behaviour, where the diff has it, and names the data/ folder the server now creates
 [>] ch14-keepless-feature  Chapter 14: the definition of a feature has a place for a slice that keeps nothing, as health does, where today "A feature is one thing the app keeps" leaves it out; both editions
 [>] ch14-swallowed-bug     Chapter 14: says what the reader does about a bug that query turns into a DatabaseFailed nobody sees, and squares reason 4 of "Why not throw" with using the same query as its example of harm; both editions
 [>] ch14-library-types     Chapter 14: squares "changes that code alone" with the routes that import DatabaseSync's type; both editions

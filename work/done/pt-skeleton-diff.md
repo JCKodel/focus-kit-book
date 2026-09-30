@@ -28,7 +28,16 @@
 
 **Done when.**
 
-* [ ] `book/pt/10-propose.md:420` reads as the Contract gives it; `book/en/10-propose.md` has no change.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] `book/pt/10-propose.md:420` reads as the Contract gives it; `book/en/10-propose.md` has no change.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author. Left for the batch driver, which builds once at the end of the loop.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Revalidated against the tree: no commit since the page was proposed touched `book/pt/10-propose.md`; the summary was still at line 420 and the diff still at lines 280 to 312 (the Behaviour hunk at 288 to 303), and "código de saída" still at line 159.
+* Line 420 replaced word for word as the Contract gives it; checked by exact comparison. `book/en/10-propose.md` has no change.
+* No choice taken alone: the page left nothing open.
+* F5 of the M4.1 review (`work/done/m4.1-review-run/findings.md:25`) is settled: the summary puts exit code 1 and the `data/` folder in Behaviour, where the diff has them.
+* No document changed: no new term, rule or decision.
+* `make verify` green. `make book` not run here, by the batch's instruction.
