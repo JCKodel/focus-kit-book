@@ -36,9 +36,16 @@
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapters 6 and 15 open with their value, with no filler and nothing useful cut.
-* [ ] No "Only the repository does I/O", "Só o repositório faz I/O", "the only code that does I/O" or "o único código que faz I/O" left in `book/`. Neither docs/03 nor ADR-0016's amendment says "the only code with `try`/`catch`".
-* [ ] docs/03:45 updated, and ADR-0016 amended.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning. Chapters 6 and 15 open with their value, with no filler and nothing useful cut.
+* [x] No "Only the repository does I/O", "Só o repositório faz I/O", "the only code that does I/O" or "o único código que faz I/O" left in `book/`. Neither docs/03 nor ADR-0016's amendment says "the only code with `try`/`catch`".
+* [x] docs/03:45 updated, and ADR-0016 amended.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Chapter 6 takes the page's sentence as proposed, in both editions; the Dart clause and its footnote stay.
+* Chapter 15's new sentence follows "In order: ..." as proposed; `ch15-event-delivery` had moved it to en/15:342 and pt/15:343, and key point 1 to en/15:441 and pt/15:442. Chapter 14's line on the route's catch is now at ch14:218 (it was 209) after the earlier chapter 14 deliveries; it is unchanged and the new sentence links to its section.
+* docs/03's repository row reads as the page asked. ADR-0016's amendment is scoped to reading the request body and to where startup code catches; line 20 is not rewritten, and `ch15-injection-rule` adds its own amendment after this one.
+* Finding F8 of the M4 review is settled. `make verify` green.

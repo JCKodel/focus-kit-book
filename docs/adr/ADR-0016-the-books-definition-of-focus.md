@@ -28,3 +28,7 @@ docs/03 holds every term above. Part III teaches FOCUS from this record; chapter
 ## Amendment, 2026-09-29 (four-pieces-injection)
 
 A piece receives a dependency only where there is a second implementation to pass, and in FOCUS that happens only in the orchestrator: the real repository, and the fake a test passes in its place. The server's orchestrator may receive the driver its repositories use, for the same reason: its test passes an in-memory database. A use case receives no repository, and a view or a repository has one implementation, so a parameter there would exist for ceremony. The clinic's client orchestrators, which now take their repositories as a parameter with the real ones by default, are the first case; chapter 15 teaches the rule from them.
+
+## Amendment, 2026-09-30 (ch15-route-io)
+
+The orchestrator receives its event, and on a server the event is the request, so reading the request body is part of receiving it: a body that cannot be read is answered `BadRequest` on the spot, as chapter 14 says. "Only repositories have `try`/`catch`" reads as: only the repository catches an exception from data, and startup code, such as opening the database or running migrations, catches where it does I/O outside the four pieces. Chapters 6 and 15 say it by role: the repository is the only piece that fetches and saves.

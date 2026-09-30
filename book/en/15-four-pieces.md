@@ -340,6 +340,7 @@ It asks four repository functions, from four slices, for the data: `findActivePr
 ```
 
 In order: the body's shape, `slotsOf`, the use case `book`, whose refusal becomes a status through `refusalStatus` from [chapter 14](14-errors-and-slices.md#exceptions-as-values-in-the-clinic), the booking code, the repository `insertAppointment`, whose SQL is in the same section of chapter 14, and the answer 201.
+The route reads the body itself, because the request is the event it receives; a body that cannot be read becomes `BadRequest`, as [chapter 14](14-errors-and-slices.md#exceptions-as-values-in-the-clinic) says.
 `drawBookingCode` draws the code at random in the route, because randomness, like the clock, is the orchestrator's to supply, so no use case stops being pure; the clinic's docs/01 says it of the clock: "*Use cases take the current time as a parameter. No use case reads the clock.*"
 
 **6. The use case decides.** This is `book`, from [`src/features/appointments/rules.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/rules.ts):
@@ -438,7 +439,7 @@ KISS, YAGNI and DRY decide, as [chapter 6](06-the-documents.md#the-two-choices) 
 
 ## Key points
 
-* The view fires events and renders state, the orchestrator turns one event into one new state, a use case holds a rule as a pure function, and the repository is the only code that does I/O.
+* The view fires events and renders state, the orchestrator turns one event into one new state, a use case holds a rule as a pure function, and the repository is the only piece that fetches and saves.
 * A piece is written when it has a job, and the "Forbids" column keeps it to that job.
 * In the clinic each side has its own orchestrator and repositories, and both import the same use cases: the server enforces a rule, and the client uses it only to decide what to show.
 * An event flows one way: the view never sets the state, and a use case never calls a repository.

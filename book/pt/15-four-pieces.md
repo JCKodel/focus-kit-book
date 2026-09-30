@@ -341,6 +341,7 @@ Ele pede os dados a quatro funções de repositório, de quatro fatias: `findAct
 ```
 
 Em ordem: o formato do corpo, `slotsOf`, o caso de uso `book`, cuja recusa vira um status por `refusalStatus` do [capítulo 14](14-errors-and-slices.md#excecoes-como-valores-na-clinica), o código do agendamento, o repositório `insertAppointment`, cujo SQL está na mesma seção do capítulo 14, e a resposta 201.
+A rota lê o corpo ela mesma, porque a requisição é o evento que ela recebe; um corpo que não pode ser lido vira `BadRequest`, como diz o [capítulo 14](14-errors-and-slices.md#excecoes-como-valores-na-clinica).
 `drawBookingCode` sorteia o código na rota, porque o acaso, como o relógio, cabe ao orquestrador fornecer, e assim nenhum caso de uso deixa de ser puro; o docs/01 da clínica diz isso do relógio: "*Casos de uso recebem a hora atual como parâmetro. Nenhum caso de uso lê o relógio.*"
 
 **6. O caso de uso decide.** Este é `book`, de [`src/features/appointments/rules.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/rules.ts):
@@ -439,7 +440,7 @@ KISS, YAGNI e DRY decidem, como o [capítulo 6](06-the-documents.md#as-duas-esco
 
 ## Pontos-chave
 
-* A tela dispara eventos e renderiza o estado, o orquestrador transforma um evento em um novo estado, um caso de uso guarda uma regra como função pura, e o repositório é o único código que faz I/O.
+* A tela dispara eventos e renderiza o estado, o orquestrador transforma um evento em um novo estado, um caso de uso guarda uma regra como função pura, e o repositório é a única peça que busca e salva.
 * Uma peça é escrita quando tem um trabalho, e a coluna "Proíbe" a mantém nesse trabalho.
 * Na clínica cada lado tem o seu orquestrador e os seus repositórios, e os dois importam os mesmos casos de uso: o servidor impõe uma regra, e o cliente a usa só para decidir o que mostrar.
 * Um evento corre em um só sentido: a tela nunca muda o estado, e um caso de uso nunca chama um repositório.
