@@ -50,18 +50,22 @@ A minimal process answers each failure with one piece.
   There is less to guess, so it guesses less.
 * **One page per delivery.**
   The page says what enters and what stays out.
-  Work that does not fit one page is two deliveries, and your review stays the size of one page.
+  Work that does not fit one page is two deliveries, and your review stays the size of one page ([chapter 14](14-propose.md)).
 * **A check before "done".**
-  A command that must pass, and proof that the result works, run before anyone calls the work finished.
+  A command that must pass, and proof that the result works, run before anyone calls the work finished ([chapter 15](15-apply.md)).
 
-The method this book teaches, focus-kit, is built on these three pieces.
+The method this book teaches, focus-kit, is built on these three pieces, and Part II teaches it.
 
 ## Too much process fails too
 
 A process can cost more than it saves: every document is one more thing to write, read and keep true.
-On Ninjobs (<https://www-ninjobs-app.translate.goog/?_x_tr_sl=pt&_x_tr_tl=en&_x_tr_hl=en>, through Google Translate: the product is in Brazilian Portuguese only), my own product, fifteen days, 87 commits and 35 OpenSpec changes produced 37,228 lines of spec for four screens and one domain table.[^ninjobs]
-OpenSpec is a tool that has the agent write, for each change, a folder of documents, specs among them, that describe what to build before the code; [chapter 3](03-spec-driven.md) explains it.
-Chapter 4 tells the Ninjobs story and how focus-kit came out of it.
+On Ninjobs, my own product, writing the spec became the work; [chapter 3](03-spec-driven.md) counts it and [chapter 9](09-birth-of-focus-kit.md) tells the story.
+
+## What the team gains
+
+The team learns where its time goes.
+Experienced developers measured 19% slower with AI while they believed they were 20% faster,[^metr-2025] and teams that adopted more AI delivered a little less and broke a little more.[^dora-2024]
+The typing was never the slow part, so the gain lies in the deciding and the checking: a decision written before the build, a scope that fits one page, and a check that must pass before anyone says "done".
 
 ## Key points
 
@@ -73,4 +77,3 @@ Chapter 4 tells the Ninjobs story and how focus-kit came out of it.
 
 [^metr-2025]: METR, "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity", 2025. <https://arxiv.org/abs/2507.09089>
 [^dora-2024]: DORA, "Accelerate State of DevOps Report 2024", 2024. <https://dora.dev/research/2024/dora-report/>
-[^ninjobs]: Ninjobs, a private repository, counted by the author over its history up to 2026-08-29, when its ADR-0022 dropped OpenSpec: days with a commit and commits from `git log`, changes from the OpenSpec archive, lines with `wc -l` over every file under `openspec/`. The screens and the table are the ones that ADR lists.

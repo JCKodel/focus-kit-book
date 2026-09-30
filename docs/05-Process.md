@@ -89,6 +89,9 @@ conversation in any session.
   brings a kind of content the build has not shown before (its first
   diagram, say) also proves it renders: screenshots of the site in light
   and dark and of the PDF, in both editions.
+* **Case A and Case B:** every passage drawn from them is listed in the
+  delivery's page for the author's approval before the chapter is done
+  (docs/00 OD-3), and `make scan` is green.
 * **Disclosure:** the disclosure list lives outside the repository, at
   `~/.config/focus-kit-book/denylist.txt` or the path in `FKB_DENYLIST`;
   in Actions it comes from the secret `DISCLOSURE_DENYLIST`. No term of
@@ -104,83 +107,13 @@ conversation in any session.
   `status: draft` in its front matter, in both editions; the site shows a
   banner and a mark in the navigation, and the chapter's delivery removes
   the line when done. So the site can publish `main` at any time.
-* **Guided project:** `JCKodel/focus-kit-clinic`, worked on locally in the
-  sibling directory `../focus-kit-clinic`. A chapter that changes it ends
-  with the annotated tag `book-v1/<chapter-slug>` on the commit it quotes
-  (message "One Page at a Time, chapter <slug>"); a chapter that changes
-  nothing has no tag. `book-v1/start` is the empty starting point. A
-  published tag never moves. The agent stages there too and never commits,
-  tags or pushes. Order: the author commits and pushes the chapter's tag
-  first, then the chapter's `make verify` can go green, because the link
-  check opens every tag URL the chapter cites. A delivery of this book
-  that is not a chapter may advance the guided project (the first is
-  `clinic-milestone-1`); the author commits each of its deliveries with
-  the kit's message and no tag, and the next chapter tag includes those
-  commits. Since `clinic-worktrees` the clinic builds each delivery in a
-  worktree, `../focus-kit-clinic-<slug>` on the branch `<slug>` (its
-  ADR-0003): the author commits the delivery on its branch, merges it
-  into the clinic's `main` with `git merge --no-ff` from the clinic's
-  root, resolves any conflict, removes the worktree and deletes the
-  branch.
-  * **A recorded clinic run** (the first is `clinic-milestone-1`, the
-    second `clinic-orchestrator-tests`; worktrees since
-    `clinic-worktrees`): each clinic delivery takes five steps, one turn
-    at a time. Every later turn of a session goes by `--resume <its
-    session id>`, never `--continue`, which takes the directory's most
-    recent session and two sessions may share one.
-    1. `/propose`, headless, fresh, from the clinic's root: `claude -p
-       "/propose <slug>"` with the common flags, `--add-dir
-       ../focus-kit-clinic-<slug>` and `--allowedTools "Bash(git worktree
-       *)" "Bash(git branch *)" "Bash(git log *)" "Bash(git rev-parse *)"
-       "Bash(git add *)" "Bash(git status *)" "Bash(git diff *)"`. The
-       author creates the empty folder `../focus-kit-clinic-<slug>` first:
-       a session cannot write in an `--add-dir` folder that did not exist
-       when it started, and `git worktree add` accepts an empty one
-       (`clinic-worktrees`' check). Every round of questions is answered
-       with `Your call. Say what you chose and why.`, unless the
-       delivery's page gives a brief.
-    2. Page review: the author decides which holes to send; each request
-       goes to the same session, word for word as the author approved it.
-       "None" is a valid review. The page is never edited by hand.
-    3. `/apply`, headless, fresh, from the worktree's root: `claude -p
-       "/apply <slug>"` with the common flags and `--allowedTools
-       "Bash(npm *)" "Bash(npx *)" "Bash(node *)" "Bash(mkdir *)"
-       "Bash(cp *)" "Bash(git add *)" "Bash(git status *)" "Bash(git diff
-       *)"` `--disallowedTools "Bash(npm run dev*)"`.
-    4. Staged review: as step 2, to the `/apply` session. Nothing in the
-       clinic is edited by hand.
-    5. The author commits on the branch with the kit's message, no tag,
-       merges with `--no-ff`, removes the worktree, deletes the branch and
-       pushes.
-
-    Common flags: `--model claude-opus-5-5 --setting-sources project
-    --strict-mcp-config --permission-mode acceptEdits --permission-prompts
-    none --output-format stream-json --verbose`.
-
-    Exits: a denied call is recorded, never retried by another route; a
-    run that cannot finish or a verify that stays red stops the delivery,
-    and the author decides on a second run; a line `/propose` splits off
-    is built in the same delivery only if the page says so; a note the
-    host writes outside the repository is deleted after each delivery.
-
-    The record, `work/done/<slug>-run/`: `README.md` with host version,
-    model, the clinic's first and last commit, the flags and the
-    allowlist, then per clinic delivery the commands, the answers, the
-    author's requests word for word (or "none"), the denied calls, what
-    diverged and the commit; `<clinic slug>/turn-N.txt`, every turn, text
-    blocks byte for byte and tool calls as `[tool <name>] <path or
-    command>`; `verify.txt`, `npm run verify` on the clinic's last commit.
-    Paths are relative to the clinic's root; session ids are left out.
-* **Brownfield project:** the fork `JCKodel/clahub`, worked on locally in
-  the sibling directory `../clahub`, on the branch `book` created from
-  `book-v1`, the frozen upstream (ADR-0009). A chapter that changes it ends
-  with the annotated tag `book-v1-<chapter-slug>` on the commit it quotes
-  (a hyphen, since git refuses `book-v1/<slug>` beside the tag `book-v1`),
-  with the same message and the same order as the guided project. The
-  agent stages there too and never commits, tags or pushes. A delivery of
-  this book that is not a chapter may change the fork too (the first were
-  the kit's installs); the author commits it on `book` with the fork's
-  message style and no tag.
+* **Guided project and brownfield project:** retired by `rewrite`
+  (ADR-0017). The repositories `JCKodel/focus-kit-clinic` and
+  `JCKodel/clahub` and their published tags stay as they are and no
+  chapter cites them; the recorded runs in `work/done/*-run/` stay as the
+  history of how the book's numbers were counted, and a chapter's note may
+  point to one. The recipe of a recorded run that this section held is in
+  the history of this file, at the commit before `rewrite`.
 * **Git:** trunk. The agent stages; it never commits or merges.
 
 ## 6. Commit
@@ -289,60 +222,8 @@ names the model, the last chapter and the paragraph.
    (each request, word for word); `queue.diff` (docs/06 before and after
    the lines).
 
-A milestone that also changed the guided project gets a code review of
+A milestone that also changed the guided project got a code review of
 its own, `m<n>-code-review`, a separate delivery placed right after its
-review, whose findings join the same `M<n>.1`.
-
-**The recipe of a milestone's code review** (the first is
-`closing-a-milestone`, chapter 12's review of the clinic's milestone 1;
-the second `m4-code-review`, which wrote it down). The delivery is
-`m<n>-code-review`; its page names the model and the range.
-
-1. The range: from the previous milestone's last chapter tag to this
-   milestone's last chapter tag, three dots, `<from>...<to>`, the form of
-   Claude Code's documentation. When the milestone's last change to the
-   guided project has no chapter tag, the range ends at that commit, by
-   its short hash. A commit at the start of the range that touches only
-   the kit's files, as a kit update does, is left out by starting the
-   range on it, and the README names it. The README says how many commits
-   the range holds, names any commit of the milestone past its end, and
-   says whether it is reviewed and why. (The untagged end and the kit
-   commit left out: first `m4.1-code-review`.)
-2. Before the run: the book as step 1 of the recipe above; the guided
-   project on `main`, clean, equal to `origin/main`, with nothing in
-   `src/` past the range's end.
-3. Turn 1, the review, headless, detached, from the guided project's
-   root: `CLAUDE_CODE_DISABLE_AUTO_MEMORY=1 nohup claude -p "/code-review
-   high <range>" --model <model> --setting-sources project
-   --strict-mcp-config --permission-mode default --permission-prompts none
-   --output-format stream-json --verbose --allowedTools "Bash(git diff *)"
-   "Bash(git log *)" "Bash(git show *)" "Bash(git status *)" "Bash(npm *)"
-   "Bash(npx *)"`. The review edits nothing.
-4. The book's `/apply` session checks each finding against the guided
-   project's code and documents and gives its assessment; the author
-   decides each one, `<n>: confirmed|rejected, <reason>`, in one sentence,
-   and approves the request word for word before it is sent. Nothing is
-   fixed.
-5. Turn 2, with `--resume <turn 1's session id>`, from the guided
-   project's root, flags as turn 1 plus `--add-dir ../focus-kit-book`,
-   with `--permission-mode acceptEdits --allowedTools "Read" "Edit"
-   "Bash(git -C ../focus-kit-book add docs/06-Queue.md)" "Bash(git -C
-   ../focus-kit-book diff *)" "Bash(git -C ../focus-kit-book status *)"`:
-   the decisions, word for word, and the request to write each confirmed
-   finding as `[ ] clinic-<slug>  <what the code does afterwards>, by a
-   recorded run` in the book's `M<n>.1`, after its book lines (the
-   milestone the review opened: after M4.1 it is M4.2), with one
-   clause in its paragraph, and to stage it. Findings that one change
-   settles may share one line, as the author decides (first
-   `m4-code-review`, second `m4.1-code-review`). If the milestone review
-   found nothing and `M<n>.1` does not exist, turn 2 creates it as step 6
-   above says. A finding a line of the guided project's own queue covers
-   still gets its line, which names that line and what the finding adds;
-   the guided project's queue is never touched. Corrections are further
-   turns to the same session, recorded.
-6. If `--add-dir` does not allow turn 2, or the session cannot or will not
-   write the lines, a fresh interactive session in the book gets the same
-   request, recorded as a turn. "Already queued" in either queue, denied
-   calls, notes of the host (in both repositories' memory folders) and the
-   record follow steps 6 to 9 above; the README adds the range, the target
-   form and the `--add-dir` check.
+review, whose findings joined the same `M<n>.1`. Since `rewrite` the book
+has no guided project (ADR-0017), so no milestone has a code review; its
+recipe is in the history of this file, at the commit before `rewrite`.

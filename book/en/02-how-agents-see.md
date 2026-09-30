@@ -66,26 +66,33 @@ Two practices follow.
 A decision that lives only in the conversation is gone in a fresh session and can be lost in a compaction.
 A decision in a file is loaded whole at the start of every session, near the beginning of the window.
 The rules file is the entry point: short, and it names the documents to read before acting.
-This is the start of this book's own rules file, the first thing a fresh session in its repository reads:
+This is the start of a rules file for a small lending library, the project whose code Part I uses as its example from chapter 4 on, written for this chapter:
 
 ```markdown
-# One Page at a Time
+# Lending library
 
-A free, bilingual book that teaches Spec-Driven Development, the focus-kit method, the optional FOCUS architecture and git for parallel agents, from beginner to advanced. Prose of the process documents in English; identifiers in English; the book in English (source) and Brazilian Portuguese.
+A small library lends copies of its books to members; a librarian records each loan and each return.
 
 ## Read before acting
 - the product: docs/00 · the vocabulary: docs/03
-- how it is built: docs/01 · the server: docs/02
-- style and tests: docs/04 · process: docs/05 · queue: docs/06
+- how it is built: docs/01 · style and tests: docs/04
+- process: docs/05 · queue: docs/06
 ```
 
-Chapter 6 explains these documents, and chapter 7 writes them for your project.
+A fresh session reads what the project is in one line, then where each kind of fact lives; the files it names hold the rest, and [chapter 10](10-the-documents.md) explains them.
 
 **Each delivery gets a fresh session.**
 In a fresh session the window holds the rules file, the documents and the page of the delivery, and nothing left over from the previous one.
 Deciding and building go in separate sessions too.
 The conversation that weighed the options, including the ones you rejected, stays out of the window where the code is written; what reaches it is the decision, written on one page.
-In focus-kit, `/propose` writes that page and `/apply` builds it in a fresh session; chapters 10 and 11 teach them.
+In focus-kit, `/propose` writes that page ([chapter 14](14-propose.md)) and `/apply` builds it in a fresh session ([chapter 15](15-apply.md)).
+
+## What the team gains
+
+Decisions survive the session.
+What the team decided is in files that every session loads whole, near the start of the window, so it cannot fall into the middle of a long conversation or out of a summary.
+A person who joins the project reads the same files the agent reads, and gets the same answer.
+There is no measure of this gain in this book; the evidence is the loss it avoids, which the studies above measured.
 
 ## Key points
 

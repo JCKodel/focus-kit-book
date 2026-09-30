@@ -12,34 +12,34 @@ Digitar é rápido.
 Decidir e verificar são lentos.
 Quando só a escrita acelera, o resultado é mais código esperando uma decisão ou uma revisão.
 
-No início de 2025, o METR fez um ensaio controlado randomizado com 16 desenvolvedores experientes de código aberto em 246 tarefas reais, em projetos maduros nos quais trabalhavam havia 5 anos em média.[^metr-2025]
+No início de 2025, o METR fez um ensaio controlado randomizado com 16 desenvolvedores experientes de código aberto em 246 tarefas reais, em projetos maduros nos quais eles trabalhavam havia 5 anos em média.[^metr-2025]
 Cada tarefa foi sorteada para permitir ou proibir ferramentas de IA.
-Antes de começar, os desenvolvedores previram que a IA reduziria o tempo de conclusão em 24%.
+Antes de começar, os desenvolvedores previram que a IA reduziria seu tempo de conclusão em 24%.
 Depois do estudo, estimaram que ela tinha reduzido o tempo em 20%.
-Na medição, a IA aumentou o tempo de conclusão em 19%.
-Eles ficaram mais lentos, e acreditaram que estavam mais rápidos.
+Medida, a IA aumentou o tempo de conclusão em 19%.
+Eles foram mais lentos, e acreditavam ter sido mais rápidos.
 
-Uma pesquisa com equipes aponta na mesma direção.
-O relatório DORA de 2024 estimou que, a cada 25% de aumento na adoção de IA, a vazão de entregas caiu 1,5% e a estabilidade das entregas caiu 7,2%.[^dora-2024]
-Os autores apontam para o básico da entrega, lotes pequenos e testes sólidos, e suspeitam que as mudanças crescem quando a IA permite produzir mais código no mesmo tempo.[^dora-2024]
+Uma pesquisa com times aponta na mesma direção.
+O relatório DORA de 2024 estimou que, a cada 25% de aumento na adoção de IA, a vazão de entrega caiu 1,5% e a estabilidade de entrega caiu 7,2%.[^dora-2024]
+Seus autores apontam para o básico da entrega, lotes pequenos e testes sólidos, e suspeitam que as mudanças ficam maiores quando a IA deixa as pessoas produzirem mais código no mesmo tempo.[^dora-2024]
 
 ## O que dá errado sem processo
 
 Três falhas se repetem quando você entrega uma tarefa a um agente e nada mais.
 
-**O agente preenche lacunas com palpites.**
+**O agente preenche as lacunas com palpites.**
 O que você não decidiu, o agente decide por você, e não avisa.
-Os palpites são plausíveis, então parecem certos até um usuário esbarrar em um.
+Os palpites são plausíveis, então parecem certos até um usuário esbarrar em um deles.
 
 **O escopo cresce durante a construção.**
-Pedido para corrigir uma coisa, o agente também renomeia, refatora e acrescenta o que acha que vem depois.
-Cada mudança parece útil; juntas, formam uma mudança grande demais para revisar, e revisar é a parte lenta.
+Pedido para corrigir uma coisa, o agente também renomeia, refatora e acrescenta o que acha que vem a seguir.
+Cada mudança parece útil; juntas, formam uma mudança grande demais para revisar, e a revisão é a parte lenta.
 
 **O "pronto" chega sem prova.**
-O agente dá a tarefa por terminada porque escreveu o código.
-Se compila, se os testes passam, se a tela bate com o design, é uma pergunta que o agente só faz quando algo o obriga a fazer.
+O agente declara a tarefa concluída porque escreveu o código.
+Se compila, se os testes passam, se a tela bate com o design, é uma pergunta que o agente só faz quando algo o obriga a fazê-la.
 
-As três empurram trabalho para as partes lentas: você decide depois, sob pressão, e verifica mais, com menos contra o que verificar.
+As três empurram trabalho para as partes lentas: você decide mais tarde, sob pressão, e verifica mais, com menos contra o que verificar.
 
 ## O que é um processo mínimo
 
@@ -50,27 +50,30 @@ Um processo mínimo responde a cada falha com uma peça.
   Há menos a adivinhar, então ele adivinha menos.
 * **Uma página por entrega.**
   A página diz o que entra e o que fica de fora.
-  Trabalho que não cabe em uma página são duas entregas, e sua revisão fica do tamanho de uma página.
+  Trabalho que não cabe numa página são duas entregas, e sua revisão continua do tamanho de uma página ([capítulo 14](14-propose.md)).
 * **Uma verificação antes do "pronto".**
-  Um comando que precisa passar, e a prova de que o resultado funciona, rodados antes de alguém dar o trabalho por terminado.
+  Um comando que precisa passar, e uma prova de que o resultado funciona, executados antes que alguém chame o trabalho de concluído ([capítulo 15](15-apply.md)).
 
-O método que este livro ensina, o focus-kit, se apoia nessas três peças.
+O método que este livro ensina, o focus-kit, é construído sobre essas três peças, e a Parte II o ensina.
 
 ## Processo demais também falha
 
 Um processo pode custar mais do que economiza: cada documento é mais uma coisa para escrever, ler e manter verdadeira.
-No Ninjobs (<https://www.ninjobs.app>), meu próprio produto, quinze dias, 87 commits e 35 mudanças do OpenSpec produziram 37.228 linhas de especificação para quatro telas e uma tabela de domínio.[^ninjobs]
-O OpenSpec é uma ferramenta que faz o agente escrever, para cada mudança, uma pasta de documentos, entre eles as especificações, que descrevem o que construir antes do código; o [capítulo 3](03-spec-driven.md) o explica.
-O capítulo 4 conta a história do Ninjobs e como o focus-kit nasceu dela.
+Na Ninjobs, meu próprio produto, escrever a especificação virou o trabalho; o [capítulo 3](03-spec-driven.md) faz a conta e o [capítulo 9](09-birth-of-focus-kit.md) conta a história.
+
+## O que o time ganha
+
+O time aprende para onde vai o seu tempo.
+Desenvolvedores experientes mediram-se 19% mais lentos com IA enquanto acreditavam estar 20% mais rápidos,[^metr-2025] e times que adotaram mais IA entregaram um pouco menos e quebraram um pouco mais.[^dora-2024]
+Digitar nunca foi a parte lenta, então o ganho está em decidir e verificar: uma decisão escrita antes da construção, um escopo que cabe numa página e uma verificação que precisa passar antes que alguém diga "pronto".
 
 ## Pontos-chave
 
-* Um agente acelera a escrita do código; decidir o que construir e verificar que funciona continuam lentos, e é ali que os projetos perdem tempo.
-* Em um ensaio controlado, desenvolvedores experientes ficaram mais lentos com IA e acreditaram que estavam mais rápidos.
+* Um agente acelera a escrita de código; decidir o que construir e verificar que funciona continuam lentos, e é aí que os projetos perdem tempo.
+* Num ensaio controlado, desenvolvedores experientes foram mais lentos com IA e acreditavam ter sido mais rápidos.
 * Sem processo, o agente adivinha o que você não decidiu, aumenta o escopo e declara "pronto" sem prova.
 * Um processo mínimo dá ao agente uma decisão por escrito, uma página por entrega e uma verificação antes do "pronto".
 * Processo demais também falha, quando escrever a especificação vira o trabalho.
 
 [^metr-2025]: METR, "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity", 2025. <https://arxiv.org/abs/2507.09089>
 [^dora-2024]: DORA, "Accelerate State of DevOps Report 2024", 2024. <https://dora.dev/research/2024/dora-report/>
-[^ninjobs]: Ninjobs, repositório privado, contado pelo autor no histórico até 2026-08-29, quando o ADR-0022 do projeto abandonou o OpenSpec: dias com commit e commits pelo `git log`, mudanças pelo arquivo do OpenSpec, linhas com `wc -l` sobre todos os arquivos de `openspec/`. As telas e a tabela são as que esse ADR lista.

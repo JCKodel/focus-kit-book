@@ -18,17 +18,20 @@
 * **One sentence per line** in the Markdown source.
 * **No em dash** in any text a reader reads, in either edition. Use a comma, a colon, parentheses or a new sentence.
 * **Anti-AI prose rules**: the patterns that make text read as machine-written, in §Prose rules, checked by `make verify`.
+* **No runs.** No chapter narrates a run: no brief, no transcript of an agent's turns, no diff, no `git status`, no headless flag, no commit hash as evidence (ADR-0017).
+  The record of how a number was counted stays in `work/done/`, and the note points to it.
 * **Evidence.** Every number says where it comes from: a primary publication, a record of this book's runs, or, for a private case, how the author counted it.
-  Every artifact shown (a page, a queue, a command output) comes from a real run.
-  The Portuguese edition shows an English prose artifact (a rules file, a page) translated, and says before it that the original is in English; code, commands and their output stay as they ran.
-  An excerpt shown as evidence of how a tool worded something (chapter 3's three excerpts) stays in English, byte for byte, in both editions; the Portuguese edition follows it with its full translation, and each edition then says in one sentence what it shows.
+  Every quoted artifact (a page, a queue line, a rules file, a command's output) is real; a page or a queue written for the chapter as an example says so where it appears.
+  The Portuguese edition shows an English prose artifact (a rules file, a page) translated, and says before it that the original is in English; code, commands and their output stay as they are.
 * **Context before an excerpt.** A reader who has read only the previous chapters understands every artifact shown without opening anything else (docs/00 product question 5).
   Before it, the text gives what the artifact is about: the project, the problem it answers, where it comes from.
-  An excerpt is a whole unit that means something on its own (a user story with its scenarios, a requirement, a page's section), never a loose line that leans on the lines around it; when several tools are compared, each shows the same unit.
+  An excerpt is a whole unit that means something on its own (a page's section, a queue's milestone), never a loose line that leans on the lines around it.
 * **Teach, do not only show.** After an artifact, one sentence says what the reader should see in it; a term, a name or a choice the reader has not met yet is explained where it appears, or the text says which chapter explains it.
-* **Code** is TypeScript only, quoted from the guided project's repository at a chapter tag `book-v1/<chapter-slug>`, with its path.
-  Code nested inside a function is shown without its common outer indentation, and the chapter says so once; every other byte is the file's (first: chapter 15, `four-pieces`).
+* **A gain per chapter.** Every chapter has the section `## What the team gains` (pt: `## O que o time ganha`) before its key points: what a team or a project gains, with a number or a sourced claim, or one sentence saying the gain has no number (docs/00 product question 7).
+* **Code** is TypeScript only, written for the chapter, short (as a rule under 25 lines a block), tab-indented, on the book's running example, the lending library (docs/03); chapter 4, at the book's first code block, says once that the examples are written for the book, and chapter 2's rules file, the one prose artifact before it, says so itself.
+  Code is never presented as the output of a run.
 * **Private cases** appear only as Case A and Case B; docs/03 §Entities and invariants says what may never appear.
+  Case B did not run on the process, and every passage that uses it says so or reads so.
 
 ## Prose rules
 
@@ -105,13 +108,14 @@ status: draft            only while the chapter is not done; the delivery remove
 
 ## <Section>             the content, in H2 sections (H3 inside when needed); as many as the value takes
 
-## Key points            pt: ## Pontos-chave; at most five bullets; every chapter
+## What the team gains   pt: ## O que o time ganha; one short section; every chapter
 
-## Exercises             pt: ## Exercícios; Part II on only; absent in Part I
-### Exercise N.M         pt: ### Exercício N.M; N the chapter number, M from 1
+## Key points            pt: ## Pontos-chave; at most five bullets; every chapter
 
 [^<key>]: <source>       source notes, at the end of the file
 ```
+
+There are no exercises (ADR-0017).
 
 * One sentence per line in the source: a convention, not a check (no error it would have caught has happened, docs/05 §7).
 * Source notes: a note only where the reader gains something to open (a publication, a tool's documentation, a file of this book's repository or its runs) or a count to repeat. Every number and every quoted claim from such a source carries `[^<key>]` at the claim; a source cited again in the chapter reuses the key, and the PDF and the EPUB print its note once.
@@ -132,7 +136,7 @@ status: draft            only while the chapter is not done; the delivery remove
 * The prologue is `00-<slug>.md`: the prefix only sorts it first, the text calls it the prologue, and it is never called chapter 0.
 * Images: `book/assets/NN-<what>.png|svg`, with no text inside, so one image serves both editions.
   A diagram, whose labels are words, is an SVG written by hand, one per edition, `book/assets/NN-<what>.<edition>.svg`, with an opaque light background so it reads in the dark theme and fonts that fall back to a generic family; each edition links its own, `![<alt>](../assets/NN-<what>.<edition>.svg)`, with the alt text in the edition's language, written as a caption, since the PDF and the EPUB print it under the image.
-  A screenshot of an artifact of a run is shown as it ran, text included: one PNG for both editions, `book/assets/NN-<what>.png`, the same bytes as the copy in the run's record; the alt text is in the edition's language, and the Portuguese edition gives the screenshot's text in a sentence. The stylesheets (`book/assets/site.css`, `pandoc/pdf.css`, `pandoc/epub.css`) give every PNG a thin border, since a screenshot is often white on a white page, and a reduced width, so a phone-sized one keeps its caption on its page.
+  The stylesheets (`book/assets/site.css`, `pandoc/pdf.css`, `pandoc/epub.css`) give every PNG a thin border and a reduced width; since `rewrite` the chapters show no screenshot.
 
 ## Tests
 

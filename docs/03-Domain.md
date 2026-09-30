@@ -76,17 +76,26 @@ A new concept enters here first, in both languages.
 | worktree | worktree | `git worktree` | An extra working folder of the same git repository, on its own branch, created with `git worktree add`; it shares the history with the main folder, so agents build different deliveries at the same time, and it costs a folder and its own dependencies. |
 | conflict | conflito | `CONFLICT (content)` | What git reports when both branches of a merge (or a revert) changed the same lines: it stops, merges the rest, and leaves the file for the person to resolve before the merge commit is made; `git merge --abort` returns to before the merge. |
 | conflict marker | marcador de conflito | `<<<<<<<`, `=======`, `>>>>>>>` | The lines git writes into a conflicted file around the two versions; git commits them like any text if the person stages the file unresolved, and `git diff --check` reports any left. |
-| case | caso | `ninjobs`, `case-a`, `case-b` | A real project the book draws on; anonymous when private. |
-| guided project | projeto guiado | `JCKodel/focus-kit-clinic` | The scheduling app the reader builds through the book. |
-| chapter tag | tag do capítulo | `book-v1/<chapter-slug>`, `book-v1-<chapter-slug>` in the fork | The annotated tag on the commit that a chapter quotes, in the guided project or in the brownfield project's fork; only a chapter that changes the project has one, and a published tag never moves. |
-| brownfield project | projeto brownfield | `JCKodel/clahub@book-v1` | The frozen open-source fork used for `/analyze`. |
+| case | caso | `ninjobs`, `case-a`, `case-b` | A real project the book draws on; anonymous when private. Case A ran on the process; Case B did not, and the book says so wherever it appears. |
+| guided project | projeto guiado | retired | The scheduling app the reader built through the book until `rewrite` (ADR-0017); no chapter names it. |
+| chapter tag | tag do capítulo | retired | The tag on the commit a chapter quoted in the guided project or the fork; the published tags stay, and no chapter cites one (ADR-0017). |
+| brownfield project | projeto brownfield | retired | The frozen open-source fork used for `/analyze` until `rewrite` (ADR-0017). |
+| running example | exemplo condutor | the lending library | The one example the book's code is written on: a lending library with books, copies, members, loans and a librarian; every code example is TypeScript written for the chapter (ADR-0017). Its Portuguese words are fixed: biblioteca de empréstimos, livro, exemplar (copy), membro (member), empréstimo (loan), bibliotecário, data de devolução (due date), prazo de empréstimo (loan period), livros em atraso (overdue books). |
+| feature | feature | `features/<name>/` | One thing the app keeps, or one thing it does that keeps nothing, with every action on it; kept in English in both editions (the Portuguese edition says "feature", never "funcionalidade"). |
+| pure function | função pura | none | A function whose output depends only on its input and that does nothing else: no I/O, no clock, no change to its input; a business rule is written as one. |
+| immutability | imutabilidade | none | Data that is never changed in place; a function returns new data instead of changing what it received. |
+| context folder | pasta de contexto | `context/` | A folder for what the code cannot say (emails, proposals, meeting notes, the client's decisions), in Markdown, read by the agent; committed or kept out of the repository as the project's docs/05 decides. |
+| question delivery | entrega de pergunta | none | A delivery whose only outcome is a written answer from a person; it closes on the answer, not on the send; Case A's customization. |
+| board mirror | espelho do quadro | none | A script that pushes the queue one way to a team's board (Case A: an Azure DevOps kanban board), refreshed by `/propose` and `/apply` when a mark changes. |
+| waiting mark | marca de espera | `[?]` | Case A's fourth mark, "waiting on a person"; never the kit's, and rejected for this book (ADR-0013). |
 | edition | edição | `en`, `pt` | One language of the book; `en` is the source. |
 | chapter | capítulo | `book/<edition>/NN-<slug>.md` | One file per edition; one delivery. |
 | draft marker | marca de rascunho | `status: draft` | The front matter line of a chapter not yet done; the site shows a banner and a mark in the navigation, and the chapter's delivery removes it. |
-| chapter shape | formato do capítulo | docs/04 §Chapter shape | The fixed order of a chapter: title, opening, sections, key points, exercises. |
+| chapter shape | formato do capítulo | docs/04 §Chapter shape | The fixed order of a chapter: title, opening, sections, what the team gains, key points. |
 | opening | abertura | none (first paragraph after the H1) | At most three sentences saying what the reader can do after the chapter; it has no heading. |
+| team gain | ganho do time | `## What the team gains` / `## O que o time ganha` | The section before the key points that says what a team or a project gains from the chapter, with a number or a sourced claim, or one sentence saying it has none. |
 | key points | pontos-chave | `## Key points` / `## Pontos-chave` | At most five bullets closing every chapter's content. |
-| exercise | exercício | `## Exercises` / `## Exercícios`, then `### Exercise N.M` / `### Exercício N.M` | A task on the guided project at the end of a chapter, from Part II on; answered in an appendix. |
+| exercise | exercício | retired | A task on the guided project at the end of a chapter, until `rewrite` (ADR-0017). |
 | source note | nota de fonte | `[^<key>]` | A footnote that gives the reader something to open, or, for a private case, how its numbers were counted; the key is the same in both editions, and the PDF and the EPUB print it once per chapter. |
 | disclosure list | lista de exposição | `FKB_DENYLIST` | The private terms that must never appear in the repository; kept outside it. |
 

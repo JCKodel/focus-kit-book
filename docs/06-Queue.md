@@ -155,9 +155,9 @@ When this milestone closes, a reader can choose between trunk, a branch per deli
 [x] git-essentials         Chapter 17: commits, branches, merges, trunk and git-flow
 [x] clinic-worktrees       the clinic switches to a worktree per delivery, then route-errors and minutes-of are proposed and built by two agents at once in two worktrees and merged by the author with --no-ff, conflict included, by a recorded run; no chapter
 [x] worktrees              Chapter 18: worktrees and parallel agents, and where parallelism really stops
-[ ] commit-as-review       Chapter 19: the agent stages, the person commits, and why
-[ ] github-for-teams       Chapter 20: pull requests as the team's review, issues, Projects boards, and why the wiki is not docs/ (the agent reads the repository, not the wiki)
-[ ] m5-review              the review of M5 as docs/05 §8 says: the Prologue to chapter 20 read end to end in both editions against the product questions and M5's paragraph; each confirmed finding becomes a line in a new milestone M5.1
+[x] commit-as-review       Chapter 19: the agent stages, the person commits, and why; absorbed by rewrite as a section of chapter 15
+[x] github-for-teams       Chapter 20: pull requests as the team's review, issues, Projects boards, and why the wiki is not docs/ (the agent reads the repository, not the wiki); absorbed by rewrite as chapter 21
+[x] m5-review              the review of M5 as docs/05 §8 says; superseded: M5's chapters were rewritten whole by rewrite (M8), whose review is m8-review
 ```
 
 ## M6. Part V, Beyond code
@@ -165,12 +165,12 @@ When this milestone closes, a reader can choose between trunk, a branch per deli
 When this milestone closes, a reader can adapt the process to a team's tools, including GitHub issues and a Projects board kept in step by the kit, ask the project questions as they would ask a colleague, from how it is going to who owes them an answer, and use the method on work that is not software.
 
 ```
-[ ] customizing            Chapter 21: extra marks, question deliveries, proof files, a board mirror (Case A), and the queue mirrored to GitHub issues and a Projects board, built and tagged in the guided project
-[ ] project-as-assistant   Chapter 22: the documents as the whole project's memory, for engineering and product alike: what is pending, how is it going, how long each delivery took (queue plus git history), who is away; team and client conversations kept in a free notes folder, so "who owes me answers?" and "what must I ask, and whom?" are answered too (Case A, Case B)
-[ ] beyond-software        Chapter 23: analyses, proposals (Case B), codeless projects (Case A), client communication as a source of truth, data work (Ninjobs' database security rules as deliveries), and this book
-[ ] cost-and-where         Chapter 24: what coding agents cost, where they pay and where they do not, and how a team decides, with measured numbers; Ninjobs after the pivot as the case: tokens per delivery (Claude Code's session logs over the pages done and the commits, same days), why the page and the documents keep each session small, and why cache reads are counted apart
-[ ] adoption               Chapter 25: taking the method to a team and a company (Case B)
-[ ] m6-review              the review of M6 as docs/05 §8 says: the Prologue to chapter 25 read end to end in both editions against the product questions and M6's paragraph; each confirmed finding becomes a line in a new milestone M6.1
+[x] customizing            Chapter 21: extra marks, question deliveries, proof files, a board mirror (Case A), and the queue mirrored to GitHub issues and a Projects board, built and tagged in the guided project; absorbed by rewrite as chapter 21, with Case A's board mirror and no guided project
+[x] project-as-assistant   Chapter 22: the documents as the whole project's memory, for engineering and product alike: what is pending, how is it going, how long each delivery took (queue plus git history), who is away; team and client conversations kept in a free notes folder, so "who owes me answers?" and "what must I ask, and whom?" are answered too (Case A, Case B); absorbed by rewrite as chapter 18, on Case A alone
+[x] beyond-software        Chapter 23: analyses, proposals (Case B), codeless projects (Case A), client communication as a source of truth, data work (Ninjobs' database security rules as deliveries), and this book; absorbed by rewrite as chapter 22
+[x] cost-and-where         Chapter 24: what coding agents cost, where they pay and where they do not, and how a team decides, with measured numbers; Ninjobs after the pivot as the case: tokens per delivery (Claude Code's session logs over the pages done and the commits, same days), why the page and the documents keep each session small, and why cache reads are counted apart; absorbed by rewrite as chapter 23
+[x] adoption               Chapter 25: taking the method to a team and a company (Case B); absorbed by rewrite as chapter 24, with Case A's catches and Case B's note
+[x] m6-review              the review of M6 as docs/05 §8 says; superseded: M6's chapters were written by rewrite (M8), whose review is m8-review
 ```
 
 ## M7. Appendices and launch
@@ -181,9 +181,18 @@ When this milestone closes, version 1 is tagged, the PDF and EPUB are on books.k
 [ ] ninjobs-case           Appendix: the Ninjobs case end to end, with its numbers and their sources, including the token count after the pivot by kind, model and month, and how it was counted
 [ ] glossary               Appendix: the glossary, generated from docs/03 in both editions
 [ ] templates              Appendix: every document template, annotated
-[ ] workshop-map           Appendix: the parts mapped to workshop sessions, with timings and exercises
-[ ] exercise-answers       Appendix: answers to every exercise, linked to the guided project's tags
+[ ] workshop-map           Appendix: the parts mapped to workshop sessions, with timings
+[x] exercise-answers       Appendix: answers to every exercise, linked to the guided project's tags; retired by rewrite (ADR-0017): the book has no exercises
 [ ] cover                  make book puts each edition's cover on the PDF's first page (book/assets/cover-<edition>.pdf, A5) and as the EPUB's cover image (book/assets/cover-<edition>.png)
 [ ] m7-review              the review of M7 as docs/05 §8 says: the whole book and its appendices read end to end in both editions against the product questions and M7's paragraph, before v1 is tagged; each confirmed finding becomes a line in a new milestone M7.1
 [ ] launch                 v1 tag and Release; focus-kit's README repointed in its own repository (OD-4)
+```
+
+## M8. The rewrite
+
+When this milestone closes, the book is 25 chapters in both editions in three movements, the base, the method and the team, with no run narrated, no guided project and no exercises, every chapter saying what the team gains with its evidence, and the author has read it whole and decided what M7 still needs.
+
+```
+[x] rewrite                the whole book rewritten in one delivery (ADR-0017): Part I the base (why process, how agents see, SDD, KISS/YAGNI/DRY, pure functions and exceptions as values, features not layers, the four pieces, a test per piece), Part II the method (birth, documents, install, starting, queue, /propose, /apply, closing, governor, the project as the team's assistant), Part III git and the team's tools, Part IV beyond code (not software, cost, adoption); Ninjobs, Case A and Case B as the evidence; both editions; docs/00, 03, 04, 05, 06, AGENTS.md and ADR-0017 updated
+[ ] m8-review              the review of M8 as docs/05 §8 says: the whole book read end to end in both editions against the product questions and M8's paragraph; each confirmed finding becomes a line in a new milestone M8.1
 ```
