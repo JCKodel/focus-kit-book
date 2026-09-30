@@ -137,7 +137,7 @@ When this milestone closes, every confirmed finding of the M4.1 review is settle
 [x] ch14-keepless-feature  Chapter 14: the definition of a feature has a place for a slice that keeps nothing, as health does, where today "A feature is one thing the app keeps" leaves it out; both editions
 [x] ch14-swallowed-bug     Chapter 14: says what the reader does about a bug that query turns into a DatabaseFailed nobody sees, and squares reason 4 of "Why not throw" with using the same query as its example of harm; both editions
 [x] ch14-library-types     Chapter 14: squares "changes that code alone" with the routes that import DatabaseSync's type; both editions
-[>] ch15-brief-printed     Chapter 15: prints the author's brief for orchestrator-tests that the reader is told to answer with, as chapters 7, 8 and 10 print theirs, where today it is behind a note; both editions
+[x] ch15-brief-printed     Chapter 15: prints the author's brief for orchestrator-tests that the reader is told to answer with, as chapters 7, 8 and 10 print theirs, where today it is behind a note; both editions
 [x] ch15-uncaught-pieces   Chapters 14 and 15: say which piece openDatabase and migrate belong to, since they catch in no piece today, against the table's "the only place an infra exception becomes a Result"; both editions
 [>] ch15-view-rule         Chapter 15: says that tooLateToCancel in the booking view comes from the use case the client imports, so the excerpt can be checked against the view's "Forbids"; both editions
 [>] ch15-shape-cost        Chapter 15: the key point on when a piece is written meets the section, which keeps healthEvents.ts for one shape across hooks, where today it says only "gives more than it costs"; both editions

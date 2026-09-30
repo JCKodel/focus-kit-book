@@ -42,9 +42,17 @@ Sentences are found by their quoted text. `ch15-uncaught-pieces`, `ch15-view-rul
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning; chapter 15 still opens with its value, with no filler and nothing useful cut.
-* [ ] The English brief in chapter 15 is byte for byte the one in `work/done/clinic-orchestrator-tests-run/README.md`.
-* [ ] No "answer its questions with the author's brief" or "responda às perguntas dele com o briefing do autor" left in `book/`.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning; chapter 15 still opens with its value, with no filler and nothing useful cut.
+* [x] The English brief in chapter 15 is byte for byte the one in `work/done/clinic-orchestrator-tests-run/README.md`.
+* [x] No "answer its questions with the author's brief" or "responda às perguntas dele com o briefing do autor" left in `book/`.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author. Left unticked on purpose: in this batch the driver runs `make book` once at the end of the loop.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Revalidated against `main` at `ae12807`: `ch15-uncaught-pieces` had moved lines further down, but the sentence at en:18 and pt:18 and the note (now en:506, pt:507) were as the page quotes them.
+* The three parts went in as proposed, in both editions; no tightening was needed, and none was asked for, since the batch ran without conversation. "Word for word" stays in English as the promise that the block is the brief, and the Portuguese says it is translated, as chapters 7, 8 and 10 do.
+* The English brief was checked against the record's line 43 by exact string match.
+* F9 is settled by this delivery; `findings.md` is a run record and is not edited, as done for F10 by `ch15-uncaught-pieces`.
+* No document changed: no new term, rule or decision.

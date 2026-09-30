@@ -15,7 +15,13 @@ Se você segue a clínica, adicione essa linha como a primeira do marco 1.1 que 
 [ ] orchestrator-tests   every use<Feature>.ts hook's events move to plain functions with repositories as a parameter, tested in Node
 ```
 
-Depois rode `/propose orchestrator-tests`, responda às perguntas dele com o briefing do autor,[^clinic-orchestrator-tests-run] em que "milestone 2" é o seu marco 1.1, e rode `/apply orchestrator-tests` antes de seguir a leitura.
+Depois rode `/propose orchestrator-tests`; eu o rodei sem interface no Claude Code e respondi à primeira rodada de perguntas com o briefing do autor, em que "marco 2" é o seu marco 1.1; o original está em inglês, e aqui vai traduzido:[^clinic-orchestrator-tests-run]
+
+```
+Todo orquestrador do cliente, cada hook use<Feature>.ts, ganha testes unitários. Tire do hook o que cada evento faz: as chamadas a repositórios e casos de uso, na ordem delas, e o novo estado vão para funções simples que recebem os seus repositórios como parâmetro, os reais por padrão, e `now` onde um caso de uso precisa do relógio, e devolvem o novo estado. O hook só guarda o estado, publica o estado em andamento e publica o que a função devolve. Os testes passam repositórios falsos, no Vitest em Node, sem mock de módulo e sem dependência nova. As rotas do servidor não mudam. O app se comporta exatamente como antes. Adicione a linha como a primeira do marco 2.
+```
+
+Toda rodada seguinte foi respondida com a regra do briefing do capítulo 10, `Your call. Diga o que escolheu e por quê.`; depois rode `/apply orchestrator-tests` antes de seguir a leitura.
 
 A clínica adotou o FOCUS inteiro no capítulo 7, e o [`docs/01-Architecture.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/docs/01-Architecture.md) dela, na seção "How the code is organized", dá as quatro peças em uma tabela.
 O original está em inglês; esta é a tradução:
@@ -498,4 +504,4 @@ Nada é construído.
 [^bloc]: Bloc, "Bloc State Management Library", documentação, acesso em 2026-09-29. <https://bloclibrary.dev/>
 [^mediatr]: Jimmy Bogard, "MediatR: Simple, unambitious mediator implementation in .NET", acesso em 2026-09-29. <https://github.com/jbogard/MediatR>
 [^clean-architecture]: Robert C. Martin, "The Clean Architecture", 2012. <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>
-[^clinic-orchestrator-tests-run]: A construção dos testes dos orquestradores do projeto guiado deste livro, 2026-09-29, com o Claude Code 2.1.284 e o modelo `claude-opus-5-5`: cada turno, e a saída do `npm run verify` no commit `e6653b5` da clínica em `verify.txt`. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/clinic-orchestrator-tests-run/README.md>
+[^clinic-orchestrator-tests-run]: A construção dos testes dos orquestradores do projeto guiado deste livro, 2026-09-29, com o Claude Code 2.1.284 e o modelo `claude-opus-5-5`: o briefing, cada turno, e a saída do `npm run verify` no commit `e6653b5` da clínica em `verify.txt`. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/clinic-orchestrator-tests-run/README.md>
