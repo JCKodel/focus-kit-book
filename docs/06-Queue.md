@@ -152,7 +152,7 @@ When this milestone closes, every confirmed finding of the M4.1 review is settle
 When this milestone closes, a reader can choose between trunk, a branch per delivery and a worktree per delivery, run agents in parallel, use the commit as the human review, and run a team's work on GitHub with pull requests, issues and a Projects board.
 
 ```
-[ ] git-essentials         Chapter 17: commits, branches, merges, trunk and git-flow
+[x] git-essentials         Chapter 17: commits, branches, merges, trunk and git-flow
 [ ] worktrees              Chapter 18: worktrees and parallel agents, and where parallelism really stops
 [ ] commit-as-review       Chapter 19: the agent stages, the person commits, and why
 [ ] github-for-teams       Chapter 20: pull requests as the team's review, issues, Projects boards, and why the wiki is not docs/ (the agent reads the repository, not the wiki)

@@ -59,6 +59,17 @@ A new concept enters here first, in both languages.
 | unit test | teste unitário | `*.test.ts` | A test that runs in Node, with no browser and no server running, calls one piece directly and runs the code that piece calls, except the I/O and the clock, which the test may swap: a use case with its data, a repository against an in-memory database, a route through `app.request` with a fake clock, or an event function with fake repositories; its requests never leave the process. |
 | end-to-end test | teste ponta a ponta | `*.e2e.ts` | A test that drives the running app in a browser, as a user would, through the view, the orchestrators, the server and the database. |
 | stage | stage | `git add` | To mark changes for the next commit; the agent stages, the person reviews and commits. |
+| version control | controle de versão | git | A system that records the changes to a set of files over time, so any earlier version can be brought back, each with who changed it, when and why; git is distributed, so every clone holds the whole history. |
+| commit | commit | `git commit` | A saved snapshot of the whole project, with its author, its message and the commit or commits it came from, its parents, named by a hash; the history is the chain of parents. |
+| branch | branch | `git switch -c <name>` | A name that points to one commit and moves to each new commit made on it; the main branch is `main`. |
+| tag | tag | `git tag` | A name fixed on one commit, which never moves, unlike a branch; the book's chapter tags are tags. |
+| merge | merge | `git merge` | Bringing one branch's commits into another, by a fast-forward, a merge commit or a squash merge. |
+| fast-forward | fast-forward | `git merge --ff-only` | A merge where the receiving branch has no commit of its own since the other left it, so its name moves to the other's last commit and no commit is made. |
+| merge commit | commit de merge | `git merge --no-ff` | A commit with two parents, the receiving branch's last commit and the merged branch's, that brings the whole branch in; `git revert -m 1` on it undoes the whole branch. |
+| squash merge | squash merge | `git merge --squash` | A merge that writes the branch's whole change as one new commit with one parent; the branch's own commits stay out of the receiving branch's history. |
+| rebase | rebase | `git rebase` | Rewriting a branch's commits on top of another commit, so the history reads as one line; never done to commits someone else already has. |
+| revert | revert | `git revert` | A new commit that undoes an earlier one and keeps the history; how a delivery is undone in one step. The Portuguese prose says "desfazer"; the command keeps its name. |
+| trunk-based development | trunk-based development | none | The industry practice of a team merging small changes into the main branch "at least once every 24 hours", often through short-lived branches; not the kit's trunk, which is one person committing on `main`; kept in English in both editions. |
 | trunk | trunk | `main` | Working on the main branch, one delivery at a time; only for one person working alone. |
 | pull request | pull request | none | A request to merge a branch that someone reviews first; how a branch per delivery lands. |
 | git-flow | git-flow | `develop`, `feature/*`, `release/*`, `hotfix/*` | A branching model with long-lived branches for teams that ship versions. |
