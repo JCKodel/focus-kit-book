@@ -1,0 +1,243 @@
+[tool Bash] cat work/hours-report.md && git diff docs/06-Queue.md && ls docs docs/adr work src/features
+
+[tool Bash] cat docs/05-Process.md docs/01-Architecture.md docs/04-Conventions.md
+
+[tool Bash] cd src/features && cat weeklyHours/weeklyHoursEvents.ts weeklyHours/useWeeklyHours.ts professionals/professionalsEvents.ts professionals/useProfessionals.ts && grep -rn "SectionRefusal\|hoursSaving\|hoursSaved\|hoursFailed\|hoursRefused\|What the editor reports" src docs
+
+[tool Read] src/features/professionals/professionalsEvents.test.ts
+
+[tool Bash] cd . && python3 - <<'EOF'
+import re
+p='src/features/weeklyHours/weeklyHoursEvents.ts'
+s=open(p).read()
+s=s.replace('export type { SectionRefusal, Weekday };','export type { Weekday };')
+s=s.replace('export type WeeklyHoursReport = "saved" | "failed" | SectionRefusal;','export type WeeklyHoursReport = "saving" | "saved" | "failed" | SectionRefusal;')
+open(p,'w').write(s)
+
+p='src/features/weeklyHours/useWeeklyHours.ts'
+s=open(p).read()
+s=s.replace('\ttype SectionRefusal,\n','')
+s=s.replace('''// What the editor reports to the professionals section, which holds the busy
+// state, the open row and the messages above the list.
+export type HoursSection = {
+	saving: () => void;
+	saved: () => void;
+	failed: () => void;
+	refused: (code: SectionRefusal) => void;
+	close: () => void;
+};
+
+function forward(section: HoursSection, report?: WeeklyHoursReport) {
+	if (report === "saved") section.saved();
+	else if (report === "failed") section.failed();
+	else if (report) section.refused(report);
+}
+
+// The events live in weeklyHoursEvents.ts; the hook holds the state and
+// forwards each report to the section.''','''export type HoursSection = {
+	report: (report: WeeklyHoursReport) => void;
+	close: () => void;
+};
+
+// The events live in weeklyHoursEvents.ts; the hook holds the state and
+// passes each report to the section.''')
+s=s.replace('''			setState(update);
+			forward(sectionRef.current, report);
+		});''','''			setState(update);
+			if (report) sectionRef.current.report(report);
+		});''')
+s=s.replace('''		sectionRef.current.saving();
+		const { update, report } = await saveEvent(professionalId, state.periods);
+		setState(update);
+		forward(sectionRef.current, report);''','''		sectionRef.current.report("saving");
+		const { update, report } = await saveEvent(professionalId, state.periods);
+		setState(update);
+		if (report) sectionRef.current.report(report);''')
+open(p,'w').write(s)
+
+p='src/features/professionals/professionalsEvents.ts'
+s=open(p).read()
+s=s.replace('import type { SectionRefusal } from "../weeklyHours/api.ts";','import type { WeeklyHoursReport } from "../weeklyHours/weeklyHoursEvents.ts";')
+i=s.index('// The hours editor fetches and saves')
+s=s[:i]+'''// The hours editor fetches and saves on its own, and reports here.
+export async function hoursReported(
+	report: WeeklyHoursReport,
+	repositories = professionalsRepositories,
+): Promise<Update> {
+	if (report === "saving") return started;
+	if (report === "saved") return (s) => ({ ...s, busy: false, row: undefined });
+	if (report === "failed") return (s) => ({ ...s, busy: false });
+	if (report === "ProfessionalNotFound") return reloadGone(repositories);
+	return (s) => ({ ...s, busy: false, error: report });
+}
+'''
+open(p,'w').write(s)
+
+p='src/features/professionals/useProfessionals.ts'
+s=open(p).read()
+s=s.replace('''	hoursFailed,
+	hoursRefused,
+	hoursSaved,
+	hoursSaving,
+''','''	hoursReported,
+''')
+s=s.replace('''			saving: () => setState(hoursSaving),
+			saved: () => setState(hoursSaved),
+			failed: () => setState(hoursFailed),
+			refused: (code) => {
+				hoursRefused(code).then(setState);
+			},''','''			report: (report) => {
+				hoursReported(report).then(setState);
+			},''')
+open(p,'w').write(s)
+
+p='src/features/professionals/professionalsEvents.test.ts'
+s=open(p).read()
+s=s.replace('''	hoursFailed,
+	hoursRefused,
+	hoursSaved,
+	hoursSaving,
+''','''	hoursReported,
+''')
+s=s.replace('''		const update = await hoursRefused(
+			"ProfessionalNotFound",
+			fake({ fetchProfessionals: async () => ok([ana]) }),
+		);
+
+		expect(update(hoursSaving(openHours(listed, rui)))).toMatchObject({''','''		const saving = (await hoursReported("saving", fake({})))(
+			openHours(listed, rui),
+		);
+		const update = await hoursReported(
+			"ProfessionalNotFound",
+			fake({ fetchProfessionals: async () => ok([ana]) }),
+		);
+
+		expect(update(saving)).toMatchObject({''')
+i=s.index('\tit("saving is busy, saved closes the row, failed keeps it"')
+j=s.index('\tit("close closes the row')
+s=s[:i]+'''	async function saving(): Promise<ProfessionalsState> {
+		return (await hoursReported("saving", fake({})))(opened);
+	}
+
+	it("saving is busy", async () => {
+		expect(await saving()).toMatchObject({ busy: true });
+	});
+
+	it("saved closes the row", async () => {
+		const update = await hoursReported("saved", fake({}));
+
+		expect(update(await saving())).toMatchObject({
+			busy: false,
+			row: undefined,
+		});
+	});
+
+	it("failed keeps the row open", async () => {
+		const update = await hoursReported("failed", fake({}));
+
+		expect(update(await saving())).toMatchObject({
+			busy: false,
+			row: { id: 3, mode: "hours" },
+		});
+	});
+
+	it("NotSignedIn shows the code above the list", async () => {
+		const update = await hoursReported("NotSignedIn", fake({}));
+
+		expect(update(await saving())).toMatchObject({
+			busy: false,
+			error: "NotSignedIn",
+			row: { id: 3, mode: "hours" },
+		});
+	});
+
+'''+s[j:]
+open(p,'w').write(s)
+EOF
+git diff --stat; grep -rn "What the editor reports" src; npm run verify 2>&1 | tail -30
+
+I'll make the edits with the Edit tool instead of a shell script.
+
+[tool Edit] src/features/weeklyHours/weeklyHoursEvents.ts
+
+[tool Edit] src/features/weeklyHours/weeklyHoursEvents.ts
+
+[tool Read] src/features/weeklyHours/useWeeklyHours.ts
+
+[tool Read] src/features/professionals/professionalsEvents.ts
+
+[tool Read] src/features/professionals/useProfessionals.ts
+
+[tool Edit] src/features/weeklyHours/useWeeklyHours.ts
+
+[tool Edit] src/features/weeklyHours/useWeeklyHours.ts
+
+[tool Edit] src/features/weeklyHours/useWeeklyHours.ts
+
+[tool Edit] src/features/weeklyHours/useWeeklyHours.ts
+
+[tool Edit] src/features/professionals/professionalsEvents.ts
+
+[tool Edit] src/features/professionals/professionalsEvents.ts
+
+[tool Edit] src/features/professionals/useProfessionals.ts
+
+[tool Edit] src/features/professionals/useProfessionals.ts
+
+Now the tests.
+
+[tool Edit] src/features/professionals/professionalsEvents.test.ts
+
+[tool Edit] src/features/professionals/professionalsEvents.test.ts
+
+[tool Edit] src/features/professionals/professionalsEvents.test.ts
+
+[tool Bash] npm --prefix . run verify 2>&1 | tail -40
+
+Verify is green (144 Playwright passed, build ok). Now the mechanical checks.
+
+[tool Bash] grep -rn "What the editor reports" src; grep -rn "forward\|hoursSaving\|hoursSaved\|hoursFailed\|hoursRefused\|SectionRefusal" src; git status --short; git diff --stat
+
+Checks pass. Do any docs name the old shapes?
+
+[tool Bash] grep -rn "HoursSection\|WeeklyHoursReport\|refused(\|forward" docs AGENTS.md; ls work/done | tail -3
+
+Nothing in docs needs to change. Now I'll record what happened on the page, tick the checklist, move the page and mark the queue.
+
+[tool Edit] work/hours-report.md
+
+[tool Edit] work/hours-report.md
+
+[tool Read] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Bash] mv work/hours-report.md work/done/hours-report.md && git add -A && git status --short && grep -n "—" work/done/hours-report.md
+
+The editor now reports to the professionals section through one path, and it's staged but not committed. `npm run verify` is green: typecheck, Biome, Vitest, all 144 Playwright tests at 390×844 and 1280×800, and the build.
+
+**What changed**
+- `WeeklyHoursReport` now includes `"saving"`. Its comment exists only once, in `weeklyHoursEvents.ts`.
+- `HoursSection` has just `report` and `close`, and `forward` is deleted. The hook calls `report` only when an answer has one, and `save` keeps the order the page set.
+- `hoursReported` replaces `hoursSaving`, `hoursSaved`, `hoursFailed` and `hoursRefused`. `useProfessionals` passes every report to it.
+- I removed the `SectionRefusal` re-export from `weeklyHoursEvents.ts`, as the page allowed, because nothing imported it from there any more.
+- The Node tests cover every report, each starting from the state `hoursReported("saving")` produces. Any repository call makes a test fail, which is how "no repository is called" is checked.
+- No `*View.tsx`, `*.e2e.ts`, `*.server.ts`, `api.ts`, `rules.ts` or package file is in the diff. No docs/01, docs/03 or ADR change was needed.
+
+**Still open: the manual check.** The page asks you to check it yourself with `npm run dev`, and I can't keep a server running, so that one box on the page is unticked. The existing Playwright tests already cover the same three scenarios, and the test that disables the buttons during a save still passes with the slightly delayed "saving" report.
+
+The page is in `work/done/hours-report.md` and the line in docs/06 is `[x]`.
+
+**Suggested commit message**
+```
+Report the hours editor to the professionals section in one path
+
+- WeeklyHoursReport gains "saving"; HoursSection is { report, close }
+- hoursReported replaces hoursSaving, hoursSaved, hoursFailed, hoursRefused
+- forward is gone; the hook passes each report as it came
+- every report is tested in Node with fake repositories
+
+See work/done/hours-report.md
+```
+
+**Environments:** local has this code but isn't running; start it with `npm run dev` for the manual check. Production doesn't exist yet (the `deploy` delivery creates it), and publishing is yours to do.

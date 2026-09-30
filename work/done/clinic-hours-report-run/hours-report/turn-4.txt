@@ -1,0 +1,73 @@
+[tool Read] src/features/professionals/professionalsEvents.ts
+
+[tool Edit] src/features/professionals/professionalsEvents.ts
+
+[tool Edit] src/features/professionals/useProfessionals.ts
+
+[tool Read] src/features/professionals/professionalsEvents.test.ts
+
+[tool Edit] src/features/professionals/professionalsEvents.test.ts
+
+[tool Edit] src/features/professionals/professionalsEvents.test.ts
+
+[tool Edit] src/features/professionals/professionalsEvents.test.ts
+
+[tool Bash] npm run verify 2>&1 | grep -E "error|✗|failed|passed|Tests |built in|FAIL" | head -30
+
+Verify is green again (328 Vitest, 144 Playwright, build ok). Now I'm updating the page to match the synchronous event.
+
+[tool Bash] grep -n "async\|Promise<Update>\|microtask\|at once\|hoursReported(\"saving\"" work/done/hours-report.md
+
+[tool Read] work/done/hours-report.md
+
+[tool Edit] work/done/hours-report.md
+
+[tool Edit] work/done/hours-report.md
+
+[tool Edit] work/done/hours-report.md
+
+[tool Edit] work/done/hours-report.md
+
+[tool Read] work/done/hours-report.md
+
+[tool Edit] work/done/hours-report.md
+
+[tool Edit] work/done/hours-report.md
+
+[tool Edit] work/done/hours-report.md
+
+[tool Edit] work/done/hours-report.md
+
+[tool Bash] git add -A && git status --short && grep -c "—" work/done/hours-report.md src/features/professionals/*.ts
+
+The saving, saved and failed reports now reach the professionals section immediately, in the same click as Save. So the button disables in the same render as before, and a double click can't send the week twice. `npm run verify` is green again (328 Vitest, 144 Playwright, build) and everything is restaged, not committed.
+
+**How it works now**
+- `hoursReported` is still the one event, but it no longer waits by default. It returns the state change directly for `"saving"`, `"saved"`, `"failed"` and `"NotSignedIn"`. Only `"ProfessionalNotFound"`, which has to reload the list, returns a promise.
+- `useProfessionals` applies a direct answer at once and waits only for the promise.
+- Each test now also fails if a report that needs no reload returns a promise. The `ProfessionalNotFound` test checks that its answer is a promise.
+
+**Two ways this differs from the option as my page first wrote it** (both recorded on the page):
+1. The event returns a state change, not a finished state, because the hook can't read the current state at that moment.
+2. `"NotSignedIn"` is immediate too, because it needs no repository and you said only those may wait.
+
+**Page:** I updated the Contract to the shape as built, replaced the "async for every report" choice with a pointer to What happened, and recorded the change there.
+
+**docs/01:** it describes each event as either immediate or waiting, and `hoursReported` is now both. The page leaves naming every event shape in docs/01 to a later delivery, so I recorded it there rather than editing docs/01 here.
+
+**Manual check:** still open on the page until you do it with `npm run dev`.
+
+**Suggested commit message**
+```
+Report the hours editor to the professionals section in one path
+
+- WeeklyHoursReport gains "saving"; HoursSection is { report, close }
+- hoursReported replaces the four hours events and answers at once,
+  waiting only for the reload of a removed professional
+- forward is gone; the hook passes each report as it came
+- every report is tested in Node with fake repositories
+
+See work/done/hours-report.md
+```
+
+**Environments:** local has this code but isn't running; start it with `npm run dev`. Production doesn't exist yet (the `deploy` delivery creates it), and publishing is yours to do.

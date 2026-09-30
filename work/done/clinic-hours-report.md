@@ -55,17 +55,17 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 
 **Done when.**
 
-* [ ] `clinic-hours-save` was `[x]`, and the clinic clean at its last commit, equal to `origin/main`, before the first run; that commit is in the README.
-* [ ] The clinic delivery (or each part of a split) ran the five steps, each turn recorded; nothing in the clinic edited by hand.
-* [ ] On the clinic's last commit, `grep -nE "forward|saving\(\)|saved\(\)|failed\(\)|refused\(" src/features/weeklyHours/useWeeklyHours.ts` finds nothing, `grep -rnE "hoursSaving|hoursSaved|hoursFailed|hoursRefused" src/` finds nothing, and `grep -rn "What the editor reports" src/` finds one line.
-* [ ] The one event's tests are in `professionalsEvents.test.ts`, every report kind covered, `saving` included; no new dependency in `package.json`.
-* [ ] The other existing tests pass without changing what they assert; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
-* [ ] The author's manual check recorded in the README.
-* [ ] Each clinic delivery committed by the author, no tag; pushed.
-* [ ] No note of the host left outside the clinic's repository.
-* [ ] `work/done/clinic-hours-report-run/` as the Contract says; docs/06 as the Contract says.
-* [ ] `make verify` green in this book, the disclosure scan included.
-* [ ] Page in `work/done/`, only this delivery's paths staged, commit message suggested.
+* [x] `clinic-hours-save` was `[x]`, and the clinic clean at its last commit, equal to `origin/main`, before the first run; that commit is in the README.
+* [x] The clinic delivery (or each part of a split) ran the five steps, each turn recorded; nothing in the clinic edited by hand.
+* [x] On the clinic's last commit, `grep -nE "forward|saving\(\)|saved\(\)|failed\(\)|refused\(" src/features/weeklyHours/useWeeklyHours.ts` finds nothing, `grep -rnE "hoursSaving|hoursSaved|hoursFailed|hoursRefused" src/` finds nothing, and `grep -rn "What the editor reports" src/` finds one line.
+* [x] The one event's tests are in `professionalsEvents.test.ts`, every report kind covered, `saving` included; no new dependency in `package.json`.
+* [x] The other existing tests pass without changing what they assert; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
+* [ ] The author's manual check recorded in the README: pending, collected at the end of the M4.1 loop.
+* [x] Each clinic delivery committed by the author, no tag; pushed.
+* [x] No note of the host left outside the clinic's repository.
+* [x] `work/done/clinic-hours-report-run/` as the Contract says; docs/06 as the Contract says.
+* [x] `make verify` green in this book, the disclosure scan included.
+* [x] Page in `work/done/`, only this delivery's paths staged, commit message suggested.
 
 **Decisions.** Each taken on the recommended option, not asked:
 
@@ -78,3 +78,18 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * The brief leaves to the clinic's agent the event's name, whether it stays async for every report, and where `HoursSection` lives; the agent says what it chose.
 * The manual check covers a save, a refused period and a professional removed meanwhile; Playwright covers the rest.
 * docs/05 is not edited: the recipe exists and needs no fifth name.
+
+## What happened
+
+* The precondition held: `clinic-hours-save` was `[x]`; the clinic was on `main`, clean, at `13dd9c0`, equal to `origin/main`, with focus-kit `bff8414`.
+* One clinic delivery, `hours-report`, four turns: `/propose` (the slug, the brief), `/apply` and one staged review. `/propose` did not split the line and put it in milestone 1.1, after `hours-save` and before `m1.1-review`. Its first turn read the slug as an owner's report of booked hours and asked five questions; the brief answered them, and no later round came, so `Your call` was never sent. The page review was the author's "None", decided before the run.
+* The staged review was not "None". `/apply` first made the one event async for every report, as the brief allowed, and said the price: Save disabled one render later, and a very fast double click could send the week twice. The author sent one request, word for word in the run's README, to make `saving`, `saved` and `failed` reach the section at once. So "The app behaves as before" holds for the Save button too.
+* The one event is `hoursReported(report, repositories)`: an update at once for `saving`, `saved`, `failed` and `NotSignedIn`, a promise only for `ProfessionalNotFound`, which reloads the list. It answers an update, not a whole state, since the hook cannot read the current state at that moment. `HoursSection` stays in `useWeeklyHours.ts`, a React callback interface, since the events file deals in data.
+* The hook still decides four things no Node test reaches, where the Decisions above name one: to report `saving` only when `send` is true, and before the call; to call `report` only when an answer carries one; to drop late answers of the load; and `sectionRef`, still written during render.
+* For `clinic-event-shapes`: the clinic's docs/01 did not change, and it describes each event as immediate or waiting; `hoursReported` is both, which the clinic's page records and that delivery names.
+* Calls denied: one in `/propose`, a shell command that printed the clinic's documents, read then with the read tool; one in `/apply`, a Python script that rewrote `weeklyHoursEvents.ts`, whose changes the clinic's agent then made with its file tools, a retry by another route inside its session, recorded in the run's README.
+* Every `claude` turn ended with a result of `success` but exited with code 1, standard error holding only `stty: stdin isn't a terminal`; recorded in the README.
+* The suggested commit message carried no trailer; the author committed the second one, after the staged review, as printed: `9f625cb`, pushed, no tag.
+* `npm run verify` green on `9f625cb`: 328 Vitest, where one test of three reports became three tests with the same assertions, 144 Playwright unchanged, build. No `package.json`, view or `*.e2e.ts` in the diff; no module mock.
+* The author's manual check on `npm run dev` is collected at the end of the M4.1 loop; its item stays open.
+* No note of the host outside the repositories: the clinic's auto-memory folder stayed empty and no turn wrote into the host's folder, so nothing was deleted. No ADR, no new term; docs/05 unchanged.

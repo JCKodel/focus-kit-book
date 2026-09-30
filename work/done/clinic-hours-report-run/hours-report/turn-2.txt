@@ -1,0 +1,58 @@
+Understood: `hours-report` means the reports the weekly hours editor sends to the professionals section, not an owner report. Let me read the code involved.
+
+[tool Bash] ls src/features/weeklyHours src/features/professionals work/done
+
+[tool Read] src/features/weeklyHours/useWeeklyHours.ts
+
+[tool Read] src/features/weeklyHours/weeklyHoursEvents.ts
+
+[tool Read] src/features/professionals/professionalsEvents.ts
+
+[tool Read] src/features/professionals/useProfessionals.ts
+
+[tool Bash] grep -rn "HoursSection\|SectionRefusal\|hoursSaving\|hoursSaved\|hoursFailed\|hoursRefused\|WeeklyHoursReport\|section\.\|What the editor reports" src docs --include=*.ts --include=*.tsx --include=*.md
+
+[tool Bash] grep -rn -e HoursSection -e SectionRefusal -e hoursSaving -e hoursSaved -e hoursFailed -e hoursRefused -e WeeklyHoursReport -e "section\." -e "What the editor reports" src docs
+
+[tool Read] src/features/professionals/professionalsEvents.test.ts
+
+[tool Read] src/features/professionals/professionalsEvents.test.ts
+
+[tool Read] src/features/weeklyHours/WeeklyHoursView.tsx
+
+[tool Read] work/done/hours-save.md
+
+[tool Bash] grep -n -i -e "every event" -e "forward" -e "report" -e "HoursSection" -e "hoursSaving" work/done/orchestrator-tests.md docs/01-Architecture.md docs/04-Conventions.md
+
+I've read the editor, the professionals section, their tests and the earlier pages (orchestrator-tests, hours-save). Now I'm writing the page and the queue line.
+
+[tool Read] work/done/orchestrator-tests.md
+
+[tool Write] work/hours-report.md
+
+Now the queue line and the milestone clause.
+
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+I misread `hours-report` at first and suggested an owner-facing report of booked hours, which isn't what you meant. The page now describes the refactor you asked for. It's at `work/hours-report.md`, and I've added the line to docs/06 marked `[>]` between `hours-save` and `m1.1-review`. The project works on trunk, so there's no branch.
+
+**What the page says:**
+- **One report path.** `WeeklyHoursReport` becomes `"saving" | "saved" | "failed" | SectionRefusal`. `HoursSection` is reduced to `{ report, close }`, and `forward` goes.
+- **One event.** `hoursReported(report, repositories)` in `professionalsEvents.ts` replaces the four existing events and gives the same states, including the reload on `ProfessionalNotFound`. Its tests replace the four old tests and assert the same states.
+- **The comment.** It lives only on `WeeklyHoursReport`.
+- **Where `HoursSection` lives.** It stays in `useWeeklyHours.ts`. It's a React callback interface (the hook's parameter and the view's `section` prop), and the events file deals in data, not callbacks, as `orchestrator-tests` decided.
+- **What the hook still decides, untested:**
+  - it reports `"saving"` only when `send` is true, and before the call;
+  - it calls `report` only when an answer carries one;
+  - the load's `active` guard drops late answers, their reports included;
+  - `sectionRef`, still written during render.
+
+**Choices I made on my own, check these first:**
+1. **Async for every report.** Since you allowed it, `"saving"`, `"saved"` and `"failed"` now reach the section one microtask later than today, outside the click handler. So the Save button disables one render later. A very fast double click could send the same week twice. Because saving replaces the whole week, that saves the same thing, and I judge it invisible. The page describes a way to keep it exactly as today if you'd rather: a synchronous answer for those three reports.
+2. **Name.** I called the event `hoursReported`. It doesn't go into docs/03, just as `WeeklyHoursReport` isn't there.
+3. **Milestone paragraph.** I added a clause to the milestone 1.1 paragraph so `m1.1-review` checks this delivery.
+4. **Re-export.** `SectionRefusal`'s re-export in `weeklyHoursEvents.ts` goes if nothing imports it any more.
+
+Please read the page and question it: can each Behaviour line be checked, is the Contract exact, and does Out of scope name anything you assumed was included? Ask for every correction here. When the page is right, open a fresh session and type `/apply hours-report`.

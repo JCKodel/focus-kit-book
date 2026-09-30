@@ -1,0 +1,37 @@
+[tool Bash] ls docs docs/adr work 2>/dev/null; cat docs/00*.md docs/03*.md docs/05*.md docs/06*.md; ls work && for f in work/*.md; do echo "=== $f"; cat "$f"; done
+
+[tool Bash] ls docs docs/adr work
+
+[tool Read] docs/00-Product.md
+
+[tool Read] docs/03-Domain.md
+
+[tool Read] docs/05-Process.md
+
+[tool Read] docs/06-Queue.md
+
+[tool Read] docs/01-Architecture.md
+
+The slug `hours-report` isn't in the queue (docs/06), and no document describes a report, so before I write anything I need to know what you mean by it. (One note: my first attempt to read the docs used a shell command that needed approval, which this session can't give. So I read each file directly instead. Nothing was lost.)
+
+**My assessment.** The owner has two kinds of "hours" today: the **weekly hours** they open for each professional, and the **appointments** clients book inside them. That gives three plausible readings of "hours report":
+
+- **A. Occupancy.** For each professional, over a period: the hours opened, the hours booked, and the share booked. This helps the owner see who is full and who is empty.
+- **B. Booked hours only.** For each professional, over a period: how many appointments and how many hours were booked. This is useful for paying professionals or splitting rent.
+- **C. A printable sheet of the weekly hours.** Each professional's weekdays and times on one page, for the door or the front desk.
+
+My guess is B, and here is why. It is the smallest version and answers a question the owner has every month. It reads only appointments, which the app already stores. A needs "hours opened" for past dates, but weekly hours are replaced whole with no history (docs/03, invariant 11). So last month's opened hours can't be rebuilt once the hours have changed. A would also have to change again when `absences` (M2) lands.
+
+**Questions (my recommendation comes first in each):**
+
+1. **Which reading?** I recommend **B**: per professional, the number of appointments and the booked hours. If you meant A, the report needs stored history of weekly hours, which is a separate delivery before this one.
+
+2. **Which period?** I recommend **one calendar month in clinic time**, with previous and next month buttons, defaulting to the current month. The other options are a free date range (more inputs to get right on a phone) or a week.
+
+3. **What counts?** I recommend **only `booked` appointments, both past and future within the month, shown as two columns: "held" (start already passed) and "upcoming"**. Cancelled appointments are left out, or at most shown as a count. There is no "no-show" status, so "held" only means the time has passed, not that the client came. Is that distinction useful to you, or is one total enough?
+
+4. **Where does it go in the queue?** It doesn't fit Milestone 2's paragraph as written. I recommend **adding it to Milestone 2 right after `owner-schedule`** and extending that milestone's paragraph with "and sees each professional's booked hours per month". The owner screen for the day's appointments would come first, and this would build on it. The alternative is a new Milestone 3, so M2 stays as it is.
+
+5. **Removed professionals.** I recommend **listing them in a month where they had appointments**, marked as removed, so the month's totals add up. Otherwise their hours would disappear from past months.
+
+Answer these (just "B, month, yes, M2, yes" is fine if you agree), and correct anything I've misread. When we agree, I'll add the term to docs/03 if the report needs a new one, write `work/hours-report.md`, and add the line to docs/06 as `[>]`.
