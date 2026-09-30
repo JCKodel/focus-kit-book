@@ -278,9 +278,14 @@ the second `m4-code-review`, which wrote it down). The delivery is
 
 1. The range: from the previous milestone's last chapter tag to this
    milestone's last chapter tag, three dots, `<from>...<to>`, the form of
-   Claude Code's documentation. The README says how many commits it
-   holds, names any commit of the milestone past the last tag, and says
-   whether it is reviewed and why.
+   Claude Code's documentation. When the milestone's last change to the
+   guided project has no chapter tag, the range ends at that commit, by
+   its short hash. A commit at the start of the range that touches only
+   the kit's files, as a kit update does, is left out by starting the
+   range on it, and the README names it. The README says how many commits
+   the range holds, names any commit of the milestone past its end, and
+   says whether it is reviewed and why. (The untagged end and the kit
+   commit left out: first `m4.1-code-review`.)
 2. Before the run: the book as step 1 of the recipe above; the guided
    project on `main`, clean, equal to `origin/main`, with nothing in
    `src/` past the range's end.
@@ -303,8 +308,11 @@ the second `m4-code-review`, which wrote it down). The delivery is
    ../focus-kit-book diff *)" "Bash(git -C ../focus-kit-book status *)"`:
    the decisions, word for word, and the request to write each confirmed
    finding as `[ ] clinic-<slug>  <what the code does afterwards>, by a
-   recorded run` in the book's `M<n>.1`, before `m<n>.1-review`, with one
-   clause in its paragraph, and to stage it. If the milestone review
+   recorded run` in the book's `M<n>.1`, before `m<n>.1-review` (the
+   milestone the review opened: after M4.1 it is M4.2), with one
+   clause in its paragraph, and to stage it. Findings that one change
+   settles may share one line, as the author decides (first
+   `m4-code-review`, second `m4.1-code-review`). If the milestone review
    found nothing and `M<n>.1` does not exist, turn 2 creates it as step 6
    above says. A finding a line of the guided project's own queue covers
    still gets its line, which names that line and what the finding adds;

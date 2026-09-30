@@ -1,0 +1,24 @@
+[tool Bash] cd ../focus-kit-book && grep -n "M4\|m4\|clinic-" docs/06-Queue.md | head -80; git status --short
+[denied]
+[tool Read] ../focus-kit-book/docs/06-Queue.md
+[tool Read] docs/06-Queue.md
+[tool Bash] grep -n "disabled\|<input\|onChange" src/features/weeklyHours/WeeklyHoursView.tsx src/features/appointments/*View*.tsx; grep -n "saving\|WeeklyHoursReport\|WeeklyHoursAnswer" src/features/weeklyHours/weeklyHoursEvents.ts | head -20
+[tool Edit] ../focus-kit-book/docs/06-Queue.md
+[tool Edit] ../focus-kit-book/docs/06-Queue.md
+[tool Bash] git -C ../focus-kit-book add docs/06-Queue.md
+[tool Bash] git -C ../focus-kit-book diff --cached
+[tool Bash] git -C ../focus-kit-book status --short
+I added and staged the two lines, but the staged change also contains an edit I didn't make. The first thing I ran, a `cd` followed by a git command, was blocked by the permission prompt, so I read the file directly instead.
+
+**The edit that isn't mine:** the working tree already changed the `m4.1-code-review` line from `[ ]` to `[>]` and added the `a3e2470...6edc9ad` range to it. Staging the whole file, as you asked, staged that too, so it is in `git diff --cached`. If you want it left out, unstage that part yourself (for example with `git restore --staged -p`). `docs/05-Process.md` (modified) and `work/m4.1-code-review.md` (untracked) were also changed before I started; they are not staged and I left them alone.
+
+**Where each line went.** Both are inside M4.2's block, just after `ch16-unit-test-fakes` and just before `m4.2-review`, with the slug padded to the same column as the lines around them:
+
+- **`clinic-busy-fields`** covers findings 1 and 2, since one change settles both. Afterwards, the hours editor's time inputs and the booking form's name and phone are disabled while a save or booking is in flight. The add, remove and submit buttons are already disabled then (`WeeklyHoursView.tsx:103,133,142`, `BookingView.tsx:179`). The line also says the booking test "sends the checked form and keeps a name typed after the click" changes to match.
+- **`clinic-hours-answer`** covers finding 4. Afterwards, `load` and `save` can only answer "saved", "failed" or a refusal, and only `useWeeklyHours` can report "saving". So no answer can leave the professionals section busy for good.
+
+**Paragraph:** M4.2's paragraph gains one clause before the Portuguese one: "the clinic's weekly hours editor and booking form take no edit while a save or a booking is in flight, and only the hook can report that a save is in flight".
+
+**Already queued:** none of the three findings. No open line in the clinic's milestone 1.1 covers them. `hours-save` and `booking-submit` are the done lines whose change led to findings 1 and 2, but they don't fix them, so neither new line names a 1.1 line. No M4.2 line touches the clinic's code.
+
+Nothing else was edited in either repository, and nothing was committed. A suggested commit message: `Queue the confirmed findings of m4.1-code-review in M4.2`.

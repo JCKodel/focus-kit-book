@@ -1,0 +1,14 @@
+[tool Edit] ../focus-kit-book/docs/06-Queue.md
+[tool Bash] git -C ../focus-kit-book add docs/06-Queue.md
+[tool Bash] git -C ../focus-kit-book diff --cached
+[tool Bash] git -C ../focus-kit-book status --short
+I changed `clinic-hours-answer` and staged `docs/06-Queue.md` again. The line now begins: "load answers only a refusal or nothing and save only "saved", "failed" or a refusal, and "saving" is a report only useWeeklyHours makes…". I edited nothing else.
+
+**Staged:** only `docs/06-Queue.md`. It still includes the `m4.1-code-review` change to `[>]` with the range, which was already in the working tree before my first edit.
+
+**Not staged, left alone:**
+- `docs/05-Process.md` is modified.
+- `work/m4.1-code-review.md` is untracked.
+- `work/done/m4.1-code-review-run/` is a new untracked folder. It appeared after my last check, and I didn't create it.
+
+Nothing was committed. The suggested message is the same: `Queue the confirmed findings of m4.1-code-review in M4.2`.
