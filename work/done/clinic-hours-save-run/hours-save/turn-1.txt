@@ -1,0 +1,33 @@
+[tool Bash] ls docs docs/adr work src/features 2>&1; cat docs/05*.md docs/06*.md
+
+[tool Bash] cat docs/00*.md docs/03*.md; ls work/done; cat work/done/weekly-hours.md
+
+[tool Bash] cat docs/01*.md; ls src/features/weeklyHours; git log --oneline | head -30
+
+[tool Bash] cat work/done/booking-submit.md; cat src/features/weeklyHours/weeklyHoursEvents.ts src/features/weeklyHours/useWeeklyHours.ts; grep -rn "saveStarted\|hours-save" --include=*.ts --include=*.tsx --include=*.md . | grep -v node_modules
+
+[tool Bash] grep -rn "saveStarted\|sectionRef\|hours-save" src docs work | grep -v "^src/features/weeklyHours/weeklyHoursEvents.ts"; grep -n "saveStarted" -A30 src/features/weeklyHours/weeklyHoursEvents.test.ts | head -80; git show c54d011 --stat
+
+[tool Bash] grep -n '"react"\|"react-dom"\|biome' package.json; grep -rn "\.current = " src --include=*.ts --include=*.tsx; grep -n "section\b\|section =" src/features/professionals/useProfessionals.ts | head -20
+
+[tool Bash] grep -rn "current = " src; grep -rn "section" src/features/professionals/useProfessionals.ts | head -20
+
+I'm reading the weekly hours code to scope `hours-save`. So far it looks like the second half of `booking-submit`.
+
+[tool Bash] grep -rn "HoursSection\|saving:\|saved:\|refused:" src | grep -v weeklyHours/useWeeklyHours.ts
+
+[tool Read] src/features/professionals/useProfessionals.ts
+
+`hours-save` is not in docs/06 yet, but docs/01 already describes it: `saveStarted` (weeklyHours) "still returns a whole state, until its own delivery." It's the second half of `booking-submit`. `saveStarted` should return `{ update, send }` and the hook should publish `update`, so a keystroke typed between the click and the check survives. The hook already saves `state.periods` from the render the person acted on, so that part is fine. The owner sees no change.
+
+I'll add the line to Milestone 1.1, after `booking-submit` and before `m1.1-review`, and extend that milestone's paragraph so the review checks it.
+
+Before I write the page, two things aren't settled by any document:
+
+**1. Should the shared `{ update, send }` type be declared in this delivery?**
+My recommendation is yes: add `Started<S> = { update: (current: S) => S; send: boolean }` in `src/lib/started.ts` and use it in both `submitStarted` and `saveStarted`. AGENTS.md says to abstract on the second concrete occurrence, and this is the second (`submitStarted` was the first). The `booking-submit` page planned it for "a delivery after that". That was a plan, though, not a rule. Putting it here saves a queue line that would only move one type. The alternative is to keep two local shapes now and queue a separate line for the type.
+
+**2. Should this delivery also remove `sectionRef.current = section` in `useWeeklyHours.ts`?**
+My recommendation is yes. It's now the only ref in `src/` written during render, which is the same kind of problem `booking-submit` removed from `useBooking` (its Done-when said "assigns nothing to a ref during render"). The fix would update the ref in an effect instead: behaviour stays the same, and it doesn't depend on `useProfessionals` keeping `section` memoized. The alternative is to leave it out of scope and let `m1.1-review` find it.
+
+Which do you choose for each?

@@ -1,0 +1,32 @@
+[tool Read] src/features/weeklyHours/weeklyHoursEvents.test.ts
+
+Your message answers both questions: no shared type in this delivery, and the section's reports stay as they are. I'll write the page and the queue line now.
+
+[tool Write] work/hours-save.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+I wrote the page at `work/hours-save.md` and changed nothing else except docs/06. No code, test or migration was touched. Git is trunk, so no branch was needed.
+
+**The shape I followed:** the one `booking-submit` gave `submitStarted`. `saveStarted(state)` returns `{ update, send }`:
+- It checks the state `save` read (the render the person acted on). That check decides `send` and which period is refused.
+- `update` writes only `unreachable: false` and the `refusal` onto the current state. Every other field stays, so a time typed just before "Save hours" survives.
+- `save` still sends that same state's periods.
+- The return type is written inline, with no shared type. `forward`, the section's reports and `WeeklyHoursAnswer` stay as they are.
+
+**Queue:** I added `[>] hours-save` to milestone 1.1, after `booking-submit` and before `m1.1-review`. The milestone paragraph now names `useWeeklyHours`' save too, so `m1.1-review` will check it.
+
+**Choices I made on my own:**
+- **`sectionRef.current = section` is out of scope.** It's the last ref in `src/` written during render. I left it out because you asked to leave the section's reports alone; `m1.1-review` can raise it. Tell me if you'd rather have it in this delivery.
+- **The refusal's `key` comes from the checked state.** If that period is removed between the click and the check, the message has nowhere to show. That's the same as today.
+- **Two existing tests change what they read, not what they assert:** "clears the old refusal when it sends" and the before-the-load case now read `update(...)`.
+
+Please read the page and question it:
+- Is each Behaviour line checkable?
+- Is the Contract exact?
+- Does Out of scope name anything you assumed was in?
+- Do you agree with the choices above?
+
+Ask for every correction here. When the page is right, open a fresh session and type `/apply hours-save`.

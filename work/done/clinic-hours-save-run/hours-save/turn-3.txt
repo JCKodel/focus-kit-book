@@ -1,0 +1,129 @@
+[tool Bash] cat work/hours-save.md && git diff docs/06-Queue.md && ls docs docs/adr work work/done src src/features
+
+[tool Bash] cat docs/05-Process.md docs/04-Conventions.md && cat work/done/booking-submit.md
+
+[tool Bash] cat docs/01-Architecture.md && cat src/features/weeklyHours/weeklyHoursEvents.ts src/features/weeklyHours/weeklyHoursEvents.test.ts src/features/weeklyHours/useWeeklyHours.ts src/features/appointments/bookingEvents.ts
+
+[tool Bash] python3 - <<'EOF'
+p='src/features/weeklyHours/weeklyHoursEvents.ts'
+s=open(p).read()
+old=s[s.index('// The rule is checked here only'):s.index('export async function save(')]
+new='''// The rule is checked here only to place the message beside the refused
+// period; the server checks it again. The check reads `state`, the one the
+// person acted on; `update` puts its answer on the current state, so what
+// was typed meanwhile survives.
+export function saveStarted(state: WeeklyHoursState): {
+	update: (current: WeeklyHoursState) => WeeklyHoursState;
+	send: boolean;
+} {
+	const { slotMinutes, periods: drafts } = state;
+	if (slotMinutes === undefined) {
+		return { update: (current) => current, send: false };
+	}
+	const checked = setWeeklyHours(withoutKeys(drafts), slotMinutes);
+	if (!checked.ok) {
+		const { code, index } = checked.error;
+		const refusal = { code, key: drafts[index].key };
+		return {
+			update: (current) => ({ ...current, unreachable: false, refusal }),
+			send: false,
+		};
+	}
+	return {
+		update: (current) => ({
+			...current,
+			unreachable: false,
+			refusal: undefined,
+		}),
+		send: true,
+	};
+}
+
+// `drafts` are the periods of the state given to `saveStarted`.
+'''
+s=s.replace(old,new)
+open(p,'w').write(s)
+
+p='src/features/weeklyHours/useWeeklyHours.ts'
+s=open(p).read()
+s=s.replace("setState(started.state);","setState(started.update);")
+open(p,'w').write(s)
+EOF
+
+[tool Read] src/features/weeklyHours/weeklyHoursEvents.ts
+
+[tool Read] src/features/weeklyHours/useWeeklyHours.ts
+
+[tool Read] src/features/weeklyHours/weeklyHoursEvents.test.ts
+
+[tool Edit] src/features/weeklyHours/weeklyHoursEvents.ts
+
+[tool Edit] src/features/weeklyHours/useWeeklyHours.ts
+
+[tool Read] src/features/weeklyHours/weeklyHoursEvents.ts
+
+Updating `saveStarted`'s signature and comment next, then the tests.
+
+[tool Edit] src/features/weeklyHours/weeklyHoursEvents.ts
+
+[tool Read] src/features/weeklyHours/weeklyHoursEvents.test.ts
+
+[tool Edit] src/features/weeklyHours/weeklyHoursEvents.test.ts
+
+Now docs/01, then verify.
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Bash] npm run verify 2>&1 | tail -40
+
+[tool Bash] npm run verify 2>&1 | grep -E "Test Files|Tests |error|Checked" ; git status --short
+
+[tool Read] work/hours-save.md
+
+[tool Bash] mv work/hours-save.md work/done/hours-save.md && git diff --stat && grep -n "hours-save" docs/06-Queue.md
+
+[tool Read] work/done/hours-save.md
+
+[tool Read] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] work/done/hours-save.md
+
+[tool Bash] tail -3 work/done/hours-save.md
+
+Verify is green. Next I'm adding the "What happened" section to the page, then staging.
+
+[tool Edit] work/done/hours-save.md
+
+[tool Bash] grep -c "—" work/done/hours-save.md docs/01-Architecture.md src/features/weeklyHours/weeklyHoursEvents.ts; git add -A && git status --short
+
+`hours-save` is built, `npm run verify` passes, and everything is staged. Nothing is committed.
+
+**What changed**
+- `saveStarted` now returns `{ update, send }`, the same shape as `submitStarted`. It checks the week the owner clicked "Save hours" on, and `update` writes only `refusal` and `unreachable` onto the current state. A time typed, or a period added or removed, just before saving is no longer lost.
+- In `useWeeklyHours`, `save` now calls `setState(started.update)`. The rest of the hook is unchanged.
+- **Tests:** I added the two new cases the page asks for, and the before-load case now checks with `toBe`. Nothing the tests assert has changed.
+- **docs/01:** it now names `submitStarted` as the first occurrence of `{ update, send }` and `saveStarted` as the second.
+- **Page and queue:** the page is in `work/done/` with its "What happened" section, and docs/06 shows `[x] hours-save`.
+
+**Where I departed from the page:** it counts two changed test cases, but "marks the first refused period and sends nothing" also read `.state`, so three changed. That case checks that only the first of two refused periods is marked, which the new cases don't cover. I kept it and only changed how it reads the result; it's recorded on the page.
+
+**Proof:** all 326 Vitest tests and 144 Playwright tests pass, the build succeeds, and no `*.e2e.ts`, `*View.tsx`, `*.server.ts`, `package.json` or `useProfessionals.ts` file is in the diff. The Playwright tests already cover the three manual-check scenarios and pass unchanged. The manual check itself is still unticked for you to run.
+
+**One blocked command:** a script to edit the files was denied because this session can't show permission prompts. I made the same changes with the file editor instead, so nothing is missing.
+
+Suggested commit message:
+
+```
+Publish useWeeklyHours' in-flight save as an update (weeklyHours)
+
+- saveStarted answers { update, send }, as submitStarted does
+- A time typed or a period changed just before Save hours survives
+- Two new saveStarted tests; existing ones read update(state)
+- docs/01 names saveStarted as the second occurrence of the shape
+
+See work/done/hours-save.md
+```
+
+**Environments:** local has the staged code and nothing needs migrating; start it with `npm run dev` for the manual check. Production doesn't exist yet (the `deploy` delivery creates it), and you do any publishing.
