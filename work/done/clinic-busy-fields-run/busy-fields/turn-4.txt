@@ -1,0 +1,36 @@
+[tool Bash] git add -A
+
+[tool Bash] git status --short
+
+Everything is staged now. `git status --short` lists these 11 files and nothing else:
+
+```
+M  docs/06-Queue.md
+M  src/features/appointments/BookingView.e2e.ts
+M  src/features/appointments/BookingView.tsx
+M  src/features/appointments/bookingEvents.test.ts
+M  src/features/weeklyHours/WeeklyHoursView.e2e.ts
+M  src/features/weeklyHours/WeeklyHoursView.tsx
+M  src/features/weeklyHours/weeklyHoursEvents.test.ts
+A  work/done/busy-fields-booking-in-flight-390x844.png
+A  work/done/busy-fields-hours-in-flight-1280x800.png
+A  work/done/busy-fields-hours-in-flight-390x844.png
+A  work/done/busy-fields.md
+```
+
+Suggested commit message:
+
+```
+Disable the busy fields of the hours editor and booking form (busy-fields)
+
+- From and To in WeeklyHoursView take disabled={busy}, as its buttons do
+- Name and phone in BookingView take disabled={busy}, as Book and Back do
+- Two Playwright and two Vitest tests renamed to what they now check
+- In-flight screenshots at 390x844 and 1280x800
+
+work/done/busy-fields.md
+```
+
+One "Done when" item is still yours: the manual check with `npm run dev` and "Slow 3G". Tick its box in `work/done/busy-fields.md` before you commit. If you tick it after staging, run `git add -A` again.
+
+**Environments:** local runs this staged, uncommitted tree; start it with `npm run dev`. Production doesn't exist yet: the `deploy` delivery creates it, and you publish.

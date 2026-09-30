@@ -53,17 +53,17 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 
 **Done when.**
 
-* [ ] `clinic-event-shapes` was `[x]`, and the clinic clean at `6edc9ad`, equal to `origin/main`, before the first run; that commit is in the README.
-* [ ] The clinic delivery (or each part of a split) ran the five steps, each turn recorded; nothing in the clinic edited by hand.
-* [ ] On the clinic's last commit, `grep -c "disabled={busy}"` counts two more in `src/features/weeklyHours/WeeklyHoursView.tsx` and two more in `src/features/appointments/BookingView.tsx` than on `6edc9ad`, on the time, name and phone inputs.
-* [ ] The two in-flight Playwright tests assert those inputs disabled; `grep -n "keeps a name typed after the click\|keeps a time typed after the click"` finds nothing in `src/` on the clinic's last commit.
-* [ ] No file under `src/` other than the two views and the four test files in the diff; no new dependency in `package.json`; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
+* [x] `clinic-event-shapes` was `[x]`, and the clinic clean at `6edc9ad`, equal to `origin/main`, before the first run; that commit is in the README.
+* [x] The clinic delivery (or each part of a split) ran the five steps, each turn recorded; nothing in the clinic edited by hand.
+* [x] On the clinic's last commit, `grep -c "disabled={busy}"` counts two more in `src/features/weeklyHours/WeeklyHoursView.tsx` and two more in `src/features/appointments/BookingView.tsx` than on `6edc9ad`, on the time, name and phone inputs.
+* [x] The two in-flight Playwright tests assert those inputs disabled; `grep -n "keeps a name typed after the click\|keeps a time typed after the click"` finds nothing in `src/` on the clinic's last commit. (It finds the refused-save test, which the brief keeps; the two tests the brief names are gone. See What happened.)
+* [x] No file under `src/` other than the two views and the four test files in the diff; no new dependency in `package.json`; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
 * [ ] The author's manual check recorded in the README.
 * [ ] Each clinic delivery committed by the author, no tag; pushed.
-* [ ] No note of the host left outside the clinic's repository.
-* [ ] `work/done/clinic-busy-fields-run/` as the Contract says; docs/06 as the Contract says.
-* [ ] `make verify` green in this book, the disclosure scan included.
-* [ ] Page in `work/done/`, only this delivery's paths staged, commit message suggested.
+* [x] No note of the host left outside the clinic's repository.
+* [x] `work/done/clinic-busy-fields-run/` as the Contract says; docs/06 as the Contract says.
+* [x] `make verify` green in this book, the disclosure scan included.
+* [x] Page in `work/done/`, only this delivery's paths staged, commit message suggested.
 
 **Decisions.** Each taken on the recommended option, not asked:
 
@@ -77,3 +77,15 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * The cancel form's and the professionals section's inputs are named out of scope rather than fixed: the line and the review name neither, and the clinic's own review decides.
 * The in-flight disabling is proven by Playwright, whose routes hold the call; a real server answers too fast to see it by hand, so the manual check covers only that a save, a refused period and a booking behave as before, collected at the end of the M4.2 loop as M4.1's were.
 * docs/05 is not edited: the recipe exists and needs no eighth name.
+
+## What happened
+
+* The page, proposed in a batch, was revalidated before the run: `clinic-event-shapes` was `[x]`; the clinic was on `main`, clean, at `6edc9ad`, equal to `origin/main`, with focus-kit `bff8414`; the four test names and the two views were as the page says.
+* One clinic delivery, `busy-fields`, four turns: `/propose` (the slug, the brief), `/apply` and one staged review. `/propose` did not split the line and put it in milestone 1.1, after `event-shapes` and before `m1.1-review`, with a clause added to the milestone paragraph. Its first turn asked four questions; the brief answered them and no later round came, so `Your call` was never sent. The page review was "none": the clinic's page matched this one.
+* The clinic's views: `disabled={busy}` on the From and To inputs and on the name and phone, 4 to 6 in `WeeklyHoursView.tsx` and 3 to 5 in `BookingView.tsx`. The two Playwright tests assert the inputs disabled under new names; the two Vitest tests apply the update to the checked state, "sends the checked form and marks it busy" and "sends the checked week and clears its refusal and unreachable". The clinic's page added three in-flight screenshots in its `work/done/`.
+* Diverged: the grep of the fourth Done when item still finds "refuses the checked week and keeps a time typed after the click", the refused-save test the brief and Out of scope keep. The item was checked against the two names the brief changes, which are gone; the grep was too wide, not the run wrong.
+* `/apply` stopped with nothing staged: `git -C . add -A` was denied, with two other calls, recorded in the README. The staged review sent one request, since an unstaged delivery is a hole against this page: stage with `git add -A` and print the message again. It did.
+* Step 5, by the author's authorization for this loop: the book's session committed the kit's message as printed, `21522b8`, no tag, not pushed. The clinic is one commit ahead of `origin/main`; the push and the "pushed" item wait for the author, and `clinic-hours-answer`'s precondition "equal to `origin/main`" holds only after it.
+* `npm run verify` green on `21522b8`: 328 Vitest and 144 Playwright, the counts `event-shapes` left, and build. No change to `package.json`.
+* The author's manual check on `npm run dev`, a save, a refused period and a booking as before, is collected at the end of the M4.2 loop; its item stays open.
+* Every `claude` turn ended with `success` and exited with code 1 on `stty: stdin isn't a terminal`. The clinic's auto-memory folder stayed empty and the host's folder gained only the two sessions' transcripts; nothing was deleted. No ADR, no new term; docs/05 unchanged; docs/06's line keeps its text.

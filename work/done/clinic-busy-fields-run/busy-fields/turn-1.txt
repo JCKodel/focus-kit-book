@@ -1,0 +1,55 @@
+[tool Bash] ls docs work 2>/dev/null; cat docs/05*.md docs/06*.md; ls work 2>/dev/null && cat work/*.md 2>/dev/null | head -300
+
+[tool Bash] grep -rn -i "busy" docs work src AGENTS.md 2>/dev/null | grep -v node_modules | head -60; ls work/done
+
+[tool Bash] ls -R src/features; grep -rn -E "<(input|select|textarea)" src | head -40; sed -n 130,175p work/done/professionals.md; sed -n 150,165p work/done/weekly-hours.md; sed -n 155,175p work/done/cancel-appointment.md; grep -n -i -A3 "busy\|disabled" work/done/book-appointment.md | head -40
+
+[tool Bash] cat docs/00-Product.md; cat docs/01-Architecture.md; cat work/done/hours-save.md
+
+[tool Bash] grep -rn -i "field\|disabled\|busy" work/done/booking-submit.md work/done/orchestrator-tests.md work/done/hours-report.md work/done/update-type.md work/done/event-shapes.md | grep -i -E "field|disabl" ; for f in src/features/*/*View.tsx; do echo "== $f"; grep -n -E "disabled|<input|<select|busy|onChange" $f; done
+
+[tool Read] src/features/professionals/ProfessionalsView.tsx
+
+[tool Read] src/features/weeklyHours/WeeklyHoursView.tsx
+
+[tool Read] src/features/appointments/BookingView.tsx
+
+[tool Read] src/features/appointments/CancelView.tsx
+
+[tool Read] src/features/signIn/OwnerView.tsx
+
+[tool Bash] grep -rn -B2 -A2 "toBeDisabled\|toBeEnabled" src --include=*.e2e.ts | head -80
+
+[tool Bash] grep -rn -B3 -A3 "toBeDisabled" src/features | head -90
+
+I have enough to see the shape of this; before I write anything I need you to confirm what it means, because `busy-fields` isn't in docs/06 and no document defines it.
+
+**What I see.** Every form in the app disables its **buttons** while a request is in flight, but none disables its **fields**. That covers 10 inputs in 5 views:
+
+| View | Fields that stay editable while busy |
+|---|---|
+| Booking form (client) | Name, Phone |
+| Cancel with a booking code (client) | Phone, Booking code |
+| Owner sign-in | Email, Password |
+| Professionals | Name (add), New name (rename) |
+| Weekly hours | every From and To |
+
+`hours-save` listed "Disabling the From and To fields while saving" as out of scope, so I read `busy-fields` as picking that up for the whole app.
+
+The gap is real in the owner screens. A time typed while "Save hours" is in flight is silently lost when the save succeeds and the row closes. The same happens to a name typed during an add or a rename. In the client screens it's milder: what gets booked or cancelled is what was on screen at the tap, not what was typed afterwards. `booking-submit` and `hours-save` made sure a later edit survives a refusal. Disabling the fields means there is no later edit to lose.
+
+The build would be small: `disabled={busy}` on each field, plus one field assertion added to each view's existing "disables … while in flight" Playwright test. No contract change, no event or hook change.
+
+**Questions (my recommendation first in each):**
+
+1. **Scope.** Should every field be disabled whenever the buttons next to it are, in all five views? In the professionals section that means every field of the section, including the hours editor inside it, just as busy already disables every button there. Or did you mean something else by `busy-fields`?
+2. **`disabled` or `readOnly`.** I recommend `disabled`:
+   - it's the same attribute the buttons already use, so the rule reads the same everywhere;
+   - it greys the field out, so the person sees it's locked;
+   - the existing tests can check it with `toBeDisabled`.
+
+   The cost: on a phone, sending with the keyboard's Enter closes the keyboard, and after a refusal the person taps the field again. `readOnly` keeps focus and the keyboard but gives no visual cue.
+3. **Where it goes in the queue.** I'd add it to Milestone 1.1, after `event-shapes` and before `m1.1-review`, and add a clause to the milestone paragraph so the review checks it. The paragraph gains a clause like "and no field can be edited while a request it belongs to is in flight". The alternative is Milestone 2, but this is cleanup of milestone 1 screens, not "the owner runs the day".
+4. **Docs.** Shape 2 in docs/01 says the update exists "so what was typed meanwhile survives". I'd leave the events untouched, since the update still guards against edits between render and publish. Should the page also change that sentence to say fields are locked while busy? My recommendation is to leave the sentence as it is and record the new rule under States in each view's section of the page instead.
+
+Once you answer, I'll write `work/busy-fields.md`, add the queue line marked `[>]`, and tell you it's ready to read.

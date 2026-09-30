@@ -1,0 +1,48 @@
+[tool Bash] grep -rn -i "disabl" docs AGENTS.md; grep -n "sends the checked\|keeps a name typed in flight\|refuses the checked week\|disables every button of the editor\|disables Book and Back" src/features/appointments/bookingEvents.test.ts src/features/weeklyHours/weeklyHoursEvents.test.ts src/features/weeklyHours/WeeklyHoursView.e2e.ts src/features/appointments/BookingView.e2e.ts
+
+[tool Read] src/features/appointments/bookingEvents.test.ts
+
+[tool Read] src/features/weeklyHours/weeklyHoursEvents.test.ts
+
+[tool Read] src/features/weeklyHours/WeeklyHoursView.e2e.ts
+
+[tool Read] src/features/appointments/BookingView.e2e.ts
+
+[tool Bash] grep -n -A28 "export function submitStarted" src/features/appointments/bookingEvents.ts; grep -n -A25 "export function saveStarted" src/features/weeklyHours/weeklyHoursEvents.ts; grep -n -B2 -A12 "const onForm" src/features/appointments/bookingEvents.test.ts; grep -n -B2 -A10 "const loaded" src/features/weeklyHours/weeklyHoursEvents.test.ts; grep -n "mondayMorning =" -A3 src/features/weeklyHours/WeeklyHoursView.e2e.ts
+
+[tool Write] work/busy-fields.md
+
+[tool Edit] work/busy-fields.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+The page is written at `work/busy-fields.md`. In docs/06, `[>] busy-fields` now sits in milestone 1.1, after `event-shapes` and before `m1.1-review`. docs/05 says trunk, so everything is on `main`, unstaged. No code, test or config was touched.
+
+**Your documents question.** No living document (docs/00 to 06, AGENTS.md) says which controls a view disables while busy. Those lists exist only in finished pages: the States of `work/done/weekly-hours.md` and `work/done/book-appointment.md`, which record what was built then. I left them alone and put that under Out of scope. The only nearby sentences in docs/01 still hold:
+- Shape 7: "so a button disables in the same render".
+- Shape 2: "so what was typed meanwhile survives".
+
+So no document changes except docs/06.
+
+**Choices I made on my own, check them first:**
+1. **Milestone paragraph.** The milestone 1.1 paragraph in docs/06 gains a clause for this line, so `m1.1-review` checks it (as `hours-save` did). You only asked for the queue line.
+2. **Screenshots.** Three screenshots of the in-flight state, because docs/05 asks for proof of a changed screen:
+   - the booking form at 390×844;
+   - the hours editor at 390×844 and 1280×800.
+3. **Test names:**
+   - "disables every button and time input of the editor while a save is in flight"
+   - "disables Book, Back, name and phone while a booking is in flight"
+   - "sends the checked form and marks it busy"
+   - "sends the checked week and clears its refusal and unreachable"
+4. **Exact assertions for the two Vitest tests:** each applies the update to the checked state and compares the whole result with `toEqual`. The page spells out the expected values.
+5. **Manual check.** It uses devtools network throttling, because a stopped server fails at once and the call is never in flight.
+
+Please read the page and question it:
+- Can each Behaviour line be checked?
+- Is the Contract exact? It lists only the two views' `disabled={busy}`, with no event, hook or route change.
+- Does Out of scope name anything you assumed was in?
+- Do you agree with the choices above?
+
+Ask for every correction here. When the page is right, open a fresh session and type `/apply busy-fields`.

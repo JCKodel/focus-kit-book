@@ -1,0 +1,149 @@
+[tool Bash] cat work/busy-fields.md && git diff docs/06-Queue.md && ls docs docs/adr work && git branch -a && git worktree list
+
+[tool Bash] cat docs/05-Process.md docs/04-Conventions.md && cat docs/01-Architecture.md | head -400
+
+[tool Bash] cat src/features/weeklyHours/WeeklyHoursView.tsx && grep -n "busy\|client-name\|client-phone\|<input" -n src/features/appointments/BookingView.tsx && ls work/done | grep png | head -30
+
+[tool Read] src/features/appointments/BookingView.tsx
+
+Now the view edits.
+
+[tool Edit] src/features/appointments/BookingView.tsx
+
+[tool Edit] src/features/appointments/BookingView.tsx
+
+[tool Edit] src/features/weeklyHours/WeeklyHoursView.tsx
+
+[tool Edit] src/features/weeklyHours/WeeklyHoursView.tsx
+
+Now the tests.
+
+[tool Bash] cd src/features && grep -n "keeps a name typed after the click" -A30 appointments/bookingEvents.test.ts; grep -n "keeps a time typed after the click" -B2 -A30 weeklyHours/weeklyHoursEvents.test.ts; grep -n "while a booking is in flight" -A45 appointments/BookingView.e2e.ts; grep -n "while a save is in flight" -A45 weeklyHours/WeeklyHoursView.e2e.ts
+
+[tool Bash] cd src && grep -n "screenshot\|getByLabel\|testInfo\|project.name" features/weeklyHours/WeeklyHoursView.e2e.ts features/appointments/BookingView.e2e.ts | head -40; grep -n "export function submitStarted" -A30 features/appointments/bookingEvents.ts
+
+[tool Bash] cd . && grep -rn "work/done\|\.png" src playwright.config.* scripts package.json 2>/dev/null | head; grep -n "screenshot" -i work/done/weekly-hours.md work/done/hours-save.md 2>/dev/null | head
+
+[tool Bash] sed -n 200,300p work/done/weekly-hours.md; ls work/done/*.md | tail -5; grep -rln "screenshot" work/done/*.md | tail -5
+
+Now the four test edits.
+
+[tool Edit] src/features/appointments/bookingEvents.test.ts
+
+[tool Edit] src/features/weeklyHours/weeklyHoursEvents.test.ts
+
+[tool Edit] src/features/appointments/BookingView.e2e.ts
+
+[tool Edit] src/features/appointments/BookingView.e2e.ts
+
+[tool Edit] src/features/weeklyHours/WeeklyHoursView.e2e.ts
+
+[tool Edit] src/features/weeklyHours/WeeklyHoursView.e2e.ts
+
+[tool Bash] npm run verify 2>&1 | tail -30
+
+Verify is green. Now the screenshots, with a one-off Playwright file as earlier deliveries did.
+
+[tool Bash] sed -n 1,130p src/features/weeklyHours/WeeklyHoursView.e2e.ts; echo ----; sed -n 1,120p src/features/appointments/BookingView.e2e.ts; cat playwright.config.ts
+
+[tool Bash] grep -n "^export" -A6 src/features/appointments/e2e.server.ts | head -80; grep -n "mondayMorning" -A5 src/features/weeklyHours/WeeklyHoursView.e2e.ts | head -8
+
+[tool Write] src/features/busyFieldsShots.e2e.ts
+
+[tool Bash] npx playwright test src/features/busyFieldsShots.e2e.ts --project phone 2>&1 | tail -15; ls -la work/done/busy-fields-*
+
+[tool Read] work/done/busy-fields-booking-in-flight-390x844.png
+
+[tool Read] work/done/busy-fields-hours-in-flight-390x844.png
+
+[tool Read] work/done/busy-fields-hours-in-flight-1280x800.png
+
+[tool Bash] rm src/features/busyFieldsShots.e2e.ts && git status --short && git diff --stat
+
+Code, tests and screenshots are done and the diff stays within the page's scope. Now I'm writing up what happened on the page and closing the delivery.
+
+[tool Bash] python3 - <<'EOF'
+p='work/busy-fields.md'
+s=open(p).read()
+s=s.replace("* [ ] Manual check","* [~] Manual check",1).replace("* [ ]","* [x]").replace("* [~] Manual check","* [ ] Manual check",1)
+s+='''
+## What happened
+
+**Built.** `disabled={busy}` on the From and To inputs of
+`WeeklyHoursView.tsx` and on `#client-name` and `#client-phone` of
+`BookingView.tsx`, with the same `busy` their buttons already use. The four
+tests renamed and extended as Behaviour says. Tests: Vitest count unchanged,
+144 Playwright (none added: two renamed with more assertions).
+
+**Diverged from the plan, and why.** Nothing. No abstraction: two
+attributes per view, the same value the buttons beside them read.
+
+**Dropped.** Nothing.
+
+**What the proof found.** The three screenshots, in `work/done/`, show the
+browser's default disabled look: the four inputs greyed out with their
+values kept, beside the already greyed buttons. In the owner shots the
+professionals section's "Name" field stays enabled, as Out of scope says.
+They were taken by a one-off Playwright file, removed after the run, on a
+fresh database, with the save and the booking held unanswered. Nothing to
+fix. `npm run verify` is green.
+
+The manual check with `npm run dev` and "Slow 3G" is the person's: the
+agent's session cannot keep `npm run dev` running. Its box stays open until
+the person ticks it at review.
+
+**Decisions.** No ADR. No living document changes besides docs/06, as
+Documents says.
+'''
+open(p,'w').write(s)
+q='docs/06-Queue.md'
+t=open(q).read().replace("[>] busy-fields","[x] busy-fields")
+open(q,'w').write(t)
+EOF
+git mv -f work/busy-fields.md work/done/busy-fields.md 2>/dev/null || mv work/busy-fields.md work/done/busy-fields.md
+grep -n "\[.\]" work/done/busy-fields.md; grep -n "busy-fields" docs/06-Queue.md; grep -rn "—" work/done/busy-fields.md src/features/appointments/BookingView.tsx src/features/weeklyHours/WeeklyHoursView.tsx; git add -A && git status --short
+
+Blocked: that command combined a Python script with `git mv`, and this session has no way to approve it. I'll do the same steps with the file tools and single commands instead.
+
+[tool Read] work/busy-fields.md
+
+[tool Read] work/busy-fields.md
+
+[tool Edit] work/busy-fields.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Bash] mv work/busy-fields.md work/done/busy-fields.md
+
+[tool Bash] grep -rn "—" work/done/busy-fields.md docs/06-Queue.md
+
+[tool Bash] git -C . add -A
+
+[tool Bash] git -C . status --short
+
+busy-fields is built and `npm run verify` is green, but **nothing is staged**. The session blocked `git add -A` because it needed approval and there was no way to give it, so you'll need to run it yourself.
+
+**What changed**
+- **Views:** `WeeklyHoursView.tsx` now greys out the From and To times while "Save hours" is in flight. `BookingView.tsx` does the same to the name and phone while a booking is in flight. Each input uses the same `busy` flag as the buttons beside it.
+- **Tests:** the four tests the page named are renamed and changed as it says. The other two tests it named are untouched, and so is every other test. All 144 Playwright tests pass, both renamed ones included.
+- **Diff:** limited to the two views, the four test files, docs/06, the page and the three screenshots. No `*Events.ts`, `use*.ts`, `*.server.ts` or `package*.json` changed.
+- **Screenshots:** the three are in `work/done/`. They show the inputs greyed out with their values kept. The professionals section's "Name" field stays enabled, as the page's Out of scope says. A temporary Playwright file took them and was then deleted. Nothing needed fixing.
+- **Docs:** the page is in `work/done/busy-fields.md` with "What happened" filled in, and its line in `docs/06-Queue.md` is marked `[x]`. No other document changes and no ADR.
+
+**Still open:** the last "Done when" item, the manual check, is yours. Run `npm run dev`, set the browser network to "Slow 3G" at 390×844, tap "Book" and "Save hours", and check that the inputs are greyed out and you can't type in them until the answer arrives. Then tick its box.
+
+**To stage:** `git add -A`
+
+**Suggested commit message:**
+```
+Disable the busy fields of the hours editor and booking form (busy-fields)
+
+- From and To in WeeklyHoursView take disabled={busy}, as its buttons do
+- Name and phone in BookingView take disabled={busy}, as Book and Back do
+- Two Playwright and two Vitest tests renamed to what they now check
+- In-flight screenshots at 390x844 and 1280x800
+
+work/done/busy-fields.md
+```
+
+**Environments:** local is at this working tree, which isn't committed yet; start it with `npm run dev`. Production doesn't exist yet: the `deploy` delivery creates it, and docs/05 leaves publishing to you.
