@@ -1,0 +1,95 @@
+[tool Bash] cat work/hours-answer.md && git diff docs/06-Queue.md && ls docs docs/adr work work/done | head -80
+
+[tool Bash] cat docs/05-Process.md && sed -n 1,80p src/features/weeklyHours/weeklyHoursEvents.ts && sed -n 135,175p docs/01-Architecture.md && cat work/done/busy-fields.md | tail -60
+
+[tool Edit] src/features/weeklyHours/weeklyHoursEvents.ts
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Bash] npm run verify 2>&1 | grep -Ei "tests? |passed|failed|error|✓ built|built in" | tail -25; echo "exit ${pipestatus[1]}"
+
+[tool Bash] npm run verify 2>&1 | tail -40
+
+Verify is green (144 Playwright tests pass, the build runs). Next I'm checking the Vitest count and the diff, then I'll close out the page.
+
+[tool Bash] npx vitest run 2>&1 | grep -E "Test Files|Tests " ; grep -rn "What the editor reports" src; git diff --stat -- src docs/01-Architecture.md
+
+[tool Bash] sed -i '' 's/^\* \[ \]/* [x]/' work/hours-answer.md && cat >> work/hours-answer.md <<'EOF'
+
+## What happened
+
+**Built.** In `weeklyHoursEvents.ts`, `WeeklyHoursAnswerReport` declared
+above `WeeklyHoursReport` with its own comment, `WeeklyHoursReport` now
+`"saving" | WeeklyHoursAnswerReport` with its comment kept word for word,
+and `WeeklyHoursAnswer`'s `report` typed `WeeklyHoursAnswerReport`. No
+function body, hook, view or test changed. docs/01's shape 6 reads as the
+Contract says; shape 7 is untouched.
+
+**Diverged from the plan, and why.** Nothing. No abstraction: one type
+split in two, and the first and only occurrence is still `load` and
+`save`.
+
+**Dropped.** Nothing.
+
+**What the proof found.** No screen changes, so no screenshot. `npm run
+verify` is green: typecheck accepts `load` and `save` against the narrower
+type, and 328 Vitest and 144 Playwright tests pass, the same numbers as
+`busy-fields`. `grep -rn "What the editor reports" src` finds one line.
+
+**Decisions.** No ADR. Nothing enters docs/03, as the page says. Living
+documents changed: docs/01 (shape 6) and docs/06.
+EOF
+sed -i '' 's/^\[>\] hours-answer /[x] hours-answer /' docs/06-Queue.md
+git mv -f work/hours-answer.md work/done/hours-answer.md 2>/dev/null || mv work/hours-answer.md work/done/hours-answer.md
+grep -n "—" work/done/hours-answer.md docs/01-Architecture.md docs/06-Queue.md src/features/weeklyHours/weeklyHoursEvents.ts; grep -n "hours-answer\|busy-fields  \|m1.1-review " docs/06-Queue.md
+
+I'll do those steps with the file tools instead of the shell.
+
+[tool Read] docs/06-Queue.md
+
+[tool Read] work/hours-answer.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Read] work/hours-answer.md
+
+[tool Edit] work/hours-answer.md
+
+[tool Edit] work/hours-answer.md
+
+[tool Edit] work/hours-answer.md
+
+[tool Bash] mv work/hours-answer.md work/done/hours-answer.md
+
+[tool Bash] git add -A && git status --short && git diff --cached | grep -c "—"
+
+The `hours-answer` delivery is built and staged, and `npm run verify` passes: 328 Vitest tests and 144 Playwright tests, the same numbers as `busy-fields`. Nothing is committed.
+
+- **Code:** only `src/features/weeklyHours/weeklyHoursEvents.ts` changed. It now declares a `WeeklyHoursAnswerReport` type without `"saving"` and builds `WeeklyHoursReport` from it. `WeeklyHoursAnswer`'s `report` uses the new type, so the compiler now rejects a `"saving"` answer from `load` or `save`. No function body, hook, view or test changed.
+- **Docs:** docs/01 shape 6 now reads exactly as the page's Contract says, and shape 7 is unchanged. In docs/06 the `hours-answer` line is `[x]`, and the milestone paragraph gained its clause.
+- **Page:** every "Done when" box is ticked, a "What happened" section is added, and the page is now `work/done/hours-answer.md`. Nothing diverged from the plan and nothing was dropped. There's no ADR, nothing new for docs/03, and no screenshot because no screen changed. The staged diff has no em dash.
+
+Two shell commands needed approval, which this session can't grant, so they were refused:
+- **Verify with an exit-code check:** I reran `npm run verify` without the check and read its output instead.
+- **One script to tick the boxes, move the page and mark the queue:** I did those steps with the file tools and a plain `mv`.
+
+Staged with `git add -A`:
+```
+M  docs/01-Architecture.md
+M  docs/06-Queue.md
+M  src/features/weeklyHours/weeklyHoursEvents.ts
+A  work/done/hours-answer.md
+```
+
+Suggested commit message:
+```
+Leave "saving" out of the weekly hours answer's report type (hours-answer)
+
+- Declare WeeklyHoursAnswerReport; WeeklyHoursReport is it or "saving"
+- WeeklyHoursAnswer's report is WeeklyHoursAnswerReport
+- docs/01 shape 6 names the type and why an answer cannot carry "saving"
+
+See work/done/hours-answer.md
+```
+
+**Environments:** local is at this staged working tree, and nothing behaviour-related changed. Start it with `npm run dev`. There is no production environment yet (the `deploy` delivery will create it), and per docs/05 you do the publishing, not me.

@@ -1,0 +1,36 @@
+[tool Bash] grep -rn "WeeklyHoursReport\|WeeklyHoursAnswer\|SectionRefusal" src docs AGENTS.md
+
+[tool Read] docs/01-Architecture.md
+
+The reading is settled. I'll name the new type `WeeklyHoursAnswerReport` (reason on the page). Writing the page and the queue now, on `main` as docs/05 says.
+
+[tool Write] work/hours-answer.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+I've written the page, `work/hours-answer.md`. In `docs/06-Queue.md` there's a new `[>] hours-answer` line between `busy-fields` and `m1.1-review`, and the milestone 1.1 paragraph has a clause for it. I wrote on `main`, since the project is trunk-based. No code has been touched.
+
+**What the page asks for:**
+- **The new type:** `WeeklyHoursAnswerReport = "saved" | "failed" | SectionRefusal`.
+- **The existing type:** `WeeklyHoursReport` becomes `"saving" | WeeklyHoursAnswerReport`.
+- **The answer:** `WeeklyHoursAnswer`'s `report?` uses the new type.
+- **Unchanged:** the hook, `hoursReported`, `api.ts` and every function body.
+- **docs/01:** shape 6 names the new type. The exact text is on the page.
+
+**Why that name:** it is the report a `WeeklyHoursAnswer` carries, and it keeps the `WeeklyHours` prefix of the types beside it. I rejected `SaveReport`, because `load` returns it too, and `WeeklyHoursOutcome`, because it sounds like the whole result, update included.
+
+**Choices I made on my own, to check first:**
+1. **The name.**
+2. **The new type's comment** says why `"saving"` isn't in it, and shape 6 in docs/01 says so too.
+3. **Shape 7 stays word for word,** because it is still true.
+4. **The milestone paragraph clause.** I suggested it last turn and you didn't object, but you didn't ask for it either.
+5. **A throwaway check in Done when:** `/apply` temporarily changes one line of `save` to answer `"saving"`, confirms `tsc` fails, reverts it, and records the error on the page. Nothing is kept, so there's still no `@ts-expect-error` and no new test. Drop it if you want typecheck passing to be the only check.
+6. **Out of scope** includes narrowing `load`'s answer further (it never returns `"saved"` or `"failed"`) and the stale-answer guards.
+
+The staging step says plain `git add -A`, then `git status --short`, both without `-C`, as you asked.
+
+Please read the page and question it: can each Behaviour line be checked, is the Contract exact, and does Out of scope name anything you assumed was in? Ask for any corrections here. When it's right, open a fresh session and type `/apply hours-answer`.

@@ -25,7 +25,7 @@ claude -p "/propose hours-answer" <common flags>
 followed, in the same session with `--continue`, by this brief, word for word:
 
 ```
-WeeklyHoursAnswer's report is a WeeklyHoursReport, which hours-report widened with "saving", so the types allow load or save to answer "saving", which would leave the professionals section busy for good, since hoursReported sets busy and nothing clears it. The code never does it: load answers only a refusal or nothing, save only "saved", "failed" or a refusal, and "saving" is a report only useWeeklyHours makes, before a save it sends. Make the type say so: WeeklyHoursAnswer's report takes a type without "saving", "saved", "failed" or a SectionRefusal, and WeeklyHoursReport, which HoursSection.report and hoursReported take, is that type or "saving". Name the new type and say why. load and save answer what they answer today, and the hook reports as today. No new test: typecheck is the check; no @ts-expect-error, no module mock, no new dependency. The app behaves exactly as before. Update docs/01's shape 6 to name the answer's report type. Add the line to milestone 1.1, just after busy-fields and before m1.1-review.
+WeeklyHoursAnswer's report is a WeeklyHoursReport, which hours-report widened with "saving", so the types allow load or save to answer "saving", which would leave the professionals section busy for good, since hoursReported sets busy and nothing clears it. The code never does it: load answers only a refusal or nothing, save only "saved", "failed" or a refusal, and "saving" is a report only useWeeklyHours makes, before a save it sends. Make the type say so: WeeklyHoursAnswer's report takes a type without "saving", "saved", "failed" or a SectionRefusal, and WeeklyHoursReport, which HoursSection.report and hoursReported take, is that type or "saving". Name the new type and say why. load and save answer what they answer today, and the hook reports as today. No new test: typecheck is the check; no @ts-expect-error, no module mock, no new dependency. The app behaves exactly as before. Update docs/01's shape 6 to name the answer's report type. Add the line to milestone 1.1, just after busy-fields and before m1.1-review. When /apply stages, use plain git add -A and git status --short, without -C.
 ```
 
 Every later round of questions, the reviews, a split and the commits: as `clinic-hours-save`.
@@ -52,17 +52,17 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 
 **Done when.**
 
-* [ ] `clinic-busy-fields` was `[x]`, and the clinic clean at its last commit, equal to `origin/main`, before the first run; that commit is in the README.
-* [ ] The clinic delivery (or each part of a split) ran the five steps, each turn recorded; nothing in the clinic edited by hand.
-* [ ] On the clinic's last commit, the type of `WeeklyHoursAnswer`'s `report` in `src/features/weeklyHours/weeklyHoursEvents.ts` holds no "saving", and `WeeklyHoursReport` is that type or "saving".
-* [ ] No new test file and no new dependency in `package.json`; no `@ts-expect-error` in the diff.
-* [ ] The existing tests pass without changing what they assert; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
+* [x] `clinic-busy-fields` was `[x]`, and the clinic clean at its last commit, equal to `origin/main`, before the first run; that commit is in the README. (The clinic was at `21522b8`, one commit ahead of `origin/main`, which the author accepted as the precondition; see Decisions.)
+* [x] The clinic delivery (or each part of a split) ran the five steps, each turn recorded; nothing in the clinic edited by hand.
+* [x] On the clinic's last commit, the type of `WeeklyHoursAnswer`'s `report` in `src/features/weeklyHours/weeklyHoursEvents.ts` holds no "saving", and `WeeklyHoursReport` is that type or "saving".
+* [x] No new test file and no new dependency in `package.json`; no `@ts-expect-error` in the diff.
+* [x] The existing tests pass without changing what they assert; `npm run verify` green on the clinic's last commit, saved as `verify.txt`.
 * [ ] The author's manual check recorded in the README.
 * [ ] Each clinic delivery committed by the author, no tag; pushed.
-* [ ] No note of the host left outside the clinic's repository.
-* [ ] `work/done/clinic-hours-answer-run/` as the Contract says; docs/06 as the Contract says.
-* [ ] `make verify` green in this book, the disclosure scan included.
-* [ ] Page in `work/done/`, only this delivery's paths staged, commit message suggested.
+* [x] No note of the host left outside the clinic's repository.
+* [x] `work/done/clinic-hours-answer-run/` as the Contract says; docs/06 as the Contract says.
+* [x] `make verify` green in this book, the disclosure scan included.
+* [x] Page in `work/done/`, only this delivery's paths staged, commit message suggested.
 
 **Decisions.** Each taken on the recommended option, not asked:
 
@@ -75,3 +75,18 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * The clinic's docs/01 changes in shape 6, because the answer's report type it names changes.
 * The manual check is `clinic-hours-save`'s: a save, a refused period and a reload, since the change touches the save's types.
 * docs/05 is not edited: the recipe exists.
+* The start commit is `21522b8`, the local commit `busy-fields` left, committed and not pushed: the author decided for the M4.2 loop that HEAD at `21522b8` with a clean tree satisfies "equal to `origin/main`", and that he pushes both commits at the end.
+* The brief gains one sentence at its end, "When /apply stages, use plain git add -A and git status --short, without -C.", by the author's batch override, since `busy-fields`' `git -C . add -A` was denied; the brief above is the text sent.
+* By the author's batch override, the book's session committed in the clinic with the kit's message as printed, no tag, no push.
+
+## What happened
+
+* The page, proposed in a batch, was revalidated before the run: `clinic-busy-fields` was `[x]`; the clinic was on `main`, clean, at `21522b8`, one ahead of `origin/main` as the author accepted, with focus-kit `bff8414`; `WeeklyHoursReport` was `"saving" | "saved" | "failed" | SectionRefusal` and `WeeklyHoursAnswer`'s `report` took it, as the page says.
+* One clinic delivery, `hours-answer`, four turns: `/propose` (the slug, the brief, one page review) and `/apply`. `/propose` did not split the line and put it in milestone 1.1, after `busy-fields` and before `m1.1-review`, with a clause added to the milestone paragraph. Turn 1 asked which of four loose ends the slug names, guessing this one; the brief answered and no later round came.
+* Page review: one request. The clinic's page had `/apply` write `report: "saving"` in `save`, see `tsc` fail and revert it, a check this page puts out of scope that also edits a function body; the request dropped it, and the agent moved it to Out of scope.
+* The clinic's code: `WeeklyHoursAnswerReport = "saved" | "failed" | SectionRefusal`, named as the report a `WeeklyHoursAnswer` carries; `WeeklyHoursReport` is `"saving" | WeeklyHoursAnswerReport`; `WeeklyHoursAnswer`'s `report` takes the new type. Only `weeklyHoursEvents.ts` changed under `src/`; no function body, test or `package.json`. docs/01's shape 6 names the type and says why an answer cannot carry `saving`.
+* `/apply` staged with plain `git add -A`, as the brief asked, so the staged review was "none". Three calls were denied, none of them the staging; they are in the README.
+* Step 5, by the author's authorization for this loop: the book's session committed the kit's message as printed, `36d7ad9`, no tag, not pushed. The clinic is two commits ahead of `origin/main`; the push and the "pushed" item wait for the author.
+* `npm run verify` green on `36d7ad9`: 328 Vitest and 144 Playwright, the counts `busy-fields` left, and build.
+* The author's manual check on `npm run dev`, a save, a refused period and a reload, is collected at the end of the M4.2 loop; its item stays open.
+* Every `claude` turn ended with `success` and exited with code 1 on `stty: stdin isn't a terminal`. The clinic's auto-memory folder stayed empty and the host's folder gained only the two sessions' transcripts; nothing was deleted. No ADR, no new term; docs/05 unchanged; docs/06's line keeps its text.
