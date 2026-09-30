@@ -244,6 +244,7 @@ Um `Record` sobre `BookingRefusal` tem de nomear todo membro desse tipo, então 
 
 A clínica captura só onde o I/O acontece: `openDatabase` e `query` em `database.server.ts` (`transaction` roda dentro de `query`), o executor de migrations em `migrate.server.ts`, `request` em `src/lib/request.ts` para a rede no cliente, e `remembered.ts` para o armazenamento do celular.
 Cada rota que lê o corpo de uma requisição também captura, já que o corpo chega pela rede: um corpo que não pode ser lido vira na hora a resposta `BadRequest`.
+`openDatabase` e o executor de migrations rodam uma vez, quando o servidor parte, antes de qualquer requisição; o [capítulo 15](15-four-pieces.md#o-que-a-clinica-injeta) diz onde eles ficam entre as peças.
 
 O app em si nunca lança.
 Dois helpers que só os testes rodam lançam: `box` em `e2e.server.ts`, quando um elemento não está na tela, e `memoryDatabase`, em [`src/server/testDatabase.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/server/testDatabase.server.ts):

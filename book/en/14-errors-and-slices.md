@@ -244,6 +244,7 @@ A `Record` over `BookingRefusal` must name every member of that type, so a refus
 
 The clinic catches only where I/O happens: `openDatabase` and `query` in `database.server.ts` (`transaction` runs inside `query`), the migration runner in `migrate.server.ts`, `request` in `src/lib/request.ts` for the network on the client, and `remembered.ts` for the phone's storage.
 Each route that reads a request body catches too, since the body arrives over the network: a body that cannot be read becomes the answer `BadRequest` on the spot.
+`openDatabase` and the migration runner run once, when the server starts, before any request; [chapter 15](15-four-pieces.md#what-the-clinic-injects) says where they stand among the pieces.
 
 The app itself never throws.
 Two helpers that only tests run do: `box` in `e2e.server.ts`, when an element is not on screen, and `memoryDatabase`, in [`src/server/testDatabase.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/server/testDatabase.server.ts):

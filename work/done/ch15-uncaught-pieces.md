@@ -31,8 +31,16 @@
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapters 14 and 15 open with their value, with no filler and nothing useful cut.
-* [ ] `openDatabase` and `migrate` are placed in chapter 15 in both editions, and chapter 14 links there.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning. Chapters 14 and 15 open with their value, with no filler and nothing useful cut.
+* [x] `openDatabase` and `migrate` are placed in chapter 15 in both editions, and chapter 14 links there.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author. Left unticked on purpose: in this batch the driver runs `make book` once at the end of the loop.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Revalidated against the tree after `ch14-keepless-feature`, `ch14-swallowed-bug` and `ch14-library-types`: the quoted sentences had moved (en/14:246, pt/14:246; en/15:403, pt/15:404) but were unchanged. The four clinic files at `book-v1/four-pieces` say what the Contract says.
+* Diverged, taken alone (batch, no conversation): "hands the database it returns to every route" became "to every route that needs it" (pt "a cada rota que precisa dele"), because `healthRoute` is mounted without `db` in `main.server.ts`, and `ch14-keepless-feature` now names `health` as the feature that keeps nothing.
+* Diverged, taken alone: the new paragraph goes after the whole server discussion, after "Vitest is the clinic's test runner, ..." and before "The client's orchestrator receives ...", not between the orchestrator's paragraph and its next line, "The route's test passes `memoryDatabase` ...", which continues that paragraph; inserting it there would have cut the route's test away from the route.
+* The rest of the proposed text is used as written, in both editions. `make verify` green. No document other than the chapters changed: no new term, no new rule, no ADR amendment (ADR-0016's ch15-route-io amendment already covers start code).
+* Finding F10 of the M4.1 review is settled.

@@ -407,6 +407,11 @@ The route's test passes `memoryDatabase`, the in-memory SQLite of chapter 14, in
 
 Vitest is the clinic's test runner, `app.request` sends a request to a route without a network, and `testDatabase.server.ts` holds `memoryDatabase`.
 
+That database is opened before the first request arrives, by the server's start code: `openMigratedDatabase`, in [`src/server/start.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/server/start.server.ts), calls `openDatabase` and `migrate`, and `main.server.ts` hands the database it returns to every route that needs it.
+Neither is a piece: no event reaches them, and they run once, at start, to make the driver ready.
+They catch where they do I/O, as a repository does, and return a `Result`; `openMigratedDatabase` turns a failure into a message and exit code 1, because a server with no database has nothing to serve.
+So the table's "only" holds where events are served: of the four pieces, the repository alone turns an infra exception into a `Result`.
+
 The client's orchestrator receives its repositories, named in `bookingEvents.ts`:
 
 ```ts

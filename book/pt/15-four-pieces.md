@@ -408,6 +408,11 @@ O teste da rota passa `memoryDatabase`, o SQLite em memória do capítulo 14, no
 
 O Vitest é o executor de testes da clínica, `app.request` envia uma requisição a uma rota sem rede, e `testDatabase.server.ts` guarda `memoryDatabase`.
 
+Esse banco é aberto antes que chegue a primeira requisição, pelo código de partida do servidor: `openMigratedDatabase`, em [`src/server/start.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/server/start.server.ts), chama `openDatabase` e `migrate`, e `main.server.ts` entrega o banco que ela devolve a cada rota que precisa dele.
+Nenhuma das duas é uma peça: nenhum evento chega a elas, e elas rodam uma vez, na partida, para deixar o driver pronto.
+Elas capturam onde fazem I/O, como faz um repositório, e devolvem um `Result`; `openMigratedDatabase` transforma uma falha numa mensagem e no código de saída 1, porque um servidor sem banco não tem o que servir.
+Então o "único" da tabela vale onde os eventos são servidos: das quatro peças, só o repositório transforma uma exceção de infra num `Result`.
+
 O orquestrador do cliente recebe os seus repositórios, nomeados em `bookingEvents.ts`:
 
 ```ts
