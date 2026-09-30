@@ -35,9 +35,18 @@ Sentences are found by their quoted text. The line numbers are from commit `cad4
 
 **Done when.**
 
-* [ ] Both editions written, with the two sentences replaced as the Contract says, and the excerpt untouched.
-* [ ] The chapter still opens with its value; no filler and nothing useful cut.
-* [ ] Every fact the new sentences state is checkable at the linked tag or in the excerpt.
-* [ ] `make verify` green, the link check opening the template link.
-* [ ] `make book`, and both PDF paths given to the author to review.
-* [ ] F4 marked settled on this page's record.
+* [x] Both editions written, with the two sentences replaced as the Contract says, and the excerpt untouched.
+* [x] The chapter still opens with its value; no filler and nothing useful cut.
+* [x] Every fact the new sentences state is checkable at the linked tag or in the excerpt.
+* [x] `make verify` green, the link check opening the template link.
+* [ ] `make book`, and both PDF paths given to the author to review. Left for the batch driver, which builds once at the end of the loop.
+* [x] F4 marked settled on this page's record.
+
+**What happened.**
+
+* Revalidated against the tree: no commit since `cad46ef` touched chapter 7; the sentences were still at en:165, en:184, pt:167, pt:187, and the excerpt at pt:172-181. At `book-v1/brainstorm` the template's Non-negotiables still hold the placeholder and the three fixed lines, and "open decision" appears in no `.claude/` kit file. Chapter 6 still quotes a line of docs/00's open decisions (en:240, pt:244).
+* Tightened alone (batch, no conversation): "the clinic has six of its own" became "the clinic's six run from" (pt "as seis da clínica vão de"); "The first five project lines each point at" gained "in parentheses" (pt "cada uma entre parênteses"), since that is what the sixth line lacks. The second replacement is three sentences on three lines, one sentence per line as the chapter writes.
+* The template link returned 200; `make verify` green.
+* F4 of the M4.1 review (`work/done/m4.1-review-run/findings.md:18`) is settled: the excerpt now splits into six project lines and three fixed lines, and the sixth line's reason is named.
+* No document changed: no new term, rule or decision.
+* `make book` not run here, by the batch's instruction.

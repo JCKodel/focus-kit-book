@@ -162,7 +162,7 @@ diary for the simple case: pick a professional, pick a free time, done.
 It is the brief's product with the client's lack of an account folded in, and its last sentence is the conversation's: what the app replaces, which tells a later session how small "simple" is here.
 
 Chapter 5 said this chapter writes `AGENTS.md`, the rules file every session reads first.
-Its non-negotiables are the kit's template with the project's own rules above the three fixed lines.
+Its non-negotiables follow the kit's [template](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/.claude/skills/brainstorm/references/documents.md), which asks for three to six rules of the project's own and then writes three fixed lines in every project: the clinic's six run from "Every business rule" to "An open decision", and the three fixed lines from "One delivery" down.
 This is [`AGENTS.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/AGENTS.md) §Non-negotiables:
 
 ```markdown
@@ -181,7 +181,9 @@ This is [`AGENTS.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/b
 - The agent stages and suggests the commit message. It never commits.
 ```
 
-Each project line points at the document or ADR that holds its reason, and the booking code comes from a "your call": the agent's answer to how a client with no account proves an appointment is theirs.
+The first five project lines each point, in parentheses, at the document or ADR that holds their reason.
+The sixth names docs/00 in its own words: it makes the open decisions of docs/00, the list chapter 6 quoted a line of, something a session asks about and never settles alone.
+The booking code comes from a "your call": the agent's answer to how a client with no account proves an appointment is theirs.
 
 docs/06 is the queue: milestones, each with a paragraph saying what is true when it closes, and one line per delivery under it (chapter 9 teaches the marks).
 This is the first milestone of [`docs/06-Queue.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/docs/06-Queue.md):

@@ -164,7 +164,7 @@ pronto.
 É o produto do briefing com a falta de conta do cliente incorporada, e a última frase é da conversa: o que o app substitui, o que diz a uma sessão futura quão pequeno é o "simples" aqui.
 
 O capítulo 5 disse que este capítulo escreve o `AGENTS.md`, o arquivo de regras que toda sessão lê primeiro.
-Os inegociáveis dele são o modelo do kit com as regras do próprio projeto acima das três linhas fixas.
+Os inegociáveis dele seguem o [modelo](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/.claude/skills/brainstorm/references/documents.md) do kit, que pede de três a seis regras do próprio projeto e depois escreve três linhas fixas em todo projeto: as seis da clínica vão de "Toda regra de negócio" a "Uma decisão em aberto", e as três linhas fixas, de "Uma entrega" para baixo.
 Esta é a seção Non-negotiables (inegociáveis) do [`AGENTS.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/AGENTS.md):
 
 ```markdown
@@ -184,7 +184,9 @@ Esta é a seção Non-negotiables (inegociáveis) do [`AGENTS.md`](https://githu
 - O agente coloca em stage e sugere a mensagem de commit. Ele nunca faz commit.
 ```
 
-Cada linha do projeto aponta para o documento ou o ADR que guarda o seu motivo, e o código de agendamento vem de um "your call": a resposta do agente para como um cliente sem conta prova que um agendamento é dele.
+As cinco primeiras linhas do projeto apontam, cada uma entre parênteses, para o documento ou o ADR que guarda o seu motivo.
+A sexta nomeia o docs/00 no próprio texto: ela faz das decisões em aberto do docs/00, a lista de que o capítulo 6 citou uma linha, algo que uma sessão pergunta e nunca decide sozinha.
+O código de agendamento vem de um "your call": a resposta do agente para como um cliente sem conta prova que um agendamento é dele.
 
 O docs/06 é a fila: marcos, cada um com um parágrafo que diz o que é verdade quando ele fecha, e uma linha por entrega abaixo dele (o capítulo 9 ensina as marcas).
 Este é o primeiro marco de [`docs/06-Queue.md`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/brainstorm/docs/06-Queue.md), com os slugs como estão:
