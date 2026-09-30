@@ -56,7 +56,7 @@ Os horários semanais e os profissionais são outras coisas que a clínica guard
 Uma mudança no agendamento mexe nesta pasta, e remover o agendamento remove esta pasta.
 A fatia também delimita o que um agente lê em uma entrega sobre agendamento, assunto do capítulo 16.
 
-A [fatia de saúde](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone/src/features/health), a verificação do servidor do primeiro marco, tem 6 arquivos:
+A [fatia de health](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone/src/features/health), a verificação do servidor do primeiro marco, tem 6 arquivos:
 
 ```text
 src/features/health/HealthView.e2e.ts

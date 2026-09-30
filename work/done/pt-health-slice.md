@@ -26,7 +26,13 @@
 
 **Done when.**
 
-* [ ] The sentence changed; `grep -rn "fatia de saúde" book/pt` finds nothing.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] The sentence changed; `grep -rn "fatia de saúde" book/pt` finds nothing.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* The sentence changed as written, now at line 59 of chapter 14 after `ch14-feature-boundary`; only "saúde" became "health", link and rest unchanged. The grep finds nothing in the Portuguese edition.
+* The English edition and docs/03 are untouched, as planned.
+* `make verify` green. Staging and the commit are left to the driver of the M4.1 loop.
