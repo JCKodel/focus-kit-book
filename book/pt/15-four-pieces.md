@@ -398,11 +398,11 @@ Então "o que acontece quando este evento chega?" tem uma resposta, e o capítul
 
 ## O que a clínica injeta
 
-O ADR-0016, com a sua emenda, dá a regra: o orquestrador é a única peça que recebe as suas dependências, e ele as recebe porque um teste passa uma segunda implementação.[^book-adr-0016]
+O ADR-0016, com as suas emendas, dá a regra: uma peça recebe uma dependência só onde o teste dela passa uma segunda implementação.[^book-adr-0016]
 A clínica a segue nos dois lados.
 
-O orquestrador do servidor recebe o banco de dados, o driver que os repositórios dele usam, e o entrega a cada função de repositório: a rota é `appointmentsRoute(db)`, e `slotsOf` e o handler acima entregam `db` a toda chamada de repositório.
-O teste dele passa `memoryDatabase`, o SQLite em memória do capítulo 14, no lugar do arquivo, e o docs/01 da clínica diz por que a rota recebe o driver:
+O orquestrador do servidor recebe o banco de dados, o driver que os repositórios dele usam, e o entrega a cada função de repositório: a rota é `appointmentsRoute(db)`, e `slotsOf` e o handler acima entregam `db` a toda chamada de repositório, e cada função de repositório também recebe `db`, porque o próprio teste dela passa direto um banco em memória, como mostra o [capítulo 16](16-testing-and-agents.md#uma-regra-cinco-testes).
+O teste da rota passa `memoryDatabase`, o SQLite em memória do capítulo 14, no lugar do arquivo, e o docs/01 da clínica diz por que a rota recebe o driver:
 
 > "*Rotas do servidor que precisam do banco de dados são funções dele (`clinicRoute(db)`), então o Vitest as conduz pelo `app.request` do Hono contra um SQLite em memória (`testDatabase.server.ts`).*"
 
@@ -433,7 +433,8 @@ O docs/01 da clínica diz isso na seção "How the code is organized"; o origina
 > "*As funções de evento dele recebem os seus repositórios como parâmetro, os reais por padrão (`<name>Repositories`), e o relógio como `now`: nenhuma função ali o lê.*"
 
 O SQLite em memória é um banco falso, e esses são repositórios falsos: falso, aqui, é uma segunda implementação que um teste passa no lugar da real.
-Em nenhum outro lugar se passa nada: um caso de uso não recebe repositório (ADR-0016), e uma tela ou um repositório tem uma só implementação, então um parâmetro ali existiria por cerimônia, o que o KISS descarta.
+Um caso de uso não recebe repositório (ADR-0016) e uma tela não recebe nada: cada um tem uma só implementação, então um parâmetro ali existiria por cerimônia, o que o KISS descarta.
+`now`, que a rota ou o hook lê, é passado adiante como dado, um valor, não uma dependência.
 O capítulo 16 mostra os testes e os repositórios falsos deles.
 
 ## Quando as peças se pagam
@@ -456,7 +457,7 @@ KISS, YAGNI e DRY decidem, como o [capítulo 6](06-the-documents.md#as-duas-esco
 * Uma peça é escrita quando tem um trabalho, e a coluna "Proíbe" a mantém nesse trabalho.
 * Na clínica cada lado tem o seu orquestrador e os seus repositórios, e os dois importam os mesmos casos de uso: o servidor impõe uma regra, e o cliente a usa só para decidir o que mostrar.
 * Um evento corre em um só sentido: a tela nunca muda o estado, e um caso de uso nunca chama um repositório.
-* Um orquestrador recebe os seus repositórios, ou o driver que eles usam, porque o teste dele passa uma segunda implementação, uma falsa; nenhuma outra peça recebe uma dependência.
+* Uma peça recebe uma dependência só onde o teste dela passa uma segunda implementação, uma falsa: o orquestrador os seus repositórios ou o driver que eles usam, e um repositório do servidor esse driver; um caso de uso e uma tela não recebem nenhuma, e `now` é passado como dado.
 
 ## Exercícios
 
@@ -479,7 +480,7 @@ A página inicial ganha uma linha de ajuda, "Keep your booking code to cancel" (
 Pergunte ao agente de quais das quatro peças isso precisa, e por que cada uma das outras não se paga.
 Nada é construído.
 
-[^book-adr-0016]: J.C. Ködel, "One Page at a Time", o ADR-0016 deste livro, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, de 2026-09-28, emendado em 2026-09-29, na pasta de ADRs em `main`. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>
+[^book-adr-0016]: J.C. Ködel, "One Page at a Time", o ADR-0016 deste livro, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, de 2026-09-28, emendado em 2026-09-29 e 2026-09-30, na pasta de ADRs em `main`. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>
 [^bloc]: Bloc, "Bloc State Management Library", documentação, acesso em 2026-09-29. <https://bloclibrary.dev/>
 [^mediatr]: Jimmy Bogard, "MediatR: Simple, unambitious mediator implementation in .NET", acesso em 2026-09-29. <https://github.com/jbogard/MediatR>
 [^clean-architecture]: Robert C. Martin, "The Clean Architecture", 2012. <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>

@@ -110,7 +110,7 @@ When this milestone closes, every confirmed finding of the M4 review is settled:
 [x] ch15-route-io          Chapters 6, 14 and 15: the route that reads the request body squares with "the only place an infra exception becomes a Result" and "only the repository does I/O"; both editions
 [x] ch15-submit-event      Chapter 15: says the hook's submitEvent is bookingEvents.ts's submit imported under another name, and what shown and latest hold; both editions
 [x] slice-imports          Chapters 14, 15 and 16: say whether a slice may import another slice's code, as slotsOf imports the repositories of three other slices, and when that code moves to src/lib/ instead; both editions
-[>] ch15-injection-rule    Chapter 15: the injection rule, its key point and "Nowhere else is anything passed" fit the code, where every repository function receives db; both editions
+[x] ch15-injection-rule    Chapter 15: the injection rule, its key point and "Nowhere else is anything passed" fit the code, where every repository function receives db; both editions
 [>] ch15-piece-cost        Chapter 15: "When the pieces pay their way" shows a piece that has a job and still costs more than it gives, so a reader can weigh one; both editions
 [>] ch16-unit-test         Chapter 16: the definition of a unit test fits the route test, which drives the route, the use case, the repository and SQLite; both editions
 [>] ch16-it-each           Chapter 16: the text describes the it.each over two refusal codes and an exception as it runs, and says what it.each does; both editions

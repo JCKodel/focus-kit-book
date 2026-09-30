@@ -397,11 +397,11 @@ So "what happens when this event arrives?" has one answer, and chapter 16 turns 
 
 ## What the clinic injects
 
-ADR-0016, as amended, gives the rule: the orchestrator is the only piece that receives its dependencies, and it receives them because a test passes a second implementation.[^book-adr-0016]
+ADR-0016, as amended, gives the rule: a piece receives a dependency only where its test passes a second implementation.[^book-adr-0016]
 The clinic follows it on both sides.
 
-The server's orchestrator receives the database, the driver its repositories use, and hands it to each repository function: the route is `appointmentsRoute(db)`, and `slotsOf` and the handler above hand `db` to every repository call.
-Its test passes `memoryDatabase`, the in-memory SQLite of chapter 14, in place of the file, and the clinic's docs/01 says why the route takes the driver:
+The server's orchestrator receives the database, the driver its repositories use, and hands it to each repository function: the route is `appointmentsRoute(db)`, and `slotsOf` and the handler above hand `db` to every repository call, and each repository function receives `db` too, because its own test passes an in-memory database straight in, as [chapter 16](16-testing-and-agents.md#one-rule-five-tests) shows.
+The route's test passes `memoryDatabase`, the in-memory SQLite of chapter 14, in place of the file, and the clinic's docs/01 says why the route takes the driver:
 
 > "*Server routes that need the database are functions of it (`clinicRoute(db)`), so Vitest drives them through Hono's `app.request` against an in-memory SQLite (`testDatabase.server.ts`).*"
 
@@ -432,7 +432,8 @@ The clinic's docs/01 says it in the section "How the code is organized":
 > "*Its event functions receive their repositories as a parameter, the real ones by default (`<name>Repositories`), and the clock as `now`: no function there reads it.*"
 
 The in-memory SQLite is a fake database and those are fake repositories: a fake is a second implementation that a test passes in place of the real one.
-Nowhere else is anything passed: a use case receives no repository (ADR-0016), and a view or a repository has one implementation, so a parameter there would exist for ceremony, which KISS rules out.
+A use case receives no repository (ADR-0016) and a view receives nothing: each has one implementation, so a parameter there would exist for ceremony, which KISS rules out.
+`now`, which the route or the hook reads, is passed on as data, a value, not a dependency.
 Chapter 16 shows the tests and their fakes.
 
 ## When the pieces pay their way
@@ -455,7 +456,7 @@ KISS, YAGNI and DRY decide, as [chapter 6](06-the-documents.md#the-two-choices) 
 * A piece is written when it has a job, and the "Forbids" column keeps it to that job.
 * In the clinic each side has its own orchestrator and repositories, and both import the same use cases: the server enforces a rule, and the client uses it only to decide what to show.
 * An event flows one way: the view never sets the state, and a use case never calls a repository.
-* An orchestrator receives its repositories, or the driver they use, because its test passes a second implementation, a fake; no other piece receives a dependency.
+* A piece receives a dependency only where its test passes a second implementation, a fake: the orchestrator its repositories or the driver they use, and a server repository that driver; a use case and a view receive none, and `now` is passed as data.
 
 ## Exercises
 
@@ -478,7 +479,7 @@ The home page gains a line of help, "Keep your booking code to cancel", written 
 Ask the agent which of the four pieces this needs, and why each other one does not pay its way.
 Nothing is built.
 
-[^book-adr-0016]: J.C. Ködel, "One Page at a Time", this book's ADR-0016, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, dated 2026-09-28, amended 2026-09-29, in the ADR folder on `main`. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>
+[^book-adr-0016]: J.C. Ködel, "One Page at a Time", this book's ADR-0016, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, dated 2026-09-28, amended 2026-09-29 and 2026-09-30, in the ADR folder on `main`. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>
 [^bloc]: Bloc, "Bloc State Management Library", documentation, accessed 2026-09-29. <https://bloclibrary.dev/>
 [^mediatr]: Jimmy Bogard, "MediatR: Simple, unambitious mediator implementation in .NET", accessed 2026-09-29. <https://github.com/jbogard/MediatR>
 [^clean-architecture]: Robert C. Martin, "The Clean Architecture", 2012. <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>

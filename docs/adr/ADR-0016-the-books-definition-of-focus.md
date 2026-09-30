@@ -32,3 +32,7 @@ A piece receives a dependency only where there is a second implementation to pas
 ## Amendment, 2026-09-30 (ch15-route-io)
 
 The orchestrator receives its event, and on a server the event is the request, so reading the request body is part of receiving it: a body that cannot be read is answered `BadRequest` on the spot, as chapter 14 says. "Only repositories have `try`/`catch`" reads as: only the repository catches an exception from data, and startup code, such as opening the database or running migrations, catches where it does I/O outside the four pieces. Chapters 6 and 15 say it by role: the repository is the only piece that fetches and saves.
+
+## Amendment, 2026-09-30 (ch15-injection-rule)
+
+The criterion of the amendment `four-pieces-injection` stands: a piece receives a dependency only where its test passes a second implementation. Two of its claims do not: "in FOCUS that happens only in the orchestrator" and "a view or a repository has one implementation". A server repository receives the driver it uses, because its test passes an in-memory database. A client repository receives none, because no test passes a second implementation to it. A use case and a view receive none, and the clock is passed as data, a value, not a dependency. The Decision's "The orchestrator is the only piece with injected dependencies" and that amendment are read through this one and are not rewritten. Chapters 6 and 15 state the criterion.

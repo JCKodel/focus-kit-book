@@ -40,9 +40,18 @@ Sentences are found by their quoted text. `ch15-event-delivery`, `ch15-submit-ev
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapters 6 and 15 still open with their value, with no filler and nothing useful cut.
-* [ ] No "Nowhere else is anything passed", "Em nenhum outro lugar se passa nada", "no other piece receives a dependency", "nenhuma outra peça recebe uma dependência", "only the orchestrator has injected dependencies", "só o orquestrador tem dependências injetadas", "the only piece that receives its dependencies" or "a única peça que recebe as suas dependências" left in `book/`. No "the only piece that receives its dependencies" left in docs/03.
-* [ ] docs/03's orchestrator and repository rows updated, and ADR-0016 amended.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning. Chapters 6 and 15 still open with their value, with no filler and nothing useful cut.
+* [x] No "Nowhere else is anything passed", "Em nenhum outro lugar se passa nada", "no other piece receives a dependency", "nenhuma outra peça recebe uma dependência", "only the orchestrator has injected dependencies", "só o orquestrador tem dependências injetadas", "the only piece that receives its dependencies" or "a única peça que recebe as suas dependências" left in `book/`. No "the only piece that receives its dependencies" left in docs/03.
+* [x] docs/03's orchestrator and repository rows updated, and ADR-0016 amended.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Every quoted sentence was still in both editions; earlier deliveries had moved chapter 15's section to en/15:398 and pt/15:399, its key point to en/15:458 and pt/15:459, and the ADR-0016 note to en/15:481 and pt/15:482. Key point 5 was already reworded by an earlier delivery ("no other piece receives a dependency"); it is the line replaced.
+* Chapter 15's rule, its "Nowhere else" sentence and key point take the page's proposals; the "Nowhere else" replacement is two sentences, one per claim. The Portuguese rule now says "com as suas emendas", as the English "as amended" does.
+* The server paragraph's new clause says "an in-memory database" instead of `memoryDatabase`, because the name is introduced in the next sentence; that sentence now opens "The route's test" ("O teste da rota"), since "Its test" would have read as the repository's.
+* The ADR-0016 note in chapter 15 now reads "amended 2026-09-29 and 2026-09-30"; chapter 6's note gives no amendment date and is unchanged.
+* docs/03's orchestrator row takes the page's wording; the repository row, as `ch15-route-io` left it, gains the server-driver sentence. ADR-0016's new amendment follows `ch15-route-io`'s and covers injection only.
+* Finding F11 of the M4 review is settled. `make verify` green.

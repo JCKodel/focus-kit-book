@@ -104,7 +104,7 @@ Feature-oriented: the code is organized in vertical slices, one folder holding e
 Clean: every business rule sits apart from I/O, in a pure function, so it is tested with data in and a value out.
 Unidirectional: an event flows one way to a new state, with nothing travelling back, so "what happens when this event arrives?" is one test.
 Scalable: every piece is isolated and testable, so the code holds at any size.
-Behind the view, which fires events and renders the state it receives, stand three pieces: the orchestrator turns one event into one new state, a use case holds one rule, and the repository fetches and saves; only the orchestrator has injected dependencies, and they are the repositories.
+Behind the view, which fires events and renders the state it receives, stand three pieces: the orchestrator turns one event into one new state, a use case holds one rule, and the repository fetches and saves; a piece receives a dependency only where its test passes a second implementation: the orchestrator its repositories, and a server repository the driver it uses.
 The orchestrator receives the event, a request on a server; only the repository fetches and saves, so only it catches an exception from data, an expected failure such as a lost connection, and returns it as a value, a Result; an error, a bug, is never caught (Dart splits its `Exception` and `Error` classes the same way).[^dart-error-exception]
 The book calls the principle "exceptions as values", where the field says "errors as values", because a bug is never a value.[^book-adr-0016]
 Nothing exists for ceremony: KISS (keep it simple), YAGNI (you aren't gonna need it) and DRY (don't repeat yourself) decide when a piece pays its way, and a feature with no rule has no use case.
