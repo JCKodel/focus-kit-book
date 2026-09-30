@@ -24,7 +24,7 @@ O Playwright conduz o app em um navegador de verdade, como um usuário faria, cl
 
 Um teste que o Vitest roda é um teste unitário: ele roda um pedaço de código, como um caso de uso chamado com os seus dados ou um repositório contra um banco em memória.
 Um teste que o Playwright roda é um teste ponta a ponta: ele conduz o app rodando pela tela, pelos orquestradores, pelo servidor e pelo banco.
-São os arquivos `.test.ts` e `.e2e.ts` da fatia do agendamento no [capítulo 14](14-errors-and-slices.md#fatias-verticais), cada um ao lado do arquivo que testa.
+São os arquivos `.test.ts` e `.e2e.ts` da fatia dos agendamentos no [capítulo 14](14-errors-and-slices.md#fatias-verticais), cada um ao lado do arquivo que testa.
 
 ## Uma regra, cinco testes
 
@@ -176,7 +176,7 @@ O relógio vai primeiro a um milissegundo depois do prazo: a resposta é 409 com
 
 Este é o "um evento, um novo estado" do [capítulo 15](15-four-pieces.md#um-evento-um-novo-estado) como um teste: uma requisição é o evento, e a resposta e as linhas são o novo estado.
 O teste do caso de uso passa `now` como dado, e o teste da rota falsifica o relógio, porque a rota lê `new Date()` e o entrega a `cancel`, como diz o item do docs/01 da clínica que o [capítulo 15](15-four-pieces.md#um-evento-um-novo-estado) citou: "*Casos de uso recebem a hora atual como parâmetro. Nenhum caso de uso lê o relógio.*"
-Na fatia do agendamento, a rota e os hooks são o único código que lê `new Date()`, e cada um o repassa, então todo outro teste passa `now` como dado e não falsifica nada.
+Na fatia dos agendamentos, a rota e os hooks são o único código que lê `new Date()`, e cada um o repassa, então todo outro teste passa `now` como dado e não falsifica nada.
 
 **O evento do cliente.** O evento do orquestrador do cliente é `submit`, em `cancelEvents.ts`: ele recebe o que foi digitado, `now`, e os seus repositórios, `postCancellation` de `api.ts` e `forget` de `remembered.ts`, nomeados no tipo `CancelRepositories`, como `BookingRepositories` no [capítulo 15](15-four-pieces.md#o-que-a-clinica-injeta).
 O teste dele, [`src/features/appointments/cancelEvents.test.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/cancelEvents.test.ts), monta os repositórios falsos com duas funções:
@@ -326,7 +326,7 @@ Os 91 e os 53 são as linhas que começam com `test(` nos arquivos `.e2e.ts` da 
 ## O que a fatia dá a um agente
 
 O capítulo 14 disse que uma fatia limita o que um agente lê.
-O registro do marco 1 da clínica deixa você contar isso, para as duas entregas da fatia do agendamento.[^clinic-milestone-1-run]
+O registro do marco 1 da clínica deixa você contar isso, para as duas entregas da fatia dos agendamentos.[^clinic-milestone-1-run]
 Contei os caminhos distintos sob `src/` que existiam no commit pai da entrega e cujo conteúdo o turno do `/apply` leu, por uma chamada `Read` ou uma chamada de shell que imprime um arquivo (`cat`, `sed -n`, `head`, `tail`); um `grep` ou um `ls` não é leitura, uma chamada que o registro lista como negada não leu nada, e o total é o que `git ls-tree -r --name-only <pai> src` lista.
 Esses turnos rodaram antes de as funções de evento existirem, então contam o código do marco 1, que era o que o agente tinha.
 

@@ -48,7 +48,7 @@ Uma fatia da clínica roda em dois lados, o navegador do celular e o servidor, e
 No cliente, o orquestrador são dois arquivos.
 `<name>Events.ts` guarda o que cada evento faz, como funções simples: as chamadas a repositórios e casos de uso, em ordem, e o novo estado.
 O hook `use<Feature>.ts` é só a parte do React: ele guarda o estado, publica o estado em andamento e a resposta, lê o relógio e descarta uma resposta velha.
-Os repositórios do orquestrador são `api.ts`, que alcança a rede, e, na fatia do agendamento, `remembered.ts`, que alcança o armazenamento do celular.
+Os repositórios do orquestrador são `api.ts`, que alcança a rede, e, na fatia dos agendamentos, `remembered.ts`, que alcança o armazenamento do celular.
 A listagem da clínica rotula só `api.ts` como repositório; este livro põe `remembered.ts` ali também, porque ele faz o trabalho de um repositório: a seção "How data is accessed" do mesmo docs/01 faz dele o único código que mexe no armazenamento do celular, e ele devolve a sua falha como um `Result`.
 
 No servidor, o orquestrador é a rota `route.server.ts`, e o repositório é `repository.server.ts`, que roda o SQL.

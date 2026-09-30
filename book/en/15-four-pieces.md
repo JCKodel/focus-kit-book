@@ -47,7 +47,7 @@ A clinic slice runs on two sides, the phone's browser and the server, and each s
 On the client, the orchestrator is two files.
 `<name>Events.ts` holds what each event does, as plain functions: the calls to repositories and use cases, in order, and the new state.
 The hook `use<Feature>.ts` is only the React part: it holds the state, publishes the in-flight state and the answer, reads the clock, and drops a stale answer.
-The orchestrator's repositories are `api.ts`, which reaches the network, and, in the booking slice, `remembered.ts`, which reaches the phone's storage.
+The orchestrator's repositories are `api.ts`, which reaches the network, and, in the appointments slice, `remembered.ts`, which reaches the phone's storage.
 The clinic's listing labels only `api.ts` as a repository; this book places `remembered.ts` there too, because it does a repository's job: the section "How data is accessed" of the same docs/01 makes it the only code that touches the phone's storage, and it returns its failure as a `Result`.
 
 On the server, the orchestrator is the route `route.server.ts`, and the repository is `repository.server.ts`, which runs the SQL.

@@ -16,7 +16,7 @@ Uma fatia vertical é uma pasta que guarda tudo o que uma funcionalidade precisa
 Não há pasta por tecnologia ou camada, nem `controllers/`, nem `models/`.
 Uma subfuncionalidade é uma subpasta, como `authentication/change-password/`; a clínica ainda não tem nenhuma.
 
-Esta é a saída de `git ls-tree -r --name-only book-v1/closing-a-milestone src/features/appointments`, a [fatia do agendamento](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone/src/features/appointments), 22 arquivos:
+Esta é a saída de `git ls-tree -r --name-only book-v1/closing-a-milestone src/features/appointments`, a [fatia dos agendamentos](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone/src/features/appointments), 22 arquivos:
 
 ```text
 src/features/appointments/BookingView.e2e.ts
@@ -50,6 +50,9 @@ Os três hooks `use*.ts` guardam o estado que cada tela mostra, e `strings.ts` e
 Um nome terminado em `.server.ts` roda só no servidor, e o código do cliente nunca importa um deles.
 Os arquivos `.test.ts` são testes unitários, os `.e2e.ts` conduzem as telas em um navegador, e `e2e.server.ts` guarda os passos que eles compartilham.
 
+Uma funcionalidade é uma coisa que o app guarda, nomeada por um termo do docs/03 do projeto (o agendamento, o profissional, os horários semanais), e a fatia dela guarda toda ação sobre ela.
+Agendar e cancelar agem os dois sobre o agendamento, então compartilham as regras dele (`rules.ts`), o SQL dele (`repository.server.ts`), as rotas dele (`route.server.ts`), as chamadas dele (`api.ts`) e a lista que o celular lembra (`remembered.ts`): são uma fatia só.
+Os horários semanais e os profissionais são outras coisas que a clínica guarda, cada uma com a sua tabela e a sua tela, então cada uma tem uma fatia própria, `weeklyHours` e `professionals`.
 Uma mudança no agendamento mexe nesta pasta, e remover o agendamento remove esta pasta.
 A fatia também delimita o que um agente lê em uma entrega sobre agendamento, assunto do capítulo 16.
 
@@ -243,7 +246,7 @@ O docs/01 da clínica, na seção "How errors travel", dá o caminho que uma fal
 
 ## Pontos-chave
 
-* Uma fatia vertical é uma pasta por funcionalidade, sem pasta por camada; uma mudança na funcionalidade mexe nessa pasta, e remover a funcionalidade remove essa pasta.
+* Uma funcionalidade é uma coisa que o app guarda, com toda ação sobre ela, e a fatia vertical dela é uma pasta, sem pasta por camada; uma mudança na funcionalidade mexe nessa pasta, e remover a funcionalidade remove essa pasta.
 * Um arquivo entra em uma fatia quando se paga, e o código entra em `lib/` no segundo uso.
 * Uma exceção existe só no I/O, uma recusa só em uma regra, e nenhuma das duas é lançada.
 * Um erro é um bug: nunca capturado, chega à sua tela e ao seu analytics.

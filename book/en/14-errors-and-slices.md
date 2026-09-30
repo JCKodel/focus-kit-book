@@ -16,7 +16,7 @@ A vertical slice is one folder that holds everything a feature needs: its screen
 There is no folder per technology or layer, no `controllers/` and no `models/`.
 A sub-feature is a subfolder, such as `authentication/change-password/`; the clinic has none yet.
 
-This is the output of `git ls-tree -r --name-only book-v1/closing-a-milestone src/features/appointments`, the [booking slice](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone/src/features/appointments), 22 files:
+This is the output of `git ls-tree -r --name-only book-v1/closing-a-milestone src/features/appointments`, the [appointments slice](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone/src/features/appointments), 22 files:
 
 ```text
 src/features/appointments/BookingView.e2e.ts
@@ -50,7 +50,10 @@ The three `use*.ts` hooks hold the state each screen shows, and `strings.ts` and
 A name ending in `.server.ts` runs only on the server, and client code never imports one.
 The `.test.ts` files are unit tests, the `.e2e.ts` files drive the screens in a browser, and `e2e.server.ts` holds their shared steps.
 
-A change to booking touches this folder, and removing booking removes this folder.
+A feature is one thing the app keeps, named by a term of the project's docs/03 (the appointment, the professional, the weekly hours), and its slice holds every action on it.
+Booking and cancelling both act on the appointment, so they share its rules (`rules.ts`), its SQL (`repository.server.ts`), its routes (`route.server.ts`), its calls (`api.ts`) and the list the phone remembers (`remembered.ts`): they are one slice.
+Weekly hours and professionals are other things the clinic keeps, each with its own table and its own screen, so each has a slice of its own, `weeklyHours` and `professionals`.
+A change to the appointment touches this folder, and removing the appointment removes this folder.
 The slice also bounds what an agent reads for a delivery on booking, which chapter 16 takes up.
 
 The [health slice](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/closing-a-milestone/src/features/health), the server check of the first milestone, is 6 files:
@@ -243,7 +246,7 @@ The clinic's docs/01, in its section "How errors travel", gives the path a failu
 
 ## Key points
 
-* A vertical slice is one folder per feature, with no folder per layer; a change to the feature touches that folder, and removing the feature removes it.
+* A feature is one thing the app keeps, with every action on it, and its vertical slice is one folder, with no folder per layer; a change to the feature touches that folder, and removing the feature removes it.
 * A file enters a slice when it pays its way, and code enters `lib/` on its second use.
 * An exception exists only at I/O, a refusal only in a rule, and neither is thrown.
 * An error is a bug: never caught, it reaches your screen and your analytics.

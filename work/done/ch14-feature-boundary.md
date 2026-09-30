@@ -35,9 +35,18 @@
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
-* [ ] No "booking slice" or "fatia do agendamento" is left in `book/`.
-* [ ] The "vertical slice" row of docs/03 updated.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
+* [x] No "booking slice" or "fatia do agendamento" is left in `book/`.
+* [x] The "vertical slice" row of docs/03 updated.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* §"Vertical slices" states the rule where the sentence on removing booking stood, then shows it on the clinic: booking and cancelling share the appointment's `rules.ts`, `repository.server.ts`, `route.server.ts`, `api.ts` and `remembered.ts`, and weekly hours and professionals each have their own table and screen, so their own slice. The sentence on change and removal now speaks of the appointment. Checked against the clinic at `book-v1/closing-a-milestone`: the `professional`, `working_period` and `appointment` migrations and the `WeeklyHoursView.tsx` and `ProfessionalsView.tsx` screens.
+* The next sentence, "The slice also bounds what an agent reads for a delivery on booking", is kept: a delivery on booking does read this slice.
+* The rule names the two other slices by their folder names, `weeklyHours` and `professionals`, so exercise 14.3's `weeklyHours` has a referent.
+* The Portuguese says "os horários semanais", the plural the book already uses for weekly hours.
+* The first key point carries the rule; chapter 14 keeps five key points. The "vertical slice" row of docs/03 gains the rule.
+* Nothing diverged from the page. Finding F3 of the M4 review is settled.
