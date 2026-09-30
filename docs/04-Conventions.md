@@ -12,6 +12,7 @@
 ## Writing the book
 
 * **Value first.** The chapter's first paragraph says what the reader can do after it.
+* **Teach, do not report.** A chapter is a lesson, not the log of a run: it starts from the reader's problem, says what the tool or practice is, why it exists and how it solves that problem, and only then how to use it. A run of the guided project or a case is evidence at the point it proves something (a real output, a number), never the thread of the chapter: who ran what, in which order, with which flags stays in the run's record (first: `worktrees`, rewritten at the author's request).
 * **No filler.** Cut every sentence that does not carry information: no recap of the previous chapter, no announcement of the next. Never cut useful content, and never pad, to reach a length; there is no length target.
 * **Voice.** The author tells stories in the first person ("when Ninjobs stalled, I..."); instruction speaks to the reader as "you".
 * **One sentence per line** in the Markdown source.

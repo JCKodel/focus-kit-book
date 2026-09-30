@@ -1,86 +1,38 @@
 # Worktrees and parallel agents
 
-After this chapter you can build two deliveries at the same time in two worktrees, merge them with `--no-ff`, resolve the conflict where they meet, and catch a conflict marker before it is committed.
-You can also say where parallel agents stop paying: shared files, shared resources, disk, and the one person who reviews and merges.
+After this chapter you can have two agents build two deliveries at the same time, each in its own folder, so that each commit holds one delivery and nothing else.
+You can also merge both back, resolve the conflict when they touched the same lines, catch a conflict marker before it is committed, and say when working in parallel stops paying.
+
+## The problem: one folder, two jobs
+
+An agent takes minutes to build a delivery, and while it works you wait.
+The natural move is to start a second agent on the next delivery, and in one folder that goes wrong in one of two ways.
+
+If both agents work on the same branch, their changes land in the same folder.
+`git status` shows the two deliveries mixed, and a commit takes both: one commit with two deliveries, one of them perhaps half done, which no single `git revert` can undo apart.
+The unit of work of [chapter 17](17-git-essentials.md#the-four-side-by-side), one delivery that reverts in one step, is gone, and separating the two afterwards means picking changes file by file, line by line, by hand.
+
+If you give each delivery its own branch, the folder still holds only one branch at a time.
+Switching branches while an agent has work not yet committed either carries that work to the other branch or makes git refuse until you put it aside with `git stash`; and two agents cannot be on two branches of one folder at the same moment.
+
+A second clone of the repository gives each agent its own folder, but each clone has its own copy of the history: the two meet only by pushing to a remote and fetching from it, and every clone repeats the whole history on disk.
+
+What you want is several folders, each on its own branch, sharing one history.
+That is a worktree.
 
 ## What a worktree is
 
-Every git command in this chapter is one you run: the agent runs none of them but `git worktree add`, which the clinic's `/propose` runs, and `git add`, `git status` and `git diff`, as in [chapter 17](17-git-essentials.md#commits-and-the-history).
-Every excerpt comes from the guided project at its chapter tag [`book-v1/worktrees`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/worktrees), commit `699ab40`, or from the record of the run that built it.[^clinic-worktrees-run]
+A worktree is an extra working folder of the same git repository, checked out on its own branch.
+In the words of the git documentation: "*A git repository can support multiple working trees, allowing you to check out more than one branch at a time.*"[^git-worktree]
 
-Your clone is at `book-v1/four-pieces`.
-Between it and `book-v1/worktrees` are the kit update, the seven clinic fixes that this book's reviews queued in the clinic's milestone 1.1 (the tag's [docs/06](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/worktrees/docs/06-Queue.md) lists them), then three deliveries, `git-worktrees`, `route-errors` and `minutes-of`, and two merges.
-For this chapter, run `git fetch --tags` and then `git switch -c mine18 book-v1/worktrees`, a branch of your own at the tag.
-Building those lines yourself with `/propose` and `/apply` is optional; the tag is what to compare against, as in [chapter 15](15-four-pieces.md#the-four-pieces).
+The folder you cloned is the main worktree.
+It holds the `.git` folder, where the history lives: the commits, the branches and the tags.
+`git worktree add` creates another folder, checks a branch out in it, and leaves there a small `.git` file that points back to the main one.
+All worktrees share the history; each has its own files, its own `HEAD` (the commit it is on) and its own staging area.[^git-worktree]
+So a commit made in one worktree is visible at once from every other, with no push and no fetch, while what you change or stage in one never appears in another.
+Git also refuses to check out one branch in two worktrees, so two folders never write to the same branch.[^git-worktree]
 
-A worktree is an extra working folder of the same git repository, on its own branch.
-The git documentation puts it this way: "*A git repository can support multiple working trees, allowing you to check out more than one branch at a time.*"[^git-worktree]
-The folder you cloned is the main worktree; each one you add is linked to it and shares everything but its own checked-out files, its `HEAD` and its staging area.[^git-worktree]
-
-Four commands cover its life:
-
-```
-git worktree add ../<folder> -b <branch> main
-git worktree list
-git worktree remove ../<folder>
-git branch -d <branch>
-```
-
-`add` creates the folder, creates the branch at `main` and checks it out there; `list` prints each worktree with its commit and branch; `remove` deletes the folder, and refuses one with files changed or not tracked, which is how git keeps work you have not committed.[^git-worktree]
-The branch outlives the folder: `git branch -d` deletes it, and only once it is merged.
-Git also refuses to check out one branch in two worktrees, so two agents never write on one branch.[^git-worktree]
-
-Against a second clone, a worktree shares one history: a commit made in the worktree is in the main folder at once, so you merge it from there with no push and no fetch.
-A clone has its own copy of the history, and the two meet only through a remote.
-Against switching branches in one folder, each agent has its own folder: one folder holds one branch at a time, two agents writing in it write over each other, and switching with uncommitted work needs `git stash` first.
-
-The clinic chose this form in its delivery `git-worktrees`, which amended its [ADR-0003](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/worktrees/docs/adr/ADR-0003-git-strategy.md): the decision of trunk stays above as history, and the amendment's Decision reads:
-
-```markdown
-A worktree per delivery. `/propose <slug>` creates it from the main folder
-with `git worktree add ../focus-kit-clinic-<slug> -b <slug> main`, and
-writes the page and the docs/06 mark there. `/apply <slug>` runs in a fresh
-session opened in that folder. The person commits the delivery on branch
-`<slug>`, then from the main folder runs `git merge --no-ff <slug>` into
-`main`: one merge per delivery. The person resolves any conflict, then runs
-`git worktree remove ../focus-kit-clinic-<slug>` and `git branch -d <slug>`.
-
-The agent stages and suggests the commit message. It never commits, merges,
-resolves a merge conflict or removes a worktree. docs/05 §5 holds the
-commands.
-```
-
-One folder per delivery, beside the clinic's own, on a branch named after the slug; one `--no-ff` merge per delivery, so it reverts in one step, as [chapter 17](17-git-essentials.md#the-four-side-by-side) showed.
-Every step that changes the history is the person's: the agent never commits, merges, resolves a conflict or removes a worktree.
-
-## Two deliveries at once
-
-Two lines of the clinic's milestone 1.1 went first.
-`route-errors` asked for one shared copy of each error answer the server's routes repeat; its `/propose` found five such answers where the line named two, and widened the line.
-`minutes-of` asked for one shared parser of "HH:MM" times, whose two copies were in `weeklyHours/rules.ts` and `appointments/rules.ts`.
-
-I started the two `/propose` sessions in the same second, both from the clinic's root, headless, with `Your call. Say what you chose and why.` as the answer to their questions, the brief of [chapter 10](10-propose.md).
-Each ran `git worktree add ../focus-kit-clinic-<slug> -b <slug> main` and wrote its page and its queue mark in its worktree.
-Headless, a session cannot write in an `--add-dir` folder (a second folder the session may work in) that did not exist when it started, so I made the two empty folders before starting the sessions, and `git worktree add` accepts an empty folder.
-Then two `/apply` sessions, again in the same second, each started from its own worktree's root.
-A worktree has no `node_modules`, since git does not track it, so each `/apply` ran `npm ci` first.
-I reviewed both pages and both staged changes and sent no request, then committed each delivery on its branch, in its worktree: [`af3269a`](https://github.com/JCKodel/focus-kit-clinic/commit/af3269aecc1d2408012ad0d5c839f49decd5d8e9) with 12 files and [`948b94d`](https://github.com/JCKodel/focus-kit-clinic/commit/948b94de50e941f6f3b816889bcd604319834e4e) with 7.[^clinic-worktrees-run]
-
-The agents' time overlapped.
-The two `/propose` sessions took 128 seconds from the first start to the last end, against 177.8 seconds for their four turns added; the two `/apply` sessions took 155 seconds, against 277.2 seconds added.[^clinic-worktrees-run]
-
-In an interactive session, open one terminal per session: one in the clinic's root for each `/propose`, one in each worktree for its `/apply`.
-`/propose` writes in the sibling folder, outside the one its session started in, so the host asks you to approve that write, as [chapter 8](08-analyze.md#check-it-against-the-code) says of a permission the mode does not grant.
-That last part follows from the permission mode; the run was headless and did not show it.
-
-## Merging, and the conflict
-
-The merge outputs in this chapter come from the run's record: `git worktree list`, the first merge and `bdb0609` below are copied from my terminal, the rest byte for byte, with paths relative to the clinic's root.[^clinic-worktrees-run]
-From the clinic's root, on `main`, the two worktrees beside the main folder:
-
-```
-git worktree list
-```
+This is the guided project with two deliveries in progress, `route-errors` and `minutes-of`, as `git worktree list` printed it from the main folder:[^clinic-worktrees-run]
 
 ```text
 .                               0993b68 [main]
@@ -88,18 +40,77 @@ git worktree list
 ../focus-kit-clinic-route-errors af3269a [route-errors]
 ```
 
-The first merge found nothing in its way (the lines for each file changed are left out here):
+Three folders, one repository: the main folder on `main`, and beside it one folder per delivery, each on a branch named after the delivery, each line with the commit its branch is on.
+
+## How it solves the problem
+
+Give each delivery its own worktree, and each agent its own folder:
+
+* The agent building `route-errors` works in `../focus-kit-clinic-route-errors`, on the branch `route-errors`; its `git status` shows only that delivery's changes, and the commit you make there holds that delivery and nothing else.
+* The agent building `minutes-of` does the same in its own folder, at the same time.
+* Nobody switches branches, so nothing needs a stash, and neither agent ever sees the other's half-done files.
+
+When a delivery is done, you bring it into `main` from the main folder with a merge commit, `git merge --no-ff`, so it stays one unit of work, reverted in one step with `git revert -m 1 <merge>` ([chapter 17](17-git-essentials.md#merge-commit)).
+
+It also saves time: in the guided project, the two agents that built those two deliveries at once took 155 seconds from the first start to the last end, for 277.2 seconds of work added up.[^clinic-worktrees-run]
+
+## The life of a worktree
+
+Five commands, run from the main folder except where the text says otherwise.
 
 ```
-git merge --no-ff route-errors
+git worktree add ../app-x -b x main
 ```
 
-```text
-Merge made by the 'ort' strategy.
- 12 files changed, 304 insertions(+), 67 deletions(-)
+Creates the folder `../app-x`, creates the branch `x` at `main`, and checks it out in the folder.
+You then build and commit inside `../app-x` as in any folder.
+Only what git tracks is there: dependencies such as `node_modules` are not, so you install them in each worktree (`npm ci` in the guided project).
+
+```
+git worktree list
 ```
 
-The second stopped:
+Prints every worktree, its commit and its branch, as above.
+
+```
+git merge --no-ff x
+```
+
+On `main`, in the main folder, brings the delivery in as one merge commit; the branch's commit is already visible there, since the history is shared.
+
+```
+git worktree remove ../app-x
+```
+
+Deletes the folder.
+It refuses a folder with files changed or not tracked, so work you have not committed is never lost by accident.[^git-worktree]
+
+```
+git branch -d x
+```
+
+Deletes the branch, which outlives its folder.
+`-d` deletes only a branch that is merged; `-D` deletes it anyway.
+
+## Worktrees in the kit
+
+A worktree per delivery is one of the three git strategies of [chapter 6](06-the-documents.md#the-two-choices), and in the kit it is these five commands with `/propose` and `/apply` in between.
+`/propose <slug>` runs `git worktree add ../<project>-<slug> -b <slug> main` and writes the page in the new folder; `/apply <slug>` runs in a fresh session opened in that folder; you review, commit on the branch, merge with `--no-ff`, remove the worktree and delete the branch.
+The agent never commits, merges, resolves a conflict or removes a worktree: every step that changes the history is yours, as in every git strategy.
+The guided project took this strategy in its [ADR-0003](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/worktrees/docs/adr/ADR-0003-git-strategy.md), which records the same steps.
+
+To run two deliveries at once in an interactive session, open one terminal per session: one in the main folder for each `/propose`, one in each worktree for its `/apply`.
+`/propose` writes in a folder outside the one its session started in, so the host asks you to approve that write, as [chapter 8](08-analyze.md#check-it-against-the-code) says of a permission the mode does not grant.
+Headless, a session can write only in an `--add-dir` folder (a second folder it may work in) that existed when it started, so create the empty folder first; `git worktree add` accepts an empty folder.[^clinic-worktrees-run]
+
+## When the branches meet: the conflict
+
+Worktrees keep deliveries apart while they are built; the merge brings them together, and git combines the two sides line by line.
+If both branches changed the same lines, or lines next to each other, git cannot know which to keep: it merges every other change, stops before the merge commit, and leaves the file to you.
+That is a conflict.[^git-merge]
+
+In the guided project, each delivery marked its own line in docs/06, the queue, and the two lines are neighbours.
+The first merge, `route-errors`, went in clean; the second stopped:
 
 ```
 git merge --no-ff minutes-of
@@ -112,9 +123,11 @@ CONFLICT (content): Merge conflict in docs/06-Queue.md
 Automatic merge failed; fix conflicts and then commit the result.
 ```
 
-A conflict is what git reports when both branches changed the same lines, or lines next to each other: git merges every other change, stops before the merge commit, and leaves the file for you.[^git-merge]
-In the file, git writes both versions between conflict markers: `<<<<<<<` opens the version of the branch you are on, `=======` separates it from the merged branch's, and `>>>>>>>` closes that one.[^git-merge]
-`git diff` shows them; during a merge it prints a combined diff, with two columns of `+` and `-`, the first against the branch you are on and the second against the merged branch:
+docs/01 had changed on both branches too, but in lines far apart, so git merged it alone ("Auto-merging"): a conflict is about lines, not files.
+
+In the conflicted file, git writes both versions between conflict markers: `<<<<<<<` opens the version of the branch you are on, `=======` separates it from the version of the branch coming in, and `>>>>>>>` closes that one.[^git-merge]
+`git diff` shows them.
+During a merge it prints two columns of `+` and `-` before each line, the first comparing with the branch you are on and the second with the branch coming in; what matters here is the lines between the markers:
 
 ```
 git diff
@@ -141,47 +154,20 @@ index ac17a76,60ea2d3..0000000
   [x] hours-report         the hours editor's reports reach the professionals section as one WeeklyHoursReport and one tested event; finishes what orchestrator-tests left
 ```
 
-Above `=======` is `main`, which already holds `route-errors`: its line marked `[x]` with the wider text, and `minutes-of` still `[ ]`.
-Below is `minutes-of`: its own line `[x]`, and `route-errors` with the text it had before.
-Each branch marked its own line in the queue, and the two lines are next to each other, so git could not keep one change without the other side's version of the neighbouring line.
-docs/01 changed on both branches too, `route-errors` in its `server/` listing and `minutes-of` in its `lib/` listing, lines apart: git printed "Auto-merging" and merged it alone.
+Above `=======` is `main`, which already holds `route-errors`: its line `[x]`, with the text that delivery rewrote, and `minutes-of` still `[ ]`.
+Below is `minutes-of`: its own line `[x]`, and `route-errors` as it was before.
+Neither side is right alone; the right version keeps what both did: both lines `[x]`, and `route-errors` with its new text.
 
-The resolution keeps what both sides did: both lines, both `[x]`, and `route-errors` with its new text; the markers go.
-With the file edited to that, `git diff` shows the resolution against each side:
-
-```
-git diff
-```
-
-```text
-diff --cc docs/06-Queue.md
-index ac17a76,60ea2d3..0000000
---- a/docs/06-Queue.md
-+++ b/docs/06-Queue.md
-@@@ -40,8 -40,8 +40,8 @@@ git-worktrees is built in its own workt
-  [ ] time-zone-names      setup accepts every IANA name the runtime knows, such as US/Eastern and Etc/UTC, as docs/03 says
-  [ ] slot-taken-retry     after a refused booking whose slot reload fails, "Try again" keeps the "no longer free" message and the chosen date
-  [ ] routes-table         the Routes table of docs/02 renders whole, with the slots and appointments routes as rows
- -[ ] route-errors         one shared databaseFailed and one shared notFound answer; the first copies are in session.server.ts and weeklyHours/route.server.ts
- +[x] route-errors         one shared copy of each error answer routes repeat (DatabaseFailed, BadRequest, NotSignedIn, ProfessionalNotFound, ClinicNotSetUp 500); the first copies are in session.server.ts and weeklyHours/route.server.ts
-- [ ] minutes-of           one shared "HH:MM" parser; the first copy is in weeklyHours/rules.ts, the second in appointments/rules.ts
-+ [x] minutes-of           one shared "HH:MM" parser; the first copy is in weeklyHours/rules.ts, the second in appointments/rules.ts
-  [x] booking-submit       useBooking's submit publishes its in-flight state as an update and books with the state the hook read, not a ref written during render
-  [x] hours-save           useWeeklyHours' save publishes its in-flight state as an update, so a time typed just before Save survives
-  [x] hours-report         the hours editor's reports reach the professionals section as one WeeklyHoursReport and one tested event; finishes what orchestrator-tests left
-```
-
-No marker is left: in the second column the `route-errors` line is as `main` had it, in the first the `minutes-of` line is as its branch had it.
-`git add` marks the file resolved, and `git commit --no-edit` makes the merge commit with the message git prepared:
+To resolve, edit the file to that version and delete the three marker lines; then `git add` tells git the file is resolved, and `git commit --no-edit` makes the merge commit with the message git prepared:
 
 ```
 git add docs/06-Queue.md
 git commit --no-edit
 ```
 
-```text
-[main 699ab40] Merge branch 'minutes-of'
-```
+If you would rather not resolve it now, `git merge --abort` leaves the merge and puts the branch back as it was before.[^git-merge]
+
+The history afterwards, in the graph of [chapter 17](17-git-essentials.md#merge-commit):
 
 ```
 git log --oneline --graph -5
@@ -200,95 +186,60 @@ git log --oneline --graph -5
 * 0993b68 Build every delivery in its own worktree (git-worktrees)
 ```
 
-Both branches start at `0993b68`, `git-worktrees`.
-[`045c744`](https://github.com/JCKodel/focus-kit-clinic/commit/045c744d27acdbaee7e269e848c5de6ee696d21d) joins `route-errors`' one commit to `main`, and [`699ab40`](https://github.com/JCKodel/focus-kit-clinic/commit/699ab4008f78853810c28561110666abd2d0b823) joins `minutes-of`'s; the crossed lines in the middle are only how `--graph` draws `af3269a` and `0993b68` on separate lines.
-Each delivery is one merge commit, reverted with `git revert -m 1 <merge>`.
-`npm run verify` on `699ab40` passed its 336 Vitest and 144 Playwright tests.[^clinic-worktrees-run]
+Both branches start at `0993b68`, each holds one commit, and each comes into `main` through its own merge commit, `045c744` and `699ab40`: two deliveries, each reverted alone.
 
-When you would rather not resolve now, `git merge --abort` leaves the merge and puts the branch back as it was before it.[^git-merge]
+## The trap: committing the markers
 
-## When git commits the markers
+`git add` is how you tell git a conflict is resolved, and git takes your word.
+Stage the file with its markers still inside, commit, and the merge commit holds the markers, with no warning.
+It happened in the guided project, when the merge's commands were pasted as one block and the add and the commit ran before anyone touched the file.[^clinic-worktrees-run]
 
-The first time, I pasted the commands of the whole merge as one block, so these two ran right after the conflict, before I had touched the file:
-
-```
-git add docs/06-Queue.md
-git commit --no-edit
-```
-
-```text
-[main bdb0609] Merge branch 'minutes-of'
-```
-
-Git made the merge commit `bdb0609` with the markers in docs/06, lines 43 to 49, and said nothing.[^clinic-worktrees-run]
-To git, a marker is text like any other: `git add` is how you tell it a file is resolved, and it takes your word.
-
-The guard is one command before the merge's commit:
+The guard is one command, before the merge's commit:
 
 ```
 git diff --cached --check
 ```
 
-It reads what is staged and reports each conflict marker as `<file>:<line>: leftover conflict marker`, and exits non-zero when it finds one.[^git-diff]
-The run did not use it; exercise 18.2 has you run it.
+It reads what is staged and reports each conflict marker as `<file>:<line>: leftover conflict marker`, and it exits non-zero when it finds one, so a script can stop on it.[^git-diff]
 
-`bdb0609` was never pushed, so the undo was to move `main` back to the commit before it, and throw it away:
+If the markers were committed anyway, the undo depends on whether anyone else has the commit.
+Not pushed: `git reset --hard <the commit before the merge>` throws the merge away, and you merge again.
+Pushed: `git revert`, since reset rewrites history that others already have, which is [chapter 17's rule for rebase](17-git-essentials.md#fast-forward-and-rebase).
 
-```
-git reset --hard 045c744
-```
+## When parallel stops paying
 
-```text
-HEAD is now at 045c744 Merge branch 'route-errors'
-```
+Worktrees remove the mixing; they do not remove everything two deliveries share.
+Before starting two at once, check four things.
 
-Then the same merge again, the same conflict, and the resolution of the previous section.
-`bdb0609` is on no branch now, and the clinic's history does not hold it.
-Reset rewrites history, so it is for commits nobody else has; once a commit is pushed, undo it with `git revert`, which is [chapter 17's rule for rebase](17-git-essentials.md#fast-forward-and-rebase).
-In the record, I asked the book's agent to run that second part, against the rule that the person merges; the chapter shows git's output, and the rule stands (chapter 19).
+**Files.** Two deliveries that change the same lines conflict at the merge.
+The queue is always one of them, since every delivery marks its line, and it resolves the same way every time: keep both marks.
+A code file both change is different: its resolution is a decision about the code.
+So pair deliveries whose files do not meet: read each queue line, docs/01 and the code it names, and list the files each will touch.
 
-## Where parallelism stops
+**Shared resources.** Worktrees share the machine: its ports, a test database in a common folder.
+In the guided project, both deliveries ran their end-to-end tests at once, both on port 3100, and one stopped with `Error: http://localhost:3100/api/health is already used`; run again, it passed.[^clinic-worktrees-run]
+A port or a database per worktree is a choice the project can make, in a delivery of its own.
 
-Two agents in two worktrees made two deliveries in less time than one after the other; the run also showed where that stops.[^clinic-worktrees-run]
+**Disk.** Each worktree has its own dependencies: in the guided project, 155M of `node_modules` per worktree, as much as the main folder.[^clinic-worktrees-run]
 
-**The queue.** Every delivery marks its line in docs/06, so two deliveries in flight always touch that file, and their lines are often neighbours.
-The clinic's ADR-0003 says so in its consequences: "*`docs/06` is edited by every delivery, so two deliveries in flight can conflict on neighbouring queue lines. The person resolves it by keeping both marks.*"
-It is the conflict of the run, and it is always resolvable the same way.
-
-**The same files.** `route-errors` changed 12 files and `minutes-of` 7; only docs/01 and docs/06 were in both, and docs/01 merged alone because the changes were lines apart.
-Two deliveries that change the same lines of a code file conflict there, and that resolution is a decision about the code, no longer a matter of keeping both marks.
-ADR-0003: "*Before building two deliveries at once, the person checks that they do not touch the same files.*"
-
-**Shared resources.** Worktrees share the machine: the clinic's end-to-end tests start a server on port 3100 in every worktree.
-`route-errors`' first `npm run verify` stopped before Playwright with `Error: http://localhost:3100/api/health is already used`, since the other worktree's run held the port; run again with no change, it passed.
-ADR-0003: "*The e2e ports (3100 and 5174, in `playwright.config.ts`) and the e2e database (`e2eDatabasePath`, in the system temp folder) are shared by every worktree today.*"
-The database did nothing visible in this run.
-A port or a database per worktree is a project's choice, with its own delivery; the clinic has not made it.
-
-**Disk.** Each worktree needs its own dependencies: `node_modules` took 155M in each, as much as the clinic's main folder.
-ADR-0003: "*Each worktree costs a folder and its own `node_modules`.*"
-
-**The person.** The agents' time overlapped: 155 seconds of clock for 277.2 seconds of `/apply` work.
-The review did not: one person reads each page, each staged change, commits and merges, one at a time.
-The run did not measure that time, so this chapter gives no number for it.
-
-This book is on trunk for the last two reasons, shared files and one reviewer, as its ADR-0010 in [chapter 6](06-the-documents.md#adrs) says.
-
-So you decide which deliveries run in parallel before starting them, by the files each will touch: read the line, docs/01 and the code it names, and pair deliveries whose files do not meet, except the queue.
-After the clinic's run, milestone 1.1 still has three open lines to build, and exercise 18.3 has you pair two.
+**You.** The agents work in parallel; your review does not.
+You read each page and each staged change, commit and merge, one delivery at a time, so run at once only as many deliveries as you can review.
+This book, written and reviewed by one person in shared files, stays on trunk for those two reasons, as its ADR-0010 in [chapter 6](06-the-documents.md#adrs) says.
 
 ## Key points
 
-* A worktree is an extra working folder of the same repository on its own branch: `git worktree add ../<folder> -b <branch> main`, `list`, `remove`, then `git branch -d`; it shares one history, and each agent writes in its own folder.
-* Two agents in two worktrees overlap their time; the person merges each delivery with `--no-ff`, one merge commit each, reverted with `git revert -m 1`.
-* A conflict is two branches changing the same or neighbouring lines: git stops, merges the rest, and leaves both versions between markers; keep what both did, `git add`, then commit, or leave with `git merge --abort`.
-* Git commits markers without a word if you stage the file unresolved; run `git diff --cached --check` before committing a merge, and undo an unpushed bad merge with `git reset --hard`, a pushed one with `git revert`.
-* Parallelism stops at the queue (always conflicts, keep both marks), files both deliveries change, shared ports and databases, a `node_modules` per worktree, and the one person who reviews and merges.
+* Two agents in one folder mix their deliveries in one commit, or fight over the one branch the folder holds; a worktree gives each delivery its own folder and branch, sharing one history.
+* `git worktree add ../<folder> -b <branch> main`, work and commit there, `git merge --no-ff <branch>` from the main folder, then `git worktree remove` and `git branch -d`; each delivery stays one merge commit, reverted alone.
+* A conflict is two branches changing the same or neighbouring lines: git merges the rest and leaves both versions between markers; keep what both did, `git add`, commit, or leave with `git merge --abort`.
+* Git commits markers without a word if you stage the file unresolved: run `git diff --cached --check` before committing a merge.
+* Parallel pays while the deliveries' files do not meet, the machine's shared resources do not collide, the disk holds a copy of the dependencies per worktree, and you can still review each delivery.
 
 ## Exercises
 
-These exercises use your clone of the clinic at `book-v1/worktrees`, on your branch `mine18`.
-They are git commands you run yourself; nothing here changes the clinic.
+These exercises use the guided project at its chapter tag [`book-v1/worktrees`](https://github.com/JCKodel/focus-kit-clinic/tree/book-v1/worktrees), which holds the two deliveries above and their merges.
+Your clone is at `book-v1/four-pieces`: run `git fetch --tags`, then `git switch -c mine18 book-v1/worktrees`.
+Between the two tags are the kit update, seven fixes that this book's reviews queued in the clinic's milestone 1.1, the switch to worktrees and the two deliveries; building them yourself with `/propose` and `/apply` is optional, and the tag is what to compare against.
+The commands are git commands you run yourself.
 
 ### Exercise 18.1
 
@@ -303,9 +254,9 @@ Then run `git merge --abort`, remove both worktrees and delete both branches: sa
 
 ### Exercise 18.3
 
-From the tag's docs/06, pick two open lines of milestone 1.1 that two agents could build at the same time, name the files each would touch, from docs/01 and the code, and say which conflicts you would still expect.
+From the tag's [docs/06](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/worktrees/docs/06-Queue.md), pick two open lines of milestone 1.1 that two agents could build at the same time, name the files each would touch, from docs/01 and the code, and say which conflicts you would still expect.
 
 [^git-worktree]: Git, "git-worktree", the documentation, accessed 2026-09-30. <https://git-scm.com/docs/git-worktree>
-[^clinic-worktrees-run]: This book's run of the guided project's parallel deliveries, 2026-09-30, with Claude Code 2.1.286 and the model `claude-opus-5-5`: every turn of `git-worktrees`, `route-errors` and `minutes-of`, the times, the merges in `merges.txt`, and the `npm run verify` output on the clinic's commit `699ab40` in `verify.txt`. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/clinic-worktrees-run/README.md>
+[^clinic-worktrees-run]: This book's run of two deliveries of the guided project in parallel, 2026-09-30, with Claude Code 2.1.286 and the model `claude-opus-5-5`: every turn, the times, the merges in `merges.txt` (the `git worktree list` output copied from the terminal, the rest byte for byte, paths relative to the clinic's root), and the tests on the clinic's commit `699ab40` in `verify.txt`. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/clinic-worktrees-run/README.md>
 [^git-merge]: Git, "git-merge", the documentation, section "How conflicts are presented" and option `--abort`, accessed 2026-09-30. <https://git-scm.com/docs/git-merge>
 [^git-diff]: Git, "git-diff", the documentation, option `--check`, accessed 2026-09-30. <https://git-scm.com/docs/git-diff>

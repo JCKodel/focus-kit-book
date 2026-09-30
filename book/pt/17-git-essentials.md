@@ -258,14 +258,14 @@ Uma entrega de vários commits, com merge feito em cada forma, e o que desfazê-
 Com um branch por entrega, faça o merge por commit de merge ou por squash, para que a entrega continue uma unidade de trabalho: a regra do [capítulo 6](06-the-documents.md#as-duas-escolhas), um merge do branch, que o [`[>]` do capítulo 9](09-queue-and-milestones.md#as-marcas) já supõe.
 Um fast-forward ou um rebase só mantém isso quando o branch tinha um commit.
 
-Quando os dois branches mudaram as mesmas linhas, o git não consegue escolher e para com um conflito, que você resolve antes de o merge terminar; o [capítulo 18](18-worktrees.md#o-merge-e-o-conflito) o ensina, onde entregas paralelas se encontram.
+Quando os dois branches mudaram as mesmas linhas, o git não consegue escolher e para com um conflito, que você resolve antes de o merge terminar; o [capítulo 18](18-worktrees.md#quando-os-branches-se-encontram-o-conflito) o ensina, onde entregas paralelas se encontram.
 
 ## Desfazendo uma entrega
 
 O `git revert <commit>` faz um commit novo que desfaz um anterior, e mantém o histórico: a entrega e o desfazer dela ficam os dois ali para ler.[^git-revert]
 
 No trunk, logo depois do `f16f83b`, `git revert f16f83b` desfaria o `cancel-appointment` inteiro, a página incluída, já que são um commit só.
-Commits posteriores que mudam as mesmas linhas fazem o revert parar com um conflito, o mesmo de um merge ([capítulo 18](18-worktrees.md#o-merge-e-o-conflito)).
+Commits posteriores que mudam as mesmas linhas fazem o revert parar com um conflito, o mesmo de um merge ([capítulo 18](18-worktrees.md#quando-os-branches-se-encontram-o-conflito)).
 
 Um commit de merge tem dois pais, então é preciso dizer ao git que lado manter.
 `git revert -m 1 846e337` mantém o pai 1, o `main` como estava, e desfaz tudo o que o segundo pai trouxe: os sete commits do #246, em um commit novo.

@@ -258,14 +258,14 @@ A delivery of several commits, merged in each form, and what undoing it takes, w
 With a branch per delivery, merge by merge commit or by squash, so the delivery stays one unit of work: the rule of [chapter 6](06-the-documents.md#the-two-choices), one merge of the branch, which [chapter 9's `[>]`](09-queue-and-milestones.md#the-marks) already assumes.
 A fast-forward or a rebase keeps that only when the branch held one commit.
 
-When both branches changed the same lines, git cannot choose and stops with a conflict, which you resolve before the merge completes; [chapter 18](18-worktrees.md#merging-and-the-conflict) teaches it, where parallel deliveries meet.
+When both branches changed the same lines, git cannot choose and stops with a conflict, which you resolve before the merge completes; [chapter 18](18-worktrees.md#when-the-branches-meet-the-conflict) teaches it, where parallel deliveries meet.
 
 ## Undoing a delivery
 
 `git revert <commit>` makes a new commit that undoes an earlier one, and keeps the history: the delivery and its undoing are both there to read.[^git-revert]
 
 On trunk, right after `f16f83b`, `git revert f16f83b` would undo `cancel-appointment` whole, its page included, since they are one commit.
-Later commits that change the same lines make the revert stop with a conflict, the same as a merge's ([chapter 18](18-worktrees.md#merging-and-the-conflict)).
+Later commits that change the same lines make the revert stop with a conflict, the same as a merge's ([chapter 18](18-worktrees.md#when-the-branches-meet-the-conflict)).
 
 A merge commit has two parents, so git must be told which side to keep.
 `git revert -m 1 846e337` keeps parent 1, `main` as it was, and undoes everything the second parent brought: #246's seven commits, in one new commit.
