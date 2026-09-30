@@ -43,7 +43,7 @@
 * [x] The excerpt matches `git show book-v1/four-pieces:src/features/appointments/useBooking.ts` lines 30 onward, byte for byte after removing the outer indentation.
 * [x] `grep -n "passes it to \`submit\`\|o passa a \`submit\`" book/*/15-four-pieces.md` finds nothing.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver, on 2026-09-30, both PDFs built
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
 
 **What happened.**

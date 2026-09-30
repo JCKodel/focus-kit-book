@@ -44,7 +44,7 @@ Sentences are found by their quoted text. `ch15-event-delivery`, `ch15-submit-ev
 * [x] No "Nowhere else is anything passed", "Em nenhum outro lugar se passa nada", "no other piece receives a dependency", "nenhuma outra peça recebe uma dependência", "only the orchestrator has injected dependencies", "só o orquestrador tem dependências injetadas", "the only piece that receives its dependencies" or "a única peça que recebe as suas dependências" left in `book/`. No "the only piece that receives its dependencies" left in docs/03.
 * [x] docs/03's orchestrator and repository rows updated, and ADR-0016 amended.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver, on 2026-09-30, both PDFs built
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
 
 **What happened.**

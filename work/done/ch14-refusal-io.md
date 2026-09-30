@@ -36,7 +36,7 @@
 * [x] No "with no I/O involved", "sem I/O envolvido", "a refusal only in a rule" or "uma recusa só em uma regra" is left in `book/`.
 * [x] The refusal row of docs/03 updated.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver, on 2026-09-30, both PDFs built
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
 
 **What happened.**

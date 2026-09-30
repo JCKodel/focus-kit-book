@@ -42,7 +42,7 @@ Sentences are found by their quoted text. The line numbers below are from commit
 * [x] `grep -n "two of its tests\|dois dos seus testes" book/*/16-testing-and-agents.md` finds nothing.
 * [x] `[^vitest-each]` is in both editions, and its link opens Vitest's `test.each` section.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver, on 2026-09-30, both PDFs built
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
 
 **What happened.**

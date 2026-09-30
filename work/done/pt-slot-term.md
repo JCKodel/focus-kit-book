@@ -28,7 +28,7 @@
 
 * [x] Both excerpts changed; `grep -n "horário livre\|horários livres" book/pt/06-the-documents.md` finds nothing.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver, on 2026-09-30, both PDFs built
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
 
 **What happened.**

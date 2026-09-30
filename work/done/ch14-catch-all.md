@@ -39,7 +39,7 @@
 * [x] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
 * [x] The claim about `ERR_SQLITE_ERROR` has its footnote in both editions.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver, on 2026-09-30, both PDFs built
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
 
 **What happened.**

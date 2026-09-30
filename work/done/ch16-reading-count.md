@@ -61,5 +61,5 @@ Sentences are found by their quoted text. The line numbers below are from commit
 * [x] `grep -n "Both turns ran\|Os dois turnos rodaram" book/*/16-testing-and-agents.md` finds nothing.
 * [x] Chapter 16 has five key points.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author. Run once at the end of the M4.1 loop by the driver.
+* [x] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver, on 2026-09-30, both PDFs built
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.

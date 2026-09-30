@@ -48,7 +48,7 @@ Sentences are found by their quoted text. `ch15-event-delivery`, `ch15-submit-ev
 * [x] Every count in the new paragraph names its tag, and the method (`wc -l`) is in the text.
 * [x] No "A piece exists when it has a job" or "Uma peça existe quando tem um trabalho" left in `book/`. Key point 2 in both editions names the job and the weighing.
 * [x] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver, on 2026-09-30, both PDFs built
 * [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
 
 **What happened.**
