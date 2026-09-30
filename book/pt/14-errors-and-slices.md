@@ -1,7 +1,8 @@
 # Exceções como valores e fatias verticais
 
 Depois deste capítulo você consegue organizar o código por funcionalidade, em fatias verticais, e devolver toda exceção como um valor.
-Você sabe distinguir uma exceção de uma recusa e de um erro, e sabe que os dois princípios funcionam sem as quatro peças do capítulo 15.
+Você sabe distinguir uma exceção de uma recusa e de um erro em qualquer linguagem, dizer por que um throw nunca deve conduzir o fluxo do programa e manter as exceções de uma biblioteca fora do seu domínio.
+Você também sabe que os dois princípios funcionam sem as quatro peças do capítulo 15.
 
 ## Dois princípios que se sustentam sozinhos
 
@@ -78,21 +79,39 @@ O que duas funcionalidades compartilham e não pertence a nenhuma coisa que o ap
 
 ## Exceção, recusa, erro
 
-O Dart divide as falhas em duas classes de `dart:core`.[^dart-core]
-Uma `Exception` foi feita para ser capturada, uma falha esperada como uma conexão perdida; um `Error` é uma falha do programa que o programador deveria ter evitado, um bug.[^dart-core]
+Um erro é um bug: um código errado, corrigido quando é achado e nunca tratado.
+Uma exceção é uma falha de fora do programa, como uma conexão perdida ou um disco cheio: nenhum código está errado, e ela é tratada onde acontece.
+O nome da classe não distingue os dois: as falhas nativas do JavaScript são todas um `Error`, e as do .NET são todas uma `Exception`, então quem decide é a causa, nunca o nome.
+Em quarenta anos programando, vi uma linguagem tornar a diferença visível: o Dart, cujo `dart:core` tem uma classe `Exception`, feita para ser capturada, e uma classe `Error`, para uma falha do programa que o programador deveria ter evitado.[^dart-core]
 
-Este livro acrescenta um terceiro tipo: a recusa, a resposta de uma regra quando ela diz não, como um número de telefone com poucos dígitos.
+Eric Lippert separa todo valor lançado em quatro tipos, cujos nomes ficam em inglês aqui:[^lippert-vexing]
+
+* "Fatal" (fatal): "*não é culpa sua, você não consegue evitá-las e não consegue limpar a bagunça delas de forma sensata*", como a memória acabar; ninguém captura uma.
+* "Boneheaded" (estúpida): "*culpa sua mesmo, você poderia tê-las evitado, então são bugs no seu código*"; o erro deste livro.
+* "Vexing" (irritante): "*o resultado de decisões de design infelizes*", uma falha que uma API lança onde poderia ter devolvido um valor, como o `Int32.Parse` do .NET recebendo um texto que o usuário digitou; uma exceção que o design da API cria, transformada em valor na hora ou evitada com a forma `Try` da API, `Int32.TryParse`.[^dotnet-exceptions]
+* "Exogenous" (exógena): "*o resultado de realidades externas bagunçadas invadindo a lógica bonita e precisa do seu programa*", como um arquivo que sumiu; a exceção deste livro.
+
+Ao lado do erro e da exceção, este livro acrescenta um terceiro tipo: a recusa, a resposta de uma regra quando ela diz não, como um número de telefone com poucos dígitos.
 Nenhum I/O falhou, e nenhum código está errado; a regra fez o trabalho dela.
 
 Então uma falha é uma de três:
 
-* **Exceção:** uma falha esperada no I/O (o banco de dados, a rede, o armazenamento do celular), capturada onde o I/O acontece e devolvida como valor.
+* **Exceção:** uma falha esperada de fora do programa (o banco de dados, a rede, o armazenamento do celular), capturada na fronteira com o mundo de fora (o I/O, e a leitura do que ele traz) e devolvida como valor.
 * **Recusa:** uma regra dizendo não, verificada no código ou por uma restrição do banco de dados, como um índice único, e devolvida como valor; mesmo quando é o banco que responde, nada falhou.
 * **Erro:** um bug, lançado e nunca capturado, então chega à sua tela enquanto você desenvolve e ao seu analytics quando o app roda.
 
 A área chama o princípio de "erros como valores", a partir do Go[^go-errors] e do Rust,[^rust-result] e o capítulo 6 disse por que este livro diz exceção.[^book-adr-0016]
 O kit e a clínica ainda usam a palavra da área, `error`, no campo do `Result` e nos documentos, para o que este livro chama de exceção ou recusa.
 O próprio docs/03 da clínica já chama cada resultado das suas regras de recusa, como `SlotTaken`, "a recusa quando um agendamento pede um horário que não está livre".
+
+## Por que não lançar
+
+Uma exceção lançada para conduzir o fluxo do programa, em vez de devolvida, custa quatro coisas:
+
+1. Um `throw` é uma saída que o ponto da chamada não mostra. Joel Spolsky escreveu em 2003 que as exceções "*são invisíveis no código-fonte*" e "*criam pontos de saída demais para uma função*".[^spolsky-exceptions]
+2. A assinatura não diz o que pode falhar, então o compilador não consegue verificar que todo caso foi tratado. Um `Result` diz isso no seu tipo, e o `Record` sobre `BookingRefusal` da próxima seção não compila quando uma recusa fica sem status.
+3. Um throw custa mais que um return. No benchmark `ExceptionThrowCatch` de Stephen Toub, publicado em 2024-09-12, 1.000 throws, cada um capturado através de 10 frames assíncronos, levaram 123,03 ms no .NET 8 e 54,68 ms no .NET 9.[^toub-net9] O guia de ASP.NET Core da Microsoft tira a regra: "*lançar e capturar exceções é lento em comparação com outros padrões de fluxo de código. Por isso, exceções não devem ser usadas para controlar o fluxo normal do programa.*"[^aspnet-best-practices] As Framework Design Guidelines dizem assim: "*NÃO use exceções para o fluxo normal de controle, se possível.*"[^fdg-exception-throwing]
+4. Um catch largo o bastante para conduzir o fluxo também captura bugs, como mostra o `query` da próxima seção: um `TypeError` dentro dele vira `DatabaseFailed`.
 
 ## Exceções como valores na clínica
 
@@ -240,6 +259,26 @@ export function memoryDatabase(): DatabaseSync {
 
 Uma migration que falha em um teste é um bug, um erro, então é lançada e o teste para ali.
 
+## A fronteira
+
+Uma exceção pertence ao domínio que a lança.
+Pense em um login pela Apple: quando o SDK da Apple falha, ele lança a exceção da própria Apple, e o código que chama o SDK a captura e devolve um valor do seu app, digamos `AuthFailure`.
+Nada depois desse código sabe que a Apple existe, então uma segunda forma de login, ou uma versão nova do SDK da Apple, muda só esse código.
+O domain-driven design chama esse tradutor de camada anticorrupção, cujo "*propósito central ... é proteger o modelo de domínio*";[^anti-corruption-layer] o padrão traduz modelos e chamadas, e este livro dá um passo a mais: traduz as exceções também.
+
+A clínica faz isso com o SQLite, em `book-v1/closing-a-milestone`.
+`git grep node:sqlite -- src` acha `DatabaseSync` importado como valor, fora dos arquivos de teste, só em `database.server.ts`, onde `query` transforma a falha do SQLite em `DatabaseFailed`, e em `testDatabase.server.ts`, o banco em memória dos testes.
+Todo outro arquivo que o nomeia, os repositórios e as rotas entre eles, importa só o tipo dele, para receber e repassar o banco aberto; nenhuma regra, hook, tela ou `api.ts` o importa.
+`git grep "UNIQUE constraint"` acha o texto da falha de `UNIQUE` do SQLite em um arquivo só, `appointments/repository.server.ts`, onde ele vira `SlotTaken`.
+
+Então toda exceção fora do I/O é um bug? Quase:
+
+* Uma exceção "vexing" da leitura de um texto vem de um texto que o I/O trouxe, então fica na mesma fronteira: uma rota transforma um corpo de requisição que não pode ser lido na resposta `BadRequest` na hora.
+* Uma "fatal", como a memória acabar, não é tratada por ninguém.
+* O fluxo de controle do próprio framework é lançado de propósito e deve passar intocado. O `redirect` do Next.js "*lança um erro, então deve ser chamado **fora** do bloco `try` quando se usa `try/catch`*",[^nextjs-redirect] e um `try`/`catch` em volta do `notFound` "*o suprime, e a tela de não encontrado não aparece*".[^nextjs-not-found] O .NET cancela uma chamada assíncrona lançando `OperationCanceledException`, para que "*a pilha de chamadas*" seja "*desfeita assim que um pedido de cancelamento é observado*";[^dotnet-exceptions] ela pertence ao código que pediu o cancelamento, nunca a um catch no banco.
+
+Então a regra é: capture na fronteira com o mundo de fora, e deixe todo o resto passar.
+
 ## Uma falha, do começo ao fim
 
 O docs/01 da clínica, na seção "How errors travel", dá o caminho que uma falha percorre.
@@ -257,8 +296,9 @@ O docs/01 da clínica, na seção "How errors travel", dá o caminho que uma fal
 
 * Uma funcionalidade é uma coisa que o app guarda, com toda ação sobre ela, e a fatia vertical dela é uma pasta, sem pasta por camada; uma mudança na funcionalidade mexe nessa pasta, e remover a funcionalidade remove essa pasta.
 * Um arquivo entra em uma fatia quando se paga; o código sobre uma coisa que o app guarda fica na fatia dela, que as outras fatias importam, e o código que não pertence a nenhuma coisa entra em `lib/` no segundo uso.
-* Uma exceção é um I/O que falhou, uma recusa é uma regra dizendo não, no código ou em uma restrição do banco de dados, e nenhuma das duas é lançada.
-* Um erro é um bug: nunca capturado, chega à sua tela e ao seu analytics.
+* Um erro é um bug, corrigido e nunca capturado; uma exceção é uma falha de fora do programa, capturada na fronteira e devolvida como valor; uma recusa é uma regra dizendo não, no código ou numa restrição do banco; o nome da classe não distingue nenhum deles.
+* Um throw é uma saída que quem chama não vê e o compilador não verifica, então nunca conduz o fluxo.
+* A exceção de uma biblioteca pertence à biblioteca: o código na fronteira a transforma no valor do domínio, e o resto do app não lança nada.
 * Um `Result` tratado com um `Record` sobre os seus casos não compila quando um caso é esquecido.
 
 ## Exercícios
@@ -268,6 +308,7 @@ Estes exercícios usam a clínica, por conversa com o agente, nunca à mão.
 ### Exercício 14.1
 
 Peça ao agente que liste todo `try`, `catch` e `throw` da sua clínica fora dos testes, e que diga, para cada um, que I/O ele protege e que valor ele devolve.
+Peça também que nomeie todo tipo de exceção de uma biblioteca que chega a um código fora do lugar que faz o I/O dessa biblioteca.
 Qualquer um que não proteja I/O é candidato para a sua fila, não uma correção agora.
 
 ### Exercício 14.2
@@ -287,3 +328,12 @@ Decida, e diga por quê; nada é construído.
 [^rust-result]: The Rust Programming Language, "Recoverable Errors with Result", capítulo 9.2, acesso em 2026-09-29. <https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html>
 [^book-adr-0016]: J.C. Ködel, "One Page at a Time", o ADR-0016 deste livro, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, de 2026-09-28, na pasta de ADRs em `main`. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>
 [^node-sqlite-error]: Node.js, "Errors", referência da API, `ERR_SQLITE_ERROR`, acesso em 2026-09-30: "*um erro foi retornado pelo SQLite*". <https://nodejs.org/api/errors.html#err_sqlite_error>
+[^lippert-vexing]: Eric Lippert, "Vexing exceptions", Fabulous Adventures in Coding, 2008-09-10, acesso em 2026-09-30. <https://ericlippert.com/2008/09/10/vexing-exceptions/>
+[^dotnet-exceptions]: Microsoft Learn, "Best practices for exceptions", .NET, acesso em 2026-09-30, seções "Call `Try*` methods to avoid exceptions" e "Catch cancellation and asynchronous exceptions": "*essas exceções permitem que a execução seja interrompida de forma eficiente e que a pilha de chamadas seja desfeita assim que um pedido de cancelamento é observado*". <https://learn.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions>
+[^spolsky-exceptions]: Joel Spolsky, "Exceptions", Joel on Software, 2003-10-13, acesso em 2026-09-30. <https://www.joelonsoftware.com/2003/10/13/13/>
+[^toub-net9]: Stephen Toub, "Performance Improvements in .NET 9", .NET Blog, 2024-09-12, seção "VM", benchmark `ExceptionThrowCatch`, acesso em 2026-09-30. <https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-9/>
+[^aspnet-best-practices]: Microsoft Learn, "ASP.NET Core Best Practices", seção "Minimize exceptions", acesso em 2026-09-30. <https://learn.microsoft.com/en-us/aspnet/core/fundamentals/best-practices>
+[^fdg-exception-throwing]: Krzysztof Cwalina e Brad Abrams, "Exception Throwing", Framework Design Guidelines, 2ª edição, 2008, no Microsoft Learn, acesso em 2026-09-30. <https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/exception-throwing>
+[^anti-corruption-layer]: Microsoft, "Anti-Corruption Layer pattern", Azure Architecture Center, acesso em 2026-09-30: "*o propósito central de uma camada anticorrupção é proteger o modelo de domínio, não prescrever nenhuma escolha de produto específica*". <https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer>
+[^nextjs-redirect]: Next.js, "redirect", referência da API, 16.3.7, acesso em 2026-09-30. <https://nextjs.org/docs/app/api-reference/functions/redirect>
+[^nextjs-not-found]: Next.js, "notFound", referência da API, 16.3.7, acesso em 2026-09-30: "*um `try/catch` em volta da chamada o suprime, e a tela de não encontrado não aparece*". <https://nextjs.org/docs/app/api-reference/functions/not-found>

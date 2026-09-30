@@ -71,10 +71,25 @@ Sentences are found by their quoted text. The line numbers below are from commit
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
-* [ ] No Dart code, and Dart appears in chapter 14 only as the credit of origin.
-* [ ] Every quote was re-read on its live page, and the benchmark numbers name their source and date.
-* [ ] The clinic's `git grep` claims were re-run at `book-v1/closing-a-milestone`.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
+* [x] No Dart code, and Dart appears in chapter 14 only as the credit of origin.
+* [x] Every quote was re-read on its live page, and the benchmark numbers name their source and date.
+* [x] The clinic's `git grep` claims were re-run at `book-v1/closing-a-milestone`.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Step 0: every quoted anchor was still in both editions, shifted three lines by `slice-imports`; the refusal and catch-all text `ch14-refusal-io` and `ch14-catch-all` left is what this page foresaw. No conflict.
+* The opening became two sentences: the abilities (any language, why a throw never steers the flow, a library's exceptions kept out of the domain), then "both principles work without the four pieces".
+* "Exception, refusal, error": error and exception defined by cause, the class-name trap, the Dart credit in the first person with `[^dart-core]` kept, then Lippert's four kinds with his definitions quoted. The refusal sentence now opens "Next to error and exception, this book adds a third kind", since "a third kind" right after four kinds read wrong. Vexing cites .NET's `Int32.Parse` and `Int32.TryParse`, Lippert's own example, sourced to Microsoft's "Best practices for exceptions".
+* "Why not throw" is a numbered list of the four reasons. The `Record` and `query` reasons point to the next section and do not repeat it.
+* "The boundary": the Apple example names no class. `AppleAuthException` is not a verified Apple type, and "every artifact shown is real", so the text says "Apple's own exception" and the app's `AuthFailure` stays a hypothetical "say". The anti-corruption quote is "core purpose ... is to protect the domain model".
+* `git grep` at `book-v1/closing-a-milestone` (fe549f2): 28 `node:sqlite` imports in `src/`; outside test files only `database.server.ts` and `testDatabase.server.ts` import `DatabaseSync` as a value, every repository, route, `session`, `migrate` and `start` file imports the type alone; no rule, hook, view or `api.ts` imports it; `UNIQUE constraint` appears only in `appointments/repository.server.ts`.
+* Framework flow: `notFound` gets its own note, `[^nextjs-not-found]`, because the `redirect` page does not say `notFound` throws; the `redirect` quote is the live sentence whole, ending "when using `try/catch` statements". .NET's page recommends catching `OperationCanceledException`, so the text says it belongs to the code that asked for the cancellation, never to a catch at the database, rather than "no one catches it".
+* Dropped: the Oracle Java note. With no Java aside, no sentence cites it, and docs/04 allows a note only at a claim. Added: the `notFound` note. Nine new notes in all.
+* Chapter 6: the parenthesis became "(a split I learned from Dart's `Exception` and `Error` classes)", first person as docs/04's voice asks, rather than "the author".
+* Key points 3 and 4 became the three proposed, unchanged. Exercise 14.1 gained its sentence.
+* docs/03 is unchanged: "exists only at I/O" still holds, parsing what I/O brings being the same boundary, and its rows already credit Dart with "after".
+* Toub's post dates to 2024-09-12 (the page's `datePublished`); the other quotes were read on 2026-09-30.

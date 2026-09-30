@@ -1,7 +1,8 @@
 # Exceptions as values and vertical slices
 
 After this chapter you can organize code by feature, in vertical slices, and return every exception as a value.
-You can tell an exception from a refusal and from an error, and you know that both principles work without the four pieces of chapter 15.
+You can tell an exception from a refusal and from an error in any language, say why a throw must never steer the program's flow, and keep a library's exceptions out of your domain.
+You also know that both principles work without the four pieces of chapter 15.
 
 ## Two principles that stand alone
 
@@ -78,21 +79,39 @@ That is the rule of the second occurrence from [chapter 13](13-the-governor.md#t
 
 ## Exception, refusal, error
 
-Dart splits failures into two classes of `dart:core`.[^dart-core]
-An `Exception` is intended to be caught, an expected failure such as a lost connection; an `Error` is a program failure the programmer should have avoided, a bug.[^dart-core]
+An error is a bug: code that is wrong, fixed once it is found and never handled.
+An exception is a failure from outside the program, such as a lost connection or a full disk: no code is wrong, and it is handled where it happens.
+The class name does not tell them apart: JavaScript's built-in failures are all an `Error`, and .NET's are all an `Exception`, so the cause decides, never the name.
+In forty years of programming, I have seen one language make the difference visible: Dart, whose `dart:core` has an `Exception` class, intended to be caught, and an `Error` class, for a program failure the programmer should have avoided.[^dart-core]
 
-This book adds a third kind: the refusal, a rule's answer when it says no, such as a phone number with too few digits.
+Eric Lippert sorts every thrown value into four kinds:[^lippert-vexing]
+
+* "Fatal": "*not your fault, you cannot prevent them, and you cannot sensibly clean up from them*", such as running out of memory; nobody catches one.
+* "Boneheaded": "*your own darn fault, you could have prevented them and therefore they are bugs in your code*"; this book's error.
+* "Vexing": "*the result of unfortunate design decisions*", a failure an API throws where it could have returned a value, such as .NET's `Int32.Parse` given text a user typed; an exception the API's design makes, turned into a value on the spot or avoided with the API's `Try` form, `Int32.TryParse`.[^dotnet-exceptions]
+* "Exogenous": "*the result of untidy external realities impinging upon your beautiful, crisp program logic*", such as a file that is gone; this book's exception.
+
+Next to error and exception, this book adds a third kind: the refusal, a rule's answer when it says no, such as a phone number with too few digits.
 No I/O failed, and no code is wrong; the rule did its job.
 
 So a failure is one of three:
 
-* **Exception:** an expected failure at I/O (the database, the network, the phone's storage), caught where the I/O happens and returned as a value.
+* **Exception:** an expected failure from outside the program (the database, the network, the phone's storage), caught at the boundary with the outside world (I/O, and the parsing of what it brings) and returned as a value.
 * **Refusal:** a rule saying no, checked in code or by a database constraint such as a unique index, and returned as a value; even when the database answers, nothing failed.
 * **Error:** a bug, thrown and never caught, so it reaches your screen while you develop and your analytics once the app runs.
 
 The field calls the principle "errors as values", after Go[^go-errors] and Rust,[^rust-result] and chapter 6 said why this book says exception.[^book-adr-0016]
 The kit and the clinic still use the field's word, `error`, in the `Result`'s field and in their documents, for what this book calls an exception or a refusal.
 The clinic's own docs/03 already calls each of its rule outcomes a refusal, such as `SlotTaken`, "the refusal when a booking asks for a time that is not free".
+
+## Why not throw
+
+An exception thrown to steer the program's flow, rather than returned, costs four things:
+
+1. A `throw` is an exit the call site does not show. Joel Spolsky wrote in 2003 that exceptions "*are invisible in the source code*" and "*create too many possible exit points for a function*".[^spolsky-exceptions]
+2. The signature does not say what can fail, so the compiler cannot check that every case is handled. A `Result` says it in its type, and the `Record` over `BookingRefusal` in the next section fails to compile when a refusal has no status.
+3. A throw costs more than a return. In Stephen Toub's benchmark `ExceptionThrowCatch`, published 2024-09-12, 1,000 throws, each caught through 10 async frames, took 123.03 ms on .NET 8 and 54.68 ms on .NET 9.[^toub-net9] Microsoft's ASP.NET Core guidance draws the rule: "*Throwing and catching exceptions is slow relative to other code flow patterns. Because of this, exceptions shouldn't be used to control normal program flow.*"[^aspnet-best-practices] The Framework Design Guidelines say it as "*DO NOT use exceptions for the normal flow of control, if possible.*"[^fdg-exception-throwing]
+4. A catch wide enough to steer the flow also catches bugs, as `query` in the next section shows: a `TypeError` inside it becomes `DatabaseFailed`.
 
 ## Exceptions as values in the clinic
 
@@ -240,6 +259,26 @@ export function memoryDatabase(): DatabaseSync {
 
 A migration that fails in a test is a bug, an error, so it is thrown and the test stops there.
 
+## The boundary
+
+An exception belongs to the domain that throws it.
+Take a sign-in through Apple: when Apple's SDK fails, it throws Apple's own exception, and the code that calls the SDK catches it and returns your app's own value, say `AuthFailure`.
+Nothing past that code knows Apple exists, so a second way to sign in, or a new version of Apple's SDK, changes that code alone.
+Domain-driven design calls such a translator an anti-corruption layer, whose "*core purpose ... is to protect the domain model*";[^anti-corruption-layer] the pattern translates models and calls, and this book takes one step more: it translates exceptions too.
+
+The clinic does it with SQLite, at `book-v1/closing-a-milestone`.
+`git grep node:sqlite -- src` finds `DatabaseSync` imported as a value, outside test files, only in `database.server.ts`, where `query` turns SQLite's failure into `DatabaseFailed`, and in `testDatabase.server.ts`, the tests' in-memory database.
+Every other file that names it, the repositories and the routes among them, imports only its type, to receive and pass the open database; no rule, hook, screen or `api.ts` imports it at all.
+`git grep "UNIQUE constraint"` finds the text of SQLite's `UNIQUE` failure in one file, `appointments/repository.server.ts`, where it becomes `SlotTaken`.
+
+Is every exception outside I/O a bug, then? Almost:
+
+* A "vexing" exception from parsing comes from text that I/O brought, so it sits at the same boundary: a route turns a request body that cannot be read into `BadRequest` on the spot.
+* A "fatal" one, such as running out of memory, is handled by no one.
+* A framework's own control flow is thrown on purpose and must pass untouched. Next.js's `redirect` "*throws an error so it should be called **outside** the `try` block when using `try/catch` statements*",[^nextjs-redirect] and a `try`/`catch` around `notFound` "*suppresses it, and the not-found UI won't render*".[^nextjs-not-found] .NET cancels an asynchronous call by throwing `OperationCanceledException`, so that "*the callstack*" is "*unwound once a cancellation request is observed*";[^dotnet-exceptions] it belongs to the code that asked for the cancellation, never to a catch at the database.
+
+So the rule is: catch at the boundary with the outside world, and let everything else pass.
+
 ## One failure, end to end
 
 The clinic's docs/01, in its section "How errors travel", gives the path a failure takes.
@@ -257,8 +296,9 @@ The clinic's docs/01, in its section "How errors travel", gives the path a failu
 
 * A feature is one thing the app keeps, with every action on it, and its vertical slice is one folder, with no folder per layer; a change to the feature touches that folder, and removing the feature removes it.
 * A file enters a slice when it pays its way; code about one thing the app keeps stays in its slice, which other slices import, and code that belongs to no one thing enters `lib/` on its second use.
-* An exception is I/O that failed, a refusal is a rule saying no, in code or in a database constraint, and neither is thrown.
-* An error is a bug: never caught, it reaches your screen and your analytics.
+* An error is a bug, fixed and never caught; an exception is a failure from outside the program, caught at the boundary and returned as a value; a refusal is a rule saying no, in code or in a database constraint; the class name tells none of them apart.
+* A throw is an exit the caller cannot see and the compiler cannot check, so it never steers the flow.
+* A library's exception belongs to the library: the code at the boundary turns it into the domain's value, and the rest of the app throws nothing.
 * A `Result` handled with a `Record` over its cases fails to compile when a case is forgotten.
 
 ## Exercises
@@ -268,6 +308,7 @@ These exercises use the clinic, by conversation with the agent, never by hand.
 ### Exercise 14.1
 
 Ask the agent to list every `try`, `catch` and `throw` in your clinic outside tests, and for each to say what I/O it guards and which value it returns.
+Ask it also to name every exception type from a library that reaches code outside the place that does that library's I/O.
 Any that guards no I/O is a candidate for your queue, not a fix now.
 
 ### Exercise 14.2
@@ -287,3 +328,12 @@ Decide, and say why; nothing is built.
 [^rust-result]: The Rust Programming Language, "Recoverable Errors with Result", chapter 9.2, accessed 2026-09-29. <https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html>
 [^book-adr-0016]: J.C. Ködel, "One Page at a Time", this book's ADR-0016, `docs/adr/ADR-0016-the-books-definition-of-focus.md`, dated 2026-09-28, in the ADR folder on `main`. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>
 [^node-sqlite-error]: Node.js, "Errors", API reference, `ERR_SQLITE_ERROR`, accessed 2026-09-30: "*An error was returned from SQLite.*" <https://nodejs.org/api/errors.html#err_sqlite_error>
+[^lippert-vexing]: Eric Lippert, "Vexing exceptions", Fabulous Adventures in Coding, 2008-09-10, accessed 2026-09-30. <https://ericlippert.com/2008/09/10/vexing-exceptions/>
+[^dotnet-exceptions]: Microsoft Learn, "Best practices for exceptions", .NET, accessed 2026-09-30, sections "Call `Try*` methods to avoid exceptions" and "Catch cancellation and asynchronous exceptions": "*These exceptions enable execution to be efficiently halted and the callstack to be unwound once a cancellation request is observed.*" <https://learn.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions>
+[^spolsky-exceptions]: Joel Spolsky, "Exceptions", Joel on Software, 2003-10-13, accessed 2026-09-30. <https://www.joelonsoftware.com/2003/10/13/13/>
+[^toub-net9]: Stephen Toub, "Performance Improvements in .NET 9", .NET Blog, 2024-09-12, section "VM", benchmark `ExceptionThrowCatch`, accessed 2026-09-30. <https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-9/>
+[^aspnet-best-practices]: Microsoft Learn, "ASP.NET Core Best Practices", section "Minimize exceptions", accessed 2026-09-30. <https://learn.microsoft.com/en-us/aspnet/core/fundamentals/best-practices>
+[^fdg-exception-throwing]: Krzysztof Cwalina and Brad Abrams, "Exception Throwing", Framework Design Guidelines, 2nd edition, 2008, on Microsoft Learn, accessed 2026-09-30. <https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/exception-throwing>
+[^anti-corruption-layer]: Microsoft, "Anti-Corruption Layer pattern", Azure Architecture Center, accessed 2026-09-30: "*the core purpose of an anti-corruption layer is to protect the domain model, not to prescribe any specific product choice*". <https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer>
+[^nextjs-redirect]: Next.js, "redirect", API reference, 16.3.7, accessed 2026-09-30. <https://nextjs.org/docs/app/api-reference/functions/redirect>
+[^nextjs-not-found]: Next.js, "notFound", API reference, 16.3.7, accessed 2026-09-30: "*A `try/catch` around the call suppresses it, and the not-found UI won't render.*" <https://nextjs.org/docs/app/api-reference/functions/not-found>
