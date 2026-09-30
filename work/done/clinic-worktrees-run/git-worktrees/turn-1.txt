@@ -1,0 +1,31 @@
+[tool Bash] ls docs work docs/adr; cat docs/05*.md docs/06*.md; grep -rn -i "worktree\|branch" docs AGENTS.md .claude --include=*.md | head -50
+
+[tool Bash] cat docs/adr/ADR-0003-trunk.md; grep -rn -i "worktree\|branch" docs AGENTS.md .claude work 2>/dev/null | head -40; ls work/done; git worktree list; git branch -a; ls .claude .claude/skills
+
+[tool Read] .claude/skills/analyze/references/documents.md
+
+[tool Read] .claude/skills/apply/SKILL.md
+
+[tool Bash] cat docs/00-Product.md | head -80; grep -n -i "port\|sqlite\|\.db\|database" playwright.config.* vite.config.* package.json .gitignore 2>/dev/null; ls; cat .gitignore; cat work/done/e2e-database-busy.md | head -40
+
+[tool Bash] cat playwright.config.ts; grep -n "e2eDatabasePath\|DATABASE_PATH\|data/" -r src/server/*.ts | head; grep -n "\"scripts\"" -A15 package.json
+
+Here's my assessment before I write anything. The slug isn't in docs/06, and nothing I've read yet decides the questions below.
+
+**What I understand.** You want to switch from trunk to a worktree per delivery. ADR-0003 already allows for this: it says that if deliveries ever need to be built in parallel, the ADR gets amended to "a branch or a worktree per delivery". So the core of this delivery is a process change: amend ADR-0003 and update the Git line in docs/05 §5. This delivery itself still runs under trunk, so its page stays on `main`. The worktree strategy starts with the next `/propose`.
+
+**What would break if we only change the documents.** Running things in parallel today would fail:
+
+- **The e2e test ports are fixed.** `playwright.config.ts` uses 3100 and 5174, with `strictPort` and `reuseExistingServer: false`. If `npm run verify` runs in two worktrees at once, the second one fails. This isn't a guess: it follows directly from the config.
+- **`npm run dev` is worse.** Vite moves to 5174 if 5173 is taken, but its proxy still points at the server on port 3000. The second worktree's client would quietly talk to the first worktree's server and database.
+- **Each worktree starts empty.** It needs its own `npm install`, and its `data/` folder (gitignored) has no clinic until `npm run setup` runs.
+
+**Questions (my recommendation first in each):**
+
+1. **Scope.** I recommend one delivery covering the documents plus ports that differ per worktree for both verify and dev. Without the ports, "parallel" fails on the first verify. The alternative is documents only, with a rule that only one worktree runs verify or dev at a time. Is parallel building what you want, or mainly the one-step revert of a branch?
+2. **How each worktree gets its ports.** I recommend environment variables that keep today's numbers as defaults (for example `PORT` and a new `E2E_PORT_OFFSET`), set in a gitignored file inside each worktree, with the page naming the exact variables. The alternative is to work the offset out from the worktree path automatically. That needs no setup, but two worktrees can end up with the same ports.
+3. **Where worktrees live.** I recommend a sibling folder, `../focus-kit-clinic-<slug>`. A `.worktrees/` folder inside the repo would be picked up by Vitest, Biome and tsc unless each one is told to ignore it.
+4. **How a delivery reaches `main`.** I recommend you do a local `git merge --no-ff <slug>` and then run `git worktree remove`, so each delivery is one merge commit that reverts in one step. The alternative is a pull request on origin. Either way, the agent still never commits or merges.
+5. **Where the line goes in the queue.** I recommend Milestone 1.1, just before `time-zone-names`, so the five remaining lines can be built in parallel. That means adding a clause to the milestone's paragraph, even though the milestone is meant for review findings. The alternative is a small milestone of its own placed before it. Which do you prefer?
+
+Answer however suits you (for example "1 yes, 2 alt, rest as you recommend"), and I'll write `work/git-worktrees.md` and mark the line.

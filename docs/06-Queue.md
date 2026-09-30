@@ -153,6 +153,7 @@ When this milestone closes, a reader can choose between trunk, a branch per deli
 
 ```
 [x] git-essentials         Chapter 17: commits, branches, merges, trunk and git-flow
+[x] clinic-worktrees       the clinic switches to a worktree per delivery, then route-errors and minutes-of are proposed and built by two agents at once in two worktrees and merged by the author with --no-ff, conflict included, by a recorded run; no chapter
 [ ] worktrees              Chapter 18: worktrees and parallel agents, and where parallelism really stops
 [ ] commit-as-review       Chapter 19: the agent stages, the person commits, and why
 [ ] github-for-teams       Chapter 20: pull requests as the team's review, issues, Projects boards, and why the wiki is not docs/ (the agent reads the repository, not the wiki)

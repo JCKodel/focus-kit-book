@@ -1,0 +1,13 @@
+Understood. That settles where worktrees live, the branch name, and the merge. Two questions are still open before I write the page, because your message doesn't settle them:
+
+1. **Ports: are they in this delivery or not?** You listed only the ADR and docs/05. Without port changes, two worktrees can't run `npm run verify` or `npm run dev` at the same time. The e2e ports (3100/5174) would clash, and a second dev client would proxy to the first worktree's server.
+   - **My recommendation:** keep this delivery to the documents only, as you described. The docs/05 Git slot would state the limit in one line: "one worktree at a time runs verify or dev". Then add a `[ ]` line, `worktree-ports`, right after this one, so parallel verify gets its own page with an exact Contract.
+   - **Alternative:** put the ports in this page too.
+2. **Where the line goes in docs/06.**
+   - **My recommendation:** Milestone 1.1, just before `time-zone-names`, with a clause added to its paragraph, so the five remaining lines are built under the new strategy.
+   - **Alternative:** a milestone of its own placed before it.
+
+I'll decide two smaller points myself unless you object:
+
+- **Who removes a worktree:** you do, after the merge (`git worktree remove`). The agent never removes one.
+- **Wording:** docs/03 already uses "owner" for the person who runs the clinic, so the documents will say "the person" for whoever commits and merges, as docs/05 already does.

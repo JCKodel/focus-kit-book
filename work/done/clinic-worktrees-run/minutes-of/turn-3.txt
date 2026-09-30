@@ -1,0 +1,121 @@
+[tool Bash] cat work/minutes-of.md && git diff docs/06-Queue.md && ls docs docs/adr work work/done | head -80
+
+[tool Bash] cat docs/05-Process.md; grep -n "lib/" -A3 docs/01-Architecture.md | head -60; grep -n "minutesOf" -B2 -A4 src/features/*/rules.ts; ls src/lib; cat src/lib/*.test.ts | head -30; cat work/done/update-type.md | tail -40
+
+[tool Bash] sed -n 50,70p docs/01-Architecture.md; sed -n 1,21p src/features/weeklyHours/rules.ts; sed -n 1,15p src/features/appointments/rules.ts; ls node_modules >/dev/null 2>&1 && echo HAS_NM
+
+[tool Bash] npm ci >/dev/null 2>&1; echo $?; npx vitest run 2>&1 | tail -5
+
+[tool Bash] npm ci
+
+Dependencies installed; taking a baseline test count before moving `minutesOf`.
+
+[tool Bash] npx vitest run 2>&1 | tail -6
+
+[tool Bash] npx vitest run 2>&1 | grep -E "Test Files|Tests "
+
+Baseline: 328 Vitest tests. Now the change.
+
+[tool Write] src/lib/time.ts
+
+[tool Write] src/lib/time.test.ts
+
+[tool Edit] src/features/weeklyHours/rules.ts
+
+[tool Edit] src/features/weeklyHours/rules.ts
+
+[tool Edit] src/features/appointments/rules.ts
+
+[tool Edit] src/features/appointments/rules.ts
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Bash] npm run verify 2>&1 | grep -E "Tests |passed|failed|error|✓ built|Found" | tail -15
+
+[tool Bash] npm run verify >/dev/null 2>&1 && echo GREEN; grep -rn "function minutesOf" src; git status --short; git diff src package.json package-lock.json
+
+Verify is green (331 Vitest = 328 + 3, 144 Playwright, same as before). Now the page, the queue and staging.
+
+[tool Bash] python3 - <<'EOF'
+p="work/minutes-of.md"
+s=open(p).read()
+last="* [ ] Manual check by the person"
+head,tail=s.split(last)
+head=head.replace("* [ ]","* [x]")
+s=head+last+tail
+s=s.rstrip("\n")+"""
+
+**What happened.**
+
+* **Built as planned.** `src/lib/time.ts` holds the `minutesOf` of the
+  Contract with its comment, and both `rules.ts` files import it. Each
+  `rules.ts` diff is the removed function and the added import, nothing
+  else; every call site stays as written. Biome kept the new import in
+  alphabetical order after `result.ts` without a reformat.
+* **Nothing dropped, nothing diverged.** No hook, view, `*.server.ts`
+  file, existing test or dependency is in the diff. `package.json` and
+  `package-lock.json` are unchanged.
+* **Proof.** `npm run verify` green: typecheck, Biome, 331 Vitest tests
+  (328 before, plus the three of `lib/time.test.ts`) and 144 Playwright
+  tests at both widths (the same count), build. `grep -rn "function
+  minutesOf" src` finds only `src/lib/time.ts`. The e2e tests already save
+  weekly hours and book a slot. The manual check with `npm run dev` is the
+  person's: the agent cannot keep the server running, so that box stays
+  open until they do it.
+* **Documents.** docs/01: the `lib/` listing names `time.ts`. No docs/03
+  change and no ADR, as the page said.
+"""
+open("work/done/minutes-of.md","w").write(s)
+EOF
+rm work/minutes-of.md
+sed -i '' 's/^\[>\] minutes-of /[x] minutes-of /' docs/06-Queue.md
+grep -n "minutes-of" docs/06-Queue.md; grep -n "\[.\]" work/done/minutes-of.md; grep -c "—" work/done/minutes-of.md src/lib/time.ts src/lib/time.test.ts
+git add -A && git status --short
+
+Shell editing was blocked, so I'll do the page and queue with the file tools instead.
+
+[tool Read] work/minutes-of.md
+
+[tool Read] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Read] work/minutes-of.md
+
+[tool Edit] work/minutes-of.md
+
+[tool Edit] work/minutes-of.md
+
+[tool Edit] work/minutes-of.md
+
+[tool Bash] mv work/minutes-of.md work/done/minutes-of.md
+
+[tool Bash] git add -A && git status --short
+
+`minutes-of` is built and staged. Nothing is committed.
+
+- **Code:** `minutesOf` now lives only in `src/lib/time.ts`, with the comment from the page. `weeklyHours/rules.ts` and `appointments/rules.ts` each lost their local copy and gained one import line, and nothing else in them changed. Every place that calls it is untouched.
+- **Tests:** `src/lib/time.test.ts` has the three new cases (`00:00` is 0, `09:30` is 570, `23:55` is 1435).
+- **Verify:** `npm run verify` passes. There are 331 Vitest tests (328 before, plus the three new ones) and 144 Playwright tests (same as before). `grep -rn "function minutesOf" src` finds only `src/lib/time.ts`. `package.json` and `package-lock.json` are unchanged.
+- **Documents:** docs/01's `lib/` listing now names `time.ts`. The page is in `work/done/minutes-of.md` with a "What happened" section; nothing diverged from the plan. docs/06 marks the line `[x]`.
+
+**Open:** the manual check box is still unticked. The agent can't keep a server running, so you need to do it: in this worktree, run `npm run setup` then `npm run dev`. On `/owner`, save weekly hours for a professional at 1280×800, then book one of their slots at 390×844. Each should behave as before.
+
+Two of my shell commands were blocked automatically because this session can't show permission prompts. I redid those steps with the file editor and a plain `mv`, so nothing was skipped.
+
+Suggested commit message:
+
+```
+Declare minutesOf once in lib/time.ts (minutes-of)
+
+- src/lib/time.ts exports minutesOf, the "HH:MM" to minutes parser
+- weeklyHours/rules.ts and appointments/rules.ts import it
+- three tests in src/lib/time.test.ts
+- docs/01 lib/ listing names time.ts
+
+See work/done/minutes-of.md
+```
+
+**Environments:**
+- **Local:** this worktree (branch `minutes-of`) has the change staged and ready to start with `npm run setup && npm run dev`. `main` does not have it until you commit on `minutes-of` and run `git merge --no-ff minutes-of` from the main folder.
+- **Production:** doesn't exist yet; the `deploy` delivery will create it.

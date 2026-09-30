@@ -1,0 +1,25 @@
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] work/git-worktrees.md
+
+[tool Edit] work/git-worktrees.md
+
+[tool Edit] work/git-worktrees.md
+
+[tool Edit] work/git-worktrees.md
+
+[tool Bash] grep -rn "parallel-verify" docs work AGENTS.md; git status --short
+
+I've dropped `parallel-verify` everywhere, and a search finds no mention of it left in `docs/`, `work/` or `AGENTS.md`:
+
+- **docs/06:** its queue line and its clause in the Milestone 1.1 paragraph are gone. The paragraph now ends with the worktree clause.
+- **`work/git-worktrees.md`:**
+  - The docs/05 Git slot no longer has the one-worktree-at-a-time rule.
+  - The Out of scope entry and its item in Done when are removed.
+  - ADR-0003's amendment gains one consequence: "the e2e ports (3100 and 5174, in `playwright.config.ts`) and the e2e database (`e2eDatabasePath`, in the system temp folder) are shared by every worktree today. Whether that needs a fix is decided after worktrees have been used in parallel."
+
+I kept that consequence to the e2e side, as you asked. The dev ports (3000 and 5173) are shared across worktrees too, but the ADR doesn't mention them. Say if you want them added.
+
+Read the page once more. When it holds, open a fresh session in this folder and type `/apply git-worktrees`.

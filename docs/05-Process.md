@@ -116,26 +116,42 @@ conversation in any session.
   that is not a chapter may advance the guided project (the first is
   `clinic-milestone-1`); the author commits each of its deliveries with
   the kit's message and no tag, and the next chapter tag includes those
-  commits.
+  commits. Since `clinic-worktrees` the clinic builds each delivery in a
+  worktree, `../focus-kit-clinic-<slug>` on the branch `<slug>` (its
+  ADR-0003): the author commits the delivery on its branch, merges it
+  into the clinic's `main` with `git merge --no-ff` from the clinic's
+  root, resolves any conflict, removes the worktree and deletes the
+  branch.
   * **A recorded clinic run** (the first is `clinic-milestone-1`, the
-    second `clinic-orchestrator-tests`): each clinic delivery takes five
-    steps, run from the clinic's root, one turn at a time.
-    1. `/propose`, headless, fresh: `claude -p "/propose <slug>"` with the
-       common flags. Every round of questions is answered with
-       `--continue` and `Your call. Say what you chose and why.`, unless
-       the delivery's page gives a brief.
+    second `clinic-orchestrator-tests`; worktrees since
+    `clinic-worktrees`): each clinic delivery takes five steps, one turn
+    at a time. Every later turn of a session goes by `--resume <its
+    session id>`, never `--continue`, which takes the directory's most
+    recent session and two sessions may share one.
+    1. `/propose`, headless, fresh, from the clinic's root: `claude -p
+       "/propose <slug>"` with the common flags, `--add-dir
+       ../focus-kit-clinic-<slug>` and `--allowedTools "Bash(git worktree
+       *)" "Bash(git branch *)" "Bash(git log *)" "Bash(git rev-parse *)"
+       "Bash(git add *)" "Bash(git status *)" "Bash(git diff *)"`. The
+       author creates the empty folder `../focus-kit-clinic-<slug>` first:
+       a session cannot write in an `--add-dir` folder that did not exist
+       when it started, and `git worktree add` accepts an empty one
+       (`clinic-worktrees`' check). Every round of questions is answered
+       with `Your call. Say what you chose and why.`, unless the
+       delivery's page gives a brief.
     2. Page review: the author decides which holes to send; each request
-       goes to the same session with `--continue`, word for word as the
-       author approved it. "None" is a valid review. The page is never
-       edited by hand.
-    3. `/apply`, headless, fresh: `claude -p "/apply <slug>"` with the
-       common flags and `--allowedTools "Bash(npm *)" "Bash(npx *)"
-       "Bash(node *)" "Bash(mkdir *)" "Bash(cp *)" "Bash(git add *)"
-       "Bash(git status *)" "Bash(git diff *)"` `--disallowedTools
-       "Bash(npm run dev*)"`.
+       goes to the same session, word for word as the author approved it.
+       "None" is a valid review. The page is never edited by hand.
+    3. `/apply`, headless, fresh, from the worktree's root: `claude -p
+       "/apply <slug>"` with the common flags and `--allowedTools
+       "Bash(npm *)" "Bash(npx *)" "Bash(node *)" "Bash(mkdir *)"
+       "Bash(cp *)" "Bash(git add *)" "Bash(git status *)" "Bash(git diff
+       *)"` `--disallowedTools "Bash(npm run dev*)"`.
     4. Staged review: as step 2, to the `/apply` session. Nothing in the
        clinic is edited by hand.
-    5. The author commits with the kit's message, no tag, and pushes.
+    5. The author commits on the branch with the kit's message, no tag,
+       merges with `--no-ff`, removes the worktree, deletes the branch and
+       pushes.
 
     Common flags: `--model claude-opus-5-5 --setting-sources project
     --strict-mcp-config --permission-mode acceptEdits --permission-prompts

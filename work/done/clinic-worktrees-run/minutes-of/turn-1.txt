@@ -1,0 +1,23 @@
+[tool Bash] ls docs work 2>/dev/null; cat docs/05*.md docs/06*.md; git worktree list; ls ../focus-kit-clinic-minutes-of
+
+[tool Bash] ls -la ../focus-kit-clinic-minutes-of; git branch -a; ls src src/features src/lib 2>/dev/null; grep -rn "minutesOf\|HH:MM\|parseTime\|toMinutes" src --include=*.ts --include=*.tsx | grep -v node_modules
+
+[tool Bash] grep -rn "minutesOf\|HH:MM\|toMinutes\|parseTime" src docs | head -60
+
+[tool Bash] cat src/features/weeklyHours/rules.ts; echo ----; cat src/features/appointments/rules.ts; echo ----; cat src/lib/name.ts src/lib/name.test.ts; ls src/features/weeklyHours src/features/appointments; grep -rn "minutes\|slotMinutes\|TIME_PATTERN\|timePattern" src/features/weeklyHours/*.test.ts src/features/appointments/*.test.ts | head -30
+
+[tool Bash] cat docs/01-Architecture.md; sed -n 50,90p docs/03-Domain.md; grep -n "lib\|occurrence\|First use\|first copy" docs/04-Conventions.md; ls work/done; cat work/done/update-type.md
+
+Reading done; the two copies are identical. Checking for any third copy before I give you my read.
+
+[tool Bash] grep -rnE 'slice\(0, ?2\)|split\(":"\)|\* ?60 ?\+|padStart\(2' src | grep -v "\.test\.ts\|\.e2e\.ts"
+
+My read: this is a small, clean delivery. There are exactly two copies of the parser, both the same one-line `minutesOf(time)`: the first at `src/features/weeklyHours/rules.ts:24` and the second at `src/features/appointments/rules.ts:46`. Nothing else parses `HH:MM`. `appointments/strings.ts` formats times and `clinicTime.ts` builds minutes from `Intl` parts, so both stay out.
+
+docs/01 already settles where the shared copy goes: "Code moves to `lib/` on its second concrete use". Nobody sees a change on screen. Two points no document settles:
+
+1. **File name. I recommend `src/lib/time.ts`**, exporting only `minutesOf`, with a comment naming its first and second use the way `name.ts` does. The other option is `src/lib/minutes.ts`. I prefer `time.ts` because it names the input, a clinic wall time `HH:MM`, just as `name.ts` and `email.ts` name theirs.
+
+2. **What moves. I recommend only `minutesOf`, with its behaviour unchanged.** It trusts its input and returns a plain number, not a `Result`. That's correct: `setWeeklyHours` checks `validTime` before any arithmetic, and `freeSlots` reads periods that are already stored and checked. The `validTime` regex has only one use, so it stays in `weeklyHours/rules.ts`. It would move only if a second feature needed it. `minutesOf` gets its own small test, `src/lib/time.test.ts` (00:00 is 0, 09:30 is 570, 23:55 is 1435), because every `lib/` file has one.
+
+Do these two work for you? Or would you rather `validTime` moved with it now, or have `minutesOf` return a `Result`? Once you answer, I'll create the worktree and write the page.

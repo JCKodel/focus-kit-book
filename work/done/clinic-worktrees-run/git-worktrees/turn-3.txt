@@ -1,0 +1,36 @@
+[tool Bash] grep -rn -i "trunk\|one commit\|ADR-0003\|main branch\|git " --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=done . | grep -v "skills/"; cat docs/adr/ADR-0005*.md | head -30; ls docs/adr
+
+[tool Bash] cat src/server/e2eClinic.server.ts | head -15; sed -n 1,30p README.md; grep -n -i "owner\b" docs/03-Domain.md | head -5
+
+[tool Write] work/git-worktrees.md
+
+Now the queue: the two new lines and the milestone clause.
+
+[tool Edit] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+I've written the page at `work/git-worktrees.md`. In docs/06, I added two lines to Milestone 1.1, just before `time-zone-names`:
+
+- `git-worktrees`, marked `[>]`.
+- `parallel-verify`, marked `[ ]`, for the ports and the e2e database.
+
+I also added a clause to the milestone's paragraph so the milestone review checks both. The files are on `main` and uncommitted, because trunk is still the rule until this delivery lands.
+
+**Choices I made on my own, so question these first:**
+
+- **ADR-0003 is renamed, not replaced.** It becomes `ADR-0003-git-strategy.md`, keeps the trunk decision as history, and gains a dated amendment. The old title "Trunk" would be wrong otherwise.
+- **The page says "the person", not "the owner".** docs/03 already uses "owner" for the person who runs the clinic.
+- **You remove a worktree after merging it,** with `git worktree remove`, then `git branch -d`. The agent never removes one, just as it never commits or merges.
+- **`/apply` runs `npm ci` itself** in a new worktree if `node_modules` is missing. Seeing the app there with `npm run dev` first needs `npm run setup`, since `data/` starts empty.
+- **The merge commit keeps git's default message.** The docs/05 commit format applies to the delivery's commit on its branch.
+- **Queue conflicts are named as a consequence in the ADR.** Two deliveries in flight both edit docs/06, so they can conflict on neighbouring lines. You resolve it by keeping both marks.
+- **Until `parallel-verify` is done, only one worktree at a time runs verify or dev.** The e2e database sits in the system temp folder, so it's shared across worktrees just like the ports.
+
+Please read the page and question it:
+
+- Can each Behaviour line be checked?
+- Are the commands in it exact?
+- Does Out of scope name anything you assumed was included, such as pull requests, a helper script, or skill changes?
+
+Ask for every correction here. When the page is right, open a fresh session in this folder and type `/apply git-worktrees`.

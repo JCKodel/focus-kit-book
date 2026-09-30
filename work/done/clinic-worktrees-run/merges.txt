@@ -1,0 +1,259 @@
+# Part 1: the author, in a terminal, under `script`. The commands were pasted as one block,
+# so `git add` and `git commit --no-edit` ran before the conflict was resolved.
+# The prompt is written `$ `; paths are relative to the clinic's root.
+
+$ cd ../focus-kit-clinic-route-errors
+$ git commit -F - <<'EOF'
+Share the error answers routes repeat (route-errors)
+
+- Add src/server/answers.server.ts with the five shared error answers
+- Use them in session, signIn, clinic, professionals, weeklyHours, appointments
+- Test each answer's status and body in answers.server.test.ts
+- docs/01 and docs/02 name where the shared answers live
+
+See work/done/route-errors.md
+EOF
+[route-errors af3269a] Share the error answers routes repeat (route-errors)
+ 12 files changed, 304 insertions(+), 67 deletions(-)
+ create mode 100644 src/server/answers.server.test.ts
+ create mode 100644 src/server/answers.server.ts
+ create mode 100644 work/done/route-errors.md
+
+$ cd ../focus-kit-clinic-minutes-of
+$ git commit -F - <<'EOF'
+Declare minutesOf once in lib/time.ts (minutes-of)
+
+- src/lib/time.ts exports minutesOf, the "HH:MM" to minutes parser
+- weeklyHours/rules.ts and appointments/rules.ts import it
+- three tests in src/lib/time.test.ts
+- docs/01 lib/ listing names time.ts
+
+See work/done/minutes-of.md
+EOF
+[minutes-of 948b94d] Declare minutesOf once in lib/time.ts (minutes-of)
+ 7 files changed, 145 insertions(+), 9 deletions(-)
+ create mode 100644 src/lib/time.test.ts
+ create mode 100644 src/lib/time.ts
+ create mode 100644 work/done/minutes-of.md
+
+$ cd ../focus-kit-clinic
+$ git worktree list
+.                               0993b68 [main]
+../focus-kit-clinic-minutes-of   948b94d [minutes-of]
+../focus-kit-clinic-route-errors af3269a [route-errors]
+
+$ git merge --no-ff route-errors
+Merge made by the 'ort' strategy.
+ docs/01-Architecture.md                    |   3 +-
+ docs/02-Backend.md                         |   2 +
+ docs/06-Queue.md                           |   2 +-
+ src/features/appointments/route.server.ts  |  34 +++++---------
+ src/features/clinic/route.server.ts        |   3 +-
+ src/features/professionals/route.server.ts |   9 +---
+ src/features/signIn/route.server.ts        |  21 ++++-----
+ src/features/weeklyHours/route.server.ts   |  26 +++++------
+ src/server/answers.server.test.ts          |  52 ++++++++++++++++++++++
+ src/server/answers.server.ts               |  25 +++++++++++
+ src/server/session.server.ts               |   9 +---
+ work/done/route-errors.md                  | 185 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 12 files changed, 304 insertions(+), 67 deletions(-)
+ create mode 100644 src/server/answers.server.test.ts
+ create mode 100644 src/server/answers.server.ts
+ create mode 100644 work/done/route-errors.md
+
+$ git merge --no-ff minutes-of
+Auto-merging docs/01-Architecture.md
+Auto-merging docs/06-Queue.md
+CONFLICT (content): Merge conflict in docs/06-Queue.md
+Automatic merge failed; fix conflicts and then commit the result.
+
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Changes to be committed:
+        modified:   docs/01-Architecture.md
+        modified:   src/features/appointments/rules.ts
+        modified:   src/features/weeklyHours/rules.ts
+        new file:   src/lib/time.test.ts
+        new file:   src/lib/time.ts
+        new file:   work/done/minutes-of.md
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both modified:   docs/06-Queue.md
+
+$ git diff
+diff --cc docs/06-Queue.md
+index ac17a76,60ea2d3..0000000
+--- a/docs/06-Queue.md
++++ b/docs/06-Queue.md
+@@@ -40,8 -40,8 +40,13 @@@ git-worktrees is built in its own workt
+  [ ] time-zone-names      setup accepts every IANA name the runtime knows, such as US/Eastern and Etc/UTC, as docs/03 says
+  [ ] slot-taken-retry     after a refused booking whose slot reload fails, "Try again" keeps the "no longer free" message and the chosen date
+  [ ] routes-table         the Routes table of docs/02 renders whole, with the slots and appointments routes as rows
+++<<<<<<< HEAD
+ +[x] route-errors         one shared copy of each error answer routes repeat (DatabaseFailed, BadRequest, NotSignedIn, ProfessionalNotFound, ClinicNotSetUp 500); the first copies are in session.server.ts and weeklyHours/route.server.ts
+ +[ ] minutes-of           one shared "HH:MM" parser; the first copy is in weeklyHours/rules.ts, the second in appointments/rules.ts
+++=======
++ [ ] route-errors         one shared databaseFailed and one shared notFound answer; the first copies are in session.server.ts and weeklyHours/route.server.ts
++ [x] minutes-of           one shared "HH:MM" parser; the first copy is in weeklyHours/rules.ts, the second in appointments/rules.ts
+++>>>>>>> minutes-of
+  [x] booking-submit       useBooking's submit publishes its in-flight state as an update and books with the state the hook read, not a ref written during render
+  [x] hours-save           useWeeklyHours' save publishes its in-flight state as an update, so a time typed just before Save survives
+  [x] hours-report         the hours editor's reports reach the professionals section as one WeeklyHoursReport and one tested event; finishes what orchestrator-tests left
+
+$ git diff
+diff --cc docs/06-Queue.md
+index ac17a76,60ea2d3..0000000
+--- a/docs/06-Queue.md
++++ b/docs/06-Queue.md
+@@@ -40,8 -40,8 +40,13 @@@ git-worktrees is built in its own workt
+  [ ] time-zone-names      setup accepts every IANA name the runtime knows, such as US/Eastern and Etc/UTC, as docs/03 says
+  [ ] slot-taken-retry     after a refused booking whose slot reload fails, "Try again" keeps the "no longer free" message and the chosen date
+  [ ] routes-table         the Routes table of docs/02 renders whole, with the slots and appointments routes as rows
+++<<<<<<< HEAD
+ +[x] route-errors         one shared copy of each error answer routes repeat (DatabaseFailed, BadRequest, NotSignedIn, ProfessionalNotFound, ClinicNotSetUp 500); the first copies are in session.server.ts and weeklyHours/route.server.ts
+ +[ ] minutes-of           one shared "HH:MM" parser; the first copy is in weeklyHours/rules.ts, the second in appointments/rules.ts
+++=======
++ [ ] route-errors         one shared databaseFailed and one shared notFound answer; the first copies are in session.server.ts and weeklyHours/route.server.ts
++ [x] minutes-of           one shared "HH:MM" parser; the first copy is in weeklyHours/rules.ts, the second in appointments/rules.ts
+++>>>>>>> minutes-of
+  [x] booking-submit       useBooking's submit publishes its in-flight state as an update and books with the state the hook read, not a ref written during render
+  [x] hours-save           useWeeklyHours' save publishes its in-flight state as an update, so a time typed just before Save survives
+  [x] hours-report         the hours editor's reports reach the professionals section as one WeeklyHoursReport and one tested event; finishes what orchestrator-tests left
+
+$ git add docs/06-Queue.md
+$ git commit --no-edit
+[main bdb0609] Merge branch 'minutes-of'
+
+$ git log --oneline --graph 0993b68..HEAD
+*   bdb0609 (HEAD -> main) Merge branch 'minutes-of'
+|\
+| * 948b94d (minutes-of) Declare minutesOf once in lib/time.ts (minutes-of)
+* 045c744 Merge branch 'route-errors'
+* af3269a (route-errors) Share the error answers routes repeat (route-errors)
+
+# bdb0609 holds the conflict markers in docs/06-Queue.md, lines 43 to 49; nothing is pushed.
+# The author decides to undo that merge and redo it, and asks the book's session to run
+# the rest.
+
+# Part 2: the book's session, at the author's request. The conflict is resolved with the
+# editor before `git add`.
+
+$ git reset --hard 045c744
+HEAD is now at 045c744 Merge branch 'route-errors'
+
+$ git merge --no-ff minutes-of
+Auto-merging docs/01-Architecture.md
+Auto-merging docs/06-Queue.md
+CONFLICT (content): Merge conflict in docs/06-Queue.md
+Automatic merge failed; fix conflicts and then commit the result.
+
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Changes to be committed:
+	modified:   docs/01-Architecture.md
+	modified:   src/features/appointments/rules.ts
+	modified:   src/features/weeklyHours/rules.ts
+	new file:   src/lib/time.test.ts
+	new file:   src/lib/time.ts
+	new file:   work/done/minutes-of.md
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+	both modified:   docs/06-Queue.md
+
+
+$ git diff
+diff --cc docs/06-Queue.md
+index ac17a76,60ea2d3..0000000
+--- a/docs/06-Queue.md
++++ b/docs/06-Queue.md
+@@@ -40,8 -40,8 +40,13 @@@ git-worktrees is built in its own workt
+  [ ] time-zone-names      setup accepts every IANA name the runtime knows, such as US/Eastern and Etc/UTC, as docs/03 says
+  [ ] slot-taken-retry     after a refused booking whose slot reload fails, "Try again" keeps the "no longer free" message and the chosen date
+  [ ] routes-table         the Routes table of docs/02 renders whole, with the slots and appointments routes as rows
+++<<<<<<< HEAD
+ +[x] route-errors         one shared copy of each error answer routes repeat (DatabaseFailed, BadRequest, NotSignedIn, ProfessionalNotFound, ClinicNotSetUp 500); the first copies are in session.server.ts and weeklyHours/route.server.ts
+ +[ ] minutes-of           one shared "HH:MM" parser; the first copy is in weeklyHours/rules.ts, the second in appointments/rules.ts
+++=======
++ [ ] route-errors         one shared databaseFailed and one shared notFound answer; the first copies are in session.server.ts and weeklyHours/route.server.ts
++ [x] minutes-of           one shared "HH:MM" parser; the first copy is in weeklyHours/rules.ts, the second in appointments/rules.ts
+++>>>>>>> minutes-of
+  [x] booking-submit       useBooking's submit publishes its in-flight state as an update and books with the state the hook read, not a ref written during render
+  [x] hours-save           useWeeklyHours' save publishes its in-flight state as an update, so a time typed just before Save survives
+  [x] hours-report         the hours editor's reports reach the professionals section as one WeeklyHoursReport and one tested event; finishes what orchestrator-tests left
+
+(the conflict resolved in docs/06-Queue.md with the editor: both lines kept, both [x], route-errors with its new text)
+
+$ git diff
+diff --cc docs/06-Queue.md
+index ac17a76,60ea2d3..0000000
+--- a/docs/06-Queue.md
++++ b/docs/06-Queue.md
+@@@ -40,8 -40,8 +40,8 @@@ git-worktrees is built in its own workt
+  [ ] time-zone-names      setup accepts every IANA name the runtime knows, such as US/Eastern and Etc/UTC, as docs/03 says
+  [ ] slot-taken-retry     after a refused booking whose slot reload fails, "Try again" keeps the "no longer free" message and the chosen date
+  [ ] routes-table         the Routes table of docs/02 renders whole, with the slots and appointments routes as rows
+ -[ ] route-errors         one shared databaseFailed and one shared notFound answer; the first copies are in session.server.ts and weeklyHours/route.server.ts
+ +[x] route-errors         one shared copy of each error answer routes repeat (DatabaseFailed, BadRequest, NotSignedIn, ProfessionalNotFound, ClinicNotSetUp 500); the first copies are in session.server.ts and weeklyHours/route.server.ts
+- [ ] minutes-of           one shared "HH:MM" parser; the first copy is in weeklyHours/rules.ts, the second in appointments/rules.ts
++ [x] minutes-of           one shared "HH:MM" parser; the first copy is in weeklyHours/rules.ts, the second in appointments/rules.ts
+  [x] booking-submit       useBooking's submit publishes its in-flight state as an update and books with the state the hook read, not a ref written during render
+  [x] hours-save           useWeeklyHours' save publishes its in-flight state as an update, so a time typed just before Save survives
+  [x] hours-report         the hours editor's reports reach the professionals section as one WeeklyHoursReport and one tested event; finishes what orchestrator-tests left
+
+$ git add docs/06-Queue.md
+
+$ git commit --no-edit
+[main 699ab40] Merge branch 'minutes-of'
+
+$ git log --oneline --graph 0993b68..HEAD
+*   699ab40 Merge branch 'minutes-of'
+|\  
+| * 948b94d Declare minutesOf once in lib/time.ts (minutes-of)
+* 045c744 Merge branch 'route-errors'
+* af3269a Share the error answers routes repeat (route-errors)
+
+$ git log --oneline --graph -5
+*   699ab40 Merge branch 'minutes-of'
+|\  
+| * 948b94d Declare minutesOf once in lib/time.ts (minutes-of)
+* |   045c744 Merge branch 'route-errors'
+|\ \  
+| |/  
+|/|   
+| * af3269a Share the error answers routes repeat (route-errors)
+|/  
+* 0993b68 Build every delivery in its own worktree (git-worktrees)
+
+$ git worktree remove ../focus-kit-clinic-route-errors
+
+$ git worktree remove ../focus-kit-clinic-minutes-of
+
+$ git branch -d route-errors
+Deleted branch route-errors (was af3269a).
+
+$ git branch -d minutes-of
+Deleted branch minutes-of (was 948b94d).
+
+$ git worktree list
+. 699ab40 [main]
+
+$ git push
+To github.com:JCKodel/focus-kit-clinic.git
+   0993b68..699ab40  main -> main
+

@@ -1,0 +1,52 @@
+[tool Bash] ls docs work 2>/dev/null; git worktree list; git branch -a; ls ../focus-kit-clinic-route-errors 2>&1 | head
+
+[tool Read] docs/05-Process.md
+
+[tool Read] docs/06-Queue.md
+
+[tool Read] docs/00-Product.md
+
+[tool Read] docs/03-Domain.md
+
+[tool Read] docs/01-Architecture.md
+
+[tool Read] docs/02-Backend.md
+
+[tool Bash] ls work/done; grep -rn -i "databaseFailed\|notFound\b\|const notFound\|function notFound\|jsonError\|c.json({ error" src --include=*.ts | grep -v test | head -80
+
+[tool Bash] grep -rn "DatabaseFailed\|NotFound\|BadRequest\|error: { code" src | grep -v "\.test\.\|strings.ts\|View.tsx" | grep "server" | head -80; ls src/features src/server src/lib
+
+Let me read the four route files and session.server.ts in full.
+
+[tool Read] src/server/session.server.ts
+
+[tool Read] src/features/weeklyHours/route.server.ts
+
+[tool Read] src/features/appointments/route.server.ts
+
+[tool Read] src/features/professionals/route.server.ts
+
+[tool Read] src/features/signIn/route.server.ts
+
+[tool Read] src/features/clinic/route.server.ts
+
+[tool Bash] grep -rln "DatabaseFailed" src --include="*.test.ts" 2>/dev/null || grep -rl "DatabaseFailed" src | grep test; grep -rn "DatabaseFailed\|BadRequest\|NotSignedIn\|ClinicNotSetUp" src | grep "test.ts" | wc -l
+
+I've read the docs, the queue and the five route files. Here's what the code shows today:
+
+- **`DatabaseFailed` (500).** The first copy is the `databaseFailed(c)` helper in `session.server.ts`. The same helper is copied into the weeklyHours, appointments and professionals routes. It's also written out inline 5 times: 4 in `signIn/route.server.ts` and 1 in `clinic/route.server.ts`.
+- **`ProfessionalNotFound` (404).** A `notFound(c)` helper in `weeklyHours/route.server.ts` (the first copy) and an identical one in `appointments/route.server.ts`. The professionals route sends the same code through its own refusal table.
+- **The same pattern with other codes:**
+  - `BadRequest` (400): a helper in professionals, plus 5 inline copies.
+  - `NotSignedIn` (401): a helper in `session.server.ts`, plus 1 inline copy in signIn.
+  - `ClinicNotSetUp` as a 500: 3 inline copies in weeklyHours and appointments. Only `GET /api/clinic` answers it as a 404, and that one stays in place.
+
+No HTTP answer changes, so the Contract section will say "none". I have five questions before I write the page. My recommendation comes first in each.
+
+1. **Scope.** I'd share every repeated error answer: `DatabaseFailed`, `ProfessionalNotFound`, `BadRequest`, `NotSignedIn` and `ClinicNotSetUp` (500). The milestone clause says "the code repeated across features has one shared copy". If only the two codes in the queue line are shared, the m1.1 review will list the other three as findings, and each one becomes a delivery in M1.2. I'd update the queue line to match. The alternative is to do only `databaseFailed` and `notFound`, as the queue line says today.
+2. **Inline copies.** I'd replace the inline `c.json({ error: … })` in signIn and clinic as well, not only the helper functions. Otherwise the code still has more than one copy of each answer.
+3. **Where the shared file goes.** I'd put it in `src/server/answers.server.ts`, next to `session.server.ts`, which the feature routes already import. `lib/` holds code that the client and the server both import, and no file there is server-only yet. The alternative is `src/lib/answers.server.ts`.
+4. **Name.** I'd call it `professionalNotFound`, not `notFound`, because `appointmentNotFound` sits beside it in the appointments route. `appointmentNotFound` stays local, since it has only one copy. The professionals route keeps its refusal table, because use case errors go through that table.
+5. **Test.** I'd add one small test file that checks the status and body of each shared answer. Today no route-level test covers a 500 `DatabaseFailed`, only the repository tests do. The alternative is no new test and relying on the existing route tests.
+
+Answer any you disagree with, or say "all as recommended". Then I'll create the `route-errors` worktree and write the page there.

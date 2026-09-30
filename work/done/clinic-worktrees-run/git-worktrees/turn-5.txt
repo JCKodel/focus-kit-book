@@ -1,0 +1,9 @@
+[tool Bash] grep -n "git-worktrees" docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Bash] git diff docs/06-Queue.md
+
+The two lines are separate again: `git-worktrees` and `time-zone-names` each have their own line in docs/06. My edit that removed the `parallel-verify` line also swallowed the newline between them. The diff against `main` now shows only the milestone clause and the one new `[>] git-worktrees` line.
+
+When the page holds, open a fresh session in this folder and type `/apply git-worktrees`.

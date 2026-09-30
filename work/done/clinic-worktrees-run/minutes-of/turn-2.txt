@@ -1,0 +1,22 @@
+[tool Bash] git worktree add ../focus-kit-clinic-minutes-of -b minutes-of main && git worktree list
+
+[tool Write] ../focus-kit-clinic-minutes-of/work/minutes-of.md
+
+[tool Edit] ../focus-kit-clinic-minutes-of/docs/06-Queue.md
+
+I created the worktree `../focus-kit-clinic-minutes-of` on branch `minutes-of` and wrote the page there: `work/minutes-of.md`. In that worktree, docs/06 now marks the line `[>]`.
+
+**What I chose and why:**
+- **The shared copy goes in `src/lib/time.ts`.** docs/01 says code moves to `lib/` on its second concrete use, and this is the second. `appointments/rules.ts` already imports a type from `weeklyHours/rules.ts`, but a shared function shouldn't live inside one feature for another feature to reach into. The file is named after what it reads, as `name.ts` and `email.ts` are.
+- **`minutesOf` keeps returning a plain number, not a `Result`.** Neither caller can pass a bad time: `setWeeklyHours` checks it first, and `freeSlots` reads periods that were checked before they were stored. A comment says it trusts its input.
+- **The time-format check (`validTime`) stays where it is.** Only one feature uses it, so it moves when a second one needs it.
+- **Three small tests in `src/lib/time.test.ts`** (00:00, 09:30, 23:55), because every `lib/` file has its own test.
+- **Nothing is added to docs/03.** This is a code helper, not clinic vocabulary. The page tells `/apply` to add `time.ts` to docs/01's `lib/` listing.
+
+**Before you build it:** read the page and question it:
+- Can each Behaviour line be checked?
+- Is the Contract exact?
+- Does Out of scope leave out anything you expected to be in?
+- Do you agree with the choices I made on my own?
+
+The Done when list limits the `src/` changes to those four files. If you want a correction, ask for it here. Then open a fresh session in `../focus-kit-clinic-minutes-of` and type `/apply minutes-of`.

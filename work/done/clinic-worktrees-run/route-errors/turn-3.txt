@@ -1,0 +1,150 @@
+[tool Bash] cat work/route-errors.md && git diff docs/06-Queue.md && ls docs docs/adr src src/features src/lib 2>/dev/null
+
+[tool Bash] cat docs/05-Process.md docs/04-Conventions.md && grep -n "server/\|shell" docs/01-Architecture.md && tail -20 docs/02-Backend.md
+
+[tool Bash] sed -n 48,60p docs/01-Architecture.md; ls node_modules >/dev/null 2>&1 && echo HAS_NM; for f in src/server/session.server.ts src/features/{signIn,clinic,professionals,weeklyHours,appointments}/route.server.ts; do echo "=== $f"; cat -n $f; done
+
+[tool Bash] sed -n 48,60p docs/01-Architecture.md; ls node_modules >/dev/null 2>&1 && echo HAS_NM; for f in src/server/session.server.ts src/features/signIn/route.server.ts src/features/clinic/route.server.ts src/features/professionals/route.server.ts src/features/weeklyHours/route.server.ts src/features/appointments/route.server.ts; do echo "=== $f"; cat -n $f; done
+
+[tool Read] src/server/session.server.ts
+
+[tool Read] src/features/signIn/route.server.ts
+
+[tool Read] src/features/clinic/route.server.ts
+
+[tool Read] src/features/professionals/route.server.ts
+
+[tool Read] src/features/weeklyHours/route.server.ts
+
+[tool Read] src/features/appointments/route.server.ts
+
+[tool Read] docs/01-Architecture.md
+
+The page matches the code as it stands. Next I'll write the shared answers file, its test, and the six route edits.
+
+[tool Write] src/server/answers.server.ts
+
+[tool Bash] ls src/server && sed -n 1,30p src/features/signIn/route.server.test.ts
+
+[tool Write] src/server/answers.server.test.ts
+
+[tool Edit] src/server/session.server.ts
+
+[tool Edit] src/server/session.server.ts
+
+Now signIn and clinic.
+
+[tool Write] src/features/signIn/route.server.ts
+
+[tool Write] src/features/clinic/route.server.ts
+
+[tool Edit] src/features/professionals/route.server.ts
+
+[tool Edit] src/features/professionals/route.server.ts
+
+Now weeklyHours and appointments.
+
+[tool Edit] src/features/weeklyHours/route.server.ts
+
+[tool Edit] src/features/weeklyHours/route.server.ts
+
+[tool Edit] src/features/weeklyHours/route.server.ts
+
+[tool Edit] src/features/weeklyHours/route.server.ts
+
+[tool Edit] src/features/appointments/route.server.ts
+
+[tool Edit] src/features/appointments/route.server.ts
+
+[tool Edit] src/features/appointments/route.server.ts
+
+[tool Edit] src/features/appointments/route.server.ts
+
+[tool Edit] src/features/appointments/route.server.ts
+
+[tool Edit] src/features/appointments/route.server.ts
+
+Docs next, then the two greps.
+
+[tool Edit] docs/01-Architecture.md
+
+[tool Edit] docs/02-Backend.md
+
+[tool Bash] grep -rnE 'error: \{ code: "(DatabaseFailed|BadRequest|NotSignedIn|ProfessionalNotFound|ClinicNotSetUp)"' src --exclude='*.test.ts' --exclude='*.e2e.ts'; echo ---; grep -rnE 'function (databaseFailed|notFound|badRequest|notSignedIn|clinicNotSetUp|professionalNotFound)\(' src; echo ---; grep -n "Context" src/features/weeklyHours/route.server.ts src/features/appointments/route.server.ts src/features/professionals/route.server.ts src/server/session.server.ts | head
+
+Both greps match the Done-when targets. Running verify.
+
+[tool Bash] ls node_modules >/dev/null && npm run verify 2>&1 | grep -vE '^\s*(✓|·)' | tail -40
+
+docs/05 says to run `npm ci` first when `node_modules` is missing.
+
+[tool Bash] npm ci 2>&1 | tail -5
+
+[tool Bash] npm run verify > /tmp/route-errors-verify.log 2>&1; echo EXIT=$?; grep -nE 'Test Files|Tests |passed|failed|error|✓ built' /tmp/route-errors-verify.log | tail -20
+
+[tool Bash] npm run verify 2>&1 | grep -nE 'Test Files|Tests |passed|failed|rror|built in|ERR' | tail -30
+
+Vitest is green (333 tests). Playwright stopped because port 3100 is already in use. Checking what's holding it.
+
+[tool Bash] lsof -nP -iTCP:3100 -sTCP:LISTEN; lsof -nP -iTCP:5174 -sTCP:LISTEN
+
+Something else (likely another worktree's e2e run) holds port 3100, and I can't inspect it from this session. I'll write the page updates while waiting, then run verify again.
+
+[tool Bash] git diff --stat && git status --short && git diff main --stat -- src | tail -3 && git log main --oneline -1 && git ls-files 'src/**/*.test.ts' | wc -l
+
+The diff scope matches the page. Before this delivery there were 33 Vitest files and 328 tests; the new file adds 5, making 34 files and 333 tests. Retrying verify:
+
+[tool Bash] npm run verify 2>&1 | grep -nE 'Test Files|Tests |passed|failed|flaky|rror|built in|ERR' | tail -30
+
+Verify is green: typecheck, lint, 333 Vitest tests, 144 Playwright tests and the build. Now the page record, the move to `work/done/` and the queue mark.
+
+[tool Bash] mkdir -p work/done && git mv -f work/route-errors.md work/done/route-errors.md 2>/dev/null || mv work/route-errors.md work/done/route-errors.md; ls work/done | grep route-errors; grep -n "route-errors" docs/06-Queue.md
+
+[tool Bash] mv work/route-errors.md work/done/route-errors.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Read] work/done/route-errors.md
+
+[tool Read] work/done/route-errors.md
+
+[tool Edit] work/done/route-errors.md
+
+[tool Edit] work/done/route-errors.md
+
+[tool Edit] work/done/route-errors.md
+
+[tool Edit] work/done/route-errors.md
+
+[tool Bash] git add -A && git status --short && grep -c '—' work/done/route-errors.md docs/01-Architecture.md docs/02-Backend.md src/server/answers.server.ts
+
+`route-errors` is built and staged in its worktree, and `npm run verify` is green. I have not committed.
+
+**What changed**
+- The new file `src/server/answers.server.ts` holds the five shared error answers from the page: `badRequest`, `notSignedIn`, `professionalNotFound`, `clinicNotSetUp` and `databaseFailed`.
+- The six route and session files now import these answers instead of keeping their own helpers or writing the answer inline. Every status, body and order of checks is the same as before.
+- The new test `src/server/answers.server.test.ts` has one test per answer.
+- The two Done-when greps return exactly what the page expects.
+- docs/01 and docs/02 are updated, the page is in `work/done/`, and its line in docs/06 is marked `[x]`.
+
+**Proof:** verify passed typecheck, lint, 333 Vitest tests (328 before, plus the 5 new ones), 144 Playwright tests, and the build. No existing test file changed, so the Playwright tests are the same set as before. The first verify run stopped before Playwright because something else was using port 3100, probably another worktree's e2e run. The second run passed without any change.
+
+**Blocked in this session:** a few commands needing approval were refused because nobody could answer a prompt. They were brace or `$` expansions in shell commands, an `lsof` to see what held port 3100, and a combined `mkdir`/`git mv`. I did the same work with plain commands and file tools, so nothing is missing. I just couldn't find out what was using port 3100.
+
+**Left for you:** the manual check is the one Done-when item I didn't tick. Run `npm run dev`, then book and cancel at 390×844, and on `/owner` sign in, add a professional, save weekly hours and sign out.
+
+**Suggested commit message:**
+```
+Share the error answers routes repeat (route-errors)
+
+- Add src/server/answers.server.ts with the five shared error answers
+- Use them in session, signIn, clinic, professionals, weeklyHours, appointments
+- Test each answer's status and body in answers.server.test.ts
+- docs/01 and docs/02 name where the shared answers live
+
+See work/done/route-errors.md
+```
+
+**Environments:**
+- **Local:** the code is ready, but nothing is running. This worktree has an empty `data/`, so to run it here use `npm run setup`, then `npm run dev`.
+- **Production:** doesn't exist yet (it comes with the `deploy` delivery). Publishing is yours to do.

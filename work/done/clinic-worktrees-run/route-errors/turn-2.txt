@@ -1,0 +1,31 @@
+[tool Bash] ls -la ../focus-kit-clinic-route-errors 2>&1; git worktree add ../focus-kit-clinic-route-errors -b route-errors main
+
+[tool Read] ../focus-kit-clinic-route-errors/work/done/update-type.md
+
+[tool Bash] cd ../focus-kit-clinic-route-errors && grep -rnE 'error: \{ code' src | grep -v '\.test\.ts\|\.e2e\.ts'; ls src/server/*.test.ts; grep -n "app.request\|import" src/server/session.server.test.ts | head
+
+[tool Write] ../focus-kit-clinic-route-errors/work/route-errors.md
+
+[tool Edit] ../focus-kit-clinic-route-errors/docs/06-Queue.md
+
+[tool Bash] grep -n "—" work/route-errors.md docs/06-Queue.md; git status --short
+
+I went with all five recommendations and wrote the page at `work/route-errors.md`. It's in the `route-errors` worktree (`../focus-kit-clinic-route-errors`, branch `route-errors`), and the queue line in docs/06 is marked `[>]`.
+
+**What I chose and why:**
+
+1. **Every repeated error answer, not just the two in the queue line.** That covers `DatabaseFailed`, `BadRequest`, `NotSignedIn`, `ProfessionalNotFound`, and `ClinicNotSetUp` when it's answered as a 500. The milestone clause says "the code repeated across features has one shared copy". Leaving three of them would only give `m1.1-review` three findings to send back. I widened the queue line to match, which is the one change to docs/06 besides the mark.
+2. **Inline copies count as copies.** signIn and clinic write the error body directly, without a helper. Replacing only the helpers would still leave several copies of each answer.
+3. **The shared file is `src/server/answers.server.ts`.** Only the server runs these answers, and they sit next to `session.server.ts`, which the features already import. `lib/` holds only code the client can import too. I named it "answers" because docs/02 already calls what a route returns its "Answer", while "errors" would get confused with the `Result` error values.
+4. **The function is called `professionalNotFound`.** `appointmentNotFound` sits right beside it, so a plain `notFound` wouldn't say which one it is.
+5. **One new test file, one test per answer.** Today no route test reaches a 500. No existing test changes.
+
+**What stays as it is:** answers that only one route writes (`SignInRefused`, the 404 `ClinicNotSetUp` from `GET /api/clinic`, `appointmentNotFound`, the booking and cancellation refusals), and the professionals `refused` table. No status, body or order of checks changes.
+
+**Before you run `/apply`**, read the page and question it:
+- Each Behaviour line should be something you can check.
+- The Contract should be exact: the five functions and the before/after table for the six files.
+- Out of scope should name anything you assumed was included.
+- Look hardest at "Choices made without the stakeholder", since I decided those on my own.
+
+Ask for every correction here in this conversation. A hole found on the page costs one turn; found after `/apply`, it costs another `/apply`. When the page is right, open a fresh session in `../focus-kit-clinic-route-errors` and type `/apply route-errors`.
