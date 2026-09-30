@@ -84,7 +84,7 @@ No I/O failed, and no code is wrong; the rule did its job.
 So a failure is one of three:
 
 * **Exception:** an expected failure at I/O (the database, the network, the phone's storage), caught where the I/O happens and returned as a value.
-* **Refusal:** a rule saying no, returned as a value, with no I/O involved.
+* **Refusal:** a rule saying no, checked in code or by a database constraint such as a unique index, and returned as a value; even when the database answers, nothing failed.
 * **Error:** a bug, thrown and never caught, so it reaches your screen while you develop and your analytics once the app runs.
 
 The field calls the principle "errors as values", after Go[^go-errors] and Rust,[^rust-result] and chapter 6 said why this book says exception.[^book-adr-0016]
@@ -168,6 +168,7 @@ export function insertAppointment(
 ```
 
 When two clients book the same time at once, the unique index refuses the second insert, and the repository returns that as the refusal `SlotTaken`; any other failure stays the exception `DatabaseFailed`.
+It is the same rule checked twice: the use case `book` refuses a time that is not free first, as [chapter 15](15-four-pieces.md#one-event-one-new-state) shows, and the index is the last guard when two clients book at once.
 
 A refusal from a rule involves no I/O at all.
 This is `checkClientPhone`, from [`src/features/appointments/rules.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/rules.ts):
@@ -248,7 +249,7 @@ The clinic's docs/01, in its section "How errors travel", gives the path a failu
 
 * A feature is one thing the app keeps, with every action on it, and its vertical slice is one folder, with no folder per layer; a change to the feature touches that folder, and removing the feature removes it.
 * A file enters a slice when it pays its way, and code enters `lib/` on its second use.
-* An exception exists only at I/O, a refusal only in a rule, and neither is thrown.
+* An exception is I/O that failed, a refusal is a rule saying no, in code or in a database constraint, and neither is thrown.
 * An error is a bug: never caught, it reaches your screen and your analytics.
 * A `Result` handled with a `Record` over its cases fails to compile when a case is forgotten.
 

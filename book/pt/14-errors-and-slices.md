@@ -84,7 +84,7 @@ Nenhum I/O falhou, e nenhum código está errado; a regra fez o trabalho dela.
 Então uma falha é uma de três:
 
 * **Exceção:** uma falha esperada no I/O (o banco de dados, a rede, o armazenamento do celular), capturada onde o I/O acontece e devolvida como valor.
-* **Recusa:** uma regra dizendo não, devolvida como valor, sem I/O envolvido.
+* **Recusa:** uma regra dizendo não, verificada no código ou por uma restrição do banco de dados, como um índice único, e devolvida como valor; mesmo quando é o banco que responde, nada falhou.
 * **Erro:** um bug, lançado e nunca capturado, então chega à sua tela enquanto você desenvolve e ao seu analytics quando o app roda.
 
 A área chama o princípio de "erros como valores", a partir do Go[^go-errors] e do Rust,[^rust-result] e o capítulo 6 disse por que este livro diz exceção.[^book-adr-0016]
@@ -168,6 +168,7 @@ export function insertAppointment(
 ```
 
 Quando dois clientes agendam o mesmo horário ao mesmo tempo, o índice único recusa a segunda inserção, e o repositório devolve isso como a recusa `SlotTaken`; qualquer outra falha continua a exceção `DatabaseFailed`.
+É a mesma regra verificada duas vezes: o caso de uso `book` recusa antes um horário que não está livre, como mostra o [capítulo 15](15-four-pieces.md#um-evento-um-novo-estado), e o índice é a última barreira quando dois clientes agendam ao mesmo tempo.
 
 Uma recusa de uma regra não envolve I/O nenhum.
 Esta é `checkClientPhone`, de [`src/features/appointments/rules.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/rules.ts):
@@ -248,7 +249,7 @@ O docs/01 da clínica, na seção "How errors travel", dá o caminho que uma fal
 
 * Uma funcionalidade é uma coisa que o app guarda, com toda ação sobre ela, e a fatia vertical dela é uma pasta, sem pasta por camada; uma mudança na funcionalidade mexe nessa pasta, e remover a funcionalidade remove essa pasta.
 * Um arquivo entra em uma fatia quando se paga, e o código entra em `lib/` no segundo uso.
-* Uma exceção existe só no I/O, uma recusa só em uma regra, e nenhuma das duas é lançada.
+* Uma exceção é um I/O que falhou, uma recusa é uma regra dizendo não, no código ou em uma restrição do banco de dados, e nenhuma das duas é lançada.
 * Um erro é um bug: nunca capturado, chega à sua tela e ao seu analytics.
 * Um `Result` tratado com um `Record` sobre os seus casos não compila quando um caso é esquecido.
 

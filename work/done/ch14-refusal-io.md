@@ -32,9 +32,17 @@
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
-* [ ] No "with no I/O involved", "sem I/O envolvido", "a refusal only in a rule" or "uma recusa só em uma regra" is left in `book/`.
-* [ ] The refusal row of docs/03 updated.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
+* [x] No "with no I/O involved", "sem I/O envolvido", "a refusal only in a rule" or "uma recusa só em uma regra" is left in `book/`.
+* [x] The refusal row of docs/03 updated.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* The definition of a refusal now says the rule is checked in code or by a database constraint such as a unique index, and ends "even when the database answers, nothing failed", which holds for both places the rule lives.
+* After the sentence on `SlotTaken` from the index, one sentence says it is the same rule checked twice, pointing to the use case `book` in chapter 15's §"One event, one new state" (Portuguese: §"Um evento, um novo estado"). Checked against the clinic at `book-v1/closing-a-milestone`: `repository.server.ts` calls `appointment_booked_slot` the last guard and returns `SlotTaken`.
+* The third key point reads as the page gave it; chapter 14 keeps five key points. The refusal row of docs/03 names a repository's `Result` and a database constraint.
+* The Portuguese calls the index "a última barreira".
+* Nothing diverged from the page. Finding F4 of the M4 review is settled.
