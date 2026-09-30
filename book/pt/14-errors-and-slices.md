@@ -112,7 +112,7 @@ Uma exceção lançada para conduzir o fluxo do programa, em vez de devolvida, c
 1. Um `throw` é uma saída que o ponto da chamada não mostra. Joel Spolsky escreveu em 2003 que as exceções "*são invisíveis no código-fonte*" e "*criam pontos de saída demais para uma função*".[^spolsky-exceptions]
 2. A assinatura não diz o que pode falhar, então o compilador não consegue verificar que todo caso foi tratado. Um `Result` diz isso no seu tipo, e o `Record` sobre `BookingRefusal` da próxima seção não compila quando uma recusa fica sem status.
 3. Um throw custa mais que um return. No benchmark `ExceptionThrowCatch` de Stephen Toub, publicado em 2024-09-12, 1.000 throws, cada um capturado através de 10 frames assíncronos, levaram 123,03 ms no .NET 8 e 54,68 ms no .NET 9.[^toub-net9] O guia de ASP.NET Core da Microsoft tira a regra: "*lançar e capturar exceções é lento em comparação com outros padrões de fluxo de código. Por isso, exceções não devem ser usadas para controlar o fluxo normal do programa.*"[^aspnet-best-practices] As Framework Design Guidelines dizem assim: "*NÃO use exceções para o fluxo normal de controle, se possível.*"[^fdg-exception-throwing]
-4. Um catch largo o bastante para conduzir o fluxo também captura bugs, como mostra o `query` da próxima seção: um `TypeError` dentro dele vira `DatabaseFailed`.
+4. Um catch largo o bastante para conduzir o fluxo também captura bugs, e paga por eles em cada lugar onde o fluxo muda. Um catch no I/O não pode ser evitado, já que a biblioteca lança, então paga esse custo uma vez, onde a biblioteca é chamada, e não conduz nada. O `query`, na próxima seção, é um catch assim, e um `TypeError` dentro dele vira `DatabaseFailed`.
 
 ## Exceções como valores na clínica
 
@@ -156,6 +156,11 @@ Este é o único `try`/`catch` dentro do qual o SQL de um repositório roda, e e
 Uma captura mais estreita não separaria os dois: o SQLite informa um comando malformado com o mesmo código de uma tabela ausente ou de um arquivo travado, `ERR_SQLITE_ERROR`.[^node-sqlite-error]
 A definição de erro diz o que o código busca; uma captura no I/O é onde um bug pode ser capturado por acidente.
 As rotas respondem `DatabaseFailed` só com o código e não registram nada, então um bug capturado ali não chega nem à sua tela nem ao seu analytics.
+
+Duas coisas o trazem de volta.
+Antes de o app sair, um teste: o SQL de todo repositório roda num teste contra o `memoryDatabase`, o SQLite em memória com as migrations reais que o [capítulo 16](16-testing-and-agents.md#uma-regra-cinco-testes) usa, e o teste confere o valor que recebe, então um bug dentro de `run` o faz falhar e mostra a mensagem.
+Com o app rodando, um log: `DatabaseFailed` carrega a `message` do que foi lançado, então o código que o transforma numa resposta registra essa mensagem antes de responder.
+O `npm run setup` já a imprime quando não consegue ler o banco; as rotas ainda não a registram, e as do seu app deveriam.
 
 Uma exceção também pode virar uma recusa.
 Em [`src/features/appointments/repository.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/repository.server.ts), a inserção de um agendamento pode falhar de dois jeitos:
@@ -300,6 +305,7 @@ O docs/01 da clínica, na seção "How errors travel", dá o caminho que uma fal
 * Um erro é um bug, corrigido e nunca capturado; uma exceção é uma falha de fora do programa, capturada na fronteira e devolvida como valor; uma recusa é uma regra dizendo não, no código ou numa restrição do banco; o nome da classe não distingue nenhum deles.
 * Um throw é uma saída que quem chama não vê e o compilador não verifica, então nunca conduz o fluxo.
 * A exceção de uma biblioteca pertence à biblioteca: o código na fronteira a transforma no valor do domínio, e o resto do app não lança nada.
+* O catch na fronteira também captura bugs, então todo repositório roda num teste contra o SQLite com as migrations reais, e o código que transforma uma exceção numa resposta registra o que ela carrega.
 * Um `Result` tratado com um `Record` sobre os seus casos não compila quando um caso é esquecido.
 
 ## Exercícios

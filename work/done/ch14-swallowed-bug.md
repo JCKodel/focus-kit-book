@@ -41,10 +41,19 @@ Sentences are found by their quoted text; `ch14-keepless-feature`, `ch14-library
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
-* [ ] Reason 4 and the new paragraph no longer leave the reader asking whether reason 4 argues against `query`.
-* [ ] The claim that every repository's SQL runs in a test against `memoryDatabase` was re-checked at `book-v1/closing-a-milestone`.
-* [ ] No logging code is shown, and the text says the clinic does not log yet.
-* [ ] `make verify` green.
+* [x] Both editions changed with the same meaning. Chapter 14 opens with its value, with no filler and nothing useful cut.
+* [x] Reason 4 and the new paragraph no longer leave the reader asking whether reason 4 argues against `query`.
+* [x] The claim that every repository's SQL runs in a test against `memoryDatabase` was re-checked at `book-v1/closing-a-milestone`.
+* [x] No logging code is shown, and the text says the clinic does not log yet.
+* [x] `make verify` green.
 * [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Revalidated against the tree after `ch14-keepless-feature`: the three quoted sentences were unchanged, now at lines 115, 158 and 302 of both editions; nothing else in the page's scope had moved.
+* Re-check at `book-v1/closing-a-milestone`: every exported function of the five repositories is called by a test that uses `memoryDatabase`, directly or, for signIn's `findOwner`, through `signIn/route.server.test.ts`; `saveSession`, `findSession` and `deleteSession` run in `session.server.test.ts`, and `requireSession` through the route tests. "Every" stands.
+* Divergence, taken alone in the batch: the page said `git grep console` finds no log in `src` outside tests. It does: `setup.server.ts` prints `DatabaseFailed`'s message ("Cannot read the database: ..."), and `start.server.ts` prints to the console too. The text therefore says `npm run setup` already prints the message and the routes do not log it yet, rather than "the clinic does not log it yet". Still no logging code shown.
+* Divergence, taken alone: repository tests also expect refusals (`ok: false`), so "the test expects `ok`" became "the test checks the value it gets back".
+* Tightened: reason 4 says "`query` ... is such a catch", not "the clinic's one catch of that kind", since chapter 14 lists other catches at I/O; the link to chapter 16 says "uses", since chapter 16 shows the tests using `memoryDatabase`. The key point says "SQLite with the real migrations", not "the real database". The Portuguese anchor of chapter 16's section, `#uma-regra-cinco-testes`, was taken from the file and passes `link-check`.
+* `make book` not run: in this batch the driver builds once at the end of the loop, so that item stays unticked.

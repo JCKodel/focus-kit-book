@@ -112,7 +112,7 @@ An exception thrown to steer the program's flow, rather than returned, costs fou
 1. A `throw` is an exit the call site does not show. Joel Spolsky wrote in 2003 that exceptions "*are invisible in the source code*" and "*create too many possible exit points for a function*".[^spolsky-exceptions]
 2. The signature does not say what can fail, so the compiler cannot check that every case is handled. A `Result` says it in its type, and the `Record` over `BookingRefusal` in the next section fails to compile when a refusal has no status.
 3. A throw costs more than a return. In Stephen Toub's benchmark `ExceptionThrowCatch`, published 2024-09-12, 1,000 throws, each caught through 10 async frames, took 123.03 ms on .NET 8 and 54.68 ms on .NET 9.[^toub-net9] Microsoft's ASP.NET Core guidance draws the rule: "*Throwing and catching exceptions is slow relative to other code flow patterns. Because of this, exceptions shouldn't be used to control normal program flow.*"[^aspnet-best-practices] The Framework Design Guidelines say it as "*DO NOT use exceptions for the normal flow of control, if possible.*"[^fdg-exception-throwing]
-4. A catch wide enough to steer the flow also catches bugs, as `query` in the next section shows: a `TypeError` inside it becomes `DatabaseFailed`.
+4. A catch wide enough to steer the flow also catches bugs, and it pays for them at every place the flow turns. A catch at I/O cannot be avoided, since the library throws, so it pays that cost once, where the library is called, and steers nothing. `query`, in the next section, is such a catch, and a `TypeError` inside it becomes `DatabaseFailed`.
 
 ## Exceptions as values in the clinic
 
@@ -156,6 +156,11 @@ This is the one `try`/`catch` a repository's SQL runs inside, and it turns the d
 A narrower catch would not tell them apart: SQLite reports a malformed statement with the same code as a missing table or a locked file, `ERR_SQLITE_ERROR`.[^node-sqlite-error]
 The definition of an error says what the code aims for; a catch at I/O is where a bug can be caught by accident.
 The routes answer `DatabaseFailed` with its code alone and log nothing, so a bug caught there reaches neither your screen nor your analytics.
+
+Two things bring it back.
+Before the app ships, a test: every repository's SQL runs in a test against `memoryDatabase`, the in-memory SQLite with the real migrations that [chapter 16](16-testing-and-agents.md#one-rule-five-tests) uses, and the test checks the value it gets back, so a bug inside `run` fails it and shows its message.
+Once the app runs, a log: `DatabaseFailed` carries the `message` of what was thrown, so the code that turns it into an answer logs that message before it answers.
+`npm run setup` already prints it when it cannot read the database; the routes do not log it yet, and your app's should.
 
 An exception can also become a refusal.
 In [`src/features/appointments/repository.server.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/closing-a-milestone/src/features/appointments/repository.server.ts), a booking's insert can fail in two ways:
@@ -300,6 +305,7 @@ The clinic's docs/01, in its section "How errors travel", gives the path a failu
 * An error is a bug, fixed and never caught; an exception is a failure from outside the program, caught at the boundary and returned as a value; a refusal is a rule saying no, in code or in a database constraint; the class name tells none of them apart.
 * A throw is an exit the caller cannot see and the compiler cannot check, so it never steers the flow.
 * A library's exception belongs to the library: the code at the boundary turns it into the domain's value, and the rest of the app throws nothing.
+* The catch at the boundary also catches bugs, so every repository runs in a test against SQLite with the real migrations, and the code that turns an exception into an answer logs what it carries.
 * A `Result` handled with a `Record` over its cases fails to compile when a case is forgotten.
 
 ## Exercises
