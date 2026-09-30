@@ -33,10 +33,19 @@ Sentences are found by their quoted text. The other ch15-* lines of M4.2 (`ch15-
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapter 15 still opens with its value, with no filler and nothing useful cut.
-* [ ] Key point 2 in both editions names the job's weighing and the shape a delivery chose; the section is unchanged.
-* [ ] No "and that job gives more than it costs" or "e esse trabalho dá mais do que custa" left in `book/`.
-* [ ] No em dash in the changed lines.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning. Chapter 15 still opens with its value, with no filler and nothing useful cut.
+* [x] Key point 2 in both editions names the job's weighing and the shape a delivery chose; the section is unchanged.
+* [x] No "and that job gives more than it costs" or "e esse trabalho dá mais do que custa" left in `book/`.
+* [x] No em dash in the changed lines.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author. Left unticked on purpose: in this batch the driver runs `make book` once at the end of the loop.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Revalidated against `main` at `60fc7d7`: `ch15-uncaught-pieces`, `ch15-brief-printed` and `ch15-view-rule` had moved the section to en:469 and pt:470, the verdict to en:484-485 and pt:485-486, the closing sentence to en:490 and pt:491, and key point 2 to en:495 and pt:496; the text was as the page quotes it, so the page held.
+* Key point 2 now reads, in English, "A piece is written when its job gives more than it costs, alone or through one shape a delivery chose for every hook, as the clinic keeps `healthEvents.ts`; the "Forbids" column keeps it to that job.", and in Portuguese as the page proposed.
+* Taken alone, since the batch ran without conversation: the page's proposal was kept word for word rather than tightened; each clause carries one behaviour item ("a delivery chose" for the second, "as the clinic keeps `healthEvents.ts`" for the first), and "has a job" was dropped as the page allowed.
+* The section was not touched.
+* F12 is settled by this delivery; `findings.md` is a run record and is not edited, as done for F9 to F11.
+* No document changed: no new term, rule or decision.

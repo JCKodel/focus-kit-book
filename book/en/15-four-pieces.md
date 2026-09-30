@@ -492,7 +492,7 @@ KISS, YAGNI and DRY decide, as [chapter 6](06-the-documents.md#the-two-choices) 
 ## Key points
 
 * The view fires events and renders state, the orchestrator turns one event into one new state, a use case holds a rule as a pure function, and the repository is the only piece that fetches and saves.
-* A piece is written when it has a job and that job gives more than it costs; the "Forbids" column keeps it to that job.
+* A piece is written when its job gives more than it costs, alone or through one shape a delivery chose for every hook, as the clinic keeps `healthEvents.ts`; the "Forbids" column keeps it to that job.
 * In the clinic each side has its own orchestrator and repositories, and both import the same use cases: the server enforces a rule, and the client uses it only to decide what to show.
 * An event flows one way: the view never sets the state, and a use case never calls a repository.
 * A piece receives a dependency only where its test passes a second implementation, a fake: the orchestrator its repositories or the driver they use, and a server repository that driver; a use case and a view receive none, and `now` is passed as data.

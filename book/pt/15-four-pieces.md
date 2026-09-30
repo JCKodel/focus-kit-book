@@ -493,7 +493,7 @@ KISS, YAGNI e DRY decidem, como o [capítulo 6](06-the-documents.md#as-duas-esco
 ## Pontos-chave
 
 * A tela dispara eventos e renderiza o estado, o orquestrador transforma um evento em um novo estado, um caso de uso guarda uma regra como função pura, e o repositório é a única peça que busca e salva.
-* Uma peça é escrita quando tem um trabalho e esse trabalho dá mais do que custa; a coluna "Proíbe" a mantém nesse trabalho.
+* Uma peça é escrita quando o trabalho dela dá mais do que custa, sozinho ou por uma só forma que uma entrega escolheu para todo hook, como a clínica mantém `healthEvents.ts`; a coluna "Proíbe" a mantém nesse trabalho.
 * Na clínica cada lado tem o seu orquestrador e os seus repositórios, e os dois importam os mesmos casos de uso: o servidor impõe uma regra, e o cliente a usa só para decidir o que mostrar.
 * Um evento corre em um só sentido: a tela nunca muda o estado, e um caso de uso nunca chama um repositório.
 * Uma peça recebe uma dependência só onde o teste dela passa uma segunda implementação, uma falsa: o orquestrador os seus repositórios ou o driver que eles usam, e um repositório do servidor esse driver; um caso de uso e uma tela não recebem nenhuma, e `now` é passado como dado.
