@@ -22,7 +22,7 @@ A mesma seção termina com a regra da clínica: "*Toda regra tem um teste. Uma 
 O Vitest roda um teste no Node, sem navegador.[^vitest]
 O Playwright conduz o app em um navegador de verdade, como um usuário faria, clicando e digitando.[^playwright]
 
-Um teste que o Vitest roda é um teste unitário: ele chama uma peça diretamente, sem servidor rodando, e roda tudo o que essa peça chama.
+Um teste que o Vitest roda é um teste unitário: ele chama uma peça diretamente, sem servidor rodando, e roda o código que essa peça chama, menos o I/O e o relógio, que o teste pode trocar.
 A peça pode ser um caso de uso com os seus dados, um repositório contra um banco em memória, uma rota por `app.request`, que roda o caso de uso e o repositório por trás dela, ou uma função de evento com repositórios falsos.
 Um teste que o Playwright roda é um teste ponta a ponta: ele conduz o app rodando pela tela, pelos orquestradores, pelo servidor e pelo banco, e as suas requisições cruzam a rede até esse servidor, enquanto a requisição de um teste unitário nunca sai do processo.
 São os arquivos `.test.ts` e `.e2e.ts` da fatia dos agendamentos no [capítulo 14](14-errors-and-slices.md#fatias-verticais), cada um ao lado do arquivo que testa.

@@ -34,10 +34,19 @@ Sentences are found by their quoted text. The line numbers below are from commit
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapter 16 still opens with its value, with no filler and nothing useful cut.
-* [ ] No "runs whatever that piece calls" or "roda tudo o que essa peça chama" left in `book/` or `docs/03-Domain.md`.
-* [ ] Every Vitest test the chapter shows fits the definition, as the second Behaviour line lists.
-* [ ] The docs/03 `unit test` row matches the chapter's definition.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning. Chapter 16 still opens with its value, with no filler and nothing useful cut.
+* [x] No "runs whatever that piece calls" or "roda tudo o que essa peça chama" left in `book/` or `docs/03-Domain.md`.
+* [x] Every Vitest test the chapter shows fits the definition, as the second Behaviour line lists.
+* [x] The docs/03 `unit test` row matches the chapter's definition.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author. Left unticked: in this batch the driver builds once at the end of the loop.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* Revalidated against the current tree: the definition was still at en:24 and pt:25, the docs/03 row at line 59, and every "checked and left alone" line still fits; no document contradicted the page.
+* en:24 and pt:25 took the page's proposed sentences as written: tightening found nothing to cut without losing the exception.
+* Decided alone (batch, no conversation): no pointer to "The client's I/O" in en:25 and pt:26. The definition already names the I/O as what a test may swap, and that section, with en:319 and pt:320, places `remembered.test.ts` and `request.test.ts` where the reader meets them; the pointer would repeat it.
+* docs/03's `unit test` row now carries the chapter's definition, with "a route through `app.request` with a fake clock", as the page proposed. Term, Portuguese term and pattern unchanged.
+* Every Vitest test the chapter shows fits: the use case's swaps nothing (en:179), the repository's runs against an in-memory database, the route's fakes the clock with `vi.useFakeTimers`, the event function's passes fake repositories (en:246), and the client's two replace `localStorage` and `fetch` (en:306, en:309).
+* `make verify` green. F13 of the M4.1 review settled.
