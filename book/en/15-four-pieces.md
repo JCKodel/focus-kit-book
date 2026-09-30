@@ -201,9 +201,18 @@ export async function submit(
 `submitStarted` checks name and phone with the use cases `checkClientName` and `checkClientPhone`, only to show a message beside a field, and gives the in-flight state, with `busy` set.
 `submit` sends the booking through the repository `postAppointment` and keeps a copy on the phone through the repository `remember`, both reached through `repositories`, with `now` passed in; it returns either an update to the state, the step `booked`, or the next event to run: `loadProfessionals` when the professional is gone, `loadSlots` when the slot was taken.
 
-The `submit` the view calls is the hook's, which hands the event to `run`, from [`src/features/appointments/useBooking.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/useBooking.ts):
+The `submit` the view calls is the hook's own, which hands the event to `run`, so the hook imports `bookingEvents.ts`'s `submit` as `submitEvent`.
+Here are the hook's state, its two refs and `run`, from [`src/features/appointments/useBooking.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/useBooking.ts):
 
 ```ts
+const [state, setState] = useState<BookingState>(initialBookingState);
+// Only the answer to the latest request is shown; Back or another tap
+// makes earlier ones stale.
+const latest = useRef(0);
+// The state last shown: what a booking sends.
+const shown = useRef(state);
+shown.current = state;
+
 // Any event with a call: its in-flight state, then its answer, which is
 // an update or the next event to run.
 const run = useCallback(async function run(next: BookingNext) {
@@ -229,7 +238,9 @@ const run = useCallback(async function run(next: BookingNext) {
 }, []);
 ```
 
-The hook sets the in-flight state, reads `new Date()` and passes it to `submit`, drops an answer that is not the latest, and publishes the update or runs the next event.
+The hook sets the in-flight state, reads `new Date()` and passes it to `submitEvent`, drops an answer that is not the latest, and publishes the update or runs the next event.
+`shown` holds the state last rendered, which the submit branch reads as `snapshot`; `submitStarted` and `submitEvent` both receive that snapshot.
+`latest` is a count of requests: each call takes the next number, and an answer whose number is no longer the latest is dropped; `back` also advances `latest`, so an answer that arrives after a tap on "Back" is dropped as well.
 
 **3. The client repository.** This is `postAppointment`, from [`src/features/appointments/api.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/api.ts):
 

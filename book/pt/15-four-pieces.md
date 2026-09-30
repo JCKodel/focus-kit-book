@@ -202,9 +202,18 @@ export async function submit(
 `submitStarted` confere nome e telefone com os casos de uso `checkClientName` e `checkClientPhone`, só para mostrar uma mensagem ao lado de um campo, e dá o estado em andamento, com `busy` ligado.
 `submit` envia o agendamento pelo repositório `postAppointment` e guarda uma cópia no celular pelo repositório `remember`, os dois alcançados por `repositories`, com `now` recebido de fora; ele devolve uma atualização do estado, o passo `booked`, ou o próximo evento a rodar: `loadProfessionals` quando o profissional sumiu, `loadSlots` quando o horário foi tomado.
 
-O `submit` que a tela chama é o do hook, que entrega o evento a `run`, de [`src/features/appointments/useBooking.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/useBooking.ts):
+O `submit` que a tela chama é o do próprio hook, que entrega o evento a `run`, por isso o hook importa o `submit` de `bookingEvents.ts` como `submitEvent`.
+Aqui estão o estado do hook, suas duas refs e `run`, de [`src/features/appointments/useBooking.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/useBooking.ts):
 
 ```ts
+const [state, setState] = useState<BookingState>(initialBookingState);
+// Only the answer to the latest request is shown; Back or another tap
+// makes earlier ones stale.
+const latest = useRef(0);
+// The state last shown: what a booking sends.
+const shown = useRef(state);
+shown.current = state;
+
 // Any event with a call: its in-flight state, then its answer, which is
 // an update or the next event to run.
 const run = useCallback(async function run(next: BookingNext) {
@@ -230,7 +239,9 @@ const run = useCallback(async function run(next: BookingNext) {
 }, []);
 ```
 
-O hook põe o estado em andamento, lê `new Date()` e o passa a `submit`, descarta uma resposta que não é a mais recente, e publica a atualização ou roda o próximo evento.
+O hook põe o estado em andamento, lê `new Date()` e o passa a `submitEvent`, descarta uma resposta que não é a mais recente, e publica a atualização ou roda o próximo evento.
+`shown` guarda o último estado renderizado, que o ramo do submit lê como `snapshot`; `submitStarted` e `submitEvent` recebem os dois esse snapshot.
+`latest` é uma contagem de pedidos: cada chamada pega o número seguinte, e uma resposta cujo número já não é o mais recente é descartada; `back` também avança `latest`, então uma resposta que chega depois de um toque em "Back" é descartada também.
 
 **3. O repositório do cliente.** Este é `postAppointment`, de [`src/features/appointments/api.ts`](https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/four-pieces/src/features/appointments/api.ts):
 

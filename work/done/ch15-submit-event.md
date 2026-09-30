@@ -39,9 +39,17 @@
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapter 15 opens with its value, with no filler and nothing useful cut.
-* [ ] The excerpt matches `git show book-v1/four-pieces:src/features/appointments/useBooking.ts` lines 30 onward, byte for byte after removing the outer indentation.
-* [ ] `grep -n "passes it to \`submit\`\|o passa a \`submit\`" book/*/15-four-pieces.md` finds nothing.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning. Chapter 15 opens with its value, with no filler and nothing useful cut.
+* [x] The excerpt matches `git show book-v1/four-pieces:src/features/appointments/useBooking.ts` lines 30 onward, byte for byte after removing the outer indentation.
+* [x] `grep -n "passes it to \`submit\`\|o passa a \`submit\`" book/*/15-four-pieces.md` finds nothing.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author: run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* The earlier M4.1 deliveries moved the lines: the sentence before the excerpt is now en/15:204 and pt/15:205, the summary en/15:241 and pt/15:242 after this delivery, and "`submit` returns the update with the step `booked`" en/15:392 and pt/15:393; all as the page foresaw, and that last one is unchanged.
+* The sentence before the excerpt now names the alias and adds a line saying the excerpt holds the hook's state, its two refs and `run`. The excerpt is useBooking.ts:30-60 at the tag, one tab of outer indentation removed.
+* The prose on `shown` and `latest` follows the summary, one line each; "Back" is written as the button's label, a tap on "Back", as chapter 15 writes "Book".
+* The other bare `submit`s (the view's paragraph, the event's two paragraphs, and "`submit`, in step 2", in both editions) already read unambiguously: the view's is handed "to the hook", the others are in `bookingEvents.ts` or "step 2". Unchanged.
+* Nothing dropped; no document changed. Finding F9 of the M4 review is settled. `make verify` green.
