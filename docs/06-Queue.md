@@ -121,7 +121,28 @@ When this milestone closes, every confirmed finding of the M4 review is settled:
 [x] clinic-update-type     the update type (current) => State is declared once and shared, and so is the starter shape that submitStarted and saveStarted repeat, each with its first occurrence named, as the clinic's AGENTS.md asks, where today seven files declare the type, by a recorded run
 [x] clinic-event-shapes    the clinic's docs/01 names every shape an event with a call takes once the lines above are done, where today it gives one and the booking's next event, the weekly hours' { update, report } and starter, and the remembered list's plain functions are written only in work/done, by a recorded run
 [x] ch14-failure-kinds     Chapter 14: says what an error and an exception are without Dart's classes, why an exception must not steer the flow, and that a library's exception becomes the domain's value at the boundary, so the app has none; both editions
-[ ] m4.1-review            the review of M4.1 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against the product questions and M4.1's paragraph; each confirmed finding becomes a line in a new milestone M4.2
+[x] m4.1-review            the review of M4.1 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against the product questions and M4.1's paragraph; each confirmed finding becomes a line in a new milestone M4.2
+[ ] m4.1-code-review       /code-review of the clinic's code that M4.1 changed, from book-v1/four-pieces to the last clinic run of M4.1, which has no chapter tag; each confirmed finding becomes a line in M4.2
+```
+
+## M4.2. What the review of M4.1 found
+
+When this milestone closes, every confirmed finding of the M4.1 review is settled: chapter 3's key points say only what its run showed; chapter 7 says which of the clinic's non-negotiables are the kit's; Part III's definitions of a feature and a unit test fit the clinic's code it shows, and it says what the reader does about a bug that the boundary's catch hides; chapter 14's boundary squares with the routes that import a library's type; chapter 15 places every catch in a piece, explains the rule its view excerpt shows, prints the brief the reader is told to answer with, and its key point on when a piece is written meets its section; and the Portuguese edition uses the terms chapter 3 taught and summarizes chapter 10's diff as it is.
+
+```
+[ ] pt-spec-change-terms   Portuguese edition: chapters 1, 4 and 13 say "mudança" and "especificação", the terms chapter 3 taught, where today they say "change", "spec" and "specs" with no gloss
+[ ] ch3-key-point-rules    Chapter 3: the key point says of OpenSpec's once-per-project files only what the section shows, where today it credits OpenSpec with rules written once per project; both editions
+[ ] ch7-agents-fixed-lines Chapter 7: says which lines of the clinic's AGENTS.md non-negotiables are the kit's fixed lines and which the project's, where today it says "three fixed lines", four follow, and "An open decision in docs/00 is asked, never assumed." fits neither; both editions
+[ ] pt-skeleton-diff       Portuguese edition: chapter 10's summary of the skeleton diff puts exit code 1 in Behaviour, where the diff has it, and names the data/ folder the server now creates
+[ ] ch14-keepless-feature  Chapter 14: the definition of a feature has a place for a slice that keeps nothing, as health does, where today "A feature is one thing the app keeps" leaves it out; both editions
+[ ] ch14-swallowed-bug     Chapter 14: says what the reader does about a bug that query turns into a DatabaseFailed nobody sees, and squares reason 4 of "Why not throw" with using the same query as its example of harm; both editions
+[ ] ch14-library-types     Chapter 14: squares "changes that code alone" with the routes that import DatabaseSync's type; both editions
+[ ] ch15-brief-printed     Chapter 15: prints the author's brief for orchestrator-tests that the reader is told to answer with, as chapters 7, 8 and 10 print theirs, where today it is behind a note; both editions
+[ ] ch15-uncaught-pieces   Chapters 14 and 15: say which piece openDatabase and migrate belong to, since they catch in no piece today, against the table's "the only place an infra exception becomes a Result"; both editions
+[ ] ch15-view-rule         Chapter 15: says that tooLateToCancel in the booking view comes from the use case the client imports, so the excerpt can be checked against the view's "Forbids"; both editions
+[ ] ch15-shape-cost        Chapter 15: the key point on when a piece is written meets the section, which keeps healthEvents.ts for one shape across hooks, where today it says only "gives more than it costs"; both editions
+[ ] ch16-unit-test-fakes   Chapter 16: the definition of a unit test fits the event tests' fake repositories and the stubbed localStorage and fetch, where today it says a unit test "runs whatever that piece calls"; both editions
+[ ] m4.2-review            the review of M4.2 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against the product questions and M4.2's paragraph; each confirmed finding becomes a line in a new milestone M4.3
 ```
 
 ## M5. Part IV, Git for agents and teams

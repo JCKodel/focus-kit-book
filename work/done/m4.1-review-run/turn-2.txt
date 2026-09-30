@@ -1,0 +1,39 @@
+[tool Bash] git diff docs/06-Queue.md; git diff --cached --stat
+
+[tool Read] docs/06-Queue.md
+
+[tool Edit] docs/06-Queue.md
+
+[tool Bash] grep -c '—' docs/06-Queue.md; git add docs/06-Queue.md && git diff --cached docs/06-Queue.md
+
+I added M4.2 to `docs/06-Queue.md` with 12 lines, one for each confirmed finding (F1 and F3 to F13), plus `m4.2-review`. The file has no em dash, and it's staged. The staged diff is above.
+
+**The staged diff includes two changes I didn't make.** Before I edited the file, your working tree already had two unstaged changes in M4.1: `m4.1-review` marked `[>]`, and the new `m4.1-code-review` line. Staging the whole file with `git add docs/06-Queue.md` picked them up. If you want them in a separate commit, run `git restore --staged -p docs/06-Queue.md` and leave those two hunks unstaged.
+
+**No existing line already covered a finding, so I extended none.** Five findings go back to subjects M4.1 lines already dealt with:
+- F6 follows `ch14-feature-boundary`.
+- F7 follows `ch14-catch-all`.
+- F10 follows `ch15-route-io`.
+- F12 follows `ch15-piece-cost`.
+- F13 follows `ch16-unit-test`.
+
+Each of those lines is already done (`[x]`), and you asked me not to touch M4.1's lines. Each finding is what's still wrong after that delivery, so each got its own new line in M4.2.
+
+The lines match your narrowings:
+- **F7:** says what the reader does about the bug that `query` hides, and deals with reason 4 using `query` as its example.
+- **F8:** only the routes importing `DatabaseSync`'s type; the repository's use of SQLite's error text is left alone.
+- **F10:** only `openDatabase` and `migrate`.
+- **F11:** only `tooLateToCancel`.
+- **F12:** the key point against the section's "one shape across hooks".
+- **F13:** the fakes and stubs against "runs whatever that piece calls".
+
+A suggested commit message, for when you commit:
+
+```
+docs(m4.1-review): queue the confirmed findings of the M4.1 review as M4.2
+
+- M4.2 after M4.1: twelve lines, one per confirmed finding, and m4.2-review
+- F2 and F14 rejected, with their reasons in the review's record
+
+work/done/m4.1-review.md
+```
