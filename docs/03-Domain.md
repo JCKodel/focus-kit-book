@@ -56,7 +56,7 @@ A new concept enters here first, in both languages.
 | YAGNI | YAGNI | none | You aren't gonna need it: nothing is built before a delivery needs it, a FOCUS piece included. |
 | DRY | DRY | none | Don't repeat yourself: each piece of knowledge lives in one place. |
 | fake | falso | none | A second implementation that a test passes in place of the real one, such as a repository that answers what the test sets, or an in-memory database; Portuguese as an adjective: "repositório falso". |
-| unit test | teste unitário | `*.test.ts` | A test that runs one piece of code in the test runner, with no browser, such as a use case called with its data or a repository against an in-memory database. |
+| unit test | teste unitário | `*.test.ts` | A test that runs in Node, with no browser and no server running, calls one piece directly and runs whatever that piece calls: a use case with its data, a repository against an in-memory database, a route through `app.request`, or an event function with fake repositories; its requests never leave the process. |
 | end-to-end test | teste ponta a ponta | `*.e2e.ts` | A test that drives the running app in a browser, as a user would, through the view, the orchestrators, the server and the database. |
 | stage | stage | `git add` | To mark changes for the next commit; the agent stages, the person reviews and commits. |
 | trunk | trunk | `main` | Working on the main branch, one delivery at a time; only for one person working alone. |

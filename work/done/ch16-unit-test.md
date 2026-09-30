@@ -36,10 +36,18 @@ Sentences are found by their quoted text. The line numbers below are from commit
 
 **Done when.**
 
-* [ ] Both editions changed with the same meaning. Chapter 16 still opens with its value, with no filler and nothing useful cut.
-* [ ] No "it runs one piece of code" or "ele roda um pedaço de código" left in `book/` or `docs/03-Domain.md`.
-* [ ] The definition names the route through `app.request`, and the line against the end-to-end test is said once, in both editions.
-* [ ] The docs/03 `unit test` row matches the chapter's definition.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given to the author.
-* [ ] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+* [x] Both editions changed with the same meaning. Chapter 16 still opens with its value, with no filler and nothing useful cut.
+* [x] No "it runs one piece of code" or "ele roda um pedaço de código" left in `book/` or `docs/03-Domain.md`.
+* [x] The definition names the route through `app.request`, and the line against the end-to-end test is said once, in both editions.
+* [x] The docs/03 `unit test` row matches the chapter's definition.
+* [x] `make verify` green.
+* [ ] `make book` run, and both PDF paths given to the author. Run once at the end of the M4.1 loop by the driver.
+* [x] Page in `work/done/`, `[x]` in docs/06, staged, commit message suggested.
+
+**What happened.**
+
+* §"A test for each piece": the unit-test sentence split in two. The first says what a unit test is: it calls one piece directly, with no server running, and runs whatever that piece calls. The second names the pieces: a use case with its data, a repository against an in-memory database, a route through `app.request`, which runs the use case and the repository behind it, or an event function with fake repositories.
+* Tightened from the proposal: "runs in Node, with no browser" is left out of the chapter's sentence, since the line just above it already says "Vitest runs a test in Node, with no browser". The event function is named too, as the Behaviour asks, so every Vitest test the chapter shows fits.
+* Choice taken: the line against the end-to-end test is folded into the Playwright sentence ("its requests cross the network to that server, where a unit test's request never leaves the process"), said once.
+* docs/03 `unit test` row: the chapter's definition, with Node and no browser kept, since the row stands alone.
+* Finding F13 of the M4 review is settled.

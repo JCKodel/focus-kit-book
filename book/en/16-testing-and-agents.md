@@ -21,8 +21,9 @@ The same section ends with the clinic's rule: "*Every rule has a test. A rule wi
 Vitest runs a test in Node, with no browser.[^vitest]
 Playwright drives the app in a real browser, as a user would, by clicking and typing.[^playwright]
 
-A test Vitest runs is a unit test: it runs one piece of code, such as a use case called with its data or a repository against an in-memory database.
-A test Playwright runs is an end-to-end test: it drives the running app through the view, the orchestrators, the server and the database.
+A test Vitest runs is a unit test: it calls one piece directly, with no server running, and runs whatever that piece calls.
+The piece can be a use case with its data, a repository against an in-memory database, a route through `app.request`, which runs the use case and the repository behind it, or an event function with fake repositories.
+A test Playwright runs is an end-to-end test: it drives the running app through the view, the orchestrators, the server and the database, and its requests cross the network to that server, where a unit test's request never leaves the process.
 They are the `.test.ts` and `.e2e.ts` files of the appointments slice in [chapter 14](14-errors-and-slices.md#vertical-slices), each beside the file it tests.
 
 ## One rule, five tests
