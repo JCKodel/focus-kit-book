@@ -36,23 +36,23 @@ Código que muda junto mora junto; código que muda por razões diferentes mora 
 A biblioteca de empréstimos, o exemplo da Parte I, fica organizada assim:
 
 ```text
-src/features/loans/          LendView.tsx, lendEvents.ts, rules.ts,
-                             repository.server.ts, route.server.ts,
-                             rules.test.ts, lendEvents.test.ts,
-                             repository.server.test.ts
-src/features/loans/return/   returning a copy
-src/features/members/        what the library keeps about a member
-src/features/catalog/        books and copies
-src/lib/result.ts            Result, ok and err
+src/features/emprestimos/            TelaDeEmprestimo.tsx, eventosDeEmprestimo.ts, regras.ts,
+                                     repositorio.server.ts, rota.server.ts,
+                                     regras.test.ts, eventosDeEmprestimo.test.ts,
+                                     repositorio.server.test.ts
+src/features/emprestimos/devolucao/  devolver um exemplar
+src/features/membros/                o que a biblioteca guarda sobre um membro
+src/features/catalogo/               livros e exemplares
+src/lib/result.ts                    Result, ok e err
 ```
 
-`LendView.tsx` é a tela de empréstimo; `lendEvents.ts` recebe o que a tela pede e responde com o novo estado; `rules.ts` guarda as regras do capítulo 5, como `lend`; `repository.server.ts` lê e escreve no banco de dados, e `route.server.ts` é o endereço do empréstimo no servidor.
+`TelaDeEmprestimo.tsx` é a tela de empréstimo; `eventosDeEmprestimo.ts` recebe o que a tela pede e responde com o novo estado; `regras.ts` guarda as regras do capítulo 5, como `emprestar`; `repositorio.server.ts` lê e escreve no banco de dados, e `rota.server.ts` é o endereço do empréstimo no servidor.
 Um nome terminado em `.server.ts` roda só no servidor, e o código do cliente nunca importa um deles.
 Os testes ficam ao lado do código que testam.
 O capítulo 7 chama esses quatro tipos de arquivo de as quatro peças, e o capítulo 8 dá a cada uma o seu teste.
 
 A pasta de cima grita a biblioteca: empréstimos, membros, catálogo.
-Uma mudança em como o empréstimo funciona mexe em `loans/`, e tirar os empréstimos do produto tira uma pasta.
+Uma mudança em como o empréstimo funciona mexe em `emprestimos/`, e tirar os empréstimos do produto tira uma pasta.
 O critério de Parnas de 1972 (capítulo 4) funciona também neste tamanho: a fatia esconde as decisões da sua feature do resto do programa.
 
 ## O que é uma feature
@@ -63,17 +63,17 @@ Emprestar e devolver agem os dois sobre o empréstimo: compartilham as regras, a
 Membros e livros são outras coisas que a biblioteca guarda, cada uma com a sua tabela e as suas telas, então cada uma tem uma fatia própria.
 
 Uma subfeature é uma subpasta.
-Devolver um exemplar tem a sua tela e o seu evento, e mora em `loans/return/`, dentro da fatia cujo empréstimo ela encerra.
+Devolver um exemplar tem a sua tela e o seu evento, e mora em `emprestimos/devolucao/`, dentro da fatia cujo empréstimo ela encerra.
 
 Um arquivo aparece em uma fatia quando se paga.
-Uma feature sem regra não tem `rules.ts`, e uma feature que não guarda nada não tem repositório.
+Uma feature sem regra não tem `regras.ts`, e uma feature que não guarda nada não tem repositório.
 Não guardar nada não a torna menos feature: se ela tem a sua própria rota ou tela, tem a sua própria fatia.
 
 ## Onde mora o código compartilhado
 
 O assunto do código decide onde ele mora quando duas features o usam.
 Código sobre uma feature fica na fatia dessa feature, e outra fatia importa de lá o que precisa, seja um tipo, uma função de repositório ou uma tela.
-`loans/rules.ts` importa o tipo `Member` de `members/`, porque um membro é o que aquela fatia guarda; a página de um membro que lista os empréstimos dele importa de `loans/`.
+`emprestimos/regras.ts` importa o tipo `Membro` de `membros/`, porque um membro é o que aquela fatia guarda; a página de um membro que lista os empréstimos dele importa de `emprestimos/`.
 Duas fatias podem importar uma da outra.
 
 O que não pertence a nenhuma feature, a forma de um valor como um endereço de email, ou encanamento como `Result`, sai das fatias para `src/lib/`.
@@ -86,40 +86,44 @@ Martin Fowler deu nome à prática de entregá-la de fora em 2004: depois de lon
 Mark Seemann acrescentou onde as partes reais são montadas: em um lugar, "*o mais perto possível do ponto de entrada da aplicação*", que ele chamou de composition root (raiz de composição).[^seemann-composition-root]
 
 Injetadas em toda parte, as dependências viram a sua própria camada de cerimônia: uma interface para cada classe, um contêiner, um parâmetro que ninguém varia.
-Este livro traça uma linha mais estreita: uma peça recebe uma dependência como parâmetro só onde o teste dela passa uma segunda implementação.
+O mundo .NET mostra o hábito no seu extremo: uma interface para tudo, `IServicoDeMembro` na frente de `ServicoDeMembro`, e um registro num contêiner para cada par, em geral defendido em nome do SOLID.
+O hábito resolve um problema real em um SDK, cujos usuários precisam substituir partes que não são deles, e é cerimônia dentro de uma aplicação, onde cada uma dessas interfaces tem uma implementação só, para sempre.
+O DRY (capítulo 4) já dá a regra: o que não tem motivo para existir não existe.
+Se, em uma aplicação, só os repositórios têm duas implementações, a real e o fake que os testes passam, então só os repositórios ganham uma interface, ou um parâmetro; um caso de uso que sempre será aquela única função concreta não ganha nenhum dos dois.
+Este livro traça essa linha mais estreita: uma peça recebe uma dependência como parâmetro só onde o teste dela passa uma segunda implementação.
 Essa segunda implementação é um fake (um falso): um repositório que responde o que o teste define, ou um banco de dados em memória com as tabelas reais.
 
 O orquestrador da fatia de empréstimos recebe os seus repositórios:
 
 ```ts
-export const lendRepositories = { findMember, findCopy, insertLoan };
+export const repositoriosDeEmprestimo = { buscarMembro, buscarExemplar, inserirEmprestimo };
 
-export async function lendRequested(
-	event: LendRequested,
-	today: string,
-	repositories = lendRepositories,
-): Promise<LendState> {
-	const member = await repositories.findMember(event.memberId);
-	if (!member.ok) return { kind: "Failed", exception: member.error };
-	const copy = await repositories.findCopy(event.copyId);
-	if (!copy.ok) return { kind: "Failed", exception: copy.error };
-	const loan = lend(copy.value, member.value, today);
-	if (!loan.ok) return { kind: "Refused", refusal: loan.error };
-	const saved = await repositories.insertLoan(loan.value);
-	if (saved.ok) return { kind: "Lent", loan: saved.value };
-	if (saved.error === "AlreadyLent") return { kind: "Refused", refusal: "AlreadyLent" };
-	return { kind: "Failed", exception: saved.error };
+export async function emprestimoPedido(
+	evento: EmprestimoPedido,
+	hoje: string,
+	repositorios = repositoriosDeEmprestimo,
+): Promise<EstadoDoEmprestimo> {
+	const membro = await repositorios.buscarMembro(evento.membroId);
+	if (!membro.ok) return { tipo: "Falhou", excecao: membro.error };
+	const exemplar = await repositorios.buscarExemplar(evento.exemplarId);
+	if (!exemplar.ok) return { tipo: "Falhou", excecao: exemplar.error };
+	const emprestimo = emprestar(exemplar.value, membro.value, hoje);
+	if (!emprestimo.ok) return { tipo: "Recusado", recusa: emprestimo.error };
+	const salvo = await repositorios.inserirEmprestimo(emprestimo.value);
+	if (salvo.ok) return { tipo: "Emprestado", emprestimo: salvo.value };
+	if (salvo.error === "JaEmprestado") return { tipo: "Recusado", recusa: "JaEmprestado" };
+	return { tipo: "Falhou", excecao: salvo.error };
 }
 ```
 
-A tela chama `lendRequested(event, today)` e recebe os repositórios reais por padrão; o teste passa fakes no lugar deles.
+A tela chama `emprestimoPedido(evento, hoje)` e recebe os repositórios reais por padrão; o teste passa fakes no lugar deles.
 O resto segue do mesmo teste.
 
 * **Um orquestrador recebe os seus repositórios**, porque o teste dele passa repositórios falsos.
-* **Um repositório do servidor recebe o banco de dados que usa**, `findMember(db, id)`, porque o teste dele passa um banco de dados em memória com as migrações reais; o código de início do servidor abre o banco real e o repassa, e essa é a raiz de composição.
-* **Um caso de uso não recebe nenhuma.** `lend` recebe dados e devolve um valor; o teste dele passa dados, e não há nada para trocar.
+* **Um repositório do servidor recebe o banco de dados que usa**, `buscarMembro(db, id)`, porque o teste dele passa um banco de dados em memória com as migrações reais; o código de início do servidor abre o banco real e o repassa, e essa é a raiz de composição.
+* **Um caso de uso não recebe nenhuma.** `emprestar` recebe dados e devolve um valor; o teste dele passa dados, e não há nada para trocar.
 * **Uma tela não recebe nenhuma.** Ela tem uma implementação só, e um parâmetro ali existiria por cerimônia, o que o KISS descarta (capítulo 4).
-* **O relógio é passado como valor.** `today` é lido uma vez, onde o evento chega, e repassado como dado; nenhuma regra lê o relógio, então o teste de uma data de devolução passa a data que quiser.
+* **O relógio é passado como valor.** `hoje` é lido uma vez, onde o evento chega, e repassado como dado; nenhuma regra lê o relógio, então o teste de uma data de devolução passa a data que quiser.
 
 ## O que isso dá a um agente
 

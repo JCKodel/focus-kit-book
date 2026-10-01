@@ -35,10 +35,10 @@ O git também se recusa a fazer checkout de um branch em dois worktrees, então 
 ## Como ele resolve o problema
 
 Dê a cada entrega o seu próprio worktree, e a cada agente a sua própria pasta.
-Digamos que a biblioteca de empréstimos tem duas entregas prontas para construir, `return-book` e `overdue-list`:
+Digamos que a biblioteca de empréstimos tem duas entregas prontas para construir, `devolver-livro` e `lista-de-atrasos`:
 
-* O agente que constrói `return-book` trabalha em `../library-return-book`, no branch `return-book`; ele vê só as mudanças dessa entrega, e o commit que você faz ali guarda essa entrega e nada mais.
-* O agente que constrói `overdue-list` faz o mesmo em `../library-overdue-list`, ao mesmo tempo.
+* O agente que constrói `devolver-livro` trabalha em `../biblioteca-devolver-livro`, no branch `devolver-livro`; ele vê só as mudanças dessa entrega, e o commit que você faz ali guarda essa entrega e nada mais.
+* O agente que constrói `lista-de-atrasos` faz o mesmo em `../biblioteca-lista-de-atrasos`, ao mesmo tempo.
 * Ninguém troca de branch, então nada precisa de stash, e nenhum agente vê os arquivos pela metade do outro.
 
 Quando uma entrega está pronta, você a traz para o `main` a partir da pasta principal com um commit de merge, `git merge --no-ff`, para que ela continue uma unidade de trabalho, desfeita em um passo com `git revert -m 1 <merge>` (capítulo 19).
@@ -48,10 +48,10 @@ Quando uma entrega está pronta, você a traz para o `main` a partir da pasta pr
 Seis passos, rodados na pasta principal, exceto onde o texto diz outra coisa.
 
 ```
-git worktree add ../library-return-book -b return-book main
+git worktree add ../biblioteca-devolver-livro -b devolver-livro main
 ```
 
-Cria a pasta `../library-return-book`, cria o branch `return-book` no `main`, e faz checkout dele na pasta.
+Cria a pasta `../biblioteca-devolver-livro`, cria o branch `devolver-livro` no `main`, e faz checkout dele na pasta.
 
 Depois você trabalha dentro da pasta como em qualquer outra: o agente constrói, você revisa e faz o commit ali.
 Só o que o git acompanha está na pasta nova: dependências como `node_modules` não estão, então você as instala em cada worktree (`npm ci` em um projeto Node).
@@ -63,20 +63,20 @@ git worktree list
 Imprime cada worktree, o commit em que ele está e o seu branch.
 
 ```
-git merge --no-ff return-book
+git merge --no-ff devolver-livro
 ```
 
 No `main`, na pasta principal, traz a entrega como um commit de merge; os commits do branch já aparecem ali, já que o histórico é compartilhado.
 
 ```
-git worktree remove ../library-return-book
+git worktree remove ../biblioteca-devolver-livro
 ```
 
 Apaga a pasta.
 Ele se recusa a apagar uma pasta com arquivos mudados ou não acompanhados, então trabalho sem commit nunca se perde por acidente.[^git-worktree]
 
 ```
-git branch -d return-book
+git branch -d devolver-livro
 ```
 
 Apaga o branch, que sobrevive à sua pasta.
@@ -101,19 +101,19 @@ Um conflito é sobre linhas, não sobre arquivos: dois branches que mudam o mesm
 
 No arquivo em conflito, o git escreve as duas versões entre marcadores de conflito: `<<<<<<<` abre a versão do branch em que você está, `=======` a separa da versão do branch que está entrando, e `>>>>>>>` fecha essa.[^git-merge]
 Cada entrega marca a sua própria linha na fila ([capítulo 13](13-queue-and-milestones.md)), então duas entregas cujas linhas são vizinhas sempre se encontram ali.
-Aqui o merge de `return-book` foi feito primeiro, e `overdue-list` entra em segundo; o bloco é uma ilustração, escrita para este capítulo:
+Aqui o merge de `devolver-livro` foi feito primeiro, e `lista-de-atrasos` entra em segundo; o bloco é uma ilustração, escrita para este capítulo:
 
 ```text
 <<<<<<< HEAD
-[x] return-book     a librarian records that a copy came back
-[ ] overdue-list    a librarian sees every loan past its due date
+[x] devolver-livro     a bibliotecária registra que um exemplar voltou
+[ ] lista-de-atrasos   a bibliotecária vê todo empréstimo com a devolução vencida
 =======
-[ ] return-book     a librarian records that a copy came back
-[x] overdue-list    a librarian sees every loan past its due date
->>>>>>> overdue-list
+[ ] devolver-livro     a bibliotecária registra que um exemplar voltou
+[x] lista-de-atrasos   a bibliotecária vê todo empréstimo com a devolução vencida
+>>>>>>> lista-de-atrasos
 ```
 
-Acima de `=======` está o `main`, onde `return-book` está pronta; abaixo está `overdue-list`, onde a sua própria linha está pronta.
+Acima de `=======` está o `main`, onde `devolver-livro` está pronta; abaixo está `lista-de-atrasos`, onde a sua própria linha está pronta.
 Nenhum dos lados está certo sozinho; a versão certa guarda o que os dois fizeram, as duas linhas em `[x]`.
 
 Para resolver, edite o arquivo até essa versão e apague as três linhas de marcador; então `git add` diz ao git que o arquivo está resolvido, e `git commit --no-edit` faz o commit de merge com a mensagem que o git preparou:

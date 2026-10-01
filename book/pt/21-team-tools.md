@@ -39,7 +39,7 @@ Isso faz dela uma boa porta de entrada para o relato de bug de um usuário.
 Uma linha da fila pode espelhar uma issue, e o slug nomeia as duas: o título da issue começa com o slug, e a linha termina com o número da issue.
 
 ```text
-[ ] fix-due-date      data de devolução um dia antes no fim do mês (#42)
+[ ] corrigir-data-de-devolucao  data de devolução um dia antes no fim do mês (#42)
 ```
 
 O pull request diz "Fixes #42", e o GitHub fecha a issue quando o merge acontece.[^gh-issues]
@@ -54,14 +54,14 @@ Um gerente abre um quadro; raramente abre um repositório.
 Um quadro cujos cartões são movidos à mão, porém, é uma segunda fila, e se afasta da primeira no dia em que alguém esquece de arrastar um cartão.
 
 A resposta é um espelho numa só direção, da fila para o quadro.
-No Caso A, um projeto para um cliente em uma plataforma low-code, uma customização registrada no seu docs/05 fazia isso: um script e um pipeline enviavam a fila, numa só direção, ao quadro kanban do projeto no Azure DevOps, então o gerente de projeto acompanhava o progresso no portal sem perguntar a um desenvolvedor.[^case-a]
+No Caso A, um projeto para um cliente em uma plataforma low-code, uma customização registrada no seu docs/05 fazia isso: um script e um pipeline enviavam a fila, numa só direção, ao quadro kanban do projeto no Azure DevOps, então o gerente de projeto acompanhava o progresso no portal sem perguntar a um desenvolvedor.
 O `/propose` e o `/apply` atualizavam o quadro sempre que mudavam uma marca, e avisavam sempre que não conseguiam, então um quadro desatualizado nunca ficava em silêncio.
 O espelho vai numa só direção porque a fila é o único lugar que o agente lê: um cartão movido no quadro não muda nada no repositório, e uma sincronização nas duas direções criaria duas fontes da verdade.
 Uma peça ainda não estava provada quando o projeto fechou: a permissão de escrita da identidade do pipeline no quadro.
 
 ### Uma marca para a espera
 
-Também faltava uma palavra à fila do Caso A.[^case-a]
+Também faltava uma palavra à fila do Caso A.
 A marca `[>]` se lê como "definida, esperando para ser construída", e cinco linhas bloqueadas pelo cliente apareciam como trabalho que ninguém tinha começado.
 O Caso A acrescentou uma quarta marca à sua fila, `[?]`, "esperando por uma pessoa".
 As suas entregas de pergunta, cujo único resultado é uma resposta escrita de alguém de fora do projeto, fecham na resposta, não no envio, porque uma sessão certa vez marcou uma delas como concluída quando o email saiu.
@@ -95,4 +95,3 @@ Não há número medido para esse ganho: o quadro do Caso A rodou em um projeto,
 [^copilot-review]: GitHub Docs, "About GitHub Copilot code review", seções "Agent skills" e "Validating Copilot code reviews", acesso em 2026-09-30. <https://docs.github.com/en/copilot/concepts/agents/code-review>
 [^gh-issues]: GitHub Docs, "About issues", acesso em 2026-09-30. <https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues>
 [^azure-kanban]: Microsoft Learn, "About Kanban boards", Azure Boards, acesso em 2026-09-30. <https://learn.microsoft.com/en-us/azure/devops/boards/boards/kanban-overview>
-[^case-a]: Caso A, um projeto para um cliente em uma plataforma low-code, um repositório privado, lido pelo autor no seu docs/05, nos seus ADRs e na sua fila: o espelho do quadro numa só direção com o seu script e o seu pipeline, as cinco linhas bloqueadas pelo cliente que levaram à marca `[?]`, e a regra que fecha uma linha de pergunta na resposta. O seu dono, o seu cliente e o seu negócio não são revelados.

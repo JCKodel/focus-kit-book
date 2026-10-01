@@ -78,13 +78,13 @@ The `.1` closes when its lines are `[x]` with their proof, and whatever it misse
 
 ## When the findings became one delivery
 
-On Ninjobs the review at the public opening returned eight findings, with the whole test suite green.[^ninjobs]
-Queries took hundreds of milliseconds, a large job posting would have timed out, and three of the findings were about security.[^ninjobs]
+On Ninjobs the review at the public opening returned eight findings, with the whole test suite green.
+Queries took hundreds of milliseconds, a large job posting would have timed out, and three of the findings were about security.
 Every delivery had passed its own tests and its own review; only the look at the whole saw them.
 
 I put all eight into one delivery instead of eight lines.
-Its page says, in its own words, that it does not fit a page and that it breaks the rule on purpose, and it ran to 879 lines, the longest page of the project.[^ninjobs]
-The fixes held: the page measured job triage at about 620 ms on the development database when the work began, and at 94 ms when it ended.[^ninjobs]
+Its page says, in its own words, that it does not fit a page and that it breaks the rule on purpose, and it ran to 879 lines, the longest page of the project.
+The fixes held: the page measured job triage at about 620 ms on the development database when the work began, and at 94 ms when it ended.
 But when I checked the result myself, I found faults its tests had not caught.
 The process was not the cause; my choice was.
 Eight lines would have been eight pages, each small enough to read before it was built and to check after.
@@ -92,7 +92,7 @@ Eight lines would have been eight pages, each small enough to read before it was
 ## What the team gains
 
 The milestone review catches the faults the tests do not reach, before users do.
-On Ninjobs it found eight with every test green, three of them about security, on the day the product opened to the public.[^ninjobs]
+On Ninjobs it found eight with every test green, three of them about security, on the day the product opened to the public.
 And because each finding becomes a line, the team sees the cost of the milestone's gaps in the queue, next to everything else it plans, instead of in fixes nobody reviewed.
 
 ## Key points
@@ -106,4 +106,3 @@ And because each finding becomes a line, the team sees the cost of the milestone
 [^claude-code-review]: Anthropic, "Code Review", Claude Code documentation, accessed 2026-09-28. <https://code.claude.com/docs/en/code-review>
 [^codex-review]: OpenAI, "Developer commands", accessed 2026-09-28. <https://learn.chatgpt.com/docs/developer-commands?surface=cli>
 [^copilot-review]: GitHub, "About GitHub Copilot code review", accessed 2026-09-28. <https://docs.github.com/en/copilot/concepts/agents/code-review>
-[^ninjobs]: Ninjobs, the author's product, a private repository, read by the author in the `work/done/` page of the delivery that took the eight findings of its first milestone review: the findings (their content paraphrased, the security findings left out), its 879 lines counted with `wc -l`, the longest of its 93 pages, and the triage timings as the page records them, measured on the development database on 2026-09-10.

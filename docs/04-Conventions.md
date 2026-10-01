@@ -3,7 +3,7 @@
 ## Languages
 
 * Process documents (`docs/`, `work/`, ADRs, commit messages): English.
-* Identifiers, file names and slugs: English.
+* Identifiers, file names and slugs of this repository: English. The Portuguese edition's example code has Portuguese names (§Writing the book, Evidence).
 * The book: English is the source (`book/en/`), Portuguese the translation (`book/pt/`, Brazilian Portuguese).
   A change to one edition is a change to both, in the same delivery (ADR-0004).
 * The Portuguese edition uses the Portuguese term of docs/03, and no synonym.
@@ -22,13 +22,20 @@
   The record of how a number was counted stays in `work/done/`, and the note points to it.
 * **Evidence.** Every number says where it comes from: a primary publication, a record of this book's runs, or, for a private case, how the author counted it.
   Every quoted artifact (a page, a queue line, a rules file, a command's output) is real; a page or a queue written for the chapter as an example says so where it appears.
-  The Portuguese edition shows an English prose artifact (a rules file, a page) translated, and says before it that the original is in English; code, commands and their output stay as they are.
+  The Portuguese edition shows an English prose artifact (a rules file, a page) translated, and says before it that the original is in English.
+  Since `author-review-1`, the Portuguese edition's code speaks Portuguese too: every name the code invents (functions, types, variables, fields, files, folders, slugs, table columns, test names, string messages, comments) is translated, identifiers without accents (`emprestar`, `RecusaDeEmprestimo`, `TemLivrosEmAtraso`), and the vocabulary of docs/03 §running example gives the words; the language's own words (`function`, `return`), library APIs (`describe`, `it`, `expect`, `new Date`), `Result`, `ok`, `err` and their fields, and names an external format fixes (a log's fields, `features/`) stay as they are, and the text says so where such a name appears (chapter 23's log fields). Commands and their output stay as they are.
+  Chapter 4, at the first code block, says once that the names are in Portuguese.
 * **Context before an excerpt.** A reader who has read only the previous chapters understands every artifact shown without opening anything else (docs/00 product question 5).
   Before it, the text gives what the artifact is about: the project, the problem it answers, where it comes from.
   An excerpt is a whole unit that means something on its own (a page's section, a queue's milestone), never a loose line that leans on the lines around it.
 * **Teach, do not only show.** After an artifact, one sentence says what the reader should see in it; a term, a name or a choice the reader has not met yet is explained where it appears, or the text says which chapter explains it.
+  An organization, a study or a tool is introduced in a few words the first time it is named (METR, DORA, Chroma, Liu's paper in chapters 1 and 2).
+  No sentence is only a pointer to a later chapter ("A project writes its product in docs/00 (chapter 10)." said nothing the reader could use yet): a forward pointer follows a sentence that already says something, as a parenthesis or as "chapter 10 shows that document"; first occurrence, the prologue in `author-review-1`.
+* **A note box** is a blockquote whose first words are bold, `> **Note.** ...` (pt: `> **Nota.**`; `**Caution.**` / `**Cuidado.**` for a warning), one paragraph, one sentence per line; the site, the PDF and the EPUB style it as a box (`site.css`, `pdf.css`, `epub.css`).
+  It holds a definition or a warning the reader needs at that point and the section's flow does not carry: first, chapter 3's behaviour; second, chapter 4's caution on an agent that grows the process.
+  It is the one box syntax pandoc and MkDocs both render; `!!!` and `:::` each break in one output.
 * **A gain per chapter.** Every chapter has the section `## What the team gains` (pt: `## O que o time ganha`) before its key points: what a team or a project gains, with a number or a sourced claim, or one sentence saying the gain has no number (docs/00 product question 7).
-* **Code** is TypeScript only, written for the chapter, short (as a rule under 25 lines a block), tab-indented, on the book's running example, the lending library (docs/03); chapter 4, at the book's first code block, says once that the examples are written for the book, and chapter 2's rules file, the one prose artifact before it, says so itself.
+* **Code** is TypeScript only, written for the chapter, short (as a rule under 25 lines a block), tab-indented, on the book's running example, the lending library (docs/03); chapter 4, at the book's first code block, says once that the examples are written for the book (and, in Portuguese, that their names are in Portuguese), and chapter 2's rules file, the one prose artifact before it, says so itself.
   Code is never presented as the output of a run.
 * **Private cases** appear only as Case A and Case B; docs/03 §Entities and invariants says what may never appear.
   Case B did not run on the process, and every passage that uses it says so or reads so.
@@ -120,7 +127,8 @@ There are no exercises (ADR-0017).
 * One sentence per line in the source: a convention, not a check (no error it would have caught has happened, docs/05 §7).
 * Source notes: a note only where the reader gains something to open (a publication, a tool's documentation, a file of this book's repository or its runs) or a count to repeat. Every number and every quoted claim from such a source carries `[^<key>]` at the claim; a source cited again in the chapter reuses the key, and the PDF and the EPUB print its note once.
   No note points to a commit, a diff or a file of focus-kit's repository: where the text quotes or states a rule of the kit, the sentence names the file in plain words (`SETUP.md` §3.4, the file of `/apply`).
-  A private case has one note per chapter that uses it, `[^ninjobs]`, `[^case-a]` or `[^case-b]`: the definition says the repository is private and how each number was obtained, so the reader knows what is claimed and can repeat the count on their own project; it names no private path: `[^ninjobs]: Ninjobs, a private repository, counted by the author over its history up to 2026-08-29: ...`
+  A private case has no note (since `author-review-1`; before it, each chapter carried a `[^ninjobs]`, `[^case-a]` or `[^case-b]` listing how every number was counted, and the author found them noise): the prologue says once, at the first mention of Ninjobs and of Case A, that their repositories are private and that every number about them was counted by the author.
+  A chapter adds a parenthesis in the text only where the method matters to a reader repeating a count on their own project (chapter 3's `wc -l` over the tool's folder), and a reason or a story a chapter needs goes in the text or a note box, never in a note.
   The key is lowercase `[a-z0-9-]+`, the same in both editions (`[^metr-2025]`).
   The definition is `[^<key>]: <Author or organization>, "<Title>", <year>. <URL>`, with the title in its original language in both editions; the URL is written in angle brackets, `<https://...>`, so the site, the PDF and the EPUB make it a link.
   A publication without a date carries `accessed YYYY-MM-DD` in place of `<year>` (pt: `acesso em YYYY-MM-DD`).

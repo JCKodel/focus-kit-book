@@ -11,7 +11,7 @@ A página põe cada decisão onde você consegue lê-la antes de existir qualque
 ## O que é uma entrega
 
 Todo trabalho em um projeto com o focus-kit é uma entrega: a menor mudança que tem valor, o que outros métodos chamam de tarefa ou item de trabalho.
-Ela tem como nome um slug (o nome curto da entrega), palavras minúsculas unidas por hífens, como `lend-book`, escrito uma vez na linha da fila (capítulo 13) e usado dali em diante para tudo o que é dela: a página `work/<slug>.md`, o argumento do `/propose <slug>` e do `/apply <slug>`, e a última linha do commit que a fecha.
+Ela tem como nome um slug (o nome curto da entrega), palavras minúsculas unidas por hífens, como `emprestar-livro`, escrito uma vez na linha da fila (capítulo 13) e usado dali em diante para tudo o que é dela: a página `work/<slug>.md`, o argumento do `/propose <slug>` e do `/apply <slug>`, e a última linha do commit que a fecha.
 Uma entrega cabe em uma página.
 Se não cabe, o escopo ainda não foi entendido, e são duas entregas.
 
@@ -41,7 +41,7 @@ O formato é fixado no §3 do docs/05 do projeto e é o mesmo em todo projeto:
 Esta é uma página para a biblioteca de empréstimos da Parte I, escrita para este capítulo:
 
 ```markdown
-# lend-book
+# emprestar-livro
 
 **Objetivo.** Um bibliotecário registra que um membro pegou um exemplar
 emprestado, e o sistema recusa quando as regras dizem não.
@@ -55,10 +55,10 @@ emprestado, e o sistema recusa quando as regras dizem não.
   consegue e o outro vê "Este exemplar acabou de ser emprestado a outra pessoa".
 
 **Contrato.**
-Tabela `loan` (copy_id, member_id, lent_at, due_at, returned_at anulável);
-índice único em copy_id onde returned_at é nulo.
-`lend(copy, member, today): Result<Loan, LendRefusal>` com
-`LendRefusal = "HasOverdueBooks" | "AlreadyLent" | "MemberSuspended"`.
+Tabela `emprestimo` (exemplar_id, membro_id, emprestado_em, devolver_em, devolvido_em anulável);
+índice único em exemplar_id onde devolvido_em é nulo.
+`emprestar(exemplar, membro, hoje): Result<Emprestimo, RecusaDeEmprestimo>` com
+`RecusaDeEmprestimo = "TemLivrosEmAtraso" | "JaEmprestado" | "MembroSuspenso"`.
 
 **Estados.** Os padrões.
 
@@ -66,12 +66,12 @@ Tabela `loan` (copy_id, member_id, lent_at, due_at, returned_at anulável);
 1280 pixels de largura.
 
 **Fora do escopo.**
-* Devolver um exemplar: uma entrega própria, `return-book`, a seguinte na fila.
+* Devolver um exemplar: uma entrega própria, `devolver-livro`, a seguinte na fila.
 * Reservas: não estão no docs/00.
 * Multas: o docs/00 as lista como uma decisão em aberto, então ninguém decide isso aqui.
 
 **Pronto quando.**
-* [ ] Os testes unitários de `lend` passam para as três linhas de Comportamento.
+* [ ] Os testes unitários de `emprestar` passam para as três linhas de Comportamento.
 * [ ] O teste do repositório prova que o índice único recusa o segundo empréstimo.
 * [ ] `npm run verify` está verde.
 * [ ] A tela de empréstimo confere com o design nas duas larguras.
@@ -99,7 +99,7 @@ Você não edita a página à mão ([capítulo 10](10-the-documents.md)): o agen
 
 A ordem é a barata.
 Um buraco achado na página custa um turno; achado depois do `/apply`, custa outro `/apply`, o comando mais caro, que constrói, testa e prova de novo.
-Na Ninjobs, a página da entrega que calcula a pontuação de compatibilidade de um candidato descobriu, enquanto era escrita, que a idade aproximada de um candidato já vazava no primeiro nível de privacidade pelas datas das suas experiências; isso virou uma linha para uma entrega posterior, e nenhum código foi escrito além dela.[^ninjobs]
+Na Ninjobs, a página da entrega que calcula a pontuação de compatibilidade de um candidato descobriu, enquanto era escrita, que a idade aproximada de um candidato já vazava no primeiro nível de privacidade pelas datas das suas experiências; isso virou uma linha para uma entrega posterior, e nenhum código foi escrito além dela.
 
 Os hosts têm o seu próprio jeito de planejar antes de editar; no Claude Code é o modo de plano (plan mode), em que "*o Claude lê arquivos e propõe um plano, mas não faz nenhuma edição até você aprovar*".[^claude-code-plan-mode]
 O modo de plano trabalha dentro de uma sessão, para a mudança do momento.
@@ -109,14 +109,14 @@ Use o modo de plano dentro de uma sessão se ele ajudar você; a página é o qu
 ## Quando não cabe
 
 Um escopo que não cabe em uma página são duas entregas: o `/propose` diz isso, propõe a divisão e escreve só a primeira página, e a segunda vira uma linha na fila, onde ela pertence.
-Na Ninjobs, a linha única da fila para uma vaga de emprego virou seis entregas em um `/propose`: a vaga, o empregador, as tags, a oferta, os benefícios e os idiomas, e o ciclo de vida; a página da primeira dizia que ela era o passo um de seis.[^ninjobs]
+Na Ninjobs, a linha única da fila para uma vaga de emprego virou seis entregas em um `/propose`: a vaga, o empregador, as tags, a oferta, os benefícios e os idiomas, e o ciclo de vida; a página da primeira dizia que ela era o passo um de seis.
 Cada uma das seis foi revisada na sua própria página e construída na sua própria sessão.
 
 ## O que o time ganha
 
 A página é a superfície de revisão do time.
 Um desenvolvedor, um gerente ou o cliente lê uma página na linguagem do docs/03 e sabe o que está para ser construído, o que não está, e o que "pronto" vai significar, antes de existir uma linha de código.
-No Caso A, o mesmo formato de página levou perguntas ao cliente e documentos para a passagem do projeto, então uma única skill de revisão serviu a todo tipo de trabalho (capítulo 22).[^case-a]
+No Caso A, o mesmo formato de página levou perguntas ao cliente e documentos para a passagem do projeto, então uma única skill de revisão serviu a todo tipo de trabalho (capítulo 22).
 E quando a construção termina, a mesma página registra o que aconteceu, então a história de uma decisão é um arquivo, com o nome do seu slug, em todo projeto que o time roda.
 
 ## Pontos-chave
@@ -127,6 +127,4 @@ E quando a construção termina, a mesma página registra o que aconteceu, entã
 * Leia a página antes do `/apply` e cubra cada buraco pedindo ao agente, nunca à mão: um buraco na página custa um turno, depois do `/apply` custa outro `/apply`.
 * A página é a superfície de revisão do time, para código e para qualquer outra coisa que caiba em uma página.
 
-[^ninjobs]: Ninjobs, o produto do autor, um repositório privado, lido pelo autor nas suas páginas de `work/done/`: a página da pontuação de compatibilidade, pelo buraco que ela achou, e a página da vaga de emprego, pela divisão em seis entregas em 2026-09-03.
-[^case-a]: Caso A, um projeto para um cliente em uma plataforma low-code, um repositório privado, lido pelo autor na sua fila e nas suas páginas: 8 entregas de pergunta e as entregas de documento da passagem do projeto. O seu dono, o seu cliente e o seu negócio não são revelados.
 [^claude-code-plan-mode]: Anthropic, "Common workflows", documentação do Claude Code, seção "Plan before editing", acesso em 2026-09-28. <https://code.claude.com/docs/en/common-workflows#plan-before-editing>

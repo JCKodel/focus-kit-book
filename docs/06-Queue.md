@@ -183,7 +183,7 @@ When this milestone closes, version 1 is tagged, the PDF and EPUB are on books.k
 [ ] templates              Appendix: every document template, annotated
 [ ] workshop-map           Appendix: the parts mapped to workshop sessions, with timings
 [x] exercise-answers       Appendix: answers to every exercise, linked to the guided project's tags; retired by rewrite (ADR-0017): the book has no exercises
-[ ] cover                  make book puts each edition's cover on the PDF's first page (book/assets/cover-<edition>.pdf, A5) and as the EPUB's cover image (book/assets/cover-<edition>.png)
+[x] cover                  make book puts each edition's cover on the PDF's first page (book/assets/cover-<edition>.pdf, A5) and as the EPUB's cover image (book/assets/cover-<edition>.png); done by author-review-1
 [ ] m7-review              the review of M7 as docs/05 §8 says: the whole book and its appendices read end to end in both editions against the product questions and M7's paragraph, before v1 is tagged; each confirmed finding becomes a line in a new milestone M7.1
 [ ] launch                 v1 tag and Release; focus-kit's README repointed in its own repository (OD-4)
 ```
@@ -194,5 +194,6 @@ When this milestone closes, the book is 25 chapters in both editions in three mo
 
 ```
 [x] rewrite                the whole book rewritten in one delivery (ADR-0017): Part I the base (why process, how agents see, SDD, KISS/YAGNI/DRY, pure functions and exceptions as values, features not layers, the four pieces, a test per piece), Part II the method (birth, documents, install, starting, queue, /propose, /apply, closing, governor, the project as the team's assistant), Part III git and the team's tools, Part IV beyond code (not software, cost, adoption); Ninjobs, Case A and Case B as the evidence; both editions; docs/00, 03, 04, 05, 06, AGENTS.md and ADR-0017 updated
-[ ] m8-review              the review of M8 as docs/05 §8 says: the whole book read end to end in both editions against the product questions and M8's paragraph; each confirmed finding becomes a line in a new milestone M8.1
+[x] author-review-1        the author's own reading of the cover and the Prologue to chapter 5, fixed by conversation: the cover on the PDF and the EPUB; bare chapter pointers become sentences; METR, DORA, Liu's paper and Chroma introduced; behaviour defined and the agent's review spiral warned of, in note boxes; chapter 5 gains the orchestrator against the async use case, the exhaustive switch as the value of a Result, why an exception becomes a value, and red-green as "done"; chapter 6 the interface-for-everything habit; the private-case notes leave the whole book; the Portuguese edition's code speaks Portuguese, chapters 4 to 23
+[ ] m8-review              the author reads the rest of the book, chapter 6 on, and sends findings by conversation; each batch is fixed as an author-review-<n> line here, with no review of its own
 ```

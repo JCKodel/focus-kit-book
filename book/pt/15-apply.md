@@ -54,12 +54,12 @@ Então, antes de parar, o `/apply` faz tudo isto:
 
 Pronto é essa lista inteira: a verificação verde, a prova, o que aconteceu escrito na página, os documentos atualizados, a página em `work/done/`, a linha `[x]`, e a mudança em stage.
 
-## `lend-book`, construída
+## `emprestar-livro`, construída
 
-Pegue a página `lend-book` do capítulo 14, revisada e marcada `[>]`, e abra uma sessão nova com `/apply lend-book`.
+Pegue a página `emprestar-livro` do capítulo 14, revisada e marcada `[>]`, e abra uma sessão nova com `/apply emprestar-livro`.
 
-O agente lê a página, depois o docs/01 para saber que os empréstimos ficam em `src/features/loans/`, o docs/04 para saber quais testes cada peça recebe (capítulo 8), e o docs/05 para saber que a verificação é `npm run verify` e que uma tela é provada por um screenshot.
-Ele escreve a migration da tabela `loan` com o seu índice único, a regra `lend` como uma função pura que devolve um `Result` (capítulo 5), a chamada do repositório que transforma a falha do índice único na recusa `AlreadyLent`, o orquestrador e a tela de empréstimo.
+O agente lê a página, depois o docs/01 para saber que os empréstimos ficam em `src/features/emprestimos/`, o docs/04 para saber quais testes cada peça recebe (capítulo 8), e o docs/05 para saber que a verificação é `npm run verify` e que uma tela é provada por um screenshot.
+Ele escreve a migration da tabela `emprestimo` com o seu índice único, a regra `emprestar` como uma função pura que devolve um `Result` (capítulo 5), a chamada do repositório que transforma a falha do índice único na recusa `JaEmprestado`, o orquestrador e a tela de empréstimo.
 Cada linha de Comportamento vira um teste: o empréstimo com a devolução prevista para 21 dias depois, a recusa para um livro atrasado, e, contra um banco de dados real em memória, o segundo de dois empréstimos do último exemplar recusado.
 Ele não constrói nada para devolver um exemplar, reservas ou multas, porque o Fora do escopo os nomeou.
 
@@ -68,7 +68,7 @@ Qualquer que seja a sua resposta, o outro muda na mesma entrega.
 
 Ele roda `npm run verify` até ficar verde, captura a tela de empréstimo com 390 e 1280 pixels de largura, e compara as duas com o arquivo de design.
 Se um botão quebra linha na largura estreita, ele é corrigido; se o arquivo de design não dá um valor para uma cor, a escolha é registrada como uma divergência, com o seu motivo.
-Então ele escreve na página o que aconteceu, acrescenta a tabela `loan` ao documento que lista o schema, marca o Pronto quando, move a página para `work/done/lend-book.md`, marca a linha `[x]`, coloca tudo em stage, sugere a mensagem, e termina dizendo qual ambiente roda esta entrega e como atualizar os outros.
+Então ele escreve na página o que aconteceu, acrescenta a tabela `emprestimo` ao documento que lista o schema, marca o Pronto quando, move a página para `work/done/emprestar-livro.md`, marca a linha `[x]`, coloca tudo em stage, sugere a mensagem, e termina dizendo qual ambiente roda esta entrega e como atualizar os outros.
 
 ## Por que ele para no stage
 
@@ -130,8 +130,8 @@ A última linha aponta para a página em `work/done/`, onde o raciocínio mora, 
 
 Nada é publicado sem uma checagem e uma pessoa: a verificação e a prova conferem a construção, e uma pessoa lê o diff antes de ele existir no histórico.
 E o que divergiu do plano fica escrito onde a próxima pessoa lê.
-Na Ninjobs, a página da entrega que permite a um usuário excluir a própria conta dizia que a tabela que registra uma exclusão pendente não teria regra de escrita nenhuma.[^ninjobs]
-A construção descobriu que uma tabela sem regra de escrita não aceita escrita de ninguém, nem das funções do próprio banco de dados, então a página registrou o ajuste: nenhum caminho de escrita alcançável pelo cliente, o que o teste das regras de acesso agora prova.[^ninjobs]
+Na Ninjobs, a página da entrega que permite a um usuário excluir a própria conta dizia que a tabela que registra uma exclusão pendente não teria regra de escrita nenhuma.
+A construção descobriu que uma tabela sem regra de escrita não aceita escrita de ninguém, nem das funções do próprio banco de dados, então a página registrou o ajuste: nenhum caminho de escrita alcançável pelo cliente, o que o teste das regras de acesso agora prova.
 A decisão e o seu motivo estão na página que a construiu, e o commit que a publicou aponta para lá.
 
 ## Pontos-chave
@@ -142,4 +142,3 @@ A decisão e o seu motivo estão na página que a construiu, e o commit que a pu
 * Revise a mudança em stage contra a página, e peça cada correção na mesma sessão.
 * O agente coloca em stage e sugere a mensagem; a pessoa lê o diff e faz o commit, então nada chega ao histórico sem ser lido, e uma entrega se desfaz em um passo.
 
-[^ninjobs]: Ninjobs, o produto do autor, um repositório privado, lido pelo autor na página de `work/done/` da entrega de exclusão de conta, seção "what diverged, and why", parafraseado.

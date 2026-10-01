@@ -50,7 +50,7 @@ When the repository is itself delivered to a client, or will be public, list the
 An ignored folder is still on the disk, so the agent reads it in every session; only git does not keep it, so back it up somewhere else.
 Personal data and anything under a confidentiality clause stay out of the repository in every case, because git keeps a removed file in its history.
 
-On Case A, a client project on a low-code platform, the repository itself was the contracted deliverable.[^case-a]
+On Case A, a client project on a low-code platform, the repository itself was the contracted deliverable.
 Its correspondence folder was kept out of the repository, and only engineering facts crossed over: a decision the client took in a message became a line of a document, never the message.
 
 ## The questions the team asks
@@ -85,10 +85,10 @@ For the lending library, written for this chapter:
 The first table says who was asked what, and when they answered.
 The second says which queue line is blocked, on whom, and for how long, so "who owes me an answer" is one table and a reminder to that person is written from it.
 
-Case A kept both tables: questions sent, with to whom, about what and answered when; and still open, with the line, what it waits on and since when.[^case-a]
-Twenty questions to people outside the project were logged there, and two were still unanswered when it closed.[^case-a]
+Case A kept both tables: questions sent, with to whom, about what and answered when; and still open, with the line, what it waits on and since when.
+Twenty questions to people outside the project were logged there, and two were still unanswered when it closed.
 Its end-of-day status report and its schedule and risk estimate for the project manager say they were written from the queue and the pages, not from memory.
-The queue gave the pace: about nine lines closed and about six new lines opened a day, so the open list shrank by about three a day.[^case-a]
+The queue gave the pace: about nine lines closed and about six new lines opened a day, so the open list shrank by about three a day.
 That pace put a scope cut in front of the project manager in the middle of the project, as a decision for them to take.
 
 ## The person is the brain
@@ -115,7 +115,7 @@ When the manager wants something changed, such as a new line in the queue, the a
 ## What the team gains
 
 One assistant for engineering and product alike: the same documents answer a developer's "where does this rule live" and a manager's "who owes us an answer", and nobody writes a status by hand.
-On Case A, twenty questions to outside people were followed to their answers, the two left open were named at the close, and the status and the risk estimate came from a queue that closed about nine lines a day.[^case-a]
+On Case A, twenty questions to outside people were followed to their answers, the two left open were named at the close, and the status and the risk estimate came from a queue that closed about nine lines a day.
 
 ## Key points
 
@@ -125,4 +125,3 @@ On Case A, twenty questions to outside people were followed to their answers, th
 * The agent's answer reads as right even when it is wrong: ask for the file behind it, and interpret, guide and validate.
 * A manager opens the host at the project's root and asks in plain words; the same rules file makes the agent read the documents first.
 
-[^case-a]: Case A, a client project on a low-code platform, a private repository with its correspondence kept outside it, counted by the author: 20 questions logged to outside people and 2 unanswered at the close, from the two tables of its work record; about 9 lines closed and 6 opened a day, from its 73 done lines in docs/06 and the 8 days of commits in `git log`. Its owner, its client and its business are not disclosed.

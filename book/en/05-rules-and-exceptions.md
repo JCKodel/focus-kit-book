@@ -33,6 +33,12 @@ It reads a member and answers.
 Where the member came from, a database or a test, is not its business.
 Immutability is the same idea on data: a function that changes its input hides a second output, so `mayBorrow` returns the member it received or a refusal, and changes nothing.
 
+Clean Architecture, as it is usually practised, does this differently: the use case, its name for the function that holds a business rule, receives its repositories as injected dependencies, and since they do I/O it becomes asynchronous.
+Its test then needs a mock or a fake for each repository, runs slower, and can pass while the real repository behaves in some way the fake never implemented.
+This book keeps the rule pure and synchronous: `mayBorrow` receives a member, not a way to fetch one.
+Fetching and saving belong to an orchestrator, the function that asks the repositories for the data, hands it to the rule and saves what the rule returns (chapter 7).
+The rule's test is a call with data, written in a minute and run in a millisecond, with no dependency to arrange and nothing in it that can disagree with the database.
+
 ## Result: the value that carries a failure
 
 `Result` is a type that holds either the value or what stopped it:
@@ -50,6 +56,11 @@ function err<E>(error: E): Result<never, E> {
 ```
 
 The caller reads `ok` before it can reach `value` or `error`, and the compiler narrows the type on that check.
+
+The reason to carry a failure in a value, whatever its shape, a union type as here or an enum, is what the compiler does with it: a `switch` over the failure that leaves one case out does not compile.
+Every outcome a rule can produce is either handled or a compile error, and that error is the whole value of the construction: the compiler, and not a code review, guarantees that no case was forgotten, on the day the rule is written and on the day a case is added.
+The section "Every case handled" shows the check in TypeScript.
+
 Go returns errors as ordinary values, "*errors are values*", and handles them with ordinary code;[^go-errors] Rust puts the recoverable failure in the return type, `Result<T, E>`;[^rust-result] Scott Wlaschin drew the same idea as two tracks, success and failure, that every step of a pipeline rides on.[^wlaschin-rop]
 The field calls the principle "errors as values".
 This book says "exceptions as values", and the next section says why.
@@ -62,7 +73,9 @@ Dart is the one language I have seen make the difference visible: its `dart:core
 
 * **An exception** is an expected failure from outside the program: the database is down, the network dropped, the disk is full.
   No code is wrong.
-  It is caught at the boundary with the outside world and returned as a value.
+  It is caught at the boundary with the outside world and returned as a value, for two reasons.
+  The exception belongs to the domain that threw it: a sign-in library throws its own `AppleSignInException`, and the application's domain has no idea what Apple sign-in is; all it needs to know is that the login failed.
+  Translated into a value, `LoginFailed`, the failure speaks the application's language, and, as a member of a type, it enters the exhaustive check: every exception the application can meet is handled, and the compiler proves it.
 * **A refusal** is a rule saying no: a member with overdue books, a phone number with too few digits, a time already taken.
   Nothing failed; the rule did its job.
   It is returned as a value too, and it is the most common outcome a program handles.
@@ -93,8 +106,9 @@ A throw used to steer the flow, rather than a return, costs four things.
 4. **A catch that hides bugs.**
    A catch wide enough to steer the flow also catches the bugs that happen inside it, and they vanish into a message nobody reads.
 
-The refusal is the reason the rule matters most.
-Most of what a program handles is a rule saying no, and a program that throws for that has an exit on every rule.
+A function returns one value, and its signature says which.
+A throw breaks that contract: the function "returns" something its signature never mentioned, through a path the caller did not write and cannot see at the call site.
+Most of what a program handles is a rule saying no, so a program that throws for refusals has such a hidden exit on every rule, and the caller has to know from memory which ones.
 
 ## Where the catch lives
 
@@ -149,6 +163,23 @@ const message: Record<LendRefusal, string> = {
 Add a refusal to the rules and forget its message, and the build fails, before any user sees a blank screen.
 In Rust and Dart an exhaustive `match` or `switch` does the same; in Go, a linter.
 
+## The rule is born with its test
+
+Kent Beck's test-driven development writes the test before the code, in a cycle of three steps: red, the test fails because the code does not exist yet; green, the smallest code that makes it pass; then clean up, with the test still green.[^beck-tdd]
+A pure rule is the easiest place to do it, because the test is a call with data.
+In Vitest, the test runner chapter 8 uses, the test of `mayBorrow` is:
+
+```ts
+it("refuses a member with an overdue book", () => {
+	expect(mayBorrow({ id: "m1", overdue: 1 })).toEqual({ ok: false, error: "HasOverdueBooks" });
+});
+```
+
+Run it before `mayBorrow` exists and it is red; write the function and it is green.
+For an agent, this is what "done" means whenever it can be said in code.
+The page of a delivery lists its behaviours (chapter 14), each one becomes a red test, and the delivery is done when every one of them is green and nothing that was green went red.
+"Done" stops being the agent's opinion and becomes the test runner's output, and [chapter 8](08-testing-each-piece.md) gives each of the four pieces its test.
+
 ## What the team gains
 
 Every rule is a function a test calls with data, so a rule has a test before it has a screen, and an agent asked to change a rule finds it in one place, with its cases named in its type.
@@ -157,11 +188,11 @@ And the measured cost of steering by throw, twice the time on .NET 9 and more th
 
 ## Key points
 
-* A pure function takes data and returns a value, with no I/O and no clock; a business rule written this way is tested with data alone.
-* A failure is an exception (from outside, caught at the boundary and returned as a value), a refusal (a rule saying no, returned as a value) or an error (a bug, never caught); the class name tells none of them apart.
-* A throw steers no flow: it is an exit the caller cannot see, a signature that lies, a measured cost, and a hiding place for bugs.
+* A pure function takes data and returns a value, with no I/O and no clock; a business rule written this way is tested with data alone, and fetching and saving belong to the orchestrator around it.
+* A failure is an exception (from outside, caught at the boundary and returned as a value in the domain's own words), a refusal (a rule saying no, returned as a value) or an error (a bug, never caught); the class name tells none of them apart.
+* A throw steers no flow: a function returns one value, and a throw is an exit the signature does not show, a measured cost, and a hiding place for bugs.
 * The only `try`/`catch` lives where the program touches the outside world, and it translates the library's exception into the program's value; a new library changes that file alone.
-* A `Result` handled with an exhaustive `Record`, `match` or `switch` fails to compile when a case is forgotten.
+* The value of a `Result` is the exhaustive check: a `Record`, `match` or `switch` that forgets a case fails to compile; write the test red before the rule, and "done" is the test green.
 
 [^go-errors]: Rob Pike, "Errors are values", The Go Blog, 2015. <https://go.dev/blog/errors-are-values>
 [^rust-result]: The Rust Programming Language, "Recoverable Errors with Result", chapter 9.2, accessed 2026-09-29. <https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html>
@@ -175,3 +206,4 @@ And the measured cost of steering by throw, twice the time on .NET 9 and more th
 [^anti-corruption-layer]: Microsoft, "Anti-Corruption Layer pattern", Azure Architecture Center, accessed 2026-09-30. <https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer>
 [^nextjs-redirect]: Next.js, "redirect", API reference, accessed 2026-09-30. <https://nextjs.org/docs/app/api-reference/functions/redirect>
 [^dotnet-exceptions]: Microsoft Learn, "Best practices for exceptions", .NET, section "Catch cancellation and asynchronous exceptions", accessed 2026-09-30. <https://learn.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions>
+[^beck-tdd]: Kent Beck, "Test-Driven Development: By Example", Addison-Wesley, 2002.

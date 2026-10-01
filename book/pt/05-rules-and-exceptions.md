@@ -19,19 +19,25 @@ Uma biblioteca de empréstimos guarda livros e membros.
 A regra "um membro com um livro atrasado não pode pegar outro" é uma função pura:
 
 ```ts
-type Member = { id: string; overdue: number };
+type Membro = { id: string; emAtraso: number };
 
-type Refusal = "HasOverdueBooks";
+type Recusa = "TemLivrosEmAtraso";
 
-function mayBorrow(member: Member): Result<Member, Refusal> {
-	if (member.overdue > 0) return err("HasOverdueBooks");
-	return ok(member);
+function podePegarEmprestado(membro: Membro): Result<Membro, Recusa> {
+	if (membro.emAtraso > 0) return err("TemLivrosEmAtraso");
+	return ok(membro);
 }
 ```
 
 Ela lê um membro e responde.
 De onde o membro veio, um banco de dados ou um teste, não é assunto dela.
-Imutabilidade é a mesma ideia aplicada aos dados: uma função que muda a sua entrada esconde uma segunda saída, então `mayBorrow` devolve o membro que recebeu ou uma recusa, e não muda nada.
+Imutabilidade é a mesma ideia aplicada aos dados: uma função que muda a sua entrada esconde uma segunda saída, então `podePegarEmprestado` devolve o membro que recebeu ou uma recusa, e não muda nada.
+
+A Clean Architecture, como costuma ser praticada, faz isso de outro jeito: o caso de uso, o nome que ela dá à função que guarda uma regra de negócio, recebe os seus repositórios como dependências injetadas, e, como eles fazem I/O, ele vira assíncrono.
+O teste dele passa a precisar de um mock ou de um fake para cada repositório, roda mais devagar, e pode passar enquanto o repositório real se comporta de um jeito que o fake nunca implementou.
+Este livro mantém a regra pura e síncrona: `podePegarEmprestado` recebe um membro, e não um jeito de buscá-lo.
+Buscar e salvar pertencem a um orquestrador, a função que pede os dados aos repositórios, os entrega à regra e salva o que a regra devolve (capítulo 7).
+O teste da regra é uma chamada com dados, escrita em um minuto e executada em um milissegundo, sem dependência para arrumar e sem nada nele que possa discordar do banco de dados.
 
 ## Result: o valor que carrega uma falha
 
@@ -50,6 +56,11 @@ function err<E>(error: E): Result<never, E> {
 ```
 
 Quem chama lê `ok` antes de alcançar `value` ou `error`, e o compilador estreita o tipo nessa checagem.
+
+O motivo para carregar uma falha em um valor, seja qual for a forma, um union type como aqui ou um enum, é o que o compilador faz com ela: um `switch` sobre a falha que deixa um caso de fora não compila.
+Todo resultado que uma regra pode produzir ou é tratado ou é um erro de compilação, e esse erro é o valor inteiro desta construção: o compilador, e não uma revisão de código, garante que nenhum caso foi esquecido, no dia em que a regra é escrita e no dia em que um caso é acrescentado.
+A seção "Todo caso tratado" mostra a checagem em TypeScript.
+
 Go devolve erros como valores comuns, "*erros são valores*", e os trata com código comum;[^go-errors] Rust põe a falha recuperável no tipo de retorno, `Result<T, E>`;[^rust-result] Scott Wlaschin desenhou a mesma ideia como dois trilhos, sucesso e falha, por onde passa cada passo de um pipeline.[^wlaschin-rop]
 A área chama o princípio de "errors as values", erros como valores.
 Este livro diz "exceções como valores", e a próxima seção diz por quê.
@@ -62,7 +73,9 @@ Dart é a única linguagem que eu vi tornar a diferença visível: o seu `dart:c
 
 * **Uma exceção** é uma falha esperada vinda de fora do programa: o banco de dados caiu, a rede caiu, o disco encheu.
   Nenhum código está errado.
-  Ela é capturada na fronteira com o mundo de fora e devolvida como um valor.
+  Ela é capturada na fronteira com o mundo de fora e devolvida como um valor, por dois motivos.
+  A exceção pertence ao domínio de onde foi lançada: uma biblioteca de login lança a sua própria `AppleSignInException`, e o domínio da aplicação não tem ideia do que é o login com Apple; tudo o que ele precisa saber é que o login falhou.
+  Traduzida em um valor, `LoginFalhou`, a falha passa a falar a língua da aplicação e, como membro de um tipo, entra na checagem exaustiva: toda exceção que a aplicação pode encontrar é tratada, e o compilador prova isso.
 * **Uma recusa** é uma regra dizendo não: um membro com livros atrasados, um telefone com dígitos de menos, um horário já ocupado.
   Nada falhou; a regra fez o seu trabalho.
   Ela também é devolvida como um valor, e é o resultado mais comum que um programa trata.
@@ -84,8 +97,8 @@ Um throw usado para conduzir o fluxo, no lugar de um return, custa quatro coisas
 1. **Uma saída que o ponto de chamada não mostra.**
    Joel Spolsky escreveu em 2003 que as exceções "*são invisíveis no código-fonte*" e "*criam pontos de saída possíveis demais para uma função*".[^spolsky-exceptions]
 2. **Uma assinatura que mente.**
-   `function lend(...): Loan` não diz nada sobre as três maneiras de falhar, então o compilador não consegue verificar que todo caso é tratado.
-   `Result<Loan, LendRefusal>` diz isso no tipo, e um `switch` sobre a recusa que esquece um caso não compila.
+   `function emprestar(...): Emprestimo` não diz nada sobre as três maneiras de falhar, então o compilador não consegue verificar que todo caso é tratado.
+   `Result<Emprestimo, RecusaDeEmprestimo>` diz isso no tipo, e um `switch` sobre a recusa que esquece um caso não compila.
 3. **Tempo.**
    No benchmark de Stephen Toub, 1.000 throws, cada um capturado através de dez frames assíncronos, levaram 123,03 ms no .NET 8 e 54,68 ms no .NET 9.[^toub-net9]
    A orientação da Microsoft para o ASP.NET Core traça a regra: "*Lançar e capturar exceções é lento em relação a outros padrões de fluxo de código. Por isso, exceções não devem ser usadas para controlar o fluxo normal do programa.*"[^aspnet-best-practices]
@@ -93,8 +106,9 @@ Um throw usado para conduzir o fluxo, no lugar de um return, custa quatro coisas
 4. **Um catch que esconde bugs.**
    Um catch largo o bastante para conduzir o fluxo também captura os bugs que acontecem dentro dele, e eles somem em uma mensagem que ninguém lê.
 
-A recusa é a razão pela qual a regra mais importa.
-A maior parte do que um programa trata é uma regra dizendo não, e um programa que lança para isso tem uma saída em cada regra.
+Uma função devolve um valor, e a sua assinatura diz qual.
+Um throw quebra esse contrato: a função "devolve" algo que a assinatura nunca mencionou, por um caminho que quem chama não escreveu e não vê no ponto de chamada.
+A maior parte do que um programa trata é uma regra dizendo não, então um programa que lança para recusas tem uma dessas saídas escondidas em cada regra, e quem chama precisa saber de cor quais são.
 
 ## Onde mora o catch
 
@@ -102,29 +116,29 @@ Exceções só existem onde o programa toca o mundo de fora: uma chamada ao banc
 Então esse é o único lugar onde mora um `try`/`catch`, e ele faz uma coisa: transforma a exceção da biblioteca no valor do programa.
 
 ```ts
-type DatabaseFailed = { code: "DatabaseFailed"; message: string };
+type BancoDeDadosFalhou = { codigo: "BancoDeDadosFalhou"; mensagem: string };
 
-function query<T>(run: () => T): Result<T, DatabaseFailed> {
+function consultar<T>(executar: () => T): Result<T, BancoDeDadosFalhou> {
 	try {
-		return ok(run());
-	} catch (thrown) {
-		const message = thrown instanceof Error ? thrown.message : String(thrown);
-		return err({ code: "DatabaseFailed", message });
+		return ok(executar());
+	} catch (lancado) {
+		const mensagem = lancado instanceof Error ? lancado.message : String(lancado);
+		return err({ codigo: "BancoDeDadosFalhou", mensagem });
 	}
 }
 ```
 
-Toda chamada ao banco de dados roda dentro de `query`, e nada depois dele sabe qual biblioteca de banco de dados está em uso.
+Toda chamada ao banco de dados roda dentro de `consultar`, e nada depois dele sabe qual biblioteca de banco de dados está em uso.
 O domain-driven design chama um tradutor assim de camada anticorrupção, cujo "*propósito central ... é proteger o modelo de domínio*";[^anti-corruption-layer] este livro dá um passo a mais e traduz as exceções também.
-Troque a biblioteca de banco de dados e `query` muda; o resto do programa não.
+Troque a biblioteca de banco de dados e `consultar` muda; o resto do programa não.
 
 A mesma fronteira pode transformar uma exceção em uma recusa.
 Quando dois membros pegam o último exemplar no mesmo instante, um índice único no banco de dados recusa a segunda escrita.
-O código que rodou a escrita lê essa falha e devolve a recusa `AlreadyLent`, já que nada quebrou: a regra valeu, no único lugar onde duas requisições não podem competir.
-Qualquer outra falha da mesma escrita continua `DatabaseFailed`.
+O código que rodou a escrita lê essa falha e devolve a recusa `JaEmprestado`, já que nada quebrou: a regra valeu, no único lugar onde duas requisições não podem competir.
+Qualquer outra falha da mesma escrita continua `BancoDeDadosFalhou`.
 
-Um catch largo assim também captura um bug lançado dentro de `run`, e o transforma em `DatabaseFailed`.
-Duas coisas trazem o bug de volta a você: um teste que roda toda chamada ao banco de dados contra um banco de dados real, em memória, e confere o valor que recebe (capítulo 8), e uma linha de log que imprime a `message` antes de o programa responder.
+Um catch largo assim também captura um bug lançado dentro de `executar`, e o transforma em `BancoDeDadosFalhou`.
+Duas coisas trazem o bug de volta a você: um teste que roda toda chamada ao banco de dados contra um banco de dados real, em memória, e confere o valor que recebe (capítulo 8), e uma linha de log que imprime a `mensagem` antes de o programa responder.
 
 Dois tipos de throw passam pela fronteira intocados.
 Um fatal, como acabar a memória, não é tratado por ninguém.
@@ -137,17 +151,34 @@ Um `Result` compensa quando o compilador confere o tratamento.
 Em TypeScript, um `Record` sobre o tipo da recusa precisa nomear cada membro:
 
 ```ts
-type LendRefusal = "HasOverdueBooks" | "AlreadyLent" | "MemberSuspended";
+type RecusaDeEmprestimo = "TemLivrosEmAtraso" | "JaEmprestado" | "MembroSuspenso";
 
-const message: Record<LendRefusal, string> = {
-	HasOverdueBooks: "Return your overdue books first.",
-	AlreadyLent: "This copy was just lent to someone else.",
-	MemberSuspended: "Your membership is suspended.",
+const mensagem: Record<RecusaDeEmprestimo, string> = {
+	TemLivrosEmAtraso: "Devolva primeiro os seus livros atrasados.",
+	JaEmprestado: "Este exemplar acabou de ser emprestado a outra pessoa.",
+	MembroSuspenso: "A sua matrícula está suspensa.",
 };
 ```
 
 Acrescente uma recusa às regras e esqueça a mensagem dela, e o build falha, antes que algum usuário veja uma tela em branco.
 Em Rust e em Dart, um `match` ou um `switch` exaustivo faz o mesmo; em Go, um linter.
+
+## A regra nasce com o teste
+
+O desenvolvimento guiado por testes de Kent Beck escreve o teste antes do código, em um ciclo de três passos: vermelho, o teste falha porque o código ainda não existe; verde, o menor código que o faz passar; depois a limpeza, com o teste ainda verde.[^beck-tdd]
+Uma regra pura é o lugar mais fácil de fazer isso, porque o teste é uma chamada com dados.
+No Vitest, o executor de testes que o capítulo 8 usa, o teste de `podePegarEmprestado` é:
+
+```ts
+it("recusa um membro com um livro atrasado", () => {
+	expect(podePegarEmprestado({ id: "m1", emAtraso: 1 })).toEqual({ ok: false, error: "TemLivrosEmAtraso" });
+});
+```
+
+Rode-o antes de `podePegarEmprestado` existir e ele está vermelho; escreva a função e ele está verde.
+Para um agente, é isso que "pronto" quer dizer sempre que pode ser dito em código.
+A página de uma entrega lista os seus comportamentos (capítulo 14), cada um vira um teste vermelho, e a entrega está pronta quando todos eles estão verdes e nada que estava verde ficou vermelho.
+"Pronto" deixa de ser a opinião do agente e passa a ser a saída do executor de testes, e o [capítulo 8](08-testing-each-piece.md) dá a cada uma das quatro peças o seu teste.
 
 ## O que o time ganha
 
@@ -157,11 +188,11 @@ E o custo medido de conduzir o fluxo por throw, o dobro do tempo no .NET 9 e mai
 
 ## Pontos-chave
 
-* Uma função pura recebe dados e devolve um valor, sem I/O e sem relógio; uma regra de negócio escrita assim é testada só com dados.
-* Uma falha é uma exceção (de fora, capturada na fronteira e devolvida como valor), uma recusa (uma regra dizendo não, devolvida como valor) ou um erro (um bug, nunca capturado); o nome da classe não distingue nenhuma delas.
-* Um throw não conduz fluxo: ele é uma saída que quem chama não vê, uma assinatura que mente, um custo medido e um esconderijo para bugs.
+* Uma função pura recebe dados e devolve um valor, sem I/O e sem relógio; uma regra de negócio escrita assim é testada só com dados, e buscar e salvar pertencem ao orquestrador em volta dela.
+* Uma falha é uma exceção (de fora, capturada na fronteira e devolvida como valor nas palavras do próprio domínio), uma recusa (uma regra dizendo não, devolvida como valor) ou um erro (um bug, nunca capturado); o nome da classe não distingue nenhuma delas.
+* Um throw não conduz fluxo: uma função devolve um valor, e um throw é uma saída que a assinatura não mostra, um custo medido e um esconderijo para bugs.
 * O único `try`/`catch` mora onde o programa toca o mundo de fora, e ele traduz a exceção da biblioteca no valor do programa; uma biblioteca nova muda só esse arquivo.
-* Um `Result` tratado com um `Record`, `match` ou `switch` exaustivo não compila quando um caso é esquecido.
+* O valor de um `Result` é a checagem exaustiva: um `Record`, `match` ou `switch` que esquece um caso não compila; escreva o teste vermelho antes da regra, e "pronto" é o teste verde.
 
 [^go-errors]: Rob Pike, "Errors are values", The Go Blog, 2015. <https://go.dev/blog/errors-are-values>
 [^rust-result]: The Rust Programming Language, "Recoverable Errors with Result", capítulo 9.2, acesso em 2026-09-29. <https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html>
@@ -175,3 +206,4 @@ E o custo medido de conduzir o fluxo por throw, o dobro do tempo no .NET 9 e mai
 [^anti-corruption-layer]: Microsoft, "Anti-Corruption Layer pattern", Azure Architecture Center, acesso em 2026-09-30. <https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer>
 [^nextjs-redirect]: Next.js, "redirect", referência da API, acesso em 2026-09-30. <https://nextjs.org/docs/app/api-reference/functions/redirect>
 [^dotnet-exceptions]: Microsoft Learn, "Best practices for exceptions", .NET, seção "Catch cancellation and asynchronous exceptions", acesso em 2026-09-30. <https://learn.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions>
+[^beck-tdd]: Kent Beck, "Test-Driven Development: By Example", Addison-Wesley, 2002.

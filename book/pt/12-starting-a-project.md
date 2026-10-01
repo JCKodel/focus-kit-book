@@ -40,7 +40,7 @@ Uma stack que não consegue entregar isso está fora, por mais que o agente a co
 Um modelo escreve melhor o que viu mais durante o treino, e a medida pública mais próxima disso é quantas pessoas escrevem uma linguagem abertamente.
 Pela contagem do GitHub, o TypeScript virou a linguagem mais usada no GitHub em agosto de 2025, com 2.636.006 contribuidores mensais, à frente de Python e JavaScript.[^octoverse]
 A contagem é de pessoas e não diz nada sobre linhas de código, então leia-a como um ranking e nunca como um tamanho.
-Na Ninjobs, o mesmo agente errava o design no Flutter, onde tinha poucos exemplos de um design system customizado para aprender, e acertava no React ([capítulo 9](09-birth-of-focus-kit.md)).[^ninjobs]
+Na Ninjobs, o mesmo agente errava o design no Flutter, onde tinha poucos exemplos de um design system customizado para aprender, e acertava no React ([capítulo 9](09-birth-of-focus-kit.md)).
 
 **A stack confere a si mesma?**
 Um compilador que rejeita um tipo errado e testes que rodam em segundos avisam ao agente que ele errou antes que você precise avisar.
@@ -62,16 +62,16 @@ membros, emprestar um exemplar a um membro por 21 dias e registrar a devolução
 um membro com um livro atrasado ou com a inscrição suspensa é recusado.
 
 ```
-[ ] skeleton      app e servidor vazios, npm run verify, primeira captura de tela
-[ ] catalog       a bibliotecária cadastra livros e seus exemplares
-[ ] members       a bibliotecária cadastra, suspende e reativa membros
-[ ] lend-book     a bibliotecária empresta um exemplar, e as regras podem recusar
-[ ] return-book   a bibliotecária registra uma devolução, e o exemplar fica livre
-[ ] m1-review     o marco conferido contra o parágrafo dele
+[ ] esqueleto        app e servidor vazios, npm run verify, primeira captura de tela
+[ ] catalogo         a bibliotecária cadastra livros e seus exemplares
+[ ] membros          a bibliotecária cadastra, suspende e reativa membros
+[ ] emprestar-livro  a bibliotecária empresta um exemplar, e as regras podem recusar
+[ ] devolver-livro   a bibliotecária registra uma devolução, e o exemplar fica livre
+[ ] m1-review        o marco conferido contra o parágrafo dele
 ```
 ````
 
-O parágrafo diz o que uma pessoa consegue conferir quando o marco fecha, e a primeira linha, `skeleton`, cria o comando de verificação que toda entrega seguinte roda; o [capítulo 13](13-queue-and-milestones.md) ensina a fila.
+O parágrafo diz o que uma pessoa consegue conferir quando o marco fecha, e a primeira linha, `esqueleto`, cria o comando de verificação que toda entrega seguinte roda; o [capítulo 13](13-queue-and-milestones.md) ensina a fila.
 
 ## `/analyze`: um projeto existente
 
@@ -158,5 +158,4 @@ Não há número para esse ganho: este livro não tem uma contagem de projetos c
 * Revise antes do commit, contra as suas respostas e contra o código, e peça ao agente cada correção: o texto dele parece certo mesmo quando está errado.
 
 [^octoverse]: GitHub, "Octoverse: A new developer joins GitHub every second as AI leads TypeScript to #1", 2025, o relatório mais recente em 2026-09-28: contribuidores mensais no GitHub, agosto de 2025. <https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/>
-[^ninjobs]: Ninjobs, o produto do autor, um repositório privado: o ADR-0022 dele, que cita o retorno visual lento no Flutter e os poucos exemplos de treino para um Material 3 customizado entre as causas de abandonar essa stack, parafraseado.
 [^strangler-fig]: Martin Fowler, "Strangler Fig", 2024. <https://martinfowler.com/bliki/StranglerFigApplication.html>

@@ -12,7 +12,8 @@ Digitar é rápido.
 Decidir e verificar são lentos.
 Quando só a escrita acelera, o resultado é mais código esperando uma decisão ou uma revisão.
 
-No início de 2025, o METR fez um ensaio controlado randomizado com 16 desenvolvedores experientes de código aberto em 246 tarefas reais, em projetos maduros nos quais eles trabalhavam havia 5 anos em média.[^metr-2025]
+O METR, Model Evaluation and Threat Research (pesquisa de avaliação de modelos e de ameaças), é uma organização de pesquisa que avalia os modelos de IA de fronteira para informar o público sobre as suas capacidades e os seus riscos.
+No início de 2025 ele fez um ensaio controlado randomizado, o desenho que a medicina usa para testar um tratamento, com 16 desenvolvedores experientes de código aberto em 246 tarefas reais, em projetos maduros nos quais eles trabalhavam havia 5 anos em média.[^metr-2025]
 Cada tarefa foi sorteada para permitir ou proibir ferramentas de IA.
 Antes de começar, os desenvolvedores previram que a IA reduziria seu tempo de conclusão em 24%.
 Depois do estudo, estimaram que ela tinha reduzido o tempo em 20%.
@@ -20,7 +21,8 @@ Medida, a IA aumentou o tempo de conclusão em 19%.
 Eles foram mais lentos, e acreditavam ter sido mais rápidos.
 
 Uma pesquisa com times aponta na mesma direção.
-O relatório DORA de 2024 estimou que, a cada 25% de aumento na adoção de IA, a vazão de entrega caiu 1,5% e a estabilidade de entrega caiu 7,2%.[^dora-2024]
+O DORA, DevOps Research and Assessment (pesquisa e avaliação de DevOps), é o programa de pesquisa, hoje parte do Google Cloud, que pesquisa times de software todo ano e publica o relatório State of DevOps.
+O relatório de 2024 estimou que, a cada 25% de aumento na adoção de IA, a vazão de entrega caiu 1,5% e a estabilidade de entrega caiu 7,2%.[^dora-2024]
 Seus autores apontam para o básico da entrega, lotes pequenos e testes sólidos, e suspeitam que as mudanças ficam maiores quando a IA deixa as pessoas produzirem mais código no mesmo tempo.[^dora-2024]
 
 ## O que dá errado sem processo

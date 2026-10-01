@@ -44,7 +44,7 @@ O `/brainstorm` e o `/analyze` explicam cada uma com uma recomendação para a s
 
 **A arquitetura.** O FOCUS é a arquitetura do capítulo 7: código organizado em fatias verticais (capítulo 6), toda regra de negócio uma função pura que devolve um Result (capítulo 5), e quatro peças pelas quais um evento flui num só sentido até um novo estado.
 O kit dá três respostas: o FOCUS inteiro; só os dois princípios, fatias verticais e exceções como valores, na estrutura que a stack favorecer; ou nenhum dos dois, as convenções do próprio projeto.
-O Ninjobs, um app web fino sobre um backend como serviço, escolheu os dois princípios.[^ninjobs]
+O Ninjobs, um app web fino sobre um backend como serviço, escolheu os dois princípios.
 Num repositório que já tem código, o padrão é o que o código já faz.
 O docs/01 registra a resposta, e um ADR registra o porquê.
 
@@ -115,7 +115,7 @@ O docs/00 da biblioteca lista as multas por devolução atrasada como em aberto,
 ## O que o time ganha
 
 A mesma resposta em toda sessão e para toda pessoa: um desenvolvedor, um gestor e um agente numa sessão nova que perguntam o prazo de empréstimo leem uma linha em um documento.
-No Ninjobs uma decisão morava em seis lugares que podiam discordar, e toda entrega pagava para mantê-los em acordo; com um lugar para cada fato, uma mudança é escrita uma vez e toda sessão seguinte a lê.[^ninjobs]
+No Ninjobs uma decisão morava em seis lugares que podiam discordar, e toda entrega pagava para mantê-los em acordo; com um lugar para cada fato, uma mudança é escrita uma vez e toda sessão seguinte a lê.
 
 ## Pontos-chave
 
@@ -127,4 +127,3 @@ No Ninjobs uma decisão morava em seis lugares que podiam discordar, e toda entr
 
 [^nygard-adr]: Michael Nygard, "Documenting Architecture Decisions", blog da Cognitect, 2011. <https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions>
 [^agents-md]: AGENTS.md, "AGENTS.md", acesso em 2026-09-30. <https://agents.md>
-[^ninjobs]: Ninjobs, o produto do autor, um repositório privado: os seis lugares onde uma decisão morava na sua era do OpenSpec (os documentos, as especificações, as mudanças, os ADRs, um roteiro e o código) são nomeados no seu ADR-0022, datado de 2026-08-29, parafraseado; a sua escolha dos dois princípios vem do seu docs/01 e do ADR que a registra.

@@ -22,7 +22,7 @@ The slug is the delivery's name, in lowercase words joined by hyphens ([chapter 
 It names the delivery's page, `work/<slug>.md`, and it is the argument of the commands, `/propose <slug>` and `/apply <slug>`, so the line, the page and the commands all point at the same delivery.
 
 The kit asks for one line, and the reasoning goes on the page.
-On Ninjobs I let the lines grow: its queue held 102 deliveries in 1,711 lines, 1,052 of them continuations of a line, decisions that belonged on the pages.[^ninjobs]
+On Ninjobs I let the lines grow: its queue held 102 deliveries in 1,711 lines, 1,052 of them continuations of a line, decisions that belonged on the pages.
 A line that grows into a paragraph is a decision in the wrong place, since the page is where the next session looks for it.
 
 ## The marks
@@ -89,8 +89,8 @@ You read the change before you commit it, as with every document, and nobody edi
 ## What the team gains
 
 The queue is the team's shared status board and its history in one file: what is next, what is in flight, what was done and in what order, readable by a manager without a tool and by an agent at the start of every session.
-On Ninjobs it held 102 deliveries, done and not yet done alike, in one file.[^ninjobs]
-On Case A, a client project on a low-code platform, the status report and the risk estimate for the project manager were written from the queue and the pages, not from memory, and the queue gave the pace: about 9 lines closed and 6 opened a day.[^case-a]
+On Ninjobs it held 102 deliveries, done and not yet done alike, in one file.
+On Case A, a client project on a low-code platform, the status report and the risk estimate for the project manager were written from the queue and the pages, not from memory, and the queue gave the pace: about 9 lines closed and 6 opened a day.
 [Chapter 18](18-project-as-assistant.md) tells the rest of Case A, and [chapter 21](21-team-tools.md) shows how its queue was mirrored on the board its project manager already used.
 
 ## Key points
@@ -101,5 +101,3 @@ On Case A, a client project on a low-code platform, the status report and the ri
 * Three to eight deliveries, the skeleton first, each line after the lines it needs, and last the review, whose confirmed findings open a `.1` milestone.
 * No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept.
 
-[^ninjobs]: Ninjobs, the author's product, a private repository, its docs/06 at its last change, 2026-09-22, counted by the author: lines with `wc -l`, deliveries as the lines inside the code blocks that start with a mark, continuations as the other non-empty lines inside them.
-[^case-a]: Case A, a client project on a low-code platform, a private repository, read by the author: the status report and the risk estimate, which say they were built from the queue and the pages; the lines closed and opened a day as that estimate measured them from the queue. Its owner, its client and its business are not disclosed.

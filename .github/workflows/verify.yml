@@ -70,6 +70,8 @@ jobs:
         run: |
           sudo apt-get install -y libpango-1.0-0 libharfbuzz0b libpangoft2-1.0-0 libharfbuzz-subset0
           pip install weasyprint==69.0
+      - name: Install pypdf 6.9.2
+        run: pip install pypdf==6.9.2
       - name: make book
         run: make book
       - name: Create the Release

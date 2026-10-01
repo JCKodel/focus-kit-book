@@ -72,7 +72,9 @@ img[src$=".png"] { border: 1px solid #c8c8c4; max-width: 45%; }
 figure { margin: 0 0 0.9em; text-align: center; }
 figcaption { font-size: 8pt; font-style: italic; margin-top: 0.3em; }
 
-blockquote { margin: 0 0 0.9em 1em; padding-left: 0.8em; border-left: 2px solid #c8c8c4; }
+/* A note box is a blockquote (`> **Note.** ...`), the one box syntax the site, the PDF and the EPUB all render. */
+blockquote { margin: 0 0 0.9em; padding: 0.5em 0.8em; border-left: 3px solid #1a4f8b; background: #f4f4f2; break-inside: avoid; }
+blockquote p { margin: 0; text-align: left; }
 
 ul, ol { margin: 0 0 0.7em; padding-left: 1.4em; }
 li { margin-bottom: 0.2em; }

@@ -54,14 +54,14 @@ A manager opens a board; they rarely open a repository.
 A board whose cards are moved by hand, though, is a second queue, and it drifts from the first the day someone forgets to drag a card.
 
 The answer is a mirror in one direction, from the queue to the board.
-On Case A, a client project on a low-code platform, a customization recorded in its docs/05 did this: a script and a pipeline pushed the queue, one way, to the project's Azure DevOps kanban board, so the project manager followed progress in the portal without asking a developer.[^case-a]
+On Case A, a client project on a low-code platform, a customization recorded in its docs/05 did this: a script and a pipeline pushed the queue, one way, to the project's Azure DevOps kanban board, so the project manager followed progress in the portal without asking a developer.
 `/propose` and `/apply` refreshed the board whenever they changed a mark, and said so whenever they could not, so a stale board was never silent.
 The mirror goes one way because the queue is the only place the agent reads: a card moved on the board changes nothing in the repository, and a sync in both directions would make two sources of truth.
 One piece was still unproven when the project closed: the write permission of the pipeline's identity on the board.
 
 ### A mark for waiting
 
-Case A's queue also lacked a word.[^case-a]
+Case A's queue also lacked a word.
 The mark `[>]` reads as "defined, waiting to be built", and five lines blocked on the client showed as work nobody had started.
 Case A added a fourth mark to its queue, `[?]`, "waiting on a person".
 Its question deliveries, whose only output is a written answer from someone outside the project, close on the answer, not on the send, because a session once marked one done when the email went out.
@@ -95,4 +95,3 @@ There is no measured number for this gain: Case A's board ran on one project, an
 [^copilot-review]: GitHub Docs, "About GitHub Copilot code review", sections "Agent skills" and "Validating Copilot code reviews", accessed 2026-09-30. <https://docs.github.com/en/copilot/concepts/agents/code-review>
 [^gh-issues]: GitHub Docs, "About issues", accessed 2026-09-30. <https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues>
 [^azure-kanban]: Microsoft Learn, "About Kanban boards", Azure Boards, accessed 2026-09-30. <https://learn.microsoft.com/en-us/azure/devops/boards/boards/kanban-overview>
-[^case-a]: Case A, a client project on a low-code platform, a private repository, read by the author in its docs/05, its ADRs and its queue: the one-way board mirror and its script and pipeline, the five lines blocked on the client that led to the mark `[?]`, and the rule that closes a question line on the answer. Its owner, its client and its business are not disclosed.

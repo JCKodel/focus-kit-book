@@ -12,7 +12,7 @@ A free, bilingual book that teaches a team the engineering practices behind the 
 - Ninjobs appears only through its process artifacts and published numbers, paraphrased; never its infrastructure, credentials, users or commercial plans; the one exception, its database vendor's name, is in docs/03.
 - A change to one edition is a change to both, in the same delivery; English is the source (ADR-0004).
 - Every chapter opens with what the reader can do after it, says what the team gains with its evidence, and is as long as proving that takes: no filler, nothing useful cut, no length target (ADR-0015, ADR-0017).
-- Every number and every quoted artifact is real and says where it comes from; code examples are TypeScript written for the chapter, on the lending library, and said so; a source note only where the reader gains something to open, or a case's count to repeat (docs/04).
+- Every number and every quoted artifact is real and says where it comes from; code examples are TypeScript written for the chapter, on the lending library, and said so, with Portuguese names in the Portuguese edition; a source note only where the reader gains something to open, never for a private case, whose numbers the prologue says the author counted (docs/04).
 - No chapter narrates a run: no brief, transcript, diff, `git status`, headless flag or commit hash in the text (ADR-0017).
 - Case B did not run on the process; no passage implies it did (docs/00).
 - The book mentions none of the author's earlier books and copies no text from them (ADR-0005).

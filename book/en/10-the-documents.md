@@ -44,7 +44,7 @@ The kit offers two choices and imposes neither: the architecture and the git str
 
 **The architecture.** FOCUS is the architecture of chapter 7: code organized in vertical slices (chapter 6), every business rule a pure function that returns a Result (chapter 5), and four pieces through which an event flows one way to a new state.
 The kit gives three answers: FOCUS whole; the two principles only, vertical slices and exceptions as values, in whatever structure the stack favors; or neither, the project's own conventions.
-Ninjobs, a thin web app over a backend as a service, chose the two principles.[^ninjobs]
+Ninjobs, a thin web app over a backend as a service, chose the two principles.
 On a repository that already has code, the default is what the code already does.
 docs/01 records the answer, and an ADR records why.
 
@@ -115,7 +115,7 @@ The library's docs/00 lists fines for late returns as open, so a page that touch
 ## What the team gains
 
 The same answer in every session and for every person: a developer, a manager and a fresh agent who ask the loan period read one line in one document.
-On Ninjobs a decision lived in six places that could disagree, and every delivery paid to keep them in step; with one place per fact, a change is written once and every later session reads it.[^ninjobs]
+On Ninjobs a decision lived in six places that could disagree, and every delivery paid to keep them in step; with one place per fact, a change is written once and every later session reads it.
 
 ## Key points
 
@@ -127,4 +127,3 @@ On Ninjobs a decision lived in six places that could disagree, and every deliver
 
 [^nygard-adr]: Michael Nygard, "Documenting Architecture Decisions", Cognitect blog, 2011. <https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions>
 [^agents-md]: AGENTS.md, "AGENTS.md", accessed 2026-09-30. <https://agents.md>
-[^ninjobs]: Ninjobs, the author's product, a private repository: the six places where a decision lived in its OpenSpec era (the documents, the specs, the changes, the ADRs, an outline and the code) are named in its ADR-0022, dated 2026-08-29, paraphrased; its choice of the two principles from its docs/01 and the ADR that records it.

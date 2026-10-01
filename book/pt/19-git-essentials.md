@@ -40,9 +40,9 @@ O histórico é a cadeia de pais, do último commit de volta ao primeiro.
 Para a biblioteca de empréstimos da Parte I ele poderia ficar assim; a saída é uma ilustração, escrita para este capítulo:
 
 ```text
-a41c9e2 Let a member return a copy (return-book)
-7d03b18 Let a librarian lend a copy and refuse when the rules say no (lend-book)
-2f6e5a1 Start: documents and first milestone
+a41c9e2 Permite que um membro devolva um exemplar (devolver-livro)
+7d03b18 Permite que a bibliotecária empreste um exemplar e recusa quando as regras dizem não (emprestar-livro)
+2f6e5a1 Início: documentos e primeiro marco
 ```
 
 Cada linha é uma entrega, e a sua mensagem diz o que um usuário agora consegue fazer, com o slug da entrega no fim (o capítulo 14 dá nome às entregas por slug).

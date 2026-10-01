@@ -79,13 +79,13 @@ O `.1` fecha quando as suas linhas estão `[x]` com a sua prova, e o que ele dei
 
 ## Quando os achados viraram uma entrega
 
-Na Ninjobs, a revisão na abertura ao público devolveu oito achados, com toda a suíte de testes verde.[^ninjobs]
-Consultas levavam centenas de milissegundos, uma vaga de emprego grande teria estourado o tempo limite, e três dos achados eram sobre segurança.[^ninjobs]
+Na Ninjobs, a revisão na abertura ao público devolveu oito achados, com toda a suíte de testes verde.
+Consultas levavam centenas de milissegundos, uma vaga de emprego grande teria estourado o tempo limite, e três dos achados eram sobre segurança.
 Cada entrega tinha passado nos seus próprios testes e na sua própria revisão; só o olhar sobre o todo os viu.
 
 Eu pus os oito em uma entrega em vez de oito linhas.
-A página dela diz, com as suas próprias palavras, que não cabe em uma página e que quebra a regra de propósito, e ela chegou a 879 linhas, a página mais longa do projeto.[^ninjobs]
-As correções se sustentaram: a página mediu a triagem de vagas em cerca de 620 ms no banco de dados de desenvolvimento quando o trabalho começou, e em 94 ms quando terminou.[^ninjobs]
+A página dela diz, com as suas próprias palavras, que não cabe em uma página e que quebra a regra de propósito, e ela chegou a 879 linhas, a página mais longa do projeto.
+As correções se sustentaram: a página mediu a triagem de vagas em cerca de 620 ms no banco de dados de desenvolvimento quando o trabalho começou, e em 94 ms quando terminou.
 Mas quando eu mesmo conferi o resultado, achei falhas que os testes dela não tinham pegado.
 A causa não foi o processo; foi a minha escolha.
 Oito linhas teriam sido oito páginas, cada uma pequena o bastante para ser lida antes de ser construída e conferida depois.
@@ -93,7 +93,7 @@ Oito linhas teriam sido oito páginas, cada uma pequena o bastante para ser lida
 ## O que o time ganha
 
 A revisão de marco pega as falhas que os testes não alcançam, antes dos usuários.
-Na Ninjobs ela achou oito com todos os testes verdes, três delas sobre segurança, no dia em que o produto abriu ao público.[^ninjobs]
+Na Ninjobs ela achou oito com todos os testes verdes, três delas sobre segurança, no dia em que o produto abriu ao público.
 E como cada achado vira uma linha, o time vê o custo das brechas do marco na fila, ao lado de tudo o que planeja, e não em correções que ninguém revisou.
 
 ## Pontos-chave
@@ -107,4 +107,3 @@ E como cada achado vira uma linha, o time vê o custo das brechas do marco na fi
 [^claude-code-review]: Anthropic, "Code Review", documentação do Claude Code, acesso em 2026-09-28. <https://code.claude.com/docs/en/code-review>
 [^codex-review]: OpenAI, "Developer commands", acesso em 2026-09-28. <https://learn.chatgpt.com/docs/developer-commands?surface=cli>
 [^copilot-review]: GitHub, "About GitHub Copilot code review", acesso em 2026-09-28. <https://docs.github.com/en/copilot/concepts/agents/code-review>
-[^ninjobs]: Ninjobs, o produto do autor, um repositório privado, lido pelo autor na página de `work/done/` da entrega que recebeu os oito achados da sua primeira revisão de marco: os achados (o seu conteúdo parafraseado, os achados de segurança deixados de fora), as suas 879 linhas contadas com `wc -l`, a mais longa das suas 93 páginas, e os tempos de triagem como a página os registra, medidos no banco de dados de desenvolvimento em 2026-09-10.

@@ -43,76 +43,76 @@ Então "o que acontece quando o evento X chega?" tem uma resposta, e um teste co
 Leia primeiro a coluna "Proíbe": ela mantém cada peça no seu trabalho.
 Uma tela que decide quem pode pegar emprestado, ou um repositório que decide isso, quebra a tabela, faça o que fizer de certo.
 
-Um evento é o que aconteceu: um toque em "Lend" (Emprestar), ou uma requisição chegando a um servidor.
+Um evento é o que aconteceu: um toque em "Emprestar", ou uma requisição chegando a um servidor.
 Um estado é o que o orquestrador publica depois dele, inteiro: em uma tela, o que a tela renderiza; em um servidor, a resposta à requisição.
 Um repositório chega ao banco por um driver, a biblioteca que fala com o motor, como um cliente de banco ou um ORM; o projeto raramente escreve um.
 
 ## Um evento, um novo estado
 
 Uma bibliotecária empresta um exemplar a um membro.
-O toque em "Lend" é o evento, e a tela que mostra o empréstimo, ou o motivo da recusa, é o novo estado.
+O toque em "Emprestar" é o evento, e a tela que mostra o empréstimo, ou o motivo da recusa, é o novo estado.
 Estes são os passos entre os dois.
 
 1. **A tela dispara o evento.**
-   A tela de empréstimo envia `LendRequested { copyId, memberId }` e não faz mais nada.
+   A tela de empréstimo envia `EmprestimoPedido { exemplarId, membroId }` e não faz mais nada.
 2. **O orquestrador o recebe.**
    Ele confere que o evento traz os dois ids; em um servidor o evento é a requisição, então ler o corpo dela faz parte de recebê-lo.
 3. **Os repositórios buscam.**
-   O orquestrador pede o membro a `findMember` e o exemplar a `findCopy`.
+   O orquestrador pede o membro a `buscarMembro` e o exemplar a `buscarExemplar`.
 4. **O caso de uso decide.**
-   O orquestrador entrega os dois a `lend`, a função pura que devolve um `Loan` com vencimento 21 dias depois, ou a recusa `HasOverdueBooks` ou `MemberSuspended`.
+   O orquestrador entrega os dois a `emprestar`, a função pura que devolve um `Emprestimo` com vencimento 21 dias depois, ou a recusa `TemLivrosEmAtraso` ou `MembroSuspenso`.
 5. **O repositório salva.**
-   O orquestrador pede a `insertLoan` que salve o empréstimo; um índice único sobre o exemplar recusa um segundo empréstimo aberto, e o repositório transforma essa falha na recusa `AlreadyLent`, como o [capítulo 5](05-rules-and-exceptions.md) mostrou.
+   O orquestrador pede a `inserirEmprestimo` que salve o empréstimo; um índice único sobre o exemplar recusa um segundo empréstimo aberto, e o repositório transforma essa falha na recusa `JaEmprestado`, como o [capítulo 5](05-rules-and-exceptions.md) mostrou.
 6. **O orquestrador publica o novo estado.**
-   `Lent` com o empréstimo, `Refused` com a recusa, ou `Failed` com a exceção, e a tela o renderiza: a data de vencimento, "Return your overdue books first." (devolva primeiro seus livros atrasados), ou "Could not reach the library's database. Try again." (não foi possível acessar o banco da biblioteca; tente de novo).
+   `Emprestado` com o empréstimo, `Recusado` com a recusa, ou `Falhou` com a exceção, e a tela o renderiza: a data de vencimento, "Devolva primeiro os seus livros atrasados.", ou "Não foi possível acessar o banco da biblioteca. Tente de novo."
 
-O estado e os repositórios de que o orquestrador precisa são tipos no arquivo dele, `lendEvents.ts`:
+O estado e os repositórios de que o orquestrador precisa são tipos no arquivo dele, `eventosDeEmprestimo.ts`:
 
 ```ts
-type LendRequested = { copyId: string; memberId: string };
+type EmprestimoPedido = { exemplarId: string; membroId: string };
 
-type LendState =
-	| { kind: "Lent"; loan: Loan }
-	| { kind: "Refused"; refusal: LendRefusal | "NotFound" }
-	| { kind: "Failed"; exception: DatabaseFailed };
+type EstadoDoEmprestimo =
+	| { tipo: "Emprestado"; emprestimo: Emprestimo }
+	| { tipo: "Recusado"; recusa: RecusaDeEmprestimo | "NaoEncontrado" }
+	| { tipo: "Falhou"; excecao: BancoDeDadosFalhou };
 
-type LoanRepositories = {
-	findMember(id: string): Result<Member, "NotFound" | DatabaseFailed>;
-	findCopy(id: string): Result<Copy, "NotFound" | DatabaseFailed>;
-	insertLoan(loan: Loan): Result<Loan, "AlreadyLent" | DatabaseFailed>;
+type RepositoriosDeEmprestimo = {
+	buscarMembro(id: string): Result<Membro, "NaoEncontrado" | BancoDeDadosFalhou>;
+	buscarExemplar(id: string): Result<Exemplar, "NaoEncontrado" | BancoDeDadosFalhou>;
+	inserirEmprestimo(emprestimo: Emprestimo): Result<Emprestimo, "JaEmprestado" | BancoDeDadosFalhou>;
 };
 ```
 
 O orquestrador em si são os passos 3 a 6, em ordem, depois que o evento foi recebido e tipado:
 
 ```ts
-function stateOf(error: LendRefusal | "NotFound" | DatabaseFailed): LendState {
-	if (typeof error === "string") return { kind: "Refused", refusal: error };
-	return { kind: "Failed", exception: error };
+function estadoDe(erro: RecusaDeEmprestimo | "NaoEncontrado" | BancoDeDadosFalhou): EstadoDoEmprestimo {
+	if (typeof erro === "string") return { tipo: "Recusado", recusa: erro };
+	return { tipo: "Falhou", excecao: erro };
 }
 
-export function lendRequested(
-	event: LendRequested,
-	today: string,
-	repositories: LoanRepositories,
-): LendState {
-	const member = repositories.findMember(event.memberId);
-	if (!member.ok) return stateOf(member.error);
-	const copy = repositories.findCopy(event.copyId);
-	if (!copy.ok) return stateOf(copy.error);
-	const loan = lend(copy.value, member.value, today);
-	if (!loan.ok) return stateOf(loan.error);
-	const saved = repositories.insertLoan(loan.value);
-	if (!saved.ok) return stateOf(saved.error);
-	return { kind: "Lent", loan: saved.value };
+export function emprestimoPedido(
+	evento: EmprestimoPedido,
+	hoje: string,
+	repositorios: RepositoriosDeEmprestimo,
+): EstadoDoEmprestimo {
+	const membro = repositorios.buscarMembro(evento.membroId);
+	if (!membro.ok) return estadoDe(membro.error);
+	const exemplar = repositorios.buscarExemplar(evento.exemplarId);
+	if (!exemplar.ok) return estadoDe(exemplar.error);
+	const emprestimo = emprestar(exemplar.value, membro.value, hoje);
+	if (!emprestimo.ok) return estadoDe(emprestimo.error);
+	const salvo = repositorios.inserirEmprestimo(emprestimo.value);
+	if (!salvo.ok) return estadoDe(salvo.error);
+	return { tipo: "Emprestado", emprestimo: salvo.value };
 }
 ```
 
 Cada linha ou pergunta a um repositório, ou pergunta ao caso de uso, ou transforma uma resposta no estado; nenhuma decide quem pode pegar emprestado.
-As recusas são strings e a exceção é um objeto com um `code`, então `stateOf` separa um `Refused` de um `Failed` com uma verificação só.
-`today` chega como valor: o código que recebe a requisição lê o relógio uma vez e o repassa, então nem `lendRequested` nem `lend` o leem, e um teste passa a data que quiser.
-`repositories` chega como parâmetro: o servidor passa os reais, ligados ao banco dele, e um teste passa fakes ([capítulo 8](08-testing-each-piece.md)).
-O fluxo nunca volta: `lend` nunca vê um repositório, e a tela nunca vê nada além do estado.
+As recusas são strings e a exceção é um objeto com um `codigo`, então `estadoDe` separa um `Recusado` de um `Falhou` com uma verificação só.
+`hoje` chega como valor: o código que recebe a requisição lê o relógio uma vez e o repassa, então nem `emprestimoPedido` nem `emprestar` o leem, e um teste passa a data que quiser.
+`repositorios` chega como parâmetro: o servidor passa os reais, ligados ao banco dele, e um teste passa fakes ([capítulo 8](08-testing-each-piece.md)).
+O fluxo nunca volta: `emprestar` nunca vê um repositório, e a tela nunca vê nada além do estado.
 
 ## O orquestrador em outros lugares
 
@@ -122,7 +122,7 @@ Em um cliente os repositórios chegam à rede, então o orquestrador espera por 
 
 Uma feature muitas vezes tem os dois: um orquestrador no cliente para a tela e um no servidor para a requisição, cada um com os próprios repositórios.
 Eles compartilham os mesmos casos de uso.
-O servidor impõe `lend`, e o cliente importa `mayBorrow` só para decidir o que mostrar, como deixar "Lend" apagado para um membro com um livro atrasado.
+O servidor impõe `emprestar`, e o cliente importa `podePegarEmprestado` só para decidir o que mostrar, como deixar "Emprestar" apagado para um membro com um livro atrasado.
 A regra é escrita uma vez e testada uma vez, e a cópia da decisão no cliente nunca discorda da do servidor.
 
 ## Quando uma peça se paga
@@ -132,7 +132,7 @@ Um caso de uso existe quando há uma regra, um repositório quando há I/O, um o
 Uma feature que mostra uma lista de livros sem regra nenhuma não tem caso de uso: o orquestrador pergunta ao repositório e publica o que recebeu.
 KISS (mantenha simples), YAGNI (você não vai precisar disso) e DRY (não se repita) ([capítulo 4](04-simplicity.md)) decidem quando uma peça é escrita: quando uma entrega precisa do trabalho dela, e não antes.
 
-Na Ninjobs, eu exigi toda peça em toda feature, formulários triviais incluídos, e mostrar um campo levava oito arquivos.[^ninjobs]
+Na Ninjobs, eu exigi toda peça em toda feature, formulários triviais incluídos, e mostrar um campo levava oito arquivos.
 A culpa foi da exigência, nunca da arquitetura: eu deixei a complexidade crescer e perdi o KISS e o YAGNI pelo caminho ([capítulo 9](09-birth-of-focus-kit.md)).
 As quatro peças são um lugar para cada trabalho, e uma feature com menos trabalhos tem menos peças.
 
@@ -153,4 +153,3 @@ Nenhum estudo mede um time com essas peças contra o mesmo time sem elas, e este
 [^clean-architecture]: Robert C. Martin, "The Clean Architecture", 2012. <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>
 [^bloc]: Bloc, "Bloc State Management Library", documentação, acesso em 2026-09-29. <https://bloclibrary.dev/>
 [^mediatr]: Jimmy Bogard, "MediatR", acesso em 2026-09-29. <https://github.com/jbogard/MediatR>
-[^ninjobs]: Ninjobs, o produto do autor, um repositório privado, lido pelo autor no seu ADR-0022, a decisão de 2026-08-29 que encerrou o primeiro processo dele: oito arquivos para mostrar um campo, porque toda feature tinha de carregar toda peça.

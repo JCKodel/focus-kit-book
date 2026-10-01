@@ -132,7 +132,7 @@ A use case exists when there is a rule, a repository when there is I/O, an orche
 A feature that shows a list of books with no rule has no use case: the orchestrator asks the repository and publishes what it got.
 KISS, YAGNI and DRY ([chapter 4](04-simplicity.md)) decide when a piece is written: when a delivery needs its job, and not before.
 
-On Ninjobs, I required every piece on every feature, trivial forms included, and showing one field took eight files.[^ninjobs]
+On Ninjobs, I required every piece on every feature, trivial forms included, and showing one field took eight files.
 The fault was the requirement, never the architecture: I let complexity grow, and lost KISS and YAGNI on the way ([chapter 9](09-birth-of-focus-kit.md)).
 The four pieces are a place for each job, and a feature with fewer jobs has fewer pieces.
 
@@ -153,4 +153,3 @@ No study measures a team with these pieces against the same team without them, a
 [^clean-architecture]: Robert C. Martin, "The Clean Architecture", 2012. <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>
 [^bloc]: Bloc, "Bloc State Management Library", documentation, accessed 2026-09-29. <https://bloclibrary.dev/>
 [^mediatr]: Jimmy Bogard, "MediatR", accessed 2026-09-29. <https://github.com/jbogard/MediatR>
-[^ninjobs]: Ninjobs, the author's product, a private repository, read by the author in its ADR-0022, the decision of 2026-08-29 that ended its first process: eight files to show one field, because every feature had to carry every piece.

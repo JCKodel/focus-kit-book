@@ -50,7 +50,7 @@ Quando o próprio repositório é entregue a um cliente, ou vai ser público, li
 Uma pasta ignorada continua no disco, então o agente a lê em toda sessão; só o git não a guarda, então faça backup dela em outro lugar.
 Dados pessoais e qualquer coisa sob cláusula de confidencialidade ficam fora do repositório em todo caso, porque o git guarda um arquivo removido no seu histórico.
 
-No Caso A, um projeto para um cliente em uma plataforma low-code, o próprio repositório era o entregável contratado.[^case-a]
+No Caso A, um projeto para um cliente em uma plataforma low-code, o próprio repositório era o entregável contratado.
 A pasta de correspondência dele ficou fora do repositório, e só os fatos de engenharia passaram: uma decisão que o cliente tomou numa mensagem virou uma linha de um documento, nunca a mensagem.
 
 ## As perguntas que o time faz
@@ -79,16 +79,16 @@ Para a biblioteca de empréstimos, escrito para este capítulo:
 
 | Linha          | Espera por                       | Desde |
 |----------------|----------------------------------|-------|
-| overdue-notice | setor de TI: email aos membros   | dia 4 |
+| aviso-de-atraso | setor de TI: email aos membros   | dia 4 |
 ```
 
 A primeira tabela diz quem foi perguntado sobre o quê, e quando respondeu.
 A segunda diz qual linha da fila está bloqueada, por quem, e há quanto tempo, então "quem me deve uma resposta" é uma tabela, e um lembrete a essa pessoa é escrito a partir dela.
 
-O Caso A manteve as duas tabelas: perguntas enviadas, com para quem, sobre o quê e respondida quando; e ainda em aberto, com a linha, o que ela espera e desde quando.[^case-a]
-Vinte perguntas a pessoas de fora do projeto foram registradas ali, e duas ainda estavam sem resposta quando ele fechou.[^case-a]
+O Caso A manteve as duas tabelas: perguntas enviadas, com para quem, sobre o quê e respondida quando; e ainda em aberto, com a linha, o que ela espera e desde quando.
+Vinte perguntas a pessoas de fora do projeto foram registradas ali, e duas ainda estavam sem resposta quando ele fechou.
 O relatório de fim de dia e a estimativa de prazo e risco para o gerente de projeto dizem que foram escritos a partir da fila e das páginas, não de memória.
-A fila deu o ritmo: cerca de nove linhas fechadas e cerca de seis linhas novas abertas por dia, então a lista aberta encolhia cerca de três por dia.[^case-a]
+A fila deu o ritmo: cerca de nove linhas fechadas e cerca de seis linhas novas abertas por dia, então a lista aberta encolhia cerca de três por dia.
 Esse ritmo pôs um corte de escopo diante do gerente de projeto no meio do projeto, como uma decisão para ele tomar.
 
 ## A pessoa é o cérebro
@@ -115,7 +115,7 @@ Quando o gerente quer mudar algo, como uma linha nova na fila, o agente a escrev
 ## O que o time ganha
 
 Um só assistente para engenharia e produto: os mesmos documentos respondem ao "onde fica essa regra" de um desenvolvedor e ao "quem nos deve uma resposta" de um gerente, e ninguém escreve um relatório de andamento à mão.
-No Caso A, vinte perguntas a pessoas de fora foram acompanhadas até as respostas, as duas que ficaram em aberto foram nomeadas no fechamento, e o relatório e a estimativa de risco vieram de uma fila que fechava cerca de nove linhas por dia.[^case-a]
+No Caso A, vinte perguntas a pessoas de fora foram acompanhadas até as respostas, as duas que ficaram em aberto foram nomeadas no fechamento, e o relatório e a estimativa de risco vieram de uma fila que fechava cerca de nove linhas por dia.
 
 ## Pontos-chave
 
@@ -125,4 +125,3 @@ No Caso A, vinte perguntas a pessoas de fora foram acompanhadas até as resposta
 * A resposta do agente parece certa mesmo quando está errada: peça o arquivo por trás dela, e interprete, guie e valide.
 * Um gerente abre o host na raiz do projeto e pergunta em palavras simples; o mesmo arquivo de regras faz o agente ler os documentos primeiro.
 
-[^case-a]: Caso A, um projeto para um cliente em uma plataforma low-code, um repositório privado com a sua correspondência guardada fora dele, contado pelo autor: 20 perguntas registradas a pessoas de fora e 2 sem resposta no fechamento, das duas tabelas do seu registro de trabalho; cerca de 9 linhas fechadas e 6 abertas por dia, das suas 73 linhas concluídas no docs/06 e dos 8 dias de commits no `git log`. O seu dono, o seu cliente e o seu negócio não são revelados.

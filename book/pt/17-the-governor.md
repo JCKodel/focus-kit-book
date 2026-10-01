@@ -7,7 +7,7 @@ Você também consegue listar o que o processo não tem, e dizer o que faz cada 
 
 Um processo cresce um passo razoável de cada vez.
 Uma checagem aqui, um modelo ali, uma revisão antes de cada construção: cada um faz sentido sozinho, e cada um é pago de novo por toda entrega que vem depois, que o roda, o satisfaz e espera por ele.
-Na Ninjobs os passos se acumularam em 29 checagens que nunca pegaram um erro no produto, caras de satisfazer e fáceis de contornar (capítulo 9).[^ninjobs]
+Na Ninjobs os passos se acumularam em 29 checagens que nunca pegaram um erro no produto, caras de satisfazer e fáceis de contornar (capítulo 9).
 Ninguém as acrescentou para atrasar o trabalho; ninguém perguntou o que cada uma tinha pegado.
 
 ## A pergunta
@@ -24,13 +24,13 @@ E o custo que ele precisa superar é pago por toda entrega depois dele.
 
 A pergunta decide o que entra, e decide o que fica.
 
-Na Ninjobs, quando eu recomecei o projeto, as 29 checagens saíram: nenhuma delas conseguia nomear um erro no produto que tivesse pegado.[^ninjobs]
-Duas checagens ficaram no lugar delas, ambas protegendo a promessa de privacidade do produto, onde um vazamento é o erro que o produto não pode se permitir: uma prova do que cada nível de privacidade pode mostrar, e um teste das regras de acesso do banco de dados.[^ninjobs]
+Na Ninjobs, quando eu recomecei o projeto, as 29 checagens saíram: nenhuma delas conseguia nomear um erro no produto que tivesse pegado.
+Duas checagens ficaram no lugar delas, ambas protegendo a promessa de privacidade do produto, onde um vazamento é o erro que o produto não pode se permitir: uma prova do que cada nível de privacidade pode mostrar, e um teste das regras de acesso do banco de dados.
 
 O que entrou depois entrou do mesmo jeito.
 O Supabase, o fornecedor do banco de dados, traz o seu próprio lint (um verificador automático de problemas), e um dos avisos dele estava em um relatório que ninguém abria.
 Ele apontava um índice idêntico a outro que já existia, então toda escrita naquela tabela gravava o mesmo índice duas vezes, e nenhum teste via isso.
-Em 2026-09-02 o lint do fornecedor entrou na verificação, e o índice duplicado foi o erro que ele nomeou.[^ninjobs]
+Em 2026-09-02 o lint do fornecedor entrou na verificação, e o índice duplicado foi o erro que ele nomeou.
 Duas regras vieram com ele: um aviso novo reprova a verificação, e um aviso já decidido vai para uma lista de exceções com o seu motivo.
 Uma entrada nessa lista sem um aviso vivo por trás dela também reprova, porque uma lista com entradas mortas é uma lista que ninguém lê mais: o regulador aplicado à própria lista.
 
@@ -53,8 +53,8 @@ Cada trabalho ainda é feito, por algo que o processo já tem:
 
 A pergunta dá respostas diferentes em projetos diferentes, e deve dar.
 
-O Caso A, um projeto para um cliente em uma plataforma low-code, acrescentou uma quarta marca à sua fila, `[?]`, para uma linha esperando por uma pessoa.[^case-a]
-As três marcas do kit leem `[>]` como "definida e esperando para ser construída", e cinco linhas travadas nas respostas do cliente pareciam trabalho que ninguém tinha começado.[^case-a]
+O Caso A, um projeto para um cliente em uma plataforma low-code, acrescentou uma quarta marca à sua fila, `[?]`, para uma linha esperando por uma pessoa.
+As três marcas do kit leem `[>]` como "definida e esperando para ser construída", e cinco linhas travadas nas respostas do cliente pareciam trabalho que ninguém tinha começado.
 Esse era o erro, e a marca o nomeou.
 
 Este livro considerou a mesma marca para a sua própria fila e a rejeitou.[^adr-0013]
@@ -64,7 +64,7 @@ A mesma marca, a mesma pergunta, e duas respostas, cada uma tirada do histórico
 ## O que o time ganha
 
 Cada passo de um processo é pago por toda entrega, então um passo que não pega nada é um imposto sobre todas elas.
-A Ninjobs chegou à abertura ao público com um processo de seis regras, as que o `SETUP.md` do kit agora lista para todo projeto, e duas checagens, depois de 29 checagens a terem acompanhado por quinze dias que construíram quatro telas.[^ninjobs]
+A Ninjobs chegou à abertura ao público com um processo de seis regras, as que o `SETUP.md` do kit agora lista para todo projeto, e duas checagens, depois de 29 checagens a terem acompanhado por quinze dias que construíram quatro telas.
 O regulador mantém um processo desse tamanho, e deixa um time dizer sim a um passo com o erro que o justifica escrito.
 
 ## Pontos-chave
@@ -75,8 +75,6 @@ O regulador mantém um processo desse tamanho, e deixa um time dizer sim a um pa
 * Cada uma das sete coisas que o processo não tem tem o seu trabalho feito por algo que ele tem: a página, os documentos, as linhas de Comportamento, a pessoa, um agente só, e o próprio regulador.
 * O regulador decide por projeto: o Caso A acrescentou uma marca para linhas esperando por uma pessoa, e este livro, cujas linhas nunca esperam por uma, não.
 
-[^ninjobs]: Ninjobs, o produto do autor, um repositório privado, lido pelo autor no seu ADR-0022, para as 29 checagens, os quinze dias e as quatro telas da era antes da virada e as duas checagens mantidas depois dela, e na emenda de 2026-09-02 e no seu docs/05 §5, para o lint do banco de dados e a sua lista de exceções, parafraseado.
 [^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>
 [^claude-code-subagents]: Anthropic, "Create custom subagents", documentação do Claude Code, acesso em 2026-09-29. <https://code.claude.com/docs/en/sub-agents>
-[^case-a]: Caso A, um projeto para um cliente em uma plataforma low-code, um repositório privado, lido pelo autor no seu docs/05 e nos seus ADRs: a quarta marca e o motivo registrado para ela. O seu dono, o seu cliente e o seu negócio não são revelados.
 [^adr-0013]: ADR-0013 deste livro, "three marks only", 2026-09-24. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/adr/ADR-0013-three-marks.md>

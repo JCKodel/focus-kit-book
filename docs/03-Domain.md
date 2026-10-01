@@ -8,6 +8,7 @@ A new concept enters here first, in both languages.
 |---|---|---|---|
 | Spec-Driven Development (SDD) | Desenvolvimento Guiado por Especificação | `sdd` | Deciding in writing before building, so the written decision guides the agent. |
 | spec | especificação | none | A written, behaviour-oriented description of what the software must do, in natural language, that guides a coding agent (after Böckeler, 2025). |
+| behaviour | comportamento | `**Behaviour.**` / `**Comportamento.**` | What the software does as its user sees it, "in this situation, this happens", never how it is built; the section of a page whose every line becomes a test or a manual check (chapter 3's note box defines it, chapter 14 shows the section). |
 | spec-first | spec-first | none | A spec is written before the task and guides it; kept in English in both editions, with "especificação primeiro" in parentheses on its first use in Portuguese. |
 | spec-anchored | spec-anchored | none | The spec is kept after the task and used to evolve and maintain the feature; Portuguese first use: "ancorado na especificação". |
 | spec-as-source | spec-as-source | none | The spec is the main source over time; a person edits only the spec, never the code; Portuguese first use: "especificação como fonte". |
@@ -80,7 +81,7 @@ A new concept enters here first, in both languages.
 | guided project | projeto guiado | retired | The scheduling app the reader built through the book until `rewrite` (ADR-0017); no chapter names it. |
 | chapter tag | tag do capítulo | retired | The tag on the commit a chapter quoted in the guided project or the fork; the published tags stay, and no chapter cites one (ADR-0017). |
 | brownfield project | projeto brownfield | retired | The frozen open-source fork used for `/analyze` until `rewrite` (ADR-0017). |
-| running example | exemplo condutor | the lending library | The one example the book's code is written on: a lending library with books, copies, members, loans and a librarian; every code example is TypeScript written for the chapter (ADR-0017). Its Portuguese words are fixed: biblioteca de empréstimos, livro, exemplar (copy), membro (member), empréstimo (loan), bibliotecário, data de devolução (due date), prazo de empréstimo (loan period), livros em atraso (overdue books). |
+| running example | exemplo condutor | the lending library | The one example the book's code is written on: a lending library with books, copies, members, loans and a librarian; every code example is TypeScript written for the chapter (ADR-0017). Its Portuguese words are fixed: biblioteca de empréstimos, livro, exemplar (copy), membro (member), empréstimo (loan), bibliotecário, data de devolução (due date), prazo de empréstimo (loan period), livros em atraso (overdue books). The Portuguese edition's code uses them as its names, without accents (`emprestar`, `Emprestimo`, `Exemplar`, `Membro`, `podePegarEmprestado`, `dataDeDevolucao`, `DIAS_DE_EMPRESTIMO`, `RecusaDeEmprestimo` = `TemLivrosEmAtraso` / `JaEmprestado` / `MembroSuspenso`, `BancoDeDadosFalhou`, `buscarMembro`, `buscarExemplar`, `inserirEmprestimo`, `emprestimoPedido`, `EstadoDoEmprestimo` = `Emprestado` / `Recusado` / `Falhou`, `hoje`; slugs `emprestar-livro`, `devolver-livro`, `lista-de-atrasos`), and keeps `Result`, `ok`, `err` and `features/` (docs/04 §Evidence). |
 | feature | feature | `features/<name>/` | One thing the app keeps, or one thing it does that keeps nothing, with every action on it; kept in English in both editions (the Portuguese edition says "feature", never "funcionalidade"). |
 | pure function | função pura | none | A function whose output depends only on its input and that does nothing else: no I/O, no clock, no change to its input; a business rule is written as one. |
 | immutability | imutabilidade | none | Data that is never changed in place; a function returns new data instead of changing what it received. |
@@ -96,7 +97,8 @@ A new concept enters here first, in both languages.
 | team gain | ganho do time | `## What the team gains` / `## O que o time ganha` | The section before the key points that says what a team or a project gains from the chapter, with a number or a sourced claim, or one sentence saying it has none. |
 | key points | pontos-chave | `## Key points` / `## Pontos-chave` | At most five bullets closing every chapter's content. |
 | exercise | exercício | retired | A task on the guided project at the end of a chapter, until `rewrite` (ADR-0017). |
-| source note | nota de fonte | `[^<key>]` | A footnote that gives the reader something to open, or, for a private case, how its numbers were counted; the key is the same in both editions, and the PDF and the EPUB print it once per chapter. |
+| source note | nota de fonte | `[^<key>]` | A footnote that gives the reader something to open (a publication, a tool's documentation, a record of the book's runs); the key is the same in both editions, and the PDF and the EPUB print it once per chapter. A private case has none: the prologue says once that the author counted its numbers (docs/04 §Source notes). |
+| note box | caixa de nota | `> **Note.** ...` / `> **Nota.** ...` | A blockquote opening with a bold word (Note, Caution / Nota, Cuidado) that holds a definition or a warning the reader needs at that point; styled as a box on the site, in the PDF and in the EPUB (docs/04 §Writing the book). |
 | disclosure list | lista de exposição | `FKB_DENYLIST` | The private terms that must never appear in the repository; kept outside it. |
 
 ## Entities and invariants
@@ -106,4 +108,4 @@ A new concept enters here first, in both languages.
 * A chapter is as long as it needs to be to prove the value it opens with: no filler added, no useful content removed to fit a limit.
 * Case A and Case B are never named, dated to a meeting, located, or described by business detail.
 * Ninjobs is named, but only its process artifacts and published numbers appear, paraphrased; never its infrastructure, credentials, users or commercial plans. One exception, approved by the author in `the-governor`: the name of its database vendor, Supabase, where a story needs it; never its servers, projects, schema or configuration.
-* Every number in the book cites where it was measured.
+* Every number in the book says where it was measured: a source note for a publication or a recorded run; for a private case, the prologue's sentence that the author counted it, plus a parenthesis in the text where the method matters.

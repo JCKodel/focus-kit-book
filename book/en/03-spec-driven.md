@@ -15,6 +15,10 @@ Birgitta Böckeler, of Thoughtworks, compared three tools that call themselves s
 A spec, in her definition, is "*a structured, behavior-oriented artifact [...] written in natural language that expresses software functionality and serves as guidance to AI coding agents.*"[^bockeler-2025]
 Spec-Driven Development (SDD) "*means writing a “spec” before writing code with AI (“documentation first”). The spec becomes the source of truth for the human and the AI.*"[^bockeler-2025]
 
+> **Note.** Behaviour, here, is what the software does as its user sees it: in this situation, this happens.
+> "A member with an overdue book is refused, with the message 'Return your overdue books first'" is behaviour; "add a column to the loans table" is not, it is how.
+> Written this way, each line can be checked by a test or by a person, and that is why the page of a focus-kit delivery has a section named Behaviour ([chapter 14](14-propose.md)).
+
 She found three levels, by how long the spec lives and who edits it:
 
 * **spec-first**: a spec is written first and guides the task at hand;
@@ -62,17 +66,17 @@ The three decide the same thing.
 The difference is how many other files say it again: a rule written in 8 places is read 8 times in review, and when it changes, it changes in 8 places, or it disagrees with itself in the ones that were missed.
 Böckeler found the same with Spec Kit: its files "*were repetitive, both with each other, and with the code that already existed*", and "*very verbose and tedious to review.*"[^bockeler-2025]
 
-The single page is not free.
-focus-kit pays for it with documents written once per project and kept up to date, the product, its vocabulary, its decisions and its queue ([chapter 10](10-the-documents.md)), so that a feature needs only what is new about it.
-The trade is to decide once per project, then write one page per feature ([chapter 14](14-propose.md)).
+One page is enough because most of what those files repeat, the product, its vocabulary, its rules and the decisions already taken, is the same for every feature.
+focus-kit writes that part once per project, in documents kept up to date ([chapter 10](10-the-documents.md)), so the page of a feature holds only what is new about it.
+The cost is to write those documents and keep them true; the return is one page per feature, read and reviewed in one sitting, in place of a folder ([chapter 14](14-propose.md)).
 The counts say what each tool writes before the code; they do not say which one builds better software, and one feature on one day is not a benchmark.
 
 ## What the team gains
 
 One page per feature, instead of one folder per feature, is what the team reads, reviews and keeps true.
-On Ninjobs, my own product, fifteen days with OpenSpec produced 37,228 lines of spec for four screens, and none of the core flow existed yet.[^ninjobs]
+On Ninjobs, my own product, fifteen days with OpenSpec produced 37,228 lines of spec for four screens (every line under the tool's folder, counted with `wc -l`), and none of the core flow existed yet.
 The causes were more than the tool, and [chapter 9](09-birth-of-focus-kit.md) tells them; the count is what a spec costs when it becomes the work.
-After the move to one page per delivery, the product opened to the public, and its 93 finished pages held 22,650 lines in all.[^ninjobs]
+After the move to one page per delivery, the product opened to the public, and its 93 finished pages held 22,650 lines in all.
 
 ## Key points
 
@@ -86,4 +90,3 @@ After the move to one page per delivery, the product opened to the public, and i
 [^spec-kit]: GitHub, "Spec Kit", accessed 2026-09-30. <https://github.com/github/spec-kit>
 [^openspec]: Fission AI, "OpenSpec", accessed 2026-09-30. <https://github.com/Fission-AI/OpenSpec>
 [^spec-driven-run]: J.C. Ködel, "One Page at a Time", the record of the run of the three tools on one feature, 2026-09, in the book's repository. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/spec-driven-run>
-[^ninjobs]: Ninjobs, the author's product, a private repository, counted by the author over its history: the fifteen days and the four screens from its ADR-0022, which dropped OpenSpec on 2026-08-29; the 37,228 lines with `wc -l` over every file under `openspec/` up to that day; the 93 finished pages in `work/done/` and their 22,650 lines with `wc -l`, up to 2026-09-23.

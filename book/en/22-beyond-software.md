@@ -51,19 +51,19 @@ Markdown in guide/, and a PDF built from it.
 
 ## Case A's documents
 
-On Case A, a client project on a low-code platform, the handover was a set of deliveries.[^case-a]
+On Case A, a client project on a low-code platform, the handover was a set of deliveries.
 A solution design, an installation guide in three formats, a handover document and a presentation, an evidence pack indexed by the acceptance criteria, a repository readme and a work record each had a queue line and a page, and each went through `/propose` and `/apply` like code.
 The evidence pack shows the Contract as structure: indexed by the acceptance criteria, it lets the client check the delivery criterion by criterion and find the proof of each.
 
 Some deliveries produce nothing but a person's written answer.
 A question delivery's page says what is asked, of whom, and what each possible answer unblocks, and it is done when the answer arrives (chapter 21).
-Of Case A's 73 done lines, 8 were questions to people and about eight were documents.[^case-a]
+Of Case A's 73 done lines, 8 were questions to people and about eight were documents.
 
 ## Data work as deliveries
 
 A database's security rules decide who may read or write which row, and they are work with value like a screen.
-On Ninjobs, six of its 93 finished pages changed only database rules, and nothing else.[^ninjobs]
-One of them was the rule "no writes while a deletion is pending": it was enforced in the database itself, by an access rule, and proven by the project's test of the access rules.[^ninjobs]
+On Ninjobs, six of its 93 finished pages changed only database rules, and nothing else.
+One of them was the rule "no writes while a deletion is pending": it was enforced in the database itself, by an access rule, and proven by the project's test of the access rules.
 The build found that a blanket rule would also block the database's own functions, so the rule became "no write path reachable from the client", and the page recorded why.
 
 A rule in the database holds for every client that will ever talk to it, and its test is the Done when that proves it.
@@ -75,19 +75,19 @@ Its checks are the parity of its two editions, its prose rules and a scan agains
 
 ## Case B, the contrast
 
-Case B is a consultancy's proposal for a client's adoption program, and it did not run on the process.[^case-b]
+Case B is a consultancy's proposal for a client's adoption program, and it did not run on the process.
 An analysis of the proposal was written with one discipline of this book: every number carried its provenance, whether it came from the proposal, a measurement, an estimate or experience.
 It found six faults.
 Among them, the proposal named the wrong tool, a contract risk, and it fixed a scope without fixing how much work that scope covered, which left it open to growth nobody would pay for.
 
 The findings had no queue line and no page to carry them.
-Two days later, the next version of the proposal still held at least one of them.[^case-b]
+Two days later, the next version of the proposal still held at least one of them.
 The analysis was right, and being right was not enough: each finding needed a line, and a page whose Done when said "the next version names the right tool", so that the fault stayed open in plain sight until a person ticked it.
 
 ## What the team gains
 
 One process for every kind of work the team does, so the same queue, the same page and the same review carry code, documents, questions and data rules.
-On Case A, about 16 of its 73 done lines were questions or documents, and on Ninjobs six of 93 pages were database rules, all through the same two commands.[^case-a][^ninjobs]
+On Case A, about 16 of its 73 done lines were questions or documents, and on Ninjobs six of 93 pages were database rules, all through the same two commands.
 
 ## Key points
 
@@ -97,6 +97,3 @@ On Case A, about 16 of its 73 done lines were questions or documents, and on Nin
 * A database rule is a delivery with a test, enforced where every client meets it.
 * A finding with no line gets lost: Case B's analysis was right, and at least one of its faults survived into the next version.
 
-[^case-a]: Case A, a client project on a low-code platform, a private repository, counted by the author in its queue in docs/06 and its pages: 73 done lines, 8 of them question deliveries and about 8 document deliveries, the handover set named here. Its owner, its client and its business are not disclosed.
-[^case-b]: Case B, a consultancy's proposal for a client's adoption program, private files read by the author: three versions of the proposal, a deck, an internal note and an analysis; the proposal did not run on the process. Its owner and its client are not disclosed.
-[^ninjobs]: Ninjobs, the author's product, a private repository, counted by the author in its `work/done/`: 93 finished pages up to 2026-09-23, 6 of them changing only database rules; the pending-deletion rule and its test read in its page.

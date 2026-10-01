@@ -26,7 +26,7 @@ Anthropic's pricing documentation gives the multipliers: a cache write costs 1.2
 ## What a delivery cost on Ninjobs
 
 Ninjobs is my own product, built with the method this book teaches.
-Claude Code keeps a log of every session, with the tokens of every call, and I counted those logs for the 21 days the host still held, from 221 sessions and 18,945 calls.[^ninjobs-tokens]
+Claude Code keeps a log of every session, with the tokens of every call, and I counted those logs for the 21 days the host still held, from 221 sessions and 18,945 calls.
 
 | Kind | Tokens in 21 days | Share |
 |---|---:|---:|
@@ -36,7 +36,7 @@ Claude Code keeps a log of every session, with the tokens of every call, and I c
 | Output | 13,871,893 | 0.3% |
 | All | 4,009,248,425 | 100% |
 
-The project had 93 finished pages, one per delivery, so each number divided by 93 is the cost of one delivery:[^ninjobs-tokens]
+The project had 93 finished pages, one per delivery, so each number divided by 93 is the cost of one delivery:
 
 | Per delivery | Arithmetic | Tokens |
 |---|---|---:|
@@ -52,7 +52,7 @@ The next milestone of the same project, counted the same way, is the comparison 
 ## Why cache reads are counted apart
 
 Each call reads the whole context again, so the cache reads say how much context each call carried.
-On Ninjobs that is about 208 thousand tokens of cached context per call on average (3,940,576,768 / 18,945).[^ninjobs-tokens]
+On Ninjobs that is about 208 thousand tokens of cached context per call on average (3,940,576,768 / 18,945).
 Output says how much the agent wrote; cache reads say how much it had to carry to write it.
 
 Counted together, the two hide each other.
@@ -123,7 +123,7 @@ function countTokens(lines: LogLine[]): Usage {
 }
 ```
 
-Count soon after the milestone closes: the host deletes logs older than its retention period, and on Ninjobs the logs before those 21 days had already gone.[^ninjobs-tokens]
+Count soon after the milestone closes: the host deletes logs older than its retention period, and on Ninjobs the logs before those 21 days had already gone.
 
 Then compare milestones, not vendors.
 The second milestone against the first, on the same project, tells you whether the team's way of working got cheaper or dearer; a vendor's price list tells you the price of a token, and nothing about how many your work needs.
@@ -132,7 +132,7 @@ When a number moves, the columns say why: output up means more was built, cache 
 ## What the team gains
 
 A number per delivery that anyone on the team can repeat from the host's logs, in place of a feeling.
-On Ninjobs it is 43.1 million tokens per delivery, 149 thousand of them written by the agent and 738 thousand without cache reads, over 93 deliveries.[^ninjobs-tokens]
+On Ninjobs it is 43.1 million tokens per delivery, 149 thousand of them written by the agent and 738 thousand without cache reads, over 93 deliveries.
 There is no outside number to set it against, by choice: the team's next milestone is the comparison.
 
 ## Key points
@@ -144,4 +144,3 @@ There is no outside number to set it against, by choice: the team's next milesto
 * Measure tokens per delivery on your own project for one milestone, from the host's logs, and compare milestones, not vendors.
 
 [^anthropic-pricing]: Anthropic, "Pricing", Claude Platform documentation, section "Prompt caching", accessed 2026-09-30. <https://docs.anthropic.com/en/docs/about-claude/pricing>
-[^ninjobs-tokens]: Ninjobs, the author's product: Claude Code's session logs for the project, recounted by the author on 2026-09-29, deduplicated by message id and request id, 2026-08-30 to 2026-09-29 (earlier logs were already purged by the host), against the 93 finished pages of work/done. The count is kept outside the repository.

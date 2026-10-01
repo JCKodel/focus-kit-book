@@ -33,7 +33,7 @@ O time mantém o seu host, o seu editor e o seu quadro.
 ## O que o processo pegou num projeto real
 
 A resposta mais forte para "o que isso teria nos dado?" é um projeto que rodou nele.
-O Caso A, um projeto para um cliente em uma plataforma low-code, rodou no método, e quatro das coisas que o seu processo pegou respondem a essa pergunta.[^case-a]
+O Caso A, um projeto para um cliente em uma plataforma low-code, rodou no método, e quatro das coisas que o seu processo pegou respondem a essa pergunta.
 
 **A base assinada não batia com o que foi construído.**
 O documento que o cliente tinha assinado descrevia outra coisa que não o que tinha sido construído.
@@ -83,7 +83,7 @@ Depois decida com esses números na mesa, e o marco seguinte vira a comparação
 ## A forma de uma proposta
 
 Para levar o método a uma empresa, comece pelos problemas dela, e ligue cada um à parte do método que o responde.
-O Caso B, a proposta de uma consultoria para o programa de adoção de um cliente, tinha uma nota interna que fazia exatamente isso.[^case-b]
+O Caso B, a proposta de uma consultoria para o programa de adoção de um cliente, tinha uma nota interna que fazia exatamente isso.
 Em linhas gerais, e com as minhas palavras, a correspondência era esta:
 
 | O problema do cliente | A parte do método |
@@ -103,7 +103,7 @@ Ela não tinha fila nem página, e o [capítulo 22](22-beyond-software.md) conta
 
 O time inteiro num só processo, em que cada pessoa sabe qual parte é sua e cada decisão está numa página que qualquer um pode ler.
 E um piloto que mede a si mesmo: um marco dá uma contagem de tokens por entrega e uma lista do que foi pego.
-No Caso A o processo pegou quatro problemas fora do código: uma base que não batia com o que foi construído, um pedido impossível, uma falha de permissão numa instalação limpa, e um segredo no pacote.[^case-a]
+No Caso A o processo pegou quatro problemas fora do código: uma base que não batia com o que foi construído, um pedido impossível, uma falha de permissão numa instalação limpa, e um segredo no pacote.
 Não há número de fora contra o qual comparar a adoção; o próprio marco do piloto é a linha de base.
 
 ## Pontos-chave
@@ -114,5 +114,3 @@ Não há número de fora contra o qual comparar a adoção; o próprio marco do 
 * Quem é dono da decisão propõe, a sessão de um desenvolvedor aplica, uma pessoa sempre faz o commit, e o time revisa o marco.
 * Comece com um marco de três a oito linhas, meça os tokens por entrega e o que foi pego, e então decida.
 
-[^case-a]: Caso A, um projeto para um cliente em uma plataforma low-code, um repositório privado, lido pelo autor na sua fila, nas suas páginas e nos seus ADRs: a entrega de pergunta sobre a base assinada, o pedido encerrado sem ser construído, a prova da instalação limpa e as suas três linhas seguintes, e o segredo removido do pacote com a varredura que veio depois. O seu dono, o seu cliente e o seu negócio não são revelados.
-[^case-b]: Caso B, a proposta de uma consultoria para o programa de adoção de um cliente, arquivos privados lidos pelo autor: uma nota interna que liga os problemas do cliente ao método. A proposta não rodou no processo. O seu dono e o seu cliente não são revelados.

@@ -34,7 +34,7 @@ Nos nomes de Meszaros, o banco em memória é um fake e um repositório que resp
 Este livro chama os dois de fakes, porque os dois trocam o I/O por uma segunda implementação que responde, e nenhum deles afirma como o código testado foi escrito.
 
 Um mock afirma isso.
-Um teste que espera que `findMember` seja chamado uma vez com `"m1"`, depois `findCopy` com `"c1"`, repete o código do orquestrador linha por linha, e falha quando você troca a ordem de duas chamadas sem mudar nada que o usuário vê.
+Um teste que espera que `buscarMembro` seja chamado uma vez com `"m1"`, depois `buscarExemplar` com `"e1"`, repete o código do orquestrador linha por linha, e falha quando você troca a ordem de duas chamadas sem mudar nada que o usuário vê.
 Fowler descreve o mesmo custo na seção "Coupling Tests to Implementations" do mesmo artigo.[^fowler-mocks]
 Um fake deixa o teste conferir o que importa, o estado que sai, e deixa o código livre para mudar por dentro.
 
@@ -45,89 +45,88 @@ Só um repositório faz I/O, e só o orquestrador recebe repositórios, então o
 Nada mais é trocado: um caso de uso nunca é falso, porque ele é puro e rápido, e um teste que o troca por um fake não testa nada.
 
 O relógio também é I/O: `new Date()` responde algo diferente a cada chamada.
-Na biblioteca, ele é lido uma vez, onde a requisição chega, e repassado como valor, `today`, então um teste passa `"2026-10-01"` e não precisa de relógio falso nenhum.
+Na biblioteca, ele é lido uma vez, onde a requisição chega, e repassado como valor, `hoje`, então um teste passa `"2026-10-01"` e não precisa de relógio falso nenhum.
 
 ## Uma regra pelos testes dela
 
 A regra: um membro com um livro atrasado não pode pegar outro emprestado.
-Ela mora no caso de uso `lend` do [capítulo 5](05-rules-and-exceptions.md), e cada peça que ela atravessa tem um teste.
+Ela mora no caso de uso `emprestar` do [capítulo 5](05-rules-and-exceptions.md), e cada peça que ela atravessa tem um teste.
 
-**O caso de uso.** `rules.test.ts` chama `lend` com dados:
+**O caso de uso.** `regras.test.ts` chama `emprestar` com dados:
 
 ```ts
-describe("lend", () => {
-	const copy = { id: "c1", bookId: "b1" };
-	const member = { id: "m1", overdue: 0, suspended: false };
+describe("emprestar", () => {
+	const exemplar = { id: "e1", livroId: "l1" };
+	const membro = { id: "m1", emAtraso: 0, suspenso: false };
 
-	it("refuses a member with an overdue book", () => {
-		const result = lend(copy, { ...member, overdue: 1 }, "2026-10-01");
-		expect(result).toEqual({ ok: false, error: "HasOverdueBooks" });
+	it("recusa um membro com um livro atrasado", () => {
+		const resultado = emprestar(exemplar, { ...membro, emAtraso: 1 }, "2026-10-01");
+		expect(resultado).toEqual({ ok: false, error: "TemLivrosEmAtraso" });
 	});
 
-	it("lends for 21 days to a member with nothing overdue", () => {
-		const result = lend(copy, member, "2026-10-01");
-		expect(result.ok && result.value.dueAt).toBe("2026-10-22");
+	it("empresta por 21 dias a um membro sem nada atrasado", () => {
+		const resultado = emprestar(exemplar, membro, "2026-10-01");
+		expect(resultado.ok && resultado.value.devolverEm).toBe("2026-10-22");
 	});
 });
 ```
 
 Sem banco, sem servidor, sem mock: o membro é um objeto, a data é uma string, e a resposta é um valor.
 
-**O repositório.** `repository.server.test.ts` abre o SQLite em memória, roda os mesmos arquivos de migração que a aplicação roda, e chama `insertLoan` duas vezes para o mesmo exemplar.
-A primeira chamada devolve o empréstimo; a segunda devolve a recusa `AlreadyLent`, porque o índice único a recusou.
-Essa é a única parte do empréstimo que só o banco consegue garantir, já que duas bibliotecárias podem apertar "Lend" (Emprestar) no mesmo instante, e ela é testada contra o motor real e o esquema real.
+**O repositório.** `repositorio.server.test.ts` abre o SQLite em memória, roda os mesmos arquivos de migração que a aplicação roda, e chama `inserirEmprestimo` duas vezes para o mesmo exemplar.
+A primeira chamada devolve o empréstimo; a segunda devolve a recusa `JaEmprestado`, porque o índice único a recusou.
+Essa é a única parte do empréstimo que só o banco consegue garantir, já que duas bibliotecárias podem apertar "Emprestar" no mesmo instante, e ela é testada contra o motor real e o esquema real.
 
-**O orquestrador.** `lendEvents.test.ts` passa repositórios falsos a `lendRequested`, o orquestrador do [capítulo 7](07-four-pieces.md):
+**O orquestrador.** `eventosDeEmprestimo.test.ts` passa repositórios falsos a `emprestimoPedido`, o orquestrador do [capítulo 7](07-four-pieces.md):
 
 ```ts
-function unexpected(): never {
-	throw new Error("not called in this test");
+function naoEsperado(): never {
+	throw new Error("não chamado neste teste");
 }
 
-function fake(repositories: Partial<LoanRepositories>): LoanRepositories {
-	const none = { findMember: unexpected, findCopy: unexpected, insertLoan: unexpected };
-	return { ...none, ...repositories };
+function falsos(repositorios: Partial<RepositoriosDeEmprestimo>): RepositoriosDeEmprestimo {
+	const nenhum = { buscarMembro: naoEsperado, buscarExemplar: naoEsperado, inserirEmprestimo: naoEsperado };
+	return { ...nenhum, ...repositorios };
 }
 
-describe("lendRequested", () => {
-	it("refuses a member with an overdue book and saves nothing", () => {
-		const repositories = fake({
-			findMember: () => ok({ id: "m1", overdue: 1, suspended: false }),
-			findCopy: () => ok({ id: "c1", bookId: "b1" }),
+describe("emprestimoPedido", () => {
+	it("recusa um membro com um livro atrasado e não salva nada", () => {
+		const repositorios = falsos({
+			buscarMembro: () => ok({ id: "m1", emAtraso: 1, suspenso: false }),
+			buscarExemplar: () => ok({ id: "e1", livroId: "l1" }),
 		});
-		const state = lendRequested({ copyId: "c1", memberId: "m1" }, "2026-10-01", repositories);
-		expect(state).toEqual({ kind: "Refused", refusal: "HasOverdueBooks" });
+		const estado = emprestimoPedido({ exemplarId: "e1", membroId: "m1" }, "2026-10-01", repositorios);
+		expect(estado).toEqual({ tipo: "Recusado", recusa: "TemLivrosEmAtraso" });
 	});
 });
 ```
 
-`fake` preenche só os repositórios que o teste define, e todos os outros lançam.
-Este teste não define `insertLoan`, então, se o orquestrador tentasse salvar um empréstimo para um membro com um livro atrasado, o fake lançaria e o teste falharia.
+`falsos` preenche só os repositórios que o teste define, e todos os outros lançam.
+Este teste não define `inserirEmprestimo`, então, se o orquestrador tentasse salvar um empréstimo para um membro com um livro atrasado, o fake lançaria e o teste falharia.
 Ele prova a recusa e que nada foi salvo, e não afirma nenhuma ordem de chamadas.
 
-**A tela.** Um teste ponta a ponta, em um navegador, abre a tela de empréstimo, empresta um exemplar a um membro que tem um livro atrasado, e espera ler "Return your overdue books first." (devolva primeiro seus livros atrasados).
+**A tela.** Um teste ponta a ponta, em um navegador, abre a tela de empréstimo, empresta um exemplar a um membro que tem um livro atrasado, e espera ler "Devolva primeiro os seus livros atrasados."
 Ele prova o que nenhum dos outros consegue: que a mensagem chega à tela.
 
 Cada teste prova algo que os outros não provam: o caso de uso, a regra; o repositório, a disputa; o orquestrador, o fluxo; a tela, o que o usuário vê.
 
 ## Nomes de teste são frases
 
-O nome de um teste é o que um revisor lê primeiro, então escreva-o como uma frase da regra.
-Na biblioteca os nomes ficam em inglês, como o código:
+O nome de um teste é o que um revisor lê primeiro, então escreva-o como uma frase da regra:
 
-* `lend refuses a member with an overdue book` (`lend` recusa um membro com um livro atrasado)
-* `lend lends for 21 days to a member with nothing overdue` (`lend` empresta por 21 dias a um membro sem nada atrasado)
-* `insertLoan refuses a second open loan of the same copy` (`insertLoan` recusa um segundo empréstimo aberto do mesmo exemplar)
-* `lendRequested refuses a member with an overdue book and saves nothing` (`lendRequested` recusa um membro com um livro atrasado e não salva nada)
-* `the lending screen tells a member with an overdue book to return it first` (a tela de empréstimo diz a um membro com um livro atrasado que o devolva primeiro)
+* `emprestar recusa um membro com um livro atrasado`
+* `emprestar empresta por 21 dias a um membro sem nada atrasado`
+* `inserirEmprestimo recusa um segundo empréstimo aberto do mesmo exemplar`
+* `emprestimoPedido recusa um membro com um livro atrasado e não salva nada`
+* `a tela de empréstimo diz a um membro com um livro atrasado que o devolva primeiro`
 
 Lidos em sequência, os nomes são as regras do empréstimo, e uma regra que não tem frase entre eles não tem teste.
-Nomes como `test1` ou `lend works` não dizem nada ao leitor e escondem a regra que falta.
+Nomes como `teste1` ou `emprestar funciona` não dizem nada ao leitor e escondem a regra que falta.
 O livro de Kent Beck *Test-Driven Development: By Example* (2002) escreve o teste antes do código, então o teste é a primeira afirmação do que o código tem de fazer; um nome que se lê como frase o mantém uma afirmação que uma pessoa consegue conferir.[^beck-tdd]
 
 ## O que isso dá a um agente
 
-Um agente que muda `lend` roda os testes unitários da fatia e sabe em segundos se quebrou a regra, antes de rodar a verificação inteira do [capítulo 15](15-apply.md).
+Um agente que muda `emprestar` roda os testes unitários da fatia e sabe em segundos se quebrou a regra, antes de rodar a verificação inteira do [capítulo 15](15-apply.md).
 Ele não precisa subir um servidor nem abrir um navegador para descobrir, então roda os testes a cada mudança, e um teste que falha diz a ele qual frase da regra ele quebrou.
 Quando ele acrescenta uma regra, os nomes dos testes que escreveu dizem a você, antes de você ler qualquer código, em que casos ele pensou e em quais não.
 

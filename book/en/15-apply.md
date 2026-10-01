@@ -130,8 +130,8 @@ The last line points to the page in `work/done/`, where the reasoning lives, so 
 
 Nothing ships without a check and a person: verify and the proof check the build, and a person reads the diff before it exists in the history.
 And what diverged from the plan is written where the next person reads it.
-On Ninjobs, the page of the delivery that lets a user delete their account said the table recording a pending deletion would have no write rule at all.[^ninjobs]
-The build found that a table with no write rule accepts writes from nobody, the database's own functions included, so the page recorded the refinement: no write path reachable from the client, which the access-rules test now proves.[^ninjobs]
+On Ninjobs, the page of the delivery that lets a user delete their account said the table recording a pending deletion would have no write rule at all.
+The build found that a table with no write rule accepts writes from nobody, the database's own functions included, so the page recorded the refinement: no write path reachable from the client, which the access-rules test now proves.
 The decision and its reason are on the page that built it, and the commit that shipped it points there.
 
 ## Key points
@@ -142,4 +142,3 @@ The decision and its reason are on the page that built it, and the commit that s
 * Review the staged change against the page, and ask for each correction in the same session.
 * The agent stages and suggests the message; the person reads the diff and commits, so nothing reaches the history unread, and a delivery reverts in one step.
 
-[^ninjobs]: Ninjobs, the author's product, a private repository, read by the author in the `work/done/` page of the account deletion delivery, section "what diverged, and why", paraphrased.

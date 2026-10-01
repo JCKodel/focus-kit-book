@@ -7,14 +7,14 @@ Depois deste capítulo você consegue contar essa história, como era, o que deu
 
 O Ninjobs começou com o OpenSpec, uma das ferramentas de Desenvolvimento Guiado por Especificação do capítulo 3.
 Cada feature era uma mudança, uma pasta com sua proposta, suas especificações, seu design e suas tarefas, e cada decisão era escrita de novo nos documentos do projeto e nos seus ADRs, os registros de decisão de arquitetura, um arquivo por decisão (capítulo 10).
-Antes de uma entrega contar como pronta, ela precisava passar por 29 verificações.[^ninjobs]
+Antes de uma entrega contar como pronta, ela precisava passar por 29 verificações.
 
-Em quinze dias, isso produziu 87 commits, 35 mudanças e 37.228 linhas de especificação, para quatro telas e uma tabela de dados.[^ninjobs]
+Em quinze dias, isso produziu 87 commits, 35 mudanças e 37.228 linhas de especificação, para quatro telas e uma tabela de dados.
 Nada do fluxo central do produto existia ainda.
 
 ## O que deu errado
 
-Quando eu parei, o registro de decisão que escrevi apontava cinco causas, e quatro revisões independentes do projeto tinham chegado ao mesmo diagnóstico.[^ninjobs]
+Quando eu parei, o registro de decisão que escrevi apontava cinco causas, e quatro revisões independentes do projeto tinham chegado ao mesmo diagnóstico.
 
 1. **Retorno visual lento.**
    O app era em Flutter, e quatro mudanças seguidas serviram só para deixar as telas perto do design.
@@ -35,18 +35,18 @@ O custo estava no número de lugares, e não no tamanho de cada arquivo.
 
 ## Para onde foi
 
-Em 2026-08-29 eu recomecei, com um processo pequeno o bastante para caber na cabeça, e mudei o app de Flutter para React.[^ninjobs]
+Em 2026-08-29 eu recomecei, com um processo pequeno o bastante para caber na cabeça, e mudei o app de Flutter para React.
 Uma entrega virou uma página, `work/<slug>.md`.
 Dois comandos faziam o trabalho: o `/propose` conversa comigo e escreve a página, nunca código; o `/apply` constrói a página, faz a verificação e compara a tela com o design.
 A fila virou uma linha por entrega.
 Das 29 verificações, ficaram duas, ambas voltadas para o próprio produto: uma prova do que cada nível de privacidade de um perfil pode mostrar, e um teste das regras de acesso do banco de dados.
 Tudo o que quisesse voltar tinha de responder a uma pergunta, o regulador do capítulo 17: que erro concreto isso teria pegado?
-Uma voltou mais tarde, um lint do banco de dados, porque apontou um: um índice duplicado que nenhum teste tinha notado.[^ninjobs]
+Uma voltou mais tarde, um lint do banco de dados, porque apontou um: um índice duplicado que nenhum teste tinha notado.
 
-O Ninjobs abriu ao público em 2026-09-10, treze dias depois do recomeço, com 91 entregas de uma página concluídas.[^ninjobs]
-As linhas concluídas da sua fila citam 19 pranchas de design, contra quatro telas nos quinze dias anteriores.[^ninjobs]
+O Ninjobs abriu ao público em 2026-09-10, treze dias depois do recomeço, com 91 entregas de uma página concluídas.
+As linhas concluídas da sua fila citam 19 pranchas de design, contra quatro telas nos quinze dias anteriores.
 
-Em 2026-09-21 eu tirei o processo do Ninjobs e o transformei no focus-kit, o kit que este livro ensina.[^ninjobs]
+Em 2026-09-21 eu tirei o processo do Ninjobs e o transformei no focus-kit, o kit que este livro ensina.
 O gatilho foi uma divergência: os próprios arquivos de comando do projeto ainda descreviam passos que o seu documento de processo, o docs/05, já tinha mudado.
 Dali em diante os comandos não guardam nenhum fato do projeto, e leem todos eles no docs/05.
 
@@ -77,7 +77,7 @@ O Flutter conseguiria construir o produto, e o limite era o que o agente tinha v
 
 Um processo que carrega o produto em vez de pesar sobre ele.
 Antes, quinze dias no Ninjobs deram quatro telas e 37.228 linhas de especificação, com cada decisão em seis lugares e 29 verificações que nunca pegaram um erro do produto.
-Depois, treze dias deram a abertura ao público, 91 entregas de uma página cada e 19 pranchas de design entregues, com cada fato num lugar só e duas verificações voltadas para o produto.[^ninjobs]
+Depois, treze dias deram a abertura ao público, 91 entregas de uma página cada e 19 pranchas de design entregues, com cada fato num lugar só e duas verificações voltadas para o produto.
 
 ## Pontos-chave
 
@@ -87,4 +87,3 @@ Depois, treze dias deram a abertura ao público, 91 entregas de uma página cada
 * Cada regra do kit responde a uma falha: seis lugares, uma construção que decide enquanto anda, comandos que divergem, um roteiro que misturava plano e raciocínio, verificações cegas ao produto e verificações que cresceram sem ninguém pedir.
 * Escolha uma stack pelo produto e pelo quanto o agente a conhece.
 
-[^ninjobs]: Ninjobs, o produto do autor, um repositório privado, contado pelo autor no seu histórico. A era do OpenSpec vem do seu ADR-0022, datado de 2026-08-29: quinze dias e 87 commits pelo `git log`, 35 mudanças pelo arquivo do OpenSpec, 37.228 linhas com `wc -l` sobre todos os arquivos de `openspec/` (o ADR arredonda a própria contagem para cerca de 38,8 mil), as quatro telas e a tabela que ele lista, as 29 verificações, e as cinco causas e as quatro revisões independentes que ele cita, parafraseadas. A abertura ao público em 2026-09-10, as 91 entregas concluídas até ali e a mudança para o focus-kit em 2026-09-21 vêm do seu ADR-0026; o prólogo conta 93 páginas concluídas porque conta até 2026-09-23. As 19 pranchas de design contadas nas linhas concluídas da sua fila, o docs/06. As duas verificações mantidas e o lint que voltou vêm do seu docs/05 e dos seus ADRs.

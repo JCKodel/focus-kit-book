@@ -38,10 +38,10 @@ Every file the agent reads and every output it receives takes space in the windo
 A long session puts more in the window, and the model uses what is there less well.
 This loss of accuracy as the context grows is called context rot.
 
-Liu and colleagues gave models a question and many documents, only one of which held the answer, and moved that document through the input.
+Nelson Liu and colleagues, in the paper "Lost in the Middle", published in 2024 in the Transactions of the Association for Computational Linguistics, gave models a question and many documents, only one of which held the answer, and moved that document through the input.
 Accuracy "*is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts, even for explicitly long-context models.*"[^liu-2024]
 
-Chroma measured 18 models as the input grew and found that "*model performance varies significantly as input length changes, even on simple tasks*", and that "*their performance grows increasingly unreliable as input length grows.*"[^chroma-2025]
+Chroma, the company behind an open-source search database for AI applications, measured 18 models as the input grew, in a 2025 report, and found that "*model performance varies significantly as input length changes, even on simple tasks*", and that "*their performance grows increasingly unreliable as input length grows.*"[^chroma-2025]
 
 Anthropic describes the same effect in every model: "*as the number of tokens in the context window increases, the model's ability to accurately recall information from that context decreases.*"[^anthropic-context-2025]
 It calls context "*a finite resource with diminishing marginal returns.*"[^anthropic-context-2025]
@@ -92,15 +92,19 @@ In focus-kit, `/propose` writes that page ([chapter 14](14-propose.md)) and `/ap
 Decisions survive the session.
 What the team decided is in files that every session loads whole, near the start of the window, so it cannot fall into the middle of a long conversation or out of a summary.
 A person who joins the project reads the same files the agent reads, and gets the same answer.
+
+The same holds for the work itself.
+In focus-kit every delivery has a page that records why it was made, what "done" meant, and, once built, what was done and how; the page is committed with the code it describes ([chapter 14](14-propose.md)).
+Everything the project did, and how, is written and versioned next to the code, so someone new to the project, a developer or a manager, asks the agent a question about it and gets an answer read from those pages, not from a colleague's memory.
 There is no measure of this gain in this book; the evidence is the loss it avoids, which the studies above measured.
 
 ## Key points
 
 * The model remembers nothing between calls: the host sends the whole conversation every time, and a fresh session starts empty.
 * The context window is everything the model sees in one call: the host's instructions, the rules file, the files read, tool output and the conversation so far, measured in tokens, up to a limit.
-* More context means less accuracy: information in the middle of a long input is used worst, and reliability falls as the input grows, even on simple tasks.
-* Compaction replaces the conversation with a summary, and a detail that mattered can be lost.
+* More context means less accuracy: information in the middle of a long input is used worst, reliability falls as the input grows, and compaction replaces the conversation with a summary that can drop a detail that mattered.
 * Keep decisions in files read at the start of every session, and give each delivery a fresh session, with deciding apart from building.
+* Every delivery's page, why, what "done" meant and what was done, is versioned with its code, so anyone new asks the agent about the project and gets an answer read from the pages.
 
 [^messages-api]: Anthropic, "Using the Messages API", accessed 2026-09-25. <https://platform.claude.com/docs/en/build-with-claude/working-with-messages>
 [^liu-2024]: Liu et al., "Lost in the Middle: How Language Models Use Long Contexts", 2024. <https://arxiv.org/abs/2307.03172>

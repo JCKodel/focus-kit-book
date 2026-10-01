@@ -38,10 +38,10 @@ Cada arquivo que o agente lê e cada saída que ele recebe ocupam espaço na jan
 Uma sessão longa põe mais coisa na janela, e o modelo usa pior o que está lá.
 Essa perda de precisão conforme o contexto cresce se chama degradação de contexto.
 
-Liu e colegas deram aos modelos uma pergunta e muitos documentos, só um dos quais tinha a resposta, e moveram esse documento ao longo da entrada.
+Nelson Liu e colegas, no artigo "Lost in the Middle" (perdido no meio), publicado em 2024 na Transactions of the Association for Computational Linguistics, deram aos modelos uma pergunta e muitos documentos, só um dos quais tinha a resposta, e moveram esse documento ao longo da entrada.
 A precisão "*costuma ser maior quando a informação relevante aparece no início ou no fim do contexto de entrada, e cai de forma significativa quando os modelos precisam acessar informação relevante no meio de contextos longos, mesmo em modelos feitos explicitamente para contextos longos.*"[^liu-2024]
 
-A Chroma mediu 18 modelos conforme a entrada crescia e descobriu que "*o desempenho do modelo varia de forma significativa conforme o tamanho da entrada muda, mesmo em tarefas simples*", e que "*seu desempenho fica cada vez menos confiável conforme a entrada cresce.*"[^chroma-2025]
+A Chroma, a empresa por trás de um banco de dados de busca de código aberto para aplicações de IA, mediu 18 modelos conforme a entrada crescia, num relatório de 2025, e descobriu que "*o desempenho do modelo varia de forma significativa conforme o tamanho da entrada muda, mesmo em tarefas simples*", e que "*seu desempenho fica cada vez menos confiável conforme a entrada cresce.*"[^chroma-2025]
 
 A Anthropic descreve o mesmo efeito em todos os modelos: "*conforme o número de tokens na janela de contexto aumenta, a capacidade do modelo de recuperar com precisão informações desse contexto diminui.*"[^anthropic-context-2025]
 Ela chama o contexto de "*um recurso finito com retornos marginais decrescentes.*"[^anthropic-context-2025]
@@ -92,15 +92,19 @@ No focus-kit, o `/propose` escreve essa página ([capítulo 14](14-propose.md)) 
 As decisões sobrevivem à sessão.
 O que o time decidiu está em arquivos que toda sessão carrega inteiros, perto do início da janela, então não pode cair no meio de uma conversa longa nem ficar de fora de um resumo.
 Uma pessoa que entra no projeto lê os mesmos arquivos que o agente lê, e recebe a mesma resposta.
+
+O mesmo vale para o trabalho em si.
+No focus-kit, toda entrega tem uma página que registra por que ela foi feita, o que "pronto" queria dizer e, depois de construída, o que foi feito e como; a página é commitada junto com o código que ela descreve ([capítulo 14](14-propose.md)).
+Tudo o que o projeto fez, e como, está escrito e versionado ao lado do código, então alguém novo no projeto, desenvolvedor ou gestor, faz uma pergunta sobre ele ao agente e recebe uma resposta lida dessas páginas, e não da memória de um colega.
 Não há medida desse ganho neste livro; a evidência é a perda que ele evita, que os estudos acima mediram.
 
 ## Pontos-chave
 
 * O modelo não se lembra de nada entre chamadas: o host envia a conversa inteira toda vez, e uma sessão nova começa vazia.
 * A janela de contexto é tudo o que o modelo vê numa chamada: as instruções do host, o arquivo de regras, os arquivos lidos, a saída das ferramentas e a conversa até aqui, medida em tokens, até um limite.
-* Mais contexto significa menos precisão: a informação no meio de uma entrada longa é a mais mal usada, e a confiabilidade cai conforme a entrada cresce, mesmo em tarefas simples.
-* A compactação substitui a conversa por um resumo, e um detalhe que importava pode se perder.
+* Mais contexto significa menos precisão: a informação no meio de uma entrada longa é a mais mal usada, a confiabilidade cai conforme a entrada cresce, e a compactação substitui a conversa por um resumo que pode descartar um detalhe que importava.
 * Guarde as decisões em arquivos lidos no início de toda sessão, e dê a cada entrega uma sessão nova, com o decidir separado do construir.
+* A página de toda entrega, o porquê, o que "pronto" queria dizer e o que foi feito, é versionada com o código dela, então quem chega pergunta ao agente sobre o projeto e recebe uma resposta lida das páginas.
 
 [^messages-api]: Anthropic, "Using the Messages API", acesso em 2026-09-25. <https://platform.claude.com/docs/en/build-with-claude/working-with-messages>
 [^liu-2024]: Liu et al., "Lost in the Middle: How Language Models Use Long Contexts", 2024. <https://arxiv.org/abs/2307.03172>

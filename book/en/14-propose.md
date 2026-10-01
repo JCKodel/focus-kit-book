@@ -99,7 +99,7 @@ You do not edit the page by hand (chapter 10): the agent knows which document ow
 
 The order is the cheap one.
 A hole found on the page costs one turn; found after `/apply`, it costs another `/apply`, the most expensive command, which builds, tests and proves again.
-On Ninjobs, the page of the delivery that computes a candidate's matching score found, while it was being written, that a candidate's approximate age already leaked at the first privacy level through the dates of their experience; it became a line for a later delivery, and no code was written past it.[^ninjobs]
+On Ninjobs, the page of the delivery that computes a candidate's matching score found, while it was being written, that a candidate's approximate age already leaked at the first privacy level through the dates of their experience; it became a line for a later delivery, and no code was written past it.
 
 Hosts have their own way to plan before editing; in Claude Code it is plan mode, where "*Claude reads files and proposes a plan but makes no edits until you approve*".[^claude-code-plan-mode]
 Plan mode works inside one session, for the change at hand.
@@ -109,14 +109,14 @@ Use plan mode inside a session if it helps you; the page is what outlives the se
 ## When it does not fit
 
 A scope that does not fit one page is two deliveries: `/propose` says so, proposes the split and writes only the first page, and the second becomes a line in the queue, where it belongs.
-On Ninjobs the queue's single line for a job posting became six deliveries in one `/propose`: the posting, its employer, its tags, its offer, its benefits and languages, and its life cycle; the page of the first said it was step one of six.[^ninjobs]
+On Ninjobs the queue's single line for a job posting became six deliveries in one `/propose`: the posting, its employer, its tags, its offer, its benefits and languages, and its life cycle; the page of the first said it was step one of six.
 Each of the six was reviewed on its own page and built in its own session.
 
 ## What the team gains
 
 The page is the review surface of the team.
 A developer, a manager or the client reads one page in the language of docs/03 and knows what is about to be built, what is not, and what "done" will mean, before a line of code exists.
-On Case A, the same page format carried questions to the client and documents for handover, so one review skill served every kind of work (chapter 22).[^case-a]
+On Case A, the same page format carried questions to the client and documents for handover, so one review skill served every kind of work (chapter 22).
 And when the build ends, the same page records what happened, so the history of a decision is one file, named by its slug, in every project the team runs.
 
 ## Key points
@@ -127,6 +127,4 @@ And when the build ends, the same page records what happened, so the history of 
 * Read the page before `/apply` and cover each hole by asking the agent, never by hand: a hole on the page costs a turn, after `/apply` it costs another `/apply`.
 * The page is the team's review surface, for code and for anything else that fits a page.
 
-[^ninjobs]: Ninjobs, the author's product, a private repository, read by the author in its `work/done/` pages: the matching-score page for the hole it found, and the job-posting page for the split into six deliveries on 2026-09-03.
-[^case-a]: Case A, a client project on a low-code platform, a private repository, read by the author in its queue and pages: 8 question deliveries and the document deliveries of its handover. Its owner, its client and its business are not disclosed.
 [^claude-code-plan-mode]: Anthropic, "Common workflows", Claude Code documentation, section "Plan before editing", accessed 2026-09-28. <https://code.claude.com/docs/en/common-workflows#plan-before-editing>

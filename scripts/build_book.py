@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-"""Build the PDF and the EPUB of both editions into output/, with pandoc and weasyprint.
+"""Build the PDF and the EPUB of both editions into output/, with pandoc, weasyprint and pypdf.
 
+The PDF opens on the edition's cover, book/assets/cover-<edition>.pdf (A5, one page), prepended with pypdf;
+the EPUB carries book/assets/cover-<edition>.png as its cover image.
 Prints the path of each file it writes.
 An error prints as `file:line: book: message`, or `Makefile:1: book: message` when it names no file, and exits 1.
 """
@@ -19,6 +21,7 @@ from markdown import front_matter, mask
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "output"
 PANDOC = ROOT / "pandoc"
+ASSETS = ROOT / "book" / "assets"
 EDITIONS = {
     "en": {"lang": "en", "name": "one-page-at-a-time"},
     "pt": {"lang": "pt-BR", "name": "uma-pagina-de-cada-vez"},
@@ -276,13 +279,16 @@ def build(edition, site, work):
     # The return arrow of a note comes with U+FE0E, which no font of the book has.
     text = notes_at_chapter_end(page.read_text(encoding="utf-8")).replace("\ufe0e", "")
     page.write_text(text, encoding="utf-8")
+    body = work / "body.pdf"
+    run(["weasyprint", "--base-url", str(ROOT / "book" / edition) + "/", str(page), str(body)], places)
     pdf = OUTPUT / f"{settings['name']}.pdf"
-    run(["weasyprint", "--base-url", str(ROOT / "book" / edition) + "/", str(page), str(pdf)], places)
+    with_cover(edition, body, pdf)
 
     epub = OUTPUT / f"{settings['name']}.epub"
     run(
         ["pandoc", *inputs, *common, "-t", "epub3",
          "--css", str(PANDOC / "epub.css"),
+         "--epub-cover-image", str(cover(edition, "png")),
          "-M", f"title={title}", "-M", f"subtitle={subtitle}",
          "-M", f"author={author}", "-M", f"rights={rights}",
          "-o", str(epub)],
@@ -291,11 +297,38 @@ def build(edition, site, work):
     return [pdf, epub]
 
 
+def cover(edition, suffix):
+    """The edition's cover, book/assets/cover-<edition>.<suffix>; a missing one is a finding at its own path."""
+    path = ASSETS / f"cover-{edition}.{suffix}"
+    if not path.is_file():
+        raise Failed(f"{path.relative_to(ROOT)}:1: book: cover not found")
+    return path
+
+
+def with_cover(edition, body, pdf):
+    """Write pdf as the cover's one page followed by every page of body, keeping body's outline."""
+    from pypdf import PdfReader, PdfWriter
+
+    front = PdfReader(str(cover(edition, "pdf")))
+    if len(front.pages) != 1:
+        raise Failed(f"{cover(edition, 'pdf').relative_to(ROOT)}:1: book: the cover must be one page, not {len(front.pages)}")
+    writer = PdfWriter()
+    writer.append(front, import_outline=False)
+    writer.append(PdfReader(str(body)))
+    with open(pdf, "wb") as out:
+        writer.write(out)
+
+
 def main():
     for tool in ("pandoc", "weasyprint"):
         if shutil.which(tool) is None:
             print(f"Makefile:1: book: {tool} not found; install it (see README)")
             return 1
+    try:
+        import pypdf  # noqa: F401
+    except ImportError:
+        print("Makefile:1: book: pypdf not found; install it (see README)")
+        return 1
     try:
         site = site_values()
         OUTPUT.mkdir(exist_ok=True)

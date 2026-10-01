@@ -12,7 +12,8 @@ Typing is fast.
 Deciding and checking are slow.
 When only the writing speeds up, the result is more code waiting for a decision or a review.
 
-In early 2025, METR ran a randomized controlled trial with 16 experienced open-source developers on 246 real tasks, in mature projects they had worked on for 5 years on average.[^metr-2025]
+METR, Model Evaluation and Threat Research, is a research organization that evaluates frontier AI models to inform the public about their capabilities and risks.
+In early 2025 it ran a randomized controlled trial, the design medicine uses to test a treatment, with 16 experienced open-source developers on 246 real tasks, in mature projects they had worked on for 5 years on average.[^metr-2025]
 Each task was randomly assigned to allow or forbid AI tools.
 Before starting, the developers forecast that AI would cut their completion time by 24%.
 After the study, they estimated it had cut the time by 20%.
@@ -20,7 +21,8 @@ Measured, AI increased their completion time by 19%.
 They were slower, and they believed they were faster.
 
 A survey of teams points the same way.
-The 2024 DORA report estimated that for every 25% increase in AI adoption, delivery throughput fell 1.5% and delivery stability fell 7.2%.[^dora-2024]
+DORA, DevOps Research and Assessment, is the research program, now part of Google Cloud, that surveys software teams every year and publishes the State of DevOps report.
+Its 2024 report estimated that for every 25% increase in AI adoption, delivery throughput fell 1.5% and delivery stability fell 7.2%.[^dora-2024]
 Its authors point to the basics of delivery, small batches and solid testing, and suspect that changes grow larger when AI lets people produce more code in the same time.[^dora-2024]
 
 ## What goes wrong without a process

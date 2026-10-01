@@ -10,7 +10,7 @@ One Markdown file per chapter per edition, built into a bilingual website by MkD
 |---|---|---|
 | Source | Markdown, one sentence per line | Diffs show sentences; the two editions compare line by line. |
 | Website | MkDocs Material with the static i18n plugin | Bilingual navigation, search, light and dark themes. Chosen over a GitHub wiki (ADR-0001) and over Quarto (ADR-0002). |
-| PDF and EPUB | pandoc and weasyprint, run by `scripts/build_book.py`; fonts from `pandoc/fonts/` | A pipeline the author already runs for books. The PDF is A5 in Merriweather, Google Sans and Iosevka Term, loaded from the repository so any machine sets the same pages; the EPUB carries no fonts, so the reader's device chooses. |
+| PDF and EPUB | pandoc, weasyprint and pypdf, run by `scripts/build_book.py`; fonts from `pandoc/fonts/`; covers from `book/assets/` | A pipeline the author already runs for books. The PDF is A5 in Merriweather, Google Sans and Iosevka Term, loaded from the repository so any machine sets the same pages, and opens on the edition's cover, a one-page A5 PDF that pypdf prepends (weasyprint cannot place a PDF); the EPUB carries no fonts, so the reader's device chooses, and takes the cover as a PNG through pandoc. |
 | Diagrams | SVG written by hand, one per edition, in `book/assets/` | No tool to install, and the site, the PDF and the EPUB show SVG as they are; Mermaid would bring mermaid-cli and a browser back into the build (ADR-0002, amendment of `how-agents-see`). |
 | Automation | GitHub Actions, one workflow with three jobs | `verify` on every push; `pages` after it on `main`; `release` after it on a `v*` tag, with pandoc 3.11 and WeasyPrint 69.0 as the local build (ADR-0014). |
 | Scripts | Make, and Python 3 for checks | Nothing to install beyond what the build already needs. |
@@ -22,22 +22,22 @@ FOCUS does not apply: there is no product code, only content and a few build scr
 ```
 book/en/NN-<slug>.md     English edition, the source (A1-<slug>.md for appendices)
 book/pt/NN-<slug>.md     Portuguese edition, same file names
-book/assets/             images shared by both editions, diagrams one per edition (NN-<what>.<edition>.svg); screenshots one for both (NN-<what>.png); site.css (the draft mark in the navigation, a border and a width for PNGs, notes at 66%, italic, links, quotations and code upright)
+book/assets/             images shared by both editions, diagrams one per edition (NN-<what>.<edition>.svg); screenshots one for both (NN-<what>.png); the covers, cover-<edition>.pdf (A5, one page, the PDF's first page), cover-<edition>.png (the EPUB's cover image) and cover-<edition>.af (their source, Affinity); site.css (the draft mark in the navigation, a border and a width for PNGs, the note box, notes at 66%, italic, links, quotations and code upright)
 overrides/main.html      theme override: the draft banner
 scripts/build.py         strict site build, warnings as findings (rule "build")
 scripts/check_parity.py  the two editions: same chapters, heading levels and status, and the same note keys, each cited as many times (rule "parity")
 scripts/check_em_dash.py no em dash in any text file but the evidence of the runs, work/done/*-run/ (rule "em-dash")
 scripts/check_prose.py   the prose rules of docs/04 in both editions and both READMEs (rule "prose")
 scripts/check_links.py   every external URL in both editions, both READMEs and mkdocs.yml still answers (rule "links")
-scripts/build_book.py    PDF and EPUB of both editions into output/ (rule "book")
+scripts/build_book.py    PDF (cover first) and EPUB (cover image) of both editions into output/ (rule "book")
 scripts/check_disclosure.py no term of the disclosure list in a file path, a text file or a commit message; --staged and --message for the hooks (rule "disclosure"; ADR-0012)
 .githooks/pre-commit     check_disclosure.py --staged: the staged paths and their staged text; POSIX sh, executable
 .githooks/commit-msg     check_disclosure.py --message: the commit message, without git's # lines and the diff below the scissors line of commit -v
 scripts/patterns.py      compile_entry: the entry syntax (plain or re:) shared by the prose and disclosure checks
 scripts/markdown.py      front_matter: the fields and the body, shared by parity and the book build; mask: front matter, code and HTML comments as spaces, shared by the prose and link checks
 scripts/repo_files.py    the files the checks read: tracked, plus untracked and not ignored
-pandoc/pdf.css           the PDF: A5, margins, page numbers, the fonts by @font-face, a wrapped code line starting at the margin, a border and a width for PNGs, notes at 66%, italic, links, quotations and code upright
-pandoc/epub.css          the EPUB: no @font-face; a wrapped code line starts at the margin; a border and a width for PNGs; notes at 66%, italic, links, quotations and code upright
+pandoc/pdf.css           the PDF: A5, margins, page numbers, the fonts by @font-face, a wrapped code line starting at the margin, a border and a width for PNGs, the note box, notes at 66%, italic, links, quotations and code upright
+pandoc/epub.css          the EPUB: no @font-face; a wrapped code line starts at the margin; a border and a width for PNGs; the note box; notes at 66%, italic, links, quotations and code upright
 pandoc/fonts/            Merriweather (4 styles), Google Sans (variable), Iosevka Term Regular; <Family>-OFL.txt each
 .github/workflows/verify.yml  jobs verify (make verify on every push, the full history, the list from the secret DISCLOSURE_DENYLIST), pages (main only) and release (v* tags only), each after verify
 mkdocs.yml               the site: MkDocs Material, i18n in folder structure, footnotes, no nav: key
@@ -59,7 +59,7 @@ __pycache__/             written by Python when a check imports a module of scri
 | `make serve` | `mkdocs serve`, at `http://127.0.0.1:8000/`, which redirects to `/focus-kit-book/` (the path of `site_url`); Portuguese under `pt/`. |
 | `make build` | `scripts/build.py`: `mkdocs build --strict` into `site/`. |
 | `make verify` | build, then parity, then em dash, then prose, then links, then disclosure (files and every commit message, as `make scan`); stops at the first failing group. The link check needs the network: offline it is skipped locally and fails in Actions (`CI` set). |
-| `make book` | `scripts/build_book.py`: for each edition, a PDF and an EPUB in `output/` (`one-page-at-a-time.*`, `uma-pagina-de-cada-vez.*`), then their paths. Needs pandoc and weasyprint; not part of `make verify`. Each file: title page, rights page, table of contents, chapters in `NN-` order, appendices in `A<n>-` order; a draft carries its banner, notes end their chapter, one per key, every mention showing its number; a heading's id drops its accents, as MkDocs does, so a link to `NN-<slug>.md#<anchor>` resolves on the site and in the book. Title and subtitle come from `book/<edition>/index.md`, author, rights and banner from `mkdocs.yml`. |
+| `make book` | `scripts/build_book.py`: for each edition, a PDF and an EPUB in `output/` (`one-page-at-a-time.*`, `uma-pagina-de-cada-vez.*`), then their paths. Needs pandoc, weasyprint and pypdf; not part of `make verify`. Each file: the edition's cover (the PDF's first page, prepended by pypdf from `book/assets/cover-<edition>.pdf`; the EPUB's cover image from `cover-<edition>.png`), title page, rights page, table of contents, chapters in `NN-` order, appendices in `A<n>-` order; a draft carries its banner, notes end their chapter, one per key, every mention showing its number; a heading's id drops its accents, as MkDocs does, so a link to `NN-<slug>.md#<anchor>` resolves on the site and in the book. Title and subtitle come from `book/<edition>/index.md`, author, rights and banner from `mkdocs.yml`. |
 | `make hooks` | `git config core.hooksPath .githooks`, once per clone: the pre-commit hook refuses a commit whose staged paths or staged text match the list, the commit-msg hook one whose message does. Both refuse every commit when the list is missing. A clean commit prints nothing; `git commit --no-verify` skips them, and `make scan` then finds the commit. |
 | `make scan` | the disclosure scan alone: the files, then the message of every commit in the history (`<sha, 12 chars>:<line>: disclosure: commit message matches list entry <n>`, line 1 the subject); with a list and without `CI`, it also fails while the hooks are off (`Makefile:1: disclosure: hooks are off; run make hooks`). The list is `FKB_DENYLIST`, or `~/.config/focus-kit-book/denylist.txt`; one entry per line, `#` comments, `re:<pattern>` for a regular expression. Without a list it is skipped locally and fails in Actions (`CI` set). A finding names the file, the line and the entry's number in the list, never the term; a matched part of a path prints as `***`. |
 
@@ -81,7 +81,7 @@ Every check prints `file:line: rule: message` and exits non-zero.
 `make verify` runs them all and stops at the first failing group.
 The site build runs with `--strict`, so a broken link or a missing page fails the build.
 MkDocs has its own message format, so `scripts/build.py` rewrites each warning as `file:line: build: message`: the doc file MkDocs names, at the line of the broken link, or line 1 when there is none; a warning that names no file points to `mkdocs.yml:1`.
-`scripts/build_book.py` does the same for pandoc and weasyprint: a message that names a chapter prints as `book/<edition>/<file>:<line>: book: message`, at the chapter's own line; any other as `Makefile:1: book: message`. A failure is one such line and exit 1; a warning is printed and the build goes on. A missing pandoc or weasyprint prints `Makefile:1: book: <tool> not found; install it (see README)`.
+`scripts/build_book.py` does the same for pandoc and weasyprint: a message that names a chapter prints as `book/<edition>/<file>:<line>: book: message`, at the chapter's own line; any other as `Makefile:1: book: message`. A failure is one such line and exit 1; a warning is printed and the build goes on. A missing pandoc, weasyprint or pypdf prints `Makefile:1: book: <tool> not found; install it (see README)`; a missing cover, or one with more than one page, prints a finding at the cover's own path.
 
 ## Environments
 

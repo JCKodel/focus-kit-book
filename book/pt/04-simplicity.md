@@ -16,21 +16,23 @@ Ele escreve a camada, a opção e a terceira cópia em segundos, cada uma plaus�
 
 ## KISS: mantenha simples
 
-"Keep it simple, stupid" (mantenha simples, estúpido) é atribuído a Kelly Johnson, o engenheiro que liderou a Skunk Works da Lockheed, a equipe que projetou o U-2 e o SR-71; o relato mais comum liga a frase a aviões que um mecânico comum precisava consertar em campo com ferramentas comuns.
-A regra é sobre a pessoa que vem depois: o projeto tem que ser simples o bastante para ela, sob pressão, sem o autor na sala.
+"Keep it simple, stupid" (mantenha simples, estúpido) é atribuído a Kelly Johnson, o engenheiro aeronáutico que liderou a Skunk Works da Lockheed, a equipe que projetou o U-2 e o SR-71, dois aviões espiões da Guerra Fria.
+O relato mais comum é que Johnson entregou aos seus engenheiros um punhado de ferramentas comuns e fixou a regra: o avião que eles projetassem tinha de poder ser consertado em campo, por um mecânico mediano em condições de combate, com aquelas ferramentas e nada mais.
+A regra é sobre a pessoa que vem depois: o projeto tem que ser simples o bastante para ela, sob pressão, sem o autor na sala, porque uma coisa simples é uma coisa que se entende e se conserta.
 
 No código, a pessoa que vem depois é um colega, um agente em uma sessão nova, ou você daqui a seis meses.
 KISS pede a forma mais simples que faz o trabalho: uma função antes de uma classe, um valor antes de uma configuração, um arquivo antes de três.
 Os exemplos de código deste livro foram escritos para ele, em TypeScript, curtos o bastante para caber na cabeça; as ideias valem em qualquer linguagem.
+Nesta edição, os nomes que o código inventa, de funções, tipos e variáveis, estão em português, sem acentos, como é costume em identificadores; as palavras da própria linguagem, como `function` e `return`, e os nomes das bibliotecas usadas ficam como são.
 A data de devolução de um empréstimo na biblioteca de empréstimos, o exemplo da Parte I, é 21 dias depois do empréstimo:
 
 ```ts
-const LOAN_DAYS = 21;
+const DIAS_DE_EMPRESTIMO = 21;
 
-function dueDate(today: string): string {
-	const due = new Date(today);
-	due.setUTCDate(due.getUTCDate() + LOAN_DAYS);
-	return due.toISOString().slice(0, 10);
+function dataDeDevolucao(hoje: string): string {
+	const devolucao = new Date(hoje);
+	devolucao.setUTCDate(devolucao.getUTCDate() + DIAS_DE_EMPRESTIMO);
+	return devolucao.toISOString().slice(0, 10);
 }
 ```
 
@@ -56,17 +58,17 @@ Até a feature presumida que se mostra certa paga o atraso e a carga.
 Suponha que alguém espere que a biblioteca empreste por prazos diferentes a tipos diferentes de membro, e escreva isso agora:
 
 ```ts
-type MemberCategory = "adult" | "child" | "researcher";
+type CategoriaDeMembro = "adulto" | "crianca" | "pesquisador";
 
-type LoanPolicy = {
-	daysFor(category: MemberCategory): number;
-	renewals(category: MemberCategory): number;
+type PoliticaDeEmprestimo = {
+	diasPara(categoria: CategoriaDeMembro): number;
+	renovacoes(categoria: CategoriaDeMembro): number;
 };
 ```
 
 O documento de produto não nomeia nenhuma categoria e nenhuma renovação.
-Todo leitor de `lend` agora precisa aprender uma política que a biblioteca não tem, todo teste precisa passar uma, e quando as categorias chegarem, não serão estas três.
-`LOAN_DAYS = 21` é a regra inteira até que uma entrega peça mais.
+Todo leitor de `emprestar` agora precisa aprender uma política que a biblioteca não tem, todo teste precisa passar uma, e quando as categorias chegarem, não serão estas três.
+`DIAS_DE_EMPRESTIMO = 21` é a regra inteira até que uma entrega peça mais.
 
 Fowler traça o limite no mesmo artigo: YAGNI "*só se aplica a capacidades construídas no software para sustentar uma feature presumida, não se aplica ao esforço de deixar o software mais fácil de modificar*".[^fowler-yagni]
 Um teste, um nome claro, uma regra tirada de uma tela para uma função própria: isso é qualidade interna, e YAGNI nunca argumenta contra ela.
@@ -79,11 +81,11 @@ A unidade é o conhecimento.
 Duas linhas idênticas podem ser dois conhecimentos, e um conhecimento pode estar escrito em duas linhas que não se parecem em nada.
 
 "Um empréstimo dura 21 dias" é um conhecimento.
-Escrito como `21` em `dueDate` e de novo como "Due in 21 days" na tela de empréstimo, ele está em dois lugares, e no dia em que a biblioteca passar para 14 dias um deles vai ser esquecido.
-A tela importa `LOAN_DAYS`, e o conhecimento mora em um lugar só.
+Escrito como `21` em `dataDeDevolucao` e de novo como "Devolução em 21 dias" na tela de empréstimo, ele está em dois lugares, e no dia em que a biblioteca passar para 14 dias um deles vai ser esquecido.
+A tela importa `DIAS_DE_EMPRESTIMO`, e o conhecimento mora em um lugar só.
 
 "O nome de um membro não pode ser vazio" e "o título de um livro não pode ser vazio" são dois conhecimentos que por acaso se leem igual hoje.
-Junte os dois em uma regra `nonEmpty` compartilhada por membros e livros, e no dia em que um título puder ser vazio para um manuscrito sem título, a mudança chega aos membros também.
+Junte os dois em uma regra `naoVazio` compartilhada por membros e livros, e no dia em que um título puder ser vazio para um manuscrito sem título, a mudança chega aos membros também.
 
 David Parnas deu a razão em 1972, antes de o nome existir: decomponha um sistema por "*uma lista de decisões de projeto difíceis ou de decisões de projeto que provavelmente vão mudar*", de modo que "*cada módulo seja então projetado para esconder uma dessas decisões dos outros*".[^parnas-1972]
 Uma decisão escondida em um módulo muda em um módulo.
@@ -101,13 +103,13 @@ Uma cópia não é prova de que uma versão compartilhada seja necessária: é u
 Duas cópias são o erro que já aconteceu, e DRY pede um lugar só.
 Nomear a primeira cópia torna o movimento verificável: quem revisa abre as duas e vê que são o mesmo conhecimento, que é o teste de Metz.
 
-Na biblioteca de empréstimos, `Result`, o tipo que carrega um valor ou o que o impediu (capítulo 5), aparece primeiro dentro da feature de empréstimos, como o tipo de retorno de `lend` em `features/loans/rules.ts`.
+Na biblioteca de empréstimos, `Result`, o tipo que carrega um valor ou o que o impediu (capítulo 5), aparece primeiro dentro da feature de empréstimos, como o tipo de retorno de `emprestar` em `features/emprestimos/regras.ts`.
 Ele fica lá enquanto tem um usuário.
 Depois, uma entrega de membros precisa de uma regra que pode recusar, e `Result` seria escrito uma segunda vez; essa entrega o move para `src/lib/result.ts`, a pasta do código que não pertence a nenhuma feature (capítulo 6), e diz isso:
 
 ```ts
-// First use: features/loans/rules.ts (lend).
-// Second use: features/members/rules.ts (register).
+// Primeiro uso: features/emprestimos/regras.ts (emprestar).
+// Segundo uso: features/membros/regras.ts (cadastrar).
 export type Result<T, E> = { ok: true; value: T } | { ok: false; error: E };
 ```
 
@@ -126,15 +128,20 @@ Os três princípios se aplicam a ele sem mudança.
 Um passo entra no processo quando nomeia o erro concreto que teria pegado, e sai quando não nomeia nenhum.
 O capítulo 17, o regulador, transforma isso na pergunta que todo passo do processo precisa responder.
 
+> **Cuidado.** Um agente escreve mais do que código nessa velocidade: escreve também scripts, verificações, regras e passos, cada um plausível, e um processo cresce como o código cresce, uma adição razoável por vez.
+> Enquanto este livro era escrito, o agente propôs que todo marco terminasse com um passo de revisão, uma boa ideia; a revisão achou erros, que abriram um marco de correções, cuja própria revisão abriu um segundo, e um terceiro estava a caminho quando eu o interrompi.
+> O que eu devia estar fazendo era ler os capítulos e dizer o que mudar.
+> Por conta própria, o agente tinha entrado numa espiral de verificações que verificavam verificações, e a pergunta acima é o que a interrompe: que erro concreto este passo teria pegado?
+
 ## O que o time ganha
 
 Menos para ler, menos para revisar e menos para manter verdadeiro.
 Cada arquivo, opção e verificação que não é escrito é um que nenhuma pessoa revisa, nenhum agente carrega em uma sessão, e nenhuma entrega precisa satisfazer.
 
 Na Ninjobs, o meu próprio produto, eu deixei a complexidade crescer antes de o processo dela mudar.
-Uma entrega tinha que passar por 29 verificações, e nenhuma delas jamais tinha pegado um erro no produto: eram caras de satisfazer e fáceis de contornar.[^ninjobs]
-Uma decisão morava em seis lugares que podiam discordar: os documentos, as especificações, as mudanças, os ADRs, um roteiro e o código.[^ninjobs]
-E porque eu exigia a forma completa, em camadas, da arquitetura em toda feature, formulários triviais incluídos, mostrar um campo em uma tela levava oito arquivos.[^ninjobs]
+Uma entrega tinha que passar por 29 verificações, e nenhuma delas jamais tinha pegado um erro no produto: eram caras de satisfazer e fáceis de contornar.
+Uma decisão morava em seis lugares que podiam discordar: os documentos, as especificações, as mudanças, os ADRs, um roteiro e o código.
+E porque eu exigia a forma completa, em camadas, da arquitetura em toda feature, formulários triviais incluídos, mostrar um campo em uma tela levava oito arquivos.
 A culpa não era da arquitetura; KISS e YAGNI se perderam, uma adição razoável por vez.
 O processo que o substituiu manteve duas verificações, cada uma ligada a um erro que ela pega, e um lugar por fato (capítulo 9).
 
@@ -152,4 +159,3 @@ O processo que o substituiu manteve duas verificações, cada uma ligada a um er
 [^pragmatic-programmer]: Andrew Hunt e David Thomas, "The Pragmatic Programmer", Addison-Wesley, 1999; edição de 20 anos, 2019.
 [^parnas-1972]: D. L. Parnas, "On the Criteria To Be Used in Decomposing Systems into Modules", Communications of the ACM 15(12), 1972. <https://doi.org/10.1145/361598.361623>
 [^metz-wrong-abstraction]: Sandi Metz, "The Wrong Abstraction", 2016-01-20, acesso em 2026-09-30. <https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction>
-[^ninjobs]: Ninjobs, o produto do autor, um repositório privado, lido pelo autor no seu ADR-0022 de 2026-08-29, que encerrou o primeiro processo dele: as 29 verificações que nunca tinham pegado um erro do produto, os seis lugares onde uma decisão podia discordar e os oito arquivos para mostrar um campo são as causas registradas nesse próprio ADR, parafraseadas; as duas verificações mantidas no processo que o substituiu foram contadas pelo autor.

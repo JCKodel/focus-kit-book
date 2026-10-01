@@ -86,7 +86,11 @@ Martin Fowler named the practice of handing it in from outside in 2004: after lo
 Mark Seemann added where the real parts are assembled: in one place, "*as close as possible to the application's entry point*", which he called the composition root.[^seemann-composition-root]
 
 Injected everywhere, dependencies become their own layer of ceremony: an interface for every class, a container, a parameter nobody varies.
-This book draws a narrower line: a piece receives a dependency as a parameter only where its test passes a second implementation.
+The .NET world shows the habit at its fullest: an interface for everything, `IMemberService` in front of `MemberService`, and a registration in a container for each pair, usually defended in the name of SOLID.
+The habit solves a real problem in an SDK, whose callers need to replace parts they do not own, and is ceremony inside an application, where each of those interfaces has one implementation for good.
+DRY (chapter 4) already gives the rule: something with no reason to exist does not exist.
+If in an application only the repositories have two implementations, the real one and the fake the tests pass, then only the repositories get an interface, or a parameter; a use case that will always be the one concrete function gets neither.
+This book draws that narrower line: a piece receives a dependency as a parameter only where its test passes a second implementation.
 That second implementation is a fake: a repository that answers what the test sets, or an in-memory database with the real tables.
 
 The orchestrator of the loans slice receives its repositories:

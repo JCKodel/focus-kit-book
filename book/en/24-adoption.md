@@ -33,7 +33,7 @@ The team keeps its host, its editor and its board.
 ## What the process caught on a real project
 
 The strongest answer to "what would this have given us?" is a project that ran on it.
-Case A, a client project on a low-code platform, ran on the method, and four of the things its process caught answer that question.[^case-a]
+Case A, a client project on a low-code platform, ran on the method, and four of the things its process caught answer that question.
 
 **The signed baseline did not match the build.**
 The document the client had signed described something other than what had been built.
@@ -83,7 +83,7 @@ Then decide with those numbers on the table, and the next milestone becomes the 
 ## The shape of a pitch
 
 To take the method to a company, start from its problems, and map each one to the part of the method that answers it.
-Case B, a consultancy's proposal for a client's adoption program, had an internal note that did exactly that.[^case-b]
+Case B, a consultancy's proposal for a client's adoption program, had an internal note that did exactly that.
 In outline, and in my words, the mapping was this:
 
 | The client's problem | The part of the method |
@@ -103,7 +103,7 @@ It had no queue and no page, and [chapter 22](22-beyond-software.md) tells what 
 
 The whole team on one process, where each person knows which part is theirs and every decision is on a page anyone can read.
 And a pilot that measures itself: one milestone gives a token count per delivery and a list of what was caught.
-On Case A the process caught four problems outside the code: a baseline that did not match the build, an impossible request, a permission failure on a clean install, and a secret in the package.[^case-a]
+On Case A the process caught four problems outside the code: a baseline that did not match the build, an impossible request, a permission failure on a clean install, and a secret in the package.
 There is no outside number to compare adoption against; the pilot's own milestone is the baseline.
 
 ## Key points
@@ -114,5 +114,3 @@ There is no outside number to compare adoption against; the pilot's own mileston
 * Whoever owns the decision proposes, a developer's session applies, a person always commits, and the team reviews the milestone.
 * Start with one milestone of three to eight lines, measure tokens per delivery and what was caught, then decide.
 
-[^case-a]: Case A, a client project on a low-code platform, a private repository, read by the author in its queue, its pages and its ADRs: the question delivery on the signed baseline, the request closed without being built, the clean-install proof and its three follow-up lines, and the secret scrubbed from the package with the scan that followed. Its owner, its client and its business are not disclosed.
-[^case-b]: Case B, a consultancy's proposal for a client's adoption program, private files read by the author: an internal note that maps the client's problems to the method. The proposal did not run on the process. Its owner and its client are not disclosed.

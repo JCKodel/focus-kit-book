@@ -14,6 +14,15 @@
   max-width: 280px;
 }
 
+/* A note box is a blockquote (`> **Note.** ...`), the one box syntax the site, the PDF and the EPUB all render. */
+.md-typeset blockquote {
+  border-left: 3px solid var(--md-primary-fg-color);
+  background: var(--md-code-bg-color);
+  color: var(--md-default-fg-color);
+  padding: 0.6em 1em;
+  margin: 1em 0;
+}
+
 /* Source notes: 66% of the body text and in italic; a link, a quotation (italic in the source) and code stay upright. */
 .md-typeset .footnote {
   font-size: 0.66em;

@@ -26,7 +26,7 @@ A documentação de preços da Anthropic dá os multiplicadores: uma escrita no 
 ## O que uma entrega custou no Ninjobs
 
 O Ninjobs é o meu próprio produto, construído com o método que este livro ensina.
-O Claude Code guarda um log de cada sessão, com os tokens de cada chamada, e eu contei esses logs nos 21 dias que o host ainda guardava, de 221 sessões e 18.945 chamadas.[^ninjobs-tokens]
+O Claude Code guarda um log de cada sessão, com os tokens de cada chamada, e eu contei esses logs nos 21 dias que o host ainda guardava, de 221 sessões e 18.945 chamadas.
 
 | Tipo | Tokens em 21 dias | Parcela |
 |---|---:|---:|
@@ -36,7 +36,7 @@ O Claude Code guarda um log de cada sessão, com os tokens de cada chamada, e eu
 | Saída | 13.871.893 | 0,3% |
 | Todos | 4.009.248.425 | 100% |
 
-O projeto tinha 93 páginas concluídas, uma por entrega, então cada número dividido por 93 é o custo de uma entrega:[^ninjobs-tokens]
+O projeto tinha 93 páginas concluídas, uma por entrega, então cada número dividido por 93 é o custo de uma entrega:
 
 | Por entrega | Conta | Tokens |
 |---|---|---:|
@@ -52,7 +52,7 @@ O marco seguinte do mesmo projeto, contado do mesmo jeito, é a comparação que
 ## Por que as leituras do cache são contadas à parte
 
 Cada chamada lê o contexto inteiro de novo, então as leituras do cache dizem quanto contexto cada chamada carregou.
-No Ninjobs, isso dá em média uns 208 mil tokens de contexto em cache por chamada (3.940.576.768 / 18.945).[^ninjobs-tokens]
+No Ninjobs, isso dá em média uns 208 mil tokens de contexto em cache por chamada (3.940.576.768 / 18.945).
 A saída diz quanto o agente escreveu; as leituras do cache dizem quanto ele teve de carregar para escrever.
 
 Contadas juntas, uma esconde a outra.
@@ -95,35 +95,37 @@ Nos logs do Claude Code, uma linha por evento, a mesma chamada pode aparecer em 
 A contagem é uma função pura ([capítulo 5](05-rules-and-exceptions.md)), escrita para este capítulo:
 
 ```ts
-type Usage = {
+type Uso = {
 	input_tokens: number;
 	cache_creation_input_tokens: number;
 	cache_read_input_tokens: number;
 	output_tokens: number;
 };
 
-type LogLine = { requestId?: string; message?: { id?: string; usage?: Usage } };
+type LinhaDeLog = { requestId?: string; message?: { id?: string; usage?: Uso } };
 
-function countTokens(lines: LogLine[]): Usage {
-	const total: Usage = {
+function contarTokens(linhas: LinhaDeLog[]): Uso {
+	const total: Uso = {
 		input_tokens: 0,
 		cache_creation_input_tokens: 0,
 		cache_read_input_tokens: 0,
 		output_tokens: 0,
 	};
-	const seen = new Set<string>();
-	for (const line of lines) {
-		const usage = line.message?.usage;
-		const key = `${line.message?.id}:${line.requestId}`;
-		if (!usage || seen.has(key)) continue;
-		seen.add(key);
-		for (const kind of Object.keys(total) as (keyof Usage)[]) total[kind] += usage[kind] ?? 0;
+	const vistos = new Set<string>();
+	for (const linha of linhas) {
+		const uso = linha.message?.usage;
+		const chave = `${linha.message?.id}:${linha.requestId}`;
+		if (!uso || vistos.has(chave)) continue;
+		vistos.add(chave);
+		for (const tipo of Object.keys(total) as (keyof Uso)[]) total[tipo] += uso[tipo] ?? 0;
 	}
 	return total;
 }
 ```
 
-Conte logo depois que o marco fecha: o host apaga os logs mais antigos que o seu prazo de retenção, e no Ninjobs os logs de antes daqueles 21 dias já tinham sumido.[^ninjobs-tokens]
+Os nomes dos campos, como `input_tokens` e `requestId`, são os do próprio log, e por isso ficam em inglês.
+
+Conte logo depois que o marco fecha: o host apaga os logs mais antigos que o seu prazo de retenção, e no Ninjobs os logs de antes daqueles 21 dias já tinham sumido.
 
 Depois compare marcos, não fornecedores.
 O segundo marco contra o primeiro, no mesmo projeto, diz se o jeito de o time trabalhar ficou mais barato ou mais caro; a tabela de preços de um fornecedor diz o preço de um token, e nada sobre quantos o seu trabalho precisa.
@@ -132,7 +134,7 @@ Quando um número muda, as colunas dizem por quê: saída maior quer dizer que m
 ## O que o time ganha
 
 Um número por entrega que qualquer pessoa do time consegue repetir a partir dos logs do host, no lugar de uma sensação.
-No Ninjobs ele é de 43,1 milhões de tokens por entrega, 149 mil deles escritos pelo agente e 738 mil sem as leituras do cache, em 93 entregas.[^ninjobs-tokens]
+No Ninjobs ele é de 43,1 milhões de tokens por entrega, 149 mil deles escritos pelo agente e 738 mil sem as leituras do cache, em 93 entregas.
 Não há número de fora para comparar com ele, por escolha: o próximo marco do time é a comparação.
 
 ## Pontos-chave
@@ -144,4 +146,3 @@ Não há número de fora para comparar com ele, por escolha: o próximo marco do
 * Meça os tokens por entrega no seu próprio projeto durante um marco, a partir dos logs do host, e compare marcos, não fornecedores.
 
 [^anthropic-pricing]: Anthropic, "Pricing", documentação da Claude Platform, seção "Prompt caching", acesso em 2026-09-30. <https://docs.anthropic.com/en/docs/about-claude/pricing>
-[^ninjobs-tokens]: Ninjobs, o produto do autor: os logs de sessão do Claude Code para o projeto, recontados pelo autor em 2026-09-29, sem duplicatas por id de mensagem e id de requisição, de 2026-08-30 a 2026-09-29 (os logs anteriores já tinham sido apagados pelo host), contra as 93 páginas concluídas de work/done. A contagem fica fora do repositório.

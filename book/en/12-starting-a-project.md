@@ -40,7 +40,7 @@ A stack that cannot deliver that is out, however well the agent knows it.
 A model writes best what it saw most while it was trained, and the nearest public measure of that is how many people write a language in the open.
 By GitHub's count, TypeScript became the most used language on GitHub in August 2025, with 2,636,006 monthly contributors, ahead of Python and JavaScript.[^octoverse]
 The count is of people and says nothing about lines of code, so read it as a ranking and never as a size.
-On Ninjobs the same agent kept missing the design in Flutter, where it had few examples of a customised design system to learn from, and got it right in React ([chapter 9](09-birth-of-focus-kit.md)).[^ninjobs]
+On Ninjobs the same agent kept missing the design in Flutter, where it had few examples of a customised design system to learn from, and got it right in React ([chapter 9](09-birth-of-focus-kit.md)).
 
 **Does the stack check itself?**
 A compiler that rejects a wrong type and tests that run in seconds tell the agent it made a mistake before you have to.
@@ -158,5 +158,4 @@ There is no number for this gain: this book has no count of projects started wit
 * Review before you commit, against your answers and against the code, and ask the agent for every fix: its text reads as right even when it is wrong.
 
 [^octoverse]: GitHub, "Octoverse: A new developer joins GitHub every second as AI leads TypeScript to #1", 2025, the latest report on 2026-09-28: monthly contributors on GitHub, August 2025. <https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/>
-[^ninjobs]: Ninjobs, the author's product, a private repository: its ADR-0022, which names slow visual feedback in Flutter and few training examples for a customised Material 3 among the causes of dropping that stack, paraphrased.
 [^strangler-fig]: Martin Fowler, "Strangler Fig", 2024. <https://martinfowler.com/bliki/StranglerFigApplication.html>

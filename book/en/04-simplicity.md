@@ -16,8 +16,9 @@ It writes the layer, the option and the third copy in seconds, each one plausibl
 
 ## KISS: keep it simple
 
-"Keep it simple, stupid" is credited to Kelly Johnson, the engineer who led Lockheed's Skunk Works, the team that designed the U-2 and the SR-71; the usual account ties it to aircraft that an ordinary mechanic had to repair in the field with ordinary tools.
-The rule is about the person who comes next: the design must be simple enough for them, under pressure, without its author in the room.
+"Keep it simple, stupid" is credited to Kelly Johnson, the aircraft engineer who led Lockheed's Skunk Works, the team that designed the U-2 and the SR-71, two spy planes of the Cold War.
+The usual account is that Johnson handed his engineers a handful of ordinary tools and set the rule: the aircraft they designed had to be repairable in the field, by an average mechanic under combat conditions, with those tools and nothing more.
+The rule is about the person who comes next: the design must be simple enough for them, under pressure, without its author in the room, because a thing that is simple is a thing that can be understood and fixed.
 
 In code, the person who comes next is a colleague, an agent in a fresh session, or you in six months.
 KISS asks for the plainest form that does the job: a function before a class, a value before a configuration, one file before three.
@@ -126,15 +127,20 @@ The three principles apply to it unchanged.
 A step enters the process when it names the concrete error it would have caught, and leaves when it names none.
 Chapter 17, the governor, turns this into the question every step of the process must answer.
 
+> **Caution.** An agent writes more than code at this speed: it also writes scripts, checks, rules and steps, each one plausible, and a process grows the way code does, one reasonable addition at a time.
+> While this book was being written, the agent proposed that every milestone end with a review step, a good idea; the review found errors, which opened a milestone of fixes, whose own review opened a second, and a third was on its way when I stopped it.
+> What I should have been doing was reading the chapters and saying what to change.
+> On its own, the agent had entered a spiral of checks that checked checks, and the question above is what stops it: which concrete error would this step have caught?
+
 ## What the team gains
 
 Less to read, less to review and less to keep true.
 Every file, option and check that is not written is one that no person reviews, no agent loads into a session, and no delivery has to satisfy.
 
 On Ninjobs, my own product, I let complexity grow before its process changed.
-A delivery had to pass 29 checks, and none of them had ever caught an error in the product: they were costly to satisfy and cheap to get around.[^ninjobs]
-A decision lived in six places that could disagree: the documents, the specs, the changes, the ADRs, an outline and the code.[^ninjobs]
-And because I required the full layered form of the architecture on every feature, trivial forms included, showing one field on a screen took eight files.[^ninjobs]
+A delivery had to pass 29 checks, and none of them had ever caught an error in the product: they were costly to satisfy and cheap to get around.
+A decision lived in six places that could disagree: the documents, the specs, the changes, the ADRs, an outline and the code.
+And because I required the full layered form of the architecture on every feature, trivial forms included, showing one field on a screen took eight files.
 The architecture was not at fault; KISS and YAGNI were lost, one reasonable addition at a time.
 The process that replaced it kept two checks, each tied to an error it catches, and one place per fact (chapter 9).
 
@@ -152,4 +158,3 @@ The process that replaced it kept two checks, each tied to an error it catches, 
 [^pragmatic-programmer]: Andrew Hunt and David Thomas, "The Pragmatic Programmer", Addison-Wesley, 1999; 20th anniversary edition, 2019.
 [^parnas-1972]: D. L. Parnas, "On the Criteria To Be Used in Decomposing Systems into Modules", Communications of the ACM 15(12), 1972. <https://doi.org/10.1145/361598.361623>
 [^metz-wrong-abstraction]: Sandi Metz, "The Wrong Abstraction", 2016-01-20, accessed 2026-09-30. <https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction>
-[^ninjobs]: Ninjobs, the author's product, a private repository, read by the author in its ADR-0022 of 2026-08-29, which ended its first process: the 29 checks that had never caught a product error, the six places where a decision could disagree, and the eight files to show one field are that ADR's own causes, paraphrased; the two checks kept in the process that replaced it are counted by the author.

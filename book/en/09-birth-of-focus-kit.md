@@ -7,14 +7,14 @@ After this chapter you can tell that story, how it was, what went wrong and wher
 
 Ninjobs started with OpenSpec, one of the Spec-Driven Development tools of chapter 3.
 Every feature was a change, a folder with its proposal, its specs, its design and its tasks, and every decision was written again in the project's documents and in its ADRs, the architecture decision records, one file per decision (chapter 10).
-Before a delivery counted as done, it had to pass 29 checks.[^ninjobs]
+Before a delivery counted as done, it had to pass 29 checks.
 
-In fifteen days that produced 87 commits, 35 changes and 37,228 lines of spec, for four screens and one table of data.[^ninjobs]
+In fifteen days that produced 87 commits, 35 changes and 37,228 lines of spec, for four screens and one table of data.
 None of the product's core flow existed yet.
 
 ## What went wrong
 
-When I stopped, the decision record I wrote named five causes, and four independent reviews of the project had reached the same diagnosis.[^ninjobs]
+When I stopped, the decision record I wrote named five causes, and four independent reviews of the project had reached the same diagnosis.
 
 1. **Slow visual feedback.**
    The app was in Flutter, and four changes in a row went only to getting the screens close to the design.
@@ -35,18 +35,18 @@ The cost was the number of places, not the size of each file.
 
 ## Where it went
 
-On 2026-08-29 I started over, with a process small enough to hold in my head, and moved the app from Flutter to React.[^ninjobs]
+On 2026-08-29 I started over, with a process small enough to hold in my head, and moved the app from Flutter to React.
 One delivery became one page, `work/<slug>.md`.
 Two commands did the work: `/propose` talks with me and writes the page, never code; `/apply` builds the page, verifies it and compares the screen against the design.
 The queue became one line per delivery.
 Of the 29 checks, two stayed, both aimed at the product itself: a proof of what each privacy level of a profile may show, and a test of the database's access rules.
 Anything that wanted to come back had to answer one question, the governor of chapter 17: which concrete error would it have caught?
-One did come back later, a lint of the database, because it named one: a duplicate index that no test had noticed.[^ninjobs]
+One did come back later, a lint of the database, because it named one: a duplicate index that no test had noticed.
 
-Ninjobs opened to the public on 2026-09-10, thirteen days after the restart, with 91 one-page deliveries done.[^ninjobs]
-Its finished queue lines cite 19 design boards, against four screens in the fifteen days before.[^ninjobs]
+Ninjobs opened to the public on 2026-09-10, thirteen days after the restart, with 91 one-page deliveries done.
+Its finished queue lines cite 19 design boards, against four screens in the fifteen days before.
 
-On 2026-09-21 I pulled the process out of Ninjobs into focus-kit, the kit this book teaches.[^ninjobs]
+On 2026-09-21 I pulled the process out of Ninjobs into focus-kit, the kit this book teaches.
 The trigger was a drift: the project's own command files still described steps its process document, docs/05, had already changed.
 From then on the commands hold no fact of the project, and read every one of them in docs/05.
 
@@ -77,7 +77,7 @@ Flutter could build the product, and what the agent had seen in training was the
 
 A process that carries a product instead of weighing on it.
 Before, fifteen days on Ninjobs gave four screens and 37,228 lines of spec, with every decision in six places and 29 checks that never caught a product error.
-After, thirteen days gave the public opening, 91 deliveries of one page each and 19 design boards delivered, with each fact in one place and two checks aimed at the product.[^ninjobs]
+After, thirteen days gave the public opening, 91 deliveries of one page each and 19 design boards delivered, with each fact in one place and two checks aimed at the product.
 
 ## Key points
 
@@ -87,4 +87,3 @@ After, thirteen days gave the public opening, 91 deliveries of one page each and
 * Each rule of the kit answers a failure: six places, a build that decides as it goes, commands that drift, an outline that mixed plan and reasoning, checks blind to the product, and checks that grew unasked.
 * Choose a stack by the product and by how well the agent knows it.
 
-[^ninjobs]: Ninjobs, the author's product, a private repository, counted by the author over its history. The OpenSpec era from its ADR-0022, dated 2026-08-29: fifteen days and 87 commits from `git log`, 35 changes from the OpenSpec archive, 37,228 lines with `wc -l` over every file under `openspec/` (the ADR rounds its own count to about 38.8k), the four screens and the table it lists, the 29 checks, and the five causes and the four independent reviews it cites, paraphrased. The public opening on 2026-09-10, the 91 deliveries done by then and the move to focus-kit on 2026-09-21 from its ADR-0026; the prologue counts 93 finished pages because it counts to 2026-09-23. The 19 design boards counted in the finished lines of its queue, docs/06. The two checks kept and the lint that came back from its docs/05 and its ADRs.

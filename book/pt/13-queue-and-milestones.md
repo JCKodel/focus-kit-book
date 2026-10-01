@@ -15,14 +15,14 @@ O docs/06 guarda os marcos do projeto, cada um com um parágrafo que diz o que �
 Uma linha tem três partes, uma marca, um slug e o que a entrega dá, em uma linha:
 
 ```
-[ ] <slug>    <what it delivers, one line>
+[ ] <slug>  <what it delivers, one line>
 ```
 
 O slug é o nome da entrega, em palavras minúsculas unidas por hífens ([capítulo 14](14-propose.md)).
 Ele dá nome à página da entrega, `work/<slug>.md`, e é o argumento dos comandos, `/propose <slug>` e `/apply <slug>`, então a linha, a página e os comandos apontam todos para a mesma entrega.
 
 O kit pede uma linha, e o raciocínio vai para a página.
-Na Ninjobs eu deixei as linhas crescerem: a fila dela tinha 102 entregas em 1.711 linhas, 1.052 delas continuações de uma linha, decisões que pertenciam às páginas.[^ninjobs]
+Na Ninjobs eu deixei as linhas crescerem: a fila dela tinha 102 entregas em 1.711 linhas, 1.052 delas continuações de uma linha, decisões que pertenciam às páginas.
 Uma linha que cresce até virar um parágrafo é uma decisão no lugar errado, já que a página é onde a próxima sessão a procura.
 
 ## As marcas
@@ -47,16 +47,16 @@ membros, emprestar um exemplar a um membro por 21 dias e registrar a devolução
 um membro com um livro atrasado ou com a inscrição suspensa é recusado.
 
 ```
-[x] skeleton      app e servidor vazios, npm run verify, primeira captura de tela
-[x] catalog       a bibliotecária cadastra livros e seus exemplares
-[x] members       a bibliotecária cadastra, suspende e reativa membros
-[>] lend-book     a bibliotecária empresta um exemplar, e as regras podem recusar
-[ ] return-book   a bibliotecária registra uma devolução, e o exemplar fica livre
-[ ] m1-review     o marco conferido contra o parágrafo dele
+[x] esqueleto        app e servidor vazios, npm run verify, primeira captura de tela
+[x] catalogo         a bibliotecária cadastra livros e seus exemplares
+[x] membros          a bibliotecária cadastra, suspende e reativa membros
+[>] emprestar-livro  a bibliotecária empresta um exemplar, e as regras podem recusar
+[ ] devolver-livro   a bibliotecária registra uma devolução, e o exemplar fica livre
+[ ] m1-review        o marco conferido contra o parágrafo dele
 ```
 ````
 
-Qualquer pessoa lê o estado nele: três entregas feitas, `lend-book` tem uma página esperando o `/apply`, e duas linhas ainda não têm página.
+Qualquer pessoa lê o estado nele: três entregas feitas, `emprestar-livro` tem uma página esperando o `/apply`, e duas linhas ainda não têm página.
 
 ## Marcos
 
@@ -69,7 +69,7 @@ Toda frase do parágrafo deveria ter uma linha que a torna verdade, e toda linha
 ### Tamanho e ordem
 
 Um marco tem de três a oito entregas, e depois a revisão dele: a regra do kit para o primeiro marco e um bom tamanho para qualquer um.
-As primeiras são o esqueleto em que as outras se apoiam: o `skeleton` da biblioteca cria o `npm run verify`, que toda entrega seguinte roda.
+As primeiras são o esqueleto em que as outras se apoiam: o `esqueleto` da biblioteca cria o `npm run verify`, que toda entrega seguinte roda.
 Depois cada linha vem após as linhas de que precisa: uma bibliotecária não consegue emprestar um exemplar antes de o catálogo ter exemplares e de os membros existirem.
 
 ### A revisão, e o `.1`
@@ -89,8 +89,8 @@ Você lê a mudança antes do commit, como com todo documento, e ninguém edita 
 ## O que o time ganha
 
 A fila é o quadro de status compartilhado do time e o histórico dele em um arquivo: o que vem a seguir, o que está em andamento, o que foi feito e em que ordem, legível por um gerente sem ferramenta nenhuma e por um agente no começo de toda sessão.
-Na Ninjobs ela guardou 102 entregas, feitas e ainda não feitas, em um arquivo.[^ninjobs]
-No Caso A, um projeto para um cliente em uma plataforma low-code, o relatório de status e a estimativa de risco para o gerente de projeto foram escritos a partir da fila e das páginas, não de memória, e a fila deu o ritmo: cerca de 9 linhas fechadas e 6 abertas por dia.[^case-a]
+Na Ninjobs ela guardou 102 entregas, feitas e ainda não feitas, em um arquivo.
+No Caso A, um projeto para um cliente em uma plataforma low-code, o relatório de status e a estimativa de risco para o gerente de projeto foram escritos a partir da fila e das páginas, não de memória, e a fila deu o ritmo: cerca de 9 linhas fechadas e 6 abertas por dia.
 O [capítulo 18](18-project-as-assistant.md) conta o resto do Caso A, e o [capítulo 21](21-team-tools.md) mostra como a fila dele foi espelhada no quadro que o gerente de projeto já usava.
 
 ## Pontos-chave
@@ -101,5 +101,3 @@ O [capítulo 18](18-project-as-assistant.md) conta o resto do Caso A, e o [capí
 * De três a oito entregas, o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados confirmados abrem um marco `.1`.
 * Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido.
 
-[^ninjobs]: Ninjobs, o produto do autor, um repositório privado, o docs/06 dele na última mudança, 2026-09-22, contado pelo autor: linhas com `wc -l`, entregas como as linhas dentro dos blocos de código que começam com uma marca, continuações como as outras linhas não vazias dentro deles.
-[^case-a]: Caso A, um projeto para um cliente em uma plataforma low-code, um repositório privado, lido pelo autor: o relatório de status e a estimativa de risco, que dizem ter sido construídos a partir da fila e das páginas; as linhas fechadas e abertas por dia como essa estimativa as mediu na fila. O dono, o cliente e o negócio dele não são revelados.

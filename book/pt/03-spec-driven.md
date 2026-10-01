@@ -1,6 +1,6 @@
 # Desenvolvimento Guiado por Especificação
 
-O Desenvolvimento Guiado por Especificação faz um agente de código escrever a decisão antes do código, e as ferramentas que o praticam podem escrever muito mais do que uma feature precisa.
+O Desenvolvimento Guiado por Especificação (Spec-Driven Development, ou SDD, o termo que você vai encontrar na mídia) faz um agente de código escrever a decisão antes do código, e as ferramentas que o praticam podem escrever muito mais do que uma feature precisa.
 Depois deste capítulo você consegue dizer o que é Desenvolvimento Guiado por Especificação e até onde uma ferramenta leva a especificação, apontar o que o Spec Kit e o OpenSpec acertaram, e dizer onde começa o custo de escrever uma decisão em muitos lugares.
 
 ## O problema
@@ -14,6 +14,10 @@ O segundo problema chega com a primeira resposta: cada arquivo escrito é um arq
 Birgitta Böckeler, da Thoughtworks, comparou três ferramentas que se dizem guiadas por especificação e registrou o que o termo significa.[^bockeler-2025]
 Uma especificação, na definição dela, é "*um artefato estruturado, orientado a comportamento [...] escrito em linguagem natural, que expressa a feature do software e serve de guia para agentes de código de IA.*"[^bockeler-2025]
 Desenvolvimento Guiado por Especificação (SDD) "*significa escrever uma “especificação” antes de escrever código com IA (“documentação primeiro”). A especificação se torna a fonte da verdade para o humano e para a IA.*"[^bockeler-2025]
+
+> **Nota.** Comportamento, aqui, é o que o software faz do jeito que o usuário vê: nesta situação, acontece isto.
+> "Um membro com um livro atrasado é recusado, com a mensagem 'Devolva primeiro os seus livros atrasados'" é comportamento; "acrescentar uma coluna à tabela de empréstimos" não é, é o como.
+> Escrita assim, cada linha pode ser conferida por um teste ou por uma pessoa, e é por isso que a página de uma entrega do focus-kit tem uma seção chamada Comportamento ([capítulo 14](14-propose.md)).
 
 Ela encontrou três níveis, conforme quanto tempo a especificação vive e quem a edita:
 
@@ -62,17 +66,17 @@ As três decidem a mesma coisa.
 A diferença é quantos outros arquivos a dizem de novo: uma regra escrita em 8 lugares é lida 8 vezes na revisão, e quando muda, muda em 8 lugares, ou se contradiz naqueles que ficaram para trás.
 Böckeler encontrou o mesmo no Spec Kit: os arquivos dele "*eram repetitivos, tanto entre si quanto com o código que já existia*", e "*muito verbosos e tediosos de revisar.*"[^bockeler-2025]
 
-A página única tem um preço.
-O focus-kit paga por ela com documentos escritos uma vez por projeto e mantidos em dia, o produto, seu vocabulário, suas decisões e sua fila ([capítulo 10](10-the-documents.md)), para que uma feature precise só do que é novo nela.
-A troca é decidir uma vez por projeto e depois escrever uma página por feature ([capítulo 14](14-propose.md)).
+Uma página basta porque a maior parte do que esses arquivos repetem, o produto, o seu vocabulário, as suas regras e as decisões já tomadas, é a mesma para toda feature.
+O focus-kit escreve essa parte uma vez por projeto, em documentos mantidos em dia ([capítulo 10](10-the-documents.md)), então a página de uma feature guarda só o que é novo nela.
+O custo é escrever esses documentos e mantê-los verdadeiros; o retorno é uma página por feature, lida e revisada de uma vez, no lugar de uma pasta ([capítulo 14](14-propose.md)).
 As contagens dizem o que cada ferramenta escreve antes do código; não dizem qual delas constrói software melhor, e uma feature num dia não é um benchmark.
 
 ## O que o time ganha
 
 Uma página por feature, em vez de uma pasta por feature, é o que o time lê, revisa e mantém verdadeiro.
-Na Ninjobs, meu próprio produto, quinze dias com o OpenSpec produziram 37.228 linhas de especificação para quatro telas, e nada do fluxo principal existia ainda.[^ninjobs]
+Na Ninjobs, meu próprio produto, quinze dias com o OpenSpec produziram 37.228 linhas de especificação para quatro telas (toda linha sob a pasta da ferramenta, contada com `wc -l`), e nada do fluxo principal existia ainda.
 As causas foram além da ferramenta, e o [capítulo 9](09-birth-of-focus-kit.md) as conta; a contagem é o que uma especificação custa quando vira o trabalho.
-Depois da mudança para uma página por entrega, o produto abriu ao público, e suas 93 páginas concluídas somavam 22.650 linhas.[^ninjobs]
+Depois da mudança para uma página por entrega, o produto abriu ao público, e suas 93 páginas concluídas somavam 22.650 linhas.
 
 ## Pontos-chave
 
@@ -86,4 +90,3 @@ Depois da mudança para uma página por entrega, o produto abriu ao público, e 
 [^spec-kit]: GitHub, "Spec Kit", acesso em 2026-09-30. <https://github.com/github/spec-kit>
 [^openspec]: Fission AI, "OpenSpec", acesso em 2026-09-30. <https://github.com/Fission-AI/OpenSpec>
 [^spec-driven-run]: J.C. Ködel, "One Page at a Time", o registro da execução das três ferramentas sobre uma feature, 2026-09, no repositório do livro. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/spec-driven-run>
-[^ninjobs]: Ninjobs, o produto do autor, um repositório privado, contado pelo autor ao longo do seu histórico: os quinze dias e as quatro telas a partir do seu ADR-0022, que abandonou o OpenSpec em 2026-08-29; as 37.228 linhas com `wc -l` sobre todos os arquivos em `openspec/` até esse dia; as 93 páginas concluídas em `work/done/` e as suas 22.650 linhas com `wc -l`, até 2026-09-23.
