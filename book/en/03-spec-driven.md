@@ -1,11 +1,11 @@
-# Spec-Driven Development
+# 3. Spec-Driven Development
 
 Spec-Driven Development has a coding agent write the decision down before the code, and the tools that practise it can write far more than a feature needs.
 After this chapter you can say what Spec-Driven Development is and how far a tool takes the spec, name what Spec Kit and OpenSpec got right, and say where the cost of writing one decision in many places begins.
 
 ## The problem
 
-An agent given a task and nothing else decides what you did not, in the middle of the build ([chapter 1](01-why-process.md)).
+An agent given a task and nothing else decides what you did not, in the middle of the build.
 The first answer is to write the decision before the code, in a file the agent reads.
 The second problem arrives with the first answer: every file written is a file someone reviews and keeps true, and a tool can write so much that the spec becomes the work.
 
@@ -41,7 +41,7 @@ Each stopped before writing code.
 ## What they got right
 
 **The decision is written before the code, in files the agent reads.**
-A decision that lives only in the conversation is lost when the session ends ([chapter 2](02-how-agents-see.md)).
+A decision that lives only in the conversation is lost when the session ends.
 All three tools stopped with the feature decided in files inside the project, where a fresh session finds them.
 
 **Some decisions are written once per project.**
@@ -68,7 +68,7 @@ Böckeler found the same with Spec Kit: its files "*were repetitive, both with e
 
 One page is enough because most of what those files repeat, the product, its vocabulary, its rules and the decisions already taken, is the same for every feature.
 focus-kit writes that part once per project, in documents kept up to date ([chapter 10](10-the-documents.md)), so the page of a feature holds only what is new about it.
-The cost is to write those documents and keep them true; the return is one page per feature, read and reviewed in one sitting, in place of a folder ([chapter 14](14-propose.md)).
+The cost is to write those documents and keep them true; the return is one page per feature, read and reviewed in one sitting, in place of a folder.
 The counts say what each tool writes before the code; they do not say which one builds better software, and one feature on one day is not a benchmark.
 
 ## What the team gains

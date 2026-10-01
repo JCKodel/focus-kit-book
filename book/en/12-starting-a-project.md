@@ -1,11 +1,11 @@
-# Starting: `/brainstorm` and `/analyze`
+# 12. Starting: `/brainstorm` and `/analyze`
 
 After this chapter you can start a new project with `/brainstorm`, or document an existing one with `/analyze`, by conversation, and review the documents either command writes before you commit them.
 You can also choose a stack by what the project needs and by how well the agent knows it, and keep what the code cannot say where the agent reads it.
 
 ## The problem
 
-Every later session reads the project documents before it acts ([chapter 10](10-the-documents.md)), so they have to exist before the first delivery.
+Every later session reads the project documents before it acts, so they have to exist before the first delivery.
 An agent that starts with nothing written decides everything alone, and a questionnaire fails the other way: it asks a person what they cannot answer yet, or what the code already says.
 focus-kit has two commands for this, one for an empty repository and one for a repository with something in it, and both write the same documents by conversation and write no code.
 
@@ -16,7 +16,7 @@ It talks one subject at a time, in this order, and moves on when it could write 
 
 1. **The product** (docs/00): what it is in one sentence, for whom, what it is not, what a good decision looks like here.
 2. **The vocabulary** (docs/03): the ten to twenty words the product cannot be described without, each with its name in code.
-3. **How it is built** (docs/01): the stack and the shape of the code, with the kit's two choices, FOCUS and the git strategy ([chapter 10](10-the-documents.md)), each with the agent's recommendation for this stack.
+3. **How it is built** (docs/01): the stack and the shape of the code, with the kit's two choices, FOCUS and the git strategy, each with the agent's recommendation for this stack.
 4. **The conventions** (docs/04): the documentation language and the identifier language, the style, where tests live, the commit format.
 5. **The process slots** (docs/05): the verify command, the environments, how a screen is proven, when an environment beyond your machine is updated.
 6. **The first milestone** (docs/06): three to eight deliveries, one line each, in order, then its review; the first ones are the skeleton the others stand on.
@@ -40,7 +40,7 @@ A stack that cannot deliver that is out, however well the agent knows it.
 A model writes best what it saw most while it was trained, and the nearest public measure of that is how many people write a language in the open.
 By GitHub's count, TypeScript became the most used language on GitHub in August 2025, with 2,636,006 monthly contributors, ahead of Python and JavaScript.[^octoverse]
 The count is of people and says nothing about lines of code, so read it as a ranking and never as a size.
-On Ninjobs the same agent kept missing the design in Flutter, where it had few examples of a customised design system to learn from, and got it right in React ([chapter 9](09-birth-of-focus-kit.md)).
+On Ninjobs the same agent kept missing the design in Flutter, where it had few examples of a customised design system to learn from, and got it right in React.
 
 **Does the stack check itself?**
 A compiler that rejects a wrong type and tests that run in seconds tell the agent it made a mistake before you have to.
@@ -125,6 +125,9 @@ Give it as your answer to the FOCUS question, for example "FOCUS whole, as a str
 The code says what a project does; it rarely says why, for whom, or what was promised.
 That knowledge lives in proposals, contracts, emails, meeting transcripts, tickets and slides, and what the agent does not read, it has to guess.
 Put everything you have about the project in one folder at the root, `context/`, as it is, with no sorting and no summary, and keep it apart from `docs/`: `context/` is what the agent reads from, `docs/` is what it writes.
+The more the folder holds, proposals to the client, meeting transcripts, emails, the better the documents the agent writes from it, and the more of the team it can answer, well beyond the code.
+It is the difference between "this was built this way because the client asked for it, in the email of the 12th" and "nobody knows why it is like this".
+When a new document arrives, put it in the folder and ask the agent to read it and bring into the project what it changes: a rule into docs/00, a term into docs/03, a line into the queue.
 Neither command looks for the folder by name, so say it in the same message, `/analyze Read context/ first, whole.`; that sentence is your instruction, and it works for `/brainstorm` too when a brief or a proposal exists before the code.
 Whether the folder is committed, and what must never be, is a decision of its own ([chapter 18](18-project-as-assistant.md)).
 
@@ -138,7 +141,7 @@ Check that:
 * every ADR records a decision you took, or says it was the agent's call;
 * on an existing project, every observed statement is true in the code (open the file it names), every open question is a contradiction the code really holds, and nothing describes what should exist instead of what does.
 
-When something is wrong, ask the agent for the fix in the same session, which still holds the conversation, and let it write the change; never edit by hand, because the agent knows which other documents the fix touches ([chapter 10](10-the-documents.md)).
+When something is wrong, ask the agent for the fix in the same session, which still holds the conversation, and let it write the change; never edit by hand, because the agent knows which other documents the fix touches.
 Read with suspicion.
 An agent's text reads as right even when it is wrong: a skipped subject leaves no gap in the prose, and a README's claim copied as a fact reads as well as one the agent checked.
 Only a check against what you answered, or against the code, finds either.

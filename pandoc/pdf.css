@@ -46,6 +46,8 @@ h2 { font-size: 12.5pt; margin: 1.6em 0 0.6em; }
 h3 { font-size: 10.5pt; margin: 1.3em 0 0.5em; }
 
 a { color: #1a4f8b; text-decoration: none; }
+/* A pointer to a chapter prints in the text's color: on paper a blue "(chapter 7)" is noise, and the numbered title finds the chapter. */
+a[href^="#chapter-"] { color: inherit; }
 
 code, pre { font-family: "Iosevka Term"; hyphens: manual; }
 code { font-size: 0.95em; }

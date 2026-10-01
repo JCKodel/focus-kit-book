@@ -1,4 +1,4 @@
-# Adoção em times e empresas
+# 24. Adoção em times e empresas
 
 Depois deste capítulo você consegue levar o método a um time ou a uma empresa, responder às resistências de sempre com evidência, e dar a cada papel a sua parte.
 Você também consegue rodar um marco como um piloto que mede a si mesmo, e dar forma à proposta para a sua própria empresa.

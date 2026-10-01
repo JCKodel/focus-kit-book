@@ -1,4 +1,4 @@
-# Features, not layers
+# 6. Features, not layers
 
 After this chapter you can organize code in vertical slices, one folder per feature, decide what one feature is and where code that two features share belongs.
 You can also decide which piece receives a dependency as a parameter and which receives none, by one test: does its test pass a second implementation?
@@ -10,7 +10,7 @@ Every feature is spread across all of them.
 Lending a book in such a library touches a file in `views/`, `controllers/`, `services/`, `models/` and `repositories/`, and a change to how lending works is a change to five folders.
 
 The cost falls on whoever makes the change.
-A person has to find the five files and keep them in mind at once; an agent has to open all five folders to learn what lending does, and every file it loads to understand the change fills the context it works in (chapter 2).
+A person has to find the five files and keep them in mind at once; an agent has to open all five folders to learn what lending does, and every file it loads to understand the change fills the context it works in.
 The folders say what the code is made of, and nothing about what the program does.
 
 ## Layers, and what they were for
@@ -53,7 +53,7 @@ Chapter 7 names these four kinds of file as the four pieces, and chapter 8 gives
 
 The top folder screams the library: loans, members, catalog.
 A change to how lending works touches `loans/`, and removing loans from the product removes one folder.
-Parnas's criterion of 1972 (chapter 4) works at this size too: the slice hides its feature's decisions from the rest of the program.
+Parnas's criterion of 1972 works at this size too: the slice hides its feature's decisions from the rest of the program.
 
 ## What one feature is
 
@@ -88,7 +88,7 @@ Mark Seemann added where the real parts are assembled: in one place, "*as close 
 Injected everywhere, dependencies become their own layer of ceremony: an interface for every class, a container, a parameter nobody varies.
 The .NET world shows the habit at its fullest: an interface for everything, `IMemberService` in front of `MemberService`, and a registration in a container for each pair, usually defended in the name of SOLID.
 The habit solves a real problem in an SDK, whose callers need to replace parts they do not own, and is ceremony inside an application, where each of those interfaces has one implementation for good.
-DRY (chapter 4) already gives the rule: something with no reason to exist does not exist.
+DRY already gives the rule: something with no reason to exist does not exist.
 If in an application only the repositories have two implementations, the real one and the fake the tests pass, then only the repositories get an interface, or a parameter; a use case that will always be the one concrete function gets neither.
 This book draws that narrower line: a piece receives a dependency as a parameter only where its test passes a second implementation.
 That second implementation is a fake: a repository that answers what the test sets, or an in-memory database with the real tables.
@@ -122,7 +122,7 @@ The rest follows from the same test.
 * **An orchestrator receives its repositories**, because its test passes fake ones.
 * **A server repository receives the database it uses**, `findMember(db, id)`, because its test passes an in-memory database with the real migrations; the server's start code opens the real one and hands it on, and that is the composition root.
 * **A use case receives none.** `lend` takes data and returns a value; its test passes data, and there is nothing to swap.
-* **A view receives none.** It has one implementation, and a parameter there would exist for ceremony, which KISS rules out (chapter 4).
+* **A view receives none.** It has one implementation, and a parameter there would exist for ceremony, which KISS rules out.
 * **The clock is passed as a value.** `today` is read once, where the event arrives, and handed on as data; no rule reads the clock, so a test of a due date passes the date it wants.
 
 ## What this gives an agent

@@ -1,4 +1,4 @@
-# Closing a milestone
+# 16. Closing a milestone
 
 After this chapter you can close a milestone: check its paragraph on the running product, review everything it built with what your host offers, and decide each finding.
 You can then turn each confirmed finding into a line in a new milestone, `<M>.1`, instead of a fix.
@@ -20,7 +20,7 @@ Each problem it reports is a finding, and the decision on each one is yours.
 
 ## Check the paragraph
 
-A milestone ends with a paragraph written as a test a person can check against the product (chapter 13).
+A milestone ends with a paragraph written as a test a person can check against the product.
 For a milestone of the lending library, written for this chapter:
 
 ```
@@ -52,7 +52,7 @@ GitHub Copilot reviews pull requests, so there the milestone goes up as one pull
 ## Decide each finding
 
 A finding reads like a fact, and some are not.
-The person is the brain of the operation (chapter 10): you check what the agent writes against what you know, and a review is the agent writing.
+The person is the brain of the operation: you check what the agent writes against what you know, and a review is the agent writing.
 That means two things: you never take a finding as true without looking at the code, and you never drop one without saying why.
 
 So each finding is confirmed or rejected, with a reason.

@@ -1,4 +1,4 @@
-# Um teste para cada peça
+# 8. Um teste para cada peça
 
 Depois deste capítulo você consegue dizer que teste guarda cada uma das quatro peças e o que ele troca, só o I/O e o relógio, e seguir uma regra pelos testes dela.
 Você também consegue escrever um fake (uma implementação falsa) que faz o teste falhar quando é chamado sem ser esperado, e dar nomes aos testes para que um revisor os leia como as frases da regra.
@@ -124,6 +124,22 @@ Lidos em sequência, os nomes são as regras do empréstimo, e uma regra que nã
 Nomes como `teste1` ou `emprestar funciona` não dizem nada ao leitor e escondem a regra que falta.
 O livro de Kent Beck *Test-Driven Development: By Example* (2002) escreve o teste antes do código, então o teste é a primeira afirmação do que o código tem de fazer; um nome que se lê como frase o mantém uma afirmação que uma pessoa consegue conferir.[^beck-tdd]
 
+## O que os testes provam, e o que não provam
+
+Por anos, o motivo para ter poucos testes foi o custo de escrevê-los.
+Um agente escreve um teste em segundos, então esse motivo acabou.
+O risco passou para o outro lado: um agente escreve testes com tanta facilidade que escreve demais, o mesmo caso de cinco jeitos, até a suíte levar minutos e ninguém rodá-la antes de dizer "pronto".
+Pergunte a um teste o que o capítulo 4 pergunta a qualquer passo: que regra quebrada ele pegaria que nenhum outro teste pega?
+
+Vermelho e verde são como o teste de um agente ganha confiança (o [capítulo 5](05-rules-and-exceptions.md) mostrou o ciclo).
+Um teste visto vermelho antes de o código existir, e verde depois, provou que consegue falhar.
+Um teste escrito depois do código, pelo agente que escreveu o código, pode afirmar o que o código faz no lugar do que a regra diz, e passar para sempre.
+
+Uma suíte verde ainda não prova que o software funciona.
+Um teste pode estar errado e passar.
+Os testes unitários conferem cada peça sozinha, e a soma das peças pode falhar onde nenhuma peça falha: um campo que o cliente envia com um nome e o servidor lê com outro passa em todos os testes unitários dos dois lados.
+Esse é o trabalho dos poucos testes ponta a ponta, e o motivo de uma entrega levar também uma prova, o resultado visto funcionando, antes que alguém a chame de pronta ([capítulo 15](15-apply.md)).
+
 ## O que isso dá a um agente
 
 Um agente que muda `emprestar` roda os testes unitários da fatia e sabe em segundos se quebrou a regra, antes de rodar a verificação inteira do [capítulo 15](15-apply.md).
@@ -140,7 +156,7 @@ Este livro não dá uma contagem de base de quanto mais cedo um time pega uma re
 * Um caso de uso é testado só com dados, um repositório contra um banco em memória com as migrações reais, um orquestrador com repositórios falsos, e a tela com poucos testes ponta a ponta em um navegador.
 * Um teste troca só o I/O e o relógio, e o relógio é um valor passado como parâmetro, então a maioria dos testes não troca nada além dos repositórios.
 * Um fake responde o que o teste define e lança em qualquer chamada que o teste não esperava; prefira-o a um mock, que repete o código que testa.
-* Uma regra seguida pelos testes dela mostra o que cada nível prova e os outros não.
+* Cada nível de teste prova o que os outros não provam, e uma suíte verde ainda prova menos que software funcionando: um teste pode estar errado, e as peças podem falhar juntas, então veja um teste vermelho antes de confiar nele verde, e guarde a prova.
 * O nome de um teste é uma frase da regra: um revisor lê os nomes, e uma regra sem frase não tem teste.
 
 [^vitest]: Vitest, "Getting Started", documentação, acesso em 2026-09-29. <https://vitest.dev/guide/>

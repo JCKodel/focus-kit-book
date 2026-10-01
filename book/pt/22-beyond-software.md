@@ -1,4 +1,4 @@
-# Projetos que não são software
+# 22. Projetos que não são software
 
 Depois deste capítulo você consegue conduzir uma proposta, uma análise, um documento de passagem de projeto, uma regra de dados ou um livro como entregas, cada uma numa página cujo Pronto quando uma pessoa consegue marcar.
 Você também consegue dizer por que um achado sem linha numa fila se perde.
@@ -51,7 +51,7 @@ O `/apply` escreve o guia como escreveria código: segue a página, roda o que u
 
 ## Os documentos do Caso A
 
-No Caso A, um projeto para um cliente em uma plataforma low-code, a passagem do projeto foi um conjunto de entregas.
+No Caso A, um projeto para um cliente em uma plataforma low-code, o Microsoft Power Apps com o Copilot Studio, a passagem do projeto foi um conjunto de entregas.
 Um desenho da solução, um guia de instalação em três formatos, um documento de passagem e uma apresentação, um pacote de evidências indexado pelos critérios de aceite, um readme do repositório e um registro de trabalho tiveram cada um uma linha na fila e uma página, e cada um passou pelo `/propose` e pelo `/apply` como código.
 O pacote de evidências mostra o Contrato como estrutura: indexado pelos critérios de aceite, ele deixa o cliente conferir a entrega critério por critério e encontrar a prova de cada um.
 

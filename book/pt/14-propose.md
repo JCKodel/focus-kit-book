@@ -1,4 +1,4 @@
-# `/propose`: uma página
+# 14. `/propose`: uma página
 
 Depois deste capítulo você consegue transformar uma linha da fila em uma página com o `/propose`, ler a página como o registro do que o agente entendeu e do que o `/apply` vai construir, cobrir os buracos dela por conversa antes de existir qualquer código, e dividir uma entrega que não cabe em uma página.
 
@@ -11,7 +11,7 @@ A página põe cada decisão onde você consegue lê-la antes de existir qualque
 ## O que é uma entrega
 
 Todo trabalho em um projeto com o focus-kit é uma entrega: a menor mudança que tem valor, o que outros métodos chamam de tarefa ou item de trabalho.
-Ela tem como nome um slug (o nome curto da entrega), palavras minúsculas unidas por hífens, como `emprestar-livro`, escrito uma vez na linha da fila (capítulo 13) e usado dali em diante para tudo o que é dela: a página `work/<slug>.md`, o argumento do `/propose <slug>` e do `/apply <slug>`, e a última linha do commit que a fecha.
+Ela tem como nome um slug (o nome curto da entrega), palavras minúsculas unidas por hífens, como `emprestar-livro`, escrito uma vez na linha da fila e usado dali em diante para tudo o que é dela: a página `work/<slug>.md`, o argumento do `/propose <slug>` e do `/apply <slug>`, e a última linha do commit que a fecha.
 Uma entrega cabe em uma página.
 Se não cabe, o escopo ainda não foi entendido, e são duas entregas.
 
@@ -24,7 +24,7 @@ Então ele conversa com você até o escopo caber em uma página, e só pergunta
 Ele escreve `work/<slug>.md`, marca a linha como `[>]` na fila, e para.
 Ele nunca escreve, edita nem gera código, migration, teste ou configuração.
 O arquivo do comando no kit dá o motivo: "*separar decidir de fazer é o que impede o escopo de crescer durante a implementação*".
-O `/apply` começa em uma sessão nova, com o contexto limpo (capítulo 2), e a página é tudo o que ele leva desta conversa, então a página precisa guardar tudo de que a construção precisa.
+O `/apply` começa em uma sessão nova, com o contexto limpo, e a página é tudo o que ele leva desta conversa, então a página precisa guardar tudo de que a construção precisa.
 
 ## A página
 
@@ -95,7 +95,7 @@ A página é escrita para ser lida, e as perguntas a fazer são estas:
 * O Pronto quando lista o que faria você dizer "pronto", e nada mais vago?
 
 Você pede cada correção na mesma conversa, e o agente escreve a correção: na página, e em qualquer documento que ela toque.
-Você não edita a página à mão ([capítulo 10](10-the-documents.md)): o agente sabe qual documento é dono de cada fato, então uma correção que toca o vocabulário ou a fila entra lá também, e a conversa guarda o motivo.
+Você não edita a página à mão: o agente sabe qual documento é dono de cada fato, então uma correção que toca o vocabulário ou a fila entra lá também, e a conversa guarda o motivo.
 
 A ordem é a barata.
 Um buraco achado na página custa um turno; achado depois do `/apply`, custa outro `/apply`, o comando mais caro, que constrói, testa e prova de novo.

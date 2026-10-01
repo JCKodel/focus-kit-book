@@ -1,4 +1,4 @@
-# Como um agente vê o seu projeto
+# 2. Como um agente vê o seu projeto
 
 O modelo por trás de um agente de código não se lembra de nada de uma chamada para a outra.
 Depois deste capítulo você consegue explicar por que um agente de código só sabe o que está na sua janela de contexto a cada chamada, por que uma sessão longa piora, e o que manter por escrito para que uma sessão nova comece certa.
@@ -94,7 +94,7 @@ O que o time decidiu está em arquivos que toda sessão carrega inteiros, perto 
 Uma pessoa que entra no projeto lê os mesmos arquivos que o agente lê, e recebe a mesma resposta.
 
 O mesmo vale para o trabalho em si.
-No focus-kit, toda entrega tem uma página que registra por que ela foi feita, o que "pronto" queria dizer e, depois de construída, o que foi feito e como; a página é commitada junto com o código que ela descreve ([capítulo 14](14-propose.md)).
+No focus-kit, toda entrega tem uma página que registra por que ela foi feita, o que "pronto" queria dizer e, depois de construída, o que foi feito e como; a página é commitada junto com o código que ela descreve.
 Tudo o que o projeto fez, e como, está escrito e versionado ao lado do código, então alguém novo no projeto, desenvolvedor ou gestor, faz uma pergunta sobre ele ao agente e recebe uma resposta lida dessas páginas, e não da memória de um colega.
 Não há medida desse ganho neste livro; a evidência é a perda que ele evita, que os estudos acima mediram.
 

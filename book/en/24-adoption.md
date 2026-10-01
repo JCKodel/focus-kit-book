@@ -1,4 +1,4 @@
-# Adoption in teams and companies
+# 24. Adoption in teams and companies
 
 After this chapter you can take the method to a team or a company, answer the usual resistance with evidence, and give each role its part.
 You can also run one milestone as a pilot that measures itself, and shape the pitch for your own company.

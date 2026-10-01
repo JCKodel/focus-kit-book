@@ -1,4 +1,4 @@
-# Como o focus-kit nasceu
+# 9. Como o focus-kit nasceu
 
 No Ninjobs, meu próprio produto, eu abandonei o OpenSpec depois de quinze dias e escrevi o processo que virou o focus-kit.
 Depois deste capítulo você consegue contar essa história, como era, o que deu errado e para onde foi, e dizer a que falha responde cada regra do focus-kit.
@@ -57,7 +57,7 @@ Toda regra do focus-kit existe porque alguma coisa falhou sem ela.
 * **Uma página por entrega.**
   Responde aos seis lugares: o que construir e o que fica de fora moram numa página, e um escopo que não cabe são duas entregas (capítulo 14).
 * **Decidir e fazer em sessões separadas.**
-  Responde à construção que decide enquanto anda: o `/apply` começa limpo, com a página e os documentos, sem a longa conversa que a decidiu, já que um contexto que cresce perde precisão (capítulo 2).
+  Responde à construção que decide enquanto anda: o `/apply` começa limpo, com a página e os documentos, sem a longa conversa que a decidiu, já que um contexto que cresce perde precisão.
 * **Os documentos guardam os fatos; os comandos, nenhum.**
   Responde à divergência: um comando que repete um fato do projeto fica desatualizado quando o documento muda, então ele só diz quais documentos ler (capítulo 10).
 * **Uma fila de uma linha por entrega.**

@@ -1,13 +1,13 @@
-# Os documentos: um lugar para cada fato
+# 10. Os documentos: um lugar para cada fato
 
 Depois deste capítulo você consegue dizer o que guardam cada um dos sete documentos do projeto, os ADRs e o `AGENTS.md`, e decidir a qual deles pertence um fato novo.
 Você também consegue mudar qualquer um deles conversando com o agente, e dizer por que isso dá a mesma resposta a toda sessão e a toda pessoa.
 
 ## O problema
 
-Uma sessão nova só sabe o que está escrito em arquivos (capítulo 2).
+Uma sessão nova só sabe o que está escrito em arquivos.
 Um fato que mora na cabeça de alguém nunca chega até ela, e um fato escrito em vários lugares fica desatualizado em alguns deles, então o agente lê a cópia que encontrar primeiro.
-No Ninjobs uma decisão morava em seis lugares, e mantê-los em acordo custava mais que o trabalho (capítulo 9).
+No Ninjobs uma decisão morava em seis lugares, e mantê-los em acordo custava mais que o trabalho.
 
 ## Um lugar para cada fato
 
@@ -36,6 +36,9 @@ Uma seção é preenchida pelo projeto, "This project" (este projeto), cujos ite
 Os comandos leem esses fatos aqui, então nenhum arquivo de comando guarda algum deles.
 
 **docs/06, a fila.** Os marcos, cada um com um parágrafo dizendo o que é verdade quando ele fecha, e sob cada um uma linha por entrega, em ordem, com uma marca para o seu estado (capítulo 13).
+É o documento em que você mais mexe: todo o trabalho do projeto, aumentado e editado todos os dias, por conversa.
+Ele faz o que um quadro kanban ou um backlog de work items faz num processo ágil, com uma diferença: o agente o lê.
+Todo documento é lido, e corrigido quando está errado; a fila é o que dá forma ao produto.
 
 ## As duas escolhas
 
@@ -55,7 +58,8 @@ O slot Git do docs/05 registra a resposta, e um ADR registra o porquê.
 
 ## ADRs
 
-Um ADR, um registro de decisão de arquitetura, é um arquivo por decisão, `docs/adr/ADR-NNNN-<slug>.md`, com o seu contexto, a decisão, as suas consequências e a sua data.
+ADR é a sigla de Architecture Decision Record, registro de decisão de arquitetura.
+Um ADR é um arquivo por decisão, `docs/adr/ADR-NNNN-<slug>.md`, com o seu contexto, a decisão, as suas consequências e a sua data.
 Michael Nygard propôs o formato em 2011, porque "*uma das coisas mais difíceis de acompanhar durante a vida de um projeto é a motivação por trás de certas decisões*".[^nygard-adr]
 Um ADR é emendado, nunca reescrito: quando a decisão muda, uma emenda abaixo dela diz o que mudou e quando, e o motivo original fica acima.
 A próxima pessoa que quiser mudá-la de novo lê por que ela era assim, e pesa o motivo antigo em vez de adivinhá-lo.
@@ -110,7 +114,7 @@ A sua parte é interpretar, guiar e validar: dizer o que a mudança significa, d
 O texto de um agente parece certo mesmo quando está errado, então você o confere com o que sabe e nunca confia nele às cegas, como não confiaria no de um colega.
 
 As decisões em aberto do docs/00 são onde o agente para.
-O docs/00 da biblioteca lista as multas por devolução atrasada como em aberto, então uma página que toca em devoluções atrasadas as nomeia como fora do escopo (capítulo 14), e um agente a quem pedem para construí-las para e pergunta, onde de outro modo teria escolhido um valor e uma regra por conta própria.
+O docs/00 da biblioteca lista as multas por devolução atrasada como em aberto, então uma página que toca em devoluções atrasadas as nomeia como fora do escopo, e um agente a quem pedem para construí-las para e pergunta, onde de outro modo teria escolhido um valor e uma regra por conta própria.
 
 ## O que o time ganha
 

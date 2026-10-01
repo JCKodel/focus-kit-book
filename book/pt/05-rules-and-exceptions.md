@@ -1,4 +1,4 @@
-# Regras como funções puras, exceções como valores
+# 5. Regras como funções puras, exceções como valores
 
 Depois deste capítulo você consegue escrever uma regra de negócio como uma função pura que devolve um Result (resultado), distinguir uma exceção de uma recusa e de um erro em qualquer linguagem, e dizer por que um throw nunca deve conduzir o fluxo do programa.
 Você também consegue manter as exceções de uma biblioteca fora do seu domínio, de modo que uma biblioteca nova mude um arquivo.

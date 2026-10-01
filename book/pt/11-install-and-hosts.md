@@ -1,4 +1,4 @@
-# Instalação, e os hosts
+# 11. Instalação, e os hosts
 
 Depois deste capítulo você consegue instalar o focus-kit num repositório com uma frase para o seu agente de código, atualizá-lo com a mesma frase, e chamar os seus comandos no host que você usa.
 Você também consegue dizer por que o método não depende do host.
@@ -38,7 +38,7 @@ O agente escreve os arquivos do kit como o arquivo de setup os guarda agora, e a
 
 ## Como cada host encontra os comandos
 
-Um host precisa de duas coisas do repositório: o arquivo de regras, `AGENTS.md` (capítulos 2 e 10), e os comandos, cada um com o slug que você digita depois dele, o nome da entrega em `work/<slug>.md` (capítulo 14).
+Um host precisa de duas coisas do repositório: o arquivo de regras, `AGENTS.md`, e os comandos, cada um com o slug que você digita depois dele, o nome da entrega em `work/<slug>.md` (capítulo 14).
 O arquivo de setup escreve o que cada host abaixo precisa:
 
 | Host | Lê as regras de | Lê os comandos de | Você digita |
@@ -68,7 +68,7 @@ Cada um lê os arquivos para os quais você aponta.
 Cada um consegue escrever arquivos.
 
 O método não precisa de mais nada.
-Ele mora em arquivos simples: o arquivo de regras, os documentos do projeto que uma sessão nova lê, as páginas em `work/` e os comandos, que só dizem quais documentos ler e o que nunca fazer (capítulo 10).
+Ele mora em arquivos simples: o arquivo de regras, os documentos do projeto que uma sessão nova lê, as páginas em `work/` e os comandos, que só dizem quais documentos ler e o que nunca fazer.
 O arquivo de setup escreve os arquivos de todos os hosts, seja qual for o host que o roda, então o repositório abre pronto em qualquer um deles, e uma pessoa que troca de host encontra os mesmos documentos, a mesma fila e os mesmos comandos.
 
 ## O que o time ganha

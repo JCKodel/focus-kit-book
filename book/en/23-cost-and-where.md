@@ -1,4 +1,4 @@
-# What agents cost, and where they pay
+# 23. What agents cost, and where they pay
 
 After this chapter you can read a token count from your host's logs, turn it into a cost per delivery your team can repeat, and say why the page and the documents keep that cost small.
 You can also say where an agent pays for itself, where it pays less, and where it does not pay.
@@ -19,7 +19,7 @@ The host, the program you run, bills every call to the model in tokens, and it c
 * **Cache read**: stored text a later call reuses.
 * **Output**: the text the model writes, its answer and the commands it asks the host to run.
 
-The model remembers nothing between calls, so the host sends the whole context again every time: its own instructions, the rules file, every file read so far and the conversation (chapter 2).
+The model remembers nothing between calls, so the host sends the whole context again every time: its own instructions, the rules file, every file read so far and the conversation.
 The cache keeps that repeated part, so the next call reads it back at a fraction of the price of new input.
 Anthropic's pricing documentation gives the multipliers: a cache write costs 1.25 times a normal input token for a five-minute cache, and a cache read costs a tenth of one or less, depending on the model.[^anthropic-pricing]
 
@@ -64,8 +64,8 @@ Keep cache reads in their own column, and a change in how the team works shows t
 
 [Chapter 2](02-how-agents-see.md) showed that everything in the context window rides along on every call, and that a long session also gets worse at recalling what is in it.
 The method answers with a fresh session per delivery.
-`/apply` starts from the rules file, the documents it names and one page ([chapter 15](15-apply.md)), so the context holds what this delivery needs and nothing from the one before.
-The page is what makes that possible: it carries every decision the build needs ([chapter 14](14-propose.md)), so the session does not have to inherit the conversation that took them.
+`/apply` starts from the rules file, the documents it names and one page, so the context holds what this delivery needs and nothing from the one before.
+The page is what makes that possible: it carries every decision the build needs, so the session does not have to inherit the conversation that took them.
 
 So the context stays the size of the delivery, and so does the bill.
 A team that keeps one long session for a week pays, on every call of Friday, for the files read on Monday.
@@ -77,13 +77,13 @@ The page says what to build, the tests and `verify` say whether it is built, and
 That is where the tokens buy the most: the person's time goes to reading one page and one staged change.
 
 **It pays less** on work whose decision is still being made.
-A `/propose` conversation is cheap in tokens and expensive in the person's time, because the person is the one deciding ([chapter 14](14-propose.md)).
+A `/propose` conversation is cheap in tokens and expensive in the person's time, because the person is the one deciding.
 The agent helps there by asking the right questions in order, and the cost to watch is hours of a person, which no token count shows.
 
 **It does not pay** on a stack the agent has seen too little of.
-On Ninjobs, before the method, the agent guessed the pixel values of a customised Flutter design that it had few examples to learn from, and screen after screen came close to the design without reaching it ([chapter 9](09-birth-of-focus-kit.md)).
+On Ninjobs, before the method, the agent guessed the pixel values of a customised Flutter design that it had few examples to learn from, and screen after screen came close to the design without reaching it.
 Each attempt cost tokens and a person's review, and neither bought a finished screen.
-Choosing a stack the agent knows is a cost decision as much as a technical one ([chapter 12](12-starting-a-project.md)).
+Choosing a stack the agent knows is a cost decision as much as a technical one.
 
 ## How a team decides
 

@@ -20,6 +20,9 @@ pre {
 /* pandoc's print style hangs a wrapped code line 5em to the right; a wrapped line starts at the margin instead. */
 pre > code.sourceCode > span { text-indent: 0; padding-left: 0; }
 
+/* A pointer to a chapter reads in the text's color, as in the PDF; it still works as a link. */
+a[href*="#chapter-"] { color: inherit; text-decoration: none; }
+
 img { max-width: 100%; }
 
 /* A screenshot (PNG) is often white on white: a thin border shows its edge, and a phone-sized one stays small enough to keep its caption on its page. */

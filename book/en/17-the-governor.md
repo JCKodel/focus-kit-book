@@ -1,4 +1,4 @@
-# The governor
+# 17. The governor
 
 After this chapter you can ask of anything that wants to enter your process, and of every step already in it, which concrete error it would have caught, and accept only an answer that names an error that happened.
 You can also list what the process does not have, and say what does each of those jobs instead.
@@ -7,7 +7,7 @@ You can also list what the process does not have, and say what does each of thos
 
 A process grows one reasonable step at a time.
 A check here, a template there, a review before each build: each one is sensible on its own, and each one is paid again by every delivery that follows, which runs it, satisfies it and waits for it.
-On Ninjobs the steps piled up to 29 checks that never caught an error in the product, costly to satisfy and cheap to get around (chapter 9).
+On Ninjobs the steps piled up to 29 checks that never caught an error in the product, costly to satisfy and cheap to get around.
 Nobody added them to slow the work down; nobody asked what each had caught.
 
 ## The question
@@ -41,7 +41,7 @@ In code the governor has its own form, the second-occurrence rule of chapter 4: 
 §7 of docs/05 lists seven things the process does not have.
 Each job still gets done, by something the process already has:
 
-* **No formal spec:** the page, `work/<slug>.md`, says what the delivery does, in the words of the person who reads it (chapter 14).
+* **No formal spec:** the page, `work/<slug>.md`, says what the delivery does, in the words of the person who reads it.
 * **No spec delta**, the OpenSpec file that lists only the requirements a change adds, changes or removes, merged into the specs when the change is archived:[^openspec-glossary] the documents the delivery changes, in the same delivery, say what changed.
 * **No change folder:** the page is the change, in `work/<slug>.md` while it is built and in `work/done/` afterwards.
 * **No numbered tasks:** the Behaviour lines, each one a test or a check.

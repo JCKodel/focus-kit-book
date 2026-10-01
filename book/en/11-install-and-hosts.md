@@ -1,4 +1,4 @@
-# Install, and the hosts
+# 11. Install, and the hosts
 
 After this chapter you can install focus-kit in a repository with one sentence to your coding agent, update it with the same sentence, and invoke its commands in the host you use.
 You can also say why the method does not depend on the host.
@@ -38,7 +38,7 @@ The agent writes the kit's files as the setup file holds them now, and the chang
 
 ## How each host finds the commands
 
-A host needs two things from the repository: the rules file, `AGENTS.md` (chapters 2 and 10), and the commands, each with the slug you type after it, the name of the delivery in `work/<slug>.md` (chapter 14).
+A host needs two things from the repository: the rules file, `AGENTS.md`, and the commands, each with the slug you type after it, the name of the delivery in `work/<slug>.md` (chapter 14).
 The setup file writes what every host below needs:
 
 | Host | Reads the rules from | Reads the commands from | You type |
@@ -68,7 +68,7 @@ Each reads the files you point it at.
 Each can write files.
 
 The method needs nothing more.
-It lives in plain files: the rules file, the project documents a fresh session reads, the pages in `work/` and the commands, which only say which documents to read and what never to do (chapter 10).
+It lives in plain files: the rules file, the project documents a fresh session reads, the pages in `work/` and the commands, which only say which documents to read and what never to do.
 The setup file writes every host's files, whichever host runs it, so the repository opens ready in any of them, and a person who switches hosts finds the same documents, the same queue and the same commands.
 
 ## What the team gains

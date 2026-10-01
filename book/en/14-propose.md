@@ -1,4 +1,4 @@
-# `/propose`: one page
+# 14. `/propose`: one page
 
 After this chapter you can turn a queue line into a page with `/propose`, read the page as the record of what the agent understood and of what `/apply` will build, cover its holes by conversation before any code exists, and split a delivery that does not fit one page.
 
@@ -11,7 +11,7 @@ The page puts every decision where you can read it before any code exists, and i
 ## What a delivery is
 
 Every piece of work in a focus-kit project is a delivery: the smallest change that has value, what other methods call a task or a work item.
-It is named by a slug, lowercase words joined by hyphens, such as `lend-book`, written once in the queue line (chapter 13) and used from then on for everything about it: the page `work/<slug>.md`, the argument of `/propose <slug>` and of `/apply <slug>`, and the last line of the commit that closes it.
+It is named by a slug, lowercase words joined by hyphens, such as `lend-book`, written once in the queue line and used from then on for everything about it: the page `work/<slug>.md`, the argument of `/propose <slug>` and of `/apply <slug>`, and the last line of the commit that closes it.
 A delivery fits on one page.
 If it does not, the scope has not been understood yet, and it is two deliveries.
 
@@ -24,7 +24,7 @@ Then it talks with you until the scope fits one page, and it asks only where the
 It writes `work/<slug>.md`, marks the line `[>]` in the queue, and stops.
 It never writes, edits or generates code, a migration, a test or configuration.
 The kit's file for the command gives the reason: "*separating deciding from doing is what keeps scope from growing during implementation*".
-`/apply` starts in a fresh session, with a clean context (chapter 2), and the page is all it takes from this conversation, so the page has to hold everything the build needs.
+`/apply` starts in a fresh session, with a clean context, and the page is all it takes from this conversation, so the page has to hold everything the build needs.
 
 ## The page
 
@@ -95,7 +95,7 @@ The page is written to be read, and the questions to ask are these:
 * Does Done when list what would make you say "done", and nothing vaguer?
 
 You ask for every correction in the same conversation, and the agent writes the fix: on the page, and in any document the fix touches.
-You do not edit the page by hand (chapter 10): the agent knows which document owns each fact, so a fix that touches the vocabulary or the queue lands there too, and the conversation keeps the reason.
+You do not edit the page by hand: the agent knows which document owns each fact, so a fix that touches the vocabulary or the queue lands there too, and the conversation keeps the reason.
 
 The order is the cheap one.
 A hole found on the page costs one turn; found after `/apply`, it costs another `/apply`, the most expensive command, which builds, tests and proves again.

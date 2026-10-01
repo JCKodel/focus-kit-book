@@ -1,4 +1,4 @@
-# Por que processo, quando a IA escreve rápido
+# 1. Por que processo, quando a IA escreve rápido
 
 Um agente de código escreve código mais rápido do que você consegue ler, e os projetos continuam atrasando.
 Depois deste capítulo você consegue explicar por quê, e nomear as três coisas que um processo mínimo dá ao agente: uma decisão por escrito, um limite de escopo e uma verificação antes do "pronto".

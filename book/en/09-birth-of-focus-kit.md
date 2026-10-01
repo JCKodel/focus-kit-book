@@ -1,4 +1,4 @@
-# How focus-kit was born
+# 9. How focus-kit was born
 
 On Ninjobs, my own product, I dropped OpenSpec after fifteen days and wrote the process that became focus-kit.
 After this chapter you can tell that story, how it was, what went wrong and where it went, and name the failure each rule of focus-kit answers.
@@ -57,7 +57,7 @@ Every rule of focus-kit exists because something failed without it.
 * **One page per delivery.**
   It answers the six places: what to build and what stays out live on one page, and a scope that does not fit is two deliveries (chapter 14).
 * **Deciding and doing in separate sessions.**
-  It answers the build that decides as it goes: `/apply` starts clean, with the page and the documents, without the long conversation that decided it, since a context that grows loses accuracy (chapter 2).
+  It answers the build that decides as it goes: `/apply` starts clean, with the page and the documents, without the long conversation that decided it, since a context that grows loses accuracy.
 * **The documents hold the facts; the commands hold none.**
   It answers the drift: a command that repeats a fact of the project goes stale when the document changes, so it only says which documents to read (chapter 10).
 * **A queue of one line per delivery.**

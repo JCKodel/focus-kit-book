@@ -1,4 +1,4 @@
-# Product, people and process
+# Prologue: Product, people and process
 
 Every company that builds software depends on three things: its product, its people and its process.
 After this prologue you can say what each one decides when some of the builders are coding agents, and what this book gives to each of the three.

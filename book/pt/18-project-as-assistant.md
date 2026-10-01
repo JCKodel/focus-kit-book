@@ -1,4 +1,4 @@
-# O projeto como assistente do time
+# 18. O projeto como assistente do time
 
 Depois deste capítulo você consegue guardar os emails, as propostas e as notas de reunião de um projeto onde o agente os lê, e perguntar ao projeto, em palavras simples, o que está pendente, como vai o trabalho e quem deve uma resposta.
 Você também consegue dizer o que uma pessoa ainda precisa fazer com cada resposta que o agente dá.
@@ -14,9 +14,9 @@ Ninguém consegue perguntar ao próprio projeto, então cada pergunta custa o te
 
 Um projeto com focus-kit já escreve quase tudo o que um time pergunta, porque o agente precisa disso para construir:
 
-* **Os documentos** (capítulo 10): o produto e as suas regras no docs/00, o vocabulário no docs/03, as decisões e os seus motivos nos ADRs.
-* **A fila** (capítulo 13): cada entrega, uma linha cada, com a sua marca: `[ ]` ainda não definida, `[>]` definida e esperando para ser construída, `[x]` concluída.
-* **As páginas em `work/`** (capítulo 14): o que está definido agora, e o que cada entrega vai fazer.
+* **Os documentos**: o produto e as suas regras no docs/00, o vocabulário no docs/03, as decisões e os seus motivos nos ADRs.
+* **A fila**: cada entrega, uma linha cada, com a sua marca: `[ ]` ainda não definida, `[>]` definida e esperando para ser construída, `[x]` concluída.
+* **As páginas em `work/`**: o que está definido agora, e o que cada entrega vai fazer.
 * **As páginas em `work/done/`**: o que cada entrega concluída fez, e o que aconteceu enquanto era construída.
 * **O histórico do git** (capítulo 19): quando cada commit aconteceu, e a qual entrega pertence, já que o commit que fecha uma entrega termina com o slug dela.
 
@@ -28,21 +28,23 @@ Nada disso foi escrito para o gerente; um documento que responde à construção
 
 ## A pasta de contexto
 
-O que o código e os documentos não conseguem dizer fica numa pasta na raiz do projeto, `context/` (capítulo 12): os emails do cliente, a proposta, as notas de uma reunião, uma decisão que o cliente tomou numa chamada.
+O que o código e os documentos não conseguem dizer fica numa pasta na raiz do projeto, `context/`: os emails do cliente, a proposta, as notas de uma reunião, uma decisão que o cliente tomou numa chamada.
 Guarde tudo em Markdown, porque o agente lê texto: um PDF ou um email exportado vira um arquivo Markdown uma vez, quando chega, e o agente pode fazer a conversão.
 Escreva ali primeiro cada mensagem que você envia, como registro, e envie uma cópia dela.
 Um layout para a biblioteca de empréstimos da Parte I, escrito para este capítulo:
 
 ```text
 context/
-  notes/        one file per meeting, named by its date
-  received/     each email or document from outside, as Markdown
-  sent/         each message sent, written here before it goes out
-  work-record.md
+  notas/        um arquivo por reunião, com a data no nome
+  recebidos/    cada email ou documento de fora, em Markdown
+  enviados/     cada mensagem enviada, escrita aqui antes de sair
+  registro-de-trabalho.md
 ```
 
 A pasta guarda o que as pessoas disseram; os documentos guardam o que o projeto decidiu a partir disso.
-Quando o cliente decide que multas não existem, a mensagem vai para `context/received/`, e a regra vira uma linha do docs/00, onde o `/propose` a lê.
+Quando o cliente decide que multas não existem, a mensagem vai para `context/recebidos/`, e a regra vira uma linha do docs/00, onde o `/propose` a lê.
+Cada mensagem ou documento novo segue o mesmo caminho: para a pasta quando chega, e depois um pedido ao agente para que o leia e traga para os documentos o que ele muda.
+Daí em diante o agente consegue dizer por que uma coisa é como é, e nomear a mensagem que a decidiu.
 
 Se a `context/` entra em commit depende de quem vai ler o repositório.
 Quando o repositório fica com o time, faça o commit dela: uma pessoa nova, ou uma sessão nova, encontra o histórico de cada decisão ao lado da decisão.
@@ -58,7 +60,7 @@ A pasta de correspondência dele ficou fora do repositório, e só os fatos de e
 Estas são as perguntas que um time faz toda semana, e o arquivo que responde a cada uma:
 
 * **O que está pendente?** As linhas `[ ]` e `[>]` da fila, marco por marco.
-* **Como vai o trabalho?** Linhas fechadas e linhas abertas por dia, a partir da fila e das datas dos commits, contra o parágrafo do marco que diz o que "fechado" significa (capítulo 13).
+* **Como vai o trabalho?** Linhas fechadas e linhas abertas por dia, a partir da fila e das datas dos commits, contra o parágrafo do marco que diz o que "fechado" significa.
 * **Quem me deve uma resposta?** A tabela de perguntas enviadas e não respondidas, no registro de trabalho.
 * **O que preciso perguntar, e a quem?** As decisões em aberto no docs/00, e as páginas que esperam por alguém.
 * **O que combinamos com o cliente?** O docs/00 e os ADRs para o que virou regra; a pasta de contexto para a mensagem de onde veio.
@@ -70,16 +72,16 @@ Para a biblioteca de empréstimos, escrito para este capítulo:
 ```markdown
 ## Perguntas enviadas
 
-| Enviada | Para                   | Sobre                                        | Respondida |
-|---------|------------------------|----------------------------------------------|------------|
-| dia 3   | bibliotecário-chefe    | Multas existem, e de quanto por dia?         | dia 5      |
-| dia 4   | setor de TI            | O sistema pode enviar email aos membros?     |            |
+| Enviada | Para        | Sobre                             | Respondida |
+|---------|-------------|-----------------------------------|------------|
+| dia 3   | direção     | Há multas? De quanto por dia?     | dia 5      |
+| dia 4   | setor de TI | Podemos enviar email aos membros? |            |
 
 ## Ainda em aberto
 
-| Linha          | Espera por                       | Desde |
-|----------------|----------------------------------|-------|
-| aviso-de-atraso | setor de TI: email aos membros   | dia 4 |
+| Linha           | Espera por                     | Desde |
+|-----------------|--------------------------------|-------|
+| aviso-de-atraso | setor de TI: email aos membros | dia 4 |
 ```
 
 A primeira tabela diz quem foi perguntado sobre o quê, e quando respondeu.
@@ -106,11 +108,11 @@ Uma resposta com um arquivo para abrir é conferida em um minuto; uma resposta s
 ## A sessão do gerente
 
 Um gerente não precisa de editor de código.
-Ele abre o host (capítulo 11) na pasta raiz do projeto, a que tem o arquivo de regras, e pergunta em palavras simples.
-O host carrega o arquivo de regras no início da sessão (capítulo 2), e o arquivo de regras manda o agente ler os documentos antes de agir, então a sessão do gerente começa dos mesmos documentos que a do desenvolvedor.
+Ele abre o host na pasta raiz do projeto, a que tem o arquivo de regras, e pergunta em palavras simples.
+O host carrega o arquivo de regras no início da sessão, e o arquivo de regras manda o agente ler os documentos antes de agir, então a sessão do gerente começa dos mesmos documentos que a do desenvolvedor.
 
 Uma pergunta não toca em código, e o modo de plano do host (capítulo 14) impede uma sessão de editar qualquer coisa.
-Quando o gerente quer mudar algo, como uma linha nova na fila, o agente a escreve por conversa, como em qualquer sessão (capítulo 13), e uma pessoa revisa e faz o commit (capítulo 15).
+Quando o gerente quer mudar algo, como uma linha nova na fila, o agente a escreve por conversa, como em qualquer sessão, e uma pessoa revisa e faz o commit.
 
 ## O que o time ganha
 

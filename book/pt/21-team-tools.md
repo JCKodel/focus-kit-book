@@ -1,11 +1,11 @@
-# As ferramentas do time: pull requests, issues e quadros
+# 21. As ferramentas do time: pull requests, issues e quadros
 
 Depois deste capítulo você consegue levar uma entrega ao branch principal por um pull request cuja revisão lê a página antes do diff, e manter issues e um quadro em sintonia com a fila sem fazer de nenhum deles a fonte da verdade.
 Você também consegue dizer por que os documentos de um projeto ficam em docs/ e nunca numa wiki.
 
 ## O problema
 
-Uma pessoa trabalhando no trunk revisa a mudança em stage e faz o commit (capítulo 15).
+Uma pessoa trabalhando no trunk revisa a mudança em stage e faz o commit.
 Um time precisa de mais duas coisas: uma segunda pessoa que revisa antes do merge, e um jeito de quem nunca abre o repositório, um gerente ou um cliente, ver o progresso.
 As estratégias de git do capítulo 19 param no merge: elas dão forma ao histórico, e não dizem nada sobre quem revisou uma mudança ou quem acompanha o trabalho.
 
@@ -17,9 +17,9 @@ O GitLab chama a mesma coisa de merge request.
 
 Com o focus-kit, um pull request carrega uma entrega:
 
-1. **Um branch por entrega**, com o nome do seu slug (capítulo 19).
+1. **Um branch por entrega**, com o nome do seu slug.
 2. **A página primeiro.** O primeiro commit no branch é `work/<slug>.md`, escrita pelo `/propose`.
-   Abra o pull request assim que ele for enviado, e a página pode ser revisada antes de existir qualquer código (capítulo 14).
+   Abra o pull request assim que ele for enviado, e a página pode ser revisada antes de existir qualquer código.
 3. **A construção depois.** O `/apply` constrói no mesmo branch; a página vai para `work/done/` e a linha da fila vira `[x]` na mesma mudança.
 4. **Um merge.** A entrega chega inteira ao branch principal, com a sua página, o seu código, os seus testes, a sua prova e a sua marca, então a fila no branch principal é sempre verdadeira.
 
@@ -39,12 +39,12 @@ Isso faz dela uma boa porta de entrada para o relato de bug de um usuário.
 Uma linha da fila pode espelhar uma issue, e o slug nomeia as duas: o título da issue começa com o slug, e a linha termina com o número da issue.
 
 ```text
-[ ] corrigir-data-de-devolucao  data de devolução um dia antes no fim do mês (#42)
+[ ] corrigir-data-de-devolucao  devolução um dia antes no fim do mês (#42)
 ```
 
 O pull request diz "Fixes #42", e o GitHub fecha a issue quando o merge acontece.[^gh-issues]
 A fila continua a fonte da verdade, porque o agente lê o repositório e nunca uma página web: uma issue sem linha na fila não existe para o `/propose`.
-Então uma issue vira uma linha por conversa (capítulo 13), e daí em diante é uma entrega como qualquer outra.
+Então uma issue vira uma linha por conversa, e daí em diante é uma entrega como qualquer outra.
 
 ## Quadros
 

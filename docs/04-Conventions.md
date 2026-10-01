@@ -31,6 +31,9 @@
 * **Teach, do not only show.** After an artifact, one sentence says what the reader should see in it; a term, a name or a choice the reader has not met yet is explained where it appears, or the text says which chapter explains it.
   An organization, a study or a tool is introduced in a few words the first time it is named (METR, DORA, Chroma, Liu's paper in chapters 1 and 2).
   No sentence is only a pointer to a later chapter ("A project writes its product in docs/00 (chapter 10)." said nothing the reader could use yet): a forward pointer follows a sentence that already says something, as a parenthesis or as "chapter 10 shows that document"; first occurrence, the prologue in `author-review-1`.
+* **Say it where the doubt is born.** What a thing is for, and what the team gets from it, is said where the thing is introduced, never saved for `## What the team gains`, which sums up and gives the evidence (first: chapter 7's orchestrator, whose reason, one test per event, was said only in the gain, `author-review-2`).
+* **Chapter pointers** (since `author-review-2`, which cut 65 of 179 per edition). A pointer forward names a term the reader has not been taught, once per chapter for each target. A pointer back stays only where the sentence leans on a specific detail worth reopening (chapter 5's red and green cycle), where it names a term of chapters 4 to 8 for the reader who skipped them (docs/00 §Audience), or where the pointers are the content, a map of where each step is taught (chapter 9's rules, chapter 24's roles and steps); a pointer back that only repeats what a reader in order has just read is cut. A chapter is found by the number in its title; in the PDF and the EPUB a chapter link prints in the text's color, and on the site it stays a link.
+* **Width of a block.** A text or Markdown artifact in a code block, a table, a queue, a folder layout, a log, keeps to 74 columns, what an A5 page holds at the PDF's code size, so no row wraps (first: chapter 18's work record, which the PDF broke). TypeScript may wrap.
 * **A note box** is a blockquote whose first words are bold, `> **Note.** ...` (pt: `> **Nota.**`; `**Caution.**` / `**Cuidado.**` for a warning), one paragraph, one sentence per line; the site, the PDF and the EPUB style it as a box (`site.css`, `pdf.css`, `epub.css`).
   It holds a definition or a warning the reader needs at that point and the section's flow does not carry: first, chapter 3's behaviour; second, chapter 4's caution on an agent that grows the process.
   It is the one box syntax pandoc and MkDocs both render; `!!!` and `:::` each break in one output.
@@ -109,7 +112,7 @@ Every chapter, in both editions, has this shape (terms from docs/03); the prolog
 status: draft            only while the chapter is not done; the delivery removes the line (docs/05 §5)
 ---
 
-# <Title>                H1, the chapter title; the navigation shows it
+# <N>. <Title>           H1, the chapter's number and title (`# 7. FOCUS: the four pieces`); the prologue is `# Prologue: <Title>` (pt: `# Prólogo: <Título>`); the navigation and the table of contents show it, so "chapter 7" in the text can be found
 
 <opening>                first paragraph, no heading, at most three sentences: what the reader can do after it
 

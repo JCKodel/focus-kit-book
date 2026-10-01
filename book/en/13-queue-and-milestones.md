@@ -1,4 +1,4 @@
-# The queue and milestones
+# 13. The queue and milestones
 
 After this chapter you can read a queue, say what each mark means and which command changes it, and write a milestone paragraph a person can check.
 You can also size and order a milestone, and add or change a line by conversation.
@@ -6,7 +6,7 @@ You can also size and order a milestone, and add or change a line by conversatio
 ## The problem
 
 A team that keeps its plan in a tracker, its decisions in a chat and its progress in someone's head cannot answer "what is left, and what was done?" without a meeting.
-An agent cannot answer it at all: it knows nothing at the start of a session ([chapter 2](02-how-agents-see.md)), so what is not written where it reads does not exist for it.
+An agent cannot answer it at all: it knows nothing at the start of a session, so what is not written where it reads does not exist for it.
 The queue is one file, docs/06, that says what comes next, what is in flight and what was delivered, in an order a person and an agent both read.
 
 ## The line
@@ -30,7 +30,7 @@ A line that grows into a paragraph is a decision in the wrong place, since the p
 A line has one of three marks, and one command moves each:
 
 * `[ ]` not yet defined: the delivery has a line and no page.
-* `[>]` defined: `/propose` wrote the page, `work/<slug>.md`, and set the mark ([chapter 14](14-propose.md)).
+* `[>]` defined: `/propose` wrote the page, `work/<slug>.md`, and set the mark.
 * `[x]` done: `/apply` built it, moved the page to `work/done/` and set the mark ([chapter 15](15-apply.md)).
 
 A line never leaves the queue; it changes mark.
@@ -83,14 +83,14 @@ Each finding you confirm becomes a `[ ]` line in a new milestone placed right af
 No command owns the queue.
 A new idea becomes a line by conversation, in any session: you tell the agent, and it writes the line in the milestone where it belongs, with a new slug and `[ ]`.
 A milestone's paragraph or a line's description changes the same way, and the slug stays, since a page or a commit may already use it.
-Lines also come from a milestone's review ([chapter 16](16-closing-a-milestone.md)) and, on an existing project, from its issues or roadmap ([chapter 12](12-starting-a-project.md)).
-You read the change before you commit it, as with every document, and nobody edits the queue by hand ([chapter 10](10-the-documents.md)).
+Lines also come from a milestone's review and, on an existing project, from its issues or roadmap.
+You read the change before you commit it, as with every document, and nobody edits the queue by hand.
 
 ## What the team gains
 
 The queue is the team's shared status board and its history in one file: what is next, what is in flight, what was done and in what order, readable by a manager without a tool and by an agent at the start of every session.
 On Ninjobs it held 102 deliveries, done and not yet done alike, in one file.
-On Case A, a client project on a low-code platform, the status report and the risk estimate for the project manager were written from the queue and the pages, not from memory, and the queue gave the pace: about 9 lines closed and 6 opened a day.
+On Case A, a client project on a low-code platform, Microsoft Power Apps with Copilot Studio, the status report and the risk estimate for the project manager were written from the queue and the pages, not from memory, and the queue gave the pace: about 9 lines closed and 6 opened a day.
 [Chapter 18](18-project-as-assistant.md) tells the rest of Case A, and [chapter 21](21-team-tools.md) shows how its queue was mirrored on the board its project manager already used.
 
 ## Key points

@@ -1,4 +1,4 @@
-# Rules as pure functions, exceptions as values
+# 5. Rules as pure functions, exceptions as values
 
 After this chapter you can write a business rule as a pure function that returns a Result, tell an exception from a refusal and from an error in any language, and say why a throw must never steer the program's flow.
 You can also keep a library's exceptions out of your domain, so a new library changes one file.

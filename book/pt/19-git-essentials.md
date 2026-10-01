@@ -1,4 +1,4 @@
-# Git essencial
+# 19. Git essencial
 
 Depois deste capítulo você consegue dizer o que um controle de versão guarda e por que o git foi criado, ler um histórico de commits, branches e merges, e fazer o merge de um branch de cada uma das quatro formas que o git oferece.
 Você também consegue desfazer uma entrega em um passo com `git revert`, e escolher entre o trunk, um branch por entrega e o git-flow para um projeto.
@@ -40,17 +40,17 @@ O histórico é a cadeia de pais, do último commit de volta ao primeiro.
 Para a biblioteca de empréstimos da Parte I ele poderia ficar assim; a saída é uma ilustração, escrita para este capítulo:
 
 ```text
-a41c9e2 Permite que um membro devolva um exemplar (devolver-livro)
-7d03b18 Permite que a bibliotecária empreste um exemplar e recusa quando as regras dizem não (emprestar-livro)
+a41c9e2 Permite devolver um exemplar (devolver-livro)
+7d03b18 Empresta um exemplar, e recusa pelas regras (emprestar-livro)
 2f6e5a1 Início: documentos e primeiro marco
 ```
 
-Cada linha é uma entrega, e a sua mensagem diz o que um usuário agora consegue fazer, com o slug da entrega no fim (o capítulo 14 dá nome às entregas por slug).
+Cada linha é uma entrega, e a sua mensagem diz o que um usuário agora consegue fazer, com o slug da entrega no fim.
 `git show <hash>` abre uma delas: a mensagem, e cada linha que ela acrescentou e removeu.
 
 O kit mantém uma regra aqui: a página de uma entrega e a sua construção são uma mudança.
 O código, os testes, os documentos que a entrega atualizou e a sua página em `work/done/` entram no mesmo commit, então o histórico guarda a decisão e a mudança que ela fez lado a lado, e desfazer a entrega desfaz tudo de uma vez.
-O agente coloca essa mudança em stage e sugere a mensagem; você a lê e faz o commit, e esse commit é a sua revisão ([capítulo 15](15-apply.md)).
+O agente coloca essa mudança em stage e sugere a mensagem; você a lê e faz o commit, e esse commit é a sua revisão.
 
 ## Branches e tags
 
@@ -188,7 +188,7 @@ Os branches de release e de hotfix são o trabalho de lançamento do time, que o
 
 ## Escolher
 
-Um projeto escreve a sua escolha uma vez, no slot Git do seu docs/05 ([capítulo 10](10-the-documents.md)), e todo comando a lê.
+Um projeto escreve a sua escolha uma vez, no slot Git do seu docs/05, e todo comando a lê.
 
 * **Trunk** serve a uma pessoa, ou a uma pessoa por vez: um commit por entrega no `main`.
 * **Um branch por entrega** serve a um time, ou a uma pessoa rodando agentes em paralelo ([capítulo 20](20-worktrees.md)): cada entrega com merge por commit de merge ou por squash, em geral por um pull request (capítulo 21).

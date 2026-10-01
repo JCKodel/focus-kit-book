@@ -1,4 +1,4 @@
-# Why process, when AI writes fast
+# 1. Why process, when AI writes fast
 
 A coding agent writes code faster than you can read it, and projects still arrive late.
 After this chapter you can explain why, and name the three things a minimal process gives the agent: a decision in writing, a limit on scope, and a check before "done".

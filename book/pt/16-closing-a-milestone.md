@@ -1,4 +1,4 @@
-# Fechando um marco
+# 16. Fechando um marco
 
 Depois deste capítulo você consegue fechar um marco: conferir o seu parágrafo no produto rodando, revisar tudo o que ele construiu com o que o seu host oferece, e decidir cada achado.
 Então você consegue transformar cada achado confirmado em uma linha de um marco novo, `<M>.1`, em vez de uma correção.
@@ -20,7 +20,7 @@ Cada problema que ela relata é um achado, e a decisão sobre cada um é sua.
 
 ## Confira o parágrafo
 
-Um marco termina com um parágrafo escrito como um teste que uma pessoa consegue conferir no produto (capítulo 13).
+Um marco termina com um parágrafo escrito como um teste que uma pessoa consegue conferir no produto.
 Para um marco da biblioteca de empréstimos, escrito para este capítulo:
 
 ```
@@ -53,7 +53,7 @@ O GitHub Copilot revisa pull requests (pedidos de merge que alguém revisa antes
 ## Decida cada achado
 
 Um achado se lê como um fato, e alguns não são.
-A pessoa é o cérebro da operação (capítulo 10): você confere o que o agente escreve contra o que você sabe, e uma revisão é o agente escrevendo.
+A pessoa é o cérebro da operação: você confere o que o agente escreve contra o que você sabe, e uma revisão é o agente escrevendo.
 Isso significa duas coisas: você nunca aceita um achado como verdadeiro sem olhar o código, e nunca descarta um sem dizer por quê.
 
 Então cada achado é confirmado ou rejeitado, com um motivo.

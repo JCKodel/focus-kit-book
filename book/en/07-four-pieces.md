@@ -1,4 +1,4 @@
-# FOCUS: the four pieces
+# 7. FOCUS: the four pieces
 
 After this chapter you can place any file of a feature in one of four pieces, view, orchestrator, use case or repository, and follow one event through them to one new state.
 You can also say what each letter of FOCUS stands for, what it corrects in Clean Architecture, and when a piece is not worth writing.
@@ -14,20 +14,23 @@ FOCUS is this book's name for one way to give that question a single answer: fou
 
 ## The acronym, letter by letter
 
-**F, Feature-oriented.** The code is organized in vertical slices: one folder holds everything a feature needs, and there is no folder per technology, no `controllers/` or `services/` ([chapter 6](06-features-not-layers.md) teaches slices).
+**F, Feature-oriented.** The code is organized in vertical slices: one folder holds everything a feature needs, and there is no folder per technology, no `controllers/` or `services/`.
 The four pieces of a feature live in its folder, side by side.
 
 **C, Clean.** The pieces are the layers of Robert C. Martin's Clean Architecture, whose dependency rule says code may point inward, toward the rules, and never outward, toward a screen or a database.[^clean-architecture]
-FOCUS keeps that rule with one correction.
-In Martin's drawing a use case talks to storage through an interface it receives, so a rule can still reach I/O, only through a door with a different name.
-In FOCUS a use case receives no repository at all: it is a pure function ([chapter 5](05-rules-and-exceptions.md)), data in, a `Result` out.
-The orchestrator is the piece that asks repositories for data and asks them to save, and it receives its repositories as a parameter, because its test passes fakes in their place.
+FOCUS keeps that rule with one correction, and the correction is the orchestrator.
+In Martin's drawing a use case talks to storage through an interface it receives, so a rule can still reach I/O, only through a door with a different name, and its test needs a double behind every door.
+In FOCUS a use case receives no repository at all: it is a pure function, data in, a `Result` out, and it holds every kind of business rule: a decision, such as who may borrow; a validation, such as whether a card number is well formed; a format, such as how a due date reads to the user.
+What makes that possible is the orchestrator, the glue between the view, the use cases and the repositories: it decides where the data comes from, which use cases validate and decide, who saves, and how the result is shaped for the view.
+It receives its repositories as a parameter, so its test passes doubles in their place and knows which ones were called, with what, and what state came out; the whole flow of a feature is proven with no database and no screen ([chapter 8](08-testing-each-piece.md) shows the test).
 Chapter 6 gives the rule behind that choice: a piece receives a dependency only where its test passes a second implementation.
 
 **U, Unidirectional.** Everything flows one way: an event, the orchestrator, the use cases and repositories it calls, and a new state.
 There is no binding, the mechanism some frameworks offer where a field on the screen and a value in memory update each other in both directions.
 No state travels back: the view never changes the state it renders, and a use case never calls a repository.
 So "what happens when event X arrives?" has one answer, and one test can check it.
+That test is the test of a behaviour: "the user wants to sign in with Google" is one event, everything it sets off is one path through the orchestrator, and what comes out is one state, a confirmed sign-in or a failure, so the test reads "given this intention, this state", with nothing to inspect in between.
+Model-View-Intent (MVI), a pattern of Android apps, draws the same one-way flow with the user's intent as the event.
 
 **S, Scalable.** Every piece is isolated and has its own test, so a new feature adds its own folder and its own tests and changes no other, and the application holds at any size.
 
@@ -35,9 +38,9 @@ So "what happens when event X arrives?" has one answer, and one test can check i
 
 | Piece | Does | Forbids |
 |---|---|---|
-| View | fires events, renders the state it receives | business rules, data access |
-| Orchestrator | turns one event into one new state: validates the input, fetches through repositories, applies the rules through use cases, asks repositories to save, publishes the state | deciding a rule, persisting |
-| Use case | the only place for a business rule; pure: data in, `Result` out | I/O, the framework, exceptions |
+| View | fires events, renders the state it receives | business rules, data access, formatting |
+| Orchestrator | turns one event into one new state: validates and formats through use cases, fetches through repositories, applies the rules through use cases, asks repositories to save, publishes the state | deciding a rule, persisting |
+| Use case | the only place for a business rule, be it a decision, a validation or a format; pure: data in, `Result` out | I/O, the framework, exceptions |
 | Repository | fetches and saves; the only place an exception from data becomes a `Result` | business rules |
 
 Read the "Forbids" column first: it keeps each piece to its job.
@@ -45,7 +48,19 @@ A view that decides who may borrow, or a repository that decides it, breaks the 
 
 An event is what happened: a tap on "Lend", or a request arriving at a server.
 A state is what the orchestrator publishes after it, whole: on a screen, what the view renders; on a server, the answer to the request.
-A repository reaches the database through a driver, the library that talks to the engine, such as a database client or an ORM; the project rarely writes one.
+A view is not only a screen.
+The JSON an API answers is a view, and so is the text a command-line tool prints: the view is the output of the computation, input, processing, output, in whatever form leaves the program.
+It is dumb on purpose: it does not even format a date; it renders the text the state carries, and the use case that formatted it has a test.
+
+### Drivers and services
+
+A repository does not talk to the disk or the network itself; it uses a driver, the library that speaks to the thing outside.
+The usual drivers come from third parties: the client library of a database engine, the program that stores and queries the data, such as SQLite or PostgreSQL; an ORM over it, such as Prisma or Entity Framework; an HTTP client; a cloud vendor's SDK, such as Firebase's.
+A project writes a driver only when the thing outside has no library: a client for a payment gateway's API, a reader of the bank's CSV statements, a wrapper around the phone's Bluetooth.
+The driver knows the protocol and nothing of the product; the repository knows the product's tables and messages and nothing of the protocol, so a driver can be replaced without a rule noticing.
+
+A service is a helper the four pieces do not name: technical code that is neither a rule nor I/O, such as hashing a password, compressing an image or rendering a PDF.
+It is usually called by a repository, before it saves or after it reads, and tested as a function.
 
 ## One event, one new state
 
@@ -111,13 +126,15 @@ export function lendRequested(
 Every line either asks a repository, asks the use case, or turns an answer into the state; none of them decides who may borrow.
 The refusals are strings and the exception is an object with a `code`, so `stateOf` tells a `Refused` from a `Failed` with one check.
 `today` comes in as a value: the code that receives the request reads the clock once and passes it on, so neither `lendRequested` nor `lend` reads it, and a test passes any date it likes.
-`repositories` comes in as a parameter: the server passes the real ones, bound to its database, and a test passes fakes ([chapter 8](08-testing-each-piece.md)).
+`repositories` comes in as a parameter: the server passes the real ones, bound to its database, and a test passes fakes.
 The flow never goes back: `lend` never sees a repository, and the view never sees anything but the state.
 
 ## The orchestrator elsewhere
 
 The orchestrator has other names in other stacks, and the job is the same.
-In Flutter it is a BLoC, a class that receives events and emits states;[^bloc] in .NET it is the Mediator pattern, as in Jimmy Bogard's library MediatR, where each request goes to one handler;[^mediatr] on a server it is the route handler that receives the request and returns the answer; on a React client it is a hook that holds the state and runs the event.
+In Flutter it is a BLoC, a class that receives events and emits states;[^bloc] in .NET it is the Mediator pattern, as in Jimmy Bogard's library MediatR, where each request goes to one handler;[^mediatr] in MVVM it is the view model, and in the MVC of web frameworks the controller is where its job sits; on a server it is the route handler that receives the request and returns the answer; on a React client it is a hook that holds the state and runs the event.
+Some find a mediator redundant next to ASP.NET MVC's controllers, since both receive a request and answer it.
+I keep both: the controller is infrastructure, replaced the day requests stop arriving over HTTP, and the handler is a piece of software tested on its own, with no web server running.
 On a client the repositories reach the network, so the orchestrator awaits them; nothing else in it changes.
 
 A feature often has both: a client orchestrator for the screen and a server orchestrator for the request, each with its own repositories.
@@ -130,7 +147,7 @@ The rule is written once and tested once, and the client's copy of the decision 
 Nothing in FOCUS exists for ceremony.
 A use case exists when there is a rule, a repository when there is I/O, an orchestrator when an event leads to a new state, and a view when there is a screen.
 A feature that shows a list of books with no rule has no use case: the orchestrator asks the repository and publishes what it got.
-KISS, YAGNI and DRY ([chapter 4](04-simplicity.md)) decide when a piece is written: when a delivery needs its job, and not before.
+KISS, YAGNI and DRY decide when a piece is written: when a delivery needs its job, and not before.
 
 On Ninjobs, I required every piece on every feature, trivial forms included, and showing one field took eight files.
 The fault was the requirement, never the architecture: I let complexity grow, and lost KISS and YAGNI on the way ([chapter 9](09-birth-of-focus-kit.md)).
@@ -144,8 +161,8 @@ No study measures a team with these pieces against the same team without them, a
 
 ## Key points
 
-* FOCUS is Feature-oriented (vertical slices), Clean (Clean Architecture's layers, with a use case that receives no repository), Unidirectional (event, orchestrator, new state, nothing back) and Scalable (every piece isolated and tested).
-* The view fires events and renders state; the orchestrator turns one event into one new state; a use case holds a rule as a pure function; the repository fetches and saves, and turns an exception from data into a `Result`.
+* FOCUS is Feature-oriented (vertical slices), Clean (Clean Architecture's layers, with a use case that receives no repository because the orchestrator fetches and saves), Unidirectional (event, orchestrator, new state, nothing back, so a behaviour is one test) and Scalable (every piece isolated and tested).
+* The view, a screen, a JSON answer or a printed line, fires events and renders state, formatting nothing; the orchestrator turns one event into one new state; a use case holds a decision, a validation or a format as a pure function; the repository fetches and saves through a driver, and turns an exception from data into a `Result`.
 * The orchestrator receives its repositories as a parameter because its test passes fakes; the clock comes in as a value.
 * Client and server have their own orchestrators and repositories and share the same use cases: the server enforces a rule, the client uses it to decide what to show.
 * A piece is written when a delivery needs its job: a feature with no rule has no use case.

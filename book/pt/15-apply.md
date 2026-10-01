@@ -1,4 +1,4 @@
-# `/apply`: construir, verificar, provar, nunca fazer commit
+# 15. `/apply`: construir, verificar, provar, nunca fazer commit
 
 Depois deste capítulo você consegue levar uma página revisada até uma mudança em stage (marcada para o próximo commit, o registro salvo no histórico do projeto) com o `/apply`, e dizer o que "pronto" significa: a verificação verde, uma prova, os documentos atualizados, a página movida e a sua linha marcada.
 Então você consegue revisar a mudança em stage contra a página e fazer o commit você mesmo, que é a revisão humana do processo.
@@ -12,11 +12,11 @@ E um agente que faz commit do próprio trabalho põe esse trabalho no histórico
 ## O que o `/apply` faz
 
 O `/apply <slug>` constrói a entrega que `work/<slug>.md` descreve, por inteiro, em uma sessão: o código, os testes, a prova e os documentos.
-Ele começa em uma sessão nova (capítulo 2), então a página é tudo o que ele leva da conversa que a escreveu, e é por isso que o capítulo 14 pede que você leia a página antes de este comando rodar.
+Ele começa em uma sessão nova, então a página é tudo o que ele leva da conversa que a escreveu, e é por isso que o capítulo 14 pede que você leia a página antes de este comando rodar.
 
 ### O que ele lê
 
-A página, o `AGENTS.md`, e três dos documentos do projeto (capítulo 10): o docs/01, a arquitetura, que diz onde cada peça fica e como os erros circulam; o docs/04, as convenções, que dizem quais testes escrever; e o docs/05, o processo.
+A página, o `AGENTS.md`, e três dos documentos do projeto: o docs/01, a arquitetura, que diz onde cada peça fica e como os erros circulam; o docs/04, as convenções, que dizem quais testes escrever; e o docs/05, o processo.
 O docs/05 guarda os slots do projeto, e o `/apply` os segue ao pé da letra: o comando de verificação, os ambientes e o que uma entrega deixa em cada um, como uma tela é provada, a política de publicação e a estratégia de git.
 
 ### A página é o escopo
@@ -48,7 +48,7 @@ Então, antes de parar, o `/apply` faz tudo isto:
 * Escreve na página o que aconteceu: o que divergiu do plano e por quê, o que foi deixado de lado, o que a prova achou, e as decisões tomadas, com um ADR se foi preciso um.
 * Atualiza os documentos que a entrega mudou: um termo novo no docs/03, uma regra nova no documento que é dono dela, uma decisão em docs/adr/.
 * Marca cada item do Pronto quando.
-* Move a página para `work/done/`, e troca a marca da linha no docs/06 de `[>]` para `[x]` (capítulo 13).
+* Move a página para `work/done/`, e troca a marca da linha no docs/06 de `[>]` para `[x]`.
 * Coloca tudo em stage e sugere a mensagem de commit no formato que o docs/05 define.
 * A última coisa que ele diz é qual ambiente está em qual versão, e o comando que atualiza os outros.
 
@@ -88,7 +88,7 @@ Leia a mudança contra a página:
 * A mensagem sugerida está certa: o assunto, os tópicos, a última linha?
 
 Leia também o que aconteceu, e pergunte-se se você teria decidido alguma divergência de outro jeito.
-Peça cada correção ao agente, na mesma sessão, nunca à mão (capítulo 10).
+Peça cada correção ao agente, na mesma sessão, nunca à mão.
 A mesma sessão guarda o raciocínio da construção: ela sabe por que fez cada escolha, o que uma sessão nova teria de adivinhar.
 
 ## O commit é a revisão humana

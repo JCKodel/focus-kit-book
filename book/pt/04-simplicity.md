@@ -1,4 +1,4 @@
-# Simplicidade é uma decisão: KISS, YAGNI, DRY
+# 4. Simplicidade é uma decisão: KISS, YAGNI, DRY
 
 Depois deste capítulo você consegue recusar um trecho de código, um documento ou uma verificação de que nenhuma entrega precisa, e dizer qual princípio o recusa e quem deu nome a ele.
 Você também sabe distinguir a duplicação que precisa sair da duplicação que deve ficar, e sabe o momento em que uma versão compartilhada é devida: a segunda ocorrência concreta.

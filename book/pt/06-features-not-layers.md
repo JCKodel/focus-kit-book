@@ -1,4 +1,4 @@
-# Features, não camadas
+# 6. Features, não camadas
 
 Depois deste capítulo você consegue organizar o código em fatias verticais, uma pasta por feature, decidir o que é uma feature e onde fica o código que duas features compartilham.
 Você também consegue decidir qual peça recebe uma dependência como parâmetro e qual não recebe nenhuma, por um teste só: o teste dela passa uma segunda implementação?
@@ -10,7 +10,7 @@ Cada feature fica espalhada por todas elas.
 Emprestar um livro em uma biblioteca assim mexe em um arquivo em `views/`, `controllers/`, `services/`, `models/` e `repositories/`, e uma mudança em como o empréstimo funciona é uma mudança em cinco pastas.
 
 O custo cai sobre quem faz a mudança.
-Uma pessoa precisa encontrar os cinco arquivos e guardá-los na cabeça ao mesmo tempo; um agente precisa abrir as cinco pastas para aprender o que o empréstimo faz, e cada arquivo que ele carrega para entender a mudança enche o contexto em que ele trabalha (capítulo 2).
+Uma pessoa precisa encontrar os cinco arquivos e guardá-los na cabeça ao mesmo tempo; um agente precisa abrir as cinco pastas para aprender o que o empréstimo faz, e cada arquivo que ele carrega para entender a mudança enche o contexto em que ele trabalha.
 As pastas dizem de que o código é feito, e nada sobre o que o programa faz.
 
 ## Camadas, e para que serviam
@@ -36,14 +36,15 @@ Código que muda junto mora junto; código que muda por razões diferentes mora 
 A biblioteca de empréstimos, o exemplo da Parte I, fica organizada assim:
 
 ```text
-src/features/emprestimos/            TelaDeEmprestimo.tsx, eventosDeEmprestimo.ts, regras.ts,
-                                     repositorio.server.ts, rota.server.ts,
-                                     regras.test.ts, eventosDeEmprestimo.test.ts,
-                                     repositorio.server.test.ts
-src/features/emprestimos/devolucao/  devolver um exemplar
-src/features/membros/                o que a biblioteca guarda sobre um membro
-src/features/catalogo/               livros e exemplares
-src/lib/result.ts                    Result, ok e err
+src/features/emprestimos/
+    TelaDeEmprestimo.tsx, eventosDeEmprestimo.ts, regras.ts,
+    repositorio.server.ts, rota.server.ts,
+    regras.test.ts, eventosDeEmprestimo.test.ts,
+    repositorio.server.test.ts
+src/features/emprestimos/devolucao/   devolver um exemplar
+src/features/membros/     o que a biblioteca guarda sobre um membro
+src/features/catalogo/    livros e exemplares
+src/lib/result.ts         Result, ok e err
 ```
 
 `TelaDeEmprestimo.tsx` é a tela de empréstimo; `eventosDeEmprestimo.ts` recebe o que a tela pede e responde com o novo estado; `regras.ts` guarda as regras do capítulo 5, como `emprestar`; `repositorio.server.ts` lê e escreve no banco de dados, e `rota.server.ts` é o endereço do empréstimo no servidor.
@@ -53,7 +54,7 @@ O capítulo 7 chama esses quatro tipos de arquivo de as quatro peças, e o capí
 
 A pasta de cima grita a biblioteca: empréstimos, membros, catálogo.
 Uma mudança em como o empréstimo funciona mexe em `emprestimos/`, e tirar os empréstimos do produto tira uma pasta.
-O critério de Parnas de 1972 (capítulo 4) funciona também neste tamanho: a fatia esconde as decisões da sua feature do resto do programa.
+O critério de Parnas de 1972 funciona também neste tamanho: a fatia esconde as decisões da sua feature do resto do programa.
 
 ## O que é uma feature
 
@@ -88,7 +89,7 @@ Mark Seemann acrescentou onde as partes reais são montadas: em um lugar, "*o ma
 Injetadas em toda parte, as dependências viram a sua própria camada de cerimônia: uma interface para cada classe, um contêiner, um parâmetro que ninguém varia.
 O mundo .NET mostra o hábito no seu extremo: uma interface para tudo, `IServicoDeMembro` na frente de `ServicoDeMembro`, e um registro num contêiner para cada par, em geral defendido em nome do SOLID.
 O hábito resolve um problema real em um SDK, cujos usuários precisam substituir partes que não são deles, e é cerimônia dentro de uma aplicação, onde cada uma dessas interfaces tem uma implementação só, para sempre.
-O DRY (capítulo 4) já dá a regra: o que não tem motivo para existir não existe.
+O DRY já dá a regra: o que não tem motivo para existir não existe.
 Se, em uma aplicação, só os repositórios têm duas implementações, a real e o fake que os testes passam, então só os repositórios ganham uma interface, ou um parâmetro; um caso de uso que sempre será aquela única função concreta não ganha nenhum dos dois.
 Este livro traça essa linha mais estreita: uma peça recebe uma dependência como parâmetro só onde o teste dela passa uma segunda implementação.
 Essa segunda implementação é um fake (um falso): um repositório que responde o que o teste define, ou um banco de dados em memória com as tabelas reais.
@@ -122,7 +123,7 @@ O resto segue do mesmo teste.
 * **Um orquestrador recebe os seus repositórios**, porque o teste dele passa repositórios falsos.
 * **Um repositório do servidor recebe o banco de dados que usa**, `buscarMembro(db, id)`, porque o teste dele passa um banco de dados em memória com as migrações reais; o código de início do servidor abre o banco real e o repassa, e essa é a raiz de composição.
 * **Um caso de uso não recebe nenhuma.** `emprestar` recebe dados e devolve um valor; o teste dele passa dados, e não há nada para trocar.
-* **Uma tela não recebe nenhuma.** Ela tem uma implementação só, e um parâmetro ali existiria por cerimônia, o que o KISS descarta (capítulo 4).
+* **Uma tela não recebe nenhuma.** Ela tem uma implementação só, e um parâmetro ali existiria por cerimônia, o que o KISS descarta.
 * **O relógio é passado como valor.** `hoje` é lido uma vez, onde o evento chega, e repassado como dado; nenhuma regra lê o relógio, então o teste de uma data de devolução passa a data que quiser.
 
 ## O que isso dá a um agente

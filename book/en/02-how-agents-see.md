@@ -1,4 +1,4 @@
-# How an agent sees your project
+# 2. How an agent sees your project
 
 The model behind a coding agent remembers nothing from one call to the next.
 After this chapter you can explain why a coding agent knows only what is in its context window at each call, why a long session gets worse, and what to keep in writing so that a fresh session starts right.
@@ -94,7 +94,7 @@ What the team decided is in files that every session loads whole, near the start
 A person who joins the project reads the same files the agent reads, and gets the same answer.
 
 The same holds for the work itself.
-In focus-kit every delivery has a page that records why it was made, what "done" meant, and, once built, what was done and how; the page is committed with the code it describes ([chapter 14](14-propose.md)).
+In focus-kit every delivery has a page that records why it was made, what "done" meant, and, once built, what was done and how; the page is committed with the code it describes.
 Everything the project did, and how, is written and versioned next to the code, so someone new to the project, a developer or a manager, asks the agent a question about it and gets an answer read from those pages, not from a colleague's memory.
 There is no measure of this gain in this book; the evidence is the loss it avoids, which the studies above measured.
 

@@ -1,4 +1,4 @@
-# A fila e os marcos
+# 13. A fila e os marcos
 
 Depois deste capítulo você consegue ler uma fila, dizer o que cada marca significa e que comando a muda, e escrever um parágrafo de marco que uma pessoa consegue conferir.
 Você também consegue dimensionar e ordenar um marco, e acrescentar ou mudar uma linha conversando.
@@ -6,7 +6,7 @@ Você também consegue dimensionar e ordenar um marco, e acrescentar ou mudar um
 ## O problema
 
 Um time que guarda o plano em um gerenciador de tarefas, as decisões em um chat e o andamento na cabeça de alguém não consegue responder "o que falta, e o que foi feito?" sem uma reunião.
-Um agente não consegue responder de jeito nenhum: ele não sabe nada no começo de uma sessão ([capítulo 2](02-how-agents-see.md)), então o que não está escrito onde ele lê não existe para ele.
+Um agente não consegue responder de jeito nenhum: ele não sabe nada no começo de uma sessão, então o que não está escrito onde ele lê não existe para ele.
 A fila é um arquivo, o docs/06, que diz o que vem a seguir, o que está em andamento e o que foi entregue, em uma ordem que uma pessoa e um agente leem igual.
 
 ## A linha
@@ -30,7 +30,7 @@ Uma linha que cresce até virar um parágrafo é uma decisão no lugar errado, j
 Uma linha tem uma de três marcas, e um comando move cada uma:
 
 * `[ ]` ainda não definida: a entrega tem uma linha e nenhuma página.
-* `[>]` definida: o `/propose` escreveu a página, `work/<slug>.md`, e pôs a marca ([capítulo 14](14-propose.md)).
+* `[>]` definida: o `/propose` escreveu a página, `work/<slug>.md`, e pôs a marca.
 * `[x]` feita: o `/apply` a construiu, moveu a página para `work/done/` e pôs a marca ([capítulo 15](15-apply.md)).
 
 Uma linha nunca sai da fila; ela muda de marca.
@@ -83,14 +83,14 @@ Cada achado que você confirma vira uma linha `[ ]` em um marco novo posto logo 
 Nenhum comando é dono da fila.
 Uma ideia nova vira uma linha conversando, em qualquer sessão: você conta ao agente, e ele escreve a linha no marco a que ela pertence, com um slug novo e `[ ]`.
 O parágrafo de um marco ou a descrição de uma linha muda do mesmo jeito, e o slug fica, já que uma página ou um commit pode já usá-lo.
-Linhas também vêm da revisão de um marco ([capítulo 16](16-closing-a-milestone.md)) e, em um projeto existente, das issues ou do roadmap dele ([capítulo 12](12-starting-a-project.md)).
-Você lê a mudança antes do commit, como com todo documento, e ninguém edita a fila à mão ([capítulo 10](10-the-documents.md)).
+Linhas também vêm da revisão de um marco e, em um projeto existente, das issues ou do roadmap dele.
+Você lê a mudança antes do commit, como com todo documento, e ninguém edita a fila à mão.
 
 ## O que o time ganha
 
 A fila é o quadro de status compartilhado do time e o histórico dele em um arquivo: o que vem a seguir, o que está em andamento, o que foi feito e em que ordem, legível por um gerente sem ferramenta nenhuma e por um agente no começo de toda sessão.
 Na Ninjobs ela guardou 102 entregas, feitas e ainda não feitas, em um arquivo.
-No Caso A, um projeto para um cliente em uma plataforma low-code, o relatório de status e a estimativa de risco para o gerente de projeto foram escritos a partir da fila e das páginas, não de memória, e a fila deu o ritmo: cerca de 9 linhas fechadas e 6 abertas por dia.
+No Caso A, um projeto para um cliente em uma plataforma low-code, o Microsoft Power Apps com o Copilot Studio, o relatório de status e a estimativa de risco para o gerente de projeto foram escritos a partir da fila e das páginas, não de memória, e a fila deu o ritmo: cerca de 9 linhas fechadas e 6 abertas por dia.
 O [capítulo 18](18-project-as-assistant.md) conta o resto do Caso A, e o [capítulo 21](21-team-tools.md) mostra como a fila dele foi espelhada no quadro que o gerente de projeto já usava.
 
 ## Pontos-chave

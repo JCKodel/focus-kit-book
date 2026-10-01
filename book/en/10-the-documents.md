@@ -1,13 +1,13 @@
-# The documents: one place per fact
+# 10. The documents: one place per fact
 
 After this chapter you can say what each of the seven project documents, the ADRs and `AGENTS.md` hold, and decide which one a new fact belongs in.
 You can also change any of them by talking to the agent, and say why that gives every session and every person the same answer.
 
 ## The problem
 
-A fresh session knows only what is written in files (chapter 2).
+A fresh session knows only what is written in files.
 A fact that lives in someone's head never reaches it, and a fact written in several places goes stale in some of them, so the agent reads whichever copy it finds first.
-On Ninjobs a decision lived in six places, and keeping them in step cost more than the work (chapter 9).
+On Ninjobs a decision lived in six places, and keeping them in step cost more than the work.
 
 ## One place per fact
 
@@ -36,6 +36,9 @@ One section is filled in by the project, "This project", whose entries are its s
 The commands read these facts here, so no command file holds any of them.
 
 **docs/06, the queue.** The milestones, each with a paragraph saying what is true when it closes, and under each one line per delivery, in order, with a mark for its state (chapter 13).
+It is the document you touch most: the whole of the project's work, added to and edited every day, by conversation.
+It does what a kanban board or a backlog of work items does in an agile process, with one difference: the agent reads it.
+Every document is read, and corrected when it is wrong; the queue is the one that gives the product its shape.
 
 ## The two choices
 
@@ -55,7 +58,8 @@ The Git slot of docs/05 records the answer, and an ADR records why.
 
 ## ADRs
 
-An ADR, an architecture decision record, is one file per decision, `docs/adr/ADR-NNNN-<slug>.md`, with its context, the decision, its consequences and its date.
+ADR stands for Architecture Decision Record.
+An ADR is one file per decision, `docs/adr/ADR-NNNN-<slug>.md`, with its context, the decision, its consequences and its date.
 Michael Nygard proposed the format in 2011, because "*one of the hardest things to track during the life of a project is the motivation behind certain decisions*".[^nygard-adr]
 An ADR is amended, never rewritten: when the decision changes, an amendment below it says what changed and when, and the original reason stays above.
 The next person who wants to change it again reads why it was so, and weighs the old reason instead of guessing at it.
@@ -110,7 +114,7 @@ Your part is to interpret, guide and validate: say what the change means, steer 
 An agent's text reads as right even when it is wrong, so you check it against what you know and never trust it blindly, as you would not trust a colleague's.
 
 The open decisions of docs/00 are where the agent stops.
-The library's docs/00 lists fines for late returns as open, so a page that touches late returns names them as out of scope (chapter 14), and an agent asked to build them stops and asks, where it would otherwise have picked an amount and a rule on its own.
+The library's docs/00 lists fines for late returns as open, so a page that touches late returns names them as out of scope, and an agent asked to build them stops and asks, where it would otherwise have picked an amount and a rule on its own.
 
 ## What the team gains
 

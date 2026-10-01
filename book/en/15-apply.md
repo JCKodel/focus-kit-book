@@ -1,4 +1,4 @@
-# `/apply`: build, verify, prove, never commit
+# 15. `/apply`: build, verify, prove, never commit
 
 After this chapter you can follow a reviewed page to a staged change with `/apply`, and say what "done" means: verify green, a proof, the documents updated, the page moved and its line marked.
 You can then review the staged change against the page and commit it yourself, which is the human review of the process.
@@ -12,11 +12,11 @@ And an agent that commits its own work puts it in the project's history before a
 ## What `/apply` does
 
 `/apply <slug>` builds the delivery that `work/<slug>.md` describes, completely, in one session: the code, the tests, the proof and the documents.
-It starts in a fresh session (chapter 2), so the page is all it takes from the conversation that wrote it, which is why chapter 14 asks you to read the page before this command runs.
+It starts in a fresh session, so the page is all it takes from the conversation that wrote it, which is why chapter 14 asks you to read the page before this command runs.
 
 ### What it reads
 
-The page, `AGENTS.md`, and three of the project documents (chapter 10): docs/01, the architecture, which says where each piece goes and how errors travel; docs/04, the conventions, which say which tests to write; and docs/05, the process.
+The page, `AGENTS.md`, and three of the project documents: docs/01, the architecture, which says where each piece goes and how errors travel; docs/04, the conventions, which say which tests to write; and docs/05, the process.
 docs/05 holds the project's slots, and `/apply` follows them literally: the verify command, the environments and what a delivery leaves in each, how a screen is proven, the publish policy and the git strategy.
 
 ### The page is the scope
@@ -48,7 +48,7 @@ So before it stops, `/apply` does all of this:
 * It writes into the page what happened: what diverged from the plan and why, what was dropped, what the proof found, and the decisions taken, with an ADR if one was needed.
 * It updates the documents the delivery changed: a new term into docs/03, a new rule into the document that owns it, a decision into docs/adr/.
 * It ticks every item of Done when.
-* It moves the page to `work/done/`, and turns the line's mark in docs/06 from `[>]` to `[x]` (chapter 13).
+* It moves the page to `work/done/`, and turns the line's mark in docs/06 from `[>]` to `[x]`.
 * It stages everything and suggests the commit message in the format docs/05 defines.
 * The last thing it says is which environment is at which version, and the command that updates the others.
 
@@ -88,7 +88,7 @@ Read it against the page:
 * Is the suggested message right: the subject, the bullets, the last line?
 
 Read what happened too, and ask whether you would have decided any divergence otherwise.
-Ask the agent for each correction, in the same session, never by hand (chapter 10).
+Ask the agent for each correction, in the same session, never by hand.
 The same session keeps the reasoning of the build: it knows why it made each choice, which a fresh session would have to guess.
 
 ## The commit is the human review

@@ -1,4 +1,4 @@
-# A test for each piece
+# 8. A test for each piece
 
 After this chapter you can say which test guards each of the four pieces and what it swaps, only the I/O and the clock, and follow one rule through its tests.
 You can also write a fake that fails the test when it is called unexpectedly, and name tests so that a reviewer reads them as the sentences of the rule.
@@ -124,6 +124,22 @@ Read in a row, the names are the rules of lending, and a rule that has no senten
 Names like `test1` or `lend works` tell the reader nothing and hide the rule that is missing.
 Kent Beck's *Test-Driven Development: By Example* (2002) writes the test before the code, so the test is the first statement of what the code must do; a name that reads as a sentence keeps it a statement a person can check.[^beck-tdd]
 
+## What tests prove, and what they do not
+
+For years the reason to have few tests was the cost of writing them.
+An agent writes a test in seconds, so that reason is gone.
+The risk moved to the other side: an agent writes tests so easily that it writes too many, the same case five ways, until the suite takes minutes and nobody runs it before saying "done".
+Ask of a test what chapter 4 asks of any step: which broken rule would it catch that no other test catches?
+
+Red and green are how an agent's test earns trust ([chapter 5](05-rules-and-exceptions.md) showed the cycle).
+A test seen red before the code existed, and green after, has proven that it can fail.
+A test written after the code, by the agent that wrote the code, may assert what the code does in place of what the rule says, and pass forever.
+
+A green suite still does not prove that the software works.
+A test can be wrong and pass.
+Unit tests check each piece alone, and the sum of the pieces can fail where no piece does: a field the client sends under one name and the server reads under another passes every unit test on both sides.
+That is the job of the few end-to-end tests, and the reason a delivery also carries a proof, the result seen working, before anyone calls it done ([chapter 15](15-apply.md)).
+
 ## What this gives an agent
 
 An agent that changes `lend` runs the slice's unit tests and knows in seconds whether it broke the rule, before it runs the whole verify of [chapter 15](15-apply.md).
@@ -140,7 +156,7 @@ This book gives no baseline count of how much sooner a team catches a broken rul
 * A use case is tested with data alone, a repository against an in-memory database with the real migrations, an orchestrator with fake repositories, and the view with a few end-to-end tests in a browser.
 * A test swaps only I/O and the clock, and the clock is a value passed in, so most tests fake nothing but the repositories.
 * A fake answers what the test sets and throws on any call the test did not expect; prefer it to a mock, which repeats the code it tests.
-* One rule followed through its tests shows what each level proves that the others do not.
+* Each level of test proves what the others do not, and a green suite still proves less than working software: a test can be wrong, and the pieces can fail together, so see a test red before trusting it green, and keep the proof.
 * A test's name is a sentence of the rule: a reviewer reads the names, and a rule with no sentence has no test.
 
 [^vitest]: Vitest, "Getting Started", documentation, accessed 2026-09-29. <https://vitest.dev/guide/>

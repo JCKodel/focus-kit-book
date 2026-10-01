@@ -1,4 +1,4 @@
-# Worktrees e agentes em paralelo
+# 20. Worktrees e agentes em paralelo
 
 Depois deste capítulo você consegue pôr dois agentes para construir duas entregas ao mesmo tempo, cada um na sua própria pasta, para que cada merge guarde uma entrega e nada mais.
 Você também consegue resolver o conflito quando os dois mexeram nas mesmas linhas, pegar um marcador de conflito antes que ele entre em um commit, e dizer quando trabalhar em paralelo deixa de compensar.
@@ -41,7 +41,7 @@ Digamos que a biblioteca de empréstimos tem duas entregas prontas para construi
 * O agente que constrói `lista-de-atrasos` faz o mesmo em `../biblioteca-lista-de-atrasos`, ao mesmo tempo.
 * Ninguém troca de branch, então nada precisa de stash, e nenhum agente vê os arquivos pela metade do outro.
 
-Quando uma entrega está pronta, você a traz para o `main` a partir da pasta principal com um commit de merge, `git merge --no-ff`, para que ela continue uma unidade de trabalho, desfeita em um passo com `git revert -m 1 <merge>` (capítulo 19).
+Quando uma entrega está pronta, você a traz para o `main` a partir da pasta principal com um commit de merge, `git merge --no-ff`, para que ela continue uma unidade de trabalho, desfeita em um passo com `git revert -m 1 <merge>`.
 
 ## A vida de um worktree
 
@@ -84,9 +84,9 @@ Apaga o branch, que sobrevive à sua pasta.
 
 ## Worktrees no kit
 
-Um worktree por entrega é uma das estratégias de git que um projeto pode escrever no slot Git do seu docs/05 (capítulo 19), e no kit são os passos acima com o `/propose` e o `/apply` no meio.
-O `/propose <slug>` cria o worktree com o nome do slug, `../<project>-<slug>` em um branch `<slug>` a partir do `main`, e escreve a página ali ([capítulo 14](14-propose.md)).
-O `/apply <slug>` roda em uma sessão nova aberta naquela pasta, constrói a página, e coloca a mudança em stage ([capítulo 15](15-apply.md)).
+Um worktree por entrega é uma das estratégias de git que um projeto pode escrever no slot Git do seu docs/05, e no kit são os passos acima com o `/propose` e o `/apply` no meio.
+O `/propose <slug>` cria o worktree com o nome do slug, `../<project>-<slug>` em um branch `<slug>` a partir do `main`, e escreve a página ali.
+O `/apply <slug>` roda em uma sessão nova aberta naquela pasta, constrói a página, e coloca a mudança em stage.
 Você revisa e faz o commit no branch, faz o merge no `main` com `--no-ff`, remove o worktree e apaga o branch.
 
 O agente nunca faz commit, merge, resolve um conflito ou remove um worktree: cada passo que muda o histórico é seu, como em toda estratégia de git.
@@ -100,16 +100,16 @@ Isso é um conflito.[^git-merge]
 Um conflito é sobre linhas, não sobre arquivos: dois branches que mudam o mesmo arquivo em pontos distantes entram por merge sozinhos.
 
 No arquivo em conflito, o git escreve as duas versões entre marcadores de conflito: `<<<<<<<` abre a versão do branch em que você está, `=======` a separa da versão do branch que está entrando, e `>>>>>>>` fecha essa.[^git-merge]
-Cada entrega marca a sua própria linha na fila ([capítulo 13](13-queue-and-milestones.md)), então duas entregas cujas linhas são vizinhas sempre se encontram ali.
+Cada entrega marca a sua própria linha na fila, então duas entregas cujas linhas são vizinhas sempre se encontram ali.
 Aqui o merge de `devolver-livro` foi feito primeiro, e `lista-de-atrasos` entra em segundo; o bloco é uma ilustração, escrita para este capítulo:
 
 ```text
 <<<<<<< HEAD
 [x] devolver-livro     a bibliotecária registra que um exemplar voltou
-[ ] lista-de-atrasos   a bibliotecária vê todo empréstimo com a devolução vencida
+[ ] lista-de-atrasos   a bibliotecária vê os empréstimos vencidos
 =======
 [ ] devolver-livro     a bibliotecária registra que um exemplar voltou
-[x] lista-de-atrasos   a bibliotecária vê todo empréstimo com a devolução vencida
+[x] lista-de-atrasos   a bibliotecária vê os empréstimos vencidos
 >>>>>>> lista-de-atrasos
 ```
 

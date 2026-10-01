@@ -1,4 +1,4 @@
-# Git essentials
+# 19. Git essentials
 
 After this chapter you can say what version control keeps and why git was made, read a history of commits, branches and merges, and merge a branch in each of the four ways git offers.
 You can also undo a delivery in one step with `git revert`, and choose between trunk, a branch per delivery and git-flow for a project.
@@ -41,16 +41,16 @@ For the lending library of Part I it could read like this; the output is an illu
 
 ```text
 a41c9e2 Let a member return a copy (return-book)
-7d03b18 Let a librarian lend a copy and refuse when the rules say no (lend-book)
+7d03b18 Lend a copy, and refuse when the rules say no (lend-book)
 2f6e5a1 Start: documents and first milestone
 ```
 
-Each line is one delivery, and its message says what a user can now do, with the delivery's slug at the end (chapter 14 names deliveries by slug).
+Each line is one delivery, and its message says what a user can now do, with the delivery's slug at the end.
 `git show <hash>` opens one of them: the message, and every line it added and removed.
 
 The kit keeps one rule here: a delivery's page and its build are one change.
 The code, the tests, the documents the delivery updated and its page in `work/done/` go into the same commit, so the history holds the decision and the change it made side by side, and taking the delivery back takes all of it at once.
-The agent stages that change and suggests the message; you read it and commit it, and that commit is your review ([chapter 15](15-apply.md)).
+The agent stages that change and suggests the message; you read it and commit it, and that commit is your review.
 
 ## Branches and tags
 
@@ -188,7 +188,7 @@ Release and hotfix branches are the team's release work, which the kit does not 
 
 ## Choosing
 
-A project writes its choice once, in the Git slot of its docs/05 ([chapter 10](10-the-documents.md)), and every command reads it.
+A project writes its choice once, in the Git slot of its docs/05, and every command reads it.
 
 * **Trunk** fits one person, or one person at a time: one commit per delivery on `main`.
 * **A branch per delivery** fits a team, or one person running agents in parallel ([chapter 20](20-worktrees.md)): each delivery merged by merge commit or squash, usually through a pull request (chapter 21).

@@ -1,4 +1,4 @@
-# O regulador
+# 17. O regulador
 
 Depois deste capítulo você consegue perguntar a tudo o que quer entrar no seu processo, e a cada passo que já está nele, que erro concreto ele teria pegado, e aceitar só uma resposta que nomeie um erro que aconteceu.
 Você também consegue listar o que o processo não tem, e dizer o que faz cada um desses trabalhos no lugar.
@@ -7,7 +7,7 @@ Você também consegue listar o que o processo não tem, e dizer o que faz cada 
 
 Um processo cresce um passo razoável de cada vez.
 Uma checagem aqui, um modelo ali, uma revisão antes de cada construção: cada um faz sentido sozinho, e cada um é pago de novo por toda entrega que vem depois, que o roda, o satisfaz e espera por ele.
-Na Ninjobs os passos se acumularam em 29 checagens que nunca pegaram um erro no produto, caras de satisfazer e fáceis de contornar (capítulo 9).
+Na Ninjobs os passos se acumularam em 29 checagens que nunca pegaram um erro no produto, caras de satisfazer e fáceis de contornar.
 Ninguém as acrescentou para atrasar o trabalho; ninguém perguntou o que cada uma tinha pegado.
 
 ## A pergunta
@@ -41,7 +41,7 @@ No código o regulador tem a sua própria forma, a regra da segunda ocorrência 
 O §7 do docs/05 lista sete coisas que o processo não tem.
 Cada trabalho ainda é feito, por algo que o processo já tem:
 
-* **Nenhuma especificação formal:** a página, `work/<slug>.md`, diz o que a entrega faz, com as palavras da pessoa que a lê (capítulo 14).
+* **Nenhuma especificação formal:** a página, `work/<slug>.md`, diz o que a entrega faz, com as palavras da pessoa que a lê.
 * **Nenhum spec delta**, o arquivo do OpenSpec que lista só os requisitos que uma mudança acrescenta, altera ou remove, juntado às especificações quando a mudança é arquivada:[^openspec-glossary] os documentos que a entrega muda, na mesma entrega, dizem o que mudou.
 * **Nenhuma pasta de mudança:** a página é a mudança, em `work/<slug>.md` enquanto é construída e em `work/done/` depois.
 * **Nenhuma tarefa numerada:** as linhas de Comportamento, cada uma um teste ou uma checagem.

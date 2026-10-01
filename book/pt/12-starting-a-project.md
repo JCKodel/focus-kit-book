@@ -1,11 +1,11 @@
-# Começando: `/brainstorm` e `/analyze`
+# 12. Começando: `/brainstorm` e `/analyze`
 
 Depois deste capítulo você consegue começar um projeto novo com o `/brainstorm`, ou documentar um projeto existente com o `/analyze`, conversando, e revisar os documentos que cada comando escreve antes de fazer o commit deles (registrá-los no histórico do projeto).
 Você também consegue escolher uma stack pelo que o projeto precisa e por quanto o agente a conhece, e guardar o que o código não diz onde o agente lê.
 
 ## O problema
 
-Toda sessão seguinte lê os documentos do projeto antes de agir ([capítulo 10](10-the-documents.md)), então eles têm de existir antes da primeira entrega.
+Toda sessão seguinte lê os documentos do projeto antes de agir, então eles têm de existir antes da primeira entrega.
 Um agente que começa sem nada escrito decide tudo sozinho, e um questionário falha pelo outro lado: pergunta a uma pessoa o que ela ainda não sabe responder, ou o que o código já diz.
 O focus-kit tem dois comandos para isso, um para um repositório vazio e outro para um repositório com alguma coisa dentro, e os dois escrevem os mesmos documentos conversando e não escrevem código.
 
@@ -16,7 +16,7 @@ Ele conversa sobre um assunto de cada vez, nesta ordem, e passa ao seguinte quan
 
 1. **O produto** (docs/00): o que ele é em uma frase, para quem, o que ele não é, como é uma boa decisão aqui.
 2. **O vocabulário** (docs/03): as dez a vinte palavras sem as quais o produto não pode ser descrito, cada uma com seu nome no código.
-3. **Como ele é construído** (docs/01): a stack e a forma do código, com as duas escolhas do kit, o FOCUS e a estratégia de git ([capítulo 10](10-the-documents.md)), cada uma com a recomendação do agente para essa stack.
+3. **Como ele é construído** (docs/01): a stack e a forma do código, com as duas escolhas do kit, o FOCUS e a estratégia de git, cada uma com a recomendação do agente para essa stack.
 4. **As convenções** (docs/04): a língua da documentação e a língua dos identificadores, o estilo, onde ficam os testes, o formato do commit.
 5. **Os slots do processo** (docs/05): o comando de verificação, os ambientes, como uma tela é provada, quando um ambiente além da sua máquina é atualizado.
 6. **O primeiro marco** (docs/06): de três a oito entregas, uma linha cada, em ordem, e depois a revisão dele; as primeiras são o esqueleto em que as outras se apoiam.
@@ -40,7 +40,7 @@ Uma stack que não consegue entregar isso está fora, por mais que o agente a co
 Um modelo escreve melhor o que viu mais durante o treino, e a medida pública mais próxima disso é quantas pessoas escrevem uma linguagem abertamente.
 Pela contagem do GitHub, o TypeScript virou a linguagem mais usada no GitHub em agosto de 2025, com 2.636.006 contribuidores mensais, à frente de Python e JavaScript.[^octoverse]
 A contagem é de pessoas e não diz nada sobre linhas de código, então leia-a como um ranking e nunca como um tamanho.
-Na Ninjobs, o mesmo agente errava o design no Flutter, onde tinha poucos exemplos de um design system customizado para aprender, e acertava no React ([capítulo 9](09-birth-of-focus-kit.md)).
+Na Ninjobs, o mesmo agente errava o design no Flutter, onde tinha poucos exemplos de um design system customizado para aprender, e acertava no React.
 
 **A stack confere a si mesma?**
 Um compilador que rejeita um tipo errado e testes que rodam em segundos avisam ao agente que ele errou antes que você precise avisar.
@@ -125,6 +125,9 @@ Dê isso como sua resposta à pergunta do FOCUS, por exemplo "FOCUS inteiro, com
 O código diz o que um projeto faz; raramente diz por que, para quem, ou o que foi prometido.
 Esse conhecimento mora em propostas, contratos, e-mails, transcrições de reuniões, tickets e apresentações, e o que o agente não lê, ele tem de adivinhar.
 Ponha tudo o que você tem sobre o projeto em uma pasta na raiz, `context/`, como está, sem triagem e sem resumo, e mantenha-a separada de `docs/`: `context/` é de onde o agente lê, `docs/` é o que ele escreve.
+Quanto mais a pasta guarda, propostas para o cliente, transcrições de reuniões, e-mails, melhores os documentos que o agente escreve a partir dela, e mais gente do time ele consegue responder, muito além do código.
+É a diferença entre "isto foi feito assim porque o cliente pediu, no e-mail do dia 12" e "ninguém sabe por que é assim".
+Chegou um documento novo, ponha-o na pasta e peça ao agente que o leia e traga para o projeto o que ele muda: uma regra para o docs/00, um termo para o docs/03, uma linha para a fila.
 Nenhum dos dois comandos procura essa pasta pelo nome, então diga isso na mesma mensagem, `/analyze Read context/ first, whole.` (leia `context/` primeiro, inteira); essa frase é instrução sua, e funciona também para o `/brainstorm` quando um briefing ou uma proposta existe antes do código.
 Se a pasta entra no commit, e o que nunca pode entrar, é uma decisão própria ([capítulo 18](18-project-as-assistant.md)).
 
@@ -138,7 +141,7 @@ Confira que:
 * cada ADR registra uma decisão que você tomou, ou diz que a escolha foi do agente;
 * em um projeto existente, cada afirmação observada é verdadeira no código (abra o arquivo que ela cita), cada questão em aberto é uma contradição que o código tem de fato, e nada descreve o que deveria existir em vez do que existe.
 
-Quando algo está errado, peça a correção ao agente na mesma sessão, que ainda guarda a conversa, e deixe que ele escreva a mudança; nunca edite à mão, porque o agente sabe que outros documentos a correção toca ([capítulo 10](10-the-documents.md)).
+Quando algo está errado, peça a correção ao agente na mesma sessão, que ainda guarda a conversa, e deixe que ele escreva a mudança; nunca edite à mão, porque o agente sabe que outros documentos a correção toca.
 Leia com desconfiança.
 O texto de um agente parece certo mesmo quando está errado: um assunto pulado não deixa buraco na prosa, e uma afirmação do README copiada como fato se lê tão bem quanto uma que o agente conferiu.
 Só uma conferência contra o que você respondeu, ou contra o código, encontra qualquer um dos dois.

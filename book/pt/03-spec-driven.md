@@ -1,11 +1,11 @@
-# Desenvolvimento Guiado por Especificação
+# 3. Desenvolvimento Guiado por Especificação
 
 O Desenvolvimento Guiado por Especificação (Spec-Driven Development, ou SDD, o termo que você vai encontrar na mídia) faz um agente de código escrever a decisão antes do código, e as ferramentas que o praticam podem escrever muito mais do que uma feature precisa.
 Depois deste capítulo você consegue dizer o que é Desenvolvimento Guiado por Especificação e até onde uma ferramenta leva a especificação, apontar o que o Spec Kit e o OpenSpec acertaram, e dizer onde começa o custo de escrever uma decisão em muitos lugares.
 
 ## O problema
 
-Um agente que recebe uma tarefa e nada mais decide o que você não decidiu, no meio da construção ([capítulo 1](01-why-process.md)).
+Um agente que recebe uma tarefa e nada mais decide o que você não decidiu, no meio da construção.
 A primeira resposta é escrever a decisão antes do código, num arquivo que o agente lê.
 O segundo problema chega com a primeira resposta: cada arquivo escrito é um arquivo que alguém revisa e mantém verdadeiro, e uma ferramenta pode escrever tanto que a especificação vira o trabalho.
 
@@ -41,7 +41,7 @@ Cada uma parou antes de escrever código.
 ## O que elas acertaram
 
 **A decisão é escrita antes do código, em arquivos que o agente lê.**
-Uma decisão que vive só na conversa se perde quando a sessão termina ([capítulo 2](02-how-agents-see.md)).
+Uma decisão que vive só na conversa se perde quando a sessão termina.
 As três ferramentas pararam com a feature decidida em arquivos dentro do projeto, onde uma sessão nova os encontra.
 
 **Algumas decisões são escritas uma vez por projeto.**
@@ -68,7 +68,7 @@ Böckeler encontrou o mesmo no Spec Kit: os arquivos dele "*eram repetitivos, ta
 
 Uma página basta porque a maior parte do que esses arquivos repetem, o produto, o seu vocabulário, as suas regras e as decisões já tomadas, é a mesma para toda feature.
 O focus-kit escreve essa parte uma vez por projeto, em documentos mantidos em dia ([capítulo 10](10-the-documents.md)), então a página de uma feature guarda só o que é novo nela.
-O custo é escrever esses documentos e mantê-los verdadeiros; o retorno é uma página por feature, lida e revisada de uma vez, no lugar de uma pasta ([capítulo 14](14-propose.md)).
+O custo é escrever esses documentos e mantê-los verdadeiros; o retorno é uma página por feature, lida e revisada de uma vez, no lugar de uma pasta.
 As contagens dizem o que cada ferramenta escreve antes do código; não dizem qual delas constrói software melhor, e uma feature num dia não é um benchmark.
 
 ## O que o time ganha

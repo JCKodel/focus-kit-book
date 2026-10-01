@@ -1,4 +1,4 @@
-# O que os agentes custam, e onde compensam
+# 23. O que os agentes custam, e onde compensam
 
 Depois deste capítulo você consegue ler uma contagem de tokens nos logs do seu host, transformá-la num custo por entrega que o seu time consegue repetir, e dizer por que a página e os documentos mantêm esse custo pequeno.
 Você também consegue dizer onde um agente se paga, onde ele se paga menos e onde ele não se paga.
@@ -19,7 +19,7 @@ O host, o programa que você roda, cobra cada chamada ao modelo em tokens, e con
 * **Leitura do cache**: texto guardado que uma chamada seguinte reusa.
 * **Saída**: o texto que o modelo escreve, a sua resposta e os comandos que ele pede ao host para rodar.
 
-O modelo não lembra nada entre uma chamada e outra, então o host manda o contexto inteiro de novo toda vez: as suas próprias instruções, o arquivo de regras, cada arquivo lido até ali e a conversa (capítulo 2).
+O modelo não lembra nada entre uma chamada e outra, então o host manda o contexto inteiro de novo toda vez: as suas próprias instruções, o arquivo de regras, cada arquivo lido até ali e a conversa.
 O cache guarda essa parte repetida, e a chamada seguinte a lê de volta por uma fração do preço da entrada nova.
 A documentação de preços da Anthropic dá os multiplicadores: uma escrita no cache custa 1,25 vez um token de entrada normal, para um cache de cinco minutos, e uma leitura do cache custa um décimo disso ou menos, conforme o modelo.[^anthropic-pricing]
 
@@ -64,8 +64,8 @@ Mantenha as leituras do cache numa coluna própria, e uma mudança no jeito de o
 
 O [capítulo 2](02-how-agents-see.md) mostrou que tudo o que está na janela de contexto vai junto em cada chamada, e que uma sessão longa também piora em lembrar o que está nela.
 O método responde com uma sessão nova por entrega.
-O `/apply` começa pelo arquivo de regras, pelos documentos que ele cita e por uma página ([capítulo 15](15-apply.md)), então o contexto tem o que esta entrega precisa e nada da anterior.
-É a página que torna isso possível: ela leva cada decisão de que a construção precisa ([capítulo 14](14-propose.md)), então a sessão não precisa herdar a conversa que as tomou.
+O `/apply` começa pelo arquivo de regras, pelos documentos que ele cita e por uma página, então o contexto tem o que esta entrega precisa e nada da anterior.
+É a página que torna isso possível: ela leva cada decisão de que a construção precisa, então a sessão não precisa herdar a conversa que as tomou.
 
 Assim o contexto fica do tamanho da entrega, e a fatura também.
 Um time que mantém uma sessão longa por uma semana paga, em cada chamada da sexta-feira, pelos arquivos lidos na segunda.
@@ -77,13 +77,13 @@ A página diz o que construir, os testes e a verificação dizem se está constr
 É ali que os tokens compram mais: o tempo da pessoa vai para ler uma página e uma mudança em stage.
 
 **Ele compensa menos** no trabalho cuja decisão ainda está sendo tomada.
-Uma conversa de `/propose` é barata em tokens e cara no tempo da pessoa, porque é a pessoa quem decide ([capítulo 14](14-propose.md)).
+Uma conversa de `/propose` é barata em tokens e cara no tempo da pessoa, porque é a pessoa quem decide.
 O agente ajuda ali fazendo as perguntas certas na ordem certa, e o custo a observar são as horas de uma pessoa, que nenhuma contagem de tokens mostra.
 
 **Ele não compensa** numa stack que o agente viu pouco.
-No Ninjobs, antes do método, o agente chutava os valores em pixels de um design personalizado em Flutter do qual tinha poucos exemplos para aprender, e tela após tela chegava perto do design sem alcançá-lo ([capítulo 9](09-birth-of-focus-kit.md)).
+No Ninjobs, antes do método, o agente chutava os valores em pixels de um design personalizado em Flutter do qual tinha poucos exemplos para aprender, e tela após tela chegava perto do design sem alcançá-lo.
 Cada tentativa custou tokens e a revisão de uma pessoa, e nenhum dos dois comprou uma tela pronta.
-Escolher uma stack que o agente conhece é uma decisão de custo tanto quanto técnica ([capítulo 12](12-starting-a-project.md)).
+Escolher uma stack que o agente conhece é uma decisão de custo tanto quanto técnica.
 
 ## Como um time decide
 

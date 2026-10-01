@@ -1,4 +1,4 @@
-# Projects that are not software
+# 22. Projects that are not software
 
 After this chapter you can run a proposal, an analysis, a handover document, a data rule or a book as deliveries, each on a page whose Done when a person can tick.
 You can also say why a finding with no line in a queue gets lost.
@@ -51,7 +51,7 @@ Markdown in guide/, and a PDF built from it.
 
 ## Case A's documents
 
-On Case A, a client project on a low-code platform, the handover was a set of deliveries.
+On Case A, a client project on a low-code platform, Microsoft Power Apps with Copilot Studio, the handover was a set of deliveries.
 A solution design, an installation guide in three formats, a handover document and a presentation, an evidence pack indexed by the acceptance criteria, a repository readme and a work record each had a queue line and a page, and each went through `/propose` and `/apply` like code.
 The evidence pack shows the Contract as structure: indexed by the acceptance criteria, it lets the client check the delivery criterion by criterion and find the proof of each.
 

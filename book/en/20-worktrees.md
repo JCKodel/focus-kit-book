@@ -1,4 +1,4 @@
-# Worktrees and parallel agents
+# 20. Worktrees and parallel agents
 
 After this chapter you can have two agents build two deliveries at the same time, each in its own folder, so that each merge holds one delivery and nothing else.
 You can also resolve the conflict when both touched the same lines, catch a conflict marker before it is committed, and say when working in parallel stops paying.
@@ -41,7 +41,7 @@ Say the lending library has two deliveries ready to build, `return-book` and `ov
 * The agent building `overdue-list` does the same in `../library-overdue-list`, at the same time.
 * Nobody switches branches, so nothing needs a stash, and neither agent ever sees the other's half-done files.
 
-When a delivery is done, you bring it into `main` from the main folder with a merge commit, `git merge --no-ff`, so it stays one unit of work, reverted in one step with `git revert -m 1 <merge>` (chapter 19).
+When a delivery is done, you bring it into `main` from the main folder with a merge commit, `git merge --no-ff`, so it stays one unit of work, reverted in one step with `git revert -m 1 <merge>`.
 
 ## The life of a worktree
 
@@ -84,9 +84,9 @@ Deletes the branch, which outlives its folder.
 
 ## Worktrees in the kit
 
-A worktree per delivery is one of the git strategies a project can write in the Git slot of its docs/05 (chapter 19), and in the kit it is the steps above with `/propose` and `/apply` in between.
-`/propose <slug>` creates the worktree named after the slug, `../<project>-<slug>` on a branch `<slug>` from `main`, and writes the page there ([chapter 14](14-propose.md)).
-`/apply <slug>` runs in a fresh session opened in that folder, builds the page, and stages the change ([chapter 15](15-apply.md)).
+A worktree per delivery is one of the git strategies a project can write in the Git slot of its docs/05, and in the kit it is the steps above with `/propose` and `/apply` in between.
+`/propose <slug>` creates the worktree named after the slug, `../<project>-<slug>` on a branch `<slug>` from `main`, and writes the page there.
+`/apply <slug>` runs in a fresh session opened in that folder, builds the page, and stages the change.
 You review and commit on the branch, merge into `main` with `--no-ff`, remove the worktree and delete the branch.
 
 The agent never commits, merges, resolves a conflict or removes a worktree: every step that changes the history is yours, as in every git strategy.
@@ -100,7 +100,7 @@ That is a conflict.[^git-merge]
 A conflict is about lines, not files: two branches that change the same file far apart merge on their own.
 
 In the conflicted file, git writes both versions between conflict markers: `<<<<<<<` opens the version of the branch you are on, `=======` separates it from the version of the branch coming in, and `>>>>>>>` closes that one.[^git-merge]
-Every delivery marks its own line in the queue ([chapter 13](13-queue-and-milestones.md)), so two deliveries whose lines are neighbours always meet there.
+Every delivery marks its own line in the queue, so two deliveries whose lines are neighbours always meet there.
 Here `return-book` was merged first, and `overdue-list` comes in second; the block is an illustration, written for this chapter:
 
 ```text

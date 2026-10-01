@@ -1,4 +1,4 @@
-# Produto, pessoas e processo
+# Prólogo: Produto, pessoas e processo
 
 Toda empresa que constrói software depende de três coisas: seu produto, suas pessoas e seu processo.
 Depois deste prólogo você consegue dizer o que cada uma decide quando parte de quem constrói são agentes de código, e o que este livro dá a cada uma das três.

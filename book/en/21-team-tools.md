@@ -1,11 +1,11 @@
-# The team's tools: pull requests, issues and boards
+# 21. The team's tools: pull requests, issues and boards
 
 After this chapter you can land a delivery through a pull request whose review reads the page before the diff, and keep issues and a board in step with the queue without making either of them the source of truth.
 You can also say why a project's documents live in docs/ and never in a wiki.
 
 ## The problem
 
-One person working on trunk reviews the staged change and commits it (chapter 15).
+One person working on trunk reviews the staged change and commits it.
 A team needs two more things: a second person who reviews before the merge, and a way for people who never open the repository, a manager or a client, to see progress.
 The git strategies of chapter 19 stop at the merge: they shape the history, and say nothing about who reviewed a change or who is watching the work.
 
@@ -17,9 +17,9 @@ GitLab calls the same thing a merge request.
 
 With focus-kit, a pull request carries one delivery:
 
-1. **A branch per delivery**, named by its slug (chapter 19).
+1. **A branch per delivery**, named by its slug.
 2. **The page first.** The first commit on the branch is `work/<slug>.md`, written by `/propose`.
-   Open the pull request as soon as it is pushed, and the page can be reviewed before any code exists (chapter 14).
+   Open the pull request as soon as it is pushed, and the page can be reviewed before any code exists.
 3. **The build after.** `/apply` builds on the same branch; the page moves to `work/done/` and the queue line becomes `[x]` in the same change.
 4. **One merge.** The delivery reaches the main branch whole, with its page, its code, its tests, its proof and its mark, so the queue on the main branch is always true.
 
@@ -44,7 +44,7 @@ A queue line may mirror an issue, and the slug names both: the issue's title sta
 
 The pull request says "Fixes #42", and GitHub closes the issue when it merges.[^gh-issues]
 The queue stays the source of truth, because the agent reads the repository and never a web page: an issue with no line in the queue does not exist for `/propose`.
-So an issue becomes a line by conversation (chapter 13), and from there it is a delivery like any other.
+So an issue becomes a line by conversation, and from there it is a delivery like any other.
 
 ## Boards
 

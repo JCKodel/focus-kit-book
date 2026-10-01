@@ -1,4 +1,4 @@
-# Simplicity is a decision: KISS, YAGNI, DRY
+# 4. Simplicity is a decision: KISS, YAGNI, DRY
 
 After this chapter you can refuse a piece of code, a document or a check that no delivery needs, and say which principle refuses it and who named it.
 You can also tell the duplication that must go from the duplication that should stay, and know the moment a shared version is due: the second concrete occurrence.
