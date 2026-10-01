@@ -19,7 +19,7 @@ It argues for the method with real cases and measured results, and it doubles as
 
 * One Markdown source per chapter per edition.
   English is the source; Portuguese is the translation, kept in step in the same delivery.
-* Published as a website on GitHub Pages, updated on every push to `main`, and as PDF and EPUB in both languages on every tagged GitHub Release; the author uploads those to books.kodel.com.br.
+* Published as a website on GitHub Pages, updated on every push to `main`, and as PDF and EPUB in both languages on every tagged GitHub Release.
 * Every chapter opens with what the reader can do after it, then delivers exactly that, then says what the team gains, with its evidence, then ends with key points.
 * No guided project and no exercises (ADR-0017).
   Code examples are TypeScript written for the chapter, on one running example, a lending library, and the book says once that they are written for it.

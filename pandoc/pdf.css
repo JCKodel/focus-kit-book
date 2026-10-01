@@ -1,24 +1,55 @@
-/* The PDF: A5, set in the repository's fonts, read by weasyprint. */
+/* The PDF: A5, set in the repository's fonts, read by weasyprint.
+   Night blue #0B1626 (text on paper, blocks), cream #F3EEE2 (text on night), amber #F2A33A (never text on white). */
 
 @font-face { font-family: "Merriweather"; src: url("fonts/Merriweather-Regular.ttf"); font-weight: 400; font-style: normal; }
 @font-face { font-family: "Merriweather"; src: url("fonts/Merriweather-Italic.ttf"); font-weight: 400; font-style: italic; }
 @font-face { font-family: "Merriweather"; src: url("fonts/Merriweather-Bold.ttf"); font-weight: 700; font-style: normal; }
 @font-face { font-family: "Merriweather"; src: url("fonts/Merriweather-BoldItalic.ttf"); font-weight: 700; font-style: italic; }
-@font-face { font-family: "Google Sans"; src: url("fonts/GoogleSans-Variable.ttf"); }
+@font-face { font-family: "Instrument Serif"; src: url("fonts/InstrumentSerif-Regular.ttf"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Instrument Serif"; src: url("fonts/InstrumentSerif-Italic.ttf"); font-weight: 400; font-style: italic; }
 @font-face { font-family: "Iosevka Term"; src: url("fonts/IosevkaTerm-Regular.ttf"); }
 
 @page {
   size: A5;
   margin: 18mm 15mm 20mm 15mm;
-  @bottom-center {
-    content: counter(page);
-    font-family: "Google Sans";
-    font-size: 8pt;
+  /* The chapter's running head, on every page of the chapter but the one that opens it. */
+  @top-left {
+    content: element(running-head, first-except);
+    width: 100%;
+    vertical-align: top;
+    padding-top: 22.5pt;
+  }
+  /* The notes of the page, under a short amber bar: a gradient that stops at 30pt, since a border would run the whole width. */
+  @footnote {
+    margin-top: 10.5pt;
+    padding-top: 8.25pt;
+    background: linear-gradient(to right, #F2A33A 30pt, transparent 30pt) no-repeat;
+    background-size: 100% 2.25pt;
   }
 }
 
+/* The cover that pypdf prepends is page 1, so weasyprint's first page is page 2:
+   a page it calls right is a left page of the book, and the number sits at the outer corner. */
+@page :first { counter-increment: page 2; }
+@page :right {
+  @bottom-left { content: counter(page); font-family: "Instrument Serif"; font-style: italic; font-size: 10.5pt; vertical-align: bottom; padding-bottom: 21pt; }
+}
+@page :left {
+  @bottom-right { content: counter(page); font-family: "Instrument Serif"; font-style: italic; font-size: 10.5pt; vertical-align: bottom; padding-bottom: 21pt; }
+}
+
+/* Title page, rights page and contents carry no running head and no page number. */
 @page front {
-  @bottom-center { content: none; }
+  @top-left { content: none; }
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
+}
+@page contents {
+  background: #0B1626;
+  margin-top: 42pt;
+  @top-left { content: none; }
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
 }
 
 html {
@@ -26,6 +57,7 @@ html {
   font-size: 9pt;
   line-height: 1.55;
   hyphens: auto;
+  color: #0B1626;
 }
 
 body { margin: 0; }
@@ -33,38 +65,109 @@ body { margin: 0; }
 p { margin: 0 0 0.7em; text-align: justify; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Google Sans";
-  font-weight: 700;
-  line-height: 1.25;
+  font-family: "Instrument Serif";
+  font-weight: 400;
   hyphens: manual;
   text-align: left;
   break-after: avoid;
 }
 
-h1 { font-size: 18pt; margin: 0 0 1.2em; break-before: page; }
-h2 { font-size: 12.5pt; margin: 1.6em 0 0.6em; }
-h3 { font-size: 10.5pt; margin: 1.3em 0 0.5em; }
+/* A heading, a code block and a note box stay on one page; the part of a code block left behind would fill the rest of its page in night blue.
+   To keep the first two lines of a block together at the foot of a page, weasyprint sends that page's last note to the next page,
+   even when the block then leaves the page whole; with orphans this high it does not try. */
+h1, h2, h3, h4, h5, h6, pre, blockquote { break-inside: avoid; orphans: 99; }
 
-a { color: #1a4f8b; text-decoration: none; }
+h1 { font-size: 33pt; line-height: 34.5pt; letter-spacing: -0.01em; margin: 0; }
+h2 { font-size: 18pt; line-height: 19.5pt; margin: 21pt 0 7.5pt; }
+h2::before { content: ""; display: block; width: 30pt; height: 2.25pt; background: #F2A33A; margin-bottom: 7.5pt; }
+h3 { font-size: 14pt; line-height: 16pt; margin: 14pt 0 5pt; }
+
+a { color: #1A4F8B; text-decoration: none; }
 /* A pointer to a chapter prints in the text's color: on paper a blue "(chapter 7)" is noise, and the numbered title finds the chapter. */
-a[href^="#chapter-"] { color: inherit; }
+a[href*="__chapter-"] { color: inherit; }
 
-code, pre { font-family: "Iosevka Term"; hyphens: manual; }
+code, pre { font-family: "Iosevka Term"; font-style: normal; hyphens: manual; }
 code { font-size: 0.95em; }
+
+/* A chapter opens on a night-blue block that bleeds to the top, left and right edges of the page:
+   the label and the number in the outline of a page, the title, the chapter's first paragraph. */
+
+.opening {
+  break-before: page;
+  margin: -18mm -15mm 21pt;
+  padding: 39pt 15mm 25.5pt;
+  background: #0B1626;
+  color: #F3EEE2;
+}
+.opening .top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16.5pt; }
+.opening .label {
+  margin: 0;
+  font-family: "Iosevka Term";
+  font-size: 7pt;
+  line-height: 10.5pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #F2A33A;
+}
+.opening .numeral {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 69pt;
+  height: 97.5pt;
+  margin: 0;
+  border: 1.1pt solid #F2A33A;
+  font-family: "Instrument Serif";
+  font-size: 72pt;
+  line-height: 72pt;
+  color: #F2A33A;
+}
+/* The PDF's outline keeps the number that left the title. */
+.opening h1 { bookmark-label: attr(data-outline); }
+.opening > p { margin: 12pt 0 0; font-size: 10pt; line-height: 15.5pt; font-style: italic; text-align: left; hyphens: manual; }
+.opening > p em { font-style: normal; }
+.opening a { color: inherit; }
+
+.running-head { position: running(running-head); padding-bottom: 6pt; border-bottom: 0.75pt solid #0B1626; color: #0B1626; }
+.running-head .number {
+  display: inline-block;
+  width: 9.75pt;
+  height: 13.5pt;
+  margin-right: 6.75pt;
+  background: #F2A33A;
+  font-family: "Iosevka Term";
+  font-size: 6.75pt;
+  line-height: 13.5pt;
+  text-align: center;
+  vertical-align: middle;
+}
+.running-head .title { font-family: "Instrument Serif"; font-style: italic; font-size: 9.75pt; line-height: 13.5pt; vertical-align: middle; }
+
+/* A code block is cream on night blue: keywords amber, strings and numbers light blue, comments grey and italic. */
 
 pre {
   font-size: 8pt;
   line-height: 1.4;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
-  background: #f4f4f2;
-  padding: 0.6em 0.8em;
+  background: #0B1626;
+  color: #F3EEE2;
+  padding: 9pt;
   margin: 0 0 0.9em;
   text-align: left;
 }
+pre code { font-size: 1em; }
 
 /* pandoc's print style hangs a wrapped code line 5em to the right; a wrapped line starts at the margin instead. */
 pre > code.sourceCode > span { text-indent: 0; padding-left: 0; }
+
+/* pandoc brings its own colors, one per kind of token; only the three kinds below keep one. */
+pre code span[class] { color: inherit; font-weight: inherit; font-style: inherit; text-decoration: none; }
+pre code span.kw, pre code span.cf, pre code span.im { color: #F2A33A; }
+pre code span.st, pre code span.ch, pre code span.ss, pre code span.vs, pre code span.sc,
+pre code span.dv, pre code span.bn, pre code span.fl { color: #8FC1FF; }
+pre code span.co, pre code span.an, pre code span.cv, pre code span.do, pre code span.in, pre code span.wa { color: #8A97AD; font-style: italic; }
 
 img { max-width: 100%; }
 
@@ -75,7 +178,7 @@ figure { margin: 0 0 0.9em; text-align: center; }
 figcaption { font-size: 8pt; font-style: italic; margin-top: 0.3em; }
 
 /* A note box is a blockquote (`> **Note.** ...`), the one box syntax the site, the PDF and the EPUB all render. */
-blockquote { margin: 0 0 0.9em; padding: 0.5em 0.8em; border-left: 3px solid #1a4f8b; background: #f4f4f2; break-inside: avoid; }
+blockquote { margin: 0 0 0.9em; padding: 0.5em 0.8em; border-top: 2.25pt solid #F2A33A; background: #F3EEE2; }
 blockquote p { margin: 0; text-align: left; }
 
 ul, ol { margin: 0 0 0.7em; padding-left: 1.4em; }
@@ -83,6 +186,7 @@ li { margin-bottom: 0.2em; }
 
 table { border-collapse: collapse; margin: 0 0 0.9em; font-size: 8pt; }
 th, td { border-bottom: 0.5pt solid #c8c8c4; padding: 0.3em 0.5em; text-align: left; }
+th { font-weight: 700; border-bottom: 0.75pt solid #0B1626; }
 
 .draft-banner {
   border-left: 3px solid #d9a400;
@@ -92,35 +196,82 @@ th, td { border-bottom: 0.5pt solid #c8c8c4; padding: 0.3em 0.5em; text-align: l
 }
 .draft-banner p { margin: 0; text-align: left; }
 
-/* Title page, rights page and table of contents carry no page number. */
+/* The title page stays light. */
 
-.title-page, .rights-page, nav#TOC { page: front; }
+.title-page, .rights-page { page: front; }
 
 .title-page { break-after: page; padding-top: 45mm; text-align: center; }
-.title-page h1 { break-before: auto; font-size: 24pt; margin: 0 0 0.6em; text-align: center; }
-.title-page .subtitle { font-family: "Google Sans"; font-size: 12pt; text-align: center; margin: 0 0 3em; }
+.title-page h1 { margin: 0 0 14pt; text-align: center; }
+.title-page .subtitle { font-style: italic; font-size: 11pt; text-align: center; margin: 0 0 3em; }
 .title-page .author { font-size: 11pt; text-align: center; }
 
 .rights-page { break-after: page; padding-top: 120mm; font-size: 8pt; }
 .rights-page p { text-align: left; }
 
-nav#TOC { break-after: page; }
-nav#TOC ul { list-style: none; padding-left: 0; margin: 0; }
-nav#TOC ul ul { padding-left: 1.2em; }
-nav#TOC li { margin: 0.25em 0; }
-nav#TOC > ul > li { margin-top: 0.7em; font-family: "Google Sans"; font-weight: 700; }
-nav#TOC ul ul li { font-family: "Merriweather"; font-weight: 400; }
-nav#TOC a { color: inherit; }
-nav#TOC a::after { content: leader(".") target-counter(attr(href), page); }
+/* The contents: a night-blue page, one row per chapter (number, title, page), each row a link whose page number comes from its target. */
 
-/* Notes at the end of their chapter: 66% of the body and in italic; a link, a quotation (italic in the source) and code stay upright. */
+.contents { page: contents; break-after: page; color: #F3EEE2; }
+.contents-title { margin: 0; font-family: "Instrument Serif"; font-size: 48pt; line-height: 48pt; letter-spacing: -0.01em; text-align: left; hyphens: manual; }
+.contents-title::after { content: ""; display: block; width: 33pt; height: 2.25pt; background: #F2A33A; margin: 10.5pt 0 12pt; }
+.contents .rows { display: table; width: 100%; border-collapse: collapse; }
+.contents a { display: table-row; color: inherit; }
+.contents a > span, .contents a::after {
+  display: table-cell;
+  padding: 1.5pt 0;
+  border-bottom: 0.75pt solid #26334A;
+  line-height: 12.75pt;
+  vertical-align: baseline;
+}
+/* The number and the page take a shorter line than the title, so the title alone sets the row's height. */
+.contents .number { width: 16.5pt; padding-right: 9pt; font-family: "Instrument Serif"; font-style: italic; font-size: 12pt; line-height: 10pt; text-align: right; color: #F2A33A; }
+.contents .title { text-align: left; hyphens: manual; }
+.contents a::after {
+  content: target-counter(attr(href), page);
+  width: 22.5pt;
+  padding-left: 9pt;
+  font-family: "Iosevka Term";
+  font-size: 7pt;
+  line-height: 9pt;
+  text-align: right;
+  color: #F2A33A;
+}
 
-aside.footnotes { font-size: 66%; font-style: italic; margin-top: 2em; }
-aside.footnotes a, aside.footnotes em, aside.footnotes code { font-style: normal; }
+/* A note sits at the foot of the page of its first mention: 66% of the body (9pt) and in italic; a link, a quotation (italic in the source) and code stay upright.
+   It is written where it is cited, so it sets every property it would otherwise take from there. */
+
+.footnote {
+  float: footnote;
+  /* A note that does not fit under its line takes the line with it to the next page. */
+  footnote-policy: line;
+  padding-left: 10pt;
+  font-family: "Merriweather";
+  font-size: 5.94pt;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0;
+  text-align: left;
+  color: #0B1626;
+}
+.footnote a, .footnote em, .footnote code { font-style: normal; }
 /* A URL breaks anywhere and never takes a hyphen that is not in it. */
-aside.footnotes a { hyphens: manual; overflow-wrap: anywhere; }
-aside.footnotes hr { border: none; border-top: 0.5pt solid #c8c8c4; width: 30%; margin: 0 0 0.8em; }
-aside.footnotes ol { padding-left: 1.4em; }
-aside.footnotes p { text-align: left; }
-a.footnote-ref sup { font-size: 0.7em; }
-a.footnote-back { font-family: "Iosevka Term"; }
+.footnote a { hyphens: manual; overflow-wrap: anywhere; }
+.footnote::footnote-call, a.footnote-ref sup {
+  font-family: "Iosevka Term";
+  font-size: 6pt;
+  font-style: normal;
+  line-height: 0;
+  vertical-align: super;
+}
+.footnote::footnote-call { content: attr(data-number); }
+.opening .footnote::footnote-call { color: #F3EEE2; }
+.footnote::footnote-marker {
+  content: attr(data-number);
+  display: inline-block;
+  width: 10pt;
+  margin-left: -10pt;
+  font-family: "Iosevka Term";
+  font-style: normal;
+}
+/* A later mention of a note shows its number as the first does, and links to it. */
+a.footnote-ref { color: inherit; }

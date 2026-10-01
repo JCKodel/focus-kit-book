@@ -11,7 +11,7 @@ Two copies of the same text drift: in Case A, the per-host copies of the command
 ## Decision
 
 This repository is the only source.
-It builds a website on GitHub Pages and PDF and EPUB files, free, published on books.kodel.com.br.
+It builds a website on GitHub Pages and PDF and EPUB files, free, published on the repository's GitHub Releases.
 focus-kit's README links to the website; there is no wiki, neither written by hand nor mirrored.
 
 ## Consequences

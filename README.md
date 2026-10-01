@@ -11,7 +11,7 @@ A free book that takes a reader who has never followed any process to running wh
 ## Read
 
 * The site: <https://jckodel.github.io/focus-kit-book/>
-* PDF and EPUB, in English and Portuguese: on this repository's [Releases](https://github.com/JCKodel/focus-kit-book/releases) and on <https://books.kodel.com.br>
+* PDF and EPUB, in English and Portuguese: on this repository's [Releases](https://github.com/JCKodel/focus-kit-book/releases)
 
 ## Build locally
 
@@ -42,5 +42,5 @@ Contributions are accepted under the license of the file they change.
 |---|---|---|
 | The book's text and figures (`book/`), the project documents (`docs/`, `work/`) and these READMEs | CC BY-SA 4.0 | [`LICENSE-TEXT`](LICENSE-TEXT) |
 | Scripts, build and site configuration (`scripts/`, `Makefile`, `mkdocs.yml`, `overrides/`, `book/assets/site.css`, `pandoc/*.css`) | AGPL-3.0-only | [`LICENSE`](LICENSE) |
-| The fonts of the PDF (`pandoc/fonts/`): Merriweather, Google Sans, Iosevka Term | SIL Open Font License 1.1 | `pandoc/fonts/<Family>-OFL.txt` |
+| The fonts of the PDF (`pandoc/fonts/`): Merriweather, Instrument Serif, Iosevka Term | SIL Open Font License 1.1 | `pandoc/fonts/<Family>-OFL.txt` |
 | focus-kit's installed command files | AGPL-3.0-only, under focus-kit's terms | [`LICENSE`](LICENSE) |

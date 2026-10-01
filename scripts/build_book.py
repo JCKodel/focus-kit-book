@@ -8,6 +8,7 @@ An error prints as `file:line: book: message`, or `Makefile:1: book: message` wh
 """
 
 import html
+import itertools
 import re
 import shutil
 import subprocess
@@ -23,19 +24,26 @@ OUTPUT = ROOT / "output"
 PANDOC = ROOT / "pandoc"
 ASSETS = ROOT / "book" / "assets"
 EDITIONS = {
-    "en": {"lang": "en", "name": "one-page-at-a-time"},
-    "pt": {"lang": "pt-BR", "name": "uma-pagina-de-cada-vez"},
+    "en": {"lang": "en", "name": "one-page-at-a-time", "contents": "Contents", "chapter": "Chapter"},
+    "pt": {"lang": "pt-BR", "name": "uma-pagina-de-cada-vez", "contents": "Sumário", "chapter": "Capítulo"},
 }
 # ascii_identifiers: a heading's id drops its accents, as on the site, so one #anchor link works in both.
-READ = ["-f", "markdown-tex_math_dollars+ascii_identifiers", "--file-scope", "--toc"]
+READ = ["-f", "markdown-tex_math_dollars+ascii_identifiers", "--file-scope"]
 
 YAML_FIELD = re.compile(r"^(\s*)(site_author|copyright|draft_banner):\s*(.*)$")
 LOCALE = re.compile(r"^(\s*)- locale:\s*(\S+)")
 CHAPTER_LINK = re.compile(r"\]\(((?:[0-9]{2}|A[0-9]+)-[^)#\s]+\.md)(\s+\"[^\"]*\")?\)")
 PANDOC_PLACE = re.compile(r"\"([^\"]+)\" \(line (\d+), column \d+\)")
-CHAPTER_START = re.compile(r"(?=<h1[ >])")
-NOTES = re.compile(r'<aside id="footnotes[^"]*" class="footnotes[^"]*"[^>]*>.*?<ol[^>]*>\n?(.*?)</ol>\s*</aside>\n?', re.S)
-NOTE_NUMBER = re.compile(r'(<a\s+href="#fn\d+"\s+class="footnote-ref"[^>]*><sup>)\d+(</sup>)')
+# The patterns below read the HTML pandoc writes with --wrap=none: one block per line, a tag never broken.
+CHAPTER_START = re.compile(r'(?=<h1 id=")')
+OPENING = re.compile(r'<h1 id="([^"]+)">(.*?)</h1>\n(<p>.*?</p>\n)?', re.S)
+NUMBERED = re.compile(r"(\d+)\. (.*)", re.S)
+TAG = re.compile(r"<[^>]+>")
+NOTES = re.compile(r'<(section|aside) id="footnotes".*?</\1>\n?', re.S)
+NOTE = re.compile(r'<li id="(fn\d+)">(.*?)</li>', re.S)
+NOTE_PARAGRAPH = re.compile(r"<p>(.*?)</p>", re.S)
+NOTE_BACK = re.compile(r'<a href="#fnref\d+" class="footnote-back"[^>]*>[^<]*</a>')
+NOTE_CALL = re.compile(r'<a href="#(fn\d+)" class="footnote-ref" id="fnref\d+"[^>]*><sup>\d+</sup></a>')
 NOTE_REF = re.compile(r"\[\^([a-z0-9-]+)\](?!:)")
 NOTE_DEFINITION = re.compile(r"^\[\^([a-z0-9-]+)\]: ")
 
@@ -192,24 +200,61 @@ def prepare(source, names, banner):
     return lines, where
 
 
-def notes_at_chapter_end(page):
-    """Move the notes of each chapter of pandoc's HTML to the chapter's end, numbered from 1.
+def notes_at_foot(page):
+    """Put each note of pandoc's HTML where it is first cited, numbered from 1 per chapter.
 
-    pandoc's --reference-location=section ends the notes at the end of the innermost section,
-    an H2, and numbers them through the whole book; the PDF wants them at the end of the chapter.
+    pandoc ends the notes at the end of the book and numbers them through it;
+    a span.footnote is what pdf.css sends to the foot of the page that cites it.
     """
-    end = page.rfind("</body>")
-    parts = CHAPTER_START.split(page[:end])
+    texts = {
+        name: "<br />".join(NOTE_PARAGRAPH.findall(NOTE_BACK.sub("", item)))
+        for name, item in NOTE.findall(page)
+    }
+    parts = CHAPTER_START.split(NOTES.sub("", page))
     for index, part in enumerate(parts):
-        items = "".join(NOTES.findall(part))
-        if not items:
-            continue
-        numbers = iter(range(1, part.count("footnote-ref") + 1))
-        part = NOTE_NUMBER.sub(lambda match: f"{match.group(1)}{next(numbers)}{match.group(2)}", NOTES.sub("", part))
-        parts[index] = (
-            part + '<aside class="footnotes" role="doc-endnotes">\n<hr />\n<ol>\n' + items + "</ol>\n</aside>\n"
+        numbers = itertools.count(1)
+        parts[index] = NOTE_CALL.sub(
+            lambda match: f'<span class="footnote" data-number="{next(numbers)}">{texts[match.group(1)]}</span>', part
         )
-    return "".join(parts) + page[end:]
+    return "".join(parts)
+
+
+def openings(page, settings):
+    """Turn each chapter's H1 and first paragraph into its opening block, and put the contents before the first.
+
+    The number of `<N>. <Title>` leaves the title: it feeds the numeral, the contents row and the running head,
+    and data-outline keeps `<N>. <Title>` for the PDF's outline. An H1 with no number gets no label and no numeral.
+    A draft's banner follows its H1, so its first paragraph stays in the text.
+    """
+    rows = []
+
+    def opening(match):
+        name, title, first = match.group(1), match.group(2), match.group(3) or ""
+        outline = TAG.sub("", title).replace('"', "&quot;")
+        numbered = NUMBERED.fullmatch(title)
+        number, title = numbered.groups() if numbered else ("", title)
+        head, top = "", ""
+        if number:
+            head = f'<span class="number">{number}</span>'
+            top = (
+                f'<div class="top"><p class="label">{html.escape(settings["chapter"])}</p>'
+                f'<p class="numeral">{number}</p></div>\n'
+            )
+        rows.append(f'<a href="#{name}"><span class="number">{number}</span><span class="title">{title}</span></a>\n')
+        return (
+            '<header class="opening">\n'
+            f'<div class="running-head">{head}<span class="title">{title}</span></div>\n'
+            f'{top}<h1 id="{name}" data-outline="{outline}">{title}</h1>\n{first}'
+            "</header>\n"
+        )
+
+    page = OPENING.sub(opening, page)
+    contents = (
+        f'<nav class="contents">\n<p class="contents-title">{html.escape(settings["contents"])}</p>\n'
+        f'<div class="rows">\n{"".join(rows)}</div>\n</nav>\n'
+    )
+    first = page.find('<header class="opening">')
+    return page[:first] + contents + page[first:]
 
 
 def run(command, places, cwd=ROOT):
@@ -270,14 +315,13 @@ def build(edition, site, work):
     )
     page = work / "book.html"
     run(
-        ["pandoc", *inputs, *common, "--reference-location=section", "-s", "-t", "html5",
+        ["pandoc", *inputs, *common, "--wrap=none", "-s", "-t", "html5",
          "--css", (PANDOC / "pdf.css").as_uri(),
          "-M", f"pagetitle={title}",
          "--include-before-body", str(front), "-o", str(page)],
         places, work,
     )
-    # The return arrow of a note comes with U+FE0E, which no font of the book has.
-    text = notes_at_chapter_end(page.read_text(encoding="utf-8")).replace("\ufe0e", "")
+    text = openings(notes_at_foot(page.read_text(encoding="utf-8")), settings)
     page.write_text(text, encoding="utf-8")
     body = work / "body.pdf"
     run(["weasyprint", "--base-url", str(ROOT / "book" / edition) + "/", str(page), str(body)], places)
@@ -286,7 +330,7 @@ def build(edition, site, work):
 
     epub = OUTPUT / f"{settings['name']}.epub"
     run(
-        ["pandoc", *inputs, *common, "-t", "epub3",
+        ["pandoc", *inputs, *common, "--toc", "-t", "epub3",
          "--css", str(PANDOC / "epub.css"),
          "--epub-cover-image", str(cover(edition, "png")),
          "-M", f"title={title}", "-M", f"subtitle={subtitle}",
