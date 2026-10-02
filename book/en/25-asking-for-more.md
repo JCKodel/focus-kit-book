@@ -2,7 +2,7 @@
 
 After this chapter you can say why an agent's first answer feels final, name the four things an agent does not propose unless you ask, and send the four turns of the challenge protocol when the work is worth what they cost.
 The challenge protocol is four messages, always the same, that you send after an agent's first answer; each message and the agent's reply to it is a turn, and the four are written out, ready to copy, under the section "The challenge protocol".
-On this book's experiment, a judge who did not know which answer was which would have sent the challenged answer in 9 of 9 pairs, and the challenge cost 2.6 to 8 times the first answer.[^ask-for-more-run]
+On this book's experiment, a judge who did not know which answer was which would have sent the challenged answer in 9 of 9 pairs, and the challenge took about 3 to 9 times the first answer's time and output tokens.[^ask-for-more-run]
 
 ## The card I accepted
 
@@ -63,7 +63,7 @@ Asked to test, the agents found what they had stated without checking: on the ca
 The three first answers wrote their summary in the chat, with tables a phone cannot show; every challenged answer wrote a file with no tables, the board's decisions first.
 
 **To fit the result to the cost of each use.**
-"Set the project up for an agent that answers the team every day" does not say that each question opens a fresh session and that the team pays for every token.
+"Set the project up for an agent that answers the team every day" does not say that each question opens a fresh session and spends tokens, from the team's bill or from its plan's session limit.
 Each first answer wrote one long guide for the agent without asking, and the judge found in two of them values copied from the code, which go stale without a sign when the code changes.
 
 **What nobody asked for.**
@@ -102,7 +102,7 @@ A test returns a result that does not depend on what you seem to want.
 **Turn 3 names the reader and the cost.**
 Who uses the result, with how much time, and what each use costs: two of the four things the agent does not propose, in one question.
 "Change the result to fit" asks for the change, not for advice about it.
-The techniques the agent will reach for when the cost is tokens are taught elsewhere: the rules file that names where each fact lives ([chapter 2](02-how-agents-see.md)), and the cache that makes a repeated context cheap ([chapter 23](23-cost-and-where.md)).
+The techniques the agent will reach for when each use spends tokens, billed or drawn from a plan, are taught elsewhere: the rules file that names where each fact lives ([chapter 2](02-how-agents-see.md)), and the cache that makes a repeated context cheap ([chapter 23](23-cost-and-where.md)).
 
 **Turn 4 asks for what you did not ask for, and keeps you deciding.**
 "Worth it" asks the agent to weigh each addition, and "tell me what you left out" puts the rest in front of you.
@@ -125,25 +125,32 @@ Each pair, first and challenged, was scored blind on three criteria of the arm, 
 
 The judge would have sent the challenged answer in all 9 pairs.
 
-The challenge was paid for in tokens.
-For the three runs of each arm, the first answers cost 0.82, 1.09 and 3.04 USD, and the challenged sessions 6.59, 3.39 and 8.00 USD: from 2.6 to 8 times as much.
+The challenge was paid for in time and tokens.
+With the three runs of each arm summed, the challenged sessions took 2.9 to 8.8 times as long as the first answers: 201 against 1,337 seconds in the limit arm, 81 against 710 in the audience arm, 390 against 1,130 in the cost arm.
+They wrote 2.7 to 9.4 times the output tokens: 24,220 against 147,419, 7,376 against 68,989, and 41,420 against 110,334.
+One session at a time, a first answer took 24 seconds to just over 2 minutes, and a challenged session 3 to 9 minutes.
+
+On a fixed subscription, those tokens come out of the plan's session limit: the use of the model a plan allows in a window of hours, after which the host refuses new turns until the window ends.
+The experiment ran its nine challenged sessions on one afternoon, all within about 45 minutes, and the author's plan ran out before the protocol's last turn: in all nine, the host answered "You've hit your session limit", and that turn was sent again about 30 minutes later.
+Each protocol you send spends a share of that limit.
+If you pay per token instead, [chapter 23](23-cost-and-where.md) shows how to turn tokens into a price.
 
 The cost arm also measured what each setup costs in use.
 Five questions about the project, each in a fresh session, were asked of every setup: all 30 answers were correct, first and challenged.
-Per five questions, the challenged setup was 20% and 16% cheaper in runs 1 and 2, and 10% dearer in run 3.
+In runs 1 and 2, the challenged setup answered the five questions in 26% and 18% less time, with 27% and 29% fewer output tokens; in run 3, in 14% less time but with 9% more output tokens.
 
 The limits are plain.
 Three pairs per arm is a recorded experiment, not a study, and has no statistics.
 The judge was a fresh session of the same model that wrote the answers, not the author, and it may share that model's taste; in some pairs it could also tell which answer came later.
 
-So send the protocol when the result will be used many times or by someone with little time: a card members open every day, a summary a board decides on, a setup paid for on every question.
+So spend the protocol's time and tokens where the result pays them back: a result used many times or by someone with little time, such as a card members open every day, a summary a board decides on, a setup that spends tokens on every question.
 Skip it for an answer you will check yourself in a minute.
 When the agent says "not possible", turn 2 alone is the cheapest test there is.
 
 ## What the team gains
 
 The prologue's role, that the person validates and trusts no one blindly, becomes four sentences anyone on the team can type, developer or not.
-On the experiment, the answers they produced were the ones a blind judge would send in 9 of 9 pairs, for 2.6 to 8 times the cost of the first answer.[^ask-for-more-run]
+On the experiment, the answers they produced were the ones a blind judge would send in 9 of 9 pairs, for about 3 to 9 times the first answer's time and output tokens.[^ask-for-more-run]
 What they avoid is what the studies measured: answers taken unchecked, from an aid, by people short of time, on tasks where the model may be wrong without showing it.[^dell-acqua-2026]
 
 ## Key points
@@ -152,7 +159,7 @@ What they avoid is what the studies measured: answers taken unchecked, from an a
 * An agent does not propose, unasked, to test a limit it claimed, to fit the result to its reader's time, to fit it to the cost of each use, or what nobody asked for.
 * The challenge protocol is four turns, sent one at a time after the first answer: (1) "Before you change anything, ask me what you need to know to do this well."; (2) "What did you say is not possible, or not worth doing? Test each one and show me the result."; (3) "Who reads or uses this, how much time do they have, and what does each use cost? Change the result to fit."; (4) "What did I not ask for that I would want? Add what is worth it, and tell me what you left out."
 * Turn 2 asks for a test because "Are you sure?" invites sycophancy: models changed their first answer 32% to 86% of the time after it.
-* On the book's experiment the challenged answer won 9 of 9 blind pairs and cost 2.6 to 8 times as much; three pairs per arm, judged by the same model, so send it where the result is used often or read in a hurry.
+* On the book's experiment the challenged answer won 9 of 9 blind pairs and took about 3 to 9 times the time and output tokens, which a subscriber pays from the plan's session limit; three pairs per arm, judged by the same model, so send it where the result is used often or read in a hurry.
 
 [^ask-for-more-run]: J.C. Ködel, "One Page at a Time", the record of the challenge protocol experiment, 2026-10, in the book's repository. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/ask-for-more-experiment-run>
 [^simon-1956]: Herbert A. Simon, "Rational choice and the structure of the environment", 1956. <https://doi.org/10.1037/h0042769>

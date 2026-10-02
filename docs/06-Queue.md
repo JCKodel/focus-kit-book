@@ -210,5 +210,5 @@ When this milestone closes, a reader knows why an agent's first answer feels fin
 [x] ask-for-more-chapter     Chapter 25, alone in a new Part V, and a seed in the prologue: why the first answer feels final, what the agent never proposes, the challenge protocol, Case A's Teams card as the author's own slip, the experiment and the studies as the team's gain; docs/00's contents updated; both editions
 [x] m9-review                the review of M9: the prologue and chapter 25 read against M9's paragraph, clause by clause
 [x] ch25-protocol-findable   a reader of chapter 25 knows what the challenge protocol is and where its four turns are written, and finds them again without rereading the section; both editions
-[ ] ch25-cost-for-subscribers  a reader on a fixed subscription knows from chapter 25 what the protocol costs them, and no per-token price reads as the bill of their own session; both editions
+[x] ch25-cost-for-subscribers  a reader on a fixed subscription knows from chapter 25 what the protocol costs them, and no per-token price reads as the bill of their own session; both editions
 ```

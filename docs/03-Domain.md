@@ -40,6 +40,7 @@ A new concept enters here first, in both languages.
 | sycophancy | bajulação | none | A model's tendency to tell the person what they seem to want, such as dropping a right answer when only asked "Are you sure?" (Sharma et al., 2024); why the challenge protocol asks for a test, not for doubt. |
 | context window | janela de contexto | none | Everything the model sees in one call. |
 | token | token | none | The unit of text a model reads and counts; a word is one token or a few. |
+| session limit | limite de sessão | none | On a fixed subscription, the use of the model a plan allows in a window of hours; once it is spent, the host refuses new turns ("You've hit your session limit") until the window ends; what the challenge protocol spends for a subscriber, with time, in chapter 25. |
 | context rot | degradação de contexto | none | The loss of accuracy as the context grows. |
 | compaction | compactação | none | The host summarizes a conversation near the limit of the context window and continues from the summary; detail is lost. |
 | FOCUS | FOCUS | `view`, `orchestrator`, `use-case`, `repository`, `driver` | The optional architecture: Feature-oriented (vertical slices), Clean (four pieces, rules in pure use cases), Unidirectional (event, orchestrator, new state), Scalable (every piece isolated and testable, whatever the size); exceptions as values; nothing exists for ceremony (ADR-0016). |

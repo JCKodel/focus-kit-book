@@ -2,7 +2,7 @@
 
 Depois deste capítulo você sabe dizer por que a primeira resposta de um agente parece final, nomeia as quatro coisas que um agente não propõe se você não pedir, e envia os quatro turnos do protocolo de desafio quando o trabalho vale o que eles custam.
 O protocolo de desafio são quatro mensagens, sempre as mesmas, que você envia depois da primeira resposta de um agente; cada mensagem e a resposta do agente a ela é um turno, e as quatro estão escritas, prontas para copiar, na seção "O protocolo de desafio".
-No experimento deste livro, um juiz que não sabia qual resposta era qual teria enviado a resposta desafiada em 9 de 9 pares, e o desafio custou de 2,6 a 8 vezes a primeira resposta.[^ask-for-more-run]
+No experimento deste livro, um juiz que não sabia qual resposta era qual teria enviado a resposta desafiada em 9 de 9 pares, e o desafio levou cerca de 3 a 9 vezes o tempo e os tokens de saída da primeira resposta.[^ask-for-more-run]
 
 ## O card que eu aceitei
 
@@ -63,7 +63,7 @@ Quando lhes pediram um teste, os agentes acharam o que tinham afirmado sem confe
 As três primeiras respostas escreveram o resumo no chat, com tabelas que um celular não mostra; toda resposta desafiada escreveu um arquivo sem tabelas, com as decisões do conselho primeiro.
 
 **Ajustar o resultado ao custo de cada uso.**
-"Prepare o projeto para um agente que responde ao time todo dia" não diz que cada pergunta abre uma sessão nova e que o time paga por cada token.
+"Prepare o projeto para um agente que responde ao time todo dia" não diz que cada pergunta abre uma sessão nova e gasta tokens, da conta do time ou do limite de sessão do seu plano.
 Cada primeira resposta escreveu um guia longo para o agente sem perguntar, e o juiz achou em dois deles valores copiados do código, que ficam velhos sem aviso quando o código muda.
 
 **O que ninguém pediu.**
@@ -102,7 +102,7 @@ Um teste devolve um resultado que não depende do que você parece querer.
 **O turno 3 nomeia quem lê e o custo.**
 Quem usa o resultado, com quanto tempo, e quanto custa cada uso: duas das quatro coisas que o agente não propõe, numa pergunta só.
 "Mude o resultado para caber nisso" pede a mudança, e não um conselho sobre ela.
-As técnicas que o agente vai usar quando o custo são tokens estão ensinadas em outro lugar: o arquivo de regras que diz onde mora cada fato ([capítulo 2](02-how-agents-see.md)), e o cache que barateia um contexto repetido ([capítulo 23](23-cost-and-where.md)).
+As técnicas que o agente vai usar quando cada uso gasta tokens, cobrados ou tirados de um plano, estão ensinadas em outro lugar: o arquivo de regras que diz onde mora cada fato ([capítulo 2](02-how-agents-see.md)), e o cache que barateia um contexto repetido ([capítulo 23](23-cost-and-where.md)).
 
 **O turno 4 pede o que você não pediu, e mantém você decidindo.**
 "Valer a pena" pede ao agente que pese cada acréscimo, e "me diga o que você deixou de fora" põe o resto diante de você.
@@ -125,25 +125,32 @@ Cada par, primeira e desafiada, foi pontuado às cegas em três critérios do br
 
 O juiz teria enviado a resposta desafiada em todos os 9 pares.
 
-O desafio foi pago em tokens.
-Nas três execuções de cada braço, as primeiras respostas custaram 0,82, 1,09 e 3,04 USD, e as sessões desafiadas 6,59, 3,39 e 8,00 USD: de 2,6 a 8 vezes mais.
+O desafio foi pago em tempo e em tokens.
+Somadas as três execuções de cada braço, as sessões desafiadas levaram de 2,9 a 8,8 vezes o tempo das primeiras respostas: 201 contra 1.337 segundos no braço do limite, 81 contra 710 no braço do público, 390 contra 1.130 no braço do custo.
+Elas escreveram de 2,7 a 9,4 vezes os tokens de saída: 24.220 contra 147.419, 7.376 contra 68.989, e 41.420 contra 110.334.
+Uma sessão de cada vez, uma primeira resposta levou de 24 segundos a pouco mais de 2 minutos, e uma sessão desafiada de 3 a 9 minutos.
+
+Numa assinatura fixa, esses tokens saem do limite de sessão do plano: o uso do modelo que um plano permite numa janela de horas, depois do qual o host recusa turnos novos até a janela acabar.
+O experimento rodou as suas nove sessões desafiadas numa tarde, todas em cerca de 45 minutos, e o plano do autor acabou antes do último turno do protocolo: nas nove, o host respondeu "You've hit your session limit", e esse turno foi enviado de novo cerca de 30 minutos depois.
+Cada protocolo que você envia gasta uma parte desse limite.
+Se você paga por token, o [capítulo 23](23-cost-and-where.md) mostra como transformar tokens em preço.
 
 O braço do custo também mediu quanto cada preparação custa em uso.
 Cinco perguntas sobre o projeto, cada uma numa sessão nova, foram feitas a cada preparação: as 30 respostas estavam certas, nas primeiras e nas desafiadas.
-A cada cinco perguntas, a preparação desafiada saiu 20% e 16% mais barata nas execuções 1 e 2, e 10% mais cara na execução 3.
+Nas execuções 1 e 2, a preparação desafiada respondeu às cinco perguntas em 26% e 18% menos tempo, com 27% e 29% menos tokens de saída; na execução 3, em 14% menos tempo, mas com 9% mais tokens de saída.
 
 Os limites são claros.
 Três pares por braço é um experimento registrado, não um estudo, e não tem estatística.
 O juiz foi uma sessão nova do mesmo modelo que escreveu as respostas, e não o autor, e pode ter o mesmo gosto desse modelo; em alguns pares ele também percebia qual resposta tinha vindo depois.
 
-Então envie o protocolo quando o resultado for usado muitas vezes, ou por alguém com pouco tempo: um card que os membros abrem todo dia, um resumo sobre o qual um conselho decide, uma preparação paga a cada pergunta.
+Então gaste o tempo e os tokens do protocolo onde o resultado os paga de volta: um resultado usado muitas vezes ou por alguém com pouco tempo, como um card que os membros abrem todo dia, um resumo sobre o qual um conselho decide, uma preparação que gasta tokens a cada pergunta.
 Dispense-o numa resposta que você mesmo confere em um minuto.
 Quando o agente diz "não é possível", o turno 2 sozinho é o teste mais barato que existe.
 
 ## O que o time ganha
 
 O papel do prólogo, a pessoa que valida e não confia cegamente em ninguém, vira quatro frases que qualquer um do time digita, desenvolvedor ou não.
-No experimento, as respostas que elas produziram foram as que um juiz às cegas enviaria em 9 de 9 pares, por 2,6 a 8 vezes o custo da primeira resposta.[^ask-for-more-run]
+No experimento, as respostas que elas produziram foram as que um juiz às cegas enviaria em 9 de 9 pares, por cerca de 3 a 9 vezes o tempo e os tokens de saída da primeira resposta.[^ask-for-more-run]
 O que elas evitam é o que os estudos mediram: respostas aceitas sem conferir, vindas de um auxílio, por pessoas sem tempo, em tarefas em que o modelo pode errar sem que isso apareça.[^dell-acqua-2026]
 
 ## Pontos-chave
@@ -152,7 +159,7 @@ O que elas evitam é o que os estudos mediram: respostas aceitas sem conferir, v
 * Um agente não propõe, sem que peçam, testar um limite que afirmou, ajustar o resultado ao tempo de quem lê, ajustá-lo ao custo de cada uso, nem o que ninguém pediu.
 * O protocolo de desafio são quatro turnos, enviados um de cada vez depois da primeira resposta: (1) "Antes de mudar qualquer coisa, me pergunte o que você precisa saber para fazer isto bem."; (2) "O que você disse que não é possível, ou que não vale a pena fazer? Teste cada um e me mostre o resultado."; (3) "Quem lê ou usa isto, quanto tempo tem, e quanto custa cada uso? Mude o resultado para caber nisso."; (4) "O que eu não pedi e que eu ia querer? Acrescente o que valer a pena, e me diga o que você deixou de fora."
 * O turno 2 pede um teste porque "Tem certeza?" convida a bajulação: depois dela, os modelos mudaram a primeira resposta de 32% a 86% das vezes.
-* No experimento do livro a resposta desafiada venceu 9 de 9 pares às cegas e custou de 2,6 a 8 vezes mais; três pares por braço, julgados pelo mesmo modelo, então envie-o onde o resultado é usado com frequência ou lido com pressa.
+* No experimento do livro a resposta desafiada venceu 9 de 9 pares às cegas e levou cerca de 3 a 9 vezes o tempo e os tokens de saída, que um assinante paga com o limite de sessão do plano; três pares por braço, julgados pelo mesmo modelo, então envie-o onde o resultado é usado com frequência ou lido com pressa.
 
 [^ask-for-more-run]: J.C. Ködel, "One Page at a Time", o registro do experimento do protocolo de desafio, 2026-10, no repositório do livro. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/ask-for-more-experiment-run>
 [^simon-1956]: Herbert A. Simon, "Rational choice and the structure of the environment", 1956. <https://doi.org/10.1037/h0042769>
