@@ -59,8 +59,8 @@ the anonymized text (docs/00 OD-3).
 
 docs/06: one line per delivery, in order, under milestones. The line never
 leaves the queue; it changes mark: `[ ]` not defined, `[>]` defined and not
-built, `[x]` done. The last line of each milestone is its review (§8). Edited by
-conversation in any session.
+built, `[x]` done. Each milestone is planned with its review as the last
+line (§8). Edited by conversation in any session.
 
 ## 5. This project
 
@@ -126,103 +126,32 @@ reasoning lives.
 ## 7. What this process does not have
 
 No formal spec, no spec delta, no change folder, no numbered tasks, no
-gate before implementation, no specialized subagent, no tool the
-deliveries did not ask for. When one of these is proposed, the question
+gate before implementation, no review of a review, no specialized
+subagent, no tool the deliveries did not ask for. When one of these is proposed, the question
 is: which concrete error would it have caught? The answer names an error
 that happened.
 
 ## 8. Closing a milestone
 
-The last line of every milestone but a `.1` is its review,
-`<milestone>-review`, a delivery like the others: /propose writes its page, /apply runs it. It
-checks the milestone's paragraph clause by clause against what the
-deliveries built, and reviews the code with what the host offers. A clause
-no delivery answers is a finding. The review fixes nothing; the person
-decides each finding, confirmed or rejected, with a reason.
+A milestone is planned with its review as its last line,
+`<milestone>-review`, a delivery like the others: /propose writes its
+page, /apply runs it. Its page takes the milestone's paragraph clause by
+clause and writes, for each, which delivery answers it and how a person
+tests it. It reviews no code and fixes nothing. The person tests each
+clause by hand: a clause no delivery answers, or one that fails in the
+person's hands, is a finding.
 
-Each confirmed finding becomes a `[ ]` line in a new milestone placed
-right after the reviewed one, numbered with `.1` (M3 is followed by M3.1),
-with its own paragraph, so the lines wait for /propose and nothing
-renumbers. No confirmed finding, no new milestone. A finding is never a
-fix in the middle of the next milestone.
+For a milestone of chapters, testing by hand is the author reading, in
+the PDF of both editions, the passages the page names, and answering the
+test the page wrote.
 
-A milestone has at most one round of fixes: `.1` is the last. A `.1`
-has no review of its own: it closes when its lines are `[x]` with their
-proof, and whatever it missed is found by the review of the next
-milestone. (Rule written after M4, whose `.1` review opened M4.2:
-`m4.2-review` was the last review run under the old rule, and the author
-rejected its four findings to close M4.)
+Each finding becomes a `[ ]` line in the same milestone, under the review
+line, waiting for /propose. The milestone closes when those lines are
+`[x]`. They get no second review: each one passes through its own page,
+its proof and the person's commit, which is the review. A finding is
+never a fix in the middle of the next milestone.
 
-For a milestone of chapters, the review is a fresh session that reads the
-book from its start to the end of the part, in both editions, and asks the
-product questions of docs/00, above all: does every sentence carry value,
-and is anything the reader needs missing? It checks the milestone's
-paragraph clause by clause against the chapters that teach it, and its
-findings may fall in any chapter it read.
-
-**The recipe of a milestone review** (the first is `m3-review`, the second
-`m4-review`, which wrote it down). The delivery is `m<n>-review`; its page
-names the model, the last chapter and the paragraph.
-
-1. Before the run: `main` with only the review's own `/propose` changes
-   uncommitted; `make verify` green.
-2. What the review reads, in order: docs/00 (audience, values, product
-   questions), docs/04 §"Writing the book" and §"Prose rules", then the
-   chapters from `00-` to the last chapter of the part, each chapter
-   English then Portuguese. The milestone's paragraph is quoted in the
-   request. Nothing else from docs/, work/ or scripts/; the guided
-   project's tags only as the links the chapters print.
-3. Turn 1, the review, headless, detached, from the repository's root:
-   `CLAUDE_CODE_DISABLE_AUTO_MEMORY=1 nohup claude -p "<request>" --model
-   <model> --setting-sources project --strict-mcp-config --permission-mode
-   default --permission-prompts none --output-format stream-json --verbose
-   --allowedTools "Read" "Glob" "Grep"`. Auto-memory is off because a
-   reader does not have the host's notes on this project.
-4. The request, in English, recorded word for word, says: read as a reader
-   who has only the earlier chapters; edit nothing; each finding names
-   where it is (file and line, one or both editions), the product question
-   or the paragraph it fails, what is wrong and what the reader loses; a
-   finding may fall in any chapter read; do not report what `make verify`
-   guards; spend attention on value, on what is missing, on whether each
-   chapter can be followed from the earlier ones alone, on whether the
-   code a chapter prints can be followed from what it says, and on whether
-   the Portuguese means what the English means; check the paragraph clause
-   by clause. It asks for this shape: `### F<n>. <summary>` with the bullets
-   Where, Question, What, Reader; then `## Paragraph`, one line per clause,
-   `<clause>: <chapter §section> · <tag or "no tag">` or
-   `<clause>: FINDING F<n>`.
-5. The book's `/apply` session checks each finding against the text and
-   gives its assessment; the author decides each one,
-   `F<n>: confirmed|rejected, <reason>`, in one sentence. Nothing is fixed.
-6. Turn 2, with `--resume <the review's session id>`, never `--continue`,
-   which takes the directory's most recent conversation (in `m3-review` it
-   reached the `/apply` session): the decisions, word for word as the
-   author approved them, and the request to write the confirmed findings
-   into docs/06 as `## M<n>.1. What the review of M<n> found`, after the
-   milestone and before the next, with a paragraph "When this milestone
-   closes, …", one `[ ]` line per finding and no review line,
-   and to stage it. A finding an
-   existing line covers adds no line; that line gains words only if the
-   finding adds something. Flags as turn 1, with `--permission-mode
-   acceptEdits --allowedTools "Read" "Edit" "Bash(git add
-   docs/06-Queue.md)" "Bash(git diff *)" "Bash(git status *)"`.
-   Corrections are further turns to the same session, recorded. docs/06
-   is not edited by hand for these lines.
-7. No confirmed finding: no new milestone; the record says so.
-8. A denied call is recorded, never retried by another route. Notes the
-   host writes outside the repository are deleted after the run. Session
-   ids and absolute paths are left out of the record.
-9. The record, `work/done/<slug>-run/`: `README.md` (date,
-   `claude --version`, model, the book's commit, commands, allowlists, the
-   paragraph check one line per clause, counts read, confirmed, rejected
-   and already queued, denied calls, what diverged); `turn-N.txt` (text
-   blocks byte for byte, tool calls as `[tool <name>] <relative path or
-   command>`); `findings.md` (as reported, byte for byte); `decisions.md`
-   (each request, word for word); `queue.diff` (docs/06 before and after
-   the lines).
-
-A milestone that also changed the guided project got a code review of
-its own, `m<n>-code-review`, a separate delivery placed right after its
-review, whose findings joined the same `M<n>.1`. Since `rewrite` the book
-has no guided project (ADR-0017), so no milestone has a code review; its
-recipe is in the history of this file, at the commit before `rewrite`.
+M3 and M4 were reviewed by a headless session whose findings opened `.1`
+milestones, with a code review of the guided project beside them, and
+both recipes are in the history of this file at the commit before
+`m9-review`.
