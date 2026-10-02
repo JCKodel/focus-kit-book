@@ -38,6 +38,7 @@ O que há de novo é que um agente de código as segue sem se cansar, uma vez es
 **Ego.**
 O autor de um trabalho o defende porque é dele, seja esse autor um colega, um agente ou você.
 A resposta é um papel: a pessoa interpreta, orienta e valida, e não confia cegamente em ninguém, agente ou colega, incluindo o autor do código.
+Validar inclui pedir mais: a primeira resposta de um agente raramente é a melhor que ele pode dar, e ele não oferece o que você não pediu; o capítulo 25, na Parte V, mostra como pedir.
 
 ## Processo
 
@@ -61,6 +62,7 @@ A Parte I é a base, as práticas que todo leitor precisa compartilhar antes do 
 A Parte II é o método, o focus-kit, dos seus documentos ao projeto como assistente do time.
 A Parte III é o git e as ferramentas do time.
 A Parte IV vai além do código: projetos que não são software, quanto custam os agentes e a adoção numa empresa.
+A Parte V é a pessoa: por que a primeira resposta de um agente parece final, e como pedir mais.
 
 ## Pontos-chave
 

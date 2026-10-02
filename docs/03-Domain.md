@@ -36,6 +36,8 @@ A new concept enters here first, in both languages.
 | open decision | decisão em aberto | `OD-<n>` | A decision listed in docs/00 that nobody closes alone, so an agent never settles it by assumption. |
 | governor | regulador | none | The question every addition to the process must answer, and every step already in it again: which concrete error would it have caught? The answer names an error that happened; a step with none leaves. |
 | challenge protocol | protocolo de desafio | none | The fixed turns a person sends after an agent's first answer, so the agent asks what it needed, tests what it called impossible, fits the result to its reader and its cost, and adds what nobody asked for; measured by `ask-for-more-experiment`, taught by chapter 25. |
+| automation bias | viés de automação | none | The tendency to take an automated answer in place of checking for oneself, so what the aid misses is missed and what it gets wrong is followed (Mosier and Skitka, 1996, as quoted in Mosier and Manzey, 2019); chapter 25 names it as one reason an agent's first answer feels final. |
+| sycophancy | bajulação | none | A model's tendency to tell the person what they seem to want, such as dropping a right answer when only asked "Are you sure?" (Sharma et al., 2024); why the challenge protocol asks for a test, not for doubt. |
 | context window | janela de contexto | none | Everything the model sees in one call. |
 | token | token | none | The unit of text a model reads and counts; a word is one token or a few. |
 | context rot | degradação de contexto | none | The loss of accuracy as the context grows. |
@@ -108,6 +110,6 @@ A new concept enters here first, in both languages.
 * A chapter exists in both editions with the same file name and the same heading structure.
 * A chapter opens with what the reader can do after it, in at most three sentences.
 * A chapter is as long as it needs to be to prove the value it opens with: no filler added, no useful content removed to fit a limit.
-* Case A and Case B are never named, dated to a meeting, located, or described by business detail. Case A's technology may be named, Microsoft Power Apps with Copilot Studio (approved by the author in `author-review-2`); nothing of its client may.
+* Case A and Case B are never named, dated to a meeting, located, or described by business detail. Case A's technology may be named, Microsoft Power Apps with Copilot Studio (approved by the author in `author-review-2`), and Microsoft Teams with its Adaptive Cards for the card story of chapter 25 (decided in `ask-for-more-experiment`); nothing of its client may.
 * Ninjobs is named, but only its process artifacts and published numbers appear, paraphrased; never its infrastructure, credentials, users or commercial plans. One exception, approved by the author in `the-governor`: the name of its database vendor, Supabase, where a story needs it; never its servers, projects, schema or configuration.
 * Every number in the book says where it was measured: a source note for a publication or a recorded run; for a private case, the prologue's sentence that the author counted it, plus a parenthesis in the text where the method matters.

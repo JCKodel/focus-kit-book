@@ -25,3 +25,9 @@ The book's purpose is a set of proven practices a whole team can run, for reader
 docs/00 gets the new contents and reworded values; docs/03 retires the guided project's terms and gains the new ones; docs/04 changes the chapter shape (a gain section, no exercises) and the code rule; docs/05 §5 retires the guided and brownfield projects; docs/06 gets M8 and marks the lines the rewrite absorbed; AGENTS.md follows.
 The appendices of M7 are planned again after the author reads the new book.
 Chapter files are renumbered in both editions; the site's navigation follows the file names.
+
+## Amendment, 2026-10-02 (ask-for-more-chapter)
+
+The book gains Part V, "The person decides", after Part IV, with one chapter, 25 "Asking for more": why an agent's first answer feels final, what an agent does not propose unasked, and the challenge protocol, with this book's experiment and the studies as the team's gain.
+It stands apart from Part IV because its subject is the person's role from the prologue, not a use of the method beyond code, and every audience of docs/00 reads it.
+The prologue names it where it asks the person to trust no one blindly, and its parts map gains a line for Part V.

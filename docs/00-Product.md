@@ -10,9 +10,9 @@ It argues for the method with real cases and measured results, and it doubles as
 
 ## Audience
 
-* **Developers new to any process**, indie or in a company: they read Parts I and II and can deliver their first milestone with an agent.
-* **Experienced developers and tech leads**: they skim Part I, use Part II as a manual, and take Parts III and IV for git, the team's tools and adoption.
-* **People who run or analyse projects without writing code** (managers, analysts, consultants, pre-sales): the prologue, chapters 1 to 3, Part II and Part IV, where the project answers them and the method is applied to proposals, analyses and a book.
+* **Developers new to any process**, indie or in a company: they read Parts I, II and V and can deliver their first milestone with an agent.
+* **Experienced developers and tech leads**: they skim Part I, use Part II as a manual, and take Parts III, IV and V for git, the team's tools, adoption and asking an agent for more.
+* **People who run or analyse projects without writing code** (managers, analysts, consultants, pre-sales): the prologue, chapters 1 to 3, Part II, Part IV and Part V, where the project answers them and the method is applied to proposals, analyses and a book.
 * **Workshop instructors**: the parts map to sessions (appendix).
 
 ## Mechanics
@@ -35,6 +35,7 @@ It argues for the method with real cases and measured results, and it doubles as
 | II. The method | 9 How focus-kit was born · 10 The documents: one place per fact · 11 Install, and the hosts · 12 Starting: `/brainstorm` and `/analyze` · 13 The queue and milestones · 14 `/propose`: one page · 15 `/apply`: build, verify, prove, never commit · 16 Closing a milestone · 17 The governor · 18 The project as the team's assistant |
 | III. Git and the team's tools | 19 Git essentials · 20 Worktrees and parallel agents · 21 The team's tools: pull requests, issues and boards |
 | IV. Beyond code | 22 Projects that are not software · 23 What agents cost, and where they pay · 24 Adoption in teams and companies |
+| V. The person decides | 25 Asking for more |
 | Appendices | The Ninjobs case · Glossary · Templates · Workshop map |
 
 The contents are a starting point; chapters are split, merged or moved by conversation, and docs/06 follows.

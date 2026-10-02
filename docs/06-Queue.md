@@ -208,6 +208,6 @@ When this milestone closes, a reader knows why an agent's first answer feels fin
 
 ```
 [x] ask-for-more-experiment  three arms on the lending library (limit: a Teams card with tabs; audience: an annual report summarized for the board; cost: a project set up for a daily question-answering agent), first answer against the challenge protocol, 3 runs per arm, judged blind by the author, recorded; the research report's unverified numbers checked against their primary sources
-[ ] ask-for-more-chapter     Chapter 25 and a seed in the prologue: why the first answer feels final, what the agent never proposes, the challenge protocol, Case A's Teams card as the author's own slip, the experiment and the studies as the team's gain; docs/00's contents updated; both editions
+[x] ask-for-more-chapter     Chapter 25, alone in a new Part V, and a seed in the prologue: why the first answer feels final, what the agent never proposes, the challenge protocol, Case A's Teams card as the author's own slip, the experiment and the studies as the team's gain; docs/00's contents updated; both editions
 [ ] m9-review                the review of M9: the prologue and chapter 25 read against M9's paragraph, clause by clause
 ```

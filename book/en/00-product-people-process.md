@@ -38,6 +38,7 @@ What is new is that a coding agent follows them without getting tired, once they
 **Ego.**
 The author of a piece of work defends it because it is theirs, whether that author is a colleague, an agent or you.
 The answer is a role: the person interprets, guides and validates, and trusts no one blindly, agent or colleague, the author of the code included.
+Validating includes asking for more: an agent's first answer is rarely the best it can give, and it does not offer what you did not ask for; chapter 25, in Part V, shows how to ask.
 
 ## Process
 
@@ -61,6 +62,7 @@ Part I is the base, the practices every reader must share before the process, fr
 Part II is the method, focus-kit, from its documents to the project as the team's assistant.
 Part III is git and the team's tools.
 Part IV is beyond code: projects that are not software, what agents cost, and adoption in a company.
+Part V is the person: why an agent's first answer feels final, and how to ask for more.
 
 ## Key points
 
