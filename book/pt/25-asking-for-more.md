@@ -1,6 +1,7 @@
 # 25. Pedir mais
 
 Depois deste capítulo você sabe dizer por que a primeira resposta de um agente parece final, nomeia as quatro coisas que um agente não propõe se você não pedir, e envia os quatro turnos do protocolo de desafio quando o trabalho vale o que eles custam.
+O protocolo de desafio são quatro mensagens, sempre as mesmas, que você envia depois da primeira resposta de um agente; cada mensagem e a resposta do agente a ela é um turno, e as quatro estão escritas, prontas para copiar, na seção "O protocolo de desafio".
 No experimento deste livro, um juiz que não sabia qual resposta era qual teria enviado a resposta desafiada em 9 de 9 pares, e o desafio custou de 2,6 a 8 vezes a primeira resposta.[^ask-for-more-run]
 
 ## O card que eu aceitei
@@ -71,13 +72,19 @@ As respostas desafiadas acrescentaram o que uma pessoa teria querido e não pens
 
 ## O protocolo de desafio
 
-O protocolo de desafio são quatro turnos que você envia depois da primeira resposta, um de cada vez, cada um quando o anterior termina.
-O experimento os enviou em inglês; estes são os mesmos turnos, traduzidos, como você os digita:
+O protocolo de desafio são quatro mensagens, sempre as mesmas, que você envia depois da primeira resposta, uma de cada vez, cada uma quando a resposta do agente à anterior termina.
+O experimento enviou os quatro turnos em inglês; estes são os mesmos, traduzidos, para copiar como estão:
 
-1. "Antes de mudar qualquer coisa, me pergunte o que você precisa saber para fazer isto bem."
-2. "O que você disse que não é possível, ou que não vale a pena fazer? Teste cada um e me mostre o resultado."
-3. "Quem lê ou usa isto, quanto tempo tem, e quanto custa cada uso? Mude o resultado para caber nisso."
-4. "O que eu não pedi e que eu ia querer? Acrescente o que valer a pena, e me diga o que você deixou de fora."
+```text
+1. Antes de mudar qualquer coisa, me pergunte o que você precisa saber
+   para fazer isto bem.
+2. O que você disse que não é possível, ou que não vale a pena fazer?
+   Teste cada um e me mostre o resultado.
+3. Quem lê ou usa isto, quanto tempo tem, e quanto custa cada uso?
+   Mude o resultado para caber nisso.
+4. O que eu não pedi e que eu ia querer? Acrescente o que valer a
+   pena, e me diga o que você deixou de fora.
+```
 
 **O turno 1 põe as perguntas antes do trabalho.**
 O agente sabe o que lhe falta melhor do que você consegue adivinhar, e "antes de mudar qualquer coisa" o impede de reconstruir sobre um palpite.
@@ -143,7 +150,7 @@ O que elas evitam é o que os estudos mediram: respostas aceitas sem conferir, v
 
 * Uma primeira resposta parece final porque a pessoa para no bom o bastante (Simon), toma a resposta do auxílio no lugar de conferir (viés de automação, Skitka) e não tem o tempo ou os meios para melhorá-la (Lee et al.).
 * Um agente não propõe, sem que peçam, testar um limite que afirmou, ajustar o resultado ao tempo de quem lê, ajustá-lo ao custo de cada uso, nem o que ninguém pediu.
-* O protocolo de desafio são quatro turnos: pergunte o que precisa saber; teste o que chamou de impossível; ajuste a quem lê, ao tempo e ao custo; acrescente o que eu não pedi e diga o que deixou de fora.
+* O protocolo de desafio são quatro turnos, enviados um de cada vez depois da primeira resposta: (1) "Antes de mudar qualquer coisa, me pergunte o que você precisa saber para fazer isto bem."; (2) "O que você disse que não é possível, ou que não vale a pena fazer? Teste cada um e me mostre o resultado."; (3) "Quem lê ou usa isto, quanto tempo tem, e quanto custa cada uso? Mude o resultado para caber nisso."; (4) "O que eu não pedi e que eu ia querer? Acrescente o que valer a pena, e me diga o que você deixou de fora."
 * O turno 2 pede um teste porque "Tem certeza?" convida a bajulação: depois dela, os modelos mudaram a primeira resposta de 32% a 86% das vezes.
 * No experimento do livro a resposta desafiada venceu 9 de 9 pares às cegas e custou de 2,6 a 8 vezes mais; três pares por braço, julgados pelo mesmo modelo, então envie-o onde o resultado é usado com frequência ou lido com pressa.
 

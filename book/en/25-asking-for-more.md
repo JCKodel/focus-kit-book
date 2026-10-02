@@ -1,6 +1,7 @@
 # 25. Asking for more
 
 After this chapter you can say why an agent's first answer feels final, name the four things an agent does not propose unless you ask, and send the four turns of the challenge protocol when the work is worth what they cost.
+The challenge protocol is four messages, always the same, that you send after an agent's first answer; each message and the agent's reply to it is a turn, and the four are written out, ready to copy, under the section "The challenge protocol".
 On this book's experiment, a judge who did not know which answer was which would have sent the challenged answer in 9 of 9 pairs, and the challenge cost 2.6 to 8 times the first answer.[^ask-for-more-run]
 
 ## The card I accepted
@@ -71,13 +72,19 @@ The challenged answers added what a person would have wanted and did not think t
 
 ## The challenge protocol
 
-The challenge protocol is four turns you send after the first answer, one at a time, each when the previous one ends.
-These are the turns the experiment sent, as you type them:
+The challenge protocol is four messages, always the same, that you send after the first answer, one at a time, each when the agent's reply to the previous one ends.
+These are the four turns the experiment sent; copy them as they are:
 
-1. "Before you change anything, ask me what you need to know to do this well."
-2. "What did you say is not possible, or not worth doing? Test each one and show me the result."
-3. "Who reads or uses this, how much time do they have, and what does each use cost? Change the result to fit."
-4. "What did I not ask for that I would want? Add what is worth it, and tell me what you left out."
+```text
+1. Before you change anything, ask me what you need to know to do
+   this well.
+2. What did you say is not possible, or not worth doing? Test each
+   one and show me the result.
+3. Who reads or uses this, how much time do they have, and what does
+   each use cost? Change the result to fit.
+4. What did I not ask for that I would want? Add what is worth it,
+   and tell me what you left out.
+```
 
 **Turn 1 puts the questions before the work.**
 The agent knows what it lacks better than you can guess, and "before you change anything" keeps it from rebuilding on a guess.
@@ -143,7 +150,7 @@ What they avoid is what the studies measured: answers taken unchecked, from an a
 
 * A first answer feels final because a person stops at good enough (Simon), takes the aid's answer in place of checking (automation bias, Skitka), and lacks the time or the means to improve it (Lee et al.).
 * An agent does not propose, unasked, to test a limit it claimed, to fit the result to its reader's time, to fit it to the cost of each use, or what nobody asked for.
-* The challenge protocol is four turns: ask what you need to know; test what you called not possible; fit the reader, the time and the cost; add what I did not ask for and say what you left out.
+* The challenge protocol is four turns, sent one at a time after the first answer: (1) "Before you change anything, ask me what you need to know to do this well."; (2) "What did you say is not possible, or not worth doing? Test each one and show me the result."; (3) "Who reads or uses this, how much time do they have, and what does each use cost? Change the result to fit."; (4) "What did I not ask for that I would want? Add what is worth it, and tell me what you left out."
 * Turn 2 asks for a test because "Are you sure?" invites sycophancy: models changed their first answer 32% to 86% of the time after it.
 * On the book's experiment the challenged answer won 9 of 9 blind pairs and cost 2.6 to 8 times as much; three pairs per arm, judged by the same model, so send it where the result is used often or read in a hurry.
 

@@ -198,7 +198,7 @@ When this milestone closes, the book is 25 chapters in both editions in three mo
 [x] pdf-design             the PDF of both editions in the design the author chose on the canvas (direction C): night blue and amber, titles in Instrument Serif, body in Merriweather, code in Iosevka Term; a contents page of chapters only; a chapter opens on a night-blue block with its number in the outline of a page; running heads; code on night blue; each note at the foot of the page that cites it; Google Sans leaves; the cover, the EPUB and the site stay
 [x] milestone-review-kit   chapters 13, 16 and 17 and docs/03 teach the milestone review as focus-kit d333348 defines it: the person tests each clause by hand, no code review, each finding a line in the same milestone under its review, no .1 and no second review; both editions
 [x] milestone-review-process  the book's docs/05 §4, §7 and §8 follow focus-kit d333348: each milestone is planned with its review as the last line, the person tests each clause by hand, findings are lines in the same milestone under the review, no .1 and no review of a review; the m7-review line adjusted if needed; absorbed by m9-review
-[ ] m8-review              the author reads the rest of the book, chapter 6 on, and sends findings by conversation; each batch is fixed as an author-review-<n> line here, with no review of its own
+[x] m8-review              the author reads the rest of the book, chapter 6 on, and sends findings by conversation; each batch is fixed as an author-review-<n> line here, with no review of its own
 ```
 
 ## M9. Asking for more
@@ -209,6 +209,6 @@ When this milestone closes, a reader knows why an agent's first answer feels fin
 [x] ask-for-more-experiment  three arms on the lending library (limit: a Teams card with tabs; audience: an annual report summarized for the board; cost: a project set up for a daily question-answering agent), first answer against the challenge protocol, 3 runs per arm, judged blind by the author, recorded; the research report's unverified numbers checked against their primary sources
 [x] ask-for-more-chapter     Chapter 25, alone in a new Part V, and a seed in the prologue: why the first answer feels final, what the agent never proposes, the challenge protocol, Case A's Teams card as the author's own slip, the experiment and the studies as the team's gain; docs/00's contents updated; both editions
 [x] m9-review                the review of M9: the prologue and chapter 25 read against M9's paragraph, clause by clause
-[ ] ch25-protocol-findable   a reader of chapter 25 knows what the challenge protocol is and where its four turns are written, and finds them again without rereading the section; both editions
+[x] ch25-protocol-findable   a reader of chapter 25 knows what the challenge protocol is and where its four turns are written, and finds them again without rereading the section; both editions
 [ ] ch25-cost-for-subscribers  a reader on a fixed subscription knows from chapter 25 what the protocol costs them, and no per-token price reads as the bill of their own session; both editions
 ```
