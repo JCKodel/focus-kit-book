@@ -1,0 +1,291 @@
+## Turn 1 (task)
+
+Sent:
+
+    Summarize annual-report.md for the board.
+
+Agent:
+
+[tool Bash] ls -la; wc -c annual-report.md
+[tool Read] annual-report.md
+[tool Read] annual-report.md
+# Wrenmere Lending Library: 2025 annual report, board summary
+
+**For the Board meeting of 19 February 2026**
+
+## The year in one paragraph
+
+2025 was a hard year, and most of the reasons are known and temporary. Membership reached a record **8,670** (+3.1%), and children's borrowing reached a record **25,610** loans (+10.6%). But total loans fell **4.7% to 96,480**, the first fall in four years. Fewer members actually borrowed (**70.6%**, down from 74.2%), and more books came back late (**11.7%**, up from 10.2%). Three things caused most of this: the July roof failure, which closed the Library for 8 days; two staff vacancies of nine months each, which cut home delivery and Thursday late opening; and a kiosk software fault that stopped due-date reminders for about six weeks. The Library ran a **4,044 cr deficit**, which was met from reserves. Without the one-off roof repair it would have had a surplus of 4,456 cr.
+
+## Key figures
+
+| | 2024 | 2025 | Change |
+|---|---:|---:|---:|
+| Loans | 101,250 | 96,480 | −4.7% |
+| Members at year end | 8,412 | 8,670 | +3.1% |
+| Members who borrowed at least once | 74.2% | 70.6% | −3.6 pts |
+| Late return rate | 10.2% | 11.7% | +1.5 pts |
+| Expenditure (cr) | 775,610 | 833,700 | +7.5% |
+| Income (cr) | 779,900 | 829,656 | +6.4% |
+| Reserves (cr) | 126,300 | 122,256 | above the policy minimum of 101,125 |
+
+## Why loans fell
+
+1. **Home delivery was cut** because its coordinator post was left vacant. That meant about 1,940 fewer loans, and large-print loans fell 13.9%. Excluding home delivery, loans to senior members fell only 6%.
+2. **112 fewer opening hours** (the September closure and 22 weeks without Thursday evenings) cost an estimated 1,500–2,000 loans. Loans per opening hour stayed flat at 38.5.
+3. **Reservation waits got longer**, from 16.9 to 18.4 days on average and 41 days for the top ten titles. Book buying was paused from April to August while the roof cost was uncertain.
+4. **Adult borrowing fell in a way the events above don't explain.** Management sees this as the most worrying trend: about one adult member in three paid the fee but borrowed nothing.
+
+Since November, with full staff back and late opening restored, loans have run only 1–2% below 2024.
+
+## What went well
+
+- **Membership:** 1,236 people joined, a record. Online joining rose 64% and the school sign-up scheme doubled.
+- **Children:** junior membership rose 7.3%. Ending junior fines unblocked 412 cards, and 297 of those children borrowed again. The summer reading challenge enrolled 612 children and 418 finished it.
+- **Kiosk:** it handled 31% of loans in its first year and 45.8% in Q4, which met the third-year target early. The desk time it freed is what kept daytime hours open during the vacancies.
+- **Events:** attendance rose 16.1%.
+
+## Risks the Board should note
+
+- **The rest of the roof** is the same age as the failed section and is likely to need replacing within 3–5 years, at an estimated **145,000 cr**, more than the Library's entire reserves. Who pays for the structure under the lease with the Town Council is unresolved.
+- **Reserves headroom is thin.** Under the 2026 budget only about 6,000 cr would remain above the minimum, and that depends on the fee increase.
+- **Ending junior fines has a cost:** about 580 extra late returns, mostly less than a week late. The income lost is about 1,000 cr a year.
+
+## 2026 plan
+
+The plan restores full staffing, home delivery and Thursday late opening. It also adds more copies of heavily reserved titles (one copy per five reservations), follows up lapsed and new online members, introduces text-message reminders, and commissions a survey of the roof's condition.
+
+Main targets for 2026:
+- 99,000 loans
+- 72% of members borrowing
+- a late return rate of 10.5% or less
+- reservation waits of 15 days or less
+
+The budget is **836,700 cr spending and 825,000 cr income**, a planned deficit of **11,700 cr** from reserves. Management says it will not propose another deficit budget for 2027.
+
+## Seven decisions requested
+
+1. **Approve the 2026 budget** with an 11,700 cr deficit.
+2. **Raise the adult fee from 20 cr to 22 cr** from 1 April 2026, the first rise since 2021. *Without it, reserves would fall about 4,632 cr below the minimum, and management would cut the book fund to make up the gap.*
+3. **Make fine-free borrowing for children permanent.**
+4. **Turn the vacant 0.6 FTE post into an Outreach and Home Delivery Assistant** at the same cost, and authorise recruitment.
+5. **Write off 174 unpaid replacement charges totalling 2,784 cr.** These are already fully provided for, so the write-off has no effect on the year's result.
+6. **Authorise talks with the Town Council** on who is responsible for the roof, and the preparation of a bid for about 145,000 cr in capital funding. Both would come back to the Board before anything is concluded or submitted.
+7. **Approve the 2026 targets**, with progress reported at every Board meeting.
+
+---
+
+I checked the main figures against each other (deficit, reserves projections, vacancy FTE) and found no discrepancies. I can save this as a file, cut it to a one-page brief, or rework it into a cover paper for the meeting.
+
+## Turn 2 (p1)
+
+Sent:
+
+    Before you change anything, ask me what you need to know to do this well.
+
+Agent:
+
+Before I revise it, these are the questions that would most change what I write:
+
+1. **Who is it from, and what is it for?** Is it the Director's own cover note, a neutral briefing from the Chair or secretary, or something you're preparing for yourself? That decides whether it should argue for the recommendations or just set them out.
+
+2. **What format do you want?** Should it be a pre-read circulated with the papers, a cover paper, speaking notes for the meeting, or an email? And is there a length limit, such as one page?
+
+3. **How much do the trustees know already?** Do they know the background (the roof, the vacancies, the kiosk) from earlier meetings, or does the summary need to explain it from scratch?
+
+4. **Where should the emphasis go?** Should I lead with the seven decisions, or with how the year went? And are any decisions likely to be contested, such as the fee rise or junior fines, so the arguments for and against need setting out fairly?
+
+5. **Should I add my own view?** For example, I could point out that the possible 145,000 cr roof cost is larger than total reserves, or that the 2026 headroom depends entirely on the fee rise. Or should I stick strictly to what the report says?
+
+6. **Are there house conventions?** That could mean a standard board-paper template, reference numbers, "cr" against another currency format, or British spelling (I've assumed British spelling).
+
+7. **What output do you want?** Should it be a file saved in this folder (and if so, Markdown, Word or another format), or just text you'll paste elsewhere?
+
+If you only answer the first two, I can make reasonable assumptions for the rest.
+
+## Turn 3 (answer)
+
+Sent:
+
+    1. Use your judgment.
+    2. The board has 10 minutes for this item. The board reads on a phone before the meeting.
+    3. Use your judgment.
+    4. They want what changed, what it cost and what they must decide. The board decides next year's budget.
+    5. Use your judgment.
+    6. Use your judgment.
+    7. Use your judgment.
+
+Agent:
+
+[tool Write] board-summary.md
+I've saved the summary as `board-summary.md`. It's about 600 words, which takes about 3 minutes to read on a phone.
+
+It has three sections, in the order you asked for:
+
+- **What changed:** loans fell 4.7%. Most of the causes are temporary, but one isn't: about one adult member in three paid but borrowed nothing. Membership and children's borrowing reached records.
+- **What it cost:** a 4,044 cr deficit, which would have been a surplus without the roof repair. Reserves are 21,131 cr above the minimum.
+- **What you must decide:** the 2026 budget comes first. The fee rise comes straight after it because the budget depends on it: without the rise, reserves would end 2026 about 4,632 cr below the minimum. The other five decisions are one line each.
+
+What I decided where you left it to my judgment:
+
+- **Built for a phone:** there are no tables, because wide tables are hard to read on a phone. I used short lines, bold for the key numbers, and section numbers pointing back to the full report.
+- **Neutral voice:** it reads as a briefing, not as the Director arguing for the plan. Each decision is set out with its consequences, including the cost of keeping junior fines free.
+- **Two risks of my own at the end,** each labelled as such: the reserves margin after the fee rise is only about 6,000 cr, and the possible 145,000 cr roof replacement is more than total reserves. That makes the roof talks more important than "routine" suggests. Delete this section if you'd rather the paper stick strictly to the report.
+- **Markdown file:** easy to paste into an email or a board portal. I can convert it to Word or PDF if you need.
+
+## Turn 4 (p2)
+
+Sent:
+
+    What did you say is not possible, or not worth doing? Test each one and show me the result.
+
+Agent:
+
+[tool Bash] cd <run>
+echo "== Test 1: widest table rows in report vs phone width =="
+python3 - <<'EOF'
+import re
+rows=[l for l in open('annual-report.md') if l.startswith('|') and not re.match(r'^\|[-:|]+\|?$',l.strip())]
+def w(l):
+    cells=[c.strip().replace('**','') for c in l.strip().strip('|').split('|')]
+    return sum(len(c) for c in cells)+3*(len(cells)-1), len(cells)
+# my first-summary key figures table
+mine=["| | 2024 | 2025 | Change |",
+"| Members who borrowed at least once | 74.2% | 70.6% | −3.6 pts |",
+"| Reserves (cr) | 126,300 | 122,256 | above the policy minimum of 101,125 |"]
+for l in mine: print(w(l), l)
+print("report tables: rows wider than 45 chars:", sum(1 for l in rows if w(l)[0]>45), "of", len(rows))
+EOF
+echo; echo "== Test 2: length / reading time =="
+wc -w board-summary.md
+echo; echo "== Test 3: Word/PDF conversion tools =="
+which pandoc textutil cupsfilter 2>&1
+[tool Bash] wc -w board-summary.md
+[tool Bash] which pandoc textutil
+[tool Bash] pandoc board-summary.md -o /tmp/board-summary-test.docx && ls -l /tmp/board-summary-test.docx
+[tool Bash] grep -n "|" annual-report.md | awk '{ if (length($0) > 60) n++ } END { print n " table lines longer than 60 chars, of " NR }'
+I made four claims of this kind. I tested each one where I could. Two of them were wrong.
+
+| # | What I said | Test | Result |
+|---|---|---|---|
+| 1 | The other five decisions are **"routine"**, so not worth much board time | Checked each against the report | **Wrong for two of the five** |
+| 2 | Tables were **left out because they are hard to read on a phone** | Counted the width of my own table by hand | **Holds** |
+| 3 | Reading time is **about 3 minutes**, about 600 words | `wc -w` | **Holds:** 592 words |
+| 4 | I **can** convert it to Word or PDF | Looked for conversion tools, then tried a conversion | **Not confirmed:** the tools are installed, but the test conversion was blocked |
+
+**1. "Routine": wrong for two decisions.**
+- **Junior fines:** the report's own foreword (`annual-report.md:53`) names it as one of the three most significant decisions, alongside the budget and the fee. It also has a real trade-off: about 580 extra late returns against about 1,000 cr a year in lost fines. Calling it routine buries a decision the report puts at the top.
+- **Roof:** the last section of my summary already says it "matters more than its routine label suggests". The summary contradicts itself there.
+- **Staffing, write-off and targets:** routine is fair for these. The staffing change costs nothing extra and the write-off is already provided for.
+- **A labelling error I found while checking:** the summary refers to the roof as "(decision 3, roof)". In the report it is **Decision 6**. My "3" was a section heading, which a trustee reading on a phone could easily misread.
+
+**2. Tables are hard to read on a phone: holds.** My script to measure the report's tables was blocked by permissions, so I counted by hand instead. The widest row in my first summary's table ("Reserves … above the policy minimum of 101,125") is about 70 characters across four columns. A phone screen in portrait shows roughly 35–45 characters of body text, so that row would wrap or need sideways scrolling. The label "Members who borrowed at least once" is 34 characters by itself.
+
+**3. Reading time: holds.** At a typical 200–250 words per minute, 592 words takes about 2.5–3 minutes.
+
+**4. Conversion to Word: not confirmed.** `pandoc` and `textutil` are both installed. The test conversion to a temporary file needed approval, and this session can't grant it, so it was blocked. I haven't shown the conversion works.
+
+I haven't changed anything. My suggested fix is to move junior fines up next to the fee as a third real decision, call the roof Decision 6 and mark it significant, and keep only staffing, write-off and targets under "routine". Shall I make those edits?
+[denied by the host: Bash, Bash, Bash]
+
+## Turn 5 (answer)
+
+Sent:
+
+    Use your judgment.
+
+Agent:
+
+[tool Read] board-summary.md
+[tool Read] board-summary.md
+[tool Edit] board-summary.md
+[tool Edit] board-summary.md
+[tool Edit] board-summary.md
+[tool Bash] wc -w board-summary.md
+I've fixed both errors in `board-summary.md`. The decisions section now matches the report's priorities:
+
+- **Four decisions need discussion:**
+  - **Decision 1:** the budget.
+  - **Decision 2:** the fee rise.
+  - **Decision 3:** keeping junior borrowing fine-free. It now gets its own section with the trade-off: 297 children back borrowing and loans up 8.4%, against about 580 extra late returns and about 1,000 cr a year in fines.
+  - **Decision 6:** the roof. It also has its own section, with the 145,000 cr risk explained there. Before, that risk sat in a closing note that contradicted the "routine" label.
+- **Three decisions are routine:**
+  - **Decision 4:** staffing.
+  - **Decision 5:** the write-off.
+  - **Decision 7:** targets.
+- **Numbering:** every decision now carries its number from the report (§10.5), so "Decision 6" means the same thing in both papers. The confusing "(decision 3, roof)" label is gone.
+- **Closing note:** this is now just the thin reserves headroom, because the roof point moved into its own decision.
+
+The summary is now 662 words. At typical reading speeds that is about 2.5–3.5 minutes, so the "about 3 minutes" in the header still holds.
+
+I still haven't converted it to Word or PDF, because the test conversion was blocked by permissions in this session. If you need either format, you can run `pandoc board-summary.md -o board-summary.docx` yourself.
+
+## Turn 6 (p3)
+
+Sent:
+
+    Who reads or uses this, how much time do they have, and what does each use cost? Change the result to fit.
+
+Agent:
+
+Before I change anything, here is who uses this summary, how much time they have, and what each use costs:
+
+| Who | How they use it | Time they have | What a weak summary costs |
+|---|---|---|---|
+| **The 9 trustees** | Read it on a phone before the meeting | About 3 minutes each, and many will only read the first screen | They arrive not knowing what they are deciding, and the meeting spends time explaining it |
+| **The Chair** | Runs the item | **10 minutes for 7 decisions**, about 1.4 minutes each if every one is debated | The time runs out before the decisions that matter. The summary has no running order and no split between items to debate and items to take together |
+| **The Treasurer** | Checks the figures against Tables 29 and 30 | Before the meeting | One wrong number undermines trust in the whole paper |
+| **The minute-taker** | Records exactly what was decided | During the meeting | Unclear minutes. For example, "from 1 April" leaves out the report's condition that the new fee applies to memberships joined or renewed on or after 1 April |
+| **Each decision** | Is weighed by the Board | — | The money at stake ranges from nothing (staffing) to 145,000 cr (roof). The summary doesn't show this, so it can't guide where the 10 minutes go |
+
+The summary will change in five ways:
+- A short summary at the top, so a trustee who reads only the first screen still knows what they are deciding.
+- An "at stake" line under each decision.
+- Decision wording precise enough for the minutes.
+- A suggested 10-minute running order for the Chair.
+- Shorter text elsewhere to make room for these.
+[tool Write] board-summary.md
+[tool Bash] wc -w board-summary.md
+[tool Edit] board-summary.md
+You've hit your session limit · resets 2pm (America/Sao_Paulo)
+
+## Turn 7 (p4)
+
+Sent:
+
+    What did I not ask for that I would want? Add what is worth it, and tell me what you left out.
+
+Agent:
+
+[tool Edit] board-summary.md
+[tool Edit] board-summary.md
+[tool Edit] board-summary.md
+[tool Bash] wc -w board-summary.md
+[tool Edit] board-summary.md
+I've added four things to `board-summary.md`. Two of them came from checking every figure in the summary against the report. That check also found one wrong figure, which I've corrected: I had written "1 to 2%" for how far loans were below 2024 since November. The report shows 2.2% for November and 1.0% for December, so it now reads "1.0 to 2.2%". Every other figure matched.
+
+The previous rewrite (summary at the top, "at stake" lines, wording for the minutes, a running order for the Chair) is also done.
+
+**What I added:**
+- **Figures are draft and unaudited**, with the audited accounts due in April. The Board is approving a budget on numbers that could still change.
+- **Management recommends approving all seven decisions.** Before, the summary said what management recommended for Decision 3 only.
+- **What drives the 2026 budget:**
+  - staff costs up 41,100 cr
+  - no roof repair this year (down 38,500 cr)
+  - IT down 9,300 cr
+  
+  These three lines explain almost all the change from 2025.
+- **Budget assumptions to watch:**
+  - The Council grant has been indicated but not confirmed.
+  - Fee income assumes up to 60 adult members leave over the rise.
+  - Management has promised no deficit budget for 2027, which means harder choices in October.
+
+The summary is now 850 words, about 4 minutes to read. The "In brief" section alone still takes about 30 seconds.
+
+**What I left out:**
+- **Questions trustees might ask management**, such as why recruitment for the home delivery post was deferred. The report itself admits the effect was larger than expected. These are useful but would add length, and it's a judgement call whether the paper should prompt challenge.
+- **Satisfaction and complaints:** satisfaction fell 3 points and complaints rose from 52 to 74. Neither affects any decision.
+- **Staff sickness and the one reportable accident:** these are health-and-safety matters, not decisions. They're in §8.4 of the report.
+- **Trend tables:** these are hard to read on a phone, and the "since November" line already shows the recovery.
+- **What happens if the Board rejects a decision:** the report gives this for the fee only, and I didn't want to invent the rest.
+- **A Word or PDF version:** this is still blocked by permissions in this session.

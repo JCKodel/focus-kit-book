@@ -72,11 +72,11 @@ A milestone holds three to eight deliveries, then its review: the kit's rule for
 The first ones are the skeleton the others stand on: the library's `skeleton` creates `npm run verify`, which every later delivery runs.
 Then each line comes after the lines it needs: a librarian cannot lend a copy before the catalog holds copies and the members exist.
 
-### The review, and `.1`
+### The review, and its findings
 
-The last line of every milestone is its review, `<milestone>-review`, a delivery like the others, which checks the paragraph clause by clause against what the milestone built ([chapter 16](16-closing-a-milestone.md)).
-The review fixes nothing.
-Each finding you confirm becomes a `[ ]` line in a new milestone placed right after, numbered with `.1` (M1 is followed by M1.1), with its own paragraph, so no milestone after it renumbers; that milestone ends with its own review.
+A milestone is planned with its review as its last line, `<milestone>-review`, a delivery like the others, which takes the paragraph clause by clause ([chapter 16](16-closing-a-milestone.md)).
+It reviews no code and fixes nothing: a person tests each clause by hand.
+Each finding becomes a `[ ]` line in the same milestone, under the review line, and those lines get no second review.
 
 ## Changing the queue
 
@@ -98,6 +98,6 @@ On Case A, a client project on a low-code platform, Microsoft Power Apps with Co
 * docs/06 holds milestones, each with a paragraph, and one line per delivery under it: a mark, a slug and what it delivers, in one line; the reasoning goes on the page.
 * Three marks: `[ ]` not defined, `[>]` the page exists (`/propose`), `[x]` done (`/apply`); a line never leaves, so the queue is also the history.
 * A milestone paragraph is a test a person can check against the product, never a theme.
-* Three to eight deliveries, the skeleton first, each line after the lines it needs, and last the review, whose confirmed findings open a `.1` milestone.
+* Three to eight deliveries, the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone.
 * No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept.
 

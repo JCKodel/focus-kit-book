@@ -72,11 +72,11 @@ Um marco tem de três a oito entregas, e depois a revisão dele: a regra do kit 
 As primeiras são o esqueleto em que as outras se apoiam: o `esqueleto` da biblioteca cria o `npm run verify`, que toda entrega seguinte roda.
 Depois cada linha vem após as linhas de que precisa: uma bibliotecária não consegue emprestar um exemplar antes de o catálogo ter exemplares e de os membros existirem.
 
-### A revisão, e o `.1`
+### A revisão, e os seus achados
 
-A última linha de todo marco é a revisão dele, `<milestone>-review`, uma entrega como as outras, que confere o parágrafo cláusula por cláusula contra o que o marco construiu ([capítulo 16](16-closing-a-milestone.md)).
-A revisão não corrige nada.
-Cada achado que você confirma vira uma linha `[ ]` em um marco novo posto logo depois, numerado com `.1` (o M1 é seguido pelo M1.1), com o próprio parágrafo, então nenhum marco depois dele muda de número; esse marco termina com a própria revisão.
+Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, uma entrega como as outras, que pega o parágrafo cláusula por cláusula ([capítulo 16](16-closing-a-milestone.md)).
+Ela não revisa código e não corrige nada: uma pessoa testa cada cláusula à mão.
+Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, e essas linhas não têm segunda revisão.
 
 ## Mudando a fila
 
@@ -98,6 +98,6 @@ O [capítulo 18](18-project-as-assistant.md) conta o resto do Caso A, e o [capí
 * O docs/06 guarda marcos, cada um com um parágrafo, e uma linha por entrega sob ele: uma marca, um slug e o que ela entrega, em uma linha; o raciocínio vai para a página.
 * Três marcas: `[ ]` não definida, `[>]` a página existe (`/propose`), `[x]` feita (`/apply`); uma linha nunca sai, então a fila é também o histórico.
 * O parágrafo de um marco é um teste que uma pessoa confere no produto, nunca um tema.
-* De três a oito entregas, o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados confirmados abrem um marco `.1`.
+* De três a oito entregas, o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados viram linhas sob ela no mesmo marco.
 * Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido.
 

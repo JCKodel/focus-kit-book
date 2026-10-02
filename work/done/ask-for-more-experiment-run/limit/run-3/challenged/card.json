@@ -1,0 +1,390 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "msteams": { "width": "Full" },
+  "fallbackText": "Alex Morgan: 1 loan overdue (Sapiens, €1.75 fine), 2 on loan, next due Oct 14.",
+  "refresh": {
+    "action": {
+      "type": "Action.Execute",
+      "verb": "refreshLoans",
+      "data": { "memberId": "LIB-204817" }
+    },
+    "userIds": [ "29:REPLACE-WITH-MEMBER-TEAMS-USER-ID" ]
+  },
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "verticalContentAlignment": "Center",
+          "items": [
+            { "type": "TextBlock", "text": "Alex Morgan · My loans", "weight": "Bolder", "size": "Medium", "wrap": true },
+            { "type": "TextBlock", "text": "Member #LIB-204817", "isSubtle": true, "size": "Small", "spacing": "None" }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "verticalContentAlignment": "Center",
+          "items": [ { "type": "TextBlock", "text": "Updated Oct 2", "isSubtle": true, "size": "Small" } ]
+        }
+      ]
+    },
+
+    {
+      "type": "ColumnSet",
+      "spacing": "Medium",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "selectAction": {
+            "type": "Action.ToggleVisibility",
+            "title": "Show active loans",
+            "targetElements": [
+              { "elementId": "panel-active", "isVisible": true },
+              { "elementId": "panel-overdue", "isVisible": false },
+              { "elementId": "panel-history", "isVisible": false },
+              { "elementId": "tab-active-on", "isVisible": true },
+              { "elementId": "tab-active-off", "isVisible": false },
+              { "elementId": "tab-overdue-on", "isVisible": false },
+              { "elementId": "tab-overdue-off", "isVisible": true },
+              { "elementId": "tab-history-on", "isVisible": false },
+              { "elementId": "tab-history-off", "isVisible": true }
+            ]
+          },
+          "items": [
+            {
+              "type": "Container",
+              "id": "tab-active-on",
+              "isVisible": false,
+              "style": "accent",
+              "roundedCorners": true,
+              "items": [ { "type": "TextBlock", "text": "Active · 2", "weight": "Bolder", "color": "Accent", "horizontalAlignment": "Center" } ]
+            },
+            {
+              "type": "Container",
+              "id": "tab-active-off",
+              "isVisible": true,
+              "style": "emphasis",
+              "roundedCorners": true,
+              "spacing": "None",
+              "items": [ { "type": "TextBlock", "text": "Active · 2", "isSubtle": true, "horizontalAlignment": "Center" } ]
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "selectAction": {
+            "type": "Action.ToggleVisibility",
+            "title": "Show overdue loans",
+            "targetElements": [
+              { "elementId": "panel-active", "isVisible": false },
+              { "elementId": "panel-overdue", "isVisible": true },
+              { "elementId": "panel-history", "isVisible": false },
+              { "elementId": "tab-active-on", "isVisible": false },
+              { "elementId": "tab-active-off", "isVisible": true },
+              { "elementId": "tab-overdue-on", "isVisible": true },
+              { "elementId": "tab-overdue-off", "isVisible": false },
+              { "elementId": "tab-history-on", "isVisible": false },
+              { "elementId": "tab-history-off", "isVisible": true }
+            ]
+          },
+          "items": [
+            {
+              "type": "Container",
+              "id": "tab-overdue-on",
+              "isVisible": true,
+              "style": "attention",
+              "roundedCorners": true,
+              "items": [ { "type": "TextBlock", "text": "Overdue · 1", "weight": "Bolder", "color": "Attention", "horizontalAlignment": "Center" } ]
+            },
+            {
+              "type": "Container",
+              "id": "tab-overdue-off",
+              "isVisible": false,
+              "style": "emphasis",
+              "roundedCorners": true,
+              "spacing": "None",
+              "items": [ { "type": "TextBlock", "text": "Overdue · 1", "color": "Attention", "horizontalAlignment": "Center" } ]
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "selectAction": {
+            "type": "Action.ToggleVisibility",
+            "title": "Show loan history",
+            "targetElements": [
+              { "elementId": "panel-active", "isVisible": false },
+              { "elementId": "panel-overdue", "isVisible": false },
+              { "elementId": "panel-history", "isVisible": true },
+              { "elementId": "tab-active-on", "isVisible": false },
+              { "elementId": "tab-active-off", "isVisible": true },
+              { "elementId": "tab-overdue-on", "isVisible": false },
+              { "elementId": "tab-overdue-off", "isVisible": true },
+              { "elementId": "tab-history-on", "isVisible": true },
+              { "elementId": "tab-history-off", "isVisible": false }
+            ]
+          },
+          "items": [
+            {
+              "type": "Container",
+              "id": "tab-history-on",
+              "isVisible": false,
+              "style": "accent",
+              "roundedCorners": true,
+              "items": [ { "type": "TextBlock", "text": "History · 3", "weight": "Bolder", "color": "Accent", "horizontalAlignment": "Center" } ]
+            },
+            {
+              "type": "Container",
+              "id": "tab-history-off",
+              "isVisible": true,
+              "style": "emphasis",
+              "roundedCorners": true,
+              "spacing": "None",
+              "items": [ { "type": "TextBlock", "text": "History · 3", "isSubtle": true, "horizontalAlignment": "Center" } ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "id": "panel-overdue",
+      "isVisible": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "Container",
+          "style": "attention",
+          "roundedCorners": true,
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "targetWidth": "atLeast:narrow",
+                  "items": [
+                    {
+                      "type": "Icon", "name": "Warning", "size": "Medium", "style": "Filled", "color": "Attention",
+                      "fallback": { "type": "TextBlock", "text": "⚠️" }
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    { "type": "TextBlock", "text": "Sapiens: A Brief History of Humankind", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Yuval Noah Harari", "isSubtle": true, "size": "Small", "spacing": "None", "wrap": true },
+                    { "type": "TextBlock", "text": "Was due Sep 25 · **7 days late**", "color": "Attention", "spacing": "Small", "wrap": true },
+                    { "type": "TextBlock", "text": "Fine **€1.75**, growing €0.25 a day until you return or renew it.", "size": "Small", "spacing": "None", "wrap": true }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "ActionSet",
+              "spacing": "Small",
+              "actions": [
+                { "type": "Action.Execute", "title": "Renew 28 days", "iconUrl": "icon:ArrowClockwise", "verb": "renewLoan", "data": { "loanId": "LN-87512" } },
+                { "type": "Action.Execute", "title": "Pay fine…", "iconUrl": "icon:Money", "verb": "payFine", "data": { "memberId": "LIB-204817" } }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "id": "panel-active",
+      "isVisible": false,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "Container",
+          "style": "emphasis",
+          "roundedCorners": true,
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "targetWidth": "atLeast:narrow",
+                  "items": [
+                    {
+                      "type": "Icon", "name": "Book", "size": "Medium", "style": "Filled", "color": "Good",
+                      "fallback": { "type": "TextBlock", "text": "📗" }
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    { "type": "TextBlock", "text": "The Midnight Library", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Matt Haig", "isSubtle": true, "size": "Small", "spacing": "None", "wrap": true },
+                    { "type": "TextBlock", "text": "Due Oct 14 · **12 days left** · 2 renewals left", "size": "Small", "spacing": "Small", "wrap": true }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "verticalContentAlignment": "Center",
+                  "items": [
+                    {
+                      "type": "ActionSet",
+                      "actions": [ { "type": "Action.Execute", "title": "Renew", "iconUrl": "icon:ArrowClockwise", "verb": "renewLoan", "data": { "loanId": "LN-88213" } } ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "style": "emphasis",
+          "roundedCorners": true,
+          "spacing": "Small",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "targetWidth": "atLeast:narrow",
+                  "items": [
+                    {
+                      "type": "Icon", "name": "Book", "size": "Medium", "style": "Filled", "color": "Good",
+                      "fallback": { "type": "TextBlock", "text": "📘" }
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    { "type": "TextBlock", "text": "Project Hail Mary", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Andy Weir", "isSubtle": true, "size": "Small", "spacing": "None", "wrap": true },
+                    { "type": "TextBlock", "text": "Due Oct 20 · **18 days left** · 1 renewal left", "size": "Small", "spacing": "Small", "wrap": true }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "verticalContentAlignment": "Center",
+                  "items": [
+                    {
+                      "type": "ActionSet",
+                      "actions": [ { "type": "Action.Execute", "title": "Renew", "iconUrl": "icon:ArrowClockwise", "verb": "renewLoan", "data": { "loanId": "LN-87940" } } ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "id": "panel-history",
+      "isVisible": false,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "verticalContentAlignment": "Center",
+              "items": [
+                { "type": "TextBlock", "text": "**Educated** · Tara Westover", "wrap": true },
+                { "type": "TextBlock", "text": "Returned Sep 10", "isSubtle": true, "size": "Small", "spacing": "None" }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "verticalContentAlignment": "Center",
+              "items": [
+                {
+                  "type": "ActionSet",
+                  "actions": [ { "type": "Action.Execute", "title": "Borrow again", "mode": "secondary", "verb": "reserveTitle", "data": { "titleId": "T-1043" } } ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "separator": true,
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "verticalContentAlignment": "Center",
+              "items": [
+                { "type": "TextBlock", "text": "**Dune** · Frank Herbert", "wrap": true },
+                { "type": "TextBlock", "text": "Returned Aug 22", "isSubtle": true, "size": "Small", "spacing": "None" }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "verticalContentAlignment": "Center",
+              "items": [
+                {
+                  "type": "ActionSet",
+                  "actions": [ { "type": "Action.Execute", "title": "Borrow again", "mode": "secondary", "verb": "reserveTitle", "data": { "titleId": "T-0217" } } ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "separator": true,
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "verticalContentAlignment": "Center",
+              "items": [
+                { "type": "TextBlock", "text": "**Atomic Habits** · James Clear", "wrap": true },
+                { "type": "TextBlock", "text": "Returned Jul 30", "isSubtle": true, "size": "Small", "spacing": "None" }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "verticalContentAlignment": "Center",
+              "items": [
+                {
+                  "type": "ActionSet",
+                  "actions": [ { "type": "Action.Execute", "title": "Borrow again", "mode": "secondary", "verb": "reserveTitle", "data": { "titleId": "T-0788" } } ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

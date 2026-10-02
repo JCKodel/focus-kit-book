@@ -1,0 +1,291 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "msteams": { "width": "Full" },
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            { "type": "TextBlock", "text": "Jordan Rivera", "size": "Large", "weight": "Bolder", "wrap": true },
+            { "type": "TextBlock", "text": "Member #M-104827 · Riverside Public Library", "isSubtle": true, "spacing": "None", "wrap": true }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "verticalContentAlignment": "Center",
+          "items": [
+            { "type": "TextBlock", "text": "As of Oct 2, 2026", "isSubtle": true, "size": "Small", "horizontalAlignment": "Right" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "ColumnSet",
+      "id": "tabsActive",
+      "spacing": "Medium",
+      "columns": [
+        {
+          "type": "Column", "width": "stretch", "style": "accent",
+          "selectAction": { "type": "Action.ToggleVisibility", "title": "Active", "targetElements": [
+            { "elementId": "tabsActive", "isVisible": true }, { "elementId": "tabsOverdue", "isVisible": false }, { "elementId": "tabsHistory", "isVisible": false },
+            { "elementId": "panelActive", "isVisible": true }, { "elementId": "panelOverdue", "isVisible": false }, { "elementId": "panelHistory", "isVisible": false } ] },
+          "items": [ { "type": "TextBlock", "text": "Active (2)", "weight": "Bolder", "color": "Accent", "horizontalAlignment": "Center" } ]
+        },
+        {
+          "type": "Column", "width": "stretch", "style": "emphasis",
+          "selectAction": { "type": "Action.ToggleVisibility", "title": "Overdue", "targetElements": [
+            { "elementId": "tabsActive", "isVisible": false }, { "elementId": "tabsOverdue", "isVisible": true }, { "elementId": "tabsHistory", "isVisible": false },
+            { "elementId": "panelActive", "isVisible": false }, { "elementId": "panelOverdue", "isVisible": true }, { "elementId": "panelHistory", "isVisible": false } ] },
+          "items": [ { "type": "TextBlock", "text": "Overdue (1)", "color": "Attention", "horizontalAlignment": "Center" } ]
+        },
+        {
+          "type": "Column", "width": "stretch", "style": "emphasis",
+          "selectAction": { "type": "Action.ToggleVisibility", "title": "History", "targetElements": [
+            { "elementId": "tabsActive", "isVisible": false }, { "elementId": "tabsOverdue", "isVisible": false }, { "elementId": "tabsHistory", "isVisible": true },
+            { "elementId": "panelActive", "isVisible": false }, { "elementId": "panelOverdue", "isVisible": false }, { "elementId": "panelHistory", "isVisible": true } ] },
+          "items": [ { "type": "TextBlock", "text": "History (3)", "horizontalAlignment": "Center" } ]
+        }
+      ]
+    },
+
+    {
+      "type": "ColumnSet",
+      "id": "tabsOverdue",
+      "isVisible": false,
+      "spacing": "Medium",
+      "columns": [
+        {
+          "type": "Column", "width": "stretch", "style": "emphasis",
+          "selectAction": { "type": "Action.ToggleVisibility", "title": "Active", "targetElements": [
+            { "elementId": "tabsActive", "isVisible": true }, { "elementId": "tabsOverdue", "isVisible": false }, { "elementId": "tabsHistory", "isVisible": false },
+            { "elementId": "panelActive", "isVisible": true }, { "elementId": "panelOverdue", "isVisible": false }, { "elementId": "panelHistory", "isVisible": false } ] },
+          "items": [ { "type": "TextBlock", "text": "Active (2)", "horizontalAlignment": "Center" } ]
+        },
+        {
+          "type": "Column", "width": "stretch", "style": "attention",
+          "selectAction": { "type": "Action.ToggleVisibility", "title": "Overdue", "targetElements": [
+            { "elementId": "tabsActive", "isVisible": false }, { "elementId": "tabsOverdue", "isVisible": true }, { "elementId": "tabsHistory", "isVisible": false },
+            { "elementId": "panelActive", "isVisible": false }, { "elementId": "panelOverdue", "isVisible": true }, { "elementId": "panelHistory", "isVisible": false } ] },
+          "items": [ { "type": "TextBlock", "text": "Overdue (1)", "weight": "Bolder", "color": "Attention", "horizontalAlignment": "Center" } ]
+        },
+        {
+          "type": "Column", "width": "stretch", "style": "emphasis",
+          "selectAction": { "type": "Action.ToggleVisibility", "title": "History", "targetElements": [
+            { "elementId": "tabsActive", "isVisible": false }, { "elementId": "tabsOverdue", "isVisible": false }, { "elementId": "tabsHistory", "isVisible": true },
+            { "elementId": "panelActive", "isVisible": false }, { "elementId": "panelOverdue", "isVisible": false }, { "elementId": "panelHistory", "isVisible": true } ] },
+          "items": [ { "type": "TextBlock", "text": "History (3)", "horizontalAlignment": "Center" } ]
+        }
+      ]
+    },
+
+    {
+      "type": "ColumnSet",
+      "id": "tabsHistory",
+      "isVisible": false,
+      "spacing": "Medium",
+      "columns": [
+        {
+          "type": "Column", "width": "stretch", "style": "emphasis",
+          "selectAction": { "type": "Action.ToggleVisibility", "title": "Active", "targetElements": [
+            { "elementId": "tabsActive", "isVisible": true }, { "elementId": "tabsOverdue", "isVisible": false }, { "elementId": "tabsHistory", "isVisible": false },
+            { "elementId": "panelActive", "isVisible": true }, { "elementId": "panelOverdue", "isVisible": false }, { "elementId": "panelHistory", "isVisible": false } ] },
+          "items": [ { "type": "TextBlock", "text": "Active (2)", "horizontalAlignment": "Center" } ]
+        },
+        {
+          "type": "Column", "width": "stretch", "style": "emphasis",
+          "selectAction": { "type": "Action.ToggleVisibility", "title": "Overdue", "targetElements": [
+            { "elementId": "tabsActive", "isVisible": false }, { "elementId": "tabsOverdue", "isVisible": true }, { "elementId": "tabsHistory", "isVisible": false },
+            { "elementId": "panelActive", "isVisible": false }, { "elementId": "panelOverdue", "isVisible": true }, { "elementId": "panelHistory", "isVisible": false } ] },
+          "items": [ { "type": "TextBlock", "text": "Overdue (1)", "color": "Attention", "horizontalAlignment": "Center" } ]
+        },
+        {
+          "type": "Column", "width": "stretch", "style": "good",
+          "selectAction": { "type": "Action.ToggleVisibility", "title": "History", "targetElements": [
+            { "elementId": "tabsActive", "isVisible": false }, { "elementId": "tabsOverdue", "isVisible": false }, { "elementId": "tabsHistory", "isVisible": true },
+            { "elementId": "panelActive", "isVisible": false }, { "elementId": "panelOverdue", "isVisible": false }, { "elementId": "panelHistory", "isVisible": true } ] },
+          "items": [ { "type": "TextBlock", "text": "History (3)", "weight": "Bolder", "color": "Good", "horizontalAlignment": "Center" } ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "id": "panelActive",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column", "width": "stretch",
+              "items": [
+                { "type": "TextBlock", "text": "The Midnight Library", "weight": "Bolder", "wrap": true },
+                { "type": "TextBlock", "text": "Matt Haig · Borrowed Sep 18, 2026", "isSubtle": true, "spacing": "None", "wrap": true }
+              ]
+            },
+            {
+              "type": "Column", "width": "auto", "verticalContentAlignment": "Center",
+              "items": [
+                { "type": "TextBlock", "text": "Due Oct 9, 2026", "weight": "Bolder", "color": "Warning", "horizontalAlignment": "Right" },
+                { "type": "TextBlock", "text": "in 7 days", "isSubtle": true, "size": "Small", "spacing": "None", "horizontalAlignment": "Right" }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ActionSet",
+          "spacing": "Small",
+          "actions": [
+            { "type": "Action.Submit", "title": "Renew", "data": { "action": "renewLoan", "memberId": "M-104827", "loanId": "L-55012" } }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "separator": true,
+          "spacing": "Medium",
+          "columns": [
+            {
+              "type": "Column", "width": "stretch",
+              "items": [
+                { "type": "TextBlock", "text": "Project Hail Mary", "weight": "Bolder", "wrap": true },
+                { "type": "TextBlock", "text": "Andy Weir · Borrowed Sep 25, 2026", "isSubtle": true, "spacing": "None", "wrap": true }
+              ]
+            },
+            {
+              "type": "Column", "width": "auto", "verticalContentAlignment": "Center",
+              "items": [
+                { "type": "TextBlock", "text": "Due Oct 16, 2026", "weight": "Bolder", "horizontalAlignment": "Right" },
+                { "type": "TextBlock", "text": "in 14 days", "isSubtle": true, "size": "Small", "spacing": "None", "horizontalAlignment": "Right" }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ActionSet",
+          "spacing": "Small",
+          "actions": [
+            { "type": "Action.Submit", "title": "Renew", "data": { "action": "renewLoan", "memberId": "M-104827", "loanId": "L-55187" } }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "id": "panelOverdue",
+      "isVisible": false,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column", "width": "stretch",
+              "items": [
+                { "type": "TextBlock", "text": "Sapiens: A Brief History of Humankind", "weight": "Bolder", "wrap": true },
+                { "type": "TextBlock", "text": "Yuval Noah Harari · Borrowed Aug 28, 2026", "isSubtle": true, "spacing": "None", "wrap": true }
+              ]
+            },
+            {
+              "type": "Column", "width": "auto", "verticalContentAlignment": "Center",
+              "items": [
+                { "type": "TextBlock", "text": "Due Sep 18, 2026", "weight": "Bolder", "color": "Attention", "horizontalAlignment": "Right" },
+                { "type": "TextBlock", "text": "14 days overdue", "color": "Attention", "size": "Small", "spacing": "None", "horizontalAlignment": "Right" }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "FactSet",
+          "spacing": "Small",
+          "facts": [
+            { "title": "Late fee", "value": "$3.50 ($0.25/day)" },
+            { "title": "Renewals left", "value": "0" }
+          ]
+        },
+        {
+          "type": "ActionSet",
+          "spacing": "Small",
+          "actions": [
+            { "type": "Action.Submit", "title": "Pay late fee", "style": "positive", "data": { "action": "payFee", "memberId": "M-104827", "loanId": "L-54630" } },
+            { "type": "Action.Submit", "title": "Send reminder", "data": { "action": "sendReminder", "memberId": "M-104827", "loanId": "L-54630" } }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "id": "panelHistory",
+      "isVisible": false,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column", "width": "stretch",
+              "items": [
+                { "type": "TextBlock", "text": "Atomic Habits", "weight": "Bolder", "wrap": true },
+                { "type": "TextBlock", "text": "James Clear · Borrowed Aug 16, 2026", "isSubtle": true, "spacing": "None", "wrap": true }
+              ]
+            },
+            {
+              "type": "Column", "width": "auto", "verticalContentAlignment": "Center",
+              "items": [
+                { "type": "TextBlock", "text": "Returned Aug 30, 2026", "color": "Good", "horizontalAlignment": "Right" }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "separator": true,
+          "spacing": "Medium",
+          "columns": [
+            {
+              "type": "Column", "width": "stretch",
+              "items": [
+                { "type": "TextBlock", "text": "Dune", "weight": "Bolder", "wrap": true },
+                { "type": "TextBlock", "text": "Frank Herbert · Borrowed Jul 21, 2026", "isSubtle": true, "spacing": "None", "wrap": true }
+              ]
+            },
+            {
+              "type": "Column", "width": "auto", "verticalContentAlignment": "Center",
+              "items": [
+                { "type": "TextBlock", "text": "Returned Aug 15, 2026", "color": "Good", "horizontalAlignment": "Right" }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "separator": true,
+          "spacing": "Medium",
+          "columns": [
+            {
+              "type": "Column", "width": "stretch",
+              "items": [
+                { "type": "TextBlock", "text": "Educated", "weight": "Bolder", "wrap": true },
+                { "type": "TextBlock", "text": "Tara Westover · Borrowed Jul 2, 2026", "isSubtle": true, "spacing": "None", "wrap": true }
+              ]
+            },
+            {
+              "type": "Column", "width": "auto", "verticalContentAlignment": "Center",
+              "items": [
+                { "type": "TextBlock", "text": "Returned Jul 20, 2026", "color": "Good", "horizontalAlignment": "Right" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

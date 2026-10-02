@@ -25,8 +25,8 @@ A new concept enters here first, in both languages.
 | queue | fila | `docs/06` | Milestones and delivery lines, in order. |
 | mark | marca | `[ ]`, `[>]`, `[x]` | The state of a queue line; a line never leaves the queue. |
 | milestone | marco | `M<n>` | A group of deliveries with a paragraph saying what is true when it closes. |
-| milestone review | revisão de marco | `<milestone>-review`, docs/05 §8 | The last delivery of every milestone but a `<M>.1`: its paragraph checked clause by clause against what the deliveries built, then the code reviewed with what the host offers; it fixes nothing, and its confirmed findings open the milestone `<M>.1` right after. A `<M>.1` is the last round of fixes and has no review of its own: it closes when its lines are `[x]` with their proof, and the review of the next milestone finds what it missed. |
-| finding | achado | none | One problem a milestone review reports; the person confirms or rejects it with a reason, and a confirmed one becomes a `[ ]` line in the milestone `<M>.1`, never a fix in the middle of the next milestone. A `<M>.1` has no review, so no finding opens an `<M>.2`; what it missed is a finding of the next milestone's review. |
+| milestone review | revisão de marco | `<milestone>-review`, docs/05 §8 | The last line every milestone is planned with: its page takes the milestone's paragraph clause by clause and writes which delivery answers each and how a person tests it; it reviews no code and fixes nothing, and the person tests each clause by hand. |
+| finding | achado | none | A clause of a milestone's paragraph that no delivery answers, or that fails in the person's hands; it becomes a `[ ]` line in the same milestone, under the review line, never a fix in the middle of the next milestone, and gets no second review. |
 | fresh session | sessão nova | none | A session with an empty context; it separates deciding from doing. |
 | headless | sem interface | `claude -p` | A session run from the terminal, one prompt per call: the host prints the answer and exits, with no one to approve anything; `--continue` sends the next message to the most recent conversation in that directory. The book's runs are headless so every turn is recorded; in an interactive session the reader keeps typing in the same session. |
 | permission mode | modo de permissão | `acceptEdits` | The host setting that decides what the agent does without asking you; what it does not allow, the host asks you to approve, or denies when no one can answer. |
@@ -35,6 +35,7 @@ A new concept enters here first, in both languages.
 | slot | slot | `docs/05 §5` | A project-specific fact the commands read. |
 | open decision | decisão em aberto | `OD-<n>` | A decision listed in docs/00 that nobody closes alone, so an agent never settles it by assumption. |
 | governor | regulador | none | The question every addition to the process must answer, and every step already in it again: which concrete error would it have caught? The answer names an error that happened; a step with none leaves. |
+| challenge protocol | protocolo de desafio | none | The fixed turns a person sends after an agent's first answer, so the agent asks what it needed, tests what it called impossible, fits the result to its reader and its cost, and adds what nobody asked for; measured by `ask-for-more-experiment`, taught by chapter 25. |
 | context window | janela de contexto | none | Everything the model sees in one call. |
 | token | token | none | The unit of text a model reads and counts; a word is one token or a few. |
 | context rot | degradação de contexto | none | The loss of accuracy as the context grows. |

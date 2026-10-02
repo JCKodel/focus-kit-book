@@ -1,24 +1,24 @@
 # 16. Fechando um marco
 
-Depois deste capítulo você consegue fechar um marco: conferir o seu parágrafo no produto rodando, revisar tudo o que ele construiu com o que o seu host oferece, e decidir cada achado.
-Então você consegue transformar cada achado confirmado em uma linha de um marco novo, `<M>.1`, em vez de uma correção.
+Depois deste capítulo você consegue fechar um marco: planejar a sua revisão como a última linha do marco, testar à mão cada cláusula do seu parágrafo, e transformar cada achado em uma linha `[ ]` no mesmo marco, sob a revisão.
+Você também consegue dizer por que essa revisão não lê código e por que os seus achados não têm revisão própria.
 
 ## O problema
 
 Cada página de um marco foi lida antes de o `/apply` construí-la, e cada mudança em stage foi revisada antes do seu commit.
 Ninguém olhou para o que elas somam.
 Um processo leve não tem barreira entre as entregas, então o risco que ele carrega é a soma: cada entrega certa na sua própria página, e o todo ainda errado.
-Uma consulta que era rápida com os dados da primeira página e fica lenta quando cinco entregas enchem as tabelas, uma função auxiliar copiada em quatro features, uma afirmação do marco que nenhuma entrega assumiu: nenhuma delas reprova na revisão de uma entrega só.
+Uma afirmação do marco que nenhuma entrega assumiu, um passo que funciona sozinho e falha quando a entrega seguinte vem depois dele, como um empréstimo que a tela de empréstimo registra e a lista do membro nunca mostra: nenhum deles reprova na revisão de uma entrega só.
 
 ## A revisão é uma entrega
 
 O kit fecha essa brecha com uma regra, o §8 do documento de processo que ele escreve, o docs/05.
-A última linha de todo marco é a sua revisão, `<milestone>-review`, uma entrega como as outras: o `/propose` escreve a sua página, e o `/apply` a executa.
-A página nomeia o que olhar: o intervalo de commits do marco, o seu parágrafo, e o comando de revisão do host com o seu nível.
-A execução confere o parágrafo cláusula por cláusula contra o que as entregas construíram, revisa o código, e não corrige nada.
-Cada problema que ela relata é um achado, e a decisão sobre cada um é sua.
+Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, uma entrega como as outras: o `/propose` escreve a sua página, e o `/apply` a executa.
+A página dela pega o parágrafo do marco cláusula por cláusula e escreve, para cada uma, qual entrega a atende e como uma pessoa a testa.
+Ela não revisa código e não corrige nada.
+O código é lido onde cada mudança é pequena o bastante para ser lida: na mudança em stage antes do commit de cada entrega (capítulo 15), e no pull request, quando o time integra as suas entregas por um (capítulo 21).
 
-## Confira o parágrafo
+## Teste cada cláusula à mão
 
 Um marco termina com um parágrafo escrito como um teste que uma pessoa consegue conferir no produto.
 Para um marco da biblioteca de empréstimos, escrito para este capítulo:
@@ -29,58 +29,45 @@ a sua devolução, e um membro vê os seus empréstimos com a data de devoluçã
 de cada um.
 ```
 
-Confira o parágrafo no produto rodando, cláusula por cláusula, ponta a ponta, uma vez, na ordem em que um bibliotecário e um membro as encontrariam: emprestar um exemplar, registrar a sua devolução, abrir os empréstimos do membro e ler as datas de devolução.
+A pessoa roda o teste que a página escreveu para cada cláusula, no produto rodando, ponta a ponta, uma vez, na ordem em que um bibliotecário e um membro as encontrariam: emprestar um exemplar, registrar a sua devolução, abrir os empréstimos do membro e ler as datas de devolução.
 A checagem de cada entrega testou a sua própria parte; esta roda todas juntas, como o produto é usado.
-Uma cláusula que não se sustenta é um achado como outro qualquer, e também uma cláusula que nenhuma entrega atendeu.
-
-## Revise tudo o que o marco construiu
-
-Depois revise o código do marco inteiro, com o que o seu host oferece.
-No Claude Code a revisão é o `/code-review`; ele recebe um alvo, como um branch (uma linha de trabalho à parte) ou um intervalo de commits, e um nível que troca confiança por cobertura: `low` e `medium` relatam só os achados de que ele tem mais certeza, e de `high` a `max` ampliam a cobertura e podem incluir achados de que ele tem menos certeza.[^claude-code-review]
-Para um marco, o intervalo começa no último commit antes dele e termina no último dele:
-
-```
-/code-review high <commit before the milestone>...<last commit of the milestone>
-```
-
-Um marco é revisado uma vez, como um todo, então ali a amplitude vale mais do que a certeza, e as decisões abaixo filtram o que é incerto.
-A revisão só relata; ela muda os seus arquivos só quando você pede que ela corrija, e aqui você não pede.[^claude-code-review]
-
-Outros hosts oferecem o mesmo olhar.
-O Codex tem `/review` em uma sessão e `codex review --base <branch>` no terminal, que revisam as mudanças contra um branch de base.[^codex-review]
-O GitHub Copilot revisa pull requests (pedidos de merge que alguém revisa antes), então ali o marco sobe como um pull request do seu primeiro commit ao último.[^copilot-review]
-
-## Decida cada achado
-
-Um achado se lê como um fato, e alguns não são.
-A pessoa é o cérebro da operação: você confere o que o agente escreve contra o que você sabe, e uma revisão é o agente escrevendo.
-Isso significa duas coisas: você nunca aceita um achado como verdadeiro sem olhar o código, e nunca descarta um sem dizer por quê.
-
-Então cada achado é confirmado ou rejeitado, com um motivo.
-Uma rejeição nomeia o que a revisão não pesou: uma escolha que um documento registra de propósito, uma ordem que outro documento fixa, um teste que já protege o caso, uma escala que o produto não vai alcançar.
-Uma confirmação é conferida no código primeiro.
-Um achado pode se dividir: uma função duplicada confirmada, uma consulta lenta ao lado dela rejeitada porque a tabela guarda meia dúzia de linhas.
+Uma pessoa faz isso à mão porque o parágrafo é uma promessa às pessoas que vão usar o produto, e só quem o usa como elas vão usar vê se ela se sustenta.
+Uma cláusula que nenhuma entrega atende, ou uma que falha nas mãos da pessoa, é um achado.
+Não há nada a confirmar ou rejeitar: a falha aconteceu nas suas mãos.
 
 ## Uma linha, e não uma correção
 
-Cada achado confirmado vira uma linha `[ ]` em um marco novo, posto logo depois do revisado e numerado com `.1`: o marco 1 é seguido pelo marco 1.1, com o seu próprio parágrafo, então nada muda de número.
-Cada linha diz o que vai ser verdade, nunca como corrigir, e uma linha sobre código copiado nomeia a primeira cópia, como pede a regra da segunda ocorrência (capítulo 4).
-Cada uma é uma entrega: o `/propose` vai escrever a sua página e o `/apply` vai construí-la.
-Nenhum achado confirmado, nenhum marco novo.
+Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, esperando o `/propose`.
+Cada linha diz o que vai ser verdade, nunca como corrigir.
+Se o exemplar devolvido continuasse entre os empréstimos do membro, as linhas do marco terminariam assim, escritas para este capítulo:
+
+```
+[x] emprestar-livro      o bibliotecário empresta um exemplar
+[x] devolver-livro       o bibliotecário registra uma devolução
+[x] meus-emprestimos     um membro vê os seus empréstimos e as datas
+[x] m1-review            cada cláusula do parágrafo testada à mão
+[ ] emprestimo-devolvido o exemplar devolvido sai da lista do membro
+```
+
+Cada linha de achado é uma entrega: o `/propose` vai escrever a sua página e o `/apply` vai construí-la.
+O marco fecha quando essas linhas estão `[x]`, cada uma com a sua prova.
 
 Uma linha, e não uma correção, porque uma correção feita no meio do marco seguinte não tem página nem revisão.
 Ninguém lê o escopo dela antes de ela ser construída, ninguém a confere contra uma página depois, e ela cai em um marco cujo parágrafo não a menciona.
 Como linha, ela espera a sua vez, e ganha as duas coisas.
+E ela fica no marco cujo parágrafo ela reprova, então esse marco só fecha quando o seu parágrafo se sustenta.
 
-Faça do `.1` a última rodada, sem revisão própria.
-O arquivo do kit deixa um `.1` terminar com a sua própria revisão, que pode abrir um `.2`; eu parei de permitir isso, porque uma revisão das correções acha achados próprios, e uma revisão desses acha mais.
-Uma rodada só mantém a revisão como um passo que tem fim.
-O `.1` fecha quando as suas linhas estão `[x]` com a sua prova, e o que ele deixou passar é achado pela revisão do marco seguinte.
+## Nenhuma segunda revisão
+
+As linhas de achado não têm revisão própria.
+Cada uma passa pela sua própria página, pela sua prova e pelo commit da pessoa, que é a revisão.
+Eu mantenho assim porque uma revisão das correções acha achados próprios, e uma revisão desses acha mais, e um marco que continua abrindo rodadas de correções nunca fecha.
 
 ## Quando os achados viraram uma entrega
 
 Na Ninjobs, a revisão na abertura ao público devolveu oito achados, com toda a suíte de testes verde.
 Consultas levavam centenas de milissegundos, uma vaga de emprego grande teria estourado o tempo limite, e três dos achados eram sobre segurança.
+Aquela revisão leu o código; a revisão de marco do kit não lê mais, já que o código de cada entrega é lido antes do seu commit.
 Cada entrega tinha passado nos seus próprios testes e na sua própria revisão; só o olhar sobre o todo os viu.
 
 Eu pus os oito em uma entrega em vez de oito linhas.
@@ -92,18 +79,14 @@ Oito linhas teriam sido oito páginas, cada uma pequena o bastante para ser lida
 
 ## O que o time ganha
 
-A revisão de marco pega as falhas que os testes não alcançam, antes dos usuários.
-Na Ninjobs ela achou oito com todos os testes verdes, três delas sobre segurança, no dia em que o produto abriu ao público.
+Um teste à mão do produto inteiro vê o que a checagem de nenhuma entrega sozinha consegue ver: uma cláusula que nenhuma entrega assumiu, um passo que falha quando as entregas rodam juntas, encontrados do jeito que um usuário vai encontrá-los, antes dos usuários.
+Esse ganho não tem número neste livro.
 E como cada achado vira uma linha, o time vê o custo das brechas do marco na fila, ao lado de tudo o que planeja, e não em correções que ninguém revisou.
 
 ## Pontos-chave
 
 * Uma revisão de marco olha para o que as entregas somam, o que nenhuma revisão de uma página ou de uma mudança em stage consegue ver.
-* A revisão é a última linha do marco, `<milestone>-review`, rodada com o `/propose` e o `/apply`: ela confere o parágrafo cláusula por cláusula no produto rodando, revisa o intervalo do marco com o que o seu host oferece, e não corrige nada.
-* Decida cada achado com o seu motivo, depois de olhar o código: nunca confie em um às cegas, nunca descarte um sem motivo.
-* Um achado confirmado vira uma linha `[ ]` em um marco novo `<M>.1` logo depois do revisado, nunca uma correção no meio do marco seguinte.
-* Um `.1` é a última rodada e não tem revisão própria; a revisão do marco seguinte acha o que ele deixou passar.
-
-[^claude-code-review]: Anthropic, "Code Review", documentação do Claude Code, acesso em 2026-09-28. <https://code.claude.com/docs/en/code-review>
-[^codex-review]: OpenAI, "Developer commands", acesso em 2026-09-28. <https://learn.chatgpt.com/docs/developer-commands?surface=cli>
-[^copilot-review]: GitHub, "About GitHub Copilot code review", acesso em 2026-09-28. <https://docs.github.com/en/copilot/concepts/agents/code-review>
+* Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, rodada com o `/propose` e o `/apply`: a página dela escreve, para cada cláusula do parágrafo, a entrega que a atende e como uma pessoa a testa; ela não revisa código e não corrige nada.
+* A pessoa testa cada cláusula à mão; uma cláusula que nenhuma entrega atende, ou uma que falha nas mãos da pessoa, é um achado.
+* Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, nunca uma correção no meio do marco seguinte; o marco fecha quando essas linhas estão `[x]`.
+* As linhas de achado não têm revisão própria: cada uma passa pela sua própria página, pela sua prova e pelo commit da pessoa.

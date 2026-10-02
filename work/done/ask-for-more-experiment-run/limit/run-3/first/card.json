@@ -1,0 +1,376 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "msteams": { "width": "Full" },
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            { "type": "TextBlock", "text": "My Loans", "size": "Large", "weight": "Bolder" },
+            { "type": "TextBlock", "text": "Alex Morgan · Member #LIB-204817", "isSubtle": true, "spacing": "None", "wrap": true }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "verticalContentAlignment": "Center",
+          "items": [
+            { "type": "TextBlock", "text": "As of Oct 2, 2026", "isSubtle": true, "size": "Small" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "id": "panel-active",
+      "isVisible": true,
+      "items": [
+        {
+          "type": "ColumnSet",
+          "spacing": "Medium",
+          "columns": [
+            {
+              "type": "Column", "width": "stretch", "style": "accent",
+              "selectAction": {
+                "type": "Action.ToggleVisibility", "title": "Active (2)",
+                "targetElements": [
+                  { "elementId": "panel-active", "isVisible": true },
+                  { "elementId": "panel-overdue", "isVisible": false },
+                  { "elementId": "panel-history", "isVisible": false }
+                ]
+              },
+              "items": [ { "type": "TextBlock", "text": "Active (2)", "horizontalAlignment": "Center", "weight": "Bolder", "color": "Accent", "wrap": true } ]
+            },
+            {
+              "type": "Column", "width": "stretch", "style": "default",
+              "selectAction": {
+                "type": "Action.ToggleVisibility", "title": "Overdue (1)",
+                "targetElements": [
+                  { "elementId": "panel-active", "isVisible": false },
+                  { "elementId": "panel-overdue", "isVisible": true },
+                  { "elementId": "panel-history", "isVisible": false }
+                ]
+              },
+              "items": [ { "type": "TextBlock", "text": "Overdue (1)", "horizontalAlignment": "Center", "wrap": true } ]
+            },
+            {
+              "type": "Column", "width": "stretch", "style": "default",
+              "selectAction": {
+                "type": "Action.ToggleVisibility", "title": "History (3)",
+                "targetElements": [
+                  { "elementId": "panel-active", "isVisible": false },
+                  { "elementId": "panel-overdue", "isVisible": false },
+                  { "elementId": "panel-history", "isVisible": true }
+                ]
+              },
+              "items": [ { "type": "TextBlock", "text": "History (3)", "horizontalAlignment": "Center", "wrap": true } ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "spacing": "Medium",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column", "width": "stretch",
+                  "items": [
+                    { "type": "TextBlock", "text": "The Midnight Library", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Matt Haig", "isSubtle": true, "spacing": "None", "wrap": true }
+                  ]
+                },
+                {
+                  "type": "Column", "width": "auto", "verticalContentAlignment": "Center",
+                  "items": [ { "type": "TextBlock", "text": "Due in 12 days", "weight": "Bolder", "color": "Good", "size": "Small" } ]
+                }
+              ]
+            },
+            {
+              "type": "FactSet",
+              "spacing": "Small",
+              "facts": [
+                { "title": "Borrowed", "value": "Sep 16, 2026" },
+                { "title": "Due", "value": "Oct 14, 2026" },
+                { "title": "Renewals", "value": "0 of 2" }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "spacing": "Medium",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column", "width": "stretch",
+                  "items": [
+                    { "type": "TextBlock", "text": "Project Hail Mary", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Andy Weir", "isSubtle": true, "spacing": "None", "wrap": true }
+                  ]
+                },
+                {
+                  "type": "Column", "width": "auto", "verticalContentAlignment": "Center",
+                  "items": [ { "type": "TextBlock", "text": "Due in 18 days", "weight": "Bolder", "color": "Good", "size": "Small" } ]
+                }
+              ]
+            },
+            {
+              "type": "FactSet",
+              "spacing": "Small",
+              "facts": [
+                { "title": "Borrowed", "value": "Sep 22, 2026" },
+                { "title": "Due", "value": "Oct 20, 2026" },
+                { "title": "Renewals", "value": "1 of 2" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "id": "panel-overdue",
+      "isVisible": false,
+      "items": [
+        {
+          "type": "ColumnSet",
+          "spacing": "Medium",
+          "columns": [
+            {
+              "type": "Column", "width": "stretch", "style": "default",
+              "selectAction": {
+                "type": "Action.ToggleVisibility", "title": "Active (2)",
+                "targetElements": [
+                  { "elementId": "panel-active", "isVisible": true },
+                  { "elementId": "panel-overdue", "isVisible": false },
+                  { "elementId": "panel-history", "isVisible": false }
+                ]
+              },
+              "items": [ { "type": "TextBlock", "text": "Active (2)", "horizontalAlignment": "Center", "wrap": true } ]
+            },
+            {
+              "type": "Column", "width": "stretch", "style": "accent",
+              "selectAction": {
+                "type": "Action.ToggleVisibility", "title": "Overdue (1)",
+                "targetElements": [
+                  { "elementId": "panel-active", "isVisible": false },
+                  { "elementId": "panel-overdue", "isVisible": true },
+                  { "elementId": "panel-history", "isVisible": false }
+                ]
+              },
+              "items": [ { "type": "TextBlock", "text": "Overdue (1)", "horizontalAlignment": "Center", "weight": "Bolder", "color": "Accent", "wrap": true } ]
+            },
+            {
+              "type": "Column", "width": "stretch", "style": "default",
+              "selectAction": {
+                "type": "Action.ToggleVisibility", "title": "History (3)",
+                "targetElements": [
+                  { "elementId": "panel-active", "isVisible": false },
+                  { "elementId": "panel-overdue", "isVisible": false },
+                  { "elementId": "panel-history", "isVisible": true }
+                ]
+              },
+              "items": [ { "type": "TextBlock", "text": "History (3)", "horizontalAlignment": "Center", "wrap": true } ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "style": "attention",
+          "spacing": "Medium",
+          "items": [
+            { "type": "TextBlock", "text": "You have 1 overdue item. Please return it as soon as possible to stop fines from growing.", "wrap": true, "size": "Small" }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "spacing": "Medium",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column", "width": "stretch",
+                  "items": [
+                    { "type": "TextBlock", "text": "Sapiens: A Brief History of Humankind", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Yuval Noah Harari", "isSubtle": true, "spacing": "None", "wrap": true }
+                  ]
+                },
+                {
+                  "type": "Column", "width": "auto", "verticalContentAlignment": "Center",
+                  "items": [ { "type": "TextBlock", "text": "7 days overdue", "weight": "Bolder", "color": "Attention", "size": "Small" } ]
+                }
+              ]
+            },
+            {
+              "type": "FactSet",
+              "spacing": "Small",
+              "facts": [
+                { "title": "Borrowed", "value": "Aug 28, 2026" },
+                { "title": "Was due", "value": "Sep 25, 2026" },
+                { "title": "Fine so far", "value": "€1.75 (€0.25 per day)" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "id": "panel-history",
+      "isVisible": false,
+      "items": [
+        {
+          "type": "ColumnSet",
+          "spacing": "Medium",
+          "columns": [
+            {
+              "type": "Column", "width": "stretch", "style": "default",
+              "selectAction": {
+                "type": "Action.ToggleVisibility", "title": "Active (2)",
+                "targetElements": [
+                  { "elementId": "panel-active", "isVisible": true },
+                  { "elementId": "panel-overdue", "isVisible": false },
+                  { "elementId": "panel-history", "isVisible": false }
+                ]
+              },
+              "items": [ { "type": "TextBlock", "text": "Active (2)", "horizontalAlignment": "Center", "wrap": true } ]
+            },
+            {
+              "type": "Column", "width": "stretch", "style": "default",
+              "selectAction": {
+                "type": "Action.ToggleVisibility", "title": "Overdue (1)",
+                "targetElements": [
+                  { "elementId": "panel-active", "isVisible": false },
+                  { "elementId": "panel-overdue", "isVisible": true },
+                  { "elementId": "panel-history", "isVisible": false }
+                ]
+              },
+              "items": [ { "type": "TextBlock", "text": "Overdue (1)", "horizontalAlignment": "Center", "wrap": true } ]
+            },
+            {
+              "type": "Column", "width": "stretch", "style": "accent",
+              "selectAction": {
+                "type": "Action.ToggleVisibility", "title": "History (3)",
+                "targetElements": [
+                  { "elementId": "panel-active", "isVisible": false },
+                  { "elementId": "panel-overdue", "isVisible": false },
+                  { "elementId": "panel-history", "isVisible": true }
+                ]
+              },
+              "items": [ { "type": "TextBlock", "text": "History (3)", "horizontalAlignment": "Center", "weight": "Bolder", "color": "Accent", "wrap": true } ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "spacing": "Medium",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column", "width": "stretch",
+                  "items": [
+                    { "type": "TextBlock", "text": "Educated", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Tara Westover", "isSubtle": true, "spacing": "None", "wrap": true }
+                  ]
+                },
+                {
+                  "type": "Column", "width": "auto", "verticalContentAlignment": "Center",
+                  "items": [ { "type": "TextBlock", "text": "Returned", "weight": "Bolder", "isSubtle": true, "size": "Small" } ]
+                }
+              ]
+            },
+            {
+              "type": "FactSet",
+              "spacing": "Small",
+              "facts": [
+                { "title": "Borrowed", "value": "Aug 12, 2026" },
+                { "title": "Returned", "value": "Sep 10, 2026" }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "spacing": "Medium",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column", "width": "stretch",
+                  "items": [
+                    { "type": "TextBlock", "text": "Dune", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Frank Herbert", "isSubtle": true, "spacing": "None", "wrap": true }
+                  ]
+                },
+                {
+                  "type": "Column", "width": "auto", "verticalContentAlignment": "Center",
+                  "items": [ { "type": "TextBlock", "text": "Returned", "weight": "Bolder", "isSubtle": true, "size": "Small" } ]
+                }
+              ]
+            },
+            {
+              "type": "FactSet",
+              "spacing": "Small",
+              "facts": [
+                { "title": "Borrowed", "value": "Jul 25, 2026" },
+                { "title": "Returned", "value": "Aug 22, 2026" }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "spacing": "Medium",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column", "width": "stretch",
+                  "items": [
+                    { "type": "TextBlock", "text": "Atomic Habits", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "James Clear", "isSubtle": true, "spacing": "None", "wrap": true }
+                  ]
+                },
+                {
+                  "type": "Column", "width": "auto", "verticalContentAlignment": "Center",
+                  "items": [ { "type": "TextBlock", "text": "Returned", "weight": "Bolder", "isSubtle": true, "size": "Small" } ]
+                }
+              ]
+            },
+            {
+              "type": "FactSet",
+              "spacing": "Small",
+              "facts": [
+                { "title": "Borrowed", "value": "Jul 2, 2026" },
+                { "title": "Returned", "value": "Jul 30, 2026" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,345 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "fallbackText": "1 book overdue ($3.50 owed), 1 due Mon, Oct 5. Open your library account to see all loans.",
+  "msteams": { "width": "Full" },
+  "refresh": {
+    "action": {
+      "type": "Action.Execute",
+      "title": "Refresh",
+      "verb": "refreshLoans"
+    }
+  },
+  "body": [
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "bleed": true,
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "verticalContentAlignment": "Center",
+              "items": [
+                { "type": "Icon", "name": "Library", "size": "Large", "color": "Accent", "style": "Filled", "fallback": "drop" }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "verticalContentAlignment": "Center",
+              "items": [
+                { "type": "TextBlock", "text": "Riverside Public Library", "size": "Small", "isSubtle": true, "wrap": true },
+                { "type": "TextBlock", "text": "Hi, Jordan", "size": "Large", "weight": "Bolder", "spacing": "None", "wrap": true },
+                { "type": "TextBlock", "text": "1 overdue · $3.50 owed · 1 due Monday", "weight": "Bolder", "color": "Attention", "spacing": "Small", "wrap": true },
+                { "type": "TextBlock", "text": "Updated {{DATE(2026-10-02T13:00:00Z, SHORT)}} at {{TIME(2026-10-02T13:00:00Z)}}", "size": "Small", "isSubtle": true, "spacing": "None", "wrap": true }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "ColumnSet",
+      "spacing": "Medium",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "selectAction": {
+            "type": "Action.ToggleVisibility",
+            "title": "Active loans tab, 2 books",
+            "targetElements": [
+              { "elementId": "tabActiveOn", "isVisible": true }, { "elementId": "tabActiveOff", "isVisible": false },
+              { "elementId": "tabOverdueOn", "isVisible": false }, { "elementId": "tabOverdueOff", "isVisible": true },
+              { "elementId": "tabHistoryOn", "isVisible": false }, { "elementId": "tabHistoryOff", "isVisible": true },
+              { "elementId": "panelActive", "isVisible": true }, { "elementId": "panelOverdue", "isVisible": false }, { "elementId": "panelHistory", "isVisible": false }
+            ]
+          },
+          "items": [
+            {
+              "type": "Container", "id": "tabActiveOn", "isVisible": false, "style": "accent", "roundedCorners": true,
+              "items": [
+                { "type": "Icon", "name": "BookOpen", "size": "Small", "color": "Accent", "style": "Filled", "horizontalAlignment": "Center", "fallback": "drop" },
+                { "type": "TextBlock", "text": "Active (2)", "weight": "Bolder", "color": "Accent", "size": "Small", "spacing": "Small", "horizontalAlignment": "Center" }
+              ]
+            },
+            {
+              "type": "Container", "id": "tabActiveOff", "style": "emphasis", "roundedCorners": true, "spacing": "None",
+              "items": [
+                { "type": "Icon", "name": "BookOpen", "size": "Small", "color": "Default", "horizontalAlignment": "Center", "fallback": "drop" },
+                { "type": "TextBlock", "text": "Active (2)", "size": "Small", "isSubtle": true, "spacing": "Small", "horizontalAlignment": "Center" }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "selectAction": {
+            "type": "Action.ToggleVisibility",
+            "title": "Overdue loans tab, 1 book",
+            "targetElements": [
+              { "elementId": "tabActiveOn", "isVisible": false }, { "elementId": "tabActiveOff", "isVisible": true },
+              { "elementId": "tabOverdueOn", "isVisible": true }, { "elementId": "tabOverdueOff", "isVisible": false },
+              { "elementId": "tabHistoryOn", "isVisible": false }, { "elementId": "tabHistoryOff", "isVisible": true },
+              { "elementId": "panelActive", "isVisible": false }, { "elementId": "panelOverdue", "isVisible": true }, { "elementId": "panelHistory", "isVisible": false }
+            ]
+          },
+          "items": [
+            {
+              "type": "Container", "id": "tabOverdueOn", "style": "attention", "roundedCorners": true,
+              "items": [
+                { "type": "Icon", "name": "Warning", "size": "Small", "color": "Attention", "style": "Filled", "horizontalAlignment": "Center", "fallback": "drop" },
+                { "type": "TextBlock", "text": "Overdue (1)", "weight": "Bolder", "color": "Attention", "size": "Small", "spacing": "Small", "horizontalAlignment": "Center" }
+              ]
+            },
+            {
+              "type": "Container", "id": "tabOverdueOff", "isVisible": false, "style": "emphasis", "roundedCorners": true, "spacing": "None",
+              "items": [
+                { "type": "Icon", "name": "Warning", "size": "Small", "color": "Default", "horizontalAlignment": "Center", "fallback": "drop" },
+                { "type": "TextBlock", "text": "Overdue (1)", "size": "Small", "isSubtle": true, "spacing": "Small", "horizontalAlignment": "Center" }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "selectAction": {
+            "type": "Action.ToggleVisibility",
+            "title": "Loan history tab, 3 books",
+            "targetElements": [
+              { "elementId": "tabActiveOn", "isVisible": false }, { "elementId": "tabActiveOff", "isVisible": true },
+              { "elementId": "tabOverdueOn", "isVisible": false }, { "elementId": "tabOverdueOff", "isVisible": true },
+              { "elementId": "tabHistoryOn", "isVisible": true }, { "elementId": "tabHistoryOff", "isVisible": false },
+              { "elementId": "panelActive", "isVisible": false }, { "elementId": "panelOverdue", "isVisible": false }, { "elementId": "panelHistory", "isVisible": true }
+            ]
+          },
+          "items": [
+            {
+              "type": "Container", "id": "tabHistoryOn", "isVisible": false, "style": "good", "roundedCorners": true,
+              "items": [
+                { "type": "Icon", "name": "History", "size": "Small", "color": "Good", "style": "Filled", "horizontalAlignment": "Center", "fallback": "drop" },
+                { "type": "TextBlock", "text": "History (3)", "weight": "Bolder", "color": "Good", "size": "Small", "spacing": "Small", "horizontalAlignment": "Center" }
+              ]
+            },
+            {
+              "type": "Container", "id": "tabHistoryOff", "style": "emphasis", "roundedCorners": true, "spacing": "None",
+              "items": [
+                { "type": "Icon", "name": "History", "size": "Small", "color": "Default", "horizontalAlignment": "Center", "fallback": "drop" },
+                { "type": "TextBlock", "text": "History (3)", "size": "Small", "isSubtle": true, "spacing": "Small", "horizontalAlignment": "Center" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "id": "panelActive",
+      "isVisible": false,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "Container",
+          "style": "emphasis",
+          "roundedCorners": true,
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column", "width": "auto", "style": "accent", "roundedCorners": true, "verticalContentAlignment": "Center",
+                  "items": [
+                    { "type": "Icon", "name": "Book", "size": "Medium", "color": "Accent", "fallback": { "type": "TextBlock", "text": "📖" } }
+                  ]
+                },
+                {
+                  "type": "Column", "width": "stretch", "verticalContentAlignment": "Center",
+                  "items": [
+                    { "type": "TextBlock", "text": "The Midnight Library", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Matt Haig", "size": "Small", "isSubtle": true, "spacing": "None", "wrap": true },
+                    { "type": "TextBlock", "text": "Due Mon, Oct 5 · in 3 days", "weight": "Bolder", "color": "Warning", "spacing": "Small", "wrap": true },
+                    { "type": "TextBlock", "text": "2 renewals left", "size": "Small", "isSubtle": true, "spacing": "None", "wrap": true }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "ActionSet",
+              "spacing": "Small",
+              "actions": [
+                { "type": "Action.Execute", "title": "Renew", "iconUrl": "icon:ArrowClockwise", "verb": "renewLoan", "data": { "loanId": "L-55012" } }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "style": "emphasis",
+          "roundedCorners": true,
+          "spacing": "Small",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column", "width": "auto", "style": "accent", "roundedCorners": true, "verticalContentAlignment": "Center",
+                  "items": [
+                    { "type": "Icon", "name": "Book", "size": "Medium", "color": "Accent", "fallback": { "type": "TextBlock", "text": "📖" } }
+                  ]
+                },
+                {
+                  "type": "Column", "width": "stretch", "verticalContentAlignment": "Center",
+                  "items": [
+                    { "type": "TextBlock", "text": "Project Hail Mary", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Andy Weir", "size": "Small", "isSubtle": true, "spacing": "None", "wrap": true },
+                    { "type": "TextBlock", "text": "Due Fri, Oct 16 · in 14 days", "weight": "Bolder", "spacing": "Small", "wrap": true },
+                    { "type": "TextBlock", "text": "1 renewal left", "size": "Small", "isSubtle": true, "spacing": "None", "wrap": true }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "ActionSet",
+              "spacing": "Small",
+              "actions": [
+                { "type": "Action.Execute", "title": "Renew", "iconUrl": "icon:ArrowClockwise", "verb": "renewLoan", "data": { "loanId": "L-55187" } }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "id": "panelOverdue",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "Container",
+          "style": "emphasis",
+          "roundedCorners": true,
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column", "width": "auto", "style": "attention", "roundedCorners": true, "verticalContentAlignment": "Center",
+                  "items": [
+                    { "type": "Icon", "name": "Book", "size": "Medium", "color": "Attention", "fallback": { "type": "TextBlock", "text": "📕" } }
+                  ]
+                },
+                {
+                  "type": "Column", "width": "stretch", "verticalContentAlignment": "Center",
+                  "items": [
+                    { "type": "TextBlock", "text": "Sapiens: A Brief History of Humankind", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Yuval Noah Harari", "size": "Small", "isSubtle": true, "spacing": "None", "wrap": true },
+                    { "type": "TextBlock", "text": "Was due Fri, Sep 18 · 14 days overdue", "weight": "Bolder", "color": "Attention", "spacing": "Small", "wrap": true },
+                    { "type": "TextBlock", "text": "$3.50 late fee, growing $0.25 a day", "size": "Small", "spacing": "None", "wrap": true }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "TextBlock",
+              "text": "Return it at any branch or book drop to stop the fee. Overdue books can't be renewed.",
+              "size": "Small",
+              "isSubtle": true,
+              "wrap": true,
+              "spacing": "Small"
+            },
+            {
+              "type": "ActionSet",
+              "spacing": "Small",
+              "actions": [
+                { "type": "Action.OpenUrl", "title": "Find a branch", "iconUrl": "icon:Location", "url": "https://library.example.org/branches" },
+                { "type": "Action.OpenUrl", "title": "Pay $3.50", "iconUrl": "icon:Payment", "url": "https://library.example.org/account/fees?loan=L-54630" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "id": "panelHistory",
+      "isVisible": false,
+      "style": "emphasis",
+      "roundedCorners": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column", "width": "stretch",
+              "items": [
+                { "type": "TextBlock", "text": "Atomic Habits", "weight": "Bolder", "wrap": true },
+                { "type": "TextBlock", "text": "James Clear · Returned Aug 30", "size": "Small", "isSubtle": true, "spacing": "None", "wrap": true }
+              ]
+            },
+            {
+              "type": "Column", "width": "auto", "verticalContentAlignment": "Center",
+              "items": [ { "type": "TextBlock", "text": "On time", "size": "Small", "color": "Good", "horizontalAlignment": "Right" } ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "separator": true,
+          "columns": [
+            {
+              "type": "Column", "width": "stretch",
+              "items": [
+                { "type": "TextBlock", "text": "Dune", "weight": "Bolder", "wrap": true },
+                { "type": "TextBlock", "text": "Frank Herbert · Returned Aug 15 · $1.00 fee paid", "size": "Small", "isSubtle": true, "spacing": "None", "wrap": true }
+              ]
+            },
+            {
+              "type": "Column", "width": "auto", "verticalContentAlignment": "Center",
+              "items": [ { "type": "TextBlock", "text": "4 days late", "size": "Small", "color": "Warning", "horizontalAlignment": "Right" } ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "separator": true,
+          "columns": [
+            {
+              "type": "Column", "width": "stretch",
+              "items": [
+                { "type": "TextBlock", "text": "Educated", "weight": "Bolder", "wrap": true },
+                { "type": "TextBlock", "text": "Tara Westover · Returned Jul 20", "size": "Small", "isSubtle": true, "spacing": "None", "wrap": true }
+              ]
+            },
+            {
+              "type": "Column", "width": "auto", "verticalContentAlignment": "Center",
+              "items": [ { "type": "TextBlock", "text": "On time", "size": "Small", "color": "Good", "horizontalAlignment": "Right" } ]
+            }
+          ]
+        },
+        {
+          "type": "TextBlock",
+          "text": "Your last 3 loans. Full history is in My account.",
+          "size": "Small",
+          "isSubtle": true,
+          "separator": true,
+          "wrap": true
+        }
+      ]
+    }
+  ],
+  "actions": [
+    { "type": "Action.OpenUrl", "title": "My account", "iconUrl": "icon:Person", "url": "https://library.example.org/account" }
+  ]
+}

@@ -1,0 +1,353 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "msteams": {
+    "width": "Full"
+  },
+  "body": [
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "bleed": true,
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "verticalContentAlignment": "Center",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "My Loans",
+                  "size": "Large",
+                  "weight": "Bolder",
+                  "wrap": true
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Alex Morgan · Member #LIB-204817",
+                  "isSubtle": true,
+                  "spacing": "None",
+                  "wrap": true
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "verticalContentAlignment": "Center",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "2 active · 1 overdue · 3 returned",
+                  "size": "Small",
+                  "horizontalAlignment": "Right",
+                  "wrap": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "id": "tabActive",
+      "isVisible": true,
+      "items": [
+        {
+          "type": "ActionSet",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "Active (2)",
+              "style": "positive",
+              "targetElements": [
+                { "elementId": "tabActive", "isVisible": true },
+                { "elementId": "tabOverdue", "isVisible": false },
+                { "elementId": "tabHistory", "isVisible": false }
+              ]
+            },
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "Overdue (1)",
+              "targetElements": [
+                { "elementId": "tabActive", "isVisible": false },
+                { "elementId": "tabOverdue", "isVisible": true },
+                { "elementId": "tabHistory", "isVisible": false }
+              ]
+            },
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "History (3)",
+              "targetElements": [
+                { "elementId": "tabActive", "isVisible": false },
+                { "elementId": "tabOverdue", "isVisible": false },
+                { "elementId": "tabHistory", "isVisible": true }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    { "type": "TextBlock", "text": "The Remains of the Day", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Kazuo Ishiguro", "isSubtle": true, "spacing": "None", "wrap": true },
+                    { "type": "TextBlock", "text": "Borrowed Sep 18, 2026", "size": "Small", "isSubtle": true, "spacing": "Small", "wrap": true }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    { "type": "TextBlock", "text": "Due Oct 16, 2026", "weight": "Bolder", "horizontalAlignment": "Right" },
+                    { "type": "TextBlock", "text": "14 days left", "color": "Good", "size": "Small", "spacing": "None", "horizontalAlignment": "Right" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    { "type": "TextBlock", "text": "Sapiens: A Brief History of Humankind", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Yuval Noah Harari", "isSubtle": true, "spacing": "None", "wrap": true },
+                    { "type": "TextBlock", "text": "Borrowed Sep 25, 2026", "size": "Small", "isSubtle": true, "spacing": "Small", "wrap": true }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    { "type": "TextBlock", "text": "Due Oct 23, 2026", "weight": "Bolder", "horizontalAlignment": "Right" },
+                    { "type": "TextBlock", "text": "21 days left", "color": "Good", "size": "Small", "spacing": "None", "horizontalAlignment": "Right" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "id": "tabOverdue",
+      "isVisible": false,
+      "items": [
+        {
+          "type": "ActionSet",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "Active (2)",
+              "targetElements": [
+                { "elementId": "tabActive", "isVisible": true },
+                { "elementId": "tabOverdue", "isVisible": false },
+                { "elementId": "tabHistory", "isVisible": false }
+              ]
+            },
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "Overdue (1)",
+              "style": "positive",
+              "targetElements": [
+                { "elementId": "tabActive", "isVisible": false },
+                { "elementId": "tabOverdue", "isVisible": true },
+                { "elementId": "tabHistory", "isVisible": false }
+              ]
+            },
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "History (3)",
+              "targetElements": [
+                { "elementId": "tabActive", "isVisible": false },
+                { "elementId": "tabOverdue", "isVisible": false },
+                { "elementId": "tabHistory", "isVisible": true }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "style": "attention",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    { "type": "TextBlock", "text": "Educated", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Tara Westover", "isSubtle": true, "spacing": "None", "wrap": true },
+                    { "type": "TextBlock", "text": "Borrowed Aug 28, 2026", "size": "Small", "isSubtle": true, "spacing": "Small", "wrap": true }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    { "type": "TextBlock", "text": "Was due Sep 25, 2026", "weight": "Bolder", "horizontalAlignment": "Right" },
+                    { "type": "TextBlock", "text": "7 days overdue", "color": "Attention", "weight": "Bolder", "size": "Small", "spacing": "None", "horizontalAlignment": "Right" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "TextBlock",
+          "text": "Please return overdue items as soon as possible.",
+          "size": "Small",
+          "isSubtle": true,
+          "wrap": true
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "id": "tabHistory",
+      "isVisible": false,
+      "items": [
+        {
+          "type": "ActionSet",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "Active (2)",
+              "targetElements": [
+                { "elementId": "tabActive", "isVisible": true },
+                { "elementId": "tabOverdue", "isVisible": false },
+                { "elementId": "tabHistory", "isVisible": false }
+              ]
+            },
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "Overdue (1)",
+              "targetElements": [
+                { "elementId": "tabActive", "isVisible": false },
+                { "elementId": "tabOverdue", "isVisible": true },
+                { "elementId": "tabHistory", "isVisible": false }
+              ]
+            },
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "History (3)",
+              "style": "positive",
+              "targetElements": [
+                { "elementId": "tabActive", "isVisible": false },
+                { "elementId": "tabOverdue", "isVisible": false },
+                { "elementId": "tabHistory", "isVisible": true }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    { "type": "TextBlock", "text": "Klara and the Sun", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Kazuo Ishiguro", "isSubtle": true, "spacing": "None", "wrap": true },
+                    { "type": "TextBlock", "text": "Borrowed Jul 30, 2026", "size": "Small", "isSubtle": true, "spacing": "Small", "wrap": true }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    { "type": "TextBlock", "text": "Returned Aug 20, 2026", "horizontalAlignment": "Right" },
+                    { "type": "TextBlock", "text": "On time", "isSubtle": true, "size": "Small", "spacing": "None", "horizontalAlignment": "Right" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    { "type": "TextBlock", "text": "The Midnight Library", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "Matt Haig", "isSubtle": true, "spacing": "None", "wrap": true },
+                    { "type": "TextBlock", "text": "Borrowed Jul 10, 2026", "size": "Small", "isSubtle": true, "spacing": "Small", "wrap": true }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    { "type": "TextBlock", "text": "Returned Jul 29, 2026", "horizontalAlignment": "Right" },
+                    { "type": "TextBlock", "text": "On time", "isSubtle": true, "size": "Small", "spacing": "None", "horizontalAlignment": "Right" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    { "type": "TextBlock", "text": "Atomic Habits", "weight": "Bolder", "wrap": true },
+                    { "type": "TextBlock", "text": "James Clear", "isSubtle": true, "spacing": "None", "wrap": true },
+                    { "type": "TextBlock", "text": "Borrowed Jun 15, 2026", "size": "Small", "isSubtle": true, "spacing": "Small", "wrap": true }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    { "type": "TextBlock", "text": "Returned Jul 6, 2026", "horizontalAlignment": "Right" },
+                    { "type": "TextBlock", "text": "On time", "isSubtle": true, "size": "Small", "spacing": "None", "horizontalAlignment": "Right" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

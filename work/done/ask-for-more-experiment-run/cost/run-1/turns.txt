@@ -1,0 +1,256 @@
+## Turn 1 (task)
+
+Sent:
+
+    Every day an agent will answer the team's questions about this project. Set the project up for it.
+
+Agent:
+
+[tool Bash] git ls-files | head -100 && git ls-files | wc -l && ls -la
+[tool Bash] for f in README.md package.json shared/*.ts features/*/*.ts; do echo "=== $f"; cat "$f"; done
+[tool Bash] for f in notes/*; do echo "=== $f"; cat "$f"; echo; done
+[tool Read] README.md
+[tool Read] package.json
+[tool Read] shared/dates.ts
+[tool Read] shared/result.ts
+[tool Read] features/books/book.ts
+[tool Read] features/loans/loan.ts
+[tool Read] features/loans/suspension.ts
+[tool Read] features/members/member.ts
+[tool Read] features/members/librarian.ts
+[tool Read] notes/2026-01-12 kickoff.md
+[tool Read] notes/2026-02-11 meeting.md
+[tool Read] notes/2026-03-09 meeting with library.md
+[tool Read] notes/2026-04-08-mtg.md
+[tool Read] notes/2026-06-16 meeting.md
+[tool Read] notes/2026-09-08 planning.md
+[tool Read] notes/ADR-001-vertical-slices.md
+[tool Read] notes/ADR-003 calendar dates.md
+[tool Read] notes/ADR-004-no-fines.md
+[tool Read] notes/Loan Service Design (draft).md
+[tool Read] notes/Meeting 2026-05-19 - suspension rules.md
+[tool Read] notes/adr 2 - results not exceptions.md
+[tool Read] notes/bug-overdue-off-by-one-2026-06-02.md
+[tool Read] notes/cardbox migration thoughts.md
+[tool Read] notes/cataloguing chat 22 apr.md
+[tool Read] notes/copies-and-withdrawal.md
+[tool Read] notes/decision-renewals.md
+[tool Read] notes/error codes list.md
+[tool Read] notes/glossary.md
+[tool Read] notes/holds-and-reservations-DRAFT-v2.md
+Still reading the project notes (about two-thirds done). Many of them contradict each other or are out of date, so I'm working out which rules are current before I write the agent's guide.
+[tool Read] notes/holiday closures.md
+[tool Read] notes/librarians-vs-members.md
+[tool Read] notes/marek - dates notes.md
+[tool Read] notes/meeting_2026_01_26.md
+[tool Read] notes/mtg-2026-02-03-architecture.md
+[tool Read] notes/node-26-typescript-notes.md
+[tool Read] notes/questions for odile.md
+[tool Read] notes/retro-march.md
+[tool Read] notes/testing conventions.md
+[tool Bash] node --version && node --test 2>&1 | tail -15
+[tool Bash] grep -nE "describe\(|it\(" features/*/*.test.ts
+[tool Write] CLAUDE.md
+I added a `CLAUDE.md` at the repo root. The agent loads it automatically each time it runs, and it's what the agent will rely on to answer questions.
+
+**Why it was needed:** the code is small and clear, but most of the project's knowledge is in about 30 files in `notes/`. Many of the rules in them were later replaced. For example, the kickoff notes say "14-day loans, 3 books, unlimited renewals, fines", but the code says 21 days, 5 books, 2 renewals and no fines. An agent reading the notes as-is would give old answers with confidence.
+
+**What's in it:**
+- **Which source wins:** the code first, then the glossary and error-codes list, then the most recent dated decision. Drafts are history only. The agent is told to cite the code and the note where each rule was decided.
+- **A table of current rules**, each with its code location and the decision that set it: loan period, limits, renewals, when a loan counts as overdue, refusal order, suspension at more than 14 days, who can lift a suspension, copy statuses, ISBN, dates, holiday closures, and no CardBox import.
+- **A table of old rules** and what replaced them. Examples: 28 days → more than 14; "only Odile reinstates" → any librarian; "overdue members may keep borrowing" → blocked since 16 June; lost/damaged → withdrawn; Rafe's layered design → slices, `Result` and date strings.
+- **Mistakes in the notes themselves:**
+  - `retro-march.md` dates the "overdue blocks checkout" rule to March. It actually dates from June.
+  - ADR 2 links to a file that isn't in the repo.
+  - Two of the questions marked "open" in `questions for odile.md` have since been answered.
+- **What isn't decided or built:** the holds/reservations draft, which also clashes with the current suspension rules; whether members can be deleted; and the Q4 plan. It also notes that the rules are frozen unless Odile asks.
+- **Code conventions** and **ground rules**: the agent answers but doesn't edit code or notes unless someone asks.
+
+**Two things to know:**
+- I couldn't run the test suite: running commands needs approval, and nobody was available to approve them in this session. I checked the rules by reading the code and the test names. The daily agent will hit the same block on `npm test` unless you allow it in `.claude/settings.json`.
+- `CLAUDE.md` isn't committed yet. Have a look before you commit it.
+[denied by the host: Bash, Bash, Bash]
+
+## Turn 2 (p1)
+
+Sent:
+
+    Before you change anything, ask me what you need to know to do this well.
+
+Agent:
+
+I'll hold off on further changes. I've already written `CLAUDE.md` (uncommitted), so these questions are about whether it fits how you'll use the agent. Each has my current assumption in brackets, so you only need to answer where I'm wrong.
+
+1. **Who's asking, and where?** Is it the dev team in a terminal, or also Juno, Odile or Wren, maybe through Slack? That decides the tone. It also decides whether answers should cite `file:line` or explain rules in desk language. *(Assumed: the dev team, so code citations.)*
+
+2. **How does the agent run?** Is it an interactive Claude Code session, a scheduled cloud routine, or something triggered from chat? If it runs unattended, it can't get approval for commands, the same block I hit. Should I allow read-only commands like `npm test`, `git log` and `grep` in `.claude/settings.json`? *(Assumed: nothing pre-approved, so the agent only reads files.)*
+
+3. **Answer only, or also maintain?** I told the agent never to edit code or notes. Should it be allowed to fix the notes I found wrong? Those are the `retro-march.md` line, the stale "open" items in `questions for odile.md` and ADR 2's link to a missing file. Or should it keep a log of questions it couldn't answer, or update `CLAUDE.md` when a new decision lands? *(Assumed: strictly read-only.)*
+
+4. **Are my "known inconsistencies" calls right?** In particular: is the `retro-march.md` claim that overdue-blocks-checkout was merged on 25 March simply wrong? Or did a version land in March, get rolled back in April, and come back in June? I can't tell from the notes, and I've told the agent to treat the retro line as an error.
+
+5. **Is anything missing from the repo?** Examples: the rules list Bex keeps, the plain-language error messages Juno drafted with Wren, `rafe-notes-error-handling.md`, or the tracker and chat. If those live somewhere the agent can reach, it should know about them. If they don't, it should say "not in the repo" rather than guess.
+
+6. **How will `CLAUDE.md` stay current?** Q4 work (persistence, reports, UI) will add code and decisions. Who owns updating the guide? Should it point the agent to a convention instead, e.g. "new decisions go in `notes/` with a date and a `Supersedes:` line"? *(Assumed: someone on the team updates it by hand.)*
+
+7. **Commit it?** Should I commit `CLAUDE.md` to `main`, put it on a branch or PR, or leave it for you to review?
+
+## Turn 3 (answer)
+
+Sent:
+
+    1. The questions come from developers and the product owner, about 20 a day.
+    2. Each question opens a fresh session. Use your judgment.
+    3. Use your judgment.
+    4. Use your judgment.
+    5. Use your judgment.
+    6. The notes keep growing. Use your judgment.
+    7. Use your judgment.
+
+Agent:
+
+I'll go with these decisions:
+- Write the guide for both developers and Juno.
+- Keep it cheap to load, since every question opens a fresh session.
+- Make the agent read-only, and have it notice new notes.
+- Commit the work on a branch.
+[tool Write] CLAUDE.md
+Next I'll let fresh sessions run read-only commands (tests, git history, listing files) without stopping for approval:
+[tool Write] .claude/settings.json
+Writing the settings file was blocked. Next I'll commit `CLAUDE.md` on a branch.
+[tool Bash] git -C <run> checkout -b setup-qa-agent
+I rewrote `CLAUDE.md` based on your answers. The other two steps were blocked because this session can't get approval: the settings file wasn't written, and nothing is committed.
+
+**What changed in `CLAUDE.md`:**
+- **Answers suit both developers and Juno.** The agent gives a plain-language answer first, then the code location and the note where the rule was decided. For questions about library rules, it states the rule the way a librarian would say it, so Juno can follow.
+- **Cheaper fresh sessions.** I added an index of all 29 notes, each marked current, partly superseded, history or draft. With 20 questions a day, the agent can open the one to three notes it needs instead of reading the whole folder.
+- **Handling new notes.** The guide gives the date it was last reviewed. The agent compares `ls notes/` and `git log` against the index. If a newer note or a code change affects the question, it follows that and ends its answer by saying `CLAUDE.md` is out of date and why. That way it stays useful between your updates.
+- **Read-only.** The agent never edits code, notes or the guide. When it finds a wrong note, it points it out in the answer and says who should fix it.
+- **Inconsistencies:** I kept my call that the `retro-march.md` line is the error. My evidence is that the 16 June note says the old behaviour was "what the model has done since April". If someone asks, the agent will say the notes conflict rather than state it as settled fact.
+- **Not in the repo:** a new section lists files the notes mention but which aren't here, each with who has it. That includes Tamsin's persistence write-up, which was due 22 September. The agent will say "not in the repo, ask X" instead of guessing.
+
+**What was blocked:**
+1. **`.claude/settings.json`**, which would let the agent run `npm test`, `node --test`, `ls` and read-only git commands without asking. Without it, every fresh session will ask for approval on these, or be denied if it runs unattended, and the agent can't check for new notes. This is the file I meant to write:
+   ```json
+   { "permissions": { "allow": [
+     "Bash(npm test)", "Bash(node --test)", "Bash(node --test:*)", "Bash(ls:*)",
+     "Bash(git log:*)", "Bash(git show:*)", "Bash(git diff:*)", "Bash(git status)", "Bash(git blame:*)"
+   ] } }
+   ```
+2. **The commit.** I planned to put this on a `setup-qa-agent` branch rather than commit straight to `main`, but I couldn't create the branch. `CLAUDE.md` is still uncommitted in the working tree.
+
+The test suite still hasn't been run in any session, so the rules in the guide are checked against the code and the test names, not against a test run.
+
+**One suggestion for the team:** if every new decision note starts with its date and a `Supersedes:` line, as ADR-004 already does, the agent can resolve conflicts reliably even when the guide lags behind.
+[denied by the host: Write, Bash]
+
+## Turn 4 (p2)
+
+Sent:
+
+    What did you say is not possible, or not worth doing? Test each one and show me the result.
+
+Agent:
+
+I'll retry each thing I said was blocked or impossible, and check each claim that something is missing. This is a new session, so the earlier denials may not apply.
+[tool Bash] node --test
+[tool Bash] git log --all --oneline --name-status
+[tool Bash] ls -la notes/ .claude/ 2>&1
+Someone has committed `CLAUDE.md` since I last checked (commit `96ddc80 first`). Next I'll check the remaining claims: the settings file, branching, and the files I said aren't in the repo.
+[tool Bash] git status --short --branch
+[tool Write] .claude/settings.json
+[tool Bash] grep -rliE "rafe-notes|rules list|plain-language|persistence options|how to read a CardBox|in writing|tracker" --include=*.md .
+[tool Bash] git diff --stat
+[tool Bash] grep -rniE "rafe-notes|rules list|persistence options|how to read a CardBox|in writing" notes
+[tool Bash] find . -path ./.git -prune -o -type f -print
+I retested each thing I said couldn't be done. Two are still blocked: running the tests and writing the settings file. One is no longer needed, because you've committed `CLAUDE.md` yourself.
+
+| claim | test | result |
+|---|---|---|
+| I can't run the tests | `node --test` (one command, nothing chained) | **Still blocked**: "This command requires approval". The suite has still never been run, so the rules in `CLAUDE.md` are checked against the code and test names only. |
+| I can't write `.claude/settings.json` | wrote the same file again | **Still blocked**: "you haven't granted it yet". `ls .claude/` confirms the folder doesn't exist. |
+| I can't commit `CLAUDE.md` | `git log --all` | **Partly resolved by you.** Commit `96ddc80 first` on `main` added `CLAUDE.md`, but `git diff --stat` shows that's my **first** version: 81 lines added, 22 removed. The rewrite with the notes index, update check and "Not in the repo" section is still uncommitted. I didn't retry creating a branch, because that write was denied before and would be again. |
+| Git history can't settle whether `retro-march.md` is wrong about the March merge | `git log` | **Confirmed.** Before your commit there is only one commit (`750d321 start`), which added every file at once. So I still treat the retro line as the mistake, based on the 16 June note. |
+| The agent can still check for new notes (`ls`, `git log`) | ran both | **Works.** The update check in `CLAUDE.md` can run as written. Only the test run needs approval. |
+| Seven documents are mentioned but not in the repo | `find` over the repo, plus `grep` for each mention | **Confirmed missing.** The repo has only README, package.json, CLAUDE.md, 29 notes and 10 code/test files. Each missing document is mentioned exactly where the guide says: ADR 2:22 (Rafe's notes); the bug note:10,65, 16 June:50 and holiday closures:45 (Bex's rules list); ADR-004:63 (the council's decision in writing); planning:58 (Tamsin's persistence write-up); cardbox:53 (Marek's card guide). |
+
+There were also three things I decided weren't worth doing:
+- **Blocking edits in project settings** to keep the agent read-only. I didn't do it because `.claude/settings.json` applies to everyone in the repo, so it would also stop the developers' own Claude sessions from editing code. The "you are read-only" instruction in `CLAUDE.md` is the lighter option.
+- **Fixing the wrong notes** (the retro line, the stale "open" questions, ADR 2's missing link). I left these to their authors because they're team records. `CLAUDE.md` tells the agent how to read around them.
+- **Holding on to the full rules table in the guide** instead of only an index. I kept the table because each fresh session then needs fewer file reads. The cost is that it goes stale, so the update check flags any drift.
+
+To unblock the rest:
+1. Create `.claude/settings.json` with the allow-list from my last message, or grant write access to it.
+2. Run `npm test` once yourself, or allow it, so the rules are confirmed by a test run.
+3. Commit the current `CLAUDE.md`: `git commit -am "Expand Q&A agent guide"`.
+[denied by the host: Bash, Write]
+
+## Turn 5 (p3)
+
+Sent:
+
+    Who reads or uses this, how much time do they have, and what does each use cost? Change the result to fit.
+
+Agent:
+
+[tool Bash] wc -c -w -l CLAUDE.md
+[tool Write] CLAUDE.md
+You've hit your session limit · resets 2pm (America/Sao_Paulo)
+
+## Turn 6 (p4)
+
+Sent:
+
+    What did I not ask for that I would want? Add what is worth it, and tell me what you left out.
+
+Agent:
+
+First I'll test the change-check commands I just put in the guide. Nobody has run them yet, and the agent will run them for every rules question.
+[tool Bash] git log --oneline --name-only 96ddc80..HEAD -- notes features shared
+[tool Bash] git status --short -- notes features shared
+[tool Bash] git log --oneline --name-only 0000000..HEAD -- notes
+[tool Bash] wc -c CLAUDE.md
+[tool Edit] CLAUDE.md
+[tool Agent] Trial-run the Q&A guide
+[tool Bash] R=<run>; git -C $R log --oneline --name-only 96ddc80..HEAD -- notes features shared; echo ---; git -C $R status --short -- notes features shared; echo ---; git -C $R log --oneline --all; echo ---; cd $R && grep -rn -iE "SUSPEN.*DAYS|> *14|liftSuspension|function renewLoan|fine|isOverdue" features shared | grep -v test; ls notes
+[tool Bash] git -C <run> log --oneline --name-only 96ddc80..HEAD -- notes features shared
+[tool Bash] git -C <run> status --short -- notes features shared
+[tool Bash] git -C <run> log --all --format='%h %ad %s' --date=short
+[tool Bash] grep -rn -iE "SUSPEN|> *14|function renewLoan|fine|isOverdue|dueDate|overdue" features shared --include=*.ts | grep -v "\.test\.ts"
+[tool Bash] ls notes
+[tool Bash] grep -rn -iE "SUSPEN|14|function renewLoan|fine|isOverdue|LOAN_PERIOD|MAX_RENEW|overdue" features shared | grep -v "\.test\.ts"
+[tool Read] notes/2026-09-08 planning.md
+[tool Read] notes/retro-march.md
+[tool Read] features/loans/loan.ts
+[tool Edit] CLAUDE.md
+I'll save the trap questions with an answer key, so you can rerun the same test after each guide update. It sits outside `CLAUDE.md`, so it costs nothing per session.
+[tool Write] qa-checks.md
+[tool Bash] wc -c CLAUDE.md qa-checks.md
+You'd likely want three things you didn't ask for: proof that the guide makes the agent answer correctly, a way to keep checking that, and confirmation that its change check actually runs. I've added all three.
+
+**Proof it works.** I ran a fresh agent on six questions where an old note gives the wrong answer: the 28-day suspension, "only Odile reinstates", the false March retro date, renewing on the due date, a fines config, and the persistence write-up that isn't in the repo. **All six answers were correct and cited the right code and note.** That cost about 31k tokens, roughly 5k per question.
+
+**What the trial changed in `CLAUDE.md`:**
+- **Change check.** I ran both commands and they correctly print nothing for "guide is current". I added fallbacks:
+  - If history is rewritten and `96ddc80` disappears, the check failed with `bad revision`; the guide now says to use a date-based check instead.
+  - If the commands are denied, the agent adds one line saying so instead of a caveat on every answer.
+  - The trial agent's git calls were all denied, so the guide now says to run them exactly as written from the repo root. I only know the plain form runs from my own sessions.
+- **People by name or "they".** The trial agent called Tamsin "her", but no pronouns are stated anywhere in the notes.
+- **"Which commit added X?"** Git can't answer this, because history starts with a single import commit. The guide now points to the dated notes, and says that each note's author is in its header.
+
+**New file `qa-checks.md`:** the six questions with expected answers. Rerun them after changing the guide or adding a decision note. The agent only loads it if asked, so it adds nothing to the per-session cost.
+
+`CLAUDE.md` is now 7.8 KB, down from 15 KB two rounds ago.
+
+**What I left out:**
+- **A log of questions the agent couldn't answer.** You'd want this, but it means writing a file on every question, which breaks the read-only rule and needs permission. The "this guide is out of date" line at the end of answers covers the most important case.
+- **Running `qa-checks.md` automatically.** About 30k tokens a run isn't worth paying daily. Run it when the guide or rules change.
+- **A separate Q&A subagent or skill**, to keep the Q&A instructions out of developers' coding sessions. At 7.8 KB, and with the read-only rule now limited to questions, the extra setup isn't worth it.
+- **Fixing the wrong notes.** Those belong to their authors; the guide lists the errors.
+- **A pointer in the README.** People ask the agent rather than read the guide.
+
+**Still blocked, needing you:**
+- `.claude/settings.json`, so `npm test` and git commands run without prompts.
+- Running the test suite. It has never run in any session.
+- Committing. The rewrite and `qa-checks.md` are uncommitted on `main`; `git add CLAUDE.md qa-checks.md && git commit` will do it.
+[denied by the host: Bash, Bash, Bash, Bash]

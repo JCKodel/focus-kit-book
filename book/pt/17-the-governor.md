@@ -38,7 +38,7 @@ No código o regulador tem a sua própria forma, a regra da segunda ocorrência 
 
 ## O que o processo não tem
 
-O §7 do docs/05 lista sete coisas que o processo não tem.
+O §7 do docs/05 lista oito coisas que o processo não tem.
 Cada trabalho ainda é feito, por algo que o processo já tem:
 
 * **Nenhuma especificação formal:** a página, `work/<slug>.md`, diz o que a entrega faz, com as palavras da pessoa que a lê.
@@ -46,6 +46,7 @@ Cada trabalho ainda é feito, por algo que o processo já tem:
 * **Nenhuma pasta de mudança:** a página é a mudança, em `work/<slug>.md` enquanto é construída e em `work/done/` depois.
 * **Nenhuma tarefa numerada:** as linhas de Comportamento, cada uma um teste ou uma checagem.
 * **Nenhuma barreira antes da implementação:** a pessoa que lê a página antes do `/apply`, e pede o que falta.
+* **Nenhuma revisão de uma revisão:** cada linha que uma revisão de marco acrescenta passa pela sua própria página, pela sua prova e pelo commit da pessoa.
 * **Nenhum subagente especializado**, um agente que outro agente lança para um papel estreito com as suas próprias instruções, como um planejador ou um revisor:[^claude-code-subagents] um agente só, que lê os documentos.
 * **Nenhuma ferramenta que as entregas não pediram:** o próprio regulador, que a mantém de fora até uma entrega nomear o erro que ela teria pegado.
 
@@ -72,7 +73,7 @@ O regulador mantém um processo desse tamanho, e deixa um time dizer sim a um pa
 * Pergunte a tudo o que quer entrar no processo, e a cada passo que já está nele: que erro concreto isso teria pegado?
 * A resposta nomeia um erro que aconteceu; um erro possível justifica qualquer coisa, e cada passo é pago por toda entrega depois dele.
 * Um passo que não nomeia erro nenhum sai, e uma lista de exceções reprova em uma entrada sem um aviso vivo.
-* Cada uma das sete coisas que o processo não tem tem o seu trabalho feito por algo que ele tem: a página, os documentos, as linhas de Comportamento, a pessoa, um agente só, e o próprio regulador.
+* Cada uma das oito coisas que o processo não tem tem o seu trabalho feito por algo que ele tem: a página, os documentos, as linhas de Comportamento, a pessoa, o commit da pessoa, um agente só, e o próprio regulador.
 * O regulador decide por projeto: o Caso A acrescentou uma marca para linhas esperando por uma pessoa, e este livro, cujas linhas nunca esperam por uma, não.
 
 [^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>

@@ -1,0 +1,414 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "msteams": {
+    "width": "Full"
+  },
+  "body": [
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "bleed": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "My Loans",
+          "size": "Large",
+          "weight": "Bolder",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "Alex Morgan · Member #LIB-204817",
+          "isSubtle": true,
+          "spacing": "None",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "Next due {{DATE(2026-10-16T12:00:00Z, SHORT)}}",
+          "size": "Small",
+          "spacing": "Small",
+          "wrap": true
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "id": "tabActive",
+      "isVisible": false,
+      "items": [
+        {
+          "type": "ActionSet",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "● Active (2)",
+              "targetElements": [
+                {
+                  "elementId": "tabActive",
+                  "isVisible": true
+                },
+                {
+                  "elementId": "tabOverdue",
+                  "isVisible": false
+                },
+                {
+                  "elementId": "tabHistory",
+                  "isVisible": false
+                }
+              ]
+            },
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "Overdue (1)",
+              "targetElements": [
+                {
+                  "elementId": "tabActive",
+                  "isVisible": false
+                },
+                {
+                  "elementId": "tabOverdue",
+                  "isVisible": true
+                },
+                {
+                  "elementId": "tabHistory",
+                  "isVisible": false
+                }
+              ]
+            },
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "History (3)",
+              "targetElements": [
+                {
+                  "elementId": "tabActive",
+                  "isVisible": false
+                },
+                {
+                  "elementId": "tabOverdue",
+                  "isVisible": false
+                },
+                {
+                  "elementId": "tabHistory",
+                  "isVisible": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "The Remains of the Day",
+              "weight": "Bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Kazuo Ishiguro",
+              "isSubtle": true,
+              "spacing": "None",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Due {{DATE(2026-10-16T12:00:00Z, SHORT)}} · 14 days left",
+              "color": "Good",
+              "weight": "Bolder",
+              "size": "Small",
+              "spacing": "Small",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Sapiens: A Brief History of Humankind",
+              "weight": "Bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Yuval Noah Harari",
+              "isSubtle": true,
+              "spacing": "None",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Due {{DATE(2026-10-23T12:00:00Z, SHORT)}} · 21 days left",
+              "color": "Good",
+              "weight": "Bolder",
+              "size": "Small",
+              "spacing": "Small",
+              "wrap": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "id": "tabOverdue",
+      "isVisible": true,
+      "items": [
+        {
+          "type": "ActionSet",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "Active (2)",
+              "targetElements": [
+                {
+                  "elementId": "tabActive",
+                  "isVisible": true
+                },
+                {
+                  "elementId": "tabOverdue",
+                  "isVisible": false
+                },
+                {
+                  "elementId": "tabHistory",
+                  "isVisible": false
+                }
+              ]
+            },
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "● Overdue (1)",
+              "targetElements": [
+                {
+                  "elementId": "tabActive",
+                  "isVisible": false
+                },
+                {
+                  "elementId": "tabOverdue",
+                  "isVisible": true
+                },
+                {
+                  "elementId": "tabHistory",
+                  "isVisible": false
+                }
+              ]
+            },
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "History (3)",
+              "targetElements": [
+                {
+                  "elementId": "tabActive",
+                  "isVisible": false
+                },
+                {
+                  "elementId": "tabOverdue",
+                  "isVisible": false
+                },
+                {
+                  "elementId": "tabHistory",
+                  "isVisible": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "style": "attention",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Educated",
+              "weight": "Bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Tara Westover",
+              "isSubtle": true,
+              "spacing": "None",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "7 days overdue · was due {{DATE(2026-09-25T12:00:00Z, SHORT)}}",
+              "color": "Attention",
+              "weight": "Bolder",
+              "size": "Small",
+              "spacing": "Small",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "TextBlock",
+          "text": "Please return overdue items as soon as possible.",
+          "size": "Small",
+          "isSubtle": true,
+          "wrap": true
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "id": "tabHistory",
+      "isVisible": false,
+      "items": [
+        {
+          "type": "ActionSet",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "Active (2)",
+              "targetElements": [
+                {
+                  "elementId": "tabActive",
+                  "isVisible": true
+                },
+                {
+                  "elementId": "tabOverdue",
+                  "isVisible": false
+                },
+                {
+                  "elementId": "tabHistory",
+                  "isVisible": false
+                }
+              ]
+            },
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "Overdue (1)",
+              "targetElements": [
+                {
+                  "elementId": "tabActive",
+                  "isVisible": false
+                },
+                {
+                  "elementId": "tabOverdue",
+                  "isVisible": true
+                },
+                {
+                  "elementId": "tabHistory",
+                  "isVisible": false
+                }
+              ]
+            },
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "● History (3)",
+              "targetElements": [
+                {
+                  "elementId": "tabActive",
+                  "isVisible": false
+                },
+                {
+                  "elementId": "tabOverdue",
+                  "isVisible": false
+                },
+                {
+                  "elementId": "tabHistory",
+                  "isVisible": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Klara and the Sun",
+              "weight": "Bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Kazuo Ishiguro",
+              "isSubtle": true,
+              "spacing": "None",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Returned {{DATE(2026-08-20T12:00:00Z, SHORT)}}",
+              "size": "Small",
+              "spacing": "Small",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "The Midnight Library",
+              "weight": "Bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Matt Haig",
+              "isSubtle": true,
+              "spacing": "None",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Returned {{DATE(2026-07-29T12:00:00Z, SHORT)}}",
+              "size": "Small",
+              "spacing": "Small",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "separator": true,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Atomic Habits",
+              "weight": "Bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "James Clear",
+              "isSubtle": true,
+              "spacing": "None",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Returned {{DATE(2026-07-06T12:00:00Z, SHORT)}}",
+              "size": "Small",
+              "spacing": "Small",
+              "wrap": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "Updated {{DATE(2026-10-02T12:00:00Z, SHORT)}}",
+      "isSubtle": true,
+      "size": "Small",
+      "separator": true,
+      "wrap": true
+    }
+  ]
+}

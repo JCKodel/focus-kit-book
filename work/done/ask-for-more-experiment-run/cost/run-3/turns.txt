@@ -1,0 +1,374 @@
+## Turn 1 (task)
+
+Sent:
+
+    Every day an agent will answer the team's questions about this project. Set the project up for it.
+
+Agent:
+
+[tool Bash] git ls-files | head -100; echo; git ls-files | wc -l; ls -la
+[tool Bash] for f in README.md package.json shared/*.ts features/*/*.ts; do echo "=== $f"; cat "$f"; done
+[tool Bash] cd notes; for f in *; do echo "=== $f"; cat "$f"; echo; done
+[tool Read] README.md
+[tool Read] package.json
+[tool Read] shared/dates.ts
+[tool Read] shared/result.ts
+[tool Read] features/books/book.ts
+[tool Read] features/loans/loan.ts
+[tool Read] features/loans/suspension.ts
+[tool Read] features/members/member.ts
+[tool Read] features/members/librarian.ts
+[tool Read] features/loans/loans.test.ts
+[tool Read] notes/2026-01-12 kickoff.md
+[tool Read] notes/2026-02-11 meeting.md
+[tool Read] notes/2026-03-09 meeting with library.md
+[tool Read] notes/2026-04-08-mtg.md
+[tool Read] notes/2026-06-16 meeting.md
+[tool Read] notes/2026-09-08 planning.md
+[tool Read] notes/ADR-001-vertical-slices.md
+[tool Read] notes/ADR-003 calendar dates.md
+[tool Read] notes/ADR-004-no-fines.md
+[tool Read] notes/Loan Service Design (draft).md
+[tool Read] notes/Meeting 2026-05-19 - suspension rules.md
+[tool Read] notes/adr 2 - results not exceptions.md
+[tool Read] notes/bug-overdue-off-by-one-2026-06-02.md
+[tool Read] notes/cardbox migration thoughts.md
+[tool Read] notes/cataloguing chat 22 apr.md
+[tool Read] notes/copies-and-withdrawal.md
+[tool Read] notes/decision-renewals.md
+[tool Read] notes/error codes list.md
+[tool Read] notes/glossary.md
+[tool Read] notes/holds-and-reservations-DRAFT-v2.md
+[tool Read] notes/holiday closures.md
+[tool Read] notes/librarians-vs-members.md
+[tool Read] notes/marek - dates notes.md
+[tool Read] notes/meeting_2026_01_26.md
+[tool Read] notes/mtg-2026-02-03-architecture.md
+[tool Read] notes/node-26-typescript-notes.md
+[tool Read] notes/questions for odile.md
+[tool Read] notes/retro-march.md
+[tool Read] notes/testing conventions.md
+I've read the code and all 28 notes. Next I'll run the test suite to confirm the current behaviour, then write the agent's guide.
+[tool Bash] npm test 2>&1 | tail -15; node --version
+[tool Read] features/members/members.test.ts
+[tool Read] features/books/books.test.ts
+[tool Write] CLAUDE.md
+Unattended runs can't answer permission prompts; my own `npm test` got blocked that way in this session. So I'll pre-allow the read-only commands the agent needs.
+[tool Write] .claude/settings.json
+I added `CLAUDE.md` at the project root as a guide for the daily question-answering agent. Claude Code loads it automatically. I haven't committed it.
+
+The main risk for that agent is the `notes/` folder. Many notes state rules that were later reversed, and two notes are drafts of things that were never built. Read on their own, they would produce confident wrong answers like "loans are 14 days", "fines are 0.20/day" or "only Odile can reinstate". `CLAUDE.md` covers:
+
+- **How to answer:** trust the code first, then the tests, then the glossary and error-code list, then the most recent dated note. Cite the code location and the note that explains why. Say plainly when something is undecided.
+- **Current rules:** one table with every rule's value, where it is in the code, and the meeting that decided it. This covers loan period, loan limit, renewals, overdue, suspension, reinstatement, refusal order, copies, ISBNs, fines, dates, closures and CardBox.
+- **Superseded claims:** each outdated statement, which notes still contain it, and what replaced it.
+- **Contradictions inside the notes:**
+  - The June meeting claims a pointer was added to the April note, but it wasn't.
+  - The March retro dates the "overdue blocks borrowing" rule wrongly.
+  - ADR 2's example uses an error code that only arrived in June.
+  - Two ADRs reference a note that isn't in the repo.
+  - Two questions marked open were already answered.
+- **Open questions:** what's still undecided, the Q4 plan, and what's deliberately left out of the model.
+
+Two things were blocked because this session can't approve permission prompts:
+
+1. **I couldn't run `npm test`.** The rules table comes from reading the code and all three test files, not from a test run.
+2. **I couldn't create `.claude/settings.json`.** It would pre-approve read-only commands: `npm test`, `node --test` and read-only `git log`/`show`/`diff`/`blame`/`status`. An unattended daily agent will hit the same wall I did, so I recommend adding it yourself:
+   ```json
+   { "permissions": { "allow": [
+     "Bash(npm test)", "Bash(node --test)", "Bash(node --test:*)",
+     "Bash(git log:*)", "Bash(git show:*)", "Bash(git diff:*)", "Bash(git blame:*)", "Bash(git status)"
+   ] } }
+   ```
+
+I left the notes themselves unchanged. You might still want to add a "superseded by …" line to the top of `2026-04-08-mtg.md`, since the June meeting says that pointer exists but it doesn't. If you want the agent to actually run every day, I can set up a schedule with `/schedule`.
+[denied by the host: Bash, Bash, Bash, Write]
+
+## Turn 2 (p1)
+
+Sent:
+
+    Before you change anything, ask me what you need to know to do this well.
+
+Agent:
+
+Understood, I won't change anything until you've answered. One thing first: I already created `CLAUDE.md` last turn. It's uncommitted, so it's easy to revise or delete based on what you tell me.
+
+Here is what I need to know:
+
+**Where and how the agent runs**
+1. Where do the questions come from: Slack, GitHub issues, a file in the repo, or a person typing into Claude Code? This decides whether I set up a schedule, an integration, or just context.
+2. Will it run unattended, for example as a scheduled cloud agent? If so, it can't approve permission prompts, as happened to me twice here. Should I set up `.claude/settings.json` to allow `npm test` and read-only git commands?
+3. Should the agent be strictly read-only, or may it fix small things it finds, like stale notes or the missing pointer on the 04-08 note?
+
+**Audience**
+4. Who asks the questions: only the developers, or also Juno, Odile and Wren? That changes the tone. For library staff it should use plain language, with no file paths or error codes unless asked.
+5. Should answers include citations (`loan.ts:39`, the note and its date)? Or should they give a short answer by default, with sources only on request?
+
+**Keeping it accurate over time**
+6. The current-rules table in `CLAUDE.md` copies values from the code, so it will drift when rules change. Would you rather:
+   - (a) keep the table, plus an instruction to always check the code first,
+   - (b) drop the numbers and point the agent at the constants and tests, or
+   - (c) have the agent flag any drift it notices?
+7. Do new notes keep landing in `notes/` with mixed naming? Should the agent treat any new note as possibly overriding older ones? Or would the team adopt a status line ("Status: current / superseded by X / draft") so the agent doesn't have to infer it?
+
+**Content I wasn't sure about**
+8. I listed some contradictions within the notes, such as the March retro and the ADR 2 example. Are any of those actually right and my reading wrong?
+9. `rafe-notes-error-handling.md` is referenced but missing. Does it exist somewhere I should know about?
+10. Is there context that lives outside the repo, like the tracker, chat or shared drive, that the agent should know exists, so it can say "check X" instead of "I don't know"?
+
+**Scope**
+11. Besides answering, should the agent produce anything daily, such as a log of questions asked, a list of gaps it couldn't answer, or suggested doc fixes?
+
+## Turn 3 (answer)
+
+Sent:
+
+    1. The questions come from developers and the product owner, about 20 a day. Each question opens a fresh session.
+    2. Each question opens a fresh session. Use your judgment.
+    3. Use your judgment.
+    4. The questions come from developers and the product owner, about 20 a day.
+    5. Use your judgment.
+    6. Use your judgment.
+    7. The notes keep growing. Use your judgment.
+    8. Use your judgment.
+    9. Use your judgment.
+    10. Use your judgment.
+    11. Use your judgment.
+
+Agent:
+
+With 20 fresh sessions a day, every session starts from `CLAUDE.md` alone. It has to point to the right files quickly and stay correct as notes accumulate. The changes:
+
+- **Read-only.** About 20 parallel sessions editing shared docs would conflict, so the agent answers and reports drift rather than fixing it.
+- **Answer format for both audiences.** A plain answer comes first, for Juno, followed by short sources for the developers.
+- **Drift-resistant.** Line numbers become symbol names. A coverage date and a `git log` check make the agent look at notes newer than the guide.
+- **Missing and external sources.** The agent mustn't invent the content of the missing note, and should point to the tracker or shared drive rather than guess.
+[tool Write] CLAUDE.md
+I've rewritten `CLAUDE.md` for one-question-per-session use by developers and Juno. It's still uncommitted.
+
+What changed:
+
+- **Read-only agent.** It answers one question and stops. About 20 sessions a day editing shared docs would collide, so the agent reports problems instead of fixing them.
+- **Answer format.** A plain answer comes first, in one to three sentences Juno could repeat to Odile. A short Sources line follows for the developers (code symbol, test name, note and date).
+- **Staying correct as notes grow.**
+  - The guide now says it covers notes up to 2026-09-08 and was reviewed on 2026-10-02.
+  - Each session checks `git log` for newer notes before answering a rules question.
+  - When the guide and the code disagree, the agent believes the code and ends its answer with a `Doc drift:` line. Searching the team's answers for "Doc drift" tells you when the guide needs updating.
+  - Line numbers became function and constant names, so the guide doesn't go stale with every edit.
+  - The agent must check a value in the code before quoting it from the tables.
+- **Notes index.** The notes are sorted into current reference, decisions still in force, history and drafts. A fresh session can go straight to the right file instead of reading all 28 notes.
+- **Gaps.** For `rafe-notes-error-handling.md`, the agent says it's missing, uses ADR 2's context and suggests asking Rafe. For the tracker, shared drive and chat, it tells people to look there instead of guessing.
+
+**Still needed from you:** I couldn't create `.claude/settings.json`; this session can't approve file writes there. Without it, every fresh session will stop and ask permission to run tests or `git log`. To add it:
+
+```json
+{ "permissions": { "allow": [
+  "Bash(npm test)", "Bash(node --test)", "Bash(node --test:*)",
+  "Bash(git log:*)", "Bash(git show:*)", "Bash(git diff:*)", "Bash(git blame:*)", "Bash(git status)"
+] } }
+```
+
+Separately, someone on the team should update `CLAUDE.md` whenever answers report drift or a decision note lands. I'd suggest whoever writes up the check-in notes, which is usually Juno or Tamsin.
+
+## Turn 4 (p2)
+
+Sent:
+
+    What did you say is not possible, or not worth doing? Test each one and show me the result.
+
+Agent:
+
+This is a new session, so last session's automatic denials may not apply any more. I'll retry each item.
+[tool Bash] npm test
+[tool Write] .claude/settings.json
+Both are still blocked. Next I'll check whether the read-only git commands the guide depends on work.
+[tool Bash] git log --since=2026-10-02 --name-only -- notes features shared
+[tool Bash] git status --short
+`CLAUDE.md` shows as modified, not new, so someone committed a version of it. I'll check which one.
+[tool Bash] git log --oneline -5 -- CLAUDE.md
+[tool Bash] git diff --stat
+The drift check works. Next I'll re-test the factual claims behind my "leave the notes alone" choices: the missing pointer on the 04-08 note and the missing `rafe-notes-error-handling.md`.
+[tool Bash] git grep -n -i -e "june" -e "06-16" -e "superseded" -e "replaced" -- "notes/2026-04-08-mtg.md"
+[tool Bash] git ls-files -- "*rafe*"
+[tool Bash] git grep -c "" -- notes
+I retested everything I'd said couldn't be done or wasn't worth doing. Two things are still blocked, and both mean you need to add one settings file.
+
+| What I said | Test | Result |
+|---|---|---|
+| I can't run `npm test` | ran `npm test` again | **Still blocked.** Denied automatically because no one can approve prompts in this session. So the tests have never actually been run; everything I've said about how the code behaves comes from reading it. |
+| I can't create `.claude/settings.json` | tried writing it again | **Still blocked**, for the same reason. |
+| Without that file, the daily sessions will stop and ask permission to run tests | compared which commands this session could run | **The wording was wrong, the risk is real.** With no one to approve, the sessions won't ask; they'll just be refused. `npm test` was refused, while `git log`, `git status`, `git grep` and `git diff` all ran. So the agent can do the drift check but can't run tests unless you add the file. |
+| I couldn't print all the files with one shell loop | (first session) | Blocked, but it didn't matter: I read every file with the Read tool instead. |
+| It's not worth having each session read all the notes | counted the notes | **Holds up.** The notes are 2,334 lines across 29 files, and reading them cost me about 41k tokens. `CLAUDE.md` is about 4k. At 20 sessions a day, the index saves roughly 750k tokens a day. |
+| I shouldn't add the missing pointer to the April note, just flag it | searched `2026-04-08-mtg.md` for any mention of June, 06-16, "superseded" or "replaced" | **The pointer is indeed missing.** Leaving it out of the agent's job was my call, not a technical limit; any person can add one line. |
+| The agent should flag `rafe-notes-error-handling.md` as missing, not reconstruct it | searched the repo for any file with "rafe" in its name | **Confirmed:** no such file exists. |
+| The agent should be read-only because edits would collide | not testable here | This is a judgment, not a measurement. About 20 independent sessions a day editing the same notes and `CLAUDE.md` would produce conflicting changes nobody reviewed. |
+
+**Something else I found:** `CLAUDE.md` was already committed, as part of commit `289d631 first`, but that's my first version. The revision from your answers is uncommitted, so if the daily agent runs on the committed code, it's still getting the old guide.
+
+**What you need to do:**
+1. Create `.claude/settings.json` yourself (the content is in my previous message). Until then, the daily sessions can't run tests.
+2. Commit the current `CLAUDE.md`.
+[denied by the host: Bash, Write]
+
+## Turn 5 (p3)
+
+Sent:
+
+    Who reads or uses this, how much time do they have, and what does each use cost? Change the result to fit.
+
+Agent:
+
+I'll start by measuring what the guide costs right now.
+[tool Bash] wc -c -w -l CLAUDE.md
+[tool Write] CLAUDE.md
+You've hit your session limit · resets 2pm (America/Sao_Paulo)
+
+## Turn 6 (p4)
+
+Sent:
+
+    What did I not ask for that I would want? Add what is worth it, and tell me what you left out.
+
+Agent:
+
+[tool Bash] wc -c -w -l CLAUDE.md
+[tool Agent] Eval Q1 overdue borrowing
+[tool Bash] git log --since=2026-10-02 --name-only -- notes features shared; grep -n "overdue\|checkOut\|function\|return\|error" features/loans/loan.ts | head -80
+[tool Agent] Eval Q2 suspension threshold
+[tool Bash] grep -rn "overdue" --include=*.test.ts . | grep -i "test(\|it(" | head; node --test --test-name-pattern="overdue" 2>&1 | tail -30
+[tool Bash] cat features/loans/suspension.ts; git log --since=2026-10-02 --name-only -- notes features shared; ls notes
+[tool Agent] Eval Q3 reinstatement
+[tool Read] features/loans/loan.test.ts
+[tool Bash] node --test --test-name-pattern="suspen" 2>&1 | grep -E "^(# |ok|not ok|\s+(ok|not ok))" | head -40; cat "notes/Meeting 2026-05-19 - suspension rules.md"
+[tool Read] features/loans/loan.ts
+[tool Bash] git log --since=2026-10-02 --name-only -- notes features shared; grep -n "liftSuspension" -A30 features/loans/suspension.ts | head -60; ls features/loans
+[tool Agent] Eval Q4 fines
+[tool Read] notes/Meeting 2026-05-19 - suspension rules.md
+[tool Bash] grep -rn -i "suspend" features --include=*.test.ts | grep -E "test\(|it\(|describe\("
+[tool Bash] grep -n "lift\|reinstat" features/loans/loans.test.ts; ls notes | grep -i "05-19"; node --test --test-name-pattern="reinstat|lift" 2>&1 | tail -15
+[tool Agent] Eval Q5 holds shelf
+Bash was denied, so I'll read the test file directly.
+[tool Bash] grep -rniE "fine|owed|penalt" features shared --include=*.ts | head; echo ---; ls notes | grep -i -E "adr|fine"; echo ---; git log --since=2026-10-02 --name-only -- notes features shared
+[tool Bash] grep -rn -i "overdue" features/loans/suspension.test.ts
+[tool Read] features/loans/loans.test.ts
+ANSWER:
+No. A loan counts as overdue from the day after its due date, so a member who is 3 days late can't borrow anything until that book is returned. Checkout is refused with `member-has-overdue-loans`. This has been the rule since the 16 June 2026 meeting. Before that, the 8 April decision let overdue members keep borrowing. Three days is well short of the suspension threshold, so the member isn't suspended, just blocked. They can still return the book at any time, and once it's back they can borrow again.
+Sources: `checkOut` and `isOverdue` in features/loans/loan.ts; 2026-06-16 meeting (tests not run, test name not found).
+
+FILES OPENED:
+- CLAUDE.md (provided in context)
+- features/loans/loan.ts (lines 55–70, plus a grep of the whole file)
+- I tried to read features/loans/loan.test.ts, but that file doesn't exist.
+- Command: `git log --since=2026-10-02 --name-only -- notes features shared` (no output, so no drift) chained with `grep -n "overdue\|checkOut\|function\|return\|error" features/loans/loan.ts`
+- Command denied: `grep -rn "overdue" --include=*.test.ts .` plus `node --test --test-name-pattern="overdue"`. Bash permission was refused, so the tests weren't run.
+[tool Agent] Eval Q6 early renewal
+[tool Bash] grep -rniE "fine|owed|penalt" features shared | head; echo ---; head -30 "notes/ADR-004-no-fines.md"
+[tool Bash] grep -rniE "hold|expir|reserv" features shared --include=*.ts | head; echo ---; git log --since=2026-10-02 --name-only -- notes features shared; echo ---; ls notes
+[tool Bash] grep -rn "14 days" features tests 2>/dev/null
+[tool Bash] grep -rniE "hold|expir|reserv" features shared; echo "exit=$?"
+[tool Bash] cat features/loans/loan.ts; git log --since=2026-10-02 --name-only -- notes features shared
+[tool Agent] Eval Q7 member deletion
+[tool Bash] grep -rln -i "suspen" <run> --exclude-dir=node_modules --exclude-dir=notes --exclude-dir=.git
+ANSWER:
+Yes, Wren can do it herself and doesn't need to wait for Odile. Since the 19 May 2026 meeting, any librarian can lift a suspension as long as the member has no overdue loans left. Before that, only Odile could. Returning the books doesn't lift the suspension on its own, so Wren still has to lift it. If any loan is still overdue, the system refuses with `still-has-overdue-loans`.
+
+Sources: `liftSuspension` (features/loans/suspension.ts), which doesn't check who is lifting it; tests "lifts a suspension once overdue loans are returned" and "cannot lift a suspension while loans are overdue" (features/loans/loans.test.ts); 2026-05-19 meeting (tests not run)
+
+FILES OPENED:
+- Command: `git log --since=2026-10-02 --name-only -- notes features shared` (drift check: no output, so nothing newer than the guide)
+- Command: `grep -n "liftSuspension" -A30 features/loans/suspension.ts` and `ls features/loans` (same Bash call)
+- Command attempted: `grep` over loans.test.ts, `ls notes | grep 05-19`, `node --test --test-name-pattern="reinstat|lift"`. Bash permission was denied, so the tests were not run.
+- Read: features/loans/loans.test.ts
+- CLAUDE.md (provided in context, not opened separately)
+The first answer came back correct and cheap (about 15k tokens). It also exposed a gap: the agent guessed `loan.test.ts`, but the file is `loans.test.ts`, so it couldn't cite a test name. I'll fix that once the rest are in.
+ANSWER:
+The fine rate isn't configured anywhere, because the library charges no fines. ADR-004 (14 Apr 2026) dropped the kickoff idea of 0.20 per day after the council confirmed there would be no charges, so the code has no fine amount, per-day rate, balance or "paid" state. The kickoff note had said to "keep it configurable", but that was never built. An overdue report can show how many days each loan is overdue, using `daysOverdue`, and whether the member is suspended, but no amount owed. If someone wants fines back, that's a new decision for Juno and Odile.
+Sources: `daysOverdue`, `isOverdue` (features/loans/loan.ts); no fine/fee terms in features/ or shared/; notes/ADR-004-no-fines.md (2026-04-14) (tests not run)
+
+FILES OPENED:
+- CLAUDE.md (I didn't open it with a tool; it was already in my context)
+- notes/ADR-004-no-fines.md (first 30 lines only, via `head -30`)
+- Commands run:
+  - `grep -rniE "fine|owed|penalt" features shared --include=*.ts | head`: failed because zsh couldn't match the `--include=*.ts` pattern ("no matches found").
+  - `ls notes | grep -i -E "adr|fine"`
+  - `git log --since=2026-10-02 --name-only -- notes features shared`: no output, so nothing has changed since this guide.
+  - `grep -rniE "fine|owed|penalt" features shared | head`: the only hits were unrelated words like "undefined", "returned" and "allowed".
+  - `head -30 "notes/ADR-004-no-fines.md"`
+[tool Bash] grep -n -i "suspen" features/loans/loans.test.ts README.md
+[tool Bash] node --test --test-name-pattern="renew" 2>&1 | grep -E "^(not )?ok|# (pass|fail)|renew" | head -30
+[tool Bash] git log --since=2026-10-02 --name-only -- notes features shared; echo ---; grep -rniE "delet|inactive|remove|leave" features shared notes/glossary.md "notes/error codes list.md" notes/questions*odile*.md 2>/dev/null | head -40
+[tool Read] features/loans/loans.test.ts
+The reinstatement answer is correct, but it called Wren "her". The notes never give Wren's pronouns; I'll have the guide say to use names or they/them. Still waiting on five answers.
+ANSWER:
+Nothing in the system expires holds, because holds don't exist yet. There is no hold shelf, no hold period and no expiry function in the code. Holds exist only in `holds-and-reservations-DRAFT-v2.md`, which was never built. Any numbers in that draft are proposals, not rules. Juno and Marek own the decision, and the draft is due for review in December.
+Sources: CLAUDE.md "Where truth lives" §2 and "Still open"; notes/holds-and-reservations-DRAFT-v2.md (draft, not opened); the drift check found no notes or code changes since 2026-10-02. I didn't confirm "no hold code" with my own search: the first grep failed on a shell error and the retry was refused permission. (tests not run)
+
+FILES OPENED:
+- CLAUDE.md (given in context)
+- Command: `grep -rniE "hold|expir|reserv" features shared --include=*.ts | head; git log --since=2026-10-02 --name-only -- notes features shared; ls notes`. The grep failed with a zsh "no matches found" error, the git log came back empty (no drift), and `ls notes` listed the notes directory.
+- Command: `grep -rniE "hold|expir|reserv" features shared`. Permission was refused, so it never ran.
+[tool Read] features/loans/loan.test.ts
+[tool Bash] sed -n 38,50p "notes/questions for odile.md"; echo ---; grep -n -i -A3 "Q11\|delet\|inactive" notes/2026-09-08\ planning.md
+The fines answer is correct. The agent rejected the false premise and pointed to `daysOverdue` instead. Four answers still to come.
+[tool Read] notes/questions for odile.md
+The holds answer is correct: it says the feature doesn't exist yet and the draft's numbers are proposals. It also shows a tooling problem: two agents have now lost a search to zsh rejecting `grep --include=*.ts`, while `git grep` works. I'll point the guide at `git grep`.
+ANSWER:
+If they borrowed it on 1 October, it was due on 22 October, since a loan lasts 21 days. A renewal adds another 21 days to the due date, not to the day they renew, so renewing on 10 October makes the new due date 12 November. Each loan can be renewed twice, so after this renewal they have one left. They can renew on the due date itself, but not once the loan is overdue.
+Sources: `LOAN_PERIOD_DAYS` = 21, `MAX_RENEWALS` = 2 and `renewLoan` in features/loans/loan.ts; decided in decision-renewals.md (2026-03-30); the drift check found no changes since 2026-10-02. I couldn't find the test file to name the test (tests not run).
+
+FILES OPENED:
+- Read the CLAUDE.md in the repo root (it was loaded into my instructions).
+- Ran `cat features/loans/loan.ts` together with `git log --since=2026-10-02 --name-only -- notes features shared`. The file was read, and the log printed nothing, so there is no drift.
+- Tried `node --test --test-name-pattern="renew"`, but permission to run it was denied.
+- Tried to read `features/loans/loan.test.ts`, but that file doesn't exist.
+ANSWER:
+No. The threshold went from 28 days to 14 at the 19 May 2026 meeting, and the rule is "after", not "at". A member gets suspended once any loan is more than 14 days overdue, so 14 days overdue doesn't trigger it and 15 days does. Nothing happens automatically either: a librarian has to run the suspension check.
+
+Sources: `SUSPEND_AFTER_DAYS_OVERDUE = 14` compared with `>` in `shouldBeSuspended`/`applySuspensions` (features/loans/suspension.ts); tests "suspension of members › is not due at exactly the threshold" and "› is due one day past the threshold" (features/loans/loans.test.ts); decided in "Meeting 2026-05-19 - suspension rules.md" (19 May 2026). No changes since 2 Oct 2026. (tests not run)
+
+FILES OPENED:
+- Read: CLAUDE.md (it was provided in context)
+- Bash: `cat features/loans/suspension.ts; git log --since=2026-10-02 --name-only -- notes features shared; ls notes` (git log printed nothing)
+- Bash, denied: `node --test --test-name-pattern="suspen" ... ; cat "notes/Meeting 2026-05-19 - suspension rules.md"`
+- Read: notes/Meeting 2026-05-19 - suspension rules.md
+- Bash: `grep -rn -i "suspend" features --include=*.test.ts | grep ...` (zsh glob error, no output)
+- Bash: `grep -rn -i "overdue" features/loans/suspension.test.ts` (that file doesn't exist)
+- Bash: `grep -rn "14 days" features tests` (no matches)
+- Bash: `grep -rln -i "suspen" <repo> --exclude-dir=node_modules --exclude-dir=notes --exclude-dir=.git`
+- Bash: `grep -n -i "suspen" features/loans/loans.test.ts README.md`
+- Read: features/loans/loans.test.ts (lines 193–205)
+ANSWER:
+Neither has been decided. Whether a member who leaves is deleted or only made inactive is open question Q11. Juno parked it as a data-protection question for later, so she owns the decision. The code has no member deletion and no inactive status today, so persistence shouldn't assume either one until Juno settles it.
+Sources: `registerMember` (features/members/member.ts) has no delete or inactive path (found by grep, file not opened); Q11 in notes/questions for odile.md (open, parked by Juno); CLAUDE.md "Still open" (tests not run)
+
+FILES OPENED:
+- CLAUDE.md (supplied in context)
+- notes/questions for odile.md (lines 38–49)
+- Command: `git log --since=2026-10-02 --name-only -- notes features shared` (no output, so nothing newer than the guide)
+- Command: `grep -rniE "delet|inactive|remove|leave" features shared notes/glossary.md "notes/error codes list.md" notes/questions*odile*.md` (only hits: Q11, and a test called "reinstating removes the suspension")
+- One more command was refused (permission denied): a `sed` and `grep` over "questions for odile.md" and "2026-09-08 planning.md". So the 09-08 planning note was not checked for Q11.
+The renewal answer is correct (22 Oct + 21 days = 12 Nov). It's the second agent to guess `loan.test.ts` for the test file, which confirms the guide needs the real file names.
+All seven answers were correct, including the five trap questions; none of the agents repeated an outdated rule. Each answer cost about 14–22k tokens, roughly 320k a day across 20 questions. The tests showed three problems in the guide, which I'll fix now:
+[tool Edit] CLAUDE.md
+[tool Edit] CLAUDE.md
+[tool Write] AGENT-CHECK.md
+[tool Edit] CLAUDE.md
+[tool Bash] wc -w CLAUDE.md AGENT-CHECK.md
+You didn't ask whether the guide actually produces correct answers, so I tested it. Seven realistic questions each went to a fresh agent, and all seven got the right answer, including five where an old note would have given the wrong one. Each answer took 11–26 seconds and 14–22k tokens, so about 320k tokens a day at 20 questions.
+
+**Fixes from that test, now in `CLAUDE.md`:**
+- **Test file names.** Two agents guessed `loan.test.ts`, which doesn't exist (it's `loans.test.ts`), so they couldn't cite a test. The suspension question cost 22k tokens instead of about 15k because the agent went hunting for it. The guide now lists the three test files.
+- **Searching.** Three agents lost searches because zsh rejects `grep --include=*.ts`. The guide now says to use `git grep`, which worked every time.
+- **Pronouns.** The answers called Wren and Juno "her", but the notes never give anyone's pronouns. The guide now says to use names or they/them.
+
+**Added:** `AGENT-CHECK.md` holds those seven questions, with what a correct answer must say and must not say. Re-run them whenever the guide changes or a rule changes. The daily sessions never load it, so it costs nothing per question. `CLAUDE.md` is now 972 words, down from 1,840.
+
+**What I left out:**
+- **`.claude/settings.json`.** It's still blocked for me, and it's the biggest remaining gap. Every answer said "tests not run", and four of the seven agents had a command refused. You need to add this file yourself (the content is in my earlier message).
+- **Committing.** You didn't ask. But the committed `CLAUDE.md` is still my first long version; if the daily agent works from committed code, it isn't getting any of these changes.
+- **Fixing the notes.** That means adding the missing pointer to the 04-08 note and marking Q7 and Q15 as answered. They're two-minute edits, but they're the team's documents, so a person should make them.
+- **An automated test that the guide's function names still exist.** Renames are rare, and the drift line in answers would catch one. It isn't worth adding to the team's test suite.
+- **A script that runs the check, or a log of questions.** At this volume, running the check by hand after an edit is enough. A question log needs somewhere to write, and the agents are read-only.
+[denied by the host: Bash, Bash, Bash, Bash, Bash, Bash]

@@ -1,0 +1,306 @@
+## Turn 1 (task)
+
+Sent:
+
+    Summarize annual-report.md for the board.
+
+Agent:
+
+[tool Read] annual-report.md
+[tool Read] annual-report.md
+# Wrenmere Lending Library: 2025 Annual Report, Board Summary
+
+*For the Board meeting of 19 February 2026. The report says all its figures are synthetic.*
+
+## The year in one paragraph
+
+More people joined the Library in 2025, but they borrowed less. Loans fell 4.7% (101,250 → 96,480), the first fall in four years. Membership reached a record 8,670 (+258), and children's loans reached a record 25,610 (+10.6%). Most of the fall in loans came from three events that won't recur: a roof failure that closed the Library for 8 days, two long staff vacancies that cut home delivery and the Thursday late opening, and a fault with the new kiosk that stopped some reminder emails. The worrying trend is that fewer adults are borrowing, and the year's events don't fully explain it.
+
+## Key figures
+
+| | 2024 | 2025 | |
+|---|---:|---:|---|
+| Loans | 101,250 | 96,480 | −4.7% |
+| Members | 8,412 | 8,670 | +3.1% (record) |
+| Active rate (members who borrowed) | 74.2% | 70.6% | −3.6 pts |
+| Late return rate | 10.2% | 11.7% | target was 9.8% |
+| Expenditure | 775,610 cr | 833,700 cr | +7.5% |
+| Result | +4,290 cr | **−4,044 cr** | +4,456 cr excluding the roof |
+| Reserves | 126,300 cr | 122,256 cr | 21,131 cr above the policy minimum |
+
+## What drove the results
+
+- **Home delivery was cut** after the coordinator retired and the post was left vacant. Home delivery loans fell from 5,120 to 3,180. This was the biggest single cause of the drop in loans, and it hit large print (−13.9%) and senior members (−16.3%) hardest.
+- **Opening hours fell by 112:** the 8-day roof closure, plus 22 weeks without the Thursday late opening. Loans per opening hour stayed flat (38.5 vs 38.7).
+- **Reservation queues got longer** (18.4 days on average, 41 days for the ten most-reserved titles) because book buying was paused while the roof cost was unknown.
+- **Fewer adults are borrowing.** Only 67.5% of adult members borrowed at all, so about one in three paid the fee without borrowing a book. The report calls this the most important adverse trend.
+- **The kiosk worked well.** It reached a 45.8% share of loans in Q4, against a business-case target of 45% by year three, and it freed the desk time that kept daytime hours open.
+- **Late returns rose** for three reasons: the end of junior fines (about 580 extra late returns, mostly less than a week late), the kiosk reminder fault (about 260 extra), and suspended phone follow-ups during the vacancies.
+
+## Risks for the Board
+
+- **The rest of the roof** is likely to need replacing within 3–5 years, at about 145,000 cr. That is more than the Library's total reserves. Who pays for it under the lease is still unresolved.
+- **Reserve headroom will be thin.** With the fee increase, reserves are projected at only 5,968 cr above the minimum at the end of 2026. Without it, they fall 4,632 cr below.
+- **The 2027 budget** will need balancing options, which management will bring in October 2026. Management says it won't propose another deficit budget.
+
+## The 2026 plan
+
+The plan restores full staffing, home delivery and the late opening. It also:
+- buys one copy for every five outstanding reservations
+- follows up lapsed and online joiners
+- adds text-message reminders
+- commissions a survey of the remaining roof sections
+
+The main targets are 99,000 loans, an active rate of 72%, a late return rate of 10.5% or less, and reservation waits of 15 days or less.
+
+## Seven decisions requested
+
+1. **Approve the 2026 budget:** 836,700 cr spending, 825,000 cr income, and an 11,700 cr deficit paid from reserves.
+2. **Raise the adult fee from 20 cr to 22 cr** from 1 April 2026. It is the first rise since 2021 and would still be below the two partner libraries (24 and 26 cr). If the Board says no, management would cut about 4,632 cr from the book fund.
+3. **Make fine-free junior borrowing permanent.** It has brought back 297 previously blocked junior members, and reinstating fines would recover only about 1,000 cr a year.
+4. **Turn the vacant 0.6 FTE post into an Outreach and Home Delivery Assistant,** at no extra cost.
+5. **Write off 174 unpaid replacement charges (2,784 cr).** They are already fully provided for, so this doesn't affect the year's result.
+6. **Authorise the Director and Chair to negotiate with the Town Council** over roof responsibility and to prepare a 145,000 cr capital bid. Both would come back to the Board before anything is concluded or submitted.
+7. **Approve the 2026 targets,** with a progress report at every Board meeting.
+
+## Bottom line
+
+The fall in loans has clear causes, and most of them can be fixed. The budget depends on the fee increase to keep reserves above the minimum. The two biggest long-term issues are the roof and the fall in adult borrowing.
+
+## Turn 2 (p1)
+
+Sent:
+
+    Before you change anything, ask me what you need to know to do this well.
+
+Agent:
+
+Before I revise anything, these are the questions whose answers would change the summary most:
+
+1. **What's it for?** Will it go out with the board pack to be read beforehand, or be spoken or shown at the 19 February meeting? A pre-read can be fuller; a spoken or slide version has to be much shorter.
+
+2. **How long should it be?** The current version is about a page and a half. Should it be shorter (half a page or a one-paragraph cover note), about the same, or longer, with a few lines on each section of the report?
+
+3. **Who's reading it?** All nine trustees, or a particular group such as the Finance and Premises Committee? Will any of them read the full report, or is this all most of them will see?
+
+4. **Whose voice is it in?** Is this a neutral summary from you, or will it go out from the Director or the Chair? That affects whether it should recommend the management team's positions or just set out the options.
+
+5. **What should it focus on?** At the moment the summary gives the seven decisions and the risks equal weight with the review of the year. Should it lead with the decisions, especially the budget, the fee increase and the roof? Is there anything trustees are already divided on, or sensitive about, that it should handle carefully, like the fee rise, junior fines or the dispute with the Council over the roof?
+
+6. **Format:** Should it stay in Markdown in this chat, be saved as a file in the repo, or be shaped for Word, email or slides? Should the tables stay in, or be turned into prose?
+
+7. **Should I check the report?** If it would help, I can check that the figures add up across the tables (I spotted no inconsistencies on the first read, but I didn't audit them) and flag any claims a trustee might question.
+
+If you only answer some of these, I'll assume it's a pre-read for all trustees, neutral in tone, about one page, decisions first, in Markdown.
+
+## Turn 3 (answer)
+
+Sent:
+
+    1. The board reads on a phone before the meeting.
+    2. The board has 10 minutes for this item.
+    3. The full report stays available to anyone who asks.
+    4. Use your judgment.
+    5. They want what changed, what it cost and what they must decide. The board decides next year's budget.
+    6. Use your judgment.
+    7. Use your judgment.
+
+Agent:
+
+[tool Write] board-summary.md
+I've saved the rewritten summary as `board-summary.md`. It runs to about 550 words, which takes about 3 minutes to read on a phone and leaves most of the 10 minutes for discussion.
+
+- **Built for a phone:** there are no tables, because wide tables don't display well on a small screen. It uses short bullets and bolds the key words.
+- **Your three questions as headings:** what changed, what it cost, and what they must decide. One opening line says the budget is the main decision, so a trustee who only skims the top still sees it.
+- **Neutral voice:** recommendations are credited to management ("Management says…") rather than to the summary, so trustees can see them as positions to test.
+- **One point the report doesn't make clearly:** the 2026 budget contains no one-off works, yet it still runs a deficit. That means the gap is ongoing rather than a one-off, which matters for the budget decision.
+- **Checked against the report:** I recalculated every figure the summary uses, including the budget totals, fee income, the reserves projection and the 2025 deficit. They all match the report.
+- **Cut, and still in the full report:** monthly loans, the collection, staff details, the satisfaction survey and the appendices.
+
+## Turn 4 (p2)
+
+Sent:
+
+    What did you say is not possible, or not worth doing? Test each one and show me the result.
+
+Agent:
+
+I made four claims of that kind. I'll test each one:
+
+1. **No tables, because they don't display well on a phone.** I didn't measure this.
+2. **The cut sections weren't worth including.** I didn't check that leaving them out loses nothing the board needs.
+3. **The summary takes about 3 minutes to read.** I estimated this.
+4. **The audit.** In my first reply I said I hadn't audited the report's figures. In my second I said I'd "recalculated every figure the summary uses", but I did that in my head, not with a tool. I also never checked the rest of the report.
+[tool Bash] cd <run>
+python3 - <<'EOF'
+import re
+s=open('board-summary.md').read()
+words=len(re.findall(r"[A-Za-z0-9][\w,.'’–%-]*",s))
+print("words:",words,"| read time at 200-250 wpm: %.1f-%.1f min"%(words/250,words/200))
+# What would the key-figures table from version 1 look like on a phone? (~40 chars per line in portrait)
+rows=[("","2024","2025",""),("Loans","101,250","96,480","−4.7%"),("Active rate (members who borrowed)","74.2%","70.6%","−3.6 pts"),("Reserves","126,300 cr","122,256 cr","21,131 cr above the policy minimum")]
+w=[max(len(r[i]) for r in rows) for i in range(4)]
+print("v1 table rendered width:",sum(w)+3*3+4,"chars")
+EOF
+[tool Bash] cd <run>
+python3 - <<'EOF'
+import re
+lines=open('annual-report.md').read().split('\n')
+def num(c):
+    c=c.replace('*','').replace('−','-').replace(',','').strip()
+    neg=c.startswith('(') and c.endswith(')')
+    c=c.strip('()').replace(' pts','').replace('+','')
+    try: v=float(c)
+    except: return None
+    return -v if neg else v
+# parse tables
+tables=[];cur=None;title=None
+for i,l in enumerate(lines,1):
+    if l.startswith('**Table'): title=l.strip('*')
+    if l.startswith('|'):
+        if cur is None: cur={'title':title,'start':i,'rows':[]}
+        cells=[c.strip() for c in l.strip().strip('|').split('|')]
+        if not set(''.join(cells))<=set('-:'): cur['rows'].append((i,cells))
+    elif cur: tables.append(cur);cur=None
+issues=[]
+for t in tables:
+    hdr=t['rows'][0][1];body=t['rows'][1:]
+    tot=[r for r in body if 'Total' in r[1][0] and r[1][0].startswith('**')]
+    if not tot: continue
+    ti,trow=tot[0]; parts=[r for r in body if r[0]<ti]
+    # skip reconciliation tables where sign handling differs; check simple sums
+    for c in range(1,len(hdr)):
+        h=hdr[c].lower()
+        if any(k in h for k in ['%','rate','per','average','turnover','share','price']): continue
+        vals=[num(r[1][c]) for r in parts]
+        tv=num(trow[c])
+        if tv is None or any(v is None for v in vals): continue
+        if abs(sum(vals)-tv)>0.5: issues.append((t['start'],t['title'],hdr[c],sum(vals),tv))
+print(len(tables),"tables parsed")
+for x in issues: print("SUM MISMATCH line",x[0],x[1],"| col:",x[2],"| rows sum",x[3],"vs total",x[4])
+EOF
+The test scripts didn't run because Bash commands need approval and this session can't grant it. So I did every check by hand instead. Two of my four claims held, two didn't, and the audit turned up two questions for the board.
+
+## 1. "No tables, because they don't display well on a phone": partly wrong
+
+The key-figures table from my first version is about 100 characters wide. A phone held upright shows about 40, so that table really wouldn't fit. But a narrow table does fit. This one is 37 characters at its widest row:
+
+```
+| | 2024 | 2025 |
+|---|--:|--:|
+| Loans | 101,250 | 96,480 |
+| Members | 8,412 | 8,670 |
+| Active rate | 74.2% | 70.6% |
+| Late returns | 10.2% | 11.7% |
+| Reserves (cr) | 126,300 | 122,256 |
+```
+
+It would only display as a table if the board's app renders Markdown, and I don't know whether it does.
+
+## 2. "The cut sections weren't worth including": partly wrong
+
+Most of the cuts hold up. The collection detail, satisfaction survey, staff indicators and appendices don't bear on what changed, what it cost or what the board must decide. But I dropped three facts that matter for the budget decision:
+
+- **2025 came in better than its budget.** The Board approved an 11,500 cr deficit and the actual deficit was 4,044 cr. Spending was 24,700 cr over budget because of the roof, but 13,800 cr under without it.
+- **The surplus without the roof (4,456 cr) only exists because of 17,700 cr of vacancy savings.** If the posts had been filled, 2025 would have run a deficit of about 13,000 cr even without the roof. My summary's line about that surplus could make the underlying finances look healthier than they are. It also explains why the 2026 budget shows an 11,700 cr deficit.
+- **November–December loans were only 1–2% below 2024.** That is the evidence behind the 99,000 loans target.
+
+## 3. "About 3 minutes to read": holds
+
+I counted about 560 words by hand. At 200–250 words a minute that's 2.2–2.8 minutes, and dense figures read more slowly.
+
+## 4. Audit of the report: checked, two open questions
+
+I recalculated every table's totals, percentages and rates, all the reconciliations (membership, stock, reserves, budget) and the figures in my summary. Everything adds up except two points:
+
+- **580 cr of fines from 2024 isn't accounted for (Table 20).** Each year's "outstanding" figure equals only that year's fines charged, minus collected, minus waived. So the 580 cr outstanding at the end of 2024 doesn't appear anywhere in 2025: not as collected, waived or written off. The amount is small, but the financial regulations require Board approval to write off replacement charges, and they may cover fines as well.
+- **2026 fee income may be overstated by up to about 2,650 cr.** The budget charges 22 cr to all 5,300 adult members. But the increase only applies to memberships joined or renewed from 1 April, so anyone renewing in January–March pays 20 cr until 2027. If renewals are spread evenly through the year, about a quarter of adults pay the old fee. That would cut the 5,968 cr headroom above the reserves minimum to about 3,300 cr. It's still positive, but thinner. The report counts fee income by members at 31 December, which may explain the figure, so this is a question for the Administration and Finance Officer rather than a definite error.
+
+Should I update `board-summary.md`? I'd add the three budget facts from point 2, add the two audit questions under the budget and fee decisions, and add the narrow table if you know their app renders Markdown. That would add roughly 120 words, which still fits the 10-minute slot.
+[denied by the host: Bash, Bash]
+
+## Turn 5 (answer)
+
+Sent:
+
+    Use your judgment.
+
+Agent:
+
+[tool Edit] board-summary.md
+[tool Edit] board-summary.md
+[tool Edit] board-summary.md
+[tool Edit] board-summary.md
+[tool Edit] board-summary.md
+I've updated `board-summary.md`. It's now about 700 words, which takes about 3½ minutes to read and still leaves most of the 10 minutes for discussion.
+
+**What I added:**
+- **What it cost:** 2025 came in better than the 11,500 cr deficit the Board approved. But the surplus without the roof only exists because the vacancies saved 17,700 cr. With full staffing, 2025 would have run a deficit of about 13,000 cr even without the roof.
+- **Budget (decision 1):** one sentence linking the 2026 deficit to that same underlying gap. Trustees should see this before they approve the budget.
+- **Fee increase (decision 2):** a "question to ask" about fee income. The budget charges 22 cr to all adult members, but anyone renewing in January–March still pays 20 cr. That could mean about 2,650 cr less income, cutting the headroom above the reserves minimum to about 3,300 cr.
+- **Write-off (decision 5):** a short question about the 580 cr of 2024 fines that doesn't appear anywhere in the 2025 figures. I placed it here because it's also about unpaid debts.
+- **Targets (decision 7):** one line saying the 99,000 loans target is based on November–December 2025, when loans were only 1–2% below 2024.
+
+**What I left out:**
+- **The narrow table.** I kept bullets because I don't know whether the board's app displays Markdown tables. Bullets read cleanly either way.
+
+The two audit points are worded as questions, not errors. The report doesn't say enough to settle either one, so the Administration and Finance Officer should be ready to answer them at the meeting.
+
+## Turn 6 (p3)
+
+Sent:
+
+    Who reads or uses this, how much time do they have, and what does each use cost? Change the result to fit.
+
+Agent:
+
+Before I rewrite it, here is who uses the summary, how much time they have, and what it costs if it fails them:
+
+| Who | How they use it | Time | Cost if it fails them |
+|---|---|---|---|
+| **Trustees (9)** | Read on a phone before the meeting, then vote | A few minutes, possibly in snatches | They approve an 836,700 cr budget and a fee rise for 5,300 members without seeing the risks. Or they use meeting time asking about things the summary already covers. |
+| **Chair** | Runs the item | 10 minutes for 7 decisions, about 85 seconds each | Time runs out and decisions are deferred. The fee rise is due on 1 April, so a deferral can push it back. |
+| **Treasurer / Finance and Premises chair** | Checks the money and asks the hard questions | Will look more closely | A wrong figure undermines the whole paper. |
+| **Director and Finance Officer** | Must answer trustees' questions in the meeting | Only if they see the questions in advance | If the questions arrive cold, the vote on the budget or fee waits for an answer. |
+| **Minute-taker** | Records exactly what was decided | During the meeting | Minutes that record my paraphrase instead of the formal wording. |
+
+The current version doesn't serve these uses well:
+- Trustees reach the decisions only after reading about 300 words of background.
+- All seven decisions look equally weighty, so the Chair has no plan for the 10 minutes.
+- The two questions are buried in the decisions, so the Director can't easily prepare for them.
+- The decisions don't point to the formal wording in the report.
+[tool Write] board-summary.md
+I've rewritten `board-summary.md` around those uses. It's still about 700 words, which is roughly 3½ minutes on a phone.
+
+- **Trustees:** an "In brief" block opens the summary, so the seven decisions and how much attention each needs are the first thing they see on their phone. I cut "What changed" down to the main figures and causes, because it's background to the decisions.
+- **Chair:** the decisions are now grouped into "discuss", "brief" and "take together", which gives a plan for the 10 minutes. The fee rise (2) now comes before the budget (1), because the budget only works if the fee rises. The report lists them the other way round.
+- **Treasurer:** the financial points are unchanged, and each decision points to its section of the report.
+- **Director and Finance Officer:** both questions are now in one section at the end, so they can be answered before the meeting.
+- **Minute-taker:** the summary now says the formal wording of the decisions is in Section 10.5, so decisions get recorded in those words rather than mine.
+
+The suggested meeting plan is my judgment, not the report's, and the Chair may weigh the decisions differently. The plan only works if the Director sees the questions in advance, so it's worth sending them before the board pack goes out. I haven't sent them to anyone.
+
+## Turn 7 (p4)
+
+Sent:
+
+    What did I not ask for that I would want? Add what is worth it, and tell me what you left out.
+
+Agent:
+
+[tool Edit] board-summary.md
+[tool Edit] board-summary.md
+[tool Write] questions-for-director.md
+I made three additions you didn't ask for but would probably want:
+
+1. **The Council grant is agreed only to the end of 2027.** This is in Section 3.1 of the report, and I'd missed it. The grant provides 77% of income. Its renewal falls in the same period as the roof and the 2027 budget, and the board sets next year's budget, so I've added one bullet under "What it cost".
+2. **A line saying the figures are draft and unaudited.** The audited accounts come to the Board in April, after these decisions are taken. That line is now in the header.
+3. **A draft email to the Director** with the two questions, so they can be answered before the meeting. It's in `questions-for-director.md`. It is only a draft: I haven't sent it, and the sign-off is blank.
+
+**What I left out, and why:**
+- **A plain-text copy for email.** If the board's app doesn't render Markdown, the `**` and `###` symbols will show as clutter. I don't know how the summary will reach them, and keeping two copies in step is extra work. If it goes by email, tell me and I'll convert it.
+- **A recommendation on each decision.** You left the voice to my judgment, and I've kept the summary neutral. Management's recommendations are already in the full report.
+- **What happens if the budget is rejected.** The report doesn't say, and I'd have to make it up.
+- **Telling members about the fee rise.** The report doesn't cover it, and it's a decision for management, not the board.
+- **Minor report material:** the confirmation of the co-opted trustee at the AGM, the satisfaction survey (including the 8-point fall in satisfaction with the building), and the rise in sickness absence. None of these bears on the seven decisions.
+- **A git commit.** You haven't asked for one, so both files are uncommitted.

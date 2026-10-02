@@ -38,7 +38,7 @@ In code the governor has its own form, the second-occurrence rule of chapter 4: 
 
 ## What the process does not have
 
-§7 of docs/05 lists seven things the process does not have.
+§7 of docs/05 lists eight things the process does not have.
 Each job still gets done, by something the process already has:
 
 * **No formal spec:** the page, `work/<slug>.md`, says what the delivery does, in the words of the person who reads it.
@@ -46,6 +46,7 @@ Each job still gets done, by something the process already has:
 * **No change folder:** the page is the change, in `work/<slug>.md` while it is built and in `work/done/` afterwards.
 * **No numbered tasks:** the Behaviour lines, each one a test or a check.
 * **No gate before implementation:** the person who reads the page before `/apply`, and asks for what is missing.
+* **No review of a review:** each line a milestone review adds passes through its own page, its proof and the person's commit.
 * **No specialized subagent**, an agent that another agent launches for one narrow role with its own instructions, such as a planner or a reviewer:[^claude-code-subagents] one agent that reads the documents.
 * **No tool the deliveries did not ask for:** the governor itself, which keeps it out until a delivery names the error it would have caught.
 
@@ -72,7 +73,7 @@ The governor keeps a process that small, and it lets a team say yes to a step wi
 * Ask anything that wants to enter the process, and every step already in it: which concrete error would it have caught?
 * The answer names an error that happened; a possible error justifies anything, and every step is paid by every delivery after it.
 * A step that names no error leaves, and a list of exceptions fails on an entry with no live warning.
-* Each of the seven things the process does not have has its job done by something it has: the page, the documents, the Behaviour lines, the person, one agent, and the governor itself.
+* Each of the eight things the process does not have has its job done by something it has: the page, the documents, the Behaviour lines, the person, the person's commit, one agent, and the governor itself.
 * The governor decides per project: Case A added a mark for lines waiting on a person, and this book, whose lines never wait on one, did not.
 
 [^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>
