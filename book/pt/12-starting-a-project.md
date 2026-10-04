@@ -128,7 +128,7 @@ Ponha tudo o que você tem sobre o projeto em uma pasta na raiz, `context/`, com
 Quanto mais a pasta guarda, propostas para o cliente, transcrições de reuniões, e-mails, melhores os documentos que o agente escreve a partir dela, e mais gente do time ele consegue responder, muito além do código.
 É a diferença entre "isto foi feito assim porque o cliente pediu, no e-mail do dia 12" e "ninguém sabe por que é assim".
 Chegou um documento novo, ponha-o na pasta e peça ao agente que o leia e traga para o projeto o que ele muda: uma regra para o docs/00, um termo para o docs/03, uma linha para a fila.
-Nenhum dos dois comandos procura essa pasta pelo nome, então diga isso na mesma mensagem, `/analyze Read context/ first, whole.` (leia `context/` primeiro, inteira); essa frase é instrução sua, e funciona também para o `/brainstorm` quando um briefing ou uma proposta existe antes do código.
+Os dois comandos procuram a pasta por esse nome e a leem inteira antes de qualquer outra coisa, então o `/brainstorm` parte do briefing ou da proposta que existe antes do código, e o `/analyze` do que o código não consegue dizer.
 Se a pasta entra no commit, e o que nunca pode entrar, é uma decisão própria ([capítulo 18](18-project-as-assistant.md)).
 
 ## Revise antes do commit

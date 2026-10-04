@@ -29,14 +29,14 @@ Nada disso foi escrito para o gerente; um documento que responde à construção
 ## A pasta de contexto
 
 O que o código e os documentos não conseguem dizer fica numa pasta na raiz do projeto, `context/`: os emails do cliente, a proposta, as notas de uma reunião, uma decisão que o cliente tomou numa chamada.
-Guarde tudo em Markdown, porque o agente lê texto: um PDF ou um email exportado vira um arquivo Markdown uma vez, quando chega, e o agente pode fazer a conversão.
+O agente lê texto, então cada item é um par: o original como chegou, guardado como está, e ao lado dele um arquivo Markdown com o mesmo nome mais `.md` (`proposta.pdf.md`) que traz o que o original diz, inteiro, não um resumo dele; o agente pode fazer a conversão, uma vez, quando ele chega, e um item que chega como texto é só o arquivo Markdown.
 Escreva ali primeiro cada mensagem que você envia, como registro, e envie uma cópia dela.
 Um layout para a biblioteca de empréstimos da Parte I, escrito para este capítulo:
 
 ```text
 context/
   notas/        um arquivo por reunião, com a data no nome
-  recebidos/    cada email ou documento de fora, em Markdown
+  recebidos/    cada email ou documento de fora, com seu Markdown
   enviados/     cada mensagem enviada, escrita aqui antes de sair
   registro-de-trabalho.md
 ```
@@ -122,7 +122,7 @@ No Caso A, vinte perguntas a pessoas de fora foram acompanhadas até as resposta
 ## Pontos-chave
 
 * Os documentos, a fila, as páginas e o histórico do git já respondem o que está pendente, o que está em andamento e quanto tempo cada entrega levou.
-* A pasta de contexto guarda o que o código não consegue dizer, em Markdown; ela entra em commit quando o repositório fica com o time, e fica de fora quando o repositório é entregue ou público.
+* A pasta de contexto guarda o que o código não consegue dizer, cada original ao lado do seu Markdown; ela entra em commit quando o repositório fica com o time, e fica de fora quando o repositório é entregue ou público.
 * Um registro de trabalho com duas tabelas, perguntas enviadas e ainda em aberto, responde "quem me deve uma resposta" e escreve o lembrete.
 * A resposta do agente parece certa mesmo quando está errada: peça o arquivo por trás dela, e interprete, guie e valide.
 * Um gerente abre o host na raiz do projeto e pergunta em palavras simples; o mesmo arquivo de regras faz o agente ler os documentos primeiro.

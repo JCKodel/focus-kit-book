@@ -29,14 +29,14 @@ None of this was written for the manager; a document that answers the build also
 ## The context folder
 
 What the code and the documents cannot say lives in a folder at the project's root, `context/`: the client's emails, the proposal, the notes of a meeting, a decision the client took on a call.
-Keep it in Markdown, because the agent reads text: a PDF or an exported email becomes a Markdown file once, when it arrives, and the agent can do the conversion.
+The agent reads text, so every item is a pair: the original as it arrived, kept as it is, and beside it a Markdown file with the same name plus `.md` (`proposal.pdf.md`) that holds what the original says, whole, not a summary of it; the agent can do the conversion, once, when it arrives, and an item that arrives as text is the Markdown file alone.
 Write every message you send there first, as the record, and send a copy of it.
 A layout for the lending library of Part I, written for this chapter:
 
 ```text
 context/
   notes/        one file per meeting, named by its date
-  received/     each email or document from outside, as Markdown
+  received/     each email or document from outside, with its Markdown
   sent/         each message sent, written here before it goes out
   work-record.md
 ```
@@ -122,7 +122,7 @@ On Case A, twenty questions to outside people were followed to their answers, th
 ## Key points
 
 * The documents, the queue, the pages and the git history already answer what is pending, what is in progress and how long each delivery took.
-* The context folder holds what the code cannot say, in Markdown; it is committed when the repository stays with the team, and kept out when the repository is delivered or public.
+* The context folder holds what the code cannot say, each original beside its Markdown; it is committed when the repository stays with the team, and kept out when the repository is delivered or public.
 * A work record with two tables, questions sent and still open, answers "who owes me an answer" and writes the reminder.
 * The agent's answer reads as right even when it is wrong: ask for the file behind it, and interpret, guide and validate.
 * A manager opens the host at the project's root and asks in plain words; the same rules file makes the agent read the documents first.

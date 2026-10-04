@@ -128,7 +128,7 @@ Put everything you have about the project in one folder at the root, `context/`,
 The more the folder holds, proposals to the client, meeting transcripts, emails, the better the documents the agent writes from it, and the more of the team it can answer, well beyond the code.
 It is the difference between "this was built this way because the client asked for it, in the email of the 12th" and "nobody knows why it is like this".
 When a new document arrives, put it in the folder and ask the agent to read it and bring into the project what it changes: a rule into docs/00, a term into docs/03, a line into the queue.
-Neither command looks for the folder by name, so say it in the same message, `/analyze Read context/ first, whole.`; that sentence is your instruction, and it works for `/brainstorm` too when a brief or a proposal exists before the code.
+Both commands look for the folder by that name and read it whole before anything else, so `/brainstorm` starts from the brief or the proposal that exists before the code, and `/analyze` from what the code cannot say.
 Whether the folder is committed, and what must never be, is a decision of its own ([chapter 18](18-project-as-assistant.md)).
 
 ## Review before you commit
