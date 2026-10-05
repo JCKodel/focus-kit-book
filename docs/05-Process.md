@@ -130,6 +130,12 @@ conversation in any session.
   `status: draft` in its front matter, in both editions; the site shows a
   banner and a mark in the navigation, and the chapter's delivery removes
   the line when done. So the site can publish `main` at any time.
+* **Context:** `context/` is listed in `.gitignore`: the repository is
+  public and what people said about the book's cases is private. The
+  folder does not exist today: the sources stay in the author's folders
+  outside the repository, named nowhere (ADR-0012), and the author's
+  decisions arrive by conversation and go into the documents. A folder
+  created later stays out of git; back it up elsewhere.
 * **Guided project and brownfield project:** retired by `rewrite`
   (ADR-0017). The repositories `JCKodel/focus-kit-clinic` and
   `JCKodel/clahub` and their published tags stay as they are and no
