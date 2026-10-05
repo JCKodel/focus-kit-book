@@ -19,12 +19,12 @@
     vertical-align: top;
     padding-top: 22.5pt;
   }
-  /* The notes of the page, under a short amber bar: a gradient that stops at 30pt, since a border would run the whole width. */
+  /* The notes of the page, under a short amber bar: an SVG of 30pt by 2.25pt, since a border would run the whole width.
+     Not a gradient: weasyprint cuts a gradient's background-size only through a soft mask, which Preview stretches over the whole notes area. */
   @footnote {
     margin-top: 10.5pt;
     padding-top: 8.25pt;
-    background: linear-gradient(to right, #F2A33A 30pt, transparent 30pt) no-repeat;
-    background-size: 100% 2.25pt;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='2.25'%3E%3Crect width='30' height='2.25' fill='%23F2A33A'/%3E%3C/svg%3E") no-repeat 0 0 / 30pt 2.25pt;
   }
 }
 

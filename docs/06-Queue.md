@@ -222,5 +222,5 @@ When this milestone closes, a reader knows the six marks of focus-kit 2026.10.05
 [x] context-slot             docs/05 §5 gains the kit's Context slot: `context/` listed in `.gitignore`, not created
 [x] m10-review               the review of M10 as docs/05 §8 says
 [x] pdf-contents-one-page    the contents of each edition's PDF fit on one page, and a chapter's number in it is no larger than its page number; both editions
-[ ] pdf-footnote-numbers     footnote numbers in each edition's PDF render as plain numbers beside their notes, with no coloured block behind them; both editions
+[x] pdf-footnote-numbers     footnote numbers in each edition's PDF render as plain numbers beside their notes, with no coloured block behind them, in Preview too, where the notes' amber bar, a gradient, paints over them; both editions
 ```
