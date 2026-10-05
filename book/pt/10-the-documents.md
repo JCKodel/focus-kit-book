@@ -53,7 +53,7 @@ O docs/01 registra a resposta, e um ADR registra o porquê.
 
 **A estratégia de git.** Três respostas, cada uma para um jeito de trabalhar: trunk, tudo no branch principal, uma entrega por vez, para uma pessoa sozinha; um branch por entrega, integrado por um pull request revisado, para trabalho em sequência; um worktree por entrega, uma segunda pasta de trabalho no seu próprio branch, para que vários agentes construam entregas diferentes ao mesmo tempo.
 Em todas, a página e a construção de uma entrega são uma mudança que se desfaz em um passo, e o agente nunca faz commit nem merge.
-Os capítulos 19 e 20 ensinam as três.
+Os capítulos 20 e 21 ensinam as três.
 O slot Git do docs/05 registra a resposta, e um ADR registra o porquê.
 
 ## ADRs

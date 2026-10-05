@@ -98,4 +98,3 @@ MkDocs has its own message format, so `scripts/build.py` rewrites each warning a
 * Code examples in many languages (ADR-0008).
 * A link shortener or playground server for code snippets: the guided project's tagged repository does that job.
 * Reusing text from the author's earlier books (ADR-0005).
-* The `[?]` mark (ADR-0013).

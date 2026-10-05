@@ -1,4 +1,4 @@
-# 16. Closing a milestone
+# 17. Closing a milestone
 
 After this chapter you can close a milestone: plan its review as the milestone's last line, test each clause of its paragraph by hand, and turn each finding into a `[ ]` line in the same milestone, under the review.
 You can also say why that review reads no code and why its findings get no review of their own.
@@ -16,7 +16,7 @@ The kit closes that gap in one rule, §8 of the process document it writes, docs
 A milestone is planned with its review as its last line, `<milestone>-review`, a delivery like the others: `/propose` writes its page, and `/apply` runs it.
 Its page takes the milestone's paragraph clause by clause and writes, for each, which delivery answers it and how a person tests it.
 It reviews no code and fixes nothing.
-Code is read where each change is small enough to read: in the staged change before each delivery's commit (chapter 15), and in the pull request, when the team lands its deliveries through one (chapter 21).
+Code is read where each change is small enough to read: in the staged change before each delivery's commit (chapter 15), and in the pull request, when the team lands its deliveries through one (chapter 22).
 
 ## Test each clause by hand
 

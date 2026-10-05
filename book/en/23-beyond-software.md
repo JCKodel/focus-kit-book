@@ -1,4 +1,4 @@
-# 22. Projects that are not software
+# 23. Projects that are not software
 
 After this chapter you can run a proposal, an analysis, a handover document, a data rule or a book as deliveries, each on a page whose Done when a person can tick.
 You can also say why a finding with no line in a queue gets lost.
@@ -56,7 +56,7 @@ A solution design, an installation guide in three formats, a handover document a
 The evidence pack shows the Contract as structure: indexed by the acceptance criteria, it lets the client check the delivery criterion by criterion and find the proof of each.
 
 Some deliveries produce nothing but a person's written answer.
-A question delivery's page says what is asked, of whom, and what each possible answer unblocks, and it is done when the answer arrives (chapter 21).
+A question delivery's page says what is asked, of whom, and what each possible answer unblocks, and it is done when the answer arrives (chapter 22).
 Of Case A's 73 done lines, 8 were questions to people and about eight were documents.
 
 ## Data work as deliveries

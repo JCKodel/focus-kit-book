@@ -1,6 +1,6 @@
 # 13. A fila e os marcos
 
-Depois deste capítulo você consegue ler uma fila, dizer o que cada marca significa e que comando a muda, e escrever um parágrafo de marco que uma pessoa consegue conferir.
+Depois deste capítulo você consegue ler uma fila, dizer o que cada marca significa, e escrever um parágrafo de marco que uma pessoa consegue conferir.
 Você também consegue dimensionar e ordenar um marco, e acrescentar ou mudar uma linha conversando.
 
 ## O problema
@@ -27,15 +27,20 @@ Uma linha que cresce até virar um parágrafo é uma decisão no lugar errado, j
 
 ## As marcas
 
-Uma linha tem uma de três marcas, e um comando move cada uma:
+Uma linha tem uma de seis marcas, que diz onde a entrega dela está:
 
 * `[ ]` ainda não definida: a entrega tem uma linha e nenhuma página.
-* `[>]` definida: o `/propose` escreveu a página, `work/<slug>.md`, e pôs a marca.
-* `[x]` feita: o `/apply` a construiu, moveu a página para `work/done/` e pôs a marca ([capítulo 15](15-apply.md)).
+* `[~]` sendo definida: uma conversa está escrevendo a página dela.
+* `[>]` definida: a página dela, `work/<slug>.md`, existe e espera ser construída.
+* `[*]` sendo construída: uma sessão a está construindo.
+* `[x]` feita: foi construída, e a página dela foi para `work/done/` ([capítulo 15](15-apply.md)).
+* `[?]` esperando: não consegue seguir até outra coisa acontecer, e a linha diz o quê.
+
+O [capítulo 16](16-queue-states.md) mostra quem põe cada marca e em que momento, e como uma linha espera e sai de `[?]`.
 
 Uma linha nunca sai da fila; ela muda de marca.
 Então a fila é também o histórico do que foi entregue, na ordem em que foi planejado, e a página em `work/done/` por trás de cada `[x]` diz o que aconteceu.
-No trunk (direto na linha principal do histórico) a página espera sem commit (sem ser registrada no histórico) entre os dois comandos, e o `/apply` a lê da árvore de trabalho, então uma sessão nova a encontra tendo ou não havido commit ([capítulo 19](19-git-essentials.md)).
+No trunk (direto na linha principal do histórico) a página espera sem commit (sem ser registrada no histórico) entre os dois comandos, e o `/apply` a lê da árvore de trabalho, então uma sessão nova a encontra tendo ou não havido commit ([capítulo 20](20-git-essentials.md)).
 
 Este é o primeiro marco da biblioteca alguns dias depois do começo do trabalho, escrito para este capítulo:
 
@@ -74,7 +79,7 @@ Depois cada linha vem após as linhas de que precisa: uma bibliotecária não co
 
 ### A revisão, e os seus achados
 
-Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, uma entrega como as outras, que pega o parágrafo cláusula por cláusula ([capítulo 16](16-closing-a-milestone.md)).
+Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, uma entrega como as outras, que pega o parágrafo cláusula por cláusula ([capítulo 17](17-closing-a-milestone.md)).
 Ela não revisa código e não corrige nada: uma pessoa testa cada cláusula à mão.
 Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, e essas linhas não têm segunda revisão.
 
@@ -91,12 +96,12 @@ Você lê a mudança antes do commit, como com todo documento, e ninguém edita 
 A fila é o quadro de status compartilhado do time e o histórico dele em um arquivo: o que vem a seguir, o que está em andamento, o que foi feito e em que ordem, legível por um gerente sem ferramenta nenhuma e por um agente no começo de toda sessão.
 Na Ninjobs ela guardou 102 entregas, feitas e ainda não feitas, em um arquivo.
 No Caso A, um projeto para um cliente em uma plataforma low-code, o Microsoft Power Apps com o Copilot Studio, o relatório de status e a estimativa de risco para o gerente de projeto foram escritos a partir da fila e das páginas, não de memória, e a fila deu o ritmo: cerca de 9 linhas fechadas e 6 abertas por dia.
-O [capítulo 18](18-project-as-assistant.md) conta o resto do Caso A, e o [capítulo 21](21-team-tools.md) mostra como a fila dele foi espelhada no quadro que o gerente de projeto já usava.
+O [capítulo 19](19-project-as-assistant.md) conta o resto do Caso A, e o [capítulo 22](22-team-tools.md) mostra como a fila dele foi espelhada no quadro que o gerente de projeto já usava.
 
 ## Pontos-chave
 
 * O docs/06 guarda marcos, cada um com um parágrafo, e uma linha por entrega sob ele: uma marca, um slug e o que ela entrega, em uma linha; o raciocínio vai para a página.
-* Três marcas: `[ ]` não definida, `[>]` a página existe (`/propose`), `[x]` feita (`/apply`); uma linha nunca sai, então a fila é também o histórico.
+* Seis marcas: `[ ]` não definida, `[~]` sendo definida, `[>]` a página existe, `[*]` sendo construída, `[x]` feita, `[?]` esperando; uma linha nunca sai, então a fila é também o histórico.
 * O parágrafo de um marco é um teste que uma pessoa confere no produto, nunca um tema.
 * De três a oito entregas, o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados viram linhas sob ela no mesmo marco.
 * Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido.

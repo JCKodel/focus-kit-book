@@ -40,7 +40,7 @@ Uma entrega virou uma página, `work/<slug>.md`.
 Dois comandos faziam o trabalho: o `/propose` conversa comigo e escreve a página, nunca código; o `/apply` constrói a página, faz a verificação e compara a tela com o design.
 A fila virou uma linha por entrega.
 Das 29 verificações, ficaram duas, ambas voltadas para o próprio produto: uma prova do que cada nível de privacidade de um perfil pode mostrar, e um teste das regras de acesso do banco de dados.
-Tudo o que quisesse voltar tinha de responder a uma pergunta, o regulador do capítulo 17: que erro concreto isso teria pegado?
+Tudo o que quisesse voltar tinha de responder a uma pergunta, o regulador do capítulo 18: que erro concreto isso teria pegado?
 Uma voltou mais tarde, um lint do banco de dados, porque apontou um: um índice duplicado que nenhum teste tinha notado.
 
 O Ninjobs abriu ao público em 2026-09-10, treze dias depois do recomeço, com 91 entregas de uma página concluídas.
@@ -65,7 +65,7 @@ Toda regra do focus-kit existe porque alguma coisa falhou sem ela.
 * **O agente coloca em stage e a pessoa faz o commit.**
   Responde às 29 verificações que nunca olhavam o produto: a verificação que olha é uma pessoa lendo cada mudança antes que ela entre no histórico (capítulo 15).
 * **Nada entra sem dizer o erro que teria pegado.**
-  Responde ao crescimento das verificações, cada uma plausível sozinha e todas juntas mais pesadas que o trabalho (capítulo 17).
+  Responde ao crescimento das verificações, cada uma plausível sozinha e todas juntas mais pesadas que o trabalho (capítulo 18).
 
 ## Escolha uma stack que o agente conhece bem
 

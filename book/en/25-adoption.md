@@ -1,4 +1,4 @@
-# 24. Adoption in teams and companies
+# 25. Adoption in teams and companies
 
 After this chapter you can take the method to a team or a company, answer the usual resistance with evidence, and give each role its part.
 You can also run one milestone as a pilot that measures itself, and shape the pitch for your own company.
@@ -18,10 +18,10 @@ Each has an answer that asks for evidence rather than for faith.
 It may.
 The prologue's rule applies to it as to everything else: a claim carries its source.
 Ask what it produced, measured how: how many deliveries, how many came back, what they cost.
-A way that works can show it, and the method gives it the means to, with a page per delivery and a count of tokens per delivery ([chapter 23](23-cost-and-where.md)).
+A way that works can show it, and the method gives it the means to, with a page per delivery and a count of tokens per delivery ([chapter 24](24-cost-and-where.md)).
 
 **"Too much process."**
-The method has a governor for that ([chapter 17](17-the-governor.md)): every step must name the concrete error it would have caught, or it leaves.
+The method has a governor for that ([chapter 18](18-the-governor.md)): every step must name the concrete error it would have caught, or it leaves.
 What survives is six rules and two checks.
 A team that finds a step that catches nothing removes it, and the method expects it to.
 
@@ -60,11 +60,11 @@ The method gives each step to whoever owns it.
 
 * **Who proposes:** whoever owns the decision.
   A developer proposes a technical delivery, an analyst a rule, a manager a question to the client; `/propose` is a conversation, and it needs someone who can answer ([chapter 14](14-propose.md)).
-* **Who applies:** a developer's session, or several at once in worktrees, each on its own delivery ([chapter 20](20-worktrees.md)).
+* **Who applies:** a developer's session, or several at once in worktrees, each on its own delivery ([chapter 21](21-worktrees.md)).
 * **Who commits and merges:** a person, always.
   `/apply` stages and stops; the commit is the human review ([chapter 15](15-apply.md)).
-* **Who reviews the milestone:** the team, on the running product, against the milestone's paragraph ([chapter 16](16-closing-a-milestone.md)).
-* **The manager** asks the project: what is pending, how it is going, who owes an answer ([chapter 18](18-project-as-assistant.md)).
+* **Who reviews the milestone:** the team, on the running product, against the milestone's paragraph ([chapter 17](17-closing-a-milestone.md)).
+* **The manager** asks the project: what is pending, how it is going, who owes an answer ([chapter 19](19-project-as-assistant.md)).
 
 ## One milestone as the pilot
 
@@ -75,9 +75,9 @@ Run it on one milestone of one project, and let the milestone decide.
 2. Run `/analyze`, so the documents describe what is already there, and review them ([chapter 12](12-starting-a-project.md)).
 3. Write one milestone of three to eight lines, each a delivery the team needs anyway ([chapter 13](13-queue-and-milestones.md)).
 4. Build it with `/propose` and `/apply`, one page per line.
-5. Close it with its review ([chapter 16](16-closing-a-milestone.md)).
+5. Close it with its review ([chapter 17](17-closing-a-milestone.md)).
 
-Measure two things: the tokens per delivery ([chapter 23](23-cost-and-where.md)), and what the review and the pages caught that would otherwise have shipped.
+Measure two things: the tokens per delivery ([chapter 24](24-cost-and-where.md)), and what the review and the pages caught that would otherwise have shipped.
 Then decide with those numbers on the table, and the next milestone becomes the comparison.
 
 ## The shape of a pitch
@@ -97,7 +97,7 @@ Use that shape for your own company: list its problems in its own words, and put
 A problem with nothing beside it is one the method does not solve, and saying so makes the rest credible.
 
 The proposal itself did not run on the process.
-It had no queue and no page, and [chapter 22](22-beyond-software.md) tells what that cost it.
+It had no queue and no page, and [chapter 23](23-beyond-software.md) tells what that cost it.
 
 ## What the team gains
 

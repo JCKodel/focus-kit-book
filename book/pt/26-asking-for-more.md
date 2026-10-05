@@ -1,4 +1,4 @@
-# 25. Pedir mais
+# 26. Pedir mais
 
 Depois deste capítulo você sabe dizer por que a primeira resposta de um agente parece final, nomeia as quatro coisas que um agente não propõe se você não pedir, e envia os quatro turnos do protocolo de desafio quando o trabalho vale o que eles custam.
 O protocolo de desafio são quatro mensagens, sempre as mesmas, que você envia depois da primeira resposta de um agente; cada mensagem e a resposta do agente a ela é um turno, e as quatro estão escritas, prontas para copiar, na seção "O protocolo de desafio".
@@ -6,7 +6,7 @@ No experimento deste livro, um juiz que não sabia qual resposta era qual teria 
 
 ## O card que eu aceitei
 
-No Caso A, o projeto de cliente do [capítulo 18](18-project-as-assistant.md), o agente precisava construir cards para o Microsoft Teams, escritos em Adaptive Cards, o formato que o Teams usa para mostrar um card num chat.
+No Caso A, o projeto de cliente do [capítulo 19](19-project-as-assistant.md), o agente precisava construir cards para o Microsoft Teams, escritos em Adaptive Cards, o formato que o Teams usa para mostrar um card num chat.
 O cliente mandou um PowerPoint com os cards que imaginava, e o agente tinha esse arquivo.
 Ele não os construiu.
 Disse que o desenho parecia mais uma página do que um Adaptive Card, e comentou algo sobre abas e botões, embora o desenho do cliente não tivesse abas.
@@ -102,7 +102,7 @@ Um teste devolve um resultado que não depende do que você parece querer.
 **O turno 3 nomeia quem lê e o custo.**
 Quem usa o resultado, com quanto tempo, e quanto custa cada uso: duas das quatro coisas que o agente não propõe, numa pergunta só.
 "Mude o resultado para caber nisso" pede a mudança, e não um conselho sobre ela.
-As técnicas que o agente vai usar quando cada uso gasta tokens, cobrados ou tirados de um plano, estão ensinadas em outro lugar: o arquivo de regras que diz onde mora cada fato ([capítulo 2](02-how-agents-see.md)), e o cache que barateia um contexto repetido ([capítulo 23](23-cost-and-where.md)).
+As técnicas que o agente vai usar quando cada uso gasta tokens, cobrados ou tirados de um plano, estão ensinadas em outro lugar: o arquivo de regras que diz onde mora cada fato ([capítulo 2](02-how-agents-see.md)), e o cache que barateia um contexto repetido ([capítulo 24](24-cost-and-where.md)).
 
 **O turno 4 pede o que você não pediu, e mantém você decidindo.**
 "Valer a pena" pede ao agente que pese cada acréscimo, e "me diga o que você deixou de fora" põe o resto diante de você.
@@ -133,7 +133,7 @@ Uma sessão de cada vez, uma primeira resposta levou de 24 segundos a pouco mais
 Numa assinatura fixa, esses tokens saem do limite de sessão do plano: o uso do modelo que um plano permite numa janela de horas, depois do qual o host recusa turnos novos até a janela acabar.
 O experimento rodou as suas nove sessões desafiadas numa tarde, todas em cerca de 45 minutos, e o plano do autor acabou antes do último turno do protocolo: nas nove, o host respondeu "You've hit your session limit", e esse turno foi enviado de novo cerca de 30 minutos depois.
 Cada protocolo que você envia gasta uma parte desse limite.
-Se você paga por token, o [capítulo 23](23-cost-and-where.md) mostra como transformar tokens em preço.
+Se você paga por token, o [capítulo 24](24-cost-and-where.md) mostra como transformar tokens em preço.
 
 O braço do custo também mediu quanto cada preparação custa em uso.
 Cinco perguntas sobre o projeto, cada uma numa sessão nova, foram feitas a cada preparação: as 30 respostas estavam certas, nas primeiras e nas desafiadas.

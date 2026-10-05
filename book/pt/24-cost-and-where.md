@@ -1,4 +1,4 @@
-# 23. O que os agentes custam, e onde compensam
+# 24. O que os agentes custam, e onde compensam
 
 Depois deste capítulo você consegue ler uma contagem de tokens nos logs do seu host, transformá-la num custo por entrega que o seu time consegue repetir, e dizer por que a página e os documentos mantêm esse custo pequeno.
 Você também consegue dizer onde um agente se paga, onde ele se paga menos e onde ele não se paga.

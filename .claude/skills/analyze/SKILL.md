@@ -4,6 +4,8 @@ description: >-
   Document an existing repository. Reads the code, writes docs/00 to 06,
   docs/adr/ and AGENTS.md describing what is there, and asks only what the
   code cannot answer. Writes no code.
+metadata:
+  version: "2026.10.05"
 ---
 You are documenting a repository so that every later session can act on it
 without rereading it. Read `references/documents.md` first, whole: it says
@@ -11,6 +13,7 @@ what each document holds.
 
 ## Read
 
+`context/`, whole, when it exists: what people said that the code cannot.
 The README and any existing docs; the manifests (package.json, pyproject,
 go.mod, *.csproj, pubspec.yaml, Cargo.toml, Gemfile, and the like); the
 folder tree two levels deep; the entry points; the tests and how they run;
@@ -32,6 +35,8 @@ host's question form when it has one:
 * the two choices of `references/documents.md` §Choices, FOCUS and git,
   presented in their own words. The default is what the code already does,
   and you say what that is;
+* whether `context/` is committed. Default: committed when the repository
+  stays with the team, in `.gitignore` when it is delivered or public;
 * the first milestone: three to eight deliveries, or where to read them
   from (issues, a TODO file, a roadmap), then its review.
 

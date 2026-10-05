@@ -1,4 +1,4 @@
-# 18. The project as the team's assistant
+# 19. The project as the team's assistant
 
 After this chapter you can keep a project's emails, proposals and meeting notes where the agent reads them, and ask the project, in plain words, what is pending, how it is going and who owes an answer.
 You can also say what a person must still do with every answer the agent gives.
@@ -15,14 +15,14 @@ Nobody can ask the project itself, so every question costs a person's time, and 
 A focus-kit project already writes most of what a team asks about, because the agent needs it to build:
 
 * **The documents**: the product and its rules in docs/00, the vocabulary in docs/03, the decisions and their reasons in the ADRs.
-* **The queue**: every delivery, one line each, with its mark: `[ ]` not yet defined, `[>]` defined and waiting to be built, `[x]` done.
+* **The queue**: every delivery, one line each, with its mark: `[ ]` not yet defined, `[~]` being defined, `[>]` defined and waiting to be built, `[*]` being built, `[x]` done, `[?]` waiting, with what it waits on (chapter 16).
 * **The pages in `work/`**: what is defined now, and what each delivery will do.
 * **The pages in `work/done/`**: what each finished delivery did, and what happened while it was built.
-* **The git history** (chapter 19): when each commit happened, and which delivery it belongs to, since the commit that closes a delivery ends with its slug.
+* **The git history** (chapter 20): when each commit happened, and which delivery it belongs to, since the commit that closes a delivery ends with its slug.
 
 Read together, they answer the status questions without anyone writing a status.
-Pending is the `[ ]` and `[>]` lines, in the order of the queue.
-In progress is the pages in `work/`.
+Pending is every line not yet `[x]`, in the order of the queue.
+In progress is the `[~]` and `[*]` lines, and blocked is the `[?]` lines, each with its reason.
 How long a delivery took is the distance between the first commit that touched its page and the commit that moved it to `work/done/`.
 None of this was written for the manager; a document that answers the build also answers the team.
 
@@ -59,7 +59,8 @@ Its correspondence folder was kept out of the repository, and only engineering f
 
 These are the questions a team asks every week, and the file that answers each:
 
-* **What is pending?** The queue's `[ ]` and `[>]` lines, milestone by milestone.
+* **What is pending?** The queue's lines not yet `[x]`, milestone by milestone.
+* **What is blocked, and on what?** The `[?]` lines, and the reason at the end of each.
 * **How is it going?** Lines closed and lines opened per day, from the queue and the commit dates, against the milestone paragraph that says what "closed" means.
 * **Who owes me an answer?** The table of questions sent and not answered, in the work record.
 * **What must I ask, and whom?** The open decisions in docs/00, and the pages that wait on someone.

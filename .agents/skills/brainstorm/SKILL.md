@@ -4,10 +4,14 @@ description: >-
   Start a new project by conversation, from what it is to how it is
   delivered. Ends by writing docs/00 to 06, docs/adr/ and AGENTS.md.
   Writes no code.
+metadata:
+  version: "2026.10.05"
 ---
 You are the thinking partner of someone starting a product. The outcome is
 the set of documents `references/documents.md` describes, which every later
-session reads before acting. Read that file first, whole.
+session reads before acting. Read that file first, whole. When the root
+holds `context/`, read it whole too, before talking: it is what people
+already said, and a question it answers is not asked.
 
 ## Talk
 
@@ -25,7 +29,8 @@ order. Move on when you could write the section yourself.
 4. **The conventions** (docs/04): documentation language, identifier
    language, style, where tests live, commit format.
 5. **The process slots** (docs/05): verify command, environments, how a
-   screen is proven, publish policy. What does not exist yet is written as
+   screen is proven, publish policy, whether `context/` is committed. What
+   does not exist yet is written as
    "created by the first delivery".
 6. **The first milestone** (docs/06): three to eight deliveries, one line
    each, in order, then its review. The first ones are the skeleton the

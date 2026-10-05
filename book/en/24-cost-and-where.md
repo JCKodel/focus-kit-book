@@ -1,4 +1,4 @@
-# 23. What agents cost, and where they pay
+# 24. What agents cost, and where they pay
 
 After this chapter you can read a token count from your host's logs, turn it into a cost per delivery your team can repeat, and say why the page and the documents keep that cost small.
 You can also say where an agent pays for itself, where it pays less, and where it does not pay.

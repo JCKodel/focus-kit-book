@@ -32,10 +32,10 @@ It argues for the method with real cases and measured results, and it doubles as
 |---|---|
 | Prologue | Product, people and process |
 | I. The base | 1 Why process, when AI writes fast · 2 How an agent sees your project · 3 Spec-Driven Development · 4 Simplicity is a decision: KISS, YAGNI, DRY · 5 Rules as pure functions, exceptions as values · 6 Features, not layers · 7 FOCUS: the four pieces · 8 A test for each piece |
-| II. The method | 9 How focus-kit was born · 10 The documents: one place per fact · 11 Install, and the hosts · 12 Starting: `/brainstorm` and `/analyze` · 13 The queue and milestones · 14 `/propose`: one page · 15 `/apply`: build, verify, prove, never commit · 16 Closing a milestone · 17 The governor · 18 The project as the team's assistant |
-| III. Git and the team's tools | 19 Git essentials · 20 Worktrees and parallel agents · 21 The team's tools: pull requests, issues and boards |
-| IV. Beyond code | 22 Projects that are not software · 23 What agents cost, and where they pay · 24 Adoption in teams and companies |
-| V. The person decides | 25 Asking for more |
+| II. The method | 9 How focus-kit was born · 10 The documents: one place per fact · 11 Install, and the hosts · 12 Starting: `/brainstorm` and `/analyze` · 13 The queue and milestones · 14 `/propose`: one page · 15 `/apply`: build, verify, prove, never commit · 16 The queue while it happens · 17 Closing a milestone · 18 The governor · 19 The project as the team's assistant |
+| III. Git and the team's tools | 20 Git essentials · 21 Worktrees and parallel agents · 22 The team's tools: pull requests, issues and boards |
+| IV. Beyond code | 23 Projects that are not software · 24 What agents cost, and where they pay · 25 Adoption in teams and companies |
+| V. The person decides | 26 Asking for more |
 | Appendices | The Ninjobs case · Glossary · Templates · Workshop map |
 
 The contents are a starting point; chapters are split, merged or moved by conversation, and docs/06 follows.

@@ -126,7 +126,7 @@ Os três princípios se aplicam a ele sem mudança.
 * **DRY.** Cada fato do projeto mora em um documento. Uma decisão escrita no plano, na especificação, no ADR e no código são quatro lugares que vão discordar, e o agente lê o que abrir primeiro.
 
 Um passo entra no processo quando nomeia o erro concreto que teria pegado, e sai quando não nomeia nenhum.
-O capítulo 17, o regulador, transforma isso na pergunta que todo passo do processo precisa responder.
+O capítulo 18, o regulador, transforma isso na pergunta que todo passo do processo precisa responder.
 
 > **Cuidado.** Um agente escreve mais do que código nessa velocidade: escreve também scripts, verificações, regras e passos, cada um plausível, e um processo cresce como o código cresce, uma adição razoável por vez.
 > Enquanto este livro era escrito, o agente propôs que todo marco terminasse com um passo de revisão, uma boa ideia; a revisão achou erros, que abriram um marco de correções, cuja própria revisão abriu um segundo, e um terceiro estava a caminho quando eu o interrompi.

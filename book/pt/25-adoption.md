@@ -1,4 +1,4 @@
-# 24. Adoção em times e empresas
+# 25. Adoção em times e empresas
 
 Depois deste capítulo você consegue levar o método a um time ou a uma empresa, responder às resistências de sempre com evidência, e dar a cada papel a sua parte.
 Você também consegue rodar um marco como um piloto que mede a si mesmo, e dar forma à proposta para a sua própria empresa.
@@ -18,10 +18,10 @@ Cada uma tem uma resposta que pede evidência em vez de fé.
 Pode ser.
 A regra do prólogo vale para ele como para todo o resto: uma afirmação traz a sua fonte.
 Pergunte o que ele produziu, medido como: quantas entregas, quantas voltaram, quanto custaram.
-Um jeito que funciona consegue mostrar isso, e o método lhe dá os meios, com uma página por entrega e uma contagem de tokens por entrega ([capítulo 23](23-cost-and-where.md)).
+Um jeito que funciona consegue mostrar isso, e o método lhe dá os meios, com uma página por entrega e uma contagem de tokens por entrega ([capítulo 24](24-cost-and-where.md)).
 
 **"Processo demais."**
-O método tem um regulador para isso ([capítulo 17](17-the-governor.md)): cada passo precisa nomear o erro concreto que teria pegado, ou sai.
+O método tem um regulador para isso ([capítulo 18](18-the-governor.md)): cada passo precisa nomear o erro concreto que teria pegado, ou sai.
 O que sobrevive são seis regras e duas checagens.
 Um time que acha um passo que não pega nada o remove, e o método espera que ele faça isso.
 
@@ -60,11 +60,11 @@ O método dá cada passo a quem é dono dele.
 
 * **Quem propõe:** quem é dono da decisão.
   Um desenvolvedor propõe uma entrega técnica, um analista uma regra, um gerente uma pergunta ao cliente; o `/propose` é uma conversa, e precisa de alguém que consiga responder ([capítulo 14](14-propose.md)).
-* **Quem aplica:** a sessão de um desenvolvedor, ou várias ao mesmo tempo em worktrees, cada uma na sua entrega ([capítulo 20](20-worktrees.md)).
+* **Quem aplica:** a sessão de um desenvolvedor, ou várias ao mesmo tempo em worktrees, cada uma na sua entrega ([capítulo 21](21-worktrees.md)).
 * **Quem faz o commit e o merge:** uma pessoa, sempre.
   O `/apply` coloca em stage e para; o commit é a revisão humana ([capítulo 15](15-apply.md)).
-* **Quem revisa o marco:** o time, no produto rodando, contra o parágrafo do marco ([capítulo 16](16-closing-a-milestone.md)).
-* **O gerente** pergunta ao projeto: o que está pendente, como está indo, quem deve uma resposta ([capítulo 18](18-project-as-assistant.md)).
+* **Quem revisa o marco:** o time, no produto rodando, contra o parágrafo do marco ([capítulo 17](17-closing-a-milestone.md)).
+* **O gerente** pergunta ao projeto: o que está pendente, como está indo, quem deve uma resposta ([capítulo 19](19-project-as-assistant.md)).
 
 ## Um marco como piloto
 
@@ -75,9 +75,9 @@ Rode-o num marco de um projeto, e deixe o marco decidir.
 2. Rode o `/analyze`, para que os documentos descrevam o que já existe, e revise-os ([capítulo 12](12-starting-a-project.md)).
 3. Escreva um marco de três a oito linhas, cada uma uma entrega de que o time precisa de qualquer forma ([capítulo 13](13-queue-and-milestones.md)).
 4. Construa-o com `/propose` e `/apply`, uma página por linha.
-5. Feche-o com a sua revisão ([capítulo 16](16-closing-a-milestone.md)).
+5. Feche-o com a sua revisão ([capítulo 17](17-closing-a-milestone.md)).
 
-Meça duas coisas: os tokens por entrega ([capítulo 23](23-cost-and-where.md)), e o que a revisão e as páginas pegaram que de outro modo teria saído.
+Meça duas coisas: os tokens por entrega ([capítulo 24](24-cost-and-where.md)), e o que a revisão e as páginas pegaram que de outro modo teria saído.
 Depois decida com esses números na mesa, e o marco seguinte vira a comparação.
 
 ## A forma de uma proposta
@@ -97,7 +97,7 @@ Use essa forma para a sua própria empresa: liste os problemas dela nas palavras
 Um problema sem nada ao lado é um que o método não resolve, e dizer isso torna o resto crível.
 
 A proposta em si não rodou no processo.
-Ela não tinha fila nem página, e o [capítulo 22](22-beyond-software.md) conta o que isso lhe custou.
+Ela não tinha fila nem página, e o [capítulo 23](23-beyond-software.md) conta o que isso lhe custou.
 
 ## O que o time ganha
 

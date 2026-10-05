@@ -1,4 +1,4 @@
-# 20. Worktrees and parallel agents
+# 21. Worktrees and parallel agents
 
 After this chapter you can have two agents build two deliveries at the same time, each in its own folder, so that each merge holds one delivery and nothing else.
 You can also resolve the conflict when both touched the same lines, catch a conflict marker before it is committed, and say when working in parallel stops paying.
@@ -10,7 +10,7 @@ The natural move is to start a second agent on the next delivery, and in one fol
 
 If both agents work on the same branch, their changes land in the same folder, mixed.
 A commit takes both: one commit with two deliveries, one of them perhaps half done, which no single `git revert` can undo apart.
-The unit of work of [chapter 19](19-git-essentials.md), one delivery that reverts in one step, is gone, and separating the two afterwards means picking changes file by file, line by line, by hand.
+The unit of work of [chapter 20](20-git-essentials.md), one delivery that reverts in one step, is gone, and separating the two afterwards means picking changes file by file, line by line, by hand.
 
 If you give each delivery its own branch, the folder still holds only one branch at a time.
 Switching branches while an agent has work not yet committed either carries that work to the other branch or makes git refuse until you put it aside with `git stash`; and two agents cannot be on two branches of one folder at the same moment.
@@ -141,7 +141,7 @@ It reads what is staged and reports each conflict marker as `<file>:<line>: left
 
 If the markers were committed anyway, the undo depends on whether anyone else has the commit.
 Not pushed: `git reset --hard <the commit before the merge>` throws the merge away, and you merge again.
-Pushed: `git revert`, since a reset rewrites history that others already have, which is the rebase rule of chapter 19.
+Pushed: `git revert`, since a reset rewrites history that others already have, which is the rebase rule of chapter 20.
 
 ## When parallel stops paying
 

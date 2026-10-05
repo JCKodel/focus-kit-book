@@ -21,7 +21,9 @@ O `/propose <slug>` lê antes de perguntar: o docs/00 para o produto e as suas r
 Então ele conversa com você até o escopo caber em uma página, e só pergunta onde há mais de uma leitura e nenhum documento a fecha: primeiro a avaliação dele, em prosa, e a recomendação dele primeiro em cada pergunta.
 "Você decide" é sempre uma resposta válida, e uma pessoa que não sabe responder ainda recebe uma boa página.
 
-Ele escreve `work/<slug>.md`, marca a linha como `[>]` na fila, e para.
+Quando começa, ele marca a linha como `[~]` na fila, então quem a lê vê uma entrega sendo definida, e quando a página está escrita, `work/<slug>.md`, a marca vira `[>]` e ele para.
+Quando o escopo espera uma resposta que ninguém deu ainda, ou outra linha ainda não feita, ele escreve a página até onde ela vai e marca a linha como `[?]` no lugar, com o que ela espera (capítulo 16).
+Em uma linha que já está `[?]`, ele diz o que a linha espera e só segue quando você diz que está resolvido.
 Ele nunca escreve, edita nem gera código, migration, teste ou configuração.
 O arquivo do comando no kit dá o motivo: "*separar decidir de fazer é o que impede o escopo de crescer durante a implementação*".
 O `/apply` começa em uma sessão nova, com o contexto limpo, e a página é tudo o que ele leva desta conversa, então a página precisa guardar tudo de que a construção precisa.
@@ -116,13 +118,13 @@ Cada uma das seis foi revisada na sua própria página e construída na sua pró
 
 A página é a superfície de revisão do time.
 Um desenvolvedor, um gerente ou o cliente lê uma página na linguagem do docs/03 e sabe o que está para ser construído, o que não está, e o que "pronto" vai significar, antes de existir uma linha de código.
-No Caso A, o mesmo formato de página levou perguntas ao cliente e documentos para a passagem do projeto, então uma única skill de revisão serviu a todo tipo de trabalho (capítulo 22).
+No Caso A, o mesmo formato de página levou perguntas ao cliente e documentos para a passagem do projeto, então uma única skill de revisão serviu a todo tipo de trabalho (capítulo 23).
 E quando a construção termina, a mesma página registra o que aconteceu, então a história de uma decisão é um arquivo, com o nome do seu slug, em todo projeto que o time roda.
 
 ## Pontos-chave
 
 * Uma entrega é a menor mudança com valor, com um slug como nome, e cabe em uma página; se não cabe, são duas.
-* O `/propose` lê os documentos, só pergunta onde nenhum documento fecha uma leitura, com a recomendação primeiro, e escreve a página e a marca `[>]`, nunca código.
+* O `/propose` lê os documentos, só pergunta onde nenhum documento fecha uma leitura, com a recomendação primeiro, marca a linha `[~]` enquanto conversa e `[>]` quando a página está escrita, ou `[?]` quando o escopo espera, e nunca escreve código.
 * A página tem um formato fixo; o Contrato é a única seção exata, porque uma coluna errada é uma migration.
 * Leia a página antes do `/apply` e cubra cada buraco pedindo ao agente, nunca à mão: um buraco na página custa um turno, depois do `/apply` custa outro `/apply`.
 * A página é a superfície de revisão do time, para código e para qualquer outra coisa que caiba em uma página.

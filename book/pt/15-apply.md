@@ -18,6 +18,7 @@ Ele começa em uma sessão nova, então a página é tudo o que ele leva da conv
 
 A página, o `AGENTS.md`, e três dos documentos do projeto: o docs/01, a arquitetura, que diz onde cada peça fica e como os erros circulam; o docs/04, as convenções, que dizem quais testes escrever; e o docs/05, o processo.
 O docs/05 guarda os slots do projeto, e o `/apply` os segue ao pé da letra: o comando de verificação, os ambientes e o que uma entrega deixa em cada um, como uma tela é provada, a política de publicação e a estratégia de git.
+Então ele marca a linha como `[*]` no docs/06, para a fila mostrar a construção em andamento; em uma linha que está `[?]`, ele primeiro diz o que a linha espera, e só segue quando você diz que está resolvido.
 
 ### A página é o escopo
 
@@ -31,6 +32,11 @@ Um pacote que a página não nomeou é uma pergunta para a pessoa, nunca uma esc
 Ele para e diz qual.
 Ou o documento muda na mesma entrega, ou a página está errada; ele nunca escolhe um dos dois em silêncio.
 Uma escolha em silêncio deixaria uma página e um documento discordando, e a próxima sessão construiria sobre o que lesse primeiro.
+
+### Quando o trabalho não consegue seguir
+
+Ele para quando a construção precisa de uma resposta que ninguém deu ainda, quando outra linha precisa ser feita antes (uma correção que ele achou vira uma linha `[ ]` acima desta), ou quando você diz que ela está travada.
+Ele escreve na página o que foi construído e o que ela espera, deixa a página em `work/`, marca a linha como `[?]` com esse motivo no fim dela, e coloca em stage o que tem (capítulo 16).
 
 ### A verificação e a prova
 
@@ -48,7 +54,7 @@ Então, antes de parar, o `/apply` faz tudo isto:
 * Escreve na página o que aconteceu: o que divergiu do plano e por quê, o que foi deixado de lado, o que a prova achou, e as decisões tomadas, com um ADR se foi preciso um.
 * Atualiza os documentos que a entrega mudou: um termo novo no docs/03, uma regra nova no documento que é dono dela, uma decisão em docs/adr/.
 * Marca cada item do Pronto quando.
-* Move a página para `work/done/`, e troca a marca da linha no docs/06 de `[>]` para `[x]`.
+* Move a página para `work/done/`, e troca a marca da linha no docs/06 de `[*]` para `[x]`; uma linha `[?]` que esperava só por linhas agora `[x]` volta para `[>]`, ou para `[ ]` quando não tem página.
 * Coloca tudo em stage e sugere a mensagem de commit no formato que o docs/05 define.
 * A última coisa que ele diz é qual ambiente está em qual versão, e o comando que atualiza os outros.
 
@@ -97,7 +103,7 @@ O agente coloca em stage e sugere a mensagem; a pessoa lê o diff e faz o commit
 Três motivos sustentam essa linha.
 
 * **Nada chega ao histórico sem ser lido por uma pessoa.** Um commit diz que uma pessoa leu a mudança e a aceita; um agente que faz commit do próprio trabalho pula o único leitor que consegue dizer que a construção é o que se queria.
-* **Um commit se desfaz em um passo.** A página e a sua construção são um commit no trunk (direto na linha principal do histórico), um merge em um branch (uma linha de trabalho à parte, juntada depois à principal), então uma entrega que se mostra errada sai do projeto com um comando (capítulo 19).
+* **Um commit se desfaz em um passo.** A página e a sua construção são um commit no trunk (direto na linha principal do histórico), um merge em um branch (uma linha de trabalho à parte, juntada depois à principal), então uma entrega que se mostra errada sai do projeto com um comando (capítulo 20).
 * **A pessoa é dona do que é publicado.** O agente escreveu o código, e a pessoa responde por ele ao time, ao cliente e ao usuário; o commit é onde essa resposta é dada.
 
 Leia o diff em stage, depois faça o commit:
@@ -137,6 +143,7 @@ A decisão e o seu motivo estão na página que a construiu, e o commit que a pu
 ## Pontos-chave
 
 * O `/apply <slug>` constrói a página em uma sessão nova, e a página é o escopo: nenhuma dependência, camada ou ferramenta que a página não nomeou.
+* Ele marca a linha como `[*]` quando começa, `[x]` quando termina, e `[?]`, com o que ela espera, quando precisa parar.
 * Ele segue o docs/05 ao pé da letra, e quando a página contradiz um documento ele para e diz qual; nunca resolve em silêncio.
 * Verde não é pronto: pronto é a verificação verde, a prova, o que aconteceu na página, os documentos atualizados, a página em `work/done/`, a linha `[x]` e a mudança em stage.
 * Revise a mudança em stage contra a página, e peça cada correção na mesma sessão.

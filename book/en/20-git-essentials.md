@@ -1,4 +1,4 @@
-# 19. Git essentials
+# 20. Git essentials
 
 After this chapter you can say what version control keeps and why git was made, read a history of commits, branches and merges, and merge a branch in each of the four ways git offers.
 You can also undo a delivery in one step with `git revert`, and choose between trunk, a branch per delivery and git-flow for a project.
@@ -69,7 +69,7 @@ A remote is another copy of the repository that yours knows by name, usually a s
 `git clone <url>` copies a remote to your machine, with its whole history, and remembers it as `origin`.
 `git push` sends your branch's new commits to the remote; `git pull` brings the remote's new commits into your branch.
 A team shares its work this way: each person commits on their own copy and pushes, and the others pull.
-Chapter 21 builds on this, with the pull request that asks for a pushed branch to be reviewed and merged.
+Chapter 22 builds on this, with the pull request that asks for a pushed branch to be reviewed and merged.
 
 ## Four ways to merge
 
@@ -147,7 +147,7 @@ A delivery of several commits, merged in each form, and what undoing it takes, w
 With a branch per delivery, merge by merge commit or by squash, so the delivery stays one unit of work that one revert takes back.
 A fast-forward or a rebase keeps that only when the branch held one commit.
 
-When both branches changed the same lines, git cannot choose and stops with a conflict, which you resolve before the merge completes; [chapter 20](20-worktrees.md) teaches it, where parallel deliveries meet.
+When both branches changed the same lines, git cannot choose and stops with a conflict, which you resolve before the merge completes; [chapter 21](21-worktrees.md) teaches it, where parallel deliveries meet.
 
 ## Undoing a delivery
 
@@ -191,7 +191,7 @@ Release and hotfix branches are the team's release work, which the kit does not 
 A project writes its choice once, in the Git slot of its docs/05, and every command reads it.
 
 * **Trunk** fits one person, or one person at a time: one commit per delivery on `main`.
-* **A branch per delivery** fits a team, or one person running agents in parallel ([chapter 20](20-worktrees.md)): each delivery merged by merge commit or squash, usually through a pull request (chapter 21).
+* **A branch per delivery** fits a team, or one person running agents in parallel ([chapter 21](21-worktrees.md)): each delivery merged by merge commit or squash, usually through a pull request (chapter 22).
 * **git-flow** fits software that ships numbered versions and keeps several in use.
 
 Whichever it is, the rule is the same: one delivery, one step to undo, and the person commits and merges, never the agent.

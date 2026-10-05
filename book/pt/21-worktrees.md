@@ -1,4 +1,4 @@
-# 20. Worktrees e agentes em paralelo
+# 21. Worktrees e agentes em paralelo
 
 Depois deste capítulo você consegue pôr dois agentes para construir duas entregas ao mesmo tempo, cada um na sua própria pasta, para que cada merge guarde uma entrega e nada mais.
 Você também consegue resolver o conflito quando os dois mexeram nas mesmas linhas, pegar um marcador de conflito antes que ele entre em um commit, e dizer quando trabalhar em paralelo deixa de compensar.
@@ -10,7 +10,7 @@ O movimento natural é começar um segundo agente na próxima entrega, e em uma 
 
 Se os dois agentes trabalham no mesmo branch, as mudanças deles caem na mesma pasta, misturadas.
 Um commit leva as duas: um commit com duas entregas, uma delas talvez pela metade, que nenhum `git revert` sozinho consegue desfazer separadamente.
-A unidade de trabalho do [capítulo 19](19-git-essentials.md), uma entrega que se desfaz em um passo, se perdeu, e separar as duas depois significa escolher mudanças arquivo por arquivo, linha por linha, à mão.
+A unidade de trabalho do [capítulo 20](20-git-essentials.md), uma entrega que se desfaz em um passo, se perdeu, e separar as duas depois significa escolher mudanças arquivo por arquivo, linha por linha, à mão.
 
 Se você dá a cada entrega o seu próprio branch, a pasta ainda guarda só um branch por vez.
 Trocar de branch enquanto um agente tem trabalho ainda sem commit ou leva esse trabalho para o outro branch ou faz o git recusar até você guardá-lo de lado com `git stash`; e dois agentes não conseguem estar em dois branches de uma pasta no mesmo momento.
@@ -141,7 +141,7 @@ Ele lê o que está em stage e relata cada marcador de conflito como `<file>:<li
 
 Se os marcadores entraram em um commit mesmo assim, o jeito de desfazer depende de alguém mais ter o commit.
 Sem push: `git reset --hard <the commit before the merge>` joga o merge fora, e você faz o merge de novo.
-Com push: `git revert`, já que um reset reescreve um histórico que outros já têm, o que é a regra do rebase do capítulo 19.
+Com push: `git revert`, já que um reset reescreve um histórico que outros já têm, o que é a regra do rebase do capítulo 20.
 
 ## Quando o paralelo deixa de compensar
 

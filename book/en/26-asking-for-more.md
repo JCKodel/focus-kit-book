@@ -1,4 +1,4 @@
-# 25. Asking for more
+# 26. Asking for more
 
 After this chapter you can say why an agent's first answer feels final, name the four things an agent does not propose unless you ask, and send the four turns of the challenge protocol when the work is worth what they cost.
 The challenge protocol is four messages, always the same, that you send after an agent's first answer; each message and the agent's reply to it is a turn, and the four are written out, ready to copy, under the section "The challenge protocol".
@@ -6,7 +6,7 @@ On this book's experiment, a judge who did not know which answer was which would
 
 ## The card I accepted
 
-On Case A, the client project of [chapter 18](18-project-as-assistant.md), the agent had to build cards for Microsoft Teams, written in Adaptive Cards, the format Teams uses to show a card in a chat.
+On Case A, the client project of [chapter 19](19-project-as-assistant.md), the agent had to build cards for Microsoft Teams, written in Adaptive Cards, the format Teams uses to show a card in a chat.
 The client sent a PowerPoint with the cards they imagined, and the agent had that file.
 It did not build them.
 It said the design looked more like a page than an Adaptive Card, and said something about tabs and buttons, though the client's design had no tabs.
@@ -102,7 +102,7 @@ A test returns a result that does not depend on what you seem to want.
 **Turn 3 names the reader and the cost.**
 Who uses the result, with how much time, and what each use costs: two of the four things the agent does not propose, in one question.
 "Change the result to fit" asks for the change, not for advice about it.
-The techniques the agent will reach for when each use spends tokens, billed or drawn from a plan, are taught elsewhere: the rules file that names where each fact lives ([chapter 2](02-how-agents-see.md)), and the cache that makes a repeated context cheap ([chapter 23](23-cost-and-where.md)).
+The techniques the agent will reach for when each use spends tokens, billed or drawn from a plan, are taught elsewhere: the rules file that names where each fact lives ([chapter 2](02-how-agents-see.md)), and the cache that makes a repeated context cheap ([chapter 24](24-cost-and-where.md)).
 
 **Turn 4 asks for what you did not ask for, and keeps you deciding.**
 "Worth it" asks the agent to weigh each addition, and "tell me what you left out" puts the rest in front of you.
@@ -133,7 +133,7 @@ One session at a time, a first answer took 24 seconds to just over 2 minutes, an
 On a fixed subscription, those tokens come out of the plan's session limit: the use of the model a plan allows in a window of hours, after which the host refuses new turns until the window ends.
 The experiment ran its nine challenged sessions on one afternoon, all within about 45 minutes, and the author's plan ran out before the protocol's last turn: in all nine, the host answered "You've hit your session limit", and that turn was sent again about 30 minutes later.
 Each protocol you send spends a share of that limit.
-If you pay per token instead, [chapter 23](23-cost-and-where.md) shows how to turn tokens into a price.
+If you pay per token instead, [chapter 24](24-cost-and-where.md) shows how to turn tokens into a price.
 
 The cost arm also measured what each setup costs in use.
 Five questions about the project, each in a fresh session, were asked of every setup: all 30 answers were correct, first and challenged.

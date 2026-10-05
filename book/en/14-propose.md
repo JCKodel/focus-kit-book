@@ -21,7 +21,9 @@ If it does not, the scope has not been understood yet, and it is two deliveries.
 Then it talks with you until the scope fits one page, and it asks only where there is more than one reading and no document closes it, its assessment first, in prose, and its recommendation first in every question.
 "Your call" is always a valid answer, and a person who cannot answer still gets a good page.
 
-It writes `work/<slug>.md`, marks the line `[>]` in the queue, and stops.
+When it starts, it marks the line `[~]` in the queue, so anyone reading it sees a delivery being defined, and when the page is written, `work/<slug>.md`, the mark becomes `[>]` and it stops.
+When the scope waits on an answer nobody has given yet, or on another line not yet done, it writes the page as far as it goes and marks the line `[?]` instead, with what it waits on (chapter 16).
+On a line already `[?]`, it says what the line waits on and goes on only when you say it is resolved.
 It never writes, edits or generates code, a migration, a test or configuration.
 The kit's file for the command gives the reason: "*separating deciding from doing is what keeps scope from growing during implementation*".
 `/apply` starts in a fresh session, with a clean context, and the page is all it takes from this conversation, so the page has to hold everything the build needs.
@@ -116,13 +118,13 @@ Each of the six was reviewed on its own page and built in its own session.
 
 The page is the review surface of the team.
 A developer, a manager or the client reads one page in the language of docs/03 and knows what is about to be built, what is not, and what "done" will mean, before a line of code exists.
-On Case A, the same page format carried questions to the client and documents for handover, so one review skill served every kind of work (chapter 22).
+On Case A, the same page format carried questions to the client and documents for handover, so one review skill served every kind of work (chapter 23).
 And when the build ends, the same page records what happened, so the history of a decision is one file, named by its slug, in every project the team runs.
 
 ## Key points
 
 * A delivery is the smallest change with value, named by a slug, and it fits on one page; if it does not, it is two.
-* `/propose` reads the documents, asks only where no document closes a reading, recommendation first, and writes the page and the mark `[>]`, never code.
+* `/propose` reads the documents, asks only where no document closes a reading, recommendation first, marks the line `[~]` while it talks and `[>]` when the page is written, or `[?]` when the scope waits, and never writes code.
 * The page has a fixed format; the Contract is the one exact section, because a wrong column is a migration.
 * Read the page before `/apply` and cover each hole by asking the agent, never by hand: a hole on the page costs a turn, after `/apply` it costs another `/apply`.
 * The page is the team's review surface, for code and for anything else that fits a page.

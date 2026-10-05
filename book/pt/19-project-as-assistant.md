@@ -1,4 +1,4 @@
-# 18. O projeto como assistente do time
+# 19. O projeto como assistente do time
 
 Depois deste capítulo você consegue guardar os emails, as propostas e as notas de reunião de um projeto onde o agente os lê, e perguntar ao projeto, em palavras simples, o que está pendente, como vai o trabalho e quem deve uma resposta.
 Você também consegue dizer o que uma pessoa ainda precisa fazer com cada resposta que o agente dá.
@@ -15,14 +15,14 @@ Ninguém consegue perguntar ao próprio projeto, então cada pergunta custa o te
 Um projeto com focus-kit já escreve quase tudo o que um time pergunta, porque o agente precisa disso para construir:
 
 * **Os documentos**: o produto e as suas regras no docs/00, o vocabulário no docs/03, as decisões e os seus motivos nos ADRs.
-* **A fila**: cada entrega, uma linha cada, com a sua marca: `[ ]` ainda não definida, `[>]` definida e esperando para ser construída, `[x]` concluída.
+* **A fila**: cada entrega, uma linha cada, com a sua marca: `[ ]` ainda não definida, `[~]` sendo definida, `[>]` definida e esperando para ser construída, `[*]` sendo construída, `[x]` concluída, `[?]` esperando, com o que ela espera (capítulo 16).
 * **As páginas em `work/`**: o que está definido agora, e o que cada entrega vai fazer.
 * **As páginas em `work/done/`**: o que cada entrega concluída fez, e o que aconteceu enquanto era construída.
-* **O histórico do git** (capítulo 19): quando cada commit aconteceu, e a qual entrega pertence, já que o commit que fecha uma entrega termina com o slug dela.
+* **O histórico do git** (capítulo 20): quando cada commit aconteceu, e a qual entrega pertence, já que o commit que fecha uma entrega termina com o slug dela.
 
 Lidos juntos, eles respondem às perguntas de andamento sem ninguém escrever um relatório.
-Pendente são as linhas `[ ]` e `[>]`, na ordem da fila.
-Em andamento são as páginas em `work/`.
+Pendente é toda linha ainda não `[x]`, na ordem da fila.
+Em andamento são as linhas `[~]` e `[*]`, e travado são as linhas `[?]`, cada uma com o seu motivo.
 Quanto tempo uma entrega levou é a distância entre o primeiro commit que tocou a página dela e o commit que a moveu para `work/done/`.
 Nada disso foi escrito para o gerente; um documento que responde à construção também responde ao time.
 
@@ -59,7 +59,8 @@ A pasta de correspondência dele ficou fora do repositório, e só os fatos de e
 
 Estas são as perguntas que um time faz toda semana, e o arquivo que responde a cada uma:
 
-* **O que está pendente?** As linhas `[ ]` e `[>]` da fila, marco por marco.
+* **O que está pendente?** As linhas da fila ainda não `[x]`, marco por marco.
+* **O que está travado, e esperando o quê?** As linhas `[?]`, e o motivo no fim de cada uma.
 * **Como vai o trabalho?** Linhas fechadas e linhas abertas por dia, a partir da fila e das datas dos commits, contra o parágrafo do marco que diz o que "fechado" significa.
 * **Quem me deve uma resposta?** A tabela de perguntas enviadas e não respondidas, no registro de trabalho.
 * **O que preciso perguntar, e a quem?** As decisões em aberto no docs/00, e as páginas que esperam por alguém.

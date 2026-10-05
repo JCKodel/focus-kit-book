@@ -1,4 +1,4 @@
-# 17. The governor
+# 18. The governor
 
 After this chapter you can ask of anything that wants to enter your process, and of every step already in it, which concrete error it would have caught, and accept only an answer that names an error that happened.
 You can also list what the process does not have, and say what does each of those jobs instead.
@@ -50,17 +50,17 @@ Each job still gets done, by something the process already has:
 * **No specialized subagent**, an agent that another agent launches for one narrow role with its own instructions, such as a planner or a reviewer:[^claude-code-subagents] one agent that reads the documents.
 * **No tool the deliveries did not ask for:** the governor itself, which keeps it out until a delivery names the error it would have caught.
 
-## The governor decides per project
+## From one project to the kit
 
-The question gives different answers in different projects, and it should.
+The question is asked in each project, and an error one project proves can change the kit every project installs.
 
-Case A, a client project on a low-code platform, added a fourth mark to its queue, `[?]`, for a line waiting on a person.
-The kit's three marks read `[>]` as "defined and waiting to be built", and five lines blocked on the client's answers looked like work nobody had started.
-That was the error, and the mark named it.
+Case A, a client project on a low-code platform, read its queue on a kanban board, and the board showed what the kit's three marks hid (chapter 16).
+A delivery reached Doing only once its page was written, and five lines blocked on the client's answers looked like work nobody had started.
+Case A added a mark by hand, `[?]`, for a line waiting on a person: five idle-looking lines were the error, and the mark named it.
 
-This book considered the same mark for its own queue and rejected it.[^adr-0013]
-Its one outside answer is the author's approval of the anonymized passages, and that approval is an item of a page's Done when, so no line of its queue ever waits on a person.
-The same mark, the same question, and two answers, each from the project's own history.
+The error was not Case A's alone: any team that reads its queue as a board meets it the day a line waits, or a delivery is being defined.
+So the kit took the answer in its version 2026.10.05, six marks with `[?]` among them, and this book follows the kit.[^adr-0018]
+The governor still decided: the mark entered with the error that justified it, proven on one project, and the kit carried it to every project.
 
 ## What the team gains
 
@@ -74,8 +74,8 @@ The governor keeps a process that small, and it lets a team say yes to a step wi
 * The answer names an error that happened; a possible error justifies anything, and every step is paid by every delivery after it.
 * A step that names no error leaves, and a list of exceptions fails on an entry with no live warning.
 * Each of the eight things the process does not have has its job done by something it has: the page, the documents, the Behaviour lines, the person, the person's commit, one agent, and the governor itself.
-* The governor decides per project: Case A added a mark for lines waiting on a person, and this book, whose lines never wait on one, did not.
+* An error proven on one project can change the kit: Case A's idle-looking lines earned `[?]`, and the kit took it for every project.
 
 [^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>
 [^claude-code-subagents]: Anthropic, "Create custom subagents", Claude Code documentation, accessed 2026-09-29. <https://code.claude.com/docs/en/sub-agents>
-[^adr-0013]: This book's ADR-0013, "three marks only", 2026-09-24. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/adr/ADR-0013-three-marks.md>
+[^adr-0018]: This book's ADR-0018, "six marks", 2026-10-05, the file `ADR-0018-six-marks.md` in its decisions folder. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>

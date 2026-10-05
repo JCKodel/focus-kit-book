@@ -38,24 +38,24 @@ What is new is that a coding agent follows them without getting tired, once they
 **Ego.**
 The author of a piece of work defends it because it is theirs, whether that author is a colleague, an agent or you.
 The answer is a role: the person interprets, guides and validates, and trusts no one blindly, agent or colleague, the author of the code included.
-Validating includes asking for more: an agent's first answer is rarely the best it can give, and it does not offer what you did not ask for; chapter 25, in Part V, shows how to ask.
+Validating includes asking for more: an agent's first answer is rarely the best it can give, and it does not offer what you did not ask for; chapter 26, in Part V, shows how to ask.
 
 ## Process
 
 No software engineering survives without a process: when each person does things their own way, the result is chaos.
 A process is followed because each step has a purpose, and the purpose is also the test.
-A step that catches no concrete error leaves the process, and too much process fails as surely as too little; chapters 1 and 9 show the second failure, and chapter 17 turns the first rule into a question.
+A step that catches no concrete error leaves the process, and too much process fails as surely as too little; chapters 1 and 9 show the second failure, and chapter 18 turns the first rule into a question.
 
 The process this book teaches runs on documents that an agent reads, and that changes who the process serves.
 Once the product, its vocabulary, its decisions and its queue are written where the agent reads them, the agent can answer anyone on the team: what is pending, how it is going, who owes an answer, what was agreed with the client.
-Feed it the emails and the proposals too, and the project becomes an assistant to the whole team, developers and managers alike; chapter 18 shows how.
+Feed it the emails and the proposals too, and the project becomes an assistant to the whole team, developers and managers alike; chapter 19 shows how.
 That is the gain this book is written for.
 
 ## What the team gains
 
 A product written down, knowledge in documents instead of heads, and one process that everyone follows because each step has a reason.
 The method is the same for one developer and for a company.
-It carried my own product, Ninjobs (<https://www.ninjobs.app>), from four screens in fifteen days to its public opening thirteen days later, the story chapter 9 tells, and it ran a client project of 73 deliveries on eight days of commits, Case A, which chapter 18 tells.
+It carried my own product, Ninjobs (<https://www.ninjobs.app>), from four screens in fifteen days to its public opening thirteen days later, the story chapter 9 tells, and it ran a client project of 73 deliveries on eight days of commits, Case A, which chapter 19 tells.
 Both repositories are private, so every number this book gives about them was counted by me over their histories; Ninjobs appears by name, and Case A without its owner, its client or its business.
 
 Part I is the base, the practices every reader must share before the process, from why process matters when AI writes fast to a test for each piece of code.

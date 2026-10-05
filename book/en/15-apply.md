@@ -18,6 +18,7 @@ It starts in a fresh session, so the page is all it takes from the conversation 
 
 The page, `AGENTS.md`, and three of the project documents: docs/01, the architecture, which says where each piece goes and how errors travel; docs/04, the conventions, which say which tests to write; and docs/05, the process.
 docs/05 holds the project's slots, and `/apply` follows them literally: the verify command, the environments and what a delivery leaves in each, how a screen is proven, the publish policy and the git strategy.
+Then it marks the line `[*]` in docs/06, so the queue shows the build under way; on a line that is `[?]`, it first says what the line waits on, and goes on only when you say it is resolved.
 
 ### The page is the scope
 
@@ -31,6 +32,11 @@ A package the page did not name is a question for the person, never a choice for
 It stops and says which.
 Either the document changes in the same delivery, or the page is wrong; it never picks one silently.
 A silent choice would leave a page and a document that disagree, and the next session would build on whichever it read first.
+
+### When the work cannot go on
+
+It stops when the build needs an answer nobody has given yet, when another line must be done first (a fix it found becomes a `[ ]` line above this one), or when you say it is blocked.
+It writes on the page what was built and what it waits on, leaves the page in `work/`, marks the line `[?]` with that reason at its end, and stages what it has (chapter 16).
 
 ### Verify and the proof
 
@@ -48,7 +54,7 @@ So before it stops, `/apply` does all of this:
 * It writes into the page what happened: what diverged from the plan and why, what was dropped, what the proof found, and the decisions taken, with an ADR if one was needed.
 * It updates the documents the delivery changed: a new term into docs/03, a new rule into the document that owns it, a decision into docs/adr/.
 * It ticks every item of Done when.
-* It moves the page to `work/done/`, and turns the line's mark in docs/06 from `[>]` to `[x]`.
+* It moves the page to `work/done/`, and turns the line's mark in docs/06 from `[*]` to `[x]`; a `[?]` line that waited only on lines now `[x]` goes back to `[>]`, or to `[ ]` when it has no page.
 * It stages everything and suggests the commit message in the format docs/05 defines.
 * The last thing it says is which environment is at which version, and the command that updates the others.
 
@@ -97,7 +103,7 @@ The agent stages and suggests the message; the person reads the diff and commits
 Three reasons hold that line.
 
 * **Nothing reaches the history unread by a person.** A commit says a person read the change and accepts it; an agent that commits its own work skips the only reader who can say the build is what was wanted.
-* **A commit reverts in one step.** The page and its build are one commit on trunk, one merge on a branch, so a delivery that turns out wrong leaves the project in one command (chapter 19).
+* **A commit reverts in one step.** The page and its build are one commit on trunk, one merge on a branch, so a delivery that turns out wrong leaves the project in one command (chapter 20).
 * **The person owns what ships.** The agent wrote the code, and the person answers for it to the team, the client and the user; the commit is where that answer is given.
 
 Read the staged diff, then commit:
@@ -137,6 +143,7 @@ The decision and its reason are on the page that built it, and the commit that s
 ## Key points
 
 * `/apply <slug>` builds the page in a fresh session, and the page is the scope: no dependency, layer or tool the page did not name.
+* It marks the line `[*]` when it starts, `[x]` when it is done, and `[?]`, with what it waits on, when it must stop.
 * It follows docs/05 literally, and when the page contradicts a document it stops and says which; it never resolves it silently.
 * Green is not done: done is verify green, the proof, what happened on the page, the documents updated, the page in `work/done/`, the line `[x]` and the change staged.
 * Review the staged change against the page, and ask for each correction in the same session.

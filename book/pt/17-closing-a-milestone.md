@@ -1,4 +1,4 @@
-# 16. Fechando um marco
+# 17. Fechando um marco
 
 Depois deste capítulo você consegue fechar um marco: planejar a sua revisão como a última linha do marco, testar à mão cada cláusula do seu parágrafo, e transformar cada achado em uma linha `[ ]` no mesmo marco, sob a revisão.
 Você também consegue dizer por que essa revisão não lê código e por que os seus achados não têm revisão própria.
@@ -16,7 +16,7 @@ O kit fecha essa brecha com uma regra, o §8 do documento de processo que ele es
 Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, uma entrega como as outras: o `/propose` escreve a sua página, e o `/apply` a executa.
 A página dela pega o parágrafo do marco cláusula por cláusula e escreve, para cada uma, qual entrega a atende e como uma pessoa a testa.
 Ela não revisa código e não corrige nada.
-O código é lido onde cada mudança é pequena o bastante para ser lida: na mudança em stage antes do commit de cada entrega (capítulo 15), e no pull request, quando o time integra as suas entregas por um (capítulo 21).
+O código é lido onde cada mudança é pequena o bastante para ser lida: na mudança em stage antes do commit de cada entrega (capítulo 15), e no pull request, quando o time integra as suas entregas por um (capítulo 22).
 
 ## Teste cada cláusula à mão
 

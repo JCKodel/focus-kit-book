@@ -15,3 +15,7 @@ The author's approval is a line of the chapter page's Done when.
 ## Consequences
 
 Chapter 21 teaches `[?]` from Case A, as a customization this project did not need.
+
+## Amendment, 2026-10-05 (queue-states)
+
+Superseded by ADR-0018 on 2026-10-05: the queue uses focus-kit's six marks, `[?]` among them.

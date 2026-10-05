@@ -53,7 +53,7 @@ docs/01 records the answer, and an ADR records why.
 
 **The git strategy.** Three answers, each for one way of working: trunk, everything on the main branch, one delivery at a time, for one person alone; a branch per delivery, merged through a reviewed pull request, for sequential work; a worktree per delivery, a second working folder on its own branch, so several agents build different deliveries at once.
 In every one, a delivery's page and build are one change that reverts in one step, and the agent never commits or merges.
-Chapters 19 and 20 teach the three.
+Chapters 20 and 21 teach the three.
 The Git slot of docs/05 records the answer, and an ADR records why.
 
 ## ADRs

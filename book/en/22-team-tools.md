@@ -1,4 +1,4 @@
-# 21. The team's tools: pull requests, issues and boards
+# 22. The team's tools: pull requests, issues and boards
 
 After this chapter you can land a delivery through a pull request whose review reads the page before the diff, and keep issues and a board in step with the queue without making either of them the source of truth.
 You can also say why a project's documents live in docs/ and never in a wiki.
@@ -7,7 +7,7 @@ You can also say why a project's documents live in docs/ and never in a wiki.
 
 One person working on trunk reviews the staged change and commits it.
 A team needs two more things: a second person who reviews before the merge, and a way for people who never open the repository, a manager or a client, to see progress.
-The git strategies of chapter 19 stop at the merge: they shape the history, and say nothing about who reviewed a change or who is watching the work.
+The git strategies of chapter 20 stop at the merge: they shape the history, and say nothing about who reviewed a change or who is watching the work.
 
 ## The pull request as the team's review
 
@@ -21,7 +21,7 @@ With focus-kit, a pull request carries one delivery:
 2. **The page first.** The first commit on the branch is `work/<slug>.md`, written by `/propose`.
    Open the pull request as soon as it is pushed, and the page can be reviewed before any code exists.
 3. **The build after.** `/apply` builds on the same branch; the page moves to `work/done/` and the queue line becomes `[x]` in the same change.
-4. **One merge.** The delivery reaches the main branch whole, with its page, its code, its tests, its proof and its mark, so the queue on the main branch is always true.
+4. **One merge.** The delivery reaches the main branch whole, with its page, its code, its tests, its proof and its mark, so the queue on the main branch holds what has landed; a `[~]` or `[*]` set on a branch shows there only (chapter 16).
 
 The reviewer reads the page, then the diff against it.
 Every Behaviour line has its test or its manual check; the Contract matches the code down to the names; nothing listed in Out of scope was built; every item of Done when is ticked with its proof.
@@ -56,19 +56,15 @@ A board whose cards are moved by hand, though, is a second queue, and it drifts 
 The answer is a mirror in one direction, from the queue to the board.
 On Case A, a client project on a low-code platform, a customization recorded in its docs/05 did this: a script and a pipeline pushed the queue, one way, to the project's Azure DevOps kanban board, so the project manager followed progress in the portal without asking a developer.
 `/propose` and `/apply` refreshed the board whenever they changed a mark, and said so whenever they could not, so a stale board was never silent.
+With the six marks of chapter 16, a mirror folds them onto a board's three columns: `[ ]` to To Do, `[~]`, `[>]` and `[*]` to Doing, `[x]` to Done; a `[?]` line leaves its card in the column it was in and tags it blocked, with the reason.
 The mirror goes one way because the queue is the only place the agent reads: a card moved on the board changes nothing in the repository, and a sync in both directions would make two sources of truth.
 One piece was still unproven when the project closed: the write permission of the pipeline's identity on the board.
 
 ### A mark for waiting
 
-Case A's queue also lacked a word.
-The mark `[>]` reads as "defined, waiting to be built", and five lines blocked on the client showed as work nobody had started.
-Case A added a fourth mark to its queue, `[?]`, "waiting on a person".
-Its question deliveries, whose only output is a written answer from someone outside the project, close on the answer, not on the send, because a session once marked one done when the email went out.
-
-`[?]` is Case A's mark, never the kit's.
-This book rejected it for itself: its only outside answer is the author's approval of the private cases' text, and that is a line of a chapter page's Done when, so none of its lines ever waits on a person.
-The governor of chapter 17 decides per project, with its one question, which concrete error would the mark have caught: on Case A, five lines read as idle; here, none.
+Case A's queue also lacked a word: five lines blocked on the client showed as work nobody had started, and Case A added a mark by hand, `[?]`, for a line waiting on a person.
+The kit took that mark in its version 2026.10.05, with the two other reasons a line waits (chapter 16).
+What stays Case A's own customization is its question deliveries, whose only output is a written answer from someone outside the project: they close on the answer, not on the send, because a session once marked one done when the email went out.
 
 ## Why the wiki is not docs/
 
@@ -89,7 +85,7 @@ There is no measured number for this gain: Case A's board ran on one project, an
 * The reviewer reads the page, then the diff against it; an agent may review first, and a person decides.
 * An issue mirrors a queue line through the slug, and the queue stays the source of truth, because the agent reads the repository.
 * A board is a one-way mirror of the queue, refreshed when a mark changes, and never silent when it cannot be.
-* `[?]` was Case A's mark for lines waiting on a person; the governor decides per project, and this book did not need it.
+* `[?]` began as Case A's mark for lines waiting on a person and is now the kit's; question deliveries, which close on the answer, stay Case A's customization.
 
 [^gh-prs]: GitHub Docs, "Pull requests", section "Working with pull requests", accessed 2026-09-30. <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests>
 [^copilot-review]: GitHub Docs, "About GitHub Copilot code review", sections "Agent skills" and "Validating Copilot code reviews", accessed 2026-09-30. <https://docs.github.com/en/copilot/concepts/agents/code-review>

@@ -1,7 +1,7 @@
 # Queue
 
-`[ ]` not yet defined · `[>]` defined, `work/<slug>.md` exists · `[x]` done, page in `work/done/`.
-A line never leaves; it changes mark.
+`[ ]` not yet defined · `[~]` being defined · `[>]` defined, `work/<slug>.md` exists · `[*]` being built · `[x]` done, page in `work/done/` · `[?]` waiting, with `· blocked: <reason>` or `· blocked: after <slug>, <slug>` at the end of the line.
+A line never leaves; it changes mark, at the moment the work changes (docs/05 §4).
 
 ## M1. The book stands up
 
@@ -211,4 +211,14 @@ When this milestone closes, a reader knows why an agent's first answer feels fin
 [x] m9-review                the review of M9: the prologue and chapter 25 read against M9's paragraph, clause by clause
 [x] ch25-protocol-findable   a reader of chapter 25 knows what the challenge protocol is and where its four turns are written, and finds them again without rereading the section; both editions
 [x] ch25-cost-for-subscribers  a reader on a fixed subscription knows from chapter 25 what the protocol costs them, and no per-token price reads as the bill of their own session; both editions
+```
+
+## M10. The six marks
+
+When this milestone closes, a reader knows the six marks of focus-kit 2026.10.05 (`[ ]`, `[~]`, `[>]`, `[*]`, `[x]`, `[?]`), why each is set at the moment the work changes and not when a command ends, the three cases of `[?]` and its two suffixes, and how a queue read as a kanban shows work while it happens; Case A's Azure Boards delay and its hand-made `[?]` are the evidence, and the book's own queue and process follow the kit.
+
+```
+[x] queue-states             a chapter of its own on the queue's states: the six marks, who sets each and when, the three cases of `[?]` (the person says so, an answer not given, another line first) with `· blocked: <reason>` and `· blocked: after <slug>`, leaving `[?]`; Case A's Doing that came only after /propose and its `[?]` as the errors; chapters 13, 14, 15, 17, 18 and 21 updated where they teach three marks or call `[?]` Case A's alone; ADR-0013 superseded; docs/03, docs/05 §4 and this queue's header follow the kit; both editions
+[ ] context-slot             docs/05 §5 gains the kit's Context slot from 2026.10.05: whether this book keeps a `context/` folder, committed or in `.gitignore`, or says it has none
+[ ] m10-review               the review of M10 as docs/05 §8 says
 ```

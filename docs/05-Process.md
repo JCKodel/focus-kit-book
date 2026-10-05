@@ -13,9 +13,11 @@ A chapter is one delivery and includes both editions.
 
 ## 2. The flow
 
-docs/06 → /propose <slug> → work/<slug>.md → /apply <slug>, in a fresh
-session → verify green, environments as §5 says → work/done/<slug>.md and
-git add → a person reviews and commits.
+docs/06 `[ ]` → /propose <slug>, the line `[~]` → work/<slug>.md, the
+line `[>]` → /apply <slug>, in a fresh session, the line `[*]` → verify
+green, environments as §5 says → work/done/<slug>.md, the line `[x]`, and
+git add → a person reviews and commits. Any line before `[x]` may wait as
+`[?]` (§4).
 
 /propose talks and writes the page, never code. /apply builds, proves,
 updates the documents, stages and suggests the commit, never commits.
@@ -58,9 +60,31 @@ the anonymized text (docs/00 OD-3).
 ## 4. The queue
 
 docs/06: one line per delivery, in order, under milestones. The line never
-leaves the queue; it changes mark: `[ ]` not defined, `[>]` defined and not
-built, `[x]` done. Each milestone is planned with its review as the last
-line (§8). Edited by conversation in any session.
+leaves the queue; it changes mark, at the moment the work changes, so the
+queue shows what is happening while it happens:
+
+| Mark | Means | Set by |
+|---|---|---|
+| `[ ]` | not defined | the conversation that adds the line |
+| `[~]` | being defined | /propose, when it starts |
+| `[>]` | defined, `work/<slug>.md` exists | /propose, when the page is written |
+| `[*]` | being built | /apply, when it starts |
+| `[x]` | done, page in `work/done/` | /apply, with verify green |
+| `[?]` | waiting | any session, in the three cases below |
+
+A line waits when the person says it is blocked, when it needs an answer
+that was asked and not given, or when it needs another line done first,
+such as a fix found in the middle of an /apply. The reason goes at the end
+of the line, `· blocked: <reason>` or `· blocked: after <slug>, <slug>`.
+Any mark before `[x]` can become `[?]`. The line leaves `[?]` when the
+reason is resolved: the person says so, the session that records the
+answer clears it, or /apply clears it when it marks `[x]` the last line of
+an `after`. It goes back to `[>]` when its page exists and `[ ]`
+otherwise, and the next command marks it again. These are the marks of
+focus-kit 2026.10.05 (ADR-0018).
+
+Each milestone is planned with its review as the last line (§8). Edited by
+conversation in any session.
 
 ## 5. This project
 

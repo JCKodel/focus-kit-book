@@ -129,7 +129,7 @@ Quanto mais a pasta guarda, propostas para o cliente, transcrições de reuniõe
 É a diferença entre "isto foi feito assim porque o cliente pediu, no e-mail do dia 12" e "ninguém sabe por que é assim".
 Chegou um documento novo, ponha-o na pasta e peça ao agente que o leia e traga para o projeto o que ele muda: uma regra para o docs/00, um termo para o docs/03, uma linha para a fila.
 Os dois comandos procuram a pasta por esse nome e a leem inteira antes de qualquer outra coisa, então o `/brainstorm` parte do briefing ou da proposta que existe antes do código, e o `/analyze` do que o código não consegue dizer.
-Se a pasta entra no commit, e o que nunca pode entrar, é uma decisão própria ([capítulo 18](18-project-as-assistant.md)).
+Se a pasta entra no commit, e o que nunca pode entrar, é uma decisão própria ([capítulo 19](19-project-as-assistant.md)).
 
 ## Revise antes do commit
 

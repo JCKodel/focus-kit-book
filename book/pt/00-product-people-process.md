@@ -38,24 +38,24 @@ O que há de novo é que um agente de código as segue sem se cansar, uma vez es
 **Ego.**
 O autor de um trabalho o defende porque é dele, seja esse autor um colega, um agente ou você.
 A resposta é um papel: a pessoa interpreta, orienta e valida, e não confia cegamente em ninguém, agente ou colega, incluindo o autor do código.
-Validar inclui pedir mais: a primeira resposta de um agente raramente é a melhor que ele pode dar, e ele não oferece o que você não pediu; o capítulo 25, na Parte V, mostra como pedir.
+Validar inclui pedir mais: a primeira resposta de um agente raramente é a melhor que ele pode dar, e ele não oferece o que você não pediu; o capítulo 26, na Parte V, mostra como pedir.
 
 ## Processo
 
 Nenhuma engenharia de software sobrevive sem um processo: quando cada pessoa faz as coisas do seu jeito, o resultado é o caos.
 Um processo é seguido porque cada passo tem um propósito, e o propósito é também o teste.
-Um passo que não pega nenhum erro concreto sai do processo, e processo demais falha tão certamente quanto processo de menos; os capítulos 1 e 9 mostram a segunda falha, e o capítulo 17 transforma a primeira regra numa pergunta.
+Um passo que não pega nenhum erro concreto sai do processo, e processo demais falha tão certamente quanto processo de menos; os capítulos 1 e 9 mostram a segunda falha, e o capítulo 18 transforma a primeira regra numa pergunta.
 
 O processo que este livro ensina roda sobre documentos que um agente lê, e isso muda a quem o processo serve.
 Quando o produto, seu vocabulário, suas decisões e sua fila estão escritos onde o agente os lê, o agente pode responder a qualquer pessoa do time: o que está pendente, como está indo, quem deve uma resposta, o que foi combinado com o cliente.
-Dê a ele também os e-mails e as propostas, e o projeto vira um assistente do time inteiro, desenvolvedores e gestores; o capítulo 18 mostra como.
+Dê a ele também os e-mails e as propostas, e o projeto vira um assistente do time inteiro, desenvolvedores e gestores; o capítulo 19 mostra como.
 É para esse ganho que este livro foi escrito.
 
 ## O que o time ganha
 
 Um produto escrito, conhecimento em documentos em vez de cabeças, e um processo que todos seguem porque cada passo tem um motivo.
 O método é o mesmo para um desenvolvedor e para uma empresa.
-Ele levou meu próprio produto, a Ninjobs (<https://www.ninjobs.app>), de quatro telas em quinze dias à abertura ao público treze dias depois, a história que o capítulo 9 conta, e conduziu um projeto de cliente de 73 entregas em oito dias de commits, o Caso A, que o capítulo 18 conta.
+Ele levou meu próprio produto, a Ninjobs (<https://www.ninjobs.app>), de quatro telas em quinze dias à abertura ao público treze dias depois, a história que o capítulo 9 conta, e conduziu um projeto de cliente de 73 entregas em oito dias de commits, o Caso A, que o capítulo 19 conta.
 Os dois repositórios são privados, então todo número que este livro dá sobre eles foi contado por mim ao longo dos seus históricos; a Ninjobs aparece pelo nome, e o Caso A sem o seu dono, o seu cliente ou o seu negócio.
 
 A Parte I é a base, as práticas que todo leitor precisa compartilhar antes do processo, de por que o processo importa quando a IA escreve rápido até um teste para cada peça de código.

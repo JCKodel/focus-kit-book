@@ -1,4 +1,4 @@
-# 17. O regulador
+# 18. O regulador
 
 Depois deste capítulo você consegue perguntar a tudo o que quer entrar no seu processo, e a cada passo que já está nele, que erro concreto ele teria pegado, e aceitar só uma resposta que nomeie um erro que aconteceu.
 Você também consegue listar o que o processo não tem, e dizer o que faz cada um desses trabalhos no lugar.
@@ -50,17 +50,17 @@ Cada trabalho ainda é feito, por algo que o processo já tem:
 * **Nenhum subagente especializado**, um agente que outro agente lança para um papel estreito com as suas próprias instruções, como um planejador ou um revisor:[^claude-code-subagents] um agente só, que lê os documentos.
 * **Nenhuma ferramenta que as entregas não pediram:** o próprio regulador, que a mantém de fora até uma entrega nomear o erro que ela teria pegado.
 
-## O regulador decide por projeto
+## De um projeto para o kit
 
-A pergunta dá respostas diferentes em projetos diferentes, e deve dar.
+A pergunta é feita em cada projeto, e um erro que um projeto prova pode mudar o kit que todo projeto instala.
 
-O Caso A, um projeto para um cliente em uma plataforma low-code, acrescentou uma quarta marca à sua fila, `[?]`, para uma linha esperando por uma pessoa.
-As três marcas do kit leem `[>]` como "definida e esperando para ser construída", e cinco linhas travadas nas respostas do cliente pareciam trabalho que ninguém tinha começado.
-Esse era o erro, e a marca o nomeou.
+O Caso A, um projeto para um cliente em uma plataforma low-code, lia a sua fila em um quadro kanban, e o quadro mostrou o que as três marcas do kit escondiam (capítulo 16).
+Uma entrega só chegava a Doing depois de a página dela estar escrita, e cinco linhas travadas nas respostas do cliente pareciam trabalho que ninguém tinha começado.
+O Caso A acrescentou uma marca à mão, `[?]`, para uma linha esperando por uma pessoa: cinco linhas que pareciam paradas eram o erro, e a marca o nomeou.
 
-Este livro considerou a mesma marca para a sua própria fila e a rejeitou.[^adr-0013]
-A sua única resposta de fora é a aprovação do autor aos trechos anonimizados, e essa aprovação é um item do Pronto quando de uma página, então nenhuma linha da sua fila jamais espera por uma pessoa.
-A mesma marca, a mesma pergunta, e duas respostas, cada uma tirada do histórico do próprio projeto.
+O erro não era só do Caso A: todo time que lê a fila como um quadro o encontra no dia em que uma linha espera, ou uma entrega está sendo definida.
+Então o kit adotou a resposta na sua versão 2026.10.05, seis marcas com `[?]` entre elas, e este livro segue o kit.[^adr-0018]
+O regulador decidiu do mesmo jeito: a marca entrou com o erro que a justificava, provado em um projeto, e o kit a levou a todo projeto.
 
 ## O que o time ganha
 
@@ -74,8 +74,8 @@ O regulador mantém um processo desse tamanho, e deixa um time dizer sim a um pa
 * A resposta nomeia um erro que aconteceu; um erro possível justifica qualquer coisa, e cada passo é pago por toda entrega depois dele.
 * Um passo que não nomeia erro nenhum sai, e uma lista de exceções reprova em uma entrada sem um aviso vivo.
 * Cada uma das oito coisas que o processo não tem tem o seu trabalho feito por algo que ele tem: a página, os documentos, as linhas de Comportamento, a pessoa, o commit da pessoa, um agente só, e o próprio regulador.
-* O regulador decide por projeto: o Caso A acrescentou uma marca para linhas esperando por uma pessoa, e este livro, cujas linhas nunca esperam por uma, não.
+* Um erro provado em um projeto pode mudar o kit: as linhas do Caso A que pareciam paradas renderam o `[?]`, e o kit o adotou para todo projeto.
 
 [^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>
 [^claude-code-subagents]: Anthropic, "Create custom subagents", documentação do Claude Code, acesso em 2026-09-29. <https://code.claude.com/docs/en/sub-agents>
-[^adr-0013]: ADR-0013 deste livro, "three marks only", 2026-09-24. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/adr/ADR-0013-three-marks.md>
+[^adr-0018]: ADR-0018 deste livro, "six marks", 2026-10-05, o arquivo `ADR-0018-six-marks.md` na sua pasta de decisões. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>

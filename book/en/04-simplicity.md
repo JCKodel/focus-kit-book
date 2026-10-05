@@ -125,7 +125,7 @@ The three principles apply to it unchanged.
 * **DRY.** Each fact of the project lives in one document. A decision written in the plan, in the spec, in the ADR and in the code is four places that will disagree, and the agent reads whichever it opens first.
 
 A step enters the process when it names the concrete error it would have caught, and leaves when it names none.
-Chapter 17, the governor, turns this into the question every step of the process must answer.
+Chapter 18, the governor, turns this into the question every step of the process must answer.
 
 > **Caution.** An agent writes more than code at this speed: it also writes scripts, checks, rules and steps, each one plausible, and a process grows the way code does, one reasonable addition at a time.
 > While this book was being written, the agent proposed that every milestone end with a review step, a good idea; the review found errors, which opened a milestone of fixes, whose own review opened a second, and a third was on its way when I stopped it.

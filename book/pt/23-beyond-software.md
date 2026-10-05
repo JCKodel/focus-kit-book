@@ -1,4 +1,4 @@
-# 22. Projetos que não são software
+# 23. Projetos que não são software
 
 Depois deste capítulo você consegue conduzir uma proposta, uma análise, um documento de passagem de projeto, uma regra de dados ou um livro como entregas, cada uma numa página cujo Pronto quando uma pessoa consegue marcar.
 Você também consegue dizer por que um achado sem linha numa fila se perde.
@@ -56,7 +56,7 @@ Um desenho da solução, um guia de instalação em três formatos, um documento
 O pacote de evidências mostra o Contrato como estrutura: indexado pelos critérios de aceite, ele deixa o cliente conferir a entrega critério por critério e encontrar a prova de cada um.
 
 Algumas entregas não produzem nada além da resposta escrita de uma pessoa.
-A página de uma entrega de pergunta diz o que é perguntado, a quem, e o que cada resposta possível desbloqueia, e ela está pronta quando a resposta chega (capítulo 21).
+A página de uma entrega de pergunta diz o que é perguntado, a quem, e o que cada resposta possível desbloqueia, e ela está pronta quando a resposta chega (capítulo 22).
 Das 73 linhas concluídas do Caso A, 8 foram perguntas a pessoas e cerca de oito foram documentos.
 
 ## Trabalho com dados como entregas

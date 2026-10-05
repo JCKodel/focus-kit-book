@@ -1,6 +1,6 @@
 # 13. The queue and milestones
 
-After this chapter you can read a queue, say what each mark means and which command changes it, and write a milestone paragraph a person can check.
+After this chapter you can read a queue, say what each mark means, and write a milestone paragraph a person can check.
 You can also size and order a milestone, and add or change a line by conversation.
 
 ## The problem
@@ -27,15 +27,20 @@ A line that grows into a paragraph is a decision in the wrong place, since the p
 
 ## The marks
 
-A line has one of three marks, and one command moves each:
+A line has one of six marks, which says where its delivery stands:
 
 * `[ ]` not yet defined: the delivery has a line and no page.
-* `[>]` defined: `/propose` wrote the page, `work/<slug>.md`, and set the mark.
-* `[x]` done: `/apply` built it, moved the page to `work/done/` and set the mark ([chapter 15](15-apply.md)).
+* `[~]` being defined: a conversation is writing its page.
+* `[>]` defined: its page, `work/<slug>.md`, exists and waits to be built.
+* `[*]` being built: a session is building it.
+* `[x]` done: it was built, and its page moved to `work/done/` ([chapter 15](15-apply.md)).
+* `[?]` waiting: it cannot go on until something else happens, and the line says what.
+
+[Chapter 16](16-queue-states.md) shows who sets each mark and at what moment, and how a line waits and leaves `[?]`.
 
 A line never leaves the queue; it changes mark.
 So the queue is also the history of what was delivered, in the order it was planned, and the page in `work/done/` behind each `[x]` says what happened.
-On trunk the page waits uncommitted between the two commands, and `/apply` reads it from the working tree, so a fresh session finds it whether or not it was committed ([chapter 19](19-git-essentials.md)).
+On trunk the page waits uncommitted between the two commands, and `/apply` reads it from the working tree, so a fresh session finds it whether or not it was committed ([chapter 20](20-git-essentials.md)).
 
 This is the lending library's first milestone some days into the work, written for this chapter:
 
@@ -74,7 +79,7 @@ Then each line comes after the lines it needs: a librarian cannot lend a copy be
 
 ### The review, and its findings
 
-A milestone is planned with its review as its last line, `<milestone>-review`, a delivery like the others, which takes the paragraph clause by clause ([chapter 16](16-closing-a-milestone.md)).
+A milestone is planned with its review as its last line, `<milestone>-review`, a delivery like the others, which takes the paragraph clause by clause ([chapter 17](17-closing-a-milestone.md)).
 It reviews no code and fixes nothing: a person tests each clause by hand.
 Each finding becomes a `[ ]` line in the same milestone, under the review line, and those lines get no second review.
 
@@ -91,12 +96,12 @@ You read the change before you commit it, as with every document, and nobody edi
 The queue is the team's shared status board and its history in one file: what is next, what is in flight, what was done and in what order, readable by a manager without a tool and by an agent at the start of every session.
 On Ninjobs it held 102 deliveries, done and not yet done alike, in one file.
 On Case A, a client project on a low-code platform, Microsoft Power Apps with Copilot Studio, the status report and the risk estimate for the project manager were written from the queue and the pages, not from memory, and the queue gave the pace: about 9 lines closed and 6 opened a day.
-[Chapter 18](18-project-as-assistant.md) tells the rest of Case A, and [chapter 21](21-team-tools.md) shows how its queue was mirrored on the board its project manager already used.
+[Chapter 19](19-project-as-assistant.md) tells the rest of Case A, and [chapter 22](22-team-tools.md) shows how its queue was mirrored on the board its project manager already used.
 
 ## Key points
 
 * docs/06 holds milestones, each with a paragraph, and one line per delivery under it: a mark, a slug and what it delivers, in one line; the reasoning goes on the page.
-* Three marks: `[ ]` not defined, `[>]` the page exists (`/propose`), `[x]` done (`/apply`); a line never leaves, so the queue is also the history.
+* Six marks: `[ ]` not defined, `[~]` being defined, `[>]` the page exists, `[*]` being built, `[x]` done, `[?]` waiting; a line never leaves, so the queue is also the history.
 * A milestone paragraph is a test a person can check against the product, never a theme.
 * Three to eight deliveries, the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone.
 * No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept.

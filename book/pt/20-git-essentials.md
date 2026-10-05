@@ -1,4 +1,4 @@
-# 19. Git essencial
+# 20. Git essencial
 
 Depois deste capítulo você consegue dizer o que um controle de versão guarda e por que o git foi criado, ler um histórico de commits, branches e merges, e fazer o merge de um branch de cada uma das quatro formas que o git oferece.
 Você também consegue desfazer uma entrega em um passo com `git revert`, e escolher entre o trunk, um branch por entrega e o git-flow para um projeto.
@@ -69,7 +69,7 @@ Um remoto é outra cópia do repositório que a sua conhece por um nome, em gera
 `git clone <url>` copia um remoto para a sua máquina, com o histórico inteiro, e o guarda como `origin`.
 `git push` envia os commits novos do seu branch para o remoto; `git pull` traz os commits novos do remoto para o seu branch.
 Um time compartilha o seu trabalho assim: cada pessoa faz commits na sua própria cópia e dá push, e os outros dão pull.
-O capítulo 21 parte daqui, com o pull request que pede que um branch enviado seja revisado e passe por merge.
+O capítulo 22 parte daqui, com o pull request que pede que um branch enviado seja revisado e passe por merge.
 
 ## Quatro formas de fazer merge
 
@@ -147,7 +147,7 @@ Uma entrega de vários commits, com o merge feito de cada forma, e o que desfaz�
 Com um branch por entrega, faça o merge por commit de merge ou por squash, para que a entrega continue uma unidade de trabalho que um `git revert` desfaz.
 Um fast-forward ou um rebase só mantém isso quando o branch tinha um commit.
 
-Quando os dois branches mudaram as mesmas linhas, o git não consegue escolher e para com um conflito, que você resolve antes de o merge terminar; o [capítulo 20](20-worktrees.md) ensina isso, onde entregas em paralelo se encontram.
+Quando os dois branches mudaram as mesmas linhas, o git não consegue escolher e para com um conflito, que você resolve antes de o merge terminar; o [capítulo 21](21-worktrees.md) ensina isso, onde entregas em paralelo se encontram.
 
 ## Desfazer uma entrega
 
@@ -191,7 +191,7 @@ Os branches de release e de hotfix são o trabalho de lançamento do time, que o
 Um projeto escreve a sua escolha uma vez, no slot Git do seu docs/05, e todo comando a lê.
 
 * **Trunk** serve a uma pessoa, ou a uma pessoa por vez: um commit por entrega no `main`.
-* **Um branch por entrega** serve a um time, ou a uma pessoa rodando agentes em paralelo ([capítulo 20](20-worktrees.md)): cada entrega com merge por commit de merge ou por squash, em geral por um pull request (capítulo 21).
+* **Um branch por entrega** serve a um time, ou a uma pessoa rodando agentes em paralelo ([capítulo 21](21-worktrees.md)): cada entrega com merge por commit de merge ou por squash, em geral por um pull request (capítulo 22).
 * **git-flow** serve a software que lança versões numeradas e mantém várias em uso.
 
 Seja qual for, a regra é a mesma: uma entrega, um passo para desfazer, e a pessoa faz o commit e o merge, nunca o agente.

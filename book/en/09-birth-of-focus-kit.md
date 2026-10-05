@@ -40,7 +40,7 @@ One delivery became one page, `work/<slug>.md`.
 Two commands did the work: `/propose` talks with me and writes the page, never code; `/apply` builds the page, verifies it and compares the screen against the design.
 The queue became one line per delivery.
 Of the 29 checks, two stayed, both aimed at the product itself: a proof of what each privacy level of a profile may show, and a test of the database's access rules.
-Anything that wanted to come back had to answer one question, the governor of chapter 17: which concrete error would it have caught?
+Anything that wanted to come back had to answer one question, the governor of chapter 18: which concrete error would it have caught?
 One did come back later, a lint of the database, because it named one: a duplicate index that no test had noticed.
 
 Ninjobs opened to the public on 2026-09-10, thirteen days after the restart, with 91 one-page deliveries done.
@@ -65,7 +65,7 @@ Every rule of focus-kit exists because something failed without it.
 * **The agent stages and the person commits.**
   It answers the 29 checks that never looked at the product: the check that does is a person reading each change before it enters the history (chapter 15).
 * **Nothing enters without naming the error it would have caught.**
-  It answers the growth of the checks, each plausible on its own and all of them together heavier than the work (chapter 17).
+  It answers the growth of the checks, each plausible on its own and all of them together heavier than the work (chapter 18).
 
 ## Pick a stack the agent knows well
 

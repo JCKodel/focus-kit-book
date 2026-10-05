@@ -31,3 +31,7 @@ Chapter files are renumbered in both editions; the site's navigation follows the
 The book gains Part V, "The person decides", after Part IV, with one chapter, 25 "Asking for more": why an agent's first answer feels final, what an agent does not propose unasked, and the challenge protocol, with this book's experiment and the studies as the team's gain.
 It stands apart from Part IV because its subject is the person's role from the prologue, not a use of the method beyond code, and every audience of docs/00 reads it.
 The prologue names it where it asks the person to trust no one blindly, and its parts map gains a line for Part V.
+
+## Amendment, 2026-10-05 (queue-states)
+
+Chapters 16 to 25 became 17 to 26 when `queue-states` inserted chapter 16, "The queue while it happens", in Part II; pages in `work/done/` and earlier ADRs keep the old numbers as history.

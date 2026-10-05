@@ -1,7 +1,7 @@
 # The documents
 
 Seven numbered documents, a folder of decisions, a rules file and a work
-folder. The numbers are fixed, because the four commands cite them; the
+folder, written from a context folder. The numbers are fixed, because the four commands cite them; the
 name after the number is in the documentation language (`00-Product.md`,
 `00-Produto.md`, `00-Produkt.md`). Prose in the documentation language;
 identifiers in English unless docs/04 says otherwise.
@@ -38,16 +38,19 @@ Where tests live and what is tested at each level. Commit message format.
 **docs/05, the process.** The template below, with its slots filled.
 
 **docs/06, the queue.** Milestones, each with a paragraph saying what is
-true when it closes, and under it one line per delivery, in order, the
-last one its review (docs/05 §8):
+true when it closes, and under it one line per delivery, in order, then
+its review (docs/05 §8):
 
 ```
 [ ] <slug>    <what it delivers, one line>
 ```
 
-`[ ]` not yet defined · `[>]` defined, `work/<slug>.md` exists · `[x]` done,
-page in `work/done/`. A line never leaves; it changes mark. The queue is
-edited by conversation in any session; no command owns it.
+`[ ]` not yet defined · `[~]` being defined · `[>]` defined,
+`work/<slug>.md` exists · `[*]` being built · `[x]` done, page in
+`work/done/` · `[?]` waiting, with `· blocked: <reason>` or
+`· blocked: after <slug>, <slug>` at the end of the line. A line never
+leaves; it changes mark, at the moment the work changes (docs/05 §4). The
+queue is edited by conversation in any session; no command owns it.
 
 **docs/adr/.** One file per decision, `ADR-NNNN-<slug>.md`: context, the
 decision, the consequences, the date. An ADR is amended, never rewritten.
@@ -63,6 +66,20 @@ so it reads the same in every one.
 ones. Created with a `.gitkeep` in `work/done/`, so the folder survives a
 clone.
 
+**context/.** What people said, as it arrived: the proposal, the client's
+emails, the notes of a meeting, a brief. `context/` is what the agent reads
+from; `docs/` is what it writes. Each item is a pair: the original, kept
+byte for byte, and beside it `<original name>.md` (`proposal.pdf.md`)
+holding what the original says, whole, in Markdown; a summary is not a
+conversion. An item that arrives as text is the `.md` alone. Subfolders
+are the project's. `/brainstorm` and `/analyze` read it whole; an item that
+arrives later is read on the person's request, and what it changes goes
+into the documents (a rule into docs/00, a term into docs/03, a line into
+docs/06), so `/propose` reads the decision, not the message. Whether it is
+committed is a slot of docs/05 §5; personal data and anything under a
+confidentiality clause stay out of a committed folder, because git keeps a
+removed file in its history.
+
 ## Choices
 
 Two things the kit offers and never imposes. Present each in the person's
@@ -75,8 +92,9 @@ rule, publishes one state. Use Cases hold every business rule as pure
 functions that take data and return a Result, no IO, no framework. The
 Repository fetches and saves, and is the only place an infrastructure
 exception becomes a value. Code is organized by feature (vertical slices),
-not by layer, and a layer exists only when it pays its own way. The book is
-FOCUS by J.C. Ködel (https://books.kodel.com.br). Three answers:
+not by layer, and a layer exists only when it pays its own way. FOCUS
+is chapter 7 of the book One Page at a Time by J.C. Ködel
+(https://jckodel.github.io/focus-kit-book/07-four-pieces/). Three answers:
 
 * **FOCUS whole:** the four pieces, errors as values, vertical slices.
   docs/01 gets the responsibility table below and names the pieces a slice
@@ -177,8 +195,29 @@ dropped, what the proof found, the decisions taken.
 ## 4. The queue
 
 docs/06: one line per delivery, in order, under milestones. The line never
-leaves the queue; it changes mark: `[ ]` not defined, `[>]` defined and not
-built, `[x]` done. The last line of each milestone is its review (§8). Edited by
+leaves the queue; it changes mark, at the moment the work changes, so the
+queue shows what is happening while it happens:
+
+| Mark | Means | Set by |
+|---|---|---|
+| `[ ]` | not defined | the conversation that adds the line |
+| `[~]` | being defined | /propose, when it starts |
+| `[>]` | defined, `work/<slug>.md` exists | /propose, when the page is written |
+| `[*]` | being built | /apply, when it starts |
+| `[x]` | done, page in `work/done/` | /apply, with verify green |
+| `[?]` | waiting | any session, in the three cases below |
+
+A line waits when the person says it is blocked, when it needs an answer
+that was asked and not given, or when it needs another line done first,
+such as a fix found in the middle of an /apply. The reason goes at the end
+of the line, `· blocked: <reason>` or `· blocked: after <slug>, <slug>`.
+Any mark before `[x]` can become `[?]`. The line leaves `[?]` when the
+reason is resolved: the person says so, the session that records the
+answer clears it, or /apply clears it when it marks `[x]` the last line of
+an `after`. It goes back to `[>]` when its page exists and `[ ]`
+otherwise, and the next command marks it again.
+
+Each milestone is planned with its review as the last line (§8). Edited by
 conversation in any session.
 
 ## 5. This project
@@ -191,6 +230,8 @@ conversation in any session.
 * **Proof of a screen:** <tool, viewports, reference>, or "no screens".
 * **Publish policy:** when an environment beyond the local one is updated,
   and whether the agent asks first.
+* **Context:** `context/` is committed | listed in `.gitignore`, and why
+  (who reads the repository).
 * **Git:** trunk | a branch per delivery | a worktree per delivery. A
   delivery's page and build are one change: one commit on trunk, one merge
   otherwise. The agent stages; it never commits or merges.
@@ -206,26 +247,26 @@ reasoning lives.
 ## 7. What this process does not have
 
 No formal spec, no spec delta, no change folder, no numbered tasks, no
-gate before implementation, no specialized subagent, no tool the
-deliveries did not ask for. When one of these is proposed, the question
-is: which concrete error would it have caught? The answer names an error
-that happened.
+gate before implementation, no review of a review, no specialized
+subagent, no tool the deliveries did not ask for. When one of these is
+proposed, the question is: which concrete error would it have caught? The
+answer names an error that happened.
 
 ## 8. Closing a milestone
 
-The last line of every milestone is its review, `<milestone>-review`, a
-delivery like the others: /propose writes its page, /apply runs it. It
-checks the milestone's paragraph clause by clause against what the
-deliveries built, and reviews the code with what the host offers. A clause
-no delivery answers is a finding. The review fixes nothing; the person
-decides each finding, confirmed or rejected, with a reason.
+A milestone is planned with its review as its last line,
+`<milestone>-review`, a delivery like the others: /propose writes its
+page, /apply runs it. It takes the milestone's paragraph clause by clause
+and writes, for each, which delivery answers it and how a person tests it.
+It reviews no code and fixes nothing. The person tests each clause by
+hand: a clause no delivery answers, or one that fails in the person's
+hands, is a finding.
 
-Each confirmed finding becomes a `[ ]` line in a new milestone placed
-right after the reviewed one, numbered with `.1` (M3 is followed by M3.1),
-with its own paragraph, so the lines wait for /propose and nothing
-renumbers. That milestone ends with its own review, which may open `.2`.
-No confirmed finding, no new milestone. A finding is never a fix in the
-middle of the next milestone.
+Each finding becomes a `[ ]` line in the same milestone, under the review
+line, waiting for /propose. The milestone closes when those lines are
+`[x]`. They get no second review: each one passes through its own page,
+its proof and the person's commit, which is the review. A finding is
+never a fix in the middle of the next milestone.
 ```
 
 ## AGENTS.md
