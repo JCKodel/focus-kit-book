@@ -47,6 +47,8 @@ O `/brainstorm` e o `/analyze` explicam cada uma com uma recomendação para a s
 
 **A arquitetura.** O FOCUS é a arquitetura do capítulo 7: código organizado em fatias verticais (capítulo 6), toda regra de negócio uma função pura que devolve um Result (capítulo 5), e quatro peças pelas quais um evento flui num só sentido até um novo estado.
 O kit dá três respostas: o FOCUS inteiro; só os dois princípios, fatias verticais e exceções como valores, na estrutura que a stack favorecer; ou nenhum dos dois, as convenções do próprio projeto.
+Com qualquer uma das três, a página, a fila, os documentos, a verificação e o commit funcionam do mesmo jeito.
+O que o FOCUS acrescenta está no código: um agente lê uma fatia para uma mudança (capítulo 6), o que os dois princípios também dão, e cada uma das quatro peças tem o seu próprio teste (capítulo 8).
 O Ninjobs, um app web fino sobre um backend como serviço, escolheu os dois princípios.
 Num repositório que já tem código, o padrão é o que o código já faz.
 O docs/01 registra a resposta, e um ADR registra o porquê.
@@ -125,7 +127,7 @@ No Ninjobs uma decisão morava em seis lugares que podiam discordar, e toda entr
 
 * Cada fato mora em um lugar: sete documentos numerados, `docs/adr/`, `AGENTS.md` e `work/`, com números fixos porque os comandos os citam.
 * O docs/00 é o produto e as suas decisões em aberto, o docs/01 e o docs/02 como ele é construído, o docs/03 o vocabulário, o docs/04 as convenções, o docs/05 o processo com os slots do projeto, o docs/06 a fila.
-* As duas escolhas, a arquitetura (o FOCUS inteiro, os dois princípios, nenhum) e o git (trunk, um branch ou um worktree por entrega), ficam registradas no docs/01 e no docs/05, cada uma com um ADR que é emendado, nunca reescrito.
+* As duas escolhas, a arquitetura (o FOCUS inteiro, os dois princípios, nenhum) e o git (trunk, um branch ou um worktree por entrega), ficam registradas no docs/01 e no docs/05, cada uma com um ADR que é emendado, nunca reescrito; o método funciona do mesmo jeito com qualquer uma delas.
 * Um fato novo vai para o primeiro documento cuja pergunta servir; uma frase pode guardar vários fatos, cada um com o seu dono, e o `AGENTS.md` só aponta para eles.
 * Você muda os documentos conversando com o agente, e interpreta, guia e valida o que ele escreve; uma decisão em aberto o faz parar e perguntar.
 

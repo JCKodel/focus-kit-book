@@ -1,6 +1,7 @@
 # 14. `/propose`: one page
 
 After this chapter you can turn a queue line into a page with `/propose`, read the page as the record of what the agent understood and of what `/apply` will build, cover its holes by conversation before any code exists, and split a delivery that does not fit one page.
+You can also explore a problem you do not understand yet by talking to the agent, before there is a page.
 
 ## The problem
 
@@ -114,6 +115,14 @@ A scope that does not fit one page is two deliveries: `/propose` says so, propos
 On Ninjobs the queue's single line for a job posting became six deliveries in one `/propose`: the posting, its employer, its tags, its offer, its benefits and languages, and its life cycle; the page of the first said it was step one of six.
 Each of the six was reviewed on its own page and built in its own session.
 
+## When you do not know yet
+
+Some scopes do not fit a page because nobody knows the answer yet: how an unfamiliar API behaves, or which of two approaches holds.
+Other methods call the work that finds out a spike; here it is a conversation with the agent, in any session, before any page.
+The agent is a language model you talk with, not a button that runs a fixed command, and it reads the project's documents, so what it suggests follows the project.
+The conversation ends in one of three ways: a new line in the queue (chapter 13); a decision you accept, written in the document that owns it (chapter 10); or `/propose` in the same session, which starts with the exploration already in its context.
+On my projects this was rarely needed, and the conversation was always enough, so no mark, command or kind of delivery was added for it: none would name an error it caught, which is the governor of chapter 18.
+
 ## What the team gains
 
 The page is the review surface of the team.
@@ -127,6 +136,7 @@ And when the build ends, the same page records what happened, so the history of 
 * `/propose` reads the documents, asks only where no document closes a reading, recommendation first, marks the line `[~]` while it talks and `[>]` when the page is written, or `[?]` when the scope waits, and never writes code.
 * The page has a fixed format; the Contract is the one exact section, because a wrong column is a migration.
 * Read the page before `/apply` and cover each hole by asking the agent, never by hand: a hole on the page costs a turn, after `/apply` it costs another `/apply`.
+* When nobody knows the answer yet, explore it by talking to the agent, and end with a queue line, a decision written where it belongs, or `/propose` in the same session; nothing new is needed for it.
 * The page is the team's review surface, for code and for anything else that fits a page.
 
 [^claude-code-plan-mode]: Anthropic, "Common workflows", Claude Code documentation, section "Plan before editing", accessed 2026-09-28. <https://code.claude.com/docs/en/common-workflows#plan-before-editing>

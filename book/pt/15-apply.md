@@ -97,6 +97,13 @@ Leia também o que aconteceu, e pergunte-se se você teria decidido alguma diver
 Peça cada correção ao agente, na mesma sessão, nunca à mão.
 A mesma sessão guarda o raciocínio da construção: ela sabe por que fez cada escolha, o que uma sessão nova teria de adivinhar.
 
+Uma pessoa que faz commit depois de muitas entregas boas para de conferir, e toma a palavra do agente no lugar da própria leitura.
+Isso é o viés de automação, definido e medido no capítulo 26, e esta revisão o combate de quatro jeitos.
+Ela é um conjunto de perguntas respondidas contra uma página que você já leu, não uma olhada no diff.
+O registro do que aconteceu, na página, mostra onde o agente decidiu sozinho, então você sabe onde olhar.
+Uma página mantém a mudança pequena o bastante para ser lida inteira.
+E a verificação e a prova rodaram antes de você olhar, então a sua atenção vai para onde nenhuma checagem chega.
+
 ## O commit é a revisão humana
 
 O agente coloca em stage e sugere a mensagem; a pessoa lê o diff e faz o commit.
@@ -147,5 +154,6 @@ A decisão e o seu motivo estão na página que a construiu, e o commit que a pu
 * Ele segue o docs/05 ao pé da letra, e quando a página contradiz um documento ele para e diz qual; nunca resolve em silêncio.
 * Verde não é pronto: pronto é a verificação verde, a prova, o que aconteceu na página, os documentos atualizados, a página em `work/done/`, a linha `[x]` e a mudança em stage.
 * Revise a mudança em stage contra a página, e peça cada correção na mesma sessão.
+* Essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
 * O agente coloca em stage e sugere a mensagem; a pessoa lê o diff e faz o commit, então nada chega ao histórico sem ser lido, e uma entrega se desfaz em um passo.
 

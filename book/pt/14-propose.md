@@ -1,6 +1,7 @@
 # 14. `/propose`: uma página
 
 Depois deste capítulo você consegue transformar uma linha da fila em uma página com o `/propose`, ler a página como o registro do que o agente entendeu e do que o `/apply` vai construir, cobrir os buracos dela por conversa antes de existir qualquer código, e dividir uma entrega que não cabe em uma página.
+Você também consegue explorar um problema que ainda não entende conversando com o agente, antes de existir uma página.
 
 ## O problema
 
@@ -114,6 +115,14 @@ Um escopo que não cabe em uma página são duas entregas: o `/propose` diz isso
 Na Ninjobs, a linha única da fila para uma vaga de emprego virou seis entregas em um `/propose`: a vaga, o empregador, as tags, a oferta, os benefícios e os idiomas, e o ciclo de vida; a página da primeira dizia que ela era o passo um de seis.
 Cada uma das seis foi revisada na sua própria página e construída na sua própria sessão.
 
+## Quando você ainda não sabe
+
+Alguns escopos não cabem em uma página porque ninguém sabe a resposta ainda: como uma API desconhecida se comporta, ou qual de duas abordagens se sustenta.
+Outros métodos chamam o trabalho que descobre isso de spike; aqui ele é uma conversa com o agente, em qualquer sessão, antes de qualquer página.
+O agente é um modelo de linguagem com quem você conversa, não um botão que roda um comando fixo, e ele lê os documentos do projeto, então o que ele sugere segue o projeto.
+A conversa termina de um de três jeitos: uma linha nova na fila (capítulo 13); uma decisão que você aceita, escrita no documento que é dono dela (capítulo 10); ou o `/propose` na mesma sessão, que começa com a exploração já no seu contexto.
+Nos meus projetos isso foi raro, e a conversa sempre bastou, então nenhuma marca, comando ou tipo de entrega foi acrescentado para isso: nenhum nomearia um erro que tivesse pegado, que é o regulador do capítulo 18.
+
 ## O que o time ganha
 
 A página é a superfície de revisão do time.
@@ -127,6 +136,7 @@ E quando a construção termina, a mesma página registra o que aconteceu, entã
 * O `/propose` lê os documentos, só pergunta onde nenhum documento fecha uma leitura, com a recomendação primeiro, marca a linha `[~]` enquanto conversa e `[>]` quando a página está escrita, ou `[?]` quando o escopo espera, e nunca escreve código.
 * A página tem um formato fixo; o Contrato é a única seção exata, porque uma coluna errada é uma migration.
 * Leia a página antes do `/apply` e cubra cada buraco pedindo ao agente, nunca à mão: um buraco na página custa um turno, depois do `/apply` custa outro `/apply`.
+* Quando ninguém sabe a resposta ainda, explore-a conversando com o agente, e termine com uma linha na fila, uma decisão escrita onde ela pertence, ou o `/propose` na mesma sessão; nada novo é preciso para isso.
 * A página é a superfície de revisão do time, para código e para qualquer outra coisa que caiba em uma página.
 
 [^claude-code-plan-mode]: Anthropic, "Common workflows", documentação do Claude Code, seção "Plan before editing", acesso em 2026-09-28. <https://code.claude.com/docs/en/common-workflows#plan-before-editing>

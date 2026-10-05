@@ -97,6 +97,13 @@ Read what happened too, and ask whether you would have decided any divergence ot
 Ask the agent for each correction, in the same session, never by hand.
 The same session keeps the reasoning of the build: it knows why it made each choice, which a fresh session would have to guess.
 
+A person who commits after many good deliveries stops checking, and takes the agent's word in place of their own reading.
+That is automation bias, defined and measured in chapter 26, and this review counters it in four ways.
+It is a set of questions answered against a page you already read, not a glance at a diff.
+The page's record of what happened shows where the agent decided alone, so you know where to look.
+One page keeps the change small enough to read whole.
+And verify and the proof ran before you look, so your attention goes where no check reaches.
+
 ## The commit is the human review
 
 The agent stages and suggests the message; the person reads the diff and commits.
@@ -147,5 +154,6 @@ The decision and its reason are on the page that built it, and the commit that s
 * It follows docs/05 literally, and when the page contradicts a document it stops and says which; it never resolves it silently.
 * Green is not done: done is verify green, the proof, what happened on the page, the documents updated, the page in `work/done/`, the line `[x]` and the change staged.
 * Review the staged change against the page, and ask for each correction in the same session.
+* That review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
 * The agent stages and suggests the message; the person reads the diff and commits, so nothing reaches the history unread, and a delivery reverts in one step.
 

@@ -47,6 +47,8 @@ The kit offers two choices and imposes neither: the architecture and the git str
 
 **The architecture.** FOCUS is the architecture of chapter 7: code organized in vertical slices (chapter 6), every business rule a pure function that returns a Result (chapter 5), and four pieces through which an event flows one way to a new state.
 The kit gives three answers: FOCUS whole; the two principles only, vertical slices and exceptions as values, in whatever structure the stack favors; or neither, the project's own conventions.
+With any of the three, the page, the queue, the documents, verify and the commit work the same.
+What FOCUS adds is in the code: an agent reads one slice for a change (chapter 6), which the two principles give too, and each of the four pieces has its own test (chapter 8).
 Ninjobs, a thin web app over a backend as a service, chose the two principles.
 On a repository that already has code, the default is what the code already does.
 docs/01 records the answer, and an ADR records why.
@@ -125,7 +127,7 @@ On Ninjobs a decision lived in six places that could disagree, and every deliver
 
 * Each fact lives in one place: seven numbered documents, `docs/adr/`, `AGENTS.md` and `work/`, with numbers fixed because the commands cite them.
 * docs/00 is the product and its open decisions, docs/01 and docs/02 how it is built, docs/03 the vocabulary, docs/04 the conventions, docs/05 the process with the project's slots, docs/06 the queue.
-* The two choices, the architecture (FOCUS whole, the two principles, neither) and git (trunk, a branch or a worktree per delivery), are recorded in docs/01 and docs/05, each with an ADR that is amended, never rewritten.
+* The two choices, the architecture (FOCUS whole, the two principles, neither) and git (trunk, a branch or a worktree per delivery), are recorded in docs/01 and docs/05, each with an ADR that is amended, never rewritten; the method works the same under any of them.
 * A new fact goes to the first document whose question fits; one sentence can hold several facts, each with its own owner, and `AGENTS.md` only points at them.
 * You change the documents by talking to the agent, and you interpret, guide and validate what it writes; an open decision makes it stop and ask.
 

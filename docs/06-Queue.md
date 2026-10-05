@@ -224,3 +224,12 @@ When this milestone closes, a reader knows the six marks of focus-kit 2026.10.05
 [x] pdf-contents-one-page    the contents of each edition's PDF fit on one page, and a chapter's number in it is no larger than its page number; both editions
 [x] pdf-footnote-numbers     footnote numbers in each edition's PDF render as plain numbers beside their notes, with no coloured block behind them, in Preview too, where the notes' amber bar, a gradient, paints over them; both editions
 ```
+
+## M11. What a critique found
+
+When this milestone closes, a reader who hears that the page needs the whole answer before the work starts, that the method needs FOCUS, or that a person who commits after nine good deliveries stops reading finds the book's answer where the doubt arises: exploring is a conversation with the agent before any page, the method works with any of the three architectures, and the review of chapter 15 is the defence against automation bias.
+
+```
+[x] critique-fixes           chapter 14 teaches exploring a problem by conversation before any page, ending in a queue line, a decision, or a /propose in the same session; chapter 10 says the page, the queue, verify and the commit work the same under any of the three architectures and what FOCUS adds; chapter 15 names automation bias (chapter 26) and shows its review as the defence; both editions
+[ ] m11-review               the review of M11 as docs/05 §8 says
+```
