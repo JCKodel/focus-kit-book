@@ -231,5 +231,5 @@ When this milestone closes, a reader who hears that the page needs the whole ans
 
 ```
 [x] critique-fixes           chapter 14 teaches exploring a problem by conversation before any page, ending in a queue line, a decision, or a /propose in the same session; chapter 10 says the page, the queue, verify and the commit work the same under any of the three architectures and what FOCUS adds; chapter 15 names automation bias (chapter 26) and shows its review as the defence; both editions
-[ ] m11-review               the review of M11 as docs/05 §8 says
+[x] m11-review               the review of M11 as docs/05 §8 says
 ```
