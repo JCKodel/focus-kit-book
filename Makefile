@@ -1,4 +1,6 @@
-.PHONY: serve build verify scan hooks book
+.PHONY: serve build verify scan hooks book release
+
+BUMP ?= patch
 
 .venv: requirements.txt
 	python3 -m venv .venv
@@ -26,3 +28,6 @@ hooks:
 
 book:
 	python3 scripts/build_book.py
+
+release:
+	python3 scripts/release.py $(BUMP)

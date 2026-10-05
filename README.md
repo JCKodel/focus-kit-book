@@ -19,6 +19,7 @@ You need Python 3 and make.
 
 * `make serve` opens the site at <http://127.0.0.1:8000/>.
 * `make verify` runs the checks. The disclosure scan needs a list only the author has; without it, the scan is skipped.
+* `make release`, for the author only, publishes the book: with `main` clean and `make verify` green, it pushes `main` and the next `v*` tag (`BUMP=minor` or `BUMP=major` for a bigger step), and Actions attaches the PDF and EPUB of both editions to a new Release.
 * `make hooks`, run once in a clone, turns on the git hooks that run the disclosure scan on each commit's staged files and message. They refuse every commit when the list is missing, so only the author, who has the list, turns them on; with the list, `make verify` fails until they are on.
 * `make book` writes the PDF and the EPUB of both editions to `output/`, each opening on its cover. It needs pandoc, weasyprint and pypdf:
   * macOS: `brew install pandoc weasyprint` and `pip install pypdf`

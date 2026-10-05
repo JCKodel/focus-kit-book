@@ -102,7 +102,7 @@ conversation in any session.
   * GitHub Pages: the site from `main`, published by Actions on every
     push. A delivery leaves nothing to do: the author's push publishes.
   * GitHub Release: PDF and EPUB in both editions, built by Actions on a
-    `v*` tag. Only the author tags.
+    `v*` tag. Only the author tags, with `make release` (docs/01).
 * **Proof of a screen:** for toolchain deliveries, a screenshot of the
   rendered site at 1280 and 390 pixels wide, in both editions, saved as
   `work/done/<slug>-<what>.png`; failures are captured too. For chapter
