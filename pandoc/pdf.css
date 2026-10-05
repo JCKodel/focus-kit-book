@@ -213,25 +213,23 @@ th { font-weight: 700; border-bottom: 0.75pt solid #0B1626; }
 .contents { page: contents; break-after: page; color: #F3EEE2; }
 .contents-title { margin: 0; font-family: "Instrument Serif"; font-size: 48pt; line-height: 48pt; letter-spacing: -0.01em; text-align: left; hyphens: manual; }
 .contents-title::after { content: ""; display: block; width: 33pt; height: 2.25pt; background: #F2A33A; margin: 10.5pt 0 12pt; }
-.contents .rows { display: table; width: 100%; border-collapse: collapse; font-size: 8.5pt; }
+/* Number, title and page share one size, so a number's figures are no taller than its page's; the rows fit one page with room for two more. */
+.contents .rows { display: table; width: 100%; border-collapse: collapse; font-size: 7.5pt; }
 .contents a { display: table-row; color: inherit; }
 .contents a > span, .contents a::after {
   display: table-cell;
-  padding: 1.5pt 0;
+  padding: 1.25pt 0;
   border-bottom: 0.75pt solid #26334A;
-  line-height: 12pt;
+  line-height: 10.5pt;
   vertical-align: baseline;
 }
-/* The number and the page take a shorter line than the title, so the title alone sets the row's height. */
-.contents .number { width: 16.5pt; padding-right: 9pt; font-family: "Instrument Serif"; font-style: italic; font-size: 12pt; line-height: 10pt; text-align: right; color: #F2A33A; }
+.contents .number { width: 16.5pt; padding-right: 9pt; font-family: "Instrument Serif"; font-style: italic; text-align: right; color: #F2A33A; }
 .contents .title { text-align: left; hyphens: manual; }
 .contents a::after {
   content: target-counter(attr(href), page);
   width: 22.5pt;
   padding-left: 9pt;
   font-family: "Iosevka Term";
-  font-size: 7pt;
-  line-height: 9pt;
   text-align: right;
   color: #F2A33A;
 }

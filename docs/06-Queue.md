@@ -221,6 +221,6 @@ When this milestone closes, a reader knows the six marks of focus-kit 2026.10.05
 [x] queue-states             a chapter of its own on the queue's states: the six marks, who sets each and when, the three cases of `[?]` (the person says so, an answer not given, another line first) with `· blocked: <reason>` and `· blocked: after <slug>`, leaving `[?]`; Case A's Doing that came only after /propose and its `[?]` as the errors; chapters 13, 14, 15, 17, 18 and 21 updated where they teach three marks or call `[?]` Case A's alone; ADR-0013 superseded; docs/03, docs/05 §4 and this queue's header follow the kit; both editions
 [x] context-slot             docs/05 §5 gains the kit's Context slot: `context/` listed in `.gitignore`, not created
 [x] m10-review               the review of M10 as docs/05 §8 says
-[ ] pdf-contents-one-page    the contents of each edition's PDF fit on one page, and a chapter's number in it is no larger than its page number; both editions
+[x] pdf-contents-one-page    the contents of each edition's PDF fit on one page, and a chapter's number in it is no larger than its page number; both editions
 [ ] pdf-footnote-numbers     footnote numbers in each edition's PDF render as plain numbers beside their notes, with no coloured block behind them; both editions
 ```

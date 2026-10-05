@@ -27,6 +27,8 @@ EDITIONS = {
     "en": {"lang": "en", "name": "one-page-at-a-time", "contents": "Contents", "chapter": "Chapter"},
     "pt": {"lang": "pt-BR", "name": "uma-pagina-de-cada-vez", "contents": "Sumário", "chapter": "Capítulo"},
 }
+# The contents' id; no heading takes it, since --file-scope prefixes every heading id with its file.
+CONTENTS = "contents"
 # ascii_identifiers: a heading's id drops its accents, as on the site, so one #anchor link works in both.
 READ = ["-f", "markdown-tex_math_dollars+ascii_identifiers", "--file-scope"]
 
@@ -250,7 +252,7 @@ def openings(page, settings):
 
     page = OPENING.sub(opening, page)
     contents = (
-        f'<nav class="contents">\n<p class="contents-title">{html.escape(settings["contents"])}</p>\n'
+        f'<nav class="contents" id="{CONTENTS}">\n<p class="contents-title">{html.escape(settings["contents"])}</p>\n'
         f'<div class="rows">\n{"".join(rows)}</div>\n</nav>\n'
     )
     first = page.find('<header class="opening">')
@@ -325,6 +327,7 @@ def build(edition, site, work):
     page.write_text(text, encoding="utf-8")
     body = work / "body.pdf"
     run(["weasyprint", "--base-url", str(ROOT / "book" / edition) + "/", str(page), str(body)], places)
+    long_contents = contents_on_one_page(edition, body)
     pdf = OUTPUT / f"{settings['name']}.pdf"
     with_cover(edition, body, pdf)
 
@@ -338,7 +341,7 @@ def build(edition, site, work):
          "-o", str(epub)],
         places, work,
     )
-    return [pdf, epub]
+    return [pdf, epub], long_contents
 
 
 def cover(edition, suffix):
@@ -347,6 +350,22 @@ def cover(edition, suffix):
     if not path.is_file():
         raise Failed(f"{path.relative_to(ROOT)}:1: book: cover not found")
     return path
+
+
+def contents_on_one_page(edition, body):
+    """The finding when the rendered contents runs past one page before the first chapter's opening, or None.
+
+    It is returned, not raised, so both editions are built and both report.
+    """
+    from pypdf import PdfReader
+
+    reader = PdfReader(str(body))
+    start = reader.get_destination_page_number(reader.named_destinations[CONTENTS])
+    headings = [reader.get_destination_page_number(entry) for entry in reader.outline if not isinstance(entry, list)]
+    pages = min(page for page in headings if page > start) - start
+    if pages > 1:
+        return f"Makefile:1: book: {edition} contents takes {pages} pages; it must fit on one"
+    return None
 
 
 def with_cover(edition, body, pdf):
@@ -376,12 +395,17 @@ def main():
     try:
         site = site_values()
         OUTPUT.mkdir(exist_ok=True)
-        written = []
+        written, long_contents = [], []
         for edition in EDITIONS:
             with tempfile.TemporaryDirectory() as work:
-                written += build(edition, site, Path(work))
+                files, problem = build(edition, site, Path(work))
+            written += files
+            long_contents += [problem] if problem else []
     except Failed as failure:
         print(failure)
+        return 1
+    if long_contents:
+        print("\n".join(long_contents))
         return 1
     for path in written:
         print(path.relative_to(ROOT))
