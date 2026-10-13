@@ -53,7 +53,7 @@ Ninjobs, a thin web app over a backend as a service, chose the two principles.
 On a repository that already has code, the default is what the code already does.
 docs/01 records the answer, and an ADR records why.
 
-**The git strategy.** Three answers, each for one way of working: trunk, everything on the main branch, one delivery at a time, for one person alone; a branch per delivery, merged through a reviewed pull request, for sequential work; a worktree per delivery, a second working folder on its own branch, so several agents build different deliveries at once.
+**The git strategy.** Three answers, each for one way of working: trunk, everything on the main branch, for one person, alone or with several sessions on free lines, deliveries ready to build, that touch different files; a branch per delivery, merged through a reviewed pull request, for sequential work; a worktree per delivery, a second working folder on its own branch, for several people, or for one person whose deliveries touch the same files.
 In every one, a delivery's page and build are one change that reverts in one step, and the agent never commits or merges.
 Chapters 20 and 21 teach the three.
 The Git slot of docs/05 records the answer, and an ADR records why.

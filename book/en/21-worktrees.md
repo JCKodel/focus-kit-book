@@ -1,23 +1,88 @@
 # 21. Worktrees and parallel agents
 
-After this chapter you can have two agents build two deliveries at the same time, each in its own folder, so that each merge holds one delivery and nothing else.
-You can also resolve the conflict when both touched the same lines, catch a conflict marker before it is committed, and say when working in parallel stops paying.
+After this chapter you can run two agents at once in one folder, on trunk, on free lines whose files do not meet, tell what is and is not a conflict there, and commit each delivery alone.
+You can also say when a worktree per delivery still pays, build in worktrees, resolve the conflict when two branches touched the same lines, catch a conflict marker before it is committed, and say when working in parallel stops paying.
 
 ## The problem: one folder, two jobs
 
 An agent takes minutes to build a delivery, and while it works you wait.
-The natural move is to start a second agent on the next delivery, and in one folder that goes wrong in one of two ways.
+The natural move is to start a second agent on the next delivery, in a second session, in the same folder.
+Often that works: the two agents write different files, and each delivery still lands as its own commit.
+It goes wrong in two cases.
 
-If both agents work on the same branch, their changes land in the same folder, mixed.
-A commit takes both: one commit with two deliveries, one of them perhaps half done, which no single `git revert` can undo apart.
+If both deliveries change the same lines of a file, or one needs a file the other is changing, each agent builds on top of the other's half-done work, and neither delivery can be reviewed or reverted alone.
+
+If one commit takes both deliveries, one of them perhaps half done, no single `git revert` can undo them apart.
 The unit of work of [chapter 20](20-git-essentials.md), one delivery that reverts in one step, is gone, and separating the two afterwards means picking changes file by file, line by line, by hand.
 
-If you give each delivery its own branch, the folder still holds only one branch at a time.
+The first case is avoided by choosing which deliveries run together; the second, by how you commit.
+
+## Two sessions in one folder
+
+Two sessions can share one folder when they build free lines that touch different files.
+A free line is a line of the queue that is not done, not waiting, and needs no other line done first ([chapter 16](16-queue-states.md) teaches the queue's marks).
+
+Say the lending library has two free lines: `return-book`, which touches `src/loans/`, and `overdue-list`, which touches `src/reports/`; the slugs and paths are an illustration, written for this chapter.
+Their code files do not meet.
+Both mark docs/06, the queue, but each marks its own line, and two lines far apart in one file are two hunks, separate pieces of a change that git stages apart.
+So the two can run in one folder at once.
+
+Each session keeps to its delivery:
+
+* it changes the mark of its own line in the queue, and no other;
+* it stages only its own paths, and only its own hunk of docs/06 (`git add -p` stages a file hunk by hunk);
+* it leaves alone whatever the other session changed or staged.
+
+The commit stays yours, one delivery at a time.
+Before committing `return-book`, look at what is staged:
+
+```
+git diff --cached --stat
+```
+
+It lists each staged file and how many of its lines change.
+If the list holds only `src/loans/`, the page of `return-book` and docs/06, and `git diff --cached docs/06-Queue.md` shows only that line's hunk, a plain `git commit` takes that delivery and nothing else.
+If it also holds `src/reports/` or the page of `overdue-list`, the other session has staged its work too, and a plain commit takes both.
+
+The trap is naming paths.
+`git commit -- docs/06-Queue.md src/loans/` looks like the safe way to commit one delivery, and for files only that delivery changed, it is.
+For a file both changed, it takes too much: the git documentation says a commit with paths is made "*by taking the updated working tree contents of the paths specified on the command line, disregarding any contents that have been staged for other paths.*"[^git-commit]
+So git takes docs/06 whole from the folder, the other line's mark included, staged or not, and that mark rides into this commit.
+
+The way out is order.
+Commit each delivery as its session ends, before the other stages anything.
+If the other has staged already, unstage its entries yourself, `git restore --staged <its paths>` and `git restore --staged -p docs/06-Queue.md` for its hunk of the queue, commit, and let its session stage them again; a session never touches the other's entries.
+
+## What is and is not a conflict there
+
+In one folder, each session sees the other's work as it happens, and most of it is no reason to stop:
+
+* another line's mark changes in docs/06, `[~]` to `[*]`, say;
+* another delivery's page appears in `work/`, or its files in the tree;
+* another delivery's entries are already staged.
+
+Each is the other session's work: the session goes on, and touches none of it.
+The kit's changelog, at entry 2026.10.08.3, tells why this is written down: a user ran two sessions on one repository, on different modules, and the second stopped because the first had changed docs/06, when it had everything it needed to go on.
+
+Two things are a conflict:
+
+* both deliveries edit the same hunk, the same lines of `src/loans/loan.ts`, say;
+* this page needs a file the other delivery is changing, as when `return-book` needs `src/loans/` while another delivery reshapes it.
+
+Then the session stops and reports, and the decision is yours: order the two lines, by writing `· after <slug>` on the one that must wait for the other, or give one of them a worktree.
+
+## When a worktree still pays
+
+One folder holds one branch at a time, and everyone working in it shares its files.
+So a worktree per delivery pays in two cases: several people working at once, since one commit on a shared branch would carry another person's half-done work; and one person whose deliveries touch the same files, so each is built apart and their changes meet only at the merge.
+
+Branches alone do not do it.
+If you give each delivery its own branch in one folder, the folder still holds only one branch at a time.
 Switching branches while an agent has work not yet committed either carries that work to the other branch or makes git refuse until you put it aside with `git stash`; and two agents cannot be on two branches of one folder at the same moment.
 
 A second clone of the repository gives each agent its own folder, but each clone has its own copy of the history: the two meet only by pushing to a remote and pulling from it, and every clone repeats the whole history on disk.
 
-What you want is several folders, each on its own branch, sharing one history.
+What you want then is several folders, each on its own branch, sharing one history.
 That is a worktree.
 
 ## What a worktree is
@@ -35,7 +100,7 @@ Git also refuses to check out one branch in two worktrees, so two folders never 
 ## How it solves the problem
 
 Give each delivery its own worktree, and each agent its own folder.
-Say the lending library has two deliveries ready to build, `return-book` and `overdue-list`:
+Say `return-book` and `overdue-list` both need `src/loans/`:
 
 * The agent building `return-book` works in `../library-return-book`, on the branch `return-book`; it sees only that delivery's changes, and the commit you make there holds that delivery and nothing else.
 * The agent building `overdue-list` does the same in `../library-overdue-list`, at the same time.
@@ -90,7 +155,7 @@ A worktree per delivery is one of the git strategies a project can write in the 
 You review and commit on the branch, merge into `main` with `--no-ff`, remove the worktree and delete the branch.
 
 The agent never commits, merges, resolves a conflict or removes a worktree: every step that changes the history is yours, as in every git strategy.
-To run two deliveries at once, open one session per folder: one in the main folder for each `/propose`, one in each worktree for its `/apply`.
+To run two deliveries at once in worktrees, open one session per folder: one in the main folder for each `/propose`, one in each worktree for its `/apply`.
 
 ## When the branches meet: the conflict
 
@@ -145,39 +210,47 @@ Pushed: `git revert`, since a reset rewrites history that others already have, w
 
 ## When parallel stops paying
 
-Worktrees remove the mixing; they leave in place everything two deliveries share.
-Before starting two at once, check five things.
+In one folder or in worktrees, two deliveries at once still share whatever is not in their own files.
+Before starting two, check five things.
 
-**The queue.** It always conflicts, since every delivery marks its line, and it resolves the same way every time: keep both marks.
+**The queue.** In one folder it does not conflict: each session marks its own line and stages its own hunk.
+Across worktrees it always conflicts at the merge, since every delivery marks its line, and it resolves the same way every time: keep both marks.
 
-**Files both change.** A code file that two deliveries both change is different: its resolution is a decision about the code, and the person who makes it must understand both changes.
+**Files both change.** A code file that two deliveries both change is different.
+In one folder the session stops when it meets the other's change; across worktrees the merge does, and its resolution is a decision about the code: the person who makes it must understand both changes.
 So pair deliveries whose files do not meet: read each queue line, docs/01 and the code it names, and list the files each will touch.
 
-**Shared ports and databases.** Worktrees share the machine: its ports, a test database in a common folder.
-Two test runs that start a server on the same port collide, and one fails for a reason that has nothing to do with its code.
-A port or a database per worktree is a choice the project can make, in a delivery of its own.
+**Shared ports and databases.** Two sessions share the machine in either form: its ports, a test database in a common folder.
+In one folder they also share the folder itself, its test database and its build output.
+Two test runs that start a server on the same port, or write the same database, collide, and one fails for a reason that has nothing to do with its code.
+A port or a database per session is a choice the project can make, in a delivery of its own.
 
-**Dependencies.** Each worktree installs its own, so each costs as much disk as the main folder, and the install takes its time again.
+**Dependencies.** One folder installs them once.
+Each worktree installs its own, so each costs as much disk as the main folder, and the install takes its time again.
 
 **You.** The agents work in parallel; your review does not.
 You read each page and each staged change, commit and merge, one delivery at a time, so run at once only as many deliveries as you can review.
-This book, written and reviewed by one person in shared files, stays on trunk for those two reasons.
+This book, written and reviewed by one person in shared files, stays on trunk for those reasons, and its docs/05 lets two sessions work in one folder on free lines that touch different files.
 
 ## What the team gains
 
-Two agents build at once, and each delivery still lands as one merge that reverts alone.
+Two agents build at once, and each delivery still lands as one change that reverts alone: one commit in one folder, one merge from a worktree.
 I measured it once, on a small TypeScript project of mine: two deliveries built at the same time by two agents took 155 seconds from the first start to the last end, against 277.2 seconds of the agents' work added up, a little over half the waiting.[^parallel-run]
 The same run paid the costs of the section above: each worktree's `node_modules` took 155 MB of disk, and the two test runs collided once on a shared port and passed when run again; the queue conflicted, as it always does.[^parallel-run]
-One run is a sign, not a rate: the gain holds while the deliveries' files do not meet, and it ends at the speed of the person who reviews and merges them.
+That run was in worktrees.
+One folder removes the second folder, the second install of 155 MB, the merge and the queue's conflict; no run measured two sessions in one folder, so that gain has no number of its own.
+The rule of what is not a conflict removes the error the kit's changelog records: a second session that stopped on a changed queue when it had everything it needed to go on.
+One run is a sign, not a rate: the gain holds while the deliveries' files do not meet, and it ends at the speed of the person who reviews and commits them.
 
 ## Key points
 
-* Two agents in one folder mix their deliveries in one commit, or fight over the one branch the folder holds; a worktree gives each delivery its own folder and branch, sharing one history.
-* `git worktree add ../<folder> -b <branch> main`, work and commit there, `git merge --no-ff <branch>` from the main folder, then `git worktree remove` and `git branch -d`; in the kit, `/propose` creates the worktree and `/apply` builds in it, and the person merges.
-* A conflict is two branches changing the same or neighbouring lines: git merges the rest and leaves both versions between markers; keep what both did, `git add`, commit, or leave with `git merge --abort`.
-* Git commits markers without a word if you stage the file unresolved: run `git diff --cached --check` before committing a merge.
+* Two sessions share one folder on trunk when their lines are free and their files do not meet: each marks only its line, stages only its paths and its hunk of the queue, and you commit one delivery at a time.
+* Another line's mark, another delivery's page or files and another session's staged entries are not a conflict; the same hunk edited by both, or a file one page needs that the other is changing, is: stop, then order the lines or give one a worktree.
+* Commit from the index once `git diff --cached --stat` holds only that delivery; `git commit -- <paths>` takes each named file whole from the folder, the other delivery's hunk of a shared file included.
+* A worktree per delivery pays for several people, or for deliveries that touch the same files: `git worktree add`, work there, `git merge --no-ff` from the main folder, `git worktree remove`, `git branch -d`; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
 * Parallel pays while the deliveries' files do not meet, the machine's ports and databases do not collide, the disk holds each worktree's dependencies, and one person can still review each delivery.
 
+[^git-commit]: Git, "git-commit", the documentation, option `--only`, accessed 2026-10-13. <https://git-scm.com/docs/git-commit>
 [^git-worktree]: Git, "git-worktree", the documentation, accessed 2026-09-30. <https://git-scm.com/docs/git-worktree>
 [^git-merge]: Git, "git-merge", the documentation, section "How conflicts are presented" and option `--abort`, accessed 2026-09-30. <https://git-scm.com/docs/git-merge>
 [^git-diff]: Git, "git-diff", the documentation, option `--check`, accessed 2026-09-30. <https://git-scm.com/docs/git-diff>

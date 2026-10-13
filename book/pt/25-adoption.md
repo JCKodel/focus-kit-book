@@ -60,7 +60,7 @@ O método dá cada passo a quem é dono dele.
 
 * **Quem propõe:** quem é dono da decisão.
   Um desenvolvedor propõe uma entrega técnica, um analista uma regra, um gerente uma pergunta ao cliente; o `/propose` é uma conversa, e precisa de alguém que consiga responder ([capítulo 14](14-propose.md)).
-* **Quem aplica:** a sessão de um desenvolvedor, ou várias ao mesmo tempo em worktrees, cada uma na sua entrega ([capítulo 21](21-worktrees.md)).
+* **Quem aplica:** a sessão de um desenvolvedor, ou várias ao mesmo tempo, em uma pasta ou em worktrees, cada uma na sua entrega ([capítulo 21](21-worktrees.md)).
 * **Quem faz o commit e o merge:** uma pessoa, sempre.
   O `/apply` coloca em stage e para; o commit é a revisão humana ([capítulo 15](15-apply.md)).
 * **Quem revisa o marco:** o time, no produto rodando, contra o parágrafo do marco ([capítulo 17](17-closing-a-milestone.md)).

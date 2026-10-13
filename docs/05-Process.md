@@ -239,7 +239,10 @@ Inspect the staged diff afterwards and report any unrelated entries that
 were already staged, so the person knows a plain commit would include
 them. Do not unstage those entries yourself. A commit must contain only
 this delivery for the one-change promise to hold: with two sessions on
-trunk, the person commits one delivery at a time, naming its paths.
+trunk, the person commits one delivery at a time, from the index once
+`git diff --cached` holds only it; naming paths takes each file whole
+from the working tree, the other delivery's hunk of a shared file
+included.
 
 The agent suggests the message; the person commits after reviewing.
 Imperative subject up to 72 characters, `<type>(<slug>): <subject>`, where

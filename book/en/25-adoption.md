@@ -60,7 +60,7 @@ The method gives each step to whoever owns it.
 
 * **Who proposes:** whoever owns the decision.
   A developer proposes a technical delivery, an analyst a rule, a manager a question to the client; `/propose` is a conversation, and it needs someone who can answer ([chapter 14](14-propose.md)).
-* **Who applies:** a developer's session, or several at once in worktrees, each on its own delivery ([chapter 21](21-worktrees.md)).
+* **Who applies:** a developer's session, or several at once, in one folder or in worktrees, each on its own delivery ([chapter 21](21-worktrees.md)).
 * **Who commits and merges:** a person, always.
   `/apply` stages and stops; the commit is the human review ([chapter 15](15-apply.md)).
 * **Who reviews the milestone:** the team, on the running product, against the milestone's paragraph ([chapter 17](17-closing-a-milestone.md)).

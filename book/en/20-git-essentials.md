@@ -1,7 +1,7 @@
 # 20. Git essentials
 
 After this chapter you can say what version control keeps and why git was made, read a history of commits, branches and merges, and merge a branch in each of the four ways git offers.
-You can also undo a delivery in one step with `git revert`, and choose between trunk, a branch per delivery and git-flow for a project.
+You can also undo a delivery in one step with `git revert`, and choose between trunk, a branch per delivery, a worktree per delivery and git-flow for a project.
 
 ## The problem
 
@@ -164,7 +164,7 @@ Revert is the undo for anything already shared.
 
 ## Trunk, and trunk-based development
 
-The kit's trunk is one person committing on `main`, one delivery at a time, one commit per delivery.
+The kit's trunk is one person committing on `main`, one commit per delivery, alone or with several agents open at once on deliveries that touch different files (chapter 21).
 It is the simplest history there is: a line, where each commit is a delivery and each revert takes one back.
 
 Trunk-based development is a team practice of the same name, described by Paul Hammant: everyone merges small changes into the main branch "*at least once every 24 hours*", often through short-lived branches reviewed as pull requests.[^tbd]
@@ -190,8 +190,10 @@ Release and hotfix branches are the team's release work, which the kit does not 
 
 A project writes its choice once, in the Git slot of its docs/05, and every command reads it.
 
-* **Trunk** fits one person, or one person at a time: one commit per delivery on `main`.
-* **A branch per delivery** fits a team, or one person running agents in parallel ([chapter 21](21-worktrees.md)): each delivery merged by merge commit or squash, usually through a pull request (chapter 22).
+* **Trunk** fits one person, alone or with several sessions open on free lines, queue lines ready to build, that touch different files: one commit per delivery on `main`, each session staging only its delivery, and the person committing one delivery at a time.
+  It does not fit two people: their deliveries share one branch, and one commit carries the other's half-done work.
+* **A branch per delivery** fits sequential work reviewed by pull request (chapter 22): each delivery merged by merge commit or squash.
+* **A worktree per delivery** fits several people working at once, or one person whose deliveries touch the same files ([chapter 21](21-worktrees.md)): each delivery on its own branch in its own folder, merged the same way.
 * **git-flow** fits software that ships numbered versions and keeps several in use.
 
 Whichever it is, the rule is the same: one delivery, one step to undo, and the person commits and merges, never the agent.
@@ -209,7 +211,7 @@ There is no number for this gain: it is a property of the history's shape, and n
 * A commit is a snapshot with its author, message and parents, named by a hash; a branch is a name that moves with each commit on it; a tag never moves; a remote is another copy you clone, push to and pull from.
 * A fast-forward and a rebase leave a line of the branch's commits; a merge commit adds a commit with two parents; a squash merge leaves one new commit; never rebase commits someone else has.
 * A delivery's page and build are one change: one commit on trunk, one merge otherwise, undone with `git revert <commit>` or `git revert -m 1 <merge>`.
-* Trunk fits one person; a branch per delivery fits a team or parallel agents; git-flow fits software that ships versions; the agent stages, the person commits and merges.
+* Trunk fits one person, alone or with several sessions on free lines that touch different files; a branch per delivery fits sequential work reviewed by pull request; a worktree per delivery fits several people, or deliveries that touch the same files; git-flow fits software that ships versions; the agent stages, the person commits and merges.
 
 [^pro-git-about]: Scott Chacon and Ben Straub, "About Version Control", *Pro Git*, 2nd ed., accessed 2026-09-30. <https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control>
 [^pro-git-history]: Scott Chacon and Ben Straub, "A Short History of Git", *Pro Git*, 2nd ed., accessed 2026-09-30. <https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git>
