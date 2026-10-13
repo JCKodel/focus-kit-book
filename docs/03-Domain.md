@@ -14,6 +14,8 @@ A new concept enters here first, in both languages.
 | spec-as-source | spec-as-source | none | The spec is the main source over time; a person edits only the spec, never the code; Portuguese first use: "especificação como fonte". |
 | focus-kit | focus-kit | `focus-kit` | The method this book teaches, and the one-file kit that installs its four commands. |
 | setup file | arquivo de setup | `SETUP.md` | The one file of focus-kit that an agent reads to install or update the kit's commands in a repository, for every host at once. |
+| migration | migração | none | A rule a newer kit version changes in a file that belongs to the project (docs/04, docs/05, `AGENTS.md`): the setup file reports it, with the path, the section and the proposed wording, and writes nothing there; the project applies it as a delivery. |
+| changelog | changelog | `CHANGELOG.md`, `CHANGELOG.pt.md` | The kit's record of what changed, newest first, one entry per version: what changed, the problem that caused it, and the migrations it brings. |
 | host | host | `claude-code`, `codex`, `copilot`, `cursor`, `gemini-cli`, `antigravity`, `windsurf` | The program that runs the coding agent. |
 | command | comando | `/brainstorm`, `/analyze`, `/propose`, `/apply` | One of the four steps the kit installs. |
 | project documents | documentos do projeto | `docs/00` to `docs/06` | The project's memory, read before acting. |

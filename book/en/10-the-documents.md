@@ -29,9 +29,9 @@ Otherwise it is one line: there is none.
 **docs/03, the domain.** One table of the project's terms, with the identifier each has in code and what it means, then the entities and the rules that always hold for them.
 The table is the vocabulary: every page, identifier and test uses its terms, and a new concept enters here before it enters anywhere else.
 
-**docs/04, the conventions.** The language of the documents and of the identifiers, naming, style and the tool that enforces it, where tests live and what each level tests, and the format of a commit message.
+**docs/04, the conventions.** The language of the documents and of the identifiers, naming, style and the tool that enforces it, where tests live and what each level tests.
 
-**docs/05, the process.** The kit's process, the same in every project: the rule, the flow from queue to commit, the shape of a page, the queue, the commit, what the process does not have, and how a milestone closes.
+**docs/05, the process.** The kit's process, the same in every project: the rule, the flow from queue to commit, the shape of a page, the queue, the commit and the format of its message, what the process does not have, and how a milestone closes.
 One section is filled in by the project, "This project", whose entries are its slots: the command that verifies a delivery, the environments, how a screen is proved, when anything is published, and the git strategy.
 The commands read these facts here, so no command file holds any of them.
 
@@ -100,7 +100,7 @@ A new fact has one owner, and you find it by asking these questions in order; th
    docs/03.
 4. Is it how the thing is built: the stack, where code goes, data access, errors, environments?
    docs/01, or docs/02 when a server holds the rule.
-5. Is it how code or text is written: naming, style, tests, commits?
+5. Is it how code or text is written: naming, style, tests?
    docs/04.
 6. Is it a fact of this project that the commands read: the verify command, the environments, git?
    A slot of docs/05.

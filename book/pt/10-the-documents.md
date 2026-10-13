@@ -29,9 +29,9 @@ Senão, é uma linha: não há.
 **docs/03, o domínio.** Uma tabela dos termos do projeto, com o identificador que cada um tem no código e o que significa, e depois as entidades e as regras que sempre valem para elas.
 A tabela é o vocabulário: toda página, identificador e teste usa os seus termos, e um conceito novo entra aqui antes de entrar em qualquer outro lugar.
 
-**docs/04, as convenções.** A língua dos documentos e dos identificadores, a nomenclatura, o estilo e a ferramenta que o impõe, onde ficam os testes e o que cada nível testa, e o formato de uma mensagem de commit.
+**docs/04, as convenções.** A língua dos documentos e dos identificadores, a nomenclatura, o estilo e a ferramenta que o impõe, onde ficam os testes e o que cada nível testa.
 
-**docs/05, o processo.** O processo do kit, o mesmo em todo projeto: a regra, o fluxo da fila ao commit, a forma de uma página, a fila, o commit, o que o processo não tem, e como um marco fecha.
+**docs/05, o processo.** O processo do kit, o mesmo em todo projeto: a regra, o fluxo da fila ao commit, a forma de uma página, a fila, o commit e o formato da sua mensagem, o que o processo não tem, e como um marco fecha.
 Uma seção é preenchida pelo projeto, "This project" (este projeto), cujos itens são os seus slots: o comando que faz a verificação de uma entrega, os ambientes, como uma tela é provada, quando algo é publicado, e a estratégia de git.
 Os comandos leem esses fatos aqui, então nenhum arquivo de comando guarda algum deles.
 
@@ -100,7 +100,7 @@ Um fato novo tem um dono, e você o encontra fazendo estas perguntas em ordem; a
    docs/03.
 4. É como a coisa é construída: a stack, onde o código fica, acesso a dados, erros, ambientes?
    docs/01, ou docs/02 quando um servidor guarda a regra.
-5. É como código ou texto é escrito: nomenclatura, estilo, testes, commits?
+5. É como código ou texto é escrito: nomenclatura, estilo, testes?
    docs/04.
 6. É um fato deste projeto que os comandos leem: o comando de verificação, os ambientes, o git?
    Um slot do docs/05.

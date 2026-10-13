@@ -17,7 +17,7 @@ It talks one subject at a time, in this order, and moves on when it could write 
 1. **The product** (docs/00): what it is in one sentence, for whom, what it is not, what a good decision looks like here.
 2. **The vocabulary** (docs/03): the ten to twenty words the product cannot be described without, each with its name in code.
 3. **How it is built** (docs/01): the stack and the shape of the code, with the kit's two choices, FOCUS and the git strategy, each with the agent's recommendation for this stack.
-4. **The conventions** (docs/04): the documentation language and the identifier language, the style, where tests live, the commit format.
+4. **The conventions** (docs/04): the documentation language and the identifier language, the style, where tests live.
 5. **The process slots** (docs/05): the verify command, the environments, how a screen is proven, when an environment beyond your machine is updated.
 6. **The first milestone** (docs/06): three to eight deliveries, one line each, in order, then its review; the first ones are the skeleton the others stand on.
 

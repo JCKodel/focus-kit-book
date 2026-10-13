@@ -17,7 +17,7 @@ Ele conversa sobre um assunto de cada vez, nesta ordem, e passa ao seguinte quan
 1. **O produto** (docs/00): o que ele é em uma frase, para quem, o que ele não é, como é uma boa decisão aqui.
 2. **O vocabulário** (docs/03): as dez a vinte palavras sem as quais o produto não pode ser descrito, cada uma com seu nome no código.
 3. **Como ele é construído** (docs/01): a stack e a forma do código, com as duas escolhas do kit, o FOCUS e a estratégia de git, cada uma com a recomendação do agente para essa stack.
-4. **As convenções** (docs/04): a língua da documentação e a língua dos identificadores, o estilo, onde ficam os testes, o formato do commit.
+4. **As convenções** (docs/04): a língua da documentação e a língua dos identificadores, o estilo, onde ficam os testes.
 5. **Os slots do processo** (docs/05): o comando de verificação, os ambientes, como uma tela é provada, quando um ambiente além da sua máquina é atualizado.
 6. **O primeiro marco** (docs/06): de três a oito entregas, uma linha cada, em ordem, e depois a revisão dele; as primeiras são o esqueleto em que as outras se apoiam.
 
