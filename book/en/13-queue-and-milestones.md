@@ -1,7 +1,7 @@
 # 13. The queue and milestones
 
 After this chapter you can read a queue, say what each mark means, and write a milestone paragraph a person can check.
-You can also size and order a milestone, and add or change a line by conversation.
+You can also order a milestone so that its order is its priority, write on a line which line must be done before it, `· after <slug>`, and add, move or change a line by conversation.
 
 ## The problem
 
@@ -12,10 +12,10 @@ The queue is one file, docs/06, that says what comes next, what is in flight and
 ## The line
 
 docs/06 holds the project's milestones, each with a paragraph saying what is true when it closes, and under each one line per delivery, in order.
-A line has three parts, a mark, a slug and what the delivery gives, in one line:
+A line has three parts, a mark, a slug and what the delivery gives, in one line, and it may end by naming a line that must be done before it:
 
 ```
-[ ] <slug>    <what it delivers, one line>
+[ ] <slug>    <what it delivers, one line> · after <slug>
 ```
 
 The slug is the delivery's name, in lowercase words joined by hyphens ([chapter 14](14-propose.md)).
@@ -36,7 +36,7 @@ A line has one of six marks, which says where its delivery stands:
 * `[x]` done: it was built, and its page moved to `work/done/` ([chapter 15](15-apply.md)).
 * `[?]` waiting: it cannot go on until something else happens, and the line says what.
 
-[Chapter 16](16-queue-states.md) shows who sets each mark and at what moment, and how a line waits and leaves `[?]`.
+[Chapter 16](16-queue-states.md) shows who sets each mark and at what moment, when a line is free to start, and how a line waits and leaves `[?]`.
 
 A line never leaves the queue; it changes mark.
 So the queue is also the history of what was delivered, in the order it was planned, and the page in `work/done/` behind each `[x]` says what happened.
@@ -56,12 +56,12 @@ overdue book or a suspended membership is refused.
 [x] catalog       the librarian registers books and their copies
 [x] members       the librarian registers, suspends and reinstates members
 [>] lend-book     the librarian lends a copy, and the rules may refuse it
-[ ] return-book   the librarian records a return, and the copy is free again
+[ ] return-book   the librarian records a return · after lend-book
 [ ] m1-review     the milestone checked against its paragraph
 ```
 ````
 
-Anyone can read the state from it: three deliveries done, `lend-book` has a page waiting for `/apply`, and two lines have no page yet.
+Anyone can read the state from it: three deliveries done, `lend-book` has a page waiting for `/apply`, and two lines have no page yet, of which `return-book` comes after `lend-book`, since a copy is returned only after it was lent.
 
 ## Milestones
 
@@ -77,6 +77,15 @@ A milestone holds three to eight deliveries, then its review: the kit's rule for
 The first ones are the skeleton the others stand on: the library's `skeleton` creates `npm run verify`, which every later delivery runs.
 Then each line comes after the lines it needs: a librarian cannot lend a copy before the catalog holds copies and the members exist.
 
+The order is the priority.
+Asked which delivery matters most, you answer from the queue: the one higher in it; the next delivery is the first one free to start ([chapter 16](16-queue-states.md)).
+There is no priority field and no label to keep in step with the order.
+
+When you add a line and already know it needs another done first, you write that with it, at the end: a return needs a loan, so `return-book` ends with `· after lend-book`.
+That is an order, not a wait: the line keeps its mark, `[ ]`, and is free to start once `lend-book` is `[x]`.
+`lend-book` carries no `after`: the lines it needs, `catalog` and `members`, are already `[x]`.
+A line written `[?]` instead would read as stuck when nothing has gone wrong; chapter 16 keeps `[?]` for a wait found on the way.
+
 ### The review, and its findings
 
 A milestone is planned with its review as its last line, `<milestone>-review`, a delivery like the others, which takes the paragraph clause by clause ([chapter 17](17-closing-a-milestone.md)).
@@ -88,6 +97,7 @@ Each finding becomes a `[ ]` line in the same milestone, under the review line, 
 No command owns the queue.
 A new idea becomes a line by conversation, in any session: you tell the agent, and it writes the line in the milestone where it belongs, with a new slug and `[ ]`.
 A milestone's paragraph or a line's description changes the same way, and the slug stays, since a page or a commit may already use it.
+Moving a line up or down is changing its priority, and it happens the same way: you ask the agent to move it.
 Lines also come from a milestone's review and, on an existing project, from its issues or roadmap.
 You read the change before you commit it, as with every document, and nobody edits the queue by hand.
 
@@ -98,11 +108,19 @@ On Ninjobs it held 102 deliveries, done and not yet done alike, in one file.
 On Case A, a client project on a low-code platform, Microsoft Power Apps with Copilot Studio, the status report and the risk estimate for the project manager were written from the queue and the pages, not from memory, and the queue gave the pace: about 9 lines closed and 6 opened a day.
 [Chapter 19](19-project-as-assistant.md) tells the rest of Case A, and [chapter 22](22-team-tools.md) shows how its queue was mirrored on the board its project manager already used.
 
+The kit's changelog, at entry 2026.10.08.3, tells why the order is written down: the rule that the order is the priority had always held and was written nowhere, so a user asked the kit for a way to rank deliveries.
+Written as a rule, it needs no ranking: the queue already is one.
+This book's own queue shows `· after` at work: in its milestone M12, seven lines end with `· after kit-2026-10-13`; each brings chapters to the kit's version 2026.10.13, which the repository had to run first, and none of them reads as stuck while it waits its turn.[^queue-m12]
+
 ## Key points
 
 * docs/06 holds milestones, each with a paragraph, and one line per delivery under it: a mark, a slug and what it delivers, in one line; the reasoning goes on the page.
 * Six marks: `[ ]` not defined, `[~]` being defined, `[>]` the page exists, `[*]` being built, `[x]` done, `[?]` waiting; a line never leaves, so the queue is also the history.
 * A milestone paragraph is a test a person can check against the product, never a theme.
 * Three to eight deliveries, the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone.
+* The order is the priority: the higher line matters more, and moving a line is changing its priority.
+* A dependency known when a line is added is written with it, `· after <slug>`: an order, not a wait, so the line keeps `[ ]`.
 * No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept.
+
+[^queue-m12]: J.C. Ködel, "One Page at a Time", the queue, `docs/06-Queue.md`, milestone M12, 2026-10, in the book's repository. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md>
 

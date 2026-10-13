@@ -54,7 +54,7 @@ Então, antes de parar, o `/apply` faz tudo isto:
 * Escreve na página o que aconteceu: o que divergiu do plano e por quê, o que foi deixado de lado, o que a prova achou, e as decisões tomadas, com um ADR se foi preciso um.
 * Atualiza os documentos que a entrega mudou: um termo novo no docs/03, uma regra nova no documento que é dono dela, uma decisão em docs/adr/.
 * Marca cada item do Pronto quando.
-* Move a página para `work/done/`, e troca a marca da linha no docs/06 de `[*]` para `[x]`; uma linha `[?]` que esperava só por linhas agora `[x]` volta para `[>]`, ou para `[ ]` quando não tem página.
+* Move a página para `work/done/`, e troca a marca da linha no docs/06 de `[*]` para `[x]`; uma linha `[?]` que esperava só por linhas agora `[x]` volta pela fase de retomada: para `[>]` quando era `resume: apply` e a página dela ainda está completa, senão para `[ ]` ([capítulo 16](16-queue-states.md)).
 * Coloca tudo em stage e sugere a mensagem de commit no formato que o docs/05 define.
 * A última coisa que ele diz é qual ambiente está em qual versão, e o comando que atualiza os outros.
 

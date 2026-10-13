@@ -54,7 +54,7 @@ So before it stops, `/apply` does all of this:
 * It writes into the page what happened: what diverged from the plan and why, what was dropped, what the proof found, and the decisions taken, with an ADR if one was needed.
 * It updates the documents the delivery changed: a new term into docs/03, a new rule into the document that owns it, a decision into docs/adr/.
 * It ticks every item of Done when.
-* It moves the page to `work/done/`, and turns the line's mark in docs/06 from `[*]` to `[x]`; a `[?]` line that waited only on lines now `[x]` goes back to `[>]`, or to `[ ]` when it has no page.
+* It moves the page to `work/done/`, and turns the line's mark in docs/06 from `[*]` to `[x]`; a `[?]` line that waited only on lines now `[x]` goes back by its resume phase: to `[>]` when it was `resume: apply` and its page is still complete, otherwise to `[ ]` ([chapter 16](16-queue-states.md)).
 * It stages everything and suggests the commit message in the format docs/05 defines.
 * The last thing it says is which environment is at which version, and the command that updates the others.
 
