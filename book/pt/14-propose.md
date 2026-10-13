@@ -1,6 +1,7 @@
 # 14. `/propose`: uma página
 
 Depois deste capítulo você consegue transformar uma linha da fila em uma página com o `/propose`, ler a página como o registro do que o agente entendeu e do que o `/apply` vai construir, cobrir os buracos dela por conversa antes de existir qualquer código, e dividir uma entrega que não cabe em uma página.
+Você sabe que o `/propose` decide o que os documentos do projeto já respondem, nomeando a fonte na página, e rascunha as linhas de Comportamento com o que precisa falhar e os casos de borda, então o seu trabalho é corrigir a página, não escrevê-la.
 Você também consegue explorar um problema que ainda não entende conversando com o agente, antes de existir uma página.
 
 ## O problema
@@ -19,12 +20,15 @@ Se não cabe, o escopo ainda não foi entendido, e são duas entregas.
 ## O que o `/propose` faz
 
 O `/propose <slug>` lê antes de perguntar: o docs/00 para o produto e as suas regras, o docs/03 para as palavras que a página precisa usar, o docs/05 para os slots do projeto e o formato da página, o docs/06 para o que vem antes e depois da linha, `work/` para as entregas em andamento, e o docs/01 para onde a mudança mora no código.
-Então ele conversa com você até o escopo caber em uma página, e só pergunta onde há mais de uma leitura e nenhum documento a fecha: primeiro a avaliação dele, em prosa, e a recomendação dele primeiro em cada pergunta.
+Então ele conversa com você até o escopo caber em uma página.
+O que os documentos já respondem, ele não pergunta: o arquivo do comando no kit manda decidir, escrever a decisão na página e nomear o documento de onde ela veio, então, se o documento estiver errado, você corrige uma vez, na revisão, em vez de responder a mesma pergunta duas vezes.
+Ele só pergunta onde os documentos deixam mais de uma leitura e nenhum a fecha: primeiro a avaliação dele, em prosa, e a recomendação dele primeiro em cada pergunta.
 "Você decide" é sempre uma resposta válida, e uma pessoa que não sabe responder ainda recebe uma boa página.
 
-Quando começa, ele marca a linha como `[~]` na fila, então quem a lê vê uma entrega sendo definida, e quando a página está escrita, `work/<slug>.md`, a marca vira `[>]` e ele para.
-Quando o escopo espera uma resposta que ninguém deu ainda, ou outra linha ainda não feita, ele escreve a página até onde ela vai e marca a linha como `[?]` no lugar, com o que ela espera (capítulo 16).
-Em uma linha que já está `[?]`, ele diz o que a linha espera e só segue quando você diz que está resolvido.
+Quando começa, ele marca a linha como `[~]` na fila, então quem a lê vê uma entrega sendo definida, e quando a página está escrita, `work/<slug>.md`, a marca vira `[>]`.
+Ele termina mostrando essa linha da fila, `[>] emprestar-livro ...` para a página abaixo, e pedindo que você leia e questione a página, e depois rode o `/apply` em uma sessão nova.
+Em uma linha que já está `[?]`, ele diz o que a linha espera e só segue quando você diz que está resolvido; em uma linha cujo `after` nomeia uma linha que ainda não está `[x]`, ele diz o mesmo e não começa (capítulo 16).
+Quando descobre, enquanto define, que o escopo espera uma resposta que ninguém deu ainda ou outra linha que precisa ser feita antes, ele escreve a página até onde ela vai e marca a linha como `[?]` no lugar, com `· resume: propose` e o que ela espera.
 Ele nunca escreve, edita nem gera código, migration, teste ou configuração.
 O arquivo do comando no kit dá o motivo: "*separar decidir de fazer é o que impede o escopo de crescer durante a implementação*".
 O `/apply` começa em uma sessão nova, com o contexto limpo, e a página é tudo o que ele leva desta conversa, então a página precisa guardar tudo de que a construção precisa.
@@ -34,7 +38,7 @@ O `/apply` começa em uma sessão nova, com o contexto limpo, e a página é tud
 O formato é fixado no §3 do docs/05 do projeto e é o mesmo em todo projeto:
 
 * **Objetivo.** Uma frase: o que o usuário consegue fazer depois.
-* **Comportamento.** Cenários verificáveis na linguagem do usuário; cada linha vira um teste ou uma checagem manual.
+* **Comportamento.** Cenários verificáveis na linguagem do usuário, cada um uma ação com uma entrada concreta e o resultado que o usuário vê, incluídos os casos que precisam falhar e os casos de borda; cada linha vira um teste ou uma checagem manual. O `/propose` os rascunha a partir dos documentos, e você os corrige em vez de escrevê-los.
 * **Contrato.** Dados, schema, API, formatos de mensagem, ou "nenhum".
 * **Estados.** Vazio, carregando, erro, offline, uma linha cada, ou "os padrões"; só quando há uma tela.
 * **Referência visual.** Onde está o design, e os tamanhos de tela; só quando há uma tela.
@@ -51,37 +55,51 @@ emprestado, e o sistema recusa quando as regras dizem não.
 
 **Comportamento.**
 * Um membro sem livros atrasados pega um exemplar disponível, e o exemplar
-  aparece como emprestado a ele, com devolução prevista para 21 dias depois.
+  aparece como emprestado a ele, com devolução prevista para 21 dias
+  depois (docs/00).
 * Um membro com um livro atrasado é recusado com "Devolva primeiro os seus
   livros atrasados"; nada é registrado.
+* Um membro suspenso é recusado com "A sua matrícula está suspensa"; nada
+  é registrado.
 * Dois bibliotecários emprestam o último exemplar no mesmo momento: um
-  consegue e o outro vê "Este exemplar acabou de ser emprestado a outra pessoa".
+  consegue e o outro vê "Este exemplar acabou de ser emprestado a outra
+  pessoa".
+* Um membro cujo único empréstimo vence hoje pega um exemplar disponível:
+  vencer hoje ainda não é estar em atraso.
 
 **Contrato.**
-Tabela `emprestimo` (exemplar_id, membro_id, emprestado_em, devolver_em, devolvido_em anulável);
-índice único em exemplar_id onde devolvido_em é nulo.
-`emprestar(exemplar, membro, hoje): Result<Emprestimo, RecusaDeEmprestimo>` com
-`RecusaDeEmprestimo = "TemLivrosEmAtraso" | "JaEmprestado" | "MembroSuspenso"`.
+Tabela `emprestimo` (exemplar_id, membro_id, emprestado_em, devolver_em,
+devolvido_em anulável); índice único em exemplar_id onde devolvido_em é
+nulo.
+`emprestar(exemplar, membro, hoje):
+Result<Emprestimo, RecusaDeEmprestimo>` com `RecusaDeEmprestimo =
+"TemLivrosEmAtraso" | "JaEmprestado" | "MembroSuspenso"`.
 
 **Estados.** Os padrões.
 
-**Referência visual.** A tela de empréstimo no arquivo de design, com 390 e
-1280 pixels de largura.
+**Referência visual.** A tela de empréstimo no arquivo de design, com 390
+e 1280 pixels de largura.
 
 **Fora do escopo.**
-* Devolver um exemplar: uma entrega própria, `devolver-livro`, a seguinte na fila.
+* Devolver um exemplar: uma entrega própria, `devolver-livro`, a seguinte
+  na fila.
 * Reservas: não estão no docs/00.
-* Multas: o docs/00 as lista como uma decisão em aberto, então ninguém decide isso aqui.
+* Multas: o docs/00 as lista como uma decisão em aberto, então ninguém
+  decide isso aqui.
 
 **Pronto quando.**
-* [ ] Os testes unitários de `emprestar` passam para as três linhas de Comportamento.
-* [ ] O teste do repositório prova que o índice único recusa o segundo empréstimo.
+* [ ] Os testes unitários de `emprestar` passam para as cinco linhas de
+  Comportamento.
+* [ ] O teste do repositório prova que o índice único recusa o segundo
+  empréstimo.
 * [ ] `npm run verify` está verde.
 * [ ] A tela de empréstimo confere com o design nas duas larguras.
 ```
 
 Leia a página como o relato do agente sobre o que ele entendeu.
 Cada linha de Comportamento pode ser conferida; o Contrato é exato; o Fora do escopo nomeia o que alguém poderia ter suposto que estava dentro; o Pronto quando é uma lista que uma máquina ou uma pessoa consegue marcar.
+Cada decisão tirada de um documento o nomeia: os 21 dias vêm do docs/00, e as reservas e as multas do Fora do escopo também.
+O agente rascunhou os casos que precisam falhar e o caso de borda: o Contrato já tinha `MembroSuspenso`, então um membro suspenso ganha uma linha, e uma regra sobre livros atrasados implica o dia em que um empréstimo vence, que ainda não é atraso.
 
 O Contrato é a única seção que precisa ser exata.
 O motivo do kit: "*uma tela errada se corrige em uma sessão, uma coluna errada é uma migration*".
@@ -92,13 +110,17 @@ Uma tela é código que você reescreve; uma coluna guarda dados, e mudá-la exi
 A página é escrita para ser lida, e as perguntas a fazer são estas:
 
 * Cada linha de Comportamento pode ser conferida, como teste ou à mão?
+* O Comportamento inclui o que precisa falhar e os casos de borda?
 * O Contrato é exato, até os nomes e os tipos?
 * O Fora do escopo nomeia algo que você supôs que estava dentro?
+* Cada decisão tirada de um documento o nomeia, e você concorda com ela?
 * Você discorda de alguma escolha que o agente fez por conta própria?
 * O Pronto quando lista o que faria você dizer "pronto", e nada mais vago?
 
 Você pede cada correção na mesma conversa, e o agente escreve a correção: na página, e em qualquer documento que ela toque.
 Você não edita a página à mão: o agente sabe qual documento é dono de cada fato, então uma correção que toca o vocabulário ou a fila entra lá também, e a conversa guarda o motivo.
+Se o `/propose` pergunta o que um documento já diz, como quantos dias dura um empréstimo quando o docs/00 diz 21, diga isso na conversa: a resposta pertence à página, com a sua fonte.
+Se o Comportamento só tem o caminho feliz, um exemplar disponível emprestado a um membro em dia, peça ao agente os casos que precisam falhar e os casos de borda antes do `/apply`.
 
 A ordem é a barata.
 Um buraco achado na página custa um turno; achado depois do `/apply`, custa outro `/apply`, o comando mais caro, que constrói, testa e prova de novo.
@@ -130,13 +152,16 @@ Um desenvolvedor, um gerente ou o cliente lê uma página na linguagem do docs/0
 No Caso A, o mesmo formato de página levou perguntas ao cliente e documentos para a passagem do projeto, então uma única skill de revisão serviu a todo tipo de trabalho (capítulo 23).
 E quando a construção termina, a mesma página registra o que aconteceu, então a história de uma decisão é um arquivo, com o nome do seu slug, em todo projeto que o time roda.
 
+O changelog do kit registra por que o `/propose` decide e rascunha.
+Na entrada 2026.10.08.3, um usuário mediu o kit contra o trabalho à mão em uma cópia do mesmo projeto e o achou muito mais lento, em parte porque o `/propose` perguntava o que os docs/00 a 05 já resolviam; uma decisão escrita com a sua fonte deixa uma correção, na revisão, e só onde um documento está errado.
+Na entrada 2026.10.08, uma pessoa que não conhecia a ferramenta sendo construída deixou o resultado esperado para o agente, que entregou uma solução, só o caminho feliz, e o cliente a rejeitou; um Comportamento rascunhado a partir dos documentos, com o que precisa falhar e os casos de borda, põe esses casos diante da pessoa antes de existir qualquer código.
+
 ## Pontos-chave
 
 * Uma entrega é a menor mudança com valor, com um slug como nome, e cabe em uma página; se não cabe, são duas.
-* O `/propose` lê os documentos, só pergunta onde nenhum documento fecha uma leitura, com a recomendação primeiro, marca a linha `[~]` enquanto conversa e `[>]` quando a página está escrita, ou `[?]` quando o escopo espera, e nunca escreve código.
-* A página tem um formato fixo; o Contrato é a única seção exata, porque uma coluna errada é uma migration.
-* Leia a página antes do `/apply` e cubra cada buraco pedindo ao agente, nunca à mão: um buraco na página custa um turno, depois do `/apply` custa outro `/apply`.
+* O `/propose` decide o que os documentos respondem e nomeia a fonte na página, só pergunta onde eles deixam mais de uma leitura, com a recomendação primeiro, marca a linha `[~]` enquanto conversa e `[>]` quando a página está escrita, ou `[?]` quando o escopo espera, e nunca escreve código.
+* A página tem um formato fixo e é a superfície de revisão do time, para código e para qualquer outra coisa que caiba em uma página; o Contrato é a única seção exata, porque uma coluna errada é uma migration.
+* O `/propose` rascunha o Comportamento, incluídos o que precisa falhar e os casos de borda; você lê a página antes do `/apply` e a corrige pedindo ao agente, nunca à mão: um buraco na página custa um turno, depois do `/apply` custa outro `/apply`.
 * Quando ninguém sabe a resposta ainda, explore-a conversando com o agente, e termine com uma linha na fila, uma decisão escrita onde ela pertence, ou o `/propose` na mesma sessão; nada novo é preciso para isso.
-* A página é a superfície de revisão do time, para código e para qualquer outra coisa que caiba em uma página.
 
 [^claude-code-plan-mode]: Anthropic, "Common workflows", documentação do Claude Code, seção "Plan before editing", acesso em 2026-09-28. <https://code.claude.com/docs/en/common-workflows#plan-before-editing>

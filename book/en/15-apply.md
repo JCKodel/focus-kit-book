@@ -2,6 +2,7 @@
 
 After this chapter you can follow a reviewed page to a staged change with `/apply`, and say what "done" means: verify green, a proof, the documents updated, the page moved and its line marked.
 You can then review the staged change against the page and commit it yourself, which is the human review of the process.
+And you can say how `/apply` ends: only its delivery staged, the suggested message in a `commit` block on the page and in the conversation, and your next steps written out.
 
 ## The problem
 
@@ -36,7 +37,10 @@ A silent choice would leave a page and a document that disagree, and the next se
 ### When the work cannot go on
 
 It stops when the build needs an answer nobody has given yet, when another line must be done first (a fix it found becomes a `[ ]` line above this one), or when you say it is blocked.
-It writes on the page what was built and what it waits on, leaves the page in `work/`, marks the line `[?]` with that reason at its end, and stages what it has (chapter 16).
+It writes on the page what was built and what it waits on, leaves the page in `work/`, marks the line `[?]` with that reason at its end (chapter 16).
+It ends the page with a partial message in a `commit` block and shows the same block in the conversation.
+On trunk it stages nothing: the work stays uncommitted, and out of the index, until it is whole.
+On a delivery branch it may stage the partial work for you to commit there, and the branch stays unmerged until the delivery is done (chapter 21).
 
 ### Verify and the proof
 
@@ -55,10 +59,11 @@ So before it stops, `/apply` does all of this:
 * It updates the documents the delivery changed: a new term into docs/03, a new rule into the document that owns it, a decision into docs/adr/.
 * It ticks every item of Done when.
 * It moves the page to `work/done/`, and turns the line's mark in docs/06 from `[*]` to `[x]`; a `[?]` line that waited only on lines now `[x]` goes back by its resume phase: to `[>]` when it was `resume: apply` and its page is still complete, otherwise to `[ ]` ([chapter 16](16-queue-states.md)).
-* It stages everything and suggests the commit message in the format docs/05 defines.
-* The last thing it says is which environment is at which version, and the command that updates the others.
+* It stages only this delivery's paths and hunks, never with `git add -A` or `git add .`, and reports what someone else had already staged without unstaging it.
+* It ends the page with the suggested commit message in a `commit` block, in the format docs/05 defines, and shows the same block in the conversation. There is one block: a resumed `/apply` replaces the earlier one.
+* Its last words are your next steps: which environment is at which version and the command that updates the others; then review the staged diff, commit (and merge, on a delivery branch), and take the queue's next line, with its command written as your host invokes it, in a fresh session.
 
-Done is that whole list: verify green, the proof, what happened written on the page, the documents updated, the page in `work/done/`, the line `[x]`, and the change staged.
+Done is that whole list: verify green, the proof, what happened written on the page, the documents updated, the page in `work/done/`, the line `[x]`, only this delivery staged, and the message on the page.
 
 ## `lend-book`, built
 
@@ -66,7 +71,7 @@ Take the `lend-book` page of chapter 14, reviewed and marked `[>]`, and open a f
 
 The agent reads the page, then docs/01 to learn that loans live in `src/features/loans/`, docs/04 to learn which tests each piece gets (chapter 8), and docs/05 to learn that verify is `npm run verify` and that a screen is proven by a screenshot.
 It writes the migration for the table `loan` with its unique index, the rule `lend` as a pure function returning a `Result` (chapter 5), the repository call that turns the unique index's failure into the refusal `AlreadyLent`, the orchestrator and the lending screen.
-Each Behaviour line becomes a test: the loan with its due date 21 days ahead, the refusal for an overdue book, and, against a real in-memory database, the second of two loans on the last copy refused.
+Each Behaviour line becomes a test: the loan with its due date 21 days ahead, the refusal for an overdue book, the refusal for a suspended member, the loan for a member whose only book is due today, and, against a real in-memory database, the second of two loans on the last copy refused.
 It builds nothing for returning a copy, reservations or fines, because Out of scope named them.
 
 If docs/00 said a loan lasts 14 days, the agent would stop at that line and ask which one is true: the page's 21 or the document's 14.
@@ -74,12 +79,33 @@ Whichever you answer, the other one changes in the same delivery.
 
 It runs `npm run verify` until it is green, takes the lending screen at 390 and 1280 pixels wide, and compares both with the design file.
 If a button wraps at the narrow width, it gets fixed; if the design file gives no value for a colour, the choice is written down as a divergence, with its reason.
-Then it writes what happened on the page, adds the table `loan` to the document that lists the schema, ticks Done when, moves the page to `work/done/lend-book.md`, marks the line `[x]`, stages everything, suggests the message, and ends by saying which environment runs this delivery and how to update the others.
+Then it writes what happened on the page, adds the table `loan` to the document that lists the schema, ticks Done when, moves the page to `work/done/lend-book.md`, marks the line `[x]`, and stages only this delivery's paths and its own hunk of docs/06.
+If another session's edit to `src/members/` sits in the tree, or its hunk of docs/06 is already staged, the agent leaves both as they are and tells you about the staged one (chapter 21).
+
+The page ends with the suggested message, written for this chapter, and the conversation shows the same block:
+
+```commit
+Lend a copy to a member
+
+- Add the table loan, one open loan per copy by a unique index
+- Lend for 21 days; refuse overdue books and suspended members
+- Refuse the second loan of the last copy as AlreadyLent
+- Prove the lending screen at 390 and 1280 pixels wide
+- List the table loan in the schema document
+
+work/done/lend-book.md
+```
+
+Then it says which environment runs this delivery and how to update the others, and ends with your next steps:
+
+1. Review the staged diff: `git diff --staged`.
+2. Commit with the suggested message: `git commit`, and paste the block.
+3. The queue's next free line is `return-book`; in a fresh session, run `/propose return-book` in Claude Code, or `$propose return-book` in Codex (chapter 11's table).
 
 ## Why it stops at the stage
 
 `/apply` never commits and never merges, whatever the git strategy.
-It stages everything and hands you the message; the commit is yours, and it comes after your review.
+It stages only its delivery and hands you the message; the commit is yours, and it comes after your review.
 The kit's process document gives the flow in one line: `/apply` "*builds, proves, updates the documents, stages and suggests the commit, never commits*".
 
 ## Review the staged change
@@ -91,7 +117,8 @@ Read it against the page:
 * Is anything built that the page did not ask for: a file, a dependency, a layer?
 * Do verify and the proof run green for you?
 * Did the documents the delivery changed get updated, and only those?
-* Is the suggested message right: the subject, the bullets, the last line?
+* Does the staged diff hold only this delivery, and did the agent report anything already staged?
+* Is the suggested message in the `commit` block at the end of the page right: the subject, the bullets, the last line?
 
 Read what happened too, and ask whether you would have decided any divergence otherwise.
 Ask the agent for each correction, in the same session, never by hand.
@@ -120,7 +147,10 @@ git diff --staged
 git commit
 ```
 
-With no `-m`, git opens your editor for the message; paste the suggested one, save and close, and the commit exists when the editor closes.
+With no `-m`, git opens your editor for the message; copy it from the `commit` block at the end of the page, paste it, save and close, and the commit exists when the editor closes.
+The page holds the message and the conversation only repeats it, so you can commit the next morning, in another window, and still find it.
+
+When another session works in the same folder, commit one delivery at a time, from the index, once `git diff --staged` holds only that delivery (chapter 21).
 
 ### The message
 
@@ -137,11 +167,21 @@ work/done/<slug>.md
 
 The subject says what the delivery does, in the imperative, "Lend a copy to a member" and not "Lent" or "Lending", with a scope in parentheses when it helps.
 The bullets are the highlights, never the reasoning.
-The last line points to the page in `work/done/`, where the reasoning lives, so anyone who reads the history finds the whole decision in one file.
+The last line points to the page's actual path, where the reasoning lives, so anyone who reads the history finds the whole decision in one file: `work/done/<slug>.md` when the delivery is done.
+
+A blocked `/apply` writes a partial message in the same shape.
+It says it is partial and names the blocker, never implies that verify passed or that the delivery is done, and its last line is `work/<slug>.md`, where the page waits.
+
+If your agent answers with `git commit -m` lines and no `commit` block on the page, the delivery did not end as the kit says; ask it for the block.
 
 ## What the team gains
 
 Nothing ships without a check and a person: verify and the proof check the build, and a person reads the diff before it exists in the history.
+The kit's changelog records why `/apply` ends the way it does.
+At entry 2026.10.06, the message lived only in the chat: an agent answered with `git commit -m` lines, and whoever committed later, in another window or another session, had nowhere to start from; the `commit` block on the page gives them that start.
+At entry 2026.10.08.2, a message suggested as plain text in a terminal lost the highlight a fenced block gave and blended into the rest of the reply; the same block in the conversation keeps it apart.
+At entry 2026.10.08.1, a person who had just used the kit for the first time knew to commit but had to search the documentation for what came after, and a Codex user was told to run `/propose`, which Codex does not recognize; next steps written out, in the host's form, end that search.
+
 And what diverged from the plan is written where the next person reads it.
 On Ninjobs, the page of the delivery that lets a user delete their account said the table recording a pending deletion would have no write rule at all.
 The build found that a table with no write rule accepts writes from nobody, the database's own functions included, so the page recorded the refinement: no write path reachable from the client, which the access-rules test now proves.
@@ -152,7 +192,9 @@ The decision and its reason are on the page that built it, and the commit that s
 * `/apply <slug>` builds the page in a fresh session, and the page is the scope: no dependency, layer or tool the page did not name.
 * It marks the line `[*]` when it starts, `[x]` when it is done, and `[?]`, with what it waits on, when it must stop.
 * It follows docs/05 literally, and when the page contradicts a document it stops and says which; it never resolves it silently.
-* Green is not done: done is verify green, the proof, what happened on the page, the documents updated, the page in `work/done/`, the line `[x]` and the change staged.
+* Green is not done: done is verify green, the proof, what happened on the page, the documents updated, the page in `work/done/`, the line `[x]` and only this delivery staged.
+* It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked.
+* Its last words are your next steps, each command written out: review the staged diff, commit, and the queue's next line in a fresh session.
 * Review the staged change against the page, and ask for each correction in the same session.
 * That review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
 * The agent stages and suggests the message; the person reads the diff and commits, so nothing reaches the history unread, and a delivery reverts in one step.
