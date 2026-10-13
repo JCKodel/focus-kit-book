@@ -49,6 +49,7 @@ A stack where a mistake shows only at run time, on a screen, leaves that check t
 ### What it writes, and where it stops
 
 When the six subjects are covered, `/brainstorm` writes docs/00 to 06, one ADR for each decision a later session might undo (the stack, FOCUS or not, git, anything you hesitated on), `AGENTS.md`, `CLAUDE.md` holding the line `@AGENTS.md`, and an empty `work/done/`.
+It writes no manual: `docs/manuals/` is created with the first one, by the delivery that adds something a person does by hand ([chapter 10](10-the-documents.md)).
 Then it shows the queue and stops.
 It writes no code, no configuration and no dependency file: the first delivery does that, with a page of its own, through `/propose` in a fresh session ([chapter 14](14-propose.md)).
 
@@ -104,6 +105,7 @@ One round, of four subjects only:
 4. The first milestone: three to eight deliveries, or where to read them from (issues, a TODO file, a roadmap), then its review.
 
 A rules file already there does not stay beside `AGENTS.md`: its rules move into `AGENTS.md`, and the file keeps only the line that imports it and what applies to its host alone.
+It writes the same documents as `/brainstorm`, plus a manual in `docs/manuals/` for each thing a person already does by hand there, such as a Makefile target, a deploy script or setup steps in a README, as the kit's file for the command says.
 The documents describe what exists, not what should exist.
 The agent shows the change before it writes, and it changes no code.
 
@@ -139,7 +141,8 @@ Check that:
 * every answer you gave landed in the document that owns it: the product in docs/00, the stack in docs/01 and its ADR, the milestone in docs/06;
 * every default the agent kept is one you accept knowingly; each one you reject is a correction now, before a delivery builds on it;
 * every ADR records a decision you took, or says it was the agent's call;
-* on an existing project, every observed statement is true in the code (open the file it names), every open question is a contradiction the code really holds, and nothing describes what should exist instead of what does.
+* on an existing project, every observed statement is true in the code (open the file it names), every open question is a contradiction the code really holds, and nothing describes what should exist instead of what does;
+* on an existing project, a person who read nothing else can follow every manual, and every command a manual gives exists in the repository.
 
 When something is wrong, ask the agent for the fix in the same session, which still holds the conversation, and let it write the change; never edit by hand, because the agent knows which other documents the fix touches.
 Read with suspicion.
@@ -157,7 +160,7 @@ There is no number for this gain: this book has no count of projects started wit
 * `/brainstorm` talks through six subjects in order (product, vocabulary, how it is built, conventions, process slots, first milestone) and writes the documents, the ADRs, `AGENTS.md` and `CLAUDE.md`, never code; the first delivery writes the code.
 * Every question comes with a default, so "your call" is a valid answer, and you check each default the agent kept.
 * Choose a stack by what the project needs, then by how much public code the agent learned from, then by whether types and tests let it check its own work.
-* `/analyze` reads the repository first and asks one round; the default of each choice is what the code does, a contradiction becomes an open question, and legacy code can move to FOCUS as a strangler fig.
+* `/analyze` reads the repository first, asks one round and writes a manual for each thing a person already does by hand; the default of each choice is what the code does, a contradiction becomes an open question, and legacy code can move to FOCUS as a strangler fig.
 * Review before you commit, against your answers and against the code, and ask the agent for every fix: its text reads as right even when it is wrong.
 
 [^octoverse]: GitHub, "Octoverse: A new developer joins GitHub every second as AI leads TypeScript to #1", 2025, the latest report on 2026-09-28: monthly contributors on GitHub, August 2025. <https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/>

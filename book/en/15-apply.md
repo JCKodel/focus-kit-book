@@ -57,6 +57,7 @@ So before it stops, `/apply` does all of this:
 
 * It writes into the page what happened: what diverged from the plan and why, what was dropped, what the proof found, and the decisions taken, with an ADR if one was needed.
 * It updates the documents the delivery changed: a new term into docs/03, a new rule into the document that owns it, a decision into docs/adr/.
+* When the delivery adds or changes something a person does by hand, such as publishing the app, it writes or updates its manual in `docs/manuals/` ([chapter 10](10-the-documents.md)).
 * It ticks every item of Done when.
 * It moves the page to `work/done/`, and turns the line's mark in docs/06 from `[*]` to `[x]`; a `[?]` line that waited only on lines now `[x]` goes back by its resume phase: to `[>]` when it was `resume: apply` and its page is still complete, otherwise to `[ ]` ([chapter 16](16-queue-states.md)).
 * It stages only this delivery's paths and hunks, never with `git add -A` or `git add .`, and reports what someone else had already staged without unstaging it.

@@ -49,6 +49,7 @@ Uma stack em que um erro só aparece em tempo de execução, em uma tela, deixa 
 ### O que ele escreve, e onde para
 
 Quando os seis assuntos estão cobertos, o `/brainstorm` escreve o docs/00 a 06, um ADR para cada decisão que uma sessão futura poderia desfazer (a stack, FOCUS ou não, o git, qualquer coisa em que você hesitou), o `AGENTS.md`, o `CLAUDE.md` com a linha `@AGENTS.md`, e uma `work/done/` vazia.
+Ele não escreve manual: a `docs/manuals/` é criada com o primeiro, pela entrega que acrescenta algo que uma pessoa faz à mão ([capítulo 10](10-the-documents.md)).
 Depois ele mostra a fila e para.
 Ele não escreve código, nem configuração, nem arquivo de dependências: a primeira entrega faz isso, com uma página própria, pelo `/propose` em uma sessão nova ([capítulo 14](14-propose.md)).
 
@@ -104,6 +105,7 @@ Uma rodada, de quatro assuntos apenas:
 4. O primeiro marco: de três a oito entregas, ou de onde lê-las (issues, um arquivo TODO, um roadmap), e depois a revisão dele.
 
 Um arquivo de regras que já existe não fica ao lado do `AGENTS.md`: as regras dele passam para o `AGENTS.md`, e o arquivo guarda só a linha que o importa e o que vale apenas para o host dele (o programa que roda o agente).
+Ele escreve os mesmos documentos que o `/brainstorm`, e mais um manual em `docs/manuals/` para cada coisa que uma pessoa já faz à mão ali, como um alvo do Makefile, um script de deploy ou os passos de instalação de um README, como diz o arquivo do kit para o comando.
 Os documentos descrevem o que existe, e não o que deveria existir.
 O agente mostra a mudança antes de escrever, e não muda código nenhum.
 
@@ -139,7 +141,8 @@ Confira que:
 * cada resposta que você deu chegou ao documento dono dela: o produto no docs/00, a stack no docs/01 e no ADR dela, o marco no docs/06;
 * cada padrão que o agente manteve é um que você aceita sabendo; cada um que você rejeita é uma correção agora, antes que uma entrega se apoie nele;
 * cada ADR registra uma decisão que você tomou, ou diz que a escolha foi do agente;
-* em um projeto existente, cada afirmação observada é verdadeira no código (abra o arquivo que ela cita), cada questão em aberto é uma contradição que o código tem de fato, e nada descreve o que deveria existir em vez do que existe.
+* em um projeto existente, cada afirmação observada é verdadeira no código (abra o arquivo que ela cita), cada questão em aberto é uma contradição que o código tem de fato, e nada descreve o que deveria existir em vez do que existe;
+* em um projeto existente, uma pessoa que não leu mais nada consegue seguir cada manual, e cada comando que um manual dá existe no repositório.
 
 Quando algo está errado, peça a correção ao agente na mesma sessão, que ainda guarda a conversa, e deixe que ele escreva a mudança; nunca edite à mão, porque o agente sabe que outros documentos a correção toca.
 Leia com desconfiança.
@@ -157,7 +160,7 @@ Não há número para esse ganho: este livro não tem uma contagem de projetos c
 * O `/brainstorm` conversa sobre seis assuntos em ordem (produto, vocabulário, como é construído, convenções, slots do processo, primeiro marco) e escreve os documentos, os ADRs, o `AGENTS.md` e o `CLAUDE.md`, nunca código; a primeira entrega escreve o código.
 * Toda pergunta vem com um padrão, então "your call" é uma resposta válida, e você confere cada padrão que o agente manteve.
 * Escolha uma stack pelo que o projeto precisa, depois por quanto código público o agente aprendeu, depois por os tipos e testes deixarem ou não o agente conferir o próprio trabalho.
-* O `/analyze` lê o repositório primeiro e pergunta em uma rodada; o padrão de cada escolha é o que o código faz, uma contradição vira uma questão em aberto, e um código legado pode passar para o FOCUS como strangler fig.
+* O `/analyze` lê o repositório primeiro, pergunta em uma rodada e escreve um manual para cada coisa que uma pessoa já faz à mão; o padrão de cada escolha é o que o código faz, uma contradição vira uma questão em aberto, e um código legado pode passar para o FOCUS como strangler fig.
 * Revise antes do commit, contra as suas respostas e contra o código, e peça ao agente cada correção: o texto dele parece certo mesmo quando está errado.
 
 [^octoverse]: GitHub, "Octoverse: A new developer joins GitHub every second as AI leads TypeScript to #1", 2025, o relatório mais recente em 2026-09-28: contribuidores mensais no GitHub, agosto de 2025. <https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/>

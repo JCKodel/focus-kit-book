@@ -1,6 +1,6 @@
 # 10. Os documentos: um lugar para cada fato
 
-Depois deste capítulo você consegue dizer o que guardam cada um dos sete documentos do projeto, os ADRs e o `AGENTS.md`, e decidir a qual deles pertence um fato novo.
+Depois deste capítulo você consegue dizer o que guardam cada um dos sete documentos do projeto, os ADRs, os manuais e o `AGENTS.md`, e decidir a qual deles pertence um fato novo.
 Você também consegue mudar qualquer um deles conversando com o agente, e dizer por que isso dá a mesma resposta a toda sessão e a toda pessoa.
 
 ## O problema
@@ -12,7 +12,7 @@ No Ninjobs uma decisão morava em seis lugares, e mantê-los em acordo custava m
 ## Um lugar para cada fato
 
 Cada fato do projeto mora em um lugar, e o agente o lê ali.
-O focus-kit dá a esses lugares uma forma fixa: sete documentos numerados, docs/00 a docs/06; uma pasta de decisões, `docs/adr/`; o arquivo de regras, `AGENTS.md`; e `work/`, que guarda uma página por entrega (capítulo 14).
+O focus-kit dá a esses lugares uma forma fixa: sete documentos numerados, docs/00 a docs/06; uma pasta de decisões, `docs/adr/`; uma pasta de manuais, `docs/manuals/`, um para cada coisa que uma pessoa faz à mão fora de uma entrega; o arquivo de regras, `AGENTS.md`; e `work/`, que guarda uma página por entrega (capítulo 14).
 Os números são fixos porque os comandos os citam; o nome depois do número fica na língua da documentação, `00-Product.md` num projeto documentado em inglês e `00-Produto.md` num documentado em português.
 O `/brainstorm` ou o `/analyze` os escreve uma vez (capítulo 12); o `/propose` e o `/apply` os leem antes de agir.
 
@@ -66,6 +66,18 @@ Michael Nygard propôs o formato em 2011, porque "*uma das coisas mais difíceis
 Um ADR é emendado, nunca reescrito: quando a decisão muda, uma emenda abaixo dela diz o que mudou e quando, e o motivo original fica acima.
 A próxima pessoa que quiser mudá-la de novo lê por que ela era assim, e pesa o motivo antigo em vez de adivinhá-lo.
 
+## Manuais
+
+Parte do trabalho de um projeto é feita por uma pessoa, à mão, fora de qualquer entrega: publicar o app, desfazer uma versão publicada, trocar um segredo, configurar um serviço.
+Cada uma dessas coisas ganha um manual, um arquivo em `docs/manuals/`, com o nome na língua da documentação dizendo o que ele faz, para que a pessoa que precisa dele o encontre pelo nome.
+Um manual se sustenta sozinho para uma pessoa que não leu mais nada, e guarda seis coisas, como diz o docs/05 do kit: o que ele faz e quando, o que precisa estar pronto antes, os comandos em ordem, como saber que deu certo, como desfazer, e o que quebra se um passo for pulado.
+O agente segue os slots do docs/05; uma pessoa segue o manual.
+
+Um slot que cita um comando desses aponta para o manual dele em vez de guardar os passos.
+No docs/05 da biblioteca de empréstimos, escrito para este capítulo, o slot Environments (ambientes) cita o comando que publica o app e aponta para `docs/manuals/publicar-o-app.md`; os passos moram só ali.
+O `/analyze` escreve os manuais do que um repositório já faz à mão, o `/apply` escreve ou atualiza um quando uma entrega acrescenta ou muda uma dessas coisas ([capítulo 15](15-apply.md)), e o `/brainstorm` não escreve nenhum.
+A pasta é criada com o primeiro manual, então não há pasta vazia, e o `AGENTS.md` aponta para ela.
+
 ## AGENTS.md
 
 O `AGENTS.md` é o arquivo de regras do capítulo 2, um formato aberto que os agentes de código leem no início de uma sessão.[^agents-md]
@@ -92,7 +104,9 @@ Um fato novo tem um dono, e você o encontra fazendo estas perguntas em ordem; a
    docs/04.
 6. É um fato deste projeto que os comandos leem: o comando de verificação, os ambientes, o git?
    Um slot do docs/05.
-7. É trabalho a fazer?
+7. São os passos que uma pessoa segue à mão fora de uma entrega: publicar, desfazer uma versão, trocar um segredo, configurar um serviço?
+   Um manual em `docs/manuals/`, com o slot guardando o comando e apontando para ele.
+8. É trabalho a fazer?
    O docs/06 guarda a sua linha, e a página em `work/` guarda a entrega.
 
 O `AGENTS.md` nunca é a resposta: quando toda sessão precisa ter um fato em mente, uma linha ali aponta para o seu dono.
@@ -122,12 +136,15 @@ O docs/00 da biblioteca lista as multas por devolução atrasada como em aberto,
 
 A mesma resposta em toda sessão e para toda pessoa: um desenvolvedor, um gestor e um agente numa sessão nova que perguntam o prazo de empréstimo leem uma linha em um documento.
 No Ninjobs uma decisão morava em seis lugares que podiam discordar, e toda entrega pagava para mantê-los em acordo; com um lugar para cada fato, uma mudança é escrita uma vez e toda sessão seguinte a lê.
+Os manuais nasceram de um fato no lugar errado, como conta o changelog do kit na entrada 2026.10.13.
+Um usuário foi publicar de novo o site de um projeto e não achou instruções.
+Os passos existiam, como um subitem do slot Environments do docs/05, escritos para o agente, onde uma pessoa que procura como publicar não procura.
 
 ## Pontos-chave
 
-* Cada fato mora em um lugar: sete documentos numerados, `docs/adr/`, `AGENTS.md` e `work/`, com números fixos porque os comandos os citam.
-* O docs/00 é o produto e as suas decisões em aberto, o docs/01 e o docs/02 como ele é construído, o docs/03 o vocabulário, o docs/04 as convenções, o docs/05 o processo com os slots do projeto, o docs/06 a fila.
+* Cada fato mora em um lugar: sete documentos numerados, `docs/adr/`, `docs/manuals/`, `AGENTS.md` e `work/`; o docs/00 é o produto e as suas decisões em aberto, o docs/01 e o docs/02 como ele é construído, o docs/03 o vocabulário, o docs/04 as convenções, o docs/05 o processo com os slots do projeto, o docs/06 a fila, com números fixos porque os comandos os citam.
 * As duas escolhas, a arquitetura (o FOCUS inteiro, os dois princípios, nenhum) e o git (trunk, um branch ou um worktree por entrega), ficam registradas no docs/01 e no docs/05, cada uma com um ADR que é emendado, nunca reescrito; o método funciona do mesmo jeito com qualquer uma delas.
+* O que uma pessoa faz à mão fora de uma entrega tem um manual em `docs/manuals/`, para uma pessoa que não leu mais nada; o slot guarda o comando e aponta para ele, o `/analyze` e o `/apply` escrevem os manuais, o `/brainstorm` nenhum.
 * Um fato novo vai para o primeiro documento cuja pergunta servir; uma frase pode guardar vários fatos, cada um com o seu dono, e o `AGENTS.md` só aponta para eles.
 * Você muda os documentos conversando com o agente, e interpreta, guia e valida o que ele escreve; uma decisão em aberto o faz parar e perguntar.
 

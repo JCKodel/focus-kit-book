@@ -1,6 +1,6 @@
 # 10. The documents: one place per fact
 
-After this chapter you can say what each of the seven project documents, the ADRs and `AGENTS.md` hold, and decide which one a new fact belongs in.
+After this chapter you can say what each of the seven project documents, the ADRs, the manuals and `AGENTS.md` hold, and decide which one a new fact belongs in.
 You can also change any of them by talking to the agent, and say why that gives every session and every person the same answer.
 
 ## The problem
@@ -12,7 +12,7 @@ On Ninjobs a decision lived in six places, and keeping them in step cost more th
 ## One place per fact
 
 Each fact of the project lives in one place, and the agent reads it there.
-focus-kit gives those places a fixed shape: seven numbered documents, docs/00 to docs/06; a folder of decisions, `docs/adr/`; the rules file, `AGENTS.md`; and `work/`, which holds one page per delivery (chapter 14).
+focus-kit gives those places a fixed shape: seven numbered documents, docs/00 to docs/06; a folder of decisions, `docs/adr/`; a folder of manuals, `docs/manuals/`, one per thing a person does by hand outside a delivery; the rules file, `AGENTS.md`; and `work/`, which holds one page per delivery (chapter 14).
 The numbers are fixed because the commands cite them; the name after the number is in the documentation language, `00-Product.md` in a project documented in English and `00-Produto.md` in one documented in Portuguese.
 `/brainstorm` or `/analyze` writes them once (chapter 12); `/propose` and `/apply` read them before they act.
 
@@ -66,6 +66,18 @@ Michael Nygard proposed the format in 2011, because "*one of the hardest things 
 An ADR is amended, never rewritten: when the decision changes, an amendment below it says what changed and when, and the original reason stays above.
 The next person who wants to change it again reads why it was so, and weighs the old reason instead of guessing at it.
 
+## Manuals
+
+Some of a project's work is done by a person, by hand, outside any delivery: publishing the app, rolling back a release, rotating a secret, setting up a service.
+Each of these gets a manual, one file in `docs/manuals/`, named in the documentation language after what it does, so a person who needs it finds it by its name.
+A manual stands alone for a person who has read nothing else, and holds six things, as the kit's docs/05 says: what it does and when, what must be in place, the commands in order, how to tell it worked, how to undo it, and what breaks if a step is skipped.
+The agent follows the slots of docs/05; a person follows the manual.
+
+A slot that names such a command points to its manual instead of holding the steps.
+In the lending library's docs/05, written for this chapter, the Environments slot names the command that publishes the app and points to `docs/manuals/publish-the-app.md`; the steps live only there.
+`/analyze` writes the manuals for what a repository already does by hand, `/apply` writes or updates one when a delivery adds or changes it ([chapter 15](15-apply.md)), and `/brainstorm` writes none.
+The folder is created with the first manual, so there is no empty folder, and `AGENTS.md` points to it.
+
 ## AGENTS.md
 
 `AGENTS.md` is the rules file of chapter 2, an open format that coding agents read at the start of a session.[^agents-md]
@@ -92,7 +104,9 @@ A new fact has one owner, and you find it by asking these questions in order; th
    docs/04.
 6. Is it a fact of this project that the commands read: the verify command, the environments, git?
    A slot of docs/05.
-7. Is it work to do?
+7. Is it the steps a person follows by hand outside a delivery: publish, roll back, rotate a secret, set up a service?
+   A manual in `docs/manuals/`, the slot keeping the command and pointing to it.
+8. Is it work to do?
    docs/06 holds its line, and the page in `work/` holds the delivery.
 
 `AGENTS.md` is never the answer: when every session must keep a fact in mind, a line there points at its owner.
@@ -122,12 +136,15 @@ The library's docs/00 lists fines for late returns as open, so a page that touch
 
 The same answer in every session and for every person: a developer, a manager and a fresh agent who ask the loan period read one line in one document.
 On Ninjobs a decision lived in six places that could disagree, and every delivery paid to keep them in step; with one place per fact, a change is written once and every later session reads it.
+The manuals came from a fact in the wrong place, as the kit's changelog tells in its entry 2026.10.13.
+A user went to republish a project's site and found no instructions.
+The steps existed, as a sub-item of the Environments slot of docs/05, written for the agent, where a person looking for how to publish does not look.
 
 ## Key points
 
-* Each fact lives in one place: seven numbered documents, `docs/adr/`, `AGENTS.md` and `work/`, with numbers fixed because the commands cite them.
-* docs/00 is the product and its open decisions, docs/01 and docs/02 how it is built, docs/03 the vocabulary, docs/04 the conventions, docs/05 the process with the project's slots, docs/06 the queue.
+* Each fact lives in one place: seven numbered documents, `docs/adr/`, `docs/manuals/`, `AGENTS.md` and `work/`; docs/00 is the product and its open decisions, docs/01 and docs/02 how it is built, docs/03 the vocabulary, docs/04 the conventions, docs/05 the process with the project's slots, docs/06 the queue, with numbers fixed because the commands cite them.
 * The two choices, the architecture (FOCUS whole, the two principles, neither) and git (trunk, a branch or a worktree per delivery), are recorded in docs/01 and docs/05, each with an ADR that is amended, never rewritten; the method works the same under any of them.
+* What a person does by hand outside a delivery has a manual in `docs/manuals/`, for a person who read nothing else; the slot keeps the command and points to it, `/analyze` and `/apply` write the manuals, `/brainstorm` none.
 * A new fact goes to the first document whose question fits; one sentence can hold several facts, each with its own owner, and `AGENTS.md` only points at them.
 * You change the documents by talking to the agent, and you interpret, guide and validate what it writes; an open decision makes it stop and ask.
 
