@@ -1,6 +1,6 @@
 # 19. O projeto como assistente do time
 
-Depois deste capítulo você consegue guardar os emails, as propostas e as notas de reunião de um projeto onde o agente os lê, e perguntar ao projeto, em palavras simples, o que está pendente, como vai o trabalho e quem deve uma resposta.
+Depois deste capítulo você consegue guardar os emails, as propostas e as notas de reunião de um projeto onde o agente os lê, e perguntar ao projeto, em palavras simples, em que pé ele está e o que rodar a seguir, o que está pendente, como vai o trabalho e quem deve uma resposta.
 Você também consegue dizer o que uma pessoa ainda precisa fazer com cada resposta que o agente dá.
 
 ## O problema
@@ -59,6 +59,7 @@ A pasta de correspondência dele ficou fora do repositório, e só os fatos de e
 
 Estas são as perguntas que um time faz toda semana, e o arquivo que responde a cada uma:
 
+* **Em que pé estamos, e o que vem a seguir?** As linhas da fila em andamento com as suas marcas, as linhas `[?]` com os seus motivos, e a próxima linha livre com o comando que a começa (a sessão do gerente, mais abaixo, mostra uma resposta).
 * **O que está pendente?** As linhas da fila ainda não `[x]`, marco por marco.
 * **O que está travado, e esperando o quê?** As linhas `[?]`, e o motivo no fim de cada uma.
 * **Como vai o trabalho?** Linhas fechadas e linhas abertas por dia, a partir da fila e das datas dos commits, contra o parágrafo do marco que diz o que "fechado" significa.
@@ -112,8 +113,25 @@ Um gerente não precisa de editor de código.
 Ele abre o host na pasta raiz do projeto, a que tem o arquivo de regras, e pergunta em palavras simples.
 O host carrega o arquivo de regras no início da sessão, e o arquivo de regras manda o agente ler os documentos antes de agir, então a sessão do gerente começa dos mesmos documentos que a do desenvolvedor.
 
+O arquivo de regras também tem uma linha para a pergunta que um gerente faz primeiro: perguntado em que pé as coisas estão, o agente responde a partir da fila e de `work/`, com o próximo comando escrito como aquele host o chama.
+Não existe comando de status, e o changelog do kit, na entrada 2026.10.08.1, dá o motivo: a fila já é o status.
+Perguntada "em que pé estamos?" na biblioteca de empréstimos, uma sessão responde assim, numa resposta escrita para este capítulo:
+
+```text
+Marco 1, uma bibliotecária empresta e recebe de volta: 4 de 7 feitas.
+Em andamento: devolver-livro [*], sendo construída.
+Esperando: nenhuma.
+Próxima linha livre: formato-devolucao [ ], ainda sem página.
+Rode: /propose formato-devolucao (Codex: $propose formato-devolucao)
+```
+
+Cada parte dela é lida do docs/06: a contagem do marco, a linha em andamento com a sua marca, as esperas, e a primeira linha livre, com o comando que a tabela do capítulo 11 dá para cada host.
+Uma linha `[?]` apareceria em "Esperando" com o seu motivo e a fase em que retoma, como a linha os guarda.
+Uma resposta tirada do que a sessão lembra, uma oferta de manter um arquivo de status, ou uma sugestão de criar um comando de status quer dizer que o agente não leu a fila: peça o arquivo por trás da resposta.
+
 Uma pergunta não toca em código, e o modo de plano do host (capítulo 14) impede uma sessão de editar qualquer coisa.
 Quando o gerente quer mudar algo, como uma linha nova na fila, o agente a escreve por conversa, como em qualquer sessão, e uma pessoa revisa e faz o commit.
+Uma mudança no código, por menor que seja, também vira uma linha (capítulo 13), e a resposta para ali.
 
 ## O que o time ganha
 
@@ -126,5 +144,5 @@ No Caso A, vinte perguntas a pessoas de fora foram acompanhadas até as resposta
 * A pasta de contexto guarda o que o código não consegue dizer, cada original ao lado do seu Markdown; ela entra em commit quando o repositório fica com o time, e fica de fora quando o repositório é entregue ou público.
 * Um registro de trabalho com duas tabelas, perguntas enviadas e ainda em aberto, responde "quem me deve uma resposta" e escreve o lembrete.
 * A resposta do agente parece certa mesmo quando está errada: peça o arquivo por trás dela, e interprete, guie e valide.
-* Um gerente abre o host na raiz do projeto e pergunta em palavras simples; o mesmo arquivo de regras faz o agente ler os documentos primeiro.
+* Um gerente abre o host na raiz do projeto e pergunta em palavras simples; o mesmo arquivo de regras faz o agente ler os documentos primeiro; perguntado em que pé as coisas estão, ele responde a partir da fila com o próximo comando; não existe comando de status.
 

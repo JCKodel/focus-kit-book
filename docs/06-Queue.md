@@ -248,6 +248,6 @@ When this milestone closes, the book teaches focus-kit 2026.10.13 and the reposi
 [x] ch10-12-manuals           chapters 10 and 12: docs/manuals/, what goes there and who writes it (/analyze, /apply); both editions · after kit-2026-10-13, ch15-apply-ends
 [x] ch11-update-migrations    chapter 11: updating reports migrations for docs/04, docs/05 and AGENTS.md and preserves them, the changelog as where to read what changed; each command names the next one as the host invokes it; both editions · after kit-2026-10-13
 [x] ch10-commit-format        chapters 10 and 12: docs/04 no longer holds the format of a commit message, docs/05 §6 does; both editions · after ch10-12-manuals
-[ ] ch18-19-only-apply        chapter 18 or 13: code changes only inside /apply, a fix asked anywhere else becomes a queue line; chapter 19: AGENTS.md answers "where are we?" from the queue, with no status command; both editions · after kit-2026-10-13
+[x] ch18-19-only-apply        chapter 13: code changes only inside /apply, a fix asked anywhere else becomes a queue line; chapter 19: AGENTS.md answers "where are we?" from the queue, with no status command; both editions · after kit-2026-10-13
 [ ] m12-review                the review of M12 as docs/05 §8 says
 ```

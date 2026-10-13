@@ -1,7 +1,7 @@
 # 13. A fila e os marcos
 
 Depois deste capítulo você consegue ler uma fila, dizer o que cada marca significa, e escrever um parágrafo de marco que uma pessoa consegue conferir.
-Você também consegue ordenar um marco de modo que a ordem seja a prioridade, escrever em uma linha qual linha precisa estar feita antes dela, `· after <slug>`, e acrescentar, mover ou mudar uma linha conversando.
+Você também consegue ordenar um marco de modo que a ordem seja a prioridade, escrever em uma linha qual linha precisa estar feita antes dela, `· after <slug>`, acrescentar, mover ou mudar uma linha conversando, e transformar em linha uma mudança de código pedida fora do `/apply`.
 
 ## O problema
 
@@ -98,7 +98,22 @@ Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, e essa
 
 Nenhum comando é dono da fila.
 Uma ideia nova vira uma linha conversando, em qualquer sessão: você conta ao agente, e ele escreve a linha no marco a que ela pertence, com um slug novo e `[ ]`.
-O parágrafo de um marco ou a descrição de uma linha muda do mesmo jeito, e o slug fica, já que uma página ou um commit pode já usá-lo.
+
+O código tem um dono, o `/apply`, o comando que constrói uma entrega (capítulo 15).
+Uma mudança nele pedida em qualquer outra sessão, por menor que seja, vira uma linha `[ ]`: o agente escreve a linha, diz isso, e a resposta para ali, sem nenhum arquivo do app alterado.
+Pedido numa sessão comum para mostrar a data de devolução na tela do empréstimo como dia/mês/ano, o agente acrescenta esta linha ao marco acima, logo acima de `m1-review`, uma linha escrita para este capítulo:
+
+```
+[ ] formato-devolucao   o empréstimo mostra a devolução em dia/mês/ano
+```
+
+A linha ganha o que toda entrega ganha, uma página, uma prova e o commit da pessoa; uma edição feita na hora teria pulado a linha, a página e o verify.
+A resposta é a mesma durante o `/propose`, que não escreve código: uma linha nova, e a página sem mudança, a não ser que você peça que essa mudança faça parte dela.
+Um agente que edita o código mesmo assim, para "só trocar o rótulo", recebe o pedido da linha no lugar, e a edição é desfeita antes de qualquer commit.
+A regra vale também para a sessão do próprio `/apply`: uma correção que ele encontra fora da sua página vira uma linha acima dele, e a entrega espera por essa linha (capítulo 16).
+Os documentos continuam mudando conversando, em qualquer sessão; a regra cobre o código: o fonte do app, os testes, uma migração, a configuração.
+
+O parágrafo de um marco ou a descrição de uma linha também muda conversando, e o slug fica, já que uma página ou um commit pode já usá-lo.
 Mover uma linha para cima ou para baixo é mudar a prioridade dela, e acontece do mesmo jeito: você pede ao agente para movê-la.
 Linhas também vêm da revisão de um marco e, em um projeto existente, das issues ou do roadmap dele.
 Você lê a mudança antes do commit, como com todo documento, e ninguém edita a fila à mão.
@@ -112,6 +127,8 @@ O [capítulo 19](19-project-as-assistant.md) conta o resto do Caso A, e o [capí
 
 O changelog do kit, na entrada 2026.10.08.3, conta por que a ordem está escrita: a regra de que a ordem é a prioridade sempre valeu e não estava escrita em lugar nenhum, então um usuário pediu ao kit um jeito de classificar as entregas.
 Escrita como regra, ela dispensa classificação: a fila já é uma.
+A entrada 2026.10.06.1 conta por que o código só muda dentro do `/apply`: antes dessa regra, um agente a quem pediam uma correção numa sessão comum editava o código direto, sem linha na fila, sem página e sem verify.
+Desde então uma mudança pedida fora do `/apply` custa uma linha, e ganha uma página, uma prova e o commit da pessoa.
 A fila deste próprio livro mostra o `· after` funcionando: no marco M12 dela, sete linhas terminam com `· after kit-2026-10-13`; cada uma leva capítulos para a versão 2026.10.13 do kit, que o repositório precisava rodar antes, e nenhuma delas parece travada enquanto espera a sua vez.[^queue-m12]
 
 ## Pontos-chave
@@ -122,7 +139,7 @@ A fila deste próprio livro mostra o `· after` funcionando: no marco M12 dela, 
 * De três a oito entregas, o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados viram linhas sob ela no mesmo marco.
 * A ordem é a prioridade: a linha mais acima importa mais, e mover uma linha é mudar a prioridade dela.
 * Uma dependência conhecida quando a linha é acrescentada é escrita junto, `· after <slug>`: uma ordem, não uma espera, então a linha mantém `[ ]`.
-* Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido.
+* Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido; o código só muda dentro do `/apply`, e uma mudança pedida em qualquer outro lugar vira uma linha.
 
 [^queue-m12]: J.C. Ködel, "One Page at a Time", a fila, `docs/06-Queue.md`, marco M12, 2026-10, no repositório do livro. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md>
 

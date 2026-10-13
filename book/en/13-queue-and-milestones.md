@@ -1,7 +1,7 @@
 # 13. The queue and milestones
 
 After this chapter you can read a queue, say what each mark means, and write a milestone paragraph a person can check.
-You can also order a milestone so that its order is its priority, write on a line which line must be done before it, `· after <slug>`, and add, move or change a line by conversation.
+You can also order a milestone so that its order is its priority, write on a line which line must be done before it, `· after <slug>`, add, move or change a line by conversation, and turn a code change asked outside `/apply` into a line.
 
 ## The problem
 
@@ -96,7 +96,22 @@ Each finding becomes a `[ ]` line in the same milestone, under the review line, 
 
 No command owns the queue.
 A new idea becomes a line by conversation, in any session: you tell the agent, and it writes the line in the milestone where it belongs, with a new slug and `[ ]`.
-A milestone's paragraph or a line's description changes the same way, and the slug stays, since a page or a commit may already use it.
+
+The code has one owner, `/apply`, the command that builds a delivery (chapter 15).
+A change to it asked in any other session, however small, becomes a `[ ]` line: the agent writes the line, says so, and the answer stops there, with no file of the app changed.
+Asked in an ordinary session to show the due date on the loan screen as day/month/year, the agent adds this line to the milestone above, just above `m1-review`, a line written for this chapter:
+
+```
+[ ] due-date-format   the loan screen shows the due date as day/month/year
+```
+
+The line gets what every delivery gets, a page, a proof and the person's commit; an edit made on the spot would have skipped the line, the page and verify.
+The answer is the same during `/propose`, which writes no code: a new line, and the page unchanged unless you ask for that change to be part of it.
+An agent that edits the code anyway, to "just change the label", is asked for the line instead, and the edit is reverted before anything is committed.
+The rule covers `/apply`'s own session too: a fix it finds outside its page becomes a line above it, and the delivery waits for that line (chapter 16).
+Documents still change by conversation, in any session; the rule covers the code: the app's source, its tests, a migration, its configuration.
+
+A milestone's paragraph or a line's description changes by conversation too, and the slug stays, since a page or a commit may already use it.
 Moving a line up or down is changing its priority, and it happens the same way: you ask the agent to move it.
 Lines also come from a milestone's review and, on an existing project, from its issues or roadmap.
 You read the change before you commit it, as with every document, and nobody edits the queue by hand.
@@ -110,6 +125,8 @@ On Case A, a client project on a low-code platform, Microsoft Power Apps with Co
 
 The kit's changelog, at entry 2026.10.08.3, tells why the order is written down: the rule that the order is the priority had always held and was written nowhere, so a user asked the kit for a way to rank deliveries.
 Written as a rule, it needs no ranking: the queue already is one.
+Its entry 2026.10.06.1 tells why code changes only inside `/apply`: before that rule, an agent asked for a correction in an ordinary session edited the code directly, with no line in the queue, no page and no verify.
+Since then a change asked outside `/apply` costs one line, and it gets a page, a proof and the person's commit.
 This book's own queue shows `· after` at work: in its milestone M12, seven lines end with `· after kit-2026-10-13`; each brings chapters to the kit's version 2026.10.13, which the repository had to run first, and none of them reads as stuck while it waits its turn.[^queue-m12]
 
 ## Key points
@@ -120,7 +137,7 @@ This book's own queue shows `· after` at work: in its milestone M12, seven line
 * Three to eight deliveries, the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone.
 * The order is the priority: the higher line matters more, and moving a line is changing its priority.
 * A dependency known when a line is added is written with it, `· after <slug>`: an order, not a wait, so the line keeps `[ ]`.
-* No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept.
+* No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept; code changes only inside `/apply`, and a change asked anywhere else becomes a line.
 
 [^queue-m12]: J.C. Ködel, "One Page at a Time", the queue, `docs/06-Queue.md`, milestone M12, 2026-10, in the book's repository. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md>
 

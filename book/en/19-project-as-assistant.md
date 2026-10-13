@@ -1,6 +1,6 @@
 # 19. The project as the team's assistant
 
-After this chapter you can keep a project's emails, proposals and meeting notes where the agent reads them, and ask the project, in plain words, what is pending, how it is going and who owes an answer.
+After this chapter you can keep a project's emails, proposals and meeting notes where the agent reads them, and ask the project, in plain words, where it stands and what to run next, what is pending, how it is going and who owes an answer.
 You can also say what a person must still do with every answer the agent gives.
 
 ## The problem
@@ -59,6 +59,7 @@ Its correspondence folder was kept out of the repository, and only engineering f
 
 These are the questions a team asks every week, and the file that answers each:
 
+* **Where are we, and what comes next?** The queue's lines in flight with their marks, the `[?]` lines with their reasons, and the next free line with the command that starts it (the manager's session below shows an answer).
 * **What is pending?** The queue's lines not yet `[x]`, milestone by milestone.
 * **What is blocked, and on what?** The `[?]` lines, and the reason at the end of each.
 * **How is it going?** Lines closed and lines opened per day, from the queue and the commit dates, against the milestone paragraph that says what "closed" means.
@@ -112,8 +113,25 @@ A manager needs no code editor.
 They open the host in the project's root folder, the one with the rules file, and ask in plain words.
 The host loads the rules file at the start of the session, and the rules file tells the agent to read the documents before acting, so the manager's session starts from the same documents as the developer's.
 
+The rules file also holds a line for the question a manager asks first: asked where things stand, the agent answers from the queue and `work/`, with the next command written as that host invokes it.
+There is no status command, and the kit's changelog, at entry 2026.10.08.1, gives the reason: the queue already is the status.
+Asked "where are we?" on the lending library, a session answers this way, in an answer written for this chapter:
+
+```text
+Milestone 1, a librarian lends and takes back: 4 of 7 lines done.
+In flight: return-book [*], being built.
+Waiting: none.
+Next free line: due-date-format [ ], no page yet.
+Run: /propose due-date-format (Codex: $propose due-date-format)
+```
+
+Every part of it is read from docs/06: the milestone's count, the line in flight with its mark, the waits, and the first free line, with the command chapter 11's table gives for each host.
+A `[?]` line would appear under "Waiting" with its reason and the phase it resumes in, as the line holds them.
+An answer from what the session remembers, an offer to keep a status file, or a suggestion to add a status command means the agent did not read the queue: ask for the file behind the answer.
+
 A question touches no code, and the host's plan mode (chapter 14) keeps a session from editing anything.
 When the manager wants something changed, such as a new line in the queue, the agent writes it by conversation, as in any session, and a person reviews and commits it.
+A change to the code, however small, becomes a line as well (chapter 13), and the answer stops there.
 
 ## What the team gains
 
@@ -126,5 +144,5 @@ On Case A, twenty questions to outside people were followed to their answers, th
 * The context folder holds what the code cannot say, each original beside its Markdown; it is committed when the repository stays with the team, and kept out when the repository is delivered or public.
 * A work record with two tables, questions sent and still open, answers "who owes me an answer" and writes the reminder.
 * The agent's answer reads as right even when it is wrong: ask for the file behind it, and interpret, guide and validate.
-* A manager opens the host at the project's root and asks in plain words; the same rules file makes the agent read the documents first.
+* A manager opens the host at the project's root and asks in plain words; the same rules file makes the agent read the documents first; asked where things stand, it answers from the queue with the next command; there is no status command.
 
