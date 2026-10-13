@@ -1,4 +1,4 @@
 ---
 agent: 'agent'
 ---
-Read `.agents/skills/analyze/SKILL.md` and follow it. `$ARGUMENTS` is `${input:slug}`.
+Read `.agents/skills/analyze/SKILL.md` and follow it.

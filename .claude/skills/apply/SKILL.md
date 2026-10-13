@@ -1,59 +1,59 @@
 ---
 name: apply
+disable-model-invocation: true
 description: >-
   Implement work/<slug>.md end to end: code, tests, verify, proof, docs,
   then stage and suggest the commit. Never commits.
 argument-hint: <slug>
 metadata:
-  version: "2026.10.05"
+  version: "2026.10.13"
 ---
-Implement `work/$ARGUMENTS.md` in this session, completely. The page is the
-scope; do not widen it.
+Implement `work/$ARGUMENTS.md` in this session, completely. When the slug
+is missing, ask for it. The page is the scope; do not widen it.
 
-Read the page, `AGENTS.md`, docs/01 (architecture), docs/04 (conventions)
-and docs/05 (process). docs/05 holds this project's slots and you follow
-them literally: the verify command, the environments and what a delivery
-leaves up to date in each, how a screen is proven, the publish policy, the
-git strategy. Work where the git strategy says: on the branch or worktree
-`/propose` created for the slug, if any. If the page contradicts a
-document, stop and say which: the document changes in the same delivery or
-the page is wrong. Do not resolve it silently.
+Read the page, `AGENTS.md`, docs/01 (architecture), docs/04 (conventions),
+docs/05 (process) and docs/06 (queue). Follow docs/05's project slots
+literally: verify, environments, proof, publish policy and git strategy.
+Before editing, record the working tree and index as docs/05 §6 says.
+Work on the branch or worktree /propose created, if any.
 
-When the line is `[?]`, say what it waits on and go on only when the
-person says it is resolved. Then mark the line in docs/06: `[>]` becomes
-`[*]`, so the queue shows the build is under way.
+If the page contradicts a document, stop and say which: the document changes
+in this delivery or the page is wrong. Do not resolve it silently. Follow
+docs/05 §4 to resume a blocked line; refuse an incomplete proposal and
+point to /propose. Only a fully defined `[>]` line whose `after` is done
+becomes `[*]`. Another session's delivery in the same tree is not a
+conflict; docs/05 §§4 and 6 say what is.
 
-When the work cannot go on, because it needs an answer nobody has given
-yet, because another line must be done first (a fix you found becomes a
-`[ ]` line above this one), or because the person says it is blocked,
-stop: write into the page what was built and what it waits on, leave the
-page in `work/`, mark the line `[?]` with `· blocked: <reason>` or
-`· blocked: after <slug>, <slug>` at its end, then stage and suggest the
-commit as below.
+When work cannot go on, record what was built and what it waits on, leave
+the page in `work/` and block it with `resume: apply` as docs/05 §4 says.
+A prerequisite fix becomes a `[ ]` line above this one. End the page with
+the partial message, show it in the conversation in the same `commit`
+block, and follow docs/05 §6's blocked-work staging rule; report verify
+and environments, and stop without claiming completion.
 
-Build every piece where docs/01 says it goes, with the error convention
-docs/01 names. Write the tests docs/04 asks for. Abstraction on the second
-concrete occurrence, and the page says which was the first. Add no
-dependency, layer or tool the page did not name. No em dash in any text a
-user reads.
+Build where docs/01 says, with its error convention. Write docs/04's tests.
+Abstraction on the second concrete occurrence; the page names the first.
+Add no dependency, layer or tool the page did not name. No em dash in any
+text a user reads.
 
-Run the verify command until it is green. Prove the delivery the way
-docs/05 says (screenshot against the reference, end-to-end run, manual
-check): list what diverges, fix it until only what you can justify
-remains. Leave every environment as docs/05 requires, and never end silent
-about them: the last thing you say is which environment is at which
-version and the command that updates the others.
+Run verify until green. Prove the delivery as docs/05 says; list divergences
+and fix them until only what you can justify remains. Leave environments
+as required. Record divergences, omissions, proof and decisions on the
+page; update their owning documents and ADRs. When the delivery adds or
+changes something a person does by hand, write or update its manual as
+docs/05 §5 says. Tick every Done when item,
+move the page to `work/done/` and mark `[x]`. Resolve dependent queue lines
+by docs/05 §4, preserving their definition or implementation phase.
 
-Then write into the page what happened: what diverged from the plan and
-why, what was dropped, what the proof found, decisions taken (and the ADR,
-if one). Update the documents the delivery changed: a new term into
-docs/03, a new rule into the document that owns it, a decision into
-docs/adr/. Tick every item of "Done when". Move the page to `work/done/`.
-Mark the line in docs/06: `[*]` becomes `[x]`. A `[?]` line whose
-`after` names only lines now `[x]` loses its suffix and goes back to
-`[>]`, or `[ ]` when it has no page; say which.
+End the page with one final `commit` block in docs/05 §6's format, replacing
+any earlier suggestion.
+Stage only this delivery's changes as that section says and suggest the
+same message in the conversation too, in the same `commit` block. Never
+commit or merge. Files and message in the documentation
+language; talk in the person's language. Report which environment is at
+which version and the command that updates the others. End with the
+person's next steps, each command written out: review the staged diff;
+commit with the suggested message, and on a delivery branch merge it as
+docs/05 §5 says; then the queue's next line and its command, written as
+this host invokes commands, in a fresh session.
 
-`git add -A` and suggest the commit message in the format docs/05 defines.
-Do not commit and do not merge, whatever the git strategy is. Files and
-message in the documentation language; talk in the language the person
-writes in.

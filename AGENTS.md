@@ -6,6 +6,7 @@ A free, bilingual book that teaches a team the engineering practices behind the 
 - the product: docs/00 · the vocabulary: docs/03
 - how it is built: docs/01 · the server: docs/02
 - style and tests: docs/04 · process: docs/05 · queue: docs/06
+- what a person does by hand (publish, release, the disclosure list): docs/manuals/
 
 ## Non-negotiables
 - Nothing private enters the repository: private cases are only Case A and Case B, with no name, place, date of meeting, path or business detail; the disclosure scan is green (docs/03, ADR-0012).
@@ -16,9 +17,10 @@ A free, bilingual book that teaches a team the engineering practices behind the 
 - No chapter narrates a run: no brief, transcript, diff, `git status`, headless flag or commit hash in the text (ADR-0017).
 - Case B did not run on the process; no passage implies it did (docs/00).
 - The book mentions none of the author's earlier books and copies no text from them (ADR-0005).
-- One delivery = one page in work/<slug>.md: /propose to define, /apply to build.
+- One delivery = one page in work/<slug>.md: /propose to define, /apply to build. Code changes only inside /apply: a change asked outside it, however small, becomes a `[ ]` line in docs/06 and the answer stops there.
 - No em dash in any text a user reads.
 - The agent stages and suggests the commit message. It never commits.
+- Stage only this delivery's changes as docs/05 §6 says; preserve unrelated edits and existing index entries.
 
 ## Do not rebuild
 - A GitHub wiki, written or mirrored (ADR-0001).
@@ -32,3 +34,4 @@ A free, bilingual book that teaches a team the engineering practices behind the 
 - `make verify` before declaring anything done.
 - Abstraction on the second concrete occurrence, and the delivery says which was the first.
 - Ambiguity → ask. Documents are living: a delivery that changes behaviour updates the document that owns it, in the same delivery.
+- Asked where things stand, answer from docs/06 and work/: the lines in flight, their marks, and the next command, as this host invokes it.

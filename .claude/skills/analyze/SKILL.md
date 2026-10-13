@@ -1,11 +1,12 @@
 ---
 name: analyze
+disable-model-invocation: true
 description: >-
   Document an existing repository. Reads the code, writes docs/00 to 06,
   docs/adr/ and AGENTS.md describing what is there, and asks only what the
   code cannot answer. Writes no code.
 metadata:
-  version: "2026.10.05"
+  version: "2026.10.13"
 ---
 You are documenting a repository so that every later session can act on it
 without rereading it. Read `references/documents.md` first, whole: it says
@@ -17,7 +18,7 @@ what each document holds.
 The README and any existing docs; the manifests (package.json, pyproject,
 go.mod, *.csproj, pubspec.yaml, Cargo.toml, Gemfile, and the like); the
 folder tree two levels deep; the entry points; the tests and how they run;
-CI; the last fifty commit subjects; any agent rules file already there
+CI, and any Makefile or script a person runs by hand; the last fifty commit subjects; any agent rules file already there
 (CLAUDE.md, AGENTS.md, .github/copilot-instructions.md, .cursorrules).
 
 From that, infer the stack, how the code is organized, where business rules
@@ -48,7 +49,9 @@ is not asked to settle it now.
 
 In the documentation language: docs/00 to 06 describing what exists, not
 what should exist; docs/adr/ with the decisions the code already embodies
-and the ones this round took, one dated paragraph each; `AGENTS.md` from the
+and the ones this round took, one dated paragraph each; docs/manuals/, one
+manual per thing a person already does by hand (a Makefile target, a
+deploy script, steps in a README), as docs/05 §5 says; `AGENTS.md` from the
 template; `CLAUDE.md` holding the line `@AGENTS.md`; and the folder
 `work/done/`. The rules live in `AGENTS.md`: what an existing `CLAUDE.md`,
 `.github/copilot-instructions.md` or similar file already says moves into
@@ -59,4 +62,5 @@ The numbers of the documents are fixed; the names after them are in the
 documentation language.
 
 Show the queue and stop. The next step is `/propose <slug>` for its first
-line, in a fresh session. Change no code.
+line, in a fresh session; write it as this host invokes commands, which may
+not be `/`. Change no code.

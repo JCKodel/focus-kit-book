@@ -19,3 +19,7 @@ The book follows the kit's six marks, `[ ]`, `[~]`, `[>]`, `[*]`, `[x]`, `[?]`, 
 Chapter 16, "The queue while it happens", teaches the six marks; chapters 16 to 25 become 17 to 26 (ADR-0017, amendment).
 Chapter 18, the governor, tells how a mark moved from one project to the kit; chapter 22 keeps question deliveries as Case A's customization and no longer calls `[?]` Case A's alone.
 ADR-0013 is superseded.
+
+## Amendment, 2026-10-13 (kit-2026-10-13)
+
+Since `kit-2026-10-13` the book runs focus-kit 2026.10.13; the six marks are unchanged.

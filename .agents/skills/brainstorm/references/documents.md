@@ -1,7 +1,7 @@
 # The documents
 
-Seven numbered documents, a folder of decisions, a rules file and a work
-folder, written from a context folder. The numbers are fixed, because the four commands cite them; the
+Seven numbered documents, a folder of decisions, a folder of manuals, a
+rules file and a work folder, written from a context folder. The numbers are fixed, because the four commands cite them; the
 name after the number is in the documentation language (`00-Product.md`,
 `00-Produto.md`, `00-Produkt.md`). Prose in the documentation language;
 identifiers in English unless docs/04 says otherwise.
@@ -33,7 +33,8 @@ test uses the terms of this table. A new concept enters here first.
 
 **docs/04, the conventions.** Documentation language and identifier
 language. Naming. Style and formatting, and the tool that enforces them.
-Where tests live and what is tested at each level. Commit message format.
+Where tests live and what is tested at each level. A pointer to docs/05 §6
+for the commit message format; do not copy that format here.
 
 **docs/05, the process.** The template below, with its slots filled.
 
@@ -45,15 +46,28 @@ its review (docs/05 §8):
 [ ] <slug>    <what it delivers, one line>
 ```
 
-`[ ]` not yet defined · `[~]` being defined · `[>]` defined,
-`work/<slug>.md` exists · `[*]` being built · `[x]` done, page in
-`work/done/` · `[?]` waiting, with `· blocked: <reason>` or
-`· blocked: after <slug>, <slug>` at the end of the line. A line never
+`[ ]` not yet defined · `[~]` being defined · `[>]` completely defined,
+`work/<slug>.md` ready for /apply · `[*]` being built · `[x]` done, page in
+`work/done/` · `[?]` waiting, with `· resume: propose` or `· resume: apply`
+before `· blocked: <reason>` or `· blocked: after <slug>, <slug>` at the
+end of the line (docs/05 §4). A line never
 leaves; it changes mark, at the moment the work changes (docs/05 §4). The
+order is the priority: a session asked for the next delivery takes the
+first free line, and the person reorders by conversation in any session;
+what is not in the current milestone is not planned yet. A line that
+needs another done first ends with `· after <slug>`, written when the
+line is added; it is an order, not a block. A line is free when every
+`after` it names is `[x]`. Free lines that touch different files may run
+at the same time, in different sessions (docs/05 §4). The
 queue is edited by conversation in any session; no command owns it.
 
 **docs/adr/.** One file per decision, `ADR-NNNN-<slug>.md`: context, the
 decision, the consequences, the date. An ADR is amended, never rewritten.
+
+**docs/manuals/.** One file per thing a person does by hand outside a
+delivery, so it is found by its name and not inside a slot: publish, roll
+back, set up a service. docs/05 §5 says what each one holds. Created with
+the first one; there is no empty folder.
 
 **AGENTS.md.** The template below. Read at the start of every session by
 every host in the table of SETUP.md §1, on its own or through the pointer
@@ -119,12 +133,15 @@ project is worked. Three answers, and in every one a delivery's page and
 build are one change that reverts in one step, because undoing a whole
 delivery must be one step; the agent never commits and never merges:
 
-* **trunk:** everything on the main branch, one delivery at a time. The
+* **trunk:** everything on the main branch. The
   page waits uncommitted in the working tree between `/propose` and
   `/apply`; page and build land in one commit, which the person makes
-  after reviewing. Only for one person working
-  alone: with two, their deliveries share one branch and one commit
-  carries the other's half-done work. What Ninjobs did;
+  after reviewing. For one person, alone or with several sessions open
+  on free lines that touch different files: each session stages only its
+  delivery, and the person commits one delivery at a time, from the paths
+  that session staged. Not for two people: their deliveries share one
+  branch and one commit carries the other's half-done work. What Ninjobs
+  did;
 * **a branch per delivery:** `/propose` creates a branch named after the
   slug and writes the page there; `/apply` builds on it. The branch may
   carry several commits, the page first and the build after; the person
@@ -134,11 +151,13 @@ delivery must be one step; the agent never commits and never merges:
 * **a worktree per delivery:** `/propose` creates a git worktree on a
   branch named after the slug and writes the page there; `/apply` runs in
   it; the branch reaches the main branch in one merge, as above. For
-  parallel work: one branch does not touch
+  parallel work by several people, or by one person whose deliveries
+  touch the same files: one branch does not touch
   another, so several agents build different deliveries at the same time.
-  Before running two at once, decide which deliveries can run in parallel
-  and which touch the same files, or their merges conflict. Costs a
-  directory per delivery.
+  Before running two at once, pick free lines (docs/06's `after`) and
+  decide which touch the same files, including docs/06 and other shared
+  documents. Reconcile the queue by docs/05 §4 when their branches are
+  integrated. Costs a directory per delivery.
 
 ## The process document (docs/05)
 
@@ -165,6 +184,16 @@ git add → a person reviews and commits.
 
 /propose talks and writes the page, never code. /apply builds, proves,
 updates the documents, stages and suggests the commit, never commits.
+Code changes only inside /apply: a change asked anywhere else, however
+small, becomes a `[ ]` line in docs/06 and the answer stops there.
+
+Before /propose changes the queue or the page, use §5's git strategy:
+create the branch or worktree named after the slug, or reuse its existing
+one on resumption. Add a missing queue line where it belongs and say so.
+Start defining with `[~]`; start building only a completely defined `[>]`
+page, with `[*]`. Follow §4 for blocked lines and §6 before changing code
+or staging. Keep project slots and rules current before using them; report
+a missing process rule rather than falling back to a retired instruction.
 
 ## 3. The page
 
@@ -172,8 +201,10 @@ updates the documents, stages and suggests the commit, never commits.
 
     **Objective.** One sentence: what the user can do afterwards.
 
-    **Behaviour.** Verifiable scenarios in user language. Each line becomes
-    a test or a manual check.
+    **Behaviour.** Verifiable scenarios in user language, each an action
+    with concrete input and the result the user sees. Include the cases
+    that must fail and the edges the documents imply. Each line becomes a
+    test or a manual check.
 
     **Contract.** Data, schema, API, message shapes, or "none". The only
     section that must be exact.
@@ -190,11 +221,27 @@ updates the documents, stages and suggests the commit, never commits.
     screenshot matches Y.
 
 After /apply the page also records what happened: what diverged, what was
-dropped, what the proof found, the decisions taken.
+dropped, what the proof found, the decisions taken. It ends with the commit
+message /apply suggested, in a fenced block whose info string is `commit`.
+There is one final block: a resumed /apply replaces the earlier suggestion.
+
+A draft with unanswered scope questions is not ready for /apply, even
+when its file exists. Before marking `[>]`, every section above is filled
+or explicitly inapplicable and no scope decision remains open. Ask the
+person to review the page: Behaviour is checkable, Contract exact, Out of
+scope names what they assumed was included, and choices made on their
+behalf are explicit. Corrections happen in the /propose conversation;
+/apply starts in a fresh session afterwards.
 
 ## 4. The queue
 
-docs/06: one line per delivery, in order, under milestones. The line never
+docs/06: one line per delivery, in order, under milestones. The order is
+the priority: the next delivery is the first free line, and the person
+reorders by conversation. A line that needs another done first ends with
+`· after <slug>`, written when the line is added; it is free when every
+line it names is `[x]`. Asked what can run at the same time, answer from
+the queue: the free lines, and among them the ones that touch different
+files, judged from their pages and docs/01. The line never
 leaves the queue; it changes mark, at the moment the work changes, so the
 queue shows what is happening while it happens:
 
@@ -202,20 +249,49 @@ queue shows what is happening while it happens:
 |---|---|---|
 | `[ ]` | not defined | the conversation that adds the line |
 | `[~]` | being defined | /propose, when it starts |
-| `[>]` | defined, `work/<slug>.md` exists | /propose, when the page is written |
+| `[>]` | completely defined, page ready for /apply | /propose, when §3 is complete |
 | `[*]` | being built | /apply, when it starts |
 | `[x]` | done, page in `work/done/` | /apply, with verify green |
 | `[?]` | waiting | any session, in the three cases below |
 
 A line waits when the person says it is blocked, when it needs an answer
-that was asked and not given, or when it needs another line done first,
-such as a fix found in the middle of an /apply. The reason goes at the end
+that was asked and not given, or when work already started finds it needs
+another line done first, such as a fix found in the middle of an /apply.
+The reason goes at the end
 of the line, `· blocked: <reason>` or `· blocked: after <slug>, <slug>`.
+A dependency known when the line is added is `· after <slug>` alone,
+without `[?]`: an order, not an interruption.
+Before that reason, record the phase to resume: `· resume: propose` for
+`[ ]` or `[~]`, and `· resume: apply` for `[>]` or `[*]`. A draft saved
+by /propose always uses `resume: propose` until §3 is complete.
 Any mark before `[x]` can become `[?]`. The line leaves `[?]` when the
 reason is resolved: the person says so, the session that records the
 answer clears it, or /apply clears it when it marks `[x]` the last line of
-an `after`. It goes back to `[>]` when its page exists and `[ ]`
-otherwise, and the next command marks it again.
+an `after`. Remove both suffixes and return `resume: propose` to `[ ]`,
+keeping any draft for /propose to finish; return `resume: apply` to `[>]`
+only when its page still satisfies §3. Existence alone is insufficient.
+If scope became undecided, return `[ ]` and say what /propose must settle.
+For an old blocked line without `resume`, recover the phase from its page
+and history; if completeness cannot be established, return `[ ]`.
+
+Two sessions in one working tree, on free lines that touch different
+files, are the normal case of parallel work on trunk. Another line
+changing mark, another delivery's page or files appearing in the tree,
+and another session's index entries are that session's work, not a
+conflict: do not stop for them, do not touch them, change only this
+delivery's line and stage only this delivery's paths and hunks, including
+its own hunk of docs/06. A conflict is the same hunk edited by both, or a
+file this page needs that the other delivery is changing; then stop and
+report. In worktrees, each worktree's queue shows that branch's state, not a
+global live view. Change only the current delivery's line, its new findings
+and the dependent lines this session can resolve. When branches are
+integrated, reconcile docs/06 by slug: retain every delivery and finding,
+and each owning branch's latest state. Do not replace the whole file with
+one side or downgrade a completed line using a stale copy. Check the page
+at the expected path and keep a dependency blocked until its completed
+changes are available in the branch that needs them. A conflicting state
+or scope is reported for resolution, never guessed. Apply the same care
+to shared domain terms and ADRs.
 
 Each milestone is planned with its review as the last line (§8). Edited by
 conversation in any session.
@@ -226,23 +302,67 @@ conversation in any session.
 * **Verify:** `<command>`, which runs <what>. Green before anything is
   declared done. <Or: created by the first delivery.>
 * **Environments:** one line each: name, what runs there, what a delivery
-  must leave up to date there, and the command that does it.
+  must leave up to date there, and the command that does it, or its
+  manual when a person does it by hand.
 * **Proof of a screen:** <tool, viewports, reference>, or "no screens".
 * **Publish policy:** when an environment beyond the local one is updated,
   and whether the agent asks first.
 * **Context:** `context/` is committed | listed in `.gitignore`, and why
   (who reads the repository).
+* **Manuals:** `docs/manuals/`, one file per thing a person does by hand
+  outside a delivery (publish, roll back, rotate a secret, set up a
+  service), named in the documentation language after what it does. Each
+  stands alone for a person who has read nothing else: what it does and
+  when, what must be in place, the commands in order, how to tell it
+  worked, how to undo it, what breaks if a step is skipped. A slot that
+  names such a command points to its manual instead of holding the steps;
+  a delivery that changes one updates its manual. <The manuals, one line
+  each, or: none yet.>
 * **Git:** trunk | a branch per delivery | a worktree per delivery. A
   delivery's page and build are one change: one commit on trunk, one merge
   otherwise. The agent stages; it never commits or merges.
 
 ## 6. Commit
 
-The agent stages and suggests the message; the person commits after
-reviewing. Imperative subject up to 72 characters, scope in parentheses
+This section owns the commit format; docs/04 points here. Before editing,
+inspect git status, the staged and unstaged diffs, and untracked files.
+Record which changes already belong to this delivery (its /propose page
+and queue changes, or a previous partial /apply) and which are unrelated;
+do not assume an existing edit belongs to it because it shares a path.
+Another delivery's page, its files and its hunk of docs/06 belong to the
+session building it (§4); they are unrelated here. Preserve unrelated
+edits and the pre-existing index entries. If ownership of a change this
+delivery must edit cannot be established, or changes overlap in the same
+hunk, stop and report the affected paths before editing them or staging;
+do not reset or stash them.
+
+Stage only this delivery's files or hunks, including the page move and its
+documentation changes. Use explicit paths for files wholly owned by it,
+and selective staging for mixed files; never `git add -A` or `git add .`.
+Inspect the staged diff afterwards and report any unrelated entries that
+were already staged, so the person knows a plain commit would include
+them. Do not unstage those entries yourself. A commit must contain only
+this delivery for the one-change promise to hold: with two sessions on
+trunk, the person commits one delivery at a time, naming its paths.
+
+The agent suggests the message; the person commits after reviewing.
+Imperative subject up to 72 characters, scope in parentheses
 when it helps; body up to five one-line bullets, the highlights and not
-the reasoning; last line points to `work/done/<slug>.md`, where the
-reasoning lives.
+the reasoning; last line points to the page's actual path, where the
+reasoning lives: `work/done/<slug>.md` when done, `work/<slug>.md` when
+blocked. A partial message says it is partial and names the blocker;
+it must not imply verify passed or the delivery is done.
+
+When blocked on trunk, keep the work uncommitted and do not add it to the
+index; the `commit` block is a draft for the eventual whole delivery.
+Resume with the same page and record the current verify result. If a
+prerequisite must be implemented separately before resumption, move this
+partial delivery to its own branch/worktree, preserving its edits and
+index ownership, before starting the prerequisite; ask for help if safe
+separation is not possible. Do not mix their commits on trunk.
+On a delivery branch or worktree, partial changes may be staged and
+suggested for the person to commit there. Keep the branch unmerged until
+the delivery is complete, so one merge still contains the whole delivery.
 
 ## 7. What this process does not have
 
@@ -283,14 +403,20 @@ is the only place a rule is written.
 - the product: docs/00 · the vocabulary: docs/03
 - how it is built: docs/01 · the server: docs/02
 - style and tests: docs/04 · process: docs/05 · queue: docs/06
+- what a person does by hand (publish, roll back): docs/manuals/, when
+  it exists
 
 ## Non-negotiables
 - <three to six rules that protect what the product is; from docs/00 and
   docs/01, one line each>
 - One delivery = one page in work/<slug>.md: /propose to define, /apply
-  to build.
+  to build. Code changes only inside /apply: a change asked outside it,
+  however small, becomes a `[ ]` line in docs/06 and the answer stops
+  there.
 - No em dash in any text a user reads.
 - The agent stages and suggests the commit message. It never commits.
+- Stage only this delivery's changes as docs/05 §6 says; preserve unrelated
+  edits and existing index entries.
 
 ## Do not rebuild
 - <what was tried and removed on purpose, with the ADR that says why>
@@ -303,4 +429,6 @@ is the only place a rule is written.
   which was the first.
 - Ambiguity → ask. Documents are living: a delivery that changes behaviour
   updates the document that owns it, in the same delivery.
+- Asked where things stand, answer from docs/06 and work/: the lines in
+  flight, their marks, and the next command, as this host invokes it.
 ```

@@ -161,6 +161,4 @@ A new check enters only when it names the error it would have caught (docs/05 §
 
 ## Commit messages
 
-Imperative subject up to 72 characters, `<type>(<slug>): <subject>`, where type is `feat`, `fix`, `docs` or `chore`.
-Body up to five one-line bullets.
-Last line: `work/done/<slug>.md`.
+docs/05 §6 owns the commit format.

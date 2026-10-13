@@ -1,7 +1,8 @@
 # Queue
 
-`[ ]` not yet defined · `[~]` being defined · `[>]` defined, `work/<slug>.md` exists · `[*]` being built · `[x]` done, page in `work/done/` · `[?]` waiting, with `· blocked: <reason>` or `· blocked: after <slug>, <slug>` at the end of the line.
+`[ ]` not yet defined · `[~]` being defined · `[>]` defined, `work/<slug>.md` exists · `[*]` being built · `[x]` done, page in `work/done/` · `[?]` waiting, with `· resume: propose` or `· resume: apply` before `· blocked: <reason>` or `· blocked: after <slug>, <slug>` at the end of the line.
 A line never leaves; it changes mark, at the moment the work changes (docs/05 §4).
+The order is the priority: the next delivery is the first free line, one whose `· after <slug>` lines are all `[x]`; `· after <slug>`, written when the line is added, is an order, not a block.
 
 ## M1. The book stands up
 
@@ -239,9 +240,9 @@ When this milestone closes, a reader who hears that the page needs the whole ans
 When this milestone closes, the book teaches focus-kit 2026.10.13 and the repository runs on it: two sessions in one working tree on free lines, the queue's order as its priority and `· after <slug>` as an order, not a block, `/propose` deciding what the documents answer, Behaviour drafted with concrete inputs and failure cases, the commit message in a `commit` block on the page, code changed only inside `/apply`, `/apply` staging only its delivery and naming the next steps, manuals in `docs/manuals/`, and an update that reports migrations instead of rewriting the project's documents; the kit's changelog, paraphrased, is the evidence.
 
 ```
-[ ] kit-2026-10-13           reinstall the kit at 2026.10.13 and apply its migration report: code only inside /apply in docs/05 §2 and AGENTS.md, Behaviour in §3, queue order and `· after` in §4 and this header, the Manuals slot in §5 with the site's publish and `make release` as manuals in docs/manuals/, the git slot for two sessions
+[x] kit-2026-10-13           reinstall the kit at 2026.10.13 and apply its migration report: code only inside /apply in docs/05 §2 and AGENTS.md, Behaviour in §3, queue order and `· after` in §4 and this header, the Manuals slot in §5 with the site's publish and `make release` as manuals in docs/manuals/, the git slot for two sessions
 [ ] ch21-one-tree             chapter 21 (and 20 and 10 where they choose git): two sessions in one working tree on free lines that touch different files as the simple case, what is and is not a conflict there, when a worktree still pays; both editions · after kit-2026-10-13
-[ ] ch13-16-queue-order       chapters 13 and 16: the order is the priority, the next delivery is the first free line, `· after <slug>` as a known order against `[?]` as a wait found on the way, which lines can run at the same time; docs/03 gains the term; the version cited in chapter 16; both editions · after kit-2026-10-13
+[ ] ch13-16-queue-order       chapters 13 and 16: the order is the priority, the next delivery is the first free line, `· after <slug>` as a known order against `[?]` as a wait found on the way, which lines can run at the same time; the version cited in chapter 16; both editions · after kit-2026-10-13
 [ ] ch14-propose-decides      chapter 14: /propose decides what the documents answer and names the source on the page; Behaviour with a concrete input, the result the user sees, the cases that must fail and the edges, drafted by /propose and corrected by the person; chapter 3's note if it needs it; both editions · after kit-2026-10-13
 [ ] ch15-apply-ends           chapter 15: the commit message in a `commit` block on the page and in the conversation, also when blocked; /apply stages only its delivery; it ends with the person's next steps in the host's form; both editions · after kit-2026-10-13
 [ ] ch10-12-manuals           chapters 10 and 12: docs/manuals/, what goes there and who writes it (/analyze, /apply); both editions · after kit-2026-10-13
