@@ -14,9 +14,10 @@ O kit precisa abrir pronto em todos eles, e ser instalado sem pedir a ninguém q
 Abra o seu agente de código na raiz do repositório e diga:
 
 ```
-Read https://github.com/JCKodel/focus-kit/blob/main/SETUP.md and follow its section 1.
+Read https://raw.githubusercontent.com/JCKodel/focus-kit/main/SETUP.md and do what it says.
 ```
 
+O endereço é o próprio arquivo, não a página que o GitHub desenha em volta dele, então o agente recebe o texto inteiro.
 Esse arquivo é o arquivo de setup do kit: um arquivo de instruções que o agente lê e transforma nos arquivos do kit, os quatro comandos e alguns pequenos arquivos-ponteiro para os hosts que precisam deles.
 Nada é instalado na sua máquina; o agente escreve arquivos no repositório, e é só isso.
 O seu host pode perguntar antes de baixar o arquivo e antes de escrever na sua própria pasta dentro do repositório, `.claude/` no Claude Code: aprove os dois.
@@ -46,36 +47,54 @@ Ele compara os arquivos com os seus próprios modelos e relata cada migração, 
 Uma migração pode citar uma regra, uma linha da fila ou um slot.
 As suas escolhas ficam: um docs/05 cujo §5 diz "trunk, uma sessão por vez" vê proposto o texto para duas sessões numa pasta, e mantém o seu até o time aceitar a mudança.
 
-Este é o relatório da atualização da 2026.10.13 para a 2026.10.16 na biblioteca de empréstimos, escrito para este capítulo:
+Este é o relatório de uma atualização na biblioteca de empréstimos, escrito para este capítulo:
 
 ```
-Instalado: focus-kit 2026.10.16, em cada SKILL.md.
-Migrações de processo pendentes: 6.
+Instalado: focus-kit 2026.10.16.2, em cada SKILL.md.
+Migrações de processo pendentes: 8.
 
-1. docs/05, §2 The flow: depois de "a resposta para ali", acrescentar
-   "ou, quando a pessoa quer defini-la agora, a conversa segue como
-   /propose <slug> na mesma sessão".
-2. docs/05, §4 The queue: acrescentar "Uma linha é a marca, o slug,
-   uma frase e os sufixos; o que aconteceu vai para a página."
-3. docs/05, §5 This project: abrir com "Um slot diz o quê e o
-   comando, em poucas linhas." No slot Manuals, acrescentar "e uma
-   prova que o /apply roda em outra máquina".
-4. AGENTS.md, Non-negotiables, a linha "One delivery": acrescentar
-   a cláusula do item 1.
-5. docs/06, Marco 1, a linha membros carrega histórico. Encurtá-la
-   para "a bibliotecária cadastra, suspende e reativa membros" e
-   levar "membros suspensos mantêm os seus empréstimos, como a
-   bibliotecária decidiu" para work/done/membros.md, que não o tem.
-6. docs/05, §5 Environments: o slot guarda os passos para publicar o
-   app. Manter o comando e apontar para docs/manuals/publicar-o-app.md,
-   que fica com os passos.
+1. docs/05, §2 The flow: trocar "e a resposta para ali, ou, quando
+   a pessoa quer defini-la agora, a conversa segue como
+   /propose <slug> na mesma sessão, e o que foi dito vira a página"
+   por "; o que foi dito e a linha não comporta vai para um rascunho
+   work/<slug>.md. A resposta para ali e cita /propose <slug> para
+   uma sessão nova, como este host invoca comandos". Depois de "ou
+   reusar o existente ao retomar", acrescentar ", trazendo para ele
+   qualquer rascunho deixado para o slug".
+2. docs/05, §3 The page: depois de "A única seção que precisa ser
+   exata", acrescentar ": uma tela errada se corrige numa sessão,
+   uma coluna errada é uma migration, e uma regra de acesso errada
+   já vazou".
+3. docs/05, §4 The queue: depois da tabela de marcas, acrescentar
+   "Um quadro pode ler a fila, e as pessoas puxam trabalho dele,
+   então uma marca muda na hora: [~] é a primeira edição do
+   /propose, [*] a primeira do /apply, e [x] a última do /apply.
+   Sem quadro, as marcas não custam nada."
+4. docs/05, §5 This project: acrescentar o slot Milestone review
+   antes do Git: "Milestone review: o /code-review ultra <base> do
+   Claude Code, lançado pela pessoa contra o commit que a página da
+   revisão cita."
+5. docs/05, §5 Publish policy: acrescentar "Seja qual for, as
+   últimas palavras do /apply dizem qual ambiente está em qual
+   versão."
+6. docs/05, §7: "nenhuma barreira antes da implementação" vira
+   "nenhuma barreira antes da implementação além de uma página
+   completa".
+7. docs/05, §8 Closing a milestone: "Ela não revisa código e não
+   corrige nada." vira "Ela não corrige nada." Depois desse
+   parágrafo, acrescentar "A revisão também lê o código: a sua
+   página cita o commit que fechou o marco anterior, ou o primeiro
+   commit, e a pessoa lança o Milestone review do §5 contra ele."
+8. AGENTS.md, Non-negotiables, a linha "One delivery": depois de
+   "vira uma linha [ ] no docs/06", acrescentar "com um rascunho de
+   página para o que a linha não comporta", e terminá-la "citando o
+   /propose para uma sessão nova (docs/05 §2)".
 
 docs/ e AGENTS.md não foram alterados.
 ```
 
-Os itens 5 e 6 não mudam nenhuma regra.
-A linha `membros` ainda diz o que foi aquela entrega, e o slot ainda cita o seu comando; cada um perde só o que uma sessão leria à toa toda vez, a razão que o [capítulo 13](13-queue-and-milestones.md) dá para uma linha curta e o [capítulo 10](10-the-documents.md) para um slot curto.
-A decisão fica na página em `work/done/`, para onde o relatório a manda.
+Os itens 1, 3, 4 e 7 mudam uma regra: uma mudança pedida fora do `/apply` para na linha, com um rascunho para o que a linha não comporta, e o próximo `/propose` roda numa sessão nova ([capítulo 13](13-queue-and-milestones.md)); uma marca muda na hora, para que um quadro que lê a fila mostre o que já foi pego ([capítulo 16](16-queue-states.md)); e a revisão de um marco também lê o código, pelo slot que cita a revisão que uma pessoa lança ([capítulo 17](17-closing-a-milestone.md)).
+Os itens 2, 5, 6 e 8 mudam só palavras, para uma regra que os documentos já guardam: o Contrato diz por que precisa ser exato ([capítulo 14](14-propose.md)); a Publish policy diz o que as últimas palavras do `/apply` já são, qual ambiente está em qual versão ([capítulo 15](15-apply.md)); a lista do que o processo não tem cita a única barreira que ele mantém, uma página completa ([capítulo 18](18-the-governor.md)); e o `AGENTS.md` diz a regra do item 1 onde toda sessão a lê.
 
 O relatório mantém dois fatos separados.
 O `metadata.version` em cada `SKILL.md` diz qual kit está instalado.
@@ -85,12 +104,14 @@ A atualização termina quando as migrações são aplicadas, e o método as apl
 Num projeto já documentado, a atualização relata as migrações primeiro, ou diz que não há nenhuma.
 Ela nunca pede que você rode o `/brainstorm` ou o `/analyze` de novo: eles escrevem os documentos de um projeto do zero, e os seus existem.
 Uma versão que não pede nada aos seus documentos não relata migração: uma versão que muda só os comandos, como o `/apply` mostrar a sua mensagem de commit também na conversa, não muda mais nada.
-Também não relata uma versão cuja regra os seus documentos já querem dizer: um docs/05 cujo slot Git não cita pasta para uma worktree por entrega já vale a forma do kit.
+Um docs/05 cujo slot Git escolheu um worktree por entrega e não cita pasta recebe uma migração só quando o projeto já trabalha num contêiner, a pasta que o [capítulo 21](21-worktrees.md) organiza com o checkout e uma pasta oculta para o histórico e os worktrees, e essa pasta oculta guarda `repo.git/`.
+O relatório então propõe escrever ali o nome dessa pasta e o prefixo que os branches das entregas já usam, para que nada mude de lugar.
+Sem contêiner ainda, o slot vale o padrão do kit, que esse capítulo cita, e o relatório não propõe nada.
 
 Para saber por que uma migração existe, leia o changelog do kit, `CHANGELOG.md` no repositório dele, `CHANGELOG.pt.md` em português.
 Ele tem uma entrada por versão, a mais nova primeiro; a versão é a linha `Version:` do `SETUP.md`, o mesmo valor do `metadata.version` em cada `SKILL.md`.
 Cada entrada diz o que mudou e o problema que causou a mudança, e um item que começa com `Migration:` (no changelog em português, `Migração:`) diz o que mudar nos documentos do projeto.
-Os itens 5 e 6 do relatório acima vêm de um item desses, que diz que o relatório lista as linhas da fila que carregam histórico e os slots que narram passos ou saída, com o texto mais curto.
+Todos os itens do relatório acima vêm de um item desses, que diz que o relatório confere o docs/05 §§2, 3, 4, 6, 7 e 8, o slot Milestone review, a última frase da Publish policy e a linha do `AGENTS.md` sobre uma mudança pedida fora do `/apply`; desses, ele lista o que os seus documentos ainda não têm.
 
 ## Como cada host encontra os comandos
 
@@ -106,6 +127,7 @@ O arquivo de setup escreve o que cada host abaixo precisa:
 | Gemini CLI | `AGENTS.md`, pelo `GEMINI.md` | `.agents/skills/`, por um arquivo de comando em `.gemini/commands/` | `/propose <slug>` |
 | Google Antigravity | `AGENTS.md`, por uma regra em `.agents/rules/` | `.agents/skills/` | `/propose <slug>` |
 | Windsurf | `AGENTS.md` | `.windsurf/skills/` | `@propose <slug>` |
+| OpenCode, Zed | `AGENTS.md` | `.agents/skills/` | pedindo a skill |
 
 Cada comando é uma skill, uma pasta com um arquivo `SKILL.md` de instruções que o host carrega quando você a chama.[^claude-code-skills][^codex-skills][^copilot-skills]
 O Claude Code lê o `CLAUDE.md` no início de uma sessão, e uma linha `@AGENTS.md` nele importa o arquivo de regras.[^claude-code-memory]

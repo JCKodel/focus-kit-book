@@ -14,9 +14,10 @@ The kit has to open ready in all of them, and install without asking anyone to i
 Open your coding agent at the root of the repository and say:
 
 ```
-Read https://github.com/JCKodel/focus-kit/blob/main/SETUP.md and follow its section 1.
+Read https://raw.githubusercontent.com/JCKodel/focus-kit/main/SETUP.md and do what it says.
 ```
 
+The address is the file itself, not the page GitHub draws around it, so the agent gets the whole text.
 That file is the kit's setup file: one file of instructions that the agent reads and turns into the kit's files, the four commands and a few small pointer files for the hosts that need them.
 Nothing is installed on your machine; the agent writes files into the repository, and that is all.
 Your host may ask before it downloads the file and before it writes into its own folder inside the repository, `.claude/` in Claude Code: approve both.
@@ -46,36 +47,51 @@ It compares the files with its own templates and reports each migration, a chang
 A migration may name a rule, a queue line or a slot.
 Your choices stay: a docs/05 whose §5 says "trunk, one session at a time" sees the wording for two sessions in one folder proposed, and keeps its own until the team accepts the change.
 
-Here is the report of the update from 2026.10.13 to 2026.10.16 on the lending library, written for this chapter:
+Here is the report of an update on the lending library, written for this chapter:
 
 ```
-Installed: focus-kit 2026.10.16, in every SKILL.md.
-Pending process migrations: 6.
+Installed: focus-kit 2026.10.16.2, in every SKILL.md.
+Pending process migrations: 8.
 
-1. docs/05, §2 The flow: after "the answer stops there", add
-   "or, when the person wants it defined now, the conversation
-   continues as /propose <slug> in the same session".
-2. docs/05, §4 The queue: add "A line is the mark, the slug, one
-   sentence and its suffixes; what happened goes on the page."
-3. docs/05, §5 This project: open it with "A slot says what and the
-   command, in a few lines." In the Manuals slot, add "and a proof
-   /apply runs on another machine".
-4. AGENTS.md, Non-negotiables, the "One delivery" line: add the
-   clause of item 1.
-5. docs/06, Milestone 1, the line members carries history. Shorten
-   it to "the librarian registers, suspends and reinstates members"
-   and move "suspended members keep their loans, as the librarian
-   decided" to work/done/members.md, which lacks it.
-6. docs/05, §5 Environments: the slot holds the steps to publish the
-   app. Keep its command and point to docs/manuals/publish-the-app.md,
-   which takes the steps.
+1. docs/05, §2 The flow: replace "and the answer stops there, or,
+   when the person wants it defined now, the conversation continues
+   as /propose <slug> in the same session, and what was said becomes
+   the page" with "; what was said that the line cannot hold goes
+   into a draft work/<slug>.md. The answer stops there and names
+   /propose <slug> for a fresh session, as this host invokes
+   commands". After "or reuse its existing one on resumption", add
+   ", bringing into it any draft left for the slug".
+2. docs/05, §3 The page: after "The only section that must be
+   exact", add ": a wrong screen is fixed in a session, a wrong
+   column is a migration, and a wrong access rule has already
+   leaked".
+3. docs/05, §4 The queue: after the table of marks, add "A board may
+   read the queue, and people pull work from it, so a mark changes
+   at once: [~] is /propose's first edit, [*] is /apply's first, and
+   [x] is /apply's last. Without a board the marks cost nothing."
+4. docs/05, §5 This project: add the Milestone review slot before
+   Git: "Milestone review: Claude Code's /code-review ultra <base>,
+   launched by the person against the commit the review's page
+   names."
+5. docs/05, §5 Publish policy: add "Whatever it is, /apply's last
+   words say which environment is at which version."
+6. docs/05, §7: "no gate before implementation" becomes "no gate
+   before implementation beyond a complete page".
+7. docs/05, §8 Closing a milestone: "It reviews no code and fixes
+   nothing." becomes "It fixes nothing." After that paragraph, add
+   "The review also reads the code: its page names the commit that
+   closed the previous milestone, or the first commit, and the
+   person launches §5's Milestone review against it."
+8. AGENTS.md, Non-negotiables, the "One delivery" line: after
+   "becomes a [ ] line in docs/06", add "with a draft page for what
+   the line cannot hold", and end it "naming /propose for a fresh
+   session (docs/05 §2)".
 
 docs/ and AGENTS.md were not changed.
 ```
 
-Items 5 and 6 change no rule.
-The line `members` still says what that delivery was, and the slot still names its command; each loses only what a session would read for nothing every time, the reason [chapter 13](13-queue-and-milestones.md) gives for a short line and [chapter 10](10-the-documents.md) for a short slot.
-The decision stays on the page in `work/done/`, where the report sends it.
+Items 1, 3, 4 and 7 change a rule: a change asked outside `/apply` stops at the line, with a draft for what the line cannot hold, and the next `/propose` runs in a fresh session ([chapter 13](13-queue-and-milestones.md)); a mark changes at once, so a board that reads the queue shows what is taken ([chapter 16](16-queue-states.md)); and a milestone's review also reads the code, through the slot that names the review a person launches ([chapter 17](17-closing-a-milestone.md)).
+Items 2, 5, 6 and 8 change only words, for a rule the documents already hold: the Contract says why it must be exact ([chapter 14](14-propose.md)); the Publish policy says what `/apply`'s last words already are, which environment is at which version ([chapter 15](15-apply.md)); the list of what the process does not have names the one gate it keeps, a complete page ([chapter 18](18-the-governor.md)); and `AGENTS.md` says item 1's rule where every session reads it.
 
 The report keeps two facts apart.
 The `metadata.version` in each `SKILL.md` says which kit is installed.
@@ -85,12 +101,14 @@ The update is done when the migrations are applied, and the method applies them 
 On a documented project the update reports the migrations first, or says there are none.
 It never asks you to run `/brainstorm` or `/analyze` again: those write a project's documents from nothing, and yours exist.
 A version that asks nothing of your documents reports no migration: a version that changes only the commands, such as `/apply` showing its commit message in the conversation too, changes nothing else.
-Neither does a version whose rule your documents already mean: a docs/05 whose Git slot names no folder for a worktree per delivery already means the kit's layout.
+A docs/05 whose Git slot chose a worktree per delivery and names no folder gets a migration only when the project already works in a container, the folder [chapter 21](21-worktrees.md) lays out with the checkout and a hidden folder for the history and the worktrees, and that hidden folder holds `repo.git/`.
+The report then proposes writing in that folder's name and the prefix the delivery branches already use, so nothing moves.
+With no container yet, the slot means the kit's default, which that chapter names, and the report proposes nothing.
 
 To know why a migration exists, read the kit's changelog, `CHANGELOG.md` in its repository, `CHANGELOG.pt.md` in Portuguese.
 It has one entry per version, newest first; the version is the `Version:` line of `SETUP.md`, the same value as the `metadata.version` in each `SKILL.md`.
 Each entry says what changed and the problem that caused it, and an item that starts with `Migration:` names what to change in the project's documents.
-Items 5 and 6 of the report above come from such an item, which says that the report lists the queue lines that carry history and the slots that narrate steps or output, with the shorter wording.
+Every item of the report above comes from such an item, which says that the report checks docs/05 §§2, 3, 4, 6, 7 and 8, the Milestone review slot, the Publish policy's last sentence and `AGENTS.md`'s line on a change asked outside `/apply`; of those, it lists what your documents still lack.
 
 ## How each host finds the commands
 
@@ -106,6 +124,7 @@ The setup file writes what every host below needs:
 | Gemini CLI | `AGENTS.md`, through `GEMINI.md` | `.agents/skills/`, through a command file in `.gemini/commands/` | `/propose <slug>` |
 | Google Antigravity | `AGENTS.md`, through a rule in `.agents/rules/` | `.agents/skills/` | `/propose <slug>` |
 | Windsurf | `AGENTS.md` | `.windsurf/skills/` | `@propose <slug>` |
+| OpenCode, Zed | `AGENTS.md` | `.agents/skills/` | by asking for the skill |
 
 Each command is a skill, a folder with a `SKILL.md` file of instructions the host loads when you invoke it.[^claude-code-skills][^codex-skills][^copilot-skills]
 Claude Code reads `CLAUDE.md` at the start of a session, and a line `@AGENTS.md` in it imports the rules file.[^claude-code-memory]
