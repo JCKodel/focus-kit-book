@@ -61,3 +61,4 @@
 * The chapter 14 Key points bullet sits after the bullet on reading the page, in the chapter's order.
 * Proof: `make verify` green, disclosure scan included; `make book` built both editions. PDF pages where the chapters start: English 71 (10), 96 (14), 103 (15); Portuguese 75 (10), 100 (14), 108 (15).
 * No document changed: no term, rule or decision is new.
+* The queue line until kit-2026-10-16 said: chapter 14 teaches exploring a problem by conversation before any page, ending in a queue line, a decision, or a /propose in the same session; chapter 10 says the page, the queue, verify and the commit work the same under any of the three architectures and what FOCUS adds; chapter 15 names automation bias (chapter 26) and shows its review as the defence; both editions.

@@ -78,3 +78,4 @@
 * Turn 2 had one call denied, a `cd` with `git status` and `grep` on the book's docs/06; it was not retried by another route, and the session read the file with `Read`. Turn 1 had none. No correction was needed, so there is no turn 3.
 * For later: M4.1's `ch15-submit-event` asks chapter 15 to explain `shown`, which `clinic-booking-submit` removes; the order of the two is decided when they are built.
 * No clinic file changed; no note of the host was written. Documents: docs/05 §8. docs/03 unchanged. No ADR.
+* The queue line until kit-2026-10-16 said: /code-review of the clinic's code from book-v1/closing-a-milestone to book-v1/four-pieces; each confirmed finding becomes a line in M4.1.

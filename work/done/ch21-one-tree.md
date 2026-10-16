@@ -65,6 +65,7 @@
 * **Proof.** `make verify` green (build, parity, em dash, prose, links, disclosure); `make book` built `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` with their EPUBs.
 * **Environments.** Local builds; GitHub Pages and Release unchanged until the author pushes and tags (docs/05 §5).
 * **Dependent lines.** None names `ch21-one-tree` in `· after`.
+* The queue line until kit-2026-10-16 said: chapter 21 (and 20 and 10 where they choose git): two sessions in one working tree on free lines that touch different files as the simple case, what is and is not a conflict there, when a worktree still pays; both editions.
 
 ```commit
 docs(ch21-one-tree): teach two sessions in one folder before worktrees

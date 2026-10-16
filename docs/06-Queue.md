@@ -2,6 +2,7 @@
 
 `[ ]` not yet defined · `[~]` being defined · `[>]` defined, `work/<slug>.md` exists · `[*]` being built · `[x]` done, page in `work/done/` · `[?]` waiting, with `· resume: propose` or `· resume: apply` before `· blocked: <reason>` or `· blocked: after <slug>, <slug>` at the end of the line.
 A line never leaves; it changes mark, at the moment the work changes (docs/05 §4).
+A line is the mark, the slug, one sentence and its suffixes; what happened goes on its page. Longer lines written before kit-2026-10-16 are in this file's history, at the commit before it.
 The order is the priority: the next delivery is the first free line, one whose `· after <slug>` lines are all `[x]`; `· after <slug>`, written when the line is added, is an order, not a block.
 
 ## M1. The book stands up
@@ -39,19 +40,19 @@ When this milestone closes, a reader can install the kit, document a new or an e
 ```
 [x] guided-project-repo    the guided project's public repository, name chosen (OD-2), a tag per chapter
 [x] commit-hooks           pre-commit and commit-msg hooks run the disclosure list on staged files and messages; make verify checks the history's messages
-[x] install-and-hosts      Chapter 5: install, update, and how each host invokes the commands; Claude Code shown running, Copilot and Codex from their cited documentation, and why the hosts are alike enough that the method does not depend on one
+[x] install-and-hosts      Chapter 5: install, update, and how each host invokes the commands, and why the method does not depend on one host
 [x] the-documents          Chapter 6: docs/00 to 06, ADRs, AGENTS.md, and why documents do the work
 [x] brainstorm             Chapter 7: /brainstorm on the guided project, and choosing a stack by what the agent knows (the Ninjobs lesson of chapter 4)
 [x] analyze                Chapter 8: /analyze on the brownfield project
-[x] two-choices            Chapter 6 gains "The two choices": FOCUS (four pieces, whole / two principles / neither) and git (trunk / branch / worktree) in a paragraph each, so chapters 7 and 8 point back to them; Parts III and IV still teach them
+[x] two-choices            Chapter 6 gains "The two choices": FOCUS and git in a paragraph each, so chapters 7 and 8 point back to them
 [x] queue-and-milestones   Chapter 9: the queue, the marks, milestones and their paragraphs
 [x] propose                Chapter 10: /propose, one page, reading it before /apply, and splitting what does not fit
 [x] apply                  Chapter 11: /apply, verify, proof, documents, stage, never commit
 [x] clinic-milestone-1     the guided project's milestone 1 built line by line with /propose and /apply, each page and staged change reviewed and committed by the author, recorded; no chapter
 [x] closing-a-milestone    Chapter 12: the whole-milestone review of the clinic's milestone 1 with /code-review, findings become queue lines; Ninjobs' milestone review as the counter-example
-[x] useful-notes           a source note only where the reader gains something to open: notes on a commit or on focus-kit's files leave (the sentence names the file), a private case keeps one note per chapter saying how its numbers were counted; a source cited several times in a chapter prints one note in the PDF and the EPUB, not one per mention (191 notes over 13 chapters); notes smaller and in italic, links upright; parity checks note keys; docs/04, docs/03, docs/01 and AGENTS.md say the new rule; both editions
+[x] useful-notes           a source note only where the reader gains something to open, one note per source in the PDF and the EPUB, with docs/04, docs/03, docs/01 and AGENTS.md saying the rule; both editions
 [x] the-governor           Chapter 13: which concrete error would it have caught, and what the process does not have
-[x] m3-review              the review of M3 as docs/05 §8 says: the Prologue to chapter 13 read end to end in both editions against the product questions and M3's paragraph; each confirmed finding becomes a line in a new milestone M3.1
+[x] m3-review              the review of M3 as docs/05 §8 says: the Prologue to chapter 13 read end to end in both editions against M3's paragraph
 ```
 
 ## M3.1. What the review of M3 found
@@ -75,7 +76,7 @@ When this milestone closes, every confirmed finding of the M3 review is settled:
 [x] headless-runs          Chapters 7, 11 and 12: say the book's runs are headless, what --continue does, and that in an interactive session the reader keeps talking in the same session; both editions
 [x] ch11-unticked-item     Chapter 11: says why the skeleton page was committed with its npm run dev item unticked, against its own question on Done when; both editions
 [x] ch11-commit-command    Chapter 11: shows the command that commits the staged change with the suggested message; chapter 17 teaches the rest; both editions
-[x] milestone-1-bridge     Between chapters 11 and 12: the reader is told to build the rest of the clinic's milestone 1 with /propose and /apply, with a tag to compare against, so M3's paragraph has somewhere to point; both editions
+[x] milestone-1-bridge     Between chapters 11 and 12: the reader is told to build the rest of the clinic's milestone 1 with /propose and /apply, with a tag to compare against; both editions
 [x] ch12-numbered-findings Chapter 12: the English list of the ten summaries is numbered, as the decisions and the Portuguese already are
 [x] ch13-unmet-terms       Chapter 13: "spec delta" and "specialized subagent" are explained where they appear, since no earlier chapter meets them; both editions
 ```
@@ -90,10 +91,10 @@ When this milestone closes, a reader can organize code by feature with exception
 [x] clinic-orchestrator-tests  The clinic's client orchestrators become plain functions that receive their repositories, each with unit tests with fakes, by a recorded run
 [x] four-pieces-injection  Chapter 15 at the clinic's tested orchestrators: the client orchestrator's two files, and injection only where a test passes a second implementation, a fake
 [x] testing-and-agents     Chapter 16: testing each piece, and how the architecture helps an agent
-[x] kit-milestone-review   focus-kit bff8414 reinstalled in the book, the clinic and the fork; each docs/05 says the review is the last line of every milestone and its findings open <M>.1; every open milestone of the three queues ends with its review line; the clinic's findings milestone becomes 1.1 and "the owner runs the day" milestone 2
-[x] kit-milestone-review-chapters  Chapters 7, 8, 9 and 12 follow focus-kit bff8414: the review is the last line of every milestone, a delivery run with /propose and /apply that checks the paragraph clause by clause and reviews the code; each confirmed finding is a line in a new milestone <M>.1 right after, which ends with its own review and may open .2; /brainstorm and /analyze end the first milestone with it; chapter 12's quote of §8 follows, and chapters 12, 13, 14 and 15 name the clinic's milestones 1.1 and 2 as renamed by kit-milestone-review; both editions
-[x] m4-review              the review of M4 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against the product questions and M4's paragraph; each confirmed finding becomes a line in a new milestone M4.1; §8 gains the review's recipe, m3-review being the first occurrence
-[x] m4-code-review         /code-review of the clinic's code from book-v1/closing-a-milestone to book-v1/four-pieces; each confirmed finding becomes a line in M4.1
+[x] kit-milestone-review   focus-kit bff8414 reinstalled in the book, the clinic and the fork, each milestone of the three queues ending with its review line
+[x] kit-milestone-review-chapters  Chapters 7, 8, 9 and 12 to 15 follow focus-kit bff8414: the review is the last line of every milestone and its findings open a milestone <M>.1; both editions
+[x] m4-review              the review of M4 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against M4's paragraph
+[x] m4-code-review         /code-review of the clinic's code from book-v1/closing-a-milestone to book-v1/four-pieces
 ```
 
 ## M4.1. What the review of M4 found
@@ -107,7 +108,7 @@ When this milestone closes, every confirmed finding of the M4 review is settled:
 [x] ch14-refusal-io        Chapter 14: the definition of a refusal and its key point fit SlotTaken, the refusal the repository makes when the unique index refuses an insert; both editions
 [x] ch14-catch-all         Chapter 14: says that query catches every thrown value, so a bug inside it becomes DatabaseFailed, and how that squares with "Error: a bug, thrown and never caught"; both editions
 [x] pt-health-slice        Portuguese edition: chapter 14 calls the server check "fatia de health", as chapter 10 does, not "fatia de saúde", which reads as a slice for medical data
-[x] ch15-event-delivery    Chapter 15: names the delivery that added the event functions after chapter 12, and tells a reader following the clinic to queue and build it, so their code can match book-v1/four-pieces; both editions
+[x] ch15-event-delivery    Chapter 15: names the delivery that added the event functions after chapter 12, so a reader following the clinic can match book-v1/four-pieces; both editions
 [x] ch15-route-io          Chapters 6, 14 and 15: the route that reads the request body squares with "the only place an infra exception becomes a Result" and "only the repository does I/O"; both editions
 [x] ch15-submit-event      Chapter 15: says the hook's submitEvent is bookingEvents.ts's submit imported under another name, and what shown and latest hold; both editions
 [x] slice-imports          Chapters 14, 15 and 16: say whether a slice may import another slice's code, as slotsOf imports the repositories of three other slices, and when that code moves to src/lib/ instead; both editions
@@ -116,14 +117,14 @@ When this milestone closes, every confirmed finding of the M4 review is settled:
 [x] ch16-unit-test         Chapter 16: the definition of a unit test fits the route test, which drives the route, the use case, the repository and SQLite; both editions
 [x] ch16-it-each           Chapter 16: the text describes the it.each over two refusal codes and an exception as it runs, and says what it.each does; both editions
 [x] ch16-reading-count     Chapter 16: the key point's 20 of 95 files gets a baseline, or "small" is stated as a description, not a measure; both editions
-[x] clinic-booking-submit  useBooking's submit publishes its in-flight state as an update applied to the current state, as docs/01 says, and passes the state it books with into run, so the shown ref written during render leaves, by a recorded run
-[x] clinic-hours-save      useWeeklyHours' save publishes its in-flight state as an update applied to the current state, so a time typed or a period added or removed just before Save is kept, by a recorded run
-[x] clinic-hours-report    the weekly hours editor's reports, saving included, reach the professionals section through one report member of HoursSection and one tested professionals event, so forward, the four callbacks and the copied comment leave; this finishes the clinic's milestone 1.1 line orchestrator-tests, which left forward and the saving report in the hook untested, by a recorded run
-[x] clinic-update-type     the update type (current) => State is declared once and shared, and so is the starter shape that submitStarted and saveStarted repeat, each with its first occurrence named, as the clinic's AGENTS.md asks, where today seven files declare the type, by a recorded run
-[x] clinic-event-shapes    the clinic's docs/01 names every shape an event with a call takes once the lines above are done, where today it gives one and the booking's next event, the weekly hours' { update, report } and starter, and the remembered list's plain functions are written only in work/done, by a recorded run
-[x] ch14-failure-kinds     Chapter 14: says what an error and an exception are without Dart's classes, why an exception must not steer the flow, and that a library's exception becomes the domain's value at the boundary, so the app has none; both editions
-[x] m4.1-review            the review of M4.1 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against the product questions and M4.1's paragraph; each confirmed finding becomes a line in a new milestone M4.2
-[x] m4.1-code-review       /code-review of the clinic's code that M4.1 changed, a3e2470...6edc9ad: from the kit update right after book-v1/four-pieces, left out, to the last clinic run of M4.1, which has no chapter tag; each confirmed finding becomes a line in M4.2
+[x] clinic-booking-submit  useBooking's submit publishes its in-flight state as an update applied to the current state, as docs/01 says, by a recorded run
+[x] clinic-hours-save      useWeeklyHours' save publishes its in-flight state as an update applied to the current state, so an edit just before Save is kept, by a recorded run
+[x] clinic-hours-report    the weekly hours editor's reports, saving included, reach the professionals section through one report member of HoursSection and one tested professionals event, by a recorded run
+[x] clinic-update-type     the update type (current) => State and the starter shape are each declared once and shared, as the clinic's AGENTS.md asks, by a recorded run
+[x] clinic-event-shapes    the clinic's docs/01 names every shape an event with a call takes, by a recorded run
+[x] ch14-failure-kinds     Chapter 14: says what an error and an exception are without Dart's classes, and that a library's exception becomes the domain's value at the boundary; both editions
+[x] m4.1-review            the review of M4.1 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against M4.1's paragraph
+[x] m4.1-code-review       /code-review of the clinic's code that M4.1 changed, a3e2470...6edc9ad
 ```
 
 ## M4.2. What the review of M4.1 found
@@ -132,20 +133,20 @@ When this milestone closes, every confirmed finding of the M4.1 review is settle
 
 ```
 [x] pt-spec-change-terms   Portuguese edition: chapters 1, 4 and 13 say "mudança" and "especificação", the terms chapter 3 taught, where today they say "change", "spec" and "specs" with no gloss
-[x] ch3-key-point-rules    Chapter 3: the key point says of OpenSpec's once-per-project files only what the section shows, where today it credits OpenSpec with rules written once per project; both editions
-[x] ch7-agents-fixed-lines Chapter 7: says which lines of the clinic's AGENTS.md non-negotiables are the kit's fixed lines and which the project's, where today it says "three fixed lines", four follow, and "An open decision in docs/00 is asked, never assumed." fits neither; both editions
+[x] ch3-key-point-rules    Chapter 3: the key point says of OpenSpec's once-per-project files only what the section shows; both editions
+[x] ch7-agents-fixed-lines Chapter 7: says which lines of the clinic's AGENTS.md non-negotiables are the kit's fixed lines and which the project's; both editions
 [x] pt-skeleton-diff       Portuguese edition: chapter 10's summary of the skeleton diff puts exit code 1 in Behaviour, where the diff has it, and names the data/ folder the server now creates
-[x] ch14-keepless-feature  Chapter 14: the definition of a feature has a place for a slice that keeps nothing, as health does, where today "A feature is one thing the app keeps" leaves it out; both editions
-[x] ch14-swallowed-bug     Chapter 14: says what the reader does about a bug that query turns into a DatabaseFailed nobody sees, and squares reason 4 of "Why not throw" with using the same query as its example of harm; both editions
+[x] ch14-keepless-feature  Chapter 14: the definition of a feature has a place for a slice that keeps nothing, as health does; both editions
+[x] ch14-swallowed-bug     Chapter 14: says what the reader does about a bug that query turns into a DatabaseFailed nobody sees, and squares it with reason 4 of "Why not throw"; both editions
 [x] ch14-library-types     Chapter 14: squares "changes that code alone" with the routes that import DatabaseSync's type; both editions
-[x] ch15-brief-printed     Chapter 15: prints the author's brief for orchestrator-tests that the reader is told to answer with, as chapters 7, 8 and 10 print theirs, where today it is behind a note; both editions
-[x] ch15-uncaught-pieces   Chapters 14 and 15: say which piece openDatabase and migrate belong to, since they catch in no piece today, against the table's "the only place an infra exception becomes a Result"; both editions
+[x] ch15-brief-printed     Chapter 15: prints the author's brief for orchestrator-tests that the reader is told to answer with, as chapters 7, 8 and 10 print theirs; both editions
+[x] ch15-uncaught-pieces   Chapters 14 and 15: say which piece openDatabase and migrate belong to; both editions
 [x] ch15-view-rule         Chapter 15: says that tooLateToCancel in the booking view comes from the use case the client imports, so the excerpt can be checked against the view's "Forbids"; both editions
-[x] ch15-shape-cost        Chapter 15: the key point on when a piece is written meets the section, which keeps healthEvents.ts for one shape across hooks, where today it says only "gives more than it costs"; both editions
-[x] ch16-unit-test-fakes   Chapter 16: the definition of a unit test fits the event tests' fake repositories and the stubbed localStorage and fetch, where today it says a unit test "runs whatever that piece calls"; both editions
-[x] clinic-busy-fields     the weekly hours editor's time inputs and the booking form's name and phone are disabled while a save or a booking is in flight, as the add, remove and submit buttons already are, so the screen shows only what was sent and a successful save closes no unsent edit, and the booking test that keeps a name typed after the click changes to match, by a recorded run
-[x] clinic-hours-answer    load answers only a refusal or nothing and save only "saved", "failed" or a refusal, and "saving" is a report only useWeeklyHours makes, so no answer can leave the professionals section busy for good, where today WeeklyHoursAnswer's report allows "saving", by a recorded run
-[x] m4.2-review            the review of M4.2 as docs/05 §8 says for a last round of fixes: only what M4.2's lines changed, both editions, against M4.2's paragraph; each confirmed finding, blocking or not, becomes a line at the start of M5, and no M4.3 opens
+[x] ch15-shape-cost        Chapter 15: the key point on when a piece is written meets the section, which keeps healthEvents.ts for one shape across hooks; both editions
+[x] ch16-unit-test-fakes   Chapter 16: the definition of a unit test fits the event tests' fake repositories and the stubbed localStorage and fetch; both editions
+[x] clinic-busy-fields     the weekly hours editor's time inputs and the booking form's name and phone are disabled while a save or a booking is in flight, by a recorded run
+[x] clinic-hours-answer    load answers only a refusal or nothing and save only "saved", "failed" or a refusal, so no answer can leave the professionals section busy for good, by a recorded run
+[x] m4.2-review            the review of M4.2 as docs/05 §8 says for a last round of fixes: only what M4.2's lines changed, both editions, against M4.2's paragraph
 ```
 
 ## M5. Part IV, Git for agents and teams
@@ -154,11 +155,11 @@ When this milestone closes, a reader can choose between trunk, a branch per deli
 
 ```
 [x] git-essentials         Chapter 17: commits, branches, merges, trunk and git-flow
-[x] clinic-worktrees       the clinic switches to a worktree per delivery, then route-errors and minutes-of are proposed and built by two agents at once in two worktrees and merged by the author with --no-ff, conflict included, by a recorded run; no chapter
+[x] clinic-worktrees       the clinic switches to a worktree per delivery, and route-errors and minutes-of are built by two agents at once in two worktrees and merged by the author, by a recorded run
 [x] worktrees              Chapter 18: worktrees and parallel agents, and where parallelism really stops
-[x] commit-as-review       Chapter 19: the agent stages, the person commits, and why; absorbed by rewrite as a section of chapter 15
-[x] github-for-teams       Chapter 20: pull requests as the team's review, issues, Projects boards, and why the wiki is not docs/ (the agent reads the repository, not the wiki); absorbed by rewrite as chapter 21
-[x] m5-review              the review of M5 as docs/05 §8 says; superseded: M5's chapters were rewritten whole by rewrite (M8), whose review is m8-review
+[x] commit-as-review       Chapter 19: the agent stages, the person commits, and why
+[x] github-for-teams       Chapter 20: pull requests as the team's review, issues, Projects boards, and why the wiki is not docs/
+[x] m5-review              the review of M5 as docs/05 §8 says
 ```
 
 ## M6. Part V, Beyond code
@@ -166,12 +167,12 @@ When this milestone closes, a reader can choose between trunk, a branch per deli
 When this milestone closes, a reader can adapt the process to a team's tools, including GitHub issues and a Projects board kept in step by the kit, ask the project questions as they would ask a colleague, from how it is going to who owes them an answer, and use the method on work that is not software.
 
 ```
-[x] customizing            Chapter 21: extra marks, question deliveries, proof files, a board mirror (Case A), and the queue mirrored to GitHub issues and a Projects board, built and tagged in the guided project; absorbed by rewrite as chapter 21, with Case A's board mirror and no guided project
-[x] project-as-assistant   Chapter 22: the documents as the whole project's memory, for engineering and product alike: what is pending, how is it going, how long each delivery took (queue plus git history), who is away; team and client conversations kept in a free notes folder, so "who owes me answers?" and "what must I ask, and whom?" are answered too (Case A, Case B); absorbed by rewrite as chapter 18, on Case A alone
-[x] beyond-software        Chapter 23: analyses, proposals (Case B), codeless projects (Case A), client communication as a source of truth, data work (Ninjobs' database security rules as deliveries), and this book; absorbed by rewrite as chapter 22
-[x] cost-and-where         Chapter 24: what coding agents cost, where they pay and where they do not, and how a team decides, with measured numbers; Ninjobs after the pivot as the case: tokens per delivery (Claude Code's session logs over the pages done and the commits, same days), why the page and the documents keep each session small, and why cache reads are counted apart; absorbed by rewrite as chapter 23
-[x] adoption               Chapter 25: taking the method to a team and a company (Case B); absorbed by rewrite as chapter 24, with Case A's catches and Case B's note
-[x] m6-review              the review of M6 as docs/05 §8 says; superseded: M6's chapters were written by rewrite (M8), whose review is m8-review
+[x] customizing            Chapter 21: extra marks, question deliveries, proof files and a board mirror (Case A)
+[x] project-as-assistant   Chapter 22: the documents as the whole project's memory, for engineering and product alike
+[x] beyond-software        Chapter 23: analyses, proposals, codeless projects, client communication as a source of truth, data work, and this book
+[x] cost-and-where         Chapter 24: what coding agents cost, where they pay and where they do not, and how a team decides, with measured numbers
+[x] adoption               Chapter 25: taking the method to a team and a company
+[x] m6-review              the review of M6 as docs/05 §8 says
 ```
 
 ## M7. Appendices and launch
@@ -182,10 +183,10 @@ When this milestone closes, version 1 is tagged, the PDF and EPUB are on its Git
 [x] glossary               Appendix: the glossary, generated from docs/03 in both editions
 [x] templates              Appendix: every document template, annotated
 [x] workshop-map           Appendix: the parts mapped to workshop sessions, with timings
-[x] exercise-answers       Appendix: answers to every exercise, linked to the guided project's tags; retired by rewrite (ADR-0017): the book has no exercises
-[x] cover                  make book puts each edition's cover on the PDF's first page (book/assets/cover-<edition>.pdf, A5) and as the EPUB's cover image (book/assets/cover-<edition>.png); done by author-review-1
-[x] m7-review              the review of M7 as docs/05 §8 says: the whole book and its appendices read end to end in both editions against the product questions and M7's paragraph, before v1 is tagged; each clause tested by hand, each finding a line in M7 under the review
-[x] launch                 v1 tag and Release, so the PDFs and EPUBs have stable links (releases/latest/download/<file>); focus-kit's README, in its own repository, links the site (https://jckodel.github.io/focus-kit-book/) and those files (OD-4)
+[x] exercise-answers       Appendix: answers to every exercise, linked to the guided project's tags
+[x] cover                  make book puts each edition's cover on the PDF's first page and as the EPUB's cover image
+[x] m7-review              the review of M7 as docs/05 §8 says: the whole book and its appendices read end to end in both editions against M7's paragraph, before v1 is tagged
+[x] launch                 v1 tag and Release, so the PDFs and EPUBs have stable links, and focus-kit's README links the site and those files (OD-4)
 ```
 
 ## M8. The rewrite
@@ -193,12 +194,12 @@ When this milestone closes, version 1 is tagged, the PDF and EPUB are on its Git
 When this milestone closes, the book is 25 chapters in both editions in three movements, the base, the method and the team, with no run narrated, no guided project and no exercises, every chapter saying what the team gains with its evidence, and the author has read it whole and decided what M7 still needs.
 
 ```
-[x] rewrite                the whole book rewritten in one delivery (ADR-0017): Part I the base (why process, how agents see, SDD, KISS/YAGNI/DRY, pure functions and exceptions as values, features not layers, the four pieces, a test per piece), Part II the method (birth, documents, install, starting, queue, /propose, /apply, closing, governor, the project as the team's assistant), Part III git and the team's tools, Part IV beyond code (not software, cost, adoption); Ninjobs, Case A and Case B as the evidence; both editions; docs/00, 03, 04, 05, 06, AGENTS.md and ADR-0017 updated
-[x] author-review-1        the author's own reading of the cover and the Prologue to chapter 5, fixed by conversation: the cover on the PDF and the EPUB; bare chapter pointers become sentences; METR, DORA, Liu's paper and Chroma introduced; behaviour defined and the agent's review spiral warned of, in note boxes; chapter 5 gains the orchestrator against the async use case, the exhaustive switch as the value of a Result, why an exception becomes a value, and red-green as "done"; chapter 6 the interface-for-everything habit; the private-case notes leave the whole book; the Portuguese edition's code speaks Portuguese, chapters 4 to 23
-[x] author-review-2        the author's second batch, chapters 7 to 22: every H1 carries its number; chapter 7 says what the orchestrator is for where it is introduced, that a view is any output, what drivers and services are, and where MVC, MVVM, MVI and the Mediator fit; chapter 8 says what tests prove and what they do not; chapter 10 the queue as the kanban the agent reads, and ADR spelled out; chapters 12 and 18 the context folder fed with every new document; chapter 18's work record fits the page; Case A's platform named; 65 chapter pointers cut per edition and chapter links in the text's color in the PDF and the EPUB
-[x] pdf-design             the PDF of both editions in the design the author chose on the canvas (direction C): night blue and amber, titles in Instrument Serif, body in Merriweather, code in Iosevka Term; a contents page of chapters only; a chapter opens on a night-blue block with its number in the outline of a page; running heads; code on night blue; each note at the foot of the page that cites it; Google Sans leaves; the cover, the EPUB and the site stay
-[x] milestone-review-kit   chapters 13, 16 and 17 and docs/03 teach the milestone review as focus-kit d333348 defines it: the person tests each clause by hand, no code review, each finding a line in the same milestone under its review, no .1 and no second review; both editions
-[x] milestone-review-process  the book's docs/05 §4, §7 and §8 follow focus-kit d333348: each milestone is planned with its review as the last line, the person tests each clause by hand, findings are lines in the same milestone under the review, no .1 and no review of a review; the m7-review line adjusted if needed; absorbed by m9-review
+[x] rewrite                the whole book rewritten in one delivery (ADR-0017): Part I the base, Part II the method, Part III git and the team's tools, Part IV beyond code; both editions
+[x] author-review-1        the author's own reading of the cover and the Prologue to chapter 5, fixed by conversation
+[x] author-review-2        the author's second batch, chapters 7 to 22, fixed by conversation
+[x] pdf-design             the PDF of both editions in the design the author chose on the canvas (direction C), with the cover, the EPUB and the site unchanged
+[x] milestone-review-kit   chapters 13, 16 and 17 and docs/03 teach the milestone review as focus-kit d333348 defines it; both editions
+[x] milestone-review-process  the book's docs/05 §4, §7 and §8 follow focus-kit d333348's milestone review
 [x] m8-review              the author reads the rest of the book, chapter 6 on, and sends findings by conversation; each batch is fixed as an author-review-<n> line here, with no review of its own
 ```
 
@@ -207,8 +208,8 @@ When this milestone closes, the book is 25 chapters in both editions in three mo
 When this milestone closes, a reader knows why an agent's first answer feels final, what an agent never proposes (the test of a limit it claimed, the reader's time, the cost, what nobody asked for), and how to ask for more with a challenge protocol, with a recorded experiment and published studies as the evidence; the prologue plants the idea and chapter 25 teaches it.
 
 ```
-[x] ask-for-more-experiment  three arms on the lending library (limit: a Teams card with tabs; audience: an annual report summarized for the board; cost: a project set up for a daily question-answering agent), first answer against the challenge protocol, 3 runs per arm, judged blind by the author, recorded; the research report's unverified numbers checked against their primary sources
-[x] ask-for-more-chapter     Chapter 25, alone in a new Part V, and a seed in the prologue: why the first answer feels final, what the agent never proposes, the challenge protocol, Case A's Teams card as the author's own slip, the experiment and the studies as the team's gain; docs/00's contents updated; both editions
+[x] ask-for-more-experiment  three arms on the lending library, first answer against the challenge protocol, 3 runs per arm, judged blind by the author, recorded
+[x] ask-for-more-chapter     Chapter 25, alone in a new Part V, and a seed in the prologue: why the first answer feels final and the challenge protocol; both editions
 [x] m9-review                the review of M9: the prologue and chapter 25 read against M9's paragraph, clause by clause
 [x] ch25-protocol-findable   a reader of chapter 25 knows what the challenge protocol is and where its four turns are written, and finds them again without rereading the section; both editions
 [x] ch25-cost-for-subscribers  a reader on a fixed subscription knows from chapter 25 what the protocol costs them, and no per-token price reads as the bill of their own session; both editions
@@ -219,11 +220,11 @@ When this milestone closes, a reader knows why an agent's first answer feels fin
 When this milestone closes, a reader knows the six marks of focus-kit 2026.10.05 (`[ ]`, `[~]`, `[>]`, `[*]`, `[x]`, `[?]`), why each is set at the moment the work changes and not when a command ends, the three cases of `[?]` and its two suffixes, and how a queue read as a kanban shows work while it happens; Case A's Azure Boards delay and its hand-made `[?]` are the evidence, and the book's own queue and process follow the kit.
 
 ```
-[x] queue-states             a chapter of its own on the queue's states: the six marks, who sets each and when, the three cases of `[?]` (the person says so, an answer not given, another line first) with `· blocked: <reason>` and `· blocked: after <slug>`, leaving `[?]`; Case A's Doing that came only after /propose and its `[?]` as the errors; chapters 13, 14, 15, 17, 18 and 21 updated where they teach three marks or call `[?]` Case A's alone; ADR-0013 superseded; docs/03, docs/05 §4 and this queue's header follow the kit; both editions
+[x] queue-states             a chapter of its own on the queue's six marks, who sets each and when, with chapters 13, 14, 15, 17, 18 and 21, docs/03, docs/05 §4 and this queue's header following the kit; both editions
 [x] context-slot             docs/05 §5 gains the kit's Context slot: `context/` listed in `.gitignore`, not created
 [x] m10-review               the review of M10 as docs/05 §8 says
 [x] pdf-contents-one-page    the contents of each edition's PDF fit on one page, and a chapter's number in it is no larger than its page number; both editions
-[x] pdf-footnote-numbers     footnote numbers in each edition's PDF render as plain numbers beside their notes, with no coloured block behind them, in Preview too, where the notes' amber bar, a gradient, paints over them; both editions
+[x] pdf-footnote-numbers     footnote numbers in each edition's PDF render as plain numbers beside their notes, with no coloured block behind them, in Preview too; both editions
 ```
 
 ## M11. What a critique found
@@ -231,7 +232,7 @@ When this milestone closes, a reader knows the six marks of focus-kit 2026.10.05
 When this milestone closes, a reader who hears that the page needs the whole answer before the work starts, that the method needs FOCUS, or that a person who commits after nine good deliveries stops reading finds the book's answer where the doubt arises: exploring is a conversation with the agent before any page, the method works with any of the three architectures, and the review of chapter 15 is the defence against automation bias.
 
 ```
-[x] critique-fixes           chapter 14 teaches exploring a problem by conversation before any page, ending in a queue line, a decision, or a /propose in the same session; chapter 10 says the page, the queue, verify and the commit work the same under any of the three architectures and what FOCUS adds; chapter 15 names automation bias (chapter 26) and shows its review as the defence; both editions
+[x] critique-fixes           chapters 10, 14 and 15: exploring by conversation before any page, the same page under any architecture, and automation bias with the review as its defence; both editions
 [x] m11-review               the review of M11 as docs/05 §8 says
 ```
 
@@ -240,14 +241,28 @@ When this milestone closes, a reader who hears that the page needs the whole ans
 When this milestone closes, the book teaches focus-kit 2026.10.13 and the repository runs on it: two sessions in one working tree on free lines, the queue's order as its priority and `· after <slug>` as an order, not a block, `/propose` deciding what the documents answer, Behaviour drafted with concrete inputs and failure cases, the commit message in a `commit` block on the page, code changed only inside `/apply`, `/apply` staging only its delivery and naming the next steps, manuals in `docs/manuals/`, and an update that reports migrations instead of rewriting the project's documents; the kit's changelog, paraphrased, is the evidence.
 
 ```
-[x] kit-2026-10-13           reinstall the kit at 2026.10.13 and apply its migration report: code only inside /apply in docs/05 §2 and AGENTS.md, Behaviour in §3, queue order and `· after` in §4 and this header, the Manuals slot in §5 with the site's publish and `make release` as manuals in docs/manuals/, the git slot for two sessions
-[x] ch21-one-tree             chapter 21 (and 20 and 10 where they choose git): two sessions in one working tree on free lines that touch different files as the simple case, what is and is not a conflict there, when a worktree still pays; both editions · after kit-2026-10-13
-[x] ch13-16-queue-order       chapters 13 and 16: the order is the priority, the next delivery is the first free line, `· after <slug>` as a known order against `[?]` as a wait found on the way, which lines can run at the same time; the version cited in chapter 16; both editions · after kit-2026-10-13
-[x] ch14-propose-decides      chapter 14: /propose decides what the documents answer and names the source on the page; Behaviour with a concrete input, the result the user sees, the cases that must fail and the edges, drafted by /propose and corrected by the person; chapter 3's note if it needs it; both editions · after kit-2026-10-13
-[x] ch15-apply-ends           chapter 15: the commit message in a `commit` block on the page and in the conversation, also when blocked; /apply stages only its delivery; it ends with the person's next steps in the host's form; both editions · after kit-2026-10-13
+[x] kit-2026-10-13           reinstall the kit at 2026.10.13 and apply its migration report to docs/05, AGENTS.md, this header and docs/manuals/
+[x] ch21-one-tree             chapter 21 (and 20 and 10 where they choose git): two sessions in one working tree on free lines that touch different files, and when a worktree still pays; both editions · after kit-2026-10-13
+[x] ch13-16-queue-order       chapters 13 and 16: the order is the priority, the next delivery is the first free line, and `· after <slug>` against `[?]`; both editions · after kit-2026-10-13
+[x] ch14-propose-decides      chapter 14: /propose decides what the documents answer, and Behaviour with a concrete input, the result the user sees and the cases that must fail; both editions · after kit-2026-10-13
+[x] ch15-apply-ends           chapter 15: the `commit` block on the page and in the conversation, staging only the delivery, and the person's next steps in the host's form; both editions · after kit-2026-10-13
 [x] ch10-12-manuals           chapters 10 and 12: docs/manuals/, what goes there and who writes it (/analyze, /apply); both editions · after kit-2026-10-13, ch15-apply-ends
-[x] ch11-update-migrations    chapter 11: updating reports migrations for docs/04, docs/05 and AGENTS.md and preserves them, the changelog as where to read what changed; each command names the next one as the host invokes it; both editions · after kit-2026-10-13
+[x] ch11-update-migrations    chapter 11: updating reports migrations for docs/04, docs/05 and AGENTS.md, the changelog, and each command naming the next; both editions · after kit-2026-10-13
 [x] ch10-commit-format        chapters 10 and 12: docs/04 no longer holds the format of a commit message, docs/05 §6 does; both editions · after ch10-12-manuals
-[x] ch18-19-only-apply        chapter 13: code changes only inside /apply, a fix asked anywhere else becomes a queue line; chapter 19: AGENTS.md answers "where are we?" from the queue, with no status command; both editions · after kit-2026-10-13
+[x] ch18-19-only-apply        chapters 13 and 19: code changes only inside /apply, and AGENTS.md answers "where are we?" from the queue; both editions · after kit-2026-10-13
 [x] m12-review                the review of M12 as docs/05 §8 says
+```
+
+## M13. focus-kit 2026.10.16
+
+When this milestone closes, the book teaches focus-kit 2026.10.16 and the repository runs on it: a worktree per delivery in a container folder, /apply reading only its own queue lines, a queue line as mark, slug, one sentence and suffixes, a slot as what and the command, a manual for a proof on another machine, and a request that continues as /propose in the same session.
+
+```
+[x] kit-2026-10-16           reinstall the kit at 2026.10.16 and apply its migration report
+[ ] ch15-24-apply-reads      chapters 15 and 24: /apply reads only its queue lines, with Case A's measured context before and after; both editions · after kit-2026-10-16
+[ ] ch13-short-lines         chapter 13: a queue line is one sentence, and a request may continue as /propose in the same session; both editions · after kit-2026-10-16
+[ ] ch10-12-slots-manuals    chapters 10 and 12: a slot says what and the command, and a manual also holds a proof /apply runs on another machine; both editions · after kit-2026-10-16
+[ ] ch11-update-2026-10-16   chapter 11: the update example and its migration report at 2026.10.16; both editions · after kit-2026-10-16
+[ ] ch21-container           chapter 21: a worktree per delivery in a container folder, as 2026.10.15 shapes it; both editions · after kit-2026-10-16
+[ ] m13-review               the review of M13 as docs/05 §8 says
 ```

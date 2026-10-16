@@ -49,3 +49,4 @@ Sentences are found by their quoted text. The other ch15-* lines of M4.2 (`ch15-
 * The section was not touched.
 * F12 is settled by this delivery; `findings.md` is a run record and is not edited, as done for F9 to F11.
 * No document changed: no new term, rule or decision.
+* The queue line until kit-2026-10-16 said: Chapter 15: the key point on when a piece is written meets the section, which keeps healthEvents.ts for one shape across hooks, where today it says only "gives more than it costs"; both editions.

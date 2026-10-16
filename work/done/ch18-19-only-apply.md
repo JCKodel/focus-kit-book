@@ -80,6 +80,8 @@
 
 **Decisions.** No document or ADR changes: docs/05 §2 and `AGENTS.md` already hold both rules, docs/03 unchanged; no manual changes, nothing done by hand changed. Chapter 15 and 16 pointers are plain text, since each chapter already links them once (docs/04, chapter pointers).
 
+* The queue line until kit-2026-10-16 said: chapter 13: code changes only inside /apply, a fix asked anywhere else becomes a queue line; chapter 19: AGENTS.md answers "where are we?" from the queue, with no status command; both editions.
+
 ```commit
 docs(ch18-19-only-apply): teach code only in /apply and where are we
 

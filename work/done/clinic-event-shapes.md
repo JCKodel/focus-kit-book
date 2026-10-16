@@ -106,3 +106,4 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * `npm run verify` green on `6edc9ad`: 328 Vitest and 144 Playwright, the counts `update-type` left, and build.
 * The author's check, docs/01 read against the events files, is collected at the end of the M4.1 loop; its item stays open.
 * No note of the host outside the repositories: the clinic's auto-memory folder was there and empty before the run and stayed empty, and the host's folder gained only the two sessions' transcripts, so nothing was deleted. No ADR, no new term; docs/05 unchanged; docs/06's line keeps its text.
+* The queue line until kit-2026-10-16 said: the clinic's docs/01 names every shape an event with a call takes once the lines above are done, where today it gives one and the booking's next event, the weekly hours' { update, report } and starter, and the remembered list's plain functions are written only in work/done, by a recorded run.

@@ -64,6 +64,7 @@
 * Chapter 14, both editions: the opening gains a sentence on deciding and drafting; "What `/propose` does" says it decides what the documents answer, names the document, and asks only where they leave more than one reading, names the kit's file for the command as the source, ends by showing the page's `[>]` line and asking for the review and `/apply` in a fresh session, does not start a line whose `after` is not `[x]`, and saves a draft found waiting as `[?]` with `· resume: propose`; the page's Behaviour bullet, the five-line example with "21 days ahead (docs/00)", Done when's "five", the paragraph under the example, two review questions, two sentences after them for the agent that asks what a document says and the page with only the happy path, the changelog paragraph in the gain, and the key points.
 * Chapter 15, both editions: the list of tests names five, adding the suspended member's refusal and the loan for a member whose only book is due today.
 * The book's other mentions of `/propose` were searched; none says it asks what a document answers or starts a line whose `after` is not `[x]`.
+* The queue line until kit-2026-10-16 said: chapter 14: /propose decides what the documents answer and names the source on the page; Behaviour with a concrete input, the result the user sees, the cases that must fail and the edges, drafted by /propose and corrected by the person; chapter 3's note if it needs it; both editions.
 
 **Divergences.**
 

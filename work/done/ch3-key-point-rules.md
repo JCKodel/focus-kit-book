@@ -38,3 +38,4 @@
 * Decision taken alone (batch, no conversation): keep one sentence and add Spec Kit as the subject of the rules clause, rather than splitting the key point in two; it is the smallest change that credits OpenSpec with nothing the section does not show.
 * No document changed: no new term, rule or decision.
 * `make verify` green. `make book` not run here, by the batch's instruction.
+* The queue line until kit-2026-10-16 said: Chapter 3: the key point says of OpenSpec's once-per-project files only what the section shows, where today it credits OpenSpec with rules written once per project; both editions.

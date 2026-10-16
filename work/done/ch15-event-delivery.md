@@ -57,3 +57,4 @@
 * The Portuguese edition keeps the clause in English, since it goes into the reader's queue, with its translation in parentheses as exercise 15.3 does; "brief" is "briefing", as chapter 13's Portuguese note has it.
 * The note repeats chapter 16's text; its link opens the run's `README.md` (`blob/main/...`), where the brief is. `make verify` green, both links included.
 * Finding F7 of the M4 review is settled for chapter 15.
+* The queue line until kit-2026-10-16 said: Chapter 15: names the delivery that added the event functions after chapter 12, and tells a reader following the clinic to queue and build it, so their code can match book-v1/four-pieces; both editions.

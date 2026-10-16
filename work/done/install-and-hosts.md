@@ -113,3 +113,4 @@ The unticked item is the author's: it ticks when the clinic's commit and tag and
 * Proof. `make verify`: build, parity, em dash and prose green; links red only on the clinic tag URL and the run's README on `main`, in both editions, which answer after the author's push; disclosure green when run alone (`scripts/check_disclosure.py`), and the 36 staged clinic files match no entry of the list. `make book` built both PDFs and EPUBs; its only warnings are the `user-select` ones earlier chapters also print.
 * The clinic: 36 files staged, 2049 lines, nothing committed, tagged or pushed by the agent.
 * Nothing dropped. No ADR.
+* The queue line until kit-2026-10-16 said: Chapter 5: install, update, and how each host invokes the commands; Claude Code shown running, Copilot and Codex from their cited documentation, and why the hosts are alike enough that the method does not depend on one.

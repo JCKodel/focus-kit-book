@@ -25,6 +25,7 @@ A new concept enters here first, in both languages.
 | page | página | `work/<slug>.md` | The document of one delivery, from Objective to Done when. |
 | unit of work | unidade de trabalho | none | A delivery's page and build as one change that reverts in one step: one commit on trunk, or, on a branch or worktree, any number of commits that reach the main branch in one merge. |
 | queue | fila | `docs/06` | Milestones and delivery lines, in order. |
+| queue line | linha da fila | `docs/06` | The mark, the slug, one sentence and its suffixes; what happened goes on the page. |
 | mark | marca | `[ ]`, `[~]`, `[>]`, `[*]`, `[x]`, `[?]` | The state of a queue line, one of focus-kit's six (since 2026.10.05): not defined, being defined, defined, being built, done, waiting; set at the moment the work changes, not when a command ends, so the queue shows work while it happens; a line never leaves the queue. |
 | kanban board | quadro kanban | none | A board of columns, one per state of the work, where each item is a card that moves from column to column as its state changes; read as one, the queue has a column per mark. |
 | milestone | marco | `M<n>` | A group of deliveries with a paragraph saying what is true when it closes. |
@@ -35,7 +36,7 @@ A new concept enters here first, in both languages.
 | permission mode | modo de permissão | `acceptEdits` | The host setting that decides what the agent does without asking you; what it does not allow, the host asks you to approve, or denies when no one can answer. |
 | verify | verificação | `make verify` | The command that must be green before anything is declared done. |
 | proof | prova | `work/done/<slug>-<step>.png` | Evidence that the result works, failures included. |
-| slot | slot | `docs/05 §5` | A project-specific fact the commands read. |
+| slot | slot | `docs/05 §5` | A project-specific fact the commands read: what and the command, in a few lines; steps go in a manual. |
 | open decision | decisão em aberto | `OD-<n>` | A decision listed in docs/00 that nobody closes alone, so an agent never settles it by assumption. |
 | governor | regulador | none | The question every addition to the process must answer, and every step already in it again: which concrete error would it have caught? The answer names an error that happened; a step with none leaves. |
 | challenge protocol | protocolo de desafio | none | The fixed turns a person sends after an agent's first answer, so the agent asks what it needed, tests what it called impossible, fits the result to its reader and its cost, and adds what nobody asked for; measured by `ask-for-more-experiment`, taught by chapter 26. |
@@ -102,7 +103,7 @@ A new concept enters here first, in both languages.
 | dependency | dependência | `· after <slug>` | A line that needs another `[x]` first, written at the end of the line when it is added; an order, not a wait, and the line keeps its mark. |
 | free line | linha livre | none | A line not `[x]` and not `[?]` whose `after` lines are all `[x]`; the first one in the queue is the next delivery, and free lines that touch different files may run at the same time. |
 | commit block | bloco de commit | a fenced block with info string `commit` | The commit message /apply suggests, ending the delivery's page; one per page, replaced by a resumed /apply. |
-| manual | manual | `docs/manuals/<what-it-does>.md` | A person's procedure outside a delivery, readable alone: what it does and when, what must be in place, the commands, how to tell it worked, how to undo it, what breaks if a step is skipped (docs/05 §5). |
+| manual | manual | `docs/manuals/<what-it-does>.md` | One action of more than one command, readable alone by whoever runs it: what a person does by hand outside a delivery, or a proof /apply runs on another machine; what it does and when, what must be in place, the commands, how to tell it worked, how to undo it, what breaks if a step is skipped (docs/05 §5). |
 | edition | edição | `en`, `pt` | One language of the book; `en` is the source. |
 | chapter | capítulo | `book/<edition>/NN-<slug>.md` | One file per edition; one delivery. |
 | draft marker | marca de rascunho | `status: draft` | The front matter line of a chapter not yet done; the site shows a banner and a mark in the navigation, and the chapter's delivery removes it. |

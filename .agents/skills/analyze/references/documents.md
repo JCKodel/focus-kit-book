@@ -50,7 +50,8 @@ its review (docs/05 §8):
 `work/<slug>.md` ready for /apply · `[*]` being built · `[x]` done, page in
 `work/done/` · `[?]` waiting, with `· resume: propose` or `· resume: apply`
 before `· blocked: <reason>` or `· blocked: after <slug>, <slug>` at the
-end of the line (docs/05 §4). A line never
+end of the line (docs/05 §4). A line holds the mark, the slug, one
+sentence and its suffixes; what happened goes on the page. A line never
 leaves; it changes mark, at the moment the work changes (docs/05 §4). The
 order is the priority: a session asked for the next delivery takes the
 first free line, and the person reorders by conversation in any session;
@@ -64,9 +65,10 @@ queue is edited by conversation in any session; no command owns it.
 **docs/adr/.** One file per decision, `ADR-NNNN-<slug>.md`: context, the
 decision, the consequences, the date. An ADR is amended, never rewritten.
 
-**docs/manuals/.** One file per thing a person does by hand outside a
-delivery, so it is found by its name and not inside a slot: publish, roll
-back, set up a service. docs/05 §5 says what each one holds. Created with
+**docs/manuals/.** One file per action that takes more than one command,
+so it is found by its name and not inside a slot: what a person does by
+hand outside a delivery (publish, roll back, set up a service), and a
+proof /apply runs on another machine. docs/05 §5 says what each one holds. Created with
 the first one; there is no empty folder.
 
 **AGENTS.md.** The template below. Read at the start of every session by
@@ -192,7 +194,9 @@ git add → a person reviews and commits.
 /propose talks and writes the page, never code. /apply builds, proves,
 updates the documents, stages and suggests the commit, never commits.
 Code changes only inside /apply: a change asked anywhere else, however
-small, becomes a `[ ]` line in docs/06 and the answer stops there.
+small, becomes a `[ ]` line in docs/06 and the answer stops there, or,
+when the person wants it defined now, the conversation continues as
+/propose <slug> in the same session, and what was said becomes the page.
 
 Before /propose changes the queue or the page, use §5's git strategy:
 create the branch or worktree named after the slug, or reuse its existing
@@ -244,7 +248,9 @@ behalf are explicit. Corrections happen in the /propose conversation;
 
 docs/06: one line per delivery, in order, under milestones. The order is
 the priority: the next delivery is the first free line, and the person
-reorders by conversation. A line that needs another done first ends with
+reorders by conversation. A line is the mark, the slug, one sentence and
+its suffixes; what happened goes on the page, because /propose reads the
+whole queue. A line that needs another done first ends with
 `· after <slug>`, written when the line is added; it is free when every
 line it names is `[x]`. Asked what can run at the same time, answer from
 the queue: the free lines, and among them the ones that touch different
@@ -305,6 +311,9 @@ conversation in any session.
 
 ## 5. This project
 
+A slot says what and the command, in a few lines: /apply reads it every
+time. Steps go in a manual, and what a command prints stays in its help.
+
 * **Documentation language:** <language>. Identifiers in <language>.
 * **Verify:** `<command>`, which runs <what>. Green before anything is
   declared done. <Or: created by the first delivery.>
@@ -316,10 +325,11 @@ conversation in any session.
   and whether the agent asks first.
 * **Context:** `context/` is committed | listed in `.gitignore`, and why
   (who reads the repository).
-* **Manuals:** `docs/manuals/`, one file per thing a person does by hand
-  outside a delivery (publish, roll back, rotate a secret, set up a
-  service), named in the documentation language after what it does. Each
-  stands alone for a person who has read nothing else: what it does and
+* **Manuals:** `docs/manuals/`, one file per action that takes more than
+  one command: what a person does by hand outside a delivery (publish,
+  roll back, rotate a secret, set up a service) and a proof /apply runs
+  on another machine, named in the documentation language after what it
+  does. Each stands alone for whoever runs it, having read nothing else: what it does and
   when, what must be in place, the commands in order, how to tell it
   worked, how to undo it, what breaks if a step is skipped. A slot that
   names such a command points to its manual instead of holding the steps;

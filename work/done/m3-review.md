@@ -62,3 +62,4 @@
 * The /apply session's assessment: every finding stands against the text; F14 narrowed, since the chapters do name the second agent and what they miss is that the runs are headless, what `--continue` does, and what an interactive reader does instead. The author accepted it whole.
 * Documents: docs/05 §8 says the new reading of a milestone of chapters. docs/03 unchanged. No ADR.
 * No chapter edited; nothing of M3.1 fixed.
+* The queue line until kit-2026-10-16 said: the review of M3 as docs/05 §8 says: the Prologue to chapter 13 read end to end in both editions against the product questions and M3's paragraph; each confirmed finding becomes a line in a new milestone M3.1.

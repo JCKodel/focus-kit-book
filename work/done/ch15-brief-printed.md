@@ -56,3 +56,4 @@ Sentences are found by their quoted text. `ch15-uncaught-pieces`, `ch15-view-rul
 * The English brief was checked against the record's line 43 by exact string match.
 * F9 is settled by this delivery; `findings.md` is a run record and is not edited, as done for F10 by `ch15-uncaught-pieces`.
 * No document changed: no new term, rule or decision.
+* The queue line until kit-2026-10-16 said: Chapter 15: prints the author's brief for orchestrator-tests that the reader is told to answer with, as chapters 7, 8 and 10 print theirs, where today it is behind a note; both editions.

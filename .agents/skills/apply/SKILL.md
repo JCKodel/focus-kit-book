@@ -6,13 +6,14 @@ description: >-
   then stage and suggest the commit. Never commits.
 argument-hint: <slug>
 metadata:
-  version: "2026.10.15"
+  version: "2026.10.16"
 ---
 Implement `work/$ARGUMENTS.md` in this session, completely. When the slug
 is missing, ask for it. The page is the scope; do not widen it.
 
 Read the page, `AGENTS.md`, docs/01 (architecture), docs/04 (conventions),
-docs/05 (process) and docs/06 (queue). Follow docs/05's project slots
+docs/05 (process), and in docs/06 (queue) only the lines naming the slug
+and their milestone heading. Follow docs/05's project slots
 literally: verify, environments, proof, publish policy and git strategy.
 Before editing, record the working tree and index as docs/05 §6 says.
 Work on the branch or worktree /propose created, if any.

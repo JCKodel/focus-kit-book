@@ -66,4 +66,5 @@ Documents of the book: docs/05 §5 "Guided project" says the clinic is on a work
 * `npm run verify` green on the clinic's `main` at `699ab40`: 336 Vitest (328, plus 5 and 3), 144 Playwright. Worktrees removed, both branches deleted by `-d`, pushed `0993b68..699ab40`.
 * Host: no note appeared; each worktree got a host folder of its own holding only its transcript, which outlives the worktree. The throwaway check's host folder was deleted.
 * Dropped: nothing. No docs/03 term, no ADR in the book.
+* The queue line until kit-2026-10-16 said: the clinic switches to a worktree per delivery, then route-errors and minutes-of are proposed and built by two agents at once in two worktrees and merged by the author with --no-ff, conflict included, by a recorded run; no chapter.
 

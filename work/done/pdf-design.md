@@ -102,3 +102,5 @@ What the proof found:
 * Screenshots: `work/done/pdf-design-<edition>-<what>.png`, with `<what>` one of `contents`, `prologue`, `chapter-5`, `code-and-notes`, `table`, `note-box`.
 
 Nothing was dropped.
+
+* The queue line until kit-2026-10-16 said: the PDF of both editions in the design the author chose on the canvas (direction C): night blue and amber, titles in Instrument Serif, body in Merriweather, code in Iosevka Term; a contents page of chapters only; a chapter opens on a night-blue block with its number in the outline of a page; running heads; code on night blue; each note at the foot of the page that cites it; Google Sans leaves; the cover, the EPUB and the site stay.

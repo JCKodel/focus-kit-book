@@ -60,6 +60,7 @@
 * The count, recounted from the kit's changelog at `96c0930`: from 2026.10.07 to 2026.10.13 there are six versions (2026.10.07, 2026.10.08, 2026.10.08.1, 2026.10.08.2, 2026.10.08.3, 2026.10.13); five change a rule in docs/04, docs/05 or `AGENTS.md`; 2026.10.08.2 changes only the commands. The sentence says the count comes from the changelog, no note.
 * The migration report is written for the chapter on the lending library and says so: docs/05 §5's Manuals slot and the line in `AGENTS.md`'s Read before acting, the latter in the kit's template wording ("what a person does by hand (publish, roll back): docs/manuals/"). In Portuguese the report is in Portuguese, the project's documentation language there, with the section names in English as chapter 10's Portuguese edition keeps them ("o slot Environments").
 * Second Done when: searched both editions for the setup file, `SETUP.md`, update, `/brainstorm` and `/analyze` outside chapter 11; no sentence says an update writes docs/04, docs/05 or `AGENTS.md`, or that it is done once the kit's files are written.
+* The queue line until kit-2026-10-16 said: chapter 11: updating reports migrations for docs/04, docs/05 and AGENTS.md and preserves them, the changelog as where to read what changed; each command names the next one as the host invokes it; both editions.
 
 **Divergences.**
 

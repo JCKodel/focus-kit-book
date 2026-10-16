@@ -58,3 +58,4 @@
 * Turn 1 made one call outside its allowlist, a `Bash` of `ls` and `wc`, which the host allowed as read-only, as it allowed `grep` in m3-review. No call was denied.
 * Turn 2 staged the whole of docs/06, so `kit-milestone-review`, a line the author added in another session during the run, is staged with this delivery. The README says so.
 * Nothing else diverged from the page. Documents: docs/05 §8. docs/03 unchanged. No ADR. No chapter edited; nothing of M4.1 fixed.
+* The queue line until kit-2026-10-16 said: the review of M4 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against the product questions and M4's paragraph; each confirmed finding becomes a line in a new milestone M4.1; §8 gains the review's recipe, m3-review being the first occurrence.

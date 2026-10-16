@@ -60,3 +60,4 @@ Sentences are found by their quoted text. The line numbers below are from commit
 * docs/03's vertical slice row changed as the page says.
 * The first `make verify` failed only on a timeout of an external link in chapter 10 (code.claude.com), unrelated; the second run was green.
 * Nothing dropped; no ADR.
+* The queue line until kit-2026-10-16 said: Chapter 14: the definition of a feature has a place for a slice that keeps nothing, as health does, where today "A feature is one thing the app keeps" leaves it out; both editions.

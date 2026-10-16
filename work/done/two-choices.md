@@ -54,3 +54,4 @@
 * **Pointers.** Chapter 7's numbered list and chapter 8's third point link to the section; the agents' quoted output ("errors as values" in both runs) is untouched.
 * **Exercise 6.4 answer**, for the `exercise-answers` appendix: any answer with a reason holds; the clinic's brief in chapter 7 answers "FOCUS whole" (a small app whose rules, the 24-hour and slot rules, want pure functions and tests) and "trunk" (one person reviews each delivery).
 * **Documents.** docs/00 §Contents: chapter 14 is "Exceptions as values and vertical slices". docs/01: the `make book` row. docs/03, ADR-0016 and docs/06 were written by /propose; docs/06 now marks the line `[x]`.
+* The queue line until kit-2026-10-16 said: Chapter 6 gains "The two choices": FOCUS (four pieces, whole / two principles / neither) and git (trunk / branch / worktree) in a paragraph each, so chapters 7 and 8 point back to them; Parts III and IV still teach them.

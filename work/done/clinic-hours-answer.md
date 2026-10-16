@@ -90,3 +90,4 @@ Every later round of questions, the reviews, a split and the commits: as `clinic
 * `npm run verify` green on `36d7ad9`: 328 Vitest and 144 Playwright, the counts `busy-fields` left, and build.
 * The author's manual check on `npm run dev`, a save, a refused period and a reload, is collected at the end of the M4.2 loop; its item stays open.
 * Every `claude` turn ended with `success` and exited with code 1 on `stty: stdin isn't a terminal`. The clinic's auto-memory folder stayed empty and the host's folder gained only the two sessions' transcripts; nothing was deleted. No ADR, no new term; docs/05 unchanged; docs/06's line keeps its text.
+* The queue line until kit-2026-10-16 said: load answers only a refusal or nothing and save only "saved", "failed" or a refusal, and "saving" is a report only useWeeklyHours makes, so no answer can leave the professionals section busy for good, where today WeeklyHoursAnswer's report allows "saving", by a recorded run.

@@ -50,3 +50,4 @@ Sentences are found by their quoted text. The line numbers are from commit `cad4
 * F4 of the M4.1 review (`work/done/m4.1-review-run/findings.md:18`) is settled: the excerpt now splits into six project lines and three fixed lines, and the sixth line's reason is named.
 * No document changed: no new term, rule or decision.
 * `make book` not run here, by the batch's instruction.
+* The queue line until kit-2026-10-16 said: Chapter 7: says which lines of the clinic's AGENTS.md non-negotiables are the kit's fixed lines and which the project's, where today it says "three fixed lines", four follow, and "An open decision in docs/00 is asked, never assumed." fits neither; both editions.

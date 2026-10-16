@@ -22,7 +22,9 @@ git add → a person reviews and commits. Any line before `[x]` may wait as
 /propose talks and writes the page, never code. /apply builds, proves,
 updates the documents, stages and suggests the commit, never commits.
 Code changes only inside /apply: a change asked anywhere else, however
-small, becomes a `[ ]` line in docs/06 and the answer stops there.
+small, becomes a `[ ]` line in docs/06 and the answer stops there, or,
+when the person wants it defined now, the conversation continues as
+/propose <slug> in the same session, and what was said becomes the page.
 
 Before /propose changes the queue or the page, use §5's git strategy:
 create the branch or worktree named after the slug, or reuse its existing
@@ -83,7 +85,9 @@ the anonymized text (docs/00 OD-3).
 
 docs/06: one line per delivery, in order, under milestones. The order is
 the priority: the next delivery is the first free line, and the person
-reorders by conversation. A line that needs another done first ends with
+reorders by conversation. A line is the mark, the slug, one sentence and
+its suffixes; what happened goes on the page, because /propose reads the
+whole queue. A line that needs another done first ends with
 `· after <slug>`, written when the line is added; it is free when every
 line it names is `[x]`. Asked what can run at the same time, answer from
 the queue: the free lines, and among them the ones that touch different
@@ -145,14 +149,15 @@ conversation in any session.
 
 ## 5. This project
 
+A slot says what and the command, in a few lines: /apply reads it every
+time. Steps go in a manual, and what a command prints stays in its help.
+
 * **Documentation language:** English. Identifiers in English. The book
   itself: English source, Brazilian Portuguese translation, same delivery.
 * **Verify:** `make verify`, which runs the strict site build, edition
   parity, the em dash check, the prose rules, the link check and the
-  disclosure scan. Green before anything is declared done. Created by
-  `site-skeleton` (build, parity, em dash); `disclosure-scan`,
-  `prose-rules` and `link-check` add their checks to it; `commit-hooks`
-  adds the commit messages and the hooks to the disclosure scan.
+  disclosure scan, commit messages and hooks included. Green before
+  anything is declared done.
 * **Environments:**
   * local: `make serve` for the site, `make book` for PDF and EPUB in
     `output/` (never committed). A delivery leaves both building.
@@ -178,33 +183,27 @@ conversation in any session.
   `~/.config/focus-kit-book/denylist.txt` or the path in `FKB_DENYLIST`;
   in Actions it comes from the secret `DISCLOSURE_DENYLIST`. No term of
   that list, no private path and no source folder name is ever written in
-  this repository, its pages or its commit messages. Created by
-  `disclosure-scan`. `commit-hooks` adds the check of every commit
-  message to `make verify` and the hooks, turned on with `make hooks`;
-  `make verify` fails while they are off. Setting up the list, the hooks
-  and the secret: `docs/manuals/set-up-the-disclosure-list.md`.
+  this repository, its pages or its commit messages. The hooks are turned
+  on with `make hooks`; `make verify` fails while they are off. Setting
+  up the list, the hooks and the secret:
+  `docs/manuals/set-up-the-disclosure-list.md`.
 * **Publish policy:** the agent never pushes, tags, releases or uploads.
   A chapter that is not done carries the draft marker, the line
   `status: draft` in its front matter, in both editions; the site shows a
   banner and a mark in the navigation, and the chapter's delivery removes
   the line when done. So the site can publish `main` at any time.
-* **Context:** `context/` is listed in `.gitignore`: the repository is
-  public and what people said about the book's cases is private. The
-  folder does not exist today: the sources stay in the author's folders
-  outside the repository, named nowhere (ADR-0012), and the author's
-  decisions arrive by conversation and go into the documents. A folder
-  created later stays out of git; back it up elsewhere.
+* **Context:** `context/` is listed in `.gitignore` and not created: the
+  repository is public and what people said about the cases is private.
 * **Guided project and brownfield project:** retired by `rewrite`
   (ADR-0017). The repositories `JCKodel/focus-kit-clinic` and
-  `JCKodel/clahub` and their published tags stay as they are and no
-  chapter cites them; the recorded runs in `work/done/*-run/` stay as the
-  history of how the book's numbers were counted, and a chapter's note may
-  point to one. The recipe of a recorded run that this section held is in
-  the history of this file, at the commit before `rewrite`.
-* **Manuals:** `docs/manuals/`, one file per thing a person does by hand
-  outside a delivery (publish, roll back, rotate a secret, set up a
-  service), named in the documentation language after what it does. Each
-  stands alone for a person who has read nothing else: what it does and
+  `JCKodel/clahub` and their tags stay as they are, cited by no chapter;
+  the recorded runs in `work/done/*-run/` are the history of the book's
+  numbers.
+* **Manuals:** `docs/manuals/`, one file per action that takes more than
+  one command: what a person does by hand outside a delivery (publish,
+  roll back, rotate a secret, set up a service) and a proof /apply runs
+  on another machine, named in the documentation language after what it
+  does. Each stands alone for whoever runs it, having read nothing else: what it does and
   when, what must be in place, the commands in order, how to tell it
   worked, how to undo it, what breaks if a step is skipped. A slot that
   names such a command points to its manual instead of holding the steps;

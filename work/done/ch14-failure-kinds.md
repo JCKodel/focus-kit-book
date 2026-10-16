@@ -93,3 +93,4 @@ Sentences are found by their quoted text. The line numbers below are from commit
 * Key points 3 and 4 became the three proposed, unchanged. Exercise 14.1 gained its sentence.
 * docs/03 is unchanged: "exists only at I/O" still holds, parsing what I/O brings being the same boundary, and its rows already credit Dart with "after".
 * Toub's post dates to 2024-09-12 (the page's `datePublished`); the other quotes were read on 2026-09-30.
+* The queue line until kit-2026-10-16 said: Chapter 14: says what an error and an exception are without Dart's classes, why an exception must not steer the flow, and that a library's exception becomes the domain's value at the boundary, so the app has none; both editions.

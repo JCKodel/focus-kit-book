@@ -44,3 +44,4 @@
 * Diverged, taken alone: the new paragraph goes after the whole server discussion, after "Vitest is the clinic's test runner, ..." and before "The client's orchestrator receives ...", not between the orchestrator's paragraph and its next line, "The route's test passes `memoryDatabase` ...", which continues that paragraph; inserting it there would have cut the route's test away from the route.
 * The rest of the proposed text is used as written, in both editions. `make verify` green. No document other than the chapters changed: no new term, no new rule, no ADR amendment (ADR-0016's ch15-route-io amendment already covers start code).
 * Finding F10 of the M4.1 review is settled.
+* The queue line until kit-2026-10-16 said: Chapters 14 and 15: say which piece openDatabase and migrate belong to, since they catch in no piece today, against the table's "the only place an infra exception becomes a Result"; both editions.

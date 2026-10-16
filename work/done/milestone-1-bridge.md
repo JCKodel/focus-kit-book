@@ -70,3 +70,5 @@ This settles finding F17 of the M3 review (`work/done/m3-review-run/findings.md`
 **What the proof found.** `make verify` green, the link check opening the tag URL and the disclosure scan included. `make book` built both PDFs and EPUBs; its only warning is the PDF renderer ignoring `user-select: none`, from the stylesheet, which this delivery did not touch. The tag checked against the clinic: `book-v1/closing-a-milestone` is `c54d011`, whose one change over `f16f83b` is `docs/06-Queue.md`; `package.json` of the clinic has `"setup"`.
 
 **Decisions.** None beyond the page; no ADR, no new term in docs/03.
+
+* The queue line until kit-2026-10-16 said: Between chapters 11 and 12: the reader is told to build the rest of the clinic's milestone 1 with /propose and /apply, with a tag to compare against, so M3's paragraph has somewhere to point; both editions.

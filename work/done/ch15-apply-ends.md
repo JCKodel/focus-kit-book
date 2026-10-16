@@ -68,6 +68,7 @@
 * "The message" gains the blocked case and the failure of a reply with `git commit -m` lines and no block; "The commit is the human review" says where to copy the message from and to commit one delivery at a time from the index when another session shares the folder.
 * "What the team gains" paraphrases the kit's changelog entries 2026.10.06, 2026.10.08.2 and 2026.10.08.1, no note; the Ninjobs paragraph is unchanged.
 * No other chapter says `/apply` stages everything or that a blocked `/apply` stages its work on trunk (searched both editions).
+* The queue line until kit-2026-10-16 said: chapter 15: the commit message in a `commit` block on the page and in the conversation, also when blocked; /apply stages only its delivery; it ends with the person's next steps in the host's form; both editions.
 
 **Divergences.**
 

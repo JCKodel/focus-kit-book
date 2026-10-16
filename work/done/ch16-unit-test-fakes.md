@@ -50,3 +50,4 @@ Sentences are found by their quoted text. The line numbers below are from commit
 * docs/03's `unit test` row now carries the chapter's definition, with "a route through `app.request` with a fake clock", as the page proposed. Term, Portuguese term and pattern unchanged.
 * Every Vitest test the chapter shows fits: the use case's swaps nothing (en:179), the repository's runs against an in-memory database, the route's fakes the clock with `vi.useFakeTimers`, the event function's passes fake repositories (en:246), and the client's two replace `localStorage` and `fetch` (en:306, en:309).
 * `make verify` green. F13 of the M4.1 review settled.
+* The queue line until kit-2026-10-16 said: Chapter 16: the definition of a unit test fits the event tests' fake repositories and the stubbed localStorage and fetch, where today it says a unit test "runs whatever that piece calls"; both editions.

@@ -37,3 +37,4 @@
 * **Proof.** Preview after the fix: page 10 (en) and page 16 (pt, chapter 2, notes 2 to 4) show the numbers and the first words on the page, with the bar above the first note. Poppler at 216 dpi, before against after, on both pages: the only pixels that differ are inside the bar's own rectangle (x 127 to 217, same place, same 30pt width). Before, the mask's 3pt BBox gave about 8 hard pixel rows; now 6 full rows and 2 anti-aliased ones, which is 2.25pt exactly. Page counts: 180 (en), 190 (pt).
 * **docs/01** names no technique for the bar, so it is unchanged.
 * **Left to the author:** confirming in Preview, on the full PDFs, that no note has the block.
+* The queue line until kit-2026-10-16 said: footnote numbers in each edition's PDF render as plain numbers beside their notes, with no coloured block behind them, in Preview too, where the notes' amber bar, a gradient, paints over them; both editions.
