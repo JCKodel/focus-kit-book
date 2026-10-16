@@ -19,6 +19,8 @@ Ele começa em uma sessão nova, então a página é tudo o que ele leva da conv
 
 A página, o `AGENTS.md`, e três dos documentos do projeto: o docs/01, a arquitetura, que diz onde cada peça fica e como os erros circulam; o docs/04, as convenções, que dizem quais testes escrever; e o docs/05, o processo.
 O docs/05 guarda os slots do projeto, e o `/apply` os segue ao pé da letra: o comando de verificação, os ambientes e o que uma entrega deixa em cada um, como uma tela é provada, a política de publicação e a estratégia de git.
+Do docs/06, a fila, ele lê as linhas que citam o slug dele e o título do marco delas, e mais nada.
+A fila é o único documento que ele não lê inteiro: ela ganha uma linha a cada entrega e guarda o estado de todas as outras, enquanto a construção só precisa da própria linha; os outros documentos dizem como o projeto está agora, e a construção precisa de tudo isso.
 Então ele marca a linha como `[*]` no docs/06, para a fila mostrar a construção em andamento; em uma linha que está `[?]`, ele primeiro diz o que a linha espera, e só segue quando você diz que está resolvido.
 
 ### A página é o escopo

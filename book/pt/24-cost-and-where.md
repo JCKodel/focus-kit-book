@@ -66,6 +66,7 @@ O [capítulo 2](02-how-agents-see.md) mostrou que tudo o que está na janela de 
 O método responde com uma sessão nova por entrega.
 O `/apply` começa pelo arquivo de regras, pelos documentos que ele cita e por uma página, então o contexto tem o que esta entrega precisa e nada da anterior.
 É a página que torna isso possível: ela leva cada decisão de que a construção precisa, então a sessão não precisa herdar a conversa que as tomou.
+Da fila, o `/apply` lê as linhas que citam o slug dele e o título do marco delas, e mais nada, porque o que ele lê no começo vai junto em cada chamada da sessão: a fila cresce a cada entrega, e o contexto da construção não cresce com ela.
 
 Assim o contexto fica do tamanho da entrega, e a fatura também.
 Um time que mantém uma sessão longa por uma semana paga, em cada chamada da sexta-feira, pelos arquivos lidos na segunda.
@@ -141,7 +142,7 @@ Não há número de fora para comparar com ele, por escolha: o próximo marco do
 
 * Um host cobra quatro tipos de token: entrada, escrita no cache, leitura do cache e saída; uma leitura do cache custa uma fração de um token de entrada, porque o host reenvia o mesmo contexto em cada chamada.
 * No Ninjobs uma entrega custou 43,1 M de tokens, 98,3% deles leituras do cache, 149 mil de saída e 738 mil sem as leituras do cache, em 93 páginas.
-* As leituras do cache são contadas à parte porque medem quanto contexto cada chamada carregou, e é isso que a página e uma sessão nova por entrega mantêm pequeno.
+* As leituras do cache são contadas à parte porque medem quanto contexto cada chamada carregou, e é isso que a página, uma sessão nova por entrega e o `/apply` lendo as próprias linhas da fila, e não a fila, mantêm pequeno.
 * Um agente compensa onde a decisão está escrita e a checagem é mecânica, compensa menos onde a decisão ainda está sendo tomada, e não compensa numa stack que ele não viu.
 * Meça os tokens por entrega no seu próprio projeto durante um marco, a partir dos logs do host, e compare marcos, não fornecedores.
 
