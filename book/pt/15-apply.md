@@ -2,7 +2,7 @@
 
 Depois deste capítulo você consegue levar uma página revisada até uma mudança em stage (marcada para o próximo commit, o registro salvo no histórico do projeto) com o `/apply`, e dizer o que "pronto" significa: a verificação verde, uma prova, os documentos atualizados, a página movida e a sua linha marcada.
 Então você consegue revisar a mudança em stage contra a página e fazer o commit você mesmo, que é a revisão humana do processo.
-E consegue dizer como o `/apply` termina: só a sua entrega em stage, a mensagem sugerida em um bloco `commit` na página e na conversa, e os seus próximos passos escritos por extenso.
+E consegue dizer como o `/apply` termina: só a sua entrega em stage, a mensagem sugerida em um bloco `commit` na página e na conversa, os seus próximos passos escritos por extenso e, por último, qual ambiente está em qual versão.
 
 ## O problema
 
@@ -19,9 +19,9 @@ Ele começa em uma sessão nova, então a página é tudo o que ele leva da conv
 
 A página, o `AGENTS.md`, e três dos documentos do projeto: o docs/01, a arquitetura, que diz onde cada peça fica e como os erros circulam; o docs/04, as convenções, que dizem quais testes escrever; e o docs/05, o processo.
 O docs/05 guarda os slots do projeto, e o `/apply` os segue ao pé da letra: o comando de verificação, os ambientes e o que uma entrega deixa em cada um, como uma tela é provada, a política de publicação e a estratégia de git.
-Do docs/06, a fila, ele lê as linhas que citam o slug dele e o título do marco delas, e mais nada.
-A fila é o único documento que ele não lê inteiro: ela ganha uma linha a cada entrega e guarda o estado de todas as outras, enquanto a construção só precisa da própria linha; os outros documentos dizem como o projeto está agora, e a construção precisa de tudo isso.
-Então ele marca a linha como `[*]` no docs/06, para a fila mostrar a construção em andamento; em uma linha que está `[?]`, ele primeiro diz o que a linha espera, e só segue quando você diz que está resolvido.
+Do docs/06, a fila, ele lê tudo: precisa ver que as linhas que o seu `· after` nomeia estão feitas antes de começar, e nomeia a próxima linha livre quando termina.
+O que mantém essa leitura pequena é a própria linha, uma frase e os seus sufixos (capítulo 13), e não uma fila mais curta: a fila cresce a cada entrega, e cada linha custa o que custa uma frase.
+Então, como a sua primeira edição, ele marca a linha como `[*]` no docs/06, para a fila mostrar a construção em andamento; em uma linha que está `[?]`, ele primeiro diz o que a linha espera, e só segue quando você diz que está resolvido.
 
 ### A página é o escopo
 
@@ -61,12 +61,13 @@ Então, antes de parar, o `/apply` faz tudo isto:
 * Atualiza os documentos que a entrega mudou: um termo novo no docs/03, uma regra nova no documento que é dono dela, uma decisão em docs/adr/.
 * Quando a entrega acrescenta ou muda algo que uma pessoa faz à mão, como publicar o app, escreve ou atualiza o manual dele em `docs/manuals/` ([capítulo 10](10-the-documents.md)).
 * Marca cada item do Pronto quando.
-* Move a página para `work/done/`, e troca a marca da linha no docs/06 de `[*]` para `[x]`; uma linha `[?]` que esperava só por linhas agora `[x]` volta pela fase de retomada: para `[>]` quando era `resume: apply` e a página dela ainda está completa, senão para `[ ]` ([capítulo 16](16-queue-states.md)).
+* Move a página para `work/done/`; uma linha `[?]` que espera só por esta, ou por linhas já `[x]`, volta pela fase de retomada: para `[ ]` quando era `resume: propose`, para `[>]` quando era `resume: apply` ([capítulo 16](16-queue-states.md)).
 * Coloca em stage só os caminhos e trechos desta entrega, nunca com `git add -A` ou `git add .`, e avisa o que outra pessoa já tinha colocado em stage, sem tirar do stage.
 * Termina a página com a mensagem de commit sugerida em um bloco `commit`, no formato que o docs/05 define, e mostra o mesmo bloco na conversa. Há um bloco só: um `/apply` retomado substitui o anterior.
-* As últimas palavras dele são os seus próximos passos: qual ambiente está em qual versão e o comando que atualiza os outros; depois revisar o diff em stage, fazer o commit (e o merge, em um branch da entrega), e pegar a próxima linha da fila, com o comando escrito como o seu host o invoca, em uma sessão nova.
+* A sua última edição marca a linha como `[x]` no docs/06 e coloca esse trecho em stage, depois de todo o resto estar em stage, então uma linha `[x]` sem nada em stage é uma sessão que parou antes da hora.
+* As últimas palavras dele são os seus próximos passos: revisar o diff em stage, fazer o commit (e o merge, em um branch da entrega), e pegar a próxima linha da fila, com o comando escrito como o seu host o invoca, em uma sessão nova. A última coisa que diz é qual ambiente está em qual versão e o comando que atualiza os outros, e ele nunca termina calado sobre isso.
 
-Pronto é essa lista inteira: a verificação verde, a prova, o que aconteceu escrito na página, os documentos atualizados, a página em `work/done/`, a linha `[x]`, só esta entrega em stage, e a mensagem na página.
+Pronto é essa lista inteira: a verificação verde, a prova, o que aconteceu escrito na página, os documentos atualizados, a página em `work/done/`, só esta entrega em stage, a mensagem na página, e a linha `[x]`.
 
 ## `emprestar-livro`, construída
 
@@ -82,7 +83,7 @@ Qualquer que seja a sua resposta, o outro muda na mesma entrega.
 
 Ele roda `npm run verify` até ficar verde, captura a tela de empréstimo com 390 e 1280 pixels de largura, e compara as duas com o arquivo de design.
 Se um botão quebra linha na largura estreita, ele é corrigido; se o arquivo de design não dá um valor para uma cor, a escolha é registrada como uma divergência, com o seu motivo.
-Então ele escreve na página o que aconteceu, acrescenta a tabela `emprestimo` ao documento que lista o schema, marca o Pronto quando, move a página para `work/done/emprestar-livro.md`, marca a linha `[x]`, e coloca em stage só os caminhos desta entrega e o seu próprio trecho do docs/06.
+Então ele escreve na página o que aconteceu, acrescenta a tabela `emprestimo` ao documento que lista o schema, marca o Pronto quando, move a página para `work/done/emprestar-livro.md`, coloca em stage só os caminhos desta entrega e, como a sua última edição, marca a linha `[x]` e coloca em stage esse trecho do docs/06.
 Se uma edição de outra sessão em `src/membros/` está na árvore, ou se o trecho dela do docs/06 já está em stage, o agente deixa os dois como estão e avisa você do que está em stage (capítulo 21).
 
 A página termina com a mensagem sugerida, escrita para este capítulo, e a conversa mostra o mesmo bloco:
@@ -99,11 +100,14 @@ Emprestar um exemplar a um membro
 work/done/emprestar-livro.md
 ```
 
-Depois ele diz qual ambiente roda esta entrega e como atualizar os outros, e termina com os seus próximos passos:
+Depois ele dá os seus próximos passos:
 
 1. Revise o diff em stage: `git diff --staged`.
 2. Faça o commit com a mensagem sugerida: `git commit`, e cole o bloco.
 3. A próxima linha livre da fila é `devolver-livro`; em uma sessão nova, rode `/propose devolver-livro` no Claude Code, ou `$propose devolver-livro` no Codex (a tabela do capítulo 11).
+
+E termina, por último, nos ambientes, com uma frase também escrita para este capítulo: "O banco de dados de desenvolvimento já tem a migration desta entrega; o ambiente de staging ainda está na entrega anterior, e `npm run migrate -- staging` o atualiza."
+Se uma sessão termina sem essa frase, ela não terminou como o kit diz; peça a frase a ela.
 
 ## Por que ele para no stage
 
@@ -180,10 +184,11 @@ Se o seu agente responde com linhas de `git commit -m` e nenhum bloco `commit` n
 ## O que o time ganha
 
 Nada é publicado sem uma checagem e uma pessoa: a verificação e a prova conferem a construção, e uma pessoa lê o diff antes de ele existir no histórico.
-O jeito como o `/apply` termina evita três erros.
+O jeito como o `/apply` termina evita quatro erros.
 Uma mensagem que vive só no chat, como linhas de `git commit -m`, deixa quem faz o commit depois, em outra janela ou em outra sessão, sem ter de onde começar; o bloco `commit` na página dá esse começo.
 Uma mensagem sugerida como texto simples em um terminal perde o destaque que um bloco cercado dá e se mistura ao resto da resposta; o mesmo bloco na conversa a mantém à parte.
 Uma pessoa que acabou de usar o kit pela primeira vez sabe que deve fazer o commit, mas tem de procurar na documentação o que vem depois, e um comando escrito na forma de outro host é um que o host dela pode não reconhecer; próximos passos escritos por extenso, na forma do host, acabam com essa procura.
+Uma pessoa que abre um site publicado achando que ele está atual, depois de uma sessão que terminou sem dizer que não estava, revisa uma versão que não tem a entrega, como aconteceu na Ninjobs; a última coisa que o `/apply` diz, qual ambiente está em qual versão e o comando que atualiza os outros, evita isso.
 
 E o que divergiu do plano fica escrito onde a próxima pessoa lê.
 Na Ninjobs, a página da entrega que permite a um usuário excluir a própria conta dizia que a tabela que registra uma exclusão pendente não teria regra de escrita nenhuma.
@@ -193,11 +198,11 @@ A decisão e o seu motivo estão na página que a construiu, e o commit que a pu
 ## Pontos-chave
 
 * O `/apply <slug>` constrói a página em uma sessão nova, e a página é o escopo: nenhuma dependência, camada ou ferramenta que a página não nomeou.
-* Ele marca a linha como `[*]` quando começa, `[x]` quando termina, e `[?]`, com o que ela espera, quando precisa parar.
+* Ele marca a linha como `[*]` com a sua primeira edição, `[x]` com a última, depois do stage, e `[?]`, com o que ela espera, quando precisa parar.
 * Ele segue o docs/05 ao pé da letra, e quando a página contradiz um documento ele para e diz qual; nunca resolve em silêncio.
 * Verde não é pronto: pronto é a verificação verde, a prova, o que aconteceu na página, os documentos atualizados, a página em `work/done/`, a linha `[x]` e só esta entrega em stage.
 * Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado.
-* As últimas palavras dele são os seus próximos passos, cada comando escrito por extenso: revisar o diff em stage, fazer o commit, e a próxima linha da fila em uma sessão nova.
+* As últimas palavras dele são os seus próximos passos, cada comando escrito por extenso, e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
 * Revise a mudança em stage contra a página, e peça cada correção na mesma sessão.
 * Essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
 * O agente coloca em stage e sugere a mensagem; a pessoa lê o diff e faz o commit, então nada chega ao histórico sem ser lido, e uma entrega se desfaz em um passo.

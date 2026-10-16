@@ -89,8 +89,7 @@ A line leaves `[?]` when the reason is resolved.
 The person says so; or the session that records the answer clears it, as when the director names the provider and the name becomes a line of docs/00; or `/apply` clears it when it marks `[x]` the last line an `after` names.
 Both suffixes go, and the resume phase says where the line goes back.
 `due-reminder`, with `resume: propose`, goes back to `[ ]`, and any draft of its page stays for `/propose` to finish.
-A line with `resume: apply` goes back to `[>]` only if its page still answers every section, and otherwise to `[ ]`, with what `/propose` must settle.
-A page that merely exists is not enough: the answer that freed the line may have changed what its page must say.
+A line with `resume: apply` goes back to `[>]`; if the answer that freed it changed what its page must say, the person asks `/propose` for the page first, as with any page that no longer holds.
 
 `/propose` and `/apply` both stop on a `[?]` line: they say what it waits on, and go on only when the person says it is resolved.
 A command that ran past the reason would build on an answer nobody gave.

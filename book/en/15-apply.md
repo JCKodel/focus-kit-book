@@ -2,7 +2,7 @@
 
 After this chapter you can follow a reviewed page to a staged change with `/apply`, and say what "done" means: verify green, a proof, the documents updated, the page moved and its line marked.
 You can then review the staged change against the page and commit it yourself, which is the human review of the process.
-And you can say how `/apply` ends: only its delivery staged, the suggested message in a `commit` block on the page and in the conversation, and your next steps written out.
+And you can say how `/apply` ends: only its delivery staged, the suggested message in a `commit` block on the page and in the conversation, your next steps written out and, last of all, which environment is at which version.
 
 ## The problem
 
@@ -19,9 +19,9 @@ It starts in a fresh session, so the page is all it takes from the conversation 
 
 The page, `AGENTS.md`, and three of the project documents: docs/01, the architecture, which says where each piece goes and how errors travel; docs/04, the conventions, which say which tests to write; and docs/05, the process.
 docs/05 holds the project's slots, and `/apply` follows them literally: the verify command, the environments and what a delivery leaves in each, how a screen is proven, the publish policy and the git strategy.
-Of docs/06, the queue, it reads only the lines that name its slug and the heading of their milestone.
-The queue is the one document it does not read whole: it gains a line with every delivery and holds the state of every other one, while the build needs only its own line; the other documents say how the project is now, and the build needs all of that.
-Then it marks the line `[*]` in docs/06, so the queue shows the build under way; on a line that is `[?]`, it first says what the line waits on, and goes on only when you say it is resolved.
+Of docs/06, the queue, it reads all of it: it must see that the lines its `· after` names are done before it starts, and it names the next free line when it ends.
+What keeps that read small is the line itself, one sentence and its suffixes (chapter 13), not a shorter queue: the queue grows with every delivery, and each line costs what one sentence costs.
+Then, as its first edit, it marks the line `[*]` in docs/06, so the queue shows the build under way; on a line that is `[?]`, it first says what the line waits on, and goes on only when you say it is resolved.
 
 ### The page is the scope
 
@@ -61,12 +61,13 @@ So before it stops, `/apply` does all of this:
 * It updates the documents the delivery changed: a new term into docs/03, a new rule into the document that owns it, a decision into docs/adr/.
 * When the delivery adds or changes something a person does by hand, such as publishing the app, it writes or updates its manual in `docs/manuals/` ([chapter 10](10-the-documents.md)).
 * It ticks every item of Done when.
-* It moves the page to `work/done/`, and turns the line's mark in docs/06 from `[*]` to `[x]`; a `[?]` line that waited only on lines now `[x]` goes back by its resume phase: to `[>]` when it was `resume: apply` and its page is still complete, otherwise to `[ ]` ([chapter 16](16-queue-states.md)).
+* It moves the page to `work/done/`; a `[?]` line that waits only on this one, or on lines already `[x]`, goes back by its resume phase: to `[ ]` when it was `resume: propose`, to `[>]` when it was `resume: apply` ([chapter 16](16-queue-states.md)).
 * It stages only this delivery's paths and hunks, never with `git add -A` or `git add .`, and reports what someone else had already staged without unstaging it.
 * It ends the page with the suggested commit message in a `commit` block, in the format docs/05 defines, and shows the same block in the conversation. There is one block: a resumed `/apply` replaces the earlier one.
-* Its last words are your next steps: which environment is at which version and the command that updates the others; then review the staged diff, commit (and merge, on a delivery branch), and take the queue's next line, with its command written as your host invokes it, in a fresh session.
+* Its last edit marks the line `[x]` in docs/06 and stages that hunk, after everything else is staged, so a line marked `[x]` with nothing staged is a session that stopped early.
+* Its last words are your next steps: review the staged diff, commit (and merge, on a delivery branch), and take the queue's next line, with its command written as your host invokes it, in a fresh session. The last thing it says is which environment is at which version and the command that updates the others, and it never ends silent about it.
 
-Done is that whole list: verify green, the proof, what happened written on the page, the documents updated, the page in `work/done/`, the line `[x]`, only this delivery staged, and the message on the page.
+Done is that whole list: verify green, the proof, what happened written on the page, the documents updated, the page in `work/done/`, only this delivery staged, the message on the page, and the line `[x]`.
 
 ## `lend-book`, built
 
@@ -82,7 +83,7 @@ Whichever you answer, the other one changes in the same delivery.
 
 It runs `npm run verify` until it is green, takes the lending screen at 390 and 1280 pixels wide, and compares both with the design file.
 If a button wraps at the narrow width, it gets fixed; if the design file gives no value for a colour, the choice is written down as a divergence, with its reason.
-Then it writes what happened on the page, adds the table `loan` to the document that lists the schema, ticks Done when, moves the page to `work/done/lend-book.md`, marks the line `[x]`, and stages only this delivery's paths and its own hunk of docs/06.
+Then it writes what happened on the page, adds the table `loan` to the document that lists the schema, ticks Done when, moves the page to `work/done/lend-book.md`, stages only this delivery's paths, and, as its last edit, marks the line `[x]` and stages that hunk of docs/06.
 If another session's edit to `src/members/` sits in the tree, or its hunk of docs/06 is already staged, the agent leaves both as they are and tells you about the staged one (chapter 21).
 
 The page ends with the suggested message, written for this chapter, and the conversation shows the same block:
@@ -99,11 +100,14 @@ Lend a copy to a member
 work/done/lend-book.md
 ```
 
-Then it says which environment runs this delivery and how to update the others, and ends with your next steps:
+Then it gives your next steps:
 
 1. Review the staged diff: `git diff --staged`.
 2. Commit with the suggested message: `git commit`, and paste the block.
 3. The queue's next free line is `return-book`; in a fresh session, run `/propose return-book` in Claude Code, or `$propose return-book` in Codex (chapter 11's table).
+
+And it ends, last of all, on the environments, in a sentence also written for this chapter: "The development database has this delivery's migration; the staging environment is still at the previous delivery, and `npm run migrate -- staging` updates it."
+If a session ends without that sentence, it did not end as the kit says; ask it for the sentence.
 
 ## Why it stops at the stage
 
@@ -180,10 +184,11 @@ If your agent answers with `git commit -m` lines and no `commit` block on the pa
 ## What the team gains
 
 Nothing ships without a check and a person: verify and the proof check the build, and a person reads the diff before it exists in the history.
-The way `/apply` ends prevents three errors.
+The way `/apply` ends prevents four errors.
 A message that lives only in the chat, as `git commit -m` lines, leaves whoever commits later, in another window or another session, nowhere to start from; the `commit` block on the page gives them that start.
 A message suggested as plain text in a terminal loses the highlight a fenced block gives and blends into the rest of the reply; the same block in the conversation keeps it apart.
 A person who has just used the kit for the first time knows to commit but has to search the documentation for what comes after, and a command written in another host's form is one their host may not recognize; next steps written out, in the host's form, end that search.
+A person who opens a published site believing it current, after a session that ended without saying it was not, reviews a version that does not hold the delivery, as happened on Ninjobs; the last thing `/apply` says, which environment is at which version and the command that updates the others, prevents it.
 
 And what diverged from the plan is written where the next person reads it.
 On Ninjobs, the page of the delivery that lets a user delete their account said the table recording a pending deletion would have no write rule at all.
@@ -193,11 +198,11 @@ The decision and its reason are on the page that built it, and the commit that s
 ## Key points
 
 * `/apply <slug>` builds the page in a fresh session, and the page is the scope: no dependency, layer or tool the page did not name.
-* It marks the line `[*]` when it starts, `[x]` when it is done, and `[?]`, with what it waits on, when it must stop.
+* It marks the line `[*]` with its first edit, `[x]` with its last, after the stage, and `[?]`, with what it waits on, when it must stop.
 * It follows docs/05 literally, and when the page contradicts a document it stops and says which; it never resolves it silently.
 * Green is not done: done is verify green, the proof, what happened on the page, the documents updated, the page in `work/done/`, the line `[x]` and only this delivery staged.
 * It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked.
-* Its last words are your next steps, each command written out: review the staged diff, commit, and the queue's next line in a fresh session.
+* Its last words are your next steps, each command written out, and, last of all, which environment is at which version and the command that updates the others.
 * Review the staged change against the page, and ask for each correction in the same session.
 * That review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
 * The agent stages and suggests the message; the person reads the diff and commits, so nothing reaches the history unread, and a delivery reverts in one step.

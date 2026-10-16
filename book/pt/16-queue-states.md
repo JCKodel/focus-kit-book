@@ -90,8 +90,7 @@ Uma linha sai de `[?]` quando o motivo se resolve.
 A pessoa diz isso; ou a sessão que registra a resposta a tira, como quando a diretora diz o provedor e o nome vira uma linha do docs/00; ou o `/apply` a tira quando marca `[x]` a última linha que um `after` nomeia.
 Os dois sufixos saem, e a fase de retomada diz para onde a linha volta.
 `aviso-prazo`, com `resume: propose`, volta para `[ ]`, e qualquer rascunho da página dela fica para o `/propose` terminar.
-Uma linha com `resume: apply` volta para `[>]` só se a página dela ainda responde a todas as seções, e senão para `[ ]`, com o que o `/propose` precisa resolver.
-Uma página que apenas existe não basta: a resposta que liberou a linha pode ter mudado o que a página dela precisa dizer.
+Uma linha com `resume: apply` volta para `[>]`; se a resposta que a liberou mudou o que a página dela precisa dizer, a pessoa pede a página ao `/propose` primeiro, como com qualquer página que não vale mais.
 
 O `/propose` e o `/apply` param os dois em uma linha `[?]`: dizem o que ela espera, e só seguem quando a pessoa diz que está resolvido.
 Um comando que passasse por cima do motivo construiria sobre uma resposta que ninguém deu.

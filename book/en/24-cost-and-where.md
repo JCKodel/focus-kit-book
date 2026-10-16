@@ -60,7 +60,7 @@ Keep cache reads in their own column, and a change in how the team works shows t
 The method answers with a fresh session per delivery.
 `/apply` starts from the rules file, the documents it names and one page, so the context holds what this delivery needs and nothing from the one before.
 The page is what makes that possible: it carries every decision the build needs, so the session does not have to inherit the conversation that took them.
-Of the queue, `/apply` reads only the lines that name its slug and their milestone's heading, because what it reads at the start rides along on every call of the session: the queue grows with every delivery, and the build's context does not grow with it.
+The queue is among those documents, whole, and what it reads at the start rides along on every call of the session; the queue grows with every delivery, so each line holds one sentence (chapter 13), and the read grows by a sentence per delivery, not by a page.
 
 So the context stays the size of the delivery, and so does the bill.
 A team that keeps one long session for a week pays, on every call of Friday, for the files read on Monday.
@@ -134,7 +134,7 @@ There is no outside number to set it against, by choice: the team's next milesto
 
 * A host bills four kinds of token: input, cache write, cache read and output; a cache read costs a fraction of an input token, because the host re-sends the same context on every call.
 * On Ninjobs one delivery cost 43.1 M tokens, nearly all of them cache reads.
-* Cache reads are counted apart because they measure how much context each call carried, and that is what the page, a fresh session per delivery and `/apply` reading its own queue lines, not the queue, keep small.
+* Cache reads are counted apart because they measure how much context each call carried, and that is what the page, a fresh session per delivery and one-sentence queue lines keep small.
 * An agent pays where the decision is written and the check is mechanical, pays less where the decision is still being made, and does not pay on a stack it has not seen.
 * Measure tokens per delivery on your own project for one milestone, from the host's logs, and compare milestones, not vendors.
 
