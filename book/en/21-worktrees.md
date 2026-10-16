@@ -1,7 +1,7 @@
 # 21. Worktrees and parallel agents
 
 After this chapter you can run two agents at once in one folder, on trunk, on free lines whose files do not meet, tell what is and is not a conflict there, and commit each delivery alone.
-You can also say when a worktree per delivery still pays, lay it out as the kit shapes it, a container folder with `main/` and a hidden folder, build in worktrees, resolve the conflict when two branches touched the same lines, catch a conflict marker before it is committed, and say when working in parallel stops paying.
+You can also say when it still pays to give each delivery a worktree, a second working folder of the same repository on its own branch, lay it out as the kit shapes it, a container folder with `main/` and a hidden folder, build in worktrees, resolve the conflict when two branches touched the same lines, catch a conflict marker before it is committed, and say when working in parallel stops paying.
 
 ## The problem: one folder, two jobs
 
@@ -71,20 +71,6 @@ Two things are a conflict:
 
 Then the session stops and reports, and the decision is yours: order the two lines, by writing `· after <slug>` on the one that must wait for the other, or give one of them a worktree.
 
-## When a worktree still pays
-
-One folder holds one branch at a time, and everyone working in it shares its files.
-So a worktree per delivery pays in two cases: several people working at once, since one commit on a shared branch would carry another person's half-done work; and one person whose deliveries touch the same files, so each is built apart and their changes meet only at the merge.
-
-Branches alone do not do it.
-If you give each delivery its own branch in one folder, the folder still holds only one branch at a time.
-Switching branches while an agent has work not yet committed either carries that work to the other branch or makes git refuse until you put it aside with `git stash`; and two agents cannot be on two branches of one folder at the same moment.
-
-A second clone of the repository gives each agent its own folder, but each clone has its own copy of the history: the two meet only by pushing to a remote and pulling from it, and every clone repeats the whole history on disk.
-
-What you want then is several folders, each on its own branch, sharing one history.
-That is a worktree.
-
 ## What a worktree is
 
 A worktree is an extra working folder of the same git repository, checked out on its own branch.
@@ -99,6 +85,19 @@ Then no working folder holds the history, and every working folder, `main/` incl
 All worktrees share the history; each has its own files, its own `HEAD` (the commit it is on) and its own staging area.[^git-worktree]
 So a commit made in one worktree is visible at once from every other, with no push and no pull, while what you change or stage in one never appears in another.
 Git also refuses to check out one branch in two worktrees, so two folders never write to the same branch.[^git-worktree]
+
+## When a worktree still pays
+
+One folder holds one branch at a time, and everyone working in it shares its files.
+So a worktree per delivery pays in two cases: several people working at once, since one commit on a shared branch would carry another person's half-done work; and one person whose deliveries touch the same files, so each is built apart and their changes meet only at the merge.
+
+Branches alone do not do it.
+If you give each delivery its own branch in one folder, the folder still holds only one branch at a time.
+Switching branches while an agent has work not yet committed either carries that work to the other branch or makes git refuse until you put it aside with `git stash`; and two agents cannot be on two branches of one folder at the same moment.
+
+A second clone of the repository gives each agent its own folder, but each clone has its own copy of the history: the two meet only by pushing to a remote and pulling from it, and every clone repeats the whole history on disk.
+
+A worktree per delivery gives exactly that: several folders, each on its own branch, sharing one history.
 
 ## How it solves the problem
 

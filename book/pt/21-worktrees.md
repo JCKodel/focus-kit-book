@@ -1,7 +1,7 @@
 # 21. Worktrees e agentes em paralelo
 
 Depois deste capítulo você consegue rodar dois agentes ao mesmo tempo em uma pasta, no trunk, em linhas livres cujos arquivos não se encontram, dizer o que é e o que não é um conflito ali, e fazer o commit de cada entrega sozinha.
-Você também consegue dizer quando um worktree por entrega ainda compensa, organizá-lo como o kit lhe dá forma, uma pasta contêiner com `main/` e uma pasta oculta, construir em worktrees, resolver o conflito quando dois branches mexeram nas mesmas linhas, pegar um marcador de conflito antes que ele entre em um commit, e dizer quando trabalhar em paralelo deixa de compensar.
+Você também consegue dizer quando ainda compensa dar a cada entrega um worktree (uma árvore de trabalho), uma segunda pasta de trabalho do mesmo repositório no seu próprio branch, organizá-lo como o kit lhe dá forma, uma pasta contêiner com `main/` e uma pasta oculta, construir em worktrees, resolver o conflito quando dois branches mexeram nas mesmas linhas, pegar um marcador de conflito antes que ele entre em um commit, e dizer quando trabalhar em paralelo deixa de compensar.
 
 ## O problema: uma pasta, dois trabalhos
 
@@ -71,20 +71,6 @@ Duas coisas são um conflito:
 
 Então a sessão para e relata, e a decisão é sua: ordenar as duas linhas, escrevendo `· after <slug>` na que precisa esperar a outra, ou dar a uma delas um worktree.
 
-## Quando um worktree ainda compensa
-
-Uma pasta guarda um branch por vez, e todos que trabalham nela dividem os seus arquivos.
-Então um worktree por entrega compensa em dois casos: várias pessoas trabalhando ao mesmo tempo, já que um commit em um branch compartilhado levaria o trabalho pela metade de outra pessoa; e uma pessoa cujas entregas mexem nos mesmos arquivos, para que cada uma seja construída à parte e as suas mudanças só se encontrem no merge.
-
-Só branches não bastam.
-Se você dá a cada entrega o seu próprio branch em uma pasta, a pasta ainda guarda só um branch por vez.
-Trocar de branch enquanto um agente tem trabalho ainda sem commit ou leva esse trabalho para o outro branch ou faz o git recusar até você guardá-lo de lado com `git stash`; e dois agentes não conseguem estar em dois branches de uma pasta no mesmo momento.
-
-Um segundo clone do repositório dá a cada agente a sua própria pasta, mas cada clone tem a sua própria cópia do histórico: os dois só se encontram dando push para um remoto e pull dele, e cada clone repete o histórico inteiro no disco.
-
-O que você quer então são várias pastas, cada uma no seu próprio branch, compartilhando um histórico.
-Isso é um worktree (uma árvore de trabalho).
-
 ## O que é um worktree
 
 Um worktree é uma pasta de trabalho extra do mesmo repositório git, com o seu próprio branch.
@@ -99,6 +85,19 @@ Então nenhuma pasta de trabalho guarda o histórico, e toda pasta de trabalho, 
 Todos os worktrees compartilham o histórico; cada um tem os seus próprios arquivos, o seu próprio `HEAD` (o commit em que ele está) e a sua própria área de stage.[^git-worktree]
 Então um commit feito em um worktree aparece na hora em todos os outros, sem push e sem pull, enquanto o que você muda ou coloca em stage em um nunca aparece em outro.
 O git também se recusa a fazer checkout de um branch em dois worktrees, então duas pastas nunca escrevem no mesmo branch.[^git-worktree]
+
+## Quando um worktree ainda compensa
+
+Uma pasta guarda um branch por vez, e todos que trabalham nela dividem os seus arquivos.
+Então um worktree por entrega compensa em dois casos: várias pessoas trabalhando ao mesmo tempo, já que um commit em um branch compartilhado levaria o trabalho pela metade de outra pessoa; e uma pessoa cujas entregas mexem nos mesmos arquivos, para que cada uma seja construída à parte e as suas mudanças só se encontrem no merge.
+
+Só branches não bastam.
+Se você dá a cada entrega o seu próprio branch em uma pasta, a pasta ainda guarda só um branch por vez.
+Trocar de branch enquanto um agente tem trabalho ainda sem commit ou leva esse trabalho para o outro branch ou faz o git recusar até você guardá-lo de lado com `git stash`; e dois agentes não conseguem estar em dois branches de uma pasta no mesmo momento.
+
+Um segundo clone do repositório dá a cada agente a sua própria pasta, mas cada clone tem a sua própria cópia do histórico: os dois só se encontram dando push para um remoto e pull dele, e cada clone repete o histórico inteiro no disco.
+
+Um worktree por entrega dá exatamente isso: várias pastas, cada uma no seu próprio branch, compartilhando um histórico.
 
 ## Como ele resolve o problema
 

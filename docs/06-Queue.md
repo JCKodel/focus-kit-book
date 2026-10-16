@@ -267,5 +267,5 @@ When this milestone closes, the book teaches focus-kit 2026.10.16 and the reposi
 [x] m13-review               the review of M13 as docs/05 §8 says
 [x] kit-as-it-is             the book describes focus-kit as it is today, never comparing it with an earlier version of itself, and docs/04 says so; both editions
 [ ] plain-numbers            no passage of the book reads as a run of numbers: each keeps the numbers that prove its point; both editions · after kit-as-it-is
-[ ] ch21-worktree-first      chapter 21 says what a worktree is before it relies on the word; both editions
+[x] ch21-worktree-first      chapter 21 says what a worktree is before it relies on the word; both editions
 ```
