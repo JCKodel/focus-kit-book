@@ -1,7 +1,7 @@
 # 13. The queue and milestones
 
 After this chapter you can read a queue, say what each mark means, and write a milestone paragraph a person can check.
-You can also write a line as one sentence with its suffixes, order a milestone so that its order is its priority, write on a line which line must be done before it, `· after <slug>`, add, move or change a line by conversation, and turn a code change asked outside `/apply` into a line, or continue it as `/propose` in the same session.
+You can also write a line as one sentence with its suffixes, order a milestone so that its order is its priority, write on a line which line must be done before it, `· after <slug>`, add, move or change a line by conversation, and turn a code change asked outside `/apply` into a line and a draft for its page.
 
 ## The problem
 
@@ -98,15 +98,17 @@ No command owns the queue.
 A new idea becomes a line by conversation, in any session: you tell the agent, and it writes the line in the milestone where it belongs, with a new slug and `[ ]`.
 
 The code has one owner, `/apply`, the command that builds a delivery (chapter 15).
-A change to it asked in any other session, however small, becomes a `[ ]` line: the agent writes the line, says so, and the answer stops there, with no file of the app changed.
-Asked in an ordinary session to show the due date on the loan screen as day/month/year, the agent adds this line to the milestone above, just above `m1-review`, a line written for this chapter:
+A change to it asked in any other session, however small, becomes a `[ ]` line: the agent writes the line, writes in a draft page what you said that the line cannot hold, says so, and the answer stops there, with no file of the app changed.
+Asked in an ordinary session to show the due date on the loan screen as day/month/year, and told how it should look on a narrow screen and that the catalog keeps the ISO form, year-month-day, the agent adds this line to the milestone above, just above `m1-review`, a line written for this chapter:
 
 ```
 [ ] due-date-format   the loan screen shows the due date as day/month/year
 ```
 
+The narrow-screen rule and the catalog exception do not fit the line's one sentence, so they go into a draft `work/due-date-format.md`, and the answer stops there, naming `/propose due-date-format` for a fresh session, written as your host invokes it; a request the line holds whole gets no draft.
 The line gets what every delivery gets, a page, a proof and the person's commit; an edit made on the spot would have skipped the line, the page and verify.
-When you want the change defined now, say so: the conversation continues as `/propose due-date-format` in the same session, the line goes `[~]`, and what you said becomes the page instead of a longer line (chapter 14 shows `/propose`).
+The draft is where the detail waits: `/propose due-date-format`, in a fresh session, starts from it and writes the page (chapter 14 shows `/propose`), so nothing you said in the first session is said twice.
+Saying "define it now" changes nothing: the agent cannot run `/propose` on its own, since it is a command the host runs, and a page written without it starts without what `/propose` reads.
 The answer is the same during `/propose`, which writes no code: a new line, and the page unchanged unless you ask for that change to be part of it.
 An agent that edits the code anyway, to "just change the label", is asked for the line instead, and the edit is reverted before anything is committed.
 The rule covers `/apply`'s own session too: a fix it finds outside its page becomes a line above it, and the delivery waits for that line (chapter 16).
@@ -127,7 +129,7 @@ On Case A, a client project on a low-code platform, Microsoft Power Apps with Co
 Three rules of the queue each prevent an error.
 The order is the priority, written down: without it, a team looks for a way to rank its deliveries, and with it the queue already is the ranking.
 Code changes only inside `/apply`: without that rule, an agent asked for a correction in an ordinary session edits the code directly, with no line in the queue, no page and no verify; with it, a change asked outside `/apply` costs one line, and it gets a page, a proof and the person's commit.
-A line holds one sentence: when the detail of a request has nowhere to go but the line, the lines grow and every session reads them; with one sentence, the detail goes to a page, in the same session if the person wants it.
+A line holds one sentence: when the detail of a request has nowhere to go but the line, the lines grow and every session reads them; with one sentence, the detail goes to the page, or to its draft until `/propose` writes it.
 This book's own queue shows `· after` at work: in its milestone M12, seven lines end with `· after kit-2026-10-13`; each needs the update `kit-2026-10-13` done first, and none of them reads as stuck while it waits its turn.[^queue-m12]
 
 ## Key points
@@ -138,7 +140,7 @@ This book's own queue shows `· after` at work: in its milestone M12, seven line
 * Three to eight deliveries, the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone.
 * The order is the priority: the higher line matters more, and moving a line is changing its priority.
 * A dependency known when a line is added is written with it, `· after <slug>`: an order, not a wait, so the line keeps `[ ]`.
-* No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept; code changes only inside `/apply`, and a change asked anywhere else becomes a line, or continues as `/propose` in the same session when you want it defined now.
+* No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept; code changes only inside `/apply`, and a change asked anywhere else becomes a line, with a draft page for what the line cannot hold, and `/propose` in a fresh session.
 
 [^queue-m12]: J.C. Ködel, "One Page at a Time", the queue, `docs/06-Queue.md`, milestone M12, 2026-10, in the book's repository. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md>
 

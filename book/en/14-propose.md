@@ -135,7 +135,7 @@ Each of the six was reviewed on its own page and built in its own session.
 Some scopes do not fit a page because nobody knows the answer yet: how an unfamiliar API behaves, or which of two approaches holds.
 Other methods call the work that finds out a spike; here it is a conversation with the agent, in any session, before any page.
 The agent is a language model you talk with, not a button that runs a fixed command, and it reads the project's documents, so what it suggests follows the project.
-The conversation ends in one of three ways: a new line in the queue (chapter 13); a decision you accept, written in the document that owns it (chapter 10); or `/propose` in the same session, which starts with the exploration already in its context.
+The conversation ends in one of three ways: a new line in the queue, with a draft page holding what the exploration found when the line cannot hold it, which `/propose` starts from in a fresh session (chapter 13); a decision you accept, written in the document that owns it (chapter 10); or nothing, when what you found leaves the plan as it is.
 On my projects this was rarely needed, and the conversation was always enough, so no mark, command or kind of delivery was added for it: none would name an error it caught, which is the governor of chapter 18.
 
 ## What the team gains
@@ -155,6 +155,6 @@ A person who does not know the tool being built leaves the expected result to th
 * `/propose` decides what the documents answer and names the source on the page, asks only where they leave more than one reading, recommendation first, marks the line `[~]` while it talks and `[>]` when the page is written, or `[?]` when the scope waits, and never writes code.
 * The page has a fixed format and is the team's review surface, for code and for anything else that fits a page; the Contract is the one exact section, because a wrong column is a migration.
 * `/propose` drafts Behaviour, what must fail and the edges included; you read the page before `/apply` and correct it by asking the agent, never by hand: a hole on the page costs a turn, after `/apply` it costs another `/apply`.
-* When nobody knows the answer yet, explore it by talking to the agent, and end with a queue line, a decision written where it belongs, or `/propose` in the same session; nothing new is needed for it.
+* When nobody knows the answer yet, explore it by talking to the agent, and end with a queue line, with a draft page when the line cannot hold what you found, a decision written where it belongs, or neither; nothing new is needed for it.
 
 [^claude-code-plan-mode]: Anthropic, "Common workflows", Claude Code documentation, section "Plan before editing", accessed 2026-09-28. <https://code.claude.com/docs/en/common-workflows#plan-before-editing>

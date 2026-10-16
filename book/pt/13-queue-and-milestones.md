@@ -1,7 +1,7 @@
 # 13. A fila e os marcos
 
 Depois deste capítulo você consegue ler uma fila, dizer o que cada marca significa, e escrever um parágrafo de marco que uma pessoa consegue conferir.
-Você também consegue escrever uma linha como uma frase com os seus sufixos, ordenar um marco de modo que a ordem seja a prioridade, escrever em uma linha qual linha precisa estar feita antes dela, `· after <slug>`, acrescentar, mover ou mudar uma linha conversando, e transformar em linha uma mudança de código pedida fora do `/apply`, ou seguir com ela como `/propose` na mesma sessão.
+Você também consegue escrever uma linha como uma frase com os seus sufixos, ordenar um marco de modo que a ordem seja a prioridade, escrever em uma linha qual linha precisa estar feita antes dela, `· after <slug>`, acrescentar, mover ou mudar uma linha conversando, e transformar uma mudança de código pedida fora do `/apply` em uma linha e no rascunho da página dela.
 
 ## O problema
 
@@ -100,15 +100,17 @@ Nenhum comando é dono da fila.
 Uma ideia nova vira uma linha conversando, em qualquer sessão: você conta ao agente, e ele escreve a linha no marco a que ela pertence, com um slug novo e `[ ]`.
 
 O código tem um dono, o `/apply`, o comando que constrói uma entrega (capítulo 15).
-Uma mudança nele pedida em qualquer outra sessão, por menor que seja, vira uma linha `[ ]`: o agente escreve a linha, diz isso, e a resposta para ali, sem nenhum arquivo do app alterado.
-Pedido numa sessão comum para mostrar a data de devolução na tela do empréstimo como dia/mês/ano, o agente acrescenta esta linha ao marco acima, logo acima de `m1-review`, uma linha escrita para este capítulo:
+Uma mudança nele pedida em qualquer outra sessão, por menor que seja, vira uma linha `[ ]`: o agente escreve a linha, escreve num rascunho da página o que você disse e a linha não comporta, diz isso, e a resposta para ali, sem nenhum arquivo do app alterado.
+Pedido numa sessão comum para mostrar a data de devolução na tela do empréstimo como dia/mês/ano, e informado de como ela deve aparecer numa tela estreita e de que o catálogo mantém a forma ISO, ano-mês-dia, o agente acrescenta esta linha ao marco acima, logo acima de `m1-review`, uma linha escrita para este capítulo:
 
 ```
 [ ] formato-devolucao   o empréstimo mostra a devolução em dia/mês/ano
 ```
 
+A regra da tela estreita e a exceção do catálogo não cabem na frase única da linha, então vão para um rascunho `work/formato-devolucao.md`, e a resposta para ali, nomeando `/propose formato-devolucao` para uma sessão nova, escrito como o seu host chama os comandos; um pedido que a linha comporta inteiro não ganha rascunho.
 A linha ganha o que toda entrega ganha, uma página, uma prova e o commit da pessoa; uma edição feita na hora teria pulado a linha, a página e o verify.
-Quando você quer a mudança definida agora, diga isso: a conversa segue como `/propose formato-devolucao` na mesma sessão, a linha vai para `[~]`, e o que você disse vira a página em vez de uma linha mais longa (o capítulo 14 mostra o `/propose`).
+O rascunho é onde o detalhe espera: o `/propose formato-devolucao`, numa sessão nova, parte dele e escreve a página (o capítulo 14 mostra o `/propose`), então nada do que você disse na primeira sessão é dito duas vezes.
+Dizer "defina agora" não muda nada: o agente não consegue rodar o `/propose` sozinho, já que ele é um comando que o host roda, e uma página escrita sem ele começa sem o que o `/propose` lê.
 A resposta é a mesma durante o `/propose`, que não escreve código: uma linha nova, e a página sem mudança, a não ser que você peça que essa mudança faça parte dela.
 Um agente que edita o código mesmo assim, para "só trocar o rótulo", recebe o pedido da linha no lugar, e a edição é desfeita antes de qualquer commit.
 A regra vale também para a sessão do próprio `/apply`: uma correção que ele encontra fora da sua página vira uma linha acima dele, e a entrega espera por essa linha (capítulo 16).
@@ -129,7 +131,7 @@ O [capítulo 19](19-project-as-assistant.md) conta o resto do Caso A, e o [capí
 Três regras da fila evitam, cada uma, um erro.
 A ordem é a prioridade, escrita: sem ela, um time procura um jeito de classificar as suas entregas, e com ela a fila já é a classificação.
 O código só muda dentro do `/apply`: sem essa regra, um agente a quem pedem uma correção numa sessão comum edita o código direto, sem linha na fila, sem página e sem verify; com ela, uma mudança pedida fora do `/apply` custa uma linha, e ganha uma página, uma prova e o commit da pessoa.
-Uma linha tem uma frase: quando o detalhe de um pedido não tem outro lugar além da linha, as linhas crescem e toda sessão as lê; com uma frase, o detalhe vai para uma página, na mesma sessão se a pessoa quiser.
+Uma linha tem uma frase: quando o detalhe de um pedido não tem outro lugar além da linha, as linhas crescem e toda sessão as lê; com uma frase, o detalhe vai para a página, ou para o rascunho dela até o `/propose` escrevê-la.
 A fila deste próprio livro mostra o `· after` funcionando: no marco M12 dela, sete linhas terminam com `· after kit-2026-10-13`; cada uma precisa da atualização `kit-2026-10-13` feita antes, e nenhuma delas parece travada enquanto espera a sua vez.[^queue-m12]
 
 ## Pontos-chave
@@ -140,7 +142,7 @@ A fila deste próprio livro mostra o `· after` funcionando: no marco M12 dela, 
 * De três a oito entregas, o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados viram linhas sob ela no mesmo marco.
 * A ordem é a prioridade: a linha mais acima importa mais, e mover uma linha é mudar a prioridade dela.
 * Uma dependência conhecida quando a linha é acrescentada é escrita junto, `· after <slug>`: uma ordem, não uma espera, então a linha mantém `[ ]`.
-* Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido; o código só muda dentro do `/apply`, e uma mudança pedida em qualquer outro lugar vira uma linha, ou segue como `/propose` na mesma sessão quando você a quer definida agora.
+* Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido; o código só muda dentro do `/apply`, e uma mudança pedida em qualquer outro lugar vira uma linha, com um rascunho da página para o que a linha não comporta, e o `/propose` numa sessão nova.
 
 [^queue-m12]: J.C. Ködel, "One Page at a Time", a fila, `docs/06-Queue.md`, marco M12, 2026-10, no repositório do livro. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md>
 

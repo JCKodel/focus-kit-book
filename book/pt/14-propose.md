@@ -142,7 +142,7 @@ Cada uma das seis foi revisada na sua própria página e construída na sua pró
 Alguns escopos não cabem em uma página porque ninguém sabe a resposta ainda: como uma API desconhecida se comporta, ou qual de duas abordagens se sustenta.
 Outros métodos chamam o trabalho que descobre isso de spike; aqui ele é uma conversa com o agente, em qualquer sessão, antes de qualquer página.
 O agente é um modelo de linguagem com quem você conversa, não um botão que roda um comando fixo, e ele lê os documentos do projeto, então o que ele sugere segue o projeto.
-A conversa termina de um de três jeitos: uma linha nova na fila (capítulo 13); uma decisão que você aceita, escrita no documento que é dono dela (capítulo 10); ou o `/propose` na mesma sessão, que começa com a exploração já no seu contexto.
+A conversa termina de um de três jeitos: uma linha nova na fila, com um rascunho da página guardando o que a exploração achou quando a linha não o comporta, do qual o `/propose` parte numa sessão nova (capítulo 13); uma decisão que você aceita, escrita no documento que é dono dela (capítulo 10); ou nada, quando o que você achou deixa o plano como está.
 Nos meus projetos isso foi raro, e a conversa sempre bastou, então nenhuma marca, comando ou tipo de entrega foi acrescentado para isso: nenhum nomearia um erro que tivesse pegado, que é o regulador do capítulo 18.
 
 ## O que o time ganha
@@ -162,6 +162,6 @@ Uma pessoa que não conhece a ferramenta sendo construída deixa o resultado esp
 * O `/propose` decide o que os documentos respondem e nomeia a fonte na página, só pergunta onde eles deixam mais de uma leitura, com a recomendação primeiro, marca a linha `[~]` enquanto conversa e `[>]` quando a página está escrita, ou `[?]` quando o escopo espera, e nunca escreve código.
 * A página tem um formato fixo e é a superfície de revisão do time, para código e para qualquer outra coisa que caiba em uma página; o Contrato é a única seção exata, porque uma coluna errada é uma migration.
 * O `/propose` rascunha o Comportamento, incluídos o que precisa falhar e os casos de borda; você lê a página antes do `/apply` e a corrige pedindo ao agente, nunca à mão: um buraco na página custa um turno, depois do `/apply` custa outro `/apply`.
-* Quando ninguém sabe a resposta ainda, explore-a conversando com o agente, e termine com uma linha na fila, uma decisão escrita onde ela pertence, ou o `/propose` na mesma sessão; nada novo é preciso para isso.
+* Quando ninguém sabe a resposta ainda, explore-a conversando com o agente, e termine com uma linha na fila, com um rascunho da página quando a linha não comporta o que você achou, uma decisão escrita onde ela pertence, ou nenhuma das duas; nada novo é preciso para isso.
 
 [^claude-code-plan-mode]: Anthropic, "Common workflows", documentação do Claude Code, seção "Plan before editing", acesso em 2026-09-28. <https://code.claude.com/docs/en/common-workflows#plan-before-editing>

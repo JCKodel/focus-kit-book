@@ -23,6 +23,7 @@ A new concept enters here first, in both languages.
 | ADR | ADR (registro de decisão de arquitetura) | `docs/adr/ADR-NNNN-<slug>.md` | One dated decision; amended, never rewritten. |
 | delivery | entrega | `<slug>` | The smallest unit of work with value; it fits on one page. |
 | page | página | `work/<slug>.md` | The document of one delivery, from Objective to Done when. |
+| draft page | rascunho da página | `work/<slug>.md` | A page written for a `[ ]` line, holding what the request said that the line cannot; `/propose` starts from it in a fresh session. |
 | unit of work | unidade de trabalho | none | A delivery's page and build as one change that reverts in one step: one commit on trunk, or, on a branch or worktree, any number of commits that reach the main branch in one merge. |
 | queue | fila | `docs/06` | Milestones and delivery lines, in order. |
 | queue line | linha da fila | `docs/06` | The mark, the slug, one sentence and its suffixes; what happened goes on the page. |
