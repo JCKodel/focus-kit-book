@@ -40,39 +40,57 @@ A command of your own in a host's folder, or an edit you made by hand to one of 
 
 ## What an update reports
 
-docs/04, docs/05 and `AGENTS.md` belong to the project: the team wrote its rules there, and its choices with them, such as the verify command or working on trunk.
-When a new kit version changes a rule those files hold, the setup file does not write it.
-It compares the files with its own templates and reports each migration, a rule your documents still need to change: the path, the section, and the wording it proposes, in the project's documentation language.
+docs/04, docs/05, docs/06 and `AGENTS.md` belong to the project: the team wrote its rules there, its choices with them, such as the verify command or working on trunk, and its queue.
+When a new kit version changes what those files should hold, the setup file does not write it.
+It compares the files with its own templates and reports each migration, a change your documents still need: the path, the section or the line, and the wording it proposes, in the project's documentation language.
+A migration may name a rule, a queue line or a slot.
 Your choices stay: a docs/05 whose §5 says "trunk, one session at a time" sees the wording for two sessions in one folder proposed, and keeps its own until the team accepts the change.
 
-Here is the report of the update to 2026.10.13 on the lending library, written for this chapter:
+Here is the report of the update from 2026.10.13 to 2026.10.16 on the lending library, written for this chapter:
 
 ```
-Installed: focus-kit 2026.10.13, in every SKILL.md.
-Pending process migrations: 2.
+Installed: focus-kit 2026.10.16, in every SKILL.md.
+Pending process migrations: 6.
 
-1. docs/05, §5 This project: add the Manuals slot.
-   "Manuals: docs/manuals/, one file per thing a person does by
-   hand outside a delivery, named after what it does."
-2. AGENTS.md, Read before acting: add the line
-   "what a person does by hand (publish, roll back): docs/manuals/".
+1. docs/05, §2 The flow: after "the answer stops there", add
+   "or, when the person wants it defined now, the conversation
+   continues as /propose <slug> in the same session".
+2. docs/05, §4 The queue: add "A line is the mark, the slug, one
+   sentence and its suffixes; what happened goes on the page."
+3. docs/05, §5 This project: open it with "A slot says what and the
+   command, in a few lines." In the Manuals slot, add "and a proof
+   /apply runs on another machine".
+4. AGENTS.md, Non-negotiables, the "One delivery" line: add the
+   clause of item 1.
+5. docs/06, Milestone 1, the line members carries history. Shorten
+   it to "the librarian registers, suspends and reinstates members"
+   and move "suspended members keep their loans, as the librarian
+   decided" to work/done/members.md, which lacks it.
+6. docs/05, §5 Environments: the slot holds the steps to publish the
+   app. Keep its command and point to docs/manuals/publish-the-app.md,
+   which takes the steps.
 
 docs/ and AGENTS.md were not changed.
 ```
 
+Items 5 and 6 change no rule.
+The line `members` still says what that delivery was, and the slot still names its command; each loses only what a session would read for nothing every time, the reason [chapter 13](13-queue-and-milestones.md) gives for a short line and [chapter 10](10-the-documents.md) for a short slot.
+The decision stays on the page in `work/done/`, where the report sends it.
+
 The report keeps two facts apart.
 The `metadata.version` in each `SKILL.md` says which kit is installed.
 The process is what docs/04, docs/05 and `AGENTS.md` say, because that is what every command reads, so an updated kit whose migrations are not applied still runs the old process.
-The update is done when the migrations are applied, and the method applies them as it applies any change: a queue line, defined with `/propose` and built with `/apply`, so the change to your rules gets a page, verify and your review.
+The update is done when the migrations are applied, and the method applies them as it applies any change: a queue line, defined with `/propose` and built with `/apply`, so the change to your rules or your queue gets a page, verify and your review.
 
 On a documented project the update reports the migrations first, or says there are none.
 It never asks you to run `/brainstorm` or `/analyze` again: those write a project's documents from nothing, and yours exist.
-A version that changes no rule in your documents reports no migration: 2026.10.08.2 only made `/apply` show its commit message in the conversation too, so the commands changed and nothing else did.
+A version that asks nothing of your documents reports no migration: 2026.10.08.2 only made `/apply` show its commit message in the conversation too, so the commands changed and nothing else did.
+2026.10.15 reports none either: it changed how a worktree per delivery is laid out, and a docs/05 whose Git slot names no folder for it already means the new layout.
 
 To know why a migration exists, read the kit's changelog, `CHANGELOG.md` in its repository, `CHANGELOG.pt.md` in Portuguese.
 It has one entry per version, newest first; the version is the `Version:` line of `SETUP.md`, the same value as the `metadata.version` in each `SKILL.md`.
 Each entry says what changed and the problem that caused it, and an item that starts with `Migration:` names what to change in the project's documents.
-The entry for 2026.10.13 names, in its `Migration:` item, the Manuals slot and the line in `AGENTS.md` of the report above.
+The entry for 2026.10.16 says, in its `Migration:` item, that the report lists the queue lines that carry history and the slots that narrate steps or output, with the shorter wording: items 5 and 6 of the report above.
 
 ## How each host finds the commands
 
@@ -120,8 +138,9 @@ One repository opens ready in any host, so each person keeps the host they prefe
 There is no number for this gain: it is a property of plain files.
 
 An update never rewrites the rules the team wrote.
-In the kit's changelog, from 2026.10.07, the version that brought the migration report, to 2026.10.13, five of the six versions change a rule in docs/04, docs/05 or `AGENTS.md`, and 2026.10.08.2 is the one that does not.
-Each of those five reached a project as a list of what to change and where, with the team's own rules still in place.
+In the kit's changelog, from 2026.10.07, the version that brought the migration report, to 2026.10.16, six of the eight versions ask for a change in the project's documents, and 2026.10.08.2 and 2026.10.15 are the two that do not.
+Each of those six reached a project as a list of what to change and where, with the team's own rules still in place.
+The shorter lines and slots of 2026.10.16 pay on every delivery, because a session reads them each time: the entry records a project where each `/apply` read about 180KB of documents before its first edit, a queue of 80KB whose lines reached 4.7KB and an Environments slot of about 120 lines.
 
 And the next command arrives in the form your host recognizes.
 The changelog's entry 2026.10.08.1 records why: a Codex user was told to run `/propose`, which Codex does not recognize, since Codex invokes skills with `$`.
@@ -129,7 +148,7 @@ The changelog's entry 2026.10.08.1 records why: a Codex user was told to run `/p
 ## Key points
 
 * One sentence to your agent installs focus-kit, and the same sentence updates it; nothing is installed on your machine, nothing is staged or committed, and a kit file you changed stops the update before it writes.
-* The setup file writes only the kit's files and never touches `docs/`, `work/`, `AGENTS.md` or `CLAUDE.md`; a rule change for docs/04, docs/05 or `AGENTS.md` comes as a migration in its report, and until the team applies it as a delivery the process is the old one.
+* The setup file writes only the kit's files and never touches `docs/`, `work/`, `AGENTS.md` or `CLAUDE.md`; a change docs/04, docs/05, docs/06 or `AGENTS.md` needs, a rule, a queue line or a slot, comes as a migration in its report, and until the team applies it as a delivery the process is the old one.
 * The kit's changelog, newest first, says for each version what changed, the problem that caused it, and in a `Migration:` item what to change in the project's documents.
 * Each host finds the rules and the commands in its own folders: Claude Code runs a command as `/propose <slug>`, Codex as `$propose <slug>`, Copilot as `/propose`, which asks for the slug, Windsurf as `@propose <slug>`; every command names the next one in that form.
 * Every host reads a rules file at the start, reads the files you point it at and writes files, and the method needs nothing more.

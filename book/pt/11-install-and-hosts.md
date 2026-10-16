@@ -40,39 +40,57 @@ Um comando seu na pasta de um host, ou uma edição que você fez à mão num do
 
 ## O que uma atualização relata
 
-O docs/04, o docs/05 e o `AGENTS.md` pertencem ao projeto: o time escreveu ali as suas regras, e as suas escolhas junto, como o comando de verificação ou trabalhar em trunk.
-Quando uma versão nova do kit muda uma regra que esses arquivos guardam, o arquivo de setup não a escreve.
-Ele compara os arquivos com os seus próprios modelos e relata cada migração, uma regra que os seus documentos ainda precisam mudar: o caminho, a seção, e o texto que ele propõe, na língua da documentação do projeto.
+O docs/04, o docs/05, o docs/06 e o `AGENTS.md` pertencem ao projeto: o time escreveu ali as suas regras, as suas escolhas junto, como o comando de verificação ou trabalhar em trunk, e a sua fila.
+Quando uma versão nova do kit muda o que esses arquivos deveriam guardar, o arquivo de setup não o escreve.
+Ele compara os arquivos com os seus próprios modelos e relata cada migração, uma mudança de que os seus documentos ainda precisam: o caminho, a seção ou a linha, e o texto que ele propõe, na língua da documentação do projeto.
+Uma migração pode citar uma regra, uma linha da fila ou um slot.
 As suas escolhas ficam: um docs/05 cujo §5 diz "trunk, uma sessão por vez" vê proposto o texto para duas sessões numa pasta, e mantém o seu até o time aceitar a mudança.
 
-Este é o relatório da atualização para 2026.10.13 na biblioteca de empréstimos, escrito para este capítulo:
+Este é o relatório da atualização da 2026.10.13 para a 2026.10.16 na biblioteca de empréstimos, escrito para este capítulo:
 
 ```
-Instalado: focus-kit 2026.10.13, em cada SKILL.md.
-Migrações de processo pendentes: 2.
+Instalado: focus-kit 2026.10.16, em cada SKILL.md.
+Migrações de processo pendentes: 6.
 
-1. docs/05, §5 This project: acrescentar o slot Manuals.
-   "Manuals: docs/manuals/, um arquivo por coisa que uma pessoa faz
-   à mão fora de uma entrega, com o nome do que ele faz."
-2. AGENTS.md, Read before acting: acrescentar a linha
-   "o que uma pessoa faz à mão (publicar, desfazer): docs/manuals/".
+1. docs/05, §2 The flow: depois de "a resposta para ali", acrescentar
+   "ou, quando a pessoa quer defini-la agora, a conversa segue como
+   /propose <slug> na mesma sessão".
+2. docs/05, §4 The queue: acrescentar "Uma linha é a marca, o slug,
+   uma frase e os sufixos; o que aconteceu vai para a página."
+3. docs/05, §5 This project: abrir com "Um slot diz o quê e o
+   comando, em poucas linhas." No slot Manuals, acrescentar "e uma
+   prova que o /apply roda em outra máquina".
+4. AGENTS.md, Non-negotiables, a linha "One delivery": acrescentar
+   a cláusula do item 1.
+5. docs/06, Marco 1, a linha membros carrega histórico. Encurtá-la
+   para "a bibliotecária cadastra, suspende e reativa membros" e
+   levar "membros suspensos mantêm os seus empréstimos, como a
+   bibliotecária decidiu" para work/done/membros.md, que não o tem.
+6. docs/05, §5 Environments: o slot guarda os passos para publicar o
+   app. Manter o comando e apontar para docs/manuals/publicar-o-app.md,
+   que fica com os passos.
 
 docs/ e AGENTS.md não foram alterados.
 ```
 
+Os itens 5 e 6 não mudam nenhuma regra.
+A linha `membros` ainda diz o que foi aquela entrega, e o slot ainda cita o seu comando; cada um perde só o que uma sessão leria à toa toda vez, a razão que o [capítulo 13](13-queue-and-milestones.md) dá para uma linha curta e o [capítulo 10](10-the-documents.md) para um slot curto.
+A decisão fica na página em `work/done/`, para onde o relatório a manda.
+
 O relatório mantém dois fatos separados.
 O `metadata.version` em cada `SKILL.md` diz qual kit está instalado.
 O processo é o que o docs/04, o docs/05 e o `AGENTS.md` dizem, porque é isso que todo comando lê, então um kit atualizado cujas migrações não foram aplicadas ainda roda o processo antigo.
-A atualização termina quando as migrações são aplicadas, e o método as aplica como aplica qualquer mudança: uma linha da fila, definida com o `/propose` e construída com o `/apply`, para que a mudança nas suas regras tenha uma página, verificação e a sua revisão.
+A atualização termina quando as migrações são aplicadas, e o método as aplica como aplica qualquer mudança: uma linha da fila, definida com o `/propose` e construída com o `/apply`, para que a mudança nas suas regras ou na sua fila tenha uma página, verificação e a sua revisão.
 
 Num projeto já documentado, a atualização relata as migrações primeiro, ou diz que não há nenhuma.
 Ela nunca pede que você rode o `/brainstorm` ou o `/analyze` de novo: eles escrevem os documentos de um projeto do zero, e os seus existem.
-Uma versão que não muda nenhuma regra dos seus documentos não relata migração: a 2026.10.08.2 só fez o `/apply` mostrar a sua mensagem de commit também na conversa, então os comandos mudaram e nada mais.
+Uma versão que não pede nada aos seus documentos não relata migração: a 2026.10.08.2 só fez o `/apply` mostrar a sua mensagem de commit também na conversa, então os comandos mudaram e nada mais.
+A 2026.10.15 também não relata nenhuma: ela mudou a forma de uma worktree por entrega, e um docs/05 cujo slot Git não cita pasta para ela já vale a forma nova.
 
 Para saber por que uma migração existe, leia o changelog do kit, `CHANGELOG.md` no repositório dele, `CHANGELOG.pt.md` em português.
 Ele tem uma entrada por versão, a mais nova primeiro; a versão é a linha `Version:` do `SETUP.md`, o mesmo valor do `metadata.version` em cada `SKILL.md`.
 Cada entrada diz o que mudou e o problema que causou a mudança, e um item que começa com `Migration:` (no changelog em português, `Migração:`) diz o que mudar nos documentos do projeto.
-A entrada da 2026.10.13 cita, no seu item de migração, o slot Manuals e a linha do `AGENTS.md` do relatório acima.
+A entrada da 2026.10.16 diz, no seu item de migração, que o relatório lista as linhas da fila que carregam histórico e os slots que narram passos ou saída, com o texto mais curto: os itens 5 e 6 do relatório acima.
 
 ## Como cada host encontra os comandos
 
@@ -120,8 +138,9 @@ Um repositório abre pronto em qualquer host, então cada pessoa fica com o host
 Não há número para esse ganho: é uma propriedade de arquivos simples.
 
 Uma atualização nunca reescreve as regras que o time escreveu.
-No changelog do kit, da 2026.10.07, a versão que trouxe o relatório de migrações, até a 2026.10.13, cinco das seis versões mudam uma regra do docs/04, do docs/05 ou do `AGENTS.md`, e a 2026.10.08.2 é a que não muda.
-Cada uma dessas cinco chegou a um projeto como uma lista do que mudar e onde, com as regras do próprio time ainda no lugar.
+No changelog do kit, da 2026.10.07, a versão que trouxe o relatório de migrações, até a 2026.10.16, seis das oito versões pedem uma mudança nos documentos do projeto, e a 2026.10.08.2 e a 2026.10.15 são as duas que não pedem.
+Cada uma dessas seis chegou a um projeto como uma lista do que mudar e onde, com as regras do próprio time ainda no lugar.
+As linhas e os slots mais curtos da 2026.10.16 rendem em toda entrega, porque uma sessão os lê toda vez: a entrada registra um projeto em que cada `/apply` lia uns 180KB de documentos antes da primeira edição, uma fila de 80KB com linhas de até 4,7KB e um slot Environments de umas 120 linhas.
 
 E o próximo comando chega na forma que o seu host reconhece.
 A entrada 2026.10.08.1 do changelog registra por quê: um usuário do Codex recebeu a instrução de rodar `/propose`, que o Codex não reconhece, já que o Codex invoca skills com `$`.
@@ -129,7 +148,7 @@ A entrada 2026.10.08.1 do changelog registra por quê: um usuário do Codex rece
 ## Pontos-chave
 
 * Uma frase para o seu agente instala o focus-kit, e a mesma frase o atualiza; nada é instalado na sua máquina, nada é colocado em stage nem vai para um commit, e um arquivo do kit que você mudou faz a atualização parar antes de escrever.
-* O arquivo de setup escreve só os arquivos do kit e nunca toca `docs/`, `work/`, `AGENTS.md` ou `CLAUDE.md`; uma mudança de regra para o docs/04, o docs/05 ou o `AGENTS.md` vem como uma migração no relatório dele, e até o time aplicá-la como uma entrega o processo é o antigo.
+* O arquivo de setup escreve só os arquivos do kit e nunca toca `docs/`, `work/`, `AGENTS.md` ou `CLAUDE.md`; uma mudança de que o docs/04, o docs/05, o docs/06 ou o `AGENTS.md` precisa, uma regra, uma linha da fila ou um slot, vem como uma migração no relatório dele, e até o time aplicá-la como uma entrega o processo é o antigo.
 * O changelog do kit, a entrada mais nova primeiro, diz para cada versão o que mudou, o problema que causou a mudança e, num item de migração, o que mudar nos documentos do projeto.
 * Cada host encontra as regras e os comandos nas suas próprias pastas: o Claude Code roda um comando como `/propose <slug>`, o Codex como `$propose <slug>`, o Copilot como `/propose`, que pede o slug, o Windsurf como `@propose <slug>`; todo comando cita o próximo nessa forma.
 * Todo host lê um arquivo de regras no início, lê os arquivos para os quais você aponta e escreve arquivos, e o método não precisa de mais nada.

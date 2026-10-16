@@ -262,7 +262,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.16 and the reposi
 [x] ch15-24-apply-reads      chapters 15 and 24: /apply reads only its queue lines and why; both editions · after kit-2026-10-16
 [ ] ch13-short-lines         chapter 13: a queue line is one sentence, and a request may continue as /propose in the same session; both editions · after kit-2026-10-16
 [x] ch10-12-slots-manuals    chapters 10 and 12: a slot says what and the command, and a manual also holds a proof /apply runs on another machine; both editions · after kit-2026-10-16
-[ ] ch11-update-2026-10-16   chapter 11: the update example and its migration report at 2026.10.16; both editions · after kit-2026-10-16
+[x] ch11-update-2026-10-16   chapter 11: the update example and its migration report at 2026.10.16; both editions · after kit-2026-10-16
 [ ] ch21-container           chapter 21: a worktree per delivery in a container folder, as 2026.10.15 shapes it; both editions · after kit-2026-10-16
 [ ] m13-review               the review of M13 as docs/05 §8 says
 ```
