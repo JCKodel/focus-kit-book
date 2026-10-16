@@ -45,7 +45,7 @@ Cada trabalho ainda é feito, por algo que o processo já tem:
 * **Nenhum spec delta**, o arquivo do OpenSpec que lista só os requisitos que uma mudança acrescenta, altera ou remove, juntado às especificações quando a mudança é arquivada:[^openspec-glossary] os documentos que a entrega muda, na mesma entrega, dizem o que mudou.
 * **Nenhuma pasta de mudança:** a página é a mudança, em `work/<slug>.md` enquanto é construída e em `work/done/` depois.
 * **Nenhuma tarefa numerada:** as linhas de Comportamento, cada uma um teste ou uma checagem.
-* **Nenhuma barreira antes da implementação:** a pessoa que lê a página antes do `/apply`, e pede o que falta.
+* **Nenhuma barreira antes da implementação além de uma página completa:** a página é a única barreira, lida pela pessoa antes do `/apply`, que pede o que falta; o `/apply` recusa uma página que não está completa e aponta o `/propose`.
 * **Nenhuma revisão de uma revisão:** cada linha que uma revisão de marco acrescenta passa pela sua própria página, pela sua prova e pelo commit da pessoa.
 * **Nenhum subagente especializado**, um agente que outro agente lança para um papel estreito com as suas próprias instruções, como um planejador ou um revisor:[^claude-code-subagents] um agente só, que lê os documentos.
 * **Nenhuma ferramenta que as entregas não pediram:** o próprio regulador, que a mantém de fora até uma entrega nomear o erro que ela teria pegado.

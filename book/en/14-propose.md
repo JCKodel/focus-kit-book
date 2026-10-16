@@ -30,7 +30,7 @@ It ends by showing that queue line, `[>] lend-book ...` for the page below, and 
 On a line already `[?]`, it says what the line waits on and goes on only when you say it is resolved; on a line whose `after` names a line not yet `[x]`, it says the same and does not start (chapter 16).
 When it finds, while defining, that the scope waits on an answer nobody has given yet or on another line that must be done first, it writes the page as far as it goes and marks the line `[?]` instead, with `· resume: propose` and what it waits on.
 It never writes, edits or generates code, a migration, a test or configuration.
-The kit's file for the command gives the reason: "*separating deciding from doing is what keeps scope from growing during implementation*".
+The kit's README gives the reason: "*Scope cannot grow during implementation because the person who decided is not in the room.*"
 `/apply` starts in a fresh session, with a clean context, and the page is all it takes from this conversation, so the page has to hold everything the build needs.
 
 ## The page
@@ -95,8 +95,9 @@ Each decision taken from a document names it: the 21 days come from docs/00, and
 The agent drafted the cases that must fail and the edge: the Contract already had `MemberSuspended`, so a suspended member gets a line, and a rule about overdue books implies the day a loan is due, which is not yet overdue.
 
 The Contract is the one section that must be exact.
-The kit's reason: "*a wrong screen is fixed in a session, a wrong column is a migration*".
-A screen is code you rewrite; a column holds data, and changing it means moving the data already there.
+The kit's reason: "*a wrong screen is fixed in a session, a wrong column is a migration, and a wrong access rule has already leaked*".
+A screen is code you rewrite; a column holds data, and changing it means moving the data already there; an access rule decides who reads what, and a wrong one has let data out before anyone reads the page again.
+No later fix undoes the third.
 
 ## Read the page before `/apply`
 

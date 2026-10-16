@@ -30,7 +30,7 @@ Ele termina mostrando essa linha da fila, `[>] emprestar-livro ...` para a pági
 Em uma linha que já está `[?]`, ele diz o que a linha espera e só segue quando você diz que está resolvido; em uma linha cujo `after` nomeia uma linha que ainda não está `[x]`, ele diz o mesmo e não começa (capítulo 16).
 Quando descobre, enquanto define, que o escopo espera uma resposta que ninguém deu ainda ou outra linha que precisa ser feita antes, ele escreve a página até onde ela vai e marca a linha como `[?]` no lugar, com `· resume: propose` e o que ela espera.
 Ele nunca escreve, edita nem gera código, migration, teste ou configuração.
-O arquivo do comando no kit dá o motivo: "*separar decidir de fazer é o que impede o escopo de crescer durante a implementação*".
+O README do kit dá o motivo: "*O escopo não cresce durante a implementação porque quem decidiu não está na sala.*"
 O `/apply` começa em uma sessão nova, com o contexto limpo, e a página é tudo o que ele leva desta conversa, então a página precisa guardar tudo de que a construção precisa.
 
 ## A página
@@ -102,8 +102,9 @@ Cada decisão tirada de um documento o nomeia: os 21 dias vêm do docs/00, e as 
 O agente rascunhou os casos que precisam falhar e o caso de borda: o Contrato já tinha `MembroSuspenso`, então um membro suspenso ganha uma linha, e uma regra sobre livros atrasados implica o dia em que um empréstimo vence, que ainda não é atraso.
 
 O Contrato é a única seção que precisa ser exata.
-O motivo do kit: "*uma tela errada se corrige em uma sessão, uma coluna errada é uma migration*".
-Uma tela é código que você reescreve; uma coluna guarda dados, e mudá-la exige mover os dados que já estão lá.
+O motivo do kit: "*uma tela errada se corrige numa sessão, uma coluna errada é uma migration, e uma regra de acesso errada já vazou*".
+Uma tela é código que você reescreve; uma coluna guarda dados, e mudá-la exige mover os dados que já estão lá; uma regra de acesso decide quem lê o quê, e uma errada já deixou dados saírem antes que alguém releia a página.
+Nenhuma correção posterior desfaz a terceira.
 
 ## Leia a página antes do `/apply`
 

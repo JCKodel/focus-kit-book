@@ -45,7 +45,7 @@ Each job still gets done, by something the process already has:
 * **No spec delta**, the OpenSpec file that lists only the requirements a change adds, changes or removes, merged into the specs when the change is archived:[^openspec-glossary] the documents the delivery changes, in the same delivery, say what changed.
 * **No change folder:** the page is the change, in `work/<slug>.md` while it is built and in `work/done/` afterwards.
 * **No numbered tasks:** the Behaviour lines, each one a test or a check.
-* **No gate before implementation:** the person who reads the page before `/apply`, and asks for what is missing.
+* **No gate before implementation beyond a complete page:** the page is the one gate, read by the person before `/apply`, who asks for what is missing; `/apply` refuses a page that is not complete and points to `/propose`.
 * **No review of a review:** each line a milestone review adds passes through its own page, its proof and the person's commit.
 * **No specialized subagent**, an agent that another agent launches for one narrow role with its own instructions, such as a planner or a reviewer:[^claude-code-subagents] one agent that reads the documents.
 * **No tool the deliveries did not ask for:** the governor itself, which keeps it out until a delivery names the error it would have caught.
