@@ -84,13 +84,13 @@ The update is done when the migrations are applied, and the method applies them 
 
 On a documented project the update reports the migrations first, or says there are none.
 It never asks you to run `/brainstorm` or `/analyze` again: those write a project's documents from nothing, and yours exist.
-A version that asks nothing of your documents reports no migration: 2026.10.08.2 only made `/apply` show its commit message in the conversation too, so the commands changed and nothing else did.
-2026.10.15 reports none either: it changed how a worktree per delivery is laid out, and a docs/05 whose Git slot names no folder for it already means the new layout.
+A version that asks nothing of your documents reports no migration: a version that changes only the commands, such as `/apply` showing its commit message in the conversation too, changes nothing else.
+Neither does a version whose rule your documents already mean: a docs/05 whose Git slot names no folder for a worktree per delivery already means the kit's layout.
 
 To know why a migration exists, read the kit's changelog, `CHANGELOG.md` in its repository, `CHANGELOG.pt.md` in Portuguese.
 It has one entry per version, newest first; the version is the `Version:` line of `SETUP.md`, the same value as the `metadata.version` in each `SKILL.md`.
 Each entry says what changed and the problem that caused it, and an item that starts with `Migration:` names what to change in the project's documents.
-The entry for 2026.10.16 says, in its `Migration:` item, that the report lists the queue lines that carry history and the slots that narrate steps or output, with the shorter wording: items 5 and 6 of the report above.
+Items 5 and 6 of the report above come from such an item, which says that the report lists the queue lines that carry history and the slots that narrate steps or output, with the shorter wording.
 
 ## How each host finds the commands
 
@@ -138,12 +138,9 @@ One repository opens ready in any host, so each person keeps the host they prefe
 There is no number for this gain: it is a property of plain files.
 
 An update never rewrites the rules the team wrote.
-In the kit's changelog, from 2026.10.07, the version that brought the migration report, to 2026.10.16, six of the eight versions ask for a change in the project's documents, and 2026.10.08.2 and 2026.10.15 are the two that do not.
-Each of those six reached a project as a list of what to change and where, with the team's own rules still in place.
-The shorter lines and slots of 2026.10.16 pay on every delivery, because a session reads them each time: the entry records a project where each `/apply` read about 180KB of documents before its first edit, a queue of 80KB whose lines reached 4.7KB and an Environments slot of about 120 lines.
+A version that asks for a change in the project's documents reaches the project as a list of what to change and where, with the team's own rules still in place, and the team applies it as it applies any change.
 
-And the next command arrives in the form your host recognizes.
-The changelog's entry 2026.10.08.1 records why: a Codex user was told to run `/propose`, which Codex does not recognize, since Codex invokes skills with `$`.
+And the next command arrives in the form your host recognizes, because a host may not recognize another's form: Codex does not recognize `/propose`, since Codex invokes skills with `$`.
 
 ## Key points
 

@@ -50,22 +50,21 @@ Cada trabalho ainda é feito, por algo que o processo já tem:
 * **Nenhum subagente especializado**, um agente que outro agente lança para um papel estreito com as suas próprias instruções, como um planejador ou um revisor:[^claude-code-subagents] um agente só, que lê os documentos.
 * **Nenhuma ferramenta que as entregas não pediram:** o próprio regulador, que a mantém de fora até uma entrega nomear o erro que ela teria pegado.
 
-## De um projeto para o kit
+## O erro que rendeu uma marca
 
-A pergunta é feita em cada projeto, e um erro que um projeto prova pode mudar o kit que todo projeto instala.
+A pergunta é feita em cada projeto, e o regulador decide ali, com um erro que aquele projeto encontrou.
 
-O Caso A, um projeto para um cliente em uma plataforma low-code, lia a sua fila em um quadro kanban, e o quadro mostrou o que as três marcas do kit escondiam (capítulo 16).
+O Caso A, um projeto para um cliente em uma plataforma low-code, lia a sua fila em um quadro kanban, e o quadro mostrou o que as três marcas do Caso A escondiam (capítulo 16).
 Uma entrega só chegava a Doing depois de a página dela estar escrita, e cinco linhas travadas nas respostas do cliente pareciam trabalho que ninguém tinha começado.
-O Caso A acrescentou uma marca à mão, `[?]`, para uma linha esperando por uma pessoa: cinco linhas que pareciam paradas eram o erro, e a marca o nomeou.
+O Caso A acrescentou uma marca à mão, `[?]`, para uma linha esperando por uma pessoa: cinco linhas que pareciam paradas eram o erro que rendeu ao Caso A a sua marca, e a marca o nomeou.
 
-O erro não era só do Caso A: todo time que lê a fila como um quadro o encontra no dia em que uma linha espera, ou uma entrega está sendo definida.
-Então o kit adotou a resposta na sua versão 2026.10.05, seis marcas com `[?]` entre elas, e este livro segue o kit.[^adr-0018]
-O regulador decidiu do mesmo jeito: a marca entrou com o erro que a justificava, provado em um projeto, e o kit a levou a todo projeto.
+O erro não é só do Caso A: todo time que lê a fila como um quadro o encontra no dia em que uma linha espera, ou uma entrega está sendo definida.
+As seis marcas do kit respondem ao mesmo erro para todo time assim, com `[?]` entre elas (capítulo 16).
 
 ## O que o time ganha
 
 Cada passo de um processo é pago por toda entrega, então um passo que não pega nada é um imposto sobre todas elas.
-A Ninjobs chegou à abertura ao público com um processo de seis regras, as que o `SETUP.md` do kit agora lista para todo projeto, e duas checagens, depois de 29 checagens a terem acompanhado por quinze dias que construíram quatro telas.
+A Ninjobs chegou à abertura ao público com um processo de seis regras, as que o `SETUP.md` do kit lista para todo projeto, e duas checagens, depois de 29 checagens a terem acompanhado por quinze dias que construíram quatro telas.
 O regulador mantém um processo desse tamanho, e deixa um time dizer sim a um passo com o erro que o justifica escrito.
 
 ## Pontos-chave
@@ -74,8 +73,7 @@ O regulador mantém um processo desse tamanho, e deixa um time dizer sim a um pa
 * A resposta nomeia um erro que aconteceu; um erro possível justifica qualquer coisa, e cada passo é pago por toda entrega depois dele.
 * Um passo que não nomeia erro nenhum sai, e uma lista de exceções reprova em uma entrada sem um aviso vivo.
 * Cada uma das oito coisas que o processo não tem tem o seu trabalho feito por algo que ele tem: a página, os documentos, as linhas de Comportamento, a pessoa, o commit da pessoa, um agente só, e o próprio regulador.
-* Um erro provado em um projeto pode mudar o kit: as linhas do Caso A que pareciam paradas renderam o `[?]`, e o kit o adotou para todo projeto.
+* O regulador decide em cada projeto: as linhas do Caso A que pareciam paradas renderam ao Caso A o seu `[?]`, e as seis marcas do kit respondem ao mesmo erro para todo time que lê a fila como um quadro.
 
 [^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>
 [^claude-code-subagents]: Anthropic, "Create custom subagents", documentação do Claude Code, acesso em 2026-09-29. <https://code.claude.com/docs/en/sub-agents>
-[^adr-0018]: ADR-0018 deste livro, "six marks", 2026-10-05, o arquivo `ADR-0018-six-marks.md` na sua pasta de decisões. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>

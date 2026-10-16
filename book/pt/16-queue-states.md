@@ -12,8 +12,8 @@ As linhas travadas nas respostas do cliente não tinham marca própria: cinco de
 O projeto acrescentou uma quarta marca à mão, `[?]`, para uma linha esperando por uma pessoa.
 
 Dois erros, então: o Doing chegava tarde, e a espera parecia parada.
-O focus-kit responde aos dois desde a sua versão 2026.10.05, com seis marcas, cada uma posta no momento em que o trabalho muda.
-Este capítulo segue a versão 2026.10.13 do kit: o arquivo `SETUP.md` dele guarda o documento de processo, o docs/05, e o §4 desse documento é a fila.
+O focus-kit responde aos dois com seis marcas, cada uma posta no momento em que o trabalho muda.
+O arquivo `SETUP.md` dele guarda o documento de processo, o docs/05, e o §4 desse documento é a fila.
 
 ## Seis marcas
 
@@ -45,7 +45,7 @@ Quem a lê sabe, sem perguntar, que uma sessão está construindo `emprestar-liv
 ## No momento em que o trabalho muda
 
 Uma marca posta quando um comando termina está errada enquanto o comando roda.
-O `/propose` pode conversar por uma hora antes de escrever uma página; com três marcas essa hora se lê como "não definida", e a entrega só aparece como começada depois de a definição dela ter acabado.
+O `/propose` pode conversar por uma hora antes de escrever uma página; uma marca posta só quando a página é escrita lê essa hora como "não definida", e a entrega só aparece como começada depois de a definição dela ter acabado.
 Então cada marca é posta quando o trabalho começa ou para: `[~]` quando a conversa começa, `[>]` quando a página está completa, `[*]` quando a construção começa, `[x]` quando ela termina verde.
 A fila passa a dizer o que está acontecendo agora, não o que terminou por último.
 
@@ -124,8 +124,7 @@ O capítulo 22 mostra como um script espelha a fila no quadro do próprio time, 
 Um gerente lê onde cada entrega está, e o que cada uma em espera espera, sem perguntar a ninguém e sem reunião de status.
 No Caso A, cinco linhas travadas no cliente pareciam trabalho parado, e cada entrega só chegava a Doing depois de a definição dela ter acabado, contado pelo autor na fila e no quadro do projeto; uma marca posta quando o trabalho muda, e uma para a espera, respondem aos dois.
 
-O changelog do kit, na entrada 2026.10.08.3, registra o que a fila ainda não respondia: nada dizia quais linhas podiam rodar juntas, então uma pessoa que queria duas sessões tinha de descobrir isso sozinha antes de abrir a segunda.
-As linhas livres e os arquivos em que mexem agora respondem isso pela fila, sem reunião.
+A fila também diz quais linhas podem rodar juntas: sem isso, uma pessoa que quer duas sessões tem de descobrir sozinha antes de abrir a segunda; as linhas livres e os arquivos em que mexem respondem isso pela fila, sem reunião.
 
 ## Pontos-chave
 

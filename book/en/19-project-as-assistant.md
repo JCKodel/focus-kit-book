@@ -114,7 +114,7 @@ They open the host in the project's root folder, the one with the rules file, an
 The host loads the rules file at the start of the session, and the rules file tells the agent to read the documents before acting, so the manager's session starts from the same documents as the developer's.
 
 The rules file also holds a line for the question a manager asks first: asked where things stand, the agent answers from the queue and `work/`, with the next command written as that host invokes it.
-There is no status command, and the kit's changelog, at entry 2026.10.08.1, gives the reason: the queue already is the status.
+There is no status command, because the queue already is the status.
 Asked "where are we?" on the lending library, a session answers this way, in an answer written for this chapter:
 
 ```text

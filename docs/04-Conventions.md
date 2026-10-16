@@ -25,6 +25,9 @@
   The Portuguese edition shows an English prose artifact (a rules file, a page) translated, and says before it that the original is in English.
   Since `author-review-1`, the Portuguese edition's code speaks Portuguese too: every name the code invents (functions, types, variables, fields, files, folders, slugs, table columns, test names, string messages, comments) is translated, identifiers without accents (`emprestar`, `RecusaDeEmprestimo`, `TemLivrosEmAtraso`), and the vocabulary of docs/03 §running example gives the words; the language's own words (`function`, `return`), library APIs (`describe`, `it`, `expect`, `new Date`), `Result`, `ok`, `err` and their fields, and names an external format fixes (a log's fields, `features/`) stay as they are, and the text says so where such a name appears (chapter 24's log fields). Commands and their output stay as they are.
   Chapter 4, at the first code block, says once that the names are in Portuguese.
+* **The kit as it is.** The book describes focus-kit as it is today: what each rule is, how it works, what the team gains.
+  It cites no changelog entry, names no version as a date ("since its version", "no longer", "before that rule") and shows no measure taken before and after a kit change; a rule's reason is the error it prevents, said in the present.
+  Chapter 11's update report keeps its versions, which are the command's output, and teaches the changelog as a file of the kit (first: `kit-as-it-is`, from `m13-review`).
 * **Context before an excerpt.** A reader who has read only the previous chapters understands every artifact shown without opening anything else (docs/00 product question 5).
   Before it, the text gives what the artifact is about: the project, the problem it answers, where it comes from.
   An excerpt is a whole unit that means something on its own (a page's section, a queue's milestone), never a loose line that leans on the lines around it.

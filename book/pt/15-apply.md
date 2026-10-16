@@ -180,10 +180,10 @@ Se o seu agente responde com linhas de `git commit -m` e nenhum bloco `commit` n
 ## O que o time ganha
 
 Nada é publicado sem uma checagem e uma pessoa: a verificação e a prova conferem a construção, e uma pessoa lê o diff antes de ele existir no histórico.
-O changelog do kit registra por que o `/apply` termina do jeito que termina.
-Na entrada 2026.10.06, a mensagem vivia só no chat: um agente respondia com linhas de `git commit -m`, e quem fazia o commit depois, em outra janela ou em outra sessão, não tinha de onde começar; o bloco `commit` na página dá esse começo.
-Na entrada 2026.10.08.2, uma mensagem sugerida como texto simples em um terminal perdia o destaque que um bloco cercado dava e se misturava ao resto da resposta; o mesmo bloco na conversa a mantém à parte.
-Na entrada 2026.10.08.1, uma pessoa que tinha acabado de usar o kit pela primeira vez sabia que devia fazer o commit, mas teve de procurar na documentação o que vinha depois, e um usuário do Codex foi mandado rodar `/propose`, que o Codex não reconhece; próximos passos escritos por extenso, na forma do host, acabam com essa procura.
+O jeito como o `/apply` termina evita três erros.
+Uma mensagem que vive só no chat, como linhas de `git commit -m`, deixa quem faz o commit depois, em outra janela ou em outra sessão, sem ter de onde começar; o bloco `commit` na página dá esse começo.
+Uma mensagem sugerida como texto simples em um terminal perde o destaque que um bloco cercado dá e se mistura ao resto da resposta; o mesmo bloco na conversa a mantém à parte.
+Uma pessoa que acabou de usar o kit pela primeira vez sabe que deve fazer o commit, mas tem de procurar na documentação o que vem depois, e um comando escrito na forma de outro host é um que o host dela pode não reconhecer; próximos passos escritos por extenso, na forma do host, acabam com essa procura.
 
 E o que divergiu do plano fica escrito onde a próxima pessoa lê.
 Na Ninjobs, a página da entrega que permite a um usuário excluir a própria conta dizia que a tabela que registra uma exclusão pendente não teria regra de escrita nenhuma.

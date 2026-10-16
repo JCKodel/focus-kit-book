@@ -141,12 +141,10 @@ O docs/00 da biblioteca lista as multas por devolução atrasada como em aberto,
 
 A mesma resposta em toda sessão e para toda pessoa: um desenvolvedor, um gestor e um agente numa sessão nova que perguntam o prazo de empréstimo leem uma linha em um documento.
 No Ninjobs uma decisão morava em seis lugares que podiam discordar, e toda entrega pagava para mantê-los em acordo; com um lugar para cada fato, uma mudança é escrita uma vez e toda sessão seguinte a lê.
-Os manuais nasceram de um fato no lugar errado, como conta o changelog do kit na entrada 2026.10.13.
-Um usuário foi publicar de novo o site de um projeto e não achou instruções.
-Os passos existiam, como um subitem do slot Environments do docs/05, escritos para o agente, onde uma pessoa que procura como publicar não procura.
-A entrada 2026.10.16 do changelog conta de um segundo fato no lugar errado.
-Num projeto, os passos de uma prova que o `/apply` rodava em outra máquina não tinham para onde ir senão um slot, e todo `/apply` os lia antes da sua primeira edição.
-Agora o slot guarda o que e o comando, e os passos têm um manual que se encontra pelo nome.
+Um manual tira dois fatos do lugar errado.
+Sem ele, os passos para publicar de novo o site de um projeto moram como um subitem do slot Environments do docs/05, escritos para o agente, onde uma pessoa que procura como publicar não procura.
+E os passos de uma prova que o `/apply` roda em outra máquina, guardados num slot, são lidos por todo `/apply` antes da sua primeira edição.
+O slot guarda o que e o comando, e os passos têm um manual que se encontra pelo nome.
 
 ## Pontos-chave
 

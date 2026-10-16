@@ -84,13 +84,13 @@ A atualização termina quando as migrações são aplicadas, e o método as apl
 
 Num projeto já documentado, a atualização relata as migrações primeiro, ou diz que não há nenhuma.
 Ela nunca pede que você rode o `/brainstorm` ou o `/analyze` de novo: eles escrevem os documentos de um projeto do zero, e os seus existem.
-Uma versão que não pede nada aos seus documentos não relata migração: a 2026.10.08.2 só fez o `/apply` mostrar a sua mensagem de commit também na conversa, então os comandos mudaram e nada mais.
-A 2026.10.15 também não relata nenhuma: ela mudou a forma de uma worktree por entrega, e um docs/05 cujo slot Git não cita pasta para ela já vale a forma nova.
+Uma versão que não pede nada aos seus documentos não relata migração: uma versão que muda só os comandos, como o `/apply` mostrar a sua mensagem de commit também na conversa, não muda mais nada.
+Também não relata uma versão cuja regra os seus documentos já querem dizer: um docs/05 cujo slot Git não cita pasta para uma worktree por entrega já vale a forma do kit.
 
 Para saber por que uma migração existe, leia o changelog do kit, `CHANGELOG.md` no repositório dele, `CHANGELOG.pt.md` em português.
 Ele tem uma entrada por versão, a mais nova primeiro; a versão é a linha `Version:` do `SETUP.md`, o mesmo valor do `metadata.version` em cada `SKILL.md`.
 Cada entrada diz o que mudou e o problema que causou a mudança, e um item que começa com `Migration:` (no changelog em português, `Migração:`) diz o que mudar nos documentos do projeto.
-A entrada da 2026.10.16 diz, no seu item de migração, que o relatório lista as linhas da fila que carregam histórico e os slots que narram passos ou saída, com o texto mais curto: os itens 5 e 6 do relatório acima.
+Os itens 5 e 6 do relatório acima vêm de um item desses, que diz que o relatório lista as linhas da fila que carregam histórico e os slots que narram passos ou saída, com o texto mais curto.
 
 ## Como cada host encontra os comandos
 
@@ -138,12 +138,9 @@ Um repositório abre pronto em qualquer host, então cada pessoa fica com o host
 Não há número para esse ganho: é uma propriedade de arquivos simples.
 
 Uma atualização nunca reescreve as regras que o time escreveu.
-No changelog do kit, da 2026.10.07, a versão que trouxe o relatório de migrações, até a 2026.10.16, seis das oito versões pedem uma mudança nos documentos do projeto, e a 2026.10.08.2 e a 2026.10.15 são as duas que não pedem.
-Cada uma dessas seis chegou a um projeto como uma lista do que mudar e onde, com as regras do próprio time ainda no lugar.
-As linhas e os slots mais curtos da 2026.10.16 rendem em toda entrega, porque uma sessão os lê toda vez: a entrada registra um projeto em que cada `/apply` lia uns 180KB de documentos antes da primeira edição, uma fila de 80KB com linhas de até 4,7KB e um slot Environments de umas 120 linhas.
+Uma versão que pede uma mudança nos documentos do projeto chega ao projeto como uma lista do que mudar e onde, com as regras do próprio time ainda no lugar, e o time a aplica como aplica qualquer mudança.
 
-E o próximo comando chega na forma que o seu host reconhece.
-A entrada 2026.10.08.1 do changelog registra por quê: um usuário do Codex recebeu a instrução de rodar `/propose`, que o Codex não reconhece, já que o Codex invoca skills com `$`.
+E o próximo comando chega na forma que o seu host reconhece, porque um host pode não reconhecer a forma de outro: o Codex não reconhece `/propose`, já que o Codex invoca skills com `$`.
 
 ## Pontos-chave
 

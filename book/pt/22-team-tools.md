@@ -63,7 +63,7 @@ Uma peça ainda não estava provada quando o projeto fechou: a permissão de esc
 ### Uma marca para a espera
 
 Também faltava uma palavra à fila do Caso A: cinco linhas bloqueadas pelo cliente apareciam como trabalho que ninguém tinha começado, e o Caso A acrescentou uma marca à mão, `[?]`, para uma linha esperando por uma pessoa.
-O kit adotou essa marca na sua versão 2026.10.05, com os outros dois motivos de uma linha esperar (capítulo 16).
+O kit tem o seu próprio `[?]`, com os outros dois motivos de uma linha esperar (capítulo 16).
 O que continua uma customização do próprio Caso A são as suas entregas de pergunta, cujo único resultado é uma resposta escrita de alguém de fora do projeto: elas fecham na resposta, não no envio, porque uma sessão certa vez marcou uma delas como concluída quando o email saiu.
 
 ## Por que a wiki não é o docs/
@@ -85,7 +85,7 @@ Não há número medido para esse ganho: o quadro do Caso A rodou em um projeto,
 * O revisor lê a página, depois o diff contra ela; um agente pode revisar primeiro, e uma pessoa decide.
 * Uma issue espelha uma linha da fila pelo slug, e a fila continua a fonte da verdade, porque o agente lê o repositório.
 * Um quadro é um espelho da fila numa só direção, atualizado quando uma marca muda, e nunca em silêncio quando não consegue ser.
-* `[?]` começou como a marca do Caso A para linhas que esperam por uma pessoa e hoje é do kit; as entregas de pergunta, que fecham na resposta, continuam uma customização do Caso A.
+* `[?]` foi a marca do Caso A para linhas que esperam por uma pessoa, e o kit tem a sua própria (capítulo 16); as entregas de pergunta, que fecham na resposta, continuam uma customização do Caso A.
 
 [^gh-prs]: GitHub Docs, "Pull requests", seção "Working with pull requests", acesso em 2026-09-30. <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests>
 [^copilot-review]: GitHub Docs, "About GitHub Copilot code review", seções "Agent skills" e "Validating Copilot code reviews", acesso em 2026-09-30. <https://docs.github.com/en/copilot/concepts/agents/code-review>

@@ -63,7 +63,7 @@ One piece was still unproven when the project closed: the write permission of th
 ### A mark for waiting
 
 Case A's queue also lacked a word: five lines blocked on the client showed as work nobody had started, and Case A added a mark by hand, `[?]`, for a line waiting on a person.
-The kit took that mark in its version 2026.10.05, with the two other reasons a line waits (chapter 16).
+The kit has its own `[?]`, with the two other reasons a line waits (chapter 16).
 What stays Case A's own customization is its question deliveries, whose only output is a written answer from someone outside the project: they close on the answer, not on the send, because a session once marked one done when the email went out.
 
 ## Why the wiki is not docs/
@@ -85,7 +85,7 @@ There is no measured number for this gain: Case A's board ran on one project, an
 * The reviewer reads the page, then the diff against it; an agent may review first, and a person decides.
 * An issue mirrors a queue line through the slug, and the queue stays the source of truth, because the agent reads the repository.
 * A board is a one-way mirror of the queue, refreshed when a mark changes, and never silent when it cannot be.
-* `[?]` began as Case A's mark for lines waiting on a person and is now the kit's; question deliveries, which close on the answer, stay Case A's customization.
+* `[?]` was Case A's mark for lines waiting on a person, and the kit has its own (chapter 16); question deliveries, which close on the answer, stay Case A's customization.
 
 [^gh-prs]: GitHub Docs, "Pull requests", section "Working with pull requests", accessed 2026-09-30. <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests>
 [^copilot-review]: GitHub Docs, "About GitHub Copilot code review", sections "Agent skills" and "Validating Copilot code reviews", accessed 2026-09-30. <https://docs.github.com/en/copilot/concepts/agents/code-review>

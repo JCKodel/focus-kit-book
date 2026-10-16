@@ -152,9 +152,9 @@ Um desenvolvedor, um gerente ou o cliente lê uma página na linguagem do docs/0
 No Caso A, o mesmo formato de página levou perguntas ao cliente e documentos para a passagem do projeto, então uma única skill de revisão serviu a todo tipo de trabalho (capítulo 23).
 E quando a construção termina, a mesma página registra o que aconteceu, então a história de uma decisão é um arquivo, com o nome do seu slug, em todo projeto que o time roda.
 
-O changelog do kit registra por que o `/propose` decide e rascunha.
-Na entrada 2026.10.08.3, um usuário mediu o kit contra o trabalho à mão em uma cópia do mesmo projeto e o achou muito mais lento, em parte porque o `/propose` perguntava o que os docs/00 a 05 já resolviam; uma decisão escrita com a sua fonte deixa uma correção, na revisão, e só onde um documento está errado.
-Na entrada 2026.10.08, uma pessoa que não conhecia a ferramenta sendo construída deixou o resultado esperado para o agente, que entregou uma solução, só o caminho feliz, e o cliente a rejeitou; um Comportamento rascunhado a partir dos documentos, com o que precisa falhar e os casos de borda, põe esses casos diante da pessoa antes de existir qualquer código.
+O `/propose` decide e rascunha porque cada um evita um erro.
+Um `/propose` que pergunta o que os docs/00 a 05 já resolvem deixa o kit mais lento que o trabalho à mão; uma decisão escrita com a sua fonte deixa uma correção, na revisão, e só onde um documento está errado.
+Uma pessoa que não conhece a ferramenta sendo construída deixa o resultado esperado para o agente, que entrega uma solução, só o caminho feliz, e o cliente a rejeita; um Comportamento rascunhado a partir dos documentos, com o que precisa falhar e os casos de borda, põe esses casos diante da pessoa antes de existir qualquer código.
 
 ## Pontos-chave
 

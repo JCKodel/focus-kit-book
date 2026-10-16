@@ -114,7 +114,7 @@ Ele abre o host na pasta raiz do projeto, a que tem o arquivo de regras, e pergu
 O host carrega o arquivo de regras no início da sessão, e o arquivo de regras manda o agente ler os documentos antes de agir, então a sessão do gerente começa dos mesmos documentos que a do desenvolvedor.
 
 O arquivo de regras também tem uma linha para a pergunta que um gerente faz primeiro: perguntado em que pé as coisas estão, o agente responde a partir da fila e de `work/`, com o próximo comando escrito como aquele host o chama.
-Não existe comando de status, e o changelog do kit, na entrada 2026.10.08.1, dá o motivo: a fila já é o status.
+Não existe comando de status, porque a fila já é o status.
 Perguntada "em que pé estamos?" na biblioteca de empréstimos, uma sessão responde assim, numa resposta escrita para este capítulo:
 
 ```text

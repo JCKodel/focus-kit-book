@@ -50,22 +50,21 @@ Each job still gets done, by something the process already has:
 * **No specialized subagent**, an agent that another agent launches for one narrow role with its own instructions, such as a planner or a reviewer:[^claude-code-subagents] one agent that reads the documents.
 * **No tool the deliveries did not ask for:** the governor itself, which keeps it out until a delivery names the error it would have caught.
 
-## From one project to the kit
+## The error that earned a mark
 
-The question is asked in each project, and an error one project proves can change the kit every project installs.
+The question is asked in each project, and the governor decides there, with an error that project met.
 
-Case A, a client project on a low-code platform, read its queue on a kanban board, and the board showed what the kit's three marks hid (chapter 16).
+Case A, a client project on a low-code platform, read its queue on a kanban board, and the board showed what Case A's three marks hid (chapter 16).
 A delivery reached Doing only once its page was written, and five lines blocked on the client's answers looked like work nobody had started.
-Case A added a mark by hand, `[?]`, for a line waiting on a person: five idle-looking lines were the error, and the mark named it.
+Case A added a mark by hand, `[?]`, for a line waiting on a person: five idle-looking lines were the error that earned Case A its mark, and the mark named it.
 
-The error was not Case A's alone: any team that reads its queue as a board meets it the day a line waits, or a delivery is being defined.
-So the kit took the answer in its version 2026.10.05, six marks with `[?]` among them, and this book follows the kit.[^adr-0018]
-The governor still decided: the mark entered with the error that justified it, proven on one project, and the kit carried it to every project.
+The error is not Case A's alone: any team that reads its queue as a board meets it the day a line waits, or a delivery is being defined.
+The kit's six marks answer the same error for every such team, with `[?]` among them (chapter 16).
 
 ## What the team gains
 
 Every step of a process is paid by every delivery, so a step that catches nothing is a tax on all of them.
-Ninjobs reached its public opening on a process of six rules, the ones the kit's `SETUP.md` now lists for every project, and two checks, after 29 checks had gone with it through fifteen days that built four screens.
+Ninjobs reached its public opening on a process of six rules, the ones the kit's `SETUP.md` lists for every project, and two checks, after 29 checks had gone with it through fifteen days that built four screens.
 The governor keeps a process that small, and it lets a team say yes to a step with the error that justifies it written down.
 
 ## Key points
@@ -74,8 +73,7 @@ The governor keeps a process that small, and it lets a team say yes to a step wi
 * The answer names an error that happened; a possible error justifies anything, and every step is paid by every delivery after it.
 * A step that names no error leaves, and a list of exceptions fails on an entry with no live warning.
 * Each of the eight things the process does not have has its job done by something it has: the page, the documents, the Behaviour lines, the person, the person's commit, one agent, and the governor itself.
-* An error proven on one project can change the kit: Case A's idle-looking lines earned `[?]`, and the kit took it for every project.
+* The governor decides in each project: Case A's idle-looking lines earned Case A its `[?]`, and the kit's six marks answer the same error for every team that reads its queue as a board.
 
 [^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>
 [^claude-code-subagents]: Anthropic, "Create custom subagents", Claude Code documentation, accessed 2026-09-29. <https://code.claude.com/docs/en/sub-agents>
-[^adr-0018]: This book's ADR-0018, "six marks", 2026-10-05, the file `ADR-0018-six-marks.md` in its decisions folder. <https://github.com/JCKodel/focus-kit-book/tree/main/docs/adr>

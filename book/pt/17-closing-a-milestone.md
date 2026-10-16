@@ -67,7 +67,7 @@ Eu mantenho assim porque uma revisão das correções acha achados próprios, e 
 
 Na Ninjobs, a revisão na abertura ao público devolveu oito achados, com toda a suíte de testes verde.
 Consultas levavam centenas de milissegundos, uma vaga de emprego grande teria estourado o tempo limite, e três dos achados eram sobre segurança.
-Aquela revisão leu o código; a revisão de marco do kit não lê mais, já que o código de cada entrega é lido antes do seu commit.
+Aquela revisão leu o código; a revisão de marco do kit não lê código, já que o código de cada entrega é lido antes do seu commit.
 Cada entrega tinha passado nos seus próprios testes e na sua própria revisão; só o olhar sobre o todo os viu.
 
 Eu pus os oito em uma entrega em vez de oito linhas.

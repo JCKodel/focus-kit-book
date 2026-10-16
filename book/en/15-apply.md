@@ -180,10 +180,10 @@ If your agent answers with `git commit -m` lines and no `commit` block on the pa
 ## What the team gains
 
 Nothing ships without a check and a person: verify and the proof check the build, and a person reads the diff before it exists in the history.
-The kit's changelog records why `/apply` ends the way it does.
-At entry 2026.10.06, the message lived only in the chat: an agent answered with `git commit -m` lines, and whoever committed later, in another window or another session, had nowhere to start from; the `commit` block on the page gives them that start.
-At entry 2026.10.08.2, a message suggested as plain text in a terminal lost the highlight a fenced block gave and blended into the rest of the reply; the same block in the conversation keeps it apart.
-At entry 2026.10.08.1, a person who had just used the kit for the first time knew to commit but had to search the documentation for what came after, and a Codex user was told to run `/propose`, which Codex does not recognize; next steps written out, in the host's form, end that search.
+The way `/apply` ends prevents three errors.
+A message that lives only in the chat, as `git commit -m` lines, leaves whoever commits later, in another window or another session, nowhere to start from; the `commit` block on the page gives them that start.
+A message suggested as plain text in a terminal loses the highlight a fenced block gives and blends into the rest of the reply; the same block in the conversation keeps it apart.
+A person who has just used the kit for the first time knows to commit but has to search the documentation for what comes after, and a command written in another host's form is one their host may not recognize; next steps written out, in the host's form, end that search.
 
 And what diverged from the plan is written where the next person reads it.
 On Ninjobs, the page of the delivery that lets a user delete their account said the table recording a pending deletion would have no write rule at all.

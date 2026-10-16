@@ -66,7 +66,7 @@ I keep it that way because a review of the fixes finds findings of its own, and 
 
 On Ninjobs the review at the public opening returned eight findings, with the whole test suite green.
 Queries took hundreds of milliseconds, a large job posting would have timed out, and three of the findings were about security.
-That review read the code; the kit's milestone review no longer does, since each delivery's code is read before its commit.
+That review read the code; the kit's milestone review reads none, since each delivery's code is read before its commit.
 Every delivery had passed its own tests and its own review; only the look at the whole saw them.
 
 I put all eight into one delivery instead of eight lines.

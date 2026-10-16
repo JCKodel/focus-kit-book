@@ -265,7 +265,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.16 and the reposi
 [x] ch11-update-2026-10-16   chapter 11: the update example and its migration report at 2026.10.16; both editions · after kit-2026-10-16
 [x] ch21-container           chapter 21: a worktree per delivery in a container folder, as 2026.10.15 shapes it; both editions · after kit-2026-10-16
 [x] m13-review               the review of M13 as docs/05 §8 says
-[ ] kit-as-it-is             the book describes focus-kit as it is today, never comparing it with an earlier version of itself, and docs/04 says so; both editions
-[ ] plain-numbers            no passage of the book reads as a run of numbers: each keeps the numbers that prove its point; both editions
+[x] kit-as-it-is             the book describes focus-kit as it is today, never comparing it with an earlier version of itself, and docs/04 says so; both editions
+[ ] plain-numbers            no passage of the book reads as a run of numbers: each keeps the numbers that prove its point; both editions · after kit-as-it-is
 [ ] ch21-worktree-first      chapter 21 says what a worktree is before it relies on the word; both editions
 ```

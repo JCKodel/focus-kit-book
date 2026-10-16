@@ -126,14 +126,11 @@ Na Ninjobs ela guardou 102 entregas, feitas e ainda não feitas, em um arquivo.
 No Caso A, um projeto para um cliente em uma plataforma low-code, o Microsoft Power Apps com o Copilot Studio, o relatório de status e a estimativa de risco para o gerente de projeto foram escritos a partir da fila e das páginas, não de memória, e a fila deu o ritmo: cerca de 9 linhas fechadas e 6 abertas por dia.
 O [capítulo 19](19-project-as-assistant.md) conta o resto do Caso A, e o [capítulo 22](22-team-tools.md) mostra como a fila dele foi espelhada no quadro que o gerente de projeto já usava.
 
-O changelog do kit, na entrada 2026.10.08.3, conta por que a ordem está escrita: a regra de que a ordem é a prioridade sempre valeu e não estava escrita em lugar nenhum, então um usuário pediu ao kit um jeito de classificar as entregas.
-Escrita como regra, ela dispensa classificação: a fila já é uma.
-A entrada 2026.10.06.1 conta por que o código só muda dentro do `/apply`: antes dessa regra, um agente a quem pediam uma correção numa sessão comum editava o código direto, sem linha na fila, sem página e sem verify.
-Desde então uma mudança pedida fora do `/apply` custa uma linha, e ganha uma página, uma prova e o commit da pessoa.
-A entrada 2026.10.16 conta por que uma linha tem uma frase: em um projeto as linhas de pedido chegaram a 4,7 KB, porque o detalhe de um pedido não tinha outro lugar além da linha, e toda sessão as lia.
-Desde então a linha tem uma frase e o detalhe vai para uma página, na mesma sessão se a pessoa quiser.
-A fila deste próprio livro foi cortada do mesmo jeito: quando ele passou para a 2026.10.16, 61 das suas 150 linhas passavam de 200 caracteres e a maior tinha 639; depois, 12 e 223.[^short-lines]
-A mesma fila mostra o `· after` funcionando: no marco M12 dela, sete linhas terminam com `· after kit-2026-10-13`; cada uma leva capítulos para a versão 2026.10.13 do kit, que o repositório precisava rodar antes, e nenhuma delas parece travada enquanto espera a sua vez.[^queue-m12]
+Três regras da fila evitam, cada uma, um erro.
+A ordem é a prioridade, escrita: sem ela, um time procura um jeito de classificar as suas entregas, e com ela a fila já é a classificação.
+O código só muda dentro do `/apply`: sem essa regra, um agente a quem pedem uma correção numa sessão comum edita o código direto, sem linha na fila, sem página e sem verify; com ela, uma mudança pedida fora do `/apply` custa uma linha, e ganha uma página, uma prova e o commit da pessoa.
+Uma linha tem uma frase: quando o detalhe de um pedido não tem outro lugar além da linha, as linhas crescem e toda sessão as lê; com uma frase, o detalhe vai para uma página, na mesma sessão se a pessoa quiser.
+A fila deste próprio livro mostra o `· after` funcionando: no marco M12 dela, sete linhas terminam com `· after kit-2026-10-13`; cada uma precisa da atualização `kit-2026-10-13` feita antes, e nenhuma delas parece travada enquanto espera a sua vez.[^queue-m12]
 
 ## Pontos-chave
 
@@ -145,6 +142,5 @@ A mesma fila mostra o `· after` funcionando: no marco M12 dela, sete linhas ter
 * Uma dependência conhecida quando a linha é acrescentada é escrita junto, `· after <slug>`: uma ordem, não uma espera, então a linha mantém `[ ]`.
 * Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido; o código só muda dentro do `/apply`, e uma mudança pedida em qualquer outro lugar vira uma linha, ou segue como `/propose` na mesma sessão quando você a quer definida agora.
 
-[^short-lines]: J.C. Ködel, "One Page at a Time", a entrega `kit-2026-10-16`, `work/done/kit-2026-10-16.md`, os tamanhos da fila antes e depois, 2026-10, no repositório do livro. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/kit-2026-10-16.md>
 [^queue-m12]: J.C. Ködel, "One Page at a Time", a fila, `docs/06-Queue.md`, marco M12, 2026-10, no repositório do livro. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md>
 

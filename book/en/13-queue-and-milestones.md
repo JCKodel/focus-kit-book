@@ -124,14 +124,11 @@ On Ninjobs it held 102 deliveries, done and not yet done alike, in one file.
 On Case A, a client project on a low-code platform, Microsoft Power Apps with Copilot Studio, the status report and the risk estimate for the project manager were written from the queue and the pages, not from memory, and the queue gave the pace: about 9 lines closed and 6 opened a day.
 [Chapter 19](19-project-as-assistant.md) tells the rest of Case A, and [chapter 22](22-team-tools.md) shows how its queue was mirrored on the board its project manager already used.
 
-The kit's changelog, at entry 2026.10.08.3, tells why the order is written down: the rule that the order is the priority had always held and was written nowhere, so a user asked the kit for a way to rank deliveries.
-Written as a rule, it needs no ranking: the queue already is one.
-Its entry 2026.10.06.1 tells why code changes only inside `/apply`: before that rule, an agent asked for a correction in an ordinary session edited the code directly, with no line in the queue, no page and no verify.
-Since then a change asked outside `/apply` costs one line, and it gets a page, a proof and the person's commit.
-Its entry 2026.10.16 tells why a line holds one sentence: in one project the request lines grew to 4.7 KB, because the detail of a request had nowhere to go but the line, and every session read them.
-Since then the line holds one sentence and the detail goes to a page, in the same session if the person wants it.
-This book's own queue was cut the same way: when it moved to 2026.10.16, 61 of its 150 lines were over 200 characters and the longest held 639; after, 12 and 223.[^short-lines]
-The same queue shows `· after` at work: in its milestone M12, seven lines end with `· after kit-2026-10-13`; each brings chapters to the kit's version 2026.10.13, which the repository had to run first, and none of them reads as stuck while it waits its turn.[^queue-m12]
+Three rules of the queue each prevent an error.
+The order is the priority, written down: without it, a team looks for a way to rank its deliveries, and with it the queue already is the ranking.
+Code changes only inside `/apply`: without that rule, an agent asked for a correction in an ordinary session edits the code directly, with no line in the queue, no page and no verify; with it, a change asked outside `/apply` costs one line, and it gets a page, a proof and the person's commit.
+A line holds one sentence: when the detail of a request has nowhere to go but the line, the lines grow and every session reads them; with one sentence, the detail goes to a page, in the same session if the person wants it.
+This book's own queue shows `· after` at work: in its milestone M12, seven lines end with `· after kit-2026-10-13`; each needs the update `kit-2026-10-13` done first, and none of them reads as stuck while it waits its turn.[^queue-m12]
 
 ## Key points
 
@@ -143,6 +140,5 @@ The same queue shows `· after` at work: in its milestone M12, seven lines end w
 * A dependency known when a line is added is written with it, `· after <slug>`: an order, not a wait, so the line keeps `[ ]`.
 * No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept; code changes only inside `/apply`, and a change asked anywhere else becomes a line, or continues as `/propose` in the same session when you want it defined now.
 
-[^short-lines]: J.C. Ködel, "One Page at a Time", the delivery `kit-2026-10-16`, `work/done/kit-2026-10-16.md`, the queue's sizes before and after, 2026-10, in the book's repository. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/kit-2026-10-16.md>
 [^queue-m12]: J.C. Ködel, "One Page at a Time", the queue, `docs/06-Queue.md`, milestone M12, 2026-10, in the book's repository. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md>
 

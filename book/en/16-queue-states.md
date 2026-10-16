@@ -12,8 +12,8 @@ Lines blocked on the client's answers had no mark of their own: five of them sat
 The project added a fourth mark by hand, `[?]`, for a line waiting on a person.
 
 Two errors, then: Doing came late, and waiting looked idle.
-focus-kit answers both since its version 2026.10.05, with six marks, each set at the moment the work changes.
-This chapter follows the kit's version 2026.10.13: its file `SETUP.md` holds the process document, docs/05, and that document's §4 is the queue.
+focus-kit answers both with six marks, each set at the moment the work changes.
+Its file `SETUP.md` holds the process document, docs/05, and that document's §4 is the queue.
 
 ## Six marks
 
@@ -44,7 +44,7 @@ Anyone reading it knows, without asking, that a session is building `lend-book`,
 ## At the moment the work changes
 
 A mark set when a command ends is wrong for as long as the command runs.
-`/propose` can talk for an hour before it writes a page; under three marks that hour reads as "not defined", and the delivery shows up as started only once its definition is over.
+`/propose` can talk for an hour before it writes a page; a mark set only when the page is written reads that hour as "not defined", and the delivery shows up as started only once its definition is over.
 So each mark is set when the work starts or stops: `[~]` when the conversation begins, `[>]` when the page is complete, `[*]` when the build begins, `[x]` when it ends green.
 The queue then says what is happening now, not what last finished.
 
@@ -123,8 +123,7 @@ Chapter 22 shows how a script mirrors the queue to a team's own board, one way.
 A manager reads where every delivery stands, and what each waiting one waits on, without asking anyone and without a status meeting.
 On Case A, five lines blocked on the client read as idle work, and every delivery reached Doing only after its definition was over, counted by the author on the project's queue and board; a mark set when the work changes, and one for waiting, answer both.
 
-The kit's changelog, at entry 2026.10.08.3, records what the queue did not yet answer: nothing said which lines could run together, so a person who wanted two sessions had to work it out alone before opening the second.
-The free lines and the files they touch now answer it from the queue, without a meeting.
+The queue also says which lines can run together: without that, a person who wants two sessions has to work it out alone before opening the second; the free lines and the files they touch answer it from the queue, without a meeting.
 
 ## Key points
 

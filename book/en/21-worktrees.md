@@ -62,7 +62,7 @@ In one folder, each session sees the other's work as it happens, and most of it 
 * another delivery's entries are already staged.
 
 Each is the other session's work: the session goes on, and touches none of it.
-The kit's changelog, at entry 2026.10.08.3, tells why this is written down: a user ran two sessions on one repository, on different modules, and the second stopped because the first had changed docs/06, when it had everything it needed to go on.
+This is written down because, without it, a second session on another module stops when the first changes docs/06, though it has everything it needs to go on.
 
 Two things are a conflict:
 
@@ -194,7 +194,7 @@ You review and commit on the branch, merge into `main` with `--no-ff`, remove th
 The agent never commits, merges, resolves a conflict or removes a worktree: every step that changes the history is yours, as in every git strategy.
 To run two deliveries at once in worktrees, open one session per folder: one in `main/` for each `/propose`, one in each worktree for its `/apply`.
 
-One shape for every tool and every person has a reason, which the kit's changelog tells at entry 2026.10.15: a `/propose` running in the background entered a worktree its host had made on its own, in the host's folder, and the person copied the page to the main branch by hand, because nothing said where a delivery's worktree belongs.
+One shape for every tool and every person prevents an error: when nothing says where a delivery's worktree belongs, a `/propose` running in the background enters a worktree its host made on its own, in the host's folder, and the person copies the page to the main branch by hand.
 
 ## When the branches meet: the conflict
 
@@ -278,8 +278,8 @@ I measured it once, on a small TypeScript project of mine: two deliveries built 
 The same run paid the costs of the section above: each worktree's `node_modules` took 155 MB of disk, and the two test runs collided once on a shared port and passed when run again; the queue conflicted, as it always does.[^parallel-run]
 That run was in worktrees.
 One folder removes the second folder, the second install of 155 MB, the merge and the queue's conflict; no run measured two sessions in one folder, so that gain has no number of its own.
-The rule of what is not a conflict removes the error the kit's changelog records: a second session that stopped on a changed queue when it had everything it needed to go on.
-The one shape of a worktree per delivery removes the error the same changelog records at 2026.10.15: a page written in a worktree its host had made elsewhere, and copied to the main branch by hand.
+The rule of what is not a conflict removes an error: a second session that stops on a changed queue when it has everything it needs to go on.
+The one shape of a worktree per delivery removes another: a page written in a worktree its host made elsewhere, and copied to the main branch by hand.
 One run is a sign, not a rate: the gain holds while the deliveries' files do not meet, and it ends at the speed of the person who reviews and commits them.
 
 ## Key points

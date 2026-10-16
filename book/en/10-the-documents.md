@@ -141,12 +141,10 @@ The library's docs/00 lists fines for late returns as open, so a page that touch
 
 The same answer in every session and for every person: a developer, a manager and a fresh agent who ask the loan period read one line in one document.
 On Ninjobs a decision lived in six places that could disagree, and every delivery paid to keep them in step; with one place per fact, a change is written once and every later session reads it.
-The manuals came from a fact in the wrong place, as the kit's changelog tells in its entry 2026.10.13.
-A user went to republish a project's site and found no instructions.
-The steps existed, as a sub-item of the Environments slot of docs/05, written for the agent, where a person looking for how to publish does not look.
-The changelog's entry 2026.10.16 tells of a second fact in the wrong place.
-In one project the steps of a proof `/apply` ran on another machine had nowhere to go but a slot, and every `/apply` read them before its first edit.
-Now the slot holds what and the command, and the steps have a manual found by its name.
+A manual keeps two facts out of the wrong place.
+Without it, the steps to republish a project's site live as a sub-item of the Environments slot of docs/05, written for the agent, where a person looking for how to publish does not look.
+And the steps of a proof `/apply` runs on another machine, kept in a slot, are read by every `/apply` before its first edit.
+The slot holds what and the command, and the steps have a manual found by its name.
 
 ## Key points
 

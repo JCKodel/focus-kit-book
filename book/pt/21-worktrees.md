@@ -62,7 +62,7 @@ Em uma pasta, cada sessão vê o trabalho da outra enquanto ele acontece, e quas
 * as entradas de outra entrega já estão em stage.
 
 Cada um é trabalho da outra sessão: a sessão segue, e não mexe em nada disso.
-O changelog do kit, na entrada 2026.10.08.3, conta por que isso foi escrito: um usuário rodou duas sessões em um repositório, em módulos diferentes, e a segunda parou porque a primeira tinha mudado o docs/06, quando tinha tudo de que precisava para seguir.
+Isso está escrito porque, sem isso, uma segunda sessão em outro módulo para quando a primeira muda o docs/06, embora tenha tudo de que precisa para seguir.
 
 Duas coisas são um conflito:
 
@@ -194,7 +194,7 @@ Você revisa e faz o commit no branch, faz o merge no `main` com `--no-ff`, remo
 O agente nunca faz commit, merge, resolve um conflito ou remove um worktree: cada passo que muda o histórico é seu, como em toda estratégia de git.
 Para rodar duas entregas ao mesmo tempo em worktrees, abra uma sessão por pasta: uma em `main/` para cada `/propose`, uma em cada worktree para o seu `/apply`.
 
-Uma forma só para toda ferramenta e toda pessoa tem um motivo, que o changelog do kit conta na entrada 2026.10.15: um `/propose` rodando em segundo plano entrou em um worktree que o host dele tinha criado por conta própria, na pasta do host, e a pessoa copiou a página para o branch principal à mão, porque nada dizia onde fica o worktree de uma entrega.
+Uma forma só para toda ferramenta e toda pessoa evita um erro: quando nada diz onde fica o worktree de uma entrega, um `/propose` rodando em segundo plano entra em um worktree que o host dele criou por conta própria, na pasta do host, e a pessoa copia a página para o branch principal à mão.
 
 ## Quando os branches se encontram: o conflito
 
@@ -278,8 +278,8 @@ Eu medi isso uma vez, em um pequeno projeto meu em TypeScript: duas entregas con
 A mesma execução pagou os custos da seção acima: o `node_modules` de cada worktree ocupou 155 MB de disco, e as duas execuções de teste colidiram uma vez em uma porta compartilhada e passaram quando rodadas de novo; a fila deu conflito, como sempre dá.[^parallel-run]
 Essa execução foi em worktrees.
 Uma pasta tira a segunda pasta, a segunda instalação de 155 MB, o merge e o conflito da fila; nenhuma execução mediu duas sessões em uma pasta, então esse ganho não tem número próprio.
-A regra do que não é conflito tira o erro que o changelog do kit registra: uma segunda sessão que parou numa fila mudada quando tinha tudo de que precisava para seguir.
-A forma única de um worktree por entrega tira o erro que o mesmo changelog registra em 2026.10.15: uma página escrita em um worktree que o host tinha criado em outro lugar, e copiada para o branch principal à mão.
+A regra do que não é conflito tira um erro: uma segunda sessão que para numa fila mudada quando tem tudo de que precisa para seguir.
+A forma única de um worktree por entrega tira outro: uma página escrita em um worktree que o host criou em outro lugar, e copiada para o branch principal à mão.
 Uma execução é um sinal, não uma taxa: o ganho vale enquanto os arquivos das entregas não se encontram, e termina na velocidade da pessoa que as revisa e faz o commit delas.
 
 ## Pontos-chave
