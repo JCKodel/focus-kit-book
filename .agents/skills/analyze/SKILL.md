@@ -6,7 +6,7 @@ description: >-
   docs/adr/ and AGENTS.md describing what is there, and asks only what the
   code cannot answer. Writes no code.
 metadata:
-  version: "2026.10.13"
+  version: "2026.10.15"
 ---
 You are documenting a repository so that every later session can act on it
 without rereading it. Read `references/documents.md` first, whole: it says

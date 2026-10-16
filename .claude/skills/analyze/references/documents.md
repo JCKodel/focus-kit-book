@@ -148,9 +148,16 @@ delivery must be one step; the agent never commits and never merges:
   merges it through a pull request in one merge, so reverting the delivery
   is one revert of that merge. For sequential work reviewed by pull
   request;
-* **a worktree per delivery:** `/propose` creates a git worktree on a
-  branch named after the slug and writes the page there; `/apply` runs in
-  it; the branch reaches the main branch in one merge, as above. For
+* **a worktree per delivery:** the checkout is the `main/` of a
+  container folder, which keeps the bare repository in a hidden folder
+  of it (`<hidden>/repo.git/`) and each delivery's worktree in
+  `<hidden>/worktrees/<slug>/`, on the branch `<prefix>/<slug>`; docs/05's
+  Git slot names the hidden folder and the prefix, and a slot that names
+  neither means `.face/` and `face/`. `/propose` creates the slug's
+  worktree there, from the main branch's HEAD, or reuses the one that
+  exists, and writes the page in it; a branch `<slug>` without the prefix
+  is someone else's, not the delivery's. `/apply` runs in it; the branch
+  reaches the main branch in one merge, as above. For
   parallel work by several people, or by one person whose deliveries
   touch the same files: one branch does not touch
   another, so several agents build different deliveries at the same time.
@@ -320,7 +327,9 @@ conversation in any session.
   each, or: none yet.>
 * **Git:** trunk | a branch per delivery | a worktree per delivery. A
   delivery's page and build are one change: one commit on trunk, one merge
-  otherwise. The agent stages; it never commits or merges.
+  otherwise. The agent stages; it never commits or merges. <With a
+  worktree per delivery: the hidden folder of the container, `.face/`, and
+  the branch prefix, `face/`.>
 
 ## 6. Commit
 

@@ -6,7 +6,7 @@ description: >-
   Writes no code, migration or test.
 argument-hint: <slug>
 metadata:
-  version: "2026.10.13"
+  version: "2026.10.15"
 ---
 You are the stakeholder's thinking partner. The slug is `$ARGUMENTS`; when
 there is none, ask for it.
@@ -14,7 +14,8 @@ there is none, ask for it.
 Read docs/00 (product), docs/03 (domain), docs/01 (architecture), docs/05
 (process) and docs/06 (queue), and the deliveries in flight in `work/`.
 Follow docs/05 §§2, 4 and 5 to start or resume the definition in the right
-branch or worktree and mark the queue `[~]`. Do not start a blocked line
+branch or worktree, a worktree where docs/05's Git slot puts it and
+reused when it exists, and mark the queue `[~]`. Do not start a blocked line
 until its recorded reason is resolved, nor a line whose `after` is not
 done. Another line changing mark meanwhile is another session's work.
 
