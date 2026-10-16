@@ -9,7 +9,7 @@ Ninjobs started with OpenSpec, one of the Spec-Driven Development tools of chapt
 Every feature was a change, a folder with its proposal, its specs, its design and its tasks, and every decision was written again in the project's documents and in its ADRs, the architecture decision records, one file per decision (chapter 10).
 Before a delivery counted as done, it had to pass 29 checks.
 
-In fifteen days that produced 87 commits, 35 changes and 37,228 lines of spec, for four screens and one table of data.
+In fifteen days that produced 37,228 lines of spec, for four screens and one table of data.
 None of the product's core flow existed yet.
 
 ## What went wrong
@@ -76,12 +76,12 @@ Flutter could build the product, and what the agent had seen in training was the
 ## What the team gains
 
 A process that carries a product instead of weighing on it.
-Before, fifteen days on Ninjobs gave four screens and 37,228 lines of spec, with every decision in six places and 29 checks that never caught a product error.
-After, thirteen days gave the public opening, 91 deliveries of one page each and 19 design boards delivered, with each fact in one place and two checks aimed at the product.
+Before, the old process gave Ninjobs four screens in fifteen days, with every decision repeated in many places and checks that never caught a product error.
+After, one page per delivery gave the public opening in thirteen days, with each fact in one place and two checks aimed at the product.
 
 ## Key points
 
-* On Ninjobs, OpenSpec gave four screens in fifteen days: each decision lived in six places, and 29 checks guarded the form and never the product.
+* On Ninjobs, OpenSpec gave four screens in fifteen days: each decision lived in many places, and its checks guarded the form and never the product.
 * The cost was the number of places, not the size of each file; the architecture was sound, and I lost KISS and YAGNI by requiring its full form on every feature.
 * The restart kept one page per delivery, two commands, one queue line per delivery, two checks and the governor's question, and reached the public opening thirteen days later.
 * Each rule of the kit answers a failure: six places, a build that decides as it goes, commands that drift, an outline that mixed plan and reasoning, checks blind to the product, and checks that grew unasked.

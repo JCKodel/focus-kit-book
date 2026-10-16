@@ -30,8 +30,8 @@ An agent's first answer usually is: it runs, it reads well, it does what was ask
 **A person takes the aid's answer in place of checking.**
 Kathleen Mosier and Linda Skitka defined automation bias in 1996: "*the tendency to use automated cues as a heuristic replacement for vigilant information seeking and processing*" (quoted in Mosier and Manzey 2019).[^mosier-manzey-2019]
 Skitka, Mosier and Burdick measured it in 1999, with 80 students on a simulated flight task, some with an automated aid and some without.[^skitka-1999]
-On the six events the aid did not flag, those with the aid were right 59% of the time against 97% without it: they missed 41% of the events, against 3%.
-When the aid recommended something wrong, on six occasions, participants followed on average 65% of the six wrong recommendations, and all but one participant followed at least one.
+On the six events the aid did not flag, those with the aid were right 59% of the time against 97% without it.
+When the aid recommended something wrong, on six occasions, all but one participant followed at least one.
 
 **A person lacks the time or the means to improve it.**
 A 2025 survey by Microsoft Research and Carnegie Mellon University asked 319 knowledge workers for examples of their own work with generative AI.[^lee-2025]
@@ -39,11 +39,11 @@ Among what kept them from thinking critically about an answer, 44 named a lack o
 In the same survey, more confidence in AI went with less critical thinking, as the workers reported it themselves; the survey measured what they said, not the quality of their work.
 
 The habit is common at work.
-In a field study of 244 consultants of the Boston Consulting Group, published by Harvard Business School, 27% (63) handed the task to the model, and 44% of those (28 of 63) took its output unchanged.[^randazzo-hbs-26-036]
+In a field study of 244 consultants of the Boston Consulting Group, published by Harvard Business School, 27% handed the task to the model, and 44% of those took its output unchanged.[^randazzo-hbs-26-036]
 
 An unchecked answer costs little while the task is one the model does well, and much when it is not.
-In an experiment with the same firm's consultants, Dell'Acqua and colleagues found that on tasks inside what the model did well, consultants with AI finished 12.2% more tasks, 25.1% faster, with quality up 29.9% to 33.9%.[^dell-acqua-2026]
-On a task outside it, those with AI were 19 percentage points less likely to be correct: 60% and 70.6% against 84.5% without it.[^dell-acqua-2026]
+In an experiment with the same firm's consultants, Dell'Acqua and colleagues found that on tasks inside what the model did well, consultants with AI finished 25.1% faster, with quality up 29.9% to 33.9%.[^dell-acqua-2026]
+On a task outside it, those with AI were 19 percentage points less likely to be correct than those without it.[^dell-acqua-2026]
 Nothing on the answer says on which side of that line it fell.
 
 ## What the agent does not propose
@@ -126,8 +126,7 @@ Each pair, first and challenged, was scored blind on three criteria of the arm, 
 The judge would have sent the challenged answer in all 9 pairs.
 
 The challenge was paid for in time and tokens.
-With the three runs of each arm summed, the challenged sessions took 2.9 to 8.8 times as long as the first answers: 201 against 1,337 seconds in the limit arm, 81 against 710 in the audience arm, 390 against 1,130 in the cost arm.
-They wrote 2.7 to 9.4 times the output tokens: 24,220 against 147,419, 7,376 against 68,989, and 41,420 against 110,334.
+With the three runs of each arm summed, the challenged sessions took 2.9 to 8.8 times as long as the first answers, and wrote 2.7 to 9.4 times the output tokens.
 One session at a time, a first answer took 24 seconds to just over 2 minutes, and a challenged session 3 to 9 minutes.
 
 On a fixed subscription, those tokens come out of the plan's session limit: the use of the model a plan allows in a window of hours, after which the host refuses new turns until the window ends.
@@ -137,7 +136,7 @@ If you pay per token instead, [chapter 24](24-cost-and-where.md) shows how to tu
 
 The cost arm also measured what each setup costs in use.
 Five questions about the project, each in a fresh session, were asked of every setup: all 30 answers were correct, first and challenged.
-In runs 1 and 2, the challenged setup answered the five questions in 26% and 18% less time, with 27% and 29% fewer output tokens; in run 3, in 14% less time but with 9% more output tokens.
+In every run the challenged setup answered the five questions in 14% to 26% less time, and wrote fewer output tokens in two runs and 9% more in the third.
 
 The limits are plain.
 Three pairs per arm is a recorded experiment, not a study, and has no statistics.
@@ -158,7 +157,7 @@ What they avoid is what the studies measured: answers taken unchecked, from an a
 * A first answer feels final because a person stops at good enough (Simon), takes the aid's answer in place of checking (automation bias, Skitka), and lacks the time or the means to improve it (Lee et al.).
 * An agent does not propose, unasked, to test a limit it claimed, to fit the result to its reader's time, to fit it to the cost of each use, or what nobody asked for.
 * The challenge protocol is four turns, sent one at a time after the first answer: (1) "Before you change anything, ask me what you need to know to do this well."; (2) "What did you say is not possible, or not worth doing? Test each one and show me the result."; (3) "Who reads or uses this, how much time do they have, and what does each use cost? Change the result to fit."; (4) "What did I not ask for that I would want? Add what is worth it, and tell me what you left out."
-* Turn 2 asks for a test because "Are you sure?" invites sycophancy: models changed their first answer 32% to 86% of the time after it.
+* Turn 2 asks for a test because "Are you sure?" invites sycophancy, a new answer chosen to please.
 * On the book's experiment the challenged answer won 9 of 9 blind pairs and took about 3 to 9 times the time and output tokens, which a subscriber pays from the plan's session limit; three pairs per arm, judged by the same model, so send it where the result is used often or read in a hurry.
 
 [^ask-for-more-run]: J.C. Ködel, "One Page at a Time", the record of the challenge protocol experiment, 2026-10, in the book's repository. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/ask-for-more-experiment-run>

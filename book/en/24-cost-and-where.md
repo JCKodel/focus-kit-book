@@ -36,13 +36,7 @@ Claude Code keeps a log of every session, with the tokens of every call, and I c
 | Output | 13,871,893 | 0.3% |
 | All | 4,009,248,425 | 100% |
 
-The project had 93 finished pages, one per delivery, so each number divided by 93 is the cost of one delivery:
-
-| Per delivery | Arithmetic | Tokens |
-|---|---|---:|
-| All tokens | 4,009,248,425 / 93 | 43.1 M |
-| Output | 13,871,893 / 93 | 149 k |
-| Without cache reads | (271,807 + 54,527,957 + 13,871,893) / 93 = 68,671,657 / 93 | 738 k |
+The project had 93 finished pages, one per delivery; each total divided by 93 gives 43.1 million tokens per delivery, 149 thousand of them output and 738 thousand without cache reads.
 
 Forty-three million tokens reads as a lot, and 98.3% of it is the cheapest kind.
 The count sets a baseline: this project, this method, this many tokens per delivery.
@@ -133,13 +127,13 @@ When a number moves, the columns say why: output up means more was built, cache 
 ## What the team gains
 
 A number per delivery that anyone on the team can repeat from the host's logs, in place of a feeling.
-On Ninjobs it is 43.1 million tokens per delivery, 149 thousand of them written by the agent and 738 thousand without cache reads, over 93 deliveries.
+On Ninjobs it is 43.1 million tokens per delivery.
 There is no outside number to set it against, by choice: the team's next milestone is the comparison.
 
 ## Key points
 
 * A host bills four kinds of token: input, cache write, cache read and output; a cache read costs a fraction of an input token, because the host re-sends the same context on every call.
-* On Ninjobs one delivery cost 43.1 M tokens, 98.3% of them cache reads, 149 k of output and 738 k without cache reads, over 93 pages.
+* On Ninjobs one delivery cost 43.1 M tokens, nearly all of them cache reads.
 * Cache reads are counted apart because they measure how much context each call carried, and that is what the page, a fresh session per delivery and `/apply` reading its own queue lines, not the queue, keep small.
 * An agent pays where the decision is written and the check is mechanical, pays less where the decision is still being made, and does not pay on a stack it has not seen.
 * Measure tokens per delivery on your own project for one milestone, from the host's logs, and compare milestones, not vendors.

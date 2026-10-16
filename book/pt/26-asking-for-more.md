@@ -30,8 +30,8 @@ A primeira resposta de um agente costuma ser: roda, lê bem, faz o que foi pedid
 **A pessoa toma a resposta do auxílio no lugar de conferir.**
 Kathleen Mosier e Linda Skitka definiram o viés de automação em 1996: "*a tendência de usar sinais automatizados como substituto heurístico da busca e do processamento atentos de informação*" (citado em Mosier e Manzey 2019).[^mosier-manzey-2019]
 Skitka, Mosier e Burdick mediram isso em 1999, com 80 estudantes numa tarefa de voo simulado, uns com um auxílio automatizado e outros sem.[^skitka-1999]
-Nos seis eventos que o auxílio não sinalizou, quem tinha o auxílio acertou 59% das vezes, contra 97% sem ele: deixou passar 41% dos eventos, contra 3%.
-Quando o auxílio recomendou algo errado, em seis ocasiões, os participantes seguiram em média 65% das seis recomendações erradas, e todos menos um seguiram ao menos uma.
+Nos seis eventos que o auxílio não sinalizou, quem tinha o auxílio acertou 59% das vezes, contra 97% sem ele.
+Quando o auxílio recomendou algo errado, em seis ocasiões, todos os participantes menos um seguiram ao menos uma.
 
 **A pessoa não tem o tempo ou os meios para melhorá-la.**
 Uma pesquisa de 2025 da Microsoft Research e da Carnegie Mellon University pediu a 319 trabalhadores do conhecimento exemplos do seu próprio trabalho com IA generativa.[^lee-2025]
@@ -39,11 +39,11 @@ Entre o que os impediu de pensar criticamente sobre uma resposta, 44 citaram a f
 Na mesma pesquisa, mais confiança na IA andou junto com menos pensamento crítico, como os próprios trabalhadores relataram; a pesquisa mediu o que eles disseram, não a qualidade do trabalho.
 
 O hábito é comum no trabalho.
-Num estudo de campo com 244 consultores do Boston Consulting Group, publicado pela Harvard Business School, 27% (63) entregaram a tarefa ao modelo, e 44% deles (28 de 63) aceitaram o resultado sem mudança.[^randazzo-hbs-26-036]
+Num estudo de campo com 244 consultores do Boston Consulting Group, publicado pela Harvard Business School, 27% entregaram a tarefa ao modelo, e 44% deles aceitaram o resultado sem mudança.[^randazzo-hbs-26-036]
 
 Uma resposta não conferida custa pouco enquanto a tarefa é uma que o modelo faz bem, e muito quando não é.
-Num experimento com consultores da mesma empresa, Dell'Acqua e colegas viram que, em tarefas dentro do que o modelo fazia bem, os consultores com IA terminaram 12,2% mais tarefas, 25,1% mais rápido, com qualidade de 29,9% a 33,9% maior.[^dell-acqua-2026]
-Numa tarefa fora disso, quem tinha IA teve 19 pontos percentuais menos chance de acertar: 60% e 70,6% contra 84,5% sem ela.[^dell-acqua-2026]
+Num experimento com consultores da mesma empresa, Dell'Acqua e colegas viram que, em tarefas dentro do que o modelo fazia bem, os consultores com IA terminaram 25,1% mais rápido, com qualidade de 29,9% a 33,9% maior.[^dell-acqua-2026]
+Numa tarefa fora disso, quem tinha IA teve 19 pontos percentuais menos chance de acertar do que quem não tinha.[^dell-acqua-2026]
 Nada na resposta diz de que lado dessa linha ela caiu.
 
 ## O que o agente não propõe
@@ -126,8 +126,7 @@ Cada par, primeira e desafiada, foi pontuado às cegas em três critérios do br
 O juiz teria enviado a resposta desafiada em todos os 9 pares.
 
 O desafio foi pago em tempo e em tokens.
-Somadas as três execuções de cada braço, as sessões desafiadas levaram de 2,9 a 8,8 vezes o tempo das primeiras respostas: 201 contra 1.337 segundos no braço do limite, 81 contra 710 no braço do público, 390 contra 1.130 no braço do custo.
-Elas escreveram de 2,7 a 9,4 vezes os tokens de saída: 24.220 contra 147.419, 7.376 contra 68.989, e 41.420 contra 110.334.
+Somadas as três execuções de cada braço, as sessões desafiadas levaram de 2,9 a 8,8 vezes o tempo das primeiras respostas e escreveram de 2,7 a 9,4 vezes os tokens de saída.
 Uma sessão de cada vez, uma primeira resposta levou de 24 segundos a pouco mais de 2 minutos, e uma sessão desafiada de 3 a 9 minutos.
 
 Numa assinatura fixa, esses tokens saem do limite de sessão do plano: o uso do modelo que um plano permite numa janela de horas, depois do qual o host recusa turnos novos até a janela acabar.
@@ -137,7 +136,7 @@ Se você paga por token, o [capítulo 24](24-cost-and-where.md) mostra como tran
 
 O braço do custo também mediu quanto cada preparação custa em uso.
 Cinco perguntas sobre o projeto, cada uma numa sessão nova, foram feitas a cada preparação: as 30 respostas estavam certas, nas primeiras e nas desafiadas.
-Nas execuções 1 e 2, a preparação desafiada respondeu às cinco perguntas em 26% e 18% menos tempo, com 27% e 29% menos tokens de saída; na execução 3, em 14% menos tempo, mas com 9% mais tokens de saída.
+Em todas as execuções a preparação desafiada respondeu às cinco perguntas em 14% a 26% menos tempo, e escreveu menos tokens de saída em duas execuções e 9% mais na terceira.
 
 Os limites são claros.
 Três pares por braço é um experimento registrado, não um estudo, e não tem estatística.
@@ -158,7 +157,7 @@ O que elas evitam é o que os estudos mediram: respostas aceitas sem conferir, v
 * Uma primeira resposta parece final porque a pessoa para no bom o bastante (Simon), toma a resposta do auxílio no lugar de conferir (viés de automação, Skitka) e não tem o tempo ou os meios para melhorá-la (Lee et al.).
 * Um agente não propõe, sem que peçam, testar um limite que afirmou, ajustar o resultado ao tempo de quem lê, ajustá-lo ao custo de cada uso, nem o que ninguém pediu.
 * O protocolo de desafio são quatro turnos, enviados um de cada vez depois da primeira resposta: (1) "Antes de mudar qualquer coisa, me pergunte o que você precisa saber para fazer isto bem."; (2) "O que você disse que não é possível, ou que não vale a pena fazer? Teste cada um e me mostre o resultado."; (3) "Quem lê ou usa isto, quanto tempo tem, e quanto custa cada uso? Mude o resultado para caber nisso."; (4) "O que eu não pedi e que eu ia querer? Acrescente o que valer a pena, e me diga o que você deixou de fora."
-* O turno 2 pede um teste porque "Tem certeza?" convida a bajulação: depois dela, os modelos mudaram a primeira resposta de 32% a 86% das vezes.
+* O turno 2 pede um teste porque "Tem certeza?" convida a bajulação, uma resposta nova escolhida para agradar.
 * No experimento do livro a resposta desafiada venceu 9 de 9 pares às cegas e levou cerca de 3 a 9 vezes o tempo e os tokens de saída, que um assinante paga com o limite de sessão do plano; três pares por braço, julgados pelo mesmo modelo, então envie-o onde o resultado é usado com frequência ou lido com pressa.
 
 [^ask-for-more-run]: J.C. Ködel, "One Page at a Time", o registro do experimento do protocolo de desafio, 2026-10, no repositório do livro. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/ask-for-more-experiment-run>

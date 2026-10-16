@@ -63,7 +63,7 @@ Every one of those files is something a person reviews before the code is writte
 The feature holds one rule about time: up to 24 hours before.
 Spec Kit restates it in each of its 8 files, OpenSpec in 4 of its 6, focus-kit on its one page.[^spec-driven-run]
 The three decide the same thing.
-The difference is how many other files say it again: a rule written in 8 places is read 8 times in review, and when it changes, it changes in 8 places, or it disagrees with itself in the ones that were missed.
+The difference is how many other files say it again: a rule restated in each file is read in each one in review, and when it changes, it changes in each, or it disagrees with itself in the ones that were missed.
 Böckeler found the same with Spec Kit: its files "*were repetitive, both with each other, and with the code that already existed*", and "*very verbose and tedious to review.*"[^bockeler-2025]
 
 One page is enough because most of what those files repeat, the product, its vocabulary, its rules and the decisions already taken, is the same for every feature.
@@ -74,7 +74,7 @@ The counts say what each tool writes before the code; they do not say which one 
 ## What the team gains
 
 One page per feature, instead of one folder per feature, is what the team reads, reviews and keeps true.
-On Ninjobs, my own product, fifteen days with OpenSpec produced 37,228 lines of spec for four screens (every line under the tool's folder, counted with `wc -l`), and none of the core flow existed yet.
+On Ninjobs, my own product, OpenSpec produced 37,228 lines of spec for four screens (every line under the tool's folder, counted with `wc -l`), and none of the core flow existed yet.
 The causes were more than the tool, and [chapter 9](09-birth-of-focus-kit.md) tells them; the count is what a spec costs when it becomes the work.
 After the move to one page per delivery, the product opened to the public, and its 93 finished pages held 22,650 lines in all.
 
@@ -83,7 +83,7 @@ After the move to one page per delivery, the product opened to the public, and i
 * A spec is a written, behaviour-oriented description of what the software must do, in natural language, that guides a coding agent; Spec-Driven Development writes it before the code.
 * By how long the spec lives, a tool is spec-first (written for the task), spec-anchored (kept to maintain the feature) or spec-as-source (the only thing a person edits).
 * Spec Kit and OpenSpec got three things right: the decision written before the code, project-wide rules written once, and, in OpenSpec, a question asked before writing.
-* One rule restated in many files is read many times and changed in many places; for the same feature Spec Kit wrote 8 files, OpenSpec 6, focus-kit 1 page.
+* One rule restated in many files is read many times and changed in many places; for the same feature Spec Kit and OpenSpec wrote a folder of files where focus-kit wrote one page.
 * A lighter page per feature is paid for with documents written once per project; the counts show what each tool writes, not which builds better software.
 
 [^bockeler-2025]: Birgitta Böckeler, "Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl", 2025. <https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html>

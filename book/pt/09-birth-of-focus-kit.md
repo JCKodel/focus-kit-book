@@ -9,7 +9,7 @@ O Ninjobs começou com o OpenSpec, uma das ferramentas de Desenvolvimento Guiado
 Cada feature era uma mudança, uma pasta com sua proposta, suas especificações, seu design e suas tarefas, e cada decisão era escrita de novo nos documentos do projeto e nos seus ADRs, os registros de decisão de arquitetura, um arquivo por decisão (capítulo 10).
 Antes de uma entrega contar como pronta, ela precisava passar por 29 verificações.
 
-Em quinze dias, isso produziu 87 commits, 35 mudanças e 37.228 linhas de especificação, para quatro telas e uma tabela de dados.
+Em quinze dias, isso produziu 37.228 linhas de especificação, para quatro telas e uma tabela de dados.
 Nada do fluxo central do produto existia ainda.
 
 ## O que deu errado
@@ -76,12 +76,12 @@ O Flutter conseguiria construir o produto, e o limite era o que o agente tinha v
 ## O que o time ganha
 
 Um processo que carrega o produto em vez de pesar sobre ele.
-Antes, quinze dias no Ninjobs deram quatro telas e 37.228 linhas de especificação, com cada decisão em seis lugares e 29 verificações que nunca pegaram um erro do produto.
-Depois, treze dias deram a abertura ao público, 91 entregas de uma página cada e 19 pranchas de design entregues, com cada fato num lugar só e duas verificações voltadas para o produto.
+Antes, o processo antigo deu ao Ninjobs quatro telas em quinze dias, com cada decisão repetida em muitos lugares e verificações que nunca pegaram um erro do produto.
+Depois, uma página por entrega deu a abertura ao público em treze dias, com cada fato num lugar só e duas verificações voltadas para o produto.
 
 ## Pontos-chave
 
-* No Ninjobs, o OpenSpec deu quatro telas em quinze dias: cada decisão morava em seis lugares, e 29 verificações guardavam a forma e nunca o produto.
+* No Ninjobs, o OpenSpec deu quatro telas em quinze dias: cada decisão morava em muitos lugares, e as suas verificações guardavam a forma e nunca o produto.
 * O custo estava no número de lugares, e não no tamanho de cada arquivo; a arquitetura era sólida, e eu perdi o KISS e o YAGNI ao exigir sua forma completa em toda feature.
 * O recomeço manteve uma página por entrega, dois comandos, uma linha de fila por entrega, duas verificações e a pergunta do regulador, e chegou à abertura ao público treze dias depois.
 * Cada regra do kit responde a uma falha: seis lugares, uma construção que decide enquanto anda, comandos que divergem, um roteiro que misturava plano e raciocínio, verificações cegas ao produto e verificações que cresceram sem ninguém pedir.

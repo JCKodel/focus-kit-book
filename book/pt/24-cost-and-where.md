@@ -36,13 +36,7 @@ O Claude Code guarda um log de cada sessão, com os tokens de cada chamada, e eu
 | Saída | 13.871.893 | 0,3% |
 | Todos | 4.009.248.425 | 100% |
 
-O projeto tinha 93 páginas concluídas, uma por entrega, então cada número dividido por 93 é o custo de uma entrega:
-
-| Por entrega | Conta | Tokens |
-|---|---|---:|
-| Todos os tokens | 4.009.248.425 / 93 | 43,1 M |
-| Saída | 13.871.893 / 93 | 149 mil |
-| Sem as leituras do cache | (271.807 + 54.527.957 + 13.871.893) / 93 = 68.671.657 / 93 | 738 mil |
+O projeto tinha 93 páginas concluídas, uma por entrega; cada total dividido por 93 dá 43,1 milhões de tokens por entrega, 149 mil deles de saída e 738 mil sem as leituras do cache.
 
 Quarenta e três milhões de tokens parece muito, e 98,3% disso é o tipo mais barato.
 A contagem fixa uma linha de base: este projeto, este método, tantos tokens por entrega.
@@ -135,13 +129,13 @@ Quando um número muda, as colunas dizem por quê: saída maior quer dizer que m
 ## O que o time ganha
 
 Um número por entrega que qualquer pessoa do time consegue repetir a partir dos logs do host, no lugar de uma sensação.
-No Ninjobs ele é de 43,1 milhões de tokens por entrega, 149 mil deles escritos pelo agente e 738 mil sem as leituras do cache, em 93 entregas.
+No Ninjobs ele é de 43,1 milhões de tokens por entrega.
 Não há número de fora para comparar com ele, por escolha: o próximo marco do time é a comparação.
 
 ## Pontos-chave
 
 * Um host cobra quatro tipos de token: entrada, escrita no cache, leitura do cache e saída; uma leitura do cache custa uma fração de um token de entrada, porque o host reenvia o mesmo contexto em cada chamada.
-* No Ninjobs uma entrega custou 43,1 M de tokens, 98,3% deles leituras do cache, 149 mil de saída e 738 mil sem as leituras do cache, em 93 páginas.
+* No Ninjobs uma entrega custou 43,1 M de tokens, quase todos leituras do cache.
 * As leituras do cache são contadas à parte porque medem quanto contexto cada chamada carregou, e é isso que a página, uma sessão nova por entrega e o `/apply` lendo as próprias linhas da fila, e não a fila, mantêm pequeno.
 * Um agente compensa onde a decisão está escrita e a checagem é mecânica, compensa menos onde a decisão ainda está sendo tomada, e não compensa numa stack que ele não viu.
 * Meça os tokens por entrega no seu próprio projeto durante um marco, a partir dos logs do host, e compare marcos, não fornecedores.

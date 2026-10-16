@@ -28,6 +28,8 @@
 * **The kit as it is.** The book describes focus-kit as it is today: what each rule is, how it works, what the team gains.
   It cites no changelog entry, names no version as a date ("since its version", "no longer", "before that rule") and shows no measure taken before and after a kit change; a rule's reason is the error it prevents, said in the present.
   Chapter 11's update report keeps its versions, which are the command's output, and teaches the changelog as a file of the kit (first: `kit-as-it-is`, from `m13-review`).
+* **Numbers that prove.** A passage keeps the numbers that prove its point and no more: the detail of a measurement (per-run values, arithmetic, sub-sample counts, one fact said in two numbers) stays at the source the note points to or in the run's record.
+  `## What the team gains` gives the one number that sums the chapter, and each key point carries at most that number (first: `plain-numbers`, from `m13-review`).
 * **Context before an excerpt.** A reader who has read only the previous chapters understands every artifact shown without opening anything else (docs/00 product question 5).
   Before it, the text gives what the artifact is about: the project, the problem it answers, where it comes from.
   An excerpt is a whole unit that means something on its own (a page's section, a queue's milestone), never a loose line that leans on the lines around it.
