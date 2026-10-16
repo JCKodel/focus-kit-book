@@ -89,7 +89,7 @@ A line written `[?]` instead would read as stuck when nothing has gone wrong; ch
 ### The review, and its findings
 
 A milestone is planned with its review as its last line, `<milestone>-review`, a delivery like the others, which takes the paragraph clause by clause ([chapter 17](17-closing-a-milestone.md)).
-It reviews no code and fixes nothing: a person tests each clause by hand.
+It fixes nothing: a person tests each clause by hand and launches the deep code review the project's docs/05 names, when it names one.
 Each finding becomes a `[ ]` line in the same milestone, under the review line, and those lines get no second review.
 
 ## Changing the queue

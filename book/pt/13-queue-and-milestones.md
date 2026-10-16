@@ -91,7 +91,7 @@ Uma linha escrita `[?]` no lugar pareceria travada sem nada ter dado errado; o c
 ### A revisão, e os seus achados
 
 Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, uma entrega como as outras, que pega o parágrafo cláusula por cláusula ([capítulo 17](17-closing-a-milestone.md)).
-Ela não revisa código e não corrige nada: uma pessoa testa cada cláusula à mão.
+Ela não corrige nada: uma pessoa testa cada cláusula à mão e lança a revisão profunda do código que o docs/05 do projeto cita, quando cita uma.
 Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, e essas linhas não têm segunda revisão.
 
 ## Mudando a fila

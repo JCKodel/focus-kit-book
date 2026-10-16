@@ -63,7 +63,7 @@ The method gives each step to whoever owns it.
 * **Who applies:** a developer's session, or several at once, in one folder or in worktrees, each on its own delivery ([chapter 21](21-worktrees.md)).
 * **Who commits and merges:** a person, always.
   `/apply` stages and stops; the commit is the human review ([chapter 15](15-apply.md)).
-* **Who reviews the milestone:** the team, on the running product, against the milestone's paragraph ([chapter 17](17-closing-a-milestone.md)).
+* **Who reviews the milestone:** the team, on the running product, against the milestone's paragraph, and it launches the deep code review of docs/05, when the project names one ([chapter 17](17-closing-a-milestone.md)).
 * **The manager** asks the project: what is pending, how it is going, who owes an answer ([chapter 19](19-project-as-assistant.md)).
 
 ## One milestone as the pilot
