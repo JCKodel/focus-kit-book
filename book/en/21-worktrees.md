@@ -104,26 +104,26 @@ A worktree per delivery gives exactly that: several folders, each on its own bra
 Give each delivery its own worktree, and each agent its own folder.
 Say `return-book` and `overdue-list` both need `src/loans/`, in the lending library's folder `library/`, whose `main/` holds the branch `main` (the next section sets it up):
 
-* The agent building `return-book` works in `library/.face/worktrees/return-book`, on the branch `face/return-book`; it sees only that delivery's changes, and the commit you make there holds that delivery and nothing else.
-* The agent building `overdue-list` does the same in `library/.face/worktrees/overdue-list`, on `face/overdue-list`, at the same time.
+* The agent building `return-book` works in `library/.focus-kit/worktrees/return-book`, on the branch `focus-kit/return-book`; it sees only that delivery's changes, and the commit you make there holds that delivery and nothing else.
+* The agent building `overdue-list` does the same in `library/.focus-kit/worktrees/overdue-list`, on `focus-kit/overdue-list`, at the same time.
 * Nobody switches branches, so nothing needs a stash, and neither agent ever sees the other's half-done files.
 
 When a delivery is done, you bring it into `main` from `main/` with a merge commit, `git merge --no-ff`, so it stays one unit of work, reverted in one step with `git revert -m 1 <merge>`.
 
 ## The life of a worktree
 
-First, once per clone, the container: a folder that holds the checkout, `main/`, and a hidden folder, `.face/`, with the history and every delivery's worktree.
+First, once per clone, the container: a folder that holds the checkout, `main/`, and a hidden folder, `.focus-kit/`, with the history and every delivery's worktree.
 The commands, the folder and the slugs are written for this chapter, on the lending library.
 From an empty folder `library/`:
 
 ```
-git clone --bare <url> .face/repo.git
+git clone --bare <url> .focus-kit/repo.git
 ```
 
-Copies the remote's history into `.face/repo.git`, a bare repository.
+Copies the remote's history into `.focus-kit/repo.git`, a bare repository.
 
 ```
-cd .face/repo.git
+cd .focus-kit/repo.git
 git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
 ```
 
@@ -135,20 +135,20 @@ Skip it, and `git fetch` in `main/` brings no `origin/main`.
 git worktree add ../../main main
 ```
 
-Run inside `.face/repo.git`, creates `library/main/` on the branch `main`: the checkout, a worktree like the others, whose `.git` is a file that points to `.face/repo.git`.
-`git worktree list` now prints two lines, one ending in `library/.face/repo.git` marked `(bare)`, one ending in `library/main` on `[main]`.
+Run inside `.focus-kit/repo.git`, creates `library/main/` on the branch `main`: the checkout, a worktree like the others, whose `.git` is a file that points to `.focus-kit/repo.git`.
+`git worktree list` now prints two lines, one ending in `library/.focus-kit/repo.git` marked `(bare)`, one ending in `library/main` on `[main]`.
 
 A project that chooses this writes these steps in a manual of `docs/manuals/` ([chapter 10](10-the-documents.md)), so whoever clones it next makes the same container.
 
 Then six steps, run from `main/` except where the text says otherwise.
-A path given to `git worktree add` is relative to the folder you stand in, so the same command run elsewhere puts the folder elsewhere; from `main/`, `../.face/worktrees/<slug>` lands inside the container.
+A path given to `git worktree add` is relative to the folder you stand in, so the same command run elsewhere puts the folder elsewhere; from `main/`, `../.focus-kit/worktrees/<slug>` lands inside the container.
 
 ```
-git worktree add ../.face/worktrees/return-book \
-  -b face/return-book main
+git worktree add ../.focus-kit/worktrees/return-book \
+  -b focus-kit/return-book main
 ```
 
-Creates the folder `library/.face/worktrees/return-book`, creates the branch `face/return-book` at `main`, and checks it out in the folder.
+Creates the folder `library/.focus-kit/worktrees/return-book`, creates the branch `focus-kit/return-book` at `main`, and checks it out in the folder.
 The folder sits in the hidden folder, beside `main/`, so none of `main/`'s files show it.
 
 Then you work inside the folder as in any other: the agent builds, you review and commit there.
@@ -161,20 +161,20 @@ git worktree list
 Prints every worktree, the commit it is on and its branch.
 
 ```
-git merge --no-ff face/return-book
+git merge --no-ff focus-kit/return-book
 ```
 
 On `main`, in `main/`, brings the delivery in as one merge commit; the branch's commits are already visible there, since the history is shared.
 
 ```
-git worktree remove ../.face/worktrees/return-book
+git worktree remove ../.focus-kit/worktrees/return-book
 ```
 
 Deletes the folder.
 It refuses a folder with files changed or not tracked, so work you have not committed is never lost by accident.[^git-worktree]
 
 ```
-git branch -d face/return-book
+git branch -d focus-kit/return-book
 ```
 
 Deletes the branch, which outlives its folder.
@@ -183,7 +183,8 @@ Deletes the branch, which outlives its folder.
 ## Worktrees in the kit
 
 A worktree per delivery is one of the git strategies a project can write in the Git slot of its docs/05, and in the kit it is the steps above with `/propose` and `/apply` in between.
-The slot may name the hidden folder and the branch prefix, and one that names neither means `.face/` and `face/`, the ones above; a slot that names `.wt/` and `wt/` puts `return-book` in `.wt/worktrees/return-book/` on `wt/return-book`.
+The slot may name the hidden folder and the branch prefix, and one that names neither means `.focus-kit/` and `focus-kit/`, the ones above; a slot that names `.wt/` and `wt/` puts `return-book` in `.wt/worktrees/return-book/` on `wt/return-book`.
+The kit's two names say what made the folder and the branch, so a person who finds them in a project knows where they came from.
 `/propose <slug>` creates the worktree at `<hidden>/worktrees/<slug>/` on the branch `<prefix>/<slug>`, from the main branch's `HEAD`, or reuses the one that exists, and writes the page there.
 A branch `<slug>` without the prefix is not the delivery's: it is someone else's.
 You make the container once; the kit makes each worktree.
@@ -193,7 +194,7 @@ You review and commit on the branch, merge into `main` with `--no-ff`, remove th
 The agent never commits, merges, resolves a conflict or removes a worktree: every step that changes the history is yours, as in every git strategy.
 To run two deliveries at once in worktrees, open one session per folder: one in `main/` for each `/propose`, one in each worktree for its `/apply`.
 
-One shape for every tool and every person prevents an error: when nothing says where a delivery's worktree belongs, a `/propose` running in the background enters a worktree its host made on its own, in the host's folder, and the person copies the page to the main branch by hand.
+One shape for every tool and every person prevents an error: when nothing says where a delivery's worktree belongs, a session makes one wherever it stands, and the page it writes there is copied to the main branch by hand.
 
 ## When the branches meet: the conflict
 
@@ -213,7 +214,7 @@ Here `return-book` was merged first, and `overdue-list` comes in second; the blo
 =======
 [ ] return-book     a librarian records that a copy came back
 [x] overdue-list    a librarian sees every loan past its due date
->>>>>>> face/overdue-list
+>>>>>>> focus-kit/overdue-list
 ```
 
 Above `=======` is `main`, where `return-book` is done; below is `overdue-list`, where its own line is done.
@@ -278,7 +279,7 @@ The same run paid the costs of the section above: each worktree's `node_modules`
 That run was in worktrees.
 One folder removes the second folder, the second install of 155 MB, the merge and the queue's conflict; no run measured two sessions in one folder, so that gain has no number of its own.
 The rule of what is not a conflict removes an error: a second session that stops on a changed queue when it has everything it needs to go on.
-The one shape of a worktree per delivery removes another: a page written in a worktree its host made elsewhere, and copied to the main branch by hand.
+The one shape of a worktree per delivery removes another: a page written in a worktree made somewhere the kit did not say, and copied to the main branch by hand.
 One run is a sign, not a rate: the gain holds while the deliveries' files do not meet, and it ends at the speed of the person who reviews and commits them.
 
 ## Key points
@@ -286,7 +287,7 @@ One run is a sign, not a rate: the gain holds while the deliveries' files do not
 * Two sessions share one folder on trunk when their lines are free and their files do not meet: each marks only its line, stages only its paths and its hunk of the queue, and you commit one delivery at a time.
 * Another line's mark, another delivery's page or files and another session's staged entries are not a conflict; the same hunk edited by both, or a file one page needs that the other is changing, is: stop, then order the lines or give one a worktree.
 * Commit from the index once `git diff --cached --stat` holds only that delivery; `git commit -- <paths>` takes each named file whole from the folder, the other delivery's hunk of a shared file included.
-* A worktree per delivery pays for several people, or for deliveries that touch the same files: a container folder whose `main/` is the checkout keeps each delivery's worktree in `<hidden>/worktrees/<slug>/` on `<prefix>/<slug>`, `.face/` and `face/` by default; `git worktree add`, work there, `git merge --no-ff` from `main/`, `git worktree remove`, `git branch -d`; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
+* A worktree per delivery pays for several people, or for deliveries that touch the same files: a container folder whose `main/` is the checkout keeps each delivery's worktree in `<hidden>/worktrees/<slug>/` on `<prefix>/<slug>`, `.focus-kit/` and `focus-kit/` by default; `git worktree add`, work there, `git merge --no-ff` from `main/`, `git worktree remove`, `git branch -d`; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
 * Parallel pays while the deliveries' files do not meet, the machine's ports and databases do not collide, the disk holds each worktree's dependencies, and one person can still review each delivery.
 
 [^git-commit]: Git, "git-commit", the documentation, option `--only`, accessed 2026-10-13. <https://git-scm.com/docs/git-commit>

@@ -104,26 +104,26 @@ Um worktree por entrega dá exatamente isso: várias pastas, cada uma no seu pr�
 Dê a cada entrega o seu próprio worktree, e a cada agente a sua própria pasta.
 Digamos que `devolver-livro` e `lista-de-atrasos` precisam as duas de `src/emprestimos/`, na pasta da biblioteca de empréstimos, `biblioteca/`, cujo `main/` guarda o branch `main` (a próxima seção a monta):
 
-* O agente que constrói `devolver-livro` trabalha em `biblioteca/.face/worktrees/devolver-livro`, no branch `face/devolver-livro`; ele vê só as mudanças dessa entrega, e o commit que você faz ali guarda essa entrega e nada mais.
-* O agente que constrói `lista-de-atrasos` faz o mesmo em `biblioteca/.face/worktrees/lista-de-atrasos`, no `face/lista-de-atrasos`, ao mesmo tempo.
+* O agente que constrói `devolver-livro` trabalha em `biblioteca/.focus-kit/worktrees/devolver-livro`, no branch `focus-kit/devolver-livro`; ele vê só as mudanças dessa entrega, e o commit que você faz ali guarda essa entrega e nada mais.
+* O agente que constrói `lista-de-atrasos` faz o mesmo em `biblioteca/.focus-kit/worktrees/lista-de-atrasos`, no `focus-kit/lista-de-atrasos`, ao mesmo tempo.
 * Ninguém troca de branch, então nada precisa de stash, e nenhum agente vê os arquivos pela metade do outro.
 
 Quando uma entrega está pronta, você a traz para o `main` a partir de `main/` com um commit de merge, `git merge --no-ff`, para que ela continue uma unidade de trabalho, desfeita em um passo com `git revert -m 1 <merge>`.
 
 ## A vida de um worktree
 
-Primeiro, uma vez por clone, o contêiner: uma pasta que guarda o checkout, `main/`, e uma pasta oculta, `.face/`, com o histórico e o worktree de cada entrega.
+Primeiro, uma vez por clone, o contêiner: uma pasta que guarda o checkout, `main/`, e uma pasta oculta, `.focus-kit/`, com o histórico e o worktree de cada entrega.
 Os comandos, a pasta e os slugs foram escritos para este capítulo, na biblioteca de empréstimos.
 A partir de uma pasta vazia `biblioteca/`:
 
 ```
-git clone --bare <url> .face/repo.git
+git clone --bare <url> .focus-kit/repo.git
 ```
 
-Copia o histórico do remoto para `.face/repo.git`, um repositório bare.
+Copia o histórico do remoto para `.focus-kit/repo.git`, um repositório bare.
 
 ```
-cd .face/repo.git
+cd .focus-kit/repo.git
 git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
 ```
 
@@ -135,20 +135,20 @@ Pule-a, e o `git fetch` em `main/` não traz nenhum `origin/main`.
 git worktree add ../../main main
 ```
 
-Rodado dentro de `.face/repo.git`, cria `biblioteca/main/` no branch `main`: o checkout, um worktree como os outros, cujo `.git` é um arquivo que aponta para `.face/repo.git`.
-`git worktree list` agora imprime duas linhas, uma terminando em `biblioteca/.face/repo.git` marcada `(bare)`, outra terminando em `biblioteca/main` em `[main]`.
+Rodado dentro de `.focus-kit/repo.git`, cria `biblioteca/main/` no branch `main`: o checkout, um worktree como os outros, cujo `.git` é um arquivo que aponta para `.focus-kit/repo.git`.
+`git worktree list` agora imprime duas linhas, uma terminando em `biblioteca/.focus-kit/repo.git` marcada `(bare)`, outra terminando em `biblioteca/main` em `[main]`.
 
 Um projeto que escolhe isso escreve esses passos em um manual de `docs/manuals/` ([capítulo 10](10-the-documents.md)), para que quem o clonar depois monte o mesmo contêiner.
 
 Depois, seis passos, rodados em `main/`, exceto onde o texto diz outra coisa.
-Um caminho dado ao `git worktree add` é relativo à pasta em que você está, então o mesmo comando rodado em outro lugar põe a pasta em outro lugar; a partir de `main/`, `../.face/worktrees/<slug>` cai dentro do contêiner.
+Um caminho dado ao `git worktree add` é relativo à pasta em que você está, então o mesmo comando rodado em outro lugar põe a pasta em outro lugar; a partir de `main/`, `../.focus-kit/worktrees/<slug>` cai dentro do contêiner.
 
 ```
-git worktree add ../.face/worktrees/devolver-livro \
-  -b face/devolver-livro main
+git worktree add ../.focus-kit/worktrees/devolver-livro \
+  -b focus-kit/devolver-livro main
 ```
 
-Cria a pasta `biblioteca/.face/worktrees/devolver-livro`, cria o branch `face/devolver-livro` no `main`, e faz checkout dele na pasta.
+Cria a pasta `biblioteca/.focus-kit/worktrees/devolver-livro`, cria o branch `focus-kit/devolver-livro` no `main`, e faz checkout dele na pasta.
 A pasta fica na pasta oculta, ao lado de `main/`, então nenhum dos arquivos de `main/` a mostra.
 
 Depois você trabalha dentro da pasta como em qualquer outra: o agente constrói, você revisa e faz o commit ali.
@@ -161,20 +161,20 @@ git worktree list
 Imprime cada worktree, o commit em que ele está e o seu branch.
 
 ```
-git merge --no-ff face/devolver-livro
+git merge --no-ff focus-kit/devolver-livro
 ```
 
 No `main`, em `main/`, traz a entrega como um commit de merge; os commits do branch já aparecem ali, já que o histórico é compartilhado.
 
 ```
-git worktree remove ../.face/worktrees/devolver-livro
+git worktree remove ../.focus-kit/worktrees/devolver-livro
 ```
 
 Apaga a pasta.
 Ele se recusa a apagar uma pasta com arquivos mudados ou não acompanhados, então trabalho sem commit nunca se perde por acidente.[^git-worktree]
 
 ```
-git branch -d face/devolver-livro
+git branch -d focus-kit/devolver-livro
 ```
 
 Apaga o branch, que sobrevive à sua pasta.
@@ -183,7 +183,8 @@ Apaga o branch, que sobrevive à sua pasta.
 ## Worktrees no kit
 
 Um worktree por entrega é uma das estratégias de git que um projeto pode escrever no slot Git do seu docs/05, e no kit são os passos acima com o `/propose` e o `/apply` no meio.
-O slot pode nomear a pasta oculta e o prefixo do branch, e um que não nomeia nenhum dos dois vale `.face/` e `face/`, os de acima; um slot que nomeia `.wt/` e `wt/` põe `devolver-livro` em `.wt/worktrees/devolver-livro/` no `wt/devolver-livro`.
+O slot pode nomear a pasta oculta e o prefixo do branch, e um que não nomeia nenhum dos dois vale `.focus-kit/` e `focus-kit/`, os de acima; um slot que nomeia `.wt/` e `wt/` põe `devolver-livro` em `.wt/worktrees/devolver-livro/` no `wt/devolver-livro`.
+Os dois nomes do kit dizem o que criou a pasta e o branch, então quem os encontra em um projeto sabe de onde vieram.
 O `/propose <slug>` cria o worktree em `<oculta>/worktrees/<slug>/` no branch `<prefixo>/<slug>`, a partir do `HEAD` do branch principal, ou reaproveita o que existe, e escreve a página ali.
 Um branch `<slug>` sem o prefixo não é o da entrega: é de outra pessoa.
 Você monta o contêiner uma vez; o kit cria cada worktree.
@@ -193,7 +194,7 @@ Você revisa e faz o commit no branch, faz o merge no `main` com `--no-ff`, remo
 O agente nunca faz commit, merge, resolve um conflito ou remove um worktree: cada passo que muda o histórico é seu, como em toda estratégia de git.
 Para rodar duas entregas ao mesmo tempo em worktrees, abra uma sessão por pasta: uma em `main/` para cada `/propose`, uma em cada worktree para o seu `/apply`.
 
-Uma forma só para toda ferramenta e toda pessoa evita um erro: quando nada diz onde fica o worktree de uma entrega, um `/propose` rodando em segundo plano entra em um worktree que o host dele criou por conta própria, na pasta do host, e a pessoa copia a página para o branch principal à mão.
+Uma forma só para toda ferramenta e toda pessoa evita um erro: quando nada diz onde fica o worktree de uma entrega, uma sessão cria um onde quer que esteja, e a página que ela escreve ali é copiada para o branch principal à mão.
 
 ## Quando os branches se encontram: o conflito
 
@@ -213,7 +214,7 @@ Aqui o merge de `devolver-livro` foi feito primeiro, e `lista-de-atrasos` entra 
 =======
 [ ] devolver-livro     a bibliotecária registra que um exemplar voltou
 [x] lista-de-atrasos   a bibliotecária vê os empréstimos vencidos
->>>>>>> face/lista-de-atrasos
+>>>>>>> focus-kit/lista-de-atrasos
 ```
 
 Acima de `=======` está o `main`, onde `devolver-livro` está pronta; abaixo está `lista-de-atrasos`, onde a sua própria linha está pronta.
@@ -278,7 +279,7 @@ A mesma execução pagou os custos da seção acima: o `node_modules` de cada wo
 Essa execução foi em worktrees.
 Uma pasta tira a segunda pasta, a segunda instalação de 155 MB, o merge e o conflito da fila; nenhuma execução mediu duas sessões em uma pasta, então esse ganho não tem número próprio.
 A regra do que não é conflito tira um erro: uma segunda sessão que para numa fila mudada quando tem tudo de que precisa para seguir.
-A forma única de um worktree por entrega tira outro: uma página escrita em um worktree que o host criou em outro lugar, e copiada para o branch principal à mão.
+A forma única de um worktree por entrega tira outro: uma página escrita em um worktree criado em um lugar que o kit não disse, e copiada para o branch principal à mão.
 Uma execução é um sinal, não uma taxa: o ganho vale enquanto os arquivos das entregas não se encontram, e termina na velocidade da pessoa que as revisa e faz o commit delas.
 
 ## Pontos-chave
@@ -286,7 +287,7 @@ Uma execução é um sinal, não uma taxa: o ganho vale enquanto os arquivos das
 * Duas sessões dividem uma pasta no trunk quando as suas linhas estão livres e os seus arquivos não se encontram: cada uma marca só a sua linha, coloca em stage só os seus caminhos e o seu hunk da fila, e você faz o commit de uma entrega por vez.
 * A marca de outra linha, a página ou os arquivos de outra entrega e as entradas em stage de outra sessão não são conflito; o mesmo hunk editado pelas duas, ou um arquivo de que uma página precisa e que a outra está mudando, é: pare, e então ordene as linhas ou dê a uma delas um worktree.
 * Faça o commit a partir do stage quando `git diff --cached --stat` guarda só aquela entrega; `git commit -- <paths>` pega cada arquivo nomeado inteiro da pasta, com o hunk da outra entrega em um arquivo compartilhado.
-* Um worktree por entrega compensa para várias pessoas, ou para entregas que mexem nos mesmos arquivos: uma pasta contêiner cujo `main/` é o checkout guarda o worktree de cada entrega em `<oculta>/worktrees/<slug>/` no `<prefixo>/<slug>`, `.face/` e `face/` por padrão; `git worktree add`, trabalhe ali, `git merge --no-ff` em `main/`, `git worktree remove`, `git branch -d`; um conflito deixa as duas versões entre marcadores, e `git diff --cached --check` pega qualquer um que sobrou antes do commit.
+* Um worktree por entrega compensa para várias pessoas, ou para entregas que mexem nos mesmos arquivos: uma pasta contêiner cujo `main/` é o checkout guarda o worktree de cada entrega em `<oculta>/worktrees/<slug>/` no `<prefixo>/<slug>`, `.focus-kit/` e `focus-kit/` por padrão; `git worktree add`, trabalhe ali, `git merge --no-ff` em `main/`, `git worktree remove`, `git branch -d`; um conflito deixa as duas versões entre marcadores, e `git diff --cached --check` pega qualquer um que sobrou antes do commit.
 * O paralelo compensa enquanto os arquivos das entregas não se encontram, as portas e os bancos de dados da máquina não colidem, o disco comporta as dependências de cada worktree, e uma pessoa ainda consegue revisar cada entrega.
 
 [^git-commit]: Git, "git-commit", a documentação, opção `--only`, acesso em 2026-10-13. <https://git-scm.com/docs/git-commit>
