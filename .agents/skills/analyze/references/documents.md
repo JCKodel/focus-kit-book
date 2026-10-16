@@ -138,12 +138,12 @@ delivery must be one step; the agent never commits and never merges:
 * **trunk:** everything on the main branch. The
   page waits uncommitted in the working tree between `/propose` and
   `/apply`; page and build land in one commit, which the person makes
-  after reviewing. For one person, alone or with several sessions open
+  after reviewing. What Ninjobs did, one session at a time. For one
+  person, alone or with several sessions open
   on free lines that touch different files: each session stages only its
   delivery, and the person commits one delivery at a time, from the paths
   that session staged. Not for two people: their deliveries share one
-  branch and one commit carries the other's half-done work. What Ninjobs
-  did;
+  branch and one commit carries the other's half-done work;
 * **a branch per delivery:** `/propose` creates a branch named after the
   slug and writes the page there; `/apply` builds on it. The branch may
   carry several commits, the page first and the build after; the person
@@ -155,7 +155,7 @@ delivery must be one step; the agent never commits and never merges:
   of it (`<hidden>/repo.git/`) and each delivery's worktree in
   `<hidden>/worktrees/<slug>/`, on the branch `<prefix>/<slug>`; docs/05's
   Git slot names the hidden folder and the prefix, and a slot that names
-  neither means `.face/` and `face/`. `/propose` creates the slug's
+  neither means `.focus-kit/` and `focus-kit/`. `/propose` creates the slug's
   worktree there, from the main branch's HEAD, or reuses the one that
   exists, and writes the page in it; a branch `<slug>` without the prefix
   is someone else's, not the delivery's. `/apply` runs in it; the branch
@@ -194,13 +194,15 @@ git add → a person reviews and commits.
 /propose talks and writes the page, never code. /apply builds, proves,
 updates the documents, stages and suggests the commit, never commits.
 Code changes only inside /apply: a change asked anywhere else, however
-small, becomes a `[ ]` line in docs/06 and the answer stops there, or,
-when the person wants it defined now, the conversation continues as
-/propose <slug> in the same session, and what was said becomes the page.
+small, becomes a `[ ]` line in docs/06; what was said that the line
+cannot hold goes into a draft `work/<slug>.md`. The answer stops there
+and names `/propose <slug>` for a fresh session, as this host invokes
+commands.
 
 Before /propose changes the queue or the page, use §5's git strategy:
 create the branch or worktree named after the slug, or reuse its existing
-one on resumption. Add a missing queue line where it belongs and say so.
+one on resumption, bringing into it any draft left for the slug. Add a
+missing queue line where it belongs and say so.
 Start defining with `[~]`; start building only a completely defined `[>]`
 page, with `[*]`. Follow §4 for blocked lines and §6 before changing code
 or staging. Keep project slots and rules current before using them; report
@@ -218,7 +220,9 @@ a missing process rule rather than falling back to a retired instruction.
     test or a manual check.
 
     **Contract.** Data, schema, API, message shapes, or "none". The only
-    section that must be exact.
+    section that must be exact: a wrong screen is fixed in a session, a
+    wrong column is a migration, and a wrong access rule has already
+    leaked.
 
     **States.** Empty, loading, error, offline: one line each, or "the
     defaults". Only when there is a screen.
@@ -267,25 +271,21 @@ queue shows what is happening while it happens:
 | `[x]` | done, page in `work/done/` | /apply, with verify green |
 | `[?]` | waiting | any session, in the three cases below |
 
+A board may read the queue, and people pull work from it, so a mark
+changes at once: `[~]` is /propose's first edit, `[*]` is /apply's first,
+and `[x]` is /apply's last. Without a board the marks cost nothing.
+
 A line waits when the person says it is blocked, when it needs an answer
 that was asked and not given, or when work already started finds it needs
 another line done first, such as a fix found in the middle of an /apply.
-The reason goes at the end
-of the line, `· blocked: <reason>` or `· blocked: after <slug>, <slug>`.
-A dependency known when the line is added is `· after <slug>` alone,
-without `[?]`: an order, not an interruption.
-Before that reason, record the phase to resume: `· resume: propose` for
-`[ ]` or `[~]`, and `· resume: apply` for `[>]` or `[*]`. A draft saved
-by /propose always uses `resume: propose` until §3 is complete.
-Any mark before `[x]` can become `[?]`. The line leaves `[?]` when the
-reason is resolved: the person says so, the session that records the
-answer clears it, or /apply clears it when it marks `[x]` the last line of
-an `after`. Remove both suffixes and return `resume: propose` to `[ ]`,
-keeping any draft for /propose to finish; return `resume: apply` to `[>]`
-only when its page still satisfies §3. Existence alone is insufficient.
-If scope became undecided, return `[ ]` and say what /propose must settle.
-For an old blocked line without `resume`, recover the phase from its page
-and history; if completeness cannot be established, return `[ ]`.
+The line ends with the command that picks it up, `· resume: propose` or
+`· resume: apply`, then the reason, `· blocked: <reason>` or
+`· blocked: after <slug>, <slug>`. A dependency known when the line is
+added is `· after <slug>` alone, without `[?]`: an order, not an
+interruption. When the reason is resolved (the person says so, the
+session that records the answer clears it, or /apply marks `[x]` the last
+line of an `after`), remove both suffixes: `resume: propose` returns to
+`[ ]`, keeping any draft, and `resume: apply` to `[>]`.
 
 Two sessions in one working tree, on free lines that touch different
 files, are the normal case of parallel work on trunk. Another line
@@ -295,16 +295,9 @@ conflict: do not stop for them, do not touch them, change only this
 delivery's line and stage only this delivery's paths and hunks, including
 its own hunk of docs/06. A conflict is the same hunk edited by both, or a
 file this page needs that the other delivery is changing; then stop and
-report. In worktrees, each worktree's queue shows that branch's state, not a
-global live view. Change only the current delivery's line, its new findings
-and the dependent lines this session can resolve. When branches are
-integrated, reconcile docs/06 by slug: retain every delivery and finding,
-and each owning branch's latest state. Do not replace the whole file with
-one side or downgrade a completed line using a stale copy. Check the page
-at the expected path and keep a dependency blocked until its completed
-changes are available in the branch that needs them. A conflicting state
-or scope is reported for resolution, never guessed. Apply the same care
-to shared domain terms and ADRs.
+report. In worktrees, change only this delivery's line; when branches are
+integrated, reconcile docs/06 by slug, keeping every line at its latest
+state, never one side's whole file.
 
 Each milestone is planned with its review as the last line (§8). Edited by
 conversation in any session.
@@ -322,7 +315,8 @@ time. Steps go in a manual, and what a command prints stays in its help.
   manual when a person does it by hand.
 * **Proof of a screen:** <tool, viewports, reference>, or "no screens".
 * **Publish policy:** when an environment beyond the local one is updated,
-  and whether the agent asks first.
+  and whether the agent asks first. Whatever it is, /apply's last words
+  say which environment is at which version.
 * **Context:** `context/` is committed | listed in `.gitignore`, and why
   (who reads the repository).
 * **Manuals:** `docs/manuals/`, one file per action that takes more than
@@ -335,25 +329,23 @@ time. Steps go in a manual, and what a command prints stays in its help.
   names such a command points to its manual instead of holding the steps;
   a delivery that changes one updates its manual. <The manuals, one line
   each, or: none yet.>
+* **Milestone review:** <the command a person launches for a deep review
+  of a whole branch's code against a base, such as Claude Code's
+  `/code-review ultra <base>`, or: none>.
 * **Git:** trunk | a branch per delivery | a worktree per delivery. A
   delivery's page and build are one change: one commit on trunk, one merge
   otherwise. The agent stages; it never commits or merges. <With a
-  worktree per delivery: the hidden folder of the container, `.face/`, and
-  the branch prefix, `face/`.>
+  worktree per delivery: the hidden folder of the container, `.focus-kit/`,
+  and the branch prefix, `focus-kit/`.>
 
 ## 6. Commit
 
 This section owns the commit format; docs/04 points here. Before editing,
-inspect git status, the staged and unstaged diffs, and untracked files.
-Record which changes already belong to this delivery (its /propose page
-and queue changes, or a previous partial /apply) and which are unrelated;
-do not assume an existing edit belongs to it because it shares a path.
-Another delivery's page, its files and its hunk of docs/06 belong to the
-session building it (§4); they are unrelated here. Preserve unrelated
-edits and the pre-existing index entries. If ownership of a change this
-delivery must edit cannot be established, or changes overlap in the same
-hunk, stop and report the affected paths before editing them or staging;
-do not reset or stash them.
+inspect git status, the diffs and untracked files. What this delivery did
+not change (another session's page, files and hunk of docs/06, anyone's
+edit) is not its own: preserve it and the existing index entries. When a
+change this delivery must edit is not clearly its own, stop and report
+the paths; do not reset or stash them.
 
 Stage only this delivery's files or hunks, including the page move and its
 documentation changes. Use explicit paths for files wholly owned by it,
@@ -372,22 +364,17 @@ reasoning lives: `work/done/<slug>.md` when done, `work/<slug>.md` when
 blocked. A partial message says it is partial and names the blocker;
 it must not imply verify passed or the delivery is done.
 
-When blocked on trunk, keep the work uncommitted and do not add it to the
-index; the `commit` block is a draft for the eventual whole delivery.
-Resume with the same page and record the current verify result. If a
-prerequisite must be implemented separately before resumption, move this
-partial delivery to its own branch/worktree, preserving its edits and
-index ownership, before starting the prerequisite; ask for help if safe
-separation is not possible. Do not mix their commits on trunk.
-On a delivery branch or worktree, partial changes may be staged and
-suggested for the person to commit there. Keep the branch unmerged until
-the delivery is complete, so one merge still contains the whole delivery.
+When blocked on trunk, keep the work uncommitted and out of the index;
+the `commit` block is a draft for the whole delivery. On a delivery
+branch or worktree, partial changes may be staged for the person to
+commit there, and the branch stays unmerged until the delivery is
+complete, so one merge still holds the whole delivery.
 
 ## 7. What this process does not have
 
 No formal spec, no spec delta, no change folder, no numbered tasks, no
-gate before implementation, no review of a review, no specialized
-subagent, no tool the deliveries did not ask for. When one of these is
+gate before implementation beyond a complete page, no review of a review,
+no specialized subagent, no tool the deliveries did not ask for. When one of these is
 proposed, the question is: which concrete error would it have caught? The
 answer names an error that happened.
 
@@ -397,9 +384,15 @@ A milestone is planned with its review as its last line,
 `<milestone>-review`, a delivery like the others: /propose writes its
 page, /apply runs it. It takes the milestone's paragraph clause by clause
 and writes, for each, which delivery answers it and how a person tests it.
-It reviews no code and fixes nothing. The person tests each clause by
-hand: a clause no delivery answers, or one that fails in the person's
-hands, is a finding.
+It fixes nothing. The person tests each clause by hand: a clause no
+delivery answers, or one that fails in the person's hands, is a finding.
+
+The review also reads the code, the one look at the whole instead of a
+delivery: every page can be right and the whole wrong. Its page names the
+commit that closed the previous milestone, or the first commit, and the
+person launches §5's Milestone review against it; the agent may say it is
+time and never launches it. A finding the code review confirms is a
+finding like the others.
 
 Each finding becomes a `[ ]` line in the same milestone, under the review
 line, waiting for /propose. The milestone closes when those lines are
@@ -430,8 +423,9 @@ is the only place a rule is written.
   docs/01, one line each>
 - One delivery = one page in work/<slug>.md: /propose to define, /apply
   to build. Code changes only inside /apply: a change asked outside it,
-  however small, becomes a `[ ]` line in docs/06 and the answer stops
-  there.
+  however small, becomes a `[ ]` line in docs/06, with a draft page for
+  what the line cannot hold, and the answer stops there, naming /propose
+  for a fresh session (docs/05 §2).
 - No em dash in any text a user reads.
 - The agent stages and suggests the commit message. It never commits.
 - Stage only this delivery's changes as docs/05 §6 says; preserve unrelated

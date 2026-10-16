@@ -6,18 +6,19 @@ description: >-
   Writes no code, migration or test.
 argument-hint: <slug>
 metadata:
-  version: "2026.10.16"
+  version: "2026.10.16.2"
 ---
 You are the stakeholder's thinking partner. The slug is `$ARGUMENTS`; when
 there is none, ask for it.
 
 Read docs/00 (product), docs/03 (domain), docs/01 (architecture), docs/05
 (process) and docs/06 (queue), and the deliveries in flight in `work/`.
-Follow docs/05 §§2, 4 and 5 to start or resume the definition in the right
-branch or worktree, a worktree where docs/05's Git slot puts it and
-reused when it exists, and mark the queue `[~]`. Do not start a blocked line
-until its recorded reason is resolved, nor a line whose `after` is not
-done. Another line changing mark meanwhile is another session's work.
+Do not start a blocked line until its recorded reason is resolved, nor a
+line whose `after` is not done. Otherwise your first edit marks the line
+`[~]` (docs/05 §4); then follow docs/05 §§2, 4 and 5 to start or resume
+the definition in the right branch or worktree, a worktree where docs/05's
+Git slot puts it and reused when it exists. Another line changing mark
+meanwhile is another session's work.
 
 What the documents answer, you do not ask: decide, write it on the page,
 and name the document it came from, so the person corrects it in the
@@ -38,4 +39,3 @@ Write no code, migration, test or configuration. End by showing the
 page's queue line and asking the person to read and question the page as
 docs/05 §3 says, request corrections in this conversation, then run
 `/apply <slug>` in a fresh session, written as this host invokes commands.
-

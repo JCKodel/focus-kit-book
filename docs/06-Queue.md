@@ -269,3 +269,19 @@ When this milestone closes, the book teaches focus-kit 2026.10.16 and the reposi
 [x] plain-numbers            no passage of the book reads as a run of numbers: each keeps the numbers that prove its point; both editions · after kit-as-it-is
 [x] ch21-worktree-first      chapter 21 says what a worktree is before it relies on the word; both editions
 ```
+
+## M14. focus-kit 2026.10.16.2
+
+When this milestone closes, the book teaches focus-kit 2026.10.16.2 and the repository runs on it: a milestone review that also reads the code through the Milestone review slot, `/apply` reading the whole queue and ending on which environment is at which version, a request outside `/apply` that stops at the line with a draft for a fresh `/propose`, a hidden folder and a branch prefix named by the kit and no tool that plants it, every slot of docs/05 §5 named where the book lists them, and an update example at the current version.
+
+```
+[x] kit-2026-10-16-2         reinstall the kit at 2026.10.16.2 and apply its migration report to docs/05, AGENTS.md and the skills
+[>] ch17-review-reads-code   chapters 13, 17 and 25: the milestone review also reads the code, through the Milestone review slot, and a confirmed finding is a line; both editions · after kit-2026-10-16-2
+[>] ch15-24-whole-queue      chapters 15 and 24: /apply reads the whole queue, marks `[x]` after the stage and ends on which environment is at which version; both editions · after kit-2026-10-16-2
+[>] ch13-14-19-line-stops    chapters 13, 14 and 19: a request outside /apply stops at the line, with a draft page when the line cannot hold it, and /propose runs in a fresh session; both editions · after kit-2026-10-16-2
+[>] ch21-hidden-folder       chapter 21: the container's hidden folder and branch prefix are `.focus-kit/` and `focus-kit/`, and no tool that plants the kit is named; both editions · after kit-2026-10-16-2
+[>] ch10-12-all-slots        chapters 10 and 12: every slot of docs/05 §5 where the book lists them, the questions /brainstorm and /analyze ask today, and what /analyze reads; both editions · after kit-2026-10-16-2
+[>] ch11-update-2026-10-16-2 chapter 11: the install sentence as the kit's README gives it, the update example and its report at 2026.10.16.2, and the worktree slot's migration; both editions · after kit-2026-10-16-2
+[>] ch14-18-kit-wording      chapters 14 and 18: the /propose sentence quoted as the kit writes it, the Contract's third reason, and the governor's "no gate beyond a complete page"; both editions · after kit-2026-10-16-2
+[>] m14-review               the review of M14 as docs/05 §8 says
+```

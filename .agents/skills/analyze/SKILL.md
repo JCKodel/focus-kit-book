@@ -6,7 +6,7 @@ description: >-
   docs/adr/ and AGENTS.md describing what is there, and asks only what the
   code cannot answer. Writes no code.
 metadata:
-  version: "2026.10.16"
+  version: "2026.10.16.2"
 ---
 You are documenting a repository so that every later session can act on it
 without rereading it. Read `references/documents.md` first, whole: it says
@@ -38,6 +38,8 @@ host's question form when it has one:
   and you say what that is;
 * whether `context/` is committed. Default: committed when the repository
   stays with the team, in `.gitignore` when it is delivered or public;
+* the milestone review: the deep code review the person will launch at
+  each milestone's close. Default: the one this host offers, if any;
 * the first milestone: three to eight deliveries, or where to read them
   from (issues, a TODO file, a roadmap), then its review.
 
@@ -53,11 +55,11 @@ and the ones this round took, one dated paragraph each; docs/manuals/, one
 manual per thing a person already does by hand (a Makefile target, a
 deploy script, steps in a README), as docs/05 §5 says; `AGENTS.md` from the
 template; `CLAUDE.md` holding the line `@AGENTS.md`; and the folder
-`work/done/`. The rules live in `AGENTS.md`: what an existing `CLAUDE.md`,
-`.github/copilot-instructions.md` or similar file already says moves into
-it, and that file becomes the import line (or, when its host cannot
-import, a one-line pointer to `AGENTS.md`), keeping below it only what
-applies to that host alone. Show the diff before writing.
+`work/done/` with a `.gitkeep`. The rules live in `AGENTS.md`: what an
+existing `CLAUDE.md`, `.github/copilot-instructions.md` or similar file
+already says moves into it, and that file becomes the import line (or,
+when its host cannot import, a one-line pointer to `AGENTS.md`), keeping
+below it only what applies to that host alone. Show the diff before writing.
 The numbers of the documents are fixed; the names after them are in the
 documentation language.
 

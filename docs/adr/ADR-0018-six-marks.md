@@ -27,3 +27,7 @@ Since `kit-2026-10-13` the book runs focus-kit 2026.10.13; the six marks are unc
 ## Amendment, 2026-10-16 (kit-2026-10-16)
 
 Since `kit-2026-10-16` the book runs focus-kit 2026.10.16, 2026.10.15 included with no migration, since its container folder applies only to a worktree per delivery and the book is on trunk (ADR-0010); the six marks are unchanged.
+
+## Amendment, 2026-10-16 (kit-2026-10-16-2)
+
+Since `kit-2026-10-16-2` the book runs focus-kit 2026.10.16.2, 2026.10.16.1 included; the six marks are unchanged.

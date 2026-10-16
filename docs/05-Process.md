@@ -15,20 +15,22 @@ A chapter is one delivery and includes both editions.
 
 docs/06 `[ ]` → /propose <slug>, the line `[~]` → work/<slug>.md, the
 line `[>]` → /apply <slug>, in a fresh session, the line `[*]` → verify
-green, environments as §5 says → work/done/<slug>.md, the line `[x]`, and
-git add → a person reviews and commits. Any line before `[x]` may wait as
+green, environments as §5 says → work/done/<slug>.md, git add, and the
+line `[x]` → a person reviews and commits. Any line before `[x]` may wait as
 `[?]` (§4).
 
 /propose talks and writes the page, never code. /apply builds, proves,
 updates the documents, stages and suggests the commit, never commits.
 Code changes only inside /apply: a change asked anywhere else, however
-small, becomes a `[ ]` line in docs/06 and the answer stops there, or,
-when the person wants it defined now, the conversation continues as
-/propose <slug> in the same session, and what was said becomes the page.
+small, becomes a `[ ]` line in docs/06; what was said that the line
+cannot hold goes into a draft `work/<slug>.md`. The answer stops there
+and names `/propose <slug>` for a fresh session, as this host invokes
+commands.
 
 Before /propose changes the queue or the page, use §5's git strategy:
 create the branch or worktree named after the slug, or reuse its existing
-one on resumption. Add a missing queue line where it belongs and say so.
+one on resumption, bringing into it any draft left for the slug. Add a
+missing queue line where it belongs and say so.
 Start defining with `[~]`; start building only a completely defined `[>]`
 page, with `[*]`. Follow §4 for blocked lines and §6 before changing code
 or staging. Keep project slots and rules current before using them; report
@@ -46,7 +48,9 @@ a missing process rule rather than falling back to a retired instruction.
     test or a manual check.
 
     **Contract.** Data, schema, API, message shapes, or "none". The only
-    section that must be exact.
+    section that must be exact: a wrong screen is fixed in a session, a
+    wrong column is a migration, and a wrong access rule has already
+    leaked.
 
     **States.** Empty, loading, error, offline: one line each, or "the
     defaults". Only when there is a screen.
@@ -104,6 +108,10 @@ queue shows what is happening while it happens:
 | `[x]` | done, page in `work/done/` | /apply, with verify green |
 | `[?]` | waiting | any session, in the three cases below |
 
+A board may read the queue, and people pull work from it, so a mark
+changes at once: `[~]` is /propose's first edit, `[*]` is /apply's first,
+and `[x]` is /apply's last. Without a board the marks cost nothing.
+
 A line waits when the person says it is blocked, when it needs an answer
 that was asked and not given, or when work already started finds it needs
 another line done first, such as a fix found in the middle of an /apply.
@@ -117,9 +125,8 @@ by /propose always uses `resume: propose` until §3 is complete.
 Any mark before `[x]` can become `[?]`. The line leaves `[?]` when the
 reason is resolved: the person says so, the session that records the
 answer clears it, or /apply clears it when it marks `[x]` the last line of
-an `after`. Remove both suffixes and return `resume: propose` to `[ ]`,
-keeping any draft for /propose to finish; return `resume: apply` to `[>]`
-only when its page still satisfies §3. Existence alone is insufficient.
+an `after`. Remove both suffixes: `resume: propose` returns to `[ ]`,
+keeping any draft, and `resume: apply` to `[>]`.
 If scope became undecided, return `[ ]` and say what /propose must settle.
 For an old blocked line without `resume`, recover the phase from its page
 and history; if completeness cannot be established, return `[ ]`.
@@ -192,6 +199,8 @@ time. Steps go in a manual, and what a command prints stays in its help.
   `status: draft` in its front matter, in both editions; the site shows a
   banner and a mark in the navigation, and the chapter's delivery removes
   the line when done. So the site can publish `main` at any time.
+  Whatever it is, /apply's last words say which environment is at which
+  version.
 * **Context:** `context/` is listed in `.gitignore` and not created: the
   repository is public and what people said about the cases is private.
 * **Guided project and brownfield project:** retired by `rewrite`
@@ -213,6 +222,8 @@ time. Steps go in a manual, and what a command prints stays in its help.
     Release, with `make release`.
   * `set-up-the-disclosure-list.md`: the list, the hooks and the Actions
     secret, once per machine and once per clone.
+* **Milestone review:** Claude Code's `/code-review ultra <base>`,
+  launched by the author against the commit the review's page names.
 * **Git:** trunk. A delivery's page and build are one change: one commit.
   Two sessions may work in one tree on free lines (§4). The agent stages;
   it never commits or merges.
@@ -266,8 +277,8 @@ the delivery is complete, so one merge still contains the whole delivery.
 ## 7. What this process does not have
 
 No formal spec, no spec delta, no change folder, no numbered tasks, no
-gate before implementation, no review of a review, no specialized
-subagent, no tool the deliveries did not ask for. When one of these is proposed, the question
+gate before implementation beyond a complete page, no review of a review,
+no specialized subagent, no tool the deliveries did not ask for. When one of these is proposed, the question
 is: which concrete error would it have caught? The answer names an error
 that happened.
 
@@ -277,9 +288,16 @@ A milestone is planned with its review as its last line,
 `<milestone>-review`, a delivery like the others: /propose writes its
 page, /apply runs it. Its page takes the milestone's paragraph clause by
 clause and writes, for each, which delivery answers it and how a person
-tests it. It reviews no code and fixes nothing. The person tests each
+tests it. It fixes nothing. The person tests each
 clause by hand: a clause no delivery answers, or one that fails in the
 person's hands, is a finding.
+
+The review also reads the code, the one look at the whole instead of a
+delivery: every page can be right and the whole wrong. Its page names the
+commit that closed the previous milestone, or the first commit, and the
+person launches §5's Milestone review against it; the agent may say it is
+time and never launches it. A finding the code review confirms is a
+finding like the others.
 
 For a milestone of chapters, testing by hand is the author reading, in
 the PDF of both editions, the passages the page names, and answering the
