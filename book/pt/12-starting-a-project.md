@@ -21,6 +21,8 @@ Ele conversa sobre um assunto de cada vez, nesta ordem, e passa ao seguinte quan
 5. **Os slots do processo** (docs/05): o comando de verificação, os ambientes, como uma tela é provada, quando um ambiente além da sua máquina é atualizado.
 6. **O primeiro marco** (docs/06): de três a oito entregas, uma linha cada, em ordem, e depois a revisão dele; as primeiras são o esqueleto em que as outras se apoiam.
 
+Cada slot que ele escreve no docs/05 diz o que e o comando, em poucas linhas, como diz o próprio docs/05 ([capítulo 10](10-the-documents.md)).
+
 ### Um padrão em cada pergunta
 
 O agente pergunta só o que não consegue decidir com um padrão sensato, e diz o padrão junto com a pergunta.
@@ -49,7 +51,7 @@ Uma stack em que um erro só aparece em tempo de execução, em uma tela, deixa 
 ### O que ele escreve, e onde para
 
 Quando os seis assuntos estão cobertos, o `/brainstorm` escreve o docs/00 a 06, um ADR para cada decisão que uma sessão futura poderia desfazer (a stack, FOCUS ou não, o git, qualquer coisa em que você hesitou), o `AGENTS.md`, o `CLAUDE.md` com a linha `@AGENTS.md`, e uma `work/done/` vazia.
-Ele não escreve manual: a `docs/manuals/` é criada com o primeiro, pela entrega que acrescenta algo que uma pessoa faz à mão ([capítulo 10](10-the-documents.md)).
+Ele não escreve manual: a `docs/manuals/` é criada com o primeiro, pela entrega que acrescenta algo que uma pessoa faz à mão ou uma prova que o `/apply` roda em outra máquina.
 Depois ele mostra a fila e para.
 Ele não escreve código, nem configuração, nem arquivo de dependências: a primeira entrega faz isso, com uma página própria, pelo `/propose` em uma sessão nova ([capítulo 14](14-propose.md)).
 
@@ -141,6 +143,7 @@ Confira que:
 * cada resposta que você deu chegou ao documento dono dela: o produto no docs/00, a stack no docs/01 e no ADR dela, o marco no docs/06;
 * cada padrão que o agente manteve é um que você aceita sabendo; cada um que você rejeita é uma correção agora, antes que uma entrega se apoie nele;
 * cada ADR registra uma decisão que você tomou, ou diz que a escolha foi do agente;
+* cada slot do docs/05 diz o que e o comando, sem passos e sem saída colada; os passos estão num manual;
 * em um projeto existente, cada afirmação observada é verdadeira no código (abra o arquivo que ela cita), cada questão em aberto é uma contradição que o código tem de fato, e nada descreve o que deveria existir em vez do que existe;
 * em um projeto existente, uma pessoa que não leu mais nada consegue seguir cada manual, e cada comando que um manual dá existe no repositório.
 

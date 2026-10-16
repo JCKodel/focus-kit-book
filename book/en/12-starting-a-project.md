@@ -21,6 +21,8 @@ It talks one subject at a time, in this order, and moves on when it could write 
 5. **The process slots** (docs/05): the verify command, the environments, how a screen is proven, when an environment beyond your machine is updated.
 6. **The first milestone** (docs/06): three to eight deliveries, one line each, in order, then its review; the first ones are the skeleton the others stand on.
 
+Each slot it writes in docs/05 says what and the command, in a few lines, as docs/05 itself says ([chapter 10](10-the-documents.md)).
+
 ### A default with every question
 
 The agent asks only what it cannot decide with a sensible default, and it states the default with the question.
@@ -49,7 +51,7 @@ A stack where a mistake shows only at run time, on a screen, leaves that check t
 ### What it writes, and where it stops
 
 When the six subjects are covered, `/brainstorm` writes docs/00 to 06, one ADR for each decision a later session might undo (the stack, FOCUS or not, git, anything you hesitated on), `AGENTS.md`, `CLAUDE.md` holding the line `@AGENTS.md`, and an empty `work/done/`.
-It writes no manual: `docs/manuals/` is created with the first one, by the delivery that adds something a person does by hand ([chapter 10](10-the-documents.md)).
+It writes no manual: `docs/manuals/` is created with the first one, by the delivery that adds something a person does by hand or a proof `/apply` runs on another machine.
 Then it shows the queue and stops.
 It writes no code, no configuration and no dependency file: the first delivery does that, with a page of its own, through `/propose` in a fresh session ([chapter 14](14-propose.md)).
 
@@ -141,6 +143,7 @@ Check that:
 * every answer you gave landed in the document that owns it: the product in docs/00, the stack in docs/01 and its ADR, the milestone in docs/06;
 * every default the agent kept is one you accept knowingly; each one you reject is a correction now, before a delivery builds on it;
 * every ADR records a decision you took, or says it was the agent's call;
+* every slot of docs/05 says what and the command, with no steps and no pasted output; the steps are in a manual;
 * on an existing project, every observed statement is true in the code (open the file it names), every open question is a contradiction the code really holds, and nothing describes what should exist instead of what does;
 * on an existing project, a person who read nothing else can follow every manual, and every command a manual gives exists in the repository.
 
