@@ -18,7 +18,7 @@ It talks one subject at a time, in this order, and moves on when it could write 
 2. **The vocabulary** (docs/03): the ten to twenty words the product cannot be described without, each with its name in code.
 3. **How it is built** (docs/01): the stack and the shape of the code, with the kit's two choices, FOCUS and the git strategy, each with the agent's recommendation for this stack.
 4. **The conventions** (docs/04): the documentation language and the identifier language, the style, where tests live.
-5. **The process slots** (docs/05): the verify command, the environments, how a screen is proven, when an environment beyond your machine is updated.
+5. **The process slots** (docs/05): the verify command, the environments, how a screen is proven, when an environment beyond your machine is updated, whether `context/` is committed, the manuals (none yet, on a new project), and the deep code review you will launch when a milestone closes.
 6. **The first milestone** (docs/06): three to eight deliveries, one line each, in order, then its review; the first ones are the skeleton the others stand on.
 
 Each slot it writes in docs/05 says what and the command, in a few lines, as docs/05 itself says ([chapter 10](10-the-documents.md)).
@@ -50,7 +50,7 @@ A stack where a mistake shows only at run time, on a screen, leaves that check t
 
 ### What it writes, and where it stops
 
-When the six subjects are covered, `/brainstorm` writes docs/00 to 06, one ADR for each decision a later session might undo (the stack, FOCUS or not, git, anything you hesitated on), `AGENTS.md`, `CLAUDE.md` holding the line `@AGENTS.md`, and an empty `work/done/`.
+When the six subjects are covered, `/brainstorm` writes docs/00 to 06, one ADR for each decision a later session might undo (the stack, FOCUS or not, git, anything you hesitated on), `AGENTS.md`, `CLAUDE.md` holding the line `@AGENTS.md`, and `work/done/` with a `.gitkeep`, so the folder survives a clone.
 It writes no manual: `docs/manuals/` is created with the first one, by the delivery that adds something a person does by hand or a proof `/apply` runs on another machine.
 Then it shows the queue and stops.
 It writes no code, no configuration and no dependency file: the first delivery does that, with a page of its own, through `/propose` in a fresh session ([chapter 14](14-propose.md)).
@@ -85,12 +85,13 @@ It works like `/brainstorm`, with a default for every question and the same docu
 
 The kit's file for the command has it read:
 
+* `context/`, whole, when it exists: what people said that the code cannot (the section below);
 * the README and any documentation already there;
 * the manifests, such as `package.json`, `pyproject.toml` or `go.mod`;
 * the folder tree, two levels deep;
 * the entry points;
 * the tests, and how they run;
-* the CI configuration;
+* the CI configuration, and any Makefile or script a person runs by hand;
 * the last fifty commit subjects;
 * any agent rules file already there, such as `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md` or `.cursorrules`.
 
@@ -99,12 +100,14 @@ What the project does not have, it skips: on a repository with no code the docum
 
 ### What it asks
 
-One round, of four subjects only:
+One round, of six subjects only:
 
 1. The documentation language. Default: the language of the README.
 2. The product's purpose and audience in your words, only when no README says it.
 3. FOCUS and the git strategy. The default of each is what the code already does, and the agent says what that is, so "your call" keeps it.
-4. The first milestone: three to eight deliveries, or where to read them from (issues, a TODO file, a roadmap), then its review.
+4. Whether `context/` is committed. Default: committed when the repository stays with the team, in `.gitignore` when it is delivered or public.
+5. The milestone review: the deep code review you will launch at each milestone's close. Default: the one your host offers, if any.
+6. The first milestone: three to eight deliveries, or where to read them from (issues, a TODO file, a roadmap), then its review.
 
 A rules file already there does not stay beside `AGENTS.md`: its rules move into `AGENTS.md`, and the file keeps only the line that imports it and what applies to its host alone.
 It writes the same documents as `/brainstorm`, plus a manual in `docs/manuals/` for each thing a person already does by hand there, such as a Makefile target, a deploy script or setup steps in a README, as the kit's file for the command says.
@@ -133,7 +136,7 @@ The more the folder holds, proposals to the client, meeting transcripts, emails,
 It is the difference between "this was built this way because the client asked for it, in the email of the 12th" and "nobody knows why it is like this".
 When a new document arrives, put it in the folder and ask the agent to read it and bring into the project what it changes: a rule into docs/00, a term into docs/03, a line into the queue.
 Both commands look for the folder by that name and read it whole before anything else, so `/brainstorm` starts from the brief or the proposal that exists before the code, and `/analyze` from what the code cannot say.
-Whether the folder is committed, and what must never be, is a decision of its own ([chapter 19](19-project-as-assistant.md)).
+Whether the folder is committed, and what must never be, is a decision of its own ([chapter 19](19-project-as-assistant.md)); both commands ask it, with the default above.
 
 ## Review before you commit
 

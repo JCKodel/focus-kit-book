@@ -32,7 +32,8 @@ A tabela é o vocabulário: toda página, identificador e teste usa os seus term
 **docs/04, as convenções.** A língua dos documentos e dos identificadores, a nomenclatura, o estilo e a ferramenta que o impõe, onde ficam os testes e o que cada nível testa.
 
 **docs/05, o processo.** O processo do kit, o mesmo em todo projeto: a regra, o fluxo da fila ao commit, a forma de uma página, a fila, o commit e o formato da sua mensagem, o que o processo não tem, e como um marco fecha.
-Uma seção é preenchida pelo projeto, "This project" (este projeto), cujos itens são os seus slots: o comando que faz a verificação de uma entrega, os ambientes, como uma tela é provada, quando algo é publicado, e a estratégia de git.
+Uma seção é preenchida pelo projeto, "This project" (este projeto), cujos itens são os seus nove slots: a língua da documentação, o comando que faz a verificação de uma entrega, os ambientes, como uma tela é provada, quando algo é publicado, se a pasta `context/` entra no commit, os manuais, a revisão profunda do código que uma pessoa lança quando um marco fecha, e a estratégia de git.
+Diga o que disser a política de publicação, as últimas palavras do `/apply` dizem qual ambiente está em qual versão (capítulo 15).
 Um slot diz o que e o comando, em poucas linhas, porque o `/apply` o lê toda vez; os passos vão para um manual, e o que um comando imprime fica na ajuda dele.
 Então um slot não diz que entrega criou o seu comando nem como ele funcionava antes: essa história está na página da entrega em `work/done/` e no ADR.
 Os comandos leem esses fatos aqui, então nenhum arquivo de comando guarda algum deles.
@@ -107,7 +108,7 @@ Um fato novo tem um dono, e você o encontra fazendo estas perguntas em ordem; a
    docs/01, ou docs/02 quando um servidor guarda a regra.
 5. É como código ou texto é escrito: nomenclatura, estilo, testes?
    docs/04.
-6. É um fato deste projeto que os comandos leem: o comando de verificação, os ambientes, o git?
+6. É um fato deste projeto que os comandos leem: o comando de verificação, os ambientes, se a pasta `context/` entra no commit, o comando da revisão de marco, o git?
    Um slot do docs/05, o que e o comando, em poucas linhas.
 7. São os passos que uma pessoa segue à mão fora de uma entrega (publicar, desfazer uma versão, trocar um segredo, configurar um serviço), ou os de uma prova que o `/apply` roda em outra máquina?
    Um manual em `docs/manuals/`, com o slot guardando o comando e apontando para ele.

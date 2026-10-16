@@ -18,7 +18,7 @@ Ele conversa sobre um assunto de cada vez, nesta ordem, e passa ao seguinte quan
 2. **O vocabulário** (docs/03): as dez a vinte palavras sem as quais o produto não pode ser descrito, cada uma com seu nome no código.
 3. **Como ele é construído** (docs/01): a stack e a forma do código, com as duas escolhas do kit, o FOCUS e a estratégia de git, cada uma com a recomendação do agente para essa stack.
 4. **As convenções** (docs/04): a língua da documentação e a língua dos identificadores, o estilo, onde ficam os testes.
-5. **Os slots do processo** (docs/05): o comando de verificação, os ambientes, como uma tela é provada, quando um ambiente além da sua máquina é atualizado.
+5. **Os slots do processo** (docs/05): o comando de verificação, os ambientes, como uma tela é provada, quando um ambiente além da sua máquina é atualizado, se a pasta `context/` entra no commit, os manuais (nenhum ainda, em um projeto novo), e a revisão profunda do código que você vai lançar quando um marco fechar.
 6. **O primeiro marco** (docs/06): de três a oito entregas, uma linha cada, em ordem, e depois a revisão dele; as primeiras são o esqueleto em que as outras se apoiam.
 
 Cada slot que ele escreve no docs/05 diz o que e o comando, em poucas linhas, como diz o próprio docs/05 ([capítulo 10](10-the-documents.md)).
@@ -50,7 +50,7 @@ Uma stack em que um erro só aparece em tempo de execução, em uma tela, deixa 
 
 ### O que ele escreve, e onde para
 
-Quando os seis assuntos estão cobertos, o `/brainstorm` escreve o docs/00 a 06, um ADR para cada decisão que uma sessão futura poderia desfazer (a stack, FOCUS ou não, o git, qualquer coisa em que você hesitou), o `AGENTS.md`, o `CLAUDE.md` com a linha `@AGENTS.md`, e uma `work/done/` vazia.
+Quando os seis assuntos estão cobertos, o `/brainstorm` escreve o docs/00 a 06, um ADR para cada decisão que uma sessão futura poderia desfazer (a stack, FOCUS ou não, o git, qualquer coisa em que você hesitou), o `AGENTS.md`, o `CLAUDE.md` com a linha `@AGENTS.md`, e uma `work/done/` com um `.gitkeep`, para que a pasta sobreviva a um clone.
 Ele não escreve manual: a `docs/manuals/` é criada com o primeiro, pela entrega que acrescenta algo que uma pessoa faz à mão ou uma prova que o `/apply` roda em outra máquina.
 Depois ele mostra a fila e para.
 Ele não escreve código, nem configuração, nem arquivo de dependências: a primeira entrega faz isso, com uma página própria, pelo `/propose` em uma sessão nova ([capítulo 14](14-propose.md)).
@@ -85,12 +85,13 @@ Ele funciona como o `/brainstorm`, com um padrão em cada pergunta e os mesmos d
 
 O arquivo do kit para o comando manda ler:
 
+* a `context/`, inteira, quando existe: o que as pessoas disseram e o código não consegue dizer (a seção abaixo);
 * o README e qualquer documentação que já exista;
 * os manifestos, como `package.json`, `pyproject.toml` ou `go.mod`;
 * a árvore de pastas, dois níveis abaixo;
 * os pontos de entrada;
 * os testes, e como eles rodam;
-* a configuração de CI;
+* a configuração de CI, e qualquer Makefile ou script que uma pessoa roda à mão;
 * os assuntos dos últimos cinquenta commits;
 * qualquer arquivo de regras de agente que já exista, como `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md` ou `.cursorrules`.
 
@@ -99,12 +100,14 @@ O que o projeto não tem, ele pula: em um repositório sem código, os documento
 
 ### O que ele pergunta
 
-Uma rodada, de quatro assuntos apenas:
+Uma rodada, de seis assuntos apenas:
 
 1. A língua da documentação. Padrão: a língua do README.
 2. O propósito e o público do produto nas suas palavras, só quando nenhum README os diz.
 3. O FOCUS e a estratégia de git. O padrão de cada um é o que o código já faz, e o agente diz o que é, então "your call" o mantém.
-4. O primeiro marco: de três a oito entregas, ou de onde lê-las (issues, um arquivo TODO, um roadmap), e depois a revisão dele.
+4. Se a pasta `context/` entra no commit. Padrão: entra quando o repositório fica com o time, e vai para o `.gitignore` quando ele é entregue ou público.
+5. A revisão de marco: a revisão profunda do código que você vai lançar ao fechar cada marco. Padrão: a que o seu host oferece, se houver.
+6. O primeiro marco: de três a oito entregas, ou de onde lê-las (issues, um arquivo TODO, um roadmap), e depois a revisão dele.
 
 Um arquivo de regras que já existe não fica ao lado do `AGENTS.md`: as regras dele passam para o `AGENTS.md`, e o arquivo guarda só a linha que o importa e o que vale apenas para o host dele (o programa que roda o agente).
 Ele escreve os mesmos documentos que o `/brainstorm`, e mais um manual em `docs/manuals/` para cada coisa que uma pessoa já faz à mão ali, como um alvo do Makefile, um script de deploy ou os passos de instalação de um README, como diz o arquivo do kit para o comando.
@@ -133,7 +136,7 @@ Quanto mais a pasta guarda, propostas para o cliente, transcrições de reuniõe
 É a diferença entre "isto foi feito assim porque o cliente pediu, no e-mail do dia 12" e "ninguém sabe por que é assim".
 Chegou um documento novo, ponha-o na pasta e peça ao agente que o leia e traga para o projeto o que ele muda: uma regra para o docs/00, um termo para o docs/03, uma linha para a fila.
 Os dois comandos procuram a pasta por esse nome e a leem inteira antes de qualquer outra coisa, então o `/brainstorm` parte do briefing ou da proposta que existe antes do código, e o `/analyze` do que o código não consegue dizer.
-Se a pasta entra no commit, e o que nunca pode entrar, é uma decisão própria ([capítulo 19](19-project-as-assistant.md)).
+Se a pasta entra no commit, e o que nunca pode entrar, é uma decisão própria ([capítulo 19](19-project-as-assistant.md)); os dois comandos perguntam isso, com o padrão acima.
 
 ## Revise antes do commit
 
