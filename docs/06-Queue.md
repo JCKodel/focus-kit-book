@@ -283,5 +283,26 @@ When this milestone closes, the book teaches focus-kit 2026.10.16.2 and the repo
 [x] ch10-12-all-slots        chapters 10 and 12: every slot of docs/05 §5 where the book lists them, the questions /brainstorm and /analyze ask today, and what /analyze reads; both editions · after kit-2026-10-16-2
 [x] ch11-update-2026-10-16-2 chapter 11: the install sentence as the kit's README gives it, the update example and its report at 2026.10.16.2, and the worktree slot's migration; both editions · after kit-2026-10-16-2
 [x] ch14-18-kit-wording      chapters 14 and 18: the /propose sentence quoted as the kit writes it, the Contract's third reason, and the governor's "no gate beyond a complete page"; both editions · after kit-2026-10-16-2
-[>] m14-review               the review of M14 as docs/05 §8 says
+[x] m14-review               the review of M14 as docs/05 §8 says · after ch14-18-kit-wording
+[ ] repo-files-any-name      every check reads every tracked or untracked file, whatever characters its name has
+[ ] site-build-anchors       the site build fails on a link to a heading that does not exist, and reports each broken link at its own line
+[ ] book-build-links         the book build fails on a link to a heading that does not exist, links every note mention, and orders appendices by number
+[ ] parity-notes-readmes     parity counts every note mention, whatever its key, and fails when the two READMEs' sections differ
+[ ] hook-hash-lines          the commit-msg hook refuses a message whose stored text holds a listed term, lines starting with `#` included
+[ ] em-dash-every-text       the em dash check reads every text file outside `work/done/*-run/`, diagrams and files without an extension included
+[ ] links-url-bounds         the link check judges the address a reader's link points to, whatever Markdown form wraps it
+[ ] entry-apostrophes        a list entry written with either apostrophe matches both
+[ ] epub-chapter-links       in the EPUB a link to a chapter prints in the text's colour, as in the PDF
+[ ] venv-failed-install      a failed install leaves `.venv` to be rebuilt by the next make
+[ ] od4-kit-pointer          docs/00's OD-4 says what is true today of the kit's pointer to FOCUS
+[ ] docs01-retired-projects  docs/01 and `AGENTS.md` present no guided or brownfield project or chapter tag as live, and docs/01's tree names every ignored path
+[ ] docs03-current-rows      docs/03's waiting mark and tag rows say what docs/05 says today, and its references name sections that exist
+[ ] docs04-gain-number       docs/04 gives one rule for a gain's numbers, and its references name sections that exist
+[ ] docs05-no-exercises      docs/05 §3's chapter Contract lists no exercises
+[ ] docs06-legend            the queue's legend defines `[>]` as docs/05 §4 does
+[ ] ch03-restated-rule       chapter 3 says how many of each tool's files restate the rule, and gives the Ninjobs lines the cause chapter 9 gives; both editions
+[ ] ch09-key-points          chapter 9's key points give the cause its gain gives and no count the gain does not; both editions
+[ ] ch16-resume-apply        chapter 16 says once, as docs/05 §4 does, where a `resume: apply` line returns; both editions
+[ ] ch17-slot-none           chapter 17 says a Milestone review slot of none launches no deep review, apart from the base commit; both editions
+[ ] ch26-what-counts         chapter 26's sentences on following wrong advice and on the three runs say what each number counts; both editions
 ```
