@@ -1,7 +1,7 @@
 # 13. The queue and milestones
 
 After this chapter you can read a queue, say what each mark means, and write a milestone paragraph a person can check.
-You can also order a milestone so that its order is its priority, write on a line which line must be done before it, `· after <slug>`, add, move or change a line by conversation, and turn a code change asked outside `/apply` into a line.
+You can also write a line as one sentence with its suffixes, order a milestone so that its order is its priority, write on a line which line must be done before it, `· after <slug>`, add, move or change a line by conversation, and turn a code change asked outside `/apply` into a line, or continue it as `/propose` in the same session.
 
 ## The problem
 
@@ -12,16 +12,16 @@ The queue is one file, docs/06, that says what comes next, what is in flight and
 ## The line
 
 docs/06 holds the project's milestones, each with a paragraph saying what is true when it closes, and under each one line per delivery, in order.
-A line has three parts, a mark, a slug and what the delivery gives, in one line, and it may end by naming a line that must be done before it:
+A line is the mark, the slug, one sentence of what the delivery gives, and its suffixes, such as `· after <slug>`, which names a line that must be done before it:
 
 ```
-[ ] <slug>    <what it delivers, one line> · after <slug>
+[ ] <slug>    <what it delivers, one sentence> · after <slug>
 ```
 
 The slug is the delivery's name, in lowercase words joined by hyphens ([chapter 14](14-propose.md)).
 It names the delivery's page, `work/<slug>.md`, and it is the argument of the commands, `/propose <slug>` and `/apply <slug>`, so the line, the page and the commands all point at the same delivery.
 
-The kit asks for one line, and the reasoning goes on the page.
+The kit asks for one sentence, and what happened goes on the page, because `/propose` reads the whole queue before it defines a delivery: every word on a line is read by every definition.
 On Ninjobs I let the lines grow: its queue held 102 deliveries in 1,711 lines, 1,052 of them continuations of a line, decisions that belonged on the pages.
 A line that grows into a paragraph is a decision in the wrong place, since the page is where the next session looks for it.
 
@@ -38,8 +38,8 @@ A line has one of six marks, which says where its delivery stands:
 
 [Chapter 16](16-queue-states.md) shows who sets each mark and at what moment, when a line is free to start, and how a line waits and leaves `[?]`.
 
-A line never leaves the queue; it changes mark.
-So the queue is also the history of what was delivered, in the order it was planned, and the page in `work/done/` behind each `[x]` says what happened.
+A line never leaves the queue; it changes mark and keeps its sentence.
+So the queue is also the history of what was delivered, in the order it was planned, and what happened is on the page in `work/done/` behind each `[x]`, never added to the line.
 On trunk the page waits uncommitted between the two commands, and `/apply` reads it from the working tree, so a fresh session finds it whether or not it was committed ([chapter 20](20-git-essentials.md)).
 
 This is the lending library's first milestone some days into the work, written for this chapter:
@@ -106,6 +106,7 @@ Asked in an ordinary session to show the due date on the loan screen as day/mont
 ```
 
 The line gets what every delivery gets, a page, a proof and the person's commit; an edit made on the spot would have skipped the line, the page and verify.
+When you want the change defined now, say so: the conversation continues as `/propose due-date-format` in the same session, the line goes `[~]`, and what you said becomes the page instead of a longer line (chapter 14 shows `/propose`).
 The answer is the same during `/propose`, which writes no code: a new line, and the page unchanged unless you ask for that change to be part of it.
 An agent that edits the code anyway, to "just change the label", is asked for the line instead, and the edit is reverted before anything is committed.
 The rule covers `/apply`'s own session too: a fix it finds outside its page becomes a line above it, and the delivery waits for that line (chapter 16).
@@ -127,17 +128,21 @@ The kit's changelog, at entry 2026.10.08.3, tells why the order is written down:
 Written as a rule, it needs no ranking: the queue already is one.
 Its entry 2026.10.06.1 tells why code changes only inside `/apply`: before that rule, an agent asked for a correction in an ordinary session edited the code directly, with no line in the queue, no page and no verify.
 Since then a change asked outside `/apply` costs one line, and it gets a page, a proof and the person's commit.
-This book's own queue shows `· after` at work: in its milestone M12, seven lines end with `· after kit-2026-10-13`; each brings chapters to the kit's version 2026.10.13, which the repository had to run first, and none of them reads as stuck while it waits its turn.[^queue-m12]
+Its entry 2026.10.16 tells why a line holds one sentence: in one project the request lines grew to 4.7 KB, because the detail of a request had nowhere to go but the line, and every session read them.
+Since then the line holds one sentence and the detail goes to a page, in the same session if the person wants it.
+This book's own queue was cut the same way: when it moved to 2026.10.16, 61 of its 150 lines were over 200 characters and the longest held 639; after, 12 and 223.[^short-lines]
+The same queue shows `· after` at work: in its milestone M12, seven lines end with `· after kit-2026-10-13`; each brings chapters to the kit's version 2026.10.13, which the repository had to run first, and none of them reads as stuck while it waits its turn.[^queue-m12]
 
 ## Key points
 
-* docs/06 holds milestones, each with a paragraph, and one line per delivery under it: a mark, a slug and what it delivers, in one line; the reasoning goes on the page.
+* docs/06 holds milestones, each with a paragraph, and one line per delivery under it: a mark, a slug, one sentence and its suffixes; what happened goes on the page.
 * Six marks: `[ ]` not defined, `[~]` being defined, `[>]` the page exists, `[*]` being built, `[x]` done, `[?]` waiting; a line never leaves, so the queue is also the history.
 * A milestone paragraph is a test a person can check against the product, never a theme.
 * Three to eight deliveries, the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone.
 * The order is the priority: the higher line matters more, and moving a line is changing its priority.
 * A dependency known when a line is added is written with it, `· after <slug>`: an order, not a wait, so the line keeps `[ ]`.
-* No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept; code changes only inside `/apply`, and a change asked anywhere else becomes a line.
+* No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept; code changes only inside `/apply`, and a change asked anywhere else becomes a line, or continues as `/propose` in the same session when you want it defined now.
 
+[^short-lines]: J.C. Ködel, "One Page at a Time", the delivery `kit-2026-10-16`, `work/done/kit-2026-10-16.md`, the queue's sizes before and after, 2026-10, in the book's repository. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/kit-2026-10-16.md>
 [^queue-m12]: J.C. Ködel, "One Page at a Time", the queue, `docs/06-Queue.md`, milestone M12, 2026-10, in the book's repository. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md>
 

@@ -1,7 +1,7 @@
 # 13. A fila e os marcos
 
 Depois deste capítulo você consegue ler uma fila, dizer o que cada marca significa, e escrever um parágrafo de marco que uma pessoa consegue conferir.
-Você também consegue ordenar um marco de modo que a ordem seja a prioridade, escrever em uma linha qual linha precisa estar feita antes dela, `· after <slug>`, acrescentar, mover ou mudar uma linha conversando, e transformar em linha uma mudança de código pedida fora do `/apply`.
+Você também consegue escrever uma linha como uma frase com os seus sufixos, ordenar um marco de modo que a ordem seja a prioridade, escrever em uma linha qual linha precisa estar feita antes dela, `· after <slug>`, acrescentar, mover ou mudar uma linha conversando, e transformar em linha uma mudança de código pedida fora do `/apply`, ou seguir com ela como `/propose` na mesma sessão.
 
 ## O problema
 
@@ -12,10 +12,10 @@ A fila é um arquivo, o docs/06, que diz o que vem a seguir, o que está em anda
 ## A linha
 
 O docs/06 guarda os marcos do projeto, cada um com um parágrafo que diz o que é verdade quando ele fecha, e sob cada um uma linha por entrega, em ordem.
-Uma linha tem três partes, uma marca, um slug e o que a entrega dá, em uma linha, e pode terminar nomeando uma linha que precisa estar feita antes dela:
+Uma linha é a marca, o slug, uma frase do que a entrega dá, e os seus sufixos, como `· after <slug>`, que nomeia uma linha que precisa estar feita antes dela:
 
 ```
-[ ] <slug>  <what it delivers, one line> · after <slug>
+[ ] <slug>  <what it delivers, one sentence> · after <slug>
 ```
 
 O `· after`, como o `· blocked:` do [capítulo 16](16-queue-states.md), fica em inglês, como o kit o escreve.
@@ -23,7 +23,7 @@ O `· after`, como o `· blocked:` do [capítulo 16](16-queue-states.md), fica e
 O slug é o nome da entrega, em palavras minúsculas unidas por hífens ([capítulo 14](14-propose.md)).
 Ele dá nome à página da entrega, `work/<slug>.md`, e é o argumento dos comandos, `/propose <slug>` e `/apply <slug>`, então a linha, a página e os comandos apontam todos para a mesma entrega.
 
-O kit pede uma linha, e o raciocínio vai para a página.
+O kit pede uma frase, e o que aconteceu vai para a página, porque o `/propose` lê a fila inteira antes de definir uma entrega: cada palavra de uma linha é lida por toda definição.
 Na Ninjobs eu deixei as linhas crescerem: a fila dela tinha 102 entregas em 1.711 linhas, 1.052 delas continuações de uma linha, decisões que pertenciam às páginas.
 Uma linha que cresce até virar um parágrafo é uma decisão no lugar errado, já que a página é onde a próxima sessão a procura.
 
@@ -40,8 +40,8 @@ Uma linha tem uma de seis marcas, que diz onde a entrega dela está:
 
 O [capítulo 16](16-queue-states.md) mostra quem põe cada marca e em que momento, quando uma linha está livre para começar, e como uma linha espera e sai de `[?]`.
 
-Uma linha nunca sai da fila; ela muda de marca.
-Então a fila é também o histórico do que foi entregue, na ordem em que foi planejado, e a página em `work/done/` por trás de cada `[x]` diz o que aconteceu.
+Uma linha nunca sai da fila; ela muda de marca e mantém a sua frase.
+Então a fila é também o histórico do que foi entregue, na ordem em que foi planejado, e o que aconteceu está na página em `work/done/` por trás de cada `[x]`, nunca acrescentado à linha.
 No trunk (direto na linha principal do histórico) a página espera sem commit (sem ser registrada no histórico) entre os dois comandos, e o `/apply` a lê da árvore de trabalho, então uma sessão nova a encontra tendo ou não havido commit ([capítulo 20](20-git-essentials.md)).
 
 Este é o primeiro marco da biblioteca alguns dias depois do começo do trabalho, escrito para este capítulo:
@@ -108,6 +108,7 @@ Pedido numa sessão comum para mostrar a data de devolução na tela do emprést
 ```
 
 A linha ganha o que toda entrega ganha, uma página, uma prova e o commit da pessoa; uma edição feita na hora teria pulado a linha, a página e o verify.
+Quando você quer a mudança definida agora, diga isso: a conversa segue como `/propose formato-devolucao` na mesma sessão, a linha vai para `[~]`, e o que você disse vira a página em vez de uma linha mais longa (o capítulo 14 mostra o `/propose`).
 A resposta é a mesma durante o `/propose`, que não escreve código: uma linha nova, e a página sem mudança, a não ser que você peça que essa mudança faça parte dela.
 Um agente que edita o código mesmo assim, para "só trocar o rótulo", recebe o pedido da linha no lugar, e a edição é desfeita antes de qualquer commit.
 A regra vale também para a sessão do próprio `/apply`: uma correção que ele encontra fora da sua página vira uma linha acima dele, e a entrega espera por essa linha (capítulo 16).
@@ -129,17 +130,21 @@ O changelog do kit, na entrada 2026.10.08.3, conta por que a ordem está escrita
 Escrita como regra, ela dispensa classificação: a fila já é uma.
 A entrada 2026.10.06.1 conta por que o código só muda dentro do `/apply`: antes dessa regra, um agente a quem pediam uma correção numa sessão comum editava o código direto, sem linha na fila, sem página e sem verify.
 Desde então uma mudança pedida fora do `/apply` custa uma linha, e ganha uma página, uma prova e o commit da pessoa.
-A fila deste próprio livro mostra o `· after` funcionando: no marco M12 dela, sete linhas terminam com `· after kit-2026-10-13`; cada uma leva capítulos para a versão 2026.10.13 do kit, que o repositório precisava rodar antes, e nenhuma delas parece travada enquanto espera a sua vez.[^queue-m12]
+A entrada 2026.10.16 conta por que uma linha tem uma frase: em um projeto as linhas de pedido chegaram a 4,7 KB, porque o detalhe de um pedido não tinha outro lugar além da linha, e toda sessão as lia.
+Desde então a linha tem uma frase e o detalhe vai para uma página, na mesma sessão se a pessoa quiser.
+A fila deste próprio livro foi cortada do mesmo jeito: quando ele passou para a 2026.10.16, 61 das suas 150 linhas passavam de 200 caracteres e a maior tinha 639; depois, 12 e 223.[^short-lines]
+A mesma fila mostra o `· after` funcionando: no marco M12 dela, sete linhas terminam com `· after kit-2026-10-13`; cada uma leva capítulos para a versão 2026.10.13 do kit, que o repositório precisava rodar antes, e nenhuma delas parece travada enquanto espera a sua vez.[^queue-m12]
 
 ## Pontos-chave
 
-* O docs/06 guarda marcos, cada um com um parágrafo, e uma linha por entrega sob ele: uma marca, um slug e o que ela entrega, em uma linha; o raciocínio vai para a página.
+* O docs/06 guarda marcos, cada um com um parágrafo, e uma linha por entrega sob ele: uma marca, um slug, uma frase e os seus sufixos; o que aconteceu vai para a página.
 * Seis marcas: `[ ]` não definida, `[~]` sendo definida, `[>]` a página existe, `[*]` sendo construída, `[x]` feita, `[?]` esperando; uma linha nunca sai, então a fila é também o histórico.
 * O parágrafo de um marco é um teste que uma pessoa confere no produto, nunca um tema.
 * De três a oito entregas, o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados viram linhas sob ela no mesmo marco.
 * A ordem é a prioridade: a linha mais acima importa mais, e mover uma linha é mudar a prioridade dela.
 * Uma dependência conhecida quando a linha é acrescentada é escrita junto, `· after <slug>`: uma ordem, não uma espera, então a linha mantém `[ ]`.
-* Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido; o código só muda dentro do `/apply`, e uma mudança pedida em qualquer outro lugar vira uma linha.
+* Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido; o código só muda dentro do `/apply`, e uma mudança pedida em qualquer outro lugar vira uma linha, ou segue como `/propose` na mesma sessão quando você a quer definida agora.
 
+[^short-lines]: J.C. Ködel, "One Page at a Time", a entrega `kit-2026-10-16`, `work/done/kit-2026-10-16.md`, os tamanhos da fila antes e depois, 2026-10, no repositório do livro. <https://github.com/JCKodel/focus-kit-book/blob/main/work/done/kit-2026-10-16.md>
 [^queue-m12]: J.C. Ködel, "One Page at a Time", a fila, `docs/06-Queue.md`, marco M12, 2026-10, no repositório do livro. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md>
 

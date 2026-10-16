@@ -131,7 +131,7 @@ Uma resposta tirada do que a sessão lembra, uma oferta de manter um arquivo de 
 
 Uma pergunta não toca em código, e o modo de plano do host (capítulo 14) impede uma sessão de editar qualquer coisa.
 Quando o gerente quer mudar algo, como uma linha nova na fila, o agente a escreve por conversa, como em qualquer sessão, e uma pessoa revisa e faz o commit.
-Uma mudança no código, por menor que seja, também vira uma linha (capítulo 13), e a resposta para ali.
+Uma mudança no código, por menor que seja, também vira uma linha (capítulo 13), e a resposta para ali, ou segue como `/propose` na mesma sessão quando o gerente quer a mudança definida agora.
 
 ## O que o time ganha
 
