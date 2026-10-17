@@ -20,7 +20,7 @@ O primeiro caso se evita escolhendo quais entregas rodam juntas; o segundo, pelo
 ## Duas sessões em uma pasta
 
 Duas sessões podem dividir uma pasta quando constroem linhas livres que mexem em arquivos diferentes.
-Uma linha livre é uma linha da fila que não está pronta, não está esperando, e não precisa de outra linha pronta antes ([o capítulo 14](14-queue-states.md) ensina as marcas da fila).
+Uma linha livre é uma linha da fila que não está feita, não está esperando, e não precisa de outra linha feita antes ([o capítulo 14](14-queue-states.md) ensina as marcas da fila).
 
 Digamos que a biblioteca de empréstimos tem duas linhas livres: `devolver-livro`, que mexe em `src/emprestimos/`, e `lista-de-atrasos`, que mexe em `src/relatorios/`; os slugs e os caminhos são uma ilustração, escrita para este capítulo.
 Os arquivos de código delas não se encontram.
