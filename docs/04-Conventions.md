@@ -34,7 +34,7 @@
   Before it, the text gives what the artifact is about: the project, the problem it answers, where it comes from.
   An excerpt is a whole unit that means something on its own (a page's section, a queue's milestone), never a loose line that leans on the lines around it.
 * **Teach, do not only show.** After an artifact, one sentence says what the reader should see in it; a term, a name or a choice the reader has not met yet is explained where it appears, or the text says which chapter explains it.
-  An organization, a study or a tool is introduced in a few words the first time it is named (METR, DORA, Chroma, Liu's paper in chapters 1 and 2).
+  An organization, a study or a tool is introduced in a few words the first time it is named (METR, DORA, Chroma, Liu's paper in the prologue and chapter 2).
   No sentence is only a pointer to a later chapter ("A project writes its product in docs/00 (chapter 10)." said nothing the reader could use yet): a forward pointer follows a sentence that already says something, as a parenthesis or as "chapter 10 shows that document"; first occurrence, the prologue in `author-review-1`.
 * **Say it where the doubt is born.** What a thing is for, and what the team gets from it, is said where the thing is introduced, never saved for `## What the team gains`, which sums up and gives the evidence (first: chapter 7's orchestrator, whose reason, one test per event, was said only in the gain, `author-review-2`).
 * **Chapter pointers** (since `author-review-2`, which cut 65 of 179 per edition). A pointer forward names a term the reader has not been taught, once per chapter for each target. A pointer back stays only where the sentence leans on a specific detail worth reopening (chapter 5's red and green cycle), where it names a term of chapters 4 to 8 for the reader who skipped them (docs/00 §Audience), or where the pointers are the content, a map of where each step is taught (chapter 9's rules, chapter 25's roles and steps); a pointer back that only repeats what a reader in order has just read is cut. A chapter is found by the number in its title; in the PDF and the EPUB a chapter link prints in the text's color, and on the site it stays a link.
@@ -110,7 +110,7 @@ remove the emoji
 
 ## Chapter shape
 
-Every chapter, in both editions, has this shape (terms from docs/03); the prologue and every chapter, starting at chapter 1, follow it:
+Every chapter, in both editions, has this shape (terms from docs/03); the prologue and every chapter follow it:
 
 ```
 ---
@@ -135,7 +135,7 @@ There are no exercises (ADR-0017).
 * One sentence per line in the source: a convention, not a check (no error it would have caught has happened, docs/05 §7).
 * Source notes: a note only where the reader gains something to open (a publication, a tool's documentation, a file of this book's repository or its runs) or a count to repeat. Every number and every quoted claim from such a source carries `[^<key>]` at the claim; a source cited again in the chapter reuses the key, and the PDF and the EPUB print its note once.
   No note points to a commit, a diff or a file of focus-kit's repository: where the text quotes or states a rule of the kit, the sentence names the file in plain words (`SETUP.md` §3.4, the file of `/apply`).
-  A private case has no note (since `author-review-1`; before it, each chapter carried a `[^ninjobs]`, `[^case-a]` or `[^case-b]` listing how every number was counted, and the author found them noise): the prologue says once, at the first mention of Ninjobs and of Case A, that their repositories are private and that every number about them was counted by the author.
+  A private case has no note (since `author-review-1`; before it, each chapter carried a `[^ninjobs]`, `[^case-a]` or `[^case-b]` listing how every number was counted, and the author found them noise): the prologue says once, in its gain section, before any number about Ninjobs or Case A, that their repositories are private and that every number about them was counted by the author.
   A chapter adds a parenthesis in the text only where the method matters to a reader repeating a count on their own project (chapter 3's `wc -l` over the tool's folder), and a reason or a story a chapter needs goes in the text or a note box, never in a note.
   The key is lowercase `[a-z0-9-]+`, the same in both editions (`[^metr-2025]`).
   The definition is `[^<key>]: <Author or organization>, "<Title>", <year>. <URL>`, with the title in its original language in both editions; the URL is written in angle brackets, `<https://...>`, so the site, the PDF and the EPUB make it a link.

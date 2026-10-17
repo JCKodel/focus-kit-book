@@ -38,11 +38,11 @@
 
 **Done when.**
 
-* [ ] One prologue in both editions, `01-why-process.md` gone from both, same headings in both; opens with METR; no filler and nothing useful cut (every claim of the two chapters is in the merged one or named as cut above).
-* [ ] No link to `01-why-process.md` and no "chapter 1"/"capítulo 1" left in `book/`, docs/00, docs/03 or docs/04; the list of the mentions resolved is on this page.
-* [ ] Every number sourced; the privacy sentence and the baseline sentence present once each.
-* [ ] `make verify` green; `make book` builds and both PDF paths are given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, the commit suggested in a `commit` block.
+* [x] One prologue in both editions, `01-why-process.md` gone from both, same headings in both; opens with METR; no filler and nothing useful cut (every claim of the two chapters is in the merged one or named as cut above).
+* [x] No link to `01-why-process.md` and no "chapter 1"/"capítulo 1" left in `book/`, docs/00, docs/03 or docs/04; the list of the mentions resolved is on this page.
+* [x] Every number sourced; the privacy sentence and the baseline sentence present once each.
+* [x] `make verify` green; `make book` builds and both PDF paths are given to the author.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, the commit suggested in a `commit` block.
 
 **Decisions taken from the documents.**
 
@@ -54,3 +54,39 @@
 **Decisions in the review.**
 
 * The two hook numbers ("four screens in fifteen days", "73 deliveries on eight days") leave the prologue, as recommended; chapters 9 and 19 own them.
+
+**What /apply did.**
+
+* Both editions: `00-product-people-process.md` rewritten from the two chapters, in the Contract's order (Speed moved the bottleneck; Three P's with Product, People, Process as H3; What goes wrong without a process; What a minimal process is; What the team gains, with the parts map; Key points); `01-why-process.md` removed with `git rm`. H1 unchanged; same headings in both editions; METR opens the first section.
+* Claims cut, as the page names them: the two lines "Typing is fast. / Deciding and checking are slow."; the television account of Marcus Lemonis (now one sentence and `[^lemonis-3ps]`); "Nothing in this book is new" and the sentence after it; the hook numbers "four screens in fifteen days" and "73 deliveries on eight days"; the DORA repeat and the "20% faster" half of the pair in the gain section (DORA stays in the body, METR's 19% is the gain's one number). Every other claim of the two chapters is in the merged prologue.
+* Mentions resolved: the prologue's "chapters 1 and 9 show the second failure" became the Ninjobs sentence pointing to chapters 3 and 9 (chapter 1's two links kept); docs/00 Contents lost "1 Why process, when AI writes fast"; docs/00 Audience "chapters 1 to 3" became "chapters 2 and 3"; docs/04 §Teach, do not only show "in chapters 1 and 2" became "in the prologue and chapter 2"; docs/04 §Chapter shape "starting at chapter 1" cut. No file linked to `01-why-process.md`; docs/03 has no row citing chapter 1 (checked, unchanged).
+* Case A passages, for the author's approval (docs/00 OD-3): one, the privacy sentence of the gain section: "Ninjobs and Case A, a client project that ran on the process and that chapter 19 tells, live in private repositories, so every number this book gives about them was counted by me over their histories." (pt: "A Ninjobs e o Caso A, um projeto de cliente que rodou sobre o processo e que o capítulo 19 conta, vivem em repositórios privados, então todo número que este livro dá sobre eles foi contado por mim ao longo dos seus históricos."), followed by "Ninjobs appears by name, and Case A without its owner, its client or its business." No Case B passage.
+* docs/adr checked: no mention of chapter 1 or `01-why-process.md`.
+* Mentions left, and why: docs/06's M1 line `chapter-template` ("proven by chapter 1, Why process") is a done line's history and outside `book/`, docs/00, docs/03 and docs/04; chapter 16's `[^toyota-kanban]` says "Chapter 1" of Toyota's own history; chapter 26's "1 to 5" is a score.
+* Notes: `[^lemonis-3ps]` once, `[^metr-2025]` twice (the trial, the gain), `[^dora-2024]` twice (the body), keys unchanged. The privacy sentence and the baseline sentence appear once each, in the gain section.
+* Proof: `make verify` green (build, parity, em dash, prose, links, disclosure); `make book` built `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+* Dependent lines: `renumber-chapters` and `one-gain-section` stay `[>]`; each still waits on other `after` lines.
+* Divergences: the privacy sentence sits in the gain section, as the Contract says, while Ninjobs's first mention is now the Process subsection; that mention carries no number, so the sentence still precedes every number about either case, and docs/04 §Source notes now says "in its gain section, before any number about Ninjobs or Case A" instead of "at the first mention". Omissions: none.
+
+**Decisions in /apply.** Chosen alone, as the batch rules say; corrections go in the review.
+
+* The opening adds "and the three things a minimal process gives an agent" to the Contract's two clauses, so the first paragraph names what the Behaviour's second item promises; two sentences.
+* The Three P's sentence keeps why product comes first ("the product is what everything else is judged by"), the one claim of the five-line account the section headings depend on.
+* Chapter 1's reason why too much process fails ("every document is one more thing to write, read and keep true") is folded into the Process sentence with the Ninjobs case, and the chapter 18 pointer stays on the rule it questions.
+* The Process paragraph on the project as the team's assistant stays in Process minus its last sentence; that sentence, merged with "the method is the same for one developer and for a company", is the gain's second sentence.
+* The privacy sentence names Ninjobs and Case A and says what Case A is, since the sentence that introduced it left with its number; the Ninjobs URL moves to its first mention.
+* The parts map's Part I line now starts "from how an agent sees a project", since the old start, why process matters, is the prologue now.
+* Ninjobs is named in the Process sentence and in the two privacy sentences, which docs/04 §Source notes requires; the Contract's "in one sentence" is read as one sentence that tells its case.
+* docs/04 §Chapter shape: "starting at chapter 1" cut rather than renumbered, so the sentence survives `renumber-chapters`.
+
+```commit
+docs(prologue-and-why): chapters 0 and 1 become one prologue
+
+- the prologue opens with METR and DORA, then the three P's
+- the three failures and the three pieces close it before the gain
+- the gain keeps METR's 19%, the privacy and the no-baseline sentences
+- 01-why-process.md removed; docs/00 and docs/04 point to the prologue
+- both editions
+
+work/done/prologue-and-why.md
+```
