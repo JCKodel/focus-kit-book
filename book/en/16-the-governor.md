@@ -52,7 +52,7 @@ Each job still gets done, by something the process already has:
 ## The error that earned a mark
 
 The question is asked in each project, and the governor decides there, with an error that project met.
-On Case A, a client project on a low-code platform, five lines waiting on the client's answers looked like idle work on its kanban board: those five idle-looking lines were the error that earned the mark Case A added by hand, `[?]`, for a line waiting on a person, and [chapter 14](14-queue-states.md) tells the story and gives the six marks that answer that error for every team.
+On Case A, a client project on a low-code platform, lines waiting on the client's answers read as idle work on its board, and that error is what let in the mark the project added by hand, `[?]` ([chapter 14](14-queue-states.md) tells the story).
 
 ## What the team gains
 
@@ -66,7 +66,7 @@ The governor keeps a process that small, and it lets a team say yes to a step wi
 * The answer names an error that happened; a possible error justifies anything, and every step is paid by every delivery after it.
 * A step that names no error leaves, and a list of exceptions fails on an entry with no live warning.
 * Each of the eight things the process does not have has its job done by something it has: the page, the documents, the Behaviour lines, the person, the person's commit, one agent, and the governor itself.
-* The governor decides in each project: Case A's idle-looking lines earned Case A its `[?]`, and the kit's six marks answer the same error for every team that reads its queue as a board.
+* The governor decides in each project, with an error that project met: Case A's `[?]` entered because waiting lines read as idle work.
 
 [^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>
 [^claude-code-subagents]: Anthropic, "Create custom subagents", Claude Code documentation, accessed 2026-09-29. <https://code.claude.com/docs/en/sub-agents>

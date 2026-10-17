@@ -335,7 +335,7 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] free-line-gloss          chapters 7 and 18 gloss a free line as docs/03 defines it, `[ ]` lines included; both editions
 [ ] pt-free-line-done       the Portuguese edition's free-line gloss says done with chapter 14's word, `feita`, not `pronta`, which also reads as ready, in chapters 7, 18 and 19
 [x] line-rule-once           chapters 13 and 22 point to chapter 11 for the one-sentence queue line instead of restating it; both editions
-[ ] case-a-board-once        chapters 16 and 20 point to chapter 14 for the kanban board, the fold onto three columns and Case A's `[?]`; both editions
+[x] case-a-board-once        chapters 16 and 20 point to chapter 14 for the kanban board, the fold onto three columns and Case A's `[?]`; both editions
 [ ] slice-paths              chapters 13, 14 and 19 name the lending library's slices under `src/features/`, as chapter 4 does; both editions
 [ ] code-width               no code block in chapters 1, 8, 10, 11, 13, 14, 15 and 21 runs past 74 columns; both editions
 [ ] pt-fixed-terms           the Portuguese edition uses docs/03's term and one word for each thing (due date, engine, view, fake, worktree, the checks, board columns, the fix-due-date slug) and means what the English means in chapters 11 and 14

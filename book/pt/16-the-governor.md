@@ -52,7 +52,7 @@ Cada trabalho ainda é feito, por algo que o processo já tem:
 ## O erro que rendeu uma marca
 
 A pergunta é feita em cada projeto, e o regulador decide ali, com um erro que aquele projeto encontrou.
-No Caso A, um projeto para um cliente em uma plataforma low-code, cinco linhas esperando as respostas do cliente pareciam trabalho parado no seu quadro kanban: essas cinco linhas que pareciam paradas eram o erro que rendeu a marca que o Caso A acrescentou à mão, `[?]`, para uma linha esperando por uma pessoa, e o [capítulo 14](14-queue-states.md) conta a história e mostra as seis marcas que respondem a esse erro para todo time.
+No Caso A, um projeto para um cliente em uma plataforma low-code, linhas esperando as respostas do cliente pareciam trabalho parado no seu quadro, e foi esse erro que deixou entrar a marca que o projeto acrescentou à mão, `[?]` (o [capítulo 14](14-queue-states.md) conta a história).
 
 ## O que o time ganha
 
@@ -66,7 +66,7 @@ O regulador mantém um processo desse tamanho, e deixa um time dizer sim a um pa
 * A resposta nomeia um erro que aconteceu; um erro possível justifica qualquer coisa, e cada passo é pago por toda entrega depois dele.
 * Um passo que não nomeia erro nenhum sai, e uma lista de exceções reprova em uma entrada sem um aviso vivo.
 * Cada uma das oito coisas que o processo não tem tem o seu trabalho feito por algo que ele tem: a página, os documentos, as linhas de Comportamento, a pessoa, o commit da pessoa, um agente só, e o próprio regulador.
-* O regulador decide em cada projeto: as linhas do Caso A que pareciam paradas renderam ao Caso A o seu `[?]`, e as seis marcas do kit respondem ao mesmo erro para todo time que lê a fila como um quadro.
+* O regulador decide em cada projeto, com um erro que aquele projeto encontrou: o `[?]` do Caso A entrou porque linhas em espera pareciam trabalho parado.
 
 [^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>
 [^claude-code-subagents]: Anthropic, "Create custom subagents", documentação do Claude Code, acesso em 2026-09-29. <https://code.claude.com/docs/en/sub-agents>

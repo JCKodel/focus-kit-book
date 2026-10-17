@@ -48,20 +48,19 @@ Então uma issue vira uma linha por conversa, e daí em diante é uma entrega co
 
 ## Quadros
 
-Um quadro kanban mostra o trabalho como cartões em colunas, uma coluna por etapa, e um cartão passa para a coluna seguinte quando o seu trabalho passa.
 Um gerente abre um quadro; raramente abre um repositório.
 Um quadro cujos cartões são movidos à mão, porém, é uma segunda fila, e se afasta da primeira no dia em que alguém esquece de arrastar um cartão.
 
 A resposta é um espelho numa só direção, da fila para o quadro.
 No Caso A, um projeto para um cliente em uma plataforma low-code, uma customização registrada no seu docs/05 fazia isso: um script e um pipeline enviavam a fila, numa só direção, ao quadro kanban do projeto no Azure DevOps, então o gerente de projeto acompanhava o progresso no portal sem perguntar a um desenvolvedor.
 O `/propose` e o `/apply` atualizavam o quadro sempre que mudavam uma marca, e avisavam sempre que não conseguiam, então um quadro desatualizado nunca ficava em silêncio.
-Com as seis marcas do capítulo 14, um espelho as dobra nas três colunas de um quadro: `[ ]` para To Do, `[~]`, `[>]` e `[*]` para Doing, `[x]` para Done; uma linha `[?]` deixa o cartão dela na coluna em que estava e o etiqueta como travado, com o motivo.
+Com as seis marcas do kit, um espelho coloca cada cartão pela marca da sua linha, na coluna em que o [capítulo 14](14-queue-states.md) as dobra nas colunas de um quadro.
 O espelho vai numa só direção porque a fila é o único lugar que o agente lê: um cartão movido no quadro não muda nada no repositório, e uma sincronização nas duas direções criaria duas fontes da verdade.
 
-### Uma marca para a espera
+### Entregas de pergunta
 
-O Caso A acrescentou uma marca à mão, `[?]`, para uma linha esperando por uma pessoa, e o kit tem a sua própria, com os outros dois motivos de uma linha esperar (o [capítulo 14](14-queue-states.md) conta por quê).
-O que continua uma customização do próprio Caso A são as suas entregas de pergunta, cujo único resultado é uma resposta escrita de alguém de fora do projeto: elas fecham na resposta, não no envio, porque uma sessão certa vez marcou uma delas como concluída quando o email saiu.
+O Caso A registrou mais uma customização: as entregas de pergunta, cujo único resultado é uma resposta escrita de alguém de fora do projeto.
+Elas fecham na resposta, não no envio, porque uma sessão certa vez marcou uma delas como concluída quando o email saiu.
 
 ## Por que a wiki não é o docs/
 
@@ -82,7 +81,7 @@ O quadro do Caso A rodou em um projeto, e a sua permissão de escrita nunca foi 
 * O revisor lê a página, depois o diff contra ela; um agente pode revisar primeiro, e uma pessoa decide.
 * Uma issue espelha uma linha da fila pelo slug, e a fila continua a fonte da verdade, porque o agente lê o repositório.
 * Um quadro é um espelho da fila numa só direção, atualizado quando uma marca muda, e nunca em silêncio quando não consegue ser.
-* `[?]` foi a marca do Caso A para linhas que esperam por uma pessoa, e o kit tem a sua própria (capítulo 14); as entregas de pergunta, que fecham na resposta, continuam uma customização do Caso A.
+* Uma entrega de pergunta, customização do próprio Caso A, fecha na resposta, não no envio.
 
 [^gh-prs]: GitHub Docs, "Pull requests", seção "Working with pull requests", acesso em 2026-09-30. <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests>
 [^copilot-review]: GitHub Docs, "About GitHub Copilot code review", seções "Agent skills" e "Validating Copilot code reviews", acesso em 2026-09-30. <https://docs.github.com/en/copilot/concepts/agents/code-review>

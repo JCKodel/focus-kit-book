@@ -48,20 +48,19 @@ So an issue becomes a line by conversation, and from there it is a delivery like
 
 ## Boards
 
-A kanban board shows work as cards in columns, one column per stage, and a card moves to the next column when its work does.
 A manager opens a board; they rarely open a repository.
 A board whose cards are moved by hand, though, is a second queue, and it drifts from the first the day someone forgets to drag a card.
 
 The answer is a mirror in one direction, from the queue to the board.
 On Case A, a client project on a low-code platform, a customization recorded in its docs/05 did this: a script and a pipeline pushed the queue, one way, to the project's Azure DevOps kanban board, so the project manager followed progress in the portal without asking a developer.
 `/propose` and `/apply` refreshed the board whenever they changed a mark, and said so whenever they could not, so a stale board was never silent.
-With the six marks of chapter 14, a mirror folds them onto a board's three columns: `[ ]` to To Do, `[~]`, `[>]` and `[*]` to Doing, `[x]` to Done; a `[?]` line leaves its card in the column it was in and tags it blocked, with the reason.
+With the kit's six marks, a mirror places each card by its line's mark, in the column where [chapter 14](14-queue-states.md) folds them onto a board's columns.
 The mirror goes one way because the queue is the only place the agent reads: a card moved on the board changes nothing in the repository, and a sync in both directions would make two sources of truth.
 
-### A mark for waiting
+### Question deliveries
 
-Case A added a mark by hand, `[?]`, for a line waiting on a person, and the kit has its own, with the two other reasons a line waits ([chapter 14](14-queue-states.md) tells why).
-What stays Case A's own customization is its question deliveries, whose only output is a written answer from someone outside the project: they close on the answer, not on the send, because a session once marked one done when the email went out.
+Case A recorded one more customization: question deliveries, whose only output is a written answer from someone outside the project.
+They close on the answer, not on the send, because a session once marked one done when the email went out.
 
 ## Why the wiki is not docs/
 
@@ -82,7 +81,7 @@ Case A's board ran on one project, and its write permission was never proven.
 * The reviewer reads the page, then the diff against it; an agent may review first, and a person decides.
 * An issue mirrors a queue line through the slug, and the queue stays the source of truth, because the agent reads the repository.
 * A board is a one-way mirror of the queue, refreshed when a mark changes, and never silent when it cannot be.
-* `[?]` was Case A's mark for lines waiting on a person, and the kit has its own (chapter 14); question deliveries, which close on the answer, stay Case A's customization.
+* A question delivery, Case A's own customization, closes on the answer, not on the send.
 
 [^gh-prs]: GitHub Docs, "Pull requests", section "Working with pull requests", accessed 2026-09-30. <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests>
 [^copilot-review]: GitHub Docs, "About GitHub Copilot code review", sections "Agent skills" and "Validating Copilot code reviews", accessed 2026-09-30. <https://docs.github.com/en/copilot/concepts/agents/code-review>
