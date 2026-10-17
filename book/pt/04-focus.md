@@ -57,7 +57,9 @@ A pasta `features/` fica em inglês, como o kit a escreve e assim como este livr
 
 A pasta de cima grita a biblioteca: empréstimos, membros, catálogo.
 Uma mudança em como o empréstimo funciona mexe em `emprestimos/`, e tirar os empréstimos do produto tira uma pasta.
-O critério de Parnas de 1972 funciona também neste tamanho: a fatia esconde as decisões da sua feature do resto do programa.
+Em 1972, David Parnas comparou duas maneiras de dividir um mesmo programa em módulos: dividido pelos passos do processamento, uma mudança em como os dados eram guardados mexia em todos os módulos; dividido pelas decisões que provavelmente vão mudar, mexia em um só.
+Ele propôs começar "*com uma lista de decisões de projeto difíceis ou de decisões de projeto que provavelmente vão mudar*", de modo que "*cada módulo seja então projetado para esconder tal decisão dos outros*".[^parnas-1972]
+Uma pasta por camada divide o código pelos passos por que passa uma requisição; uma fatia aplica o critério de Parnas no tamanho de uma feature, e esconde do resto do programa as decisões da sua feature, como a forma de decidir e de guardar um empréstimo.
 
 ## O que é uma feature
 
@@ -243,5 +245,6 @@ Cliente e servidor compartilham os casos de uso: o servidor impõe `emprestar`, 
 [^bogard-vertical-slice]: Jimmy Bogard, "Vertical Slice Architecture", 2018, acesso em 2026-09-30. <https://www.jimmybogard.com/vertical-slice-architecture/>
 [^fowler-injection]: Martin Fowler, "Inversion of Control Containers and the Dependency Injection pattern", martinfowler.com, 2004, acesso em 2026-09-30. <https://martinfowler.com/articles/injection.html>
 [^seemann-composition-root]: Mark Seemann, "Composition Root", 2011-07-28, acesso em 2026-09-30. <https://blog.ploeh.dk/2011/07/28/CompositionRoot/>
+[^parnas-1972]: D. L. Parnas, "On the Criteria To Be Used in Decomposing Systems into Modules", Communications of the ACM 15(12), 1972. <https://doi.org/10.1145/361598.361623>
 [^bloc]: Bloc, "Bloc State Management Library", documentação, acesso em 2026-09-29. <https://bloclibrary.dev/>
 [^mediatr]: Jimmy Bogard, "MediatR", acesso em 2026-09-29. <https://github.com/jbogard/MediatR>

@@ -55,7 +55,9 @@ Each of these files is one of the four pieces this chapter names further on, and
 
 The top folder screams the library: loans, members, catalog.
 A change to how lending works touches `loans/`, and removing loans from the product removes one folder.
-Parnas's criterion of 1972 works at this size too: the slice hides its feature's decisions from the rest of the program.
+In 1972 David Parnas compared two ways of splitting one program into modules: split by the steps of the processing, a change to how the data was stored touched every module; split by the decisions likely to change, it touched one.
+He proposed to begin "*with a list of difficult design decisions or design decisions which are likely to change*", so that "*each module is then designed to hide such a decision from the others*".[^parnas-1972]
+A folder per layer splits code by the steps a request goes through; a slice applies Parnas's criterion at the size of a feature, and hides its feature's decisions, such as how a loan is decided and stored, from the rest of the program.
 
 ## What one feature is
 
@@ -241,5 +243,6 @@ Client and server share the use cases: the server enforces `lend`, and the clien
 [^bogard-vertical-slice]: Jimmy Bogard, "Vertical Slice Architecture", 2018, accessed 2026-09-30. <https://www.jimmybogard.com/vertical-slice-architecture/>
 [^fowler-injection]: Martin Fowler, "Inversion of Control Containers and the Dependency Injection pattern", martinfowler.com, 2004, accessed 2026-09-30. <https://martinfowler.com/articles/injection.html>
 [^seemann-composition-root]: Mark Seemann, "Composition Root", 2011-07-28, accessed 2026-09-30. <https://blog.ploeh.dk/2011/07/28/CompositionRoot/>
+[^parnas-1972]: D. L. Parnas, "On the Criteria To Be Used in Decomposing Systems into Modules", Communications of the ACM 15(12), 1972. <https://doi.org/10.1145/361598.361623>
 [^bloc]: Bloc, "Bloc State Management Library", documentation, accessed 2026-09-29. <https://bloclibrary.dev/>
 [^mediatr]: Jimmy Bogard, "MediatR", accessed 2026-09-29. <https://github.com/jbogard/MediatR>

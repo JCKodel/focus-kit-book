@@ -342,7 +342,7 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] pt-fixed-terms           the Portuguese edition uses docs/03's term and one word for each thing (due date, engine, view, fake, worktree, the checks, the fix-due-date slug) and means what the English means in chapters 11 and 14
 [x] pt-placeholders          the Portuguese edition translates every placeholder and folder written for a chapter, notes the kit's English ones, and explains the imperative with its own commit (chapters 4, 7, 11, 13, 14, 18, 19, 21)
 [x] ch03-opening             chapter 3 opens on what grew on Ninjobs without retelling chapter 6's causes and checks; both editions
-[ ] ch04-parnas              chapter 4 introduces Parnas's criterion with its source, or does not lean on it; both editions
+[x] ch04-parnas              chapter 4 introduces Parnas's criterion with its source, or does not lean on it; both editions
 [ ] ch05-lend-pointer        chapter 5 points to the chapter where the use case `lend` is shown; both editions
 [ ] ch10-commit-message      chapter 10's commit message follows docs/05 §6's format as the book writes it; both editions
 [ ] ch12-review-skill        chapter 12 names no review skill the kit does not have; both editions
