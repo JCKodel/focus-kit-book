@@ -2,15 +2,15 @@
 
 BUMP ?= patch
 
-.venv: requirements.txt
+.venv/.installed: requirements.txt
 	python3 -m venv .venv
 	.venv/bin/pip install -r requirements.txt
-	touch .venv
+	touch .venv/.installed
 
-serve: .venv
+serve: .venv/.installed
 	.venv/bin/mkdocs serve
 
-build: .venv
+build: .venv/.installed
 	.venv/bin/python scripts/build.py
 
 verify: build

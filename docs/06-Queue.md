@@ -293,7 +293,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.16.2 and the repo
 [x] links-url-bounds         the link check judges the address a reader's link points to, whatever Markdown form wraps it
 [x] entry-apostrophes        a list entry written with either apostrophe matches both
 [x] epub-chapter-links       in the EPUB a link to a chapter prints in the text's colour, as in the PDF
-[>] venv-failed-install      a failed install leaves `.venv` to be rebuilt by the next make
+[x] venv-failed-install      a failed install leaves `.venv` to be rebuilt by the next make
 [>] od4-kit-pointer          docs/00's OD-4 says what is true today of the kit's pointer to FOCUS
 [>] docs01-retired-projects  docs/01 and `AGENTS.md` present no guided or brownfield project or chapter tag as live, and docs/01's tree names every ignored path
 [>] docs03-current-rows      docs/03's waiting mark and tag rows say what docs/05 says today, and its references name sections that exist

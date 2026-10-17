@@ -49,7 +49,7 @@ docs/manuals/            the manuals of docs/05 §5
 README.md, README.pt.md  what the book is, where to read it, how to build and contribute, which license covers what
 LICENSE                  AGPL-3.0 text: scripts, build and site configuration (ADR-0003)
 LICENSE-TEXT             CC BY-SA 4.0 legal code: the book, docs/, work/, the READMEs (ADR-0003)
-.venv/                   created by make from requirements.txt; ignored
+.venv/                   created by make from requirements.txt; .venv/.installed marks a finished install; ignored
 site/                    the built site; ignored
 output/                  PDF and EPUB; ignored
 __pycache__/             written by Python when a check imports a module of scripts/; ignored
@@ -57,7 +57,7 @@ __pycache__/             written by Python when a check imports a module of scri
 
 | Target | Does |
 |---|---|
-| `.venv` | `python3 -m venv .venv` and `pip install -r requirements.txt`; rebuilt when `requirements.txt` changes. Only Python 3 is needed beforehand. |
+| `.venv/.installed` | `python3 -m venv .venv` and `pip install -r requirements.txt`, then the stamp; rebuilt when `requirements.txt` is newer than the stamp or an install failed. Only Python 3 is needed beforehand. |
 | `make serve` | `mkdocs serve`, at `http://127.0.0.1:8000/`, which redirects to `/focus-kit-book/` (the path of `site_url`); Portuguese under `pt/`. |
 | `make build` | `scripts/build.py`: `mkdocs build --strict` into `site/`. |
 | `make verify` | build, then parity, then em dash, then prose, then links, then disclosure (files and every commit message, as `make scan`); stops at the first failing group. The link check needs the network: offline it is skipped locally and fails in Actions (`CI` set). |
