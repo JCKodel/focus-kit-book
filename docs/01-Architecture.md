@@ -24,7 +24,7 @@ book/en/NN-<slug>.md     English edition, the source (A1-<slug>.md for appendice
 book/pt/NN-<slug>.md     Portuguese edition, same file names
 book/assets/             images shared by both editions, diagrams one per edition (NN-<what>.<edition>.svg); screenshots one for both (NN-<what>.png); the covers, cover-<edition>.pdf (A5, one page, the PDF's first page), cover-<edition>.png (the EPUB's cover image) and cover-<edition>.af (their source, Affinity); site.css (the draft mark in the navigation, a border and a width for PNGs, the note box, notes at 66%, italic, links, quotations and code upright)
 overrides/main.html      theme override: the draft banner
-scripts/build.py         strict site build, warnings as findings (rule "build")
+scripts/build.py         strict site build, warnings as findings, a broken link found at each line it stands on (rule "build")
 scripts/check_parity.py  the two editions: same chapters, heading levels and status, and the same note keys, each cited as many times (rule "parity")
 scripts/check_em_dash.py no em dash in any text file but the evidence of the runs, work/done/*-run/ (rule "em-dash")
 scripts/check_prose.py   the prose rules of docs/04 in both editions and both READMEs (rule "prose")
@@ -41,7 +41,7 @@ pandoc/pdf.css           the PDF: A5, margins, the fonts by @font-face, night bl
 pandoc/epub.css          the EPUB: no @font-face; a wrapped code line starts at the margin; a border and a width for PNGs; the note box; notes at 66%, italic, links, quotations and code upright
 pandoc/fonts/            Merriweather (4 styles), Instrument Serif (regular and italic), Iosevka Term Regular; <Family>-OFL.txt each
 .github/workflows/verify.yml  jobs verify (make verify on every push, the full history, the list from the secret DISCLOSURE_DENYLIST), pages (main only) and release (v* tags only), each after verify
-mkdocs.yml               the site: MkDocs Material, i18n in folder structure, footnotes, no nav: key
+mkdocs.yml               the site: MkDocs Material, i18n in folder structure, footnotes, no nav: key, links to headings validated (validation: links: anchors: warn)
 requirements.txt         mkdocs-material and mkdocs-static-i18n, exact versions
 Makefile                 the targets below
 docs/, work/             the process documents and the deliveries
@@ -82,8 +82,8 @@ Source material for the cases lives in the author's private folders and is never
 
 Every check prints `file:line: rule: message` and exits non-zero.
 `make verify` runs them all and stops at the first failing group.
-The site build runs with `--strict`, so a broken link or a missing page fails the build.
-MkDocs has its own message format, so `scripts/build.py` rewrites each warning as `file:line: build: message`: the doc file MkDocs names, at the line of the broken link, or line 1 when there is none; a warning that names no file points to `mkdocs.yml:1`.
+The site build runs with `--strict`, so a broken link, a missing page or a link to a heading that does not exist, on another page or on its own, fails the build.
+MkDocs has its own message format, so `scripts/build.py` rewrites each warning as `file:line: build: message`: the doc file MkDocs names, at every line the broken link stands on, one finding per line, or line 1 when there is none; a warning that names no file points to `mkdocs.yml:1`.
 `scripts/build_book.py` does the same for pandoc and weasyprint: a message that names a chapter prints as `book/<edition>/<file>:<line>: book: message`, at the chapter's own line; any other as `Makefile:1: book: message`. A failure is one such line and exit 1; a warning is printed and the build goes on. A missing pandoc, weasyprint or pypdf prints `Makefile:1: book: <tool> not found; install it (see README)`; a missing cover, or one with more than one page, prints a finding at the cover's own path. An edition whose rendered contents runs past one page prints `Makefile:1: book: <edition> contents takes <n> pages; it must fit on one`; both editions are built first, so each reports, then exit 1.
 
 ## Environments

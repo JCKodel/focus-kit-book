@@ -20,18 +20,19 @@ LINK = re.compile(r"contains a link '([^']+)'")
 
 
 def locate(message):
-    """Return (file, line) for a MkDocs message: the doc file and the line of the link, when named."""
+    """Return every (file, line) of a MkDocs message: the doc file and each line holding the link, when named."""
     doc = DOC_FILE.search(message)
     if not doc:
-        return CONFIG, 1
+        return [(CONFIG, 1)]
     path = DOCS / doc.group(1)
     link = LINK.search(message)
     if link and (ROOT / path).is_file():
+        target = re.compile(r"(?:\(<?|\]:\s*)" + re.escape(link.group(1)) + r"(?=$|[\s)>])")
         lines = (ROOT / path).read_text(encoding="utf-8").splitlines()
-        for number, line in enumerate(lines, 1):
-            if f"({link.group(1)}" in line or f"]: {link.group(1)}" in line:
-                return path, number
-    return path, 1
+        found = [(path, number) for number, line in enumerate(lines, 1) if target.search(line)]
+        if found:
+            return found
+    return [(path, 1)]
 
 
 def main():
@@ -45,8 +46,10 @@ def main():
         match = PROBLEM.match(line.strip())
         if match:
             message = " ".join(match.group(1).split())
-            path, number = locate(message)
-            findings.append(f"{path}:{number}: build: {message}")
+            for path, number in locate(message):
+                finding = f"{path}:{number}: build: {message}"
+                if finding not in findings:
+                    findings.append(finding)
     if result.returncode != 0 and not findings:
         last = next((line.strip() for line in reversed(output) if line.strip()), "build failed")
         findings.append(f"{CONFIG}:1: build: {last}")

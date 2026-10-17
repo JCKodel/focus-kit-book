@@ -4,6 +4,10 @@ site_author: J.C. Ködel
 copyright: '© 2026 J.C. Ködel · Text: <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> · Code: <a href="https://github.com/JCKodel/focus-kit-book/blob/main/LICENSE">AGPL-3.0</a>'
 docs_dir: book
 
+validation:
+  links:
+    anchors: warn
+
 theme:
   name: material
   custom_dir: overrides
