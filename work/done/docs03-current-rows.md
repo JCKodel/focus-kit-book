@@ -22,11 +22,11 @@
 
 **Done when.**
 
-* [ ] The four rows read as Behaviour says, in `docs/03-Domain.md` only.
-* [ ] `grep -n "only when its page is still complete\|chapter tags are tags" docs/03-Domain.md` finds nothing; `grep -n "§Evidence\|§Source notes" docs/03-Domain.md` finds only the two explicit forms.
-* [ ] Every "docs/04 §X" and "docs/05 §N" of docs/03 resolves to a heading, or to a rule named in the section it cites.
-* [ ] `make verify` green, disclosure scan included.
-* [ ] Page in `work/done/`, line `[x]`, staged by its paths and its hunks of docs/03 and docs/06, commit message in a `commit` block.
+* [x] The four rows read as Behaviour says, in `docs/03-Domain.md` only.
+* [x] `grep -n "only when its page is still complete\|chapter tags are tags" docs/03-Domain.md` finds nothing; `grep -n "§Evidence\|§Source notes" docs/03-Domain.md` finds only the two explicit forms.
+* [x] Every "docs/04 §X" and "docs/05 §N" of docs/03 resolves to a heading, or to a rule named in the section it cites.
+* [x] `make verify` green, disclosure scan included.
+* [x] Page in `work/done/`, line `[x]`, staged by its paths and its hunks of docs/03 and docs/06, commit message in a `commit` block.
 
 **In flight.** Pages in `work/` that touch docs/03 are `focus-and-slices` (FOCUS, orchestrator, use case, repository and view rows), `simplicity-and-results` and `renumber-chapters` (rows that name a chapter) and `prologue-and-why`. None edits rows 76, 96, 103 or 118, and those four name no chapter. Two of them (rows 96 and 118) sit near rows others edit, so git can join the hunks: /apply stages by hunk and does not take another delivery's. `docs04-gain-number` edits docs/04, not this file.
 
@@ -35,3 +35,25 @@
 * The `tag` row ends on the release tag `vX.Y.Z` rather than only losing the clause, because a glossary row on a git term should say what it is used for here (docs/manuals/release-the-book.md).
 * The pointer form is "docs/04 §<heading>, <rule>", copying docs/04:6; the alternative, renaming docs/04's rules into headings, changes how every page cites them and is not taken.
 * `waiting mark` follows docs/05 §4 and drops the condition, not the other way: docs/05 is the owner of the marks (docs/03 row `waiting mark` cites it; docs/05 §4 says "These are the marks of focus-kit 2026.10.05").
+
+**Proof.** Re-checked at the start: docs/03:76, 96, 103 and 118 held the stale text; docs/05:123 to 129 return `resume: apply` to `[>]` with no condition and an undecided scope to `[ ]`; docs/04 has headings "Writing the book" and "Chapter shape", the bold rule "Evidence" (docs/04:23) and the bullet "Source notes:" (docs/04:136), and no heading of either name; docs/manuals/release-the-book.md and docs/01's job `release` publish under tags `vX.Y.Z`. After the change, `grep -n "only when its page is still complete\|chapter tags are tags" docs/03-Domain.md` finds nothing, and `grep -n "§Evidence\|§Source notes"` finds only 96 ("§Writing the book, Evidence") and 118 ("§Chapter shape, Source notes"). The other pointers resolve: docs/05 §8 (33) "Closing a milestone", docs/05 §5 (40, 109) "This project", docs/04 §Chapter shape (113) and docs/04 §Writing the book (119) are headings. `git diff docs/03-Domain.md` holds the four rows and nothing else; the Portuguese column is unchanged. `make verify` green, disclosure scan included.
+
+**Divergences.** None: each row reads as Behaviour says.
+
+**Dropped.** Nothing.
+
+**Decisions in /apply.**
+
+* The `tag` row's new ending is "the book's releases are tags `vX.Y.Z` (docs/manuals/release-the-book.md)", citing the manual only; docs/01's job `release` is not cited in the row, since the manual already points to it (decided in this session, not asked).
+* The `waiting mark` row keeps its list form and adds the undecided case last: "`resume: apply` back to `[>]`, and `[ ]` when scope became undecided" (decided in this session, not asked).
+* No manual: nothing a person does by hand changed. No queue line names this one in an `after`.
+
+```commit
+docs(docs03-current-rows): docs/03's rows say what docs/05 says today
+
+- waiting mark: resume: apply returns to [>] with no condition
+- tag: names the release tags, not the retired chapter tags
+- running example and source note cite a heading and its rule
+
+work/done/docs03-current-rows.md
+```
