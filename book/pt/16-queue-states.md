@@ -90,7 +90,7 @@ Uma linha sai de `[?]` quando o motivo se resolve.
 A pessoa diz isso; ou a sessão que registra a resposta a tira, como quando a diretora diz o provedor e o nome vira uma linha do docs/00; ou o `/apply` a tira quando marca `[x]` a última linha que um `after` nomeia.
 Os dois sufixos saem, e a fase de retomada diz para onde a linha volta.
 `aviso-prazo`, com `resume: propose`, volta para `[ ]`, e qualquer rascunho da página dela fica para o `/propose` terminar.
-Uma linha com `resume: apply` volta para `[>]`; se a resposta que a liberou mudou o que a página dela precisa dizer, a pessoa pede a página ao `/propose` primeiro, como com qualquer página que não vale mais.
+Uma linha com `resume: apply` volta para `[>]`; se o escopo ficou indefinido, volta para `[ ]` no lugar, e a sessão diz o que o `/propose` precisa decidir.
 
 O `/propose` e o `/apply` param os dois em uma linha `[?]`: dizem o que ela espera, e só seguem quando a pessoa diz que está resolvido.
 Um comando que passasse por cima do motivo construiria sobre uma resposta que ninguém deu.
@@ -132,7 +132,7 @@ A fila também diz quais linhas podem rodar juntas: sem isso, uma pessoa que que
 * Uma linha está livre quando não está `[x]` nem `[?]` e toda linha que o `after` dela nomeia está `[x]`; a próxima entrega é a primeira linha livre que nenhuma sessão pegou, e linhas livres que mexem em arquivos diferentes podem rodar ao mesmo tempo.
 * `· after` é uma ordem escrita com a linha, que mantém a sua marca; `[?]` com `· blocked: after` é uma espera descoberta depois de o trabalho começar.
 * Uma linha espera quando a pessoa diz, quando uma resposta foi pedida e não veio, ou quando o trabalho já começado descobre que outra linha precisa ser feita antes; no fim vão a fase de retomada e o motivo, `· resume: apply · blocked: after <slug>`.
-* Uma linha sai de `[?]` quando o motivo se resolve, pela fase de retomada: `propose` de volta a `[ ]`, `apply` de volta a `[>]` só se a página dela ainda está completa; o `/propose` e o `/apply` param em uma linha `[?]`, ou em uma que não está livre, até que esteja.
+* Uma linha sai de `[?]` quando o motivo se resolve, pela fase de retomada; o `/propose` e o `/apply` param em uma linha `[?]`, ou em uma que não está livre, até que esteja.
 * A fila é um quadro kanban, uma coluna por marca; em três colunas, Fazendo guarda `[~]`, `[>]` e `[*]`, e um cartão `[?]` é etiquetado como travado onde estava.
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", acesso em 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>

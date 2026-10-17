@@ -41,10 +41,10 @@ The finding was re-checked, not taken on trust: chapter 16 en 92 says the line g
 
 **Done when.**
 
-* [ ] Chapters 15 and 16 changed in both editions, same headings; each still opens with its value; no filler and nothing useful cut.
-* [ ] `resume: apply` returns to `[>]`, or to `[ ]` when scope became undecided, stated once in chapter 16 §Waiting in both editions; no chapter 15 or 16 sentence has "only if its page is still complete" or the `/propose`-first clause (`grep` gives nothing in `book/`).
-* [ ] `make verify` green; `make book` builds and both PDF paths are given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, the commit suggested in a `commit` block.
+* [x] Chapters 15 and 16 changed in both editions, same headings; each still opens with its value; no filler and nothing useful cut.
+* [x] `resume: apply` returns to `[>]`, or to `[ ]` when scope became undecided, stated once in chapter 16 §Waiting in both editions; no chapter 15 or 16 sentence has "only if its page is still complete" or the `/propose`-first clause (`grep` gives nothing in `book/`).
+* [x] `make verify` green; `make book` builds and both PDF paths are given to the author.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, the commit suggested in a `commit` block.
 
 **Decisions in the review.**
 
@@ -53,3 +53,31 @@ The finding was re-checked, not taken on trust: chapter 16 en 92 says the line g
 * The key point loses the mapping and the condition rather than repeating the exception, because the body states it two sentences above. Chosen alone.
 * Pt "escopo ficou indefinido" for "scope became undecided", the word chapter 14 and the rest of the Portuguese edition use for scope ("o escopo ainda não foi entendido"); chosen alone.
 * The finding holds as the review wrote it, with one addition from the author's override: chapter 15 line 64. Chosen from the override.
+
+**Decisions in /apply.** Chosen alone, under the batch's rule; corrections go in the review.
+
+* The Contract's four sentences are taken as written, in both editions; each was found by its words, at the lines the page names (en 92 and 134, pt 93 and 135, chapter 15 line 64 in both).
+* No dependent queue line waits on this one; docs/03, docs/04 and docs/05 untouched, as the Contract says.
+
+**What happened.**
+
+* `book/en/16-queue-states.md` and `book/pt/16-queue-states.md`: §Waiting's `resume: apply` sentence states docs/05 §4's rule, back to `[>]`, or to `[ ]` when scope became undecided, with what `/propose` must settle; the key point keeps "by its resume phase" (pt "pela fase de retomada") and loses the mapping and the condition.
+* `book/en/15-apply.md` and `book/pt/15-apply.md`, line 64: the `[?]` line goes back by its resume phase, with the pointer to chapter 16 and no mapping.
+* The `resume: propose` sentence and the sentence on how the phase is chosen unchanged; headings, openings and the rest of both chapters unchanged. No divergence from the Contract.
+
+**Proof.**
+
+* `grep -rn "page is still complete\|for the page first\|ainda está completa\|pede a página ao" book/` finds nothing.
+* `grep -n "resume: apply" book/*/16-queue-states.md` shows one sentence per edition saying where the line returns, in §Waiting.
+* `make verify` green, disclosure scan included; `make book` built both editions, and the PDFs are `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+```commit
+docs(ch16-resume-apply): chapter 16 says once where resume: apply returns
+
+- ch16: §Waiting returns a resume: apply line to [>], or to [ ] when scope became undecided
+- ch16: the key point keeps the resume phase, without the stale condition
+- ch15: the [?] line goes back by its resume phase, pointing to chapter 16
+- both editions
+
+work/done/ch16-resume-apply.md
+```

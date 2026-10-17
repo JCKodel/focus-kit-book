@@ -89,7 +89,7 @@ A line leaves `[?]` when the reason is resolved.
 The person says so; or the session that records the answer clears it, as when the director names the provider and the name becomes a line of docs/00; or `/apply` clears it when it marks `[x]` the last line an `after` names.
 Both suffixes go, and the resume phase says where the line goes back.
 `due-reminder`, with `resume: propose`, goes back to `[ ]`, and any draft of its page stays for `/propose` to finish.
-A line with `resume: apply` goes back to `[>]`; if the answer that freed it changed what its page must say, the person asks `/propose` for the page first, as with any page that no longer holds.
+A line with `resume: apply` goes back to `[>]`; if scope became undecided, it goes back to `[ ]` instead, and the session says what `/propose` must settle.
 
 `/propose` and `/apply` both stop on a `[?]` line: they say what it waits on, and go on only when the person says it is resolved.
 A command that ran past the reason would build on an answer nobody gave.
@@ -131,7 +131,7 @@ The queue also says which lines can run together: without that, a person who wan
 * A line is free when it is not `[x]` nor `[?]` and every line its `after` names is `[x]`; the next delivery is the first free line no session holds, and free lines that touch different files can run at the same time.
 * `· after` is an order written with the line, which keeps its mark; `[?]` with `· blocked: after` is a wait found after work started.
 * A line waits when the person says so, when an answer was asked and not given, or when work already started finds another line must be done first; at the end go the phase to resume and the reason, `· resume: apply · blocked: after <slug>`.
-* A line leaves `[?]` when the reason is resolved, by its resume phase: `propose` back to `[ ]`, `apply` back to `[>]` only if its page is still complete; `/propose` and `/apply` stop on a `[?]` line, or one not free, until it is.
+* A line leaves `[?]` when the reason is resolved, by its resume phase; `/propose` and `/apply` stop on a `[?]` line, or one not free, until it is.
 * The queue is a kanban board, a column per mark; on three columns, Doing holds `[~]`, `[>]` and `[*]`, and a `[?]` card is tagged blocked where it was.
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", accessed 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>
