@@ -320,7 +320,7 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] ch8-testing-trim         chapter 8 opens with the agent that writes too many tests, keeps one source per point and one gain section; both editions · after m14-review
 [x] renumber-chapters        the chapters renumbered after the merges, with every cross-reference, index and build following; both editions · after prologue-and-why, simplicity-and-results, focus-and-slices, quick-guide
 [x] method-said-once         chapters 9 to 19: each rule, mark list, number and story said once in the chapter that owns it, and the passages that read as the kit's manual cut to what the reader uses; both editions · after m14-review
-[>] small-delivery-example   chapter 13: a five-line delivery shown end to end, so the reader sees what the smallest page costs before the rule asks for one; both editions · after method-said-once
+[x] small-delivery-example   chapter 13: a five-line delivery shown end to end, so the reader sees what the smallest page costs before the rule asks for one; both editions · after method-said-once
 [>] ch20-21-git-cut          chapters 20 and 21 open with the decision they serve, drop the history and the glossary a manual gives, and say each thing once; both editions · after m14-review
 [>] ch22-26-team-cut         chapters 22 to 26: repeated sources, repeated gains and asides cut, the challenge protocol moved next to the story that needs it; both editions · after m14-review
 [>] one-gain-section         every chapter ends with one gain section and no key points that repeat it, and the lack of a baseline is said once, in the prologue; both editions · after prologue-and-why, ch8-testing-trim, method-said-once, ch20-21-git-cut, ch22-26-team-cut

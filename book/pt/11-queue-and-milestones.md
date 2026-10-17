@@ -2,6 +2,7 @@
 
 Depois deste capítulo você consegue ler uma fila e escrever um parágrafo de marco que uma pessoa consegue conferir.
 Você também consegue escrever uma linha como uma frase com os seus sufixos, ordenar um marco de modo que a ordem seja a prioridade, escrever em uma linha qual linha precisa estar feita antes dela, `· after <slug>`, acrescentar, mover ou mudar uma linha conversando, e transformar uma mudança de código pedida fora do `/apply` em uma linha e no rascunho da página dela.
+E consegue dizer quanto custa a menor entrega, da linha dela até o commit.
 
 ## O problema
 
@@ -100,9 +101,57 @@ Pedido numa sessão comum para mostrar a data de devolução na tela do emprést
 ```
 
 A regra da tela estreita e a exceção do catálogo não cabem na frase única da linha, então vão para um rascunho `work/formato-devolucao.md`, e a resposta para ali, nomeando `/propose formato-devolucao` para uma sessão nova, escrito como o seu host chama os comandos; um pedido que a linha comporta inteiro não ganha rascunho.
-A linha ganha o que toda entrega ganha, uma página, uma prova e o commit da pessoa; uma edição feita na hora teria pulado a linha, a página e o verify.
 O rascunho é onde o detalhe espera: o `/propose formato-devolucao`, numa sessão nova, parte dele e escreve a página (o capítulo 12 mostra o `/propose`), então nada do que você disse na primeira sessão é dito duas vezes.
 Dizer "defina agora" não muda nada: o agente não consegue rodar o `/propose` sozinho, já que ele é um comando que o host roda, e uma página escrita sem ele começa sem o que o `/propose` lê.
+
+Uma mudança tão pequena passa mesmo assim pelo método inteiro, e isto é o que ela custa.
+O `/propose formato-devolucao` lê os documentos do projeto e o rascunho e escreve esta página, escrita para este capítulo:
+
+```markdown
+# formato-devolucao
+
+**Objetivo.** Um membro vê a data de devolução de um empréstimo como
+dia/mês/ano na tela do empréstimo.
+
+**Comportamento.**
+* Um empréstimo com devolução em 2026-03-05 mostra 05/03/2026, numa tela
+  estreita também.
+* Um empréstimo sem data de devolução não mostra nada onde a data estaria.
+
+**Contrato.** Nenhum.
+
+**Estados.** Os padrões.
+
+**Referência visual.** Nenhuma.
+
+**Fora do escopo.** As datas do catálogo, que mantêm ano-mês-dia; as datas
+da lista de atrasos, uma linha própria.
+
+**Pronto quando.** As duas linhas de Comportamento passam como testes; a
+verificação está verde.
+```
+
+Todas as seções estão lá, e três delas só dizem que não se aplicam; os dois detalhes do rascunho são uma linha de Comportamento e um item de Fora do escopo.
+Você lê a página e a corrige, e numa outra sessão nova o `/apply formato-devolucao` a constrói: ele muda a função que formata a data na tela do empréstimo e escreve um teste com as duas linhas de Comportamento, umas cinco linhas entre os dois, roda o verify até ficar verde, move a página para `work/done/`, coloca em stage os dois arquivos com a página e a linha da fila, e sugere a mensagem, também escrita para este capítulo (o capítulo 13 explica o formato dela):
+
+```commit
+Mostrar a data de devolução como dia/mês/ano
+
+- Não mostra nada quando um empréstimo não tem data de devolução
+
+work/done/formato-devolucao.md
+```
+
+Você revisa um diff de poucas linhas contra uma página que já leu, e faz o commit; a linha agora diz:
+
+```
+[x] formato-devolucao   o empréstimo mostra a devolução em dia/mês/ano
+```
+
+Foi isso o que a regra custou: duas sessões curtas, uma revisão e um commit.
+Em troca, a fila diz que a mudança existe, a página diz o que ela faz e o que deixa de fora, e um teste falha se o formato um dia voltar ao que era.
+Uma edição feita na hora teria pulado a linha, a página, o teste e a revisão.
+A página é do tamanho da mudança: sete seções de uma ou duas linhas, e uma página que precisa de mais para uma mudança deste tamanho está definindo mais de uma entrega.
 A regra vale em toda sessão: durante o `/propose` a mudança é uma linha nova, a não ser que você a peça na página que está sendo escrita; durante o `/apply`, uma correção encontrada fora da sua página é uma linha acima dele, pela qual a entrega espera (capítulo 14); e uma edição feita mesmo assim, para "só trocar o rótulo", é desfeita antes de qualquer commit.
 Os documentos continuam mudando conversando, em qualquer sessão; a regra cobre o código: o fonte do app, os testes, uma migração, a configuração.
 
@@ -130,4 +179,4 @@ Uma linha tem uma frase: quando o detalhe de um pedido não tem outro lugar alé
 * De três a oito entregas, o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados viram linhas sob ela no mesmo marco.
 * A ordem é a prioridade: a linha mais acima importa mais, e mover uma linha é mudar a prioridade dela.
 * Uma dependência conhecida quando a linha é acrescentada é escrita junto, `· after <slug>`: uma ordem, não uma espera, então a linha mantém `[ ]`.
-* Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido; o código só muda dentro do `/apply`, e uma mudança pedida em qualquer outro lugar vira uma linha, com um rascunho da página para o que a linha não comporta, e o `/propose` numa sessão nova.
+* Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido; o código só muda dentro do `/apply`, até uma mudança de cinco linhas tem sua página, e uma mudança pedida em qualquer outro lugar vira uma linha, com um rascunho da página para o que a linha não comporta, e o `/propose` numa sessão nova.

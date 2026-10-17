@@ -2,6 +2,7 @@
 
 After this chapter you can read a queue and write a milestone paragraph a person can check.
 You can also write a line as one sentence with its suffixes, order a milestone so that its order is its priority, write on a line which line must be done before it, `· after <slug>`, add, move or change a line by conversation, and turn a code change asked outside `/apply` into a line and a draft for its page.
+And you can say what the smallest delivery costs, from its line to its commit.
 
 ## The problem
 
@@ -98,9 +99,55 @@ Asked in an ordinary session to show the due date on the loan screen as day/mont
 ```
 
 The narrow-screen rule and the catalog exception do not fit the line's one sentence, so they go into a draft `work/due-date-format.md`, and the answer stops there, naming `/propose due-date-format` for a fresh session, written as your host invokes it; a request the line holds whole gets no draft.
-The line gets what every delivery gets, a page, a proof and the person's commit; an edit made on the spot would have skipped the line, the page and verify.
 The draft is where the detail waits: `/propose due-date-format`, in a fresh session, starts from it and writes the page (chapter 12 shows `/propose`), so nothing you said in the first session is said twice.
 Saying "define it now" changes nothing: the agent cannot run `/propose` on its own, since it is a command the host runs, and a page written without it starts without what `/propose` reads.
+
+A change this small still goes through the whole method, and this is what it takes.
+`/propose due-date-format` reads the project's documents and the draft and writes this page, written for this chapter:
+
+```markdown
+# due-date-format
+
+**Objective.** A member sees a loan's due date as day/month/year on the
+loan screen.
+
+**Behaviour.**
+* A loan due 2026-03-05 shows 05/03/2026, on a narrow screen too.
+* A loan with no due date shows nothing where the date would be.
+
+**Contract.** None.
+
+**States.** The defaults.
+
+**Visual reference.** None.
+
+**Out of scope.** The catalog's dates, which keep year-month-day; the
+overdue list's dates, a line of its own.
+
+**Done when.** The two Behaviour lines pass as tests; verify green.
+```
+
+Every section is there, and three of them say only that they do not apply; the two details of the draft are a Behaviour line and an Out of scope item.
+You read the page and correct it, and in another fresh session `/apply due-date-format` builds it: it changes the function that formats the date on the loan screen and writes one test with the two Behaviour lines, about five lines between them, runs verify until it is green, moves the page to `work/done/`, stages the two files with the page and the queue line, and suggests the message, also written for this chapter (chapter 13 explains its shape):
+
+```commit
+Show the due date as day/month/year
+
+- Show nothing where a loan has no due date
+
+work/done/due-date-format.md
+```
+
+You review a diff of a few lines against a page you already read, and commit it; the line now reads:
+
+```
+[x] due-date-format   the loan screen shows the due date as day/month/year
+```
+
+That is what the rule cost: two short sessions, one review and one commit.
+In return the queue says the change exists, the page says what it does and what it leaves out, and a test fails if the format ever changes back.
+An edit made on the spot would have skipped the line, the page, the test and the review.
+The page is as short as its change: seven sections of a line or two, and a page that needs more for a change this size is defining more than one delivery.
 The rule holds in every session: during `/propose` the change is a new line, unless you ask for it on the page being written; during `/apply`, a fix found outside its page is a line above it, which the delivery waits for (chapter 14); and an edit made anyway, to "just change the label", is reverted before anything is committed.
 Documents still change by conversation, in any session; the rule covers the code: the app's source, its tests, a migration, its configuration.
 
@@ -128,4 +175,4 @@ A line holds one sentence: when the detail of a request has nowhere to go but th
 * Three to eight deliveries, the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone.
 * The order is the priority: the higher line matters more, and moving a line is changing its priority.
 * A dependency known when a line is added is written with it, `· after <slug>`: an order, not a wait, so the line keeps `[ ]`.
-* No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept; code changes only inside `/apply`, and a change asked anywhere else becomes a line, with a draft page for what the line cannot hold, and `/propose` in a fresh session.
+* No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept; code changes only inside `/apply`, even a five-line change gets its page, and a change asked anywhere else becomes a line, with a draft page for what the line cannot hold, and `/propose` in a fresh session.
