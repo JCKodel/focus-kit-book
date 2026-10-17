@@ -5,9 +5,11 @@ The list lives outside the repository: `FKB_DENYLIST`, or `~/.config/focus-kit-b
 Prints one line per finding as `file:line: disclosure: message`; exits 1 when anything is printed.
 A finding never shows the term or the matched text: a matched part of a path is printed as `***`.
 
-With no argument it scans the files and every commit message, and fails when the hooks are off.
+With no argument it scans the files and every commit message. Without a list file it is skipped
+locally (a note on standard error, exit 0) and fails when `CI` is set; a list file with no entry
+fails; with a list and without `CI` it also fails while the hooks are off.
 `--staged` scans the staged files (the pre-commit hook); `--message <file>` scans a commit message
-(the commit-msg hook). Both fail when the list is missing.
+(the commit-msg hook). Both fail when the list is missing or has no entry.
 """
 
 import os

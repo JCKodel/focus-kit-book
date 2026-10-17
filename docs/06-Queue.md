@@ -326,7 +326,8 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] one-gain-section         every chapter ends with one gain section and no key points that repeat it, and the lack of a baseline is said once, in the prologue; both editions · after prologue-and-why, ch8-testing-trim, method-said-once, ch20-21-git-cut, ch22-26-team-cut
 [x] review-slot-models       docs/05's Milestone review slot says how this repository's deep review runs and on which models, as the author decided after M14
 [x] m15-review               the review of M15 as docs/05 §8 says
-[ ] disclosure-docstring     check_disclosure.py's docstring says when the run fails as docs/01 does
+[x] disclosure-docstring     check_disclosure.py's docstring says when the run fails as docs/01 does
+[ ] docs01-empty-list        docs/01's make scan row says a list file with no entry fails the run even locally, as check_disclosure.py does
 [ ] docs03-finding-and-gain  docs/03's finding row includes a finding the code review confirms, and its team gain row allows no sentence on a missing number
 [ ] adr17-gain-amendment     ADR-0017 carries an amendment saying a gain with no number has no sentence about it
 [ ] docs05-review-checker    docs/05's Milestone review slot names the checker as the author runs it, Opus with the host's advisor on Fable
