@@ -162,7 +162,7 @@ No kit, o git-flow é um branch por entrega cujo branch começa do `develop` e s
 
 Um projeto escreve a sua escolha uma vez, no slot Git do seu docs/05, e todo comando a lê.
 
-* **Trunk** serve a uma pessoa, sozinha ou com várias sessões abertas em linhas livres, linhas da fila prontas para construir, que mexem em arquivos diferentes: um commit por entrega no `main`, cada sessão colocando em stage só a sua entrega, e a pessoa fazendo o commit de uma entrega por vez.
+* **Trunk** serve a uma pessoa, sozinha ou com várias sessões abertas em linhas livres (linhas da fila que não estão prontas, não estão esperando e não precisam de outra linha pronta antes, já definidas ou não; [capítulo 14](14-queue-states.md)) que mexem em arquivos diferentes: um commit por entrega no `main`, cada sessão colocando em stage só a sua entrega, e a pessoa fazendo o commit de uma entrega por vez.
   Não serve a duas pessoas: as entregas delas dividem um branch, e um commit leva o trabalho pela metade da outra.
 * **Um branch por entrega** serve a trabalho em sequência revisado por pull request (capítulo 20): cada entrega com merge por commit de merge ou por squash.
 * **Um worktree por entrega** serve a várias pessoas trabalhando ao mesmo tempo, ou a uma pessoa cujas entregas mexem nos mesmos arquivos ([capítulo 19](19-worktrees.md)): cada entrega no seu próprio branch, na sua própria pasta, com merge do mesmo jeito.

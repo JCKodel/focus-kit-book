@@ -162,7 +162,7 @@ In the kit, git-flow is a branch per delivery whose branch starts from `develop`
 
 A project writes its choice once, in the Git slot of its docs/05, and every command reads it.
 
-* **Trunk** fits one person, alone or with several sessions open on free lines, queue lines ready to build, that touch different files: one commit per delivery on `main`, each session staging only its delivery, and the person committing one delivery at a time.
+* **Trunk** fits one person, alone or with several sessions open on free lines (queue lines not done, not waiting and needing no other line done first, defined yet or not; [chapter 14](14-queue-states.md)) that touch different files: one commit per delivery on `main`, each session staging only its delivery, and the person committing one delivery at a time.
   It does not fit two people: their deliveries share one branch, and one commit carries the other's half-done work.
 * **A branch per delivery** fits sequential work reviewed by pull request (chapter 20): each delivery merged by merge commit or squash.
 * **A worktree per delivery** fits several people working at once, or one person whose deliveries touch the same files ([chapter 19](19-worktrees.md)): each delivery on its own branch in its own folder, merged the same way.
