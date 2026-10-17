@@ -124,7 +124,7 @@ It records an open question in the document that owns the subject, says what eac
 
 On code with no clear architecture the default for FOCUS is "neither", because the code does not do it, and FOCUS whole would mean rewriting it.
 There is a way between the two: the strangler fig, Martin Fowler's name for replacing an old system gradually, after a vine that grows around a tree until it stands on its own.[^strangler-fig]
-New code grows beside the old: every new feature is a vertical slice in FOCUS ([chapter 6](06-features-not-layers.md) and [chapter 7](07-four-pieces.md)), every part a delivery changes moves into one, and the old code goes away one delivery at a time while the project keeps working.
+New code grows beside the old: every new feature is a vertical slice in FOCUS ([chapter 6](06-focus.md)), every part a delivery changes moves into one, and the old code goes away one delivery at a time while the project keeps working.
 Give it as your answer to the FOCUS question, for example "FOCUS whole, as a strangler fig: new features and every part a delivery touches become vertical slices; the rest stays until then", and `/analyze` writes it into docs/01 and an ADR, so every later `/propose` and `/apply` follows it.
 
 ## What the code cannot say: the context folder

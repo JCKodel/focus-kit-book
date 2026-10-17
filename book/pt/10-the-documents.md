@@ -48,7 +48,7 @@ Todo documento é lido, e corrigido quando está errado; a fila é o que dá for
 O kit oferece duas escolhas e não impõe nenhuma: a arquitetura e a estratégia de git.
 O `/brainstorm` e o `/analyze` explicam cada uma com uma recomendação para a stack do projeto, e registram a resposta.
 
-**A arquitetura.** O FOCUS é a arquitetura do capítulo 7: código organizado em fatias verticais (capítulo 6), toda regra de negócio uma função pura que devolve um Result (capítulo 4), e quatro peças pelas quais um evento flui num só sentido até um novo estado.
+**A arquitetura.** O FOCUS é a arquitetura do capítulo 6: código organizado em fatias verticais, toda regra de negócio uma função pura que devolve um Result (capítulo 4), e quatro peças pelas quais um evento flui num só sentido até um novo estado.
 O kit dá três respostas: o FOCUS inteiro; só os dois princípios, fatias verticais e exceções como valores, na estrutura que a stack favorecer; ou nenhum dos dois, as convenções do próprio projeto.
 Com qualquer uma das três, a página, a fila, os documentos, a verificação e o commit funcionam do mesmo jeito.
 O que o FOCUS acrescenta está no código: um agente lê uma fatia para uma mudança (capítulo 6), o que os dois princípios também dão, e cada uma das quatro peças tem o seu próprio teste (capítulo 8).

@@ -131,7 +131,7 @@ It reads a member and answers.
 Where the member came from, a database or a test, is not its business.
 Immutability is the same idea on data: a function that changes its input hides a second output, so `mayBorrow` returns the member it received or a refusal, and changes nothing.
 
-Clean Architecture, as it is usually practised, injects the repositories into the use case that holds the rule, so its test needs a fake for each one; this book keeps `mayBorrow` pure, receiving a member and not a way to fetch one, and leaves fetching and saving to an orchestrator, the function around the rule that chapter 7 builds.
+Clean Architecture, as it is usually practised, injects the repositories into the use case that holds the rule, so its test needs a fake for each one; this book keeps `mayBorrow` pure, receiving a member and not a way to fetch one, and leaves fetching and saving to an orchestrator, the function around the rule that chapter 6 builds.
 
 ## Result: the value that carries a failure
 

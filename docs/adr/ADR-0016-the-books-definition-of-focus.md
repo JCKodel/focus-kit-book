@@ -36,3 +36,7 @@ The orchestrator receives its event, and on a server the event is the request, s
 ## Amendment, 2026-09-30 (ch15-injection-rule)
 
 The criterion of the amendment `four-pieces-injection` stands: a piece receives a dependency only where its test passes a second implementation. Two of its claims do not: "in FOCUS that happens only in the orchestrator" and "a view or a repository has one implementation". A server repository receives the driver it uses, because its test passes an in-memory database. A client repository receives none, because no test passes a second implementation to it. A use case and a view receive none, and the clock is passed as data, a value, not a dependency. The Decision's "The orchestrator is the only piece with injected dependencies" and that amendment are read through this one and are not rewritten. Chapters 6 and 15 state the criterion.
+
+## Amendment, 2026-10-16 (focus-and-slices)
+
+Chapters 6 and 7 are one chapter, `06-focus.md`, which teaches all four letters, the four pieces and the dependency criterion; the definition above is unchanged.

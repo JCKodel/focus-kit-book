@@ -7,7 +7,7 @@ Você também consegue escrever um fake (uma implementação falsa) que faz o te
 
 Um teste que precisa da aplicação inteira rodando, um servidor de pé, um banco populado, um navegador aberto, leva minutos para começar e quebra por motivos que nada têm a ver com o código que ele confere.
 Então ninguém o roda antes de dizer "pronto", e uma regra que mudou semana passada é encontrada quebrada por um usuário.
-As quatro peças do [capítulo 7](07-four-pieces.md) têm uma forma que deixa testar cada uma sozinha, no tempo de salvar um arquivo.
+As quatro peças do [capítulo 6](06-focus.md) têm uma forma que deixa testar cada uma sozinha, no tempo de salvar um arquivo.
 
 ## Um teste para cada peça
 
@@ -77,7 +77,7 @@ Sem banco, sem servidor, sem mock: o membro é um objeto, a data é uma string, 
 A primeira chamada devolve o empréstimo; a segunda devolve a recusa `JaEmprestado`, porque o índice único a recusou.
 Essa é a única parte do empréstimo que só o banco consegue garantir, já que duas bibliotecárias podem apertar "Emprestar" no mesmo instante, e ela é testada contra o motor real e o esquema real.
 
-**O orquestrador.** `eventosDeEmprestimo.test.ts` passa repositórios falsos a `emprestimoPedido`, o orquestrador do [capítulo 7](07-four-pieces.md):
+**O orquestrador.** `eventosDeEmprestimo.test.ts` passa repositórios falsos a `emprestimoPedido`, o orquestrador do [capítulo 6](06-focus.md):
 
 ```ts
 function naoEsperado(): never {

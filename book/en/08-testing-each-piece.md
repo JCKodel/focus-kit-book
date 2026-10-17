@@ -7,7 +7,7 @@ You can also write a fake that fails the test when it is called unexpectedly, an
 
 A test that needs the whole application running, a server up, a database seeded, a browser open, takes minutes to start and breaks for reasons that have nothing to do with the code it checks.
 So nobody runs it before saying "done", and a rule that changed last week is found broken by a user.
-The four pieces of [chapter 7](07-four-pieces.md) are shaped so that each one can be tested alone, in the time it takes to save a file.
+The four pieces of [chapter 6](06-focus.md) are shaped so that each one can be tested alone, in the time it takes to save a file.
 
 ## A test for each piece
 
@@ -77,7 +77,7 @@ No database, no server, no mock: the member is an object, the date is a string, 
 The first returns the loan; the second returns the refusal `AlreadyLent`, because the unique index refused it.
 It is the one part of lending that only the database can hold, since two librarians can press "Lend" at the same moment, and it is tested against the real engine and the real schema.
 
-**The orchestrator.** `lendEvents.test.ts` passes fake repositories to `lendRequested`, the orchestrator of [chapter 7](07-four-pieces.md):
+**The orchestrator.** `lendEvents.test.ts` passes fake repositories to `lendRequested`, the orchestrator of [chapter 6](06-focus.md):
 
 ```ts
 function unexpected(): never {

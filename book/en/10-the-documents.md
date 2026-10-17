@@ -48,7 +48,7 @@ Every document is read, and corrected when it is wrong; the queue is the one tha
 The kit offers two choices and imposes neither: the architecture and the git strategy.
 `/brainstorm` and `/analyze` explain each one with a recommendation for the project's stack, and record the answer.
 
-**The architecture.** FOCUS is the architecture of chapter 7: code organized in vertical slices (chapter 6), every business rule a pure function that returns a Result (chapter 4), and four pieces through which an event flows one way to a new state.
+**The architecture.** FOCUS is the architecture of chapter 6: code organized in vertical slices, every business rule a pure function that returns a Result (chapter 4), and four pieces through which an event flows one way to a new state.
 The kit gives three answers: FOCUS whole; the two principles only, vertical slices and exceptions as values, in whatever structure the stack favors; or neither, the project's own conventions.
 With any of the three, the page, the queue, the documents, verify and the commit work the same.
 What FOCUS adds is in the code: an agent reads one slice for a change (chapter 6), which the two principles give too, and each of the four pieces has its own test (chapter 8).

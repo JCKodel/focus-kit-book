@@ -21,7 +21,7 @@ Quando eu parei, o registro de decisão que escrevi apontava cinco causas, e qua
 2. **Uma stack que o agente tinha visto pouco.**
    O design customizava o Material 3, o sistema de design do Google, que o Flutter implementa, e o agente tinha visto poucos exemplos disso no treinamento, então chutava valores em pixels.
 3. **Oito arquivos para mostrar um campo.**
-   Eu exigia a forma completa do FOCUS, as quatro peças do capítulo 7, em toda feature, até num formulário trivial.
+   Eu exigia a forma completa do FOCUS, as quatro peças do capítulo 6, em toda feature, até num formulário trivial.
    A arquitetura era sólida; eu tinha perdido o KISS e o YAGNI, os dois princípios do capítulo 4 que decidem quando uma peça se paga, e deixei a complexidade crescer.
 4. **Verificações que guardavam a forma.**
    As 29 verificações eram caras de satisfazer e baratas de contornar, e nenhuma jamais tinha falhado num erro do produto.

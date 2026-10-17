@@ -124,7 +124,7 @@ Ele registra uma questão em aberto no documento dono do assunto, diz o que cada
 
 Em um código sem arquitetura clara, o padrão para o FOCUS é "nenhum", porque o código não o segue, e o FOCUS inteiro significaria reescrevê-lo.
 Há um caminho entre os dois: a strangler fig (figueira estranguladora), o nome que Martin Fowler deu à troca gradual de um sistema antigo, por causa de uma trepadeira que cresce em volta de uma árvore até ficar de pé sozinha.[^strangler-fig]
-O código novo cresce ao lado do antigo: toda feature nova é uma fatia vertical no FOCUS ([capítulo 6](06-features-not-layers.md) e [capítulo 7](07-four-pieces.md)), toda parte que uma entrega muda passa para uma, e o código antigo vai embora uma entrega de cada vez enquanto o projeto continua funcionando.
+O código novo cresce ao lado do antigo: toda feature nova é uma fatia vertical no FOCUS ([capítulo 6](06-focus.md)), toda parte que uma entrega muda passa para uma, e o código antigo vai embora uma entrega de cada vez enquanto o projeto continua funcionando.
 Dê isso como sua resposta à pergunta do FOCUS, por exemplo "FOCUS inteiro, como strangler fig: features novas e toda parte que uma entrega tocar viram fatias verticais; o resto fica até lá", e o `/analyze` escreve isso no docs/01 e em um ADR, para que todo `/propose` e `/apply` seguinte o siga.
 
 ## O que o código não diz: a pasta de contexto

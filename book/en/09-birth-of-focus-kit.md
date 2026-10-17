@@ -21,7 +21,7 @@ When I stopped, the decision record I wrote named five causes, and four independ
 2. **A stack the agent had seen little of.**
    The design customized Material 3, Google's design system, which Flutter implements, and the agent had seen few examples of that in training, so it guessed pixel values.
 3. **Eight files to show one field.**
-   I required the full form of FOCUS, the four pieces of chapter 7, on every feature, a trivial form included.
+   I required the full form of FOCUS, the four pieces of chapter 6, on every feature, a trivial form included.
    The architecture was sound; I had lost KISS and YAGNI, the two principles of chapter 4 that decide when a piece pays its way, and let complexity grow.
 4. **Checks that guarded the form.**
    The 29 checks were costly to satisfy and cheap to get around, and not one had ever failed on an error in the product.
