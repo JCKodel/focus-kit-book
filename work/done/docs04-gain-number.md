@@ -23,11 +23,11 @@
 
 **Done when.**
 
-* [ ] docs/04:32 reads as Behaviour says, docs/04:26 names the glossary row and docs/04:15 names no guided project; no other line of docs/04 changes.
-* [ ] `grep -n "docs/03 §running example" docs/04-Conventions.md` finds nothing.
-* [ ] No file of `book/` is in the delivery's staged paths.
-* [ ] `make verify` green.
-* [ ] Page in `work/done/`, line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] docs/04:32 reads as Behaviour says, docs/04:26 names the glossary row and docs/04:15 names no guided project; no other line of docs/04 changes.
+* [x] `grep -n "docs/03 §running example" docs/04-Conventions.md` finds nothing.
+* [x] No file of `book/` is in the delivery's staged paths.
+* [x] `make verify` green.
+* [x] Page in `work/done/`, line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
 
 **In flight.** Four pages in `work/` touch docs/04, and two touch the same lines.
 
@@ -42,3 +42,23 @@
 * The "first" attribution adds this delivery next to `plain-numbers` rather than replacing it, as docs/04 does for amended rules.
 * No chapter number appears in the rule, so `renumber-chapters` has nothing to follow here.
 * docs/04:15 joined this page after it was written, by the session that drove the proposals: the line is per file, and the stale mention is docs/04's.
+
+**Divergences.** None. docs/04:15, :26 and :32 read as the page said when /apply started (`renumber-chapters` had not run), and each changed as Behaviour says; no other line of docs/04 moved.
+
+**Omissions.** None.
+
+**Proof.** `grep -n "docs/03 §running example" docs/04-Conventions.md` and `grep -n "guided project" docs/04-Conventions.md` find nothing; docs/03 has the `running example` row the new wording names; `git diff --cached --name-only` holds no path under `book/`; `make verify` green. No chapter changed, so no `make book`.
+
+**Decisions in /apply.** Choices made alone.
+
+* `one-gain-section`'s page, which says "the gain's one number" in its decision 2, is not edited here: it is another delivery's page, and this page's In flight already says it should be corrected when it is applied.
+
+```commit
+docs(docs04-gain-number): docs/04 allows a gain's one pair
+
+- docs/04 Numbers that prove: one number, or the one pair that is the gain
+- docs/04 Evidence names docs/03's running example row
+- docs/04 Teach, do not report names no guided project
+
+work/done/docs04-gain-number.md
+```
