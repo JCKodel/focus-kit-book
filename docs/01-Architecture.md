@@ -33,7 +33,7 @@ scripts/build_book.py    PDF (cover first) and EPUB (cover image) of both editio
 scripts/release.py       the author's publish: checks main, clean and not behind, verify green, then pushes main and the next v* tag (rule "release")
 scripts/check_disclosure.py no term of the disclosure list in a file path, a text file or a commit message; --staged and --message for the hooks (rule "disclosure"; ADR-0012)
 .githooks/pre-commit     check_disclosure.py --staged: the staged paths and their staged text; POSIX sh, executable
-.githooks/commit-msg     check_disclosure.py --message: the commit message, without git's # lines and the diff below the scissors line of commit -v
+.githooks/commit-msg     check_disclosure.py --message: the commit message, # lines included, without the diff below the scissors line of commit -v
 scripts/patterns.py      compile_entry: the entry syntax (plain or re:) shared by the prose and disclosure checks
 scripts/markdown.py      front_matter: the fields and the body, shared by parity and the book build; mask: front matter, code and HTML comments as spaces, shared by the prose and link checks; NOTE_DEFINITION, NOTE_MENTION and mentions: a note's definition marker, its mention with any key pandoc reads, and the keys cited on a masked line, used by parity; the two patterns shared by the book build
 scripts/repo_files.py    the files the checks read: tracked, plus untracked and not ignored, whatever the characters of the name

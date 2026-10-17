@@ -108,12 +108,12 @@ def scan_staged(entries):
 
 
 def scan_message(entries, name):
+    """Every line before the scissors line of commit -v, `#` lines included: git may store them."""
     lines = []
     for number, line in enumerate(Path(name).read_text(encoding="utf-8", errors="replace").split("\n"), 1):
         if line == SCISSORS:
             break
-        if not line.startswith("#"):
-            lines.append((number, line))
+        lines.append((number, line))
     return scan_lines(entries, name, lines)
 
 
