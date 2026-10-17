@@ -58,7 +58,7 @@ Keep cache reads in their own column, and a change in how the team works shows t
 The method answers with a fresh session per delivery.
 `/apply` starts from the rules file, the documents it names and one page, so the context holds what this delivery needs and nothing from the one before.
 The page is what makes that possible: it carries every decision the build needs, so the session does not have to inherit the conversation that took them.
-The queue is among those documents, whole, and what it reads at the start rides along on every call of the session; the queue grows with every delivery, so each line holds one sentence (chapter 11), and the read grows by a sentence per delivery, not by a page.
+The queue is among those documents, whole, and what it reads at the start rides along on every call of the session; with chapter 11's one-sentence line, that read grows by a sentence per delivery, not by a page.
 
 So the context stays the size of the delivery, and so does the bill.
 A team that keeps one long session for a week pays, on every call of Friday, for the files read on Monday.

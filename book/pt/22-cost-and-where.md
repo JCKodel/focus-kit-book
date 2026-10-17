@@ -58,7 +58,7 @@ O [capítulo 1](01-how-agents-see.md) mostrou que tudo o que está na janela de 
 O método responde com uma sessão nova por entrega.
 O `/apply` começa pelo arquivo de regras, pelos documentos que ele cita e por uma página, então o contexto tem o que esta entrega precisa e nada da anterior.
 É a página que torna isso possível: ela leva cada decisão de que a construção precisa, então a sessão não precisa herdar a conversa que as tomou.
-A fila está entre esses documentos, inteira, e o que ele lê no começo vai junto em cada chamada da sessão; a fila cresce a cada entrega, então cada linha tem uma frase (capítulo 11), e a leitura cresce uma frase por entrega, não uma página.
+A fila está entre esses documentos, inteira, e o que ele lê no começo vai junto em cada chamada da sessão; com a linha de uma frase do capítulo 11, essa leitura cresce uma frase por entrega, não uma página.
 
 Assim o contexto fica do tamanho da entrega, e a fatura também.
 Um time que mantém uma sessão longa por uma semana paga, em cada chamada da sexta-feira, pelos arquivos lidos na segunda.

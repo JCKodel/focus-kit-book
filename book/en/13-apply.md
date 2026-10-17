@@ -20,7 +20,7 @@ It starts in a fresh session, so the page is all it takes from the conversation 
 The page, `AGENTS.md`, and three of the project documents: docs/01, the architecture, which says where each piece goes and how errors travel; docs/04, the conventions, which say which tests to write; and docs/05, the process.
 docs/05 holds the project's slots, and `/apply` follows them literally: the verify command, the environments and what a delivery leaves in each, how a screen is proven, the publish policy and the git strategy.
 Of docs/06, the queue, it reads all of it: it must see that the lines its `· after` names are done before it starts, and it names the next free line when it ends.
-What keeps that read small is the line itself, one sentence and its suffixes (chapter 11), not a shorter queue: the queue grows with every delivery, and each line costs what one sentence costs.
+So every word on a line is read by every build as well as by every definition (chapter 11).
 Then, as its first edit, it marks the line `[*]` in docs/06, so the queue shows the build under way; on a line that is `[?]`, it first says what the line waits on, and goes on only when you say it is resolved.
 
 ### The page is the scope

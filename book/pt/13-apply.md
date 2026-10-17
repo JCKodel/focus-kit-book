@@ -20,7 +20,7 @@ Ele começa em uma sessão nova, então a página é tudo o que ele leva da conv
 A página, o `AGENTS.md`, e três dos documentos do projeto: o docs/01, a arquitetura, que diz onde cada peça fica e como os erros circulam; o docs/04, as convenções, que dizem quais testes escrever; e o docs/05, o processo.
 O docs/05 guarda os slots do projeto, e o `/apply` os segue ao pé da letra: o comando de verificação, os ambientes e o que uma entrega deixa em cada um, como uma tela é provada, a política de publicação e a estratégia de git.
 Do docs/06, a fila, ele lê tudo: precisa ver que as linhas que o seu `· after` nomeia estão feitas antes de começar, e nomeia a próxima linha livre quando termina.
-O que mantém essa leitura pequena é a própria linha, uma frase e os seus sufixos (capítulo 11), e não uma fila mais curta: a fila cresce a cada entrega, e cada linha custa o que custa uma frase.
+Por isso, cada palavra de uma linha é lida por toda construção tanto quanto por toda definição (capítulo 11).
 Então, como a sua primeira edição, ele marca a linha como `[*]` no docs/06, para a fila mostrar a construção em andamento; em uma linha que está `[?]`, ele primeiro diz o que a linha espera, e só segue quando você diz que está resolvido.
 
 ### A página é o escopo
