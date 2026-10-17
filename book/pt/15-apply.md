@@ -74,7 +74,7 @@ Pronto é essa lista inteira: a verificação verde, a prova, o que aconteceu es
 Pegue a página `emprestar-livro` do capítulo 14, revisada e marcada `[>]`, e abra uma sessão nova com `/apply emprestar-livro`.
 
 O agente lê a página, depois o docs/01 para saber que os empréstimos ficam em `src/features/emprestimos/`, o docs/04 para saber quais testes cada peça recebe (capítulo 8), e o docs/05 para saber que a verificação é `npm run verify` e que uma tela é provada por um screenshot.
-Ele escreve a migration da tabela `emprestimo` com o seu índice único, a regra `emprestar` como uma função pura que devolve um `Result` (capítulo 5), a chamada do repositório que transforma a falha do índice único na recusa `JaEmprestado`, o orquestrador e a tela de empréstimo.
+Ele escreve a migration da tabela `emprestimo` com o seu índice único, a regra `emprestar` como uma função pura que devolve um `Result` (capítulo 4), a chamada do repositório que transforma a falha do índice único na recusa `JaEmprestado`, o orquestrador e a tela de empréstimo.
 Cada linha de Comportamento vira um teste: o empréstimo com a devolução prevista para 21 dias depois, a recusa para um livro atrasado, a recusa para um membro suspenso, o empréstimo para um membro cujo único livro vence hoje, e, contra um banco de dados real em memória, o segundo de dois empréstimos do último exemplar recusado.
 Ele não constrói nada para devolver um exemplar, reservas ou multas, porque o Fora do escopo os nomeou.
 

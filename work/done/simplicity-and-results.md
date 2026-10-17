@@ -47,11 +47,11 @@
 
 **Done when.**
 
-* [ ] One chapter in both editions, `05-rules-and-exceptions.md` gone from both, same headings; opens with Ninjobs; one source per point; no filler and nothing useful cut (every rule of the two chapters is in the merged one or named as cut above).
-* [ ] No link to `05-rules-and-exceptions.md` and no "chapter 5"/"capítulo 5" left in `book/`, docs/00, docs/03 or docs/04 that means the old chapter; the list on this page.
-* [ ] Every number sourced; parity of notes green; the Portuguese code keeps its Portuguese names.
-* [ ] `make verify` green; `make book` builds and both PDF paths are given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, the commit suggested in a `commit` block.
+* [x] One chapter in both editions, `05-rules-and-exceptions.md` gone from both, same headings; opens with Ninjobs; one source per point; no filler and nothing useful cut (every rule of the two chapters is in the merged one or named as cut above).
+* [x] No link to `05-rules-and-exceptions.md` and no "chapter 5"/"capítulo 5" left in `book/`, docs/00, docs/03 or docs/04 that means the old chapter; the list on this page.
+* [x] Every number sourced; parity of notes green; the Portuguese code keeps its Portuguese names.
+* [x] `make verify` green; `make book` builds and both PDF paths are given to the author.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, the commit suggested in a `commit` block.
 
 **Decisions taken from the documents.**
 
@@ -64,3 +64,45 @@
 
 * The gain's one number is Ninjobs's 29 checks, as recommended.
 * The title stays "Simplicity and results" (pt "Simplicidade e resultados"), the author's choice; the Contract's H1 holds.
+
+**Decisions in /apply.** Chosen alone, under the batch's rule; corrections go in the review.
+
+* Toub's number. The Behaviour's ratio, "more than four times a return on .NET 8", is not in the cited source: the benchmark `ExceptionThrowCatch` compares .NET 8 with .NET 9 (123.03 ms against 54.68 ms, ratio 0.44) and measures no return; the ratio had no derivation in `work/done/ch14-failure-kinds.md` either. docs/04 §Evidence outranks the page, so the sentence keeps the story the Behaviour asks for (every refusal pays a thrown and caught exception, and most of what a program handles is a refusal) and one real figure from the source: a thousand throws, each caught through ten asynchronous calls, took about an eighth of a second on .NET 8 (123.03 ms, rounded).
+* Chapter 5's `## The problem`, in no slot of the Contract and in no cut, is folded in, not dropped: its first sentence (a rule inside a screen cannot be tested without it) opens `## A pure function`; the door the caller cannot see and the agent that cannot tell which failures were meant join `## Why not throw`.
+* YAGNI's four costs: the numbered list goes, as the Contract says; build and repair stay as one sentence of prose, since they are the reason the rule exists, and "delay and carry" keeps Fowler's quotation "adds some complexity to the software" with `[^fowler-yagni]`.
+* "The discipline: abstraction on the second occurrence" becomes `## Abstraction on the second occurrence`, the Contract's heading; its text is unchanged except chapter 4's "(chapter 5)" on `Result`, now "(its own section follows)" (pt "(a seção dele vem a seguir)").
+* Chapter 5's "A lending library keeps books and members." is cut: the library was introduced at the first code block; the rule's sentence starts "In the lending library".
+* The Caution box's last sentence said "the question above"; with the three bullets gone it says "one question is what stops it", and the sentence on chapter 18 that follows carries the rule a step enters and leaves by.
+* The Kelly Johnson account keeps its rule (field repair, an average mechanic, a handful of ordinary tools) and loses the U-2, the SR-71 and "under combat conditions".
+* "Two kinds of throw pass the boundary" keeps its first and last sentences, with the two kinds named in the first (a fatal one, a framework's own control flow), since the reader needs to know which kinds they are.
+* Chapter 8's "Red and green are how an agent's test earns trust (chapter 5 showed the cycle)" loses the parenthesis and points nowhere: the cycle is no longer in chapter 4, and `ch8-testing-trim` adds it to chapter 8 and points to its own section.
+* The gain's one number, 29 checks, is said in its first sentence, after the opening section told the story.
+
+**What happened.**
+
+* `book/{en,pt}/04-simplicity.md` moved to `04-simplicity-and-results.md` and rewritten to the Contract's thirteen sections; `book/{en,pt}/05-rules-and-exceptions.md` removed. Same 14 H2 headings in both editions.
+* Kept from chapter 4: the Ninjobs paragraph (moved to the opening section), Brooks, the agent sentence, KISS's code and process paragraphs, YAGNI's origin, loan-periods example and Fowler's limit, DRY's two examples and Metz, the second-occurrence section, the Caution box. Cut: "Software projects rarely die", the U-2 account, the four-cost list, Parnas, the three process bullets.
+* Kept from chapter 5: the pure function, `mayBorrow`, immutability, `Result` and its exhaustive reason, the trio and "exceptions as values", the three reasons of "Why not throw" as prose, the boundary with `query`, the anti-corruption layer, the unique index refusal, the swallowed bug, "Every case handled" unchanged. Cut as the page names: Clean Architecture to one sentence, Rust and Wlaschin, Lippert, Spolsky, the ASP.NET and Framework Design Guidelines quotations, Next.js and .NET cancellation, "The rule is born with its test" whole, the old gain and key points.
+* Notes removed: `[^parnas-1972]`, `[^rust-result]`, `[^wlaschin-rop]`, `[^lippert-vexing]`, `[^spolsky-exceptions]`, `[^aspnet-best-practices]`, `[^fdg-exception-throwing]`, `[^nextjs-redirect]`, `[^dotnet-exceptions]`, `[^beck-tdd]`.
+* Mentions resolved, both editions: chapter 4's "(chapter 5)" on `Result` (above); chapter 6 "the rules of chapter 5" to chapter 4; chapter 7 "as chapter 5 showed" (link) to chapter 4; chapter 8 "the use case `lend` of chapter 5" (link) to chapter 4, and "chapter 5 showed the cycle" removed (above); chapter 10 "returns a Result (chapter 5)" to chapter 4; chapter 15 "returning a `Result` (chapter 5)" to chapter 4; chapter 24 "a pure function (chapter 5)" (link) to chapter 4.
+* docs/00 Contents: entries 4 and 5 become "4 Simplicity and results: KISS, YAGNI, DRY and exceptions as values"; Audience names no chapter 4 or 5, unchanged. docs/04 §Chapter pointers: "chapter 5's red and green cycle" becomes chapter 8's; its "chapter 4" mentions (first code block, the Caution box) still hold. docs/03: no row cited chapter 5, so nothing moved.
+* Chapter numbers 6 to 26 and "chapters 4 to 8" in docs/04 are left for `renumber-chapters`; no dependent line is freed by this one alone.
+
+**Proof.**
+
+* `rg -n "05-rules|[Cc]hapter 5\b|[Cc]apítulo 5\b" book docs/00-Product.md docs/03-Domain.md docs/04-Conventions.md` finds nothing.
+* Citations per edition, en and pt equal: `[^brooks-silver-bullet]` 1, `[^beck-xp]` 1, `[^fowler-yagni]` 3, `[^pragmatic-programmer]` 1, `[^metz-wrong-abstraction]` 1, `[^go-errors]` 1, `[^dart-core]` 1, `[^toub-net9]` 1, `[^anti-corruption-layer]` 1.
+* Toub's table read on 2026-10-16 at the note's URL, section "VM": `ExceptionThrowCatch`, .NET 8.0 123.03 ms, .NET 9.0 54.68 ms.
+* `make verify` green; `make book` built both editions, and the PDFs are `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+```commit
+docs(simplicity-and-results): chapters 4 and 5 become one chapter
+
+- ch4: opens with what grew on Ninjobs, one source per principle
+- ch4: pure function, Result, the trio and the boundary from chapter 5
+- ch5 removed; every pointer to it now names chapter 4
+- docs/00 contents and docs/04 pointer example follow
+- both editions
+
+work/done/simplicity-and-results.md
+```

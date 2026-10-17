@@ -46,7 +46,7 @@ src/features/catalog/        books and copies
 src/lib/result.ts            Result, ok and err
 ```
 
-`LendView.tsx` is the lending screen; `lendEvents.ts` receives what the screen asks for and answers with the new state; `rules.ts` holds the rules of chapter 5, such as `lend`; `repository.server.ts` reads and writes the database, and `route.server.ts` is the server's address for the loan.
+`LendView.tsx` is the lending screen; `lendEvents.ts` receives what the screen asks for and answers with the new state; `rules.ts` holds the rules of chapter 4, such as `lend`; `repository.server.ts` reads and writes the database, and `route.server.ts` is the server's address for the loan.
 A name ending in `.server.ts` runs only on the server, and client code never imports one.
 The tests sit beside the code they test.
 Chapter 7 names these four kinds of file as the four pieces, and chapter 8 gives each its test.

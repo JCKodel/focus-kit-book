@@ -50,7 +50,7 @@ In the lending library it is read once, where the request arrives, and passed on
 ## One rule through its tests
 
 The rule: a member with an overdue book cannot borrow another.
-It lives in the use case `lend` of [chapter 5](05-rules-and-exceptions.md), and each piece it crosses has a test.
+It lives in the use case `lend` of [chapter 4](04-simplicity-and-results.md), and each piece it crosses has a test.
 
 **The use case.** `rules.test.ts` calls `lend` with data:
 
@@ -131,7 +131,7 @@ An agent writes a test in seconds, so that reason is gone.
 The risk moved to the other side: an agent writes tests so easily that it writes too many, the same case five ways, until the suite takes minutes and nobody runs it before saying "done".
 Ask of a test what chapter 4 asks of any step: which broken rule would it catch that no other test catches?
 
-Red and green are how an agent's test earns trust ([chapter 5](05-rules-and-exceptions.md) showed the cycle).
+Red and green are how an agent's test earns trust.
 A test seen red before the code existed, and green after, has proven that it can fail.
 A test written after the code, by the agent that wrote the code, may assert what the code does in place of what the rule says, and pass forever.
 

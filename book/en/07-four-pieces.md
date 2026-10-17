@@ -77,7 +77,7 @@ These are the steps between them.
 4. **The use case decides.**
    The orchestrator hands both to `lend`, the pure function that returns a `Loan` due 21 days later, or the refusal `HasOverdueBooks` or `MemberSuspended`.
 5. **The repository saves.**
-   The orchestrator asks `insertLoan` to save the loan; a unique index on the copy refuses a second open loan, and the repository turns that failure into the refusal `AlreadyLent`, as [chapter 5](05-rules-and-exceptions.md) showed.
+   The orchestrator asks `insertLoan` to save the loan; a unique index on the copy refuses a second open loan, and the repository turns that failure into the refusal `AlreadyLent`, as [chapter 4](04-simplicity-and-results.md) showed.
 6. **The orchestrator publishes the new state.**
    `Lent` with the loan, `Refused` with the refusal, or `Failed` with the exception, and the view renders it: the due date, "Return your overdue books first.", or "Could not reach the library's database. Try again."
 

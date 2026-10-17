@@ -77,7 +77,7 @@ Estes são os passos entre os dois.
 4. **O caso de uso decide.**
    O orquestrador entrega os dois a `emprestar`, a função pura que devolve um `Emprestimo` com vencimento 21 dias depois, ou a recusa `TemLivrosEmAtraso` ou `MembroSuspenso`.
 5. **O repositório salva.**
-   O orquestrador pede a `inserirEmprestimo` que salve o empréstimo; um índice único sobre o exemplar recusa um segundo empréstimo aberto, e o repositório transforma essa falha na recusa `JaEmprestado`, como o [capítulo 5](05-rules-and-exceptions.md) mostrou.
+   O orquestrador pede a `inserirEmprestimo` que salve o empréstimo; um índice único sobre o exemplar recusa um segundo empréstimo aberto, e o repositório transforma essa falha na recusa `JaEmprestado`, como o [capítulo 4](04-simplicity-and-results.md) mostrou.
 6. **O orquestrador publica o novo estado.**
    `Emprestado` com o empréstimo, `Recusado` com a recusa, ou `Falhou` com a exceção, e a tela o renderiza: a data de vencimento, "Devolva primeiro os seus livros atrasados.", ou "Não foi possível acessar o banco da biblioteca. Tente de novo."
 

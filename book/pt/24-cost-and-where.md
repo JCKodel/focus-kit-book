@@ -87,7 +87,7 @@ O seu host guarda um log de cada sessão na sua máquina, e o log registra os to
 Conte um marco, divida pelas páginas que ele concluiu, e você tem os seus tokens por entrega.
 
 Nos logs do Claude Code, uma linha por evento, a mesma chamada pode aparecer em mais de uma linha, então a contagem considera cada mensagem e cada requisição uma vez só.
-A contagem é uma função pura ([capítulo 5](05-rules-and-exceptions.md)), escrita para este capítulo:
+A contagem é uma função pura ([capítulo 4](04-simplicity-and-results.md)), escrita para este capítulo:
 
 ```ts
 type Uso = {

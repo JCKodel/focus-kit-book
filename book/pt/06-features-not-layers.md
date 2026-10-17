@@ -47,7 +47,7 @@ src/features/catalogo/    livros e exemplares
 src/lib/result.ts         Result, ok e err
 ```
 
-`TelaDeEmprestimo.tsx` é a tela de empréstimo; `eventosDeEmprestimo.ts` recebe o que a tela pede e responde com o novo estado; `regras.ts` guarda as regras do capítulo 5, como `emprestar`; `repositorio.server.ts` lê e escreve no banco de dados, e `rota.server.ts` é o endereço do empréstimo no servidor.
+`TelaDeEmprestimo.tsx` é a tela de empréstimo; `eventosDeEmprestimo.ts` recebe o que a tela pede e responde com o novo estado; `regras.ts` guarda as regras do capítulo 4, como `emprestar`; `repositorio.server.ts` lê e escreve no banco de dados, e `rota.server.ts` é o endereço do empréstimo no servidor.
 Um nome terminado em `.server.ts` roda só no servidor, e o código do cliente nunca importa um deles.
 Os testes ficam ao lado do código que testam.
 O capítulo 7 chama esses quatro tipos de arquivo de as quatro peças, e o capítulo 8 dá a cada uma o seu teste.

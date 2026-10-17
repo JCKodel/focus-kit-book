@@ -87,7 +87,7 @@ Your host keeps a log of each session on your machine, and the log records the t
 Count one milestone, divide by the pages it finished, and you have your tokens per delivery.
 
 In Claude Code's logs, one line per event, the same call can appear on more than one line, so the count keeps each message and request only once.
-The counting is a pure function ([chapter 5](05-rules-and-exceptions.md)), written for this chapter:
+The counting is a pure function ([chapter 4](04-simplicity-and-results.md)), written for this chapter:
 
 ```ts
 type Usage = {

@@ -74,7 +74,7 @@ Done is that whole list: verify green, the proof, what happened written on the p
 Take the `lend-book` page of chapter 14, reviewed and marked `[>]`, and open a fresh session with `/apply lend-book`.
 
 The agent reads the page, then docs/01 to learn that loans live in `src/features/loans/`, docs/04 to learn which tests each piece gets (chapter 8), and docs/05 to learn that verify is `npm run verify` and that a screen is proven by a screenshot.
-It writes the migration for the table `loan` with its unique index, the rule `lend` as a pure function returning a `Result` (chapter 5), the repository call that turns the unique index's failure into the refusal `AlreadyLent`, the orchestrator and the lending screen.
+It writes the migration for the table `loan` with its unique index, the rule `lend` as a pure function returning a `Result` (chapter 4), the repository call that turns the unique index's failure into the refusal `AlreadyLent`, the orchestrator and the lending screen.
 Each Behaviour line becomes a test: the loan with its due date 21 days ahead, the refusal for an overdue book, the refusal for a suspended member, the loan for a member whose only book is due today, and, against a real in-memory database, the second of two loans on the last copy refused.
 It builds nothing for returning a copy, reservations or fines, because Out of scope named them.
 

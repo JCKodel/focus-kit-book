@@ -50,7 +50,7 @@ Na biblioteca, ele é lido uma vez, onde a requisição chega, e repassado como 
 ## Uma regra pelos testes dela
 
 A regra: um membro com um livro atrasado não pode pegar outro emprestado.
-Ela mora no caso de uso `emprestar` do [capítulo 5](05-rules-and-exceptions.md), e cada peça que ela atravessa tem um teste.
+Ela mora no caso de uso `emprestar` do [capítulo 4](04-simplicity-and-results.md), e cada peça que ela atravessa tem um teste.
 
 **O caso de uso.** `regras.test.ts` chama `emprestar` com dados:
 
@@ -131,7 +131,7 @@ Um agente escreve um teste em segundos, então esse motivo acabou.
 O risco passou para o outro lado: um agente escreve testes com tanta facilidade que escreve demais, o mesmo caso de cinco jeitos, até a suíte levar minutos e ninguém rodá-la antes de dizer "pronto".
 Pergunte a um teste o que o capítulo 4 pergunta a qualquer passo: que regra quebrada ele pegaria que nenhum outro teste pega?
 
-Vermelho e verde são como o teste de um agente ganha confiança (o [capítulo 5](05-rules-and-exceptions.md) mostrou o ciclo).
+Vermelho e verde são como o teste de um agente ganha confiança.
 Um teste visto vermelho antes de o código existir, e verde depois, provou que consegue falhar.
 Um teste escrito depois do código, pelo agente que escreveu o código, pode afirmar o que o código faz no lugar do que a regra diz, e passar para sempre.
 
