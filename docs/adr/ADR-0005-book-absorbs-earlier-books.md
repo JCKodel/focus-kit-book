@@ -19,3 +19,4 @@ FOCUS is redefined and simplified here.
 
 The book must teach context and SDD fundamentals itself, briefly.
 focus-kit's references to the earlier FOCUS book are repointed at launch (docs/00 OD-4).
+Amendment, 2026-10-16 (od4-kit-pointer): launch repointed the kit's README and `documents.md` at this book; the pointer to FOCUS is the remainder, in docs/00 OD-4.

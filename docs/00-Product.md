@@ -86,5 +86,6 @@ Nobody closes these alone; an agent never settles them by assumption.
   Closed on 2026-09-25: `JCKodel/focus-kit-clinic`, a clinic (ADR-0008, amendment).
   Superseded on 2026-09-30: the book has no guided project (ADR-0017).
 * **OD-3, what each private case may show.** For every passage drawn from Case A or Case B, the author approves the anonymized text before the chapter is done.
-* **OD-4, repointing the kit.** focus-kit's README and `documents.md` point FOCUS at books.kodel.com.br and the earlier FOCUS book.
-  The change is made in the focus-kit repository when this book launches, not here.
+* **OD-4, repointing the kit.** Launch repointed focus-kit at this book: its READMEs name the site, the Releases and the source, and the `documents.md` its `SETUP.md` §3 installs names the book (checked 2026-10-16 at kit `70fc709`).
+  Open: the FOCUS pointer there names this book's chapter 7 and `.../07-four-pieces/`, which M15 removes and renumbers.
+  The author makes the change in the focus-kit repository, in its README, README.pt and `SETUP.md` §3, to the chapter's final address once `renumber-chapters` is applied, not here; the copies installed here follow at the kit's next reinstall.

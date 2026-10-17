@@ -31,9 +31,9 @@ ADR-0005, under Consequences, one line: "Amendment, <date of /apply> (od4-kit-po
 
 **Done when.**
 
-* [ ] The kit's three places re-read at apply time (`git -C ../focus-kit grep -n "focus-kit-book"`), and the bullet says what they say then; if the kit moved, the bullet follows it.
-* [ ] docs/00's OD-4 and ADR-0005's line written; no em dash; no other line of either file changes.
-* [ ] `make verify` green; page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06 and of docs/00, the commit suggested in a `commit` block.
+* [x] The kit's three places re-read at apply time (`git -C ../focus-kit grep -n "focus-kit-book"`), and the bullet says what they say then; if the kit moved, the bullet follows it.
+* [x] docs/00's OD-4 and ADR-0005's line written; no em dash; no other line of either file changes.
+* [x] `make verify` green; page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06 and of docs/00, the commit suggested in a `commit` block.
 
 **Decisions taken from the documents.**
 
@@ -46,3 +46,30 @@ ADR-0005, under Consequences, one line: "Amendment, <date of /apply> (od4-kit-po
 * The bullet records the check by date and kit commit, and says the final address waits for `renumber-chapters`: chosen alone; the alternative, repointing the kit now to `06-focus`, would break again at the renumbering.
 * ADR-0005 gets an amendment line, as ADR-0017 and ADR-0008 do, rather than a rewritten consequence: chosen alone.
 * Overlap with pages in flight: docs/00 is edited by `focus-and-slices`, `renumber-chapters`, `prologue-and-why`, `simplicity-and-results` and `quick-guide` (Contents and Audience), a different part of the file from OD-4; `focus-and-slices` and `renumber-chapters` do not list the kit's URL, which is outside this repository. No page in flight edits ADR-0005. No docs/03 term is needed.
+
+**Proof.** The kit re-read on 2026-10-16: `../focus-kit` at `70fc709`, clean, the version installed here as 2026.10.16.2. `git -C ../focus-kit grep -n "focus-kit-book"` finds the site, the Releases and the source in `README.md` (lines 135 to 137) and `README.pt.md` (138 to 140), and the FOCUS pointer to `.../07-four-pieces/` in `README.md` (189), `README.pt.md` (193, `/pt/`) and `SETUP.md` (524, §3, the text the kit installs as `references/documents.md`). The installed copies in `.claude/skills/analyze/` and `.claude/skills/brainstorm/` say the same at lines 112 and 113. No file of the kit names books.kodel.com.br or an earlier book. The kit did not move since /propose; the bullet follows what it says. `make verify` green.
+
+**Divergences.**
+
+* The bullet is not the Contract's text word for word. The Contract said "its README and `documents.md` name the site, the Releases and the source" and "in its README, README.pt and `documents.md`"; the re-read shows the focus-kit repository has no file named `documents.md` (it is installed from `SETUP.md` §3) and that the installed file names the book and one chapter address, not the Releases or the source. The bullet says so, names `SETUP.md` §3 as the place to change, and adds the Behaviour's "by the author" and "the installed copies follow by the kit's next rerun", which the Contract's text had left out. The ADR-0005 line keeps the Contract's wording, which is true of the installed file.
+
+**Noted, not fixed.** Nothing.
+
+**Dropped.** Nothing.
+
+**Decisions in /apply.**
+
+* The bullet corrected to what the kit says, as above, rather than written verbatim: the Done when item asks the bullet to say what the kit says at apply time (decided in this session, not asked).
+* ADR-0005's amendment is one line under Consequences, as the Contract says, not an `## Amendment` heading as ADR-0017 and ADR-0008 have (decided in this session, not asked).
+* `renumber-chapters` was checked: its Mentions move "chapter N" by script in docs/00's Contents and Audience only, so the script leaves OD-4 alone; but its Failure reads every "chapter N" anywhere in docs/00. Its /apply must read OD-4's "chapter 7" as the kit's pointer, quoted, not as this book's number, and leave it while the kit says 7. Recorded here, since that page is another delivery's.
+* No manual: the change in the focus-kit repository is the author's, in another repository, and the installed copies follow by the kit's reinstall delivery. No queue line depends on this one.
+
+```commit
+docs(od4-kit-pointer): OD-4 says what the kit points at today
+
+- docs/00's OD-4 records the kit's pointers to this book, checked at 70fc709
+- OD-4 stays open, narrowed to the FOCUS pointer M15 removes
+- ADR-0005 gains an amendment line pointing at OD-4
+
+work/done/od4-kit-pointer.md
+```
