@@ -52,29 +52,9 @@ Uma stack em que um erro só aparece em tempo de execução, em uma tela, deixa 
 
 Quando os seis assuntos estão cobertos, o `/brainstorm` escreve o docs/00 a 06, um ADR para cada decisão que uma sessão futura poderia desfazer (a stack, FOCUS ou não, o git, qualquer coisa em que você hesitou), o `AGENTS.md`, o `CLAUDE.md` com a linha `@AGENTS.md`, e uma `work/done/` com um `.gitkeep`, para que a pasta sobreviva a um clone.
 Ele não escreve manual: a `docs/manuals/` é criada com o primeiro, pela entrega que acrescenta algo que uma pessoa faz à mão ou uma prova que o `/apply` roda em outra máquina.
+O primeiro marco, no docs/06, é um parágrafo que uma pessoa consegue conferir quando o marco fecha e as linhas dele, o esqueleto primeiro; o [capítulo 11](11-queue-and-milestones.md) mostra o da biblioteca de empréstimos e ensina a fila.
 Depois ele mostra a fila e para.
 Ele não escreve código, nem configuração, nem arquivo de dependências: a primeira entrega faz isso, com uma página própria, pelo `/propose` em uma sessão nova ([capítulo 12](12-propose.md)).
-
-Para a biblioteca da Parte I, um primeiro marco poderia ser assim, escrito para este capítulo:
-
-````markdown
-## Marco 1: uma bibliotecária empresta e recebe de volta
-
-Quando ele fecha, uma bibliotecária consegue cadastrar livros, seus exemplares e
-membros, emprestar um exemplar a um membro por 21 dias e registrar a devolução;
-um membro com um livro atrasado ou com a inscrição suspensa é recusado.
-
-```
-[ ] esqueleto        app e servidor vazios, npm run verify, primeira captura de tela
-[ ] catalogo         a bibliotecária cadastra livros e seus exemplares
-[ ] membros          a bibliotecária cadastra, suspende e reativa membros
-[ ] emprestar-livro  a bibliotecária empresta um exemplar, e as regras podem recusar
-[ ] devolver-livro   a bibliotecária registra uma devolução, e o exemplar fica livre
-[ ] m1-review        o marco conferido contra o parágrafo dele
-```
-````
-
-O parágrafo diz o que uma pessoa consegue conferir quando o marco fecha, e a primeira linha, `esqueleto`, cria o comando de verificação que toda entrega seguinte roda; o [capítulo 11](11-queue-and-milestones.md) ensina a fila.
 
 ## `/analyze`: um projeto existente
 
@@ -83,17 +63,7 @@ Ele funciona como o `/brainstorm`, com um padrão em cada pergunta e os mesmos d
 
 ### O que ele lê
 
-O arquivo do kit para o comando manda ler:
-
-* a `context/`, inteira, quando existe: o que as pessoas disseram e o código não consegue dizer (a seção abaixo);
-* o README e qualquer documentação que já exista;
-* os manifestos, como `package.json`, `pyproject.toml` ou `go.mod`;
-* a árvore de pastas, dois níveis abaixo;
-* os pontos de entrada;
-* os testes, e como eles rodam;
-* a configuração de CI, e qualquer Makefile ou script que uma pessoa roda à mão;
-* os assuntos dos últimos cinquenta commits;
-* qualquer arquivo de regras de agente que já exista, como `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md` ou `.cursorrules`.
+Como o arquivo do kit para o comando lista, ele lê a `context/` inteira quando existe (a seção abaixo), o README e qualquer documentação que já exista, os manifestos, a árvore de pastas, os pontos de entrada, os testes e como eles rodam, a configuração de CI e qualquer script que uma pessoa roda à mão, os assuntos dos commits recentes, e qualquer arquivo de regras de agente que já exista, como `CLAUDE.md` ou `.cursorrules`.
 
 A partir disso ele deduz a stack, como o código está organizado, onde moram as regras de negócio, como os erros viajam, o comando de verificação e os ambientes, e marca cada item como observado.
 O que o projeto não tem, ele pula: em um repositório sem código, os documentos descrevem o que os arquivos dizem.
@@ -129,14 +99,8 @@ Dê isso como sua resposta à pergunta do FOCUS, por exemplo "FOCUS inteiro, com
 
 ## O que o código não diz: a pasta de contexto
 
-O código diz o que um projeto faz; raramente diz por que, para quem, ou o que foi prometido.
-Esse conhecimento mora em propostas, contratos, e-mails, transcrições de reuniões, tickets e apresentações, e o que o agente não lê, ele tem de adivinhar.
-Ponha tudo o que você tem sobre o projeto em uma pasta na raiz, `context/`, como está, sem triagem e sem resumo, e mantenha-a separada de `docs/`: `context/` é de onde o agente lê, `docs/` é o que ele escreve.
-Quanto mais a pasta guarda, propostas para o cliente, transcrições de reuniões, e-mails, melhores os documentos que o agente escreve a partir dela, e mais gente do time ele consegue responder, muito além do código.
-É a diferença entre "isto foi feito assim porque o cliente pediu, no e-mail do dia 12" e "ninguém sabe por que é assim".
-Chegou um documento novo, ponha-o na pasta e peça ao agente que o leia e traga para o projeto o que ele muda: uma regra para o docs/00, um termo para o docs/03, uma linha para a fila.
-Os dois comandos procuram a pasta por esse nome e a leem inteira antes de qualquer outra coisa, então o `/brainstorm` parte do briefing ou da proposta que existe antes do código, e o `/analyze` do que o código não consegue dizer.
-Se a pasta entra no commit, e o que nunca pode entrar, é uma decisão própria ([capítulo 17](17-project-as-assistant.md)); os dois comandos perguntam isso, com o padrão acima.
+O código diz o que um projeto faz e raramente por que, para quem ou o que foi prometido, então ponha tudo o que você tem sobre o projeto em uma pasta na raiz, `context/`, como está (propostas, contratos, e-mails, transcrições de reuniões), e os dois comandos a leem inteira antes de qualquer outra coisa: o `/brainstorm` parte do briefing que existe antes do código, o `/analyze` do que o código não consegue dizer.
+O [capítulo 17](17-project-as-assistant.md) mostra como a pasta é mantida e quando ela entra no commit, uma pergunta que os dois comandos fazem, com o padrão acima.
 
 ## Revise antes do commit
 
@@ -152,7 +116,7 @@ Confira que:
 
 Quando algo está errado, peça a correção ao agente na mesma sessão, que ainda guarda a conversa, e deixe que ele escreva a mudança; nunca edite à mão, porque o agente sabe que outros documentos a correção toca.
 Leia com desconfiança.
-O texto de um agente parece certo mesmo quando está errado: um assunto pulado não deixa buraco na prosa, e uma afirmação do README copiada como fato se lê tão bem quanto uma que o agente conferiu.
+Um assunto pulado não deixa buraco na prosa, e uma afirmação do README copiada como fato se lê tão bem quanto uma que o agente conferiu.
 Só uma conferência contra o que você respondeu, ou contra o código, encontra qualquer um dos dois.
 
 ## O que o time ganha
@@ -167,7 +131,7 @@ Não há número para esse ganho: este livro não tem uma contagem de projetos c
 * Toda pergunta vem com um padrão, então "your call" é uma resposta válida, e você confere cada padrão que o agente manteve.
 * Escolha uma stack pelo que o projeto precisa, depois por quanto código público o agente aprendeu, depois por os tipos e testes deixarem ou não o agente conferir o próprio trabalho.
 * O `/analyze` lê o repositório primeiro, pergunta em uma rodada e escreve um manual para cada coisa que uma pessoa já faz à mão; o padrão de cada escolha é o que o código faz, uma contradição vira uma questão em aberto, e um código legado pode passar para o FOCUS como strangler fig.
-* Revise antes do commit, contra as suas respostas e contra o código, e peça ao agente cada correção: o texto dele parece certo mesmo quando está errado.
+* Revise antes do commit, contra as suas respostas e contra o código, e peça ao agente cada correção.
 
 [^octoverse]: GitHub, "Octoverse: A new developer joins GitHub every second as AI leads TypeScript to #1", 2025, o relatório mais recente em 2026-09-28: contribuidores mensais no GitHub, agosto de 2025. <https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/>
 [^strangler-fig]: Martin Fowler, "Strangler Fig", 2024. <https://martinfowler.com/bliki/StranglerFigApplication.html>

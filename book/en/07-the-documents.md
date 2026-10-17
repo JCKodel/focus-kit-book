@@ -79,7 +79,6 @@ A manual stands alone for whoever runs it, having read nothing else, and holds s
 The slot says what and the command, and the manual holds the steps for whoever runs them.
 A single command, such as the one that verifies a delivery, needs no manual: it stays in its slot.
 
-A slot that names such a command points to its manual instead of holding the steps.
 In the same docs/05, the Environments slot names the command that publishes the app and points to `docs/manuals/publish-the-app.md`; the steps live only there.
 `/analyze` writes the manuals for what a repository already does by hand, `/apply` writes or updates one when a delivery adds or changes it ([chapter 13](13-apply.md)), and `/brainstorm` writes none.
 The folder is created with the first manual, so there is no empty folder, and `AGENTS.md` points to it.
@@ -142,10 +141,7 @@ The library's docs/00 lists fines for late returns as open, so a page that touch
 
 The same answer in every session and for every person: a developer, a manager and a fresh agent who ask the loan period read one line in one document.
 On Ninjobs a decision lived in six places that could disagree, and every delivery paid to keep them in step; with one place per fact, a change is written once and every later session reads it.
-A manual keeps two facts out of the wrong place.
-Without it, the steps to republish a project's site live as a sub-item of the Environments slot of docs/05, written for the agent, where a person looking for how to publish does not look.
-And the steps of a proof `/apply` runs on another machine, kept in a slot, are read by every `/apply` before its first edit.
-The slot holds what and the command, and the steps have a manual found by its name.
+A manual puts the steps a person follows by hand where that person looks for them, in a file found by its name, and keeps a proof's steps out of the slot every `/apply` reads before its first edit.
 
 ## Key points
 

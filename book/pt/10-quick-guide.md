@@ -68,7 +68,7 @@ Um projeto deixado depois do passo 3 está pronto para o kit: qualquer sessão p
    Ensinado no [capítulo 8](08-install-and-hosts.md), "O que a instalação nunca toca, e como atualizar".
 2. Ponha o que o código não diz numa pasta `context/` na raiz, como está: propostas, contratos, e-mails, transcrições de reuniões, tickets.
    Você vê uma pasta ao lado do código, sem nada ordenado nem resumido.
-   Ensinado no [capítulo 9](09-starting-a-project.md), "O que o código não diz: a pasta de contexto".
+   Ensinado no [capítulo 17](17-project-as-assistant.md), "A pasta de contexto".
 3. Digite `/analyze` e responda à única rodada dele; cada padrão é o que o código já faz.
    Você vê a mudança mostrada antes de ser escrita, depois os documentos do passo 2 do projeto novo, um manual em `docs/manuals/` para cada coisa que uma pessoa já faz à mão, cada afirmação deduzida marcada como observada, e o agente nomeando o `/propose <slug>`.
    Ensinado no [capítulo 9](09-starting-a-project.md), "`/analyze`: um projeto existente".

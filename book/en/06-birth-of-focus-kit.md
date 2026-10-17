@@ -41,7 +41,7 @@ Two commands did the work: `/propose` talks with me and writes the page, never c
 The queue became one line per delivery.
 Of the 29 checks, two stayed, both aimed at the product itself: a proof of what each privacy level of a profile may show, and a test of the database's access rules.
 Anything that wanted to come back had to answer one question, the governor of chapter 16: which concrete error would it have caught?
-One did come back later, a lint of the database, because it named one: a duplicate index that no test had noticed.
+One check did come back later, because it named an error that had happened.
 
 Ninjobs opened to the public on 2026-09-10, thirteen days after the restart, with 91 one-page deliveries done.
 Its finished queue lines cite 19 design boards, against four screens in the fifteen days before.

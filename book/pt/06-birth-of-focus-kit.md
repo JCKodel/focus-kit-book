@@ -41,7 +41,7 @@ Dois comandos faziam o trabalho: o `/propose` conversa comigo e escreve a págin
 A fila virou uma linha por entrega.
 Das 29 verificações, ficaram duas, ambas voltadas para o próprio produto: uma prova do que cada nível de privacidade de um perfil pode mostrar, e um teste das regras de acesso do banco de dados.
 Tudo o que quisesse voltar tinha de responder a uma pergunta, o regulador do capítulo 16: que erro concreto isso teria pegado?
-Uma voltou mais tarde, um lint do banco de dados, porque apontou um: um índice duplicado que nenhum teste tinha notado.
+Uma verificação voltou mais tarde, porque apontou um erro que tinha acontecido.
 
 O Ninjobs abriu ao público em 2026-09-10, treze dias depois do recomeço, com 91 entregas de uma página concluídas.
 As linhas concluídas da sua fila citam 19 pranchas de design, contra quatro telas nos quinze dias anteriores.

@@ -58,13 +58,62 @@ Chapters and sections touched, both editions, same headings (pt section names ar
 
 **Done when.**
 
-* [ ] Every section of Contract changed in both editions, same headings; each chapter still opens with its value; nothing taught for the first time is cut.
-* [ ] The checks of Contract hold in `book/en` and `book/pt`; every `[^key]` definition keeps a reference.
-* [ ] Every link to a chapter that now owns a passage points to the chapter that holds it.
-* [ ] `make verify` green, disclosure scan included; `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Every section of Contract changed in both editions, same headings; each chapter still opens with its value; nothing taught for the first time is cut.
+* [x] The checks of Contract hold in `book/en` and `book/pt`; every `[^key]` definition keeps a reference.
+* [x] Every link to a chapter that now owns a passage points to the chapter that holds it.
+* [x] `make verify` green, disclosure scan included; `make book` run; both PDF paths given to the author.
+* [x] Page in `work/done/`, line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
 
 **Decisions in the review.**
 
 * The `M1` block is shown once, in chapter 13, as recommended.
 * Case A's rate stays in chapter 19 and chapter 13's gain points there, as recommended.
+
+**Chapter numbers.** This page was written before `renumber-chapters`; every chapter number above is the old one, and /apply resolved each through the old-to-new table on `work/done/renumber-chapters.md` (file slugs unchanged, only the prefix): old 9 is chapter 6 (`06-birth-of-focus-kit.md`), 10 is 7 (`07-the-documents.md`), 11 is 8 (`08-install-and-hosts.md`), 12 is 9 (`09-starting-a-project.md`), 13 is 11 (`11-queue-and-milestones.md`), 14 is 12 (`12-propose.md`), 15 is 13 (`13-apply.md`), 16 is 14 (`14-queue-states.md`), 17 is 15 (`15-closing-a-milestone.md`), 18 is 16 (`16-the-governor.md`), 19 is 17 (`17-project-as-assistant.md`), 20 and 21 are 18 and 19. Old 12a, the quick guide, is chapter 10. The text above keeps the old numbers as the record of what was decided; everything below, and the book, uses the new ones. The queue line keeps "chapters 9 to 19", since docs/06 keeps old numbers as history (`renumber-chapters`).
+
+**Decisions taken by /apply** (batch run: no question asked, each the recommended choice).
+
+* Section names the page gives that the chapters do not have were found by the words quoted: "chapter 12 §Milestone 1" is chapter 9 §What it writes, and where it stops; "chapter 13 §Milestone 1" is the milestone block in chapter 11 §The marks; the "Your call" sentence cut from chapter 12 is owned by chapter 9 §A default with every question, not §Review before you commit.
+* Chapter 14 §At the moment the work changes keeps the sentence on a mark set on a branch or a worktree. Chapters 18 §Choosing and 19 do not hold it, and chapter 20 says "a `[~]` or `[*]` set on a branch shows there only (chapter 14)": cutting it would leave a pointer to a chapter that no longer holds the passage and lose the only place the rule is taught, both Fails of this page.
+* Chapter 14 §The next line keeps "`/propose` and `/apply` do not start a line that is not free": it is the first and only place that rule is taught, and chapter 12 points to it. Only its tail, "as it does on a `[?]` line", was the repetition, and it left; the pair in §Waiting stays.
+* Chapter 13 §What the team gains: the two sentences on the block in the conversation and on the next steps left, so the gain "prevents two errors". The error each rule prevents is not lost: it moved, as a clause, to its item of the list in §Green is not done (the block in the conversation stands apart from the rest of the reply; the next steps spare a person new to the kit a search of the documentation), where docs/04 §Say it where the doubt is born puts a reason. The error of a command in another host's form stays in chapter 8's gain.
+* Chapter 17: Case A's numbers (twenty questions, two left open, about nine lines closed and six opened a day) were in §The questions the team asks and again in the gain. Following the objective (each number once) and Behaviour ("the numbers in chapter 17 §What the team gains only"), they stay in the gain and leave the body, which keeps the story: both tables, the reports written from the queue, the pace that put a scope cut in front of the project manager. The gain gains "and opened about six a day", moved from the body, not new; "shrank by about three a day" is that pair's arithmetic and left (docs/04 §Numbers that prove).
+* Chapter 9 §What the code cannot say keeps its heading, so `/analyze`'s "(the section below)" still lands, and holds two sentences and the link to chapter 17. Chapter 10's step 2 of an existing project said "Taught in chapter 9, 'What the code cannot say: the context folder'"; it now points to chapter 17, "The context folder", in both editions, the only edit to chapter 10, made for Done when's third item.
+* Chapter 9 §`/analyze`: "the link to the kit's file" is the file named in plain words, as docs/04 §Chapter shape forbids a note or link into focus-kit's repository.
+* Chapter 11: the opening said the reader can "say what each mark means"; with the four marks sent to chapter 14 it now says the reader can read a queue and write a milestone paragraph. Key point two names `[ ]` and `[x]` only. The pointer to chapter 20 in the gain left with the Case A sentences it closed: chapter 14 already points to chapter 20 for the mirrored board. `[^queue-m12]` had its only reference in the cut M12 sentence and left in both editions.
+* Chapter 16: the check asks for "29 checks" once; §It works both ways says "those checks" and the gain "the old checks". The two paragraphs of §The error that earned a mark became one.
+* Chapter 6 keeps "29 checks" four times: the page names no cut there beyond §Where it went, and each later use names the same checks, not a second count.
+
+**Already so when /apply started** (no edit): chapter 6's gain names "many places" and gives one telling of the four screens; chapter 8 §How each host finds the commands already says Codex's auto-run and Cursor's unknown support in one sentence each, and its gain has no three-file sentence; chapter 12's gain has no sentence on the governor (§When you do not know yet keeps the link to chapter 16); chapter 13 has no parenthesis on `resume: apply`, and "never commits" appears only in §Why it stops at the stage (the sentence and the quoted flow), not in the gain or the key points; chapter 15: no cut, as the page says.
+
+**What happened.**
+
+* Chapter 6 §Where it went: the lint's story became one sentence, a check came back because it named an error that had happened, after the sentence that names the governor of chapter 16.
+* Chapter 7 §Manuals: the second "a slot that names such a command points to its manual" left; the gain's four sentences on manuals became one.
+* Chapter 8 §What an update reports: the explanation of items 2, 5, 6 and 8 is one sentence after the items that change a rule; "The report keeps two facts apart" and its three sentences became one paragraph of two. The report is unchanged.
+* Chapter 9: the milestone block left, one sentence says what the first milestone holds and points to chapter 11; `/analyze`'s list of nine reads is one sentence; the context folder is two sentences and the link to chapter 17; "reads as right even when it is wrong" left §Review before you commit and the key points, which keep the instruction and this chapter's own reason (a skipped subject leaves no gap).
+* Chapter 11: §The marks gives `[ ]` and `[x]` and sends the other four to chapter 14; §Milestones lost the `[?]`-instead sentence; §Changing the queue's four special cases are two sentences; the gain keeps Case A in one sentence with the link to chapter 17 and the three rules in one sentence each, and lost the M12 example and its note.
+* Chapter 12 §What `/propose` does opens with what the documents answer, then what it reads and marks; the "Your call" sentence left; the plan mode aside is one sentence, its note kept.
+* Chapter 13: §Green is not done ends "Done is that whole list."; the gain prevents two errors; key point four does not repeat the list.
+* Chapter 14: the `SETUP.md` sentence left §The problem; the tail of the not-free sentence left §The next line.
+* Chapter 16: "The file that describes the kit lists it" left; "29 checks" only in §The problem; §The error that earned a mark is one paragraph with the link to chapter 14.
+* Chapter 17: the queue in one sentence with no list of marks; Case A's numbers only in the gain; §The person is the brain and the key point keep the instruction without the maxim.
+* No document changed: no rule, term or convention moved. Dependents: `small-delivery-example` (`· after method-said-once`) is free once this line is `[x]` and keeps `[>]`; `one-gain-section` still waits on `ch20-21-git-cut` and `ch22-26-team-cut` and keeps `[>]`.
+
+**Proof.**
+
+* Same headings in both editions for every chapter touched; `make verify` green (strict build, parity, em dash, prose, links, disclosure).
+* Checks of Contract, in `book/en` and `book/pt`: "29 checks" / "29 checagens" once in `16-the-governor.md`; "`[~]` being defined" / "`[~]` sendo definida" only in `14-queue-states.md`; "reads as right even when it is wrong" / "parece cert[oa] mesmo quando está errad[oa]" only in `07-the-documents.md`; "never commits" / "nunca faz commit" twice in `13-apply.md`, both in §Why it stops at the stage. Every `[^key]` in chapters 6 to 17 has its definition and a reference.
+* `make book` built both editions: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+```commit
+docs(method-said-once): chapters 6 to 17 say each rule and number once
+
+- ch11: two marks; the other four, and Case A's numbers, live elsewhere
+- ch9: milestone block, context folder and /analyze list cut to links
+- ch13, ch16, ch17: Done, 29 checks and Case A's counts said once
+- ch7, ch8, ch12, ch14: repeated slot, report and plan-mode text cut
+- both editions
+
+work/done/method-said-once.md
+```

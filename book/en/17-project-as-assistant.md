@@ -15,7 +15,7 @@ Nobody can ask the project itself, so every question costs a person's time, and 
 A focus-kit project already writes most of what a team asks about, because the agent needs it to build:
 
 * **The documents**: the product and its rules in docs/00, the vocabulary in docs/03, the decisions and their reasons in the ADRs.
-* **The queue**: every delivery, one line each, with its mark: `[ ]` not yet defined, `[~]` being defined, `[>]` defined and waiting to be built, `[*]` being built, `[x]` done, `[?]` waiting, with what it waits on (chapter 14).
+* **The queue**: every delivery, one line each, with the mark that says where it stands and, on a waiting line, what it waits on (chapter 14).
 * **The pages in `work/`**: what is defined now, and what each delivery will do.
 * **The pages in `work/done/`**: what each finished delivery did, and what happened while it was built.
 * **The git history** (chapter 18): when each commit happened, and which delivery it belongs to, since the commit that closes a delivery ends with its slug.
@@ -90,15 +90,12 @@ The first table says who was asked what, and when they answered.
 The second says which queue line is blocked, on whom, and for how long, so "who owes me an answer" is one table and a reminder to that person is written from it.
 
 Case A kept both tables: questions sent, with to whom, about what and answered when; and still open, with the line, what it waits on and since when.
-Twenty questions to people outside the project were logged there, and two were still unanswered when it closed.
 Its end-of-day status report and its schedule and risk estimate for the project manager say they were written from the queue and the pages, not from memory.
-The queue gave the pace: about nine lines closed and about six new lines opened a day, so the open list shrank by about three a day.
-That pace put a scope cut in front of the project manager in the middle of the project, as a decision for them to take.
+The pace the queue gave, lines closed against lines opened a day, put a scope cut in front of the project manager in the middle of the project, as a decision for them to take.
 
 ## The person is the brain
 
-The agent's answer reads as right even when it is wrong: fluent, formatted and sure of itself.
-It may miss a message nobody put in the folder, read a draft as sent, or count a line whose page says it waits on someone.
+The agent's answer may miss a message nobody put in the folder, read a draft as sent, or count a line whose page says it waits on someone.
 So the person keeps three jobs, the same three the prologue gives the person for code.
 They interpret: what the answer means for the client, the budget and the date.
 They guide: they ask the next question, and point the agent to the file it missed.
@@ -136,13 +133,13 @@ A change to the code, however small, becomes a line as well, with a draft page f
 ## What the team gains
 
 One assistant for engineering and product alike: the same documents answer a developer's "where does this rule live" and a manager's "who owes us an answer", and nobody writes a status by hand.
-On Case A, twenty questions to outside people were followed to their answers, the two left open were named at the close, and the status and the risk estimate came from a queue that closed about nine lines a day.
+On Case A, twenty questions to outside people were followed to their answers, the two left open were named at the close, and the status and the risk estimate came from a queue that closed about nine lines and opened about six a day.
 
 ## Key points
 
 * The documents, the queue, the pages and the git history already answer what is pending, what is in progress and how long each delivery took.
 * The context folder holds what the code cannot say, each original beside its Markdown; it is committed when the repository stays with the team, and kept out when the repository is delivered or public.
 * A work record with two tables, questions sent and still open, answers "who owes me an answer" and writes the reminder.
-* The agent's answer reads as right even when it is wrong: ask for the file behind it, and interpret, guide and validate.
+* Ask for the file behind every answer, and interpret, guide and validate it.
 * A manager opens the host at the project's root and asks in plain words; the same rules file makes the agent read the documents first; asked where things stand, it answers from the queue with the next command; there is no status command.
 

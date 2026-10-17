@@ -91,12 +91,10 @@ docs/ and AGENTS.md were not changed.
 ```
 
 Items 1, 3, 4 and 7 change a rule: a change asked outside `/apply` stops at the line, with a draft for what the line cannot hold, and the next `/propose` runs in a fresh session ([chapter 11](11-queue-and-milestones.md)); a mark changes at once, so a board that reads the queue shows what is taken ([chapter 14](14-queue-states.md)); and a milestone's review also reads the code, through the slot that names the review a person launches ([chapter 15](15-closing-a-milestone.md)).
-Items 2, 5, 6 and 8 change only words, for a rule the documents already hold: the Contract says why it must be exact ([chapter 12](12-propose.md)); the Publish policy says what `/apply`'s last words already are, which environment is at which version ([chapter 13](13-apply.md)); the list of what the process does not have names the one gate it keeps, a complete page ([chapter 16](16-the-governor.md)); and `AGENTS.md` says item 1's rule where every session reads it.
+Items 2, 5, 6 and 8 change only words, for a rule the documents already hold.
 
-The report keeps two facts apart.
-The `metadata.version` in each `SKILL.md` says which kit is installed.
-The process is what docs/04, docs/05 and `AGENTS.md` say, because that is what every command reads, so an updated kit whose migrations are not applied still runs the old process.
-The update is done when the migrations are applied, and the method applies them as it applies any change: a queue line, defined with `/propose` and built with `/apply`, so the change to your rules or your queue gets a page, verify and your review.
+The kit's version is the `metadata.version` in each `SKILL.md`; the process is what docs/04, docs/05 and `AGENTS.md` say, because every command reads them, so an updated kit whose migrations are not applied still runs the old process.
+The update is done when the migrations are applied, as any change is: a queue line, defined with `/propose` and built with `/apply`, so the change to your rules or your queue gets a page, verify and your review.
 
 On a documented project the update reports the migrations first, or says there are none.
 It never asks you to run `/brainstorm` or `/analyze` again: those write a project's documents from nothing, and yours exist.

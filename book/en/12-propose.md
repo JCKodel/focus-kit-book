@@ -19,12 +19,10 @@ If it does not, the scope has not been understood yet, and it is two deliveries.
 
 ## What `/propose` does
 
-`/propose <slug>` reads before it asks: docs/00 for the product and its rules, docs/03 for the words the page must use, docs/05 for the project's slots and the format of the page, docs/06 for what comes before and after the line, `work/` for the deliveries in flight, and docs/01 for where the change lives in the code.
-Then it talks with you until the scope fits one page.
-What the documents already answer, it does not ask: the kit's file for the command tells it to decide, write the decision on the page and name the document it came from, so if the document is wrong you correct it once, in the review, instead of answering the same question twice.
+`/propose <slug>` talks with you until the scope fits one page, and what the project's documents already answer, it does not ask: the kit's file for the command tells it to decide, write the decision on the page and name the document it came from, so if the document is wrong you correct it once, in the review, instead of answering the same question twice.
 It asks only where the documents leave more than one reading and none closes it, its assessment first, in prose, and its recommendation first in every question.
-"Your call" is always a valid answer, and a person who cannot answer still gets a good page.
 
+To decide, it reads before it asks: docs/00 for the product and its rules, docs/03 for the words the page must use, docs/05 for the project's slots and the format of the page, docs/06 for what comes before and after the line, `work/` for the deliveries in flight, and docs/01 for where the change lives in the code.
 When it starts, it marks the line `[~]` in the queue, so anyone reading it sees a delivery being defined, and when the page is written, `work/<slug>.md`, the mark becomes `[>]`.
 It ends by showing that queue line, `[>] lend-book ...` for the page below, and asking you to read and question the page, then to run `/apply` in a fresh session.
 On a line already `[?]`, it says what the line waits on and goes on only when you say it is resolved; on a line whose `after` names a line not yet `[x]`, it says the same and does not start (chapter 14).
@@ -120,10 +118,7 @@ The order is the cheap one.
 A hole found on the page costs one turn; found after `/apply`, it costs another `/apply`, the most expensive command, which builds, tests and proves again.
 On Ninjobs, the page of the delivery that computes a candidate's matching score found, while it was being written, that a candidate's approximate age already leaked at the first privacy level through the dates of their experience; it became a line for a later delivery, and no code was written past it.
 
-Hosts have their own way to plan before editing; in Claude Code it is plan mode, where "*Claude reads files and proposes a plan but makes no edits until you approve*".[^claude-code-plan-mode]
-Plan mode works inside one session, for the change at hand.
-The page works for the project: a file in the repository, in a format every project shares, written from the project documents and in their words, marked in the queue, read by a fresh session to build it, and kept in `work/done/` with what happened.
-Use plan mode inside a session if it helps you; the page is what outlives the session.
+Hosts have their own way to plan inside one session, such as Claude Code's plan mode, where "*Claude reads files and proposes a plan but makes no edits until you approve*";[^claude-code-plan-mode] the page is what outlives the session: a file in the repository, written from the project's documents in their words, marked in the queue, read by a fresh session to build it, and kept in `work/done/` with what happened.
 
 ## When it does not fit
 

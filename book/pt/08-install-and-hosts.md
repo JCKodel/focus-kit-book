@@ -94,12 +94,10 @@ docs/ e AGENTS.md não foram alterados.
 ```
 
 Os itens 1, 3, 4 e 7 mudam uma regra: uma mudança pedida fora do `/apply` para na linha, com um rascunho para o que a linha não comporta, e o próximo `/propose` roda numa sessão nova ([capítulo 11](11-queue-and-milestones.md)); uma marca muda na hora, para que um quadro que lê a fila mostre o que já foi pego ([capítulo 14](14-queue-states.md)); e a revisão de um marco também lê o código, pelo slot que cita a revisão que uma pessoa lança ([capítulo 15](15-closing-a-milestone.md)).
-Os itens 2, 5, 6 e 8 mudam só palavras, para uma regra que os documentos já guardam: o Contrato diz por que precisa ser exato ([capítulo 12](12-propose.md)); a Publish policy diz o que as últimas palavras do `/apply` já são, qual ambiente está em qual versão ([capítulo 13](13-apply.md)); a lista do que o processo não tem cita a única barreira que ele mantém, uma página completa ([capítulo 16](16-the-governor.md)); e o `AGENTS.md` diz a regra do item 1 onde toda sessão a lê.
+Os itens 2, 5, 6 e 8 mudam só palavras, para uma regra que os documentos já guardam.
 
-O relatório mantém dois fatos separados.
-O `metadata.version` em cada `SKILL.md` diz qual kit está instalado.
-O processo é o que o docs/04, o docs/05 e o `AGENTS.md` dizem, porque é isso que todo comando lê, então um kit atualizado cujas migrações não foram aplicadas ainda roda o processo antigo.
-A atualização termina quando as migrações são aplicadas, e o método as aplica como aplica qualquer mudança: uma linha da fila, definida com o `/propose` e construída com o `/apply`, para que a mudança nas suas regras ou na sua fila tenha uma página, verificação e a sua revisão.
+A versão do kit é o `metadata.version` em cada `SKILL.md`; o processo é o que o docs/04, o docs/05 e o `AGENTS.md` dizem, porque todo comando os lê, então um kit atualizado cujas migrações não foram aplicadas ainda roda o processo antigo.
+A atualização termina quando as migrações são aplicadas, como qualquer mudança: uma linha da fila, definida com o `/propose` e construída com o `/apply`, para que a mudança nas suas regras ou na sua fila tenha uma página, verificação e a sua revisão.
 
 Num projeto já documentado, a atualização relata as migrações primeiro, ou diz que não há nenhuma.
 Ela nunca pede que você rode o `/brainstorm` ou o `/analyze` de novo: eles escrevem os documentos de um projeto do zero, e os seus existem.

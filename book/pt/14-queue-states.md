@@ -13,7 +13,6 @@ O projeto acrescentou uma quarta marca à mão, `[?]`, para uma linha esperando 
 
 Dois erros, então: o Doing chegava tarde, e a espera parecia parada.
 O focus-kit responde aos dois com seis marcas, cada uma posta no momento em que o trabalho muda.
-O arquivo `SETUP.md` dele guarda o documento de processo, o docs/05, e o §4 desse documento é a fila.
 
 ## Seis marcas
 
@@ -62,7 +61,7 @@ A próxima entrega é a primeira linha livre que nenhuma sessão pegou: uma sess
 Quando `emprestar-livro` vira `[x]`, `meus-emprestimos` fica livre nesse momento, sem nada para tirar e sem marca para mudar; o `· after` fica na linha como o registro da ordem.
 Uma linha com duas ordens, `· after emprestar-livro, membros`, só fica livre quando as duas estão `[x]`.
 
-O `/propose` e o `/apply` não começam uma linha que não está livre: rode `/propose meus-emprestimos` com `emprestar-livro` em `[*]`, e ele diz o que a linha espera e para, como faz em uma linha `[?]`.
+O `/propose` e o `/apply` não começam uma linha que não está livre: rode `/propose meus-emprestimos` com `emprestar-livro` em `[*]`, e ele diz o que a linha espera e para.
 
 Perguntado o que pode rodar ao mesmo tempo, você responde pela fila: as linhas livres, e entre elas as que mexem em arquivos diferentes, julgadas pelas páginas delas e pelo docs/01, que diz onde mora cada parte do código.
 `buscar-catalogo` e `reservas`, em `src/catalogo/` e `src/reservas/`, podem.

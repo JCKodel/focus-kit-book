@@ -1,6 +1,6 @@
 # 11. The queue and milestones
 
-After this chapter you can read a queue, say what each mark means, and write a milestone paragraph a person can check.
+After this chapter you can read a queue and write a milestone paragraph a person can check.
 You can also write a line as one sentence with its suffixes, order a milestone so that its order is its priority, write on a line which line must be done before it, `· after <slug>`, add, move or change a line by conversation, and turn a code change asked outside `/apply` into a line and a draft for its page.
 
 ## The problem
@@ -27,16 +27,9 @@ A line that grows into a paragraph is a decision in the wrong place, since the p
 
 ## The marks
 
-A line has one of six marks, which says where its delivery stands:
-
-* `[ ]` not yet defined: the delivery has a line and no page.
-* `[~]` being defined: a conversation is writing its page.
-* `[>]` defined: its page, `work/<slug>.md`, exists and waits to be built.
-* `[*]` being built: a session is building it.
-* `[x]` done: it was built, and its page moved to `work/done/` ([chapter 13](13-apply.md)).
-* `[?]` waiting: it cannot go on until something else happens, and the line says what.
-
-[Chapter 14](14-queue-states.md) shows who sets each mark and at what moment, when a line is free to start, and how a line waits and leaves `[?]`.
+A line has one of six marks, which says where its delivery stands.
+This chapter needs two of them: `[ ]`, not yet defined, the delivery has a line and no page; and `[x]`, done, it was built and its page moved to `work/done/` ([chapter 13](13-apply.md)).
+The other four, `[~]`, `[>]`, `[*]` and `[?]`, are [chapter 14](14-queue-states.md)'s: what each means, who sets it and at what moment, when a line is free to start, and how a line waits and leaves `[?]`.
 
 A line never leaves the queue; it changes mark and keeps its sentence.
 So the queue is also the history of what was delivered, in the order it was planned, and what happened is on the page in `work/done/` behind each `[x]`, never added to the line.
@@ -84,7 +77,6 @@ There is no priority field and no label to keep in step with the order.
 When you add a line and already know it needs another done first, you write that with it, at the end: a return needs a loan, so `return-book` ends with `· after lend-book`.
 That is an order, not a wait: the line keeps its mark, `[ ]`, and is free to start once `lend-book` is `[x]`.
 `lend-book` carries no `after`: the lines it needs, `catalog` and `members`, are already `[x]`.
-A line written `[?]` instead would read as stuck when nothing has gone wrong; chapter 14 keeps `[?]` for a wait found on the way.
 
 ### The review, and its findings
 
@@ -109,9 +101,7 @@ The narrow-screen rule and the catalog exception do not fit the line's one sente
 The line gets what every delivery gets, a page, a proof and the person's commit; an edit made on the spot would have skipped the line, the page and verify.
 The draft is where the detail waits: `/propose due-date-format`, in a fresh session, starts from it and writes the page (chapter 12 shows `/propose`), so nothing you said in the first session is said twice.
 Saying "define it now" changes nothing: the agent cannot run `/propose` on its own, since it is a command the host runs, and a page written without it starts without what `/propose` reads.
-The answer is the same during `/propose`, which writes no code: a new line, and the page unchanged unless you ask for that change to be part of it.
-An agent that edits the code anyway, to "just change the label", is asked for the line instead, and the edit is reverted before anything is committed.
-The rule covers `/apply`'s own session too: a fix it finds outside its page becomes a line above it, and the delivery waits for that line (chapter 14).
+The rule holds in every session: during `/propose` the change is a new line, unless you ask for it on the page being written; during `/apply`, a fix found outside its page is a line above it, which the delivery waits for (chapter 14); and an edit made anyway, to "just change the label", is reverted before anything is committed.
 Documents still change by conversation, in any session; the rule covers the code: the app's source, its tests, a migration, its configuration.
 
 A milestone's paragraph or a line's description changes by conversation too, and the slug stays, since a page or a commit may already use it.
@@ -123,24 +113,19 @@ You read the change before you commit it, as with every document, and nobody edi
 
 The queue is the team's shared status board and its history in one file: what is next, what is in flight, what was done and in what order, readable by a manager without a tool and by an agent at the start of every session.
 On Ninjobs it held 102 deliveries, done and not yet done alike, in one file.
-On Case A, a client project on a low-code platform, Microsoft Power Apps with Copilot Studio, the status report and the risk estimate for the project manager were written from the queue and the pages, not from memory, and the queue gave the pace: about 9 lines closed and 6 opened a day.
-[Chapter 17](17-project-as-assistant.md) tells the rest of Case A, and [chapter 20](20-team-tools.md) shows how its queue was mirrored on the board its project manager already used.
+On Case A, a client project on a low-code platform, Microsoft Power Apps with Copilot Studio, the status report and the risk estimate for the project manager were written from the queue and the pages, not from memory ([chapter 17](17-project-as-assistant.md)).
 
 Three rules of the queue each prevent an error.
 The order is the priority, written down: without it, a team looks for a way to rank its deliveries, and with it the queue already is the ranking.
 Code changes only inside `/apply`: without that rule, an agent asked for a correction in an ordinary session edits the code directly, with no line in the queue, no page and no verify; with it, a change asked outside `/apply` costs one line, and it gets a page, a proof and the person's commit.
 A line holds one sentence: when the detail of a request has nowhere to go but the line, the lines grow and every session reads them; with one sentence, the detail goes to the page, or to its draft until `/propose` writes it.
-This book's own queue shows `· after` at work: in its milestone M12, seven lines end with `· after kit-2026-10-13`; each needs the update `kit-2026-10-13` done first, and none of them reads as stuck while it waits its turn.[^queue-m12]
 
 ## Key points
 
 * docs/06 holds milestones, each with a paragraph, and one line per delivery under it: a mark, a slug, one sentence and its suffixes; what happened goes on the page.
-* Six marks: `[ ]` not defined, `[~]` being defined, `[>]` the page exists, `[*]` being built, `[x]` done, `[?]` waiting; a line never leaves, so the queue is also the history.
+* A line's mark says where its delivery stands, from `[ ]`, not defined, to `[x]`, done; a line never leaves, so the queue is also the history.
 * A milestone paragraph is a test a person can check against the product, never a theme.
 * Three to eight deliveries, the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone.
 * The order is the priority: the higher line matters more, and moving a line is changing its priority.
 * A dependency known when a line is added is written with it, `· after <slug>`: an order, not a wait, so the line keeps `[ ]`.
 * No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept; code changes only inside `/apply`, and a change asked anywhere else becomes a line, with a draft page for what the line cannot hold, and `/propose` in a fresh session.
-
-[^queue-m12]: J.C. Ködel, "One Page at a Time", the queue, `docs/06-Queue.md`, milestone M12, 2026-10, in the book's repository. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md>
-

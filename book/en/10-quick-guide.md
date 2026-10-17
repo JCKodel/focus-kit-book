@@ -68,7 +68,7 @@ A project left after step 3 is ready for the kit: any later session reads its do
    Taught in [chapter 8](08-install-and-hosts.md), "What the install never touches, and how to update".
 2. Put what the code cannot say in a folder `context/` at the root, as it is: proposals, contracts, emails, meeting transcripts, tickets.
    You see one folder beside the code, with nothing sorted or summarized.
-   Taught in [chapter 9](09-starting-a-project.md), "What the code cannot say: the context folder".
+   Taught in [chapter 17](17-project-as-assistant.md), "The context folder".
 3. Type `/analyze` and answer its one round; each default is what the code already does.
    You see the change shown before it is written, then the documents of the new project's step 2, a manual in `docs/manuals/` for each thing a person already does by hand, every inferred statement marked observed, and the agent naming `/propose <slug>`.
    Taught in [chapter 9](09-starting-a-project.md), "`/analyze`: an existing project".

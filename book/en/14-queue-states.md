@@ -13,7 +13,6 @@ The project added a fourth mark by hand, `[?]`, for a line waiting on a person.
 
 Two errors, then: Doing came late, and waiting looked idle.
 focus-kit answers both with six marks, each set at the moment the work changes.
-Its file `SETUP.md` holds the process document, docs/05, and that document's §4 is the queue.
 
 ## Six marks
 
@@ -61,7 +60,7 @@ The next delivery is the first free line no session holds: a session is building
 When `lend-book` becomes `[x]`, `my-loans` is free from that moment, with nothing to clear and no mark to change; the `· after` stays on the line as the record of the order.
 A line with two orders, `· after lend-book, members`, is free only when both are `[x]`.
 
-`/propose` and `/apply` do not start a line that is not free: run `/propose my-loans` while `lend-book` is `[*]`, and it says what the line waits on and stops, as it does on a `[?]` line.
+`/propose` and `/apply` do not start a line that is not free: run `/propose my-loans` while `lend-book` is `[*]`, and it says what the line waits on and stops.
 
 Asked what can run at the same time, you answer from the queue: the free lines, and among them those that touch different files, judged from their pages and from docs/01, which says where each part of the code lives.
 `search-catalog` and `reservations`, in `src/catalog/` and `src/reservations/`, can.

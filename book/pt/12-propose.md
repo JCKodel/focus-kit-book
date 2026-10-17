@@ -19,12 +19,10 @@ Se não cabe, o escopo ainda não foi entendido, e são duas entregas.
 
 ## O que o `/propose` faz
 
-O `/propose <slug>` lê antes de perguntar: o docs/00 para o produto e as suas regras, o docs/03 para as palavras que a página precisa usar, o docs/05 para os slots do projeto e o formato da página, o docs/06 para o que vem antes e depois da linha, `work/` para as entregas em andamento, e o docs/01 para onde a mudança mora no código.
-Então ele conversa com você até o escopo caber em uma página.
-O que os documentos já respondem, ele não pergunta: o arquivo do comando no kit manda decidir, escrever a decisão na página e nomear o documento de onde ela veio, então, se o documento estiver errado, você corrige uma vez, na revisão, em vez de responder a mesma pergunta duas vezes.
+O `/propose <slug>` conversa com você até o escopo caber em uma página, e o que os documentos do projeto já respondem, ele não pergunta: o arquivo do comando no kit manda decidir, escrever a decisão na página e nomear o documento de onde ela veio, então, se o documento estiver errado, você corrige uma vez, na revisão, em vez de responder a mesma pergunta duas vezes.
 Ele só pergunta onde os documentos deixam mais de uma leitura e nenhum a fecha: primeiro a avaliação dele, em prosa, e a recomendação dele primeiro em cada pergunta.
-"Você decide" é sempre uma resposta válida, e uma pessoa que não sabe responder ainda recebe uma boa página.
 
+Para decidir, ele lê antes de perguntar: o docs/00 para o produto e as suas regras, o docs/03 para as palavras que a página precisa usar, o docs/05 para os slots do projeto e o formato da página, o docs/06 para o que vem antes e depois da linha, `work/` para as entregas em andamento, e o docs/01 para onde a mudança mora no código.
 Quando começa, ele marca a linha como `[~]` na fila, então quem a lê vê uma entrega sendo definida, e quando a página está escrita, `work/<slug>.md`, a marca vira `[>]`.
 Ele termina mostrando essa linha da fila, `[>] emprestar-livro ...` para a página abaixo, e pedindo que você leia e questione a página, e depois rode o `/apply` em uma sessão nova.
 Em uma linha que já está `[?]`, ele diz o que a linha espera e só segue quando você diz que está resolvido; em uma linha cujo `after` nomeia uma linha que ainda não está `[x]`, ele diz o mesmo e não começa (capítulo 14).
@@ -127,10 +125,7 @@ A ordem é a barata.
 Um buraco achado na página custa um turno; achado depois do `/apply`, custa outro `/apply`, o comando mais caro, que constrói, testa e prova de novo.
 Na Ninjobs, a página da entrega que calcula a pontuação de compatibilidade de um candidato descobriu, enquanto era escrita, que a idade aproximada de um candidato já vazava no primeiro nível de privacidade pelas datas das suas experiências; isso virou uma linha para uma entrega posterior, e nenhum código foi escrito além dela.
 
-Os hosts têm o seu próprio jeito de planejar antes de editar; no Claude Code é o modo de plano (plan mode), em que "*o Claude lê arquivos e propõe um plano, mas não faz nenhuma edição até você aprovar*".[^claude-code-plan-mode]
-O modo de plano trabalha dentro de uma sessão, para a mudança do momento.
-A página trabalha para o projeto: um arquivo no repositório, em um formato que todo projeto compartilha, escrito a partir dos documentos do projeto e com as palavras deles, marcado na fila, lido por uma sessão nova para construí-lo, e guardado em `work/done/` com o que aconteceu.
-Use o modo de plano dentro de uma sessão se ele ajudar você; a página é o que sobrevive à sessão.
+Os hosts têm o seu próprio jeito de planejar dentro de uma sessão, como o modo de plano (plan mode) do Claude Code, em que "*o Claude lê arquivos e propõe um plano, mas não faz nenhuma edição até você aprovar*";[^claude-code-plan-mode] a página é o que sobrevive à sessão: um arquivo no repositório, escrito a partir dos documentos do projeto e com as palavras deles, marcado na fila, lido por uma sessão nova para construí-lo, e guardado em `work/done/` com o que aconteceu.
 
 ## Quando não cabe
 

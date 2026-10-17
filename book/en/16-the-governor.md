@@ -13,7 +13,6 @@ Nobody added them to slow the work down; nobody asked what each had caught.
 ## The question
 
 The kit writes one rule into every project's process document, in §7 of docs/05, "What this process does not have": when something new is proposed, ask which concrete error it would have caught, and accept an answer that names an error that happened.
-The file that describes the kit lists it among the rules every project keeps: nothing enters the process without naming the concrete error it would have caught.
 This book calls that question the governor, after the part that keeps an engine from running faster than its load asks.
 
 The answer has to name an error that happened, because a possible error justifies anything: some error is always possible.
@@ -24,7 +23,7 @@ And the cost it must outweigh is paid by every delivery after it.
 
 The question decides what enters, and it decides what stays.
 
-On Ninjobs, when I restarted the project, the 29 checks left: none of them could name an error in the product it had caught.
+On Ninjobs, when I restarted the project, those checks left: none of them could name an error in the product it had caught.
 Two checks took their place, both guarding the product's promise of privacy, where a leak is the error the product cannot afford: a proof of what each privacy level may show, and a test of the database access rules.
 
 What entered later came in the same way.
@@ -53,18 +52,12 @@ Each job still gets done, by something the process already has:
 ## The error that earned a mark
 
 The question is asked in each project, and the governor decides there, with an error that project met.
-
-Case A, a client project on a low-code platform, read its queue on a kanban board, and the board showed what Case A's three marks hid (chapter 14).
-A delivery reached Doing only once its page was written, and five lines blocked on the client's answers looked like work nobody had started.
-Case A added a mark by hand, `[?]`, for a line waiting on a person: five idle-looking lines were the error that earned Case A its mark, and the mark named it.
-
-The error is not Case A's alone: any team that reads its queue as a board meets it the day a line waits, or a delivery is being defined.
-The kit's six marks answer the same error for every such team, with `[?]` among them (chapter 14).
+On Case A, a client project on a low-code platform, five lines waiting on the client's answers looked like idle work on its kanban board: those five idle-looking lines were the error that earned the mark Case A added by hand, `[?]`, for a line waiting on a person, and [chapter 14](14-queue-states.md) tells the story and gives the six marks that answer that error for every team.
 
 ## What the team gains
 
 Every step of a process is paid by every delivery, so a step that catches nothing is a tax on all of them.
-Ninjobs reached its public opening on a process of six rules, the ones the kit's `SETUP.md` lists for every project, and two checks, after 29 checks had gone with it through fifteen days that built four screens.
+Ninjobs reached its public opening on a process of six rules, the ones the kit's `SETUP.md` lists for every project, and two checks, after the old checks had gone with it through fifteen days that built four screens.
 The governor keeps a process that small, and it lets a team say yes to a step with the error that justifies it written down.
 
 ## Key points

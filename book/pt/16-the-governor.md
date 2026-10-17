@@ -13,7 +13,6 @@ Ninguém as acrescentou para atrasar o trabalho; ninguém perguntou o que cada u
 ## A pergunta
 
 O kit escreve uma regra no documento de processo de todo projeto, no §7 do docs/05, "What this process does not have" (o que este processo não tem): quando algo novo é proposto, pergunte que erro concreto isso teria pegado, e aceite uma resposta que nomeie um erro que aconteceu.
-O arquivo que descreve o kit a lista entre as regras que todo projeto mantém: nada entra no processo sem nomear o erro concreto que teria pegado.
 Este livro chama essa pergunta de regulador, a partir da peça que impede um motor de girar mais rápido do que a sua carga pede.
 
 A resposta precisa nomear um erro que aconteceu, porque um erro possível justifica qualquer coisa: algum erro é sempre possível.
@@ -24,7 +23,7 @@ E o custo que ele precisa superar é pago por toda entrega depois dele.
 
 A pergunta decide o que entra, e decide o que fica.
 
-Na Ninjobs, quando eu recomecei o projeto, as 29 checagens saíram: nenhuma delas conseguia nomear um erro no produto que tivesse pegado.
+Na Ninjobs, quando eu recomecei o projeto, aquelas checagens saíram: nenhuma delas conseguia nomear um erro no produto que tivesse pegado.
 Duas checagens ficaram no lugar delas, ambas protegendo a promessa de privacidade do produto, onde um vazamento é o erro que o produto não pode se permitir: uma prova do que cada nível de privacidade pode mostrar, e um teste das regras de acesso do banco de dados.
 
 O que entrou depois entrou do mesmo jeito.
@@ -53,18 +52,12 @@ Cada trabalho ainda é feito, por algo que o processo já tem:
 ## O erro que rendeu uma marca
 
 A pergunta é feita em cada projeto, e o regulador decide ali, com um erro que aquele projeto encontrou.
-
-O Caso A, um projeto para um cliente em uma plataforma low-code, lia a sua fila em um quadro kanban, e o quadro mostrou o que as três marcas do Caso A escondiam (capítulo 14).
-Uma entrega só chegava a Doing depois de a página dela estar escrita, e cinco linhas travadas nas respostas do cliente pareciam trabalho que ninguém tinha começado.
-O Caso A acrescentou uma marca à mão, `[?]`, para uma linha esperando por uma pessoa: cinco linhas que pareciam paradas eram o erro que rendeu ao Caso A a sua marca, e a marca o nomeou.
-
-O erro não é só do Caso A: todo time que lê a fila como um quadro o encontra no dia em que uma linha espera, ou uma entrega está sendo definida.
-As seis marcas do kit respondem ao mesmo erro para todo time assim, com `[?]` entre elas (capítulo 14).
+No Caso A, um projeto para um cliente em uma plataforma low-code, cinco linhas esperando as respostas do cliente pareciam trabalho parado no seu quadro kanban: essas cinco linhas que pareciam paradas eram o erro que rendeu a marca que o Caso A acrescentou à mão, `[?]`, para uma linha esperando por uma pessoa, e o [capítulo 14](14-queue-states.md) conta a história e mostra as seis marcas que respondem a esse erro para todo time.
 
 ## O que o time ganha
 
 Cada passo de um processo é pago por toda entrega, então um passo que não pega nada é um imposto sobre todas elas.
-A Ninjobs chegou à abertura ao público com um processo de seis regras, as que o `SETUP.md` do kit lista para todo projeto, e duas checagens, depois de 29 checagens a terem acompanhado por quinze dias que construíram quatro telas.
+A Ninjobs chegou à abertura ao público com um processo de seis regras, as que o `SETUP.md` do kit lista para todo projeto, e duas checagens, depois de as checagens antigas a terem acompanhado por quinze dias que construíram quatro telas.
 O regulador mantém um processo desse tamanho, e deixa um time dizer sim a um passo com o erro que o justifica escrito.
 
 ## Pontos-chave

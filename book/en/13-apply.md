@@ -63,11 +63,11 @@ So before it stops, `/apply` does all of this:
 * It ticks every item of Done when.
 * It moves the page to `work/done/`; a `[?]` line that waits only on this one, or on lines already `[x]`, goes back by its resume phase ([chapter 14](14-queue-states.md)).
 * It stages only this delivery's paths and hunks, never with `git add -A` or `git add .`, and reports what someone else had already staged without unstaging it.
-* It ends the page with the suggested commit message in a `commit` block, in the format docs/05 defines, and shows the same block in the conversation. There is one block: a resumed `/apply` replaces the earlier one.
+* It ends the page with the suggested commit message in a `commit` block, in the format docs/05 defines, and shows the same block in the conversation, where a fenced block stands apart from the rest of the reply. There is one block: a resumed `/apply` replaces the earlier one.
 * Its last edit marks the line `[x]` in docs/06 and stages that hunk, after everything else is staged, so a line marked `[x]` with nothing staged is a session that stopped early.
-* Its last words are your next steps: review the staged diff, commit (and merge, on a delivery branch), and take the queue's next line, with its command written as your host invokes it, in a fresh session. The last thing it says is which environment is at which version and the command that updates the others, and it never ends silent about it.
+* Its last words are your next steps: review the staged diff, commit (and merge, on a delivery branch), and take the queue's next line, with its command written as your host invokes it, in a fresh session, so a person new to the kit does not search the documentation for what comes after. The last thing it says is which environment is at which version and the command that updates the others, and it never ends silent about it.
 
-Done is that whole list: verify green, the proof, what happened written on the page, the documents updated, the page in `work/done/`, only this delivery staged, the message on the page, and the line `[x]`.
+Done is that whole list.
 
 ## `lend-book`, built
 
@@ -184,10 +184,8 @@ If your agent answers with `git commit -m` lines and no `commit` block on the pa
 ## What the team gains
 
 Nothing ships without a check and a person: verify and the proof check the build, and a person reads the diff before it exists in the history.
-The way `/apply` ends prevents four errors.
+The way `/apply` ends prevents two errors.
 A message that lives only in the chat, as `git commit -m` lines, leaves whoever commits later, in another window or another session, nowhere to start from; the `commit` block on the page gives them that start.
-A message suggested as plain text in a terminal loses the highlight a fenced block gives and blends into the rest of the reply; the same block in the conversation keeps it apart.
-A person who has just used the kit for the first time knows to commit but has to search the documentation for what comes after, and a command written in another host's form is one their host may not recognize; next steps written out, in the host's form, end that search.
 A person who opens a published site believing it current, after a session that ended without saying it was not, reviews a version that does not hold the delivery, as happened on Ninjobs; the last thing `/apply` says, which environment is at which version and the command that updates the others, prevents it.
 
 And what diverged from the plan is written where the next person reads it.
@@ -200,7 +198,7 @@ The decision and its reason are on the page that built it, and the commit that s
 * `/apply <slug>` builds the page in a fresh session, and the page is the scope: no dependency, layer or tool the page did not name.
 * It marks the line `[*]` with its first edit, `[x]` with its last, after the stage, and `[?]`, with what it waits on, when it must stop.
 * It follows docs/05 literally, and when the page contradicts a document it stops and says which; it never resolves it silently.
-* Green is not done: done is verify green, the proof, what happened on the page, the documents updated, the page in `work/done/`, the line `[x]` and only this delivery staged.
+* Green is not done: done is the whole list, from what happened written on the page to the line marked `[x]`.
 * It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked.
 * Its last words are your next steps, each command written out, and, last of all, which environment is at which version and the command that updates the others.
 * Review the staged change against the page, and ask for each correction in the same session.

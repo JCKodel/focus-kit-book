@@ -15,7 +15,7 @@ Ninguém consegue perguntar ao próprio projeto, então cada pergunta custa o te
 Um projeto com focus-kit já escreve quase tudo o que um time pergunta, porque o agente precisa disso para construir:
 
 * **Os documentos**: o produto e as suas regras no docs/00, o vocabulário no docs/03, as decisões e os seus motivos nos ADRs.
-* **A fila**: cada entrega, uma linha cada, com a sua marca: `[ ]` ainda não definida, `[~]` sendo definida, `[>]` definida e esperando para ser construída, `[*]` sendo construída, `[x]` concluída, `[?]` esperando, com o que ela espera (capítulo 14).
+* **A fila**: cada entrega, uma linha cada, com a marca que diz onde ela está e, numa linha esperando, o que ela espera (capítulo 14).
 * **As páginas em `work/`**: o que está definido agora, e o que cada entrega vai fazer.
 * **As páginas em `work/done/`**: o que cada entrega concluída fez, e o que aconteceu enquanto era construída.
 * **O histórico do git** (capítulo 18): quando cada commit aconteceu, e a qual entrega pertence, já que o commit que fecha uma entrega termina com o slug dela.
@@ -90,15 +90,12 @@ A primeira tabela diz quem foi perguntado sobre o quê, e quando respondeu.
 A segunda diz qual linha da fila está bloqueada, por quem, e há quanto tempo, então "quem me deve uma resposta" é uma tabela, e um lembrete a essa pessoa é escrito a partir dela.
 
 O Caso A manteve as duas tabelas: perguntas enviadas, com para quem, sobre o quê e respondida quando; e ainda em aberto, com a linha, o que ela espera e desde quando.
-Vinte perguntas a pessoas de fora do projeto foram registradas ali, e duas ainda estavam sem resposta quando ele fechou.
 O relatório de fim de dia e a estimativa de prazo e risco para o gerente de projeto dizem que foram escritos a partir da fila e das páginas, não de memória.
-A fila deu o ritmo: cerca de nove linhas fechadas e cerca de seis linhas novas abertas por dia, então a lista aberta encolhia cerca de três por dia.
-Esse ritmo pôs um corte de escopo diante do gerente de projeto no meio do projeto, como uma decisão para ele tomar.
+O ritmo que a fila deu, linhas fechadas contra linhas abertas por dia, pôs um corte de escopo diante do gerente de projeto no meio do projeto, como uma decisão para ele tomar.
 
 ## A pessoa é o cérebro
 
-A resposta do agente parece certa mesmo quando está errada: fluente, formatada e segura de si.
-Ela pode deixar de fora uma mensagem que ninguém pôs na pasta, ler um rascunho como enviado, ou contar uma linha cuja página diz que ela espera por alguém.
+A resposta do agente pode deixar de fora uma mensagem que ninguém pôs na pasta, ler um rascunho como enviado, ou contar uma linha cuja página diz que ela espera por alguém.
 Então a pessoa mantém três tarefas, as mesmas três que o prólogo dá à pessoa para o código.
 Ela interpreta: o que a resposta significa para o cliente, o orçamento e a data.
 Ela guia: faz a próxima pergunta, e aponta ao agente o arquivo que ele deixou de ler.
@@ -136,13 +133,13 @@ Uma mudança no código, por menor que seja, também vira uma linha, com um rasc
 ## O que o time ganha
 
 Um só assistente para engenharia e produto: os mesmos documentos respondem ao "onde fica essa regra" de um desenvolvedor e ao "quem nos deve uma resposta" de um gerente, e ninguém escreve um relatório de andamento à mão.
-No Caso A, vinte perguntas a pessoas de fora foram acompanhadas até as respostas, as duas que ficaram em aberto foram nomeadas no fechamento, e o relatório e a estimativa de risco vieram de uma fila que fechava cerca de nove linhas por dia.
+No Caso A, vinte perguntas a pessoas de fora foram acompanhadas até as respostas, as duas que ficaram em aberto foram nomeadas no fechamento, e o relatório e a estimativa de risco vieram de uma fila que fechava cerca de nove linhas e abria cerca de seis por dia.
 
 ## Pontos-chave
 
 * Os documentos, a fila, as páginas e o histórico do git já respondem o que está pendente, o que está em andamento e quanto tempo cada entrega levou.
 * A pasta de contexto guarda o que o código não consegue dizer, cada original ao lado do seu Markdown; ela entra em commit quando o repositório fica com o time, e fica de fora quando o repositório é entregue ou público.
 * Um registro de trabalho com duas tabelas, perguntas enviadas e ainda em aberto, responde "quem me deve uma resposta" e escreve o lembrete.
-* A resposta do agente parece certa mesmo quando está errada: peça o arquivo por trás dela, e interprete, guie e valide.
+* Peça o arquivo por trás de cada resposta, e interprete, guie e valide.
 * Um gerente abre o host na raiz do projeto e pergunta em palavras simples; o mesmo arquivo de regras faz o agente ler os documentos primeiro; perguntado em que pé as coisas estão, ele responde a partir da fila com o próximo comando; não existe comando de status.
 

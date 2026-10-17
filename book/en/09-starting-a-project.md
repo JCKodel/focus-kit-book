@@ -52,29 +52,9 @@ A stack where a mistake shows only at run time, on a screen, leaves that check t
 
 When the six subjects are covered, `/brainstorm` writes docs/00 to 06, one ADR for each decision a later session might undo (the stack, FOCUS or not, git, anything you hesitated on), `AGENTS.md`, `CLAUDE.md` holding the line `@AGENTS.md`, and `work/done/` with a `.gitkeep`, so the folder survives a clone.
 It writes no manual: `docs/manuals/` is created with the first one, by the delivery that adds something a person does by hand or a proof `/apply` runs on another machine.
+Its first milestone, in docs/06, is a paragraph a person can check when the milestone closes and its lines, the skeleton first; [chapter 11](11-queue-and-milestones.md) shows the lending library's and teaches the queue.
 Then it shows the queue and stops.
 It writes no code, no configuration and no dependency file: the first delivery does that, with a page of its own, through `/propose` in a fresh session ([chapter 12](12-propose.md)).
-
-For the lending library of Part I, a first milestone could read like this, written for this chapter:
-
-````markdown
-## Milestone 1: a librarian lends and takes back
-
-When it closes, a librarian can register books, their copies and members,
-lend a copy to a member for 21 days and record its return; a member with an
-overdue book or a suspended membership is refused.
-
-```
-[ ] skeleton      empty app and server, npm run verify, first screenshot
-[ ] catalog       the librarian registers books and their copies
-[ ] members       the librarian registers, suspends and reinstates members
-[ ] lend-book     the librarian lends a copy, and the rules may refuse it
-[ ] return-book   the librarian records a return, and the copy is free again
-[ ] m1-review     the milestone checked against its paragraph
-```
-````
-
-The paragraph says what a person can check when the milestone closes, and the first line, `skeleton`, creates the verify command every later delivery runs; [chapter 11](11-queue-and-milestones.md) teaches the queue.
 
 ## `/analyze`: an existing project
 
@@ -83,17 +63,7 @@ It works like `/brainstorm`, with a default for every question and the same docu
 
 ### What it reads
 
-The kit's file for the command has it read:
-
-* `context/`, whole, when it exists: what people said that the code cannot (the section below);
-* the README and any documentation already there;
-* the manifests, such as `package.json`, `pyproject.toml` or `go.mod`;
-* the folder tree, two levels deep;
-* the entry points;
-* the tests, and how they run;
-* the CI configuration, and any Makefile or script a person runs by hand;
-* the last fifty commit subjects;
-* any agent rules file already there, such as `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md` or `.cursorrules`.
+As the kit's file for the command lists, it reads `context/` whole when it exists (the section below), the README and any documentation already there, the manifests, the folder tree, the entry points, the tests and how they run, the CI configuration and any script a person runs by hand, the recent commit subjects, and any agent rules file already there, such as `CLAUDE.md` or `.cursorrules`.
 
 From that it infers the stack, how the code is organized, where the business rules live, how errors travel, the verify command and the environments, and it marks each as observed.
 What the project does not have, it skips: on a repository with no code the documents describe what the files say.
@@ -129,14 +99,8 @@ Give it as your answer to the FOCUS question, for example "FOCUS whole, as a str
 
 ## What the code cannot say: the context folder
 
-The code says what a project does; it rarely says why, for whom, or what was promised.
-That knowledge lives in proposals, contracts, emails, meeting transcripts, tickets and slides, and what the agent does not read, it has to guess.
-Put everything you have about the project in one folder at the root, `context/`, as it is, with no sorting and no summary, and keep it apart from `docs/`: `context/` is what the agent reads from, `docs/` is what it writes.
-The more the folder holds, proposals to the client, meeting transcripts, emails, the better the documents the agent writes from it, and the more of the team it can answer, well beyond the code.
-It is the difference between "this was built this way because the client asked for it, in the email of the 12th" and "nobody knows why it is like this".
-When a new document arrives, put it in the folder and ask the agent to read it and bring into the project what it changes: a rule into docs/00, a term into docs/03, a line into the queue.
-Both commands look for the folder by that name and read it whole before anything else, so `/brainstorm` starts from the brief or the proposal that exists before the code, and `/analyze` from what the code cannot say.
-Whether the folder is committed, and what must never be, is a decision of its own ([chapter 17](17-project-as-assistant.md)); both commands ask it, with the default above.
+The code says what a project does and rarely why, for whom or what was promised, so put everything you have about the project in one folder at the root, `context/`, as it is (proposals, contracts, emails, meeting transcripts), and both commands read it whole before anything else: `/brainstorm` starts from the brief that exists before the code, `/analyze` from what the code cannot say.
+[Chapter 17](17-project-as-assistant.md) shows how the folder is kept and when it is committed, a question both commands ask, with the default above.
 
 ## Review before you commit
 
@@ -152,7 +116,7 @@ Check that:
 
 When something is wrong, ask the agent for the fix in the same session, which still holds the conversation, and let it write the change; never edit by hand, because the agent knows which other documents the fix touches.
 Read with suspicion.
-An agent's text reads as right even when it is wrong: a skipped subject leaves no gap in the prose, and a README's claim copied as a fact reads as well as one the agent checked.
+A skipped subject leaves no gap in the prose, and a README's claim copied as a fact reads as well as one the agent checked.
 Only a check against what you answered, or against the code, finds either.
 
 ## What the team gains
@@ -167,7 +131,7 @@ There is no number for this gain: this book has no count of projects started wit
 * Every question comes with a default, so "your call" is a valid answer, and you check each default the agent kept.
 * Choose a stack by what the project needs, then by how much public code the agent learned from, then by whether types and tests let it check its own work.
 * `/analyze` reads the repository first, asks one round and writes a manual for each thing a person already does by hand; the default of each choice is what the code does, a contradiction becomes an open question, and legacy code can move to FOCUS as a strangler fig.
-* Review before you commit, against your answers and against the code, and ask the agent for every fix: its text reads as right even when it is wrong.
+* Review before you commit, against your answers and against the code, and ask the agent for every fix.
 
 [^octoverse]: GitHub, "Octoverse: A new developer joins GitHub every second as AI leads TypeScript to #1", 2025, the latest report on 2026-09-28: monthly contributors on GitHub, August 2025. <https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/>
 [^strangler-fig]: Martin Fowler, "Strangler Fig", 2024. <https://martinfowler.com/bliki/StranglerFigApplication.html>

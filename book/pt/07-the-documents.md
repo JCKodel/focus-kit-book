@@ -79,7 +79,6 @@ Um manual se sustenta sozinho para quem o executa, sem ter lido mais nada, e gua
 O slot diz o que e o comando, e o manual guarda os passos para quem os executa.
 Um comando sozinho, como o que faz a verificação de uma entrega, não precisa de manual: ele fica no seu slot.
 
-Um slot que cita um comando desses aponta para o manual dele em vez de guardar os passos.
 No mesmo docs/05, o slot Environments (ambientes) cita o comando que publica o app e aponta para `docs/manuals/publicar-o-app.md`; os passos moram só ali.
 O `/analyze` escreve os manuais do que um repositório já faz à mão, o `/apply` escreve ou atualiza um quando uma entrega acrescenta ou muda uma dessas coisas ([capítulo 13](13-apply.md)), e o `/brainstorm` não escreve nenhum.
 A pasta é criada com o primeiro manual, então não há pasta vazia, e o `AGENTS.md` aponta para ela.
@@ -142,10 +141,7 @@ O docs/00 da biblioteca lista as multas por devolução atrasada como em aberto,
 
 A mesma resposta em toda sessão e para toda pessoa: um desenvolvedor, um gestor e um agente numa sessão nova que perguntam o prazo de empréstimo leem uma linha em um documento.
 No Ninjobs uma decisão morava em seis lugares que podiam discordar, e toda entrega pagava para mantê-los em acordo; com um lugar para cada fato, uma mudança é escrita uma vez e toda sessão seguinte a lê.
-Um manual tira dois fatos do lugar errado.
-Sem ele, os passos para publicar de novo o site de um projeto moram como um subitem do slot Environments do docs/05, escritos para o agente, onde uma pessoa que procura como publicar não procura.
-E os passos de uma prova que o `/apply` roda em outra máquina, guardados num slot, são lidos por todo `/apply` antes da sua primeira edição.
-O slot guarda o que e o comando, e os passos têm um manual que se encontra pelo nome.
+Um manual põe os passos que uma pessoa segue à mão onde essa pessoa os procura, num arquivo que se encontra pelo nome, e tira os passos de uma prova do slot que todo `/apply` lê antes da sua primeira edição.
 
 ## Pontos-chave
 

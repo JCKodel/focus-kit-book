@@ -63,11 +63,11 @@ Então, antes de parar, o `/apply` faz tudo isto:
 * Marca cada item do Pronto quando.
 * Move a página para `work/done/`; uma linha `[?]` que espera só por esta, ou por linhas já `[x]`, volta pela fase de retomada ([capítulo 14](14-queue-states.md)).
 * Coloca em stage só os caminhos e trechos desta entrega, nunca com `git add -A` ou `git add .`, e avisa o que outra pessoa já tinha colocado em stage, sem tirar do stage.
-* Termina a página com a mensagem de commit sugerida em um bloco `commit`, no formato que o docs/05 define, e mostra o mesmo bloco na conversa. Há um bloco só: um `/apply` retomado substitui o anterior.
+* Termina a página com a mensagem de commit sugerida em um bloco `commit`, no formato que o docs/05 define, e mostra o mesmo bloco na conversa, onde um bloco cercado fica à parte do resto da resposta. Há um bloco só: um `/apply` retomado substitui o anterior.
 * A sua última edição marca a linha como `[x]` no docs/06 e coloca esse trecho em stage, depois de todo o resto estar em stage, então uma linha `[x]` sem nada em stage é uma sessão que parou antes da hora.
-* As últimas palavras dele são os seus próximos passos: revisar o diff em stage, fazer o commit (e o merge, em um branch da entrega), e pegar a próxima linha da fila, com o comando escrito como o seu host o invoca, em uma sessão nova. A última coisa que diz é qual ambiente está em qual versão e o comando que atualiza os outros, e ele nunca termina calado sobre isso.
+* As últimas palavras dele são os seus próximos passos: revisar o diff em stage, fazer o commit (e o merge, em um branch da entrega), e pegar a próxima linha da fila, com o comando escrito como o seu host o invoca, em uma sessão nova, para que uma pessoa nova no kit não procure na documentação o que vem depois. A última coisa que diz é qual ambiente está em qual versão e o comando que atualiza os outros, e ele nunca termina calado sobre isso.
 
-Pronto é essa lista inteira: a verificação verde, a prova, o que aconteceu escrito na página, os documentos atualizados, a página em `work/done/`, só esta entrega em stage, a mensagem na página, e a linha `[x]`.
+Pronto é essa lista inteira.
 
 ## `emprestar-livro`, construída
 
@@ -184,10 +184,8 @@ Se o seu agente responde com linhas de `git commit -m` e nenhum bloco `commit` n
 ## O que o time ganha
 
 Nada é publicado sem uma checagem e uma pessoa: a verificação e a prova conferem a construção, e uma pessoa lê o diff antes de ele existir no histórico.
-O jeito como o `/apply` termina evita quatro erros.
+O jeito como o `/apply` termina evita dois erros.
 Uma mensagem que vive só no chat, como linhas de `git commit -m`, deixa quem faz o commit depois, em outra janela ou em outra sessão, sem ter de onde começar; o bloco `commit` na página dá esse começo.
-Uma mensagem sugerida como texto simples em um terminal perde o destaque que um bloco cercado dá e se mistura ao resto da resposta; o mesmo bloco na conversa a mantém à parte.
-Uma pessoa que acabou de usar o kit pela primeira vez sabe que deve fazer o commit, mas tem de procurar na documentação o que vem depois, e um comando escrito na forma de outro host é um que o host dela pode não reconhecer; próximos passos escritos por extenso, na forma do host, acabam com essa procura.
 Uma pessoa que abre um site publicado achando que ele está atual, depois de uma sessão que terminou sem dizer que não estava, revisa uma versão que não tem a entrega, como aconteceu na Ninjobs; a última coisa que o `/apply` diz, qual ambiente está em qual versão e o comando que atualiza os outros, evita isso.
 
 E o que divergiu do plano fica escrito onde a próxima pessoa lê.
@@ -200,7 +198,7 @@ A decisão e o seu motivo estão na página que a construiu, e o commit que a pu
 * O `/apply <slug>` constrói a página em uma sessão nova, e a página é o escopo: nenhuma dependência, camada ou ferramenta que a página não nomeou.
 * Ele marca a linha como `[*]` com a sua primeira edição, `[x]` com a última, depois do stage, e `[?]`, com o que ela espera, quando precisa parar.
 * Ele segue o docs/05 ao pé da letra, e quando a página contradiz um documento ele para e diz qual; nunca resolve em silêncio.
-* Verde não é pronto: pronto é a verificação verde, a prova, o que aconteceu na página, os documentos atualizados, a página em `work/done/`, a linha `[x]` e só esta entrega em stage.
+* Verde não é pronto: pronto é a lista inteira, do que aconteceu escrito na página à linha marcada `[x]`.
 * Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado.
 * As últimas palavras dele são os seus próximos passos, cada comando escrito por extenso, e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
 * Revise a mudança em stage contra a página, e peça cada correção na mesma sessão.
