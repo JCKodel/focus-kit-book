@@ -25,7 +25,7 @@ book/pt/NN-<slug>.md     Portuguese edition, same file names
 book/assets/             images shared by both editions, diagrams one per edition (NN-<what>.<edition>.svg); screenshots one for both (NN-<what>.png); the covers, cover-<edition>.pdf (A5, one page, the PDF's first page), cover-<edition>.png (the EPUB's cover image) and cover-<edition>.af (their source, Affinity); site.css (the draft mark in the navigation, a border and a width for PNGs, the note box, notes at 66%, italic, links, quotations and code upright)
 overrides/main.html      theme override: the draft banner
 scripts/build.py         strict site build, warnings as findings, a broken link found at each line it stands on (rule "build")
-scripts/check_parity.py  the two editions: same chapters, heading levels and status, and the same note keys, each cited as many times (rule "parity")
+scripts/check_parity.py  the two editions: same chapters, heading levels and status, and the same note keys, each cited as many times, whatever the key; the two READMEs: the same number of headings, at the same levels in the same order (rule "parity")
 scripts/check_em_dash.py no em dash in any text file but the evidence of the runs, work/done/*-run/ (rule "em-dash")
 scripts/check_prose.py   the prose rules of docs/04 in both editions and both READMEs (rule "prose")
 scripts/check_links.py   every external URL in both editions, both READMEs and mkdocs.yml still answers (rule "links")
@@ -35,7 +35,7 @@ scripts/check_disclosure.py no term of the disclosure list in a file path, a tex
 .githooks/pre-commit     check_disclosure.py --staged: the staged paths and their staged text; POSIX sh, executable
 .githooks/commit-msg     check_disclosure.py --message: the commit message, without git's # lines and the diff below the scissors line of commit -v
 scripts/patterns.py      compile_entry: the entry syntax (plain or re:) shared by the prose and disclosure checks
-scripts/markdown.py      front_matter: the fields and the body, shared by parity and the book build; mask: front matter, code and HTML comments as spaces, shared by the prose and link checks
+scripts/markdown.py      front_matter: the fields and the body, shared by parity and the book build; mask: front matter, code and HTML comments as spaces, shared by the prose and link checks; NOTE_DEFINITION, NOTE_MENTION and mentions: a note's definition marker, its mention with any key pandoc reads, and the keys cited on a masked line, used by parity
 scripts/repo_files.py    the files the checks read: tracked, plus untracked and not ignored, whatever the characters of the name
 pandoc/pdf.css           the PDF: A5, margins, the fonts by @font-face, night blue, cream and amber as on the cover; the contents page, on one page with room for two more rows, its chapter number at the size of the row's title and page number; the chapter's opening block, its running head and the page number at the outer corner; code on night blue, a block on one page, a wrapped line starting at the margin; a border and a width for PNGs; the note box; notes at the foot of the page at 66%, italic, links, quotations and code upright
 pandoc/epub.css          the EPUB: no @font-face; a wrapped code line starts at the margin; a border and a width for PNGs; the note box; notes at 66%, italic, links, quotations and code upright

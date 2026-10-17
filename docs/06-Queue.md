@@ -287,7 +287,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.16.2 and the repo
 [x] repo-files-any-name      every check reads every tracked or untracked file, whatever characters its name has
 [x] site-build-anchors       the site build fails on a link to a heading that does not exist, and reports each broken link at its own line
 [>] book-build-links         the book build fails on a link to a heading that does not exist, links every note mention, and orders appendices by number · after parity-notes-readmes
-[>] parity-notes-readmes     parity counts every note mention, whatever its key, and fails when the two READMEs' sections differ
+[x] parity-notes-readmes     parity counts every note mention, whatever its key, and fails when the two READMEs' sections differ
 [>] hook-hash-lines          the commit-msg hook refuses a message whose stored text holds a listed term, lines starting with `#` included
 [>] em-dash-every-text       the em dash check reads every text file outside `work/done/*-run/`, diagrams and files without an extension included
 [>] links-url-bounds         the link check judges the address a reader's link points to, whatever Markdown form wraps it

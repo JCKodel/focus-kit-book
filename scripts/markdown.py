@@ -1,8 +1,11 @@
-"""The Markdown reading shared by the scripts: front matter, and the masking of what a reader does not read."""
+"""The Markdown reading shared by the scripts: front matter, the masking of what a reader does not read, and note mentions."""
 
 import re
 
 FIELD = re.compile(r"^([A-Za-z_][\w-]*):\s*(.*?)\s*$")
+# A note's key, as pandoc reads a label: any run without whitespace, `^`, `[` or `]`.
+NOTE_DEFINITION = re.compile(r"^ {0,3}\[\^([^\]\s^\[]+)\]:")
+NOTE_MENTION = re.compile(r"\[\^([^\]\s^\[]+)\]")
 
 
 def front_matter(text):
@@ -108,3 +111,11 @@ def mask_inline(line, comment, keep_targets):
             continue
         i += 1
     return "".join(chars), comment
+
+
+def mentions(line):
+    """Return the keys of the notes cited on a masked line, in order; a definition marker at its start is not a citation."""
+    definition = NOTE_DEFINITION.match(line)
+    if definition:
+        line = line[definition.end():]
+    return NOTE_MENTION.findall(line)

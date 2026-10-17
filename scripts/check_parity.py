@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Check that the two editions of the book have the same chapters, heading levels, status and note keys.
+"""Check that the two editions of the book have the same chapters, heading levels, status and note keys,
+and that the two READMEs have the same headings at the same levels.
 
 Prints one line per finding as `file:line: parity: message`; exits 1 when anything is printed.
 """
@@ -9,31 +10,30 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-from markdown import front_matter, mask
+from markdown import NOTE_DEFINITION, front_matter, mask, mentions
 
 ROOT = Path(__file__).resolve().parent.parent
 EN = Path("book/en")
 PT = Path("book/pt")
+README_EN = Path("README.md")
+README_PT = Path("README.pt.md")
 
 HEADING = re.compile(r"^ {0,3}(#{1,6})(?:\s|$)")
 FENCE = re.compile(r"^ {0,3}(`{3,}|~{3,})")
-# A mention of a note, not its definition `[^key]:` at the start of a line.
-NOTE_REF = re.compile(r"\[\^([a-z0-9-]+)\](?!:)")
 
 
 def notes(path):
     """Return (count of mentions per key, first line of each key): mentions outside code, definition lines as fallback."""
     text = (ROOT / path).read_text(encoding="utf-8")
-    counts, first = Counter(), {}
+    counts, mentioned, defined = Counter(), {}, {}
     for number, line in enumerate(mask(text, keep_targets=False), 1):
-        for match in NOTE_REF.finditer(line):
-            counts[match.group(1)] += 1
-            first.setdefault(match.group(1), number)
-    for number, line in enumerate(text.splitlines(), 1):
-        match = re.match(r"\[\^([a-z0-9-]+)\]:", line)
-        if match:
-            first.setdefault(match.group(1), number)
-    return counts, first
+        definition = NOTE_DEFINITION.match(line)
+        if definition:
+            defined.setdefault(definition.group(1), number)
+        for key in mentions(line):
+            counts[key] += 1
+            mentioned.setdefault(key, number)
+    return counts, {**defined, **mentioned}
 
 
 def read(path):
@@ -89,17 +89,25 @@ def compare(en, pt):
     return findings
 
 
+def pair(en, pt):
+    """Compare en and pt when both exist; else the finding of the one missing."""
+    has_en, has_pt = (ROOT / en).is_file(), (ROOT / pt).is_file()
+    if has_en and has_pt:
+        return compare(en, pt)
+    if has_en:
+        return [f"{en}:1: parity: no Portuguese counterpart {pt}"]
+    if has_pt:
+        return [f"{pt}:1: parity: no English counterpart {en}"]
+    return []
+
+
 def main():
     en_names = {p.name for p in (ROOT / EN).glob("*.md")}
     pt_names = {p.name for p in (ROOT / PT).glob("*.md")}
     findings = []
     for name in sorted(en_names | pt_names):
-        if name not in pt_names:
-            findings.append(f"{EN / name}:1: parity: no Portuguese counterpart {PT / name}")
-        elif name not in en_names:
-            findings.append(f"{PT / name}:1: parity: no English counterpart {EN / name}")
-        else:
-            findings.extend(compare(EN / name, PT / name))
+        findings.extend(pair(EN / name, PT / name))
+    findings.extend(pair(README_EN, README_PT))
     for finding in findings:
         print(finding)
     return 1 if findings else 0
