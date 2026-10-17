@@ -36,7 +36,7 @@ scripts/check_disclosure.py no term of the disclosure list in a file path, a tex
 .githooks/commit-msg     check_disclosure.py --message: the commit message, without git's # lines and the diff below the scissors line of commit -v
 scripts/patterns.py      compile_entry: the entry syntax (plain or re:) shared by the prose and disclosure checks
 scripts/markdown.py      front_matter: the fields and the body, shared by parity and the book build; mask: front matter, code and HTML comments as spaces, shared by the prose and link checks
-scripts/repo_files.py    the files the checks read: tracked, plus untracked and not ignored
+scripts/repo_files.py    the files the checks read: tracked, plus untracked and not ignored, whatever the characters of the name
 pandoc/pdf.css           the PDF: A5, margins, the fonts by @font-face, night blue, cream and amber as on the cover; the contents page, on one page with room for two more rows, its chapter number at the size of the row's title and page number; the chapter's opening block, its running head and the page number at the outer corner; code on night blue, a block on one page, a wrapped line starting at the margin; a border and a width for PNGs; the note box; notes at the foot of the page at 66%, italic, links, quotations and code upright
 pandoc/epub.css          the EPUB: no @font-face; a wrapped code line starts at the margin; a border and a width for PNGs; the note box; notes at 66%, italic, links, quotations and code upright
 pandoc/fonts/            Merriweather (4 styles), Instrument Serif (regular and italic), Iosevka Term Regular; <Family>-OFL.txt each

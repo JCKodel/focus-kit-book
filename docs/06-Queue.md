@@ -284,7 +284,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.16.2 and the repo
 [x] ch11-update-2026-10-16-2 chapter 11: the install sentence as the kit's README gives it, the update example and its report at 2026.10.16.2, and the worktree slot's migration; both editions · after kit-2026-10-16-2
 [x] ch14-18-kit-wording      chapters 14 and 18: the /propose sentence quoted as the kit writes it, the Contract's third reason, and the governor's "no gate beyond a complete page"; both editions · after kit-2026-10-16-2
 [x] m14-review               the review of M14 as docs/05 §8 says · after ch14-18-kit-wording
-[>] repo-files-any-name      every check reads every tracked or untracked file, whatever characters its name has
+[x] repo-files-any-name      every check reads every tracked or untracked file, whatever characters its name has
 [>] site-build-anchors       the site build fails on a link to a heading that does not exist, and reports each broken link at its own line
 [>] book-build-links         the book build fails on a link to a heading that does not exist, links every note mention, and orders appendices by number · after parity-notes-readmes
 [>] parity-notes-readmes     parity counts every note mention, whatever its key, and fails when the two READMEs' sections differ
