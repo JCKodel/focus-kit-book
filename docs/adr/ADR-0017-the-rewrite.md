@@ -39,3 +39,8 @@ Chapters 16 to 25 became 17 to 26 when `queue-states` inserted chapter 16, "The 
 ## Amendment, 2026-10-16 (renumber-chapters)
 
 The chapters were renumbered 1 to 24 when the prologue absorbed chapter 1, chapters 4 and 5 and chapters 6 and 7 merged, and the quick guide was inserted after chapter 12; the map, old to new, is in `work/done/renumber-chapters.md`, and pages in `work/done/`, docs/06 and earlier ADRs keep the old numbers as history.
+
+## Amendment, 2026-10-17 (adr17-gain-amendment)
+
+A chapter's gain section holds a number or a sourced claim where the book has one, and otherwise the gain alone, with no sentence on the missing number; that no study in the book measures a team with the method against the same team without it is said once, in the prologue.
+The author decided it in the review of 2026-10-16 and `one-gain-section` applied it to every chapter and to docs/04 §Chapter shape; the Decision's "or one sentence saying the gain has no number" is read through this amendment and is not rewritten.
