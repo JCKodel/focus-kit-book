@@ -63,7 +63,7 @@ Every one of those files is something a person reviews before the code is writte
 The feature holds one rule about time: up to 24 hours before.
 Spec Kit restates it in each of its 8 files, OpenSpec in 4 of its 6, focus-kit on its one page.[^spec-driven-run]
 The three decide the same thing.
-The difference is how many other files say it again: a rule restated in each file is read in each one in review, and when it changes, it changes in each, or it disagrees with itself in the ones that were missed.
+The difference is how many other files say it again: a rule restated in a file is read again in that file in review, and when it changes, it changes in every file that restates it, or it disagrees with itself in the ones that were missed.
 Böckeler found the same with Spec Kit: its files "*were repetitive, both with each other, and with the code that already existed*", and "*very verbose and tedious to review.*"[^bockeler-2025]
 
 One page is enough because most of what those files repeat, the product, its vocabulary, its rules and the decisions already taken, is the same for every feature.
@@ -74,8 +74,8 @@ The counts say what each tool writes before the code; they do not say which one 
 ## What the team gains
 
 One page per feature, instead of one folder per feature, is what the team reads, reviews and keeps true.
-On Ninjobs, my own product, OpenSpec produced 37,228 lines of spec for four screens (every line under the tool's folder, counted with `wc -l`), and none of the core flow existed yet.
-The causes were more than the tool, and [chapter 9](09-birth-of-focus-kit.md) tells them; the count is what a spec costs when it becomes the work.
+The process I ran on OpenSpec, on Ninjobs, my own product, produced 37,228 lines of spec for four screens (every line under the tool's folder, counted with `wc -l`), and none of the core flow existed yet.
+The causes were my choices as much as the tool, and [chapter 9](09-birth-of-focus-kit.md) tells them; the count is what a spec costs when it becomes the work.
 After the move to one page per delivery, the product opened to the public, and its 93 finished pages held 22,650 lines in all.
 
 ## Key points

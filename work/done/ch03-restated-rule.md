@@ -43,12 +43,12 @@
 
 **Done when.**
 
-* [ ] Both editions changed at the lines of Contract; the two greps of Behaviour find nothing in `book/en` and `book/pt`; the counts are on line 64 as before.
-* [ ] Chapter 3 still opens with its value, keeps its gain with its number, no filler and nothing useful cut.
-* [ ] Every number still sourced; every `[^key]` keeps a reference and a definition in both editions.
-* [ ] `make verify` green, disclosure scan included; no em dash.
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions changed at the lines of Contract; the two greps of Behaviour find nothing in `book/en` and `book/pt`; the counts are on line 64 as before.
+* [x] Chapter 3 still opens with its value, keeps its gain with its number, no filler and nothing useful cut.
+* [x] Every number still sourced; every `[^key]` keeps a reference and a definition in both editions.
+* [x] `make verify` green, disclosure scan included; no em dash.
+* [x] `make book` run; both PDF paths given to the author.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
 
 **Decisions in the review.** Chosen alone, because the author could not answer; corrections go in the review.
 
@@ -56,3 +56,31 @@
 * The Ninjobs sentence names "the process I ran on OpenSpec" as what produced the lines, and the next sentence says the causes were "my choices as much as the tool"; the alternative "the old process" was rejected because a reader of chapter 3 has not met it (chapter 9 defines it). Source: chapter 9 §What went wrong, and the book's rule that Ninjobs' cost came from the author's process, never FOCUS.
 * The Ninjobs pair stays in chapter 3's gain with its method (`plain-numbers`, decision 5).
 * No OD-3 approval: no Case A or Case B text changes.
+
+**Decisions in /apply.** Chosen alone, under the batch's rule; corrections go in the review.
+
+* The Ninjobs sentence opens with its subject, "The process I ran on OpenSpec, on Ninjobs, my own product, produced 37,228 lines ..." (pt "O processo que eu rodei sobre o OpenSpec, na Ninjobs, meu próprio produto, produziu 37.228 linhas ..."), not with "On Ninjobs, my own product, the process I ran on OpenSpec produced" as the draft had it. The draft contains "OpenSpec produced" and "OpenSpec produziu", so the page's own check would have found it; the new order is the Behaviour's own ("the process the author ran on OpenSpec, on Ninjobs, produced"), keeps every word, number and method of the draft, and leaves the grep empty.
+* The causes sentence keeps the draft, "my choices as much as the tool", rather than dropping the tool: chapter 9 §What went wrong lists the specs and the changes, the tool's files, among the six places, and the sentence names neither OpenSpec's design nor FOCUS as the cause.
+* Every other sentence is the draft as written, in both editions.
+
+**What happened.**
+
+* `book/en/03-spec-driven.md` and `book/pt/03-spec-driven.md`, line 66: "a rule restated in a file is read again in that file in review, and when it changes, it changes in every file that restates it" (pt "uma regra repetida num arquivo é lida de novo nele na revisão, e quando muda, muda em todo arquivo que a repete"); the counts stay on line 64 only.
+* Lines 77 and 78: the process the author ran on OpenSpec produced the 37,228 lines, and the causes were "my choices as much as the tool", with the pointer to chapter 9 and "the count is what a spec costs when it becomes the work" kept. Line 79's pair, 22,650 lines in 93 pages, unchanged. "Fifteen days" not added.
+* No divergence from the Contract; no document changes (docs/03, docs/04, docs/05 untouched); no dependent queue line waits on this one.
+
+**Proof.**
+
+* `grep -n "restated in each file\|repetida em cada arquivo\|OpenSpec produced\|OpenSpec produziu" book/*/03-spec-driven.md` finds nothing; "8 files"/"8 arquivos" and "4 of its 6"/"4 dos seus 6" appear on line 64 of the section only (line 58's "8 files and 756 lines" is the run's count, unchanged).
+* `[^spec-driven-run]` and `[^bockeler-2025]` untouched, same references in both editions.
+* `make verify` green; `make book` built both editions, and the PDFs are `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+```commit
+docs(ch03-restated-rule): a restated rule changes where it is restated
+- ch3: a restated rule changes in every file that restates it
+- ch3: the Ninjobs lines are the cost of the process the author ran
+- ch3: the causes are the author's choices as much as the tool
+- both editions
+
+work/done/ch03-restated-rule.md
+```

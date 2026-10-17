@@ -63,7 +63,7 @@ Cada um desses arquivos é algo que uma pessoa revisa antes de o código ser esc
 A feature tem uma regra sobre tempo: até 24 horas antes.
 O Spec Kit a repete em cada um dos seus 8 arquivos, o OpenSpec em 4 dos seus 6, o focus-kit na sua única página.[^spec-driven-run]
 As três decidem a mesma coisa.
-A diferença é quantos outros arquivos a dizem de novo: uma regra repetida em cada arquivo é lida em cada um na revisão, e quando muda, muda em cada um, ou se contradiz naqueles que ficaram para trás.
+A diferença é quantos outros arquivos a dizem de novo: uma regra repetida num arquivo é lida de novo nele na revisão, e quando muda, muda em todo arquivo que a repete, ou se contradiz naqueles que ficaram para trás.
 Böckeler encontrou o mesmo no Spec Kit: os arquivos dele "*eram repetitivos, tanto entre si quanto com o código que já existia*", e "*muito verbosos e tediosos de revisar.*"[^bockeler-2025]
 
 Uma página basta porque a maior parte do que esses arquivos repetem, o produto, o seu vocabulário, as suas regras e as decisões já tomadas, é a mesma para toda feature.
@@ -74,8 +74,8 @@ As contagens dizem o que cada ferramenta escreve antes do código; não dizem qu
 ## O que o time ganha
 
 Uma página por feature, em vez de uma pasta por feature, é o que o time lê, revisa e mantém verdadeiro.
-Na Ninjobs, meu próprio produto, o OpenSpec produziu 37.228 linhas de especificação para quatro telas (toda linha sob a pasta da ferramenta, contada com `wc -l`), e nada do fluxo principal existia ainda.
-As causas foram além da ferramenta, e o [capítulo 9](09-birth-of-focus-kit.md) as conta; a contagem é o que uma especificação custa quando vira o trabalho.
+O processo que eu rodei sobre o OpenSpec, na Ninjobs, meu próprio produto, produziu 37.228 linhas de especificação para quatro telas (toda linha sob a pasta da ferramenta, contada com `wc -l`), e nada do fluxo principal existia ainda.
+As causas foram minhas escolhas tanto quanto a ferramenta, e o [capítulo 9](09-birth-of-focus-kit.md) as conta; a contagem é o que uma especificação custa quando vira o trabalho.
 Depois da mudança para uma página por entrega, o produto abriu ao público, e suas 93 páginas concluídas somavam 22.650 linhas.
 
 ## Pontos-chave
