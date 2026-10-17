@@ -1,7 +1,7 @@
 # 3. Spec-Driven Development
 
 Spec-Driven Development has a coding agent write the decision down before the code, and the tools that practise it can write far more than a feature needs.
-After this chapter you can say what Spec-Driven Development is and how far a tool takes the spec, name what Spec Kit and OpenSpec got right, and say where the cost of writing one decision in many places begins.
+After this chapter you can say what a spec and Spec-Driven Development are, name what Spec Kit and OpenSpec got right, and say where the cost of writing one decision in many places begins.
 
 ## The problem
 
@@ -19,21 +19,10 @@ Spec-Driven Development (SDD) "*means writing a “spec” before writing code w
 > "A member with an overdue book is refused, with the message 'Return your overdue books first'" is behaviour; "add a column to the loans table" is not, it is how.
 > Written this way, each line can be checked by a test or by a person, and that is why the page of a focus-kit delivery has a section named Behaviour ([chapter 14](14-propose.md)).
 
-She found three levels, by how long the spec lives and who edits it:
-
-* **spec-first**: a spec is written first and guides the task at hand;
-* **spec-anchored**: the spec is kept after the task and used to evolve and maintain the feature;
-* **spec-as-source**: the spec is the main source over time, and a person edits only the spec, never the code.
-
-"*All SDD approaches and definitions I've found are spec-first, but not all strive to be spec-anchored or spec-as-source.*"[^bockeler-2025]
-Of her three tools, Kiro is "*the simplest (or most lightweight)*" and "*mostly spec-first*", and Tessl is "*the only one of these three tools that explicitly aspires to a spec-anchored approach*".[^bockeler-2025]
-She adds that "*these tools are very fast evolving, so they might have already changed since I used them*".[^bockeler-2025]
-
 ## Two tools
 
 Spec Kit, from GitHub, is a toolkit of processes for coding agents; its Spec-Driven Development process writes a constitution once per project, then a specification, a plan and a list of tasks for each feature before the code.[^spec-kit]
 OpenSpec, from Fission AI, "*adds a lightweight spec layer so you agree on what to build before any code is written*"; its propose command writes one folder per change, with a proposal, specs, a design and tasks.[^openspec]
-Both are spec-first by default: the spec is written for the task at hand.
 
 I gave both tools, and focus-kit, the method Part II teaches, the same small feature: a booking may be cancelled up to 24 hours before it starts, and a later cancellation is refused with a message that says why.[^spec-driven-run]
 Each stopped before writing code.
@@ -81,10 +70,9 @@ After the move to one page per delivery, the product opened to the public, and i
 ## Key points
 
 * A spec is a written, behaviour-oriented description of what the software must do, in natural language, that guides a coding agent; Spec-Driven Development writes it before the code.
-* By how long the spec lives, a tool is spec-first (written for the task), spec-anchored (kept to maintain the feature) or spec-as-source (the only thing a person edits).
 * Spec Kit and OpenSpec got three things right: the decision written before the code, project-wide rules written once, and, in OpenSpec, a question asked before writing.
 * One rule restated in many files is read many times and changed in many places; for the same feature Spec Kit and OpenSpec wrote a folder of files where focus-kit wrote one page.
-* A lighter page per feature is paid for with documents written once per project; the counts show what each tool writes, not which builds better software.
+* A lighter page per feature is paid for with documents written once per project.
 
 [^bockeler-2025]: Birgitta Böckeler, "Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl", 2025. <https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html>
 [^spec-kit]: GitHub, "Spec Kit", accessed 2026-09-30. <https://github.com/github/spec-kit>

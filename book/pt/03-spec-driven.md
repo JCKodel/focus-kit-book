@@ -1,7 +1,7 @@
 # 3. Desenvolvimento Guiado por Especificação
 
 O Desenvolvimento Guiado por Especificação (Spec-Driven Development, ou SDD, o termo que você vai encontrar na mídia) faz um agente de código escrever a decisão antes do código, e as ferramentas que o praticam podem escrever muito mais do que uma feature precisa.
-Depois deste capítulo você consegue dizer o que é Desenvolvimento Guiado por Especificação e até onde uma ferramenta leva a especificação, apontar o que o Spec Kit e o OpenSpec acertaram, e dizer onde começa o custo de escrever uma decisão em muitos lugares.
+Depois deste capítulo você consegue dizer o que são uma especificação e o Desenvolvimento Guiado por Especificação, apontar o que o Spec Kit e o OpenSpec acertaram, e dizer onde começa o custo de escrever uma decisão em muitos lugares.
 
 ## O problema
 
@@ -19,21 +19,10 @@ Desenvolvimento Guiado por Especificação (SDD) "*significa escrever uma “esp
 > "Um membro com um livro atrasado é recusado, com a mensagem 'Devolva primeiro os seus livros atrasados'" é comportamento; "acrescentar uma coluna à tabela de empréstimos" não é, é o como.
 > Escrita assim, cada linha pode ser conferida por um teste ou por uma pessoa, e é por isso que a página de uma entrega do focus-kit tem uma seção chamada Comportamento ([capítulo 14](14-propose.md)).
 
-Ela encontrou três níveis, conforme quanto tempo a especificação vive e quem a edita:
-
-* **spec-first** (especificação primeiro): uma especificação é escrita primeiro e guia a tarefa em questão;
-* **spec-anchored** (ancorado na especificação): a especificação é mantida depois da tarefa e usada para evoluir e manter a feature;
-* **spec-as-source** (especificação como fonte): a especificação é a fonte principal ao longo do tempo, e uma pessoa edita só a especificação, nunca o código.
-
-"*Todas as abordagens e definições de SDD que encontrei são spec-first, mas nem todas buscam ser spec-anchored ou spec-as-source.*"[^bockeler-2025]
-Das três ferramentas dela, o Kiro é "*a mais simples (ou a mais leve)*" e "*majoritariamente spec-first*", e o Tessl é "*a única dessas três ferramentas que aspira explicitamente a uma abordagem spec-anchored*".[^bockeler-2025]
-Ela acrescenta que "*essas ferramentas evoluem muito rápido, então podem já ter mudado desde que as usei*".[^bockeler-2025]
-
 ## Duas ferramentas
 
 O Spec Kit, do GitHub, é um conjunto de processos para agentes de código; o seu processo de Desenvolvimento Guiado por Especificação escreve uma constituição uma vez por projeto e, para cada feature, uma especificação, um plano e uma lista de tarefas antes do código.[^spec-kit]
 O OpenSpec, da Fission AI, "*acrescenta uma camada leve de especificação para que vocês combinem o que construir antes que qualquer código seja escrito*"; o seu comando de proposta escreve uma pasta por mudança, com uma proposta, especificações, um design e tarefas.[^openspec]
-Os dois são spec-first por padrão: a especificação é escrita para a tarefa em questão.
 
 Dei às duas ferramentas, e ao focus-kit, o método que a Parte II ensina, a mesma feature pequena: uma reserva pode ser cancelada até 24 horas antes de começar, e um cancelamento mais tardio é recusado com uma mensagem que diz por quê.[^spec-driven-run]
 Cada uma parou antes de escrever código.
@@ -81,10 +70,9 @@ Depois da mudança para uma página por entrega, o produto abriu ao público, e 
 ## Pontos-chave
 
 * Uma especificação é uma descrição escrita, orientada a comportamento, do que o software deve fazer, em linguagem natural, que guia um agente de código; o Desenvolvimento Guiado por Especificação a escreve antes do código.
-* Conforme quanto tempo a especificação vive, uma ferramenta é spec-first (escrita para a tarefa), spec-anchored (mantida para cuidar da feature) ou spec-as-source (a única coisa que uma pessoa edita).
 * O Spec Kit e o OpenSpec acertaram três coisas: a decisão escrita antes do código, as regras do projeto inteiro escritas uma vez e, no OpenSpec, uma pergunta feita antes de escrever.
 * Uma regra repetida em muitos arquivos é lida muitas vezes e alterada em muitos lugares; para a mesma feature o Spec Kit e o OpenSpec escreveram uma pasta de arquivos onde o focus-kit escreveu uma página.
-* Uma página mais leve por feature é paga com documentos escritos uma vez por projeto; as contagens mostram o que cada ferramenta escreve, não qual constrói software melhor.
+* Uma página mais leve por feature é paga com documentos escritos uma vez por projeto.
 
 [^bockeler-2025]: Birgitta Böckeler, "Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl", 2025. <https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html>
 [^spec-kit]: GitHub, "Spec Kit", acesso em 2026-09-30. <https://github.com/github/spec-kit>
