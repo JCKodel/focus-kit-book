@@ -304,7 +304,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.16.2 and the repo
 [x] ch09-key-points          chapter 9's key points give the cause its gain gives and no count the gain does not; both editions
 [x] ch16-resume-apply        chapter 16 says once, as docs/05 §4 does, where a `resume: apply` line returns; both editions
 [x] ch17-slot-none           chapter 17 says a Milestone review slot of none launches no deep review, apart from the base commit; both editions
-[>] ch26-what-counts         chapter 26's sentences on following wrong advice and on the three runs say what each number counts; both editions
+[x] ch26-what-counts         chapter 26's sentences on following wrong advice and on the three runs say what each number counts; both editions
 ```
 
 ## M15. The reader's time

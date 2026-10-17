@@ -31,7 +31,7 @@ A primeira resposta de um agente costuma ser: roda, lê bem, faz o que foi pedid
 Kathleen Mosier e Linda Skitka definiram o viés de automação em 1996: "*a tendência de usar sinais automatizados como substituto heurístico da busca e do processamento atentos de informação*" (citado em Mosier e Manzey 2019).[^mosier-manzey-2019]
 Skitka, Mosier e Burdick mediram isso em 1999, com 80 estudantes numa tarefa de voo simulado, uns com um auxílio automatizado e outros sem.[^skitka-1999]
 Nos seis eventos que o auxílio não sinalizou, quem tinha o auxílio acertou 59% das vezes, contra 97% sem ele.
-Quando o auxílio recomendou algo errado, em seis ocasiões, todos os participantes menos um seguiram ao menos uma.
+Quando o auxílio recomendou algo errado, em seis ocasiões, todos os participantes que tinham o auxílio, menos um, seguiram ao menos uma das recomendações erradas.
 
 **A pessoa não tem o tempo ou os meios para melhorá-la.**
 Uma pesquisa de 2025 da Microsoft Research e da Carnegie Mellon University pediu a 319 trabalhadores do conhecimento exemplos do seu próprio trabalho com IA generativa.[^lee-2025]
@@ -136,7 +136,7 @@ Se você paga por token, o [capítulo 24](24-cost-and-where.md) mostra como tran
 
 O braço do custo também mediu quanto cada preparação custa em uso.
 Cinco perguntas sobre o projeto, cada uma numa sessão nova, foram feitas a cada preparação: as 30 respostas estavam certas, nas primeiras e nas desafiadas.
-Em todas as execuções a preparação desafiada respondeu às cinco perguntas em 14% a 26% menos tempo, e escreveu menos tokens de saída em duas execuções e 9% mais na terceira.
+Em cada uma das três execuções do braço do custo, as cinco perguntas levaram de 14% a 26% menos tempo na preparação desafiada do que na da primeira resposta da mesma execução, e as cinco sessões da preparação desafiada escreveram menos tokens de saída em duas execuções e 9% mais na terceira.
 
 Os limites são claros.
 Três pares por braço é um experimento registrado, não um estudo, e não tem estatística.

@@ -41,11 +41,11 @@
 
 **Done when.**
 
-* [ ] Both editions changed at line 34 and line 139; the greps of Behaviour hold in `book/en` and `book/pt`.
-* [ ] Chapter 26 still opens with its value, keeps its gain with its number, no filler and nothing useful cut.
-* [ ] Every number still sourced; every `[^key]` keeps a reference and a definition in both editions; `make verify` green, disclosure scan included; no em dash.
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions changed at line 34 and line 139; the greps of Behaviour hold in `book/en` and `book/pt`.
+* [x] Chapter 26 still opens with its value, keeps its gain with its number, no filler and nothing useful cut.
+* [x] Every number still sourced; every `[^key]` keeps a reference and a definition in both editions; `make verify` green, disclosure scan included; no em dash.
+* [x] `make book` run; both PDF paths given to the author.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
 
 **Decisions in the review.** Chosen alone, because the author could not answer; corrections go in the review.
 
@@ -53,3 +53,26 @@
 * L10 compares each run's challenged setup with the first-answer setup of the same run and keeps the percentages, with no per-run values. Source: `plain-numbers` decision 2 and the run's README.
 * No new note on the L10 sentence: the same record is cited at the start of the section (docs/04 Evidence: a source note only where the reader gains something to open).
 * The review's line 152 is line 139; the finding is the same.
+
+**What /apply did.**
+
+* Both editions, line 34: the Skitka sentence now names the group and the noun: "all but one of the participants who had the aid followed at least one of the wrong recommendations" (pt: "todos os participantes que tinham o auxílio, menos um, seguiram ao menos uma das recomendações erradas"). Line 139: the cost arm's sentence names the three runs and the comparison inside each run. No 65%, no group size, no per-run seconds or tokens.
+* Numbers rechecked against the run's README, §Cost: the five questions per setup: seconds 53 to 39, 60 to 49, 81 to 70 are 26%, 18% and 14% less; output tokens fall in runs 1 and 2 and rise from 5,997 to 6,537 (9%) in run 3. Skitka against `sources.md` row 3: "Only one participant made no commission errors".
+* Behaviour's greps hold in `book/en` and `book/pt`: "In every run" and "Em todas as execu" find nothing; "followed at least one" and "seguiram ao menos uma" find line 34 with "of the wrong recommendations" and "das recomendações erradas" after them; `65%|3[.,]92|23[.,]1` finds nothing.
+* Proof: `make verify` green (build, parity, em dash, prose, links, disclosure); `make book` built `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+* Divergences: none. Omissions: none.
+
+**Decisions in /apply.** Chosen alone, as the batch rules say; corrections go in the review.
+
+* L9 uses the page's drafts word for word, in both editions.
+* L10 polishes the draft's "its five sessions" to "the challenged setup's five sessions" (pt: "as suas cinco sessões" to "as cinco sessões da preparação desafiada"): after "the first-answer setup of the same run", "its" could read as that setup or that run.
+
+```commit
+docs(ch26-what-counts): chapter 26 says what each of its numbers counts
+
+- Skitka: all but one of those with the aid followed a wrong recommendation
+- cost arm: each run's challenged setup against its first-answer setup
+- both editions; no cut number returns
+
+work/done/ch26-what-counts.md
+```

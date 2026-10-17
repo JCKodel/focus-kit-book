@@ -31,7 +31,7 @@ An agent's first answer usually is: it runs, it reads well, it does what was ask
 Kathleen Mosier and Linda Skitka defined automation bias in 1996: "*the tendency to use automated cues as a heuristic replacement for vigilant information seeking and processing*" (quoted in Mosier and Manzey 2019).[^mosier-manzey-2019]
 Skitka, Mosier and Burdick measured it in 1999, with 80 students on a simulated flight task, some with an automated aid and some without.[^skitka-1999]
 On the six events the aid did not flag, those with the aid were right 59% of the time against 97% without it.
-When the aid recommended something wrong, on six occasions, all but one participant followed at least one.
+When the aid recommended something wrong, on six occasions, all but one of the participants who had the aid followed at least one of the wrong recommendations.
 
 **A person lacks the time or the means to improve it.**
 A 2025 survey by Microsoft Research and Carnegie Mellon University asked 319 knowledge workers for examples of their own work with generative AI.[^lee-2025]
@@ -136,7 +136,7 @@ If you pay per token instead, [chapter 24](24-cost-and-where.md) shows how to tu
 
 The cost arm also measured what each setup costs in use.
 Five questions about the project, each in a fresh session, were asked of every setup: all 30 answers were correct, first and challenged.
-In every run the challenged setup answered the five questions in 14% to 26% less time, and wrote fewer output tokens in two runs and 9% more in the third.
+In each of the cost arm's three runs, the five questions took the challenged setup 14% to 26% less time than the first-answer setup of the same run, and the challenged setup's five sessions wrote fewer output tokens in two runs and 9% more in the third.
 
 The limits are plain.
 Three pairs per arm is a recorded experiment, not a study, and has no statistics.
