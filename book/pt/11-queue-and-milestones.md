@@ -49,7 +49,7 @@ registrar a devolução; um membro com um livro atrasado ou com a inscrição
 suspensa é recusado.
 
 ```
-[x] esqueleto        app e servidor vazios, npm run verify, tela capturada
+[x] esqueleto        app e servidor vazios, npm run verify, 1º screenshot
 [x] catalogo         a bibliotecária cadastra livros e seus exemplares
 [x] membros          a bibliotecária cadastra, suspende e reativa membros
 [>] emprestar-livro  a bibliotecária empresta, e as regras podem recusar
