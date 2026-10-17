@@ -340,7 +340,7 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] code-width               no code block in chapters 1, 8, 10, 11, 13, 14, 15 and 21 runs past 74 columns; both editions
 [x] pt-skeleton-first        chapter 11's Portuguese queue says the skeleton's screenshot was the first, as the English does, within 74 columns
 [x] pt-fixed-terms           the Portuguese edition uses docs/03's term and one word for each thing (due date, engine, view, fake, worktree, the checks, the fix-due-date slug) and means what the English means in chapters 11 and 14
-[ ] pt-placeholders          the Portuguese edition translates every placeholder and folder written for a chapter, notes the kit's English ones, and explains the imperative with its own commit (chapters 11, 13, 19, 21)
+[x] pt-placeholders          the Portuguese edition translates every placeholder and folder written for a chapter, notes the kit's English ones, and explains the imperative with its own commit (chapters 4, 7, 11, 13, 14, 18, 19, 21)
 [ ] ch03-opening             chapter 3 opens on what grew on Ninjobs without retelling chapter 6's causes and checks; both editions
 [ ] ch04-parnas              chapter 4 introduces Parnas's criterion with its source, or does not lean on it; both editions
 [ ] ch05-lend-pointer        chapter 5 points to the chapter where the use case `lend` is shown; both editions

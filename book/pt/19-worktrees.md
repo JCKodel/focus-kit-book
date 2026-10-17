@@ -223,10 +223,10 @@ A proteção é um comando, antes do commit do merge:
 git diff --cached --check
 ```
 
-Ele lê o que está em stage e relata cada marcador de conflito como `<file>:<line>: leftover conflict marker`, e termina com código diferente de zero quando acha um, então um script consegue parar nele.[^git-diff]
+Ele lê o que está em stage e relata cada marcador de conflito como `<arquivo>:<linha>: leftover conflict marker`, e termina com código diferente de zero quando acha um, então um script consegue parar nele.[^git-diff]
 
 Se os marcadores entraram em um commit mesmo assim, o jeito de desfazer depende de alguém mais ter o commit.
-Sem push: `git reset --hard <the commit before the merge>` joga o merge fora, e você faz o merge de novo.
+Sem push: `git reset --hard <o commit antes do merge>` joga o merge fora, e você faz o merge de novo.
 Com push: `git revert`, já que um reset reescreve um histórico que outros já têm, o que é a regra do rebase do capítulo 18.
 
 ## Quando o paralelo deixa de compensar
@@ -263,7 +263,7 @@ O ganho vale enquanto os arquivos das entregas não se encontram, e termina na v
 
 * Duas sessões dividem uma pasta no trunk quando as suas linhas estão livres e os seus arquivos não se encontram: cada uma marca só a sua linha, coloca em stage só os seus caminhos e o seu hunk da fila, e você faz o commit de uma entrega por vez.
 * A marca de outra linha, a página ou os arquivos de outra entrega e as entradas em stage de outra sessão não são conflito; o mesmo hunk editado pelas duas, ou um arquivo de que uma página precisa e que a outra está mudando, é: pare, e então ordene as linhas ou dê a uma delas um worktree.
-* Faça o commit a partir do stage quando `git diff --cached --stat` guarda só aquela entrega; `git commit -- <paths>` pega cada arquivo nomeado inteiro da pasta, com o hunk da outra entrega em um arquivo compartilhado.
+* Faça o commit a partir do stage quando `git diff --cached --stat` guarda só aquela entrega; `git commit -- <caminhos>` pega cada arquivo nomeado inteiro da pasta, com o hunk da outra entrega em um arquivo compartilhado.
 * Um worktree por entrega compensa para várias pessoas, ou para entregas que mexem nos mesmos arquivos: uma pasta contêiner cujo `main/` é o checkout guarda o worktree de cada entrega em `<oculta>/worktrees/<slug>/` no `<prefixo>/<slug>`, `.focus-kit/` e `focus-kit/` por padrão; `git worktree add`, trabalhe ali, `git merge --no-ff` em `main/`, `git worktree remove`, `git branch -d`; um conflito deixa as duas versões entre marcadores, e `git diff --cached --check` pega qualquer um que sobrou antes do commit.
 * O paralelo compensa enquanto os arquivos das entregas não se encontram, as portas e os bancos de dados da máquina não colidem, o disco comporta as dependências de cada worktree, e uma pessoa ainda consegue revisar cada entrega.
 

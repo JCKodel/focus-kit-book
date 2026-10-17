@@ -14,6 +14,7 @@ No Ninjobs uma decisão morava em seis lugares, e mantê-los em acordo custava m
 Cada fato do projeto mora em um lugar, e o agente o lê ali.
 O focus-kit dá a esses lugares uma forma fixa: sete documentos numerados, docs/00 a docs/06; uma pasta de decisões, `docs/adr/`; uma pasta de manuais, `docs/manuals/`, um para cada ação de mais de um comando, feita à mão fora de uma entrega ou uma prova que o `/apply` roda em outra máquina; o arquivo de regras, `AGENTS.md`; e `work/`, que guarda uma página por entrega (capítulo 12).
 Os números são fixos porque os comandos os citam; o nome depois do número fica na língua da documentação, `00-Product.md` num projeto documentado em inglês e `00-Produto.md` num documentado em português.
+As pastas `docs/`, `docs/adr/`, `docs/manuals/`, `work/` e `work/done/` (onde fica a página de uma entrega feita) ficam em inglês em todo projeto, como o kit as escreve; os arquivos dentro delas levam a língua da documentação, como `docs/manuals/publicar-o-app.md`.
 O `/brainstorm` ou o `/analyze` os escreve uma vez (capítulo 9); o `/propose` e o `/apply` os leem antes de agir.
 
 ## Os sete documentos

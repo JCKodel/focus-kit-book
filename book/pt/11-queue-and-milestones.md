@@ -16,7 +16,7 @@ O docs/06 guarda os marcos do projeto, cada um com um parágrafo que diz o que �
 Uma linha é a marca, o slug, uma frase do que a entrega dá, e os seus sufixos, como `· after <slug>`, que nomeia uma linha que precisa estar feita antes dela:
 
 ```
-[ ] <slug>  <what it delivers, one sentence> · after <slug>
+[ ] <slug>  <o que ela entrega, uma frase> · after <slug>
 ```
 
 O `· after`, como o `· blocked:` do [capítulo 14](14-queue-states.md), fica em inglês, como o kit o escreve.
@@ -84,7 +84,7 @@ Isso é uma ordem, não uma espera: a linha mantém a sua marca, `[ ]`, e fica l
 
 ### A revisão, e os seus achados
 
-Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, uma entrega como as outras, que pega o parágrafo cláusula por cláusula ([capítulo 15](15-closing-a-milestone.md)).
+Um marco é planejado com a sua revisão como a última linha, `<milestone>-review` (em inglês, como o kit a escreve: `m1-review` para o primeiro marco), uma entrega como as outras, que pega o parágrafo cláusula por cláusula ([capítulo 15](15-closing-a-milestone.md)).
 Ela não corrige nada: uma pessoa testa cada cláusula à mão e lança a revisão profunda do código que o docs/05 do projeto cita, quando cita uma.
 Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, e essas linhas não têm segunda revisão.
 

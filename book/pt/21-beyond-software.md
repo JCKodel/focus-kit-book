@@ -38,7 +38,7 @@ exemplar no primeiro dia, com este guia e sem treinamento.
 Seções: Emprestar, Receber de volta, Recusas.
 Recusas lista cada membro de RecusaDeEmprestimo com a mensagem que o
 membro vê.
-Markdown em guide/, e um PDF gerado a partir dele.
+Markdown em guia/, e um PDF gerado a partir dele.
 
 **Fora do escopo.**
 * Gerenciar membros: tem o seu próprio guia, `guia-do-administrador`.

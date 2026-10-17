@@ -165,15 +165,15 @@ Quando outra sessão trabalha na mesma pasta, faça o commit de uma entrega por 
 O formato é o que o docs/05 define, e o kit escreve o mesmo em todo projeto:
 
 ```
-<subject in the imperative, up to 72 characters>
+<assunto no infinitivo, até 72 caracteres>
 
-- <a highlight, one line>
-- <up to five of them>
+- <um destaque, uma linha>
+- <até cinco deles>
 
 work/done/<slug>.md
 ```
 
-O assunto diz o que a entrega faz, no imperativo, "Lend a copy to a member" e não "Lent" nem "Lending", com um escopo entre parênteses quando ajuda.
+O assunto diz o que a entrega faz, no infinitivo, como uma ordem, "Emprestar um exemplar a um membro" e não "Emprestou" nem "Emprestando", com um escopo entre parênteses quando ajuda.
 Os tópicos são os destaques, nunca o raciocínio.
 A última linha aponta para o caminho real da página, onde o raciocínio mora, então quem lê o histórico acha a decisão inteira em um arquivo: `work/done/<slug>.md` quando a entrega está pronta.
 

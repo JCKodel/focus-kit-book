@@ -61,7 +61,7 @@ Um time compartilha o seu trabalho assim, e o pull request do capítulo 20, que 
 
 Um branch é um nome que aponta para um commit e anda para cada commit novo feito nele.
 O git foi feito para "*milhares de branches em paralelo*", e um branch é só um nome, e por isso não custa nada.[^pro-git-history]
-`main` é um branch; `git switch -c <name>` cria outro no commit em que você está e muda para ele, e `git branch` lista os branches, com um `*` antes do seu.
+`main` é um branch; `git switch -c <nome>` cria outro no commit em que você está e muda para ele, e `git branch` lista os branches, com um `*` antes do seu.
 Dois branches que começam no mesmo commit e ganham commits cada um têm dois históricos que compartilham o começo: um merge os junta de novo.
 
 Uma tag é um nome fixo em um commit, que nunca anda.

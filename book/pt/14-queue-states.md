@@ -76,7 +76,7 @@ Uma linha espera em três casos:
 * **Uma resposta foi pedida e não veio.** `aviso-prazo` precisa de um provedor de SMS, a pergunta foi para a diretora da biblioteca, e ninguém respondeu: `· resume: propose · blocked: qual provedor?`.
 * **Outra linha precisa ser feita antes, descoberto depois de o trabalho começar.** No meio de `/apply meus-emprestimos`, a construção descobre que `emprestar-livro` põe a data de devolução um dia antes no fim de um mês; a correção vira uma linha `[ ]` acima dela, `corrigir-devolucao`, e `meus-emprestimos` espera: `· resume: apply · blocked: after corrigir-devolucao`.
 
-O motivo vai no fim da linha, em palavras, `· blocked: <reason>`, ou como as linhas que precisam estar `[x]` antes, `· blocked: after <slug>, <slug>`.
+O motivo vai no fim da linha, em palavras, `· blocked: <motivo>`, ou como as linhas que precisam estar `[x]` antes, `· blocked: after <slug>, <slug>`.
 Antes dele vai a fase de retomada, `· resume: propose` para uma linha que estava `[ ]` ou `[~]`, `· resume: apply` para uma que estava `[>]` ou `[*]`, para que a sessão que retoma a linha saiba de qual comando ela precisa.
 Qualquer marca antes de `[x]` pode virar `[?]`: uma linha pode esperar antes de alguém defini-la, enquanto a página dela está sendo escrita, ou no meio da construção.
 
