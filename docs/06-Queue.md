@@ -327,3 +327,17 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] review-slot-models       docs/05's Milestone review slot says how this repository's deep review runs and on which models, as the author decided after M14
 [>] m15-review               the review of M15 as docs/05 §8 says
 ```
+
+## M16. focus-kit 2026.10.17
+
+When this milestone closes, the book teaches focus-kit 2026.10.17 and the repository runs on it: `/apply` having each delivery's own changes reviewed by a context that did not write them, with the host's own review where the agent can run it and keep it to the delivery's paths, else a read-only agent, fixing what breaks the page before it ends; a milestone review whose code reading is the kit's own and runs in any host that runs agents, over `git diff <base>..HEAD` and never a bare commit, split into the Milestone review slot's areas with one read-only agent each, every reader listing the paths it read and the line waiting as `[?]` when they miss part of the range, a checker marking every candidate seen, latent or weak before the person sees it, the review started on the person's word because it costs, and the reviews' readers as the one specialized subagent the governor admits; Devin Desktop, formerly Windsurf, reading the commands from `.agents/skills/` and invoking them as `/<name>`; and a reader who runs `/propose` in a batch knows what each page must say about the answers chosen without them, and why the commit stays theirs when applies run in parallel.
+
+```
+[ ] kit-2026-10-17           reinstall the kit at 2026.10.17 and apply its migration report to docs/05, docs/03, AGENTS.md and the skills · after m15-review
+[ ] ch13-delivery-review     chapter 13: /apply has its delivery's changes reviewed by a context that did not write them, the host's own review first, fixes what breaks the page and lines the rest; both editions · after kit-2026-10-17
+[ ] ch15-review-by-areas     chapter 15: the code reading over the range since the base, split by areas, one read-only agent each in any host, the paths read, a checker for every candidate, and the person's word; both editions · after kit-2026-10-17
+[ ] ch16-review-agents       chapter 16: the one specialized subagent the governor admits, the reviews' readers and checker, and the errors that let them in; both editions · after kit-2026-10-17
+[ ] batch-propose            chapter 19: proposes run in a batch on the recommended answers, each page listing what it decided alone, while applies stay parallel only on free lines and every commit stays the person's; both editions · after ch16-review-agents
+[ ] ch08-10-devin-desktop    chapters 8 and 10 and docs/03: Devin Desktop, formerly Windsurf, its folder `.agents/skills/` and its `/propose <slug>`, and no `.windsurf/skills/`; both editions · after kit-2026-10-17
+[ ] ch08-09-review-slot      chapters 8 and 9: the update example and its report at 2026.10.17, and the questions on the delivery review and on the milestone review's areas and model; both editions · after kit-2026-10-17
+```
