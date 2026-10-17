@@ -79,11 +79,11 @@ behalf are explicit. Corrections happen in the /propose conversation;
 For a chapter, the page reads this way: **Objective** is the "what you get"
 sentence the chapter opens with; **Behaviour** lists what the reader can do
 or explain afterwards; **Contract** lists the sections, the terms of docs/03
-it introduces, the sources it cites, the cases it draws on and the
-exercises; **Done when** always includes: both editions written, opens with
-its value, no filler and nothing useful cut, every number sourced,
-verify green, and, when a private case is used, the author's approval of
-the anonymized text (docs/00 OD-3).
+it introduces, the sources it cites and the cases it draws on; **Done when**
+always includes: both editions written, opens with its value, no filler
+and nothing useful cut, every number sourced, verify green, and, when a
+private case is used, the author's approval of the anonymized text
+(docs/00 OD-3).
 
 ## 4. The queue
 

@@ -298,7 +298,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.16.2 and the repo
 [x] docs01-retired-projects  docs/01 and `AGENTS.md` present no guided or brownfield project or chapter tag as live, and docs/01's tree names every ignored path
 [x] docs03-current-rows      docs/03's waiting mark and tag rows say what docs/05 says today, and its references name sections that exist
 [x] docs04-gain-number       docs/04 gives one rule for a gain's numbers, names no retired guided project, and its references name sections that exist
-[>] docs05-no-exercises      docs/05 §3's chapter Contract lists no exercises
+[x] docs05-no-exercises      docs/05 §3's chapter Contract lists no exercises
 [>] docs06-legend            the queue's legend defines `[>]` as docs/05 §4 does
 [>] ch03-restated-rule       chapter 3 says how many of each tool's files restate the rule, and gives the Ninjobs lines the cause chapter 9 gives; both editions
 [>] ch09-key-points          chapter 9's key points give the cause its gain gives and no count the gain does not; both editions

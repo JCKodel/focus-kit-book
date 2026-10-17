@@ -18,12 +18,30 @@
 
 **Done when.**
 
-* [ ] `grep -n -i "exercise" docs/05-Process.md` finds nothing.
-* [ ] `make verify` green.
-* [ ] Page in `work/done/`, line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] `grep -n -i "exercise" docs/05-Process.md` finds nothing.
+* [x] `make verify` green.
+* [x] Page in `work/done/`, line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
 
 **In flight.** No page in `work/` edits docs/05; `m15-review` and others only cite it. No overlap.
 
 **Decisions in the review.** Choices made alone.
 
 * The list is shortened ("the sources it cites and the cases it draws on") and not given a replacement item: ADR-0017 retired the exercises without adding anything to a page (docs/04:133).
+
+**Divergences.** None. docs/05:79 to 86 read as the page said when /apply started, and only the Contract clause changed; the sentence was rewrapped from the clause to its end (docs/05:83 to 86) so no line is left short.
+
+**Omissions.** None.
+
+**Proof.** `grep -n -i "exercise" docs/05-Process.md` finds nothing; `make verify` green; `git diff --cached --name-only` holds `docs/05-Process.md`, `docs/06-Queue.md` and the page's move, and no path under `book/`. No chapter changed, so no `make book`.
+
+**Decisions in /apply.** Choices made alone.
+
+* The rewrap reaches the sentence's last three lines, past the clause, so the paragraph keeps the file's line width; Objective, Behaviour and Done when keep every word.
+
+```commit
+docs(docs05-no-exercises): docs/05's chapter Contract lists no exercises
+
+- docs/05 §3: a chapter page's Contract lists sections, terms, sources and cases
+
+work/done/docs05-no-exercises.md
+```
