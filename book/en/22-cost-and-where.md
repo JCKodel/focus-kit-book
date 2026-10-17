@@ -40,8 +40,6 @@ The project had 93 finished pages, one per delivery; each total divided by 93 gi
 
 Forty-three million tokens reads as a lot, and 98.3% of it is the cheapest kind.
 The count sets a baseline: this project, this method, this many tokens per delivery.
-It is my choice to compare it with nothing outside: I have no other project measured the same way, and a number from another team, another model or another price table would compare things that do not match.
-The next milestone of the same project, counted the same way, is the comparison that means something.
 
 ## Why cache reads are counted apart
 
@@ -74,6 +72,7 @@ That is where the tokens buy the most: the person's time goes to reading one pag
 **It pays less** on work whose decision is still being made.
 A `/propose` conversation is cheap in tokens and expensive in the person's time, because the person is the one deciding.
 The agent helps there by asking the right questions in order, and the cost to watch is hours of a person, which no token count shows.
+On Ninjobs everything the agent wrote for a delivery, its page included, averaged 149 thousand output tokens, and the hours I spent deciding those pages are in none of the table's columns.
 
 **It does not pay** on a stack the agent has seen too little of.
 On Ninjobs, before the method, the agent guessed the pixel values of a customised Flutter design that it had few examples to learn from, and screen after screen came close to the design without reaching it.
@@ -86,49 +85,19 @@ Measure before you argue.
 Your host keeps a log of each session on your machine, and the log records the tokens of each call, in the four kinds above.
 Count one milestone, divide by the pages it finished, and you have your tokens per delivery.
 
-In Claude Code's logs, one line per event, the same call can appear on more than one line, so the count keeps each message and request only once.
-The counting is a pure function ([chapter 3](03-simplicity-and-results.md)), written for this chapter:
-
-```ts
-type Usage = {
-	input_tokens: number;
-	cache_creation_input_tokens: number;
-	cache_read_input_tokens: number;
-	output_tokens: number;
-};
-
-type LogLine = { requestId?: string; message?: { id?: string; usage?: Usage } };
-
-function countTokens(lines: LogLine[]): Usage {
-	const total: Usage = {
-		input_tokens: 0,
-		cache_creation_input_tokens: 0,
-		cache_read_input_tokens: 0,
-		output_tokens: 0,
-	};
-	const seen = new Set<string>();
-	for (const line of lines) {
-		const usage = line.message?.usage;
-		const key = `${line.message?.id}:${line.requestId}`;
-		if (!usage || seen.has(key)) continue;
-		seen.add(key);
-		for (const kind of Object.keys(total) as (keyof Usage)[]) total[kind] += usage[kind] ?? 0;
-	}
-	return total;
-}
-```
+In Claude Code's logs, one line per event, a streamed answer logs its usage on more than one line, so count each pair of `message.id` and `requestId` once.
 
 Count soon after the milestone closes: the host deletes logs older than its retention period, and on Ninjobs the logs before those 21 days had already gone.
 
 Then compare milestones, not vendors.
 The second milestone against the first, on the same project, tells you whether the team's way of working got cheaper or dearer; a vendor's price list tells you the price of a token, and nothing about how many your work needs.
 When a number moves, the columns say why: output up means more was built, cache reads up means sessions grew.
+That is why I compare Ninjobs with nothing outside: I have no other project measured the same way, and a number from another team, another model or another price table would compare things that do not match.
 
 ## What the team gains
 
 A number per delivery that anyone on the team can repeat from the host's logs, in place of a feeling.
 On Ninjobs it is 43.1 million tokens per delivery.
-There is no outside number to set it against, by choice: the team's next milestone is the comparison.
 
 ## Key points
 

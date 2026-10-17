@@ -48,8 +48,7 @@ Então uma issue vira uma linha por conversa, e daí em diante é uma entrega co
 
 ## Quadros
 
-Um quadro mostra o trabalho como cartões em colunas, uma coluna por etapa.
-O Azure DevOps, o produto da Microsoft para planejar e construir software, descreve o seu quadro kanban assim: "*os membros do time arrastam cartões entre as colunas para atualizar o status*".[^azure-kanban]
+Um quadro kanban mostra o trabalho como cartões em colunas, uma coluna por etapa, e um cartão passa para a coluna seguinte quando o seu trabalho passa.
 Um gerente abre um quadro; raramente abre um repositório.
 Um quadro cujos cartões são movidos à mão, porém, é uma segunda fila, e se afasta da primeira no dia em que alguém esquece de arrastar um cartão.
 
@@ -58,12 +57,10 @@ No Caso A, um projeto para um cliente em uma plataforma low-code, uma customiza�
 O `/propose` e o `/apply` atualizavam o quadro sempre que mudavam uma marca, e avisavam sempre que não conseguiam, então um quadro desatualizado nunca ficava em silêncio.
 Com as seis marcas do capítulo 14, um espelho as dobra nas três colunas de um quadro: `[ ]` para To Do, `[~]`, `[>]` e `[*]` para Doing, `[x]` para Done; uma linha `[?]` deixa o cartão dela na coluna em que estava e o etiqueta como travado, com o motivo.
 O espelho vai numa só direção porque a fila é o único lugar que o agente lê: um cartão movido no quadro não muda nada no repositório, e uma sincronização nas duas direções criaria duas fontes da verdade.
-Uma peça ainda não estava provada quando o projeto fechou: a permissão de escrita da identidade do pipeline no quadro.
 
 ### Uma marca para a espera
 
-Também faltava uma palavra à fila do Caso A: cinco linhas bloqueadas pelo cliente apareciam como trabalho que ninguém tinha começado, e o Caso A acrescentou uma marca à mão, `[?]`, para uma linha esperando por uma pessoa.
-O kit tem o seu próprio `[?]`, com os outros dois motivos de uma linha esperar (capítulo 14).
+O Caso A acrescentou uma marca à mão, `[?]`, para uma linha esperando por uma pessoa, e o kit tem a sua própria, com os outros dois motivos de uma linha esperar (o [capítulo 14](14-queue-states.md) conta por quê).
 O que continua uma customização do próprio Caso A são as suas entregas de pergunta, cujo único resultado é uma resposta escrita de alguém de fora do projeto: elas fecham na resposta, não no envio, porque uma sessão certa vez marcou uma delas como concluída quando o email saiu.
 
 ## Por que a wiki não é o docs/
@@ -90,4 +87,3 @@ Não há número medido para esse ganho: o quadro do Caso A rodou em um projeto,
 [^gh-prs]: GitHub Docs, "Pull requests", seção "Working with pull requests", acesso em 2026-09-30. <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests>
 [^copilot-review]: GitHub Docs, "About GitHub Copilot code review", seções "Agent skills" e "Validating Copilot code reviews", acesso em 2026-09-30. <https://docs.github.com/en/copilot/concepts/agents/code-review>
 [^gh-issues]: GitHub Docs, "About issues", acesso em 2026-09-30. <https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues>
-[^azure-kanban]: Microsoft Learn, "About Kanban boards", Azure Boards, acesso em 2026-09-30. <https://learn.microsoft.com/en-us/azure/devops/boards/boards/kanban-overview>

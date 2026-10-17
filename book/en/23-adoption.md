@@ -15,9 +15,7 @@ Three objections come up in every team.
 Each has an answer that asks for evidence rather than for faith.
 
 **"My way works."**
-It may.
-The prologue's rule applies to it as to everything else: a claim carries its source.
-Ask what it produced, measured how: how many deliveries, how many came back, what they cost.
+Then ask it for the source the prologue asks of every claim: how many deliveries it produced, how many came back, what they cost.
 A way that works can show it, and the method gives it the means to, with a page per delivery and a count of tokens per delivery ([chapter 22](22-cost-and-where.md)).
 
 **"Too much process."**
@@ -77,7 +75,7 @@ Run it on one milestone of one project, and let the milestone decide.
 4. Build it with `/propose` and `/apply`, one page per line.
 5. Close it with its review ([chapter 15](15-closing-a-milestone.md)).
 
-[Chapter 10](10-quick-guide.md) gives each step from the install to the first delivery committed.
+[Chapter 10](10-quick-guide.md), in its section for an existing project, gives each step from the install to the first delivery committed.
 
 Measure two things: the tokens per delivery ([chapter 22](22-cost-and-where.md)), and what the review and the pages caught that would otherwise have shipped.
 Then decide with those numbers on the table, and the next milestone becomes the comparison.
@@ -98,8 +96,7 @@ In outline, and in my words, the mapping was this:
 Use that shape for your own company: list its problems in its own words, and put beside each one the document, the command, the page or the queue that answers it.
 A problem with nothing beside it is one the method does not solve, and saying so makes the rest credible.
 
-The proposal itself did not run on the process.
-It had no queue and no page, and [chapter 21](21-beyond-software.md) tells what that cost it.
+What the proposal itself lost with no queue line and no page to carry its findings, [chapter 21](21-beyond-software.md) tells.
 
 ## What the team gains
 

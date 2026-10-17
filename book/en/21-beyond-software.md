@@ -20,7 +20,6 @@ The page format reads the same for a document:
 * **Out of scope.** What the document does not cover, and where that lives instead.
 * **Done when.** A checklist a person ticks.
 
-States and Visual reference are usually "none", or the template the document follows.
 A page for the lending library of Part I, written for this chapter:
 
 ```markdown
@@ -59,6 +58,9 @@ Some deliveries produce nothing but a person's written answer.
 A question delivery's page says what is asked, of whom, and what each possible answer unblocks, and it is done when the answer arrives (chapter 20).
 Of Case A's 73 done lines, 8 were questions to people and about eight were documents.
 
+This book runs on the kit too: one page per chapter in `work/`, a queue of milestones in docs/06, and `make verify`, which checks the parity of the two editions, the prose rules and a scan against the disclosure list.
+A chapter is done when those checks are green and the author has approved every passage about a private case.
+
 ## Data work as deliveries
 
 A database's security rules decide who may read or write which row, and they are work with value like a screen.
@@ -67,11 +69,6 @@ One of them was the rule "no writes while a deletion is pending": it was enforce
 The build found that a blanket rule would also block the database's own functions, so the rule became "no write path reachable from the client", and the page recorded why.
 
 A rule in the database holds for every client that will ever talk to it, and its test is the Done when that proves it.
-
-## This book
-
-This book is written with the kit: one page per chapter in `work/`, a queue of milestones in docs/06, and `make verify` as its verify command.
-Its checks are the parity of its two editions, its prose rules and a scan against its disclosure list, so a chapter is done when they are green and the author has approved every passage about a private case.
 
 ## Case B, the contrast
 
@@ -88,6 +85,7 @@ The analysis was right, and being right was not enough: each finding needed a li
 
 One process for every kind of work the team does, so the same queue, the same page and the same review carry code, documents, questions and data rules.
 On Case A, about 16 of its 73 done lines were questions or documents, and on Ninjobs six of 93 pages were database rules, all through the same two commands.
+Case B shows what a page would have saved: its analysis had none, and at least one of its six faults reached the next version of the proposal.
 
 ## Key points
 

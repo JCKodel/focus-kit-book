@@ -40,8 +40,6 @@ O projeto tinha 93 páginas concluídas, uma por entrega; cada total dividido po
 
 Quarenta e três milhões de tokens parece muito, e 98,3% disso é o tipo mais barato.
 A contagem fixa uma linha de base: este projeto, este método, tantos tokens por entrega.
-É escolha minha não compará-la com nada de fora: eu não tenho outro projeto medido do mesmo jeito, e um número de outro time, de outro modelo ou de outra tabela de preços compararia coisas que não se correspondem.
-O marco seguinte do mesmo projeto, contado do mesmo jeito, é a comparação que tem significado.
 
 ## Por que as leituras do cache são contadas à parte
 
@@ -74,6 +72,7 @@ A página diz o que construir, os testes e a verificação dizem se está constr
 **Ele compensa menos** no trabalho cuja decisão ainda está sendo tomada.
 Uma conversa de `/propose` é barata em tokens e cara no tempo da pessoa, porque é a pessoa quem decide.
 O agente ajuda ali fazendo as perguntas certas na ordem certa, e o custo a observar são as horas de uma pessoa, que nenhuma contagem de tokens mostra.
+No Ninjobs, tudo o que o agente escreveu para uma entrega, a sua página incluída, deu em média 149 mil tokens de saída, e as horas que eu passei decidindo essas páginas não estão em nenhuma coluna da tabela.
 
 **Ele não compensa** numa stack que o agente viu pouco.
 No Ninjobs, antes do método, o agente chutava os valores em pixels de um design personalizado em Flutter do qual tinha poucos exemplos para aprender, e tela após tela chegava perto do design sem alcançá-lo.
@@ -86,51 +85,20 @@ Meça antes de discutir.
 O seu host guarda um log de cada sessão na sua máquina, e o log registra os tokens de cada chamada, nos quatro tipos acima.
 Conte um marco, divida pelas páginas que ele concluiu, e você tem os seus tokens por entrega.
 
-Nos logs do Claude Code, uma linha por evento, a mesma chamada pode aparecer em mais de uma linha, então a contagem considera cada mensagem e cada requisição uma vez só.
-A contagem é uma função pura ([capítulo 3](03-simplicity-and-results.md)), escrita para este capítulo:
-
-```ts
-type Uso = {
-	input_tokens: number;
-	cache_creation_input_tokens: number;
-	cache_read_input_tokens: number;
-	output_tokens: number;
-};
-
-type LinhaDeLog = { requestId?: string; message?: { id?: string; usage?: Uso } };
-
-function contarTokens(linhas: LinhaDeLog[]): Uso {
-	const total: Uso = {
-		input_tokens: 0,
-		cache_creation_input_tokens: 0,
-		cache_read_input_tokens: 0,
-		output_tokens: 0,
-	};
-	const vistos = new Set<string>();
-	for (const linha of linhas) {
-		const uso = linha.message?.usage;
-		const chave = `${linha.message?.id}:${linha.requestId}`;
-		if (!uso || vistos.has(chave)) continue;
-		vistos.add(chave);
-		for (const tipo of Object.keys(total) as (keyof Uso)[]) total[tipo] += uso[tipo] ?? 0;
-	}
-	return total;
-}
-```
-
-Os nomes dos campos, como `input_tokens` e `requestId`, são os do próprio log, e por isso ficam em inglês.
+Nos logs do Claude Code, uma linha por evento, uma resposta transmitida aos poucos registra o seu uso em mais de uma linha, então conte cada par de `message.id` e `requestId` uma vez só.
+Esses nomes são campos do próprio log, e por isso ficam em inglês.
 
 Conte logo depois que o marco fecha: o host apaga os logs mais antigos que o seu prazo de retenção, e no Ninjobs os logs de antes daqueles 21 dias já tinham sumido.
 
 Depois compare marcos, não fornecedores.
 O segundo marco contra o primeiro, no mesmo projeto, diz se o jeito de o time trabalhar ficou mais barato ou mais caro; a tabela de preços de um fornecedor diz o preço de um token, e nada sobre quantos o seu trabalho precisa.
 Quando um número muda, as colunas dizem por quê: saída maior quer dizer que mais coisa foi construída, leituras do cache maiores querem dizer que as sessões cresceram.
+É por isso que eu não comparo o Ninjobs com nada de fora: eu não tenho outro projeto medido do mesmo jeito, e um número de outro time, de outro modelo ou de outra tabela de preços compararia coisas que não se correspondem.
 
 ## O que o time ganha
 
 Um número por entrega que qualquer pessoa do time consegue repetir a partir dos logs do host, no lugar de uma sensação.
 No Ninjobs ele é de 43,1 milhões de tokens por entrega.
-Não há número de fora para comparar com ele, por escolha: o próximo marco do time é a comparação.
 
 ## Pontos-chave
 

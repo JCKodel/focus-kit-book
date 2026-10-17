@@ -15,9 +15,7 @@ Três objeções aparecem em todo time.
 Cada uma tem uma resposta que pede evidência em vez de fé.
 
 **"O meu jeito funciona."**
-Pode ser.
-A regra do prólogo vale para ele como para todo o resto: uma afirmação traz a sua fonte.
-Pergunte o que ele produziu, medido como: quantas entregas, quantas voltaram, quanto custaram.
+Então peça a ele a fonte que o prólogo pede de toda afirmação: quantas entregas ele produziu, quantas voltaram, quanto custaram.
 Um jeito que funciona consegue mostrar isso, e o método lhe dá os meios, com uma página por entrega e uma contagem de tokens por entrega ([capítulo 22](22-cost-and-where.md)).
 
 **"Processo demais."**
@@ -77,7 +75,7 @@ Rode-o num marco de um projeto, e deixe o marco decidir.
 4. Construa-o com `/propose` e `/apply`, uma página por linha.
 5. Feche-o com a sua revisão ([capítulo 15](15-closing-a-milestone.md)).
 
-[O capítulo 10](10-quick-guide.md) dá cada passo da instalação até a primeira entrega com commit.
+[O capítulo 10](10-quick-guide.md), na sua seção para um projeto existente, dá cada passo da instalação até a primeira entrega com commit.
 
 Meça duas coisas: os tokens por entrega ([capítulo 22](22-cost-and-where.md)), e o que a revisão e as páginas pegaram que de outro modo teria saído.
 Depois decida com esses números na mesa, e o marco seguinte vira a comparação.
@@ -98,8 +96,7 @@ Em linhas gerais, e com as minhas palavras, a correspondência era esta:
 Use essa forma para a sua própria empresa: liste os problemas dela nas palavras dela, e ponha ao lado de cada um o documento, o comando, a página ou a fila que o responde.
 Um problema sem nada ao lado é um que o método não resolve, e dizer isso torna o resto crível.
 
-A proposta em si não rodou no processo.
-Ela não tinha fila nem página, e o [capítulo 21](21-beyond-software.md) conta o que isso lhe custou.
+O que a própria proposta perdeu sem linha na fila nem página para carregar os seus achados, o [capítulo 21](21-beyond-software.md) conta.
 
 ## O que o time ganha
 

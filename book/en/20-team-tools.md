@@ -48,8 +48,7 @@ So an issue becomes a line by conversation, and from there it is a delivery like
 
 ## Boards
 
-A board shows work as cards in columns, one column per stage.
-Azure DevOps, Microsoft's product for planning and building software, describes its kanban board this way: "*team members drag cards across columns to update status*".[^azure-kanban]
+A kanban board shows work as cards in columns, one column per stage, and a card moves to the next column when its work does.
 A manager opens a board; they rarely open a repository.
 A board whose cards are moved by hand, though, is a second queue, and it drifts from the first the day someone forgets to drag a card.
 
@@ -58,12 +57,10 @@ On Case A, a client project on a low-code platform, a customization recorded in 
 `/propose` and `/apply` refreshed the board whenever they changed a mark, and said so whenever they could not, so a stale board was never silent.
 With the six marks of chapter 14, a mirror folds them onto a board's three columns: `[ ]` to To Do, `[~]`, `[>]` and `[*]` to Doing, `[x]` to Done; a `[?]` line leaves its card in the column it was in and tags it blocked, with the reason.
 The mirror goes one way because the queue is the only place the agent reads: a card moved on the board changes nothing in the repository, and a sync in both directions would make two sources of truth.
-One piece was still unproven when the project closed: the write permission of the pipeline's identity on the board.
 
 ### A mark for waiting
 
-Case A's queue also lacked a word: five lines blocked on the client showed as work nobody had started, and Case A added a mark by hand, `[?]`, for a line waiting on a person.
-The kit has its own `[?]`, with the two other reasons a line waits (chapter 14).
+Case A added a mark by hand, `[?]`, for a line waiting on a person, and the kit has its own, with the two other reasons a line waits ([chapter 14](14-queue-states.md) tells why).
 What stays Case A's own customization is its question deliveries, whose only output is a written answer from someone outside the project: they close on the answer, not on the send, because a session once marked one done when the email went out.
 
 ## Why the wiki is not docs/
@@ -90,4 +87,3 @@ There is no measured number for this gain: Case A's board ran on one project, an
 [^gh-prs]: GitHub Docs, "Pull requests", section "Working with pull requests", accessed 2026-09-30. <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests>
 [^copilot-review]: GitHub Docs, "About GitHub Copilot code review", sections "Agent skills" and "Validating Copilot code reviews", accessed 2026-09-30. <https://docs.github.com/en/copilot/concepts/agents/code-review>
 [^gh-issues]: GitHub Docs, "About issues", accessed 2026-09-30. <https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues>
-[^azure-kanban]: Microsoft Learn, "About Kanban boards", Azure Boards, accessed 2026-09-30. <https://learn.microsoft.com/en-us/azure/devops/boards/boards/kanban-overview>

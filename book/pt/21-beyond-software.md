@@ -20,7 +20,6 @@ O formato da página se lê igual para um documento:
 * **Fora do escopo.** O que o documento não cobre, e onde isso fica.
 * **Pronto quando.** Uma lista que uma pessoa marca.
 
-Estados e Referência visual costumam ser "nenhum", ou o modelo que o documento segue.
 Uma página para a biblioteca de empréstimos da Parte I, escrita para este capítulo:
 
 ```markdown
@@ -59,6 +58,9 @@ Algumas entregas não produzem nada além da resposta escrita de uma pessoa.
 A página de uma entrega de pergunta diz o que é perguntado, a quem, e o que cada resposta possível desbloqueia, e ela está pronta quando a resposta chega (capítulo 20).
 Das 73 linhas concluídas do Caso A, 8 foram perguntas a pessoas e cerca de oito foram documentos.
 
+Este livro também roda no kit: uma página por capítulo em `work/`, uma fila de marcos no docs/06, e `make verify`, que confere a paridade das duas edições, as regras de prosa e uma varredura contra a lista de exposição.
+Um capítulo está pronto quando essas checagens estão verdes e o autor aprovou cada trecho sobre um caso privado.
+
 ## Trabalho com dados como entregas
 
 As regras de segurança de um banco de dados decidem quem pode ler ou escrever cada linha, e são trabalho com valor como uma tela.
@@ -67,11 +69,6 @@ Uma delas foi a regra "nenhuma escrita enquanto uma exclusão está pendente": e
 A construção descobriu que uma regra geral também bloquearia as funções do próprio banco de dados, então a regra virou "nenhum caminho de escrita alcançável a partir do cliente", e a página registrou por quê.
 
 Uma regra no banco de dados vale para todo cliente que um dia falar com ele, e o teste dela é o Pronto quando que a prova.
-
-## Este livro
-
-Este livro é escrito com o kit: uma página por capítulo em `work/`, uma fila de marcos no docs/06, e `make verify` como o seu comando de verificação.
-As suas checagens são a paridade das duas edições, as suas regras de prosa e uma varredura contra a sua lista de exposição, então um capítulo está pronto quando elas estão verdes e o autor aprovou cada trecho sobre um caso privado.
 
 ## O Caso B, o contraste
 
@@ -88,6 +85,7 @@ A análise estava certa, e estar certa não bastou: cada achado precisava de uma
 
 Um só processo para todo tipo de trabalho que o time faz, então a mesma fila, a mesma página e a mesma revisão carregam código, documentos, perguntas e regras de dados.
 No Caso A, cerca de 16 das suas 73 linhas concluídas foram perguntas ou documentos, e na Ninjobs seis de 93 páginas foram regras do banco de dados, todas pelos mesmos dois comandos.
+O Caso B mostra o que uma página teria poupado: a sua análise não teve nenhuma, e pelo menos uma das suas seis falhas chegou à versão seguinte da proposta.
 
 ## Pontos-chave
 

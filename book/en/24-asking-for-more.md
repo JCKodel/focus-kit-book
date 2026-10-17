@@ -1,8 +1,6 @@
 # 24. Asking for more
 
-After this chapter you can say why an agent's first answer feels final, name the four things an agent does not propose unless you ask, and send the four turns of the challenge protocol when the work is worth what they cost.
-The challenge protocol is four messages, always the same, that you send after an agent's first answer; each message and the agent's reply to it is a turn, and the four are written out, ready to copy, under the section "The challenge protocol".
-On this book's experiment, a judge who did not know which answer was which would have sent the challenged answer in 9 of 9 pairs, and the challenge took about 3 to 9 times the first answer's time and output tokens.[^ask-for-more-run]
+After this chapter you can send the challenge protocol, four messages, always the same, that follow an agent's first answer and are written out, ready to copy, under the section of that name, when the work is worth what they cost; and you can say why that first answer feels final and which four things an agent does not propose unless you ask.
 
 ## The card I accepted
 
@@ -15,8 +13,44 @@ The client was unhappy with how they looked, and said so.
 Only after that did the agent become a little more proactive and actually test what a Teams card can do.
 
 The slip was mine as much as the agent's: it called the design unfeasible without testing it, and I accepted that without asking for the test.
-Before agents, I could have done the same: looked at a sketch on paper and said "that is not possible", out of laziness, out of not knowing the platform or for any other reason, even when a little more effort and research would have made it possible.
-Models only amplify that behaviour.
+The second of the four messages below would have made the agent test its claim and show me a card built from the client's PowerPoint before I accepted anything.
+
+## The challenge protocol
+
+The challenge protocol is four messages, always the same, that you send after the first answer, one at a time, each when the agent's reply to the previous one ends; each message and the agent's reply to it is a turn.
+These are the four turns sent in the experiment this chapter's last section reports; copy them as they are:
+
+```text
+1. Before you change anything, ask me what you need to know to do
+   this well.
+2. What did you say is not possible, or not worth doing? Test each
+   one and show me the result.
+3. Who reads or uses this, how much time do they have, and what does
+   each use cost? Change the result to fit.
+4. What did I not ask for that I would want? Add what is worth it,
+   and tell me what you left out.
+```
+
+**Turn 1 puts the questions before the work.**
+The agent knows what it lacks better than you can guess, and "before you change anything" keeps it from rebuilding on a guess.
+Answer its questions from what you know: who uses the result, on what, with how much time, what it costs.
+That is the part of the work that was never in its window, and only you have it.
+A question you cannot answer, say so, and let the agent choose.
+
+**Turn 2 asks for a test, not for doubt.**
+Asking "Are you sure?" invites a new answer chosen to please you.
+Sharma and colleagues, researchers at Anthropic, measured it: after "Are you sure?", the models changed their first answer between 32% (GPT-4) and 86% (Claude 1.3) of the time.[^sharma-2024]
+They call this sycophancy: a model tells the person what they seem to want, and drops a right answer as easily as a wrong one.
+A test returns a result that does not depend on what you seem to want.
+"Or not worth doing" catches the quiet limits, the things the agent left out without saying it could not do them.
+
+**Turn 3 names the reader and the cost.**
+Who uses the result, with how much time, and what each use costs: two of the four things an agent does not propose unless asked, which a section below names, in one question.
+"Change the result to fit" asks for the change, not for advice about it.
+
+**Turn 4 asks for what you did not ask for, and keeps you deciding.**
+"Worth it" asks the agent to weigh each addition, and "tell me what you left out" puts the rest in front of you.
+You stay the one who decides, which is the role the prologue gives the person.
 
 ## Why the first answer feels final
 
@@ -38,11 +72,8 @@ A 2025 survey by Microsoft Research and Carnegie Mellon University asked 319 kno
 Among what kept them from thinking critically about an answer, 44 named a lack of time, and 72 said it was hard to improve the answer by asking the model again.
 In the same survey, more confidence in AI went with less critical thinking, as the workers reported it themselves; the survey measured what they said, not the quality of their work.
 
-The habit is common at work.
-In a field study of 244 consultants of the Boston Consulting Group, published by Harvard Business School, 27% handed the task to the model, and 44% of those took its output unchanged.[^randazzo-hbs-26-036]
-
 An unchecked answer costs little while the task is one the model does well, and much when it is not.
-In an experiment with the same firm's consultants, Dell'Acqua and colleagues found that on tasks inside what the model did well, consultants with AI finished 25.1% faster, with quality up 29.9% to 33.9%.[^dell-acqua-2026]
+In an experiment with consultants of the Boston Consulting Group, Dell'Acqua and colleagues found that on tasks inside what the model did well, consultants with AI finished 25.1% faster, with quality up 29.9% to 33.9%.[^dell-acqua-2026]
 On a task outside it, those with AI were 19 percentage points less likely to be correct than those without it.[^dell-acqua-2026]
 Nothing on the answer says on which side of that line it fell.
 
@@ -70,44 +101,6 @@ Each first answer wrote one long guide for the agent without asking, and the jud
 An agent that answers the question does not add what was not in it.
 The challenged answers added what a person would have wanted and did not think to ask: a check file the agent runs against new notes so the guide stays right, the expiry of a grant and the fact that the accounts were not yet audited, a list of questions for the library's management.
 
-## The challenge protocol
-
-The challenge protocol is four messages, always the same, that you send after the first answer, one at a time, each when the agent's reply to the previous one ends.
-These are the four turns the experiment sent; copy them as they are:
-
-```text
-1. Before you change anything, ask me what you need to know to do
-   this well.
-2. What did you say is not possible, or not worth doing? Test each
-   one and show me the result.
-3. Who reads or uses this, how much time do they have, and what does
-   each use cost? Change the result to fit.
-4. What did I not ask for that I would want? Add what is worth it,
-   and tell me what you left out.
-```
-
-**Turn 1 puts the questions before the work.**
-The agent knows what it lacks better than you can guess, and "before you change anything" keeps it from rebuilding on a guess.
-Answer its questions from what you know: who uses the result, on what, with how much time, what it costs.
-That is the part of the work that was never in its window, and only you have it.
-A question you cannot answer, say so, and let the agent choose.
-
-**Turn 2 asks for a test, not for doubt.**
-Asking "Are you sure?" invites a new answer chosen to please you.
-Sharma and colleagues, researchers at Anthropic, measured it: after "Are you sure?", the models changed their first answer between 32% (GPT-4) and 86% (Claude 1.3) of the time.[^sharma-2024]
-They call this sycophancy: a model tells the person what they seem to want, and drops a right answer as easily as a wrong one.
-A test returns a result that does not depend on what you seem to want.
-"Or not worth doing" catches the quiet limits, the things the agent left out without saying it could not do them.
-
-**Turn 3 names the reader and the cost.**
-Who uses the result, with how much time, and what each use costs: two of the four things the agent does not propose, in one question.
-"Change the result to fit" asks for the change, not for advice about it.
-The techniques the agent will reach for when each use spends tokens, billed or drawn from a plan, are taught elsewhere: the rules file that names where each fact lives ([chapter 1](01-how-agents-see.md)), and the cache that makes a repeated context cheap ([chapter 22](22-cost-and-where.md)).
-
-**Turn 4 asks for what you did not ask for, and keeps you deciding.**
-"Worth it" asks the agent to weigh each addition, and "tell me what you left out" puts the rest in front of you.
-You stay the one who decides, which is the role the prologue gives the person.
-
 ## What the protocol bought, and what it cost
 
 The experiment had three arms, each run three times on the same model, each run recording the first answer and then the answer after the four turns.[^ask-for-more-run]
@@ -130,7 +123,7 @@ With the three runs of each arm summed, the challenged sessions took 2.9 to 8.8 
 One session at a time, a first answer took 24 seconds to just over 2 minutes, and a challenged session 3 to 9 minutes.
 
 On a fixed subscription, those tokens come out of the plan's session limit: the use of the model a plan allows in a window of hours, after which the host refuses new turns until the window ends.
-The experiment ran its nine challenged sessions on one afternoon, all within about 45 minutes, and the author's plan ran out before the protocol's last turn: in all nine, the host answered "You've hit your session limit", and that turn was sent again about 30 minutes later.
+The experiment's nine challenged sessions, run within about 45 minutes on one afternoon, spent my plan's limit before the protocol's last turn, which in all nine was sent again about 30 minutes later.
 Each protocol you send spends a share of that limit.
 If you pay per token instead, [chapter 22](22-cost-and-where.md) shows how to turn tokens into a price.
 
@@ -165,6 +158,5 @@ What they avoid is what the studies measured: answers taken unchecked, from an a
 [^mosier-manzey-2019]: Kathleen L. Mosier and Dietrich Manzey, "Humans and Automated Decision Aids: A Match Made in Heaven?", 2019. <https://d-nb.info/1223023044/34>
 [^skitka-1999]: Linda J. Skitka, Kathleen L. Mosier and Mark Burdick, "Does automation bias decision-making?", 1999. <https://web.archive.org/web/2020id_/http://lskitka.people.uic.edu/AutomationBias.pdf>
 [^lee-2025]: Hao-Ping Lee et al., "The Impact of Generative AI on Critical Thinking: Self-Reported Reductions in Cognitive Effort and Confidence Effects From a Survey of Knowledge Workers", 2025. <https://doi.org/10.1145/3706598.3713778>
-[^randazzo-hbs-26-036]: Steven Randazzo et al., "Cyborgs, Centaurs and Self-Automators: The Three Modes of Human-GenAI Knowledge Work and Their Implications for Skilling and the Future of Expertise", Harvard Business School Working Paper 26-036, 2025. <https://www.hbs.edu/ris/Publication%20Files/26-036_e7d0e59a-904c-49f1-b610-56eb2bdfe6f9.pdf>
 [^dell-acqua-2026]: Fabrizio Dell'Acqua et al., "Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of Artificial Intelligence on Knowledge Worker Productivity and Quality", Organization Science, 2026. <https://doi.org/10.1287/orsc.2025.21838>
 [^sharma-2024]: Mrinank Sharma et al., "Towards Understanding Sycophancy in Language Models", 2024. <https://arxiv.org/abs/2310.13548>
