@@ -325,7 +325,31 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] ch22-26-team-cut         chapters 22 to 26: repeated sources, repeated gains and asides cut, the challenge protocol moved next to the story that needs it; both editions · after m14-review
 [x] one-gain-section         every chapter ends with one gain section and no key points that repeat it, and the lack of a baseline is said once, in the prologue; both editions · after prologue-and-why, ch8-testing-trim, method-said-once, ch20-21-git-cut, ch22-26-team-cut
 [x] review-slot-models       docs/05's Milestone review slot says how this repository's deep review runs and on which models, as the author decided after M14
-[>] m15-review               the review of M15 as docs/05 §8 says
+[x] m15-review               the review of M15 as docs/05 §8 says
+[ ] disclosure-docstring     check_disclosure.py's docstring says when the run fails as docs/01 does
+[ ] docs03-finding-and-gain  docs/03's finding row includes a finding the code review confirms, and its team gain row allows no sentence on a missing number
+[ ] adr17-gain-amendment     ADR-0017 carries an amendment saying a gain with no number has no sentence about it
+[ ] docs05-review-checker    docs/05's Milestone review slot names the checker as the author runs it, Opus with the host's advisor on Fable
+[ ] stack-rule-once          the stack chosen by what the agent knows, and the Flutter story, are told in one chapter and pointed to from chapters 6, 9 and 22; both editions
+[ ] free-line-gloss          chapters 7 and 18 gloss a free line as docs/03 defines it, `[ ]` lines included; both editions
+[ ] line-rule-once           chapters 13 and 22 point to chapter 11 for the one-sentence queue line instead of restating it; both editions
+[ ] case-a-board-once        chapters 16 and 20 point to chapter 14 for the kanban board, the fold onto three columns and Case A's `[?]`; both editions
+[ ] slice-paths              chapters 13, 14 and 19 name the lending library's slices under `src/features/`, as chapter 4 does; both editions
+[ ] code-width               no code block in chapters 1, 8, 10, 11, 13, 14, 15 and 21 runs past 74 columns; both editions
+[ ] pt-fixed-terms           the Portuguese edition uses docs/03's term and one word for each thing (due date, engine, view, fake, worktree, the checks, board columns, the fix-due-date slug) and means what the English means in chapters 11 and 14
+[ ] pt-placeholders          the Portuguese edition translates every placeholder and folder written for a chapter, notes the kit's English ones, and explains the imperative with its own commit (chapters 11, 13, 19, 21)
+[ ] ch03-opening             chapter 3 opens on what grew on Ninjobs without retelling chapter 6's causes and checks; both editions
+[ ] ch04-parnas              chapter 4 introduces Parnas's criterion with its source, or does not lean on it; both editions
+[ ] ch05-lend-pointer        chapter 5 points to the chapter where the use case `lend` is shown; both editions
+[ ] ch10-commit-message      chapter 10's commit message follows docs/05 §6's format as the book writes it; both editions
+[ ] ch12-review-skill        chapter 12 names no review skill the kit does not have; both editions
+[ ] ch15-first-commit        chapter 15 gives the first commit as a base for any milestone, as docs/05 §8 does; both editions
+[ ] ch17-delivery-time       chapter 17 measures how long a delivery took in a way that holds on trunk; both editions
+[ ] ch18-log-evidence        chapter 18's log gives lend-book's commit as chapter 13 does, and its gain cites no illustration as evidence; both editions
+[ ] ch19-when-worktrees-pay  chapter 19 says one thing about when a worktree per delivery pays; both editions
+[ ] ch21-counts-once         chapter 21 gives each count once, its gain one number or pair, and points to chapter 13 for the pending-deletion story; both editions
+[ ] ch23-what-survives       chapter 23 says what survives of the method without Ninjobs' own product checks; both editions
+[ ] ch24-note-keys           chapter 24's numbers carry their note key at the claim; both editions
 ```
 
 ## M16. focus-kit 2026.10.17
@@ -340,4 +364,5 @@ When this milestone closes, the book teaches focus-kit 2026.10.17 and the reposi
 [ ] batch-propose            chapter 19: proposes run in a batch on the recommended answers, each page listing what it decided alone, while applies stay parallel only on free lines and every commit stays the person's; both editions · after ch16-review-agents
 [ ] ch08-10-devin-desktop    chapters 8 and 10 and docs/03: Devin Desktop, formerly Windsurf, its folder `.agents/skills/` and its `/propose <slug>`, and no `.windsurf/skills/`; both editions · after kit-2026-10-17
 [ ] ch08-09-review-slot      chapters 8 and 9: the update example and its report at 2026.10.17, and the questions on the delivery review and on the milestone review's areas and model; both editions · after kit-2026-10-17
+[ ] m16-review               the review of M16 as docs/05 §8 says · after ch13-delivery-review, ch15-review-by-areas, batch-propose, ch08-10-devin-desktop, ch08-09-review-slot
 ```
