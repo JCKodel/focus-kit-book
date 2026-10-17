@@ -18,7 +18,7 @@ Ask the author for the list's contents; this manual never shows them.
 
 1. Write the list to `~/.config/focus-kit-book/denylist.txt`, or anywhere outside the repository with `FKB_DENYLIST` set to its path in your shell.
    One entry per line. A line starting with `#` is a comment; an empty line is ignored.
-   A plain entry matches without regard to case and not inside a longer word; `re:<pattern>` is a regular expression, also without regard to case.
+   A plain entry matches without regard to case and not inside a longer word, and its apostrophe, `'` or `’`, matches either; `re:<pattern>` is a regular expression, also without regard to case, that spells both apostrophes when it wants both, as `(’|')`.
 2. In the clone, once: `make hooks`.
    It sets `core.hooksPath` to `.githooks`, whose pre-commit hook checks the staged paths and text and whose commit-msg hook checks the message.
 3. Once per repository: Settings, Secrets and variables, Actions, a repository secret named `DISCLOSURE_DENYLIST` holding the whole list, the same text as the file.

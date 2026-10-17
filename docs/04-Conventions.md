@@ -53,7 +53,7 @@
 A reader who spots one of these patterns stops trusting the sentence around it, because it reads as written by a machine and not checked by a person.
 `scripts/check_prose.py` reads this section and nothing else: each `### <id>` is a rule, its first line is the message a finding prints, and each backtick span on a `* en:`, `* pt:` or `* both:` line is one entry.
 A plain entry matches as a whole word, regardless of case; `re:<pattern>` is a Python regular expression, also regardless of case.
-`'` and `’` are both apostrophes, so the entries that hold one accept either.
+In a plain entry, `'` and `’` are both apostrophes and match either; a `re:` entry spells both, as `(’|')`.
 It checks `book/en/` and `README.md` with the `en` and `both` entries, `book/pt/` and `README.pt.md` with the `pt` and `both` entries; code, link targets, HTML comments and the front matter are not checked.
 Adding an entry here is enough to make the check use it.
 
