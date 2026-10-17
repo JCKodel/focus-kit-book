@@ -222,8 +222,12 @@ time. Steps go in a manual, and what a command prints stays in its help.
     Release, with `make release`.
   * `set-up-the-disclosure-list.md`: the list, the hooks and the Actions
     secret, once per machine and once per clone.
-* **Milestone review:** Claude Code's `/code-review ultra <base>`,
-  launched by the author against the commit the review's page names.
+* **Milestone review:** on the author's word in the review's /apply
+  session, read-only agents on Opus read `git diff <base>..HEAD`
+  against the commit the review's page names, one per area it touches:
+  the build, the chapters, the kit's skills, the documents. An agent on
+  Fable checks each candidate against the file before the author sees
+  it. Each launch sets its model; no other model runs the review.
 * **Git:** trunk. A delivery's page and build are one change: one commit.
   Two sessions may work in one tree on free lines (§4). The agent stages;
   it never commits or merges.

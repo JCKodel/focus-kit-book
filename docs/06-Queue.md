@@ -324,5 +324,6 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] ch20-21-git-cut          chapters 20 and 21 open with the decision they serve, drop the history and the glossary a manual gives, and say each thing once; both editions · after m14-review
 [x] ch22-26-team-cut         chapters 22 to 26: repeated sources, repeated gains and asides cut, the challenge protocol moved next to the story that needs it; both editions · after m14-review
 [x] one-gain-section         every chapter ends with one gain section and no key points that repeat it, and the lack of a baseline is said once, in the prologue; both editions · after prologue-and-why, ch8-testing-trim, method-said-once, ch20-21-git-cut, ch22-26-team-cut
+[x] review-slot-models       docs/05's Milestone review slot says how this repository's deep review runs and on which models, as the author decided after M14
 [>] m15-review               the review of M15 as docs/05 §8 says
 ```
