@@ -89,14 +89,10 @@ No focus-kit, o `/propose` escreve essa página ([capítulo 12](12-propose.md)) 
 
 ## O que o time ganha
 
-As decisões sobrevivem à sessão.
-O que o time decidiu está em arquivos que toda sessão carrega inteiros, perto do início da janela, então não pode cair no meio de uma conversa longa nem ficar de fora de um resumo.
-Uma pessoa que entra no projeto lê os mesmos arquivos que o agente lê, e recebe a mesma resposta.
-
-O mesmo vale para o trabalho em si.
-No focus-kit, toda entrega tem uma página que registra por que ela foi feita, o que "pronto" queria dizer e, depois de construída, o que foi feito e como; a página é commitada junto com o código que ela descreve.
-Tudo o que o projeto fez, e como, está escrito e versionado ao lado do código, então alguém novo no projeto, desenvolvedor ou gestor, faz uma pergunta sobre ele ao agente e recebe uma resposta lida dessas páginas, e não da memória de um colega.
-Não há medida desse ganho neste livro; a evidência é a perda que ele evita, que os estudos acima mediram.
+As decisões sobrevivem à sessão: o que o time decidiu está em arquivos que toda sessão carrega inteiros, perto do início da janela, então não pode cair no meio de uma conversa longa nem ficar de fora de um resumo.
+O trabalho também sobrevive: no focus-kit, toda entrega tem uma página, commitada junto com o código que ela descreve, que registra por que ela foi feita, o que "pronto" queria dizer e, depois de construída, o que foi feito e como.
+Então alguém novo no projeto, desenvolvedor ou gestor, lê os mesmos arquivos que o agente lê, pergunta ao agente sobre o projeto e recebe uma resposta lida dessas páginas, e não da memória de um colega.
+A evidência é a perda que isso evita, que os estudos acima mediram.
 
 ## Pontos-chave
 
@@ -104,7 +100,7 @@ Não há medida desse ganho neste livro; a evidência é a perda que ele evita, 
 * A janela de contexto é tudo o que o modelo vê numa chamada: as instruções do host, o arquivo de regras, os arquivos lidos, a saída das ferramentas e a conversa até aqui, medida em tokens, até um limite.
 * Mais contexto significa menos precisão: a informação no meio de uma entrada longa é a mais mal usada, a confiabilidade cai conforme a entrada cresce, e a compactação substitui a conversa por um resumo que pode descartar um detalhe que importava.
 * Guarde as decisões em arquivos lidos no início de toda sessão, e dê a cada entrega uma sessão nova, com o decidir separado do construir.
-* A página de toda entrega, o porquê, o que "pronto" queria dizer e o que foi feito, é versionada com o código dela, então quem chega pergunta ao agente sobre o projeto e recebe uma resposta lida das páginas.
+* Faça o commit da página de cada entrega com o código dela, e pergunte ao agente, e não a um colega, o que o projeto fez e por quê.
 
 [^messages-api]: Anthropic, "Using the Messages API", acesso em 2026-09-25. <https://platform.claude.com/docs/en/build-with-claude/working-with-messages>
 [^liu-2024]: Liu et al., "Lost in the Middle: How Language Models Use Long Contexts", 2024. <https://arxiv.org/abs/2307.03172>

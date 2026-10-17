@@ -102,7 +102,7 @@ O método que este livro ensina, o focus-kit, é construído sobre essas três p
 
 O time aprende para onde vai o seu tempo: desenvolvedores experientes mediram-se 19% mais lentos com IA enquanto acreditavam estar mais rápidos,[^metr-2025] então o ganho está em decidir e verificar, onde as três peças de um processo mínimo trabalham.
 Quando o processo roda sobre documentos que um agente lê, o projeto responde ao time inteiro, para um desenvolvedor como para uma empresa, e é para esse ganho que este livro foi escrito.
-Este livro não mede linha de base para as práticas da Parte I, nenhum time contado antes e depois de adotá-las, então os seus capítulos dizem o que cada prática evita, e todo número que o livro dá diz de onde vem.
+Nenhum estudo neste livro mede um time com o método e as suas práticas contra o mesmo time sem eles: a evidência de cada capítulo é o seu número, contado num projeto real e dizendo de onde vem, ou a perda que a sua prática evita.
 A Ninjobs e o Caso A, um projeto de cliente que rodou sobre o processo e que o capítulo 17 conta, vivem em repositórios privados, então todo número que este livro dá sobre eles foi contado por mim ao longo dos seus históricos.
 A Ninjobs aparece pelo nome, e o Caso A sem o seu dono, o seu cliente ou o seu negócio.
 
@@ -118,7 +118,7 @@ A Parte V é a pessoa: por que a primeira resposta de um agente parece final, e 
 * Num ensaio controlado, desenvolvedores experientes foram 19% mais lentos com IA e acreditavam ter sido mais rápidos: decidir e verificar continuam lentos, e é aí que os projetos perdem tempo.
 * Sem processo, o agente adivinha o que você não decidiu, aumenta o escopo e declara "pronto" sem prova.
 * Um processo mínimo dá ao agente uma decisão por escrito, uma página por entrega e uma verificação antes do "pronto"; processo demais também falha, quando escrever a especificação vira o trabalho.
-* Quando o processo roda sobre documentos que um agente lê, o projeto responde ao time inteiro, e é para esse ganho que este livro foi escrito.
+* Escreva cada decisão onde um agente a lê, e pergunte ao projeto antes de perguntar a um colega.
 
 [^lemonis-3ps]: Marcus Lemonis Business Team, "3 Key To Business Success: People, Process & Product", acesso em 2026-09-28. <https://marcuslemonis.com/business/3ps-of-business>
 [^metr-2025]: METR, "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity", 2025. <https://arxiv.org/abs/2507.09089>

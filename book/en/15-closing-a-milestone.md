@@ -101,7 +101,6 @@ Eight lines would have been eight pages, each small enough to read before it was
 
 A hand test of the whole product sees what no single delivery's check can: a clause no delivery took on, a step that fails once the deliveries run together, met the way a user will meet them, before users do.
 The read of the whole code adds what no hand test can see, the kind of fault the review at the Ninjobs opening found.
-This gain has no number in this book.
 And because each finding becomes a line, the team sees the cost of the milestone's gaps in the queue, next to everything else it plans, instead of in fixes nobody reviewed.
 
 ## Key points

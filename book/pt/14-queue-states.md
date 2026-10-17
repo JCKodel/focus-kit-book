@@ -126,12 +126,10 @@ A fila também diz quais linhas podem rodar juntas: sem isso, uma pessoa que que
 
 ## Pontos-chave
 
-* Seis marcas: `[ ]` não definida, `[~]` sendo definida, `[>]` definida, `[*]` sendo construída, `[x]` feita, `[?]` esperando.
-* Uma marca muda quando o trabalho muda, não quando um comando termina: o `/propose` põe `[~]` e `[>]`, o `/apply` põe `[*]` e `[x]`, qualquer sessão põe `[?]`.
+* Seis marcas, `[ ]` não definida, `[~]` sendo definida, `[>]` definida, `[*]` sendo construída, `[x]` feita, `[?]` esperando, cada uma mudada quando o trabalho muda, não quando um comando termina: o `/propose` põe `[~]` e `[>]`, o `/apply` põe `[*]` e `[x]`, qualquer sessão põe `[?]`.
 * Uma linha está livre quando não está `[x]` nem `[?]` e toda linha que o `after` dela nomeia está `[x]`; a próxima entrega é a primeira linha livre que nenhuma sessão pegou, e linhas livres que mexem em arquivos diferentes podem rodar ao mesmo tempo.
 * `· after` é uma ordem escrita com a linha, que mantém a sua marca; `[?]` com `· blocked: after` é uma espera descoberta depois de o trabalho começar.
-* Uma linha espera quando a pessoa diz, quando uma resposta foi pedida e não veio, ou quando o trabalho já começado descobre que outra linha precisa ser feita antes; no fim vão a fase de retomada e o motivo, `· resume: apply · blocked: after <slug>`.
-* Uma linha sai de `[?]` quando o motivo se resolve, pela fase de retomada; o `/propose` e o `/apply` param em uma linha `[?]`, ou em uma que não está livre, até que esteja.
+* Uma linha espera quando a pessoa diz, quando uma resposta foi pedida e não veio, ou quando o trabalho já começado descobre que outra linha precisa ser feita antes, com a fase de retomada e o motivo no fim, `· resume: apply · blocked: after <slug>`; ela sai de `[?]` por essa fase quando o motivo se resolve, e até lá o `/propose` e o `/apply` param nela, como numa linha que não está livre.
 * A fila é um quadro kanban, uma coluna por marca; em três colunas, Fazendo guarda `[~]`, `[>]` e `[*]`, e um cartão `[?]` é etiquetado como travado onde estava.
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", acesso em 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>

@@ -108,6 +108,7 @@ Then it gives your next steps:
 
 And it ends, last of all, on the environments, in a sentence also written for this chapter: "The development database has this delivery's migration; the staging environment is still at the previous delivery, and `npm run migrate -- staging` updates it."
 If a session ends without that sentence, it did not end as the kit says; ask it for the sentence.
+On Ninjobs, a person who opened the published site believing it current, after a session that ended without that sentence, reviewed a version that did not hold the delivery.
 
 ## Why it stops at the stage
 
@@ -184,24 +185,14 @@ If your agent answers with `git commit -m` lines and no `commit` block on the pa
 ## What the team gains
 
 Nothing ships without a check and a person: verify and the proof check the build, and a person reads the diff before it exists in the history.
-The way `/apply` ends prevents two errors.
-A message that lives only in the chat, as `git commit -m` lines, leaves whoever commits later, in another window or another session, nowhere to start from; the `commit` block on the page gives them that start.
-A person who opens a published site believing it current, after a session that ended without saying it was not, reviews a version that does not hold the delivery, as happened on Ninjobs; the last thing `/apply` says, which environment is at which version and the command that updates the others, prevents it.
-
-And what diverged from the plan is written where the next person reads it.
-On Ninjobs, the page of the delivery that lets a user delete their account said the table recording a pending deletion would have no write rule at all.
-The build found that a table with no write rule accepts writes from nobody, the database's own functions included, so the page recorded the refinement: no write path reachable from the client, which the access-rules test now proves.
-The decision and its reason are on the page that built it, and the commit that shipped it points there.
+And what diverged from the plan is written where the next person reads it: on Ninjobs, the page of the delivery that lets a user delete their account said the table recording a pending deletion would have no write rule at all, and the build found that a table with no write rule accepts writes from nobody, the database's own functions included.
+So the page recorded the refinement, no write path reachable from the client, which the access-rules test now proves, and the commit that shipped it points to that page.
 
 ## Key points
 
-* `/apply <slug>` builds the page in a fresh session, and the page is the scope: no dependency, layer or tool the page did not name.
+* `/apply <slug>` builds the page in a fresh session and follows docs/05 literally: the page is the scope, with no dependency, layer or tool it did not name, and when the page contradicts a document it stops and says which, never resolving it silently.
 * It marks the line `[*]` with its first edit, `[x]` with its last, after the stage, and `[?]`, with what it waits on, when it must stop.
-* It follows docs/05 literally, and when the page contradicts a document it stops and says which; it never resolves it silently.
 * Green is not done: done is the whole list, from what happened written on the page to the line marked `[x]`.
-* It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked.
-* Its last words are your next steps, each command written out, and, last of all, which environment is at which version and the command that updates the others.
-* Review the staged change against the page, and ask for each correction in the same session.
-* That review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
-* The agent stages and suggests the message; the person reads the diff and commits, so nothing reaches the history unread, and a delivery reverts in one step.
+* It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, each command written out, and, last of all, which environment is at which version and the command that updates the others.
+* Review the staged change against the page, ask for each correction in the same session, and commit it yourself: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
 

@@ -103,8 +103,7 @@ No Ninjobs ele é de 43,1 milhões de tokens por entrega.
 ## Pontos-chave
 
 * Um host cobra quatro tipos de token: entrada, escrita no cache, leitura do cache e saída; uma leitura do cache custa uma fração de um token de entrada, porque o host reenvia o mesmo contexto em cada chamada.
-* No Ninjobs uma entrega custou 43,1 M de tokens, quase todos leituras do cache.
-* As leituras do cache são contadas à parte porque medem quanto contexto cada chamada carregou, e é isso que a página, uma sessão nova por entrega e as linhas da fila de uma frase mantêm pequeno.
+* As leituras do cache, quase todos os tokens de uma entrega no Ninjobs, são contadas à parte porque medem quanto contexto cada chamada carregou, e é isso que a página, uma sessão nova por entrega e as linhas da fila de uma frase mantêm pequeno.
 * Um agente compensa onde a decisão está escrita e a checagem é mecânica, compensa menos onde a decisão ainda está sendo tomada, e não compensa numa stack que ele não viu.
 * Meça os tokens por entrega no seu próprio projeto durante um marco, a partir dos logs do host, e compare marcos, não fornecedores.
 

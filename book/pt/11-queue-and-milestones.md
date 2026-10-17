@@ -166,17 +166,10 @@ A fila é o quadro de status compartilhado do time e o histórico dele em um arq
 Na Ninjobs ela guardou 102 entregas, feitas e ainda não feitas, em um arquivo.
 No Caso A, um projeto para um cliente em uma plataforma low-code, o Microsoft Power Apps com o Copilot Studio, o relatório de status e a estimativa de risco para o gerente de projeto foram escritos a partir da fila e das páginas, não de memória ([capítulo 17](17-project-as-assistant.md)).
 
-Três regras da fila evitam, cada uma, um erro.
-A ordem é a prioridade, escrita: sem ela, um time procura um jeito de classificar as suas entregas, e com ela a fila já é a classificação.
-O código só muda dentro do `/apply`: sem essa regra, um agente a quem pedem uma correção numa sessão comum edita o código direto, sem linha na fila, sem página e sem verify; com ela, uma mudança pedida fora do `/apply` custa uma linha, e ganha uma página, uma prova e o commit da pessoa.
-Uma linha tem uma frase: quando o detalhe de um pedido não tem outro lugar além da linha, as linhas crescem e toda sessão as lê; com uma frase, o detalhe vai para a página, ou para o rascunho dela até o `/propose` escrevê-la.
-
 ## Pontos-chave
 
 * O docs/06 guarda marcos, cada um com um parágrafo, e uma linha por entrega sob ele: uma marca, um slug, uma frase e os seus sufixos; o que aconteceu vai para a página.
 * A marca de uma linha diz onde a entrega dela está, de `[ ]`, não definida, a `[x]`, feita; uma linha nunca sai, então a fila é também o histórico.
-* O parágrafo de um marco é um teste que uma pessoa confere no produto, nunca um tema.
-* De três a oito entregas, o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados viram linhas sob ela no mesmo marco.
-* A ordem é a prioridade: a linha mais acima importa mais, e mover uma linha é mudar a prioridade dela.
-* Uma dependência conhecida quando a linha é acrescentada é escrita junto, `· after <slug>`: uma ordem, não uma espera, então a linha mantém `[ ]`.
+* O parágrafo de um marco é um teste que uma pessoa confere no produto, nunca um tema, sobre três a oito entregas: o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados viram linhas sob ela no mesmo marco.
+* A ordem é a prioridade: a linha mais acima importa mais, mover uma linha muda a prioridade dela, e uma dependência conhecida quando a linha é acrescentada é escrita junto, `· after <slug>`, uma ordem, não uma espera, então a linha mantém `[ ]`.
 * Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido; o código só muda dentro do `/apply`, até uma mudança de cinco linhas tem sua página, e uma mudança pedida em qualquer outro lugar vira uma linha, com um rascunho da página para o que a linha não comporta, e o `/propose` numa sessão nova.

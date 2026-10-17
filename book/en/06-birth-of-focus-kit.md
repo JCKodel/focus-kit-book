@@ -81,9 +81,8 @@ After, one page per delivery gave the public opening in thirteen days, with each
 
 ## Key points
 
-* On Ninjobs, the old process gave four screens in fifteen days: each decision lived in many places, and its checks guarded the form and never the product.
 * The cost was the number of places, not the size of each file; the architecture was sound, and I lost KISS and YAGNI by requiring its full form on every feature.
-* The restart kept one page per delivery, two commands, one queue line per delivery, two checks and the governor's question, and reached the public opening thirteen days later.
+* Start from the least that held on Ninjobs: one page per delivery, two commands, one queue line per delivery, two checks and the governor's question.
 * Each rule of the kit answers a failure: a decision kept in many places, a build that decides as it goes, commands that drift, an outline that mixed plan and reasoning, checks blind to the product, and checks that grew unasked.
 * Choose a stack by the product and by how well the agent knows it.
 

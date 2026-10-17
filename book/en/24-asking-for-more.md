@@ -151,7 +151,7 @@ What they avoid is what the studies measured: answers taken unchecked, from an a
 * An agent does not propose, unasked, to test a limit it claimed, to fit the result to its reader's time, to fit it to the cost of each use, or what nobody asked for.
 * The challenge protocol is four turns, sent one at a time after the first answer: (1) "Before you change anything, ask me what you need to know to do this well."; (2) "What did you say is not possible, or not worth doing? Test each one and show me the result."; (3) "Who reads or uses this, how much time do they have, and what does each use cost? Change the result to fit."; (4) "What did I not ask for that I would want? Add what is worth it, and tell me what you left out."
 * Turn 2 asks for a test because "Are you sure?" invites sycophancy, a new answer chosen to please.
-* On the book's experiment the challenged answer won 9 of 9 blind pairs and took about 3 to 9 times the time and output tokens, which a subscriber pays from the plan's session limit; three pairs per arm, judged by the same model, so send it where the result is used often or read in a hurry.
+* Send the protocol where the result is used often or read in a hurry: it costs about 3 to 9 times the first answer's time and output tokens, which a subscriber pays from the plan's session limit, and its evidence is three pairs per arm, judged by the same model.
 
 [^ask-for-more-run]: J.C. Ködel, "One Page at a Time", the record of the challenge protocol experiment, 2026-10, in the book's repository. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/ask-for-more-experiment-run>
 [^simon-1956]: Herbert A. Simon, "Rational choice and the structure of the environment", 1956. <https://doi.org/10.1037/h0042769>

@@ -152,7 +152,6 @@ The setup file writes every host's files, whichever host runs it, so the reposit
 ## What the team gains
 
 One repository opens ready in any host, so each person keeps the host they prefer and the team still shares one process, and switching hosts changes nothing in the project.
-There is no number for this gain: it is a property of plain files.
 
 An update never rewrites the rules the team wrote.
 A version that asks for a change in the project's documents reaches the project as a list of what to change and where, with the team's own rules still in place, and the team applies it as it applies any change.

@@ -93,5 +93,5 @@ O Caso B mostra o que uma página teria poupado: a sua análise não teve nenhum
 * Para um documento, o Comportamento é o que o seu leitor consegue fazer, o Contrato é a sua estrutura, e o Pronto quando é uma lista que uma pessoa marca.
 * Uma pergunta a uma pessoa também é uma entrega, pronta quando a resposta chega.
 * Uma regra do banco de dados é uma entrega com um teste, garantida onde todo cliente a encontra.
-* Um achado sem linha se perde: a análise do Caso B estava certa, e pelo menos uma das suas falhas sobreviveu na versão seguinte.
+* Dê uma linha a cada achado, ou ele se perde.
 

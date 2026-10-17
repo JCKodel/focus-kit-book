@@ -223,18 +223,10 @@ On Ninjobs I required every piece on every feature and one field took eight file
 
 ## What the team gains
 
-A change touches one folder, and an agent reads one slice.
-A delivery on lending names `loans/`, and the agent loads the screen, the event, the rules, the database access and their tests side by side, and nothing about another feature; the dependencies it meets are the ones a test swaps, so the tests show it what to fake and nothing else.
-A reviewer sees a delivery's diff inside one folder and knows it touched nothing else, and removing a feature is removing a folder.
-
-"What happens when event X arrives?" is one test: call the orchestrator with the event and fake repositories, and check the state it returns.
-Every rule sits in a use case, a pure function, so every rule has a test that needs no setup, and a reviewer or an agent finds the rule in one place.
-
-Client and server share the use cases.
-A feature often has a client orchestrator for the screen and a server orchestrator for the request, each with its own repositories, and both call the same rules: the server enforces `lend`, and the client imports `mayBorrow` only to decide what to show, such as greying out "Lend" for a member with an overdue book.
-The rule is written once and tested once, and the client's copy of the decision can never disagree with the server's.
-
-None of this has a number: as the prologue says, the book counted no team before and after the practices of Part I.
+A change touches one folder, and an agent reads one slice: a delivery on lending names `loans/`, and the agent loads the screen, the event, the rules, the database access and their tests side by side, and nothing about another feature, and the tests show it what to fake and nothing else.
+A reviewer sees a delivery's diff inside one folder and knows it touched nothing else.
+Every rule sits in a use case, a pure function, so it has a test that needs no setup, and "what happens when event X arrives?" is one test: call the orchestrator with the event and fake repositories, and check the state it returns.
+Client and server share the use cases: the server enforces `lend`, and the client imports `mayBorrow` only to decide what to show, such as greying out "Lend" for a member with an overdue book, so the rule is written and tested once and the client's copy of the decision can never disagree with the server's.
 
 ## Key points
 
@@ -242,7 +234,7 @@ None of this has a number: as the prologue says, the book counted no team before
 * FOCUS is Feature-oriented (vertical slices), Clean (the dependency rule, with a use case that receives no repository because the orchestrator fetches and saves), Unidirectional (event, orchestrator, new state, nothing back, so a behaviour is one test) and Scalable (every piece isolated, with its own test).
 * The view fires events and renders state, formatting nothing; the orchestrator turns one event into one new state; a use case holds a decision, a validation or a format as a pure function; the repository fetches and saves through a driver, and turns an exception from data into a `Result`.
 * A piece receives a dependency only where its test passes a fake: orchestrators and server repositories do, use cases and views do not, and the clock is a value.
-* A piece is written when a delivery needs its job, and client and server share the same use cases, so a rule is written and tested once.
+* Write a piece when a delivery needs its job, and on the client import the server's use case to decide what to show, never a second copy of the rule.
 
 [^martin-clean-2012]: Robert C. Martin, "The Clean Architecture", The Clean Code Blog, 2012-08-13, accessed 2026-09-30. <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>
 [^martin-screaming]: Robert C. Martin, "Screaming Architecture", The Clean Code Blog, 2011-09-30, accessed 2026-09-30. <https://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html>

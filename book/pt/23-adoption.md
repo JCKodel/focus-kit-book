@@ -103,13 +103,11 @@ O que a própria proposta perdeu sem linha na fila nem página para carregar os 
 O time inteiro num só processo, em que cada pessoa sabe qual parte é sua e cada decisão está numa página que qualquer um pode ler.
 E um piloto que mede a si mesmo: um marco dá uma contagem de tokens por entrega e uma lista do que foi pego.
 No Caso A o processo pegou quatro problemas fora do código: uma base que não batia com o que foi construído, um pedido impossível, uma falha de permissão numa instalação limpa, e um segredo no pacote.
-Não há número de fora contra o qual comparar a adoção; o próprio marco do piloto é a linha de base.
 
 ## Pontos-chave
 
 * Sem um processo comum cada pessoa usa IA do seu jeito, a um custo que ninguém vê, e a opinião mais alta decide.
 * Responda a "o meu jeito funciona" pedindo a sua evidência, a "processo demais" com o regulador, e a "nós já temos uma ferramenta" com o fato de que o método são documentos que qualquer host lê.
-* No Caso A o processo pegou uma base que não batia com o que foi construído, um pedido impossível, uma falha escondida pelo ambiente de desenvolvimento, e um segredo no pacote.
 * Quem é dono da decisão propõe, a sessão de um desenvolvedor aplica, uma pessoa sempre faz o commit, e o time revisa o marco.
 * Comece com um marco de três a oito linhas, meça os tokens por entrega e o que foi pego, e então decida.
 

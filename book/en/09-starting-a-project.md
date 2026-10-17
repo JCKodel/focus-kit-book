@@ -123,7 +123,6 @@ Only a check against what you answered, or against the code, finds either.
 
 A person who cannot answer a question still gets a good document, because every question carries a default; and nobody is asked what the code already says, because `/analyze` reads it first.
 The team starts its first delivery with the product, the vocabulary, the decisions and the queue written down, and every contradiction the code holds recorded as a question instead of settled by a guess.
-There is no number for this gain: this book has no count of projects started with and without the two commands.
 
 ## Key points
 

@@ -103,7 +103,7 @@ Quando ele para, os documentos ficam: são a documentação do projeto de um jei
 
 ## O que o time ganha
 
-Qualquer pessoa do time, desenvolvedora ou não, vai de uma sessão vazia a uma primeira entrega com commit seguindo uma lista, cada passo a um link do seu motivo; não há número para este ganho, porque o livro não contou a primeira entrega de nenhum leitor.
+Qualquer pessoa do time, desenvolvedora ou não, vai de uma sessão vazia a uma primeira entrega com commit seguindo uma lista, cada passo a um link do seu motivo.
 
 ## Pontos-chave
 

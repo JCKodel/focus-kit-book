@@ -31,6 +31,8 @@
   Chapter 8's update report keeps its versions, which are the command's output, and teaches the changelog as a file of the kit (first: `kit-as-it-is`, from `m13-review`).
 * **Numbers that prove.** A passage keeps the numbers that prove its point and no more: the detail of a measurement (per-run values, arithmetic, sub-sample counts, one fact said in two numbers) stays at the source the note points to or in the run's record.
   `## What the team gains` gives the one number that sums the chapter, or, when the gain is a comparison, the one pair that is the gain (a figure before and after, a result and its cost); a chapter with no number follows **A gain per chapter**; each key point carries at most that number or pair (first: `plain-numbers`, from `m13-review`; the pair: `docs04-gain-number`, from `m14-review`).
+* **One gain.** The gain is said in `## What the team gains`, once; a key point says what the reader does, not what is gained, and carries at most the gain's one number or pair.
+  That the book measures no baseline against a team without the method is the prologue's sentence, said nowhere else (first: `one-gain-section`, from the author's review of 2026-10-16).
 * **Context before an excerpt.** A reader who has read only the previous chapters understands every artifact shown without opening anything else (docs/00 product question 5).
   Before it, the text gives what the artifact is about: the project, the problem it answers, where it comes from.
   An excerpt is a whole unit that means something on its own (a page's section, a queue's milestone), never a loose line that leans on the lines around it.
@@ -43,7 +45,7 @@
 * **A note box** is a blockquote whose first words are bold, `> **Note.** ...` (pt: `> **Nota.**`; `**Caution.**` / `**Cuidado.**` for a warning), one paragraph, one sentence per line; the site, the PDF and the EPUB style it as a box (`site.css`, `pdf.css`, `epub.css`).
   It holds a definition or a warning the reader needs at that point and the section's flow does not carry: first, chapter 2's behaviour; second, chapter 3's caution on an agent that grows the process.
   It is the one box syntax pandoc and MkDocs both render; `!!!` and `:::` each break in one output.
-* **A gain per chapter.** Every chapter has the section `## What the team gains` (pt: `## O que o time ganha`) before its key points: what a team or a project gains, with a number or a sourced claim, or one sentence saying the gain has no number (docs/00 product question 7).
+* **A gain per chapter.** Every chapter has the section `## What the team gains` (pt: `## O que o time ganha`) before its key points: what a team or a project gains, with its number or a sourced claim where the book has one, and otherwise the gain alone, with no sentence on the missing number (**One gain**; docs/00 product question 7).
 * **Code** is TypeScript only, written for the chapter, short (as a rule under 25 lines a block), tab-indented, on the book's running example, the lending library (docs/03); chapter 3, at the book's first code block, says once that the examples are written for the book (and, in Portuguese, that their names are in Portuguese), and chapter 1's rules file, the one prose artifact before it, says so itself.
   Code is never presented as the output of a run.
 * **Private cases** appear only as Case A and Case B; docs/03 §Entities and invariants says what may never appear.

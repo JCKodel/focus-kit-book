@@ -74,7 +74,7 @@ Este livro tomou a mesma decisão para si: nenhuma wiki, escrita ou espelhada; u
 ## O que o time ganha
 
 O gerente vê o progresso sem perguntar a um desenvolvedor, e a revisão lê uma página antes de ler um diff, então uma mudança que ninguém pediu é encontrada na primeira pergunta.
-Não há número medido para esse ganho: o quadro do Caso A rodou em um projeto, e a sua permissão de escrita nunca foi provada.
+O quadro do Caso A rodou em um projeto, e a sua permissão de escrita nunca foi provada.
 
 ## Pontos-chave
 

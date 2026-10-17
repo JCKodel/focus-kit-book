@@ -81,9 +81,8 @@ Depois, uma página por entrega deu a abertura ao público em treze dias, com ca
 
 ## Pontos-chave
 
-* No Ninjobs, o processo antigo deu quatro telas em quinze dias: cada decisão morava em muitos lugares, e as verificações do processo guardavam a forma e nunca o produto.
 * O custo estava no número de lugares, e não no tamanho de cada arquivo; a arquitetura era sólida, e eu perdi o KISS e o YAGNI ao exigir sua forma completa em toda feature.
-* O recomeço manteve uma página por entrega, dois comandos, uma linha de fila por entrega, duas verificações e a pergunta do regulador, e chegou à abertura ao público treze dias depois.
+* Comece do mínimo que se sustentou no Ninjobs: uma página por entrega, dois comandos, uma linha de fila por entrega, duas verificações e a pergunta do regulador.
 * Cada regra do kit responde a uma falha: uma decisão guardada em muitos lugares, uma construção que decide enquanto anda, comandos que divergem, um roteiro que misturava plano e raciocínio, verificações cegas ao produto e verificações que cresceram sem ninguém pedir.
 * Escolha uma stack pelo produto e pelo quanto o agente a conhece.
 

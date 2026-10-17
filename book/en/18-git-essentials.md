@@ -174,16 +174,7 @@ This book, written and reviewed by one person, is on trunk.
 ## What the team gains
 
 Every delivery lands as one commit on trunk or one merge otherwise, with its page beside its code, so taking a delivery back is one command, and reading why a line changed is one commit that holds both the change and the decision.
-The evidence is the history itself, the lending library's log shown earlier in this chapter:
-
-```text
-a41c9e2 Let a member return a copy (return-book)
-7d03b18 Lend a copy, and refuse when the rules say no (lend-book)
-2f6e5a1 Start: documents and first milestone
-```
-
-It reads as the list of what users can do, one line per delivery and one revert per line, and a person who never opens the code can follow it.
-There is no number for this gain: it is a property of the history's shape, and no measurement was made.
+The evidence is the history itself: the lending library's log, shown earlier in this chapter, reads as the list of what users can do, one line per delivery and one revert per line, and a person who never opens the code can follow it.
 
 ## Key points
 

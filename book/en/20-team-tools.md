@@ -74,7 +74,7 @@ This book took the same decision for itself: no wiki, written or mirrored; one s
 ## What the team gains
 
 The manager sees progress without asking a developer, and the review reads a page before it reads a diff, so a change nobody asked for is found by the first question.
-There is no measured number for this gain: Case A's board ran on one project, and its write permission was never proven.
+Case A's board ran on one project, and its write permission was never proven.
 
 ## Key points
 

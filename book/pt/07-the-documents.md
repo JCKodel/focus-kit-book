@@ -140,7 +140,7 @@ O docs/00 da biblioteca lista as multas por devolução atrasada como em aberto,
 ## O que o time ganha
 
 A mesma resposta em toda sessão e para toda pessoa: um desenvolvedor, um gestor e um agente numa sessão nova que perguntam o prazo de empréstimo leem uma linha em um documento.
-No Ninjobs uma decisão morava em seis lugares que podiam discordar, e toda entrega pagava para mantê-los em acordo; com um lugar para cada fato, uma mudança é escrita uma vez e toda sessão seguinte a lê.
+Com um lugar para cada fato, uma mudança é escrita uma vez e toda sessão seguinte a lê, onde no Ninjobs toda entrega pagava para manter em acordo as seis cópias de uma decisão.
 Um manual põe os passos que uma pessoa segue à mão onde essa pessoa os procura, num arquivo que se encontra pelo nome, e tira os passos de uma prova do slot que todo `/apply` lê antes da sua primeira edição.
 
 ## Pontos-chave

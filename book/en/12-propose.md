@@ -112,7 +112,7 @@ The page is written to be read, and the questions to ask are these:
 You ask for every correction in the same conversation, and the agent writes the fix: on the page, and in any document the fix touches.
 You do not edit the page by hand: the agent knows which document owns each fact, so a fix that touches the vocabulary or the queue lands there too, and the conversation keeps the reason.
 If `/propose` asks what a document already says, such as how many days a loan lasts when docs/00 says 21, say so in the conversation: the answer belongs on the page, with its source.
-If Behaviour holds only the happy path, an available copy lent to a member in good standing, ask the agent for the cases that must fail and the edges before `/apply`.
+If Behaviour holds only the happy path, an available copy lent to a member in good standing, ask the agent for the cases that must fail and the edges before `/apply`: a person who does not know the tool being built and leaves the expected result to the agent gets one solution, happy path only, which the client rejects.
 
 The order is the cheap one.
 A hole found on the page costs one turn; found after `/apply`, it costs another `/apply`, the most expensive command, which builds, tests and proves again.
@@ -140,10 +140,6 @@ The page is the review surface of the team.
 A developer, a manager or the client reads one page in the language of docs/03 and knows what is about to be built, what is not, and what "done" will mean, before a line of code exists.
 On Case A, the same page format carried questions to the client and documents for handover, so one review skill served every kind of work (chapter 21).
 And when the build ends, the same page records what happened, so the history of a decision is one file, named by its slug, in every project the team runs.
-
-`/propose` decides and drafts because each prevents an error.
-A `/propose` that asks what docs/00 to 05 already settle makes the kit slower than working by hand; a decision written with its source leaves one correction, in the review, and only where a document is wrong.
-A person who does not know the tool being built leaves the expected result to the agent, which delivers one solution, happy path only, and the client rejects it; Behaviour drafted from the documents, with what must fail and the edges, puts those cases in front of the person before any code exists.
 
 ## Key points
 

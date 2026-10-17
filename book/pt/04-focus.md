@@ -224,18 +224,10 @@ Na Ninjobs eu exigi toda peça em toda feature e um campo levava oito arquivos (
 
 ## O que o time ganha
 
-Uma mudança mexe em uma pasta, e um agente lê uma fatia.
-Uma entrega sobre empréstimo nomeia `emprestimos/`, e o agente carrega a tela, o evento, as regras, o acesso ao banco de dados e os testes deles lado a lado, e nada sobre outra feature; as dependências que ele encontra são as que um teste troca, então os testes mostram a ele o que fingir e nada mais.
-Quem revisa vê o diff de uma entrega dentro de uma pasta e sabe que ela não mexeu em mais nada, e remover uma feature é remover uma pasta.
-
-"O que acontece quando o evento X chega?" é um teste: chame o orquestrador com o evento e repositórios falsos, e confira o estado que ele devolve.
-Toda regra fica em um caso de uso, uma função pura, então toda regra tem um teste que não precisa de preparação, e um revisor ou um agente encontra a regra em um lugar só.
-
-Cliente e servidor compartilham os casos de uso.
-Uma feature muitas vezes tem um orquestrador no cliente para a tela e um no servidor para a requisição, cada um com os próprios repositórios, e os dois chamam as mesmas regras: o servidor impõe `emprestar`, e o cliente importa `podePegarEmprestado` só para decidir o que mostrar, como deixar "Emprestar" apagado para um membro com um livro atrasado.
-A regra é escrita uma vez e testada uma vez, e a cópia da decisão no cliente nunca discorda da do servidor.
-
-Nada disso tem um número: como diz o prólogo, o livro não contou nenhum time antes e depois das práticas da Parte I.
+Uma mudança mexe em uma pasta, e um agente lê uma fatia: uma entrega sobre empréstimo nomeia `emprestimos/`, e o agente carrega a tela, o evento, as regras, o acesso ao banco de dados e os testes deles lado a lado, e nada sobre outra feature, e os testes mostram a ele o que fingir e nada mais.
+Quem revisa vê o diff de uma entrega dentro de uma pasta e sabe que ela não mexeu em mais nada.
+Toda regra fica em um caso de uso, uma função pura, então ela tem um teste que não precisa de preparação, e "o que acontece quando o evento X chega?" é um teste: chame o orquestrador com o evento e repositórios falsos, e confira o estado que ele devolve.
+Cliente e servidor compartilham os casos de uso: o servidor impõe `emprestar`, e o cliente importa `podePegarEmprestado` só para decidir o que mostrar, como deixar "Emprestar" apagado para um membro com um livro atrasado, então a regra é escrita e testada uma vez, e a cópia da decisão no cliente nunca discorda da do servidor.
 
 ## Pontos-chave
 
@@ -243,7 +235,7 @@ Nada disso tem um número: como diz o prólogo, o livro não contou nenhum time 
 * FOCUS é Feature-oriented (fatias verticais), Clean (a regra de dependência, com um caso de uso que não recebe repositório porque o orquestrador busca e salva), Unidirectional (evento, orquestrador, novo estado, nada volta, então um comportamento é um teste) e Scalable (toda peça isolada, com o próprio teste).
 * A tela dispara eventos e renderiza o estado sem formatar nada; o orquestrador transforma um evento em um novo estado; um caso de uso guarda uma decisão, uma validação ou uma formatação como função pura; o repositório busca e salva por um driver, e transforma uma exceção vinda dos dados em um `Result`.
 * Uma peça recebe uma dependência só onde o teste dela passa um fake: orquestradores e repositórios do servidor recebem, casos de uso e telas não, e o relógio é um valor.
-* Uma peça é escrita quando uma entrega precisa do trabalho dela, e cliente e servidor compartilham os mesmos casos de uso, então uma regra é escrita e testada uma vez.
+* Escreva uma peça quando uma entrega precisar do trabalho dela, e no cliente importe o caso de uso do servidor para decidir o que mostrar, nunca uma segunda cópia da regra.
 
 [^martin-clean-2012]: Robert C. Martin, "The Clean Architecture", The Clean Code Blog, 2012-08-13, acesso em 2026-09-30. <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>
 [^martin-screaming]: Robert C. Martin, "Screaming Architecture", The Clean Code Blog, 2011-09-30, acesso em 2026-09-30. <https://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html>

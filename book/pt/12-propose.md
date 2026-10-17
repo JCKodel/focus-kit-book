@@ -119,7 +119,7 @@ A página é escrita para ser lida, e as perguntas a fazer são estas:
 Você pede cada correção na mesma conversa, e o agente escreve a correção: na página, e em qualquer documento que ela toque.
 Você não edita a página à mão: o agente sabe qual documento é dono de cada fato, então uma correção que toca o vocabulário ou a fila entra lá também, e a conversa guarda o motivo.
 Se o `/propose` pergunta o que um documento já diz, como quantos dias dura um empréstimo quando o docs/00 diz 21, diga isso na conversa: a resposta pertence à página, com a sua fonte.
-Se o Comportamento só tem o caminho feliz, um exemplar disponível emprestado a um membro em dia, peça ao agente os casos que precisam falhar e os casos de borda antes do `/apply`.
+Se o Comportamento só tem o caminho feliz, um exemplar disponível emprestado a um membro em dia, peça ao agente os casos que precisam falhar e os casos de borda antes do `/apply`: uma pessoa que não conhece a ferramenta sendo construída e deixa o resultado esperado para o agente recebe uma solução, só o caminho feliz, que o cliente rejeita.
 
 A ordem é a barata.
 Um buraco achado na página custa um turno; achado depois do `/apply`, custa outro `/apply`, o comando mais caro, que constrói, testa e prova de novo.
@@ -147,10 +147,6 @@ A página é a superfície de revisão do time.
 Um desenvolvedor, um gerente ou o cliente lê uma página na linguagem do docs/03 e sabe o que está para ser construído, o que não está, e o que "pronto" vai significar, antes de existir uma linha de código.
 No Caso A, o mesmo formato de página levou perguntas ao cliente e documentos para a passagem do projeto, então uma única skill de revisão serviu a todo tipo de trabalho (capítulo 21).
 E quando a construção termina, a mesma página registra o que aconteceu, então a história de uma decisão é um arquivo, com o nome do seu slug, em todo projeto que o time roda.
-
-O `/propose` decide e rascunha porque cada um evita um erro.
-Um `/propose` que pergunta o que os docs/00 a 05 já resolvem deixa o kit mais lento que o trabalho à mão; uma decisão escrita com a sua fonte deixa uma correção, na revisão, e só onde um documento está errado.
-Uma pessoa que não conhece a ferramenta sendo construída deixa o resultado esperado para o agente, que entrega uma solução, só o caminho feliz, e o cliente a rejeita; um Comportamento rascunhado a partir dos documentos, com o que precisa falhar e os casos de borda, põe esses casos diante da pessoa antes de existir qualquer código.
 
 ## Pontos-chave
 

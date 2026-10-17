@@ -103,7 +103,7 @@ When it stops, the documents stay: they are the project's documentation either w
 
 ## What the team gains
 
-Anyone on the team, developer or not, goes from an empty session to a first delivery committed by one list, each step one link from its reason; there is no number for this gain, since the book counted no reader's first delivery.
+Anyone on the team, developer or not, goes from an empty session to a first delivery committed by one list, each step one link from its reason.
 
 ## Key points
 

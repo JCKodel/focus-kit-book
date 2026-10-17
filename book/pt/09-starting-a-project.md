@@ -123,7 +123,6 @@ Só uma conferência contra o que você respondeu, ou contra o código, encontra
 
 Uma pessoa que não sabe responder a uma pergunta ainda recebe um bom documento, porque toda pergunta traz um padrão; e ninguém é perguntado sobre o que o código já diz, porque o `/analyze` o lê primeiro.
 O time começa a primeira entrega com o produto, o vocabulário, as decisões e a fila escritos, e toda contradição que o código tem registrada como pergunta em vez de resolvida por um palpite.
-Não há número para esse ganho: este livro não tem uma contagem de projetos começados com e sem os dois comandos.
 
 ## Pontos-chave
 

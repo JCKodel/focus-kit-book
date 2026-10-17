@@ -140,7 +140,7 @@ The library's docs/00 lists fines for late returns as open, so a page that touch
 ## What the team gains
 
 The same answer in every session and for every person: a developer, a manager and a fresh agent who ask the loan period read one line in one document.
-On Ninjobs a decision lived in six places that could disagree, and every delivery paid to keep them in step; with one place per fact, a change is written once and every later session reads it.
+With one place per fact, a change is written once and every later session reads it, where on Ninjobs every delivery paid to keep a decision's six copies in step.
 A manual puts the steps a person follows by hand where that person looks for them, in a file found by its name, and keeps a proof's steps out of the slot every `/apply` reads before its first edit.
 
 ## Key points

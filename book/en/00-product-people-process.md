@@ -102,7 +102,7 @@ The method this book teaches, focus-kit, is built on these three pieces, and Par
 
 The team learns where its time goes: experienced developers measured 19% slower with AI while they believed they were faster,[^metr-2025] so the gain lies in the deciding and the checking, where the three pieces of a minimal process work.
 When the process runs on documents an agent reads, the project answers the whole team, for one developer as for a company, and that is the gain this book is written for.
-This book measures no baseline for the practices of Part I, no team counted before and after adopting them, so their chapters say what each practice prevents, and every number the book gives says where it comes from.
+No study in this book measures a team with the method and its practices against the same team without them: the evidence in each chapter is its number, counted on a real project and saying where it comes from, or the loss its practice avoids.
 Ninjobs and Case A, a client project that ran on the process and that chapter 17 tells, live in private repositories, so every number this book gives about them was counted by me over their histories.
 Ninjobs appears by name, and Case A without its owner, its client or its business.
 
@@ -118,7 +118,7 @@ Part V is the person: why an agent's first answer feels final, and how to ask fo
 * In a controlled trial, experienced developers were 19% slower with AI and believed they were faster: deciding and checking stay slow, and that is where projects lose time.
 * Without a process, the agent guesses what you did not decide, grows the scope and declares "done" without proof.
 * A minimal process gives the agent a decision in writing, one page per delivery and a check before "done"; too much process fails too, when writing the spec becomes the work.
-* When the process runs on documents an agent reads, the project answers the whole team, and that is the gain this book is written for.
+* Write each decision where an agent reads it, and ask the project before you ask a colleague.
 
 [^lemonis-3ps]: Marcus Lemonis Business Team, "3 Key To Business Success: People, Process & Product", accessed 2026-09-28. <https://marcuslemonis.com/business/3ps-of-business>
 [^metr-2025]: METR, "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity", 2025. <https://arxiv.org/abs/2507.09089>

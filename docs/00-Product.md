@@ -73,7 +73,7 @@ Every decision must answer yes to all of these:
 4. Would the text be safe if the private case it draws on were read by its owner's competitor?
 5. Can a reader who has read only the previous chapters follow it?
 6. Are both editions updated in this delivery?
-7. Does the chapter say what the team or the project gains, with a number or a sourced claim, or say in one sentence that it has none?
+7. Does the chapter say once what the team or the project gains, with its number or a sourced claim where the book has one? (The prologue says once that no study in the book measures a team with the method against the same team without it.)
 
 ## Open decisions
 

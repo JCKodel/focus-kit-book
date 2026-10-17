@@ -103,13 +103,11 @@ What the proposal itself lost with no queue line and no page to carry its findin
 The whole team on one process, where each person knows which part is theirs and every decision is on a page anyone can read.
 And a pilot that measures itself: one milestone gives a token count per delivery and a list of what was caught.
 On Case A the process caught four problems outside the code: a baseline that did not match the build, an impossible request, a permission failure on a clean install, and a secret in the package.
-There is no outside number to compare adoption against; the pilot's own milestone is the baseline.
 
 ## Key points
 
 * Without a shared process each person uses AI their own way, at a cost nobody sees, and the loudest opinion decides.
 * Answer "my way works" by asking for its evidence, "too much process" with the governor, and "we already have a tool" with the fact that the method is documents any host reads.
-* On Case A the process caught a baseline that did not match the build, an impossible request, a failure hidden by the development environment, and a secret in the package.
 * Whoever owns the decision proposes, a developer's session applies, a person always commits, and the team reviews the milestone.
 * Start with one milestone of three to eight lines, measure tokens per delivery and what was caught, then decide.
 

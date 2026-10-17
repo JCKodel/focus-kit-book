@@ -89,14 +89,10 @@ In focus-kit, `/propose` writes that page ([chapter 12](12-propose.md)) and `/ap
 
 ## What the team gains
 
-Decisions survive the session.
-What the team decided is in files that every session loads whole, near the start of the window, so it cannot fall into the middle of a long conversation or out of a summary.
-A person who joins the project reads the same files the agent reads, and gets the same answer.
-
-The same holds for the work itself.
-In focus-kit every delivery has a page that records why it was made, what "done" meant, and, once built, what was done and how; the page is committed with the code it describes.
-Everything the project did, and how, is written and versioned next to the code, so someone new to the project, a developer or a manager, asks the agent a question about it and gets an answer read from those pages, not from a colleague's memory.
-There is no measure of this gain in this book; the evidence is the loss it avoids, which the studies above measured.
+Decisions survive the session: what the team decided is in files that every session loads whole, near the start of the window, so it cannot fall into the middle of a long conversation or out of a summary.
+The work survives too: in focus-kit every delivery has a page, committed with the code it describes, that records why it was made, what "done" meant and, once built, what was done and how.
+So a person new to the project, a developer or a manager, reads the same files the agent reads, asks the agent about the project and gets an answer read from those pages, not from a colleague's memory.
+The evidence is the loss this avoids, which the studies above measured.
 
 ## Key points
 
@@ -104,7 +100,7 @@ There is no measure of this gain in this book; the evidence is the loss it avoid
 * The context window is everything the model sees in one call: the host's instructions, the rules file, the files read, tool output and the conversation so far, measured in tokens, up to a limit.
 * More context means less accuracy: information in the middle of a long input is used worst, reliability falls as the input grows, and compaction replaces the conversation with a summary that can drop a detail that mattered.
 * Keep decisions in files read at the start of every session, and give each delivery a fresh session, with deciding apart from building.
-* Every delivery's page, why, what "done" meant and what was done, is versioned with its code, so anyone new asks the agent about the project and gets an answer read from the pages.
+* Commit each delivery's page with its code, and ask the agent, not a colleague, what the project did and why.
 
 [^messages-api]: Anthropic, "Using the Messages API", accessed 2026-09-25. <https://platform.claude.com/docs/en/build-with-claude/working-with-messages>
 [^liu-2024]: Liu et al., "Lost in the Middle: How Language Models Use Long Contexts", 2024. <https://arxiv.org/abs/2307.03172>

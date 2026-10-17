@@ -102,8 +102,7 @@ On Ninjobs it is 43.1 million tokens per delivery.
 ## Key points
 
 * A host bills four kinds of token: input, cache write, cache read and output; a cache read costs a fraction of an input token, because the host re-sends the same context on every call.
-* On Ninjobs one delivery cost 43.1 M tokens, nearly all of them cache reads.
-* Cache reads are counted apart because they measure how much context each call carried, and that is what the page, a fresh session per delivery and one-sentence queue lines keep small.
+* Cache reads, nearly all of a delivery's tokens on Ninjobs, are counted apart because they measure how much context each call carried, and that is what the page, a fresh session per delivery and one-sentence queue lines keep small.
 * An agent pays where the decision is written and the check is mechanical, pays less where the decision is still being made, and does not pay on a stack it has not seen.
 * Measure tokens per delivery on your own project for one milestone, from the host's logs, and compare milestones, not vendors.
 

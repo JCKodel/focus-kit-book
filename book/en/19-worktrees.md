@@ -256,7 +256,7 @@ This book, written and reviewed by one person in shared files, stays on trunk fo
 ## What the team gains
 
 Two agents build at once, and each delivery still lands as one change that reverts alone: one commit in one folder, one merge from a worktree.
-I measured it once, in worktrees on a small TypeScript project of mine: two deliveries built at the same time took 155 seconds from the first start to the last end, against 277.2 seconds of the agents' work added up, at the cost of 155 MB of `node_modules` per worktree, two test runs that collided once on a shared port, and the queue's conflict at the merge.[^parallel-run]
+I measured it once, in worktrees on a small TypeScript project of mine: two deliveries built at the same time took 155 seconds from the first start to the last end, against 277.2 seconds of the agents' work added up, at the cost of a `node_modules` folder in each worktree, two test runs that collided once on a shared port, and the queue's conflict at the merge.[^parallel-run]
 The gain holds while the deliveries' files do not meet, and it ends at the speed of the person who reviews and commits them.
 
 ## Key points

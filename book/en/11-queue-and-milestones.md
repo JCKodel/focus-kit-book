@@ -162,17 +162,10 @@ The queue is the team's shared status board and its history in one file: what is
 On Ninjobs it held 102 deliveries, done and not yet done alike, in one file.
 On Case A, a client project on a low-code platform, Microsoft Power Apps with Copilot Studio, the status report and the risk estimate for the project manager were written from the queue and the pages, not from memory ([chapter 17](17-project-as-assistant.md)).
 
-Three rules of the queue each prevent an error.
-The order is the priority, written down: without it, a team looks for a way to rank its deliveries, and with it the queue already is the ranking.
-Code changes only inside `/apply`: without that rule, an agent asked for a correction in an ordinary session edits the code directly, with no line in the queue, no page and no verify; with it, a change asked outside `/apply` costs one line, and it gets a page, a proof and the person's commit.
-A line holds one sentence: when the detail of a request has nowhere to go but the line, the lines grow and every session reads them; with one sentence, the detail goes to the page, or to its draft until `/propose` writes it.
-
 ## Key points
 
 * docs/06 holds milestones, each with a paragraph, and one line per delivery under it: a mark, a slug, one sentence and its suffixes; what happened goes on the page.
 * A line's mark says where its delivery stands, from `[ ]`, not defined, to `[x]`, done; a line never leaves, so the queue is also the history.
-* A milestone paragraph is a test a person can check against the product, never a theme.
-* Three to eight deliveries, the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone.
-* The order is the priority: the higher line matters more, and moving a line is changing its priority.
-* A dependency known when a line is added is written with it, `· after <slug>`: an order, not a wait, so the line keeps `[ ]`.
+* A milestone paragraph is a test a person can check against the product, never a theme, over three to eight deliveries: the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone.
+* The order is the priority: the higher line matters more, moving a line changes its priority, and a dependency known when a line is added is written with it, `· after <slug>`, an order, not a wait, so the line keeps `[ ]`.
 * No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept; code changes only inside `/apply`, even a five-line change gets its page, and a change asked anywhere else becomes a line, with a draft page for what the line cannot hold, and `/propose` in a fresh session.

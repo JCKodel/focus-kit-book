@@ -256,7 +256,7 @@ Este livro, escrito e revisado por uma pessoa em arquivos compartilhados, fica n
 ## O que o time ganha
 
 Dois agentes constroem ao mesmo tempo, e cada entrega ainda chega como uma mudança que se desfaz sozinha: um commit em uma pasta, um merge a partir de um worktree.
-Eu medi isso uma vez, em worktrees, em um pequeno projeto meu em TypeScript: duas entregas construídas ao mesmo tempo levaram 155 segundos do primeiro início ao último fim, contra 277,2 segundos de trabalho dos agentes somados, ao custo de 155 MB de `node_modules` por worktree, duas execuções de teste que colidiram uma vez em uma porta compartilhada, e o conflito da fila no merge.[^parallel-run]
+Eu medi isso uma vez, em worktrees, em um pequeno projeto meu em TypeScript: duas entregas construídas ao mesmo tempo levaram 155 segundos do primeiro início ao último fim, contra 277,2 segundos de trabalho dos agentes somados, ao custo de uma pasta `node_modules` em cada worktree, duas execuções de teste que colidiram uma vez em uma porta compartilhada, e o conflito da fila no merge.[^parallel-run]
 O ganho vale enquanto os arquivos das entregas não se encontram, e termina na velocidade da pessoa que as revisa e faz o commit delas.
 
 ## Pontos-chave

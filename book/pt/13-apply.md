@@ -108,6 +108,7 @@ Depois ele dá os seus próximos passos:
 
 E termina, por último, nos ambientes, com uma frase também escrita para este capítulo: "O banco de dados de desenvolvimento já tem a migration desta entrega; o ambiente de staging ainda está na entrega anterior, e `npm run migrate -- staging` o atualiza."
 Se uma sessão termina sem essa frase, ela não terminou como o kit diz; peça a frase a ela.
+Na Ninjobs, uma pessoa que abriu o site publicado achando que ele estava atual, depois de uma sessão que terminou sem essa frase, revisou uma versão que não tinha a entrega.
 
 ## Por que ele para no stage
 
@@ -184,24 +185,14 @@ Se o seu agente responde com linhas de `git commit -m` e nenhum bloco `commit` n
 ## O que o time ganha
 
 Nada é publicado sem uma checagem e uma pessoa: a verificação e a prova conferem a construção, e uma pessoa lê o diff antes de ele existir no histórico.
-O jeito como o `/apply` termina evita dois erros.
-Uma mensagem que vive só no chat, como linhas de `git commit -m`, deixa quem faz o commit depois, em outra janela ou em outra sessão, sem ter de onde começar; o bloco `commit` na página dá esse começo.
-Uma pessoa que abre um site publicado achando que ele está atual, depois de uma sessão que terminou sem dizer que não estava, revisa uma versão que não tem a entrega, como aconteceu na Ninjobs; a última coisa que o `/apply` diz, qual ambiente está em qual versão e o comando que atualiza os outros, evita isso.
-
-E o que divergiu do plano fica escrito onde a próxima pessoa lê.
-Na Ninjobs, a página da entrega que permite a um usuário excluir a própria conta dizia que a tabela que registra uma exclusão pendente não teria regra de escrita nenhuma.
-A construção descobriu que uma tabela sem regra de escrita não aceita escrita de ninguém, nem das funções do próprio banco de dados, então a página registrou o ajuste: nenhum caminho de escrita alcançável pelo cliente, o que o teste das regras de acesso agora prova.
-A decisão e o seu motivo estão na página que a construiu, e o commit que a publicou aponta para lá.
+E o que divergiu do plano fica escrito onde a próxima pessoa lê: na Ninjobs, a página da entrega que permite a um usuário excluir a própria conta dizia que a tabela que registra uma exclusão pendente não teria regra de escrita nenhuma, e a construção descobriu que uma tabela sem regra de escrita não aceita escrita de ninguém, nem das funções do próprio banco de dados.
+Então a página registrou o ajuste, nenhum caminho de escrita alcançável pelo cliente, o que o teste das regras de acesso agora prova, e o commit que a publicou aponta para essa página.
 
 ## Pontos-chave
 
-* O `/apply <slug>` constrói a página em uma sessão nova, e a página é o escopo: nenhuma dependência, camada ou ferramenta que a página não nomeou.
+* O `/apply <slug>` constrói a página em uma sessão nova e segue o docs/05 ao pé da letra: a página é o escopo, sem dependência, camada ou ferramenta que ela não nomeou, e quando a página contradiz um documento ele para e diz qual, sem nunca resolver em silêncio.
 * Ele marca a linha como `[*]` com a sua primeira edição, `[x]` com a última, depois do stage, e `[?]`, com o que ela espera, quando precisa parar.
-* Ele segue o docs/05 ao pé da letra, e quando a página contradiz um documento ele para e diz qual; nunca resolve em silêncio.
 * Verde não é pronto: pronto é a lista inteira, do que aconteceu escrito na página à linha marcada `[x]`.
-* Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado.
-* As últimas palavras dele são os seus próximos passos, cada comando escrito por extenso, e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
-* Revise a mudança em stage contra a página, e peça cada correção na mesma sessão.
-* Essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
-* O agente coloca em stage e sugere a mensagem; a pessoa lê o diff e faz o commit, então nada chega ao histórico sem ser lido, e uma entrega se desfaz em um passo.
+* Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, cada comando escrito por extenso, e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
+* Revise a mudança em stage contra a página, peça cada correção na mesma sessão, e faça você o commit: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
 

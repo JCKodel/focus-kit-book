@@ -125,12 +125,10 @@ The queue also says which lines can run together: without that, a person who wan
 
 ## Key points
 
-* Six marks: `[ ]` not defined, `[~]` being defined, `[>]` defined, `[*]` being built, `[x]` done, `[?]` waiting.
-* A mark changes when the work changes, not when a command ends: `/propose` sets `[~]` and `[>]`, `/apply` sets `[*]` and `[x]`, any session sets `[?]`.
+* Six marks, `[ ]` not defined, `[~]` being defined, `[>]` defined, `[*]` being built, `[x]` done, `[?]` waiting, each changed when the work changes, not when a command ends: `/propose` sets `[~]` and `[>]`, `/apply` sets `[*]` and `[x]`, any session sets `[?]`.
 * A line is free when it is not `[x]` nor `[?]` and every line its `after` names is `[x]`; the next delivery is the first free line no session holds, and free lines that touch different files can run at the same time.
 * `· after` is an order written with the line, which keeps its mark; `[?]` with `· blocked: after` is a wait found after work started.
-* A line waits when the person says so, when an answer was asked and not given, or when work already started finds another line must be done first; at the end go the phase to resume and the reason, `· resume: apply · blocked: after <slug>`.
-* A line leaves `[?]` when the reason is resolved, by its resume phase; `/propose` and `/apply` stop on a `[?]` line, or one not free, until it is.
+* A line waits when the person says so, when an answer was asked and not given, or when work already started finds another line must be done first, with the phase to resume and the reason at its end, `· resume: apply · blocked: after <slug>`; it leaves `[?]` by that phase when the reason is resolved, and until then `/propose` and `/apply` stop on it, as on a line not free.
 * The queue is a kanban board, a column per mark; on three columns, Doing holds `[~]`, `[>]` and `[*]`, and a `[?]` card is tagged blocked where it was.
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", accessed 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>

@@ -174,16 +174,7 @@ Este livro, escrito e revisado por uma pessoa, está no trunk.
 ## O que o time ganha
 
 Cada entrega chega como um commit no trunk ou um merge nos outros casos, com a sua página ao lado do seu código, então desfazer uma entrega é um comando, e ler por que uma linha mudou é um commit que guarda tanto a mudança quanto a decisão.
-A evidência é o próprio histórico, o log da biblioteca de empréstimos mostrado antes neste capítulo:
-
-```text
-a41c9e2 Permite devolver um exemplar (devolver-livro)
-7d03b18 Empresta um exemplar, e recusa pelas regras (emprestar-livro)
-2f6e5a1 Início: documentos e primeiro marco
-```
-
-Ele se lê como a lista do que os usuários conseguem fazer, uma linha por entrega e um `git revert` por linha, e uma pessoa que nunca abre o código consegue acompanhá-lo.
-Não há número para este ganho: ele é uma propriedade da forma do histórico, e nenhuma medição foi feita.
+A evidência é o próprio histórico: o log da biblioteca de empréstimos, mostrado antes neste capítulo, se lê como a lista do que os usuários conseguem fazer, uma linha por entrega e um `git revert` por linha, e uma pessoa que nunca abre o código consegue acompanhá-lo.
 
 ## Pontos-chave
 

@@ -155,7 +155,6 @@ O arquivo de setup escreve os arquivos de todos os hosts, seja qual for o host q
 ## O que o time ganha
 
 Um repositório abre pronto em qualquer host, então cada pessoa fica com o host que prefere e o time ainda compartilha um processo, e trocar de host não muda nada no projeto.
-Não há número para esse ganho: é uma propriedade de arquivos simples.
 
 Uma atualização nunca reescreve as regras que o time escreveu.
 Uma versão que pede uma mudança nos documentos do projeto chega ao projeto como uma lista do que mudar e onde, com as regras do próprio time ainda no lugar, e o time a aplica como aplica qualquer mudança.

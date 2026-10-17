@@ -93,5 +93,5 @@ Case B shows what a page would have saved: its analysis had none, and at least o
 * For a document, Behaviour is what its reader can do, the Contract is its structure, and Done when is a checklist a person ticks.
 * A question to a person is a delivery too, done when the answer arrives.
 * A database rule is a delivery with a test, enforced where every client meets it.
-* A finding with no line gets lost: Case B's analysis was right, and at least one of its faults survived into the next version.
+* Give every finding a line, or it gets lost.
 

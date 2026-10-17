@@ -102,7 +102,6 @@ Oito linhas teriam sido oito páginas, cada uma pequena o bastante para ser lida
 
 Um teste à mão do produto inteiro vê o que a checagem de nenhuma entrega sozinha consegue ver: uma cláusula que nenhuma entrega assumiu, um passo que falha quando as entregas rodam juntas, encontrados do jeito que um usuário vai encontrá-los, antes dos usuários.
 A leitura do código inteiro soma o que nenhum teste à mão consegue ver, o tipo de falha que a revisão na abertura da Ninjobs achou.
-Esse ganho não tem número neste livro.
 E como cada achado vira uma linha, o time vê o custo das brechas do marco na fila, ao lado de tudo o que planeja, e não em correções que ninguém revisou.
 
 ## Pontos-chave
