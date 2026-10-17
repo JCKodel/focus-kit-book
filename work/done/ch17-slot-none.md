@@ -37,13 +37,39 @@ The finding was re-checked, not taken on trust: chapter 17 line 20 (en and pt) e
 
 **Done when.**
 
-* [ ] Chapter 17 changed in both editions, same headings; it still opens with its value; no filler and nothing useful cut.
-* [ ] No sentence of chapter 17 in either edition puts `none` as a value of `<base>`; the none case is said once, in the paragraph on a host with no such review, and says no deep review is launched.
-* [ ] `make verify` green; `make book` builds and both PDF paths are given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, the commit suggested in a `commit` block.
+* [x] Chapter 17 changed in both editions, same headings; it still opens with its value; no filler and nothing useful cut.
+* [x] No sentence of chapter 17 in either edition puts `none` as a value of `<base>`; the none case is said once, in the paragraph on a host with no such review, and says no deep review is launched.
+* [x] `make verify` green; `make book` builds and both PDF paths are given to the author.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, the commit suggested in a `commit` block.
 
 **Decisions in the review.**
 
 * The sentence is split at the semicolon so that `none` appears only in the later paragraph, which already owns the case: docs/04's No filler and the author's "say once" rule for the book. Chosen alone.
 * The base commit stays named by the page whatever the slot says, reading the queue line's "apart from the base commit" and docs/05 §8, which names the commit without conditioning it on the slot. Chosen alone; docs/05 §8.
 * "launches no deep review" added to the none paragraph because the queue line asks the chapter to say it. Chosen alone, from the queue line.
+
+**Decisions in /apply.** Chosen alone, under the batch's rule; corrections go in the review.
+
+* The Contract's two sentences are taken as written, in both editions; each was found by its words, at the lines the page names (en 20 and 56, pt 20 and 57).
+* No dependent queue line waits on this one; docs/03, docs/04 and docs/05 untouched, as the Contract says.
+
+**What happened.**
+
+* `book/en/17-closing-a-milestone.md` and `book/pt/17-closing-a-milestone.md`, §The review is a delivery: the page names the base commit, and the person launches the deep review against it when the Milestone review slot names one; `none` is no longer read as a value of `<base>`.
+* The paragraph on a host with no such review says the slot's none launches no deep review, and the hand test still runs.
+* Headings, opening, gain and key points unchanged. No divergence from the Contract.
+
+**Proof.**
+
+* `grep -n "none\|nenhuma" book/*/17-closing-a-milestone.md` shows the slot's none once per edition, in the paragraph on a host with no such review (en 56, pt 57); no sentence attaches it to `<base>`.
+* `make verify` green, disclosure scan included; `make book` built both editions, and the PDFs are `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+```commit
+docs(ch17-slot-none): chapter 17 says a slot of none launches no review
+
+- ch17: the page names the base commit; the slot's review is launched against it
+- ch17: a slot of none launches no deep review, said once
+- both editions
+
+work/done/ch17-slot-none.md
+```

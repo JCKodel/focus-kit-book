@@ -17,7 +17,7 @@ A milestone is planned with its review as its last line, `<milestone>-review`, a
 Its page takes the milestone's paragraph clause by clause and writes, for each, which delivery answers it and how a person tests it.
 It fixes nothing.
 The review also reads the code, the one look at the whole instead of a delivery, because every page can be right and the whole wrong.
-Its page names the commit that closed the previous milestone, or the project's first commit for a first milestone, and the person launches against it the deep review that docs/05's Milestone review slot names, such as Claude Code's `/code-review ultra <base>`, where `<base>` is that commit, or none when the slot says so.
+Its page names the commit that closed the previous milestone, or the project's first commit for a first milestone; when docs/05's Milestone review slot names a deep review, such as Claude Code's `/code-review ultra <base>`, the person launches it against that commit, which is `<base>`.
 The agent may say it is time, and never launches it.
 Each delivery's code is still read where its change is small enough to read: in the staged change before its commit (chapter 15), and in the pull request, when the team lands its deliveries through one (chapter 22).
 
@@ -53,7 +53,7 @@ Milestone review: /code-review ultra <base>
 ```
 
 The person launches it once, at the milestone's close, against the commit the review's page names.
-A project whose host offers no such review writes none in the slot, the hand test still runs, and nothing else in this chapter changes for it.
+A project whose host offers no such review writes none in the slot and launches no deep review; the hand test still runs, and nothing else in this chapter changes for it.
 A finding the code review confirms is a finding like the others, a `[ ]` line under the review line; one it does not confirm is not a finding.
 
 ## A line, and not a fix

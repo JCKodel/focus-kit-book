@@ -17,7 +17,7 @@ Um marco é planejado com a sua revisão como a última linha, `<milestone>-revi
 A página dela pega o parágrafo do marco cláusula por cláusula e escreve, para cada uma, qual entrega a atende e como uma pessoa a testa.
 Ela não corrige nada.
 A revisão também lê o código, o único olhar sobre o todo em vez de sobre uma entrega, porque cada página pode estar certa e o todo errado.
-A página dela cita o commit que fechou o marco anterior, ou o primeiro commit do projeto para um primeiro marco, e a pessoa lança contra ele a revisão profunda do código que o slot Milestone review (revisão de marco) do docs/05 cita, como o `/code-review ultra <base>` do Claude Code, onde `<base>` é esse commit, ou nenhuma quando o slot diz isso.
+A página dela cita o commit que fechou o marco anterior, ou o primeiro commit do projeto para um primeiro marco; quando o slot Milestone review (revisão de marco) do docs/05 cita uma revisão profunda do código, como o `/code-review ultra <base>` do Claude Code, a pessoa a lança contra esse commit, que é o `<base>`.
 O agente pode dizer que chegou a hora, e nunca a lança.
 O código de cada entrega continua sendo lido onde a sua mudança é pequena o bastante para ser lida: na mudança em stage antes do seu commit (capítulo 15), e no pull request, quando o time integra as suas entregas por um (capítulo 22).
 
@@ -54,7 +54,7 @@ Milestone review: /code-review ultra <base>
 ```
 
 A pessoa a lança uma vez, no fechamento do marco, contra o commit que a página da revisão cita.
-Um projeto cujo host não oferece uma revisão assim escreve none (nenhuma) no slot, o teste à mão continua rodando, e nada mais neste capítulo muda para ele.
+Um projeto cujo host não oferece uma revisão assim escreve none (nenhuma) no slot e não lança revisão profunda; o teste à mão continua rodando, e nada mais neste capítulo muda para ele.
 Um achado que a revisão do código confirma é um achado como os outros, uma linha `[ ]` sob a linha da revisão; um que ela não confirma não é um achado.
 
 ## Uma linha, e não uma correção
