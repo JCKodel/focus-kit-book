@@ -53,7 +53,7 @@ In the lending library it is read once, where the request arrives, and passed on
 ## One rule through its tests
 
 The rule: a member with an overdue book cannot borrow another.
-It lives in the use case `lend` of [chapter 3](03-simplicity-and-results.md), and each piece it crosses has a test.
+It lives in the use case `lend` of [chapter 4](04-focus.md), and each piece it crosses has a test.
 
 Kent Beck's test-driven development writes the test before the code, in a cycle of three steps: red, the test fails because the code does not exist yet; green, the smallest code that makes it pass; then clean up, with the test still green.[^beck-tdd]
 A pure rule is the easiest place to do it, because its test is a call with data: run the first test below before `lend` exists and it is red, write `lend` and it is green.

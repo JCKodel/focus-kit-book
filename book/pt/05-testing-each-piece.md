@@ -53,7 +53,7 @@ Na biblioteca, ele é lido uma vez, onde a requisição chega, e repassado como 
 ## Uma regra pelos testes dela
 
 A regra: um membro com um livro atrasado não pode pegar outro emprestado.
-Ela mora no caso de uso `emprestar` do [capítulo 3](03-simplicity-and-results.md), e cada peça que ela atravessa tem um teste.
+Ela mora no caso de uso `emprestar` do [capítulo 4](04-focus.md), e cada peça que ela atravessa tem um teste.
 
 O desenvolvimento guiado por testes de Kent Beck escreve o teste antes do código, em um ciclo de três passos: vermelho, o teste falha porque o código ainda não existe; verde, o menor código que o faz passar; depois a limpeza, com o teste ainda verde.[^beck-tdd]
 Uma regra pura é o lugar mais fácil de fazer isso, porque o teste dela é uma chamada com dados: rode o primeiro teste abaixo antes de `emprestar` existir e ele está vermelho, escreva `emprestar` e ele está verde.
