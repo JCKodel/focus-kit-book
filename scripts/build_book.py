@@ -5,6 +5,8 @@ The PDF opens on the edition's cover, book/assets/cover-<edition>.pdf (A5, one p
 the EPUB carries book/assets/cover-<edition>.png as its cover image.
 Prints the path of each file it writes.
 An error prints as `file:line: book: message`, or `Makefile:1: book: message` when it names no file, and exits 1.
+A link to a heading that does not exist, or any other weasyprint `ERROR:`, is found in each edition;
+both are built, then the findings print and the exit is 1.
 """
 
 import html
@@ -17,7 +19,7 @@ import tempfile
 from html.parser import HTMLParser
 from pathlib import Path
 
-from markdown import front_matter, mask
+from markdown import NOTE_DEFINITION, NOTE_MENTION, front_matter, mask
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "output"
@@ -36,6 +38,10 @@ YAML_FIELD = re.compile(r"^(\s*)(site_author|copyright|draft_banner):\s*(.*)$")
 LOCALE = re.compile(r"^(\s*)- locale:\s*(\S+)")
 CHAPTER_LINK = re.compile(r"\]\(((?:[0-9]{2}|A[0-9]+)-[^)#\s]+\.md)(\s+\"[^\"]*\")?\)")
 PANDOC_PLACE = re.compile(r"\"([^\"]+)\" \(line (\d+), column \d+\)")
+# weasyprint names a link it cannot place by pandoc's id: the target's file without its leading digits, `__`, the anchor.
+NO_ANCHOR = re.compile(r"^ERROR: No anchor #(.+?)__(\S+) for internal URI reference")
+HEADING_LINK = re.compile(r"\]\(<?([^)#\s>]*)#([^)\s>]+)(?=[)\s>])")
+APPENDIX = re.compile(r"A([0-9]+)-")
 # The patterns below read the HTML pandoc writes with --wrap=none: one block per line, a tag never broken.
 CHAPTER_START = re.compile(r'(?=<h1 id=")')
 OPENING = re.compile(r'<h1 id="([^"]+)">(.*?)</h1>\n(<p>.*?</p>\n)?', re.S)
@@ -46,8 +52,6 @@ NOTE = re.compile(r'<li id="(fn\d+)">(.*?)</li>', re.S)
 NOTE_PARAGRAPH = re.compile(r"<p>(.*?)</p>", re.S)
 NOTE_BACK = re.compile(r'<a href="#fnref\d+" class="footnote-back"[^>]*>[^<]*</a>')
 NOTE_CALL = re.compile(r'<a href="#(fn\d+)" class="footnote-ref" id="fnref\d+"[^>]*><sup>\d+</sup></a>')
-NOTE_REF = re.compile(r"\[\^([a-z0-9-]+)\](?!:)")
-NOTE_DEFINITION = re.compile(r"^\[\^([a-z0-9-]+)\]: ")
 
 
 class Failed(Exception):
@@ -137,7 +141,9 @@ def index_values(edition):
 def chapters(edition):
     folder = ROOT / "book" / edition
     numbered = sorted(folder.glob("[0-9][0-9]-*.md"))
-    appendices = sorted(folder.glob("A[0-9]*-*.md"))
+    appendices = sorted(
+        folder.glob("A[0-9]*-*.md"), key=lambda path: (int(APPENDIX.match(path.name).group(1)), path.name)
+    )
     return numbered + appendices
 
 
@@ -156,7 +162,7 @@ def prepare(source, names, banner):
 
     The front matter goes; a draft gets the banner after its H1; the H1 gets the id `anchor`;
     a link to another chapter of the book without #anchor points to that id.
-    A note keeps its first mention; every later mention of its key becomes a link to that note,
+    A note keeps its first mention; every later mention of its key, whatever the key, becomes a link to that note,
     showing its number, since pandoc prints one note per mention. Notes number from 1 per chapter.
     """
     text = source.read_text(encoding="utf-8")
@@ -171,9 +177,12 @@ def prepare(source, names, banner):
         # Edits as (start, end, text) on the columns of seen, applied from the right so none shifts another.
         edits = []
         definition = NOTE_DEFINITION.match(seen)
+        start = definition.end() if definition else 0
         if definition:
-            edits.append((definition.end(), definition.end(), f"[]{{#{note_anchor(source.name, definition.group(1))}}}"))
-        for match in NOTE_REF.finditer(seen):
+            # The id goes after the colon and the spaces that follow it, where the note's text starts.
+            place = re.compile(r" *").match(seen, start).end()
+            edits.append((place, place, f"[]{{#{note_anchor(source.name, definition.group(1))}}}"))
+        for match in NOTE_MENTION.finditer(seen, start):
             key = match.group(1)
             if key in notes:
                 link = f"[^{notes[key]}^](#{note_anchor(source.name, key)}){{.footnote-ref}}"
@@ -259,15 +268,21 @@ def openings(page, settings):
     return page[:first] + contents + page[first:]
 
 
-def run(command, places, cwd=ROOT):
-    """Run pandoc or weasyprint; print its warnings as findings, and on failure raise Failed with one finding."""
+def run(command, places, cwd=ROOT, errors=False):
+    """Run pandoc or weasyprint; print its warnings as findings, and on failure raise Failed with one finding.
+
+    With errors, its `ERROR:` lines are returned instead of printed: weasyprint logs what it could not do and exits 0.
+    """
     done = subprocess.run(command, cwd=cwd, capture_output=True, text=True)
     messages = [line.strip() for line in done.stderr.splitlines() if line.strip()]
     if done.returncode != 0:
         message = " ".join(messages) or f"{command[0]} exited with {done.returncode}"
         raise Failed(finding(message, places))
+    failed = [message for message in messages if errors and message.startswith("ERROR:")]
     for message in messages:
-        print(finding(message, places))
+        if message not in failed:
+            print(finding(message, places))
+    return failed
 
 
 def finding(message, places):
@@ -283,6 +298,27 @@ def finding(message, places):
         text = (message[:match.start()].rstrip().removesuffix(" at") + message[match.end():]).strip()
         return f"{source}:{number}: book: {text}"
     return f"Makefile:1: book: {message}"
+
+
+def located(error, sources):
+    """The findings of one weasyprint `ERROR:` line.
+
+    A link it cannot place is found at each chapter line holding it, `<target>#<anchor>` as written;
+    any other error, or a link found in no chapter, is `Makefile:1: book: <error>`.
+    """
+    missing = NO_ANCHOR.match(error)
+    found = []
+    if missing:
+        name, wanted = missing.group(1).lower(), missing.group(2)
+        for source in sources:
+            lines = mask(source.read_text(encoding="utf-8"), keep_targets=True)
+            for number, line in enumerate(lines, 1):
+                for link in HEADING_LINK.finditer(line):
+                    target, anchor = link.groups()
+                    line_found = f"{source.relative_to(ROOT)}:{number}: book: {target}#{anchor} names no heading"
+                    if anchor == wanted and target and target.lower().endswith(name) and line_found not in found:
+                        found.append(line_found)
+    return found or [f"Makefile:1: book: {error}"]
 
 
 def build(edition, site, work):
@@ -326,8 +362,12 @@ def build(edition, site, work):
     text = openings(notes_at_foot(page.read_text(encoding="utf-8")), settings)
     page.write_text(text, encoding="utf-8")
     body = work / "body.pdf"
-    run(["weasyprint", "--base-url", str(ROOT / "book" / edition) + "/", str(page), str(body)], places)
+    errors = run(["weasyprint", "--base-url", str(ROOT / "book" / edition) + "/", str(page), str(body)], places, errors=True)
+    problems = []
+    for error in errors:
+        problems += [line for line in located(error, sources) if line not in problems]
     long_contents = contents_on_one_page(edition, body)
+    problems += [long_contents] if long_contents else []
     pdf = OUTPUT / f"{settings['name']}.pdf"
     with_cover(edition, body, pdf)
 
@@ -341,7 +381,7 @@ def build(edition, site, work):
          "-o", str(epub)],
         places, work,
     )
-    return [pdf, epub], long_contents
+    return [pdf, epub], problems
 
 
 def cover(edition, suffix):
@@ -355,7 +395,7 @@ def cover(edition, suffix):
 def contents_on_one_page(edition, body):
     """The finding when the rendered contents runs past one page before the first chapter's opening, or None.
 
-    It is returned, not raised, so both editions are built and both report.
+    It is returned, not raised, so both editions are built and both report, as weasyprint's errors are.
     """
     from pypdf import PdfReader
 
@@ -395,17 +435,17 @@ def main():
     try:
         site = site_values()
         OUTPUT.mkdir(exist_ok=True)
-        written, long_contents = [], []
+        written, problems = [], []
         for edition in EDITIONS:
             with tempfile.TemporaryDirectory() as work:
-                files, problem = build(edition, site, Path(work))
+                files, found = build(edition, site, Path(work))
             written += files
-            long_contents += [problem] if problem else []
+            problems += found
     except Failed as failure:
         print(failure)
         return 1
-    if long_contents:
-        print("\n".join(long_contents))
+    if problems:
+        print("\n".join(problems))
         return 1
     for path in written:
         print(path.relative_to(ROOT))
