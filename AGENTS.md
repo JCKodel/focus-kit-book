@@ -25,7 +25,7 @@ A free, bilingual book that teaches a team the engineering practices behind the 
 ## Do not rebuild
 - A GitHub wiki, written or mirrored (ADR-0001).
 - Code examples in several languages (ADR-0008).
-- A link shortener or playground server for snippets; the guided project's tags do that (docs/01).
+- A link shortener or playground server for snippets: the examples are short and live in the chapter (ADR-0017).
 - A guided project, a brownfield project, chapter tags or exercises (ADR-0017).
 
 ## How to work

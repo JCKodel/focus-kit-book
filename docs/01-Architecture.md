@@ -52,7 +52,9 @@ LICENSE-TEXT             CC BY-SA 4.0 legal code: the book, docs/, work/, the RE
 .venv/                   created by make from requirements.txt; .venv/.installed marks a finished install; ignored
 site/                    the built site; ignored
 output/                  PDF and EPUB; ignored
+context/                 not created; listed in `.gitignore` so private notes never enter, docs/05 §5
 __pycache__/             written by Python when a check imports a module of scripts/; ignored
+.DS_Store                macOS folder metadata, in any folder; ignored
 ```
 
 | Target | Does |
@@ -69,8 +71,6 @@ __pycache__/             written by Python when a check imports a module of scri
 The navigation comes from the file names in `NN-` order, with each chapter's H1 as its title.
 
 The file name of a chapter is the same in both editions, so parity is checked by name.
-Code of the guided project lives in its own repository, `JCKodel/focus-kit-clinic` (ADR-0008); the book shows it by quoting a file at a chapter tag, `https://github.com/JCKodel/focus-kit-clinic/blob/book-v1/<chapter-slug>/<path>`, never by keeping a copy here.
-Code of the brownfield project lives in the fork `JCKodel/clahub`; the book quotes the project as upstream left it at tag `book-v1`, and what a chapter added at its chapter tag, `https://github.com/JCKodel/clahub/blob/book-v1-<chapter-slug>/<path>` (`book-v1-analyze` first), never copies it (ADR-0009).
 
 ## Data
 
@@ -99,5 +99,6 @@ MkDocs has its own message format, so `scripts/build.py` rewrites each warning a
 
 * A GitHub wiki, as the book or as a mirror (ADR-0001).
 * Code examples in many languages (ADR-0008).
-* A link shortener or playground server for code snippets: the guided project's tagged repository does that job.
+* A link shortener or playground server for code snippets: the examples are short, written for the chapter and shown in it (ADR-0017).
+* A guided project and a brownfield project, each in its own repository with a tag per chapter (ADR-0008, ADR-0009, retired by ADR-0017; the repositories and tags stay, cited by no chapter, docs/05 §5).
 * Reusing text from the author's earlier books (ADR-0005).
