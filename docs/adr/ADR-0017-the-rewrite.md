@@ -35,3 +35,7 @@ The prologue names it where it asks the person to trust no one blindly, and its 
 ## Amendment, 2026-10-05 (queue-states)
 
 Chapters 16 to 25 became 17 to 26 when `queue-states` inserted chapter 16, "The queue while it happens", in Part II; pages in `work/done/` and earlier ADRs keep the old numbers as history.
+
+## Amendment, 2026-10-16 (renumber-chapters)
+
+The chapters were renumbered 1 to 24 when the prologue absorbed chapter 1, chapters 4 and 5 and chapters 6 and 7 merged, and the quick guide was inserted after chapter 12; the map, old to new, is in `work/done/renumber-chapters.md`, and pages in `work/done/`, docs/06 and earlier ADRs keep the old numbers as history.

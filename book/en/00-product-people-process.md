@@ -34,7 +34,7 @@ Along the way they lose sight of what matters, the product being built.
 The code is compiled and its users never see it; only the product exists, and everything is judged by it.
 That does not make code irrelevant.
 Part I organizes code because a clear structure serves the product and the agent that changes it: architecture is worth what it gives them, and is never an end in itself.
-The product itself is written down, in a document that the team and the agent read before they act, and chapter 10 shows that document and the others that go with it.
+The product itself is written down, in a document that the team and the agent read before they act, and chapter 7 shows that document and the others that go with it.
 
 ### People
 
@@ -42,7 +42,7 @@ People, and now agents, are the most important part of a company and the most fr
 Three fragilities repeat.
 
 **Knowledge held by a few.**
-When what a project knows lives in a few heads, it leaves when they leave, and it never reaches an agent, which knows nothing at the start of a session, as chapter 2 explains.
+When what a project knows lives in a few heads, it leaves when they leave, and it never reaches an agent, which knows nothing at the start of a session, as chapter 1 explains.
 The answer is documents: what the project knows is written where a person and an agent both read it.
 
 **Opinion in place of evidence.**
@@ -52,18 +52,18 @@ The answer is to cite it: every number and every claim carries its source, as ev
 **Ego.**
 The author of a piece of work defends it because it is theirs, whether that author is a colleague, an agent or you.
 The answer is a role: the person interprets, guides and validates, and trusts no one blindly, agent or colleague, the author of the code included.
-Validating includes asking for more: an agent's first answer is rarely the best it can give, and it does not offer what you did not ask for; chapter 26, in Part V, shows how to ask.
+Validating includes asking for more: an agent's first answer is rarely the best it can give, and it does not offer what you did not ask for; chapter 24, in Part V, shows how to ask.
 
 ### Process
 
 No software engineering survives without a process: when each person does things their own way, the result is chaos.
 A process is followed because each step has a purpose, and the purpose is also the test.
-A step that catches no concrete error leaves the process, a rule chapter 18 turns into a question, and too much process fails as surely as too little: every document is one more thing to write, read and keep true.
-On Ninjobs (<https://www.ninjobs.app>), my own product, writing the spec became the work; [chapter 3](03-spec-driven.md) counts it and [chapter 9](09-birth-of-focus-kit.md) tells the story.
+A step that catches no concrete error leaves the process, a rule chapter 16 turns into a question, and too much process fails as surely as too little: every document is one more thing to write, read and keep true.
+On Ninjobs (<https://www.ninjobs.app>), my own product, writing the spec became the work; [chapter 2](02-spec-driven.md) counts it and [chapter 6](06-birth-of-focus-kit.md) tells the story.
 
 The process this book teaches runs on documents that an agent reads, and that changes who the process serves.
 Once the product, its vocabulary, its decisions and its queue are written where the agent reads them, the agent can answer anyone on the team: what is pending, how it is going, who owes an answer, what was agreed with the client.
-Feed it the emails and the proposals too, and the project becomes an assistant to the whole team, developers and managers alike; chapter 19 shows how.
+Feed it the emails and the proposals too, and the project becomes an assistant to the whole team, developers and managers alike; chapter 17 shows how.
 
 ## What goes wrong without a process
 
@@ -92,9 +92,9 @@ A minimal process answers each failure with one piece.
   There is less to guess, so it guesses less.
 * **One page per delivery.**
   The page says what enters and what stays out.
-  Work that does not fit one page is two deliveries, and your review stays the size of one page ([chapter 14](14-propose.md)).
+  Work that does not fit one page is two deliveries, and your review stays the size of one page ([chapter 12](12-propose.md)).
 * **A check before "done".**
-  A command that must pass, and proof that the result works, run before anyone calls the work finished ([chapter 15](15-apply.md)).
+  A command that must pass, and proof that the result works, run before anyone calls the work finished ([chapter 13](13-apply.md)).
 
 The method this book teaches, focus-kit, is built on these three pieces, and Part II teaches it.
 
@@ -103,7 +103,7 @@ The method this book teaches, focus-kit, is built on these three pieces, and Par
 The team learns where its time goes: experienced developers measured 19% slower with AI while they believed they were faster,[^metr-2025] so the gain lies in the deciding and the checking, where the three pieces of a minimal process work.
 When the process runs on documents an agent reads, the project answers the whole team, for one developer as for a company, and that is the gain this book is written for.
 This book measures no baseline for the practices of Part I, no team counted before and after adopting them, so their chapters say what each practice prevents, and every number the book gives says where it comes from.
-Ninjobs and Case A, a client project that ran on the process and that chapter 19 tells, live in private repositories, so every number this book gives about them was counted by me over their histories.
+Ninjobs and Case A, a client project that ran on the process and that chapter 17 tells, live in private repositories, so every number this book gives about them was counted by me over their histories.
 Ninjobs appears by name, and Case A without its owner, its client or its business.
 
 Part I is the base, the practices every reader must share before the process, from how an agent sees a project to a test for each piece of code.

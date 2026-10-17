@@ -34,7 +34,7 @@ No caminho, perdem de vista o que importa, o produto que está sendo construído
 O código é compilado e seus usuários nunca o veem; só o produto existe, e tudo é julgado por ele.
 Isso não torna o código irrelevante.
 A Parte I organiza o código porque uma estrutura clara serve ao produto e ao agente que o altera: a arquitetura vale o que dá a eles, e nunca é um fim em si.
-O próprio produto é escrito, num documento que o time e o agente leem antes de agir, e o capítulo 10 mostra esse documento e os outros que o acompanham.
+O próprio produto é escrito, num documento que o time e o agente leem antes de agir, e o capítulo 7 mostra esse documento e os outros que o acompanham.
 
 ### Pessoas
 
@@ -42,7 +42,7 @@ As pessoas, e agora os agentes, são a parte mais importante de uma empresa e a 
 Três fragilidades se repetem.
 
 **Conhecimento nas mãos de poucos.**
-Quando o que um projeto sabe vive em poucas cabeças, vai embora quando elas vão, e nunca chega a um agente, que não sabe nada no início de uma sessão, como o capítulo 2 explica.
+Quando o que um projeto sabe vive em poucas cabeças, vai embora quando elas vão, e nunca chega a um agente, que não sabe nada no início de uma sessão, como o capítulo 1 explica.
 A resposta são documentos: o que o projeto sabe fica escrito num lugar onde uma pessoa e um agente leem igualmente.
 
 **Opinião no lugar de evidência.**
@@ -52,18 +52,18 @@ A resposta é citá-la: todo número e toda afirmação levam sua fonte, como to
 **Ego.**
 O autor de um trabalho o defende porque é dele, seja esse autor um colega, um agente ou você.
 A resposta é um papel: a pessoa interpreta, orienta e valida, e não confia cegamente em ninguém, agente ou colega, incluindo o autor do código.
-Validar inclui pedir mais: a primeira resposta de um agente raramente é a melhor que ele pode dar, e ele não oferece o que você não pediu; o capítulo 26, na Parte V, mostra como pedir.
+Validar inclui pedir mais: a primeira resposta de um agente raramente é a melhor que ele pode dar, e ele não oferece o que você não pediu; o capítulo 24, na Parte V, mostra como pedir.
 
 ### Processo
 
 Nenhuma engenharia de software sobrevive sem um processo: quando cada pessoa faz as coisas do seu jeito, o resultado é o caos.
 Um processo é seguido porque cada passo tem um propósito, e o propósito é também o teste.
-Um passo que não pega nenhum erro concreto sai do processo, uma regra que o capítulo 18 transforma numa pergunta, e processo demais falha tão certamente quanto processo de menos: cada documento é mais uma coisa para escrever, ler e manter verdadeira.
-Na Ninjobs (<https://www.ninjobs.app>), meu próprio produto, escrever a especificação virou o trabalho; o [capítulo 3](03-spec-driven.md) faz a conta e o [capítulo 9](09-birth-of-focus-kit.md) conta a história.
+Um passo que não pega nenhum erro concreto sai do processo, uma regra que o capítulo 16 transforma numa pergunta, e processo demais falha tão certamente quanto processo de menos: cada documento é mais uma coisa para escrever, ler e manter verdadeira.
+Na Ninjobs (<https://www.ninjobs.app>), meu próprio produto, escrever a especificação virou o trabalho; o [capítulo 2](02-spec-driven.md) faz a conta e o [capítulo 6](06-birth-of-focus-kit.md) conta a história.
 
 O processo que este livro ensina roda sobre documentos que um agente lê, e isso muda a quem o processo serve.
 Quando o produto, seu vocabulário, suas decisões e sua fila estão escritos onde o agente os lê, o agente pode responder a qualquer pessoa do time: o que está pendente, como está indo, quem deve uma resposta, o que foi combinado com o cliente.
-Dê a ele também os e-mails e as propostas, e o projeto vira um assistente do time inteiro, desenvolvedores e gestores; o capítulo 19 mostra como.
+Dê a ele também os e-mails e as propostas, e o projeto vira um assistente do time inteiro, desenvolvedores e gestores; o capítulo 17 mostra como.
 
 ## O que dá errado sem processo
 
@@ -92,9 +92,9 @@ Um processo mínimo responde a cada falha com uma peça.
   Há menos a adivinhar, então ele adivinha menos.
 * **Uma página por entrega.**
   A página diz o que entra e o que fica de fora.
-  Trabalho que não cabe numa página são duas entregas, e sua revisão continua do tamanho de uma página ([capítulo 14](14-propose.md)).
+  Trabalho que não cabe numa página são duas entregas, e sua revisão continua do tamanho de uma página ([capítulo 12](12-propose.md)).
 * **Uma verificação antes do "pronto".**
-  Um comando que precisa passar, e uma prova de que o resultado funciona, executados antes que alguém chame o trabalho de concluído ([capítulo 15](15-apply.md)).
+  Um comando que precisa passar, e uma prova de que o resultado funciona, executados antes que alguém chame o trabalho de concluído ([capítulo 13](13-apply.md)).
 
 O método que este livro ensina, o focus-kit, é construído sobre essas três peças, e a Parte II o ensina.
 
@@ -103,7 +103,7 @@ O método que este livro ensina, o focus-kit, é construído sobre essas três p
 O time aprende para onde vai o seu tempo: desenvolvedores experientes mediram-se 19% mais lentos com IA enquanto acreditavam estar mais rápidos,[^metr-2025] então o ganho está em decidir e verificar, onde as três peças de um processo mínimo trabalham.
 Quando o processo roda sobre documentos que um agente lê, o projeto responde ao time inteiro, para um desenvolvedor como para uma empresa, e é para esse ganho que este livro foi escrito.
 Este livro não mede linha de base para as práticas da Parte I, nenhum time contado antes e depois de adotá-las, então os seus capítulos dizem o que cada prática evita, e todo número que o livro dá diz de onde vem.
-A Ninjobs e o Caso A, um projeto de cliente que rodou sobre o processo e que o capítulo 19 conta, vivem em repositórios privados, então todo número que este livro dá sobre eles foi contado por mim ao longo dos seus históricos.
+A Ninjobs e o Caso A, um projeto de cliente que rodou sobre o processo e que o capítulo 17 conta, vivem em repositórios privados, então todo número que este livro dá sobre eles foi contado por mim ao longo dos seus históricos.
 A Ninjobs aparece pelo nome, e o Caso A sem o seu dono, o seu cliente ou o seu negócio.
 
 A Parte I é a base, as práticas que todo leitor precisa compartilhar antes do processo, de como um agente vê um projeto até um teste para cada peça de código.
