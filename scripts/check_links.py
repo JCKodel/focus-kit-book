@@ -27,8 +27,9 @@ USER_AGENT = "focus-kit-book link-check (+https://github.com/JCKodel/focus-kit-b
 TIMEOUT = 15
 WORKERS = 8
 PASSING = (401, 403, 429)
-URL = re.compile(r"https?://[^\s<>\"'`]+")
-TRAILING = ".,;:!?)"
+AUTOLINK = re.compile(r"<(https?://[^\s<>]+)>")
+URL = re.compile(r"https?://[^\s<>\"'`\]\u201c\u201d\u2018\u2019]+")
+TRAILING = ".,;:!?*_~"
 
 
 def site_url():
@@ -46,7 +47,11 @@ def files():
 
 
 def urls_in(line):
-    """Return (column, url) for each URL on the line; a link target keeps its balanced parentheses."""
+    """Return (column, url) for each URL on the line, read as a reader follows it.
+
+    A link target keeps its balanced parentheses and an autolink `<…>` everything inside it; any other
+    URL loses trailing punctuation and emphasis markers, and a trailing `)` that closes no `(` of its own.
+    """
     found = []
     chars = list(line)
     i = line.find("](")
@@ -57,12 +62,25 @@ def urls_in(line):
             found.append((i + 2, target))
             chars[i + 2:end] = " " * (end - i - 2)
         i = line.find("](", end)
-    rest = "".join(chars)
-    for match in URL.finditer(rest):
-        url = match.group(0).rstrip(TRAILING)
+    for match in AUTOLINK.finditer("".join(chars)):
+        found.append((match.start(1), match.group(1)))
+        chars[match.start():match.end()] = " " * (match.end() - match.start())
+    for match in URL.finditer("".join(chars)):
+        url = trimmed(match.group(0))
         if len(url) > len("https://"):
             found.append((match.start(), url))
     return sorted(found)
+
+
+def trimmed(url):
+    """Cut what ends a sentence or an emphasis, and a `)` the URL does not open, until nothing changes."""
+    while True:
+        if url.endswith(tuple(TRAILING)):
+            url = url[:-1]
+        elif url.endswith(")") and url.count(")") > url.count("("):
+            url = url[:-1]
+        else:
+            return url
 
 
 def skipped(url, own):
@@ -114,9 +132,11 @@ def main():
     places = {}
     for path, lines in files():
         for number, line in enumerate(lines, 1):
+            seen = set()
             for column, url in urls_in(line):
-                if skipped(url, own):
+                if skipped(url, own) or url in seen:
                     continue
+                seen.add(url)
                 places.setdefault(url.split("#")[0], []).append((path.as_posix(), number, column, url))
     with ThreadPoolExecutor(max_workers=WORKERS) as pool:
         results = dict(zip(places, pool.map(fetch, places)))
