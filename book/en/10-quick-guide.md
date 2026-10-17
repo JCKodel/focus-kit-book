@@ -9,7 +9,8 @@ You need a git repository, empty or with code, and a host from [chapter 8](08-in
 The kit is installed with the one sentence that chapter gives, said to your agent at the root of the repository:
 
 ```
-Read https://raw.githubusercontent.com/JCKodel/focus-kit/main/SETUP.md and do what it says.
+Read https://raw.githubusercontent.com/JCKodel/focus-kit/main/SETUP.md
+and do what it says.
 ```
 
 The steps are written for Claude Code.

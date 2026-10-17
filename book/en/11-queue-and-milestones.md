@@ -42,8 +42,8 @@ This is the lending library's first milestone some days into the work, written f
 ## Milestone 1: a librarian lends and takes back
 
 When it closes, a librarian can register books, their copies and members,
-lend a copy to a member for 21 days and record its return; a member with an
-overdue book or a suspended membership is refused.
+lend a copy to a member for 21 days and record its return; a member with
+an overdue book or a suspended membership is refused.
 
 ```
 [x] skeleton      empty app and server, npm run verify, first screenshot

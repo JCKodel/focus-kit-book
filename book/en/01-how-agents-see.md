@@ -71,7 +71,8 @@ This is the start of a rules file for a small lending library, the project whose
 ```markdown
 # Lending library
 
-A small library lends copies of its books to members; a librarian records each loan and each return.
+A small library lends copies of its books to members; a librarian records
+each loan and each return.
 
 ## Read before acting
 - the product: docs/00 · the vocabulary: docs/03

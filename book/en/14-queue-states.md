@@ -34,7 +34,7 @@ This is the lending library's first milestone on one afternoon, written for this
 [>] search-catalog  a member searches the catalog
 [~] reservations    a member reserves a copy that is on loan
 [ ] my-loans        a member sees their loans · after lend-book
-[?] due-reminder    a reminder · resume: propose · blocked: which provider?
+[?] due-reminder    a reminder · resume: propose · blocked: what provider?
 [ ] m1-review       the milestone checked against its paragraph
 ```
 
@@ -72,7 +72,7 @@ Two lines that both change `src/features/loans/`, as `lend-book` and a line to r
 A line waits in three cases:
 
 * **The person says it is blocked.** The library has not bought its barcode scanners yet, so the librarian asks to hold `scan-copy`: `· resume: propose · blocked: no scanners yet`.
-* **An answer was asked and not given.** `due-reminder` needs a text-message provider, the question went to the library's director, and nobody has answered: `· resume: propose · blocked: which provider?`.
+* **An answer was asked and not given.** `due-reminder` needs a text-message provider, the question went to the library's director, and nobody has answered: `· resume: propose · blocked: what provider?`.
 * **Another line must be done first, found after work started.** In the middle of `/apply my-loans`, the build finds that `lend-book` sets the due date one day early at the end of a month; the fix becomes a `[ ]` line above it, `fix-due-date`, and `my-loans` waits: `· resume: apply · blocked: after fix-due-date`.
 
 The reason goes at the end of the line, in words, `· blocked: <reason>`, or as the lines that must be `[x]` first, `· blocked: after <slug>, <slug>`.

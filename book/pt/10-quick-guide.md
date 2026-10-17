@@ -9,7 +9,8 @@ Você precisa de um repositório git, vazio ou com código, e de um host da tabe
 O kit é instalado com a única frase que esse capítulo dá, dita ao seu agente na raiz do repositório:
 
 ```
-Read https://raw.githubusercontent.com/JCKodel/focus-kit/main/SETUP.md and do what it says.
+Read https://raw.githubusercontent.com/JCKodel/focus-kit/main/SETUP.md
+and do what it says.
 ```
 
 Os passos estão escritos para o Claude Code.

@@ -27,9 +27,9 @@ Um marco termina com um parágrafo escrito como um teste que uma pessoa consegue
 Para um marco da biblioteca de empréstimos, escrito para este capítulo:
 
 ```
-Quando ele fecha, um bibliotecário consegue emprestar um exemplar e registrar
-a sua devolução, e um membro vê os seus empréstimos com a data de devolução
-de cada um.
+Quando ele fecha, um bibliotecário consegue emprestar um exemplar e
+registrar a sua devolução, e um membro vê os seus empréstimos com a data
+de devolução de cada um.
 ```
 
 A pessoa roda o teste que a página escreveu para cada cláusula, no produto rodando, ponta a ponta, uma vez, na ordem em que um bibliotecário e um membro as encontrariam: emprestar um exemplar, registrar a sua devolução, abrir os empréstimos do membro e ler as datas de devolução.

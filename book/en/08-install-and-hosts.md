@@ -14,7 +14,8 @@ The kit has to open ready in all of them, and install without asking anyone to i
 Open your coding agent at the root of the repository and say:
 
 ```
-Read https://raw.githubusercontent.com/JCKodel/focus-kit/main/SETUP.md and do what it says.
+Read https://raw.githubusercontent.com/JCKodel/focus-kit/main/SETUP.md
+and do what it says.
 ```
 
 The address is the file itself, not the page GitHub draws around it, so the agent gets the whole text.

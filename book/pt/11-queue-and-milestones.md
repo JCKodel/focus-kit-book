@@ -43,16 +43,17 @@ Este é o primeiro marco da biblioteca alguns dias depois do começo do trabalho
 ````markdown
 ## Marco 1: uma bibliotecária empresta e recebe de volta
 
-Quando ele fecha, uma bibliotecária consegue cadastrar livros, seus exemplares e
-membros, emprestar um exemplar a um membro por 21 dias e registrar a devolução;
-um membro com um livro atrasado ou com a inscrição suspensa é recusado.
+Quando ele fecha, uma bibliotecária consegue cadastrar livros, seus
+exemplares e membros, emprestar um exemplar a um membro por 21 dias e
+registrar a devolução; um membro com um livro atrasado ou com a inscrição
+suspensa é recusado.
 
 ```
-[x] esqueleto        app e servidor vazios, npm run verify, primeira captura de tela
+[x] esqueleto        app e servidor vazios, npm run verify, tela capturada
 [x] catalogo         a bibliotecária cadastra livros e seus exemplares
 [x] membros          a bibliotecária cadastra, suspende e reativa membros
-[>] emprestar-livro  a bibliotecária empresta um exemplar, e as regras podem recusar
-[ ] devolver-livro   a bibliotecária registra a volta · after emprestar-livro
+[>] emprestar-livro  a bibliotecária empresta, e as regras podem recusar
+[ ] devolver-livro   registra a devolução · after emprestar-livro
 [ ] m1-review        o marco conferido contra o parágrafo dele
 ```
 ````

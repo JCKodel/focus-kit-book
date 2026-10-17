@@ -162,9 +162,9 @@ time. Steps go in a manual, and what a command prints stays in its help.
 * **Documentation language:** English. Identifiers in English. The book
   itself: English source, Brazilian Portuguese translation, same delivery.
 * **Verify:** `make verify`, which runs the strict site build, edition
-  parity, the em dash check, the prose rules, the link check and the
-  disclosure scan, commit messages and hooks included. Green before
-  anything is declared done.
+  parity, the em dash check, the prose rules, the block width check, the
+  link check and the disclosure scan, commit messages and hooks
+  included. Green before anything is declared done.
 * **Environments:**
   * local: `make serve` for the site, `make book` for PDF and EPUB in
     `output/` (never committed). A delivery leaves both building.

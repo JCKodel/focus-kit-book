@@ -337,7 +337,8 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] line-rule-once           chapters 13 and 22 point to chapter 11 for the one-sentence queue line instead of restating it; both editions
 [x] case-a-board-once        chapters 16 and 20 point to chapter 14 for the kanban board, the fold onto three columns and Case A's `[?]`; both editions
 [x] slice-paths              chapters 13, 14 and 19 name the lending library's slices under `src/features/`, as chapter 4 does; both editions
-[ ] code-width               no code block in chapters 1, 8, 10, 11, 13, 14, 15 and 21 runs past 74 columns; both editions
+[x] code-width               no code block in chapters 1, 8, 10, 11, 13, 14, 15 and 21 runs past 74 columns; both editions
+[ ] pt-skeleton-first        chapter 11's Portuguese queue says the skeleton's screenshot was the first, as the English does, within 74 columns
 [ ] pt-fixed-terms           the Portuguese edition uses docs/03's term and one word for each thing (due date, engine, view, fake, worktree, the checks, board columns, the fix-due-date slug) and means what the English means in chapters 11 and 14
 [ ] pt-placeholders          the Portuguese edition translates every placeholder and folder written for a chapter, notes the kit's English ones, and explains the imperative with its own commit (chapters 11, 13, 19, 21)
 [ ] ch03-opening             chapter 3 opens on what grew on Ninjobs without retelling chapter 6's causes and checks; both editions

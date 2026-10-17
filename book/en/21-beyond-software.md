@@ -29,12 +29,15 @@ A page for the lending library of Part I, written for this chapter:
 day, with this guide and no training.
 
 **Behaviour.**
-* A librarian who never used the system lends a copy by following the guide.
-* A librarian finds, from the contents, what to tell a member who is refused.
+* A librarian who never used the system lends a copy by following the
+  guide.
+* A librarian finds, from the contents, what to tell a member who is
+  refused.
 
 **Contract.**
 Sections: Lend, Take back, Refusals.
-Refusals lists every member of LendRefusal with the message the member sees.
+Refusals lists every member of LendRefusal with the message the member
+sees.
 Markdown in guide/, and a PDF built from it.
 
 **Out of scope.**
@@ -42,7 +45,8 @@ Markdown in guide/, and a PDF built from it.
 
 **Done when.**
 * [ ] Every member of LendRefusal appears in Refusals.
-* [ ] A person who never used the system lends a copy with the guide alone.
+* [ ] A person who never used the system lends a copy with the guide
+      alone.
 * [ ] The PDF builds.
 ```
 

@@ -91,7 +91,7 @@ A página termina com a mensagem sugerida, escrita para este capítulo, e a conv
 ```commit
 Emprestar um exemplar a um membro
 
-- Cria a tabela emprestimo, um empréstimo aberto por exemplar por índice único
+- Cria a tabela emprestimo, um aberto por exemplar por índice único
 - Empresta por 21 dias; recusa livros atrasados e membros suspensos
 - Recusa o segundo empréstimo do último exemplar como JaEmprestado
 - Prova a tela de empréstimo com 390 e 1280 pixels de largura

@@ -29,12 +29,15 @@ Uma página para a biblioteca de empréstimos da Parte I, escrita para este cap�
 exemplar no primeiro dia, com este guia e sem treinamento.
 
 **Comportamento.**
-* Um bibliotecário que nunca usou o sistema empresta um exemplar seguindo o guia.
-* Um bibliotecário encontra, pelo sumário, o que dizer a um membro recusado.
+* Um bibliotecário que nunca usou o sistema empresta um exemplar seguindo
+  o guia.
+* Um bibliotecário encontra, pelo sumário, o que dizer a um membro
+  recusado.
 
 **Contrato.**
 Seções: Emprestar, Receber de volta, Recusas.
-Recusas lista cada membro de RecusaDeEmprestimo com a mensagem que o membro vê.
+Recusas lista cada membro de RecusaDeEmprestimo com a mensagem que o
+membro vê.
 Markdown em guide/, e um PDF gerado a partir dele.
 
 **Fora do escopo.**
@@ -42,7 +45,8 @@ Markdown em guide/, e um PDF gerado a partir dele.
 
 **Pronto quando.**
 * [ ] Cada membro de RecusaDeEmprestimo aparece em Recusas.
-* [ ] Uma pessoa que nunca usou o sistema empresta um exemplar só com o guia.
+* [ ] Uma pessoa que nunca usou o sistema empresta um exemplar só com o
+      guia.
 * [ ] O PDF é gerado.
 ```
 

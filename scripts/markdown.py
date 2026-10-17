@@ -6,6 +6,9 @@ FIELD = re.compile(r"^([A-Za-z_][\w-]*):\s*(.*?)\s*$")
 # A note's key, as pandoc reads a label: any run without whitespace, `^`, `[` or `]`.
 NOTE_DEFINITION = re.compile(r"^ {0,3}\[\^([^\]\s^\[]+)\]:")
 NOTE_MENTION = re.compile(r"\[\^([^\]\s^\[]+)\]")
+# A fenced block opens on a run of three or more backticks or tildes after any indent;
+# group 1 is the run, group 2 the info string.
+FENCE_OPENING = re.compile(r"\s*(`{3,}|~{3,})(.*)")
 
 
 def front_matter(text):
@@ -25,6 +28,11 @@ def front_matter(text):
         if match:
             fields[match.group(1)] = match.group(2).strip("\"'")
     return {}, lines
+
+
+def closes(line, run):
+    """Whether line closes a fenced block opened by run: it starts, after its indent, with the run."""
+    return line.lstrip().startswith(run)
 
 
 def blank(text):
@@ -50,11 +58,11 @@ def mask(text, keep_targets):
             continue
         if fence:
             out.append(blank(line))
-            if line.lstrip().startswith(fence):
+            if closes(line, fence):
                 fence = None
             continue
         if not comment:
-            opening = re.match(r"\s*(`{3,}|~{3,})", line)
+            opening = FENCE_OPENING.match(line)
             if opening:
                 fence = opening.group(1)
                 out.append(blank(line))

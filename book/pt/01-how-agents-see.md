@@ -71,7 +71,8 @@ Este é o começo de um arquivo de regras de uma pequena biblioteca de emprésti
 ```markdown
 # Biblioteca de empréstimos
 
-Uma pequena biblioteca empresta exemplares dos seus livros a membros; um bibliotecário registra cada empréstimo e cada devolução.
+Uma pequena biblioteca empresta exemplares dos seus livros a membros; um
+bibliotecário registra cada empréstimo e cada devolução.
 
 ## Leia antes de agir
 - o produto: docs/00 · o vocabulário: docs/03
