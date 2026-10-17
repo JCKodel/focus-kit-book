@@ -63,8 +63,8 @@ A line with two orders, `· after lend-book, members`, is free only when both ar
 `/propose` and `/apply` do not start a line that is not free: run `/propose my-loans` while `lend-book` is `[*]`, and it says what the line waits on and stops.
 
 Asked what can run at the same time, you answer from the queue: the free lines, and among them those that touch different files, judged from their pages and from docs/01, which says where each part of the code lives.
-`search-catalog` and `reservations`, in `src/catalog/` and `src/reservations/`, can.
-Two lines that both change `src/loans/`, as `lend-book` and a line to renew a loan would, cannot run together in one folder.
+`search-catalog` and `reservations`, in `src/features/catalog/` and `src/features/reservations/`, can.
+Two lines that both change `src/features/loans/`, as `lend-book` and a line to renew a loan would, cannot run together in one folder.
 [Chapter 19](19-worktrees.md) shows how two sessions run in one folder, and when they need two.
 
 ## Waiting: `[?]`

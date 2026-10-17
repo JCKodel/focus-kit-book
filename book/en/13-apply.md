@@ -84,7 +84,7 @@ Whichever you answer, the other one changes in the same delivery.
 It runs `npm run verify` until it is green, takes the lending screen at 390 and 1280 pixels wide, and compares both with the design file.
 If a button wraps at the narrow width, it gets fixed; if the design file gives no value for a colour, the choice is written down as a divergence, with its reason.
 Then it writes what happened on the page, adds the table `loan` to the document that lists the schema, ticks Done when, moves the page to `work/done/lend-book.md`, stages only this delivery's paths, and, as its last edit, marks the line `[x]` and stages that hunk of docs/06.
-If another session's edit to `src/members/` sits in the tree, or its hunk of docs/06 is already staged, the agent leaves both as they are and tells you about the staged one (chapter 19).
+If another session's edit to `src/features/members/` sits in the tree, or its hunk of docs/06 is already staged, the agent leaves both as they are and tells you about the staged one (chapter 19).
 
 The page ends with the suggested message, written for this chapter, and the conversation shows the same block:
 

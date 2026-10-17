@@ -84,7 +84,7 @@ Qualquer que seja a sua resposta, o outro muda na mesma entrega.
 Ele roda `npm run verify` até ficar verde, captura a tela de empréstimo com 390 e 1280 pixels de largura, e compara as duas com o arquivo de design.
 Se um botão quebra linha na largura estreita, ele é corrigido; se o arquivo de design não dá um valor para uma cor, a escolha é registrada como uma divergência, com o seu motivo.
 Então ele escreve na página o que aconteceu, acrescenta a tabela `emprestimo` ao documento que lista o schema, marca o Pronto quando, move a página para `work/done/emprestar-livro.md`, coloca em stage só os caminhos desta entrega e, como a sua última edição, marca a linha `[x]` e coloca em stage esse trecho do docs/06.
-Se uma edição de outra sessão em `src/membros/` está na árvore, ou se o trecho dela do docs/06 já está em stage, o agente deixa os dois como estão e avisa você do que está em stage (capítulo 19).
+Se uma edição de outra sessão em `src/features/membros/` está na árvore, ou se o trecho dela do docs/06 já está em stage, o agente deixa os dois como estão e avisa você do que está em stage (capítulo 19).
 
 A página termina com a mensagem sugerida, escrita para este capítulo, e a conversa mostra o mesmo bloco:
 

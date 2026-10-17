@@ -22,7 +22,7 @@ The first case is avoided by choosing which deliveries run together; the second,
 Two sessions can share one folder when they build free lines that touch different files.
 A free line is a line of the queue that is not done, not waiting, and needs no other line done first ([chapter 14](14-queue-states.md) teaches the queue's marks).
 
-Say the lending library has two free lines: `return-book`, which touches `src/loans/`, and `overdue-list`, which touches `src/reports/`; the slugs and paths are an illustration, written for this chapter.
+Say the lending library has two free lines: `return-book`, which touches `src/features/loans/`, and `overdue-list`, which touches `src/features/reports/`; the slugs and paths are an illustration, written for this chapter.
 Their code files do not meet.
 Both mark docs/06, the queue, but each marks its own line, and two lines far apart in one file are two hunks, separate pieces of a change that git stages apart.
 So the two can run in one folder at once.
@@ -41,11 +41,11 @@ git diff --cached --stat
 ```
 
 It lists each staged file and how many of its lines change.
-If the list holds only `src/loans/`, the page of `return-book` and docs/06, and `git diff --cached docs/06-Queue.md` shows only that line's hunk, a plain `git commit` takes that delivery and nothing else.
-If it also holds `src/reports/` or the page of `overdue-list`, the other session has staged its work too, and a plain commit takes both.
+If the list holds only `src/features/loans/`, the page of `return-book` and docs/06, and `git diff --cached docs/06-Queue.md` shows only that line's hunk, a plain `git commit` takes that delivery and nothing else.
+If it also holds `src/features/reports/` or the page of `overdue-list`, the other session has staged its work too, and a plain commit takes both.
 
 The trap is naming paths.
-`git commit -- docs/06-Queue.md src/loans/` looks like the safe way to commit one delivery, and for files only that delivery changed, it is.
+`git commit -- docs/06-Queue.md src/features/loans/` looks like the safe way to commit one delivery, and for files only that delivery changed, it is.
 For a file both changed, it takes too much: the git documentation says a commit with paths is made "*by taking the updated working tree contents of the paths specified on the command line, disregarding any contents that have been staged for other paths.*"[^git-commit]
 So git takes docs/06 whole from the folder, the other line's mark included, staged or not, and that mark rides into this commit.
 
@@ -66,8 +66,8 @@ This is written down because, without it, a second session on another module sto
 
 Two things are a conflict:
 
-* both deliveries edit the same hunk, the same lines of `src/loans/loan.ts`, say;
-* this page needs a file the other delivery is changing, as when `return-book` needs `src/loans/` while another delivery reshapes it.
+* both deliveries edit the same hunk, the same lines of `src/features/loans/rules.ts`, say;
+* this page needs a file the other delivery is changing, as when `return-book` needs `src/features/loans/` while another delivery reshapes it.
 
 Then the session stops and reports, and the decision is yours: order the two lines, by writing `· after <slug>` on the one that must wait for the other, or give one of them a worktree.
 
@@ -85,7 +85,7 @@ A worktree per delivery pays in two cases: several people working at once, since
 A branch per delivery in one folder does not do it: the folder holds one branch at a time, and switching while an agent has work not yet committed carries that work along or stops until `git stash` puts it aside.
 A second clone gives each agent its own folder, but with its own copy of the whole history on disk, which meets the other only through a push and a pull.
 
-Say `return-book` and `overdue-list` both need `src/loans/`, in the lending library's folder `library/`, whose `main/` holds the branch `main` (the next section sets it up):
+Say `return-book` and `overdue-list` both need `src/features/loans/`, in the lending library's folder `library/`, whose `main/` holds the branch `main` (the next section sets it up):
 
 * The agent building `return-book` works in `library/.focus-kit/worktrees/return-book`, on the branch `focus-kit/return-book`; it sees only that delivery's changes, and the commit you make there holds that delivery and nothing else.
 * The agent building `overdue-list` does the same in `library/.focus-kit/worktrees/overdue-list`, on `focus-kit/overdue-list`, at the same time.

@@ -22,7 +22,7 @@ O primeiro caso se evita escolhendo quais entregas rodam juntas; o segundo, pelo
 Duas sessões podem dividir uma pasta quando constroem linhas livres que mexem em arquivos diferentes.
 Uma linha livre é uma linha da fila que não está feita, não está esperando, e não precisa de outra linha feita antes ([o capítulo 14](14-queue-states.md) ensina as marcas da fila).
 
-Digamos que a biblioteca de empréstimos tem duas linhas livres: `devolver-livro`, que mexe em `src/emprestimos/`, e `lista-de-atrasos`, que mexe em `src/relatorios/`; os slugs e os caminhos são uma ilustração, escrita para este capítulo.
+Digamos que a biblioteca de empréstimos tem duas linhas livres: `devolver-livro`, que mexe em `src/features/emprestimos/`, e `lista-de-atrasos`, que mexe em `src/features/relatorios/`; os slugs e os caminhos são uma ilustração, escrita para este capítulo.
 Os arquivos de código delas não se encontram.
 As duas marcam o docs/06, a fila, mas cada uma marca a sua própria linha, e duas linhas distantes em um arquivo são dois hunks, pedaços separados de uma mudança que o git coloca em stage separadamente.
 Então as duas podem rodar em uma pasta ao mesmo tempo.
@@ -41,11 +41,11 @@ git diff --cached --stat
 ```
 
 Ele lista cada arquivo em stage e quantas das suas linhas mudam.
-Se a lista guarda só `src/emprestimos/`, a página de `devolver-livro` e o docs/06, e `git diff --cached docs/06-Queue.md` mostra só o hunk daquela linha, um `git commit` simples leva aquela entrega e nada mais.
-Se ela também guarda `src/relatorios/` ou a página de `lista-de-atrasos`, a outra sessão também colocou o seu trabalho em stage, e um commit simples leva as duas.
+Se a lista guarda só `src/features/emprestimos/`, a página de `devolver-livro` e o docs/06, e `git diff --cached docs/06-Queue.md` mostra só o hunk daquela linha, um `git commit` simples leva aquela entrega e nada mais.
+Se ela também guarda `src/features/relatorios/` ou a página de `lista-de-atrasos`, a outra sessão também colocou o seu trabalho em stage, e um commit simples leva as duas.
 
 A armadilha é nomear caminhos.
-`git commit -- docs/06-Queue.md src/emprestimos/` parece o jeito seguro de fazer o commit de uma entrega, e para arquivos que só aquela entrega mudou, é.
+`git commit -- docs/06-Queue.md src/features/emprestimos/` parece o jeito seguro de fazer o commit de uma entrega, e para arquivos que só aquela entrega mudou, é.
 Para um arquivo que as duas mudaram, ele leva demais: a documentação do git diz que um commit com caminhos é feito "*pegando o conteúdo atualizado da árvore de trabalho dos caminhos dados na linha de comando, ignorando qualquer conteúdo que tenha sido colocado em stage para outros caminhos.*"[^git-commit]
 Então o git pega o docs/06 inteiro da pasta, com a marca da outra linha, em stage ou não, e essa marca entra neste commit.
 
@@ -66,8 +66,8 @@ Isso está escrito porque, sem isso, uma segunda sessão em outro módulo para q
 
 Duas coisas são um conflito:
 
-* as duas entregas editam o mesmo hunk, as mesmas linhas de `src/emprestimos/emprestimo.ts`, por exemplo;
-* esta página precisa de um arquivo que a outra entrega está mudando, como quando `devolver-livro` precisa de `src/emprestimos/` enquanto outra entrega o reorganiza.
+* as duas entregas editam o mesmo hunk, as mesmas linhas de `src/features/emprestimos/regras.ts`, por exemplo;
+* esta página precisa de um arquivo que a outra entrega está mudando, como quando `devolver-livro` precisa de `src/features/emprestimos/` enquanto outra entrega o reorganiza.
 
 Então a sessão para e relata, e a decisão é sua: ordenar as duas linhas, escrevendo `· after <slug>` na que precisa esperar a outra, ou dar a uma delas um worktree.
 
@@ -85,7 +85,7 @@ Um worktree por entrega compensa em dois casos: várias pessoas trabalhando ao m
 Um branch por entrega em uma pasta não basta: a pasta guarda um branch por vez, e trocar de branch enquanto um agente tem trabalho ainda sem commit leva esse trabalho junto ou para até o `git stash` guardá-lo de lado.
 Um segundo clone dá a cada agente a sua própria pasta, mas com a sua própria cópia do histórico inteiro no disco, que só encontra a do outro por um push e um pull.
 
-Digamos que `devolver-livro` e `lista-de-atrasos` precisam as duas de `src/emprestimos/`, na pasta da biblioteca de empréstimos, `biblioteca/`, cujo `main/` guarda o branch `main` (a próxima seção a monta):
+Digamos que `devolver-livro` e `lista-de-atrasos` precisam as duas de `src/features/emprestimos/`, na pasta da biblioteca de empréstimos, `biblioteca/`, cujo `main/` guarda o branch `main` (a próxima seção a monta):
 
 * O agente que constrói `devolver-livro` trabalha em `biblioteca/.focus-kit/worktrees/devolver-livro`, no branch `focus-kit/devolver-livro`; ele vê só as mudanças dessa entrega, e o commit que você faz ali guarda essa entrega e nada mais.
 * O agente que constrói `lista-de-atrasos` faz o mesmo em `biblioteca/.focus-kit/worktrees/lista-de-atrasos`, no `focus-kit/lista-de-atrasos`, ao mesmo tempo.

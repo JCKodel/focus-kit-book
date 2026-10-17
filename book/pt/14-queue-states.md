@@ -64,8 +64,8 @@ Uma linha com duas ordens, `· after emprestar-livro, membros`, só fica livre q
 O `/propose` e o `/apply` não começam uma linha que não está livre: rode `/propose meus-emprestimos` com `emprestar-livro` em `[*]`, e ele diz o que a linha espera e para.
 
 Perguntado o que pode rodar ao mesmo tempo, você responde pela fila: as linhas livres, e entre elas as que mexem em arquivos diferentes, julgadas pelas páginas delas e pelo docs/01, que diz onde mora cada parte do código.
-`buscar-catalogo` e `reservas`, em `src/catalogo/` e `src/reservas/`, podem.
-Duas linhas que mudam ambas `src/emprestimos/`, como fariam `emprestar-livro` e uma linha para renovar um empréstimo, não podem rodar juntas em uma pasta.
+`buscar-catalogo` e `reservas`, em `src/features/catalogo/` e `src/features/reservas/`, podem.
+Duas linhas que mudam ambas `src/features/emprestimos/`, como fariam `emprestar-livro` e uma linha para renovar um empréstimo, não podem rodar juntas em uma pasta.
 O [capítulo 19](19-worktrees.md) mostra como duas sessões rodam em uma pasta, e quando elas precisam de duas.
 
 ## Esperando: `[?]`
