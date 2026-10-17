@@ -71,37 +71,20 @@ Duas coisas são um conflito:
 
 Então a sessão para e relata, e a decisão é sua: ordenar as duas linhas, escrevendo `· after <slug>` na que precisa esperar a outra, ou dar a uma delas um worktree.
 
-## O que é um worktree
+## O que é um worktree e quando ele compensa
 
 Um worktree é uma pasta de trabalho extra do mesmo repositório git, com o seu próprio branch.
 Nas palavras da documentação do git: "*Um repositório git pode ter várias árvores de trabalho, o que permite fazer checkout de mais de um branch ao mesmo tempo.*"[^git-worktree]
-
-A pasta que você clonou é o worktree principal.
-Ela guarda a pasta `.git`, onde o histórico mora: os commits, os branches e as tags.
-Esse é o caso comum.
-Um repositório também pode ser bare: um repositório sem arquivos próprios, só com o histórico, feito por `git clone --bare`.[^git-clone]
-Então nenhuma pasta de trabalho guarda o histórico, e toda pasta de trabalho, `main/` incluída, é um worktree do repositório bare.
+A pasta que você clonou é o worktree principal, aquele cuja pasta `.git` guarda o histórico: os commits, os branches e as tags.
 `git worktree add` cria outra pasta, faz checkout de um branch nela, e deixa lá um pequeno arquivo `.git` que aponta de volta para onde o histórico mora.
 Todos os worktrees compartilham o histórico; cada um tem os seus próprios arquivos, o seu próprio `HEAD` (o commit em que ele está) e a sua própria área de stage.[^git-worktree]
 Então um commit feito em um worktree aparece na hora em todos os outros, sem push e sem pull, enquanto o que você muda ou coloca em stage em um nunca aparece em outro.
 O git também se recusa a fazer checkout de um branch em dois worktrees, então duas pastas nunca escrevem no mesmo branch.[^git-worktree]
 
-## Quando um worktree ainda compensa
+Um worktree por entrega compensa em dois casos: várias pessoas trabalhando ao mesmo tempo, já que um commit em um branch compartilhado levaria o trabalho pela metade de outra pessoa; e uma pessoa cujas entregas mexem nos mesmos arquivos, para que cada uma seja construída à parte e as suas mudanças só se encontrem no merge.
+Um branch por entrega em uma pasta não basta: a pasta guarda um branch por vez, e trocar de branch enquanto um agente tem trabalho ainda sem commit leva esse trabalho junto ou para até o `git stash` guardá-lo de lado.
+Um segundo clone dá a cada agente a sua própria pasta, mas com a sua própria cópia do histórico inteiro no disco, que só encontra a do outro por um push e um pull.
 
-Uma pasta guarda um branch por vez, e todos que trabalham nela dividem os seus arquivos.
-Então um worktree por entrega compensa em dois casos: várias pessoas trabalhando ao mesmo tempo, já que um commit em um branch compartilhado levaria o trabalho pela metade de outra pessoa; e uma pessoa cujas entregas mexem nos mesmos arquivos, para que cada uma seja construída à parte e as suas mudanças só se encontrem no merge.
-
-Só branches não bastam.
-Se você dá a cada entrega o seu próprio branch em uma pasta, a pasta ainda guarda só um branch por vez.
-Trocar de branch enquanto um agente tem trabalho ainda sem commit ou leva esse trabalho para o outro branch ou faz o git recusar até você guardá-lo de lado com `git stash`; e dois agentes não conseguem estar em dois branches de uma pasta no mesmo momento.
-
-Um segundo clone do repositório dá a cada agente a sua própria pasta, mas cada clone tem a sua própria cópia do histórico: os dois só se encontram dando push para um remoto e pull dele, e cada clone repete o histórico inteiro no disco.
-
-Um worktree por entrega dá exatamente isso: várias pastas, cada uma no seu próprio branch, compartilhando um histórico.
-
-## Como ele resolve o problema
-
-Dê a cada entrega o seu próprio worktree, e a cada agente a sua própria pasta.
 Digamos que `devolver-livro` e `lista-de-atrasos` precisam as duas de `src/emprestimos/`, na pasta da biblioteca de empréstimos, `biblioteca/`, cujo `main/` guarda o branch `main` (a próxima seção a monta):
 
 * O agente que constrói `devolver-livro` trabalha em `biblioteca/.focus-kit/worktrees/devolver-livro`, no branch `focus-kit/devolver-livro`; ele vê só as mudanças dessa entrega, e o commit que você faz ali guarda essa entrega e nada mais.
@@ -120,16 +103,15 @@ A partir de uma pasta vazia `biblioteca/`:
 git clone --bare <url> .focus-kit/repo.git
 ```
 
-Copia o histórico do remoto para `.focus-kit/repo.git`, um repositório bare.
+Copia o histórico do remoto para `.focus-kit/repo.git`, um repositório bare: um repositório sem arquivos próprios, só com o histórico.[^git-clone]
+Então nenhuma pasta de trabalho guarda o histórico, e toda pasta de trabalho, `main/` incluída, é um worktree do repositório bare.
 
 ```
 cd .focus-kit/repo.git
 git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
 ```
 
-Diz ao `git fetch` para guardar uma cópia de cada branch do remoto como `origin/<branch>`, o branch de rastreamento remoto: o registro local do git de onde está o branch do remoto.
-Um clone bare não escreve essa linha; a documentação do git diz que, com `--bare`, "*nem os branches de rastreamento remoto nem as variáveis de configuração relacionadas são criados.*"[^git-clone]
-Pule-a, e o `git fetch` em `main/` não traz nenhum `origin/main`.
+Escreve a linha de fetch que um clone bare deixa de fora: sem ela, o `git fetch` em `main/` não traz nenhum `origin/main`, o registro do git de onde está o `main` do remoto.
 
 ```
 git worktree add ../../main main
@@ -194,7 +176,7 @@ Você revisa e faz o commit no branch, faz o merge no `main` com `--no-ff`, remo
 O agente nunca faz commit, merge, resolve um conflito ou remove um worktree: cada passo que muda o histórico é seu, como em toda estratégia de git.
 Para rodar duas entregas ao mesmo tempo em worktrees, abra uma sessão por pasta: uma em `main/` para cada `/propose`, uma em cada worktree para o seu `/apply`.
 
-Uma forma só para toda ferramenta e toda pessoa evita um erro: quando nada diz onde fica o worktree de uma entrega, uma sessão cria um onde quer que esteja, e a página que ela escreve ali é copiada para o branch principal à mão.
+O kit dá essa forma única a toda ferramenta e toda pessoa por causa de um erro: um `/propose` rodando em um worktree que outra ferramenta criou, numa pasta própria, escreve a página onde o próximo `/apply` não procura.
 
 ## Quando os branches se encontram: o conflito
 
@@ -274,13 +256,8 @@ Este livro, escrito e revisado por uma pessoa em arquivos compartilhados, fica n
 ## O que o time ganha
 
 Dois agentes constroem ao mesmo tempo, e cada entrega ainda chega como uma mudança que se desfaz sozinha: um commit em uma pasta, um merge a partir de um worktree.
-Eu medi isso uma vez, em um pequeno projeto meu em TypeScript: duas entregas construídas ao mesmo tempo por dois agentes levaram 155 segundos do primeiro início ao último fim, contra 277,2 segundos de trabalho dos agentes somados, pouco mais da metade da espera.[^parallel-run]
-A mesma execução pagou os custos da seção acima: o `node_modules` de cada worktree ocupou 155 MB de disco, e as duas execuções de teste colidiram uma vez em uma porta compartilhada e passaram quando rodadas de novo; a fila deu conflito, como sempre dá.[^parallel-run]
-Essa execução foi em worktrees.
-Uma pasta tira a segunda pasta, a segunda instalação de 155 MB, o merge e o conflito da fila; nenhuma execução mediu duas sessões em uma pasta, então esse ganho não tem número próprio.
-A regra do que não é conflito tira um erro: uma segunda sessão que para numa fila mudada quando tem tudo de que precisa para seguir.
-A forma única de um worktree por entrega tira outro: uma página escrita em um worktree criado em um lugar que o kit não disse, e copiada para o branch principal à mão.
-Uma execução é um sinal, não uma taxa: o ganho vale enquanto os arquivos das entregas não se encontram, e termina na velocidade da pessoa que as revisa e faz o commit delas.
+Eu medi isso uma vez, em worktrees, em um pequeno projeto meu em TypeScript: duas entregas construídas ao mesmo tempo levaram 155 segundos do primeiro início ao último fim, contra 277,2 segundos de trabalho dos agentes somados, ao custo de 155 MB de `node_modules` por worktree, duas execuções de teste que colidiram uma vez em uma porta compartilhada, e o conflito da fila no merge.[^parallel-run]
+O ganho vale enquanto os arquivos das entregas não se encontram, e termina na velocidade da pessoa que as revisa e faz o commit delas.
 
 ## Pontos-chave
 

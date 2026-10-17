@@ -71,37 +71,20 @@ Two things are a conflict:
 
 Then the session stops and reports, and the decision is yours: order the two lines, by writing `· after <slug>` on the one that must wait for the other, or give one of them a worktree.
 
-## What a worktree is
+## What a worktree is and when it pays
 
 A worktree is an extra working folder of the same git repository, checked out on its own branch.
 In the words of the git documentation: "*A git repository can support multiple working trees, allowing you to check out more than one branch at a time.*"[^git-worktree]
-
-The folder you cloned is the main worktree.
-It holds the `.git` folder, where the history lives: the commits, the branches and the tags.
-That is the common case.
-A repository can also be bare: a repository with no files of its own, only the history, made by `git clone --bare`.[^git-clone]
-Then no working folder holds the history, and every working folder, `main/` included, is a worktree of the bare repository.
+The folder you cloned is the main worktree, the one whose `.git` folder holds the history: the commits, the branches and the tags.
 `git worktree add` creates another folder, checks a branch out in it, and leaves there a small `.git` file that points back to where the history lives.
 All worktrees share the history; each has its own files, its own `HEAD` (the commit it is on) and its own staging area.[^git-worktree]
 So a commit made in one worktree is visible at once from every other, with no push and no pull, while what you change or stage in one never appears in another.
 Git also refuses to check out one branch in two worktrees, so two folders never write to the same branch.[^git-worktree]
 
-## When a worktree still pays
+A worktree per delivery pays in two cases: several people working at once, since one commit on a shared branch would carry another person's half-done work; and one person whose deliveries touch the same files, so each is built apart and their changes meet only at the merge.
+A branch per delivery in one folder does not do it: the folder holds one branch at a time, and switching while an agent has work not yet committed carries that work along or stops until `git stash` puts it aside.
+A second clone gives each agent its own folder, but with its own copy of the whole history on disk, which meets the other only through a push and a pull.
 
-One folder holds one branch at a time, and everyone working in it shares its files.
-So a worktree per delivery pays in two cases: several people working at once, since one commit on a shared branch would carry another person's half-done work; and one person whose deliveries touch the same files, so each is built apart and their changes meet only at the merge.
-
-Branches alone do not do it.
-If you give each delivery its own branch in one folder, the folder still holds only one branch at a time.
-Switching branches while an agent has work not yet committed either carries that work to the other branch or makes git refuse until you put it aside with `git stash`; and two agents cannot be on two branches of one folder at the same moment.
-
-A second clone of the repository gives each agent its own folder, but each clone has its own copy of the history: the two meet only by pushing to a remote and pulling from it, and every clone repeats the whole history on disk.
-
-A worktree per delivery gives exactly that: several folders, each on its own branch, sharing one history.
-
-## How it solves the problem
-
-Give each delivery its own worktree, and each agent its own folder.
 Say `return-book` and `overdue-list` both need `src/loans/`, in the lending library's folder `library/`, whose `main/` holds the branch `main` (the next section sets it up):
 
 * The agent building `return-book` works in `library/.focus-kit/worktrees/return-book`, on the branch `focus-kit/return-book`; it sees only that delivery's changes, and the commit you make there holds that delivery and nothing else.
@@ -120,16 +103,15 @@ From an empty folder `library/`:
 git clone --bare <url> .focus-kit/repo.git
 ```
 
-Copies the remote's history into `.focus-kit/repo.git`, a bare repository.
+Copies the remote's history into `.focus-kit/repo.git`, a bare repository: one with no files of its own, only the history.[^git-clone]
+No working folder then holds the history, and every working folder, `main/` included, is a worktree of the bare repository.
 
 ```
 cd .focus-kit/repo.git
 git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
 ```
 
-Tells `git fetch` to keep a copy of every remote branch as `origin/<branch>`, the remote-tracking branch: git's local record of where the remote's branch is.
-A bare clone writes no such line; the git documentation says that with `--bare` "*neither remote-tracking branches nor the related configuration variables are created.*"[^git-clone]
-Skip it, and `git fetch` in `main/` brings no `origin/main`.
+Writes the fetch line a bare clone leaves out: without it, `git fetch` in `main/` brings no `origin/main`, git's record of where the remote's `main` is.
 
 ```
 git worktree add ../../main main
@@ -194,7 +176,7 @@ You review and commit on the branch, merge into `main` with `--no-ff`, remove th
 The agent never commits, merges, resolves a conflict or removes a worktree: every step that changes the history is yours, as in every git strategy.
 To run two deliveries at once in worktrees, open one session per folder: one in `main/` for each `/propose`, one in each worktree for its `/apply`.
 
-One shape for every tool and every person prevents an error: when nothing says where a delivery's worktree belongs, a session makes one wherever it stands, and the page it writes there is copied to the main branch by hand.
+The kit gives every tool and every person this one shape because of an error: a `/propose` running in a worktree another tool made, in a folder of its own, writes the page where the next `/apply` does not look.
 
 ## When the branches meet: the conflict
 
@@ -274,13 +256,8 @@ This book, written and reviewed by one person in shared files, stays on trunk fo
 ## What the team gains
 
 Two agents build at once, and each delivery still lands as one change that reverts alone: one commit in one folder, one merge from a worktree.
-I measured it once, on a small TypeScript project of mine: two deliveries built at the same time by two agents took 155 seconds from the first start to the last end, against 277.2 seconds of the agents' work added up, a little over half the waiting.[^parallel-run]
-The same run paid the costs of the section above: each worktree's `node_modules` took 155 MB of disk, and the two test runs collided once on a shared port and passed when run again; the queue conflicted, as it always does.[^parallel-run]
-That run was in worktrees.
-One folder removes the second folder, the second install of 155 MB, the merge and the queue's conflict; no run measured two sessions in one folder, so that gain has no number of its own.
-The rule of what is not a conflict removes an error: a second session that stops on a changed queue when it has everything it needs to go on.
-The one shape of a worktree per delivery removes another: a page written in a worktree made somewhere the kit did not say, and copied to the main branch by hand.
-One run is a sign, not a rate: the gain holds while the deliveries' files do not meet, and it ends at the speed of the person who reviews and commits them.
+I measured it once, in worktrees on a small TypeScript project of mine: two deliveries built at the same time took 155 seconds from the first start to the last end, against 277.2 seconds of the agents' work added up, at the cost of 155 MB of `node_modules` per worktree, two test runs that collided once on a shared port, and the queue's conflict at the merge.[^parallel-run]
+The gain holds while the deliveries' files do not meet, and it ends at the speed of the person who reviews and commits them.
 
 ## Key points
 

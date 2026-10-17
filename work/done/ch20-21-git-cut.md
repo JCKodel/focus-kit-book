@@ -43,13 +43,49 @@
 
 **Done when.**
 
-* [ ] Both chapters changed in both editions, headings as Contract; each opens with its value and reaches its decision in its second section; nothing a later section needs is cut.
-* [ ] The checks of Contract hold; every note definition keeps a reference; `make verify` green.
-* [ ] Word count of chapter 20 and 21 recorded on this page, before and after, as a record and not as a target.
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both chapters changed in both editions, headings as Contract; each opens with its value and reaches its decision in its second section; nothing a later section needs is cut.
+* [x] The checks of Contract hold; every note definition keeps a reference; `make verify` green.
+* [x] Word count of chapter 20 and 21 recorded on this page, before and after, as a record and not as a target.
+* [x] `make book` run; both PDF paths given to the author.
+* [x] Page in `work/done/`, line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
 
 **Decisions in the review.**
 
 * The three-line log is shown in the gain as its evidence, as recommended.
 * The `.psd` paragraph is cut entirely, as recommended.
+
+**Chapter numbers.** This page was written before `renumber-chapters`; every chapter number above is the old one.
+/apply resolved each through the map on `work/done/renumber-chapters.md` (file slugs unchanged, only the prefix): old 20 is chapter 18, `18-git-essentials.md`, and old 21 is chapter 19, `19-worktrees.md`; the pull request chapter, old 22, is chapter 20.
+The record below and the book use the new numbers, and the Contract's checks were run on `18-*.md` and `19-*.md`.
+
+**What happened.**
+
+* Chapter 18, both editions: the opening leads with the rule; §One delivery, one step to undo holds the table of the four forms, its two sentences and one sentence saying the sections below define its terms; §Version control, and why git became four sentences at the start of §Commits and the history (definition, what it keeps, distribution, who made git and why); §Remotes became two sentences in that section, chapter 20's pull request named in the second; "a branch is only a name, which is why it costs nothing" is in §Branches and tags with `[^pro-git-history]`; §Four ways to merge lost its H3 "The four side by side"; §Trunk and §git-flow are one paragraph each; the gain shows the three-line log; the key points start with the rule.
+* Removed from chapter 18: the `.psd` paragraph and its note `[^gitattributes]`, BitKeeper, 1991 to 2002, the "*thousands of parallel branches*" goal list (the quotation stays, at the branch sentence), the git-flow bullets and Driessen's `--no-ff` quotation (paraphrased in the git-flow sentence).
+* Chapter 19, both editions: §What a worktree is, §When a worktree still pays and §How it solves the problem are one section, §What a worktree is and when it pays; "Branches alone" and "A second clone" are one sentence each; the bare repository is defined at `git clone --bare`; the fetch block keeps its two lines with one sentence; the git documentation quotation on `--bare` left with its paragraph; the "one shape" sentence names the error; the gain is three sentences.
+* Checks: `grep -c "BitKeeper\|logo final" book/*/18-*.md` gives 0 and 0; `## ` headings 11 and 11 in chapter 18, 11 and 11 in chapter 19 (`### ` 4 and 4, 0 and 0); the merge table is on line 18 and `## Commits` on line 29 in both editions; every note definition has at least one reference in both editions, with the same counts.
+* Proof: `make verify` green (strict build, parity, em dash, prose, links, disclosure); `make book` built both editions, with no warning but the known `user-select` one: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+* Word count (`wc -w`, a record and not a target): chapter 18, en 2733 to 2469, pt 3008 to 2713; chapter 19, en 3562 to 3283, pt 3888 to 3592.
+* docs/03, docs/04, docs/05 and the ADRs are unchanged: no term, rule or slot changed.
+
+**Decisions in /apply** (taken alone, as the batch rules ask):
+
+* Who made git stays, in one sentence, in §Commits and the history: Linus Torvalds and the kernel's community, 2005, for the kernel, when their tool stopped being free of charge, written for speed and many lines of work at once. The author's standing guidance asks a tool chapter to say what it is, why and who made it, for non-developers too; the Contract's "first two sentences and the one on distribution" would have dropped it. BitKeeper and the years before 2005 still leave, so the check holds.
+* The three-line log is shown twice, in §Commits and the history, where it teaches `git log --oneline`, and in the gain, as the review decided, with a sentence saying it is the same log; showing it only in the gain would leave the command without its example, and pointing to it would not show it.
+* `[^git-clone]` stays in chapter 19, cited by the definition of a bare repository, which keeps its note as the Contract's "notes kept with their sentences" says; the quotation's citation left with its paragraph.
+* Driessen's `--no-ff` quotation left: the git-flow paragraph says in plain words that feature branches merge back by merge commit so a whole feature is easy to revert, with the same note; the table already carries the reason.
+* The "one shape" sentence reads "a `/propose` running in a worktree another tool made, in a folder of its own, writes the page where the next `/apply` does not look", with no tool named, as `ch21-hidden-folder` decided.
+* The heading "Trunk, and trunk-based development" became "Trunk", as the Contract names it; no link in the book pointed to its anchor.
+* The manual pointer stays where it was, after the container's three commands, since it covers all of them; the fetch sentence says what the line does and what breaks without it.
+* The Contract's "two sentences that follow the table" are kept, and a third says the terms are defined below, since the table names forms the reader has not met (docs/04, Teach, do not only show).
+
+```commit
+docs(ch20-21-git-cut): chapters 18 and 19 lead with the decision
+
+- chapter 18 opens with one delivery, one step to undo and the merge table
+- git's history cut to who made it and why; remotes are two sentences
+- chapter 19 merges three worktree sections into one; bare defined at use
+- both gains say the evidence once; both editions
+
+work/done/ch20-21-git-cut.md
+```
