@@ -6,12 +6,9 @@ You can also keep a library's exceptions at the boundary, so a new library chang
 
 ## What grew on Ninjobs
 
-On Ninjobs, my own product, I let complexity grow before its process changed.
-A delivery had to pass 29 checks, and none of them had ever caught an error in the product: they were costly to satisfy and cheap to get around.
-A decision lived in six places that could disagree: the documents, the specs, the changes, the ADRs, an outline and the code.
-And because I required the full layered form of the architecture on every feature, trivial forms included, showing one field on a screen took eight files.
-The architecture was not at fault; KISS and YAGNI were lost, one reasonable addition at a time.
-The process that replaced it kept two checks, each tied to an error it catches, and one place per fact (chapter 6).
+On Ninjobs, my own product, I let complexity grow, one reasonable addition at a time.
+I required the full layered form of the architecture on every feature, trivial forms included, so showing one field on a screen took eight files; every delivery had to pass 29 checks that had never caught an error in the product.
+The architecture was not at fault; KISS and YAGNI were lost (chapter 6 tells what went wrong and how the process restarted).
 
 Fred Brooks split the difficulty of software in two in 1987: the essential complexity, which belongs to the problem itself, and the accidental complexity, which the people building it add along the way.[^brooks-silver-bullet]
 Nobody can remove the first; the second is a choice, made one file at a time, and the three principles of this chapter are three ways to refuse it.

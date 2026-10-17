@@ -6,12 +6,9 @@ Você também consegue manter as exceções de uma biblioteca na fronteira, de m
 
 ## O que cresceu na Ninjobs
 
-Na Ninjobs, o meu próprio produto, eu deixei a complexidade crescer antes de o processo dela mudar.
-Uma entrega tinha que passar por 29 verificações, e nenhuma delas jamais tinha pegado um erro no produto: eram caras de satisfazer e fáceis de contornar.
-Uma decisão morava em seis lugares que podiam discordar: os documentos, as especificações, as mudanças, os ADRs, um roteiro e o código.
-E porque eu exigia a forma completa, em camadas, da arquitetura em toda feature, formulários triviais incluídos, mostrar um campo em uma tela levava oito arquivos.
-A culpa não era da arquitetura; KISS e YAGNI se perderam, uma adição razoável por vez.
-O processo que o substituiu manteve duas verificações, cada uma ligada a um erro que ela pega, e um lugar por fato (capítulo 6).
+Na Ninjobs, o meu próprio produto, eu deixei a complexidade crescer, uma adição razoável por vez.
+Eu exigia a forma completa, em camadas, da arquitetura em toda feature, formulários triviais incluídos, então mostrar um campo em uma tela levava oito arquivos; toda entrega tinha que passar por 29 verificações que nunca tinham pegado um erro no produto.
+A culpa não era da arquitetura; KISS e YAGNI se perderam (o capítulo 6 conta o que deu errado e como o processo recomeçou).
 
 Fred Brooks dividiu a dificuldade do software em duas em 1987: a complexidade essencial, que pertence ao próprio problema, e a complexidade acidental, que as pessoas que constroem acrescentam pelo caminho.[^brooks-silver-bullet]
 Ninguém consegue remover a primeira; a segunda é uma escolha, feita um arquivo por vez, e os três princípios deste capítulo são três maneiras de recusá-la.
