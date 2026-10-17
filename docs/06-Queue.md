@@ -317,7 +317,7 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] ch3-spec-cut             chapter 3 keeps the definition of a spec and the measured numbers, and drops the taxonomy and the tools the book never used; both editions · after m14-review
 [x] simplicity-and-results   chapters 4 and 5 become one chapter that opens with Ninjobs, one section per principle, exception, refusal and error, and the exhaustive switch; both editions · after m14-review
 [x] focus-and-slices         chapters 6 and 7 become one chapter, FOCUS, with the slice, the four pieces and the code shown once; both editions · after m14-review
-[>] ch8-testing-trim         chapter 8 opens with the agent that writes too many tests, keeps one source per point and one gain section; both editions · after m14-review
+[x] ch8-testing-trim         chapter 8 opens with the agent that writes too many tests, keeps one source per point and one gain section; both editions · after m14-review
 [>] renumber-chapters        the chapters renumbered after the merges, with every cross-reference, index and build following; both editions · after prologue-and-why, simplicity-and-results, focus-and-slices, quick-guide
 [>] method-said-once         chapters 9 to 19: each rule, mark list, number and story said once in the chapter that owns it, and the passages that read as the kit's manual cut to what the reader uses; both editions · after m14-review
 [>] small-delivery-example   chapter 13: a five-line delivery shown end to end, so the reader sees what the smallest page costs before the rule asks for one; both editions · after method-said-once

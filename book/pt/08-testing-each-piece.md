@@ -2,11 +2,16 @@
 
 Depois deste capítulo você consegue dizer que teste guarda cada uma das quatro peças e o que ele troca, só o I/O e o relógio, e seguir uma regra pelos testes dela.
 Você também consegue escrever um fake (uma implementação falsa) que faz o teste falhar quando é chamado sem ser esperado, e dar nomes aos testes para que um revisor os leia como as frases da regra.
+E você sabe por que um teste que um agente escreveu só merece confiança verde depois de ter sido visto vermelho.
 
 ## O problema
 
-Um teste que precisa da aplicação inteira rodando, um servidor de pé, um banco populado, um navegador aberto, leva minutos para começar e quebra por motivos que nada têm a ver com o código que ele confere.
-Então ninguém o roda antes de dizer "pronto", e uma regra que mudou semana passada é encontrada quebrada por um usuário.
+O motivo para ter poucos testes era o custo de escrevê-los, e um agente escreve um em segundos, então esse motivo acabou.
+O risco passou para o outro lado: um agente escreve testes com tanta facilidade que escreve demais, o mesmo caso de cinco jeitos, até a suíte levar minutos e ninguém rodá-la antes de dizer "pronto".
+Pergunte a um teste o que o capítulo 4 pergunta a qualquer passo: que regra quebrada ele pegaria que nenhum outro teste pega?
+
+Um teste que precisa da aplicação inteira rodando, um servidor de pé, um banco populado, um navegador aberto, também leva minutos para começar, e quebra por motivos que nada têm a ver com o código que ele confere.
+Então ele também fica sem rodar, e uma regra que mudou semana passada é encontrada quebrada por um usuário.
 As quatro peças do [capítulo 6](06-focus.md) têm uma forma que deixa testar cada uma sozinha, no tempo de salvar um arquivo.
 
 ## Um teste para cada peça
@@ -28,14 +33,12 @@ Testes ponta a ponta são poucos porque cada um é lento e falha por muitos moti
 ## O que é um fake
 
 Gerard Meszaros chamou de "test doubles" (dublês de teste) os objetos que um teste põe no lugar dos reais, por causa do dublê de um filme, no livro *xUnit Test Patterns* (2007).[^meszaros]
-Martin Fowler resumiu os tipos: um stub responde o que o teste definiu, um mock confere as chamadas que mandaram ele esperar, e um fake tem uma implementação que funciona e pega um atalho, como um banco em memória.[^fowler-mocks]
-
-Nos nomes de Meszaros, o banco em memória é um fake e um repositório que responde o que o teste define é um stub.
+Nos nomes dele, um banco em memória, uma implementação que funciona e pega um atalho, é um fake, e um repositório que responde o que o teste define é um stub.
 Este livro chama os dois de fakes, porque os dois trocam o I/O por uma segunda implementação que responde, e nenhum deles afirma como o código testado foi escrito.
 
-Um mock afirma isso.
+Um mock afirma isso: ele confere as chamadas que mandaram ele esperar.
 Um teste que espera que `buscarMembro` seja chamado uma vez com `"m1"`, depois `buscarExemplar` com `"e1"`, repete o código do orquestrador linha por linha, e falha quando você troca a ordem de duas chamadas sem mudar nada que o usuário vê.
-Fowler descreve o mesmo custo na seção "Coupling Tests to Implementations" do mesmo artigo.[^fowler-mocks]
+Martin Fowler descreve esse custo na seção "Coupling Tests to Implementations" do artigo "Mocks Aren't Stubs".[^fowler-mocks]
 Um fake deixa o teste conferir o que importa, o estado que sai, e deixa o código livre para mudar por dentro.
 
 ## Troque só o I/O e o relógio
@@ -51,6 +54,10 @@ Na biblioteca, ele é lido uma vez, onde a requisição chega, e repassado como 
 
 A regra: um membro com um livro atrasado não pode pegar outro emprestado.
 Ela mora no caso de uso `emprestar` do [capítulo 4](04-simplicity-and-results.md), e cada peça que ela atravessa tem um teste.
+
+O desenvolvimento guiado por testes de Kent Beck escreve o teste antes do código, em um ciclo de três passos: vermelho, o teste falha porque o código ainda não existe; verde, o menor código que o faz passar; depois a limpeza, com o teste ainda verde.[^beck-tdd]
+Uma regra pura é o lugar mais fácil de fazer isso, porque o teste dela é uma chamada com dados: rode o primeiro teste abaixo antes de `emprestar` existir e ele está vermelho, escreva `emprestar` e ele está verde.
+A página de uma entrega lista os seus comportamentos (capítulo 14), cada um vira um teste vermelho, e a entrega está pronta quando todos eles estão verdes e nada que estava verde ficou vermelho.
 
 **O caso de uso.** `regras.test.ts` chama `emprestar` com dados:
 
@@ -122,16 +129,10 @@ O nome de um teste é o que um revisor lê primeiro, então escreva-o como uma f
 
 Lidos em sequência, os nomes são as regras do empréstimo, e uma regra que não tem frase entre eles não tem teste.
 Nomes como `teste1` ou `emprestar funciona` não dizem nada ao leitor e escondem a regra que falta.
-O livro de Kent Beck *Test-Driven Development: By Example* (2002) escreve o teste antes do código, então o teste é a primeira afirmação do que o código tem de fazer; um nome que se lê como frase o mantém uma afirmação que uma pessoa consegue conferir.[^beck-tdd]
 
 ## O que os testes provam, e o que não provam
 
-Por anos, o motivo para ter poucos testes foi o custo de escrevê-los.
-Um agente escreve um teste em segundos, então esse motivo acabou.
-O risco passou para o outro lado: um agente escreve testes com tanta facilidade que escreve demais, o mesmo caso de cinco jeitos, até a suíte levar minutos e ninguém rodá-la antes de dizer "pronto".
-Pergunte a um teste o que o capítulo 4 pergunta a qualquer passo: que regra quebrada ele pegaria que nenhum outro teste pega?
-
-Vermelho e verde são como o teste de um agente ganha confiança.
+Vermelho e verde, o ciclo de "Uma regra pelos testes dela" acima, são como o teste de um agente ganha confiança.
 Um teste visto vermelho antes de o código existir, e verde depois, provou que consegue falhar.
 Um teste escrito depois do código, pelo agente que escreveu o código, pode afirmar o que o código faz no lugar do que a regra diz, e passar para sempre.
 
@@ -140,23 +141,19 @@ Um teste pode estar errado e passar.
 Os testes unitários conferem cada peça sozinha, e a soma das peças pode falhar onde nenhuma peça falha: um campo que o cliente envia com um nome e o servidor lê com outro passa em todos os testes unitários dos dois lados.
 Esse é o trabalho dos poucos testes ponta a ponta, e o motivo de uma entrega levar também uma prova, o resultado visto funcionando, antes que alguém a chame de pronta ([capítulo 15](15-apply.md)).
 
-## O que isso dá a um agente
-
-Um agente que muda `emprestar` roda os testes unitários da fatia e sabe em segundos se quebrou a regra, antes de rodar a verificação inteira do [capítulo 15](15-apply.md).
-Ele não precisa subir um servidor nem abrir um navegador para descobrir, então roda os testes a cada mudança, e um teste que falha diz a ele qual frase da regra ele quebrou.
-Quando ele acrescenta uma regra, os nomes dos testes que escreveu dizem a você, antes de você ler qualquer código, em que casos ele pensou e em quais não.
-
 ## O que o time ganha
 
-Toda peça tem um teste que roda sem a aplicação, então um agente confere o próprio trabalho antes de dizer "pronto", e um revisor confere uma entrega lendo nomes de teste.
-Este livro não dá uma contagem de base de quanto mais cedo um time pega uma regra quebrada assim; o ganho é que a conferência existe e roda em segundos.
+Toda peça tem um teste que roda sem a aplicação, e cada teste pega uma regra quebrada que nenhum outro pega, então a suíte roda em segundos e um agente a roda a cada mudança, não só antes de dizer "pronto".
+Um agente que muda `emprestar` descobre pelo nome do teste que falha qual frase da regra ele quebrou, antes de rodar a verificação inteira.
+Como cada teste foi visto vermelho primeiro, "pronto" é a saída do executor de testes e não a opinião do agente.
+E um revisor confere uma entrega lendo nomes de teste, que dizem, antes de qualquer código, em que casos o agente pensou e em quais não.
 
 ## Pontos-chave
 
 * Um caso de uso é testado só com dados, um repositório contra um banco em memória com as migrações reais, um orquestrador com repositórios falsos, e a tela com poucos testes ponta a ponta em um navegador.
 * Um teste troca só o I/O e o relógio, e o relógio é um valor passado como parâmetro, então a maioria dos testes não troca nada além dos repositórios.
 * Um fake responde o que o teste define e lança em qualquer chamada que o teste não esperava; prefira-o a um mock, que repete o código que testa.
-* Cada nível de teste prova o que os outros não provam, e uma suíte verde ainda prova menos que software funcionando: um teste pode estar errado, e as peças podem falhar juntas, então veja um teste vermelho antes de confiar nele verde, e guarde a prova.
+* Cada nível de teste prova o que os outros não provam, e uma suíte verde ainda prova menos que software funcionando: um teste pode estar errado, e as peças podem falhar juntas, então veja um teste vermelho antes de confiar nele verde.
 * O nome de um teste é uma frase da regra: um revisor lê os nomes, e uma regra sem frase não tem teste.
 
 [^vitest]: Vitest, "Getting Started", documentação, acesso em 2026-09-29. <https://vitest.dev/guide/>

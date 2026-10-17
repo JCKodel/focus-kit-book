@@ -37,10 +37,10 @@
 
 **Done when.**
 
-* [ ] Chapter 8 changed in both editions, same headings; opens with the agent that writes too many tests; the TDD cycle taught here; Beck cited once, Meszaros once, Fowler once; one gain section; no filler and nothing useful cut.
-* [ ] Parity of notes green.
-* [ ] `make verify` green; `make book` builds and both PDF paths are given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, the commit suggested in a `commit` block.
+* [x] Chapter 8 changed in both editions, same headings; opens with the agent that writes too many tests; the TDD cycle taught here; Beck cited once, Meszaros once, Fowler once; one gain section; no filler and nothing useful cut.
+* [x] Parity of notes green.
+* [x] `make verify` green; `make book` builds and both PDF paths are given to the author.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, the commit suggested in a `commit` block.
 
 **Decisions taken from the documents.**
 
@@ -49,3 +49,40 @@
 * One gain section: docs/04 §A gain per chapter names one section.
 
 **Decisions in the review.** None.
+
+**Decisions made in /apply.**
+
+* The opening gains a third sentence, the one thing the chapter now teaches anew: a test an agent wrote is trusted green only after it was seen red.
+* The paragraph moved to `## The problem` had four sentences, not three; the first two became one, so the chapter 4 question, which the Behaviour names, stays and the paragraph is three sentences.
+* Once the two paragraphs of `## The problem` sat together, both said "nobody runs it before saying done"; the whole-application paragraph now says it "takes minutes to start too" and "is skipped as well", and keeps the user who finds the broken rule.
+* `## What a fake is`: Meszaros's second mention ("In Meszaros's names") became "In his names", and it carries the fake's definition that Fowler's summary held; the mock's definition joins "A mock does assert that"; the cost sentence names the article, since "the same article" lost its antecedent.
+* The TDD cycle is chapter 5's text adapted to `lend` and to the use case's first test, with its "(chapter 14)" pointer for the delivery page, the chapter's only pointer to chapter 14; "done stops being the agent's opinion" went to the gain.
+* "Red and green" points to "One rule through its tests" by name in prose, not by an anchor link: the book has no in-page links.
+* The merged gain names the whole verify without a second link to chapter 15 (docs/04 §Chapter pointers, once per chapter per target); the link stays in "What tests prove".
+* Key point four: the Edge says "the last one", the Contract "the fourth"; the fourth holds the proof clause, so "and keep the proof" is cut there.
+* Pointers to chapter 7: `focus-and-slices` had already repointed both to `06-focus.md`; nothing left here.
+
+**What happened.**
+
+* `book/{en,pt}/08-testing-each-piece.md`: opening of three sentences; `## The problem` opens with the agent that writes too many tests and the chapter 4 question, then the whole-application test; `## What a fake is` cites Meszaros once and `[^fowler-mocks]` once, for the mock's cost; `## One rule through its tests` teaches red, green and clean up with `[^beck-tdd]`; the Beck sentence left `## Test names are sentences`; `## What tests prove, and what they do not` lost its first paragraph and points to the section above; "What this gives an agent" folded into `## What the team gains`, four sentences, the baseline sentence gone; key point four shortened. Code blocks and the table unchanged.
+* docs/00 Contents names chapter 8 by title only; docs/04 §Chapter pointers already says "chapter 8's red and green cycle", which now holds. No other document changed.
+* Dependents: `one-gain-section` also waits on `method-said-once`, `ch20-21-git-cut` and `ch22-26-team-cut`, so it keeps `[>]`; `renumber-chapters` does not name this slug.
+
+**Proof.**
+
+* Same nine H2 headings in both editions.
+* Citations per edition, en and pt equal: `[^vitest]` 1, `[^playwright]` 1, `[^cohn]` 1, `[^vocke-pyramid]` 1, `[^meszaros]` 1, `[^fowler-mocks]` 1, `[^beck-tdd]` 1. In prose, Meszaros and Beck appear once each; Fowler twice, once as the owner of the site that hosts Vocke's guide.
+* The Portuguese code keeps its names (`emprestar`, `emprestimoPedido`, `falsos`, `buscarMembro`).
+* `make verify` green; `make book` built both editions, and the PDFs are `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+```commit
+docs(ch8-testing-trim): chapter 8 opens on the agent that tests too much
+
+- ch8: the problem opens with too many tests and the chapter 4 question
+- ch8: the TDD cycle taught once, before the rule's tests
+- ch8: Meszaros, Fowler and Beck cited once each
+- ch8: one gain section; the baseline sentence gone
+- both editions
+
+work/done/ch8-testing-trim.md
+```
