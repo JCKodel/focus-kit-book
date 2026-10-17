@@ -42,11 +42,11 @@
 
 **Done when.**
 
-* [ ] Both editions changed at points 1 and 4; the grep of Behaviour finds nothing in `book/en` and `book/pt`.
-* [ ] Chapter 9 still opens with its value, keeps its gain with its number, no filler and nothing useful cut; the story's counts are as before.
-* [ ] Every number still sourced; `make verify` green, disclosure scan included; no em dash.
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions changed at points 1 and 4; the grep of Behaviour finds nothing in `book/en` and `book/pt`.
+* [x] Chapter 9 still opens with its value, keeps its gain with its number, no filler and nothing useful cut; the story's counts are as before.
+* [x] Every number still sourced; `make verify` green, disclosure scan included; no em dash.
+* [x] `make book` run; both PDF paths given to the author.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
 
 **Decisions in the review.** Chosen alone, because the author could not answer; corrections go in the review.
 
@@ -54,3 +54,28 @@
 * Point 4's "six places" becomes "a decision kept in many places", not a restored count in the gain, because `plain-numbers` cut that count from the summary on purpose and the story proves it (docs/04 §Numbers that prove; `plain-numbers` Divergences). Source: `m14-review` L4.
 * No number is restored; nothing is left without its proof.
 * Points 2, 3 and 5 are left as they are (decision 5 above).
+
+**Decisions in /apply.** Chosen alone, under the batch's rule; corrections go in the review.
+
+* Both drafts are taken as written, in both editions; no polish was needed within the page's limits.
+* The Behaviour's story check reads "as before the delivery", but before it the grep counted 3 per edition, key point 4's "six places" among them. After it the count is 2 per edition, the two the page names (the opening of cause 5 and "the six places" in §Each rule and its failure). The page's intent, the story's counts kept and the key point's count gone, is what was checked.
+
+**What happened.**
+
+* `book/en/09-birth-of-focus-kit.md` and `book/pt/09-birth-of-focus-kit.md`, §Key points (pt §Pontos-chave): point 1's subject is "the old process" (pt "o processo antigo", and "as verificações do processo" for "as suas verificações"); point 4's first failure is "a decision kept in many places" (pt "uma decisão guardada em muitos lugares").
+* The story, the gain and points 2, 3 and 5 unchanged. No divergence from the Contract; docs/03, docs/04 and docs/05 untouched; no dependent queue line waits on this one.
+
+**Proof.**
+
+* On §Key points only, from its heading to the first `[^` or the end, `grep -n "OpenSpec\|six places\|seis lugares\|29"` finds nothing in either edition.
+* `grep -c "six places\|Six places\|seis lugares\|Seis lugares"` gives 2 per edition: line 29 (cause 5) and line 58 (§Each rule and its failure).
+* `make verify` green, disclosure scan included; `make book` built both editions, and the PDFs are `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+```commit
+docs(ch09-key-points): key points name the gain's cause, no extra count
+- ch9: point 1's subject is the old process, as in the gain
+- ch9: point 4 names a decision kept in many places, not six places
+- both editions
+
+work/done/ch09-key-points.md
+```
