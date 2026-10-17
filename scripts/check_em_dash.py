@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
-"""Check that no text file in the repository contains an em dash.
+"""Check every text file in the repository for an em dash.
 
+A text file is one with no NUL byte in its first 8000 bytes, git's own test, whatever its extension.
 Skips `work/done/*-run/`: the output of a recorded run kept byte for byte as evidence (docs/04 \u00a7Tests).
 Prints one line per finding as `file:line: em-dash: message`; exits 1 when anything is printed.
 """
 
 import sys
-from pathlib import Path
 
 from repo_files import ROOT, repo_files
 
 EM_DASH = "\u2014"
-EXTENSIONS = {".md", ".yml", ".yaml", ".html", ".css", ".py", ".txt", ".toml"}
 MESSAGE = "em dash found; use a comma, a colon, parentheses or a new sentence"
 
 
@@ -20,12 +19,19 @@ def is_run_evidence(path):
     return len(parts) > 3 and parts[:2] == ("work", "done") and parts[2].endswith("-run")
 
 
+def is_text(data: bytes) -> bool:
+    return b"\0" not in data[:8000]
+
+
 def main():
     findings = []
     for path in repo_files():
-        if path.suffix not in EXTENSIONS or is_run_evidence(path):
+        if is_run_evidence(path):
             continue
-        text = (ROOT / path).read_text(encoding="utf-8", errors="replace")
+        data = (ROOT / path).read_bytes()
+        if not is_text(data):
+            continue
+        text = data.decode("utf-8", errors="replace")
         for number, line in enumerate(text.splitlines(), 1):
             if EM_DASH in line:
                 findings.append(f"{path}:{number}: em-dash: {MESSAGE}")
