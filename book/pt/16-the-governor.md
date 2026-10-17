@@ -6,8 +6,8 @@ Você também consegue listar o que o processo não tem, e dizer o que faz cada 
 ## O problema
 
 Um processo cresce um passo razoável de cada vez.
-Uma checagem aqui, um modelo ali, uma revisão antes de cada construção: cada um faz sentido sozinho, e cada um é pago de novo por toda entrega que vem depois, que o roda, o satisfaz e espera por ele.
-Na Ninjobs os passos se acumularam em 29 checagens que nunca pegaram um erro no produto, caras de satisfazer e fáceis de contornar.
+Uma verificação aqui, um modelo ali, uma revisão antes de cada construção: cada um faz sentido sozinho, e cada um é pago de novo por toda entrega que vem depois, que o roda, o satisfaz e espera por ele.
+Na Ninjobs os passos se acumularam em 29 verificações que nunca pegaram um erro no produto, caras de satisfazer e fáceis de contornar.
 Ninguém as acrescentou para atrasar o trabalho; ninguém perguntou o que cada uma tinha pegado.
 
 ## A pergunta
@@ -23,8 +23,8 @@ E o custo que ele precisa superar é pago por toda entrega depois dele.
 
 A pergunta decide o que entra, e decide o que fica.
 
-Na Ninjobs, quando eu recomecei o projeto, aquelas checagens saíram: nenhuma delas conseguia nomear um erro no produto que tivesse pegado.
-Duas checagens ficaram no lugar delas, ambas protegendo a promessa de privacidade do produto, onde um vazamento é o erro que o produto não pode se permitir: uma prova do que cada nível de privacidade pode mostrar, e um teste das regras de acesso do banco de dados.
+Na Ninjobs, quando eu recomecei o projeto, aquelas verificações saíram: nenhuma delas conseguia nomear um erro no produto que tivesse pegado.
+Duas verificações ficaram no lugar delas, ambas protegendo a promessa de privacidade do produto, onde um vazamento é o erro que o produto não pode se permitir: uma prova do que cada nível de privacidade pode mostrar, e um teste das regras de acesso do banco de dados.
 
 O que entrou depois entrou do mesmo jeito.
 O Supabase, o fornecedor do banco de dados, traz o seu próprio lint (um verificador automático de problemas), e um dos avisos dele estava em um relatório que ninguém abria.
@@ -57,7 +57,7 @@ No Caso A, um projeto para um cliente em uma plataforma low-code, linhas esperan
 ## O que o time ganha
 
 Cada passo de um processo é pago por toda entrega, então um passo que não pega nada é um imposto sobre todas elas.
-A Ninjobs chegou à abertura ao público com um processo de seis regras, as que o `SETUP.md` do kit lista para todo projeto, e duas checagens, depois de as checagens antigas a terem acompanhado por quinze dias que construíram quatro telas.
+A Ninjobs chegou à abertura ao público com um processo de seis regras, as que o `SETUP.md` do kit lista para todo projeto, e duas verificações, depois de as verificações antigas a terem acompanhado por quinze dias que construíram quatro telas.
 O regulador mantém um processo desse tamanho, e deixa um time dizer sim a um passo com o erro que o justifica escrito.
 
 ## Pontos-chave

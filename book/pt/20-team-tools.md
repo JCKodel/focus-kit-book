@@ -39,7 +39,7 @@ Isso faz dela uma boa porta de entrada para o relato de bug de um usuário.
 Uma linha da fila pode espelhar uma issue, e o slug nomeia as duas: o título da issue começa com o slug, e a linha termina com o número da issue.
 
 ```text
-[ ] corrigir-data-de-devolucao  devolução um dia antes no fim do mês (#42)
+[ ] corrigir-devolucao  data de devolução um dia antes no fim do mês (#42)
 ```
 
 O pull request diz "Fixes #42", e o GitHub fecha a issue quando o merge acontece.[^gh-issues]

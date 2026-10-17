@@ -31,7 +31,7 @@ Os sufixos `· after`, `· resume:` e `· blocked:` ficam em inglês, como o kit
 ```
 [x] catalogo          a bibliotecária cadastra livros e exemplares
 [x] membros           a bibliotecária cadastra e suspende membros
-[*] emprestar-livro   a bibliotecária empresta, e as regras recusam
+[*] emprestar-livro   a bibliotecária empresta, e as regras podem recusar
 [>] buscar-catalogo   um membro busca no catálogo
 [~] reservas          um membro reserva um exemplar emprestado
 [ ] meus-emprestimos  o membro vê os dele · after emprestar-livro
@@ -50,7 +50,7 @@ A fila passa a dizer o que está acontecendo agora, não o que terminou por últ
 
 Onde uma marca é vista depende de onde a sessão trabalha (capítulo 18).
 No trunk, a marca muda na fila da pasta onde a sessão roda, na hora, e chega ao histórico com o commit da pessoa.
-Em um branch ou em uma worktree, o `[~]` e o `[*]` moram nesse branch, e o branch principal só os vê quando o merge da entrega chega, então a fila do branch principal guarda o que já chegou.
+Em um branch ou em um worktree, o `[~]` e o `[*]` moram nesse branch, e o branch principal só os vê quando o merge da entrega chega, então a fila do branch principal guarda o que já chegou.
 Um quadro atualizado pelo comando que mudou a marca a mostra na hora, em qualquer branch em que o trabalho esteja.
 
 ## A próxima linha, e quais rodam juntas
@@ -74,7 +74,7 @@ Uma linha espera em três casos:
 
 * **A pessoa diz que ela está travada.** A biblioteca ainda não comprou os leitores de código de barras, então a bibliotecária pede para segurar `escanear-exemplar`: `· resume: propose · blocked: sem leitores ainda`.
 * **Uma resposta foi pedida e não veio.** `aviso-prazo` precisa de um provedor de SMS, a pergunta foi para a diretora da biblioteca, e ninguém respondeu: `· resume: propose · blocked: qual provedor?`.
-* **Outra linha precisa ser feita antes, descoberto depois de o trabalho começar.** No meio de `/apply meus-emprestimos`, a construção descobre que `emprestar-livro` põe o prazo um dia antes no fim de um mês; a correção vira uma linha `[ ]` acima dela, `corrigir-vencimento`, e `meus-emprestimos` espera: `· resume: apply · blocked: after corrigir-vencimento`.
+* **Outra linha precisa ser feita antes, descoberto depois de o trabalho começar.** No meio de `/apply meus-emprestimos`, a construção descobre que `emprestar-livro` põe a data de devolução um dia antes no fim de um mês; a correção vira uma linha `[ ]` acima dela, `corrigir-devolucao`, e `meus-emprestimos` espera: `· resume: apply · blocked: after corrigir-devolucao`.
 
 O motivo vai no fim da linha, em palavras, `· blocked: <reason>`, ou como as linhas que precisam estar `[x]` antes, `· blocked: after <slug>, <slug>`.
 Antes dele vai a fase de retomada, `· resume: propose` para uma linha que estava `[ ]` ou `[~]`, `· resume: apply` para uma que estava `[>]` ou `[*]`, para que a sessão que retoma a linha saiba de qual comando ela precisa.
@@ -82,7 +82,7 @@ Qualquer marca antes de `[x]` pode virar `[?]`: uma linha pode esperar antes de 
 
 `· after` e `· blocked: after` se parecem e dizem coisas diferentes.
 `· after` é uma ordem conhecida quando a linha é escrita: `meus-emprestimos` precisa de empréstimos para mostrar, então foi acrescentada como `[ ] meus-emprestimos ... · after emprestar-livro`, e mantém `[ ]`.
-`· blocked: after` é uma espera descoberta depois de o trabalho começar, como foi `corrigir-vencimento`.
+`· blocked: after` é uma espera descoberta depois de o trabalho começar, como foi `corrigir-devolucao`.
 Escrever `[?] meus-emprestimos ... · blocked: after emprestar-livro` quando a linha é acrescentada está errado: a linha está na fila, não travada, e em um quadro levaria uma etiqueta de travada que diz a um gerente que algo deu errado quando nada deu.
 
 Uma linha sai de `[?]` quando o motivo se resolve.

@@ -53,8 +53,8 @@ emprestado, e o sistema recusa quando as regras dizem não.
 
 **Comportamento.**
 * Um membro sem livros atrasados pega um exemplar disponível, e o exemplar
-  aparece como emprestado a ele, com devolução prevista para 21 dias
-  depois (docs/00).
+  aparece como emprestado a ele, com data de devolução 21 dias depois
+  (docs/00).
 * Um membro com um livro atrasado é recusado com "Devolva primeiro os seus
   livros atrasados"; nada é registrado.
 * Um membro suspenso é recusado com "A sua matrícula está suspensa"; nada

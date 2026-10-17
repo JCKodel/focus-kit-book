@@ -112,8 +112,8 @@ Uma tela que decide quem pode pegar emprestado, ou um repositório que decide is
 
 Um evento é o que aconteceu: um toque em "Emprestar", ou uma requisição chegando a um servidor.
 Um estado é o que o orquestrador publica depois dele, inteiro: em uma tela, o que a tela renderiza; em um servidor, a resposta à requisição.
-Uma tela, a view, não é só uma interface gráfica.
-O JSON que uma API responde é uma view, e o texto que uma ferramenta de linha de comando imprime também: a view é a saída da computação, entrada, processamento, saída, em qualquer forma que deixe o programa.
+Uma tela não é só uma interface gráfica.
+O JSON que uma API responde é uma tela, e o texto que uma ferramenta de linha de comando imprime também: a tela é a saída da computação, entrada, processamento, saída, em qualquer forma que deixe o programa.
 Ela é burra de propósito: não formata nem uma data; renderiza o texto que o estado traz, e o caso de uso que o formatou tem um teste.
 
 ### Drivers e serviços
@@ -135,9 +135,9 @@ Estes são os passos entre os dois:
 1. **A tela dispara o evento**, `EmprestimoPedido { exemplarId, membroId }`, e não faz mais nada.
 2. **O orquestrador o recebe** e confere que ele traz os dois ids; em um servidor o evento é a requisição, então ler o corpo dela faz parte de recebê-lo.
 3. **Os repositórios buscam** o membro, por `buscarMembro`, e o exemplar, por `buscarExemplar`.
-4. **O caso de uso decide**: `emprestar` devolve um `Emprestimo` com vencimento 21 dias depois, ou a recusa `TemLivrosEmAtraso` ou `MembroSuspenso`.
+4. **O caso de uso decide**: `emprestar` devolve um `Emprestimo` com data de devolução 21 dias depois, ou a recusa `TemLivrosEmAtraso` ou `MembroSuspenso`.
 5. **O repositório salva**: `inserirEmprestimo` transforma a recusa do índice único a um segundo empréstimo aberto do exemplar em `JaEmprestado`, como o [capítulo 3](03-simplicity-and-results.md) mostrou.
-6. **O orquestrador publica o novo estado**, que a tela renderiza: `Emprestado` mostra a data de vencimento, `Recusado` "Devolva primeiro os seus livros atrasados.", `Falhou` "Não foi possível acessar o banco da biblioteca. Tente de novo."
+6. **O orquestrador publica o novo estado**, que a tela renderiza: `Emprestado` mostra a data de devolução, `Recusado` "Devolva primeiro os seus livros atrasados.", `Falhou` "Não foi possível acessar o banco da biblioteca. Tente de novo."
 
 O estado e os repositórios de que o orquestrador precisa são tipos no arquivo dele, `eventosDeEmprestimo.ts`:
 
@@ -186,10 +186,10 @@ As recusas são strings e a exceção é um objeto com um `codigo`, então `esta
 O código mostra mais três coisas:
 
 * **Os repositórios são um parâmetro.** O servidor passa os reais, ligados ao banco dele, e nada mais na função vem de fora.
-* **Um teste passa fakes.** Um fake (um falso) é uma segunda implementação que responde o que o teste define, então o teste sabe quais repositórios foram chamados, com o quê, e que estado saiu, e o fluxo inteiro de uma feature é provado sem banco e sem tela (o capítulo 5 mostra o teste).
+* **Um teste passa repositórios falsos.** Um repositório falso é uma segunda implementação que responde o que o teste define, então o teste sabe quais repositórios foram chamados, com o quê, e que estado saiu, e o fluxo inteiro de uma feature é provado sem banco e sem tela (o capítulo 5 mostra o teste).
 * **O relógio é um valor.** `hoje` é lido uma vez, onde o evento chega, e repassado como dado; nem `emprestimoPedido` nem `emprestar` leem o relógio, então o teste de uma data de devolução passa a data que quiser.
 
-## Dependências só onde existe um fake
+## Dependências só onde existe uma implementação falsa
 
 Uma dependência é algo de que um trecho de código precisa, de fora dele, para rodar: o banco de dados, a rede, o relógio, outro módulo.
 Martin Fowler deu nome à prática de entregá-la de fora em 2004: depois de longa discussão, escreveu, "*nos decidimos pelo nome Injeção de Dependência*".[^fowler-injection]
@@ -198,7 +198,7 @@ Mark Seemann acrescentou onde as partes reais são montadas: em um lugar, "*o ma
 Injetadas em toda parte, as dependências viram a sua própria camada de cerimônia: uma interface para cada classe, um contêiner, um parâmetro que ninguém varia.
 Injetar em toda parte resolve um problema real em um SDK, cujos usuários precisam substituir partes que não são deles, e é cerimônia dentro de uma aplicação, onde cada uma dessas interfaces tem uma implementação só, para sempre.
 O DRY já dá a regra: o que não tem motivo para existir não existe.
-Se, em uma aplicação, só os repositórios têm duas implementações, a real e o fake que os testes passam, então só os repositórios ganham uma interface, ou um parâmetro; um caso de uso que sempre será aquela única função concreta não ganha nenhum dos dois.
+Se, em uma aplicação, só os repositórios têm duas implementações, a real e a falsa que os testes passam, então só os repositórios ganham uma interface, ou um parâmetro; um caso de uso que sempre será aquela única função concreta não ganha nenhum dos dois.
 Este livro traça essa linha mais estreita: uma peça recebe uma dependência como parâmetro só onde o teste dela passa uma segunda implementação.
 
 `emprestimoPedido(evento, hoje, repositorios)` é essa linha traçada uma vez: o orquestrador recebe os seus repositórios porque o teste dele passa repositórios falsos.
@@ -234,7 +234,7 @@ Cliente e servidor compartilham os casos de uso: o servidor impõe `emprestar`, 
 * Uma fatia vertical guarda tudo de que uma feature precisa em uma pasta; uma feature é uma coisa que o app guarda, ou uma coisa que ele faz sem guardar nada, e código que não pertence a nenhuma feature vai para `lib/` no segundo uso.
 * FOCUS é Feature-oriented (fatias verticais), Clean (a regra de dependência, com um caso de uso que não recebe repositório porque o orquestrador busca e salva), Unidirectional (evento, orquestrador, novo estado, nada volta, então um comportamento é um teste) e Scalable (toda peça isolada, com o próprio teste).
 * A tela dispara eventos e renderiza o estado sem formatar nada; o orquestrador transforma um evento em um novo estado; um caso de uso guarda uma decisão, uma validação ou uma formatação como função pura; o repositório busca e salva por um driver, e transforma uma exceção vinda dos dados em um `Result`.
-* Uma peça recebe uma dependência só onde o teste dela passa um fake: orquestradores e repositórios do servidor recebem, casos de uso e telas não, e o relógio é um valor.
+* Uma peça recebe uma dependência só onde o teste dela passa uma implementação falsa: orquestradores e repositórios do servidor recebem, casos de uso e telas não, e o relógio é um valor.
 * Escreva uma peça quando uma entrega precisar do trabalho dela, e no cliente importe o caso de uso do servidor para decidir o que mostrar, nunca uma segunda cópia da regra.
 
 [^martin-clean-2012]: Robert C. Martin, "The Clean Architecture", The Clean Code Blog, 2012-08-13, acesso em 2026-09-30. <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>

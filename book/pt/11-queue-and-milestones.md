@@ -98,7 +98,7 @@ Uma mudança nele pedida em qualquer outra sessão, por menor que seja, vira uma
 Pedido numa sessão comum para mostrar a data de devolução na tela do empréstimo como dia/mês/ano, e informado de como ela deve aparecer numa tela estreita e de que o catálogo mantém a forma ISO, ano-mês-dia, o agente acrescenta esta linha ao marco acima, logo acima de `m1-review`, uma linha escrita para este capítulo:
 
 ```
-[ ] formato-devolucao   o empréstimo mostra a devolução em dia/mês/ano
+[ ] formato-devolucao   a tela mostra a data de devolução em dia/mês/ano
 ```
 
 A regra da tela estreita e a exceção do catálogo não cabem na frase única da linha, então vão para um rascunho `work/formato-devolucao.md`, e a resposta para ali, nomeando `/propose formato-devolucao` para uma sessão nova, escrito como o seu host chama os comandos; um pedido que a linha comporta inteiro não ganha rascunho.
@@ -115,8 +115,8 @@ O `/propose formato-devolucao` lê os documentos do projeto e o rascunho e escre
 dia/mês/ano na tela do empréstimo.
 
 **Comportamento.**
-* Um empréstimo com devolução em 2026-03-05 mostra 05/03/2026, numa tela
-  estreita também.
+* Um empréstimo com data de devolução 2026-03-05 mostra 05/03/2026, numa
+  tela estreita também.
 * Um empréstimo sem data de devolução não mostra nada onde a data estaria.
 
 **Contrato.** Nenhum.
@@ -146,7 +146,7 @@ work/done/formato-devolucao.md
 Você revisa um diff de poucas linhas contra uma página que já leu, e faz o commit; a linha agora diz:
 
 ```
-[x] formato-devolucao   o empréstimo mostra a devolução em dia/mês/ano
+[x] formato-devolucao   a tela mostra a data de devolução em dia/mês/ano
 ```
 
 Foi isso o que a regra custou: duas sessões curtas, uma revisão e um commit.

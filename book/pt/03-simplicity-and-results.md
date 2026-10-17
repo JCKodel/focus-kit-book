@@ -132,7 +132,7 @@ Ela lê um membro e responde.
 De onde o membro veio, um banco de dados ou um teste, não é assunto dela.
 Imutabilidade é a mesma ideia aplicada aos dados: uma função que muda a sua entrada esconde uma segunda saída, então `podePegarEmprestado` devolve o membro que recebeu ou uma recusa, e não muda nada.
 
-A Clean Architecture, como costuma ser praticada, injeta os repositórios no caso de uso que guarda a regra, e o teste dele passa a precisar de um fake para cada um; este livro mantém `podePegarEmprestado` pura, recebendo um membro e não um jeito de buscá-lo, e deixa buscar e salvar para um orquestrador, a função em volta da regra que o capítulo 4 constrói.
+A Clean Architecture, como costuma ser praticada, injeta os repositórios no caso de uso que guarda a regra, e o teste dele passa a precisar de um repositório falso para cada um; este livro mantém `podePegarEmprestado` pura, recebendo um membro e não um jeito de buscá-lo, e deixa buscar e salvar para um orquestrador, a função em volta da regra que o capítulo 4 constrói.
 
 ## Result: o valor que carrega uma falha
 

@@ -1,7 +1,7 @@
 # 5. Um teste para cada peça
 
 Depois deste capítulo você consegue dizer que teste guarda cada uma das quatro peças e o que ele troca, só o I/O e o relógio, e seguir uma regra pelos testes dela.
-Você também consegue escrever um fake (uma implementação falsa) que faz o teste falhar quando é chamado sem ser esperado, e dar nomes aos testes para que um revisor os leia como as frases da regra.
+Você também consegue escrever uma implementação falsa que faz o teste falhar quando é chamada sem ser esperada, e dar nomes aos testes para que um revisor os leia como as frases da regra.
 E você sabe por que um teste que um agente escreveu só merece confiança verde depois de ter sido visto vermelho.
 
 ## O problema
@@ -23,29 +23,29 @@ Em TypeScript, o Vitest roda testes unitários no Node,[^vitest] e o Playwright 
 | Peça | O teste dela | O que ele troca |
 |---|---|---|
 | Caso de uso | chamado com dados; sem preparação | nada: ele não tem I/O, e a data chega como valor |
-| Repositório | contra um banco em memória com as migrações reais do projeto | o arquivo do banco, pelo mesmo motor em memória |
+| Repositório | contra um banco em memória com as migrações reais do projeto | o arquivo do banco, pela mesma engine de banco de dados em memória |
 | Orquestrador | com repositórios falsos que respondem o que o teste define e lançam em qualquer chamada que o teste não esperava | os repositórios |
 | Tela | um teste ponta a ponta em um navegador; poucos, um por cenário que o usuário vê | nada |
 
 A maioria dos testes é dos três primeiros tipos, e eles rodam em segundos.
 Testes ponta a ponta são poucos porque cada um é lento e falha por muitos motivos; Mike Cohn desenhou essa forma como uma pirâmide, muitos testes unitários na base e poucos testes ponta a ponta no topo,[^cohn] e o guia de Ham Vocke no site de Martin Fowler a ensina com código.[^vocke-pyramid]
 
-## O que é um fake
+## O que é uma implementação falsa
 
 Gerard Meszaros chamou de "test doubles" (dublês de teste) os objetos que um teste põe no lugar dos reais, por causa do dublê de um filme, no livro *xUnit Test Patterns* (2007).[^meszaros]
-Nos nomes dele, um banco em memória, uma implementação que funciona e pega um atalho, é um fake, e um repositório que responde o que o teste define é um stub.
-Este livro chama os dois de fakes, porque os dois trocam o I/O por uma segunda implementação que responde, e nenhum deles afirma como o código testado foi escrito.
+Nos nomes dele, um banco em memória, uma implementação que funciona e pega um atalho, é um *fake*, e um repositório que responde o que o teste define é um *stub*.
+Este livro chama os dois de implementações falsas, porque os dois trocam o I/O por uma segunda implementação que responde, e nenhum deles afirma como o código testado foi escrito.
 
 Um mock afirma isso: ele confere as chamadas que mandaram ele esperar.
 Um teste que espera que `buscarMembro` seja chamado uma vez com `"m1"`, depois `buscarExemplar` com `"e1"`, repete o código do orquestrador linha por linha, e falha quando você troca a ordem de duas chamadas sem mudar nada que o usuário vê.
 Martin Fowler descreve esse custo na seção "Coupling Tests to Implementations" do artigo "Mocks Aren't Stubs".[^fowler-mocks]
-Um fake deixa o teste conferir o que importa, o estado que sai, e deixa o código livre para mudar por dentro.
+Uma implementação falsa deixa o teste conferir o que importa, o estado que sai, e deixa o código livre para mudar por dentro.
 
 ## Troque só o I/O e o relógio
 
 As quatro peças decidem o que um teste pode trocar.
 Só um repositório faz I/O, e só o orquestrador recebe repositórios, então o teste do orquestrador troca os repositórios e o teste do repositório troca o arquivo do banco.
-Nada mais é trocado: um caso de uso nunca é falso, porque ele é puro e rápido, e um teste que o troca por um fake não testa nada.
+Nada mais é trocado: um caso de uso nunca é trocado, porque ele é puro e rápido, e um teste que o troca por uma implementação falsa não testa nada.
 
 O relógio também é I/O: `new Date()` responde algo diferente a cada chamada.
 Na biblioteca, ele é lido uma vez, onde a requisição chega, e repassado como valor, `hoje`, então um teste passa `"2026-10-01"` e não precisa de relógio falso nenhum.
@@ -82,7 +82,7 @@ Sem banco, sem servidor, sem mock: o membro é um objeto, a data é uma string, 
 
 **O repositório.** `repositorio.server.test.ts` abre o SQLite em memória, roda os mesmos arquivos de migração que a aplicação roda, e chama `inserirEmprestimo` duas vezes para o mesmo exemplar.
 A primeira chamada devolve o empréstimo; a segunda devolve a recusa `JaEmprestado`, porque o índice único a recusou.
-Essa é a única parte do empréstimo que só o banco consegue garantir, já que duas bibliotecárias podem apertar "Emprestar" no mesmo instante, e ela é testada contra o motor real e o esquema real.
+Essa é a única parte do empréstimo que só o banco consegue garantir, já que duas bibliotecárias podem apertar "Emprestar" no mesmo instante, e ela é testada contra a engine de banco de dados real e o esquema real.
 
 **O orquestrador.** `eventosDeEmprestimo.test.ts` passa repositórios falsos a `emprestimoPedido`, o orquestrador do [capítulo 4](04-focus.md):
 
@@ -109,7 +109,7 @@ describe("emprestimoPedido", () => {
 ```
 
 `falsos` preenche só os repositórios que o teste define, e todos os outros lançam.
-Este teste não define `inserirEmprestimo`, então, se o orquestrador tentasse salvar um empréstimo para um membro com um livro atrasado, o fake lançaria e o teste falharia.
+Este teste não define `inserirEmprestimo`, então, se o orquestrador tentasse salvar um empréstimo para um membro com um livro atrasado, o repositório falso lançaria e o teste falharia.
 Ele prova a recusa e que nada foi salvo, e não afirma nenhuma ordem de chamadas.
 
 **A tela.** Um teste ponta a ponta, em um navegador, abre a tela de empréstimo, empresta um exemplar a um membro que tem um livro atrasado, e espera ler "Devolva primeiro os seus livros atrasados."
@@ -152,7 +152,7 @@ E um revisor confere uma entrega lendo nomes de teste, que dizem, antes de qualq
 
 * Um caso de uso é testado só com dados, um repositório contra um banco em memória com as migrações reais, um orquestrador com repositórios falsos, e a tela com poucos testes ponta a ponta em um navegador.
 * Um teste troca só o I/O e o relógio, e o relógio é um valor passado como parâmetro, então a maioria dos testes não troca nada além dos repositórios.
-* Um fake responde o que o teste define e lança em qualquer chamada que o teste não esperava; prefira-o a um mock, que repete o código que testa.
+* Uma implementação falsa responde o que o teste define e lança em qualquer chamada que o teste não esperava; prefira-a a um mock, que repete o código que testa.
 * Cada nível de teste prova o que os outros não provam, e uma suíte verde ainda prova menos que software funcionando: um teste pode estar errado, e as peças podem falhar juntas, então veja um teste vermelho antes de confiar nele verde.
 * O nome de um teste é uma frase da regra: um revisor lê os nomes, e uma regra sem frase não tem teste.
 

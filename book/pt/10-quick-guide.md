@@ -29,7 +29,7 @@ Em outro host, um comando toma a forma da tabela do capítulo 8:
 
 `/brainstorm`, `/analyze` e `/apply` tomam a mesma forma que o `/propose`.
 
-Uma escolha é sua antes do primeiro `/propose`: a estratégia de git, trunk, uma branch por entrega ou uma worktree por entrega.
+Uma escolha é sua antes do primeiro `/propose`: a estratégia de git, trunk, um branch por entrega ou um worktree por entrega.
 O `/brainstorm` e o `/analyze` perguntam com um padrão e escrevem a sua resposta no docs/05: trunk para uma pessoa, e, num projeto com código, o que o repositório já faz.
 O [capítulo 18](18-git-essentials.md) e o [capítulo 19](19-worktrees.md) ensinam as três; os passos abaixo supõem trunk.
 
