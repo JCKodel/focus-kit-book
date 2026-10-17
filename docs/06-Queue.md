@@ -328,7 +328,7 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] m15-review               the review of M15 as docs/05 §8 says
 [x] disclosure-docstring     check_disclosure.py's docstring says when the run fails as docs/01 does
 [ ] docs01-empty-list        docs/01's make scan row says a list file with no entry fails the run even locally, as check_disclosure.py does
-[ ] docs03-finding-and-gain  docs/03's finding row includes a finding the code review confirms, and its team gain row allows no sentence on a missing number
+[x] docs03-finding-and-gain  docs/03's finding row includes a finding the code review confirms, and its team gain row allows no sentence on a missing number
 [ ] adr17-gain-amendment     ADR-0017 carries an amendment saying a gain with no number has no sentence about it
 [ ] docs05-review-checker    docs/05's Milestone review slot names the checker as the author runs it, Opus with the host's advisor on Fable
 [ ] stack-rule-once          the stack chosen by what the agent knows, and the Flutter story, are told in one chapter and pointed to from chapters 6, 9 and 22; both editions
