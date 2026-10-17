@@ -319,6 +319,11 @@ time. Steps go in a manual, and what a command prints stays in its help.
   say which environment is at which version.
 * **Context:** `context/` is committed | listed in `.gitignore`, and why
   (who reads the repository).
+* **Delivery review:** <how /apply has a delivery's changes reviewed by a
+  context that did not write them: the host's own review, as a skill the
+  agent invokes or a command it runs, and how it is limited to the
+  delivery's paths; else a read-only agent on the session's model reading
+  `git diff` of those paths; or: none>.
 * **Manuals:** `docs/manuals/`, one file per action that takes more than
   one command: what a person does by hand outside a delivery (publish,
   roll back, rotate a secret, set up a service) and a proof /apply runs
@@ -329,9 +334,9 @@ time. Steps go in a manual, and what a command prints stays in its help.
   names such a command points to its manual instead of holding the steps;
   a delivery that changes one updates its manual. <The manuals, one line
   each, or: none yet.>
-* **Milestone review:** <the command a person launches for a deep review
-  of a whole branch's code against a base, such as Claude Code's
-  `/code-review ultra <base>`, or: none>.
+* **Milestone review:** <the areas a milestone's changes split into for
+  the code reading of §8, one reader each, and the model its readers and
+  checker run on, or the session's; or: none>.
 * **Git:** trunk | a branch per delivery | a worktree per delivery. A
   delivery's page and build are one change: one commit on trunk, one merge
   otherwise. The agent stages; it never commits or merges. <With a
@@ -374,7 +379,8 @@ complete, so one merge still holds the whole delivery.
 
 No formal spec, no spec delta, no change folder, no numbered tasks, no
 gate before implementation beyond a complete page, no review of a review,
-no specialized subagent, no tool the deliveries did not ask for. When one of these is
+no specialized subagent beyond the reviews' readers and checker (§5's
+Delivery review, §8), no tool the deliveries did not ask for. When one of these is
 proposed, the question is: which concrete error would it have caught? The
 answer names an error that happened.
 
@@ -389,10 +395,23 @@ delivery answers, or one that fails in the person's hands, is a finding.
 
 The review also reads the code, the one look at the whole instead of a
 delivery: every page can be right and the whole wrong. Its page names the
-commit that closed the previous milestone, or the first commit, and the
-person launches §5's Milestone review against it; the agent may say it is
-time and never launches it. A finding the code review confirms is a
-finding like the others.
+commit that closed the previous milestone, or the first commit, as the
+base, and lists, by §5's areas, the paths `git diff --stat <base>..HEAD`
+shows: always the range, since a bare commit reads that one commit. An
+area too large for one careful reading splits again. It costs, so the
+session says it is time and starts it only on the person's word: one
+read-only agent per area, in parallel where the host runs agents, or one
+fresh session per area, opened by the person, where it does not. Each
+reader has the whole repository open and reads its area's changes for
+what no delivery's own review could see, one delivery's work against
+another's, a document against another, the whole against docs/01, and
+reports candidates by file and line and the paths it read. One checker,
+an agent or the review's session, opens each candidate's file and marks
+it seen, latent (nothing triggers it today) or weak (the claim does not
+hold as stated) before the person sees it. They fix nothing. When the
+paths read miss some of the range's, the page says which and the line
+waits as `[?]` with `· resume: apply` (§4). A candidate the person confirms is a finding like
+the others.
 
 Each finding becomes a `[ ]` line in the same milestone, under the review
 line, waiting for /propose. The milestone closes when those lines are

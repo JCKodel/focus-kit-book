@@ -6,7 +6,7 @@ description: >-
   then stage and suggest the commit. Never commits.
 argument-hint: <slug>
 metadata:
-  version: "2026.10.16.2"
+  version: "2026.10.17"
 ---
 Implement `work/$ARGUMENTS.md` in this session, completely. When the slug
 is missing, ask for it. The page is the scope; do not widen it.
@@ -37,8 +37,12 @@ Add no dependency, layer or tool the page did not name. No em dash in any
 text a user reads.
 
 Run verify until green. Prove the delivery as docs/05 says; list divergences
-and fix them until only what you can justify remains. Leave environments
-as required. Record divergences, omissions, proof and decisions on the
+and fix them until only what you can justify remains. Then have this
+delivery's changes, by its paths, reviewed as docs/05 §5's Delivery review
+says, by a context that did not write them; another delivery's file is not
+this review's. Fix what breaks the page, docs/04 or this delivery's own
+lines and run verify again; anything else becomes a `[ ]` line. Leave environments
+as required. Record divergences, omissions, proof, the review and decisions on the
 page; update their owning documents and ADRs. When the delivery adds or
 changes something a person does by hand, write or update its manual as
 docs/05 §5 says. Tick every Done when item and

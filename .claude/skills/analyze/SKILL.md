@@ -6,7 +6,7 @@ description: >-
   docs/adr/ and AGENTS.md describing what is there, and asks only what the
   code cannot answer. Writes no code.
 metadata:
-  version: "2026.10.16.2"
+  version: "2026.10.17"
 ---
 You are documenting a repository so that every later session can act on it
 without rereading it. Read `references/documents.md` first, whole: it says
@@ -38,8 +38,13 @@ host's question form when it has one:
   and you say what that is;
 * whether `context/` is committed. Default: committed when the repository
   stays with the team, in `.gitignore` when it is delivered or public;
-* the milestone review: the deep code review the person will launch at
-  each milestone's close. Default: the one this host offers, if any;
+* the delivery review: the host's own review that the agent can run on a
+  delivery's paths, as a skill or a command, else a read-only agent
+  (docs/05 §5). Default: the host's, when it can be limited to those
+  paths;
+* the milestone review: the areas its code reading splits into and the
+  model its agents run on (docs/05 §8). Default: docs/01's modules and
+  the session's model;
 * the first milestone: three to eight deliveries, or where to read them
   from (issues, a TODO file, a roadmap), then its review.
 

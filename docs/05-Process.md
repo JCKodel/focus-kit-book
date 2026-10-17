@@ -203,6 +203,11 @@ time. Steps go in a manual, and what a command prints stays in its help.
   version.
 * **Context:** `context/` is listed in `.gitignore` and not created: the
   repository is public and what people said about the cases is private.
+* **Delivery review:** before /apply ends, a read-only agent on Opus,
+  which keeps the session's advisor, reads `git diff` and
+  `git diff --cached` of the delivery's paths, of docs/06 only its own
+  hunk, against the delivery's page and docs/04. Another session's
+  files are not this review's. No other model runs it.
 * **Guided project and brownfield project:** retired by `rewrite`
   (ADR-0017). The repositories `JCKodel/focus-kit-clinic` and
   `JCKodel/clahub` and their tags stay as they are, cited by no chapter;
@@ -282,7 +287,8 @@ the delivery is complete, so one merge still contains the whole delivery.
 
 No formal spec, no spec delta, no change folder, no numbered tasks, no
 gate before implementation beyond a complete page, no review of a review,
-no specialized subagent, no tool the deliveries did not ask for. When one of these is proposed, the question
+no specialized subagent beyond the reviews' readers and checker (§5's
+Delivery review, §8), no tool the deliveries did not ask for. When one of these is proposed, the question
 is: which concrete error would it have caught? The answer names an error
 that happened.
 
@@ -298,10 +304,23 @@ person's hands, is a finding.
 
 The review also reads the code, the one look at the whole instead of a
 delivery: every page can be right and the whole wrong. Its page names the
-commit that closed the previous milestone, or the first commit, and the
-person launches §5's Milestone review against it; the agent may say it is
-time and never launches it. A finding the code review confirms is a
-finding like the others.
+commit that closed the previous milestone, or the first commit, as the
+base, and lists, by §5's areas, the paths `git diff --stat <base>..HEAD`
+shows: always the range, since a bare commit reads that one commit. An
+area too large for one careful reading splits again. It costs, so the
+session says it is time and starts it only on the person's word: one
+read-only agent per area, in parallel where the host runs agents, or one
+fresh session per area, opened by the person, where it does not. Each
+reader has the whole repository open and reads its area's changes for
+what no delivery's own review could see, one delivery's work against
+another's, a document against another, the whole against docs/01, and
+reports candidates by file and line and the paths it read. One checker,
+an agent or the review's session, opens each candidate's file and marks
+it seen, latent (nothing triggers it today) or weak (the claim does not
+hold as stated) before the person sees it. They fix nothing. When the
+paths read miss some of the range's, the page says which and the line
+waits as `[?]` with `· resume: apply` (§4). A candidate the person confirms is a finding like
+the others.
 
 For a milestone of chapters, testing by hand is the author reading, in
 the PDF of both editions, the passages the page names, and answering the

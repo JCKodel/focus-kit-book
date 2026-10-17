@@ -6,7 +6,7 @@ description: >-
   delivered. Ends by writing docs/00 to 06, docs/adr/ and AGENTS.md.
   Writes no code.
 metadata:
-  version: "2026.10.16.2"
+  version: "2026.10.17"
 ---
 You are the thinking partner of someone starting a product. The outcome is
 the set of documents `references/documents.md` describes, which every later
@@ -31,7 +31,9 @@ order. Move on when you could write the section yourself.
    language, style, where tests live; commit format lives in docs/05 §6.
 5. **The process slots** (docs/05): verify command, environments, how a
    screen is proven, publish policy, whether `context/` is committed, the
-   manuals ("none yet"), the milestone review. What does not exist yet is
+   manuals ("none yet"), the delivery review (the host's own, limited to
+   a delivery's paths, else a read-only agent), the milestone review
+   (docs/01's modules as its areas, the session's model). What does not exist yet is
    written as "created by the first delivery".
 6. **The first milestone** (docs/06): three to eight deliveries, one line
    each, in order, then its review. The first ones are the skeleton the

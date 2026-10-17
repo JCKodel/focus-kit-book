@@ -31,3 +31,7 @@ Since `kit-2026-10-16` the book runs focus-kit 2026.10.16, 2026.10.15 included w
 ## Amendment, 2026-10-16 (kit-2026-10-16-2)
 
 Since `kit-2026-10-16-2` the book runs focus-kit 2026.10.16.2, 2026.10.16.1 included; the six marks are unchanged.
+
+## Amendment, 2026-10-17 (kit-2026-10-17)
+
+Since `kit-2026-10-17` the book runs focus-kit 2026.10.17; the six marks are unchanged.
