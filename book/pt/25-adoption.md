@@ -77,6 +77,8 @@ Rode-o num marco de um projeto, e deixe o marco decidir.
 4. Construa-o com `/propose` e `/apply`, uma página por linha.
 5. Feche-o com a sua revisão ([capítulo 17](17-closing-a-milestone.md)).
 
+[O capítulo depois do 12](12a-quick-guide.md) dá cada passo da instalação até a primeira entrega com commit.
+
 Meça duas coisas: os tokens por entrega ([capítulo 24](24-cost-and-where.md)), e o que a revisão e as páginas pegaram que de outro modo teria saído.
 Depois decida com esses números na mesa, e o marco seguinte vira a comparação.
 

@@ -312,7 +312,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.16.2 and the repo
 When this milestone closes, a reader reaches the method in five chapters instead of nine, every rule of the book is said once in the chapter that owns it with one source per point and one gain section, a reader sees what a five-line delivery costs before being asked to accept one, chapters 20 to 26 keep only what no manual gives, and a chapter after chapter 12 walks a reader from zero to the first delivery on a new project and on an existing one, step by step, with no repository.
 
 ```
-[>] quick-guide              a new chapter after chapter 12: from install to the first delivery and its commit, one column for a new project and one for an existing one, one pointer per step; both editions · after m14-review
+[x] quick-guide              a new chapter after chapter 12: from install to the first delivery and its commit, one column for a new project and one for an existing one, one pointer per step; both editions · after m14-review
 [>] prologue-and-why         chapters 0 and 1 become one prologue that opens with the METR study and ends in the three parts; both editions · after m14-review
 [>] ch3-spec-cut             chapter 3 keeps the definition of a spec and the measured numbers, and drops the taxonomy and the tools the book never used; both editions · after m14-review
 [>] simplicity-and-results   chapters 4 and 5 become one chapter that opens with Ninjobs, one section per principle, exception, refusal and error, and the exhaustive switch; both editions · after m14-review

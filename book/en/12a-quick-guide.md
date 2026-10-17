@@ -1,0 +1,114 @@
+# 12a. From zero to the first delivery
+
+After this chapter you can take a project, new or with code already in it, from an empty session of your host to its first delivery committed, step by step.
+Each step says what to type or do, what you see when it worked, and the one chapter that teaches it, so you can follow it with no other chapter open.
+
+## Before you start
+
+You need a git repository, empty or with code, and a host from [chapter 11](11-install-and-hosts.md)'s table, the program that runs your coding agent.
+The kit is installed with the one sentence that chapter gives, said to your agent at the root of the repository:
+
+```
+Read https://raw.githubusercontent.com/JCKodel/focus-kit/main/SETUP.md and do what it says.
+```
+
+The steps are written for Claude Code.
+In another host, a command takes the form of chapter 11's table:
+
+| Host | You type |
+|---|---|
+| Claude Code | `/propose <slug>` |
+| Codex | `$propose <slug>` |
+| GitHub Copilot | `/propose`, and it asks for the slug |
+| Cursor | `/propose` |
+| Gemini CLI | `/propose <slug>` |
+| Google Antigravity | `/propose <slug>` |
+| Windsurf | `@propose <slug>` |
+| OpenCode, Zed | by asking for the skill |
+
+`/brainstorm`, `/analyze` and `/apply` take the same form as `/propose`.
+
+One choice is yours before the first `/propose`: the git strategy, trunk, a branch per delivery or a worktree per delivery.
+`/brainstorm` and `/analyze` ask it with a default and write your answer into docs/05: trunk for one person, and on a project with code, what the repository already does.
+[Chapter 20](20-git-essentials.md) and [chapter 21](21-worktrees.md) teach the three; the steps below assume trunk.
+
+## A new project
+
+1. Open Claude Code at the root of the empty repository and say the sentence above.
+   You see the kit's four commands in `.claude/skills/`, nothing staged or committed, and the agent naming `/brainstorm` as the next step.
+   Taught in [chapter 11](11-install-and-hosts.md), "Install".
+2. Type `/brainstorm` and answer its questions, one subject at a time; "your call" keeps the agent's default.
+   You see docs/00 to 06, `docs/adr/`, `AGENTS.md`, `CLAUDE.md` and `work/done/` written, the queue shown, and the agent naming `/propose <slug>` for the queue's first line, in a fresh session.
+   Taught in [chapter 12](12-starting-a-project.md), "`/brainstorm`: a new project".
+3. Read the documents against chapter 12's checklist, ask the agent for every fix in the same session, then commit them with the kit's files: `git add -A`, then `git commit -m "docs: the project's documents, by /brainstorm"`, a message written for this chapter.
+   You see one commit in `git log` holding the documents, `AGENTS.md`, `CLAUDE.md` and the host's folders; from here, your docs/05 owns the format of every message.
+   Taught in [chapter 12](12-starting-a-project.md), "Review before you commit".
+4. In a fresh session, type `/propose <slug>`, with the slug of the queue's first line, and answer what the documents leave open.
+   You see `work/<slug>.md` written, its line in docs/06 marked `[>]`, and the agent asking you to read the page, then to run `/apply <slug>` in a fresh session.
+   Taught in [chapter 14](14-propose.md), "What `/propose` does".
+5. Read the page with chapter 14's questions, and ask the agent for every correction in that same session.
+   You see a page whose every Behaviour line can be checked, whose Out of scope names what you assumed was in, and no question left open.
+   Taught in [chapter 14](14-propose.md), "Read the page before `/apply`".
+6. Open a fresh session, never the one that ran `/propose`, because the page must stand alone, and type `/apply <slug>`.
+   You see verify green, the page moved to `work/done/`, its line marked `[x]`, the delivery staged and the suggested message in a `commit` block, on the page and in the conversation.
+   Taught in [chapter 15](15-apply.md), "What `/apply` does".
+7. Read the staged change with `git diff --staged` against the page, and ask the agent for every correction in the same session.
+   You see only this delivery staged, every Behaviour line answered, and a message whose last line is `work/done/<slug>.md`.
+   Taught in [chapter 15](15-apply.md), "Review the staged change".
+8. Type `git commit` and paste the message from the `commit` block at the end of the page.
+   You see one new commit in `git log`, holding the page in `work/done/` and its build.
+   Taught in [chapter 15](15-apply.md), "The commit is the human review".
+
+A project left after step 3 is ready for the kit: any later session reads its documents and starts at step 4.
+
+## An existing project
+
+1. Install as in the new project's step 1, at the root of the repository with code.
+   You see the same kit files, and no file of your code changed.
+   Taught in [chapter 11](11-install-and-hosts.md), "What the install never touches, and how to update".
+2. Put what the code cannot say in a folder `context/` at the root, as it is: proposals, contracts, emails, meeting transcripts, tickets.
+   You see one folder beside the code, with nothing sorted or summarized.
+   Taught in [chapter 12](12-starting-a-project.md), "What the code cannot say: the context folder".
+3. Type `/analyze` and answer its one round; each default is what the code already does.
+   You see the change shown before it is written, then the documents of the new project's step 2, a manual in `docs/manuals/` for each thing a person already does by hand, every inferred statement marked observed, and the agent naming `/propose <slug>`.
+   Taught in [chapter 12](12-starting-a-project.md), "`/analyze`: an existing project".
+4. Check every observed statement against the code, opening the file it names, then review and commit them as in the new project's step 3, from a tree with no change of yours, with `/analyze` in the message.
+   You see one commit holding the documents, `AGENTS.md`, `CLAUDE.md` and the host's folders, and none of your code.
+   Taught in [chapter 12](12-starting-a-project.md), "Review before you commit".
+5. In a fresh session, type `/propose <slug>` for the queue's first line: with code already there, there is no skeleton to build, so it is the smallest change the first milestone needs.
+   You see a page whose Done when runs the verify command `/analyze` observed, and the agent asking you to read it.
+   Taught in [chapter 14](14-propose.md), "What `/propose` does".
+
+From there, follow steps 5 to 8 of the new project, unchanged.
+
+The tests and CI already there are the verify command, or part of it, as `/analyze` recorded them in docs/05.
+The backlog already there is read into the first milestone by `/analyze`, three to eight lines, and the rest waits in its tool.
+Nothing else in the repository changes until a delivery touches it.
+
+## The loop after the first delivery
+
+The next delivery is the queue's first free line ([chapter 13](13-queue-and-milestones.md)).
+Each delivery is a page, a build and a commit, steps 4 to 8 of the new project.
+A milestone closes with its review, its last line, a delivery like the others ([chapter 17](17-closing-a-milestone.md)).
+
+## When to stop a pilot
+
+A pilot, one milestone run on the method to see whether it pays ([chapter 25](25-adoption.md)), is not paying when one of three signs shows:
+
+* the pages are written and nobody reads them before `/apply`;
+* the queue is not the plan the team follows;
+* "done" is still said without verify green.
+
+When it stops, the documents stay: they are the project's documentation either way.
+
+## What the team gains
+
+Anyone on the team, developer or not, goes from an empty session to a first delivery committed by one list, each step one link from its reason; there is no number for this gain, since the book counted no reader's first delivery.
+
+## Key points
+
+* Before the first `/propose` you need a repository, a host, the kit installed with one sentence, and an answer to the git question; trunk fits one person.
+* A new project: install, `/brainstorm`, review and commit the documents, `/propose` the first line, read the page, `/apply` in a fresh session, read the staged change, commit.
+* An existing project: `context/` first, then `/analyze`, every observed statement checked against the code; the first delivery is the smallest change the first milestone needs, checked by the verify command `/analyze` observed.
+* The documents are the project's first commit, and a project stopped there is ready for any later session.
+* A pilot stops when the pages go unread, the queue is not the plan or "done" is said without verify; the documents stay.

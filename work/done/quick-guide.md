@@ -45,12 +45,12 @@
 
 **Done when.**
 
-* [ ] Both editions written, same file name and headings; opens with its value; no step explains a rule, every step points to one chapter; no filler and nothing useful cut.
-* [ ] A person following the "New project" column on an empty repository with Claude Code reaches a committed first delivery with no other chapter open (the author's own check, by reading, since the book narrates no run).
-* [ ] No other chapter file moved; the chapter builds after chapter 12 on the site, in the PDF contents and in the EPUB under its temporary number; docs/00's Contents lists it; chapter 25's pointer added.
-* [ ] Every host form matches chapter 11's table at the time of the build; the install sentence matches chapter 11.
-* [ ] `make verify` green; `make book` builds, the PDF contents of both editions still fit on one page, and both PDF paths are given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, the commit suggested in a `commit` block.
+* [x] Both editions written, same file name and headings; opens with its value; no step explains a rule, every step points to one chapter; no filler and nothing useful cut.
+* [x] A person following the "New project" column on an empty repository with Claude Code reaches a committed first delivery with no other chapter open (the author's own check, by reading, since the book narrates no run).
+* [x] No other chapter file moved; the chapter builds after chapter 12 on the site, in the PDF contents and in the EPUB under its temporary number; docs/00's Contents lists it; chapter 25's pointer added.
+* [x] Every host form matches chapter 11's table at the time of the build; the install sentence matches chapter 11.
+* [x] `make verify` green; `make book` builds, the PDF contents of both editions still fit on one page, and both PDF paths are given to the author.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, the commit suggested in a `commit` block.
 
 **Decisions taken from the documents.**
 
@@ -64,3 +64,34 @@
 
 * Numbering: the author chose one renumbering at the end. This delivery shifts no chapter: the file is `12a-quick-guide.md` in both editions, its H1 carries the temporary number "12a." so the site, the PDF contents and the EPUB order it after chapter 12, and `renumber-chapters` gives it its number with the merges' gaps. Chapter 25's pointer names it "the chapter after 12" until then. If a check of `make verify` rejects the temporary number, /apply reports it and the line waits as `[?]`.
 * Title: "From zero to the first delivery", as recommended.
+
+**What happened.**
+
+* `make book` did not see the chapter: `scripts/build_book.py` took only `[0-9][0-9]-*.md`, so `12a-quick-guide.md` was absent from the PDF and the EPUB, its H1 got no numeral, and a link to it got no anchor. Three patterns widened (the glob, `NUMBERED`, `CHAPTER_LINK`) to take one letter after the two digits; `make verify` never rejected the number, so the line did not wait.
+* docs/01 (the tree and the `make book` row) and docs/04 §Files say a chapter between two numbers takes a letter, `12a-`, until a renumbering; first: this delivery.
+* docs/00's Contents lists "12a From zero to the first delivery" in Part II, with its number marked temporary; chapter 25's "One milestone as the pilot" gains one sentence linking "the chapter after 12", both editions.
+* The chapter is written in both editions with the seven sections of the Contract and no `status: draft`.
+
+**Proof.** `make verify` green. `make book` builds both editions: the contents stay on one page (page 4) with the row "12a" between 12 and 13; the chapter opens on page 98 (en) and 102 (pt) with the numeral "12a" and its running head; the EPUB carries it after chapter 12 and chapter 25's link lands on its anchor. Host forms and the install sentence copied from chapter 11's table and code block, each edition from its own.
+
+**Decisions taken alone.**
+
+* The build script change above, needed for Done when's PDF and EPUB, with docs/01 and docs/04 following; `renumber-chapters` may narrow the patterns again.
+* No example slug in the steps: chapter 12's milestone starts with `skeleton`, so `lend-book` as "the queue's first line" would be wrong; the steps say `<slug>`, and the lending library is not named.
+* The install sentence is quoted once, in "Before you start", and step 1 says it, so each step keeps its three lines.
+* The git default is said as the kit says it: trunk for one person; on a project with code, what the repository already does. The kit has no single fixed default for `/brainstorm`.
+* Each step's pointer is a link to its chapter with the section's title in quotes, the chapter's own words, since the pointers are the content (docs/04 §Chapter pointers, chapter 25's steps).
+* The free line points to chapter 13, as the Contract says; chapter 13 points on to chapter 16, which defines it.
+* "`renumber-chapters` moves these pointers" is a note to that delivery, not to the reader, and is left out of the loop section.
+* The existing project's tests, CI, backlog and "nothing else changes" are three lines after its list, since they are not steps a person does; its step 4 commits "from a tree with no change of yours", because `git add -A` takes everything.
+* The Portuguese example message is translated, `docs: os documentos do projeto, pelo /brainstorm`, as chapter 15's Portuguese translates the message written for it.
+
+```commit
+docs(quick-guide): add chapter 12a, from zero to the first delivery
+
+- Steps for a new and an existing project, one pointer each; both editions
+- Chapter 25 points to it; docs/00 lists it in Part II
+- The book build takes a temporary 12a- chapter; docs/01 and docs/04 say so
+
+work/done/quick-guide.md
+```

@@ -36,7 +36,7 @@ READ = ["-f", "markdown-tex_math_dollars+ascii_identifiers", "--file-scope"]
 
 YAML_FIELD = re.compile(r"^(\s*)(site_author|copyright|draft_banner):\s*(.*)$")
 LOCALE = re.compile(r"^(\s*)- locale:\s*(\S+)")
-CHAPTER_LINK = re.compile(r"\]\(((?:[0-9]{2}|A[0-9]+)-[^)#\s]+\.md)(\s+\"[^\"]*\")?\)")
+CHAPTER_LINK = re.compile(r"\]\(((?:[0-9]{2}[a-z]?|A[0-9]+)-[^)#\s]+\.md)(\s+\"[^\"]*\")?\)")
 PANDOC_PLACE = re.compile(r"\"([^\"]+)\" \(line (\d+), column \d+\)")
 # weasyprint names a link it cannot place by pandoc's id: the target's file without its leading digits, `__`, the anchor.
 NO_ANCHOR = re.compile(r"^ERROR: No anchor #(.+?)__(\S+) for internal URI reference")
@@ -45,7 +45,7 @@ APPENDIX = re.compile(r"A([0-9]+)-")
 # The patterns below read the HTML pandoc writes with --wrap=none: one block per line, a tag never broken.
 CHAPTER_START = re.compile(r'(?=<h1 id=")')
 OPENING = re.compile(r'<h1 id="([^"]+)">(.*?)</h1>\n(<p>.*?</p>\n)?', re.S)
-NUMBERED = re.compile(r"(\d+)\. (.*)", re.S)
+NUMBERED = re.compile(r"(\d+[a-z]?)\. (.*)", re.S)
 TAG = re.compile(r"<[^>]+>")
 NOTES = re.compile(r'<(section|aside) id="footnotes".*?</\1>\n?', re.S)
 NOTE = re.compile(r'<li id="(fn\d+)">(.*?)</li>', re.S)
@@ -140,7 +140,8 @@ def index_values(edition):
 
 def chapters(edition):
     folder = ROOT / "book" / edition
-    numbered = sorted(folder.glob("[0-9][0-9]-*.md"))
+    # A chapter placed between two numbers until a renumbering takes a letter, 12a- after 12- and before 13-.
+    numbered = sorted([*folder.glob("[0-9][0-9]-*.md"), *folder.glob("[0-9][0-9][a-z]-*.md")])
     appendices = sorted(
         folder.glob("A[0-9]*-*.md"), key=lambda path: (int(APPENDIX.match(path.name).group(1)), path.name)
     )

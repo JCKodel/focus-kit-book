@@ -77,6 +77,8 @@ Run it on one milestone of one project, and let the milestone decide.
 4. Build it with `/propose` and `/apply`, one page per line.
 5. Close it with its review ([chapter 17](17-closing-a-milestone.md)).
 
+[The chapter after 12](12a-quick-guide.md) gives each step from the install to the first delivery committed.
+
 Measure two things: the tokens per delivery ([chapter 24](24-cost-and-where.md)), and what the review and the pages caught that would otherwise have shipped.
 Then decide with those numbers on the table, and the next milestone becomes the comparison.
 
