@@ -331,7 +331,7 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] docs03-finding-and-gain  docs/03's finding row includes a finding the code review confirms, and its team gain row allows no sentence on a missing number
 [x] adr17-gain-amendment     ADR-0017 carries an amendment saying a gain with no number has no sentence about it
 [x] docs05-review-checker    docs/05's Milestone review slot names the checker as the author runs it, Opus with the host's advisor on Fable
-[ ] stack-rule-once          the stack chosen by what the agent knows, and the Flutter story, are told in one chapter and pointed to from chapters 6, 9 and 22; both editions
+[x] stack-rule-once          the stack chosen by what the agent knows, and the Flutter story, are told in one chapter and pointed to from chapters 6, 9 and 22; both editions
 [ ] free-line-gloss          chapters 7 and 18 gloss a free line as docs/03 defines it, `[ ]` lines included; both editions
 [ ] line-rule-once           chapters 13 and 22 point to chapter 11 for the one-sentence queue line instead of restating it; both editions
 [ ] case-a-board-once        chapters 16 and 20 point to chapter 14 for the kanban board, the fold onto three columns and Case A's `[?]`; both editions

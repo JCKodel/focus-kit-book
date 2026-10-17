@@ -35,7 +35,7 @@ The cost was the number of places, not the size of each file.
 
 ## Where it went
 
-On 2026-08-29 I started over, with a process small enough to hold in my head, and moved the app from Flutter to React.
+On 2026-08-29 I started over, with a process small enough to hold in my head, and moved the app from Flutter to React, where the same agent got the design right (chapter 9 turns that into how to choose a stack).
 One delivery became one page, `work/<slug>.md`.
 Two commands did the work: `/propose` talks with me and writes the page, never code; `/apply` builds the page, verifies it and compares the screen against the design.
 The queue became one line per delivery.
@@ -67,12 +67,6 @@ Every rule of focus-kit exists because something failed without it.
 * **Nothing enters without naming the error it would have caught.**
   It answers the growth of the checks, each plausible on its own and all of them together heavier than the work (chapter 16).
 
-## Pick a stack the agent knows well
-
-The restart taught one lesson beyond the process.
-In Flutter the same agent kept missing the design; in React it wrote it right.
-Flutter could build the product, and what the agent had seen in training was the limit, so I choose a stack by the product's needs and by how well the agent knows it (chapter 9).
-
 ## What the team gains
 
 A process that carries a product instead of weighing on it.
@@ -84,5 +78,4 @@ After, one page per delivery gave the public opening in thirteen days, with each
 * The cost was the number of places, not the size of each file; the architecture was sound, and I lost KISS and YAGNI by requiring its full form on every feature.
 * Start from the least that held on Ninjobs: one page per delivery, two commands, one queue line per delivery, two checks and the governor's question.
 * Each rule of the kit answers a failure: a decision kept in many places, a build that decides as it goes, commands that drift, an outline that mixed plan and reasoning, checks blind to the product, and checks that grew unasked.
-* Choose a stack by the product and by how well the agent knows it.
 

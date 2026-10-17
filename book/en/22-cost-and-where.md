@@ -75,9 +75,8 @@ The agent helps there by asking the right questions in order, and the cost to wa
 On Ninjobs everything the agent wrote for a delivery, its page included, averaged 149 thousand output tokens, and the hours I spent deciding those pages are in none of the table's columns.
 
 **It does not pay** on a stack the agent has seen too little of.
-On Ninjobs, before the method, the agent guessed the pixel values of a customised Flutter design that it had few examples to learn from, and screen after screen came close to the design without reaching it.
-Each attempt cost tokens and a person's review, and neither bought a finished screen.
-Choosing a stack the agent knows is a cost decision as much as a technical one.
+On Ninjobs, before the method, that stack was Flutter: each attempt at the design cost tokens and a person's review, and neither bought a finished screen.
+Choosing a stack by the questions of chapter 9 is a cost decision as much as a technical one.
 
 ## How a team decides
 

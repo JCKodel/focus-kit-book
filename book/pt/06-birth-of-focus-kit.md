@@ -35,7 +35,7 @@ O custo estava no número de lugares, e não no tamanho de cada arquivo.
 
 ## Para onde foi
 
-Em 2026-08-29 eu recomecei, com um processo pequeno o bastante para caber na cabeça, e mudei o app de Flutter para React.
+Em 2026-08-29 eu recomecei, com um processo pequeno o bastante para caber na cabeça, e mudei o app de Flutter para React, onde o mesmo agente acertou o design (o capítulo 9 transforma isso em como escolher uma stack).
 Uma entrega virou uma página, `work/<slug>.md`.
 Dois comandos faziam o trabalho: o `/propose` conversa comigo e escreve a página, nunca código; o `/apply` constrói a página, faz a verificação e compara a tela com o design.
 A fila virou uma linha por entrega.
@@ -67,12 +67,6 @@ Toda regra do focus-kit existe porque alguma coisa falhou sem ela.
 * **Nada entra sem dizer o erro que teria pegado.**
   Responde ao crescimento das verificações, cada uma plausível sozinha e todas juntas mais pesadas que o trabalho (capítulo 16).
 
-## Escolha uma stack que o agente conhece bem
-
-O recomeço ensinou uma lição além do processo.
-Em Flutter o mesmo agente errava o design o tempo todo; em React ele o acertava.
-O Flutter conseguiria construir o produto, e o limite era o que o agente tinha visto no treinamento, então eu escolho uma stack pelas necessidades do produto e pelo quanto o agente a conhece (capítulo 9).
-
 ## O que o time ganha
 
 Um processo que carrega o produto em vez de pesar sobre ele.
@@ -84,5 +78,4 @@ Depois, uma página por entrega deu a abertura ao público em treze dias, com ca
 * O custo estava no número de lugares, e não no tamanho de cada arquivo; a arquitetura era sólida, e eu perdi o KISS e o YAGNI ao exigir sua forma completa em toda feature.
 * Comece do mínimo que se sustentou no Ninjobs: uma página por entrega, dois comandos, uma linha de fila por entrega, duas verificações e a pergunta do regulador.
 * Cada regra do kit responde a uma falha: uma decisão guardada em muitos lugares, uma construção que decide enquanto anda, comandos que divergem, um roteiro que misturava plano e raciocínio, verificações cegas ao produto e verificações que cresceram sem ninguém pedir.
-* Escolha uma stack pelo produto e pelo quanto o agente a conhece.
 

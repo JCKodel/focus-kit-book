@@ -75,9 +75,8 @@ O agente ajuda ali fazendo as perguntas certas na ordem certa, e o custo a obser
 No Ninjobs, tudo o que o agente escreveu para uma entrega, a sua página incluída, deu em média 149 mil tokens de saída, e as horas que eu passei decidindo essas páginas não estão em nenhuma coluna da tabela.
 
 **Ele não compensa** numa stack que o agente viu pouco.
-No Ninjobs, antes do método, o agente chutava os valores em pixels de um design personalizado em Flutter do qual tinha poucos exemplos para aprender, e tela após tela chegava perto do design sem alcançá-lo.
-Cada tentativa custou tokens e a revisão de uma pessoa, e nenhum dos dois comprou uma tela pronta.
-Escolher uma stack que o agente conhece é uma decisão de custo tanto quanto técnica.
+No Ninjobs, antes do método, essa stack foi o Flutter: cada tentativa no design custou tokens e a revisão de uma pessoa, e nenhum dos dois comprou uma tela pronta.
+Escolher uma stack pelas perguntas do capítulo 9 é uma decisão de custo tanto quanto técnica.
 
 ## Como um time decide
 
