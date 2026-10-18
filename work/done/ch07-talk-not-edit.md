@@ -50,10 +50,34 @@
 
 **Done when.**
 
-* [ ] Both editions written: the two lines as Behaviour says.
-* [ ] Chapter 7 still opens with its value, keeps its gain, no filler and nothing useful cut.
-* [ ] Every number sourced: none added.
-* [ ] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions written: the two lines as Behaviour says.
+* [x] Chapter 7 still opens with its value, keeps its gain, no filler and nothing useful cut.
+* [x] Every number sourced: none added.
+* [x] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author: run by the batch driver at the end of the batch.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+
+**Divergences.** None. Both lines in each edition are the Behaviour's exact words.
+
+**Proof.**
+
+* The `grep` for "I recommend you do not" and "eu recomendo que não edite" prints nothing.
+* The `grep` for the new first line prints one line per edition (en 07:142, pt 07:143).
+* `git diff -- book/` on chapter 7 shows two lines changed per edition, nothing else.
+* `make verify` passes build, parity, em dash, prose, width, links and disclosure, with exit 0.
+
+**Review.** A read-only Opus reviewer that did not write the change read the diff against this page and docs/04. Nothing breaks the page or docs/04; the wording matches Behaviour, no fact of the old second line is lost, and no Fails pattern appears. Its one optional suggestion, a semicolon in the Portuguese line to match the English, is not applied: the page keeps the author's comma on purpose (decision 2). There is no new queue line.
+
+**Decisions.** The batch driver owns docs/06, the staging and the commit, and runs `make book`.
+
+```commit
+docs(ch07-talk-not-edit): say the reader changes the documents by talking to the agent
+
+- Chapter 7, both editions, "Living documents": the line that said the reader does not edit by hand and then recommended not to becomes one statement, in the author's words, that the reader talks to the agent to change the documents, pointing at what is wrong or missing; the next line keeps what the agent does and why
+
+book/en/07-the-documents.md
+book/pt/07-the-documents.md
+docs/06-Queue.md
+work/done/ch07-talk-not-edit.md
+```

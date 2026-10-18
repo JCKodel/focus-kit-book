@@ -140,8 +140,8 @@ Uma frase de uma conversa pode guardar vários fatos como esses, e cada um chega
 Uma entrega que muda comportamento atualiza o documento dono do fato, na mesma entrega.
 A próxima sessão lê a mudança junto com todo o resto e a segue sem que ninguém precise repetir.
 
-Você não edita os documentos à mão, e eu recomendo que não edite.
-Converse com o agente: aponte uma lacuna, um detalhe errado, algo a acrescentar, mudar ou remover, e ele encontra o documento dono do fato e escreve a mudança ali, já que os documentos lhe dizem onde mora cada fato, e a conversa guarda o motivo.
+Você não edita os documentos à mão, você conversa com o agente para alterá-los, apontando uma lacuna, um detalhe errado, algo a acrescentar, mudar ou remover.
+Ele encontra o documento dono do fato e escreve a mudança ali, já que os documentos lhe dizem onde mora cada fato, e a conversa guarda o motivo.
 A sua parte é interpretar, guiar e validar: dizer o que a mudança significa, direcioná-la, e lê-la antes de fazer o commit.
 O texto de um agente parece certo mesmo quando está errado, então você o confere com o que sabe e nunca confia nele às cegas, como não confiaria no de um colega.
 

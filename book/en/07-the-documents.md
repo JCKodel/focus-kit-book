@@ -139,8 +139,8 @@ One sentence of a conversation can hold several facts like these, and each lands
 A delivery that changes behaviour updates the document that owns the fact, in the same delivery.
 The next session reads the change with everything else and follows it without being told again.
 
-You do not edit the documents by hand, and I recommend you do not.
-Talk to the agent: point at a gap, a wrong detail, something to add, change or remove, and it finds the document that owns the fact and writes the change there, since the documents tell it where each fact lives, and the conversation keeps the reason.
+You do not edit the documents by hand; you talk to the agent to change them, pointing at a gap, a wrong detail, something to add, change or remove.
+It finds the document that owns the fact and writes the change there, since the documents tell it where each fact lives, and the conversation keeps the reason.
 Your part is to interpret, guide and validate: say what the change means, steer it, and read it before you commit.
 An agent's text reads as right even when it is wrong, so you check it against what you know and never trust it blindly, as you would not trust a colleague's.
 
