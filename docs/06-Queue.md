@@ -452,25 +452,49 @@ When this milestone closes, a reader of chapters 0 to 7 learns each idea where i
 When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repository runs on it: verify kept fast with the slow tests run by the milestone review, a line no clause needs going to the next milestone, /propose in the asking session or a fresh one, /apply's next steps starting with using the delivery, and the agent committing or merging only when asked; and every passage the comparison of the book with the kit on 2026-10-18 found false says what the kit does.
 
 ```
-[ ] kit-2026-10-18-1         reinstall the kit at 2026.10.18.1 and apply its migration report to docs/05 §§2, 4, 5, 6 and 8, docs/04, AGENTS.md and the skills · after m18-review
-[ ] ch08-update-2026-10-18-1 chapter 8: the update example and its report at 2026.10.18.1, and the Claude Code row that reads `AGENTS.md` alone only without a `CLAUDE.md`; both editions · after kit-2026-10-18-1
-[ ] ch05-13-slow-tests       chapters 5, 7, 13 and 15: verify fast on every delivery, the slow tests named in the Verify slot and run by the milestone review, and /apply saying when a test is too slow for verify; both editions · after kit-2026-10-18-1
-[ ] ch11-next-milestone      chapters 11, 14 and 15: a line no clause of the current milestone needs goes under the next milestone, and a review's finding stays in its own; both editions · after kit-2026-10-18-1
-[ ] propose-same-session     chapters 8 to 13 and 17: /propose runs in the session that asked for the change or in a fresh one, and /apply always in a fresh one; both editions · after kit-2026-10-18-1
-[ ] apply-use-first          chapters 10 and 13, and where chapters 18, 19, 22 and 23 describe the person's review: /apply's next steps start with using what the delivery changed; both editions · after kit-2026-10-18-1
-[ ] agent-commits-asked      chapters 6, 18, 19 and 23: the agent never commits or merges on its own, and asked, it takes the step the person names, as the kit now says; both editions · after kit-2026-10-18-1
-[ ] ch11-14-defined-mark     chapters 11 and 14: `[>]` means completely defined, not that the page exists, and a `[ ]` line may keep a draft; both editions
-[ ] ch21-done-when           chapter 21: /apply ticks every Done when item, as the kit says; both editions
-[ ] ch17-context-read        chapter 17: /brainstorm and /analyze read `context/` whole, and a later item is read on the person's request and turned into the documents; both editions
-[ ] ch14-back-to-open        chapter 14: a line returns to `[ ]` only as the kit says, `resume: propose` with its draft kept; both editions
-[ ] ch08-10-fresh-start      chapters 8 and 10: /brainstorm and /analyze run in a fresh session after the install; both editions
-[ ] ch19-batch-staging       chapter 19: in a batch, /propose stages nothing, as the kit's /propose does; both editions
-[ ] ch18-kit-branches        chapter 18: git-flow and the squash merge are told as strategies outside the kit, whose branch is named after the slug and reverted in one merge; both editions
-[ ] ch06-23-kit-rules        chapters 6 and 23: the kit's rules as SETUP.md §2 lists them; both editions
-[ ] ch10-explicit-staging    chapter 10: the quick guide stages by explicit paths, never `git add -A`, as docs/05 §6 says; both editions
-[ ] ch08-hosts-details       chapters 8 and 10: Antigravity reads `AGENTS.md` directly with an always-on pointer, the Jules to Cline row in the tables, /brainstorm and /analyze take no slug, and Claude Code's skills disable model invocation; both editions
-[ ] ch09-empty-repo          chapter 9: a repository with no code starts with /brainstorm, as the kit says; both editions
-[ ] ch13-refuse-incomplete   chapter 13: /apply refuses an incomplete page and points to /propose, and only a `[>]` line becomes `[*]`; both editions
-[ ] ch02-93-moment           chapter 2: the 93 finished pages are counted after the opening, which had 91; both editions
-[ ] m19-review               the review of M19 as docs/05 §8 says · after kit-2026-10-18-1, ch08-update-2026-10-18-1, ch05-13-slow-tests, ch11-next-milestone, propose-same-session, apply-use-first, agent-commits-asked, ch11-14-defined-mark, ch21-done-when, ch17-context-read, ch14-back-to-open, ch08-10-fresh-start, ch19-batch-staging, ch18-kit-branches, ch06-23-kit-rules, ch10-explicit-staging, ch08-hosts-details, ch09-empty-repo, ch13-refuse-incomplete, ch02-93-moment
+[>] kit-2026-10-18-1         reinstall the kit at 2026.10.18.1 and apply its migration report to docs/05 §§2, 4, 5, 6 and 8, docs/04, AGENTS.md and the skills · after m18-review
+[>] ch08-update-2026-10-18-1 chapter 8: the update example and its report at 2026.10.18.1, and the Claude Code row that reads `AGENTS.md` alone only without a `CLAUDE.md`; both editions · after kit-2026-10-18-1
+[>] ch05-13-slow-tests       chapters 5, 7, 13 and 15: verify fast on every delivery, the slow tests named in the Verify slot and run by the milestone review, and /apply saying when a test is too slow for verify; both editions · after kit-2026-10-18-1
+[>] ch11-next-milestone      chapters 11, 14 and 15: a line no clause of the current milestone needs goes under the next milestone, and a review's finding stays in its own; both editions · after kit-2026-10-18-1
+[>] propose-same-session     chapters 8 to 13 and 17: /propose runs in the session that asked for the change or in a fresh one, and /apply always in a fresh one; both editions · after kit-2026-10-18-1
+[>] apply-use-first          chapters 10 and 13, and where chapters 18, 19, 22 and 23 describe the person's review: /apply's next steps start with using what the delivery changed; both editions · after kit-2026-10-18-1
+[>] agent-commits-asked      chapters 6, 7, 13, 18, 19 and 23, and docs/00 contents: the agent never commits or merges on its own, and asked, it takes the step the person names; both editions · after kit-2026-10-18-1
+[>] ch11-14-defined-mark     chapters 11 and 14: `[>]` means completely defined, not that the page exists, and a `[ ]` line may keep a draft; both editions
+[>] ch21-done-when           chapter 21: /apply ticks every Done when item, as the kit says; both editions
+[>] ch17-context-read        chapter 17: /brainstorm and /analyze read `context/` whole, and a later item is read on the person's request and turned into the documents; both editions
+[>] ch14-back-to-open        chapter 14: a line returns to `[ ]` only as the kit says, `resume: propose` with its draft kept; both editions · after kit-2026-10-18-1
+[>] ch08-10-fresh-start      chapters 8 and 10: /brainstorm and /analyze run in a fresh session after the install; both editions
+[>] ch19-batch-staging       chapter 19: in a batch, /propose stages nothing, as the kit's /propose does; both editions
+[>] ch18-kit-branches        chapter 18: git-flow and the squash merge are told as strategies outside the kit, whose branch is named after the slug and reverted in one merge; both editions
+[>] ch06-23-kit-rules        chapters 6 and 23: the kit's rules as SETUP.md §2 lists them; both editions
+[>] ch10-explicit-staging    chapter 10: the quick guide stages by explicit paths, never `git add -A`, as docs/05 §6 says; both editions
+[>] ch08-hosts-details       chapters 8 and 10: Antigravity reads `AGENTS.md` directly with an always-on pointer, the Jules to Cline row in the tables, /brainstorm and /analyze take no slug, and Claude Code's skills disable model invocation; both editions
+[>] ch09-empty-repo          chapter 9: a repository with no code starts with /brainstorm, as the kit says; both editions
+[>] ch13-refuse-incomplete   chapter 13: /apply refuses an incomplete page and points to /propose, and only a `[>]` line becomes `[*]`; both editions
+[>] ch02-93-moment           chapter 2: the 93 finished pages are counted after the opening, which had 91; both editions
+[>] ch19-commit-by-index     chapters 13 and 19 and docs/05 §6: the person commits from an index holding one delivery, never by naming paths on `git commit`, and a conflict is a line both sessions edited, not a hunk, as the kit now says; both editions · after kit-2026-10-18-1
+[>] ch13-review-base         chapter 13: the read-only review reads `git diff HEAD`, the branch's earlier commits and the created files; /apply updates documents and manuals before the review and runs verify again after any later edit; both editions · after kit-2026-10-18-1
+[>] ch14-ended-and-dropped   chapters 14 and 23: a `[~]` or `[*]` line whose session ended is resumed on the person's word, and a cancelled delivery ends `[x] · dropped: <reason>`, which is how chapter 23's impossible request is written; both editions · after kit-2026-10-18-1
+[>] ch18-revert-scope        chapters 18 and 19: one step reverts what git holds; a migration run or a message sent is undone as the page's Done when says, or not at all; both editions · after kit-2026-10-18-1
+[>] ch15-review-head         chapter 15: the milestone review's page names the commit its reading started at, so the range stays fixed while readers work; both editions · after kit-2026-10-18-1
+[>] ch07-ninjobs-focus       chapters 4, 6 and 7 and ADR-0016 distinguish the earlier whole-FOCUS requirement from the later simplification retaining two principles; both editions · after kit-2026-10-18-1
+[>] m19-review               the review of M19 as docs/05 §8 says · after kit-2026-10-18-1, ch08-update-2026-10-18-1, ch05-13-slow-tests, ch11-next-milestone, propose-same-session, apply-use-first, agent-commits-asked, ch11-14-defined-mark, ch21-done-when, ch17-context-read, ch14-back-to-open, ch08-10-fresh-start, ch19-batch-staging, ch18-kit-branches, ch06-23-kit-rules, ch10-explicit-staging, ch08-hosts-details, ch09-empty-repo, ch13-refuse-incomplete, ch02-93-moment, ch19-commit-by-index, ch13-review-base, ch14-ended-and-dropped, ch18-revert-scope, ch15-review-head, ch07-ninjobs-focus
+```
+
+## M20. What the audit of 2026-10-18 found
+
+When this milestone closes, every technical claim the audit of 2026-10-18 found to promise more than its example or rule guarantees says what holds: chapter 3's examples run as the text says, chapter 4's isolation is a goal, chapter 1 promises recovery and not immunity, chapter 12's page ties each scenario to the level that proves it, chapter 24 says in which phase its protocol runs, chapter 22 preserves historical token totals with explicit coverage limits and no unmatched per-delivery average, and `make verify` runs the chapters' examples.
+
+```
+[>] ch03-query-catch         chapter 3: `query` turns only the driver's failures into a value and rethrows the rest, and an async variant awaits inside the try, each case tested; the audit ran the original and saw a bug and a control object become DatabaseFailed and a rejected promise escape the Result; both editions
+[>] ch03-exhaustive-switch   chapter 3: a Result makes the cases representable and checkable, not every switch exhaustive; shows `Record` and a switch with a `never` check and when each fails to compile; both editions
+[>] ch12-scenario-levels     chapter 12: the example page ties each Behaviour scenario to the level that proves it, the race for the last copy to the repository test, and its Contract gives the column types or points to the schema that does; both editions
+[>] ch04-isolation-claims    chapter 4: isolation as a goal, the consumers of a changed contract checked, and the function shared with the client leaves the server's decision authoritative over other data; both editions
+[>] ch01-recovery-not-immunity chapter 1: a decision in a file survives compaction as something to reread, not as text kept in every call; reopen the page and documents after compaction or resumption; both editions
+[>] ch24-protocol-phase      chapter 24: in which phase the protocol runs; after /apply's first result, what already satisfies the page goes in and a new capability becomes a line; both editions
+[>] ch22-cost-method         chapter 22 preserves historical token totals with their unrecovered coverage limits, removes unmatched per-delivery averages, and explains the growing whole-queue input; both editions
+[>] ch16-prevention-evidence chapter 16: an error documented in another project may justify prevention, with evidence and a proportionate cost; both editions
+[>] ch14-blocked-column      chapter 14: a blocked line returns to `[ ]` or `[>]` as docs/05 §4 says, so the board shows it there and keeps no memory of a column; both editions · after ch14-back-to-open
+[>] verify-examples          `make verify` runs the executable examples extracted from the chapters, starting with chapter 3's `query` · after ch03-query-catch
+[>] m20-review               the review of M20 as docs/05 §8 says · after ch03-query-catch, ch03-exhaustive-switch, ch12-scenario-levels, ch04-isolation-claims, ch01-recovery-not-immunity, ch24-protocol-phase, ch22-cost-method, ch16-prevention-evidence, ch14-blocked-column, verify-examples, m19-review
 ```
