@@ -25,7 +25,7 @@ FOCUS is this book's name for one way out of both: one folder per feature, and i
 ## The dependency rule
 
 Layers answered a real problem: rules mixed with screens and SQL cannot be changed, or tested, one without the others.
-Robert C. Martin drew the answer in 2012 as concentric circles, with the business rules at the center and the database, the web and the frameworks at the edge, held together by the dependency rule, "*source code dependencies can only point inwards*", so a rule never names a screen, a table or a library.[^martin-clean-2012]
+Robert C. Martin (Uncle Bob) drew the answer in 2012 as concentric circles, with the business rules at the center and the database, the web and the frameworks at the edge, held together by the dependency rule, "*source code dependencies can only point inwards*", so a rule never names a screen, a table or a library.[^martin-clean-2012]
 Martin also asked, in 2011, what a project's top-level folders scream, the system or the framework it was built with, and folders named `controllers/` and `models/` scream the framework.[^martin-screaming]
 This book keeps the dependency rule and drops the folder per layer, and with it the ceremony of an interface and a mapping at every boundary for code that has one implementation.
 

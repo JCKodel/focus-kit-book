@@ -25,7 +25,7 @@ FOCUS é o nome que este livro dá a um jeito de sair dos dois problemas: uma pa
 ## A regra de dependência
 
 As camadas respondiam a um problema real: regras misturadas com telas e SQL não podem ser mudadas, nem testadas, umas sem as outras.
-Robert C. Martin desenhou a resposta em 2012 como círculos concêntricos, com as regras de negócio no centro e o banco de dados, a web e os frameworks na borda, unidos pela regra de dependência, "*dependências de código-fonte só podem apontar para dentro*", então uma regra nunca nomeia uma tela, uma tabela ou uma biblioteca.[^martin-clean-2012]
+Robert C. Martin (Uncle Bob) desenhou a resposta em 2012 como círculos concêntricos, com as regras de negócio no centro e o banco de dados, a web e os frameworks na borda, unidos pela regra de dependência, "*dependências de código-fonte só podem apontar para dentro*", então uma regra nunca nomeia uma tela, uma tabela ou uma biblioteca.[^martin-clean-2012]
 Martin também perguntou, em 2011, o que as pastas de primeiro nível de um projeto gritam, o sistema ou o framework com que ele foi construído, e pastas chamadas `controllers/` e `models/` gritam o framework.[^martin-screaming]
 Este livro mantém a regra de dependência e abandona a pasta por camada, e com ela a cerimônia de uma interface e de um mapeamento em cada fronteira para código que tem uma implementação só.
 

@@ -43,10 +43,30 @@
 
 **Done when.**
 
-* [ ] Both editions written: the sentence as Behaviour says.
-* [ ] Chapter 4 still opens with its value, keeps its gain, no filler and nothing useful cut.
-* [ ] Every number sourced: none added.
-* [ ] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions written: the sentence as Behaviour says.
+* [x] Chapter 4 still opens with its value, keeps its gain, no filler and nothing useful cut.
+* [x] Every number sourced: none added.
+* [x] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author: left to the driver, who builds the book once at the end of the batch.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block: the page moved here; the driver marks the line `[x]`, stages and commits.
+
+**Proof.** `grep -rn "Uncle Bob" book/` prints two lines, en 04:28 and pt 04:28, each the sentence of Behaviour. `grep -rn "Robert C. Martin" book/ README*.md` shows the full name only at those two lines and in the two source notes. `git diff -- book/en/04-focus.md book/pt/04-focus.md` shows one hunk per edition, the inserted " (Uncle Bob)" only.
+
+`make verify` green: build, parity, em dash, prose, width, links, disclosure. A first run failed on parity in book/pt/01-how-agents-see.md, a file another session of the batch was editing; the rerun was green.
+
+**Divergences.** None.
+
+**Omissions.** None.
+
+**Decisions taken in /apply.** None beyond the page's.
+
+**Review.** Delivery review by a read-only Opus agent on the diff of both chapter 4 files, against the page and docs/04. No findings: one inserted parenthesis per edition, untranslated in Portuguese, no later mention or source note touched, no new note, no em dash, editions in parity.
+
+```commit
+docs(ch04-uncle-bob): name Uncle Bob at Robert C. Martin's first mention
+
+- ch 4, both editions: "Robert C. Martin (Uncle Bob)" in the dependency rule
+
+work/done/ch04-uncle-bob.md
+```
