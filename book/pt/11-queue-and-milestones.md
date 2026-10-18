@@ -70,9 +70,15 @@ Toda frase do parágrafo deveria ter uma linha que a torna verdade, e toda linha
 
 ### Tamanho e ordem
 
-Um marco tem de três a oito entregas, e depois a revisão dele: a regra do kit para o primeiro marco e um bom tamanho para qualquer um.
+Um marco começa com as linhas de que o seu parágrafo precisa, e depois a revisão dele; para o primeiro marco o kit pede de três a oito entregas.
 As primeiras são o esqueleto em que as outras se apoiam: o `esqueleto` da biblioteca cria o `npm run verify`, que toda entrega seguinte roda.
 Depois cada linha vem após as linhas de que precisa: um bibliotecário não consegue emprestar um exemplar antes de o catálogo ter exemplares e de os membros existirem.
+
+Linhas são acrescentadas enquanto um marco anda: uma correção que uma entrega encontra fora da sua página, os achados da revisão, um problema que você encontra testando o produto.
+Assim um marco fecha maior do que começou, e a fila muda com o trabalho.
+A fila deste próprio livro mostra isso: o marco M15 fechou com 42 linhas; a revisão dele foi a 14ª, com 28 sob ela.[^m15-queue]
+Um agente a quem você pergunta sobre um problema tende a responder com linhas, cada uma razoável, então, sem uma pessoa julgando, um marco cresce sem fim.
+Você decide o que entra e onde: uma linha que não serve a nenhuma frase do parágrafo deste marco vai para um marco posterior, um de melhorias se você quiser um.
 
 A ordem é a prioridade.
 Perguntado qual entrega importa mais, você responde pela fila: a que está mais acima nela; a próxima entrega é a primeira livre para começar ([capítulo 14](14-queue-states.md)).
@@ -171,6 +177,8 @@ No Caso A, um projeto para um cliente em uma plataforma low-code, o Microsoft Po
 
 * O docs/06 guarda marcos, cada um com um parágrafo, e uma linha por entrega sob ele: uma marca, um slug, uma frase e os seus sufixos; o que aconteceu vai para a página.
 * A marca de uma linha diz onde a entrega dela está, de `[ ]`, não definida, a `[x]`, feita; uma linha nunca sai, então a fila é também o histórico.
-* O parágrafo de um marco é um teste que uma pessoa confere no produto, nunca um tema, sobre três a oito entregas: o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados viram linhas sob ela no mesmo marco.
+* O parágrafo de um marco é um teste que uma pessoa confere no produto, nunca um tema, sobre as entregas que o tornam verdade, de três a oito no primeiro marco: o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados viram linhas sob ela no mesmo marco; linhas são acrescentadas enquanto ele anda, e a pessoa decide quais entram agora e quais esperam um marco posterior.
 * A ordem é a prioridade: a linha mais acima importa mais, mover uma linha muda a prioridade dela, e uma dependência conhecida quando a linha é acrescentada é escrita junto, `· after <slug>`, uma ordem, não uma espera, então a linha mantém `[ ]`.
 * Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido; o código só muda dentro do `/apply`, até uma mudança de cinco linhas tem sua página, e uma mudança pedida em qualquer outro lugar vira uma linha, com um rascunho da página para o que a linha não comporta, e o `/propose` numa sessão nova.
+
+[^m15-queue]: J.C. Ködel, "One Page at a Time", o docs/06, a fila, marco M15, acesso em 2026-10-18, no repositório do livro. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md>

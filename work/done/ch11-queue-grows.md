@@ -60,10 +60,36 @@
 
 **Done when.**
 
-* [ ] Both editions written: the size sentence, the growth paragraph, the key point and the note as Behaviour says.
-* [ ] Chapter 11 still opens with its value, keeps its gain said once, no filler and nothing useful cut.
-* [ ] Every number sourced: 42, 14th and 28 from docs/06 §M15, recounted at apply time, with `[^m15-queue]`.
-* [ ] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions written: the size sentence, the growth paragraph, the key point and the note as Behaviour says.
+* [x] Chapter 11 still opens with its value, keeps its gain said once, no filler and nothing useful cut.
+* [x] Every number sourced: 42, 14th and 28 from docs/06 §M15, recounted at apply time, with `[^m15-queue]`.
+* [x] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+
+**Proof.**
+
+* en 11:70 (pt 11:73) is the new size sentence; en 11:74-78 (pt 11:77-81) the new paragraph; en/pt key point 3 rewritten; `[^m15-queue]` added at the end of both editions.
+* Recounted in docs/06 §M15 on 2026-10-18: 42 lines, all `[x]`; `m15-review` is the 14th, 28 lines under it.
+* Behaviour's greps: "three to eight" / "três a oito" print only 09:22, 09:85, 10:86, 23:74, 23:112 and the two lines of chapter 11 in each edition; "good size for any" / "bom tamanho para qualquer" print nothing.
+* `git diff --stat` on the two paths: 20 insertions, 4 deletions, only in `### Size and order`, key point 3 and the new note.
+* `make verify` green: build, parity, em dash, prose, width, links, disclosure.
+
+**Divergences.** The pt note says `acesso em 2026-10-18`, as docs/04 §Source notes and every pt note of the book say, where Behaviour wrote `acessado em`; the page slipped, docs/04 owns the rule.
+
+**Decisions taken in /apply.**
+
+* Run in a batch of applies on one tree: the driver marks this line in docs/06, runs `make book` once at the end of the batch and gives both PDF paths, and stages and commits this delivery by its paths.
+* The count sentence says "closed with 42 lines; its review was the 14th, with 28 under it", without "all done": "closed" already says it.
+
+**Review.** One read-only agent on Opus read the diff of the two paths against this page, docs/04 and docs/06 §M15: nothing breaks the page or docs/04; the counts match. Three wording suggestions on text this delivery wrote, all applied: "answer with lines, each one reasonable" (en/pt), the pt count sentence without the chain of dela/dele/delas, and pt "Um agente a quem você pergunta" for the literal "Um agente perguntado". No queue line.
+
+```commit
+docs(ch11-queue-grows): say a milestone grows while it runs and the person decides what enters
+
+- Chapter 11, Size and order: three to eight deliveries is how the first milestone starts; lines are added while a milestone runs, M15 of this book's queue as the count, and the person decides what enters now
+- Chapter 11, key point 3 says the same; new source note [^m15-queue] to docs/06
+
+work/done/ch11-queue-grows.md
+```

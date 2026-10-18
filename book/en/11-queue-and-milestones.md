@@ -67,9 +67,15 @@ Every sentence of the paragraph should have a line that makes it true, and every
 
 ### Size and order
 
-A milestone holds three to eight deliveries, then its review: the kit's rule for the first milestone and a good size for any.
+A milestone starts with the lines its paragraph needs, then its review; for the first milestone the kit asks three to eight deliveries.
 The first ones are the skeleton the others stand on: the library's `skeleton` creates `npm run verify`, which every later delivery runs.
 Then each line comes after the lines it needs: a librarian cannot lend a copy before the catalog holds copies and the members exist.
+
+Lines are added while a milestone runs: a fix a delivery finds outside its page, the review's findings, a problem you find trying the product.
+So a milestone closes larger than it started, and the queue changes with the work.
+This book's own queue shows it: its milestone M15 closed with 42 lines; its review was the 14th, with 28 under it.[^m15-queue]
+An agent asked about a problem tends to answer with lines, each one reasonable, so without a person judging, a milestone grows without end.
+You decide what enters and where: a line that serves no sentence of this milestone's paragraph goes to a later milestone, one of improvements if you want one.
 
 The order is the priority.
 Asked which delivery matters most, you answer from the queue: the one higher in it; the next delivery is the first one free to start ([chapter 14](14-queue-states.md)).
@@ -166,6 +172,8 @@ On Case A, a client project on a low-code platform, Microsoft Power Apps with Co
 
 * docs/06 holds milestones, each with a paragraph, and one line per delivery under it: a mark, a slug, one sentence and its suffixes; what happened goes on the page.
 * A line's mark says where its delivery stands, from `[ ]`, not defined, to `[x]`, done; a line never leaves, so the queue is also the history.
-* A milestone paragraph is a test a person can check against the product, never a theme, over three to eight deliveries: the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone.
+* A milestone paragraph is a test a person can check against the product, never a theme, over the deliveries that make it true, three to eight in the first milestone: the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone; lines are added while it runs, and the person decides which enter now and which wait for a later milestone.
 * The order is the priority: the higher line matters more, moving a line changes its priority, and a dependency known when a line is added is written with it, `· after <slug>`, an order, not a wait, so the line keeps `[ ]`.
 * No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept; code changes only inside `/apply`, even a five-line change gets its page, and a change asked anywhere else becomes a line, with a draft page for what the line cannot hold, and `/propose` in a fresh session.
+
+[^m15-queue]: J.C. Ködel, "One Page at a Time", docs/06, the queue, milestone M15, accessed 2026-10-18, in the book's repository. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md>

@@ -435,7 +435,7 @@ When this milestone closes, a reader of chapters 0 to 7 learns each idea where i
 [>] ch05-random-values       chapter 5's section on swapping only I/O and the clock covers random values and anything else that changes between runs; both editions
 [>] ch07-rag-and-numbers     chapter 7 says the documents work as retrieval made for the project, and that every focus-kit project gives each document the same number; both editions
 [>] ch07-talk-not-edit       chapter 7 says the person changes the documents by talking to the agent, without the sentence that reads as a contradiction; both editions
-[>] ch11-queue-grows         chapter 11 says three to eight deliveries is how a milestone starts, not a limit, and that the person decides what enters it, because agents tend to add; both editions
+[x] ch11-queue-grows         chapter 11 says three to eight deliveries is how a milestone starts, not a limit, and that the person decides what enters it, because agents tend to add; both editions
 [>] ch11-agent-runs-propose  chapter 11 drops the claim that the agent cannot run /propose on its own; both editions
 [>] ch13-teach-the-agent     chapter 13's staged review asks for each correction by talking to the agent, so it learns, instead of fixing by hand; both editions
 [>] ch14-face-prototype      chapter 14's kanban board shows briefly face.kodel.com.br, the author's prototype of a board that runs on focus-kit; both editions
