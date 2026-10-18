@@ -409,7 +409,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18 and the reposi
 [ ] pt-ch08-migration-label  the Portuguese chapter 8's key point names the changelog item's `Migração:` label as the English names `Migration:`
 [ ] untracked-diff-wording   chapter 8 and docs/03's untracked file row say a new file shows in `git diff --cached` once staged and never in plain `git diff`; both editions
 [x] ch14-m1-return-book      chapter 14's first milestone holds `return-book`, like chapters 11 and 15; both editions
-[ ] docs03-checker-pt        docs/03 gives the checker and the labels seen, latent and weak their Portuguese words, and the Portuguese edition uses them
+[x] docs03-checker-pt        docs/03 gives the checker and the labels seen, latent and weak their Portuguese words, and the Portuguese edition uses them
 [x] docs05-fourth-case-version  docs/05 §4 and docs/03's waiting mark row say the fourth case came with focus-kit 2026.10.18
 [x] docs05-review-concurrency  docs/05's Milestone review slot says how many review agents run at once
 [x] docs05-four-cases-sentence  docs/05 §4's sentence on when a line waits reads as four cases, the fourth not an example of the third
