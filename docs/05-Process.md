@@ -240,6 +240,8 @@ time. Steps go in a manual, and what a command prints stays in its help.
   read-only agent on Opus checks each candidate against the file before
   the author sees it. Every agent keeps the session's advisor, Fable.
   Each launch sets its model to Opus; no other model runs the review.
+  At most two of these agents run at a time: in `m16-review` five at
+  once left three with no report.
 * **Git:** trunk. A delivery's page and build are one change: one commit.
   Two sessions may work in one tree on free lines (§4). The agent stages;
   it never commits or merges.
