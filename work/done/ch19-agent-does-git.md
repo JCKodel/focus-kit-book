@@ -57,10 +57,35 @@
 
 **Done when.**
 
-* [ ] Both editions written: chapter 19's three lines and chapter 18's ending as Behaviour says.
-* [ ] Chapters 18 and 19 still open with their value, keep their gain, no filler and nothing useful cut.
-* [ ] Every number sourced: none added.
-* [ ] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions written: chapter 19's three lines and chapter 18's ending as Behaviour says.
+* [x] Chapters 18 and 19 still open with their value, keep their gain, no filler and nothing useful cut.
+* [x] Every number sourced: none added.
+* [x] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+
+**Proof.**
+
+* en/pt 19:177 became three lines, 19:177-179, word for word as Behaviour says; en/pt 18:171 ends as Behaviour says.
+* Behaviour's greps: the old chapter 19 sentence and the old chapter 18 ending print nothing; "Each step comes after your reading" / "Cada passo vem depois da sua leitura" and "never the agent on its own" / "nunca o agente sozinho" print one line per edition.
+* `git diff --stat` on the four paths: 8 insertions, 4 deletions, only these lines.
+* `make verify` green: build, parity, em dash, prose, width, links, disclosure.
+
+**Divergences.** None from Behaviour. Decision 5's premise is wrong: chapters 18 and 19 teach `git rebase`, `git reset --hard`, `git revert` and `git merge --abort`, never a rebase stopped in the middle or a commit on the wrong branch; the line keeps the page's examples and the fix is queued (Review).
+
+**Decisions taken in /apply.**
+
+* Run in a batch of applies on one tree: the driver marks this line in docs/06, runs `make book` once at the end of the batch and gives both PDF paths, and stages and commits this delivery by its paths.
+* The review's findings change the wording Behaviour fixed word for word, so they go to a queue line for the author instead of being applied here.
+
+**Review.** One read-only agent on Opus read the diff of the four paths against this page and docs/04, with the context of chapters 18 and 19 in both editions: nothing breaks the page or docs/04; the four costs at en/pt 19:280-284 stay true. Four findings for a queue line: (1) en/pt 19:178 "any of them" points to line 177's four steps, while its list drops "removes a worktree" and adds "pushes"; (2) en/pt 19:178's tangles, a rebase left half done and a commit on the wrong branch, are not taught in chapters 18 or 19 (decision 5's premise); a taught one, such as a merge stopped by a conflict (`git merge --abort`, 19:213) or a commit to take back (`git revert`, 18:138), fits; (3) en/pt 19:179 "marker" comes before the conflict markers are taught at 19:186-199, and "conflict marker" / "marcador de conflito" matches 19:4; (4) pt 18:171 "nunca o agente sozinho" can read as "never without the person"; "por conta própria" matches pt 19:177.
+
+```commit
+docs(ch19-agent-does-git): say the agent takes any git step when asked
+
+- Chapter 19, Worktrees in the kit: the agent takes no history step on its own; asked, it takes any, each after the person's reading
+- Chapter 18, Choosing: the rule ends "never the agent on its own"
+
+work/done/ch19-agent-does-git.md
+```

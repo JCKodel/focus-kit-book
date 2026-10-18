@@ -174,7 +174,9 @@ You make the container once; the kit makes each worktree.
 `/apply <slug>` runs in a fresh session opened in that folder, builds the page, and stages the change.
 You review and commit on the branch, merge into `main` with `--no-ff`, remove the worktree and delete the branch.
 
-The agent never commits, merges, resolves a conflict or removes a worktree: every step that changes the history is yours, as in every git strategy.
+The agent never commits, merges, resolves a conflict or removes a worktree on its own: every step that changes the history is yours to decide, as in every git strategy.
+Ask, and it takes any of them for you: it writes the commit message, resolves the conflict, commits, merges or pushes, and knows the commands that undo a tangle such as a rebase left half done or a commit on the wrong branch.
+Each step comes after your reading: ask for the commit once the staged diff holds only the delivery, for the merge commit once the resolved file has no marker left, and for the push once `git log` shows what will leave.
 To run two deliveries at once in worktrees, open one session per folder: one in `main/` for each `/propose`, one in each worktree for its `/apply`.
 
 The kit gives every tool and every person this one shape because of an error: a `/propose` running in a worktree another tool made, in a folder of its own, writes the page where the next `/apply` does not look.

@@ -168,7 +168,7 @@ A project writes its choice once, in the Git slot of its docs/05, and every comm
 * **A worktree per delivery** fits several people working at once, or one person whose deliveries touch the same files ([chapter 19](19-worktrees.md)): each delivery on its own branch in its own folder, merged the same way.
 * **git-flow** fits software that ships numbered versions and keeps several in use.
 
-Whichever it is, the rule is the same: one delivery, one step to undo, and the person commits and merges, never the agent.
+Whichever it is, the rule is the same: one delivery, one step to undo, and the person decides each commit and merge, never the agent on its own.
 This book, written and reviewed by one person, is on trunk.
 
 ## What the team gains
