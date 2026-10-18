@@ -53,7 +53,7 @@ src/lib/result.ts         Result, ok e err
 Um nome terminado em `.server.ts` roda só no servidor, e o código do cliente nunca importa um deles.
 Os testes ficam ao lado do código que testam.
 Cada um desses arquivos é uma das quatro peças que este capítulo nomeia mais adiante, e o capítulo 5 dá a cada uma o seu teste.
-A pasta `features/` fica em inglês, como o kit a escreve e assim como este livro diz *feature*, sem traduzir; cada fatia dentro dela tem um nome em português, da biblioteca de empréstimos: `emprestimos/`, `membros/`, `catalogo/`.
+A pasta `features/` fica em inglês, porque é o nome que este livro dá à pasta das fatias, assim como ele diz *feature*, sem traduzir; cada fatia dentro dela tem um nome em português, da biblioteca de empréstimos: `emprestimos/`, `membros/`, `catalogo/`.
 
 A pasta de cima grita a biblioteca: empréstimos, membros, catálogo.
 Uma mudança em como o empréstimo funciona mexe em `emprestimos/`, e tirar os empréstimos do produto tira uma pasta.
