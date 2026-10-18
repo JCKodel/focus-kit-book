@@ -61,11 +61,46 @@
 
 **Done when.**
 
-* [ ] Both editions written: the two paragraphs, the gain sentence, the key point's words and the two notes, as Behaviour says.
-* [ ] docs/03's row added as Behaviour quotes.
-* [ ] Chapter 7 still opens with its value, keeps its gain said once, no filler and nothing useful cut.
-* [ ] Every number sourced: none added; the definition of RAG carries its note.
-* [ ] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunks of docs/03 and docs/06, commit message in a `commit` block.
+* [x] Both editions written: the two paragraphs, the gain sentence, the key point's words and the two notes, as Behaviour says.
+* [x] docs/03's row added as Behaviour quotes, with the one word change Divergences gives.
+* [x] Chapter 7 still opens with its value, keeps its gain said once, no filler and nothing useful cut.
+* [x] Every number sourced: none added; the definition of RAG carries its note.
+* [x] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author: left to the driver, who builds the book once at the end of the batch.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunks of docs/03 and docs/06, commit message in a `commit` block: the driver marks and stages (batch rules).
+
+**Divergences.** The delivery review's suggestions are applied on the driver's word (batch rule 5). The text keeps the page's intent and differs from the Behaviour's exact words as follows:
+
+* "a body of writing it was not trained on" becomes "a body of writing kept outside the model" in en, in pt ("guardado fora do modelo") and in the docs/03 row. The paper sets the retrieved text apart from what the model's weights hold; it does not say the model never saw that text (its BART was very likely pretrained on text that included Wikipedia).
+* en "work as a retrieval made for the project" becomes "work as retrieval made for the project".
+* "as the kit's description of the documents writes them" becomes "numbers them" (pt "os numera"), and pt "a descrição dos documentos no kit" becomes "do kit".
+* pt "O agente busca pelo nome" becomes "O agente busca o que precisa pelo nome", matching the English. Decision 6's phrase stays inside it.
+* pt "cada outro número" becomes "cada um dos outros números", and the gain sentence gets the comma before "em outro projeto".
+* The two paragraphs follow the section's last sentence (en 07:17, pt 07:18), so line 17 is not split from line 16. They open with one sentence that leans on chapter 1's window, with no pointer (decision 8).
+* Not applied: moving the numbers paragraph before the RAG one, because Behaviour lists RAG first. "Sob demanda" for "just in time" was not used; the pt keeps "na hora certa".
+
+**Proof.**
+
+* The `grep` for "RAG" and "retriev" (pt "recupera") prints en 07:20-22 and 155, and pt 07:21-23 and 156: the paragraphs and the gain line only.
+* The `grep` for the two keys prints 4 lines per edition: one call and one definition of each.
+* There are no chapter numbers in the new sentences, and `git diff` shows only chapter 7 and the docs/03 row.
+* The quotations were read in their sources on 2026-10-18. The arXiv abstract says "dense vector index of Wikipedia, accessed with a pre-trained neural retriever". Anthropic writes "just in time" for loading "lightweight identifiers (file paths...)" "at runtime using tools".
+* `make verify` passes build, parity, em dash, prose, width, links and disclosure, with exit 0. The first run failed only on chapter 24's web.archive.org link, which was refused; it passed on the rerun.
+
+**Review.** A read-only Opus reviewer that did not write the change read the diff against this page and docs/04. Nothing breaks the page or docs/04, the text matches Behaviour, and no Fails pattern appears. Its accuracy point and its wording suggestions are applied as Divergences says. There is no new queue line.
+
+**Decisions.** The batch driver owns docs/06, the staging and the commit, and runs `make book`.
+
+```commit
+docs(ch07-rag-and-numbers): say the documents work as retrieval, numbered alike in every project
+
+- Chapter 7, both editions: what RAG is (Lewis et al., 2020, note), the documents as retrieval made for the project, read by name just in time (Anthropic, note), the author's view that this is their main value; every focus-kit project gives each document the same number, so docs/06 is always the queue; one gain sentence; the first key point adds "the same in every project"
+- docs/03: retrieval-augmented generation (RAG) row after compaction
+
+book/en/07-the-documents.md
+book/pt/07-the-documents.md
+docs/03-Domain.md
+docs/06-Queue.md
+work/done/ch07-rag-and-numbers.md
+```

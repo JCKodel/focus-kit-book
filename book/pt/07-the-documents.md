@@ -17,6 +17,16 @@ Os números são fixos porque os comandos os citam; o nome depois do número fic
 As pastas `docs/`, `docs/adr/`, `docs/manuals/`, `work/` e `work/done/` (onde fica a página de uma entrega feita) ficam em inglês em todo projeto, como o kit as escreve; os arquivos dentro delas levam a língua da documentação, como `docs/manuals/publicar-o-app.md`.
 O `/brainstorm` ou o `/analyze` os escreve uma vez (capítulo 9); o `/propose` e o `/apply` os leem antes de agir.
 
+Um agente responde a partir do que está na sua janela, então o que importa é qual texto chega até ela.
+A geração aumentada por recuperação (RAG) é um jeito de levá-lo: a cada pergunta, um recuperador encontra trechos num corpo de texto guardado fora do modelo, e o modelo responde a partir deles.
+O termo e o método vêm de um artigo de 2020 de Patrick Lewis e colegas do Facebook AI Research, cujo recuperador buscava num índice da Wikipédia.[^lewis-rag-2020]
+Os documentos do focus-kit funcionam como uma recuperação feita para o projeto: o corpo de texto são os próprios documentos do projeto, escritos para esse uso, um lugar para cada fato.
+O agente busca o que precisa pelo nome, já que o `AGENTS.md` e os comandos lhe dizem qual documento guarda qual fato, e lê esse documento quando precisa dele, com as suas próprias ferramentas, o que a Anthropic chama de carregar o contexto "*na hora certa*".[^anthropic-context-2025]
+Para mim, esse é o principal valor dos documentos.
+
+Todo projeto do focus-kit dá a cada documento o mesmo número, como a descrição dos documentos do kit os numera.
+Então o docs/06 é a fila em qualquer projeto do focus-kit, o que fazer, o que está sendo feito e o que está feito, e cada um dos outros números guarda ali o mesmo documento, seja qual for o nome depois dele.
+
 ## Os sete documentos
 
 **docs/00, o produto.** O que o produto é e para quem: seu propósito em um parágrafo, seu público, como funciona nas palavras do usuário, o que ele não é, os valores contra os quais as decisões são medidas, as perguntas de produto a que toda decisão deve responder sim, e as decisões em aberto, o que ninguém pode fechar sozinho.
@@ -143,10 +153,11 @@ O docs/00 da biblioteca lista as multas por devolução atrasada como em aberto,
 A mesma resposta em toda sessão e para toda pessoa: um desenvolvedor, um gestor e um agente numa sessão nova que perguntam o prazo de empréstimo leem uma linha em um documento.
 Com um lugar para cada fato, uma mudança é escrita uma vez e toda sessão seguinte a lê, onde na Ninjobs toda entrega pagava para manter em acordo as seis cópias de uma decisão.
 Um manual põe os passos que uma pessoa segue à mão onde essa pessoa os procura, num arquivo que se encontra pelo nome, e tira os passos de uma prova do slot que todo `/apply` lê antes da sua primeira edição.
+O que mais valorizo: toda sessão e toda pessoa recuperam um fato do mesmo lugar, e, em outro projeto do focus-kit, do mesmo número.
 
 ## Pontos-chave
 
-* Cada fato mora em um lugar: sete documentos numerados, `docs/adr/`, `docs/manuals/`, `AGENTS.md` e `work/`; o docs/00 é o produto e as suas decisões em aberto, o docs/01 e o docs/02 como ele é construído, o docs/03 o vocabulário, o docs/04 as convenções, o docs/05 o processo com os slots do projeto, cada um o que e o comando, o docs/06 a fila, com números fixos porque os comandos os citam.
+* Cada fato mora em um lugar: sete documentos numerados, `docs/adr/`, `docs/manuals/`, `AGENTS.md` e `work/`; o docs/00 é o produto e as suas decisões em aberto, o docs/01 e o docs/02 como ele é construído, o docs/03 o vocabulário, o docs/04 as convenções, o docs/05 o processo com os slots do projeto, cada um o que e o comando, o docs/06 a fila, com números fixos porque os comandos os citam, os mesmos em todo projeto.
 * As duas escolhas, a arquitetura (o FOCUS inteiro, os dois princípios, nenhum) e o git (trunk, um branch ou um worktree por entrega), ficam registradas no docs/01 e no docs/05, cada uma com um ADR que é emendado, nunca reescrito; o método funciona do mesmo jeito com qualquer uma delas.
 * Uma ação de mais de um comando, feita à mão fora de uma entrega ou uma prova que o `/apply` roda em outra máquina, tem um manual em `docs/manuals/`, para quem o executa, sem ter lido mais nada; o slot guarda o comando e aponta para ele, o `/analyze` e o `/apply` escrevem os manuais, o `/brainstorm` nenhum.
 * Um fato novo vai para o primeiro documento cuja pergunta servir; uma frase pode guardar vários fatos, cada um com o seu dono, e o `AGENTS.md` só aponta para eles.
@@ -154,3 +165,5 @@ Um manual põe os passos que uma pessoa segue à mão onde essa pessoa os procur
 
 [^nygard-adr]: Michael Nygard, "Documenting Architecture Decisions", blog da Cognitect, 2011. <https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions>
 [^agents-md]: AGENTS.md, "AGENTS.md", acesso em 2026-09-30. <https://agents.md>
+[^lewis-rag-2020]: Patrick Lewis et al., "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks", 2020. <https://arxiv.org/abs/2005.11401>
+[^anthropic-context-2025]: Anthropic, "Effective context engineering for AI agents", 2025. <https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents>

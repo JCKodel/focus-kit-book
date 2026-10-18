@@ -16,6 +16,16 @@ focus-kit gives those places a fixed shape: seven numbered documents, docs/00 to
 The numbers are fixed because the commands cite them; the name after the number is in the documentation language, `00-Product.md` in a project documented in English and `00-Produto.md` in one documented in Portuguese.
 `/brainstorm` or `/analyze` writes them once (chapter 9); `/propose` and `/apply` read them before they act.
 
+An agent answers from what is in its window, so what matters is which text gets there.
+Retrieval-augmented generation (RAG) is one way to bring it: with each question, a retriever finds passages in a body of writing kept outside the model, and the model answers from them.
+The term and the method come from a 2020 paper by Patrick Lewis and colleagues at Facebook AI Research, whose retriever searched an index of Wikipedia.[^lewis-rag-2020]
+focus-kit's documents work as retrieval made for the project: the body of writing is the project's own documents, written for that use, one place per fact.
+The agent finds what it needs by name, since `AGENTS.md` and the commands tell it which document holds which fact, and it reads that document when it needs it, with its own tools, which Anthropic calls loading context "*just in time*".[^anthropic-context-2025]
+For me, this is the documents' main value.
+
+Every focus-kit project gives each document the same number, as the kit's description of the documents numbers them.
+So docs/06 is the queue in any focus-kit project, what to do, what is being done and what is done, and every other number holds the same document there, whatever the name after it.
+
 ## The seven documents
 
 **docs/00, the product.** What the product is and for whom: its purpose in one paragraph, its audience, how it works in the user's words, what it is not, the values decisions are measured against, the product questions every decision must answer yes to, and the open decisions, what nobody may close alone.
@@ -142,10 +152,11 @@ The library's docs/00 lists fines for late returns as open, so a page that touch
 The same answer in every session and for every person: a developer, a manager and a fresh agent who ask the loan period read one line in one document.
 With one place per fact, a change is written once and every later session reads it, where on Ninjobs every delivery paid to keep a decision's six copies in step.
 A manual puts the steps a person follows by hand where that person looks for them, in a file found by its name, and keeps a proof's steps out of the slot every `/apply` reads before its first edit.
+What I value most: every session and every person retrieves a fact from the same place, and in another focus-kit project from the same number.
 
 ## Key points
 
-* Each fact lives in one place: seven numbered documents, `docs/adr/`, `docs/manuals/`, `AGENTS.md` and `work/`; docs/00 is the product and its open decisions, docs/01 and docs/02 how it is built, docs/03 the vocabulary, docs/04 the conventions, docs/05 the process with the project's slots, each what and the command, docs/06 the queue, with numbers fixed because the commands cite them.
+* Each fact lives in one place: seven numbered documents, `docs/adr/`, `docs/manuals/`, `AGENTS.md` and `work/`; docs/00 is the product and its open decisions, docs/01 and docs/02 how it is built, docs/03 the vocabulary, docs/04 the conventions, docs/05 the process with the project's slots, each what and the command, docs/06 the queue, with numbers fixed because the commands cite them, the same in every project.
 * The two choices, the architecture (FOCUS whole, the two principles, neither) and git (trunk, a branch or a worktree per delivery), are recorded in docs/01 and docs/05, each with an ADR that is amended, never rewritten; the method works the same under any of them.
 * An action of more than one command, done by hand outside a delivery or a proof `/apply` runs on another machine, has a manual in `docs/manuals/`, for whoever runs it, having read nothing else; the slot keeps the command and points to it, `/analyze` and `/apply` write the manuals, `/brainstorm` none.
 * A new fact goes to the first document whose question fits; one sentence can hold several facts, each with its own owner, and `AGENTS.md` only points at them.
@@ -153,3 +164,5 @@ A manual puts the steps a person follows by hand where that person looks for the
 
 [^nygard-adr]: Michael Nygard, "Documenting Architecture Decisions", Cognitect blog, 2011. <https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions>
 [^agents-md]: AGENTS.md, "AGENTS.md", accessed 2026-09-30. <https://agents.md>
+[^lewis-rag-2020]: Patrick Lewis et al., "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks", 2020. <https://arxiv.org/abs/2005.11401>
+[^anthropic-context-2025]: Anthropic, "Effective context engineering for AI agents", 2025. <https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents>

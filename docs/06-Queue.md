@@ -433,7 +433,7 @@ When this milestone closes, a reader of chapters 0 to 7 learns each idea where i
 [x] ch04-scalable-meaning    chapter 4's S says the project grows without one feature interfering with another, which is why it scales; both editions
 [>] ch05-test-time           chapter 5 says agents write tests without minding how long they run, and the person keeps the suite fast with pure use cases and slower tests only where they pay; both editions
 [>] ch05-random-values       chapter 5's section on swapping only I/O and the clock covers random values and anything else that changes between runs; both editions
-[>] ch07-rag-and-numbers     chapter 7 says the documents work as retrieval made for the project, and that every focus-kit project gives each document the same number; both editions
+[x] ch07-rag-and-numbers     chapter 7 says the documents work as retrieval made for the project, and that every focus-kit project gives each document the same number; both editions
 [>] ch07-talk-not-edit       chapter 7 says the person changes the documents by talking to the agent, without the sentence that reads as a contradiction; both editions
 [x] ch11-queue-grows         chapter 11 says three to eight deliveries is how a milestone starts, not a limit, and that the person decides what enters it, because agents tend to add; both editions
 [x] ch11-agent-runs-propose  chapter 11 drops the claim that the agent cannot run /propose on its own; both editions
