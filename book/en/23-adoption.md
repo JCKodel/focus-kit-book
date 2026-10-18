@@ -39,7 +39,8 @@ A question delivery, a queue line whose only purpose is a written answer, asked 
 
 **A request that could not be built was closed, not absorbed.**
 One request had been accepted, and the work on it proved it technically impossible.
-It was closed in the queue with the reason, without being built, where it could otherwise have been dropped in silence or bent into something nobody asked for.
+It was closed in the queue with the reason, without being built, where it could otherwise have been left in silence or bent into something nobody asked for.
+The kit writes such a closure as `[x]` with `· dropped: <reason>` at the end of the line, its page in `work/done/` saying what was built and undone ([chapter 14](14-queue-states.md)).
 
 **A clean install found what the development environment hid.**
 An install on a clean environment failed on a permission that the development environment already had.

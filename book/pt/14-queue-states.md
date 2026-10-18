@@ -2,6 +2,7 @@
 
 Depois deste capítulo você consegue ler o estado de qualquer linha da fila entre as seis marcas do focus-kit, dizer quem põe cada uma e em que momento, dizer qual é a próxima entrega, e quais linhas podem rodar ao mesmo tempo.
 Você também consegue distinguir uma ordem escrita com a linha, `· after`, de uma espera descoberta no caminho, `[?]`, marcar uma linha que espera com o seu motivo e a fase de retomada, e tirá-la de lá de novo; e dispor a fila como um quadro kanban que mostra o trabalho enquanto ele acontece, e dizer onde cada marca é vista.
+E você consegue retomar uma linha cuja sessão terminou, e registrar uma entrega que a pessoa cancela de modo que ela nunca pareça construída.
 
 ## O problema
 
@@ -22,15 +23,17 @@ O focus-kit responde aos dois com seis marcas, cada uma posta no momento em que 
 | `[~]` | sendo definida | o `/propose`, quando começa |
 | `[>]` | completamente definida: a página está pronta para o `/apply` | o `/propose`, quando a página está completa |
 | `[*]` | sendo construída | o `/apply`, quando começa |
-| `[x]` | feita: a página está em `work/done/` | o `/apply`, com a verificação verde |
+| `[x]` | feita: a página está em `work/done/`; com `· dropped:`, cancelada | o `/apply`, com a verificação verde; a pessoa, ao cancelar |
 | `[?]` | esperando | qualquer sessão, nos quatro casos abaixo |
+
+`· dropped:` é um sufixo do `[x]`, não uma sétima marca: uma entrega cancelada é encerrada como uma construída, e o sufixo diz que nada foi entregue (abaixo).
 
 Uma página que existe ainda não é `[>]`: um rascunho guardado para uma linha `[ ]` também é um arquivo em `work/` ([capítulo 11](11-queue-and-milestones.md)).
 A página está completa quando toda seção está preenchida ou diz que não se aplica e nenhuma questão de escopo está aberta; só então o `/propose` marca a linha `[>]`, e o `/apply` a constrói quando toda linha que o `after` dela nomeia está `[x]`.
 Enquanto uma questão de escopo ainda está sendo conversada, a linha fica `[~]`; uma pergunta feita a alguém que não respondeu a faz esperar, `[?]` (abaixo).
 
 Este é o primeiro marco da biblioteca em uma tarde, escrito para este capítulo, com todas as marcas em uso.
-Os sufixos `· after`, `· resume:` e `· blocked:` ficam em inglês, como o kit os escreve:
+Os sufixos `· after`, `· resume:`, `· blocked:` e `· dropped:` ficam em inglês, como o kit os escreve:
 
 ```
 [x] catalogo          o bibliotecário cadastra livros e exemplares
@@ -60,7 +63,7 @@ Um quadro atualizado pelo comando que mudou a marca a mostra na hora, em qualque
 
 ## A próxima linha, e quais rodam juntas
 
-Uma linha está livre quando não está `[x]` nem `[?]`, e toda linha que o `after` dela nomeia está `[x]`.
+Uma linha está livre quando não está `[x]` nem `[?]`, e toda linha que o `after` dela nomeia está `[x]` (um `[x]` que foi cancelado pede a pessoa antes, abaixo).
 No marco acima, `emprestar-livro`, `buscar-catalogo` e `reservas` estão livres; `devolver-livro` e `meus-emprestimos` não, já que `emprestar-livro` ainda não está `[x]`, e `aviso-prazo` espera.
 A próxima entrega é a primeira linha livre que nenhuma sessão pegou: uma sessão está construindo `emprestar-livro` e outra está definindo `reservas`, então a próxima entrega de uma sessão nova é `buscar-catalogo`.
 Quando `emprestar-livro` vira `[x]`, `devolver-livro` e `meus-emprestimos` ficam livres nesse momento, sem nada para tirar e sem marca para mudar; o `· after` fica na linha como o registro da ordem.
@@ -100,6 +103,30 @@ Uma linha com `resume: apply` volta para `[>]`.
 O `/propose` e o `/apply` param os dois em uma linha `[?]`: dizem o que ela espera, e só seguem depois que o motivo se resolve, por um desses três caminhos.
 Um comando que passasse por cima do motivo construiria sobre uma resposta que ninguém deu.
 
+## Uma sessão que terminou, uma entrega cancelada
+
+Uma sessão pode terminar sem que ninguém trave a linha dela: o host fecha, a conexão cai, o limite do plano chega.
+A linha mantém a sua marca.
+`reservas` continua `[~]` depois que a conversa que a definia termina; nada espera por ninguém, então ela não vira `[?]`.
+A marca sozinha não diz que a sessão terminou: uma linha `[~]` ou `[*]` está com uma sessão, e essa sessão pode estar conversando agora mesmo em outra pasta ou em outra máquina.
+Então uma sessão nova não toma a linha só porque vê a marca; a pessoa, que sabe que a sessão terminou, diz isso e roda `/propose reservas` de novo.
+O comando então inspeciona a página, a pasta de trabalho e o índice antes de editar, e segue do que a conversa anterior escreveu.
+`emprestar-livro`, em `[*]` quando a construção dela perdeu a conexão, é retomada do mesmo jeito com `/apply emprestar-livro`: os arquivos já construídos e o que já está no índice continuam da entrega, e a linha continua `[*]`, nunca devolvida a `[>]` ou `[ ]` como se nada tivesse sido feito.
+
+Uma entrega que a pessoa cancela, porque o trabalho provou que é impossível, porque foi recusada, ou porque ninguém a quer mais, também fica na fila.
+Ela termina `[x]` com o motivo no fim da linha, `· dropped: <motivo>`, e a página dela vai para `work/done/` como qualquer outra, dizendo o que foi construído e o que foi desfeito, ou que nada foi construído.
+A biblioteca queria que o bibliotecário imprimisse o cartão de um membro pelo navegador, e a impressora de cartões se mostrou sem um driver que o navegador alcançasse; o bibliotecário cancela a linha, e `reimprimir-cartao`, acrescentada depois dela, espera por ela, em duas linhas escritas para este capítulo:
+
+```
+[x] imprimir-cartao    imprime o cartão de membro · dropped: sem driver
+[ ] reimprimir-cartao  reimprime um cartão perdido · after imprimir-cartao
+```
+
+`[x]` sozinho diz que a promessa da entrega vale, com a verificação verde; `[x]` com `· dropped:` diz que a decisão foi tomada e que a promessa não existe.
+Quem o põe é a pessoa, não o `/apply`, porque cancelar é uma decisão de escopo, e a linha fica para que ninguém pergunte depois se `imprimir-cartao` foi esquecida.
+Só pela regra de linha livre, `reimprimir-cartao` fica livre quando `imprimir-cartao` está `[x]`, e essa é a armadilha: o `[x]` que ela nomeia é uma decisão, não uma impressora de cartões que funciona.
+Então uma linha cujo `after` nomeia uma entrega cancelada cabe à pessoa redecidir: cancelá-la também, como seria `reimprimir-cartao`, ou reescrevê-la sobre o que existe.
+
 ## A fila como quadro kanban
 
 Um quadro kanban mostra o trabalho como cartões em colunas, uma coluna por estado, e um cartão passa de coluna em coluna conforme o estado dele muda.
@@ -138,15 +165,16 @@ O FACE, um protótipo gratuito que o autor está construindo, roda na sua máqui
 
 Um gerente lê onde cada entrega está, e o que cada uma em espera espera, sem perguntar a ninguém e sem reunião de status.
 No Caso A, cinco linhas travadas no cliente pareciam trabalho parado, e cada entrega só chegava a Doing depois de a definição dela ter acabado, contado pelo autor na fila e no quadro do projeto; uma marca posta quando o trabalho muda, e uma para a espera, respondem aos dois.
+Um pedido que se provou impossível ali foi encerrado na fila com o seu motivo em vez de deixado em silêncio ([capítulo 23](23-adoption.md)), e o kit escreve um encerramento assim como `[x]` com `· dropped:`.
 
 A fila também diz quais linhas podem rodar juntas: sem isso, uma pessoa que quer duas sessões tem de descobrir sozinha antes de abrir a segunda; as linhas livres e os arquivos em que mexem respondem isso pela fila, sem reunião.
 
 ## Pontos-chave
 
-* Seis marcas, `[ ]` não definida, `[~]` sendo definida, `[>]` completamente definida e pronta para o `/apply`, `[*]` sendo construída, `[x]` feita, `[?]` esperando, cada uma mudada quando o trabalho muda, não quando um comando termina: o `/propose` põe `[~]` e `[>]`, o `/apply` põe `[*]` e `[x]`, qualquer sessão põe `[?]`.
-* Uma linha está livre quando não está `[x]` nem `[?]` e toda linha que o `after` dela nomeia está `[x]`; a próxima entrega é a primeira linha livre que nenhuma sessão pegou, e linhas livres que mexem em arquivos diferentes podem rodar ao mesmo tempo.
-* `· after` é uma ordem escrita com a linha, que mantém a sua marca; `[?]` com `· blocked: after` é uma espera descoberta depois de o trabalho começar.
-* Uma linha espera quando a pessoa diz, quando uma resposta foi pedida e não veio, quando o trabalho já começado descobre que outra linha precisa ser feita antes, ou quando a leitura do código de uma revisão de marco não cobriu parte do seu intervalo, com a fase de retomada e o motivo no fim, `· resume: apply · blocked: after <slug>`; quando o motivo se resolve, os dois sufixos saem e ela volta conforme essa fase, `resume: propose` para `[ ]` com qualquer rascunho mantido, `resume: apply` para `[>]`, e até lá o `/propose` e o `/apply` param nela, como numa linha que não está livre.
+* Seis marcas, `[ ]` não definida, `[~]` sendo definida, `[>]` completamente definida e pronta para o `/apply`, `[*]` sendo construída, `[x]` feita, `[?]` esperando, cada uma mudada quando o trabalho muda, não quando um comando termina: o `/propose` põe `[~]` e `[>]`, o `/apply` põe `[*]` e `[x]`, a pessoa põe `[x]` com `· dropped: <motivo>` ao cancelar, qualquer sessão põe `[?]`.
+* Uma linha está livre quando não está `[x]` nem `[?]` e toda linha que o `after` dela nomeia está `[x]`, e quando uma é cancelada a pessoa redecide a linha; a próxima entrega é a primeira linha livre que nenhuma sessão pegou, e linhas livres que mexem em arquivos diferentes podem rodar ao mesmo tempo.
+* Uma linha cuja sessão terminou mantém a sua marca, e o seu comando a retoma com a palavra da pessoa, inspecionando antes a página, a pasta e o índice; uma entrega cancelada termina `[x] · dropped: <motivo>`, com a página em `work/done/` dizendo o que foi construído e desfeito.
+* `· after` é uma ordem escrita com a linha, que mantém a sua marca; `[?]` com `· blocked: after` é uma espera descoberta depois de o trabalho começar; uma linha espera quando a pessoa diz, quando uma resposta foi pedida e não veio, quando o trabalho já começado descobre que outra linha precisa ser feita antes, ou quando a leitura do código de uma revisão de marco não cobriu parte do seu intervalo, com a fase de retomada e o motivo no fim, `· resume: apply · blocked: after <slug>`; quando o motivo se resolve, os dois sufixos saem e ela volta conforme essa fase, `resume: propose` para `[ ]` com qualquer rascunho mantido, `resume: apply` para `[>]`, e até lá o `/propose` e o `/apply` param nela, como numa linha que não está livre.
 * A fila é um quadro kanban, uma coluna por marca, um cartão `[?]` em Esperando até voltar a `[ ]` ou `[>]`; nas três colunas deste capítulo, Fazendo guarda `[~]`, `[>]` e `[*]`, e um cartão `[?]` é etiquetado como travado na coluna que a sua fase de retomada nomeia, A fazer para `propose`, Fazendo para `apply`.
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", acesso em 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>

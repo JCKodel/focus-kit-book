@@ -39,7 +39,8 @@ Uma entrega de pergunta, uma linha da fila cujo único propósito é uma respost
 
 **Um pedido que não podia ser construído foi encerrado, não absorvido.**
 Um pedido tinha sido aceito, e o trabalho nele provou que era tecnicamente impossível.
-Ele foi encerrado na fila com o motivo, sem ser construído, quando poderia ter sido largado em silêncio ou torcido em algo que ninguém pediu.
+Ele foi encerrado na fila com o motivo, sem ser construído, quando poderia ter sido deixado em silêncio ou torcido em algo que ninguém pediu.
+O kit escreve um encerramento assim como `[x]` com `· dropped: <motivo>` no fim da linha, com a página em `work/done/` dizendo o que foi construído e desfeito ([capítulo 14](14-queue-states.md)).
 
 **Uma instalação limpa achou o que o ambiente de desenvolvimento escondia.**
 Uma instalação num ambiente limpo falhou numa permissão que o ambiente de desenvolvimento já tinha.
