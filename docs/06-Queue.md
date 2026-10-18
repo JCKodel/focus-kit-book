@@ -373,7 +373,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.17 and the reposi
 [x] docs04-width-rule        docs/04 names the width check among the tests, and docs/04 and `check_width.py` agree on which info strings go unmeasured
 [x] width-comment-fence      `check_width.py` measures no fence inside an HTML comment, as `mask` does
 [x] fence-commonmark         `markdown.py` opens and closes a fence where CommonMark does, and docs/01 says so
-[ ] docs01-helpers           docs/01 names every helper `markdown.py` shares, `target_end` among them, every script that uses them, and `check_width.py`'s use of `check_prose.py`
+[x] docs01-helpers           docs/01 names every helper `markdown.py` shares, `target_end` among them, every script that uses them, and `check_width.py`'s use of `check_prose.py`
 [ ] adr17-section-name       ADR-0017's amendment names the docs/04 section `one-gain-section` changed
 [ ] docs06-m16-paragraph     docs/06's M16 paragraph names the reviews' readers and checker, and M15's `pt-free-line-done` sentence starts in its neighbours' column
 [ ] docs03-review-rows       docs/03's delivery review row fixes the text the delivery wrote, as the apply skill says, and its candidate row glosses seen
