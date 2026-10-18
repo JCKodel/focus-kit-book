@@ -395,7 +395,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18 and the reposi
 [x] ch13-created-files       chapter 13: the delivery review reads the files the delivery created, untracked when it runs; both editions · after kit-2026-10-18
 [x] ch14-four-waits          chapter 14: a line waits in four cases, a code reading that missed part of its range among them; both editions · after kit-2026-10-18
 [x] ch15-review-base         chapter 15: the base is the commit of the previous milestone's review, or the first commit; both editions · after kit-2026-10-18
-[ ] ch14-resume-moment       chapter 14's fourth waiting case says the review was being built, so it resumes by `apply`; both editions
+[x] ch14-resume-moment       chapter 14's fourth waiting case says the review was being built, so it resumes by `apply`; both editions
 [ ] ch15-waiting-reason      chapter 15's review line waits with `· blocked: <what was read>` after `· resume: apply`; both editions · after ch15-review-base
 [ ] m17-review               the review of M17 as docs/05 §8 says · after kit-2026-10-18, ch08-update-2026-10-18, ch13-created-files, ch14-four-waits, ch15-review-base, ch14-resume-moment, ch15-waiting-reason
 ```
