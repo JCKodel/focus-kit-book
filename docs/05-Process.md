@@ -131,7 +131,9 @@ keeping any draft, and `resume: apply` to `[>]`.
 If scope became undecided, return `[ ]` and say what /propose must settle.
 For an old blocked line without `resume`, recover the phase from its page
 and history; if completeness cannot be established, return `[ ]`.
-These are the marks of focus-kit 2026.10.05 (ADR-0018).
+These are the marks of focus-kit 2026.10.05, and the fourth case a line
+waits in is that of 2026.10.18 (ADR-0018 and its amendment of
+2026-10-18).
 
 Two sessions in one working tree, on free lines that touch different
 files, are the normal case of parallel work on trunk. Another line
