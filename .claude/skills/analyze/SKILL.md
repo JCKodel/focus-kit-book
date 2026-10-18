@@ -6,7 +6,7 @@ description: >-
   docs/adr/ and AGENTS.md describing what is there, and asks only what the
   code cannot answer. Writes no code.
 metadata:
-  version: "2026.10.17"
+  version: "2026.10.18"
 ---
 You are documenting a repository so that every later session can act on it
 without rereading it. Read `references/documents.md` first, whole: it says
@@ -43,7 +43,7 @@ host's question form when it has one:
   (docs/05 §5). Default: the host's, when it can be limited to those
   paths;
 * the milestone review: the areas its code reading splits into and the
-  model its agents run on (docs/05 §8). Default: docs/01's modules and
+  model its agents run on (docs/05 §5). Default: docs/01's modules and
   the session's model;
 * the first milestone: three to eight deliveries, or where to read them
   from (issues, a TODO file, a roadmap), then its review.

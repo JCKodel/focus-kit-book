@@ -106,7 +106,7 @@ queue shows what is happening while it happens:
 | `[>]` | completely defined, page ready for /apply | /propose, when §3 is complete |
 | `[*]` | being built | /apply, when it starts |
 | `[x]` | done, page in `work/done/` | /apply, with verify green |
-| `[?]` | waiting | any session, in the three cases below |
+| `[?]` | waiting | any session, in the four cases below |
 
 A board may read the queue, and people pull work from it, so a mark
 changes at once: `[~]` is /propose's first edit, `[*]` is /apply's first,
@@ -114,7 +114,8 @@ and `[x]` is /apply's last. Without a board the marks cost nothing.
 
 A line waits when the person says it is blocked, when it needs an answer
 that was asked and not given, or when work already started finds it needs
-another line done first, such as a fix found in the middle of an /apply.
+another line done first, such as a fix found in the middle of an /apply,
+or when a milestone review's code reading missed part of its range (§8).
 The reason goes at the end
 of the line, `· blocked: <reason>` or `· blocked: after <slug>, <slug>`.
 A dependency known when the line is added is `· after <slug>` alone,
@@ -206,8 +207,9 @@ time. Steps go in a manual, and what a command prints stays in its help.
 * **Delivery review:** before /apply ends, a read-only agent on Opus,
   which keeps the session's advisor, reads `git diff` and
   `git diff --cached` of the delivery's paths, of docs/06 only its own
-  hunk, against the delivery's page and docs/04. Another session's
-  files are not this review's. No other model runs it.
+  hunk, and the files the delivery created, which no diff shows until
+  they are staged, against the delivery's page and docs/04. Another
+  session's files are not this review's. No other model runs it.
 * **Guided project and brownfield project:** retired by `rewrite`
   (ADR-0017). The repositories `JCKodel/focus-kit-clinic` and
   `JCKodel/clahub` and their tags stay as they are, cited by no chapter;
@@ -304,9 +306,10 @@ clause by hand: a clause no delivery answers, or one that fails in the
 person's hands, is a finding.
 
 The review also reads the code, the one look at the whole instead of a
-delivery: every page can be right and the whole wrong. Its page names the
-commit that closed the previous milestone, or the first commit, as the
-base, and lists, by §5's areas, the paths `git diff --stat <base>..HEAD`
+delivery: every page can be right and the whole wrong. Its page names as
+the base the commit of the previous milestone's review, so the range
+holds the fixes of its findings, which get no second review, or the
+first commit for a first milestone, and lists, by §5's areas, the paths `git diff --stat <base>..HEAD`
 shows: always the range, since a bare commit reads that one commit. An
 area too large for one careful reading splits again. It costs, so the
 session says it is time and starts it only on the person's word: one
@@ -317,10 +320,11 @@ what no delivery's own review could see, one delivery's work against
 another's, a document against another, the whole against docs/01, and
 reports candidates by file and line and the paths it read. One checker,
 an agent or the review's session, opens each candidate's file and marks
-it seen, latent (nothing triggers it today) or weak (the claim does not
-hold as stated) before the person sees it. They fix nothing. When the
-paths read miss some of the range's, the page says which and the line
-waits as `[?]` with `· resume: apply` (§4). A candidate the person confirms is a finding like
+it seen (true in the file today), latent (nothing triggers it today) or
+weak (the claim does not hold as stated) before the person sees it. They
+fix nothing. When the paths read miss some of the range's, the page says
+which and the line waits as `[?]` with `· resume: apply` and
+`· blocked: <what was read>` (§4). A candidate the person confirms is a finding like
 the others.
 
 For a milestone of chapters, testing by hand is the author reading, in

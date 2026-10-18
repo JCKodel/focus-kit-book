@@ -35,3 +35,7 @@ Since `kit-2026-10-16-2` the book runs focus-kit 2026.10.16.2, 2026.10.16.1 incl
 ## Amendment, 2026-10-17 (kit-2026-10-17)
 
 Since `kit-2026-10-17` the book runs focus-kit 2026.10.17; the six marks are unchanged.
+
+## Amendment, 2026-10-18 (kit-2026-10-18)
+
+Since `kit-2026-10-18` the book runs focus-kit 2026.10.18; the six marks are unchanged, and `[?]` waits in a fourth case: a milestone review's code reading that missed part of its range (docs/05 §§4, 8).
