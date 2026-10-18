@@ -397,5 +397,19 @@ When this milestone closes, the book teaches focus-kit 2026.10.18 and the reposi
 [x] ch15-review-base         chapter 15: the base is the commit of the previous milestone's review, or the first commit; both editions · after kit-2026-10-18
 [x] ch14-resume-moment       chapter 14's fourth waiting case says the review was being built, so it resumes by `apply`; both editions
 [x] ch15-waiting-reason      chapter 15's review line waits with `· blocked: <what was read>` after `· resume: apply`; both editions · after ch15-review-base
-[ ] m17-review               the review of M17 as docs/05 §8 says · after kit-2026-10-18, ch08-update-2026-10-18, ch13-created-files, ch14-four-waits, ch15-review-base, ch14-resume-moment, ch15-waiting-reason
+[x] m17-review               the review of M17 as docs/05 §8 says · after kit-2026-10-18, ch08-update-2026-10-18, ch13-created-files, ch14-four-waits, ch15-review-base, ch14-resume-moment, ch15-waiting-reason
+[ ] conflict-same-lines      chapter 19, docs/05 §4 and §6, and docs/03's conflict row define a conflict between two sessions in one way, so a batch's adjacent marks in one hunk of docs/06 are either staged or stopped for, consistently; both editions
+[ ] ch19-adjacent-mark-staging  chapter 19 says who stages a batch's adjacent mark and how a session stages one line of a shared hunk without an editor; both editions
+[ ] pt-librarian-masculine   the Portuguese edition says "o bibliotecário", as docs/03 fixes, in chapters 4, 5, 11, 14, 17 and 19
+[ ] ch15-review-range-order  chapters 15 and 8 say the review's range holds the next milestone's deliveries that landed after the review's commit, not every one of them; both editions
+[ ] ch15-first-commit-base   chapter 15 says what a first milestone's range leaves out of the first commit, instead of "the whole project"; both editions
+[ ] ch13-four-waits          chapter 13's list of when /apply cannot go on names all four cases a line waits in; both editions
+[ ] ch08-report-item-one     chapter 8's report item 1 says what text it replaces, as items 2 and 3 do; both editions
+[ ] pt-ch08-migration-label  the Portuguese chapter 8's key point names the changelog item's `Migração:` label as the English names `Migration:`
+[ ] untracked-diff-wording   chapter 8 and docs/03's untracked file row say a new file shows in `git diff --cached` once staged and never in plain `git diff`; both editions
+[ ] ch14-m1-return-book      chapter 14's first milestone holds `return-book`, like chapters 11 and 15; both editions
+[ ] docs03-checker-pt        docs/03 gives the checker and the labels seen, latent and weak their Portuguese words, and the Portuguese edition uses them
+[ ] docs05-fourth-case-version  docs/05 §4 and docs/03's waiting mark row say the fourth case came with focus-kit 2026.10.18
+[ ] docs05-review-concurrency  docs/05's Milestone review slot says how many review agents run at once
+[ ] docs05-four-cases-sentence  docs/05 §4's sentence on when a line waits reads as four cases, the fourth not an example of the third
 ```
