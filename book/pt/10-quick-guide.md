@@ -41,7 +41,7 @@ O [capítulo 18](18-git-essentials.md) e o [capítulo 19](19-worktrees.md) ensin
 2. Digite `/brainstorm` e responda às perguntas dele, um assunto por vez; "your call" (você decide) mantém o padrão do agente.
    Você vê o docs/00 ao 06, `docs/adr/`, `AGENTS.md`, `CLAUDE.md` e `work/done/` escritos, a fila mostrada, e o agente nomeando o `/propose <slug>` para a primeira linha da fila, numa sessão nova.
    Ensinado no [capítulo 9](09-starting-a-project.md), "`/brainstorm`: um projeto novo".
-3. Leia os documentos contra a lista de conferência do capítulo 9, peça ao agente cada correção na mesma sessão, e então faça o commit deles com os arquivos do kit: `git add -A`, depois `git commit -m "docs: os documentos do projeto, pelo /brainstorm"`, uma mensagem escrita para este capítulo.
+3. Leia os documentos contra a lista de conferência do capítulo 9, peça ao agente cada correção na mesma sessão, e então faça o commit deles com os arquivos do kit: `git add -A`, depois `git commit -m "Adicionar o kit e os documentos do /brainstorm"`, uma mensagem escrita para este capítulo, só o assunto, já que ainda não há página para a sua última linha.
    Você vê um commit no `git log` com os documentos, o `AGENTS.md`, o `CLAUDE.md` e as pastas do host; daqui em diante, o seu docs/05 é dono do formato de cada mensagem.
    Ensinado no [capítulo 9](09-starting-a-project.md), "Revise antes do commit".
 4. Numa sessão nova, digite `/propose <slug>`, com o slug da primeira linha da fila, e responda ao que os documentos deixam em aberto.

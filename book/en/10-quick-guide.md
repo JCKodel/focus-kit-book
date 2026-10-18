@@ -41,7 +41,7 @@ One choice is yours before the first `/propose`: the git strategy, trunk, a bran
 2. Type `/brainstorm` and answer its questions, one subject at a time; "your call" keeps the agent's default.
    You see docs/00 to 06, `docs/adr/`, `AGENTS.md`, `CLAUDE.md` and `work/done/` written, the queue shown, and the agent naming `/propose <slug>` for the queue's first line, in a fresh session.
    Taught in [chapter 9](09-starting-a-project.md), "`/brainstorm`: a new project".
-3. Read the documents against chapter 9's checklist, ask the agent for every fix in the same session, then commit them with the kit's files: `git add -A`, then `git commit -m "docs: the project's documents, by /brainstorm"`, a message written for this chapter.
+3. Read the documents against chapter 9's checklist, ask the agent for every fix in the same session, then commit them with the kit's files: `git add -A`, then `git commit -m "Add the kit and the documents from /brainstorm"`, a message written for this chapter, a subject alone, since there is no page yet for its last line.
    You see one commit in `git log` holding the documents, `AGENTS.md`, `CLAUDE.md` and the host's folders; from here, your docs/05 owns the format of every message.
    Taught in [chapter 9](09-starting-a-project.md), "Review before you commit".
 4. In a fresh session, type `/propose <slug>`, with the slug of the queue's first line, and answer what the documents leave open.
