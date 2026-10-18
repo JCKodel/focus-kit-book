@@ -274,6 +274,9 @@ from the working tree, the other delivery's hunk of a shared file
 included.
 
 The agent suggests the message; the person commits after reviewing.
+The one commit a script makes is the release's: `make release`, on the
+author's `y`, commits `VERSION` alone as `chore(release): vX.Y.Z`, with no
+page and no body (`docs/manuals/release-the-book.md`).
 Imperative subject up to 72 characters, `<type>(<slug>): <subject>`, where
 type is `feat`, `fix`, `docs` or `chore`; body up to five one-line bullets,
 the highlights and not

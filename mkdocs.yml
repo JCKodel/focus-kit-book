@@ -33,6 +33,8 @@ extra:
   status:
     draft: Draft
   draft_banner: "Draft: this chapter is still being written."
+  book_version: "This is version {version} of the book, published on {date}. Check https://github.com/JCKodel/focus-kit-book/releases for a newer version."
+  book_version_unpublished: "This is version {version} of the book, published on {date}, with changes not yet published, built on {built}. Check https://github.com/JCKodel/focus-kit-book/releases for a newer version."
 
 plugins:
   - search
@@ -64,3 +66,5 @@ plugins:
             status:
               draft: Rascunho
             draft_banner: "Rascunho: este capítulo ainda está sendo escrito."
+            book_version: "Esta é a versão {version} do livro, publicada em {date}. Veja se há uma versão mais nova em https://github.com/JCKodel/focus-kit-book/releases."
+            book_version_unpublished: "Esta é a versão {version} do livro, publicada em {date}, com alterações ainda não publicadas, gerada em {built}. Veja se há uma versão mais nova em https://github.com/JCKodel/focus-kit-book/releases."

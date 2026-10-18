@@ -444,4 +444,33 @@ When this milestone closes, a reader of chapters 0 to 7 learns each idea where i
 [x] ch19-git-step-wording   chapters 18 and 19 name only git steps and knots the book teaches where they say the agent acts on the person's word, say conflict marker, and give the Portuguese one phrase for the agent acting alone; both editions
 [x] docs04-code-layout       docs/04's rule for code says declarations and `{ }` blocks are set apart by blank lines, as the author writes code
 [x] m18-review               the review of M18 as docs/05 §8 says · after ch19-git-step-wording, ch14-face-prototype, try-before-commit, ch19-agent-does-git, docs04-code-layout, early-no-forward-links, pt-ninjobs-masculine, case-a-why-anonymous, agent-never-unsure, ch02-gain-less-to-read, pt-identifiers-choice, ch03-literal-type-comment, ch03-error-languages, ch04-focus-optional, ch04-uncle-bob, ch04-scalable-meaning, ch05-test-time, ch05-random-values, ch07-rag-and-numbers, ch07-talk-not-edit, ch11-queue-grows, ch11-agent-runs-propose, ch13-teach-the-agent
+[x] copyright-version        the page with the copyright line says which version of the book this copy is and the date it was published, and asks the reader to check the book's GitHub repository for newer versions; `make release` writes them to a committed `VERSION` and builds the book before pushing; both editions
+```
+
+## M19. focus-kit 2026.10.18.1
+
+When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repository runs on it: verify kept fast with the slow tests run by the milestone review, a line no clause needs going to the next milestone, /propose in the asking session or a fresh one, /apply's next steps starting with using the delivery, and the agent committing or merging only when asked; and every passage the comparison of the book with the kit on 2026-10-18 found false says what the kit does.
+
+```
+[ ] kit-2026-10-18-1         reinstall the kit at 2026.10.18.1 and apply its migration report to docs/05 §§2, 4, 5, 6 and 8, docs/04, AGENTS.md and the skills · after m18-review
+[ ] ch08-update-2026-10-18-1 chapter 8: the update example and its report at 2026.10.18.1, and the Claude Code row that reads `AGENTS.md` alone only without a `CLAUDE.md`; both editions · after kit-2026-10-18-1
+[ ] ch05-13-slow-tests       chapters 5, 7, 13 and 15: verify fast on every delivery, the slow tests named in the Verify slot and run by the milestone review, and /apply saying when a test is too slow for verify; both editions · after kit-2026-10-18-1
+[ ] ch11-next-milestone      chapters 11, 14 and 15: a line no clause of the current milestone needs goes under the next milestone, and a review's finding stays in its own; both editions · after kit-2026-10-18-1
+[ ] propose-same-session     chapters 8 to 13 and 17: /propose runs in the session that asked for the change or in a fresh one, and /apply always in a fresh one; both editions · after kit-2026-10-18-1
+[ ] apply-use-first          chapters 10 and 13, and where chapters 18, 19, 22 and 23 describe the person's review: /apply's next steps start with using what the delivery changed; both editions · after kit-2026-10-18-1
+[ ] agent-commits-asked      chapters 6, 18, 19 and 23: the agent never commits or merges on its own, and asked, it takes the step the person names, as the kit now says; both editions · after kit-2026-10-18-1
+[ ] ch11-14-defined-mark     chapters 11 and 14: `[>]` means completely defined, not that the page exists, and a `[ ]` line may keep a draft; both editions
+[ ] ch21-done-when           chapter 21: /apply ticks every Done when item, as the kit says; both editions
+[ ] ch17-context-read        chapter 17: /brainstorm and /analyze read `context/` whole, and a later item is read on the person's request and turned into the documents; both editions
+[ ] ch14-back-to-open        chapter 14: a line returns to `[ ]` only as the kit says, `resume: propose` with its draft kept; both editions
+[ ] ch08-10-fresh-start      chapters 8 and 10: /brainstorm and /analyze run in a fresh session after the install; both editions
+[ ] ch19-batch-staging       chapter 19: in a batch, /propose stages nothing, as the kit's /propose does; both editions
+[ ] ch18-kit-branches        chapter 18: git-flow and the squash merge are told as strategies outside the kit, whose branch is named after the slug and reverted in one merge; both editions
+[ ] ch06-23-kit-rules        chapters 6 and 23: the kit's rules as SETUP.md §2 lists them; both editions
+[ ] ch10-explicit-staging    chapter 10: the quick guide stages by explicit paths, never `git add -A`, as docs/05 §6 says; both editions
+[ ] ch08-hosts-details       chapters 8 and 10: Antigravity reads `AGENTS.md` directly with an always-on pointer, the Jules to Cline row in the tables, /brainstorm and /analyze take no slug, and Claude Code's skills disable model invocation; both editions
+[ ] ch09-empty-repo          chapter 9: a repository with no code starts with /brainstorm, as the kit says; both editions
+[ ] ch13-refuse-incomplete   chapter 13: /apply refuses an incomplete page and points to /propose, and only a `[>]` line becomes `[*]`; both editions
+[ ] ch02-93-moment           chapter 2: the 93 finished pages are counted after the opening, which had 91; both editions
+[ ] m19-review               the review of M19 as docs/05 §8 says · after kit-2026-10-18-1, ch08-update-2026-10-18-1, ch05-13-slow-tests, ch11-next-milestone, propose-same-session, apply-use-first, agent-commits-asked, ch11-14-defined-mark, ch21-done-when, ch17-context-read, ch14-back-to-open, ch08-10-fresh-start, ch19-batch-staging, ch18-kit-branches, ch06-23-kit-rules, ch10-explicit-staging, ch08-hosts-details, ch09-empty-repo, ch13-refuse-incomplete, ch02-93-moment
 ```

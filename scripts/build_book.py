@@ -3,6 +3,8 @@
 
 The PDF opens on the edition's cover, book/assets/cover-<edition>.pdf (A5, one page), prepended with pypdf;
 the EPUB carries book/assets/cover-<edition>.png as its cover image.
+The rights page carries the version sentence: the published one with --release, or when the tag v<version> of
+VERSION points at HEAD and the tree is clean; otherwise the unpublished one, built today.
 Prints the path of each file it writes.
 An error prints as `file:line: book: message`, or `Makefile:1: book: message` when it names no file, and exits 1.
 A link to a heading that does not exist, or any other weasyprint `ERROR:`, is found in each edition;
@@ -16,6 +18,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -25,6 +28,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "output"
 PANDOC = ROOT / "pandoc"
 ASSETS = ROOT / "book" / "assets"
+VERSION = ROOT / "VERSION"
 EDITIONS = {
     "en": {"lang": "en", "name": "one-page-at-a-time", "contents": "Contents", "chapter": "Chapter"},
     "pt": {"lang": "pt-BR", "name": "uma-pagina-de-cada-vez", "contents": "Sumário", "chapter": "Capítulo"},
@@ -34,7 +38,9 @@ CONTENTS = "contents"
 # ascii_identifiers: a heading's id drops its accents, as on the site, so one #anchor link works in both.
 READ = ["-f", "markdown-tex_math_dollars+ascii_identifiers", "--file-scope"]
 
-YAML_FIELD = re.compile(r"^(\s*)(site_author|copyright|draft_banner):\s*(.*)$")
+SITE_KEYS = ("site_author", "copyright", "draft_banner", "book_version", "book_version_unpublished")
+YAML_FIELD = re.compile(rf"^(\s*)({'|'.join(SITE_KEYS)}):\s*(.*)$")
+VERSION_LINE = re.compile(r"(\d+\.\d+\.\d+) (\d{4}-\d{2}-\d{2})")
 LOCALE = re.compile(r"^(\s*)- locale:\s*(\S+)")
 CHAPTER_LINK = re.compile(r"\]\(((?:[0-9]{2}[a-z]?|A[0-9]+)-[^)#\s]+\.md)(\s+\"[^\"]*\")?\)")
 PANDOC_PLACE = re.compile(r"\"([^\"]+)\" \(line (\d+), column \d+\)")
@@ -67,9 +73,9 @@ def unquote(value):
 
 
 def site_values():
-    """Read site_author, copyright and draft_banner from mkdocs.yml, per edition.
+    """Read the SITE_KEYS from mkdocs.yml, per edition.
 
-    The standard library has no YAML reader, so this reads the three keys by indentation:
+    The standard library has no YAML reader, so this reads the keys by indentation:
     top level for English, under `- locale: pt` of the i18n plugin for Portuguese.
     """
     values = {"en": {}, "pt": {}}
@@ -91,10 +97,38 @@ def site_values():
                 values[target].setdefault(match.group(2), unquote(match.group(3).strip()))
     values["pt"].setdefault("site_author", values["en"].get("site_author"))
     for edition, found in values.items():
-        for key in ("site_author", "copyright", "draft_banner"):
+        for key in SITE_KEYS:
             if not found.get(key):
                 raise Failed(f"mkdocs.yml:1: book: no {key} for edition {edition}")
     return values
+
+
+def book_version():
+    """Return (version, date) of VERSION, its one line `X.Y.Z YYYY-MM-DD`; anything else raises Failed."""
+    lines = VERSION.read_text(encoding="utf-8").splitlines() if VERSION.is_file() else []
+    match = VERSION_LINE.fullmatch(lines[0]) if len(lines) == 1 else None
+    if not match:
+        raise Failed('VERSION:1: book: VERSION must be one line "X.Y.Z YYYY-MM-DD"')
+    return match.groups()
+
+
+def published(version):
+    """True when the tag v<version> points at HEAD and the tree is clean; False with no git, as in an archive."""
+    try:
+        tags = subprocess.run(["git", "tag", "--points-at", "HEAD"], cwd=ROOT, capture_output=True, text=True)
+        status = subprocess.run(["git", "status", "--porcelain"], cwd=ROOT, capture_output=True, text=True)
+    except FileNotFoundError:
+        return False
+    if tags.returncode != 0 or status.returncode != 0:
+        return False
+    return f"v{version}" in tags.stdout.split() and not status.stdout.strip()
+
+
+def version_sentence(site, edition, release):
+    """The rights page's sentence: which version this copy is, when it was published, where to find a newer one."""
+    version, day = book_version()
+    key = "book_version" if release or published(version) else "book_version_unpublished"
+    return site[edition][key].format(version=version, date=day, built=date.today().isoformat())
 
 
 class TextWithURLs(HTMLParser):
@@ -322,11 +356,12 @@ def located(error, sources):
     return found or [f"Makefile:1: book: {error}"]
 
 
-def build(edition, site, work):
+def build(edition, site, work, release):
     settings = EDITIONS[edition]
     title, subtitle = index_values(edition)
     author = site[edition]["site_author"]
     rights = html_to_text(site[edition]["copyright"])
+    version = version_sentence(site, edition, release)
     sources = chapters(edition)
     names = {source.name for source in sources}
     places = {}
@@ -349,7 +384,7 @@ def build(edition, site, work):
         f'<p class="subtitle">{html.escape(subtitle)}</p>\n'
         f'<p class="author">{html.escape(author)}</p>\n'
         "</section>\n"
-        f'<section class="rights-page">\n<p>{html.escape(rights)}</p>\n</section>\n',
+        f'<section class="rights-page">\n<p>{html.escape(rights)}</p>\n<p>{html.escape(version)}</p>\n</section>\n',
         encoding="utf-8",
     )
     page = work / "book.html"
@@ -378,7 +413,7 @@ def build(edition, site, work):
          "--css", str(PANDOC / "epub.css"),
          "--epub-cover-image", str(cover(edition, "png")),
          "-M", f"title={title}", "-M", f"subtitle={subtitle}",
-         "-M", f"author={author}", "-M", f"rights={rights}",
+         "-M", f"author={author}", "-M", f"rights={rights} {version}",
          "-o", str(epub)],
         places, work,
     )
@@ -424,6 +459,10 @@ def with_cover(edition, body, pdf):
 
 
 def main():
+    if sys.argv[1:] not in ([], ["--release"]):
+        print("Makefile:1: book: usage: build_book.py [--release]")
+        return 1
+    release = sys.argv[1:] == ["--release"]
     for tool in ("pandoc", "weasyprint"):
         if shutil.which(tool) is None:
             print(f"Makefile:1: book: {tool} not found; install it (see README)")
@@ -439,7 +478,7 @@ def main():
         written, problems = [], []
         for edition in EDITIONS:
             with tempfile.TemporaryDirectory() as work:
-                files, found = build(edition, site, Path(work))
+                files, found = build(edition, site, Path(work), release)
             written += files
             problems += found
     except Failed as failure:
