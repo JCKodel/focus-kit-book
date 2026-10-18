@@ -138,7 +138,7 @@ On my projects this was rarely needed, and the conversation was always enough, s
 
 The page is the review surface of the team.
 A developer, a manager or the client reads one page in the language of docs/03 and knows what is about to be built, what is not, and what "done" will mean, before a line of code exists.
-On Case A, the same page format carried questions to the client and documents for handover, so one review skill served every kind of work (chapter 21).
+On Case A, the same page format carried questions to the client and documents for handover, so every kind of work was reviewed the same way, by reading its page (chapter 21).
 And when the build ends, the same page records what happened, so the history of a decision is one file, named by its slug, in every project the team runs.
 
 ## Key points

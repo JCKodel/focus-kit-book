@@ -145,7 +145,7 @@ Nos meus projetos isso foi raro, e a conversa sempre bastou, então nenhuma marc
 
 A página é a superfície de revisão do time.
 Um desenvolvedor, um gerente ou o cliente lê uma página na linguagem do docs/03 e sabe o que está para ser construído, o que não está, e o que "pronto" vai significar, antes de existir uma linha de código.
-No Caso A, o mesmo formato de página levou perguntas ao cliente e documentos para a passagem do projeto, então uma única skill de revisão serviu a todo tipo de trabalho (capítulo 21).
+No Caso A, o mesmo formato de página levou perguntas ao cliente e documentos para a passagem do projeto, então todo tipo de trabalho foi revisado do mesmo jeito, lendo a sua página (capítulo 21).
 E quando a construção termina, a mesma página registra o que aconteceu, então a história de uma decisão é um arquivo, com o nome do seu slug, em todo projeto que o time roda.
 
 ## Pontos-chave

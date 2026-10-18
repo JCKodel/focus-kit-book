@@ -345,7 +345,7 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] ch04-parnas              chapter 4 introduces Parnas's criterion with its source, or does not lean on it; both editions
 [x] ch05-lend-pointer        chapter 5 points to the chapter where the use case `lend` is shown; both editions
 [x] ch10-commit-message      chapter 10's commit message follows docs/05 §6's format as the book writes it; both editions
-[ ] ch12-review-skill        chapter 12 names no review skill the kit does not have; both editions
+[x] ch12-review-skill        chapter 12 names no review skill the kit does not have; both editions
 [ ] ch15-first-commit        chapter 15 gives the first commit as a base for any milestone, as docs/05 §8 does; both editions
 [ ] ch17-delivery-time       chapter 17 measures how long a delivery took in a way that holds on trunk; both editions
 [ ] ch18-log-evidence        chapter 18's log gives lend-book's commit as chapter 13 does, and its gain cites no illustration as evidence; both editions
