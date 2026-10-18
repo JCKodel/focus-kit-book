@@ -7,7 +7,8 @@ You can also choose a stack by what the project needs and by how well the agent 
 
 Every later session reads the project documents before it acts, so they have to exist before the first delivery.
 An agent that starts with nothing written decides everything alone, and a questionnaire fails the other way: it asks a person what they cannot answer yet, or what the code already says.
-focus-kit has two commands for this, one for an empty repository and one for a repository with something in it, and both write the same documents by conversation and write no code.
+focus-kit has two commands for this, and code is what chooses between them: `/brainstorm` for a repository with no application code yet, even one that already holds a README, notes or the kit's own files, and `/analyze` for a repository with code.
+Both write the same documents by conversation and write no code; a project already documented runs neither again when it updates the kit ([chapter 8](08-install-and-hosts.md)).
 
 ## `/brainstorm`: a new project
 
@@ -62,7 +63,7 @@ It writes no code, no configuration and no dependency file: the first delivery d
 
 ## `/analyze`: an existing project
 
-`/analyze` is the command for a repository that already has something in it: code, documents, or both.
+`/analyze` is the command for a repository that already has code, with or without a README or documentation of its own.
 It works like `/brainstorm`, with a default for every question and the same documents at the end, but it reads before it asks, and what the code says, it does not ask.
 
 ### What it reads
@@ -70,7 +71,7 @@ It works like `/brainstorm`, with a default for every question and the same docu
 As the kit's file for the command lists, it reads `context/` whole when it exists (the section below), the README and any documentation already there, the manifests, the folder tree, the entry points, the tests and how they run, the CI configuration and any script a person runs by hand, the recent commit subjects, and any agent rules file already there, such as `CLAUDE.md` or `.cursorrules`.
 
 From that it infers the stack, how the code is organized, where the business rules live, how errors travel, the verify command and the environments, and it marks each as observed.
-What the project does not have, it skips: on a repository with no code the documents describe what the files say.
+What the project does not have, it skips.
 
 ### What it asks
 

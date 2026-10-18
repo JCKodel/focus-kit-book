@@ -7,7 +7,8 @@ Você também consegue escolher uma stack pelo que o projeto precisa e por quant
 
 Toda sessão seguinte lê os documentos do projeto antes de agir, então eles têm de existir antes da primeira entrega.
 Um agente que começa sem nada escrito decide tudo sozinho, e um questionário falha pelo outro lado: pergunta a uma pessoa o que ela ainda não sabe responder, ou o que o código já diz.
-O focus-kit tem dois comandos para isso, um para um repositório vazio e outro para um repositório com alguma coisa dentro, e os dois escrevem os mesmos documentos conversando e não escrevem código.
+O focus-kit tem dois comandos para isso, e o que escolhe entre eles é o código: o `/brainstorm` para um repositório que ainda não tem código da aplicação, mesmo que já tenha um README, anotações ou os arquivos do próprio kit, e o `/analyze` para um repositório com código.
+Os dois escrevem os mesmos documentos conversando e não escrevem código; um projeto já documentado não roda nenhum dos dois de novo quando atualiza o kit ([capítulo 8](08-install-and-hosts.md)).
 
 ## `/brainstorm`: um projeto novo
 
@@ -62,7 +63,7 @@ Ele não escreve código, nem configuração, nem arquivo de dependências: a pr
 
 ## `/analyze`: um projeto existente
 
-O `/analyze` é o comando para um repositório que já tem alguma coisa dentro: código, documentos, ou os dois.
+O `/analyze` é o comando para um repositório que já tem código, com ou sem um README ou documentação própria.
 Ele funciona como o `/brainstorm`, com um padrão em cada pergunta e os mesmos documentos no fim, mas lê antes de perguntar, e o que o código diz ele não pergunta.
 
 ### O que ele lê
@@ -70,7 +71,7 @@ Ele funciona como o `/brainstorm`, com um padrão em cada pergunta e os mesmos d
 Como o arquivo do kit para o comando lista, ele lê a `context/` inteira quando existe (a seção abaixo), o README e qualquer documentação que já exista, os manifestos, a árvore de pastas, os pontos de entrada, os testes e como eles rodam, a configuração de CI e qualquer script que uma pessoa roda à mão, os assuntos dos commits recentes, e qualquer arquivo de regras de agente que já exista, como `CLAUDE.md` ou `.cursorrules`.
 
 A partir disso ele deduz a stack, como o código está organizado, onde moram as regras de negócio, como os erros viajam, o comando de verificação e os ambientes, e marca cada item como observado.
-O que o projeto não tem, ele pula: em um repositório sem código, os documentos descrevem o que os arquivos dizem.
+O que o projeto não tem, ele pula.
 
 ### O que ele pergunta
 

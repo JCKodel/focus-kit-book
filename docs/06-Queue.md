@@ -469,7 +469,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repo
 [x] ch06-23-kit-rules        chapters 6 and 23: the kit's rules as SETUP.md §2 lists them; both editions
 [x] ch10-explicit-staging    chapter 10: the quick guide stages by explicit paths, never `git add -A`, as docs/05 §6 says; both editions
 [x] ch08-hosts-details       chapters 8 and 10: Antigravity reads `AGENTS.md` directly with an always-on pointer, the Jules to Cline row in the tables, /brainstorm and /analyze take no slug, and Claude Code's skills disable model invocation; both editions
-[>] ch09-empty-repo          chapter 9: a repository with no code starts with /brainstorm, as the kit says; both editions
+[x] ch09-empty-repo          chapter 9: a repository with no code starts with /brainstorm, as the kit says; both editions
 [x] ch13-refuse-incomplete   chapter 13: /apply refuses an incomplete page and points to /propose, and only a `[>]` line becomes `[*]`; both editions
 [>] ch02-93-moment           chapter 2: the 93 finished pages are counted after the opening, which had 91; both editions
 [>] ch19-commit-by-index     chapters 13 and 19 and docs/05 §6: the person commits from an index holding one delivery, never by naming paths on `git commit`, and a conflict is a line both sessions edited, not a hunk, as the kit now says; both editions · after kit-2026-10-18-1
