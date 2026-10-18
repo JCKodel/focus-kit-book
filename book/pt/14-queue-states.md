@@ -103,8 +103,10 @@ As fábricas da Toyota usavam kanban, cartões que diziam que peças eram necess
 Times de software levaram a ideia para um quadro em que, nas palavras da Microsoft sobre o Azure DevOps, "*os membros do time arrastam cartões entre colunas para atualizar o status*".[^azure-kanban]
 
 Lida como um quadro, a fila tem uma coluna por marca, seis delas, e cada mudança de marca move um cartão.
+Um cartão `[?]` fica em Esperando com o seu motivo, e quando o motivo se resolve ele passa para a coluna da marca a que volta, `[ ]` ou `[>]`.
 Um time cujo quadro tem três colunas as dobra: `[ ]` para A fazer; `[~]`, `[>]` e `[*]` para Fazendo; `[x]` para Feito.
-Um cartão `[?]` fica na coluna em que estava, etiquetado como travado, com o seu motivo, então a espera nunca parece parada.
+No quadro de três colunas deste capítulo, uma ilustração e não uma regra do kit nem um recurso de algum quadro, um cartão `[?]` vai pela sua fase de retomada, etiquetado como travado com o seu motivo, então a espera nunca parece parada: `resume: propose` em A fazer, `resume: apply` em Fazendo.
+A linha diz para onde o cartão vai, então o quadro não guarda memória da coluna em que um cartão estava.
 O marco acima, em um quadro de três colunas:
 
 ```
@@ -115,9 +117,14 @@ meus-emprestimos     emprestar-livro
 m1-review
 ```
 
-`devolver-livro` e `meus-emprestimos` ficam em A fazer sem etiqueta: esperam a sua vez, não por alguém, e só `aviso-prazo` é etiquetada como travada.
+`devolver-livro` e `meus-emprestimos` ficam em A fazer sem etiqueta: esperam a sua vez, não por alguém, e só `aviso-prazo` é etiquetada como travada, em A fazer porque a sua linha diz `resume: propose`.
 
 `reservas` está em Fazendo desde o primeiro minuto da conversa dela, que era o erro do quadro do Caso A.
+
+Se `reservas` travasse no meio da definição, o seu `resume: propose` a levaria de Fazendo para A fazer, etiquetada como travada; resolvida, ela fica em A fazer como `[ ]`, com o rascunho mantido e sem etiqueta.
+`meus-emprestimos`, esperando `corrigir-devolucao` no meio da construção, ficaria em Fazendo pelo seu `resume: apply`, etiquetada como travada; resolvida, ela fica em Fazendo como `[>]`, não como um `[*]` que nenhuma sessão está construindo.
+Nos dois casos, resolver o motivo tira os dois sufixos e, com eles, a etiqueta.
+
 O capítulo 20 mostra como um script espelha a fila no quadro do próprio time, numa só direção.
 
 Um quadro também pode ler a própria fila, sem nada a espelhar.
@@ -136,7 +143,7 @@ A fila também diz quais linhas podem rodar juntas: sem isso, uma pessoa que que
 * Uma linha está livre quando não está `[x]` nem `[?]` e toda linha que o `after` dela nomeia está `[x]`; a próxima entrega é a primeira linha livre que nenhuma sessão pegou, e linhas livres que mexem em arquivos diferentes podem rodar ao mesmo tempo.
 * `· after` é uma ordem escrita com a linha, que mantém a sua marca; `[?]` com `· blocked: after` é uma espera descoberta depois de o trabalho começar.
 * Uma linha espera quando a pessoa diz, quando uma resposta foi pedida e não veio, quando o trabalho já começado descobre que outra linha precisa ser feita antes, ou quando a leitura do código de uma revisão de marco não cobriu parte do seu intervalo, com a fase de retomada e o motivo no fim, `· resume: apply · blocked: after <slug>`; quando o motivo se resolve, os dois sufixos saem e ela volta conforme essa fase, `resume: propose` para `[ ]` com qualquer rascunho mantido, `resume: apply` para `[>]`, e até lá o `/propose` e o `/apply` param nela, como numa linha que não está livre.
-* A fila é um quadro kanban, uma coluna por marca; em três colunas, Fazendo guarda `[~]`, `[>]` e `[*]`, e um cartão `[?]` é etiquetado como travado onde estava.
+* A fila é um quadro kanban, uma coluna por marca, um cartão `[?]` em Esperando até voltar a `[ ]` ou `[>]`; nas três colunas deste capítulo, Fazendo guarda `[~]`, `[>]` e `[*]`, e um cartão `[?]` é etiquetado como travado na coluna que a sua fase de retomada nomeia, A fazer para `propose`, Fazendo para `apply`.
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", acesso em 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>
 [^azure-kanban]: Microsoft Learn, "About Kanban boards", Azure Boards, acesso em 2026-09-30. <https://learn.microsoft.com/en-us/azure/devops/boards/boards/kanban-overview>

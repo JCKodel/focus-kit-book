@@ -496,7 +496,7 @@ When this milestone closes, every technical claim the audit of 2026-10-18 found 
 [>] ch24-protocol-phase      chapter 24: in which phase the protocol runs; after /apply's first result, what already satisfies the page goes in and a new capability becomes a line; both editions
 [>] ch22-cost-method         chapter 22 preserves historical token totals with their unrecovered coverage limits, removes unmatched per-delivery averages, and explains the growing whole-queue input; both editions
 [>] ch16-prevention-evidence chapter 16: an error documented in another project may justify prevention, with evidence and a proportionate cost; both editions
-[>] ch14-blocked-column      chapter 14: a blocked line returns to `[ ]` or `[>]` as docs/05 §4 says, so the board shows it there and keeps no memory of a column; both editions · after ch14-back-to-open
+[x] ch14-blocked-column      chapter 14: a blocked line returns to `[ ]` or `[>]` as docs/05 §4 says, so the board shows it there and keeps no memory of a column; both editions · after ch14-back-to-open
 [>] verify-examples          `make verify` runs the executable examples extracted from the chapters, starting with chapter 3's `query` · after ch03-query-catch
 [>] m20-review               the review of M20 as docs/05 §8 says · after ch03-query-catch, ch03-exhaustive-switch, ch12-scenario-levels, ch04-isolation-claims, ch01-recovery-not-immunity, ch24-protocol-phase, ch22-cost-method, ch16-prevention-evidence, ch14-blocked-column, verify-examples, m19-review
 ```

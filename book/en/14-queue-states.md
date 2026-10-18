@@ -102,8 +102,10 @@ Toyota's factories used kanban, cards to say which parts were needed, where and 
 Software teams took the idea as a board where, in Microsoft's words for Azure DevOps, "*team members drag cards across columns to update status*".[^azure-kanban]
 
 Read as a board, the queue has a column per mark, six of them, and each mark change moves a card.
+A `[?]` card sits in Waiting with its reason, and when the reason is resolved it moves to the column of the mark it returns to, `[ ]` or `[>]`.
 A team whose board has three columns folds them: `[ ]` to To Do; `[~]`, `[>]` and `[*]` to Doing; `[x]` to Done.
-A `[?]` card stays in the column it was in, tagged blocked, with its reason, so waiting never looks idle.
+On this chapter's three-column board, an illustration and not a rule of the kit nor a feature of any board, a `[?]` card goes by its resume phase, tagged blocked with its reason, so waiting never looks idle: `resume: propose` in To Do, `resume: apply` in Doing.
+The line says where the card goes, so the board keeps no memory of the column a card was in.
 The milestone above, on a three-column board:
 
 ```
@@ -114,9 +116,14 @@ my-loans              lend-book
 m1-review
 ```
 
-`return-book` and `my-loans` sit in To Do with no tag: they wait their turn, not on anyone, and only `due-reminder` is tagged blocked.
+`return-book` and `my-loans` sit in To Do with no tag: they wait their turn, not on anyone, and only `due-reminder` is tagged blocked, in To Do because its line says `resume: propose`.
 
 `reservations` is in Doing from the first minute of its conversation, which is the error Case A's board had.
+
+If `reservations` were blocked in the middle of its definition, its `resume: propose` would take it from Doing to To Do, tagged blocked; resolved, it stays in To Do as `[ ]`, with its draft kept and no tag.
+`my-loans`, waiting on `fix-due-date` in the middle of its build, would stay in Doing by its `resume: apply`, tagged blocked; resolved, it stays in Doing as `[>]`, not as a `[*]` that no session is building.
+Either way, resolving the reason removes both suffixes and the tag with them.
+
 Chapter 20 shows how a script mirrors the queue to a team's own board, one way.
 
 A board can also read the queue itself, with nothing to mirror.
@@ -135,7 +142,7 @@ The queue also says which lines can run together: without that, a person who wan
 * A line is free when it is not `[x]` nor `[?]` and every line its `after` names is `[x]`; the next delivery is the first free line no session holds, and free lines that touch different files can run at the same time.
 * `· after` is an order written with the line, which keeps its mark; `[?]` with `· blocked: after` is a wait found after work started.
 * A line waits when the person says so, when an answer was asked and not given, when work already started finds another line must be done first, or when a milestone review's code reading missed part of its range, with the phase to resume and the reason at its end, `· resume: apply · blocked: after <slug>`; when the reason is resolved, both suffixes go and it returns as that phase says, `resume: propose` to `[ ]` with any draft kept, `resume: apply` to `[>]`, and until then `/propose` and `/apply` stop on it, as on a line not free.
-* The queue is a kanban board, a column per mark; on three columns, Doing holds `[~]`, `[>]` and `[*]`, and a `[?]` card is tagged blocked where it was.
+* The queue is a kanban board, a column per mark, a `[?]` card in Waiting until it returns to `[ ]` or `[>]`; on this chapter's three columns, Doing holds `[~]`, `[>]` and `[*]`, and a `[?]` card is tagged blocked in the column its resume phase names, To Do for `propose`, Doing for `apply`.
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", accessed 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>
 [^azure-kanban]: Microsoft Learn, "About Kanban boards", Azure Boards, accessed 2026-09-30. <https://learn.microsoft.com/en-us/azure/devops/boards/boards/kanban-overview>
