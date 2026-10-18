@@ -239,7 +239,7 @@ Entre worktrees ela sempre dá conflito no merge, já que cada entrega marca a s
 
 **Arquivos que as duas mudam.** Um arquivo de código que duas entregas mudam é diferente.
 Em uma pasta a sessão para quando encontra a mudança da outra; entre worktrees o merge para, e resolvê-lo é uma decisão sobre o código: quem a toma precisa entender as duas mudanças.
-Então junte entregas cujos arquivos não se encontram: leia cada linha da fila, o docs/01 e o código que ela nomeia, e liste os arquivos que cada uma vai tocar.
+Então liste os arquivos que cada entrega vai tocar, a partir da sua linha da fila, do docs/01 e do código que ela nomeia: entregas cujos arquivos não se encontram podem dividir uma pasta; entregas cujos arquivos se encontram rodam ao mesmo tempo só em worktrees, e só quando você consegue tomar a decisão do merge; senão, ordene-as com `· after <slug>`.
 
 **Portas e bancos de dados compartilhados.** Duas sessões compartilham a máquina nas duas formas: as suas portas, um banco de dados de teste em uma pasta comum.
 Em uma pasta elas também compartilham a própria pasta, o seu banco de dados de teste e a saída do seu build.
@@ -257,7 +257,7 @@ Este livro, escrito e revisado por uma pessoa em arquivos compartilhados, fica n
 
 Dois agentes constroem ao mesmo tempo, e cada entrega ainda chega como uma mudança que se desfaz sozinha: um commit em uma pasta, um merge a partir de um worktree.
 Eu medi isso uma vez, em worktrees, em um pequeno projeto meu em TypeScript: duas entregas construídas ao mesmo tempo levaram 155 segundos do primeiro início ao último fim, contra 277,2 segundos de trabalho dos agentes somados, ao custo de uma pasta `node_modules` em cada worktree, duas execuções de teste que colidiram uma vez em uma porta compartilhada, e o conflito da fila no merge.[^parallel-run]
-O ganho vale enquanto os arquivos das entregas não se encontram, e termina na velocidade da pessoa que as revisa e faz o commit delas.
+A medição é de duas entregas cujos arquivos de código não se encontravam; o ganho termina na velocidade da pessoa que as revisa, faz o commit e o merge delas.
 
 ## Pontos-chave
 
@@ -265,7 +265,7 @@ O ganho vale enquanto os arquivos das entregas não se encontram, e termina na v
 * A marca de outra linha, a página ou os arquivos de outra entrega e as entradas em stage de outra sessão não são conflito; o mesmo hunk editado pelas duas, ou um arquivo de que uma página precisa e que a outra está mudando, é: pare, e então ordene as linhas ou dê a uma delas um worktree.
 * Faça o commit a partir do stage quando `git diff --cached --stat` guarda só aquela entrega; `git commit -- <caminhos>` pega cada arquivo nomeado inteiro da pasta, com o hunk da outra entrega em um arquivo compartilhado.
 * Um worktree por entrega compensa para várias pessoas, ou para entregas que mexem nos mesmos arquivos: uma pasta contêiner cujo `main/` é o checkout guarda o worktree de cada entrega em `<oculta>/worktrees/<slug>/` no `<prefixo>/<slug>`, `.focus-kit/` e `focus-kit/` por padrão; `git worktree add`, trabalhe ali, `git merge --no-ff` em `main/`, `git worktree remove`, `git branch -d`; um conflito deixa as duas versões entre marcadores, e `git diff --cached --check` pega qualquer um que sobrou antes do commit.
-* O paralelo compensa enquanto os arquivos das entregas não se encontram, as portas e os bancos de dados da máquina não colidem, o disco comporta as dependências de cada worktree, e uma pessoa ainda consegue revisar cada entrega.
+* O paralelo compensa enquanto os arquivos das entregas não se encontram, ou só se encontram entre worktrees cujo merge você consegue decidir, as portas e os bancos de dados da máquina não colidem, o disco comporta as dependências de cada worktree, e uma pessoa ainda consegue revisar cada entrega.
 
 [^git-commit]: Git, "git-commit", a documentação, opção `--only`, acesso em 2026-10-13. <https://git-scm.com/docs/git-commit>
 [^git-clone]: Git, "git-clone", a documentação, opção `--bare`, acesso em 2026-10-16. <https://git-scm.com/docs/git-clone>

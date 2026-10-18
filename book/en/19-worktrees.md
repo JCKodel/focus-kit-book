@@ -239,7 +239,7 @@ Across worktrees it always conflicts at the merge, since every delivery marks it
 
 **Files both change.** A code file that two deliveries both change is different.
 In one folder the session stops when it meets the other's change; across worktrees the merge does, and its resolution is a decision about the code: the person who makes it must understand both changes.
-So pair deliveries whose files do not meet: read each queue line, docs/01 and the code it names, and list the files each will touch.
+So list the files each delivery will touch, from its queue line, docs/01 and the code it names: deliveries whose files do not meet can share one folder; deliveries whose files meet run at once only in worktrees, and only when you can make the merge's decision; otherwise, order them with `· after <slug>`.
 
 **Shared ports and databases.** Two sessions share the machine in either form: its ports, a test database in a common folder.
 In one folder they also share the folder itself, its test database and its build output.
@@ -257,7 +257,7 @@ This book, written and reviewed by one person in shared files, stays on trunk fo
 
 Two agents build at once, and each delivery still lands as one change that reverts alone: one commit in one folder, one merge from a worktree.
 I measured it once, in worktrees on a small TypeScript project of mine: two deliveries built at the same time took 155 seconds from the first start to the last end, against 277.2 seconds of the agents' work added up, at the cost of a `node_modules` folder in each worktree, two test runs that collided once on a shared port, and the queue's conflict at the merge.[^parallel-run]
-The gain holds while the deliveries' files do not meet, and it ends at the speed of the person who reviews and commits them.
+The measurement is of two deliveries whose code files did not meet; the gain ends at the speed of the person who reviews, commits and merges them.
 
 ## Key points
 
@@ -265,7 +265,7 @@ The gain holds while the deliveries' files do not meet, and it ends at the speed
 * Another line's mark, another delivery's page or files and another session's staged entries are not a conflict; the same hunk edited by both, or a file one page needs that the other is changing, is: stop, then order the lines or give one a worktree.
 * Commit from the index once `git diff --cached --stat` holds only that delivery; `git commit -- <paths>` takes each named file whole from the folder, the other delivery's hunk of a shared file included.
 * A worktree per delivery pays for several people, or for deliveries that touch the same files: a container folder whose `main/` is the checkout keeps each delivery's worktree in `<hidden>/worktrees/<slug>/` on `<prefix>/<slug>`, `.focus-kit/` and `focus-kit/` by default; `git worktree add`, work there, `git merge --no-ff` from `main/`, `git worktree remove`, `git branch -d`; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
-* Parallel pays while the deliveries' files do not meet, the machine's ports and databases do not collide, the disk holds each worktree's dependencies, and one person can still review each delivery.
+* Parallel pays while the deliveries' files do not meet, or meet only across worktrees whose merge you can decide, the machine's ports and databases do not collide, the disk holds each worktree's dependencies, and one person can still review each delivery.
 
 [^git-commit]: Git, "git-commit", the documentation, option `--only`, accessed 2026-10-13. <https://git-scm.com/docs/git-commit>
 [^git-clone]: Git, "git-clone", the documentation, option `--bare`, accessed 2026-10-16. <https://git-scm.com/docs/git-clone>
