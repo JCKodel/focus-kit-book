@@ -21,7 +21,8 @@ Its page names as the base the commit of the previous milestone's review, or, fo
 The range from the previous review's commit holds every commit made after it: all the fixes of that review's findings, which close after it, and the next milestone's deliveries that landed after it.
 A free line of the next milestone does not wait for the review (chapter 14), so a delivery committed before the review's commit is outside the range from it.
 The reading costs, so the session says when it is time and starts it only on the person's word: each area gets a reader of its own, which reads it with the whole repository open.
-The first commit, the base of a first milestone, makes the review read the whole project.
+A first milestone's range, from the project's first commit, holds every change made after that commit and not the commit itself.
+What the first commit added, on a new project the kit's files and the documents (chapter 10), is in no diff of the range: the readers see it only as the repository they read their areas against, and the person read the documents before committing them.
 Each delivery's code is still read where its change is small enough to read: by the delivery review before `/apply` ends and in the staged change before its commit (chapter 13), and in the pull request, when the team lands its deliveries through one (chapter 20); the milestone's readers look for what those could not see.
 
 ## Test each clause by hand

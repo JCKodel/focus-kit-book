@@ -21,7 +21,8 @@ A página dela cita como base o commit da revisão do marco anterior, ou, para u
 O intervalo a partir do commit da revisão anterior guarda todo commit feito depois dele: todas as correções dos achados dessa revisão, que fecham depois dele, e as entregas do marco seguinte que entraram depois dele.
 Uma linha livre do marco seguinte não espera a revisão (capítulo 14), então uma entrega cujo commit veio antes do commit da revisão fica fora do intervalo a partir dele.
 A leitura custa, então a sessão diz quando chegou a hora e só a começa com a palavra da pessoa: cada área ganha um leitor próprio, que a lê com o repositório inteiro aberto.
-O primeiro commit, a base de um primeiro marco, faz a revisão ler o projeto inteiro.
+O intervalo de um primeiro marco, a partir do primeiro commit do projeto, guarda toda mudança feita depois desse commit, e não o próprio commit.
+O que o primeiro commit acrescentou, num projeto novo os arquivos do kit e os documentos (capítulo 10), não está em nenhum diff do intervalo: os leitores só o veem como o repositório contra o qual leem as suas áreas, e a pessoa leu os documentos antes de fazer o commit deles.
 O código de cada entrega continua sendo lido onde a sua mudança é pequena o bastante para ser lida: pela revisão da entrega antes de o `/apply` terminar e na mudança em stage antes do seu commit (capítulo 13), e no pull request, quando o time integra as suas entregas por um (capítulo 20); os leitores do marco procuram o que esses não conseguiram ver.
 
 ## Teste cada cláusula à mão
