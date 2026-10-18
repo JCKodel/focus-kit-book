@@ -139,18 +139,20 @@ changing mark, another delivery's page or files appearing in the tree,
 and another session's index entries are that session's work, not a
 conflict: do not stop for them, do not touch them, change only this
 delivery's line and stage only this delivery's paths and hunks, including
-its own hunk of docs/06. A conflict is the same hunk edited by both, or a
-file this page needs that the other delivery is changing; then stop and
-report. In worktrees, each worktree's queue shows that branch's state, not a
-global live view. Change only the current delivery's line, its new findings
-and the dependent lines this session can resolve. When branches are
-integrated, reconcile docs/06 by slug: retain every delivery and finding,
-and each owning branch's latest state. Do not replace the whole file with
-one side or downgrade a completed line using a stale copy. Check the page
-at the expected path and keep a dependency blocked until its completed
-changes are available in the branch that needs them. A conflicting state
-or scope is reported for resolution, never guessed. Apply the same care
-to shared domain terms and ADRs.
+its own hunk of docs/06. A conflict is the same lines edited by both, or
+a file this page needs that the other delivery is changing; then stop and
+report. Two lines next to each other, one edited by each, are not a
+conflict, though git shows them in one hunk: each session stages only its
+own line. In worktrees, each worktree's queue shows that branch's state,
+not a global live view. Change only the current delivery's line, its new
+findings and the dependent lines this session can resolve. When branches
+are integrated, reconcile docs/06 by slug: retain every delivery and
+finding, and each owning branch's latest state. Do not replace the whole
+file with one side or downgrade a completed line using a stale copy.
+Check the page at the expected path and keep a dependency blocked until
+its completed changes are available in the branch that needs them. A
+conflicting state or scope is reported for resolution, never guessed.
+Apply the same care to shared domain terms and ADRs.
 
 Each milestone is planned with its review as the last line (§8). Edited by
 conversation in any session.
@@ -250,9 +252,9 @@ do not assume an existing edit belongs to it because it shares a path.
 Another delivery's page, its files and its hunk of docs/06 belong to the
 session building it (§4); they are unrelated here. Preserve unrelated
 edits and the pre-existing index entries. If ownership of a change this
-delivery must edit cannot be established, or changes overlap in the same
-hunk, stop and report the affected paths before editing them or staging;
-do not reset or stash them.
+delivery must edit cannot be established, or this delivery and another
+changed the same lines, stop and report the affected paths before editing
+them or staging; do not reset or stash them.
 
 Stage only this delivery's files or hunks, including the page move and its
 documentation changes. Use explicit paths for files wholly owned by it,

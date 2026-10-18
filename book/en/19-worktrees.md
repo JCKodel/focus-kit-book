@@ -67,7 +67,7 @@ This is written down because, without it, a second session on another module sto
 
 Two things are a conflict:
 
-* both deliveries edit the same hunk, the same lines of `src/features/loans/rules.ts`, say;
+* both deliveries edit the same lines of `src/features/loans/rules.ts`, say;
 * this page needs a file the other delivery is changing, as when `return-book` needs `src/features/loans/` while another delivery reshapes it.
 
 Then the session stops and reports, and the decision is yours: order the two lines, by writing `· after <slug>` on the one that must wait for the other, or give one of them a worktree.
@@ -268,7 +268,7 @@ Pages written at once do not read each other.
 `/propose` reads the deliveries in flight in `work/` when it starts, and a page being written at the same time is not there yet: two pages may settle the same question two ways, or each ask docs/03 for the same new term.
 You find it by reading the pages side by side, and you correct one of them in its conversation.
 The lines of one batch sit side by side in the queue, so git puts their marks in one hunk of docs/06.
-That hunk holds no conflict: no line in it is changed by two sessions, which is what the conflict above means by the same hunk, the same lines, and each session's change is its own line's mark, which the list of what is not a conflict names first.
+That hunk holds no conflict: no line in it is changed by two sessions, and each session's change is its own line's mark, which the list of what is not a conflict names first.
 What it changes is the staging: `git add -p` splits a hunk with `s` only where an unchanged line separates two changes, so for adjacent marks you answer `e`, and git opens the hunk in your editor, where you delete the other lines' `+` lines and turn their `-` into a space.[^git-add]
 Before each commit, `git diff --cached docs/06-Queue.md` then shows you only that line staged.
 
@@ -314,7 +314,7 @@ Proposes in a batch carry the parallel into definition: the agents write the pag
 ## Key points
 
 * Two sessions share one folder on trunk when their lines are free and their files do not meet: each marks only its line, stages only its paths and its hunk of the queue, and you commit one delivery at a time.
-* Another line's mark, another delivery's page or files and another session's staged entries are not a conflict; the same hunk edited by both, or a file one page needs that the other is changing, is: stop, then order the lines or give one a worktree.
+* Another line's mark, another delivery's page or files and another session's staged entries are not a conflict; the same lines edited by both, or a file one page needs that the other is changing, is: stop, then order the lines or give one a worktree.
 * Commit from the index once `git diff --cached --stat` holds only that delivery; `git commit -- <paths>` takes each named file whole from the folder, the other delivery's hunk of a shared file included.
 * A worktree per delivery pays for several people, or for deliveries that touch the same files: a container folder whose `main/` is the checkout keeps each delivery's worktree in `<hidden>/worktrees/<slug>/` on `<prefix>/<slug>`, `.focus-kit/` and `focus-kit/` by default; `git worktree add`, work there, `git merge --no-ff` from `main/`, `git worktree remove`, `git branch -d`; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
 * Parallel pays while the deliveries' files do not meet, or meet only across worktrees whose merge you can decide, the machine's ports and databases do not collide, the disk holds each worktree's dependencies, and one person can still review each delivery; proposes can run in a batch on the recommended answers, each page listing what it decided alone for you to read before any `/apply`, and every commit stays yours.

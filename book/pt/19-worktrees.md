@@ -67,7 +67,7 @@ Isso está escrito porque, sem isso, uma segunda sessão em outro módulo para q
 
 Duas coisas são um conflito:
 
-* as duas entregas editam o mesmo hunk, as mesmas linhas de `src/features/emprestimos/regras.ts`, por exemplo;
+* as duas entregas editam as mesmas linhas de `src/features/emprestimos/regras.ts`, por exemplo;
 * esta página precisa de um arquivo que a outra entrega está mudando, como quando `devolver-livro` precisa de `src/features/emprestimos/` enquanto outra entrega o reorganiza.
 
 Então a sessão para e relata, e a decisão é sua: ordenar as duas linhas, escrevendo `· after <slug>` na que precisa esperar a outra, ou dar a uma delas um worktree.
@@ -268,7 +268,7 @@ Páginas escritas ao mesmo tempo não leem umas às outras.
 O `/propose` lê as entregas em andamento em `work/` quando começa, e uma página sendo escrita ao mesmo tempo ainda não está lá: duas páginas podem decidir a mesma pergunta de dois jeitos, ou cada uma pedir ao docs/03 o mesmo termo novo.
 Você encontra isso lendo as páginas lado a lado, e corrige uma delas na sua conversa.
 As linhas de um lote ficam lado a lado na fila, então o git põe as suas marcas em um hunk do docs/06.
-Esse hunk não guarda conflito: nenhuma linha dele é mudada por duas sessões, que é o que o conflito acima quer dizer com o mesmo hunk, as mesmas linhas, e a mudança de cada sessão é a marca da sua própria linha, que a lista do que não é conflito nomeia primeiro.
+Esse hunk não guarda conflito: nenhuma linha dele é mudada por duas sessões, e a mudança de cada sessão é a marca da sua própria linha, que a lista do que não é conflito nomeia primeiro.
 O que ele muda é o stage: o `git add -p` divide um hunk com `s` só onde uma linha sem mudança separa duas mudanças, então para marcas vizinhas você responde `e`, e o git abre o hunk no seu editor, onde você apaga as linhas `+` das outras linhas e troca o `-` delas por um espaço.[^git-add]
 Antes de cada commit, `git diff --cached docs/06-Queue.md` então mostra só aquela linha em stage.
 
@@ -314,7 +314,7 @@ O `/propose` em lote leva o paralelo para a definição: os agentes escrevem as 
 ## Pontos-chave
 
 * Duas sessões dividem uma pasta no trunk quando as suas linhas estão livres e os seus arquivos não se encontram: cada uma marca só a sua linha, coloca em stage só os seus caminhos e o seu hunk da fila, e você faz o commit de uma entrega por vez.
-* A marca de outra linha, a página ou os arquivos de outra entrega e as entradas em stage de outra sessão não são conflito; o mesmo hunk editado pelas duas, ou um arquivo de que uma página precisa e que a outra está mudando, é: pare, e então ordene as linhas ou dê a uma delas um worktree.
+* A marca de outra linha, a página ou os arquivos de outra entrega e as entradas em stage de outra sessão não são conflito; as mesmas linhas editadas pelas duas, ou um arquivo de que uma página precisa e que a outra está mudando, é: pare, e então ordene as linhas ou dê a uma delas um worktree.
 * Faça o commit a partir do stage quando `git diff --cached --stat` guarda só aquela entrega; `git commit -- <caminhos>` pega cada arquivo nomeado inteiro da pasta, com o hunk da outra entrega em um arquivo compartilhado.
 * Um worktree por entrega compensa para várias pessoas, ou para entregas que mexem nos mesmos arquivos: uma pasta contêiner cujo `main/` é o checkout guarda o worktree de cada entrega em `<oculta>/worktrees/<slug>/` no `<prefixo>/<slug>`, `.focus-kit/` e `focus-kit/` por padrão; `git worktree add`, trabalhe ali, `git merge --no-ff` em `main/`, `git worktree remove`, `git branch -d`; um conflito deixa as duas versões entre marcadores, e `git diff --cached --check` pega qualquer um que sobrou antes do commit.
 * O paralelo compensa enquanto os arquivos das entregas não se encontram, ou só se encontram entre worktrees cujo merge você consegue decidir, as portas e os bancos de dados da máquina não colidem, o disco comporta as dependências de cada worktree, e uma pessoa ainda consegue revisar cada entrega; o `/propose` pode rodar em lote nas respostas recomendadas, cada página listando o que decidiu sozinha para você ler antes de qualquer `/apply`, e todo commit continua seu.
