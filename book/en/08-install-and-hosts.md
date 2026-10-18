@@ -77,7 +77,7 @@ docs/ and AGENTS.md were not changed.
 
 Every item changes a rule.
 Item 1 gives a line a fourth case to wait in, a milestone review whose code reading missed part of its range ([chapter 14](14-queue-states.md)), so a reading that covered less than its range shows in the queue instead of passing as done.
-Item 2 has the delivery review read the files the delivery created as well as its `git diff`: a new file is untracked, one git does not hold yet, so `git diff` shows nothing of it until it is staged, and `/apply` stages after the review.
+Item 2 has the delivery review read the files the delivery created as well as its `git diff`: a new file is untracked, one git does not hold yet, so plain `git diff` never shows it, and `git diff --cached`, the diff of what is staged, holds it only once it is staged, and `/apply` stages after the review.
 Item 3 names as the base the commit of the previous milestone's review, so the range holds every commit after that review: the fixes of its findings, and the next milestone's deliveries that landed after it ([chapter 15](15-closing-a-milestone.md)); it also says what seen means, and has the waiting line say what the readers read.
 A Delivery review slot that names the host's own review gets no item 2: the report proposes the created files only where the slot reads `git diff`, so the team's choice of reviewer stays.
 

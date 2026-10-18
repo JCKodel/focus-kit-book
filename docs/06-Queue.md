@@ -407,7 +407,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18 and the reposi
 [x] ch13-four-waits          chapter 13's list of when /apply cannot go on names all four cases a line waits in; both editions
 [x] ch08-report-item-one     chapter 8's report item 1 says what text it replaces, as items 2 and 3 do; both editions
 [x] pt-ch08-migration-label  the Portuguese chapter 8's key point names the changelog item's `Migração:` label as the English names `Migration:`
-[ ] untracked-diff-wording   chapter 8 and docs/03's untracked file row say a new file shows in `git diff --cached` once staged and never in plain `git diff`; both editions
+[x] untracked-diff-wording   chapter 8 and docs/03's untracked file row say a new file shows in `git diff --cached` once staged and never in plain `git diff`; both editions
 [x] ch14-m1-return-book      chapter 14's first milestone holds `return-book`, like chapters 11 and 15; both editions
 [x] docs03-checker-pt        docs/03 gives the checker and the labels seen, latent and weak their Portuguese words, and the Portuguese edition uses them
 [x] docs05-fourth-case-version  docs/05 §4 and docs/03's waiting mark row say the fourth case came with focus-kit 2026.10.18

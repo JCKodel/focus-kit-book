@@ -78,7 +78,7 @@ docs/ e AGENTS.md não foram alterados.
 
 Todo item muda uma regra.
 O item 1 dá a uma linha um quarto caso de espera, uma revisão de marco cuja leitura do código não cobriu parte do seu intervalo ([capítulo 14](14-queue-states.md)), para que uma leitura que cobriu menos que o seu intervalo apareça na fila em vez de passar por feita.
-O item 2 faz a revisão da entrega ler os arquivos que a entrega criou, além do seu `git diff`: um arquivo novo é não rastreado, um que o git ainda não guarda, então o `git diff` não mostra nada dele até ele entrar em stage, e o `/apply` põe em stage depois da revisão.
+O item 2 faz a revisão da entrega ler os arquivos que a entrega criou, além do seu `git diff`: um arquivo novo é não rastreado, um que o git ainda não guarda, então o `git diff` sem opções nunca o mostra, e o `git diff --cached`, o diff do que está em stage, só o traz depois que ele entra em stage, e o `/apply` põe em stage depois da revisão.
 O item 3 cita como base o commit da revisão do marco anterior, para que o intervalo guarde todo commit depois dessa revisão: as correções dos seus achados e as entregas do marco seguinte que entraram depois dela ([capítulo 15](15-closing-a-milestone.md)); ele também diz o que visto significa, e faz a linha que espera dizer o que os leitores leram.
 Um slot Delivery review que cita a revisão do próprio host não recebe o item 2: o relatório propõe os arquivos criados só onde o slot lê o `git diff`, então a escolha do revisor pelo time fica.
 
