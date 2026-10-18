@@ -49,8 +49,8 @@ an overdue book or a suspended membership is refused.
 [x] skeleton      empty app and server, npm run verify, first screenshot
 [x] catalog       the librarian registers books and their copies
 [x] members       the librarian registers, suspends and reinstates members
-[>] lend-book     the librarian lends a copy, and the rules may refuse it
-[ ] return-book   the librarian records a return · after lend-book
+[>] lend-book     the librarian lends, and the rules may refuse
+[ ] return-book   records a return · after lend-book
 [ ] m1-review     the milestone checked against its paragraph
 ```
 ````
@@ -95,7 +95,7 @@ A change to it asked in any other session, however small, becomes a `[ ]` line: 
 Asked in an ordinary session to show the due date on the loan screen as day/month/year, and told how it should look on a narrow screen and that the catalog keeps the ISO form, year-month-day, the agent adds this line to the milestone above, just above `m1-review`, a line written for this chapter:
 
 ```
-[ ] due-date-format   the loan screen shows the due date as day/month/year
+[ ] due-date-format   the screen shows the due date as day/month/year
 ```
 
 The narrow-screen rule and the catalog exception do not fit the line's one sentence, so they go into a draft `work/due-date-format.md`, and the answer stops there, naming `/propose due-date-format` for a fresh session, written as your host invokes it; a request the line holds whole gets no draft.
@@ -141,14 +141,14 @@ work/done/due-date-format.md
 You review a diff of a few lines against a page you already read, and commit it; the line now reads:
 
 ```
-[x] due-date-format   the loan screen shows the due date as day/month/year
+[x] due-date-format   the screen shows the due date as day/month/year
 ```
 
 That is what the rule cost: two short sessions, one review and one commit.
 In return the queue says the change exists, the page says what it does and what it leaves out, and a test fails if the format ever changes back.
 An edit made on the spot would have skipped the line, the page, the test and the review.
 The page is as short as its change: seven sections of a line or two, and a page that needs more for a change this size is defining more than one delivery.
-The rule holds in every session: during `/propose` the change is a new line, unless you ask for it on the page being written; during `/apply`, a fix found outside its page is a line above it, which the delivery waits for (chapter 14); and an edit made anyway, to "just change the label", is reverted before anything is committed.
+The rule holds in every session: during `/propose` the change is a new line, unless you ask for it on the page being written; during `/apply`, a fix found outside its page becomes a `[ ]` line, and only a fix the delivery needs first goes above it and makes it wait (chapter 14); and an edit made anyway, to "just change the label", is reverted before anything is committed.
 Documents still change by conversation, in any session; the rule covers the code: the app's source, its tests, a migration, its configuration.
 
 A milestone's paragraph or a line's description changes by conversation too, and the slug stays, since a page or a commit may already use it.

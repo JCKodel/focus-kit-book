@@ -153,7 +153,7 @@ Foi isso o que a regra custou: duas sessões curtas, uma revisão e um commit.
 Em troca, a fila diz que a mudança existe, a página diz o que ela faz e o que deixa de fora, e um teste falha se o formato um dia voltar ao que era.
 Uma edição feita na hora teria pulado a linha, a página, o teste e a revisão.
 A página é do tamanho da mudança: sete seções de uma ou duas linhas, e uma página que precisa de mais para uma mudança deste tamanho está definindo mais de uma entrega.
-A regra vale em toda sessão: durante o `/propose` a mudança é uma linha nova, a não ser que você a peça na página que está sendo escrita; durante o `/apply`, uma correção encontrada fora da sua página é uma linha acima dele, pela qual a entrega espera (capítulo 14); e uma edição feita mesmo assim, para "só trocar o rótulo", é desfeita antes de qualquer commit.
+A regra vale em toda sessão: durante o `/propose` a mudança é uma linha nova, a não ser que você a peça na página que está sendo escrita; durante o `/apply`, uma correção encontrada fora da sua página vira uma linha `[ ]`, e só uma correção de que a entrega precisa antes fica acima dela e a faz esperar (capítulo 14); e uma edição feita mesmo assim, para "só trocar o rótulo", é desfeita antes de qualquer commit.
 Os documentos continuam mudando conversando, em qualquer sessão; a regra cobre o código: o fonte do app, os testes, uma migração, a configuração.
 
 O parágrafo de um marco ou a descrição de uma linha também muda conversando, e o slug fica, já que uma página ou um commit pode já usá-lo.
