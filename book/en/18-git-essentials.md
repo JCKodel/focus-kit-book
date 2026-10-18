@@ -42,13 +42,13 @@ The history is the chain of parents, from the last commit back to the first.
 For the lending library of Part I it could read like this; the output is an illustration, written for this chapter:
 
 ```text
-a41c9e2 Let a member return a copy (return-book)
-7d03b18 Lend a copy, and refuse when the rules say no (lend-book)
-2f6e5a1 Start: documents and first milestone
+a41c9e2 Record the return of a copy
+7d03b18 Lend a copy to a member
+2f6e5a1 Register, suspend and reinstate members
 ```
 
-Each line is one delivery, and its message says what a user can now do, with the delivery's slug at the end.
-`git show <hash>` opens one of them: the message, and every line it added and removed.
+Each line is one delivery, and its subject says what the delivery does, in the imperative, as chapter 13 teaches; read from the top, such a log is the list of what users can now do, one revert per line, and a person who never opens the code can follow it.
+`git show <hash>` opens one of them: the whole message, whose last line is the delivery's page in `work/done/`, and every line it added and removed.
 
 A delivery's page and its build are one change.
 The code, the tests, the documents the delivery updated and its page in `work/done/` go into the same commit, so the history holds the decision and the change it made side by side, and taking the delivery back takes all of it at once.
@@ -174,7 +174,6 @@ This book, written and reviewed by one person, is on trunk.
 ## What the team gains
 
 Every delivery lands as one commit on trunk or one merge otherwise, with its page beside its code, so taking a delivery back is one command, and reading why a line changed is one commit that holds both the change and the decision.
-The evidence is the history itself: the lending library's log, shown earlier in this chapter, reads as the list of what users can do, one line per delivery and one revert per line, and a person who never opens the code can follow it.
 
 ## Key points
 

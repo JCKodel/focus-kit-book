@@ -42,13 +42,13 @@ O histórico é a cadeia de pais, do último commit de volta ao primeiro.
 Para a biblioteca de empréstimos da Parte I ele poderia ficar assim; a saída é uma ilustração, escrita para este capítulo:
 
 ```text
-a41c9e2 Permite devolver um exemplar (devolver-livro)
-7d03b18 Empresta um exemplar, e recusa pelas regras (emprestar-livro)
-2f6e5a1 Início: documentos e primeiro marco
+a41c9e2 Registrar a devolução de um exemplar
+7d03b18 Emprestar um exemplar a um membro
+2f6e5a1 Cadastrar, suspender e reativar membros
 ```
 
-Cada linha é uma entrega, e a sua mensagem diz o que um usuário agora consegue fazer, com o slug da entrega no fim.
-`git show <hash>` abre uma delas: a mensagem, e cada linha que ela acrescentou e removeu.
+Cada linha é uma entrega, e o seu assunto diz o que a entrega faz, no infinitivo, como o capítulo 13 ensina; lido de cima para baixo, um log assim é a lista do que os usuários agora conseguem fazer, um `git revert` por linha, e uma pessoa que nunca abre o código consegue acompanhá-lo.
+`git show <hash>` abre uma delas: a mensagem inteira, cuja última linha é a página da entrega em `work/done/`, e cada linha que ela acrescentou e removeu.
 
 A página de uma entrega e a sua construção são uma mudança.
 O código, os testes, os documentos que a entrega atualizou e a sua página em `work/done/` entram no mesmo commit, então o histórico guarda a decisão e a mudança que ela fez lado a lado, e desfazer a entrega desfaz tudo de uma vez.
@@ -174,7 +174,6 @@ Este livro, escrito e revisado por uma pessoa, está no trunk.
 ## O que o time ganha
 
 Cada entrega chega como um commit no trunk ou um merge nos outros casos, com a sua página ao lado do seu código, então desfazer uma entrega é um comando, e ler por que uma linha mudou é um commit que guarda tanto a mudança quanto a decisão.
-A evidência é o próprio histórico: o log da biblioteca de empréstimos, mostrado antes neste capítulo, se lê como a lista do que os usuários conseguem fazer, uma linha por entrega e um `git revert` por linha, e uma pessoa que nunca abre o código consegue acompanhá-lo.
 
 ## Pontos-chave
 
