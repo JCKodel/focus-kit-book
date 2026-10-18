@@ -7,7 +7,7 @@ Você também consegue mudar qualquer um deles conversando com o agente, e dizer
 
 Uma sessão nova só sabe o que está escrito em arquivos.
 Um fato que mora na cabeça de alguém nunca chega até ela, e um fato escrito em vários lugares fica desatualizado em alguns deles, então o agente lê a cópia que encontrar primeiro.
-No Ninjobs uma decisão morava em seis lugares, e mantê-los em acordo custava mais que o trabalho.
+Na Ninjobs uma decisão morava em seis lugares, e mantê-los em acordo custava mais que o trabalho.
 
 ## Um lugar para cada fato
 
@@ -53,7 +53,7 @@ O `/brainstorm` e o `/analyze` explicam cada uma com uma recomendação para a s
 O kit dá três respostas: o FOCUS inteiro; só os dois princípios, fatias verticais e exceções como valores, na estrutura que a stack favorecer; ou nenhum dos dois, as convenções do próprio projeto.
 Com qualquer uma das três, a página, a fila, os documentos, a verificação e o commit funcionam do mesmo jeito.
 O que o FOCUS acrescenta está no código: um agente lê uma fatia para uma mudança (capítulo 4), o que os dois princípios também dão, e cada uma das quatro peças tem o seu próprio teste (capítulo 5).
-O Ninjobs, um app web fino sobre um backend como serviço, escolheu os dois princípios.
+A Ninjobs, um app web fino sobre um backend como serviço, escolheu os dois princípios.
 Num repositório que já tem código, o padrão é o que o código já faz.
 O docs/01 registra a resposta, e um ADR registra o porquê.
 
@@ -141,7 +141,7 @@ O docs/00 da biblioteca lista as multas por devolução atrasada como em aberto,
 ## O que o time ganha
 
 A mesma resposta em toda sessão e para toda pessoa: um desenvolvedor, um gestor e um agente numa sessão nova que perguntam o prazo de empréstimo leem uma linha em um documento.
-Com um lugar para cada fato, uma mudança é escrita uma vez e toda sessão seguinte a lê, onde no Ninjobs toda entrega pagava para manter em acordo as seis cópias de uma decisão.
+Com um lugar para cada fato, uma mudança é escrita uma vez e toda sessão seguinte a lê, onde na Ninjobs toda entrega pagava para manter em acordo as seis cópias de uma decisão.
 Um manual põe os passos que uma pessoa segue à mão onde essa pessoa os procura, num arquivo que se encontra pelo nome, e tira os passos de uma prova do slot que todo `/apply` lê antes da sua primeira edição.
 
 ## Pontos-chave

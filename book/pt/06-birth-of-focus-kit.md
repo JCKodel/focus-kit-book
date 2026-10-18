@@ -1,11 +1,11 @@
 # 6. Como o focus-kit nasceu
 
-No Ninjobs, meu próprio produto, eu abandonei o OpenSpec depois de quinze dias e escrevi o processo que virou o focus-kit.
+Na Ninjobs, meu próprio produto, eu abandonei o OpenSpec depois de quinze dias e escrevi o processo que virou o focus-kit.
 Depois deste capítulo você consegue contar essa história, como era, o que deu errado e para onde foi, e dizer a que falha responde cada regra do focus-kit.
 
 ## Como era
 
-O Ninjobs começou com o OpenSpec, uma das ferramentas de Desenvolvimento Guiado por Especificação do capítulo 2.
+A Ninjobs começou com o OpenSpec, uma das ferramentas de Desenvolvimento Guiado por Especificação do capítulo 2.
 Cada feature era uma mudança, uma pasta com sua proposta, suas especificações, seu design e suas tarefas, e cada decisão era escrita de novo nos documentos do projeto e nos seus ADRs, os registros de decisão de arquitetura, um arquivo por decisão (capítulo 7).
 Antes de uma entrega contar como pronta, ela precisava passar por 29 verificações.
 
@@ -43,10 +43,10 @@ Das 29 verificações, ficaram duas, ambas voltadas para o próprio produto: uma
 Tudo o que quisesse voltar tinha de responder a uma pergunta, o regulador do capítulo 16: que erro concreto isso teria pegado?
 Uma verificação voltou mais tarde, porque apontou um erro que tinha acontecido.
 
-O Ninjobs abriu ao público em 2026-09-10, treze dias depois do recomeço, com 91 entregas de uma página concluídas.
+A Ninjobs abriu ao público em 2026-09-10, treze dias depois do recomeço, com 91 entregas de uma página concluídas.
 As linhas concluídas da sua fila citam 19 pranchas de design, contra quatro telas nos quinze dias anteriores.
 
-Em 2026-09-21 eu tirei o processo do Ninjobs e o transformei no focus-kit, o kit que este livro ensina.
+Em 2026-09-21 eu tirei o processo da Ninjobs e o transformei no focus-kit, o kit que este livro ensina.
 O gatilho foi uma divergência: os próprios arquivos de comando do projeto ainda descreviam passos que o seu documento de processo, o docs/05, já tinha mudado.
 Dali em diante os comandos não guardam nenhum fato do projeto, e leem todos eles no docs/05.
 
@@ -70,12 +70,12 @@ Toda regra do focus-kit existe porque alguma coisa falhou sem ela.
 ## O que o time ganha
 
 Um processo que carrega o produto em vez de pesar sobre ele.
-Antes, o processo antigo deu ao Ninjobs quatro telas em quinze dias, com cada decisão repetida em muitos lugares e verificações que nunca pegaram um erro do produto.
+Antes, o processo antigo deu à Ninjobs quatro telas em quinze dias, com cada decisão repetida em muitos lugares e verificações que nunca pegaram um erro do produto.
 Depois, uma página por entrega deu a abertura ao público em treze dias, com cada fato num lugar só e duas verificações voltadas para o produto.
 
 ## Pontos-chave
 
 * O custo estava no número de lugares, e não no tamanho de cada arquivo; a arquitetura era sólida, e eu perdi o KISS e o YAGNI ao exigir sua forma completa em toda feature.
-* Comece do mínimo que se sustentou no Ninjobs: uma página por entrega, dois comandos, uma linha de fila por entrega, duas verificações e a pergunta do regulador.
+* Comece do mínimo que se sustentou na Ninjobs: uma página por entrega, dois comandos, uma linha de fila por entrega, duas verificações e a pergunta do regulador.
 * Cada regra do kit responde a uma falha: uma decisão guardada em muitos lugares, uma construção que decide enquanto anda, comandos que divergem, um roteiro que misturava plano e raciocínio, verificações cegas ao produto e verificações que cresceram sem ninguém pedir.
 
