@@ -24,7 +24,7 @@ Em outro host, um comando toma a forma da tabela do capítulo 8:
 | Cursor | `/propose` |
 | Gemini CLI | `/propose <slug>` |
 | Google Antigravity | `/propose <slug>` |
-| Windsurf | `@propose <slug>` |
+| Devin Desktop, antes Windsurf | `/propose` |
 | OpenCode, Zed | pedindo a skill |
 
 `/brainstorm`, `/analyze` e `/apply` tomam a mesma forma que o `/propose`.

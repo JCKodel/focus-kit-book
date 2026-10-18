@@ -367,7 +367,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.17 and the reposi
 [x] ch07-11-23-review-words  chapters 7, 11 and 23: the milestone review's code reading by areas on the person's word, no deep review a person launches, and chapter 7's slots with the Delivery review; both editions · after ch15-review-by-areas
 [x] ch16-review-agents       chapter 16: the one specialized subagent the governor admits, the reviews' readers and checker, and the errors that let them in; both editions · after kit-2026-10-17, ch13-delivery-review, ch15-review-by-areas
 [x] batch-propose            chapter 19: proposes run in a batch on the recommended answers, each page listing what it decided alone, while applies stay parallel only on free lines and every commit stays the person's; both editions · after ch16-review-agents
-[ ] ch08-10-devin-desktop    chapters 8 and 10 and docs/03: Devin Desktop, formerly Windsurf, its folder `.agents/skills/` and its `/propose <slug>`, and no `.windsurf/skills/`; both editions · after kit-2026-10-17
+[x] ch08-10-devin-desktop    chapters 8 and 10 and docs/03: Devin Desktop, formerly Windsurf, its folder `.agents/skills/` and its `/propose <slug>`, and no `.windsurf/skills/`; both editions · after kit-2026-10-17
 [ ] ch08-09-review-slot      chapters 8 and 9: the update example and its report at 2026.10.17, and the questions on the delivery review and on the milestone review's areas and model; both editions · after kit-2026-10-17
 [ ] m16-review               the review of M16 as docs/05 §8 says · after ch13-delivery-review, ch15-review-by-areas, batch-propose, ch08-10-devin-desktop, ch08-09-review-slot, ch07-11-23-review-words
 ```
