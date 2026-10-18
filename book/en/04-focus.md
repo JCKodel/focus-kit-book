@@ -190,7 +190,7 @@ export function lendRequested(
 	const saved = repositories.insertLoan(loan.value);
 
 	if (!saved.ok) return stateOf(saved.error);
-  
+
 	return { kind: "Lent", loan: saved.value };
 }
 ```

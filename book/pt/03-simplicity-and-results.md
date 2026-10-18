@@ -32,7 +32,7 @@ function dataDeDevolucao(hoje: string): string {
 	const devolucao = new Date(hoje);
 
 	devolucao.setUTCDate(devolucao.getUTCDate() + DIAS_DE_EMPRESTIMO);
-  
+
 	return devolucao.toISOString().slice(0, 10);
 }
 ```
@@ -214,6 +214,7 @@ function consultar<T>(executar: () => T): Result<T, BancoDeDadosFalhou> {
 		return ok(executar());
 	} catch (lancado) {
 		const mensagem = lancado instanceof Error ? lancado.message : String(lancado);
+
 		return err({ codigo: "BancoDeDadosFalhou", mensagem });
 	}
 }

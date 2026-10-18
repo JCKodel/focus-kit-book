@@ -107,7 +107,7 @@ describe("lendRequested", () => {
 		});
 
 		const state = lendRequested({ copyId: "c1", memberId: "m1" }, "2026-10-01", repositories);
-    
+
 		expect(state).toEqual({ kind: "Refused", refusal: "HasOverdueBooks" });
 	});
 });

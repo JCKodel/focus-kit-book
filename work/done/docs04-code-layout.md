@@ -57,11 +57,48 @@
 
 **Done when.**
 
-* [ ] docs/04 holds the line Behaviour quotes, after docs/04:51.
-* [ ] The seven blank lines of the book fixed, both editions; Behaviour's checks give what they name.
-* [ ] Chapters 3 to 5 still open with their value and keep their gain; no text changed.
-* [ ] Every number sourced: none added.
-* [ ] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunks of docs/04 and docs/06, commit message in a `commit` block.
+* [x] docs/04 holds the line Behaviour quotes, after docs/04:51, with the review's two accuracy edits (Divergences).
+* [x] The seven blank lines of the book fixed, both editions; Behaviour's checks give what they name.
+* [x] Chapters 3 to 5 still open with their value and keep their gain; no text changed.
+* [x] Every number sourced: none added.
+* [x] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author: left to the driver, who builds the book once at the end of the batch.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunks of docs/04 and docs/06, commit message in a `commit` block: marks, staging and commit left to the batch driver.
+
+**Divergences.**
+
+* The docs/04 line differs from Behaviour's words in two places, applied from the delivery review because they make it more accurate: "the `return` that ends the body when a statement precedes it" (a body that is only its `return`, as `ok`, `err` and the `try` of `query`, has no blank line), and "one one-line guard" (decision 2's `if (...) return ...;`, so a multi-line `if` is not read as the exception).
+* Line numbers moved with the deliveries committed since /propose; every line was found by its text: en 03:216, pt 03:35 and 216-217, en 04:193, pt 04:195, en/pt 05:110.
+
+**Proof.**
+
+* `grep -rnE "^[[:space:]]+$" book/` prints nothing.
+* Blank-line positions of the 7, 2 and 2 `ts` blocks of chapters 3, 4 and 5 compared en against pt by a one-off script: same line counts, same positions.
+* Every English block read against the docs/04 line: none breaks a clause; `mayBorrow` and `stateOf` unchanged.
+* `git diff --stat` on this delivery's book files: en 03, 04, 05 and pt 04, 05 one line changed each, pt 03 one line changed and one added.
+* `make verify`: build, parity, em dash, prose, width, links and disclosure all pass, exit 0.
+
+**Review.** A read-only Opus reviewer that did not write the change read the diff against this page and docs/04: no broken item; three wording suggestions on the docs/04 line. The first two (a statement before the final `return`, "one-line guard") were applied (Divergences); the third, opening the line without "as the author writes it", was not, since that phrase carries the rule's origin and the reviewer called it taste. No queue line.
+
+**Decisions.**
+
+* Chapter 4 was edited by `ch04-focus-optional` while this delivery ran; its two lines were fixed only after that delivery was committed and chapter 4's diff was empty.
+* The batch driver owns docs/06 and the commit; this delivery staged nothing and left `make book` to the driver.
+
+```commit
+docs(docs04-code-layout): say how code blocks are laid out
+
+- docs/04: the author's code layout, declarations and { } blocks set apart by blank lines, a blank line before a final return, a blank line empty
+- Chapters 3 to 5, both editions: six whitespace-only lines emptied; pt chapter 3's consultar gets the blank line before its return the English has
+
+book/en/03-simplicity-and-results.md
+book/en/04-focus.md
+book/en/05-testing-each-piece.md
+book/pt/03-simplicity-and-results.md
+book/pt/04-focus.md
+book/pt/05-testing-each-piece.md
+docs/04-Conventions.md
+docs/06-Queue.md
+work/done/docs04-code-layout.md
+```

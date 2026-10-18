@@ -192,7 +192,7 @@ export function emprestimoPedido(
 	const salvo = repositorios.inserirEmprestimo(emprestimo.value);
 
 	if (!salvo.ok) return estadoDe(salvo.error);
-  
+
 	return { tipo: "Emprestado", emprestimo: salvo.value };
 }
 ```

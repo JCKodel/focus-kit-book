@@ -107,7 +107,7 @@ describe("emprestimoPedido", () => {
 		});
 
 		const estado = emprestimoPedido({ exemplarId: "e1", membroId: "m1" }, "2026-10-01", repositorios);
-    
+
 		expect(estado).toEqual({ tipo: "Recusado", recusa: "TemLivrosEmAtraso" });
 	});
 });

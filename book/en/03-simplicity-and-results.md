@@ -213,7 +213,7 @@ function query<T>(run: () => T): Result<T, DatabaseFailed> {
 		return ok(run());
 	} catch (thrown) {
 		const message = thrown instanceof Error ? thrown.message : String(thrown);
-    
+
 		return err({ code: "DatabaseFailed", message });
 	}
 }
