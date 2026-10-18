@@ -168,7 +168,7 @@ Um projeto escreve a sua escolha uma vez, no slot Git do seu docs/05, e todo com
 * **Um worktree por entrega** serve a várias pessoas trabalhando ao mesmo tempo, ou a uma pessoa cujas entregas mexem nos mesmos arquivos ([capítulo 19](19-worktrees.md)): cada entrega no seu próprio branch, na sua própria pasta, com merge do mesmo jeito.
 * **git-flow** serve a software que lança versões numeradas e mantém várias em uso.
 
-Seja qual for, a regra é a mesma: uma entrega, um passo para desfazer, e a pessoa decide cada commit e cada merge, nunca o agente sozinho.
+Seja qual for, a regra é a mesma: uma entrega, um passo para desfazer, e a pessoa decide cada commit e cada merge, nunca o agente por conta própria.
 Este livro, escrito e revisado por uma pessoa, está no trunk.
 
 ## O que o time ganha

@@ -174,9 +174,9 @@ Você monta o contêiner uma vez; o kit cria cada worktree.
 O `/apply <slug>` roda em uma sessão nova aberta naquela pasta, constrói a página, e coloca a mudança em stage.
 Você revisa e faz o commit no branch, faz o merge no `main` com `--no-ff`, remove o worktree e apaga o branch.
 
-O agente nunca faz commit, merge, resolve um conflito ou remove um worktree por conta própria: cada passo que muda o histórico é decisão sua, como em toda estratégia de git.
-Peça, e ele dá qualquer um desses passos por você: escreve a mensagem de commit, resolve o conflito, faz o commit, o merge ou o push, e conhece os comandos que desfazem um nó como um rebase parado no meio ou um commit no branch errado.
-Cada passo vem depois da sua leitura: peça o commit quando o diff em stage tiver só a entrega, o commit de merge quando o arquivo resolvido não tiver nenhum marcador, e o push quando o `git log` mostrar o que vai sair.
+O agente nunca faz commit, merge ou push, nem resolve um conflito ou remove um worktree por conta própria: cada passo que muda o histórico é decisão sua, como em toda estratégia de git.
+Peça, e ele dá qualquer um desses passos por você: escreve a mensagem de commit, resolve o conflito, faz o commit, o merge ou o push, remove o worktree, e conhece os comandos que desfazem um passo, como `git merge --abort` para um merge parado por um conflito ou `git revert` para uma entrega a desfazer.
+Cada passo vem depois da sua leitura: peça o commit quando o diff em stage tiver só a entrega, o commit de merge quando o arquivo resolvido não tiver nenhum marcador de conflito, e o push quando o `git log` mostrar o que vai sair.
 Para rodar duas entregas ao mesmo tempo em worktrees, abra uma sessão por pasta: uma em `main/` para cada `/propose`, uma em cada worktree para o seu `/apply`.
 
 O kit dá essa forma única a toda ferramenta e toda pessoa por causa de um erro: um `/propose` rodando em um worktree que outra ferramenta criou, numa pasta própria, escreve a página onde o próximo `/apply` não procura.
