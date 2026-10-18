@@ -32,7 +32,7 @@ The table is the vocabulary: every page, identifier and test uses its terms, and
 **docs/04, the conventions.** The language of the documents and of the identifiers, naming, style and the tool that enforces it, where tests live and what each level tests.
 
 **docs/05, the process.** The kit's process, the same in every project: the rule, the flow from queue to commit, the shape of a page, the queue, the commit and the format of its message, what the process does not have, and how a milestone closes.
-One section is filled in by the project, "This project", whose entries are its nine slots: the documentation language, the command that verifies a delivery, the environments, how a screen is proved, when anything is published, whether `context/` is committed, the manuals, the deep code review a person launches when a milestone closes, and the git strategy.
+One section is filled in by the project, "This project", whose entries are its ten slots: the documentation language, the command that verifies a delivery, the environments, how a screen is proved, when anything is published, whether `context/` is committed, who reviews a delivery's changes before `/apply` ends (chapter 13), the manuals, the areas the milestone review's code reading splits into and the model its readers and checker run on (chapter 15), and the git strategy.
 Whatever the publish policy says, `/apply`'s last words say which environment is at which version (chapter 13).
 A slot says what and the command, in a few lines, because `/apply` reads it every time; the steps go in a manual, and what a command prints stays in its help.
 So a slot does not say which delivery created its command or how it used to work: that history is on the delivery's page in `work/done/` and in the ADR.
@@ -107,7 +107,7 @@ A new fact has one owner, and you find it by asking these questions in order; th
    docs/01, or docs/02 when a server holds the rule.
 5. Is it how code or text is written: naming, style, tests?
    docs/04.
-6. Is it a fact of this project that the commands read: the verify command, the environments, whether `context/` is committed, the milestone review's command, git?
+6. Is it a fact of this project that the commands read: the verify command, the environments, whether `context/` is committed, how a delivery and a milestone are reviewed, git?
    A slot of docs/05, what and the command, in a few lines.
 7. Is it the steps a person follows by hand outside a delivery (publish, roll back, rotate a secret, set up a service), or those of a proof `/apply` runs on another machine?
    A manual in `docs/manuals/`, the slot keeping the command and pointing to it.

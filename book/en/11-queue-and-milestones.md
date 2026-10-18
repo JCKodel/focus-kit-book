@@ -82,7 +82,7 @@ That is an order, not a wait: the line keeps its mark, `[ ]`, and is free to sta
 ### The review, and its findings
 
 A milestone is planned with its review as its last line, `<milestone>-review`, a delivery like the others, which takes the paragraph clause by clause ([chapter 15](15-closing-a-milestone.md)).
-It fixes nothing: a person tests each clause by hand and launches the deep code review the project's docs/05 names, when it names one.
+It fixes nothing: a person tests each clause by hand and, on the person's word, the session has the code changed since the milestone's base read by the areas the project's docs/05 names, when it names areas, one read-only agent each, and a checker marks each candidate before the person sees it.
 Each finding becomes a `[ ]` line in the same milestone, under the review line, and those lines get no second review.
 
 ## Changing the queue

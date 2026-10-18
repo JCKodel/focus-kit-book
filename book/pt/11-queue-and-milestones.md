@@ -85,7 +85,7 @@ Isso é uma ordem, não uma espera: a linha mantém a sua marca, `[ ]`, e fica l
 ### A revisão, e os seus achados
 
 Um marco é planejado com a sua revisão como a última linha, `<milestone>-review` (em inglês, como o kit a escreve: `m1-review` para o primeiro marco), uma entrega como as outras, que pega o parágrafo cláusula por cláusula ([capítulo 15](15-closing-a-milestone.md)).
-Ela não corrige nada: uma pessoa testa cada cláusula à mão e lança a revisão profunda do código que o docs/05 do projeto cita, quando cita uma.
+Ela não corrige nada: uma pessoa testa cada cláusula à mão e, com a palavra da pessoa, a sessão faz ler o código alterado desde a base do marco pelas áreas que o docs/05 do projeto cita, quando cita áreas, um agente somente leitura em cada uma, e um conferente marca cada candidato antes que a pessoa o veja.
 Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, e essas linhas não têm segunda revisão.
 
 ## Mudando a fila
