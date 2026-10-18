@@ -23,7 +23,12 @@ A página, o `AGENTS.md`, e três dos documentos do projeto: o docs/01, a arquit
 O docs/05 guarda os slots do projeto, e o `/apply` os segue ao pé da letra: o comando de verificação, os ambientes e o que uma entrega deixa em cada um, como uma tela é provada, como as suas mudanças são revisadas antes de ele terminar, a política de publicação e a estratégia de git.
 Do docs/06, a fila, ele lê tudo: precisa ver que as linhas que o seu `· after` nomeia estão feitas antes de começar, e nomeia a próxima linha livre quando termina.
 Por isso, cada palavra de uma linha é lida por toda construção tanto quanto por toda definição (capítulo 11).
-Então, como a sua primeira edição, ele marca a linha como `[*]` no docs/06, para a fila mostrar a construção em andamento; em uma linha que está `[?]`, ele primeiro diz o que a linha espera, e só segue quando você diz que está resolvido.
+Um arquivo em `work/` não deixa uma página pronta: só o `/propose` marca a linha como `[>]`, quando cada seção está preenchida ou explicitamente inaplicável e nenhuma pergunta de escopo ficou aberta (docs/05 §3).
+Em uma página que ainda tem uma pergunta aberta, ou cuja linha está `[ ]` ou `[~]`, ele se recusa a construir e aponta para o `/propose`: na biblioteca, em um exemplo escrito para este capítulo, `/apply emprestar-livro` em uma página cujo Contrato ainda tem uma pergunta sem resposta não edita nada e nomeia `/propose emprestar-livro`, onde a pergunta recebe a sua resposta.
+Essa recusa vem antes de qualquer construção, então não é a parada que "Quando o trabalho não consegue seguir" descreve: nada foi construído, e a linha não é marcada como `[?]`.
+Em uma linha `[>]` cujo `after` nomeia uma linha que ainda não está `[x]`, ele também não começa, e deixa a marca como está: um `after` é uma ordem, não uma espera (capítulo 14).
+Só em uma linha `[>]` completa cujas linhas do `after` estão todas `[x]` ele marca a linha como `[*]` no docs/06, como a sua primeira edição, para a fila mostrar a construção em andamento.
+Em uma linha que está `[?]`, ele primeiro diz o que a linha espera, e só segue quando o motivo se resolve (capítulo 14); então a linha volta pela fase de retomada: `resume: apply` a devolve para `[>]`, pronta para construir, e `resume: propose` a devolve para `[ ]`, mantendo qualquer rascunho, para o `/propose` terminar, porque tirar o motivo não completa uma definição.
 
 ### A página é o escopo
 

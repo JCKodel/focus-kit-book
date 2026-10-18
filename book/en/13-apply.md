@@ -23,7 +23,12 @@ The page, `AGENTS.md`, and three of the project documents: docs/01, the architec
 docs/05 holds the project's slots, and `/apply` follows them literally: the verify command, the environments and what a delivery leaves in each, how a screen is proven, how its changes are reviewed before it ends, the publish policy and the git strategy.
 Of docs/06, the queue, it reads all of it: it must see that the lines its `· after` names are done before it starts, and it names the next free line when it ends.
 So every word on a line is read by every build as well as by every definition (chapter 11).
-Then, as its first edit, it marks the line `[*]` in docs/06, so the queue shows the build under way; on a line that is `[?]`, it first says what the line waits on, and goes on only when you say it is resolved.
+A file in `work/` does not make a page ready: only `/propose` marks the line `[>]`, when every section is filled or explicitly inapplicable and no scope question is left open (docs/05 §3).
+On a page that still has a question open, or whose line is `[ ]` or `[~]`, it refuses to build and points to `/propose`: in the lending library, in an example written for this chapter, `/apply lend-book` on a page whose Contract still has a question unanswered edits nothing and names `/propose lend-book`, where the question gets its answer.
+That refusal comes before any build, so it is not the stop that "When the work cannot go on" describes: nothing was built, and the line is not marked `[?]`.
+On a `[>]` line whose `after` names a line not yet `[x]`, it does not start either, and leaves the mark as it is: an `after` is an order, not a wait (chapter 14).
+Only on a complete `[>]` line whose `after` lines are all `[x]` does it mark the line `[*]` in docs/06, as its first edit, so the queue shows the build under way.
+On a line that is `[?]`, it first says what the line waits on, and goes on only once the reason is resolved (chapter 14); then the line goes back by its resume phase: `resume: apply` returns it to `[>]`, ready to build, and `resume: propose` returns it to `[ ]`, with any draft kept, for `/propose` to finish, because removing the reason does not complete a definition.
 
 ### The page is the scope
 
