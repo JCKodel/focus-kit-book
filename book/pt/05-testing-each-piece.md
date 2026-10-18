@@ -2,12 +2,15 @@
 
 Depois deste capítulo você consegue dizer que teste guarda cada uma das quatro peças e o que ele troca, só o I/O e o relógio, e seguir uma regra pelos testes dela.
 Você também consegue escrever uma implementação falsa que faz o teste falhar quando é chamada sem ser esperada, e dar nomes aos testes para que um revisor os leia como as frases da regra.
+Você consegue manter rápidos os testes que toda entrega roda, e dizer onde rodam os lentos.
 E você sabe por que um teste que um agente escreveu só merece confiança verde depois de ter sido visto vermelho.
 
 ## O problema
 
 O motivo para ter poucos testes era o custo de escrevê-los, e um agente escreve um em segundos, então esse motivo acabou.
 O risco passou para o outro lado: um agente escreve testes com tanta facilidade que escreve demais, o mesmo caso de cinco jeitos, até a suíte levar minutos e ninguém rodá-la antes de dizer "pronto".
+Um agente também não se importa com quanto tempo um teste leva para rodar, e quando toda entrega roda os testes, um teste lento faz toda entrega esperar.
+Eu já vi agentes escreverem testes que levavam 20 minutos para rodar: 20 minutos em toda entrega.
 Pergunte a um teste o que o capítulo 3 pergunta a qualquer passo: que regra quebrada ele pegaria que nenhum outro teste pega?
 
 Um teste que precisa da aplicação inteira rodando, um servidor de pé, um banco populado, um navegador aberto, também leva minutos para começar, e quebra por motivos que nada têm a ver com o código que ele confere.
@@ -29,6 +32,13 @@ Em TypeScript, o Vitest roda testes unitários no Node,[^vitest] e o Playwright 
 
 A maioria dos testes é dos três primeiros tipos, e eles rodam em segundos.
 Testes ponta a ponta são poucos porque cada um é lento e falha por muitos motivos; Mike Cohn desenhou essa forma como uma pirâmide, muitos testes unitários na base e poucos testes ponta a ponta no topo,[^cohn] e o guia de Ham Vocke no site de Martin Fowler a ensina com código.[^vocke-pyramid]
+
+Manter os testes em ordem, incluindo quanto tempo eles levam, é trabalho seu; o agente não faz isso se você não pedir.
+É mais um motivo para manter uma regra em um caso de uso puro: o teste dele é uma chamada com dados, o teste mais rápido do projeto.
+Testes ponta a ponta, e qualquer teste que precise da aplicação ou de uma rede, só são escritos onde provam algo que os rápidos não conseguem.
+O que toda entrega roda é o comando de verificação do projeto, o comando que precisa passar antes de uma entrega ser dada como pronta, e você decide o que ele roda.
+Um teste lento pode ficar fora dele e rodar em outro comando, que você mesmo roda, por exemplo antes de um marco fechar.
+Um marco é um grupo de entregas com um parágrafo que diz o que é verdade quando ele fecha.
 
 ## O que é uma implementação falsa
 
@@ -155,7 +165,7 @@ E um revisor confere uma entrega lendo nomes de teste, que dizem, antes de qualq
 
 ## Pontos-chave
 
-* Um caso de uso é testado só com dados, um repositório contra um banco em memória com as migrações reais, um orquestrador com repositórios falsos, e a tela com poucos testes ponta a ponta em um navegador.
+* Um caso de uso é testado só com dados, um repositório contra um banco em memória com as migrações reais, um orquestrador com repositórios falsos, e a tela com poucos testes ponta a ponta em um navegador, então o que toda entrega roda continua rápido.
 * Um teste troca só o I/O e o relógio, e o relógio é um valor passado como parâmetro, então a maioria dos testes não troca nada além dos repositórios.
 * Uma implementação falsa responde o que o teste define e lança em qualquer chamada que o teste não esperava; prefira-a a um mock, que repete o código que testa.
 * Cada nível de teste prova o que os outros não provam, e uma suíte verde ainda prova menos que software funcionando: um teste pode estar errado, e as peças podem falhar juntas, então veja um teste vermelho antes de confiar nele verde.

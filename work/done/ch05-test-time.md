@@ -58,11 +58,44 @@
 
 **Done when.**
 
-* [ ] Both editions written: the opening, the two sections and key point 1 as Behaviour says.
-* [ ] docs/04's Evidence bullet as decision 3 quotes.
-* [ ] Chapter 5 still opens with its value, keeps its gain said once, no filler and nothing useful cut.
-* [ ] Every number sourced: the 20 minutes said as the author's own observation.
-* [ ] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunks of docs/04 and docs/06, commit message in a `commit` block.
+* [x] Both editions written: the opening, the two sections and key point 1 as Behaviour says.
+* [x] docs/04's Evidence bullet as decision 3 quotes.
+* [x] Chapter 5 still opens with its value, keeps its gain said once, no filler and nothing useful cut.
+* [x] Every number sourced: the 20 minutes said as the author's own observation.
+* [x] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunks of docs/04 and docs/06, commit message in a `commit` block.
+
+**Proof.**
+
+* en/pt 05:5 (opening), 05:11-12 ("The problem"), 05:33-38 ("A test for each piece") and key point 1 read as Behaviour says, with the wordings of Divergences; docs/04:23 as Divergences says.
+* `git diff --stat` on the three paths: 23 insertions, 3 deletions; 05:44-51 and 05:138-148 untouched.
+* `make verify`: build, parity, em dash, prose, width, links and disclosure green, exit 0.
+* `make book`: not run here; the driver builds the book once at the end of the batch and gives both PDF paths.
+
+**Divergences.** Review wordings on text this delivery wrote, kept to the page's intent:
+
+* The new opening sentence sits before "And you know why...", so the opening still ends on that line.
+* "every delivery runs the tests, so" became "when every delivery runs the tests,": 05:10 says a slow suite goes unrun, and the new line reads as the case where it runs.
+* End-to-end tests "are few" is not said again: 05:31 says it, and docs/04 says a fact once; the new line says they are written only where they prove what the fast ones cannot.
+* The milestone gloss is its own sentence; pt "o agente não faz isso se você não pedir"; pt key point 1 "então o que toda entrega roda continua rápido", since "espera" also reads as "expects".
+* docs/04's Evidence bullet separates its four sources with semicolons, not the commas decision 3 quotes, so "for a private case, how the author counted it" stays one item.
+
+**Decisions taken in /apply.**
+
+* "Verify" is glossed where it first appears in the chapter as the command that must pass before a delivery is called done, the words of en/pt 00:96-97.
+* Run in a batch of applies on one tree: the driver marks this line in docs/06, runs `make book` once at the end of the batch, and stages and commits this delivery by its paths.
+
+**Review.** One read-only agent on Opus read the diff of the three paths against this page and docs/04, with chapters 0 to 5 in both editions: nothing breaks the page; two near-breaks (05:11 against 05:10, "few" said twice) and six wordings, all applied (Divergences).
+
+```commit
+docs(ch05-test-time): keep the tests every delivery runs fast
+
+- Chapter 5, The problem: an agent does not mind how long a test runs; the author has seen tests of 20 minutes on every delivery
+- Chapter 5, A test for each piece: the person keeps the tests in order; use cases are the fastest tests; slow tests stay out of verify and run by the person, for example before a milestone closes
+- Chapter 5, opening and key point 1
+- docs/04, Evidence: the author's own observation on no named project, said as such, with no source note
+
+work/done/ch05-test-time.md
+```

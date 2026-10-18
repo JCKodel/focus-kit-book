@@ -2,12 +2,15 @@
 
 After this chapter you can say which test guards each of the four pieces and what it swaps, only the I/O and the clock, and follow one rule through its tests.
 You can also write a fake that fails the test when it is called unexpectedly, and name tests so that a reviewer reads them as the sentences of the rule.
+You can keep the tests every delivery runs fast, and say where the slow ones run.
 And you know why a test an agent wrote is trusted green only after it was seen red.
 
 ## The problem
 
 The reason to have few tests used to be the cost of writing them, and an agent writes one in seconds, so that reason is gone.
 The risk moved to the other side: an agent writes tests so easily that it writes too many, the same case five ways, until the suite takes minutes and nobody runs it before saying "done".
+An agent also does not mind how long a test takes to run, and when every delivery runs the tests, one slow test makes every delivery wait.
+I have seen agents write tests that took 20 minutes to run: 20 minutes on every delivery.
 Ask of a test what chapter 3 asks of any step: which broken rule would it catch that no other test catches?
 
 A test that needs the whole application running, a server up, a database seeded, a browser open, takes minutes to start too, and breaks for reasons that have nothing to do with the code it checks.
@@ -29,6 +32,13 @@ In TypeScript, Vitest runs unit tests in Node,[^vitest] and Playwright drives a 
 
 Most tests are of the first three kinds, and they run in seconds.
 End-to-end tests are few because each one is slow and fails for many reasons; Mike Cohn drew the shape as a pyramid, many unit tests at the base and few end-to-end tests at the top,[^cohn] and Ham Vocke's guide on Martin Fowler's site teaches it with code.[^vocke-pyramid]
+
+Keeping the tests in order, run time included, is your job; the agent will not do it unless you ask.
+It is one more reason to keep a rule in a pure use case: its test is a call with data, the fastest test the project has.
+End-to-end tests, and any test that needs the application or a network, are written only where they prove something the fast ones cannot.
+What every delivery runs is the project's verify command, the command that must pass before a delivery is called done, and you decide what it runs.
+A slow test can stay out of it and run in another command, which you run yourself, for example before a milestone closes.
+A milestone is a group of deliveries with a paragraph saying what is true when it closes.
 
 ## What a fake is
 
@@ -155,7 +165,7 @@ And a reviewer checks a delivery by reading test names, which say, before any co
 
 ## Key points
 
-* A use case is tested with data alone, a repository against an in-memory database with the real migrations, an orchestrator with fake repositories, and the view with a few end-to-end tests in a browser.
+* A use case is tested with data alone, a repository against an in-memory database with the real migrations, an orchestrator with fake repositories, and the view with a few end-to-end tests in a browser, so the run every delivery waits for stays fast.
 * A test swaps only I/O and the clock, and the clock is a value passed in, so most tests fake nothing but the repositories.
 * A fake answers what the test sets and throws on any call the test did not expect; prefer it to a mock, which repeats the code it tests.
 * Each level of test proves what the others do not, and a green suite still proves less than working software: a test can be wrong, and the pieces can fail together, so see a test red before trusting it green.

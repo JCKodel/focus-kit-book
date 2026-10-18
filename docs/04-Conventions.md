@@ -20,7 +20,7 @@
 * **Anti-AI prose rules**: the patterns that make text read as machine-written, in §Prose rules, checked by `make verify`.
 * **No runs.** No chapter narrates a run: no brief, no transcript of an agent's turns, no diff, no `git status`, no headless flag, no commit hash as evidence (ADR-0017).
   The record of how a number was counted stays in `work/done/`, and the note points to it.
-* **Evidence.** Every number says where it comes from: a primary publication, a record of this book's runs, or, for a private case, how the author counted it.
+* **Evidence.** Every number says where it comes from: a primary publication; a record of this book's runs; for a private case, how the author counted it; or the author's own observation on no named project, said as such in the text with no source note (first: `ch05-test-time`).
   Every quoted artifact (a page, a queue line, a rules file, a command's output) is real; a page or a queue written for the chapter as an example says so where it appears.
   The Portuguese edition shows an English prose artifact (a rules file, a page) translated, and says before it that the original is in English.
   A page or a commit message written for the chapter on the lending library has no original: it is in the edition's language with no such note, and its commit message follows the kit's format, as chapter 13 teaches it, with no `<type>(<slug>):` prefix, which is this repository's (first: `lend-book`, chapters 12 and 13; second: `due-date-format`, chapter 11, `small-delivery-example`).
