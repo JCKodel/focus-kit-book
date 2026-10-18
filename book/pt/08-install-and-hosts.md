@@ -51,56 +51,35 @@ As suas escolhas ficam: um docs/05 cujo §5 diz "trunk, uma sessão por vez" vê
 Este é o relatório de uma atualização na biblioteca de empréstimos, escrito para este capítulo:
 
 ```
-Instalado: focus-kit 2026.10.17, em cada SKILL.md.
-Removidos: os 6 arquivos do kit em .windsurf/skills/; nada mais ali.
-Migrações de processo pendentes: 4.
+Instalado: focus-kit 2026.10.18, em cada SKILL.md.
+Migrações de processo pendentes: 3.
 
-1. docs/05, §5 This project: acrescentar o slot Delivery review
-   depois do Context: "Delivery review: um agente somente leitura no
-   modelo da sessão lê o git diff dos caminhos da entrega contra a
+1. docs/05, §4 The queue: na tabela de marcas, [?] é posta "nos
+   quatro casos abaixo"; depois de "como uma correção descoberta no
+   meio de um /apply" acrescentar ", ou quando a leitura do código
+   de uma revisão de marco não cobriu parte do seu intervalo (§8)".
+2. docs/05, §5 Delivery review: o slot lê o git diff. Proposto:
+   "Delivery review: um agente somente leitura no modelo da sessão
+   lê o git diff dos caminhos da entrega e os arquivos que a entrega
+   criou, que nenhum diff mostra até entrarem em stage, contra a
    página dela e o docs/04."
-2. docs/05, §5 Milestone review: o slot cita um comando que uma
-   pessoa lança. Proposto, com as áreas tiradas dos módulos do
-   docs/01: "por áreas, um leitor cada: src/features/emprestimos/,
-   src/features/membros/, src/features/catalogo/, os documentos e o
-   resto; leitores e conferente no modelo da sessão." Diga se o
-   comando também continua rodando.
-3. docs/05, §7: "nenhum subagente especializado" vira "nenhum
-   subagente especializado além dos leitores e do conferente das
-   revisões (Delivery review do §5, §8)".
-4. docs/05, §8 Closing a milestone: trocar "A revisão também lê o
-   código: a sua página cita o commit que fechou o marco anterior, ou
-   o primeiro commit, e a pessoa lança o Milestone review do §5
-   contra ele." por "A revisão também lê o código, o único olhar
-   sobre o todo em vez de uma entrega: cada página pode estar certa e
-   o todo errado. A sua página cita como base o commit que fechou o
-   marco anterior, ou o primeiro commit, e lista, pelas áreas do §5,
-   os caminhos que git diff --stat <base>..HEAD mostra: sempre o
-   intervalo, já que um commit solto lê só aquele commit. Uma área
-   grande demais para uma leitura cuidadosa se divide de novo. Ela
-   custa, então a sessão diz que é hora e só a começa com a palavra
-   da pessoa: um agente somente leitura por área, em paralelo onde o
-   host roda agentes, ou uma sessão nova por área, aberta pela
-   pessoa, onde não roda. Cada leitor tem o repositório inteiro
-   aberto e lê as mudanças da sua área atrás do que a revisão de
-   nenhuma entrega podia ver, o trabalho de uma entrega contra o de
-   outra, um documento contra outro, o todo contra o docs/01, e
-   relata candidatos por arquivo e linha e os caminhos que leu. Um
-   conferente, um agente ou a sessão da revisão, abre o arquivo de
-   cada candidato e o marca visto, latente (nada o dispara hoje) ou
-   fraco (a afirmação não se sustenta como foi dita) antes de a
-   pessoa vê-lo. Eles não corrigem nada. Quando os caminhos lidos não
-   cobrem parte dos do intervalo, a página diz quais e a linha espera
-   como [?] com · resume: apply (§4). Um candidato que a pessoa
-   confirma é um achado como os outros."
+3. docs/05, §8 Closing a milestone: trocar "A sua página cita como
+   base o commit que fechou o marco anterior, ou o primeiro commit,"
+   por "A sua página cita como base o commit da revisão do marco
+   anterior, para que o intervalo guarde as correções dos achados
+   dela, que não têm segunda revisão, ou o primeiro commit para um
+   primeiro marco,"; "o marca visto," por "o marca visto (verdadeiro
+   no arquivo hoje),"; e "como [?] com · resume: apply (§4)" por
+   "como [?] com · resume: apply e · blocked: <o que foi lido> (§4)".
 
 docs/ e AGENTS.md não foram alterados.
 ```
 
 Todo item muda uma regra.
-O item 1 faz as mudanças de cada entrega serem lidas antes de o `/apply` terminar, por um leitor que não as escreveu, aqui um agente somente leitura, que não depende de recurso de nenhum host, enquanto o capítulo 9 dá o padrão de que um projeto parte; os itens 2 e 4 fazem a revisão de marco ler toda mudança desde a base do marco, dividida em áreas, um leitor somente leitura cada, com um conferente antes de a pessoa ver o que relatam ([capítulo 15](15-closing-a-milestone.md)); o item 3 deixa o §7 do docs/05, que lista o que o processo não tem, admitir esses leitores e o seu conferente.
-O item 2 também mantém uma escolha: o slot citava um comando que a pessoa lança, e o relatório propõe as áreas ao lado dele e pergunta se ele continua rodando, para que o time decida.
-`Removidos` lista os arquivos do próprio kit que a atualização apagou de `.windsurf/skills/`, uma pasta que o arquivo de setup não escreve; um arquivo seu ali teria sido relatado e mantido.
+O item 1 dá a uma linha um quarto caso de espera, uma revisão de marco cuja leitura do código não cobriu parte do seu intervalo ([capítulo 14](14-queue-states.md)), para que uma leitura que cobriu menos que o seu intervalo apareça na fila em vez de passar por feita.
+O item 2 faz a revisão da entrega ler os arquivos que a entrega criou, além do seu `git diff`: um arquivo novo é não rastreado, um que o git ainda não guarda, então o `git diff` não mostra nada dele até ele entrar em stage, e o `/apply` põe em stage depois da revisão.
+O item 3 cita como base o commit da revisão do marco anterior, para que o intervalo guarde todo commit depois dessa revisão, as correções dos seus achados e as entregas do marco seguinte em qualquer ordem em que entraram ([capítulo 15](15-closing-a-milestone.md)); ele também diz o que visto significa, e faz a linha que espera dizer o que os leitores leram.
+Um slot Delivery review que cita a revisão do próprio host não recebe o item 2: o relatório propõe os arquivos criados só onde o slot lê o `git diff`, então a escolha do revisor pelo time fica.
 
 A versão do kit é o `metadata.version` em cada `SKILL.md`; o processo é o que o docs/04, o docs/05 e o `AGENTS.md` dizem, porque todo comando os lê, então um kit atualizado cujas migrações não foram aplicadas ainda roda o processo antigo.
 A atualização termina quando as migrações são aplicadas, como qualquer mudança: uma linha da fila, definida com o `/propose` e construída com o `/apply`, para que a mudança nas suas regras ou na sua fila tenha uma página, verificação e a sua revisão.
@@ -115,7 +94,7 @@ Sem contêiner ainda, o slot vale o padrão do kit, que esse capítulo cita, e o
 Para saber por que uma migração existe, leia o changelog do kit, `CHANGELOG.md` no repositório dele, `CHANGELOG.pt.md` em português.
 Ele tem uma entrada por versão, a mais nova primeiro; a versão é a linha `Version:` do `SETUP.md`, o mesmo valor do `metadata.version` em cada `SKILL.md`.
 Cada entrada diz o que mudou e o problema que causou a mudança, e uma entrada pode trazer um item que começa com `Migration:` (no changelog em português, `Migração:`), citando o que mudar nos documentos do projeto.
-O que uma nova execução compara é o próprio passo do arquivo de setup, que cita as seções do docs/05, os slots e as linhas do `AGENTS.md` que confere; o relatório lista só o que os seus documentos ainda não têm, na biblioteca de empréstimos os quatro itens acima.
+O que uma nova execução compara é o próprio passo do arquivo de setup, que cita as seções do docs/05, os slots e as linhas do `AGENTS.md` que confere; o relatório lista só o que os seus documentos ainda não têm, na biblioteca de empréstimos os três itens acima.
 
 ## Como cada host encontra os comandos
 

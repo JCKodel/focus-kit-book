@@ -51,56 +51,35 @@ Your choices stay: a docs/05 whose §5 says "trunk, one session at a time" sees 
 Here is the report of an update on the lending library, written for this chapter:
 
 ```
-Installed: focus-kit 2026.10.17, in every SKILL.md.
-Removed: the kit's 6 files in .windsurf/skills/; nothing else there.
-Pending process migrations: 4.
+Installed: focus-kit 2026.10.18, in every SKILL.md.
+Pending process migrations: 3.
 
-1. docs/05, §5 This project: add the Delivery review slot after
-   Context: "Delivery review: a read-only agent on the session's
-   model reads git diff of the delivery's paths against its page and
-   docs/04."
-2. docs/05, §5 Milestone review: the slot names a command a person
-   launches. Proposed, its areas from docs/01's modules: "by areas,
-   one reader each: src/features/loans/, src/features/members/,
-   src/features/catalog/, the documents and the rest; readers and
-   checker on the session's model." Say whether the command still
-   runs too.
-3. docs/05, §7: "no specialized subagent" becomes "no specialized
-   subagent beyond the reviews' readers and checker (§5's Delivery
-   review, §8)".
-4. docs/05, §8 Closing a milestone: replace "The review also reads
-   the code: its page names the commit that closed the previous
-   milestone, or the first commit, and the person launches §5's
-   Milestone review against it." with "The review also reads the
-   code, the one look at the whole instead of a delivery: every page
-   can be right and the whole wrong. Its page names the commit that
-   closed the previous milestone, or the first commit, as the base,
-   and lists, by §5's areas, the paths git diff --stat <base>..HEAD
-   shows: always the range, since a bare commit reads that one
-   commit. An area too large for one careful reading splits again.
-   It costs, so the session says it is time and starts it only on
-   the person's word: one read-only agent per area, in parallel
-   where the host runs agents, or one fresh session per area, opened
-   by the person, where it does not. Each reader has the whole
-   repository open and reads its area's changes for what no
-   delivery's own review could see, one delivery's work against
-   another's, a document against another, the whole against docs/01,
-   and reports candidates by file and line and the paths it read.
-   One checker, an agent or the review's session, opens each
-   candidate's file and marks it seen, latent (nothing triggers it
-   today) or weak (the claim does not hold as stated) before the
-   person sees it. They fix nothing. When the paths read miss some
-   of the range's, the page says which and the line waits as [?]
-   with · resume: apply (§4). A candidate the person confirms is a
-   finding like the others."
+1. docs/05, §4 The queue: in the mark table, [?] is set "in the four
+   cases below"; after "such as a fix found in the middle of an
+   /apply" add ", or when a milestone review's code reading missed
+   part of its range (§8)".
+2. docs/05, §5 Delivery review: the slot reads git diff. Proposed:
+   "Delivery review: a read-only agent on the session's model reads
+   git diff of the delivery's paths and the files the delivery
+   created, which no diff shows until they are staged, against its
+   page and docs/04."
+3. docs/05, §8 Closing a milestone: replace "Its page names the
+   commit that closed the previous milestone, or the first commit, as
+   the base," with "Its page names as the base the commit of the
+   previous milestone's review, so the range holds the fixes of its
+   findings, which get no second review, or the first commit for a
+   first milestone,"; "marks it seen," with "marks it seen (true in
+   the file today),"; and "with · resume: apply (§4)" with "with
+   · resume: apply and · blocked: <what was read> (§4)".
 
 docs/ and AGENTS.md were not changed.
 ```
 
 Every item changes a rule.
-Item 1 has each delivery's own changes read before `/apply` ends, by a reader that did not write them, here a read-only agent, which claims no feature of any host, while chapter 9 gives the default a project starts from; items 2 and 4 have the milestone review read every change since the milestone's base, split into areas, one read-only reader each, with a checker before the person sees what they report ([chapter 15](15-closing-a-milestone.md)); item 3 lets docs/05 §7, which lists what the process does not have, admit those readers and their checker.
-Item 2 also keeps a choice: the slot named a command the person launches, and the report proposes the areas beside it and asks whether it still runs, so the team decides.
-`Removed` lists the kit's own files the update deleted from `.windsurf/skills/`, a folder the setup file does not write; a file of yours there would have been reported and left.
+Item 1 gives a line a fourth case to wait in, a milestone review whose code reading missed part of its range ([chapter 14](14-queue-states.md)), so a reading that covered less than its range shows in the queue instead of passing as done.
+Item 2 has the delivery review read the files the delivery created as well as its `git diff`: a new file is untracked, one git does not hold yet, so `git diff` shows nothing of it until it is staged, and `/apply` stages after the review.
+Item 3 names as the base the commit of the previous milestone's review, so the range holds every commit after that review, the fixes of its findings and the next milestone's deliveries in whatever order they landed ([chapter 15](15-closing-a-milestone.md)); it also says what seen means, and has the waiting line say what the readers read.
+A Delivery review slot that names the host's own review gets no item 2: the report proposes the created files only where the slot reads `git diff`, so the team's choice of reviewer stays.
 
 The kit's version is the `metadata.version` in each `SKILL.md`; the process is what docs/04, docs/05 and `AGENTS.md` say, because every command reads them, so an updated kit whose migrations are not applied still runs the old process.
 The update is done when the migrations are applied, as any change is: a queue line, defined with `/propose` and built with `/apply`, so the change to your rules or your queue gets a page, verify and your review.
@@ -115,7 +94,7 @@ With no container yet, the slot means the kit's default, which that chapter name
 To know why a migration exists, read the kit's changelog, `CHANGELOG.md` in its repository, `CHANGELOG.pt.md` in Portuguese.
 It has one entry per version, newest first; the version is the `Version:` line of `SETUP.md`, the same value as the `metadata.version` in each `SKILL.md`.
 Each entry says what changed and the problem that caused it, and an entry may carry an item that starts with `Migration:`, naming what to change in the project's documents.
-What a rerun compares is the setup file's own step, which names the sections of docs/05, the slots and the lines of `AGENTS.md` it checks; the report lists only what your documents still lack, on the lending library the four items above.
+What a rerun compares is the setup file's own step, which names the sections of docs/05, the slots and the lines of `AGENTS.md` it checks; the report lists only what your documents still lack, on the lending library the three items above.
 
 ## How each host finds the commands
 
