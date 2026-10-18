@@ -29,7 +29,7 @@ A line that grows into a paragraph is a decision in the wrong place, since the p
 ## The marks
 
 A line has one of six marks, which says where its delivery stands.
-This chapter needs two of them: `[ ]`, not yet defined, the delivery has a line and no page; and `[x]`, done, it was built and its page moved to `work/done/` ([chapter 13](13-apply.md)).
+This chapter needs two of them: `[ ]`, not yet defined, the delivery has a line and no complete page, though a draft of one may wait in `work/` (below); and `[x]`, done, it was built and its page moved to `work/done/` ([chapter 13](13-apply.md)).
 The other four, `[~]`, `[>]`, `[*]` and `[?]`, are [chapter 14](14-queue-states.md)'s: what each means, who sets it and at what moment, when a line is free to start, and how a line waits and leaves `[?]`.
 
 A line never leaves the queue; it changes mark and keeps its sentence.
@@ -55,7 +55,7 @@ an overdue book or a suspended membership is refused.
 ```
 ````
 
-Anyone can read the state from it: three deliveries done, `lend-book` has a page waiting for `/apply`, and two lines have no page yet, of which `return-book` comes after `lend-book`, since a copy is returned only after it was lent.
+Anyone can read the state from it: three deliveries done, `lend-book` is completely defined and waits for `/apply`, and two lines are not defined yet, of which `return-book` comes after `lend-book`, since a copy is returned only after it was lent.
 
 ## Milestones
 
@@ -106,6 +106,7 @@ Asked in an ordinary session to show the due date on the loan screen as day/mont
 
 The narrow-screen rule and the catalog exception do not fit the line's one sentence, so they go into a draft `work/due-date-format.md`, and the answer stops there, naming `/propose due-date-format` for a fresh session, written as your host invokes it; a request the line holds whole gets no draft.
 The draft is where the detail waits: `/propose due-date-format`, in a fresh session, starts from it and writes the page (chapter 12 shows `/propose`), so nothing you said in the first session is said twice.
+The line stays `[ ]` with the draft beside it: a draft in `work/` is not a definition, and `/apply` builds only a line `/propose` has marked `[>]` ([chapter 14](14-queue-states.md)).
 Saying "define it now" gets the same answer: the kit's rule is `/propose` in a fresh session, whose window holds the rules file, the documents and the draft and nothing of this conversation, so the page holds only what was written down, which is all `/apply` will have.
 A host may still run the command here when you name it in your message, and some offer to; the page would then be written with everything said in this session still in the window, so open a fresh one.
 

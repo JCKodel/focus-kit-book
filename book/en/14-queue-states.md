@@ -20,10 +20,14 @@ focus-kit answers both with six marks, each set at the moment the work changes.
 |---|---|---|
 | `[ ]` | not defined | the conversation that adds the line |
 | `[~]` | being defined | `/propose`, when it starts |
-| `[>]` | defined: the page exists | `/propose`, when the page is complete |
+| `[>]` | completely defined: the page is ready for `/apply` | `/propose`, when the page is complete |
 | `[*]` | being built | `/apply`, when it starts |
 | `[x]` | done: the page is in `work/done/` | `/apply`, with verify green |
 | `[?]` | waiting | any session, in the four cases below |
+
+A page that exists is not yet `[>]`: a draft saved for a `[ ]` line is a file in `work/` too ([chapter 11](11-queue-and-milestones.md)).
+The page is complete when every section is filled or says it does not apply and no scope question is open; only then does `/propose` mark the line `[>]`, and `/apply` builds it once every line its `after` names is `[x]`.
+While a scope question is still being talked through, the line stays `[~]`; a question asked of someone who has not answered makes it wait, `[?]` (below).
 
 This is the lending library's first milestone on one afternoon, written for this chapter, with every mark in use:
 
@@ -39,7 +43,7 @@ This is the lending library's first milestone on one afternoon, written for this
 [ ] m1-review       the milestone checked against its paragraph
 ```
 
-Anyone reading it knows, without asking, that a session is building `lend-book`, that `search-catalog` has a page ready for `/apply`, that someone is talking `reservations` through right now, that `return-book` and `my-loans` come after `lend-book`, and what `due-reminder` waits on and which command picks it up again.
+Anyone reading it knows, without asking, that a session is building `lend-book`, that `search-catalog` is completely defined and ready for `/apply`, that someone is talking `reservations` through right now, that `return-book` and `my-loans` come after `lend-book`, and what `due-reminder` waits on and which command picks it up again.
 
 ## At the moment the work changes
 
@@ -138,7 +142,7 @@ The queue also says which lines can run together: without that, a person who wan
 
 ## Key points
 
-* Six marks, `[ ]` not defined, `[~]` being defined, `[>]` defined, `[*]` being built, `[x]` done, `[?]` waiting, each changed when the work changes, not when a command ends: `/propose` sets `[~]` and `[>]`, `/apply` sets `[*]` and `[x]`, any session sets `[?]`.
+* Six marks, `[ ]` not defined, `[~]` being defined, `[>]` completely defined and ready for `/apply`, `[*]` being built, `[x]` done, `[?]` waiting, each changed when the work changes, not when a command ends: `/propose` sets `[~]` and `[>]`, `/apply` sets `[*]` and `[x]`, any session sets `[?]`.
 * A line is free when it is not `[x]` nor `[?]` and every line its `after` names is `[x]`; the next delivery is the first free line no session holds, and free lines that touch different files can run at the same time.
 * `· after` is an order written with the line, which keeps its mark; `[?]` with `· blocked: after` is a wait found after work started.
 * A line waits when the person says so, when an answer was asked and not given, when work already started finds another line must be done first, or when a milestone review's code reading missed part of its range, with the phase to resume and the reason at its end, `· resume: apply · blocked: after <slug>`; when the reason is resolved, both suffixes go and it returns as that phase says, `resume: propose` to `[ ]` with any draft kept, `resume: apply` to `[>]`, and until then `/propose` and `/apply` stop on it, as on a line not free.

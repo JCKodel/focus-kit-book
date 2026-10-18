@@ -20,10 +20,14 @@ O focus-kit responde aos dois com seis marcas, cada uma posta no momento em que 
 |---|---|---|
 | `[ ]` | não definida | a conversa que acrescenta a linha |
 | `[~]` | sendo definida | o `/propose`, quando começa |
-| `[>]` | definida: a página existe | o `/propose`, quando a página está completa |
+| `[>]` | completamente definida: a página está pronta para o `/apply` | o `/propose`, quando a página está completa |
 | `[*]` | sendo construída | o `/apply`, quando começa |
 | `[x]` | feita: a página está em `work/done/` | o `/apply`, com a verificação verde |
 | `[?]` | esperando | qualquer sessão, nos quatro casos abaixo |
+
+Uma página que existe ainda não é `[>]`: um rascunho guardado para uma linha `[ ]` também é um arquivo em `work/` ([capítulo 11](11-queue-and-milestones.md)).
+A página está completa quando toda seção está preenchida ou diz que não se aplica e nenhuma questão de escopo está aberta; só então o `/propose` marca a linha `[>]`, e o `/apply` a constrói quando toda linha que o `after` dela nomeia está `[x]`.
+Enquanto uma questão de escopo ainda está sendo conversada, a linha fica `[~]`; uma pergunta feita a alguém que não respondeu a faz esperar, `[?]` (abaixo).
 
 Este é o primeiro marco da biblioteca em uma tarde, escrito para este capítulo, com todas as marcas em uso.
 Os sufixos `· after`, `· resume:` e `· blocked:` ficam em inglês, como o kit os escreve:
@@ -40,7 +44,7 @@ Os sufixos `· after`, `· resume:` e `· blocked:` ficam em inglês, como o kit
 [ ] m1-review         o marco conferido contra o parágrafo dele
 ```
 
-Quem a lê sabe, sem perguntar, que uma sessão está construindo `emprestar-livro`, que `buscar-catalogo` tem uma página pronta para o `/apply`, que alguém está conversando `reservas` agora mesmo, que `devolver-livro` e `meus-emprestimos` vêm depois de `emprestar-livro`, e o que `aviso-prazo` espera e qual comando a retoma.
+Quem a lê sabe, sem perguntar, que uma sessão está construindo `emprestar-livro`, que `buscar-catalogo` está completamente definida e pronta para o `/apply`, que alguém está conversando `reservas` agora mesmo, que `devolver-livro` e `meus-emprestimos` vêm depois de `emprestar-livro`, e o que `aviso-prazo` espera e qual comando a retoma.
 
 ## No momento em que o trabalho muda
 
@@ -139,7 +143,7 @@ A fila também diz quais linhas podem rodar juntas: sem isso, uma pessoa que que
 
 ## Pontos-chave
 
-* Seis marcas, `[ ]` não definida, `[~]` sendo definida, `[>]` definida, `[*]` sendo construída, `[x]` feita, `[?]` esperando, cada uma mudada quando o trabalho muda, não quando um comando termina: o `/propose` põe `[~]` e `[>]`, o `/apply` põe `[*]` e `[x]`, qualquer sessão põe `[?]`.
+* Seis marcas, `[ ]` não definida, `[~]` sendo definida, `[>]` completamente definida e pronta para o `/apply`, `[*]` sendo construída, `[x]` feita, `[?]` esperando, cada uma mudada quando o trabalho muda, não quando um comando termina: o `/propose` põe `[~]` e `[>]`, o `/apply` põe `[*]` e `[x]`, qualquer sessão põe `[?]`.
 * Uma linha está livre quando não está `[x]` nem `[?]` e toda linha que o `after` dela nomeia está `[x]`; a próxima entrega é a primeira linha livre que nenhuma sessão pegou, e linhas livres que mexem em arquivos diferentes podem rodar ao mesmo tempo.
 * `· after` é uma ordem escrita com a linha, que mantém a sua marca; `[?]` com `· blocked: after` é uma espera descoberta depois de o trabalho começar.
 * Uma linha espera quando a pessoa diz, quando uma resposta foi pedida e não veio, quando o trabalho já começado descobre que outra linha precisa ser feita antes, ou quando a leitura do código de uma revisão de marco não cobriu parte do seu intervalo, com a fase de retomada e o motivo no fim, `· resume: apply · blocked: after <slug>`; quando o motivo se resolve, os dois sufixos saem e ela volta conforme essa fase, `resume: propose` para `[ ]` com qualquer rascunho mantido, `resume: apply` para `[>]`, e até lá o `/propose` e o `/apply` param nela, como numa linha que não está livre.

@@ -31,7 +31,7 @@ Uma linha que cresce até virar um parágrafo é uma decisão no lugar errado, j
 ## As marcas
 
 Uma linha tem uma de seis marcas, que diz onde a entrega dela está.
-Este capítulo precisa de duas: `[ ]`, ainda não definida, a entrega tem uma linha e nenhuma página; e `[x]`, feita, foi construída e a página dela foi para `work/done/` ([capítulo 13](13-apply.md)).
+Este capítulo precisa de duas: `[ ]`, ainda não definida, a entrega tem uma linha e nenhuma página completa, embora um rascunho dela possa esperar em `work/` (abaixo); e `[x]`, feita, foi construída e a página dela foi para `work/done/` ([capítulo 13](13-apply.md)).
 As outras quatro, `[~]`, `[>]`, `[*]` e `[?]`, são do [capítulo 14](14-queue-states.md): o que cada uma significa, quem a põe e em que momento, quando uma linha está livre para começar, e como uma linha espera e sai de `[?]`.
 
 Uma linha nunca sai da fila; ela muda de marca e mantém a sua frase.
@@ -58,7 +58,7 @@ suspensa é recusado.
 ```
 ````
 
-Qualquer pessoa lê o estado nele: três entregas feitas, `emprestar-livro` tem uma página esperando o `/apply`, e duas linhas ainda não têm página, das quais `devolver-livro` vem depois de `emprestar-livro`, já que um exemplar só é devolvido depois de ter sido emprestado.
+Qualquer pessoa lê o estado nele: três entregas feitas, `emprestar-livro` está completamente definida e espera o `/apply`, e duas linhas ainda não estão definidas, das quais `devolver-livro` vem depois de `emprestar-livro`, já que um exemplar só é devolvido depois de ter sido emprestado.
 
 ## Marcos
 
@@ -109,6 +109,7 @@ Pedido numa sessão comum para mostrar a data de devolução na tela do emprést
 
 A regra da tela estreita e a exceção do catálogo não cabem na frase única da linha, então vão para um rascunho `work/formato-devolucao.md`, e a resposta para ali, nomeando `/propose formato-devolucao` para uma sessão nova, escrito como o seu host chama os comandos; um pedido que a linha comporta inteiro não ganha rascunho.
 O rascunho é onde o detalhe espera: o `/propose formato-devolucao`, numa sessão nova, parte dele e escreve a página (o capítulo 12 mostra o `/propose`), então nada do que você disse na primeira sessão é dito duas vezes.
+A linha fica `[ ]` com o rascunho ao lado: um rascunho em `work/` não é uma definição, e o `/apply` só constrói uma linha que o `/propose` marcou `[>]` ([capítulo 14](14-queue-states.md)).
 Dizer "defina agora" recebe a mesma resposta: a regra do kit é o `/propose` numa sessão nova, cuja janela contém o arquivo de regras, os documentos e o rascunho, e nada desta conversa, então a página guarda só o que ficou por escrito, que é tudo o que o `/apply` terá.
 Um host pode mesmo assim rodar o comando aqui quando você o nomeia na sua mensagem, e alguns se oferecem para isso; a página seria escrita com tudo o que foi dito nesta sessão ainda na janela, então abra uma sessão nova.
 
