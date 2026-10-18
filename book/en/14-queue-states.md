@@ -23,14 +23,14 @@ focus-kit answers both with six marks, each set at the moment the work changes.
 | `[>]` | defined: the page exists | `/propose`, when the page is complete |
 | `[*]` | being built | `/apply`, when it starts |
 | `[x]` | done: the page is in `work/done/` | `/apply`, with verify green |
-| `[?]` | waiting | any session, in the three cases below |
+| `[?]` | waiting | any session, in the four cases below |
 
 This is the lending library's first milestone on one afternoon, written for this chapter, with every mark in use:
 
 ```
 [x] catalog         the librarian registers books and their copies
 [x] members         the librarian registers and suspends members
-[*] lend-book       the librarian lends a copy, the rules may refuse
+[*] lend-book       the librarian lends a copy, or a rule refuses
 [>] search-catalog  a member searches the catalog
 [~] reservations    a member reserves a copy that is on loan
 [ ] my-loans        a member sees their loans · after lend-book
@@ -69,11 +69,12 @@ Two lines that both change `src/features/loans/`, as `lend-book` and a line to r
 
 ## Waiting: `[?]`
 
-A line waits in three cases:
+A line waits in four cases:
 
 * **The person says it is blocked.** The library has not bought its barcode scanners yet, so the librarian asks to hold `scan-copy`: `· resume: propose · blocked: no scanners yet`.
 * **An answer was asked and not given.** `due-reminder` needs a text-message provider, the question went to the library's director, and nobody has answered: `· resume: propose · blocked: what provider?`.
 * **Another line must be done first, found after work started.** In the middle of `/apply my-loans`, the build finds that `lend-book` sets the due date one day early at the end of a month; the fix becomes a `[ ]` line above it, `fix-due-date`, and `my-loans` waits: `· resume: apply · blocked: after fix-due-date`.
+* **A milestone review's code reading missed part of its range.** The review that closes a milestone reads, on the person's word, every change since the milestone's base, split into areas with one reader each that lists the paths it read ([chapter 15](15-closing-a-milestone.md)), and a reader that read part of its area reports the same way as one that read it all, so when `m1-review`'s readers list no path of `src/features/catalog/`, the line waits with what was read as its reason: `· resume: apply · blocked: read all but catalog/`.
 
 The reason goes at the end of the line, in words, `· blocked: <reason>`, or as the lines that must be `[x]` first, `· blocked: after <slug>, <slug>`.
 Before it goes the phase to resume, `· resume: propose` for a line that was `[ ]` or `[~]`, `· resume: apply` for one that was `[>]` or `[*]`, so the session that takes the line up again knows which command it needs.
@@ -128,7 +129,7 @@ The queue also says which lines can run together: without that, a person who wan
 * Six marks, `[ ]` not defined, `[~]` being defined, `[>]` defined, `[*]` being built, `[x]` done, `[?]` waiting, each changed when the work changes, not when a command ends: `/propose` sets `[~]` and `[>]`, `/apply` sets `[*]` and `[x]`, any session sets `[?]`.
 * A line is free when it is not `[x]` nor `[?]` and every line its `after` names is `[x]`; the next delivery is the first free line no session holds, and free lines that touch different files can run at the same time.
 * `· after` is an order written with the line, which keeps its mark; `[?]` with `· blocked: after` is a wait found after work started.
-* A line waits when the person says so, when an answer was asked and not given, or when work already started finds another line must be done first, with the phase to resume and the reason at its end, `· resume: apply · blocked: after <slug>`; it leaves `[?]` by that phase when the reason is resolved, and until then `/propose` and `/apply` stop on it, as on a line not free.
+* A line waits when the person says so, when an answer was asked and not given, when work already started finds another line must be done first, or when a milestone review's code reading missed part of its range, with the phase to resume and the reason at its end, `· resume: apply · blocked: after <slug>`; it leaves `[?]` by that phase when the reason is resolved, and until then `/propose` and `/apply` stop on it, as on a line not free.
 * The queue is a kanban board, a column per mark; on three columns, Doing holds `[~]`, `[>]` and `[*]`, and a `[?]` card is tagged blocked where it was.
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", accessed 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>

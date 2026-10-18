@@ -23,7 +23,7 @@ O focus-kit responde aos dois com seis marcas, cada uma posta no momento em que 
 | `[>]` | definida: a página existe | o `/propose`, quando a página está completa |
 | `[*]` | sendo construída | o `/apply`, quando começa |
 | `[x]` | feita: a página está em `work/done/` | o `/apply`, com a verificação verde |
-| `[?]` | esperando | qualquer sessão, nos três casos abaixo |
+| `[?]` | esperando | qualquer sessão, nos quatro casos abaixo |
 
 Este é o primeiro marco da biblioteca em uma tarde, escrito para este capítulo, com todas as marcas em uso.
 Os sufixos `· after`, `· resume:` e `· blocked:` ficam em inglês, como o kit os escreve:
@@ -31,10 +31,10 @@ Os sufixos `· after`, `· resume:` e `· blocked:` ficam em inglês, como o kit
 ```
 [x] catalogo          a bibliotecária cadastra livros e exemplares
 [x] membros           a bibliotecária cadastra e suspende membros
-[*] emprestar-livro   a bibliotecária empresta, e as regras podem recusar
+[*] emprestar-livro   a bibliotecária empresta um exemplar ou a regra nega
 [>] buscar-catalogo   um membro busca no catálogo
 [~] reservas          um membro reserva um exemplar emprestado
-[ ] meus-emprestimos  o membro vê os dele · after emprestar-livro
+[ ] meus-emprestimos  o membro vê seus empréstimos · after emprestar-livro
 [?] aviso-prazo       um aviso · resume: propose · blocked: qual provedor?
 [ ] m1-review         o marco conferido contra o parágrafo dele
 ```
@@ -70,11 +70,12 @@ O [capítulo 19](19-worktrees.md) mostra como duas sessões rodam em uma pasta, 
 
 ## Esperando: `[?]`
 
-Uma linha espera em três casos:
+Uma linha espera em quatro casos:
 
 * **A pessoa diz que ela está travada.** A biblioteca ainda não comprou os leitores de código de barras, então a bibliotecária pede para segurar `escanear-exemplar`: `· resume: propose · blocked: sem leitores ainda`.
 * **Uma resposta foi pedida e não veio.** `aviso-prazo` precisa de um provedor de SMS, a pergunta foi para a diretora da biblioteca, e ninguém respondeu: `· resume: propose · blocked: qual provedor?`.
 * **Outra linha precisa ser feita antes, descoberto depois de o trabalho começar.** No meio de `/apply meus-emprestimos`, a construção descobre que `emprestar-livro` põe a data de devolução um dia antes no fim de um mês; a correção vira uma linha `[ ]` acima dela, `corrigir-devolucao`, e `meus-emprestimos` espera: `· resume: apply · blocked: after corrigir-devolucao`.
+* **A leitura do código de uma revisão de marco não cobriu parte do seu intervalo.** A revisão que fecha um marco lê, com a palavra da pessoa, toda mudança desde a base do marco, dividida em áreas com um leitor cada que lista os caminhos que leu ([capítulo 15](15-closing-a-milestone.md)), e um leitor que leu parte da sua área aponta do mesmo jeito que um que a leu inteira, então quando os leitores de `m1-review` não listam nenhum caminho de `src/features/catalogo/`, a linha espera com o que foi lido como motivo: `· resume: apply · blocked: lidos todos menos catalogo/`.
 
 O motivo vai no fim da linha, em palavras, `· blocked: <motivo>`, ou como as linhas que precisam estar `[x]` antes, `· blocked: after <slug>, <slug>`.
 Antes dele vai a fase de retomada, `· resume: propose` para uma linha que estava `[ ]` ou `[~]`, `· resume: apply` para uma que estava `[>]` ou `[*]`, para que a sessão que retoma a linha saiba de qual comando ela precisa.
@@ -129,7 +130,7 @@ A fila também diz quais linhas podem rodar juntas: sem isso, uma pessoa que que
 * Seis marcas, `[ ]` não definida, `[~]` sendo definida, `[>]` definida, `[*]` sendo construída, `[x]` feita, `[?]` esperando, cada uma mudada quando o trabalho muda, não quando um comando termina: o `/propose` põe `[~]` e `[>]`, o `/apply` põe `[*]` e `[x]`, qualquer sessão põe `[?]`.
 * Uma linha está livre quando não está `[x]` nem `[?]` e toda linha que o `after` dela nomeia está `[x]`; a próxima entrega é a primeira linha livre que nenhuma sessão pegou, e linhas livres que mexem em arquivos diferentes podem rodar ao mesmo tempo.
 * `· after` é uma ordem escrita com a linha, que mantém a sua marca; `[?]` com `· blocked: after` é uma espera descoberta depois de o trabalho começar.
-* Uma linha espera quando a pessoa diz, quando uma resposta foi pedida e não veio, ou quando o trabalho já começado descobre que outra linha precisa ser feita antes, com a fase de retomada e o motivo no fim, `· resume: apply · blocked: after <slug>`; ela sai de `[?]` por essa fase quando o motivo se resolve, e até lá o `/propose` e o `/apply` param nela, como numa linha que não está livre.
+* Uma linha espera quando a pessoa diz, quando uma resposta foi pedida e não veio, quando o trabalho já começado descobre que outra linha precisa ser feita antes, ou quando a leitura do código de uma revisão de marco não cobriu parte do seu intervalo, com a fase de retomada e o motivo no fim, `· resume: apply · blocked: after <slug>`; ela sai de `[?]` por essa fase quando o motivo se resolve, e até lá o `/propose` e o `/apply` param nela, como numa linha que não está livre.
 * A fila é um quadro kanban, uma coluna por marca; em três colunas, Fazendo guarda `[~]`, `[>]` e `[*]`, e um cartão `[?]` é etiquetado como travado onde estava.
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", acesso em 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>
