@@ -29,6 +29,9 @@ Alguns hosts buscam uma página web por uma ferramenta que entrega ao agente um 
 A instalação não coloca nada em stage nem faz commit.
 Você lê o que ela escreveu e faz o commit você mesmo, como em toda mudança que o agente faz (capítulo 13).
 
+O agente termina uma primeira instalação dizendo o que vem depois: num repositório sem código, abra uma sessão nova e digite `/brainstorm`; num repositório com código, abra uma sessão nova e digite `/analyze` (capítulo 9).
+Ele escreve o comando como o seu host o invoca, sem slug, já que esses dois não levam nenhum: no Codex, `$brainstorm` ou `$analyze`, e o Copilot não pede slug.
+
 ## O que a instalação nunca toca, e como atualizar
 
 O arquivo de setup escreve os arquivos do kit e mais nada.
@@ -103,7 +106,7 @@ O que uma nova execução compara é o próprio passo do arquivo de setup, que c
 
 ## Como cada host encontra os comandos
 
-Um host precisa de duas coisas do repositório: o arquivo de regras, `AGENTS.md`, e os comandos, cada um com o slug que você digita depois dele, o nome da entrega em `work/<slug>.md` (capítulo 12).
+Um host precisa de duas coisas do repositório: o arquivo de regras, `AGENTS.md`, e os comandos, o `/propose` e o `/apply` cada um com o slug que você digita depois dele, o nome da entrega em `work/<slug>.md` (capítulo 12).
 O arquivo de setup escreve o que cada host abaixo precisa:
 
 | Host | Lê as regras de | Lê os comandos de | Você digita |
@@ -126,7 +129,7 @@ Para o Cursor e o Devin Desktop, nenhum dos dois fornecedores diz na documentaç
 O Devin Desktop também lê `.windsurf/skills/`, a pasta do seu nome anterior;[^devin-skills] o arquivo de setup não escreve nada ali e, numa atualização, remove dela os arquivos do próprio kit, para que o host nunca encontre uma cópia mais velha de um comando ao lado da atual em `.agents/skills/`, e um arquivo seu ali é relatado e mantido.
 
 Todo comando termina dizendo o próximo, escrito como o host que o roda o invoca, a última coluna da tabela.
-O arquivo de setup cita o `/brainstorm` ou o `/analyze`, o `/propose` cita o `/apply` com o slug da página, e o `/apply` cita a próxima linha da fila.
+O arquivo de setup cita o `/brainstorm` ou o `/analyze`, para rodar numa sessão nova, o `/propose` cita o `/apply` com o slug da página, e o `/apply` cita a próxima linha da fila.
 Na biblioteca de empréstimos, depois de `/propose emprestar-livro`, o Claude Code diz para você rodar `/apply emprestar-livro` numa sessão nova, e o Codex diz para rodar `$apply emprestar-livro`.
 Os arquivos do kit são os mesmos nos dois; a forma segue o host que os roda.
 

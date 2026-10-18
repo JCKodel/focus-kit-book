@@ -27,7 +27,7 @@ In another host, a command takes the form of chapter 8's table:
 | Devin Desktop, formerly Windsurf | `/propose` |
 | OpenCode, Zed | by asking for the skill |
 
-`/brainstorm`, `/analyze` and `/apply` take the same form as `/propose`.
+`/apply` takes the same form as `/propose`; `/brainstorm` and `/analyze` take it with no slug, `$brainstorm` in Codex.
 
 One choice is yours before the first `/propose`: the git strategy, trunk, a branch per delivery or a worktree per delivery.
 `/brainstorm` and `/analyze` ask it with a default and write your answer into docs/05: trunk for one person, and on a project with code, what the repository already does.
@@ -36,9 +36,9 @@ One choice is yours before the first `/propose`: the git strategy, trunk, a bran
 ## A new project
 
 1. Open Claude Code at the root of the empty repository and say the sentence above.
-   You see the kit's four commands in `.claude/skills/`, nothing staged or committed, and the agent naming `/brainstorm` as the next step.
+   You see the kit's four commands in `.claude/skills/`, nothing staged or committed, and the agent naming `/brainstorm` as the next step, in a fresh session.
    Taught in [chapter 8](08-install-and-hosts.md), "Install".
-2. Type `/brainstorm` and answer its questions, one subject at a time; "your call" keeps the agent's default.
+2. Open a fresh session, not the one that ran the install, and type `/brainstorm`, then answer its questions, one subject at a time; "your call" keeps the agent's default.
    You see docs/00 to 06, `docs/adr/`, `AGENTS.md`, `CLAUDE.md` and `work/done/` written, the queue shown, and the agent naming `/propose <slug>` for the queue's first line, in a fresh session.
    Taught in [chapter 9](09-starting-a-project.md), "`/brainstorm`: a new project".
 3. Read the documents against chapter 9's checklist, ask the agent for every fix in the same session, then commit them with the kit's files: `git add -A`, then `git commit -m "Add the kit and the documents from /brainstorm"`, a message written for this chapter, a subject alone, since there is no page yet for its last line.
@@ -65,12 +65,12 @@ A project left after step 3 is ready for the kit: any later session reads its do
 ## An existing project
 
 1. Install as in the new project's step 1, at the root of the repository with code.
-   You see the same kit files, and no file of your code changed.
+   You see the same kit files, no file of your code changed, and the agent naming `/analyze` as the next step, in a fresh session.
    Taught in [chapter 8](08-install-and-hosts.md), "What the install never touches, and how to update".
 2. Put what the code cannot say in a folder `context/` at the root, as it is: proposals, contracts, emails, meeting transcripts, tickets.
    You see one folder beside the code, with nothing sorted or summarized.
    Taught in [chapter 17](17-project-as-assistant.md), "The context folder".
-3. Type `/analyze` and answer its one round; each default is what the code already does.
+3. Open a fresh session, not the one that ran the install, and type `/analyze`, then answer its one round; each default is what the code already does.
    You see the change shown before it is written, then the documents of the new project's step 2, a manual in `docs/manuals/` for each thing a person already does by hand, every inferred statement marked observed, and the agent naming `/propose <slug>`.
    Taught in [chapter 9](09-starting-a-project.md), "`/analyze`: an existing project".
 4. Check every observed statement against the code, opening the file it names, then review and commit them as in the new project's step 3, from a tree with no change of yours, with `/analyze` in the message.
@@ -109,7 +109,7 @@ Anyone on the team, developer or not, goes from an empty session to a first deli
 ## Key points
 
 * Before the first `/propose` you need a repository, a host, the kit installed with one sentence, and an answer to the git question; trunk fits one person.
-* A new project: install, `/brainstorm`, review and commit the documents, `/propose` the first line, read the page, `/apply` in a fresh session, read the staged change, commit.
-* An existing project: `context/` first, then `/analyze`, every observed statement checked against the code; the first delivery is the smallest change the first milestone needs, checked by the verify command `/analyze` observed.
+* A new project: install, `/brainstorm` in a fresh session, review and commit the documents, `/propose` the first line, read the page, `/apply` in a fresh session, read the staged change, commit.
+* An existing project: `context/` first, then `/analyze` in a fresh session, every observed statement checked against the code; the first delivery is the smallest change the first milestone needs, checked by the verify command `/analyze` observed.
 * The documents are the project's first commit, and a project stopped there is ready for any later session.
 * A pilot stops when the pages go unread, the queue is not the plan or "done" is said without verify; the documents stay.

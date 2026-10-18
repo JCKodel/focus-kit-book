@@ -29,6 +29,9 @@ Some hosts fetch a web page through a tool that hands the agent a summary of the
 The install does not stage or commit.
 You read what it wrote and commit it yourself, as with every change the agent makes (chapter 13).
 
+The agent ends a first install by naming what comes next: on a repository without code, open a fresh session and type `/brainstorm`; on a repository with code, open a fresh session and type `/analyze` (chapter 9).
+It writes the command as your host invokes it, with no slug, since these two take none: in Codex, `$brainstorm` or `$analyze`, and Copilot asks for no slug.
+
 ## What the install never touches, and how to update
 
 The setup file writes the kit's files and nothing else.
@@ -101,7 +104,7 @@ What a rerun compares is the setup file's own step, which names the sections of 
 
 ## How each host finds the commands
 
-A host needs two things from the repository: the rules file, `AGENTS.md`, and the commands, each with the slug you type after it, the name of the delivery in `work/<slug>.md` (chapter 12).
+A host needs two things from the repository: the rules file, `AGENTS.md`, and the commands, `/propose` and `/apply` each with the slug you type after it, the name of the delivery in `work/<slug>.md` (chapter 12).
 The setup file writes what every host below needs:
 
 | Host | Reads the rules from | Reads the commands from | You type |
@@ -124,7 +127,7 @@ For Cursor and Devin Desktop, neither vendor's documentation says whether a slug
 Devin Desktop also reads `.windsurf/skills/`, the folder of its former name;[^devin-skills] the setup file writes nothing there and, on an update, removes the kit's own files from it, so the host never finds an older copy of a command beside the current one in `.agents/skills/`, and a file of yours there is reported and left.
 
 Every command ends by naming the next one, written as the host running it invokes it, the table's last column.
-The setup file names `/brainstorm` or `/analyze`, `/propose` names `/apply` with the page's slug, and `/apply` names the queue's next line.
+The setup file names `/brainstorm` or `/analyze`, to run in a fresh session, `/propose` names `/apply` with the page's slug, and `/apply` names the queue's next line.
 On the lending library, after `/propose lend-book`, Claude Code tells you to run `/apply lend-book` in a fresh session, and Codex tells you to run `$apply lend-book`.
 The kit's files are the same in both; the form follows the host that runs them.
 

@@ -27,7 +27,7 @@ Em outro host, um comando toma a forma da tabela do capítulo 8:
 | Devin Desktop, antes Windsurf | `/propose` |
 | OpenCode, Zed | pedindo a skill |
 
-`/brainstorm`, `/analyze` e `/apply` tomam a mesma forma que o `/propose`.
+O `/apply` toma a mesma forma que o `/propose`; o `/brainstorm` e o `/analyze` a tomam sem slug, `$brainstorm` no Codex.
 
 Uma escolha é sua antes do primeiro `/propose`: a estratégia de git, trunk, um branch por entrega ou um worktree por entrega.
 O `/brainstorm` e o `/analyze` perguntam com um padrão e escrevem a sua resposta no docs/05: trunk para uma pessoa, e, num projeto com código, o que o repositório já faz.
@@ -36,9 +36,9 @@ O [capítulo 18](18-git-essentials.md) e o [capítulo 19](19-worktrees.md) ensin
 ## Um projeto novo
 
 1. Abra o Claude Code na raiz do repositório vazio e diga a frase acima.
-   Você vê os quatro comandos do kit em `.claude/skills/`, nada em stage nem com commit, e o agente nomeando o `/brainstorm` como o próximo passo.
+   Você vê os quatro comandos do kit em `.claude/skills/`, nada em stage nem com commit, e o agente nomeando o `/brainstorm` como o próximo passo, numa sessão nova.
    Ensinado no [capítulo 8](08-install-and-hosts.md), "Instalação".
-2. Digite `/brainstorm` e responda às perguntas dele, um assunto por vez; "your call" (você decide) mantém o padrão do agente.
+2. Abra uma sessão nova, não a que rodou a instalação, digite `/brainstorm` e responda às perguntas dele, um assunto por vez; "your call" (você decide) mantém o padrão do agente.
    Você vê o docs/00 ao 06, `docs/adr/`, `AGENTS.md`, `CLAUDE.md` e `work/done/` escritos, a fila mostrada, e o agente nomeando o `/propose <slug>` para a primeira linha da fila, numa sessão nova.
    Ensinado no [capítulo 9](09-starting-a-project.md), "`/brainstorm`: um projeto novo".
 3. Leia os documentos contra a lista de conferência do capítulo 9, peça ao agente cada correção na mesma sessão, e então faça o commit deles com os arquivos do kit: `git add -A`, depois `git commit -m "Adicionar o kit e os documentos do /brainstorm"`, uma mensagem escrita para este capítulo, só o assunto, já que ainda não há página para a sua última linha.
@@ -65,12 +65,12 @@ Um projeto deixado depois do passo 3 está pronto para o kit: qualquer sessão p
 ## Um projeto existente
 
 1. Instale como no passo 1 do projeto novo, na raiz do repositório com código.
-   Você vê os mesmos arquivos do kit, e nenhum arquivo do seu código mudou.
+   Você vê os mesmos arquivos do kit, nenhum arquivo do seu código alterado, e o agente nomeando o `/analyze` como o próximo passo, numa sessão nova.
    Ensinado no [capítulo 8](08-install-and-hosts.md), "O que a instalação nunca toca, e como atualizar".
 2. Ponha o que o código não diz numa pasta `context/` na raiz, como está: propostas, contratos, e-mails, transcrições de reuniões, tickets.
    Você vê uma pasta ao lado do código, sem nada ordenado nem resumido.
    Ensinado no [capítulo 17](17-project-as-assistant.md), "A pasta de contexto".
-3. Digite `/analyze` e responda à única rodada dele; cada padrão é o que o código já faz.
+3. Abra uma sessão nova, não a que rodou a instalação, digite `/analyze` e responda à única rodada dele; cada padrão é o que o código já faz.
    Você vê a mudança mostrada antes de ser escrita, depois os documentos do passo 2 do projeto novo, um manual em `docs/manuals/` para cada coisa que uma pessoa já faz à mão, cada afirmação deduzida marcada como observada, e o agente nomeando o `/propose <slug>`.
    Ensinado no [capítulo 9](09-starting-a-project.md), "`/analyze`: um projeto existente".
 4. Confira cada afirmação observada contra o código, abrindo o arquivo que ela cita, e então revise e faça o commit como no passo 3 do projeto novo, a partir de uma árvore sem mudança sua, com `/analyze` na mensagem.
@@ -109,7 +109,7 @@ Qualquer pessoa do time, desenvolvedora ou não, vai de uma sessão vazia a uma 
 ## Pontos-chave
 
 * Antes do primeiro `/propose` você precisa de um repositório, de um host, do kit instalado com uma frase e de uma resposta à pergunta de git; trunk serve a uma pessoa.
-* Um projeto novo: instalar, `/brainstorm`, revisar os documentos e fazer o commit deles, `/propose` da primeira linha, ler a página, `/apply` numa sessão nova, ler a mudança em stage, fazer o commit.
-* Um projeto existente: `context/` primeiro, depois o `/analyze`, cada afirmação observada conferida contra o código; a primeira entrega é a menor mudança de que o primeiro marco precisa, conferida pelo comando de verificação que o `/analyze` observou.
+* Um projeto novo: instalar, `/brainstorm` numa sessão nova, revisar os documentos e fazer o commit deles, `/propose` da primeira linha, ler a página, `/apply` numa sessão nova, ler a mudança em stage, fazer o commit.
+* Um projeto existente: `context/` primeiro, depois o `/analyze` numa sessão nova, cada afirmação observada conferida contra o código; a primeira entrega é a menor mudança de que o primeiro marco precisa, conferida pelo comando de verificação que o `/analyze` observou.
 * Os documentos são o primeiro commit do projeto, e um projeto parado ali está pronto para qualquer sessão posterior.
 * Um piloto para quando as páginas ficam sem leitura, a fila não é o plano ou "pronto" é dito sem a verificação; os documentos ficam.

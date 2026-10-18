@@ -463,7 +463,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repo
 [>] ch21-done-when           chapter 21: /apply ticks every Done when item, as the kit says; both editions
 [>] ch17-context-read        chapter 17: /brainstorm and /analyze read `context/` whole, and a later item is read on the person's request and turned into the documents; both editions
 [x] ch14-back-to-open        chapter 14: a line returns to `[ ]` only as the kit says, `resume: propose` with its draft kept; both editions · after kit-2026-10-18-1
-[>] ch08-10-fresh-start      chapters 8 and 10: /brainstorm and /analyze run in a fresh session after the install; both editions
+[x] ch08-10-fresh-start      chapters 8 and 10: /brainstorm and /analyze run in a fresh session after the install; both editions
 [>] ch19-batch-staging       chapter 19: in a batch, /propose stages nothing, as the kit's /propose does; both editions
 [>] ch18-kit-branches        chapter 18: git-flow and the squash merge are told as strategies outside the kit, whose branch is named after the slug and reverted in one merge; both editions
 [>] ch06-23-kit-rules        chapters 6 and 23: the kit's rules as SETUP.md §2 lists them; both editions
