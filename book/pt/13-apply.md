@@ -53,7 +53,9 @@ Em um branch da entrega ele pode colocar o trabalho parcial em stage para você 
 
 ### A verificação e a prova
 
-Ele roda o comando de verificação até ficar verde.
+Ele escreve os testes que o docs/04 cita para cada peça (capítulo 5); um lento demais para a verificação vai para os testes lentos, cujo comando o slot Verify do docs/05 cita e a revisão de marco roda (capítulo 15), e o `/apply` avisa você, porque um teste movido em silêncio pareceria cobertura perdida.
+Movê-lo não apaga teste nenhum nem dispensa a própria prova desta entrega, e não muda onde uma regra mora, em um caso de uso puro, nem o nível de teste que prova cada cenário.
+Em seguida ele roda o comando de verificação até ficar verde.
 Depois prova a entrega do jeito que o docs/05 diz: um screenshot contra o design, uma execução ponta a ponta, ou uma checagem à mão.
 Ele lista o que diverge da referência e corrige, até restar só o que ele consegue justificar.
 Uma falha faz parte da prova e é registrada, nunca escondida.
@@ -166,7 +168,7 @@ Leia a mudança contra a página:
 
 * Cada linha de Comportamento foi atendida, cada uma pelo seu teste ou por uma checagem registrada?
 * Foi construída alguma coisa que a página não pediu: um arquivo, uma dependência, uma camada?
-* A verificação e a prova ficam verdes para você?
+* A verificação e a prova ficam verdes para você, e, se um teste foi para os testes lentos, o agente avisou, e o comando dos testes lentos no slot Verify o roda?
 * Os documentos que a entrega mudou foram atualizados, e só eles?
 * O diff em stage tem só esta entrega, e o agente avisou o que já estava em stage?
 * A mensagem sugerida no bloco `commit` no fim da página está certa: o assunto, os tópicos, a última linha?

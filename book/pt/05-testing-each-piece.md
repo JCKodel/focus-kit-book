@@ -37,8 +37,8 @@ Manter os testes em ordem, incluindo quanto tempo eles levam, é trabalho seu; o
 É mais um motivo para manter uma regra em um caso de uso puro: o teste dele é uma chamada com dados, o teste mais rápido do projeto.
 Testes ponta a ponta, e qualquer teste que precise da aplicação ou de uma rede, só são escritos onde provam algo que os rápidos não conseguem.
 O que toda entrega roda é o comando de verificação do projeto, o comando que precisa passar antes de uma entrega ser dada como pronta, e você decide o que ele roda.
-Um teste lento pode ficar fora dele e rodar em outro comando, que você mesmo roda, por exemplo antes de um marco fechar.
-Um marco é um grupo de entregas com um parágrafo que diz o que é verdade quando ele fecha.
+Um teste lento que prova o que os rápidos não conseguem pode ficar fora dele, e então é mantido, não apagado: ao lado do comando de verificação, o projeto escreve o comando que roda os testes lentos e o que eles provam, ou que não há nenhum.
+Um marco é um grupo de entregas com um parágrafo que diz o que é verdade quando ele fecha, e a revisão que o fecha roda esses testes lentos; um que falha deixa o marco aberto até a correção dele estar pronta.
 
 ## O que é uma implementação falsa
 

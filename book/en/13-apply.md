@@ -53,7 +53,9 @@ On a delivery branch it may stage the partial work for you to commit there, and 
 
 ### Verify and the proof
 
-It runs the verify command until it is green.
+It writes the tests docs/04 names for each piece (chapter 5); one too slow for verify goes with the slow tests, whose command docs/05's Verify slot names and the milestone review runs (chapter 15), and `/apply` tells you so, because a test moved there in silence would look like coverage dropped.
+Moving it deletes no test and waives none of this delivery's own proof, and it changes neither where a rule lives, in a pure use case, nor the level of test that proves each scenario.
+It then runs the verify command until it is green.
 Then it proves the delivery the way docs/05 says: a screenshot against the design, a run from end to end, or a check by hand.
 It lists what diverges from the reference and fixes it, until only what it can justify remains.
 A failure is part of the proof and is recorded, never hidden.
@@ -166,7 +168,7 @@ Read it against the page:
 
 * Is every Behaviour line answered, each by its test or a recorded check?
 * Is anything built that the page did not ask for: a file, a dependency, a layer?
-* Do verify and the proof run green for you?
+* Do verify and the proof run green for you, and if a test went to the slow tests, did the agent say so, and does the slow-test command in the Verify slot run it?
 * Did the documents the delivery changed get updated, and only those?
 * Does the staged diff hold only this delivery, and did the agent report anything already staged?
 * Is the suggested message in the `commit` block at the end of the page right: the subject, the bullets, the last line?

@@ -454,7 +454,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repo
 ```
 [x] kit-2026-10-18-1         reinstall the kit at 2026.10.18.1 and apply its migration report to docs/05 §§2, 4, 5, 6 and 8, docs/04, AGENTS.md and the skills · after m18-review
 [x] ch08-update-2026-10-18-1 chapter 8: the update example and its report at 2026.10.18.1, and the Claude Code row that reads `AGENTS.md` alone only without a `CLAUDE.md`; both editions · after kit-2026-10-18-1
-[>] ch05-13-slow-tests       chapters 5, 7, 13 and 15: verify fast on every delivery, the slow tests named in the Verify slot and run by the milestone review, and /apply saying when a test is too slow for verify; both editions · after kit-2026-10-18-1
+[x] ch05-13-slow-tests       chapters 5, 7, 13 and 15: verify fast on every delivery, the slow tests named in the Verify slot and run by the milestone review, and /apply saying when a test is too slow for verify; both editions · after kit-2026-10-18-1
 [>] ch11-next-milestone      chapters 11, 14 and 15: a line no clause of the current milestone needs goes under the next milestone, and a review's finding stays in its own; both editions · after kit-2026-10-18-1
 [>] propose-same-session     chapters 8 to 13 and 17: /propose runs in the session that asked for the change or in a fresh one, and /apply always in a fresh one; both editions · after kit-2026-10-18-1
 [>] apply-use-first          chapters 10 and 13, and where chapters 18, 19, 22 and 23 describe the person's review: /apply's next steps start with using what the delivery changed; both editions · after kit-2026-10-18-1

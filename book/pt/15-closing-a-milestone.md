@@ -1,6 +1,6 @@
 # 15. Fechando um marco
 
-Depois deste capítulo você consegue fechar um marco: planejar a sua revisão como a última linha do marco, testar à mão cada cláusula do seu parágrafo, e transformar cada achado em uma linha `[ ]` no mesmo marco, sob a revisão.
+Depois deste capítulo você consegue fechar um marco: planejar a sua revisão como a última linha do marco, testar à mão cada cláusula do seu parágrafo, rodar os testes lentos que o projeto deixa fora da verificação, e transformar cada achado em uma linha `[ ]` no mesmo marco, sob a revisão.
 Você também consegue dizer o que essa revisão lê, o parágrafo à mão e, com a palavra da pessoa, o código alterado desde a base do marco, dividido por áreas com um agente somente leitura em cada uma e um conferente antes que a pessoa veja um candidato, e por que os seus achados não têm revisão própria.
 
 ## O problema
@@ -16,6 +16,7 @@ O kit fecha essa brecha com uma regra, o §8 do documento de processo que ele es
 Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, uma entrega como as outras: o `/propose` escreve a sua página, e o `/apply` a executa.
 A página dela pega o parágrafo do marco cláusula por cláusula e escreve, para cada uma, qual entrega a atende e como uma pessoa a testa.
 Ela não corrige nada.
+Ela roda os testes lentos que o slot Verify do docs/05 cita, os que ficam fora da verificação porque demoram demais para toda entrega, quando o slot cita algum; um que falha é um achado, então o marco não fecha enquanto a linha dele estiver aberta.
 A revisão também lê o código, o único olhar sobre o todo em vez de sobre uma entrega, porque cada página pode estar certa e o todo errado.
 A página dela cita como base o commit da revisão do marco anterior, ou, para um primeiro marco, o primeiro commit do projeto, e lista, pelas áreas que o slot Milestone review (revisão de marco) do docs/05 cita, os caminhos que o intervalo desde ele alterou.
 O intervalo a partir do commit da revisão anterior guarda todo commit feito depois dele: todas as correções dos achados dessa revisão, que fecham depois dele, e as entregas do marco seguinte que entraram depois dele.
@@ -154,7 +155,7 @@ E como cada achado vira uma linha, o time vê o custo das brechas do marco na fi
 ## Pontos-chave
 
 * Uma revisão de marco olha para o que as entregas somam, o que nenhuma revisão de uma página ou de uma mudança em stage consegue ver.
-* Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, rodada com o `/propose` e o `/apply`: a página dela cita como base o commit da revisão do marco anterior, ou o primeiro commit do projeto para um primeiro marco, escreve para cada cláusula do parágrafo a entrega que a atende e como uma pessoa a testa, e não corrige nada.
-* A pessoa testa cada cláusula à mão e, com a palavra da pessoa, a sessão lê o intervalo desde a base pelas áreas do slot, um agente somente leitura em cada uma listando os caminhos que leu, e um conferente marca cada candidato; uma cláusula que nenhuma entrega atende, uma que falha nas mãos da pessoa, ou um candidato que a pessoa confirma é um achado.
+* Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, rodada com o `/propose` e o `/apply`: a página dela cita como base o commit da revisão do marco anterior, ou o primeiro commit do projeto para um primeiro marco, escreve para cada cláusula do parágrafo a entrega que a atende e como uma pessoa a testa, e não corrige nada; a revisão roda os testes lentos que o slot Verify cita.
+* A pessoa testa cada cláusula à mão e, com a palavra da pessoa, a sessão lê o intervalo desde a base pelas áreas do slot, um agente somente leitura em cada uma listando os caminhos que leu, e um conferente marca cada candidato; uma cláusula que nenhuma entrega atende, uma que falha nas mãos da pessoa, um teste lento que falha, ou um candidato que a pessoa confirma é um achado.
 * Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, nunca uma correção no meio do marco seguinte; o marco fecha quando essas linhas estão `[x]`.
 * As linhas de achado não têm revisão própria: cada uma passa pela sua própria página, pela sua prova e pelo commit da pessoa.

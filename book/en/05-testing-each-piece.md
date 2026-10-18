@@ -37,8 +37,8 @@ Keeping the tests in order, run time included, is your job; the agent will not d
 It is one more reason to keep a rule in a pure use case: its test is a call with data, the fastest test the project has.
 End-to-end tests, and any test that needs the application or a network, are written only where they prove something the fast ones cannot.
 What every delivery runs is the project's verify command, the command that must pass before a delivery is called done, and you decide what it runs.
-A slow test can stay out of it and run in another command, which you run yourself, for example before a milestone closes.
-A milestone is a group of deliveries with a paragraph saying what is true when it closes.
+A slow test that proves what the fast ones cannot may stay out of it, and is then kept, not deleted: next to the verify command, the project writes the command that runs the slow tests and what they prove, or that there are none.
+A milestone is a group of deliveries with a paragraph saying what is true when it closes, and the review that closes it runs those slow tests; one that fails keeps the milestone open until its fix is done.
 
 ## What a fake is
 
