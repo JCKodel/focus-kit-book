@@ -52,10 +52,33 @@
 
 **Done when.**
 
-* [ ] Both editions written: the note box and the gain sentence as Behaviour says.
-* [ ] Chapter 4 still opens with its value, keeps its gain said once, no filler and nothing useful cut.
-* [ ] Every number sourced: none added.
-* [ ] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions written: the note box and the gain sentence as Behaviour says.
+* [x] Chapter 4 still opens with its value, keeps its gain said once, no filler and nothing useful cut.
+* [x] Every number sourced: none added.
+* [x] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author: left to the driver, who builds the book once at the end of the batch.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block: the page moved here; the driver marks the line `[x]`, stages and commits.
+
+**Proof.** `grep -n "Note\." book/en/04-focus.md` and `grep -n "Nota\." book/pt/04-focus.md` print one line each, line 7, after the three opening sentences and before `## The problem` / `## O problema`. `head -5` of both editions is unchanged. `git diff -- book/en/04-focus.md book/pt/04-focus.md` shows two hunks per edition, the box (four added lines with the blank line) and one sentence added at the end of the gain section; nothing else.
+
+`make verify` green: build, parity, em dash, prose, width, links, disclosure. A first run failed only on links, at the web.archive.org note of chapter 24 (connection refused), outside this delivery; the rerun after the review fixes was green, links included.
+
+**Divergences.** From the Behaviour's exact words, on the review's suggestions: the two principles are in parentheses, "only its two principles (vertical slices and exceptions as values) or neither", so the box reads as three answers and not five; the gain says "the same pattern" (pt "o mesmo padrão") where the page says "one pattern", since the gain needs every project on the same one.
+
+**Omissions.** The box leaves out that on existing code the default is what the code already does; decision 2 allows a few words, and chapter 7 says how the kit records the choice.
+
+**Decisions taken in /apply.** The box refers to the gain section by its name in quotation marks, "What the team gains" (pt "O que o time ganha"), not by a link. The gain sentence opens "And I see one more gain beyond a single project" (pt "E eu vejo mais um ganho além de um projeto só"), the first person decision 5 asks for.
+
+**Review.** Delivery review by a read-only Opus agent on the diff of both chapter 4 files, against the page, docs/04 and the kit's §Choices. No blocking findings. Three wording findings: the list of answers read as more than three (applied, parentheses); "one pattern" could read as each project's own (applied, "the same pattern"); parentheses for the practices in the box's first sentence (optional, not applied: the sentence reads correctly and matches the book's appositive style).
+
+```commit
+docs(ch04-focus-optional): say FOCUS is the team's choice
+
+- ch 4, both editions: a note box after the opening says what FOCUS is,
+  that the team chooses it, and to read the gain before choosing
+- ch 4, both editions: the gain ends with cheaper moves between teams
+  when every project follows the same pattern
+
+work/done/ch04-focus-optional.md
+```

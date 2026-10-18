@@ -4,6 +4,10 @@ After this chapter you can organize code in vertical slices, one folder per feat
 You can follow one event through them to one new state, and answer "what happens when event X arrives?" with one test.
 You can also decide which piece receives a dependency as a parameter, by one question: does its test pass a second implementation?
 
+> **Note.** FOCUS gathers the qualities of the practices this book teaches, simplicity, exceptions as values and vertical slices, into one simple architecture.
+> It is the team's choice: when focus-kit starts a project with the team, new or already written, it asks whether the project uses FOCUS whole, only its two principles (vertical slices and exceptions as values) or neither, and the rest of the method works the same under each answer.
+> Read the chapter, above all its section "What the team gains", and decide whether your team sees the value.
+
 ## The problem
 
 Many projects sort their code by technical layer: a folder of screens, one of controllers, one of services, one of models, one of database access.
@@ -238,6 +242,7 @@ A change touches one folder, and an agent reads one slice: a delivery on lending
 A reviewer sees a delivery's diff inside one folder and knows it touched nothing else.
 Every rule sits in a use case, a pure function, so it has a test that needs no setup, and "what happens when event X arrives?" is one test: call the orchestrator with the event and fake repositories, and check the state it returns.
 Client and server share the use cases: the server enforces `lend`, and the client imports `mayBorrow` only to decide what to show, such as greying out "Lend" for a member with an overdue book, so the rule is written and tested once and the client's copy of the decision can never disagree with the server's.
+And I see one more gain beyond a single project: when every project of a company follows the same pattern, a person who moves to another team finds the folders, the four pieces and the tests where they expect them, so moving people between teams costs less.
 
 ## Key points
 

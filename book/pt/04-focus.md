@@ -4,6 +4,10 @@ Depois deste capítulo você consegue organizar o código em fatias verticais, u
 Você consegue seguir um evento por elas até um novo estado, e responder "o que acontece quando o evento X chega?" com um teste.
 Você também consegue decidir qual peça recebe uma dependência como parâmetro, por uma pergunta só: o teste dela passa uma segunda implementação?
 
+> **Nota.** O FOCUS reúne as qualidades das práticas que este livro ensina, simplicidade, exceções como valores e fatias verticais, em uma arquitetura simples.
+> Ele é uma escolha do time: quando o focus-kit começa um projeto com o time, novo ou já escrito, ele pergunta se o projeto usa o FOCUS inteiro, só os dois princípios dele (fatias verticais e exceções como valores) ou nenhum dos dois, e o resto do método funciona igual com qualquer resposta.
+> Leia o capítulo, sobretudo a seção "O que o time ganha", e decida se o seu time vê o valor.
+
 ## O problema
 
 Muitos projetos separam o código por camada técnica: uma pasta de telas, uma de controllers, uma de services, uma de models, uma de acesso ao banco de dados.
@@ -240,6 +244,7 @@ Uma mudança mexe em uma pasta, e um agente lê uma fatia: uma entrega sobre emp
 Quem revisa vê o diff de uma entrega dentro de uma pasta e sabe que ela não mexeu em mais nada.
 Toda regra fica em um caso de uso, uma função pura, então ela tem um teste que não precisa de preparação, e "o que acontece quando o evento X chega?" é um teste: chame o orquestrador com o evento e repositórios falsos, e confira o estado que ele devolve.
 Cliente e servidor compartilham os casos de uso: o servidor impõe `emprestar`, e o cliente importa `podePegarEmprestado` só para decidir o que mostrar, como deixar "Emprestar" apagado para um membro com um livro atrasado, então a regra é escrita e testada uma vez, e a cópia da decisão no cliente nunca discorda da do servidor.
+E eu vejo mais um ganho além de um projeto só: quando todo projeto de uma empresa segue o mesmo padrão, quem muda para outro time encontra as pastas, as quatro peças e os testes onde espera, então mover pessoas entre times custa menos.
 
 ## Pontos-chave
 

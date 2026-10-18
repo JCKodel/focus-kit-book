@@ -428,7 +428,7 @@ When this milestone closes, a reader of chapters 0 to 7 learns each idea where i
 [x] pt-identifiers-choice    the Portuguese chapter 3 drops the sentence on which names are translated and says Portuguese identifiers are a teaching choice, not a recommendation
 [x] ch03-literal-type-comment  chapter 3's refusal example carries a comment saying the string is a type the compiler checks, so err takes no other; both editions
 [x] ch03-error-languages     chapter 3 says several languages separate a program's bug from a failure the caller handles, and that Dart does it most explicitly; both editions
-[>] ch04-focus-optional      chapter 4 opens saying FOCUS is optional and the team decides after reading its gain, and the gain adds that one pattern across projects makes moving people cheaper; both editions
+[x] ch04-focus-optional      chapter 4 opens saying FOCUS is optional and the team decides after reading its gain, and the gain adds that one pattern across projects makes moving people cheaper; both editions
 [x] ch04-uncle-bob           chapter 4 gives Robert C. Martin's nickname, Uncle Bob, where it first names him; both editions
 [x] ch04-scalable-meaning    chapter 4's S says the project grows without one feature interfering with another, which is why it scales; both editions
 [>] ch05-test-time           chapter 5 says agents write tests without minding how long they run, and the person keeps the suite fast with pure use cases and slower tests only where they pay; both editions
