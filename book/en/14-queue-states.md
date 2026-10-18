@@ -119,6 +119,9 @@ m1-review
 `reservations` is in Doing from the first minute of its conversation, which is the error Case A's board had.
 Chapter 20 shows how a script mirrors the queue to a team's own board, one way.
 
+A board can also read the queue itself, with nothing to mirror.
+FACE, a free prototype the author is building, runs on your machine in the folder that holds your projects, reads docs/06 and the pages in `work/`, and shows the queue as a board in the browser, its cards moving as the marks change while the agent works.[^face]
+
 ## What the team gains
 
 A manager reads where every delivery stands, and what each waiting one waits on, without asking anyone and without a status meeting.
@@ -136,3 +139,4 @@ The queue also says which lines can run together: without that, a person who wan
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", accessed 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>
 [^azure-kanban]: Microsoft Learn, "About Kanban boards", Azure Boards, accessed 2026-09-30. <https://learn.microsoft.com/en-us/azure/devops/boards/boards/kanban-overview>
+[^face]: J.C. Ködel, "FACE: agents write the code, your team keeps the thread", accessed 2026-10-18. <https://face.kodel.com.br>

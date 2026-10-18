@@ -57,10 +57,39 @@
 
 **Done when.**
 
-* [ ] Both editions written: the paragraph and the note as Behaviour says.
-* [ ] Chapter 14 still opens with its value, keeps its gain, no filler and nothing useful cut.
-* [ ] Every number sourced: none added.
-* [ ] `make verify` green: edition parity, prose rules, width, links (the FACE URL answers), disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions written: the paragraph and the note as Behaviour says.
+* [x] Chapter 14 still opens with its value, keeps its gain, no filler and nothing useful cut.
+* [x] Every number sourced: none added.
+* [x] `make verify` green: edition parity, prose rules, width, links (the FACE URL answers), disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author: run by the batch driver at the end of the batch.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+
+**Divergences.** Two, from the delivery review's wording suggestions, applied as the batch rules say: they keep the page's intent and make the text more accurate or clearer.
+
+* "its marks moving while the agent works" became "its cards moving as the marks change while the agent works" (pt: "com os cartões andando conforme as marcas mudam enquanto o agente trabalha"): in this section a mark changes and a card moves ("each mark change moves a card").
+* English only: "in the folder of your projects" became "in the folder that holds your projects", the idiomatic form and the site's own phrasing; the Portuguese "na pasta dos seus projetos" already reads well.
+
+**Proof.**
+
+* `grep -n "face.kodel.com.br" book/*/14-queue-states.md` prints one note line per edition (en 14:142, pt 14:143).
+* `grep -c "\[\^face\]" book/*/14-queue-states.md` prints 2 per edition.
+* `git diff --stat -- book/*/14-queue-states.md` shows 4 added lines per edition: the blank line, the two lines of the paragraph and the note.
+* The FACE URL answered 200 with the title the note quotes, on 2026-10-18.
+* `make verify`: the first run passed with exit 0 (build, parity, em dash, prose, width, links, disclosure). After the review's fixes, every check passed except links, whose only failures are chapter 24's web.archive.org note (connection refused), a remote failure outside this delivery; `check_links.py` with that file filtered out prints nothing, and `check_disclosure.py` run on its own exits 0.
+
+**Review.** A read-only Opus reviewer that did not write the change read the diff against this page and docs/04. Nothing breaks the page or docs/04: the paragraph matches Behaviour and follows the chapter 20 line, the note matches docs/04 §Source notes and the live page's title, the Portuguese reads naturally and matches the English, and nothing from the Fails list appears. Its two wording suggestions were applied (Divergences). It also asked whether docs/04's rule that a tool cited at a release carries its version applies; it does not, since the note cites the site, not a release, so "accessed 2026-10-18" stays. No new queue line.
+
+**Decisions.** The batch driver owns docs/06, the staging and the commit, and runs `make book`.
+
+```commit
+docs(ch14-face-prototype): show FACE, a board that reads the queue itself
+
+- Chapter 14, both editions, "The queue as a kanban board": after the pointer to chapter 20's one-way mirror, a short paragraph says a board can also read the queue itself, and names FACE, a free prototype the author is building, which reads docs/06 and the pages in work/ and shows the queue as a board in the browser
+- One source note, [^face], the FACE site, accessed 2026-10-18
+
+book/en/14-queue-states.md
+book/pt/14-queue-states.md
+docs/06-Queue.md
+work/done/ch14-face-prototype.md
+```

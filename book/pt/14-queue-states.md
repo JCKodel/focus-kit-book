@@ -120,6 +120,9 @@ m1-review
 `reservas` está em Fazendo desde o primeiro minuto da conversa dela, que era o erro do quadro do Caso A.
 O capítulo 20 mostra como um script espelha a fila no quadro do próprio time, numa só direção.
 
+Um quadro também pode ler a própria fila, sem nada a espelhar.
+O FACE, um protótipo gratuito que o autor está construindo, roda na sua máquina na pasta dos seus projetos, lê o docs/06 e as páginas em `work/`, e mostra a fila como um quadro no navegador, com os cartões andando conforme as marcas mudam enquanto o agente trabalha.[^face]
+
 ## O que o time ganha
 
 Um gerente lê onde cada entrega está, e o que cada uma em espera espera, sem perguntar a ninguém e sem reunião de status.
@@ -137,3 +140,4 @@ A fila também diz quais linhas podem rodar juntas: sem isso, uma pessoa que que
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", acesso em 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>
 [^azure-kanban]: Microsoft Learn, "About Kanban boards", Azure Boards, acesso em 2026-09-30. <https://learn.microsoft.com/en-us/azure/devops/boards/boards/kanban-overview>
+[^face]: J.C. Ködel, "FACE: agents write the code, your team keeps the thread", acesso em 2026-10-18. <https://face.kodel.com.br>
