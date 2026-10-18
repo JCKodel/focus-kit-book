@@ -133,7 +133,7 @@ Eu mantenho assim porque uma revisão das correções acha achados próprios, e 
 
 ## Quando os achados viraram uma entrega
 
-Na Ninjobs, a revisão na abertura ao público devolveu oito achados, com toda a suíte de testes verde.
+No Ninjobs, a revisão na abertura ao público devolveu oito achados, com toda a suíte de testes verde.
 Consultas levavam centenas de milissegundos, uma vaga de emprego grande teria estourado o tempo limite, e três dos achados eram sobre segurança.
 Aquela revisão leu o código, e ela é a razão de a revisão de marco do kit também lê-lo: cada entrega tinha passado nos seus próprios testes e na sua própria revisão, e só o olhar sobre o todo viu os oito.
 
@@ -147,7 +147,7 @@ Oito linhas teriam sido oito páginas, cada uma pequena o bastante para ser lida
 ## O que o time ganha
 
 Um teste à mão do produto inteiro vê o que a checagem de nenhuma entrega sozinha consegue ver: uma cláusula que nenhuma entrega assumiu, um passo que falha quando as entregas rodam juntas, encontrados do jeito que um usuário vai encontrá-los, antes dos usuários.
-A leitura do código inteiro soma o que nenhum teste à mão consegue ver, o tipo de falha que a revisão na abertura da Ninjobs achou.
+A leitura do código inteiro soma o que nenhum teste à mão consegue ver, o tipo de falha que a revisão na abertura do Ninjobs achou.
 O conferente gasta o tempo da pessoa com os candidatos que se sustentam, e os caminhos que cada leitor lista fazem uma parte do marco deixada sem ler aparecer na página, em vez de passar como lida.
 E como cada achado vira uma linha, o time vê o custo das brechas do marco na fila, ao lado de tudo o que planeja, e não em correções que ninguém revisou.
 

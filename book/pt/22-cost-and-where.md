@@ -23,9 +23,9 @@ O modelo não lembra nada entre uma chamada e outra, então o host manda o conte
 O cache guarda essa parte repetida, e a chamada seguinte a lê de volta por uma fração do preço da entrada nova.
 A documentação de preços da Anthropic dá os multiplicadores: uma escrita no cache custa 1,25 vez um token de entrada normal, para um cache de cinco minutos, e uma leitura do cache custa um décimo disso ou menos, conforme o modelo.[^anthropic-pricing]
 
-## O que uma entrega custou na Ninjobs
+## O que uma entrega custou no Ninjobs
 
-A Ninjobs é o meu próprio produto, construído com o método que este livro ensina.
+O Ninjobs é o meu próprio produto, construído com o método que este livro ensina.
 O Claude Code guarda um log de cada sessão, com os tokens de cada chamada, e eu contei esses logs nos 21 dias que o host ainda guardava, de 221 sessões e 18.945 chamadas.
 
 | Tipo | Tokens em 21 dias | Parcela |
@@ -44,7 +44,7 @@ A contagem fixa uma linha de base: este projeto, este método, tantos tokens por
 ## Por que as leituras do cache são contadas à parte
 
 Cada chamada lê o contexto inteiro de novo, então as leituras do cache dizem quanto contexto cada chamada carregou.
-Na Ninjobs, isso dá em média uns 208 mil tokens de contexto em cache por chamada (3.940.576.768 / 18.945).
+No Ninjobs, isso dá em média uns 208 mil tokens de contexto em cache por chamada (3.940.576.768 / 18.945).
 A saída diz quanto o agente escreveu; as leituras do cache dizem quanto ele teve de carregar para escrever.
 
 Contadas juntas, uma esconde a outra.
@@ -72,10 +72,10 @@ A página diz o que construir, os testes e a verificação dizem se está constr
 **Ele compensa menos** no trabalho cuja decisão ainda está sendo tomada.
 Uma conversa de `/propose` é barata em tokens e cara no tempo da pessoa, porque é a pessoa quem decide.
 O agente ajuda ali fazendo as perguntas certas na ordem certa, e o custo a observar são as horas de uma pessoa, que nenhuma contagem de tokens mostra.
-Na Ninjobs, tudo o que o agente escreveu para uma entrega, a sua página incluída, deu em média 149 mil tokens de saída, e as horas que eu passei decidindo essas páginas não estão em nenhuma coluna da tabela.
+No Ninjobs, tudo o que o agente escreveu para uma entrega, a sua página incluída, deu em média 149 mil tokens de saída, e as horas que eu passei decidindo essas páginas não estão em nenhuma coluna da tabela.
 
 **Ele não compensa** numa stack que o agente viu pouco.
-Na Ninjobs, antes do método, essa stack foi o Flutter: cada tentativa no design custou tokens e a revisão de uma pessoa, e nenhum dos dois comprou uma tela pronta.
+No Ninjobs, antes do método, essa stack foi o Flutter: cada tentativa no design custou tokens e a revisão de uma pessoa, e nenhum dos dois comprou uma tela pronta.
 Escolher uma stack pelas perguntas do capítulo 9 é uma decisão de custo tanto quanto técnica.
 
 ## Como um time decide
@@ -87,22 +87,22 @@ Conte um marco, divida pelas páginas que ele concluiu, e você tem os seus toke
 Nos logs do Claude Code, uma linha por evento, uma resposta transmitida aos poucos registra o seu uso em mais de uma linha, então conte cada par de `message.id` e `requestId` uma vez só.
 Esses nomes são campos do próprio log, e por isso ficam em inglês.
 
-Conte logo depois que o marco fecha: o host apaga os logs mais antigos que o seu prazo de retenção, e na Ninjobs os logs de antes daqueles 21 dias já tinham sumido.
+Conte logo depois que o marco fecha: o host apaga os logs mais antigos que o seu prazo de retenção, e no Ninjobs os logs de antes daqueles 21 dias já tinham sumido.
 
 Depois compare marcos, não fornecedores.
 O segundo marco contra o primeiro, no mesmo projeto, diz se o jeito de o time trabalhar ficou mais barato ou mais caro; a tabela de preços de um fornecedor diz o preço de um token, e nada sobre quantos o seu trabalho precisa.
 Quando um número muda, as colunas dizem por quê: saída maior quer dizer que mais coisa foi construída, leituras do cache maiores querem dizer que as sessões cresceram.
-É por isso que eu não comparo a Ninjobs com nada de fora: eu não tenho outro projeto medido do mesmo jeito, e um número de outro time, de outro modelo ou de outra tabela de preços compararia coisas que não se correspondem.
+É por isso que eu não comparo o Ninjobs com nada de fora: eu não tenho outro projeto medido do mesmo jeito, e um número de outro time, de outro modelo ou de outra tabela de preços compararia coisas que não se correspondem.
 
 ## O que o time ganha
 
 Um número por entrega que qualquer pessoa do time consegue repetir a partir dos logs do host, no lugar de uma sensação.
-Na Ninjobs ele é de 43,1 milhões de tokens por entrega.
+No Ninjobs ele é de 43,1 milhões de tokens por entrega.
 
 ## Pontos-chave
 
 * Um host cobra quatro tipos de token: entrada, escrita no cache, leitura do cache e saída; uma leitura do cache custa uma fração de um token de entrada, porque o host reenvia o mesmo contexto em cada chamada.
-* As leituras do cache, quase todos os tokens de uma entrega na Ninjobs, são contadas à parte porque medem quanto contexto cada chamada carregou, e é isso que a página, uma sessão nova por entrega e as linhas da fila de uma frase mantêm pequeno.
+* As leituras do cache, quase todos os tokens de uma entrega no Ninjobs, são contadas à parte porque medem quanto contexto cada chamada carregou, e é isso que a página, uma sessão nova por entrega e as linhas da fila de uma frase mantêm pequeno.
 * Um agente compensa onde a decisão está escrita e a checagem é mecânica, compensa menos onde a decisão ainda está sendo tomada, e não compensa numa stack que ele não viu.
 * Meça os tokens por entrega no seu próprio projeto durante um marco, a partir dos logs do host, e compare marcos, não fornecedores.
 

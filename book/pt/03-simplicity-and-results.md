@@ -4,9 +4,9 @@ Depois deste capítulo você consegue recusar um trecho de código, um documento
 Você consegue escrever uma regra de negócio como uma função pura que devolve um `Result` (resultado), e distinguir uma exceção de uma recusa e de um erro em qualquer linguagem.
 Você também consegue manter as exceções de uma biblioteca na fronteira, de modo que uma biblioteca nova mude um arquivo, e deixar o compilador recusar um caso que você esqueceu de tratar.
 
-## O que cresceu na Ninjobs
+## O que cresceu no Ninjobs
 
-Na Ninjobs, o meu próprio produto, eu deixei a complexidade crescer, uma adição razoável por vez.
+No Ninjobs, o meu próprio produto, eu deixei a complexidade crescer, uma adição razoável por vez.
 Eu exigia a forma completa, em camadas, da arquitetura em toda feature, formulários triviais incluídos, então mostrar um campo em uma tela levava oito arquivos; toda entrega tinha que passar por 29 verificações que nunca tinham pegado um erro no produto.
 A culpa não era da arquitetura; KISS e YAGNI se perderam.
 
@@ -264,7 +264,7 @@ Este livro chama essa pergunta de regulador e faz dela a regra que todo passo do
 
 ## O que o time ganha
 
-Menos para ler, menos para revisar e menos para manter verdadeiro: cada arquivo, opção e verificação que não é escrito é um que nenhuma pessoa revisa, nenhum agente carrega em uma sessão e nenhuma entrega precisa satisfazer, enquanto a Ninjobs fazia toda entrega passar por 29 verificações que nunca tinham pegado um erro.
+Menos para ler, menos para revisar e menos para manter verdadeiro: cada arquivo, opção e verificação que não é escrito é um que nenhuma pessoa revisa, nenhum agente carrega em uma sessão e nenhuma entrega precisa satisfazer, enquanto o Ninjobs fazia toda entrega passar por 29 verificações que nunca tinham pegado um erro.
 Toda regra é uma função que um teste chama com dados, então uma regra tem um teste antes de ter uma tela, e um agente a quem se pede para mudá-la a encontra em um lugar só, com os casos dela nomeados no tipo.
 Toda falha que quem chama precisa tratar está na assinatura, então quem revisa lê o tipo e sabe o que pode dar errado, e um caso esquecido é um erro de compilação.
 

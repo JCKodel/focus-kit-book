@@ -67,7 +67,7 @@ Um capítulo está pronto quando essas checagens estão verdes e o autor aprovou
 ## Trabalho com dados como entregas
 
 As regras de segurança de um banco de dados decidem quem pode ler ou escrever cada linha, e são trabalho com valor como uma tela.
-Na Ninjobs, seis das suas 93 páginas concluídas mudaram só regras do banco de dados, e nada mais.
+No Ninjobs, seis das suas 93 páginas concluídas mudaram só regras do banco de dados, e nada mais.
 Uma dessas regras impede o cliente de escrever enquanto a exclusão de uma conta está pendente; ela mora no próprio banco de dados, como uma regra de acesso, e o teste das regras de acesso do projeto a prova (o [capítulo 13](13-apply.md) conta o que a construção dela encontrou).
 
 Uma regra no banco de dados vale para todo cliente que um dia falar com ele, e o teste dela é o Pronto quando que a prova.

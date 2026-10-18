@@ -139,7 +139,7 @@ Depois ele dá os seus próximos passos:
 
 E termina, por último, nos ambientes, com uma frase também escrita para este capítulo: "O banco de dados de desenvolvimento já tem a migration desta entrega; o ambiente de staging ainda está na entrega anterior, e `npm run migrate -- staging` o atualiza."
 Se uma sessão termina sem essa frase, ela não terminou como o kit diz; peça a frase a ela.
-Na Ninjobs, uma pessoa que abriu o site publicado achando que ele estava atual, depois de uma sessão que terminou sem essa frase, revisou uma versão que não tinha a entrega.
+No Ninjobs, uma pessoa que abriu o site publicado achando que ele estava atual, depois de uma sessão que terminou sem essa frase, revisou uma versão que não tinha a entrega.
 
 ## Por que ele para no stage
 
@@ -167,7 +167,7 @@ Os testes provam o que a página escreveu e a revisão lê o código; só o uso 
 Esse uso cobre uma entrega enquanto ela está aberta; o teste à mão no fechamento do marco percorre o parágrafo inteiro.
 O que a página pediu e a construção errou ou deixou mal acabado, um botão fora do lugar, um rótulo que não cabe, uma tela que leva segundos para responder, é uma correção desta entrega: a verificação roda de novo e a página a registra.
 O que a página não pediu, por menor que seja, e um problema que precisa de uma definição própria viram uma linha `[ ]`, acrescentada por conversa com um rascunho da página para o que a linha não comporta; peça a linha logo abaixo da linha desta entrega, para que ela seja a próxima linha livre e o `/propose` dela parta do que você viu enquanto ainda se lembra.
-Na Ninjobs, eu usei cada entrega antes de fazer o commit: foi ali que achei problemas de interface, de uso e de velocidade que os testes e as revisões não tinham mostrado, e onde melhorei o que o agente fez, o que a página tinha pedido corrigido na mesma conversa, enquanto a entrega estava aberta, e o resto escrito como as próximas linhas da fila.
+No Ninjobs, eu usei cada entrega antes de fazer o commit: foi ali que achei problemas de interface, de uso e de velocidade que os testes e as revisões não tinham mostrado, e onde melhorei o que o agente fez, o que a página tinha pedido corrigido na mesma conversa, enquanto a entrega estava aberta, e o resto escrito como as próximas linhas da fila.
 Peça cada correção ao agente, na mesma sessão, nunca à mão.
 A mesma sessão guarda o raciocínio da construção: ela sabe por que fez cada escolha, o que uma sessão nova teria de adivinhar.
 Isso vale para o gosto tanto quanto para os defeitos: quando o código funciona mas você o teria escrito de outro jeito, diga o que quer no lugar e por quê, em vez de reescrevê-lo você mesmo.
@@ -230,7 +230,7 @@ Se o seu agente responde com linhas de `git commit -m` e nenhum bloco `commit` n
 
 Nada é publicado sem uma checagem e uma pessoa: a verificação e a prova conferem a construção, e uma pessoa lê o diff antes de ele existir no histórico.
 Um defeito que uma entrega escreveu é achado por um leitor que não o escreveu, e corrigido nessa entrega, antes de você ler o diff.
-E o que divergiu do plano fica escrito onde a próxima pessoa lê: na Ninjobs, a página da entrega que permite a um usuário excluir a própria conta dizia que a tabela que registra uma exclusão pendente não teria regra de escrita nenhuma, e a construção descobriu que uma tabela sem regra de escrita não aceita escrita de ninguém, nem das funções do próprio banco de dados.
+E o que divergiu do plano fica escrito onde a próxima pessoa lê: no Ninjobs, a página da entrega que permite a um usuário excluir a própria conta dizia que a tabela que registra uma exclusão pendente não teria regra de escrita nenhuma, e a construção descobriu que uma tabela sem regra de escrita não aceita escrita de ninguém, nem das funções do próprio banco de dados.
 Então a página registrou o ajuste, nenhum caminho de escrita alcançável pelo cliente, o que o teste das regras de acesso agora prova, e o commit que a publicou aponta para essa página.
 
 ## Pontos-chave

@@ -46,7 +46,7 @@ Uma stack que não consegue entregar isso está fora, por mais que o agente a co
 Um modelo escreve melhor o que viu mais durante o treino, e a medida pública mais próxima disso é quantas pessoas escrevem uma linguagem abertamente.
 Pela contagem do GitHub, o TypeScript virou a linguagem mais usada no GitHub em agosto de 2025, com 2.636.006 contribuidores mensais, à frente de Python e JavaScript.[^octoverse]
 A contagem é de pessoas e não diz nada sobre linhas de código, então leia-a como um ranking e nunca como um tamanho.
-Na Ninjobs, o mesmo agente errava o design no Flutter, onde tinha poucos exemplos de um design system customizado para aprender, e acertava no React: o Flutter conseguiria construir o produto, e o limite era o que o agente tinha visto.
+No Ninjobs, o mesmo agente errava o design no Flutter, onde tinha poucos exemplos de um design system customizado para aprender, e acertava no React: o Flutter conseguiria construir o produto, e o limite era o que o agente tinha visto.
 
 **A stack confere a si mesma?**
 Um compilador que rejeita um tipo errado e testes que rodam em segundos avisam ao agente que ele errou antes que você precise avisar.

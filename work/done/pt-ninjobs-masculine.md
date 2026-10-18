@@ -47,11 +47,43 @@
 
 **Done when.**
 
-* [ ] Behaviour's checks give what it names on the whole Portuguese edition and `README.pt.md` at apply time; every sentence changed beyond its article listed on the page.
-* [ ] docs/03's `case` row amended as Behaviour quotes.
-* [ ] Each changed chapter still opens with its value, keeps its gain, no filler and nothing useful cut.
-* [ ] Every number sourced: no number added.
-* [ ] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, the change draws on no Case A or Case B passage (docs/00 OD-3); on pt 00:107 it touches only the article before Ninjobs.
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunks of docs/03 and docs/06, commit message in a `commit` block.
+* [x] Behaviour's checks give what it names on the whole Portuguese edition and `README.pt.md` at apply time; every sentence changed beyond its article listed on the page.
+* [x] docs/03's `case` row amended as Behaviour quotes.
+* [x] Each changed chapter still opens with its value, keeps its gain, no filler and nothing useful cut.
+* [x] Every number sourced: no number added.
+* [x] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, the change draws on no Case A or Case B passage (docs/00 OD-3); on pt 00:107 it touches only the article before Ninjobs.
+* [x] `make book` run; both PDF paths given to the author: the driver builds the book once at the end of the batch.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunks of docs/03 and docs/06, commit message in a `commit` block: the driver marks the line and stages.
+
+**Proof.**
+
+* Count before and after over `book/pt/` and `README.pt.md` at apply time: 40 occurrences in 14 files, every one feminine before (20 "Na", 8 "na", 7 "A", 2 "a", 2 "da", 1 "à"); 40 after, every one masculine. The 40th, against the 39 counted at /propose, is pt 13:170 "Na Ninjobs, eu usei cada entrega", written by `try-before-commit` (decision 4). `README.pt.md` names Ninjobs nowhere.
+* The feminine grep of Behaviour prints nothing; the `cresceu-na\|custou-na` grep prints nothing; `git diff --stat book/en README.md` is empty.
+* A word diff of `book/pt` holds only: `Na`/`No` 20, `na`/`no` 8, `A`/`O` 7, `a`/`o` 3 (two articles, one pronoun), `da`/`do` 2, `à`/`ao` 1, `dela`/`dele` 1.
+* `make verify`: build, parity, em dash, prose, width, links and disclosure, exit 0.
+
+**Sentences changed beyond the article** (decision 1):
+
+* pt 11:28 "a fila dela tinha 102 entregas" to "a fila dele tinha 102 entregas" (en 11:26 "its queue held 102 deliveries").
+* pt 16:78 "depois de as verificações antigas a terem acompanhado" to "o terem acompanhado" (en 16:78 "after the old checks had gone with it").
+
+**Kept by decision 1**, read in their sentences and neighbours: pt 11:174 "No Ninjobs ela guardou" (the queue), pt 12:133 "ela era" (the page), pt 13:142 "ele estava atual" (the site), pt 22:100 "ele" (the number), pt 07:66 "um app web fino" and pt 22:28 "construído", already masculine. No other pronoun, participle or adjective in the neighbouring lines refers to Ninjobs; in chapters 6, 16 and 22, where Ninjobs runs as the subject, every "ela", "dela" and "nela" was read and refers to another noun (a delivery, a rule, a change, the bill, a session, the page, an entry, the governor's error).
+
+**Divergences.** None from Behaviour. The line numbers moved since /propose (other M18 deliveries landed first): 03:254 is now 03:267, 04:234 is 04:239, 07:56 is 07:66, 07:144 is 07:154, 11:167 is 11:174, 13:222 is 13:233, 02:66 is 02:69.
+
+**Decisions taken in /apply.**
+
+* The 40th occurrence, pt 13:170, changed as every other, by decision 4; the before and after counts are both 40.
+
+**Review.** One read-only agent on Opus read `git diff -- book/pt docs/03-Domain.md` against this page and docs/04, and every Ninjobs line of the Portuguese edition in its sentence with two lines either side: no findings. Its one note, that the page's /propose counts say 39 and old line numbers, is answered under Proof and Divergences: 40 before and after, with the moved lines listed.
+
+```commit
+docs(pt-ninjobs-masculine): give Ninjobs the masculine throughout pt
+
+- Portuguese edition: Ninjobs takes o, no, do, ao, 40 uses in 14 chapters
+- Agreement: pt 11:28 "a fila dele", pt 16:78 "o terem acompanhado"
+- docs/03's `case` row fixes the masculine, as an app or a site
+
+work/done/pt-ninjobs-masculine.md
+```

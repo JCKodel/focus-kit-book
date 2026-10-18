@@ -25,7 +25,7 @@ O slug é o nome da entrega, em palavras minúsculas unidas por hífens ([capít
 Ele dá nome à página da entrega, `work/<slug>.md`, e é o argumento dos comandos, `/propose <slug>` e `/apply <slug>`, então a linha, a página e os comandos apontam todos para a mesma entrega.
 
 O kit pede uma frase, e o que aconteceu vai para a página, porque o `/propose` lê a fila inteira antes de definir uma entrega: cada palavra de uma linha é lida por toda definição.
-Na Ninjobs eu deixei as linhas crescerem: a fila dela tinha 102 entregas em 1.711 linhas, 1.052 delas continuações de uma linha, decisões que pertenciam às páginas.
+No Ninjobs eu deixei as linhas crescerem: a fila dele tinha 102 entregas em 1.711 linhas, 1.052 delas continuações de uma linha, decisões que pertenciam às páginas.
 Uma linha que cresce até virar um parágrafo é uma decisão no lugar errado, já que a página é onde a próxima sessão a procura.
 
 ## As marcas
@@ -171,7 +171,7 @@ Você lê a mudança antes do commit, como com todo documento, e ninguém edita 
 ## O que o time ganha
 
 A fila é o quadro de status compartilhado do time e o histórico dele em um arquivo: o que vem a seguir, o que está em andamento, o que foi feito e em que ordem, legível por um gerente sem ferramenta nenhuma e por um agente no começo de toda sessão.
-Na Ninjobs ela guardou 102 entregas, feitas e ainda não feitas, em um arquivo.
+No Ninjobs ela guardou 102 entregas, feitas e ainda não feitas, em um arquivo.
 No Caso A, um projeto para um cliente em uma plataforma low-code, o Microsoft Power Apps com o Copilot Studio, o relatório de status e a estimativa de risco para o gerente de projeto foram escritos a partir da fila e das páginas, não de memória ([capítulo 17](17-project-as-assistant.md)).
 
 ## Pontos-chave

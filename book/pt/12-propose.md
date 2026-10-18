@@ -123,14 +123,14 @@ Se o Comportamento só tem o caminho feliz, um exemplar disponível emprestado a
 
 A ordem é a barata.
 Um buraco achado na página custa um turno; achado depois do `/apply`, custa outro `/apply`, o comando mais caro, que constrói, testa e prova de novo.
-Na Ninjobs, a página da entrega que calcula a pontuação de compatibilidade de um candidato descobriu, enquanto era escrita, que a idade aproximada de um candidato já vazava no primeiro nível de privacidade pelas datas das suas experiências; isso virou uma linha para uma entrega posterior, e nenhum código foi escrito além dela.
+No Ninjobs, a página da entrega que calcula a pontuação de compatibilidade de um candidato descobriu, enquanto era escrita, que a idade aproximada de um candidato já vazava no primeiro nível de privacidade pelas datas das suas experiências; isso virou uma linha para uma entrega posterior, e nenhum código foi escrito além dela.
 
 Os hosts têm o seu próprio jeito de planejar dentro de uma sessão, como o modo de plano (plan mode) do Claude Code, em que "*o Claude lê arquivos e propõe um plano, mas não faz nenhuma edição até você aprovar*";[^claude-code-plan-mode] a página é o que sobrevive à sessão: um arquivo no repositório, escrito a partir dos documentos do projeto e com as palavras deles, marcado na fila, lido por uma sessão nova para construí-lo, e guardado em `work/done/` com o que aconteceu.
 
 ## Quando não cabe
 
 Um escopo que não cabe em uma página são duas entregas: o `/propose` diz isso, propõe a divisão e escreve só a primeira página, e a segunda vira uma linha na fila, onde ela pertence.
-Na Ninjobs, a linha única da fila para uma vaga de emprego virou seis entregas em um `/propose`: a vaga, o empregador, as tags, a oferta, os benefícios e os idiomas, e o ciclo de vida; a página da primeira dizia que ela era o passo um de seis.
+No Ninjobs, a linha única da fila para uma vaga de emprego virou seis entregas em um `/propose`: a vaga, o empregador, as tags, a oferta, os benefícios e os idiomas, e o ciclo de vida; a página da primeira dizia que ela era o passo um de seis.
 Cada uma das seis foi revisada na sua própria página e construída na sua própria sessão.
 
 ## Quando você ainda não sabe

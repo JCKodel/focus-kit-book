@@ -59,7 +59,7 @@ Validar inclui pedir mais: a primeira resposta de um agente raramente é a melho
 Nenhuma engenharia de software sobrevive sem um processo: quando cada pessoa faz as coisas do seu jeito, o resultado é o caos.
 Um processo é seguido porque cada passo tem um propósito, e o propósito é também o teste.
 Um passo que não pega nenhum erro concreto sai do processo, uma regra que este livro chama de regulador, e processo demais falha tão certamente quanto processo de menos: cada documento é mais uma coisa para escrever, ler e manter verdadeira.
-Na Ninjobs (<https://www.ninjobs.app>), meu próprio produto, escrever a especificação virou o trabalho.
+No Ninjobs (<https://www.ninjobs.app>), meu próprio produto, escrever a especificação virou o trabalho.
 
 O processo que este livro ensina roda sobre documentos que um agente lê, e isso muda a quem o processo serve.
 Quando o produto, seu vocabulário, suas decisões e sua fila estão escritos onde o agente os lê, o agente pode responder a qualquer pessoa do time: o que está pendente, como está indo, quem deve uma resposta, o que foi combinado com o cliente.
@@ -103,8 +103,8 @@ O método que este livro ensina, o focus-kit, é construído sobre essas três p
 O time aprende para onde vai o seu tempo: desenvolvedores experientes mediram-se 19% mais lentos com IA enquanto acreditavam estar mais rápidos,[^metr-2025] então o ganho está em decidir e verificar, onde as três peças de um processo mínimo trabalham.
 Quando o processo roda sobre documentos que um agente lê, o projeto responde ao time inteiro, para um desenvolvedor como para uma empresa, e é para esse ganho que este livro foi escrito.
 Nenhum estudo neste livro mede um time com o método e as suas práticas contra o mesmo time sem eles: a evidência de cada capítulo é o seu número, contado num projeto real e dizendo de onde vem, ou a perda que a sua prática evita.
-A Ninjobs e o Caso A, um projeto de cliente que rodou sobre o processo e que o capítulo 17 conta, vivem em repositórios privados, então todo número que este livro dá sobre eles foi contado por mim ao longo dos seus históricos.
-A Ninjobs aparece pelo nome; o Caso A é um projeto corporativo privado, e o seu nome não poderia ser publicado sem autorização, então aparece sem o seu dono, o seu cliente ou o seu negócio.
+O Ninjobs e o Caso A, um projeto de cliente que rodou sobre o processo e que o capítulo 17 conta, vivem em repositórios privados, então todo número que este livro dá sobre eles foi contado por mim ao longo dos seus históricos.
+O Ninjobs aparece pelo nome; o Caso A é um projeto corporativo privado, e o seu nome não poderia ser publicado sem autorização, então aparece sem o seu dono, o seu cliente ou o seu negócio.
 
 A Parte I é a base, as práticas que todo leitor precisa compartilhar antes do processo, de como um agente vê um projeto até um teste para cada peça de código.
 A Parte II é o método, o focus-kit, dos seus documentos ao projeto como assistente do time.
