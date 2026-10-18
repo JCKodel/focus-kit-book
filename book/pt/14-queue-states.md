@@ -89,11 +89,11 @@ Escrever `[?] meus-emprestimos ... · blocked: after emprestar-livro` quando a l
 
 Uma linha sai de `[?]` quando o motivo se resolve.
 A pessoa diz isso; ou a sessão que registra a resposta a tira, como quando a diretora diz o provedor e o nome vira uma linha do docs/00; ou o `/apply` a tira quando marca `[x]` a última linha que um `after` nomeia.
-Os dois sufixos saem, e a fase de retomada diz para onde a linha volta.
-`aviso-prazo`, com `resume: propose`, volta para `[ ]`, e qualquer rascunho da página dela fica para o `/propose` terminar.
-Uma linha com `resume: apply` volta para `[>]`; se o escopo ficou indefinido, volta para `[ ]` no lugar, e a sessão diz o que o `/propose` precisa decidir.
+Os dois sufixos saem, `resume` e `blocked`, e a fase de retomada diz para onde a linha volta.
+`aviso-prazo`, com `resume: propose`, volta para `[ ]`, e qualquer rascunho da página dela fica para o `/propose` terminar: um rascunho é uma página começada, não uma definição completa.
+Uma linha com `resume: apply` volta para `[>]`.
 
-O `/propose` e o `/apply` param os dois em uma linha `[?]`: dizem o que ela espera, e só seguem quando a pessoa diz que está resolvido.
+O `/propose` e o `/apply` param os dois em uma linha `[?]`: dizem o que ela espera, e só seguem depois que o motivo se resolve, por um desses três caminhos.
 Um comando que passasse por cima do motivo construiria sobre uma resposta que ninguém deu.
 
 ## A fila como quadro kanban
@@ -135,7 +135,7 @@ A fila também diz quais linhas podem rodar juntas: sem isso, uma pessoa que que
 * Seis marcas, `[ ]` não definida, `[~]` sendo definida, `[>]` definida, `[*]` sendo construída, `[x]` feita, `[?]` esperando, cada uma mudada quando o trabalho muda, não quando um comando termina: o `/propose` põe `[~]` e `[>]`, o `/apply` põe `[*]` e `[x]`, qualquer sessão põe `[?]`.
 * Uma linha está livre quando não está `[x]` nem `[?]` e toda linha que o `after` dela nomeia está `[x]`; a próxima entrega é a primeira linha livre que nenhuma sessão pegou, e linhas livres que mexem em arquivos diferentes podem rodar ao mesmo tempo.
 * `· after` é uma ordem escrita com a linha, que mantém a sua marca; `[?]` com `· blocked: after` é uma espera descoberta depois de o trabalho começar.
-* Uma linha espera quando a pessoa diz, quando uma resposta foi pedida e não veio, quando o trabalho já começado descobre que outra linha precisa ser feita antes, ou quando a leitura do código de uma revisão de marco não cobriu parte do seu intervalo, com a fase de retomada e o motivo no fim, `· resume: apply · blocked: after <slug>`; ela sai de `[?]` por essa fase quando o motivo se resolve, e até lá o `/propose` e o `/apply` param nela, como numa linha que não está livre.
+* Uma linha espera quando a pessoa diz, quando uma resposta foi pedida e não veio, quando o trabalho já começado descobre que outra linha precisa ser feita antes, ou quando a leitura do código de uma revisão de marco não cobriu parte do seu intervalo, com a fase de retomada e o motivo no fim, `· resume: apply · blocked: after <slug>`; quando o motivo se resolve, os dois sufixos saem e ela volta conforme essa fase, `resume: propose` para `[ ]` com qualquer rascunho mantido, `resume: apply` para `[>]`, e até lá o `/propose` e o `/apply` param nela, como numa linha que não está livre.
 * A fila é um quadro kanban, uma coluna por marca; em três colunas, Fazendo guarda `[~]`, `[>]` e `[*]`, e um cartão `[?]` é etiquetado como travado onde estava.
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", acesso em 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>
