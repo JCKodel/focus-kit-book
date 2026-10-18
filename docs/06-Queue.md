@@ -333,7 +333,7 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] docs05-review-checker    docs/05's Milestone review slot names the checker as the author runs it, Opus with the host's advisor on Fable
 [x] stack-rule-once          the stack chosen by what the agent knows, and the Flutter story, are told in one chapter and pointed to from chapters 6, 9 and 22; both editions
 [x] free-line-gloss          chapters 7 and 18 gloss a free line as docs/03 defines it, `[ ]` lines included; both editions
-[x] pt-free-line-done       the Portuguese edition's free-line gloss says done with chapter 14's word, `feita`, not `pronta`, which also reads as ready, in chapters 7, 18 and 19
+[x] pt-free-line-done        the Portuguese edition's free-line gloss says done with chapter 14's word, `feita`, not `pronta`, which also reads as ready, in chapters 7, 18 and 19
 [x] line-rule-once           chapters 13 and 22 point to chapter 11 for the one-sentence queue line instead of restating it; both editions
 [x] case-a-board-once        chapters 16 and 20 point to chapter 14 for the kanban board, the fold onto three columns and Case A's `[?]`; both editions
 [x] slice-paths              chapters 13, 14 and 19 name the lending library's slices under `src/features/`, as chapter 4 does; both editions
@@ -358,7 +358,7 @@ When this milestone closes, a reader reaches the method in five chapters instead
 
 ## M16. focus-kit 2026.10.17
 
-When this milestone closes, the book teaches focus-kit 2026.10.17 and the repository runs on it: `/apply` having each delivery's own changes reviewed by a context that did not write them, with the host's own review where the agent can run it and keep it to the delivery's paths, else a read-only agent, fixing what breaks the page before it ends; a milestone review whose code reading is the kit's own and runs in any host that runs agents, over `git diff <base>..HEAD` and never a bare commit, split into the Milestone review slot's areas with one read-only agent each, every reader listing the paths it read and the line waiting as `[?]` when they miss part of the range, a checker marking every candidate seen, latent or weak before the person sees it, the review started on the person's word because it costs, and the reviews' readers as the one specialized subagent the governor admits; Devin Desktop, formerly Windsurf, reading the commands from `.agents/skills/` and invoking them as `/<name>`; and a reader who runs `/propose` in a batch knows what each page must say about the answers chosen without them, and why the commit stays theirs when applies run in parallel.
+When this milestone closes, the book teaches focus-kit 2026.10.17 and the repository runs on it: `/apply` having each delivery's own changes reviewed by a context that did not write them, with the host's own review where the agent can run it and keep it to the delivery's paths, else a read-only agent, fixing what breaks the page before it ends; a milestone review whose code reading is the kit's own and runs in any host that runs agents, over `git diff <base>..HEAD` and never a bare commit, split into the Milestone review slot's areas with one read-only agent each, every reader listing the paths it read and the line waiting as `[?]` when they miss part of the range, a checker marking every candidate seen, latent or weak before the person sees it, the review started on the person's word because it costs, and the reviews' readers and checker as the one specialized subagent the governor admits; Devin Desktop, formerly Windsurf, reading the commands from `.agents/skills/` and invoking them as `/<name>`; and a reader who runs `/propose` in a batch knows what each page must say about the answers chosen without them, and why the commit stays theirs when applies run in parallel.
 
 ```
 [x] kit-2026-10-17           reinstall the kit at 2026.10.17 and apply its migration report to docs/05, docs/03, AGENTS.md and the skills · after m15-review
@@ -375,7 +375,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.17 and the reposi
 [x] fence-commonmark         `markdown.py` opens and closes a fence where CommonMark does, and docs/01 says so
 [x] docs01-helpers           docs/01 names every helper `markdown.py` shares, `target_end` among them, every script that uses them, and `check_width.py`'s use of `check_prose.py`
 [x] adr17-section-name       ADR-0017's amendment names the docs/04 section `one-gain-section` changed
-[ ] docs06-m16-paragraph     docs/06's M16 paragraph names the reviews' readers and checker, and M15's `pt-free-line-done` sentence starts in its neighbours' column
+[x] docs06-m16-paragraph     docs/06's M16 paragraph names the reviews' readers and checker, and M15's `pt-free-line-done` sentence starts in its neighbours' column
 [ ] docs03-review-rows       docs/03's delivery review row fixes the text the delivery wrote, as the apply skill says, and its candidate row glosses seen
 [ ] ch15-range-pointer       chapter 15 points `<base>..HEAD` to the chapter that teaches a range, or teaches it; both editions
 [ ] ch19-batch               chapter 19's batch stages its adjacent marks in docs/06 without contradicting what a conflict is, and points question deliveries to chapter 20 as Case A's customization; both editions
