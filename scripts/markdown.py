@@ -6,9 +6,11 @@ FIELD = re.compile(r"^([A-Za-z_][\w-]*):\s*(.*?)\s*$")
 # A note's key, as pandoc reads a label: any run without whitespace, `^`, `[` or `]`.
 NOTE_DEFINITION = re.compile(r"^ {0,3}\[\^([^\]\s^\[]+)\]:")
 NOTE_MENTION = re.compile(r"\[\^([^\]\s^\[]+)\]")
-# A fenced block opens on a run of three or more backticks or tildes after any indent;
+# A fenced block opens as CommonMark §4.5 reads a fence at the margin: at most three spaces,
+# then a run of three or more backticks whose info string holds no backtick,
+# or a run of three or more tildes with any info string;
 # group 1 is the run, group 2 the info string.
-FENCE_OPENING = re.compile(r"\s*(`{3,}|~{3,})(.*)")
+FENCE_OPENING = re.compile(r" {0,3}(`{3,}(?!.*`)|~{3,})(.*)")
 
 
 def front_matter(text):
@@ -31,8 +33,12 @@ def front_matter(text):
 
 
 def closes(line, run):
-    """Whether line closes a fenced block opened by run: it starts, after its indent, with the run."""
-    return line.lstrip().startswith(run)
+    """Whether line closes a fenced block opened by run, as CommonMark §4.5 reads it.
+
+    The line is at most three spaces, then a run of run's character at least len(run) long,
+    then only spaces or tabs to its end.
+    """
+    return re.fullmatch(" {0,3}" + re.escape(run[0]) + "{%d,}[ \t]*" % len(run), line) is not None
 
 
 def blank(text):
