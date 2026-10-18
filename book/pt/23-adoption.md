@@ -20,7 +20,7 @@ Um jeito que funciona consegue mostrar isso, e o método lhe dá os meios, com u
 
 **"Processo demais."**
 O método tem um regulador para isso ([capítulo 16](16-the-governor.md)): cada passo precisa nomear o erro concreto que teria pegado, ou sai.
-O que sobrevive são seis regras e duas checagens.
+O que sobrevive são as seis regras do kit, cada uma responde a uma falha (o [capítulo 6](06-birth-of-focus-kit.md) as lista); toda verificação é do próprio projeto, e entrou por um erro que aquele projeto encontrou.
 Um time que acha um passo que não pega nada o remove, e o método espera que ele faça isso.
 
 **"Nós já temos uma ferramenta."**

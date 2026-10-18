@@ -352,7 +352,7 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] ch18-log-evidence        chapter 18's log gives lend-book's commit as chapter 13 does, and its gain cites no illustration as evidence; both editions
 [x] ch19-when-worktrees-pay  chapter 19 says one thing about when a worktree per delivery pays; both editions
 [x] ch21-counts-once         chapter 21 gives each count once, its gain one number or pair, and points to chapter 13 for the pending-deletion story; both editions
-[ ] ch23-what-survives       chapter 23 says what survives of the method without Ninjobs' own product checks; both editions
+[x] ch23-what-survives       chapter 23 says what survives of the method without Ninjobs' own product checks; both editions
 [ ] ch24-note-keys           chapter 24's numbers carry their note key at the claim; both editions
 ```
 
