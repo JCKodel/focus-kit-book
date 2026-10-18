@@ -31,6 +31,7 @@ This is the lending library's first milestone on one afternoon, written for this
 [x] catalog         the librarian registers books and their copies
 [x] members         the librarian registers and suspends members
 [*] lend-book       the librarian lends a copy, or a rule refuses
+[ ] return-book     records a return · after lend-book
 [>] search-catalog  a member searches the catalog
 [~] reservations    a member reserves a copy that is on loan
 [ ] my-loans        a member sees their loans · after lend-book
@@ -38,7 +39,7 @@ This is the lending library's first milestone on one afternoon, written for this
 [ ] m1-review       the milestone checked against its paragraph
 ```
 
-Anyone reading it knows, without asking, that a session is building `lend-book`, that `search-catalog` has a page ready for `/apply`, that someone is talking `reservations` through right now, that `my-loans` comes after `lend-book`, and what `due-reminder` waits on and which command picks it up again.
+Anyone reading it knows, without asking, that a session is building `lend-book`, that `search-catalog` has a page ready for `/apply`, that someone is talking `reservations` through right now, that `return-book` and `my-loans` come after `lend-book`, and what `due-reminder` waits on and which command picks it up again.
 
 ## At the moment the work changes
 
@@ -55,9 +56,9 @@ A board refreshed by the command that changed the mark shows it at once, whichev
 ## The next line, and which run together
 
 A line is free when it is not `[x]` and not `[?]`, and every line its `after` names is `[x]`.
-In the milestone above, `lend-book`, `search-catalog` and `reservations` are free; `my-loans` is not, since `lend-book` is not `[x]` yet, and `due-reminder` waits.
+In the milestone above, `lend-book`, `search-catalog` and `reservations` are free; `return-book` and `my-loans` are not, since `lend-book` is not `[x]` yet, and `due-reminder` waits.
 The next delivery is the first free line no session holds: a session is building `lend-book` and another is defining `reservations`, so a new session's next delivery is `search-catalog`.
-When `lend-book` becomes `[x]`, `my-loans` is free from that moment, with nothing to clear and no mark to change; the `· after` stays on the line as the record of the order.
+When `lend-book` becomes `[x]`, `return-book` and `my-loans` are free from that moment, with nothing to clear and no mark to change; the `· after` stays on the line as the record of the order.
 A line with two orders, `· after lend-book, members`, is free only when both are `[x]`.
 
 `/propose` and `/apply` do not start a line that is not free: run `/propose my-loans` while `lend-book` is `[*]`, and it says what the line waits on and stops.
@@ -108,11 +109,12 @@ The milestone above, on a three-column board:
 ```
 TO DO                 DOING                  DONE
 due-reminder BLOCKED  reservations           catalog
-my-loans              search-catalog         members
-m1-review             lend-book
+return-book           search-catalog         members
+my-loans              lend-book
+m1-review
 ```
 
-`my-loans` sits in To Do with no tag: it waits its turn, not on anyone, and only `due-reminder` is tagged blocked.
+`return-book` and `my-loans` sit in To Do with no tag: they wait their turn, not on anyone, and only `due-reminder` is tagged blocked.
 
 `reservations` is in Doing from the first minute of its conversation, which is the error Case A's board had.
 Chapter 20 shows how a script mirrors the queue to a team's own board, one way.

@@ -32,6 +32,7 @@ Os sufixos `· after`, `· resume:` e `· blocked:` ficam em inglês, como o kit
 [x] catalogo          o bibliotecário cadastra livros e exemplares
 [x] membros           o bibliotecário cadastra e suspende membros
 [*] emprestar-livro   o bibliotecário empresta um exemplar ou a regra nega
+[ ] devolver-livro    registra a devolução · after emprestar-livro
 [>] buscar-catalogo   um membro busca no catálogo
 [~] reservas          um membro reserva um exemplar emprestado
 [ ] meus-emprestimos  o membro vê seus empréstimos · after emprestar-livro
@@ -39,7 +40,7 @@ Os sufixos `· after`, `· resume:` e `· blocked:` ficam em inglês, como o kit
 [ ] m1-review         o marco conferido contra o parágrafo dele
 ```
 
-Quem a lê sabe, sem perguntar, que uma sessão está construindo `emprestar-livro`, que `buscar-catalogo` tem uma página pronta para o `/apply`, que alguém está conversando `reservas` agora mesmo, que `meus-emprestimos` vem depois de `emprestar-livro`, e o que `aviso-prazo` espera e qual comando a retoma.
+Quem a lê sabe, sem perguntar, que uma sessão está construindo `emprestar-livro`, que `buscar-catalogo` tem uma página pronta para o `/apply`, que alguém está conversando `reservas` agora mesmo, que `devolver-livro` e `meus-emprestimos` vêm depois de `emprestar-livro`, e o que `aviso-prazo` espera e qual comando a retoma.
 
 ## No momento em que o trabalho muda
 
@@ -56,9 +57,9 @@ Um quadro atualizado pelo comando que mudou a marca a mostra na hora, em qualque
 ## A próxima linha, e quais rodam juntas
 
 Uma linha está livre quando não está `[x]` nem `[?]`, e toda linha que o `after` dela nomeia está `[x]`.
-No marco acima, `emprestar-livro`, `buscar-catalogo` e `reservas` estão livres; `meus-emprestimos` não, já que `emprestar-livro` ainda não está `[x]`, e `aviso-prazo` espera.
+No marco acima, `emprestar-livro`, `buscar-catalogo` e `reservas` estão livres; `devolver-livro` e `meus-emprestimos` não, já que `emprestar-livro` ainda não está `[x]`, e `aviso-prazo` espera.
 A próxima entrega é a primeira linha livre que nenhuma sessão pegou: uma sessão está construindo `emprestar-livro` e outra está definindo `reservas`, então a próxima entrega de uma sessão nova é `buscar-catalogo`.
-Quando `emprestar-livro` vira `[x]`, `meus-emprestimos` fica livre nesse momento, sem nada para tirar e sem marca para mudar; o `· after` fica na linha como o registro da ordem.
+Quando `emprestar-livro` vira `[x]`, `devolver-livro` e `meus-emprestimos` ficam livres nesse momento, sem nada para tirar e sem marca para mudar; o `· after` fica na linha como o registro da ordem.
 Uma linha com duas ordens, `· after emprestar-livro, membros`, só fica livre quando as duas estão `[x]`.
 
 O `/propose` e o `/apply` não começam uma linha que não está livre: rode `/propose meus-emprestimos` com `emprestar-livro` em `[*]`, e ele diz o que a linha espera e para.
@@ -109,11 +110,12 @@ O marco acima, em um quadro de três colunas:
 ```
 A FAZER              FAZENDO                    FEITO
 aviso-prazo TRAVADA  reservas                   catalogo
-meus-emprestimos     buscar-catalogo            membros
-m1-review            emprestar-livro
+devolver-livro       buscar-catalogo            membros
+meus-emprestimos     emprestar-livro
+m1-review
 ```
 
-`meus-emprestimos` fica em A fazer sem etiqueta: espera a sua vez, não por alguém, e só `aviso-prazo` é etiquetada como travada.
+`devolver-livro` e `meus-emprestimos` ficam em A fazer sem etiqueta: esperam a sua vez, não por alguém, e só `aviso-prazo` é etiquetada como travada.
 
 `reservas` está em Fazendo desde o primeiro minuto da conversa dela, que era o erro do quadro do Caso A.
 O capítulo 20 mostra como um script espelha a fila no quadro do próprio time, numa só direção.
