@@ -43,8 +43,18 @@ O [capítulo 18](18-git-essentials.md) e o [capítulo 19](19-worktrees.md) ensin
 2. Abra uma sessão nova, não a que rodou a instalação, digite `/brainstorm` e responda às perguntas dele, um assunto por vez; "your call" (você decide) mantém o padrão do agente.
    Você vê o docs/00 ao 06, `docs/adr/`, `AGENTS.md`, `CLAUDE.md` e `work/done/` escritos, a fila mostrada, e o agente nomeando o `/propose <slug>` para a primeira linha da fila, numa sessão nova.
    Ensinado no [capítulo 9](09-starting-a-project.md), "`/brainstorm`: um projeto novo".
-3. Leia os documentos contra a lista de conferência do capítulo 9, peça ao agente cada correção na mesma sessão, e então faça o commit deles com os arquivos do kit: `git add -A`, depois `git commit -m "Adicionar o kit e os documentos do /brainstorm"`, uma mensagem escrita para este capítulo, só o assunto, já que ainda não há página para a sua última linha.
-   Você vê um commit no `git log` com os documentos, o `AGENTS.md`, o `CLAUDE.md` e as pastas do host; daqui em diante, o seu docs/05 é dono do formato de cada mensagem.
+3. Leia os documentos contra a lista de conferência do capítulo 9 e peça ao agente cada correção na mesma sessão.
+   Depois coloque em stage, pelo nome, só os arquivos que a instalação relatou ter escrito e os que o `/brainstorm` escreveu; nunca `git add -A`, `git add .` ou uma pasta inteira como `.claude/`, que levariam junto uma anotação ou uma edição sua ao lado deles.
+   Uma parte dessa lista, para completar com o relato da instalação e os arquivos que o `/brainstorm` escreveu, não para copiar como está:
+
+   ```
+   git add AGENTS.md CLAUDE.md work/done/.gitkeep
+   git add .claude/skills/propose/SKILL.md
+   ```
+
+   Leia o que está em stage com `git diff --staged`, como o passo 7 faz: um arquivo que nem a instalação nem o `/brainstorm` escreveram não é deste commit, mesmo um posto em stage antes de você começar, e nomear caminhos não o tira de lá; descubra de quem ele é, e tire-o com `git rm --cached <caminho>` quando souber que ele pode ficar para um commit próprio, o que mantém o arquivo no disco; o `git restore --staged`, que o capítulo 19 usa, precisa de um primeiro commit existindo.
+   Então `git commit -m "Adicionar o kit e os documentos do /brainstorm"`, uma mensagem escrita para este capítulo, só o assunto, já que ainda não há página para a sua última linha.
+   Você vê um commit no `git log` com os documentos, o `AGENTS.md`, o `CLAUDE.md` e os arquivos do kit nas pastas do host, e nada mais; daqui em diante, o seu docs/05 é dono do formato de cada mensagem.
    Ensinado no [capítulo 9](09-starting-a-project.md), "Revise antes do commit".
 4. Numa sessão nova, digite `/propose <slug>`, com o slug da primeira linha da fila, e responda ao que os documentos deixam em aberto.
    Você vê `work/<slug>.md` escrito, a linha dele no docs/06 marcada `[>]`, e o agente pedindo que você leia a página e depois rode o `/apply <slug>` numa sessão nova.
@@ -75,8 +85,8 @@ Um projeto deixado depois do passo 3 está pronto para o kit: qualquer sessão p
 3. Abra uma sessão nova, não a que rodou a instalação, digite `/analyze` e responda à única rodada dele; cada padrão é o que o código já faz.
    Você vê a mudança mostrada antes de ser escrita, depois os documentos do passo 2 do projeto novo, um manual em `docs/manuals/` para cada coisa que uma pessoa já faz à mão, cada afirmação deduzida marcada como observada, e o agente nomeando o `/propose <slug>`.
    Ensinado no [capítulo 9](09-starting-a-project.md), "`/analyze`: um projeto existente".
-4. Confira cada afirmação observada contra o código, abrindo o arquivo que ela cita, e então revise e faça o commit como no passo 3 do projeto novo, a partir de uma árvore sem mudança sua, com `/analyze` na mensagem.
-   Você vê um commit com os documentos, o `AGENTS.md`, o `CLAUDE.md` e as pastas do host, e nada do seu código.
+4. Confira cada afirmação observada contra o código, abrindo o arquivo que ela cita, e então revise e faça o commit como no passo 3 do projeto novo, colocando em stage pelo nome só o que a instalação e o `/analyze` escreveram, a partir de uma árvore sem mudança sua, com `/analyze` na mensagem.
+   Você vê um commit com os documentos, o `AGENTS.md`, o `CLAUDE.md` e os arquivos do kit nas pastas do host, e nada do seu código.
    Ensinado no [capítulo 9](09-starting-a-project.md), "Revise antes do commit".
 5. Numa sessão nova, digite `/propose <slug>` para a primeira linha da fila: com o código já lá, não há esqueleto a construir, então ela é a menor mudança de que o primeiro marco precisa.
    Você vê uma página cujo Pronto quando roda o comando de verificação que o `/analyze` observou, e o agente pedindo que você a leia.

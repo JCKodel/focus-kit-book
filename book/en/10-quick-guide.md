@@ -43,8 +43,18 @@ One choice is yours before the first `/propose`: the git strategy, trunk, a bran
 2. Open a fresh session, not the one that ran the install, and type `/brainstorm`, then answer its questions, one subject at a time; "your call" keeps the agent's default.
    You see docs/00 to 06, `docs/adr/`, `AGENTS.md`, `CLAUDE.md` and `work/done/` written, the queue shown, and the agent naming `/propose <slug>` for the queue's first line, in a fresh session.
    Taught in [chapter 9](09-starting-a-project.md), "`/brainstorm`: a new project".
-3. Read the documents against chapter 9's checklist, ask the agent for every fix in the same session, then commit them with the kit's files: `git add -A`, then `git commit -m "Add the kit and the documents from /brainstorm"`, a message written for this chapter, a subject alone, since there is no page yet for its last line.
-   You see one commit in `git log` holding the documents, `AGENTS.md`, `CLAUDE.md` and the host's folders; from here, your docs/05 owns the format of every message.
+3. Read the documents against chapter 9's checklist and ask the agent for every fix in the same session.
+   Then stage by name only the files the install reported writing and the ones `/brainstorm` wrote; never `git add -A`, `git add .` or a whole folder such as `.claude/`, which would also take a note or an edit of yours lying beside them.
+   A part of that list, to complete from the install's report and the files `/brainstorm` wrote, not to copy as it stands:
+
+   ```
+   git add AGENTS.md CLAUDE.md work/done/.gitkeep
+   git add .claude/skills/propose/SKILL.md
+   ```
+
+   Read what is staged with `git diff --staged`, as step 7 does: a file neither the install nor `/brainstorm` wrote is not this commit's, even one staged before you began, and naming paths does not take it out; find out whose it is, and take it out with `git rm --cached <path>` once you know it can wait for its own commit, which leaves the file on disk; `git restore --staged`, which chapter 19 uses, needs a first commit to exist.
+   Then `git commit -m "Add the kit and the documents from /brainstorm"`, a message written for this chapter, a subject alone, since there is no page yet for its last line.
+   You see one commit in `git log` holding the documents, `AGENTS.md`, `CLAUDE.md` and the kit's files in the host's folders, and nothing else; from here, your docs/05 owns the format of every message.
    Taught in [chapter 9](09-starting-a-project.md), "Review before you commit".
 4. In a fresh session, type `/propose <slug>`, with the slug of the queue's first line, and answer what the documents leave open.
    You see `work/<slug>.md` written, its line in docs/06 marked `[>]`, and the agent asking you to read the page, then to run `/apply <slug>` in a fresh session.
@@ -75,8 +85,8 @@ A project left after step 3 is ready for the kit: any later session reads its do
 3. Open a fresh session, not the one that ran the install, and type `/analyze`, then answer its one round; each default is what the code already does.
    You see the change shown before it is written, then the documents of the new project's step 2, a manual in `docs/manuals/` for each thing a person already does by hand, every inferred statement marked observed, and the agent naming `/propose <slug>`.
    Taught in [chapter 9](09-starting-a-project.md), "`/analyze`: an existing project".
-4. Check every observed statement against the code, opening the file it names, then review and commit them as in the new project's step 3, from a tree with no change of yours, with `/analyze` in the message.
-   You see one commit holding the documents, `AGENTS.md`, `CLAUDE.md` and the host's folders, and none of your code.
+4. Check every observed statement against the code, opening the file it names, then review and commit them as in the new project's step 3, staging by name only what the install and `/analyze` wrote, from a tree with no change of yours, with `/analyze` in the message.
+   You see one commit holding the documents, `AGENTS.md`, `CLAUDE.md` and the kit's files in the host's folders, and none of your code.
    Taught in [chapter 9](09-starting-a-project.md), "Review before you commit".
 5. In a fresh session, type `/propose <slug>` for the queue's first line: with code already there, there is no skeleton to build, so it is the smallest change the first milestone needs.
    You see a page whose Done when runs the verify command `/analyze` observed, and the agent asking you to read it.
