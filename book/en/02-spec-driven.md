@@ -17,7 +17,7 @@ Spec-Driven Development (SDD) "*means writing a “spec” before writing code w
 
 > **Note.** Behaviour, here, is what the software does as its user sees it: in this situation, this happens.
 > "A member with an overdue book is refused, with the message 'Return your overdue books first'" is behaviour; "add a column to the loans table" is not, it is how.
-> Written this way, each line can be checked by a test or by a person, and that is why the page of a focus-kit delivery has a section named Behaviour ([chapter 12](12-propose.md)).
+> Written this way, each line can be checked by a test or by a person, and that is why the page of a focus-kit delivery has a section named Behaviour.
 
 ## Two tools
 
@@ -56,7 +56,7 @@ The difference is how many other files say it again: a rule restated in a file i
 Böckeler found the same with Spec Kit: its files "*were repetitive, both with each other, and with the code that already existed*", and "*very verbose and tedious to review.*"[^bockeler-2025]
 
 One page is enough because most of what those files repeat, the product, its vocabulary, its rules and the decisions already taken, is the same for every feature.
-focus-kit writes that part once per project, in documents kept up to date ([chapter 7](07-the-documents.md)), so the page of a feature holds only what is new about it.
+focus-kit writes that part once per project, in documents kept up to date, so the page of a feature holds only what is new about it.
 The cost is to write those documents and keep them true; the return is one page per feature, read and reviewed in one sitting, in place of a folder.
 The counts say what each tool writes before the code; they do not say which one builds better software, and one feature on one day is not a benchmark.
 

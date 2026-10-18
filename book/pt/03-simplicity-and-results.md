@@ -8,7 +8,7 @@ Você também consegue manter as exceções de uma biblioteca na fronteira, de m
 
 Na Ninjobs, o meu próprio produto, eu deixei a complexidade crescer, uma adição razoável por vez.
 Eu exigia a forma completa, em camadas, da arquitetura em toda feature, formulários triviais incluídos, então mostrar um campo em uma tela levava oito arquivos; toda entrega tinha que passar por 29 verificações que nunca tinham pegado um erro no produto.
-A culpa não era da arquitetura; KISS e YAGNI se perderam (o capítulo 6 conta o que deu errado e como o processo recomeçou).
+A culpa não era da arquitetura; KISS e YAGNI se perderam.
 
 Fred Brooks dividiu a dificuldade do software em duas em 1987: a complexidade essencial, que pertence ao próprio problema, e a complexidade acidental, que as pessoas que constroem acrescentam pelo caminho.[^brooks-silver-bullet]
 Ninguém consegue remover a primeira; a segunda é uma escolha, feita um arquivo por vez, e os três princípios deste capítulo são três maneiras de recusá-la.
@@ -96,7 +96,7 @@ Nomear a primeira cópia torna o movimento verificável: quem revisa abre as dua
 
 Na biblioteca de empréstimos, `Result`, o tipo que carrega um valor ou o que o impediu (a seção dele vem a seguir), aparece primeiro dentro da feature de empréstimos, como o tipo de retorno de `emprestar` em `features/emprestimos/regras.ts`.
 Ele fica lá enquanto tem um usuário.
-Depois, uma entrega de membros precisa de uma regra que pode recusar, e `Result` seria escrito uma segunda vez; essa entrega o move para `src/lib/result.ts`, a pasta do código que não pertence a nenhuma feature (capítulo 4), e diz isso:
+Depois, uma entrega de membros precisa de uma regra que pode recusar, e `Result` seria escrito uma segunda vez; essa entrega o move para `src/lib/result.ts`, a pasta do código que não pertence a nenhuma feature, e diz isso:
 
 ```ts
 // Primeiro uso: features/emprestimos/regras.ts (emprestar).
@@ -134,7 +134,7 @@ Ela lê um membro e responde.
 De onde o membro veio, um banco de dados ou um teste, não é assunto dela.
 Imutabilidade é a mesma ideia aplicada aos dados: uma função que muda a sua entrada esconde uma segunda saída, então `podePegarEmprestado` devolve o membro que recebeu ou uma recusa, e não muda nada.
 
-A Clean Architecture, como costuma ser praticada, injeta os repositórios no caso de uso que guarda a regra, e o teste dele passa a precisar de um repositório falso para cada um; este livro mantém `podePegarEmprestado` pura, recebendo um membro e não um jeito de buscá-lo, e deixa buscar e salvar para um orquestrador, a função em volta da regra que o capítulo 4 constrói.
+A Clean Architecture, como costuma ser praticada, injeta os repositórios no caso de uso que guarda a regra, e o teste dele passa a precisar de um repositório falso para cada um; este livro mantém `podePegarEmprestado` pura, recebendo um membro e não um jeito de buscá-lo, e deixa buscar e salvar para um orquestrador, a função em volta da regra.
 
 ## Result: o valor que carrega uma falha
 
@@ -230,7 +230,7 @@ O código que rodou a escrita lê essa falha e devolve a recusa `JaEmprestado`, 
 Qualquer outra falha da mesma escrita continua `BancoDeDadosFalhou`.
 
 Um catch largo assim também captura um bug lançado dentro de `executar`, e o transforma em `BancoDeDadosFalhou`.
-Duas coisas trazem o bug de volta a você: um teste que roda toda chamada ao banco de dados contra um banco de dados real, em memória, e confere o valor que recebe (capítulo 5), e uma linha de log que imprime a `mensagem` antes de o programa responder.
+Duas coisas trazem o bug de volta a você: um teste que roda toda chamada ao banco de dados contra um banco de dados real, em memória, e confere o valor que recebe, e uma linha de log que imprime a `mensagem` antes de o programa responder.
 
 Dois tipos de throw passam pela fronteira intocados, um fatal, como acabar a memória, e o fluxo de controle próprio de um framework, lançado de propósito.
 Então a regra fica assim: capture na fronteira com o mundo de fora, traduza, e deixe todo o resto passar.
@@ -260,7 +260,7 @@ Em Rust e em Dart, um `match` ou um `switch` exaustivo faz o mesmo; em Go, um li
 > O que eu devia estar fazendo era ler os capítulos e dizer o que mudar.
 > Por conta própria, o agente tinha entrado numa espiral de verificações que verificavam verificações, e uma pergunta é o que a interrompe: que erro concreto este passo teria pegado?
 
-O capítulo 16, o regulador, transforma essa pergunta na regra que todo passo do processo precisa responder: um passo entra quando nomeia o erro concreto que teria pegado, e sai quando não nomeia nenhum.
+Este livro chama essa pergunta de regulador e faz dela a regra que todo passo do processo precisa responder: um passo entra quando nomeia o erro concreto que teria pegado, e sai quando não nomeia nenhum.
 
 ## O que o time ganha
 

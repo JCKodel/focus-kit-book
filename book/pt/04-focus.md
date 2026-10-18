@@ -56,7 +56,7 @@ src/lib/result.ts         Result, ok e err
 `TelaDeEmprestimo.tsx` é a tela de empréstimo; `eventosDeEmprestimo.ts` recebe o que a tela pede e responde com o novo estado; `regras.ts` guarda as regras do capítulo 3, como `emprestar`; `repositorio.server.ts` lê e escreve no banco de dados, e `rota.server.ts` é o endereço do empréstimo no servidor.
 Um nome terminado em `.server.ts` roda só no servidor, e o código do cliente nunca importa um deles.
 Os testes ficam ao lado do código que testam.
-Cada um desses arquivos é uma das quatro peças que este capítulo nomeia mais adiante, e o capítulo 5 dá a cada uma o seu teste.
+Cada um desses arquivos é uma das quatro peças que este capítulo nomeia mais adiante, e cada uma tem o seu próprio teste.
 A pasta `features/` fica em inglês, porque é o nome que este livro dá à pasta das fatias, assim como ele diz *feature*, sem traduzir; cada fatia dentro dela tem um nome em português, da biblioteca de empréstimos: `emprestimos/`, `membros/`, `catalogo/`.
 
 A pasta de cima grita a biblioteca: empréstimos, membros, catálogo.
@@ -202,7 +202,7 @@ As recusas são strings e a exceção é um objeto com um `codigo`, então `esta
 O código mostra mais três coisas:
 
 * **Os repositórios são um parâmetro.** O servidor passa os reais, ligados ao banco dele, e nada mais na função vem de fora.
-* **Um teste passa repositórios falsos.** Um repositório falso é uma segunda implementação que responde o que o teste define, então o teste sabe quais repositórios foram chamados, com o quê, e que estado saiu, e o fluxo inteiro de uma feature é provado sem banco e sem tela (o capítulo 5 mostra o teste).
+* **Um teste passa repositórios falsos.** Um repositório falso é uma segunda implementação que responde o que o teste define, então o teste sabe quais repositórios foram chamados, com o quê, e que estado saiu, e o fluxo inteiro de uma feature é provado sem banco e sem tela.
 * **O relógio é um valor.** `hoje` é lido uma vez, onde o evento chega, e repassado como dado; nem `emprestimoPedido` nem `emprestar` leem o relógio, então o teste de uma data de devolução passa a data que quiser.
 
 ## Dependências só onde existe uma implementação falsa

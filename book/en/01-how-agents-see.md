@@ -84,7 +84,7 @@ Two practices follow.
 A decision that lives only in the conversation is gone in a fresh session and can be lost in a compaction.
 A decision in a file is loaded whole at the start of every session, near the beginning of the window.
 The rules file is the entry point: short, and it names the documents to read before acting.
-This is the start of a rules file for a small lending library, the project whose code Part I uses as its example from chapter 3 on, written for this chapter:
+This is the start of a rules file for a small lending library, the project whose code Part I uses as its example, written for this chapter:
 
 ```markdown
 # Lending library
@@ -98,13 +98,13 @@ each loan and each return.
 - process: docs/05 · queue: docs/06
 ```
 
-A fresh session reads what the project is in one line, then where each kind of fact lives; the files it names hold the rest, and [chapter 7](07-the-documents.md) explains them.
+A fresh session reads what the project is in one line, then where each kind of fact lives; the files it names hold the rest.
 
 **Each delivery gets a fresh session.**
 In a fresh session the window holds the rules file, the documents and the page of the delivery, and nothing left over from the previous one.
 Deciding and building go in separate sessions too.
 The conversation that weighed the options, including the ones you rejected, stays out of the window where the code is written; what reaches it is the decision, written on one page.
-In focus-kit, `/propose` writes that page ([chapter 12](12-propose.md)) and `/apply` builds it in a fresh session ([chapter 13](13-apply.md)).
+In focus-kit, `/propose` writes that page and `/apply` builds it in a fresh session.
 
 ## What the team gains
 

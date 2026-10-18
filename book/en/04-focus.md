@@ -55,7 +55,7 @@ src/lib/result.ts            Result, ok and err
 `LendView.tsx` is the lending screen; `lendEvents.ts` receives what the screen asks for and answers with the new state; `rules.ts` holds the rules of chapter 3, such as `lend`; `repository.server.ts` reads and writes the database, and `route.server.ts` is the server's address for the loan.
 A name ending in `.server.ts` runs only on the server, and client code never imports one.
 The tests sit beside the code they test.
-Each of these files is one of the four pieces this chapter names further on, and chapter 5 gives each its test.
+Each of these files is one of the four pieces this chapter names further on, and each has its own test.
 
 The top folder screams the library: loans, members, catalog.
 A change to how lending works touches `loans/`, and removing loans from the product removes one folder.
@@ -200,7 +200,7 @@ The refusals are strings and the exception is an object with a `code`, so `state
 Three more things the code shows:
 
 * **The repositories are a parameter.** The server passes the real ones, bound to its database, and nothing else in the function comes from outside.
-* **A test passes fakes.** A fake is a second implementation that answers what the test sets, so the test knows which repositories were called, with what, and what state came out, and the whole flow of a feature is proven with no database and no screen (chapter 5 shows the test).
+* **A test passes fakes.** A fake is a second implementation that answers what the test sets, so the test knows which repositories were called, with what, and what state came out, and the whole flow of a feature is proven with no database and no screen.
 * **The clock is a value.** `today` is read once, where the event arrives, and handed on as data; neither `lendRequested` nor `lend` reads the clock, so a test of a due date passes the date it wants.
 
 ## Dependencies only where a fake exists

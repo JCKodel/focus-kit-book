@@ -17,7 +17,7 @@ Desenvolvimento Guiado por Especificação (SDD) "*significa escrever uma “esp
 
 > **Nota.** Comportamento, aqui, é o que o software faz do jeito que o usuário vê: nesta situação, acontece isto.
 > "Um membro com um livro atrasado é recusado, com a mensagem 'Devolva primeiro os seus livros atrasados'" é comportamento; "acrescentar uma coluna à tabela de empréstimos" não é, é o como.
-> Escrita assim, cada linha pode ser conferida por um teste ou por uma pessoa, e é por isso que a página de uma entrega do focus-kit tem uma seção chamada Comportamento ([capítulo 12](12-propose.md)).
+> Escrita assim, cada linha pode ser conferida por um teste ou por uma pessoa, e é por isso que a página de uma entrega do focus-kit tem uma seção chamada Comportamento.
 
 ## Duas ferramentas
 
@@ -56,7 +56,7 @@ A diferença é quantos outros arquivos a dizem de novo: uma regra repetida num 
 Böckeler encontrou o mesmo no Spec Kit: os arquivos dele "*eram repetitivos, tanto entre si quanto com o código que já existia*", e "*muito verbosos e tediosos de revisar.*"[^bockeler-2025]
 
 Uma página basta porque a maior parte do que esses arquivos repetem, o produto, o seu vocabulário, as suas regras e as decisões já tomadas, é a mesma para toda feature.
-O focus-kit escreve essa parte uma vez por projeto, em documentos mantidos em dia ([capítulo 7](07-the-documents.md)), então a página de uma feature guarda só o que é novo nela.
+O focus-kit escreve essa parte uma vez por projeto, em documentos mantidos em dia, então a página de uma feature guarda só o que é novo nela.
 O custo é escrever esses documentos e mantê-los verdadeiros; o retorno é uma página por feature, lida e revisada de uma vez, no lugar de uma pasta.
 As contagens dizem o que cada ferramenta escreve antes do código; não dizem qual delas constrói software melhor, e uma feature num dia não é um benchmark.
 

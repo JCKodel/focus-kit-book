@@ -12,9 +12,9 @@ On Ninjobs a decision lived in six places, and keeping them in step cost more th
 ## One place per fact
 
 Each fact of the project lives in one place, and the agent reads it there.
-focus-kit gives those places a fixed shape: seven numbered documents, docs/00 to docs/06; a folder of decisions, `docs/adr/`; a folder of manuals, `docs/manuals/`, one per action of more than one command, done by hand outside a delivery or a proof `/apply` runs on another machine; the rules file, `AGENTS.md`; and `work/`, which holds one page per delivery (chapter 12).
+focus-kit gives those places a fixed shape: seven numbered documents, docs/00 to docs/06; a folder of decisions, `docs/adr/`; a folder of manuals, `docs/manuals/`, one per action of more than one command, done by hand outside a delivery or a proof `/apply` runs on another machine; the rules file, `AGENTS.md`; and `work/`, which holds one page per delivery.
 The numbers are fixed because the commands cite them; the name after the number is in the documentation language, `00-Product.md` in a project documented in English and `00-Produto.md` in one documented in Portuguese.
-`/brainstorm` or `/analyze` writes them once (chapter 9); `/propose` and `/apply` read them before they act.
+`/brainstorm`, which defines a new project by conversation, or `/analyze`, which reads an existing repository, writes them once; `/propose` and `/apply` read them before they act.
 
 An agent answers from what is in its window, so what matters is which text gets there.
 Retrieval-augmented generation (RAG) is one way to bring it: with each question, a retriever finds passages in a body of writing kept outside the model, and the model answers from them.
@@ -42,13 +42,13 @@ The table is the vocabulary: every page, identifier and test uses its terms, and
 **docs/04, the conventions.** The language of the documents and of the identifiers, naming, style and the tool that enforces it, where tests live and what each level tests.
 
 **docs/05, the process.** The kit's process, the same in every project: the rule, the flow from queue to commit, the shape of a page, the queue, the commit and the format of its message, what the process does not have, and how a milestone closes.
-One section is filled in by the project, "This project", whose entries are its ten slots: the documentation language, the command that verifies a delivery, the environments, how a screen is proved, when anything is published, whether `context/` is committed, who reviews a delivery's changes before `/apply` ends (chapter 13), the manuals, the areas the milestone review's code reading splits into and the model its readers and checker run on (chapter 15), and the git strategy.
-Whatever the publish policy says, `/apply`'s last words say which environment is at which version (chapter 13).
+One section is filled in by the project, "This project", whose entries are its ten slots: the documentation language, the command that verifies a delivery, the environments, how a screen is proved, when anything is published, whether `context/` is committed, who reviews a delivery's changes before `/apply` ends, the manuals, the areas into which the review that closes a milestone splits its code reading and the model its readers and checker run on, and the git strategy.
+Whatever the publish policy says, `/apply`'s last words say which environment is at which version.
 A slot says what and the command, in a few lines, because `/apply` reads it every time; the steps go in a manual, and what a command prints stays in its help.
 So a slot does not say which delivery created its command or how it used to work: that history is on the delivery's page in `work/done/` and in the ADR.
 The commands read these facts here, so no command file holds any of them.
 
-**docs/06, the queue.** The milestones, each with a paragraph saying what is true when it closes, and under each one line per delivery, in order, with a mark for its state (chapter 11).
+**docs/06, the queue.** The milestones, each with a paragraph saying what is true when it closes, and under each one line per delivery, in order, with a mark for its state.
 It is the document you touch most: the whole of the project's work, added to and edited every day, by conversation.
 It does what a kanban board or a backlog of work items does in an agile process, with one difference: the agent reads it.
 Every document is read, and corrected when it is wrong; the queue is the one that gives the product its shape.
@@ -66,9 +66,9 @@ Ninjobs, a thin web app over a backend as a service, chose the two principles.
 On a repository that already has code, the default is what the code already does.
 docs/01 records the answer, and an ADR records why.
 
-**The git strategy.** Three answers, each for one way of working: trunk, everything on the main branch, for one person, alone or with several sessions on free lines (queue lines not done, not waiting and needing no other line done first, defined yet or not; [chapter 14](14-queue-states.md)) that touch different files; a branch per delivery, merged through a reviewed pull request, for sequential work; a worktree per delivery, a second working folder on its own branch, for several people, or for one person whose deliveries touch the same files.
+**The git strategy.** Three answers, each for one way of working: trunk, everything on the main branch, for one person, alone or with several sessions on free lines (queue lines not done, not waiting and needing no other line done first, defined yet or not) that touch different files; a branch per delivery, merged through a reviewed pull request, for sequential work; a worktree per delivery, a second working folder on its own branch, for several people, or for one person whose deliveries touch the same files.
 In every one, a delivery's page and build are one change that reverts in one step, and the agent never commits or merges.
-Chapters 18 and 19 teach the three.
+Part III teaches the three.
 The Git slot of docs/05 records the answer, and an ADR records why.
 
 ## ADRs
@@ -90,13 +90,13 @@ The slot says what and the command, and the manual holds the steps for whoever r
 A single command, such as the one that verifies a delivery, needs no manual: it stays in its slot.
 
 In the same docs/05, the Environments slot names the command that publishes the app and points to `docs/manuals/publish-the-app.md`; the steps live only there.
-`/analyze` writes the manuals for what a repository already does by hand, `/apply` writes or updates one when a delivery adds or changes it ([chapter 13](13-apply.md)), and `/brainstorm` writes none.
+`/analyze` writes the manuals for what a repository already does by hand, `/apply` writes or updates one when a delivery adds or changes it, and `/brainstorm` writes none.
 The folder is created with the first manual, so there is no empty folder, and `AGENTS.md` points to it.
 
 ## AGENTS.md
 
 `AGENTS.md` is the rules file of chapter 1, an open format that coding agents read at the start of a session.[^agents-md]
-Every host of chapter 8 reads it, on its own or through a pointer; Claude Code reads it through `CLAUDE.md`, which holds the line `@AGENTS.md` and, below it, only what applies to Claude Code alone.
+Every host reads it, on its own or through a pointer; Claude Code reads it through `CLAUDE.md`, which holds the line `@AGENTS.md` and, below it, only what applies to Claude Code alone.
 `AGENTS.md` names no host's tool, so it reads the same in every one.
 
 It has four short sections: what to read before acting, the non-negotiables, what not to rebuild, and how to work.

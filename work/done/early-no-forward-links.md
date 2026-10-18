@@ -45,7 +45,7 @@
 **Deliveries in flight on the same files.** Other sessions' pages of M18; this one applies after them (decision 8) and edits only the pointer sentences.
 
 * `ch02-gain-less-to-read`: chapter 2's gain section, which this line does not touch.
-* `ch03-literal-type-comment`: chapter 3's refusal code block (section "Result: the value that carries a failure"). `ch03-error-languages`: chapter 3's "Exception, refusal, error" (pt 03:164). `pt-identifiers-choice`: pt 03:25 and docs/04 §Writing the book's Evidence and Code bullets, a hunk apart from the two bullets here. None holds a pointer of this list.
+* `ch03-literal-type-comment`: chapter 3's refusal code block (section "A pure function"; the page first placed it in "Result", corrected at apply). `ch03-error-languages`: chapter 3's "Exception, refusal, error" (pt 03:164). `pt-identifiers-choice`: pt 03:25 and docs/04 §Writing the book's Evidence and Code bullets, a hunk apart from the two bullets here. None holds a pointer of this list.
 * `ch04-focus-optional`: chapter 4's opening and gain. `ch04-uncle-bob`: en 04:28. `ch04-scalable-meaning`: the S of FOCUS (pt 04:102). None holds a pointer of this list.
 * `ch05-test-time`: chapter 5's testing sections, near en 05:138 to 148, where 05:147 is edited here; a gloss of "milestone" it adds follows decision 5. `ch05-random-values`: chapter 5's "Swap only I/O and the clock".
 * `ch07-rag-and-numbers`: chapter 7's "The seven documents", where 07:35, 36 and 41 are edited here. `ch07-talk-not-edit`: pt 07:133, "Living documents".
@@ -62,11 +62,52 @@
 
 **Done when.**
 
-* [ ] Behaviour's apply-time check prints nothing for both editions; every changed sentence listed on the page, en and pt line beside each.
-* [ ] docs/04's two bullets amended as Behaviour quotes, with the count /apply made.
-* [ ] Both editions changed alike; each changed chapter still opens with its value, keeps its gain, no filler and nothing useful cut.
-* [ ] Every number sourced: no number added.
-* [ ] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no Case A or Case B passage changes beyond a pointer (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunks of docs/04 and docs/06, commit message in a `commit` block.
+* [x] Behaviour's apply-time check prints nothing for both editions; every changed sentence listed on the page, en and pt line beside each.
+* [x] docs/04's two bullets amended as Behaviour quotes, with the count /apply made.
+* [x] Both editions changed alike; each changed chapter still opens with its value, keeps its gain, no filler and nothing useful cut.
+* [x] Every number sourced: no number added.
+* [x] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no Case A or Case B passage changes beyond a pointer (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author: by the driver, once at the end of the batch (batch rule 4).
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunks of docs/04 and docs/06, commit message in a `commit` block: the page moved by /apply; the mark, the staging and the commit by the driver (batch rules 1 and 2).
+
+## Applied (2026-10-18)
+
+**What changed.** Lines are after the edit, en/pt; the before-edit check, run after every other M18 delivery on chapters 0 to 7 was committed, found the same 34 sentences per edition as Behaviour, at new line numbers; no other delivery added a pointer forward.
+
+* Prologue: 37/37 (ch 7, near), 45/45 (ch 1, near), 55/55 ("chapter 24, in Part V" goes whole, as listed), 61/61 (ch 16, kind b: "a rule this book calls the governor" / "uma regra que este livro chama de regulador"; the sentence already states the rule; "this book" and not "the method", which the prologue has not named by then, and chapter 3's only "method" before it is Extreme Programming), 62/62 (ch 2 and 6, near; the sentence ends "writing the spec became the work."), 66/66, 95/95, 97/97.
+* Chapter 1: 87/87 ("from chapter 3 on" goes, near; "Part I" stays), 101/101 (ch 7, near), 107/107 (ch 12 and 13).
+* Chapter 2: 20/20, 59/59 (ch 7, near).
+* Chapter 3: 11/11 (ch 6, near), 98/99 (ch 4, near), 136/137 (ch 4, near; "the function around the rule" stays), 232/233 (ch 5, near), 262/263 (ch 16, kind b: "This book calls that question the governor and makes it the rule every step..." / "Este livro chama essa pergunta de regulador e faz dela a regra que todo passo...").
+* Chapter 4: 58/59 (ch 5, near: "and each has its own test" / "e cada uma tem o seu próprio teste"), 203/205 (ch 5, near).
+* Chapter 5: 81/81 (ch 12), 168/168 (ch 13).
+* Chapter 6: 9/9 (ch 7, near), 38/38 (ch 9), 43/43 (ch 16; "the governor" already named in the prologue and chapter 3).
+* Chapter 7: 15/15 (ch 12), 17/18 (ch 9, kind b: "`/brainstorm`, which defines a new project by conversation, or `/analyze`, which reads an existing repository, writes them once"), 45/46 (ch 13 kind a, ch 15 kind b: "the areas into which the review that closes a milestone splits its code reading" / "as áreas em que a revisão que fecha um marco divide a leitura do código"), 46/47 (ch 13), 51/52 (ch 11), 69/70 (ch 14; the parenthesis ends "defined yet or not)"), 71/72 ("Chapters 18 and 19 teach the three." becomes "Part III teaches the three." / "A Parte III ensina as três."), 92/93 (ch 13), 98/99 (ch 8, kind a: "host" is defined in chapter 1, line 10, so "Every host reads it" needs no gloss).
+
+**Divergences.**
+
+* Behaviour's check, run literally, also prints chapter 3's footnote `[^rust-book-errors]` ("The Rust Programming Language, chapter 9"), a chapter of another book, which Behaviour keeps as a source. The script skips footnote definitions (lines starting `[^`); with that it prints nothing for either edition.
+* 07:98/99 is kind a, not b: the page's own condition ("unless chapters 0 to 7 already said it") holds, chapter 1 defines the host.
+* "Milestone" in 07:45/46 needs no gloss: ch05-test-time glosses it at 05:41. Only "the review that closes a milestone" is said.
+* docs/04's "after the first sentence of Chapter pointers" is read as after "A pointer forward names a term the reader has not been taught, once per chapter for each target.", the first sentence after the bold label and its parenthesis.
+* The count in docs/04 reads "38 pointers in 34 sentences per edition" where Behaviour quoted "34 per edition": 00:62, 01:107, 07:45 and 07:71 named two chapters each (the review's wording, applied).
+* 07:71/72: Behaviour said the sentence goes whole. The review found that cutting it leaves trunk, branch, pull request and merge with nothing said of them, since chapters 0 to 6 teach no git; a kind *b* the page missed. It now names Part III, which the prologue says is git (decision 3 keeps Parts), and no chapter.
+* 07:45 reads "the areas into which the review that closes a milestone splits its code reading", the review's wording, clearer than stacking the two clauses.
+* docs/04's bullet "Teach, do not only show" keeps its example "chapter 7 shows that document", cited from the prologue's `author-review-1`: it is the record of the rule's first occurrence and the rule still holds for chapters 8 on; the prologue no longer has that clause.
+
+**Proof.** `make verify` green (strict build, parity, em dash, prose, width, links, disclosure). Apply-time check after the edits: `en lines 0`, `pt lines 0`. `make book`: by the driver at the end of the batch.
+
+**Delivery review.** A read-only Opus agent, which did not write the changes, read `git diff` of the sixteen chapters and docs/04 against this page and docs/04. It found one thing that broke docs/04: once 07:71/72 was cut, git's terms had nothing said of them. That is fixed by naming Part III. It made two wording suggestions, 07:45 and the docs/04 count, and both were applied (see Divergences). Everything else passed: no pointer forward is left, even under a wider search (number words, "the chapter on", bare links); gains, chapter 6's map, Parts and pointers back are intact; the glosses read whole; both editions changed alike; no em dash; docs/04 matches Behaviour. `make verify` green again after the fixes, and the check prints nothing. Nothing new for the queue.
+
+**Decisions.** The page's own list, applied as written, except for the divergences above.
+
+```commit
+docs(early-no-forward-links): say each idea where it appears in chapters 0 to 7
+
+- cut 38 pointers forward in 34 sentences per edition, chapters 0 to 7
+- gloss the governor, /brainstorm and /analyze, the milestone review
+- chapter 7 names Part III for git strategies, no chapter
+- docs/04: no pointer forward in the base outside gains and ch 6's map
+
+work/done/early-no-forward-links.md
+```

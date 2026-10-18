@@ -78,7 +78,7 @@ It lives in the use case `lend` of [chapter 4](04-focus.md), and each piece it c
 
 Kent Beck's test-driven development writes the test before the code, in a cycle of three steps: red, the test fails because the code does not exist yet; green, the smallest code that makes it pass; then clean up, with the test still green.[^beck-tdd]
 A pure rule is the easiest place to do it, because its test is a call with data: run the first test below before `lend` exists and it is red, write `lend` and it is green.
-The page of a delivery lists its behaviours (chapter 12), each one becomes a red test, and the delivery is done when every one of them is green and nothing that was green went red.
+The page of a delivery lists its behaviours, each one becomes a red test, and the delivery is done when every one of them is green and nothing that was green went red.
 
 **The use case.** `rules.test.ts` calls `lend` with data:
 
@@ -165,7 +165,7 @@ A test written after the code, by the agent that wrote the code, may assert what
 A green suite still does not prove that the software works.
 A test can be wrong and pass.
 Unit tests check each piece alone, and the sum of the pieces can fail where no piece does: a field the client sends under one name and the server reads under another passes every unit test on both sides.
-That is the job of the few end-to-end tests, and the reason a delivery also carries a proof, the result seen working, before anyone calls it done ([chapter 13](13-apply.md)).
+That is the job of the few end-to-end tests, and the reason a delivery also carries a proof, the result seen working, before anyone calls it done.
 
 ## What the team gains
 

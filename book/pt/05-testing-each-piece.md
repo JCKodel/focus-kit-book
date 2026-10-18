@@ -78,7 +78,7 @@ Ela mora no caso de uso `emprestar` do [capítulo 4](04-focus.md), e cada peça 
 
 O desenvolvimento guiado por testes de Kent Beck escreve o teste antes do código, em um ciclo de três passos: vermelho, o teste falha porque o código ainda não existe; verde, o menor código que o faz passar; depois a limpeza, com o teste ainda verde.[^beck-tdd]
 Uma regra pura é o lugar mais fácil de fazer isso, porque o teste dela é uma chamada com dados: rode o primeiro teste abaixo antes de `emprestar` existir e ele está vermelho, escreva `emprestar` e ele está verde.
-A página de uma entrega lista os seus comportamentos (capítulo 12), cada um vira um teste vermelho, e a entrega está pronta quando todos eles estão verdes e nada que estava verde ficou vermelho.
+A página de uma entrega lista os seus comportamentos, cada um vira um teste vermelho, e a entrega está pronta quando todos eles estão verdes e nada que estava verde ficou vermelho.
 
 **O caso de uso.** `regras.test.ts` chama `emprestar` com dados:
 
@@ -165,7 +165,7 @@ Um teste escrito depois do código, pelo agente que escreveu o código, pode afi
 Uma suíte verde ainda não prova que o software funciona.
 Um teste pode estar errado e passar.
 Os testes unitários conferem cada peça sozinha, e a soma das peças pode falhar onde nenhuma peça falha: um campo que o cliente envia com um nome e o servidor lê com outro passa em todos os testes unitários dos dois lados.
-Esse é o trabalho dos poucos testes ponta a ponta, e o motivo de uma entrega levar também uma prova, o resultado visto funcionando, antes que alguém a chame de pronta ([capítulo 13](13-apply.md)).
+Esse é o trabalho dos poucos testes ponta a ponta, e o motivo de uma entrega levar também uma prova, o resultado visto funcionando, antes que alguém a chame de pronta.
 
 ## O que o time ganha
 

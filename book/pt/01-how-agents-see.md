@@ -84,7 +84,7 @@ Duas práticas decorrem disso.
 Uma decisão que vive só na conversa some numa sessão nova e pode se perder numa compactação.
 Uma decisão num arquivo é carregada inteira no início de toda sessão, perto do começo da janela.
 O arquivo de regras é a porta de entrada: curto, e ele nomeia os documentos a ler antes de agir.
-Este é o começo de um arquivo de regras de uma pequena biblioteca de empréstimos, o projeto cujo código a Parte I usa como exemplo a partir do capítulo 3, escrito para este capítulo:
+Este é o começo de um arquivo de regras de uma pequena biblioteca de empréstimos, o projeto cujo código a Parte I usa como exemplo, escrito para este capítulo:
 
 ```markdown
 # Biblioteca de empréstimos
@@ -98,13 +98,13 @@ bibliotecário registra cada empréstimo e cada devolução.
 - processo: docs/05 · fila: docs/06
 ```
 
-Uma sessão nova lê o que o projeto é numa linha, depois onde mora cada tipo de fato; os arquivos que ele nomeia guardam o resto, e o [capítulo 7](07-the-documents.md) os explica.
+Uma sessão nova lê o que o projeto é numa linha, depois onde mora cada tipo de fato; os arquivos que ele nomeia guardam o resto.
 
 **Cada entrega ganha uma sessão nova.**
 Numa sessão nova, a janela contém o arquivo de regras, os documentos e a página da entrega, e nada que tenha sobrado da anterior.
 Decidir e construir também ficam em sessões separadas.
 A conversa que pesou as opções, incluindo as que você rejeitou, fica fora da janela onde o código é escrito; o que chega a ela é a decisão, escrita numa página.
-No focus-kit, o `/propose` escreve essa página ([capítulo 12](12-propose.md)) e o `/apply` a constrói numa sessão nova ([capítulo 13](13-apply.md)).
+No focus-kit, o `/propose` escreve essa página e o `/apply` a constrói numa sessão nova.
 
 ## O que o time ganha
 

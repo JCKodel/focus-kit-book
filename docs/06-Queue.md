@@ -420,7 +420,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18 and the reposi
 When this milestone closes, a reader of chapters 0 to 7 learns each idea where it is named instead of being sent to a later chapter, a Portuguese reader reads "o Ninjobs", a reader with little TypeScript reads chapter 3's refusal without seeing a magic string, a team reads FOCUS as optional before deciding to adopt it, keeps its tests fast, and teaches the agent by talking to it instead of fixing its work by hand, and every passage the author's reading marked says what the author means.
 
 ```
-[>] early-no-forward-links   chapters 0 to 7 explain in a few words each idea they name instead of pointing to a later chapter, and keep the pointers in their gain sections; both editions
+[x] early-no-forward-links   chapters 0 to 7 explain in a few words each idea they name instead of pointing to a later chapter, and keep the pointers in their gain sections; both editions
 [>] pt-ninjobs-masculine     the Portuguese edition and docs/03 give Ninjobs the masculine article, o Ninjobs, as an app or a site
 [x] case-a-why-anonymous     the prologue says why Case A has no owner, client or business: a private corporate project whose name could not be published without authorization; both editions
 [x] agent-never-unsure       the book says, where it fits best, that an agent never says "I don't know", and that the person's judgment is what tells a hypothesis from a fact; both editions

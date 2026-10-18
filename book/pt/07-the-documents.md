@@ -12,10 +12,10 @@ Na Ninjobs uma decisão morava em seis lugares, e mantê-los em acordo custava m
 ## Um lugar para cada fato
 
 Cada fato do projeto mora em um lugar, e o agente o lê ali.
-O focus-kit dá a esses lugares uma forma fixa: sete documentos numerados, docs/00 a docs/06; uma pasta de decisões, `docs/adr/`; uma pasta de manuais, `docs/manuals/`, um para cada ação de mais de um comando, feita à mão fora de uma entrega ou uma prova que o `/apply` roda em outra máquina; o arquivo de regras, `AGENTS.md`; e `work/`, que guarda uma página por entrega (capítulo 12).
+O focus-kit dá a esses lugares uma forma fixa: sete documentos numerados, docs/00 a docs/06; uma pasta de decisões, `docs/adr/`; uma pasta de manuais, `docs/manuals/`, um para cada ação de mais de um comando, feita à mão fora de uma entrega ou uma prova que o `/apply` roda em outra máquina; o arquivo de regras, `AGENTS.md`; e `work/`, que guarda uma página por entrega.
 Os números são fixos porque os comandos os citam; o nome depois do número fica na língua da documentação, `00-Product.md` num projeto documentado em inglês e `00-Produto.md` num documentado em português.
 As pastas `docs/`, `docs/adr/`, `docs/manuals/`, `work/` e `work/done/` (onde fica a página de uma entrega feita) ficam em inglês em todo projeto, como o kit as escreve; os arquivos dentro delas levam a língua da documentação, como `docs/manuals/publicar-o-app.md`.
-O `/brainstorm` ou o `/analyze` os escreve uma vez (capítulo 9); o `/propose` e o `/apply` os leem antes de agir.
+O `/brainstorm`, que define um projeto novo numa conversa, ou o `/analyze`, que lê um repositório existente, os escreve uma vez; o `/propose` e o `/apply` os leem antes de agir.
 
 Um agente responde a partir do que está na sua janela, então o que importa é qual texto chega até ela.
 A geração aumentada por recuperação (RAG) é um jeito de levá-lo: a cada pergunta, um recuperador encontra trechos num corpo de texto guardado fora do modelo, e o modelo responde a partir deles.
@@ -43,13 +43,13 @@ A tabela é o vocabulário: toda página, identificador e teste usa os seus term
 **docs/04, as convenções.** A língua dos documentos e dos identificadores, a nomenclatura, o estilo e a ferramenta que o impõe, onde ficam os testes e o que cada nível testa.
 
 **docs/05, o processo.** O processo do kit, o mesmo em todo projeto: a regra, o fluxo da fila ao commit, a forma de uma página, a fila, o commit e o formato da sua mensagem, o que o processo não tem, e como um marco fecha.
-Uma seção é preenchida pelo projeto, "This project" (este projeto), cujos itens são os seus dez slots: a língua da documentação, o comando que faz a verificação de uma entrega, os ambientes, como uma tela é provada, quando algo é publicado, se a pasta `context/` entra no commit, quem revisa as mudanças de uma entrega antes de o `/apply` terminar (capítulo 13), os manuais, as áreas em que a leitura do código da revisão de marco se divide e o modelo em que os seus leitores e o conferente rodam (capítulo 15), e a estratégia de git.
-Diga o que disser a política de publicação, as últimas palavras do `/apply` dizem qual ambiente está em qual versão (capítulo 13).
+Uma seção é preenchida pelo projeto, "This project" (este projeto), cujos itens são os seus dez slots: a língua da documentação, o comando que faz a verificação de uma entrega, os ambientes, como uma tela é provada, quando algo é publicado, se a pasta `context/` entra no commit, quem revisa as mudanças de uma entrega antes de o `/apply` terminar, os manuais, as áreas em que a revisão que fecha um marco divide a leitura do código e o modelo em que os seus leitores e o conferente rodam, e a estratégia de git.
+Diga o que disser a política de publicação, as últimas palavras do `/apply` dizem qual ambiente está em qual versão.
 Um slot diz o que e o comando, em poucas linhas, porque o `/apply` o lê toda vez; os passos vão para um manual, e o que um comando imprime fica na ajuda dele.
 Então um slot não diz que entrega criou o seu comando nem como ele funcionava antes: essa história está na página da entrega em `work/done/` e no ADR.
 Os comandos leem esses fatos aqui, então nenhum arquivo de comando guarda algum deles.
 
-**docs/06, a fila.** Os marcos, cada um com um parágrafo dizendo o que é verdade quando ele fecha, e sob cada um uma linha por entrega, em ordem, com uma marca para o seu estado (capítulo 11).
+**docs/06, a fila.** Os marcos, cada um com um parágrafo dizendo o que é verdade quando ele fecha, e sob cada um uma linha por entrega, em ordem, com uma marca para o seu estado.
 É o documento em que você mais mexe: todo o trabalho do projeto, aumentado e editado todos os dias, por conversa.
 Ele faz o que um quadro kanban ou um backlog de work items faz num processo ágil, com uma diferença: o agente o lê.
 Todo documento é lido, e corrigido quando está errado; a fila é o que dá forma ao produto.
@@ -67,9 +67,9 @@ A Ninjobs, um app web fino sobre um backend como serviço, escolheu os dois prin
 Num repositório que já tem código, o padrão é o que o código já faz.
 O docs/01 registra a resposta, e um ADR registra o porquê.
 
-**A estratégia de git.** Três respostas, cada uma para um jeito de trabalhar: trunk, tudo no branch principal, para uma pessoa, sozinha ou com várias sessões em linhas livres (linhas da fila que não estão feitas, não estão esperando e não precisam de outra linha feita antes, já definidas ou não; [capítulo 14](14-queue-states.md)) que mexem em arquivos diferentes; um branch por entrega, integrado por um pull request revisado, para trabalho em sequência; um worktree por entrega, uma segunda pasta de trabalho no seu próprio branch, para várias pessoas, ou para uma pessoa cujas entregas mexem nos mesmos arquivos.
+**A estratégia de git.** Três respostas, cada uma para um jeito de trabalhar: trunk, tudo no branch principal, para uma pessoa, sozinha ou com várias sessões em linhas livres (linhas da fila que não estão feitas, não estão esperando e não precisam de outra linha feita antes, já definidas ou não) que mexem em arquivos diferentes; um branch por entrega, integrado por um pull request revisado, para trabalho em sequência; um worktree por entrega, uma segunda pasta de trabalho no seu próprio branch, para várias pessoas, ou para uma pessoa cujas entregas mexem nos mesmos arquivos.
 Em todas, a página e a construção de uma entrega são uma mudança que se desfaz em um passo, e o agente nunca faz commit nem merge.
-Os capítulos 18 e 19 ensinam as três.
+A Parte III ensina as três.
 O slot Git do docs/05 registra a resposta, e um ADR registra o porquê.
 
 ## ADRs
@@ -91,13 +91,13 @@ O slot diz o que e o comando, e o manual guarda os passos para quem os executa.
 Um comando sozinho, como o que faz a verificação de uma entrega, não precisa de manual: ele fica no seu slot.
 
 No mesmo docs/05, o slot Environments (ambientes) cita o comando que publica o app e aponta para `docs/manuals/publicar-o-app.md`; os passos moram só ali.
-O `/analyze` escreve os manuais do que um repositório já faz à mão, o `/apply` escreve ou atualiza um quando uma entrega acrescenta ou muda uma dessas coisas ([capítulo 13](13-apply.md)), e o `/brainstorm` não escreve nenhum.
+O `/analyze` escreve os manuais do que um repositório já faz à mão, o `/apply` escreve ou atualiza um quando uma entrega acrescenta ou muda uma dessas coisas, e o `/brainstorm` não escreve nenhum.
 A pasta é criada com o primeiro manual, então não há pasta vazia, e o `AGENTS.md` aponta para ela.
 
 ## AGENTS.md
 
 O `AGENTS.md` é o arquivo de regras do capítulo 1, um formato aberto que os agentes de código leem no início de uma sessão.[^agents-md]
-Todo host do capítulo 8 o lê, sozinho ou por um ponteiro; o Claude Code o lê pelo `CLAUDE.md`, que guarda a linha `@AGENTS.md` e, abaixo dela, só o que vale apenas para o Claude Code.
+Todo host o lê, sozinho ou por um ponteiro; o Claude Code o lê pelo `CLAUDE.md`, que guarda a linha `@AGENTS.md` e, abaixo dela, só o que vale apenas para o Claude Code.
 O `AGENTS.md` não cita a ferramenta de nenhum host, então se lê igual em todos.
 
 Ele tem quatro seções curtas: o que ler antes de agir, os inegociáveis, o que não reconstruir, e como trabalhar.

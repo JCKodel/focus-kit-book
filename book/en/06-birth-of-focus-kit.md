@@ -6,7 +6,7 @@ After this chapter you can tell that story, how it was, what went wrong and wher
 ## How it was
 
 Ninjobs started with OpenSpec, one of the Spec-Driven Development tools of chapter 2.
-Every feature was a change, a folder with its proposal, its specs, its design and its tasks, and every decision was written again in the project's documents and in its ADRs, the architecture decision records, one file per decision (chapter 7).
+Every feature was a change, a folder with its proposal, its specs, its design and its tasks, and every decision was written again in the project's documents and in its ADRs, the architecture decision records, one file per decision.
 Before a delivery counted as done, it had to pass 29 checks.
 
 In fifteen days that produced 37,228 lines of spec, for four screens and one table of data.
@@ -35,12 +35,12 @@ The cost was the number of places, not the size of each file.
 
 ## Where it went
 
-On 2026-08-29 I started over, with a process small enough to hold in my head, and moved the app from Flutter to React, where the same agent got the design right (chapter 9 turns that into how to choose a stack).
+On 2026-08-29 I started over, with a process small enough to hold in my head, and moved the app from Flutter to React, where the same agent got the design right.
 One delivery became one page, `work/<slug>.md`.
 Two commands did the work: `/propose` talks with me and writes the page, never code; `/apply` builds the page, verifies it and compares the screen against the design.
 The queue became one line per delivery.
 Of the 29 checks, two stayed, both aimed at the product itself: a proof of what each privacy level of a profile may show, and a test of the database's access rules.
-Anything that wanted to come back had to answer one question, the governor of chapter 16: which concrete error would it have caught?
+Anything that wanted to come back had to answer one question, the governor: which concrete error would it have caught?
 One check did come back later, because it named an error that had happened.
 
 Ninjobs opened to the public on 2026-09-10, thirteen days after the restart, with 91 one-page deliveries done.

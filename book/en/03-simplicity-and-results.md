@@ -8,7 +8,7 @@ You can also keep a library's exceptions at the boundary, so a new library chang
 
 On Ninjobs, my own product, I let complexity grow, one reasonable addition at a time.
 I required the full layered form of the architecture on every feature, trivial forms included, so showing one field on a screen took eight files; every delivery had to pass 29 checks that had never caught an error in the product.
-The architecture was not at fault; KISS and YAGNI were lost (chapter 6 tells what went wrong and how the process restarted).
+The architecture was not at fault; KISS and YAGNI were lost.
 
 Fred Brooks split the difficulty of software in two in 1987: the essential complexity, which belongs to the problem itself, and the accidental complexity, which the people building it add along the way.[^brooks-silver-bullet]
 Nobody can remove the first; the second is a choice, made one file at a time, and the three principles of this chapter are three ways to refuse it.
@@ -95,7 +95,7 @@ Naming the first copy makes the move checkable: a reviewer opens both and sees t
 
 In the lending library, `Result`, the type that carries either a value or what stopped it (its own section follows), first appears inside the loans feature, as the return type of `lend` in `features/loans/rules.ts`.
 It stays there while it has one user.
-Then a delivery for members needs a rule that can refuse, and `Result` would be written a second time; that delivery moves it to `src/lib/result.ts`, the folder for code that belongs to no single feature (chapter 4), and says so:
+Then a delivery for members needs a rule that can refuse, and `Result` would be written a second time; that delivery moves it to `src/lib/result.ts`, the folder for code that belongs to no single feature, and says so:
 
 ```ts
 // First use: features/loans/rules.ts (lend).
@@ -133,7 +133,7 @@ It reads a member and answers.
 Where the member came from, a database or a test, is not its business.
 Immutability is the same idea on data: a function that changes its input hides a second output, so `mayBorrow` returns the member it received or a refusal, and changes nothing.
 
-Clean Architecture, as it is usually practised, injects the repositories into the use case that holds the rule, so its test needs a fake for each one; this book keeps `mayBorrow` pure, receiving a member and not a way to fetch one, and leaves fetching and saving to an orchestrator, the function around the rule that chapter 4 builds.
+Clean Architecture, as it is usually practised, injects the repositories into the use case that holds the rule, so its test needs a fake for each one; this book keeps `mayBorrow` pure, receiving a member and not a way to fetch one, and leaves fetching and saving to an orchestrator, the function around the rule.
 
 ## Result: the value that carries a failure
 
@@ -229,7 +229,7 @@ The code that ran the write reads that failure and returns the refusal `AlreadyL
 Any other failure of the same write stays `DatabaseFailed`.
 
 A catch this wide also catches a bug thrown inside `run`, and turns it into `DatabaseFailed`.
-Two things bring the bug back to you: a test that runs every database call against a real, in-memory database and checks the value it gets (chapter 5), and a log line that prints the `message` before the program answers.
+Two things bring the bug back to you: a test that runs every database call against a real, in-memory database and checks the value it gets, and a log line that prints the `message` before the program answers.
 
 Two kinds of throw pass the boundary untouched, a fatal one, such as running out of memory, and a framework's own control flow, thrown on purpose.
 So the rule reads: catch at the boundary with the outside world, translate, and let everything else pass.
@@ -259,7 +259,7 @@ In Rust and Dart an exhaustive `match` or `switch` does the same; in Go, a linte
 > What I should have been doing was reading the chapters and saying what to change.
 > On its own, the agent had entered a spiral of checks that checked checks, and one question is what stops it: which concrete error would this step have caught?
 
-Chapter 16, the governor, turns that question into the rule every step of the process must answer: a step enters when it names the concrete error it would have caught, and leaves when it names none.
+This book calls that question the governor and makes it the rule every step of the process must answer: a step enters when it names the concrete error it would have caught, and leaves when it names none.
 
 ## What the team gains
 

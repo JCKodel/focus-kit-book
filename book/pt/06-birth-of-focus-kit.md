@@ -6,7 +6,7 @@ Depois deste capítulo você consegue contar essa história, como era, o que deu
 ## Como era
 
 A Ninjobs começou com o OpenSpec, uma das ferramentas de Desenvolvimento Guiado por Especificação do capítulo 2.
-Cada feature era uma mudança, uma pasta com sua proposta, suas especificações, seu design e suas tarefas, e cada decisão era escrita de novo nos documentos do projeto e nos seus ADRs, os registros de decisão de arquitetura, um arquivo por decisão (capítulo 7).
+Cada feature era uma mudança, uma pasta com sua proposta, suas especificações, seu design e suas tarefas, e cada decisão era escrita de novo nos documentos do projeto e nos seus ADRs, os registros de decisão de arquitetura, um arquivo por decisão.
 Antes de uma entrega contar como pronta, ela precisava passar por 29 verificações.
 
 Em quinze dias, isso produziu 37.228 linhas de especificação, para quatro telas e uma tabela de dados.
@@ -35,12 +35,12 @@ O custo estava no número de lugares, e não no tamanho de cada arquivo.
 
 ## Para onde foi
 
-Em 2026-08-29 eu recomecei, com um processo pequeno o bastante para caber na cabeça, e mudei o app de Flutter para React, onde o mesmo agente acertou o design (o capítulo 9 transforma isso em como escolher uma stack).
+Em 2026-08-29 eu recomecei, com um processo pequeno o bastante para caber na cabeça, e mudei o app de Flutter para React, onde o mesmo agente acertou o design.
 Uma entrega virou uma página, `work/<slug>.md`.
 Dois comandos faziam o trabalho: o `/propose` conversa comigo e escreve a página, nunca código; o `/apply` constrói a página, faz a verificação e compara a tela com o design.
 A fila virou uma linha por entrega.
 Das 29 verificações, ficaram duas, ambas voltadas para o próprio produto: uma prova do que cada nível de privacidade de um perfil pode mostrar, e um teste das regras de acesso do banco de dados.
-Tudo o que quisesse voltar tinha de responder a uma pergunta, o regulador do capítulo 16: que erro concreto isso teria pegado?
+Tudo o que quisesse voltar tinha de responder a uma pergunta, o regulador: que erro concreto isso teria pegado?
 Uma verificação voltou mais tarde, porque apontou um erro que tinha acontecido.
 
 A Ninjobs abriu ao público em 2026-09-10, treze dias depois do recomeço, com 91 entregas de uma página concluídas.
