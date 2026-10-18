@@ -52,20 +52,27 @@ Dali em diante os comandos não guardam nenhum fato do projeto, e leem todos ele
 
 ## Cada regra e sua falha
 
-Toda regra do focus-kit existe porque alguma coisa falhou sem ela.
+O kit mantém seis regras em todo projeto, as que o seu `SETUP.md` lista no §2, e toda regra existe porque alguma coisa falhou sem ela.
+Qualquer outra verificação é do próprio projeto.
 
-* **Uma página por entrega.**
-  Responde aos seis lugares: o que construir e o que fica de fora moram numa página, e um escopo que não cabe são duas entregas (capítulo 12).
+* **Uma entrega é uma página.**
+  Responde à pasta de cada mudança, com uma proposta, especificações, um design e tarefas para uma feature: o que construir e o que fica de fora moram numa página, e um escopo que não cabe são duas entregas (capítulo 12).
 * **Decidir e fazer em sessões separadas.**
-  Responde à construção que decide enquanto anda: o `/apply` começa limpo, com a página e os documentos, sem a longa conversa que a decidiu, já que um contexto que cresce perde precisão.
-* **Os documentos guardam os fatos; os comandos, nenhum.**
-  Responde à divergência: um comando que repete um fato do projeto fica desatualizado quando o documento muda, então ele só diz quais documentos ler (capítulo 7).
-* **Uma fila de uma linha por entrega.**
-  Responde ao roteiro, que guardava juntos o plano de cada entrega e o seu raciocínio, então ler a lista era ler tudo; a linha diz o quê, e a página guarda o raciocínio (capítulo 11).
-* **O agente coloca em stage e a pessoa faz o commit.**
+  Responde à construção que decide enquanto anda: o `/apply` começa limpo, com a página e os documentos, sem a longa conversa que a decidiu, já que um contexto que cresce perde precisão; o `/propose` não escreve código e o `/apply` não amplia o escopo.
+* **O agente coloca em stage e sugere a mensagem do commit.**
+  O agente nunca faz commit nem merge por conta própria; quando pedem, ele dá o passo que a pessoa nomeia.
   Responde às 29 verificações que nunca olhavam o produto: a verificação que olha é uma pessoa lendo cada mudança antes que ela entre no histórico (capítulo 13).
-* **Nada entra sem dizer o erro que teria pegado.**
+* **O que é específico do projeto são slots no docs/05 do projeto.**
+  O comando de verificação, os ambientes, a prova e a estratégia de git são preenchidos uma vez ali, e o `/apply` os lê.
+  Responde à divergência: um comando que repete um fato do projeto fica desatualizado quando o documento muda, então o comando só diz qual slot ler (capítulo 7).
+* **Os documentos são vivos.**
+  Uma entrega que muda um comportamento atualiza o documento dono dele, na mesma entrega.
+  Responde aos seis lugares: cada fato tem um dono, e a entrega que muda o fato muda o dono, então nenhuma cópia fica desatualizada sozinha (capítulo 7).
+* **Nada entra sem dizer o erro concreto que teria pegado.**
   Responde ao crescimento das verificações, cada uma plausível sozinha e todas juntas mais pesadas que o trabalho (capítulo 16).
+
+A fila de uma linha por entrega serve a essas regras sem ser uma delas.
+Ela responde ao roteiro, que guardava juntos o plano de cada entrega e o seu raciocínio, então ler a lista era ler tudo; a linha diz o quê, e a página guarda o raciocínio (capítulo 11).
 
 ## O que o time ganha
 
@@ -77,5 +84,5 @@ Depois, uma página por entrega deu a abertura ao público em treze dias, com ca
 
 * O custo estava no número de lugares, e não no tamanho de cada arquivo; a arquitetura era sólida, e eu perdi o KISS e o YAGNI ao exigir sua forma completa em toda feature.
 * Comece do mínimo que se sustentou no Ninjobs: uma página por entrega, dois comandos, uma linha de fila por entrega, duas verificações e a pergunta do regulador.
-* Cada regra do kit responde a uma falha: uma decisão guardada em muitos lugares, uma construção que decide enquanto anda, comandos que divergem, um roteiro que misturava plano e raciocínio, verificações cegas ao produto e verificações que cresceram sem ninguém pedir.
+* Cada uma das seis regras do kit responde a uma falha: uma feature espalhada por uma pasta de arquivos, uma construção que decide enquanto anda, verificações cegas ao produto, comandos que divergem, uma decisão guardada em muitos lugares e verificações que cresceram sem ninguém pedir; qualquer outra verificação é do próprio projeto.
 

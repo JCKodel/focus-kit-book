@@ -20,7 +20,7 @@ A way that works can show it, and the method gives it the means to, with a page 
 
 **"Too much process."**
 The method has a governor for that ([chapter 16](16-the-governor.md)): every step must name the concrete error it would have caught, or it leaves.
-What survives is the kit's six rules, each answering a failure ([chapter 6](06-birth-of-focus-kit.md) lists them); every check is the project's own, let in by an error that project met.
+What survives is the kit's six rules, the same in every project, each answering a failure ([chapter 6](06-birth-of-focus-kit.md) lists them); every check beyond them is the project's own, let in by an error that project met, so the kit imposes none.
 A team that finds a step that catches nothing removes it, and the method expects it to.
 
 **"We already have a tool."**

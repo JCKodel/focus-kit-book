@@ -52,20 +52,27 @@ From then on the commands hold no fact of the project, and read every one of the
 
 ## Each rule and its failure
 
-Every rule of focus-kit exists because something failed without it.
+The kit keeps six rules in every project, the ones its `SETUP.md` lists in §2, and every rule exists because something failed without it.
+Any other check is the project's own.
 
-* **One page per delivery.**
-  It answers the six places: what to build and what stays out live on one page, and a scope that does not fit is two deliveries (chapter 12).
+* **One delivery is one page.**
+  It answers the change folder, a proposal, specs, a design and tasks for one feature: what to build and what stays out live on one page, and a scope that does not fit is two deliveries (chapter 12).
 * **Deciding and doing in separate sessions.**
-  It answers the build that decides as it goes: `/apply` starts clean, with the page and the documents, without the long conversation that decided it, since a context that grows loses accuracy.
-* **The documents hold the facts; the commands hold none.**
-  It answers the drift: a command that repeats a fact of the project goes stale when the document changes, so it only says which documents to read (chapter 7).
-* **A queue of one line per delivery.**
-  It answers the outline, which held each delivery's plan and its reasoning together, so reading the list meant reading everything; the line says what, and the page keeps the reasoning (chapter 11).
-* **The agent stages and the person commits.**
+  It answers the build that decides as it goes: `/apply` starts clean, with the page and the documents, without the long conversation that decided it, since a context that grows loses accuracy; `/propose` writes no code and `/apply` widens no scope.
+* **The agent stages and suggests the commit message.**
+  The agent never commits or merges on its own; asked, it takes the step the person names.
   It answers the 29 checks that never looked at the product: the check that does is a person reading each change before it enters the history (chapter 13).
-* **Nothing enters without naming the error it would have caught.**
+* **Project specifics are slots in the project's docs/05.**
+  The verify command, the environments, the proof and the git strategy are filled once there, and `/apply` reads them.
+  It answers the drift: a command that repeats a fact of the project goes stale when the document changes, so the command only says which slot to read (chapter 7).
+* **Documents are living.**
+  A delivery that changes a behaviour updates the document that owns it, in the same delivery.
+  It answers the six places: each fact has one owner, and the delivery that changes the fact changes the owner, so no copy goes stale on its own (chapter 7).
+* **Nothing enters without naming the concrete error it would have caught.**
   It answers the growth of the checks, each plausible on its own and all of them together heavier than the work (chapter 16).
+
+The queue of one line per delivery serves these rules without being one of them.
+It answers the outline, which held each delivery's plan and its reasoning together, so reading the list meant reading everything; the line says what, and the page keeps the reasoning (chapter 11).
 
 ## What the team gains
 
@@ -77,5 +84,5 @@ After, one page per delivery gave the public opening in thirteen days, with each
 
 * The cost was the number of places, not the size of each file; the architecture was sound, and I lost KISS and YAGNI by requiring its full form on every feature.
 * Start from the least that held on Ninjobs: one page per delivery, two commands, one queue line per delivery, two checks and the governor's question.
-* Each rule of the kit answers a failure: a decision kept in many places, a build that decides as it goes, commands that drift, an outline that mixed plan and reasoning, checks blind to the product, and checks that grew unasked.
+* Each of the kit's six rules answers a failure: a feature spread over a folder of files, a build that decides as it goes, checks blind to the product, commands that drift, a decision kept in many places, and checks that grew unasked; every other check is the project's own.
 
