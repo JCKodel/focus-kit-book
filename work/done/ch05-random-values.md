@@ -60,11 +60,45 @@
 
 **Done when.**
 
-* [ ] Both editions written: the heading, the new paragraphs, the opening phrase and key point 2 as Behaviour says.
-* [ ] Behaviour's apply-time greps print what it says.
-* [ ] Chapter 5 still opens with its value, keeps its gain said once, no filler and nothing useful cut.
-* [ ] Every number sourced: none added.
-* [ ] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions written: the heading, the new paragraphs, the opening phrase and key point 2 as Behaviour says.
+* [x] Behaviour's apply-time greps print what it says.
+* [x] Chapter 5 still opens with its value, keeps its gain said once, no filler and nothing useful cut.
+* [x] Every number sourced: none added.
+* [x] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+
+**Proof.**
+
+* en/pt 05:3 (opening phrase), 05:54 (heading), 05:63-72 (three new paragraphs after the clock paragraph) and key point 2 (05:180) read as Behaviour says, with the wordings of Divergences.
+* `grep -n "^## "` on both editions: the renamed heading at 05:54, between "What a fake is" (05:43) and "One rule through its tests" (05:74), the same in pt.
+* `grep -n "I/O and the clock"` on en and `grep -n "I/O e o relógio"` on pt print only 05:22, the line the page calls 05:19 (`ch05-test-time` moved it); docs/03 unchanged.
+* `git diff --stat` on the two paths: 28 insertions, 6 deletions; the lines of `ch05-test-time` and `early-no-forward-links` untouched.
+* `make verify`: build, parity, em dash, prose, width, links and disclosure green, exit 0.
+* `make book`: not run here; the driver builds the book once at the end of the batch and gives both PDF paths.
+
+**Divergences.** Review wordings on text this delivery wrote, kept to the page's intent:
+
+* Key point 2 says "which it passes in as a value, and expects an order only where the query fixes one" (pt "que ele passa como valor, e espera uma ordem só onde a consulta fixa uma") in place of "each passed in as a value" and "asserts no order nobody fixed": no double negative, and the I/O is not said to be passed in.
+* pt 05:69 says "voltam em qualquer ordem em que o banco os encontre", as en says "whatever order", so the order does not read as a fixed one.
+* The closing sentence says "passes today and fails tomorrow, or on another machine, on the same code", so it covers the environment value too.
+* The page's line numbers are stale after `ch05-test-time`: the clock paragraph is 05:60-61, key point 2 is 05:180, the surviving "I/O and the clock" is 05:22.
+
+**Decisions taken in /apply.**
+
+* `Math.random()` names the random value, as Behaviour's list of library names has it; the closing sentence of the section is its own paragraph.
+* Run in a batch of applies on one tree: the driver marks this line in docs/06, runs `make book` once at the end of the batch, and stages and commits this delivery by its paths.
+
+**Review.** One read-only agent on Opus read the diff of the two paths against this page and docs/04: nothing breaks the page or docs/04; the technical claims (`ORDER BY`, `crypto.randomUUID()`) hold; four wordings, three applied (Divergences), the fourth (adding "or one machine" to 05:63) left out because 05:66 and the closing sentence already say it.
+
+```commit
+docs(ch05-random-values): keep what changes between runs out of a test
+
+- Chapter 5: the section becomes "Swap only I/O and what changes between runs"
+- A random value, a new id and the environment are read once and passed in, as today is
+- The order of a set: the query states it, or the test compares without order
+- Opening phrase and key point 2 follow the heading
+
+work/done/ch05-random-values.md
+```

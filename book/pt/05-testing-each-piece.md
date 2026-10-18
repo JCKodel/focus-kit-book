@@ -1,6 +1,6 @@
 # 5. Um teste para cada peça
 
-Depois deste capítulo você consegue dizer que teste guarda cada uma das quatro peças e o que ele troca, só o I/O e o relógio, e seguir uma regra pelos testes dela.
+Depois deste capítulo você consegue dizer que teste guarda cada uma das quatro peças e o que ele troca, só o I/O e o que muda entre execuções, e seguir uma regra pelos testes dela.
 Você também consegue escrever uma implementação falsa que faz o teste falhar quando é chamada sem ser esperada, e dar nomes aos testes para que um revisor os leia como as frases da regra.
 Você consegue manter rápidos os testes que toda entrega roda, e dizer onde rodam os lentos.
 E você sabe por que um teste que um agente escreveu só merece confiança verde depois de ter sido visto vermelho.
@@ -51,7 +51,7 @@ Um teste que espera que `buscarMembro` seja chamado uma vez com `"m1"`, depois `
 Martin Fowler descreve esse custo na seção "Coupling Tests to Implementations" do artigo "Mocks Aren't Stubs".[^fowler-mocks]
 Uma implementação falsa deixa o teste conferir o que importa, o estado que sai, e deixa o código livre para mudar por dentro.
 
-## Troque só o I/O e o relógio
+## Troque só o I/O e o que muda entre execuções
 
 As quatro peças decidem o que um teste pode trocar.
 Só um repositório faz I/O, e só o orquestrador recebe repositórios, então o teste do orquestrador troca os repositórios e o teste do repositório troca o arquivo do banco.
@@ -59,6 +59,17 @@ Nada mais é trocado: um caso de uso nunca é trocado, porque ele é puro e ráp
 
 O relógio também é I/O: `new Date()` responde algo diferente a cada chamada.
 Na biblioteca, ele é lido uma vez, onde a requisição chega, e repassado como valor, `hoje`, então um teste passa `"2026-10-01"` e não precisa de relógio falso nenhum.
+
+Um valor aleatório de `Math.random()`, um id novo e um valor lido do ambiente também respondem diferente de uma execução para outra, então cada um é I/O no mesmo sentido.
+Cada um é lido uma vez e repassado como valor, como `hoje`, então o teste passa o valor que quer e não precisa de implementação falsa.
+Se `emprestar` desse a cada empréstimo um id novo com `crypto.randomUUID()`, o teste dele não conseguiria dizer que empréstimo espera; o id é criado onde a requisição chega, ou pelo banco quando ele salva o empréstimo.
+Um valor do ambiente, como uma variável, o fuso horário ou o idioma da máquina, é lido uma vez onde o programa começa, então um teste não responde diferente em outra máquina.
+
+Não há nada para trocar na ordem de um conjunto.
+Os empréstimos de um membro lidos sem `ORDER BY` voltam em qualquer ordem em que o banco os encontre, então um teste que os espera na ordem em que foram salvos pode passar hoje e falhar depois que os dados ou um índice mudam.
+A consulta declara a ordem que promete, ou o teste compara os empréstimos sem ordem.
+
+Um teste cuja resposta depende de qualquer um desses passa hoje e falha amanhã, ou em outra máquina, com o mesmo código, e então um teste vermelho deixa de dizer que uma regra quebrou.
 
 ## Uma regra pelos testes dela
 
@@ -166,7 +177,7 @@ E um revisor confere uma entrega lendo nomes de teste, que dizem, antes de qualq
 ## Pontos-chave
 
 * Um caso de uso é testado só com dados, um repositório contra um banco em memória com as migrações reais, um orquestrador com repositórios falsos, e a tela com poucos testes ponta a ponta em um navegador, então o que toda entrega roda continua rápido.
-* Um teste troca só o I/O e o relógio, e o relógio é um valor passado como parâmetro, então a maioria dos testes não troca nada além dos repositórios.
+* Um teste troca só o I/O e o que muda entre execuções, que ele passa como valor, e espera uma ordem só onde a consulta fixa uma, então a maioria dos testes não troca nada além dos repositórios.
 * Uma implementação falsa responde o que o teste define e lança em qualquer chamada que o teste não esperava; prefira-a a um mock, que repete o código que testa.
 * Cada nível de teste prova o que os outros não provam, e uma suíte verde ainda prova menos que software funcionando: um teste pode estar errado, e as peças podem falhar juntas, então veja um teste vermelho antes de confiar nele verde.
 * O nome de um teste é uma frase da regra: um revisor lê os nomes, e uma regra sem frase não tem teste.

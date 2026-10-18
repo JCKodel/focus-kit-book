@@ -1,6 +1,6 @@
 # 5. A test for each piece
 
-After this chapter you can say which test guards each of the four pieces and what it swaps, only the I/O and the clock, and follow one rule through its tests.
+After this chapter you can say which test guards each of the four pieces and what it swaps, only the I/O and what changes between runs, and follow one rule through its tests.
 You can also write a fake that fails the test when it is called unexpectedly, and name tests so that a reviewer reads them as the sentences of the rule.
 You can keep the tests every delivery runs fast, and say where the slow ones run.
 And you know why a test an agent wrote is trusted green only after it was seen red.
@@ -51,7 +51,7 @@ A test that expects `findMember` to be called once with `"m1"`, then `findCopy` 
 Martin Fowler describes this cost in the section "Coupling Tests to Implementations" of his article "Mocks Aren't Stubs".[^fowler-mocks]
 A fake lets the test check what matters, the state that comes out, and leaves the code free to change inside.
 
-## Swap only I/O and the clock
+## Swap only I/O and what changes between runs
 
 The four pieces decide what a test may swap.
 Only a repository does I/O, and only the orchestrator receives repositories, so the orchestrator's test swaps them and the repository's test swaps the database file.
@@ -59,6 +59,17 @@ Nothing else is swapped: a use case is never faked, because it is pure and fast,
 
 The clock is I/O too: `new Date()` answers something different on every call.
 In the lending library it is read once, where the request arrives, and passed on as a value, `today`, so a test passes `"2026-10-01"` and needs no fake clock at all.
+
+A random value from `Math.random()`, a new id and a value read from the environment also answer differently from one run to the next, so each is I/O in the same sense.
+Each is read once and handed on as a value, as `today` is, so the test passes the value it wants and needs no fake.
+If `lend` gave each loan a new id with `crypto.randomUUID()`, its test could not say which loan it expects; the id is made where the request arrives, or by the database when it saves the loan.
+A value from the environment, such as a variable, the time zone or the machine's language, is read once where the program starts, so a test does not answer differently on another machine.
+
+There is nothing to swap in the order of a set.
+A member's loans read with no `ORDER BY` come back in whatever order the database finds them, so a test that expects the order they were saved in can pass today and fail after the data or an index changes.
+The query states the order it promises, or the test compares the loans without order.
+
+A test whose answer depends on any of these passes today and fails tomorrow, or on another machine, on the same code, and then a red test no longer says that a rule broke.
 
 ## One rule through its tests
 
@@ -166,7 +177,7 @@ And a reviewer checks a delivery by reading test names, which say, before any co
 ## Key points
 
 * A use case is tested with data alone, a repository against an in-memory database with the real migrations, an orchestrator with fake repositories, and the view with a few end-to-end tests in a browser, so the run every delivery waits for stays fast.
-* A test swaps only I/O and the clock, and the clock is a value passed in, so most tests fake nothing but the repositories.
+* A test swaps only I/O and what changes between runs, which it passes in as a value, and expects an order only where the query fixes one, so most tests fake nothing but the repositories.
 * A fake answers what the test sets and throws on any call the test did not expect; prefer it to a mock, which repeats the code it tests.
 * Each level of test proves what the others do not, and a green suite still proves less than working software: a test can be wrong, and the pieces can fail together, so see a test red before trusting it green.
 * A test's name is a sentence of the rule: a reviewer reads the names, and a rule with no sentence has no test.
