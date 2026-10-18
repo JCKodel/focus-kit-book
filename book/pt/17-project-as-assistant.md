@@ -18,7 +18,7 @@ Um projeto com focus-kit já escreve quase tudo o que um time pergunta, porque o
 * **A fila**: cada entrega, uma linha cada, com a marca que diz onde ela está e, numa linha esperando, o que ela espera (capítulo 14).
 * **As páginas em `work/`**: o que está definido agora, e o que cada entrega vai fazer.
 * **As páginas em `work/done/`**: o que cada entrega concluída fez, e o que aconteceu enquanto era construída.
-* **O histórico do git** (capítulo 18): quando cada commit aconteceu, e a qual entrega pertence, já que o commit que fecha uma entrega termina com o slug dela.
+* **O histórico do git** (capítulo 18): quando cada commit aconteceu, e a qual entrega pertence, já que o commit que fecha uma entrega termina com o caminho da página dela, `work/done/<slug>.md`.
 
 Lidos juntos, eles respondem às perguntas de andamento sem ninguém escrever um relatório.
 Pendente é toda linha ainda não `[x]`, na ordem da fila.

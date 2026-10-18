@@ -18,7 +18,7 @@ A focus-kit project already writes most of what a team asks about, because the a
 * **The queue**: every delivery, one line each, with the mark that says where it stands and, on a waiting line, what it waits on (chapter 14).
 * **The pages in `work/`**: what is defined now, and what each delivery will do.
 * **The pages in `work/done/`**: what each finished delivery did, and what happened while it was built.
-* **The git history** (chapter 18): when each commit happened, and which delivery it belongs to, since the commit that closes a delivery ends with its slug.
+* **The git history** (chapter 18): when each commit happened, and which delivery it belongs to, since the commit that closes a delivery ends with the path of its page, `work/done/<slug>.md`.
 
 Read together, they answer the status questions without anyone writing a status.
 Pending is every line not yet `[x]`, in the order of the queue.
