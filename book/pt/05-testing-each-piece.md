@@ -68,11 +68,13 @@ describe("emprestar", () => {
 
 	it("recusa um membro com um livro atrasado", () => {
 		const resultado = emprestar(exemplar, { ...membro, emAtraso: 1 }, "2026-10-01");
+
 		expect(resultado).toEqual({ ok: false, error: "TemLivrosEmAtraso" });
 	});
 
 	it("empresta por 21 dias a um membro sem nada atrasado", () => {
 		const resultado = emprestar(exemplar, membro, "2026-10-01");
+
 		expect(resultado.ok && resultado.value.devolverEm).toBe("2026-10-22");
 	});
 });
@@ -93,6 +95,7 @@ function naoEsperado(): never {
 
 function falsos(repositorios: Partial<RepositoriosDeEmprestimo>): RepositoriosDeEmprestimo {
 	const nenhum = { buscarMembro: naoEsperado, buscarExemplar: naoEsperado, inserirEmprestimo: naoEsperado };
+
 	return { ...nenhum, ...repositorios };
 }
 
@@ -102,7 +105,9 @@ describe("emprestimoPedido", () => {
 			buscarMembro: () => ok({ id: "m1", emAtraso: 1, suspenso: false }),
 			buscarExemplar: () => ok({ id: "e1", livroId: "l1" }),
 		});
+
 		const estado = emprestimoPedido({ exemplarId: "e1", membroId: "m1" }, "2026-10-01", repositorios);
+    
 		expect(estado).toEqual({ tipo: "Recusado", recusa: "TemLivrosEmAtraso" });
 	});
 });

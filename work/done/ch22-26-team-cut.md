@@ -97,13 +97,19 @@
   		cache_read_input_tokens: 0,
   		output_tokens: 0,
   	};
+
   	const seen = new Set<string>();
+
   	for (const line of lines) {
   		const usage = line.message?.usage;
   		const key = `${line.message?.id}:${line.requestId}`;
+
   		if (!usage || seen.has(key)) continue;
   		seen.add(key);
-  		for (const kind of Object.keys(total) as (keyof Usage)[]) total[kind] += usage[kind] ?? 0;
+
+  		for (const kind of Object.keys(total) as (keyof Usage)[]) {
+        total[kind] += usage[kind] ?? 0;
+      }
   	}
   	return total;
   }

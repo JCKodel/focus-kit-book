@@ -171,13 +171,21 @@ export function lendRequested(
 	repositories: LoanRepositories,
 ): LendState {
 	const member = repositories.findMember(event.memberId);
+
 	if (!member.ok) return stateOf(member.error);
+
 	const copy = repositories.findCopy(event.copyId);
+
 	if (!copy.ok) return stateOf(copy.error);
+
 	const loan = lend(copy.value, member.value, today);
+
 	if (!loan.ok) return stateOf(loan.error);
+
 	const saved = repositories.insertLoan(loan.value);
+
 	if (!saved.ok) return stateOf(saved.error);
+  
 	return { kind: "Lent", loan: saved.value };
 }
 ```

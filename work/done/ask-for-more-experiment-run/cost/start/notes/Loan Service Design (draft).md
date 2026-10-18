@@ -94,8 +94,10 @@ We use JavaScript `Date` objects throughout, with precise `loanedAt` and `dueAt`
 // src/services/time.ts
 export function dueDateFrom(loanedAt: Date, days: number): Date {
   const due = new Date(loanedAt);
+
   due.setDate(due.getDate() + days);
   due.setHours(23, 59, 0, 0);
+
   return due;
 }
 ```
@@ -158,17 +160,21 @@ export class LoanService {
 
   async checkOut(memberId: string, copyId: string): Promise<Loan> {
     const member = await this.requireMember(memberId);
+
     if (member.suspended) throw new MemberSuspendedError(memberId);
 
     const active = await this.loans.findActiveByMember(memberId);
+
     if (active.length >= LoanService.MAX_ACTIVE_LOANS) {
       throw new LoanLimitReachedError(memberId, LoanService.MAX_ACTIVE_LOANS);
     }
 
     const copy = await this.requireCopy(copyId);
+
     if (copy.status !== 'available') throw new CopyNotAvailableError(copyId);
 
     const now = this.clock.now();
+
     const loan: Loan = {
       id: this.ids(),
       copyId,
@@ -178,32 +184,44 @@ export class LoanService {
       renewals: 0,
       returnedAt: null,
     };
+
     await this.loans.save(loan);
     await this.copies.save({ ...copy, status: 'on-loan' });
+
     return loan;
   }
 
   async returnCopy(loanId: string): Promise<{ loan: Loan; fine: number }> {
     const loan = await this.requireLoan(loanId);
+
     if (loan.returnedAt) throw new LoanError(`Loan ${loanId} already returned`);
 
     const now = this.clock.now();
     const fine = this.fines.amountFor(loan, now);
     const returned = { ...loan, returnedAt: now };
+
     await this.loans.save(returned);
+
     const copy = await this.requireCopy(loan.copyId);
+
     await this.copies.save({ ...copy, status: 'available' });
+
     return { loan: returned, fine };
   }
 
   async renew(loanId: string): Promise<Loan> {
     const loan = await this.requireLoan(loanId);
+
     if (loan.returnedAt) throw new LoanError(`Loan ${loanId} already returned`);
+
     const member = await this.requireMember(loan.memberId);
+
     if (member.suspended) throw new MemberSuspendedError(member.id);
 
     const renewed = { ...loan, dueAt: this.nextDueDate(loan), renewals: loan.renewals + 1 };
+
     await this.loans.save(renewed);
+
     return renewed;
   }
 
@@ -227,12 +245,15 @@ export class FineService {
 
   daysOverdue(loan: Loan, at: Date): number {
     const late = at.getTime() - loan.dueAt.getTime();
+
     if (late <= 0) return 0;
+
     return Math.ceil(late / FineService.MS_PER_DAY);
   }
 
   amountFor(loan: Loan, at: Date): number {
     const days = this.daysOverdue(loan, at);
+
     return Math.round(days * FineService.DAILY_RATE * 100) / 100;
   }
 }
@@ -257,6 +278,7 @@ Thin: each desk action parses input, calls a service, and maps the outcome, with
 ```ts
 test('checkout fails when member already has 3 loans', async () => {
   const svc = makeService({ now: new Date('2026-02-02T10:00:00') });
+
   for (const c of ['c1', 'c2', 'c3']) await svc.checkOut('m1', c);
   await assert.rejects(() => svc.checkOut('m1', 'c4'), LoanLimitReachedError);
 });

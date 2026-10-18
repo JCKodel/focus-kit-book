@@ -68,11 +68,13 @@ describe("lend", () => {
 
 	it("refuses a member with an overdue book", () => {
 		const result = lend(copy, { ...member, overdue: 1 }, "2026-10-01");
+
 		expect(result).toEqual({ ok: false, error: "HasOverdueBooks" });
 	});
 
 	it("lends for 21 days to a member with nothing overdue", () => {
 		const result = lend(copy, member, "2026-10-01");
+
 		expect(result.ok && result.value.dueAt).toBe("2026-10-22");
 	});
 });
@@ -93,6 +95,7 @@ function unexpected(): never {
 
 function fake(repositories: Partial<LoanRepositories>): LoanRepositories {
 	const none = { findMember: unexpected, findCopy: unexpected, insertLoan: unexpected };
+
 	return { ...none, ...repositories };
 }
 
@@ -102,7 +105,9 @@ describe("lendRequested", () => {
 			findMember: () => ok({ id: "m1", overdue: 1, suspended: false }),
 			findCopy: () => ok({ id: "c1", bookId: "b1" }),
 		});
+
 		const state = lendRequested({ copyId: "c1", memberId: "m1" }, "2026-10-01", repositories);
+    
 		expect(state).toEqual({ kind: "Refused", refusal: "HasOverdueBooks" });
 	});
 });

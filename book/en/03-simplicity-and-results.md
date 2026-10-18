@@ -29,7 +29,9 @@ const LOAN_DAYS = 21;
 
 function dueDate(today: string): string {
 	const due = new Date(today);
+
 	due.setUTCDate(due.getUTCDate() + LOAN_DAYS);
+
 	return due.toISOString().slice(0, 10);
 }
 ```
@@ -199,6 +201,7 @@ function query<T>(run: () => T): Result<T, DatabaseFailed> {
 		return ok(run());
 	} catch (thrown) {
 		const message = thrown instanceof Error ? thrown.message : String(thrown);
+    
 		return err({ code: "DatabaseFailed", message });
 	}
 }

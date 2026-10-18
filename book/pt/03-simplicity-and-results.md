@@ -30,7 +30,9 @@ const DIAS_DE_EMPRESTIMO = 21;
 
 function dataDeDevolucao(hoje: string): string {
 	const devolucao = new Date(hoje);
+
 	devolucao.setUTCDate(devolucao.getUTCDate() + DIAS_DE_EMPRESTIMO);
+  
 	return devolucao.toISOString().slice(0, 10);
 }
 ```

@@ -173,13 +173,21 @@ export function emprestimoPedido(
 	repositorios: RepositoriosDeEmprestimo,
 ): EstadoDoEmprestimo {
 	const membro = repositorios.buscarMembro(evento.membroId);
+
 	if (!membro.ok) return estadoDe(membro.error);
+
 	const exemplar = repositorios.buscarExemplar(evento.exemplarId);
+
 	if (!exemplar.ok) return estadoDe(exemplar.error);
+
 	const emprestimo = emprestar(exemplar.value, membro.value, hoje);
+
 	if (!emprestimo.ok) return estadoDe(emprestimo.error);
+
 	const salvo = repositorios.inserirEmprestimo(emprestimo.value);
+
 	if (!salvo.ok) return estadoDe(salvo.error);
+  
 	return { tipo: "Emprestado", emprestimo: salvo.value };
 }
 ```
