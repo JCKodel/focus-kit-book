@@ -33,7 +33,10 @@ test uses the terms of this table. A new concept enters here first.
 
 **docs/04, the conventions.** Documentation language and identifier
 language. Naming. Style and formatting, and the tool that enforces them.
-Where tests live and what is tested at each level. A pointer to docs/05 §6
+Where tests live and what is tested at each level: business rules
+tested in process, the fastest tests there are; end-to-end
+tests, and any that need the running application or a network, only
+where they prove what the fast ones cannot. A pointer to docs/05 §6
 for the commit message format; do not copy that format here.
 
 **docs/05, the process.** The template below, with its slots filled.
@@ -50,14 +53,18 @@ its review (docs/05 §8):
 `work/<slug>.md` ready for /apply · `[*]` being built · `[x]` done, page in
 `work/done/` · `[?]` waiting, with `· resume: propose` or `· resume: apply`
 before `· blocked: <reason>` or `· blocked: after <slug>, <slug>` at the
-end of the line (docs/05 §4). A line holds the mark, the slug, one
+end of the line, and `· dropped: <reason>` on an `[x]` line the person
+cancelled (docs/05 §4). A line holds the mark, the slug, one
 sentence and its suffixes; what happened goes on the page. A line never
 leaves; it changes mark, at the moment the work changes (docs/05 §4). The
 order is the priority: a session asked for the next delivery takes the
 first free line, and the person reorders by conversation in any session;
 what is not in the current milestone is not planned yet. A line that
 needs another done first ends with `· after <slug>`, written when the
-line is added; it is an order, not a block. A line is free when every
+line is added; it is an order, not a block. A line no clause of the
+current milestone's paragraph needs goes under the next milestone,
+created when missing with a paragraph that line answers and its review
+last (docs/05 §4). A line is free when every
 `after` it names is `[x]`. Free lines that touch different files may run
 at the same time, in different sessions (docs/05 §4). The
 queue is edited by conversation in any session; no command owns it.
@@ -109,16 +116,14 @@ functions that take data and return a Result, no IO, no framework. The
 Repository fetches and saves, and is the only place an infrastructure
 exception becomes a value. Code is organized by feature (vertical slices),
 not by layer, and a layer exists only when it pays its own way. FOCUS
-is chapter 7 of the book One Page at a Time by J.C. Ködel
-(https://jckodel.github.io/focus-kit-book/07-four-pieces/). Three answers:
+is chapter 4 of the book One Page at a Time by J.C. Ködel
+(https://jckodel.github.io/focus-kit-book/04-focus/). Three answers:
 
-* **FOCUS whole:** the four pieces, errors as values, vertical slices.
+* **FOCUS whole:** the four pieces, exceptions as values, vertical slices.
   docs/01 gets the responsibility table below and names the pieces a slice
-  has in this stack;
-* **the two principles only:** vertical slices and errors as values, with
-  whatever structure the stack favors. Ninjobs, a thin PWA over a backend
-  as a service, chose this: component, one function per feature, client
-  library, `{ data, error }` everywhere, `throw` never as flow;
+  has in this stack. Ninjobs chose this;
+* **the two principles only:** vertical slices and exceptions as values,
+  with whatever structure the stack favors;
 * **neither:** the project's own conventions, written in docs/01.
 
 On a repository with code the default is what the code already does.
@@ -133,7 +138,10 @@ On a repository with code the default is what the code already does.
 **Git.** A strategy, not a silver bullet: pick the one that fits how the
 project is worked. Three answers, and in every one a delivery's page and
 build are one change that reverts in one step, because undoing a whole
-delivery must be one step; the agent never commits and never merges:
+delivery must be one step. That step undoes what git holds; a migration
+run or a message sent is not undone by it, so a page whose delivery acts
+outside git says in Done when how that is undone, naming its manual, or
+that it is not. The agent never commits or merges on its own:
 
 * **trunk:** everything on the main branch. The
   page waits uncommitted in the working tree between `/propose` and
@@ -141,8 +149,8 @@ delivery must be one step; the agent never commits and never merges:
   after reviewing. What Ninjobs did, one session at a time. For one
   person, alone or with several sessions open
   on free lines that touch different files: each session stages only its
-  delivery, and the person commits one delivery at a time, from the paths
-  that session staged. Not for two people: their deliveries share one
+  delivery, and the person commits one delivery at a time, from an index
+  that holds only it (docs/05 §6). Not for two people: their deliveries share one
   branch and one commit carries the other's half-done work;
 * **a branch per delivery:** `/propose` creates a branch named after the
   slug and writes the page there; `/apply` builds on it. The branch may
@@ -189,15 +197,17 @@ decided yet.
 
 docs/06 → /propose <slug> → work/<slug>.md → /apply <slug>, in a fresh
 session → verify green, environments as §5 says → work/done/<slug>.md and
-git add → a person reviews and commits.
+git add → a person uses it, reviews and commits.
 
 /propose talks and writes the page, never code. /apply builds, proves,
-updates the documents, stages and suggests the commit, never commits.
-Code changes only inside /apply: a change asked anywhere else, however
-small, becomes a `[ ]` line in docs/06; what was said that the line
-cannot hold goes into a draft `work/<slug>.md`. The answer stops there
-and names `/propose <slug>` for a fresh session, as this host invokes
-commands.
+updates the documents, stages and suggests the commit, never commits on
+its own. Code changes only inside /apply: a change asked anywhere else,
+however small, becomes a `[ ]` line in docs/06; what was said that the
+line cannot hold goes into a draft `work/<slug>.md`. The answer stops
+there and names `/propose <slug>`, as this host invokes commands; the
+person runs it in this session, whose conversation the draft already
+holds, or in a fresh one. /apply always starts in a fresh session: it
+has only what the page says.
 
 Before /propose changes the queue or the page, use §5's git strategy:
 create the branch or worktree named after the slug, or reuse its existing
@@ -256,7 +266,11 @@ reorders by conversation. A line is the mark, the slug, one sentence and
 its suffixes; what happened goes on the page, because /propose reads the
 whole queue. A line that needs another done first ends with
 `· after <slug>`, written when the line is added; it is free when every
-line it names is `[x]`. Asked what can run at the same time, answer from
+line it names is `[x]`. A line that no clause of the current milestone's
+paragraph needs, whoever adds it, goes under the next milestone, created
+when missing with a paragraph that line answers and its review last; a
+finding of the milestone's own review stays in it (§8).
+Asked what can run at the same time, answer from
 the queue: the free lines, and among them the ones that touch different
 files, judged from their pages and docs/01. The line never
 leaves the queue; it changes mark, at the moment the work changes, so the
@@ -268,7 +282,7 @@ queue shows what is happening while it happens:
 | `[~]` | being defined | /propose, when it starts |
 | `[>]` | completely defined, page ready for /apply | /propose, when §3 is complete |
 | `[*]` | being built | /apply, when it starts |
-| `[x]` | done, page in `work/done/` | /apply, with verify green |
+| `[x]` | done, page in `work/done/`; with `· dropped:`, cancelled | /apply, with verify green; the person, when cancelling |
 | `[?]` | waiting | any session, in the four cases below |
 
 A board may read the queue, and people pull work from it, so a mark
@@ -288,15 +302,25 @@ session that records the answer clears it, or /apply marks `[x]` the last
 line of an `after`), remove both suffixes: `resume: propose` returns to
 `[ ]`, keeping any draft, and `resume: apply` to `[>]`.
 
+A `[~]` or `[*]` line whose session ended without blocking it (the host
+closed, the connection or its limit) keeps its mark; its command resumes
+it on the person's word, inspecting the page, the tree and the index
+before editing. A delivery the person cancels, because it is impossible,
+refused or no longer wanted, ends `[x]` with `· dropped: <reason>` at the
+end of the line, its page in `work/done/` saying what was built and
+undone; a line whose `after` names it is the person's to re-decide.
+
 Two sessions in one working tree, on free lines that touch different
 files, are the normal case of parallel work on trunk. Another line
 changing mark, another delivery's page or files appearing in the tree,
 and another session's index entries are that session's work, not a
 conflict: do not stop for them, do not touch them, change only this
 delivery's line and stage only this delivery's paths and hunks, including
-its own hunk of docs/06. A conflict is the same hunk edited by both, or a
+its own hunk of docs/06. A conflict is a line edited by both, or a
 file this page needs that the other delivery is changing; then stop and
-report. In worktrees, change only this delivery's line; when branches are
+report. Two deliveries' edits in one hunk, each on its own line, as two
+neighbouring queue lines are, conflict in nothing: they are split when
+staged. In worktrees, change only this delivery's line; when branches are
 integrated, reconcile docs/06 by slug, keeping every line at its latest
 state, never one side's whole file.
 
@@ -309,8 +333,10 @@ A slot says what and the command, in a few lines: /apply reads it every
 time. Steps go in a manual, and what a command prints stays in its help.
 
 * **Documentation language:** <language>. Identifiers in <language>.
-* **Verify:** `<command>`, which runs <what>. Green before anything is
-  declared done. <Or: created by the first delivery.>
+* **Verify:** `<command>`, which runs <what>, fast enough to run on every
+  delivery. Green before anything is declared done. <Or: created by the
+  first delivery.> Slow tests: `<command>`, which runs <what>, run by the
+  milestone review (§8); <or: none>.
 * **Environments:** one line each: name, what runs there, what a delivery
   must leave up to date there, and the command that does it, or its
   manual when a person does it by hand.
@@ -324,8 +350,10 @@ time. Steps go in a manual, and what a command prints stays in its help.
   context that did not write them: the host's own review, as a skill the
   agent invokes or a command it runs, and how it is limited to the
   delivery's paths; else a read-only agent on the session's model reading
-  `git diff` of those paths and the files the delivery created, which no
-  diff shows until they are staged; or: none>.
+  the whole delivery against its base: `git diff HEAD` of those paths,
+  staged and unstaged, the commits a blocked delivery already made on its
+  branch or worktree, and the files it created, which no diff shows until
+  they are staged; or: none>.
 * **Manuals:** `docs/manuals/`, one file per action that takes more than
   one command: what a person does by hand outside a delivery (publish,
   roll back, rotate a secret, set up a service) and a proof /apply runs
@@ -341,7 +369,10 @@ time. Steps go in a manual, and what a command prints stays in its help.
   checker run on, or the session's; or: none>.
 * **Git:** trunk | a branch per delivery | a worktree per delivery. A
   delivery's page and build are one change: one commit on trunk, one merge
-  otherwise. The agent stages; it never commits or merges. <With a
+  otherwise. Reverting it undoes what git holds; a delivery that acts
+  outside git (a migration run, a message sent) says in its Done when how
+  that is undone, or that it is not. The agent stages; it never commits or merges on its own, and
+  asked, it takes the step the person names. <With a
   worktree per delivery: the hidden folder of the container, `.focus-kit/`,
   and the branch prefix, `focus-kit/`.>
 
@@ -361,9 +392,13 @@ Inspect the staged diff afterwards and report any unrelated entries that
 were already staged, so the person knows a plain commit would include
 them. Do not unstage those entries yourself. A commit must contain only
 this delivery for the one-change promise to hold: with two sessions on
-trunk, the person commits one delivery at a time, naming its paths.
+trunk, the person commits each delivery as its session ends, from an
+index that holds only it, never by naming paths on `git commit`, which
+takes each named file whole from the working tree and carries the other
+session's hunk of it, staged or not.
 
-The agent suggests the message; the person commits after reviewing.
+The agent suggests the message; the person commits after reviewing, or
+asks the agent to.
 Imperative subject up to 72 characters, scope in parentheses
 when it helps; body up to five one-line bullets, the highlights and not
 the reasoning; last line points to the page's actual path, where the
@@ -392,14 +427,17 @@ A milestone is planned with its review as its last line,
 `<milestone>-review`, a delivery like the others: /propose writes its
 page, /apply runs it. It takes the milestone's paragraph clause by clause
 and writes, for each, which delivery answers it and how a person tests it.
-It fixes nothing. The person tests each clause by hand: a clause no
-delivery answers, or one that fails in the person's hands, is a finding.
+It fixes nothing. It runs §5's slow tests, when the slot names them; a
+failing one is a finding. The person tests each clause by hand: a clause
+no delivery answers, or one that fails in the person's hands, is a finding.
 
 The review also reads the code, the one look at the whole instead of a
 delivery: every page can be right and the whole wrong. Its page names as
 the base the commit of the previous milestone's review, so the range
 holds the fixes of its findings, which get no second review, or the
-first commit for a first milestone, and lists, by §5's areas, the paths `git diff --stat <base>..HEAD`
+first commit for a first milestone, and the commit HEAD was when the
+reading started, so the range stays fixed while readers work, and lists,
+by §5's areas, the paths `git diff --stat <base>..<that commit>`
 shows: always the range, since a bare commit reads that one commit. An
 area too large for one careful reading splits again. It costs, so the
 session says it is time and starts it only on the person's word: one
@@ -448,9 +486,10 @@ is the only place a rule is written.
   to build. Code changes only inside /apply: a change asked outside it,
   however small, becomes a `[ ]` line in docs/06, with a draft page for
   what the line cannot hold, and the answer stops there, naming /propose
-  for a fresh session (docs/05 §2).
+  (docs/05 §2).
 - No em dash in any text a user reads.
-- The agent stages and suggests the commit message. It never commits.
+- The agent stages and suggests the commit message. It never commits or
+  merges on its own; asked, it takes the step the person names.
 - Stage only this delivery's changes as docs/05 §6 says; preserve unrelated
   edits and existing index entries.
 

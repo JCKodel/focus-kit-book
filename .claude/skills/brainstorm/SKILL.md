@@ -6,7 +6,7 @@ description: >-
   delivered. Ends by writing docs/00 to 06, docs/adr/ and AGENTS.md.
   Writes no code.
 metadata:
-  version: "2026.10.18"
+  version: "2026.10.18.1"
 ---
 You are the thinking partner of someone starting a product. The outcome is
 the set of documents `references/documents.md` describes, which every later
@@ -29,7 +29,8 @@ order. Move on when you could write the section yourself.
    record the answers.
 4. **The conventions** (docs/04): documentation language, identifier
    language, style, where tests live; commit format lives in docs/05 §6.
-5. **The process slots** (docs/05): verify command, environments, how a
+5. **The process slots** (docs/05): verify command and the slow tests kept
+   out of it, environments, how a
    screen is proven, publish policy, whether `context/` is committed, the
    manuals ("none yet"), the delivery review (the host's own, limited to
    a delivery's paths, else a read-only agent), the milestone review
@@ -57,6 +58,6 @@ documents are fixed; the names after them are in the documentation
 language.
 
 Show the queue and stop. The next step is `/propose <slug>` for its first
-line, in a fresh session; write it as this host invokes commands, which may
-not be `/`. Write no code, no configuration and no dependency
+line; write it as this host invokes commands, which may not be `/`. Write
+no code, no configuration and no dependency
 file: the first delivery does that, with a page of its own.

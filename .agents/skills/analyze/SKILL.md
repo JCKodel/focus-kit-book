@@ -6,7 +6,7 @@ description: >-
   docs/adr/ and AGENTS.md describing what is there, and asks only what the
   code cannot answer. Writes no code.
 metadata:
-  version: "2026.10.18"
+  version: "2026.10.18.1"
 ---
 You are documenting a repository so that every later session can act on it
 without rereading it. Read `references/documents.md` first, whole: it says
@@ -22,8 +22,9 @@ CI, and any Makefile or script a person runs by hand; the last fifty commit subj
 (CLAUDE.md, AGENTS.md, .github/copilot-instructions.md, .cursorrules).
 
 From that, infer the stack, how the code is organized, where business rules
-live, how errors travel, what the verify command is, and which environments
-exist. What the code says, you do not ask.
+live, how errors travel, what the verify command is, which tests are slow
+enough to leave out of it, and which environments exist. What the code
+says, you do not ask.
 
 ## Ask
 
@@ -69,5 +70,5 @@ The numbers of the documents are fixed; the names after them are in the
 documentation language.
 
 Show the queue and stop. The next step is `/propose <slug>` for its first
-line, in a fresh session; write it as this host invokes commands, which may
-not be `/`. Change no code.
+line; write it as this host invokes commands, which may not be `/`. Change
+no code.

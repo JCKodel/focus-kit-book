@@ -39,3 +39,10 @@ Since `kit-2026-10-17` the book runs focus-kit 2026.10.17; the six marks are unc
 ## Amendment, 2026-10-18 (kit-2026-10-18)
 
 Since `kit-2026-10-18` the book runs focus-kit 2026.10.18; the six marks are unchanged, and `[?]` waits in a fourth case: a milestone review's code reading that missed part of its range (docs/05 §§4, 8).
+
+## Amendment, 2026-10-18 (kit-2026-10-18-1)
+
+Since `kit-2026-10-18-1` the book runs focus-kit 2026.10.18.1; the six marks are unchanged, and their states say three things more (docs/05 §4).
+A `[~]` or `[*]` line whose session ended without blocking it keeps its mark and is resumed by its command on the person's word.
+A delivery the person cancels ends `[x]` with `· dropped: <reason>`, and a line whose `after` names it is the person's to re-decide.
+A resolved wait returns by its suffix alone, `resume: propose` to `[ ]` with its draft kept and `resume: apply` to `[>]`: the two returns the kit's template carried until it dropped them during 2026.10.16.1, kept here through later installations (a return to `[ ]` when scope became undecided and the recovery of a line blocked without `resume`), are retired.

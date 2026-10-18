@@ -452,7 +452,7 @@ When this milestone closes, a reader of chapters 0 to 7 learns each idea where i
 When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repository runs on it: verify kept fast with the slow tests run by the milestone review, a line no clause needs going to the next milestone, /propose in the asking session or a fresh one, /apply's next steps starting with using the delivery, and the agent committing or merging only when asked; and every passage the comparison of the book with the kit on 2026-10-18 found false says what the kit does.
 
 ```
-[>] kit-2026-10-18-1         reinstall the kit at 2026.10.18.1 and apply its migration report to docs/05 §§2, 4, 5, 6 and 8, docs/04, AGENTS.md and the skills · after m18-review
+[x] kit-2026-10-18-1         reinstall the kit at 2026.10.18.1 and apply its migration report to docs/05 §§2, 4, 5, 6 and 8, docs/04, AGENTS.md and the skills · after m18-review
 [>] ch08-update-2026-10-18-1 chapter 8: the update example and its report at 2026.10.18.1, and the Claude Code row that reads `AGENTS.md` alone only without a `CLAUDE.md`; both editions · after kit-2026-10-18-1
 [>] ch05-13-slow-tests       chapters 5, 7, 13 and 15: verify fast on every delivery, the slow tests named in the Verify slot and run by the milestone review, and /apply saying when a test is too slow for verify; both editions · after kit-2026-10-18-1
 [>] ch11-next-milestone      chapters 11, 14 and 15: a line no clause of the current milestone needs goes under the next milestone, and a review's finding stays in its own; both editions · after kit-2026-10-18-1

@@ -17,9 +17,9 @@ A free, bilingual book that teaches a team the engineering practices behind the 
 - No chapter narrates a run: no brief, transcript, diff, `git status`, headless flag or commit hash in the text (ADR-0017).
 - Case B did not run on the process; no passage implies it did (docs/00).
 - The book mentions none of the author's earlier books and copies no text from them (ADR-0005).
-- One delivery = one page in work/<slug>.md: /propose to define, /apply to build. Code changes only inside /apply: a change asked outside it, however small, becomes a `[ ]` line in docs/06, with a draft page for what the line cannot hold, and the answer stops there, naming /propose for a fresh session (docs/05 §2).
+- One delivery = one page in work/<slug>.md: /propose to define, /apply to build. Code changes only inside /apply: a change asked outside it, however small, becomes a `[ ]` line in docs/06, with a draft page for what the line cannot hold, and the answer stops there, naming /propose (docs/05 §2).
 - No em dash in any text a user reads.
-- The agent stages and suggests the commit message. It never commits.
+- The agent stages and suggests the commit message. It never commits or merges on its own; asked, it takes the step the person names.
 - Stage only this delivery's changes as docs/05 §6 says; preserve unrelated edits and existing index entries.
 
 ## Do not rebuild

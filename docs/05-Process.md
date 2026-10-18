@@ -16,16 +16,18 @@ A chapter is one delivery and includes both editions.
 docs/06 `[ ]` → /propose <slug>, the line `[~]` → work/<slug>.md, the
 line `[>]` → /apply <slug>, in a fresh session, the line `[*]` → verify
 green, environments as §5 says → work/done/<slug>.md, git add, and the
-line `[x]` → a person reviews and commits. Any line before `[x]` may wait as
-`[?]` (§4).
+line `[x]` → a person uses it, reviews and commits. Any line before `[x]`
+may wait as `[?]` (§4).
 
 /propose talks and writes the page, never code. /apply builds, proves,
-updates the documents, stages and suggests the commit, never commits.
-Code changes only inside /apply: a change asked anywhere else, however
-small, becomes a `[ ]` line in docs/06; what was said that the line
-cannot hold goes into a draft `work/<slug>.md`. The answer stops there
-and names `/propose <slug>` for a fresh session, as this host invokes
-commands.
+updates the documents, stages and suggests the commit, never commits on
+its own. Code changes only inside /apply: a change asked anywhere else,
+however small, becomes a `[ ]` line in docs/06; what was said that the
+line cannot hold goes into a draft `work/<slug>.md`. The answer stops
+there and names `/propose <slug>`, as this host invokes commands; the
+person runs it in this session, whose conversation the draft already
+holds, or in a fresh one. /apply always starts in a fresh session: it
+has only what the page says.
 
 Before /propose changes the queue or the page, use §5's git strategy:
 create the branch or worktree named after the slug, or reuse its existing
@@ -93,7 +95,11 @@ reorders by conversation. A line is the mark, the slug, one sentence and
 its suffixes; what happened goes on the page, because /propose reads the
 whole queue. A line that needs another done first ends with
 `· after <slug>`, written when the line is added; it is free when every
-line it names is `[x]`. Asked what can run at the same time, answer from
+line it names is `[x]`. A line that no clause of the current milestone's
+paragraph needs, whoever adds it, goes under the next milestone, created
+when missing with a paragraph that line answers and its review last; a
+finding of the milestone's own review stays in it (§8).
+Asked what can run at the same time, answer from
 the queue: the free lines, and among them the ones that touch different
 files, judged from their pages and docs/01. The line never
 leaves the queue; it changes mark, at the moment the work changes, so the
@@ -105,7 +111,7 @@ queue shows what is happening while it happens:
 | `[~]` | being defined | /propose, when it starts |
 | `[>]` | completely defined, page ready for /apply | /propose, when §3 is complete |
 | `[*]` | being built | /apply, when it starts |
-| `[x]` | done, page in `work/done/` | /apply, with verify green |
+| `[x]` | done, page in `work/done/`; with `· dropped:`, cancelled | /apply, with verify green; the person, when cancelling |
 | `[?]` | waiting | any session, in the four cases below |
 
 A board may read the queue, and people pull work from it, so a mark
@@ -129,12 +135,18 @@ reason is resolved: the person says so, the session that records the
 answer clears it, or /apply clears it when it marks `[x]` the last line of
 an `after`. Remove both suffixes: `resume: propose` returns to `[ ]`,
 keeping any draft, and `resume: apply` to `[>]`.
-If scope became undecided, return `[ ]` and say what /propose must settle.
-For an old blocked line without `resume`, recover the phase from its page
-and history; if completeness cannot be established, return `[ ]`.
-These are the marks of focus-kit 2026.10.05, and the fourth case a line
-waits in is that of 2026.10.18 (ADR-0018 and its amendment of
-2026-10-18).
+
+A `[~]` or `[*]` line whose session ended without blocking it (the host
+closed, the connection or its limit) keeps its mark; its command resumes
+it on the person's word, inspecting the page, the tree and the index
+before editing. A delivery the person cancels, because it is impossible,
+refused or no longer wanted, ends `[x]` with `· dropped: <reason>` at the
+end of the line, its page in `work/done/` saying what was built and
+undone; a line whose `after` names it is the person's to re-decide.
+These are the marks of focus-kit 2026.10.05, the fourth case a line
+waits in is that of 2026.10.18, and the ended and dropped lines are
+those of 2026.10.18.1 (ADR-0018 and its amendments `kit-2026-10-18` and
+`kit-2026-10-18-1`).
 
 Two sessions in one working tree, on free lines that touch different
 files, are the normal case of parallel work on trunk. Another line
@@ -142,11 +154,11 @@ changing mark, another delivery's page or files appearing in the tree,
 and another session's index entries are that session's work, not a
 conflict: do not stop for them, do not touch them, change only this
 delivery's line and stage only this delivery's paths and hunks, including
-its own hunk of docs/06. A conflict is the same lines edited by both, or
-a file this page needs that the other delivery is changing; then stop and
-report. Two lines next to each other, one edited by each, are not a
-conflict, though git shows them in one hunk: each session stages only its
-own line. In worktrees, each worktree's queue shows that branch's state,
+its own hunk of docs/06. A conflict is a line edited by both, or a file
+this page needs that the other delivery is changing; then stop and
+report. Two deliveries' edits in one hunk, each on its own line, as two
+neighbouring queue lines are, conflict in nothing: they are split when
+staged, each session staging only its own line. In worktrees, each worktree's queue shows that branch's state,
 not a global live view. Change only the current delivery's line, its new
 findings and the dependent lines this session can resolve. When branches
 are integrated, reconcile docs/06 by slug: retain every delivery and
@@ -170,7 +182,8 @@ time. Steps go in a manual, and what a command prints stays in its help.
 * **Verify:** `make verify`, which runs the strict site build, edition
   parity, the em dash check, the prose rules, the block width check, the
   link check and the disclosure scan, commit messages and hooks
-  included. Green before anything is declared done.
+  included, fast enough to run on every delivery. Green before anything
+  is declared done. Slow tests: none.
 * **Environments:**
   * local: `make serve` for the site, `make book` for PDF and EPUB in
     `output/` (never committed). A delivery leaves both building.
@@ -210,10 +223,12 @@ time. Steps go in a manual, and what a command prints stays in its help.
 * **Context:** `context/` is listed in `.gitignore` and not created: the
   repository is public and what people said about the cases is private.
 * **Delivery review:** before /apply ends, a read-only agent on Opus,
-  which keeps the session's advisor, reads `git diff` and
-  `git diff --cached` of the delivery's paths, of docs/06 only its own
-  hunk, and the files the delivery created, which no diff shows until
-  they are staged, against the delivery's page and docs/04. Another
+  which keeps the session's advisor, reads the whole delivery against its
+  base: `git diff HEAD` of the delivery's paths, staged and unstaged, of
+  docs/06 only its own hunk; the commits a blocked delivery already made
+  on its branch, none on trunk, where blocked work stays uncommitted
+  (§6); and the files the delivery created, which no diff shows until
+  they are staged; all against the delivery's page and docs/04. Another
   session's files are not this review's. No other model runs it.
 * **Guided project and brownfield project:** retired by `rewrite`
   (ADR-0017). The repositories `JCKodel/focus-kit-clinic` and
@@ -235,8 +250,9 @@ time. Steps go in a manual, and what a command prints stays in its help.
   * `set-up-the-disclosure-list.md`: the list, the hooks and the Actions
     secret, once per machine and once per clone.
 * **Milestone review:** on the author's word in the review's /apply
-  session, read-only agents on Opus read `git diff <base>..HEAD`
-  against the commit the review's page names, one per area it touches:
+  session, read-only agents on Opus read `git diff <base>..<end>`, the
+  two commits the review's page names, its base and the commit HEAD was
+  when the reading started, one per area it touches:
   the build, the chapters, the kit's skills, the documents. One more
   read-only agent on Opus checks each candidate against the file before
   the author sees it. Every agent keeps the session's advisor, Fable.
@@ -244,8 +260,11 @@ time. Steps go in a manual, and what a command prints stays in its help.
   At most two of these agents run at a time: in `m16-review` five at
   once left three with no report.
 * **Git:** trunk. A delivery's page and build are one change: one commit.
-  Two sessions may work in one tree on free lines (§4). The agent stages;
-  it never commits or merges.
+  Reverting it undoes what git holds; a delivery that acts outside git
+  (a migration run, a message sent) says in its Done when how that is
+  undone, or that it is not. Two sessions may work in one tree on free
+  lines (§4). The agent stages; it never commits or merges on its own,
+  and asked, it takes the step the person names.
 
 ## 6. Commit
 
@@ -268,12 +287,13 @@ Inspect the staged diff afterwards and report any unrelated entries that
 were already staged, so the person knows a plain commit would include
 them. Do not unstage those entries yourself. A commit must contain only
 this delivery for the one-change promise to hold: with two sessions on
-trunk, the person commits one delivery at a time, from the index once
-`git diff --cached` holds only it; naming paths takes each file whole
-from the working tree, the other delivery's hunk of a shared file
-included.
+trunk, the person commits each delivery as its session ends, from an
+index that holds only it, never by naming paths on `git commit`, which
+takes each named file whole from the working tree and carries the other
+session's hunk of it, staged or not.
 
-The agent suggests the message; the person commits after reviewing.
+The agent suggests the message; the person commits after reviewing, or
+asks the agent to.
 The one commit a script makes is the release's: `make release`, on the
 author's `y`, commits `VERSION` alone as `chore(release): vX.Y.Z`, with no
 page and no body (`docs/manuals/release-the-book.md`).
@@ -311,7 +331,8 @@ A milestone is planned with its review as its last line,
 `<milestone>-review`, a delivery like the others: /propose writes its
 page, /apply runs it. Its page takes the milestone's paragraph clause by
 clause and writes, for each, which delivery answers it and how a person
-tests it. It fixes nothing. The person tests each
+tests it. It fixes nothing. It runs §5's slow tests, when the slot names
+them; a failing one is a finding. The person tests each
 clause by hand: a clause no delivery answers, or one that fails in the
 person's hands, is a finding.
 
@@ -319,8 +340,9 @@ The review also reads the code, the one look at the whole instead of a
 delivery: every page can be right and the whole wrong. Its page names as
 the base the commit of the previous milestone's review, so the range
 holds the fixes of its findings, which get no second review, or the
-first commit for a first milestone, and lists, by §5's areas, the paths `git diff --stat <base>..HEAD`
-shows: always the range, since a bare commit reads that one commit. An
+first commit for a first milestone, and the commit HEAD was when the
+reading started, so the range stays fixed while readers work, and lists,
+by §5's areas, the paths `git diff --stat <base>..<that commit>` shows: always the range, since a bare commit reads that one commit. An
 area too large for one careful reading splits again. It costs, so the
 session says it is time and starts it only on the person's word: one
 read-only agent per area, in parallel where the host runs agents, or one
