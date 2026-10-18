@@ -49,10 +49,32 @@
 
 **Done when.**
 
-* [ ] Both editions written: the gain section as Behaviour says.
-* [ ] Chapter 2 still opens with its value, keeps its gain said once, no filler and nothing useful cut.
-* [ ] Every number sourced: none added.
-* [ ] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions written: the gain section as Behaviour says.
+* [x] Chapter 2 still opens with its value, keeps its gain said once, no filler and nothing useful cut.
+* [x] Every number sourced: none added.
+* [x] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author: left to the driver, who builds the book once at the end of the batch.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+
+**Divergences.** Two of the reviewer's wording suggestions, which keep the page's intent, were applied, so the text departs from the Behaviour's words: (1) the first sentence says "everything written before the code" (pt "tudo o que é escrito antes do código") in place of "everything the tool writes", since the reader has just met three tools and the page's objective says "written"; (2) the third and fourth Behaviour lines are one short sentence, "So the gain is writing less.", then one sentence that sets the page, read whole and with attention, against the folder, skimmed, so the contrast is said once and does not echo body line 60. The old opening line ("One page per feature, instead of one folder per feature, is what the team reads, reviews and keeps true") is merged into that last sentence.
+
+**Proof.**
+
+* `git diff -- book/*/02-spec-driven.md`: one hunk per edition, inside `## What the team gains` (pt `## O que o time ganha`), one line out and four in; lines 66 to 68 (now 69 to 71) and the link to chapter 6 unchanged.
+* `make verify`: build, parity, em dash, prose, width, links and disclosure all pass, exit 0.
+
+**Review.** A read-only Opus reviewer that did not write the change read the diff against this page and docs/04: nothing breaks the page or docs/04; no number, Ninjobs mention, key point or body line changed; the attention line is reasoning, not a measured or quality claim. It found the first draft said the page-versus-folder contrast twice and echoed body line 60, and pt "onde" read as a translation of "where"; suggestions A (merge the last two lines) and B ("everything written") were applied, see Divergences. It noted, without counting it a break, that the first sentence is close to body line 50; the page's Behaviour asks for it and it adds the reason (nobody checked).
+
+**Decisions.** The batch driver owns docs/06 and the commit; this delivery staged nothing and left `make book` to the driver.
+
+```commit
+docs(ch02-gain-less-to-read): say why writing less is the gain
+
+- Chapter 2, both editions: the gain opens with why less is written; a person reads all of it, attention does not grow with the lines, so one page is read with attention where a folder is skimmed
+
+book/en/02-spec-driven.md
+book/pt/02-spec-driven.md
+docs/06-Queue.md
+work/done/ch02-gain-less-to-read.md
+```

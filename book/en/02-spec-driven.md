@@ -62,7 +62,10 @@ The counts say what each tool writes before the code; they do not say which one 
 
 ## What the team gains
 
-One page per feature, instead of one folder per feature, is what the team reads, reviews and keeps true.
+A person has to read everything written before the code, because a decision nobody read is a decision nobody checked.
+A person's attention does not grow with the number of lines: the more there is to read, the less attention each part gets.
+So the gain is writing less.
+That is why focus-kit writes one page per feature, which the team reads whole and with attention, reviews and keeps true, where a folder of files gets skimmed.
 The process I ran on OpenSpec, on Ninjobs, my own product, produced 37,228 lines of spec for four screens (every line under the tool's folder, counted with `wc -l`), and none of the core flow existed yet.
 The causes were my choices as much as the tool, and [chapter 6](06-birth-of-focus-kit.md) tells them; the count is what a spec costs when it becomes the work.
 After the move to one page per delivery, the product opened to the public, and its 93 finished pages held 22,650 lines in all.
