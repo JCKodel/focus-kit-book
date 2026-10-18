@@ -164,6 +164,11 @@ Se a página não registra revisão nenhuma e o slot do docs/05 nomeia uma, a en
 Leia também o que aconteceu, e pergunte-se se você teria decidido alguma divergência de outro jeito.
 Peça cada correção ao agente, na mesma sessão, nunca à mão.
 A mesma sessão guarda o raciocínio da construção: ela sabe por que fez cada escolha, o que uma sessão nova teria de adivinhar.
+Isso vale para o gosto tanto quanto para os defeitos: quando o código funciona mas você o teria escrito de outro jeito, diga o que quer no lugar e por quê, em vez de reescrevê-lo você mesmo.
+Uma preferência que deve valer além desta entrega vai para onde a próxima sessão a lê, uma convenção no docs/04 ou uma decisão com o seu motivo em um ADR, escrita nesta mesma entrega.
+Seja qual for a memória que o seu host guarda por conta própria, a memória que todo host e todo colega leem são os documentos do projeto.
+Na minha experiência, no começo de um projeto o agente muitas vezes faz coisas que não combinam com o gosto ou as necessidades do time; dizer uma vez, para que vá parar em um documento, me custou menos do que corrigir a mesma coisa à mão em toda entrega.
+Trate o agente como um novo membro do time: você explica uma vez o que o time quer, em um lugar onde ele pode ler de novo.
 
 Uma pessoa que faz commit depois de muitas entregas boas para de conferir, e toma a palavra do agente no lugar da própria leitura.
 Isso é o viés de automação, definido e medido no capítulo 24, e esta revisão o combate de quatro jeitos.
@@ -228,6 +233,6 @@ Então a página registrou o ajuste, nenhum caminho de escrita alcançável pelo
 * Ele marca a linha como `[*]` com a sua primeira edição, `[x]` com a última, depois do stage, e `[?]`, com o que ela espera, quando precisa parar.
 * Verde não é pronto: pronto é a lista inteira, da revisão por um contexto que não escreveu a mudança à linha marcada `[x]`.
 * Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, cada comando escrito por extenso, e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
-* Revise a mudança em stage contra a página, peça cada correção na mesma sessão, e faça você o commit: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
+* Revise a mudança em stage contra a página, peça cada correção na mesma sessão, dizendo o que quer no lugar e por quê, e faça você o commit: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>

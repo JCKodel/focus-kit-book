@@ -164,6 +164,11 @@ If the page records no review and docs/05's slot names one, the delivery did not
 Read what happened too, and ask whether you would have decided any divergence otherwise.
 Ask the agent for each correction, in the same session, never by hand.
 The same session keeps the reasoning of the build: it knows why it made each choice, which a fresh session would have to guess.
+That holds for taste as much as for faults: when the code works but you would have written it another way, say what you want instead and why, rather than rewriting it yourself.
+A preference that should hold beyond this delivery goes where the next session reads it, a convention in docs/04 or a decision with its reason in an ADR, written in this same delivery.
+Whatever memory your host keeps of its own, the memory every host and every colleague reads is the project's documents.
+In my experience, early in a project the agent often does things that do not suit the team's taste or needs; saying it once, so it lands in a document, cost me less than fixing the same thing by hand in every delivery.
+Treat the agent as a new member of the team: you explain once what the team wants, in a place where it can read it again.
 
 A person who commits after many good deliveries stops checking, and takes the agent's word in place of their own reading.
 That is automation bias, defined and measured in chapter 24, and this review counters it in four ways.
@@ -228,6 +233,6 @@ So the page recorded the refinement, no write path reachable from the client, wh
 * It marks the line `[*]` with its first edit, `[x]` with its last, after the stage, and `[?]`, with what it waits on, when it must stop.
 * Green is not done: done is the whole list, from the review by a context that did not write the change to the line marked `[x]`.
 * It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, each command written out, and, last of all, which environment is at which version and the command that updates the others.
-* Review the staged change against the page, ask for each correction in the same session, and commit it yourself: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
+* Review the staged change against the page, ask for each correction in the same session, saying what you want instead and why, and commit it yourself: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>

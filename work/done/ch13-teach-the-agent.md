@@ -62,10 +62,37 @@
 
 **Done when.**
 
-* [ ] Both editions written: the five lines and the key point as Behaviour says.
-* [ ] Chapter 13 still opens with its value, keeps its gain, no filler and nothing useful cut.
-* [ ] Every number sourced: none added.
-* [ ] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions written: the five lines and the key point as Behaviour says, with the one divergence below.
+* [x] Chapter 13 still opens with its value, keeps its gain, no filler and nothing useful cut.
+* [x] Every number sourced: none added.
+* [x] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash; the only failure is the external link check on chapter 24's web.archive.org note, outside this delivery (see Proof).
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author: left to the driver, who builds the book once at the end of the batch.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block: the batch driver marks the line and stages and commits.
+
+**Divergences.** One, from the review: the English fifth line reads "you explain once what the team wants, in a place where it can read it again." instead of "where it can read it again", since "where" had nothing to refer to; the Portuguese already said "em um lugar onde". Every other line is the Behaviour's exact words, found by its text and inserted after en 13:166 / pt 13:166; the key point is en 13:236 / pt 13:236 after the insertion.
+
+**Proof.**
+
+* `grep -n "That holds for taste\|Isso vale para o gosto" book/*/13-apply.md` prints en 13:167 and pt 13:167.
+* `grep -n "saying what you want instead and why\|dizendo o que quer no lugar e por quê" book/*/13-apply.md` prints en 13:236 and pt 13:236, the key point.
+* `grep -n "kit's files\|arquivos do kit" book/*/13-apply.md` prints nothing.
+* `git diff --stat -- book/*/13-apply.md`: 6 insertions and 1 deletion per edition (five lines added, the key point changed); lines 165-166 unchanged.
+* `make verify`: build, parity, em dash, prose, width and disclosure pass; links fails only on en 24:159 and pt 24:159, the web.archive.org note of chapter 24 ("connection failed: Connection refused"), an external failure outside this delivery's files.
+
+**Review.** A read-only Opus reviewer that did not write the change read the diff against this page and docs/04: no blocking findings; text matches Behaviour, no Fails pattern, lines 165-166 untouched, the Portuguese natural. One wording suggestion on the English fifth line, applied as the divergence above. No queue line.
+
+**Decisions.** The batch driver owns docs/06 and the commit; this delivery staged nothing and left `make book` to the driver. `try-before-commit` edits this section next; its region, before "Ask the agent for each correction", was left alone.
+
+```commit
+docs(ch13-teach-the-agent): teach the agent by asking for corrections
+
+- Chapter 13, both editions: taste counts as a correction; say what you want instead and why, and the preference lands in docs/04 or an ADR
+- The project's documents are the memory every host and colleague reads; treat the agent as a new team member
+- Key point: ask for each correction saying what you want instead and why
+
+book/en/13-apply.md
+book/pt/13-apply.md
+docs/06-Queue.md
+work/done/ch13-teach-the-agent.md
+```
