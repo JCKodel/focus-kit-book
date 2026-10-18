@@ -426,7 +426,7 @@ When this milestone closes, a reader of chapters 0 to 7 learns each idea where i
 [>] agent-never-unsure       the book says, where it fits best, that an agent never says "I don't know", and that the person's judgment is what tells a hypothesis from a fact; both editions
 [>] ch02-gain-less-to-read   chapter 2's gain says plainly that the method writes less because the person must read all of it, and less to read is more attention; both editions
 [x] pt-identifiers-choice    the Portuguese chapter 3 drops the sentence on which names are translated and says Portuguese identifiers are a teaching choice, not a recommendation
-[>] ch03-literal-type-comment  chapter 3's refusal example carries a comment saying the string is a type the compiler checks, so err takes no other; both editions
+[x] ch03-literal-type-comment  chapter 3's refusal example carries a comment saying the string is a type the compiler checks, so err takes no other; both editions
 [>] ch03-error-languages     chapter 3 says several languages separate a program's bug from a failure the caller handles, and that Dart does it most explicitly; both editions
 [>] ch04-focus-optional      chapter 4 opens saying FOCUS is optional and the team decides after reading its gain, and the gain adds that one pattern across projects makes moving people cheaper; both editions
 [>] ch04-uncle-bob           chapter 4 gives Robert C. Martin's nickname, Uncle Bob, where it first names him; both editions

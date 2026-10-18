@@ -118,6 +118,9 @@ In the lending library, the rule "a member with an overdue book cannot borrow an
 ```ts
 type Member = { id: string; overdue: number };
 
+// A string literal type: its only value is this exact string.
+// Where a Refusal is expected, as in err below, the compiler
+// accepts this string and no other, so a typo does not compile.
 type Refusal = "HasOverdueBooks";
 
 function mayBorrow(member: Member): Result<Member, Refusal> {

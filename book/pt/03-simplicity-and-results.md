@@ -119,6 +119,9 @@ Na biblioteca de empréstimos, a regra "um membro com um livro atrasado não pod
 ```ts
 type Membro = { id: string; emAtraso: number };
 
+// Um tipo literal de string: seu único valor é esta string.
+// Onde se espera uma Recusa, como no err abaixo, o compilador
+// aceita só esta string, e um erro de digitação não compila.
 type Recusa = "TemLivrosEmAtraso";
 
 function podePegarEmprestado(membro: Membro): Result<Membro, Recusa> {

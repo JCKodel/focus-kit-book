@@ -82,10 +82,34 @@ function podePegarEmprestado(membro: Membro): Result<Membro, Recusa> {
 
 **Done when.**
 
-* [ ] Both editions written: the comment as Behaviour quotes, in place, the block's layout kept; Behaviour's checks give what they name.
-* [ ] Chapter 3 still opens with its value, keeps its gain, no filler and nothing useful cut.
-* [ ] Every number sourced: no number added.
-* [ ] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no Case A or Case B passage (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions written: the comment as Behaviour quotes, in place, the block's layout kept; Behaviour's checks give what they name.
+* [x] Chapter 3 still opens with its value, keeps its gain, no filler and nothing useful cut.
+* [x] Every number sourced: no number added.
+* [x] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no Case A or Case B passage (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+
+**Proof.**
+
+* en 03:121-123 and pt 03:122-124 hold the comment as Behaviour quotes, directly above `type Refusal` and `type Recusa`; the blank lines around it are kept.
+* `grep -n "string literal type"` on en 03 prints 121, two lines above `type Refusal` (en 03:123); `grep -n "tipo literal de string"` on pt 03 prints 122, two lines above `type Recusa` (pt 03:124); `grep -rn "literal type\|tipo literal" book` prints those two lines only.
+* `git diff --stat` on the two chapter 3 files: 3 lines added in each, nothing else.
+* Comment lines measure 61 to 64 columns, at column 0, no tab.
+* `make verify` green: build, parity, em dash, prose, width, links, disclosure. A first run failed on pt 01 parity, another delivery's file mid-edit; green on rerun.
+
+**Divergences.** None from Behaviour.
+
+**Decisions taken in /apply.**
+
+* Run in a batch of applies on one tree: the driver marks this line in docs/06, runs `make book` once at the end of the batch and gives both PDF paths, and stages and commits this delivery by its paths.
+
+**Review.** One read-only agent on Opus read the diff of both chapter 3 files against this page and docs/04: text matches Behaviour exactly, placement and blank lines kept, the TypeScript claim holds (the error comes from `mayBorrow`'s declared return type, not from `err`), natural Brazilian Portuguese, no em dash, under 74 columns. No findings.
+
+```commit
+docs(ch03-literal-type-comment): explain the literal type in a comment
+
+- Chapter 3, both editions: a three-line comment on `type Refusal` / `type Recusa` says it is a string literal type and a typo does not compile
+
+work/done/ch03-literal-type-comment.md
+```
