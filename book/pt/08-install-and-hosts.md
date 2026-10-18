@@ -54,10 +54,11 @@ Este é o relatório de uma atualização na biblioteca de empréstimos, escrito
 Instalado: focus-kit 2026.10.18, em cada SKILL.md.
 Migrações de processo pendentes: 3.
 
-1. docs/05, §4 The queue: na tabela de marcas, [?] é posta "nos
-   quatro casos abaixo"; depois de "como uma correção descoberta no
-   meio de um /apply" acrescentar ", ou quando a leitura do código
-   de uma revisão de marco não cobriu parte do seu intervalo (§8)".
+1. docs/05, §4 The queue: na tabela de marcas, trocar "nos três casos
+   abaixo" por "nos quatro casos abaixo"; depois de "como uma correção
+   descoberta no meio de um /apply" acrescentar ", ou quando a leitura
+   do código de uma revisão de marco não cobriu parte do seu intervalo
+   (§8)".
 2. docs/05, §5 Delivery review: o slot lê o git diff. Proposto:
    "Delivery review: um agente somente leitura no modelo da sessão
    lê o git diff dos caminhos da entrega e os arquivos que a entrega

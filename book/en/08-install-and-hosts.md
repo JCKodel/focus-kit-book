@@ -54,10 +54,10 @@ Here is the report of an update on the lending library, written for this chapter
 Installed: focus-kit 2026.10.18, in every SKILL.md.
 Pending process migrations: 3.
 
-1. docs/05, §4 The queue: in the mark table, [?] is set "in the four
-   cases below"; after "such as a fix found in the middle of an
-   /apply" add ", or when a milestone review's code reading missed
-   part of its range (§8)".
+1. docs/05, §4 The queue: in the mark table, replace "in the three
+   cases below" with "in the four cases below"; after "such as a fix
+   found in the middle of an /apply" add ", or when a milestone
+   review's code reading missed part of its range (§8)".
 2. docs/05, §5 Delivery review: the slot reads git diff. Proposed:
    "Delivery review: a read-only agent on the session's model reads
    git diff of the delivery's paths and the files the delivery
