@@ -369,5 +369,30 @@ When this milestone closes, the book teaches focus-kit 2026.10.17 and the reposi
 [x] batch-propose            chapter 19: proposes run in a batch on the recommended answers, each page listing what it decided alone, while applies stay parallel only on free lines and every commit stays the person's; both editions · after ch16-review-agents
 [x] ch08-10-devin-desktop    chapters 8 and 10 and docs/03: Devin Desktop, formerly Windsurf, its folder `.agents/skills/` and its `/propose <slug>`, and no `.windsurf/skills/`; both editions · after kit-2026-10-17
 [x] ch08-09-review-slot      chapters 8 and 9: the update example and its report at 2026.10.17, and the questions on the delivery review and on the milestone review's areas and model; both editions · after kit-2026-10-17
-[ ] m16-review               the review of M16 as docs/05 §8 says · after ch13-delivery-review, ch15-review-by-areas, batch-propose, ch08-10-devin-desktop, ch08-09-review-slot, ch07-11-23-review-words
+[x] m16-review               the review of M16 as docs/05 §8 says · after ch13-delivery-review, ch15-review-by-areas, batch-propose, ch08-10-devin-desktop, ch08-09-review-slot, ch07-11-23-review-words
+[ ] docs04-width-rule        docs/04 names the width check among the tests, and docs/04 and `check_width.py` agree on which info strings go unmeasured
+[ ] width-comment-fence      `check_width.py` measures no fence inside an HTML comment, as `mask` does
+[ ] fence-commonmark         `markdown.py` opens and closes a fence where CommonMark does, and docs/01 says so
+[ ] docs01-helpers           docs/01 names every helper `markdown.py` shares, `target_end` among them, every script that uses them, and `check_width.py`'s use of `check_prose.py`
+[ ] adr17-section-name       ADR-0017's amendment names the docs/04 section `one-gain-section` changed
+[ ] docs06-m16-paragraph     docs/06's M16 paragraph names the reviews' readers and checker, and M15's `pt-free-line-done` sentence starts in its neighbours' column
+[ ] docs03-review-rows       docs/03's delivery review row fixes the text the delivery wrote, as the apply skill says, and its candidate row glosses seen
+[ ] ch15-range-pointer       chapter 15 points `<base>..HEAD` to the chapter that teaches a range, or teaches it; both editions
+[ ] ch19-batch               chapter 19's batch stages its adjacent marks in docs/06 without contradicting what a conflict is, and points question deliveries to chapter 20 as Case A's customization; both editions
+[ ] ch04-features-folder     the Portuguese chapter 4 gives `features/` as the book's name, not the kit's
+[ ] ch11-blocking-fix        chapter 11 blocks a delivery only on a prerequisite fix, as chapter 13 does, and the Portuguese queue says what the English one says; both editions
+[ ] pt-ninjobs-article       the Portuguese edition gives Ninjobs one article throughout
+```
+
+## M17. focus-kit 2026.10.18
+
+When this milestone closes, the book teaches focus-kit 2026.10.18 and the repository runs on it: a milestone review's base is the commit of the previous milestone's review, or the first commit, so the range holds the fixes of its findings; a line waits in four cases, a code reading that missed part of its range among them, with what was read as its reason; the checker's seen is glossed with latent and weak; and a Delivery review that reads `git diff` also reads the files a delivery created.
+
+```
+[ ] kit-2026-10-18           reinstall the kit at 2026.10.18 and apply its migration report to docs/05 §§4, 5 and 8, docs/03's waiting mark and the skills · after m16-review
+[ ] ch08-update-2026-10-18   chapter 8: the update example and its report at 2026.10.18, the base named as the previous review's commit; both editions · after kit-2026-10-18
+[ ] ch13-created-files       chapter 13: the delivery review reads the files the delivery created, untracked when it runs; both editions · after kit-2026-10-18
+[ ] ch14-four-waits          chapter 14: a line waits in four cases, a code reading that missed part of its range among them; both editions · after kit-2026-10-18
+[ ] ch15-review-base         chapter 15: the base is the commit of the previous milestone's review, or the first commit; both editions · after kit-2026-10-18
+[ ] m17-review               the review of M17 as docs/05 §8 says · after kit-2026-10-18, ch08-update-2026-10-18, ch13-created-files, ch14-four-waits, ch15-review-base
 ```
