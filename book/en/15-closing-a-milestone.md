@@ -1,7 +1,7 @@
 # 15. Closing a milestone
 
 After this chapter you can close a milestone: plan its review as the milestone's last line, test each clause of its paragraph by hand, and turn each finding into a `[ ]` line in the same milestone, under the review.
-You can also say what that review reads, the paragraph by hand and the whole code through your host's deep review, and why its findings get no review of their own.
+You can also say what that review reads, the paragraph by hand and, on the person's word, the code changed since the milestone's base, split by areas with one read-only agent each and a checker before the person sees a candidate, and why its findings get no review of their own.
 
 ## The problem
 
@@ -17,10 +17,10 @@ A milestone is planned with its review as its last line, `<milestone>-review`, a
 Its page takes the milestone's paragraph clause by clause and writes, for each, which delivery answers it and how a person tests it.
 It fixes nothing.
 The review also reads the code, the one look at the whole instead of a delivery, because every page can be right and the whole wrong.
-Its page names the commit that closed the previous milestone, or the project's first commit; when docs/05's Milestone review slot names a deep review, such as Claude Code's `/code-review ultra <base>`, the person launches it against that commit, which is `<base>`.
-The agent may say it is time, and never launches it.
+Its page names the commit that closed the previous milestone, or the project's first commit; that commit is the base, and the page lists, by the areas docs/05's Milestone review slot names, the paths the range since it changed.
+The reading costs, so the session says when it is time and starts it only on the person's word: each area gets a reader of its own, which reads it with the whole repository open.
 The first commit makes the review read the whole project: it is the base of a first milestone, and of any later one whose earlier reviews left part of the project unread.
-Each delivery's code is still read where its change is small enough to read: in the staged change before its commit (chapter 13), and in the pull request, when the team lands its deliveries through one (chapter 20).
+Each delivery's code is still read where its change is small enough to read: by the delivery review before `/apply` ends and in the staged change before its commit (chapter 13), and in the pull request, when the team lands its deliveries through one (chapter 20); the milestone's readers look for what those could not see.
 
 ## Test each clause by hand
 
@@ -38,7 +38,7 @@ A person does it by hand because the paragraph is a promise to the people who wi
 A clause no delivery answers, or one that fails in the person's hands, is a finding.
 There is nothing to confirm or reject: the failure happened in your hands.
 
-## Read the whole code once
+## Read the code since the base, by areas
 
 The hand test sees the product as a user meets it, and so it sees nothing a user cannot see.
 A call that takes hundreds of milliseconds still answers.
@@ -46,16 +46,55 @@ A page that can be framed, shown by another site inside its own to trick a visit
 Data sent to a service it should not reach leaves no trace on the screen, and a function that reaches a network it should not still returns the right result.
 None of them fails a clause tested by hand; all of them are in the code.
 
-The deep review is the host's command that reads the whole code changed since a base commit and reports the faults it finds there.
-docs/05's Milestone review slot names it in one line, here for the lending library, written for this chapter:
+The milestone is every change since its base, and the reading covers all of them.
+`git diff <base>..HEAD` shows them: `git diff` prints what changed between two commits, line by line, and `<base>..HEAD` is the range from the base to the last commit (chapter 18 teaches it).
+A review given one commit reads what that commit changed, the milestone's last delivery, and misses the others.
+`git diff --stat <base>..HEAD` lists the range's paths, and the review's page writes them down by area, so the paths the readers read can be checked against it.
+
+docs/05's Milestone review slot says how the range is split: the areas a milestone's changes split into, one reader each, and the model its readers and its checker run on, or the session's.
+For the lending library, written for this chapter, it reads:
 
 ```
-Milestone review: /code-review ultra <base>
+Milestone review: by areas, one reader each: src/features/loans/,
+src/features/members/, src/features/catalog/, the documents and the
+rest; readers and checker on the session's model.
 ```
 
-The person launches it once, at the milestone's close, against the commit the review's page names.
-A project whose host offers no such review writes none in the slot and launches no deep review; the hand test still runs, and nothing else in this chapter changes for it.
-A finding the code review confirms is a finding like the others, a `[ ]` line under the review line; one it does not confirm is not a finding.
+Each area is a slice of chapter 4, because a slice's changes are read together; the documents and the rest is the area for what lives outside the slices.
+An area too large for one careful reading splits again, as `src/features/loans/` would into its lending and its `return/`.
+
+The reading runs in any host.
+Where the host runs agents, the session launches one read-only agent per area, the agent of chapter 13 that reads files and edits nothing, all in parallel.
+Where it runs none, the person opens one fresh session per area and gives it its area.
+Each reader has the whole repository open and reads its area's changes for what no delivery's own review could see: one delivery's work against another's, a document against another, the whole against docs/01.
+It reports candidates, each by file and line, and the paths it read; a candidate is what a reviewer reports before anyone acts on it.
+
+The review's page compares the paths read with the range's.
+When they miss some, the page says which, and the review line waits as `[?]` with `· resume: apply` (chapter 14) until they are read, because a reader that read part of its area reports the same way as one that read it all.
+
+One checker, an agent or the review's session itself, opens each candidate's file and marks it before the person sees it: seen, latent when nothing triggers it today, or weak when the claim does not hold as stated.
+A reader's candidate is a claim about a file, and some do not hold once the file is opened; the checker spends that opening so the person does not.
+Three candidates on the lending library, written for this chapter, one per mark, as the checker hands them to the person:
+
+```
+src/features/members/myLoans.server.ts:12
+  the query of my-loans reads the table loan directly; loan code
+  lives in src/features/loans/, and other slices import it
+  seen: true today, and no hand test shows it
+src/features/members/myLoans.server.ts:14 and
+src/features/loans/return/repository.server.ts:21
+  each writes its own condition for an open loan, returned_at null
+  latent: the same today; they part the day a loan gains another state
+src/features/loans/return/repository.server.ts:18
+  return-book records a return for a copy never lent
+  weak: its UPDATE matches only an open loan and refuses the rest
+```
+
+The seen and the latent candidates each sit across two slices, which no delivery's review reads together, and the weak one, unchecked, would have spent the person's time on a claim the file refutes.
+
+The readers and the checker fix nothing.
+A candidate becomes a finding only when the person confirms it, and then it is a finding like the others, a `[ ]` line under the review line.
+A project whose Milestone review slot says none has no code reading, and the hand test still runs.
 
 ## A line, and not a fix
 
@@ -67,7 +106,7 @@ If the returned copy stayed among the member's loans, the milestone's lines woul
 [x] lend-book      the librarian lends a copy
 [x] return-book    the librarian records a return
 [x] my-loans       a member sees their loans and due dates
-[x] m1-review      each clause of the paragraph tested by hand
+[x] m1-review      the paragraph tested by hand, the code read
 [ ] returned-loan  a returned copy leaves the member's loans
 ```
 
@@ -102,12 +141,13 @@ Eight lines would have been eight pages, each small enough to read before it was
 
 A hand test of the whole product sees what no single delivery's check can: a clause no delivery took on, a step that fails once the deliveries run together, met the way a user will meet them, before users do.
 The read of the whole code adds what no hand test can see, the kind of fault the review at the Ninjobs opening found.
+The checker spends the person's time on the candidates that hold, and the paths each reader lists make a part of the milestone left unread show on the page instead of passing as read.
 And because each finding becomes a line, the team sees the cost of the milestone's gaps in the queue, next to everything else it plans, instead of in fixes nobody reviewed.
 
 ## Key points
 
 * A milestone review looks at what the deliveries add up to, which no review of a single page or staged change can see.
 * A milestone is planned with its review as its last line, `<milestone>-review`, run with `/propose` and `/apply`: its page names the commit that closed the previous milestone, or the project's first commit, writes for each clause of the paragraph the delivery that answers it and how a person tests it, and fixes nothing.
-* The person tests each clause by hand and launches the deep review docs/05's Milestone review slot names against that commit; a clause no delivery answers, or one that fails in the person's hands, is a finding, and a finding the code review confirms is a finding like the others.
+* The person tests each clause by hand, and on the person's word the session reads the range since the base by the slot's areas, one read-only agent each listing the paths it read, and a checker marks each candidate; a clause no delivery answers, one that fails in the person's hands, or a candidate the person confirms is a finding.
 * Each finding becomes a `[ ]` line in the same milestone, under the review line, never a fix in the middle of the next milestone; the milestone closes when those lines are `[x]`.
 * The finding lines get no review of their own: each passes through its own page, its proof and the person's commit.

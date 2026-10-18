@@ -1,7 +1,7 @@
 # 15. Fechando um marco
 
 Depois deste capítulo você consegue fechar um marco: planejar a sua revisão como a última linha do marco, testar à mão cada cláusula do seu parágrafo, e transformar cada achado em uma linha `[ ]` no mesmo marco, sob a revisão.
-Você também consegue dizer o que essa revisão lê, o parágrafo à mão e o código inteiro pela revisão profunda do seu host, e por que os seus achados não têm revisão própria.
+Você também consegue dizer o que essa revisão lê, o parágrafo à mão e, com a palavra da pessoa, o código alterado desde a base do marco, dividido por áreas com um agente somente leitura em cada uma e um conferente antes que a pessoa veja um candidato, e por que os seus achados não têm revisão própria.
 
 ## O problema
 
@@ -17,10 +17,10 @@ Um marco é planejado com a sua revisão como a última linha, `<milestone>-revi
 A página dela pega o parágrafo do marco cláusula por cláusula e escreve, para cada uma, qual entrega a atende e como uma pessoa a testa.
 Ela não corrige nada.
 A revisão também lê o código, o único olhar sobre o todo em vez de sobre uma entrega, porque cada página pode estar certa e o todo errado.
-A página dela cita o commit que fechou o marco anterior, ou o primeiro commit do projeto; quando o slot Milestone review (revisão de marco) do docs/05 cita uma revisão profunda do código, como o `/code-review ultra <base>` do Claude Code, a pessoa a lança contra esse commit, que é o `<base>`.
-O agente pode dizer que chegou a hora, e nunca a lança.
+A página dela cita o commit que fechou o marco anterior, ou o primeiro commit do projeto; esse commit é a base, e a página lista, pelas áreas que o slot Milestone review (revisão de marco) do docs/05 cita, os caminhos que o intervalo desde ele alterou.
+A leitura custa, então a sessão diz quando chegou a hora e só a começa com a palavra da pessoa: cada área ganha um leitor próprio, que a lê com o repositório inteiro aberto.
 O primeiro commit faz a revisão ler o projeto inteiro: é a base de um primeiro marco, e de qualquer marco posterior cujas revisões anteriores deixaram parte do projeto sem ler.
-O código de cada entrega continua sendo lido onde a sua mudança é pequena o bastante para ser lida: na mudança em stage antes do seu commit (capítulo 13), e no pull request, quando o time integra as suas entregas por um (capítulo 20).
+O código de cada entrega continua sendo lido onde a sua mudança é pequena o bastante para ser lida: pela revisão da entrega antes de o `/apply` terminar e na mudança em stage antes do seu commit (capítulo 13), e no pull request, quando o time integra as suas entregas por um (capítulo 20); os leitores do marco procuram o que esses não conseguiram ver.
 
 ## Teste cada cláusula à mão
 
@@ -39,7 +39,7 @@ Uma pessoa faz isso à mão porque o parágrafo é uma promessa às pessoas que 
 Uma cláusula que nenhuma entrega atende, ou uma que falha nas mãos da pessoa, é um achado.
 Não há nada a confirmar ou rejeitar: a falha aconteceu nas suas mãos.
 
-## Leia o código inteiro uma vez
+## Leia o código desde a base, por áreas
 
 O teste à mão vê o produto como um usuário o encontra, e por isso não vê nada que um usuário não consiga ver.
 Uma chamada que leva centenas de milissegundos ainda responde.
@@ -47,16 +47,57 @@ Uma página que pode ser enquadrada, exibida por outro site dentro do dele para 
 Dados enviados a um serviço que não deviam alcançar não deixam rastro na tela, e uma função que alcança uma rede que não devia ainda devolve o resultado certo.
 Nenhum deles reprova uma cláusula testada à mão; todos eles estão no código.
 
-A revisão profunda do código é o comando do host que lê o código inteiro alterado desde um commit base e relata as falhas que acha ali.
-O slot Milestone review do docs/05 a cita em uma linha, aqui para a biblioteca de empréstimos, escrita para este capítulo:
+O marco é toda mudança desde a sua base, e a leitura cobre todas elas.
+O `git diff <base>..HEAD` mostra todas: o `git diff` imprime o que mudou entre dois commits, linha a linha, e `<base>..HEAD` é o intervalo da base até o último commit (o capítulo 18 o ensina).
+Uma revisão que recebe um commit lê o que esse commit mudou, a última entrega do marco, e perde as outras.
+O `git diff --stat <base>..HEAD` lista os caminhos do intervalo, e a página da revisão os anota por área, para que os caminhos que os leitores leram possam ser conferidos contra ela.
+
+O slot Milestone review do docs/05 diz como o intervalo se divide: as áreas em que as mudanças de um marco se dividem, um leitor para cada, e o modelo em que os seus leitores e o seu conferente rodam, ou o da sessão.
+Para a biblioteca de empréstimos, escrito para este capítulo, ele diz:
 
 ```
-Milestone review: /code-review ultra <base>
+Milestone review: por áreas, um leitor cada: src/features/emprestimos/,
+src/features/membros/, src/features/catalogo/, os documentos e o
+resto; leitores e conferente no modelo da sessão.
 ```
 
-A pessoa a lança uma vez, no fechamento do marco, contra o commit que a página da revisão cita.
-Um projeto cujo host não oferece uma revisão assim escreve none (nenhuma) no slot e não lança revisão profunda; o teste à mão continua rodando, e nada mais neste capítulo muda para ele.
-Um achado que a revisão do código confirma é um achado como os outros, uma linha `[ ]` sob a linha da revisão; um que ela não confirma não é um achado.
+Cada área é uma fatia do capítulo 4, porque as mudanças de uma fatia são lidas juntas; os documentos e o resto é a área do que mora fora das fatias.
+Uma área grande demais para uma leitura cuidadosa se divide de novo, como `src/features/emprestimos/` se dividiria no empréstimo e na sua `devolucao/`.
+
+A leitura roda em qualquer host.
+Onde o host roda agentes, a sessão lança um agente somente leitura por área, o agente do capítulo 13 que lê arquivos e não edita nada, todos em paralelo.
+Onde ele não roda nenhum, a pessoa abre uma sessão nova por área e entrega a ela a sua área.
+Cada leitor tem o repositório inteiro aberto e lê as mudanças da sua área procurando o que a revisão própria de nenhuma entrega conseguiu ver: o trabalho de uma entrega contra o de outra, um documento contra outro, o todo contra o docs/01.
+Ele aponta candidatos, cada um por arquivo e linha, e os caminhos que leu; um candidato é o que um revisor aponta antes que alguém aja sobre ele.
+
+A página da revisão compara os caminhos lidos com os do intervalo.
+Quando faltam alguns, a página diz quais, e a linha da revisão espera como `[?]` com `· resume: apply` (capítulo 14) até que eles sejam lidos, porque um leitor que leu parte da sua área aponta do mesmo jeito que um que a leu inteira.
+
+Um conferente, um agente ou a própria sessão da revisão, abre o arquivo de cada candidato e o marca antes que a pessoa o veja: visto, latente quando nada o dispara hoje, ou fraco quando a afirmação não se sustenta como foi dita.
+O candidato de um leitor é uma afirmação sobre um arquivo, e algumas não se sustentam quando o arquivo é aberto; o conferente gasta essa abertura para que a pessoa não precise gastá-la.
+Três candidatos da biblioteca de empréstimos, escritos para este capítulo, um por marca, como o conferente os entrega à pessoa:
+
+```
+src/features/membros/meusEmprestimos.server.ts:12
+  a consulta de meus-emprestimos lê a tabela emprestimo direto; o
+  código de empréstimo mora em src/features/emprestimos/, e as outras
+  fatias o importam
+  visto: verdadeiro hoje, e nenhum teste à mão o mostra
+src/features/membros/meusEmprestimos.server.ts:14 e
+src/features/emprestimos/devolucao/repositorio.server.ts:21
+  cada um escreve a sua condição de empréstimo aberto, devolvido_em nulo
+  latente: iguais hoje; divergem no dia em que um empréstimo ganhar
+  outro estado
+src/features/emprestimos/devolucao/repositorio.server.ts:18
+  devolver-livro registra a devolução de um exemplar nunca emprestado
+  fraco: o seu UPDATE só casa com um empréstimo aberto e recusa o resto
+```
+
+O visto e o latente ficam cada um entre duas fatias, que a revisão de nenhuma entrega lê juntas, e o fraco, sem conferência, gastaria o tempo da pessoa com uma afirmação que o arquivo desmente.
+
+Os leitores e o conferente não corrigem nada.
+Um candidato só vira achado quando a pessoa o confirma, e então é um achado como os outros, uma linha `[ ]` sob a linha da revisão.
+Um projeto cujo slot Milestone review diz none (nenhuma) não tem leitura do código, e o teste à mão continua rodando.
 
 ## Uma linha, e não uma correção
 
@@ -68,7 +109,7 @@ Se o exemplar devolvido continuasse entre os empréstimos do membro, as linhas d
 [x] emprestar-livro      o bibliotecário empresta um exemplar
 [x] devolver-livro       o bibliotecário registra uma devolução
 [x] meus-emprestimos     um membro vê os seus empréstimos e as datas
-[x] m1-review            cada cláusula do parágrafo testada à mão
+[x] m1-review            o parágrafo testado à mão, o código lido
 [ ] emprestimo-devolvido o exemplar devolvido sai da lista do membro
 ```
 
@@ -103,12 +144,13 @@ Oito linhas teriam sido oito páginas, cada uma pequena o bastante para ser lida
 
 Um teste à mão do produto inteiro vê o que a checagem de nenhuma entrega sozinha consegue ver: uma cláusula que nenhuma entrega assumiu, um passo que falha quando as entregas rodam juntas, encontrados do jeito que um usuário vai encontrá-los, antes dos usuários.
 A leitura do código inteiro soma o que nenhum teste à mão consegue ver, o tipo de falha que a revisão na abertura da Ninjobs achou.
+O conferente gasta o tempo da pessoa com os candidatos que se sustentam, e os caminhos que cada leitor lista fazem uma parte do marco deixada sem ler aparecer na página, em vez de passar como lida.
 E como cada achado vira uma linha, o time vê o custo das brechas do marco na fila, ao lado de tudo o que planeja, e não em correções que ninguém revisou.
 
 ## Pontos-chave
 
 * Uma revisão de marco olha para o que as entregas somam, o que nenhuma revisão de uma página ou de uma mudança em stage consegue ver.
 * Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, rodada com o `/propose` e o `/apply`: a página dela cita o commit que fechou o marco anterior, ou o primeiro commit do projeto, escreve para cada cláusula do parágrafo a entrega que a atende e como uma pessoa a testa, e não corrige nada.
-* A pessoa testa cada cláusula à mão e lança contra esse commit a revisão profunda do código que o slot Milestone review do docs/05 cita; uma cláusula que nenhuma entrega atende, ou uma que falha nas mãos da pessoa, é um achado, e um achado que a revisão do código confirma é um achado como os outros.
+* A pessoa testa cada cláusula à mão e, com a palavra da pessoa, a sessão lê o intervalo desde a base pelas áreas do slot, um agente somente leitura em cada uma listando os caminhos que leu, e um conferente marca cada candidato; uma cláusula que nenhuma entrega atende, uma que falha nas mãos da pessoa, ou um candidato que a pessoa confirma é um achado.
 * Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, nunca uma correção no meio do marco seguinte; o marco fecha quando essas linhas estão `[x]`.
 * As linhas de achado não têm revisão própria: cada uma passa pela sua própria página, pela sua prova e pelo commit da pessoa.
