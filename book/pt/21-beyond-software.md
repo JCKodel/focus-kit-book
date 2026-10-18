@@ -60,7 +60,6 @@ O pacote de evidências mostra o Contrato como estrutura: indexado pelos critér
 
 Algumas entregas não produzem nada além da resposta escrita de uma pessoa.
 A página de uma entrega de pergunta diz o que é perguntado, a quem, e o que cada resposta possível desbloqueia, e ela está pronta quando a resposta chega (capítulo 20).
-Das 73 linhas concluídas do Caso A, 8 foram perguntas a pessoas e cerca de oito foram documentos.
 
 Este livro também roda no kit: uma página por capítulo em `work/`, uma fila de marcos no docs/06, e `make verify`, que confere a paridade das duas edições, as regras de prosa e uma varredura contra a lista de exposição.
 Um capítulo está pronto quando essas checagens estão verdes e o autor aprovou cada trecho sobre um caso privado.
@@ -69,8 +68,7 @@ Um capítulo está pronto quando essas checagens estão verdes e o autor aprovou
 
 As regras de segurança de um banco de dados decidem quem pode ler ou escrever cada linha, e são trabalho com valor como uma tela.
 Na Ninjobs, seis das suas 93 páginas concluídas mudaram só regras do banco de dados, e nada mais.
-Uma delas foi a regra "nenhuma escrita enquanto uma exclusão está pendente": ela foi garantida no próprio banco de dados, por uma regra de acesso, e provada pelo teste das regras de acesso do projeto.
-A construção descobriu que uma regra geral também bloquearia as funções do próprio banco de dados, então a regra virou "nenhum caminho de escrita alcançável a partir do cliente", e a página registrou por quê.
+Uma dessas regras impede o cliente de escrever enquanto a exclusão de uma conta está pendente; ela mora no próprio banco de dados, como uma regra de acesso, e o teste das regras de acesso do projeto a prova (o [capítulo 13](13-apply.md) conta o que a construção dela encontrou).
 
 Uma regra no banco de dados vale para todo cliente que um dia falar com ele, e o teste dela é o Pronto quando que a prova.
 
@@ -88,8 +86,7 @@ A análise estava certa, e estar certa não bastou: cada achado precisava de uma
 ## O que o time ganha
 
 Um só processo para todo tipo de trabalho que o time faz, então a mesma fila, a mesma página e a mesma revisão carregam código, documentos, perguntas e regras de dados.
-No Caso A, cerca de 16 das suas 73 linhas concluídas foram perguntas ou documentos, e na Ninjobs seis de 93 páginas foram regras do banco de dados, todas pelos mesmos dois comandos.
-O Caso B mostra o que uma página teria poupado: a sua análise não teve nenhuma, e pelo menos uma das suas seis falhas chegou à versão seguinte da proposta.
+No Caso A, cerca de 16 das suas 73 linhas concluídas foram perguntas a pessoas ou documentos, e cada uma passou pelos mesmos dois comandos que o código do projeto.
 
 ## Pontos-chave
 

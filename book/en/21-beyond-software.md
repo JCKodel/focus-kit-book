@@ -60,7 +60,6 @@ The evidence pack shows the Contract as structure: indexed by the acceptance cri
 
 Some deliveries produce nothing but a person's written answer.
 A question delivery's page says what is asked, of whom, and what each possible answer unblocks, and it is done when the answer arrives (chapter 20).
-Of Case A's 73 done lines, 8 were questions to people and about eight were documents.
 
 This book runs on the kit too: one page per chapter in `work/`, a queue of milestones in docs/06, and `make verify`, which checks the parity of the two editions, the prose rules and a scan against the disclosure list.
 A chapter is done when those checks are green and the author has approved every passage about a private case.
@@ -69,8 +68,7 @@ A chapter is done when those checks are green and the author has approved every 
 
 A database's security rules decide who may read or write which row, and they are work with value like a screen.
 On Ninjobs, six of its 93 finished pages changed only database rules, and nothing else.
-One of them was the rule "no writes while a deletion is pending": it was enforced in the database itself, by an access rule, and proven by the project's test of the access rules.
-The build found that a blanket rule would also block the database's own functions, so the rule became "no write path reachable from the client", and the page recorded why.
+One of those rules stops the client from writing while an account deletion is pending; it lives in the database itself, as an access rule, and the project's test of the access rules proves it ([chapter 13](13-apply.md) tells what its build found).
 
 A rule in the database holds for every client that will ever talk to it, and its test is the Done when that proves it.
 
@@ -88,8 +86,7 @@ The analysis was right, and being right was not enough: each finding needed a li
 ## What the team gains
 
 One process for every kind of work the team does, so the same queue, the same page and the same review carry code, documents, questions and data rules.
-On Case A, about 16 of its 73 done lines were questions or documents, and on Ninjobs six of 93 pages were database rules, all through the same two commands.
-Case B shows what a page would have saved: its analysis had none, and at least one of its six faults reached the next version of the proposal.
+On Case A, about 16 of its 73 done lines were questions to people or documents, and each went through the same two commands as the project's code.
 
 ## Key points
 
