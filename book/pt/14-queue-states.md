@@ -29,9 +29,9 @@ Este é o primeiro marco da biblioteca em uma tarde, escrito para este capítulo
 Os sufixos `· after`, `· resume:` e `· blocked:` ficam em inglês, como o kit os escreve:
 
 ```
-[x] catalogo          a bibliotecária cadastra livros e exemplares
-[x] membros           a bibliotecária cadastra e suspende membros
-[*] emprestar-livro   a bibliotecária empresta um exemplar ou a regra nega
+[x] catalogo          o bibliotecário cadastra livros e exemplares
+[x] membros           o bibliotecário cadastra e suspende membros
+[*] emprestar-livro   o bibliotecário empresta um exemplar ou a regra nega
 [>] buscar-catalogo   um membro busca no catálogo
 [~] reservas          um membro reserva um exemplar emprestado
 [ ] meus-emprestimos  o membro vê seus empréstimos · after emprestar-livro
@@ -72,7 +72,7 @@ O [capítulo 19](19-worktrees.md) mostra como duas sessões rodam em uma pasta, 
 
 Uma linha espera em quatro casos:
 
-* **A pessoa diz que ela está travada.** A biblioteca ainda não comprou os leitores de código de barras, então a bibliotecária pede para segurar `escanear-exemplar`: `· resume: propose · blocked: sem leitores ainda`.
+* **A pessoa diz que ela está travada.** A biblioteca ainda não comprou os leitores de código de barras, então o bibliotecário pede para segurar `escanear-exemplar`: `· resume: propose · blocked: sem leitores ainda`.
 * **Uma resposta foi pedida e não veio.** `aviso-prazo` precisa de um provedor de SMS, a pergunta foi para a diretora da biblioteca, e ninguém respondeu: `· resume: propose · blocked: qual provedor?`.
 * **Outra linha precisa ser feita antes, descoberto depois de o trabalho começar.** No meio de `/apply meus-emprestimos`, a construção descobre que `emprestar-livro` põe a data de devolução um dia antes no fim de um mês; a correção vira uma linha `[ ]` acima dela, `corrigir-devolucao`, e `meus-emprestimos` espera: `· resume: apply · blocked: after corrigir-devolucao`.
 * **A leitura do código de uma revisão de marco não cobriu parte do seu intervalo.** A revisão que fecha um marco lê, com a palavra da pessoa, toda mudança desde a base do marco, dividida em áreas com um leitor cada que lista os caminhos que leu ([capítulo 15](15-closing-a-milestone.md)), e um leitor que leu parte da sua área aponta do mesmo jeito que um que a leu inteira, então quando, no meio de `/apply m1-review`, os leitores da revisão não listam nenhum caminho de `src/features/catalogo/`, a linha espera com o que foi lido como motivo: `· resume: apply · blocked: lidos todos menos catalogo/`.

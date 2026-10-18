@@ -41,18 +41,18 @@ No trunk (direto na linha principal do histórico) a página espera sem commit (
 Este é o primeiro marco da biblioteca alguns dias depois do começo do trabalho, escrito para este capítulo:
 
 ````markdown
-## Marco 1: uma bibliotecária empresta e recebe de volta
+## Marco 1: um bibliotecário empresta e recebe de volta
 
-Quando ele fecha, uma bibliotecária consegue cadastrar livros, seus
+Quando ele fecha, um bibliotecário consegue cadastrar livros, seus
 exemplares e membros, emprestar um exemplar a um membro por 21 dias e
 registrar a devolução; um membro com um livro atrasado ou com a inscrição
 suspensa é recusado.
 
 ```
 [x] esqueleto        app e servidor vazios, npm run verify, 1º screenshot
-[x] catalogo         a bibliotecária cadastra livros e seus exemplares
-[x] membros          a bibliotecária cadastra, suspende e reativa membros
-[>] emprestar-livro  a bibliotecária empresta, e as regras podem recusar
+[x] catalogo         o bibliotecário cadastra livros e seus exemplares
+[x] membros          o bibliotecário cadastra, suspende e reativa membros
+[>] emprestar-livro  o bibliotecário empresta, e as regras podem recusar
 [ ] devolver-livro   registra a devolução · after emprestar-livro
 [ ] m1-review        o marco conferido contra o parágrafo dele
 ```
@@ -65,14 +65,14 @@ Qualquer pessoa lê o estado nele: três entregas feitas, `emprestar-livro` tem 
 ### O parágrafo é um teste
 
 O parágrafo de um marco diz o que é verdade quando o marco fecha, em frases que uma pessoa consegue conferir no produto rodando.
-Ele é um teste, nunca um tema e nunca uma lista das linhas sob ele: "uma bibliotecária consegue emprestar um exemplar a um membro por 21 dias" pode ser conferido, "empréstimos" não.
+Ele é um teste, nunca um tema e nunca uma lista das linhas sob ele: "um bibliotecário consegue emprestar um exemplar a um membro por 21 dias" pode ser conferido, "empréstimos" não.
 Toda frase do parágrafo deveria ter uma linha que a torna verdade, e toda linha deveria servir a uma frase; uma frase sem linha, ou uma linha sem frase, é uma fila para corrigir antes de o trabalho começar.
 
 ### Tamanho e ordem
 
 Um marco tem de três a oito entregas, e depois a revisão dele: a regra do kit para o primeiro marco e um bom tamanho para qualquer um.
 As primeiras são o esqueleto em que as outras se apoiam: o `esqueleto` da biblioteca cria o `npm run verify`, que toda entrega seguinte roda.
-Depois cada linha vem após as linhas de que precisa: uma bibliotecária não consegue emprestar um exemplar antes de o catálogo ter exemplares e de os membros existirem.
+Depois cada linha vem após as linhas de que precisa: um bibliotecário não consegue emprestar um exemplar antes de o catálogo ter exemplares e de os membros existirem.
 
 A ordem é a prioridade.
 Perguntado qual entrega importa mais, você responde pela fila: a que está mais acima nela; a próxima entrega é a primeira livre para começar ([capítulo 14](14-queue-states.md)).

@@ -16,7 +16,7 @@ As pastas dizem de que o código é feito, e nada sobre o que o programa faz.
 
 As regras não se saem melhor.
 Na maioria das aplicações, uma regra de negócio mora onde alguém precisou dela primeiro: uma parte em uma tela que esconde um botão, outra no handler que salva o formulário, e uma cópia em uma consulta.
-Pergunte "o que acontece quando uma bibliotecária empresta este exemplar a este membro?" e ninguém consegue responder lendo um lugar só.
+Pergunte "o que acontece quando um bibliotecário empresta este exemplar a este membro?" e ninguém consegue responder lendo um lugar só.
 Você descobre rodando o app, clicando e olhando o banco.
 Uma pessoa não consegue testar essa resposta sem o app inteiro, e um agente a quem se pede para mudar a regra encontra duas das três cópias e muda essas duas.
 
@@ -131,7 +131,7 @@ Em geral ele é chamado por um repositório, antes de salvar ou depois de ler, e
 
 ## Um evento, um novo estado
 
-Uma bibliotecária empresta um exemplar a um membro.
+Um bibliotecário empresta um exemplar a um membro.
 O toque em "Emprestar" é o evento, e a tela que mostra o empréstimo, ou o motivo da recusa, é o novo estado.
 Estes são os passos entre os dois:
 

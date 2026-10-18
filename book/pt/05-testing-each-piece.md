@@ -82,7 +82,7 @@ Sem banco, sem servidor, sem mock: o membro é um objeto, a data é uma string, 
 
 **O repositório.** `repositorio.server.test.ts` abre o SQLite em memória, roda os mesmos arquivos de migração que a aplicação roda, e chama `inserirEmprestimo` duas vezes para o mesmo exemplar.
 A primeira chamada devolve o empréstimo; a segunda devolve a recusa `JaEmprestado`, porque o índice único a recusou.
-Essa é a única parte do empréstimo que só o banco consegue garantir, já que duas bibliotecárias podem apertar "Emprestar" no mesmo instante, e ela é testada contra a engine de banco de dados real e o esquema real.
+Essa é a única parte do empréstimo que só o banco consegue garantir, já que dois bibliotecários podem apertar "Emprestar" no mesmo instante, e ela é testada contra a engine de banco de dados real e o esquema real.
 
 **O orquestrador.** `eventosDeEmprestimo.test.ts` passa repositórios falsos a `emprestimoPedido`, o orquestrador do [capítulo 4](04-focus.md):
 

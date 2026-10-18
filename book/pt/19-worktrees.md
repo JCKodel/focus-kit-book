@@ -192,11 +192,11 @@ Aqui o merge de `devolver-livro` foi feito primeiro, e `lista-de-atrasos` entra 
 
 ```text
 <<<<<<< HEAD
-[x] devolver-livro     a bibliotecária registra que um exemplar voltou
-[ ] lista-de-atrasos   a bibliotecária vê os empréstimos vencidos
+[x] devolver-livro     o bibliotecário registra que um exemplar voltou
+[ ] lista-de-atrasos   o bibliotecário vê os empréstimos vencidos
 =======
-[ ] devolver-livro     a bibliotecária registra que um exemplar voltou
-[x] lista-de-atrasos   a bibliotecária vê os empréstimos vencidos
+[ ] devolver-livro     o bibliotecário registra que um exemplar voltou
+[x] lista-de-atrasos   o bibliotecário vê os empréstimos vencidos
 >>>>>>> focus-kit/lista-de-atrasos
 ```
 
@@ -248,7 +248,7 @@ Aqui está essa lista na página de `lista-de-atrasos`, escrita para este capít
 **Decidido sem você.**
 
 1. Ordem da lista: mais dias de atraso primeiro. O docs/00 não
-   diz; recomendado, já que a bibliotecária cobra primeiro o
+   diz; recomendado, já que o bibliotecário cobra primeiro o
    empréstimo mais antigo.
 2. Um exemplar devolvido hoje sai da lista na hora. O docs/00 não
    diz; recomendado, para a lista nunca mostrar um livro já de volta.
