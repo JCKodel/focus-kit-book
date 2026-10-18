@@ -104,7 +104,7 @@ The team learns where its time goes: experienced developers measured 19% slower 
 When the process runs on documents an agent reads, the project answers the whole team, for one developer as for a company, and that is the gain this book is written for.
 No study in this book measures a team with the method and its practices against the same team without them: the evidence in each chapter is its number, counted on a real project and saying where it comes from, or the loss its practice avoids.
 Ninjobs and Case A, a client project that ran on the process and that chapter 17 tells, live in private repositories, so every number this book gives about them was counted by me over their histories.
-Ninjobs appears by name, and Case A without its owner, its client or its business.
+Ninjobs appears by name; Case A is a private corporate project, and its name could not be published without authorization, so it appears without its owner, its client or its business.
 
 Part I is the base, the practices every reader must share before the process, from how an agent sees a project to a test for each piece of code.
 Part II is the method, focus-kit, from its documents to the project as the team's assistant.

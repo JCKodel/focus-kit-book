@@ -104,7 +104,7 @@ O time aprende para onde vai o seu tempo: desenvolvedores experientes mediram-se
 Quando o processo roda sobre documentos que um agente lê, o projeto responde ao time inteiro, para um desenvolvedor como para uma empresa, e é para esse ganho que este livro foi escrito.
 Nenhum estudo neste livro mede um time com o método e as suas práticas contra o mesmo time sem eles: a evidência de cada capítulo é o seu número, contado num projeto real e dizendo de onde vem, ou a perda que a sua prática evita.
 A Ninjobs e o Caso A, um projeto de cliente que rodou sobre o processo e que o capítulo 17 conta, vivem em repositórios privados, então todo número que este livro dá sobre eles foi contado por mim ao longo dos seus históricos.
-A Ninjobs aparece pelo nome, e o Caso A sem o seu dono, o seu cliente ou o seu negócio.
+A Ninjobs aparece pelo nome; o Caso A é um projeto corporativo privado, e o seu nome não poderia ser publicado sem autorização, então aparece sem o seu dono, o seu cliente ou o seu negócio.
 
 A Parte I é a base, as práticas que todo leitor precisa compartilhar antes do processo, de como um agente vê um projeto até um teste para cada peça de código.
 A Parte II é o método, o focus-kit, dos seus documentos ao projeto como assistente do time.

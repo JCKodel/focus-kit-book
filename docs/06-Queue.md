@@ -422,7 +422,7 @@ When this milestone closes, a reader of chapters 0 to 7 learns each idea where i
 ```
 [>] early-no-forward-links   chapters 0 to 7 explain in a few words each idea they name instead of pointing to a later chapter, and keep the pointers in their gain sections; both editions
 [>] pt-ninjobs-masculine     the Portuguese edition and docs/03 give Ninjobs the masculine article, o Ninjobs, as an app or a site
-[>] case-a-why-anonymous     the prologue says why Case A has no owner, client or business: a private corporate project whose name could not be published without authorization; both editions
+[x] case-a-why-anonymous     the prologue says why Case A has no owner, client or business: a private corporate project whose name could not be published without authorization; both editions
 [>] agent-never-unsure       the book says, where it fits best, that an agent never says "I don't know", and that the person's judgment is what tells a hypothesis from a fact; both editions
 [>] ch02-gain-less-to-read   chapter 2's gain says plainly that the method writes less because the person must read all of it, and less to read is more attention; both editions
 [x] pt-identifiers-choice    the Portuguese chapter 3 drops the sentence on which names are translated and says Portuguese identifiers are a teaching choice, not a recommendation

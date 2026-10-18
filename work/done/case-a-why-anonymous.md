@@ -43,10 +43,32 @@
 
 **Done when.**
 
-* [ ] en and pt 00:107 read as Behaviour quotes, or as the author rewords them on approval; both editions in the same delivery.
-* [ ] The prologue still opens with its value, keeps its gain, no filler and nothing useful cut.
-* [ ] Every number sourced: no number added.
-* [ ] The author's approval of the anonymized passage listed under Behaviour (docs/00 OD-3).
-* [ ] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] en and pt 00:107 read as Behaviour quotes, or as the author rewords them on approval; both editions in the same delivery.
+* [x] The prologue still opens with its value, keeps its gain, no filler and nothing useful cut.
+* [x] Every number sourced: no number added.
+* [x] The author's approval of the anonymized passage listed under Behaviour (docs/00 OD-3).
+* [x] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
+* [x] `make book` run; both PDF paths given to the author: by the driver, once at the end of the batch.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block: page moved here; the line's mark, staging and commit are the driver's.
+
+**Divergences.** None from Behaviour or Contract. `make book`, the docs/06 mark and staging are the driver's, by the batch rules.
+
+**Proof.** Both greps print line 107, one line each; `git diff -U0` shows one hunk per edition, `@@ -107 +107 @@`, and in Portuguese "A Ninjobs aparece pelo nome" unchanged; `make verify` exit 0 (build, parity, em dash, prose, width, links, disclosure scan).
+
+**For the author's approval (docs/00 OD-3).** The only passage drawn from Case A this delivery writes, as Behaviour quotes it:
+
+* en 00:107: "Ninjobs appears by name; Case A is a private corporate project, and its name could not be published without authorization, so it appears without its owner, its client or its business."
+* pt 00:107: "A Ninjobs aparece pelo nome; o Caso A é um projeto corporativo privado, e o seu nome não poderia ser publicado sem autorização, então aparece sem o seu dono, o seu cliente ou o seu negócio."
+
+**Delivery review.** One read-only reviewer read the diff against this page, docs/04 and docs/03: no findings. Its one suggestion, left for the author's approval and not applied: line 106 already calls Case A "a client project" in "private repositories", so 107's "a private corporate project" describes it twice in a row and repeats "private"; a reader may wonder whether "corporate" means the client's company or the author's. A rewording on approval could drop "private" or say "a client's corporate project".
+
+**Decisions in /apply.** None beyond the page's: the wording is decision 3's, word for word.
+
+```commit
+docs(case-a-why-anonymous): the prologue says why Case A is anonymous
+
+- 00:107: Case A is a private corporate project, not named without leave
+- both editions
+
+work/done/case-a-why-anonymous.md
+```
