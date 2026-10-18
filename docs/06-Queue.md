@@ -376,7 +376,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.17 and the reposi
 [x] docs01-helpers           docs/01 names every helper `markdown.py` shares, `target_end` among them, every script that uses them, and `check_width.py`'s use of `check_prose.py`
 [x] adr17-section-name       ADR-0017's amendment names the docs/04 section `one-gain-section` changed
 [x] docs06-m16-paragraph     docs/06's M16 paragraph names the reviews' readers and checker, and M15's `pt-free-line-done` sentence starts in its neighbours' column
-[ ] docs03-review-rows       docs/03's delivery review row fixes the text the delivery wrote, as the apply skill says, and its candidate row glosses seen
+[x] docs03-review-rows       docs/03's delivery review row fixes the text the delivery wrote, as the apply skill says, and its candidate row glosses seen
 [ ] ch15-range-pointer       chapter 15 points `<base>..HEAD` to the chapter that teaches a range, or teaches it; both editions
 [ ] ch19-batch               chapter 19's batch stages its adjacent marks in docs/06 without contradicting what a conflict is, and points question deliveries to chapter 20 as Case A's customization; both editions
 [ ] ch04-features-folder     the Portuguese chapter 4 gives `features/` as the book's name, not the kit's
