@@ -262,12 +262,15 @@ Before the first `/apply`, read every page, this list first, and correct each on
 
 The recommendation covers only a question the documents leave open and you could answer.
 A question that belongs to someone else, a client or the library's director, is never answered on a recommendation: the page goes as far as it can, and the line waits as `[?]` with `· resume: propose`, as `due-reminder` waits on `· blocked: what provider?` in chapter 14.
-A question delivery, a queue line whose only purpose is a written answer, asks it (chapter 23).
+Case A gave such a question a line of its own, a question delivery, whose only output is a written answer; it is Case A's own customization, not a step of the kit (chapter 20).
 
 Pages written at once do not read each other.
 `/propose` reads the deliveries in flight in `work/` when it starts, and a page being written at the same time is not there yet: two pages may settle the same question two ways, or each ask docs/03 for the same new term.
 You find it by reading the pages side by side, and you correct one of them in its conversation.
-The lines of one batch sit side by side in the queue, so their marks fall in one hunk of docs/06; that is still another line's mark, no conflict, and before each commit `git diff --cached docs/06-Queue.md` shows you only that line staged.
+The lines of one batch sit side by side in the queue, so git puts their marks in one hunk of docs/06.
+That hunk holds no conflict: no line in it is changed by two sessions, which is what the conflict above means by the same hunk, the same lines, and each session's change is its own line's mark, which the list of what is not a conflict names first.
+What it changes is the staging: `git add -p` splits a hunk with `s` only where an unchanged line separates two changes, so for adjacent marks you answer `e`, and git opens the hunk in your editor, where you delete the other lines' `+` lines and turn their `-` into a space.[^git-add]
+Before each commit, `git diff --cached docs/06-Queue.md` then shows you only that line staged.
 
 The applies that follow add no rule: they run at once only on free lines whose files do not meet, and each commit is yours, one delivery at a time.
 
@@ -321,4 +324,5 @@ Proposes in a batch carry the parallel into definition: the agents write the pag
 [^git-worktree]: Git, "git-worktree", the documentation, accessed 2026-09-30. <https://git-scm.com/docs/git-worktree>
 [^git-merge]: Git, "git-merge", the documentation, section "How conflicts are presented" and option `--abort`, accessed 2026-09-30. <https://git-scm.com/docs/git-merge>
 [^git-diff]: Git, "git-diff", the documentation, option `--check`, accessed 2026-09-30. <https://git-scm.com/docs/git-diff>
+[^git-add]: Git, "git-add", the documentation, sections "Interactive mode" and "Editing patches", accessed 2026-10-18. <https://git-scm.com/docs/git-add>
 [^parallel-run]: J.C. Ködel, "One Page at a Time", the record of two deliveries built in parallel in two worktrees, 2026-09-30, in the book's repository. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/clinic-worktrees-run>

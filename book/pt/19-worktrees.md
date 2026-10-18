@@ -262,12 +262,15 @@ Antes do primeiro `/apply`, leia cada página, esta lista primeiro, e corrija ca
 
 A recomendação cobre só uma pergunta que os documentos deixam em aberto e que você conseguiria responder.
 Uma pergunta que pertence a outra pessoa, um cliente ou a diretora da biblioteca, nunca é respondida por uma recomendação: a página vai até onde consegue, e a linha espera como `[?]` com `· resume: propose`, como `aviso-prazo` espera em `· blocked: qual provedor?` no capítulo 14.
-Uma entrega de pergunta, uma linha da fila cujo único propósito é uma resposta escrita, a faz (capítulo 23).
+O Caso A deu a uma pergunta assim uma linha própria, uma entrega de pergunta, cujo único resultado é uma resposta escrita; ela é uma customização do próprio Caso A, não um passo do kit (capítulo 20).
 
 Páginas escritas ao mesmo tempo não leem umas às outras.
 O `/propose` lê as entregas em andamento em `work/` quando começa, e uma página sendo escrita ao mesmo tempo ainda não está lá: duas páginas podem decidir a mesma pergunta de dois jeitos, ou cada uma pedir ao docs/03 o mesmo termo novo.
 Você encontra isso lendo as páginas lado a lado, e corrige uma delas na sua conversa.
-As linhas de um lote ficam lado a lado na fila, então as suas marcas caem em um hunk do docs/06; isso continua sendo a marca de outra linha, nenhum conflito, e antes de cada commit `git diff --cached docs/06-Queue.md` mostra só aquela linha em stage.
+As linhas de um lote ficam lado a lado na fila, então o git põe as suas marcas em um hunk do docs/06.
+Esse hunk não guarda conflito: nenhuma linha dele é mudada por duas sessões, que é o que o conflito acima quer dizer com o mesmo hunk, as mesmas linhas, e a mudança de cada sessão é a marca da sua própria linha, que a lista do que não é conflito nomeia primeiro.
+O que ele muda é o stage: o `git add -p` divide um hunk com `s` só onde uma linha sem mudança separa duas mudanças, então para marcas vizinhas você responde `e`, e o git abre o hunk no seu editor, onde você apaga as linhas `+` das outras linhas e troca o `-` delas por um espaço.[^git-add]
+Antes de cada commit, `git diff --cached docs/06-Queue.md` então mostra só aquela linha em stage.
 
 Os `/apply` que vêm depois não acrescentam regra: rodam ao mesmo tempo só em linhas livres cujos arquivos não se encontram, e cada commit é seu, uma entrega por vez.
 
@@ -321,4 +324,5 @@ O `/propose` em lote leva o paralelo para a definição: os agentes escrevem as 
 [^git-worktree]: Git, "git-worktree", a documentação, acesso em 2026-09-30. <https://git-scm.com/docs/git-worktree>
 [^git-merge]: Git, "git-merge", a documentação, seção "How conflicts are presented" e opção `--abort`, acesso em 2026-09-30. <https://git-scm.com/docs/git-merge>
 [^git-diff]: Git, "git-diff", a documentação, opção `--check`, acesso em 2026-09-30. <https://git-scm.com/docs/git-diff>
+[^git-add]: Git, "git-add", a documentação, seções "Interactive mode" e "Editing patches", acesso em 2026-10-18. <https://git-scm.com/docs/git-add>
 [^parallel-run]: J.C. Ködel, "One Page at a Time", o registro de duas entregas construídas em paralelo em dois worktrees, 2026-09-30, no repositório do livro. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/clinic-worktrees-run>
