@@ -60,10 +60,39 @@
 
 **Done when.**
 
-* [ ] Both editions written: the opening's second sentence, the new text and the fifth key point as Behaviour says.
-* [ ] Chapter 13 still opens with its value in three sentences, keeps its gain said once and five key points, no filler and nothing useful cut.
-* [ ] No new number; the Ninjobs account carries none.
-* [ ] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3); the Ninjobs account is the author's own and the author reads it in the review.
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions written: the opening's second sentence, the new text and the fifth key point as Behaviour says, with the divergences below.
+* [x] Chapter 13 still opens with its value in three sentences, keeps its gain said once and five key points, no filler and nothing useful cut.
+* [x] No new number; the Ninjobs account carries none.
+* [x] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3); the Ninjobs account is the author's own and the author reads it in the review (see Divergences 3).
+* [x] `make book` run; both PDF paths given to the author: left to the driver, who builds the book once at the end of the batch.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block: the batch driver marks the line and stages and commits.
+
+**Coexistence.** `ch13-teach-the-agent` landed first (63b35b7). Its section and its fifth key point were read before writing: the new text sits after "Read what happened too, ..." and before "Ask the agent for each correction, in the same session, never by hand.", which this delivery left as it was, so "each correction" now also covers what using the delivery found; "in the same session" is said only there. The key point's clause "saying what you want instead and why" is kept, and this delivery's clauses were added around it. `pt-ninjobs-masculine` has not landed: the new Portuguese sentence says "Na Ninjobs" (feminine), as docs/03 gives today; that page converts it.
+
+**Divergences.** All from the delivery review, wording that keeps the page's intent:
+
+1. "This is one delivery, while it is open" became "This use covers one delivery while it is open; the hand test at a milestone's close goes through its whole paragraph." (pt "Esse uso cobre uma entrega enquanto ela está aberta; o teste à mão no fechamento do marco percorre o parágrafo inteiro."), since "This" had no clear subject.
+2. The correction sentence drops "made while it is open" (pt "feita enquanto ela está aberta"), which repeated the sentence before; en "only using it shows" became "only using the delivery shows".
+3. The Ninjobs account sorts by the page, not by size: "what the page had asked for corrected in the same conversation, while the delivery was open, and the rest written as the next lines of the queue" in place of decision 6's "the small ones fixed in the same conversation, the larger ones written as the next lines", which, right after "however small ... become a `[ ]` line", read as the author breaking the rule just taught. This interprets the author's draft ("small things were fixed in conversation, because the delivery was still open"); the author confirms or corrects it in the review. "Problems of the interface, of how it was to use" became "problems with the interface, with how easy it was to use".
+
+**Proof.**
+
+* `git diff --stat -- book/*/13-apply.md`: 8 insertions and 2 deletions per edition (the opening's line 4, six new lines after 164, the key point at 242); en/pt 13:165-166 of before, now 171-172, unchanged.
+* `grep -c Ninjobs book/en/13-apply.md book/pt/13-apply.md`: 3 and 3 (2 before).
+* The opening has three sentences and `## Key points` five bullets in both editions; the new text holds no number.
+* `make verify`: build, parity, em dash, prose, width, links and disclosure all pass.
+
+**Review.** A read-only Opus reviewer that did not write the change read the diff against this page and docs/04: nothing breaks the page or docs/04; the Fails list clean, 165-166 untouched, the teach-the-agent clause kept, the feminine article kept. Its wording suggestions were applied as the divergences above. Out of scope, noted for `ch11-queue-grows`: pt "por conversa" for adding a line, if chapter 11 settles another phrasing. No queue line.
+
+**Decisions.** The batch driver owns docs/06 and the commit; this delivery staged nothing and left `make book` to the driver.
+
+```commit
+docs(try-before-commit): use each delivery before committing it
+
+- Chapter 13, both editions: use what the delivery built, as its user would, before the commit
+- What the page asked and the build got wrong is a correction; what it did not ask becomes the next queue line
+- The author's Ninjobs account, with no number; opening and fifth key point amended
+
+work/done/try-before-commit.md
+```

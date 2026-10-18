@@ -1,7 +1,7 @@
 # 13. `/apply`: construir, verificar, provar, nunca fazer commit
 
 Depois deste capítulo você consegue levar uma página revisada até uma mudança em stage (marcada para o próximo commit, o registro salvo no histórico do projeto) com o `/apply`, e dizer o que "pronto" significa: a verificação verde, uma prova, uma revisão por um contexto que não escreveu a mudança, os documentos atualizados, a página movida e a sua linha marcada.
-Então você consegue revisar a mudança em stage contra a página e fazer o commit você mesmo, que é a revisão humana do processo.
+Então você consegue usar o que o `/apply` construiu, revisar a mudança em stage contra a página e fazer o commit você mesmo, que é a revisão humana do processo.
 E consegue dizer como o `/apply` termina: só a sua entrega em stage, a mensagem sugerida em um bloco `commit` na página e na conversa, os seus próximos passos escritos por extenso e, por último, qual ambiente está em qual versão.
 
 ## O problema
@@ -162,6 +162,12 @@ Leia a mudança contra a página:
 
 Se a página não registra revisão nenhuma e o slot do docs/05 nomeia uma, a entrega não terminou como o kit diz; peça a revisão ao agente.
 Leia também o que aconteceu, e pergunte-se se você teria decidido alguma divergência de outro jeito.
+Antes do commit, use o que a entrega construiu como o usuário dela usaria, no ambiente que a última frase do `/apply` diz que tem a entrega, passando pelo que a página mudou.
+Os testes provam o que a página escreveu e a revisão lê o código; só o uso mostra se ficou com a cara certa, se é fácil de usar e se responde sem deixar o usuário esperando.
+Esse uso cobre uma entrega enquanto ela está aberta; o teste à mão no fechamento do marco percorre o parágrafo inteiro.
+O que a página pediu e a construção errou ou deixou mal acabado, um botão fora do lugar, um rótulo que não cabe, uma tela que leva segundos para responder, é uma correção desta entrega: a verificação roda de novo e a página a registra.
+O que a página não pediu, por menor que seja, e um problema que precisa de uma definição própria viram uma linha `[ ]`, acrescentada por conversa com um rascunho da página para o que a linha não comporta; peça a linha logo abaixo da linha desta entrega, para que ela seja a próxima linha livre e o `/propose` dela parta do que você viu enquanto ainda se lembra.
+Na Ninjobs, eu usei cada entrega antes de fazer o commit: foi ali que achei problemas de interface, de uso e de velocidade que os testes e as revisões não tinham mostrado, e onde melhorei o que o agente fez, o que a página tinha pedido corrigido na mesma conversa, enquanto a entrega estava aberta, e o resto escrito como as próximas linhas da fila.
 Peça cada correção ao agente, na mesma sessão, nunca à mão.
 A mesma sessão guarda o raciocínio da construção: ela sabe por que fez cada escolha, o que uma sessão nova teria de adivinhar.
 Isso vale para o gosto tanto quanto para os defeitos: quando o código funciona mas você o teria escrito de outro jeito, diga o que quer no lugar e por quê, em vez de reescrevê-lo você mesmo.
@@ -233,6 +239,6 @@ Então a página registrou o ajuste, nenhum caminho de escrita alcançável pelo
 * Ele marca a linha como `[*]` com a sua primeira edição, `[x]` com a última, depois do stage, e `[?]`, com o que ela espera, quando precisa parar.
 * Verde não é pronto: pronto é a lista inteira, da revisão por um contexto que não escreveu a mudança à linha marcada `[x]`.
 * Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, cada comando escrito por extenso, e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
-* Revise a mudança em stage contra a página, peça cada correção na mesma sessão, dizendo o que quer no lugar e por quê, e faça você o commit: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
+* Use o que foi construído como o usuário usaria, revise a mudança em stage contra a página, peça cada correção na mesma sessão, dizendo o que quer no lugar e por quê, transforme o que a página não pediu na próxima linha da fila, e faça você o commit: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>

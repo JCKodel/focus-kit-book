@@ -439,7 +439,7 @@ When this milestone closes, a reader of chapters 0 to 7 learns each idea where i
 [x] ch11-agent-runs-propose  chapter 11 drops the claim that the agent cannot run /propose on its own; both editions
 [x] ch13-teach-the-agent     chapter 13's staged review asks for each correction by talking to the agent, so it learns, instead of fixing by hand; both editions
 [x] ch14-face-prototype      chapter 14's kanban board shows briefly face.kodel.com.br, the author's prototype of a board that runs on focus-kit; both editions
-[>] try-before-commit        the book advises using the software being built before committing each page, as on Ninjobs: small things fixed in conversation while the delivery is open, larger ones as the next lines; both editions
+[x] try-before-commit        the book advises using the software being built before committing each page, as on Ninjobs: small things fixed in conversation while the delivery is open, larger ones as the next lines; both editions
 [x] ch19-agent-does-git      chapter 19 says the person can always ask the agent to do a git step for them, a commit message, a conflict, a commit, a merge or a push, and checks the result; both editions
 [x] ch19-git-step-wording   chapters 18 and 19 name only git steps and knots the book teaches where they say the agent acts on the person's word, say conflict marker, and give the Portuguese one phrase for the agent acting alone; both editions
 [x] docs04-code-layout       docs/04's rule for code says declarations and `{ }` blocks are set apart by blank lines, as the author writes code

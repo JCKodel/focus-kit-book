@@ -1,7 +1,7 @@
 # 13. `/apply`: build, verify, prove, never commit
 
 After this chapter you can follow a reviewed page to a staged change with `/apply`, and say what "done" means: verify green, a proof, a review by a context that did not write the change, the documents updated, the page moved and its line marked.
-You can then review the staged change against the page and commit it yourself, which is the human review of the process.
+You can then use what `/apply` built, review the staged change against the page and commit it yourself, which is the human review of the process.
 And you can say how `/apply` ends: only its delivery staged, the suggested message in a `commit` block on the page and in the conversation, your next steps written out and, last of all, which environment is at which version.
 
 ## The problem
@@ -162,6 +162,12 @@ Read it against the page:
 
 If the page records no review and docs/05's slot names one, the delivery did not end as the kit says; ask the agent for the review.
 Read what happened too, and ask whether you would have decided any divergence otherwise.
+Before you commit, use what the delivery built as its user would, in the environment that `/apply`'s last sentence names as holding the delivery, going through what the page changed.
+The tests prove what the page wrote and the review reads the code; only using the delivery shows whether it looks right, is easy to use and answers without keeping its user waiting.
+This use covers one delivery while it is open; the hand test at a milestone's close goes through its whole paragraph.
+What the page asked and the build got wrong or left rough, a button out of place, a label that does not fit, a screen that takes seconds to answer, is a correction of this delivery: verify runs again and the page records it.
+What the page did not ask, however small, and a problem that needs a definition of its own become a `[ ]` line, added by conversation with a draft page for what the line cannot hold; ask for it right below this delivery's line, so it is the next free line and its `/propose` starts from what you saw while you still remember it.
+On Ninjobs I used each delivery before committing it: that is where I found problems with the interface, with how easy it was to use and with speed that the tests and the reviews had not shown, and where I improved what the agent made, what the page had asked for corrected in the same conversation, while the delivery was open, and the rest written as the next lines of the queue.
 Ask the agent for each correction, in the same session, never by hand.
 The same session keeps the reasoning of the build: it knows why it made each choice, which a fresh session would have to guess.
 That holds for taste as much as for faults: when the code works but you would have written it another way, say what you want instead and why, rather than rewriting it yourself.
@@ -233,6 +239,6 @@ So the page recorded the refinement, no write path reachable from the client, wh
 * It marks the line `[*]` with its first edit, `[x]` with its last, after the stage, and `[?]`, with what it waits on, when it must stop.
 * Green is not done: done is the whole list, from the review by a context that did not write the change to the line marked `[x]`.
 * It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, each command written out, and, last of all, which environment is at which version and the command that updates the others.
-* Review the staged change against the page, ask for each correction in the same session, saying what you want instead and why, and commit it yourself: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
+* Use what was built as its user would, review the staged change against the page, ask for each correction in the same session, saying what you want instead and why, make what the page did not ask the queue's next line, and commit it yourself: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>
