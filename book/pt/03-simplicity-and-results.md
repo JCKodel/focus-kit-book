@@ -162,11 +162,20 @@ A área chama o princípio de "errors as values", erros como valores, a partir d
 
 ## Exceção, recusa, erro
 
-Uma falha é uma de três coisas, e o nome da classe nunca diz qual.
-As falhas nativas do JavaScript são todas um `Error`, e as do .NET são todas uma `Exception`, então quem decide é a causa.
-Dart é a única linguagem que eu vi tornar a diferença visível: o seu `dart:core` tem uma classe `Exception`, "*feita para ser capturada*", e uma classe `Error`, para "*uma falha do programa que o programador deveria ter evitado*".[^dart-core]
+Uma falha é uma de três coisas, e na maioria das linguagens o tipo não diz qual.
+O livro do Rust diz isso de um bug e de uma falha que quem chama trata: "*a maioria das linguagens não distingue esses dois tipos de erro e trata os dois do mesmo jeito, usando mecanismos como exceções*".[^rust-book-errors]
+As falhas nativas do JavaScript são todas um `Error`,[^mdn-error] e as do .NET são todas uma `Exception`,[^dotnet-exception] então quem decide é a causa.
 
-* **Uma exceção** é uma falha esperada vinda de fora do programa: o banco de dados caiu, a rede caiu, o disco encheu.
+Algumas linguagens separam, sim, o bug da falha que quem chama trata, cada uma com o seu mecanismo.
+Rust devolve um `Result` para a falha que quem chama trata e interrompe com `panic!` em um bug: "*erros irrecuperáveis são sempre sintomas de bugs*".[^rust-book-errors]
+Swift tem `throws` para o que ele chama de "*erros recuperáveis em tempo de execução*", as exceções deste livro, enquanto uma asserção ou uma pré-condição que falha interrompe o programa, como `fatalError` faz: "*não há como capturar uma asserção que falhou*".[^swift-book-errors]
+Go devolve um valor `error`, "*o jeito usual de reportar um erro*", a exceção deste livro, e guarda `panic` para quando "*algo impossível aconteceu*", como o seu runtime faz ao "*indexar um slice fora dos limites*".[^effective-go]
+Java também traça a linha, mas não pelo nome.
+O seu `Error` marca "*problemas sérios que uma aplicação razoável não deveria tentar capturar*", e as suas exceções de runtime são "*o resultado de um problema de programação*", do qual não se pode "*razoavelmente esperar*" que quem chama se recupere; mesmo assim, `NullPointerException` estende `RuntimeException`, que estende `Exception`, então um `catch` de `Exception` captura também o bug.[^java-errors]
+Dart é a mais explícita que eu conheço, porque põe a linha nos nomes dos seus dois tipos raiz: o seu `dart:core` tem uma classe `Exception`, "*feita para ser capturada*", e uma classe `Error`, para "*uma falha do programa que o programador deveria ter evitado*", com `RangeError`, `StateError` e `TypeError` entre os seus erros.
+Uma falha que quem chama precisa capturar, diz a sua documentação, é "*uma exceção, e não um erro*".[^dart-core]
+
+* **Uma exceção** é uma falha esperada vinda de fora do programa: o banco de dados caiu, a rede caiu, o disco encheu, um arquivo não está lá.
   Nenhum código está errado.
   Ela é capturada na fronteira com o mundo de fora e devolvida como um valor, por dois motivos.
   A exceção pertence ao domínio de onde foi lançada: uma biblioteca de login lança a sua própria `AppleSignInException`, e o domínio da aplicação não tem ideia do que é o login com Apple; tudo o que ele precisa saber é que o login falhou.
@@ -273,5 +282,11 @@ Toda falha que quem chama precisa tratar está na assinatura, então quem revisa
 [^metz-wrong-abstraction]: Sandi Metz, "The Wrong Abstraction", 2016-01-20, acesso em 2026-09-30. <https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction>
 [^go-errors]: Rob Pike, "Errors are values", The Go Blog, 2015. <https://go.dev/blog/errors-are-values>
 [^dart-core]: Dart, "Exception class" e "Error class", referência da API `dart:core`, acesso em 2026-09-29. <https://api.dart.dev/stable/dart-core/Exception-class.html> e <https://api.dart.dev/stable/dart-core/Error-class.html>
+[^rust-book-errors]: The Rust Project, "Error Handling" e "To `panic!` or Not to `panic!`", The Rust Programming Language, capítulo 9, acesso em 2026-10-18. <https://doc.rust-lang.org/book/ch09-00-error-handling.html> e <https://doc.rust-lang.org/book/ch09-03-to-panic-or-not-to-panic.html>
+[^mdn-error]: MDN Web Docs, "Error", referência de JavaScript, acesso em 2026-10-18. <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error>
+[^dotnet-exception]: Microsoft, "Exception Class", referência da API do .NET, Microsoft Learn, acesso em 2026-10-18. <https://learn.microsoft.com/en-us/dotnet/api/system.exception>
+[^swift-book-errors]: Swift.org, "The Basics" e "Error Handling", The Swift Programming Language, acesso em 2026-10-18. <https://docs.swift.org/swift-book/documentation/the-swift-programming-language/thebasics/#Assertions-and-Preconditions> e <https://docs.swift.org/swift-book/documentation/the-swift-programming-language/errorhandling/>
+[^effective-go]: The Go Authors, "Effective Go", seções "Errors" e "Panic", go.dev, acesso em 2026-10-18. <https://go.dev/doc/effective_go>
+[^java-errors]: Oracle, "Class Error" e "Class NullPointerException", API do Java SE 21, e "Unchecked Exceptions: The Controversy", The Java Tutorials, acesso em 2026-10-18. <https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Error.html>, <https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html> e <https://docs.oracle.com/javase/tutorial/essential/exceptions/runtime.html>
 [^toub-net9]: Stephen Toub, "Performance Improvements in .NET 9", .NET Blog, 2024-09-12, seção "VM", benchmark `ExceptionThrowCatch`, acesso em 2026-09-30. <https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-9/>
 [^anti-corruption-layer]: Microsoft, "Anti-Corruption Layer pattern", Azure Architecture Center, acesso em 2026-09-30. <https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer>

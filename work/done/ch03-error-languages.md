@@ -66,12 +66,44 @@
 
 **Done when.**
 
-* [ ] Both editions written: the opening lines, the language sentences, the exception example and the notes, as Behaviour and Contract say.
-* [ ] Every quoted phrase checked against its source at apply time; the Swift words checked in the book's source repository, the note pointing to docs.swift.org.
-* [ ] Behaviour's apply-time checks give what they name.
-* [ ] Chapter 3 still opens with its value, keeps its gain, no filler and nothing useful cut.
-* [ ] Every number sourced: none added.
-* [ ] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions written: the opening lines, the language sentences, the exception example and the notes, as Behaviour and Contract say.
+* [x] Every quoted phrase checked against its source at apply time; the Swift words checked in the book's source repository, the note pointing to docs.swift.org.
+* [x] Behaviour's apply-time checks give what they name.
+* [x] Chapter 3 still opens with its value, keeps its gain, no filler and nothing useful cut.
+* [x] Every number sourced: none added.
+* [x] `make verify` green: edition parity, prose rules, width, links, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author: by the batch driver, once at the end of the batch.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block: the page moved and the message below by /apply; the mark, staging and commit by the batch driver.
+
+**Proof.**
+
+* en 03:164 to 175, pt 03:165 to 176: the section's opening now says most languages' types do not tell (Rust book quoted), JavaScript and .NET with their notes, then one sentence each for Rust, Swift, Go, Java (two) and Dart (two); the exception bullet adds "a file is not there" ("um arquivo não está lá"). Six new notes at the end of both editions, `[^dart-core]` reused. `git diff --stat` on the two paths: 20 insertions, 5 deletions each.
+* Every quoted phrase found at apply time, 2026-10-18, in its source: the two Rust book pages; Swift's `TheBasics.md` and `ErrorHandling.md` in swiftlang/swift-book; Effective Go (its "not actively updated" banner read too); Oracle's `Error` and `NullPointerException` pages (`java.lang.RuntimeException` in its hierarchy) and the tutorial page; MDN "Error"; Microsoft Learn "Exception Class"; Dart's `Error` page ("we consider the thrown object an exception rather than an error"; `StateError` and `TypeError` among its implementers, `RangeError` through `ArgumentError`).
+* Behaviour's greps: "the one language" and "a única linguagem" print nothing; "kotlin" and "c++" print nothing; "recoverable error" prints en 03:169 and 03:170, pt 03:171, each inside a quotation attributed to Rust or Swift.
+* `make verify` green: build, parity, em dash, prose, width, links, disclosure.
+
+**Divergences.**
+
+* The Rust quote "unrecoverable errors are always symptoms of bugs" is quoted whole, with its subject, so that "recoverable error" appears only inside a quotation, as Behaviour's grep asks.
+* The Rust page title "To panic! or Not to panic!" is written with `panic!` in code, as the Rust book sets it, because the prose check reads a bare "!" as an exclamation.
+* The Java tutorial's title joins "Unchecked Exceptions" and "The Controversy" with an em dash; the note writes it with a colon, by the no-em-dash rule.
+* The .NET note carries no quote in the text: the sentence says only that .NET's failures are all an `Exception`, which the page's "the base class for all exceptions" supports (the page's wording is "The Exception class is the base class for all exceptions", not "serves as").
+
+**Decisions taken in /apply.**
+
+* Run in a batch of applies on one tree: the batch driver marks this line in docs/06, runs `make book` once at the end of the batch and gives both PDF paths, and stages and commits this delivery by its paths.
+* Swift's force unwrap and its "programmer error or corrupted state" are left out: the sentence names assertions, preconditions and `fatalError`, and one quote proves the line.
+* Go's "real library functions should avoid `panic`" is left out: the two quotes on `error` and `panic` already prove the line.
+* The six new notes follow `[^dart-core]` at the end of the file, in no particular order; the PDF and EPUB number notes by first citation.
+
+**Review.** One read-only agent on Opus read the diff of the two paths against this page, docs/03 and docs/04, and fetched the sources: nothing breaks the page or docs/04; every quote matches. Of four optional suggestions, two applied: pt "interrompe" instead of the verb "para", which read as the preposition (03:170, 03:171), and "um slice" (03:172). Not applied: a book term after the opening Rust quote (the sentence before it already names the two kinds as a bug and a failure the caller handles), and decision 5's wording "Dart alone names" (Behaviour asks for "the most explicit the author knows"). No queue line.
+
+```commit
+docs(ch03-error-languages): say which languages separate a bug from a handled failure
+
+- Chapter 3, "Exception, refusal, error": most languages' types do not tell which; Rust, Swift, Go and Java separate the bug by their own mechanisms, and Dart most explicitly, in its root types' names
+- The exception bullet adds a missing file; six new source notes, JavaScript and .NET included
+
+work/done/ch03-error-languages.md
+```
