@@ -1,7 +1,7 @@
 # 1. Como um agente vê o seu projeto
 
 O modelo por trás de um agente de código não se lembra de nada de uma chamada para a outra.
-Depois deste capítulo você consegue explicar por que um agente de código só sabe o que está na sua janela de contexto a cada chamada, por que uma sessão longa piora, e o que manter por escrito para que uma sessão nova comece certa.
+Depois deste capítulo você consegue explicar por que um agente de código só sabe o que está na sua janela de contexto a cada chamada, por que uma sessão longa piora, por que a resposta dele soa igualmente segura quando um fato não estava na janela, e o que manter por escrito para que uma sessão nova comece certa.
 
 ## O modelo não se lembra de nada entre chamadas
 
@@ -58,6 +58,24 @@ Um resumo é mais curto do que o que ele resume, e guarda o que parecia importan
 A Anthropic avisa que compactar de forma agressiva demais "*pode resultar na perda de contexto sutil, mas crítico, cuja importância só fica evidente mais tarde.*"[^anthropic-context-2025]
 Uma decisão que você tomou na conversa, e que o agente seguia até então, pode ser o detalhe que o resumo descarta.
 
+## O que não está na janela
+
+O modelo escreve o texto seguinte mais provável, a partir do que está na sua janela e do que aprendeu no treinamento.
+Ele escreve esse texto esteja ou não na janela o fato de que ele precisa.
+Por isso um agente diz o que não sabe com a mesma segurança com que diz o que sabe: no meu trabalho com agentes, raramente vi um dizer "não sei".
+Quando o fato não está na janela, o agente responde de um de três jeitos:
+
+* afirma um palpite como fato;
+* responde a partir do que o modelo aprendeu no treinamento, o que pode não ter nada a ver com o seu projeto: uma API de outra versão, uma convenção de outra base de código;
+* raramente, e muitas vezes de passagem, diz que não tem certeza e propõe um jeito de reunir evidências para a hipótese dele.
+
+Adam Tauman Kalai e colegas, num artigo de 2025, argumentam que o treinamento e a avaliação "*recompensam o palpite em vez de admitir a incerteza.*"[^kalai-2025]
+A maioria dos testes pontua um modelo como uma prova pontua um aluno: um ponto pela resposta certa e nenhum pela resposta em branco ou por um "não sei".[^kalai-2025]
+Assim, "*dar um palpite quando há incerteza melhora o desempenho nos testes.*"[^kalai-2025]
+
+Uma hipótese nem sempre é verdadeira, e nada no tom da resposta a distingue de um fato.
+O seu julgamento distingue: confira a afirmação nos arquivos do projeto, ou peça ao agente que a teste e mostre o resultado.
+
 ## O que isso muda no seu projeto
 
 Duas práticas decorrem disso.
@@ -100,6 +118,7 @@ A evidência é a perda que isso evita, que os estudos acima mediram.
 * O modelo não se lembra de nada entre chamadas: o host envia a conversa inteira toda vez, e uma sessão nova começa vazia.
 * A janela de contexto é tudo o que o modelo vê numa chamada: as instruções do host, o arquivo de regras, os arquivos lidos, a saída das ferramentas e a conversa até aqui, medida em tokens, até um limite.
 * Mais contexto significa menos precisão: a informação no meio de uma entrada longa é a mais mal usada, a confiabilidade cai conforme a entrada cresce, e a compactação substitui a conversa por um resumo que pode descartar um detalhe que importava.
+* Um agente responde o que não está na janela com a mesma segurança com que responde o que está, a partir do treinamento ou de um palpite, então uma resposta segura é uma hipótese até você conferir.
 * Guarde as decisões em arquivos lidos no início de toda sessão, e dê a cada entrega uma sessão nova, com o decidir separado do construir.
 * Faça o commit da página de cada entrega com o código dela, e pergunte ao agente, e não a um colega, o que o projeto fez e por quê.
 
@@ -107,3 +126,4 @@ A evidência é a perda que isso evita, que os estudos acima mediram.
 [^liu-2024]: Liu et al., "Lost in the Middle: How Language Models Use Long Contexts", 2024. <https://arxiv.org/abs/2307.03172>
 [^chroma-2025]: Chroma, "Context Rot: How Increasing Input Tokens Impacts LLM Performance", 2025. <https://research.trychroma.com/context-rot>
 [^anthropic-context-2025]: Anthropic, "Effective context engineering for AI agents", 2025. <https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents>
+[^kalai-2025]: Adam Tauman Kalai, Ofir Nachum, Santosh S. Vempala e Edwin Zhang, "Why Language Models Hallucinate", 2025. <https://arxiv.org/abs/2509.04664>

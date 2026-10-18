@@ -46,12 +46,39 @@
 
 **Done when.**
 
-* [ ] Both editions written: the section, the opening sentence, the key point and the note, as Behaviour and Contract say.
-* [ ] The paper quoted from its own text, read at apply time.
-* [ ] Chapter 1 still opens with its value, keeps its gain, no filler and nothing useful cut.
-* [ ] Every number sourced: none added.
-* [ ] No forward pointer in the new section; the protocol not restated.
-* [ ] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions written: the section, the opening sentence, the key point and the note, as Behaviour and Contract say.
+* [x] The paper quoted from its own text, read at apply time.
+* [x] Chapter 1 still opens with its value, keeps its gain, no filler and nothing useful cut.
+* [x] Every number sourced: none added.
+* [x] No forward pointer in the new section; the protocol not restated.
+* [x] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author: by the batch driver, once at the end of the batch.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block: the page moved and the message below by /apply; the mark, staging and commit by the batch driver.
+
+**Proof.**
+
+* en/pt 01:4 opening sentence gains "why its answer sounds just as sure when a fact was not in the window"; en/pt 01:61-77 the new section `## What is not in the window` (`## O que não está na janela`), between `## When the window fills` and `## What this changes in your project`; one new key point, the fourth; `[^kalai-2025]` added at the end of both editions, as the Contract writes it.
+* The paper read at apply time, from its arXiv HTML (v1, 2025-09-04): the abstract says "the training and evaluation procedures reward guessing over acknowledging uncertainty" and "guessing when uncertain improves test performance"; section 1.2 says a binary 0-1 scheme "awards 1 point for a correct answer and none for blanks or IDKs". The chapter quotes the first two and paraphrases the third, each with the note.
+* "Hallucinat" appears in chapter 1 only in the note's title, in both editions; no link to chapter 24 in the new section.
+* `git diff --stat` on the two paths: 21 insertions, 1 deletion each.
+* `make verify`: build, parity, em dash, prose, width and disclosure green; the link check fails only on en/pt 24:159, a web.archive.org URL in chapter 24 that this delivery did not touch, refused by the network from this machine (curl gets no answer either); every other link, the new arXiv one included, passes.
+
+**Divergences.** None from Behaviour. The opening sentence puts the new ability after "why a long session gets worse", in the order the chapter teaches it.
+
+**Decisions taken in /apply.**
+
+* Run in a batch of applies on one tree: the batch driver marks this line in docs/06, runs `make book` once at the end of the batch and gives both PDF paths, and stages and commits this delivery by its paths.
+* The body names the authors and the year, not the paper's title, so "hallucination" stays in the note only (decision 5).
+* The pt quotes translate "guessing" as "palpite"/"dar um palpite", the word the section already uses for a guess, not "chutar".
+
+**Review.** One read-only agent on Opus read the diff of the two paths against this page and docs/04: nothing breaks the page or docs/04; quotes match the paper. Three suggestions on text this delivery wrote, all applied: the sentence on how most tests score a model takes its own `[^kalai-2025]` marker; the opening sentence says "just as sure" ("igualmente segura"); pt "esteja ou não na janela o fato de que ele precisa" and "a hipótese dele" for the ambiguous "a sua hipótese". No queue line.
+
+```commit
+docs(agent-never-unsure): say an agent answers what is not in its window as surely as what is
+
+- Chapter 1, new section "What is not in the window": the model writes the likeliest text whether or not the fact was in the window; three ways an agent answers what it does not know; why, from Kalai et al. 2025; a confident answer is a hypothesis the person checks
+- Chapter 1, opening sentence and a new key point say the same; new source note [^kalai-2025]
+
+work/done/agent-never-unsure.md
+```

@@ -1,7 +1,7 @@
 # 1. How an agent sees your project
 
 The model behind a coding agent remembers nothing from one call to the next.
-After this chapter you can explain why a coding agent knows only what is in its context window at each call, why a long session gets worse, and what to keep in writing so that a fresh session starts right.
+After this chapter you can explain why a coding agent knows only what is in its context window at each call, why a long session gets worse, why its answer sounds just as sure when a fact was not in the window, and what to keep in writing so that a fresh session starts right.
 
 ## The model remembers nothing between calls
 
@@ -58,6 +58,24 @@ A summary is shorter than what it summarizes, and it keeps what looked important
 Anthropic warns that compacting too aggressively "*can result in the loss of subtle but critical context whose importance only becomes apparent later.*"[^anthropic-context-2025]
 A decision you made in the conversation, and that the agent followed until then, can be the detail the summary drops.
 
+## What is not in the window
+
+The model writes the most likely next text, from what is in its window and from what it learned in training.
+It writes it whether or not the fact it needs was in the window.
+So an agent says what it does not know with the same assurance as what it knows: in my work with agents, I have rarely seen one say "I don't know".
+When the fact is not in the window, the agent answers in one of three ways:
+
+* it states a guess as a fact;
+* it answers from what the model learned in training, which may have nothing to do with your project: an API of another version, a convention of another codebase;
+* rarely, and often in passing, it says it is not sure and proposes a way to gather evidence for its hypothesis.
+
+Adam Tauman Kalai and colleagues, in a 2025 paper, argue that training and evaluation "*reward guessing over acknowledging uncertainty.*"[^kalai-2025]
+Most tests score a model the way an exam scores a student: a point for a right answer and none for a blank or an "I don't know".[^kalai-2025]
+So "*guessing when uncertain improves test performance.*"[^kalai-2025]
+
+A hypothesis is not always true, and nothing in the tone of the answer tells it from a fact.
+Your judgment does: check the claim against the project's files, or ask the agent to test it and show you the result.
+
 ## What this changes in your project
 
 Two practices follow.
@@ -100,6 +118,7 @@ The evidence is the loss this avoids, which the studies above measured.
 * The model remembers nothing between calls: the host sends the whole conversation every time, and a fresh session starts empty.
 * The context window is everything the model sees in one call: the host's instructions, the rules file, the files read, tool output and the conversation so far, measured in tokens, up to a limit.
 * More context means less accuracy: information in the middle of a long input is used worst, reliability falls as the input grows, and compaction replaces the conversation with a summary that can drop a detail that mattered.
+* An agent answers what is not in its window with the same assurance as what is, from training or from a guess, so a confident answer is a hypothesis until you check it.
 * Keep decisions in files read at the start of every session, and give each delivery a fresh session, with deciding apart from building.
 * Commit each delivery's page with its code, and ask the agent, not a colleague, what the project did and why.
 
@@ -107,3 +126,4 @@ The evidence is the loss this avoids, which the studies above measured.
 [^liu-2024]: Liu et al., "Lost in the Middle: How Language Models Use Long Contexts", 2024. <https://arxiv.org/abs/2307.03172>
 [^chroma-2025]: Chroma, "Context Rot: How Increasing Input Tokens Impacts LLM Performance", 2025. <https://research.trychroma.com/context-rot>
 [^anthropic-context-2025]: Anthropic, "Effective context engineering for AI agents", 2025. <https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents>
+[^kalai-2025]: Adam Tauman Kalai, Ofir Nachum, Santosh S. Vempala and Edwin Zhang, "Why Language Models Hallucinate", 2025. <https://arxiv.org/abs/2509.04664>
