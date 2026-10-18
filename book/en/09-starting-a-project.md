@@ -18,10 +18,14 @@ It talks one subject at a time, in this order, and moves on when it could write 
 2. **The vocabulary** (docs/03): the ten to twenty words the product cannot be described without, each with its name in code.
 3. **How it is built** (docs/01): the stack and the shape of the code, with the kit's two choices, FOCUS and the git strategy, each with the agent's recommendation for this stack.
 4. **The conventions** (docs/04): the documentation language and the identifier language, the style, where tests live.
-5. **The process slots** (docs/05): the verify command, the environments, how a screen is proven, when an environment beyond your machine is updated, whether `context/` is committed, the manuals (none yet, on a new project), and the deep code review you will launch when a milestone closes.
+5. **The process slots** (docs/05): the verify command, the environments, how a screen is proven, when an environment beyond your machine is updated, whether `context/` is committed, the manuals (none yet, on a new project), who reviews a delivery's changes before `/apply` ends, and how the milestone review's code reading splits.
 6. **The first milestone** (docs/06): three to eight deliveries, one line each, in order, then its review; the first ones are the skeleton the others stand on.
 
 Each slot it writes in docs/05 says what and the command, in a few lines, as docs/05 itself says ([chapter 7](07-the-documents.md)).
+
+Two of those slots say who reviews.
+The Delivery review slot names who reads a delivery's changes before `/apply` ends, a context that did not write them ([chapter 13](13-apply.md)): the default is the host's own review, a skill or a command the agent can run, when it can be kept to the delivery's paths, since another session may be working in the same folder; otherwise a read-only agent, one that reads files and edits none.
+The Milestone review slot says how the code reading at a milestone's close splits ([chapter 15](15-closing-a-milestone.md)): the default areas are docs/01's modules, one reader each, because a module's changes are read together, and the readers run on the session's model, the one you already work with, unless you name another.
 
 ### A default with every question
 
@@ -70,14 +74,15 @@ What the project does not have, it skips: on a repository with no code the docum
 
 ### What it asks
 
-One round, of six subjects only:
+One round, of seven subjects only:
 
 1. The documentation language. Default: the language of the README.
 2. The product's purpose and audience in your words, only when no README says it.
 3. FOCUS and the git strategy. The default of each is what the code already does, and the agent says what that is, so "your call" keeps it.
 4. Whether `context/` is committed. Default: committed when the repository stays with the team, in `.gitignore` when it is delivered or public.
-5. The milestone review: the deep code review you will launch at each milestone's close. Default: the one your host offers, if any.
-6. The first milestone: three to eight deliveries, or where to read them from (issues, a TODO file, a roadmap), then its review.
+5. The delivery review: who reads a delivery's changes before `/apply` ends. Default: the host's own review, when it can be kept to the delivery's paths; otherwise a read-only agent.
+6. The milestone review: the areas its code reading splits into and the model its readers run on. Default: docs/01's modules and the session's model.
+7. The first milestone: three to eight deliveries, or where to read them from (issues, a TODO file, a roadmap), then its review.
 
 A rules file already there does not stay beside `AGENTS.md`: its rules move into `AGENTS.md`, and the file keeps only the line that imports it and what applies to its host alone.
 It writes the same documents as `/brainstorm`, plus a manual in `docs/manuals/` for each thing a person already does by hand there, such as a Makefile target, a deploy script or setup steps in a README, as the kit's file for the command says.

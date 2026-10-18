@@ -18,10 +18,14 @@ Ele conversa sobre um assunto de cada vez, nesta ordem, e passa ao seguinte quan
 2. **O vocabulário** (docs/03): as dez a vinte palavras sem as quais o produto não pode ser descrito, cada uma com seu nome no código.
 3. **Como ele é construído** (docs/01): a stack e a forma do código, com as duas escolhas do kit, o FOCUS e a estratégia de git, cada uma com a recomendação do agente para essa stack.
 4. **As convenções** (docs/04): a língua da documentação e a língua dos identificadores, o estilo, onde ficam os testes.
-5. **Os slots do processo** (docs/05): o comando de verificação, os ambientes, como uma tela é provada, quando um ambiente além da sua máquina é atualizado, se a pasta `context/` entra no commit, os manuais (nenhum ainda, em um projeto novo), e a revisão profunda do código que você vai lançar quando um marco fechar.
+5. **Os slots do processo** (docs/05): o comando de verificação, os ambientes, como uma tela é provada, quando um ambiente além da sua máquina é atualizado, se a pasta `context/` entra no commit, os manuais (nenhum ainda, em um projeto novo), quem revisa as mudanças de uma entrega antes de o `/apply` terminar, e como se divide a leitura do código da revisão de marco.
 6. **O primeiro marco** (docs/06): de três a oito entregas, uma linha cada, em ordem, e depois a revisão dele; as primeiras são o esqueleto em que as outras se apoiam.
 
 Cada slot que ele escreve no docs/05 diz o que e o comando, em poucas linhas, como diz o próprio docs/05 ([capítulo 7](07-the-documents.md)).
+
+Dois desses slots dizem quem revisa.
+O slot Delivery review cita quem lê as mudanças de uma entrega antes de o `/apply` terminar, um contexto que não as escreveu ([capítulo 13](13-apply.md)): o padrão é a revisão do próprio host, uma skill ou um comando que o agente consegue rodar, quando ela pode ficar restrita aos caminhos da entrega, já que outra sessão pode estar trabalhando na mesma pasta; senão, um agente somente leitura, que lê arquivos e não edita nenhum.
+O slot Milestone review diz como se divide a leitura do código ao fechar um marco ([capítulo 15](15-closing-a-milestone.md)): as áreas padrão são os módulos do docs/01, um leitor cada, porque as mudanças de um módulo se leem juntas, e os leitores rodam no modelo da sessão, o que você já usa, a menos que você cite outro.
 
 ### Um padrão em cada pergunta
 
@@ -70,14 +74,15 @@ O que o projeto não tem, ele pula: em um repositório sem código, os documento
 
 ### O que ele pergunta
 
-Uma rodada, de seis assuntos apenas:
+Uma rodada, de sete assuntos apenas:
 
 1. A língua da documentação. Padrão: a língua do README.
 2. O propósito e o público do produto nas suas palavras, só quando nenhum README os diz.
 3. O FOCUS e a estratégia de git. O padrão de cada um é o que o código já faz, e o agente diz o que é, então "your call" o mantém.
 4. Se a pasta `context/` entra no commit. Padrão: entra quando o repositório fica com o time, e vai para o `.gitignore` quando ele é entregue ou público.
-5. A revisão de marco: a revisão profunda do código que você vai lançar ao fechar cada marco. Padrão: a que o seu host oferece, se houver.
-6. O primeiro marco: de três a oito entregas, ou de onde lê-las (issues, um arquivo TODO, um roadmap), e depois a revisão dele.
+5. A revisão da entrega: quem lê as mudanças de uma entrega antes de o `/apply` terminar. Padrão: a revisão do próprio host, quando ela pode ficar restrita aos caminhos da entrega; senão, um agente somente leitura.
+6. A revisão de marco: as áreas em que a leitura do código se divide e o modelo em que os leitores rodam. Padrão: os módulos do docs/01 e o modelo da sessão.
+7. O primeiro marco: de três a oito entregas, ou de onde lê-las (issues, um arquivo TODO, um roadmap), e depois a revisão dele.
 
 Um arquivo de regras que já existe não fica ao lado do `AGENTS.md`: as regras dele passam para o `AGENTS.md`, e o arquivo guarda só a linha que o importa e o que vale apenas para o host dele (o programa que roda o agente).
 Ele escreve os mesmos documentos que o `/brainstorm`, e mais um manual em `docs/manuals/` para cada coisa que uma pessoa já faz à mão ali, como um alvo do Makefile, um script de deploy ou os passos de instalação de um README, como diz o arquivo do kit para o comando.

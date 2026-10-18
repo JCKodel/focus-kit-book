@@ -51,48 +51,56 @@ Your choices stay: a docs/05 whose §5 says "trunk, one session at a time" sees 
 Here is the report of an update on the lending library, written for this chapter:
 
 ```
-Installed: focus-kit 2026.10.16.2, in every SKILL.md.
-Pending process migrations: 8.
+Installed: focus-kit 2026.10.17, in every SKILL.md.
+Removed: the kit's 6 files in .windsurf/skills/; nothing else there.
+Pending process migrations: 4.
 
-1. docs/05, §2 The flow: replace "and the answer stops there, or,
-   when the person wants it defined now, the conversation continues
-   as /propose <slug> in the same session, and what was said becomes
-   the page" with "; what was said that the line cannot hold goes
-   into a draft work/<slug>.md. The answer stops there and names
-   /propose <slug> for a fresh session, as this host invokes
-   commands". After "or reuse its existing one on resumption", add
-   ", bringing into it any draft left for the slug".
-2. docs/05, §3 The page: after "The only section that must be
-   exact", add ": a wrong screen is fixed in a session, a wrong
-   column is a migration, and a wrong access rule has already
-   leaked".
-3. docs/05, §4 The queue: after the table of marks, add "A board may
-   read the queue, and people pull work from it, so a mark changes
-   at once: [~] is /propose's first edit, [*] is /apply's first, and
-   [x] is /apply's last. Without a board the marks cost nothing."
-4. docs/05, §5 This project: add the Milestone review slot before
-   Git: "Milestone review: Claude Code's /code-review ultra <base>,
-   launched by the person against the commit the review's page
-   names."
-5. docs/05, §5 Publish policy: add "Whatever it is, /apply's last
-   words say which environment is at which version."
-6. docs/05, §7: "no gate before implementation" becomes "no gate
-   before implementation beyond a complete page".
-7. docs/05, §8 Closing a milestone: "It reviews no code and fixes
-   nothing." becomes "It fixes nothing." After that paragraph, add
-   "The review also reads the code: its page names the commit that
-   closed the previous milestone, or the first commit, and the
-   person launches §5's Milestone review against it."
-8. AGENTS.md, Non-negotiables, the "One delivery" line: after
-   "becomes a [ ] line in docs/06", add "with a draft page for what
-   the line cannot hold", and end it "naming /propose for a fresh
-   session (docs/05 §2)".
+1. docs/05, §5 This project: add the Delivery review slot after
+   Context: "Delivery review: a read-only agent on the session's
+   model reads git diff of the delivery's paths against its page and
+   docs/04."
+2. docs/05, §5 Milestone review: the slot names a command a person
+   launches. Proposed, its areas from docs/01's modules: "by areas,
+   one reader each: src/features/loans/, src/features/members/,
+   src/features/catalog/, the documents and the rest; readers and
+   checker on the session's model." Say whether the command still
+   runs too.
+3. docs/05, §7: "no specialized subagent" becomes "no specialized
+   subagent beyond the reviews' readers and checker (§5's Delivery
+   review, §8)".
+4. docs/05, §8 Closing a milestone: replace "The review also reads
+   the code: its page names the commit that closed the previous
+   milestone, or the first commit, and the person launches §5's
+   Milestone review against it." with "The review also reads the
+   code, the one look at the whole instead of a delivery: every page
+   can be right and the whole wrong. Its page names the commit that
+   closed the previous milestone, or the first commit, as the base,
+   and lists, by §5's areas, the paths git diff --stat <base>..HEAD
+   shows: always the range, since a bare commit reads that one
+   commit. An area too large for one careful reading splits again.
+   It costs, so the session says it is time and starts it only on
+   the person's word: one read-only agent per area, in parallel
+   where the host runs agents, or one fresh session per area, opened
+   by the person, where it does not. Each reader has the whole
+   repository open and reads its area's changes for what no
+   delivery's own review could see, one delivery's work against
+   another's, a document against another, the whole against docs/01,
+   and reports candidates by file and line and the paths it read.
+   One checker, an agent or the review's session, opens each
+   candidate's file and marks it seen, latent (nothing triggers it
+   today) or weak (the claim does not hold as stated) before the
+   person sees it. They fix nothing. When the paths read miss some
+   of the range's, the page says which and the line waits as [?]
+   with · resume: apply (§4). A candidate the person confirms is a
+   finding like the others."
 
 docs/ and AGENTS.md were not changed.
 ```
 
-Items 1, 3, 4 and 7 change a rule: a change asked outside `/apply` stops at the line, with a draft for what the line cannot hold, and the next `/propose` runs in a fresh session ([chapter 11](11-queue-and-milestones.md)); a mark changes at once, so a board that reads the queue shows what is taken ([chapter 14](14-queue-states.md)); and a milestone's review also reads the code, through the slot that names the review a person launches ([chapter 15](15-closing-a-milestone.md)).
-Items 2, 5, 6 and 8 change only words, for a rule the documents already hold.
+Every item changes a rule.
+Item 1 has each delivery's own changes read before `/apply` ends, by a reader that did not write them, here a read-only agent, which claims no feature of any host, while chapter 9 gives the default a project starts from; items 2 and 4 have the milestone review read every change since the milestone's base, split into areas, one read-only reader each, with a checker before the person sees what they report ([chapter 15](15-closing-a-milestone.md)); item 3 lets docs/05 §7, which lists what the process does not have, admit those readers and their checker.
+Item 2 also keeps a choice: the slot named a command the person launches, and the report proposes the areas beside it and asks whether it still runs, so the team decides.
+`Removed` lists the kit's own files the update deleted from `.windsurf/skills/`, a folder the setup file does not write; a file of yours there would have been reported and left.
 
 The kit's version is the `metadata.version` in each `SKILL.md`; the process is what docs/04, docs/05 and `AGENTS.md` say, because every command reads them, so an updated kit whose migrations are not applied still runs the old process.
 The update is done when the migrations are applied, as any change is: a queue line, defined with `/propose` and built with `/apply`, so the change to your rules or your queue gets a page, verify and your review.
@@ -106,8 +114,8 @@ With no container yet, the slot means the kit's default, which that chapter name
 
 To know why a migration exists, read the kit's changelog, `CHANGELOG.md` in its repository, `CHANGELOG.pt.md` in Portuguese.
 It has one entry per version, newest first; the version is the `Version:` line of `SETUP.md`, the same value as the `metadata.version` in each `SKILL.md`.
-Each entry says what changed and the problem that caused it, and an item that starts with `Migration:` names what to change in the project's documents.
-Every item of the report above comes from such an item, which says that the report checks docs/05 §§2, 3, 4, 6, 7 and 8, the Milestone review slot, the Publish policy's last sentence and `AGENTS.md`'s line on a change asked outside `/apply`; of those, it lists what your documents still lack.
+Each entry says what changed and the problem that caused it, and an entry may carry an item that starts with `Migration:`, naming what to change in the project's documents.
+What a rerun compares is the setup file's own step, which names the sections of docs/05, the slots and the lines of `AGENTS.md` it checks; the report lists only what your documents still lack, on the lending library the four items above.
 
 ## How each host finds the commands
 
@@ -164,7 +172,7 @@ And the next command arrives in the form your host recognizes, because a host ma
 
 * One sentence to your agent installs focus-kit, and the same sentence updates it; nothing is installed on your machine, nothing is staged or committed, and a kit file you changed stops the update before it writes.
 * The setup file writes only the kit's files and never touches `docs/`, `work/`, `AGENTS.md` or `CLAUDE.md`; a change docs/04, docs/05, docs/06 or `AGENTS.md` needs, a rule, a queue line or a slot, comes as a migration in its report, and until the team applies it as a delivery the process is the old one.
-* The kit's changelog, newest first, says for each version what changed, the problem that caused it, and in a `Migration:` item what to change in the project's documents.
+* The kit's changelog, newest first, says for each version what changed, the problem that caused it, and, in an item that starts with `Migration:` when the entry has one, what to change in the project's documents.
 * Each host finds the rules and the commands in its own folders: Claude Code runs a command as `/propose <slug>`, Codex as `$propose <slug>`, Copilot as `/propose`, which asks for the slug, Devin Desktop as `/propose`; every command names the next one in that form.
 * Every host reads a rules file at the start, reads the files you point it at and writes files, and the method needs nothing more.
 
