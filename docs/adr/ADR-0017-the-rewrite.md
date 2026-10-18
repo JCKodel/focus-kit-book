@@ -43,4 +43,4 @@ The chapters were renumbered 1 to 24 when the prologue absorbed chapter 1, chapt
 ## Amendment, 2026-10-17 (adr17-gain-amendment)
 
 A chapter's gain section holds a number or a sourced claim where the book has one, and otherwise the gain alone, with no sentence on the missing number; that no study in the book measures a team with the method against the same team without it is said once, in the prologue.
-The author decided it in the review of 2026-10-16 and `one-gain-section` applied it to every chapter and to docs/04 §Chapter shape; the Decision's "or one sentence saying the gain has no number" is read through this amendment and is not rewritten.
+The author decided it in the review of 2026-10-16 and `one-gain-section` applied it to every chapter and to docs/04 §Writing the book, its **A gain per chapter** and **One gain**; the Decision's "or one sentence saying the gain has no number" is read through this amendment and is not rewritten.
