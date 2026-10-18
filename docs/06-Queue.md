@@ -399,7 +399,8 @@ When this milestone closes, the book teaches focus-kit 2026.10.18 and the reposi
 [x] ch15-waiting-reason      chapter 15's review line waits with `· blocked: <what was read>` after `· resume: apply`; both editions · after ch15-review-base
 [x] m17-review               the review of M17 as docs/05 §8 says · after kit-2026-10-18, ch08-update-2026-10-18, ch13-created-files, ch14-four-waits, ch15-review-base, ch14-resume-moment, ch15-waiting-reason
 [x] conflict-same-lines      chapter 19, docs/05 §4 and §6, and docs/03's conflict row define a conflict between two sessions in one way, so a batch's adjacent marks in one hunk of docs/06 are either staged or stopped for, consistently; both editions
-[ ] ch19-adjacent-mark-staging  chapter 19 says who stages a batch's adjacent mark and how a session stages one line of a shared hunk without an editor; both editions
+[x] ch19-adjacent-mark-staging  chapter 19 says who stages a batch's adjacent mark and how a session stages one line of a shared hunk without an editor; both editions
+[ ] pt-ch19-index-word       the Portuguese chapter 19's key point says "a partir do índice", as chapter 13 and 19's batch paragraph say, not "a partir do stage"
 [x] pt-librarian-masculine   the Portuguese edition says "o bibliotecário", as docs/03 fixes, in chapters 4, 5, 11, 14, 17 and 19
 [ ] ch15-review-range-order  chapters 15 and 8 say the review's range holds the next milestone's deliveries that landed after the review's commit, not every one of them; both editions
 [ ] ch15-first-commit-base   chapter 15 says what a first milestone's range leaves out of the first commit, instead of "the whole project"; both editions

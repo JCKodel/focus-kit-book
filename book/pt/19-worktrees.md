@@ -269,8 +269,11 @@ O `/propose` lê as entregas em andamento em `work/` quando começa, e uma pági
 Você encontra isso lendo as páginas lado a lado, e corrige uma delas na sua conversa.
 As linhas de um lote ficam lado a lado na fila, então o git põe as suas marcas em um hunk do docs/06.
 Esse hunk não guarda conflito: nenhuma linha dele é mudada por duas sessões, e a mudança de cada sessão é a marca da sua própria linha, que a lista do que não é conflito nomeia primeiro.
-O que ele muda é o stage: o `git add -p` divide um hunk com `s` só onde uma linha sem mudança separa duas mudanças, então para marcas vizinhas você responde `e`, e o git abre o hunk no seu editor, onde você apaga as linhas `+` das outras linhas e troca o `-` delas por um espaço.[^git-add]
-Antes de cada commit, `git diff --cached docs/06-Queue.md` então mostra só aquela linha em stage.
+O que ele muda é o stage, e quem coloca em stage a marca de uma linha é a sessão dona dela, nunca você.
+O `git add -p` não consegue fazer isso aqui: ele divide um hunk com `s` só onde uma linha sem mudança separa duas mudanças, e o `e` dele abre o hunk em um editor, que uma sessão não opera.[^git-add]
+Então a sessão escreve um patch, o texto que o `git diff` imprime para uma mudança, com só o `-` e o `+` da sua própria linha, um ao lado do outro, e as outras linhas como estão no índice (a cópia em stage de onde o commit é feito), sem mudança, em volta deles.
+Ela entrega esse patch ao `git apply --cached`, que o aplica só ao índice e deixa os arquivos da pasta como estão.[^git-apply]
+Antes de cada commit, `git diff --cached docs/06-Queue.md` mostra uma linha `-` e uma linha `+`, lado a lado, só daquela linha, e nenhuma outra mudança.
 
 Os `/apply` que vêm depois não acrescentam regra: rodam ao mesmo tempo só em linhas livres cujos arquivos não se encontram, e cada commit é seu, uma entrega por vez.
 
@@ -324,5 +327,6 @@ O `/propose` em lote leva o paralelo para a definição: os agentes escrevem as 
 [^git-worktree]: Git, "git-worktree", a documentação, acesso em 2026-09-30. <https://git-scm.com/docs/git-worktree>
 [^git-merge]: Git, "git-merge", a documentação, seção "How conflicts are presented" e opção `--abort`, acesso em 2026-09-30. <https://git-scm.com/docs/git-merge>
 [^git-diff]: Git, "git-diff", a documentação, opção `--check`, acesso em 2026-09-30. <https://git-scm.com/docs/git-diff>
-[^git-add]: Git, "git-add", a documentação, seções "Interactive mode" e "Editing patches", acesso em 2026-10-18. <https://git-scm.com/docs/git-add>
+[^git-add]: Git, "git-add", a documentação, seção "Interactive mode", acesso em 2026-10-18. <https://git-scm.com/docs/git-add>
+[^git-apply]: Git, "git-apply", a documentação, opção `--cached`, acesso em 2026-10-18. <https://git-scm.com/docs/git-apply>
 [^parallel-run]: J.C. Ködel, "One Page at a Time", o registro de duas entregas construídas em paralelo em dois worktrees, 2026-09-30, no repositório do livro. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/clinic-worktrees-run>

@@ -269,8 +269,11 @@ Pages written at once do not read each other.
 You find it by reading the pages side by side, and you correct one of them in its conversation.
 The lines of one batch sit side by side in the queue, so git puts their marks in one hunk of docs/06.
 That hunk holds no conflict: no line in it is changed by two sessions, and each session's change is its own line's mark, which the list of what is not a conflict names first.
-What it changes is the staging: `git add -p` splits a hunk with `s` only where an unchanged line separates two changes, so for adjacent marks you answer `e`, and git opens the hunk in your editor, where you delete the other lines' `+` lines and turn their `-` into a space.[^git-add]
-Before each commit, `git diff --cached docs/06-Queue.md` then shows you only that line staged.
+What it changes is the staging, and the session that owns a line stages its mark, never you.
+`git add -p` cannot do it here: it splits a hunk with `s` only where an unchanged line separates two changes, and its `e` opens the hunk in an editor, which a session does not drive.[^git-add]
+So the session writes a patch, the text `git diff` prints for a change, holding only its own line's `-` and `+`, next to each other, with the other lines as they stand in the index (the staged copy a commit is made from), unchanged, around them.
+It gives that patch to `git apply --cached`, which applies it to the index alone and leaves the files in the folder as they are.[^git-apply]
+Before each commit, `git diff --cached docs/06-Queue.md` shows one `-` line and one `+` line, side by side, for that line alone, and no other change.
 
 The applies that follow add no rule: they run at once only on free lines whose files do not meet, and each commit is yours, one delivery at a time.
 
@@ -324,5 +327,6 @@ Proposes in a batch carry the parallel into definition: the agents write the pag
 [^git-worktree]: Git, "git-worktree", the documentation, accessed 2026-09-30. <https://git-scm.com/docs/git-worktree>
 [^git-merge]: Git, "git-merge", the documentation, section "How conflicts are presented" and option `--abort`, accessed 2026-09-30. <https://git-scm.com/docs/git-merge>
 [^git-diff]: Git, "git-diff", the documentation, option `--check`, accessed 2026-09-30. <https://git-scm.com/docs/git-diff>
-[^git-add]: Git, "git-add", the documentation, sections "Interactive mode" and "Editing patches", accessed 2026-10-18. <https://git-scm.com/docs/git-add>
+[^git-add]: Git, "git-add", the documentation, section "Interactive mode", accessed 2026-10-18. <https://git-scm.com/docs/git-add>
+[^git-apply]: Git, "git-apply", the documentation, option `--cached`, accessed 2026-10-18. <https://git-scm.com/docs/git-apply>
 [^parallel-run]: J.C. Ködel, "One Page at a Time", the record of two deliveries built in parallel in two worktrees, 2026-09-30, in the book's repository. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/clinic-worktrees-run>
