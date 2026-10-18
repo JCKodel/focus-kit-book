@@ -47,10 +47,33 @@
 
 **Done when.**
 
-* [ ] Both editions written: the sentence as Behaviour says.
-* [ ] Chapter 4 still opens with its value, keeps its gain, no filler and nothing useful cut.
-* [ ] Every number sourced: none added.
-* [ ] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions written: the sentence as Behaviour says.
+* [x] Chapter 4 still opens with its value, keeps its gain, no filler and nothing useful cut.
+* [x] Every number sourced: none added.
+* [x] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author: left to the driver, who builds the book once at the end of the batch.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+
+**Divergences.** None: the sentence is the Behaviour's exact words in both editions, found by its text at en 04:100 and pt 04:102 and added on the next line.
+
+**Proof.**
+
+* `grep -n "scalable means\|escalável quer dizer" book/*/04-focus.md` prints en 04:101 and pt 04:103, each right after the S line.
+* `git diff -- book/*/04-focus.md`: one line added per edition, nothing else.
+* `make verify`: build, parity, em dash, prose, width, links and disclosure all pass, exit 0.
+
+**Review.** A read-only Opus reviewer that did not write the change read the diff against this page and docs/04: no findings; text matches Behaviour word for word, no Fails pattern, the Portuguese is natural and faithful, no wording suggestion; no queue line.
+
+**Decisions.** The batch driver owns docs/06 and the commit; this delivery staged nothing and left `make book` to the driver.
+
+```commit
+docs(ch04-scalable-meaning): say what scalable means in FOCUS
+
+- Chapter 4, both editions: after the S of FOCUS, scalable means the project can grow indefinitely with no feature interfering with another, each feature in its folder and each job in its piece
+
+book/en/04-focus.md
+book/pt/04-focus.md
+docs/06-Queue.md
+work/done/ch04-scalable-meaning.md
+```

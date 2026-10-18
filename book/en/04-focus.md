@@ -98,6 +98,7 @@ So "what happens when event X arrives?" has one answer, and one test can check i
 That test is the test of a behaviour: "the user wants to sign in with Google" is one event, everything it sets off is one path through the orchestrator, and what comes out is one state, a confirmed sign-in or a failure, so the test reads "given this intention, this state", with nothing to inspect in between.
 
 **S, Scalable.** Every piece is isolated and has its own test, so a new feature adds its own folder and its own tests and changes no other.
+That is what scalable means here: the project can grow indefinitely, feature after feature, and no feature interferes with another, because each feature keeps to its folder and each job to its piece.
 
 ## The four pieces
 

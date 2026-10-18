@@ -100,6 +100,7 @@ Então "o que acontece quando o evento X chega?" tem uma resposta, e um teste co
 Esse teste é o teste de um comportamento: "o usuário quer entrar com o Google" é um evento, tudo o que ele dispara é um caminho pelo orquestrador, e o que sai é um estado, um login confirmado ou uma falha, então o teste se lê "dada esta intenção, este estado", sem nada para inspecionar no meio.
 
 **S, Scalable (escalável).** Toda peça é isolada e tem o próprio teste, então uma feature nova acrescenta a própria pasta e os próprios testes e não muda nenhuma outra.
+É isso que escalável quer dizer aqui: o projeto pode crescer indefinidamente, feature após feature, sem que uma feature interfira em outra, porque cada feature fica na sua pasta e cada trabalho na sua peça.
 
 ## As quatro peças
 

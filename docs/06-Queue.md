@@ -430,7 +430,7 @@ When this milestone closes, a reader of chapters 0 to 7 learns each idea where i
 [>] ch03-error-languages     chapter 3 says several languages separate a program's bug from a failure the caller handles, and that Dart does it most explicitly; both editions
 [>] ch04-focus-optional      chapter 4 opens saying FOCUS is optional and the team decides after reading its gain, and the gain adds that one pattern across projects makes moving people cheaper; both editions
 [x] ch04-uncle-bob           chapter 4 gives Robert C. Martin's nickname, Uncle Bob, where it first names him; both editions
-[>] ch04-scalable-meaning    chapter 4's S says the project grows without one feature interfering with another, which is why it scales; both editions
+[x] ch04-scalable-meaning    chapter 4's S says the project grows without one feature interfering with another, which is why it scales; both editions
 [>] ch05-test-time           chapter 5 says agents write tests without minding how long they run, and the person keeps the suite fast with pure use cases and slower tests only where they pay; both editions
 [>] ch05-random-values       chapter 5's section on swapping only I/O and the clock covers random values and anything else that changes between runs; both editions
 [>] ch07-rag-and-numbers     chapter 7 says the documents work as retrieval made for the project, and that every focus-kit project gives each document the same number; both editions
