@@ -2,6 +2,7 @@
 
 Depois deste capítulo você consegue rodar dois agentes ao mesmo tempo em uma pasta, no trunk, em linhas livres cujos arquivos não se encontram, dizer o que é e o que não é um conflito ali, e fazer o commit de cada entrega sozinha.
 Você também consegue dizer quando ainda compensa dar a cada entrega um worktree (uma árvore de trabalho), uma segunda pasta de trabalho do mesmo repositório no seu próprio branch, organizá-lo como o kit lhe dá forma, uma pasta contêiner com `main/` e uma pasta oculta, construir em worktrees, resolver o conflito quando dois branches mexeram nas mesmas linhas, pegar um marcador de conflito antes que ele entre em um commit, e dizer quando trabalhar em paralelo deixa de compensar.
+E consegue rodar vários `/propose` ao mesmo tempo nas respostas recomendadas do agente, ler em cada página o que ele decidiu sem você antes de qualquer `/apply`, e dizer por que todo commit continua seu.
 
 ## O problema: uma pasta, dois trabalhos
 
@@ -229,6 +230,53 @@ Se os marcadores entraram em um commit mesmo assim, o jeito de desfazer depende 
 Sem push: `git reset --hard <o commit antes do merge>` joga o merge fora, e você faz o merge de novo.
 Com push: `git revert`, já que um reset reescreve um histórico que outros já têm, o que é a regra do rebase do capítulo 18.
 
+## Propor em lote
+
+Tudo acima roda o `/apply` em paralelo.
+Um `/propose` parece mais lento, e o tempo vai para você, respondendo às suas perguntas, as horas de uma pessoa que, como o [capítulo 22](22-cost-and-where.md) mostra, nenhuma contagem de tokens vê.
+Quando você mesmo conseguiria responder a cada uma dessas perguntas, dá para levar esse tempo para uma leitura só, em vez de gastá-lo em cada conversa.
+
+Isso é um lote: uma sessão por linha, cada uma rodando `/propose <slug>`, e cada uma instruída, na conversa, a seguir a sua própria recomendação onde perguntaria.
+O kit não tem comando para isso e não precisa de um.
+O `/propose` já pergunta com a sua recomendação primeiro, e escreve na página cada decisão que toma com o documento de onde ela veio (capítulo 12); o processo do kit pede que toda escolha feita em seu nome fique explícita na página.
+O lote apenas responde às suas perguntas de antemão.
+
+Cada página então lista as perguntas que respondeu sozinha: a pergunta, a resposta escolhida e o porquê, e o documento que a deixou em aberto.
+Aqui está essa lista na página de `lista-de-atrasos`, escrita para este capítulo:
+
+```
+**Decidido sem você.**
+
+1. Ordem da lista: mais dias de atraso primeiro. O docs/00 não
+   diz; recomendado, já que a bibliotecária cobra primeiro o
+   empréstimo mais antigo.
+2. Um exemplar devolvido hoje sai da lista na hora. O docs/00 não
+   diz; recomendado, para a lista nunca mostrar um livro já de volta.
+```
+
+Cada item dá a pergunta, a resposta e o seu motivo, e nomeia o docs/00 como o documento que a deixou em aberto; o título é do projeto, que o nomeia como quiser, já que o kit fixa as seções da página e não esta.
+Uma página que não respondeu nada sozinha diz isso, ou não traz lista.
+
+O lote leva as suas decisões para a leitura e não tira nenhuma delas.
+Antes do primeiro `/apply`, leia cada página, esta lista primeiro, e corrija cada uma na sua própria conversa.
+
+A recomendação cobre só uma pergunta que os documentos deixam em aberto e que você conseguiria responder.
+Uma pergunta que pertence a outra pessoa, um cliente ou a diretora da biblioteca, nunca é respondida por uma recomendação: a página vai até onde consegue, e a linha espera como `[?]` com `· resume: propose`, como `aviso-prazo` espera em `· blocked: qual provedor?` no capítulo 14.
+Uma entrega de pergunta, uma linha da fila cujo único propósito é uma resposta escrita, a faz (capítulo 23).
+
+Páginas escritas ao mesmo tempo não leem umas às outras.
+O `/propose` lê as entregas em andamento em `work/` quando começa, e uma página sendo escrita ao mesmo tempo ainda não está lá: duas páginas podem decidir a mesma pergunta de dois jeitos, ou cada uma pedir ao docs/03 o mesmo termo novo.
+Você encontra isso lendo as páginas lado a lado, e corrige uma delas na sua conversa.
+As linhas de um lote ficam lado a lado na fila, então as suas marcas caem em um hunk do docs/06; isso continua sendo a marca de outra linha, nenhum conflito, e antes de cada commit `git diff --cached docs/06-Queue.md` mostra só aquela linha em stage.
+
+Os `/apply` que vêm depois não acrescentam regra: rodam ao mesmo tempo só em linhas livres cujos arquivos não se encontram, e cada commit é seu, uma entrega por vez.
+
+Deixar os agentes fazerem o commit de um lote de `/apply` sai do método, e custa quatro coisas.
+Um commit deixa de dizer que uma pessoa leu a mudança, que é o que ele diz no [capítulo 13](13-apply.md).
+Em uma pasta, o commit de um agente leva o que outra sessão colocou em stage, ou, com caminhos, o docs/06 compartilhado inteiro: a armadilha de nomear caminhos, no começo deste capítulo.
+Ler muitas mudanças depois que elas entraram em commits é a condição do viés de automação (capítulos 13 e 24).
+E uma entrega errada sobre a qual as seguintes construíram se desfaz com um conflito onde quer que elas tenham mudado as suas linhas (capítulo 18).
+
 ## Quando o paralelo deixa de compensar
 
 Em uma pasta ou em worktrees, duas entregas ao mesmo tempo ainda compartilham tudo o que não está nos seus próprios arquivos.
@@ -250,7 +298,7 @@ Uma porta ou um banco de dados por sessão é uma escolha que o projeto pode faz
 Cada worktree instala as suas, então cada um custa tanto disco quanto a pasta principal, e a instalação leva o seu tempo de novo.
 
 **Você.** Os agentes trabalham em paralelo; a sua revisão não.
-Você lê cada página e cada mudança em stage, faz o commit e o merge, uma entrega por vez, então rode ao mesmo tempo só tantas entregas quantas você consegue revisar.
+Você lê cada página e cada mudança em stage, faz o commit e o merge, uma entrega por vez, então rode ao mesmo tempo só tantas entregas quantas você consegue revisar; um lote de `/propose` leva essa leitura para uma leitura só e não a encurta.
 Este livro, escrito e revisado por uma pessoa em arquivos compartilhados, fica no trunk por esses motivos, e o seu docs/05 deixa duas sessões trabalharem em uma pasta em linhas livres que mexem em arquivos diferentes.
 
 ## O que o time ganha
@@ -258,6 +306,7 @@ Este livro, escrito e revisado por uma pessoa em arquivos compartilhados, fica n
 Dois agentes constroem ao mesmo tempo, e cada entrega ainda chega como uma mudança que se desfaz sozinha: um commit em uma pasta, um merge a partir de um worktree.
 Eu medi isso uma vez, em worktrees, em um pequeno projeto meu em TypeScript: duas entregas construídas ao mesmo tempo levaram 155 segundos do primeiro início ao último fim, contra 277,2 segundos de trabalho dos agentes somados, ao custo de uma pasta `node_modules` em cada worktree, duas execuções de teste que colidiram uma vez em uma porta compartilhada, e o conflito da fila no merge.[^parallel-run]
 A medição é de duas entregas cujos arquivos de código não se encontravam; o ganho termina na velocidade da pessoa que as revisa, faz o commit e o merge delas.
+O `/propose` em lote leva o paralelo para a definição: os agentes escrevem as páginas enquanto você está fora, e cada página traz as decisões que tomou sozinha, listadas para a sua única leitura.
 
 ## Pontos-chave
 
@@ -265,7 +314,7 @@ A medição é de duas entregas cujos arquivos de código não se encontravam; o
 * A marca de outra linha, a página ou os arquivos de outra entrega e as entradas em stage de outra sessão não são conflito; o mesmo hunk editado pelas duas, ou um arquivo de que uma página precisa e que a outra está mudando, é: pare, e então ordene as linhas ou dê a uma delas um worktree.
 * Faça o commit a partir do stage quando `git diff --cached --stat` guarda só aquela entrega; `git commit -- <caminhos>` pega cada arquivo nomeado inteiro da pasta, com o hunk da outra entrega em um arquivo compartilhado.
 * Um worktree por entrega compensa para várias pessoas, ou para entregas que mexem nos mesmos arquivos: uma pasta contêiner cujo `main/` é o checkout guarda o worktree de cada entrega em `<oculta>/worktrees/<slug>/` no `<prefixo>/<slug>`, `.focus-kit/` e `focus-kit/` por padrão; `git worktree add`, trabalhe ali, `git merge --no-ff` em `main/`, `git worktree remove`, `git branch -d`; um conflito deixa as duas versões entre marcadores, e `git diff --cached --check` pega qualquer um que sobrou antes do commit.
-* O paralelo compensa enquanto os arquivos das entregas não se encontram, ou só se encontram entre worktrees cujo merge você consegue decidir, as portas e os bancos de dados da máquina não colidem, o disco comporta as dependências de cada worktree, e uma pessoa ainda consegue revisar cada entrega.
+* O paralelo compensa enquanto os arquivos das entregas não se encontram, ou só se encontram entre worktrees cujo merge você consegue decidir, as portas e os bancos de dados da máquina não colidem, o disco comporta as dependências de cada worktree, e uma pessoa ainda consegue revisar cada entrega; o `/propose` pode rodar em lote nas respostas recomendadas, cada página listando o que decidiu sozinha para você ler antes de qualquer `/apply`, e todo commit continua seu.
 
 [^git-commit]: Git, "git-commit", a documentação, opção `--only`, acesso em 2026-10-13. <https://git-scm.com/docs/git-commit>
 [^git-clone]: Git, "git-clone", a documentação, opção `--bare`, acesso em 2026-10-16. <https://git-scm.com/docs/git-clone>
