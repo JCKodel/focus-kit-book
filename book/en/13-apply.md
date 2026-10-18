@@ -1,7 +1,7 @@
-# 13. `/apply`: build, verify, prove, never commit
+# 13. `/apply`: build, verify, prove, never commit on its own
 
 After this chapter you can follow a reviewed page to a staged change with `/apply`, and say what "done" means: verify green, a proof, a review by a context that did not write the change, the documents updated, the page moved and its line marked.
-You can then use what `/apply` built, review the staged change against the page and commit it yourself, which is the human review of the process.
+You can then use what `/apply` built and review the staged change against the page, which is the human review of the process, and then commit it, yourself or by asking the agent.
 And you can say how `/apply` ends: only its delivery staged, the suggested message in a `commit` block on the page and in the conversation, your next steps written out and, last of all, which environment is at which version.
 
 ## The problem
@@ -10,7 +10,7 @@ An agent that is told "build this" stops when the code compiles, or when the tes
 What it built around the request, what it chose on its own and which documents no longer say the truth are left for someone to find later, and that someone is usually a user.
 Asked to check its own work, it rereads the work with the reasoning that wrote it, so what it missed while writing, it misses again.
 A 2024 study of large language models on reasoning tasks, by Jie Huang and colleagues, found that they "*struggle to self-correct their responses without external feedback, and at times, their performance even degrades after self-correction*".[^huang-2024]
-And an agent that commits its own work puts it in the project's history before any person has read it.
+And an agent that commits on its own puts its work in the project's history before any person has read it.
 
 ## What `/apply` does
 
@@ -157,9 +157,10 @@ On Ninjobs, a person who opened the published site believing it current, after a
 
 ## Why it stops at the stage
 
-`/apply` never commits and never merges, whatever the git strategy.
-It stages only its delivery and hands you the message; the commit is yours, and it comes after your review.
-The kit's process document gives the flow in one line: `/apply` "*builds, proves, updates the documents, stages and suggests the commit, never commits*".
+`/apply` never commits and never merges on its own, whatever the git strategy.
+It stages only its delivery and hands you the message; the decision to commit is yours, and it comes after your review.
+The kit's process document gives the flow in one line: `/apply` "*builds, proves, updates the documents, stages and suggests the commit, never commits on its own*".
+*On its own* is the point: once you have used and reviewed the delivery, you may ask the agent to commit it, and it takes that step and no other (the section on the commit shows how).
 
 ## Review the staged change
 
@@ -200,12 +201,12 @@ And verify and the proof ran before you look, so your attention goes where no ch
 
 ## The commit is the human review
 
-The agent stages and suggests the message; the person reads the diff and commits.
+The agent stages and suggests the message; the person reads the diff and decides the commit.
 Three reasons hold that line.
 
-* **Nothing reaches the history unread by a person.** A commit says a person read the change and accepts it; an agent that commits its own work skips the only reader who can say the build is what was wanted.
+* **Nothing reaches the history unread by a person.** A commit says a person read the change and accepts it; an agent that commits on its own skips the only reader who can say the build is what was wanted.
 * **A commit reverts in one step.** The page and its build are one commit on trunk, one merge on a branch, so a delivery that turns out wrong leaves the project in one command (chapter 18).
-* **The person owns what ships.** The agent wrote the code, and the person answers for it to the team, the client and the user; the commit is where that answer is given.
+* **The person owns what ships.** The agent wrote the code, and the person answers for it to the team, the client and the user; the commit, whoever types it, is where that answer is given.
 
 Read the staged diff, then commit:
 
@@ -216,6 +217,11 @@ git commit
 
 With no `-m`, git opens your editor for the message; copy it from the `commit` block at the end of the page, paste it, save and close, and the commit exists when the editor closes.
 The page holds the message and the conversation only repeats it, so you can commit the next morning, in another window, and still find it.
+
+Or, once you have read the staged diff, ask the agent: "commit this delivery with the message on its page".
+It runs the commit and stops there: a request to commit is not one to merge or to push, and on a delivery branch the merge is a step you name again, after reading the branch (chapter 19).
+The agent may have your host's permission to run `git commit`; that permission lets it type the command, and only your request, after your reading, says the change should enter the history.
+Then check what it made with `git show --stat HEAD`, which prints the last commit's message and the files it holds: the message from the page, and this delivery's paths and nothing else.
 
 When another session works in the same folder, commit one delivery at a time, from the index, once `git diff --staged` holds only that delivery (chapter 19).
 
@@ -254,6 +260,6 @@ So the page recorded the refinement, no write path reachable from the client, wh
 * It marks the line `[*]` with its first edit, `[x]` with its last, after the stage, and `[?]`, with what it waits on, when it must stop.
 * Green is not done: done is the whole list, from the documents updated before a review by a context that did not write the change, which reads the whole delivery, to verify green after the last edit and the line marked `[x]`.
 * It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, each command written out, and, last of all, which environment is at which version and the command that updates the others.
-* Use what was built as its user would, review the staged change against the page, ask for each correction in the same session, saying what you want instead and why, make what the page did not ask the queue's next line, and commit it yourself: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
+* Use what was built as its user would, review the staged change against the page, ask for each correction in the same session, saying what you want instead and why, make what the page did not ask the queue's next line, and then commit it, yourself or by asking the agent: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>

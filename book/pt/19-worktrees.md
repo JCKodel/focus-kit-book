@@ -2,7 +2,7 @@
 
 Depois deste capítulo você consegue rodar dois agentes ao mesmo tempo em uma pasta, no trunk, em linhas livres cujos arquivos não se encontram, dizer o que é e o que não é um conflito ali, e fazer o commit de cada entrega sozinha.
 Você também consegue dizer quando ainda compensa dar a cada entrega um worktree (uma árvore de trabalho), uma segunda pasta de trabalho do mesmo repositório no seu próprio branch, organizá-lo como o kit lhe dá forma, uma pasta contêiner com `main/` e uma pasta oculta, construir em worktrees, resolver o conflito quando dois branches mexeram nas mesmas linhas, pegar um marcador de conflito antes que ele entre em um commit, e dizer quando trabalhar em paralelo deixa de compensar.
-E consegue rodar vários `/propose` ao mesmo tempo nas respostas recomendadas do agente, ler em cada página o que ele decidiu sem você antes de qualquer `/apply`, e dizer por que todo commit continua seu.
+E consegue rodar vários `/propose` ao mesmo tempo nas respostas recomendadas do agente, ler em cada página o que ele decidiu sem você antes de qualquer `/apply`, e dizer por que todo commit continua sendo decisão sua.
 
 ## O problema: uma pasta, dois trabalhos
 
@@ -34,7 +34,7 @@ Cada sessão se atém à sua entrega:
 * ela coloca em stage só os seus próprios caminhos, e só o seu próprio hunk do docs/06 (`git add -p` coloca um arquivo em stage hunk por hunk);
 * ela não mexe em nada que a outra sessão mudou ou colocou em stage.
 
-O commit continua seu, uma entrega por vez.
+O commit continua sendo decisão sua, uma entrega por vez.
 Antes de fazer o commit de `devolver-livro`, veja o que está em stage:
 
 ```
@@ -177,6 +177,7 @@ Você revisa e faz o commit no branch, faz o merge no `main` com `--no-ff`, remo
 O agente nunca faz commit, merge ou push, nem resolve um conflito ou remove um worktree por conta própria: cada passo que muda o histórico é decisão sua, como em toda estratégia de git.
 Peça, e ele dá qualquer um desses passos por você: escreve a mensagem de commit, resolve o conflito, faz o commit, o merge ou o push, remove o worktree, e conhece os comandos que desfazem um passo, como `git merge --abort` para um merge parado por um conflito ou `git revert` para uma entrega a desfazer.
 Cada passo vem depois da sua leitura: peça o commit quando o diff em stage tiver só a entrega, o commit de merge quando o arquivo resolvido não tiver nenhum marcador de conflito, e o push quando o `git log` mostrar o que vai sair.
+Depois de um merge que ele fez, `git log --oneline --graph -3` em `main/` mostra o commit de merge e o branch que ele trouxe.
 Para rodar duas entregas ao mesmo tempo em worktrees, abra uma sessão por pasta: uma em `main/` para cada `/propose`, uma em cada worktree para o seu `/apply`.
 
 O kit dá essa forma única a toda ferramenta e toda pessoa por causa de um erro: um `/propose` rodando em um worktree que outra ferramenta criou, numa pasta própria, escreve a página onde o próximo `/apply` não procura.
@@ -277,9 +278,11 @@ Então a sessão escreve um patch, o texto que o `git diff` imprime para uma mud
 Ela entrega esse patch ao `git apply --cached`, que o aplica só ao índice e deixa os arquivos da pasta como estão.[^git-apply]
 Antes de cada commit, `git diff --cached docs/06-Queue.md` mostra uma linha `-` e uma linha `+`, lado a lado, só daquela linha, e nenhuma outra mudança.
 
-Os `/apply` que vêm depois não acrescentam regra: rodam ao mesmo tempo só em linhas livres cujos arquivos não se encontram, e cada commit é seu, uma entrega por vez.
+Os `/apply` que vêm depois não acrescentam regra: rodam ao mesmo tempo só em linhas livres cujos arquivos não se encontram, e cada commit é decisão sua, uma entrega por vez.
 
-Deixar os agentes fazerem o commit de um lote de `/apply` sai do método, e custa quatro coisas.
+Pedir um passo não é entregar o lote.
+Depois que você usou e revisou uma entrega, e o `git diff --cached --stat` mostra um índice com só ela, você pode pedir à sessão dela que faça o commit; a entrega seguinte espera o seu próprio uso, a sua própria revisão e o seu próprio índice.
+Deixar os agentes fazerem por conta própria o commit de um lote de `/apply`, antes que você os tenha lido, sai do método, e custa quatro coisas.
 Um commit deixa de dizer que uma pessoa leu a mudança, que é o que ele diz no [capítulo 13](13-apply.md).
 Em uma pasta, o commit de um agente leva o que outra sessão colocou em stage, ou, com caminhos, o docs/06 compartilhado inteiro: a armadilha de nomear caminhos, no começo deste capítulo.
 Ler muitas mudanças depois que elas entraram em commits é a condição do viés de automação (capítulos 13 e 24).
@@ -306,23 +309,23 @@ Uma porta ou um banco de dados por sessão é uma escolha que o projeto pode faz
 Cada worktree instala as suas, então cada um custa tanto disco quanto a pasta principal, e a instalação leva o seu tempo de novo.
 
 **Você.** Os agentes trabalham em paralelo; a sua revisão não.
-Você lê cada página e cada mudança em stage, faz o commit e o merge, uma entrega por vez, então rode ao mesmo tempo só tantas entregas quantas você consegue revisar; um lote de `/propose` leva essa leitura para uma leitura só e não a encurta.
+Você lê cada página e cada mudança em stage e decide cada commit e cada merge, uma entrega por vez, então rode ao mesmo tempo só tantas entregas quantas você consegue revisar; um lote de `/propose` leva essa leitura para uma leitura só e não a encurta.
 Este livro, escrito e revisado por uma pessoa em arquivos compartilhados, fica no trunk por esses motivos, e o seu docs/05 deixa duas sessões trabalharem em uma pasta em linhas livres que mexem em arquivos diferentes.
 
 ## O que o time ganha
 
 Dois agentes constroem ao mesmo tempo, e cada entrega ainda chega como uma mudança que se desfaz sozinha: um commit em uma pasta, um merge a partir de um worktree.
 Eu medi isso uma vez, em worktrees, em um pequeno projeto meu em TypeScript: duas entregas construídas ao mesmo tempo levaram 155 segundos do primeiro início ao último fim, contra 277,2 segundos de trabalho dos agentes somados, ao custo de uma pasta `node_modules` em cada worktree, duas execuções de teste que colidiram uma vez em uma porta compartilhada, e o conflito da fila no merge.[^parallel-run]
-A medição é de duas entregas cujos arquivos de código não se encontravam; o ganho termina na velocidade da pessoa que as revisa, faz o commit e o merge delas.
+A medição é de duas entregas cujos arquivos de código não se encontravam; o ganho termina na velocidade da pessoa que as revisa e decide os commits e os merges delas.
 O `/propose` em lote leva o paralelo para a definição: os agentes escrevem as páginas enquanto você está fora, e cada página traz as decisões que tomou sozinha, listadas para a sua única leitura.
 
 ## Pontos-chave
 
-* Duas sessões dividem uma pasta no trunk quando as suas linhas estão livres e os seus arquivos não se encontram: cada uma marca só a sua linha, coloca em stage só os seus caminhos e o seu hunk da fila, e você faz o commit de uma entrega por vez.
+* Duas sessões dividem uma pasta no trunk quando as suas linhas estão livres e os seus arquivos não se encontram: cada uma marca só a sua linha, coloca em stage só os seus caminhos e o seu hunk da fila, e você decide cada commit, uma entrega por vez.
 * A marca de outra linha, a página ou os arquivos de outra entrega e as entradas em stage de outra sessão não são conflito; as mesmas linhas editadas pelas duas, ou um arquivo de que uma página precisa e que a outra está mudando, é: pare, e então ordene as linhas ou dê a uma delas um worktree.
 * Faça o commit a partir do índice quando `git diff --cached --stat` guarda só aquela entrega; `git commit -- <caminhos>` pega cada arquivo nomeado inteiro da pasta, com o hunk da outra entrega em um arquivo compartilhado.
 * Um worktree por entrega compensa para várias pessoas, ou para entregas que mexem nos mesmos arquivos: uma pasta contêiner cujo `main/` é o checkout guarda o worktree de cada entrega em `<oculta>/worktrees/<slug>/` no `<prefixo>/<slug>`, `.focus-kit/` e `focus-kit/` por padrão; `git worktree add`, trabalhe ali, `git merge --no-ff` em `main/`, `git worktree remove`, `git branch -d`; um conflito deixa as duas versões entre marcadores, e `git diff --cached --check` pega qualquer um que sobrou antes do commit.
-* O paralelo compensa enquanto os arquivos das entregas não se encontram, ou só se encontram entre worktrees cujo merge você consegue decidir, as portas e os bancos de dados da máquina não colidem, o disco comporta as dependências de cada worktree, e uma pessoa ainda consegue revisar cada entrega; o `/propose` pode rodar em lote nas respostas recomendadas, cada página listando o que decidiu sozinha para você ler antes de qualquer `/apply`, e todo commit continua seu.
+* O paralelo compensa enquanto os arquivos das entregas não se encontram, ou só se encontram entre worktrees cujo merge você consegue decidir, as portas e os bancos de dados da máquina não colidem, o disco comporta as dependências de cada worktree, e uma pessoa ainda consegue revisar cada entrega; o `/propose` pode rodar em lote nas respostas recomendadas, cada página listando o que decidiu sozinha para você ler antes de qualquer `/apply`, e todo commit continua sendo decisão sua, feito por você ou pedido ao agente depois da sua revisão.
 
 [^git-commit]: Git, "git-commit", a documentação, opção `--only`, acesso em 2026-10-13. <https://git-scm.com/docs/git-commit>
 [^git-clone]: Git, "git-clone", a documentação, opção `--bare`, acesso em 2026-10-16. <https://git-scm.com/docs/git-clone>

@@ -52,7 +52,7 @@ Each line is one delivery, and its subject says what the delivery does, in the i
 
 A delivery's page and its build are one change.
 The code, the tests, the documents the delivery updated and its page in `work/done/` go into the same commit, so the history holds the decision and the change it made side by side, and taking the delivery back takes all of it at once.
-The agent stages that change and suggests the message; you read it and commit it, and that commit is your review.
+The agent stages that change and suggests the message; you read it and commit it, or ask the agent to, and that reading before the commit is your review.
 
 A remote is another copy of the repository that yours knows by name, usually on a server such as GitHub, named `origin` by convention: `git clone <url>` copies it to your machine with its whole history, `git push` sends your branch's new commits to it, and `git pull` brings its new commits into your branch.
 A team shares its work this way, and chapter 20's pull request, which asks for a pushed branch to be reviewed and merged, builds on it.
@@ -162,7 +162,7 @@ In the kit, git-flow is a branch per delivery whose branch starts from `develop`
 
 A project writes its choice once, in the Git slot of its docs/05, and every command reads it.
 
-* **Trunk** fits one person, alone or with several sessions open on free lines (queue lines not done, not waiting and needing no other line done first, defined yet or not; [chapter 14](14-queue-states.md)) that touch different files: one commit per delivery on `main`, each session staging only its delivery, and the person committing one delivery at a time.
+* **Trunk** fits one person, alone or with several sessions open on free lines (queue lines not done, not waiting and needing no other line done first, defined yet or not; [chapter 14](14-queue-states.md)) that touch different files: one commit per delivery on `main`, each session staging only its delivery, and the person deciding each commit, one delivery at a time.
   It does not fit two people: their deliveries share one branch, and one commit carries the other's half-done work.
 * **A branch per delivery** fits sequential work reviewed by pull request (chapter 20): each delivery merged by merge commit or squash.
 * **A worktree per delivery** fits several people working at once, or one person whose deliveries touch the same files ([chapter 19](19-worktrees.md)): each delivery on its own branch in its own folder, merged the same way.
@@ -181,7 +181,7 @@ Every delivery lands as one commit on trunk or one merge otherwise, with its pag
 * Version control keeps every version of a project's files with who changed what and when; git, written in 2005 by Linus Torvalds and the Linux kernel's community, is distributed, so every copy holds the whole history.
 * A commit is a snapshot with its author, message and parents, named by a hash; a branch is a name that moves with each commit on it; a tag never moves; a remote is another copy you clone, push to and pull from.
 * A fast-forward and a rebase leave a line of the branch's commits; a merge commit adds a commit with two parents; a squash merge leaves one new commit; never rebase commits someone else has.
-* Trunk fits one person, alone or with several sessions on free lines that touch different files; a branch per delivery fits sequential work reviewed by pull request; a worktree per delivery fits several people, or deliveries that touch the same files; git-flow fits software that ships versions; the agent stages, the person commits and merges.
+* Trunk fits one person, alone or with several sessions on free lines that touch different files; a branch per delivery fits sequential work reviewed by pull request; a worktree per delivery fits several people, or deliveries that touch the same files; git-flow fits software that ships versions; the agent stages, the person decides each commit and merge, and the agent takes one of those steps only when the person names it.
 
 [^pro-git-about]: Scott Chacon and Ben Straub, "About Version Control", *Pro Git*, 2nd ed., accessed 2026-09-30. <https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control>
 [^pro-git-history]: Scott Chacon and Ben Straub, "A Short History of Git", *Pro Git*, 2nd ed., accessed 2026-09-30. <https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git>

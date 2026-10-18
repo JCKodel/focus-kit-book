@@ -32,7 +32,7 @@ It argues for the method with real cases and measured results, and it doubles as
 |---|---|
 | Prologue | Product, people and process |
 | I. The base | 1 How an agent sees your project · 2 Spec-Driven Development · 3 Simplicity and results: KISS, YAGNI, DRY and exceptions as values · 4 FOCUS: features, not layers, and the four pieces · 5 A test for each piece |
-| II. The method | 6 How focus-kit was born · 7 The documents: one place per fact · 8 Install, and the hosts · 9 Starting: `/brainstorm` and `/analyze` · 10 From zero to the first delivery · 11 The queue and milestones · 12 `/propose`: one page · 13 `/apply`: build, verify, prove, never commit · 14 The queue while it happens · 15 Closing a milestone · 16 The governor · 17 The project as the team's assistant |
+| II. The method | 6 How focus-kit was born · 7 The documents: one place per fact · 8 Install, and the hosts · 9 Starting: `/brainstorm` and `/analyze` · 10 From zero to the first delivery · 11 The queue and milestones · 12 `/propose`: one page · 13 `/apply`: build, verify, prove, never commit on its own · 14 The queue while it happens · 15 Closing a milestone · 16 The governor · 17 The project as the team's assistant |
 | III. Git and the team's tools | 18 Git essentials · 19 Worktrees and parallel agents · 20 The team's tools: pull requests, issues and boards |
 | IV. Beyond code | 21 Projects that are not software · 22 What agents cost, and where they pay · 23 Adoption in teams and companies |
 | V. The person decides | 24 Asking for more |

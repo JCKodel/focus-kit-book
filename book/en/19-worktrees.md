@@ -2,7 +2,7 @@
 
 After this chapter you can run two agents at once in one folder, on trunk, on free lines whose files do not meet, tell what is and is not a conflict there, and commit each delivery alone.
 You can also say when it still pays to give each delivery a worktree, a second working folder of the same repository on its own branch, lay it out as the kit shapes it, a container folder with `main/` and a hidden folder, build in worktrees, resolve the conflict when two branches touched the same lines, catch a conflict marker before it is committed, and say when working in parallel stops paying.
-And you can run several `/propose` at once on the agent's recommended answers, read on each page what it decided without you before any `/apply`, and say why every commit stays yours.
+And you can run several `/propose` at once on the agent's recommended answers, read on each page what it decided without you before any `/apply`, and say why every commit stays your decision.
 
 ## The problem: one folder, two jobs
 
@@ -34,7 +34,7 @@ Each session keeps to its delivery:
 * it stages only its own paths, and only its own hunk of docs/06 (`git add -p` stages a file hunk by hunk);
 * it leaves alone whatever the other session changed or staged.
 
-The commit stays yours, one delivery at a time.
+The commit stays your decision, one delivery at a time.
 Before committing `return-book`, look at what is staged:
 
 ```
@@ -177,6 +177,7 @@ You review and commit on the branch, merge into `main` with `--no-ff`, remove th
 The agent never commits, merges, pushes, resolves a conflict or removes a worktree on its own: every step that changes the history is yours to decide, as in every git strategy.
 Ask, and it takes any of them for you: it writes the commit message, resolves the conflict, commits, merges, pushes or removes the worktree, and knows the commands that undo a step, such as `git merge --abort` for a merge stopped by a conflict or `git revert` for a delivery to take back.
 Each step comes after your reading: ask for the commit once the staged diff holds only the delivery, for the merge commit once the resolved file has no conflict marker left, and for the push once `git log` shows what will leave.
+After a merge it made, `git log --oneline --graph -3` in `main/` shows the merge commit and the branch it brought in.
 To run two deliveries at once in worktrees, open one session per folder: one in `main/` for each `/propose`, one in each worktree for its `/apply`.
 
 The kit gives every tool and every person this one shape because of an error: a `/propose` running in a worktree another tool made, in a folder of its own, writes the page where the next `/apply` does not look.
@@ -277,9 +278,11 @@ So the session writes a patch, the text `git diff` prints for a change, holding 
 It gives that patch to `git apply --cached`, which applies it to the index alone and leaves the files in the folder as they are.[^git-apply]
 Before each commit, `git diff --cached docs/06-Queue.md` shows one `-` line and one `+` line, side by side, for that line alone, and no other change.
 
-The applies that follow add no rule: they run at once only on free lines whose files do not meet, and each commit is yours, one delivery at a time.
+The applies that follow add no rule: they run at once only on free lines whose files do not meet, and each commit is your decision, one delivery at a time.
 
-Letting the agents commit a batch of applies leaves the method, and it costs four things.
+Asking for a step is not handing over the batch.
+Once you have used and reviewed one delivery, and `git diff --cached --stat` shows an index holding only it, you may ask its session to commit it; the next delivery waits for its own use, its own review and its own index.
+Letting the agents commit a batch of applies on their own, before you have read them, leaves the method, and it costs four things.
 A commit stops saying that a person read the change, which is what it says in [chapter 13](13-apply.md).
 In one folder, an agent's commit takes what another session staged, or, with paths, the shared docs/06 whole: the trap of naming paths, earlier in this chapter.
 Reading many changes after they are committed is the condition of automation bias (chapters 13 and 24).
@@ -306,23 +309,23 @@ A port or a database per session is a choice the project can make, in a delivery
 Each worktree installs its own, so each costs as much disk as the main folder, and the install takes its time again.
 
 **You.** The agents work in parallel; your review does not.
-You read each page and each staged change, commit and merge, one delivery at a time, so run at once only as many deliveries as you can review; a batch of proposes moves that reading to one sitting and does not shorten it.
+You read each page and each staged change and decide each commit and merge, one delivery at a time, so run at once only as many deliveries as you can review; a batch of proposes moves that reading to one sitting and does not shorten it.
 This book, written and reviewed by one person in shared files, stays on trunk for those reasons, and its docs/05 lets two sessions work in one folder on free lines that touch different files.
 
 ## What the team gains
 
 Two agents build at once, and each delivery still lands as one change that reverts alone: one commit in one folder, one merge from a worktree.
 I measured it once, in worktrees on a small TypeScript project of mine: two deliveries built at the same time took 155 seconds from the first start to the last end, against 277.2 seconds of the agents' work added up, at the cost of a `node_modules` folder in each worktree, two test runs that collided once on a shared port, and the queue's conflict at the merge.[^parallel-run]
-The measurement is of two deliveries whose code files did not meet; the gain ends at the speed of the person who reviews, commits and merges them.
+The measurement is of two deliveries whose code files did not meet; the gain ends at the speed of the person who reviews them and decides their commits and merges.
 Proposes in a batch carry the parallel into definition: the agents write the pages while you are away, and each page brings the decisions it took alone, listed for your one reading.
 
 ## Key points
 
-* Two sessions share one folder on trunk when their lines are free and their files do not meet: each marks only its line, stages only its paths and its hunk of the queue, and you commit one delivery at a time.
+* Two sessions share one folder on trunk when their lines are free and their files do not meet: each marks only its line, stages only its paths and its hunk of the queue, and you decide each commit, one delivery at a time.
 * Another line's mark, another delivery's page or files and another session's staged entries are not a conflict; the same lines edited by both, or a file one page needs that the other is changing, is: stop, then order the lines or give one a worktree.
 * Commit from the index once `git diff --cached --stat` holds only that delivery; `git commit -- <paths>` takes each named file whole from the folder, the other delivery's hunk of a shared file included.
 * A worktree per delivery pays for several people, or for deliveries that touch the same files: a container folder whose `main/` is the checkout keeps each delivery's worktree in `<hidden>/worktrees/<slug>/` on `<prefix>/<slug>`, `.focus-kit/` and `focus-kit/` by default; `git worktree add`, work there, `git merge --no-ff` from `main/`, `git worktree remove`, `git branch -d`; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
-* Parallel pays while the deliveries' files do not meet, or meet only across worktrees whose merge you can decide, the machine's ports and databases do not collide, the disk holds each worktree's dependencies, and one person can still review each delivery; proposes can run in a batch on the recommended answers, each page listing what it decided alone for you to read before any `/apply`, and every commit stays yours.
+* Parallel pays while the deliveries' files do not meet, or meet only across worktrees whose merge you can decide, the machine's ports and databases do not collide, the disk holds each worktree's dependencies, and one person can still review each delivery; proposes can run in a batch on the recommended answers, each page listing what it decided alone for you to read before any `/apply`, and every commit stays your decision, made by you or asked of the agent after your review.
 
 [^git-commit]: Git, "git-commit", the documentation, option `--only`, accessed 2026-10-13. <https://git-scm.com/docs/git-commit>
 [^git-clone]: Git, "git-clone", the documentation, option `--bare`, accessed 2026-10-16. <https://git-scm.com/docs/git-clone>

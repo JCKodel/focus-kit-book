@@ -1,7 +1,7 @@
-# 13. `/apply`: construir, verificar, provar, nunca fazer commit
+# 13. `/apply`: construir, verificar, provar, nunca fazer commit por conta própria
 
 Depois deste capítulo você consegue levar uma página revisada até uma mudança em stage (marcada para o próximo commit, o registro salvo no histórico do projeto) com o `/apply`, e dizer o que "pronto" significa: a verificação verde, uma prova, uma revisão por um contexto que não escreveu a mudança, os documentos atualizados, a página movida e a sua linha marcada.
-Então você consegue usar o que o `/apply` construiu, revisar a mudança em stage contra a página e fazer o commit você mesmo, que é a revisão humana do processo.
+Então você consegue usar o que o `/apply` construiu e revisar a mudança em stage contra a página, que é a revisão humana do processo, e então fazer o commit, você mesmo ou pedindo ao agente.
 E consegue dizer como o `/apply` termina: só a sua entrega em stage, a mensagem sugerida em um bloco `commit` na página e na conversa, os seus próximos passos escritos por extenso e, por último, qual ambiente está em qual versão.
 
 ## O problema
@@ -10,7 +10,7 @@ Um agente a quem se diz "construa isto" para quando o código compila, ou quando
 O que ele construiu em volta do pedido, o que escolheu por conta própria e quais documentos não dizem mais a verdade ficam para alguém achar depois, e esse alguém costuma ser um usuário.
 Quando se pede a ele que confira o próprio trabalho, ele relê o trabalho com o raciocínio que o escreveu, então o que deixou passar ao escrever deixa passar de novo.
 Um estudo de 2024 sobre modelos de linguagem grandes em tarefas de raciocínio, de Jie Huang e colegas, concluiu que eles "*têm dificuldade de corrigir as próprias respostas sem feedback externo e, às vezes, o desempenho deles chega a piorar depois da autocorreção*".[^huang-2024]
-E um agente que faz commit do próprio trabalho põe esse trabalho no histórico do projeto antes que qualquer pessoa o tenha lido.
+E um agente que faz commit por conta própria põe o trabalho dele no histórico do projeto antes que qualquer pessoa o tenha lido.
 
 ## O que o `/apply` faz
 
@@ -157,9 +157,10 @@ No Ninjobs, uma pessoa que abriu o site publicado achando que ele estava atual, 
 
 ## Por que ele para no stage
 
-O `/apply` nunca faz commit e nunca faz merge, qualquer que seja a estratégia de git.
-Ele coloca em stage só a sua entrega e entrega a mensagem a você; o commit é seu, e vem depois da sua revisão.
-O documento de processo do kit dá o fluxo em uma linha: o `/apply` "*constrói, prova, atualiza os documentos, coloca em stage e sugere o commit, nunca faz commit*".
+O `/apply` nunca faz commit e nunca faz merge por conta própria, qualquer que seja a estratégia de git.
+Ele coloca em stage só a sua entrega e entrega a mensagem a você; a decisão do commit é sua, e vem depois da sua revisão.
+O documento de processo do kit dá o fluxo em uma linha: o `/apply` "*constrói, prova, atualiza os documentos, coloca em stage e sugere o commit, nunca faz commit por conta própria*".
+O ponto está no *por conta própria*: depois que você usou e revisou a entrega, pode pedir ao agente que faça o commit dela, e ele dá esse passo e nenhum outro (a seção sobre o commit mostra como).
 
 ## Revise a mudança em stage
 
@@ -200,12 +201,12 @@ E a verificação e a prova rodaram antes de você olhar, então a sua atenção
 
 ## O commit é a revisão humana
 
-O agente coloca em stage e sugere a mensagem; a pessoa lê o diff e faz o commit.
+O agente coloca em stage e sugere a mensagem; a pessoa lê o diff e decide o commit.
 Três motivos sustentam essa linha.
 
-* **Nada chega ao histórico sem ser lido por uma pessoa.** Um commit diz que uma pessoa leu a mudança e a aceita; um agente que faz commit do próprio trabalho pula o único leitor que consegue dizer que a construção é o que se queria.
+* **Nada chega ao histórico sem ser lido por uma pessoa.** Um commit diz que uma pessoa leu a mudança e a aceita; um agente que faz commit por conta própria pula o único leitor que consegue dizer que a construção é o que se queria.
 * **Um commit se desfaz em um passo.** A página e a sua construção são um commit no trunk (direto na linha principal do histórico), um merge em um branch (uma linha de trabalho à parte, juntada depois à principal), então uma entrega que se mostra errada sai do projeto com um comando (capítulo 18).
-* **A pessoa é dona do que é publicado.** O agente escreveu o código, e a pessoa responde por ele ao time, ao cliente e ao usuário; o commit é onde essa resposta é dada.
+* **A pessoa é dona do que é publicado.** O agente escreveu o código, e a pessoa responde por ele ao time, ao cliente e ao usuário; o commit, quem quer que digite o comando, é onde essa resposta é dada.
 
 Leia o diff em stage, depois faça o commit:
 
@@ -216,6 +217,11 @@ git commit
 
 Sem `-m`, o git abre o seu editor para a mensagem; copie-a do bloco `commit` no fim da página, cole, salve e feche, e o commit existe quando o editor fecha.
 A página guarda a mensagem e a conversa só a repete, então você pode fazer o commit na manhã seguinte, em outra janela, e ainda achá-la.
+
+Ou, depois de ler o diff em stage, peça ao agente: "faça o commit desta entrega com a mensagem da página dela".
+Ele faz o commit e para aí: um pedido de commit não é um pedido de merge nem de push, e em um branch da entrega o merge é um passo que você nomeia de novo, depois de ler o branch (capítulo 19).
+O agente pode ter a permissão do seu host para rodar `git commit`; essa permissão permite que ele digite o comando, e só o seu pedido, depois da sua leitura, diz que a mudança deve entrar no histórico.
+Depois confira o que ele fez com `git show --stat HEAD`, que mostra a mensagem do último commit e os arquivos que ele guarda: a mensagem da página, e os caminhos desta entrega e nada mais.
 
 Quando outra sessão trabalha na mesma pasta, faça o commit de uma entrega por vez, a partir do índice, quando o `git diff --staged` tiver só aquela entrega (capítulo 19).
 
@@ -254,6 +260,6 @@ Então a página registrou o ajuste, nenhum caminho de escrita alcançável pelo
 * Ele marca a linha como `[*]` com a sua primeira edição, `[x]` com a última, depois do stage, e `[?]`, com o que ela espera, quando precisa parar.
 * Verde não é pronto: pronto é a lista inteira, dos documentos atualizados antes de uma revisão por um contexto que não escreveu a mudança, que lê a entrega inteira, à verificação verde depois da última edição e à linha marcada `[x]`.
 * Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, cada comando escrito por extenso, e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
-* Use o que foi construído como o usuário usaria, revise a mudança em stage contra a página, peça cada correção na mesma sessão, dizendo o que quer no lugar e por quê, transforme o que a página não pediu na próxima linha da fila, e faça você o commit: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
+* Use o que foi construído como o usuário usaria, revise a mudança em stage contra a página, peça cada correção na mesma sessão, dizendo o que quer no lugar e por quê, transforme o que a página não pediu na próxima linha da fila, e então faça o commit, você mesmo ou pedindo ao agente: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>

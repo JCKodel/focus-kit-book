@@ -60,8 +60,8 @@ The method gives each step to whoever owns it.
 * **Who proposes:** whoever owns the decision.
   A developer proposes a technical delivery, an analyst a rule, a manager a question to the client; `/propose` is a conversation, and it needs someone who can answer ([chapter 12](12-propose.md)).
 * **Who applies:** a developer's session, or several at once, in one folder or in worktrees, each on its own delivery ([chapter 19](19-worktrees.md)).
-* **Who commits and merges:** a person, always.
-  `/apply` stages and stops; the commit is the human review ([chapter 13](13-apply.md)).
+* **Who decides each commit and merge:** a person, always.
+  `/apply` stages and stops; the person reviews, then commits or asks the agent to take that one step, and checks what it did: the review is the human one either way ([chapter 13](13-apply.md)).
 * **Who reviews the milestone:** the team, on the running product, against the milestone's paragraph; on its word, the session has the code changed since the milestone's base read by the areas docs/05 names, when it names areas, one read-only agent each, and a checker marks each candidate before the team confirms which are findings ([chapter 15](15-closing-a-milestone.md)).
 * **The manager** asks the project: what is pending, how it is going, who owes an answer ([chapter 17](17-project-as-assistant.md)).
 
@@ -109,6 +109,6 @@ On Case A the process caught four problems outside the code: a baseline that did
 
 * Without a shared process each person uses AI their own way, at a cost nobody sees, and the loudest opinion decides.
 * Answer "my way works" by asking for its evidence, "too much process" with the governor, and "we already have a tool" with the fact that the method is documents any host reads.
-* Whoever owns the decision proposes, a developer's session applies, a person always commits, and the team reviews the milestone.
+* Whoever owns the decision proposes, a developer's session applies, a person always decides each commit and merge after reviewing it, and the team reviews the milestone.
 * Start with one milestone of three to eight lines, measure tokens per delivery and what was caught, then decide.
 
