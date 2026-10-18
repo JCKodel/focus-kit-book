@@ -17,9 +17,10 @@ Um marco é planejado com a sua revisão como a última linha, `<milestone>-revi
 A página dela pega o parágrafo do marco cláusula por cláusula e escreve, para cada uma, qual entrega a atende e como uma pessoa a testa.
 Ela não corrige nada.
 A revisão também lê o código, o único olhar sobre o todo em vez de sobre uma entrega, porque cada página pode estar certa e o todo errado.
-A página dela cita o commit que fechou o marco anterior, ou o primeiro commit do projeto; esse commit é a base, e a página lista, pelas áreas que o slot Milestone review (revisão de marco) do docs/05 cita, os caminhos que o intervalo desde ele alterou.
+A página dela cita como base o commit da revisão do marco anterior, ou, para um primeiro marco, o primeiro commit do projeto, e lista, pelas áreas que o slot Milestone review (revisão de marco) do docs/05 cita, os caminhos que o intervalo desde ele alterou.
+O commit da revisão anterior fica antes de todo commit do marco seguinte, cujas entregas podem entrar antes de os achados do anterior fecharem, então o intervalo a partir dele guarda todos eles, incluídas as correções desses achados.
 A leitura custa, então a sessão diz quando chegou a hora e só a começa com a palavra da pessoa: cada área ganha um leitor próprio, que a lê com o repositório inteiro aberto.
-O primeiro commit faz a revisão ler o projeto inteiro: é a base de um primeiro marco, e de qualquer marco posterior cujas revisões anteriores deixaram parte do projeto sem ler.
+O primeiro commit, a base de um primeiro marco, faz a revisão ler o projeto inteiro.
 O código de cada entrega continua sendo lido onde a sua mudança é pequena o bastante para ser lida: pela revisão da entrega antes de o `/apply` terminar e na mudança em stage antes do seu commit (capítulo 13), e no pull request, quando o time integra as suas entregas por um (capítulo 20); os leitores do marco procuram o que esses não conseguiram ver.
 
 ## Teste cada cláusula à mão
@@ -71,9 +72,9 @@ Cada leitor tem o repositório inteiro aberto e lê as mudanças da sua área pr
 Ele aponta candidatos, cada um por arquivo e linha, e os caminhos que leu; um candidato é o que um revisor aponta antes que alguém aja sobre ele.
 
 A página da revisão compara os caminhos lidos com os do intervalo.
-Quando faltam alguns, a página diz quais, e a linha da revisão espera como `[?]` com `· resume: apply` (capítulo 14) até que eles sejam lidos, porque um leitor que leu parte da sua área aponta do mesmo jeito que um que a leu inteira.
+Quando faltam alguns, a página diz quais, e a linha da revisão espera como `[?]` com `· resume: apply` e `· blocked: <o que foi lido>` (capítulo 14) até que eles sejam lidos, porque um leitor que leu parte da sua área aponta do mesmo jeito que um que a leu inteira.
 
-Um conferente, um agente ou a própria sessão da revisão, abre o arquivo de cada candidato e o marca antes que a pessoa o veja: visto, latente quando nada o dispara hoje, ou fraco quando a afirmação não se sustenta como foi dita.
+Um conferente, um agente ou a própria sessão da revisão, abre o arquivo de cada candidato e o marca antes que a pessoa o veja: visto quando é verdadeiro no arquivo hoje, latente quando nada o dispara hoje, ou fraco quando a afirmação não se sustenta como foi dita.
 O candidato de um leitor é uma afirmação sobre um arquivo, e algumas não se sustentam quando o arquivo é aberto; o conferente gasta essa abertura para que a pessoa não precise gastá-la.
 Três candidatos da biblioteca de empréstimos, escritos para este capítulo, um por marca, como o conferente os entrega à pessoa:
 
@@ -125,6 +126,7 @@ E ela fica no marco cujo parágrafo ela reprova, então esse marco só fecha qua
 
 As linhas de achado não têm revisão própria.
 Cada uma passa pela sua própria página, pela sua prova e pelo commit da pessoa, que é a revisão.
+O código delas ainda é lido com o todo: a revisão do marco seguinte cita o commit desta revisão como base, então na biblioteca de empréstimos o intervalo de `m2-review` começa no commit de `m1-review` e guarda a correção de `emprestimo-devolvido`.
 Eu mantenho assim porque uma revisão das correções acha achados próprios, e uma revisão desses acha mais, e um marco que continua abrindo rodadas de correções nunca fecha.
 
 ## Quando os achados viraram uma entrega
@@ -150,7 +152,7 @@ E como cada achado vira uma linha, o time vê o custo das brechas do marco na fi
 ## Pontos-chave
 
 * Uma revisão de marco olha para o que as entregas somam, o que nenhuma revisão de uma página ou de uma mudança em stage consegue ver.
-* Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, rodada com o `/propose` e o `/apply`: a página dela cita o commit que fechou o marco anterior, ou o primeiro commit do projeto, escreve para cada cláusula do parágrafo a entrega que a atende e como uma pessoa a testa, e não corrige nada.
+* Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, rodada com o `/propose` e o `/apply`: a página dela cita como base o commit da revisão do marco anterior, ou o primeiro commit do projeto para um primeiro marco, escreve para cada cláusula do parágrafo a entrega que a atende e como uma pessoa a testa, e não corrige nada.
 * A pessoa testa cada cláusula à mão e, com a palavra da pessoa, a sessão lê o intervalo desde a base pelas áreas do slot, um agente somente leitura em cada uma listando os caminhos que leu, e um conferente marca cada candidato; uma cláusula que nenhuma entrega atende, uma que falha nas mãos da pessoa, ou um candidato que a pessoa confirma é um achado.
 * Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, nunca uma correção no meio do marco seguinte; o marco fecha quando essas linhas estão `[x]`.
 * As linhas de achado não têm revisão própria: cada uma passa pela sua própria página, pela sua prova e pelo commit da pessoa.

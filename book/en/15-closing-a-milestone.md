@@ -17,9 +17,10 @@ A milestone is planned with its review as its last line, `<milestone>-review`, a
 Its page takes the milestone's paragraph clause by clause and writes, for each, which delivery answers it and how a person tests it.
 It fixes nothing.
 The review also reads the code, the one look at the whole instead of a delivery, because every page can be right and the whole wrong.
-Its page names the commit that closed the previous milestone, or the project's first commit; that commit is the base, and the page lists, by the areas docs/05's Milestone review slot names, the paths the range since it changed.
+Its page names as the base the commit of the previous milestone's review, or, for a first milestone, the project's first commit, and lists, by the areas docs/05's Milestone review slot names, the paths the range since it changed.
+The previous review's commit sits before every commit of the next milestone, whose deliveries can land before the previous one's findings close, so the range from it holds all of them, the fixes of those findings included.
 The reading costs, so the session says when it is time and starts it only on the person's word: each area gets a reader of its own, which reads it with the whole repository open.
-The first commit makes the review read the whole project: it is the base of a first milestone, and of any later one whose earlier reviews left part of the project unread.
+The first commit, the base of a first milestone, makes the review read the whole project.
 Each delivery's code is still read where its change is small enough to read: by the delivery review before `/apply` ends and in the staged change before its commit (chapter 13), and in the pull request, when the team lands its deliveries through one (chapter 20); the milestone's readers look for what those could not see.
 
 ## Test each clause by hand
@@ -70,9 +71,9 @@ Each reader has the whole repository open and reads its area's changes for what 
 It reports candidates, each by file and line, and the paths it read; a candidate is what a reviewer reports before anyone acts on it.
 
 The review's page compares the paths read with the range's.
-When they miss some, the page says which, and the review line waits as `[?]` with `· resume: apply` (chapter 14) until they are read, because a reader that read part of its area reports the same way as one that read it all.
+When they miss some, the page says which, and the review line waits as `[?]` with `· resume: apply` and `· blocked: <what was read>` (chapter 14) until they are read, because a reader that read part of its area reports the same way as one that read it all.
 
-One checker, an agent or the review's session itself, opens each candidate's file and marks it before the person sees it: seen, latent when nothing triggers it today, or weak when the claim does not hold as stated.
+One checker, an agent or the review's session itself, opens each candidate's file and marks it before the person sees it: seen when it is true in the file today, latent when nothing triggers it today, or weak when the claim does not hold as stated.
 A reader's candidate is a claim about a file, and some do not hold once the file is opened; the checker spends that opening so the person does not.
 Three candidates on the lending library, written for this chapter, one per mark, as the checker hands them to the person:
 
@@ -122,6 +123,7 @@ And it stays in the milestone whose paragraph it fails, so that milestone closes
 
 The finding lines get no review of their own.
 Each one passes through its own page, its proof and the person's commit, which is the review.
+Their code is still read with the whole: the next milestone's review names this review's commit as its base, so on the lending library `m2-review`'s range starts at `m1-review`'s commit and holds `returned-loan`'s fix.
 I keep it that way because a review of the fixes finds findings of its own, and a review of those finds more, and a milestone that keeps opening rounds of fixes never closes.
 
 ## When the findings became one delivery
@@ -147,7 +149,7 @@ And because each finding becomes a line, the team sees the cost of the milestone
 ## Key points
 
 * A milestone review looks at what the deliveries add up to, which no review of a single page or staged change can see.
-* A milestone is planned with its review as its last line, `<milestone>-review`, run with `/propose` and `/apply`: its page names the commit that closed the previous milestone, or the project's first commit, writes for each clause of the paragraph the delivery that answers it and how a person tests it, and fixes nothing.
+* A milestone is planned with its review as its last line, `<milestone>-review`, run with `/propose` and `/apply`: its page names as the base the commit of the previous milestone's review, or the project's first commit for a first milestone, writes for each clause of the paragraph the delivery that answers it and how a person tests it, and fixes nothing.
 * The person tests each clause by hand, and on the person's word the session reads the range since the base by the slot's areas, one read-only agent each listing the paths it read, and a checker marks each candidate; a clause no delivery answers, one that fails in the person's hands, or a candidate the person confirms is a finding.
 * Each finding becomes a `[ ]` line in the same milestone, under the review line, never a fix in the middle of the next milestone; the milestone closes when those lines are `[x]`.
 * The finding lines get no review of their own: each passes through its own page, its proof and the person's commit.
