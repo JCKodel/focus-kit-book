@@ -23,7 +23,8 @@ A focus-kit project already writes most of what a team asks about, because the a
 Read together, they answer the status questions without anyone writing a status.
 Pending is every line not yet `[x]`, in the order of the queue.
 In progress is the `[~]` and `[*]` lines, and blocked is the `[?]` lines, each with its reason.
-How long a delivery took is the distance between the first commit that touched its page and the commit that moved it to `work/done/`.
+How long a delivery took runs from the commit that added its line to the queue to the commit that closed it: from asked to done, the waits included.
+The closing commit cannot say it alone, because on trunk a delivery is one commit, which dates its end and not its start; a line added in that same commit has no earlier date, and the history cannot tell how long it took.
 None of this was written for the manager; a document that answers the build also answers the team.
 
 ## The context folder
@@ -66,7 +67,7 @@ These are the questions a team asks every week, and the file that answers each:
 * **Who owes me an answer?** The table of questions sent and not answered, in the work record.
 * **What must I ask, and whom?** The open decisions in docs/00, and the pages that wait on someone.
 * **What did we agree with the client?** docs/00 and the ADRs for what became a rule; the context folder for the message it came from.
-* **How long did the last five deliveries take?** The commit dates of their five slugs.
+* **How long did the last five deliveries take?** For each, the date its line entered the queue and the date of the commit that closed it.
 
 The work record is a file with two tables, in the context folder, or in the repository when it names nobody private, kept up to date by the agent whenever a message goes out or an answer comes in.
 For the lending library, written for this chapter:

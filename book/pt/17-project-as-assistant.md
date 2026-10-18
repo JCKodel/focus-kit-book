@@ -23,7 +23,8 @@ Um projeto com focus-kit já escreve quase tudo o que um time pergunta, porque o
 Lidos juntos, eles respondem às perguntas de andamento sem ninguém escrever um relatório.
 Pendente é toda linha ainda não `[x]`, na ordem da fila.
 Em andamento são as linhas `[~]` e `[*]`, e travado são as linhas `[?]`, cada uma com o seu motivo.
-Quanto tempo uma entrega levou é a distância entre o primeiro commit que tocou a página dela e o commit que a moveu para `work/done/`.
+Quanto tempo uma entrega levou vai do commit que acrescentou a linha dela à fila até o commit que a fechou: do pedido ao fim, com as esperas incluídas.
+O commit que a fecha não diz isso sozinho, porque no trunk uma entrega é um commit só, que data o fim dela e não o começo; uma linha acrescentada nesse mesmo commit não tem data anterior, e o histórico não sabe dizer quanto tempo ela levou.
 Nada disso foi escrito para o gerente; um documento que responde à construção também responde ao time.
 
 ## A pasta de contexto
@@ -66,7 +67,7 @@ Estas são as perguntas que um time faz toda semana, e o arquivo que responde a 
 * **Quem me deve uma resposta?** A tabela de perguntas enviadas e não respondidas, no registro de trabalho.
 * **O que preciso perguntar, e a quem?** As decisões em aberto no docs/00, e as páginas que esperam por alguém.
 * **O que combinamos com o cliente?** O docs/00 e os ADRs para o que virou regra; a pasta de contexto para a mensagem de onde veio.
-* **Quanto tempo levaram as últimas cinco entregas?** As datas dos commits dos seus cinco slugs.
+* **Quanto tempo levaram as últimas cinco entregas?** Para cada uma, a data em que a linha dela entrou na fila e a data do commit que a fechou.
 
 O registro de trabalho é um arquivo com duas tabelas, na pasta de contexto, ou no repositório quando não nomeia ninguém privado, mantido em dia pelo agente sempre que uma mensagem sai ou uma resposta chega.
 Para a biblioteca de empréstimos, escrito para este capítulo:
