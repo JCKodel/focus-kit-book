@@ -1,7 +1,7 @@
 # 11. A fila e os marcos
 
 Depois deste capítulo você consegue ler uma fila e escrever um parágrafo de marco que uma pessoa consegue conferir.
-Você também consegue escrever uma linha como uma frase com os seus sufixos, ordenar um marco de modo que a ordem seja a prioridade, escrever em uma linha qual linha precisa estar feita antes dela, `· after <slug>`, acrescentar, mover ou mudar uma linha conversando, e transformar uma mudança de código pedida fora do `/apply` em uma linha e no rascunho da página dela.
+Você também consegue escrever uma linha como uma frase com os seus sufixos, ordenar um marco de modo que a ordem seja a prioridade, escrever em uma linha qual linha precisa estar feita antes dela, `· after <slug>`, acrescentar uma linha no marco cujo parágrafo precisa dela ou sob o seguinte, mover ou mudar uma linha conversando, e transformar uma mudança de código pedida fora do `/apply` em uma linha e no rascunho da página dela.
 E consegue dizer quanto custa a menor entrega, da linha dela até o commit.
 
 ## O problema
@@ -78,7 +78,10 @@ Linhas são acrescentadas enquanto um marco anda: uma correção que uma entrega
 Assim um marco fecha maior do que começou, e a fila muda com o trabalho.
 A fila deste próprio livro mostra isso: o marco M15 fechou com 42 linhas; a revisão dele foi a 14ª, com 28 sob ela.[^m15-queue]
 Um agente a quem você pergunta sobre um problema tende a responder com linhas, cada uma razoável, então, sem uma pessoa julgando, um marco cresce sem fim.
-Você decide o que entra e onde: uma linha que não serve a nenhuma frase do parágrafo deste marco vai para um marco posterior, um de melhorias se você quiser um.
+O parágrafo decide onde uma linha vai, seja quem for que a acrescente, você ou o agente: uma linha de que uma cláusula do parágrafo do marco atual precisa vai nesse marco, e qualquer outra vai sob o marco seguinte, que o agente cria quando não há nenhum, com um parágrafo que a linha atende e a sua revisão por último.
+Na biblioteca, depois de `devolver-livro` construída, você testa o produto e descobre que um exemplar cujo empréstimo está atrasado não consegue ser recebido de volta; a correção, uma linha escrita para este capítulo, `corrigir-devolucao-atrasada`, fica no marco 1, acima de `m1-review`, porque o parágrafo promete registrar a devolução.
+Um achado da revisão do próprio marco também fica no seu marco, sob a revisão, mesmo quando o marco seguinte já está na fila (abaixo).
+O que você decide é o parágrafo: uma linha só entra no marco atual por uma cláusula, então para trazer uma você amplia o parágrafo conversando antes, e a linha passa a atender a cláusula nova.
 
 A ordem é a prioridade.
 Perguntado qual entrega importa mais, você responde pela fila: a que está mais acima nela; a próxima entrega é a primeira livre para começar ([capítulo 14](14-queue-states.md)).
@@ -92,20 +95,32 @@ Isso é uma ordem, não uma espera: a linha mantém a sua marca, `[ ]`, e fica l
 
 Um marco é planejado com a sua revisão como a última linha, `<milestone>-review` (em inglês, como o kit a escreve: `m1-review` para o primeiro marco), uma entrega como as outras, que pega o parágrafo cláusula por cláusula ([capítulo 15](15-closing-a-milestone.md)).
 Ela não corrige nada: uma pessoa testa cada cláusula à mão e, com a palavra da pessoa, a sessão faz ler o código alterado desde a base do marco pelas áreas que o docs/05 do projeto cita, quando cita áreas, um agente somente leitura em cada uma, e um conferente marca cada candidato antes que a pessoa o veja.
-Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, e essas linhas não têm segunda revisão.
+Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, mesmo quando o marco seguinte já tem linhas, e essas linhas não têm segunda revisão.
 
 ## Mudando a fila
 
 Nenhum comando é dono da fila.
-Uma ideia nova vira uma linha conversando, em qualquer sessão: você conta ao agente, e ele escreve a linha no marco a que ela pertence, com um slug novo e `[ ]`.
+Uma ideia nova vira uma linha conversando, em qualquer sessão: você conta ao agente, e ele escreve a linha, com um slug novo e `[ ]`, no marco cujo parágrafo precisa dela, ou sob o seguinte.
 
 O código tem um dono, o `/apply`, o comando que constrói uma entrega (capítulo 13).
 Uma mudança nele pedida em qualquer outra sessão, por menor que seja, vira uma linha `[ ]`: o agente escreve a linha, escreve num rascunho da página o que você disse e a linha não comporta, diz isso, e a resposta para ali, sem nenhum arquivo do app alterado.
-Pedido numa sessão comum para mostrar a data de devolução na tela do empréstimo como dia/mês/ano, e informado de como ela deve aparecer numa tela estreita e de que o catálogo mantém a forma ISO, ano-mês-dia, o agente acrescenta esta linha ao marco acima, logo acima de `m1-review`, uma linha escrita para este capítulo:
+Pedido numa sessão comum para mostrar a data de devolução na tela do empréstimo como dia/mês/ano, e informado de como ela deve aparecer numa tela estreita e de que o catálogo mantém a forma ISO, ano-mês-dia, o agente escreve uma linha, `formato-devolucao`, e procura onde ela vai.
+Nenhuma cláusula do parágrafo do marco 1 precisa dela: o parágrafo promete um empréstimo de 21 dias e uma devolução registrada, não como uma data se lê.
+Então a linha não vai acima de `m1-review`, como se chegar agora a tornasse parte do marco; ela vai sob o marco seguinte, e sem nenhum na fila o agente cria um, com um parágrafo que a linha atende e a sua revisão por último, escrito para este capítulo:
+
+````markdown
+## Marco 2: datas de empréstimo lidas de relance
+
+Quando ele fecha, um membro lê a data de devolução na tela do empréstimo
+como dia/mês/ano, numa tela estreita também.
 
 ```
 [ ] formato-devolucao   a tela mostra a data de devolução em dia/mês/ano
+[ ] m2-review           o marco conferido contra o parágrafo dele
 ```
+````
+
+O marco 1 mantém as suas linhas, a ordem delas e o `· after emprestar-livro` de `devolver-livro`; o marco 2 vem depois dele, então a sua linha vem depois de todas elas em prioridade, e o parágrafo que o agente escreveu é seu para ler e corrigir, como toda mudança na fila.
 
 A regra da tela estreita e a exceção do catálogo não cabem na frase única da linha, então vão para um rascunho `work/formato-devolucao.md`, e a resposta para ali, nomeando `/propose formato-devolucao` para uma sessão nova, escrito como o seu host chama os comandos; um pedido que a linha comporta inteiro não ganha rascunho.
 O rascunho é onde o detalhe espera: o `/propose formato-devolucao`, numa sessão nova, parte dele e escreve a página (o capítulo 12 mostra o `/propose`), então nada do que você disse na primeira sessão é dito duas vezes.
@@ -166,6 +181,7 @@ Os documentos continuam mudando conversando, em qualquer sessão; a regra cobre 
 
 O parágrafo de um marco ou a descrição de uma linha também muda conversando, e o slug fica, já que uma página ou um commit pode já usá-lo.
 Mover uma linha para cima ou para baixo é mudar a prioridade dela, e acontece do mesmo jeito: você pede ao agente para movê-la.
+Uma mudança de lugar mantém o `· after` da linha, e uma linha levada para o marco atual precisa de uma cláusula do parágrafo dele, ou de um parágrafo que você ampliou antes, então mover nunca muda o que um marco promete sem uma palavra.
 Linhas também vêm da revisão de um marco e, em um projeto existente, das issues ou do roadmap dele.
 Você lê a mudança antes do commit, como com todo documento, e ninguém edita a fila à mão.
 
@@ -179,7 +195,7 @@ No Caso A, um projeto para um cliente em uma plataforma low-code, o Microsoft Po
 
 * O docs/06 guarda marcos, cada um com um parágrafo, e uma linha por entrega sob ele: uma marca, um slug, uma frase e os seus sufixos; o que aconteceu vai para a página.
 * A marca de uma linha diz onde a entrega dela está, de `[ ]`, não definida, a `[x]`, feita; uma linha nunca sai, então a fila é também o histórico.
-* O parágrafo de um marco é um teste que uma pessoa confere no produto, nunca um tema, sobre as entregas que o tornam verdade, de três a oito no primeiro marco: o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados viram linhas sob ela no mesmo marco; linhas são acrescentadas enquanto ele anda, e a pessoa decide quais entram agora e quais esperam um marco posterior.
+* O parágrafo de um marco é um teste que uma pessoa confere no produto, nunca um tema, sobre as entregas que o tornam verdade, de três a oito no primeiro marco: o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados viram linhas sob ela no mesmo marco; linhas são acrescentadas enquanto ele anda, e quem acrescenta uma a põe no marco que tem uma cláusula que precisa dela, ou sob o seguinte, criado quando falta com um parágrafo que a linha atende e a sua revisão por último.
 * A ordem é a prioridade: a linha mais acima importa mais, mover uma linha muda a prioridade dela, e uma dependência conhecida quando a linha é acrescentada é escrita junto, `· after <slug>`, uma ordem, não uma espera, então a linha mantém `[ ]`.
 * Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido; o código só muda dentro do `/apply`, até uma mudança de cinco linhas tem sua página, e uma mudança pedida em qualquer outro lugar vira uma linha, com um rascunho da página para o que a linha não comporta, e o `/propose` numa sessão nova.
 

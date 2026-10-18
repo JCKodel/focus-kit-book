@@ -1,6 +1,6 @@
 # 15. Closing a milestone
 
-After this chapter you can close a milestone: plan its review as the milestone's last line, test each clause of its paragraph by hand, run the slow tests the project keeps out of verify, and turn each finding into a `[ ]` line in the same milestone, under the review.
+After this chapter you can close a milestone: plan its review as the milestone's last line, test each clause of its paragraph by hand, run the slow tests the project keeps out of verify, and turn each finding into a `[ ]` line in the same milestone, under the review, even when the next milestone is already in the queue.
 You can also say what that review reads, the paragraph by hand and, on the person's word, the code changed since the milestone's base, split by areas with one read-only agent each and a checker before the person sees a candidate, and why its findings get no review of their own.
 
 ## The problem
@@ -121,6 +121,7 @@ A line, and not a fix, because a fix made in the middle of the next milestone ha
 Nobody reads its scope before it is built, nobody checks it against a page afterwards, and it lands in a milestone whose paragraph does not mention it.
 As a line it waits its turn, and gets both.
 And it stays in the milestone whose paragraph it fails, so that milestone closes only when its paragraph holds.
+It stays there when the next milestone already exists: with a milestone 2 already below it, holding its own lines and `m2-review`, `returned-loan` still goes under `m1-review`, not into milestone 2, with its own `/propose` and `/apply` and no review of its own.
 
 ## No second review
 
@@ -154,5 +155,5 @@ And because each finding becomes a line, the team sees the cost of the milestone
 * A milestone review looks at what the deliveries add up to, which no review of a single page or staged change can see.
 * A milestone is planned with its review as its last line, `<milestone>-review`, run with `/propose` and `/apply`: its page names as the base the commit of the previous milestone's review, or the project's first commit for a first milestone, writes for each clause of the paragraph the delivery that answers it and how a person tests it, and fixes nothing; the review runs the slow tests the Verify slot names.
 * The person tests each clause by hand, and on the person's word the session reads the range since the base by the slot's areas, one read-only agent each listing the paths it read, and a checker marks each candidate; a clause no delivery answers, one that fails in the person's hands, a slow test that fails, or a candidate the person confirms is a finding.
-* Each finding becomes a `[ ]` line in the same milestone, under the review line, never a fix in the middle of the next milestone; the milestone closes when those lines are `[x]`.
+* Each finding becomes a `[ ]` line in the same milestone, under the review line, even when the next milestone already exists, never a fix in the middle of the next milestone; the milestone closes when those lines are `[x]`.
 * The finding lines get no review of their own: each passes through its own page, its proof and the person's commit.

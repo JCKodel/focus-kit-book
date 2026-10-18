@@ -1,6 +1,6 @@
 # 15. Fechando um marco
 
-Depois deste capítulo você consegue fechar um marco: planejar a sua revisão como a última linha do marco, testar à mão cada cláusula do seu parágrafo, rodar os testes lentos que o projeto deixa fora da verificação, e transformar cada achado em uma linha `[ ]` no mesmo marco, sob a revisão.
+Depois deste capítulo você consegue fechar um marco: planejar a sua revisão como a última linha do marco, testar à mão cada cláusula do seu parágrafo, rodar os testes lentos que o projeto deixa fora da verificação, e transformar cada achado em uma linha `[ ]` no mesmo marco, sob a revisão, mesmo quando o marco seguinte já está na fila.
 Você também consegue dizer o que essa revisão lê, o parágrafo à mão e, com a palavra da pessoa, o código alterado desde a base do marco, dividido por áreas com um agente somente leitura em cada uma e um conferente antes que a pessoa veja um candidato, e por que os seus achados não têm revisão própria.
 
 ## O problema
@@ -124,6 +124,7 @@ Uma linha, e não uma correção, porque uma correção feita no meio do marco s
 Ninguém lê o escopo dela antes de ela ser construída, ninguém a confere contra uma página depois, e ela cai em um marco cujo parágrafo não a menciona.
 Como linha, ela espera a sua vez, e ganha as duas coisas.
 E ela fica no marco cujo parágrafo ela reprova, então esse marco só fecha quando o seu parágrafo se sustenta.
+Ela fica ali quando o marco seguinte já existe: com um marco 2 já abaixo dele, com as suas próprias linhas e `m2-review`, `emprestimo-devolvido` vai mesmo assim sob `m1-review`, não para o marco 2, com o seu próprio `/propose` e `/apply` e nenhuma revisão própria.
 
 ## Nenhuma segunda revisão
 
@@ -157,5 +158,5 @@ E como cada achado vira uma linha, o time vê o custo das brechas do marco na fi
 * Uma revisão de marco olha para o que as entregas somam, o que nenhuma revisão de uma página ou de uma mudança em stage consegue ver.
 * Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, rodada com o `/propose` e o `/apply`: a página dela cita como base o commit da revisão do marco anterior, ou o primeiro commit do projeto para um primeiro marco, escreve para cada cláusula do parágrafo a entrega que a atende e como uma pessoa a testa, e não corrige nada; a revisão roda os testes lentos que o slot Verify cita.
 * A pessoa testa cada cláusula à mão e, com a palavra da pessoa, a sessão lê o intervalo desde a base pelas áreas do slot, um agente somente leitura em cada uma listando os caminhos que leu, e um conferente marca cada candidato; uma cláusula que nenhuma entrega atende, uma que falha nas mãos da pessoa, um teste lento que falha, ou um candidato que a pessoa confirma é um achado.
-* Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, nunca uma correção no meio do marco seguinte; o marco fecha quando essas linhas estão `[x]`.
+* Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, mesmo quando o marco seguinte já existe, nunca uma correção no meio do marco seguinte; o marco fecha quando essas linhas estão `[x]`.
 * As linhas de achado não têm revisão própria: cada uma passa pela sua própria página, pela sua prova e pelo commit da pessoa.

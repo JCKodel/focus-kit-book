@@ -1,7 +1,7 @@
 # 11. The queue and milestones
 
 After this chapter you can read a queue and write a milestone paragraph a person can check.
-You can also write a line as one sentence with its suffixes, order a milestone so that its order is its priority, write on a line which line must be done before it, `· after <slug>`, add, move or change a line by conversation, and turn a code change asked outside `/apply` into a line and a draft for its page.
+You can also write a line as one sentence with its suffixes, order a milestone so that its order is its priority, write on a line which line must be done before it, `· after <slug>`, add a line in the milestone whose paragraph needs it or under the next one, move or change a line by conversation, and turn a code change asked outside `/apply` into a line and a draft for its page.
 And you can say what the smallest delivery costs, from its line to its commit.
 
 ## The problem
@@ -75,7 +75,10 @@ Lines are added while a milestone runs: a fix a delivery finds outside its page,
 So a milestone closes larger than it started, and the queue changes with the work.
 This book's own queue shows it: its milestone M15 closed with 42 lines; its review was the 14th, with 28 under it.[^m15-queue]
 An agent asked about a problem tends to answer with lines, each one reasonable, so without a person judging, a milestone grows without end.
-You decide what enters and where: a line that serves no sentence of this milestone's paragraph goes to a later milestone, one of improvements if you want one.
+The paragraph decides where a line goes, whoever adds it, you or the agent: a line that a clause of the current milestone's paragraph needs goes in that milestone, and any other goes under the next milestone, which the agent creates when there is none, with a paragraph the line answers and its review last.
+On the lending library, once `return-book` is built, you try the product and find that a copy whose loan is overdue cannot be taken back; the fix, a line written for this chapter, `fix-overdue-return`, stays in milestone 1, above `m1-review`, because the paragraph promises to record the return.
+A finding of the milestone's own review stays in its milestone too, under the review, even when the next milestone is already in the queue (below).
+What you decide is the paragraph: a line enters the current milestone only through a clause, so to bring one in you widen the paragraph by conversation first, and the line then answers the new clause.
 
 The order is the priority.
 Asked which delivery matters most, you answer from the queue: the one higher in it; the next delivery is the first one free to start ([chapter 14](14-queue-states.md)).
@@ -89,20 +92,32 @@ That is an order, not a wait: the line keeps its mark, `[ ]`, and is free to sta
 
 A milestone is planned with its review as its last line, `<milestone>-review`, a delivery like the others, which takes the paragraph clause by clause ([chapter 15](15-closing-a-milestone.md)).
 It fixes nothing: a person tests each clause by hand and, on the person's word, the session has the code changed since the milestone's base read by the areas the project's docs/05 names, when it names areas, one read-only agent each, and a checker marks each candidate before the person sees it.
-Each finding becomes a `[ ]` line in the same milestone, under the review line, and those lines get no second review.
+Each finding becomes a `[ ]` line in the same milestone, under the review line, even when the next milestone already holds lines, and those lines get no second review.
 
 ## Changing the queue
 
 No command owns the queue.
-A new idea becomes a line by conversation, in any session: you tell the agent, and it writes the line in the milestone where it belongs, with a new slug and `[ ]`.
+A new idea becomes a line by conversation, in any session: you tell the agent, and it writes the line, with a new slug and `[ ]`, in the milestone whose paragraph needs it, or under the next one.
 
 The code has one owner, `/apply`, the command that builds a delivery (chapter 13).
 A change to it asked in any other session, however small, becomes a `[ ]` line: the agent writes the line, writes in a draft page what you said that the line cannot hold, says so, and the answer stops there, with no file of the app changed.
-Asked in an ordinary session to show the due date on the loan screen as day/month/year, and told how it should look on a narrow screen and that the catalog keeps the ISO form, year-month-day, the agent adds this line to the milestone above, just above `m1-review`, a line written for this chapter:
+Asked in an ordinary session to show the due date on the loan screen as day/month/year, and told how it should look on a narrow screen and that the catalog keeps the ISO form, year-month-day, the agent writes a line, `due-date-format`, and looks for where it goes.
+No clause of milestone 1's paragraph needs it: the paragraph promises a loan of 21 days and a recorded return, not how a date reads.
+So the line does not go above `m1-review`, as if arriving now made it part of the milestone; it goes under the next milestone, and with none in the queue the agent creates one, with a paragraph the line answers and its review last, written for this chapter:
+
+````markdown
+## Milestone 2: loan dates read at a glance
+
+When it closes, a member reads the due date on the loan screen as
+day/month/year, on a narrow screen too.
 
 ```
 [ ] due-date-format   the screen shows the due date as day/month/year
+[ ] m2-review         the milestone checked against its paragraph
 ```
+````
+
+Milestone 1 keeps its lines, their order and `return-book`'s `· after lend-book`; milestone 2 comes after it, so its line comes after all of them in priority, and the paragraph the agent wrote is yours to read and correct, like any change to the queue.
 
 The narrow-screen rule and the catalog exception do not fit the line's one sentence, so they go into a draft `work/due-date-format.md`, and the answer stops there, naming `/propose due-date-format` for a fresh session, written as your host invokes it; a request the line holds whole gets no draft.
 The draft is where the detail waits: `/propose due-date-format`, in a fresh session, starts from it and writes the page (chapter 12 shows `/propose`), so nothing you said in the first session is said twice.
@@ -161,6 +176,7 @@ Documents still change by conversation, in any session; the rule covers the code
 
 A milestone's paragraph or a line's description changes by conversation too, and the slug stays, since a page or a commit may already use it.
 Moving a line up or down is changing its priority, and it happens the same way: you ask the agent to move it.
+A move keeps the line's `· after`, and a line moved into the current milestone needs a clause of its paragraph, or a paragraph you widened first, so a move never changes what a milestone promises without a word.
 Lines also come from a milestone's review and, on an existing project, from its issues or roadmap.
 You read the change before you commit it, as with every document, and nobody edits the queue by hand.
 
@@ -174,7 +190,7 @@ On Case A, a client project on a low-code platform, Microsoft Power Apps with Co
 
 * docs/06 holds milestones, each with a paragraph, and one line per delivery under it: a mark, a slug, one sentence and its suffixes; what happened goes on the page.
 * A line's mark says where its delivery stands, from `[ ]`, not defined, to `[x]`, done; a line never leaves, so the queue is also the history.
-* A milestone paragraph is a test a person can check against the product, never a theme, over the deliveries that make it true, three to eight in the first milestone: the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone; lines are added while it runs, and the person decides which enter now and which wait for a later milestone.
+* A milestone paragraph is a test a person can check against the product, never a theme, over the deliveries that make it true, three to eight in the first milestone: the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone; lines are added while it runs, and whoever adds one puts it in the milestone whose paragraph has a clause that needs it, or under the next, created when missing with a paragraph the line answers and its review last.
 * The order is the priority: the higher line matters more, moving a line changes its priority, and a dependency known when a line is added is written with it, `· after <slug>`, an order, not a wait, so the line keeps `[ ]`.
 * No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept; code changes only inside `/apply`, even a five-line change gets its page, and a change asked anywhere else becomes a line, with a draft page for what the line cannot hold, and `/propose` in a fresh session.
 

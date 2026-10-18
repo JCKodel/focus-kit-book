@@ -69,6 +69,11 @@ A próxima entrega é a primeira linha livre que nenhuma sessão pegou: uma sess
 Quando `emprestar-livro` vira `[x]`, `devolver-livro` e `meus-emprestimos` ficam livres nesse momento, sem nada para tirar e sem marca para mudar; o `· after` fica na linha como o registro da ordem.
 Uma linha com duas ordens, `· after emprestar-livro, membros`, só fica livre quando as duas estão `[x]`.
 
+O fim de um marco define a prioridade, não se uma linha está livre.
+A `formato-devolucao` do capítulo 11 fica sob o marco 2, abaixo de `m1-review`, e não nomeia nenhum `after`: ela está livre, e não espera `m1-review`.
+Mas a próxima entrega é a primeira linha livre descendo a fila, então uma sessão a quem se pede a próxima só chega a ela quando o marco 1 não tem mais nenhuma linha livre.
+Uma linha acrescentada depois vai no marco cujo parágrafo precisa dela, nunca mais acima na fila por ser nova: o lugar dela é a sua prioridade, e as linhas que já estavam lá mantêm a ordem e o `after` delas.
+
 O `/propose` e o `/apply` não começam uma linha que não está livre: rode `/propose meus-emprestimos` com `emprestar-livro` em `[*]`, e ele diz o que a linha espera e para.
 
 Perguntado o que pode rodar ao mesmo tempo, você responde pela fila: as linhas livres, e entre elas as que mexem em arquivos diferentes, julgadas pelas páginas delas e pelo docs/01, que diz onde mora cada parte do código.

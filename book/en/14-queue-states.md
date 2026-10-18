@@ -68,6 +68,11 @@ The next delivery is the first free line no session holds: a session is building
 When `lend-book` becomes `[x]`, `return-book` and `my-loans` are free from that moment, with nothing to clear and no mark to change; the `· after` stays on the line as the record of the order.
 A line with two orders, `· after lend-book, members`, is free only when both are `[x]`.
 
+A milestone's end sets priority, not whether a line is free.
+Chapter 11's `due-date-format` sits under milestone 2, below `m1-review`, and names no `after`: it is free, and does not wait for `m1-review`.
+But the next delivery is the first free line counting down the queue, so a session asked for the next one reaches it only once milestone 1 holds no free line.
+A line added later goes in the milestone whose paragraph needs it, never higher in the queue because it is new: its place is its priority, and the lines already there keep their order and their `after`.
+
 `/propose` and `/apply` do not start a line that is not free: run `/propose my-loans` while `lend-book` is `[*]`, and it says what the line waits on and stops.
 
 Asked what can run at the same time, you answer from the queue: the free lines, and among them those that touch different files, judged from their pages and from docs/01, which says where each part of the code lives.
