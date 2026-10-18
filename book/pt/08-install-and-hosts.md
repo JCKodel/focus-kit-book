@@ -48,39 +48,43 @@ Ele compara os arquivos com os seus próprios modelos e relata cada migração, 
 Uma migração pode citar uma regra, uma linha da fila ou um slot.
 As suas escolhas ficam: um docs/05 cujo §5 diz "trunk, uma sessão por vez" vê proposto o texto para duas sessões numa pasta, e mantém o seu até o time aceitar a mudança.
 
-Este é o relatório de uma atualização na biblioteca de empréstimos, escrito para este capítulo:
+Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.18.1 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro são em inglês, e o relatório propôs o texto em inglês. O registro dessa atualização é o `work/done/kit-2026-10-18-1.md`, no repositório do livro.
 
 ```
-Instalado: focus-kit 2026.10.18, em cada SKILL.md.
-Migrações de processo pendentes: 3.
+Instalado: focus-kit 2026.10.18.1, em cada SKILL.md.
+Migrações de processo pendentes, encurtadas a três:
 
-1. docs/05, §4 The queue: na tabela de marcas, trocar "nos três casos
-   abaixo" por "nos quatro casos abaixo"; depois de "como uma correção
-   descoberta no meio de um /apply" acrescentar ", ou quando a leitura
-   do código de uma revisão de marco não cobriu parte do seu intervalo
-   (§8)".
-2. docs/05, §5 Delivery review: o slot lê o git diff. Proposto:
-   "Delivery review: um agente somente leitura no modelo da sessão
-   lê o git diff dos caminhos da entrega e os arquivos que a entrega
-   criou, que nenhum diff mostra até entrarem em stage, contra a
-   página dela e o docs/04."
-3. docs/05, §8 Closing a milestone: trocar "A sua página cita como
-   base o commit que fechou o marco anterior, ou o primeiro commit,"
-   por "A sua página cita como base o commit da revisão do marco
-   anterior, para que o intervalo guarde as correções dos achados
-   dela, que não têm segunda revisão, ou o primeiro commit para um
-   primeiro marco,"; "o marca visto," por "o marca visto (verdadeiro
-   no arquivo hoje),"; e "como [?] com · resume: apply (§4)" por
-   "como [?] com · resume: apply e · blocked: <o que foi lido> (§4)".
+1. docs/05, §5 Verify. O slot cita o make verify e as suas
+   verificações e diz "Verde antes de qualquer coisa ser dada por
+   feita." Proposto: acrescentar que a verificação é rápida o
+   bastante para rodar em toda entrega, e "Testes lentos: nenhum";
+   as verificações ficam como estão.
+2. docs/05, §5 Delivery review. O slot lê o git diff e o
+   git diff --cached dos caminhos da entrega, e os arquivos que ela
+   criou. Proposto: o git diff HEAD dos caminhos da entrega, em
+   stage e fora dele, os commits que uma entrega bloqueada já fez no
+   seu branch, e os arquivos que ela criou; o revisor continua o que
+   o slot cita.
+3. docs/05, §5 Git. O slot diz "O agente põe em stage; nunca faz
+   commit nem merge." Proposto: reverter uma entrega desfaz o que o
+   git guarda, uma entrega que age fora do git diz no seu Done when
+   como isso se desfaz, e o agente nunca faz commit nem merge por
+   conta própria; quando pedido, dá o passo que a pessoa cita. O
+   trunk fica.
 
+Os outros itens vão para o docs/05 §§2, 4, 6 e 8, o slot Milestone
+review do §5, o docs/04 e duas linhas do AGENTS.md.
 docs/ e AGENTS.md não foram alterados.
 ```
 
-Todo item muda uma regra.
-O item 1 dá a uma linha um quarto caso de espera, uma revisão de marco cuja leitura do código não cobriu parte do seu intervalo ([capítulo 14](14-queue-states.md)), para que uma leitura que cobriu menos que o seu intervalo apareça na fila em vez de passar por feita.
-O item 2 faz a revisão da entrega ler os arquivos que a entrega criou, além do seu `git diff`: um arquivo novo é não rastreado, um que o git ainda não guarda, então o `git diff` sem opções nunca o mostra, e o `git diff --cached`, o diff do que está em stage, só o traz depois que ele entra em stage, e o `/apply` põe em stage depois da revisão.
-O item 3 cita como base o commit da revisão do marco anterior, para que o intervalo guarde todo commit depois dessa revisão: as correções dos seus achados e as entregas do marco seguinte que entraram depois dela ([capítulo 15](15-closing-a-milestone.md)); ele também diz o que visto significa, e faz a linha que espera dizer o que os leitores leram.
-Um slot Delivery review que cita a revisão do próprio host não recebe o item 2: o relatório propõe os arquivos criados só onde o slot lê o `git diff`, então a escolha do revisor pelo time fica.
+Todo item cita o documento, a seção, a regra que ele guarda hoje e o texto proposto no lugar dela.
+O item 1 mantém a verificação como está e diz que ela continua rápida: um teste lento demais para rodar em toda entrega vai com os testes lentos, que a revisão de marco roda, e o repositório do livro não tem nenhum.
+O item 2 faz a revisão ler a entrega inteira contra o último commit: o `git diff` mostra o que não está em stage, o `git diff --cached` o que está, e o `git diff HEAD` os dois de uma vez; os commits que uma entrega bloqueada já fez no seu branch também são lidos, e os arquivos criados à parte, porque um arquivo novo é não rastreado, um que o git ainda não guarda, e nenhum diff o mostra até ele entrar em stage.
+O item 3 diz o que um revert desfaz, o que o git guarda e não um banco migrado ou uma mensagem enviada, e deixa o agente fazer o commit quando a pessoa pede.
+Aplicá-los mantém as escolhas do time: a verificação continua `make verify` com as suas verificações, o revisor continua o que o slot cita, e o Git continua trunk.
+
+O relatório lista só o que os documentos ainda não têm, ou diz que não há nada.
+O docs/05 §8 do livro já cita como base da revisão de marco o commit da revisão do marco anterior, não um commit posterior que fechou um marco, uma regra que veio com o focus-kit 2026.10.18 ([capítulo 15](15-closing-a-milestone.md)); a 2026.10.18.1 a mantém, então o seu relatório não pede nada sobre a base, e o seu item para o §8 acrescenta que o intervalo termina no commit em que a leitura começou, e que a revisão roda os testes lentos que o slot Verify cita.
 
 A versão do kit é o `metadata.version` em cada `SKILL.md`; o processo é o que o docs/04, o docs/05 e o `AGENTS.md` dizem, porque todo comando os lê, então um kit atualizado cujas migrações não foram aplicadas ainda roda o processo antigo.
 A atualização termina quando as migrações são aplicadas, como qualquer mudança: uma linha da fila, definida com o `/propose` e construída com o `/apply`, para que a mudança nas suas regras ou na sua fila tenha uma página, verificação e a sua revisão.
@@ -95,7 +99,7 @@ Sem contêiner ainda, o slot vale o padrão do kit, que esse capítulo cita, e o
 Para saber por que uma migração existe, leia o changelog do kit, `CHANGELOG.md` no repositório dele, `CHANGELOG.pt.md` em português.
 Ele tem uma entrada por versão, a mais nova primeiro; a versão é a linha `Version:` do `SETUP.md`, o mesmo valor do `metadata.version` em cada `SKILL.md`.
 Cada entrada diz o que mudou e o problema que causou a mudança, e uma entrada pode trazer um item que começa com `Migration:` (no changelog em português, `Migração:`), citando o que mudar nos documentos do projeto.
-O que uma nova execução compara é o próprio passo do arquivo de setup, que cita as seções do docs/05, os slots e as linhas do `AGENTS.md` que confere; o relatório lista só o que os seus documentos ainda não têm, na biblioteca de empréstimos os três itens acima.
+O que uma nova execução compara é o próprio passo do arquivo de setup, que cita as seções do docs/05, os slots e as linhas do `AGENTS.md` que confere; o relatório lista só o que os seus documentos ainda não têm.
 
 ## Como cada host encontra os comandos
 
@@ -104,7 +108,7 @@ O arquivo de setup escreve o que cada host abaixo precisa:
 
 | Host | Lê as regras de | Lê os comandos de | Você digita |
 |---|---|---|---|
-| Claude Code | `CLAUDE.md`, que importa o `AGENTS.md` | `.claude/skills/` | `/propose <slug>` |
+| Claude Code | `CLAUDE.md`, que importa o `AGENTS.md`; o `AGENTS.md` sozinho só onde não existe `CLAUDE.md`, a partir da versão 2.1.277 | `.claude/skills/` | `/propose <slug>` |
 | Codex | `AGENTS.md` | `.agents/skills/` | `$propose <slug>` |
 | GitHub Copilot | `AGENTS.md` | `.agents/skills/`, por um arquivo de prompt em `.github/prompts/` | `/propose`, e ele pede o slug |
 | Cursor | `AGENTS.md` | `.agents/skills/`, por um arquivo de comando em `.cursor/commands/` | `/propose` |
@@ -114,7 +118,7 @@ O arquivo de setup escreve o que cada host abaixo precisa:
 | OpenCode, Zed | `AGENTS.md` | `.agents/skills/` | pedindo a skill |
 
 Cada comando é uma skill, uma pasta com um arquivo `SKILL.md` de instruções que o host carrega quando você a chama.[^claude-code-skills][^codex-skills][^copilot-skills]
-O Claude Code lê o `CLAUDE.md` no início de uma sessão, e uma linha `@AGENTS.md` nele importa o arquivo de regras.[^claude-code-memory]
+O Claude Code lê o `CLAUDE.md` no início de uma sessão, e uma linha `@AGENTS.md` nele importa o arquivo de regras; a partir da versão 2.1.277 ele lê o `AGENTS.md` sozinho, mas só num repositório sem `CLAUDE.md`, então o kit escreve o `CLAUDE.md` com a importação, que toda versão lê.[^claude-code-memory]
 O Codex, o Copilot e o Devin Desktop, antes Windsurf, leem o `AGENTS.md` sozinhos.[^codex-agents-md][^copilot-instructions][^devin-rules]
 O comando de barra do Copilot vem de um arquivo de prompt que só diz ao agente para ler a skill e segui-la, e pede o slug quando você digita o comando.[^copilot-prompt-files]
 O Codex pode rodar uma skill por conta própria quando uma mensagem bate com a descrição dela; um pequeno arquivo ao lado de cada skill desliga isso, para que uma mensagem que por acaso diga "apply" não construa nada que você não pediu.[^codex-skills]
@@ -156,7 +160,7 @@ E o próximo comando chega na forma que o seu host reconhece, porque um host pod
 * Cada host encontra as regras e os comandos nas suas próprias pastas: o Claude Code roda um comando como `/propose <slug>`, o Codex como `$propose <slug>`, o Copilot como `/propose`, que pede o slug, o Devin Desktop como `/propose`; todo comando cita o próximo nessa forma.
 * Todo host lê um arquivo de regras no início, lê os arquivos para os quais você aponta e escreve arquivos, e o método não precisa de mais nada.
 
-[^claude-code-memory]: Anthropic, "How Claude remembers your project", documentação do Claude Code, acesso em 2026-09-30. <https://code.claude.com/docs/en/memory>
+[^claude-code-memory]: Anthropic, "How Claude remembers your project", documentação do Claude Code, acesso em 2026-10-18. <https://code.claude.com/docs/en/memory>
 [^claude-code-skills]: Anthropic, "Extend Claude with skills", documentação do Claude Code, acesso em 2026-09-30. <https://code.claude.com/docs/en/skills>
 [^codex-agents-md]: OpenAI, "Custom instructions with AGENTS.md", documentação do Codex, acesso em 2026-09-30. <https://developers.openai.com/codex/guides/agents-md>
 [^codex-skills]: OpenAI, "Build skills", documentação do Codex, acesso em 2026-09-30. <https://developers.openai.com/codex/skills>

@@ -48,38 +48,41 @@ It compares the files with its own templates and reports each migration, a chang
 A migration may name a rule, a queue line or a slot.
 Your choices stay: a docs/05 whose §5 says "trunk, one session at a time" sees the wording for two sessions in one folder proposed, and keeps its own until the team accepts the change.
 
-Here is the report of an update on the lending library, written for this chapter:
+Here is part of the report the update to focus-kit 2026.10.18.1 gave on this book's own repository, shortened and paraphrased from the record of that update, `work/done/kit-2026-10-18-1.md` in the book's repository:
 
 ```
-Installed: focus-kit 2026.10.18, in every SKILL.md.
-Pending process migrations: 3.
+Installed: focus-kit 2026.10.18.1, in every SKILL.md.
+Pending process migrations, shortened to three:
 
-1. docs/05, §4 The queue: in the mark table, replace "in the three
-   cases below" with "in the four cases below"; after "such as a fix
-   found in the middle of an /apply" add ", or when a milestone
-   review's code reading missed part of its range (§8)".
-2. docs/05, §5 Delivery review: the slot reads git diff. Proposed:
-   "Delivery review: a read-only agent on the session's model reads
-   git diff of the delivery's paths and the files the delivery
-   created, which no diff shows until they are staged, against its
-   page and docs/04."
-3. docs/05, §8 Closing a milestone: replace "Its page names the
-   commit that closed the previous milestone, or the first commit, as
-   the base," with "Its page names as the base the commit of the
-   previous milestone's review, so the range holds the fixes of its
-   findings, which get no second review, or the first commit for a
-   first milestone,"; "marks it seen," with "marks it seen (true in
-   the file today),"; and "with · resume: apply (§4)" with "with
-   · resume: apply and · blocked: <what was read> (§4)".
+1. docs/05, §5 Verify. The slot names make verify and its checks and
+   says "Green before anything is declared done." Proposed: add that
+   verify is fast enough to run on every delivery, and "Slow tests:
+   none"; the checks stay as they are.
+2. docs/05, §5 Delivery review. The slot reads git diff and
+   git diff --cached of the delivery's paths, and the files it
+   created. Proposed: git diff HEAD of the delivery's paths, staged
+   and unstaged, the commits a blocked delivery already made on its
+   branch, and the files it created; the reviewer stays the one the
+   slot names.
+3. docs/05, §5 Git. The slot says "The agent stages; it never commits
+   or merges." Proposed: reverting a delivery undoes what git holds,
+   a delivery that acts outside git says in its Done when how that is
+   undone, and the agent never commits or merges on its own; asked,
+   it takes the step the person names. Trunk stays.
 
+The other items go to docs/05 §§2, 4, 6 and 8, the Milestone review
+slot of §5, docs/04 and two lines of AGENTS.md.
 docs/ and AGENTS.md were not changed.
 ```
 
-Every item changes a rule.
-Item 1 gives a line a fourth case to wait in, a milestone review whose code reading missed part of its range ([chapter 14](14-queue-states.md)), so a reading that covered less than its range shows in the queue instead of passing as done.
-Item 2 has the delivery review read the files the delivery created as well as its `git diff`: a new file is untracked, one git does not hold yet, so plain `git diff` never shows it, and `git diff --cached`, the diff of what is staged, holds it only once it is staged, and `/apply` stages after the review.
-Item 3 names as the base the commit of the previous milestone's review, so the range holds every commit after that review: the fixes of its findings, and the next milestone's deliveries that landed after it ([chapter 15](15-closing-a-milestone.md)); it also says what seen means, and has the waiting line say what the readers read.
-A Delivery review slot that names the host's own review gets no item 2: the report proposes the created files only where the slot reads `git diff`, so the team's choice of reviewer stays.
+Every item names the document, the section, the rule it holds today and the wording proposed in its place.
+Item 1 keeps verify as it is and says it stays fast: a test too slow to run on every delivery goes with the slow tests, which the milestone review runs, and the book's repository has none.
+Item 2 has the review read the whole delivery against the last commit: `git diff` shows what is not staged, `git diff --cached` what is, and `git diff HEAD` both at once; the commits a blocked delivery already made on its branch are read as well, and the created files apart, because a new file is untracked, one git does not hold yet, and no diff shows it until it is staged.
+Item 3 says what a revert undoes, what git holds and not a database migrated or a message sent, and lets the agent commit when the person asks.
+Applying them keeps the team's choices: verify stays `make verify` with its checks, the reviewer stays the one the slot names, and Git stays trunk.
+
+The report lists only what the documents still lack, or says there is none.
+The book's docs/05 §8 already names as the milestone review's base the commit of the previous milestone's review, not a later commit that closed a milestone, a rule that came with focus-kit 2026.10.18 ([chapter 15](15-closing-a-milestone.md)); 2026.10.18.1 keeps it, so its report asks nothing of the base, and its item for §8 adds that the range ends at the commit the reading started at, and that the review runs the slow tests the Verify slot names.
 
 The kit's version is the `metadata.version` in each `SKILL.md`; the process is what docs/04, docs/05 and `AGENTS.md` say, because every command reads them, so an updated kit whose migrations are not applied still runs the old process.
 The update is done when the migrations are applied, as any change is: a queue line, defined with `/propose` and built with `/apply`, so the change to your rules or your queue gets a page, verify and your review.
@@ -94,7 +97,7 @@ With no container yet, the slot means the kit's default, which that chapter name
 To know why a migration exists, read the kit's changelog, `CHANGELOG.md` in its repository, `CHANGELOG.pt.md` in Portuguese.
 It has one entry per version, newest first; the version is the `Version:` line of `SETUP.md`, the same value as the `metadata.version` in each `SKILL.md`.
 Each entry says what changed and the problem that caused it, and an entry may carry an item that starts with `Migration:`, naming what to change in the project's documents.
-What a rerun compares is the setup file's own step, which names the sections of docs/05, the slots and the lines of `AGENTS.md` it checks; the report lists only what your documents still lack, on the lending library the three items above.
+What a rerun compares is the setup file's own step, which names the sections of docs/05, the slots and the lines of `AGENTS.md` it checks; the report lists only what your documents still lack.
 
 ## How each host finds the commands
 
@@ -103,7 +106,7 @@ The setup file writes what every host below needs:
 
 | Host | Reads the rules from | Reads the commands from | You type |
 |---|---|---|---|
-| Claude Code | `CLAUDE.md`, which imports `AGENTS.md` | `.claude/skills/` | `/propose <slug>` |
+| Claude Code | `CLAUDE.md`, which imports `AGENTS.md`; `AGENTS.md` alone only where no `CLAUDE.md` exists, from version 2.1.277 | `.claude/skills/` | `/propose <slug>` |
 | Codex | `AGENTS.md` | `.agents/skills/` | `$propose <slug>` |
 | GitHub Copilot | `AGENTS.md` | `.agents/skills/`, through a prompt file in `.github/prompts/` | `/propose`, and it asks for the slug |
 | Cursor | `AGENTS.md` | `.agents/skills/`, through a command file in `.cursor/commands/` | `/propose` |
@@ -113,7 +116,7 @@ The setup file writes what every host below needs:
 | OpenCode, Zed | `AGENTS.md` | `.agents/skills/` | by asking for the skill |
 
 Each command is a skill, a folder with a `SKILL.md` file of instructions the host loads when you invoke it.[^claude-code-skills][^codex-skills][^copilot-skills]
-Claude Code reads `CLAUDE.md` at the start of a session, and a line `@AGENTS.md` in it imports the rules file.[^claude-code-memory]
+Claude Code reads `CLAUDE.md` at the start of a session, and a line `@AGENTS.md` in it imports the rules file; from version 2.1.277 it reads `AGENTS.md` alone, but only in a repository with no `CLAUDE.md`, so the kit writes `CLAUDE.md` with the import, which every version reads.[^claude-code-memory]
 Codex, Copilot and Devin Desktop, formerly Windsurf, read `AGENTS.md` on their own.[^codex-agents-md][^copilot-instructions][^devin-rules]
 Copilot's slash command comes from a prompt file that only tells the agent to read the skill and follow it, and asks you for the slug when you type the command.[^copilot-prompt-files]
 Codex may run a skill on its own when a message matches its description; a small file beside each skill turns that off, so a message that happens to say "apply" builds nothing you did not ask for.[^codex-skills]
@@ -155,7 +158,7 @@ And the next command arrives in the form your host recognizes, because a host ma
 * Each host finds the rules and the commands in its own folders: Claude Code runs a command as `/propose <slug>`, Codex as `$propose <slug>`, Copilot as `/propose`, which asks for the slug, Devin Desktop as `/propose`; every command names the next one in that form.
 * Every host reads a rules file at the start, reads the files you point it at and writes files, and the method needs nothing more.
 
-[^claude-code-memory]: Anthropic, "How Claude remembers your project", Claude Code documentation, accessed 2026-09-30. <https://code.claude.com/docs/en/memory>
+[^claude-code-memory]: Anthropic, "How Claude remembers your project", Claude Code documentation, accessed 2026-10-18. <https://code.claude.com/docs/en/memory>
 [^claude-code-skills]: Anthropic, "Extend Claude with skills", Claude Code documentation, accessed 2026-09-30. <https://code.claude.com/docs/en/skills>
 [^codex-agents-md]: OpenAI, "Custom instructions with AGENTS.md", Codex documentation, accessed 2026-09-30. <https://developers.openai.com/codex/guides/agents-md>
 [^codex-skills]: OpenAI, "Build skills", Codex documentation, accessed 2026-09-30. <https://developers.openai.com/codex/skills>
