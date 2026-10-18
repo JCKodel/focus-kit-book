@@ -403,7 +403,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18 and the reposi
 [ ] pt-librarian-masculine   the Portuguese edition says "o bibliotecário", as docs/03 fixes, in chapters 4, 5, 11, 14, 17 and 19
 [ ] ch15-review-range-order  chapters 15 and 8 say the review's range holds the next milestone's deliveries that landed after the review's commit, not every one of them; both editions
 [ ] ch15-first-commit-base   chapter 15 says what a first milestone's range leaves out of the first commit, instead of "the whole project"; both editions
-[ ] ch13-four-waits          chapter 13's list of when /apply cannot go on names all four cases a line waits in; both editions
+[x] ch13-four-waits          chapter 13's list of when /apply cannot go on names all four cases a line waits in; both editions
 [ ] ch08-report-item-one     chapter 8's report item 1 says what text it replaces, as items 2 and 3 do; both editions
 [ ] pt-ch08-migration-label  the Portuguese chapter 8's key point names the changelog item's `Migração:` label as the English names `Migration:`
 [ ] untracked-diff-wording   chapter 8 and docs/03's untracked file row say a new file shows in `git diff --cached` once staged and never in plain `git diff`; both editions

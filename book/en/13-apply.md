@@ -40,7 +40,7 @@ A silent choice would leave a page and a document that disagree, and the next se
 
 ### When the work cannot go on
 
-It stops when the build needs an answer nobody has given yet, when another line must be done first (a fix it found becomes a `[ ]` line above this one), or when you say it is blocked.
+It stops when the build needs an answer nobody has given yet, when another line must be done first (a fix it found becomes a `[ ]` line above this one), when you say it is blocked, or, in a milestone's review, when the reading of the code changed since the milestone's base left part of it unread.
 It writes on the page what was built and what it waits on, leaves the page in `work/`, marks the line `[?]` with that reason at its end (chapter 14).
 It ends the page with a partial message in a `commit` block and shows the same block in the conversation.
 On trunk it stages nothing: the work stays uncommitted, and out of the index, until it is whole.

@@ -40,7 +40,7 @@ Uma escolha em silêncio deixaria uma página e um documento discordando, e a pr
 
 ### Quando o trabalho não consegue seguir
 
-Ele para quando a construção precisa de uma resposta que ninguém deu ainda, quando outra linha precisa ser feita antes (uma correção que ele achou vira uma linha `[ ]` acima desta), ou quando você diz que ela está travada.
+Ele para quando a construção precisa de uma resposta que ninguém deu ainda, quando outra linha precisa ser feita antes (uma correção que ele achou vira uma linha `[ ]` acima desta), quando você diz que ela está travada, ou, na revisão de um marco, quando a leitura do código alterado desde a base do marco deixou parte dele sem ler.
 Ele escreve na página o que foi construído e o que ela espera, deixa a página em `work/`, marca a linha como `[?]` com esse motivo no fim dela (capítulo 14).
 Ele termina a página com uma mensagem parcial em um bloco `commit` e mostra o mesmo bloco na conversa.
 No trunk ele não coloca nada em stage: o trabalho fica sem commit, e fora do índice, até estar inteiro.
