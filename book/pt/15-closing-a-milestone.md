@@ -17,8 +17,9 @@ Um marco é planejado com a sua revisão como a última linha, `<milestone>-revi
 A página dela pega o parágrafo do marco cláusula por cláusula e escreve, para cada uma, qual entrega a atende e como uma pessoa a testa.
 Ela não corrige nada.
 A revisão também lê o código, o único olhar sobre o todo em vez de sobre uma entrega, porque cada página pode estar certa e o todo errado.
-A página dela cita o commit que fechou o marco anterior, ou o primeiro commit do projeto para um primeiro marco; quando o slot Milestone review (revisão de marco) do docs/05 cita uma revisão profunda do código, como o `/code-review ultra <base>` do Claude Code, a pessoa a lança contra esse commit, que é o `<base>`.
+A página dela cita o commit que fechou o marco anterior, ou o primeiro commit do projeto; quando o slot Milestone review (revisão de marco) do docs/05 cita uma revisão profunda do código, como o `/code-review ultra <base>` do Claude Code, a pessoa a lança contra esse commit, que é o `<base>`.
 O agente pode dizer que chegou a hora, e nunca a lança.
+O primeiro commit faz a revisão ler o projeto inteiro: é a base de um primeiro marco, e de qualquer marco posterior cujas revisões anteriores deixaram parte do projeto sem ler.
 O código de cada entrega continua sendo lido onde a sua mudança é pequena o bastante para ser lida: na mudança em stage antes do seu commit (capítulo 13), e no pull request, quando o time integra as suas entregas por um (capítulo 20).
 
 ## Teste cada cláusula à mão
@@ -107,7 +108,7 @@ E como cada achado vira uma linha, o time vê o custo das brechas do marco na fi
 ## Pontos-chave
 
 * Uma revisão de marco olha para o que as entregas somam, o que nenhuma revisão de uma página ou de uma mudança em stage consegue ver.
-* Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, rodada com o `/propose` e o `/apply`: a página dela cita o commit que fechou o marco anterior, escreve para cada cláusula do parágrafo a entrega que a atende e como uma pessoa a testa, e não corrige nada.
+* Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, rodada com o `/propose` e o `/apply`: a página dela cita o commit que fechou o marco anterior, ou o primeiro commit do projeto, escreve para cada cláusula do parágrafo a entrega que a atende e como uma pessoa a testa, e não corrige nada.
 * A pessoa testa cada cláusula à mão e lança contra esse commit a revisão profunda do código que o slot Milestone review do docs/05 cita; uma cláusula que nenhuma entrega atende, ou uma que falha nas mãos da pessoa, é um achado, e um achado que a revisão do código confirma é um achado como os outros.
 * Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, nunca uma correção no meio do marco seguinte; o marco fecha quando essas linhas estão `[x]`.
 * As linhas de achado não têm revisão própria: cada uma passa pela sua própria página, pela sua prova e pelo commit da pessoa.

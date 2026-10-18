@@ -17,8 +17,9 @@ A milestone is planned with its review as its last line, `<milestone>-review`, a
 Its page takes the milestone's paragraph clause by clause and writes, for each, which delivery answers it and how a person tests it.
 It fixes nothing.
 The review also reads the code, the one look at the whole instead of a delivery, because every page can be right and the whole wrong.
-Its page names the commit that closed the previous milestone, or the project's first commit for a first milestone; when docs/05's Milestone review slot names a deep review, such as Claude Code's `/code-review ultra <base>`, the person launches it against that commit, which is `<base>`.
+Its page names the commit that closed the previous milestone, or the project's first commit; when docs/05's Milestone review slot names a deep review, such as Claude Code's `/code-review ultra <base>`, the person launches it against that commit, which is `<base>`.
 The agent may say it is time, and never launches it.
+The first commit makes the review read the whole project: it is the base of a first milestone, and of any later one whose earlier reviews left part of the project unread.
 Each delivery's code is still read where its change is small enough to read: in the staged change before its commit (chapter 13), and in the pull request, when the team lands its deliveries through one (chapter 20).
 
 ## Test each clause by hand
@@ -106,7 +107,7 @@ And because each finding becomes a line, the team sees the cost of the milestone
 ## Key points
 
 * A milestone review looks at what the deliveries add up to, which no review of a single page or staged change can see.
-* A milestone is planned with its review as its last line, `<milestone>-review`, run with `/propose` and `/apply`: its page names the commit that closed the previous milestone, writes for each clause of the paragraph the delivery that answers it and how a person tests it, and fixes nothing.
+* A milestone is planned with its review as its last line, `<milestone>-review`, run with `/propose` and `/apply`: its page names the commit that closed the previous milestone, or the project's first commit, writes for each clause of the paragraph the delivery that answers it and how a person tests it, and fixes nothing.
 * The person tests each clause by hand and launches the deep review docs/05's Milestone review slot names against that commit; a clause no delivery answers, or one that fails in the person's hands, is a finding, and a finding the code review confirms is a finding like the others.
 * Each finding becomes a `[ ]` line in the same milestone, under the review line, never a fix in the middle of the next milestone; the milestone closes when those lines are `[x]`.
 * The finding lines get no review of their own: each passes through its own page, its proof and the person's commit.
