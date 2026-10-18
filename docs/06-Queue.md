@@ -353,7 +353,7 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] ch19-when-worktrees-pay  chapter 19 says one thing about when a worktree per delivery pays; both editions
 [x] ch21-counts-once         chapter 21 gives each count once, its gain one number or pair, and points to chapter 13 for the pending-deletion story; both editions
 [x] ch23-what-survives       chapter 23 says what survives of the method without Ninjobs' own product checks; both editions
-[ ] ch24-note-keys           chapter 24's numbers carry their note key at the claim; both editions
+[x] ch24-note-keys           chapter 24's numbers carry their note key at the claim; both editions
 ```
 
 ## M16. focus-kit 2026.10.17

@@ -64,12 +64,12 @@ An agent's first answer usually is: it runs, it reads well, it does what was ask
 **A person takes the aid's answer in place of checking.**
 Kathleen Mosier and Linda Skitka defined automation bias in 1996: "*the tendency to use automated cues as a heuristic replacement for vigilant information seeking and processing*" (quoted in Mosier and Manzey 2019).[^mosier-manzey-2019]
 Skitka, Mosier and Burdick measured it in 1999, with 80 students on a simulated flight task, some with an automated aid and some without.[^skitka-1999]
-On the six events the aid did not flag, those with the aid were right 59% of the time against 97% without it.
-When the aid recommended something wrong, on six occasions, all but one of the participants who had the aid followed at least one of the wrong recommendations.
+On the six events the aid did not flag, those with the aid were right 59% of the time against 97% without it.[^skitka-1999]
+When the aid recommended something wrong, on six occasions, all but one of the participants who had the aid followed at least one of the wrong recommendations.[^skitka-1999]
 
 **A person lacks the time or the means to improve it.**
 A 2025 survey by Microsoft Research and Carnegie Mellon University asked 319 knowledge workers for examples of their own work with generative AI.[^lee-2025]
-Among what kept them from thinking critically about an answer, 44 named a lack of time, and 72 said it was hard to improve the answer by asking the model again.
+Among what kept them from thinking critically about an answer, 44 named a lack of time, and 72 said it was hard to improve the answer by asking the model again.[^lee-2025]
 In the same survey, more confidence in AI went with less critical thinking, as the workers reported it themselves; the survey measured what they said, not the quality of their work.
 
 An unchecked answer costs little while the task is one the model does well, and much when it is not.
@@ -86,16 +86,16 @@ The examples below come from an experiment this book ran on three tasks of the l
 
 **To test a limit it claimed.**
 When an agent says something cannot be done, it says so from what it remembers of the tool, and a test costs turns that nobody asked it to spend.
-On the card task, one first answer said plainly that it had not been able to check the card and left the check to the person.
+On the card task, one first answer said plainly that it had not been able to check the card and left the check to the person.[^ask-for-more-run]
 Asked to test, the agents found what they had stated without checking: on the card, styles Teams does not show and elements its documentation did not confirm; in a summary for a board, decisions it had called routine that the report itself ranked among the most important.
 
 **To fit the result to its reader's time.**
 "Summarize the report for the board" does not say that the board has little time and reads on a phone.
-The three first answers wrote their summary in the chat, with tables a phone cannot show; every challenged answer wrote a file with no tables, the board's decisions first.
+The three first answers wrote their summary in the chat, with tables a phone cannot show; every challenged answer wrote a file with no tables, the board's decisions first.[^ask-for-more-run]
 
 **To fit the result to the cost of each use.**
 "Set the project up for an agent that answers the team every day" does not say that each question opens a fresh session and spends tokens, from the team's bill or from its plan's session limit.
-Each first answer wrote one long guide for the agent without asking, and the judge found in two of them values copied from the code, which go stale without a sign when the code changes.
+Each first answer wrote one long guide for the agent without asking, and the judge found in two of them values copied from the code, which go stale without a sign when the code changes.[^ask-for-more-run]
 
 **What nobody asked for.**
 An agent that answers the question does not add what was not in it.
@@ -108,7 +108,7 @@ In the limit arm, the agent built a Teams card with three tabs for a library mem
 In the audience arm, it summarized a long annual report for a board that decides the budget.
 In the cost arm, it set up a small project for an agent that answers the team's questions every day, on notes that keep growing.
 
-Each pair, first and challenged, was scored blind on three criteria of the arm, 1 to 5 each, so an arm sums to at most 45 over its three pairs.
+Each pair, first and challenged, was scored blind on three criteria of the arm, 1 to 5 each, so an arm sums to at most 45 over its three pairs.[^ask-for-more-run]
 
 | Arm | First | Challenged |
 |---|---|---|
@@ -116,20 +116,20 @@ Each pair, first and challenged, was scored blind on three criteria of the arm, 
 | audience | 36 | 44 |
 | cost | 24 | 39 |
 
-The judge would have sent the challenged answer in all 9 pairs.
+The judge would have sent the challenged answer in all 9 pairs.[^ask-for-more-run]
 
 The challenge was paid for in time and tokens.
-With the three runs of each arm summed, the challenged sessions took 2.9 to 8.8 times as long as the first answers, and wrote 2.7 to 9.4 times the output tokens.
-One session at a time, a first answer took 24 seconds to just over 2 minutes, and a challenged session 3 to 9 minutes.
+With the three runs of each arm summed, the challenged sessions took 2.9 to 8.8 times as long as the first answers, and wrote 2.7 to 9.4 times the output tokens.[^ask-for-more-run]
+One session at a time, a first answer took 24 seconds to just over 2 minutes, and a challenged session 3 to 9 minutes.[^ask-for-more-run]
 
 On a fixed subscription, those tokens come out of the plan's session limit: the use of the model a plan allows in a window of hours, after which the host refuses new turns until the window ends.
-The experiment's nine challenged sessions, run within about 45 minutes on one afternoon, spent my plan's limit before the protocol's last turn, which in all nine was sent again about 30 minutes later.
+The experiment's nine challenged sessions, run within about 45 minutes on one afternoon, spent my plan's limit before the protocol's last turn, which in all nine was sent again about 30 minutes later.[^ask-for-more-run]
 Each protocol you send spends a share of that limit.
 If you pay per token instead, [chapter 22](22-cost-and-where.md) shows how to turn tokens into a price.
 
 The cost arm also measured what each setup costs in use.
-Five questions about the project, each in a fresh session, were asked of every setup: all 30 answers were correct, first and challenged.
-In each of the cost arm's three runs, the five questions took the challenged setup 14% to 26% less time than the first-answer setup of the same run, and the challenged setup's five sessions wrote fewer output tokens in two runs and 9% more in the third.
+Five questions about the project, each in a fresh session, were asked of every setup: all 30 answers were correct, first and challenged.[^ask-for-more-run]
+In each of the cost arm's three runs, the five questions took the challenged setup 14% to 26% less time than the first-answer setup of the same run, and the challenged setup's five sessions wrote fewer output tokens in two runs and 9% more in the third.[^ask-for-more-run]
 
 The limits are plain.
 Three pairs per arm is a recorded experiment, not a study, and has no statistics.

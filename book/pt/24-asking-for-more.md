@@ -64,12 +64,12 @@ A primeira resposta de um agente costuma ser: roda, lê bem, faz o que foi pedid
 **A pessoa toma a resposta do auxílio no lugar de conferir.**
 Kathleen Mosier e Linda Skitka definiram o viés de automação em 1996: "*a tendência de usar sinais automatizados como substituto heurístico da busca e do processamento atentos de informação*" (citado em Mosier e Manzey 2019).[^mosier-manzey-2019]
 Skitka, Mosier e Burdick mediram isso em 1999, com 80 estudantes numa tarefa de voo simulado, uns com um auxílio automatizado e outros sem.[^skitka-1999]
-Nos seis eventos que o auxílio não sinalizou, quem tinha o auxílio acertou 59% das vezes, contra 97% sem ele.
-Quando o auxílio recomendou algo errado, em seis ocasiões, todos os participantes que tinham o auxílio, menos um, seguiram ao menos uma das recomendações erradas.
+Nos seis eventos que o auxílio não sinalizou, quem tinha o auxílio acertou 59% das vezes, contra 97% sem ele.[^skitka-1999]
+Quando o auxílio recomendou algo errado, em seis ocasiões, todos os participantes que tinham o auxílio, menos um, seguiram ao menos uma das recomendações erradas.[^skitka-1999]
 
 **A pessoa não tem o tempo ou os meios para melhorá-la.**
 Uma pesquisa de 2025 da Microsoft Research e da Carnegie Mellon University pediu a 319 trabalhadores do conhecimento exemplos do seu próprio trabalho com IA generativa.[^lee-2025]
-Entre o que os impediu de pensar criticamente sobre uma resposta, 44 citaram a falta de tempo, e 72 disseram que era difícil melhorar a resposta pedindo de novo ao modelo.
+Entre o que os impediu de pensar criticamente sobre uma resposta, 44 citaram a falta de tempo, e 72 disseram que era difícil melhorar a resposta pedindo de novo ao modelo.[^lee-2025]
 Na mesma pesquisa, mais confiança na IA andou junto com menos pensamento crítico, como os próprios trabalhadores relataram; a pesquisa mediu o que eles disseram, não a qualidade do trabalho.
 
 Uma resposta não conferida custa pouco enquanto a tarefa é uma que o modelo faz bem, e muito quando não é.
@@ -86,16 +86,16 @@ Os exemplos abaixo vêm de um experimento que este livro fez com três tarefas d
 
 **Testar um limite que ele afirmou.**
 Quando um agente diz que algo não pode ser feito, diz isso pelo que lembra da ferramenta, e um teste custa turnos que ninguém pediu que ele gastasse.
-Na tarefa do card, uma primeira resposta disse com todas as letras que não tinha conseguido conferir o card e deixou a conferência para a pessoa.
+Na tarefa do card, uma primeira resposta disse com todas as letras que não tinha conseguido conferir o card e deixou a conferência para a pessoa.[^ask-for-more-run]
 Quando lhes pediram um teste, os agentes acharam o que tinham afirmado sem conferir: no card, estilos que o Teams não mostra e elementos que a documentação dele não confirmava; num resumo para um conselho, decisões chamadas de rotina que o próprio relatório punha entre as mais importantes.
 
 **Ajustar o resultado ao tempo de quem lê.**
 "Resuma o relatório para o conselho" não diz que o conselho tem pouco tempo e lê no celular.
-As três primeiras respostas escreveram o resumo no chat, com tabelas que um celular não mostra; toda resposta desafiada escreveu um arquivo sem tabelas, com as decisões do conselho primeiro.
+As três primeiras respostas escreveram o resumo no chat, com tabelas que um celular não mostra; toda resposta desafiada escreveu um arquivo sem tabelas, com as decisões do conselho primeiro.[^ask-for-more-run]
 
 **Ajustar o resultado ao custo de cada uso.**
 "Prepare o projeto para um agente que responde ao time todo dia" não diz que cada pergunta abre uma sessão nova e gasta tokens, da conta do time ou do limite de sessão do seu plano.
-Cada primeira resposta escreveu um guia longo para o agente sem perguntar, e o juiz achou em dois deles valores copiados do código, que ficam velhos sem aviso quando o código muda.
+Cada primeira resposta escreveu um guia longo para o agente sem perguntar, e o juiz achou em dois deles valores copiados do código, que ficam velhos sem aviso quando o código muda.[^ask-for-more-run]
 
 **O que ninguém pediu.**
 Um agente que responde à pergunta não acrescenta o que não estava nela.
@@ -108,7 +108,7 @@ No braço do limite, o agente construiu um card do Teams com três abas para um 
 No braço do público, resumiu um relatório anual longo para um conselho que decide o orçamento.
 No braço do custo, preparou um pequeno projeto para um agente que responde às perguntas do time todo dia, sobre notas que não param de crescer.
 
-Cada par, primeira e desafiada, foi pontuado às cegas em três critérios do braço, de 1 a 5 cada, então um braço soma no máximo 45 nos seus três pares.
+Cada par, primeira e desafiada, foi pontuado às cegas em três critérios do braço, de 1 a 5 cada, então um braço soma no máximo 45 nos seus três pares.[^ask-for-more-run]
 
 | Braço | Primeira | Desafiada |
 |---|---|---|
@@ -116,20 +116,20 @@ Cada par, primeira e desafiada, foi pontuado às cegas em três critérios do br
 | público | 36 | 44 |
 | custo | 24 | 39 |
 
-O juiz teria enviado a resposta desafiada em todos os 9 pares.
+O juiz teria enviado a resposta desafiada em todos os 9 pares.[^ask-for-more-run]
 
 O desafio foi pago em tempo e em tokens.
-Somadas as três execuções de cada braço, as sessões desafiadas levaram de 2,9 a 8,8 vezes o tempo das primeiras respostas e escreveram de 2,7 a 9,4 vezes os tokens de saída.
-Uma sessão de cada vez, uma primeira resposta levou de 24 segundos a pouco mais de 2 minutos, e uma sessão desafiada de 3 a 9 minutos.
+Somadas as três execuções de cada braço, as sessões desafiadas levaram de 2,9 a 8,8 vezes o tempo das primeiras respostas e escreveram de 2,7 a 9,4 vezes os tokens de saída.[^ask-for-more-run]
+Uma sessão de cada vez, uma primeira resposta levou de 24 segundos a pouco mais de 2 minutos, e uma sessão desafiada de 3 a 9 minutos.[^ask-for-more-run]
 
 Numa assinatura fixa, esses tokens saem do limite de sessão do plano: o uso do modelo que um plano permite numa janela de horas, depois do qual o host recusa turnos novos até a janela acabar.
-As nove sessões desafiadas do experimento, rodadas em cerca de 45 minutos numa tarde, gastaram o limite do meu plano antes do último turno do protocolo, que nas nove foi enviado de novo cerca de 30 minutos depois.
+As nove sessões desafiadas do experimento, rodadas em cerca de 45 minutos numa tarde, gastaram o limite do meu plano antes do último turno do protocolo, que nas nove foi enviado de novo cerca de 30 minutos depois.[^ask-for-more-run]
 Cada protocolo que você envia gasta uma parte desse limite.
 Se você paga por token, o [capítulo 22](22-cost-and-where.md) mostra como transformar tokens em preço.
 
 O braço do custo também mediu quanto cada preparação custa em uso.
-Cinco perguntas sobre o projeto, cada uma numa sessão nova, foram feitas a cada preparação: as 30 respostas estavam certas, nas primeiras e nas desafiadas.
-Em cada uma das três execuções do braço do custo, as cinco perguntas levaram de 14% a 26% menos tempo na preparação desafiada do que na da primeira resposta da mesma execução, e as cinco sessões da preparação desafiada escreveram menos tokens de saída em duas execuções e 9% mais na terceira.
+Cinco perguntas sobre o projeto, cada uma numa sessão nova, foram feitas a cada preparação: as 30 respostas estavam certas, nas primeiras e nas desafiadas.[^ask-for-more-run]
+Em cada uma das três execuções do braço do custo, as cinco perguntas levaram de 14% a 26% menos tempo na preparação desafiada do que na da primeira resposta da mesma execução, e as cinco sessões da preparação desafiada escreveram menos tokens de saída em duas execuções e 9% mais na terceira.[^ask-for-more-run]
 
 Os limites são claros.
 Três pares por braço é um experimento registrado, não um estudo, e não tem estatística.
