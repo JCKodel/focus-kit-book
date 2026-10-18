@@ -47,7 +47,7 @@ Data sent to a service it should not reach leaves no trace on the screen, and a 
 None of them fails a clause tested by hand; all of them are in the code.
 
 The milestone is every change since its base, and the reading covers all of them.
-`git diff <base>..HEAD` shows them: `git diff` prints what changed between two commits, line by line, and `<base>..HEAD` is the range from the base to the last commit (chapter 18 teaches it).
+`git diff <base>..HEAD` shows them: `git diff` prints what changed between two commits, line by line, and `<base>..HEAD` is the range from the base to `HEAD`, the commit you are on, usually the last (chapter 18 teaches `HEAD`), so the diff holds every change made after the base, whichever delivery made it.
 A review given one commit reads what that commit changed, the milestone's last delivery, and misses the others.
 `git diff --stat <base>..HEAD` lists the range's paths, and the review's page writes them down by area, so the paths the readers read can be checked against it.
 

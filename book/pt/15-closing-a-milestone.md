@@ -48,7 +48,7 @@ Dados enviados a um serviço que não deviam alcançar não deixam rastro na tel
 Nenhum deles reprova uma cláusula testada à mão; todos eles estão no código.
 
 O marco é toda mudança desde a sua base, e a leitura cobre todas elas.
-O `git diff <base>..HEAD` mostra todas: o `git diff` imprime o que mudou entre dois commits, linha a linha, e `<base>..HEAD` é o intervalo da base até o último commit (o capítulo 18 o ensina).
+O `git diff <base>..HEAD` mostra todas: o `git diff` imprime o que mudou entre dois commits, linha a linha, e `<base>..HEAD` é o intervalo da base até o `HEAD`, o commit em que você está, em geral o último (o capítulo 18 ensina o `HEAD`), então o diff traz toda mudança feita depois da base, seja qual for a entrega que a fez.
 Uma revisão que recebe um commit lê o que esse commit mudou, a última entrega do marco, e perde as outras.
 O `git diff --stat <base>..HEAD` lista os caminhos do intervalo, e a página da revisão os anota por área, para que os caminhos que os leitores leram possam ser conferidos contra ela.
 
