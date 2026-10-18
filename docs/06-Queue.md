@@ -382,7 +382,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.17 and the reposi
 [x] ch04-features-folder     the Portuguese chapter 4 gives `features/` as the book's name, not the kit's
 [x] ch11-blocking-fix        chapter 11 blocks a delivery only on a prerequisite fix, as chapter 13 does, and the Portuguese queue says what the English one says; both editions
 [ ] pt-ninjobs-article       the Portuguese edition gives Ninjobs one article throughout
-[ ] docs04-features-reason   docs/04's Evidence gives `features/` chapter 4's reason, the book's name for the slices' folder, not a name an external format fixes
+[x] docs04-features-reason   docs/04's Evidence gives `features/` chapter 4's reason, the book's name for the slices' folder, not a name an external format fixes
 ```
 
 ## M17. focus-kit 2026.10.18
