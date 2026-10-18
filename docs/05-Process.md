@@ -112,10 +112,11 @@ A board may read the queue, and people pull work from it, so a mark
 changes at once: `[~]` is /propose's first edit, `[*]` is /apply's first,
 and `[x]` is /apply's last. Without a board the marks cost nothing.
 
-A line waits when the person says it is blocked, when it needs an answer
-that was asked and not given, or when work already started finds it needs
-another line done first, such as a fix found in the middle of an /apply,
-or when a milestone review's code reading missed part of its range (§8).
+A line waits in four cases: the person says it is blocked; it needs an
+answer that was asked and not given; work already started finds it needs
+another line done first, such as a fix found in the middle of an /apply;
+or a milestone review's code reading missed part of its range, and its
+reason says what was read (§8).
 The reason goes at the end
 of the line, `· blocked: <reason>` or `· blocked: after <slug>, <slug>`.
 A dependency known when the line is added is `· after <slug>` alone,
