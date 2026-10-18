@@ -107,6 +107,7 @@ O que uma nova execução compara é o próprio passo do arquivo de setup, que c
 ## Como cada host encontra os comandos
 
 Um host precisa de duas coisas do repositório: o arquivo de regras, `AGENTS.md`, e os comandos, o `/propose` e o `/apply` cada um com o slug que você digita depois dele, o nome da entrega em `work/<slug>.md` (capítulo 12).
+O `/brainstorm` e o `/analyze` começam um projeto, não uma entrega, então não levam slug; para definir ou construir `emprestar-livro`, você digita `/propose emprestar-livro` ou `/apply emprestar-livro`, ou, onde o host pede o slug, responde `emprestar-livro`.
 O arquivo de setup escreve o que cada host abaixo precisa:
 
 | Host | Lê as regras de | Lê os comandos de | Você digita |
@@ -116,15 +117,19 @@ O arquivo de setup escreve o que cada host abaixo precisa:
 | GitHub Copilot | `AGENTS.md` | `.agents/skills/`, por um arquivo de prompt em `.github/prompts/` | `/propose`, e ele pede o slug |
 | Cursor | `AGENTS.md` | `.agents/skills/`, por um arquivo de comando em `.cursor/commands/` | `/propose` |
 | Gemini CLI | `AGENTS.md`, pelo `GEMINI.md` | `.agents/skills/`, por um arquivo de comando em `.gemini/commands/` | `/propose <slug>` |
-| Google Antigravity | `AGENTS.md`, por uma regra em `.agents/rules/` | `.agents/skills/` | `/propose <slug>` |
+| Google Antigravity | `AGENTS.md` direto; `.agents/rules/focus-kit.md` é um ponteiro sempre ativo | `.agents/skills/` | `/propose <slug>` |
 | Devin Desktop, antes Windsurf | `AGENTS.md` | `.agents/skills/` | `/propose` |
 | OpenCode, Zed | `AGENTS.md` | `.agents/skills/` | pedindo a skill |
+| Jules, Junie, Warp, Kiro, Roo Code, Cline | `AGENTS.md` | nenhuma | pedindo em palavras o `.agents/skills/propose/SKILL.md` |
 
 Cada comando é uma skill, uma pasta com um arquivo `SKILL.md` de instruções que o host carrega quando você a chama.[^claude-code-skills][^codex-skills][^copilot-skills]
 O Claude Code lê o `CLAUDE.md` no início de uma sessão, e uma linha `@AGENTS.md` nele importa o arquivo de regras; a partir da versão 2.1.277 ele lê o `AGENTS.md` sozinho, mas só num repositório sem `CLAUDE.md`, então o kit escreve o `CLAUDE.md` com a importação, que toda versão lê.[^claude-code-memory]
 O Codex, o Copilot e o Devin Desktop, antes Windsurf, leem o `AGENTS.md` sozinhos.[^codex-agents-md][^copilot-instructions][^devin-rules]
+O Antigravity também lê o `AGENTS.md` direto; a regra que o kit escreve em `.agents/rules/focus-kit.md` é um ponteiro sempre ativo, sem regra própria, um caminho a mais até o `AGENTS.md`, não o único.
 O comando de barra do Copilot vem de um arquivo de prompt que só diz ao agente para ler a skill e segui-la, e pede o slug quando você digita o comando.[^copilot-prompt-files]
 O Codex pode rodar uma skill por conta própria quando uma mensagem bate com a descrição dela; um pequeno arquivo ao lado de cada skill desliga isso, para que uma mensagem que por acaso diga "apply" não construa nada que você não pediu.[^codex-skills]
+As skills do Claude Code levam `disable-model-invocation: true`, que impede o Claude de rodar uma por conta própria: uma mensagem que bate com a descrição de uma skill não basta, e o comando só roda quando você o nomeia.[^claude-code-skills]
+Nos outros hosts, invoque os comandos você mesmo; o kit não afirma que cada host garanta o mesmo.
 Para o Cursor e o Devin Desktop, nenhum dos dois fornecedores diz na documentação se um slug digitado depois de um comando chega até ele, então nomeie a entrega na sua mensagem se não chegar.
 O Devin Desktop também lê `.windsurf/skills/`, a pasta do seu nome anterior;[^devin-skills] o arquivo de setup não escreve nada ali e, numa atualização, remove dela os arquivos do próprio kit, para que o host nunca encontre uma cópia mais velha de um comando ao lado da atual em `.agents/skills/`, e um arquivo seu ali é relatado e mantido.
 
@@ -133,7 +138,8 @@ O arquivo de setup cita o `/brainstorm` ou o `/analyze`, para rodar numa sessão
 Na biblioteca de empréstimos, depois de `/propose emprestar-livro`, o Claude Code diz para você rodar `/apply emprestar-livro` numa sessão nova, e o Codex diz para rodar `$apply emprestar-livro`.
 Os arquivos do kit são os mesmos nos dois; a forma segue o host que os roda.
 
-O arquivo de setup do kit mantém esta tabela atualizada, com a página do fornecedor de onde cada linha foi lida, e só acrescenta um host com a documentação dele em mãos; outros hosts que leem o `AGENTS.md` ainda conseguem rodar um comando quando você pede a skill dele em palavras.
+O arquivo de setup do kit mantém esta tabela atualizada, com a página do fornecedor de onde cada linha foi lida, e só acrescenta um host com a documentação dele em mãos.
+A última linha vem da §1 do arquivo de setup: Jules, Junie, Warp, Kiro, Roo Code e Cline leem o `AGENTS.md`, e o kit não conta com nenhuma pasta de skills nem comando de barra deles, então você pede em palavras, "leia `.agents/skills/propose/SKILL.md` e siga-o para `emprestar-livro`", e o host lê o arquivo para o qual você aponta.
 
 ## Por que o método não depende do host
 
@@ -160,11 +166,11 @@ E o próximo comando chega na forma que o seu host reconhece, porque um host pod
 * Uma frase para o seu agente instala o focus-kit, e a mesma frase o atualiza; nada é instalado na sua máquina, nada é colocado em stage nem vai para um commit, e um arquivo do kit que você mudou faz a atualização parar antes de escrever.
 * O arquivo de setup escreve só os arquivos do kit e nunca toca `docs/`, `work/`, `AGENTS.md` ou `CLAUDE.md`; uma mudança de que o docs/04, o docs/05, o docs/06 ou o `AGENTS.md` precisa, uma regra, uma linha da fila ou um slot, vem como uma migração no relatório dele, e até o time aplicá-la como uma entrega o processo é o antigo.
 * O changelog do kit, a entrada mais nova primeiro, diz para cada versão o que mudou, o problema que causou a mudança e, num item que começa com `Migração:`, quando a entrada tem um, o que mudar nos documentos do projeto.
-* Cada host encontra as regras e os comandos nas suas próprias pastas: o Claude Code roda um comando como `/propose <slug>`, o Codex como `$propose <slug>`, o Copilot como `/propose`, que pede o slug, o Devin Desktop como `/propose`; todo comando cita o próximo nessa forma.
+* Cada host encontra as regras e os comandos nas suas próprias pastas: o Claude Code roda um comando como `/propose <slug>`, o Codex como `$propose <slug>`, o Copilot como `/propose`, que pede o slug, o Devin Desktop como `/propose`, e Jules, Junie, Warp, Kiro, Roo Code e Cline pedindo em palavras o arquivo da skill; o `/brainstorm` e o `/analyze` não levam slug; todo comando cita o próximo nessa forma.
 * Todo host lê um arquivo de regras no início, lê os arquivos para os quais você aponta e escreve arquivos, e o método não precisa de mais nada.
 
 [^claude-code-memory]: Anthropic, "How Claude remembers your project", documentação do Claude Code, acesso em 2026-10-18. <https://code.claude.com/docs/en/memory>
-[^claude-code-skills]: Anthropic, "Extend Claude with skills", documentação do Claude Code, acesso em 2026-09-30. <https://code.claude.com/docs/en/skills>
+[^claude-code-skills]: Anthropic, "Extend Claude with skills", documentação do Claude Code, acesso em 2026-10-18. <https://code.claude.com/docs/en/skills>
 [^codex-agents-md]: OpenAI, "Custom instructions with AGENTS.md", documentação do Codex, acesso em 2026-09-30. <https://developers.openai.com/codex/guides/agents-md>
 [^codex-skills]: OpenAI, "Build skills", documentação do Codex, acesso em 2026-09-30. <https://developers.openai.com/codex/skills>
 [^copilot-instructions]: GitHub, "Adding repository custom instructions for GitHub Copilot", GitHub Docs, acesso em 2026-09-30. <https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions>
