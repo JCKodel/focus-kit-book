@@ -109,7 +109,8 @@ Pedido numa sessão comum para mostrar a data de devolução na tela do emprést
 
 A regra da tela estreita e a exceção do catálogo não cabem na frase única da linha, então vão para um rascunho `work/formato-devolucao.md`, e a resposta para ali, nomeando `/propose formato-devolucao` para uma sessão nova, escrito como o seu host chama os comandos; um pedido que a linha comporta inteiro não ganha rascunho.
 O rascunho é onde o detalhe espera: o `/propose formato-devolucao`, numa sessão nova, parte dele e escreve a página (o capítulo 12 mostra o `/propose`), então nada do que você disse na primeira sessão é dito duas vezes.
-Dizer "defina agora" não muda nada: o agente não consegue rodar o `/propose` sozinho, já que ele é um comando que o host roda, e uma página escrita sem ele começa sem o que o `/propose` lê.
+Dizer "defina agora" recebe a mesma resposta: a regra do kit é o `/propose` numa sessão nova, cuja janela contém o arquivo de regras, os documentos e o rascunho, e nada desta conversa, então a página guarda só o que ficou por escrito, que é tudo o que o `/apply` terá.
+Um host pode mesmo assim rodar o comando aqui quando você o nomeia na sua mensagem, e alguns se oferecem para isso; a página seria escrita com tudo o que foi dito nesta sessão ainda na janela, então abra uma sessão nova.
 
 Uma mudança tão pequena passa mesmo assim pelo método inteiro, e isto é o que ela custa.
 O `/propose formato-devolucao` lê os documentos do projeto e o rascunho e escreve esta página, escrita para este capítulo:

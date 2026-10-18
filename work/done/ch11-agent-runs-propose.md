@@ -51,10 +51,38 @@
 
 **Done when.**
 
-* [ ] Both editions written: the two lines as Behaviour says.
-* [ ] Chapter 11 still opens with its value, keeps its gain, no filler and nothing useful cut.
-* [ ] Every number sourced: none added.
-* [ ] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+* [x] Both editions written: the two lines as Behaviour says.
+* [x] Chapter 11 still opens with its value, keeps its gain, no filler and nothing useful cut.
+* [x] Every number sourced: none added.
+* [x] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, no private case (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author: left to the driver, who builds the book once at the end of the batch.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, commit message in a `commit` block.
+
+**Divergences.** The two lines replace the one line, found by its text at en 11:109 and pt 11:112 after `ch11-queue-grows` landed, with the delivery review's three wording suggestions applied on the driver's word (batch rule 5), so the text differs from the Behaviour's exact words in keeping its intent:
+
+* en "the kit runs `/propose` in a fresh session" is "the kit's rule is `/propose` in a fresh session"; pt "o kit roda o `/propose`" is "a regra do kit é o `/propose`": the person invokes the command, the kit only sets the rule (decision 4).
+* pt "a página guarda só o que foi escrito" is "o que ficou por escrito", so it cannot read as the page's own text.
+* en "written beside everything said in this session" is "written with everything said in this session still in the window"; pt "escrita ao lado de tudo o que foi dito" is "escrita com tudo o que foi dito nesta sessão ainda na janela": it names the risk.
+
+**Proof.**
+
+* `grep -n "cannot run \`/propose\` on its own\|não consegue rodar o \`/propose\` sozinho" book/*/11-queue-and-milestones.md` prints nothing.
+* `grep -n "gets the same answer\|recebe a mesma resposta" book/*/11-queue-and-milestones.md` prints en 11:109 and pt 11:112.
+* `git diff -- book/*/11-queue-and-milestones.md`: one hunk per edition, one line out and two in.
+* `make verify`: build, parity, em dash, prose, width, links and disclosure all pass, exit 0.
+
+**Review.** A read-only Opus reviewer that did not write the change read the diff against this page and docs/04: nothing breaks the page or docs/04; text matches Behaviour, no Fails pattern, flow with the lines around it holds. Its three optional wording suggestions are applied in this delivery, as Divergences says; no queue line.
+
+**Decisions.** The batch driver owns docs/06 and the commit; this delivery staged nothing and left `make book` to the driver.
+
+```commit
+docs(ch11-agent-runs-propose): say why /propose waits for a fresh session
+
+- Chapter 11, both editions: "define it now" gets the same answer, the kit's rule of `/propose` in a fresh session, whose window holds only what was written down; a host may run the command when named, so open a fresh one
+
+book/en/11-queue-and-milestones.md
+book/pt/11-queue-and-milestones.md
+docs/06-Queue.md
+work/done/ch11-agent-runs-propose.md
+```

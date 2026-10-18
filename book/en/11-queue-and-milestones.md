@@ -106,7 +106,8 @@ Asked in an ordinary session to show the due date on the loan screen as day/mont
 
 The narrow-screen rule and the catalog exception do not fit the line's one sentence, so they go into a draft `work/due-date-format.md`, and the answer stops there, naming `/propose due-date-format` for a fresh session, written as your host invokes it; a request the line holds whole gets no draft.
 The draft is where the detail waits: `/propose due-date-format`, in a fresh session, starts from it and writes the page (chapter 12 shows `/propose`), so nothing you said in the first session is said twice.
-Saying "define it now" changes nothing: the agent cannot run `/propose` on its own, since it is a command the host runs, and a page written without it starts without what `/propose` reads.
+Saying "define it now" gets the same answer: the kit's rule is `/propose` in a fresh session, whose window holds the rules file, the documents and the draft and nothing of this conversation, so the page holds only what was written down, which is all `/apply` will have.
+A host may still run the command here when you name it in your message, and some offer to; the page would then be written with everything said in this session still in the window, so open a fresh one.
 
 A change this small still goes through the whole method, and this is what it takes.
 `/propose due-date-format` reads the project's documents and the draft and writes this page, written for this chapter:
