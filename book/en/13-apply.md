@@ -61,13 +61,14 @@ The kit's first choice is the host's own review, a skill the agent invokes or a 
 Otherwise it is a read-only agent: one the session launches with its own context, which reads files and runs `git diff` and edits nothing (chapter 16 says more on agents that an agent launches).
 A slot that says none means no such review, and your commit stays the only review.
 
-The review reads the delivery's changes by their paths, and of docs/06 only this line's hunk, against the page and docs/04.
-A read-only agent reads their `git diff`, staged and unstaged; the host's review reads them its own way, kept to those paths.
-Another session's files in the same folder are not this review's (chapter 19).
+The review reads the delivery's changes by their paths, the files the delivery created among them, and of docs/06 only this line's hunk, against the page and docs/04.
+A read-only agent reads their `git diff`, staged and unstaged, and opens each file the delivery created, which the session names, since it wrote them: a new file is untracked, one git does not hold yet, so `git diff` shows nothing of it until it is staged, and `/apply` stages only after the review.
+The host's review reads them its own way, kept to those paths.
+Another session's files in the same folder, the ones it created included, are not this review's (chapter 19).
 The reviewer brings what the writer's own reread lacks, a context free of the reasoning that wrote the change, and measures the change against the page and docs/04.
 
 The reviewer reports candidates, faults it suspects, and fixes nothing itself.
-A candidate that breaks the page, docs/04 or a line this delivery wrote is fixed in this session, and verify runs again.
+A candidate that breaks the page, docs/04 or the text this delivery wrote is fixed in this session, and verify runs again.
 Anything else, a fault in code the delivery did not touch or a wish the page did not ask for, becomes a `[ ]` line in the queue, because the page is the scope.
 The reviewer stays read-only because the session that built the change knows why it made each choice, so that session makes the fix and the change keeps one writer.
 
@@ -107,9 +108,10 @@ Whichever you answer, the other one changes in the same delivery.
 It runs `npm run verify` until it is green, takes the lending screen at 390 and 1280 pixels wide, and compares both with the design file.
 If a button wraps at the narrow width, it gets fixed; if the design file gives no value for a colour, the choice is written down as a divergence, with its reason.
 
-Then a read-only agent reads the `git diff` of the delivery's paths against the page and docs/04, in a review also written for this chapter, and reports two candidates.
+Then a read-only agent reads the files the delivery created, the migration and everything in `src/features/loans/`, and the `git diff` of what the delivery edited, against the page and docs/04, in a review also written for this chapter, and reports two candidates.
 The first draft of `insertLoan` turned every failure of the write into `AlreadyLent`, while the library's docs/04 holds chapter 3's boundary: the unique index's failure becomes `AlreadyLent`, and any other failure of the write stays `DatabaseFailed`.
-No test triggers it, since in the tests only the unique index ever fails, and it sits in a line this delivery wrote, so the agent narrows the catch to the unique index's error and runs verify again; the repository call chapters 3 and 4 describe is the fixed one.
+No test triggers it, since in the tests only the unique index ever fails, and it sits in the text this delivery wrote, so the agent narrows the catch to the unique index's error and runs verify again; the repository call chapters 3 and 4 describe is the fixed one.
+`insertLoan` lives in a file this delivery created, so a review of the `git diff` alone would have read nothing of it.
 The second candidate: the refusal for a suspended member does not say until when.
 The page never asked for that, so it becomes the line `suspension-end`, placed in the queue below `return-book`, which stays the next free line.
 Then it writes what happened on the page, both candidates and what became of each included, adds the table `loan` to the document that lists the schema, ticks Done when, moves the page to `work/done/lend-book.md`, stages only this delivery's paths, and, as its last edit, marks the line `[x]` and stages that hunk of docs/06.

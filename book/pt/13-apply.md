@@ -61,13 +61,14 @@ A primeira escolha do kit é a revisão do próprio host, uma skill que o agente
 Senão, é um agente somente leitura: um agente que a sessão lança com o seu próprio contexto, que lê arquivos e roda `git diff` e não edita nada (o capítulo 16 diz mais sobre agentes que um agente lança).
 Se o slot não nomeia revisor nenhum, essa revisão não existe, e o seu commit continua sendo a única revisão.
 
-A revisão lê as mudanças da entrega pelos seus caminhos, e do docs/06 só o trecho desta linha, contra a página e o docs/04.
-Um agente somente leitura lê o `git diff` delas, em stage e fora dele; a revisão do host as lê do seu jeito, mantida nesses caminhos.
-Os arquivos de outra sessão na mesma pasta não são desta revisão (capítulo 19).
+A revisão lê as mudanças da entrega pelos seus caminhos, entre elas os arquivos que a entrega criou, e do docs/06 só o trecho desta linha, contra a página e o docs/04.
+Um agente somente leitura lê o `git diff` delas, em stage e fora dele, e abre cada arquivo que a entrega criou, que a sessão cita, já que os escreveu: um arquivo novo é não rastreado, um que o git ainda não guarda, então o `git diff` não mostra nada dele até ele entrar em stage, e o `/apply` só põe em stage depois da revisão.
+A revisão do host as lê do seu jeito, mantida nesses caminhos.
+Os arquivos de outra sessão na mesma pasta, os que ela criou incluídos, não são desta revisão (capítulo 19).
 O revisor traz o que a releitura de quem escreveu não tem, um contexto livre do raciocínio que escreveu a mudança, e mede a mudança contra a página e o docs/04.
 
 O revisor aponta candidatos, defeitos de que suspeita, e não corrige nada ele mesmo.
-Um candidato que quebra a página, o docs/04 ou uma linha que esta entrega escreveu é corrigido nesta sessão, e a verificação roda de novo.
+Um candidato que quebra a página, o docs/04 ou o texto que esta entrega escreveu é corrigido nesta sessão, e a verificação roda de novo.
 Todo o resto, um defeito em código que a entrega não tocou ou um desejo que a página não pediu, vira uma linha `[ ]` na fila, porque a página é o escopo.
 O revisor fica somente leitura porque a sessão que construiu a mudança sabe por que fez cada escolha, então é essa sessão que faz a correção, e a mudança tem um só autor.
 
@@ -107,9 +108,10 @@ Qualquer que seja a sua resposta, o outro muda na mesma entrega.
 Ele roda `npm run verify` até ficar verde, captura a tela de empréstimo com 390 e 1280 pixels de largura, e compara as duas com o arquivo de design.
 Se um botão quebra linha na largura estreita, ele é corrigido; se o arquivo de design não dá um valor para uma cor, a escolha é registrada como uma divergência, com o seu motivo.
 
-Depois um agente somente leitura lê o `git diff` dos caminhos da entrega contra a página e o docs/04, em uma revisão também escrita para este capítulo, e aponta dois candidatos.
+Depois um agente somente leitura lê os arquivos que a entrega criou, a migration e tudo em `src/features/emprestimos/`, e o `git diff` do que ela editou, contra a página e o docs/04, em uma revisão também escrita para este capítulo, e aponta dois candidatos.
 O primeiro rascunho de `inserirEmprestimo` transformava toda falha da escrita em `JaEmprestado`, enquanto o docs/04 da biblioteca guarda a fronteira do capítulo 3: a falha do índice único vira `JaEmprestado`, e qualquer outra falha da escrita continua `BancoDeDadosFalhou`.
-Nenhum teste dispara isso, já que nos testes só o índice único falha, e está em uma linha que esta entrega escreveu, então o agente restringe a captura ao erro do índice único e roda a verificação de novo; a chamada do repositório que os capítulos 3 e 4 descrevem é a corrigida.
+Nenhum teste dispara isso, já que nos testes só o índice único falha, e está no texto que esta entrega escreveu, então o agente restringe a captura ao erro do índice único e roda a verificação de novo; a chamada do repositório que os capítulos 3 e 4 descrevem é a corrigida.
+`inserirEmprestimo` fica em um arquivo que esta entrega criou, então uma revisão só do `git diff` não teria lido nada dele.
 O segundo candidato: a recusa para um membro suspenso não diz até quando.
 A página nunca pediu isso, então vira a linha `fim-da-suspensao`, posta na fila abaixo de `devolver-livro`, que continua sendo a próxima linha livre.
 Então ele escreve na página o que aconteceu, com os dois candidatos e o que foi feito de cada um, acrescenta a tabela `emprestimo` ao documento que lista o schema, marca o Pronto quando, move a página para `work/done/emprestar-livro.md`, coloca em stage só os caminhos desta entrega e, como a sua última edição, marca a linha `[x]` e coloca em stage esse trecho do docs/06.

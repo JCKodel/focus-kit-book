@@ -392,7 +392,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18 and the reposi
 ```
 [x] kit-2026-10-18           reinstall the kit at 2026.10.18 and apply its migration report to docs/05 §§4, 5 and 8, docs/03's waiting mark and the skills · after m16-review
 [x] ch08-update-2026-10-18   chapter 8: the update example and its report at 2026.10.18, the base named as the previous review's commit; both editions · after kit-2026-10-18
-[ ] ch13-created-files       chapter 13: the delivery review reads the files the delivery created, untracked when it runs; both editions · after kit-2026-10-18
+[x] ch13-created-files       chapter 13: the delivery review reads the files the delivery created, untracked when it runs; both editions · after kit-2026-10-18
 [ ] ch14-four-waits          chapter 14: a line waits in four cases, a code reading that missed part of its range among them; both editions · after kit-2026-10-18
 [ ] ch15-review-base         chapter 15: the base is the commit of the previous milestone's review, or the first commit; both editions · after kit-2026-10-18
 [ ] m17-review               the review of M17 as docs/05 §8 says · after kit-2026-10-18, ch08-update-2026-10-18, ch13-created-files, ch14-four-waits, ch15-review-base
