@@ -60,20 +60,25 @@ Uma falha faz parte da prova e é registrada, nunca escondida.
 
 ### A revisão da entrega
 
-Com a verificação verde e a prova feita, e antes de a página registrar o que aconteceu, o `/apply` faz revisar as mudanças da sua entrega por um contexto que não as escreveu.
+Com a verificação verde, a prova feita e os documentos e manuais que a entrega muda já atualizados, e antes de a página registrar o que aconteceu, o `/apply` faz revisar as mudanças da sua entrega por um contexto que não as escreveu.
+Os documentos vêm antes porque fazem parte da entrega: um documento de schema ou um manual escrito depois da revisão é um que nenhum revisor leu.
 Isso acontece dentro da mesma sessão, nunca em uma sessão nova, e o slot de revisão da entrega do docs/05 nomeia o revisor.
 A primeira escolha do kit é a revisão do próprio host, uma skill que o agente invoca ou um comando que ele roda, quando o agente consegue mantê-la nos caminhos da entrega.
 Senão, é um agente somente leitura: um agente que a sessão lança com o seu próprio contexto, que lê arquivos e roda `git diff` e não edita nada (o capítulo 16 diz mais sobre agentes que um agente lança).
 Se o slot não nomeia revisor nenhum, essa revisão não existe, e o seu commit continua sendo a única revisão.
 
-A revisão lê as mudanças da entrega pelos seus caminhos, entre elas os arquivos que a entrega criou, e do docs/06 só o trecho desta linha, contra a página e o docs/04.
-Um agente somente leitura lê o `git diff` delas, em stage e fora dele, e abre cada arquivo que a entrega criou, que a sessão cita, já que os escreveu: um arquivo novo é não rastreado, um que o git ainda não guarda, então o `git diff` não mostra nada dele até ele entrar em stage, e o `/apply` só põe em stage depois da revisão.
+A revisão lê a entrega inteira contra a sua base, pelos seus caminhos, entre eles os arquivos que a entrega criou, e do docs/06 só o trecho desta linha, contra a página e o docs/04.
+Um agente somente leitura lê o `git diff HEAD` desses caminhos, que os compara com o último commit e por isso traz juntas as mudanças em stage e fora dele; um `git diff` puro compara a pasta de trabalho com o índice e perde o que já está em stage.
+Em um branch da entrega onde você fez commit do trabalho parcial que um `/apply` bloqueado colocou em stage, o agente também lê esses commits contra a base do branch: quando a sessão é retomada, uma pasta de trabalho limpa não quer dizer que não há nada a revisar, já que o trabalho até ali pode estar nesses commits, e eles continuam sendo desta revisão.
+No trunk não há nenhum, já que lá o trabalho bloqueado fica sem commit.
+E ele abre cada arquivo que a entrega criou, que a sessão cita, já que os escreveu: um arquivo novo é não rastreado, um que o git ainda não guarda, então nenhum diff mostra nada dele até ele entrar em stage, e o `/apply` só põe em stage depois da revisão.
 A revisão do host as lê do seu jeito, mantida nesses caminhos.
 Os arquivos de outra sessão na mesma pasta, os que ela criou incluídos, não são desta revisão (capítulo 19).
 O revisor traz o que a releitura de quem escreveu não tem, um contexto livre do raciocínio que escreveu a mudança, e mede a mudança contra a página e o docs/04.
 
 O revisor aponta candidatos, defeitos de que suspeita, e não corrige nada ele mesmo.
 Um candidato que quebra a página, o docs/04 ou o texto que esta entrega escreveu é corrigido nesta sessão, e a verificação roda de novo.
+Isso vale para qualquer edição que a verificação cobre feita depois da sua última execução verde, uma correção da revisão ou um documento mudado tarde: uma execução verde fala pelos arquivos como estavam quando ela rodou, então a edição posterior a faz rodar mais uma vez.
 Todo o resto, um defeito em código que a entrega não tocou ou um desejo que a página não pediu, vira uma linha `[ ]` na fila, porque a página é o escopo.
 O revisor fica somente leitura porque a sessão que construiu a mudança sabe por que fez cada escolha, então é essa sessão que faz a correção, e a mudança tem um só autor.
 
@@ -87,8 +92,9 @@ Ela não diz nada sobre se a página foi atendida, se os documentos ainda valem,
 Então, antes de parar, o `/apply` faz tudo isto:
 
 * Escreve na página o que aconteceu: o que divergiu do plano e por quê, o que foi deixado de lado, o que a prova achou, o que a revisão da entrega achou e o que foi feito de cada candidato, e as decisões tomadas, com um ADR se foi preciso um.
-* Atualiza os documentos que a entrega mudou: um termo novo no docs/03, uma regra nova no documento que é dono dela, uma decisão em docs/adr/.
-* Quando a entrega acrescenta ou muda algo que uma pessoa faz à mão, como publicar o app, escreve ou atualiza o manual dele em `docs/manuals/` ([capítulo 7](07-the-documents.md)).
+* Antes da revisão, atualiza os documentos que a entrega mudou: um termo novo no docs/03, uma regra nova no documento que é dono dela, uma decisão em docs/adr/.
+* Antes da revisão também, quando a entrega acrescenta ou muda algo que uma pessoa faz à mão, como publicar o app, escreve ou atualiza o manual dele em `docs/manuals/` ([capítulo 7](07-the-documents.md)).
+* A verificação está verde depois da última edição que ela cobre; uma edição depois dessa execução verde, qualquer que seja o motivo, a faz rodar de novo.
 * Marca cada item do Pronto quando.
 * Move a página para `work/done/`; uma linha `[?]` que espera só por esta, ou por linhas já `[x]`, volta pela fase de retomada ([capítulo 14](14-queue-states.md)).
 * Coloca em stage só os caminhos e trechos desta entrega, nunca com `git add -A` ou `git add .`, e avisa o que outra pessoa já tinha colocado em stage, sem tirar do stage.
@@ -113,13 +119,14 @@ Qualquer que seja a sua resposta, o outro muda na mesma entrega.
 Ele roda `npm run verify` até ficar verde, captura a tela de empréstimo com 390 e 1280 pixels de largura, e compara as duas com o arquivo de design.
 Se um botão quebra linha na largura estreita, ele é corrigido; se o arquivo de design não dá um valor para uma cor, a escolha é registrada como uma divergência, com o seu motivo.
 
-Depois um agente somente leitura lê os arquivos que a entrega criou, a migration e tudo em `src/features/emprestimos/`, e o `git diff` do que ela editou, contra a página e o docs/04, em uma revisão também escrita para este capítulo, e aponta dois candidatos.
+A entrega mudou o schema, então antes de qualquer revisão ele acrescenta a tabela `emprestimo` ao documento que lista o schema.
+Depois um agente somente leitura lê os arquivos que a entrega criou, a migration e tudo em `src/features/emprestimos/`, e o `git diff HEAD` do que ela editou, o documento do schema incluído, contra a página e o docs/04, em uma revisão também escrita para este capítulo, e aponta dois candidatos.
 O primeiro rascunho de `inserirEmprestimo` transformava toda falha da escrita em `JaEmprestado`, enquanto o docs/04 da biblioteca guarda a fronteira do capítulo 3: a falha do índice único vira `JaEmprestado`, e qualquer outra falha da escrita continua `BancoDeDadosFalhou`.
 Nenhum teste dispara isso, já que nos testes só o índice único falha, e está no texto que esta entrega escreveu, então o agente restringe a captura ao erro do índice único e roda a verificação de novo; a chamada do repositório que os capítulos 3 e 4 descrevem é a corrigida.
-`inserirEmprestimo` fica em um arquivo que esta entrega criou, então uma revisão só do `git diff` não teria lido nada dele.
+`inserirEmprestimo` fica em um arquivo que esta entrega criou, então uma revisão só do diff não teria lido nada dele.
 O segundo candidato: a recusa para um membro suspenso não diz até quando.
 A página nunca pediu isso, então vira a linha `fim-da-suspensao`, posta na fila abaixo de `devolver-livro`, que continua sendo a próxima linha livre.
-Então ele escreve na página o que aconteceu, com os dois candidatos e o que foi feito de cada um, acrescenta a tabela `emprestimo` ao documento que lista o schema, marca o Pronto quando, move a página para `work/done/emprestar-livro.md`, coloca em stage só os caminhos desta entrega e, como a sua última edição, marca a linha `[x]` e coloca em stage esse trecho do docs/06.
+Então ele escreve na página o que aconteceu, com os dois candidatos e o que foi feito de cada um, marca o Pronto quando, move a página para `work/done/emprestar-livro.md`, coloca em stage só os caminhos desta entrega e, como a sua última edição, marca a linha `[x]` e coloca em stage esse trecho do docs/06.
 Se uma edição de outra sessão em `src/features/membros/` está na árvore, ou se o trecho dela do docs/06 já está em stage, o agente deixa os dois como estão e avisa você do que está em stage (capítulo 19).
 
 A página termina com a mensagem sugerida, escrita para este capítulo, e a conversa mostra o mesmo bloco:
@@ -164,6 +171,7 @@ Leia a mudança contra a página:
 * O diff em stage tem só esta entrega, e o agente avisou o que já estava em stage?
 * A mensagem sugerida no bloco `commit` no fim da página está certa: o assunto, os tópicos, a última linha?
 * O que a revisão da entrega achou, e cada candidato foi corrigido ou virou uma linha `[ ]`?
+* A revisão leu a entrega inteira, com os arquivos que ela criou e os commits que ela tenha feito no seu branch, e a verificação rodou de novo depois da última edição que ela cobre?
 
 Se a página não registra revisão nenhuma e o slot do docs/05 nomeia uma, a entrega não terminou como o kit diz; peça a revisão ao agente.
 Leia também o que aconteceu, e pergunte-se se você teria decidido alguma divergência de outro jeito.
@@ -242,7 +250,7 @@ Então a página registrou o ajuste, nenhum caminho de escrita alcançável pelo
 
 * O `/apply <slug>` constrói a página em uma sessão nova e segue o docs/05 ao pé da letra: a página é o escopo, sem dependência, camada ou ferramenta que ela não nomeou, e quando a página contradiz um documento ele para e diz qual, sem nunca resolver em silêncio.
 * Ele marca a linha como `[*]` com a sua primeira edição, `[x]` com a última, depois do stage, e `[?]`, com o que ela espera, quando precisa parar.
-* Verde não é pronto: pronto é a lista inteira, da revisão por um contexto que não escreveu a mudança à linha marcada `[x]`.
+* Verde não é pronto: pronto é a lista inteira, dos documentos atualizados antes de uma revisão por um contexto que não escreveu a mudança, que lê a entrega inteira, à verificação verde depois da última edição e à linha marcada `[x]`.
 * Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, cada comando escrito por extenso, e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
 * Use o que foi construído como o usuário usaria, revise a mudança em stage contra a página, peça cada correção na mesma sessão, dizendo o que quer no lugar e por quê, transforme o que a página não pediu na próxima linha da fila, e faça você o commit: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
 

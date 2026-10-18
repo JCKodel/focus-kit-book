@@ -60,20 +60,25 @@ A failure is part of the proof and is recorded, never hidden.
 
 ### The delivery review
 
-With verify green and the proof done, and before the page records what happened, `/apply` has its delivery's changes reviewed by a context that did not write them.
+With verify green, the proof done and the documents and manuals the delivery changes already updated, and before the page records what happened, `/apply` has its delivery's changes reviewed by a context that did not write them.
+The documents come first because they are part of the delivery: a schema document or a manual written after the review is one no reviewer read.
 It happens inside the same session, never in a fresh one, and docs/05's Delivery review slot names the reviewer.
 The kit's first choice is the host's own review, a skill the agent invokes or a command it runs, when the agent can keep it to the delivery's paths.
 Otherwise it is a read-only agent: one the session launches with its own context, which reads files and runs `git diff` and edits nothing (chapter 16 says more on agents that an agent launches).
 A slot that says none means no such review, and your commit stays the only review.
 
-The review reads the delivery's changes by their paths, the files the delivery created among them, and of docs/06 only this line's hunk, against the page and docs/04.
-A read-only agent reads their `git diff`, staged and unstaged, and opens each file the delivery created, which the session names, since it wrote them: a new file is untracked, one git does not hold yet, so `git diff` shows nothing of it until it is staged, and `/apply` stages only after the review.
+The review reads the whole delivery against its base, by its paths, the files the delivery created among them, and of docs/06 only this line's hunk, against the page and docs/04.
+A read-only agent reads `git diff HEAD` of those paths, which compares them with the last commit and so holds staged and unstaged changes together; a bare `git diff` compares the working folder with the index and misses whatever is already staged.
+On a delivery branch where you committed the partial work a blocked `/apply` staged, the agent also reads those commits against the branch's base: when the session resumes, a clean working folder does not mean there is nothing to review, since the work so far may sit in those commits, and they are still this review's.
+On trunk there are none, since blocked work stays uncommitted there.
+And it opens each file the delivery created, which the session names, since it wrote them: a new file is untracked, one git does not hold yet, so no diff shows anything of it until it is staged, and `/apply` stages only after the review.
 The host's review reads them its own way, kept to those paths.
 Another session's files in the same folder, the ones it created included, are not this review's (chapter 19).
 The reviewer brings what the writer's own reread lacks, a context free of the reasoning that wrote the change, and measures the change against the page and docs/04.
 
 The reviewer reports candidates, faults it suspects, and fixes nothing itself.
 A candidate that breaks the page, docs/04 or the text this delivery wrote is fixed in this session, and verify runs again.
+That holds for any edit verify covers made after its last green run, a review's fix or a document changed late: a green run speaks for the files as they were when it ran, so the later edit runs it once more.
 Anything else, a fault in code the delivery did not touch or a wish the page did not ask for, becomes a `[ ]` line in the queue, because the page is the scope.
 The reviewer stays read-only because the session that built the change knows why it made each choice, so that session makes the fix and the change keeps one writer.
 
@@ -87,8 +92,9 @@ It says nothing about whether the page was answered, whether the documents still
 So before it stops, `/apply` does all of this:
 
 * It writes into the page what happened: what diverged from the plan and why, what was dropped, what the proof found, what the delivery review found and what became of each candidate, and the decisions taken, with an ADR if one was needed.
-* It updates the documents the delivery changed: a new term into docs/03, a new rule into the document that owns it, a decision into docs/adr/.
-* When the delivery adds or changes something a person does by hand, such as publishing the app, it writes or updates its manual in `docs/manuals/` ([chapter 7](07-the-documents.md)).
+* Before the review, it updates the documents the delivery changed: a new term into docs/03, a new rule into the document that owns it, a decision into docs/adr/.
+* Before the review too, when the delivery adds or changes something a person does by hand, such as publishing the app, it writes or updates its manual in `docs/manuals/` ([chapter 7](07-the-documents.md)).
+* Verify is green after the last edit it covers; an edit after that green run, whatever its reason, runs it again.
 * It ticks every item of Done when.
 * It moves the page to `work/done/`; a `[?]` line that waits only on this one, or on lines already `[x]`, goes back by its resume phase ([chapter 14](14-queue-states.md)).
 * It stages only this delivery's paths and hunks, never with `git add -A` or `git add .`, and reports what someone else had already staged without unstaging it.
@@ -113,13 +119,14 @@ Whichever you answer, the other one changes in the same delivery.
 It runs `npm run verify` until it is green, takes the lending screen at 390 and 1280 pixels wide, and compares both with the design file.
 If a button wraps at the narrow width, it gets fixed; if the design file gives no value for a colour, the choice is written down as a divergence, with its reason.
 
-Then a read-only agent reads the files the delivery created, the migration and everything in `src/features/loans/`, and the `git diff` of what the delivery edited, against the page and docs/04, in a review also written for this chapter, and reports two candidates.
+The delivery changed the schema, so before any review it adds the table `loan` to the document that lists the schema.
+Then a read-only agent reads the files the delivery created, the migration and everything in `src/features/loans/`, and `git diff HEAD` of what the delivery edited, the schema document included, against the page and docs/04, in a review also written for this chapter, and reports two candidates.
 The first draft of `insertLoan` turned every failure of the write into `AlreadyLent`, while the library's docs/04 holds chapter 3's boundary: the unique index's failure becomes `AlreadyLent`, and any other failure of the write stays `DatabaseFailed`.
 No test triggers it, since in the tests only the unique index ever fails, and it sits in the text this delivery wrote, so the agent narrows the catch to the unique index's error and runs verify again; the repository call chapters 3 and 4 describe is the fixed one.
-`insertLoan` lives in a file this delivery created, so a review of the `git diff` alone would have read nothing of it.
+`insertLoan` lives in a file this delivery created, so a review of the diff alone would have read nothing of it.
 The second candidate: the refusal for a suspended member does not say until when.
 The page never asked for that, so it becomes the line `suspension-end`, placed in the queue below `return-book`, which stays the next free line.
-Then it writes what happened on the page, both candidates and what became of each included, adds the table `loan` to the document that lists the schema, ticks Done when, moves the page to `work/done/lend-book.md`, stages only this delivery's paths, and, as its last edit, marks the line `[x]` and stages that hunk of docs/06.
+Then it writes what happened on the page, both candidates and what became of each included, ticks Done when, moves the page to `work/done/lend-book.md`, stages only this delivery's paths, and, as its last edit, marks the line `[x]` and stages that hunk of docs/06.
 If another session's edit to `src/features/members/` sits in the tree, or its hunk of docs/06 is already staged, the agent leaves both as they are and tells you about the staged one (chapter 19).
 
 The page ends with the suggested message, written for this chapter, and the conversation shows the same block:
@@ -164,6 +171,7 @@ Read it against the page:
 * Does the staged diff hold only this delivery, and did the agent report anything already staged?
 * Is the suggested message in the `commit` block at the end of the page right: the subject, the bullets, the last line?
 * What did the delivery review find, and was each candidate fixed or turned into a `[ ]` line?
+* Did the review read the whole delivery, its created files and any commits it already made on its branch included, and did verify run again after the last edit it covers?
 
 If the page records no review and docs/05's slot names one, the delivery did not end as the kit says; ask the agent for the review.
 Read what happened too, and ask whether you would have decided any divergence otherwise.
@@ -242,7 +250,7 @@ So the page recorded the refinement, no write path reachable from the client, wh
 
 * `/apply <slug>` builds the page in a fresh session and follows docs/05 literally: the page is the scope, with no dependency, layer or tool it did not name, and when the page contradicts a document it stops and says which, never resolving it silently.
 * It marks the line `[*]` with its first edit, `[x]` with its last, after the stage, and `[?]`, with what it waits on, when it must stop.
-* Green is not done: done is the whole list, from the review by a context that did not write the change to the line marked `[x]`.
+* Green is not done: done is the whole list, from the documents updated before a review by a context that did not write the change, which reads the whole delivery, to verify green after the last edit and the line marked `[x]`.
 * It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, each command written out, and, last of all, which environment is at which version and the command that updates the others.
 * Use what was built as its user would, review the staged change against the page, ask for each correction in the same session, saying what you want instead and why, make what the page did not ask the queue's next line, and commit it yourself: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
 
