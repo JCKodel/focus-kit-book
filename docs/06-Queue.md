@@ -402,7 +402,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18 and the reposi
 [x] ch19-adjacent-mark-staging  chapter 19 says who stages a batch's adjacent mark and how a session stages one line of a shared hunk without an editor; both editions
 [ ] pt-ch19-index-word       the Portuguese chapter 19's key point says "a partir do índice", as chapter 13 and 19's batch paragraph say, not "a partir do stage"
 [x] pt-librarian-masculine   the Portuguese edition says "o bibliotecário", as docs/03 fixes, in chapters 4, 5, 11, 14, 17 and 19
-[ ] ch15-review-range-order  chapters 15 and 8 say the review's range holds the next milestone's deliveries that landed after the review's commit, not every one of them; both editions
+[x] ch15-review-range-order  chapters 15 and 8 say the review's range holds the next milestone's deliveries that landed after the review's commit, not every one of them; both editions
 [ ] ch15-first-commit-base   chapter 15 says what a first milestone's range leaves out of the first commit, instead of "the whole project"; both editions
 [x] ch13-four-waits          chapter 13's list of when /apply cannot go on names all four cases a line waits in; both editions
 [ ] ch08-report-item-one     chapter 8's report item 1 says what text it replaces, as items 2 and 3 do; both editions

@@ -18,7 +18,8 @@ A página dela pega o parágrafo do marco cláusula por cláusula e escreve, par
 Ela não corrige nada.
 A revisão também lê o código, o único olhar sobre o todo em vez de sobre uma entrega, porque cada página pode estar certa e o todo errado.
 A página dela cita como base o commit da revisão do marco anterior, ou, para um primeiro marco, o primeiro commit do projeto, e lista, pelas áreas que o slot Milestone review (revisão de marco) do docs/05 cita, os caminhos que o intervalo desde ele alterou.
-O commit da revisão anterior fica antes de todo commit do marco seguinte, cujas entregas podem entrar antes de os achados do anterior fecharem, então o intervalo a partir dele guarda todos eles, incluídas as correções desses achados.
+O intervalo a partir do commit da revisão anterior guarda todo commit feito depois dele: todas as correções dos achados dessa revisão, que fecham depois dele, e as entregas do marco seguinte que entraram depois dele.
+Uma linha livre do marco seguinte não espera a revisão (capítulo 14), então uma entrega cujo commit veio antes do commit da revisão fica fora do intervalo a partir dele.
 A leitura custa, então a sessão diz quando chegou a hora e só a começa com a palavra da pessoa: cada área ganha um leitor próprio, que a lê com o repositório inteiro aberto.
 O primeiro commit, a base de um primeiro marco, faz a revisão ler o projeto inteiro.
 O código de cada entrega continua sendo lido onde a sua mudança é pequena o bastante para ser lida: pela revisão da entrega antes de o `/apply` terminar e na mudança em stage antes do seu commit (capítulo 13), e no pull request, quando o time integra as suas entregas por um (capítulo 20); os leitores do marco procuram o que esses não conseguiram ver.
