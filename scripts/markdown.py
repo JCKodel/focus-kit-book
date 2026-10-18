@@ -1,4 +1,4 @@
-"""The Markdown reading shared by the scripts: front matter, the masking of what a reader does not read, and note mentions."""
+"""The Markdown reading shared by the scripts: front matter, the kind of each line, the masking of what a reader does not read, and note mentions."""
 
 import re
 
@@ -39,36 +39,54 @@ def blank(text):
     return " " * len(text)
 
 
+def line_kinds(text):
+    """Yield (kind, info) for each line of text.split("\\n"), in order.
+
+    kind is "front" (the front matter, its `---` lines included; unclosed, it runs to the end),
+    "fence" (a line that opens or closes a fenced block), "code" (a line inside one) or "text".
+    info is the opening's info string for "fence" and "code" ("" on a closing line),
+    for "text" whether the line starts inside an HTML comment, and None for "front".
+    A fence opens only on a line that does not start inside a comment.
+    """
+    lines = text.split("\n")
+    front = bool(lines) and lines[0].strip() == "---"
+    fence, info = None, ""
+    comment = False
+    for index, line in enumerate(lines):
+        if front:
+            yield "front", None
+            if index > 0 and line.strip() == "---":
+                front = False
+            continue
+        if fence:
+            if closes(line, fence):
+                fence = None
+                yield "fence", ""
+            else:
+                yield "code", info
+            continue
+        if not comment:
+            opening = FENCE_OPENING.match(line)
+            if opening:
+                fence, info = opening.group(1), opening.group(2)
+                yield "fence", info
+                continue
+        yield "text", comment
+        comment = mask_inline(line, comment, True)[1]
+
+
 def mask(text, keep_targets):
     """Return the lines of text with front matter, code and HTML comments as spaces.
 
     With keep_targets False, link and image targets `](…)` are blanked too.
     Line numbers and columns are those of the text.
     """
-    lines = text.split("\n")
     out = []
-    front = bool(lines) and lines[0].strip() == "---"
-    fence = None
-    comment = False
-    for index, line in enumerate(lines):
-        if front:
+    for line, (kind, info) in zip(text.split("\n"), line_kinds(text)):
+        if kind == "text":
+            out.append(mask_inline(line, info, keep_targets)[0])
+        else:
             out.append(blank(line))
-            if index > 0 and line.strip() == "---":
-                front = False
-            continue
-        if fence:
-            out.append(blank(line))
-            if closes(line, fence):
-                fence = None
-            continue
-        if not comment:
-            opening = FENCE_OPENING.match(line)
-            if opening:
-                fence = opening.group(1)
-                out.append(blank(line))
-                continue
-        kept, comment = mask_inline(line, comment, keep_targets)
-        out.append(kept)
     return out
 
 
