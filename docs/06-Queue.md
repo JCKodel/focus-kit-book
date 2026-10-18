@@ -362,7 +362,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.17 and the reposi
 
 ```
 [x] kit-2026-10-17           reinstall the kit at 2026.10.17 and apply its migration report to docs/05, docs/03, AGENTS.md and the skills · after m15-review
-[ ] ch13-delivery-review     chapter 13: /apply has its delivery's changes reviewed by a context that did not write them, the host's own review first, fixes what breaks the page and lines the rest; both editions · after kit-2026-10-17
+[x] ch13-delivery-review     chapter 13: /apply has its delivery's changes reviewed by a context that did not write them, the host's own review first, fixes what breaks the page and lines the rest; both editions · after kit-2026-10-17
 [ ] ch15-review-by-areas     chapter 15: the code reading over the range since the base, split by areas, one read-only agent each in any host, the paths read, a checker for every candidate, and the person's word; both editions · after kit-2026-10-17
 [ ] ch16-review-agents       chapter 16: the one specialized subagent the governor admits, the reviews' readers and checker, and the errors that let them in; both editions · after kit-2026-10-17
 [ ] batch-propose            chapter 19: proposes run in a batch on the recommended answers, each page listing what it decided alone, while applies stay parallel only on free lines and every commit stays the person's; both editions · after ch16-review-agents
