@@ -4,3 +4,4 @@ Not a delivery of this repository: suggestions from the author's reading on 2026
 
 1. **Test time** (from ch05-test-time). Agents write tests without minding how long they run; the author has seen a 20-minute suite run on every delivery. The kit could ask /apply to keep the per-delivery test run fast: pure use cases tested in-process, integration and E2E tests run where they pay or at a milestone's review, and a slow test reported, not added silently.
 2. **A mark for "if there is time"** (from ch11-queue-grows). Agents tend to add lines, and a milestone of 5 lines may end with 50. Analyse whether a mark such as `[+]`, for an optional improvement a milestone may close without, is worth adding, or whether a later milestone of improvements already does it.
+3. **A broken link** (found by ch04-focus-optional's /propose). The kit's `references/documents.md` points to `07-four-pieces`, which answers 404; it should point to the book's current FOCUS chapter.

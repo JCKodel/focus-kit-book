@@ -420,24 +420,27 @@ When this milestone closes, the book teaches focus-kit 2026.10.18 and the reposi
 When this milestone closes, a reader of chapters 0 to 7 learns each idea where it is named instead of being sent to a later chapter, a Portuguese reader reads "o Ninjobs", a reader with little TypeScript reads chapter 3's refusal without seeing a magic string, a team reads FOCUS as optional before deciding to adopt it, keeps its tests fast, and teaches the agent by talking to it instead of fixing its work by hand, and every passage the author's reading marked says what the author means.
 
 ```
-[ ] early-no-forward-links   chapters 0 to 7 explain in a few words each idea they name instead of pointing to a later chapter, and keep the pointers in their gain sections; both editions
-[ ] pt-ninjobs-masculine     the Portuguese edition and docs/03 give Ninjobs the masculine article, o Ninjobs, as an app or a site
-[ ] case-a-why-anonymous     the prologue says why Case A has no owner, client or business: a private corporate project whose name could not be published without authorization; both editions
-[ ] agent-never-unsure       the book says, where it fits best, that an agent never says "I don't know", and that the person's judgment is what tells a hypothesis from a fact; both editions
-[ ] ch02-gain-less-to-read   chapter 2's gain says plainly that the method writes less because the person must read all of it, and less to read is more attention; both editions
-[ ] pt-identifiers-choice    the Portuguese chapter 3 drops the sentence on which names are translated and says Portuguese identifiers are a teaching choice, not a recommendation
-[ ] ch03-literal-type-comment  chapter 3's refusal example carries a comment saying the string is a type the compiler checks, so err takes no other; both editions
-[ ] ch03-error-languages     chapter 3 says several languages separate a program's bug from a failure the caller handles, and that Dart does it most explicitly; both editions
-[ ] ch04-focus-optional      chapter 4 opens saying FOCUS is optional and the team decides after reading its gain, and the gain adds that one pattern across projects makes moving people cheaper; both editions
-[ ] ch04-uncle-bob           chapter 4 gives Robert C. Martin's nickname, Uncle Bob, where it first names him; both editions
-[ ] ch04-scalable-meaning    chapter 4's S says the project grows without one feature interfering with another, which is why it scales; both editions
-[ ] ch05-test-time           chapter 5 says agents write tests without minding how long they run, and the person keeps the suite fast with pure use cases and slower tests only where they pay; both editions
-[ ] ch05-random-values       chapter 5's section on swapping only I/O and the clock covers random values and anything else that changes between runs; both editions
-[ ] ch07-rag-and-numbers     chapter 7 says the documents work as retrieval made for the project, and that every focus-kit project gives each document the same number; both editions
-[ ] ch07-talk-not-edit       chapter 7 says the person changes the documents by talking to the agent, without the sentence that reads as a contradiction; both editions
-[ ] ch11-queue-grows         chapter 11 says three to eight deliveries is how a milestone starts, not a limit, and that the person decides what enters it, because agents tend to add; both editions
-[ ] ch11-agent-runs-propose  chapter 11 drops the claim that the agent cannot run /propose on its own; both editions
-[ ] ch13-teach-the-agent     chapter 13's staged review asks for each correction by talking to the agent, so it learns, instead of fixing by hand; both editions
-[ ] docs04-code-layout       docs/04's rule for code says declarations and `{ }` blocks are set apart by blank lines, as the author writes code
-[ ] m18-review               the review of M18 as docs/05 §8 says · after docs04-code-layout, early-no-forward-links, pt-ninjobs-masculine, case-a-why-anonymous, agent-never-unsure, ch02-gain-less-to-read, pt-identifiers-choice, ch03-literal-type-comment, ch03-error-languages, ch04-focus-optional, ch04-uncle-bob, ch04-scalable-meaning, ch05-test-time, ch05-random-values, ch07-rag-and-numbers, ch07-talk-not-edit, ch11-queue-grows, ch11-agent-runs-propose, ch13-teach-the-agent
+[>] early-no-forward-links   chapters 0 to 7 explain in a few words each idea they name instead of pointing to a later chapter, and keep the pointers in their gain sections; both editions
+[>] pt-ninjobs-masculine     the Portuguese edition and docs/03 give Ninjobs the masculine article, o Ninjobs, as an app or a site
+[>] case-a-why-anonymous     the prologue says why Case A has no owner, client or business: a private corporate project whose name could not be published without authorization; both editions
+[>] agent-never-unsure       the book says, where it fits best, that an agent never says "I don't know", and that the person's judgment is what tells a hypothesis from a fact; both editions
+[>] ch02-gain-less-to-read   chapter 2's gain says plainly that the method writes less because the person must read all of it, and less to read is more attention; both editions
+[>] pt-identifiers-choice    the Portuguese chapter 3 drops the sentence on which names are translated and says Portuguese identifiers are a teaching choice, not a recommendation
+[>] ch03-literal-type-comment  chapter 3's refusal example carries a comment saying the string is a type the compiler checks, so err takes no other; both editions
+[>] ch03-error-languages     chapter 3 says several languages separate a program's bug from a failure the caller handles, and that Dart does it most explicitly; both editions
+[>] ch04-focus-optional      chapter 4 opens saying FOCUS is optional and the team decides after reading its gain, and the gain adds that one pattern across projects makes moving people cheaper; both editions
+[>] ch04-uncle-bob           chapter 4 gives Robert C. Martin's nickname, Uncle Bob, where it first names him; both editions
+[>] ch04-scalable-meaning    chapter 4's S says the project grows without one feature interfering with another, which is why it scales; both editions
+[>] ch05-test-time           chapter 5 says agents write tests without minding how long they run, and the person keeps the suite fast with pure use cases and slower tests only where they pay; both editions
+[>] ch05-random-values       chapter 5's section on swapping only I/O and the clock covers random values and anything else that changes between runs; both editions
+[>] ch07-rag-and-numbers     chapter 7 says the documents work as retrieval made for the project, and that every focus-kit project gives each document the same number; both editions
+[>] ch07-talk-not-edit       chapter 7 says the person changes the documents by talking to the agent, without the sentence that reads as a contradiction; both editions
+[>] ch11-queue-grows         chapter 11 says three to eight deliveries is how a milestone starts, not a limit, and that the person decides what enters it, because agents tend to add; both editions
+[>] ch11-agent-runs-propose  chapter 11 drops the claim that the agent cannot run /propose on its own; both editions
+[>] ch13-teach-the-agent     chapter 13's staged review asks for each correction by talking to the agent, so it learns, instead of fixing by hand; both editions
+[>] ch14-face-prototype      chapter 14's kanban board shows briefly face.kodel.com.br, the author's prototype of a board that runs on focus-kit; both editions
+[>] try-before-commit        the book advises using the software being built before committing each page, as on Ninjobs: small things fixed in conversation while the delivery is open, larger ones as the next lines; both editions
+[>] ch19-agent-does-git      chapter 19 says the person can always ask the agent to do a git step for them, a commit message, a conflict, a commit, a merge or a push, and checks the result; both editions
+[>] docs04-code-layout       docs/04's rule for code says declarations and `{ }` blocks are set apart by blank lines, as the author writes code
+[ ] m18-review               the review of M18 as docs/05 §8 says · after ch14-face-prototype, try-before-commit, ch19-agent-does-git, docs04-code-layout, early-no-forward-links, pt-ninjobs-masculine, case-a-why-anonymous, agent-never-unsure, ch02-gain-less-to-read, pt-identifiers-choice, ch03-literal-type-comment, ch03-error-languages, ch04-focus-optional, ch04-uncle-bob, ch04-scalable-meaning, ch05-test-time, ch05-random-values, ch07-rag-and-numbers, ch07-talk-not-edit, ch11-queue-grows, ch11-agent-runs-propose, ch13-teach-the-agent
 ```
