@@ -46,11 +46,35 @@
 
 **Done when.**
 
-* [ ] pt 03:25 replaced by Behaviour's sentence; Behaviour's checks give what it names.
-* [ ] docs/04's two places read as decision 4 quotes.
-* [ ] Chapter 3 still opens with its value, keeps its gain, no filler and nothing useful cut.
-* [ ] Every number sourced: no number added.
-* [ ] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
-* [ ] The author's approval of an anonymized passage: inapplicable, the change draws on no Case A or Case B passage (docs/00 OD-3).
-* [ ] `make book` run; both PDF paths given to the author.
-* [ ] Page in `work/done/`, the line `[x]`, staged by its paths and its hunks of docs/04 and docs/06, commit message in a `commit` block.
+* [x] pt 03:25 replaced by Behaviour's sentence; Behaviour's checks give what it names.
+* [x] docs/04's two places read as decision 4 quotes.
+* [x] Chapter 3 still opens with its value, keeps its gain, no filler and nothing useful cut.
+* [x] Every number sourced: no number added.
+* [x] `make verify` green: edition parity, prose rules, width, disclosure scan, no em dash.
+* [x] The author's approval of an anonymized passage: inapplicable, the change draws on no Case A or Case B passage (docs/00 OD-3).
+* [x] `make book` run; both PDF paths given to the author.
+* [x] Page in `work/done/`, the line `[x]`, staged by its paths and its hunks of docs/04 and docs/06, commit message in a `commit` block.
+
+**Proof.**
+
+* pt 03:25 now reads Behaviour's sentence, between pt 03:24 and the first code block's lead-in.
+* `grep -n "sem acentos"` on chapter 3 and `grep -n "names are in Portuguese" docs/04-Conventions.md` print nothing; `grep -rn "escolha didática" book/pt` prints pt 03:25 only.
+* `git diff --stat book/en README.md README.pt.md` showed nothing from this delivery; changes there belong to other deliveries in flight.
+* `make verify` green: build, parity, em dash, prose, width, links, disclosure.
+
+**Divergences.** None from Behaviour.
+
+**Decisions taken in /apply.**
+
+* Run in a batch of applies on one tree: the driver marks this line in docs/06, runs `make book` once at the end of the batch and gives both PDF paths, and stages and commits this delivery by its paths and hunks.
+
+**Review.** One read-only agent on Opus read the hunks of `book/pt/03-simplicity-and-results.md` and `docs/04-Conventions.md` against this page and docs/04, and checked the kit-name sentences of pt 04, 07, 11, 14 and 22 and the English edition: no findings.
+
+```commit
+docs(pt-identifiers-choice): say pt names are a teaching choice
+
+- Portuguese chapter 3: the note on translated names becomes one sentence: Portuguese names are a teaching choice, not a recommendation; the team decides
+- docs/04: Evidence and the Code bullet describe the new note
+
+work/done/pt-identifiers-choice.md
+```

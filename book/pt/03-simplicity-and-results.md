@@ -22,7 +22,7 @@ A regra é sobre a pessoa que vem depois: o projeto tem que ser simples o bastan
 No código, a pessoa que vem depois é um colega, um agente em uma sessão nova, ou você daqui a seis meses.
 KISS pede a forma mais simples que faz o trabalho: uma função antes de uma classe, um valor antes de uma configuração, um arquivo antes de três.
 Os exemplos de código deste livro foram escritos para ele, em TypeScript, curtos o bastante para caber na cabeça; as ideias valem em qualquer linguagem.
-Nesta edição, os nomes que o código inventa, de funções, tipos e variáveis, estão em português, sem acentos, como é costume em identificadores; as palavras da própria linguagem, como `function` e `return`, e os nomes das bibliotecas usadas ficam como são.
+Nesta edição, os nomes do código estão em português por uma escolha didática, não como recomendação: cabe à equipe decidir o que é melhor para o projeto e para as pessoas dele.
 A data de devolução de um empréstimo na biblioteca de empréstimos, o exemplo da Parte I, é 21 dias depois do empréstimo:
 
 ```ts
