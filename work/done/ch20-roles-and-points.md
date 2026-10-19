@@ -61,13 +61,38 @@ Terms of docs/03 used: slot, trunk; the Git slot's two forms are the kit's slot 
 * The team's practice is said in both chapters, briefly in chapter 20's problem and as the opening of chapter 23's roles, since the finding names both sentences; chapter 23 now attributes the split to the team, not to "the method".
 * Lines 10 and 33 of chapter 20 stay, each true under both forms as the Contract says.
 * No docs/03 row: no new term enters.
+* (/apply) The review's optional note that, by default, a person may ask the agent to merge, so "whoever merges" read literally could be the agent: not taken. The wording was there before this delivery, the Contract keeps "whoever merges", and read as whoever takes the merge decision it holds; tightening it is the author's call.
 
 **Done when.**
 
-* Both editions changed in the listed passages, every other sentence the same.
-* Chapter 20 opens with its value, as before; no filler, nothing useful cut: the merged key point keeps every clause of the two it replaces.
-* Under `## Key points` / `## Pontos-chave` of `20-team-tools.md`, each edition has exactly five `* ` bullets.
-* Lines 51 to 62 and 88 of chapter 20 unchanged in both editions (`git diff` shows no hunk there).
-* No new number, footnote or case; no em dash.
-* `make verify` green.
-* `make book` built, both PDF paths given.
+* [x] Both editions changed in the listed passages, every other sentence the same.
+* [x] Chapter 20 opens with its value, as before; no filler, nothing useful cut: the merged key point keeps every clause of the two it replaces.
+* [x] Under `## Key points` / `## Pontos-chave` of `20-team-tools.md`, each edition has exactly five `* ` bullets.
+* [x] Lines 51 to 62 and 88 of chapter 20 unchanged in both editions (`git diff` shows no hunk there).
+* [x] No new number, footnote or case; no em dash.
+* [x] `make verify` green.
+* [x] `make book` built, both PDF paths given: run once by the driver for the batch.
+
+**Proof.**
+
+* `git diff -U0 HEAD` of chapter 20, each edition: hunks at lines 8, 34 and 84 to 86 only (84 to 86 become 84 and 85); no hunk in lines 51 to 62, and the board bullet's text is unchanged, now line 87 after the merge.
+* Under `## Key points` / `## Pontos-chave` each edition has five `* ` bullets: roles, pull request, issue, board, question delivery.
+* Chapter 23, each edition: line 58 only, with the pointer back to chapter 20; the role bullets unchanged. Other hunks in chapter 23 belong to a parallel delivery.
+* No em dash, number, footnote, case, version, date or host command added.
+* `make verify` green after the review's fix. `make book` is run once by the driver for the batch.
+* Staging and the docs/06 hunk are the driver's in this batch.
+
+**Divergences.** None.
+
+**Delivery review.** A read-only Opus agent read this delivery's hunks against this page, docs/04 and AGENTS.md: no blocking finding. Two low notes: the merged pull-request bullet chained four comma-joined clauses, fixed by restoring the semicolon before "an agent may review first" (pt "um agente pode revisar primeiro"), as the Contract has it; "whoever merges" under the default form, left as recorded in Decisions taken alone.
+
+```commit
+docs(ch20-roles-and-points): the reviewer under both Git slot forms
+
+- ch20 problem: review by default before commit, or after by slot's word
+- ch20 pull request: whoever merges by default, or reviews the agent's
+- ch20 key points: the two pull-request bullets become one, five in all
+- ch23 roles: the kit assumes one person; a team splits them as practice
+
+work/done/ch20-roles-and-points.md
+```

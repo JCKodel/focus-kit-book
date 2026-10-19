@@ -55,7 +55,7 @@ Each was caught because the work was written as lines and pages that a person re
 
 ## Roles in a team
 
-The method gives each step to whoever owns it.
+The kit assumes one person in every role ([chapter 20](20-team-tools.md)); a team, as its own practice, gives each step to whoever owns it.
 
 * **Who proposes:** whoever owns the decision.
   A developer proposes a technical delivery, an analyst a rule, a manager a question to the client; `/propose` is a conversation, and it needs someone who can answer ([chapter 12](12-propose.md)).

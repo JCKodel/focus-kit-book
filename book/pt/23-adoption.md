@@ -55,7 +55,7 @@ Cada uma foi pega porque o trabalho estava escrito em linhas e páginas que uma 
 
 ## Papéis num time
 
-O método dá cada passo a quem é dono dele.
+O kit assume uma pessoa em todos os papéis ([capítulo 20](20-team-tools.md)); um time, como prática própria, dá cada passo a quem é dono dele.
 
 * **Quem propõe:** quem é dono da decisão.
   Um desenvolvedor propõe uma entrega técnica, um analista uma regra, um gerente uma pergunta ao cliente; o `/propose` é uma conversa, e precisa de alguém que consiga responder ([capítulo 12](12-propose.md)).

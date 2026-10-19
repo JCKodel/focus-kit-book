@@ -5,7 +5,7 @@ Você também consegue dizer por que os documentos de um projeto ficam em docs/ 
 
 ## O problema
 
-O kit assume uma pessoa que propõe uma entrega, usa a entrega, revisa o diff em stage e faz o commit, e não divide esses papéis além disso.
+O kit assume uma pessoa que propõe uma entrega, usa a entrega e a revisa: por padrão o diff em stage, antes de fazer o commit, ou, quando a palavra do slot Git deixa o agente fazer o commit, o commit, depois que ele entra. O kit não divide esses papéis além disso; como um time os divide é prática do próprio time.
 Quem não lê código participa do `/propose`, onde a página é escrita em linguagem de usuário ([capítulo 12](12-propose.md)), testa a entrega como seu usuário ([capítulo 13](13-apply.md)) e pergunta a qualquer sessão em que pé as coisas estão ou o que uma página decidiu ([capítulo 17](17-project-as-assistant.md)).
 Um time precisa de mais duas coisas: uma segunda pessoa que revisa antes do merge, e um jeito de quem não abre nem o repositório nem uma sessão, um cliente ou um gerente, ver o progresso.
 As estratégias de git do capítulo 18 param no merge: elas dão forma ao histórico, e não dizem nada sobre quem revisou uma mudança ou quem acompanha o trabalho.
@@ -31,7 +31,7 @@ Uma mudança no diff que a página não pede é o primeiro achado, qualquer que 
 O primeiro revisor pode ser um agente: o comando de revisão do próprio host, ou a revisão de código do GitHub Copilot, que lê as instruções personalizadas e de agente do repositório no branch em revisão, então conhece as mesmas regras que o agente que construiu a mudança.[^copilot-review]
 A documentação do GitHub dá o próprio limite: "*Sempre valide o feedback do Copilot com cuidado. Complemente o feedback do Copilot com uma revisão humana.*"[^copilot-review]
 A revisão do agente encontra o que uma pessoa cansada lê por cima; a pessoa decide o que é um achado, e aprova o merge.
-Quem faz o merge é o revisor que o kit assume: em um branch o merge é a única mudança da entrega, como o commit é no trunk.
+Por padrão quem faz o merge é o revisor que o kit assume: em um branch o merge é a única mudança da entrega, como o commit é no trunk; quando a palavra do slot Git deixa o agente fazer o merge, o revisor é a pessoa que revisa o merge depois que ele entra.
 
 ## Issues
 
@@ -81,9 +81,8 @@ O quadro do Caso A rodou em um projeto, e a sua permissão de escrita nunca foi 
 
 ## Pontos-chave
 
-* O kit assume uma pessoa que propõe, usa, revisa o diff em stage e faz o commit; quem no time não lê código participa do `/propose`, testa a entrega como seu usuário e pergunta a uma sessão em que pé as coisas estão ou o que uma página decidiu, e um quadro serve a quem não abre nem o repositório nem uma sessão.
-* Um pull request carrega uma entrega: um branch com o nome do slug, a página primeiro, a construção depois, um merge com a página, o código e a marca.
-* O revisor lê a página, depois o diff contra ela; um agente pode revisar primeiro, uma pessoa decide, e quem faz o merge é o revisor que o kit assume.
+* O kit assume uma pessoa que propõe, usa e revisa, por padrão o diff em stage antes de fazer o commit, ou o commit que a palavra do slot Git deixou o agente fazer, e um time divide esses papéis como prática própria; quem no time não lê código participa do `/propose`, testa a entrega como seu usuário e pergunta a uma sessão em que pé as coisas estão ou o que uma página decidiu, e um quadro serve a quem não abre nem o repositório nem uma sessão.
+* Um pull request carrega uma entrega: um branch com o nome do slug, a página primeiro, a construção depois, um merge com a página, o código e a marca; seu revisor lê a página, depois o diff contra ela; um agente pode revisar primeiro, uma pessoa decide, e o revisor que o kit assume é, por padrão, quem faz o merge, ou, pela palavra do slot Git, a pessoa que revisa o merge que o agente fez.
 * Uma issue espelha uma linha da fila pelo slug, e a fila continua a fonte da verdade, porque o agente lê o repositório.
 * Um quadro é um espelho da fila numa só direção, atualizado, quando uma marca muda, por um slot do docs/05 que os comandos seguem, não por uma edição neles, e nunca em silêncio quando não consegue ser.
 * Uma entrega de pergunta, customização do próprio Caso A, fecha na resposta, não no envio.
