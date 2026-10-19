@@ -28,9 +28,37 @@ English counterparts, unchanged: "no scope question is left open", "the partial 
 
 **Done when.**
 
-* [ ] `book/pt/13-apply.md` edited in the three sentences above, nothing else; each Behaviour line checked against it; `grep -n -E "pergunta de escopo|bloquead" book/pt/13-apply.md` prints nothing.
-* [ ] `book/en/13-apply.md` unchanged, and the page says why (ADR-0004: English is the source and already says it).
-* [ ] The chapter still opens with its value and keeps its evidenced team gain; no filler and nothing useful cut; every number keeps its source; terms follow docs/03; no em dash.
-* [ ] No Case A or Case B passage changed or added, so the author's OD-3 approval is inapplicable.
-* [ ] `make verify` green after the last edit; `make book` builds both editions and the page gives `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` for the author's review.
-* [ ] Delivery review by a read-only Opus agent per docs/05 §5, its candidates answered on this page; page archived and commit message suggested.
+* [x] `book/pt/13-apply.md` edited in the three sentences above, nothing else; each Behaviour line checked against it; `grep -n -E "pergunta de escopo|bloquead" book/pt/13-apply.md` prints nothing.
+* [x] `book/en/13-apply.md` unchanged, and the page says why (ADR-0004: English is the source and already says it).
+* [x] The chapter still opens with its value and keeps its evidenced team gain; no filler and nothing useful cut; every number keeps its source; terms follow docs/03; no em dash.
+* [x] No Case A or Case B passage changed or added, so the author's OD-3 approval is inapplicable.
+* [x] `make verify` green after the last edit; `make book` builds both editions and the page gives `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` for the author's review.
+* [x] Delivery review by a read-only Opus agent per docs/05 §5, its candidates answered on this page; page archived and commit message suggested.
+
+## What happened
+
+**Built.** `book/pt/13-apply.md`, three sentences: "nenhuma questão de escopo ficou aberta", "o trabalho parcial que um `/apply` travado colocou em stage" and "lá o trabalho travado fica sem commit". Nothing else in the file changed; `grep -n -E "pergunta de escopo|bloquead" book/pt/13-apply.md` prints nothing.
+
+**English.** `book/en/13-apply.md` unchanged: English is the source (ADR-0004) and already says "scope question" and "blocked" throughout, so the change only brings the Portuguese to it.
+
+**First occurrence.** None: no abstraction.
+
+**Divergences.** None.
+
+**Proof.** `make verify` green after the last edit. `make book` is run once by the batch driver at the end of this batch, which gives the author `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+**Review.** One read-only Opus context over `book/pt/13-apply.md` against this page and docs/04: no findings. Each Behaviour and Contract line met, only the three sentences touched, agreement correct, wording matching chapters 12, 14 and 19 and chapter 13's own lines.
+
+**Decisions.** The three taken alone above, unchanged. No Case A or Case B passage changed.
+
+```commit
+docs(ch13-scope-question-term): say questão de escopo and travado
+
+- Portuguese chapter 13 says "questão de escopo", as chapters 12
+  and 14 do, and "travado" for a blocked /apply and its work, as
+  chapter 19 and chapter 13's own lines do
+- English edition unchanged: it already says scope question and
+  blocked
+
+work/done/ch13-scope-question-term.md
+```

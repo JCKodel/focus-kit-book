@@ -23,7 +23,7 @@ A página, o `AGENTS.md`, e três dos documentos do projeto: o docs/01, a arquit
 O docs/05 guarda os slots do projeto, e o `/apply` os segue ao pé da letra: o comando de verificação, os ambientes e o que uma entrega deixa em cada um, como uma tela é provada, como as suas mudanças são revisadas antes de ele terminar, a política de publicação e a estratégia de git.
 Do docs/06, a fila, ele lê tudo: precisa ver que as linhas que o seu `· after` nomeia estão feitas antes de começar, e nomeia a próxima linha livre quando termina.
 Por isso, cada palavra de uma linha é lida por toda construção tanto quanto por toda definição (capítulo 11).
-Um arquivo em `work/` não deixa uma página pronta: só o `/propose` marca a linha como `[>]`, quando cada seção está preenchida ou explicitamente inaplicável e nenhuma pergunta de escopo ficou aberta (docs/05 §3).
+Um arquivo em `work/` não deixa uma página pronta: só o `/propose` marca a linha como `[>]`, quando cada seção está preenchida ou explicitamente inaplicável e nenhuma questão de escopo ficou aberta (docs/05 §3).
 Em uma página que ainda tem uma pergunta aberta, ou cuja linha está `[ ]` ou `[~]`, ele se recusa a construir e aponta para o `/propose`: na biblioteca, em um exemplo escrito para este capítulo, `/apply emprestar-livro` em uma página cujo Contrato ainda tem uma pergunta sem resposta não edita nada e nomeia `/propose emprestar-livro`, onde a pergunta recebe a sua resposta.
 Essa recusa vem antes de qualquer construção, então não é a parada que "Quando o trabalho não consegue seguir" descreve: nada foi construído, e a linha não é marcada como `[?]`.
 Em uma linha `[>]` cujo `after` nomeia uma linha que ainda não está `[x]`, ele também não começa, e deixa a marca como está: um `after` é uma ordem, não uma espera (capítulo 14).
@@ -71,8 +71,8 @@ Se o slot não nomeia revisor nenhum, essa revisão não existe, e o seu commit 
 
 A revisão lê a entrega inteira contra a sua base, pelos seus caminhos, entre eles os arquivos que a entrega criou, e do docs/06 só a mudança desta linha, contra a página e o docs/04.
 Um agente somente leitura lê o `git diff HEAD` desses caminhos, que os compara com o último commit e por isso traz juntas as mudanças em stage e fora dele; um `git diff` puro compara a pasta de trabalho com o índice e perde o que já está em stage.
-Em um branch da entrega onde você fez commit do trabalho parcial que um `/apply` bloqueado colocou em stage, o agente também lê esses commits contra a base do branch: quando a sessão é retomada, uma pasta de trabalho limpa não quer dizer que não há nada a revisar, já que o trabalho até ali pode estar nesses commits, e eles continuam sendo desta revisão.
-No trunk não há nenhum, já que lá o trabalho bloqueado fica sem commit.
+Em um branch da entrega onde você fez commit do trabalho parcial que um `/apply` travado colocou em stage, o agente também lê esses commits contra a base do branch: quando a sessão é retomada, uma pasta de trabalho limpa não quer dizer que não há nada a revisar, já que o trabalho até ali pode estar nesses commits, e eles continuam sendo desta revisão.
+No trunk não há nenhum, já que lá o trabalho travado fica sem commit.
 E ele abre cada arquivo que a entrega criou, que a sessão cita, já que os escreveu: um arquivo novo é não rastreado, um que o git ainda não guarda, então nenhum diff mostra nada dele até ele entrar em stage, e o `/apply` só põe em stage depois da revisão.
 A revisão do host as lê do seu jeito, mantida nesses caminhos.
 Os arquivos de outra sessão na mesma pasta, os que ela criou incluídos, não são desta revisão (capítulo 19).
