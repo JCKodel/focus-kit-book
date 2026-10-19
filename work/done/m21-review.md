@@ -30,6 +30,8 @@
 
 **End.** The commit HEAD is when the reading starts; /apply records it before launching any reader, and nothing it records later moves it.
 
+Recorded: `22a0232` (`docs(queue): define m21-review`), the tree clean apart from the driver's `[*]` mark in docs/06.
+
 **Areas.** The paths `git diff --stat a50474b..HEAD` shows today, at `234fbd7` (76 paths, 2780 insertions, 506 deletions), by the areas of docs/05 §5's Milestone review slot. /apply recomputes them at its end commit and splits an area too large for one careful reading:
 
 * **Build:** `VERSION`, `README.md`, `README.pt.md`.
@@ -39,7 +41,9 @@
 * **The kit's skills:** `.claude/skills/{analyze,apply,brainstorm,propose}/SKILL.md`, `.claude/skills/{analyze,brainstorm}/references/documents.md`, and the same six under `.agents/skills/` (12 files), each also compared byte for byte with SETUP.md §3 of 2026.10.19.
 * **The documents**, split in two:
   * documents: `AGENTS.md`, `docs/03-Domain.md`, `docs/05-Process.md`, `docs/06-Queue.md`, `docs/adr/ADR-0010-trunk.md`, `docs/adr/ADR-0018-six-marks.md`, `work/kit-proposals.md`;
-  * delivery records: the 24 pages added to `work/done/` (`adr0010-commit-asked`, `ch06-kit-after-ninjobs`, `ch07-review-git-slots`, `ch07-slots-and-decided`, `ch08-update-2026-10-19`, `ch09-second-pair-of-eyes`, `ch11-23-who-reads`, `ch12-branch-then-mark`, `ch13-19-commit-by-slot`, `ch13-apply-reads-00-03`, `ch13-next-milestone`, `ch14-where-a-board-sees`, `ch15-who-reads`, `ch16-ceiling-moves`, `ch16-two-checks-stayed`, `ch18-19-one-index`, `ch20-one-person-assumed`, `ch20-reader-no-code`, `docs03-review-reads`, `docs05-blocked-trunk`, `kit-2026-10-19`, `kit-proposals-ninjobs-phases`, `pt-blocked-term`, `readme-release`) and the move of `work/m20-review.md` to `work/done/m20-review.md`.
+  * delivery records (split in two at the end commit, below): the 24 pages added to `work/done/` (`adr0010-commit-asked`, `ch06-kit-after-ninjobs`, `ch07-review-git-slots`, `ch07-slots-and-decided`, `ch08-update-2026-10-19`, `ch09-second-pair-of-eyes`, `ch11-23-who-reads`, `ch12-branch-then-mark`, `ch13-19-commit-by-slot`, `ch13-apply-reads-00-03`, `ch13-next-milestone`, `ch14-where-a-board-sees`, `ch15-who-reads`, `ch16-ceiling-moves`, `ch16-two-checks-stayed`, `ch18-19-one-index`, `ch20-one-person-assumed`, `ch20-reader-no-code`, `docs03-review-reads`, `docs05-blocked-trunk`, `kit-2026-10-19`, `kit-proposals-ninjobs-phases`, `pt-blocked-term`, `readme-release`) and the move of `work/m20-review.md` to `work/done/m20-review.md`.
+
+Recorded at `22a0232`: `git diff --stat a50474b..22a0232` shows 77 paths, 2861 insertions, 506 deletions. The one path not listed above is this page, `work/m21-review.md`, added by the end commit; it goes to the documents reader. The delivery records, 25 paths and 2118 added lines, split in two for one careful reading each: records 1, the twelve pages `adr0010-commit-asked` to `ch14-where-a-board-sees` in the order above (1059 lines); records 2, the other twelve and the move of `m20-review`. So seven readers run, not six.
 
 **Readers.** Six read-only readers on Opus, one per area above, each keeping the session's advisor, Fable, at most two at a time, then one read-only checker on Opus; no other model runs the review (docs/05 §5, Milestone review). Each reader lists the paths it read.
 
@@ -52,6 +56,36 @@
 * Chapter 7, "The two choices", line 145, sends the 21-day loan period to docs/03; chapter 12, lines 59 and 114, says it comes from docs/00 (`ch13-apply-reads-00-03`, Decisions). It answers no clause of M21: if confirmed, a line under the next milestone (docs/05 §4).
 
 Only this page, its move to `work/done/` and its findings' lines change; no chapter, document or build change.
+
+**Reading.** At `22a0232`, seven read-only readers on Opus, two at a time, then one checker on Opus. Paths read against the range: all 77. Chapters 06 to 13 read its 14; chapters 14 to 23 read its 15 (`book/pt/17` alone is `pt-blocked-term`, an M19 finding fix); the skills read its 12 (all byte-equal to SETUP.md §3 at `fd1aa75`, no candidate); the documents read its 8 (this page included); records 1 read its 12; records 2 read its 12 and the move of `m20-review`; the build read its 3. No path missed.
+
+**Candidates**, marked by the checker at `22a0232` (seen: true in the file today; latent: nothing triggers it today; weak: the claim does not hold as stated). Lines are both editions unless the pt line is given. K are the known candidates above.
+
+| Id | File and lines | Claim | Mark | M21 clause |
+|---|---|---|---|---|
+| K1, G4 | `book/{en,pt}/19-worktrees.md`:38, 185, 189, 196 | States the commit after the person's reading with no "By default", though :194 teaches the Git slot's form where the agent commits and the person reviews after | seen | commands follow every slot (Git slot) |
+| G2 | `book/{en,pt}/13-apply.md`:4, 72, 217 (:89 weak) | :4 and :217 state review then commit; :72 "your commit stays the only review"; the chapter's :164 and :210 teach the slot's form | seen | commands follow every slot (Git slot) |
+| G1 | `book/{en,pt}/06-birth-of-focus-kit.md`:66 | "reading each change before it enters the history (chapter 13)" though chapter 13 now has the commit come first under the slot | seen | commands follow every slot (Git slot) |
+| G3 | `book/{en,pt}/18-git-essentials.md`:65 | "use and reading before the commit are your review", with no slot form | seen | commands follow every slot (Git slot) |
+| G5 | `book/{en,pt}/08-install-and-hosts.md`:30 | "as with every change the agent makes (chapter 13)" overstates under the slot | seen, low | commands follow every slot (Git slot) |
+| O7 | `book/en/08-install-and-hosts.md`:93 (pt :95) | "lists only what the documents still lack" contradicts the three outcomes at :84 to 88 and the excerpt | seen | SETUP.md §1's step 4 as a list |
+| O6, O8 | `book/{en,pt}/08-install-and-hosts.md`:54; :46, 69 to 72 | Example slot against the recorded-choice rule; excerpt naming this repository's choices as a run | weak | none |
+| G6, G7, O9 | `book/{en,pt}/20-team-tools.md`:8, 84; :34, 86; :84 to 89 | "reviews the staged diff and commits it" and "whoever merges is the reviewer" hold only for the default form (kit README :132 to 133 too); six key points where docs/04:133 allows five | seen | one person, a team, a non-coder; Git slot |
+| O1 | `book/{en,pt}/20-team-tools.md`:8 vs `23-adoption.md`:58 to 64 | The kit "splits those roles no further" against "gives each step to whoever owns it", neither saying the split is the team's practice | seen | one person and a team |
+| O2 | `book/en/14-queue-states.md`:62 (pt :63), `book/{en,pt}/20-team-tools.md`:60 | A pushed board shows a mark "at once, on any branch", but each push carries only its own branch's queue (ch19:180) | seen (docs/05:119 to 121, docs/03:31 latent) | where a board sees a mark |
+| O5 | `book/{en,pt}/12-propose.md`:26, 30 | /propose branches before refusing a `[?]` line or an unmet `after`; the skill refuses first | seen, low | /propose branching before `[~]` |
+| K3 | `book/en/07-the-documents.md`:145, 148 (pt :146, 149) vs `book/en/12-propose.md`:59, 114 (pt :59, 123) | The 21-day loan period is in docs/03 in chapter 7 and from docs/00 in chapter 12 | seen | none: next milestone |
+| O4 | `book/{en,pt}/16-the-governor.md`:44 | A command body "at most thirty ... fifty" lines as a hard limit; the kit's CLAUDE.md says "target" | seen, low | none (`ch16-ceiling-moves` row) |
+| K2 | `docs/05-Process.md`:361 to 364 vs `docs/03-Domain.md`:33, `book/en/15-closing-a-milestone.md`:63 (pt :64), `23-adoption.md`:65 | §8 (the kit's text) names two answers for who reads; docs/03 and the chapters name three, counting none; `docs03-review-reads` said a line was proposed and none exists | seen | Milestone review slot (likely a kit note) |
+| O3 | `docs/05-Process.md`:352 to 356, `book/en/15-closing-a-milestone.md`:22, 166 (pt :22, 169), this page :29 | No base case fits a dropped previous review while an earlier one exists; this page invokes "where no earlier review exists" (docs/03:33's wording weak: it fits) | seen | Milestone review slot (which base) |
+| O17 | `docs/05-Process.md`:260 | Not rewrapped as `kit-2026-10-19`:105 records | seen, low | the repository runs on 2026.10.19 |
+| O10, O11 | `docs/06-Queue.md`:3; :530 to 531 | Header omits "the next milestone" from docs/05 §4's rules; two lines sit in M21 with no clause (the page's Decisions leave it to the author) | seen | queue's rules once in docs/05 §4 |
+| O16 | `docs/06-Queue.md`:498, `work/done/m20-review.md`:52 | M20's paragraph still promises the chapters' examples run; the remedy chosen at m19-review:106 is carried by no line | seen | none |
+| O12, O13 | `work/kit-proposals.md`:14 to 15; :17 | No blank line before "For the next focus-kit version:"; item 9 names 2026.10.18.1 though 2026.10.19 still carries the wording | seen (O13 low) | none |
+| O14 | this page :19, 21, 23 | The board, review-slot and one-index rows name only chapter deliveries, not `kit-2026-10-19`'s docs/05 and docs/03 text | seen, low | those three clauses |
+| O18, O20 | `work/done/ch11-23-who-reads.md`:51; :49 | The reason for not saying "the kit's readers" in ch11 and ch23 no longer holds (ch07:45, ch09:30); the "when it names one" alternative was left to the author | seen (O20 low) | Milestone review slot, author's choice |
+| O19 | `work/done/ch07-review-git-slots.md`:47 | The reading of docs/06:532's "this project's slot keeping commits on request" was left for the driver; nothing records a decision | seen, low | commands follow every slot |
+| O15, O21 | `scripts/release.py`:2; :63 to 64 with `README{,.pt}.md`:25 | Docstring opening leaves out VERSION and the build (weak: its next lines say them); the refusal tests tag equals HEAD, not commits since the tag | weak; latent | none |
 
 **States.** Inapplicable: a review, no screen.
 
@@ -75,7 +109,31 @@ Only this page, its move to `work/done/` and its findings' lines change; no chap
 
 **Done when.**
 
-* [ ] Every line in this review's `after` is `[x]`, and every clause above has the author's answer.
-* [ ] Base, end commit, the inventory of paths by area, the slow tests (none), each reader's paths read and every checked candidate are recorded on this page.
-* [ ] Every candidate the author confirms is its own `[ ]` line under this review, or under the next milestone as Decisions says; nothing is fixed here.
-* [ ] `make verify` is green after the last edit, both PDFs were built at the end commit for the author's reading, and only this review's changes are staged, with its suggested commit message.
+* [x] Every line in this review's `after` is `[x]`, and every clause above has the author's answer.
+* [x] Base, end commit, the inventory of paths by area, the slow tests (none), each reader's paths read and every checked candidate are recorded on this page.
+* [x] Every candidate the author confirms is its own `[ ]` line under this review, or under the next milestone as Decisions says; nothing is fixed here.
+* [x] `make verify` is green after the last edit, both PDFs were built at the end commit for the author's reading, and only this review's changes are staged, with its suggested commit message.
+
+**Author's answers.** The author took every clause above as holding without reading the PDFs now, as in m17-review; the PDFs were built at `234fbd7`, whose chapters equal the end commit's. The author read the whole candidate table and confirmed: K1 and G1 to G5; G6, G7, O9 and O1; O2; O7; O5; K3; O10, O17 and O3 (this page's base case); K2 and O3 as notes for focus-kit; O11. Not confirmed: O16, and every weak or low candidate not listed (O4, O6, O8, O12 to O15, O18 to O21).
+
+**Divergence.** Decisions placed a confirmed candidate that answers no clause under the next milestone; docs/05 §4 keeps a finding of the milestone's own review in it, so K3 is a line under this review.
+
+**Findings,** each a `[ ]` line under this review in docs/06:
+
+* `m21-git-slot-default` (K1, G1 to G5): chapters 6, 8, 13, 18 and 19.
+* `ch20-roles-and-points` (G6, G7, O9, O1): chapters 20 and 23.
+* `ch14-20-board-branch` (O2): chapters 14 and 20, after `ch20-roles-and-points`.
+* `ch12-refuse-first` (O5): chapter 12.
+* `ch08-step4-outcomes` (O7): chapter 8, after `m21-git-slot-default`.
+* `ch07-12-loan-days` (K3): chapters 7 and 12, after `ch12-refuse-first`.
+* `docs-m21-tidy` (O10, O11, O17, O3, K2): docs/06's header and M21's paragraph, docs/05:260, this page's base case, and `work/kit-proposals.md` notes for focus-kit (§8's "or none", the base when the previous review was dropped, the README's reviewer under the slot's commit form).
+
+```commit
+docs(m21-review): review M21, seven findings
+
+- clauses taken as holding by the author; PDFs built at 234fbd7
+- seven readers and a checker over a50474b..22a0232, 77 paths read
+- 31 candidates; the author confirmed 21 in seven finding lines
+
+work/done/m21-review.md
+```
