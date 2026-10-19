@@ -84,7 +84,7 @@ And had the only check that caught it been someone reading every file name befor
 ## What the team gains
 
 Every step of a process is paid by every delivery, so a step that catches nothing is a tax on all of them.
-Ninjobs reached its public opening on a process of six rules, the ones the kit's `SETUP.md` lists for every project, and two checks, after the old checks had gone with it through fifteen days that built four screens.
+Ninjobs reached its public opening on a process of one page per delivery, two commands, one queue line per delivery, two checks and the governor's question ([chapter 6](06-birth-of-focus-kit.md) tells the story), after the old checks had gone with it through fifteen days that built four screens.
 The governor keeps a process that small, and it lets a team say yes to a step with the error that justifies it written down, its own or one another project documented where the same conditions hold, without paying for that error first.
 The one exception carries the errors that justify it, so the team checks it the way it checks any step, and the readers stay on the job those errors gave them.
 

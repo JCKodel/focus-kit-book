@@ -84,7 +84,7 @@ E se a única verificação que o pegasse fosse alguém lendo todo nome de arqui
 ## O que o time ganha
 
 Cada passo de um processo é pago por toda entrega, então um passo que não pega nada é um imposto sobre todas elas.
-O Ninjobs chegou à abertura ao público com um processo de seis regras, as que o `SETUP.md` do kit lista para todo projeto, e duas verificações, depois de as verificações antigas o terem acompanhado por quinze dias que construíram quatro telas.
+O Ninjobs chegou à abertura ao público com um processo de uma página por entrega, dois comandos, uma linha de fila por entrega, duas verificações e a pergunta do regulador (o [capítulo 6](06-birth-of-focus-kit.md) conta a história), depois de as verificações antigas o terem acompanhado por quinze dias que construíram quatro telas.
 O regulador mantém um processo desse tamanho, e deixa um time dizer sim a um passo com o erro que o justifica escrito, o seu ou um que outro projeto documentou onde valem as mesmas condições, sem pagar por esse erro antes.
 A única exceção traz os erros que a justificam, então o time a confere do jeito que confere qualquer passo, e os leitores ficam no trabalho que esses erros lhes deram.
 
