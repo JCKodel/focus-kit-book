@@ -58,7 +58,7 @@ The tests sit beside the code they test.
 Each of these files is one of the four pieces this chapter names further on, and each has its own test.
 
 The top folder screams the library: loans, members, catalog.
-A change to how lending works touches `loans/`, and removing loans from the product removes one folder.
+A change to how lending works touches `loans/`, and removing loans from the product removes that folder and changes every slice that imports from it, such as a member's page that lists their loans; those imports name the slices the removal reaches.
 In 1972 David Parnas compared two ways of splitting one program into modules: split by the steps of the processing, a change to how the data was stored touched every module; split by the decisions likely to change, it touched one.
 He proposed to begin "*with a list of difficult design decisions or design decisions which are likely to change*", so that "*each module is then designed to hide such a decision from the others*".[^parnas-1972]
 A folder per layer splits code by the steps a request goes through; a slice applies Parnas's criterion at the size of a feature, and hides its feature's decisions, such as how a loan is decided and stored, from the rest of the program.

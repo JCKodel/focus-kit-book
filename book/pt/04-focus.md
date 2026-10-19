@@ -60,7 +60,7 @@ Cada um desses arquivos é uma das quatro peças que este capítulo nomeia mais 
 A pasta `features/` fica em inglês, porque é o nome que este livro dá à pasta das fatias, assim como ele diz *feature*, sem traduzir; cada fatia dentro dela tem um nome em português, da biblioteca de empréstimos: `emprestimos/`, `membros/`, `catalogo/`.
 
 A pasta de cima grita a biblioteca: empréstimos, membros, catálogo.
-Uma mudança em como o empréstimo funciona mexe em `emprestimos/`, e tirar os empréstimos do produto tira uma pasta.
+Uma mudança em como o empréstimo funciona mexe em `emprestimos/`, e tirar os empréstimos do produto tira essa pasta e muda cada fatia que importa dela, como a página de um membro que lista os empréstimos dele; esses imports dizem a quais fatias a remoção chega.
 Em 1972, David Parnas comparou duas maneiras de dividir um mesmo programa em módulos: dividido pelos passos do processamento, uma mudança em como os dados eram guardados mexia em todos os módulos; dividido pelas decisões que provavelmente vão mudar, mexia em um só.
 Ele propôs começar "*com uma lista de decisões de projeto difíceis ou de decisões de projeto que provavelmente vão mudar*", de modo que "*cada módulo seja então projetado para esconder tal decisão dos outros*".[^parnas-1972]
 Uma pasta por camada divide o código pelos passos por que passa uma requisição; uma fatia aplica o critério de Parnas no tamanho de uma feature, e esconde do resto do programa as decisões da sua feature, como a forma de decidir e de guardar um empréstimo.

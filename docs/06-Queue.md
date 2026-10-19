@@ -503,6 +503,6 @@ When this milestone closes, every technical claim the audit of 2026-10-18 found 
 [x] ch16-prevention-evidence chapter 16: an error documented in another project may justify prevention, with evidence and a proportionate cost; both editions
 [x] ch14-blocked-column      chapter 14: a blocked line returns to `[ ]` or `[>]` as docs/05 §4 says, so the board shows it there and keeps no memory of a column; both editions · after ch14-back-to-open
 [x] verify-examples          `make verify` runs the executable examples extracted from the chapters, starting with chapter 3's `query` · after ch03-query-catch
-[>] ch04-remove-slice        chapter 4: removing a feature removes its folder and the imports other slices hold of it, as the member's page importing from loans/ shows; both editions
+[x] ch04-remove-slice        chapter 4: removing a feature removes its folder and the imports other slices hold of it, as the member's page importing from loans/ shows; both editions
 [>] m20-review               the review of M20 as docs/05 §8 says · after ch03-query-catch, ch03-exhaustive-switch, ch12-scenario-levels, ch04-isolation-claims, ch01-recovery-not-immunity, ch24-protocol-phase, ch22-cost-method, ch16-prevention-evidence, ch14-blocked-column, verify-examples, m19-review, ch04-remove-slice
 ```
