@@ -1,6 +1,6 @@
 # 24. Asking for more
 
-After this chapter you can send the challenge protocol, four messages, always the same, that follow an agent's first answer and are written out, ready to copy, under the section of that name, when the work is worth what they cost; and you can say why that first answer feels final and which four things an agent does not propose unless you ask.
+After this chapter you can send the challenge protocol, four messages, always the same, that follow an agent's first answer and are written out, ready to copy, under the section of that name, when the work is worth what they cost; you can say in which phase of a delivery each turn may change something, so the protocol never widens what the page agreed; and you can say why that first answer feels final and which four things an agent does not propose unless you ask.
 
 ## The card I accepted
 
@@ -31,6 +31,15 @@ These are the four turns sent in the experiment this chapter's last section repo
    and tell me what you left out.
 ```
 
+**The phase decides what a turn may change.**
+In a project run on the method, the protocol never widens a delivery.
+Once `/propose` has written the page, and before `/apply` runs, send it in that session: the agent's questions, the limits it tested and what it would add go into the page, which you review; no turn authorizes code, since `/propose` writes none (chapter 12).
+After `/apply`'s first result, sort what each turn finds against the page.
+A requirement the page already holds and the result missed is a fix: it goes into this delivery, verify and the proof run again and the page records it, before the delivery closes.
+A new capability is a new line: if turn 4, on `lend-book`, proposes that a member reserve a copy on loan, that is a capability the page puts out of scope (chapter 12).
+The answer is a `[ ]` line `reservations`, with a draft page for what the line cannot hold, defined by `/propose` and built by a fresh `/apply`, never added to the open delivery (chapter 13).
+Turn 2's test checks the agreed result; a change it uncovers outside that result follows the same rule.
+
 **Turn 1 puts the questions before the work.**
 The agent knows what it lacks better than you can guess, and "before you change anything" keeps it from rebuilding on a guess.
 Answer its questions from what you know: who uses the result, on what, with how much time, what it costs.
@@ -51,6 +60,7 @@ Who uses the result, with how much time, and what each use costs: two of the fou
 **Turn 4 asks for what you did not ask for, and keeps you deciding.**
 "Worth it" asks the agent to weigh each addition, and "tell me what you left out" puts the rest in front of you.
 You stay the one who decides, which is the role the prologue gives the person.
+Inside a delivery, what is worth adding now is what the page already asks for; anything else is what the agent left out, and becomes a line.
 
 ## Why the first answer feels final
 
@@ -150,6 +160,7 @@ What they avoid is what the studies measured: answers taken unchecked, from an a
 * A first answer feels final because a person stops at good enough (Simon), takes the aid's answer in place of checking (automation bias, Skitka), and lacks the time or the means to improve it (Lee et al.).
 * An agent does not propose, unasked, to test a limit it claimed, to fit the result to its reader's time, to fit it to the cost of each use, or what nobody asked for.
 * The challenge protocol is four turns, sent one at a time after the first answer: (1) "Before you change anything, ask me what you need to know to do this well."; (2) "What did you say is not possible, or not worth doing? Test each one and show me the result."; (3) "Who reads or uses this, how much time do they have, and what does each use cost? Change the result to fit."; (4) "What did I not ask for that I would want? Add what is worth it, and tell me what you left out."
+* The phase decides what a turn may change: while `/propose` defines a delivery, what the turns find goes into the page and no turn authorizes code; after `/apply`'s first result, a requirement the page holds and the result missed is fixed and proved in that delivery, and a new capability becomes a `[ ]` line for `/propose` and a fresh `/apply`, as does a change turn 2's test uncovers outside the agreed result.
 * Turn 2 asks for a test because "Are you sure?" invites sycophancy, a new answer chosen to please.
 * Send the protocol where the result is used often or read in a hurry: it costs about 3 to 9 times the first answer's time and output tokens, which a subscriber pays from the plan's session limit, and its evidence is three pairs per arm, judged by the same model.
 

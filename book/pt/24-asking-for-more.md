@@ -1,6 +1,6 @@
 # 24. Pedir mais
 
-Depois deste capítulo você consegue enviar o protocolo de desafio, quatro mensagens, sempre as mesmas, que seguem a primeira resposta de um agente e estão escritas, prontas para copiar, na seção com esse nome, quando o trabalho vale o que elas custam; e consegue dizer por que essa primeira resposta parece final e quais quatro coisas um agente não propõe se você não pedir.
+Depois deste capítulo você consegue enviar o protocolo de desafio, quatro mensagens, sempre as mesmas, que seguem a primeira resposta de um agente e estão escritas, prontas para copiar, na seção com esse nome, quando o trabalho vale o que elas custam; consegue dizer em que fase de uma entrega cada turno pode mudar alguma coisa, para que o protocolo nunca alargue o que a página combinou; e consegue dizer por que essa primeira resposta parece final e quais quatro coisas um agente não propõe se você não pedir.
 
 ## O card que eu aceitei
 
@@ -31,6 +31,15 @@ O experimento que a última seção deste capítulo relata enviou os quatro turn
    pena, e me diga o que você deixou de fora.
 ```
 
+**A fase decide o que um turno pode mudar.**
+Num projeto que segue o método, o protocolo nunca alarga uma entrega.
+Depois que o `/propose` escreve a página, e antes de o `/apply` rodar, envie-o nessa sessão: as perguntas do agente, os limites que testou e o que acrescentaria vão para a página, que você revisa; nenhum turno autoriza código, já que o `/propose` não escreve nenhum (capítulo 12).
+Depois do primeiro resultado do `/apply`, compare com a página o que cada turno encontra.
+Um requisito que a página já tem e o resultado deixou passar é uma correção: entra nesta entrega, a verificação e a prova rodam de novo e a página a registra, antes de a entrega fechar.
+Uma capacidade nova é uma linha nova: se o turno 4, em `emprestar-livro`, propõe que um membro reserve um exemplar emprestado, essa é uma capacidade que a página põe fora do escopo (capítulo 12).
+A resposta é uma linha `[ ]` `reservas`, com um rascunho da página para o que a linha não comporta, definida pelo `/propose` e construída por um `/apply` numa sessão nova, nunca acrescentada à entrega aberta (capítulo 13).
+O teste do turno 2 confere o resultado combinado; uma mudança que ele revela fora desse resultado segue a mesma regra.
+
 **O turno 1 põe as perguntas antes do trabalho.**
 O agente sabe o que lhe falta melhor do que você consegue adivinhar, e "antes de mudar qualquer coisa" o impede de reconstruir sobre um palpite.
 Responda às perguntas dele com o que você sabe: quem usa o resultado, em quê, com quanto tempo, quanto custa.
@@ -51,6 +60,7 @@ Quem usa o resultado, com quanto tempo, e quanto custa cada uso: duas das quatro
 **O turno 4 pede o que você não pediu, e mantém você decidindo.**
 "Valer a pena" pede ao agente que pese cada acréscimo, e "me diga o que você deixou de fora" põe o resto diante de você.
 Você continua sendo quem decide, que é o papel que o prólogo dá à pessoa.
+Dentro de uma entrega, o que vale a pena acrescentar agora é o que a página já pede; o resto é o que o agente deixou de fora, e vira uma linha.
 
 ## Por que a primeira resposta parece final
 
@@ -150,6 +160,7 @@ O que elas evitam é o que os estudos mediram: respostas aceitas sem conferir, v
 * Uma primeira resposta parece final porque a pessoa para no bom o bastante (Simon), toma a resposta do auxílio no lugar de conferir (viés de automação, Skitka) e não tem o tempo ou os meios para melhorá-la (Lee et al.).
 * Um agente não propõe, sem que peçam, testar um limite que afirmou, ajustar o resultado ao tempo de quem lê, ajustá-lo ao custo de cada uso, nem o que ninguém pediu.
 * O protocolo de desafio são quatro turnos, enviados um de cada vez depois da primeira resposta: (1) "Antes de mudar qualquer coisa, me pergunte o que você precisa saber para fazer isto bem."; (2) "O que você disse que não é possível, ou que não vale a pena fazer? Teste cada um e me mostre o resultado."; (3) "Quem lê ou usa isto, quanto tempo tem, e quanto custa cada uso? Mude o resultado para caber nisso."; (4) "O que eu não pedi e que eu ia querer? Acrescente o que valer a pena, e me diga o que você deixou de fora."
+* A fase decide o que um turno pode mudar: enquanto o `/propose` define uma entrega, o que os turnos encontram vai para a página e nenhum turno autoriza código; depois do primeiro resultado do `/apply`, um requisito que a página tem e o resultado deixou passar é corrigido e provado nessa entrega, e uma capacidade nova vira uma linha `[ ]` para o `/propose` e um `/apply` numa sessão nova, assim como uma mudança que o teste do turno 2 revela fora do resultado combinado.
 * O turno 2 pede um teste porque "Tem certeza?" convida a bajulação, uma resposta nova escolhida para agradar.
 * Envie o protocolo onde o resultado é usado com frequência ou lido com pressa: ele custa cerca de 3 a 9 vezes o tempo e os tokens de saída da primeira resposta, que um assinante paga com o limite de sessão do plano, e a sua evidência são três pares por braço, julgados pelo mesmo modelo.
 
