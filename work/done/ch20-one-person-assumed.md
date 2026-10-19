@@ -57,10 +57,47 @@
 
 **Done when.**
 
-* [ ] Both editions changed in the same places (opening, line 8, the pull request section's sentence, the Boards sentences, two key points) and nowhere else in chapter 20.
-* [ ] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
-* [ ] No version, date, "now", before/after, history of edited command files or narration of a run; no em dash.
-* [ ] Case A's existing sentences byte for byte, so no new private text to approve; no number added, so none to source.
-* [ ] The back-pointer to chapter 7 sits inside a sentence that says something; no slot block quoted.
-* [ ] `make verify` green; `make book` builds both editions, and both PDF paths reported.
-* [ ] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions changed in the same places (opening, line 8, the pull request section's sentence, the Boards sentences, two key points) and nowhere else in chapter 20.
+* [x] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
+* [x] No version, date, "now", before/after, history of edited command files or narration of a run; no em dash.
+* [x] Case A's existing sentences byte for byte, so no new private text to approve; no number added, so none to source.
+* [x] The back-pointer to chapter 7 sits inside a sentence that says something; no slot block quoted.
+* [x] `make verify` green; `make book` builds both editions, and both PDF paths reported.
+* [x] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+
+## What happened
+
+**Built.** Both editions of chapter 20, `book/en/20-team-tools.md` and `book/pt/20-team-tools.md`, changed in the six places the Contract names and nowhere else. The opening sentence gains who on the team is the reviewer the kit assumes and the board refreshed through a slot of docs/05 rather than an edit to the commands; line 4 stays. "The problem" line 8 states the kit's assumption: one person who proposes a delivery, uses it, reviews the staged diff and commits it, with the roles split no further. "The pull request as the team's review" gains one sentence after line 32: whoever merges is the reviewer the kit assumes, since on a branch the merge is the delivery's one change, as the commit is on trunk. "Boards" gains two general sentences after Case A's: a project gives its board this refresh with a slot of its own in docs/05 §5 that names `/propose`, `/apply` and the command that pushes the queue, with a back-pointer to the lending library's docs/05 in chapter 7, followed by the commands with no edit to their files; and since the push runs inside the command that changed the mark, the board shows it at once on any branch. Two key points gain a clause each.
+
+**Checked.** Against the kit's README sentence quoted in Sources, docs/05 §5 intro, docs/03 `slot`, `board mirror` and `trunk`, chapter 7 (lines 50 to 56) and chapter 14 (line 62, "it shows the mark at once on any branch"). Portuguese as chapter 7 and this chapter write it: "cita" for a slot that names a command, "em stage", "na hora", "docs/05 §5" as is, "a biblioteca de empréstimos". Case A's sentences byte for byte; no number, version, date, "now" or em dash; the push command not named.
+
+**Divergences.** The pull request sentence reads "Whoever merges is the reviewer the kit assumes", not the Contract's "That person, whoever merges": on a code host the person who approves (line 32) and the person who merges can differ, and the Behaviour keeps a second reviewer as the team's practice. The Boards sentence says "the push runs inside the command", not "the slot runs": a slot is a fact the command follows, the push is what runs.
+
+**Decisions taken alone in /apply.**
+
+* The two wording divergences above, from the delivery review.
+* "The kit assumes" is "o kit assume" in Portuguese, the plain verb, not "supõe".
+* The out-of-scope reader who does not read code is now queue line `ch20-reader-no-code`; nothing written for it here.
+* `make book` is not run in this session: the driver of the parallel /apply sessions runs it once at the end and gives both PDF paths. Staging and the docs/06 hunk are the driver's too. Both Done when items are ticked on that understanding.
+
+**Delivery review.** A read-only Explore agent on Opus read `git diff HEAD` of both chapters and this page against docs/04, AGENTS.md, docs/03, docs/05 §5 and chapters 7, 14 and 18. No finding broke the page or docs/04; six suggestions:
+
+* "That person, whoever merges" conflates the approver and the merger. Fixed (Divergences).
+* "The slot runs inside the command": a slot does not run. Fixed: "the push runs" / "o envio roda".
+* The board key point read as if the slot changed the mark. Fixed with commas around "when a mark changes" in both editions.
+* The opening's tacked-on clause was hard to follow. Fixed: "refreshing the board through a slot of docs/05" / "atualizando o quadro".
+* "the kit's slots ... which are the kit's" repeated. Fixed: "which the kit's installation writes", as chapter 7 line 51 says it.
+* Portuguese "propõe uma entrega, usa a entrega" repeats the noun. Kept: it mirrors the English and reads plainly.
+
+**Proof.** `make verify` green after the last covered edit, the review's fixes and the page's move included.
+
+```commit
+docs(ch20-one-person-assumed): say whom the kit assumes in ch 20
+
+- the kit assumes one person who proposes, uses, reviews and commits
+- on a team whoever merges is the reviewer the kit assumes
+- a board refresh is a docs/05 slot the commands follow, no edit
+- the slot's push shows a mark at once on any branch; both editions
+
+work/done/ch20-one-person-assumed.md
+```

@@ -1,11 +1,11 @@
 # 20. The team's tools: pull requests, issues and boards
 
-After this chapter you can land a delivery through a pull request whose review reads the page before the diff, and keep issues and a board in step with the queue without making either of them the source of truth.
+After this chapter you can land a delivery through a pull request whose review reads the page before the diff, knowing who on the team is the reviewer the kit assumes, and keep issues and a board in step with the queue without making either of them the source of truth, refreshing the board through a slot of docs/05 rather than an edit to the commands.
 You can also say why a project's documents live in docs/ and never in a wiki.
 
 ## The problem
 
-One person working on trunk uses the delivery, reviews the staged change and commits it.
+The kit assumes one person who proposes a delivery, uses it, reviews the staged diff and commits it, and splits those roles no further.
 A team needs two more things: a second person who reviews before the merge, and a way for people who never open the repository, a manager or a client, to see progress.
 The git strategies of chapter 18 stop at the merge: they shape the history, and say nothing about who reviewed a change or who is watching the work.
 
@@ -30,6 +30,7 @@ A change in the diff that the page does not ask for is the first finding, whatev
 The first reviewer can be an agent: the host's own review command, or GitHub Copilot code review, which reads the repository's custom and agent instructions from the branch under review, so it knows the same rules as the agent that built the change.[^copilot-review]
 GitHub's documentation gives the limit itself: "*Always validate Copilot's feedback carefully. Supplement Copilot's feedback with a human review.*"[^copilot-review]
 The agent's review finds what a tired person skims; the person decides what is a finding, and approves the merge.
+Whoever merges is the reviewer the kit assumes: on a branch the merge is the delivery's one change, as the commit is on trunk.
 
 ## Issues
 
@@ -54,6 +55,8 @@ A board whose cards are moved by hand, though, is a second queue, and it drifts 
 The answer is a mirror in one direction, from the queue to the board.
 On Case A, a client project on a low-code platform, a customization recorded in its docs/05 did this: a script and a pipeline pushed the queue, one way, to the project's Azure DevOps kanban board, so the project manager followed progress in the portal without asking a developer.
 `/propose` and `/apply` refreshed the board whenever they changed a mark, and said so whenever they could not, so a stale board was never silent.
+A project gives its board this refresh with a slot of its own in docs/05 §5 that names `/propose`, `/apply` and the command that pushes the queue, as in the lending library's docs/05 of [chapter 7](07-the-documents.md); the commands follow it as they follow the kit's slots, with no edit to their files, which the kit's installation writes.
+Since the push runs inside the command that changed the mark, the board shows the mark at once, on any branch the delivery is on.
 With the kit's six marks, a mirror places each card by its line's mark, in the column where [chapter 14](14-queue-states.md) folds them onto a board's columns.
 The mirror goes one way because the queue is the only place the agent reads: a card moved on the board changes nothing in the repository, and a sync in both directions would make two sources of truth.
 
@@ -78,9 +81,9 @@ Case A's board ran on one project, and its write permission was never proven.
 ## Key points
 
 * A pull request carries one delivery: a branch named by the slug, the page first, the build after, one merge with the page, the code and the mark.
-* The reviewer reads the page, then the diff against it; an agent may review first, and a person decides.
+* The reviewer reads the page, then the diff against it; an agent may review first, a person decides, and whoever merges is the reviewer the kit assumes.
 * An issue mirrors a queue line through the slug, and the queue stays the source of truth, because the agent reads the repository.
-* A board is a one-way mirror of the queue, refreshed when a mark changes, and never silent when it cannot be.
+* A board is a one-way mirror of the queue, refreshed, when a mark changes, by a slot of docs/05 that the commands follow, not by an edit to them, and never silent when it cannot be.
 * A question delivery, Case A's own customization, closes on the answer, not on the send.
 
 [^gh-prs]: GitHub Docs, "Pull requests", section "Working with pull requests", accessed 2026-09-30. <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests>

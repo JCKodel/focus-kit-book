@@ -1,11 +1,11 @@
 # 20. As ferramentas do time: pull requests, issues e quadros
 
-Depois deste capítulo você consegue levar uma entrega ao branch principal por um pull request cuja revisão lê a página antes do diff, e manter issues e um quadro em sintonia com a fila sem fazer de nenhum deles a fonte da verdade.
+Depois deste capítulo você consegue levar uma entrega ao branch principal por um pull request cuja revisão lê a página antes do diff, sabendo quem no time é o revisor que o kit assume, e manter issues e um quadro em sintonia com a fila sem fazer de nenhum deles a fonte da verdade, atualizando o quadro por um slot do docs/05 em vez de uma edição nos comandos.
 Você também consegue dizer por que os documentos de um projeto ficam em docs/ e nunca numa wiki.
 
 ## O problema
 
-Uma pessoa trabalhando no trunk usa a entrega, revisa a mudança em stage e faz o commit.
+O kit assume uma pessoa que propõe uma entrega, usa a entrega, revisa o diff em stage e faz o commit, e não divide esses papéis além disso.
 Um time precisa de mais duas coisas: uma segunda pessoa que revisa antes do merge, e um jeito de quem nunca abre o repositório, um gerente ou um cliente, ver o progresso.
 As estratégias de git do capítulo 18 param no merge: elas dão forma ao histórico, e não dizem nada sobre quem revisou uma mudança ou quem acompanha o trabalho.
 
@@ -30,6 +30,7 @@ Uma mudança no diff que a página não pede é o primeiro achado, qualquer que 
 O primeiro revisor pode ser um agente: o comando de revisão do próprio host, ou a revisão de código do GitHub Copilot, que lê as instruções personalizadas e de agente do repositório no branch em revisão, então conhece as mesmas regras que o agente que construiu a mudança.[^copilot-review]
 A documentação do GitHub dá o próprio limite: "*Sempre valide o feedback do Copilot com cuidado. Complemente o feedback do Copilot com uma revisão humana.*"[^copilot-review]
 A revisão do agente encontra o que uma pessoa cansada lê por cima; a pessoa decide o que é um achado, e aprova o merge.
+Quem faz o merge é o revisor que o kit assume: em um branch o merge é a única mudança da entrega, como o commit é no trunk.
 
 ## Issues
 
@@ -54,6 +55,8 @@ Um quadro cujos cartões são movidos à mão, porém, é uma segunda fila, e se
 A resposta é um espelho numa só direção, da fila para o quadro.
 No Caso A, um projeto para um cliente em uma plataforma low-code, uma customização registrada no seu docs/05 fazia isso: um script e um pipeline enviavam a fila, numa só direção, ao quadro kanban do projeto no Azure DevOps, então o gerente de projeto acompanhava o progresso no portal sem perguntar a um desenvolvedor.
 O `/propose` e o `/apply` atualizavam o quadro sempre que mudavam uma marca, e avisavam sempre que não conseguiam, então um quadro desatualizado nunca ficava em silêncio.
+Um projeto dá ao seu quadro essa atualização com um slot próprio no docs/05 §5 que cita o `/propose`, o `/apply` e o comando que envia a fila, como no docs/05 da biblioteca de empréstimos do [capítulo 7](07-the-documents.md); os comandos o seguem como seguem os slots do kit, sem nenhuma edição nos seus arquivos, que a instalação do kit escreve.
+Como o envio roda dentro do comando que mudou a marca, o quadro mostra a marca na hora, em qualquer branch em que a entrega esteja.
 Com as seis marcas do kit, um espelho coloca cada cartão pela marca da sua linha, na coluna em que o [capítulo 14](14-queue-states.md) as dobra nas colunas de um quadro.
 O espelho vai numa só direção porque a fila é o único lugar que o agente lê: um cartão movido no quadro não muda nada no repositório, e uma sincronização nas duas direções criaria duas fontes da verdade.
 
@@ -78,9 +81,9 @@ O quadro do Caso A rodou em um projeto, e a sua permissão de escrita nunca foi 
 ## Pontos-chave
 
 * Um pull request carrega uma entrega: um branch com o nome do slug, a página primeiro, a construção depois, um merge com a página, o código e a marca.
-* O revisor lê a página, depois o diff contra ela; um agente pode revisar primeiro, e uma pessoa decide.
+* O revisor lê a página, depois o diff contra ela; um agente pode revisar primeiro, uma pessoa decide, e quem faz o merge é o revisor que o kit assume.
 * Uma issue espelha uma linha da fila pelo slug, e a fila continua a fonte da verdade, porque o agente lê o repositório.
-* Um quadro é um espelho da fila numa só direção, atualizado quando uma marca muda, e nunca em silêncio quando não consegue ser.
+* Um quadro é um espelho da fila numa só direção, atualizado, quando uma marca muda, por um slot do docs/05 que os comandos seguem, não por uma edição neles, e nunca em silêncio quando não consegue ser.
 * Uma entrega de pergunta, customização do próprio Caso A, fecha na resposta, não no envio.
 
 [^gh-prs]: GitHub Docs, "Pull requests", seção "Working with pull requests", acesso em 2026-09-30. <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests>
