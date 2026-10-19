@@ -41,6 +41,24 @@ The decision stands: one delivery, one commit, on `main`, decided by the author.
 
 **Done when.**
 
-* [ ] ADR-0010 ends with the Contract's section and every Behaviour line holds; `git diff docs/adr/ADR-0010-trunk.md` shows only added lines.
-* [ ] `make verify` green after the last edit.
-* [ ] The page is in `work/done/` and the line is `[x]`.
+* [x] ADR-0010 ends with the Contract's section and every Behaviour line holds; `git diff docs/adr/ADR-0010-trunk.md` shows only added lines.
+* [x] `make verify` green after the last edit.
+* [x] The page is in `work/done/` and the line is `[x]`.
+
+**Divergences.** None: the section is the Contract's, with `<date of /apply>` as 2026-10-19.
+
+**Proof.** `git diff docs/adr/ADR-0010-trunk.md` shows only added lines at the file's end; docs/05 §6 and `docs/manuals/release-the-book.md` both name `chore(release): vX.Y.Z`; `make verify` green after the last edit.
+
+**Delivery review:** skipped on the author's word (2026-10-19).
+
+**Open questions taken alone.** None left open by the page.
+
+```commit
+docs(adr0010-commit-asked): amend ADR-0010 on who commits
+
+- the agent commits or merges only when the person asks, after review
+- make release commits VERSION alone as chore(release): vX.Y.Z
+- the decision and its earlier amendment are unchanged
+
+work/done/adr0010-commit-asked.md
+```

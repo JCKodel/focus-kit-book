@@ -19,3 +19,9 @@ The simplest history. Part IV still teaches branches and worktrees, from the oth
 
 Since `kit-2026-10-13`, two sessions may work in one tree on free lines that touch different files (docs/05 §4): each stages only its delivery, and the author commits one delivery at a time.
 The history stays one commit per delivery, and no worktree is used: two deliveries that need the same files are ordered in the queue with `· after` (`ch21-one-tree`).
+
+## Amendment, 2026-10-19 (adr0010-commit-asked)
+
+Since `kit-2026-10-18-1`, the agent never commits or merges on its own; asked, it takes the step the person names, once the person has reviewed the delivery (docs/05 §§5 and 6, AGENTS.md).
+Since `copyright-version`, `make release` makes one commit: on the author's `y`, it commits `VERSION` alone as `chore(release): vX.Y.Z` (docs/05 §6, `docs/manuals/release-the-book.md`).
+The decision stands: one delivery, one commit, on `main`, decided by the author.
