@@ -538,7 +538,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.19 and the reposi
 [ ] m21-git-slot-default     chapters 6, 8, 13, 18 and 19: every sentence that puts the person's reading before the commit says "by default", so it holds under the Git slot's commit form; both editions · after m21-review
 [ ] ch20-roles-and-points    chapters 20 and 23: the roles chapter 20 assumes hold under both Git slot forms, the split of roles is the team's practice, and chapter 20 keeps five key points; both editions · after m21-review
 [ ] ch14-20-board-branch     chapters 14 and 20: a board refreshed by a push shows the queue of the branch that pushed it; both editions · after m21-review, ch20-roles-and-points
-[ ] ch12-refuse-first        chapter 12: /propose refuses a waiting line or an unmet `after` before it creates a branch or worktree; both editions · after m21-review
+[>] ch12-refuse-first        chapter 12: /propose refuses a waiting line or an unmet `after` before it creates a branch or worktree; both editions · after m21-review
 [ ] ch08-step4-outcomes      chapter 8: the sentence after the report names its three outcomes, not only what the documents lack; both editions · after m21-review, m21-git-slot-default
 [ ] ch07-12-loan-days        chapters 7 and 12: the 21-day loan period comes from the same document in both chapters; both editions · after m21-review, ch12-refuse-first
 [ ] docs-m21-tidy            docs/06's header names the next milestone and M21's paragraph names what ch06 and ch16 answer, docs/05 is rewrapped, m21-review's page cites its base case, and work/kit-proposals.md carries three notes for focus-kit · after m21-review
