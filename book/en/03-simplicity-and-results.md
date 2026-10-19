@@ -3,7 +3,7 @@
 After this chapter you can refuse a piece of code, a document or a check that no delivery needs, say which of KISS, YAGNI and DRY refuses it, and know the moment a shared version is due: the second concrete occurrence.
 You can write a business rule as a pure function that returns a `Result`, and tell an exception from a refusal and from an error in any language.
 You can also keep a library's exceptions, and only those, at the boundary, whether the call answers at once or later, so a new library changes one file and a bug still reaches you.
-And you can let the compiler refuse a case you forgot to handle.
+And you can make the compiler refuse a case you forgot to handle, with a `Record` or a `never` check, since declaring a `Result` alone does not.
 
 ## What grew on Ninjobs
 
@@ -154,9 +154,10 @@ function err<E>(error: E): Result<never, E> {
 
 The caller reads `ok` before it can reach `value` or `error`, and the compiler narrows the type on that check.
 
-The reason to carry a failure in a value, whatever its shape, a union type as here or an enum, is what the compiler does with it: a `switch` over the failure that leaves one case out does not compile.
-Every outcome a rule can produce is either handled or a compile error, and that error is the whole value of the construction: the compiler, and not a code review, guarantees that no case was forgotten, on the day the rule is written and on the day a case is added.
-The section "Every case handled" shows the check in TypeScript.
+The reason to carry a failure in a value, whatever its shape, a union type as here or an enum, is what the compiler can do with it: every outcome a rule can produce is named in its type, so the code that handles them can be checked against that list.
+The type makes the check possible and does not run it: a `switch` that leaves a case out still compiles when it has a `default` or returns nothing, and when it fails, its error does not name the case, unless the code that handles the failure asks for the check.
+When the handler asks for it, the check is the whole value of the construction: the compiler, and not a code review, guarantees that no case was forgotten, on the day the rule is written and on the day a case is added.
+The section "Every case handled" shows two ways to ask for it in TypeScript.
 
 The field calls the principle "errors as values", after Go's "*errors are values*";[^go-errors] this book says "exceptions as values", and the next section says why.
 
@@ -179,7 +180,7 @@ A failure the caller must catch, its documentation says, is "*an exception rathe
   No code is wrong.
   It is caught at the boundary with the outside world and returned as a value, for two reasons.
   The exception belongs to the domain that threw it: a sign-in library throws its own `AppleSignInException`, and the application's domain has no idea what Apple sign-in is; all it needs to know is that the login failed.
-  Translated into a value, `LoginFailed`, the failure speaks the application's language, and, as a member of a type, it enters the exhaustive check: every exception the application can meet is handled, and the compiler proves it.
+  Translated into a value, `LoginFailed`, the failure speaks the application's language, and, as a member of a type, it can enter the exhaustive check: a handler that asks for the check must handle every exception the application can meet, and the compiler proves it.
 * **A refusal** is a rule saying no: a member with overdue books, a phone number with too few digits, a time already taken.
   Nothing failed; the rule did its job.
   It is returned as a value too, and it is the most common outcome a program handles.
@@ -196,7 +197,7 @@ What travels in a `Result` is an exception or a refusal.
 A function returns one value, and its signature says which.
 A throw used to steer the flow, in place of a return, costs three things.
 It leaves through an exit the call site does not show: the function "returns" something its signature never mentioned, through a path the caller did not write, and every call inside it is one more such door.
-It makes the signature lie: `function lend(...): Loan` says nothing about the three ways it can fail, so the compiler cannot check that every case is handled, while `Result<Loan, LendRefusal>` says it in the type, and a `switch` over the refusal that forgets a case fails to compile.
+It makes the signature lie: `function lend(...): Loan` says nothing about the three ways it can fail, so the compiler cannot check that every case is handled, while `Result<Loan, LendRefusal>` says it in the type, and a handler that must name every refusal fails to compile when one is missing.
 And the catch wide enough to steer the flow also catches the bugs that happen inside it, and they vanish into a message nobody reads.
 
 Most of what a program handles is a rule saying no, so a program that throws for refusals has a hidden exit on every rule, the caller and the agent that reads the code have to know from memory which failures were meant, and every refusal pays for a thrown and caught exception: in Stephen Toub's benchmark, a thousand throws, each caught through ten asynchronous calls, took about an eighth of a second on .NET 8.[^toub-net9]
@@ -266,7 +267,7 @@ So the rule reads: catch at the boundary with the outside world, recognize the l
 
 ## Every case handled
 
-A `Result` pays off when the compiler checks the handling.
+A `Result` pays off when the compiler checks the handling, and the handler has to ask for the check.
 In TypeScript a `Record` over the refusal type must name every member:
 
 ```ts
@@ -279,8 +280,38 @@ const message: Record<LendRefusal, string> = {
 };
 ```
 
-Add a refusal to the rules and forget its message, and the build fails, before any user sees a blank screen.
-In Rust and Dart an exhaustive `match` or `switch` does the same; in Go, a linter.
+Leave `MemberSuspended` out of `message`, and the build fails with an error that names the missing property.
+Add a refusal to the rules and forget its message, and it fails the same way, before any user sees a blank screen.
+
+A `Record` fits when each case gives a value.
+When a case has to run code, a `switch` asks for the same check with `never`, the type that has no values.
+After each `case`, the compiler narrows the refusal to the cases not yet matched, so in the `default` branch, once every case is handled, only `never` is left.
+Here the switch gives the same messages as the `Record`, so the two can be compared:
+
+```ts
+function messageFor(refusal: LendRefusal): string {
+	switch (refusal) {
+		case "HasOverdueBooks":
+			return "Return your overdue books first.";
+		case "AlreadyLent":
+			return "This copy was just lent to someone else.";
+		case "MemberSuspended":
+			return "Your membership is suspended.";
+		default: {
+			const unhandled: never = refusal;
+
+			return unhandled;
+		}
+	}
+}
+```
+
+Leave the `MemberSuspended` case out, and that refusal reaches `default`; it is not `never`, so the line that declares `unhandled` fails to compile, with an error that names `"MemberSuspended"`.
+Add a refusal to the union, and both `message` and `messageFor` fail until each handles it.[^ts-handbook]
+
+Without that line, a switch whose `default` returns a generic message, such as "Something went wrong.", compiles with a case left out, and so does a switch whose branches return nothing; the suspended member then reads the generic message, or nothing, where the rule had a precise one.
+A `default` does not prove that the cases are complete; it hides the one that is missing.
+In Rust and Dart an exhaustive `match` or `switch` gives the same check; in Go, a linter.
 
 ## The same principles in a process
 
@@ -295,7 +326,7 @@ This book calls that question the governor and makes it the rule every step of t
 
 Less to read, less to review and less to keep true: every file, option and check that is not written is one that no person reviews, no agent loads into a session and no delivery has to satisfy, while Ninjobs made every delivery pass 29 checks that had never caught an error.
 Every rule is a function a test calls with data, so a rule has a test before it has a screen, and an agent asked to change it finds it in one place, with its cases named in its type.
-Every failure a caller must handle is in the signature, so a reviewer reads the type and knows what can go wrong, and a forgotten case is a compile error.
+Every failure a caller must handle is in the signature, so a reviewer reads the type and knows what can go wrong, and a handler written as a `Record` or with a `never` check turns a forgotten case into a compile error.
 
 ## Key points
 
@@ -303,7 +334,7 @@ Every failure a caller must handle is in the signature, so a reviewer reads the 
 * An abstraction is written on the second concrete occurrence, and the delivery says which was the first; in a process, a step enters only when it names the concrete error it would have caught.
 * A business rule is a pure function: data in, a `Result` out, no I/O and no clock; fetching and saving belong to the orchestrator around it.
 * A failure is an exception (from outside, recognized and caught at the boundary, awaited inside the `try` when the call is asynchronous, and returned in the domain's own words), a refusal (a rule saying no, returned as a value) or an error (a bug, never caught); a throw steers no flow.
-* The value of a `Result` is the exhaustive check: a `Record`, `match` or `switch` that forgets a case fails to compile.
+* The value of a `Result` is the exhaustive check, and the handler asks for it: a `Record`, or a `switch` whose `default` must be `never`, fails to compile when a case is missing; a `switch` with a generic `default` does not.
 
 [^brooks-silver-bullet]: Frederick P. Brooks Jr., "No Silver Bullet: Essence and Accidents of Software Engineering", IEEE Computer 20(4), 1987.
 [^beck-xp]: Kent Beck, "Extreme Programming Explained: Embrace Change", Addison-Wesley, 1999.
@@ -321,3 +352,4 @@ Every failure a caller must handle is in the signature, so a reviewer reads the 
 [^toub-net9]: Stephen Toub, "Performance Improvements in .NET 9", .NET Blog, 2024-09-12, section "VM", benchmark `ExceptionThrowCatch`, accessed 2026-09-30. <https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-9/>
 [^anti-corruption-layer]: Microsoft, "Anti-Corruption Layer pattern", Azure Architecture Center, accessed 2026-09-30. <https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer>
 [^ecma-await]: Ecma International, "ECMAScript Language Specification", sections "Await" and "The try Statement", accessed 2026-10-18. <https://tc39.es/ecma262/multipage/control-abstraction-objects.html#await> and <https://tc39.es/ecma262/multipage/ecmascript-language-statements-and-declarations.html#sec-try-statement>
+[^ts-handbook]: Microsoft, "Narrowing", section "Exhaustiveness checking", and "Utility Types", section "Record<Keys, Type>", TypeScript Handbook, accessed 2026-10-18. <https://www.typescriptlang.org/docs/handbook/2/narrowing.html#exhaustiveness-checking> and <https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type>

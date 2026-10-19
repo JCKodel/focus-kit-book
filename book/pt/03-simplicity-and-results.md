@@ -3,7 +3,7 @@
 Depois deste capítulo você consegue recusar um trecho de código, um documento ou uma verificação de que nenhuma entrega precisa, dizer qual entre KISS, YAGNI e DRY o recusa, e saber o momento em que uma versão compartilhada é devida: a segunda ocorrência concreta.
 Você consegue escrever uma regra de negócio como uma função pura que devolve um `Result` (resultado), e distinguir uma exceção de uma recusa e de um erro em qualquer linguagem.
 Você também consegue manter as exceções de uma biblioteca, e só elas, na fronteira, quer a chamada responda na hora ou depois, de modo que uma biblioteca nova mude um arquivo e um bug ainda chegue até você.
-E consegue deixar o compilador recusar um caso que você esqueceu de tratar.
+E consegue fazer o compilador recusar um caso que você esqueceu de tratar, com um `Record` ou uma checagem `never`, já que declarar um `Result` sozinho não faz isso.
 
 ## O que cresceu no Ninjobs
 
@@ -155,9 +155,10 @@ function err<E>(error: E): Result<never, E> {
 
 Quem chama lê `ok` antes de alcançar `value` ou `error`, e o compilador estreita o tipo nessa checagem.
 
-O motivo para carregar uma falha em um valor, seja qual for a forma, um union type como aqui ou um enum, é o que o compilador faz com ela: um `switch` sobre a falha que deixa um caso de fora não compila.
-Todo resultado que uma regra pode produzir ou é tratado ou é um erro de compilação, e esse erro é o valor inteiro desta construção: o compilador, e não uma revisão de código, garante que nenhum caso foi esquecido, no dia em que a regra é escrita e no dia em que um caso é acrescentado.
-A seção "Todo caso tratado" mostra a checagem em TypeScript.
+O motivo para carregar uma falha em um valor, seja qual for a forma, um union type como aqui ou um enum, é o que o compilador consegue fazer com ela: todo resultado que uma regra pode produzir está nomeado no tipo dela, então o código que os trata pode ser conferido contra essa lista.
+O tipo torna a checagem possível e não a executa: um `switch` que deixa um caso de fora ainda compila quando tem um `default` ou não devolve nada, e quando falha, o erro dele não nomeia o caso, a menos que o código que trata a falha peça a checagem.
+Quando o tratamento a pede, a checagem é o valor inteiro desta construção: o compilador, e não uma revisão de código, garante que nenhum caso foi esquecido, no dia em que a regra é escrita e no dia em que um caso é acrescentado.
+A seção "Todo caso tratado" mostra duas maneiras de pedi-la em TypeScript.
 
 A área chama o princípio de "errors as values", erros como valores, a partir do "*erros são valores*" do Go;[^go-errors] este livro diz "exceções como valores", e a próxima seção diz por quê.
 
@@ -180,7 +181,7 @@ Uma falha que quem chama precisa capturar, diz a sua documentação, é "*uma ex
   Nenhum código está errado.
   Ela é capturada na fronteira com o mundo de fora e devolvida como um valor, por dois motivos.
   A exceção pertence ao domínio de onde foi lançada: uma biblioteca de login lança a sua própria `AppleSignInException`, e o domínio da aplicação não tem ideia do que é o login com Apple; tudo o que ele precisa saber é que o login falhou.
-  Traduzida em um valor, `LoginFalhou`, a falha passa a falar a língua da aplicação e, como membro de um tipo, entra na checagem exaustiva: toda exceção que a aplicação pode encontrar é tratada, e o compilador prova isso.
+  Traduzida em um valor, `LoginFalhou`, a falha passa a falar a língua da aplicação e, como membro de um tipo, pode entrar na checagem exaustiva: um tratamento que pede a checagem precisa tratar toda exceção que a aplicação pode encontrar, e o compilador prova isso.
 * **Uma recusa** é uma regra dizendo não: um membro com livros atrasados, um telefone com dígitos de menos, um horário já ocupado.
   Nada falhou; a regra fez o seu trabalho.
   Ela também é devolvida como um valor, e é o resultado mais comum que um programa trata.
@@ -197,7 +198,7 @@ O que viaja em um `Result` é uma exceção ou uma recusa.
 Uma função devolve um valor, e a sua assinatura diz qual.
 Um throw usado para conduzir o fluxo, no lugar de um return, custa três coisas.
 Ele sai por uma porta que o ponto de chamada não mostra: a função "devolve" algo que a assinatura nunca mencionou, por um caminho que quem chama não escreveu, e cada chamada dentro dela é mais uma porta dessas.
-Ele faz a assinatura mentir: `function emprestar(...): Emprestimo` não diz nada sobre as três maneiras de falhar, então o compilador não consegue verificar que todo caso é tratado, enquanto `Result<Emprestimo, RecusaDeEmprestimo>` diz isso no tipo, e um `switch` sobre a recusa que esquece um caso não compila.
+Ele faz a assinatura mentir: `function emprestar(...): Emprestimo` não diz nada sobre as três maneiras de falhar, então o compilador não consegue verificar que todo caso é tratado, enquanto `Result<Emprestimo, RecusaDeEmprestimo>` diz isso no tipo, e um tratamento que precisa nomear cada recusa não compila quando falta uma.
 E o catch largo o bastante para conduzir o fluxo também captura os bugs que acontecem dentro dele, e eles somem em uma mensagem que ninguém lê.
 
 A maior parte do que um programa trata é uma regra dizendo não, então um programa que lança para recusas tem uma saída escondida em cada regra, quem chama e o agente que lê o código precisam saber de cor quais falhas eram intencionais, e cada recusa paga por uma exceção lançada e capturada: no benchmark de Stephen Toub, mil throws, cada um capturado através de dez chamadas assíncronas, levaram cerca de um oitavo de segundo no .NET 8.[^toub-net9]
@@ -267,7 +268,7 @@ Então a regra fica assim: capture na fronteira com o mundo de fora, reconheça 
 
 ## Todo caso tratado
 
-Um `Result` compensa quando o compilador confere o tratamento.
+Um `Result` compensa quando o compilador confere o tratamento, e o tratamento precisa pedir a checagem.
 Em TypeScript, um `Record` sobre o tipo da recusa precisa nomear cada membro:
 
 ```ts
@@ -280,8 +281,38 @@ const mensagem: Record<RecusaDeEmprestimo, string> = {
 };
 ```
 
-Acrescente uma recusa às regras e esqueça a mensagem dela, e o build falha, antes que algum usuário veja uma tela em branco.
-Em Rust e em Dart, um `match` ou um `switch` exaustivo faz o mesmo; em Go, um linter.
+Deixe `MembroSuspenso` de fora de `mensagem`, e o build falha com um erro que nomeia a propriedade que falta.
+Acrescente uma recusa às regras e esqueça a mensagem dela, e ele falha do mesmo jeito, antes que algum usuário veja uma tela em branco.
+
+Um `Record` serve quando cada caso dá um valor.
+Quando um caso precisa executar código, um `switch` pede a mesma checagem com `never`, o tipo que não tem valores.
+Depois de cada `case`, o compilador estreita a recusa aos casos ainda não atendidos, então no ramo `default`, quando todo caso está tratado, só resta `never`.
+Aqui o switch dá as mesmas mensagens que o `Record`, para que os dois possam ser comparados:
+
+```ts
+function mensagemPara(recusa: RecusaDeEmprestimo): string {
+	switch (recusa) {
+		case "TemLivrosEmAtraso":
+			return "Devolva primeiro os seus livros atrasados.";
+		case "JaEmprestado":
+			return "Este exemplar acabou de ser emprestado a outra pessoa.";
+		case "MembroSuspenso":
+			return "A sua matrícula está suspensa.";
+		default: {
+			const naoTratada: never = recusa;
+
+			return naoTratada;
+		}
+	}
+}
+```
+
+Deixe o caso `MembroSuspenso` de fora, e essa recusa chega ao `default`; ela não é `never`, então a linha que declara `naoTratada` não compila, com um erro que nomeia `"MembroSuspenso"`.
+Acrescente uma recusa ao union, e tanto `mensagem` quanto `mensagemPara` falham até que cada um a trate.[^ts-handbook]
+
+Sem essa linha, um switch cujo `default` devolve uma mensagem genérica, como "Algo deu errado.", compila com um caso de fora, e também um switch cujos ramos não devolvem nada; o membro suspenso então lê a mensagem genérica, ou nada, onde a regra tinha uma precisa.
+Um `default` não prova que os casos estão completos; ele esconde o que falta.
+Em Rust e em Dart, um `match` ou um `switch` exaustivo dá a mesma checagem; em Go, um linter.
 
 ## Os mesmos princípios em um processo
 
@@ -296,7 +327,7 @@ Este livro chama essa pergunta de regulador e faz dela a regra que todo passo do
 
 Menos para ler, menos para revisar e menos para manter verdadeiro: cada arquivo, opção e verificação que não é escrito é um que nenhuma pessoa revisa, nenhum agente carrega em uma sessão e nenhuma entrega precisa satisfazer, enquanto o Ninjobs fazia toda entrega passar por 29 verificações que nunca tinham pegado um erro.
 Toda regra é uma função que um teste chama com dados, então uma regra tem um teste antes de ter uma tela, e um agente a quem se pede para mudá-la a encontra em um lugar só, com os casos dela nomeados no tipo.
-Toda falha que quem chama precisa tratar está na assinatura, então quem revisa lê o tipo e sabe o que pode dar errado, e um caso esquecido é um erro de compilação.
+Toda falha que quem chama precisa tratar está na assinatura, então quem revisa lê o tipo e sabe o que pode dar errado, e um tratamento escrito como um `Record` ou com uma checagem `never` transforma um caso esquecido em um erro de compilação.
 
 ## Pontos-chave
 
@@ -304,7 +335,7 @@ Toda falha que quem chama precisa tratar está na assinatura, então quem revisa
 * Uma abstração é escrita na segunda ocorrência concreta, e a entrega diz qual foi a primeira; em um processo, um passo só entra quando nomeia o erro concreto que teria pegado.
 * Uma regra de negócio é uma função pura: dados entrando, um `Result` saindo, sem I/O e sem relógio; buscar e salvar pertencem ao orquestrador em volta dela.
 * Uma falha é uma exceção (de fora, reconhecida e capturada na fronteira, aguardada dentro do `try` quando a chamada é assíncrona, e devolvida nas palavras do próprio domínio), uma recusa (uma regra dizendo não, devolvida como valor) ou um erro (um bug, nunca capturado); um throw não conduz fluxo.
-* O valor de um `Result` é a checagem exaustiva: um `Record`, `match` ou `switch` que esquece um caso não compila.
+* O valor de um `Result` é a checagem exaustiva, e o tratamento a pede: um `Record`, ou um `switch` cujo `default` precisa ser `never`, não compila quando falta um caso; um `switch` com um `default` genérico compila.
 
 [^brooks-silver-bullet]: Frederick P. Brooks Jr., "No Silver Bullet: Essence and Accidents of Software Engineering", IEEE Computer 20(4), 1987.
 [^beck-xp]: Kent Beck, "Extreme Programming Explained: Embrace Change", Addison-Wesley, 1999.
@@ -322,3 +353,4 @@ Toda falha que quem chama precisa tratar está na assinatura, então quem revisa
 [^toub-net9]: Stephen Toub, "Performance Improvements in .NET 9", .NET Blog, 2024-09-12, seção "VM", benchmark `ExceptionThrowCatch`, acesso em 2026-09-30. <https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-9/>
 [^anti-corruption-layer]: Microsoft, "Anti-Corruption Layer pattern", Azure Architecture Center, acesso em 2026-09-30. <https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer>
 [^ecma-await]: Ecma International, "ECMAScript Language Specification", seções "Await" e "The try Statement", acesso em 2026-10-18. <https://tc39.es/ecma262/multipage/control-abstraction-objects.html#await> e <https://tc39.es/ecma262/multipage/ecmascript-language-statements-and-declarations.html#sec-try-statement>
+[^ts-handbook]: Microsoft, "Narrowing", seção "Exhaustiveness checking", e "Utility Types", seção "Record<Keys, Type>", TypeScript Handbook, acesso em 2026-10-18. <https://www.typescriptlang.org/docs/handbook/2/narrowing.html#exhaustiveness-checking> e <https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type>
