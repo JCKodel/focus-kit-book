@@ -62,7 +62,7 @@ Cada linha é uma entrega, e o seu assunto diz o que a entrega faz, no infinitiv
 
 A página de uma entrega e a sua construção são uma mudança.
 O código, os testes, os documentos que a entrega atualizou e a sua página em `work/done/` entram no mesmo commit, então o histórico guarda a decisão e a mudança que ela fez lado a lado, e desfazer a entrega desfaz de uma vez tudo o que o git guarda dela.
-O agente coloca essa mudança em stage e sugere a mensagem; você usa o que ele construiu, lê a mudança e faz o commit, ou pede ao agente que o faça, e esse uso e essa leitura antes do commit são a sua revisão.
+Por padrão, o agente coloca essa mudança em stage e sugere a mensagem; você usa o que ele construiu, lê a mudança e faz o commit, ou pede ao agente que o faça, e esse uso e essa leitura antes do commit são a sua revisão.
 Colocar em stage é escrever no índice, também chamado de staging area, a cópia em stage do projeto de onde o commit é feito: `git add <caminho>` escreve uma mudança nele, `git diff --cached` mostra o que ele guarda, e um `git commit` simples o leva inteiro, então o que você coloca em stage é o que o commit guarda.
 Uma pasta de trabalho tem um só índice, compartilhado por todas as sessões abertas nela; o [capítulo 19](19-worktrees.md) diz o que duas sessões fazem a respeito.
 

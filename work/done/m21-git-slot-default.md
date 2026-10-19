@@ -76,12 +76,35 @@ Terms of docs/03 used: slot, trunk, worktree; the Git slot's commit form as chap
 
 **Done when.**
 
-* [ ] Both editions written, the same sentences changed in each, Portuguese read as Portuguese; each chapter opens with its value as before, no filler and nothing useful cut; no number added.
-* [ ] Every sentence the Contract names reads true under both Git slot forms; every sentence it lists as staying is unchanged.
-* [ ] `grep -c -i "by default"` rises by exactly 1 in chapters 6, 8 and 18, 2 in chapter 13 and 4 in chapter 19 (en); `grep -c -i "por padrão"` by the same in pt.
-* [ ] `grep -n "your commit stays the only review" book/en/13-apply.md` and `grep -n "o seu commit continua sendo a única revisão" book/pt/13-apply.md` find nothing.
-* [ ] `grep -c "07-the-documents"` on the five chapter files, both editions, is unchanged.
-* [ ] No added line holds "no longer", "now offers", "não mais", "agora oferece", "2026.10" or an em dash; no narrated run.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver runs `make book` once for the batch).
-* [ ] Only this delivery's paths and its hunk of docs/06 staged (staging is the driver's); the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions written, the same sentences changed in each, Portuguese read as Portuguese; each chapter opens with its value as before, no filler and nothing useful cut; no number added.
+* [x] Every sentence the Contract names reads true under both Git slot forms; every sentence it lists as staying is unchanged.
+* [x] `grep -c -i "by default"` rises by exactly 1 in chapters 6, 8 and 18, 2 in chapter 13 and 4 in chapter 19 (en); `grep -c -i "por padrão"` by the same in pt.
+* [x] `grep -n "your commit stays the only review" book/en/13-apply.md` and `grep -n "o seu commit continua sendo a única revisão" book/pt/13-apply.md` find nothing.
+* [x] `grep -c "07-the-documents"` on the five chapter files, both editions, is unchanged.
+* [x] No added line holds "no longer", "now offers", "não mais", "agora oferece", "2026.10" or an em dash; no narrated run.
+* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver runs `make book` once for the batch).
+* [x] Only this delivery's paths and its hunk of docs/06 staged (staging is the driver's); the page moved to `work/done/` and its commit message suggested.
+
+**Proof.**
+
+* `grep -c -i "by default"` (en) and `grep -c -i "por padrão"` (pt), before and after: chapter 6 0 to 1, chapter 8 0 to 1, chapter 13 1 to 3, chapter 18 0 to 1, chapter 19 1 to 5, the same in both editions.
+* The two `grep -n` on chapter 13's old sentence find nothing in either edition.
+* `grep -c "07-the-documents"`: 0, 0, 2, 1, 2 in chapters 6, 8, 13, 18, 19, before and after, both editions.
+* `git diff HEAD` of the ten chapter files: one line changed per Contract sentence, 10 per edition, no title touched; no added line holds an em dash, "no longer", "now offers", "não mais", "agora oferece" or "2026.10".
+* `make verify` green. `make book` is run once by the driver for the batch; staging and the docs/06 hunk are the driver's.
+
+**Divergences.** None: every sentence takes the Contract's wording; the Portuguese ones are "por padrão" at the same place.
+
+**Delivery review.** A read-only Opus agent read the diff of the ten chapter files against this page, docs/04 and chapter 7's two forms: nothing breaks the page or docs/04; counts, stayed lines and Portuguese confirmed. Three nits, left as the Contract wrote them: chapter 8 line 30 could set "by default" off with commas; chapter 19 line 189's head "By default" could be read as qualifying the exception itself; chapter 13 line 4 pairs "can" with "by default". Each follows a decision above, and none makes a sentence false.
+
+```commit
+docs(m21-git-slot-default): reading before the commit is the default
+
+- chapters 6, 8, 18: the reading before the commit says "by default"
+- chapter 13: opening and "The commit is the human review" say it too
+- chapter 13: with no delivery reviewer, your review stays the only one
+- chapter 19: one folder, the worktree's branch, the partial commit, each step
+
+work/done/m21-git-slot-default.md
+```

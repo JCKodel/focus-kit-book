@@ -63,7 +63,7 @@ Any other check is the project's own.
   It answers the build that decides as it goes: `/apply` starts clean, with the page and the documents, without the long conversation that decided it, since a context that grows loses accuracy; `/propose` writes no code and `/apply` widens no scope.
 * **The agent stages and suggests the commit message.**
   The agent never commits or merges on its own; asked, it takes the step the person names.
-  It answers the 29 checks that never looked at the product: the check that does is a person reading each change before it enters the history (chapter 13).
+  It answers the 29 checks that never looked at the product: the check that does is a person reading each change, by default before it enters the history (chapter 13).
 * **Project specifics are slots in the project's docs/05.**
   The verify command, the environments, the proof and the git strategy are filled once there, and `/apply` reads them.
   It answers the drift: a command that repeats a fact of the project goes stale when the document changes, so the command only says which slot to read (chapter 7).

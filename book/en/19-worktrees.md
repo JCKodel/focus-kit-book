@@ -35,7 +35,7 @@ Each session keeps to its delivery:
 * it stages only its own paths, and only its own line of docs/06;
 * it leaves alone whatever the other session changed or staged.
 
-The commit stays your decision, one delivery at a time, after you have used it and read what it staged.
+The commit stays your decision, one delivery at a time, by default after you have used it and read what it staged.
 Before committing `return-book`, look at what is staged:
 
 ```
@@ -182,18 +182,18 @@ The line's `[~]` and every later mark are written in the worktree, on its branch
 A branch `<slug>` without the prefix is not the delivery's: it is someone else's.
 You make the container once; the kit makes each worktree.
 `/apply <slug>` runs in a fresh session opened in that folder, builds the page, and stages the change.
-You use the delivery, review and commit on the branch, merge into `main` with `--no-ff`, remove the worktree and delete the branch.
+By default, you use the delivery, review and commit on the branch, merge into `main` with `--no-ff`, remove the worktree and delete the branch.
 
 When `/apply return-book` blocks in its worktree on an answer nobody has given, it stops as chapter 13 says: it marks the line `[?]` with `· resume: apply · blocked: what if the copy comes back damaged?`, writes on the page what was built, and shows a partial message in a `commit` block.
 There it may also stage the partial work for you to commit on `focus-kit/return-book` when you choose, with that message: it says it is partial, names the blocker, never implies that verify passed or that the delivery is done, and its last line is `work/return-book.md`, where the page waits.
-That commit is the one exception to using the delivery before you commit it: a commit of unfinished work whose message says so; the commit that completes the delivery still comes after you use the whole of it and read its staged diff.
+By default, that commit is the one exception to using the delivery before you commit it: a commit of unfinished work whose message says so; the commit that completes the delivery still comes after you use the whole of it and read its staged diff.
 While the line is `[?]`, do not merge the branch, whoever asks: it stays unmerged until the delivery is done, so one `git merge --no-ff` still brings the whole delivery to `main`.
 When `/apply` resumes in the same worktree, a clean working folder does not mean nothing was built: the work so far is in those commits, and the delivery review reads them against the branch's base (chapter 13).
 On trunk there is no partial commit: a blocked `/apply` stages nothing, and the work stays uncommitted until it is whole.
 
 The agent never commits, merges, pushes, resolves a conflict or removes a worktree on its own: every step that changes the history is yours to decide, as in every git strategy; for the commit and the merge, the Git slot may say the agent takes them by the slot's word, which counts as the asking, and you then review the commit ([chapter 7](07-the-documents.md)); the push, the conflict and the worktree stay yours to ask for.
 Ask, and it takes any of them for you: it writes the commit message, resolves the conflict, commits, merges, pushes or removes the worktree, and knows the commands that undo a step, such as `git merge --abort` for a merge stopped by a conflict or `git revert` for a delivery to take back.
-Each step comes after your reading: ask for the commit once you have used the delivery and the staged diff holds only it, for the merge commit once the resolved file has no conflict marker left, and for the push once `git log` shows what will leave.
+By default, each step comes after your reading: ask for the commit once you have used the delivery and the staged diff holds only it, for the merge commit once the resolved file has no conflict marker left, and for the push once `git log` shows what will leave.
 After a merge it made, `git log --oneline --graph -3` in `main/` shows the merge commit and the branch it brought in.
 To run two deliveries at once in worktrees, open one session per folder: one in `main/` for each `/propose`, one in each worktree for its `/apply`.
 

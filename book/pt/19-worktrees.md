@@ -35,7 +35,7 @@ Cada sessão se atém à sua entrega:
 * ela coloca em stage só os seus próprios caminhos, e só a sua própria linha do docs/06;
 * ela não mexe em nada que a outra sessão mudou ou colocou em stage.
 
-O commit continua sendo decisão sua, uma entrega por vez, depois que você a usou e leu o que ela colocou em stage.
+O commit continua sendo decisão sua, uma entrega por vez, por padrão depois que você a usou e leu o que ela colocou em stage.
 Antes de fazer o commit de `devolver-livro`, veja o que está em stage:
 
 ```
@@ -182,18 +182,18 @@ O [capítulo 14](14-queue-states.md) diz onde um quadro as vê.
 Um branch `<slug>` sem o prefixo não é o da entrega: é de outra pessoa.
 Você monta o contêiner uma vez; o kit cria cada worktree.
 O `/apply <slug>` roda em uma sessão nova aberta naquela pasta, constrói a página, e coloca a mudança em stage.
-Você usa a entrega, revisa e faz o commit no branch, faz o merge no `main` com `--no-ff`, remove o worktree e apaga o branch.
+Por padrão, você usa a entrega, revisa e faz o commit no branch, faz o merge no `main` com `--no-ff`, remove o worktree e apaga o branch.
 
 Quando o `/apply devolver-livro` trava no seu worktree esperando uma resposta que ninguém deu, ele para como o capítulo 13 diz: marca a linha `[?]` com `· resume: apply · blocked: e se o exemplar voltar danificado?`, escreve na página o que foi construído, e mostra uma mensagem parcial em um bloco `commit`.
 Ali ele também pode colocar o trabalho parcial em stage para você fazer o commit no `focus-kit/devolver-livro` quando quiser, com essa mensagem: ela diz que é parcial, nomeia o que trava, nunca dá a entender que a verificação passou ou que a entrega está pronta, e a sua última linha é `work/devolver-livro.md`, onde a página espera.
-Esse commit é a única exceção a usar a entrega antes de fazer o commit dela: um commit de trabalho inacabado cuja mensagem diz isso; o commit que completa a entrega continua vindo depois de você usar a entrega inteira e ler o seu diff em stage.
+Por padrão, esse commit é a única exceção a usar a entrega antes de fazer o commit dela: um commit de trabalho inacabado cuja mensagem diz isso; o commit que completa a entrega continua vindo depois de você usar a entrega inteira e ler o seu diff em stage.
 Enquanto a linha está `[?]`, não faça o merge do branch, quem quer que peça: ele fica sem merge até a entrega estar pronta, então um só `git merge --no-ff` ainda leva a entrega inteira ao `main`.
 Quando o `/apply` é retomado no mesmo worktree, uma pasta de trabalho limpa não quer dizer que nada foi construído: o trabalho até ali está nesses commits, e a revisão da entrega os lê contra a base do branch (capítulo 13).
 No trunk não há commit parcial: um `/apply` travado não coloca nada em stage, e o trabalho fica sem commit até estar inteiro.
 
 O agente nunca faz commit, merge ou push, nem resolve um conflito ou remove um worktree por conta própria: cada passo que muda o histórico é decisão sua, como em toda estratégia de git; para o commit e o merge, o slot Git pode dizer que o agente os faz pela palavra do slot, que vale como o pedido, e você então revisa o commit ([capítulo 7](07-the-documents.md)); o push, o conflito e o worktree continuam esperando o seu pedido.
 Peça, e ele dá qualquer um desses passos por você: escreve a mensagem de commit, resolve o conflito, faz o commit, o merge ou o push, remove o worktree, e conhece os comandos que desfazem um passo, como `git merge --abort` para um merge parado por um conflito ou `git revert` para uma entrega a desfazer.
-Cada passo vem depois da sua leitura: peça o commit quando você tiver usado a entrega e o diff em stage tiver só ela, o commit de merge quando o arquivo resolvido não tiver nenhum marcador de conflito, e o push quando o `git log` mostrar o que vai sair.
+Por padrão, cada passo vem depois da sua leitura: peça o commit quando você tiver usado a entrega e o diff em stage tiver só ela, o commit de merge quando o arquivo resolvido não tiver nenhum marcador de conflito, e o push quando o `git log` mostrar o que vai sair.
 Depois de um merge que ele fez, `git log --oneline --graph -3` em `main/` mostra o commit de merge e o branch que ele trouxe.
 Para rodar duas entregas ao mesmo tempo em worktrees, abra uma sessão por pasta: uma em `main/` para cada `/propose`, uma em cada worktree para o seu `/apply`.
 

@@ -63,7 +63,7 @@ Qualquer outra verificação é do próprio projeto.
   Responde à construção que decide enquanto anda: o `/apply` começa limpo, com a página e os documentos, sem a longa conversa que a decidiu, já que um contexto que cresce perde precisão; o `/propose` não escreve código e o `/apply` não amplia o escopo.
 * **O agente coloca em stage e sugere a mensagem do commit.**
   O agente nunca faz commit nem merge por conta própria; quando pedem, ele dá o passo que a pessoa nomeia.
-  Responde às 29 verificações que nunca olhavam o produto: a verificação que olha é uma pessoa lendo cada mudança antes que ela entre no histórico (capítulo 13).
+  Responde às 29 verificações que nunca olhavam o produto: a verificação que olha é uma pessoa lendo cada mudança, por padrão antes que ela entre no histórico (capítulo 13).
 * **O que é específico do projeto são slots no docs/05 do projeto.**
   O comando de verificação, os ambientes, a prova e a estratégia de git são preenchidos uma vez ali, e o `/apply` os lê.
   Responde à divergência: um comando que repete um fato do projeto fica desatualizado quando o documento muda, então o comando só diz qual slot ler (capítulo 7).

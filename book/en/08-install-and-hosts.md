@@ -27,7 +27,7 @@ The setup file tells the agent to copy every file byte for byte.
 Some hosts fetch a web page through a tool that hands the agent a summary of the page instead of its text; if yours does, ask the agent to download the file and read it whole.
 
 The install does not stage or commit.
-You read what it wrote and commit it yourself, as with every change the agent makes (chapter 13).
+You read what it wrote and commit it yourself, as by default with every change the agent makes (chapter 13).
 
 The agent ends a first install by naming what comes next: on a repository without code, open a fresh session and type `/brainstorm`; on a repository with code, open a fresh session and type `/analyze` (chapter 9).
 It writes the command as your host invokes it, with no slug, since these two take none: in Codex, `$brainstorm` or `$analyze`, and Copilot asks for no slug.

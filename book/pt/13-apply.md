@@ -1,7 +1,7 @@
 # 13. `/apply`: construir, verificar, provar, nunca fazer commit por conta própria
 
 Depois deste capítulo você consegue levar uma página revisada até uma mudança em stage (marcada para o próximo commit, o registro salvo no histórico do projeto) com o `/apply`, e dizer o que "pronto" significa: a verificação verde, uma prova, uma revisão por um contexto que não escreveu a mudança, os documentos atualizados, a página movida e a sua linha marcada.
-Então você consegue usar o que o `/apply` construiu e revisar a mudança em stage contra a página, que é a revisão humana do processo, e então fazer o commit, você mesmo ou pedindo ao agente.
+Então você consegue, por padrão, usar o que o `/apply` construiu e revisar a mudança em stage contra a página, que é a revisão humana do processo, e então fazer o commit, você mesmo ou pedindo ao agente.
 E consegue dizer como o `/apply` termina: só a sua entrega em stage, a mensagem sugerida em um bloco `commit` na página e na conversa, os seus próximos passos escritos por extenso e, por último, qual ambiente está em qual versão.
 
 ## O problema
@@ -69,7 +69,7 @@ Os documentos vêm antes porque fazem parte da entrega: um documento de schema o
 Isso acontece dentro da mesma sessão, nunca em uma sessão nova, e o slot de revisão da entrega do docs/05 nomeia o revisor.
 A primeira escolha do kit é a revisão do próprio host, uma skill que o agente invoca ou um comando que ele roda, quando o agente consegue mantê-la nos caminhos da entrega.
 Senão, é um agente somente leitura: um agente que a sessão lança com o seu próprio contexto, que lê arquivos e roda `git diff` e não edita nada (o capítulo 16 diz mais sobre agentes que um agente lança).
-Se o slot não nomeia revisor nenhum, essa revisão não existe, e o seu commit continua sendo a única revisão.
+Se o slot não nomeia revisor nenhum, essa revisão não existe, e a sua revisão continua sendo a única.
 
 A revisão lê a entrega inteira contra a sua base, pelos seus caminhos, entre eles os arquivos que a entrega criou, e do docs/06 só a mudança desta linha, contra a página e o docs/04.
 Um agente somente leitura lê o `git diff HEAD` desses caminhos, que os compara com o último commit e por isso traz juntas as mudanças em stage e fora dele; um `git diff` puro compara a pasta de trabalho com o índice e perde o que já está em stage.
@@ -214,7 +214,7 @@ Três motivos sustentam essa linha.
 * **Um commit se desfaz em um passo.** A página e a sua construção são um commit no trunk (direto na linha principal do histórico), um merge em um branch (uma linha de trabalho à parte, juntada depois à principal), então uma entrega que se mostra errada sai do projeto com um comando (capítulo 18).
 * **A pessoa é dona do que é publicado.** O agente escreveu o código, e a pessoa responde por ele ao time, ao cliente e ao usuário; o commit, quem quer que digite o comando, é onde essa resposta é dada, ou, pela palavra do slot, a revisão do commit.
 
-Depois de usar a entrega, leia o diff em stage e faça o commit:
+Por padrão, depois de usar a entrega, leia o diff em stage e faça o commit:
 
 ```
 git diff --staged

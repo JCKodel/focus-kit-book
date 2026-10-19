@@ -62,7 +62,7 @@ Each line is one delivery, and its subject says what the delivery does, in the i
 
 A delivery's page and its build are one change.
 The code, the tests, the documents the delivery updated and its page in `work/done/` go into the same commit, so the history holds the decision and the change it made side by side, and taking the delivery back takes all of it that git holds at once.
-The agent stages that change and suggests the message; you use what it built, read the change and commit it, or ask the agent to, and that use and reading before the commit are your review.
+By default, the agent stages that change and suggests the message; you use what it built, read the change and commit it, or ask the agent to, and that use and reading before the commit are your review.
 To stage is to write to the index, also called the staging area, the staged copy of the project a commit is made from: `git add <path>` writes a change to it, `git diff --cached` shows what it holds, and a plain `git commit` takes it whole, so what you stage is what the commit holds.
 One working folder has one index, shared by every session open in it; [chapter 19](19-worktrees.md) says what two sessions do about it.
 

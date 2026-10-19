@@ -1,7 +1,7 @@
 # 13. `/apply`: build, verify, prove, never commit on its own
 
 After this chapter you can follow a reviewed page to a staged change with `/apply`, and say what "done" means: verify green, a proof, a review by a context that did not write the change, the documents updated, the page moved and its line marked.
-You can then use what `/apply` built and review the staged change against the page, which is the human review of the process, and then commit it, yourself or by asking the agent.
+You can then, by default, use what `/apply` built and review the staged change against the page, which is the human review of the process, and then commit it, yourself or by asking the agent.
 And you can say how `/apply` ends: only its delivery staged, the suggested message in a `commit` block on the page and in the conversation, your next steps written out and, last of all, which environment is at which version.
 
 ## The problem
@@ -69,7 +69,7 @@ The documents come first because they are part of the delivery: a schema documen
 It happens inside the same session, never in a fresh one, and docs/05's Delivery review slot names the reviewer.
 The kit's first choice is the host's own review, a skill the agent invokes or a command it runs, when the agent can keep it to the delivery's paths.
 Otherwise it is a read-only agent: one the session launches with its own context, which reads files and runs `git diff` and edits nothing (chapter 16 says more on agents that an agent launches).
-A slot that says none means no such review, and your commit stays the only review.
+A slot that says none means no such review, and your review stays the only one.
 
 The review reads the whole delivery against its base, by its paths, the files the delivery created among them, and of docs/06 only this line's change, against the page and docs/04.
 A read-only agent reads `git diff HEAD` of those paths, which compares them with the last commit and so holds staged and unstaged changes together; a bare `git diff` compares the working folder with the index and misses whatever is already staged.
@@ -214,7 +214,7 @@ Three reasons hold that line.
 * **A commit reverts in one step.** The page and its build are one commit on trunk, one merge on a branch, so a delivery that turns out wrong leaves the project in one command (chapter 18).
 * **The person owns what ships.** The agent wrote the code, and the person answers for it to the team, the client and the user; the commit, whoever types it, is where that answer is given, or, by the slot's word, the review of the commit.
 
-Once you have used the delivery, read the staged diff, then commit:
+By default, once you have used the delivery, read the staged diff, then commit:
 
 ```
 git diff --staged

@@ -27,7 +27,7 @@ O arquivo de setup manda o agente copiar cada arquivo byte a byte.
 Alguns hosts buscam uma página web por uma ferramenta que entrega ao agente um resumo da página em vez do seu texto; se o seu faz isso, peça ao agente que baixe o arquivo e o leia inteiro.
 
 A instalação não coloca nada em stage nem faz commit.
-Você lê o que ela escreveu e faz o commit você mesmo, como em toda mudança que o agente faz (capítulo 13).
+Você lê o que ela escreveu e faz o commit você mesmo, como por padrão em toda mudança que o agente faz (capítulo 13).
 
 O agente termina uma primeira instalação dizendo o que vem depois: num repositório sem código, abra uma sessão nova e digite `/brainstorm`; num repositório com código, abra uma sessão nova e digite `/analyze` (capítulo 9).
 Ele escreve o comando como o seu host o invoca, sem slug, já que esses dois não levam nenhum: no Codex, `$brainstorm` ou `$analyze`, e o Copilot não pede slug.
