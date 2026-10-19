@@ -552,7 +552,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.19.1 and the repo
 [x] kit-2026-10-19-1         reinstall the kit at 2026.10.19.1 and apply its migration report to docs/05 §4 · after docs-m21-tidy
 [x] ch08-update-2026-10-19-1 chapter 8: the update example and its report at 2026.10.19.1; both editions · after kit-2026-10-19-1
 [>] ch14-20-read-branches    chapters 14 and 20: with a branch or worktree per delivery a board, or a session picking free lines or resolving an `after`, reads each slug's line from its worktree or branch, the main branch showing it as it was until the merge; both editions · after kit-2026-10-19-1
-[>] ch12-free-lines-branches chapter 12: /propose, starting its worktree from the main branch's HEAD, judges free lines and `after` from each slug's own branch; both editions · after kit-2026-10-19-1
+[x] ch12-free-lines-branches chapter 12: /propose, starting its worktree from the main branch's HEAD, judges free lines and `after` from each slug's own branch; both editions · after kit-2026-10-19-1
 [x] make-help                `make` with no target prints the Makefile's commands, one line each saying what it does
 [ ] m22-review               the review of M22 as docs/05 §8 says · after kit-2026-10-19-1, ch08-update-2026-10-19-1, ch14-20-read-branches, ch12-free-lines-branches, make-help
 ```

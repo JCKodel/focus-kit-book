@@ -57,10 +57,35 @@
 
 **Done when.**
 
-* [ ] Both editions changed in the same two places, "What `/propose` does" and "Key points", and nowhere else in chapter 12; Portuguese read as Portuguese, with the words chapters 18 and 19 use.
-* [ ] In both editions, `grep -n` shows the `[?]` / `after` sentence, then the new reading sentence, then "first stands where" / "primeiro se coloca onde", in that line order.
-* [ ] `git diff` of the two chapter files touches only those two places; the 21-day lines unchanged.
-* [ ] No em dash; no number, version, date, "now", "no longer", "agora", "não mais" added; no narrated run; no path inside the container folder.
-* [ ] Delivery review as docs/05 §5 says, including that nothing implies an unmerged `[x]` meets an `after`.
-* [ ] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver may run it once for the batch).
-* [ ] Only this delivery's paths and its hunk of docs/06 staged (the driver's in this batch); the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions changed in the same two places, "What `/propose` does" and "Key points", and nowhere else in chapter 12; Portuguese read as Portuguese, with the words chapters 18 and 19 use.
+* [x] In both editions, `grep -n` shows the `[?]` / `after` sentence, then the new reading sentence, then "first stands where" / "primeiro se coloca onde", in that line order.
+* [x] `git diff` of the two chapter files touches only those two places; the 21-day lines unchanged.
+* [x] No em dash; no number, version, date, "now", "no longer", "agora", "não mais" added; no narrated run; no path inside the container folder.
+* [x] Delivery review as docs/05 §5 says, including that nothing implies an unmerged `[x]` meets an `after`.
+* [x] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver may run it once for the batch).
+* [x] Only this delivery's paths and its hunk of docs/06 staged (the driver's in this batch); the page moved to `work/done/` and its commit message suggested.
+
+**Proof.**
+
+* `grep -n` on each file: the `[?]` / `after` sentence is line 26, the new reading sentence line 27, and the "first stands where" / "primeiro se coloca onde" sentence line 28, in both editions.
+* `git diff HEAD` of the two chapters: 2 insertions and 1 deletion per file, the new line in "What `/propose` does" and the clause in the Key points' `/propose` bullet; the 21-day lines unchanged.
+* The sentence kept whole on one line, trunk first, in the Contract's wording; the Key points clause as the Contract gives it.
+* `make verify`: build, parity, em dash, prose, width, examples and disclosure green; the link check reported only timeouts on external sites (martinfowler.com, web.archive.org) that did not answer from this machine, none in chapter 12. `make book` is run once by the driver for the batch.
+* Staging and the docs/06 hunk are the driver's in this batch.
+
+**Divergences.** The link check's external timeouts above, outside this delivery; to rerun when those sites answer.
+
+**Delivery review.** A read-only Opus agent read the diff of both chapters against this page, docs/04 and AGENTS.md: no findings.
+
+**Decisions taken in /apply.**
+
+* The sentence stays one line, not split at the semicolon: the section's other lines are as long, and one line keeps the order check to three lines.
+
+```commit
+docs(ch12-free-lines-branches): /propose reads marks off trunk per slug
+
+- off trunk, /propose reads its line and its after from each slug's branch
+- the Key points /propose bullet says the same, in both editions
+
+work/done/ch12-free-lines-branches.md
+```
