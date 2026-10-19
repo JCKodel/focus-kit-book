@@ -1,7 +1,7 @@
 # 1. Como um agente vê o seu projeto
 
 O modelo por trás de um agente de código não se lembra de nada de uma chamada para a outra.
-Depois deste capítulo você consegue explicar por que um agente de código só sabe o que está na sua janela de contexto a cada chamada, por que uma sessão longa piora, por que a resposta dele soa igualmente segura quando um fato não estava na janela, e o que manter por escrito para que uma sessão nova comece certa.
+Depois deste capítulo você consegue explicar por que um agente de código só sabe o que está na sua janela de contexto a cada chamada, por que uma sessão longa piora, por que a resposta dele soa igualmente segura quando um fato não estava na janela, o que manter por escrito para que uma sessão nova comece certa, e o que fazer o agente ler de novo depois de uma compactação ou quando você retoma uma sessão.
 
 ## O modelo não se lembra de nada entre chamadas
 
@@ -31,7 +31,7 @@ Num agente de código, ela contém:
 A janela é medida em tokens.
 Um token é a unidade de texto que um modelo lê e conta: uma palavra comum é um token, uma palavra longa ou rara é alguns.
 Cada modelo tem um limite de quantos tokens uma chamada pode conter.
-Cada arquivo que o agente lê e cada saída que ele recebe ocupam espaço na janela e ficam lá pelo resto da sessão.
+Cada arquivo que o agente lê e cada saída que ele recebe ocupam espaço na janela e ficam lá até a sessão terminar ou uma compactação resumi-los.
 
 ## Mais contexto, menos precisão
 
@@ -82,8 +82,8 @@ Duas práticas decorrem disso.
 
 **As decisões vão para arquivos que o agente lê no início de toda sessão.**
 Uma decisão que vive só na conversa some numa sessão nova e pode se perder numa compactação.
-Uma decisão num arquivo é carregada inteira no início de toda sessão, perto do começo da janela.
-O arquivo de regras é a porta de entrada: curto, e ele nomeia os documentos a ler antes de agir.
+Uma decisão num arquivo pode ser lida de novo, em qualquer sessão e em qualquer ponto dela.
+O arquivo de regras é a porta de entrada: o host o carrega no início de toda sessão, ele é curto e nomeia os documentos a ler antes de agir.
 Este é o começo de um arquivo de regras de uma pequena biblioteca de empréstimos, o projeto cujo código a Parte I usa como exemplo, escrito para este capítulo:
 
 ```markdown
@@ -100,6 +100,11 @@ bibliotecário registra cada empréstimo e cada devolução.
 
 Uma sessão nova lê o que o projeto é numa linha, depois onde mora cada tipo de fato; os arquivos que ele nomeia guardam o resto.
 
+Um arquivo não fica inteiro na janela: um documento que o agente leu no início de uma sessão acaba, conforme a sessão cresce, no meio, onde o modelo o usa pior, e uma compactação o resume como o resto da conversa.
+A Anthropic recomenda a mesma prática para agentes: notas "*persistidas na memória fora da janela de contexto*" que "*são trazidas de volta para a janela de contexto mais tarde.*"[^anthropic-context-2025]
+Então, depois de uma compactação, quando você retoma uma sessão ou quando o trabalho se afasta de uma decisão que você tomou, peça ao agente que reabra a página da entrega e os documentos de que o trabalho depende antes de continuar; o resumo não diz o que descartou.
+Uma decisão que nunca foi escrita num arquivo não tem o que reabrir.
+
 **Cada entrega ganha uma sessão nova.**
 Numa sessão nova, a janela contém o arquivo de regras, os documentos e a página da entrega, e nada que tenha sobrado da anterior.
 Decidir e construir também ficam em sessões separadas.
@@ -108,10 +113,10 @@ No focus-kit, o `/propose` escreve essa página e o `/apply` a constrói numa se
 
 ## O que o time ganha
 
-As decisões sobrevivem à sessão: o que o time decidiu está em arquivos que toda sessão carrega inteiros, perto do início da janela, então não pode cair no meio de uma conversa longa nem ficar de fora de um resumo.
+As decisões sobrevivem à sessão: o que o time decidiu está em arquivos, então, quando um resumo descarta uma decisão, ou uma sessão longa se afasta dela, você faz o agente lê-la de novo na página e nos documentos em vez de confiar no que ele lembra.
 O trabalho também sobrevive: no focus-kit, toda entrega tem uma página, commitada junto com o código que ela descreve, que registra por que ela foi feita, o que "pronto" queria dizer e, depois de construída, o que foi feito e como.
 Então alguém novo no projeto, desenvolvedor ou gestor, lê os mesmos arquivos que o agente lê, pergunta ao agente sobre o projeto e recebe uma resposta lida dessas páginas, e não da memória de um colega.
-A evidência é a perda que isso evita, que os estudos acima mediram.
+A evidência é a perda que os estudos acima mediram; ler de novo o registro escrito é a prática que a Anthropic recomenda contra ela.
 
 ## Pontos-chave
 
@@ -119,7 +124,8 @@ A evidência é a perda que isso evita, que os estudos acima mediram.
 * A janela de contexto é tudo o que o modelo vê numa chamada: as instruções do host, o arquivo de regras, os arquivos lidos, a saída das ferramentas e a conversa até aqui, medida em tokens, até um limite.
 * Mais contexto significa menos precisão: a informação no meio de uma entrada longa é a mais mal usada, a confiabilidade cai conforme a entrada cresce, e a compactação substitui a conversa por um resumo que pode descartar um detalhe que importava.
 * Um agente responde o que não está na janela com a mesma segurança com que responde o que está, a partir do treinamento ou de um palpite, então uma resposta segura é uma hipótese até você conferir.
-* Guarde as decisões em arquivos lidos no início de toda sessão, e dê a cada entrega uma sessão nova, com o decidir separado do construir.
+* Guarde as decisões em arquivos e, depois de uma compactação ou quando retomar uma sessão, faça o agente reabrir a página e os documentos: um arquivo é um registro para ler de novo, não um texto que a janela com certeza guarda.
+* Dê a cada entrega uma sessão nova, com o decidir separado do construir.
 * Faça o commit da página de cada entrega com o código dela, e pergunte ao agente, e não a um colega, o que o projeto fez e por quê.
 
 [^messages-api]: Anthropic, "Using the Messages API", acesso em 2026-09-25. <https://platform.claude.com/docs/en/build-with-claude/working-with-messages>

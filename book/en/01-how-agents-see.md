@@ -1,7 +1,7 @@
 # 1. How an agent sees your project
 
 The model behind a coding agent remembers nothing from one call to the next.
-After this chapter you can explain why a coding agent knows only what is in its context window at each call, why a long session gets worse, why its answer sounds just as sure when a fact was not in the window, and what to keep in writing so that a fresh session starts right.
+After this chapter you can explain why a coding agent knows only what is in its context window at each call, why a long session gets worse, why its answer sounds just as sure when a fact was not in the window, what to keep in writing so that a fresh session starts right, and what to have the agent read again after a compaction or when you resume a session.
 
 ## The model remembers nothing between calls
 
@@ -31,7 +31,7 @@ In a coding agent it holds:
 The window is measured in tokens.
 A token is the unit of text a model reads and counts: a common word is one token, a long or rare word is a few.
 Each model has a limit on how many tokens one call can hold.
-Every file the agent reads and every output it receives takes space in the window and stays there for the rest of the session.
+Every file the agent reads and every output it receives takes space in the window and stays there until the session ends or a compaction summarizes it.
 
 ## More context, less accuracy
 
@@ -82,8 +82,8 @@ Two practices follow.
 
 **Decisions go in files the agent reads at the start of every session.**
 A decision that lives only in the conversation is gone in a fresh session and can be lost in a compaction.
-A decision in a file is loaded whole at the start of every session, near the beginning of the window.
-The rules file is the entry point: short, and it names the documents to read before acting.
+A decision in a file can be read again, in any session and at any point of one.
+The rules file is the entry point: the host loads it at the start of every session, it is short, and it names the documents to read before acting.
 This is the start of a rules file for a small lending library, the project whose code Part I uses as its example, written for this chapter:
 
 ```markdown
@@ -100,6 +100,11 @@ each loan and each return.
 
 A fresh session reads what the project is in one line, then where each kind of fact lives; the files it names hold the rest.
 
+A file does not stay whole in the window: a document the agent read at the start of a session ends up, as the session grows, in the middle, where the model uses it worst, and a compaction summarizes it like the rest of the conversation.
+Anthropic recommends the same practice for agents: notes "*persisted to memory outside of the context window*" that "*get pulled back into the context window at later times.*"[^anthropic-context-2025]
+So after a compaction, when you resume a session, or when the work drifts from a decision you made, ask the agent to reopen the delivery's page and the documents the work depends on before it goes on; the summary does not say what it dropped.
+A decision that was never written in a file has nothing to reopen.
+
 **Each delivery gets a fresh session.**
 In a fresh session the window holds the rules file, the documents and the page of the delivery, and nothing left over from the previous one.
 Deciding and building go in separate sessions too.
@@ -108,10 +113,10 @@ In focus-kit, `/propose` writes that page and `/apply` builds it in a fresh sess
 
 ## What the team gains
 
-Decisions survive the session: what the team decided is in files that every session loads whole, near the start of the window, so it cannot fall into the middle of a long conversation or out of a summary.
+Decisions survive the session: what the team decided is in files, so when a summary drops a decision, or a long session drifts from it, you have the agent read it again from the page and the documents instead of trusting what it remembers.
 The work survives too: in focus-kit every delivery has a page, committed with the code it describes, that records why it was made, what "done" meant and, once built, what was done and how.
 So a person new to the project, a developer or a manager, reads the same files the agent reads, asks the agent about the project and gets an answer read from those pages, not from a colleague's memory.
-The evidence is the loss this avoids, which the studies above measured.
+The evidence is the loss the studies above measured; reading the written record again is the practice Anthropic recommends against it.
 
 ## Key points
 
@@ -119,7 +124,8 @@ The evidence is the loss this avoids, which the studies above measured.
 * The context window is everything the model sees in one call: the host's instructions, the rules file, the files read, tool output and the conversation so far, measured in tokens, up to a limit.
 * More context means less accuracy: information in the middle of a long input is used worst, reliability falls as the input grows, and compaction replaces the conversation with a summary that can drop a detail that mattered.
 * An agent answers what is not in its window with the same assurance as what is, from training or from a guess, so a confident answer is a hypothesis until you check it.
-* Keep decisions in files read at the start of every session, and give each delivery a fresh session, with deciding apart from building.
+* Keep decisions in files, and after a compaction or when you resume a session, have the agent reopen the page and the documents: a file is a record to read again, not text the window is sure to keep.
+* Give each delivery a fresh session, with deciding apart from building.
 * Commit each delivery's page with its code, and ask the agent, not a colleague, what the project did and why.
 
 [^messages-api]: Anthropic, "Using the Messages API", accessed 2026-09-25. <https://platform.claude.com/docs/en/build-with-claude/working-with-messages>
