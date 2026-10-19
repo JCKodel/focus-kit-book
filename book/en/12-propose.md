@@ -56,7 +56,7 @@ system refuses when the rules say no.
 
 **Behaviour.**
 * A member with no overdue books borrows an available copy, and the copy
-  shows as lent to them with a due date 21 days ahead (docs/00).
+  shows as lent to them with a due date 21 days ahead (docs/03).
 * A member with an overdue book is refused with "Return your overdue books
   first"; nothing is recorded.
 * A suspended member is refused with "Your membership is suspended";
@@ -111,7 +111,7 @@ Read it as the agent's account of what it understood.
 Each Behaviour line can be checked; the Contract is exact; Out of scope names what someone might have assumed was in; Done when is a list a machine or a person can tick.
 Done when also says which test of chapter 5 proves each Behaviour line: the rules in the unit tests of `lend`, that a refusal saves nothing in the tests of the orchestrator, the race for the last copy in the repository test, and what the screen shows in the end-to-end tests.
 The race is the repository's: two librarians at the same moment meet only in the database, and no pure function sees them.
-Each decision taken from a document names it: the 21 days come from docs/00, and so do Out of scope's reservations and fines.
+Each decision taken from a document names it: the 21 days come from docs/03, and Out of scope's reservations and fines from docs/00.
 The agent drafted the cases that must fail and the edge: the Contract already had `MemberSuspended`, so a suspended member gets a line, and a rule about overdue books implies the day a loan is due, which is not yet overdue.
 
 The Contract is the one section that must be exact.
@@ -134,7 +134,7 @@ The page is written to be read, and the questions to ask are these:
 
 You ask for every correction in the same conversation, and the agent writes the fix: on the page, and in any document the fix touches.
 You do not edit the page by hand: the agent knows which document owns each fact, so a fix that touches the vocabulary or the queue lands there too, and the conversation keeps the reason.
-If `/propose` asks what a document already says, such as how many days a loan lasts when docs/00 says 21, say so in the conversation: the answer belongs on the page, with its source.
+If `/propose` asks what a document already says, such as how many days a loan lasts when docs/03 says 21, say so in the conversation: the answer belongs on the page, with its source.
 If Behaviour holds only the happy path, an available copy lent to a member in good standing, ask the agent for the cases that must fail and the edges before `/apply`: a person who does not know the tool being built and leaves the expected result to the agent gets one solution, happy path only, which the client rejects.
 
 The order is the cheap one.

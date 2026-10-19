@@ -117,7 +117,7 @@ It writes the migration for the table `loan` with its unique index, the rule `le
 Each Behaviour line becomes a test: the loan with its due date 21 days ahead, the refusal for an overdue book, the refusal for a suspended member, the loan for a member whose only book is due today, and, against a real in-memory database, the second of two loans on the last copy refused.
 It builds nothing for returning a copy, reservations or fines, because Out of scope named them.
 
-If docs/00 said a loan lasts 14 days, the agent would stop at that line and ask which one is true: the page's 21 or the document's 14.
+If docs/03 said a loan lasts 14 days, the agent would stop at that line and ask which one is true: the page's 21 or the document's 14.
 Whichever you answer, the other one changes in the same delivery.
 
 It runs `npm run verify` until it is green, takes the lending screen at 390 and 1280 pixels wide, and compares both with the design file.

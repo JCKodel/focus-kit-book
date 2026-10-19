@@ -49,10 +49,37 @@ Terms of docs/03 used: loan period, loan, due date; none new. No number added, n
 
 **Done when.**
 
-* [ ] Both editions written, the same three citations changed in each chapter 12 file and the same one in each chapter 13 file, Portuguese read as Portuguese; the chapter opens as it did, no filler and nothing useful cut.
-* [ ] `grep -n "docs/00" book/{en,pt}/12-propose.md` finds no line that holds "21"; `grep -n "21" ` on the same files shows docs/03 on the three lines; `grep -n "14 d" book/{en,pt}/13-apply.md` shows docs/03 on that sentence and no docs/00.
-* [ ] `git diff` of this delivery touches only the three lines in each chapter 12 file and the one sentence in each chapter 13 file, and nothing in chapter 7.
-* [ ] No em dash; no "no longer", "now", "não mais", "agora" added; no narrated run.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver may run it once for the batch).
-* [ ] Only this delivery's paths staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions written, the same three citations changed in each chapter 12 file and the same one in each chapter 13 file, Portuguese read as Portuguese; the chapter opens as it did, no filler and nothing useful cut.
+* [x] `grep -n "docs/00" book/{en,pt}/12-propose.md` finds no line that holds "21"; `grep -n "21" ` on the same files shows docs/03 on the three lines; `grep -n "14 d" book/{en,pt}/13-apply.md` shows docs/03 on that sentence and no docs/00.
+* [x] `git diff` of this delivery touches only the three lines in each chapter 12 file and the one sentence in each chapter 13 file, and nothing in chapter 7.
+* [x] No em dash; no "no longer", "now", "não mais", "agora" added; no narrated run.
+* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver may run it once for the batch).
+* [x] Only this delivery's paths staged; the page moved to `work/done/` and its commit message suggested.
+
+**Proof.**
+
+* `git diff HEAD` of chapter 12, each edition: three one-line hunks, en 59, 114 and 137, pt 60, 123 and 146; the citation only, the code block's wrapping unchanged ("(docs/03)" ends en 59 and stays alone on pt 60).
+* `git diff HEAD` of chapter 13, each edition: one hunk at line 120, "docs/00" becomes "docs/03"; the rest of the sentence unchanged.
+* `git diff HEAD` of chapter 7, both editions: empty. Chapter 7 still gives the 21 days to docs/03 (en 145, pt 146).
+* `grep -n "14 d" book/{en,pt}/13-apply.md`: docs/03 on line 120, no docs/00.
+* No em dash, no "no longer", "now", "não mais", "agora", no narrated run.
+* `make verify` green. `make book` is run once by the driver for the batch.
+* Staging and the docs/06 hunk are the driver's in this batch.
+
+**Divergences.**
+
+* Done when's second check says `grep -n "docs/00"` on chapter 12 finds no line holding "21"; it finds en 114 and pt 123, because the Contract's own sentence puts the 21 days (docs/03) and Out of scope's reservations and fines (docs/00) on one line. The Contract's wording was kept; the check's intent, no line placing the 21 days in docs/00, holds.
+
+**Delivery review.** A read-only Opus agent read this delivery's hunks against this page, docs/04 and AGENTS.md: no finding. It noted "vêm do" twice in pt 123, the Contract's wording, kept; chapter 13's other docs/00 citations (lines 22, 115, 266) cite the member's rules, not the loan's length, and stay.
+
+```commit
+docs(ch07-12-loan-days): the loan period comes from docs/03
+
+- ch12 example page: the 21 days cite docs/03
+- ch12 after the page: 21 days from docs/03, reservations from docs/00
+- ch12 read the page: the document that says 21 is docs/03
+- ch13 lend-book built: the contradicting document is docs/03
+
+work/done/ch07-12-loan-days.md
+```

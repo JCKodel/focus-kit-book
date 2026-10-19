@@ -540,6 +540,6 @@ When this milestone closes, the book teaches focus-kit 2026.10.19 and the reposi
 [>] ch14-20-board-branch     chapters 14 and 20: a board refreshed by a push shows the queue of the branch that pushed it; both editions · after m21-review, ch20-roles-and-points
 [x] ch12-refuse-first        chapter 12: /propose refuses a waiting line or an unmet `after` before it creates a branch or worktree; both editions · after m21-review
 [x] ch08-step4-outcomes      chapter 8: the sentence after the report names its three outcomes, not only what the documents lack; both editions · after m21-review, m21-git-slot-default
-[>] ch07-12-loan-days        chapters 7, 12 and 13: the lending library's loan period comes from docs/03 in every chapter; both editions · after m21-review, ch12-refuse-first, m21-git-slot-default
+[x] ch07-12-loan-days        chapters 7, 12 and 13: the lending library's loan period comes from docs/03 in every chapter; both editions · after m21-review, ch12-refuse-first, m21-git-slot-default
 [>] docs-m21-tidy            docs/06's header names the next milestone and M21's paragraph names what ch06 and ch16 answer, docs/05 is rewrapped, m21-review's page cites its base case, and work/kit-proposals.md carries three notes for focus-kit · after m21-review
 ```

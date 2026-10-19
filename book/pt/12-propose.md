@@ -57,7 +57,7 @@ emprestado, e o sistema recusa quando as regras dizem não.
 **Comportamento.**
 * Um membro sem livros atrasados pega um exemplar disponível, e o exemplar
   aparece como emprestado a ele, com data de devolução 21 dias depois
-  (docs/00).
+  (docs/03).
 * Um membro com um livro atrasado é recusado com "Devolva primeiro os seus
   livros atrasados"; nada é registrado.
 * Um membro suspenso é recusado com "A sua matrícula está suspensa"; nada
@@ -120,7 +120,7 @@ Leia a página como o relato do agente sobre o que ele entendeu.
 Cada linha de Comportamento pode ser conferida; o Contrato é exato; o Fora do escopo nomeia o que alguém poderia ter suposto que estava dentro; o Pronto quando é uma lista que uma máquina ou uma pessoa consegue marcar.
 O Pronto quando também diz qual teste do capítulo 5 prova cada linha de Comportamento: as regras nos testes unitários de `emprestar`, que uma recusa não salva nada nos testes do orquestrador, a disputa pelo último exemplar no teste do repositório, e o que a tela mostra nos testes ponta a ponta.
 A disputa é do repositório: dois bibliotecários no mesmo instante só se encontram no banco, e nenhuma função pura os vê.
-Cada decisão tirada de um documento o nomeia: os 21 dias vêm do docs/00, e as reservas e as multas do Fora do escopo também.
+Cada decisão tirada de um documento o nomeia: os 21 dias vêm do docs/03, e as reservas e as multas do Fora do escopo vêm do docs/00.
 O agente rascunhou os casos que precisam falhar e o caso de borda: o Contrato já tinha `MembroSuspenso`, então um membro suspenso ganha uma linha, e uma regra sobre livros atrasados implica o dia em que um empréstimo vence, que ainda não é atraso.
 
 O Contrato é a única seção que precisa ser exata.
@@ -143,7 +143,7 @@ A página é escrita para ser lida, e as perguntas a fazer são estas:
 
 Você pede cada correção na mesma conversa, e o agente escreve a correção: na página, e em qualquer documento que ela toque.
 Você não edita a página à mão: o agente sabe qual documento é dono de cada fato, então uma correção que toca o vocabulário ou a fila entra lá também, e a conversa guarda o motivo.
-Se o `/propose` pergunta o que um documento já diz, como quantos dias dura um empréstimo quando o docs/00 diz 21, diga isso na conversa: a resposta pertence à página, com a sua fonte.
+Se o `/propose` pergunta o que um documento já diz, como quantos dias dura um empréstimo quando o docs/03 diz 21, diga isso na conversa: a resposta pertence à página, com a sua fonte.
 Se o Comportamento só tem o caminho feliz, um exemplar disponível emprestado a um membro em dia, peça ao agente os casos que precisam falhar e os casos de borda antes do `/apply`: uma pessoa que não conhece a ferramenta sendo construída e deixa o resultado esperado para o agente recebe uma solução, só o caminho feliz, que o cliente rejeita.
 
 A ordem é a barata.

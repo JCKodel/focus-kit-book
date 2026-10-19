@@ -117,7 +117,7 @@ Ele escreve a migration da tabela `emprestimo` com o seu índice único, a regra
 Cada linha de Comportamento vira um teste: o empréstimo com a data de devolução 21 dias depois, a recusa para um livro atrasado, a recusa para um membro suspenso, o empréstimo para um membro cujo único livro vence hoje, e, contra um banco de dados real em memória, o segundo de dois empréstimos do último exemplar recusado.
 Ele não constrói nada para devolver um exemplar, reservas ou multas, porque o Fora do escopo os nomeou.
 
-Se o docs/00 dissesse que um empréstimo dura 14 dias, o agente pararia naquela linha e perguntaria qual é a verdade: os 21 da página ou os 14 do documento.
+Se o docs/03 dissesse que um empréstimo dura 14 dias, o agente pararia naquela linha e perguntaria qual é a verdade: os 21 da página ou os 14 do documento.
 Qualquer que seja a sua resposta, o outro muda na mesma entrega.
 
 Ele roda `npm run verify` até ficar verde, captura a tela de empréstimo com 390 e 1280 pixels de largura, e compara as duas com o arquivo de design.
