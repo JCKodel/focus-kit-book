@@ -25,8 +25,8 @@ E o custo que ele precisa superar é pago por toda entrega depois dele, que roda
 
 A pergunta decide o que entra, e decide o que fica.
 
-No Ninjobs, quando eu recomecei o projeto, aquelas verificações saíram: nenhuma delas conseguia nomear um erro no produto que tivesse pegado.
-Duas verificações ficaram no lugar delas, ambas protegendo a promessa de privacidade do produto, onde um vazamento é o erro que o produto não pode se permitir: uma prova do que cada nível de privacidade pode mostrar, e um teste das regras de acesso do banco de dados.
+No Ninjobs, quando eu recomecei o projeto, aquelas verificações saíram, menos duas: nenhuma delas conseguia nomear um erro no produto que tivesse pegado.
+As duas que ficaram protegem a promessa de privacidade do produto, onde um vazamento é o erro que o produto não pode se permitir: uma prova do que cada nível de privacidade pode mostrar, e um teste das regras de acesso do banco de dados.
 
 O que entrou depois entrou do mesmo jeito.
 O Supabase, o fornecedor do banco de dados, traz o seu próprio lint (um verificador automático de problemas), e um dos avisos dele estava em um relatório que ninguém abria.

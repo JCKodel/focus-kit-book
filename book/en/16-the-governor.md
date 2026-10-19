@@ -25,8 +25,8 @@ And the cost it must outweigh is paid by every delivery after it, which runs the
 
 The question decides what enters, and it decides what stays.
 
-On Ninjobs, when I restarted the project, those checks left: none of them could name an error in the product it had caught.
-Two checks took their place, both guarding the product's promise of privacy, where a leak is the error the product cannot afford: a proof of what each privacy level may show, and a test of the database access rules.
+On Ninjobs, when I restarted the project, all of those checks but two left: none of them could name an error in the product it had caught.
+The two that stayed both guard the product's promise of privacy, where a leak is the error the product cannot afford: a proof of what each privacy level may show, and a test of the database access rules.
 
 What entered later came in the same way.
 Supabase, the database vendor, ships its own lint, and one of its warnings sat in a report that nobody opened.

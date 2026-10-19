@@ -29,9 +29,26 @@
 
 **Done when.**
 
-* [ ] Both editions edited in the two sentences above, nothing else; each Behaviour line checked; the Fails grep prints nothing.
-* [ ] The chapter still opens with its value and keeps its evidenced team gain; no filler and nothing useful cut; every number keeps its source; terms follow docs/03; no em dash.
-* [ ] No Case A or Case B passage changed or added, so OD-3 is inapplicable.
-* [ ] `make verify` green after the last edit; `make book` is run once by the batch driver at the end and gives `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` for the author's review.
-* [ ] No delivery review: the author waived it for this round; /apply does not add one.
-* [ ] Page archived to `work/done/` and commit message suggested.
+* [x] Both editions edited in the two sentences above, nothing else; each Behaviour line checked; the Fails grep prints nothing.
+* [x] The chapter still opens with its value and keeps its evidenced team gain; no filler and nothing useful cut; every number keeps its source; terms follow docs/03; no em dash.
+* [x] No Case A or Case B passage changed or added, so OD-3 is inapplicable.
+* [x] `make verify` green after the last edit; `make book` is run once by the batch driver at the end and gives `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` for the author's review.
+* [x] No delivery review: the author waived it for this round; /apply does not add one.
+* [x] Page archived to `work/done/` and commit message suggested.
+
+**Record.**
+
+* Built: both editions, the two sentences of §It works both ways, worded as the Contract gives them; nothing else in the chapter changed.
+* Proof: the Fails grep prints nothing; "29" stays only in line 10's "29 checks" (the other match is a footnote's access date); chapter 6's "two stayed" now reads the same.
+* Divergences: none. Omissions: none.
+* Delivery review: skipped on the author's word (2026-10-19).
+* Decisions: those the page lists; no new one.
+* `make verify`: green after the last edit.
+
+```commit
+docs(ch16-two-checks-stayed): say two old checks stayed in chapter 16
+
+- en/pt §It works both ways: all of the checks but two left, and the
+  two that stayed guard privacy, as chapter 6 tells it
+- no new checks took their place; count still said once
+```
