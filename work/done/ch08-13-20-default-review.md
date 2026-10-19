@@ -61,10 +61,37 @@ Terms of docs/03 used: delivery, slot (the Git slot, as the chapters already nam
 
 **Done when.**
 
-* [ ] Both editions written, the five sentences changed in each pair of files, Portuguese read as Portuguese; each chapter opens as it did and its gain section stays true.
-* [ ] `grep -n "whoever merges\|quem faz o merge é\|por padrão, quem faz o merge\|commit it yourself, as by default\|faz o commit você mesmo, como por padrão" book/{en,pt}/{08-install-and-hosts,20-team-tools}.md` finds nothing.
-* [ ] `git diff` of this delivery touches only those sentences.
-* [ ] No em dash; no "no longer", "now", "não mais", "agora" added; no narrated run.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver may run it once for the batch).
-* [ ] Only this delivery's paths staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions written, the five sentences changed in each pair of files, Portuguese read as Portuguese; each chapter opens as it did and its gain section stays true.
+* [x] `grep -n "whoever merges\|quem faz o merge é\|por padrão, quem faz o merge\|commit it yourself, as by default\|faz o commit você mesmo, como por padrão" book/{en,pt}/{08-install-and-hosts,20-team-tools}.md` finds nothing.
+* [x] `git diff` of this delivery touches only those sentences.
+* [x] No em dash; no "no longer", "now", "não mais", "agora" added; no narrated run.
+* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver may run it once for the batch).
+* [x] Only this delivery's paths staged; the page moved to `work/done/` and its commit message suggested.
+
+**Proof.**
+
+* The five sentences, found by their words, now read as the contract gives them in both editions: chapter 8:30, chapter 13:260 (the page's :259, one line lower after `ch08-13-17-next-line`), chapter 20:11, :35 and :86 (the page's :10, :34 and :85, one line lower after `ch20-merge-and-marks`).
+* The Done when `grep` finds nothing (exit 1).
+* `make verify` green, before and after the delivery review.
+* `make book` left to the driver, which runs it once for the batch.
+
+**Divergences.** None: the wording is the contract's, word for word.
+
+**Delivery review.** One read-only agent on Opus read this delivery's ten lines against the page, docs/04 and AGENTS.md, in their chapters: no findings. It noted the pt "fazendo-o ou pedindo-o ao agente" is slightly formal but correct and the page's choice; kept.
+
+**Decisions taken alone at /apply.**
+
+* Staging and committing are left to the driver, which commits this delivery from its own index; this session staged nothing.
+* `make book` is the driver's, once for the batch, as the Done when allows.
+
+```commit
+docs(ch08-13-20-default-review): mark review before commit as default
+
+- ch 8: by default read the install's change, then commit or ask the agent
+- ch 13: a person reads the diff by default, or the commit by the Git slot
+- ch 20: the reviewer is whoever decides the merge, by default
+- both editions
+
+work/done/ch08-13-20-default-review.md
+```
