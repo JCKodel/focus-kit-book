@@ -34,7 +34,7 @@ Cada sessão se atém à sua entrega:
 * ela coloca em stage só os seus próprios caminhos, e só o seu próprio hunk do docs/06 (`git add -p` coloca um arquivo em stage hunk por hunk);
 * ela não mexe em nada que a outra sessão mudou ou colocou em stage.
 
-O commit continua sendo decisão sua, uma entrega por vez.
+O commit continua sendo decisão sua, uma entrega por vez, depois que você a usou e leu o que ela colocou em stage.
 Antes de fazer o commit de `devolver-livro`, veja o que está em stage:
 
 ```
@@ -134,7 +134,7 @@ git worktree add ../.focus-kit/worktrees/devolver-livro \
 Cria a pasta `biblioteca/.focus-kit/worktrees/devolver-livro`, cria o branch `focus-kit/devolver-livro` no `main`, e faz checkout dele na pasta.
 A pasta fica na pasta oculta, ao lado de `main/`, então nenhum dos arquivos de `main/` a mostra.
 
-Depois você trabalha dentro da pasta como em qualquer outra: o agente constrói, você revisa e faz o commit ali.
+Depois você trabalha dentro da pasta como em qualquer outra: o agente constrói, você usa o que ele construiu, revisa e faz o commit ali.
 Só o que o git acompanha está na pasta nova: dependências como `node_modules` não estão, então você as instala em cada worktree (`npm ci` em um projeto Node).
 
 ```
@@ -172,11 +172,11 @@ O `/propose <slug>` cria o worktree em `<oculta>/worktrees/<slug>/` no branch `<
 Um branch `<slug>` sem o prefixo não é o da entrega: é de outra pessoa.
 Você monta o contêiner uma vez; o kit cria cada worktree.
 O `/apply <slug>` roda em uma sessão nova aberta naquela pasta, constrói a página, e coloca a mudança em stage.
-Você revisa e faz o commit no branch, faz o merge no `main` com `--no-ff`, remove o worktree e apaga o branch.
+Você usa a entrega, revisa e faz o commit no branch, faz o merge no `main` com `--no-ff`, remove o worktree e apaga o branch.
 
 O agente nunca faz commit, merge ou push, nem resolve um conflito ou remove um worktree por conta própria: cada passo que muda o histórico é decisão sua, como em toda estratégia de git.
 Peça, e ele dá qualquer um desses passos por você: escreve a mensagem de commit, resolve o conflito, faz o commit, o merge ou o push, remove o worktree, e conhece os comandos que desfazem um passo, como `git merge --abort` para um merge parado por um conflito ou `git revert` para uma entrega a desfazer.
-Cada passo vem depois da sua leitura: peça o commit quando o diff em stage tiver só a entrega, o commit de merge quando o arquivo resolvido não tiver nenhum marcador de conflito, e o push quando o `git log` mostrar o que vai sair.
+Cada passo vem depois da sua leitura: peça o commit quando você tiver usado a entrega e o diff em stage tiver só ela, o commit de merge quando o arquivo resolvido não tiver nenhum marcador de conflito, e o push quando o `git log` mostrar o que vai sair.
 Depois de um merge que ele fez, `git log --oneline --graph -3` em `main/` mostra o commit de merge e o branch que ele trouxe.
 Para rodar duas entregas ao mesmo tempo em worktrees, abra uma sessão por pasta: uma em `main/` para cada `/propose`, uma em cada worktree para o seu `/apply`.
 
@@ -309,7 +309,7 @@ Uma porta ou um banco de dados por sessão é uma escolha que o projeto pode faz
 Cada worktree instala as suas, então cada um custa tanto disco quanto a pasta principal, e a instalação leva o seu tempo de novo.
 
 **Você.** Os agentes trabalham em paralelo; a sua revisão não.
-Você lê cada página e cada mudança em stage e decide cada commit e cada merge, uma entrega por vez, então rode ao mesmo tempo só tantas entregas quantas você consegue revisar; um lote de `/propose` leva essa leitura para uma leitura só e não a encurta.
+Você lê cada página, usa cada entrega, lê a mudança em stage dela e decide cada commit e cada merge, uma entrega por vez, então rode ao mesmo tempo só tantas entregas quantas você consegue revisar; um lote de `/propose` leva essa leitura para uma leitura só e não a encurta.
 Este livro, escrito e revisado por uma pessoa em arquivos compartilhados, fica no trunk por esses motivos, e o seu docs/05 deixa duas sessões trabalharem em uma pasta em linhas livres que mexem em arquivos diferentes.
 
 ## O que o time ganha

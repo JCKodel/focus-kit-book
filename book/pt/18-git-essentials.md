@@ -23,7 +23,7 @@ O git faz o merge de um branch de quatro formas, e isto é o que cada uma deixa 
 | Rebase, depois fast-forward | Os commits, reescritos | Um `git revert` por commit |
 
 No branch por entrega do kit, o `/propose` cria o branch com o nome do slug, ou o reutiliza quando ele existe, e escreve a página nele; o `/apply` constrói nele, e a pessoa faz o merge da página e da construção no `main` em um merge, aqui um commit de merge, pelo pull request do branch (capítulo 20) ou à mão: a unidade de trabalho que um `git revert -m 1 <merge>` desfaz.
-Para `emprestar-livro`, uma entrega da biblioteca de empréstimos escrita para este capítulo, a primeira linha é o que o `/propose` faz por você, `git switch emprestar-livro` no lugar dela quando o branch existe, e as duas últimas são suas, quando o `/apply` termina e você revisou o branch:
+Para `emprestar-livro`, uma entrega da biblioteca de empréstimos escrita para este capítulo, a primeira linha é o que o `/propose` faz por você, `git switch emprestar-livro` no lugar dela quando o branch existe, e as duas últimas são suas, quando o `/apply` termina e você usou a entrega e revisou o branch:
 
 ```
 git switch -c emprestar-livro
@@ -62,7 +62,7 @@ Cada linha é uma entrega, e o seu assunto diz o que a entrega faz, no infinitiv
 
 A página de uma entrega e a sua construção são uma mudança.
 O código, os testes, os documentos que a entrega atualizou e a sua página em `work/done/` entram no mesmo commit, então o histórico guarda a decisão e a mudança que ela fez lado a lado, e desfazer a entrega desfaz de uma vez tudo o que o git guarda dela.
-O agente coloca essa mudança em stage e sugere a mensagem; você a lê e faz o commit, ou pede ao agente que o faça, e essa leitura antes do commit é a sua revisão.
+O agente coloca essa mudança em stage e sugere a mensagem; você usa o que ele construiu, lê a mudança e faz o commit, ou pede ao agente que o faça, e esse uso e essa leitura antes do commit são a sua revisão.
 
 Um remoto é outra cópia do repositório que a sua conhece por um nome, em geral em um servidor como o GitHub, chamado `origin` por convenção: `git clone <url>` o copia para a sua máquina com o histórico inteiro, `git push` envia para ele os commits novos do seu branch, e `git pull` traz os commits novos dele para o seu branch.
 Um time compartilha o seu trabalho assim, e o pull request do capítulo 20, que pede que um branch enviado seja revisado e passe por merge, parte daqui.

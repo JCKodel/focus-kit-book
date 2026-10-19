@@ -63,10 +63,11 @@ One choice is yours before the first `/propose`: the git strategy, trunk, a bran
    You see a page whose every Behaviour line can be checked, whose Out of scope names what you assumed was in, and no question left open.
    Taught in [chapter 12](12-propose.md), "Read the page before `/apply`".
 6. Open a fresh session, never the one that ran `/propose`, because the page must stand alone, and type `/apply <slug>`.
-   You see verify green, the page moved to `work/done/`, its line marked `[x]`, the delivery staged and the suggested message in a `commit` block, on the page and in the conversation.
+   You see verify green, the page moved to `work/done/`, its line marked `[x]`, the delivery staged, the suggested message in a `commit` block, on the page and in the conversation, and your next steps, starting with using what the delivery changed.
    Taught in [chapter 13](13-apply.md), "What `/apply` does".
-7. Read the staged change with `git diff --staged` against the page, and ask the agent for every correction in the same session.
-   You see only this delivery staged, every Behaviour line answered, and a message whose last line is `work/done/<slug>.md`.
+7. Use what the delivery built as its user would, in the environment `/apply`'s last sentence names: for chapter 12's `lend-book`, lend a copy and try each refusal its page lists; for a document, open what it renders and read it, with no screen to invent.
+   Then read the staged change with `git diff --staged` against the page, and ask the agent for every correction in the same session.
+   You see the delivery do what its page says, only this delivery staged, every Behaviour line answered, and a message whose last line is `work/done/<slug>.md`.
    Taught in [chapter 13](13-apply.md), "Review the staged change".
 8. Type `git commit` and paste the message from the `commit` block at the end of the page.
    You see one new commit in `git log`, holding the page in `work/done/` and its build.
@@ -121,7 +122,7 @@ Anyone on the team, developer or not, goes from an empty session to a first deli
 ## Key points
 
 * Before the first `/propose` you need a repository, a host, the kit installed with one sentence, and an answer to the git question; trunk fits one person.
-* A new project: install, `/brainstorm` in a fresh session, review and commit the documents, `/propose` the first line, read the page, `/apply` in a fresh session, read the staged change, commit.
+* A new project: install, `/brainstorm` in a fresh session, review and commit the documents, `/propose` the first line, read the page, `/apply` in a fresh session, use what it built, read the staged change, commit.
 * An existing project: `context/` first, then `/analyze` in a fresh session, every observed statement checked against the code; the first delivery is the smallest change the first milestone needs, checked by the verify command `/analyze` observed.
 * The documents are the project's first commit, and a project stopped there is ready for any later session.
 * A pilot stops when the pages go unread, the queue is not the plan or "done" is said without verify; the documents stay.

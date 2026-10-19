@@ -63,10 +63,11 @@ O [capítulo 18](18-git-essentials.md) e o [capítulo 19](19-worktrees.md) ensin
    Você vê uma página em que cada linha de Comportamento pode ser conferida, cujo Fora do escopo nomeia o que você supunha que entrava, e nenhuma pergunta em aberto.
    Ensinado no [capítulo 12](12-propose.md), "Leia a página antes do `/apply`".
 6. Abra uma sessão nova, nunca a que rodou o `/propose`, porque a página precisa bastar sozinha, e digite `/apply <slug>`.
-   Você vê a verificação verde, a página movida para `work/done/`, a linha dela marcada `[x]`, a entrega em stage e a mensagem sugerida num bloco `commit`, na página e na conversa.
+   Você vê a verificação verde, a página movida para `work/done/`, a linha dela marcada `[x]`, a entrega em stage, a mensagem sugerida num bloco `commit`, na página e na conversa, e os seus próximos passos, começando por usar o que a entrega mudou.
    Ensinado no [capítulo 13](13-apply.md), "O que o `/apply` faz".
-7. Leia a mudança em stage com `git diff --staged` contra a página, e peça ao agente cada correção na mesma sessão.
-   Você vê só esta entrega em stage, cada linha de Comportamento respondida, e uma mensagem cuja última linha é `work/done/<slug>.md`.
+7. Use o que a entrega construiu como o usuário dela usaria, no ambiente que a última frase do `/apply` nomeia: para a `emprestar-livro` do capítulo 12, empreste um exemplar e tente cada recusa que a página dela lista; para um documento, abra o que ele gera e leia, sem tela nenhuma a inventar.
+   Depois leia a mudança em stage com `git diff --staged` contra a página, e peça ao agente cada correção na mesma sessão.
+   Você vê a entrega fazer o que a página dela diz, só esta entrega em stage, cada linha de Comportamento respondida, e uma mensagem cuja última linha é `work/done/<slug>.md`.
    Ensinado no [capítulo 13](13-apply.md), "Revise a mudança em stage".
 8. Digite `git commit` e cole a mensagem do bloco `commit` no fim da página.
    Você vê um commit novo no `git log`, com a página em `work/done/` e a construção dela.
@@ -121,7 +122,7 @@ Qualquer pessoa do time, desenvolvedora ou não, vai de uma sessão vazia a uma 
 ## Pontos-chave
 
 * Antes do primeiro `/propose` você precisa de um repositório, de um host, do kit instalado com uma frase e de uma resposta à pergunta de git; trunk serve a uma pessoa.
-* Um projeto novo: instalar, `/brainstorm` numa sessão nova, revisar os documentos e fazer o commit deles, `/propose` da primeira linha, ler a página, `/apply` numa sessão nova, ler a mudança em stage, fazer o commit.
+* Um projeto novo: instalar, `/brainstorm` numa sessão nova, revisar os documentos e fazer o commit deles, `/propose` da primeira linha, ler a página, `/apply` numa sessão nova, usar o que ele construiu, ler a mudança em stage, fazer o commit.
 * Um projeto existente: `context/` primeiro, depois o `/analyze` numa sessão nova, cada afirmação observada conferida contra o código; a primeira entrega é a menor mudança de que o primeiro marco precisa, conferida pelo comando de verificação que o `/analyze` observou.
 * Os documentos são o primeiro commit do projeto, e um projeto parado ali está pronto para qualquer sessão posterior.
 * Um piloto para quando as páginas ficam sem leitura, a fila não é o plano ou "pronto" é dito sem a verificação; os documentos ficam.

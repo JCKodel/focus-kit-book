@@ -34,7 +34,7 @@ Each session keeps to its delivery:
 * it stages only its own paths, and only its own hunk of docs/06 (`git add -p` stages a file hunk by hunk);
 * it leaves alone whatever the other session changed or staged.
 
-The commit stays your decision, one delivery at a time.
+The commit stays your decision, one delivery at a time, after you have used it and read what it staged.
 Before committing `return-book`, look at what is staged:
 
 ```
@@ -134,7 +134,7 @@ git worktree add ../.focus-kit/worktrees/return-book \
 Creates the folder `library/.focus-kit/worktrees/return-book`, creates the branch `focus-kit/return-book` at `main`, and checks it out in the folder.
 The folder sits in the hidden folder, beside `main/`, so none of `main/`'s files show it.
 
-Then you work inside the folder as in any other: the agent builds, you review and commit there.
+Then you work inside the folder as in any other: the agent builds, you use what it built, review and commit there.
 Only what git tracks is in the new folder: dependencies such as `node_modules` are not, so you install them in each worktree (`npm ci` in a Node project).
 
 ```
@@ -172,11 +172,11 @@ The kit's two names say what made the folder and the branch, so a person who fin
 A branch `<slug>` without the prefix is not the delivery's: it is someone else's.
 You make the container once; the kit makes each worktree.
 `/apply <slug>` runs in a fresh session opened in that folder, builds the page, and stages the change.
-You review and commit on the branch, merge into `main` with `--no-ff`, remove the worktree and delete the branch.
+You use the delivery, review and commit on the branch, merge into `main` with `--no-ff`, remove the worktree and delete the branch.
 
 The agent never commits, merges, pushes, resolves a conflict or removes a worktree on its own: every step that changes the history is yours to decide, as in every git strategy.
 Ask, and it takes any of them for you: it writes the commit message, resolves the conflict, commits, merges, pushes or removes the worktree, and knows the commands that undo a step, such as `git merge --abort` for a merge stopped by a conflict or `git revert` for a delivery to take back.
-Each step comes after your reading: ask for the commit once the staged diff holds only the delivery, for the merge commit once the resolved file has no conflict marker left, and for the push once `git log` shows what will leave.
+Each step comes after your reading: ask for the commit once you have used the delivery and the staged diff holds only it, for the merge commit once the resolved file has no conflict marker left, and for the push once `git log` shows what will leave.
 After a merge it made, `git log --oneline --graph -3` in `main/` shows the merge commit and the branch it brought in.
 To run two deliveries at once in worktrees, open one session per folder: one in `main/` for each `/propose`, one in each worktree for its `/apply`.
 
@@ -309,7 +309,7 @@ A port or a database per session is a choice the project can make, in a delivery
 Each worktree installs its own, so each costs as much disk as the main folder, and the install takes its time again.
 
 **You.** The agents work in parallel; your review does not.
-You read each page and each staged change and decide each commit and merge, one delivery at a time, so run at once only as many deliveries as you can review; a batch of proposes moves that reading to one sitting and does not shorten it.
+You read each page, use each delivery, read its staged change and decide each commit and merge, one delivery at a time, so run at once only as many deliveries as you can review; a batch of proposes moves that reading to one sitting and does not shorten it.
 This book, written and reviewed by one person in shared files, stays on trunk for those reasons, and its docs/05 lets two sessions work in one folder on free lines that touch different files.
 
 ## What the team gains

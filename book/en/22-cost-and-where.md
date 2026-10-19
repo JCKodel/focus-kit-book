@@ -67,7 +67,7 @@ A team that keeps one long session for a week pays, on every call of Friday, for
 
 **It pays** on work whose decision is written and whose check is mechanical.
 The page says what to build, the tests and `verify` say whether it is built, and the agent can loop between writing and checking without a person in the loop.
-That is where the tokens buy the most: the person's time goes to reading one page and one staged change.
+That is where the tokens buy the most: the person's time goes to reading one page, using what was built and reading one staged change.
 
 **It pays less** on work whose decision is still being made.
 A `/propose` conversation is cheap in tokens and expensive in the person's time, because the person is the one deciding.

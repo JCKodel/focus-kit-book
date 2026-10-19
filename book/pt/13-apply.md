@@ -84,7 +84,7 @@ Isso vale para qualquer edição que a verificação cobre feita depois da sua �
 Todo o resto, um defeito em código que a entrega não tocou ou um desejo que a página não pediu, vira uma linha `[ ]` na fila, porque a página é o escopo.
 O revisor fica somente leitura porque a sessão que construiu a mudança sabe por que fez cada escolha, então é essa sessão que faz a correção, e a mudança tem um só autor.
 
-A sua revisão e o seu commit continuam vindo depois dela: ela é uma checagem a mais antes de você ler o diff.
+O seu uso da entrega, a sua revisão e o seu commit continuam vindo depois dela: ela é uma checagem a mais antes de você usar a entrega e ler o diff.
 E ela lê uma entrega enquanto essa entrega está aberta, enquanto a revisão de marco lê juntas as entregas do marco ([capítulo 15](15-closing-a-milestone.md)).
 
 ### Verde não é pronto
@@ -102,7 +102,7 @@ Então, antes de parar, o `/apply` faz tudo isto:
 * Coloca em stage só os caminhos e trechos desta entrega, nunca com `git add -A` ou `git add .`, e avisa o que outra pessoa já tinha colocado em stage, sem tirar do stage.
 * Termina a página com a mensagem de commit sugerida em um bloco `commit`, no formato que o docs/05 define, e mostra o mesmo bloco na conversa, onde um bloco cercado fica à parte do resto da resposta. Há um bloco só: um `/apply` retomado substitui o anterior.
 * A sua última edição marca a linha como `[x]` no docs/06 e coloca esse trecho em stage, depois de todo o resto estar em stage, então uma linha `[x]` sem nada em stage é uma sessão que parou antes da hora.
-* As últimas palavras dele são os seus próximos passos: revisar o diff em stage, fazer o commit (e o merge, em um branch da entrega), e pegar a próxima linha da fila, com o comando escrito como o seu host o invoca, em uma sessão nova, para que uma pessoa nova no kit não procure na documentação o que vem depois. A última coisa que diz é qual ambiente está em qual versão e o comando que atualiza os outros, e ele nunca termina calado sobre isso.
+* As últimas palavras dele são os seus próximos passos: usar o que a entrega mudou como o usuário dela usaria, e dizer naquela sessão o que está errado; revisar o diff em stage; fazer o commit (e o merge, em um branch da entrega); e pegar a próxima linha da fila, com o comando escrito como o seu host o invoca, em uma sessão nova, para que uma pessoa nova no kit não procure na documentação o que vem depois. A última coisa que diz é qual ambiente está em qual versão e o comando que atualiza os outros, e ele nunca termina calado sobre isso.
 
 Pronto é a revisão e essa lista inteira.
 
@@ -147,9 +147,10 @@ work/done/emprestar-livro.md
 
 Depois ele dá os seus próximos passos:
 
-1. Revise o diff em stage: `git diff --staged`.
-2. Faça o commit com a mensagem sugerida: `git commit`, e cole o bloco.
-3. A próxima linha livre da fila é `devolver-livro`; em uma sessão nova, rode `/propose devolver-livro` no Claude Code, ou `$propose devolver-livro` no Codex (a tabela do capítulo 8).
+1. No ambiente de desenvolvimento, que a frase abaixo nomeia, use o que mudou: empreste um exemplar a um membro e veja a data de devolução 21 dias depois, então tente as recusas que a página lista, um membro com livro atrasado, um membro suspenso e o último exemplar já emprestado, e diga a esta sessão o que está errado.
+2. Revise o diff em stage: `git diff --staged`.
+3. Faça o commit com a mensagem sugerida: `git commit`, e cole o bloco.
+4. A próxima linha livre da fila é `devolver-livro`; em uma sessão nova, rode `/propose devolver-livro` no Claude Code, ou `$propose devolver-livro` no Codex (a tabela do capítulo 8).
 
 E termina, por último, nos ambientes, com uma frase também escrita para este capítulo: "O banco de dados de desenvolvimento já tem a migration desta entrega; o ambiente de staging ainda está na entrega anterior, e `npm run migrate -- staging` o atualiza."
 Se uma sessão termina sem essa frase, ela não terminou como o kit diz; peça a frase a ela.
@@ -165,7 +166,15 @@ O ponto está no *por conta própria*: depois que você usou e revisou a entrega
 ## Revise a mudança em stage
 
 A mudança em stage é o que o agente diz que fez; a sua revisão confere que ele fez.
-Leia a mudança contra a página:
+Comece pela entrega, não pelo diff: use o que ela construiu como o usuário dela usaria, no ambiente que a última frase do `/apply` diz que tem a entrega, passando pelo que a página mudou; para um documento, abra o que ele gera e leia.
+Os testes provam o que a página escreveu e a revisão lê o código; só o uso mostra se ficou com a cara certa, se é fácil de usar e se responde sem deixar o usuário esperando.
+Usar também não substitui ler o diff: o uso mostra o que a construção faz, e o diff em stage mostra o que o commit levaria, um arquivo que a página não pediu ou uma entrada de outra sessão, que nenhuma tela mostra; e nenhum dos dois publica a entrega nem faz o commit dela.
+Esse uso cobre uma entrega enquanto ela está aberta; o teste à mão no fechamento do marco percorre o parágrafo inteiro.
+O que a página pediu e a construção errou ou deixou mal acabado, um botão fora do lugar, um rótulo que não cabe, uma tela que leva segundos para responder, é uma correção desta entrega: a verificação e a prova rodam de novo e a página a registra.
+O que a página não pediu, por menor que seja, e um problema que precisa de uma definição própria viram uma linha `[ ]`, acrescentada por conversa com um rascunho da página para o que a linha não comporta; peça a linha logo abaixo da linha desta entrega, para que ela seja a próxima linha livre e o `/propose` dela parta do que você viu enquanto ainda se lembra.
+No Ninjobs, eu usei cada entrega antes de fazer o commit: foi ali que achei problemas de interface, de uso e de velocidade que os testes e as revisões não tinham mostrado, e onde melhorei o que o agente fez, o que a página tinha pedido corrigido na mesma conversa, enquanto a entrega estava aberta, e o resto escrito como as próximas linhas da fila.
+
+Depois leia a mudança em stage contra a página:
 
 * Cada linha de Comportamento foi atendida, cada uma pelo seu teste ou por uma checagem registrada?
 * Foi construída alguma coisa que a página não pediu: um arquivo, uma dependência, uma camada?
@@ -178,12 +187,6 @@ Leia a mudança contra a página:
 
 Se a página não registra revisão nenhuma e o slot do docs/05 nomeia uma, a entrega não terminou como o kit diz; peça a revisão ao agente.
 Leia também o que aconteceu, e pergunte-se se você teria decidido alguma divergência de outro jeito.
-Antes do commit, use o que a entrega construiu como o usuário dela usaria, no ambiente que a última frase do `/apply` diz que tem a entrega, passando pelo que a página mudou.
-Os testes provam o que a página escreveu e a revisão lê o código; só o uso mostra se ficou com a cara certa, se é fácil de usar e se responde sem deixar o usuário esperando.
-Esse uso cobre uma entrega enquanto ela está aberta; o teste à mão no fechamento do marco percorre o parágrafo inteiro.
-O que a página pediu e a construção errou ou deixou mal acabado, um botão fora do lugar, um rótulo que não cabe, uma tela que leva segundos para responder, é uma correção desta entrega: a verificação roda de novo e a página a registra.
-O que a página não pediu, por menor que seja, e um problema que precisa de uma definição própria viram uma linha `[ ]`, acrescentada por conversa com um rascunho da página para o que a linha não comporta; peça a linha logo abaixo da linha desta entrega, para que ela seja a próxima linha livre e o `/propose` dela parta do que você viu enquanto ainda se lembra.
-No Ninjobs, eu usei cada entrega antes de fazer o commit: foi ali que achei problemas de interface, de uso e de velocidade que os testes e as revisões não tinham mostrado, e onde melhorei o que o agente fez, o que a página tinha pedido corrigido na mesma conversa, enquanto a entrega estava aberta, e o resto escrito como as próximas linhas da fila.
 Peça cada correção ao agente, na mesma sessão, nunca à mão.
 A mesma sessão guarda o raciocínio da construção: ela sabe por que fez cada escolha, o que uma sessão nova teria de adivinhar.
 Isso vale para o gosto tanto quanto para os defeitos: quando o código funciona mas você o teria escrito de outro jeito, diga o que quer no lugar e por quê, em vez de reescrevê-lo você mesmo.
@@ -201,14 +204,14 @@ E a verificação e a prova rodaram antes de você olhar, então a sua atenção
 
 ## O commit é a revisão humana
 
-O agente coloca em stage e sugere a mensagem; a pessoa lê o diff e decide o commit.
+O agente coloca em stage e sugere a mensagem; a pessoa usa a entrega, lê o diff e decide o commit.
 Três motivos sustentam essa linha.
 
 * **Nada chega ao histórico sem ser lido por uma pessoa.** Um commit diz que uma pessoa leu a mudança e a aceita; um agente que faz commit por conta própria pula o único leitor que consegue dizer que a construção é o que se queria.
 * **Um commit se desfaz em um passo.** A página e a sua construção são um commit no trunk (direto na linha principal do histórico), um merge em um branch (uma linha de trabalho à parte, juntada depois à principal), então uma entrega que se mostra errada sai do projeto com um comando (capítulo 18).
 * **A pessoa é dona do que é publicado.** O agente escreveu o código, e a pessoa responde por ele ao time, ao cliente e ao usuário; o commit, quem quer que digite o comando, é onde essa resposta é dada.
 
-Leia o diff em stage, depois faça o commit:
+Depois de usar a entrega, leia o diff em stage e faça o commit:
 
 ```
 git diff --staged
@@ -218,7 +221,7 @@ git commit
 Sem `-m`, o git abre o seu editor para a mensagem; copie-a do bloco `commit` no fim da página, cole, salve e feche, e o commit existe quando o editor fecha.
 A página guarda a mensagem e a conversa só a repete, então você pode fazer o commit na manhã seguinte, em outra janela, e ainda achá-la.
 
-Ou, depois de ler o diff em stage, peça ao agente: "faça o commit desta entrega com a mensagem da página dela".
+Ou, depois de usar a entrega e ler o diff em stage, peça ao agente: "faça o commit desta entrega com a mensagem da página dela".
 Ele faz o commit e para aí: um pedido de commit não é um pedido de merge nem de push, e em um branch da entrega o merge é um passo que você nomeia de novo, depois de ler o branch (capítulo 19).
 O agente pode ter a permissão do seu host para rodar `git commit`; essa permissão permite que ele digite o comando, e só o seu pedido, depois da sua leitura, diz que a mudança deve entrar no histórico.
 Depois confira o que ele fez com `git show --stat HEAD`, que mostra a mensagem do último commit e os arquivos que ele guarda: a mensagem da página, e os caminhos desta entrega e nada mais.
@@ -259,7 +262,7 @@ Então a página registrou o ajuste, nenhum caminho de escrita alcançável pelo
 * O `/apply <slug>` constrói a página em uma sessão nova e segue o docs/05 ao pé da letra: a página é o escopo, sem dependência, camada ou ferramenta que ela não nomeou, e quando a página contradiz um documento ele para e diz qual, sem nunca resolver em silêncio.
 * Ele marca a linha como `[*]` com a sua primeira edição, `[x]` com a última, depois do stage, e `[?]`, com o que ela espera, quando precisa parar.
 * Verde não é pronto: pronto é a lista inteira, dos documentos atualizados antes de uma revisão por um contexto que não escreveu a mudança, que lê a entrega inteira, à verificação verde depois da última edição e à linha marcada `[x]`.
-* Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, cada comando escrito por extenso, e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
+* Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, primeiro usar o que ele construiu, cada comando escrito por extenso, e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
 * Use o que foi construído como o usuário usaria, revise a mudança em stage contra a página, peça cada correção na mesma sessão, dizendo o que quer no lugar e por quê, transforme o que a página não pediu na próxima linha da fila, e então faça o commit, você mesmo ou pedindo ao agente: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>

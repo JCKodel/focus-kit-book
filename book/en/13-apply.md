@@ -84,7 +84,7 @@ That holds for any edit verify covers made after its last green run, a review's 
 Anything else, a fault in code the delivery did not touch or a wish the page did not ask for, becomes a `[ ]` line in the queue, because the page is the scope.
 The reviewer stays read-only because the session that built the change knows why it made each choice, so that session makes the fix and the change keeps one writer.
 
-Your review and your commit still come after it: it is one more check before you read the diff.
+Your use of the delivery, your review and your commit still come after it: it is one more check before you use the delivery and read the diff.
 And it reads one delivery while that delivery is open, where the milestone review reads across the milestone's deliveries ([chapter 15](15-closing-a-milestone.md)).
 
 ### Green is not done
@@ -102,7 +102,7 @@ So before it stops, `/apply` does all of this:
 * It stages only this delivery's paths and hunks, never with `git add -A` or `git add .`, and reports what someone else had already staged without unstaging it.
 * It ends the page with the suggested commit message in a `commit` block, in the format docs/05 defines, and shows the same block in the conversation, where a fenced block stands apart from the rest of the reply. There is one block: a resumed `/apply` replaces the earlier one.
 * Its last edit marks the line `[x]` in docs/06 and stages that hunk, after everything else is staged, so a line marked `[x]` with nothing staged is a session that stopped early.
-* Its last words are your next steps: review the staged diff, commit (and merge, on a delivery branch), and take the queue's next line, with its command written as your host invokes it, in a fresh session, so a person new to the kit does not search the documentation for what comes after. The last thing it says is which environment is at which version and the command that updates the others, and it never ends silent about it.
+* Its last words are your next steps: use what the delivery changed as its user would, and say in that session what is wrong; review the staged diff; commit (and merge, on a delivery branch); and take the queue's next line, with its command written as your host invokes it, in a fresh session, so a person new to the kit does not search the documentation for what comes after. The last thing it says is which environment is at which version and the command that updates the others, and it never ends silent about it.
 
 Done is the review and that whole list.
 
@@ -147,9 +147,10 @@ work/done/lend-book.md
 
 Then it gives your next steps:
 
-1. Review the staged diff: `git diff --staged`.
-2. Commit with the suggested message: `git commit`, and paste the block.
-3. The queue's next free line is `return-book`; in a fresh session, run `/propose return-book` in Claude Code, or `$propose return-book` in Codex (chapter 8's table).
+1. In the development environment, which the sentence below names, use what changed: lend a copy to a member and see its due date 21 days ahead, then try the refusals the page lists, a member with an overdue book, a suspended member and the last copy already lent, and tell this session what is wrong.
+2. Review the staged diff: `git diff --staged`.
+3. Commit with the suggested message: `git commit`, and paste the block.
+4. The queue's next free line is `return-book`; in a fresh session, run `/propose return-book` in Claude Code, or `$propose return-book` in Codex (chapter 8's table).
 
 And it ends, last of all, on the environments, in a sentence also written for this chapter: "The development database has this delivery's migration; the staging environment is still at the previous delivery, and `npm run migrate -- staging` updates it."
 If a session ends without that sentence, it did not end as the kit says; ask it for the sentence.
@@ -165,7 +166,15 @@ The kit's process document gives the flow in one line: `/apply` "*builds, proves
 ## Review the staged change
 
 The staged change is what the agent says it did; your review checks that it did it.
-Read it against the page:
+Begin with the delivery, not the diff: use what it built as its user would, in the environment that `/apply`'s last sentence names as holding the delivery, going through what the page changed; for a document, open what it renders and read it.
+The tests prove what the page wrote and the review reads the code; only using the delivery shows whether it looks right, is easy to use and answers without keeping its user waiting.
+Using it does not replace reading the diff either: use shows what the build does, and the staged diff shows what the commit would hold, a file the page did not ask for or another session's entry, which no screen shows; and neither publishes the delivery nor commits it.
+This use covers one delivery while it is open; the hand test at a milestone's close goes through its whole paragraph.
+What the page asked and the build got wrong or left rough, a button out of place, a label that does not fit, a screen that takes seconds to answer, is a correction of this delivery: verify and the proof run again and the page records it.
+What the page did not ask, however small, and a problem that needs a definition of its own become a `[ ]` line, added by conversation with a draft page for what the line cannot hold; ask for it right below this delivery's line, so it is the next free line and its `/propose` starts from what you saw while you still remember it.
+On Ninjobs I used each delivery before committing it: that is where I found problems with the interface, with how easy it was to use and with speed that the tests and the reviews had not shown, and where I improved what the agent made, what the page had asked for corrected in the same conversation, while the delivery was open, and the rest written as the next lines of the queue.
+
+Then read the staged change against the page:
 
 * Is every Behaviour line answered, each by its test or a recorded check?
 * Is anything built that the page did not ask for: a file, a dependency, a layer?
@@ -178,12 +187,6 @@ Read it against the page:
 
 If the page records no review and docs/05's slot names one, the delivery did not end as the kit says; ask the agent for the review.
 Read what happened too, and ask whether you would have decided any divergence otherwise.
-Before you commit, use what the delivery built as its user would, in the environment that `/apply`'s last sentence names as holding the delivery, going through what the page changed.
-The tests prove what the page wrote and the review reads the code; only using the delivery shows whether it looks right, is easy to use and answers without keeping its user waiting.
-This use covers one delivery while it is open; the hand test at a milestone's close goes through its whole paragraph.
-What the page asked and the build got wrong or left rough, a button out of place, a label that does not fit, a screen that takes seconds to answer, is a correction of this delivery: verify runs again and the page records it.
-What the page did not ask, however small, and a problem that needs a definition of its own become a `[ ]` line, added by conversation with a draft page for what the line cannot hold; ask for it right below this delivery's line, so it is the next free line and its `/propose` starts from what you saw while you still remember it.
-On Ninjobs I used each delivery before committing it: that is where I found problems with the interface, with how easy it was to use and with speed that the tests and the reviews had not shown, and where I improved what the agent made, what the page had asked for corrected in the same conversation, while the delivery was open, and the rest written as the next lines of the queue.
 Ask the agent for each correction, in the same session, never by hand.
 The same session keeps the reasoning of the build: it knows why it made each choice, which a fresh session would have to guess.
 That holds for taste as much as for faults: when the code works but you would have written it another way, say what you want instead and why, rather than rewriting it yourself.
@@ -201,14 +204,14 @@ And verify and the proof ran before you look, so your attention goes where no ch
 
 ## The commit is the human review
 
-The agent stages and suggests the message; the person reads the diff and decides the commit.
+The agent stages and suggests the message; the person uses the delivery, reads the diff and decides the commit.
 Three reasons hold that line.
 
 * **Nothing reaches the history unread by a person.** A commit says a person read the change and accepts it; an agent that commits on its own skips the only reader who can say the build is what was wanted.
 * **A commit reverts in one step.** The page and its build are one commit on trunk, one merge on a branch, so a delivery that turns out wrong leaves the project in one command (chapter 18).
 * **The person owns what ships.** The agent wrote the code, and the person answers for it to the team, the client and the user; the commit, whoever types it, is where that answer is given.
 
-Read the staged diff, then commit:
+Once you have used the delivery, read the staged diff, then commit:
 
 ```
 git diff --staged
@@ -218,7 +221,7 @@ git commit
 With no `-m`, git opens your editor for the message; copy it from the `commit` block at the end of the page, paste it, save and close, and the commit exists when the editor closes.
 The page holds the message and the conversation only repeats it, so you can commit the next morning, in another window, and still find it.
 
-Or, once you have read the staged diff, ask the agent: "commit this delivery with the message on its page".
+Or, once you have used the delivery and read the staged diff, ask the agent: "commit this delivery with the message on its page".
 It runs the commit and stops there: a request to commit is not one to merge or to push, and on a delivery branch the merge is a step you name again, after reading the branch (chapter 19).
 The agent may have your host's permission to run `git commit`; that permission lets it type the command, and only your request, after your reading, says the change should enter the history.
 Then check what it made with `git show --stat HEAD`, which prints the last commit's message and the files it holds: the message from the page, and this delivery's paths and nothing else.
@@ -259,7 +262,7 @@ So the page recorded the refinement, no write path reachable from the client, wh
 * `/apply <slug>` builds the page in a fresh session and follows docs/05 literally: the page is the scope, with no dependency, layer or tool it did not name, and when the page contradicts a document it stops and says which, never resolving it silently.
 * It marks the line `[*]` with its first edit, `[x]` with its last, after the stage, and `[?]`, with what it waits on, when it must stop.
 * Green is not done: done is the whole list, from the documents updated before a review by a context that did not write the change, which reads the whole delivery, to verify green after the last edit and the line marked `[x]`.
-* It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, each command written out, and, last of all, which environment is at which version and the command that updates the others.
+* It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, using what it built first, each command written out, and, last of all, which environment is at which version and the command that updates the others.
 * Use what was built as its user would, review the staged change against the page, ask for each correction in the same session, saying what you want instead and why, make what the page did not ask the queue's next line, and then commit it, yourself or by asking the agent: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>

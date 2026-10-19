@@ -23,7 +23,7 @@ Git merges a branch in four ways, and this is what each leaves and what undoing 
 | Rebase, then fast-forward | The commits, rewritten | One revert per commit |
 
 In the kit's branch per delivery, `/propose` creates the branch named after the slug, or reuses it when it exists, and writes the page there; `/apply` builds on it, and the person merges page and build into `main` in one merge, here a merge commit, through its pull request (chapter 20) or by hand: the unit of work one `git revert -m 1 <merge>` takes back.
-For `lend-book`, a delivery of the lending library written for this chapter, the first line is what `/propose` does for you, `git switch lend-book` instead when the branch exists, and the last two are yours, once `/apply` is done and you have reviewed the branch:
+For `lend-book`, a delivery of the lending library written for this chapter, the first line is what `/propose` does for you, `git switch lend-book` instead when the branch exists, and the last two are yours, once `/apply` is done and you have used the delivery and reviewed the branch:
 
 ```
 git switch -c lend-book
@@ -62,7 +62,7 @@ Each line is one delivery, and its subject says what the delivery does, in the i
 
 A delivery's page and its build are one change.
 The code, the tests, the documents the delivery updated and its page in `work/done/` go into the same commit, so the history holds the decision and the change it made side by side, and taking the delivery back takes all of it that git holds at once.
-The agent stages that change and suggests the message; you read it and commit it, or ask the agent to, and that reading before the commit is your review.
+The agent stages that change and suggests the message; you use what it built, read the change and commit it, or ask the agent to, and that use and reading before the commit are your review.
 
 A remote is another copy of the repository that yours knows by name, usually on a server such as GitHub, named `origin` by convention: `git clone <url>` copies it to your machine with its whole history, `git push` sends your branch's new commits to it, and `git pull` brings its new commits into your branch.
 A team shares its work this way, and chapter 20's pull request, which asks for a pushed branch to be reviewed and merged, builds on it.

@@ -67,7 +67,7 @@ Um time que mantém uma sessão longa por uma semana paga, em cada chamada da se
 
 **Ele compensa** no trabalho cuja decisão está escrita e cuja checagem é mecânica.
 A página diz o que construir, os testes e a verificação dizem se está construído, e o agente consegue alternar entre escrever e checar sem uma pessoa no meio.
-É ali que os tokens compram mais: o tempo da pessoa vai para ler uma página e uma mudança em stage.
+É ali que os tokens compram mais: o tempo da pessoa vai para ler uma página, usar o que foi construído e ler uma mudança em stage.
 
 **Ele compensa menos** no trabalho cuja decisão ainda está sendo tomada.
 Uma conversa de `/propose` é barata em tokens e cara no tempo da pessoa, porque é a pessoa quem decide.
