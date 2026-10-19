@@ -1,6 +1,6 @@
 # 17. O projeto como assistente do time
 
-Depois deste capítulo você consegue guardar os emails, as propostas e as notas de reunião de um projeto onde o agente os lê, e perguntar ao projeto, em palavras simples, em que pé ele está e o que rodar a seguir, o que está pendente, como vai o trabalho e quem deve uma resposta.
+Depois deste capítulo você consegue guardar os emails, as propostas e as notas de reunião de um projeto onde o agente consegue lê-los, trazer para os documentos o que eles decidem, e perguntar ao projeto, em palavras simples, em que pé ele está e o que rodar a seguir, o que está pendente, como vai o trabalho e quem deve uma resposta.
 Você também consegue dizer o que uma pessoa ainda precisa fazer com cada resposta que o agente dá.
 
 ## O problema
@@ -43,15 +43,20 @@ context/
 ```
 
 A pasta guarda o que as pessoas disseram; os documentos guardam o que o projeto decidiu a partir disso.
-Quando o cliente decide que multas não existem, a mensagem vai para `context/recebidos/`, e a regra vira uma linha do docs/00, onde o `/propose` a lê.
-Cada mensagem ou documento novo segue o mesmo caminho: para a pasta quando chega, e depois um pedido ao agente para que o leia e traga para os documentos o que ele muda.
+O `/brainstorm` e o `/analyze` leem a pasta inteira quando começam, então não perguntam o que ela já responde.
+Depois disso, nenhuma sessão a relê sozinha.
+Quando o cliente decide que multas não existem, a mensagem vai para `context/recebidos/`, e nada muda ainda: você pede ao agente que a leia, e a regra vira uma linha do docs/00; um termo novo vai para o docs/03, e uma entrega nova para a fila no docs/06.
+O `/propose` lê ali a decisão, não a mensagem.
+Cada mensagem ou documento novo segue o mesmo caminho.
 Daí em diante o agente consegue dizer por que uma coisa é como é, e nomear a mensagem que a decidiu.
 
 Se a `context/` entra em commit depende de quem vai ler o repositório.
 Quando o repositório fica com o time, faça o commit dela: uma pessoa nova, ou uma sessão nova, encontra o histórico de cada decisão ao lado da decisão.
 Quando o próprio repositório é entregue a um cliente, ou vai ser público, liste a pasta no `.gitignore` e deixe só os fatos de engenharia passarem para os documentos.
-Uma pasta ignorada continua no disco, então o agente a lê em toda sessão; só o git não a guarda, então faça backup dela em outro lugar.
+Uma pasta ignorada continua no disco, então o agente consegue lê-la quando você pede; só o git não a guarda, então faça backup dela em outro lugar.
 Dados pessoais e qualquer coisa sob cláusula de confidencialidade ficam fora do repositório em todo caso, porque o git guarda um arquivo removido no seu histórico.
+Sem a pasta, o agente não tem correspondência nenhuma: ele lê arquivos, não uma caixa de email.
+O repositório deste livro é público, então o docs/05 dele lista a `context/` no `.gitignore` e nunca a cria.
 
 No Caso A, um projeto para um cliente em uma plataforma low-code, o próprio repositório era o entregável contratado.
 A pasta de correspondência dele ficou fora do repositório, e só os fatos de engenharia passaram: uma decisão que o cliente tomou numa mensagem virou uma linha de um documento, nunca a mensagem.
@@ -139,7 +144,7 @@ No Caso A, vinte perguntas a pessoas de fora foram acompanhadas até as resposta
 ## Pontos-chave
 
 * Os documentos, a fila, as páginas e o histórico do git já respondem o que está pendente, o que está em andamento e quanto tempo cada entrega levou.
-* A pasta de contexto guarda o que o código não consegue dizer, cada original ao lado do seu Markdown; ela entra em commit quando o repositório fica com o time, e fica de fora quando o repositório é entregue ou público.
+* A pasta de contexto guarda o que o código não consegue dizer, cada original ao lado do seu Markdown; o `/brainstorm` e o `/analyze` a leem inteira quando começam, um item que chega depois é lido quando você pede, e o que ele decide vai para os documentos, onde o `/propose` o lê; ela entra em commit quando o repositório fica com o time, e fica de fora quando o repositório é entregue ou público.
 * Um registro de trabalho com duas tabelas, perguntas enviadas e ainda em aberto, responde "quem me deve uma resposta" e escreve o lembrete.
 * Peça o arquivo por trás de cada resposta, e interprete, guie e valide.
 * Um gerente abre o host na raiz do projeto e pergunta em palavras simples; o mesmo arquivo de regras faz o agente ler os documentos primeiro; perguntado em que pé as coisas estão, ele responde a partir da fila com o próximo comando; não existe comando de status.

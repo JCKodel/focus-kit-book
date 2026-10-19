@@ -1,6 +1,6 @@
 # 17. The project as the team's assistant
 
-After this chapter you can keep a project's emails, proposals and meeting notes where the agent reads them, and ask the project, in plain words, where it stands and what to run next, what is pending, how it is going and who owes an answer.
+After this chapter you can keep a project's emails, proposals and meeting notes where the agent can read them, bring what they decide into the documents, and ask the project, in plain words, where it stands and what to run next, what is pending, how it is going and who owes an answer.
 You can also say what a person must still do with every answer the agent gives.
 
 ## The problem
@@ -43,15 +43,20 @@ context/
 ```
 
 The folder holds what people said; the documents hold what the project decided from it.
-When the client decides that fines do not exist, the message goes to `context/received/`, and the rule becomes a line of docs/00, where `/propose` reads it.
-Each new message or document goes the same way: into the folder when it arrives, then a request to the agent to read it and bring into the documents what it changes.
+`/brainstorm` and `/analyze` read the folder whole when they start, so they do not ask what it already answers.
+After that, no session rereads it on its own.
+When the client decides that fines do not exist, the message goes to `context/received/`, and nothing changes yet: you ask the agent to read it, and the rule becomes a line of docs/00; a new term goes to docs/03, and a new delivery to the queue in docs/06.
+`/propose` reads the decision there, not the message.
+Each new message or document goes the same way.
 From then on the agent can say why a thing is as it is, and name the message that decided it.
 
 Whether `context/` is committed depends on who will read the repository.
 When the repository stays with the team, commit it: a new person, or a new session, finds the history of every decision beside the decision.
 When the repository is itself delivered to a client, or will be public, list the folder in `.gitignore` and let only engineering facts cross into the documents.
-An ignored folder is still on the disk, so the agent reads it in every session; only git does not keep it, so back it up somewhere else.
+An ignored folder is still on the disk, so the agent can read it when you ask; only git does not keep it, so back it up somewhere else.
 Personal data and anything under a confidentiality clause stay out of the repository in every case, because git keeps a removed file in its history.
+With no folder, the agent has no correspondence at all: it reads files, not a mailbox.
+This book's own repository is public, so its docs/05 lists `context/` in `.gitignore` and never creates it.
 
 On Case A, a client project on a low-code platform, the repository itself was the contracted deliverable.
 Its correspondence folder was kept out of the repository, and only engineering facts crossed over: a decision the client took in a message became a line of a document, never the message.
@@ -139,7 +144,7 @@ On Case A, twenty questions to outside people were followed to their answers, th
 ## Key points
 
 * The documents, the queue, the pages and the git history already answer what is pending, what is in progress and how long each delivery took.
-* The context folder holds what the code cannot say, each original beside its Markdown; it is committed when the repository stays with the team, and kept out when the repository is delivered or public.
+* The context folder holds what the code cannot say, each original beside its Markdown; `/brainstorm` and `/analyze` read it whole when they start, a later item is read when you ask, and what it decides goes into the documents, where `/propose` reads it; it is committed when the repository stays with the team, and kept out when the repository is delivered or public.
 * A work record with two tables, questions sent and still open, answers "who owes me an answer" and writes the reminder.
 * Ask for the file behind every answer, and interpret, guide and validate it.
 * A manager opens the host at the project's root and asks in plain words; the same rules file makes the agent read the documents first; asked where things stand, it answers from the queue with the next command; there is no status command.
