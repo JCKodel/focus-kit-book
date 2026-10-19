@@ -36,6 +36,29 @@ No Portuguese wording (docs/06 is English only). No new term; no new queue line.
 
 **Done when.**
 
-* [ ] docs/06:517 reads as the Contract says, and nothing else in docs/06 changes but this delivery's mark.
-* [ ] `make verify` green; no em dash.
-* [ ] Page in `work/done/`, line `[x]`, staged by its paths and its own hunks of docs/06 (docs/05 §6), other sessions' changes left unstaged; commit message in a `commit` block.
+* [x] docs/06:517 reads as the Contract says, and nothing else in docs/06 changes but this delivery's mark.
+* [x] `make verify` green; no em dash.
+* [x] Page in `work/done/`, line `[x]`, staged by its paths and its own hunks of docs/06 (docs/05 §6), other sessions' changes left unstaged; commit message in a `commit` block.
+
+**Built.** docs/06, M21's paragraph: "the kit planted there after the beta," now reads "the kit planted there after the opening,". No other word of the paragraph changed; of docs/06, besides that, only this line's mark.
+
+**Diverged from the contract.** Nothing.
+
+**Proof.** `git diff HEAD -- docs/06-Queue.md` shows, of this delivery, the paragraph's one word and this line's mark. `grep -n "after the beta" docs/06-Queue.md` finds only the done line of `ch06-kit-after-ninjobs`, as decision 2 keeps it. Chapter 6 says "after the opening" at line 50 in book/en and "depois da abertura" in book/pt; no chapter touched. `make verify` green.
+
+**Review.** A read-only agent on Opus read this delivery's hunks of `git diff HEAD -- docs/06-Queue.md`, this page, docs/04 and chapter 6's line 50 in both editions. It confirmed the Contract word for word, nothing else in the paragraph changed, line 530 kept, no em dash, verify clean. Its two findings were about timing, not the text: the line was still `[*]` while the Done when said `[x]`, and nothing was staged yet. The first is closed by this delivery's last edit, the `[x]`; the second by the driver, which stages and commits this delivery from its own index.
+
+**Decisions.**
+
+* No ADR, no manual and no other document: nothing a person does by hand changes.
+* The page's "Decided without the author" stand as written: the driver ran this /apply with recommended answers, so no question was asked.
+* Staging: the driver of this batch stages and commits each delivery from a temporary index, so this session staged nothing; the Done when's staging item is the driver's step.
+* Other lanes' marks in docs/06 were not touched: of docs/06 only this delivery's paragraph edit and its own mark changed.
+
+```commit
+docs(docs06-m21-opening): M21 plants the kit after the opening
+
+- docs/06: M21's paragraph says "after the opening", as chapter 6
+
+work/done/docs06-m21-opening.md
+```

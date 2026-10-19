@@ -514,7 +514,7 @@ When this milestone closes, every technical claim the audit of 2026-10-18 found 
 
 ## M21. focus-kit 2026.10.19
 
-When this milestone closes, the book teaches focus-kit 2026.10.19 and the repository runs on it: /propose branching before it marks `[~]` and where a board sees a mark, the commands following every slot of docs/05 §5 including the project's own, the Milestone review slot choosing the host's deep review or the kit's readers, /apply reading docs/00 and docs/03, the one index of a working tree, the queue's rules written once in docs/05 §4, SETUP.md §1's step 4 as a list, and what the kit assumes of one person, a team and a reader who does not read code. It also says that Ninjobs' 91 deliveries ran on its own two commands, the kit planted there after the beta, and where the words go when a command is full, with the kit's three ceilings.
+When this milestone closes, the book teaches focus-kit 2026.10.19 and the repository runs on it: /propose branching before it marks `[~]` and where a board sees a mark, the commands following every slot of docs/05 §5 including the project's own, the Milestone review slot choosing the host's deep review or the kit's readers, /apply reading docs/00 and docs/03, the one index of a working tree, the queue's rules written once in docs/05 §4, SETUP.md §1's step 4 as a list, and what the kit assumes of one person, a team and a reader who does not read code. It also says that Ninjobs' 91 deliveries ran on its own two commands, the kit planted there after the opening, and where the words go when a command is full, with the kit's three ceilings.
 
 ```
 [x] kit-2026-10-19           reinstall the kit at 2026.10.19 and apply its migration report to docs/05 §§2, 4, 5, 6 and 8, AGENTS.md and the skills · after m20-review
@@ -563,5 +563,5 @@ When this milestone closes, the book teaches focus-kit 2026.10.19.1 and the repo
 [x] kit-note-work-in-flight  work/kit-proposals.md: a note for focus-kit that off trunk the pages in flight sit on their branches, not in the main branch's `work/` · after m22-review
 [x] m22-batch-proof          the pages of ch08-update-2026-10-19-1, ch12-free-lines-branches and ch14-20-read-branches: their Proof and Done when agree on `make verify` and `make book` · after m22-review
 [x] readme-make-list         README.md and README.pt.md: the `make` bullet matches the eight targets `make` prints · after m22-review
-[>] docs06-m21-opening       docs/06: M21's paragraph says the kit was planted after the opening, as chapter 6 says · after m22-review, ch08-13-17-next-line, ch20-merge-and-marks, ch08-13-20-default-review, ch14-face-retired, docs05-dependency-merged, kit-note-work-in-flight, m22-batch-proof, readme-make-list
+[x] docs06-m21-opening       docs/06: M21's paragraph says the kit was planted after the opening, as chapter 6 says · after m22-review, ch08-13-17-next-line, ch20-merge-and-marks, ch08-13-20-default-review, ch14-face-retired, docs05-dependency-merged, kit-note-work-in-flight, m22-batch-proof, readme-make-list
 ```
