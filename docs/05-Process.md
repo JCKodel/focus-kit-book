@@ -181,9 +181,10 @@ time. Steps go in a manual, and what a command prints stays in its help.
   itself: English source, Brazilian Portuguese translation, same delivery.
 * **Verify:** `make verify`, which runs the strict site build, edition
   parity, the em dash check, the prose rules, the block width check, the
-  link check and the disclosure scan, commit messages and hooks
-  included, fast enough to run on every delivery. Green before anything
-  is declared done. Slow tests: none.
+  examples check (chapter 3's database-boundary examples run by Node.js
+  26.12.0 or later), the link check and the disclosure scan, commit
+  messages and hooks included, fast enough to run on every delivery.
+  Green before anything is declared done. Slow tests: none.
 * **Environments:**
   * local: `make serve` for the site, `make book` for PDF and EPUB in
     `output/` (never committed). A delivery leaves both building.
