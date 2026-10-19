@@ -1,7 +1,7 @@
 # 18. Git essentials
 
 After this chapter you can keep every delivery one step to undo, one commit on trunk or one merge otherwise, take it back with `git revert`, and say on its page how what it did outside git is undone, or that it is not.
-You can also say what version control keeps and who made git, read a history of commits, branches and merges, merge a branch in each of the four ways git offers, and choose for a project among the kit's three strategies, trunk, a branch per delivery and a worktree per delivery, telling them apart from trunk-based development and git-flow, practices outside the kit.
+You can also say what version control keeps and who made git, read a history of commits, branches and merges, say what the index holds and why a folder has only one, merge a branch in each of the four ways git offers, and choose for a project among the kit's three strategies, trunk, a branch per delivery and a worktree per delivery, telling them apart from trunk-based development and git-flow, practices outside the kit.
 
 ## The problem
 
@@ -22,7 +22,7 @@ Git merges a branch in four ways, and this is what each leaves and what undoing 
 | Squash merge | One new commit | `git revert <commit>` |
 | Rebase, then fast-forward | The commits, rewritten | One revert per commit |
 
-In the kit's branch per delivery, `/propose` creates the branch named after the slug, or reuses it when it exists, and writes the page there; `/apply` builds on it, and the person merges page and build into `main` in one merge, here a merge commit, through its pull request (chapter 20) or by hand: the unit of work one `git revert -m 1 <merge>` takes back.
+In the kit's branch per delivery, `/propose` creates the branch named after the slug, or reuses it when it exists, and writes the page there; `/apply` builds on it; the page and every mark of its line in docs/06 are written on the branch, so `main`'s queue shows the line as it was until the merge ([chapter 14](14-queue-states.md) says where a board sees it); and the person merges page and build into `main` in one merge, here a merge commit, through its pull request (chapter 20) or by hand: the unit of work one `git revert -m 1 <merge>` takes back.
 For `lend-book`, a delivery of the lending library written for this chapter, the first line is what `/propose` does for you, `git switch lend-book` instead when the branch exists, and the last two are yours, once `/apply` is done and you have used the delivery and reviewed the branch:
 
 ```
@@ -63,6 +63,8 @@ Each line is one delivery, and its subject says what the delivery does, in the i
 A delivery's page and its build are one change.
 The code, the tests, the documents the delivery updated and its page in `work/done/` go into the same commit, so the history holds the decision and the change it made side by side, and taking the delivery back takes all of it that git holds at once.
 The agent stages that change and suggests the message; you use what it built, read the change and commit it, or ask the agent to, and that use and reading before the commit are your review.
+To stage is to write to the index, also called the staging area, the staged copy of the project a commit is made from: `git add <path>` writes a change to it, `git diff --cached` shows what it holds, and a plain `git commit` takes it whole, so what you stage is what the commit holds.
+One working folder has one index, shared by every session open in it; [chapter 19](19-worktrees.md) says what two sessions do about it.
 
 A remote is another copy of the repository that yours knows by name, usually on a server such as GitHub, named `origin` by convention: `git clone <url>` copies it to your machine with its whole history, `git push` sends your branch's new commits to it, and `git pull` brings its new commits into your branch.
 A team shares its work this way, and chapter 20's pull request, which asks for a pushed branch to be reviewed and merged, builds on it.
@@ -178,7 +180,7 @@ git-flow is not one of the kit's strategies: `develop` and the `feature/`, `rele
 
 A project writes its choice once, in the Git slot of its docs/05, and every command reads it; the slot holds one of the kit's three strategies.
 
-* **Trunk** fits one person, alone or with several sessions open on free lines (queue lines not done, not waiting and needing no other line done first, defined yet or not; [chapter 14](14-queue-states.md)) that touch different files: one commit per delivery on `main`, each session staging only its delivery, and the person deciding each commit, one delivery at a time.
+* **Trunk** fits one person, alone or with several sessions open on free lines (queue lines not done, not waiting and needing no other line done first, defined yet or not; [chapter 14](14-queue-states.md)) that touch different files: one commit per delivery on `main`, each session staging only its delivery in the folder's one index, and the person deciding each commit, one delivery at a time.
   It does not fit two people: their deliveries share one branch, and one commit carries the other's half-done work.
 * **A branch per delivery** fits sequential work reviewed by pull request (chapter 20): each delivery on the branch named after its slug, `lend-book`, which reaches `main` in one merge.
 * **A worktree per delivery** fits several people working at once, or one person whose deliveries touch the same files ([chapter 19](19-worktrees.md)): each delivery in its own folder, `.focus-kit/worktrees/<slug>/`, on `focus-kit/<slug>`, unless the slot names another folder or prefix, merged the same way; a branch named only `<slug>` is someone else's, not the delivery's.
@@ -196,9 +198,9 @@ Every delivery lands as one commit on trunk or one merge otherwise, with its pag
 
 * One delivery, one step to undo: a delivery's page and build are one change, one commit on trunk or one merge otherwise, undone with `git revert <commit>` or `git revert -m 1 <merge>`; the revert undoes what git holds, and a migration run or a message sent is undone as the page's Done when says, or not at all.
 * Version control keeps every version of a project's files with who changed what and when; git, written in 2005 by Linus Torvalds and the Linux kernel's community, is distributed, so every copy holds the whole history.
-* A commit is a snapshot with its author, message and parents, named by a hash; a branch is a name that moves with each commit on it; a tag never moves; a remote is another copy you clone, push to and pull from.
+* A commit is a snapshot with its author, message and parents, named by a hash; a branch is a name that moves with each commit on it; a tag never moves; a remote is another copy you clone, push to and pull from; the index is the staged copy a commit is made from, one per working folder.
 * A fast-forward and a rebase leave a line of the branch's commits; a merge commit adds a commit with two parents; a squash merge leaves one new commit; never rebase commits someone else has.
-* Trunk fits one person, alone or with several sessions on free lines that touch different files; a branch per delivery fits sequential work reviewed by pull request; a worktree per delivery fits several people, or deliveries that touch the same files; trunk-based development and git-flow, which fits software that ships versions, are practices outside the kit; the agent stages, the person decides each commit and merge, and the agent takes one of those steps only when the person names it.
+* Trunk fits one person, alone or with several sessions on free lines that touch different files; a branch per delivery fits sequential work reviewed by pull request; a worktree per delivery fits several people, or deliveries that touch the same files; with a branch or a worktree per delivery, the line's marks live on the delivery's branch until its merge; trunk-based development and git-flow, which fits software that ships versions, are practices outside the kit; the agent stages, the person decides each commit and merge, and the agent takes one of those steps only when the person names it.
 
 [^pro-git-about]: Scott Chacon and Ben Straub, "About Version Control", *Pro Git*, 2nd ed., accessed 2026-09-30. <https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control>
 [^pro-git-history]: Scott Chacon and Ben Straub, "A Short History of Git", *Pro Git*, 2nd ed., accessed 2026-09-30. <https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git>

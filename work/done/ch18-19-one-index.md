@@ -69,12 +69,47 @@ docs/03, a new row after `stage` (the driver adds it before /apply; the `stage` 
 
 **Done when.**
 
-* [ ] The docs/03 `index` row is present, as the Contract writes it, before the first chapter edit.
-* [ ] Both editions changed in the places the Contract names, and nowhere else in chapters 18 and 19.
-* [ ] Each chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
-* [ ] No version, date, before/after or narration of a run in the text; no em dash.
-* [ ] Portuguese says "índice" for the index everywhere in chapters 18 and 19, and no "área de stage" is left; chapter 18's one gloss of git's other name gives it in English, "staging area", as the book does for a term git names in English.
-* [ ] Nothing in either chapter suggests a mark waits for a merge on trunk.
-* [ ] No number added, so none to source; no private case used, so no approval needed.
-* [ ] `make verify` green; `make book` builds both editions, and both PDF paths reported.
-* [ ] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] The docs/03 `index` row is present, as the Contract writes it, before the first chapter edit (committed by the driver in c79bc37).
+* [x] Both editions changed in the places the Contract names, and nowhere else in chapters 18 and 19.
+* [x] Each chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
+* [x] No version, date, before/after or narration of a run in the text; no em dash.
+* [x] Portuguese says "índice" for the index everywhere in chapters 18 and 19, and no "área de stage" is left; chapter 18's one gloss of git's other name gives it in English, "staging area", as the book does for a term git names in English.
+* [x] Nothing in either chapter suggests a mark waits for a merge on trunk.
+* [x] No number added, so none to source; no private case used, so no approval needed.
+* [x] `make verify` green; `make book` and both PDF paths: run once by the driver at the end of the batch, as this run's rules say.
+* [x] Delivery review as docs/05 §5 says; the page moved to `work/done/` and its commit message suggested; staging and the docs/06 hunk are the driver's, as this run's rules say.
+
+## Proof
+
+* `make verify` green before the first edit and after the last.
+* `make book` and the two PDF paths: run once by the driver at the end of the batch.
+* Chapter 18, both editions: the opening's second sentence, line 25's branch per delivery sentence, two new lines after line 65, the Trunk bullet, and the commit and strategies key points.
+* Chapter 19, both editions: a new line before "Then do not commit yet", line 88, two new lines after line 178, and the commit and worktree key points.
+
+## Divergences
+
+* Chapter 18 line 25: the marks clause goes after "`/apply` builds on it", joined by semicolons, since `/apply` writes the later marks; the rest of the sentence and the example stay.
+* Chapter 18's definition opens "To stage is to write to the index" / "Colocar em stage é escrever no índice", tying the agent's staging to the index as the Behaviour asks.
+* Chapter 19's commit key point opens "One folder has one index, so commit from it ..." rather than "One folder has one index: ...", to avoid two colons in one sentence; the rest stays.
+* Chapter 19 line 88's added clause reads "the one every session open in that folder stages into" / "aquele em que toda sessão aberta naquela pasta coloca em stage", so it states the same fact from the worktree's side instead of a contrast.
+* Chapter 19's "Worktrees in the kit" refers to the conflict section as "the next section, on conflicts" / "a próxima seção, sobre conflitos", since the book links no in-page headings.
+
+## Delivery review
+
+A read-only agent on Opus read `git diff HEAD` of the four chapter files against this page, docs/03, docs/04 and AGENTS.md. No blocking findings; Contract places, parity, Portuguese terms, the trunk edge and git facts held. Three nits: line 88's "while" set up a false contrast, fixed (the divergence above); "`git diff --cached` shows what it holds" is the Contract's wording and kept; the new chapter 19 line 49 partly repeats the line before it, kept as the reason the Contract asks for.
+
+## Decisions taken alone (apply)
+
+* The author was not in the session; the review's nits were settled as above without asking.
+* The strategies key point of chapter 18 takes the marks clause, since it reads in one clause attached to the branch and worktree strategies only.
+
+```commit
+docs(ch18-19-one-index): one index per folder, marks on the branch
+
+- Define the index in ch 18, one per working folder
+- Give the reason before ch 19's git restore --staged steps
+- Each worktree has its own index; "área de stage" becomes "índice"
+- Marks live on the delivery's branch until its merge, ch 18 and 19
+
+work/done/ch18-19-one-index.md
+```

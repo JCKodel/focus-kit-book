@@ -46,6 +46,7 @@ It lists each staged file and how many of its lines change: it names files, and 
 So a list of only `src/features/loans/`, the page of `return-book` and docs/06 does not settle docs/06, which both sessions change; `git diff --cached docs/06-Queue.md` does, and when it shows `return-book`'s line alone, a plain `git commit` takes that delivery and nothing else.
 If the list also holds `src/features/reports/` or the page of `overdue-list`, or the queue's staged diff holds `overdue-list`'s line, the other session has staged its work too, and a plain commit takes both.
 
+One folder has one index, which both sessions stage into, so a commit takes whatever either has staged ([chapter 18](18-git-essentials.md)).
 Then do not commit yet: the commit waits until the index holds only the delivery you reviewed.
 The session that found the other's entries already staged told you so and left them as they were; neither session removes the other's entries.
 The usual way to an index of one delivery is order: commit each delivery as its session ends, before the other stages anything.
@@ -85,7 +86,7 @@ A worktree is an extra working folder of the same git repository, checked out on
 In the words of the git documentation: "*A git repository can support multiple working trees, allowing you to check out more than one branch at a time.*"[^git-worktree]
 The folder you cloned is the main worktree, the one whose `.git` folder holds the history: the commits, the branches and the tags.
 `git worktree add` creates another folder, checks a branch out in it, and leaves there a small `.git` file that points back to where the history lives.
-All worktrees share the history; each has its own files, its own `HEAD` (the commit it is on) and its own staging area.[^git-worktree]
+All worktrees share the history; each has its own files, its own `HEAD` (the commit it is on) and its own index, the one every session open in that folder stages into.[^git-worktree]
 So a commit made in one worktree is visible at once from every other, with no push and no pull, while what you change or stage in one never appears in another.
 Git also refuses to check out one branch in two worktrees, so two folders never write to the same branch.[^git-worktree]
 
@@ -176,6 +177,8 @@ A worktree per delivery is one of the git strategies a project can write in the 
 The slot may name the hidden folder and the branch prefix, and one that names neither means `.focus-kit/` and `focus-kit/`, the ones above; a slot that names `.wt/` and `wt/` puts `return-book` in `.wt/worktrees/return-book/` on `wt/return-book`.
 The kit's two names say what made the folder and the branch, so a person who finds them in a project knows where they came from.
 `/propose <slug>` creates the worktree at `<hidden>/worktrees/<slug>/` on the branch `<prefix>/<slug>`, from the main branch's `HEAD`, or reuses the one that exists, and writes the page there.
+The line's `[~]` and every later mark are written in the worktree, on its branch, so `main/`'s queue shows the line as it was and each worktree's queue shows its own branch's state; the merge brings the marks in, which is why the queue meets at every merge, as the next section, on conflicts, shows.
+[Chapter 14](14-queue-states.md) says where a board sees them.
 A branch `<slug>` without the prefix is not the delivery's: it is someone else's.
 You make the container once; the kit makes each worktree.
 `/apply <slug>` runs in a fresh session opened in that folder, builds the page, and stages the change.
@@ -343,8 +346,8 @@ Proposes in a batch carry the parallel into definition: the agents write the pag
 
 * Two sessions share one folder on trunk when their lines are free and their files do not meet: each marks only its line, stages only its paths and its line of the queue, and you decide each commit, one delivery at a time.
 * Another line's mark, another delivery's page or files and another session's staged entries are not a conflict; neither are two neighbouring lines of the queue in one hunk; a line edited by both, or a file one page needs that the other is changing, is: stop, then order the lines or give one a worktree.
-* Commit from the index once it holds only that delivery: `git diff --cached --stat` names files, so read the staged diff of a shared file for its lines too; with another delivery staged, wait; and never select a delivery with `git commit -- <paths>`, which takes each named file whole from the folder, the other delivery's lines in a shared file included, staged or not.
-* A worktree per delivery pays for several people, or for deliveries that touch the same files: a container folder whose `main/` is the checkout keeps each delivery's worktree in `<hidden>/worktrees/<slug>/` on `<prefix>/<slug>`, `.focus-kit/` and `focus-kit/` by default; `git worktree add`, work there, `git merge --no-ff` from `main/`, `git worktree remove`, `git branch -d`; a blocked `/apply` there may stage its partial work for you to commit on the branch, which stays unmerged until the delivery is done; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
+* One folder has one index, so commit from it once it holds only that delivery: `git diff --cached --stat` names files, so read the staged diff of a shared file for its lines too; with another delivery staged, wait; and never select a delivery with `git commit -- <paths>`, which takes each named file whole from the folder, the other delivery's lines in a shared file included, staged or not.
+* A worktree per delivery pays for several people, or for deliveries that touch the same files: a container folder whose `main/` is the checkout keeps each delivery's worktree in `<hidden>/worktrees/<slug>/` on `<prefix>/<slug>`, `.focus-kit/` and `focus-kit/` by default; `git worktree add`, work there, `git merge --no-ff` from `main/`, `git worktree remove`, `git branch -d`; each worktree has its own index, and the line's marks live on its branch until the merge; a blocked `/apply` there may stage its partial work for you to commit on the branch, which stays unmerged until the delivery is done; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
 * Parallel pays while the deliveries' files do not meet, or meet only across worktrees whose merge you can decide, the machine's ports and databases do not collide, the disk holds each worktree's dependencies, and one person can still review each delivery; proposes can run in a batch on the recommended answers, staging nothing, each page listing what it decided alone for you to read before any `/apply`, each `/apply` staging its own delivery, and every commit stays your decision, made by you or asked of the agent after your review.
 
 [^git-commit]: Git, "git-commit", the documentation, option `--only`, accessed 2026-10-13. <https://git-scm.com/docs/git-commit>
