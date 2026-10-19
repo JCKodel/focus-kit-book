@@ -33,10 +33,24 @@ English counterparts, unchanged: chapter 8 "the commits a blocked delivery alrea
 
 **Done when.**
 
-* [ ] The three sentences and the docs/03 row above edited, nothing else; each Behaviour line checked; `grep -n -i "bloquead" book/pt/*.md` prints nothing.
-* [ ] `book/en/` unchanged, and the page says why (ADR-0004: English is the source and already says "blocked").
-* [ ] The chapters still open with their value and keep their evidenced team gain; no filler and nothing useful cut; every number keeps its source; no em dash.
-* [ ] No Case A or Case B passage changed or added, so OD-3 is inapplicable.
-* [ ] `make verify` green after the last edit; `make book` is run once by the batch driver at the end and gives `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` for the author's review.
-* [ ] No delivery review: the author waived it for this round; /apply does not add one.
-* [ ] Page archived to `work/done/` and commit message suggested.
+* [x] The three sentences and the docs/03 row above edited, nothing else; each Behaviour line checked; `grep -n -i "bloquead" book/pt/*.md` prints nothing.
+* [x] `book/en/` unchanged, and the page says why (ADR-0004: English is the source and already says "blocked").
+* [x] The chapters still open with their value and keep their evidenced team gain; no filler and nothing useful cut; every number keeps its source; no em dash.
+* [x] No Case A or Case B passage changed or added, so OD-3 is inapplicable.
+* [x] `make verify` green after the last edit; `make book` is run once by the batch driver at the end and gives `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` for the author's review.
+* [x] No delivery review: the author waived it for this round; /apply does not add one.
+* [x] Page archived to `work/done/` and commit message suggested.
+
+**Record.**
+
+* Built: chapter 8 (report item 2 and its paragraph) and chapter 17 (the second table) say "travada" in Portuguese; docs/03 has the row `blocked | travado` after `blocked reason`. `grep -n -i "bloquead" book/pt/*.md` prints nothing.
+* `book/en/` unchanged: English is the source and already says "blocked" in both places (ADR-0004).
+* Chapter 8's report line got shorter and stays inside the block's width; no number or meaning changed; no Case A or Case B passage touched.
+* Divergences: none. Omissions: none.
+* Proof: `make verify` green after the last edit.
+* Delivery review: skipped on the author's word (2026-10-19).
+* Decisions: the three on this page, as written; no new one.
+
+```commit
+docs(pt-blocked-term): say "travado" for a blocked line in Portuguese
+```

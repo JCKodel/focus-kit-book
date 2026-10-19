@@ -93,7 +93,7 @@ Para a biblioteca de empréstimos, escrito para este capítulo:
 ```
 
 A primeira tabela diz quem foi perguntado sobre o quê, e quando respondeu.
-A segunda diz qual linha da fila está bloqueada, por quem, e há quanto tempo, então "quem me deve uma resposta" é uma tabela, e um lembrete a essa pessoa é escrito a partir dela.
+A segunda diz qual linha da fila está travada, por quem, e há quanto tempo, então "quem me deve uma resposta" é uma tabela, e um lembrete a essa pessoa é escrito a partir dela.
 
 O Caso A manteve as duas tabelas: perguntas enviadas, com para quem, sobre o quê e respondida quando; e ainda em aberto, com a linha, o que ela espera e desde quando.
 O relatório de fim de dia e a estimativa de prazo e risco para o gerente de projeto dizem que foram escritos a partir da fila e das páginas, não de memória.

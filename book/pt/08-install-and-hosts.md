@@ -65,7 +65,7 @@ Migrações de processo pendentes, encurtadas a três:
 2. docs/05, §5 Delivery review. O slot lê o git diff e o
    git diff --cached dos caminhos da entrega, e os arquivos que ela
    criou. Proposto: o git diff HEAD dos caminhos da entrega, em
-   stage e fora dele, os commits que uma entrega bloqueada já fez no
+   stage e fora dele, os commits que uma entrega travada já fez no
    seu branch, e os arquivos que ela criou; o revisor continua o que
    o slot cita.
 3. docs/05, §5 Git. O slot diz "O agente põe em stage; nunca faz
@@ -82,7 +82,7 @@ docs/ e AGENTS.md não foram alterados.
 
 Todo item cita o documento, a seção, a regra que ele guarda hoje e o texto proposto no lugar dela.
 O item 1 mantém a verificação como está e diz que ela continua rápida: um teste lento demais para rodar em toda entrega vai com os testes lentos, que a revisão de marco roda, e o repositório do livro não tem nenhum.
-O item 2 faz a revisão ler a entrega inteira contra o último commit: o `git diff` mostra o que não está em stage, o `git diff --cached` o que está, e o `git diff HEAD` os dois de uma vez; os commits que uma entrega bloqueada já fez no seu branch também são lidos, e os arquivos criados à parte, porque um arquivo novo é não rastreado, um que o git ainda não guarda, e nenhum diff o mostra até ele entrar em stage.
+O item 2 faz a revisão ler a entrega inteira contra o último commit: o `git diff` mostra o que não está em stage, o `git diff --cached` o que está, e o `git diff HEAD` os dois de uma vez; os commits que uma entrega travada já fez no seu branch também são lidos, e os arquivos criados à parte, porque um arquivo novo é não rastreado, um que o git ainda não guarda, e nenhum diff o mostra até ele entrar em stage.
 O item 3 diz o que um revert desfaz, o que o git guarda e não um banco migrado ou uma mensagem enviada, e deixa o agente fazer o commit quando a pessoa pede.
 Aplicá-los mantém as escolhas do time: a verificação continua `make verify` com as suas verificações, o revisor continua o que o slot cita, e o Git continua trunk.
 
