@@ -17,6 +17,7 @@ A free book that takes a reader who has never followed any process to running wh
 
 You need Python 3 and make, and Node.js 26.12.0 or later for `make verify`.
 
+* `make` lists these commands, one line each.
 * `make serve` opens the site at <http://127.0.0.1:8000/>.
 * `make verify` runs the checks. The disclosure scan needs a list only the author has; without it, the scan is skipped.
   The examples check runs chapter 3's database-boundary examples, in both editions, with Node, and fails when Node is missing or older; the book's other examples are not run.

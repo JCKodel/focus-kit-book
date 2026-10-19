@@ -71,13 +71,13 @@ Documents in the same delivery:
 
 **Done when.**
 
-* [ ] The Makefile is the Contract's: `make` and `make help` print the eight lines byte for byte and exit 0, in the repository.
-* [ ] Every name in `.PHONY` appears in `make help`'s output (checked by hand).
-* [ ] A scratch copy of the Makefile with no `.venv`: `make` prints the lines and creates nothing; `make -f` from another directory prints them too.
-* [ ] `make -n` of the seven other targets prints the same commands as at HEAD.
-* [ ] docs/01's tree line and target row, and both READMEs' bullet, written.
-* [ ] No screenshot: docs/05 §5's proof of a screen is the rendered site, which this delivery does not change; the proof is the runs above, recorded on the page.
-* [ ] `make verify` green; page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, the commit suggested in a `commit` block.
+* [x] The Makefile is the Contract's: `make` and `make help` print the eight lines byte for byte and exit 0, in the repository.
+* [x] Every name in `.PHONY` appears in `make help`'s output (checked by hand).
+* [x] A scratch copy of the Makefile with no `.venv`: `make` prints the lines and creates nothing; `make -f` from another directory prints them too.
+* [x] `make -n` of the seven other targets prints the same commands as at HEAD.
+* [x] docs/01's tree line and target row, and both READMEs' bullet, written.
+* [x] No screenshot: docs/05 §5's proof of a screen is the rendered site, which this delivery does not change; the proof is the runs above, recorded on the page.
+* [x] `make verify` green; page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, the commit suggested in a `commit` block.
 
 **Decisions taken from the documents.**
 
@@ -93,3 +93,72 @@ Documents in the same delivery:
 * `build` is listed: Actions runs it and docs/01 documents it, though the READMEs do not.
 * The eight descriptions above, worded for this delivery from docs/01's rows.
 * Target names `[a-z]+` only, the pattern kept simple until a name needs more.
+
+**Built.** The Makefile is the Contract's: `.PHONY` gains `help`, `.DEFAULT_GOAL := help` follows it, the rule `help` comes after `BUMP ?= patch` and before `.venv/.installed`, and the seven public rule lines end in their `## ` description; every recipe line is unchanged. docs/01: the tree line `Makefile` reads "the targets below; `make` alone is `make help`" (inside the fenced tree, with backticks as its `VERSION` and `context/` lines have), and the target table's first row is `make help`, worded as the Contract says. README.md and README.pt.md: the first bullet under "Build locally" and "Gerar localmente".
+
+**Diverged from the contract.** Nothing.
+
+**Proof.** GNU Make 3.81, macOS. `$S` is the session's scratch directory; `expected.txt` there holds the Contract's eight lines.
+
+In the repository:
+
+```
+== make
+exit 0
+identical            (cmp with expected.txt)
+== make help
+exit 0
+identical
+== make -n
+awk -F ':.*## ' '/^[a-z]+:.*## /{printf "make %-8s %s\n", $1, $2}'  Makefile
+```
+
+`make -n` prints the awk command alone: nothing else runs. Every name in `.PHONY` (help, serve, build, verify, scan, hooks, book, release) is in the output, checked by a loop over the `.PHONY` line.
+
+`make -n` of each of the seven other targets, saved at HEAD before the edit and again after, compared with `cmp`: serve, build, verify, scan, hooks, book and release the same.
+
+A scratch directory `$S/fresh` holding only a copy of the Makefile, `requirements.txt` and an empty `sub/`:
+
+```
+== make
+exit 0
+identical
+ls -A: Makefile requirements.txt sub        (no .venv)
+== cd sub; make -f ../Makefile
+exit 0
+identical
+== cd /; make -f $S/fresh/Makefile
+identical
+```
+
+In the same scratch directory, `make -n build` prints `python3 -m venv .venv` and `.venv/bin/pip install -r requirements.txt` first, as the Makefile at HEAD does there; `make -n serve` and `make -n verify` start with `python3 -m venv .venv` too: they still install `.venv` when it is missing.
+
+Edges, in the scratch copy with two rules appended, `nodesc:` with no `## ` and `with-hyphen: ## hy`: `make` prints the same eight lines and exits 0; neither is listed.
+
+Failure as before: `make nosuch` prints `make: *** No rule to make target `nosuch'.  Stop.` and exits 2.
+
+`make verify` green in the repository.
+
+**Noted, not fixed.** Nothing.
+
+**Dropped.** Nothing.
+
+**Review.** A read-only agent on Opus read `git diff HEAD` of the Makefile, both READMEs, docs/01 and this line of docs/06, and this page, against the page and docs/04, and ran the checks in a scratch copy: no findings. It confirmed the Contract character for character, tabs on every recipe line, the eight lines byte for byte, the fresh copy creating nothing, `make -f` from `/`, the seven `make -n` unchanged, `make nosuch` exit 2, and the docs/01 and README wording word for word, the table row ending in a period as the other rows do.
+
+**Decisions.**
+
+* No screenshot: the site renders nothing new; the proof is the runs above, as the page says.
+* No ADR and no manual: no ADR's decision changes, and nothing a person does by hand changes beyond `make` alone, which README and docs/01 now say.
+* The page's "Decisions made alone" stand as written: the driver ran this /apply with recommended answers, so no question was asked.
+* The `make -n` comparison is against `make -n` run at HEAD in the repository before the first edit, so `.venv/.installed` is up to date in both and only the targets' own commands differ, if any.
+* The other lane building `kit-2026-10-19-1` in the same tree was not touched: of docs/06 only this line's mark changed.
+
+```commit
+feat(make-help): `make` alone lists the targets, one line each
+
+- .DEFAULT_GOAL is help: awk lists every rule line ending in "## "
+- the seven public targets carry their one-line description
+- docs/01's tree line and table row, both READMEs' first bullet
+
+work/done/make-help.md
+```

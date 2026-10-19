@@ -46,7 +46,7 @@ pandoc/fonts/            Merriweather (4 styles), Instrument Serif (regular and 
 mkdocs.yml               the site: MkDocs Material, i18n in folder structure, footnotes, no nav: key, links to headings validated (validation: links: anchors: warn)
 VERSION                  one line `X.Y.Z YYYY-MM-DD`: the newest release and its date, read by the book build; only `make release` changes it
 requirements.txt         mkdocs-material and mkdocs-static-i18n, exact versions
-Makefile                 the targets below
+Makefile                 the targets below; `make` alone is `make help`
 docs/, work/             the process documents and the deliveries
 docs/manuals/            the manuals of docs/05 §5
 README.md, README.pt.md  what the book is, where to read it, how to build and contribute, which license covers what
@@ -62,6 +62,7 @@ __pycache__/             written by Python when a check imports a module of scri
 
 | Target | Does |
 |---|---|
+| `make help` | the default goal: each target whose rule line ends in `## <what it does>`, one line each, `make <name>` and the text, in the Makefile's order; a target without it, `.venv/.installed` included, is not listed. |
 | `.venv/.installed` | `python3 -m venv .venv` and `pip install -r requirements.txt`, then the stamp; rebuilt when `requirements.txt` is newer than the stamp or an install failed. Only Python 3 is needed beforehand. |
 | `make serve` | `mkdocs serve`, at `http://127.0.0.1:8000/`, which redirects to `/focus-kit-book/` (the path of `site_url`); Portuguese under `pt/`. |
 | `make build` | `scripts/build.py`: `mkdocs build --strict` into `site/`. |

@@ -17,6 +17,7 @@ Um livro gratuito que leva quem nunca seguiu processo algum a conduzir projetos 
 
 Você precisa de Python 3 e make, e de Node.js 26.12.0 ou mais novo para o `make verify`.
 
+* `make` lista estes comandos, uma linha cada.
 * `make serve` abre o site em <http://127.0.0.1:8000/>.
 * `make verify` roda as verificações. A varredura de exposição precisa de uma lista que só o autor tem; sem ela, é pulada.
   A verificação dos exemplos roda os exemplos da fronteira com o banco de dados do capítulo 3, nas duas edições, com o Node, e falha quando o Node falta ou é mais antigo; os outros exemplos do livro não são executados.
