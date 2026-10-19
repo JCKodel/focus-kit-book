@@ -277,15 +277,21 @@ Case A gave such a question a line of its own, a question delivery, whose only o
 Pages written at once do not read each other.
 `/propose` reads the deliveries in flight in `work/` when it starts, and a page being written at the same time is not there yet: two pages may settle the same question two ways, or each ask docs/03 for the same new term.
 You find it by reading the pages side by side, and you correct one of them in its conversation.
+
+Each `/propose` writes its page and its line's mark and stages nothing: the proposal stays in the folder, uncommitted, and whatever the index already held stays as it was.
+No commit hands a page on, either: the `/apply` that builds it, in the same folder, reads the page and the mark from the folder as they are.
 The lines of one batch sit side by side in the queue, so git puts their marks in one hunk of docs/06.
 That hunk holds no conflict: no line in it is changed by two sessions, and each session's change is its own line's mark, which the list of what is not a conflict names.
-What it changes is the staging, and the session that owns a line stages its mark, never you.
+Nor is it a reason to stage anything while the pages are being written.
+
+The applies that follow add no rule of their own: they run at once only on free lines whose files do not meet, and each commit is your decision, one delivery at a time.
+Each `/apply` stages its delivery when it completes: its page, what it built and its line of the queue, and the other proposals stay unstaged in the folder.
+That is where the shared hunk counts, and the session that owns a line stages its mark, never you.
 `git add -p` cannot do it here: it splits a hunk with `s` only where an unchanged line separates two changes, and its `e` opens the hunk in an editor, which a session does not drive.[^git-add]
 So the session writes a patch, the text `git diff` prints for a change, holding only its own line's `-` and `+`, next to each other, with the other lines as they stand in the index (the staged copy a commit is made from), unchanged, around them.
 It gives that patch to `git apply --cached`, which applies it to the index alone and leaves the files in the folder as they are.[^git-apply]
-Before each commit, `git diff --cached docs/06-Queue.md` shows one `-` line and one `+` line, side by side, for that line alone, and no other change.
-
-The applies that follow add no rule: they run at once only on free lines whose files do not meet, and each commit is your decision, one delivery at a time.
+Before each commit, `git diff --cached docs/06-Queue.md` shows this delivery's changes alone, its line's `-` and `+` side by side, and no change of another session.
+If the index already held another session's entries, the session tells you and leaves them as they were, and the commit waits until the index holds only this delivery, as earlier in this chapter.
 
 Asking for a step is not handing over the batch.
 Once you have used and reviewed one delivery, and the index holds only it, its files in `git diff --cached --stat` and its line alone in `git diff --cached docs/06-Queue.md`, you may ask its session to commit it; the next delivery waits for its own use, its own review and its own index.
@@ -300,7 +306,7 @@ And a wrong delivery that later ones built on reverts with a conflict wherever t
 In one folder or in worktrees, two deliveries at once still share whatever is not in their own files.
 Before starting two, check five things.
 
-**The queue.** In one folder it does not conflict: each session marks its own line and stages that line alone, whether or not it shares a hunk with the other's.
+**The queue.** In one folder it does not conflict: each session marks its own line, and each `/apply` stages that line alone, whether or not it shares a hunk with the other's.
 Across worktrees it always conflicts at the merge, since every delivery marks its line, and it resolves the same way every time: keep both marks.
 
 **Files both change.** A code file that two deliveries both change is different.
@@ -332,7 +338,7 @@ Proposes in a batch carry the parallel into definition: the agents write the pag
 * Another line's mark, another delivery's page or files and another session's staged entries are not a conflict; neither are two neighbouring lines of the queue in one hunk; a line edited by both, or a file one page needs that the other is changing, is: stop, then order the lines or give one a worktree.
 * Commit from the index once it holds only that delivery: `git diff --cached --stat` names files, so read the staged diff of a shared file for its lines too; with another delivery staged, wait; and never select a delivery with `git commit -- <paths>`, which takes each named file whole from the folder, the other delivery's lines in a shared file included, staged or not.
 * A worktree per delivery pays for several people, or for deliveries that touch the same files: a container folder whose `main/` is the checkout keeps each delivery's worktree in `<hidden>/worktrees/<slug>/` on `<prefix>/<slug>`, `.focus-kit/` and `focus-kit/` by default; `git worktree add`, work there, `git merge --no-ff` from `main/`, `git worktree remove`, `git branch -d`; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
-* Parallel pays while the deliveries' files do not meet, or meet only across worktrees whose merge you can decide, the machine's ports and databases do not collide, the disk holds each worktree's dependencies, and one person can still review each delivery; proposes can run in a batch on the recommended answers, each page listing what it decided alone for you to read before any `/apply`, and every commit stays your decision, made by you or asked of the agent after your review.
+* Parallel pays while the deliveries' files do not meet, or meet only across worktrees whose merge you can decide, the machine's ports and databases do not collide, the disk holds each worktree's dependencies, and one person can still review each delivery; proposes can run in a batch on the recommended answers, staging nothing, each page listing what it decided alone for you to read before any `/apply`, each `/apply` staging its own delivery, and every commit stays your decision, made by you or asked of the agent after your review.
 
 [^git-commit]: Git, "git-commit", the documentation, option `--only`, accessed 2026-10-13. <https://git-scm.com/docs/git-commit>
 [^git-clone]: Git, "git-clone", the documentation, option `--bare`, accessed 2026-10-16. <https://git-scm.com/docs/git-clone>

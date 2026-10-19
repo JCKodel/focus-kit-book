@@ -277,15 +277,21 @@ O Caso A deu a uma pergunta assim uma linha própria, uma entrega de pergunta, c
 Páginas escritas ao mesmo tempo não leem umas às outras.
 O `/propose` lê as entregas em andamento em `work/` quando começa, e uma página sendo escrita ao mesmo tempo ainda não está lá: duas páginas podem decidir a mesma pergunta de dois jeitos, ou cada uma pedir ao docs/03 o mesmo termo novo.
 Você encontra isso lendo as páginas lado a lado, e corrige uma delas na sua conversa.
+
+Cada `/propose` escreve a sua página e a marca da sua linha e não coloca nada em stage: a proposta fica na pasta, sem commit, e o que o índice já guardava fica como estava.
+Nem é preciso um commit para passar a página adiante: o `/apply` que a constrói, na mesma pasta, lê a página e a marca da pasta, como estão.
 As linhas de um lote ficam lado a lado na fila, então o git põe as suas marcas em um hunk do docs/06.
 Esse hunk não guarda conflito: nenhuma linha dele é mudada por duas sessões, e a mudança de cada sessão é a marca da sua própria linha, que a lista do que não é conflito nomeia.
-O que ele muda é o stage, e quem coloca em stage a marca de uma linha é a sessão dona dela, nunca você.
+Nem é motivo para colocar nada em stage enquanto as páginas estão sendo escritas.
+
+Os `/apply` que vêm depois não acrescentam regra própria: rodam ao mesmo tempo só em linhas livres cujos arquivos não se encontram, e cada commit é decisão sua, uma entrega por vez.
+Cada `/apply` coloca a sua entrega em stage quando termina: a sua página, o que construiu e a sua linha da fila, e as outras propostas ficam fora do stage, na pasta.
+É aí que o hunk compartilhado conta, e quem coloca em stage a marca de uma linha é a sessão dona dela, nunca você.
 O `git add -p` não consegue fazer isso aqui: ele divide um hunk com `s` só onde uma linha sem mudança separa duas mudanças, e o `e` dele abre o hunk em um editor, que uma sessão não opera.[^git-add]
 Então a sessão escreve um patch, o texto que o `git diff` imprime para uma mudança, com só o `-` e o `+` da sua própria linha, um ao lado do outro, e as outras linhas como estão no índice (a cópia em stage de onde o commit é feito), sem mudança, em volta deles.
 Ela entrega esse patch ao `git apply --cached`, que o aplica só ao índice e deixa os arquivos da pasta como estão.[^git-apply]
-Antes de cada commit, `git diff --cached docs/06-Queue.md` mostra uma linha `-` e uma linha `+`, lado a lado, só daquela linha, e nenhuma outra mudança.
-
-Os `/apply` que vêm depois não acrescentam regra: rodam ao mesmo tempo só em linhas livres cujos arquivos não se encontram, e cada commit é decisão sua, uma entrega por vez.
+Antes de cada commit, `git diff --cached docs/06-Queue.md` mostra só as mudanças desta entrega, o `-` e o `+` da sua linha lado a lado, e nenhuma mudança de outra sessão.
+Se o índice já guardava entradas de outra sessão, a sessão avisa você e as deixa como estavam, e o commit espera até o índice guardar só esta entrega, como mais acima neste capítulo.
 
 Pedir um passo não é entregar o lote.
 Depois que você usou e revisou uma entrega, e o índice guarda só ela, os seus arquivos no `git diff --cached --stat` e só a sua linha no `git diff --cached docs/06-Queue.md`, você pode pedir à sessão dela que faça o commit; a entrega seguinte espera o seu próprio uso, a sua própria revisão e o seu próprio índice.
@@ -300,7 +306,7 @@ E uma entrega errada sobre a qual as seguintes construíram se desfaz com um con
 Em uma pasta ou em worktrees, duas entregas ao mesmo tempo ainda compartilham tudo o que não está nos seus próprios arquivos.
 Antes de começar duas, confira cinco coisas.
 
-**A fila.** Em uma pasta ela não dá conflito: cada sessão marca a sua própria linha e coloca em stage só essa linha, esteja ela no mesmo hunk que a da outra ou não.
+**A fila.** Em uma pasta ela não dá conflito: cada sessão marca a sua própria linha, e cada `/apply` coloca em stage só essa linha, esteja ela no mesmo hunk que a da outra ou não.
 Entre worktrees ela sempre dá conflito no merge, já que cada entrega marca a sua linha, e se resolve do mesmo jeito toda vez: guarde as duas marcas.
 
 **Arquivos que as duas mudam.** Um arquivo de código que duas entregas mudam é diferente.
@@ -332,7 +338,7 @@ O `/propose` em lote leva o paralelo para a definição: os agentes escrevem as 
 * A marca de outra linha, a página ou os arquivos de outra entrega e as entradas em stage de outra sessão não são conflito; nem duas linhas vizinhas da fila em um hunk; uma linha editada pelas duas, ou um arquivo de que uma página precisa e que a outra está mudando, é: pare, e então ordene as linhas ou dê a uma delas um worktree.
 * Faça o commit a partir do índice quando ele guarda só aquela entrega: `git diff --cached --stat` nomeia arquivos, então leia também o diff em stage de um arquivo compartilhado, pelas suas linhas; com outra entrega em stage, espere; e nunca escolha uma entrega com `git commit -- <caminhos>`, que pega cada arquivo nomeado inteiro da pasta, com as linhas da outra entrega em um arquivo compartilhado, em stage ou não.
 * Um worktree por entrega compensa para várias pessoas, ou para entregas que mexem nos mesmos arquivos: uma pasta contêiner cujo `main/` é o checkout guarda o worktree de cada entrega em `<oculta>/worktrees/<slug>/` no `<prefixo>/<slug>`, `.focus-kit/` e `focus-kit/` por padrão; `git worktree add`, trabalhe ali, `git merge --no-ff` em `main/`, `git worktree remove`, `git branch -d`; um conflito deixa as duas versões entre marcadores, e `git diff --cached --check` pega qualquer um que sobrou antes do commit.
-* O paralelo compensa enquanto os arquivos das entregas não se encontram, ou só se encontram entre worktrees cujo merge você consegue decidir, as portas e os bancos de dados da máquina não colidem, o disco comporta as dependências de cada worktree, e uma pessoa ainda consegue revisar cada entrega; o `/propose` pode rodar em lote nas respostas recomendadas, cada página listando o que decidiu sozinha para você ler antes de qualquer `/apply`, e todo commit continua sendo decisão sua, feito por você ou pedido ao agente depois da sua revisão.
+* O paralelo compensa enquanto os arquivos das entregas não se encontram, ou só se encontram entre worktrees cujo merge você consegue decidir, as portas e os bancos de dados da máquina não colidem, o disco comporta as dependências de cada worktree, e uma pessoa ainda consegue revisar cada entrega; o `/propose` pode rodar em lote nas respostas recomendadas, sem colocar nada em stage, cada página listando o que decidiu sozinha para você ler antes de qualquer `/apply`, cada `/apply` colocando a sua própria entrega em stage, e todo commit continua sendo decisão sua, feito por você ou pedido ao agente depois da sua revisão.
 
 [^git-commit]: Git, "git-commit", a documentação, opção `--only`, acesso em 2026-10-13. <https://git-scm.com/docs/git-commit>
 [^git-clone]: Git, "git-clone", a documentação, opção `--bare`, acesso em 2026-10-16. <https://git-scm.com/docs/git-clone>
