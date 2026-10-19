@@ -48,3 +48,5 @@ The range's hashes and path inventory are execution inputs fixed before reading,
 * [ ] The exact base and endpoint, path inventory, complete reader coverage, slow-suite outcomes and checked candidates are recorded.
 * [ ] Every confirmed failure becomes an M20 finding, with no fixes made during the review.
 * [ ] `make verify` is green after final edits, both PDFs were built for the author, and this review alone is staged and archived with its suggested commit message.
+
+**Dropped.** The author cancelled this review on 2026-10-19: m19-review's code reading (a50474b) already read M20's range, so nothing here was run, no Done when item holds, and nothing was built or undone. M21's review takes a50474b as its base.

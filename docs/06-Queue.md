@@ -511,5 +511,25 @@ When this milestone closes, every technical claim the audit of 2026-10-18 found 
 [x] ch14-blocked-column      chapter 14: a blocked line returns to `[ ]` or `[>]` as docs/05 §4 says, so the board shows it there and keeps no memory of a column; both editions · after ch14-back-to-open
 [x] verify-examples          `make verify` runs the executable examples extracted from the chapters, starting with chapter 3's `query` · after ch03-query-catch
 [x] ch04-remove-slice        chapter 4: removing a feature removes its folder and the imports other slices hold of it, as the member's page importing from loans/ shows; both editions
-[>] m20-review               the review of M20 as docs/05 §8 says · after ch03-query-catch, ch03-exhaustive-switch, ch12-scenario-levels, ch04-isolation-claims, ch01-recovery-not-immunity, ch24-protocol-phase, ch22-cost-method, ch16-prevention-evidence, ch14-blocked-column, verify-examples, m19-review, ch04-remove-slice
+[x] m20-review               the review of M20 as docs/05 §8 says · after ch03-query-catch, ch03-exhaustive-switch, ch12-scenario-levels, ch04-isolation-claims, ch01-recovery-not-immunity, ch24-protocol-phase, ch22-cost-method, ch16-prevention-evidence, ch14-blocked-column, verify-examples, m19-review, ch04-remove-slice · dropped: its range was read by m19-review
+```
+
+## M21. focus-kit 2026.10.19
+
+When this milestone closes, the book teaches focus-kit 2026.10.19 and the repository runs on it: /propose branching before it marks `[~]` and where a board sees a mark, the commands following every slot of docs/05 §5 including the project's own, the Milestone review slot choosing the host's deep review or the kit's readers, /apply reading docs/00 and docs/03, the one index of a working tree, the queue's rules written once in docs/05 §4, SETUP.md §1's step 4 as a list, and what the kit assumes of one person, a team and a reader who does not read code.
+
+```
+[ ] kit-2026-10-19           reinstall the kit at 2026.10.19 and apply its migration report to docs/05 §§2, 4, 5, 6 and 8, AGENTS.md and the skills · after m20-review
+[ ] ch08-update-2026-10-19   chapter 8: the update example and its report at 2026.10.19, a custom edit shown against the kit file it was made on, a prior version verified from the kit's history or the person's word, step 4 as a list by section, the next command on a documented project, and Copilot's order for a skill in both folders; both editions · after kit-2026-10-19
+[ ] ch07-slots-and-decided   chapter 7: a project may add slots of docs/05 §5 that /propose and /apply follow, the queue's rules live once in docs/05 §4, and AGENTS.md answers what a page decided; both editions · after kit-2026-10-19
+[ ] ch09-second-pair-of-eyes chapter 9: /brainstorm and /analyze ask whether a second pair of eyes reads each delivery and each milestone, default stated, not which tool or model; both editions · after kit-2026-10-19
+[ ] ch12-branch-then-mark    chapter 12: /propose creates the branch or worktree first and marks `[~]` there; both editions · after kit-2026-10-19
+[ ] ch13-apply-reads-00-03   chapter 13: /apply reads docs/00 and docs/03, builds with docs/03's identifiers and follows every slot of docs/05 §5; both editions · after kit-2026-10-19
+[ ] ch14-where-a-board-sees  chapter 14: on trunk a board sees a mark at once, with a branch or worktree per delivery at the merge; both editions · after kit-2026-10-19
+[ ] ch15-who-reads           chapter 15: the Milestone review slot says who reads, the host's deep review over the range or the kit's readers by area, the checker either way, and the base a page names where no earlier review exists; both editions · after kit-2026-10-19
+[ ] ch18-19-one-index        chapters 18 and 19: one working tree has one index, `git restore --staged` when the second session staged first, and the mark on a delivery branch until its merge; both editions · after kit-2026-10-19
+[ ] ch20-one-person-assumed  chapter 20: the kit assumes one person who proposes, uses, reviews and commits, whoever commits is the reviewer on a team, and a Board slot the commands follow instead of edited skills; both editions · after kit-2026-10-19
+[ ] ch06-kit-after-ninjobs   chapter 6: Ninjobs' 91 deliveries ran on its own two commands and the kit was planted there on 2026-09-21, after the beta; both editions · after kit-2026-10-19
+[ ] ch16-ceiling-moves       chapter 16: the governor watches where the words go when a command is full, with ceilings on SETUP.md §1, the docs/05 template and documents.md; both editions · after kit-2026-10-19
+[ ] m21-review               the review of M21 as docs/05 §8 says · after kit-2026-10-19, ch08-update-2026-10-19, ch07-slots-and-decided, ch09-second-pair-of-eyes, ch12-branch-then-mark, ch13-apply-reads-00-03, ch14-where-a-board-sees, ch15-who-reads, ch18-19-one-index, ch20-one-person-assumed, ch06-kit-after-ninjobs, ch16-ceiling-moves
 ```
