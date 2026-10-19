@@ -161,8 +161,8 @@ On Ninjobs, a person who opened the published site believing it current, after a
 
 ## Why it stops at the stage
 
-`/apply` never commits and never merges on its own, whatever the git strategy.
-It stages only its delivery and hands you the message; the decision to commit is yours, and it comes after your review.
+`/apply` never commits and never merges on its own, whatever the git strategy; a Git slot may say the agent commits, and merges, by the slot's word, which counts as the asking, and the person then reviews the commit ([chapter 7](07-the-documents.md)).
+By default it stages only its delivery and hands you the message; the decision to commit is yours, and it comes after your review.
 The kit's process document gives the flow in one line: `/apply` "*builds, proves, updates the documents, stages and suggests the commit, never commits on its own*".
 *On its own* is the point: once you have used and reviewed the delivery, you may ask the agent to commit it, and it takes that step and no other (the section on the commit shows how).
 
@@ -207,12 +207,12 @@ And verify and the proof ran before you look, so your attention goes where no ch
 
 ## The commit is the human review
 
-The agent stages and suggests the message; the person uses the delivery, reads the diff and decides the commit.
+The agent stages and suggests the message; the person uses the delivery, reads the diff and decides the commit, or, when the Git slot's word lets the agent commit, uses the delivery and reads the commit once it lands.
 Three reasons hold that line.
 
-* **Nothing reaches the history unread by a person.** A commit says a person read the change and accepts it; an agent that commits on its own skips the only reader who can say the build is what was wanted.
+* **No delivery stands unread by a person.** A commit the person makes says they read the change and accept it; when the Git slot's word lets the agent commit, the person reads the commit after it lands and reverts it if it is wrong; an agent that commits on its own skips the only reader who can say the build is what was wanted.
 * **A commit reverts in one step.** The page and its build are one commit on trunk, one merge on a branch, so a delivery that turns out wrong leaves the project in one command (chapter 18).
-* **The person owns what ships.** The agent wrote the code, and the person answers for it to the team, the client and the user; the commit, whoever types it, is where that answer is given.
+* **The person owns what ships.** The agent wrote the code, and the person answers for it to the team, the client and the user; the commit, whoever types it, is where that answer is given, or, by the slot's word, the review of the commit.
 
 Once you have used the delivery, read the staged diff, then commit:
 
@@ -267,6 +267,6 @@ So the page recorded the refinement, no write path reachable from the client, wh
 * It marks the line `[*]` with its first edit, `[x]` with its last, after the stage, and `[?]`, with what it waits on, when it must stop.
 * Green is not done: done is the whole list, from the documents updated before a review by a context that did not write the change, which reads the whole delivery, to verify green after the last edit and the line marked `[x]`.
 * It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, using what it built first, each command written out, and, last of all, which environment is at which version and the command that updates the others.
-* Use what was built as its user would, review the staged change against the page, ask for each correction in the same session, saying what you want instead and why, make what the page did not ask a line of the queue, where its milestone's paragraph puts it, and then commit it, yourself or by asking the agent: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
+* Use what was built as its user would, review the staged change against the page, ask for each correction in the same session, saying what you want instead and why, make what the page did not ask a line of the queue, where its milestone's paragraph puts it, and then commit it, yourself or by asking the agent, or, when the Git slot let it commit, review that commit: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>

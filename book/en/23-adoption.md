@@ -60,8 +60,8 @@ The method gives each step to whoever owns it.
 * **Who proposes:** whoever owns the decision.
   A developer proposes a technical delivery, an analyst a rule, a manager a question to the client; `/propose` is a conversation, and it needs someone who can answer ([chapter 12](12-propose.md)).
 * **Who applies:** a developer's session, or several at once, in one folder or in worktrees, each on its own delivery ([chapter 19](19-worktrees.md)).
-* **Who decides each commit and merge:** a person, always.
-  `/apply` stages and stops; the person uses what it built and reviews it, then commits or asks the agent to take that one step, and checks what it did: the review is the human one either way ([chapter 13](13-apply.md)).
+* **Who decides each commit and merge:** a person, always, by asking, or once in the Git slot, whose word is the asking.
+  By default `/apply` stages and stops, and the person uses what it built and reviews it, then commits or asks the agent to take that one step, and checks what it did; by the Git slot's word, the agent commits and the person uses the delivery and reviews the commit: the review is the human one in every case ([chapter 13](13-apply.md)).
 * **Who reviews the milestone:** the team, on the running product, against the milestone's paragraph; on its word, the code changed since the milestone's base is read by whoever docs/05's Milestone review slot names, when it names anyone, the host's deep review or one read-only agent per area, and either way a checker marks each candidate before the team confirms which are findings ([chapter 15](15-closing-a-milestone.md)).
 * **The manager** asks the project: what is pending, how it is going, who owes an answer ([chapter 17](17-project-as-assistant.md)).
 
@@ -109,6 +109,6 @@ On Case A the process caught four problems outside the code: a baseline that did
 
 * Without a shared process each person uses AI their own way, at a cost nobody sees, and the loudest opinion decides.
 * Answer "my way works" by asking for its evidence, "too much process" with the governor, and "we already have a tool" with the fact that the method is documents any host reads.
-* Whoever owns the decision proposes, a developer's session applies, a person always decides each commit and merge after using the delivery and reviewing it, and the team reviews the milestone.
+* Whoever owns the decision proposes, a developer's session applies, a person always decides each commit and merge, asking for it after using the delivery and reviewing it, or once in the Git slot, then reviewing each commit after it lands, and the team reviews the milestone.
 * Start with one milestone of three to eight lines, measure tokens per delivery and what was caught, then decide.
 

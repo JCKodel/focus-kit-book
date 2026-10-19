@@ -187,7 +187,7 @@ A project writes its choice once, in the Git slot of its docs/05, and every comm
 
 git-flow is outside the slot: it fits software that ships numbered versions and keeps several in use, and a team that needs it runs it as its own workflow.
 
-Whichever it is, the rule is the same: one delivery, one step to undo, and the person decides each commit and merge, never the agent on its own.
+Whichever it is, the rule is the same: one delivery, one step to undo, and the person decides each commit and merge, by asking, or once in the Git slot, whose word is the asking ([chapter 7](07-the-documents.md)), never the agent on its own.
 This book, written and reviewed by one person, is on trunk.
 
 ## What the team gains
@@ -200,7 +200,7 @@ Every delivery lands as one commit on trunk or one merge otherwise, with its pag
 * Version control keeps every version of a project's files with who changed what and when; git, written in 2005 by Linus Torvalds and the Linux kernel's community, is distributed, so every copy holds the whole history.
 * A commit is a snapshot with its author, message and parents, named by a hash; a branch is a name that moves with each commit on it; a tag never moves; a remote is another copy you clone, push to and pull from; the index is the staged copy a commit is made from, one per working folder.
 * A fast-forward and a rebase leave a line of the branch's commits; a merge commit adds a commit with two parents; a squash merge leaves one new commit; never rebase commits someone else has.
-* Trunk fits one person, alone or with several sessions on free lines that touch different files; a branch per delivery fits sequential work reviewed by pull request; a worktree per delivery fits several people, or deliveries that touch the same files; with a branch or a worktree per delivery, the line's marks live on the delivery's branch until its merge; trunk-based development and git-flow, which fits software that ships versions, are practices outside the kit; the agent stages, the person decides each commit and merge, and the agent takes one of those steps only when the person names it.
+* Trunk fits one person, alone or with several sessions on free lines that touch different files; a branch per delivery fits sequential work reviewed by pull request; a worktree per delivery fits several people, or deliveries that touch the same files; with a branch or a worktree per delivery, the line's marks live on the delivery's branch until its merge; trunk-based development and git-flow, which fits software that ships versions, are practices outside the kit; the agent stages, the person decides each commit and merge, and the agent takes one of those steps only when the person names it or when the Git slot says it commits, and merges, by the slot's word.
 
 [^pro-git-about]: Scott Chacon and Ben Straub, "About Version Control", *Pro Git*, 2nd ed., accessed 2026-09-30. <https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control>
 [^pro-git-history]: Scott Chacon and Ben Straub, "A Short History of Git", *Pro Git*, 2nd ed., accessed 2026-09-30. <https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git>

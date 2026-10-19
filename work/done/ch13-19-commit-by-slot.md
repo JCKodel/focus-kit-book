@@ -76,14 +76,33 @@ Terms of docs/03 used: slot, trunk, worktree, conflict, automation bias as chapt
 * Chapter 19's line 308 keeps "leaves the method" for the agents' own commits only, and the four costs are said to hold under the slot's form too: the costs (the index, automation bias, the revert) do not depend on who gave the word.
 * Chapter 23 points to no chapter 7: its line 64 already points to chapter 13, which holds the clause and the pointer.
 * The page still fits one page: about ten sentences per edition, each a clause or a reframed reason.
+* (/apply) "At most once per chapter" is read as at most one new pointer, as the Done when's grep measures: chapters 13 and 19 already pointed to chapter 7 once, for the manuals (13 line 100, 19 line 132), a different detail; each now has two, chapter 18 one, chapter 23 none.
+* (/apply) Chapter 13 line 165 and chapter 23 line 64 open with "By default" (pt "Por padrão"), which the Contract allows for 165: without it, "the decision to commit is yours, and it comes after your review" and "`/apply` stages and stops" read false one line after the slot's form is named.
+* (/apply) Chapter 13 line 213 drops "in one step" from the revert, which the next bullet's lead already says; "the slot's form" is not used in the text: the chapters say "the slot's word", chapter 7's term.
+* (/apply) Chapter 19 line 196 ("Each step comes after your reading") stays, as the Contract lists it: it follows "Ask, and it takes any of them", so it reads as the asked steps; a "By default" there is a proposed queue line, not this page's.
+
+**Proof.** `make verify` green after the last edit. The Done when greps: "Nothing reaches the history unread" and "Nada chega ao histórico sem ser lido" find nothing; "whatever the git strategy" and "qualquer que seja a estratégia de git" remain only on chapter 13 line 164, in the sentence that names the slot's word as the asking; `07-the-documents` counts go 13: 1 to 2, 18: 0 to 1, 19: 1 to 2, 23: 0 to 0, in both editions; no added line holds "no longer", "now offers", "não mais", "agora oferece", "2026.10", "code-review", "ultra" or an em dash. `make book` is the driver's, once for the batch.
+
+**Delivery review.** A read-only agent on Opus read `git diff HEAD` of the eight chapter files against this page and docs/04: nothing on the Fails if list tripped. Fixed: "its word" read as the agent's word (18 line 203, 19 line 194), now "the slot's word"; "o agente os dá" now "os faz"; chapter 23 line 64's "`/apply` stages and stops" false under the slot's form, now "By default"; chapter 23 line 112 put the decision after a review that, under the slot, follows the commit, now split by form; chapter 13 lines 164, 165, 210, 213, 215, 270 reworded for clarity (repeated subject, "the slot's form", a broken subject, "which counts as the asking" as in chapter 7); chapter 19 line 308's agreement and the pt "os" with no plural antecedent; 351's "its" and the pt "dado" now "dada". Left: chapter 19 line 196, as decided above.
 
 **Done when.**
 
-* [ ] Both editions written, the same passages changed in each, Portuguese read as Portuguese; each chapter opens as it did, no filler and nothing useful cut.
-* [ ] Every sentence the Contract names reads true under both Git slot forms; every sentence it lists as staying is unchanged.
-* [ ] `grep -n -E "whatever the git strategy" book/en/13-apply.md` and `grep -n -E "qualquer que seja a estratégia de git" book/pt/13-apply.md` find nothing, or only inside a sentence that now names the slot's word as the asking; `grep -n "Nothing reaches the history unread" book/en/13-apply.md` and `grep -n "Nada chega ao histórico sem ser lido" book/pt/13-apply.md` find nothing.
-* [ ] `grep -c "07-the-documents" ` on each of the four chapter files, both editions, rises by at most one for 13, 18 and 19 and not for 23.
-* [ ] `grep -n -i -E "no longer|now offers|2026\.10|code-review|ultra"` on the four en files and `grep -n -i -E "não mais|agora oferece|2026\.10|code-review|ultra"` on the four pt files find nothing new; no em dash; no narrated run.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver runs `make book` once for the batch).
-* [ ] Only this delivery's paths and its hunk of docs/06 staged (staging is the driver's); the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions written, the same passages changed in each, Portuguese read as Portuguese; each chapter opens as it did, no filler and nothing useful cut.
+* [x] Every sentence the Contract names reads true under both Git slot forms; every sentence it lists as staying is unchanged.
+* [x] `grep -n -E "whatever the git strategy" book/en/13-apply.md` and `grep -n -E "qualquer que seja a estratégia de git" book/pt/13-apply.md` find nothing, or only inside a sentence that now names the slot's word as the asking; `grep -n "Nothing reaches the history unread" book/en/13-apply.md` and `grep -n "Nada chega ao histórico sem ser lido" book/pt/13-apply.md` find nothing.
+* [x] `grep -c "07-the-documents" ` on each of the four chapter files, both editions, rises by at most one for 13, 18 and 19 and not for 23.
+* [x] `grep -n -i -E "no longer|now offers|2026\.10|code-review|ultra"` on the four en files and `grep -n -i -E "não mais|agora oferece|2026\.10|code-review|ultra"` on the four pt files find nothing new; no em dash; no narrated run.
+* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver runs `make book` once for the batch).
+* [x] Only this delivery's paths and its hunk of docs/06 staged (staging is the driver's); the page moved to `work/done/` and its commit message suggested.
+
+```commit
+docs(ch13-19-commit-by-slot): the Git slot's word is the asking
+
+- ch13: never on its own stays; the slot's word is the asking
+- ch13: no delivery stands unread, the commit reviewed after it lands
+- ch18, ch23: each commit and merge decided by asking or in the slot
+- ch19: slot covers commit and merge only; the four costs hold both ways
+
+work/done/ch13-19-commit-by-slot.md
+```

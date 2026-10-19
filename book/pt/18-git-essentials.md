@@ -187,7 +187,7 @@ Um projeto escreve a sua escolha uma vez, no slot Git do seu docs/05, e todo com
 
 O git-flow fica fora do slot: ele serve a software que lança versões numeradas e mantém várias em uso, e um time que precisa dele o adota como fluxo próprio.
 
-Seja qual for, a regra é a mesma: uma entrega, um passo para desfazer, e a pessoa decide cada commit e cada merge, nunca o agente por conta própria.
+Seja qual for, a regra é a mesma: uma entrega, um passo para desfazer, e a pessoa decide cada commit e cada merge, pedindo, ou uma vez no slot Git, cuja palavra vale como o pedido ([capítulo 7](07-the-documents.md)), nunca o agente por conta própria.
 Este livro, escrito e revisado por uma pessoa, está no trunk.
 
 ## O que o time ganha
@@ -200,7 +200,7 @@ Cada entrega chega como um commit no trunk ou um merge nos outros casos, com a s
 * Um controle de versão guarda cada versão dos arquivos de um projeto com quem mudou o quê e quando; o git, escrito em 2005 por Linus Torvalds e pela comunidade do kernel do Linux, é distribuído, então cada cópia guarda o histórico inteiro.
 * Um commit é uma foto com autor, mensagem e pais, com um hash como nome; um branch é um nome que anda com cada commit feito nele; uma tag nunca anda; um remoto é outra cópia que você clona, para a qual dá push e da qual dá pull; o índice é a cópia em stage de onde o commit é feito, um por pasta de trabalho.
 * Um fast-forward e um rebase deixam uma linha com os commits do branch; um commit de merge acrescenta um commit com dois pais; um squash merge deixa um commit novo; nunca faça rebase de commits que outra pessoa tem.
-* O trunk serve a uma pessoa, sozinha ou com várias sessões em linhas livres que mexem em arquivos diferentes; um branch por entrega serve a trabalho em sequência revisado por pull request; um worktree por entrega serve a várias pessoas, ou a entregas que mexem nos mesmos arquivos; com um branch ou um worktree por entrega, as marcas da linha ficam no branch da entrega até o merge dele; o trunk-based development e o git-flow, que serve a software que lança versões, são práticas de fora do kit; o agente coloca em stage, a pessoa decide cada commit e cada merge, e o agente dá um desses passos só quando a pessoa o nomeia.
+* O trunk serve a uma pessoa, sozinha ou com várias sessões em linhas livres que mexem em arquivos diferentes; um branch por entrega serve a trabalho em sequência revisado por pull request; um worktree por entrega serve a várias pessoas, ou a entregas que mexem nos mesmos arquivos; com um branch ou um worktree por entrega, as marcas da linha ficam no branch da entrega até o merge dele; o trunk-based development e o git-flow, que serve a software que lança versões, são práticas de fora do kit; o agente coloca em stage, a pessoa decide cada commit e cada merge, e o agente dá um desses passos só quando a pessoa o nomeia ou quando o slot Git diz que ele faz o commit, e o merge, pela palavra do slot.
 
 [^pro-git-about]: Scott Chacon e Ben Straub, "About Version Control", *Pro Git*, 2ª ed., acesso em 2026-09-30. <https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control>
 [^pro-git-history]: Scott Chacon e Ben Straub, "A Short History of Git", *Pro Git*, 2ª ed., acesso em 2026-09-30. <https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git>

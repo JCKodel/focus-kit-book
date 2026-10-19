@@ -161,8 +161,8 @@ No Ninjobs, uma pessoa que abriu o site publicado achando que ele estava atual, 
 
 ## Por que ele para no stage
 
-O `/apply` nunca faz commit e nunca faz merge por conta própria, qualquer que seja a estratégia de git.
-Ele coloca em stage só a sua entrega e entrega a mensagem a você; a decisão do commit é sua, e vem depois da sua revisão.
+O `/apply` nunca faz commit e nunca faz merge por conta própria, qualquer que seja a estratégia de git; um slot Git pode dizer que o agente faz o commit, e o merge, pela palavra do slot, que vale como o pedido, e a pessoa então revisa o commit ([capítulo 7](07-the-documents.md)).
+Por padrão ele coloca em stage só a sua entrega e entrega a mensagem a você; a decisão do commit é sua, e vem depois da sua revisão.
 O documento de processo do kit dá o fluxo em uma linha: o `/apply` "*constrói, prova, atualiza os documentos, coloca em stage e sugere o commit, nunca faz commit por conta própria*".
 O ponto está no *por conta própria*: depois que você usou e revisou a entrega, pode pedir ao agente que faça o commit dela, e ele dá esse passo e nenhum outro (a seção sobre o commit mostra como).
 
@@ -207,12 +207,12 @@ E a verificação e a prova rodaram antes de você olhar, então a sua atenção
 
 ## O commit é a revisão humana
 
-O agente coloca em stage e sugere a mensagem; a pessoa usa a entrega, lê o diff e decide o commit.
+O agente coloca em stage e sugere a mensagem; a pessoa usa a entrega, lê o diff e decide o commit, ou, quando a palavra do slot Git deixa o agente fazer o commit, usa a entrega e lê o commit depois que ele entra.
 Três motivos sustentam essa linha.
 
-* **Nada chega ao histórico sem ser lido por uma pessoa.** Um commit diz que uma pessoa leu a mudança e a aceita; um agente que faz commit por conta própria pula o único leitor que consegue dizer que a construção é o que se queria.
+* **Nenhuma entrega fica sem ser lida por uma pessoa.** Um commit que a pessoa faz diz que ela leu a mudança e a aceita; quando a palavra do slot Git deixa o agente fazer o commit, a pessoa lê o commit depois que ele entra e o desfaz se estiver errado; um agente que faz commit por conta própria pula o único leitor que consegue dizer que a construção é o que se queria.
 * **Um commit se desfaz em um passo.** A página e a sua construção são um commit no trunk (direto na linha principal do histórico), um merge em um branch (uma linha de trabalho à parte, juntada depois à principal), então uma entrega que se mostra errada sai do projeto com um comando (capítulo 18).
-* **A pessoa é dona do que é publicado.** O agente escreveu o código, e a pessoa responde por ele ao time, ao cliente e ao usuário; o commit, quem quer que digite o comando, é onde essa resposta é dada.
+* **A pessoa é dona do que é publicado.** O agente escreveu o código, e a pessoa responde por ele ao time, ao cliente e ao usuário; o commit, quem quer que digite o comando, é onde essa resposta é dada, ou, pela palavra do slot, a revisão do commit.
 
 Depois de usar a entrega, leia o diff em stage e faça o commit:
 
@@ -267,6 +267,6 @@ Então a página registrou o ajuste, nenhum caminho de escrita alcançável pelo
 * Ele marca a linha como `[*]` com a sua primeira edição, `[x]` com a última, depois do stage, e `[?]`, com o que ela espera, quando precisa parar.
 * Verde não é pronto: pronto é a lista inteira, dos documentos atualizados antes de uma revisão por um contexto que não escreveu a mudança, que lê a entrega inteira, à verificação verde depois da última edição e à linha marcada `[x]`.
 * Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, primeiro usar o que ele construiu, cada comando escrito por extenso, e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
-* Use o que foi construído como o usuário usaria, revise a mudança em stage contra a página, peça cada correção na mesma sessão, dizendo o que quer no lugar e por quê, transforme o que a página não pediu em uma linha da fila, onde o parágrafo do seu marco a põe, e então faça o commit, você mesmo ou pedindo ao agente: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
+* Use o que foi construído como o usuário usaria, revise a mudança em stage contra a página, peça cada correção na mesma sessão, dizendo o que quer no lugar e por quê, transforme o que a página não pediu em uma linha da fila, onde o parágrafo do seu marco a põe, e então faça o commit, você mesmo ou pedindo ao agente, ou revise o commit que o slot Git deixou o agente fazer: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>
