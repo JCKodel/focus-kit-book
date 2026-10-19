@@ -173,10 +173,9 @@ findings and the dependent lines this session can resolve. When branches
 are integrated, reconcile docs/06 by slug: retain every delivery and
 finding, and each owning branch's latest state. Do not replace the whole
 file with one side or downgrade a completed line using a stale copy.
-Check the page at the expected path and keep a dependency blocked until
-its completed changes are available in the branch that needs them. A
-conflicting state or scope is reported for resolution, never guessed.
-Apply the same care to shared domain terms and ADRs.
+Check the page at the expected path. A conflicting state or scope is
+reported for resolution, never guessed. Apply the same care to shared
+domain terms and ADRs.
 
 Each milestone is planned with its review as the last line (§8). Edited by
 conversation in any session.
