@@ -22,7 +22,7 @@ Com o focus-kit, um pull request carrega uma entrega:
 2. **A página primeiro.** O primeiro commit no branch é `work/<slug>.md`, escrita pelo `/propose`.
    Abra o pull request assim que ele for enviado, e a página pode ser revisada antes de existir qualquer código.
 3. **A construção depois.** O `/apply` constrói no mesmo branch; a página vai para `work/done/` e a linha da fila vira `[x]` na mesma mudança.
-4. **Um merge.** A entrega chega inteira ao branch principal, com a sua página, o seu código, os seus testes, a sua prova e a sua marca, então a fila no branch principal guarda o que já chegou; um `[~]` ou `[*]` posto em um branch só aparece nele (capítulo 14).
+4. **Um merge.** A entrega chega inteira ao branch principal, com a sua página, o seu código, os seus testes, a sua prova e a sua marca, então a fila no branch principal guarda o que já chegou; um `[~]` ou `[*]` posto em um branch está só nesse branch, onde um quadro ou uma sessão o lê (capítulo 14).
 
 O revisor lê a página, depois o diff contra ela.
 Cada linha de Comportamento tem o seu teste ou a sua checagem manual; o Contrato bate com o código até os nomes; nada listado em Fora do escopo foi construído; cada item do Pronto quando está marcado com a sua prova.
@@ -57,7 +57,7 @@ A resposta é um espelho numa só direção, da fila para o quadro.
 No Caso A, um projeto para um cliente em uma plataforma low-code, uma customização registrada no seu docs/05 fazia isso: um script e um pipeline enviavam a fila, numa só direção, ao quadro kanban do projeto no Azure DevOps, então o gerente de projeto acompanhava o progresso no portal sem perguntar a um desenvolvedor.
 O `/propose` e o `/apply` atualizavam o quadro sempre que mudavam uma marca, e avisavam sempre que não conseguiam, então um quadro desatualizado nunca ficava em silêncio.
 Um projeto dá ao seu quadro essa atualização com um slot próprio no docs/05 §5 que cita o `/propose`, o `/apply` e o comando que envia a fila, como no docs/05 da biblioteca de empréstimos do [capítulo 7](07-the-documents.md); os comandos o seguem como seguem os slots do kit, sem nenhuma edição nos seus arquivos, que a instalação do kit escreve.
-Como o envio roda dentro do comando que mudou a marca, o quadro mostra a marca na hora, na fila do branch em que a entrega está: cada envio leva só a fila desse branch, então o envio de outra entrega põe no quadro a fila do próprio branch, e as marcas se encontram quando é feito o merge.
+Como o envio roda dentro do comando que mudou a marca, o quadro mostra a marca na hora; com um branch por entrega o comando que envia lê a linha de cada slug no branch dele, então o envio de uma entrega leva também as marcas mais recentes das outras entregas.
 Com as seis marcas do kit, um espelho coloca cada cartão pela marca da sua linha, na coluna em que o [capítulo 14](14-queue-states.md) as dobra nas colunas de um quadro.
 O espelho vai numa só direção porque a fila é o único lugar que o agente lê: um cartão movido no quadro não muda nada no repositório, e uma sincronização nas duas direções criaria duas fontes da verdade.
 
@@ -84,7 +84,7 @@ O quadro do Caso A rodou em um projeto, e a sua permissão de escrita nunca foi 
 * O kit assume uma pessoa que propõe, usa e revisa, por padrão o diff em stage antes de fazer o commit, ou o commit que a palavra do slot Git deixou o agente fazer, e um time divide esses papéis como prática própria; quem no time não lê código participa do `/propose`, testa a entrega como seu usuário e pergunta a uma sessão em que pé as coisas estão ou o que uma página decidiu, e um quadro serve a quem não abre nem o repositório nem uma sessão.
 * Um pull request carrega uma entrega: um branch com o nome do slug, a página primeiro, a construção depois, um merge com a página, o código e a marca; seu revisor lê a página, depois o diff contra ela; um agente pode revisar primeiro, uma pessoa decide, e o revisor que o kit assume é, por padrão, quem faz o merge, ou, pela palavra do slot Git, a pessoa que revisa o merge que o agente fez.
 * Uma issue espelha uma linha da fila pelo slug, e a fila continua a fonte da verdade, porque o agente lê o repositório.
-* Um quadro é um espelho da fila numa só direção, atualizado, quando uma marca muda, por um slot do docs/05 que os comandos seguem, não por uma edição neles, e nunca em silêncio quando não consegue ser.
+* Um quadro é um espelho da fila numa só direção, atualizado, quando uma marca muda, por um slot do docs/05 que os comandos seguem, não por uma edição neles, nunca em silêncio quando não consegue ser, e, com um branch por entrega, lido do branch de cada slug.
 * Uma entrega de pergunta, customização do próprio Caso A, fecha na resposta, não no envio.
 
 [^gh-prs]: GitHub Docs, "Pull requests", seção "Working with pull requests", acesso em 2026-09-30. <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests>

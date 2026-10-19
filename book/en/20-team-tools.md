@@ -22,7 +22,7 @@ With focus-kit, a pull request carries one delivery:
 2. **The page first.** The first commit on the branch is `work/<slug>.md`, written by `/propose`.
    Open the pull request as soon as it is pushed, and the page can be reviewed before any code exists.
 3. **The build after.** `/apply` builds on the same branch; the page moves to `work/done/` and the queue line becomes `[x]` in the same change.
-4. **One merge.** The delivery reaches the main branch whole, with its page, its code, its tests, its proof and its mark, so the queue on the main branch holds what has landed; a `[~]` or `[*]` set on a branch shows there only (chapter 14).
+4. **One merge.** The delivery reaches the main branch whole, with its page, its code, its tests, its proof and its mark, so the queue on the main branch holds what has landed; a `[~]` or `[*]` set on a branch is on that branch only, where a board or a session reads it (chapter 14).
 
 The reviewer reads the page, then the diff against it.
 Every Behaviour line has its test or its manual check; the Contract matches the code down to the names; nothing listed in Out of scope was built; every item of Done when is ticked with its proof.
@@ -57,7 +57,7 @@ The answer is a mirror in one direction, from the queue to the board.
 On Case A, a client project on a low-code platform, a customization recorded in its docs/05 did this: a script and a pipeline pushed the queue, one way, to the project's Azure DevOps kanban board, so the project manager followed progress in the portal without asking a developer.
 `/propose` and `/apply` refreshed the board whenever they changed a mark, and said so whenever they could not, so a stale board was never silent.
 A project gives its board this refresh with a slot of its own in docs/05 §5 that names `/propose`, `/apply` and the command that pushes the queue, as in the lending library's docs/05 of [chapter 7](07-the-documents.md); the commands follow it as they follow the kit's slots, with no edit to their files, which the kit's installation writes.
-Since the push runs inside the command that changed the mark, the board shows the mark at once, in the queue of the branch the delivery is on: each push carries only that branch's queue, so another delivery's push puts its own branch's queue on the board, and the marks meet at the merge.
+Since the push runs inside the command that changed the mark, the board shows the mark at once; with a branch per delivery the command that pushes reads each slug's line from its own branch, so one delivery's push carries the other deliveries' latest marks too.
 With the kit's six marks, a mirror places each card by its line's mark, in the column where [chapter 14](14-queue-states.md) folds them onto a board's columns.
 The mirror goes one way because the queue is the only place the agent reads: a card moved on the board changes nothing in the repository, and a sync in both directions would make two sources of truth.
 
@@ -84,7 +84,7 @@ Case A's board ran on one project, and its write permission was never proven.
 * The kit assumes one person who proposes, uses and reviews, by default the staged diff before committing, or the commit the Git slot's word let the agent make, and a team splits those roles as its own practice; a teammate who does not read code takes part in `/propose`, tests the delivery as its user and asks a session where things stand or what a page decided, and a board serves those who open neither the repository nor a session.
 * A pull request carries one delivery: a branch named by the slug, the page first, the build after, one merge with the page, the code and the mark; its reviewer reads the page, then the diff against it; an agent may review first, a person decides, and the reviewer the kit assumes is, by default, whoever merges, or, by the Git slot's word, the person who reviews the merge the agent made.
 * An issue mirrors a queue line through the slug, and the queue stays the source of truth, because the agent reads the repository.
-* A board is a one-way mirror of the queue, refreshed, when a mark changes, by a slot of docs/05 that the commands follow, not by an edit to them, and never silent when it cannot be.
+* A board is a one-way mirror of the queue, refreshed, when a mark changes, by a slot of docs/05 that the commands follow, not by an edit to them, never silent when it cannot be, and, with a branch per delivery, read from each slug's own branch.
 * A question delivery, Case A's own customization, closes on the answer, not on the send.
 
 [^gh-prs]: GitHub Docs, "Pull requests", section "Working with pull requests", accessed 2026-09-30. <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests>

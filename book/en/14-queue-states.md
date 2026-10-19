@@ -57,16 +57,19 @@ The queue then says what is happening now, not what last finished.
 
 Where a mark is seen depends on where the session works (chapter 18).
 On trunk, the mark changes in the queue of the folder where the session runs, a board that reads that queue sees it at once, and it reaches the history with the person's commit.
-With a branch or a worktree per delivery, the mark lives on the delivery's branch, and a board that reads the main branch's queue sees it when that branch is merged.
-So the reason the marks change at once, a board people pull work from, is trunk's; on a branch, the early mark serves that branch's own queue until the merge.
-A project's own one-way mirror, refreshed by the commands when a mark changes, shows the mark at once, but each refresh carries the queue of the branch the command ran on.
-On a branch, the board shows the queue of the branch that refreshed it last, and the other branches' marks reach it with their own refresh or at the merge.
+With a branch or a worktree per delivery, the mark lives on the delivery's branch, and the main branch shows the line as it was until the merge.
+So whoever reads the queue, a board or a session picking free lines or resolving an `after`, takes each slug's line from its worktree, or from its branch, local or remote, adds the lines only a branch has, and reconciles them by slug, each line at its latest state, never one branch's whole file.
+The marks change at once for the same reason either way, a board people pull work from: on trunk the board reads the one queue, and with a branch or a worktree per delivery it reads each slug's line where that line lives.
+Where the line lives decides how soon a reader sees it: a worktree's file shows the mark the moment it changes, a branch once the mark is committed on it, a remote branch once that commit is pushed.
+A project's own one-way mirror, refreshed by the commands when a mark changes, shows the mark at once, and with a branch or a worktree per delivery it pushes the queue read the same way, so each refresh carries every delivery's latest mark, not its own branch's copy.
 
 ## The next line, and which run together
 
 A line is free when it is not `[x]` and not `[?]`, and every line its `after` names is `[x]` (an `[x]` that was cancelled asks the person first, below).
 In the milestone above, `lend-book`, `search-catalog` and `reservations` are free; `return-book` and `my-loans` are not, since `lend-book` is not `[x]` yet, and `due-reminder` waits.
 The next delivery is the first free line no session holds: a session is building `lend-book` and another is defining `reservations`, so a new session's next delivery is `search-catalog`.
+With a branch or a worktree per delivery, the session judges free lines and `after` from each slug's line read as the section above says, so `return-book`'s `after` reads `lend-book`'s mark on `lend-book`'s branch.
+From the main branch's copy alone, `lend-book` would read `[ ]`, free and held by no one, and the answer would name a delivery another session is building.
 When `lend-book` becomes `[x]`, `return-book` and `my-loans` are free from that moment, with nothing to clear and no mark to change; the `· after` stays on the line as the record of the order.
 A line with two orders, `· after lend-book, members`, is free only when both are `[x]`.
 
@@ -181,7 +184,7 @@ The queue also says which lines can run together: without that, a person who wan
 * A line is free when it is not `[x]` nor `[?]` and every line its `after` names is `[x]`, and when one is cancelled the person re-decides the line; the next delivery is the first free line no session holds, and free lines that touch different files can run at the same time.
 * A line whose session ended keeps its mark, and its command resumes it on the person's word, inspecting the page, the folder and the index first; a cancelled delivery ends `[x] · dropped: <reason>`, its page in `work/done/` saying what was built and undone.
 * `· after` is an order written with the line, which keeps its mark; `[?]` with `· blocked: after` is a wait found after work started; a line waits when the person says so, when an answer was asked and not given, when work already started finds another line must be done first, or when a milestone review's code reading missed part of its range, with the phase to resume and the reason at its end, `· resume: apply · blocked: after <slug>`; when the reason is resolved, both suffixes go and it returns as that phase says, `resume: propose` to `[ ]` with any draft kept, `resume: apply` to `[>]`, and until then `/propose` and `/apply` stop on it, as on a line not free.
-* The queue is a kanban board, a column per mark, a `[?]` card in Waiting until it returns to `[ ]` or `[>]`; on this chapter's three columns, Doing holds `[~]`, `[>]` and `[*]`, and a `[?]` card is tagged blocked in the column its resume phase names, To Do for `propose`, Doing for `apply`; a board that reads the queue sees a mark at once on trunk, and with a branch or a worktree per delivery when that branch is merged.
+* The queue is a kanban board, a column per mark, a `[?]` card in Waiting until it returns to `[ ]` or `[>]`; on this chapter's three columns, Doing holds `[~]`, `[>]` and `[*]`, and a `[?]` card is tagged blocked in the column its resume phase names, To Do for `propose`, Doing for `apply`; a board that reads the queue sees a mark at once on trunk, and with a branch or a worktree per delivery from each slug's own worktree or branch, since the main branch shows the line as it was until the merge.
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", accessed 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>
 [^azure-kanban]: Microsoft Learn, "About Kanban boards", Azure Boards, accessed 2026-09-30. <https://learn.microsoft.com/en-us/azure/devops/boards/boards/kanban-overview>

@@ -67,11 +67,45 @@
 
 **Done when.**
 
-* [ ] Both editions changed in the same places: chapter 14's paragraph on where a mark is seen, its next-line section, its kanban key point; chapter 20's step 4, push sentence and board key point; nowhere else.
-* [ ] No sentence left that says a board on a branch sees a mark only at the merge, that the early mark's reason is trunk's alone, or that a board shows the queue of the branch that refreshed it last.
-* [ ] Nothing reads as if a reader on trunk does anything new, or as if Case A's script read branches.
-* [ ] Both chapters still open with their value; gain sections true; no filler, nothing useful cut; one sentence per line kept.
-* [ ] No version, date, number, before and after or narration of a run; no em dash.
-* [ ] No number added, so none to source; no private case newly used, so no approval needed.
-* [ ] `make verify` green; `make book` builds both editions, and both PDF paths reported.
-* [ ] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions changed in the same places: chapter 14's paragraph on where a mark is seen, its next-line section, its kanban key point; chapter 20's step 4, push sentence and board key point; nowhere else.
+* [x] No sentence left that says a board on a branch sees a mark only at the merge, that the early mark's reason is trunk's alone, or that a board shows the queue of the branch that refreshed it last.
+* [x] Nothing reads as if a reader on trunk does anything new, or as if Case A's script read branches.
+* [x] Both chapters still open with their value; gain sections true; no filler, nothing useful cut; one sentence per line kept.
+* [x] No version, date, number, before and after or narration of a run; no em dash.
+* [x] No number added, so none to source; no private case newly used, so no approval needed.
+* [x] `make verify` green; `make book` builds both editions, and both PDF paths reported.
+* [x] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+
+**Proof.**
+
+* `git diff -U0 HEAD` of chapter 14, each edition: three hunks. The paragraph on where a mark is seen keeps its first two lines and its four replaced lines become five (en 60-64, pt 61-65); the next-line section gains two lines after the `search-catalog` (`buscar-catalogo`) sentence (en 72-73, pt 73-74); the kanban key point changes its last clause (en 187, pt 188).
+* `git diff -U0 HEAD` of chapter 20, each edition: three hunks, step 4 (line 25), the push sentence (line 60) and the board key point (line 87), same lines in both editions.
+* `grep` of both editions finds no "refreshed it last", "when that branch is merged", "meet at the merge", "shows there only" or "is trunk's"; chapter 18 line 25 and chapter 19's free-line pointer still land on true text.
+* No em dash, number, footnote, case, version or date added.
+* `make verify` green after the review's fixes (an earlier run timed out on an external site's links in chapters 2 to 5 and 9, not this delivery's files; the rerun passed). `make book` is run once by the driver for the batch, so this lane reports no PDF paths.
+* Staging and the commit are the driver's in this batch.
+
+**Divergences.**
+
+* The paragraph on where a mark is seen holds five new lines for the four it replaces: the reason and the visibility clause are two sentences, since one would run past sixty words.
+* Chapter 20's board key point puts the new clause last ("never silent when it cannot be, and, with a branch per delivery, read from each slug's own branch"): placed before "never silent", it made "cannot be" read as "cannot be read". The words of the rest are unchanged.
+* Done when's `make book` item is the driver's in this batch.
+
+**Delivery review.** A read-only Opus agent read this delivery's hunks against this page, docs/04, docs/03 and docs/05 §4: no blocking finding, coverage and parity complete, no leftover claim, nothing reading as Case A's script. Fixed: chapter 20's key point order (above); chapter 14's "it reads" became "the board reads" (pt "o quadro lê"); Portuguese wording, "que a tenha pegado", "nos dois casos", "em quanto tempo quem lê vê a marca", "de cada entrega". Not changed, with reason: a session picking free lines is not named in a key point, since this page decides the kanban bullet carries the reading and its wording mirrors docs/03's `kanban board`; chapter 20's "the other deliveries' latest marks" keeps no visibility limit of its own, since the next sentence links chapter 14, which states it. Noted for the driver, not changed (Out of scope): chapter 7's lending library Board slot and FACE in chapter 14 read docs/06, true on trunk.
+
+**Decisions taken alone in /apply.**
+
+* The reason and the visibility clause are two lines in each edition, not one.
+* Chapter 14's next-line section uses two sentences: one says how `return-book`'s `after` is read, the other what the main branch's copy alone would answer.
+* No private case passage is added or changed; the Case A passages of chapters 14 and 20 are untouched.
+
+```commit
+docs(ch14-20-read-branches): read each slug's line from its branch
+
+- ch14: a board or session reads each slug's line from its own branch
+- ch14: a worktree shows a mark at once, a branch once committed, pushed
+- ch14: the next delivery judged from each branch, not main's copy
+- ch20: a board push reads each branch; step 4 and key point follow
+
+work/done/ch14-20-read-branches.md
+```
