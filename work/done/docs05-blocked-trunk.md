@@ -47,6 +47,24 @@ The next two sentences, "On a delivery branch or worktree, ..." to "... one merg
 
 **Done when.**
 
-* [ ] docs/05 §6 reads as the Contract, and every Behaviour line holds.
-* [ ] `make verify` green after the last edit.
-* [ ] The page is in `work/done/` and the line is `[x]`.
+* [x] docs/05 §6 reads as the Contract, and every Behaviour line holds.
+* [x] `make verify` green after the last edit.
+* [x] The page is in `work/done/` and the line is `[x]`.
+
+**Divergences.** None: docs/05 §6 reads as the Contract, word for word; the delivery-branch sentences are unchanged.
+
+**Proof.** `grep -rn "branch/worktree" book docs .claude` finds nothing; §6's stop-and-report rule for shared lines (line 281) is the one the new paragraph points to; `make verify` green after the last edit.
+
+**Delivery review:** skipped on the author's word (2026-10-19).
+
+**Open questions taken alone.** None left open by the page.
+
+```commit
+docs(docs05-blocked-trunk): keep blocked trunk work in the tree
+
+- docs/05 §6: a prerequisite becomes a [ ] line above, this one waits [?]
+- the partial work stays uncommitted and out of the index, no worktree
+- shared lines: the prerequisite's session stops and reports
+
+work/done/docs05-blocked-trunk.md
+```

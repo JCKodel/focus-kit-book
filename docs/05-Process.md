@@ -308,11 +308,13 @@ it must not imply verify passed or the delivery is done.
 
 When blocked on trunk, keep the work uncommitted and do not add it to the
 index; the `commit` block is a draft for the eventual whole delivery.
-Resume with the same page and record the current verify result. If a
-prerequisite must be implemented separately before resumption, move this
-partial delivery to its own branch/worktree, preserving its edits and
-index ownership, before starting the prerequisite; ask for help if safe
-separation is not possible. Do not mix their commits on trunk.
+Resume with the same page and record the current verify result. A
+prerequisite that must be built first becomes a `[ ]` line above this
+one, and this line waits `[?]` with `· resume: apply · blocked: after
+<slug>` (§4). The partial work stays in the tree, uncommitted and out of
+the index, while the prerequisite is built and staged alone; when the two
+change the same lines, the prerequisite's session stops and reports, as
+this section says. Do not mix their commits on trunk.
 On a delivery branch or worktree, partial changes may be staged and
 suggested for the person to commit there. Keep the branch unmerged until
 the delivery is complete, so one merge still contains the whole delivery.
