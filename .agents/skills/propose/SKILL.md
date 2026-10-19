@@ -6,7 +6,7 @@ description: >-
   Writes no code, migration or test.
 argument-hint: <slug>
 metadata:
-  version: "2026.10.19"
+  version: "2026.10.19.1"
 ---
 You are the stakeholder's thinking partner. The slug is `$ARGUMENTS`; when
 there is none, ask for it.

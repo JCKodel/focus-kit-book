@@ -50,3 +50,7 @@ A resolved wait returns by its suffix alone, `resume: propose` to `[ ]` with its
 ## Amendment, 2026-10-19 (kit-2026-10-19)
 
 Since `kit-2026-10-19` the book runs focus-kit 2026.10.19; the six marks are unchanged, and docs/05 §4 says where a board sees a mark: on trunk at once, with a branch or a worktree per delivery when that branch is merged.
+
+## Amendment, 2026-10-19 (kit-2026-10-19-1)
+
+Since `kit-2026-10-19-1` the book runs focus-kit 2026.10.19.1; the six marks are unchanged, and with a branch or a worktree per delivery a mark is read from the slug's own branch or worktree, the main branch showing the line as it was until the merge (docs/05 §4).

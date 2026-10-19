@@ -116,10 +116,13 @@ queue shows what is happening while it happens:
 
 A board may read the queue, and people pull work from it, so a mark
 changes at once: `[~]` is /propose's first edit, `[*]` is /apply's first,
-and `[x]` is /apply's last. On trunk the board sees it at once; with a
-branch or a worktree per delivery the mark lives on the delivery's
-branch and the board sees it when that branch is merged. Without a board
-the marks cost nothing.
+and `[x]` is /apply's last. On trunk the board sees it at once. With a
+branch or a worktree per delivery the mark lives on the delivery's branch
+and the main branch shows the line as it was until the merge, so whoever
+reads the queue there, a board or a session picking free lines or
+resolving an `after`, takes each slug's line from its worktree's file,
+or from its branch, local or remote, and the lines only a branch has,
+reconciled by slug as below. Without a board the marks cost nothing.
 
 A line waits in four cases: the person says it is blocked; it needs an
 answer that was asked and not given; work already started finds it needs
@@ -148,9 +151,11 @@ end of the line, its page in `work/done/` saying what was built and
 undone; a line whose `after` names it is the person's to re-decide.
 These are the marks of focus-kit 2026.10.05, the fourth case a line
 waits in is that of 2026.10.18, and the ended and dropped lines are
-those of 2026.10.18.1, and where a board sees a mark is that of
-2026.10.19 (ADR-0018 and its amendments `kit-2026-10-18`,
-`kit-2026-10-18-1` and `kit-2026-10-19`).
+those of 2026.10.18.1, where a board sees a mark is that of
+2026.10.19, and how the queue is read with a branch or a worktree per
+delivery is that of 2026.10.19.1 (ADR-0018 and its amendments
+`kit-2026-10-18`, `kit-2026-10-18-1`, `kit-2026-10-19` and
+`kit-2026-10-19-1`).
 
 Two sessions in one working tree, on free lines that touch different
 files, are the normal case of parallel work on trunk. Another line

@@ -274,10 +274,13 @@ queue shows what is happening while it happens:
 
 A board may read the queue, and people pull work from it, so a mark
 changes at once: `[~]` is /propose's first edit, `[*]` is /apply's first,
-and `[x]` is /apply's last. On trunk the board sees it at once; with a
-branch or a worktree per delivery the mark lives on the delivery's
-branch and the board sees it when that branch is merged. Without a board
-the marks cost nothing.
+and `[x]` is /apply's last. On trunk the board sees it at once. With a
+branch or a worktree per delivery the mark lives on the delivery's branch
+and the main branch shows the line as it was until the merge, so whoever
+reads the queue there, a board or a session picking free lines or
+resolving an `after`, takes each slug's line from its worktree's file,
+or from its branch, local or remote, and the lines only a branch has,
+reconciled by slug as below. Without a board the marks cost nothing.
 
 A line waits when the person says it is blocked, when it needs an answer
 that was asked and not given, or when work already started finds it needs
