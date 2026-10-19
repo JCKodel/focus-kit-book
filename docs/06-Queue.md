@@ -499,7 +499,7 @@ When this milestone closes, every technical claim the audit of 2026-10-18 found 
 [x] ch01-recovery-not-immunity chapter 1: a decision in a file survives compaction as something to reread, not as text kept in every call; reopen the page and documents after compaction or resumption; both editions
 [>] ch24-protocol-phase      chapter 24: in which phase the protocol runs; after /apply's first result, what already satisfies the page goes in and a new capability becomes a line; both editions
 [x] ch22-cost-method         chapter 22 preserves historical token totals with their unrecovered coverage limits, removes unmatched per-delivery averages, and explains the growing whole-queue input; both editions
-[>] ch16-prevention-evidence chapter 16: an error documented in another project may justify prevention, with evidence and a proportionate cost; both editions
+[x] ch16-prevention-evidence chapter 16: an error documented in another project may justify prevention, with evidence and a proportionate cost; both editions
 [x] ch14-blocked-column      chapter 14: a blocked line returns to `[ ]` or `[>]` as docs/05 §4 says, so the board shows it there and keeps no memory of a column; both editions · after ch14-back-to-open
 [x] verify-examples          `make verify` runs the executable examples extracted from the chapters, starting with chapter 3's `query` · after ch03-query-catch
 [ ] ch04-remove-slice        chapter 4: removing a feature removes its folder and the imports other slices hold of it, as the member's page importing from loans/ shows; both editions

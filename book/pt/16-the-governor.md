@@ -1,6 +1,6 @@
 # 16. O regulador
 
-Depois deste capítulo você consegue perguntar a tudo o que quer entrar no seu processo, e a cada passo que já está nele, que erro concreto ele teria pegado, e aceitar só uma resposta que nomeie um erro que aconteceu.
+Depois deste capítulo você consegue perguntar a tudo o que quer entrar no seu processo, e a cada passo que já está nele, que erro concreto ele teria pegado, e aceitar só uma resposta que nomeie um erro que aconteceu, no seu projeto ou em outro cujo registro você consegue abrir e cujas condições o seu compartilha, a um custo que esse erro justifica.
 Você também consegue listar o que o processo não tem, dizer o que faz cada um desses trabalhos no lugar, e dizer por que os leitores das revisões, agentes somente leitura, e o seu conferente são o único subagente especializado que ele admite.
 
 ## O problema
@@ -17,7 +17,9 @@ Este livro chama essa pergunta de regulador, a partir da peça que impede um mot
 
 A resposta precisa nomear um erro que aconteceu, porque um erro possível justifica qualquer coisa: algum erro é sempre possível.
 Um erro que aconteceu é um fato que você consegue conferir, no histórico, em uma página ou em um achado.
-E o custo que ele precisa superar é pago por toda entrega depois dele.
+Ele não precisa ter acontecido com você: um erro que outro projeto documentou conta quando você consegue abrir o registro dele, mostrar que as condições que o produziram existem no seu projeto e dizer o que a verificação pegaria.
+Um risco que ninguém registrou continua reprovando, e um erro real cujas condições o seu projeto não tem não justifica nenhum passo permanente.
+E o custo que ele precisa superar é pago por toda entrega depois dele, que roda a verificação, e pelo time, que a mantém funcionando: um erro relevante compra a menor verificação que o pega, não qualquer verificação.
 
 ## Funciona nos dois sentidos
 
@@ -69,14 +71,21 @@ A exceção não abre mais nada: um subagente planejador, construtor ou corretor
 
 ## O erro que rendeu uma marca
 
-A pergunta é feita em cada projeto, e o regulador decide ali, com um erro que aquele projeto encontrou.
+A pergunta é feita em cada projeto, e o regulador decide ali; o erro que ele aceita pode vir daquele projeto ou do registro de outro.
 No Caso A, um projeto para um cliente em uma plataforma low-code, linhas esperando as respostas do cliente pareciam trabalho parado no seu quadro, e foi esse erro que deixou entrar a marca que o projeto acrescentou à mão, `[?]` (o [capítulo 14](14-queue-states.md) conta a história).
+Esse erro aconteceu no Caso A, e é dali que a marca veio, não um pedágio que todo time paga: um time cujas linhas também esperam alguém de fora tem o erro documentado no capítulo 14 e pode acrescentar o `[?]` antes que o seu próprio quadro o engane.
+
+O primeiro erro dos leitores, acima, funciona do mesmo jeito para um time que constrói as suas próprias verificações.
+O registro que a entrada dos leitores cita é público, e diz por que os arquivos sumiam: a listagem pedia os nomes ao `git ls-files` sem `-z`, e sem ele o git põe entre aspas um nome que tem uma letra fora do ASCII, então o arquivo era pulado.
+Se as suas verificações listam os arquivos do repositório do mesmo jeito, e os seus arquivos podem ter nomes assim, como os de um time que escreve em português podem ter, as condições são suas, e a verificação é pequena: listar com `-z`, e provar uma vez que um arquivo chamado `café.md` chega a toda verificação.
+Se as suas verificações nunca listam arquivos, ou os seus nomes são todos ASCII, o mesmo registro é real e não justifica nada no seu projeto.
+E se a única verificação que o pegasse fosse alguém lendo todo nome de arquivo antes de cada commit, o erro continuaria relevante e a verificação ficaria de fora, porque toda entrega pagaria por ela à mão.
 
 ## O que o time ganha
 
 Cada passo de um processo é pago por toda entrega, então um passo que não pega nada é um imposto sobre todas elas.
 O Ninjobs chegou à abertura ao público com um processo de seis regras, as que o `SETUP.md` do kit lista para todo projeto, e duas verificações, depois de as verificações antigas o terem acompanhado por quinze dias que construíram quatro telas.
-O regulador mantém um processo desse tamanho, e deixa um time dizer sim a um passo com o erro que o justifica escrito.
+O regulador mantém um processo desse tamanho, e deixa um time dizer sim a um passo com o erro que o justifica escrito, o seu ou um que outro projeto documentou onde valem as mesmas condições, sem pagar por esse erro antes.
 A única exceção traz os erros que a justificam, então o time a confere do jeito que confere qualquer passo, e os leitores ficam no trabalho que esses erros lhes deram.
 
 ## Pontos-chave
@@ -85,7 +94,7 @@ A única exceção traz os erros que a justificam, então o time a confere do je
 * A resposta nomeia um erro que aconteceu; um erro possível justifica qualquer coisa, e cada passo é pago por toda entrega depois dele.
 * Um passo que não nomeia erro nenhum sai, e uma lista de exceções reprova em uma entrada sem um aviso vivo.
 * Cada uma das oito coisas que o processo não tem tem o seu trabalho feito por algo que ele tem: a página, os documentos, as linhas de Comportamento, a pessoa, o commit da pessoa, um agente só, e o próprio regulador; os leitores e o conferente das revisões são o único subagente especializado que ele admite, cada um com um erro que aconteceu.
-* O regulador decide em cada projeto, com um erro que aquele projeto encontrou: o `[?]` do Caso A entrou porque linhas em espera pareciam trabalho parado.
+* O regulador decide em cada projeto, com um erro que aconteceu ali ou um que outro projeto documentou cujas condições ele compartilha, e compra a menor verificação que o pega: o `[?]` do Caso A entrou porque linhas em espera pareciam trabalho parado, e um time cujas linhas esperam alguém de fora pode acrescentá-lo sem esse erro antes.
 
 [^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>
 [^claude-code-subagents]: Anthropic, "Create custom subagents", documentação do Claude Code, acesso em 2026-09-29. <https://code.claude.com/docs/en/sub-agents>

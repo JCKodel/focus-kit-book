@@ -1,6 +1,6 @@
 # 16. The governor
 
-After this chapter you can ask of anything that wants to enter your process, and of every step already in it, which concrete error it would have caught, and accept only an answer that names an error that happened.
+After this chapter you can ask of anything that wants to enter your process, and of every step already in it, which concrete error it would have caught, and accept only an answer that names an error that happened, in your project or in another one whose record you can open and whose conditions yours shares, at a cost that error justifies.
 You can also list what the process does not have, say what does each of those jobs instead, and say why the reviews' read-only readers and their checker are the one specialized subagent it admits.
 
 ## The problem
@@ -17,7 +17,9 @@ This book calls that question the governor, after the part that keeps an engine 
 
 The answer has to name an error that happened, because a possible error justifies anything: some error is always possible.
 An error that happened is a fact you can check, in the history, on a page or in a finding.
-And the cost it must outweigh is paid by every delivery after it.
+It does not have to have happened to you: an error another project documented counts when you can open its record, show that the conditions that produced it exist in your project, and say what the check would catch.
+A risk nobody recorded still fails, and a real error whose conditions your project lacks justifies no permanent step.
+And the cost it must outweigh is paid by every delivery after it, which runs the check, and by the team, which keeps it working: a relevant error buys the smallest check that catches it, not any check.
 
 ## It works both ways
 
@@ -69,14 +71,21 @@ The exception opens nothing else: a planner, a builder or a fixer subagent still
 
 ## The error that earned a mark
 
-The question is asked in each project, and the governor decides there, with an error that project met.
+The question is asked in each project, and the governor decides there; the error it accepts may come from that project or from another one's record.
 On Case A, a client project on a low-code platform, lines waiting on the client's answers read as idle work on its board, and that error is what let in the mark the project added by hand, `[?]` ([chapter 14](14-queue-states.md) tells the story).
+That error happened on Case A, and that is where the mark came from, not a toll every team pays: a team whose lines also wait on someone outside it has the error documented in chapter 14 and can add `[?]` before its own board misleads it.
+
+The readers' first error above works the same way for a team that builds its own checks.
+The record the readers' entry cites is public, and it says why the files vanished: the listing asked `git ls-files` for names without `-z`, and without it git quotes a name that holds a non-ASCII letter, so the file was skipped.
+If your checks list the repository's files the same way, and your files can carry such names, as a team that writes in Portuguese may, the conditions are yours, and the check is small: list with `-z`, and prove once that a file named `café.md` reaches every check.
+If your checks never list files, or your names are all ASCII, the same record is real and justifies nothing in your project.
+And had the only check that caught it been someone reading every file name before each commit, the error would still be relevant and the check would still stay out, because every delivery would pay for it by hand.
 
 ## What the team gains
 
 Every step of a process is paid by every delivery, so a step that catches nothing is a tax on all of them.
 Ninjobs reached its public opening on a process of six rules, the ones the kit's `SETUP.md` lists for every project, and two checks, after the old checks had gone with it through fifteen days that built four screens.
-The governor keeps a process that small, and it lets a team say yes to a step with the error that justifies it written down.
+The governor keeps a process that small, and it lets a team say yes to a step with the error that justifies it written down, its own or one another project documented where the same conditions hold, without paying for that error first.
 The one exception carries the errors that justify it, so the team checks it the way it checks any step, and the readers stay on the job those errors gave them.
 
 ## Key points
@@ -85,7 +94,7 @@ The one exception carries the errors that justify it, so the team checks it the 
 * The answer names an error that happened; a possible error justifies anything, and every step is paid by every delivery after it.
 * A step that names no error leaves, and a list of exceptions fails on an entry with no live warning.
 * Each of the eight things the process does not have has its job done by something it has: the page, the documents, the Behaviour lines, the person, the person's commit, one agent, and the governor itself; the reviews' readers and checker are the one specialized subagent it admits, each on an error that happened.
-* The governor decides in each project, with an error that project met: Case A's `[?]` entered because waiting lines read as idle work.
+* The governor decides in each project, with an error that happened there or one another project documented whose conditions it shares, and buys the smallest check that catches it: Case A's `[?]` entered because waiting lines read as idle work, and a team whose lines wait on someone outside it can add it without that error first.
 
 [^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>
 [^claude-code-subagents]: Anthropic, "Create custom subagents", Claude Code documentation, accessed 2026-09-29. <https://code.claude.com/docs/en/sub-agents>
