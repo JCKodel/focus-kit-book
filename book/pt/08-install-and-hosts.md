@@ -40,8 +40,10 @@ Um `GEMINI.md` que já guarda o texto do próprio projeto o mantém; o kit só a
 
 Para atualizar o kit, diga a mesma frase de novo.
 O agente escreve os arquivos do kit como o arquivo de setup os guarda agora, e a mudança que você revisa é só do kit, sem nada do seu projeto.
-Ele substitui um arquivo só quando esse arquivo é um que o kit entregou, nesta versão ou numa anterior.
-Um comando seu na pasta de um host, ou uma edição que você fez à mão num dos arquivos do kit, o `.claude/skills/apply/SKILL.md`, por exemplo, faz a atualização parar antes de escrever qualquer arquivo: o agente mostra o diff contra o arquivo do kit, e você decide se fica com o seu ou o substitui.
+Ele substitui um arquivo só quando esse arquivo é igual a um que o kit entregou, nesta versão ou numa anterior, e a anterior se confirma pelo histórico do kit, `git show <commit>:SETUP.md` no repositório dele, ou, sem esse histórico à mão, pela sua palavra de que o arquivo nunca foi editado; um nome conhecido ou uma linha `metadata.version` sozinhos não provam isso.
+Um comando seu na pasta de um host, ou uma edição que você fez à mão num dos arquivos do kit, uma linha que você acrescentou ao `.claude/skills/propose/SKILL.md`, por exemplo, faz a atualização parar antes de escrever ou remover qualquer arquivo.
+O agente mostra a sua edição como um diff contra o arquivo do kit em que ela foi feita, e a mudança do próprio kit nesse arquivo desde então à parte e resumida; ele ainda relata as migrações e o próximo comando, e você decide se fica com a sua edição ou a substitui, sabendo que uma regra que a sua edição acrescentou a um comando pode virar um slot do docs/05 §5, que os comandos seguem (capítulo 7).
+Essa verificação foi testada numa cópia dos arquivos do kit do livro, feita fora do repositório do livro: uma linha acrescentada ao `propose/SKILL.md` parou assim a atualização para o focus-kit 2026.10.19, e todos os arquivos da cópia ficaram iguais depois.
 
 ## O que uma atualização relata
 
@@ -51,49 +53,53 @@ Ele compara os arquivos com os seus próprios modelos e relata cada migração, 
 Uma migração pode citar uma regra, uma linha da fila ou um slot.
 As suas escolhas ficam: um docs/05 cujo §5 diz "trunk, uma sessão por vez" vê proposto o texto para duas sessões numa pasta, e mantém o seu até o time aceitar a mudança.
 
-Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.18.1 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro são em inglês, e o relatório propôs o texto em inglês. O registro dessa atualização é o `work/done/kit-2026-10-18-1.md`, no repositório do livro.
+Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.19 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro são em inglês, e o relatório propôs o texto em inglês. O registro dessa atualização é o `work/done/kit-2026-10-19.md`, no repositório do livro.
 
 ```
-Instalado: focus-kit 2026.10.18.1, em cada SKILL.md.
-Migrações de processo pendentes, encurtadas a três:
+Instalado: focus-kit 2026.10.19, em cada SKILL.md.
+Migrações de processo pendentes, por documento e seção, encurtadas:
 
-1. docs/05, §5 Verify. O slot cita o make verify e as suas
-   verificações e diz "Verde antes de qualquer coisa ser dada por
-   feita." Proposto: acrescentar que a verificação é rápida o
-   bastante para rodar em toda entrega, e "Testes lentos: nenhum";
-   as verificações ficam como estão.
-2. docs/05, §5 Delivery review. O slot lê o git diff e o
-   git diff --cached dos caminhos da entrega, e os arquivos que ela
-   criou. Proposto: o git diff HEAD dos caminhos da entrega, em
-   stage e fora dele, os commits que uma entrega travada já fez no
-   seu branch, e os arquivos que ela criou; o revisor continua o que
-   o slot cita.
-3. docs/05, §5 Git. O slot diz "O agente põe em stage; nunca faz
-   commit nem merge." Proposto: reverter uma entrega desfaz o que o
-   git guarda, uma entrega que age fora do git diz no seu Done when
-   como isso se desfaz, e o agente nunca faz commit nem merge por
-   conta própria; quando pedido, dá o passo que a pessoa cita. O
-   trunk fica.
+* docs/05, números de seção: batem com o modelo (§4 a fila,
+  §5 os slots, §6 commit, §8 fechar um marco). Nenhuma.
+* docs/05 §4, onde um quadro vê uma marca: falta. Proposto, depois
+  de "e o [x] é a última do /apply.": "Em trunk o quadro a vê na
+  hora; com um branch ou um worktree por entrega a marca mora no
+  branch da entrega e o quadro a vê quando esse branch é
+  integrado."
+* docs/05 §5, Milestone review: uma escolha do projeto, não uma
+  migração, registrada em 2026-10-17. O kit diz que o slot cita
+  quem lê, a revisão profunda do host sobre o intervalo ou os
+  leitores do kit por área; este projeto escolheu os leitores do
+  kit.
+* docs/05 §6, o índice único: falta. Proposto, depois de "em stage
+  ou não.": "Uma árvore de trabalho tem um índice, então quando a
+  segunda sessão já pôs em stage, a pessoa tira os caminhos dela
+  com git restore --staged <caminhos>, faz o commit da primeira, e
+  os põe em stage de novo."
 
-Os outros itens vão para o docs/05 §§2, 4, 6 e 8, o slot Milestone
-review do §5, o docs/04 e duas linhas do AGENTS.md.
-docs/ e AGENTS.md não foram alterados.
+Os outros itens cobrem o docs/05 §§2, 3, 5, 7 e 8, o docs/04, o
+docs/06 e o AGENTS.md.
+Próximo: /propose ch08-update-2026-10-19, a primeira linha livre da
+fila.
 ```
 
-Todo item cita o documento, a seção, a regra que ele guarda hoje e o texto proposto no lugar dela.
-O item 1 mantém a verificação como está e diz que ela continua rápida: um teste lento demais para rodar em toda entrega vai com os testes lentos, que a revisão de marco roda, e o repositório do livro não tem nenhum.
-O item 2 faz a revisão ler a entrega inteira contra o último commit: o `git diff` mostra o que não está em stage, o `git diff --cached` o que está, e o `git diff HEAD` os dois de uma vez; os commits que uma entrega travada já fez no seu branch também são lidos, e os arquivos criados à parte, porque um arquivo novo é não rastreado, um que o git ainda não guarda, e nenhum diff o mostra até ele entrar em stage.
-O item 3 diz o que um revert desfaz, o que o git guarda e não um banco migrado ou uma mensagem enviada, e deixa o agente fazer o commit quando a pessoa pede.
-Aplicá-los mantém as escolhas do time: a verificação continua `make verify` com as suas verificações, o revisor continua o que o slot cita, e o Git continua trunk.
+Cada item cita um documento e uma seção, e termina num de três resultados.
+Ele bate e não precisa de nada, e diz isso: `Nenhuma`.
+Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra, como no §4 e no §6.
+Ou ele difere por uma escolha que o projeto fez e registrou com uma data ou um ADR, como o slot Milestone review do livro: o item cita essa escolha e o que o kit diz ao lado dela, e não pede mudança.
+Todo item é relatado, nunca feito: a atualização não escreve nenhum desses documentos.
 
-O relatório lista só o que os documentos ainda não têm, ou diz que não há nada.
-O docs/05 §8 do livro já cita como base da revisão de marco o commit da revisão do marco anterior, não um commit posterior que fechou um marco, uma regra que veio com o focus-kit 2026.10.18 ([capítulo 15](15-closing-a-milestone.md)); a 2026.10.18.1 a mantém, então o seu relatório não pede nada sobre a base, e o seu item para o §8 acrescenta que o intervalo termina no commit em que a leitura começou, e que a revisão roda os testes lentos que o slot Verify cita.
+Os números de seção vêm primeiro porque os comandos citam o docs/05 pelos números do modelo, o §4 para a fila, o §6 para o commit, e leem pelo número; um docs/05 numerado de outro jeito mandaria cada comando para a seção errada, então essa migração vem antes de qualquer outra, diga o que disser um ADR.
+Aplicar as migrações mantém as escolhas do time: a verificação continua `make verify` com as suas verificações, o revisor continua o que o slot cita, o Git continua trunk, e o Milestone review continua com os leitores do kit.
+
+O relatório lista só o que os documentos ainda não têm, ou diz que não há nada; ele compara os documentos com os modelos atuais, nunca uma versão do kit com outra.
 
 A versão do kit é o `metadata.version` em cada `SKILL.md`; o processo é o que o docs/04, o docs/05 e o `AGENTS.md` dizem, porque todo comando os lê, então um kit atualizado cujas migrações não foram aplicadas ainda roda o processo antigo.
 A atualização termina quando as migrações são aplicadas, como qualquer mudança: uma linha da fila, definida com o `/propose` e construída com o `/apply`, para que a mudança nas suas regras ou na sua fila tenha uma página, verificação e a sua revisão.
 
 Num projeto já documentado, a atualização relata as migrações primeiro, ou diz que não há nenhuma.
 Ela nunca pede que você rode o `/brainstorm` ou o `/analyze` de novo: eles escrevem os documentos de um projeto do zero, e os seus existem.
+Ela cita em vez disso o comando que a primeira linha livre do docs/06 pede, na forma do seu host: o `/propose` e o seu slug para uma linha `[ ]`, o `/apply` e o seu slug para uma `[>]`.
 Uma versão que não pede nada aos seus documentos não relata migração: uma versão que muda só os comandos, como o `/apply` mostrar a sua mensagem de commit também na conversa, não muda mais nada.
 Um docs/05 cujo slot Git escolheu um worktree por entrega e não cita pasta recebe uma migração só quando o projeto já trabalha num contêiner, a pasta que o [capítulo 19](19-worktrees.md) organiza com o checkout e uma pasta oculta para o histórico e os worktrees, e essa pasta oculta guarda `repo.git/`.
 O relatório então propõe escrever ali o nome dessa pasta e o prefixo que os branches das entregas já usam, para que nada mude de lugar.
@@ -102,7 +108,7 @@ Sem contêiner ainda, o slot vale o padrão do kit, que esse capítulo cita, e o
 Para saber por que uma migração existe, leia o changelog do kit, `CHANGELOG.md` no repositório dele, `CHANGELOG.pt.md` em português.
 Ele tem uma entrada por versão, a mais nova primeiro; a versão é a linha `Version:` do `SETUP.md`, o mesmo valor do `metadata.version` em cada `SKILL.md`.
 Cada entrada diz o que mudou e o problema que causou a mudança, e uma entrada pode trazer um item que começa com `Migration:` (no changelog em português, `Migração:`), citando o que mudar nos documentos do projeto.
-O que uma nova execução compara é o próprio passo do arquivo de setup, que cita as seções do docs/05, os slots e as linhas do `AGENTS.md` que confere; o relatório lista só o que os seus documentos ainda não têm.
+O que uma nova execução compara é o próprio passo 4 do arquivo de setup, uma lista por documento e seção, que cita as seções do docs/05, os slots e as linhas do `AGENTS.md` que confere; cada item é relatado, nunca feito, e o relatório lista só o que os seus documentos ainda não têm.
 
 ## Como cada host encontra os comandos
 
@@ -131,6 +137,7 @@ O Codex pode rodar uma skill por conta própria quando uma mensagem bate com a d
 As skills do Claude Code levam `disable-model-invocation: true`, que impede o Claude de rodar uma por conta própria: uma mensagem que bate com a descrição de uma skill não basta, e o comando só roda quando você o nomeia.[^claude-code-skills]
 Nos outros hosts, invoque os comandos você mesmo; o kit não afirma que cada host garanta o mesmo.
 Para o Cursor e o Devin Desktop, nenhum dos dois fornecedores diz na documentação se um slug digitado depois de um comando chega até ele, então nomeie a entrega na sua mensagem se não chegar.
+O Copilot lê as duas pastas de skills, e a sua referência da CLI diz o que acontece com uma skill de mesmo nome nas duas: `.agents/skills/` vem antes de `.claude/skills/` e a primeira encontrada vence; o kit escreve o mesmo arquivo nas duas, então qualquer das cópias é o mesmo comando.[^copilot-cli-reference]
 O Devin Desktop também lê `.windsurf/skills/`, a pasta do seu nome anterior;[^devin-skills] o arquivo de setup não escreve nada ali e, numa atualização, remove dela os arquivos do próprio kit, para que o host nunca encontre uma cópia mais velha de um comando ao lado da atual em `.agents/skills/`, e um arquivo seu ali é relatado e mantido.
 
 Todo comando termina dizendo o próximo, escrito como o host que o roda o invoca, a última coluna da tabela.
@@ -159,15 +166,16 @@ Um repositório abre pronto em qualquer host, então cada pessoa fica com o host
 
 Uma atualização nunca reescreve as regras que o time escreveu.
 Uma versão que pede uma mudança nos documentos do projeto chega ao projeto como uma lista do que mudar e onde, com as regras do próprio time ainda no lugar, e o time a aplica como aplica qualquer mudança.
+Uma edição que o time fez num arquivo do kit aparece à parte da mudança do próprio kit, então o time sabe qual é qual, e uma escolha que ele registrou é relatada como dele.
 
 E o próximo comando chega na forma que o seu host reconhece, porque um host pode não reconhecer a forma de outro: o Codex não reconhece `/propose`, já que o Codex invoca skills com `$`.
 
 ## Pontos-chave
 
-* Uma frase para o seu agente instala o focus-kit, e a mesma frase o atualiza; nada é instalado na sua máquina, nada é colocado em stage nem vai para um commit, e um arquivo do kit que você mudou faz a atualização parar antes de escrever.
-* O arquivo de setup escreve só os arquivos do kit e nunca toca `docs/`, `work/`, `AGENTS.md` ou `CLAUDE.md`; uma mudança de que o docs/04, o docs/05, o docs/06 ou o `AGENTS.md` precisa, uma regra, uma linha da fila ou um slot, vem como uma migração no relatório dele, e até o time aplicá-la como uma entrega o processo é o antigo.
+* Uma frase para o seu agente instala o focus-kit, e a mesma frase o atualiza; nada é instalado na sua máquina, nada é colocado em stage nem vai para um commit, e um arquivo do kit que você mudou faz a atualização parar antes de escrever, com a sua edição mostrada como um diff contra o arquivo do kit em que ela foi feita.
+* O arquivo de setup escreve só os arquivos do kit e nunca toca `docs/`, `work/`, `AGENTS.md` ou `CLAUDE.md`; uma mudança de que o docs/04, o docs/05, o docs/06 ou o `AGENTS.md` precisa, uma regra, uma linha da fila ou um slot, vem como uma migração no relatório dele, uma lista por documento e seção em que uma escolha que o projeto registrou é relatada como essa escolha, e até o time aplicá-la como uma entrega o processo é o antigo.
 * O changelog do kit, a entrada mais nova primeiro, diz para cada versão o que mudou, o problema que causou a mudança e, num item que começa com `Migração:`, quando a entrada tem um, o que mudar nos documentos do projeto.
-* Cada host encontra as regras e os comandos nas suas próprias pastas: o Claude Code roda um comando como `/propose <slug>`, o Codex como `$propose <slug>`, o Copilot como `/propose`, que pede o slug, o Devin Desktop como `/propose`, e Jules, Junie, Warp, Kiro, Roo Code e Cline pedindo em palavras o arquivo da skill; o `/brainstorm` e o `/analyze` não levam slug; todo comando cita o próximo nessa forma.
+* Cada host encontra as regras e os comandos nas suas próprias pastas: o Claude Code roda um comando como `/propose <slug>`, o Codex como `$propose <slug>`, o Copilot como `/propose`, que pede o slug, o Devin Desktop como `/propose`, e Jules, Junie, Warp, Kiro, Roo Code e Cline pedindo em palavras o arquivo da skill; o `/brainstorm` e o `/analyze` não levam slug; todo comando cita o próximo nessa forma; o Copilot pega uma skill de `.agents/skills/` antes de `.claude/skills/`, o mesmo arquivo nas duas.
 * Todo host lê um arquivo de regras no início, lê os arquivos para os quais você aponta e escreve arquivos, e o método não precisa de mais nada.
 
 [^claude-code-memory]: Anthropic, "How Claude remembers your project", documentação do Claude Code, acesso em 2026-10-18. <https://code.claude.com/docs/en/memory>
@@ -176,6 +184,7 @@ E o próximo comando chega na forma que o seu host reconhece, porque um host pod
 [^codex-skills]: OpenAI, "Build skills", documentação do Codex, acesso em 2026-09-30. <https://developers.openai.com/codex/skills>
 [^copilot-instructions]: GitHub, "Adding repository custom instructions for GitHub Copilot", GitHub Docs, acesso em 2026-09-30. <https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions>
 [^copilot-skills]: GitHub, "About agent skills", GitHub Docs, acesso em 2026-09-30. <https://docs.github.com/en/copilot/concepts/agents/about-agent-skills>
+[^copilot-cli-reference]: GitHub, "GitHub Copilot CLI command reference", GitHub Docs, acesso em 2026-10-19. <https://docs.github.com/en/copilot/reference/cli-command-reference>
 [^copilot-prompt-files]: GitHub, "Your first prompt file", GitHub Docs, acesso em 2026-09-30. <https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files/your-first-prompt-file>
 [^devin-skills]: Cognition, "Skills Overview", Devin Docs, acesso em 2026-10-17. <https://docs.devin.ai/cli/extensibility/skills/overview>
 [^devin-rules]: Cognition, "Rules & AGENTS.md", Devin Docs, acesso em 2026-10-17. <https://docs.devin.ai/cli/extensibility/rules>

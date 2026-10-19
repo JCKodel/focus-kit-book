@@ -40,8 +40,10 @@ A `GEMINI.md` that already holds the project's own text keeps it; the kit only a
 
 To update the kit, say the same sentence again.
 The agent writes the kit's files as the setup file holds them now, and the change you review is the kit's alone, with nothing of your project in it.
-It replaces a file only when that file is one the kit shipped, in this version or an earlier one.
-A command of your own in a host's folder, or an edit you made by hand to one of the kit's files, `.claude/skills/apply/SKILL.md` say, stops the update before it writes any file: the agent shows the diff against the kit's file, and you decide whether to keep yours or replace it.
+It replaces a file only when that file matches one the kit shipped, in this version or an earlier one, and the earlier one is established from the kit's history, `git show <commit>:SETUP.md` in the kit's repository, or, without that history at hand, by your word that the file was never edited; a familiar name or a `metadata.version` line alone does not prove it.
+A command of your own in a host's folder, or an edit you made by hand to one of the kit's files, a line you added to `.claude/skills/propose/SKILL.md` say, stops the update before it writes or removes any file.
+The agent shows your edit as a diff against the kit file it was made on, and the kit's own change to that file since then apart and in short; it still reports the migrations and the next command, and you decide whether to keep your edit or replace it, knowing that a rule your edit added to a command can become a slot of docs/05 §5, which the commands follow (chapter 7).
+This check was tried on a copy of the book's kit files, made outside the book's repository: a line appended to `propose/SKILL.md` stopped the update to focus-kit 2026.10.19 this way, and every file of the copy was unchanged afterwards.
 
 ## What an update reports
 
@@ -51,47 +53,51 @@ It compares the files with its own templates and reports each migration, a chang
 A migration may name a rule, a queue line or a slot.
 Your choices stay: a docs/05 whose §5 says "trunk, one session at a time" sees the wording for two sessions in one folder proposed, and keeps its own until the team accepts the change.
 
-Here is part of the report the update to focus-kit 2026.10.18.1 gave on this book's own repository, shortened and paraphrased from the record of that update, `work/done/kit-2026-10-18-1.md` in the book's repository:
+Here is part of the report the update to focus-kit 2026.10.19 gave on this book's own repository, shortened and paraphrased from the record of that update, `work/done/kit-2026-10-19.md` in the book's repository:
 
 ```
-Installed: focus-kit 2026.10.18.1, in every SKILL.md.
-Pending process migrations, shortened to three:
+Installed: focus-kit 2026.10.19, in every SKILL.md.
+Pending process migrations, by document and section, shortened:
 
-1. docs/05, §5 Verify. The slot names make verify and its checks and
-   says "Green before anything is declared done." Proposed: add that
-   verify is fast enough to run on every delivery, and "Slow tests:
-   none"; the checks stay as they are.
-2. docs/05, §5 Delivery review. The slot reads git diff and
-   git diff --cached of the delivery's paths, and the files it
-   created. Proposed: git diff HEAD of the delivery's paths, staged
-   and unstaged, the commits a blocked delivery already made on its
-   branch, and the files it created; the reviewer stays the one the
-   slot names.
-3. docs/05, §5 Git. The slot says "The agent stages; it never commits
-   or merges." Proposed: reverting a delivery undoes what git holds,
-   a delivery that acts outside git says in its Done when how that is
-   undone, and the agent never commits or merges on its own; asked,
-   it takes the step the person names. Trunk stays.
+* docs/05, section numbers: match the template (§4 the queue,
+  §5 the slots, §6 commit, §8 closing a milestone). None.
+* docs/05 §4, where a board sees a mark: missing. Proposed, after
+  "and [x] is /apply's last.": "On trunk the board sees it at once;
+  with a branch or a worktree per delivery the mark lives on the
+  delivery's branch and the board sees it when that branch is
+  merged."
+* docs/05 §5, Milestone review: a project choice, not a migration,
+  recorded on 2026-10-17. The kit says the slot names who reads,
+  the host's deep review over the range or the kit's readers by
+  area; this project chose the kit's readers.
+* docs/05 §6, the one index: missing. Proposed, after "staged or
+  not.": "One working tree has one index, so when the second
+  session has already staged, the person sets its paths aside with
+  git restore --staged <paths>, commits the first, and stages them
+  again."
 
-The other items go to docs/05 §§2, 4, 6 and 8, the Milestone review
-slot of §5, docs/04 and two lines of AGENTS.md.
-docs/ and AGENTS.md were not changed.
+The other items cover docs/05 §§2, 3, 5, 7 and 8, docs/04, docs/06
+and AGENTS.md.
+Next: /propose ch08-update-2026-10-19, the queue's first free line.
 ```
 
-Every item names the document, the section, the rule it holds today and the wording proposed in its place.
-Item 1 keeps verify as it is and says it stays fast: a test too slow to run on every delivery goes with the slow tests, which the milestone review runs, and the book's repository has none.
-Item 2 has the review read the whole delivery against the last commit: `git diff` shows what is not staged, `git diff --cached` what is, and `git diff HEAD` both at once; the commits a blocked delivery already made on its branch are read as well, and the created files apart, because a new file is untracked, one git does not hold yet, and no diff shows it until it is staged.
-Item 3 says what a revert undoes, what git holds and not a database migrated or a message sent, and lets the agent commit when the person asks.
-Applying them keeps the team's choices: verify stays `make verify` with its checks, the reviewer stays the one the slot names, and Git stays trunk.
+Each item names a document and a section, and ends in one of three outcomes.
+It matches and needs nothing, and says so: `None`.
+It lacks something, and the item gives the wording the template proposes and where it goes, as for §4 and §6.
+Or it differs by a choice the project made and recorded with a date or an ADR, as the book's Milestone review slot does: the item names that choice and what the kit says beside it, and asks for no change.
+Every item is reported, never done: the update writes none of these documents.
 
-The report lists only what the documents still lack, or says there is none.
-The book's docs/05 §8 already names as the milestone review's base the commit of the previous milestone's review, not a later commit that closed a milestone, a rule that came with focus-kit 2026.10.18 ([chapter 15](15-closing-a-milestone.md)); 2026.10.18.1 keeps it, so its report asks nothing of the base, and its item for §8 adds that the range ends at the commit the reading started at, and that the review runs the slow tests the Verify slot names.
+Section numbers come first because the commands cite docs/05 by the template's numbers, §4 for the queue, §6 for the commit, and read by number; a docs/05 numbered otherwise would send every command to the wrong section, so that migration comes before any other, whatever an ADR says.
+Applying the migrations keeps the team's choices: verify stays `make verify` with its checks, the reviewer stays the one the slot names, Git stays trunk, and the Milestone review keeps the kit's readers.
+
+The report lists only what the documents still lack, or says there is none; it compares the documents with the current templates, never one version of the kit with another.
 
 The kit's version is the `metadata.version` in each `SKILL.md`; the process is what docs/04, docs/05 and `AGENTS.md` say, because every command reads them, so an updated kit whose migrations are not applied still runs the old process.
 The update is done when the migrations are applied, as any change is: a queue line, defined with `/propose` and built with `/apply`, so the change to your rules or your queue gets a page, verify and your review.
 
 On a documented project the update reports the migrations first, or says there are none.
 It never asks you to run `/brainstorm` or `/analyze` again: those write a project's documents from nothing, and yours exist.
+It names instead the command docs/06's first free line wants, in your host's form: `/propose` and its slug for a `[ ]` line, `/apply` and its slug for a `[>]` one.
 A version that asks nothing of your documents reports no migration: a version that changes only the commands, such as `/apply` showing its commit message in the conversation too, changes nothing else.
 A docs/05 whose Git slot chose a worktree per delivery and names no folder gets a migration only when the project already works in a container, the folder [chapter 19](19-worktrees.md) lays out with the checkout and a hidden folder for the history and the worktrees, and that hidden folder holds `repo.git/`.
 The report then proposes writing in that folder's name and the prefix the delivery branches already use, so nothing moves.
@@ -100,7 +106,7 @@ With no container yet, the slot means the kit's default, which that chapter name
 To know why a migration exists, read the kit's changelog, `CHANGELOG.md` in its repository, `CHANGELOG.pt.md` in Portuguese.
 It has one entry per version, newest first; the version is the `Version:` line of `SETUP.md`, the same value as the `metadata.version` in each `SKILL.md`.
 Each entry says what changed and the problem that caused it, and an entry may carry an item that starts with `Migration:`, naming what to change in the project's documents.
-What a rerun compares is the setup file's own step, which names the sections of docs/05, the slots and the lines of `AGENTS.md` it checks; the report lists only what your documents still lack.
+What a rerun compares is the setup file's own step 4, a list by document and section, which names the sections of docs/05, the slots and the lines of `AGENTS.md` it checks; each item is reported, never done, and the report lists only what your documents still lack.
 
 ## How each host finds the commands
 
@@ -129,6 +135,7 @@ Codex may run a skill on its own when a message matches its description; a small
 Claude Code's skills carry `disable-model-invocation: true`, which keeps Claude from running one on its own: a message that matches a skill's description is not enough, and the command runs only when you name it.[^claude-code-skills]
 On the other hosts, invoke the commands yourself; the kit does not claim that each host enforces the same.
 For Cursor and Devin Desktop, neither vendor's documentation says whether a slug typed after a command reaches it, so name the delivery in your message if it does not.
+Copilot reads both skills folders, and its CLI reference says what happens to a skill with the same name in both: `.agents/skills/` comes before `.claude/skills/` and the first found wins; the kit writes the same file in both, so either copy is the same command.[^copilot-cli-reference]
 Devin Desktop also reads `.windsurf/skills/`, the folder of its former name;[^devin-skills] the setup file writes nothing there and, on an update, removes the kit's own files from it, so the host never finds an older copy of a command beside the current one in `.agents/skills/`, and a file of yours there is reported and left.
 
 Every command ends by naming the next one, written as the host running it invokes it, the table's last column.
@@ -157,15 +164,16 @@ One repository opens ready in any host, so each person keeps the host they prefe
 
 An update never rewrites the rules the team wrote.
 A version that asks for a change in the project's documents reaches the project as a list of what to change and where, with the team's own rules still in place, and the team applies it as it applies any change.
+An edit the team made to a kit file is shown apart from the kit's own change, so the team can tell which is which, and a choice it recorded is reported as its own.
 
 And the next command arrives in the form your host recognizes, because a host may not recognize another's form: Codex does not recognize `/propose`, since Codex invokes skills with `$`.
 
 ## Key points
 
-* One sentence to your agent installs focus-kit, and the same sentence updates it; nothing is installed on your machine, nothing is staged or committed, and a kit file you changed stops the update before it writes.
-* The setup file writes only the kit's files and never touches `docs/`, `work/`, `AGENTS.md` or `CLAUDE.md`; a change docs/04, docs/05, docs/06 or `AGENTS.md` needs, a rule, a queue line or a slot, comes as a migration in its report, and until the team applies it as a delivery the process is the old one.
+* One sentence to your agent installs focus-kit, and the same sentence updates it; nothing is installed on your machine, nothing is staged or committed, and a kit file you changed stops the update before it writes, with your edit shown as a diff against the kit file it was made on.
+* The setup file writes only the kit's files and never touches `docs/`, `work/`, `AGENTS.md` or `CLAUDE.md`; a change docs/04, docs/05, docs/06 or `AGENTS.md` needs, a rule, a queue line or a slot, comes as a migration in its report, a list by document and section where a choice the project recorded is reported as that choice, and until the team applies it as a delivery the process is the old one.
 * The kit's changelog, newest first, says for each version what changed, the problem that caused it, and, in an item that starts with `Migration:` when the entry has one, what to change in the project's documents.
-* Each host finds the rules and the commands in its own folders: Claude Code runs a command as `/propose <slug>`, Codex as `$propose <slug>`, Copilot as `/propose`, which asks for the slug, Devin Desktop as `/propose`, and Jules, Junie, Warp, Kiro, Roo Code and Cline by asking in words for the skill's file; `/brainstorm` and `/analyze` take no slug; every command names the next one in that form.
+* Each host finds the rules and the commands in its own folders: Claude Code runs a command as `/propose <slug>`, Codex as `$propose <slug>`, Copilot as `/propose`, which asks for the slug, Devin Desktop as `/propose`, and Jules, Junie, Warp, Kiro, Roo Code and Cline by asking in words for the skill's file; `/brainstorm` and `/analyze` take no slug; every command names the next one in that form; Copilot takes a skill from `.agents/skills/` before `.claude/skills/`, the same file in both.
 * Every host reads a rules file at the start, reads the files you point it at and writes files, and the method needs nothing more.
 
 [^claude-code-memory]: Anthropic, "How Claude remembers your project", Claude Code documentation, accessed 2026-10-18. <https://code.claude.com/docs/en/memory>
@@ -174,6 +182,7 @@ And the next command arrives in the form your host recognizes, because a host ma
 [^codex-skills]: OpenAI, "Build skills", Codex documentation, accessed 2026-09-30. <https://developers.openai.com/codex/skills>
 [^copilot-instructions]: GitHub, "Adding repository custom instructions for GitHub Copilot", GitHub Docs, accessed 2026-09-30. <https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions>
 [^copilot-skills]: GitHub, "About agent skills", GitHub Docs, accessed 2026-09-30. <https://docs.github.com/en/copilot/concepts/agents/about-agent-skills>
+[^copilot-cli-reference]: GitHub, "GitHub Copilot CLI command reference", GitHub Docs, accessed 2026-10-19. <https://docs.github.com/en/copilot/reference/cli-command-reference>
 [^copilot-prompt-files]: GitHub, "Your first prompt file", GitHub Docs, accessed 2026-09-30. <https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files/your-first-prompt-file>
 [^devin-skills]: Cognition, "Skills Overview", Devin Docs, accessed 2026-10-17. <https://docs.devin.ai/cli/extensibility/skills/overview>
 [^devin-rules]: Cognition, "Rules & AGENTS.md", Devin Docs, accessed 2026-10-17. <https://docs.devin.ai/cli/extensibility/rules>
