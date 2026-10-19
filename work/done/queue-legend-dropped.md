@@ -31,7 +31,27 @@ The docs/06 legend edit is part of this delivery. It sits in the file's first li
 
 **Done when.**
 
-* [ ] The three edits are in place word for word; every Behaviour line reads true against docs/06, docs/03 and docs/05 §4.
-* [ ] Only the legend hunk and this line's mark of docs/06 are staged, with docs/03 and this page; other lines' hunks stay as other sessions left them.
-* [ ] `make verify` green after the last edit. `make book`: inapplicable, no chapter changes. Both editions: inapplicable, the process documents are English only.
-* [ ] Delivery review by a read-only Opus agent per docs/05 §5, its candidates answered on this page; the page moves to `work/done/` and the commit message is suggested.
+* [x] The three edits are in place word for word; every Behaviour line reads true against docs/06, docs/03 and docs/05 §4.
+* [x] Only the legend hunk and this line's mark of docs/06 are staged, with docs/03 and this page; other lines' hunks stay as other sessions left them.
+* [x] `make verify` green after the last edit. `make book`: inapplicable, no chapter changes. Both editions: inapplicable, the process documents are English only.
+* [x] Delivery review by a read-only Opus agent per docs/05 §5, its candidates answered on this page; the page moves to `work/done/` and the commit message is suggested.
+
+**Built.** docs/06's legend now names `· dropped: <reason>` as the suffix of an `[x]` line the person cancelled, citing docs/05 §4, in the clause SETUP.md 2026.10.18.1's docs/06 template gives. docs/03's `mark` row says a dropped line is a suffix on `[x]`, not a seventh mark, its page in `work/done/` saying what was built and undone. docs/03's `conflict` row now says a conflict between sessions is a line both edited, and two deliveries' edits in one hunk, each on its own line, are none.
+
+**Divergences.** None.
+
+**Decisions.** The three edits are the Contract's text word for word; no question was left open. Under the batch, the driver sets this line's mark and stages the docs/06 legend hunk with the mark, docs/03 and this page.
+
+**Proof.** `git diff` of docs/06 and docs/03 shows only the legend line and the two rows changed; docs/05 is unchanged. `make verify` green after the last edit. `make book`: inapplicable, no chapter changes.
+
+**Delivery review.** A read-only agent on Opus read this delivery's hunks of docs/06 and docs/03 against this page, docs/05 §4 and docs/04. The three edits match the Contract word for word, and every Behaviour line reads true. Points: (1) the queue line was still `[>]`: under this batch, the driver sets the mark and stages it. (2) It could not open SETUP.md to compare the legend: the clause is the Contract's, which cites SETUP.md. (3) The new clause follows the `[?]` item and reads a little oddly: it is SETUP.md's wording, kept so the legend and the template do not drift.
+
+```commit
+docs(queue-legend-dropped): name the dropped suffix and line conflicts
+
+- docs/06's legend names `· dropped: <reason>` on a cancelled `[x]` line
+- docs/03's mark row: dropped is a suffix, not a seventh mark
+- docs/03's conflict row: a line both sessions edited, not one hunk
+
+work/done/queue-legend-dropped.md
+```

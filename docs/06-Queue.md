@@ -1,6 +1,6 @@
 # Queue
 
-`[ ]` not yet defined · `[~]` being defined · `[>]` completely defined, `work/<slug>.md` ready for /apply · `[*]` being built · `[x]` done, page in `work/done/` · `[?]` waiting, with `· resume: propose` or `· resume: apply` before `· blocked: <reason>` or `· blocked: after <slug>, <slug>` at the end of the line.
+`[ ]` not yet defined · `[~]` being defined · `[>]` completely defined, `work/<slug>.md` ready for /apply · `[*]` being built · `[x]` done, page in `work/done/` · `[?]` waiting, with `· resume: propose` or `· resume: apply` before `· blocked: <reason>` or `· blocked: after <slug>, <slug>` at the end of the line, and `· dropped: <reason>` on an `[x]` line the person cancelled (docs/05 §4).
 A line never leaves; it changes mark, at the moment the work changes (docs/05 §4).
 A line is the mark, the slug, one sentence and its suffixes; what happened goes on its page. Longer lines written before kit-2026-10-16 are in this file's history, at the commit before it.
 The order is the priority: the next delivery is the first free line, one whose `· after <slug>` lines are all `[x]`; `· after <slug>`, written when the line is added, is an order, not a block.
@@ -478,7 +478,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repo
 [x] ch18-revert-scope        chapters 18 and 19: one step reverts what git holds; a migration run or a message sent is undone as the page's Done when says, or not at all; both editions · after kit-2026-10-18-1
 [x] ch15-review-head         chapter 15: the milestone review's page names the commit its reading started at, so the range stays fixed while readers work; both editions · after kit-2026-10-18-1
 [x] ch07-ninjobs-focus       chapters 4, 6 and 7 and ADR-0016 distinguish the earlier whole-FOCUS requirement from the later simplification retaining two principles; both editions · after kit-2026-10-18-1
-[>] queue-legend-dropped     docs/06's legend and docs/03's mark and conflict rows say what focus-kit 2026.10.18.1 says: `· dropped:` on a cancelled line, and a conflict as a line both sessions edited · after kit-2026-10-18-1
+[x] queue-legend-dropped     docs/06's legend and docs/03's mark and conflict rows say what focus-kit 2026.10.18.1 says: `· dropped:` on a cancelled line, and a conflict as a line both sessions edited · after kit-2026-10-18-1
 [>] ch12-defined-mark       chapter 12: the line becomes `[>]` when the page is completely defined, as docs/05 §3 says, not when it is written; both editions
 [>] ch19-partial-branch-commits chapter 19: a blocked /apply on a delivery branch stages its partial work for the person to commit there, as chapter 13 cites; both editions
 [>] ch16-six-rules-timeline  chapter 16: Ninjobs opened on one page, two commands, two checks and the governor, not on the six rules SETUP.md lists, which chapter 6 dates after the opening; both editions
