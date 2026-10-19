@@ -12,4 +12,6 @@ Taken to focus-kit 2026.10.18.1, taught by M19 in docs/06:
 6. **The Claude Code row** (from install-and-hosts). It reads `AGENTS.md` alone only where no `CLAUDE.md` exists, from v2.1.277; the kit still writes `CLAUDE.md` with `@AGENTS.md`.
 7. **The agent's git rule** (from ch19-agent-does-git, decision 3). It never commits or merges on its own; asked, it takes the step the person names.
 8. **"exceptions as values"**, the book's term, replaces "errors as values" in SETUP.md and both READMEs.
-9. **Ninjobs took FOCUS whole**, as chapters 3, 4 and 6 say; the kit had it under the two principles.
+For the next focus-kit version:
+
+9. **Ninjobs in two phases** (from ch07-ninjobs-focus). Ninjobs required FOCUS whole on every feature until its restart on 2026-08-29, and after it kept the two principles, vertical slices and exceptions as values, without the four pieces on every feature (ADR-0016's amendment ch07-ninjobs-focus; chapters 4, 6 and 7). 2026.10.18.1 took the earlier phase alone, with no date: SETUP.md §3.5's "FOCUS whole" answer ends "Ninjobs chose this", README.md says "Ninjobs took it whole." and README.pt.md "O Ninjobs adotou inteira."; the next version says both phases in all three. The copies the kit installs in this repository follow that version and are not edited here.

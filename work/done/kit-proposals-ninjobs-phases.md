@@ -34,9 +34,23 @@
 
 **Done when.**
 
-* [ ] `work/kit-proposals.md` edited as the Contract says, nothing else; each Behaviour line checked; `grep -n "under the two principles\|chapters 3, 4 and 6" work/kit-proposals.md` prints nothing.
-* [ ] No local path in the file or this page; the disclosure scan green.
-* [ ] No chapter changed, so no edition and no `make book` apply; no em dash.
-* [ ] `make verify` green after the last edit.
-* [ ] No delivery review: the author waived it for this round; /apply does not add one.
-* [ ] Page archived to `work/done/` and commit message suggested.
+* [x] `work/kit-proposals.md` edited as the Contract says, nothing else; each Behaviour line checked; `grep -n "under the two principles\|chapters 3, 4 and 6" work/kit-proposals.md` prints nothing.
+* [x] No local path in the file or this page; the disclosure scan green.
+* [x] No chapter changed, so no edition and no `make book` apply; no em dash.
+* [x] `make verify` green after the last edit.
+* [x] No delivery review: the author waived it for this round; /apply does not add one.
+* [x] Page archived to `work/done/` and commit message suggested.
+
+**Record.**
+
+* Built: item 9 of `work/kit-proposals.md` moved under a new line "For the next focus-kit version:", kept its number, and says both phases, its sources and the kit's three passages to correct; items 1 to 8 and the opening paragraph unchanged.
+* Polish within the Contract: "without the four pieces on every feature" added after the two principles, and the last sentence says the installed copies are not edited here, as the Behaviour asks.
+* The grep for the superseded wording prints nothing; no local path in the file or this page; no chapter changed.
+* Divergences: none. Omissions: none.
+* Proof: `make verify` green after the last edit, disclosure scan included.
+* Delivery review: skipped on the author's word (2026-10-19).
+* Decisions: the three on this page, as written; no new one.
+
+```commit
+docs(kit-proposals-ninjobs-phases): say Ninjobs' two phases in item 9
+```

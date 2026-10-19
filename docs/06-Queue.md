@@ -492,7 +492,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repo
 [x] adr0010-commit-asked     ADR-0010 gains an amendment: the agent commits or merges when the person asks, and make release commits VERSION, as docs/05 §§5 and 6 say
 [x] readme-release           the READMEs say make release checks and writes VERSION, builds the book, commits VERSION and pushes main and the tag, as the release manual says; both editions
 [x] pt-blocked-term          the Portuguese edition says "travado" for a blocked line or delivery in chapters 8 and 17, as chapters 13, 14, 17 and 19 do, and docs/03 gives the word; the English already matches
-[>] kit-proposals-ninjobs-phases work/kit-proposals.md's item 9 says Ninjobs required FOCUS whole until its restart and kept the two principles after, and names the kit's SETUP.md §3.5 and READMEs
+[x] kit-proposals-ninjobs-phases work/kit-proposals.md's item 9 says Ninjobs required FOCUS whole until its restart and kept the two principles after, and names the kit's SETUP.md §3.5 and READMEs
 ```
 
 ## M20. What the audit of 2026-10-18 found
