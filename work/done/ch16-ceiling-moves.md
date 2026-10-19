@@ -10,7 +10,7 @@
 * Asked which error let those ceilings in, the reader names it as the governor asks: a step of §1 had grown into one long sentence that an agent running it could not hold in mind and rewrote as a list for itself. The chapter tells it with no date, no version and no line count of the old text.
 * The reader carries the pattern to their own project: a cap on one file (a rules file, a prompt, a command) moves the growth to the files next to it unless they have a cap too, and every cap still answers the governor's question with an error that happened.
 * Edge: the reader knows these ceilings are rules of the kit's own repository, binding whoever changes the kit; installing the kit does not put them in a project's docs/05.
-* Fails if: the chapter says "no longer", "since", a kit version or a date for the ceilings, gives the old step's line count, compares before and after, narrates a run of either repository, or gives a ceiling number with no source note.
+* Fails if: the chapter says "no longer", "since", a kit version or a date for the ceilings, gives the old step's line count, compares before and after, narrates a run of either repository, or gives a ceiling number without naming the kit's file it comes from.
 
 **Contract.**
 
@@ -22,9 +22,9 @@ Chapter `book/en/16-the-governor.md` and `book/pt/16-the-governor.md`, the same 
   * a full command does not stop the words; they go to the files around it, `SETUP.md` §1 (chapter 8's install and update steps), the docs/05 template and `documents.md` (each named in a few words, as above), so the same ceiling watches them: 160 lines, 260 non-blank lines and 450 lines, and a change that would pass one removes as much as it adds;
   * the error that let them in, said once and with no date, version or count: a step of §1 written as one long sentence, which an agent running it could not hold in mind and rewrote as a list for itself;
   * for the reader's project, one or two sentences: a cap on one file moves the growth next door, so the cap goes where the words go, and each cap names its error like any other step.
-  * One source note, `[^kit-rules]`, at the first ceiling number, covering the five numbers and the error: J.C. Ködel, "CLAUDE.md", focus-kit, the rules of the kit's repository, accessed 2026-10-19, <https://github.com/JCKodel/focus-kit/blob/main/CLAUDE.md>; the Portuguese note in the edition's form ("acesso em 2026-10-19"). The kit's prose is English; a quoted phrase, if any, is translated in pt with the note docs/04 asks for, but the passage paraphrases by default.
+  * No source note: at the first ceiling number the sentence names the file in plain words, the rules of the kit's own repository in its `CLAUDE.md`, which covers the five numbers and the error (docs/04 "Source notes": no note points to a file of focus-kit's repository; amended by /apply, see Decisions taken alone). The passage paraphrases; no quotation.
 * `## What the team gains`: unchanged.
-* `## Key points`: one new bullet, after the third: the commands stay short enough to read whole, and the files a full command sends its words to have ceilings of their own; a change that would pass one removes as much as it adds. No number in it (docs/04 "Numbers that prove", "One gain").
+* `## Key points`: the third bullet gains a clause: a cap on a step's size goes with caps on the files its words move to, and a change that would pass one removes as much as it adds. No number in it (docs/04 "Numbers that prove", "One gain"). (Amended by /apply: a sixth bullet would pass docs/04's five.)
 * Every other section, footnote and sentence stays.
 
 Terms of docs/03 used: governor, slot, command, docs/05. "Ceiling" (pt "teto") is said in plain words, as the kit's rule says it, and needs no docs/03 row: it is used in one chapter only. Sources: focus-kit `CLAUDE.md` §Rules at commit `fd1aa75`, read for this page; its `CHANGELOG.md` entry for 2026.10.19, read only to confirm the error, never cited (docs/04 "The kit as it is"); `SETUP.md` §§1, 3.5 for what §1, `documents.md` and the template are. No private case, no lending library code.
@@ -45,7 +45,7 @@ Terms of docs/03 used: governor, slot, command, docs/05. "Ceiling" (pt "teto") i
 
 * The ceilings and the error are the kit's, from focus-kit `CLAUDE.md` §Rules (fd1aa75): "Commands stay short enough to read whole ... The same ceiling watches where the words go when a command is full: `SETUP.md` §1 at most 160 lines, the docs/05 template at most 260 non-blank lines, `documents.md` at most 450. A change that would pass one removes as much as it adds."
 * The error is told without its date, the old line count or the version: docs/04 "The kit as it is" (no version as a date, no before and after; a rule's reason is the error it prevents) and the driver's rule of no numbers measuring a kit change.
-* A source note points to the kit's file, since it gives the reader something to open and carries every number: docs/04 "Evidence" and "Source notes".
+* The numbers are sourced by naming the kit's file in the sentence, not by a note: docs/04 "Source notes" ("No note points to a commit, a diff or a file of focus-kit's repository: where the text quotes or states a rule of the kit, the sentence names the file in plain words").
 * The key point carries no number: docs/04 "Numbers that prove" and "One gain".
 * The gain section stays: the new passage applies the governor already summed there (docs/04 "One gain").
 
@@ -53,17 +53,49 @@ Terms of docs/03 used: governor, slot, command, docs/05. "Ceiling" (pt "teto") i
 
 * A section of its own, placed after "It works both ways", because the ceiling is the governor deciding what enters the kit's own text; one paragraph inside that section would bury the files and their numbers.
 * The error is told in the past as an error that happened, as the governor requires and as the chapter tells its other errors, while keeping docs/04's limits: no date, version, count or old wording. An alternative the author may prefer: say it in the present only ("a step written as one long sentence is one an agent cannot hold in mind and rewrites as a list"), which drops "happened".
-* The source note links the kit's `CLAUDE.md` on `main`, as chapter 8 links `SETUP.md` on `main` and the book links its own records on `main`, not a commit hash (ADR-0017).
+* (/apply) The page asked for a `[^kit-rules]` note linking the kit's `CLAUDE.md`; docs/04 "Source notes" forbids a note to a file of focus-kit's repository, and no chapter has one (chapter 8's `SETUP.md` URL is the install command the reader types, not a citation). The documents settle it, so the page was wrong: the sentence names "the rules of the kit's own repository, in its `CLAUDE.md`" and the contract, Fails if and Done when lines were amended to match. docs/04 is unchanged.
+* (/apply) The kit's "target at most" is said as "keep its body to at most"; its sentence on Ninjobs' eleven and forty-eight lines is history, left out (docs/04 "The kit as it is").
+* (/apply) "Frontmatter" is glossed once, "the block of settings at the top of the file", for a reader who does not write code.
+* (/apply) The new key point merges into the third bullet instead of a sixth: docs/04 "Chapter shape" allows at most five (found by the delivery review).
+* (/apply) The Edge line is said in the text: "These ceilings bind whoever changes the kit; installing the kit puts none of them in your docs/05."
+* (/apply) The opening gains a third sentence, on its own line: "And when you cap the size of a step, you can cap where its words go."
 * "Ceiling" gets no docs/03 row: one chapter uses it, and docs/03 adds a term on its second use.
 * The opening gains a clause rather than a new sentence when it reads as well; /apply decides.
 
 **Done when.**
 
-* [ ] Both editions written, the same passages changed in each, Portuguese read as Portuguese.
-* [ ] The chapter still opens with what the reader can do after it, now including capping where a step's words go; no filler and nothing useful cut.
-* [ ] The five ceilings and the rule "removes as much as it adds" agree word for word in meaning with focus-kit `CLAUDE.md` §Rules, each under the `[^kit-rules]` note.
-* [ ] `grep -n -i -E "no longer|since (its|version)|2026\.10\.1|45|before and after" book/en/16-the-governor.md` and `grep -n -i -E "não mais|desde a versão|2026\.10\.1|45|antes e depois" book/pt/16-the-governor.md` find nothing new; no narrated run, no em dash.
-* [ ] Every link resolves; every number sourced.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] `make verify` green; `make book` builds both editions, and the two PDF paths are reported.
-* [ ] Only this delivery's paths and its hunks of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions written, the same passages changed in each, Portuguese read as Portuguese.
+* [x] The chapter still opens with what the reader can do after it, now including capping where a step's words go; no filler and nothing useful cut.
+* [x] The five ceilings and the rule "removes as much as it adds" agree word for word in meaning with focus-kit `CLAUDE.md` §Rules, the sentence naming that file in plain words.
+* [x] `grep -n -i -E "no longer|since (its|version)|2026\.10\.1|45|before and after" book/en/16-the-governor.md` and `grep -n -i -E "não mais|desde a versão|2026\.10\.1|45|antes e depois" book/pt/16-the-governor.md` find nothing new; no narrated run, no em dash.
+* [x] Every link resolves; every number sourced.
+* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green; `make book` builds both editions, and the two PDF paths are reported. (`make book` and the PDF paths: run once by the batch driver for all lanes.)
+* [x] Only this delivery's paths and its hunks of docs/06 staged; the page moved to `work/done/` and its commit message suggested. (Staging and the docs/06 mark: done by the batch driver.)
+
+**Divergences.**
+
+* The Done when grep for `45` matches line 49 of each edition, "450", the `documents.md` ceiling the contract requires; nothing else new matches. The old step's count appears nowhere.
+* The note `[^kit-rules]`, the sixth key point and the Edge line: see Decisions taken alone.
+
+**Proof.**
+
+* `make verify` green after the last edit (an earlier run failed only on an external link of chapter 24, `web.archive.org` refusing the connection, not this delivery's file; the re-run passed).
+* The new section sits between `## It works both ways` and `## What the process does not have` in both editions, its four parts in the contract's order; the five numbers and "removes as much as it adds" checked against focus-kit `CLAUDE.md` lines 39 to 53 at `fd1aa75`.
+* `## Key points` has five bullets in both editions; the gain section and every other section are unchanged.
+
+**Delivery review.** A read-only Opus agent read `git diff HEAD` of both chapters and this page against the page and docs/04. Five findings, all fixed: a sixth key point passed docs/04's five (merged into the third); the Edge line was only implied (one sentence added); "its" in the command sentence had two referents (now "a command's", pt "de um comando"); the pt key point's word order (rewritten with the merge); the examples of "one file" read as a list (now in parentheses). The optional pt opening wording was taken too. Nothing became a queue line.
+
+**commit**
+
+```commit
+docs(ch16-ceiling-moves): the governor caps where the words go
+
+- ch 16: a section on the command ceilings and the files around them
+- SETUP.md §1, the docs/05 template, documents.md and their ceilings
+- the error that let them in, told with no date, version or count
+- the cap goes where the words go, for the reader's own project
+- both editions; the key point joins the third bullet
+
+work/done/ch16-ceiling-moves.md
+```

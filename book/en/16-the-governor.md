@@ -2,6 +2,7 @@
 
 After this chapter you can ask of anything that wants to enter your process, and of every step already in it, which concrete error it would have caught, and accept only an answer that names an error that happened, in your project or in another one whose record you can open and whose conditions yours shares, at a cost that error justifies.
 You can also list what the process does not have, say what does each of those jobs instead, and say why the reviews' read-only readers and their checker are the one specialized subagent it admits.
+And when you cap the size of a step, you can cap where its words go.
 
 ## The problem
 
@@ -36,6 +37,21 @@ Two rules came with it: a new warning fails verify, and a warning already decide
 An entry on that list with no live warning behind it also fails, because a list with dead entries is a list nobody reads anymore: the governor applied to the list itself.
 
 In code the governor has its own form, the second-occurrence rule of chapter 3: one copy is no evidence that a shared version is needed, and two copies are the error that happened.
+
+## A ceiling, and where the words go
+
+The kit asks the governor's question of its own files.
+A command is read whole by the agent on every run, so the rules of the kit's own repository, in its `CLAUDE.md`, keep a command's body to at most thirty lines of prose for `/propose` and fifty for `/apply`, not counting blank lines or the frontmatter, the block of settings at the top of the file.
+A command says which documents to read, what to do and what never to do; what is specific to one project goes in a slot of docs/05 ([chapter 7](07-the-documents.md)).
+
+A full command does not stop the words: they go to the files around it.
+Those are `SETUP.md` §1, the steps an agent follows to install and update the kit ([chapter 8](08-install-and-hosts.md)); the docs/05 template; and `documents.md`, the reference `/brainstorm` and `/analyze` read, which describes each document and holds that template.
+So the same rules give them a ceiling too: §1 at most 160 lines, the docs/05 template at most 260 non-blank lines, `documents.md` at most 450, and a change that would pass one removes as much as it adds.
+These ceilings bind whoever changes the kit; installing the kit puts none of them in your docs/05.
+The error that let them in happened in §1: one of its steps was written as one long sentence, which an agent running it could not hold in mind and rewrote as a list for itself.
+
+Your own project works the same way.
+A cap on one file (a rules file, a prompt, a command) moves the growth to the files next to it, so the cap goes where the words go, and each cap names the error it answers, like any other step.
 
 ## What the process does not have
 
@@ -92,7 +108,7 @@ The one exception carries the errors that justify it, so the team checks it the 
 
 * Ask anything that wants to enter the process, and every step already in it: which concrete error would it have caught?
 * The answer names an error that happened; a possible error justifies anything, and every step is paid by every delivery after it.
-* A step that names no error leaves, and a list of exceptions fails on an entry with no live warning.
+* A step that names no error leaves, and a list of exceptions fails on an entry with no live warning; a cap on a step's size goes with caps on the files its words move to, and a change that would pass one removes as much as it adds.
 * Each of the eight things the process does not have has its job done by something it has: the page, the documents, the Behaviour lines, the person, the person's commit, one agent, and the governor itself; the reviews' readers and checker are the one specialized subagent it admits, each on an error that happened.
 * The governor decides in each project, with an error that happened there or one another project documented whose conditions it shares, and buys the smallest check that catches it: Case A's `[?]` entered because waiting lines read as idle work, and a team whose lines wait on someone outside it can add it without that error first.
 

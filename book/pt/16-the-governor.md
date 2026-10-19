@@ -2,6 +2,7 @@
 
 Depois deste capítulo você consegue perguntar a tudo o que quer entrar no seu processo, e a cada passo que já está nele, que erro concreto ele teria pegado, e aceitar só uma resposta que nomeie um erro que aconteceu, no seu projeto ou em outro cujo registro você consegue abrir e cujas condições o seu compartilha, a um custo que esse erro justifica.
 Você também consegue listar o que o processo não tem, dizer o que faz cada um desses trabalhos no lugar, e dizer por que os leitores das revisões, agentes somente leitura, e o seu conferente são o único subagente especializado que ele admite.
+E, quando você limita o tamanho de um passo, consegue limitar para onde vão as palavras dele.
 
 ## O problema
 
@@ -36,6 +37,21 @@ Duas regras vieram com ele: um aviso novo reprova a verificação, e um aviso j�
 Uma entrada nessa lista sem um aviso vivo por trás dela também reprova, porque uma lista com entradas mortas é uma lista que ninguém lê mais: o regulador aplicado à própria lista.
 
 No código o regulador tem a sua própria forma, a regra da segunda ocorrência do capítulo 3: uma cópia não é evidência de que uma versão compartilhada é necessária, e duas cópias são o erro que aconteceu.
+
+## Um teto, e para onde vão as palavras
+
+O kit faz a pergunta do regulador aos seus próprios arquivos.
+Um comando é lido inteiro pelo agente a cada execução, então as regras do próprio repositório do kit, no seu `CLAUDE.md`, mantêm o corpo de um comando em no máximo trinta linhas de prosa para o `/propose` e cinquenta para o `/apply`, sem contar as linhas em branco nem o frontmatter, o bloco de configurações no topo do arquivo.
+Um comando diz quais documentos ler, o que fazer e o que nunca fazer; o que é específico de um projeto vai para um slot do docs/05 ([capítulo 7](07-the-documents.md)).
+
+Um comando cheio não para as palavras: elas vão para os arquivos em volta dele.
+Esses arquivos são o §1 do `SETUP.md`, os passos que um agente segue para instalar e atualizar o kit ([capítulo 8](08-install-and-hosts.md)); o modelo do docs/05; e o `documents.md`, a referência que o `/brainstorm` e o `/analyze` leem, que descreve cada documento e guarda esse modelo.
+Então as mesmas regras dão um teto a eles também: o §1 com no máximo 160 linhas, o modelo do docs/05 com no máximo 260 linhas não vazias, o `documents.md` com no máximo 450, e uma mudança que passaria de um deles remove tanto quanto acrescenta.
+Esses tetos valem para quem muda o kit; instalar o kit não põe nenhum deles no seu docs/05.
+O erro que os deixou entrar aconteceu no §1: um dos seus passos estava escrito como uma única frase longa, que um agente que o executava não conseguia manter em mente e reescreveu como uma lista para si mesmo.
+
+O seu próprio projeto funciona do mesmo jeito.
+Um limite em um arquivo (um arquivo de regras, um prompt, um comando) leva o crescimento para os arquivos ao lado, então o limite vai para onde vão as palavras, e cada limite nomeia o erro a que responde, como qualquer outro passo.
 
 ## O que o processo não tem
 
@@ -92,7 +108,7 @@ A única exceção traz os erros que a justificam, então o time a confere do je
 
 * Pergunte a tudo o que quer entrar no processo, e a cada passo que já está nele: que erro concreto isso teria pegado?
 * A resposta nomeia um erro que aconteceu; um erro possível justifica qualquer coisa, e cada passo é pago por toda entrega depois dele.
-* Um passo que não nomeia erro nenhum sai, e uma lista de exceções reprova em uma entrada sem um aviso vivo.
+* Um passo que não nomeia erro nenhum sai, e uma lista de exceções reprova em uma entrada sem um aviso vivo; um limite no tamanho de um passo vem com limites nos arquivos para onde vão as suas palavras, e uma mudança que passaria de um deles remove tanto quanto acrescenta.
 * Cada uma das oito coisas que o processo não tem tem o seu trabalho feito por algo que ele tem: a página, os documentos, as linhas de Comportamento, a pessoa, o commit da pessoa, um agente só, e o próprio regulador; os leitores e o conferente das revisões são o único subagente especializado que ele admite, cada um com um erro que aconteceu.
 * O regulador decide em cada projeto, com um erro que aconteceu ali ou um que outro projeto documentou cujas condições ele compartilha, e compra a menor verificação que o pega: o `[?]` do Caso A entrou porque linhas em espera pareciam trabalho parado, e um time cujas linhas esperam alguém de fora pode acrescentá-lo sem esse erro antes.
 
