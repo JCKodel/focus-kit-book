@@ -559,7 +559,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.19.1 and the repo
 [>] ch20-merge-and-marks     chapter 20: a push reads each slug's line from its branch or worktree and carries the marks it can see, one sentence per line; both editions · after m22-review
 [>] ch08-13-20-default-review chapters 8, 13 and 20: every sentence that puts a person's review before the commit or the merge says "by default", and the reviewer is whoever decides the merge; both editions · after m22-review, ch08-13-17-next-line, ch20-merge-and-marks
 [>] ch14-face-retired        chapter 14: FACE and its note leave the kanban board section, which keeps a board that reads the queue itself, docs/06 and `work/` by slug, naming no tool; both editions · after m22-review
-[ ] docs05-dependency-merged docs/05 §4: the project's sentence on a dependency off trunk agrees with the reading by slug and with docs/03's words, or leaves · after m22-review
+[>] docs05-dependency-merged docs/05 §4: the project's sentence on a dependency off trunk agrees with the reading by slug and with docs/03's words, or leaves · after m22-review
 [ ] kit-note-work-in-flight  work/kit-proposals.md: a note for focus-kit that off trunk the pages in flight sit on their branches, not in the main branch's `work/` · after m22-review
 [ ] m22-batch-proof          the pages of ch08-update-2026-10-19-1, ch12-free-lines-branches and ch14-20-read-branches: their Proof and Done when agree on `make verify` and `make book` · after m22-review
 [ ] readme-make-list         README.md and README.pt.md: the `make` bullet matches the eight targets `make` prints · after m22-review
