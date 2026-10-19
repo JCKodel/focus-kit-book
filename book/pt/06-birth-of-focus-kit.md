@@ -38,16 +38,17 @@ O custo estava no número de lugares, e não no tamanho de cada arquivo.
 Em 2026-08-29 eu recomecei, com um processo pequeno o bastante para caber na cabeça, e mudei o app de Flutter para React, onde o mesmo agente acertou o design.
 O código manteve os dois princípios do FOCUS, fatias verticais e exceções como valores, e deixou de exigir as quatro peças em toda feature.
 Uma entrega virou uma página, `work/<slug>.md`.
-Dois comandos faziam o trabalho: o `/propose` conversa comigo e escreve a página, nunca código; o `/apply` constrói a página, faz a verificação e compara a tela com o design.
+Dois comandos do próprio Ninjobs faziam o trabalho: o `/propose` conversa comigo e escreve a página, nunca código; o `/apply` constrói a página, faz a verificação e compara a tela com o design.
 A fila virou uma linha por entrega.
 Das 29 verificações, ficaram duas, ambas voltadas para o próprio produto: uma prova do que cada nível de privacidade de um perfil pode mostrar, e um teste das regras de acesso do banco de dados.
 Tudo o que quisesse voltar tinha de responder a uma pergunta, o regulador: que erro concreto isso teria pegado?
 Uma verificação voltou mais tarde, porque apontou um erro que tinha acontecido.
 
-O Ninjobs abriu ao público em 2026-09-10, treze dias depois do recomeço, com 91 entregas de uma página concluídas.
+O Ninjobs abriu ao público em 2026-09-10, treze dias depois do recomeço, com 91 entregas de uma página concluídas, todas feitas com esses dois comandos.
 As linhas concluídas da sua fila citam 19 pranchas de design, contra quatro telas nos quinze dias anteriores.
 
-Em 2026-09-21 eu tirei o processo do Ninjobs e o transformei no focus-kit, o kit que este livro ensina.
+Em 2026-09-21, depois da abertura, eu tirei o processo do Ninjobs e o transformei no focus-kit, o kit que este livro ensina, e plantei o kit de volta no Ninjobs.
+Os números deste capítulo vêm de antes desse dia, nenhum deles do kit.
 O gatilho foi uma divergência: os próprios arquivos de comando do projeto ainda descreviam passos que o seu documento de processo, o docs/05, já tinha mudado.
 Dali em diante os comandos não guardam nenhum fato do projeto, e leem todos eles no docs/05.
 

@@ -38,16 +38,17 @@ The cost was the number of places, not the size of each file.
 On 2026-08-29 I started over, with a process small enough to hold in my head, and moved the app from Flutter to React, where the same agent got the design right.
 The code kept the two principles of FOCUS, vertical slices and exceptions as values, and stopped requiring the four pieces on every feature.
 One delivery became one page, `work/<slug>.md`.
-Two commands did the work: `/propose` talks with me and writes the page, never code; `/apply` builds the page, verifies it and compares the screen against the design.
+Ninjobs' own two commands did the work: `/propose` talks with me and writes the page, never code; `/apply` builds the page, verifies it and compares the screen against the design.
 The queue became one line per delivery.
 Of the 29 checks, two stayed, both aimed at the product itself: a proof of what each privacy level of a profile may show, and a test of the database's access rules.
 Anything that wanted to come back had to answer one question, the governor: which concrete error would it have caught?
 One check did come back later, because it named an error that had happened.
 
-Ninjobs opened to the public on 2026-09-10, thirteen days after the restart, with 91 one-page deliveries done.
+Ninjobs opened to the public on 2026-09-10, thirteen days after the restart, with 91 one-page deliveries done, every one on those two commands.
 Its finished queue lines cite 19 design boards, against four screens in the fifteen days before.
 
-On 2026-09-21 I pulled the process out of Ninjobs into focus-kit, the kit this book teaches.
+On 2026-09-21, after the opening, I pulled the process out of Ninjobs into focus-kit, the kit this book teaches, and planted the kit back in Ninjobs.
+The numbers in this chapter come from before that day, none of them from the kit.
 The trigger was a drift: the project's own command files still described steps its process document, docs/05, had already changed.
 From then on the commands hold no fact of the project, and read every one of them in docs/05.
 

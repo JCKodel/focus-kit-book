@@ -57,11 +57,37 @@ Sources the /apply checks (none becomes a source note: Ninjobs is a private repo
 
 **Done when.**
 
-* [ ] Both editions written, the same passages changed in each, Portuguese read as Portuguese, "o Ninjobs" with its masculine article (docs/03).
-* [ ] The chapter still opens with what the reader can do after it; no filler and nothing useful cut.
-* [ ] `grep -n -i -E "2026\.10|changelog|readme|no longer|beta" book/en/06-birth-of-focus-kit.md` and `grep -n -i -E "2026\.10|changelog|readme|não mais|beta" book/pt/06-birth-of-focus-kit.md` find nothing; no before/after, no narrated run, no em dash.
-* [ ] No number or date added; the ones kept (2026-09-10, 2026-09-21, 91) agree with the sources in Contract.
-* [ ] No private detail of Ninjobs beyond its process artifacts; the disclosure scan green.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] `make verify` green; `make book` builds both editions, and the two PDF paths are reported.
-* [ ] Only this delivery's paths and its hunks of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions written, the same passages changed in each, Portuguese read as Portuguese, "o Ninjobs" with its masculine article (docs/03).
+* [x] The chapter still opens with what the reader can do after it; no filler and nothing useful cut.
+* [x] `grep -n -i -E "2026\.10|changelog|readme|no longer|beta" book/en/06-birth-of-focus-kit.md` and `grep -n -i -E "2026\.10|changelog|readme|não mais|beta" book/pt/06-birth-of-focus-kit.md` find nothing; no before/after, no narrated run, no em dash.
+* [x] No number or date added; the ones kept (2026-09-10, 2026-09-21, 91) agree with the sources in Contract.
+* [x] No private detail of Ninjobs beyond its process artifacts; the disclosure scan green.
+* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green; `make book` and the two PDF paths are the driver's step, run once at the end of the batch.
+* [x] Only this delivery's paths and its hunks of docs/06 staged: the driver's step (it owns docs/06 and the index); the page moved to `work/done/` and its commit message suggested.
+
+**Divergences.**
+
+* Contract asked for "Two commands of Ninjobs' own did the work"; the chapter says "Ninjobs' own two commands did the work", the same claim in the kit README's own phrasing, which reads better (review finding 2).
+* Contract asked for a sentence saying the numbers come "from the process the kit was taken from, not from the kit"; the chapter says "The numbers in this chapter come from before that day, none of them from the kit." (pt "Os números deste capítulo vêm de antes desse dia, nenhum deles do kit."). The chapter's 37,228 lines of spec, four screens and 29 checks measure the earlier process, not the one the kit was taken from, so the narrower claim is the true one (review finding 1). The Behaviour bullet's grouping of four screens and 29 checks under "the process the kit was taken from" is read the same way: they are not kit numbers.
+
+**Omissions.** None.
+
+**Proof.** Both editions changed in §Where it went / §Para onde foi only: the two commands named as Ninjobs' own, the 91 deliveries said to have run on them, the 2026-09-21 sentence gaining "after the opening" and the planting, and one sentence that no number of the chapter comes from the kit. The Done when greps find nothing in either edition. `make verify` green after the last edit. Sources checked: the kit's `README.md` §Why this shape (lines 163-169) and `README.pt.md`; `work/done/rewrite.md`, `work/done/birth-of-focus-kit.md`.
+
+**Review.** One read-only Opus agent read `git diff HEAD` of the two chapter files and this page against the page and docs/04. Findings: (1) "from the process the kit was taken from" is not true of every chapter number: fixed as in Divergences; (2) "Two commands of Ninjobs' own" awkward: fixed; (3) pt "todas nesses dois comandos" elliptical: now "todas feitas com esses dois comandos"; (4) optional, move the numbers sentence to the end of the paragraph: not taken, the Contract places it after the first sentence and the trigger still reads as Ninjobs' own commands drifting.
+
+**Decisions taken alone during /apply.**
+
+* Took review findings 1 to 3 and declined 4, as Review says.
+* Portuguese wording: "Dois comandos do próprio Ninjobs faziam o trabalho", "todas feitas com esses dois comandos", "depois da abertura", "plantei o kit de volta no Ninjobs".
+
+```commit
+docs(ch06-kit-after-ninjobs): Ninjobs ran on its own commands
+
+- chapter 6: the two commands and the 91 deliveries were Ninjobs' own
+- the kit was planted in Ninjobs on 2026-09-21, after the opening
+- no number in the chapter comes from the kit; both editions
+
+work/done/ch06-kit-after-ninjobs.md
+```
