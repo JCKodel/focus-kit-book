@@ -90,7 +90,7 @@ Every item is reported, never done: the update writes none of these documents.
 Section numbers come first because the commands cite docs/05 by the template's numbers, §4 for the queue, §6 for the commit, and read by number; a docs/05 numbered otherwise would send every command to the wrong section, so that migration comes before any other, whatever an ADR says.
 Applying the migrations keeps the team's choices: verify stays `make verify` with its checks, the reviewer stays the one the slot names, Git stays trunk, and the Milestone review keeps the kit's readers.
 
-The report lists only what the documents still lack, or says there is none; it compares the documents with the current templates, never one version of the kit with another.
+The report gives each item one of those three outcomes; it compares the documents with the current templates, never one version of the kit with another.
 
 The kit's version is the `metadata.version` in each `SKILL.md`; the process is what docs/04, docs/05 and `AGENTS.md` say, because every command reads them, so an updated kit whose migrations are not applied still runs the old process.
 The update is done when the migrations are applied, as any change is: a queue line, defined with `/propose` and built with `/apply`, so the change to your rules or your queue gets a page, verify and your review.
@@ -106,7 +106,7 @@ With no container yet, the slot means the kit's default, which that chapter name
 To know why a migration exists, read the kit's changelog, `CHANGELOG.md` in its repository, `CHANGELOG.pt.md` in Portuguese.
 It has one entry per version, newest first; the version is the `Version:` line of `SETUP.md`, the same value as the `metadata.version` in each `SKILL.md`.
 Each entry says what changed and the problem that caused it, and an entry may carry an item that starts with `Migration:`, naming what to change in the project's documents.
-What a rerun compares is the setup file's own step 4, a list by document and section, which names the sections of docs/05, the slots and the lines of `AGENTS.md` it checks; each item is reported, never done, and the report lists only what your documents still lack.
+What a rerun compares is the setup file's own step 4, a list by document and section, which names the sections of docs/05, the slots and the lines of `AGENTS.md` it checks; each item is reported, never done, with one of the three outcomes.
 
 ## How each host finds the commands
 

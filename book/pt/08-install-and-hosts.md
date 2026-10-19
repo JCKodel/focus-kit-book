@@ -92,7 +92,7 @@ Todo item é relatado, nunca feito: a atualização não escreve nenhum desses d
 Os números de seção vêm primeiro porque os comandos citam o docs/05 pelos números do modelo, o §4 para a fila, o §6 para o commit, e leem pelo número; um docs/05 numerado de outro jeito mandaria cada comando para a seção errada, então essa migração vem antes de qualquer outra, diga o que disser um ADR.
 Aplicar as migrações mantém as escolhas do time: a verificação continua `make verify` com as suas verificações, o revisor continua o que o slot cita, o Git continua trunk, e o Milestone review continua com os leitores do kit.
 
-O relatório lista só o que os documentos ainda não têm, ou diz que não há nada; ele compara os documentos com os modelos atuais, nunca uma versão do kit com outra.
+O relatório dá a cada item um desses três resultados; ele compara os documentos com os modelos atuais, nunca uma versão do kit com outra.
 
 A versão do kit é o `metadata.version` em cada `SKILL.md`; o processo é o que o docs/04, o docs/05 e o `AGENTS.md` dizem, porque todo comando os lê, então um kit atualizado cujas migrações não foram aplicadas ainda roda o processo antigo.
 A atualização termina quando as migrações são aplicadas, como qualquer mudança: uma linha da fila, definida com o `/propose` e construída com o `/apply`, para que a mudança nas suas regras ou na sua fila tenha uma página, verificação e a sua revisão.
@@ -108,7 +108,7 @@ Sem contêiner ainda, o slot vale o padrão do kit, que esse capítulo cita, e o
 Para saber por que uma migração existe, leia o changelog do kit, `CHANGELOG.md` no repositório dele, `CHANGELOG.pt.md` em português.
 Ele tem uma entrada por versão, a mais nova primeiro; a versão é a linha `Version:` do `SETUP.md`, o mesmo valor do `metadata.version` em cada `SKILL.md`.
 Cada entrada diz o que mudou e o problema que causou a mudança, e uma entrada pode trazer um item que começa com `Migration:` (no changelog em português, `Migração:`), citando o que mudar nos documentos do projeto.
-O que uma nova execução compara é o próprio passo 4 do arquivo de setup, uma lista por documento e seção, que cita as seções do docs/05, os slots e as linhas do `AGENTS.md` que confere; cada item é relatado, nunca feito, e o relatório lista só o que os seus documentos ainda não têm.
+O que uma nova execução compara é o próprio passo 4 do arquivo de setup, uma lista por documento e seção, que cita as seções do docs/05, os slots e as linhas do `AGENTS.md` que confere; cada item é relatado, nunca feito, com um dos três resultados.
 
 ## Como cada host encontra os comandos
 

@@ -44,10 +44,31 @@ Terms of docs/03 used: migration, project choice, slot; none new. No number adde
 
 **Done when.**
 
-* [ ] Both editions written, the same two sentences changed in each file, Portuguese read as Portuguese; the chapter opens as it did, no filler and nothing useful cut.
-* [ ] `grep -n "only what\|só o que" book/{en,pt}/08-install-and-hosts.md` finds nothing.
-* [ ] `git diff` of this delivery touches only those two lines in each chapter 8 file.
-* [ ] No em dash; no "no longer", "now", "não mais", "agora" added; no narrated run.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver may run it once for the batch).
-* [ ] Only this delivery's paths staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions written, the same two sentences changed in each file, Portuguese read as Portuguese; the chapter opens as it did, no filler and nothing useful cut.
+* [x] `grep -n "only what\|só o que" book/{en,pt}/08-install-and-hosts.md` finds nothing.
+* [x] `git diff` of this delivery touches only those two lines in each chapter 8 file.
+* [x] No em dash; no "no longer", "now", "não mais", "agora" added; no narrated run.
+* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver may run it once for the batch).
+* [x] Only this delivery's paths staged; the page moved to `work/done/` and its commit message suggested.
+
+**Proof.**
+
+* `git diff -U0 HEAD` of chapter 8, each edition: two one-line hunks, en lines 93 and 109, pt lines 95 and 111; on 109 (pt 111) only the last clause differs.
+* `grep -n "only what\|só o que" book/{en,pt}/08-install-and-hosts.md` finds nothing.
+* No em dash, number, source note, case, version or "now"/"agora" added; no narrated run.
+* `make verify` green. `make book` is run once by the driver for the batch.
+* Staging and the docs/06 hunk are the driver's in this batch.
+
+**Divergences.** None.
+
+**Delivery review.** A read-only Opus agent read this delivery's hunks against this page, docs/04 and AGENTS.md: no findings. It checked that "those three outcomes" has one antecedent (the three-outcome paragraph, one paragraph above, with no other set of three between), that no other sentence of chapter 8 in either edition contradicts the new wording, and that the Portuguese reuses "resultados" from the list's opening line.
+
+```commit
+docs(ch08-step4-outcomes): the report gives each item an outcome
+
+- ch08 report: each item gets one of three outcomes, not only what lacks
+- ch08 changelog paragraph: each item reported with one of the outcomes
+
+work/done/ch08-step4-outcomes.md
+```
