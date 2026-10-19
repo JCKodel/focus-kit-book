@@ -2,7 +2,8 @@
 
 After this chapter you can refuse a piece of code, a document or a check that no delivery needs, say which of KISS, YAGNI and DRY refuses it, and know the moment a shared version is due: the second concrete occurrence.
 You can write a business rule as a pure function that returns a `Result`, and tell an exception from a refusal and from an error in any language.
-You can also keep a library's exceptions at the boundary, so a new library changes one file, and let the compiler refuse a case you forgot to handle.
+You can also keep a library's exceptions, and only those, at the boundary, whether the call answers at once or later, so a new library changes one file and a bug still reaches you.
+And you can let the compiler refuse a case you forgot to handle.
 
 ## What grew on Ninjobs
 
@@ -203,7 +204,16 @@ Most of what a program handles is a rule saying no, so a program that throws for
 ## Where the catch lives
 
 Exceptions exist only where the program touches the outside world: a database call, a network request, a file, the phone's storage.
-So that is the only place a `try`/`catch` lives, and it does one thing: turn the library's exception into the program's value.
+So that is the only place a `try`/`catch` lives, and it does one thing: turn the library's exception into the program's value, and let every other throw pass.
+
+The catch has to recognize the library's exception, and the library says how.
+The lending library's database driver, in this chapter's example, throws a class of its own:
+
+```ts
+class DriverFailure extends Error {}
+```
+
+A real driver documents its own sign, a class or a code on the failure, and the boundary tests that sign; `instanceof Error` or the text of the message would match a bug too.
 
 ```ts
 type DatabaseFailed = { code: "DatabaseFailed"; message: string };
@@ -212,27 +222,47 @@ function query<T>(run: () => T): Result<T, DatabaseFailed> {
 	try {
 		return ok(run());
 	} catch (thrown) {
-		const message = thrown instanceof Error ? thrown.message : String(thrown);
+		if (!(thrown instanceof DriverFailure)) throw thrown;
 
-		return err({ code: "DatabaseFailed", message });
+		return err({ code: "DatabaseFailed", message: thrown.message });
 	}
 }
 ```
 
-Every call to the database runs inside `query`, and nothing past it knows which database library is in use.
+Everything else leaves `query` as it came, the same object: a `TypeError` from a bug inside `run`, any other `Error`, a thrown string, a framework's own control flow thrown on purpose.
+A catch that took them all would turn the bug into `DatabaseFailed`, and the program would tell the user the database failed while the code is what is wrong.
+
+`query` handles a call that has its answer when it returns.
+A database call is usually asynchronous: it returns at once a promise, the value JavaScript gives for a result still on its way, and its failure comes later, as a rejection of that promise.
+Passed to `query`, the promise is simply what `run` returned, so `query` returns `ok` holding it: a `catch` sees a throw, and a rejection is not one until something awaits the promise, so the rejection escapes the `Result`.
+An asynchronous call goes through a function of its own, which waits for the promise inside the `try`:
+
+```ts
+async function queryAsync<T>(
+	run: () => Promise<T>,
+): Promise<Result<T, DatabaseFailed>> {
+	try {
+		return ok(await run());
+	} catch (thrown) {
+		if (!(thrown instanceof DriverFailure)) throw thrown;
+
+		return err({ code: "DatabaseFailed", message: thrown.message });
+	}
+}
+```
+
+`await` throws a rejection where it waits,[^ecma-await] here inside the `try`, so the driver's failure becomes `err`, and any other rejection rejects the promise of `queryAsync` with the same reason.
+
+Every call to the database runs inside `query` or `queryAsync`, and nothing past them knows which database library is in use.
 Domain-driven design calls such a translator an anti-corruption layer, whose "*core purpose ... is to protect the domain model*";[^anti-corruption-layer] this book takes one step more and translates the exceptions too.
-Replace the database library and `query` changes; the rest of the program does not.
+Replace the database library and the boundary changes, these two functions and the sign they test; the rest of the program does not.
 
 The same boundary can turn an exception into a refusal.
 When two members borrow the last copy at the same moment, a unique index in the database refuses the second write.
-The code that ran the write reads that failure and returns the refusal `AlreadyLent`, since nothing broke: the rule held, in the one place two requests cannot race.
-Any other failure of the same write stays `DatabaseFailed`.
+The code that ran the write reads that failure, the driver's report that this unique index refused it, and returns the refusal `AlreadyLent`, since nothing broke: the rule held, in the one place two requests cannot race.
+Any other failure of the same write, another constraint or a lost connection, stays `DatabaseFailed`.
 
-A catch this wide also catches a bug thrown inside `run`, and turns it into `DatabaseFailed`.
-Two things bring the bug back to you: a test that runs every database call against a real, in-memory database and checks the value it gets, and a log line that prints the `message` before the program answers.
-
-Two kinds of throw pass the boundary untouched, a fatal one, such as running out of memory, and a framework's own control flow, thrown on purpose.
-So the rule reads: catch at the boundary with the outside world, translate, and let everything else pass.
+So the rule reads: catch at the boundary with the outside world, recognize the library's exception, translate it, and let everything else pass.
 
 ## Every case handled
 
@@ -272,7 +302,7 @@ Every failure a caller must handle is in the signature, so a reviewer reads the 
 * Accidental complexity is the part people add; it is a choice, and KISS (the plainest form that does the job), YAGNI (nothing built for a presumed need) and DRY (one place for each piece of knowledge) are three ways to refuse it.
 * An abstraction is written on the second concrete occurrence, and the delivery says which was the first; in a process, a step enters only when it names the concrete error it would have caught.
 * A business rule is a pure function: data in, a `Result` out, no I/O and no clock; fetching and saving belong to the orchestrator around it.
-* A failure is an exception (from outside, caught at the boundary and returned in the domain's own words), a refusal (a rule saying no, returned as a value) or an error (a bug, never caught); a throw steers no flow.
+* A failure is an exception (from outside, recognized and caught at the boundary, awaited inside the `try` when the call is asynchronous, and returned in the domain's own words), a refusal (a rule saying no, returned as a value) or an error (a bug, never caught); a throw steers no flow.
 * The value of a `Result` is the exhaustive check: a `Record`, `match` or `switch` that forgets a case fails to compile.
 
 [^brooks-silver-bullet]: Frederick P. Brooks Jr., "No Silver Bullet: Essence and Accidents of Software Engineering", IEEE Computer 20(4), 1987.
@@ -290,3 +320,4 @@ Every failure a caller must handle is in the signature, so a reviewer reads the 
 [^java-errors]: Oracle, "Class Error" and "Class NullPointerException", Java SE 21 API, and "Unchecked Exceptions: The Controversy", The Java Tutorials, accessed 2026-10-18. <https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Error.html>, <https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html> and <https://docs.oracle.com/javase/tutorial/essential/exceptions/runtime.html>
 [^toub-net9]: Stephen Toub, "Performance Improvements in .NET 9", .NET Blog, 2024-09-12, section "VM", benchmark `ExceptionThrowCatch`, accessed 2026-09-30. <https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-9/>
 [^anti-corruption-layer]: Microsoft, "Anti-Corruption Layer pattern", Azure Architecture Center, accessed 2026-09-30. <https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer>
+[^ecma-await]: Ecma International, "ECMAScript Language Specification", sections "Await" and "The try Statement", accessed 2026-10-18. <https://tc39.es/ecma262/multipage/control-abstraction-objects.html#await> and <https://tc39.es/ecma262/multipage/ecmascript-language-statements-and-declarations.html#sec-try-statement>

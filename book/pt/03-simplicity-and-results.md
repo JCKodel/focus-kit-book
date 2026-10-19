@@ -2,7 +2,8 @@
 
 Depois deste capítulo você consegue recusar um trecho de código, um documento ou uma verificação de que nenhuma entrega precisa, dizer qual entre KISS, YAGNI e DRY o recusa, e saber o momento em que uma versão compartilhada é devida: a segunda ocorrência concreta.
 Você consegue escrever uma regra de negócio como uma função pura que devolve um `Result` (resultado), e distinguir uma exceção de uma recusa e de um erro em qualquer linguagem.
-Você também consegue manter as exceções de uma biblioteca na fronteira, de modo que uma biblioteca nova mude um arquivo, e deixar o compilador recusar um caso que você esqueceu de tratar.
+Você também consegue manter as exceções de uma biblioteca, e só elas, na fronteira, quer a chamada responda na hora ou depois, de modo que uma biblioteca nova mude um arquivo e um bug ainda chegue até você.
+E consegue deixar o compilador recusar um caso que você esqueceu de tratar.
 
 ## O que cresceu no Ninjobs
 
@@ -204,7 +205,16 @@ A maior parte do que um programa trata é uma regra dizendo não, então um prog
 ## Onde mora o catch
 
 Exceções só existem onde o programa toca o mundo de fora: uma chamada ao banco de dados, uma requisição de rede, um arquivo, o armazenamento do celular.
-Então esse é o único lugar onde mora um `try`/`catch`, e ele faz uma coisa: transforma a exceção da biblioteca no valor do programa.
+Então esse é o único lugar onde mora um `try`/`catch`, e ele faz uma coisa: transforma a exceção da biblioteca no valor do programa, e deixa passar qualquer outro throw.
+
+O catch precisa reconhecer a exceção da biblioteca, e a biblioteca diz como.
+O driver de banco de dados da biblioteca de empréstimos, no exemplo deste capítulo, lança uma classe própria:
+
+```ts
+class FalhaDoDriver extends Error {}
+```
+
+Um driver real documenta o próprio sinal, uma classe ou um código na falha, e a fronteira testa esse sinal; `instanceof Error` ou o texto da mensagem também casariam com um bug.
 
 ```ts
 type BancoDeDadosFalhou = { codigo: "BancoDeDadosFalhou"; mensagem: string };
@@ -213,27 +223,47 @@ function consultar<T>(executar: () => T): Result<T, BancoDeDadosFalhou> {
 	try {
 		return ok(executar());
 	} catch (lancado) {
-		const mensagem = lancado instanceof Error ? lancado.message : String(lancado);
+		if (!(lancado instanceof FalhaDoDriver)) throw lancado;
 
-		return err({ codigo: "BancoDeDadosFalhou", mensagem });
+		return err({ codigo: "BancoDeDadosFalhou", mensagem: lancado.message });
 	}
 }
 ```
 
-Toda chamada ao banco de dados roda dentro de `consultar`, e nada depois dele sabe qual biblioteca de banco de dados está em uso.
+Todo o resto sai de `consultar` como entrou, o mesmo objeto: um `TypeError` de um bug dentro de `executar`, qualquer outro `Error`, uma string lançada, o fluxo de controle próprio de um framework, lançado de propósito.
+Um catch que pegasse tudo isso transformaria o bug em `BancoDeDadosFalhou`, e o programa diria ao usuário que o banco de dados falhou enquanto o que está errado é o código.
+
+`consultar` trata uma chamada que tem a resposta quando retorna.
+Uma chamada ao banco de dados costuma ser assíncrona: ela devolve na hora uma promise, o valor que o JavaScript dá para um resultado ainda a caminho, e a falha vem depois, como uma rejeição dessa promise.
+Passada a `consultar`, a promise é apenas o que `executar` devolveu, então `consultar` devolve `ok` com ela dentro: um `catch` vê um throw, e uma rejeição só vira um quando alguém espera a promise com `await`, por isso a rejeição escapa do `Result`.
+Uma chamada assíncrona passa por uma função própria, que espera a promise dentro do `try`:
+
+```ts
+async function consultarAsync<T>(
+	executar: () => Promise<T>,
+): Promise<Result<T, BancoDeDadosFalhou>> {
+	try {
+		return ok(await executar());
+	} catch (lancado) {
+		if (!(lancado instanceof FalhaDoDriver)) throw lancado;
+
+		return err({ codigo: "BancoDeDadosFalhou", mensagem: lancado.message });
+	}
+}
+```
+
+O `await` lança uma rejeição onde espera,[^ecma-await] aqui dentro do `try`, então a falha do driver vira `err`, e qualquer outra rejeição rejeita a promise de `consultarAsync` com o mesmo motivo.
+
+Toda chamada ao banco de dados roda dentro de `consultar` ou `consultarAsync`, e nada depois delas sabe qual biblioteca de banco de dados está em uso.
 O domain-driven design chama um tradutor assim de camada anticorrupção, cujo "*propósito central ... é proteger o modelo de domínio*";[^anti-corruption-layer] este livro dá um passo a mais e traduz as exceções também.
-Troque a biblioteca de banco de dados e `consultar` muda; o resto do programa não.
+Troque a biblioteca de banco de dados e a fronteira muda, essas duas funções e o sinal que elas testam; o resto do programa não.
 
 A mesma fronteira pode transformar uma exceção em uma recusa.
 Quando dois membros pegam o último exemplar no mesmo instante, um índice único no banco de dados recusa a segunda escrita.
-O código que rodou a escrita lê essa falha e devolve a recusa `JaEmprestado`, já que nada quebrou: a regra valeu, no único lugar onde duas requisições não podem competir.
-Qualquer outra falha da mesma escrita continua `BancoDeDadosFalhou`.
+O código que rodou a escrita lê essa falha, o aviso do driver de que esse índice único a recusou, e devolve a recusa `JaEmprestado`, já que nada quebrou: a regra valeu, no único lugar onde duas requisições não podem competir.
+Qualquer outra falha da mesma escrita, outra restrição ou uma conexão perdida, continua `BancoDeDadosFalhou`.
 
-Um catch largo assim também captura um bug lançado dentro de `executar`, e o transforma em `BancoDeDadosFalhou`.
-Duas coisas trazem o bug de volta a você: um teste que roda toda chamada ao banco de dados contra um banco de dados real, em memória, e confere o valor que recebe, e uma linha de log que imprime a `mensagem` antes de o programa responder.
-
-Dois tipos de throw passam pela fronteira intocados, um fatal, como acabar a memória, e o fluxo de controle próprio de um framework, lançado de propósito.
-Então a regra fica assim: capture na fronteira com o mundo de fora, traduza, e deixe todo o resto passar.
+Então a regra fica assim: capture na fronteira com o mundo de fora, reconheça a exceção da biblioteca, traduza, e deixe todo o resto passar.
 
 ## Todo caso tratado
 
@@ -273,7 +303,7 @@ Toda falha que quem chama precisa tratar está na assinatura, então quem revisa
 * A complexidade acidental é a parte que as pessoas acrescentam; ela é uma escolha, e KISS (a forma mais simples que faz o trabalho), YAGNI (nada construído para uma necessidade presumida) e DRY (um lugar para cada conhecimento) são três maneiras de recusá-la.
 * Uma abstração é escrita na segunda ocorrência concreta, e a entrega diz qual foi a primeira; em um processo, um passo só entra quando nomeia o erro concreto que teria pegado.
 * Uma regra de negócio é uma função pura: dados entrando, um `Result` saindo, sem I/O e sem relógio; buscar e salvar pertencem ao orquestrador em volta dela.
-* Uma falha é uma exceção (de fora, capturada na fronteira e devolvida nas palavras do próprio domínio), uma recusa (uma regra dizendo não, devolvida como valor) ou um erro (um bug, nunca capturado); um throw não conduz fluxo.
+* Uma falha é uma exceção (de fora, reconhecida e capturada na fronteira, aguardada dentro do `try` quando a chamada é assíncrona, e devolvida nas palavras do próprio domínio), uma recusa (uma regra dizendo não, devolvida como valor) ou um erro (um bug, nunca capturado); um throw não conduz fluxo.
 * O valor de um `Result` é a checagem exaustiva: um `Record`, `match` ou `switch` que esquece um caso não compila.
 
 [^brooks-silver-bullet]: Frederick P. Brooks Jr., "No Silver Bullet: Essence and Accidents of Software Engineering", IEEE Computer 20(4), 1987.
@@ -291,3 +321,4 @@ Toda falha que quem chama precisa tratar está na assinatura, então quem revisa
 [^java-errors]: Oracle, "Class Error" e "Class NullPointerException", API do Java SE 21, e "Unchecked Exceptions: The Controversy", The Java Tutorials, acesso em 2026-10-18. <https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Error.html>, <https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html> e <https://docs.oracle.com/javase/tutorial/essential/exceptions/runtime.html>
 [^toub-net9]: Stephen Toub, "Performance Improvements in .NET 9", .NET Blog, 2024-09-12, seção "VM", benchmark `ExceptionThrowCatch`, acesso em 2026-09-30. <https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-9/>
 [^anti-corruption-layer]: Microsoft, "Anti-Corruption Layer pattern", Azure Architecture Center, acesso em 2026-09-30. <https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer>
+[^ecma-await]: Ecma International, "ECMAScript Language Specification", seções "Await" e "The try Statement", acesso em 2026-10-18. <https://tc39.es/ecma262/multipage/control-abstraction-objects.html#await> e <https://tc39.es/ecma262/multipage/ecmascript-language-statements-and-declarations.html#sec-try-statement>
