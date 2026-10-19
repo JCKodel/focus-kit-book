@@ -543,3 +543,15 @@ When this milestone closes, the book teaches focus-kit 2026.10.19 and the reposi
 [x] ch07-12-loan-days        chapters 7, 12 and 13: the lending library's loan period comes from docs/03 in every chapter; both editions · after m21-review, ch12-refuse-first, m21-git-slot-default
 [x] docs-m21-tidy            docs/06's header names the next milestone and M21's paragraph names what ch06 and ch16 answer, docs/05 is rewrapped, m21-review's page cites its base case, and work/kit-proposals.md carries three notes for focus-kit · after m21-review
 ```
+
+## M22. focus-kit 2026.10.19.1
+
+When this milestone closes, the book teaches focus-kit 2026.10.19.1 and the repository runs on it: with a branch or a worktree per delivery the main branch shows each line as it was until the merge, so a board, or a session picking free lines or resolving an `after`, takes each slug's line from its worktree or its branch and reconciles by slug. A person who runs `make` with no target sees the commands it offers, each with one line saying what it does.
+
+```
+[>] kit-2026-10-19-1         reinstall the kit at 2026.10.19.1 and apply its migration report to docs/05 §4 · after docs-m21-tidy
+[ ] ch14-20-read-branches    chapters 14 and 20: with a branch or worktree per delivery a board, or a session picking free lines or resolving an `after`, reads each slug's line from its worktree or branch, the main branch showing it as it was until the merge; both editions · after kit-2026-10-19-1
+[ ] ch12-free-lines-branches chapter 12: /propose, starting its worktree from the main branch's HEAD, judges free lines and `after` from each slug's own branch; both editions · after kit-2026-10-19-1
+[ ] make-help                `make` with no target prints the Makefile's commands, one line each saying what it does
+[ ] m22-review               the review of M22 as docs/05 §8 says · after kit-2026-10-19-1, ch14-20-read-branches, ch12-free-lines-branches, make-help
+```
