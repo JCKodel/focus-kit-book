@@ -25,13 +25,14 @@ A free line is a line of the queue that is not done, not waiting, and needs no o
 
 Say the lending library has two free lines: `return-book`, which touches `src/features/loans/`, and `overdue-list`, which touches `src/features/reports/`; the slugs and paths are an illustration, written for this chapter.
 Their code files do not meet.
-Both mark docs/06, the queue, but each marks its own line, and two lines far apart in one file are two hunks, separate pieces of a change that git stages apart.
+Both mark docs/06, the queue, but each marks only its own line.
+`git add -p` offers a file to stage in hunks, separate pieces of a change: two lines far apart are two hunks, two neighbouring lines are one, and each session still stages its own line alone (the section on the batch shows how).
 So the two can run in one folder at once.
 
 Each session keeps to its delivery:
 
 * it changes the mark of its own line in the queue, and no other;
-* it stages only its own paths, and only its own hunk of docs/06 (`git add -p` stages a file hunk by hunk);
+* it stages only its own paths, and only its own line of docs/06;
 * it leaves alone whatever the other session changed or staged.
 
 The commit stays your decision, one delivery at a time, after you have used it and read what it staged.
@@ -41,18 +42,23 @@ Before committing `return-book`, look at what is staged:
 git diff --cached --stat
 ```
 
-It lists each staged file and how many of its lines change.
-If the list holds only `src/features/loans/`, the page of `return-book` and docs/06, and `git diff --cached docs/06-Queue.md` shows only that line's hunk, a plain `git commit` takes that delivery and nothing else.
-If it also holds `src/features/reports/` or the page of `overdue-list`, the other session has staged its work too, and a plain commit takes both.
+It lists each staged file and how many of its lines change: it names files, and says nothing of whose lines a shared file holds.
+So a list of only `src/features/loans/`, the page of `return-book` and docs/06 does not settle docs/06, which both sessions change; `git diff --cached docs/06-Queue.md` does, and when it shows `return-book`'s line alone, a plain `git commit` takes that delivery and nothing else.
+If the list also holds `src/features/reports/` or the page of `overdue-list`, or the queue's staged diff holds `overdue-list`'s line, the other session has staged its work too, and a plain commit takes both.
+
+Then do not commit yet: the commit waits until the index holds only the delivery you reviewed.
+The session that found the other's entries already staged told you so and left them as they were; neither session removes the other's entries.
+The usual way to an index of one delivery is order: commit each delivery as its session ends, before the other stages anything.
+If both are staged already, sorting the index is yours: `git restore --staged <its paths>` takes the other's files out of the index and leaves them in the folder.
+The queue cannot be split with `s` when the two lines are neighbours, since `git restore --staged -p` divides a hunk as `git add -p` does;[^git-restore] so `git restore --staged docs/06-Queue.md` takes the whole file out, you ask this delivery's session to stage its own line again, and you commit.
+Then the other session stages its entries again, when you ask it.
 
 The trap is naming paths.
-`git commit -- docs/06-Queue.md src/features/loans/` looks like the safe way to commit one delivery, and for files only that delivery changed, it is.
-For a file both changed, it takes too much: the git documentation says a commit with paths is made "*by taking the updated working tree contents of the paths specified on the command line, disregarding any contents that have been staged for other paths.*"[^git-commit]
+`git commit -- docs/06-Queue.md src/features/loans/` looks like the way to commit one delivery, and it is never a way to choose one.
+A plain `git commit` takes the index: a line the other session changed and did not stage is in the folder, not in the index, so it stays out of the commit.
+A commit with paths takes the folder instead: the git documentation says it is made "*by taking the updated working tree contents of the paths specified on the command line, disregarding any contents that have been staged for other paths.*"[^git-commit]
 So git takes docs/06 whole from the folder, the other line's mark included, staged or not, and that mark rides into this commit.
-
-The way out is order.
-Commit each delivery as its session ends, before the other stages anything.
-If the other has staged already, unstage its entries yourself, `git restore --staged <its paths>` and `git restore --staged -p docs/06-Queue.md` for its hunk of the queue, commit, and let its session stage them again; a session never touches the other's entries.
+You choose a delivery with the index and check it with `git diff --cached`, never with paths on `git commit`.
 
 ## What is and is not a conflict there
 
@@ -60,14 +66,15 @@ In one folder, each session sees the other's work as it happens, and most of it 
 
 * another line's mark changes in docs/06, `[~]` to `[*]`, say;
 * another delivery's page appears in `work/`, or its files in the tree;
-* another delivery's entries are already staged.
+* another delivery's entries are already staged;
+* two neighbouring lines of docs/06, one per delivery, which git puts in one hunk: each session stages its own line, and sharing a hunk is sharing no line.
 
 Each is the other session's work: the session goes on, and touches none of it.
 This is written down because, without it, a second session on another module stops when the first changes docs/06, though it has everything it needs to go on.
 
 Two things are a conflict:
 
-* both deliveries edit the same lines of `src/features/loans/rules.ts`, say;
+* both deliveries edit the same line, of `src/features/loans/rules.ts`, say, or of the queue;
 * this page needs a file the other delivery is changing, as when `return-book` needs `src/features/loans/` while another delivery reshapes it.
 
 Then the session stops and reports, and the decision is yours: order the two lines, by writing `· after <slug>` on the one that must wait for the other, or give one of them a worktree.
@@ -271,7 +278,7 @@ Pages written at once do not read each other.
 `/propose` reads the deliveries in flight in `work/` when it starts, and a page being written at the same time is not there yet: two pages may settle the same question two ways, or each ask docs/03 for the same new term.
 You find it by reading the pages side by side, and you correct one of them in its conversation.
 The lines of one batch sit side by side in the queue, so git puts their marks in one hunk of docs/06.
-That hunk holds no conflict: no line in it is changed by two sessions, and each session's change is its own line's mark, which the list of what is not a conflict names first.
+That hunk holds no conflict: no line in it is changed by two sessions, and each session's change is its own line's mark, which the list of what is not a conflict names.
 What it changes is the staging, and the session that owns a line stages its mark, never you.
 `git add -p` cannot do it here: it splits a hunk with `s` only where an unchanged line separates two changes, and its `e` opens the hunk in an editor, which a session does not drive.[^git-add]
 So the session writes a patch, the text `git diff` prints for a change, holding only its own line's `-` and `+`, next to each other, with the other lines as they stand in the index (the staged copy a commit is made from), unchanged, around them.
@@ -281,7 +288,7 @@ Before each commit, `git diff --cached docs/06-Queue.md` shows one `-` line and 
 The applies that follow add no rule: they run at once only on free lines whose files do not meet, and each commit is your decision, one delivery at a time.
 
 Asking for a step is not handing over the batch.
-Once you have used and reviewed one delivery, and `git diff --cached --stat` shows an index holding only it, you may ask its session to commit it; the next delivery waits for its own use, its own review and its own index.
+Once you have used and reviewed one delivery, and the index holds only it, its files in `git diff --cached --stat` and its line alone in `git diff --cached docs/06-Queue.md`, you may ask its session to commit it; the next delivery waits for its own use, its own review and its own index.
 Letting the agents commit a batch of applies on their own, before you have read them, leaves the method, and it costs four things.
 A commit stops saying that a person read the change, which is what it says in [chapter 13](13-apply.md).
 In one folder, an agent's commit takes what another session staged, or, with paths, the shared docs/06 whole: the trap of naming paths, earlier in this chapter.
@@ -293,7 +300,7 @@ And a wrong delivery that later ones built on reverts with a conflict wherever t
 In one folder or in worktrees, two deliveries at once still share whatever is not in their own files.
 Before starting two, check five things.
 
-**The queue.** In one folder it does not conflict: each session marks its own line and stages its own hunk.
+**The queue.** In one folder it does not conflict: each session marks its own line and stages that line alone, whether or not it shares a hunk with the other's.
 Across worktrees it always conflicts at the merge, since every delivery marks its line, and it resolves the same way every time: keep both marks.
 
 **Files both change.** A code file that two deliveries both change is different.
@@ -321,9 +328,9 @@ Proposes in a batch carry the parallel into definition: the agents write the pag
 
 ## Key points
 
-* Two sessions share one folder on trunk when their lines are free and their files do not meet: each marks only its line, stages only its paths and its hunk of the queue, and you decide each commit, one delivery at a time.
-* Another line's mark, another delivery's page or files and another session's staged entries are not a conflict; the same lines edited by both, or a file one page needs that the other is changing, is: stop, then order the lines or give one a worktree.
-* Commit from the index once `git diff --cached --stat` holds only that delivery; `git commit -- <paths>` takes each named file whole from the folder, the other delivery's hunk of a shared file included.
+* Two sessions share one folder on trunk when their lines are free and their files do not meet: each marks only its line, stages only its paths and its line of the queue, and you decide each commit, one delivery at a time.
+* Another line's mark, another delivery's page or files and another session's staged entries are not a conflict; neither are two neighbouring lines of the queue in one hunk; a line edited by both, or a file one page needs that the other is changing, is: stop, then order the lines or give one a worktree.
+* Commit from the index once it holds only that delivery: `git diff --cached --stat` names files, so read the staged diff of a shared file for its lines too; with another delivery staged, wait; and never select a delivery with `git commit -- <paths>`, which takes each named file whole from the folder, the other delivery's lines in a shared file included, staged or not.
 * A worktree per delivery pays for several people, or for deliveries that touch the same files: a container folder whose `main/` is the checkout keeps each delivery's worktree in `<hidden>/worktrees/<slug>/` on `<prefix>/<slug>`, `.focus-kit/` and `focus-kit/` by default; `git worktree add`, work there, `git merge --no-ff` from `main/`, `git worktree remove`, `git branch -d`; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
 * Parallel pays while the deliveries' files do not meet, or meet only across worktrees whose merge you can decide, the machine's ports and databases do not collide, the disk holds each worktree's dependencies, and one person can still review each delivery; proposes can run in a batch on the recommended answers, each page listing what it decided alone for you to read before any `/apply`, and every commit stays your decision, made by you or asked of the agent after your review.
 
@@ -333,5 +340,6 @@ Proposes in a batch carry the parallel into definition: the agents write the pag
 [^git-merge]: Git, "git-merge", the documentation, section "How conflicts are presented" and option `--abort`, accessed 2026-09-30. <https://git-scm.com/docs/git-merge>
 [^git-diff]: Git, "git-diff", the documentation, option `--check`, accessed 2026-09-30. <https://git-scm.com/docs/git-diff>
 [^git-add]: Git, "git-add", the documentation, section "Interactive mode", accessed 2026-10-18. <https://git-scm.com/docs/git-add>
+[^git-restore]: Git, "git-restore", the documentation, option `--patch`, accessed 2026-10-18. <https://git-scm.com/docs/git-restore>
 [^git-apply]: Git, "git-apply", the documentation, option `--cached`, accessed 2026-10-18. <https://git-scm.com/docs/git-apply>
 [^parallel-run]: J.C. Ködel, "One Page at a Time", the record of two deliveries built in parallel in two worktrees, 2026-09-30, in the book's repository. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/clinic-worktrees-run>

@@ -69,7 +69,7 @@ A primeira escolha do kit é a revisão do próprio host, uma skill que o agente
 Senão, é um agente somente leitura: um agente que a sessão lança com o seu próprio contexto, que lê arquivos e roda `git diff` e não edita nada (o capítulo 16 diz mais sobre agentes que um agente lança).
 Se o slot não nomeia revisor nenhum, essa revisão não existe, e o seu commit continua sendo a única revisão.
 
-A revisão lê a entrega inteira contra a sua base, pelos seus caminhos, entre eles os arquivos que a entrega criou, e do docs/06 só o trecho desta linha, contra a página e o docs/04.
+A revisão lê a entrega inteira contra a sua base, pelos seus caminhos, entre eles os arquivos que a entrega criou, e do docs/06 só a mudança desta linha, contra a página e o docs/04.
 Um agente somente leitura lê o `git diff HEAD` desses caminhos, que os compara com o último commit e por isso traz juntas as mudanças em stage e fora dele; um `git diff` puro compara a pasta de trabalho com o índice e perde o que já está em stage.
 Em um branch da entrega onde você fez commit do trabalho parcial que um `/apply` bloqueado colocou em stage, o agente também lê esses commits contra a base do branch: quando a sessão é retomada, uma pasta de trabalho limpa não quer dizer que não há nada a revisar, já que o trabalho até ali pode estar nesses commits, e eles continuam sendo desta revisão.
 No trunk não há nenhum, já que lá o trabalho bloqueado fica sem commit.
@@ -101,7 +101,7 @@ Então, antes de parar, o `/apply` faz tudo isto:
 * Move a página para `work/done/`; uma linha `[?]` que espera só por esta, ou por linhas já `[x]`, volta pela fase de retomada ([capítulo 14](14-queue-states.md)).
 * Coloca em stage só os caminhos e trechos desta entrega, nunca com `git add -A` ou `git add .`, e avisa o que outra pessoa já tinha colocado em stage, sem tirar do stage.
 * Termina a página com a mensagem de commit sugerida em um bloco `commit`, no formato que o docs/05 define, e mostra o mesmo bloco na conversa, onde um bloco cercado fica à parte do resto da resposta. Há um bloco só: um `/apply` retomado substitui o anterior.
-* A sua última edição marca a linha como `[x]` no docs/06 e coloca esse trecho em stage, depois de todo o resto estar em stage, então uma linha `[x]` sem nada em stage é uma sessão que parou antes da hora.
+* A sua última edição marca a linha como `[x]` no docs/06 e coloca essa linha em stage, depois de todo o resto estar em stage, então uma linha `[x]` sem nada em stage é uma sessão que parou antes da hora.
 * As últimas palavras dele são os seus próximos passos: usar o que a entrega mudou como o usuário dela usaria, e dizer naquela sessão o que está errado; revisar o diff em stage; fazer o commit (e o merge, em um branch da entrega); e pegar a próxima linha da fila, com o comando escrito como o seu host o invoca, em uma sessão nova, para que uma pessoa nova no kit não procure na documentação o que vem depois. A última coisa que diz é qual ambiente está em qual versão e o comando que atualiza os outros, e ele nunca termina calado sobre isso.
 
 Pronto é a revisão e essa lista inteira.
@@ -128,8 +128,8 @@ Nenhum teste dispara isso, já que nos testes só o índice único falha, e est�
 `inserirEmprestimo` fica em um arquivo que esta entrega criou, então uma revisão só do diff não teria lido nada dele.
 O segundo candidato: a recusa para um membro suspenso não diz até quando.
 A página nunca pediu isso, então vira a linha `fim-da-suspensao`, posta na fila abaixo de `devolver-livro`, que continua sendo a próxima linha livre.
-Então ele escreve na página o que aconteceu, com os dois candidatos e o que foi feito de cada um, marca o Pronto quando, move a página para `work/done/emprestar-livro.md`, coloca em stage só os caminhos desta entrega e, como a sua última edição, marca a linha `[x]` e coloca em stage esse trecho do docs/06.
-Se uma edição de outra sessão em `src/features/membros/` está na árvore, ou se o trecho dela do docs/06 já está em stage, o agente deixa os dois como estão e avisa você do que está em stage (capítulo 19).
+Então ele escreve na página o que aconteceu, com os dois candidatos e o que foi feito de cada um, marca o Pronto quando, move a página para `work/done/emprestar-livro.md`, coloca em stage só os caminhos desta entrega e, como a sua última edição, marca a linha `[x]` e coloca em stage essa linha do docs/06.
+Se uma edição de outra sessão em `src/features/membros/` está na árvore, ou se a linha dela do docs/06 já está em stage, o agente deixa os dois como estão e avisa você do que está em stage (capítulo 19).
 
 A página termina com a mensagem sugerida, escrita para este capítulo, e a conversa mostra o mesmo bloco:
 
@@ -226,7 +226,8 @@ Ele faz o commit e para aí: um pedido de commit não é um pedido de merge nem 
 O agente pode ter a permissão do seu host para rodar `git commit`; essa permissão permite que ele digite o comando, e só o seu pedido, depois da sua leitura, diz que a mudança deve entrar no histórico.
 Depois confira o que ele fez com `git show --stat HEAD`, que mostra a mensagem do último commit e os arquivos que ele guarda: a mensagem da página, e os caminhos desta entrega e nada mais.
 
-Quando outra sessão trabalha na mesma pasta, faça o commit de uma entrega por vez, a partir do índice, quando o `git diff --staged` tiver só aquela entrega (capítulo 19).
+Quando outra sessão trabalha na mesma pasta, faça o commit de uma entrega por vez, a partir do índice, quando o `git diff --staged` tiver só aquela entrega, nunca nomeando caminhos no `git commit`, que pega cada arquivo nomeado inteiro da pasta, com as linhas da outra sessão nele (capítulo 19).
+Se o diff em stage também guarda entradas de outra entrega, que o `/apply` avisou e deixou como estavam, não faça o commit ainda: um commit simples as levaria também, e o capítulo 19 diz como o índice passa a guardar uma entrega só.
 
 ### A mensagem
 

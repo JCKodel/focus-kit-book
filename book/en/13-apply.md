@@ -69,7 +69,7 @@ The kit's first choice is the host's own review, a skill the agent invokes or a 
 Otherwise it is a read-only agent: one the session launches with its own context, which reads files and runs `git diff` and edits nothing (chapter 16 says more on agents that an agent launches).
 A slot that says none means no such review, and your commit stays the only review.
 
-The review reads the whole delivery against its base, by its paths, the files the delivery created among them, and of docs/06 only this line's hunk, against the page and docs/04.
+The review reads the whole delivery against its base, by its paths, the files the delivery created among them, and of docs/06 only this line's change, against the page and docs/04.
 A read-only agent reads `git diff HEAD` of those paths, which compares them with the last commit and so holds staged and unstaged changes together; a bare `git diff` compares the working folder with the index and misses whatever is already staged.
 On a delivery branch where you committed the partial work a blocked `/apply` staged, the agent also reads those commits against the branch's base: when the session resumes, a clean working folder does not mean there is nothing to review, since the work so far may sit in those commits, and they are still this review's.
 On trunk there are none, since blocked work stays uncommitted there.
@@ -101,7 +101,7 @@ So before it stops, `/apply` does all of this:
 * It moves the page to `work/done/`; a `[?]` line that waits only on this one, or on lines already `[x]`, goes back by its resume phase ([chapter 14](14-queue-states.md)).
 * It stages only this delivery's paths and hunks, never with `git add -A` or `git add .`, and reports what someone else had already staged without unstaging it.
 * It ends the page with the suggested commit message in a `commit` block, in the format docs/05 defines, and shows the same block in the conversation, where a fenced block stands apart from the rest of the reply. There is one block: a resumed `/apply` replaces the earlier one.
-* Its last edit marks the line `[x]` in docs/06 and stages that hunk, after everything else is staged, so a line marked `[x]` with nothing staged is a session that stopped early.
+* Its last edit marks the line `[x]` in docs/06 and stages that line, after everything else is staged, so a line marked `[x]` with nothing staged is a session that stopped early.
 * Its last words are your next steps: use what the delivery changed as its user would, and say in that session what is wrong; review the staged diff; commit (and merge, on a delivery branch); and take the queue's next line, with its command written as your host invokes it, in a fresh session, so a person new to the kit does not search the documentation for what comes after. The last thing it says is which environment is at which version and the command that updates the others, and it never ends silent about it.
 
 Done is the review and that whole list.
@@ -128,8 +128,8 @@ No test triggers it, since in the tests only the unique index ever fails, and it
 `insertLoan` lives in a file this delivery created, so a review of the diff alone would have read nothing of it.
 The second candidate: the refusal for a suspended member does not say until when.
 The page never asked for that, so it becomes the line `suspension-end`, placed in the queue below `return-book`, which stays the next free line.
-Then it writes what happened on the page, both candidates and what became of each included, ticks Done when, moves the page to `work/done/lend-book.md`, stages only this delivery's paths, and, as its last edit, marks the line `[x]` and stages that hunk of docs/06.
-If another session's edit to `src/features/members/` sits in the tree, or its hunk of docs/06 is already staged, the agent leaves both as they are and tells you about the staged one (chapter 19).
+Then it writes what happened on the page, both candidates and what became of each included, ticks Done when, moves the page to `work/done/lend-book.md`, stages only this delivery's paths, and, as its last edit, marks the line `[x]` and stages that line of docs/06.
+If another session's edit to `src/features/members/` sits in the tree, or its line of docs/06 is already staged, the agent leaves both as they are and tells you about the staged one (chapter 19).
 
 The page ends with the suggested message, written for this chapter, and the conversation shows the same block:
 
@@ -226,7 +226,8 @@ It runs the commit and stops there: a request to commit is not one to merge or t
 The agent may have your host's permission to run `git commit`; that permission lets it type the command, and only your request, after your reading, says the change should enter the history.
 Then check what it made with `git show --stat HEAD`, which prints the last commit's message and the files it holds: the message from the page, and this delivery's paths and nothing else.
 
-When another session works in the same folder, commit one delivery at a time, from the index, once `git diff --staged` holds only that delivery (chapter 19).
+When another session works in the same folder, commit one delivery at a time, from the index, once `git diff --staged` holds only that delivery, never by naming paths on `git commit`, which takes each named file whole from the folder, the other session's lines in it included (chapter 19).
+If the staged diff also holds another delivery's entries, which `/apply` reported and left as they were, do not commit yet: a plain commit would take them too, and chapter 19 says how the index comes to hold one delivery.
 
 ### The message
 
