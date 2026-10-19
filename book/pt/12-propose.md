@@ -67,9 +67,15 @@ emprestado, e o sistema recusa quando as regras dizem não.
   vencer hoje ainda não é estar em atraso.
 
 **Contrato.**
-Tabela `emprestimo` (exemplar_id, membro_id, emprestado_em, devolver_em,
-devolvido_em anulável); índice único em exemplar_id onde devolvido_em é
-nulo.
+Tabela `emprestimo`:
+* `exemplar_id`, `membro_id`: texto, não nulo.
+* `emprestado_em`, `devolver_em`: texto, uma data como `YYYY-MM-DD`, não
+  nulo.
+* `devolvido_em`: texto, uma data como `YYYY-MM-DD`, nulo enquanto o
+  exemplar está fora.
+Índice único em `exemplar_id` onde `devolvido_em` é nulo: um empréstimo
+aberto por exemplar, e um exemplar cujo empréstimo foi devolvido pode ser
+emprestado de novo.
 `emprestar(exemplar, membro, hoje):
 Result<Emprestimo, RecusaDeEmprestimo>` com `RecusaDeEmprestimo =
 "TemLivrosEmAtraso" | "JaEmprestado" | "MembroSuspenso"`.
@@ -87,16 +93,31 @@ e 1280 pixels de largura.
   decide isso aqui.
 
 **Pronto quando.**
-* [ ] Os testes unitários de `emprestar` passam para as cinco linhas de
-  Comportamento.
-* [ ] O teste do repositório prova que o índice único recusa o segundo
-  empréstimo.
+* [ ] Os testes unitários de `emprestar` provam a data de devolução 21
+  dias depois, a recusa de um membro com um livro atrasado e de um membro
+  suspenso, e que um empréstimo que vence hoje não conta como atraso.
+* [ ] Os testes de `emprestimoPedido`, com repositórios falsos, provam
+  que um empréstimo é salvo e o seu estado é `Emprestado`, e que cada
+  recusa, incluída `JaEmprestado` vinda de `inserirEmprestimo`, dá
+  `Recusado` levando essa recusa; para o membro com um livro atrasado e
+  o suspenso, nada chama `inserirEmprestimo`.
+* [ ] O teste do repositório, com as migrações reais, prova que o
+  primeiro empréstimo aberto de um exemplar é salvo e que um segundo
+  devolve `JaEmprestado`, e que um exemplar cujo empréstimo foi devolvido
+  é emprestado de novo.
+* [ ] Testes ponta a ponta provam que um exemplar emprestado mostra o
+  membro e a sua data de devolução, e que cada recusa mostra a sua
+  mensagem: "Devolva primeiro os seus livros atrasados.", "A sua
+  matrícula está suspensa." e, com um empréstimo aberto do exemplar já
+  salvo, "Este exemplar acabou de ser emprestado a outra pessoa."
 * [ ] `npm run verify` está verde.
 * [ ] A tela de empréstimo confere com o design nas duas larguras.
 ```
 
 Leia a página como o relato do agente sobre o que ele entendeu.
 Cada linha de Comportamento pode ser conferida; o Contrato é exato; o Fora do escopo nomeia o que alguém poderia ter suposto que estava dentro; o Pronto quando é uma lista que uma máquina ou uma pessoa consegue marcar.
+O Pronto quando também diz qual teste do capítulo 5 prova cada linha de Comportamento: as regras nos testes unitários de `emprestar`, que uma recusa não salva nada nos testes do orquestrador, a disputa pelo último exemplar no teste do repositório, e o que a tela mostra nos testes ponta a ponta.
+A disputa é do repositório: dois bibliotecários no mesmo instante só se encontram no banco, e nenhuma função pura os vê.
 Cada decisão tirada de um documento o nomeia: os 21 dias vêm do docs/00, e as reservas e as multas do Fora do escopo também.
 O agente rascunhou os casos que precisam falhar e o caso de borda: o Contrato já tinha `MembroSuspenso`, então um membro suspenso ganha uma linha, e uma regra sobre livros atrasados implica o dia em que um empréstimo vence, que ainda não é atraso.
 
@@ -104,6 +125,7 @@ O Contrato é a única seção que precisa ser exata.
 O motivo do kit: "*uma tela errada se corrige numa sessão, uma coluna errada é uma migration, e uma regra de acesso errada já vazou*".
 Uma tela é código que você reescreve; uma coluna guarda dados, e mudá-la exige mover os dados que já estão lá; uma regra de acesso decide quem lê o quê, e uma errada já deixou dados saírem antes que alguém releia a página.
 Nenhuma correção posterior desfaz a terceira.
+Por isso o Contrato acima dá a cada coluna o seu tipo e se ela pode ser nula, as datas como texto, como o `hoje` do capítulo 3, e a regra do índice em palavras: ele guarda só os empréstimos abertos.
 
 ## Leia a página antes do `/apply`
 

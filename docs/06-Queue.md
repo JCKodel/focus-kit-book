@@ -494,7 +494,7 @@ When this milestone closes, every technical claim the audit of 2026-10-18 found 
 ```
 [x] ch03-query-catch         chapter 3: `query` turns only the driver's failures into a value and rethrows the rest, and an async variant awaits inside the try, each case tested; the audit ran the original and saw a bug and a control object become DatabaseFailed and a rejected promise escape the Result; both editions
 [x] ch03-exhaustive-switch   chapter 3: a Result makes the cases representable and checkable, not every switch exhaustive; shows `Record` and a switch with a `never` check and when each fails to compile; both editions
-[>] ch12-scenario-levels     chapter 12: the example page ties each Behaviour scenario to the level that proves it, the race for the last copy to the repository test, and its Contract gives the column types or points to the schema that does; both editions
+[x] ch12-scenario-levels     chapter 12: the example page ties each Behaviour scenario to the level that proves it, the race for the last copy to the repository test, and its Contract gives the column types or points to the schema that does; both editions
 [x] ch04-isolation-claims    chapter 4: isolation as a goal, the consumers of a changed contract checked, and the function shared with the client leaves the server's decision authoritative over other data; both editions
 [>] ch01-recovery-not-immunity chapter 1: a decision in a file survives compaction as something to reread, not as text kept in every call; reopen the page and documents after compaction or resumption; both editions
 [>] ch24-protocol-phase      chapter 24: in which phase the protocol runs; after /apply's first result, what already satisfies the page goes in and a new capability becomes a line; both editions

@@ -65,8 +65,12 @@ system refuses when the rules say no.
   today is not yet overdue.
 
 **Contract.**
-Table `loan` (copy_id, member_id, lent_at, due_at, returned_at nullable);
-unique index on copy_id where returned_at is null.
+Table `loan`:
+* `copy_id`, `member_id`: text, not null.
+* `lent_at`, `due_at`: text, a date as `YYYY-MM-DD`, not null.
+* `returned_at`: text, a date as `YYYY-MM-DD`, null while the copy is out.
+Unique index on `copy_id` where `returned_at` is null: one open loan per
+copy, and a copy whose loan was returned can be lent again.
 `lend(copy, member, today): Result<Loan, LendRefusal>` with
 `LendRefusal = "HasOverdueBooks" | "AlreadyLent" | "MemberSuspended"`.
 
@@ -82,14 +86,29 @@ unique index on copy_id where returned_at is null.
   here.
 
 **Done when.**
-* [ ] Unit tests of `lend` pass for the five Behaviour lines.
-* [ ] The repository test proves the unique index refuses the second loan.
+* [ ] The unit tests of `lend` prove the due date 21 days ahead, the
+  refusal of a member with an overdue book and of a suspended member, and
+  a loan due today not counted as overdue.
+* [ ] The tests of `lendRequested`, with fake repositories, prove a loan
+  is saved and its state is `Lent`, and each refusal, `AlreadyLent` from
+  `insertLoan` included, gives `Refused` carrying that refusal; for the
+  member with an overdue book and the suspended one, nothing calls
+  `insertLoan`.
+* [ ] The repository test, with the real migrations, proves the first
+  open loan of a copy is saved and a second returns `AlreadyLent`, and a
+  copy whose loan was returned is lent again.
+* [ ] End-to-end tests prove a lent copy shows the member and its due
+  date, and each refusal shows its message: "Return your overdue books
+  first.", "Your membership is suspended." and, with an open loan of the
+  copy already saved, "This copy was just lent to someone else."
 * [ ] `npm run verify` is green.
 * [ ] The lending screen matches the design at both widths.
 ```
 
 Read it as the agent's account of what it understood.
 Each Behaviour line can be checked; the Contract is exact; Out of scope names what someone might have assumed was in; Done when is a list a machine or a person can tick.
+Done when also says which test of chapter 5 proves each Behaviour line: the rules in the unit tests of `lend`, that a refusal saves nothing in the tests of the orchestrator, the race for the last copy in the repository test, and what the screen shows in the end-to-end tests.
+The race is the repository's: two librarians at the same moment meet only in the database, and no pure function sees them.
 Each decision taken from a document names it: the 21 days come from docs/00, and so do Out of scope's reservations and fines.
 The agent drafted the cases that must fail and the edge: the Contract already had `MemberSuspended`, so a suspended member gets a line, and a rule about overdue books implies the day a loan is due, which is not yet overdue.
 
@@ -97,6 +116,7 @@ The Contract is the one section that must be exact.
 The kit's reason: "*a wrong screen is fixed in a session, a wrong column is a migration, and a wrong access rule has already leaked*".
 A screen is code you rewrite; a column holds data, and changing it means moving the data already there; an access rule decides who reads what, and a wrong one has let data out before anyone reads the page again.
 No later fix undoes the third.
+So the Contract above gives each column its type and whether it may be null, the dates as text, as chapter 3's `today` is, and the rule of the index in words: it holds only open loans.
 
 ## Read the page before `/apply`
 
