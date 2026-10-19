@@ -116,7 +116,10 @@ queue shows what is happening while it happens:
 
 A board may read the queue, and people pull work from it, so a mark
 changes at once: `[~]` is /propose's first edit, `[*]` is /apply's first,
-and `[x]` is /apply's last. Without a board the marks cost nothing.
+and `[x]` is /apply's last. On trunk the board sees it at once; with a
+branch or a worktree per delivery the mark lives on the delivery's
+branch and the board sees it when that branch is merged. Without a board
+the marks cost nothing.
 
 A line waits in four cases: the person says it is blocked; it needs an
 answer that was asked and not given; work already started finds it needs
@@ -145,8 +148,9 @@ end of the line, its page in `work/done/` saying what was built and
 undone; a line whose `after` names it is the person's to re-decide.
 These are the marks of focus-kit 2026.10.05, the fourth case a line
 waits in is that of 2026.10.18, and the ended and dropped lines are
-those of 2026.10.18.1 (ADR-0018 and its amendments `kit-2026-10-18` and
-`kit-2026-10-18-1`).
+those of 2026.10.18.1, and where a board sees a mark is that of
+2026.10.19 (ADR-0018 and its amendments `kit-2026-10-18`,
+`kit-2026-10-18-1` and `kit-2026-10-19`).
 
 Two sessions in one working tree, on free lines that touch different
 files, are the normal case of parallel work on trunk. Another line
@@ -176,6 +180,8 @@ conversation in any session.
 
 A slot says what and the command, in a few lines: /apply reads it every
 time. Steps go in a manual, and what a command prints stays in its help.
+The project may add slots of its own; a slot that names /propose or
+/apply is followed by that command, with no edit to the skill.
 
 * **Documentation language:** English. Identifiers in English. The book
   itself: English source, Brazilian Portuguese translation, same delivery.
@@ -250,8 +256,8 @@ time. Steps go in a manual, and what a command prints stays in its help.
     Release, with `make release`.
   * `set-up-the-disclosure-list.md`: the list, the hooks and the Actions
     secret, once per machine and once per clone.
-* **Milestone review:** on the author's word in the review's /apply
-  session, read-only agents on Opus read `git diff <base>..<end>`, the
+* **Milestone review:** the kit's readers: on the author's word in the
+  review's /apply session, read-only agents on Opus read `git diff <base>..<end>`, the
   two commits the review's page names, its base and the commit HEAD was
   when the reading started, one per area it touches:
   the build, the chapters, the kit's skills, the documents. One more
@@ -291,7 +297,10 @@ this delivery for the one-change promise to hold: with two sessions on
 trunk, the person commits each delivery as its session ends, from an
 index that holds only it, never by naming paths on `git commit`, which
 takes each named file whole from the working tree and carries the other
-session's hunk of it, staged or not.
+session's hunk of it, staged or not. One working tree has one index, so
+when the second session has already staged, the person sets its paths
+aside with `git restore --staged <paths>`, commits the first, and stages
+them again.
 
 The agent suggests the message; the person commits after reviewing, or
 asks the agent to.
@@ -343,24 +352,28 @@ The review also reads the code, the one look at the whole instead of a
 delivery: every page can be right and the whole wrong. Its page names as
 the base the commit of the previous milestone's review, so the range
 holds the fixes of its findings, which get no second review, or the
-first commit for a first milestone, and the commit HEAD was when the
-reading started, so the range stays fixed while readers work, and lists,
-by §5's areas, the paths `git diff --stat <base>..<that commit>` shows: always the range, since a bare commit reads that one commit. An
-area too large for one careful reading splits again. It costs, so the
-session says it is time and starts it only on the person's word: one
-read-only agent per area, in parallel where the host runs agents, or one
-fresh session per area, opened by the person, where it does not. Each
-reader has the whole repository open and reads its area's changes for
-what no delivery's own review could see, one delivery's work against
-another's, a document against another, the whole against docs/01, and
-reports candidates by file and line and the paths it read. One checker,
-an agent or the review's session, opens each candidate's file and marks
-it seen (true in the file today), latent (nothing triggers it today) or
-weak (the claim does not hold as stated) before the person sees it. They
-fix nothing. When the paths read miss some of the range's, the page says
-which and the line waits as `[?]` with `· resume: apply` and
-`· blocked: <what was read>` (§4). A candidate the person confirms is a finding like
-the others.
+first commit for a first milestone, or, where no earlier review exists,
+the commit the page names and why; and the commit HEAD was when the
+reading started, so the range stays fixed while readers work; and it
+lists the paths `git diff --stat <base>..<that commit>` shows: always
+the range, since a bare commit reads that one commit. It costs, so the
+session says it is time and starts it only on the person's word. §5's
+Milestone review slot says who reads: the host's deep review, which the
+person launches over that range; or the kit's readers, one read-only
+agent per area of the slot, in parallel where the host runs agents, or
+one fresh session per area, opened by the person, where it does not;
+an area too large for one careful reading splits again. Each reader has
+the whole repository open and reads its area's changes for what no
+delivery's own review could see, one delivery's work against another's,
+a document against another, the whole against docs/01, and reports
+candidates by file and line and the paths it read. Either way, one
+checker, an agent or the review's session, opens each candidate's file
+and marks it seen (true in the file today), latent (nothing triggers it
+today) or weak (the claim does not hold as stated) before the person
+sees it. They fix nothing. When the paths read miss some of the range's,
+the page says which and the line waits as `[?]` with `· resume: apply`
+and `· blocked: <what was read>` (§4). A candidate the person confirms
+is a finding like the others.
 
 For a milestone of chapters, testing by hand is the author reading, in
 the PDF of both editions, the passages the page names, and answering the

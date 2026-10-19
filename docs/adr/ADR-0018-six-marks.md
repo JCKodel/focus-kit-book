@@ -46,3 +46,7 @@ Since `kit-2026-10-18-1` the book runs focus-kit 2026.10.18.1; the six marks are
 A `[~]` or `[*]` line whose session ended without blocking it keeps its mark and is resumed by its command on the person's word.
 A delivery the person cancels ends `[x]` with `· dropped: <reason>`, and a line whose `after` names it is the person's to re-decide.
 A resolved wait returns by its suffix alone, `resume: propose` to `[ ]` with its draft kept and `resume: apply` to `[>]`: the two returns the kit's template carried until it dropped them during 2026.10.16.1, kept here through later installations (a return to `[ ]` when scope became undecided and the recovery of a line blocked without `resume`), are retired.
+
+## Amendment, 2026-10-19 (kit-2026-10-19)
+
+Since `kit-2026-10-19` the book runs focus-kit 2026.10.19; the six marks are unchanged, and docs/05 §4 says where a board sees a mark: on trunk at once, with a branch or a worktree per delivery when that branch is merged.

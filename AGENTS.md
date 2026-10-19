@@ -34,4 +34,4 @@ A free, bilingual book that teaches a team the engineering practices behind the 
 - `make verify` before declaring anything done.
 - Abstraction on the second concrete occurrence, and the delivery says which was the first.
 - Ambiguity → ask. Documents are living: a delivery that changes behaviour updates the document that owns it, in the same delivery.
-- Asked where things stand, answer from docs/06 and work/: the lines in flight, their marks, and the next command, as this host invokes it.
+- Asked where things stand, answer from docs/06 and work/: the lines in flight, their marks, and the next command, as this host invokes it. Asked what a delivery decided or why, answer from its page and the ADRs it names.

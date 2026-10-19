@@ -49,24 +49,11 @@ its review (docs/05 §8):
 [ ] <slug>    <what it delivers, one line>
 ```
 
-`[ ]` not yet defined · `[~]` being defined · `[>]` completely defined,
-`work/<slug>.md` ready for /apply · `[*]` being built · `[x]` done, page in
-`work/done/` · `[?]` waiting, with `· resume: propose` or `· resume: apply`
-before `· blocked: <reason>` or `· blocked: after <slug>, <slug>` at the
-end of the line, and `· dropped: <reason>` on an `[x]` line the person
-cancelled (docs/05 §4). A line holds the mark, the slug, one
-sentence and its suffixes; what happened goes on the page. A line never
-leaves; it changes mark, at the moment the work changes (docs/05 §4). The
-order is the priority: a session asked for the next delivery takes the
-first free line, and the person reorders by conversation in any session;
-what is not in the current milestone is not planned yet. A line that
-needs another done first ends with `· after <slug>`, written when the
-line is added; it is an order, not a block. A line no clause of the
-current milestone's paragraph needs goes under the next milestone,
-created when missing with a paragraph that line answers and its review
-last (docs/05 §4). A line is free when every
-`after` it names is `[x]`. Free lines that touch different files may run
-at the same time, in different sessions (docs/05 §4). The
+A line holds the mark, the slug, one sentence and its suffixes; what
+happened goes on the page. The marks, the suffixes (`· after`,
+`· resume:`, `· blocked:`, `· dropped:`), the order as priority, the next
+milestone and what may run at the same time are docs/05 §4, written once
+there. What is not in the current milestone is not planned yet. The
 queue is edited by conversation in any session; no command owns it.
 
 **docs/adr/.** One file per decision, `ADR-NNNN-<slug>.md`: context, the
@@ -287,7 +274,10 @@ queue shows what is happening while it happens:
 
 A board may read the queue, and people pull work from it, so a mark
 changes at once: `[~]` is /propose's first edit, `[*]` is /apply's first,
-and `[x]` is /apply's last. Without a board the marks cost nothing.
+and `[x]` is /apply's last. On trunk the board sees it at once; with a
+branch or a worktree per delivery the mark lives on the delivery's
+branch and the board sees it when that branch is merged. Without a board
+the marks cost nothing.
 
 A line waits when the person says it is blocked, when it needs an answer
 that was asked and not given, or when work already started finds it needs
@@ -331,6 +321,8 @@ conversation in any session.
 
 A slot says what and the command, in a few lines: /apply reads it every
 time. Steps go in a manual, and what a command prints stays in its help.
+The project may add slots of its own; a slot that names /propose or
+/apply is followed by that command, with no edit to the skill.
 
 * **Documentation language:** <language>. Identifiers in <language>.
 * **Verify:** `<command>`, which runs <what>, fast enough to run on every
@@ -364,15 +356,20 @@ time. Steps go in a manual, and what a command prints stays in its help.
   names such a command points to its manual instead of holding the steps;
   a delivery that changes one updates its manual. <The manuals, one line
   each, or: none yet.>
-* **Milestone review:** <the areas a milestone's changes split into for
-  the code reading of §8, one reader each, and the model its readers and
-  checker run on, or the session's; or: none>.
+* **Milestone review:** <who reads the milestone's code in §8: the
+  host's deep review the person launches over the range, named with its
+  command, when the host has one that takes the whole range; or the
+  kit's readers, with the areas a milestone's changes split into, one
+  reader each, and the model its readers and checker run on, or the
+  session's; or: none>.
 * **Git:** trunk | a branch per delivery | a worktree per delivery. A
   delivery's page and build are one change: one commit on trunk, one merge
   otherwise. Reverting it undoes what git holds; a delivery that acts
   outside git (a migration run, a message sent) says in its Done when how
   that is undone, or that it is not. The agent stages; it never commits or merges on its own, and
-  asked, it takes the step the person names. <With a
+  asked, it takes the step the person names. <Or: the agent commits, and
+  merges, by this slot's word, which is the asking; the person reviews
+  the commit.> <With a
   worktree per delivery: the hidden folder of the container, `.focus-kit/`,
   and the branch prefix, `focus-kit/`.>
 
@@ -395,7 +392,10 @@ this delivery for the one-change promise to hold: with two sessions on
 trunk, the person commits each delivery as its session ends, from an
 index that holds only it, never by naming paths on `git commit`, which
 takes each named file whole from the working tree and carries the other
-session's hunk of it, staged or not.
+session's hunk of it, staged or not. One working tree has one index, so
+when the second session has already staged, the person sets its paths
+aside with `git restore --staged <paths>`, commits the first, and stages
+them again.
 
 The agent suggests the message; the person commits after reviewing, or
 asks the agent to.
@@ -435,25 +435,28 @@ The review also reads the code, the one look at the whole instead of a
 delivery: every page can be right and the whole wrong. Its page names as
 the base the commit of the previous milestone's review, so the range
 holds the fixes of its findings, which get no second review, or the
-first commit for a first milestone, and the commit HEAD was when the
-reading started, so the range stays fixed while readers work, and lists,
-by §5's areas, the paths `git diff --stat <base>..<that commit>`
-shows: always the range, since a bare commit reads that one commit. An
-area too large for one careful reading splits again. It costs, so the
-session says it is time and starts it only on the person's word: one
-read-only agent per area, in parallel where the host runs agents, or one
-fresh session per area, opened by the person, where it does not. Each
-reader has the whole repository open and reads its area's changes for
-what no delivery's own review could see, one delivery's work against
-another's, a document against another, the whole against docs/01, and
-reports candidates by file and line and the paths it read. One checker,
-an agent or the review's session, opens each candidate's file and marks
-it seen (true in the file today), latent (nothing triggers it today) or
-weak (the claim does not hold as stated) before the person sees it. They
-fix nothing. When the paths read miss some of the range's, the page says
-which and the line waits as `[?]` with `· resume: apply` and
-`· blocked: <what was read>` (§4). A candidate the person confirms is a finding like
-the others.
+first commit for a first milestone, or, where no earlier review exists,
+the commit the page names and why; and the commit HEAD was when the
+reading started, so the range stays fixed while readers work; and it
+lists the paths `git diff --stat <base>..<that commit>` shows: always
+the range, since a bare commit reads that one commit. It costs, so the
+session says it is time and starts it only on the person's word. §5's
+Milestone review slot says who reads: the host's deep review, which the
+person launches over that range; or the kit's readers, one read-only
+agent per area of the slot, in parallel where the host runs agents, or
+one fresh session per area, opened by the person, where it does not;
+an area too large for one careful reading splits again. Each reader has
+the whole repository open and reads its area's changes for what no
+delivery's own review could see, one delivery's work against another's,
+a document against another, the whole against docs/01, and reports
+candidates by file and line and the paths it read. Either way, one
+checker, an agent or the review's session, opens each candidate's file
+and marks it seen (true in the file today), latent (nothing triggers it
+today) or weak (the claim does not hold as stated) before the person
+sees it. They fix nothing. When the paths read miss some of the range's,
+the page says which and the line waits as `[?]` with `· resume: apply`
+and `· blocked: <what was read>` (§4). A candidate the person confirms
+is a finding like the others.
 
 Each finding becomes a `[ ]` line in the same milestone, under the review
 line, waiting for /propose. The milestone closes when those lines are
@@ -506,4 +509,6 @@ is the only place a rule is written.
   updates the document that owns it, in the same delivery.
 - Asked where things stand, answer from docs/06 and work/: the lines in
   flight, their marks, and the next command, as this host invokes it.
+  Asked what a delivery decided or why, answer from its page and the
+  ADRs it names.
 ```

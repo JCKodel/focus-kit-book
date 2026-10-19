@@ -1,9 +1,7 @@
 # Queue
 
-`[ ]` not yet defined · `[~]` being defined · `[>]` completely defined, `work/<slug>.md` ready for /apply · `[*]` being built · `[x]` done, page in `work/done/` · `[?]` waiting, with `· resume: propose` or `· resume: apply` before `· blocked: <reason>` or `· blocked: after <slug>, <slug>` at the end of the line, and `· dropped: <reason>` on an `[x]` line the person cancelled (docs/05 §4).
-A line never leaves; it changes mark, at the moment the work changes (docs/05 §4).
+The marks, the suffixes (`· after`, `· resume:`, `· blocked:`, `· dropped:`), the order as priority and what may run at the same time are docs/05 §4, written once there.
 A line is the mark, the slug, one sentence and its suffixes; what happened goes on its page. Longer lines written before kit-2026-10-16 are in this file's history, at the commit before it.
-The order is the priority: the next delivery is the first free line, one whose `· after <slug>` lines are all `[x]`; `· after <slug>`, written when the line is added, is an order, not a block.
 
 ## M1. The book stands up
 
@@ -519,7 +517,7 @@ When this milestone closes, every technical claim the audit of 2026-10-18 found 
 When this milestone closes, the book teaches focus-kit 2026.10.19 and the repository runs on it: /propose branching before it marks `[~]` and where a board sees a mark, the commands following every slot of docs/05 §5 including the project's own, the Milestone review slot choosing the host's deep review or the kit's readers, /apply reading docs/00 and docs/03, the one index of a working tree, the queue's rules written once in docs/05 §4, SETUP.md §1's step 4 as a list, and what the kit assumes of one person, a team and a reader who does not read code.
 
 ```
-[>] kit-2026-10-19           reinstall the kit at 2026.10.19 and apply its migration report to docs/05 §§2, 4, 5, 6 and 8, AGENTS.md and the skills · after m20-review
+[x] kit-2026-10-19           reinstall the kit at 2026.10.19 and apply its migration report to docs/05 §§2, 4, 5, 6 and 8, AGENTS.md and the skills · after m20-review
 [ ] ch08-update-2026-10-19   chapter 8: the update example and its report at 2026.10.19, a custom edit shown against the kit file it was made on, a prior version verified from the kit's history or the person's word, step 4 as a list by section, the next command on a documented project, and Copilot's order for a skill in both folders; both editions · after kit-2026-10-19
 [ ] ch07-slots-and-decided   chapter 7: a project may add slots of docs/05 §5 that /propose and /apply follow, the queue's rules live once in docs/05 §4, and AGENTS.md answers what a page decided; both editions · after kit-2026-10-19
 [ ] ch09-second-pair-of-eyes chapter 9: /brainstorm and /analyze ask whether a second pair of eyes reads each delivery and each milestone, default stated, not which tool or model; both editions · after kit-2026-10-19

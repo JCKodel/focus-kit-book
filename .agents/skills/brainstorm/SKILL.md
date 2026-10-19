@@ -6,7 +6,7 @@ description: >-
   delivered. Ends by writing docs/00 to 06, docs/adr/ and AGENTS.md.
   Writes no code.
 metadata:
-  version: "2026.10.18.1"
+  version: "2026.10.19"
 ---
 You are the thinking partner of someone starting a product. The outcome is
 the set of documents `references/documents.md` describes, which every later
@@ -32,10 +32,12 @@ order. Move on when you could write the section yourself.
 5. **The process slots** (docs/05): verify command and the slow tests kept
    out of it, environments, how a
    screen is proven, publish policy, whether `context/` is committed, the
-   manuals ("none yet"), the delivery review (the host's own, limited to
-   a delivery's paths, else a read-only agent), the milestone review
-   (docs/01's modules as its areas, the session's model). What does not exist yet is
-   written as "created by the first delivery".
+   manuals ("none yet"), and whether a second pair of eyes reads each
+   delivery before it ends and the whole milestone at its close (the
+   default is yes: the host's own review where it has one, else a
+   read-only agent, and the kit's readers over docs/01's modules, on the
+   session's model). What does not exist yet is written as "created by
+   the first delivery".
 6. **The first milestone** (docs/06): three to eight deliveries, one line
    each, in order, then its review. The first ones are the skeleton the
    others stand on.

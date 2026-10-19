@@ -6,7 +6,7 @@ description: >-
   Writes no code, migration or test.
 argument-hint: <slug>
 metadata:
-  version: "2026.10.18.1"
+  version: "2026.10.19"
 ---
 You are the stakeholder's thinking partner. The slug is `$ARGUMENTS`; when
 there is none, ask for it.
@@ -15,11 +15,13 @@ Read docs/00 (product), docs/03 (domain), docs/01 (architecture), docs/05
 (process) and docs/06 (queue), and the deliveries in flight in `work/`.
 Do not start a blocked line until its recorded reason is resolved, nor a
 line whose `after` is not done; a `[~]` line is resumed only on the
-person's word that its session ended (docs/05 §4). Otherwise your first
-edit marks the line `[~]`; then follow docs/05 §§2, 4 and 5 to start or resume
-the definition in the right branch or worktree, a worktree where docs/05's
-Git slot puts it and reused when it exists. Another line changing mark
-meanwhile is another session's work.
+person's word that its session ended (docs/05 §4). Otherwise follow
+docs/05 §§2, 4 and 5 first: start or resume the definition in the right
+branch or worktree, a worktree where docs/05's Git slot puts it and
+reused when it exists; then your first edit there marks the line `[~]`.
+Follow every slot of docs/05 §5 that names this command, the project's
+own included. Another line changing mark meanwhile is another session's
+work.
 
 What the documents answer, you do not ask: decide, write it on the page,
 and name the document it came from, so the person corrects it in the
