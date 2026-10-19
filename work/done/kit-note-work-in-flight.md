@@ -39,8 +39,25 @@
 
 **Done when.**
 
-* [ ] `work/kit-proposals.md` carries item 13 as the Contract says, nothing else changed (`git diff work/kit-proposals.md` shows only the appended lines).
-* [ ] Each Behaviour line checked; no local path, no line number of the kit's files, no em dash in the item or this page; the disclosure scan green.
-* [ ] No chapter changed, so no edition and no `make book` apply.
-* [ ] `make verify` green after the last edit.
-* [ ] Page archived to `work/done/` and commit message suggested.
+* [x] `work/kit-proposals.md` carries item 13 as the Contract says, nothing else changed (`git diff work/kit-proposals.md` shows only the appended lines).
+* [x] Each Behaviour line checked; no local path, no line number of the kit's files, no em dash in the item or this page; the disclosure scan green.
+* [x] No chapter changed, so no edition and no `make book` apply.
+* [x] `make verify` green after the last edit.
+* [x] Page archived to `work/done/` and commit message suggested.
+
+**Record.**
+
+* Built: item 13 appended to `work/kit-proposals.md` with the Contract's text unchanged; no polish was needed. Items 1 to 12 and the opening paragraph stay.
+* Divergences: none. The queue line's marks were flipped by this session, `[*]` first and `[x]` last, on the driver's word, which overrides this page's "the queue line's marks are the driver's"; no other line of docs/06 changed.
+* Proof: `git diff work/kit-proposals.md` shows only the blank line and item 13; `make verify` green after the last edit, the disclosure scan included; no chapter changed, so no `make book`.
+* Delivery review (docs/05 §5): a read-only agent on Opus read this delivery's paths against the page and docs/04: no findings. It confirmed the quote word for word in the installed /propose skill and docs/05 §4's board paragraph and its 2026.10.19.1 date.
+* Decisions taken alone: none beyond the page's.
+
+```commit
+docs(kit-note-work-in-flight): note pages in flight sit off trunk
+
+- work/kit-proposals.md: item 13, /propose reads pages in flight by slug
+- answers m22-review candidates 2 and 18
+
+work/done/kit-note-work-in-flight.md
+```
