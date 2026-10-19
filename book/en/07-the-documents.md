@@ -1,6 +1,6 @@
 # 7. The documents: one place per fact
 
-After this chapter you can say what each of the seven project documents, the ADRs, the manuals and `AGENTS.md` hold, and decide which one a new fact belongs in.
+After this chapter you can say what each of the seven project documents, the ADRs, the manuals and `AGENTS.md` hold, and decide which one a new fact belongs in, including a step of the team's own, which becomes a slot of docs/05 that the commands follow.
 You can also change any of them by talking to the agent, and say why that gives every session and every person the same answer.
 
 ## The problem
@@ -47,8 +47,19 @@ Whatever the publish policy says, `/apply`'s last words say which environment is
 A slot says what and the command, in a few lines, because `/apply` reads it every time; the steps go in a manual, and what a command prints stays in its help.
 So a slot does not say which delivery created its command or how it used to work: that history is on the delivery's page in `work/done/` and in the ADR.
 The commands read these facts here, so no command file holds any of them.
+The project may add slots of its own beside these ten, and a slot that names `/propose` or `/apply` is followed by that command with no edit to its file.
+The command files are the kit's, and its installation writes them; the slot is the project's fact, in the document the commands already read.
+A slot that names neither command is a fact the commands read like any other, and every project slot keeps the shape above.
+In the lending library's docs/05, written for this chapter, a team that follows its queue on a board adds this one:
+
+```markdown
+* **Board:** `npm run board` pushes docs/06 to the team's board.
+  /propose and /apply run it whenever they change a mark, and say
+  so when it fails.
+```
 
 **docs/06, the queue.** The milestones, each with a paragraph saying what is true when it closes, and under each one line per delivery, in order, with a mark for its state.
+It holds no rules of its own: the marks, the suffixes such as `· after`, which holds a line until another is done, the order and what may run at the same time are written once, in docs/05 §4, and docs/06's header points there, so no second copy can drift from the first.
 It is the document you touch most: the whole of the project's work, added to and edited every day, by conversation.
 It does what a kanban board or a backlog of work items does in an agile process, with one difference: the agent reads it.
 Every document is read, and corrected when it is wrong; the queue is the one that gives the product its shape.
@@ -100,6 +111,8 @@ Every host reads it, on its own or through a pointer; Claude Code reads it throu
 `AGENTS.md` names no host's tool, so it reads the same in every one.
 
 It has four short sections: what to read before acting, the non-negotiables, what not to rebuild, and how to work.
+The how-to-work section also says where the agent answers from: asked where things stand, from docs/06 and `work/`; asked what a delivery decided or why, from its page in `work/done/` and the ADRs that page names, not from memory or a commit message.
+So the library's agent, asked why `lend-book` refuses a member with an overdue copy, opens `work/done/lend-book.md` and the ADRs it names, which hold the answer.
 The kit's description of the documents gives it three rules: sixty lines at most, everything in it points at a document, and nothing in it is the only place a rule is written.
 It is loaded whole into every session, so it stays short; and a rule that lived only there would have no reason written anywhere.
 
@@ -152,14 +165,15 @@ The library's docs/00 lists fines for late returns as open, so a page that touch
 The same answer in every session and for every person: a developer, a manager and a fresh agent who ask the loan period read one line in one document.
 With one place per fact, a change is written once and every later session reads it, where on Ninjobs every delivery paid to keep a decision's six copies in step.
 A manual puts the steps a person follows by hand where that person looks for them, in a file found by its name, and keeps a proof's steps out of the slot every `/apply` reads before its first edit.
+A team's own step, such as refreshing its board, lives in its own docs/05 and survives every update of the kit's commands, since an update writes only the kit's files and stops, writing nothing, on one that holds an edit it does not recognize.
 What I value most: every session and every person retrieves a fact from the same place, and in another focus-kit project from the same number.
 
 ## Key points
 
-* Each fact lives in one place: seven numbered documents, `docs/adr/`, `docs/manuals/`, `AGENTS.md` and `work/`; docs/00 is the product and its open decisions, docs/01 and docs/02 how it is built, docs/03 the vocabulary, docs/04 the conventions, docs/05 the process with the project's slots, each what and the command, docs/06 the queue, with numbers fixed because the commands cite them, the same in every project.
+* Each fact lives in one place: seven numbered documents, `docs/adr/`, `docs/manuals/`, `AGENTS.md` and `work/`; docs/00 is the product and its open decisions, docs/01 and docs/02 how it is built, docs/03 the vocabulary, docs/04 the conventions, docs/05 the process with the project's slots, each what and the command, the kit's ten and any the project adds that the commands follow, docs/06 the queue, whose rules are written once in docs/05 §4, with numbers fixed because the commands cite them, the same in every project.
 * The two choices, the architecture (FOCUS whole, the two principles, neither) and git (trunk, a branch or a worktree per delivery), are recorded in docs/01 and docs/05, each with an ADR that is amended, never rewritten; the method works the same under any of them.
 * An action of more than one command, done by hand outside a delivery or a proof `/apply` runs on another machine, has a manual in `docs/manuals/`, for whoever runs it, having read nothing else; the slot keeps the command and points to it, `/analyze` and `/apply` write the manuals, `/brainstorm` none.
-* A new fact goes to the first document whose question fits; one sentence can hold several facts, each with its own owner, and `AGENTS.md` only points at them.
+* A new fact goes to the first document whose question fits; one sentence can hold several facts, each with its own owner, and `AGENTS.md` only points at them, and tells the agent to answer what a delivery decided from its page and ADRs.
 * You change the documents by talking to the agent, and you interpret, guide and validate what it writes; an open decision makes it stop and ask.
 
 [^nygard-adr]: Michael Nygard, "Documenting Architecture Decisions", Cognitect blog, 2011. <https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions>

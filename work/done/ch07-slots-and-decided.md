@@ -54,12 +54,45 @@ Terms of docs/03 used: `slot` (its row already says a project may add one that /
 * The AGENTS.md example question is about `lend-book`, the library's delivery of chapter 12, named without a pointer.
 * The gain sentence states the mechanism (the update replaces only the kit's files and stops on an unrecognized edit), not the kit's story of a project that redid its edit on every update, which would be a before/after and an unnamed project's history.
 * The two stale sentences (Milestone review slot wording, Git paragraph) are left as they are and reported, since the line's scope does not name them.
+* /apply, the author absent (driver session): the Portuguese Board slot is named `Quadro` and its command `npm run quadro`, as the page says. A project's own slot is the project's text, not the kit's, so it takes the documentation language, as the library's manuals do (`publicar-o-app.md`); the script name is one the library invents, so docs/04's rule on Portuguese names applies. Chapter 13's `npm run verify` and `npm run migrate` stay as they are: not this line.
+* /apply: the opening's new clause goes on the first sentence ("including a step of the team's own, which becomes a slot of docs/05 that the commands follow"), so the second sentence's "that" still refers to changing documents by talking to the agent.
+* /apply: the Key points' fourth bullet says `AGENTS.md` "tells the agent to answer" what a delivery decided, not "answers", since the file does not answer; the meaning of the Contract's clause is kept.
+* /apply: the gain sentence says what the kit's SETUP does, as `work/done/kit-2026-10-19.md` records it: an update writes only the kit's files and stops, writing nothing, on one holding an edit it does not recognize.
+
+**Implementation.** `book/en/07-the-documents.md` and `book/pt/07-the-documents.md`: the opening's first sentence; the docs/05 paragraph gains four sentences and the lending library's `Board` slot (`Quadro` in pt) as a fenced block, written for this chapter; the docs/06 paragraph gains one sentence on the queue's rules in docs/05 §4, with a gloss of `· after`, which no earlier chapter explains; `## AGENTS.md` gains two sentences and the `lend-book` (`emprestar-livro`) example; the gain section one sentence; Key points the first and fourth bullets. Nothing else in the chapter changed. No shared file touched.
+
+**Proof.** `make verify` green after the last edit (the first run failed only on `book/pt/08-install-and-hosts.md`'s parity, another lane's file in flight, untouched here; every other check passed on chapter 7 then, and the whole verify passed on the final run). `make book` is the driver's, run once at the end of the batch.
+
+**Delivery review.** A read-only general-purpose agent on Opus read `git diff HEAD` of both chapter files, this page, docs/04, AGENTS.md, docs/05 §§4 and 5, the docs/06 header, the kit's `documents.md` and `work/done/kit-2026-10-19.md`, and ran the check scripts. No must-fix; seven optional findings:
+
+1. Key points first bullet: the queue-rules clause blurred docs/05's item into docs/06's. Fixed: moved to docs/06's item, "whose rules are written once in docs/05 §4".
+2. Key points fourth bullet: "so the agent answers" claimed a false cause. Fixed: "and tells the agent to answer".
+3. Gain sentence: "stops on a command file it does not recognize" was loose against the source. Fixed: "writes only the kit's files and stops, writing nothing, on one that holds an edit it does not recognize".
+4. The project-slot sentence repeated the shape rule two lines above. Fixed: "keeps the shape above".
+5. `· after` appeared unexplained. Fixed: "which holds a line until another is done".
+6. The Board slot says "change a mark" five lines before marks are introduced. Left: the docs/06 paragraph right below defines it, and the slot is quoted as the library wrote it.
+7. pt: "quando perguntam" and the ambiguous "ela". Fixed: "quando lhe perguntam", "essa página".
+
+Verify ran again after the fixes: green.
+
+**Divergences.** None from Behaviour or Contract beyond the wording decisions above and the `· after` gloss the review asked for.
 
 **Done when.**
 
-* [ ] Both editions written, same file name, each Behaviour line checkable in the text.
-* [ ] Opens with its value; no filler and nothing useful cut; the chapter keeps everything else it says.
-* [ ] No number added; the example is the lending library's, written for this chapter and said so.
-* [ ] No em dash; no pointer forward outside the gain section; no before/after of the kit.
-* [ ] `make verify` green after the last edit; `make book` builds both editions and both PDF paths are given to the author.
-* [ ] Delivery review as docs/05 §5 says; no private case used, so OD-3 approval is inapplicable; only this delivery's paths staged (docs/05 §6) and the commit message suggested.
+* [x] Both editions written, same file name, each Behaviour line checkable in the text.
+* [x] Opens with its value; no filler and nothing useful cut; the chapter keeps everything else it says.
+* [x] No number added; the example is the lending library's, written for this chapter and said so.
+* [x] No em dash; no pointer forward outside the gain section; no before/after of the kit.
+* [x] `make verify` green after the last edit; `make book` builds both editions and both PDF paths are given to the author (the driver runs `make book` once for the batch and gives the paths).
+* [x] Delivery review as docs/05 §5 says; no private case used, so OD-3 approval is inapplicable; only this delivery's paths staged (docs/05 §6) and the commit message suggested (staging is the driver's).
+
+```commit
+docs(ch07-slots-and-decided): project slots, queue rules, decided
+
+- chapter 7 shows a project slot the commands follow, the library's Board
+- docs/06's rules are written once in docs/05 §4, its header points there
+- AGENTS.md sends "what did a delivery decide" to its page and ADRs
+- a team's own step survives kit updates; key points updated
+
+work/done/ch07-slots-and-decided.md
+```

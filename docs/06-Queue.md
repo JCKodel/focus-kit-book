@@ -519,7 +519,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.19 and the reposi
 ```
 [x] kit-2026-10-19           reinstall the kit at 2026.10.19 and apply its migration report to docs/05 §§2, 4, 5, 6 and 8, AGENTS.md and the skills · after m20-review
 [x] ch08-update-2026-10-19   chapter 8: the update example and its report at 2026.10.19, a custom edit shown against the kit file it was made on, a prior version verified from the kit's history or the person's word, step 4 as a list by section, the next command on a documented project, and Copilot's order for a skill in both folders; both editions · after kit-2026-10-19
-[*] ch07-slots-and-decided   chapter 7: a project may add slots of docs/05 §5 that /propose and /apply follow, the queue's rules live once in docs/05 §4, and AGENTS.md answers what a page decided; both editions · after kit-2026-10-19
+[x] ch07-slots-and-decided   chapter 7: a project may add slots of docs/05 §5 that /propose and /apply follow, the queue's rules live once in docs/05 §4, and AGENTS.md answers what a page decided; both editions · after kit-2026-10-19
 [x] ch09-second-pair-of-eyes chapter 9: /brainstorm and /analyze ask whether a second pair of eyes reads each delivery and each milestone, default stated, not which tool or model; both editions · after kit-2026-10-19
 [x] ch12-branch-then-mark    chapter 12: /propose creates the branch or worktree first and marks `[~]` there; both editions · after kit-2026-10-19
 [>] ch13-apply-reads-00-03   chapter 13: /apply reads docs/00 and docs/03, builds with docs/03's identifiers and follows every slot of docs/05 §5; both editions · after kit-2026-10-19
