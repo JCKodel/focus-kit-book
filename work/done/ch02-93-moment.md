@@ -23,7 +23,27 @@ Choosing a relative time rather than an unsupported exact date follows docs/00's
 
 **Done when.**
 
-* [ ] Both editions distinguish the later 93-page sample from the opening, and still pair it with 22,650 lines (22.650 in Portuguese).
-* [ ] The opening value and evidenced team gain remain, with no filler or useful information cut; all numbers retain their recorded provenance and no exact later date is invented.
-* [ ] No Case A or Case B passage is used, so OD-3 approval is inapplicable; Ninjobs stays within the disclosure rules.
-* [ ] `make verify` and `make book` pass, and both PDFs are given to the author to review.
+* [x] Both editions distinguish the later 93-page sample from the opening, and still pair it with 22,650 lines (22.650 in Portuguese).
+* [x] The opening value and evidenced team gain remain, with no filler or useful information cut; all numbers retain their recorded provenance and no exact later date is invented.
+* [x] No Case A or Case B passage is used, so OD-3 approval is inapplicable; Ninjobs stays within the disclosure rules.
+* [x] `make verify` and `make book` pass, and both PDFs are given to the author to review.
+
+**What happened.** Both editions of chapter 2 changed in the last sentence of "What the team gains": the product opened to the public, and a later count found 93 finished pages holding 22,650 lines in all (22.650 in the Portuguese edition, "uma contagem posterior").
+Chapter 6 keeps the opening's 91 deliveries; chapter 2 does not repeat it.
+
+**Divergences.** None. No Case A or Case B passage was added or changed; Ninjobs appears only through its published counts.
+
+**Decisions.** The later count is relative ("a later count"), with no date, as the page asks; the 37,228 and 93/22,650 pair keeps its existing provenance.
+
+**Delivery review.** A read-only agent on Opus read `git diff HEAD` of both chapter files against this page and docs/04. Points: (1) and (2) "after" said twice in each edition's sentence: fixed to "a later count" and "uma contagem posterior". Everything else passed. Verify ran again after the fixes.
+
+**Proof.** `make verify` green after the last edit; `make book` is run once by the batch driver for both PDFs, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`, for the author's review.
+
+```commit
+docs(ch02-93-moment): count the 93 finished pages after the opening
+
+- Chapter 2's gain says a later count found the 93 pages and 22,650 lines
+- Chapter 6 keeps the opening's 91 deliveries; no date is invented
+
+work/done/ch02-93-moment.md
+```

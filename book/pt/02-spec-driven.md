@@ -68,7 +68,7 @@ Então o ganho é escrever menos.
 É por isso que o focus-kit escreve uma página por feature, que o time lê inteira e com atenção, revisa e mantém verdadeira, enquanto uma pasta de arquivos é lida por cima.
 O processo que eu rodei sobre o OpenSpec, no Ninjobs, meu próprio produto, produziu 37.228 linhas de especificação para quatro telas (toda linha sob a pasta da ferramenta, contada com `wc -l`), e nada do fluxo principal existia ainda.
 As causas foram minhas escolhas tanto quanto a ferramenta, e o [capítulo 6](06-birth-of-focus-kit.md) as conta; a contagem é o que uma especificação custa quando vira o trabalho.
-Depois da mudança para uma página por entrega, o produto abriu ao público, e suas 93 páginas concluídas somavam 22.650 linhas.
+Depois da mudança para uma página por entrega, o produto abriu ao público, e uma contagem posterior encontrou 93 páginas concluídas, que somavam 22.650 linhas.
 
 ## Pontos-chave
 

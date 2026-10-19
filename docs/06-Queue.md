@@ -471,7 +471,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repo
 [x] ch08-hosts-details       chapters 8 and 10: Antigravity reads `AGENTS.md` directly with an always-on pointer, the Jules to Cline row in the tables, /brainstorm and /analyze take no slug, and Claude Code's skills disable model invocation; both editions
 [x] ch09-empty-repo          chapter 9: a repository with no code starts with /brainstorm, as the kit says; both editions
 [x] ch13-refuse-incomplete   chapter 13: /apply refuses an incomplete page and points to /propose, and only a `[>]` line becomes `[*]`; both editions
-[>] ch02-93-moment           chapter 2: the 93 finished pages are counted after the opening, which had 91; both editions
+[x] ch02-93-moment           chapter 2: the 93 finished pages are counted after the opening, which had 91; both editions
 [>] ch19-commit-by-index     chapters 13 and 19 and docs/05 §6: the person commits from an index holding one delivery, never by naming paths on `git commit`, and a conflict is a line both sessions edited, not a hunk, as the kit now says; both editions · after kit-2026-10-18-1
 [x] ch13-review-base         chapter 13: the read-only review reads `git diff HEAD`, the branch's earlier commits and the created files; /apply updates documents and manuals before the review and runs verify again after any later edit; both editions · after kit-2026-10-18-1
 [x] ch14-ended-and-dropped   chapters 14 and 23: a `[~]` or `[*]` line whose session ended is resumed on the person's word, and a cancelled delivery ends `[x] · dropped: <reason>`, which is how chapter 23's impossible request is written; both editions · after kit-2026-10-18-1
