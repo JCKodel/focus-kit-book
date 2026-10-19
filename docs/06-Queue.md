@@ -1,6 +1,6 @@
 # Queue
 
-The marks, the suffixes (`· after`, `· resume:`, `· blocked:`, `· dropped:`), the order as priority and what may run at the same time are docs/05 §4, written once there.
+The marks, the suffixes (`· after`, `· resume:`, `· blocked:`, `· dropped:`), the order as priority, the next milestone and what may run at the same time are docs/05 §4, written once there.
 A line is the mark, the slug, one sentence and its suffixes; what happened goes on its page. Longer lines written before kit-2026-10-16 are in this file's history, at the commit before it.
 
 ## M1. The book stands up
@@ -514,7 +514,7 @@ When this milestone closes, every technical claim the audit of 2026-10-18 found 
 
 ## M21. focus-kit 2026.10.19
 
-When this milestone closes, the book teaches focus-kit 2026.10.19 and the repository runs on it: /propose branching before it marks `[~]` and where a board sees a mark, the commands following every slot of docs/05 §5 including the project's own, the Milestone review slot choosing the host's deep review or the kit's readers, /apply reading docs/00 and docs/03, the one index of a working tree, the queue's rules written once in docs/05 §4, SETUP.md §1's step 4 as a list, and what the kit assumes of one person, a team and a reader who does not read code.
+When this milestone closes, the book teaches focus-kit 2026.10.19 and the repository runs on it: /propose branching before it marks `[~]` and where a board sees a mark, the commands following every slot of docs/05 §5 including the project's own, the Milestone review slot choosing the host's deep review or the kit's readers, /apply reading docs/00 and docs/03, the one index of a working tree, the queue's rules written once in docs/05 §4, SETUP.md §1's step 4 as a list, and what the kit assumes of one person, a team and a reader who does not read code. It also says that Ninjobs' 91 deliveries ran on its own two commands, the kit planted there after the beta, and where the words go when a command is full, with the kit's three ceilings.
 
 ```
 [x] kit-2026-10-19           reinstall the kit at 2026.10.19 and apply its migration report to docs/05 §§2, 4, 5, 6 and 8, AGENTS.md and the skills · after m20-review
@@ -541,5 +541,5 @@ When this milestone closes, the book teaches focus-kit 2026.10.19 and the reposi
 [x] ch12-refuse-first        chapter 12: /propose refuses a waiting line or an unmet `after` before it creates a branch or worktree; both editions · after m21-review
 [x] ch08-step4-outcomes      chapter 8: the sentence after the report names its three outcomes, not only what the documents lack; both editions · after m21-review, m21-git-slot-default
 [x] ch07-12-loan-days        chapters 7, 12 and 13: the lending library's loan period comes from docs/03 in every chapter; both editions · after m21-review, ch12-refuse-first, m21-git-slot-default
-[>] docs-m21-tidy            docs/06's header names the next milestone and M21's paragraph names what ch06 and ch16 answer, docs/05 is rewrapped, m21-review's page cites its base case, and work/kit-proposals.md carries three notes for focus-kit · after m21-review
+[x] docs-m21-tidy            docs/06's header names the next milestone and M21's paragraph names what ch06 and ch16 answer, docs/05 is rewrapped, m21-review's page cites its base case, and work/kit-proposals.md carries three notes for focus-kit · after m21-review
 ```

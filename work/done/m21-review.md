@@ -28,6 +28,8 @@
 
 **Base.** `a50474bc4debd01a933641ca5c509fa7e9d1c956`, the commit of m19-review. M20 has no review of its own: `m20-review` was dropped because m19-review's reading, "review M19 and M20 code", already covered M20's range. So no review of the previous milestone exists, and this page names the last review's commit, as docs/05 §8 asks where no earlier review exists. The range therefore also holds the fixes of M19's seven findings (`docs05-blocked-trunk`, `adr0010-commit-asked`, `readme-release`, `pt-blocked-term`, `kit-proposals-ninjobs-phases`, `ch16-two-checks-stayed`, `ch13-next-milestone`), which get no second review (docs/05 §8), and the release commit of v1.2.4 (`VERSION`): the clause checks above are M21's alone, while the readers read the whole range, as m19-review did with M20's.
 
+**Correction** (`docs-m21-tidy`). The base case that fits is "the previous review's commit", as docs/03's `milestone review` row words it: m19-review is the last review that exists, since `m20-review` was dropped as already read. The paragraph above invokes "where no earlier review exists", which does not hold; docs/05 §8, the kit's text, names the previous milestone's review and has no case for a dropped one, a note for focus-kit in `work/kit-proposals.md`. The base itself does not change.
+
 **End.** The commit HEAD is when the reading starts; /apply records it before launching any reader, and nothing it records later moves it.
 
 Recorded: `22a0232` (`docs(queue): define m21-review`), the tree clean apart from the driver's `[*]` mark in docs/06.

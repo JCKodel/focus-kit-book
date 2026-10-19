@@ -257,15 +257,15 @@ The project may add slots of its own; a slot that names /propose or
   * `set-up-the-disclosure-list.md`: the list, the hooks and the Actions
     secret, once per machine and once per clone.
 * **Milestone review:** the kit's readers: on the author's word in the
-  review's /apply session, read-only agents on Opus read `git diff <base>..<end>`, the
-  two commits the review's page names, its base and the commit HEAD was
-  when the reading started, one per area it touches:
-  the build, the chapters, the kit's skills, the documents. One more
-  read-only agent on Opus checks each candidate against the file before
-  the author sees it. Every agent keeps the session's advisor, Fable.
-  Each launch sets its model to Opus; no other model runs the review.
-  At most two of these agents run at a time: in `m16-review` five at
-  once left three with no report.
+  review's /apply session, read-only agents on Opus read
+  `git diff <base>..<end>`, the two commits the review's page names, its
+  base and the commit HEAD was when the reading started, one per area it
+  touches: the build, the chapters, the kit's skills, the documents. One
+  more read-only agent on Opus checks each candidate against the file
+  before the author sees it. Every agent keeps the session's advisor,
+  Fable. Each launch sets its model to Opus; no other model runs the
+  review. At most two of these agents run at a time: in `m16-review`
+  five at once left three with no report.
 * **Git:** trunk. A delivery's page and build are one change: one commit.
   Reverting it undoes what git holds; a delivery that acts outside git
   (a migration run, a message sent) says in its Done when how that is

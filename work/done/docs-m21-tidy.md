@@ -75,9 +75,34 @@ No docs/03 row, no chapter, no ADR.
 
 **Done when.**
 
-* [ ] docs/06's header and M21's paragraph read as Contract 1 and 2; no queue line changed but this delivery's own mark.
-* [ ] docs/05's Milestone review slot reads as Contract 3, its words equal before and after (compared with whitespace collapsed), no line past 72 columns.
-* [ ] `work/done/m21-review.md` carries the correction of Contract 4 and nothing else changes on it.
-* [ ] `work/kit-proposals.md` carries items 10 to 12 of Contract 5.
-* [ ] No em dash added; `make verify` green after the last edit.
-* [ ] Only this delivery's paths and hunks staged (docs/05 §6), with its suggested commit message.
+* [x] docs/06's header and M21's paragraph read as Contract 1 and 2; no queue line changed but this delivery's own mark.
+* [x] docs/05's Milestone review slot reads as Contract 3, its words equal before and after (compared with whitespace collapsed), no line past 72 columns.
+* [x] `work/done/m21-review.md` carries the correction of Contract 4 and nothing else changes on it.
+* [x] `work/kit-proposals.md` carries items 10 to 12 of Contract 5.
+* [x] No em dash added; `make verify` green after the last edit.
+* [x] Only this delivery's paths and hunks staged (docs/05 §6), with its suggested commit message.
+
+**Proof.**
+
+* `git diff -U0 HEAD -- docs/06-Queue.md`: three hunks, line 3 (Contract 1), line 517 (Contract 2, the sentence appended to M21's paragraph) and line 544, this delivery's own mark, the driver's; no other queue line.
+* docs/05 lines 259 to 268: widths 70, 56, 72, 72, 72, 69, 69, 68, 68, 41; the slot's words at HEAD and now are equal with whitespace collapsed; `git diff <base>..<end>` whole on line 261.
+* `work/done/m21-review.md`: one added paragraph between **Base.** and **End.**; nothing else on the page changed.
+* `work/kit-proposals.md`: items 10 to 12 appended after item 9, as Contract 5.
+* No em dash added. `make verify` green after the last edit.
+* Staging and the `[x]` mark are the driver's in this run.
+
+**Divergences.** None.
+
+**Delivery review.** A read-only Opus agent read this delivery's hunks against this page, docs/04 and AGENTS.md: no finding. It checked the facts the notes cite: docs/03:33 says "the previous review's commit"; m21-review's findings K2, O3, G6 and G7 say what items 10 to 12 say; the README sentences quoted in item 12 and SETUP.md §8's two answers and base cases are in the kit at `fd1aa75`.
+
+```commit
+docs(docs-m21-tidy): M21's clauses, a rewrap and three kit notes
+
+- docs/06: the header names the next milestone in docs/05 §4
+- docs/06: M21's paragraph names what chapters 6 and 16 answer
+- docs/05: the Milestone review slot rewrapped within 72 columns
+- m21-review: a correction names the base case that fits
+- kit-proposals: items 10 to 12 for the next focus-kit version
+
+work/done/docs-m21-tidy.md
+```
