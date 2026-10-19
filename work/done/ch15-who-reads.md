@@ -67,11 +67,34 @@ Terms of docs/03 used: milestone review, checker, candidate, finding, slot, mile
 
 **Done when.**
 
-* [ ] Both editions written, the same passages changed in each, Portuguese read as Portuguese.
-* [ ] The chapter still opens with what the reader can do after it, now naming who reads as the slot's choice; no filler and nothing useful cut.
-* [ ] The three answers of the slot, the person launching the deep review over the recorded range, the checker either way, and the base where no earlier review exists are each said once in the body and agree with docs/05 §8.
-* [ ] `grep -n -i -E "code-review|ultra|opus|fable|advisor|cloud|no longer|2026\.10" book/en/15-closing-a-milestone.md` and `grep -n -i -E "code-review|ultra|opus|fable|advisor|nuvem|não mais|2026\.10" book/pt/15-closing-a-milestone.md` find nothing; no before/after, no narrated run, no em dash.
-* [ ] Every link resolves; no number added, so none to source.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] `make verify` green; `make book` builds both editions, and the two PDF paths are reported.
-* [ ] Only this delivery's paths and its hunks of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions written, the same passages changed in each, Portuguese read as Portuguese.
+* [x] The chapter still opens with what the reader can do after it, now naming who reads as the slot's choice; no filler and nothing useful cut.
+* [x] The three answers of the slot, the person launching the deep review over the recorded range, the checker either way, and the base where no earlier review exists are each said once in the body and agree with docs/05 §8.
+* [x] `grep -n -i -E "code-review|ultra|opus|fable|advisor|cloud|no longer|2026\.10" book/en/15-closing-a-milestone.md` and `grep -n -i -E "code-review|ultra|opus|fable|advisor|nuvem|não mais|2026\.10" book/pt/15-closing-a-milestone.md` find nothing; no before/after, no narrated run, no em dash.
+* [x] Every link resolves; no number added, so none to source.
+* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green; `make book` builds both editions, and the two PDF paths are reported.
+* [x] Only this delivery's paths and its hunks of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+
+## Record
+
+**Proof.** EN and PT chapter 15 changed in the same passages: the opening's second sentence (who reads is the slot's, a checker either way); the base sentence with the third case and one example reason written for the chapter; the listing clause keeps areas for the kit's readers; who reads is the slot's choice; the first-commit exclusion covers a base the page names; the section title `## Read the code since the base` (pt `## Leia o código desde a base`); the slot's three answers; a new paragraph on the host's deep review, launched by the person, once, over `<base>..<review-head>` from the page; the readers' slot block, host paragraph and paths-read paragraph said of the readers; the checker "either way"; key points 2 and 3. Both Done when greps find nothing. `make verify` green after the last edit. `make book` and the two PDF paths are run and reported by the driver once at the end of the batch.
+
+**Divergences.** Beyond the contract's list, four sentences that would have become false were adjusted on review: the `--stat` sentence says the page lists paths by area when the kit's readers read; "A reader's candidate" became "A candidate"; the reading "starts only on the person's word" instead of the session starting it; the gain section's paths sentence holds "when the kit's readers read" (the page let /apply decide; the default no change would have left it false for a deep review).
+
+**Omissions.** None.
+
+**Delivery review.** A read-only Opus agent over `git diff HEAD` of both chapter files and this page. No blocking findings. Fixed: the `--stat` sentence said areas for every review; "the person launches" was said three times, now once; the session seemed to start the deep review; EN "as" read as "because", now "just as"; the gain section's paths sentence held only for readers; key point 3 had the areas reading, now the kit's readers per area. Not taken: "the repository they read their areas against" stays, still true of the kit's readers. Verify green again after the fixes.
+
+**Decisions taken by /apply alone.** The gain section changes in one clause (above). The deep review's example base reason is one sentence after the base sentence, so "where no earlier review exists" is said once in the body.
+
+```commit
+docs(ch15-who-reads): who reads a milestone is the slot's choice
+
+- the slot's three answers: the host's deep review, the kit's readers, none
+- the person launches the deep review once over the range the page records
+- one checker marks every candidate either way
+- the base where no earlier review exists, named by the page with its reason
+
+work/done/ch15-who-reads.md
+```
