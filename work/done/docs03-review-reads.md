@@ -51,10 +51,32 @@
 
 **Done when.**
 
-* [ ] docs/03's `milestone review` row reads as Contract gives it; no other row changed.
-* [ ] `grep -n "the session reads" docs/03-Domain.md` finds nothing.
-* [ ] The row agrees with docs/05 §8 and chapter 15 on who reads, who launches the deep review, none, and the checker.
-* [ ] No em dash; no host command, model or kit version in the row.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] `make verify` green.
-* [ ] Only this delivery's paths and its hunks of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] docs/03's `milestone review` row reads as Contract gives it; no other row changed.
+* [x] `grep -n "the session reads" docs/03-Domain.md` finds nothing.
+* [x] The row agrees with docs/05 §8 and chapter 15 on who reads, who launches the deep review, none, and the checker.
+* [x] No em dash; no host command, model or kit version in the row.
+* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green.
+* [x] Only this delivery's paths and its hunks of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+
+## Record
+
+**Proof.** docs/03's `milestone review` row now holds Contract's Meaning character for character; the Term, Portuguese and Identifier columns and every other row are unchanged (one line out, one line in). `grep -n "the session reads" docs/03-Domain.md` finds nothing; no em dash, host command, model or kit version in the row. The row agrees with docs/05 §8 and chapter 15, §Read the code since the base, on the person's word, who reads, the person launching the deep review, none, and the checker. `make verify` green after the last edit. No edition changes, so no `make book`.
+
+**Divergences.** None.
+
+**Omissions.** None.
+
+**Delivery review.** A read-only Opus agent over `git diff HEAD -- docs/03-Domain.md` and this page. No findings that break the page or docs/04. Outside this page: docs/05 §8 names two answers for who reads, docs/03 and chapter 15 three with none, as this page already leaves to the author; proposed as a `[ ]` line, not made here. "Whoever reads, one checker" with none: no candidate, so no checker, as Decisions taken alone says; kept.
+
+**Decisions taken by /apply alone.** None; the page's three decisions taken alone stand as written, "none" in the row included.
+
+```commit
+docs(docs03-review-reads): the slot names who reads a milestone's code
+
+- docs/03: the range is read on the person's word, not by the session
+- the host's deep review the person launches, the kit's readers, or none
+- whoever reads, one checker before the person sees the candidates
+
+work/done/docs03-review-reads.md
+```
