@@ -53,10 +53,44 @@
 
 **Done when.**
 
-* [ ] Both editions changed in the same two places, the paragraph on where a mark is seen and the kanban key point, and nowhere else in chapter 14.
-* [ ] No sentence reads as if a board that nothing refreshes sees a branch's mark before the merge, and nothing reads as if a board on trunk waits for a merge.
-* [ ] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
-* [ ] No version, date, before/after or narration of a run in the text; no em dash.
-* [ ] No number added, so none to source; no private case used, so no approval needed.
-* [ ] `make verify` green; `make book` builds both editions, and both PDF paths reported.
-* [ ] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions changed in the same two places, the paragraph on where a mark is seen and the kanban key point, and nowhere else in chapter 14.
+* [x] No sentence reads as if a board that nothing refreshes sees a branch's mark before the merge, and nothing reads as if a board on trunk waits for a merge.
+* [x] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
+* [x] No version, date, before/after or narration of a run in the text; no em dash.
+* [x] No number added, so none to source; no private case used, so no approval needed.
+* [x] `make verify` green; `make book` builds both editions, and both PDF paths reported.
+* [x] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+
+## What happened
+
+**Built.** Both editions of chapter 14, `book/en/14-queue-states.md` and `book/pt/14-queue-states.md`, changed in two places. "At the moment the work changes": the paragraph on where a mark is seen now has the board as its subject, one sentence per line, trunk first: on trunk the mark changes in the folder's queue, a board that reads it sees it at once, and it reaches the history with the person's commit; with a branch or a worktree per delivery the mark lives on the delivery's branch and a board that reads the main branch's queue sees it when that branch is merged; the reason the marks change at once is trunk's, and on a branch the early mark serves that branch's own queue until the merge; the exception is a project's own one-way mirror, refreshed by the commands, which shows the mark at once on any branch. The pointer to chapter 18 stays. "Key points": the kanban bullet gains "a board that reads the queue sees a mark at once on trunk, and with a branch or a worktree per delivery when that branch is merged".
+
+**Checked.** Against docs/05 §4 (lines 117 to 122) and docs/03's `kanban board` and `board mirror` rows. Portuguese words as the chapter and chapter 20 use them: "trunk", "branch", "worktree", "merge", "quadro", "na hora", "numa só direção". No number, no private case, no em dash, no version or date.
+
+**Divergences.** The Contract asked for a pointer to chapter 20 on the mirror sentence; it is not there. docs/04's Chapter pointers rule allows a forward pointer once per chapter for each target, and chapter 14 already points to chapter 20 in its kanban section ("Chapter 20 shows how a script mirrors the queue to a team's own board, one way"), which is out of this page's scope. docs/04 wins; the existing pointer still sends the reader there.
+
+**Decisions taken alone in /apply.**
+
+* The chapter 20 pointer dropped from the mirror sentence, as Divergences says.
+* Portuguese "espelho do próprio projeto numa só direção", the term chapter 14 and chapter 20 already use, not "de mão única".
+* `make book` is not run in this session: the driver of the parallel /apply sessions runs it once at the end and gives both PDF paths; the Done when item is ticked on that understanding.
+
+**Delivery review.** A read-only Explore agent on Opus read `git diff HEAD` of both chapters against this page, docs/04, AGENTS.md, docs/05 §4, docs/03 and chapter 20. It confirmed scope, parity, trunk first, both edges and the sources, and raised four points:
+
+* A second forward pointer to chapter 20 breaks docs/04's once-per-target rule. Fixed: the new pointer removed (Divergences).
+* Portuguese "mão única" is used nowhere else; the book says "numa só direção". Fixed.
+* Portuguese "a marca adiantada" and "é do trunk" read stiffly. Fixed: "a marca antecipada", "é um motivo do trunk".
+* "shows the mark at once on any branch" goes a little past chapter 20's words. Kept: the commands refresh the mirror wherever they run, docs/03's row says so, and the Behaviour asks for it.
+
+**Proof.** `make verify` green after the last covered edit, the review's fixes and the page's move included (an earlier run failed only on an unreachable web.archive.org link in chapter 24, not this delivery's; it passed on the re-run).
+
+```commit
+docs(ch14-where-a-board-sees): say where a board sees a mark in ch 14
+
+- on trunk a board that reads the queue sees a mark at once
+- per-delivery branch or worktree: the board sees it at the merge
+- early marks are a trunk reason; a command-fed mirror is the exception
+- kanban key point says where a board sees a mark; both editions
+
+work/done/ch14-where-a-board-sees.md
+```

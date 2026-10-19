@@ -57,9 +57,10 @@ Então cada marca é posta quando o trabalho começa ou para: `[~]` quando a con
 A fila passa a dizer o que está acontecendo agora, não o que terminou por último.
 
 Onde uma marca é vista depende de onde a sessão trabalha (capítulo 18).
-No trunk, a marca muda na fila da pasta onde a sessão roda, na hora, e chega ao histórico com o commit da pessoa.
-Em um branch ou em um worktree, o `[~]` e o `[*]` moram nesse branch, e o branch principal só os vê quando o merge da entrega chega, então a fila do branch principal guarda o que já chegou.
-Um quadro atualizado pelo comando que mudou a marca a mostra na hora, em qualquer branch em que o trabalho esteja.
+No trunk, a marca muda na fila da pasta onde a sessão roda, um quadro que lê essa fila a vê na hora, e ela chega ao histórico com o commit da pessoa.
+Com um branch ou um worktree por entrega, a marca mora no branch da entrega, e um quadro que lê a fila do branch principal a vê quando é feito o merge desse branch.
+Então o motivo de as marcas mudarem na hora, um quadro de onde as pessoas puxam trabalho, é um motivo do trunk; em um branch, a marca antecipada serve à fila do próprio branch até o merge.
+A exceção é um espelho do próprio projeto numa só direção, atualizado pelos comandos quando uma marca muda: ele mostra a marca na hora em qualquer branch.
 
 ## A próxima linha, e quais rodam juntas
 
@@ -180,7 +181,7 @@ A fila também diz quais linhas podem rodar juntas: sem isso, uma pessoa que que
 * Uma linha está livre quando não está `[x]` nem `[?]` e toda linha que o `after` dela nomeia está `[x]`, e quando uma é cancelada a pessoa redecide a linha; a próxima entrega é a primeira linha livre que nenhuma sessão pegou, e linhas livres que mexem em arquivos diferentes podem rodar ao mesmo tempo.
 * Uma linha cuja sessão terminou mantém a sua marca, e o seu comando a retoma com a palavra da pessoa, inspecionando antes a página, a pasta e o índice; uma entrega cancelada termina `[x] · dropped: <motivo>`, com a página em `work/done/` dizendo o que foi construído e desfeito.
 * `· after` é uma ordem escrita com a linha, que mantém a sua marca; `[?]` com `· blocked: after` é uma espera descoberta depois de o trabalho começar; uma linha espera quando a pessoa diz, quando uma resposta foi pedida e não veio, quando o trabalho já começado descobre que outra linha precisa ser feita antes, ou quando a leitura do código de uma revisão de marco não cobriu parte do seu intervalo, com a fase de retomada e o motivo no fim, `· resume: apply · blocked: after <slug>`; quando o motivo se resolve, os dois sufixos saem e ela volta conforme essa fase, `resume: propose` para `[ ]` com qualquer rascunho mantido, `resume: apply` para `[>]`, e até lá o `/propose` e o `/apply` param nela, como numa linha que não está livre.
-* A fila é um quadro kanban, uma coluna por marca, um cartão `[?]` em Esperando até voltar a `[ ]` ou `[>]`; nas três colunas deste capítulo, Fazendo guarda `[~]`, `[>]` e `[*]`, e um cartão `[?]` é etiquetado como travado na coluna que a sua fase de retomada nomeia, A fazer para `propose`, Fazendo para `apply`.
+* A fila é um quadro kanban, uma coluna por marca, um cartão `[?]` em Esperando até voltar a `[ ]` ou `[>]`; nas três colunas deste capítulo, Fazendo guarda `[~]`, `[>]` e `[*]`, e um cartão `[?]` é etiquetado como travado na coluna que a sua fase de retomada nomeia, A fazer para `propose`, Fazendo para `apply`; um quadro que lê a fila vê uma marca na hora no trunk, e com um branch ou um worktree por entrega quando é feito o merge desse branch.
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", acesso em 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>
 [^azure-kanban]: Microsoft Learn, "About Kanban boards", Azure Boards, acesso em 2026-09-30. <https://learn.microsoft.com/en-us/azure/devops/boards/boards/kanban-overview>
