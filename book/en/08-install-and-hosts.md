@@ -27,7 +27,7 @@ The setup file tells the agent to copy every file byte for byte.
 Some hosts fetch a web page through a tool that hands the agent a summary of the page instead of its text; if yours does, ask the agent to download the file and read it whole.
 
 The install does not stage or commit.
-You read what it wrote and commit it yourself, as by default with every change the agent makes (chapter 13).
+By default you read what it wrote and then commit it, yourself or by asking the agent, as with every change the agent makes (chapter 13).
 
 The agent ends a first install by naming what comes next: on a repository without code, open a fresh session and type `/brainstorm`; on a repository with code, open a fresh session and type `/analyze` (chapter 9).
 It writes the command as your host invokes it, with no slug, since these two take none: in Codex, `$brainstorm` or `$analyze`, and Copilot asks for no slug.
@@ -98,6 +98,7 @@ The update is done when the migrations are applied, as any change is: a queue li
 On a documented project the update reports the migrations first, or says there are none.
 It never asks you to run `/brainstorm` or `/analyze` again: those write a project's documents from nothing, and yours exist.
 It names instead the command docs/06's first free line wants, in your host's form: `/propose` and its slug for a `[ ]` line, `/apply` and its slug for a `[>]` one.
+On trunk that line is read in the queue of the folder; with a branch or a worktree per delivery the main branch shows each line as it was until its merge, so the update reads each slug's line from its worktree or branch, local or remote, and reconciles them by slug ([chapter 14](14-queue-states.md)).
 A version that asks nothing of your documents reports no migration: a version that changes only the commands, such as `/apply` showing its commit message in the conversation too, changes nothing else.
 A docs/05 whose Git slot chose a worktree per delivery and names no folder gets a migration only when the project already works in a container, the folder [chapter 19](19-worktrees.md) lays out with the checkout and a hidden folder for the history and the worktrees, and that hidden folder holds `repo.git/`.
 The report then proposes writing in that folder's name and the prefix the delivery branches already use, so nothing moves.

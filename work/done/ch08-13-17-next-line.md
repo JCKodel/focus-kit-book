@@ -64,10 +64,37 @@
 
 **Done when.**
 
-* [ ] Both editions changed in the places the Contract names, and nowhere else in the four chapters; Portuguese read as Portuguese, with chapters 12 and 14's words.
-* [ ] `grep -n` in each edition shows each new line right after its anchor: ch8 after "first free line wants" / "primeira linha livre do docs/06 pede"; ch13 after the "(chapter 11)" / "(capítulo 11)" line of "What it reads"; ch17 after "Every part of it is read from docs/06" / "Cada parte dela é lida do docs/06".
-* [ ] `git diff` of the eight files: 1 insertion in each of chapters 8 and 13, 2 insertions and 1 deletion in chapter 17, 1 insertion and 1 deletion in chapter 23, per edition.
-* [ ] Every chapter still opens with its value, its gain section still true, no filler and nothing useful cut; no em dash; no number, version, date, "now", "no longer", "agora", "não mais"; no narrated run.
-* [ ] Delivery review as docs/05 §5 says, including that nothing implies an unmerged `[x]` meets an `after`.
-* [ ] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver may run it once for the batch).
-* [ ] Only this delivery's paths staged (the driver's in this batch); the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions changed in the places the Contract names, and nowhere else in the four chapters; Portuguese read as Portuguese, with chapters 12 and 14's words.
+* [x] `grep -n` in each edition shows each new line right after its anchor: ch8 after "first free line wants" / "primeira linha livre do docs/06 pede"; ch13 after the "(chapter 11)" / "(capítulo 11)" line of "What it reads"; ch17 after "Every part of it is read from docs/06" / "Cada parte dela é lida do docs/06".
+* [x] `git diff` of the eight files: 1 insertion in each of chapters 8 and 13, 2 insertions and 1 deletion in chapter 17, 1 insertion and 1 deletion in chapter 23, per edition.
+* [x] Every chapter still opens with its value, its gain section still true, no filler and nothing useful cut; no em dash; no number, version, date, "now", "no longer", "agora", "não mais"; no narrated run.
+* [x] Delivery review as docs/05 §5 says, including that nothing implies an unmerged `[x]` meets an `after`.
+* [x] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver may run it once for the batch).
+* [x] Only this delivery's paths staged (the driver's in this batch); the page moved to `work/done/` and its commit message suggested.
+
+**Proof.**
+
+* `grep -n` in each edition: chapter 8's new line follows "first free line wants" (en :101) / "primeira linha livre do docs/06 pede" (pt :103); chapter 13's follows the "(chapter 11)" / "(capítulo 11)" line at :28; chapter 17's follows "Every part of it is read from docs/06" / "Cada parte dela é lida do docs/06" at :132.
+* `git diff --stat` of the eight files: 1 insertion in each of chapters 8 and 13, 2 insertions and 1 deletion in chapter 17, 1 insertion and 1 deletion in chapter 23, per edition; 10 insertions and 4 deletions in all.
+* `make verify` green after the chapter edits and again after the page moved.
+* `make book` and the two PDF paths: left to the driver, which runs it once for the batch, as Done when allows.
+
+**Divergences.** None: the Contract's wording is in place word for word, and nothing else in the four chapters changed.
+
+**Omissions.** None.
+
+**Delivery review.** One read-only agent on Opus read this delivery's diff of the eight chapter files and its docs/06 hunk against this page, docs/04 and AGENTS.md: no findings. It checked the ten Contract strings word for word by script, each placement, the line counts, both editions' order and sense, the Portuguese terms of chapters 12 and 14, trunk first, never a branch without the worktree, nothing implying that an unmerged `[x]` meets an `after`, no number, date, "now", "agora" or em dash, no narrated run, and every gain section still true.
+
+**Decisions taken in /apply.** None beyond the page: it ran as a lane of a driver session, which stages and commits from its own index.
+
+```commit
+docs(ch08-13-17-next-line): read each slug's line off trunk
+
+- ch 8: the update reads each slug's line from its worktree or branch
+- ch 13: /apply's `after` and next free line read the same way
+- ch 17: the manager's answer and Key points, with return-book's case
+- ch 23: the manager's bullet names where the queue is read
+- both editions, trunk first in every changed sentence
+
+work/done/ch08-13-17-next-line.md
+```

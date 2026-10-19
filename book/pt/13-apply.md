@@ -25,6 +25,7 @@ Ele segue ao pé da letra cada slot do docs/05 §5, os do próprio projeto inclu
 Entre eles estão o comando de verificação, os ambientes e o que uma entrega deixa em cada um, como uma tela é provada, como as suas mudanças são revisadas antes de ele terminar, a política de publicação e a estratégia de git.
 Do docs/06, a fila, ele lê tudo: precisa ver que as linhas que o seu `· after` nomeia estão feitas antes de começar, e nomeia a próxima linha livre quando termina.
 Por isso, cada palavra de uma linha é lida por toda construção tanto quanto por toda definição (capítulo 11).
+No trunk ele lê a fila da pasta onde a sessão roda; com um branch ou um worktree por entrega, o branch principal mostra cada linha como estava até o merge dela, então ele lê cada linha que o seu `after` nomeia, e cada linha que pesa para a próxima linha livre, no worktree ou no branch daquele slug, local ou remoto, e as reconcilia pelo slug (capítulo 14).
 Um arquivo em `work/` não deixa uma página pronta: só o `/propose` marca a linha como `[>]`, quando cada seção está preenchida ou explicitamente inaplicável e nenhuma questão de escopo ficou aberta (docs/05 §3).
 Em uma página que ainda tem uma pergunta aberta, ou cuja linha está `[ ]` ou `[~]`, ele se recusa a construir e aponta para o `/propose`: na biblioteca, em um exemplo escrito para este capítulo, `/apply emprestar-livro` em uma página cujo Contrato ainda tem uma pergunta sem resposta não edita nada e nomeia `/propose emprestar-livro`, onde a pergunta recebe a sua resposta.
 Essa recusa vem antes de qualquer construção, então não é a parada que "Quando o trabalho não consegue seguir" descreve: nada foi construído, e a linha não é marcada como `[?]`.
@@ -256,7 +257,7 @@ Se o seu agente responde com linhas de `git commit -m` e nenhum bloco `commit` n
 
 ## O que o time ganha
 
-Nada é publicado sem uma checagem e uma pessoa: a verificação e a prova conferem a construção, e uma pessoa lê o diff antes de ele existir no histórico.
+Nada é publicado sem uma checagem e uma pessoa: a verificação e a prova conferem a construção, e uma pessoa lê a mudança, por padrão o diff antes de ele existir no histórico, ou, pela palavra do slot Git, o commit depois que ele entra.
 Um defeito que uma entrega escreveu é achado por um leitor que não o escreveu, e corrigido nessa entrega, antes de você ler o diff.
 E o que divergiu do plano fica escrito onde a próxima pessoa lê: no Ninjobs, a página da entrega que permite a um usuário excluir a própria conta dizia que a tabela que registra uma exclusão pendente não teria regra de escrita nenhuma, e a construção descobriu que uma tabela sem regra de escrita não aceita escrita de ninguém, nem das funções do próprio banco de dados.
 Então a página registrou o ajuste, nenhum caminho de escrita alcançável pelo cliente, o que o teste das regras de acesso agora prova, e o commit que a publicou aponta para essa página.

@@ -27,7 +27,7 @@ O arquivo de setup manda o agente copiar cada arquivo byte a byte.
 Alguns hosts buscam uma página web por uma ferramenta que entrega ao agente um resumo da página em vez do seu texto; se o seu faz isso, peça ao agente que baixe o arquivo e o leia inteiro.
 
 A instalação não coloca nada em stage nem faz commit.
-Você lê o que ela escreveu e faz o commit você mesmo, como por padrão em toda mudança que o agente faz (capítulo 13).
+Por padrão você lê o que ela escreveu e então faz o commit, você mesmo ou pedindo ao agente, como em toda mudança que o agente faz (capítulo 13).
 
 O agente termina uma primeira instalação dizendo o que vem depois: num repositório sem código, abra uma sessão nova e digite `/brainstorm`; num repositório com código, abra uma sessão nova e digite `/analyze` (capítulo 9).
 Ele escreve o comando como o seu host o invoca, sem slug, já que esses dois não levam nenhum: no Codex, `$brainstorm` ou `$analyze`, e o Copilot não pede slug.
@@ -100,6 +100,7 @@ A atualização termina quando as migrações são aplicadas, como qualquer muda
 Num projeto já documentado, a atualização relata as migrações primeiro, ou diz que não há nenhuma.
 Ela nunca pede que você rode o `/brainstorm` ou o `/analyze` de novo: eles escrevem os documentos de um projeto do zero, e os seus existem.
 Ela cita em vez disso o comando que a primeira linha livre do docs/06 pede, na forma do seu host: o `/propose` e o seu slug para uma linha `[ ]`, o `/apply` e o seu slug para uma `[>]`.
+No trunk essa linha é lida na fila da pasta; com um branch ou um worktree por entrega, o branch principal mostra cada linha como estava até o merge dela, então a atualização lê a linha de cada slug no worktree ou no branch dele, local ou remoto, e as reconcilia pelo slug ([capítulo 14](14-queue-states.md)).
 Uma versão que não pede nada aos seus documentos não relata migração: uma versão que muda só os comandos, como o `/apply` mostrar a sua mensagem de commit também na conversa, não muda mais nada.
 Um docs/05 cujo slot Git escolheu um worktree por entrega e não cita pasta recebe uma migração só quando o projeto já trabalha num contêiner, a pasta que o [capítulo 19](19-worktrees.md) organiza com o checkout e uma pasta oculta para o histórico e os worktrees, e essa pasta oculta guarda `repo.git/`.
 O relatório então propõe escrever ali o nome dessa pasta e o prefixo que os branches das entregas já usam, para que nada mude de lugar.

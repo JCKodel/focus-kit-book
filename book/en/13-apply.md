@@ -25,6 +25,7 @@ It follows every slot of docs/05 §5 literally, the project's own included, thos
 Among them are the verify command, the environments and what a delivery leaves in each, how a screen is proven, how its changes are reviewed before it ends, the publish policy and the git strategy.
 Of docs/06, the queue, it reads all of it: it must see that the lines its `· after` names are done before it starts, and it names the next free line when it ends.
 So every word on a line is read by every build as well as by every definition (chapter 11).
+On trunk it reads the queue of the folder where the session runs; with a branch or a worktree per delivery the main branch shows each line as it was until its merge, so it reads each line its `after` names, and each line it weighs for the next free line, from that slug's worktree or branch, local or remote, and reconciles them by slug (chapter 14).
 A file in `work/` does not make a page ready: only `/propose` marks the line `[>]`, when every section is filled or explicitly inapplicable and no scope question is left open (docs/05 §3).
 On a page that still has a question open, or whose line is `[ ]` or `[~]`, it refuses to build and points to `/propose`: in the lending library, in an example written for this chapter, `/apply lend-book` on a page whose Contract still has a question unanswered edits nothing and names `/propose lend-book`, where the question gets its answer.
 That refusal comes before any build, so it is not the stop that "When the work cannot go on" describes: nothing was built, and the line is not marked `[?]`.
@@ -256,7 +257,7 @@ If your agent answers with `git commit -m` lines and no `commit` block on the pa
 
 ## What the team gains
 
-Nothing ships without a check and a person: verify and the proof check the build, and a person reads the diff before it exists in the history.
+Nothing ships without a check and a person: verify and the proof check the build, and a person reads the change, by default the diff before it exists in the history, or, by the Git slot's word, the commit once it lands.
 A fault a delivery wrote is found by a reader that did not write it, and fixed in that delivery, before you read the diff.
 And what diverged from the plan is written where the next person reads it: on Ninjobs, the page of the delivery that lets a user delete their account said the table recording a pending deletion would have no write rule at all, and the build found that a table with no write rule accepts writes from nobody, the database's own functions included.
 So the page recorded the refinement, no write path reachable from the client, which the access-rules test now proves, and the commit that shipped it points to that page.
