@@ -1,6 +1,6 @@
 # 21. Projects that are not software
 
-After this chapter you can run a proposal, an analysis, a handover document, a data rule or a book as deliveries, each on a page whose Done when a person can tick.
+After this chapter you can run a proposal, an analysis, a handover document, a data rule or a book as deliveries, each done only when every item of its page's Done when has its evidence and `/apply` has ticked it.
 You can also say why a finding with no line in a queue gets lost.
 
 ## The problem
@@ -18,7 +18,7 @@ The page format reads the same for a document:
 * **Behaviour.** What the reader can do, one line each, every line a check a person makes by reading or by trying.
 * **Contract.** The document's structure: its sections, its format, the facts it must carry.
 * **Out of scope.** What the document does not cover, and where that lives instead.
-* **Done when.** A checklist a person ticks.
+* **Done when.** A checklist of the checks that prove it done, some run by a machine, some made by a person reading or trying; `/apply` ticks each one when its evidence is on the page.
 
 A page for the lending library of Part I, written for this chapter:
 
@@ -50,7 +50,12 @@ Markdown in guide/, and a PDF built from it.
 * [ ] The PDF builds.
 ```
 
-`/apply` writes the guide as it would write code: it follows the page, runs what can be checked by a machine (the PDF builds, every refusal is listed), and leaves the rest of Done when for the person to tick.
+`/apply` writes the guide as it would write code: it follows the page and runs what can be checked by a machine (the PDF builds, every refusal is listed).
+The second item is a manual check, and only a person can make it: someone who never used the system tries to lend a copy with the guide alone.
+Until that happens the delivery is not done, however green the machine checks are, and `/apply` does not move the page with that item left for a later tick.
+Until the report comes, `/apply` stops as [chapter 13](13-apply.md) says: the page stays in `work/` and the delivery's line in the queue waits as `[?]`, with `resume: apply` and the report it waits on.
+When the person reports that a new librarian lent a copy with the guide alone, the resumed `/apply` writes that report on the page as the item's evidence, ticks it with the other two, and moves the page to `work/done/`.
+If the librarian got stuck, the guide is wrong where they got stuck: the person says where, `/apply` corrects it, and the check is made again.
 
 ## Case A's documents
 
@@ -81,7 +86,7 @@ Among them, the proposal named the wrong tool, a contract risk, and it fixed a s
 
 The findings had no queue line and no page to carry them.
 Two days later, the next version of the proposal still held at least one of them.
-The analysis was right, and being right was not enough: each finding needed a line, and a page whose Done when said "the next version names the right tool", so that the fault stayed open in plain sight until a person ticked it.
+The analysis was right, and being right was not enough: each finding needed a line, and a page whose Done when said "the next version names the right tool", so that the fault stayed open in plain sight until a person checked the next version and the item was ticked on that evidence.
 
 ## What the team gains
 
@@ -91,7 +96,8 @@ On Case A, about 16 of its 73 done lines were questions to people or documents, 
 ## Key points
 
 * A delivery is anything with value that fits a page, code or not.
-* For a document, Behaviour is what its reader can do, the Contract is its structure, and Done when is a checklist a person ticks.
+* For a document, Behaviour is what its reader can do, the Contract is its structure, and Done when is a checklist of machine checks and manual checks.
+* A check only a person can make stays the person's; `/apply` records what they report and ticks every item, and never one without its evidence.
 * A question to a person is a delivery too, done when the answer arrives.
 * A database rule is a delivery with a test, enforced where every client meets it.
 * Give every finding a line, or it gets lost.

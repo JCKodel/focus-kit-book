@@ -460,7 +460,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repo
 [x] apply-use-first          chapters 10 and 13, and where chapters 18, 19, 22 and 23 describe the person's review: /apply's next steps start with using what the delivery changed; both editions · after kit-2026-10-18-1
 [x] agent-commits-asked      chapters 6, 7, 13, 18, 19 and 23, and docs/00 contents: the agent never commits or merges on its own, and asked, it takes the step the person names; both editions · after kit-2026-10-18-1
 [x] ch11-14-defined-mark     chapters 11 and 14: `[>]` means completely defined, not that the page exists, and a `[ ]` line may keep a draft; both editions
-[>] ch21-done-when           chapter 21: /apply ticks every Done when item, as the kit says; both editions
+[x] ch21-done-when           chapter 21: /apply ticks every Done when item, as the kit says; both editions
 [x] ch17-context-read        chapter 17: /brainstorm and /analyze read `context/` whole, and a later item is read on the person's request and turned into the documents; both editions
 [x] ch14-back-to-open        chapter 14: a line returns to `[ ]` only as the kit says, `resume: propose` with its draft kept; both editions · after kit-2026-10-18-1
 [x] ch08-10-fresh-start      chapters 8 and 10: /brainstorm and /analyze run in a fresh session after the install; both editions

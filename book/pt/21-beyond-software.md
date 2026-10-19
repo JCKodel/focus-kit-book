@@ -1,6 +1,6 @@
 # 21. Projetos que não são software
 
-Depois deste capítulo você consegue conduzir uma proposta, uma análise, um documento de passagem de projeto, uma regra de dados ou um livro como entregas, cada uma numa página cujo Pronto quando uma pessoa consegue marcar.
+Depois deste capítulo você consegue conduzir uma proposta, uma análise, um documento de passagem de projeto, uma regra de dados ou um livro como entregas, cada uma pronta só depois que cada item do Pronto quando da sua página tiver a sua evidência e tiver sido marcado pelo `/apply`.
 Você também consegue dizer por que um achado sem linha numa fila se perde.
 
 ## O problema
@@ -18,7 +18,7 @@ O formato da página se lê igual para um documento:
 * **Comportamento.** O que o leitor consegue fazer, uma linha cada, cada linha uma checagem que uma pessoa faz lendo ou experimentando.
 * **Contrato.** A estrutura do documento: as suas seções, o seu formato, os fatos que ele precisa trazer.
 * **Fora do escopo.** O que o documento não cobre, e onde isso fica.
-* **Pronto quando.** Uma lista que uma pessoa marca.
+* **Pronto quando.** Uma lista das checagens que provam que está pronto, umas feitas por uma máquina, outras por uma pessoa lendo ou experimentando; o `/apply` marca cada uma quando a sua evidência está na página.
 
 Uma página para a biblioteca de empréstimos da Parte I, escrita para este capítulo:
 
@@ -50,7 +50,12 @@ Markdown em guia/, e um PDF gerado a partir dele.
 * [ ] O PDF é gerado.
 ```
 
-O `/apply` escreve o guia como escreveria código: segue a página, roda o que uma máquina consegue conferir (o PDF é gerado, cada recusa está listada), e deixa o resto do Pronto quando para a pessoa marcar.
+O `/apply` escreve o guia como escreveria código: segue a página e roda o que uma máquina consegue conferir (o PDF é gerado, cada recusa está listada).
+O segundo item é uma checagem manual, e só uma pessoa consegue fazê-la: alguém que nunca usou o sistema tenta emprestar um exemplar só com o guia.
+Enquanto isso não acontecer, a entrega não está pronta, por mais verdes que estejam as checagens da máquina, e o `/apply` não move a página deixando esse item para marcar depois.
+Até o relato chegar, o `/apply` para como o [capítulo 13](13-apply.md) diz: a página fica em `work/` e a linha da entrega na fila fica `[?]`, com `resume: apply` e o relato que ela espera.
+Quando a pessoa relata que um bibliotecário novo emprestou um exemplar só com o guia, o `/apply` retomado escreve esse relato na página como a evidência do item, marca-o junto com os outros dois, e move a página para `work/done/`.
+Se o bibliotecário travou, o guia está errado onde ele travou: a pessoa diz onde, o `/apply` o corrige, e a checagem é feita de novo.
 
 ## Os documentos do Caso A
 
@@ -81,7 +86,7 @@ Entre elas, a proposta nomeava a ferramenta errada, um risco contratual, e fixav
 
 Os achados não tinham linha na fila nem página para carregá-los.
 Dois dias depois, a versão seguinte da proposta ainda continha pelo menos um deles.
-A análise estava certa, e estar certa não bastou: cada achado precisava de uma linha, e de uma página cujo Pronto quando dissesse "a próxima versão nomeia a ferramenta certa", para que a falha ficasse aberta à vista de todos até uma pessoa marcá-la.
+A análise estava certa, e estar certa não bastou: cada achado precisava de uma linha, e de uma página cujo Pronto quando dissesse "a próxima versão nomeia a ferramenta certa", para que a falha ficasse aberta à vista de todos até uma pessoa conferir a versão seguinte e o item ser marcado com base nessa evidência.
 
 ## O que o time ganha
 
@@ -91,7 +96,8 @@ No Caso A, cerca de 16 das suas 73 linhas concluídas foram perguntas a pessoas 
 ## Pontos-chave
 
 * Uma entrega é qualquer coisa com valor que cabe numa página, seja código ou não.
-* Para um documento, o Comportamento é o que o seu leitor consegue fazer, o Contrato é a sua estrutura, e o Pronto quando é uma lista que uma pessoa marca.
+* Para um documento, o Comportamento é o que o seu leitor consegue fazer, o Contrato é a sua estrutura, e o Pronto quando é uma lista de checagens de máquina e checagens manuais.
+* Uma checagem que só uma pessoa consegue fazer continua sendo da pessoa; o `/apply` registra o que ela relata e marca cada item, e nunca um sem a sua evidência.
 * Uma pergunta a uma pessoa também é uma entrega, pronta quando a resposta chega.
 * Uma regra do banco de dados é uma entrega com um teste, garantida onde todo cliente a encontra.
 * Dê uma linha a cada achado, ou ele se perde.
