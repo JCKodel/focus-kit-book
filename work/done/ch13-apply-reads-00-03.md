@@ -56,10 +56,41 @@
 
 **Done when.**
 
-* [ ] Both editions changed in the same three places, "What it reads" (lines 22 and 23), the `lend-book` example (line 113) and "Key points" (line 264), and nowhere else in chapter 13.
-* [ ] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
-* [ ] No version, date, "now", before/after or narration of a run in the text; no em dash.
-* [ ] Portuguese uses "identificador", "do próprio projeto" and docs/03's identifiers for the example.
-* [ ] No number added, so none to source; no private case used, so no approval needed.
-* [ ] `make verify` green; `make book` builds both editions, and both PDF paths reported.
-* [ ] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions changed in the same three places, "What it reads" (lines 22 and 23), the `lend-book` example (line 113) and "Key points" (line 264), and nowhere else in chapter 13.
+* [x] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
+* [x] No version, date, "now", before/after or narration of a run in the text; no em dash.
+* [x] Portuguese uses "identificador", "do próprio projeto" and docs/03's identifiers for the example.
+* [x] No number added, so none to source; no private case used, so no approval needed.
+* [x] `make verify` green; `make book` builds both editions, and both PDF paths reported.
+* [x] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+
+## Proof
+
+* `make verify` green after the last edit. The first two runs failed only on the link check of `book/en/24-asking-for-more.md:170` and `book/pt/24-asking-for-more.md:170`, an archive.org URL refusing connections; that chapter is not this delivery's, it was not touched, and the next run passed.
+* `make book` and the two PDF paths: run once by the driver at the end of the batch, as this run's rules say.
+* Both editions changed in the same three sections: "What it reads" (line 22 split in two sentences and line 23 in two, as the Contract allows), the `lend-book` example (line 113) and "Key points" (line 264).
+
+## Divergences
+
+* Line 23 became two sentences, the second "Among them are ..." / "Entre eles estão ...", so "among them" reads as all slots, not only the project's own; the Contract allows two.
+* In the `lend-book` example the three names stand in parentheses, so they do not read as items of the list of documents.
+* In the key point, "writes the code with docs/03's identifiers" / "escreve o código com os identificadores do docs/03" replaces "builds with", to avoid the bullet saying "builds" twice.
+
+## Delivery review
+
+A read-only agent on Opus read `git diff HEAD` of both chapter 13 files against this page, docs/04, docs/03 and the installed skill. No blocking findings; scope, parity, Portuguese terms and accuracy against the skill held. Two clarity nits, both fixed (the divergences above), plus the repeated verb, fixed. One point left as is: "open decisions a page must not contradict" is the Contract's own wording.
+
+## Decisions taken alone (apply)
+
+* The author was not in the session; each review nit was fixed as the reviewer suggested, without asking.
+
+```commit
+docs(ch13-apply-reads-00-03): apply reads docs/00 and docs/03 in ch 13
+
+- List the five project documents /apply reads, in number order
+- Build with docs/03's identifiers, never a synonym
+- Follow every slot of docs/05 §5, the project's own included
+- lend-book example reads docs/00 and docs/03 with the rest
+
+work/done/ch13-apply-reads-00-03.md
+```

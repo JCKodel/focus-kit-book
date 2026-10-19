@@ -19,8 +19,10 @@ Ele sempre começa em uma sessão nova, mesmo quando o `/propose` rodou na conve
 
 ### O que ele lê
 
-A página, o `AGENTS.md`, e três dos documentos do projeto: o docs/01, a arquitetura, que diz onde cada peça fica e como os erros circulam; o docs/04, as convenções, que dizem quais testes escrever; e o docs/05, o processo.
-O docs/05 guarda os slots do projeto, e o `/apply` os segue ao pé da letra: o comando de verificação, os ambientes e o que uma entrega deixa em cada um, como uma tela é provada, como as suas mudanças são revisadas antes de ele terminar, a política de publicação e a estratégia de git.
+A página, o `AGENTS.md`, e cinco dos documentos do projeto, na ordem dos números: o docs/00, o produto, cujas regras e decisões em aberto uma página não pode contradizer; o docs/01, a arquitetura, que diz onde cada peça fica e como os erros circulam; o docs/03, o domínio, cuja tabela dá a cada termo o identificador que o código usa; o docs/04, as convenções, que dizem quais testes escrever; e o docs/05, o processo.
+Ele constrói com os identificadores do docs/03, então a palavra da página, dos testes e do código é a que a tabela nomeia, nunca um sinônimo que o agente escolhe.
+Ele segue ao pé da letra cada slot do docs/05 §5, os do próprio projeto incluídos, os que um projeto acrescenta ali ao lado dos do kit.
+Entre eles estão o comando de verificação, os ambientes e o que uma entrega deixa em cada um, como uma tela é provada, como as suas mudanças são revisadas antes de ele terminar, a política de publicação e a estratégia de git.
 Do docs/06, a fila, ele lê tudo: precisa ver que as linhas que o seu `· after` nomeia estão feitas antes de começar, e nomeia a próxima linha livre quando termina.
 Por isso, cada palavra de uma linha é lida por toda construção tanto quanto por toda definição (capítulo 11).
 Um arquivo em `work/` não deixa uma página pronta: só o `/propose` marca a linha como `[>]`, quando cada seção está preenchida ou explicitamente inaplicável e nenhuma questão de escopo ficou aberta (docs/05 §3).
@@ -110,7 +112,7 @@ Pronto é a revisão e essa lista inteira.
 
 Pegue a página `emprestar-livro` do capítulo 12, revisada e marcada `[>]`, e abra uma sessão nova com `/apply emprestar-livro`.
 
-O agente lê a página, depois o docs/01 para saber que os empréstimos ficam em `src/features/emprestimos/`, o docs/04 para saber quais testes cada peça recebe (capítulo 5), e o docs/05 para saber que a verificação é `npm run verify` e que uma tela é provada por um screenshot.
+O agente lê a página, depois o docs/00 para as regras que um membro encontra e as decisões em aberto, o docs/01 para saber que os empréstimos ficam em `src/features/emprestimos/`, o docs/03 para os nomes que a construção usa (`emprestimo`, `emprestar` e a recusa `JaEmprestado`), o docs/04 para saber quais testes cada peça recebe (capítulo 5), e o docs/05 para saber que a verificação é `npm run verify` e que uma tela é provada por um screenshot.
 Ele escreve a migration da tabela `emprestimo` com o seu índice único, a regra `emprestar` como uma função pura que devolve um `Result` (capítulo 3), a chamada do repositório que transforma a falha do índice único na recusa `JaEmprestado`, o orquestrador e a tela de empréstimo.
 Cada linha de Comportamento vira um teste: o empréstimo com a data de devolução 21 dias depois, a recusa para um livro atrasado, a recusa para um membro suspenso, o empréstimo para um membro cujo único livro vence hoje, e, contra um banco de dados real em memória, o segundo de dois empréstimos do último exemplar recusado.
 Ele não constrói nada para devolver um exemplar, reservas ou multas, porque o Fora do escopo os nomeou.
@@ -261,7 +263,7 @@ Então a página registrou o ajuste, nenhum caminho de escrita alcançável pelo
 
 ## Pontos-chave
 
-* O `/apply <slug>` constrói a página em uma sessão nova e segue o docs/05 ao pé da letra: a página é o escopo, sem dependência, camada ou ferramenta que ela não nomeou, e quando a página contradiz um documento ele para e diz qual, sem nunca resolver em silêncio.
+* O `/apply <slug>` constrói a página em uma sessão nova, lê o docs/00 e o docs/03 com o resto, escreve o código com os identificadores do docs/03 e segue ao pé da letra cada slot do docs/05 §5, os do próprio projeto incluídos: a página é o escopo, sem dependência, camada ou ferramenta que ela não nomeou, e quando a página contradiz um documento ele para e diz qual, sem nunca resolver em silêncio.
 * Ele marca a linha como `[*]` com a sua primeira edição, `[x]` com a última, depois do stage, e `[?]`, com o que ela espera, quando precisa parar.
 * Verde não é pronto: pronto é a lista inteira, dos documentos atualizados antes de uma revisão por um contexto que não escreveu a mudança, que lê a entrega inteira, à verificação verde depois da última edição e à linha marcada `[x]`.
 * Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, primeiro usar o que ele construiu, cada comando escrito por extenso, e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.

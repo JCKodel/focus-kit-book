@@ -19,8 +19,10 @@ It always starts in a fresh session, even when `/propose` ran in the conversatio
 
 ### What it reads
 
-The page, `AGENTS.md`, and three of the project documents: docs/01, the architecture, which says where each piece goes and how errors travel; docs/04, the conventions, which say which tests to write; and docs/05, the process.
-docs/05 holds the project's slots, and `/apply` follows them literally: the verify command, the environments and what a delivery leaves in each, how a screen is proven, how its changes are reviewed before it ends, the publish policy and the git strategy.
+The page, `AGENTS.md`, and five of the project documents, in number order: docs/00, the product, whose rules and open decisions a page must not contradict; docs/01, the architecture, which says where each piece goes and how errors travel; docs/03, the domain, whose table gives each term the identifier the code uses; docs/04, the conventions, which say which tests to write; and docs/05, the process.
+It builds with docs/03's identifiers, so the word on the page, in the tests and in the code is the one the table names, never a synonym the agent picks.
+It follows every slot of docs/05 §5 literally, the project's own included, those a project adds there beside the kit's.
+Among them are the verify command, the environments and what a delivery leaves in each, how a screen is proven, how its changes are reviewed before it ends, the publish policy and the git strategy.
 Of docs/06, the queue, it reads all of it: it must see that the lines its `· after` names are done before it starts, and it names the next free line when it ends.
 So every word on a line is read by every build as well as by every definition (chapter 11).
 A file in `work/` does not make a page ready: only `/propose` marks the line `[>]`, when every section is filled or explicitly inapplicable and no scope question is left open (docs/05 §3).
@@ -110,7 +112,7 @@ Done is the review and that whole list.
 
 Take the `lend-book` page of chapter 12, reviewed and marked `[>]`, and open a fresh session with `/apply lend-book`.
 
-The agent reads the page, then docs/01 to learn that loans live in `src/features/loans/`, docs/04 to learn which tests each piece gets (chapter 5), and docs/05 to learn that verify is `npm run verify` and that a screen is proven by a screenshot.
+The agent reads the page, then docs/00 for the rules a member meets and the open decisions, docs/01 to learn that loans live in `src/features/loans/`, docs/03 for the names the build uses (`loan`, `lend` and the refusal `AlreadyLent`), docs/04 to learn which tests each piece gets (chapter 5), and docs/05 to learn that verify is `npm run verify` and that a screen is proven by a screenshot.
 It writes the migration for the table `loan` with its unique index, the rule `lend` as a pure function returning a `Result` (chapter 3), the repository call that turns the unique index's failure into the refusal `AlreadyLent`, the orchestrator and the lending screen.
 Each Behaviour line becomes a test: the loan with its due date 21 days ahead, the refusal for an overdue book, the refusal for a suspended member, the loan for a member whose only book is due today, and, against a real in-memory database, the second of two loans on the last copy refused.
 It builds nothing for returning a copy, reservations or fines, because Out of scope named them.
@@ -261,7 +263,7 @@ So the page recorded the refinement, no write path reachable from the client, wh
 
 ## Key points
 
-* `/apply <slug>` builds the page in a fresh session and follows docs/05 literally: the page is the scope, with no dependency, layer or tool it did not name, and when the page contradicts a document it stops and says which, never resolving it silently.
+* `/apply <slug>` builds the page in a fresh session, reads docs/00 and docs/03 with the rest, writes the code with docs/03's identifiers and follows every slot of docs/05 §5 literally, the project's own included: the page is the scope, with no dependency, layer or tool it did not name, and when the page contradicts a document it stops and says which, never resolving it silently.
 * It marks the line `[*]` with its first edit, `[x]` with its last, after the stage, and `[?]`, with what it waits on, when it must stop.
 * Green is not done: done is the whole list, from the documents updated before a review by a context that did not write the change, which reads the whole delivery, to verify green after the last edit and the line marked `[x]`.
 * It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, using what it built first, each command written out, and, last of all, which environment is at which version and the command that updates the others.
