@@ -44,6 +44,24 @@ No other line of either README changes.
 
 **Done when.**
 
-* [ ] Both READMEs carry the Contract's bullets in the same delivery, and every Behaviour line holds.
-* [ ] `make verify` green after the last edit (parity and links included).
-* [ ] The page is in `work/done/` and the line is `[x]`.
+* [x] Both READMEs carry the Contract's bullets in the same delivery, and every Behaviour line holds.
+* [x] `make verify` green after the last edit (parity and links included).
+* [x] The page is in `work/done/` and the line is `[x]`.
+
+**Divergences.** None: each README's bullet is the Contract's, and no other line changed (`git diff --stat`: one line in each).
+
+**Proof.** The checks follow `docs/manuals/release-the-book.md` "What must be in place" in its order; neither bullet claims a refusal restores `VERSION`; `make verify` green after the last edit, parity and links included.
+
+**Delivery review:** skipped on the author's word (2026-10-19).
+
+**Open questions taken alone.** None left open by the page.
+
+```commit
+docs(readme-release): say what make release checks, writes and commits
+
+- both READMEs: the checks the release manual lists, in its order
+- it writes VERSION, builds the book and asks; on y commits and pushes
+- the bullet points to docs/manuals/release-the-book.md
+
+work/done/readme-release.md
+```
