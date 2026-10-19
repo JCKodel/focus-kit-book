@@ -465,7 +465,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repo
 [x] ch14-back-to-open        chapter 14: a line returns to `[ ]` only as the kit says, `resume: propose` with its draft kept; both editions · after kit-2026-10-18-1
 [x] ch08-10-fresh-start      chapters 8 and 10: /brainstorm and /analyze run in a fresh session after the install; both editions
 [>] ch19-batch-staging       chapter 19: in a batch, /propose stages nothing, as the kit's /propose does; both editions
-[>] ch18-kit-branches        chapter 18: git-flow and the squash merge are told as strategies outside the kit, whose branch is named after the slug and reverted in one merge; both editions
+[x] ch18-kit-branches        chapter 18: git-flow and the squash merge are told as strategies outside the kit, whose branch is named after the slug and reverted in one merge; both editions
 [x] ch06-23-kit-rules        chapters 6 and 23: the kit's rules as SETUP.md §2 lists them; both editions
 [x] ch10-explicit-staging    chapter 10: the quick guide stages by explicit paths, never `git add -A`, as docs/05 §6 says; both editions
 [x] ch08-hosts-details       chapters 8 and 10: Antigravity reads `AGENTS.md` directly with an always-on pointer, the Jules to Cline row in the tables, /brainstorm and /analyze take no slug, and Claude Code's skills disable model invocation; both editions

@@ -1,7 +1,7 @@
 # 18. Git essentials
 
 After this chapter you can keep every delivery one step to undo, one commit on trunk or one merge otherwise, and take it back with `git revert`.
-You can also say what version control keeps and who made git, read a history of commits, branches and merges, merge a branch in each of the four ways git offers, and choose between trunk, a branch per delivery, a worktree per delivery and git-flow for a project.
+You can also say what version control keeps and who made git, read a history of commits, branches and merges, merge a branch in each of the four ways git offers, and choose for a project among the kit's three strategies, trunk, a branch per delivery and a worktree per delivery, telling them apart from trunk-based development and git-flow, practices outside the kit.
 
 ## The problem
 
@@ -22,8 +22,18 @@ Git merges a branch in four ways, and this is what each leaves and what undoing 
 | Squash merge | One new commit | `git revert <commit>` |
 | Rebase, then fast-forward | The commits, rewritten | One revert per commit |
 
-With a branch per delivery, merge by merge commit or by squash, so the delivery stays one unit of work that one revert takes back.
-A fast-forward or a rebase keeps that only when the branch held one commit.
+In the kit's branch per delivery, `/propose` creates the branch named after the slug, or reuses it when it exists, and writes the page there; `/apply` builds on it, and the person merges page and build into `main` in one merge, here a merge commit, through its pull request (chapter 20) or by hand: the unit of work one `git revert -m 1 <merge>` takes back.
+For `lend-book`, a delivery of the lending library written for this chapter, the first line is what `/propose` does for you, `git switch lend-book` instead when the branch exists, and the last two are yours, once `/apply` is done and you have reviewed the branch:
+
+```
+git switch -c lend-book
+
+git switch main
+git merge --no-ff lend-book
+```
+
+A squash merge also leaves one step, one new commit an ordinary `git revert <commit>` takes back, but it is one of git's forms; the kit asks only that the delivery reach `main` in one merge, and this chapter uses a merge commit.
+A fast-forward or a rebase keeps one step only when the branch held one commit.
 The sections below define each term of the table: the four forms, then `git revert`.
 
 ## Commits and the history
@@ -150,23 +160,24 @@ Revert is the undo for anything already shared.
 
 The kit's trunk is one person committing on `main`, one commit per delivery, alone or with several agents open at once on deliveries that touch different files (chapter 19): a line, where each commit is a delivery and each revert takes one back.
 Trunk-based development is a team practice of the same name, described by Paul Hammant: everyone merges small changes into the main branch "*at least once every 24 hours*", often through short-lived branches reviewed as pull requests.[^tbd]
-In the kit's terms that is a branch per delivery with small deliveries, each merged by a merge commit or a squash.
+That practice is not one of the kit's strategies, only the same word: its closest kit answer is a branch per delivery with small deliveries, each reaching `main` in one merge.
 
 ## git-flow
 
 git-flow is the branching model Vincent Driessen published in 2010: two branches that live forever, `master` (`main` today) for released versions and `develop` for the next one, and three kinds that come and go, `feature/` branches that go back into `develop` by merge commit, so a whole feature is easy to revert, and `release/` and `hotfix/` branches that prepare and fix a release.[^git-flow]
 In 2020 he added a note at the top of the post: for software delivered continuously, such as a web app, which is not rolled back and does not keep several versions in use, a simpler flow fits better; git-flow still fits software that ships explicit versions or keeps several in use.[^git-flow]
-In the kit, git-flow is a branch per delivery whose branch starts from `develop` and is named `feature/<slug>`, and its release and hotfix branches are the team's release work, which the kit does not model.
+git-flow is not one of the kit's strategies: `develop` and the `feature/`, `release/` and `hotfix/` branches are Driessen's names, and the kit installs none of them; a team on git-flow decides itself how a delivery becomes one branch and one merge.
 
 ## Choosing
 
-A project writes its choice once, in the Git slot of its docs/05, and every command reads it.
+A project writes its choice once, in the Git slot of its docs/05, and every command reads it; the slot holds one of the kit's three strategies.
 
 * **Trunk** fits one person, alone or with several sessions open on free lines (queue lines not done, not waiting and needing no other line done first, defined yet or not; [chapter 14](14-queue-states.md)) that touch different files: one commit per delivery on `main`, each session staging only its delivery, and the person deciding each commit, one delivery at a time.
   It does not fit two people: their deliveries share one branch, and one commit carries the other's half-done work.
-* **A branch per delivery** fits sequential work reviewed by pull request (chapter 20): each delivery merged by merge commit or squash.
-* **A worktree per delivery** fits several people working at once, or one person whose deliveries touch the same files ([chapter 19](19-worktrees.md)): each delivery on its own branch in its own folder, merged the same way.
-* **git-flow** fits software that ships numbered versions and keeps several in use.
+* **A branch per delivery** fits sequential work reviewed by pull request (chapter 20): each delivery on the branch named after its slug, `lend-book`, which reaches `main` in one merge.
+* **A worktree per delivery** fits several people working at once, or one person whose deliveries touch the same files ([chapter 19](19-worktrees.md)): each delivery in its own folder, `.focus-kit/worktrees/<slug>/`, on `focus-kit/<slug>`, unless the slot names another folder or prefix, merged the same way; a branch named only `<slug>` is someone else's, not the delivery's.
+
+git-flow is outside the slot: it fits software that ships numbered versions and keeps several in use, and a team that needs it runs it as its own workflow.
 
 Whichever it is, the rule is the same: one delivery, one step to undo, and the person decides each commit and merge, never the agent on its own.
 This book, written and reviewed by one person, is on trunk.
@@ -181,7 +192,7 @@ Every delivery lands as one commit on trunk or one merge otherwise, with its pag
 * Version control keeps every version of a project's files with who changed what and when; git, written in 2005 by Linus Torvalds and the Linux kernel's community, is distributed, so every copy holds the whole history.
 * A commit is a snapshot with its author, message and parents, named by a hash; a branch is a name that moves with each commit on it; a tag never moves; a remote is another copy you clone, push to and pull from.
 * A fast-forward and a rebase leave a line of the branch's commits; a merge commit adds a commit with two parents; a squash merge leaves one new commit; never rebase commits someone else has.
-* Trunk fits one person, alone or with several sessions on free lines that touch different files; a branch per delivery fits sequential work reviewed by pull request; a worktree per delivery fits several people, or deliveries that touch the same files; git-flow fits software that ships versions; the agent stages, the person decides each commit and merge, and the agent takes one of those steps only when the person names it.
+* Trunk fits one person, alone or with several sessions on free lines that touch different files; a branch per delivery fits sequential work reviewed by pull request; a worktree per delivery fits several people, or deliveries that touch the same files; trunk-based development and git-flow, which fits software that ships versions, are practices outside the kit; the agent stages, the person decides each commit and merge, and the agent takes one of those steps only when the person names it.
 
 [^pro-git-about]: Scott Chacon and Ben Straub, "About Version Control", *Pro Git*, 2nd ed., accessed 2026-09-30. <https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control>
 [^pro-git-history]: Scott Chacon and Ben Straub, "A Short History of Git", *Pro Git*, 2nd ed., accessed 2026-09-30. <https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git>

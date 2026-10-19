@@ -1,7 +1,7 @@
 # 18. Git essencial
 
 Depois deste capítulo você consegue manter cada entrega a um passo de ser desfeita, um commit no trunk ou um merge nos outros casos, e desfazê-la com `git revert`.
-Você também consegue dizer o que um controle de versão guarda e quem criou o git, ler um histórico de commits, branches e merges, fazer o merge de um branch de cada uma das quatro formas que o git oferece, e escolher entre o trunk, um branch por entrega, um worktree por entrega e o git-flow para um projeto.
+Você também consegue dizer o que um controle de versão guarda e quem criou o git, ler um histórico de commits, branches e merges, fazer o merge de um branch de cada uma das quatro formas que o git oferece, e escolher para um projeto entre as três estratégias do kit, o trunk, um branch por entrega e um worktree por entrega, distinguindo-as do trunk-based development e do git-flow, práticas de fora do kit.
 
 ## O problema
 
@@ -22,8 +22,18 @@ O git faz o merge de um branch de quatro formas, e isto é o que cada uma deixa 
 | Squash merge | Um commit novo | `git revert <commit>` |
 | Rebase, depois fast-forward | Os commits, reescritos | Um `git revert` por commit |
 
-Com um branch por entrega, faça o merge por commit de merge ou por squash, para que a entrega continue uma unidade de trabalho que um `git revert` desfaz.
-Um fast-forward ou um rebase só mantém isso quando o branch tinha um commit.
+No branch por entrega do kit, o `/propose` cria o branch com o nome do slug, ou o reutiliza quando ele existe, e escreve a página nele; o `/apply` constrói nele, e a pessoa faz o merge da página e da construção no `main` em um merge, aqui um commit de merge, pelo pull request do branch (capítulo 20) ou à mão: a unidade de trabalho que um `git revert -m 1 <merge>` desfaz.
+Para `emprestar-livro`, uma entrega da biblioteca de empréstimos escrita para este capítulo, a primeira linha é o que o `/propose` faz por você, `git switch emprestar-livro` no lugar dela quando o branch existe, e as duas últimas são suas, quando o `/apply` termina e você revisou o branch:
+
+```
+git switch -c emprestar-livro
+
+git switch main
+git merge --no-ff emprestar-livro
+```
+
+Um squash merge também deixa um passo, um commit novo que um `git revert <commit>` comum desfaz, mas ele é uma das formas do git; o kit pede só que a entrega chegue ao `main` em um merge, e este capítulo usa um commit de merge.
+Um fast-forward ou um rebase só mantém um passo quando o branch tinha um commit.
 As seções abaixo definem cada termo da tabela: as quatro formas, e depois o `git revert`.
 
 ## Commits e o histórico
@@ -150,23 +160,24 @@ O `git revert` é o jeito de desfazer qualquer coisa já compartilhada.
 
 O trunk do kit é uma pessoa fazendo commits no `main`, um commit por entrega, sozinha ou com vários agentes abertos ao mesmo tempo em entregas que mexem em arquivos diferentes (capítulo 19): uma linha, onde cada commit é uma entrega e cada `git revert` desfaz uma.
 Trunk-based development (desenvolvimento baseado no tronco) é uma prática de time com o mesmo nome, descrita por Paul Hammant: todos fazem o merge de mudanças pequenas no branch principal "*pelo menos uma vez a cada 24 horas*", muitas vezes por branches de vida curta revisados como pull requests.[^tbd]
-Nos termos do kit, isso é um branch por entrega com entregas pequenas, cada uma com merge por commit de merge ou por squash.
+Essa prática não é uma das estratégias do kit, só a mesma palavra: a resposta do kit mais próxima é um branch por entrega com entregas pequenas, cada uma chegando ao `main` em um merge.
 
 ## git-flow
 
 O git-flow é o modelo de branches que Vincent Driessen publicou em 2010: dois branches que vivem para sempre, `master` (hoje `main`) para as versões lançadas e `develop` para a próxima, e três tipos que vêm e vão, branches `feature/` que voltam para o `develop` por commit de merge, para que uma feature inteira seja fácil de desfazer, e branches `release/` e `hotfix/` que preparam e corrigem um lançamento.[^git-flow]
 Em 2020 ele acrescentou uma nota no topo do post: para software entregue continuamente, como um app web, que não volta atrás e não mantém várias versões em uso, um fluxo mais simples serve melhor; o git-flow ainda serve a software que lança versões explícitas ou mantém várias em uso.[^git-flow]
-No kit, o git-flow é um branch por entrega cujo branch começa do `develop` e se chama `feature/<slug>`, e os seus branches de release e de hotfix são o trabalho de lançamento do time, que o kit não modela.
+O git-flow não é uma das estratégias do kit: o `develop` e os branches `feature/`, `release/` e `hotfix/` são nomes de Driessen, e o kit não instala nenhum deles; um time no git-flow decide ele mesmo como uma entrega vira um branch e um merge.
 
 ## Escolher
 
-Um projeto escreve a sua escolha uma vez, no slot Git do seu docs/05, e todo comando a lê.
+Um projeto escreve a sua escolha uma vez, no slot Git do seu docs/05, e todo comando a lê; o slot guarda uma das três estratégias do kit.
 
 * **Trunk** serve a uma pessoa, sozinha ou com várias sessões abertas em linhas livres (linhas da fila que não estão feitas, não estão esperando e não precisam de outra linha feita antes, já definidas ou não; [capítulo 14](14-queue-states.md)) que mexem em arquivos diferentes: um commit por entrega no `main`, cada sessão colocando em stage só a sua entrega, e a pessoa decidindo cada commit, uma entrega por vez.
   Não serve a duas pessoas: as entregas delas dividem um branch, e um commit leva o trabalho pela metade da outra.
-* **Um branch por entrega** serve a trabalho em sequência revisado por pull request (capítulo 20): cada entrega com merge por commit de merge ou por squash.
-* **Um worktree por entrega** serve a várias pessoas trabalhando ao mesmo tempo, ou a uma pessoa cujas entregas mexem nos mesmos arquivos ([capítulo 19](19-worktrees.md)): cada entrega no seu próprio branch, na sua própria pasta, com merge do mesmo jeito.
-* **git-flow** serve a software que lança versões numeradas e mantém várias em uso.
+* **Um branch por entrega** serve a trabalho em sequência revisado por pull request (capítulo 20): cada entrega no branch com o nome do seu slug, `emprestar-livro`, que chega ao `main` em um merge.
+* **Um worktree por entrega** serve a várias pessoas trabalhando ao mesmo tempo, ou a uma pessoa cujas entregas mexem nos mesmos arquivos ([capítulo 19](19-worktrees.md)): cada entrega na sua própria pasta, `.focus-kit/worktrees/<slug>/`, no `focus-kit/<slug>`, a menos que o slot nomeie outra pasta ou outro prefixo, com merge do mesmo jeito; um branch chamado só `<slug>` é de outra pessoa, não da entrega.
+
+O git-flow fica fora do slot: ele serve a software que lança versões numeradas e mantém várias em uso, e um time que precisa dele o adota como fluxo próprio.
 
 Seja qual for, a regra é a mesma: uma entrega, um passo para desfazer, e a pessoa decide cada commit e cada merge, nunca o agente por conta própria.
 Este livro, escrito e revisado por uma pessoa, está no trunk.
@@ -181,7 +192,7 @@ Cada entrega chega como um commit no trunk ou um merge nos outros casos, com a s
 * Um controle de versão guarda cada versão dos arquivos de um projeto com quem mudou o quê e quando; o git, escrito em 2005 por Linus Torvalds e pela comunidade do kernel do Linux, é distribuído, então cada cópia guarda o histórico inteiro.
 * Um commit é uma foto com autor, mensagem e pais, com um hash como nome; um branch é um nome que anda com cada commit feito nele; uma tag nunca anda; um remoto é outra cópia que você clona, para a qual dá push e da qual dá pull.
 * Um fast-forward e um rebase deixam uma linha com os commits do branch; um commit de merge acrescenta um commit com dois pais; um squash merge deixa um commit novo; nunca faça rebase de commits que outra pessoa tem.
-* O trunk serve a uma pessoa, sozinha ou com várias sessões em linhas livres que mexem em arquivos diferentes; um branch por entrega serve a trabalho em sequência revisado por pull request; um worktree por entrega serve a várias pessoas, ou a entregas que mexem nos mesmos arquivos; o git-flow serve a software que lança versões; o agente coloca em stage, a pessoa decide cada commit e cada merge, e o agente dá um desses passos só quando a pessoa o nomeia.
+* O trunk serve a uma pessoa, sozinha ou com várias sessões em linhas livres que mexem em arquivos diferentes; um branch por entrega serve a trabalho em sequência revisado por pull request; um worktree por entrega serve a várias pessoas, ou a entregas que mexem nos mesmos arquivos; o trunk-based development e o git-flow, que serve a software que lança versões, são práticas de fora do kit; o agente coloca em stage, a pessoa decide cada commit e cada merge, e o agente dá um desses passos só quando a pessoa o nomeia.
 
 [^pro-git-about]: Scott Chacon e Ben Straub, "About Version Control", *Pro Git*, 2ª ed., acesso em 2026-09-30. <https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control>
 [^pro-git-history]: Scott Chacon e Ben Straub, "A Short History of Git", *Pro Git*, 2ª ed., acesso em 2026-09-30. <https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git>
