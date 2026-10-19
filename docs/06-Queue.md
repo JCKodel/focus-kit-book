@@ -541,5 +541,5 @@ When this milestone closes, the book teaches focus-kit 2026.10.19 and the reposi
 [x] ch12-refuse-first        chapter 12: /propose refuses a waiting line or an unmet `after` before it creates a branch or worktree; both editions · after m21-review
 [ ] ch08-step4-outcomes      chapter 8: the sentence after the report names its three outcomes, not only what the documents lack; both editions · after m21-review, m21-git-slot-default
 [ ] ch07-12-loan-days        chapters 7 and 12: the 21-day loan period comes from the same document in both chapters; both editions · after m21-review, ch12-refuse-first
-[ ] docs-m21-tidy            docs/06's header names the next milestone and M21's paragraph names what ch06 and ch16 answer, docs/05 is rewrapped, m21-review's page cites its base case, and work/kit-proposals.md carries three notes for focus-kit · after m21-review
+[>] docs-m21-tidy            docs/06's header names the next milestone and M21's paragraph names what ch06 and ch16 answer, docs/05 is rewrapped, m21-review's page cites its base case, and work/kit-proposals.md carries three notes for focus-kit · after m21-review
 ```
