@@ -57,7 +57,7 @@ A resposta é um espelho numa só direção, da fila para o quadro.
 No Caso A, um projeto para um cliente em uma plataforma low-code, uma customização registrada no seu docs/05 fazia isso: um script e um pipeline enviavam a fila, numa só direção, ao quadro kanban do projeto no Azure DevOps, então o gerente de projeto acompanhava o progresso no portal sem perguntar a um desenvolvedor.
 O `/propose` e o `/apply` atualizavam o quadro sempre que mudavam uma marca, e avisavam sempre que não conseguiam, então um quadro desatualizado nunca ficava em silêncio.
 Um projeto dá ao seu quadro essa atualização com um slot próprio no docs/05 §5 que cita o `/propose`, o `/apply` e o comando que envia a fila, como no docs/05 da biblioteca de empréstimos do [capítulo 7](07-the-documents.md); os comandos o seguem como seguem os slots do kit, sem nenhuma edição nos seus arquivos, que a instalação do kit escreve.
-Como o envio roda dentro do comando que mudou a marca, o quadro mostra a marca na hora, em qualquer branch em que a entrega esteja.
+Como o envio roda dentro do comando que mudou a marca, o quadro mostra a marca na hora, na fila do branch em que a entrega está: cada envio leva só a fila desse branch, então o envio de outra entrega põe no quadro a fila do próprio branch, e as marcas se encontram quando é feito o merge.
 Com as seis marcas do kit, um espelho coloca cada cartão pela marca da sua linha, na coluna em que o [capítulo 14](14-queue-states.md) as dobra nas colunas de um quadro.
 O espelho vai numa só direção porque a fila é o único lugar que o agente lê: um cartão movido no quadro não muda nada no repositório, e uma sincronização nas duas direções criaria duas fontes da verdade.
 

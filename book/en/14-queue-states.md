@@ -59,7 +59,8 @@ Where a mark is seen depends on where the session works (chapter 18).
 On trunk, the mark changes in the queue of the folder where the session runs, a board that reads that queue sees it at once, and it reaches the history with the person's commit.
 With a branch or a worktree per delivery, the mark lives on the delivery's branch, and a board that reads the main branch's queue sees it when that branch is merged.
 So the reason the marks change at once, a board people pull work from, is trunk's; on a branch, the early mark serves that branch's own queue until the merge.
-The exception is a project's own one-way mirror, refreshed by the commands when a mark changes: it shows the mark at once on any branch.
+A project's own one-way mirror, refreshed by the commands when a mark changes, shows the mark at once, but each refresh carries the queue of the branch the command ran on.
+On a branch, the board shows the queue of the branch that refreshed it last, and the other branches' marks reach it with their own refresh or at the merge.
 
 ## The next line, and which run together
 

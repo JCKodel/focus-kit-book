@@ -57,7 +57,7 @@ The answer is a mirror in one direction, from the queue to the board.
 On Case A, a client project on a low-code platform, a customization recorded in its docs/05 did this: a script and a pipeline pushed the queue, one way, to the project's Azure DevOps kanban board, so the project manager followed progress in the portal without asking a developer.
 `/propose` and `/apply` refreshed the board whenever they changed a mark, and said so whenever they could not, so a stale board was never silent.
 A project gives its board this refresh with a slot of its own in docs/05 §5 that names `/propose`, `/apply` and the command that pushes the queue, as in the lending library's docs/05 of [chapter 7](07-the-documents.md); the commands follow it as they follow the kit's slots, with no edit to their files, which the kit's installation writes.
-Since the push runs inside the command that changed the mark, the board shows the mark at once, on any branch the delivery is on.
+Since the push runs inside the command that changed the mark, the board shows the mark at once, in the queue of the branch the delivery is on: each push carries only that branch's queue, so another delivery's push puts its own branch's queue on the board, and the marks meet at the merge.
 With the kit's six marks, a mirror places each card by its line's mark, in the column where [chapter 14](14-queue-states.md) folds them onto a board's columns.
 The mirror goes one way because the queue is the only place the agent reads: a card moved on the board changes nothing in the repository, and a sync in both directions would make two sources of truth.
 

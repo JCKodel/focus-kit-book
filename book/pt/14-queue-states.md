@@ -60,7 +60,8 @@ Onde uma marca é vista depende de onde a sessão trabalha (capítulo 18).
 No trunk, a marca muda na fila da pasta onde a sessão roda, um quadro que lê essa fila a vê na hora, e ela chega ao histórico com o commit da pessoa.
 Com um branch ou um worktree por entrega, a marca mora no branch da entrega, e um quadro que lê a fila do branch principal a vê quando é feito o merge desse branch.
 Então o motivo de as marcas mudarem na hora, um quadro de onde as pessoas puxam trabalho, é um motivo do trunk; em um branch, a marca antecipada serve à fila do próprio branch até o merge.
-A exceção é um espelho do próprio projeto numa só direção, atualizado pelos comandos quando uma marca muda: ele mostra a marca na hora em qualquer branch.
+Um espelho do próprio projeto numa só direção, atualizado pelos comandos quando uma marca muda, mostra a marca na hora, mas cada atualização leva a fila do branch em que o comando rodou.
+Em um branch, o quadro mostra a fila do branch que o atualizou por último, e as marcas dos outros branches chegam a ele com a atualização deles ou quando é feito o merge.
 
 ## A próxima linha, e quais rodam juntas
 
