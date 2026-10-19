@@ -41,7 +41,7 @@ One choice is yours before the first `/propose`: the git strategy, trunk, a bran
    You see the kit's four commands in `.claude/skills/`, nothing staged or committed, and the agent naming `/brainstorm` as the next step, in a fresh session.
    Taught in [chapter 8](08-install-and-hosts.md), "Install".
 2. Open a fresh session, not the one that ran the install, and type `/brainstorm`, then answer its questions, one subject at a time; "your call" keeps the agent's default.
-   You see docs/00 to 06, `docs/adr/`, `AGENTS.md`, `CLAUDE.md` and `work/done/` written, the queue shown, and the agent naming `/propose <slug>` for the queue's first line, in a fresh session.
+   You see docs/00 to 06, `docs/adr/`, `AGENTS.md`, `CLAUDE.md` and `work/done/` written, the queue shown, and the agent naming `/propose <slug>` for the queue's first line.
    Taught in [chapter 9](09-starting-a-project.md), "`/brainstorm`: a new project".
 3. Read the documents against chapter 9's checklist and ask the agent for every fix in the same session.
    Then stage by name only the files the install reported writing and the ones `/brainstorm` wrote; never `git add -A`, `git add .` or a whole folder such as `.claude/`, which would also take a note or an edit of yours lying beside them.

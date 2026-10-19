@@ -122,11 +122,11 @@ como dia/mês/ano, numa tela estreita também.
 
 O marco 1 mantém as suas linhas, a ordem delas e o `· after emprestar-livro` de `devolver-livro`; o marco 2 vem depois dele, então a sua linha vem depois de todas elas em prioridade, e o parágrafo que o agente escreveu é seu para ler e corrigir, como toda mudança na fila.
 
-A regra da tela estreita e a exceção do catálogo não cabem na frase única da linha, então vão para um rascunho `work/formato-devolucao.md`, e a resposta para ali, nomeando `/propose formato-devolucao` para uma sessão nova, escrito como o seu host chama os comandos; um pedido que a linha comporta inteiro não ganha rascunho.
-O rascunho é onde o detalhe espera: o `/propose formato-devolucao`, numa sessão nova, parte dele e escreve a página (o capítulo 12 mostra o `/propose`), então nada do que você disse na primeira sessão é dito duas vezes.
+A regra da tela estreita e a exceção do catálogo não cabem na frase única da linha, então vão para um rascunho `work/formato-devolucao.md`, e a resposta para ali, nomeando `/propose formato-devolucao`, escrito como o seu host chama os comandos; um pedido que a linha comporta inteiro não ganha rascunho.
+O rascunho é onde o detalhe espera, e você escolhe onde o `/propose formato-devolucao` roda: nesta sessão, cuja conversa o rascunho já guarda, ou numa sessão nova; nos dois casos ele escreve a página (o capítulo 12 mostra o `/propose`), e nada do que você disse é dito duas vezes.
 A linha fica `[ ]` com o rascunho ao lado: um rascunho em `work/` não é uma definição, e o `/apply` só constrói uma linha que o `/propose` marcou `[>]` ([capítulo 14](14-queue-states.md)).
-Dizer "defina agora" recebe a mesma resposta: a regra do kit é o `/propose` numa sessão nova, cuja janela contém o arquivo de regras, os documentos e o rascunho, e nada desta conversa, então a página guarda só o que ficou por escrito, que é tudo o que o `/apply` terá.
-Um host pode mesmo assim rodar o comando aqui quando você o nomeia na sua mensagem, e alguns se oferecem para isso; a página seria escrita com tudo o que foi dito nesta sessão ainda na janela, então abra uma sessão nova.
+Dizer "defina agora" é a primeira escolha: você nomeia `/propose formato-devolucao` na sua mensagem, e ele escreve a página com tudo o que foi dito nesta sessão ainda na janela, então a página precisa guardar cada decisão de que a construção precisa, inclusive o que só esta conversa trouxe, porque o `/apply` roda numa sessão nova, cuja janela contém o arquivo de regras, os documentos e a página, e nada desta conversa.
+Se você escolher uma sessão nova, o `/propose` lê o rascunho e os documentos e pergunta só o que eles deixam em aberto, nunca uma pergunta que o rascunho já responde; nos dois casos, você lê e corrige a página na conversa que a escreveu.
 
 Uma mudança tão pequena passa mesmo assim pelo método inteiro, e isto é o que ela custa.
 O `/propose formato-devolucao` lê os documentos do projeto e o rascunho e escreve esta página, escrita para este capítulo:
@@ -156,7 +156,7 @@ verificação está verde.
 ```
 
 Todas as seções estão lá, e três delas só dizem que não se aplicam; os dois detalhes do rascunho são uma linha de Comportamento e um item de Fora do escopo.
-Você lê a página e a corrige, e numa outra sessão nova o `/apply formato-devolucao` a constrói: ele muda a função que formata a data na tela do empréstimo e escreve um teste com as duas linhas de Comportamento, umas cinco linhas entre os dois, roda o verify até ficar verde, move a página para `work/done/`, coloca em stage os dois arquivos com a página e a linha da fila, e sugere a mensagem, também escrita para este capítulo (o capítulo 13 explica o formato dela):
+Você lê a página e a corrige na sessão que a escreveu, e numa sessão nova o `/apply formato-devolucao` a constrói: ele muda a função que formata a data na tela do empréstimo e escreve um teste com as duas linhas de Comportamento, umas cinco linhas entre os dois, roda o verify até ficar verde, move a página para `work/done/`, coloca em stage os dois arquivos com a página e a linha da fila, e sugere a mensagem, também escrita para este capítulo (o capítulo 13 explica o formato dela):
 
 ```commit
 Mostrar a data de devolução como dia/mês/ano
@@ -197,6 +197,6 @@ No Caso A, um projeto para um cliente em uma plataforma low-code, o Microsoft Po
 * A marca de uma linha diz onde a entrega dela está, de `[ ]`, não definida, a `[x]`, feita; uma linha nunca sai, então a fila é também o histórico.
 * O parágrafo de um marco é um teste que uma pessoa confere no produto, nunca um tema, sobre as entregas que o tornam verdade, de três a oito no primeiro marco: o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados viram linhas sob ela no mesmo marco; linhas são acrescentadas enquanto ele anda, e quem acrescenta uma a põe no marco que tem uma cláusula que precisa dela, ou sob o seguinte, criado quando falta com um parágrafo que a linha atende e a sua revisão por último.
 * A ordem é a prioridade: a linha mais acima importa mais, mover uma linha muda a prioridade dela, e uma dependência conhecida quando a linha é acrescentada é escrita junto, `· after <slug>`, uma ordem, não uma espera, então a linha mantém `[ ]`.
-* Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido; o código só muda dentro do `/apply`, até uma mudança de cinco linhas tem sua página, e uma mudança pedida em qualquer outro lugar vira uma linha, com um rascunho da página para o que a linha não comporta, e o `/propose` numa sessão nova.
+* Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido; o código só muda dentro do `/apply`, até uma mudança de cinco linhas tem sua página, e uma mudança pedida em qualquer outro lugar vira uma linha, com um rascunho da página para o que a linha não comporta, e o `/propose` nessa sessão ou numa sessão nova, o `/apply` sempre numa sessão nova.
 
 [^m15-queue]: J.C. Ködel, "One Page at a Time", o docs/06, a fila, marco M15, acesso em 2026-10-18, no repositório do livro. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md>

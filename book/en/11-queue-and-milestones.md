@@ -119,11 +119,11 @@ day/month/year, on a narrow screen too.
 
 Milestone 1 keeps its lines, their order and `return-book`'s `· after lend-book`; milestone 2 comes after it, so its line comes after all of them in priority, and the paragraph the agent wrote is yours to read and correct, like any change to the queue.
 
-The narrow-screen rule and the catalog exception do not fit the line's one sentence, so they go into a draft `work/due-date-format.md`, and the answer stops there, naming `/propose due-date-format` for a fresh session, written as your host invokes it; a request the line holds whole gets no draft.
-The draft is where the detail waits: `/propose due-date-format`, in a fresh session, starts from it and writes the page (chapter 12 shows `/propose`), so nothing you said in the first session is said twice.
+The narrow-screen rule and the catalog exception do not fit the line's one sentence, so they go into a draft `work/due-date-format.md`, and the answer stops there, naming `/propose due-date-format`, written as your host invokes it; a request the line holds whole gets no draft.
+The draft is where the detail waits, and you choose where `/propose due-date-format` runs: in this session, whose conversation the draft already holds, or in a fresh one; either way it writes the page (chapter 12 shows `/propose`), and nothing you said is said twice.
 The line stays `[ ]` with the draft beside it: a draft in `work/` is not a definition, and `/apply` builds only a line `/propose` has marked `[>]` ([chapter 14](14-queue-states.md)).
-Saying "define it now" gets the same answer: the kit's rule is `/propose` in a fresh session, whose window holds the rules file, the documents and the draft and nothing of this conversation, so the page holds only what was written down, which is all `/apply` will have.
-A host may still run the command here when you name it in your message, and some offer to; the page would then be written with everything said in this session still in the window, so open a fresh one.
+Saying "define it now" is the first choice: you name `/propose due-date-format` in your message, and it writes the page with everything said in this session still in the window, so the page must hold every decision the build needs, including what only this conversation supplied, because `/apply` runs in a fresh session, whose window holds the rules file, the documents and the page and nothing of this conversation.
+If you choose a fresh session instead, `/propose` reads the draft and the documents and asks only what they leave open, never a question the draft already answers; in both, you read and correct the page in the conversation that wrote it.
 
 A change this small still goes through the whole method, and this is what it takes.
 `/propose due-date-format` reads the project's documents and the draft and writes this page, written for this chapter:
@@ -151,7 +151,7 @@ overdue list's dates, a line of its own.
 ```
 
 Every section is there, and three of them say only that they do not apply; the two details of the draft are a Behaviour line and an Out of scope item.
-You read the page and correct it, and in another fresh session `/apply due-date-format` builds it: it changes the function that formats the date on the loan screen and writes one test with the two Behaviour lines, about five lines between them, runs verify until it is green, moves the page to `work/done/`, stages the two files with the page and the queue line, and suggests the message, also written for this chapter (chapter 13 explains its shape):
+You read the page and correct it in the session that wrote it, and in a fresh session `/apply due-date-format` builds it: it changes the function that formats the date on the loan screen and writes one test with the two Behaviour lines, about five lines between them, runs verify until it is green, moves the page to `work/done/`, stages the two files with the page and the queue line, and suggests the message, also written for this chapter (chapter 13 explains its shape):
 
 ```commit
 Show the due date as day/month/year
@@ -192,6 +192,6 @@ On Case A, a client project on a low-code platform, Microsoft Power Apps with Co
 * A line's mark says where its delivery stands, from `[ ]`, not defined, to `[x]`, done; a line never leaves, so the queue is also the history.
 * A milestone paragraph is a test a person can check against the product, never a theme, over the deliveries that make it true, three to eight in the first milestone: the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone; lines are added while it runs, and whoever adds one puts it in the milestone whose paragraph has a clause that needs it, or under the next, created when missing with a paragraph the line answers and its review last.
 * The order is the priority: the higher line matters more, moving a line changes its priority, and a dependency known when a line is added is written with it, `· after <slug>`, an order, not a wait, so the line keeps `[ ]`.
-* No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept; code changes only inside `/apply`, even a five-line change gets its page, and a change asked anywhere else becomes a line, with a draft page for what the line cannot hold, and `/propose` in a fresh session.
+* No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept; code changes only inside `/apply`, even a five-line change gets its page, and a change asked anywhere else becomes a line, with a draft page for what the line cannot hold, and `/propose` in that session or a fresh one, `/apply` always in a fresh one.
 
 [^m15-queue]: J.C. Ködel, "One Page at a Time", docs/06, the queue, milestone M15, accessed 2026-10-18, in the book's repository. <https://github.com/JCKodel/focus-kit-book/blob/main/docs/06-Queue.md>

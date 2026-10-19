@@ -456,7 +456,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repo
 [x] ch08-update-2026-10-18-1 chapter 8: the update example and its report at 2026.10.18.1, and the Claude Code row that reads `AGENTS.md` alone only without a `CLAUDE.md`; both editions · after kit-2026-10-18-1
 [x] ch05-13-slow-tests       chapters 5, 7, 13 and 15: verify fast on every delivery, the slow tests named in the Verify slot and run by the milestone review, and /apply saying when a test is too slow for verify; both editions · after kit-2026-10-18-1
 [x] ch11-next-milestone      chapters 11, 14 and 15: a line no clause of the current milestone needs goes under the next milestone, and a review's finding stays in its own; both editions · after kit-2026-10-18-1
-[>] propose-same-session     chapters 8 to 13 and 17: /propose runs in the session that asked for the change or in a fresh one, and /apply always in a fresh one; both editions · after kit-2026-10-18-1
+[x] propose-same-session     chapters 8 to 13 and 17: /propose runs in the session that asked for the change or in a fresh one, and /apply always in a fresh one; both editions · after kit-2026-10-18-1
 [>] apply-use-first          chapters 10 and 13, and where chapters 18, 19, 22 and 23 describe the person's review: /apply's next steps start with using what the delivery changed; both editions · after kit-2026-10-18-1
 [x] agent-commits-asked      chapters 6, 7, 13, 18, 19 and 23, and docs/00 contents: the agent never commits or merges on its own, and asked, it takes the step the person names; both editions · after kit-2026-10-18-1
 [x] ch11-14-defined-mark     chapters 11 and 14: `[>]` means completely defined, not that the page exists, and a `[ ]` line may keep a draft; both editions

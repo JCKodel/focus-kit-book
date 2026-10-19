@@ -41,7 +41,7 @@ O [capítulo 18](18-git-essentials.md) e o [capítulo 19](19-worktrees.md) ensin
    Você vê os quatro comandos do kit em `.claude/skills/`, nada em stage nem com commit, e o agente nomeando o `/brainstorm` como o próximo passo, numa sessão nova.
    Ensinado no [capítulo 8](08-install-and-hosts.md), "Instalação".
 2. Abra uma sessão nova, não a que rodou a instalação, digite `/brainstorm` e responda às perguntas dele, um assunto por vez; "your call" (você decide) mantém o padrão do agente.
-   Você vê o docs/00 ao 06, `docs/adr/`, `AGENTS.md`, `CLAUDE.md` e `work/done/` escritos, a fila mostrada, e o agente nomeando o `/propose <slug>` para a primeira linha da fila, numa sessão nova.
+   Você vê o docs/00 ao 06, `docs/adr/`, `AGENTS.md`, `CLAUDE.md` e `work/done/` escritos, a fila mostrada, e o agente nomeando o `/propose <slug>` para a primeira linha da fila.
    Ensinado no [capítulo 9](09-starting-a-project.md), "`/brainstorm`: um projeto novo".
 3. Leia os documentos contra a lista de conferência do capítulo 9 e peça ao agente cada correção na mesma sessão.
    Depois coloque em stage, pelo nome, só os arquivos que a instalação relatou ter escrito e os que o `/brainstorm` escreveu; nunca `git add -A`, `git add .` ou uma pasta inteira como `.claude/`, que levariam junto uma anotação ou uma edição sua ao lado deles.

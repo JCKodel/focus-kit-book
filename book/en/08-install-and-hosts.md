@@ -133,7 +133,8 @@ Devin Desktop also reads `.windsurf/skills/`, the folder of its former name;[^de
 
 Every command ends by naming the next one, written as the host running it invokes it, the table's last column.
 The setup file names `/brainstorm` or `/analyze`, to run in a fresh session, `/propose` names `/apply` with the page's slug, and `/apply` names the queue's next line.
-On the lending library, after `/propose lend-book`, Claude Code tells you to run `/apply lend-book` in a fresh session, and Codex tells you to run `$apply lend-book`.
+On the lending library, after `/propose lend-book`, Claude Code tells you to run `/apply lend-book` in a fresh session, and Codex tells you to run `$apply lend-book`, in a fresh session too.
+`/propose` may run in the conversation that asked for the change; `/apply` always starts in a fresh session, in every host (chapter 11).
 The kit's files are the same in both; the form follows the host that runs them.
 
 The kit's setup file keeps this table current, with the vendor page each row was read from, and adds a host only with its documentation in hand.

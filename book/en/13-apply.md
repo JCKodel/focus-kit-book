@@ -15,7 +15,7 @@ And an agent that commits on its own puts its work in the project's history befo
 ## What `/apply` does
 
 `/apply <slug>` builds the delivery that `work/<slug>.md` describes, completely, in one session: the code, the tests, the proof and the documents.
-It starts in a fresh session, so the page is all it takes from the conversation that wrote it, which is why chapter 12 asks you to read the page before this command runs.
+It always starts in a fresh session, even when `/propose` ran in the conversation that asked for the change (chapter 11), so the page is all it takes from the conversation that wrote it, which is why chapter 12 asks you to read the page before this command runs.
 
 ### What it reads
 

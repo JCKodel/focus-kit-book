@@ -135,7 +135,8 @@ O Devin Desktop também lê `.windsurf/skills/`, a pasta do seu nome anterior;[^
 
 Todo comando termina dizendo o próximo, escrito como o host que o roda o invoca, a última coluna da tabela.
 O arquivo de setup cita o `/brainstorm` ou o `/analyze`, para rodar numa sessão nova, o `/propose` cita o `/apply` com o slug da página, e o `/apply` cita a próxima linha da fila.
-Na biblioteca de empréstimos, depois de `/propose emprestar-livro`, o Claude Code diz para você rodar `/apply emprestar-livro` numa sessão nova, e o Codex diz para rodar `$apply emprestar-livro`.
+Na biblioteca de empréstimos, depois de `/propose emprestar-livro`, o Claude Code diz para você rodar `/apply emprestar-livro` numa sessão nova, e o Codex diz para rodar `$apply emprestar-livro`, também numa sessão nova.
+O `/propose` pode rodar na conversa que pediu a mudança; o `/apply` sempre começa numa sessão nova, em todo host (capítulo 11).
 Os arquivos do kit são os mesmos nos dois; a forma segue o host que os roda.
 
 O arquivo de setup do kit mantém esta tabela atualizada, com a página do fornecedor de onde cada linha foi lida, e só acrescenta um host com a documentação dele em mãos.

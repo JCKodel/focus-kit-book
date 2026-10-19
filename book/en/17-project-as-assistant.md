@@ -129,7 +129,7 @@ An answer from what the session remembers, an offer to keep a status file, or a 
 
 A question touches no code, and the host's plan mode (chapter 12) keeps a session from editing anything.
 When the manager wants something changed, such as a new line in the queue, the agent writes it by conversation, as in any session, and a person reviews and commits it.
-A change to the code, however small, becomes a line as well, with a draft page for the detail, and the answer stops there, naming `/propose` for a fresh session (chapter 11).
+A change to the code, however small, becomes a line as well, with a draft page for the detail, and the answer stops there, naming `/propose` for that session, out of plan mode, or a fresh one (chapter 11).
 
 ## What the team gains
 

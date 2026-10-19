@@ -15,7 +15,7 @@ E um agente que faz commit por conta própria põe o trabalho dele no histórico
 ## O que o `/apply` faz
 
 O `/apply <slug>` constrói a entrega que `work/<slug>.md` descreve, por inteiro, em uma sessão: o código, os testes, a prova e os documentos.
-Ele começa em uma sessão nova, então a página é tudo o que ele leva da conversa que a escreveu, e é por isso que o capítulo 12 pede que você leia a página antes de este comando rodar.
+Ele sempre começa em uma sessão nova, mesmo quando o `/propose` rodou na conversa que pediu a mudança (capítulo 11), então a página é tudo o que ele leva da conversa que a escreveu, e é por isso que o capítulo 12 pede que você leia a página antes de este comando rodar.
 
 ### O que ele lê
 
