@@ -62,7 +62,7 @@ The kit offers two choices and imposes neither: the architecture and the git str
 The kit gives three answers: FOCUS whole; the two principles only, vertical slices and exceptions as values, in whatever structure the stack favors; or neither, the project's own conventions.
 With any of the three, the page, the queue, the documents, verify and the commit work the same.
 What FOCUS adds is in the code: an agent reads one slice for a change (chapter 4), which the two principles give too, and each of the four pieces has its own test (chapter 5).
-Ninjobs, a thin web app over a backend as a service, chose the two principles.
+Ninjobs first required FOCUS whole on every feature (chapter 6); after the restart it kept the two principles, vertical slices and exceptions as values, without the four pieces as a rule.
 On a repository that already has code, the default is what the code already does.
 docs/01 records the answer, and an ADR records why.
 

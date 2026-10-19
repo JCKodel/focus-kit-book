@@ -36,6 +36,7 @@ O custo estava no número de lugares, e não no tamanho de cada arquivo.
 ## Para onde foi
 
 Em 2026-08-29 eu recomecei, com um processo pequeno o bastante para caber na cabeça, e mudei o app de Flutter para React, onde o mesmo agente acertou o design.
+O código manteve os dois princípios do FOCUS, fatias verticais e exceções como valores, e deixou de exigir as quatro peças em toda feature.
 Uma entrega virou uma página, `work/<slug>.md`.
 Dois comandos faziam o trabalho: o `/propose` conversa comigo e escreve a página, nunca código; o `/apply` constrói a página, faz a verificação e compara a tela com o design.
 A fila virou uma linha por entrega.

@@ -236,7 +236,7 @@ Nada no FOCUS existe por cerimônia.
 Um caso de uso existe quando há uma regra, um repositório quando há I/O, um orquestrador quando um evento leva a um novo estado, e uma tela quando há uma tela para mostrar.
 Uma feature que mostra uma lista de livros sem regra nenhuma não tem caso de uso: o orquestrador pergunta ao repositório e publica o que recebeu.
 KISS, YAGNI e DRY decidem quando uma peça é escrita: quando uma entrega precisa do trabalho dela, e não antes.
-No Ninjobs eu exigi toda peça em toda feature e um campo levava oito arquivos ([capítulo 3](03-simplicity-and-results.md)); a culpa foi da exigência, e as quatro peças são um lugar para cada trabalho, então uma feature com menos trabalhos tem menos peças.
+No Ninjobs, antes do recomeço do [capítulo 6](06-birth-of-focus-kit.md), eu exigi toda peça em toda feature e um campo levava oito arquivos ([capítulo 3](03-simplicity-and-results.md)); a culpa foi da exigência, e as quatro peças são um lugar para cada trabalho, então uma feature com menos trabalhos tem menos peças.
 
 ## O que o time ganha
 

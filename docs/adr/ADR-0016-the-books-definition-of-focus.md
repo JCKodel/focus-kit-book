@@ -40,3 +40,7 @@ The criterion of the amendment `four-pieces-injection` stands: a piece receives 
 ## Amendment, 2026-10-16 (focus-and-slices)
 
 Chapters 6 and 7 are one chapter, `06-focus.md`, which teaches all four letters, the four pieces and the dependency criterion; the definition above is unchanged.
+
+## Amendment, 2026-10-18 (ch07-ninjobs-focus)
+
+The Context's "FOCUS was required whole on every feature" describes Ninjobs' earlier phase, the fifteen days before the restart of 2026-08-29. After the restart, Ninjobs kept the two principles, vertical slices and exceptions as values, and stopped requiring the four pieces on every feature. The author's read-only inspection on 2026-10-18 of Ninjobs' preserved process decisions and current source records the earlier phase and shows the later one; it proves the recorded earlier choice, not how fully the earlier code followed it. Chapters 4, 6 and 7 place each phase in its time. The Decision and the definition of FOCUS above are unchanged, and the Context is not rewritten.

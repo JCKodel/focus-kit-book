@@ -36,6 +36,7 @@ The cost was the number of places, not the size of each file.
 ## Where it went
 
 On 2026-08-29 I started over, with a process small enough to hold in my head, and moved the app from Flutter to React, where the same agent got the design right.
+The code kept the two principles of FOCUS, vertical slices and exceptions as values, and stopped requiring the four pieces on every feature.
 One delivery became one page, `work/<slug>.md`.
 Two commands did the work: `/propose` talks with me and writes the page, never code; `/apply` builds the page, verifies it and compares the screen against the design.
 The queue became one line per delivery.

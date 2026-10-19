@@ -30,7 +30,19 @@ The author authorized definition before prerequisites finish; `after kit-2026-10
 
 **Done when.**
 
-* [ ] Both editions and the ADR agree on the two phases; only the bounded historical sentences change, with no unsupported conformity claim.
-* [ ] The author reviews the paraphrased historical wording; no private detail, source path or new measurement appears, and `make scan` passes.
-* [ ] Each chapter keeps its reader-value opening and evidenced gain, with no filler or useful explanation cut; retained numbers preserve their provenance.
-* [ ] `make verify` and `make book` pass; both PDFs are given to the author, and the pending kit wording correction is explicitly reported.
+* [x] Both editions and the ADR agree on the two phases; only the bounded historical sentences change, with no unsupported conformity claim.
+* [x] The author reviews the paraphrased historical wording; no private detail, source path or new measurement appears, and `make scan` passes.
+* [x] Each chapter keeps its reader-value opening and evidenced gain, with no filler or useful explanation cut; retained numbers preserve their provenance.
+* [x] `make verify` and `make book` pass; both PDFs are given to the author, and the pending kit wording correction is explicitly reported.
+
+## Record
+
+**Built.** Chapter 7, The two choices: the sentence on Ninjobs' architecture now places both phases, whole FOCUS first (chapter 6), then the two principles kept after the restart without the four pieces as a rule; "a thin web app over a backend as a service" is gone. Chapter 4 anchors its "every piece on every feature" sentence before the restart of chapter 6. Chapter 6, Where it went, gains one sentence on what the code kept, since that section never said what the architecture became. ADR-0016 gains the amendment `2026-10-18 (ch07-ninjobs-focus)`; Decision and Context unchanged. Both editions.
+
+**Not changed.** Chapter 3's opening already speaks in the past of the earlier phase, and is not on this page. Chapter 6's cause 3 sits inside What went wrong, already bounded to the fifteen days.
+
+**Proof.** `make verify` and `make scan` green after the last edit. `make book` runs once at the end of the batch, by the driver.
+
+**Review.** One read-only Opus review: no blocking finding; three wording points, all taken (the Portuguese "ele" dropped, chapter 7's repeated "feature" replaced by "as a rule", the ADR's "supports both phases" narrowed to "records the earlier phase and shows the later one").
+
+**Decisions.** Under the batch, the author's review of the wording is asked in the report; the kit correction is reported, not made: focus-kit `README.md` "Ninjobs took it whole." and `README.pt.md` "O Ninjobs adotou inteira." need the two-phase wording.

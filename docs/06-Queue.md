@@ -477,7 +477,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repo
 [x] ch14-ended-and-dropped   chapters 14 and 23: a `[~]` or `[*]` line whose session ended is resumed on the person's word, and a cancelled delivery ends `[x] · dropped: <reason>`, which is how chapter 23's impossible request is written; both editions · after kit-2026-10-18-1
 [x] ch18-revert-scope        chapters 18 and 19: one step reverts what git holds; a migration run or a message sent is undone as the page's Done when says, or not at all; both editions · after kit-2026-10-18-1
 [x] ch15-review-head         chapter 15: the milestone review's page names the commit its reading started at, so the range stays fixed while readers work; both editions · after kit-2026-10-18-1
-[>] ch07-ninjobs-focus       chapters 4, 6 and 7 and ADR-0016 distinguish the earlier whole-FOCUS requirement from the later simplification retaining two principles; both editions · after kit-2026-10-18-1
+[x] ch07-ninjobs-focus       chapters 4, 6 and 7 and ADR-0016 distinguish the earlier whole-FOCUS requirement from the later simplification retaining two principles; both editions · after kit-2026-10-18-1
 [ ] queue-legend-dropped     docs/06's legend and docs/03's mark and conflict rows say what focus-kit 2026.10.18.1 says: `· dropped:` on a cancelled line, and a conflict as a line both sessions edited · after kit-2026-10-18-1
 [ ] ch12-defined-mark       chapter 12: the line becomes `[>]` when the page is completely defined, as docs/05 §3 says, not when it is written; both editions
 [ ] ch19-partial-branch-commits chapter 19: a blocked /apply on a delivery branch stages its partial work for the person to commit there, as chapter 13 cites; both editions

@@ -234,7 +234,7 @@ Nothing in FOCUS exists for ceremony.
 A use case exists when there is a rule, a repository when there is I/O, an orchestrator when an event leads to a new state, and a view when there is a screen.
 A feature that shows a list of books with no rule has no use case: the orchestrator asks the repository and publishes what it got.
 KISS, YAGNI and DRY decide when a piece is written: when a delivery needs its job, and not before.
-On Ninjobs I required every piece on every feature and one field took eight files ([chapter 3](03-simplicity-and-results.md)); the fault was the requirement, and the four pieces are a place for each job, so a feature with fewer jobs has fewer pieces.
+On Ninjobs, before the restart of [chapter 6](06-birth-of-focus-kit.md), I required every piece on every feature and one field took eight files ([chapter 3](03-simplicity-and-results.md)); the fault was the requirement, and the four pieces are a place for each job, so a feature with fewer jobs has fewer pieces.
 
 ## What the team gains
 

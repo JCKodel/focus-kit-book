@@ -63,7 +63,7 @@ O `/brainstorm` e o `/analyze` explicam cada uma com uma recomendação para a s
 O kit dá três respostas: o FOCUS inteiro; só os dois princípios, fatias verticais e exceções como valores, na estrutura que a stack favorecer; ou nenhum dos dois, as convenções do próprio projeto.
 Com qualquer uma das três, a página, a fila, os documentos, a verificação e o commit funcionam do mesmo jeito.
 O que o FOCUS acrescenta está no código: um agente lê uma fatia para uma mudança (capítulo 4), o que os dois princípios também dão, e cada uma das quatro peças tem o seu próprio teste (capítulo 5).
-O Ninjobs, um app web fino sobre um backend como serviço, escolheu os dois princípios.
+O Ninjobs primeiro exigiu o FOCUS inteiro em toda feature (capítulo 6); depois do recomeço, manteve os dois princípios, fatias verticais e exceções como valores, sem as quatro peças como regra.
 Num repositório que já tem código, o padrão é o que o código já faz.
 O docs/01 registra a resposta, e um ADR registra o porquê.
 
