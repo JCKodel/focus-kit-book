@@ -127,7 +127,8 @@ The first draft of `insertLoan` turned every failure of the write into `AlreadyL
 No test triggers it, since in the tests only the unique index ever fails, and it sits in the text this delivery wrote, so the agent narrows the catch to the unique index's error and runs verify again; the repository call chapters 3 and 4 describe is the fixed one.
 `insertLoan` lives in a file this delivery created, so a review of the diff alone would have read nothing of it.
 The second candidate: the refusal for a suspended member does not say until when.
-The page never asked for that, so it becomes the line `suspension-end`, placed in the queue below `return-book`, which stays the next free line.
+The page never asked for that, and no clause of milestone 1's paragraph needs it: the paragraph promises the refusal, not its end date.
+So it becomes the line `suspension-end`, under the next milestone, created when there is none, as chapter 11 says, and `return-book` stays the next free line.
 Then it writes what happened on the page, both candidates and what became of each included, ticks Done when, moves the page to `work/done/lend-book.md`, stages only this delivery's paths, and, as its last edit, marks the line `[x]` and stages that line of docs/06.
 If another session's edit to `src/features/members/` sits in the tree, or its line of docs/06 is already staged, the agent leaves both as they are and tells you about the staged one (chapter 19).
 
@@ -171,8 +172,8 @@ The tests prove what the page wrote and the review reads the code; only using th
 Using it does not replace reading the diff either: use shows what the build does, and the staged diff shows what the commit would hold, a file the page did not ask for or another session's entry, which no screen shows; and neither publishes the delivery nor commits it.
 This use covers one delivery while it is open; the hand test at a milestone's close goes through its whole paragraph.
 What the page asked and the build got wrong or left rough, a button out of place, a label that does not fit, a screen that takes seconds to answer, is a correction of this delivery: verify and the proof run again and the page records it.
-What the page did not ask, however small, and a problem that needs a definition of its own become a `[ ]` line, added by conversation with a draft page for what the line cannot hold; ask for it right below this delivery's line, so it is the next free line and its `/propose` starts from what you saw while you still remember it.
-On Ninjobs I used each delivery before committing it: that is where I found problems with the interface, with how easy it was to use and with speed that the tests and the reviews had not shown, and where I improved what the agent made, what the page had asked for corrected in the same conversation, while the delivery was open, and the rest written as the next lines of the queue.
+What the page did not ask, however small, and a problem that needs a definition of its own become a `[ ]` line, added by conversation with a draft page for what the line cannot hold; it goes in this milestone when a clause of its paragraph needs it and under the next otherwise, as chapter 11 says, because its place is its priority; the draft page, written in this conversation, keeps what you saw while you still remember it, for its `/propose`.
+On Ninjobs I used each delivery before committing it: that is where I found problems with the interface, with how easy it was to use and with speed that the tests and the reviews had not shown, and where I improved what the agent made, what the page had asked for corrected in the same conversation, while the delivery was open, and the rest written as lines of the queue.
 
 Then read the staged change against the page:
 
@@ -264,6 +265,6 @@ So the page recorded the refinement, no write path reachable from the client, wh
 * It marks the line `[*]` with its first edit, `[x]` with its last, after the stage, and `[?]`, with what it waits on, when it must stop.
 * Green is not done: done is the whole list, from the documents updated before a review by a context that did not write the change, which reads the whole delivery, to verify green after the last edit and the line marked `[x]`.
 * It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, using what it built first, each command written out, and, last of all, which environment is at which version and the command that updates the others.
-* Use what was built as its user would, review the staged change against the page, ask for each correction in the same session, saying what you want instead and why, make what the page did not ask the queue's next line, and then commit it, yourself or by asking the agent: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
+* Use what was built as its user would, review the staged change against the page, ask for each correction in the same session, saying what you want instead and why, make what the page did not ask a line of the queue, where its milestone's paragraph puts it, and then commit it, yourself or by asking the agent: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>

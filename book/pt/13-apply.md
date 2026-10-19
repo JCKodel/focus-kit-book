@@ -127,7 +127,8 @@ O primeiro rascunho de `inserirEmprestimo` transformava toda falha da escrita em
 Nenhum teste dispara isso, já que nos testes só o índice único falha, e está no texto que esta entrega escreveu, então o agente restringe a captura ao erro do índice único e roda a verificação de novo; a chamada do repositório que os capítulos 3 e 4 descrevem é a corrigida.
 `inserirEmprestimo` fica em um arquivo que esta entrega criou, então uma revisão só do diff não teria lido nada dele.
 O segundo candidato: a recusa para um membro suspenso não diz até quando.
-A página nunca pediu isso, então vira a linha `fim-da-suspensao`, posta na fila abaixo de `devolver-livro`, que continua sendo a próxima linha livre.
+A página nunca pediu isso, e nenhuma cláusula do parágrafo do marco 1 precisa disso: o parágrafo promete a recusa, não a data em que ela termina.
+Então vira a linha `fim-da-suspensao`, sob o próximo marco, criado quando não há nenhum, como o capítulo 11 diz, e `devolver-livro` continua sendo a próxima linha livre.
 Então ele escreve na página o que aconteceu, com os dois candidatos e o que foi feito de cada um, marca o Pronto quando, move a página para `work/done/emprestar-livro.md`, coloca em stage só os caminhos desta entrega e, como a sua última edição, marca a linha `[x]` e coloca em stage essa linha do docs/06.
 Se uma edição de outra sessão em `src/features/membros/` está na árvore, ou se a linha dela do docs/06 já está em stage, o agente deixa os dois como estão e avisa você do que está em stage (capítulo 19).
 
@@ -171,8 +172,8 @@ Os testes provam o que a página escreveu e a revisão lê o código; só o uso 
 Usar também não substitui ler o diff: o uso mostra o que a construção faz, e o diff em stage mostra o que o commit levaria, um arquivo que a página não pediu ou uma entrada de outra sessão, que nenhuma tela mostra; e nenhum dos dois publica a entrega nem faz o commit dela.
 Esse uso cobre uma entrega enquanto ela está aberta; o teste à mão no fechamento do marco percorre o parágrafo inteiro.
 O que a página pediu e a construção errou ou deixou mal acabado, um botão fora do lugar, um rótulo que não cabe, uma tela que leva segundos para responder, é uma correção desta entrega: a verificação e a prova rodam de novo e a página a registra.
-O que a página não pediu, por menor que seja, e um problema que precisa de uma definição própria viram uma linha `[ ]`, acrescentada por conversa com um rascunho da página para o que a linha não comporta; peça a linha logo abaixo da linha desta entrega, para que ela seja a próxima linha livre e o `/propose` dela parta do que você viu enquanto ainda se lembra.
-No Ninjobs, eu usei cada entrega antes de fazer o commit: foi ali que achei problemas de interface, de uso e de velocidade que os testes e as revisões não tinham mostrado, e onde melhorei o que o agente fez, o que a página tinha pedido corrigido na mesma conversa, enquanto a entrega estava aberta, e o resto escrito como as próximas linhas da fila.
+O que a página não pediu, por menor que seja, e um problema que precisa de uma definição própria viram uma linha `[ ]`, acrescentada por conversa com um rascunho da página para o que a linha não comporta; ela vai neste marco quando uma cláusula do parágrafo dele precisa dela, e sob o próximo nos outros casos, como o capítulo 11 diz, porque o lugar dela é a sua prioridade; o rascunho da página, escrito nesta conversa, guarda o que você viu enquanto ainda se lembra, para o `/propose` dela.
+No Ninjobs, eu usei cada entrega antes de fazer o commit: foi ali que achei problemas de interface, de uso e de velocidade que os testes e as revisões não tinham mostrado, e onde melhorei o que o agente fez, o que a página tinha pedido corrigido na mesma conversa, enquanto a entrega estava aberta, e o resto escrito como linhas da fila.
 
 Depois leia a mudança em stage contra a página:
 
@@ -264,6 +265,6 @@ Então a página registrou o ajuste, nenhum caminho de escrita alcançável pelo
 * Ele marca a linha como `[*]` com a sua primeira edição, `[x]` com a última, depois do stage, e `[?]`, com o que ela espera, quando precisa parar.
 * Verde não é pronto: pronto é a lista inteira, dos documentos atualizados antes de uma revisão por um contexto que não escreveu a mudança, que lê a entrega inteira, à verificação verde depois da última edição e à linha marcada `[x]`.
 * Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, primeiro usar o que ele construiu, cada comando escrito por extenso, e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
-* Use o que foi construído como o usuário usaria, revise a mudança em stage contra a página, peça cada correção na mesma sessão, dizendo o que quer no lugar e por quê, transforme o que a página não pediu na próxima linha da fila, e então faça o commit, você mesmo ou pedindo ao agente: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
+* Use o que foi construído como o usuário usaria, revise a mudança em stage contra a página, peça cada correção na mesma sessão, dizendo o que quer no lugar e por quê, transforme o que a página não pediu em uma linha da fila, onde o parágrafo do seu marco a põe, e então faça o commit, você mesmo ou pedindo ao agente: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>

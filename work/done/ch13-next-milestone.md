@@ -30,9 +30,28 @@
 
 **Done when.**
 
-* [ ] Both editions edited in the four places above, nothing else; each Behaviour line checked; the Fails phrases absent from `book/*/13-apply.md`.
-* [ ] The chapter still opens with its value and keeps its evidenced team gain; no filler and nothing useful cut; every number keeps its source; terms follow docs/03; no em dash.
-* [ ] No Case A or Case B passage changed or added, so OD-3 is inapplicable.
-* [ ] `make verify` green after the last edit; `make book` is run once by the batch driver at the end and gives `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` for the author's review.
-* [ ] No delivery review: the author waived it for this round; /apply does not add one.
-* [ ] Page archived to `work/done/` and commit message suggested.
+* [x] Both editions edited in the four places above, nothing else; each Behaviour line checked; the Fails phrases absent from `book/*/13-apply.md`.
+* [x] The chapter still opens with its value and keeps its evidenced team gain; no filler and nothing useful cut; every number keeps its source; terms follow docs/03; no em dash.
+* [x] No Case A or Case B passage changed or added, so OD-3 is inapplicable.
+* [x] `make verify` green after the last edit; `make book` is run once by the batch driver at the end and gives `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` for the author's review.
+* [x] No delivery review: the author waived it for this round; /apply does not add one.
+* [x] Page archived to `work/done/` and commit message suggested.
+
+**Record.**
+
+* Built: both editions, the four places of the Contract, worded as it gives them; the §`lend-book`, built sentence split in two at its colon, one sentence a line.
+* Proof: the Fails phrases are absent from `book/*/13-apply.md` (the `/apply` ending's "the queue's next line" at line 105 is out of scope and stays); chapter 13 does not name chapter 11's milestone 2; "`return-book` stays the next free line" kept.
+* Divergences: none. Omissions: none.
+* Delivery review: skipped on the author's word (2026-10-19).
+* Decisions: those the page lists; no new one.
+* `make verify`: green after the last edit.
+
+```commit
+docs(ch13-next-milestone): place unasked lines by milestone in ch 13
+
+- en/pt: suspension-end goes under the next milestone; return-book
+  stays the next free line
+- review step and key point: an unasked line goes where its
+  milestone's paragraph puts it, the draft keeps what you saw
+- Ninjobs: the rest written as lines of the queue, no claim of where
+```
