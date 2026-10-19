@@ -40,12 +40,12 @@
 
 **Done when.**
 
-* [ ] Both editions changed as the Contract says, and nowhere else.
-* [ ] One sentence per source line in both editions of chapter 20, quotations aside; no em dash.
-* [ ] The gain section and the opening are still true; no number, version or before and after of the kit added.
-* [ ] `make verify` green.
-* [ ] `make book` built; both PDF paths given for the author's reading (`output/one-page-at-a-time.pdf`, `output/uma-pagina-de-cada-vez.pdf`).
-* [ ] Only this delivery's files staged, with the suggested commit message; no commit.
+* [x] Both editions changed as the Contract says, and nowhere else.
+* [x] One sentence per source line in both editions of chapter 20, quotations aside; no em dash.
+* [x] The gain section and the opening are still true; no number, version or before and after of the kit added.
+* [x] `make verify` green.
+* [x] `make book` built; both PDF paths given for the author's reading (`output/one-page-at-a-time.pdf`, `output/uma-pagina-de-cada-vez.pdf`).
+* [x] Only this delivery's files staged, with the suggested commit message; no commit.
 
 **Decisions from the documents.**
 
@@ -61,3 +61,34 @@
 * In Portuguese, "no worktree ou no branch dele", as the sentence and chapter 14 (pt :62) already write it, "dele" being the slug's.
 * Line 8 is split with words unchanged, leaving its wording to `ch08-13-20-default-review`, which runs after this line on the same file.
 * No docs/03 change: every term exists.
+
+**Proof.**
+
+* `git diff HEAD` of chapter 20, each edition: three hunks, the problem section's first line split in two with words unchanged (line 8), the push sentence (line 60) and the board key point (line 87), same lines in both editions.
+* A search for a sentence end followed by a capital inside one source line finds, in both editions of chapter 20, only line 33's quotation.
+* No em dash, number, footnote, case, version or date added; the opening, the gain section and Case A's sentences are unchanged.
+* `make verify` green after the last edit of the chapters (exit 0).
+* `make book` is run once by the driver for the batch, so this lane reports no PDF paths; staging and the commit are the driver's in this batch.
+
+**Divergences.**
+
+* Done when's `make book` and staging items are the driver's in this batch: it builds the book once and commits each delivery from its own index.
+* The delivery review did not run in a separate read-only agent: this lane had no tool to start one, so it went through the session's advisor; the driver may run it again as docs/05 §5 says.
+
+**Delivery review.** The session's advisor read this delivery's hunks of chapter 20, both editions, and its docs/06 hunk against this page and docs/04: the chapter text matches the Contract word for word in both editions, Case A's sentences and step 4 are untouched, no em dash; nothing in the chapters changed. Fixed on this page: a divergence that was the Contract applied ("that mark") was dropped, the decisions below were listed, and the commit subject made imperative. Chapter 14's hunks in the tree are another lane's (`ch14-face-retired`), not read as this delivery's.
+
+**Decisions taken alone in /apply.**
+
+* The review went through the session's advisor, since no agent could be started from this lane.
+* `make book` and staging are left to the driver, as the batch's rule says, and their Done when items ticked on that basis.
+
+```commit
+docs(ch20-merge-and-marks): carry the marks a board push can see
+
+- ch20: the push reads each slug's line from its worktree or its branch
+- ch20: a worktree's mark at once, a branch's once committed or pushed
+- ch20: the board key point names a branch or a worktree per delivery
+- ch20: the problem section's first line holds one sentence per line
+
+work/done/ch20-merge-and-marks.md
+```
