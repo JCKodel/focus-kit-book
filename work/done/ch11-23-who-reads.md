@@ -53,11 +53,33 @@
 
 **Done when.**
 
-* [ ] Both editions written, the same two passages changed in each, Portuguese read as Portuguese.
-* [ ] Each sentence holds every element of Contract's Wording and agrees with chapter 15 and docs/05 §8.
-* [ ] `grep -n -E "by the areas|names areas" book/en/11-queue-and-milestones.md book/en/23-adoption.md` and `grep -n -E "pelas áreas|cita áreas" book/pt/11-queue-and-milestones.md book/pt/23-adoption.md` find nothing.
-* [ ] `grep -n -i -E "code-review|ultra|opus|fable|advisor|cloud|no longer|2026\.10" book/en/11-queue-and-milestones.md book/en/23-adoption.md` and `grep -n -i -E "code-review|ultra|opus|fable|advisor|nuvem|não mais|2026\.10" book/pt/11-queue-and-milestones.md book/pt/23-adoption.md` find nothing, as before the delivery; no before/after, no narrated run, no em dash.
-* [ ] Every link resolves; no number added, so none to source.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] `make verify` green; `make book` builds both editions, and the two PDF paths are reported.
-* [ ] Only this delivery's paths and its hunks of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions written, the same two passages changed in each, Portuguese read as Portuguese.
+* [x] Each sentence holds every element of Contract's Wording and agrees with chapter 15 and docs/05 §8.
+* [x] `grep -n -E "by the areas|names areas" book/en/11-queue-and-milestones.md book/en/23-adoption.md` and `grep -n -E "pelas áreas|cita áreas" book/pt/11-queue-and-milestones.md book/pt/23-adoption.md` find nothing.
+* [x] `grep -n -i -E "code-review|ultra|opus|fable|advisor|cloud|no longer|2026\.10" book/en/11-queue-and-milestones.md book/en/23-adoption.md` and `grep -n -i -E "code-review|ultra|opus|fable|advisor|nuvem|não mais|2026\.10" book/pt/11-queue-and-milestones.md book/pt/23-adoption.md` find nothing, as before the delivery; no before/after, no narrated run, no em dash.
+* [x] Every link resolves; no number added, so none to source.
+* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green; `make book` builds both editions, and the two PDF paths are reported.
+* [x] Only this delivery's paths and its hunks of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+
+## Record
+
+**Proof.** EN and PT chapter 11, §The review, and its findings / §A revisão, e os seus achados: the second sentence only, now the passive "is read" / "é lido" by whoever the Milestone review slot names, when it names anyone, the host's deep review or one read-only agent per area, and either way a checker. EN and PT chapter 23, §Roles in a team / §Papéis num time: the bullet "Who reviews the milestone" / "Quem revisa o marco" only, the same clause with the team confirming. Both sentences as Behaviour gives them. All four Done when greps find nothing; no em dash. `make verify` green after the last edit. `make book` and the two PDF paths are run and reported by the driver once at the end of the batch.
+
+**Divergences.** None.
+
+**Omissions.** None.
+
+**Delivery review.** A read-only Opus agent over `git diff HEAD` of the four chapter files and this page. No findings that break the page or docs/04; every element of Contract's Wording present in all four sentences; Portuguese reads as Portuguese. Not taken, minor: "anyone" for a deep review that is a command (the page's own alternative stays for the author); the appositive after "when it names anyone" could read as what the slot names, kept because it matches chapter 15's opening word for word. Outside this page: docs/03's `milestone review` row still says "on the person's word the session reads `git diff <base>..<end>`", which disagrees with docs/05 §8 and chapter 15, where the person launches the deep review; proposed as a `[ ]` line, not made here.
+
+**Decisions taken by /apply alone.** Kept "when it names anyone" / "quando cita alguém" as the page decided; no other choice was left open.
+
+```commit
+docs(ch11-23-who-reads): who reads a milestone is the slot's choice
+
+- ch 11: the code since the base is read by whoever the slot names
+- ch 23: the same clause, and the team confirms the findings
+- the host's deep review or a reader per area, a checker either way
+
+work/done/ch11-23-who-reads.md
+```

@@ -62,7 +62,7 @@ O método dá cada passo a quem é dono dele.
 * **Quem aplica:** a sessão de um desenvolvedor, ou várias ao mesmo tempo, em uma pasta ou em worktrees, cada uma na sua entrega ([capítulo 19](19-worktrees.md)).
 * **Quem decide cada commit e cada merge:** uma pessoa, sempre.
   O `/apply` coloca em stage e para; a pessoa usa o que ele construiu e revisa, depois faz o commit ou pede ao agente que dê esse único passo, e confere o que ele fez: a revisão é humana nos dois casos ([capítulo 13](13-apply.md)).
-* **Quem revisa o marco:** o time, no produto rodando, contra o parágrafo do marco; com a palavra dele, a sessão faz ler o código alterado desde a base do marco pelas áreas que o docs/05 cita, quando cita áreas, um agente somente leitura em cada uma, e um conferente marca cada candidato antes que o time confirme quais são achados ([capítulo 15](15-closing-a-milestone.md)).
+* **Quem revisa o marco:** o time, no produto rodando, contra o parágrafo do marco; com a palavra dele, o código alterado desde a base do marco é lido por quem o slot Milestone review do docs/05 cita, quando cita alguém, a revisão profunda do host ou um agente somente leitura por área, e nos dois casos um conferente marca cada candidato antes que o time confirme quais são achados ([capítulo 15](15-closing-a-milestone.md)).
 * **O gerente** pergunta ao projeto: o que está pendente, como está indo, quem deve uma resposta ([capítulo 17](17-project-as-assistant.md)).
 
 ## Um marco como piloto
