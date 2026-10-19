@@ -1,6 +1,6 @@
 # 22. What agents cost, and where they pay
 
-After this chapter you can read a token count from your host's logs, turn it into a cost per delivery your team can repeat, and say why the page and the documents keep that cost small.
+After this chapter you can read a token count from your host's logs, measure what one milestone's deliveries cost with a window and a set of sessions written down so your team can repeat the count, and say what a fresh session carries into its context and what it leaves out.
 You can also say where an agent pays for itself, where it pays less, and where it does not pay.
 
 ## The problem
@@ -23,10 +23,10 @@ The model remembers nothing between calls, so the host sends the whole context a
 The cache keeps that repeated part, so the next call reads it back at a fraction of the price of new input.
 Anthropic's pricing documentation gives the multipliers: a cache write costs 1.25 times a normal input token for a five-minute cache, and a cache read costs a tenth of one or less, depending on the model.[^anthropic-pricing]
 
-## What a delivery cost on Ninjobs
+## What Ninjobs recorded in tokens
 
 Ninjobs is my own product, built with the method this book teaches.
-Claude Code keeps a log of every session, with the tokens of every call, and I counted those logs for the 21 days the host still held, from 221 sessions and 18,945 calls.
+Claude Code keeps a log of every session, with the tokens of every call, and I once counted those logs over the 21 days the host still held: 221 sessions and 18,945 calls.
 
 | Kind | Tokens in 21 days | Share |
 |---|---:|---:|
@@ -36,15 +36,17 @@ Claude Code keeps a log of every session, with the tokens of every call, and I c
 | Output | 13,871,893 | 0.3% |
 | All | 4,009,248,425 | 100% |
 
-The project had 93 finished pages, one per delivery; each total divided by 93 gives 43.1 million tokens per delivery, 149 thousand of them output and 738 thousand without cache reads.
+Those 21 days are the limit of the count.
+Their dates, and the rule that decided which sessions it took in, were not written down with it, and the logs it read are gone.
+The commits cannot rebuild them: a commit records what changed, not the calls to the model that changed it.
+So no list survives of the deliveries those 221 sessions worked on, and the table cannot be divided into a cost per delivery; dividing it by a page count taken from another window would mix two samples.
 
-Forty-three million tokens reads as a lot, and 98.3% of it is the cheapest kind.
-The count sets a baseline: this project, this method, this many tokens per delivery.
+What the table does say is how that sample's tokens split among the four kinds: 98.3% of them were cache reads, the cheapest kind.
 
 ## Why cache reads are counted apart
 
 Each call reads the whole context again, so the cache reads say how much context each call carried.
-On Ninjobs that is about 208 thousand tokens of cached context per call on average (3,940,576,768 / 18,945).
+In that sample it is about 208 thousand tokens of cached context per call on average (3,940,576,768 / 18,945).
 Output says how much the agent wrote; cache reads say how much it had to carry to write it.
 
 Counted together, the two hide each other.
@@ -52,16 +54,17 @@ A session that grows by one file adds that file to every call after it, so the c
 That is the number the process can move, and output is the number it cannot: the code a delivery needs is the code it needs.
 Keep cache reads in their own column, and a change in how the team works shows there first.
 
-## Why the page and the documents keep sessions small
+## What a fresh session carries
 
 [Chapter 1](01-how-agents-see.md) showed that everything in the context window rides along on every call, and that a long session also gets worse at recalling what is in it.
 The method answers with a fresh session per delivery.
-`/apply` starts from the rules file, the documents it names and one page, so the context holds what this delivery needs and nothing from the one before.
+`/apply` starts from the rules file, the documents it names and one page, so the context holds none of the conversation of the delivery before.
 The page is what makes that possible: it carries every decision the build needs, so the session does not have to inherit the conversation that took them.
-The queue is among those documents, whole, and what it reads at the start rides along on every call of the session; with chapter 11's one-sentence line, that read grows by a sentence per delivery, not by a page.
+The queue is among those documents, and a session reads it whole, done lines included, so what it reads at the start grows with the project's history and rides along on every call of the session.
+Chapter 11's one-sentence line makes that growth a sentence per delivery, not a page, but it does not stop it.
 
-So the context stays the size of the delivery, and so does the bill.
-A team that keeps one long session for a week pays, on every call of Friday, for the files read on Monday.
+So a fresh session's context is one page plus documents that grow with the project, and both the context and the bill grow with that history as well as with the delivery.
+What the fresh session removes is the conversation of the deliveries before: a team that keeps one long session for a week pays, on every call of Friday, for the files read on Monday.
 
 ## Where an agent pays
 
@@ -72,7 +75,7 @@ That is where the tokens buy the most: the person's time goes to reading one pag
 **It pays less** on work whose decision is still being made.
 A `/propose` conversation is cheap in tokens and expensive in the person's time, because the person is the one deciding.
 The agent helps there by asking the right questions in order, and the cost to watch is hours of a person, which no token count shows.
-On Ninjobs everything the agent wrote for a delivery, its page included, averaged 149 thousand output tokens, and the hours I spent deciding those pages are in none of the table's columns.
+On Ninjobs the table counts tokens only, and the hours I spent deciding the pages are in none of its columns.
 
 **It does not pay** on a stack the agent has seen too little of.
 On Ninjobs, before the method, that stack was Flutter: each attempt at the design cost tokens and a person's review, and neither bought a finished screen.
@@ -82,11 +85,19 @@ Choosing a stack by the questions of chapter 9 is a cost decision as much as a t
 
 Measure before you argue.
 Your host keeps a log of each session on your machine, and the log records the tokens of each call, in the four kinds above.
-Count one milestone, divide by the pages it finished, and you have your tokens per delivery.
+Before you divide one milestone's tokens by its deliveries, write down what you counted, so that someone else can count it again and get the same number:
+
+* the window: the first and the last moment counted, and the time zone the log writes them in;
+* the sessions and calls in that window that worked on the milestone, proposals, retries and sessions shared with other work included, and the rule that chose them;
+* the deliveries those same sessions finished;
+* the work in the window that matches no delivery, counted on its own line.
+
+Divide the tokens of the calls that worked on those deliveries by those deliveries, and you have your tokens per delivery for that milestone.
+The line that matches no delivery is reported beside it, never divided by a page count from another window.
 
 In Claude Code's logs, one line per event, a streamed answer logs its usage on more than one line, so count each pair of `message.id` and `requestId` once.
 
-Count soon after the milestone closes: the host deletes logs older than its retention period, and on Ninjobs the logs before those 21 days had already gone.
+Count soon after the milestone closes: the host deletes logs older than its retention period, and on Ninjobs the logs before those 21 days had already gone, and the logs of those 21 days have gone since, so the table cannot be counted again.
 
 Then compare milestones, not vendors.
 The second milestone against the first, on the same project, tells you whether the team's way of working got cheaper or dearer; a vendor's price list tells you the price of a token, and nothing about how many your work needs.
@@ -95,14 +106,14 @@ That is why I compare Ninjobs with nothing outside: I have no other project meas
 
 ## What the team gains
 
-A number per delivery that anyone on the team can repeat from the host's logs, in place of a feeling.
-On Ninjobs it is 43.1 million tokens per delivery.
+A number per delivery that anyone on the team can repeat from the host's logs, because its window, its sessions and its deliveries are written down, in place of a feeling.
+In the sample Ninjobs recorded, 98.3% of the tokens were cache reads, the column the way a team works can move.
 
 ## Key points
 
 * A host bills four kinds of token: input, cache write, cache read and output; a cache read costs a fraction of an input token, because the host re-sends the same context on every call.
-* Cache reads, nearly all of a delivery's tokens on Ninjobs, are counted apart because they measure how much context each call carried, and that is what the page, a fresh session per delivery and one-sentence queue lines keep small.
+* Count cache reads apart, because they measure the context each call carried: a fresh session per delivery leaves earlier conversations out of it, and the queue, read whole, still adds a sentence per delivery to it.
 * An agent pays where the decision is written and the check is mechanical, pays less where the decision is still being made, and does not pay on a stack it has not seen.
-* Measure tokens per delivery on your own project for one milestone, from the host's logs, and compare milestones, not vendors.
+* Measure tokens per delivery on your own project for one milestone, from the host's logs, with its window, sessions and deliveries written down and unmatched work on its own line, and compare milestones, not vendors.
 
 [^anthropic-pricing]: Anthropic, "Pricing", Claude Platform documentation, section "Prompt caching", accessed 2026-09-30. <https://docs.anthropic.com/en/docs/about-claude/pricing>
