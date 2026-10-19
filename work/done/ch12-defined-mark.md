@@ -26,8 +26,33 @@ The next sentence ("It ends by showing that queue line, `[>] lend-book ...`") an
 
 **Done when.**
 
-* [ ] Both editions written, same hunks; each Behaviour line checked against both.
-* [ ] The chapter opens with its value; no filler and nothing useful cut; every number and quoted artifact keeps its source; terms follow docs/03; no em dash.
-* [ ] No Case A or Case B passage changed or added, so the author's OD-3 approval is inapplicable.
-* [ ] `make verify` green after the last edit; `make book` builds both editions and the page gives `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` for the author's review.
-* [ ] Delivery review by a read-only Opus agent per docs/05 §5, its candidates answered on this page; page archived and commit message suggested.
+* [x] Both editions written, same hunks; each Behaviour line checked against both.
+* [x] The chapter opens with its value; no filler and nothing useful cut; every number and quoted artifact keeps its source; terms follow docs/03; no em dash.
+* [x] No Case A or Case B passage changed or added, so the author's OD-3 approval is inapplicable.
+* [x] `make verify` green after the last edit; `make book` builds both editions and the page gives `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` for the author's review.
+* [x] Delivery review by a read-only Opus agent per docs/05 §5, its candidates answered on this page; page archived and commit message suggested.
+
+## What happened
+
+**Built.** Chapter 12, "What `/propose` does": the line becomes `[>]` only when the page is completely defined, not merely written; a page written while a scope question is still being talked through leaves its line `[~]`, and chapter 14 says when a page is complete. Key points: "when the page is completely defined". Both editions, same two hunks; the `[>] lend-book ...` sentence and the `[?]` sentence with `· resume: propose` are unchanged.
+
+**First occurrence.** The condition lives under chapter 14's mark table (`ch11-14-defined-mark`); chapter 12 names it and points there, repeating only the `[~]` consequence Behaviour asks for.
+
+**Divergences.** None.
+
+**Proof.** `make verify` green after the last edit. `make book` is run once by the batch driver at the end of this batch, which gives the author `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+**Review.** One read-only Opus context over both chapter files against this page and docs/04. Findings: (1) "a page ... stays `[~]`" gave the mark to the page; marks belong to lines, now "leaves its line `[~]`" (pt "deixa a linha dela `[~]`"), fixed. (2) A pt cleft "é que a marca vira" was suggested; it trips the prose check's not-but rule, so the sentence stays without it. (3) The Key point could add "not merely written"; the Contract names the exact replacement, so it stays as defined. Outside this delivery: `book/pt/13-apply.md` says "pergunta de escopo" where chapters 12 and 14 say "questão de escopo"; queued as a new line.
+
+**Decisions.** Pointed to chapter 14 in plain text, "(chapter 14 ...)", as the chapter already does elsewhere. No Case A or Case B passage changed.
+
+```commit
+docs(ch12-defined-mark): mark [>] when the page is completely defined
+
+- Chapter 12: /propose marks [>] when the page is completely defined,
+  not merely written; an open scope question leaves the line [~]
+- Points to chapter 14 for the condition; Key points follow
+- Both editions
+
+work/done/ch12-defined-mark.md
+```

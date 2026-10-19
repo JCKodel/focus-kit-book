@@ -479,7 +479,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repo
 [x] ch15-review-head         chapter 15: the milestone review's page names the commit its reading started at, so the range stays fixed while readers work; both editions · after kit-2026-10-18-1
 [x] ch07-ninjobs-focus       chapters 4, 6 and 7 and ADR-0016 distinguish the earlier whole-FOCUS requirement from the later simplification retaining two principles; both editions · after kit-2026-10-18-1
 [x] queue-legend-dropped     docs/06's legend and docs/03's mark and conflict rows say what focus-kit 2026.10.18.1 says: `· dropped:` on a cancelled line, and a conflict as a line both sessions edited · after kit-2026-10-18-1
-[>] ch12-defined-mark       chapter 12: the line becomes `[>]` when the page is completely defined, as docs/05 §3 says, not when it is written; both editions
+[x] ch12-defined-mark       chapter 12: the line becomes `[>]` when the page is completely defined, as docs/05 §3 says, not when it is written; both editions
 [>] ch19-partial-branch-commits chapter 19: a blocked /apply on a delivery branch stages its partial work for the person to commit there, as chapter 13 cites; both editions
 [>] ch16-six-rules-timeline  chapter 16: Ninjobs opened on one page, two commands, two checks and the governor, not on the six rules SETUP.md lists, which chapter 6 dates after the opening; both editions
 [>] docs03-finding-slow-test docs/03: the finding term includes a failing slow test the milestone review runs, as the milestone review term already says
