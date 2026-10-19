@@ -28,8 +28,34 @@ Slugs and branch are the chapter's existing lending-library example, written for
 
 **Done when.**
 
-* [ ] Both editions written, same hunks; each Behaviour line checked against both; chapter 13's "(chapter 19)" pointer now leads to the case.
-* [ ] The chapter opens with its value; no filler and nothing useful cut; every number and quoted artifact keeps its source; terms follow docs/03; no em dash; no run narrated.
-* [ ] No Case A or Case B passage changed or added, so the author's OD-3 approval is inapplicable.
-* [ ] `make verify` green after the last edit; `make book` builds both editions and the page gives `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` for the author's review.
-* [ ] Delivery review by a read-only Opus agent per docs/05 §5, its candidates answered on this page; page archived and commit message suggested.
+* [x] Both editions written, same hunks; each Behaviour line checked against both; chapter 13's "(chapter 19)" pointer now leads to the case.
+* [x] The chapter opens with its value; no filler and nothing useful cut; every number and quoted artifact keeps its source; terms follow docs/03; no em dash; no run narrated.
+* [x] No Case A or Case B passage changed or added, so the author's OD-3 approval is inapplicable.
+* [x] `make verify` green after the last edit; `make book` builds both editions and the page gives `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` for the author's review.
+* [x] Delivery review by a read-only Opus agent per docs/05 §5, its candidates answered on this page; page archived and commit message suggested.
+
+## What happened
+
+**Built.** Chapter 19, "Worktrees in the kit": a new paragraph after "You use the delivery, review and commit on the branch..." follows `/apply return-book` (pt `devolver-livro`) blocked in its worktree on an unanswered question, `· resume: apply · blocked: what if the copy comes back damaged?`: what the agent writes and shows, the partial commit on `focus-kit/return-book` with its partial message ending in `work/return-book.md`, named as the one exception to using the delivery before its commit; no merge while the line is `[?]`, so one `git merge --no-ff` still brings the whole delivery; on resume, a clean working folder means the work is in those commits, which the delivery review reads against the branch's base; on trunk, no partial commit. Key points: the worktree bullet gains the clause. Both editions, same two hunks. Chapter 13's "(chapter 19)" pointer now leads to the case.
+
+**First occurrence.** None: no abstraction; chapter 13 states the rule, chapter 19 shows it in a worktree.
+
+**Divergences.** None.
+
+**Proof.** `make verify` green after the last edit. `make book` is run once by the batch driver at the end of this batch, which gives the author `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+**Review.** One read-only Opus context over both chapter files against this page and docs/04. Findings: (1) "On trunk none of this happens" overstated, since trunk still marks `[?]` and shows the partial message; now "On trunk there is no partial commit" (pt "No trunk não há commit parcial"), fixed. (2) The partial message's rule left out "or that the delivery is done" (docs/05 §6); added in both, fixed. (3) pt subjunctive "voltar danificado" and "trava ... esperando uma resposta"; fixed. (4) pt chapter 13 says both "bloqueado" (line 74) and "travado" (line 249) for a blocked `/apply`; chapter 19 keeps "travado", as chapter 13's partial message does; chapter 13 is out of scope, queued as a new line. (5) "a clean folder" now "a clean working folder" (pt "pasta de trabalho limpa"), as chapter 13 says; fixed.
+
+**Decisions.** The blocked reason is a question about a damaged copy, not a fine: fines are out of the library's scope (chapters 12 and 17). The "asked to merge" Behaviour is said as "do not merge the branch, whoever asks". No Case A or Case B passage changed.
+
+```commit
+docs(ch19-partial-branch-commits): commit blocked work on its branch
+
+- Chapter 19: a blocked /apply in a worktree may stage its partial
+  work for a partial commit on the branch, which stays unmerged
+- The partial commit is the one exception to use-first; on resume
+  the review reads those commits against the branch's base
+- Key points follow; both editions
+
+work/done/ch19-partial-branch-commits.md
+```
