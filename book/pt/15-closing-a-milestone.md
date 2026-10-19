@@ -6,7 +6,7 @@ Esse intervalo fica fixo enquanto chegam commits novos, então o diff de todo le
 
 ## O problema
 
-Cada página de um marco foi lida antes de o `/apply` construí-la, e cada mudança em stage foi revisada antes do seu commit.
+Cada página de um marco foi lida antes de o `/apply` construí-la, e cada entrega foi usada e a sua mudança em stage revisada antes do seu commit.
 Ninguém olhou para o que elas somam.
 Um processo leve não tem barreira entre as entregas, então o risco que ele carrega é a soma: cada entrega certa na sua própria página, e o todo ainda errado.
 Uma afirmação do marco que nenhuma entrega assumiu, um passo que funciona sozinho e falha quando a entrega seguinte vem depois dele, como um empréstimo que a tela de empréstimo registra e a lista do membro nunca mostra: nenhum deles reprova na revisão de uma entrega só.
@@ -133,7 +133,7 @@ Ela fica ali quando o marco seguinte já existe: com um marco 2 já abaixo dele,
 ## Nenhuma segunda revisão
 
 As linhas de achado não têm revisão própria.
-Cada uma passa pela sua própria página, pela sua prova e pelo commit da pessoa, que é a revisão.
+Cada uma passa pela sua própria página, pela sua prova e pelo uso, pela revisão e pelo commit da pessoa.
 O código delas ainda é lido com o todo: a revisão do marco seguinte cita o commit desta revisão como base, então na biblioteca de empréstimos o intervalo de `m2-review` começa no commit de `m1-review` e guarda a correção de `emprestimo-devolvido`.
 Eu mantenho assim porque uma revisão das correções acha achados próprios, e uma revisão desses acha mais, e um marco que continua abrindo rodadas de correções nunca fecha.
 
@@ -164,4 +164,4 @@ E como cada achado vira uma linha, o time vê o custo das brechas do marco na fi
   Ela escreve para cada cláusula do parágrafo a entrega que a atende e como uma pessoa a testa, e não corrige nada; a revisão roda os testes lentos que o slot Verify cita.
 * A pessoa testa cada cláusula à mão e, com a palavra da pessoa, a sessão lê o intervalo da base até o `<head-da-revisao>` pelas áreas do slot, um agente somente leitura em cada uma, todos sobre esses dois commits registrados, listando os caminhos que leu, e um conferente marca cada candidato; uma cláusula que nenhuma entrega atende, uma que falha nas mãos da pessoa, um teste lento que falha, ou um candidato que a pessoa confirma é um achado.
 * Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, mesmo quando o marco seguinte já existe, nunca uma correção no meio do marco seguinte; o marco fecha quando essas linhas estão `[x]`.
-* As linhas de achado não têm revisão própria: cada uma passa pela sua própria página, pela sua prova e pelo commit da pessoa.
+* As linhas de achado não têm revisão própria: cada uma passa pela sua própria página, pela sua prova e pelo uso, pela revisão e pelo commit da pessoa.

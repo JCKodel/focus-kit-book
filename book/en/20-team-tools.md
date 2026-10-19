@@ -5,7 +5,7 @@ You can also say why a project's documents live in docs/ and never in a wiki.
 
 ## The problem
 
-One person working on trunk reviews the staged change and commits it.
+One person working on trunk uses the delivery, reviews the staged change and commits it.
 A team needs two more things: a second person who reviews before the merge, and a way for people who never open the repository, a manager or a client, to see progress.
 The git strategies of chapter 18 stop at the merge: they shape the history, and say nothing about who reviewed a change or who is watching the work.
 

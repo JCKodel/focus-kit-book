@@ -5,7 +5,7 @@ Você também consegue dizer por que os documentos de um projeto ficam em docs/ 
 
 ## O problema
 
-Uma pessoa trabalhando no trunk revisa a mudança em stage e faz o commit.
+Uma pessoa trabalhando no trunk usa a entrega, revisa a mudança em stage e faz o commit.
 Um time precisa de mais duas coisas: uma segunda pessoa que revisa antes do merge, e um jeito de quem nunca abre o repositório, um gerente ou um cliente, ver o progresso.
 As estratégias de git do capítulo 18 param no merge: elas dão forma ao histórico, e não dizem nada sobre quem revisou uma mudança ou quem acompanha o trabalho.
 

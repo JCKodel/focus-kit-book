@@ -6,7 +6,7 @@ That range stays fixed while new commits arrive, so every reader's diff is the s
 
 ## The problem
 
-Each page of a milestone was read before `/apply` built it, and each staged change was reviewed before its commit.
+Each page of a milestone was read before `/apply` built it, and each delivery was used and its staged change reviewed before its commit.
 Nobody looked at what they add up to.
 A light process has no gate between deliveries, so the risk it carries is the sum: every delivery right on its own page, and the whole still wrong.
 A claim of the milestone that no delivery took on, a step that works on its own and fails once the next delivery follows it, such as a loan the lending screen records and the member's list never shows: none of them fails a single delivery's review.
@@ -130,7 +130,7 @@ It stays there when the next milestone already exists: with a milestone 2 alread
 ## No second review
 
 The finding lines get no review of their own.
-Each one passes through its own page, its proof and the person's commit, which is the review.
+Each one passes through its own page, its proof and the person's use, review and commit.
 Their code is still read with the whole: the next milestone's review names this review's commit as its base, so on the lending library `m2-review`'s range starts at `m1-review`'s commit and holds `returned-loan`'s fix.
 I keep it that way because a review of the fixes finds findings of its own, and a review of those finds more, and a milestone that keeps opening rounds of fixes never closes.
 
@@ -161,4 +161,4 @@ And because each finding becomes a line, the team sees the cost of the milestone
   It writes for each clause of the paragraph the delivery that answers it and how a person tests it, and fixes nothing; the review runs the slow tests the Verify slot names.
 * The person tests each clause by hand, and on the person's word the session reads the range from the base to `<review-head>` by the slot's areas, one read-only agent each, all on those two recorded commits, listing the paths it read, and a checker marks each candidate; a clause no delivery answers, one that fails in the person's hands, a slow test that fails, or a candidate the person confirms is a finding.
 * Each finding becomes a `[ ]` line in the same milestone, under the review line, even when the next milestone already exists, never a fix in the middle of the next milestone; the milestone closes when those lines are `[x]`.
-* The finding lines get no review of their own: each passes through its own page, its proof and the person's commit.
+* The finding lines get no review of their own: each passes through its own page, its proof and the person's use, review and commit.

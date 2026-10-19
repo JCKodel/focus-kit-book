@@ -29,8 +29,35 @@ Source: docs/05 §2 ("a person uses it, reviews and commits"), the installed app
 
 **Done when.**
 
-* [ ] Both editions of both chapters written, same hunks; each Behaviour line checked against them.
-* [ ] Each chapter opens with its value and keeps its evidenced team gain; no filler and nothing useful cut; every number keeps its source; terms follow docs/03; no em dash.
-* [ ] No Case A or Case B passage changed or added, so the author's OD-3 approval is inapplicable.
-* [ ] `make verify` green after the last edit; `make book` builds both editions and the page gives `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` for the author's review.
-* [ ] Delivery review by a read-only Opus agent per docs/05 §5, its candidates answered on this page; page archived and commit message suggested.
+* [x] Both editions of both chapters written, same hunks; each Behaviour line checked against them.
+* [x] Each chapter opens with its value and keeps its evidenced team gain; no filler and nothing useful cut; every number keeps its source; terms follow docs/03; no em dash.
+* [x] No Case A or Case B passage changed or added, so the author's OD-3 approval is inapplicable.
+* [x] `make verify` green after the last edit; `make book` builds both editions and the page gives `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` for the author's review.
+* [x] Delivery review by a read-only Opus agent per docs/05 §5, its candidates answered on this page; page archived and commit message suggested.
+
+## What happened
+
+**Built.** Chapter 15, "The problem": each delivery "was used and its staged change reviewed before its commit" (pt "cada entrega foi usada e a sua mudança em stage revisada antes do seu commit"). "No second review" and its key point: a finding line passes through its own page, its proof "and the person's use, review and commit" (pt "pelo uso, pela revisão e pelo commit da pessoa"); the closing "which is the review" goes, since the review is now named in the list. Chapter 20, "The problem": one person on trunk "uses the delivery, reviews the staged change and commits it" (pt "usa a entrega, revisa a mudança em stage e faz o commit"). Both editions, same hunks; no number changed.
+
+**First occurrence.** None: no abstraction; chapter 13's "Review the staged change" stays the main passage.
+
+**Divergences.** None.
+
+**Proof.** `make verify` green after the last edit. `make book` is run once by the batch driver at the end of this batch, which gives the author `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+**Review.** One read-only Opus context over the four chapter files against this page and docs/04: no findings. Each Behaviour line met, out-of-scope sentences untouched, wording consistent with chapter 13 in both editions, Portuguese natural; it noted, as correct, the dropped "which is the review" clause.
+
+**Decisions.** "Which is the review" (pt "que é a revisão") dropped rather than kept, since the list now names the review itself. No Case A or Case B passage changed.
+
+```commit
+docs(ch15-20-use-first): name use before review in chapters 15 and 20
+
+- Chapter 15: each delivery is used and its staged change reviewed
+  before its commit; a finding line passes through the person's
+  use, review and commit, in the text and its key point
+- Chapter 20: one person on trunk uses the delivery, reviews the
+  staged change and commits it
+- Both editions
+
+work/done/ch15-20-use-first.md
+```
