@@ -62,7 +62,7 @@
 * [x] `git diff` of the two chapter files touches only those two places; the 21-day lines unchanged.
 * [x] No em dash; no number, version, date, "now", "no longer", "agora", "não mais" added; no narrated run; no path inside the container folder.
 * [x] Delivery review as docs/05 §5 says, including that nothing implies an unmerged `[x]` meets an `after`.
-* [x] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver may run it once for the batch).
+* [x] `make verify` green: in this session every check passed but the link check, which failed only on external timeouts outside chapter 12 (Proof), and the whole run passed after `m22-review`'s last edit, with this chapter unchanged; `make book` built both editions from `abb988a`'s `book/`, which holds this chapter, and both PDF paths are in `work/done/m22-review.md`.
 * [x] Only this delivery's paths and its hunk of docs/06 staged (the driver's in this batch); the page moved to `work/done/` and its commit message suggested.
 
 **Proof.**
@@ -70,10 +70,10 @@
 * `grep -n` on each file: the `[?]` / `after` sentence is line 26, the new reading sentence line 27, and the "first stands where" / "primeiro se coloca onde" sentence line 28, in both editions.
 * `git diff HEAD` of the two chapters: 2 insertions and 1 deletion per file, the new line in "What `/propose` does" and the clause in the Key points' `/propose` bullet; the 21-day lines unchanged.
 * The sentence kept whole on one line, trunk first, in the Contract's wording; the Key points clause as the Contract gives it.
-* `make verify`: build, parity, em dash, prose, width, examples and disclosure green; the link check reported only timeouts on external sites (martinfowler.com, web.archive.org) that did not answer from this machine, none in chapter 12. `make book` is run once by the driver for the batch.
+* `make verify`: build, parity, em dash, prose, width, examples and disclosure green; the link check reported only timeouts on external sites (martinfowler.com, web.archive.org) that did not answer from this machine, none in chapter 12. The whole run passed after `m22-review`'s last edit, with chapter 12 as this delivery left it, and `make book` built both PDFs from `abb988a`'s `book/`: `work/done/m22-review.md` records both, with the PDF paths.
 * Staging and the docs/06 hunk are the driver's in this batch.
 
-**Divergences.** The link check's external timeouts above, outside this delivery; to rerun when those sites answer.
+**Divergences.** The link check's external timeouts above, outside this delivery; the whole run passed after `m22-review`'s last edit (Proof).
 
 **Delivery review.** A read-only Opus agent read the diff of both chapters against this page, docs/04 and AGENTS.md: no findings.
 

@@ -81,7 +81,33 @@ No docs/03 row, no chapter, no ADR, no docs/05 or docs/06 text.
 
 **Done when.**
 
-* [ ] The nine replacements above made word for word, and nothing else in the three pages changed (`git diff` of each page shows only those lines).
-* [ ] `git diff --stat abb988a 838f737 -- book/` rechecked empty at /apply; later edits by other M22 lines do not touch these records, which speak of the runs at that state.
-* [ ] No em dash; no private case, so OD-3 approval is inapplicable.
-* [ ] `make verify` green after the last edit; only this delivery's paths and its hunk of docs/06 staged as docs/05 §6 says (the driver's in this batch), the page moved to `work/done/` and its commit message suggested.
+* [x] The nine replacements above made word for word, and nothing else in the three pages changed (`git diff` of each page shows only those lines).
+* [x] `git diff --stat abb988a 838f737 -- book/` rechecked empty at /apply; later edits by other M22 lines do not touch these records, which speak of the runs at that state.
+* [x] No em dash; no private case, so OD-3 approval is inapplicable.
+* [x] `make verify` green after the last edit; only this delivery's paths and its hunk of docs/06 staged as docs/05 §6 says (the driver's in this batch), the page moved to `work/done/` and its commit message suggested.
+
+## What happened
+
+**Built.** The nine replacements, word for word, matched by their quoted text: the line numbers at `838f737` still held. `git diff HEAD` of the three pages shows 9 lines out and 9 in, nothing else; no item unticked.
+
+**Checked.** `git diff --stat abb988a 838f737 -- book/` empty again at /apply; `1e0159b` (chapter 8) and `fac1518` (chapter 12) are ancestors of `abb988a`. `work/done/m22-review.md` holds both PDF paths under Mechanical checks and `make verify` green in its Proof. No em dash in the three pages.
+
+**Divergences.** None.
+
+**Decisions taken alone in /apply.**
+
+* Staging and the commit are the driver's in this batch, from its own index: this session stages nothing.
+* The Delivery review ran as a headless Opus session in plan mode, read-only, since this session could not start an agent of its own.
+
+**Delivery review.** A read-only Opus context read `git diff HEAD` of the three pages and this line of docs/06 against this page, docs/04, AGENTS.md and `work/done/m22-review.md`: every replacement word for word, nothing else changed, no em dash, no claim that a session ran what it did not, the records named exist, the `book/` diff empty. No findings.
+
+**Proof.** `make verify` green after the nine replacements, and again after the last edit of this page, its move and the queue's `[x]`.
+
+```commit
+docs(m22-batch-proof): three pages point to m22-review's runs
+
+- ch08, ch12, ch14-20 pages: make verify and make book items say what ran
+- Proof and Divergences point to the build and run m22-review records
+
+work/done/m22-batch-proof.md
+```

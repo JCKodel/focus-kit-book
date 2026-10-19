@@ -73,7 +73,7 @@
 * [x] Both chapters still open with their value; gain sections true; no filler, nothing useful cut; one sentence per line kept.
 * [x] No version, date, number, before and after or narration of a run; no em dash.
 * [x] No number added, so none to source; no private case newly used, so no approval needed.
-* [x] `make verify` green; `make book` builds both editions, and both PDF paths reported.
+* [x] `make verify` green; `make book` built both editions from `abb988a`, this delivery's commit, and both PDF paths are in `work/done/m22-review.md`.
 * [x] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
 
 **Proof.**
@@ -82,14 +82,14 @@
 * `git diff -U0 HEAD` of chapter 20, each edition: three hunks, step 4 (line 25), the push sentence (line 60) and the board key point (line 87), same lines in both editions.
 * `grep` of both editions finds no "refreshed it last", "when that branch is merged", "meet at the merge", "shows there only" or "is trunk's"; chapter 18 line 25 and chapter 19's free-line pointer still land on true text.
 * No em dash, number, footnote, case, version or date added.
-* `make verify` green after the review's fixes (an earlier run timed out on an external site's links in chapters 2 to 5 and 9, not this delivery's files; the rerun passed). `make book` is run once by the driver for the batch, so this lane reports no PDF paths.
+* `make verify` green after the review's fixes (an earlier run timed out on an external site's links in chapters 2 to 5 and 9, not this delivery's files; the rerun passed). `make book` built both PDFs from `abb988a`, this delivery's commit; `work/done/m22-review.md` records them with their paths, so this lane reports none.
 * Staging and the commit are the driver's in this batch.
 
 **Divergences.**
 
 * The paragraph on where a mark is seen holds five new lines for the four it replaces: the reason and the visibility clause are two sentences, since one would run past sixty words.
 * Chapter 20's board key point puts the new clause last ("never silent when it cannot be, and, with a branch per delivery, read from each slug's own branch"): placed before "never silent", it made "cannot be" read as "cannot be read". The words of the rest are unchanged.
-* Done when's `make book` item is the driver's in this batch.
+* Done when's `make book` item is met by the build `work/done/m22-review.md` records, not by this session.
 
 **Delivery review.** A read-only Opus agent read this delivery's hunks against this page, docs/04, docs/03 and docs/05 §4: no blocking finding, coverage and parity complete, no leftover claim, nothing reading as Case A's script. Fixed: chapter 20's key point order (above); chapter 14's "it reads" became "the board reads" (pt "o quadro lê"); Portuguese wording, "que a tenha pegado", "nos dois casos", "em quanto tempo quem lê vê a marca", "de cada entrega". Not changed, with reason: a session picking free lines is not named in a key point, since this page decides the kanban bullet carries the reading and its wording mirrors docs/03's `kanban board`; chapter 20's "the other deliveries' latest marks" keeps no visibility limit of its own, since the next sentence links chapter 14, which states it. Noted for the driver, not changed (Out of scope): chapter 7's lending library Board slot and FACE in chapter 14 read docs/06, true on trunk.
 
