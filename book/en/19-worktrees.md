@@ -314,7 +314,7 @@ This book, written and reviewed by one person in shared files, stays on trunk fo
 
 ## What the team gains
 
-Two agents build at once, and each delivery still lands as one change that reverts alone: one commit in one folder, one merge from a worktree.
+Two agents build at once, and each delivery still lands as one change that reverts alone in git, and what it did outside git is left to its page (chapter 18): one commit in one folder, one merge from a worktree.
 I measured it once, in worktrees on a small TypeScript project of mine: two deliveries built at the same time took 155 seconds from the first start to the last end, against 277.2 seconds of the agents' work added up, at the cost of a `node_modules` folder in each worktree, two test runs that collided once on a shared port, and the queue's conflict at the merge.[^parallel-run]
 The measurement is of two deliveries whose code files did not meet; the gain ends at the speed of the person who reviews them and decides their commits and merges.
 Proposes in a batch carry the parallel into definition: the agents write the pages while you are away, and each page brings the decisions it took alone, listed for your one reading.

@@ -1,6 +1,6 @@
 # 18. Git essentials
 
-After this chapter you can keep every delivery one step to undo, one commit on trunk or one merge otherwise, and take it back with `git revert`.
+After this chapter you can keep every delivery one step to undo, one commit on trunk or one merge otherwise, take it back with `git revert`, and say on its page how what it did outside git is undone, or that it is not.
 You can also say what version control keeps and who made git, read a history of commits, branches and merges, merge a branch in each of the four ways git offers, and choose for a project among the kit's three strategies, trunk, a branch per delivery and a worktree per delivery, telling them apart from trunk-based development and git-flow, practices outside the kit.
 
 ## The problem
@@ -61,7 +61,7 @@ Each line is one delivery, and its subject says what the delivery does, in the i
 `git show <hash>` opens one of them: the whole message, whose last line is the delivery's page in `work/done/`, and every line it added and removed.
 
 A delivery's page and its build are one change.
-The code, the tests, the documents the delivery updated and its page in `work/done/` go into the same commit, so the history holds the decision and the change it made side by side, and taking the delivery back takes all of it at once.
+The code, the tests, the documents the delivery updated and its page in `work/done/` go into the same commit, so the history holds the decision and the change it made side by side, and taking the delivery back takes all of it that git holds at once.
 The agent stages that change and suggests the message; you read it and commit it, or ask the agent to, and that reading before the commit is your review.
 
 A remote is another copy of the repository that yours knows by name, usually on a server such as GitHub, named `origin` by convention: `git clone <url>` copies it to your machine with its whole history, `git push` sends your branch's new commits to it, and `git pull` brings its new commits into your branch.
@@ -147,13 +147,19 @@ When both branches changed the same lines, git cannot choose and stops with a co
 
 `git revert <commit>` makes a new commit that undoes an earlier one, and keeps the history: the delivery and its undoing are both there to read.[^git-revert]
 On trunk it undoes a delivery whole, its page included.
-Later commits that changed the same lines make the revert stop with a conflict, resolved the same way as a merge's.
+One step is not always a clean one: later commits that changed the same lines make the revert stop with a conflict, resolved the same way as a merge's.
 
 A merge commit has two parents, so git must be told which side to keep.
 `git revert -m 1 <merge>` keeps parent 1, the receiving branch as it was, and undoes everything the second parent brought, every commit of the branch, in one new commit.[^git-revert]
 The git documentation adds one caution: once a merge is reverted, a later merge of the same branch brings only the commits made on it after that merge.[^git-revert]
 
-Revert is the undo for anything already shared.
+Either step undoes what git holds, the files the delivery changed in the repository, and run nothing backwards.
+Two deliveries of the lending library, written for this chapter, show where they stop.
+`add-due-date` adds a database migration that gives each loan a due date, and the migration has run on the library's database: reverting the delivery removes the migration file, and the column stays in the database.
+`send-reminders` adds the code that texts a member whose loan is overdue, and the reminders went out: reverting removes the code, and every message already sent stays on the members' phones.
+So a delivery that acts outside git says in its Done when how that is undone, here a second migration that removes the column, or that it is not: a message sent cannot be recalled, and the page records that instead of promising a rollback.
+
+Revert is the undo for any commit already shared.
 `git reset --hard <commit>` also goes back, by moving the branch and dropping the commits after it; that rewrites history, so it is the rebase rule again: only on commits nobody else has.
 
 ## Trunk
@@ -184,11 +190,11 @@ This book, written and reviewed by one person, is on trunk.
 
 ## What the team gains
 
-Every delivery lands as one commit on trunk or one merge otherwise, with its page beside its code, so taking a delivery back is one command, and reading why a line changed is one commit that holds both the change and the decision.
+Every delivery lands as one commit on trunk or one merge otherwise, with its page beside its code, so taking back what git holds of a delivery is one command, its page says how to undo what it did outside git, or that nothing can, and reading why a line changed is one commit that holds both the change and the decision.
 
 ## Key points
 
-* One delivery, one step to undo: a delivery's page and build are one change, one commit on trunk or one merge otherwise, undone with `git revert <commit>` or `git revert -m 1 <merge>`.
+* One delivery, one step to undo: a delivery's page and build are one change, one commit on trunk or one merge otherwise, undone with `git revert <commit>` or `git revert -m 1 <merge>`; the revert undoes what git holds, and a migration run or a message sent is undone as the page's Done when says, or not at all.
 * Version control keeps every version of a project's files with who changed what and when; git, written in 2005 by Linus Torvalds and the Linux kernel's community, is distributed, so every copy holds the whole history.
 * A commit is a snapshot with its author, message and parents, named by a hash; a branch is a name that moves with each commit on it; a tag never moves; a remote is another copy you clone, push to and pull from.
 * A fast-forward and a rebase leave a line of the branch's commits; a merge commit adds a commit with two parents; a squash merge leaves one new commit; never rebase commits someone else has.

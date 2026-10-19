@@ -1,6 +1,6 @@
 # 18. Git essencial
 
-Depois deste capítulo você consegue manter cada entrega a um passo de ser desfeita, um commit no trunk ou um merge nos outros casos, e desfazê-la com `git revert`.
+Depois deste capítulo você consegue manter cada entrega a um passo de ser desfeita, um commit no trunk ou um merge nos outros casos, desfazê-la com `git revert`, e dizer na sua página como se desfaz o que ela fez fora do git, ou que isso não se desfaz.
 Você também consegue dizer o que um controle de versão guarda e quem criou o git, ler um histórico de commits, branches e merges, fazer o merge de um branch de cada uma das quatro formas que o git oferece, e escolher para um projeto entre as três estratégias do kit, o trunk, um branch por entrega e um worktree por entrega, distinguindo-as do trunk-based development e do git-flow, práticas de fora do kit.
 
 ## O problema
@@ -61,7 +61,7 @@ Cada linha é uma entrega, e o seu assunto diz o que a entrega faz, no infinitiv
 `git show <hash>` abre uma delas: a mensagem inteira, cuja última linha é a página da entrega em `work/done/`, e cada linha que ela acrescentou e removeu.
 
 A página de uma entrega e a sua construção são uma mudança.
-O código, os testes, os documentos que a entrega atualizou e a sua página em `work/done/` entram no mesmo commit, então o histórico guarda a decisão e a mudança que ela fez lado a lado, e desfazer a entrega desfaz tudo de uma vez.
+O código, os testes, os documentos que a entrega atualizou e a sua página em `work/done/` entram no mesmo commit, então o histórico guarda a decisão e a mudança que ela fez lado a lado, e desfazer a entrega desfaz de uma vez tudo o que o git guarda dela.
 O agente coloca essa mudança em stage e sugere a mensagem; você a lê e faz o commit, ou pede ao agente que o faça, e essa leitura antes do commit é a sua revisão.
 
 Um remoto é outra cópia do repositório que a sua conhece por um nome, em geral em um servidor como o GitHub, chamado `origin` por convenção: `git clone <url>` o copia para a sua máquina com o histórico inteiro, `git push` envia para ele os commits novos do seu branch, e `git pull` traz os commits novos dele para o seu branch.
@@ -147,13 +147,19 @@ Quando os dois branches mudaram as mesmas linhas, o git não consegue escolher e
 
 `git revert <commit>` faz um commit novo que desfaz um anterior, e mantém o histórico: a entrega e o seu desfazer estão os dois lá para ler.[^git-revert]
 No trunk ele desfaz uma entrega inteira, a página incluída.
-Commits posteriores que mudaram as mesmas linhas fazem o `git revert` parar com um conflito, resolvido do mesmo jeito que o de um merge.
+Um passo nem sempre é um passo limpo: commits posteriores que mudaram as mesmas linhas fazem o `git revert` parar com um conflito, resolvido do mesmo jeito que o de um merge.
 
 Um commit de merge tem dois pais, então o git precisa saber qual lado manter.
 `git revert -m 1 <merge>` mantém o pai 1, o branch que recebeu como estava, e desfaz tudo o que o segundo pai trouxe, cada commit do branch, em um commit novo.[^git-revert]
 A documentação do git acrescenta um cuidado: depois que um merge é desfeito, um merge posterior do mesmo branch traz só os commits feitos nele depois daquele merge.[^git-revert]
 
-O `git revert` é o jeito de desfazer qualquer coisa já compartilhada.
+Os dois passos desfazem o que o git guarda, os arquivos que a entrega mudou no repositório, e não rodam nada ao contrário.
+Duas entregas da biblioteca de empréstimos, escritas para este capítulo, mostram onde eles param.
+`adicionar-data-de-devolucao` acrescenta uma migração do banco de dados que dá a cada empréstimo uma data de devolução, e a migração já rodou no banco da biblioteca: o `git revert` da entrega remove o arquivo da migração, e a coluna continua no banco.
+`enviar-lembretes` acrescenta o código que manda uma mensagem de texto ao membro com empréstimo atrasado, e os lembretes saíram: o `git revert` remove o código, e cada mensagem já enviada continua no celular dos membros.
+Então uma entrega que age fora do git diz no seu Pronto quando como isso se desfaz, aqui uma segunda migração que remove a coluna, ou que não se desfaz: uma mensagem enviada não volta, e a página registra isso em vez de prometer um rollback.
+
+O `git revert` é o jeito de desfazer qualquer commit já compartilhado.
 `git reset --hard <commit>` também volta, movendo o branch e descartando os commits depois dele; isso reescreve o histórico, então é a regra do rebase de novo: só em commits que ninguém mais tem.
 
 ## Trunk
@@ -184,11 +190,11 @@ Este livro, escrito e revisado por uma pessoa, está no trunk.
 
 ## O que o time ganha
 
-Cada entrega chega como um commit no trunk ou um merge nos outros casos, com a sua página ao lado do seu código, então desfazer uma entrega é um comando, e ler por que uma linha mudou é um commit que guarda tanto a mudança quanto a decisão.
+Cada entrega chega como um commit no trunk ou um merge nos outros casos, com a sua página ao lado do seu código, então desfazer o que o git guarda de uma entrega é um comando, a sua página diz como desfazer o que ela fez fora do git, ou que não há como desfazê-lo, e ler por que uma linha mudou é um commit que guarda tanto a mudança quanto a decisão.
 
 ## Pontos-chave
 
-* Uma entrega, um passo para desfazer: a página e a construção de uma entrega são uma mudança, um commit no trunk ou um merge nos outros casos, desfeita com `git revert <commit>` ou `git revert -m 1 <merge>`.
+* Uma entrega, um passo para desfazer: a página e a construção de uma entrega são uma mudança, um commit no trunk ou um merge nos outros casos, desfeita com `git revert <commit>` ou `git revert -m 1 <merge>`; o `git revert` desfaz o que o git guarda, e uma migração que rodou ou uma mensagem enviada se desfaz como diz o Pronto quando da página, ou não se desfaz.
 * Um controle de versão guarda cada versão dos arquivos de um projeto com quem mudou o quê e quando; o git, escrito em 2005 por Linus Torvalds e pela comunidade do kernel do Linux, é distribuído, então cada cópia guarda o histórico inteiro.
 * Um commit é uma foto com autor, mensagem e pais, com um hash como nome; um branch é um nome que anda com cada commit feito nele; uma tag nunca anda; um remoto é outra cópia que você clona, para a qual dá push e da qual dá pull.
 * Um fast-forward e um rebase deixam uma linha com os commits do branch; um commit de merge acrescenta um commit com dois pais; um squash merge deixa um commit novo; nunca faça rebase de commits que outra pessoa tem.

@@ -314,7 +314,7 @@ Este livro, escrito e revisado por uma pessoa em arquivos compartilhados, fica n
 
 ## O que o time ganha
 
-Dois agentes constroem ao mesmo tempo, e cada entrega ainda chega como uma mudança que se desfaz sozinha: um commit em uma pasta, um merge a partir de um worktree.
+Dois agentes constroem ao mesmo tempo, e cada entrega ainda chega como uma mudança que se desfaz sozinha no git, e o que ela fez fora do git fica por conta da sua página (capítulo 18): um commit em uma pasta, um merge a partir de um worktree.
 Eu medi isso uma vez, em worktrees, em um pequeno projeto meu em TypeScript: duas entregas construídas ao mesmo tempo levaram 155 segundos do primeiro início ao último fim, contra 277,2 segundos de trabalho dos agentes somados, ao custo de uma pasta `node_modules` em cada worktree, duas execuções de teste que colidiram uma vez em uma porta compartilhada, e o conflito da fila no merge.[^parallel-run]
 A medição é de duas entregas cujos arquivos de código não se encontravam; o ganho termina na velocidade da pessoa que as revisa e decide os commits e os merges delas.
 O `/propose` em lote leva o paralelo para a definição: os agentes escrevem as páginas enquanto você está fora, e cada página traz as decisões que tomou sozinha, listadas para a sua única leitura.
