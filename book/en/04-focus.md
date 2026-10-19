@@ -101,8 +101,9 @@ No state travels back: the view never changes the state it renders, and a use ca
 So "what happens when event X arrives?" has one answer, and one test can check it.
 That test is the test of a behaviour: "the user wants to sign in with Google" is one event, everything it sets off is one path through the orchestrator, and what comes out is one state, a confirmed sign-in or a failure, so the test reads "given this intention, this state", with nothing to inspect in between.
 
-**S, Scalable.** Every piece is isolated and has its own test, so a new feature adds its own folder and its own tests and changes no other.
-That is what scalable means here: the project can grow indefinitely, feature after feature, and no feature interferes with another, because each feature keeps to its folder and each job to its piece.
+**S, Scalable.** Every piece is isolated and has its own test, so a new feature adds its own folder and its own tests, and a change to one feature's implementation stays in its folder.
+That is what scalable means here: the project can grow feature after feature, each keeping to its folder and each job to its piece, with the coupling between slices only what one imports from another, as Bogard's rule asks.
+What a slice offers others is a contract, and a change to it reaches its consumers: `loans/rules.ts` imports `Member` from `members/`, so a change to `Member` changes the input of `lend`, and the imports of `Member` name the slices whose tests to run again.
 
 ## The four pieces
 
@@ -238,19 +239,23 @@ On Ninjobs, before the restart of [chapter 6](06-birth-of-focus-kit.md), I requi
 
 ## What the team gains
 
-A change touches one folder, and an agent reads one slice: a delivery on lending names `loans/`, and the agent loads the screen, the event, the rules, the database access and their tests side by side, and nothing about another feature, and the tests show it what to fake and nothing else.
-A reviewer sees a delivery's diff inside one folder and knows it touched nothing else.
+A change to one feature's implementation touches one folder, and an agent reads one slice: a delivery on lending names `loans/`, and the agent loads the screen, the event, the rules, the database access and their tests side by side, and from another feature only what the slice imports, such as `Member`, and the tests show it what to fake and nothing else.
+A reviewer sees in the diff which folders a delivery touched, and when it changed something another slice imports, the imports name where to look next and which tests to read.
 Every rule sits in a use case, a pure function, so it has a test that needs no setup, and "what happens when event X arrives?" is one test: call the orchestrator with the event and fake repositories, and check the state it returns.
-Client and server share the use cases: the server enforces `lend`, and the client imports `mayBorrow` only to decide what to show, such as greying out "Lend" for a member with an overdue book, so the rule is written and tested once and the client's copy of the decision can never disagree with the server's.
+Client and server share the use cases: the server enforces `lend`, and the client imports `mayBorrow` only to decide what to show, such as greying out "Lend" for a member with an overdue book, so the rule is written and tested once.
+The rule is shared and the data is not: `mayBorrow` is a pure function, its output depends only on its input, and the member the client loaded can be old.
+If the client loaded the member before a book went overdue, it computes `mayBorrow` on `overdue: 0` and leaves "Lend" enabled, while the server reads `overdue: 1` and `lend` refuses with `HasOverdueBooks`.
+The server's decision is the one that counts: it refuses the loan, and its reply, the `Refused` state, updates what the client shows.
+The import gives the client the rule and nothing more: the server still fetches the member and decides for itself, and the client still imports no `.server.ts` file, such as the repository that fetches the member.
 And I see one more gain beyond a single project: when every project of a company follows the same pattern, a person who moves to another team finds the folders, the four pieces and the tests where they expect them, so moving people between teams costs less.
 
 ## Key points
 
 * A vertical slice keeps everything one feature needs in one folder; a feature is one thing the app keeps, or one thing it does that keeps nothing, and code that belongs to no feature moves to `lib/` on its second use.
-* FOCUS is Feature-oriented (vertical slices), Clean (the dependency rule, with a use case that receives no repository because the orchestrator fetches and saves), Unidirectional (event, orchestrator, new state, nothing back, so a behaviour is one test) and Scalable (every piece isolated, with its own test).
+* FOCUS is Feature-oriented (vertical slices), Clean (the dependency rule, with a use case that receives no repository because the orchestrator fetches and saves), Unidirectional (event, orchestrator, new state, nothing back, so a behaviour is one test) and Scalable (every piece isolated, with its own test; a change inside a slice stays there, and the imports of a changed contract name the slices to check).
 * The view fires events and renders state, formatting nothing; the orchestrator turns one event into one new state; a use case holds a decision, a validation or a format as a pure function; the repository fetches and saves through a driver, and turns an exception from data into a `Result`.
 * A piece receives a dependency only where its test passes a fake: orchestrators and server repositories do, use cases and views do not, and the clock is a value.
-* Write a piece when a delivery needs its job, and on the client import the server's use case to decide what to show, never a second copy of the rule.
+* Write a piece when a delivery needs its job, and on the client import the server's use case to decide what to show, never a second copy of the rule; on different data the two can decide differently, and the server's decision counts.
 
 [^martin-clean-2012]: Robert C. Martin, "The Clean Architecture", The Clean Code Blog, 2012-08-13, accessed 2026-09-30. <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>
 [^martin-screaming]: Robert C. Martin, "Screaming Architecture", The Clean Code Blog, 2011-09-30, accessed 2026-09-30. <https://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html>

@@ -103,8 +103,9 @@ Nenhum estado volta: a tela nunca muda o estado que renderiza, e um caso de uso 
 Então "o que acontece quando o evento X chega?" tem uma resposta, e um teste consegue conferi-la.
 Esse teste é o teste de um comportamento: "o usuário quer entrar com o Google" é um evento, tudo o que ele dispara é um caminho pelo orquestrador, e o que sai é um estado, um login confirmado ou uma falha, então o teste se lê "dada esta intenção, este estado", sem nada para inspecionar no meio.
 
-**S, Scalable (escalável).** Toda peça é isolada e tem o próprio teste, então uma feature nova acrescenta a própria pasta e os próprios testes e não muda nenhuma outra.
-É isso que escalável quer dizer aqui: o projeto pode crescer indefinidamente, feature após feature, sem que uma feature interfira em outra, porque cada feature fica na sua pasta e cada trabalho na sua peça.
+**S, Scalable (escalável).** Toda peça é isolada e tem o próprio teste, então uma feature nova acrescenta a própria pasta e os próprios testes, e uma mudança na implementação de uma feature fica na pasta dela.
+É isso que escalável quer dizer aqui: o projeto pode crescer feature após feature, cada uma na sua pasta e cada trabalho na sua peça, com o acoplamento entre as fatias só o que uma importa da outra, como pede a regra de Bogard.
+O que uma fatia oferece às outras é um contrato, e uma mudança nele chega a quem o consome: `emprestimos/regras.ts` importa `Membro` de `membros/`, então uma mudança em `Membro` muda a entrada de `emprestar`, e os imports de `Membro` dizem de quais fatias rodar os testes de novo.
 
 ## As quatro peças
 
@@ -240,19 +241,23 @@ No Ninjobs, antes do recomeço do [capítulo 6](06-birth-of-focus-kit.md), eu ex
 
 ## O que o time ganha
 
-Uma mudança mexe em uma pasta, e um agente lê uma fatia: uma entrega sobre empréstimo nomeia `emprestimos/`, e o agente carrega a tela, o evento, as regras, o acesso ao banco de dados e os testes deles lado a lado, e nada sobre outra feature, e os testes mostram a ele o que fingir e nada mais.
-Quem revisa vê o diff de uma entrega dentro de uma pasta e sabe que ela não mexeu em mais nada.
+Uma mudança na implementação de uma feature mexe em uma pasta, e um agente lê uma fatia: uma entrega sobre empréstimo nomeia `emprestimos/`, e o agente carrega a tela, o evento, as regras, o acesso ao banco de dados e os testes deles lado a lado, e de outra feature só o que a fatia importa, como `Membro`, e os testes mostram a ele o que fingir e nada mais.
+Quem revisa vê no diff em quais pastas uma entrega mexeu, e quando ela mudou algo que outra fatia importa, os imports dizem onde olhar em seguida e quais testes ler.
 Toda regra fica em um caso de uso, uma função pura, então ela tem um teste que não precisa de preparação, e "o que acontece quando o evento X chega?" é um teste: chame o orquestrador com o evento e repositórios falsos, e confira o estado que ele devolve.
-Cliente e servidor compartilham os casos de uso: o servidor impõe `emprestar`, e o cliente importa `podePegarEmprestado` só para decidir o que mostrar, como deixar "Emprestar" apagado para um membro com um livro atrasado, então a regra é escrita e testada uma vez, e a cópia da decisão no cliente nunca discorda da do servidor.
+Cliente e servidor compartilham os casos de uso: o servidor impõe `emprestar`, e o cliente importa `podePegarEmprestado` só para decidir o que mostrar, como deixar "Emprestar" apagado para um membro com um livro atrasado, então a regra é escrita e testada uma vez.
+A regra é compartilhada e os dados não: `podePegarEmprestado` é uma função pura, a saída dela depende só da entrada, e o membro que o cliente carregou pode estar desatualizado.
+Se o cliente carregou o membro antes de um livro atrasar, ele calcula `podePegarEmprestado` com `emAtraso: 0` e deixa "Emprestar" ativo, enquanto o servidor lê `emAtraso: 1` e `emprestar` recusa com `TemLivrosEmAtraso`.
+A decisão do servidor é a que vale: ele recusa o empréstimo, e a resposta dele, o estado `Recusado`, atualiza o que o cliente mostra.
+O import dá ao cliente a regra e nada mais: o servidor continua buscando o membro e decidindo sozinho, e o cliente continua sem importar nenhum arquivo `.server.ts`, como o repositório que busca o membro.
 E eu vejo mais um ganho além de um projeto só: quando todo projeto de uma empresa segue o mesmo padrão, quem muda para outro time encontra as pastas, as quatro peças e os testes onde espera, então mover pessoas entre times custa menos.
 
 ## Pontos-chave
 
 * Uma fatia vertical guarda tudo de que uma feature precisa em uma pasta; uma feature é uma coisa que o app guarda, ou uma coisa que ele faz sem guardar nada, e código que não pertence a nenhuma feature vai para `lib/` no segundo uso.
-* FOCUS é Feature-oriented (fatias verticais), Clean (a regra de dependência, com um caso de uso que não recebe repositório porque o orquestrador busca e salva), Unidirectional (evento, orquestrador, novo estado, nada volta, então um comportamento é um teste) e Scalable (toda peça isolada, com o próprio teste).
+* FOCUS é Feature-oriented (fatias verticais), Clean (a regra de dependência, com um caso de uso que não recebe repositório porque o orquestrador busca e salva), Unidirectional (evento, orquestrador, novo estado, nada volta, então um comportamento é um teste) e Scalable (toda peça isolada, com o próprio teste; uma mudança dentro de uma fatia fica nela, e os imports de um contrato mudado dizem quais fatias conferir).
 * A tela dispara eventos e renderiza o estado sem formatar nada; o orquestrador transforma um evento em um novo estado; um caso de uso guarda uma decisão, uma validação ou uma formatação como função pura; o repositório busca e salva por um driver, e transforma uma exceção vinda dos dados em um `Result`.
 * Uma peça recebe uma dependência só onde o teste dela passa uma implementação falsa: orquestradores e repositórios do servidor recebem, casos de uso e telas não, e o relógio é um valor.
-* Escreva uma peça quando uma entrega precisar do trabalho dela, e no cliente importe o caso de uso do servidor para decidir o que mostrar, nunca uma segunda cópia da regra.
+* Escreva uma peça quando uma entrega precisar do trabalho dela, e no cliente importe o caso de uso do servidor para decidir o que mostrar, nunca uma segunda cópia da regra; com dados diferentes os dois podem decidir diferente, e a decisão do servidor é a que vale.
 
 [^martin-clean-2012]: Robert C. Martin, "The Clean Architecture", The Clean Code Blog, 2012-08-13, acesso em 2026-09-30. <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>
 [^martin-screaming]: Robert C. Martin, "Screaming Architecture", The Clean Code Blog, 2011-09-30, acesso em 2026-09-30. <https://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html>
