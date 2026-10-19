@@ -42,7 +42,7 @@ The table is the vocabulary: every page, identifier and test uses its terms, and
 **docs/04, the conventions.** The language of the documents and of the identifiers, naming, style and the tool that enforces it, where tests live and what each level tests.
 
 **docs/05, the process.** The kit's process, the same in every project: the rule, the flow from queue to commit, the shape of a page, the queue, the commit and the format of its message, what the process does not have, and how a milestone closes.
-One section is filled in by the project, "This project", whose entries are its ten slots: the documentation language, the command that verifies a delivery, with the command of any slow tests kept out of it for the milestone review, the environments, how a screen is proved, when anything is published, whether `context/` is committed, who reviews a delivery's changes before `/apply` ends, the manuals, the areas into which the review that closes a milestone splits its code reading and the model its readers and checker run on, and the git strategy.
+One section is filled in by the project, "This project", whose entries are its ten slots: the documentation language, the command that verifies a delivery, with the command of any slow tests kept out of it for the milestone review, the environments, how a screen is proved, when anything is published, whether `context/` is committed, who reviews a delivery's changes before `/apply` ends, the manuals, who reads the code when a milestone closes (the host's deep review, the host's own review that reads all of the milestone's changes at once, started by the person; the kit's readers, one read-only agent per area the slot names, on the model it names or the session's; one checker after either; or no one), and the git strategy.
 Whatever the publish policy says, `/apply`'s last words say which environment is at which version.
 A slot says what and the command, in a few lines, because `/apply` reads it every time; the steps go in a manual, and what a command prints stays in its help.
 So a slot does not say which delivery created its command or how it used to work: that history is on the delivery's page in `work/done/` and in the ADR.
@@ -78,7 +78,8 @@ On a repository that already has code, the default is what the code already does
 docs/01 records the answer, and an ADR records why.
 
 **The git strategy.** Three answers, each for one way of working: trunk, everything on the main branch, for one person, alone or with several sessions on free lines (queue lines not done, not waiting and needing no other line done first, defined yet or not) that touch different files; a branch per delivery, merged through a reviewed pull request, for sequential work; a worktree per delivery, a second working folder on its own branch, for several people, or for one person whose deliveries touch the same files.
-In every one, a delivery's page and build are one change that reverts in one step, and the agent never commits or merges on its own; asked, it takes the step the person names.
+In every one, a delivery's page and build are one change that reverts in one step, and by default the agent stages and never commits or merges on its own; asked, it takes the step the person names.
+The Git slot may say instead that the agent commits, and merges, by the slot's word, which counts as the asking; the person then reviews the commit.
 Part III teaches the three.
 The Git slot of docs/05 records the answer, and an ADR records why.
 

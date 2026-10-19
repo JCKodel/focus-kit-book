@@ -49,11 +49,40 @@ Terms of docs/03 used: milestone review, checker, slot, trunk; "host's deep revi
 * Portuguese "pela palavra do slot, que vale como o pedido".
 * The Git slot sentence (line 83) stays unchanged rather than gaining "and how the agent commits".
 
+* /apply: the Milestone review item is one parenthesis of three answers separated by semicolons, so the comma list keeps ten items; it adds "one checker after either", since docs/03's `checker` row has one checker after the area readers or the host's deep review (review finding 2).
+* /apply: the deep review's gloss says "reads all of the milestone's changes at once" (pt "lê todas as mudanças do marco de uma vez"), not "the whole range", a term chapters 0 to 7 do not use (review finding 1).
+* /apply: the git paragraph keeps the default in its second sentence, adding "by default the agent stages" (pt "coloca em stage", as chapters 6, 8 and 9 say), and the slot's other form is a new third sentence.
+* /apply: the Behaviour's "when the host has one that takes the whole range" is implied by "the host's own review" and not written; the Contract does not ask for it.
+
+**Implementation.** `book/en/07-the-documents.md` and `book/pt/07-the-documents.md`: in the docs/05 paragraph, the ten-slot list's milestone item now says who reads the code when a milestone closes; in "The git strategy", the second sentence names the default and one new sentence gives the Git slot's commit-by-its-word form. Nothing else in the chapter changed. No shared file touched.
+
+**Proof.** `make verify` green after the last edit. Both Done when greps find nothing; no em dash. `make book` is the driver's, run once at the end of the batch.
+
+**Delivery review.** A read-only Explore agent on Opus read `git diff HEAD` of both chapter files, this page, AGENTS.md, docs/04, the kit's `documents.md` slots, docs/05 §8 and docs/03's rows. Ten slots counted, both editions parallel, no host command, model, cloud, pointer or before/after. Three findings, all fixed:
+
+1. "the whole range" was a term the reader has not met. Fixed: "all of the milestone's changes".
+2. The checker was tied to the kit's readers only. Fixed: "one checker after either".
+3. "in one launch, which the person launches" repeated a word. Fixed: "at once, started by the person".
+
+Verify ran again after the fixes: green.
+
+**Divergences.** None from Behaviour or Contract beyond the wording decisions above.
+
 **Done when.**
 
-* [ ] Both editions written, the same passages changed in each, Portuguese read as Portuguese.
-* [ ] The slot list still counts ten and names who reads a milestone's code, both terms glossed in place; the git paragraph gives both commit forms; nothing else in the chapter changed.
-* [ ] `grep -n -i -E "code-review|ultra|opus|fable|advisor|cloud|no longer|2026\.10|chapter 15|\(chapter 1[0-9]" book/en/07-the-documents.md` and `grep -n -i -E "code-review|ultra|opus|fable|advisor|nuvem|não mais|2026\.10|capítulo 15|\(capítulo 1[0-9]" book/pt/07-the-documents.md` find nothing; no em dash; no narrated run.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] `make verify` green; `make book` builds both editions and both PDF paths are reported.
-* [ ] Only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions written, the same passages changed in each, Portuguese read as Portuguese.
+* [x] The slot list still counts ten and names who reads a milestone's code, both terms glossed in place; the git paragraph gives both commit forms; nothing else in the chapter changed.
+* [x] `grep -n -i -E "code-review|ultra|opus|fable|advisor|cloud|no longer|2026\.10|chapter 15|\(chapter 1[0-9]" book/en/07-the-documents.md` and `grep -n -i -E "code-review|ultra|opus|fable|advisor|nuvem|não mais|2026\.10|capítulo 15|\(capítulo 1[0-9]" book/pt/07-the-documents.md` find nothing; no em dash; no narrated run.
+* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver runs `make book` once for the batch).
+* [x] Only this delivery's paths and its hunk of docs/06 staged (staging is the driver's); the page moved to `work/done/` and its commit message suggested.
+
+```commit
+docs(ch07-review-git-slots): who reads a milestone, commit by slot
+
+- chapter 7's slot list says who reads the code when a milestone closes
+- the host's deep review and the kit's readers glossed where they appear
+- the git strategy gives the Git slot's other form: commit by its word
+
+work/done/ch07-review-git-slots.md
+```

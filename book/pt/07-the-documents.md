@@ -43,7 +43,7 @@ A tabela é o vocabulário: toda página, identificador e teste usa os seus term
 **docs/04, as convenções.** A língua dos documentos e dos identificadores, a nomenclatura, o estilo e a ferramenta que o impõe, onde ficam os testes e o que cada nível testa.
 
 **docs/05, o processo.** O processo do kit, o mesmo em todo projeto: a regra, o fluxo da fila ao commit, a forma de uma página, a fila, o commit e o formato da sua mensagem, o que o processo não tem, e como um marco fecha.
-Uma seção é preenchida pelo projeto, "This project" (este projeto), cujos itens são os seus dez slots: a língua da documentação, o comando que faz a verificação de uma entrega, com o comando dos testes lentos que ficam fora dele para a revisão de marco, se houver, os ambientes, como uma tela é provada, quando algo é publicado, se a pasta `context/` entra no commit, quem revisa as mudanças de uma entrega antes de o `/apply` terminar, os manuais, as áreas em que a revisão que fecha um marco divide a leitura do código e o modelo em que os seus leitores e o conferente rodam, e a estratégia de git.
+Uma seção é preenchida pelo projeto, "This project" (este projeto), cujos itens são os seus dez slots: a língua da documentação, o comando que faz a verificação de uma entrega, com o comando dos testes lentos que ficam fora dele para a revisão de marco, se houver, os ambientes, como uma tela é provada, quando algo é publicado, se a pasta `context/` entra no commit, quem revisa as mudanças de uma entrega antes de o `/apply` terminar, os manuais, quem lê o código quando um marco fecha (a revisão profunda do host, a revisão do próprio host que lê todas as mudanças do marco de uma vez, e que a pessoa dispara; os leitores do kit, um agente só de leitura por área que o slot nomeia, no modelo que o slot nomeia ou no da sessão; um conferente depois de qualquer dos dois; ou ninguém), e a estratégia de git.
 Diga o que disser a política de publicação, as últimas palavras do `/apply` dizem qual ambiente está em qual versão.
 Um slot diz o que e o comando, em poucas linhas, porque o `/apply` o lê toda vez; os passos vão para um manual, e o que um comando imprime fica na ajuda dele.
 Então um slot não diz que entrega criou o seu comando nem como ele funcionava antes: essa história está na página da entrega em `work/done/` e no ADR.
@@ -79,7 +79,8 @@ Num repositório que já tem código, o padrão é o que o código já faz.
 O docs/01 registra a resposta, e um ADR registra o porquê.
 
 **A estratégia de git.** Três respostas, cada uma para um jeito de trabalhar: trunk, tudo no branch principal, para uma pessoa, sozinha ou com várias sessões em linhas livres (linhas da fila que não estão feitas, não estão esperando e não precisam de outra linha feita antes, já definidas ou não) que mexem em arquivos diferentes; um branch por entrega, integrado por um pull request revisado, para trabalho em sequência; um worktree por entrega, uma segunda pasta de trabalho no seu próprio branch, para várias pessoas, ou para uma pessoa cujas entregas mexem nos mesmos arquivos.
-Em todas, a página e a construção de uma entrega são uma mudança que se desfaz em um passo, e o agente nunca faz commit nem merge por conta própria; quando pedem, ele dá o passo que a pessoa nomeia.
+Em todas, a página e a construção de uma entrega são uma mudança que se desfaz em um passo, e por padrão o agente coloca em stage e nunca faz commit nem merge por conta própria; quando pedem, ele dá o passo que a pessoa nomeia.
+O slot Git pode dizer, em vez disso, que o agente faz o commit, e o merge, pela palavra do slot, que vale como o pedido; a pessoa revisa o commit.
 A Parte III ensina as três.
 O slot Git do docs/05 registra a resposta, e um ADR registra o porquê.
 
