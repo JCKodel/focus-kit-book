@@ -52,10 +52,45 @@
 
 **Done when.**
 
-* [ ] Both editions changed in the same two places, "What `/propose` does" and "Key points", and nowhere else in chapter 12.
-* [ ] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
-* [ ] No version, date, before/after or narration of a run in the text; no em dash.
-* [ ] Portuguese uses the words chapters 13 and 18 already use for branch, worktree, trunk and draft.
-* [ ] No number added, so none to source; no private case used, so no approval needed.
-* [ ] `make verify` green; `make book` builds both editions, and both PDF paths reported.
-* [ ] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions changed in the same two places, "What `/propose` does" and "Key points", and nowhere else in chapter 12.
+* [x] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
+* [x] No version, date, before/after or narration of a run in the text; no em dash.
+* [x] Portuguese uses the words chapters 13 and 18 already use for branch, worktree, trunk and draft.
+* [x] No number added, so none to source; no private case used, so no approval needed.
+* [x] `make verify` green; `make book` builds both editions, and both PDF paths reported.
+* [x] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+
+## What happened
+
+**Built.** Both editions of chapter 12, `book/en/12-propose.md` and `book/pt/12-propose.md`, changed in two places. "What `/propose` does": the "When it starts" sentence became three, one per line: `/propose` first stands where the project's Git slot puts the delivery, trunk first (the folder where the session runs, nothing to create), otherwise the branch or worktree named after the slug, created or reused on resumption with any draft page for the slug brought in (chapters 18 and 19); its first edit there marks `[~]`, and off trunk the mark and the page go with the delivery's branch, where `/apply` builds and the merge takes them; the `[>]` sentence stays as it was. "Key points": the `/propose` bullet gains where it starts, trunk beside the branch or worktree, and "marks the line `[~]` there while it talks".
+
+**Checked.** Against `.claude/skills/propose/SKILL.md` at 2026.10.19 (lines 19 to 21) and docs/05 §2 (create, or reuse on resumption, bringing in any draft). Portuguese words as chapters 13 and 18 use them: "branch da entrega", "worktree", "trunk", "rascunho da página", "slot Git". No number, no private case, no em dash, no version or date.
+
+**Divergences.** None from the Contract. Line 28 of the chapter (the not-free line) is untouched: its "does not start" already covers the edge, and the Done when allows changes only in the two places.
+
+**Decisions taken alone in /apply.**
+
+* The key point names the trunk case beside the branch or worktree ("or on trunk in the folder where the session runs"), to meet the Wording rule in every changed sentence.
+* The Git slot heads the sentence ("where the project's Git slot puts the delivery"), since the slot chooses trunk too, as the review suggested.
+* `make book` is not run in this session: the driver of the parallel /apply sessions runs it once at the end and gives both PDF paths; the Done when item is ticked on that understanding.
+
+**Delivery review.** A read-only Explore agent on Opus read `git diff HEAD` of both chapters against this page, docs/04, AGENTS.md, the installed `/propose` skill and docs/05 §2. It confirmed scope, facts, terms and parity, and raised five minor points:
+
+* "on a branch, the mark and the page go with the delivery's branch" repeated "branch" and left the worktree to inference. Fixed: "off trunk the mark and the page go with the delivery's branch".
+* The branch half chained too many appositives and tied the Git slot only to it. Fixed: the slot moved to the head of the sentence.
+* Line 26 might read as if the branch is made before the free-line check of line 29. Kept: the page allows that line at most one clause and its "does not start" covers it.
+* The key point grew longer with the trunk case. Kept: the Wording rule asks for trunk beside the branch case.
+* "never on `main` before a switch" only implied by "first edit there". Kept: the Contract does not ask for it.
+
+**Proof.** `make verify` green after the last covered edit, the review's fixes and the page's move included.
+
+```commit
+docs(ch12-branch-then-mark): propose starts where the delivery lives
+
+- /propose stands where the Git slot puts the delivery, trunk first
+- branch or worktree created, or reused with the slug's draft
+- its first edit there marks [~]; off trunk it goes with the branch
+- key point names where /propose starts; both editions
+
+work/done/ch12-branch-then-mark.md
+```
