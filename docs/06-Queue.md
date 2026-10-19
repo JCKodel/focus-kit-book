@@ -478,12 +478,12 @@ When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repo
 [x] ch18-revert-scope        chapters 18 and 19: one step reverts what git holds; a migration run or a message sent is undone as the page's Done when says, or not at all; both editions · after kit-2026-10-18-1
 [x] ch15-review-head         chapter 15: the milestone review's page names the commit its reading started at, so the range stays fixed while readers work; both editions · after kit-2026-10-18-1
 [x] ch07-ninjobs-focus       chapters 4, 6 and 7 and ADR-0016 distinguish the earlier whole-FOCUS requirement from the later simplification retaining two principles; both editions · after kit-2026-10-18-1
-[ ] queue-legend-dropped     docs/06's legend and docs/03's mark and conflict rows say what focus-kit 2026.10.18.1 says: `· dropped:` on a cancelled line, and a conflict as a line both sessions edited · after kit-2026-10-18-1
-[ ] ch12-defined-mark       chapter 12: the line becomes `[>]` when the page is completely defined, as docs/05 §3 says, not when it is written; both editions
-[ ] ch19-partial-branch-commits chapter 19: a blocked /apply on a delivery branch stages its partial work for the person to commit there, as chapter 13 cites; both editions
-[ ] ch16-six-rules-timeline  chapter 16: Ninjobs opened on one page, two commands, two checks and the governor, not on the six rules SETUP.md lists, which chapter 6 dates after the opening; both editions
-[ ] docs03-finding-slow-test docs/03: the finding term includes a failing slow test the milestone review runs, as the milestone review term already says
-[ ] ch15-20-use-first        chapters 15 and 20: the short review sequences name using the delivery before reviewing the staged change and committing; both editions · after apply-use-first
+[>] queue-legend-dropped     docs/06's legend and docs/03's mark and conflict rows say what focus-kit 2026.10.18.1 says: `· dropped:` on a cancelled line, and a conflict as a line both sessions edited · after kit-2026-10-18-1
+[>] ch12-defined-mark       chapter 12: the line becomes `[>]` when the page is completely defined, as docs/05 §3 says, not when it is written; both editions
+[>] ch19-partial-branch-commits chapter 19: a blocked /apply on a delivery branch stages its partial work for the person to commit there, as chapter 13 cites; both editions
+[>] ch16-six-rules-timeline  chapter 16: Ninjobs opened on one page, two commands, two checks and the governor, not on the six rules SETUP.md lists, which chapter 6 dates after the opening; both editions
+[>] docs03-finding-slow-test docs/03: the finding term includes a failing slow test the milestone review runs, as the milestone review term already says
+[>] ch15-20-use-first        chapters 15 and 20: the short review sequences name using the delivery before reviewing the staged change and committing; both editions · after apply-use-first
 [>] m19-review               the review of M19 as docs/05 §8 says · after kit-2026-10-18-1, ch08-update-2026-10-18-1, ch05-13-slow-tests, ch11-next-milestone, propose-same-session, apply-use-first, agent-commits-asked, ch11-14-defined-mark, ch21-done-when, ch17-context-read, ch14-back-to-open, ch08-10-fresh-start, ch19-batch-staging, ch18-kit-branches, ch06-23-kit-rules, ch10-explicit-staging, ch08-hosts-details, ch09-empty-repo, ch13-refuse-incomplete, ch02-93-moment, ch19-commit-by-index, ch13-review-base, ch14-ended-and-dropped, ch18-revert-scope, ch15-review-head, ch07-ninjobs-focus, queue-legend-dropped, ch12-defined-mark, ch19-partial-branch-commits, ch16-six-rules-timeline, docs03-finding-slow-test, ch15-20-use-first
 ```
 
@@ -502,6 +502,6 @@ When this milestone closes, every technical claim the audit of 2026-10-18 found 
 [x] ch16-prevention-evidence chapter 16: an error documented in another project may justify prevention, with evidence and a proportionate cost; both editions
 [x] ch14-blocked-column      chapter 14: a blocked line returns to `[ ]` or `[>]` as docs/05 §4 says, so the board shows it there and keeps no memory of a column; both editions · after ch14-back-to-open
 [x] verify-examples          `make verify` runs the executable examples extracted from the chapters, starting with chapter 3's `query` · after ch03-query-catch
-[ ] ch04-remove-slice        chapter 4: removing a feature removes its folder and the imports other slices hold of it, as the member's page importing from loans/ shows; both editions
+[>] ch04-remove-slice        chapter 4: removing a feature removes its folder and the imports other slices hold of it, as the member's page importing from loans/ shows; both editions
 [>] m20-review               the review of M20 as docs/05 §8 says · after ch03-query-catch, ch03-exhaustive-switch, ch12-scenario-levels, ch04-isolation-claims, ch01-recovery-not-immunity, ch24-protocol-phase, ch22-cost-method, ch16-prevention-evidence, ch14-blocked-column, verify-examples, m19-review, ch04-remove-slice
 ```
