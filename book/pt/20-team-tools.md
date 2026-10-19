@@ -1,12 +1,13 @@
 # 20. As ferramentas do time: pull requests, issues e quadros
 
-Depois deste capítulo você consegue levar uma entrega ao branch principal por um pull request cuja revisão lê a página antes do diff, sabendo quem no time é o revisor que o kit assume, e manter issues e um quadro em sintonia com a fila sem fazer de nenhum deles a fonte da verdade, atualizando o quadro por um slot do docs/05 em vez de uma edição nos comandos.
+Depois deste capítulo você consegue levar uma entrega ao branch principal por um pull request cuja revisão lê a página antes do diff, sabendo quem no time é o revisor que o kit assume e o que o kit assume de quem no time não lê código, e manter issues e um quadro em sintonia com a fila sem fazer de nenhum deles a fonte da verdade, atualizando o quadro por um slot do docs/05 em vez de uma edição nos comandos.
 Você também consegue dizer por que os documentos de um projeto ficam em docs/ e nunca numa wiki.
 
 ## O problema
 
 O kit assume uma pessoa que propõe uma entrega, usa a entrega, revisa o diff em stage e faz o commit, e não divide esses papéis além disso.
-Um time precisa de mais duas coisas: uma segunda pessoa que revisa antes do merge, e um jeito de quem nunca abre o repositório, um gerente ou um cliente, ver o progresso.
+Quem não lê código participa do `/propose`, onde a página é escrita em linguagem de usuário ([capítulo 12](12-propose.md)), testa a entrega como seu usuário ([capítulo 13](13-apply.md)) e pergunta a qualquer sessão em que pé as coisas estão ou o que uma página decidiu ([capítulo 17](17-project-as-assistant.md)).
+Um time precisa de mais duas coisas: uma segunda pessoa que revisa antes do merge, e um jeito de quem não abre nem o repositório nem uma sessão, um cliente ou um gerente, ver o progresso.
 As estratégias de git do capítulo 18 param no merge: elas dão forma ao histórico, e não dizem nada sobre quem revisou uma mudança ou quem acompanha o trabalho.
 
 ## O pull request como a revisão do time
@@ -80,6 +81,7 @@ O quadro do Caso A rodou em um projeto, e a sua permissão de escrita nunca foi 
 
 ## Pontos-chave
 
+* O kit assume uma pessoa que propõe, usa, revisa o diff em stage e faz o commit; quem no time não lê código participa do `/propose`, testa a entrega como seu usuário e pergunta a uma sessão em que pé as coisas estão ou o que uma página decidiu, e um quadro serve a quem não abre nem o repositório nem uma sessão.
 * Um pull request carrega uma entrega: um branch com o nome do slug, a página primeiro, a construção depois, um merge com a página, o código e a marca.
 * O revisor lê a página, depois o diff contra ela; um agente pode revisar primeiro, uma pessoa decide, e quem faz o merge é o revisor que o kit assume.
 * Uma issue espelha uma linha da fila pelo slug, e a fila continua a fonte da verdade, porque o agente lê o repositório.

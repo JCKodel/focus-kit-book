@@ -52,10 +52,33 @@
 
 **Done when.**
 
-* [ ] Both editions changed in the same places (opening clause, the sentence after line 8, line 9, one key point bullet) and nowhere else; chapter 17 untouched.
-* [ ] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
-* [ ] Every pointer sits inside a sentence that says something; nothing of chapters 7, 12, 13 or 17 repeated.
-* [ ] No version, date, "now", before/after or history; no em dash; no number, so none to source; no private case text, so no OD-3 approval.
-* [ ] Chapter 17's lines 113 to 137 and chapter 20's line 9 agree on who opens what: a session for the person who does not read code, the board for those who open neither.
-* [ ] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver runs it once, as for `ch20-one-person-assumed`).
-* [ ] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged (the driver's, in this batch); the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions changed in the same places (opening clause, the sentence after line 8, line 9, one key point bullet) and nowhere else; chapter 17 untouched.
+* [x] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
+* [x] Every pointer sits inside a sentence that says something; nothing of chapters 7, 12, 13 or 17 repeated.
+* [x] No version, date, "now", before/after or history; no em dash; no number, so none to source; no private case text, so no OD-3 approval.
+* [x] Chapter 17's lines 113 to 137 and chapter 20's line 9 agree on who opens what: a session for the person who does not read code, the board for those who open neither.
+* [x] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver runs it once, as for `ch20-one-person-assumed`).
+* [x] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged (the driver's, in this batch); the page moved to `work/done/` and its commit message suggested.
+
+**Proof.** `make verify` green after the last edit. `make book` is run once by the driver at the end of the batch, which reports both PDF paths.
+
+**Divergences.** One, from the review: the Portuguese opening clause reads "e o que o kit assume de quem no time não lê código" instead of the Contract's "e o que ele assume", since "ele" could read as "o revisor", the nearest masculine noun. The English "it" is unambiguous and stays.
+
+**Omissions.** None.
+
+**Delivery review.** A read-only Opus agent read `git diff HEAD` of both chapter files against this page, docs/04 and AGENTS.md. No must-fix finding. Two suggestions: the Portuguese "ele" ambiguity, fixed as above; and adding "who only follows progress" to line 9, declined because the page fixes that line's wording and the Behaviour already carries the distinction.
+
+**Decisions taken alone during /apply.**
+
+* The Portuguese key point bullet writes "quem no time não lê código", matching the opening clause, where the English says "a teammate".
+* The review's Portuguese fix above, applied without the author, since it only removes an ambiguity in text this delivery wrote.
+
+```commit
+docs(ch20-reader-no-code): say what the kit assumes of a non-coder
+
+- ch 20: a teammate who does not read code proposes, uses, asks
+- ch 20: the board serves those who open neither repository nor session
+- ch 20: key point on whom the kit assumes; both editions
+
+work/done/ch20-reader-no-code.md
+```

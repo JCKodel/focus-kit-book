@@ -1,12 +1,13 @@
 # 20. The team's tools: pull requests, issues and boards
 
-After this chapter you can land a delivery through a pull request whose review reads the page before the diff, knowing who on the team is the reviewer the kit assumes, and keep issues and a board in step with the queue without making either of them the source of truth, refreshing the board through a slot of docs/05 rather than an edit to the commands.
+After this chapter you can land a delivery through a pull request whose review reads the page before the diff, knowing who on the team is the reviewer the kit assumes and what it assumes of a teammate who does not read code, and keep issues and a board in step with the queue without making either of them the source of truth, refreshing the board through a slot of docs/05 rather than an edit to the commands.
 You can also say why a project's documents live in docs/ and never in a wiki.
 
 ## The problem
 
 The kit assumes one person who proposes a delivery, uses it, reviews the staged diff and commits it, and splits those roles no further.
-A team needs two more things: a second person who reviews before the merge, and a way for people who never open the repository, a manager or a client, to see progress.
+A person who does not read code takes part in `/propose`, where the page is written in user language ([chapter 12](12-propose.md)), tests the delivery as its user ([chapter 13](13-apply.md)), and asks any session where things stand or what a page decided ([chapter 17](17-project-as-assistant.md)).
+A team needs two more things: a second person who reviews before the merge, and a way for people who open neither the repository nor a session, a client or a manager, to see progress.
 The git strategies of chapter 18 stop at the merge: they shape the history, and say nothing about who reviewed a change or who is watching the work.
 
 ## The pull request as the team's review
@@ -80,6 +81,7 @@ Case A's board ran on one project, and its write permission was never proven.
 
 ## Key points
 
+* The kit assumes one person who proposes, uses, reviews the staged diff and commits; a teammate who does not read code takes part in `/propose`, tests the delivery as its user and asks a session where things stand or what a page decided, and a board serves those who open neither the repository nor a session.
 * A pull request carries one delivery: a branch named by the slug, the page first, the build after, one merge with the page, the code and the mark.
 * The reviewer reads the page, then the diff against it; an agent may review first, a person decides, and whoever merges is the reviewer the kit assumes.
 * An issue mirrors a queue line through the slug, and the queue stays the source of truth, because the agent reads the repository.
