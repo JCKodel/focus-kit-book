@@ -49,14 +49,39 @@ Terms of docs/03 used: delivery review, milestone review, slot, milestone; "seco
 * The host's deep review is named in half a clause with a link to chapter 15, and not explained here, to keep the boundary with ch15-who-reads, which runs in parallel.
 * No docs/03 row for "second pair of eyes" or "host's deep review": the first is wording, the second already appears in docs/03's `milestone review` and `checker` rows, and ch15-who-reads owns any further term.
 * Key points and the gain section are left to /apply's judgment, defaulting to no change.
+* /apply: Key points and "What the team gains" unchanged; a clause there would repeat the first gain sentence (the default lets a person who cannot answer still get a good document).
+* /apply: the edge (saying no) is one sentence after the two slots, "You can also say no: whether anyone reads your work is yours to decide."; the tool rule stays in "A default with every question", tied in a parenthesis.
 
 **Done when.**
 
-* [ ] Both editions written, the same passages changed in each, Portuguese read as Portuguese.
-* [ ] The chapter still opens with what the reader can do after it; the review question reads as one question with its default; no filler and nothing useful cut.
-* [ ] No sentence asks or says which tool or model the reader picks; no before/after; no narrated run; no em dash.
-* [ ] `/analyze` counts six subjects in both editions, numbered 1 to 6.
-* [ ] Every link resolves; no number added, so none to source.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] `make verify` green; `make book` builds both editions, and the two PDF paths are reported.
-* [ ] Only this delivery's paths and its hunks of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions written, the same passages changed in each, Portuguese read as Portuguese.
+* [x] The chapter still opens with what the reader can do after it; the review question reads as one question with its default; no filler and nothing useful cut.
+* [x] No sentence asks or says which tool or model the reader picks; no before/after; no narrated run; no em dash.
+* [x] `/analyze` counts six subjects in both editions, numbered 1 to 6.
+* [x] Every link resolves; no number added, so none to source.
+* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green; `make book` builds both editions, and the two PDF paths are reported.
+* [x] Only this delivery's paths and its hunks of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+
+## Record
+
+**Proof.** EN and PT chapter 9 changed in the same five passages: `/brainstorm` item 5, the review paragraph (one question, default yes, two slots, saying no), the tie in "A default with every question", `/analyze` "six subjects", its merged item 5 and renumbered item 6. No "seven", "sete", areas or model question left. `make verify` green. `make book` and the two PDF paths are run and reported by the driver once at the end of the batch.
+
+**Divergences.** None from the contract.
+
+**Omissions.** None.
+
+**Delivery review.** A read-only Opus agent over `git diff HEAD` of both chapter files and this page. No blocking findings. Four minor findings, all fixed: a restated "asks nothing about tools" clause removed (the rule stays in one place); the PT tie put in parentheses, EN matched; PT "no fechamento dele" became "quando ele fecha" in three places; "Review comes as one question" became "One question covers review" (PT "Uma pergunta só cobre a revisão"). Verify green again after the fixes.
+
+**Verify note.** One run failed in `book/pt/08-install-and-hosts.md` (parity of `[^copilot-cli-reference]`), another lane's file, untouched; the next run was green.
+
+```commit
+docs(ch09-second-pair-of-eyes): ask review as one question in ch 9
+
+- /brainstorm item 5 asks whether a second pair of eyes reads each delivery and the milestone
+- the review paragraph states the default, yes, and the two slots it fills
+- the no-tool-by-name rule tied to the review question in one clause
+- /analyze asks six subjects, its two review items merged into one
+
+work/done/ch09-second-pair-of-eyes.md
+```
