@@ -60,9 +60,37 @@
 
 **Done when.**
 
-* [ ] Both editions changed in the same two places: the FACE line replaced by the Contract's line, the `[^face]` note deleted; nowhere else.
-* [ ] `grep -rn "FACE\|face.kodel" book/` finds nothing; `[^toyota-kanban]` and `[^azure-kanban]` still resolve.
-* [ ] The chapter still opens with its value; the gain section true; no filler, nothing useful cut; one sentence per line kept.
-* [ ] No version, date, number, before and after, narration of a run or em dash; no private case touched.
-* [ ] `make verify` green; `make book` builds both editions, and both PDF paths are reported (or the driver runs it for the batch, said on this page).
-* [ ] Delivery review as docs/05 §5 says; only this delivery's paths staged, the page moved to `work/done/` and its commit message suggested; in this batch the driver stages and commits.
+* [x] Both editions changed in the same two places: the FACE line replaced by the Contract's line, the `[^face]` note deleted; nowhere else.
+* [x] `grep -rn "FACE\|face.kodel" book/` finds nothing; `[^toyota-kanban]` and `[^azure-kanban]` still resolve.
+* [x] The chapter still opens with its value; the gain section true; no filler, nothing useful cut; one sentence per line kept.
+* [x] No version, date, number, before and after, narration of a run or em dash; no private case touched.
+* [x] `make verify` green; `make book` builds both editions, and both PDF paths are reported (or the driver runs it for the batch, said on this page).
+* [x] Delivery review as docs/05 §5 says; only this delivery's paths staged, the page moved to `work/done/` and its commit message suggested; in this batch the driver stages and commits.
+
+**Proof.**
+
+* `git diff HEAD` of chapter 14, each edition: two hunks, the FACE line replaced by the Contract's line (en 171, pt 172) and the `[^face]` definition deleted; the line before it, "A board can also read the queue itself, with nothing to mirror.", unchanged.
+* `grep -rn "FACE\|face.kodel" book/` finds nothing; `[^toyota-kanban]` and `[^azure-kanban]` still resolve in both editions.
+* No em dash, number, footnote, case, version or date added; the opening, the gain section and the key points are unchanged.
+* `make verify` green after the last edit of the chapters (exit 0).
+* `make book` is run once by the driver for the batch, so this lane reports no PDF paths; staging and the commit are the driver's in this batch.
+
+**Divergences.**
+
+* Done when's `make book` and staging items are the driver's in this batch.
+
+**Delivery review.** A separate read-only headless session on Opus read `git diff HEAD` of chapter 14, both editions, and this delivery's docs/06 line against this page, docs/04 and AGENTS.md: no findings. It confirmed the line matches the Contract word for word, the notes resolve, no tool is named, and the sentence says where a board reads and leaves when to "At the moment the work changes".
+
+**Decisions taken alone in /apply.**
+
+* None beyond the page's: the Contract's sentences are applied word for word in both editions.
+
+```commit
+docs(ch14-face-retired): a board reads the queue itself, naming no tool
+
+- ch14: the FACE line becomes where a board reads the queue, by slug
+- ch14: the FACE footnote is deleted; the kanban notes stay
+- both editions
+
+work/done/ch14-face-retired.md
+```
