@@ -562,6 +562,6 @@ When this milestone closes, the book teaches focus-kit 2026.10.19.1 and the repo
 [>] docs05-dependency-merged docs/05 §4: the project's sentence on a dependency off trunk agrees with the reading by slug and with docs/03's words, or leaves · after m22-review
 [>] kit-note-work-in-flight  work/kit-proposals.md: a note for focus-kit that off trunk the pages in flight sit on their branches, not in the main branch's `work/` · after m22-review
 [>] m22-batch-proof          the pages of ch08-update-2026-10-19-1, ch12-free-lines-branches and ch14-20-read-branches: their Proof and Done when agree on `make verify` and `make book` · after m22-review
-[ ] readme-make-list         README.md and README.pt.md: the `make` bullet matches the eight targets `make` prints · after m22-review
+[>] readme-make-list         README.md and README.pt.md: the `make` bullet matches the eight targets `make` prints · after m22-review
 [ ] docs06-m21-opening       docs/06: M21's paragraph says the kit was planted after the opening, as chapter 6 says · after m22-review, ch08-13-17-next-line, ch20-merge-and-marks, ch08-13-20-default-review, ch14-face-retired, docs05-dependency-merged, kit-note-work-in-flight, m22-batch-proof, readme-make-list
 ```
