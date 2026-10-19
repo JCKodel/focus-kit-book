@@ -23,11 +23,11 @@ If it does not, the scope has not been understood yet, and it is two deliveries.
 It asks only where the documents leave more than one reading and none closes it, its assessment first, in prose, and its recommendation first in every question.
 
 To decide, it reads before it asks: docs/00 for the product and its rules, docs/03 for the words the page must use, docs/05 for the project's slots and the format of the page, docs/06 for what comes before and after the line, `work/` for the deliveries in flight, and docs/01 for where the change lives in the code.
-When it starts, it first stands where the project's Git slot puts the delivery: on trunk, the folder where the session runs, with nothing to create; otherwise the branch or worktree named after the slug, created, or reused when the definition resumes, with any draft page left for the slug brought into it (chapters 18 and 19).
+On a line already `[?]`, it says what the line waits on and goes on only when you say it is resolved; on a line whose `after` names a line not yet `[x]`, it says the same and does not start (chapter 14).
+On a line it may start, it first stands where the project's Git slot puts the delivery: on trunk, the folder where the session runs, with nothing to create; otherwise the branch or worktree named after the slug, created, or reused when the definition resumes, with any draft page left for the slug brought into it (chapters 18 and 19).
 Its first edit there marks the line `[~]` in the queue, so anyone reading it sees a delivery being defined, and off trunk the mark and the page go with the delivery's branch, where `/apply` builds and the merge takes them.
 Only when the page, `work/<slug>.md`, is completely defined, not merely written, does the mark become `[>]`: a page written while a scope question is still being talked through leaves its line `[~]` (chapter 14 says when a page is complete).
 It ends by showing that queue line, `[>] lend-book ...` for the page below, and asking you to read and question the page, then to run `/apply` in a fresh session.
-On a line already `[?]`, it says what the line waits on and goes on only when you say it is resolved; on a line whose `after` names a line not yet `[x]`, it says the same and does not start (chapter 14).
 When it finds, while defining, that the scope waits on an answer nobody has given yet or on another line that must be done first, it writes the page as far as it goes and marks the line `[?]` instead, with `· resume: propose` and what it waits on.
 It never writes, edits or generates code, a migration, a test or configuration.
 The kit's README gives the reason: "*Scope cannot grow during implementation because the person who decided is not in the room.*"

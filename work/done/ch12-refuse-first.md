@@ -44,10 +44,31 @@ Terms of docs/03 used: queue, mark, `after`, slot, trunk, worktree; none new. No
 
 **Done when.**
 
-* [ ] Both editions written, the same sentence moved and the same clause added in each, Portuguese read as Portuguese; the chapter opens as it did, no filler and nothing useful cut.
-* [ ] In both editions the `[?]` / `after` sentence's line number is lower than the "first stands where" / "primeiro se coloca onde" sentence's (`grep -n` on each file).
-* [ ] `git diff` of the two chapter files touches only that section; the 21-day lines are unchanged.
-* [ ] No em dash; no "no longer", "now", "não mais", "agora", "2026.10" added; no narrated run.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver may run it once for the batch).
-* [ ] Only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions written, the same sentence moved and the same clause added in each, Portuguese read as Portuguese; the chapter opens as it did, no filler and nothing useful cut.
+* [x] In both editions the `[?]` / `after` sentence's line number is lower than the "first stands where" / "primeiro se coloca onde" sentence's (`grep -n` on each file).
+* [x] `git diff` of the two chapter files touches only that section; the 21-day lines are unchanged.
+* [x] No em dash; no "no longer", "now", "não mais", "agora", "2026.10" added; no narrated run.
+* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver may run it once for the batch).
+* [x] Only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+
+**Proof.**
+
+* `grep -n` on each file: the `[?]` / `after` sentence is line 26 and the "first stands where" / "primeiro se coloca onde" sentence is line 27, in both editions.
+* `git diff HEAD` of the two chapters: 2 insertions and 2 deletions per file, all in "What `/propose` does"; the 21-day lines unchanged.
+* The clause added: "On a line it may start, it first stands where ..." (pt "Em uma linha que ele pode começar, ele primeiro se coloca onde ..."), the wording the Contract offered.
+* `make verify` green. `make book` is run once by the driver for the batch.
+* Staging and the docs/06 hunk are the driver's in this batch.
+
+**Divergences.** None.
+
+**Delivery review.** A read-only Opus agent read the diff of both chapters against this page, docs/04 and AGENTS.md: no findings.
+
+```commit
+docs(ch12-refuse-first): /propose refuses before it starts
+
+- the [?] and after refusal comes before where it stands, in both editions
+- the sentence on where it stands opens on a line it may start
+
+work/done/ch12-refuse-first.md
+```
