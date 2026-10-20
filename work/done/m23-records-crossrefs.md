@@ -61,9 +61,34 @@
 
 **Done when.**
 
-* [ ] The eight edits of the Contract are in the four pages, each found by its section and text after `kit-record-step4` and `m23-records-proof` have applied, and nothing else in those pages changed.
-* [ ] A search of the four pages finds no "12 and 13", "and 12," or "and chapter 12" naming `ch10-12-run-manual`'s or M23's chapters, no `ch13-19-session-folder`, no "lines 250 to 253", and one account of who picked the Portuguese phrase.
-* [ ] No em dash in the edited sentences.
-* [ ] `make verify` green after the last edit.
-* [ ] Delivery review as docs/05 §5 says: a read-only Opus agent with the advisor reads the diff against this page; its findings fixed or recorded.
-* [ ] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging are the batch driver's steps.
+* [x] The eight edits of the Contract are in the four pages, each found by its section and text after `kit-record-step4` and `m23-records-proof` have applied, and nothing else in those pages changed.
+* [x] A search of the four pages finds no "12 and 13", "and 12," or "and chapter 12" naming `ch10-12-run-manual`'s or M23's chapters, no `ch13-19-session-folder`, no "lines 250 to 253", and one account of who picked the Portuguese phrase.
+* [x] No em dash in the edited sentences.
+* [x] `make verify` green after the last edit.
+* [x] Delivery review as docs/05 §5 says: a read-only Opus agent with the advisor reads the diff against this page; its findings fixed or recorded (Delivery review). Whether it kept the advisor is not recorded.
+* [x] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging are the batch driver's steps. No chapter changes, so `make book` is the driver's, once for the batch.
+
+**Built.** The eight replacements, word for word, each found by its section and quoted text after `kit-record-step4` (`9bd46a2`) and `m23-records-proof` (`8eb5748`); the line numbers at `7e7fcae` still held. `git diff HEAD` of the four pages shows 8 lines out and 8 in, two per page, nothing else.
+
+**Checked.** docs/05's Manuals item opens on line 250 and its first sentence ends on 254. `ch10-12-run-manual`'s Built says "chapters 11 and 12 untouched". Chapter 9, both editions, names the `docs/manuals/` folder and no file. `ch08-update-2026-10-19-2` :69 says only that chapter 8 took chapter 7's words, so the phrase keeps one account. The page's search finds nothing in the four pages.
+
+**Divergences.** None.
+
+**Decisions taken alone in /apply.** None beyond the page's.
+
+**Delivery review.** A read-only Opus agent, launched by this lane, read `git diff HEAD` of the four pages against this page, docs/04 and AGENTS.md, and checked the facts the edits state. No finding. Its one optional wording note, on `ch10-12-run-manual`'s Divergences writing the short Portuguese file name, needs no change: that page uses the short form already at :68.
+
+**Proof.** `make verify` exited 0 after the eight replacements (build, parity, em dash, prose, width, examples, links, disclosure), and again after this page's last edit and its move.
+
+```commit
+docs(m23-records-crossrefs): four M23 records agree on chapters
+
+- kit-2026-10-19-2, ch08, ch13 pages: M23 taught chapters 7, 8, 9, 10
+  and 13; ch10-12-run-manual never owned chapter 12
+- ch08 page: docs/05's Manuals sentence is lines 250 to 254
+- ch10-12 page: the phrase came from ch13-apply-run-manual's /propose;
+  Divergences names chapter 9's missing file
+- ch13 page: the later worktree delivery is described, not named
+
+work/done/m23-records-crossrefs.md
+```

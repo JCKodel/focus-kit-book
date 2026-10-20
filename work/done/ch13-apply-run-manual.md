@@ -36,9 +36,9 @@ No docs/03 edit (see the report). No code example: the library's file and comman
 
 **Out of scope.**
 
-* Chapters 7, 9, 10 and 12, and the kinds of manual, the Manuals slot and `/analyze`: `ch10-12-run-manual`, which this line follows, so chapter 13's pointer lands on chapter 7 as that delivery leaves it.
+* Chapters 7, 9 and 10, and the kinds of manual, the Manuals slot and `/analyze`: `ch10-12-run-manual`, which this line follows, so chapter 13's pointer lands on chapter 7 as that delivery leaves it.
 * Chapter 8: `ch08-update-2026-10-19-2`. README.md and README.pt.md: `readme-run-manual`.
-* Where `/apply`'s fresh session opens with a worktree per delivery: `ch13-19-session-folder` (M25), which also edits chapter 13; this page leaves line 21 and the "fresh session" of line 108 as they are, but adds a sentence to line 108, which that delivery edits on top of.
+* Where `/apply`'s fresh session opens with a worktree per delivery: a later delivery of the queue's plan, which also edits chapter 13; this page leaves line 21 and the "fresh session" of line 108 as they are, but adds a sentence to line 108, which that delivery edits on top of.
 * Chapter 15's hand test and chapter 19's container manual (line 132): true as they are.
 * "What the team gains" in chapter 13: one gain per chapter (docs/04 **One gain**); the manual is a reason said where the doubt is born.
 * The kit's changelog case: the book is the kit today, with no before and after (docs/04 **The kit as it is**).

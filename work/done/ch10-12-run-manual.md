@@ -73,7 +73,7 @@
 
 **Decisions taken alone in /apply** (the batch's driver asked for recommended answers; correct them in the review).
 
-* The phrase, set by the batch's driver so the book says it one way, here and in `ch13-apply-run-manual`: "the manual of running it", or "the manual of running the product" where the product was not just named; pt "o manual de rodá-lo" / "o manual de rodar o produto", the kit's README.pt.md wording. The kind itself is "running the product from a fresh clone" (pt "rodar o produto a partir de um clone novo").
+* The phrase, picked by `ch13-apply-run-manual`'s /propose and passed by the batch's driver to this /apply so the book says it one way, here and in that delivery: "the manual of running it", or "the manual of running the product" where the product was not just named; pt "o manual de rodá-lo" / "o manual de rodar o produto", the kit's README.pt.md wording. The kind itself is "running the product from a fresh clone" (pt "rodar o produto a partir de um clone novo").
 * The library's manual keeps the page's names: `docs/manuals/run-the-app-from-a-clone.md`, pt `docs/manuals/rodar-o-app-de-um-clone.md`, written by `skeleton`, pt `esqueleto`.
 * Chapter 7 does not print "chapter 11's first line": docs/04's Chapter pointers allow no forward pointer outside the gain in chapters 0 to 7, so the text says what `skeleton` is, "the first delivery, which builds the empty app and server"; the Contract's words name the delivery for the page, not for the text.
 * The reason is said where the manual is introduced too (docs/04, "Say it where the doubt is born"): chapter 7's Manuals paragraph gives it in one clause, and the gain sums it in one sentence.
@@ -82,7 +82,7 @@
 
 **Built.** Chapter 7: the folder's three kinds in "One place per fact"; "Manuals" with three kinds, the first owed from the start, the library's `skeleton` example, the who-writes sentence and `AGENTS.md`'s pointer; question 7; one gain sentence; the third key point (still five). Chapter 9: the fifth subject, "What it writes, and where it stops", `/analyze`'s write sentence, a review bullet, the `/analyze` key point. Chapter 10: new project step 6 and existing project step 3. Both editions; headings unchanged; chapters 11 and 12 untouched.
 
-**Divergences.** None beyond the forward pointer above.
+**Divergences.** Beyond the forward pointer above, one: Behaviour's second scenario expects chapter 9 to name `docs/manuals/run-the-app-from-a-clone.md` (pt `rodar-o-app-de-um-clone.md`); chapter 9 names the manual of running it and no file, which chapter 7 carries, as the Delivery review noted and left.
 
 **Proof.** A search of both editions outside chapters 8 and 13 for "two kinds"/"dois tipos", "none yet"/"nenhum ainda", "writes the manuals"/"escreve os manuais" and "a manual ... for each"/"um manual ... para cada" finds only chapter 3's unrelated "two kinds of errors" and chapter 9's new fifth subject, which names the manual of running it before "the rest none yet". `make verify` green after the last edit, the page's move included; the batch's driver ran `make book` at `31f510e` (exit 0), and `work/done/m23-review.md` records the build at `8a87b0c`, the same `book/`, with both PDF paths.
 
