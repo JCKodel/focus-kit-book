@@ -61,11 +61,31 @@ No docs/03 edit (see the report). No code example: the library's file and comman
 
 **Done when.**
 
-* [ ] Both editions written, the same passages changed in each, Portuguese read as Portuguese; the chapter opens as it did, no filler and nothing useful cut.
-* [ ] Every passage the Contract names says what it says; every passage it lists as staying is unchanged.
-* [ ] `grep -n "run-the-app-from-a-clone" book/en/13-apply.md` and `grep -n "rodar-o-app-de-um-clone" book/pt/13-apply.md` find the file; `grep -c "07-the-documents"` on chapter 13 is unchanged in both editions.
-* [ ] `git diff --stat` touches no book file but the two chapter 13 files.
-* [ ] `grep -n -i -E "no longer|now |2026\.10|changelog"` on the added en lines and `grep -n -i -E "não mais|agora |2026\.10|changelog"` on the added pt lines find nothing; no em dash; no narrated run.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] `make verify` green after the last edit; `make book` builds both editions and both PDF paths are reported (the driver runs `make book` once for the batch).
-* [ ] Only this delivery's paths and its hunk of docs/06 staged (staging is the driver's); the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions written, the same passages changed in each, Portuguese read as Portuguese; the chapter opens as it did, no filler and nothing useful cut.
+* [x] Every passage the Contract names says what it says; every passage it lists as staying is unchanged.
+* [x] `grep -n "run-the-app-from-a-clone" book/en/13-apply.md` and `grep -n "rodar-o-app-de-um-clone" book/pt/13-apply.md` find the file; `grep -c "07-the-documents"` on chapter 13 is unchanged in both editions.
+* [x] `git diff --stat` touches no book file but the two chapter 13 files.
+* [x] `grep -n -i -E "no longer|now |2026\.10|changelog"` on the added en lines and `grep -n -i -E "não mais|agora |2026\.10|changelog"` on the added pt lines find nothing; no em dash; no narrated run.
+* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green after the last edit; `make book` builds both editions and both PDF paths are reported (`make book` run by the driver, once for the batch).
+* [x] Only this delivery's paths and its hunk of docs/06 staged (staging is the driver's); the page moved to `work/done/` and its commit message suggested.
+
+**What happened.**
+
+* Built as the Contract says, in both editions, at the same lines: line 101 gained the sentence inside the manuals bullet (no bullet of its own); line 108 gained its sentence before "The last thing it says"; a three-sentence paragraph follows the Ninjobs sentence at line 161 (new lines 163 to 165); the checklist gained one question (line 191); Key points gained the clause (line 275). Both editions go from 273 to 278 lines.
+* Divergence from the Contract's wording, from the delivery review: line 108 says the manual holds "how to run the product", not "them", since "them" would be the next steps and the manual does not replace those; the `lend-book` paragraph adds "and later deliveries kept current", since `skeleton`'s manual of an empty app could not already give `npm run migrate` alone.
+* Checks: both greps find the file at line 164; `07-the-documents` counts 2 in both editions, before and after; `git diff --stat` touches only the two chapter 13 files among book files; the forbidden-words grep on the added lines and the em dash grep find nothing.
+
+**Delivery review.** One read-only Opus agent over the two chapter files. Five candidates, all fixed: line 108 antecedent (the manual seemed to hold the next steps), Key points clause in en and pt (a run-on, and "it"/"ele" could read as `/apply`; now "said in the conversation and gone with it" / "ditos na conversa e que acabam com ela", "the product runs" / "o produto roda"), pt checklist question (three "rodá-lo"; now "um passo para rodá-lo" and "rodar o produto"), and the manual's history in the `lend-book` paragraph (`skeleton` wrote it, later deliveries kept it current). No new queue line. `make verify` green after the fixes.
+
+```commit
+docs(ch13-apply-run-manual): name the manual of running it in ch 13
+
+- Green is not done: the first runnable delivery writes the manual
+  of running it, every step change updates it; next steps end with
+  the conversation
+- lend-book: the library's manual, written by skeleton, stays as it is
+- checklist question and Key points clause on the manual, both editions
+
+work/done/ch13-apply-run-manual.md
+```

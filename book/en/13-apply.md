@@ -98,14 +98,14 @@ So before it stops, `/apply` does all of this:
 
 * It writes into the page what happened: what diverged from the plan and why, what was dropped, what the proof found, what the delivery review found and what became of each candidate, and the decisions taken, with an ADR if one was needed.
 * Before the review, it updates the documents the delivery changed: a new term into docs/03, a new rule into the document that owns it, a decision into docs/adr/.
-* Before the review too, when the delivery adds or changes something a person does by hand, such as publishing the app, it writes or updates its manual in `docs/manuals/` ([chapter 7](07-the-documents.md)).
+* Before the review too, when the delivery adds or changes something a person does by hand, such as publishing the app, it writes or updates its manual in `docs/manuals/` ([chapter 7](07-the-documents.md)). When the delivery is the first after which a person can run the product, it writes the manual of running it, from a fresh clone to the first screen or call, and every later delivery that changes a step updates it.
 * Verify is green after the last edit it covers; an edit after that green run, whatever its reason, runs it again.
 * It ticks every item of Done when.
 * It moves the page to `work/done/`; a `[?]` line that waits only on this one, or on lines already `[x]`, goes back by its resume phase ([chapter 14](14-queue-states.md)).
 * It stages only this delivery's paths and hunks, never with `git add -A` or `git add .`, and reports what someone else had already staged without unstaging it.
 * It ends the page with the suggested commit message in a `commit` block, in the format docs/05 defines, and shows the same block in the conversation, where a fenced block stands apart from the rest of the reply. There is one block: a resumed `/apply` replaces the earlier one.
 * Its last edit marks the line `[x]` in docs/06 and stages that line, after everything else is staged, so a line marked `[x]` with nothing staged is a session that stopped early.
-* Its last words are your next steps: use what the delivery changed as its user would, and say in that session what is wrong; review the staged diff; commit (and merge, on a delivery branch); and take the queue's next line, with its command written as your host invokes it, in a fresh session, so a person new to the kit does not search the documentation for what comes after. The last thing it says is which environment is at which version and the command that updates the others, and it never ends silent about it.
+* Its last words are your next steps: use what the delivery changed as its user would, and say in that session what is wrong; review the staged diff; commit (and merge, on a delivery branch); and take the queue's next line, with its command written as your host invokes it, in a fresh session, so a person new to the kit does not search the documentation for what comes after. These steps are said in the conversation and end with it, and when another agent runs the session on your behalf they may never reach you; what still holds how to run the product, for the next person, is the manual of running it, from the bullet above. The last thing it says is which environment is at which version and the command that updates the others, and it never ends silent about it.
 
 Done is the review and that whole list.
 
@@ -160,6 +160,10 @@ And it ends, last of all, on the environments, in a sentence also written for th
 If a session ends without that sentence, it did not end as the kit says; ask it for the sentence.
 On Ninjobs, a person who opened the published site believing it current, after a session that ended without that sentence, reviewed a version that did not hold the delivery.
 
+Those next steps belong to this conversation.
+A colleague with a fresh clone next month runs the library from `docs/manuals/run-the-app-from-a-clone.md`, which `skeleton` wrote, being the first delivery after which a person could run the app, and later deliveries kept current.
+`lend-book` changes no step of it, since its migration runs with the `npm run migrate` the manual already gives, so the manual stays as it is; a delivery that added a step, a service to start or a variable to set, would update it before the review.
+
 ## Why it stops at the stage
 
 `/apply` never commits and never merges on its own, whatever the git strategy; a Git slot may say the agent commits, and merges, by the slot's word, which counts as the asking, and the person then reviews the commit ([chapter 7](07-the-documents.md)).
@@ -184,6 +188,7 @@ Then read the staged change against the page:
 * Is anything built that the page did not ask for: a file, a dependency, a layer?
 * Do verify and the proof run green for you, and if a test went to the slow tests, did the agent say so, and does the slow-test command in the Verify slot run it?
 * Did the documents the delivery changed get updated, and only those?
+* If this delivery is the first after which the product runs, or changed a step of running it, does the manual of running it say so, so that someone with a fresh clone and nothing else can run it?
 * Does the staged diff hold only this delivery, and did the agent report anything already staged?
 * Is the suggested message in the `commit` block at the end of the page right: the subject, the bullets, the last line?
 * What did the delivery review find, and was each candidate fixed or turned into a `[ ]` line?
@@ -267,7 +272,7 @@ So the page recorded the refinement, no write path reachable from the client, wh
 * `/apply <slug>` builds the page in a fresh session, reads docs/00 and docs/03 with the rest, writes the code with docs/03's identifiers and follows every slot of docs/05 §5 literally, the project's own included: the page is the scope, with no dependency, layer or tool it did not name, and when the page contradicts a document it stops and says which, never resolving it silently.
 * It marks the line `[*]` with its first edit, `[x]` with its last, after the stage, and `[?]`, with what it waits on, when it must stop.
 * Green is not done: done is the whole list, from the documents updated before a review by a context that did not write the change, which reads the whole delivery, to verify green after the last edit and the line marked `[x]`.
-* It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, using what it built first, each command written out, and, last of all, which environment is at which version and the command that updates the others.
+* It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, using what it built first, each command written out, said in the conversation and gone with it, while the manual of running the product, written by the first delivery after which the product runs and updated by each that changes a step, is what lasts; and, last of all, which environment is at which version and the command that updates the others.
 * Use what was built as its user would, review the staged change against the page, ask for each correction in the same session, saying what you want instead and why, make what the page did not ask a line of the queue, where its milestone's paragraph puts it, and then commit it, yourself or by asking the agent, or, when the Git slot let it commit, review that commit: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>

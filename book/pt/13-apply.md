@@ -98,14 +98,14 @@ Então, antes de parar, o `/apply` faz tudo isto:
 
 * Escreve na página o que aconteceu: o que divergiu do plano e por quê, o que foi deixado de lado, o que a prova achou, o que a revisão da entrega achou e o que foi feito de cada candidato, e as decisões tomadas, com um ADR se foi preciso um.
 * Antes da revisão, atualiza os documentos que a entrega mudou: um termo novo no docs/03, uma regra nova no documento que é dono dela, uma decisão em docs/adr/.
-* Antes da revisão também, quando a entrega acrescenta ou muda algo que uma pessoa faz à mão, como publicar o app, escreve ou atualiza o manual dele em `docs/manuals/` ([capítulo 7](07-the-documents.md)).
+* Antes da revisão também, quando a entrega acrescenta ou muda algo que uma pessoa faz à mão, como publicar o app, escreve ou atualiza o manual dele em `docs/manuals/` ([capítulo 7](07-the-documents.md)). Quando a entrega é a primeira depois da qual uma pessoa consegue rodar o produto, escreve o manual de rodá-lo, de um clone novo até a primeira tela ou chamada, e toda entrega posterior que muda um passo o atualiza.
 * A verificação está verde depois da última edição que ela cobre; uma edição depois dessa execução verde, qualquer que seja o motivo, a faz rodar de novo.
 * Marca cada item do Pronto quando.
 * Move a página para `work/done/`; uma linha `[?]` que espera só por esta, ou por linhas já `[x]`, volta pela fase de retomada ([capítulo 14](14-queue-states.md)).
 * Coloca em stage só os caminhos e trechos desta entrega, nunca com `git add -A` ou `git add .`, e avisa o que outra pessoa já tinha colocado em stage, sem tirar do stage.
 * Termina a página com a mensagem de commit sugerida em um bloco `commit`, no formato que o docs/05 define, e mostra o mesmo bloco na conversa, onde um bloco cercado fica à parte do resto da resposta. Há um bloco só: um `/apply` retomado substitui o anterior.
 * A sua última edição marca a linha como `[x]` no docs/06 e coloca essa linha em stage, depois de todo o resto estar em stage, então uma linha `[x]` sem nada em stage é uma sessão que parou antes da hora.
-* As últimas palavras dele são os seus próximos passos: usar o que a entrega mudou como o usuário dela usaria, e dizer naquela sessão o que está errado; revisar o diff em stage; fazer o commit (e o merge, em um branch da entrega); e pegar a próxima linha da fila, com o comando escrito como o seu host o invoca, em uma sessão nova, para que uma pessoa nova no kit não procure na documentação o que vem depois. A última coisa que diz é qual ambiente está em qual versão e o comando que atualiza os outros, e ele nunca termina calado sobre isso.
+* As últimas palavras dele são os seus próximos passos: usar o que a entrega mudou como o usuário dela usaria, e dizer naquela sessão o que está errado; revisar o diff em stage; fazer o commit (e o merge, em um branch da entrega); e pegar a próxima linha da fila, com o comando escrito como o seu host o invoca, em uma sessão nova, para que uma pessoa nova no kit não procure na documentação o que vem depois. Esses passos são ditos na conversa e acabam com ela, e quando outro agente roda a sessão por você eles podem nunca chegar até você; o que ainda guarda como rodar o produto, para a próxima pessoa, é o manual de rodá-lo, do item acima. A última coisa que diz é qual ambiente está em qual versão e o comando que atualiza os outros, e ele nunca termina calado sobre isso.
 
 Pronto é a revisão e essa lista inteira.
 
@@ -160,6 +160,10 @@ E termina, por último, nos ambientes, com uma frase também escrita para este c
 Se uma sessão termina sem essa frase, ela não terminou como o kit diz; peça a frase a ela.
 No Ninjobs, uma pessoa que abriu o site publicado achando que ele estava atual, depois de uma sessão que terminou sem essa frase, revisou uma versão que não tinha a entrega.
 
+Esses próximos passos são desta conversa.
+Um colega com um clone novo no mês que vem roda a biblioteca a partir de `docs/manuals/rodar-o-app-de-um-clone.md`, que o `esqueleto` escreveu, por ser a primeira entrega depois da qual uma pessoa conseguia rodar o app, e entregas posteriores mantiveram em dia.
+O `emprestar-livro` não muda nenhum passo dele, já que a sua migration roda com o `npm run migrate` que o manual já dá, então o manual fica como está; uma entrega que acrescentasse um passo, um serviço a iniciar ou uma variável a definir, o atualizaria antes da revisão.
+
 ## Por que ele para no stage
 
 O `/apply` nunca faz commit e nunca faz merge por conta própria, qualquer que seja a estratégia de git; um slot Git pode dizer que o agente faz o commit, e o merge, pela palavra do slot, que vale como o pedido, e a pessoa então revisa o commit ([capítulo 7](07-the-documents.md)).
@@ -184,6 +188,7 @@ Depois leia a mudança em stage contra a página:
 * Foi construída alguma coisa que a página não pediu: um arquivo, uma dependência, uma camada?
 * A verificação e a prova ficam verdes para você, e, se um teste foi para os testes lentos, o agente avisou, e o comando dos testes lentos no slot Verify o roda?
 * Os documentos que a entrega mudou foram atualizados, e só eles?
+* Se esta entrega é a primeira depois da qual o produto roda, ou mudou um passo para rodá-lo, o manual de rodá-lo diz isso, para que alguém com um clone novo e mais nada consiga rodar o produto?
 * O diff em stage tem só esta entrega, e o agente avisou o que já estava em stage?
 * A mensagem sugerida no bloco `commit` no fim da página está certa: o assunto, os tópicos, a última linha?
 * O que a revisão da entrega achou, e cada candidato foi corrigido ou virou uma linha `[ ]`?
@@ -267,7 +272,7 @@ Então a página registrou o ajuste, nenhum caminho de escrita alcançável pelo
 * O `/apply <slug>` constrói a página em uma sessão nova, lê o docs/00 e o docs/03 com o resto, escreve o código com os identificadores do docs/03 e segue ao pé da letra cada slot do docs/05 §5, os do próprio projeto incluídos: a página é o escopo, sem dependência, camada ou ferramenta que ela não nomeou, e quando a página contradiz um documento ele para e diz qual, sem nunca resolver em silêncio.
 * Ele marca a linha como `[*]` com a sua primeira edição, `[x]` com a última, depois do stage, e `[?]`, com o que ela espera, quando precisa parar.
 * Verde não é pronto: pronto é a lista inteira, dos documentos atualizados antes de uma revisão por um contexto que não escreveu a mudança, que lê a entrega inteira, à verificação verde depois da última edição e à linha marcada `[x]`.
-* Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, primeiro usar o que ele construiu, cada comando escrito por extenso, e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
+* Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, primeiro usar o que ele construiu, cada comando escrito por extenso, ditos na conversa e que acabam com ela, enquanto o manual de rodar o produto, escrito pela primeira entrega depois da qual o produto roda e atualizado por cada uma que muda um passo, é o que fica; e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
 * Use o que foi construído como o usuário usaria, revise a mudança em stage contra a página, peça cada correção na mesma sessão, dizendo o que quer no lugar e por quê, transforme o que a página não pediu em uma linha da fila, onde o parágrafo do seu marco a põe, e então faça o commit, você mesmo ou pedindo ao agente, ou revise o commit que o slot Git deixou o agente fazer: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>
