@@ -134,7 +134,7 @@ Uma linha `[?]` apareceria em "Esperando" com o seu motivo e a fase em que retom
 Uma resposta tirada do que a sessão lembra, uma oferta de manter um arquivo de status, ou uma sugestão de criar um comando de status quer dizer que o agente não leu a fila: peça o arquivo por trás da resposta.
 
 Uma pergunta não toca em código, e o modo de plano do host (capítulo 12) impede uma sessão de editar qualquer coisa.
-Quando o gerente quer mudar algo, como uma linha nova na fila, o agente a escreve por conversa, como em qualquer sessão, e uma pessoa revisa e faz o commit.
+Quando o gerente quer mudar algo, como uma linha nova na fila, o agente a escreve por conversa, como em qualquer sessão, e uma pessoa a revisa e faz o commit, por padrão, ou pede ao agente que o faça; quando a palavra do slot Git deixa o agente fazer o commit, a pessoa revisa o commit depois que ele entra.
 Uma mudança no código, por menor que seja, também vira uma linha, com um rascunho da página para o detalhe, e a resposta para ali, nomeando o `/propose` para essa sessão, fora do modo de plano, ou uma sessão nova (capítulo 11).
 
 ## O que o time ganha

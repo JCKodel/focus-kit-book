@@ -61,7 +61,7 @@ O kit assume uma pessoa em todos os papéis ([capítulo 20](20-team-tools.md)); 
   Um desenvolvedor propõe uma entrega técnica, um analista uma regra, um gerente uma pergunta ao cliente; o `/propose` é uma conversa, e precisa de alguém que consiga responder ([capítulo 12](12-propose.md)).
 * **Quem aplica:** a sessão de um desenvolvedor, ou várias ao mesmo tempo, em uma pasta ou em worktrees, cada uma na sua entrega ([capítulo 19](19-worktrees.md)).
 * **Quem decide cada commit e cada merge:** uma pessoa, sempre, pedindo, ou uma vez no slot Git, cuja palavra vale como o pedido.
-  Por padrão o `/apply` coloca em stage e para, e a pessoa usa o que ele construiu e revisa, depois faz o commit ou pede ao agente que dê esse único passo, e confere o que ele fez; pela palavra do slot Git, o agente faz o commit e a pessoa usa a entrega e revisa o commit: a revisão é humana em todos os casos ([capítulo 13](13-apply.md)).
+  Por padrão o `/apply` coloca em stage e para, e a pessoa usa o que ele construiu e revisa, depois faz o commit ou pede ao agente que dê esse único passo, e confere o que ele fez; pela palavra do slot Git, o agente faz o commit, e o merge, e a pessoa usa a entrega e revisa o commit ou o merge: a revisão é humana em todos os casos ([capítulo 13](13-apply.md)).
 * **Quem revisa o marco:** o time, no produto rodando, contra o parágrafo do marco; com a palavra dele, o código alterado desde a base do marco é lido por quem o slot Milestone review do docs/05 cita, quando cita alguém, a revisão profunda do host ou um agente somente leitura por área, e nos dois casos um conferente marca cada candidato antes que o time confirme quais são achados ([capítulo 15](15-closing-a-milestone.md)).
 * **O gerente** pergunta ao projeto: o que está pendente e como está indo, lido da fila, no trunk o arquivo único dela e com um branch ou um worktree por entrega a linha de cada slug no worktree ou no branch dele, e quem deve uma resposta ([capítulo 17](17-project-as-assistant.md)).
 
@@ -109,6 +109,6 @@ No Caso A o processo pegou quatro problemas fora do código: uma base que não b
 
 * Sem um processo comum cada pessoa usa IA do seu jeito, a um custo que ninguém vê, e a opinião mais alta decide.
 * Responda a "o meu jeito funciona" pedindo a sua evidência, a "processo demais" com o regulador, e a "nós já temos uma ferramenta" com o fato de que o método são documentos que qualquer host lê.
-* Quem é dono da decisão propõe, a sessão de um desenvolvedor aplica, uma pessoa sempre decide cada commit e cada merge, pedindo depois de usar a entrega e revisá-la, ou uma vez no slot Git, revisando depois cada commit que entra, e o time revisa o marco.
+* Quem é dono da decisão propõe, a sessão de um desenvolvedor aplica, uma pessoa sempre decide cada commit e cada merge, pedindo depois de usar a entrega e revisá-la, ou uma vez no slot Git, revisando depois cada commit e cada merge que entra, e o time revisa o marco.
 * Comece com um marco de três a oito linhas, meça os tokens por entrega e o que foi pego, e então decida.
 

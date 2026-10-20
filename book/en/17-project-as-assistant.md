@@ -134,7 +134,7 @@ A `[?]` line would appear under "Waiting" with its reason and the phase it resum
 An answer from what the session remembers, an offer to keep a status file, or a suggestion to add a status command means the agent did not read the queue: ask for the file behind the answer.
 
 A question touches no code, and the host's plan mode (chapter 12) keeps a session from editing anything.
-When the manager wants something changed, such as a new line in the queue, the agent writes it by conversation, as in any session, and a person reviews and commits it.
+When the manager wants something changed, such as a new line in the queue, the agent writes it by conversation, as in any session, and a person reviews it and commits it, by default, or asks the agent to; when the Git slot's word lets the agent commit, the person reviews the commit once it lands.
 A change to the code, however small, becomes a line as well, with a draft page for the detail, and the answer stops there, naming `/propose` for that session, out of plan mode, or a fresh one (chapter 11).
 
 ## What the team gains

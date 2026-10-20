@@ -22,7 +22,8 @@ Git merges a branch in four ways, and this is what each leaves and what undoing 
 | Squash merge | One new commit | `git revert <commit>` |
 | Rebase, then fast-forward | The commits, rewritten | One revert per commit |
 
-In the kit's branch per delivery, `/propose` creates the branch named after the slug, or reuses it when it exists, and writes the page there; `/apply` builds on it; the page and every mark of its line in docs/06 are written on the branch, so `main`'s queue shows the line as it was until the merge ([chapter 14](14-queue-states.md) says where a board sees it); and the person merges page and build into `main` in one merge, here a merge commit, through its pull request (chapter 20) or by hand: the unit of work one `git revert -m 1 <merge>` takes back.
+In the kit's branch per delivery, `/propose` creates the branch named after the slug, or reuses it when it exists, and writes the page there; `/apply` builds on it; the page and every mark of its line in docs/06 are written on the branch, so `main`'s queue shows the line as it was until the merge ([chapter 14](14-queue-states.md) says where a board sees it); and by default the person merges page and build into `main`, or asks the agent to, in one merge, here a merge commit, through its pull request (chapter 20) or by hand: the unit of work one `git revert -m 1 <merge>` takes back.
+When the Git slot's word lets the agent merge, the agent takes that step and the person reviews the merge once it lands (chapter 20).
 For `lend-book`, a delivery of the lending library written for this chapter, the first line is what `/propose` does for you, `git switch lend-book` instead when the branch exists, and the last two are yours, once `/apply` is done and you have used the delivery and reviewed the branch:
 
 ```

@@ -142,7 +142,7 @@ git worktree add ../.focus-kit/worktrees/devolver-livro \
 Cria a pasta `biblioteca/.focus-kit/worktrees/devolver-livro`, cria o branch `focus-kit/devolver-livro` no `main`, e faz checkout dele na pasta.
 A pasta fica na pasta oculta, ao lado de `main/`, então nenhum dos arquivos de `main/` a mostra.
 
-Depois você trabalha dentro da pasta como em qualquer outra: o agente constrói, você usa o que ele construiu, revisa e faz o commit ali.
+Depois você trabalha dentro da pasta como em qualquer outra: o agente constrói, você usa o que ele construiu, revisa e, por padrão, faz o commit ali, ou pede ao agente que o faça; pela palavra do slot Git o agente faz o commit ali e você revisa o commit.
 Só o que o git acompanha está na pasta nova: dependências como `node_modules` não estão, então você as instala em cada worktree (`npm ci` em um projeto Node).
 
 ```

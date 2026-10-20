@@ -30,7 +30,7 @@
   * en :64: "by the Git slot's word, the agent commits and the person uses the delivery and reviews the commit:" becomes "by the Git slot's word, the agent commits, and merges, and the person uses the delivery and reviews the commit or the merge:". The rest stays.
   * pt :64: "pela palavra do slot Git, o agente faz o commit e a pessoa usa a entrega e revisa o commit:" becomes "pela palavra do slot Git, o agente faz o commit, e o merge, e a pessoa usa a entrega e revisa o commit ou o merge:". The rest stays.
   * en :112: "then reviewing each commit after it lands," becomes "then reviewing each commit and merge after it lands,".
-  * pt :112: "revisando depois cada commit que entra," becomes "revisando depois cada commit e cada merge que entram,".
+  * pt :112: "revisando depois cada commit que entra," becomes "revisando depois cada commit e cada merge que entra,".
 * Terms of docs/03: Git slot, trunk, branch, worktree, the person's review. No new term; no docs/03 row.
 * Sources: chapter 20 :8, :35, :85 and :86 (the reviewer by default and by the Git slot's word, the merge included), chapter 13 :169, docs/05 §5's Git slot and AGENTS.md ("The agent stages and suggests the commit message. It never commits or merges on its own"). No footnote: the reader gains nothing to open.
 * Cases: none. No number.
@@ -66,10 +66,48 @@
 
 **Done when.**
 
-* [ ] Both editions changed in the sentences the Contract names, chapter 18's one new line included, and nowhere else in chapters 17, 18, 19 and 23.
-* [ ] No passage of the four reads as if a person always commits or merges by hand, nor as if the agent commits or merges with no asking and no slot's word.
-* [ ] Each chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
-* [ ] No version, date, before/after or narration of a run in the text; no em dash; no number added, no private case used.
-* [ ] `make verify` green after the last edit, its result recorded in this page's Proof.
-* [ ] `make book` built both PDFs, its run and both PDF paths recorded in this page's Proof; when a batch's driver runs it instead, this item is ticked only on that run as the Proof records it.
-* [ ] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
+* [x] Both editions changed in the sentences the Contract names, chapter 18's one new line included, and nowhere else in chapters 17, 18, 19 and 23.
+* [x] No passage of the four reads as if a person always commits or merges by hand, nor as if the agent commits or merges with no asking and no slot's word.
+* [x] Each chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
+* [x] No version, date, before/after or narration of a run in the text; no em dash; no number added, no private case used.
+* [x] `make verify` green after the last edit, its result recorded in this page's Proof.
+* [x] `make book` built both PDFs, its run and both PDF paths recorded in this page's Proof; when a batch's driver runs it instead, this item is ticked only on that run as the Proof records it.
+* [x] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
+
+**Proof.**
+
+`git diff HEAD -- book/` shows the eight chapter files only, 12 insertions and 10 deletions: ten edited lines and chapter 18's new line in each edition.
+Chapter 18's new line moves the sentences that stay: chapter 18 :190 and :203 are now :191 and :204; chapter 19 :194 and :351 and chapter 23 :63 have not moved.
+
+`make verify` green after the last edit. `make book` is run by the driver once for the batch.
+
+**Divergences.**
+
+* pt 23 :112 ends "que entra", singular, not the Contract's "que entram": with "cada" before each subject the verb stays singular, as the English "after it lands"; the Contract line is corrected to match (Delivery review finding 1).
+
+**Decisions.**
+
+* The four review findings outside the page go to the queue as lines of their own, not widened here.
+
+**Delivery review.** One read-only Opus agent over this delivery's paths (`git diff HEAD` of the eight chapter files, word diff, and this page), against the page, AGENTS.md, docs/04, docs/05 §5, chapter 20 en/pt :8, :35, :85, :86, chapter 13 en/pt :169, :216, :265, and the neighbouring lines of chapters 18 and 19; it did not read docs/03, since the page adds no term. Verdict: passes; every Contract string in place word for word in both editions, nothing else changed in the four chapters, one sentence per line kept, the wording agrees with chapters 13 and 20, no em dash, number, private case, version, date or run narration added.
+Findings:
+1. Text written, minor: pt 23 :112 "que entram" reads better singular after "cada ... e cada ...". Fixed: "que entra", the Contract corrected.
+2. Outside the page: chapter 19 :103 (both editions), "When a delivery is done, you bring it into `main` from `main/` with a merge commit", says who merges with no "by default" or slot's word. A queue line.
+3. Outside the page: chapter 18 :25 (both editions), "or by hand" after "or asks the agent to" now also reads as a contrast with the agent; "or on the command line" would keep it the pull request's contrast. A queue line.
+4. Outside the page, already named in Out of scope: chapter 13 :169 and chapter 19 :194 and :351 say the person reviews "the commit" where the slot may give the merge too. A queue line.
+5. Outside the page, low: chapter 23 :64's default half names only the commit under a heading on each commit and merge; "then commits or merges, or asks the agent to take that one step". A queue line.
+
+**Noted, not fixed.** Findings 2 to 5, queue lines of their own.
+
+**Dropped.** Nothing.
+
+```commit
+docs(ch17-23-git-slot-word): say who commits and merges in 17-23
+
+- ch17 and ch19: a person commits by default, or asks the agent to
+- ch18: the person merges by default; a new line gives the slot's case
+- ch23: the Git slot's word may give the agent the merge as well
+- both editions
+
+work/done/ch17-23-git-slot-word.md
+```

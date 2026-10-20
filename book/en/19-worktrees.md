@@ -142,7 +142,7 @@ git worktree add ../.focus-kit/worktrees/return-book \
 Creates the folder `library/.focus-kit/worktrees/return-book`, creates the branch `focus-kit/return-book` at `main`, and checks it out in the folder.
 The folder sits in the hidden folder, beside `main/`, so none of `main/`'s files show it.
 
-Then you work inside the folder as in any other: the agent builds, you use what it built, review and commit there.
+Then you work inside the folder as in any other: the agent builds, you use what it built, review it and, by default, commit there, or ask the agent to; by the Git slot's word the agent commits there and you review the commit.
 Only what git tracks is in the new folder: dependencies such as `node_modules` are not, so you install them in each worktree (`npm ci` in a Node project).
 
 ```
