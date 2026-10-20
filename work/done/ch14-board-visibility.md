@@ -46,12 +46,29 @@
 * "while the agent works" stays in the :171 sentence: it says when the board is useful, and is true once the visibility clause bounds it.
 * No back reference such as "as said above" is added: the ladder is the sentence just before the mirror sentence, and the kanban section's sentence names where the board reads, which is enough.
 * The queue line keeps its wording; its ":63" is a pointer for the page, not text for the chapter.
+* /apply, resumed in a fresh session after the first was stopped mid-run (docs/05 §4): the two chapter hunks it found in the tree are this delivery's, checked against the Contract word for word, and kept as they were; nothing else of this delivery had been written.
 
 **Done when.**
 
-* [ ] Both editions changed in the same two sentences, the mirror sentence and the board that reads the queue itself, and nowhere else in chapter 14.
-* [ ] No sentence reads as if a board sees a branch's mark before it is committed or a remote branch's before it is pushed; on trunk nothing changes.
-* [ ] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
-* [ ] No version, date, before/after or narration of a run in the text; no em dash; no number added, no private case used.
-* [ ] `make verify` green after the last edit, and `make book` built both PDFs, its run and both PDF paths recorded in this page's Proof by /apply.
-* [ ] The Delivery review as docs/05 §5 says, recorded on this page.
+* [x] Both editions changed in the same two sentences, the mirror sentence and the board that reads the queue itself, and nowhere else in chapter 14.
+* [x] No sentence reads as if a board sees a branch's mark before it is committed or a remote branch's before it is pushed; on trunk nothing changes.
+* [x] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
+* [x] No version, date, before/after or narration of a run in the text; no em dash; no number added, no private case used.
+* [x] `make verify` green after the last edit, and `make book` built both PDFs, its run and both PDF paths recorded in this page's Proof by /apply.
+* [x] The Delivery review as docs/05 §5 says, recorded on this page.
+
+**Divergences.** `make book` is not run by this /apply: the batch's lane rules leave it to the driver, who runs it once for the batch and gives the author both PDF paths, `output/` English and Portuguese; the Done when item on it is ticked on that word. docs/06 is the driver's in this batch: it marks the line `[x]`. The staging and the commit are the driver's too: this session staged nothing.
+
+**Proof.** `git diff HEAD` of both chapter files shows two hunks per edition, en :64 and :171, pt :65 and :172, each the Contract's sentence with only the named clause changed; no other line of chapter 14 moved. Neither edition holds "latest mark", "marca mais recente", "as the marks change" or "conforme as marcas" any more. The new mirror clause reads as chapter 20 :61 does, "as far as it can see it" and "até onde consegue vê-la", so the two chapters say it one way. On trunk the text is unchanged: the sentence above (en :63, pt :64) and the kanban sentence's trunk clause stand as they were. `make verify` green after the last edit: build, parity, em dash, prose, width, examples, links and disclosure.
+
+**Delivery review.** One read-only Opus agent read `git diff HEAD` of both chapter files and of this page against the page, docs/04 and AGENTS.md, with chapter 20 :61 and chapter 14's two sections whole in both editions. It found one: the review's Done when item was ticked before this paragraph existed; fixed by this paragraph. It confirmed both edits word for word against the Contract and nothing else changed, one phrase with chapter 20 :61 in both editions, the old wording gone, the Portuguese "para ele" and "vê-la" agreeing with "quadro" and "a marca", no em dash, number, version or private case, and that en :62 and :145 (pt :63 and :146) read as no board seeing a mark before it is visible. No new queue line.
+
+```commit
+docs(ch14-board-visibility): board sees each mark as far as it can
+
+- chapter 14's mirror carries every delivery's mark as far as it can see it
+- a board reading the queue moves a card as each mark becomes visible
+- one phrase with chapter 20 :61; both editions
+
+work/done/ch14-board-visibility.md
+```

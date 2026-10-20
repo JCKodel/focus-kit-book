@@ -61,7 +61,7 @@ With a branch or a worktree per delivery, the mark lives on the delivery's branc
 So whoever reads the queue, a board or a session picking free lines or resolving an `after`, takes each slug's line from its worktree, or from its branch, local or remote, adds the lines only a branch has, and reconciles them by slug, each line at its latest state, never one branch's whole file.
 The marks change at once for the same reason either way, a board people pull work from: on trunk the board reads the one queue, and with a branch or a worktree per delivery it reads each slug's line where that line lives.
 Where the line lives decides how soon a reader sees it: a worktree's file shows the mark the moment it changes, a branch once the mark is committed on it, a remote branch once that commit is pushed.
-A project's own one-way mirror, refreshed by the commands when a mark changes, shows the mark at once, and with a branch or a worktree per delivery it pushes the queue read the same way, so each refresh carries every delivery's latest mark, not its own branch's copy.
+A project's own one-way mirror, refreshed by the commands when a mark changes, shows the mark at once, and with a branch or a worktree per delivery it pushes the queue read the same way, so each refresh carries every delivery's mark as far as it can see it, not its own branch's copy.
 
 ## The next line, and which run together
 
@@ -168,7 +168,7 @@ Either way, resolving the reason removes both suffixes and the tag with them.
 Chapter 20 shows how a script mirrors the queue to a team's own board, one way.
 
 A board can also read the queue itself, with nothing to mirror.
-It reads docs/06 and the pages in `work/` by slug, on trunk from the folder's own files and with a branch or a worktree per delivery from each slug's worktree or branch, and moves its cards as the marks change while the agent works.
+It reads docs/06 and the pages in `work/` by slug, on trunk from the folder's own files and with a branch or a worktree per delivery from each slug's worktree or branch, and moves its cards as each mark becomes visible to it while the agent works.
 
 ## What the team gains
 

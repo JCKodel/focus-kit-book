@@ -62,7 +62,7 @@ Com um branch ou um worktree por entrega, a marca mora no branch da entrega, e o
 Então quem lê a fila, um quadro ou uma sessão que escolhe linhas livres ou resolve um `after`, pega a linha de cada slug no worktree dele, ou no branch dele, local ou remoto, acrescenta as linhas que só um branch tem, e as reconcilia pelo slug, com cada linha no seu estado mais recente, nunca o arquivo inteiro de um branch.
 As marcas mudam na hora pelo mesmo motivo nos dois casos, um quadro de onde as pessoas puxam trabalho: no trunk o quadro lê a fila única, e com um branch ou um worktree por entrega lê a linha de cada slug onde ela mora.
 Onde a linha mora decide em quanto tempo quem lê vê a marca: o arquivo de um worktree mostra a marca no momento em que ela muda, um branch quando a marca entra em um commit nele, um branch remoto quando esse commit é enviado.
-Um espelho do próprio projeto numa só direção, atualizado pelos comandos quando uma marca muda, mostra a marca na hora, e com um branch ou um worktree por entrega envia a fila lida do mesmo jeito, então cada atualização leva a marca mais recente de cada entrega, não a cópia do próprio branch.
+Um espelho do próprio projeto numa só direção, atualizado pelos comandos quando uma marca muda, mostra a marca na hora, e com um branch ou um worktree por entrega envia a fila lida do mesmo jeito, então cada atualização leva a marca de cada entrega até onde consegue vê-la, não a cópia do próprio branch.
 
 ## A próxima linha, e quais rodam juntas
 
@@ -169,7 +169,7 @@ Nos dois casos, resolver o motivo tira os dois sufixos e, com eles, a etiqueta.
 O capítulo 20 mostra como um script espelha a fila no quadro do próprio time, numa só direção.
 
 Um quadro também pode ler a própria fila, sem nada a espelhar.
-Ele lê o docs/06 e as páginas em `work/` pelo slug, no trunk nos arquivos da própria pasta e com um branch ou um worktree por entrega no worktree ou no branch de cada slug, e move os cartões conforme as marcas mudam enquanto o agente trabalha.
+Ele lê o docs/06 e as páginas em `work/` pelo slug, no trunk nos arquivos da própria pasta e com um branch ou um worktree por entrega no worktree ou no branch de cada slug, e move os cartões conforme cada marca fica visível para ele enquanto o agente trabalha.
 
 ## O que o time ganha
 
