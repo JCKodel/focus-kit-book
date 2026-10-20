@@ -44,8 +44,8 @@
 * [x] One sentence per source line in both editions of chapter 20, quotations aside; no em dash.
 * [x] The gain section and the opening are still true; no number, version or before and after of the kit added.
 * [x] `make verify` green.
-* [x] `make book` built; both PDF paths given for the author's reading (`output/one-page-at-a-time.pdf`, `output/uma-pagina-de-cada-vez.pdf`).
-* [x] Only this delivery's files staged, with the suggested commit message; no commit.
+* [x] `make book` built both editions: `work/done/m23-review.md` records the build at `8a87b0c`, whose chapter 20 is as this delivery left it, with both PDF paths (`output/one-page-at-a-time.pdf`, `output/uma-pagina-de-cada-vez.pdf`).
+* [x] Only this delivery's files staged, by the batch's driver from its own index (Divergences), with the suggested commit message; no commit by this lane.
 
 **Decisions from the documents.**
 
@@ -68,19 +68,19 @@
 * A search for a sentence end followed by a capital inside one source line finds, in both editions of chapter 20, only line 33's quotation.
 * No em dash, number, footnote, case, version or date added; the opening, the gain section and Case A's sentences are unchanged.
 * `make verify` green after the last edit of the chapters (exit 0).
-* `make book` is run once by the driver for the batch, so this lane reports no PDF paths; staging and the commit are the driver's in this batch.
+* This lane did not run `make book`; `work/done/m23-review.md` records the build at `8a87b0c`, which holds chapter 20 as this delivery left it, with both PDF paths. Staging and the commit are the driver's in this batch.
 
 **Divergences.**
 
-* Done when's `make book` and staging items are the driver's in this batch: it builds the book once and commits each delivery from its own index.
-* The delivery review did not run in a separate read-only agent: this lane had no tool to start one, so it went through the session's advisor; the driver may run it again as docs/05 §5 says.
+* Done when's `make book` and staging items are not this lane's: the build is the one `work/done/m23-review.md` records, and the driver commits each delivery from its own index.
+* The delivery review did not run in a separate read-only agent: this lane had no tool to start one, so it went through the session's advisor; no review by a read-only agent, as docs/05 §5 says, is recorded for it.
 
 **Delivery review.** The session's advisor read this delivery's hunks of chapter 20, both editions, and its docs/06 hunk against this page and docs/04: the chapter text matches the Contract word for word in both editions, Case A's sentences and step 4 are untouched, no em dash; nothing in the chapters changed. Fixed on this page: a divergence that was the Contract applied ("that mark") was dropped, the decisions below were listed, and the commit subject made imperative. Chapter 14's hunks in the tree are another lane's (`ch14-face-retired`), not read as this delivery's.
 
 **Decisions taken alone in /apply.**
 
 * The review went through the session's advisor, since no agent could be started from this lane.
-* `make book` and staging are left to the driver, as the batch's rule says, and their Done when items ticked on that basis.
+* `make book` and staging are left to the driver, as the batch's rule says; their Done when items name the build `work/done/m23-review.md` records and the driver's index.
 
 ```commit
 docs(ch20-merge-and-marks): carry the marks a board push can see

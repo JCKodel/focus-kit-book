@@ -52,8 +52,8 @@
 * [x] Chapters 7, 9 and 10 changed in both editions as the Contract says, same headings, chapter 12 untouched; each still opens with its value; no filler and nothing useful cut.
 * [x] No sentence in the book lists the kinds of manual without running it from a fresh clone, says `/brainstorm`'s Manuals slot is "none yet" alone, or says `/analyze` writes manuals without the one of running it first (outside chapters 8 and 13, whose lines own them).
 * [x] No numbers, no history of the kit's change, no run narrated; no em dash.
-* [x] `make verify` green; `make book` is run once for the batch by its driver, who gives the author both PDF paths.
-* [x] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging by paths and hunk are the batch driver's steps.
+* [x] `make verify` green; `make book` built both editions: the batch's driver ran it after the last M23 build lane, at `31f510e` (exit 0), and `work/done/m23-review.md` records the build at `8a87b0c`, whose `book/` is the same and holds chapters 7, 9 and 10 as this delivery left them, with both PDF paths.
+* [x] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging by paths and hunk were the batch driver's, from a temporary index at commit time.
 
 **Decisions taken from the documents.**
 
@@ -84,9 +84,9 @@
 
 **Divergences.** None beyond the forward pointer above.
 
-**Proof.** A search of both editions outside chapters 8 and 13 for "two kinds"/"dois tipos", "none yet"/"nenhum ainda", "writes the manuals"/"escreve os manuais" and "a manual ... for each"/"um manual ... para cada" finds only chapter 3's unrelated "two kinds of errors" and chapter 9's new fifth subject, which names the manual of running it before "the rest none yet". `make verify` green after the last edit, the page's move included; `make book` is run by the batch's driver.
+**Proof.** A search of both editions outside chapters 8 and 13 for "two kinds"/"dois tipos", "none yet"/"nenhum ainda", "writes the manuals"/"escreve os manuais" and "a manual ... for each"/"um manual ... para cada" finds only chapter 3's unrelated "two kinds of errors" and chapter 9's new fifth subject, which names the manual of running it before "the rest none yet". `make verify` green after the last edit, the page's move included; the batch's driver ran `make book` at `31f510e` (exit 0), and `work/done/m23-review.md` records the build at `8a87b0c`, the same `book/`, with both PDF paths.
 
-**Delivery review.** A read-only agent on Opus read `git diff HEAD` of the six chapter files against this page, docs/04 and AGENTS.md, and searched both editions outside chapters 8 and 13 for stale sentences on manuals. No finding breaks the page or docs/04: no em dash, no forward pointer in chapter 7's body, five key points, headings unchanged, chapter 12 untouched, the editions agree. Its wording suggestions, all on text this delivery wrote, were applied: chapter 7 moves "from the start" before the slot so it does not read as "running it from the start" (both editions); chapter 10 step 6 says "the manual of running it", not "its manual"; pt chapter 9 says "a cargo da primeira entrega" for "owed by", and pt chapter 7 gains a comma before "para rodar o produto". It also noted that the library's file name is in chapter 7 and not in chapter 9; it is left there, since chapter 9 names the manual and chapter 7 carries the example.
+**Delivery review.** A read-only agent on Opus, launched by this lane, read `git diff HEAD` of the six chapter files against this page, docs/04 and AGENTS.md, and searched both editions outside chapters 8 and 13 for stale sentences on manuals. No finding breaks the page or docs/04: no em dash, no forward pointer in chapter 7's body, five key points, headings unchanged, chapter 12 untouched, the editions agree. Its wording suggestions, all on text this delivery wrote, were applied: chapter 7 moves "from the start" before the slot so it does not read as "running it from the start" (both editions); chapter 10 step 6 says "the manual of running it", not "its manual"; pt chapter 9 says "a cargo da primeira entrega" for "owed by", and pt chapter 7 gains a comma before "para rodar o produto". It also noted that the library's file name is in chapter 7 and not in chapter 9; it is left there, since chapter 9 names the manual and chapter 7 carries the example.
 
 ```commit
 docs(ch10-12-run-manual): name the manual of running it in ch 7, 9, 10

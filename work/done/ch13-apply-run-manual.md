@@ -66,9 +66,9 @@ No docs/03 edit (see the report). No code example: the library's file and comman
 * [x] `grep -n "run-the-app-from-a-clone" book/en/13-apply.md` and `grep -n "rodar-o-app-de-um-clone" book/pt/13-apply.md` find the file; `grep -c "07-the-documents"` on chapter 13 is unchanged in both editions.
 * [x] `git diff --stat` touches no book file but the two chapter 13 files.
 * [x] `grep -n -i -E "no longer|now |2026\.10|changelog"` on the added en lines and `grep -n -i -E "não mais|agora |2026\.10|changelog"` on the added pt lines find nothing; no em dash; no narrated run.
-* [x] Delivery review as docs/05 §5 says.
-* [x] `make verify` green after the last edit; `make book` builds both editions and both PDF paths are reported (`make book` run by the driver, once for the batch).
-* [x] Only this delivery's paths and its hunk of docs/06 staged (staging is the driver's); the page moved to `work/done/` and its commit message suggested.
+* [x] Delivery review by one read-only Opus agent this lane launched, over the two chapter files (Delivery review): narrower than docs/05 §5, which also has it read this page, against the page and docs/04, and keep the session's advisor, which this page does not record.
+* [x] `make verify` green after the last edit; `make book` built both editions: the batch's driver ran it after this lane, at `31f510e`, this delivery's commit (exit 0), and `work/done/m23-review.md` records the build at `8a87b0c`, the same `book/`, with both PDF paths.
+* [x] Only this delivery's paths and its hunk of docs/06 staged, by the batch's driver from a temporary index at commit time; the page moved to `work/done/` and its commit message suggested.
 
 **What happened.**
 
@@ -76,7 +76,7 @@ No docs/03 edit (see the report). No code example: the library's file and comman
 * Divergence from the Contract's wording, from the delivery review: line 108 says the manual holds "how to run the product", not "them", since "them" would be the next steps and the manual does not replace those; the `lend-book` paragraph adds "and later deliveries kept current", since `skeleton`'s manual of an empty app could not already give `npm run migrate` alone.
 * Checks: both greps find the file at line 164; `07-the-documents` counts 2 in both editions, before and after; `git diff --stat` touches only the two chapter 13 files among book files; the forbidden-words grep on the added lines and the em dash grep find nothing.
 
-**Delivery review.** One read-only Opus agent over the two chapter files. Five candidates, all fixed: line 108 antecedent (the manual seemed to hold the next steps), Key points clause in en and pt (a run-on, and "it"/"ele" could read as `/apply`; now "said in the conversation and gone with it" / "ditos na conversa e que acabam com ela", "the product runs" / "o produto roda"), pt checklist question (three "rodá-lo"; now "um passo para rodá-lo" and "rodar o produto"), and the manual's history in the `lend-book` paragraph (`skeleton` wrote it, later deliveries kept it current). No new queue line. `make verify` green after the fixes.
+**Delivery review.** One read-only Opus agent, launched by this lane, over the two chapter files. Five candidates, all fixed: line 108 antecedent (the manual seemed to hold the next steps), Key points clause in en and pt (a run-on, and "it"/"ele" could read as `/apply`; now "said in the conversation and gone with it" / "ditos na conversa e que acabam com ela", "the product runs" / "o produto roda"), pt checklist question (three "rodá-lo"; now "um passo para rodá-lo" and "rodar o produto"), and the manual's history in the `lend-book` paragraph (`skeleton` wrote it, later deliveries kept it current). No new queue line. `make verify` green after the fixes.
 
 ```commit
 docs(ch13-apply-run-manual): name the manual of running it in ch 13

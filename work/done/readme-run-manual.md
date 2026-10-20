@@ -81,7 +81,7 @@ No docs/03 term is needed. docs/01's README line ("how to build") stays true.
 * [x] `docs/manuals/release-the-book.md` line 18 reads as the Contract says.
 * [x] Read by hand beside `make`'s output and the manual: every bullet is true in both editions, and no install command is in both the README and the manual.
 * [x] The link's target, `docs/manuals/build-the-book-from-a-clone.md`, exists relative to the repository root, where GitHub resolves a README's relative link, in both editions.
-* [x] `make verify` green; page in `work/done/`, the line `[x]`, staged by its paths and its hunk of docs/06, the commit suggested in a `commit` block.
+* [x] `make verify` green; page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging by its paths and its hunk of docs/06 were the batch driver's, from a temporary index at commit time.
 
 
 **Decisions taken from the documents.**
@@ -112,7 +112,7 @@ No docs/03 term is needed. docs/01's README line ("how to build") stays true.
 
 **Proof.** Read beside `make`'s eight lines and `docs/manuals/build-the-book-from-a-clone.md`: every bullet is true in both editions; the manual holds the nodejs.org address, `brew install node`, the `brew` and `apt` lines and `python3-venv`, and the README none of them; the link's target exists from the repository root. No other file in `docs/`, `scripts/` or `.claude/` cites the content removed. `make verify` green after the last edit, the page's move included; `make book` is run by the batch's driver.
 
-**Delivery review.** A read-only agent on Opus read `git diff HEAD` of README.md, README.pt.md and `docs/manuals/release-the-book.md` against this page, docs/04 and AGENTS.md, ran `make help` and searched `docs/`, `scripts/` and `.claude/` for citations of the removed text. No findings.
+**Delivery review.** A read-only agent on Opus, launched by this lane, read `git diff HEAD` of README.md, README.pt.md and `docs/manuals/release-the-book.md` against this page, docs/04 and AGENTS.md, ran `make help` and searched `docs/`, `scripts/` and `.claude/` for citations of the removed text. No findings.
 
 ```commit
 docs(readme-run-manual): point Build locally to the build manual

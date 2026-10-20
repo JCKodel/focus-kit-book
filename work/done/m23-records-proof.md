@@ -132,10 +132,35 @@ Exact replacements, each found by its section and quoted text (line numbers are 
 
 **Done when.**
 
-* [ ] The 22 replacements above made word for word, each found by its section and quoted text, and nothing else in the six pages changed (`git diff` of each shows only those lines).
-* [ ] The Contract's git checks rechecked at /apply: `git diff --stat 31f510e 8a87b0c -- book/` empty, chapter 20 unchanged from `9c2e490` to `8a87b0c`.
-* [ ] A search of the six pages finds no "run once for the batch", "the driver may run it again" or "for the author's reading", "is run by the batch's driver" only in `readme-run-manual`'s Proof (Out of scope), and no "Delivery review as docs/05 §5 says" ticked.
-* [ ] No em dash; no private case, so OD-3 approval is inapplicable.
-* [ ] `make verify` green after the last edit.
-* [ ] Delivery review as docs/05 §5 says: a read-only Opus agent with the session's advisor reads the diff of the six pages and this page against this page and docs/04; its findings fixed or recorded.
-* [ ] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging are the batch driver's steps.
+* [x] The 22 replacements above made word for word, each found by its section and quoted text, and nothing else in the six pages changed (`git diff` of each shows only those lines).
+* [x] The Contract's git checks rechecked at /apply: `git diff --stat 31f510e 8a87b0c -- book/` empty, chapter 20 unchanged from `9c2e490` to `8a87b0c`.
+* [x] A search of the six pages finds no "run once for the batch", "the driver may run it again" or "for the author's reading", "is run by the batch's driver" only in `readme-run-manual`'s Proof (Out of scope), and no "Delivery review as docs/05 §5 says" ticked.
+* [x] No em dash; no private case, so OD-3 approval is inapplicable.
+* [x] `make verify` green after the last edit.
+* [x] Delivery review by a read-only Opus agent this lane launched, over the diff of the six pages, against this page and docs/04; its findings recorded (Delivery review). This page does not record whether it kept the session's advisor, as docs/05 §5 asks it to.
+* [x] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging are the batch driver's steps. No chapter changes, so `make book` is the driver's, once for the batch.
+
+**Built.** The 22 replacements, word for word, matched by their quoted text; the line numbers at `61d00b2` still held. `git diff HEAD` of the six pages shows 22 lines out and 22 in (ch08 4, ch10-12 4, ch13 4, readme 2, ch20 6, docs05 2), nothing else; no item unticked.
+
+**Checked.** At /apply, `git diff --stat 31f510e 8a87b0c -- book/` is empty, and so is chapter 20's diff from `9c2e490` to `8a87b0c`, chapter 8's from `29670c7` to `31f510e` and chapters 7, 9 and 10's from `2911ef6` to `31f510e`. The page's search finds "is run by the batch's driver" only at `readme-run-manual` :113, its Proof. No em dash in the six pages.
+
+**Divergences.** None.
+
+**Decisions taken alone in /apply.**
+
+* The replacements were applied by one script that asserts each quoted text occurs exactly once on its page, so no edit could land on a second match.
+
+**Delivery review.** A read-only Opus agent, launched by this lane, read `git diff HEAD` of the six pages against this page, docs/04 and docs/05 §5, reran the Contract's git checks and the search, and read `work/done/m23-review.md`'s Mechanical checks. No finding breaks the page, docs/04 or the text this delivery wrote. It noted that `readme-run-manual` :109 still says the driver runs `make book` once for the batch: kept by Out of scope, true for a delivery that changed no chapter, so no queue line. Its three wording notes (ch08 :60 and ch13 :69, ch20 :76 and docs05 :69, on how "as docs/05 §5 says" attaches) are on this page's quoted text, applied as written. Whether it kept the session's advisor is not recorded.
+
+**Proof.** `make verify` exited 0 after the 22 replacements (build, parity, em dash, prose, width, examples, links, disclosure), and again after this page's last edit and its move.
+
+```commit
+docs(m23-records-proof): six pages tick only what their records hold
+
+- ch08, ch10-12, ch13, readme pages: make book, review and staging items
+  say what ran, the driver's build at 31f510e and m23-review's at 8a87b0c
+- ch20, docs05 pages: build, review and staging items point to records
+- Delivery review paragraphs say the agent was launched by the lane
+
+work/done/m23-records-proof.md
+```

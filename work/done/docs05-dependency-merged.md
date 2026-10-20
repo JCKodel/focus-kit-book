@@ -54,7 +54,7 @@ Only these four lines are rewrapped; no other line of docs/05 moves. No docs/03 
 * [x] docs/05 §4 reads as the Contract's After block; `grep -n "dependency blocked\|available in the branch" docs/05-Process.md` finds nothing.
 * [x] No other file changes but this page and its line in docs/06 (the driver's).
 * [x] `make verify` green after the last edit.
-* [x] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Delivery review by the session's advisor, not by the read-only Opus agent docs/05 §5 asks (Divergences); only this delivery's paths and its hunk of docs/06 staged, by the batch's driver from its own index; the page moved to `work/done/` and its commit message suggested.
 
 **Proof.**
 
@@ -66,7 +66,7 @@ Only these four lines are rewrapped; no other line of docs/05 moves. No docs/03 
 **Divergences.**
 
 * Staging and the commit are the driver's in this batch: it commits each delivery from its own index, so the Done when item on staging is ticked on that basis.
-* The delivery review did not run in a separate read-only agent: this lane had no tool to start one, so it went through the session's advisor, as earlier lanes of this batch did; the driver may run it again as docs/05 §5 says.
+* The delivery review did not run in a separate read-only agent: this lane had no tool to start one, so it went through the session's advisor, as earlier lanes of this batch did; no review by a read-only agent, as docs/05 §5 says, is recorded for it.
 
 **Delivery review.** The session's advisor read this delivery's hunk of docs/05 and its hunk of docs/06 against this page and docs/04: one hunk in docs/05, three lines replacing four, matching the Contract's After block exactly; no "blocked" said of a dependency remains in docs/05, whose only `dependenc` match is §4's "an order, not an interruption"; no other file, section, record or edition changed. Fixed on this page: this paragraph, first written before the review ran, now says what it found; the Proof's verify claim, rerun after the page's last edit; the commit's second bullet, which gave reasoning, now states the highlight. The chapter, docs/06 and work/ changes in the tree belong to other lanes (`ch08-13-17-next-line`, `ch14-face-retired`, `ch20-merge-and-marks`, `ch08-13-20-default-review`) and were not read as this delivery's.
 
