@@ -20,10 +20,11 @@ GitLab calls the same thing a merge request.
 With focus-kit, a pull request carries one delivery:
 
 1. **A branch per delivery**, named by its slug.
+   `/propose` pushes the branch the moment it creates it, so the line is taken for everyone who fetches.
 2. **The page first.** The first commit on the branch is `work/<slug>.md`, written by `/propose`.
-   Open the pull request as soon as it is pushed, and the page can be reviewed before any code exists.
+   Open the pull request as soon as the page's commit is pushed, the second push, yours or asked of the agent, and the page can be reviewed before any code exists.
 3. **The build after.** `/apply` builds on the same branch; the page moves to `work/done/` and the queue line becomes `[x]` in the same change.
-4. **One merge.** The delivery reaches the main branch whole, with its page, its code, its tests, its proof and its mark, so the queue on the main branch holds what has landed; a `[~]` or `[*]` set on a branch is on that branch only, where a board or a session reads it (chapter 14).
+4. **One merge.** The delivery reaches the main branch whole, with its page, its code, its tests, its proof and its mark, so the queue on the main branch changes only through merges and holds what has landed; a `[~]` or `[*]` set on a branch is on that branch only, where a board or a session reads it (chapter 14).
 
 The reviewer reads the page, then the diff against it.
 Every Behaviour line has its test or its manual check; the Contract matches the code down to the names; nothing listed in Out of scope was built; every item of Done when is ticked with its proof.
@@ -83,7 +84,7 @@ Case A's board ran on one project, and its write permission was never proven.
 ## Key points
 
 * The kit assumes one person who proposes, uses and reviews, by default the staged diff before committing, or the commit the Git slot's word let the agent make, and a team splits those roles as its own practice; a teammate who does not read code takes part in `/propose`, tests the delivery as its user and asks a session where things stand or what a page decided, and a board serves those who open neither the repository nor a session.
-* A pull request carries one delivery: a branch named by the slug, the page first, the build after, one merge with the page, the code and the mark; its reviewer reads the page, then the diff against it; an agent may review first, a person decides, and the reviewer the kit assumes is, by default, whoever decides the merge, or, by the Git slot's word, the person who reviews the merge the agent made.
+* A pull request carries one delivery: a branch named by the slug, pushed when `/propose` creates it, the page first, the build after, one merge with the page, the code and the mark; its reviewer reads the page, then the diff against it; an agent may review first, a person decides, and the reviewer the kit assumes is, by default, whoever decides the merge, or, by the Git slot's word, the person who reviews the merge the agent made.
 * An issue mirrors a queue line through the slug, and the queue stays the source of truth, because the agent reads the repository.
 * A board is a one-way mirror of the queue, refreshed, when a mark changes, by a slot of docs/05 that the commands follow, not by an edit to them, never silent when it cannot be, and, with a branch or a worktree per delivery, read from each slug's worktree or branch.
 * A question delivery, Case A's own customization, closes on the answer, not on the send.

@@ -116,7 +116,7 @@ A manager needs no code editor.
 They open the host in the project's root folder, the one with the rules file, and ask in plain words.
 The host loads the rules file at the start of the session, and the rules file tells the agent to read the documents before acting, so the manager's session starts from the same documents as the developer's.
 
-The rules file also holds a line for the question a manager asks first: asked where things stand, the agent answers from the queue and `work/`, with the next command written as that host invokes it.
+The rules file also holds a line for the question a manager asks first: asked where things stand, the agent answers from the queue and `work/`, and with a branch or a worktree per delivery from the delivery branches after `git fetch`, with the next command written as that host invokes it.
 There is no status command, because the queue already is the status.
 Asked "where are we?" on the lending library, a session answers this way, in an answer written for this chapter:
 
@@ -129,7 +129,7 @@ Run: /propose m1-review (Codex: $propose m1-review)
 ```
 
 Every part of it is read from docs/06: the milestone's count, the line in flight with its mark, the waits, and the first free line, with the command chapter 8's table gives for each host.
-On trunk that is the queue of the folder where the session runs; with a branch or a worktree per delivery the main branch shows each line as it was until its merge, so the session takes each slug's line from its worktree or branch, local or remote, and reconciles them by slug (chapter 14): from the main branch's copy alone, `return-book` would read `[ ]`, and "In flight" would miss the build under way.
+On trunk that is the queue of the folder where the session runs; with a branch or a worktree per delivery the main branch shows each line as it was until its merge, so the session runs `git fetch` and takes each slug's line from its worktree or branch, local or remote, and reconciles them by slug (chapter 14): from the main branch's copy alone, `return-book` would read `[ ]`, and "In flight" would miss the build under way.
 A `[?]` line would appear under "Waiting" with its reason and the phase it resumes in, as the line holds them.
 An answer from what the session remembers, an offer to keep a status file, or a suggestion to add a status command means the agent did not read the queue: ask for the file behind the answer.
 
@@ -148,5 +148,5 @@ On Case A, twenty questions to outside people were followed to their answers, th
 * The context folder holds what the code cannot say, each original beside its Markdown; `/brainstorm` and `/analyze` read it whole when they start, a later item is read when you ask, and what it decides goes into the documents, where `/propose` reads it; it is committed when the repository stays with the team, and kept out when the repository is delivered or public.
 * A work record with two tables, questions sent and still open, answers "who owes me an answer" and writes the reminder.
 * Ask for the file behind every answer, and interpret, guide and validate it.
-* A manager opens the host at the project's root and asks in plain words; the same rules file makes the agent read the documents first; asked where things stand, it answers from the queue, read on trunk in its one file and with a branch or a worktree per delivery from each slug's worktree or branch, with the next command; there is no status command.
+* A manager opens the host at the project's root and asks in plain words; the same rules file makes the agent read the documents first; asked where things stand, it answers from the queue, read on trunk in its one file and with a branch or a worktree per delivery from the delivery branches after `git fetch`, with the next command; there is no status command.
 

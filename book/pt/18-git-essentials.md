@@ -22,12 +22,13 @@ O git faz o merge de um branch de quatro formas, e isto é o que cada uma deixa 
 | Squash merge | Um commit novo | `git revert <commit>` |
 | Rebase, depois fast-forward | Os commits, reescritos | Um `git revert` por commit |
 
-No branch por entrega do kit, o `/propose` cria o branch com o nome do slug, ou o reutiliza quando ele existe, e escreve a página nele; o `/apply` constrói nele; a página e cada marca da sua linha no docs/06 são escritas no branch, então a fila do `main` mostra a linha como estava até o merge (o [capítulo 14](14-queue-states.md) diz onde um quadro a vê); e por padrão a pessoa faz o merge da página e da construção no `main`, ou pede ao agente que o faça, em um merge, aqui um commit de merge, pelo pull request do branch (capítulo 20) ou pela linha de comando: a unidade de trabalho que um `git revert -m 1 <merge>` desfaz.
+No branch por entrega do kit, o `/propose` consulta o remoto pelo branch com o nome do slug, cria o branch e dá push nele na hora, então a linha fica ocupada em todo clone, ou o reutiliza quando a definição é retomada, e escreve a página nele; o `/apply` constrói nele; a página e cada marca da sua linha no docs/06 são escritas no branch, então a fila do `main` mostra a linha como estava até o merge (o [capítulo 14](14-queue-states.md) diz onde um quadro a vê); e por padrão a pessoa faz o merge da página e da construção no `main`, ou pede ao agente que o faça, em um merge, aqui um commit de merge, pelo pull request do branch (capítulo 20) ou pela linha de comando: a unidade de trabalho que um `git revert -m 1 <merge>` desfaz.
 Quando a palavra do slot Git deixa o agente fazer o merge, o agente dá esse passo e a pessoa revisa o merge depois que ele entra (capítulo 20).
-Para `emprestar-livro`, uma entrega da biblioteca de empréstimos escrita para este capítulo, a primeira linha é o que o `/propose` faz por você, `git switch emprestar-livro` no lugar dela quando o branch existe, e as duas últimas são suas, quando o `/apply` termina e você usou a entrega e revisou o branch:
+Para `emprestar-livro`, uma entrega da biblioteca de empréstimos escrita para este capítulo, as duas primeiras linhas são o que o `/propose` faz por você, `git switch emprestar-livro` no lugar delas quando o branch existe, e as duas últimas são suas, quando o `/apply` termina e você usou a entrega e revisou o branch:
 
 ```
 git switch -c emprestar-livro
+git push -u origin emprestar-livro
 
 git switch main
 git merge --no-ff emprestar-livro

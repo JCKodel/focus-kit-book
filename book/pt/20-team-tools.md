@@ -20,10 +20,11 @@ O GitLab chama a mesma coisa de merge request.
 Com o focus-kit, um pull request carrega uma entrega:
 
 1. **Um branch por entrega**, com o nome do seu slug.
+   O `/propose` envia o branch no momento em que o cria, então a linha fica ocupada para todo mundo que faz `git fetch`.
 2. **A página primeiro.** O primeiro commit no branch é `work/<slug>.md`, escrita pelo `/propose`.
-   Abra o pull request assim que ele for enviado, e a página pode ser revisada antes de existir qualquer código.
+   Abra o pull request assim que o commit da página for enviado, o segundo envio, seu ou pedido ao agente, e a página pode ser revisada antes de existir qualquer código.
 3. **A construção depois.** O `/apply` constrói no mesmo branch; a página vai para `work/done/` e a linha da fila vira `[x]` na mesma mudança.
-4. **Um merge.** A entrega chega inteira ao branch principal, com a sua página, o seu código, os seus testes, a sua prova e a sua marca, então a fila no branch principal guarda o que já chegou; um `[~]` ou `[*]` posto em um branch está só nesse branch, onde um quadro ou uma sessão o lê (capítulo 14).
+4. **Um merge.** A entrega chega inteira ao branch principal, com a sua página, o seu código, os seus testes, a sua prova e a sua marca, então a fila no branch principal só muda por merges e guarda o que já chegou; um `[~]` ou `[*]` posto em um branch está só nesse branch, onde um quadro ou uma sessão o lê (capítulo 14).
 
 O revisor lê a página, depois o diff contra ela.
 Cada linha de Comportamento tem o seu teste ou a sua checagem manual; o Contrato bate com o código até os nomes; nada listado em Fora do escopo foi construído; cada item do Pronto quando está marcado com a sua prova.
@@ -83,7 +84,7 @@ O quadro do Caso A rodou em um projeto, e a sua permissão de escrita nunca foi 
 ## Pontos-chave
 
 * O kit assume uma pessoa que propõe, usa e revisa, por padrão o diff em stage antes de fazer o commit, ou o commit que a palavra do slot Git deixou o agente fazer, e um time divide esses papéis como prática própria; quem no time não lê código participa do `/propose`, testa a entrega como seu usuário e pergunta a uma sessão em que pé as coisas estão ou o que uma página decidiu, e um quadro serve a quem não abre nem o repositório nem uma sessão.
-* Um pull request carrega uma entrega: um branch com o nome do slug, a página primeiro, a construção depois, um merge com a página, o código e a marca; seu revisor lê a página, depois o diff contra ela; um agente pode revisar primeiro, uma pessoa decide, e o revisor que o kit assume é, por padrão, quem decide o merge, ou, pela palavra do slot Git, a pessoa que revisa o merge que o agente fez.
+* Um pull request carrega uma entrega: um branch com o nome do slug, enviado quando o `/propose` o cria, a página primeiro, a construção depois, um merge com a página, o código e a marca; seu revisor lê a página, depois o diff contra ela; um agente pode revisar primeiro, uma pessoa decide, e o revisor que o kit assume é, por padrão, quem decide o merge, ou, pela palavra do slot Git, a pessoa que revisa o merge que o agente fez.
 * Uma issue espelha uma linha da fila pelo slug, e a fila continua a fonte da verdade, porque o agente lê o repositório.
 * Um quadro é um espelho da fila numa só direção, atualizado, quando uma marca muda, por um slot do docs/05 que os comandos seguem, não por uma edição neles, nunca em silêncio quando não consegue ser, e, com um branch ou um worktree por entrega, lido do worktree ou do branch de cada slug.
 * Uma entrega de pergunta, customização do próprio Caso A, fecha na resposta, não no envio.
