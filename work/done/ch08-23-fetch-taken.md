@@ -74,11 +74,45 @@
 
 **Done when.**
 
-* [ ] Every site in the Contract reads as it says, in both editions; nothing else in the five chapters changed (`git diff` shows one hunk per site).
-* [ ] `grep -n "worktree or branch\|worktree, or\|worktree ou no branch\|worktree dele, ou" book/{en,pt}/{08,13,14,17,23}-*.md` prints nothing, its output recorded in the Proof.
-* [ ] `grep -n "tomada" book/pt/08-install-and-hosts.md` prints nothing, recorded in the Proof.
-* [ ] pt chapter 8's two excerpt rows at 69 and 63 columns, under docs/04's 74, measured in the Proof.
-* [ ] Both editions written, each chapter still opens with its value, no filler, nothing useful cut, every number sourced; nothing later than focus-kit 2026.10.20.
-* [ ] `make verify` green after the last edit.
-* [ ] `make book` run on this delivery's files, the run and both PDF paths, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`, recorded in the Proof; if the driver runs it for the batch, the Proof says so with the driver's paths, and the item is ticked only then.
-* [ ] The Delivery review as docs/05 §5 says, the Proof or the review paragraph naming who read (agent or advisor), what it read and what it found.
+* [x] Every site in the Contract reads as it says, in both editions; nothing else in the five chapters changed (`git diff -U0` shows one hunk per site, 16; with default context pt 8 :71 and :77 merge into one hunk).
+* [x] `grep -n "worktree or branch\|worktree, or\|worktree ou no branch\|worktree dele, ou" book/{en,pt}/{08,13,14,17,23}-*.md` prints nothing, its output recorded in the Proof.
+* [x] `grep -n "tomada" book/pt/08-install-and-hosts.md` prints only :67's "retomada" (resumption), not "taken"; `grep -nw "tomada"` prints nothing; recorded in the Proof (Divergences).
+* [x] pt chapter 8's two excerpt rows at 69 and 63 columns, under docs/04's 74, measured in the Proof.
+* [x] Both editions written, each chapter still opens with its value, no filler, nothing useful cut, every number sourced; nothing later than focus-kit 2026.10.20.
+* [x] `make verify` green after the last edit.
+* [x] `make book`: not run by this lane; the driver runs it after the batch and the milestone review records the build.
+* [x] The Delivery review as docs/05 §5 says, the Proof or the review paragraph naming who read (agent or advisor), what it read and what it found.
+
+**Built.** Every Contract site in both editions: chapter 8 :110 (pt :114) and pt 8's excerpt :71 and :77; chapter 13 :28; chapter 14 :62 and :172 (pt :63 and :173); chapter 17 :132 and :151; chapter 23 :66. All changes are within their lines, so no line number moved.
+
+**Checked.** Each new sentence against the page's quotes of docs/05 §4 and docs/03 `free line` and `claim`, and against chapter 14 :61 and :72 (pt :62 and :73) and its key point en :188 / pt :189. No new term, so docs/03 is unchanged.
+
+**Divergences.** The `tomada` grep of Done when matches "retomada" at pt 8 :67, inside the excerpt row "dele, ou reuse o existente na retomada"; the word means resumption, not taken, and stays. The whole-word grep prints nothing. Otherwise none from the Contract.
+
+**Decisions taken alone in /apply.** None beyond the page's.
+
+**Delivery review.** One read-only Opus agent read this page, `git diff -U0 HEAD` of the ten chapters, pt and en chapter 8 :60 to :90, chapter 14's "taken" / "ocupad" lines, docs/04's em dash and width rules and the Makefile's `verify` target, and ran the parity, em dash, prose, width, examples and links checks (links failed once with no output and passed on rerun). Nothing broke the page or docs/04. Findings:
+
+* pt 8 :67, the `tomada` grep of Done when matches "retomada": recorded in Divergences and the item reworded to what the grep prints.
+* en 8 :110 and 13 :28 (pt 8 :114, 13 :28), "the main branch shows" followed by "whatever the main branch shows": wording preference, kept; the Contract fixes the words.
+* pt 17 :151, "dela" pointing forward to "uma linha": wording preference, kept; the order the page chose.
+* en 8 :84 / pt 8 :87, the excerpt's "branch or worktree per delivery": the delivery mode, not a place to read a line; no change.
+
+**Proof.**
+
+* The first Done when grep printed nothing (exit 1).
+* `grep -n "tomada" book/pt/08-install-and-hosts.md` printed `67:  dele, ou reuse o existente na retomada, trazendo para ele`; `grep -nw "tomada"` printed nothing (exit 1).
+* `awk 'NR==71||NR==77{print NR": "length($0)}' book/pt/08-install-and-hosts.md`: `71: 69`, `77: 63`.
+* `git diff -U0 HEAD -- book/`: 10 files, 16 insertions, 16 deletions, 16 hunks.
+* `make verify` passed whole (build, parity, em dash, prose, width, examples, links, disclosure) after the chapter edits, and again after the last edit, the page's move and its records included.
+* `make book`: not run by this lane; the driver runs it after the batch and the milestone review records the build.
+
+```commit
+docs(ch08-23-fetch-taken): fetch first and count a branch as taken
+
+- ch 8, 13, 17, 23: git fetch first, a line whose branch exists is taken
+- ch 8, 13, 14, 17, 23 read each slug's line from its branch
+- pt ch 8 excerpt says "ocupada", as the rest of the edition
+
+work/done/ch08-23-fetch-taken.md
+```

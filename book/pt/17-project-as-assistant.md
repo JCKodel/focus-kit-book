@@ -129,7 +129,7 @@ Rode: /propose m1-review (Codex: $propose m1-review)
 ```
 
 Cada parte dela é lida do docs/06: a contagem do marco, a linha em andamento com a sua marca, as esperas, e a primeira linha livre, com o comando que a tabela do capítulo 8 dá para cada host.
-No trunk essa é a fila da pasta onde a sessão roda; com um branch ou um worktree por entrega, o branch principal mostra cada linha como estava até o merge dela, então a sessão roda `git fetch` e pega a linha de cada slug no worktree ou no branch dele, local ou remoto, e as reconcilia pelo slug (capítulo 14): só pela cópia do branch principal, `devolver-livro` leria `[ ]`, e "Em andamento" perderia a construção em curso.
+No trunk essa é a fila da pasta onde a sessão roda; com um branch ou um worktree por entrega, o branch principal mostra cada linha como estava até o merge dela, então a sessão roda `git fetch`, toma como ocupada uma linha cujo branch existe, em andamento antes mesmo de qualquer marca dela ser enviada, e pega a linha de cada slug no branch dele, local ou remoto, reconciliando-as pelo slug (capítulo 14): só pela cópia do branch principal, `devolver-livro` leria `[ ]`, e "Em andamento" perderia a construção em curso.
 Uma linha `[?]` apareceria em "Esperando" com o seu motivo e a fase em que retoma, como a linha os guarda.
 Uma resposta tirada do que a sessão lembra, uma oferta de manter um arquivo de status, ou uma sugestão de criar um comando de status quer dizer que o agente não leu a fila: peça o arquivo por trás da resposta.
 
@@ -148,5 +148,5 @@ No Caso A, vinte perguntas a pessoas de fora foram acompanhadas até as resposta
 * A pasta de contexto guarda o que o código não consegue dizer, cada original ao lado do seu Markdown; o `/brainstorm` e o `/analyze` a leem inteira quando começam, um item que chega depois é lido quando você pede, e o que ele decide vai para os documentos, onde o `/propose` o lê; ela entra em commit quando o repositório fica com o time, e fica de fora quando o repositório é entregue ou público.
 * Um registro de trabalho com duas tabelas, perguntas enviadas e ainda em aberto, responde "quem me deve uma resposta" e escreve o lembrete.
 * Peça o arquivo por trás de cada resposta, e interprete, guie e valide.
-* Um gerente abre o host na raiz do projeto e pergunta em palavras simples; o mesmo arquivo de regras faz o agente ler os documentos primeiro; perguntado em que pé as coisas estão, ele responde a partir da fila, lida no trunk no arquivo único dela e com um branch ou um worktree por entrega nos branches das entregas depois de um `git fetch`, com o próximo comando; não existe comando de status.
+* Um gerente abre o host na raiz do projeto e pergunta em palavras simples; o mesmo arquivo de regras faz o agente ler os documentos primeiro; perguntado em que pé as coisas estão, ele responde a partir da fila, lida no trunk no arquivo único dela e com um branch ou um worktree por entrega nos branches das entregas depois de um `git fetch`, tomando como ocupada, antes mesmo de qualquer marca dela ser enviada, uma linha cujo branch existe, com o próximo comando; não existe comando de status.
 

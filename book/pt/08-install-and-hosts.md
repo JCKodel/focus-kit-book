@@ -68,13 +68,13 @@ Migrações de processo pendentes, por documento e seção, encurtadas:
   qualquer rascunho deixado para o slug."
 * docs/05 §4, onde um quadro vê uma marca e o branch como
   reivindicação: não diz que o branch é enviado quando o /propose o
-  cria, nem que uma linha cujo branch existe está tomada. Proposto,
+  cria, nem que uma linha cujo branch existe está ocupada. Proposto,
   de "No trunk o quadro a vê na hora." até o fim do parágrafo, o
   texto do modelo, que continua: "Com um branch ou um worktree por
   entrega, a marca mora no branch da entrega, enviado quando o
   /propose o cria, e o branch principal mostra a linha como estava
   até o merge: depois de git fetch, uma linha cujo branch existe
-  está tomada, mostre o main o que mostrar", e o resto como o
+  está ocupada, mostre o main o que mostrar", e o resto como o
   modelo o tem.
 * docs/05 §5, Git: uma escolha do projeto, não uma migração: trunk,
   ADR-0010, com a Publish policy, o agente nunca envia. O slot
@@ -111,7 +111,7 @@ A atualização termina quando as migrações são aplicadas, como qualquer muda
 Num projeto já documentado, a atualização relata as migrações primeiro, ou diz que não há nenhuma.
 Ela nunca pede que você rode o `/brainstorm` ou o `/analyze` de novo: eles escrevem os documentos de um projeto do zero, e os seus existem.
 Ela cita em vez disso o comando que a primeira linha livre do docs/06 pede, na forma do seu host: o `/propose` e o seu slug para uma linha `[ ]`, o `/apply` e o seu slug para uma `[>]`.
-No trunk essa linha é lida na fila da pasta; com um branch ou um worktree por entrega, o branch principal mostra cada linha como estava até o merge dela, então a atualização lê a linha de cada slug no worktree ou no branch dele, local ou remoto, e as reconcilia pelo slug ([capítulo 14](14-queue-states.md)).
+No trunk essa linha é lida na fila da pasta; com um branch ou um worktree por entrega, o branch principal mostra cada linha como estava até o merge dela, então a atualização roda `git fetch` antes, toma como ocupada, antes mesmo de qualquer marca dela ser enviada, uma linha cujo branch existe, mostre o que mostrar o branch principal, e lê a linha de cada slug no branch dele, local ou remoto, reconciliando-as pelo slug ([capítulo 14](14-queue-states.md)).
 Uma versão que não pede nada aos seus documentos não relata migração: uma versão que muda só os comandos, como o `/apply` mostrar a sua mensagem de commit também na conversa, não muda mais nada.
 Um docs/05 cujo slot Git escolheu um worktree por entrega e não cita pasta recebe uma migração só quando o projeto já trabalha num contêiner, a pasta que o [capítulo 19](19-worktrees.md) organiza com o checkout e uma pasta oculta para o histórico e os worktrees, e essa pasta oculta guarda `repo.git/`.
 O relatório então propõe escrever ali o nome dessa pasta e o prefixo que os branches das entregas já usam, para que nada mude de lugar.

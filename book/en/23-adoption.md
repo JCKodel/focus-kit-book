@@ -63,7 +63,7 @@ The kit assumes one person in every role ([chapter 20](20-team-tools.md)); a tea
 * **Who decides each commit and merge:** a person, always, by asking, or once in the Git slot, whose word is the asking.
   By default `/apply` stages and stops, and the person uses what it built and reviews it, then commits or merges, or asks the agent to take that one step, and checks what it did; by the Git slot's word, the agent commits, and merges, and the person uses the delivery and reviews the commit or the merge: the review is the human one in every case ([chapter 13](13-apply.md)).
 * **Who reviews the milestone:** the team, on the running product, against the milestone's paragraph; on its word, the code changed since the milestone's base is read by whoever docs/05's Milestone review slot names, when it names anyone, the host's deep review or one read-only agent per area, and either way a checker marks each candidate before the team confirms which are findings ([chapter 15](15-closing-a-milestone.md)).
-* **The manager** asks the project: what is pending and how it is going, read from the queue, on trunk its one file and with a branch or a worktree per delivery each slug's line from its worktree or branch, and who owes an answer ([chapter 17](17-project-as-assistant.md)).
+* **The manager** asks the project: what is pending and how it is going, read from the queue, on trunk its one file and with a branch or a worktree per delivery each slug's line from its branch after `git fetch`, a line whose branch exists counting as taken even before any of its marks is pushed, and who owes an answer ([chapter 17](17-project-as-assistant.md)).
 
 ## One milestone as the pilot
 
