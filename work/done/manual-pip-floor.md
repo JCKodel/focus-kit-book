@@ -36,11 +36,11 @@ Neighbouring lines on the same file: none open. `manual-link-pointers` and `manu
 
 **Done when.**
 
-* [ ] In a scratchpad venv with pip pinned to 23.0, `pip install --dry-run --break-system-packages pypdf` prints `no such option: --break-system-packages`; with pip 23.0.1, the same command prints `Would install pypdf-...`; recorded. (`--dry-run` exists from pip 22.2; `--user` is dropped because a venv refuses it for its own reason; needs network.)
-* [ ] In the pip 23.0 venv, `pip install --dry-run pypdf` prints `Would install pypdf-...`, recorded.
-* [ ] The manual's macOS bullet reads as Contract says; `git diff` of the manual shows only that line changed, recorded.
-* [ ] `make verify` green.
-* [ ] The Delivery review as docs/05 §5 says.
+* [x] In a scratchpad venv with pip pinned to 23.0, `pip install --dry-run --break-system-packages pypdf` prints `no such option: --break-system-packages`; with pip 23.0.1, the same command prints `Would install pypdf-...`; recorded. (`--dry-run` exists from pip 22.2; `--user` is dropped because a venv refuses it for its own reason; needs network.)
+* [x] In the pip 23.0 venv, `pip install --dry-run pypdf` prints `Would install pypdf-...`, recorded.
+* [x] The manual's macOS bullet reads as Contract says; `git diff` of the manual shows only that line changed, recorded.
+* [x] `make verify` green.
+* [x] The Delivery review as docs/05 §5 says.
 
 **Decisions taken alone.**
 
@@ -48,3 +48,50 @@ Neighbouring lines on the same file: none open. `manual-link-pointers` and `manu
 * "Without that flag", not a second full command: the smallest wording; the command the reader just ran is one line above.
 * The 23.0 gap is left out of the manual and stated here from pip's NEWS (23.0 added the refusal, 23.0.1 the flag), with no claim about which Pythons shipped 23.0.
 * The proof uses venvs with pinned pips in the scratchpad: it shows the floor exactly, 23.0 against 23.0.1, without changing this machine's `python3`.
+
+**Proof.**
+
+Two venvs in the session's scratchpad, made from Apple's `/usr/bin/python3` (Python 3.9.6), one with pip pinned to 23.0 and one to 23.0.1:
+
+```
+$ pip --version            # venv with pip 23.0
+pip 23.0 from .../site-packages/pip (python 3.9)
+$ pip install --dry-run --break-system-packages pypdf
+no such option: --break-system-packages
+$ pip install --dry-run pypdf
+Would install pypdf-6.21.1 typing_extensions-4.16.0
+
+$ pip --version            # venv with pip 23.0.1
+pip 23.0.1 from .../site-packages/pip (python 3.9)
+$ pip install --dry-run --break-system-packages pypdf
+Would install pypdf-6.21.1 typing_extensions-4.16.0
+```
+
+After the proof, the machine's `python3 -m pip --version` still prints `pip 26.2.1` (Homebrew's Python 3.14) and `/usr/bin/python3 -m pip --version` still prints `pip 26.0.1`: neither changed.
+
+`git diff HEAD -- docs/manuals/build-the-book-from-a-clone.md` shows one line changed, :15, which now reads:
+
+```
+  * macOS: `brew install pandoc weasyprint` and `python3 -m pip install --user --break-system-packages pypdf`, for the `python3` that `make book` runs; Homebrew's Python refuses a bare `pip install` and has no pypdf formula. If pip answers `no such option: --break-system-packages`, it is older than 23.0.1: run the same command without that flag.
+```
+
+`make verify` green. `make book` is run by the driver once for the batch; this delivery changes nothing it builds.
+
+**Divergences.**
+
+* Done when names "a scratchpad venv" without its Python. The first venvs, made from this machine's `python3` (3.14.8), could not run pip 23.0 or 23.0.1: both stop at `AttributeError: module 'pkgutil' has no attribute 'ImpImporter'`, since that attribute left Python in 3.12. The proof ran on venvs made from Apple's `/usr/bin/python3` 3.9.6 instead, the interpreter the finding names.
+
+**Decisions.**
+
+* The 3.14 failure changes nothing in the manual: it is about running an old pip on a new Python, not about the flag, and the 3.9 venvs show the floor exactly.
+
+**Delivery review.** One read-only Opus agent over this delivery's paths (`git diff HEAD` of the manual and this page against its committed version): nothing breaks the page, docs/04 or the text written. It confirmed :15 matches the Contract word for word and is the only changed line, the rest of the manual stays true, and the Proof reproduces in the same venvs; Apple's `/usr/bin/python3` is not externally managed, so dropping the flag holds there. The Divergence and the Decision are sound and the commit block follows docs/05 §6. Outside the page: nothing. Stylistic notes, kept: the page has both "Decisions taken alone." and "Decisions.", an established pattern; the 26.0.1 pip of `/usr/bin/python3` lives in the user site, not Apple's stock install.
+
+```commit
+docs(manual-pip-floor): say what to run when pip lacks the flag
+
+- macOS pypdf line: a pip older than 23.0.1 answers no such option
+- the manual says to run the same command without the flag
+
+work/done/manual-pip-floor.md
+```
