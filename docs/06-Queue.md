@@ -600,7 +600,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.20 and the reposi
 
 ```
 [x] kit-2026-10-20           reinstall the kit at 2026.10.20 and apply its migration report to docs/05 §§2, 4 and 5 and AGENTS.md · after kit-2026-10-19-2
-[ ] ch08-update-2026-10-20   chapter 8: the update example and its report at 2026.10.20; both editions · after kit-2026-10-20
+[>] ch08-update-2026-10-20   chapter 8: the update example and its report at 2026.10.20; both editions · after kit-2026-10-20
 [ ] ch12-14-17-20-branch-claim chapters 12, 14, 17 and 20: /propose pushes the branch it creates and that branch is the claim of the line; a free line is one with no branch after a fetch, whatever main shows; "where are we" reads the delivery branches; both editions · after kit-2026-10-20
 [ ] m24-review               the review of M24 as docs/05 §8 says · after kit-2026-10-20, ch08-update-2026-10-20, ch12-14-17-20-branch-claim
 ```
