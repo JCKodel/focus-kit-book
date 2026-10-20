@@ -43,7 +43,7 @@ O agente escreve os arquivos do kit como o arquivo de setup os guarda agora, e a
 Ele substitui um arquivo só quando esse arquivo é igual a um que o kit entregou, nesta versão ou numa anterior, e a anterior se confirma pelo histórico do kit, `git show <commit>:SETUP.md` no repositório dele, ou, sem esse histórico à mão, pela sua palavra de que o arquivo nunca foi editado; um nome conhecido ou uma linha `metadata.version` sozinhos não provam isso.
 Um comando seu na pasta de um host, ou uma edição que você fez à mão num dos arquivos do kit, uma linha que você acrescentou ao `.claude/skills/propose/SKILL.md`, por exemplo, faz a atualização parar antes de escrever ou remover qualquer arquivo.
 O agente mostra a sua edição como um diff contra o arquivo do kit em que ela foi feita, e a mudança do próprio kit nesse arquivo desde então à parte e resumida; ele ainda relata as migrações e o próximo comando, e você decide se fica com a sua edição ou a substitui, sabendo que uma regra que a sua edição acrescentou a um comando pode virar um slot do docs/05 §5, que os comandos seguem (capítulo 7).
-Essa verificação foi testada numa cópia dos arquivos do kit do livro, feita fora do repositório do livro: uma linha acrescentada ao `propose/SKILL.md` parou assim a atualização para o focus-kit 2026.10.19.2, e todos os arquivos da cópia ficaram iguais depois.
+Essa verificação foi testada numa cópia dos arquivos do kit do livro, feita fora do repositório do livro: uma linha acrescentada ao `propose/SKILL.md` parou assim a atualização para o focus-kit 2026.10.20, e todos os arquivos da cópia ficaram iguais depois.
 
 ## O que uma atualização relata
 
@@ -53,43 +53,51 @@ Ele compara os arquivos com os seus próprios modelos e relata cada migração, 
 Uma migração pode citar uma regra, uma linha da fila ou um slot.
 As suas escolhas ficam: um docs/05 cujo §5 diz "trunk, uma sessão por vez" vê proposto o texto para duas sessões numa pasta, e mantém o seu até o time aceitar a mudança.
 
-Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.19.2 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro são em inglês, e o relatório propôs o texto em inglês. O registro dessa atualização é o `work/done/kit-2026-10-19-2.md`, no repositório do livro.
+Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.20 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro são em inglês, e o relatório propôs o texto em inglês. O registro dessa atualização é o `work/done/kit-2026-10-20.md`, no repositório do livro.
 
 ```
-Instalado: focus-kit 2026.10.19.2, em cada SKILL.md.
+Instalado: focus-kit 2026.10.20, em cada SKILL.md.
 Migrações de processo pendentes, por documento e seção, encurtadas:
 
 * docs/05, números de seção: batem com o modelo (§4 a fila,
   §5 os slots, §6 commit, §8 fechar um marco). Nenhuma.
-* docs/05 §5, Manuals: não cita o manual de rodá-lo. Proposto,
-  como a primeira frase do slot: "docs/manuals/, um arquivo por
-  ação de mais de um comando, com o nome do que ela faz: rodar o
-  produto a partir de um clone novo, o que uma pessoa faz à mão
-  fora de uma entrega (publicar, desfazer uma versão, trocar um
-  segredo, configurar um serviço) e uma prova que o /apply roda em
-  outra máquina." E, primeiro na lista do slot, o manual de
-  rodá-lo: devido pela primeira entrega depois da qual uma pessoa
-  consegue rodá-lo, de instalar até a primeira tela ou chamada.
-* AGENTS.md, a linha dos manuais: falta rodá-lo. Proposto, com o
-  parêntese deste projeto: "- rodá-lo, e o que uma pessoa faz à
-  mão (publicar, lançar uma versão, a lista de exposição):
-  docs/manuals/"
-* docs/05 §5, Milestone review: uma escolha do projeto, não uma
-  migração, registrada em 2026-10-17. O kit diz que o slot cita
-  quem lê, a revisão profunda do host sobre o intervalo ou os
-  leitores do kit por área; este projeto escolheu os leitores do
-  kit.
+* docs/05 §2: falta "enviar o branch dele". Proposto: "Antes de o
+  /propose mudar a fila ou a página, use a estratégia de git do §5:
+  crie o branch ou o worktree com o nome do slug, envie o branch
+  dele, ou reuse o existente na retomada, trazendo para ele
+  qualquer rascunho deixado para o slug."
+* docs/05 §4, onde um quadro vê uma marca e o branch como
+  reivindicação: não diz que o branch é enviado quando o /propose o
+  cria, nem que uma linha cujo branch existe está tomada. Proposto,
+  de "No trunk o quadro a vê na hora." até o fim do parágrafo, o
+  texto do modelo, que continua: "Com um branch ou um worktree por
+  entrega, a marca mora no branch da entrega, enviado quando o
+  /propose o cria, e o branch principal mostra a linha como estava
+  até o merge: depois de git fetch, uma linha cujo branch existe
+  está tomada, mostre o main o que mostrar", e o resto como o
+  modelo o tem.
+* docs/05 §5, Git: uma escolha do projeto, não uma migração: trunk,
+  ADR-0010, com a Publish policy, o agente nunca envia. O slot
+  do kit oferece, para um branch ou um worktree por entrega, o
+  /propose enviar o branch que cria; no trunk nenhum branch é
+  criado. Nenhuma.
+* AGENTS.md, a linha sobre em que pé as coisas estão: faltam os
+  branches das entregas. Proposto: "- Quando perguntarem em que pé
+  as coisas estão, responda pelo docs/06 e pelo work/, e com um
+  branch ou um worktree por entrega pelos branches das entregas
+  depois de git fetch: as linhas em andamento, as suas marcas e o
+  próximo comando, como este host o invoca."
 
-Os outros itens cobrem o docs/05 §§2 a 4, os outros slots do §5,
-os §§6 a 8, o docs/04 e o docs/06.
-Próximo: /propose ch08-update-2026-10-19-2, quando
-kit-2026-10-19-2 estiver [x].
+Os outros itens cobrem o docs/05 §3, os outros slots do §5, os §§6
+a 8, o docs/04 e o docs/06.
+Próximo: /propose ch08-update-2026-10-20, quando
+kit-2026-10-20 estiver [x].
 ```
 
 Cada item cita um documento e uma seção, e termina num de três resultados.
 Ele bate e não precisa de nada, e diz isso: `Nenhuma`.
-Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra, como no slot Manuals.
-Ou ele difere por uma escolha que o projeto fez e registrou com uma data ou um ADR, como o slot Milestone review do livro: o item cita essa escolha e o que o kit diz ao lado dela, e não pede mudança.
+Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra, como no docs/05 §2.
+Ou ele difere por uma escolha que o projeto fez e registrou com uma data ou um ADR, como o slot Git do livro: o item cita essa escolha e o que o kit diz ao lado dela, e não pede mudança.
 Todo item é relatado, nunca feito: a atualização não escreve nenhum desses documentos.
 
 Os números de seção vêm primeiro porque os comandos citam o docs/05 pelos números do modelo, o §4 para a fila, o §6 para o commit, e leem pelo número; um docs/05 numerado de outro jeito mandaria cada comando para a seção errada, então essa migração vem antes de qualquer outra, diga o que disser um ADR.
