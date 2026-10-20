@@ -589,7 +589,8 @@ When this milestone closes, the book teaches focus-kit 2026.10.19.2 and the repo
 [>] m23-records-crossrefs    the pages of kit-2026-10-19-2, ch08-update-2026-10-19-2, ch10-12-run-manual and ch13-apply-run-manual say that ch10-12-run-manual left chapter 12 untouched and chapter 9 names no file, agree on who set the Portuguese phrase, name no slug that no committed line holds and cite docs/05 §5's lines 250 to 254 · after m23-review
 [ ] m22-records-commits      the pages of ch08-13-17-next-line, ch20-merge-and-marks and ch08-13-20-default-review: each Proof says which commit holds default-review's chapter sentences, and chapter 8 :30's section is "Install" · after m23-review
 [x] manual-link-pointers     docs/manuals/build-the-book-from-a-clone.md and release-the-book.md, scripts/check_links.py, check_examples.py and build_book.py: the link check reads the manuals' URLs, "(see README)" points where the install steps are, and the manuals are named one way · after m23-review
-[>] manual-pypdf-install     docs/manuals/build-the-book-from-a-clone.md: pypdf installed for the `python3` that `make book` runs, which refuses a bare `pip install` on Homebrew · after m23-review
+[x] manual-pypdf-install     docs/manuals/build-the-book-from-a-clone.md: pypdf installed for the `python3` that `make book` runs, which refuses a bare `pip install` on Homebrew · after m23-review
+[ ] manual-pip-floor        docs/manuals/build-the-book-from-a-clone.md: the macOS pypdf line says the pip it needs for `--break-system-packages`, 23.0.1 or later, or gives the command for an older pip · after manual-pypdf-install
 ```
 
 ## M24. focus-kit 2026.10.20

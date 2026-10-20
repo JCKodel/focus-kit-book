@@ -38,12 +38,12 @@ Neighbouring line on the same file: `manual-link-pointers` edits this manual fir
 
 **Done when.**
 
-* [ ] On this machine, `python3 -m pip install --dry-run pypdf` and `python3 -m pip install --dry-run --user pypdf` print `error: externally-managed-environment`, and `python3 -m pip install --dry-run --user --break-system-packages pypdf` prints `Would install pypdf-...`, recorded.
-* [ ] `python3 -c "import pypdf"` exits 0, recorded.
-* [ ] The manual's macOS sentence reads as Contract says; `grep -n "pip install" docs/manuals/build-the-book-from-a-clone.md` prints only that line, recorded.
-* [ ] `make book` prints both PDF paths, recorded.
-* [ ] `make verify` green.
-* [ ] The Delivery review as docs/05 §5 says.
+* [x] On this machine, `python3 -m pip install --dry-run pypdf` and `python3 -m pip install --dry-run --user pypdf` print `error: externally-managed-environment`, and `python3 -m pip install --dry-run --user --break-system-packages pypdf` prints `Would install pypdf-...`, recorded.
+* [x] `python3 -c "import pypdf"` exits 0, recorded.
+* [x] The manual's macOS sentence reads as Contract says; `grep -n "pip install" docs/manuals/build-the-book-from-a-clone.md` prints only that line, recorded.
+* [x] `make book` prints both PDF paths, recorded (run by the driver once for the batch).
+* [x] `make verify` green.
+* [x] The Delivery review as docs/05 §5 says.
 
 **Decisions taken alone.**
 
@@ -53,3 +53,47 @@ Neighbouring line on the same file: `manual-link-pointers` edits this manual fir
 * The manual says why in half a sentence (Homebrew refuses a bare `pip install` and has no formula), so a reader does not "fix" the flag away.
 * The proof is dry runs: pypdf is already installed for this machine's `python3`, and a real install would change the machine.
 * No line added under "What breaks if a step is skipped": the refusal is pip's own message, printed at the step itself, and the pypdf line there already covers a skipped install.
+
+**Proof.**
+
+The `python3` on this machine's `PATH` is `~/.local/bin/python3`, a link to Homebrew's Python 3.14.8 (`sys.prefix` under `/opt/homebrew/opt/python@3.14`).
+
+```
+$ python3 -m pip install --dry-run pypdf
+error: externally-managed-environment
+$ python3 -m pip install --dry-run --user pypdf
+error: externally-managed-environment
+$ python3 -m pip install --dry-run --user --break-system-packages pypdf
+Requirement already satisfied: pypdf in /opt/homebrew/lib/python3.14/site-packages (6.9.2)
+$ python3 -m pip install --dry-run --ignore-installed --user --break-system-packages pypdf
+Would install pypdf-6.21.1
+$ python3 -c "import pypdf"; echo $?
+0
+$ grep -n "pip install" docs/manuals/build-the-book-from-a-clone.md
+15:  * macOS: `brew install pandoc weasyprint` and `python3 -m pip install --user --break-system-packages pypdf`, for the `python3` that `make book` runs; Homebrew's Python refuses a bare `pip install` and has no pypdf formula.
+```
+
+`make verify` green. `make book` is run by the driver once for the batch.
+
+**Divergences.**
+
+* Done when expects `Would install pypdf-...` from the third dry run; pypdf 6.9.2 is already in this `python3`'s site-packages, so pip prints `Requirement already satisfied` instead. The point of the step, that the flag gets past the refusal, holds; the same dry run with `--ignore-installed` added prints `Would install pypdf-6.21.1`, and that flag with `--user` alone still prints `error: externally-managed-environment`.
+
+**Decisions.**
+
+* `--ignore-installed` is used only in the proof, never in the manual: it shows what a machine without pypdf would get, without changing this one.
+
+**Delivery review.** One read-only Opus agent over this delivery's paths (`git diff HEAD` of the manual and this page against its committed version): nothing breaks the page, docs/04 or the text written. It confirmed :15 matches the Contract exactly and is the only changed line, the rest of the manual stays true, the Proof reproduces on this machine, the Divergence is sound and the commit block follows docs/05 §6. It noted the `make book` item is ticked before the driver's batch run; kept, as the batch rules say. Outside the page: Behaviour says the flag "is accepted and changes nothing" on a `python3` that is not externally managed, which holds for pip 23.0.1 or later; an older pip (Apple's `/usr/bin/python3` with its stock pip) rejects `--break-system-packages` as an unknown option. Not reproduced here (this machine's `/usr/bin/python3` has pip 26.0.1); a queue line of its own.
+
+**Noted, not fixed.** The pip 23.0.1 floor of `--break-system-packages`, a queue line of its own.
+
+**Dropped.** Nothing.
+
+```commit
+docs(manual-pypdf-install): install pypdf past Homebrew's refusal
+
+- macOS line uses python3 -m pip install --user --break-system-packages
+- says why: Homebrew's Python refuses bare pip and has no pypdf formula
+
+work/done/manual-pypdf-install.md
+```

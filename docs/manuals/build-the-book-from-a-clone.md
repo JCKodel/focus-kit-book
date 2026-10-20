@@ -12,7 +12,7 @@ Each of the three goals needs only the tools its own step names: the site needs 
 * Python 3 with its `venv` module, and make. On Debian and Ubuntu the module is a package of its own: `sudo apt install python3-venv`.
 * For `make verify`: Node.js 26.12.0 or later, the installer or binary for your system from <https://nodejs.org/dist/v26.12.0/> or, on macOS, `brew install node`.
 * For `make book`: pandoc, weasyprint and pypdf.
-  * macOS: `brew install pandoc weasyprint` and `pip install pypdf`.
+  * macOS: `brew install pandoc weasyprint` and `python3 -m pip install --user --break-system-packages pypdf`, for the `python3` that `make book` runs; Homebrew's Python refuses a bare `pip install` and has no pypdf formula.
   * Debian or Ubuntu: `sudo apt install pandoc weasyprint python3-pypdf`.
 * The network, for the first `make serve`, which installs MkDocs into `.venv/` from `requirements.txt`, and for the link check of `make verify`.
 
