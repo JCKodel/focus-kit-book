@@ -70,16 +70,16 @@
 * [x] Every chapter still opens with its value, its gain section still true, no filler and nothing useful cut; no em dash; no number, version, date, "now", "no longer", "agora", "não mais"; no narrated run.
 * [x] Delivery review as docs/05 §5 says, including that nothing implies an unmerged `[x]` meets an `after`.
 * [x] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver may run it once for the batch).
-* [x] Only this delivery's paths staged (the driver's in this batch); the page moved to `work/done/` and its commit message suggested.
+* [x] This delivery's paths staged by the batch's driver, whose commit `d740cbb` also holds `ch08-13-20-default-review`'s sentences in chapters 8 and 13 (Proof); the page moved to `work/done/` and its commit message suggested.
 
 **Proof.**
 
 * `grep -n` in each edition: chapter 8's new line follows "first free line wants" (en :101) / "primeira linha livre do docs/06 pede" (pt :103); chapter 13's follows the "(chapter 11)" / "(capítulo 11)" line at :28; chapter 17's follows "Every part of it is read from docs/06" / "Cada parte dela é lida do docs/06" at :132.
-* `git diff --stat` of the eight files: 1 insertion in each of chapters 8 and 13, 2 insertions and 1 deletion in chapter 17, 1 insertion and 1 deletion in chapter 23, per edition; 10 insertions and 4 deletions in all.
+* `git diff --stat` of the eight files: 1 insertion in each of chapters 8 and 13, 2 insertions and 1 deletion in chapter 17, 1 insertion and 1 deletion in chapter 23, per edition; 10 insertions and 4 deletions in all. Its commit `d740cbb` also holds `ch08-13-20-default-review`'s sentences in chapter 8 (:30) and chapter 13 (:260), one replaced line in each per edition, so the commit's stat of the eight files reads 2 insertions and 1 deletion in each of chapters 8 and 13, per edition, 14 insertions and 8 deletions in all.
 * `make verify` green after the chapter edits and again after the page moved.
 * `make book` and the two PDF paths: left to the driver, which runs it once for the batch, as Done when allows.
 
-**Divergences.** None: the Contract's wording is in place word for word, and nothing else in the four chapters changed.
+**Divergences.** None in this delivery's text: the Contract's wording is in place word for word, and this delivery changed nothing else in the four chapters. Its commit also carries `ch08-13-20-default-review`'s sentences in chapters 8 and 13, which are that delivery's (Proof).
 
 **Omissions.** None.
 

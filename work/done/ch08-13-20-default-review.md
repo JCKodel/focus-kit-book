@@ -13,7 +13,7 @@
 
 **Contract.** Five sentences in six files. Line numbers are as of this page; this line runs after `ch08-13-17-next-line` and `ch20-merge-and-marks`, which edit the same files, so /apply finds each sentence by its words. Wording is /apply's within the sense given.
 
-1. `book/{en,pt}/08-install-and-hosts.md`:30, section "What the install never touches, and how to update" / "O que a instalação nunca toca, e como atualizar" (candidate 16):
+1. `book/{en,pt}/08-install-and-hosts.md`:30, section "Install" / "Instalação" (candidate 16):
    * en "You read what it wrote and commit it yourself, as by default with every change the agent makes (chapter 13)." becomes "By default you read what it wrote and then commit it, yourself or by asking the agent, as with every change the agent makes (chapter 13)."
    * pt "Você lê o que ela escreveu e faz o commit você mesmo, como por padrão em toda mudança que o agente faz (capítulo 13)." becomes "Por padrão você lê o que ela escreveu e então faz o commit, você mesmo ou pedindo ao agente, como em toda mudança que o agente faz (capítulo 13)."
 2. `book/{en,pt}/13-apply.md`:259, section "What the team gains" / "O que o time ganha" (candidate 4):
@@ -67,11 +67,12 @@ Terms of docs/03 used: delivery, slot (the Git slot, as the chapters already nam
 * [x] No em dash; no "no longer", "now", "não mais", "agora" added; no narrated run.
 * [x] Delivery review as docs/05 §5 says.
 * [x] `make verify` green; `make book` builds both editions and both PDF paths are reported (the driver may run it once for the batch).
-* [x] Only this delivery's paths staged; the page moved to `work/done/` and its commit message suggested.
+* [x] The page moved to `work/done/` and its commit message suggested; its commit `53a82de` holds the page and its docs/06 hunk, and its chapter sentences were committed with `d740cbb` and `9c2e490` (Proof).
 
 **Proof.**
 
 * The five sentences, found by their words, now read as the contract gives them in both editions: chapter 8:30, chapter 13:260 (the page's :259, one line lower after `ch08-13-17-next-line`), chapter 20:11, :35 and :86 (the page's :10, :34 and :85, one line lower after `ch20-merge-and-marks`).
+* The commit `53a82de` holds only this page and its docs/06 hunk: the sentences in chapters 8 and 13 are in `d740cbb` (`ch08-13-17-next-line`), those in chapter 20 in `9c2e490` (`ch20-merge-and-marks`), both editions.
 * The Done when `grep` finds nothing (exit 1).
 * `make verify` green, before and after the delivery review.
 * `make book` left to the driver, which runs it once for the batch.

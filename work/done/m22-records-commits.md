@@ -81,10 +81,35 @@ Exact replacements, each found by its section and quoted text (line numbers are 
 
 **Done when.**
 
-* [ ] The 7 replacements above made word for word, each found by its section and quoted text, and nothing else in the three pages changed (`git diff` of each shows only those lines).
-* [ ] The Contract's git checks rechecked at /apply: the three `--shortstat`/`--stat` results and chapter 8's headings as given.
-* [ ] A search of the three pages finds no "What the install never touches" and no "Only this delivery's paths staged"; `ch20-merge-and-marks`'s Proof still says "three hunks" for its own.
-* [ ] No em dash; no private case, so OD-3 approval is inapplicable.
-* [ ] `make verify` green after the last edit.
-* [ ] Delivery review as docs/05 §5 says: a read-only Opus agent with the session's advisor reads the diff of the three pages and this page against this page, docs/04 and the three commits; its findings fixed or recorded.
-* [ ] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging are the batch driver's steps.
+* [x] The 7 replacements above made word for word, each found by its section and quoted text, and nothing else in the three pages changed (`git diff` of each shows only those lines); two words differ, recorded (Divergences).
+* [x] The Contract's git checks rechecked at /apply: the three `--shortstat`/`--stat` results and chapter 8's headings as given.
+* [x] A search of the three pages finds no "What the install never touches" and no "Only this delivery's paths staged"; `ch20-merge-and-marks`'s Proof still says "three hunks" for its own.
+* [x] No em dash; no private case, so OD-3 approval is inapplicable.
+* [x] `make verify` green after the last edit.
+* [x] Delivery review as docs/05 §5 says: a read-only Opus agent with the session's advisor reads the diff of the three pages and this page against this page, docs/04 and the three commits; its findings fixed or recorded.
+* [x] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging are the batch driver's steps. No chapter changes, so `make book` is the driver's, once for the batch.
+
+**Built.** The 7 replacements, matched by their quoted text; the line numbers at `aa828d6` still held, :67 of `ch20-merge-and-marks` among them after `m23-records-proof`. `git diff HEAD -U0` of the three pages shows 7 hunks (`ch08-13-17-next-line` 3, `ch20-merge-and-marks` 1, `ch08-13-20-default-review` 3), 4 in a plain `git diff HEAD`, 7 lines in and 6 out, nothing else; no item unticked.
+
+**Checked.** At /apply: `git show d740cbb --format= --shortstat -- book/` reads 8 files, 14 insertions, 8 deletions, with 2 and 1 in chapters 8, 13 and 17 and 1 and 1 in chapter 23, per edition; `git show 9c2e490 --format= --shortstat -- book/` reads 2 files, 14 insertions, 12 deletions, 7 and 6 per edition, four hunks per edition at :5, :32, :58 and :83 on the new side, its tree holding the quoted sentences at :11, :35 and :86; `git show 53a82de --format= --stat` lists `docs/06-Queue.md` and `work/done/ch08-13-20-default-review.md` only; chapter 8's `## Install` / `## Instalação` at :12 and the next heading at :35, both editions. The page's search finds no "What the install never touches" and no "Only this delivery's paths staged" in the three pages, and `ch20-merge-and-marks`'s Proof still says "three hunks". No em dash in the three pages.
+
+**Divergences.** Replacement 2 says chapter 13 (:260), not the Contract's :259: in `d740cbb` the sentence is at :260 in both editions, the hunk `@@ -256,7 +257,7 @@` putting :259 on its old side only, after the line the same commit added at :28. `ch08-13-20-default-review`'s Proof already gives :260. The Behaviour's :259 is left as defined. Replacement 4 says the :35 sentence is "the second by position", not "as the fourth": in `git show 9c2e490` it is the second `@@` hunk (`-31,7 +32,7`), as the Contract says, and the same sentence places :11 and :86 by position (delivery review).
+
+**Decisions taken alone in /apply.**
+
+* The chapter 13 line is given as it sits in the committed file, :260, as chapter 20's :11, :35 and :86 are, so each number says what `git show` of the named commit shows.
+
+**Delivery review.** A read-only Opus agent, launched by this lane, read `git diff HEAD` of the three pages and this page against this page, docs/04 and docs/05 §5, and reran the Contract's `git show` checks, chapter 8's headings and the search. It found the 7 replacements in place and the :260 divergence correct, and two findings, both fixed in this delivery: replacement 4's "as the fourth" contradicted the hunk order `git show 9c2e490` gives, and Built counted hunks as `-U0` counts them without saying so. No finding lies outside the page, so no queue line.
+
+**Proof.** `make verify` exited 0 after the 7 replacements, and again after the review's fixes and this page's move.
+
+```commit
+docs(m22-records-commits): three records name the commits holding lines
+
+- ch08-13-17-next-line: d740cbb also holds default-review's ch8, ch13
+- ch20-merge-and-marks: 9c2e490 holds four hunks per edition
+- ch08-13-20-default-review: 53a82de holds the page; ch8 :30 in Install
+- Staging items say what each commit staged
+
+work/done/m22-records-commits.md
+```

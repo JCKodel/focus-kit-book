@@ -64,7 +64,7 @@
 
 **Proof.**
 
-* `git diff HEAD` of chapter 20, each edition: three hunks, the problem section's first line split in two with words unchanged (line 8), the push sentence (line 60) and the board key point (line 87), same lines in both editions.
+* `git diff HEAD` of chapter 20, each edition: three hunks, the problem section's first line split in two with words unchanged (line 8), the push sentence (line 60) and the board key point (line 87), same lines in both editions. Its commit `9c2e490` holds four hunks per edition, 7 insertions and 6 deletions each: these three and `ch08-13-20-default-review`'s sentence at :35, the second by position, with that delivery's :11 and :86 inside the first and last.
 * A search for a sentence end followed by a capital inside one source line finds, in both editions of chapter 20, only line 33's quotation.
 * No em dash, number, footnote, case, version or date added; the opening, the gain section and Case A's sentences are unchanged.
 * `make verify` green after the last edit of the chapters (exit 0).
