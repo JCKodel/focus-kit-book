@@ -49,9 +49,9 @@ The `finding` (:35), `candidate` (:36) and `checker` (:37) rows and §5's Milest
 
 **Done when.**
 
-* [ ] docs/05 §8 and docs/03's `milestone review` row say what the Contract says; no other line of either file changes.
-* [ ] No em dash in the changed text; `make verify` green after the last edit.
-* [ ] Delivery review as docs/05 §5 says; only this delivery's paths and its hunk of docs/06 staged; the page moved to `work/done/` and its commit message suggested.
+* [x] docs/05 §8 and docs/03's `milestone review` row say what the Contract says; no other line of either file changes.
+* [x] No em dash in the changed text; `make verify` green after the last edit.
+* [x] Delivery review as docs/05 §5 says; the page moved to `work/done/` and its commit message suggested; the staging by paths and the docs/06 hunk are the batch driver's steps (`make book` not needed: no chapter changes; the driver runs it once per batch).
 
 **Decisions from the documents.**
 
@@ -66,3 +66,20 @@ The `finding` (:35), `candidate` (:36) and `checker` (:37) rows and §5's Milest
 * A new paragraph, not an edit inside §8's sentences, so the template's lines stay byte for byte and the project's addition is one hunk.
 * Neighbour on the same files: `kit-2026-10-20` (M24) edits docs/05 §§2 and 4 and docs/03's `free line` and `kanban board` and adds `claim` and `remote`; this line comes first in queue order, and its insertion at :392 shifts no line that page or another open page cites. Its page's "docs/05 §§3, 6 to 8 ... match since kit-2026-10-19-2; none" goes stale once this lands: its /apply should report §8's project paragraph as a recorded project choice. That page is M24's and is not edited here.
 * The word is per review, not standing: m23-review's was given "for this batch", and a standing word would retire §8's by-hand test, which only the author can choose.
+* The review's L1 (the word "given in the review's /apply session" is narrower than m23-review's, given to the batch driver for the batch): the batch driver decided the rule must cover the case that prompted it, so docs/05 §8 and the docs/03 row say the word is given for the review, in its session or relayed to it, and quoted on its page. Behaviour bullet 1's "given in that review's session" is left as written and read as including a word relayed to that session. m23-review's "departs from docs/05 §8" stays on its page as history.
+* The review's L2 (one word covers both the tests and the confirmation): kept as one word, as m23-review's was; the Behaviour's "for the confirmation too" reads as that same word.
+
+**Divergences.** One, after the delivery review's L1, at the batch driver's decision: docs/05 §8's first two lines read "On the person's word, given for the review, in its session or relayed / to it, and quoted on its page," in place of the Contract's "given in the review's /apply session and quoted / on its page,"; docs/03's row reads "given for the review in its session or relayed to it and quoted on its page" in place of "quoted on its page". Otherwise both hunks are the Contract's text, at its places.
+
+**Proof.** `git diff HEAD -- docs/05-Process.md docs/03-Domain.md`: docs/05 gains one paragraph of ten lines between :391 and the "Each finding becomes" paragraph, no other line touched; docs/03's :33 row gains the Contract's sentence, as Divergences loosens it, before its closing `|`, Portuguese column unchanged; no em dash in either hunk; `make verify` green after the last edit.
+
+**Delivery review:** a read-only Opus agent over the two files' hunks against this page and docs/04: pass with notes. L1, low, in this delivery's text: fixed at the batch driver's decision (Divergences). L2, low, in this delivery's text, recorded above as a decision for the author. L3, low, §8 now says "the person's word" at :371 (start the reading) and :393 (hand over the tests), a wording risk the paragraph's own qualifier mostly prevents: a stylistic note, no queue line. L4, note: the docs/03 row leaves the PDFs and the dropped list to docs/05 §8, which it cites.
+
+```commit
+docs(docs05-author-word): let the author's word hand a review its tests
+
+- docs/05 §8: on the person's quoted word, the session answers the clause tests and the word confirms seen candidates
+- docs/03 milestone review: the same rule, pointing to docs/05 §8
+
+work/done/docs05-author-word.md
+```

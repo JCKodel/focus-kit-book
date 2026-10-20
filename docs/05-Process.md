@@ -390,6 +390,17 @@ For a milestone of chapters, testing by hand is the author reading, in
 the PDF of both editions, the passages the page names, and answering the
 test the page wrote.
 
+On the person's word, given for the review, in its session or relayed
+to it, and quoted on its page, the review's session may take the tests and the
+confirmation: it answers each clause's test from its own reading of
+the passages the page names, in the PDF of both editions for a
+milestone of chapters, and the word is the person's confirmation of
+each candidate the checker marks seen, the latent and weak ones listed
+on the page as dropped. The page records those answers as the
+review's, never the person's. The word holds for the review whose page
+quotes it; the checker, the range and the `[?]` for paths not read
+stay as above.
+
 Each finding becomes a `[ ]` line in the same milestone, under the review
 line, waiting for /propose. The milestone closes when those lines are
 `[x]`. They get no second review: each one passes through its own page,
