@@ -197,7 +197,8 @@ The project may add slots of its own; a slot that names /propose or
   Green before anything is declared done. Slow tests: none.
 * **Environments:**
   * local: `make serve` for the site, `make book` for PDF and EPUB in
-    `output/` (never committed). A delivery leaves both building.
+    `output/` (never committed). A delivery leaves both building
+    (`docs/manuals/build-the-book-from-a-clone.md`).
   * GitHub Pages: the site from `main`, published by Actions on every
     push. A delivery leaves nothing to do: the author's push publishes
     (`docs/manuals/publish-the-site.md`).
@@ -247,14 +248,20 @@ The project may add slots of its own; a slot that names /propose or
   the recorded runs in `work/done/*-run/` are the history of the book's
   numbers.
 * **Manuals:** `docs/manuals/`, one file per action that takes more than
-  one command: what a person does by hand outside a delivery (publish,
-  roll back, rotate a secret, set up a service) and a proof /apply runs
-  on another machine, named in the documentation language after what it
-  does. Each stands alone for whoever runs it, having read nothing else: what it does and
-  when, what must be in place, the commands in order, how to tell it
-  worked, how to undo it, what breaks if a step is skipped. A slot that
-  names such a command points to its manual instead of holding the steps;
-  a delivery that changes one updates its manual.
+  one command, named after what it does: running the product from a fresh
+  clone, what a person does by hand outside a delivery (publish, roll
+  back, rotate a secret, set up a service) and a proof /apply runs on
+  another machine. Each stands alone for whoever runs it, having read
+  nothing else: what it does and when, what must be in place, the commands
+  in order, how to tell it worked, how to undo it, what breaks if a step
+  is skipped. A slot that names such a command points to its manual
+  instead of holding the steps; a delivery that changes one updates its
+  manual.
+  * `build-the-book-from-a-clone.md`: running the book from a fresh
+    clone, from installing what it needs to the site at
+    `http://127.0.0.1:8000/`, the PDF and EPUB in `output/` and `make
+    verify` green; owed since the book could be built, written by
+    `kit-2026-10-19-2`, updated by every delivery that changes a step.
   * `publish-the-site.md`: the site on GitHub Pages, from a push to `main`.
   * `release-the-book.md`: PDF and EPUB of both editions as a GitHub
     Release, with `make release`.

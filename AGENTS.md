@@ -6,7 +6,7 @@ A free, bilingual book that teaches a team the engineering practices behind the 
 - the product: docs/00 · the vocabulary: docs/03
 - how it is built: docs/01 · the server: docs/02
 - style and tests: docs/04 · process: docs/05 · queue: docs/06
-- what a person does by hand (publish, release, the disclosure list): docs/manuals/
+- running it, and what a person does by hand (publish, release, the disclosure list): docs/manuals/
 
 ## Non-negotiables
 - Nothing private enters the repository: private cases are only Case A and Case B, with no name, place, date of meeting, path or business detail; the disclosure scan is green (docs/03, ADR-0012).

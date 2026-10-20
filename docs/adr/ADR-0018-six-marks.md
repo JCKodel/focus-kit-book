@@ -54,3 +54,7 @@ Since `kit-2026-10-19` the book runs focus-kit 2026.10.19; the six marks are unc
 ## Amendment, 2026-10-19 (kit-2026-10-19-1)
 
 Since `kit-2026-10-19-1` the book runs focus-kit 2026.10.19.1; the six marks are unchanged, and with a branch or a worktree per delivery a mark is read from the slug's own branch or worktree, the main branch showing the line as it was until the merge (docs/05 §4).
+
+## Amendment, 2026-10-20 (kit-2026-10-19-2)
+
+Since `kit-2026-10-19-2` the book runs focus-kit 2026.10.19.2; the six marks are unchanged, and running the product from a fresh clone is a manual always owed, named in docs/05 §5's Manuals slot: here `docs/manuals/build-the-book-from-a-clone.md`.

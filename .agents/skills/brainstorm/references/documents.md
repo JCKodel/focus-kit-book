@@ -60,10 +60,10 @@ queue is edited by conversation in any session; no command owns it.
 decision, the consequences, the date. An ADR is amended, never rewritten.
 
 **docs/manuals/.** One file per action that takes more than one command,
-so it is found by its name and not inside a slot: what a person does by
-hand outside a delivery (publish, roll back, set up a service), and a
-proof /apply runs on another machine. docs/05 §5 says what each one holds. Created with
-the first one; there is no empty folder.
+so it is found by its name and not inside a slot: running the product from
+a fresh clone, what a person does by hand outside a delivery (publish, roll
+back, set up a service), and a proof /apply runs on another machine.
+docs/05 §5 says what each one holds. Created with the first one; there is no empty folder.
 
 **AGENTS.md.** The template below. Read at the start of every session by
 every host in the table of SETUP.md §1, on its own or through the pointer
@@ -350,15 +350,16 @@ The project may add slots of its own; a slot that names /propose or
   branch or worktree, and the files it created, which no diff shows until
   they are staged; or: none>.
 * **Manuals:** `docs/manuals/`, one file per action that takes more than
-  one command: what a person does by hand outside a delivery (publish,
-  roll back, rotate a secret, set up a service) and a proof /apply runs
-  on another machine, named in the documentation language after what it
-  does. Each stands alone for whoever runs it, having read nothing else: what it does and
-  when, what must be in place, the commands in order, how to tell it
-  worked, how to undo it, what breaks if a step is skipped. A slot that
-  names such a command points to its manual instead of holding the steps;
-  a delivery that changes one updates its manual. <The manuals, one line
-  each, or: none yet.>
+  one command, named after what it does: running the product from a fresh
+  clone, what a person does by hand outside a delivery (publish, roll
+  back, rotate a secret, set up a service) and a proof /apply runs on
+  another machine. Each stands alone for whoever runs it, having read
+  nothing else: what it does and when, what must be in place, the commands
+  in order, how to tell it worked, how to undo it, what breaks if a step
+  is skipped. A slot that names such a command points to its manual
+  instead of holding the steps; a delivery that changes one updates its
+  manual. <One line each; running it is owed by the first delivery after
+  which a person can run it, from install to the first screen or call.>
 * **Milestone review:** <who reads the milestone's code in §8: the
   host's deep review the person launches over the range, named with its
   command, when the host has one that takes the whole range; or the
@@ -369,12 +370,11 @@ The project may add slots of its own; a slot that names /propose or
   delivery's page and build are one change: one commit on trunk, one merge
   otherwise. Reverting it undoes what git holds; a delivery that acts
   outside git (a migration run, a message sent) says in its Done when how
-  that is undone, or that it is not. The agent stages; it never commits or merges on its own, and
-  asked, it takes the step the person names. <Or: the agent commits, and
-  merges, by this slot's word, which is the asking; the person reviews
-  the commit.> <With a
-  worktree per delivery: the hidden folder of the container, `.focus-kit/`,
-  and the branch prefix, `focus-kit/`.>
+  that is undone, or that it is not. The agent stages; it never commits or
+  merges on its own, and asked, it takes the step the person names. <Or:
+  the agent commits, and merges, by this slot's word, which is the asking;
+  the person reviews the commit.> <With a worktree per delivery: the hidden
+  folder of the container, `.focus-kit/`, and the branch prefix, `focus-kit/`.>
 
 ## 6. Commit
 
@@ -482,8 +482,8 @@ is the only place a rule is written.
 - the product: docs/00 · the vocabulary: docs/03
 - how it is built: docs/01 · the server: docs/02
 - style and tests: docs/04 · process: docs/05 · queue: docs/06
-- what a person does by hand (publish, roll back): docs/manuals/, when
-  it exists
+- running it, and what a person does by hand (publish, roll back):
+  docs/manuals/, when it exists
 
 ## Non-negotiables
 - <three to six rules that protect what the product is; from docs/00 and

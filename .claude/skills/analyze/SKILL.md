@@ -6,7 +6,7 @@ description: >-
   docs/adr/ and AGENTS.md describing what is there, and asks only what the
   code cannot answer. Writes no code.
 metadata:
-  version: "2026.10.19.1"
+  version: "2026.10.19.2"
 ---
 You are documenting a repository so that every later session can act on it
 without rereading it. Read `references/documents.md` first, whole: it says
@@ -56,10 +56,10 @@ is not asked to settle it now.
 
 In the documentation language: docs/00 to 06 describing what exists, not
 what should exist; docs/adr/ with the decisions the code already embodies
-and the ones this round took, one dated paragraph each; docs/manuals/, one
-manual per thing a person already does by hand (a Makefile target, a
-deploy script, steps in a README), as docs/05 §5 says; `AGENTS.md` from the
-template; `CLAUDE.md` holding the line `@AGENTS.md`; and the folder
+and the ones this round took, one dated paragraph each; docs/manuals/,
+running it first, then one per thing a person already does by hand (a
+Makefile target, a deploy script, steps in a README), as docs/05 §5 says;
+`AGENTS.md` from the template; `CLAUDE.md` holding `@AGENTS.md`; and the folder
 `work/done/` with a `.gitkeep`. The rules live in `AGENTS.md`: what an
 existing `CLAUDE.md`, `.github/copilot-instructions.md` or similar file
 already says moves into it, and that file becomes the import line (or,
