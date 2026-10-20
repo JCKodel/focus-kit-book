@@ -19,7 +19,7 @@ Ele conversa sobre um assunto de cada vez, nesta ordem, e passa ao seguinte quan
 2. **O vocabulário** (docs/03): as dez a vinte palavras sem as quais o produto não pode ser descrito, cada uma com seu nome no código.
 3. **Como ele é construído** (docs/01): a stack e a forma do código, com as duas escolhas do kit, o FOCUS e a estratégia de git, cada uma com a recomendação do agente para essa stack.
 4. **As convenções** (docs/04): a língua da documentação e a língua dos identificadores, o estilo, onde ficam os testes.
-5. **Os slots do processo** (docs/05): o comando de verificação, os ambientes, como uma tela é provada, quando um ambiente além da sua máquina é atualizado, se a pasta `context/` entra no commit, os manuais (o de rodar o produto, devido pela primeira entrega depois da qual uma pessoa consegue rodá-lo; os outros nenhum ainda, em um projeto novo), e se um segundo par de olhos lê cada entrega antes de ela terminar e o marco inteiro quando ele fecha.
+5. **Os slots do processo** (docs/05): o comando de verificação e os testes lentos que ficam fora dele, os ambientes, como uma tela é provada, quando um ambiente além da sua máquina é atualizado, se a pasta `context/` entra no commit, os manuais (o de rodar o produto, devido pela primeira entrega depois da qual uma pessoa consegue rodá-lo; os outros nenhum ainda, em um projeto novo), e se um segundo par de olhos lê cada entrega antes de ela terminar e o marco inteiro quando ele fecha.
 6. **O primeiro marco** (docs/06): de três a oito entregas, uma linha cada, em ordem, e depois a revisão dele; as primeiras são o esqueleto em que as outras se apoiam.
 
 Cada slot que ele escreve no docs/05 diz o que e o comando, em poucas linhas, como diz o próprio docs/05 ([capítulo 7](07-the-documents.md)).
@@ -73,7 +73,7 @@ Ele funciona como o `/brainstorm`, com um padrão em cada pergunta e os mesmos d
 
 Como o arquivo do kit para o comando lista, ele lê a `context/` inteira quando existe (a seção abaixo), o README e qualquer documentação que já exista, os manifestos, a árvore de pastas, os pontos de entrada, os testes e como eles rodam, a configuração de CI e qualquer script que uma pessoa roda à mão, os assuntos dos commits recentes, e qualquer arquivo de regras de agente que já exista, como `CLAUDE.md` ou `.cursorrules`.
 
-A partir disso ele deduz a stack, como o código está organizado, onde moram as regras de negócio, como os erros viajam, o comando de verificação e os ambientes, e marca cada item como observado.
+A partir disso ele deduz a stack, como o código está organizado, onde moram as regras de negócio, como os erros viajam, o comando de verificação, quais testes são lentos o bastante para ficar fora dele, e os ambientes, e marca cada item como observado.
 O que o projeto não tem, ele pula.
 
 ### O que ele pergunta

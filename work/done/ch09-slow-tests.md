@@ -31,11 +31,11 @@
 
 **Done when.**
 
-* [ ] Chapter 9 changed in both editions as the Contract says, same headings; it still opens with its value; no filler and nothing useful cut.
-* [ ] No sentence in chapter 9 lists `/brainstorm`'s process slots or `/analyze`'s inferences with the verify command and without the slow tests.
-* [ ] No numbers, no history of the kit, no run narrated; no em dash.
-* [ ] `make verify` green; `make book` built both PDFs, their paths given to the author.
-* [ ] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging by paths and hunk are the driver's steps.
+* [x] Chapter 9 changed in both editions as the Contract says, same headings; it still opens with its value; no filler and nothing useful cut.
+* [x] No sentence in chapter 9 lists `/brainstorm`'s process slots or `/analyze`'s inferences with the verify command and without the slow tests.
+* [x] No numbers, no history of the kit, no run narrated; no em dash.
+* [x] `make verify` green; `make book` built both PDFs, their paths given to the author (`make book` run by the batch driver).
+* [x] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging by paths and hunk are the driver's steps.
 
 **Decisions taken from the documents.**
 
@@ -47,3 +47,18 @@
 * `/analyze`'s "What it reads" (:76) is included: the same omission against its skill ("which tests are slow enough to leave out of it"), a sibling sentence the review did not cite and no other line owns. The author may drop it in review; the line's wording would then stay as is.
 * The queue line's wording is unchanged; it names `/brainstorm` only, and the `/analyze` sentence is recorded here as the sibling.
 * :38's example is left as it is (Out of scope).
+
+**Divergences.** None: the four lines are the Contract's.
+
+**Proof.** `grep -n "verify command\|comando de verifica" book/*/09-starting-a-project.md` prints :22, :38 and :76 in each edition; :22 and :76 name the slow tests, :38 is the example the page leaves out of scope; pt :22 keeps "devido pela"; `make verify` green after the last edit; `make book` run by the batch driver.
+
+**Delivery review:** a read-only Opus agent over the two chapter files against this page and docs/04: no findings. Two stylistic notes, no change: en :76 "which tests are slow enough to leave out of it" could for a moment read as describing the verify command (the Contract's wording, reads correctly as a list item); :76 now has ", and the environments, and it marks", the second "and" there before this delivery.
+
+```commit
+docs(ch09-slow-tests): name the slow tests beside the verify command
+
+- en/pt 09: /brainstorm's process slots include the slow tests kept out of verify
+- en/pt 09: /analyze infers which tests are slow enough to leave out of verify
+
+work/done/ch09-slow-tests.md
+```
