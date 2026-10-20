@@ -73,12 +73,29 @@ Neighbour: `m23-records-crossrefs` also edits this file, at lines 3 and 37, and 
 * The second list's heading is "The project's other dispositions", the line's own words.
 * Step 5's "those above" is changed as a sibling sentence that would go stale once the list splits; no other line touches it.
 * The Contract's line 15 stays: it is the plan, and its "dispositions of the step 4 report" holds once a disposition is read as what the report led to.
+* /apply, resumed in a fresh session after the first was stopped mid-run (docs/05 §4): the record's uncommitted hunks it found in the tree are this delivery's, checked against the Contract word for word, and kept as they were.
 
 **Done when.**
 
-* [ ] The three replacements above made word for word, and `git diff` of `work/done/kit-2026-10-19-2.md` shows only those lines.
-* [ ] The new step 4 list matches chapter 8's excerpt item for item in both editions, which stay unchanged.
-* [ ] No Done when item of the record unticked; no em dash; no private case, so OD-3 approval is inapplicable.
-* [ ] `make verify` green after the last edit.
-* [ ] Delivery review as docs/05 §5 says: one read-only agent on Opus with the session's advisor reads `git diff HEAD` of the record and this page against this page and docs/04.
-* [ ] The page moved to `work/done/` and its commit message suggested; the staging and the queue's marks are the driver's in this batch.
+* [x] The three replacements above made word for word, and `git diff` of `work/done/kit-2026-10-19-2.md` shows only those lines.
+* [x] The new step 4 list matches chapter 8's excerpt item for item in both editions, which stay unchanged.
+* [x] No Done when item of the record unticked; no em dash; no private case, so OD-3 approval is inapplicable.
+* [x] `make verify` green after the last edit.
+* [x] Delivery review as docs/05 §5 says: one read-only agent on Opus with the session's advisor reads `git diff HEAD` of the record and this page against this page and docs/04.
+* [x] The page moved to `work/done/` and its commit message suggested; the staging and the queue's marks are the driver's in this batch.
+
+**Divergences.** `make book` is not run: the batch's lane rules leave it to the driver, and no chapter changes. docs/06 is the driver's in this batch: it marks the line `[x]`. The staging and the commit are the driver's too: this session staged nothing.
+
+**Proof.** `git diff HEAD -- work/done/kit-2026-10-19-2.md` shows two hunks, :9 and :75 to :96: replacement 1 in the Behaviour line, its Step 5 sentence kept; replacement 2, five items under step 4 and six under "The project's other dispositions"; replacement 3 in Step 5. Lines 3 and 37 are untouched. Chapter 8's excerpt, en :60 to :84 and pt likewise, is unchanged and names Manuals, AGENTS.md, Milestone review as a project choice and "the other items" for §§2 to 4, the other slots of §5, §§6 to 8, docs/04 and docs/06, the new step 4 list item for item. No em dash in the record or this page. `make verify` green after the last edit: build, parity, em dash, prose, width, examples, links and disclosure.
+
+**Delivery review.** One read-only Opus agent read `git diff HEAD` of the record and this page against this page and docs/04, with SETUP.md and CHANGELOG.md at the kit's `44132c4` and chapter 8 in both editions. No findings: the three replacements word for word and nothing else, the step 4 list exactly what SETUP's step 4 checks, the changelog crediting only the AGENTS.md echo, chapter 8's excerpt agreeing item for item, and the record's :46 agreeing with the Environments item's new place. No new queue line.
+
+```commit
+docs(kit-record-step4): split the record's step 4 report from the rest
+
+- kit-2026-10-19-2's step 4 report holds only what SETUP's step 4 checks
+- the project's other dispositions, the Environments pointer included, apart
+- the changelog credited only with the AGENTS.md echo; Step 5 points to step 4
+
+work/done/kit-record-step4.md
+```
