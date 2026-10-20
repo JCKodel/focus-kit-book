@@ -81,7 +81,7 @@ Pending process migrations, by document and section, shortened:
 
 The other items cover docs/05 §§2 to 4, the other slots of §5,
 §§6 to 8, docs/04 and docs/06.
-Next: /propose ch08-update-2026-10-19-2, the queue's first free line.
+Next: /propose ch08-update-2026-10-19-2, once kit-2026-10-19-2 is [x].
 ```
 
 Each item names a document and a section, and ends in one of three outcomes.

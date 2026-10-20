@@ -82,8 +82,8 @@ Migrações de processo pendentes, por documento e seção, encurtadas:
 
 Os outros itens cobrem o docs/05 §§2 a 4, os outros slots do §5,
 os §§6 a 8, o docs/04 e o docs/06.
-Próximo: /propose ch08-update-2026-10-19-2, a primeira linha livre
-da fila.
+Próximo: /propose ch08-update-2026-10-19-2, quando
+kit-2026-10-19-2 estiver [x].
 ```
 
 Cada item cita um documento e uma seção, e termina num de três resultados.

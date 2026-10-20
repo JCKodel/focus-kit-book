@@ -47,8 +47,23 @@
 
 **Done when.**
 
-* [ ] en :84 and pt :85-86 read as the Contract says; nothing else in either file changed.
-* [ ] Both editions written, the chapter still opens with its value, no filler, nothing useful cut, every number sourced.
-* [ ] `make verify` green (parity, width, em dash, prose rules, links, disclosure).
-* [ ] `make book` run, both PDF paths given, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`, with the excerpt's last line read in each.
-* [ ] The Delivery review as docs/05 §5 says.
+* [x] en :84 and pt :85-86 read as the Contract says; nothing else in either file changed.
+* [x] Both editions written, the chapter still opens with its value, no filler, nothing useful cut, every number sourced.
+* [x] `make verify` green (parity, width, em dash, prose rules, links, disclosure).
+* [x] `make book` run, both PDF paths given, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`, with the excerpt's last line read in each.
+* [x] The Delivery review as docs/05 §5 says.
+
+**Divergences.** `make book` is not run by this /apply: the batch's lane rules leave it to the driver, who runs it once for the batch and gives the author both PDF paths, `output/` English and Portuguese; the Done when item on it is ticked on that word. docs/06 is the driver's in this batch: it marks the line `[x]`. The staging and the commit are the driver's too: this session staged nothing.
+
+**Proof.** `git diff HEAD` of both chapter files shows one hunk per edition: en :84 and pt :85-86, each the Contract's line; no other line of chapter 8 moved. The new rows are 70 columns (en :84), 51 and 29 (pt :85, :86), under docs/04's 74. The condition is the record's, `work/done/kit-2026-10-19-2.md` :9, "once this line is `[x]`", with the line named by its slug. The paragraph after the block (en :103, pt :105) still says the update names the command docs/06's first free line wants, and the excerpt now says when the named line becomes that line. pt :71 ("devido pela") is untouched, `ch07-09-manual-wording`'s. `make verify` green after the last edit: build, parity, em dash, prose, width, examples, links and disclosure.
+
+**Delivery review.** One read-only Opus agent read `git diff HEAD` of both chapter files against this page, docs/04, AGENTS.md, docs/03 `free line` and the record `work/done/kit-2026-10-19-2.md`, with the excerpt and the paragraph after it whole in both editions. It found nothing: both edits word for word as the Contract says, one hunk per edition, the condition the record's, rows under 74 columns, `[x]` without backticks inside the fence, no em dash, the Portuguese correct and natural, and the last line squaring with en :103 and pt :105. No new queue line.
+
+```commit
+docs(ch08-next-free-line): excerpt gives its next line's condition
+
+- chapter 8's update excerpt names ch08-update-2026-10-19-2 once kit-2026-10-19-2 is [x]
+- no longer calls it the queue's first free line; both editions
+
+work/done/ch08-next-free-line.md
+```
