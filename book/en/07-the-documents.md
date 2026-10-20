@@ -99,7 +99,7 @@ Running a product is assembled over several deliveries, each adding a step, and 
 In the lending library, written for this chapter, the first delivery, `skeleton`, which builds the empty app and server, writes `docs/manuals/run-the-app-from-a-clone.md`; a later delivery that adds a database started before the server updates it in the same delivery, and one that adds a refusal to `lend-book` leaves it as it is.
 The second is done by a person, by hand, outside any delivery: publishing the app, rolling back a release, rotating a secret, setting up a service.
 The third is a proof `/apply` runs on another machine: in the lending library's docs/05, written for this chapter, the Proof of a screen slot names the command that proves a screen and points to `docs/manuals/prove-on-the-test-server.md`, where `/apply` finds the steps to publish a preview to the test server and run the end-to-end tests there.
-Each of these gets a manual, one file in `docs/manuals/`, named in the documentation language after what it does, so whoever needs it finds it by its name.
+Each of these gets a manual, one file in `docs/manuals/`, named after what it does, so whoever needs it finds it by its name.
 A manual stands alone for whoever runs it, having read nothing else, and holds six things, as the kit's docs/05 says: what it does and when, what must be in place, the commands in order, how to tell it worked, how to undo it, and what breaks if a step is skipped.
 The slot says what and the command, and the manual holds the steps for whoever runs them.
 A single command, such as the one that verifies a delivery, needs no manual: it stays in its slot.

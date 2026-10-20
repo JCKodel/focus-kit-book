@@ -49,13 +49,13 @@
 
 **Done when.**
 
-* [ ] The five lines changed as the Contract says, chapter 7 in both editions and pt 09; same headings; each chapter still opens with its value; no filler and nothing useful cut.
-* [ ] `grep -n "língua da documentação" book/pt/07-the-documents.md` prints only :16 and :46; `grep -n "documentation language" book/en/07-the-documents.md` prints only :16 and :45.
-* [ ] `grep -n "a cargo da" book/pt/0[789]-*.md` prints nothing.
-* [ ] No numbers, no history of the kit, no run narrated; no em dash.
-* [ ] `make verify` green; `make book` built both PDFs, their paths given to the author.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging by paths and hunk are the driver's steps.
+* [x] The five lines changed as the Contract says, chapter 7 in both editions and pt 09; same headings; each chapter still opens with its value; no filler and nothing useful cut.
+* [x] `grep -n "língua da documentação" book/pt/07-the-documents.md` prints only :16 and :46; `grep -n "documentation language" book/en/07-the-documents.md` prints only :16 and :45.
+* [x] `grep -n "a cargo da" book/pt/0[789]-*.md` prints nothing.
+* [x] No numbers, no history of the kit, no run narrated; no em dash.
+* [x] `make verify` green; `make book` built both PDFs, their paths given to the author (`make book` run by the batch driver).
+* [x] Delivery review as docs/05 §5 says.
+* [x] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging by paths and hunk are the driver's steps.
 
 **Decisions taken from the documents.**
 
@@ -67,3 +67,19 @@
 * The phrase is "devido pela", not "a cargo da": "devido" is already the word at five of the seven places (pt 07:109, :173, :181; pt 08:71; pt 09:122), "devido por" is idiomatic Portuguese for owed by ("o valor devido pelo cliente"), and pt 08:71 sits inside a fenced block of the update excerpt, which the M24-and-later `ch08-update-*` lines rewrite; standardizing on it changes only two prose lines of chapter 9. No kit wording decides it: the kit's README.pt.md fixed "o manual de rodá-lo" (`work/done/ch13-apply-run-manual.md` :18), not the verb.
 * pt 07:17 keeps its purpose, telling the Portuguese reader once that the kit's folders stay in English, and its example; only the claim that the files inside take the documentation language goes, replaced by the manual's naming rule. The example stays in Portuguese because the Portuguese edition's example names are Portuguese (docs/04).
 * Chapter 8 and the English chapter 9 need no change; the queue line's wording could say "chapters 7 and 9", left to the driver.
+
+**Divergences.** None: the five lines are the Contract's.
+
+**Proof.** The three Done-when greps print what they say (pt 07 :16 and :46; en 07 :16 and :45; no "a cargo da" in pt 07 to 09); `make verify` green after the last edit; `make book` run by the batch driver.
+
+**Delivery review:** a read-only Opus agent over the three chapter files against this page and docs/04: no findings; one stylistic note (pt 07:17 "tem o nome do que faz" beside pt 07:103 "com o nome do que ele faz"), both correct, no change.
+
+```commit
+docs(ch07-09-manual-wording): name a manual after what it does
+
+- en/pt 07: a manual is named after what it does, no language rule
+- pt 07: the files inside the kit's folders do not stay in English
+- pt 09: the run manual is "devido pela" first delivery, as ch 8 says
+
+work/done/ch07-09-manual-wording.md
+```

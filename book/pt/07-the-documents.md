@@ -14,7 +14,7 @@ No Ninjobs uma decisão morava em seis lugares, e mantê-los em acordo custava m
 Cada fato do projeto mora em um lugar, e o agente o lê ali.
 O focus-kit dá a esses lugares uma forma fixa: sete documentos numerados, docs/00 a docs/06; uma pasta de decisões, `docs/adr/`; uma pasta de manuais, `docs/manuals/`, um para cada ação de mais de um comando: rodar o produto a partir de um clone novo, uma feita à mão fora de uma entrega, ou uma prova que o `/apply` roda em outra máquina; o arquivo de regras, `AGENTS.md`; e `work/`, que guarda uma página por entrega.
 Os números são fixos porque os comandos os citam; o nome depois do número fica na língua da documentação, `00-Product.md` num projeto documentado em inglês e `00-Produto.md` num documentado em português.
-As pastas `docs/`, `docs/adr/`, `docs/manuals/`, `work/` e `work/done/` (onde fica a página de uma entrega feita) ficam em inglês em todo projeto, como o kit as escreve; os arquivos dentro delas levam a língua da documentação, como `docs/manuals/publicar-o-app.md`.
+As pastas `docs/`, `docs/adr/`, `docs/manuals/`, `work/` e `work/done/` (onde fica a página de uma entrega feita) ficam em inglês em todo projeto, como o kit as escreve; os arquivos dentro delas, não: um manual tem o nome do que faz, como `docs/manuals/publicar-o-app.md`.
 O `/brainstorm`, que define um projeto novo numa conversa, ou o `/analyze`, que lê um repositório existente, os escreve uma vez; o `/propose` e o `/apply` os leem antes de agir.
 
 Um agente responde a partir do que está na sua janela, então o que importa é qual texto chega até ela.
@@ -100,7 +100,7 @@ Rodar um produto se monta ao longo de várias entregas, cada uma acrescentando u
 Na biblioteca de empréstimos, escrita para este capítulo, a primeira entrega, o `esqueleto`, que constrói o app e o servidor vazios, escreve `docs/manuals/rodar-o-app-de-um-clone.md`; uma entrega posterior que acrescenta um banco de dados iniciado antes do servidor o atualiza na mesma entrega, e uma que acrescenta uma recusa ao `emprestar-livro` o deixa como está.
 O segundo é feito por uma pessoa, à mão, fora de qualquer entrega: publicar o app, desfazer uma versão publicada, trocar um segredo, configurar um serviço.
 O terceiro é uma prova que o `/apply` roda em outra máquina: no docs/05 da biblioteca de empréstimos, escrito para este capítulo, o slot Proof of a screen (prova de uma tela) cita o comando que prova uma tela e aponta para `docs/manuals/provar-no-servidor-de-teste.md`, onde o `/apply` encontra os passos para publicar uma prévia no servidor de teste e rodar ali os testes ponta a ponta.
-Cada uma dessas ações ganha um manual, um arquivo em `docs/manuals/`, com o nome na língua da documentação dizendo o que ele faz, para que quem precisa dele o encontre pelo nome.
+Cada uma dessas ações ganha um manual, um arquivo em `docs/manuals/`, com o nome do que ele faz, para que quem precisa dele o encontre pelo nome.
 Um manual se sustenta sozinho para quem o executa, sem ter lido mais nada, e guarda seis coisas, como diz o docs/05 do kit: o que ele faz e quando, o que precisa estar pronto antes, os comandos em ordem, como saber que deu certo, como desfazer, e o que quebra se um passo for pulado.
 O slot diz o que e o comando, e o manual guarda os passos para quem os executa.
 Um comando sozinho, como o que faz a verificação de uma entrega, não precisa de manual: ele fica no seu slot.

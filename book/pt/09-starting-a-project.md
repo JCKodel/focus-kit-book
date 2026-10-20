@@ -19,7 +19,7 @@ Ele conversa sobre um assunto de cada vez, nesta ordem, e passa ao seguinte quan
 2. **O vocabulário** (docs/03): as dez a vinte palavras sem as quais o produto não pode ser descrito, cada uma com seu nome no código.
 3. **Como ele é construído** (docs/01): a stack e a forma do código, com as duas escolhas do kit, o FOCUS e a estratégia de git, cada uma com a recomendação do agente para essa stack.
 4. **As convenções** (docs/04): a língua da documentação e a língua dos identificadores, o estilo, onde ficam os testes.
-5. **Os slots do processo** (docs/05): o comando de verificação, os ambientes, como uma tela é provada, quando um ambiente além da sua máquina é atualizado, se a pasta `context/` entra no commit, os manuais (o de rodar o produto, a cargo da primeira entrega depois da qual uma pessoa consegue rodá-lo; os outros nenhum ainda, em um projeto novo), e se um segundo par de olhos lê cada entrega antes de ela terminar e o marco inteiro quando ele fecha.
+5. **Os slots do processo** (docs/05): o comando de verificação, os ambientes, como uma tela é provada, quando um ambiente além da sua máquina é atualizado, se a pasta `context/` entra no commit, os manuais (o de rodar o produto, devido pela primeira entrega depois da qual uma pessoa consegue rodá-lo; os outros nenhum ainda, em um projeto novo), e se um segundo par de olhos lê cada entrega antes de ela terminar e o marco inteiro quando ele fecha.
 6. **O primeiro marco** (docs/06): de três a oito entregas, uma linha cada, em ordem, e depois a revisão dele; as primeiras são o esqueleto em que as outras se apoiam.
 
 Cada slot que ele escreve no docs/05 diz o que e o comando, em poucas linhas, como diz o próprio docs/05 ([capítulo 7](07-the-documents.md)).
@@ -59,7 +59,7 @@ Uma stack em que um erro só aparece em tempo de execução, em uma tela, deixa 
 
 Quando os seis assuntos estão cobertos, o `/brainstorm` escreve o docs/00 a 06, um ADR para cada decisão que uma sessão futura poderia desfazer (a stack, FOCUS ou não, o git, qualquer coisa em que você hesitou), o `AGENTS.md`, o `CLAUDE.md` com a linha `@AGENTS.md`, e uma `work/done/` com um `.gitkeep`, para que a pasta sobreviva a um clone.
 Ele não escreve manual, e a `docs/manuals/` é criada com o primeiro.
-O slot Manuals (manuais) nomeia o manual de rodar o produto como devido, a cargo da primeira entrega depois da qual uma pessoa consegue rodá-lo, de instalar o que ele precisa até a primeira tela ou chamada; os outros vêm com a entrega que acrescenta algo que uma pessoa faz à mão ou uma prova que o `/apply` roda em outra máquina.
+O slot Manuals (manuais) nomeia o manual de rodar o produto como devido pela primeira entrega depois da qual uma pessoa consegue rodá-lo, de instalar o que ele precisa até a primeira tela ou chamada; os outros vêm com a entrega que acrescenta algo que uma pessoa faz à mão ou uma prova que o `/apply` roda em outra máquina.
 O primeiro marco, no docs/06, é um parágrafo que uma pessoa consegue conferir quando o marco fecha e as linhas dele, o esqueleto primeiro; o [capítulo 11](11-queue-and-milestones.md) mostra o da biblioteca de empréstimos e ensina a fila.
 Depois ele mostra a fila e para.
 Ele não escreve código, nem configuração, nem arquivo de dependências: a primeira entrega faz isso, com uma página própria, pelo `/propose` em uma sessão nova ([capítulo 12](12-propose.md)).
