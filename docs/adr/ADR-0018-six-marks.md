@@ -58,3 +58,7 @@ Since `kit-2026-10-19-1` the book runs focus-kit 2026.10.19.1; the six marks are
 ## Amendment, 2026-10-20 (kit-2026-10-19-2)
 
 Since `kit-2026-10-19-2` the book runs focus-kit 2026.10.19.2; the six marks are unchanged, and running the product from a fresh clone is a manual always owed, named in docs/05 §5's Manuals slot: here `docs/manuals/build-the-book-from-a-clone.md`.
+
+## Amendment, 2026-10-20 (kit-2026-10-20)
+
+Since `kit-2026-10-20` the book runs focus-kit 2026.10.20; the six marks are unchanged, and with a branch or a worktree per delivery the delivery's branch, pushed by /propose when it creates it, is the claim of its line: after `git fetch` a line whose branch exists is taken, whatever the main branch's queue shows (docs/05 §4). The book stays on trunk, where no delivery branch is created and the agent never pushes (ADR-0010, docs/05 §5).

@@ -30,9 +30,9 @@ holds, or in a fresh one. /apply always starts in a fresh session: it
 has only what the page says.
 
 Before /propose changes the queue or the page, use §5's git strategy:
-create the branch or worktree named after the slug, or reuse its existing
-one on resumption, bringing into it any draft left for the slug. Add a
-missing queue line where it belongs and say so.
+create the branch or worktree named after the slug, push its branch, or
+reuse its existing one on resumption, bringing into it any draft left
+for the slug. Add a missing queue line where it belongs and say so.
 Start defining with `[~]`; start building only a completely defined `[>]`
 page, with `[*]`. Follow §4 for blocked lines and §6 before changing code
 or staging. Keep project slots and rules current before using them; report
@@ -117,12 +117,13 @@ queue shows what is happening while it happens:
 A board may read the queue, and people pull work from it, so a mark
 changes at once: `[~]` is /propose's first edit, `[*]` is /apply's first,
 and `[x]` is /apply's last. On trunk the board sees it at once. With a
-branch or a worktree per delivery the mark lives on the delivery's branch
-and the main branch shows the line as it was until the merge, so whoever
-reads the queue there, a board or a session picking free lines or
-resolving an `after`, takes each slug's line from its worktree's file,
-or from its branch, local or remote, and the lines only a branch has,
-reconciled by slug as below. Without a board the marks cost nothing.
+branch or a worktree per delivery the mark lives on the delivery's
+branch, pushed when /propose creates it, and the main branch shows the
+line as it was until the merge: after `git fetch`, a line whose branch
+exists is taken, whatever main shows, and whoever reads the queue there,
+a board or a session picking free lines or resolving an `after`, takes
+each slug's line from that branch, local or remote, and the lines only a
+branch has, reconciled by slug as below.
 
 A line waits in four cases: the person says it is blocked; it needs an
 answer that was asked and not given; work already started finds it needs
@@ -152,10 +153,11 @@ undone; a line whose `after` names it is the person's to re-decide.
 These are the marks of focus-kit 2026.10.05, the fourth case a line
 waits in is that of 2026.10.18, and the ended and dropped lines are
 those of 2026.10.18.1, where a board sees a mark is that of
-2026.10.19, and how the queue is read with a branch or a worktree per
-delivery is that of 2026.10.19.1 (ADR-0018 and its amendments
-`kit-2026-10-18`, `kit-2026-10-18-1`, `kit-2026-10-19` and
-`kit-2026-10-19-1`).
+2026.10.19, how the queue is read with a branch or a worktree per
+delivery is that of 2026.10.19.1, and the branch as the claim of its
+line is that of 2026.10.20 (ADR-0018 and its amendments
+`kit-2026-10-18`, `kit-2026-10-18-1`, `kit-2026-10-19`,
+`kit-2026-10-19-1` and `kit-2026-10-20`).
 
 Two sessions in one working tree, on free lines that touch different
 files, are the normal case of parallel work on trunk. Another line

@@ -6,7 +6,7 @@ description: >-
   Writes no code, migration or test.
 argument-hint: <slug>
 metadata:
-  version: "2026.10.19.2"
+  version: "2026.10.20"
 ---
 You are the stakeholder's thinking partner. The slug is `$ARGUMENTS`; when
 there is none, ask for it.
@@ -17,8 +17,8 @@ Do not start a blocked line until its recorded reason is resolved, nor a
 line whose `after` is not done; a `[~]` line is resumed only on the
 person's word that its session ended (docs/05 §4). Otherwise follow
 docs/05 §§2, 4 and 5 first: start or resume the definition in the right
-branch or worktree, a worktree where docs/05's Git slot puts it and
-reused when it exists; then your first edit there marks the line `[~]`.
+branch or worktree, a worktree where docs/05's Git slot puts it, reused
+when it exists, its branch pushed; your first edit there marks it `[~]`.
 Follow every slot of docs/05 §5 that names this command, the project's
 own included. Another line changing mark meanwhile is another session's
 work.
