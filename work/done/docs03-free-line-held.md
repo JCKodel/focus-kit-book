@@ -44,20 +44,29 @@
 
 **Done when.**
 
-* [ ] docs/03 :115 reads as the Contract says, and no other row changes.
-* [ ] The row agrees with chapter 14 en :185 and pt :186 on the next delivery.
-* [ ] No em dash; no version, date or before/after in the row.
-* [ ] `make verify` green after the last edit, its result recorded in this page's Proof.
-* [ ] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
+* [x] docs/03 :115 reads as the Contract says, and no other row changes.
+* [x] The row agrees with chapter 14 en :185 and pt :186 on the next delivery.
+* [x] No em dash; no version, date or before/after in the row.
+* [x] `make verify` green after the last edit, its result recorded in this page's Proof.
+* [x] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
 
 **Proof.**
 
+* `git diff HEAD -- docs/03-Domain.md`: one line changed, :115, the clause "the first one in the queue that no session holds is the next delivery,"; the rest of the row as the Contract quotes it.
+* Chapter 14 en :71 and :185 say "the first free line no session holds"; pt :72 and :186 say "a primeira linha livre que nenhuma sessão pegou": the row names the same next delivery.
+* `make verify` after the last edit: exit 0 (build, parity, em dash, prose, width, examples, links, disclosure).
+* `make book` after the last verify: exit 0; `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
 **Divergences.**
+
+* The commit subject the page proposed ran 86 characters; it is shortened to fit 72, same meaning.
 
 **Delivery review.**
 
+One read-only Opus agent read `git diff HEAD -- docs/03-Domain.md` against this page, docs/04 and chapter 14 en :71, :185 and pt :72, :186. Verdict: clean, no findings. It confirmed the only change is :115, the term, pt name and code column unchanged, no other row changed, the row agrees with chapter 14 on the next delivery, and no em dash, version, date or before/after.
+
 ```commit
-docs(docs03-free-line-held): the next delivery is the first free line no session holds
+docs(docs03-free-line-held): a held free line is not the next delivery
 
 - docs/03: `free line` says the next delivery is the first free line no
   session holds, as chapter 14 says
