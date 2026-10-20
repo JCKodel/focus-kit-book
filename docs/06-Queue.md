@@ -565,3 +565,37 @@ When this milestone closes, the book teaches focus-kit 2026.10.19.1 and the repo
 [x] readme-make-list         README.md and README.pt.md: the `make` bullet matches the eight targets `make` prints · after m22-review
 [x] docs06-m21-opening       docs/06: M21's paragraph says the kit was planted after the opening, as chapter 6 says · after m22-review, ch08-13-17-next-line, ch20-merge-and-marks, ch08-13-20-default-review, ch14-face-retired, docs05-dependency-merged, kit-note-work-in-flight, m22-batch-proof, readme-make-list
 ```
+
+## M23. focus-kit 2026.10.19.2
+
+When this milestone closes, the book teaches focus-kit 2026.10.19.2 and the repository runs on it: running the product from a fresh clone is a manual always owed, named in the Manuals slot from `/brainstorm`, written first by `/analyze` on an existing repository, written by the first delivery after which a person can run it and updated by every delivery that changes a step.
+
+```
+[ ] kit-2026-10-19-2         reinstall the kit at 2026.10.19.2 and apply its migration report to docs/05 §5, AGENTS.md and docs/manuals/ · after docs06-m21-opening
+[ ] ch08-update-2026-10-19-2 chapter 8: the update example and its report at 2026.10.19.2; both editions · after kit-2026-10-19-2
+[ ] ch10-12-run-manual       chapters 10 and 12: the manual of running it, always owed, named in the Manuals slot by /brainstorm, written by the first delivery after which a person can run the product and updated by the deliveries that change a step; both editions · after kit-2026-10-19-2
+[ ] ch13-apply-run-manual    chapter 13: /apply's next steps, use the delivery as its user, are the conversation's; the manual of running it is what survives it; both editions · after kit-2026-10-19-2
+[ ] m23-review               the review of M23 as docs/05 §8 says · after kit-2026-10-19-2, ch08-update-2026-10-19-2, ch10-12-run-manual, ch13-apply-run-manual
+```
+
+## M24. focus-kit 2026.10.20
+
+When this milestone closes, the book teaches focus-kit 2026.10.20 and the repository runs on it: with a branch or a worktree per delivery the branch is the claim of the line, pushed by /propose the moment it is created, so a line whose branch exists on the remote is taken whatever the main branch's queue shows, and the main branch's queue changes only through merges.
+
+```
+[ ] kit-2026-10-20           reinstall the kit at 2026.10.20 and apply its migration report to docs/05 §§2, 4 and 5 and AGENTS.md · after kit-2026-10-19-2
+[ ] ch08-update-2026-10-20   chapter 8: the update example and its report at 2026.10.20; both editions · after kit-2026-10-20
+[ ] ch12-14-17-20-branch-claim chapters 12, 14, 17 and 20: /propose pushes the branch it creates and that branch is the claim of the line; a free line is one with no branch after a fetch, whatever main shows; "where are we" reads the delivery branches; both editions · after kit-2026-10-20
+[ ] m24-review               the review of M24 as docs/05 §8 says · after kit-2026-10-20, ch08-update-2026-10-20, ch12-14-17-20-branch-claim
+```
+
+## M25. focus-kit 2026.10.20.1
+
+When this milestone closes, the book teaches focus-kit 2026.10.20.1 and the repository runs on it: a queue line may carry `(PA)` after the slug, saying whether its /propose and its /apply may run while the lines above it are in flight, `-` waiting for them to be `[>]` or `[x]`; whoever changes the queue re-judges the tokens, and /propose and /apply wait as the token says.
+
+```
+[ ] kit-2026-10-20-1         reinstall the kit at 2026.10.20.1 and apply its migration report to docs/05 §4 · after kit-2026-10-20
+[ ] ch08-update-2026-10-20-1 chapter 8: the update example and its report at 2026.10.20.1; both editions · after kit-2026-10-20-1
+[ ] ch12-14-parallel-token   chapters 12, 13 and 14: the `(PA)` token, what each letter lets run and what `-` waits for, who re-judges it, and /propose and /apply waiting as it says; both editions · after kit-2026-10-20-1
+[ ] m25-review               the review of M25 as docs/05 §8 says · after kit-2026-10-20-1, ch08-update-2026-10-20-1, ch12-14-parallel-token
+```
