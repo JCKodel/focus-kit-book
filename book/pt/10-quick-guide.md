@@ -63,7 +63,7 @@ O [capítulo 18](18-git-essentials.md) e o [capítulo 19](19-worktrees.md) ensin
    Você vê uma página em que cada linha de Comportamento pode ser conferida, cujo Fora do escopo nomeia o que você supunha que entrava, e nenhuma pergunta em aberto.
    Ensinado no [capítulo 12](12-propose.md), "Leia a página antes do `/apply`".
 6. Abra uma sessão nova, nunca a que rodou o `/propose`, porque a página precisa bastar sozinha, e digite `/apply <slug>`.
-   Você vê a verificação verde, a página movida para `work/done/`, a linha dela marcada `[x]`, a entrega em stage, a mensagem sugerida num bloco `commit`, na página e na conversa, e os seus próximos passos, começando por usar o que a entrega mudou.
+   Você vê a verificação verde, a página movida para `work/done/`, a linha dela marcada `[x]`, a entrega em stage, a mensagem sugerida num bloco `commit`, na página e na conversa, e os seus próximos passos, começando por usar o que a entrega mudou; quando a entrega é a primeira depois da qual uma pessoa consegue rodar o produto, como o esqueleto, também o manual de rodá-lo em `docs/manuals/`.
    Ensinado no [capítulo 13](13-apply.md), "O que o `/apply` faz".
 7. Use o que a entrega construiu como o usuário dela usaria, no ambiente que a última frase do `/apply` nomeia: para a `emprestar-livro` do capítulo 12, empreste um exemplar e tente cada recusa que a página dela lista; para um documento, abra o que ele gera e leia, sem tela nenhuma a inventar.
    Depois leia a mudança em stage com `git diff --staged` contra a página, e peça ao agente cada correção na mesma sessão.
@@ -84,7 +84,7 @@ Um projeto deixado depois do passo 3 está pronto para o kit: qualquer sessão p
    Você vê uma pasta ao lado do código, sem nada ordenado nem resumido.
    Ensinado no [capítulo 17](17-project-as-assistant.md), "A pasta de contexto".
 3. Abra uma sessão nova, não a que rodou a instalação, digite `/analyze` e responda à única rodada dele; cada padrão é o que o código já faz.
-   Você vê a mudança mostrada antes de ser escrita, depois os documentos do passo 2 do projeto novo, um manual em `docs/manuals/` para cada coisa que uma pessoa já faz à mão, cada afirmação deduzida marcada como observada, e o agente nomeando o `/propose <slug>`.
+   Você vê a mudança mostrada antes de ser escrita, depois os documentos do passo 2 do projeto novo, o manual de rodar o produto a partir de um clone novo e um para cada coisa que uma pessoa já faz à mão, em `docs/manuals/`, cada afirmação deduzida marcada como observada, e o agente nomeando o `/propose <slug>`.
    Ensinado no [capítulo 9](09-starting-a-project.md), "`/analyze`: um projeto existente".
 4. Confira cada afirmação observada contra o código, abrindo o arquivo que ela cita, e então revise e faça o commit como no passo 3 do projeto novo, colocando em stage pelo nome só o que a instalação e o `/analyze` escreveram, a partir de uma árvore sem mudança sua, com `/analyze` na mensagem.
    Você vê um commit com os documentos, o `AGENTS.md`, o `CLAUDE.md` e os arquivos do kit nas pastas do host, e nada do seu código.

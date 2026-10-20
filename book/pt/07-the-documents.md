@@ -12,7 +12,7 @@ No Ninjobs uma decisão morava em seis lugares, e mantê-los em acordo custava m
 ## Um lugar para cada fato
 
 Cada fato do projeto mora em um lugar, e o agente o lê ali.
-O focus-kit dá a esses lugares uma forma fixa: sete documentos numerados, docs/00 a docs/06; uma pasta de decisões, `docs/adr/`; uma pasta de manuais, `docs/manuals/`, um para cada ação de mais de um comando, feita à mão fora de uma entrega ou uma prova que o `/apply` roda em outra máquina; o arquivo de regras, `AGENTS.md`; e `work/`, que guarda uma página por entrega.
+O focus-kit dá a esses lugares uma forma fixa: sete documentos numerados, docs/00 a docs/06; uma pasta de decisões, `docs/adr/`; uma pasta de manuais, `docs/manuals/`, um para cada ação de mais de um comando: rodar o produto a partir de um clone novo, uma feita à mão fora de uma entrega, ou uma prova que o `/apply` roda em outra máquina; o arquivo de regras, `AGENTS.md`; e `work/`, que guarda uma página por entrega.
 Os números são fixos porque os comandos os citam; o nome depois do número fica na língua da documentação, `00-Product.md` num projeto documentado em inglês e `00-Produto.md` num documentado em português.
 As pastas `docs/`, `docs/adr/`, `docs/manuals/`, `work/` e `work/done/` (onde fica a página de uma entrega feita) ficam em inglês em todo projeto, como o kit as escreve; os arquivos dentro delas levam a língua da documentação, como `docs/manuals/publicar-o-app.md`.
 O `/brainstorm`, que define um projeto novo numa conversa, ou o `/analyze`, que lê um repositório existente, os escreve uma vez; o `/propose` e o `/apply` os leem antes de agir.
@@ -94,17 +94,20 @@ A próxima pessoa que quiser mudá-la de novo lê por que ela era assim, e pesa 
 
 ## Manuais
 
-Parte do trabalho de um projeto é uma ação de mais de um comando, de dois tipos.
-Um é feito por uma pessoa, à mão, fora de qualquer entrega: publicar o app, desfazer uma versão publicada, trocar um segredo, configurar um serviço.
-O outro é uma prova que o `/apply` roda em outra máquina: no docs/05 da biblioteca de empréstimos, escrito para este capítulo, o slot Proof of a screen (prova de uma tela) cita o comando que prova uma tela e aponta para `docs/manuals/provar-no-servidor-de-teste.md`, onde o `/apply` encontra os passos para publicar uma prévia no servidor de teste e rodar ali os testes ponta a ponta.
+Parte do trabalho de um projeto é uma ação de mais de um comando, de três tipos.
+O primeiro é rodar o produto a partir de um clone novo, de instalar o que ele precisa até a primeira tela ou chamada, e todo projeto o deve.
+Rodar um produto se monta ao longo de várias entregas, cada uma acrescentando um passo, e o que o `/apply` diz sobre usar uma entrega fica na conversa dele; então, desde o início, o slot Manuals (manuais) do docs/05 nomeia o manual de rodá-lo, a primeira entrega depois da qual uma pessoa consegue rodar o produto o escreve, e toda entrega que muda um passo o atualiza.
+Na biblioteca de empréstimos, escrita para este capítulo, a primeira entrega, o `esqueleto`, que constrói o app e o servidor vazios, escreve `docs/manuals/rodar-o-app-de-um-clone.md`; uma entrega posterior que acrescenta um banco de dados iniciado antes do servidor o atualiza na mesma entrega, e uma que acrescenta uma recusa ao `emprestar-livro` o deixa como está.
+O segundo é feito por uma pessoa, à mão, fora de qualquer entrega: publicar o app, desfazer uma versão publicada, trocar um segredo, configurar um serviço.
+O terceiro é uma prova que o `/apply` roda em outra máquina: no docs/05 da biblioteca de empréstimos, escrito para este capítulo, o slot Proof of a screen (prova de uma tela) cita o comando que prova uma tela e aponta para `docs/manuals/provar-no-servidor-de-teste.md`, onde o `/apply` encontra os passos para publicar uma prévia no servidor de teste e rodar ali os testes ponta a ponta.
 Cada uma dessas ações ganha um manual, um arquivo em `docs/manuals/`, com o nome na língua da documentação dizendo o que ele faz, para que quem precisa dele o encontre pelo nome.
 Um manual se sustenta sozinho para quem o executa, sem ter lido mais nada, e guarda seis coisas, como diz o docs/05 do kit: o que ele faz e quando, o que precisa estar pronto antes, os comandos em ordem, como saber que deu certo, como desfazer, e o que quebra se um passo for pulado.
 O slot diz o que e o comando, e o manual guarda os passos para quem os executa.
 Um comando sozinho, como o que faz a verificação de uma entrega, não precisa de manual: ele fica no seu slot.
 
 No mesmo docs/05, o slot Environments (ambientes) cita o comando que publica o app e aponta para `docs/manuals/publicar-o-app.md`; os passos moram só ali.
-O `/analyze` escreve os manuais do que um repositório já faz à mão, o `/apply` escreve ou atualiza um quando uma entrega acrescenta ou muda uma dessas coisas, e o `/brainstorm` não escreve nenhum.
-A pasta é criada com o primeiro manual, então não há pasta vazia, e o `AGENTS.md` aponta para ela.
+O `/analyze` escreve primeiro o manual de rodar o produto, depois os do que um repositório já faz à mão; o `/apply` escreve ou atualiza um quando uma entrega acrescenta ou muda uma dessas coisas; e o `/brainstorm` não escreve nenhum, e nomeia no slot o manual de rodá-lo como devido.
+A pasta é criada com o primeiro manual, então não há pasta vazia, e o `AGENTS.md` aponta para ela, para rodar o produto e para o que se faz à mão.
 
 ## AGENTS.md
 
@@ -134,7 +137,7 @@ Um fato novo tem um dono, e você o encontra fazendo estas perguntas em ordem; a
    docs/04.
 6. É um fato deste projeto que os comandos leem: o comando de verificação, os ambientes, se a pasta `context/` entra no commit, como uma entrega e um marco são revisados, o git?
    Um slot do docs/05, o que e o comando, em poucas linhas.
-7. São os passos que uma pessoa segue à mão fora de uma entrega (publicar, desfazer uma versão, trocar um segredo, configurar um serviço), ou os de uma prova que o `/apply` roda em outra máquina?
+7. É como rodar o produto a partir de um clone novo, os passos que uma pessoa segue à mão fora de uma entrega (publicar, desfazer uma versão, trocar um segredo, configurar um serviço), ou os de uma prova que o `/apply` roda em outra máquina?
    Um manual em `docs/manuals/`, com o slot guardando o comando e apontando para ele.
 8. É trabalho a fazer?
    O docs/06 guarda a sua linha, e a página em `work/` guarda a entrega.
@@ -167,6 +170,7 @@ O docs/00 da biblioteca lista as multas por devolução atrasada como em aberto,
 A mesma resposta em toda sessão e para toda pessoa: um desenvolvedor, um gestor e um agente numa sessão nova que perguntam o prazo de empréstimo leem uma linha em um documento.
 Com um lugar para cada fato, uma mudança é escrita uma vez e toda sessão seguinte a lê, onde no Ninjobs toda entrega pagava para manter em acordo as seis cópias de uma decisão.
 Um manual põe os passos que uma pessoa segue à mão onde essa pessoa os procura, num arquivo que se encontra pelo nome, e tira os passos de uma prova do slot que todo `/apply` lê antes da sua primeira edição.
+O manual de rodar o produto, devido desde o início, deixa uma pessoa rodar o que um marco construiu sem as conversas das entregas que lhe acrescentaram, cada uma, um passo.
 Um passo do próprio time, como atualizar o seu quadro, mora no docs/05 dele e sobrevive a toda atualização dos comandos do kit, já que uma atualização escreve só os arquivos do kit e para, sem escrever nada, diante de um que tenha uma edição que ela não reconhece.
 O que mais valorizo: toda sessão e toda pessoa recuperam um fato do mesmo lugar, e, em outro projeto do focus-kit, do mesmo número.
 
@@ -174,7 +178,7 @@ O que mais valorizo: toda sessão e toda pessoa recuperam um fato do mesmo lugar
 
 * Cada fato mora em um lugar: sete documentos numerados, `docs/adr/`, `docs/manuals/`, `AGENTS.md` e `work/`; o docs/00 é o produto e as suas decisões em aberto, o docs/01 e o docs/02 como ele é construído, o docs/03 o vocabulário, o docs/04 as convenções, o docs/05 o processo com os slots do projeto, cada um o que e o comando, os dez do kit e os que o projeto acrescenta e os comandos seguem, o docs/06 a fila, cujas regras estão escritas uma vez no docs/05 §4, com números fixos porque os comandos os citam, os mesmos em todo projeto.
 * As duas escolhas, a arquitetura (o FOCUS inteiro, os dois princípios, nenhum) e o git (trunk, um branch ou um worktree por entrega), ficam registradas no docs/01 e no docs/05, cada uma com um ADR que é emendado, nunca reescrito; o método funciona do mesmo jeito com qualquer uma delas.
-* Uma ação de mais de um comando, feita à mão fora de uma entrega ou uma prova que o `/apply` roda em outra máquina, tem um manual em `docs/manuals/`, para quem o executa, sem ter lido mais nada; o slot guarda o comando e aponta para ele, o `/analyze` e o `/apply` escrevem os manuais, o `/brainstorm` nenhum.
+* Rodar o produto a partir de um clone novo é o manual que todo projeto deve, escrito pela primeira entrega depois da qual uma pessoa consegue rodá-lo; uma ação de mais de um comando feita à mão fora de uma entrega, ou uma prova que o `/apply` roda em outra máquina, também tem o seu, em `docs/manuals/`, para quem o executa, sem ter lido mais nada; o slot guarda o comando e aponta para ele, o `/analyze` escreve primeiro o manual de rodá-lo, o `/apply` escreve ou atualiza um, e o `/brainstorm` não escreve nenhum e nomeia o de rodá-lo como devido.
 * Um fato novo vai para o primeiro documento cuja pergunta servir; uma frase pode guardar vários fatos, cada um com o seu dono, e o `AGENTS.md` só aponta para eles, e diz ao agente para responder o que uma entrega decidiu a partir da sua página e dos ADRs.
 * Você muda os documentos conversando com o agente, e interpreta, guia e valida o que ele escreve; uma decisão em aberto o faz parar e perguntar.
 

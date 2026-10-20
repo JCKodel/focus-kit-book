@@ -63,7 +63,7 @@ One choice is yours before the first `/propose`: the git strategy, trunk, a bran
    You see a page whose every Behaviour line can be checked, whose Out of scope names what you assumed was in, and no question left open.
    Taught in [chapter 12](12-propose.md), "Read the page before `/apply`".
 6. Open a fresh session, never the one that ran `/propose`, because the page must stand alone, and type `/apply <slug>`.
-   You see verify green, the page moved to `work/done/`, its line marked `[x]`, the delivery staged, the suggested message in a `commit` block, on the page and in the conversation, and your next steps, starting with using what the delivery changed.
+   You see verify green, the page moved to `work/done/`, its line marked `[x]`, the delivery staged, the suggested message in a `commit` block, on the page and in the conversation, and your next steps, starting with using what the delivery changed; when the delivery is the first after which a person can run the product, such as the skeleton, also the manual of running it in `docs/manuals/`.
    Taught in [chapter 13](13-apply.md), "What `/apply` does".
 7. Use what the delivery built as its user would, in the environment `/apply`'s last sentence names: for chapter 12's `lend-book`, lend a copy and try each refusal its page lists; for a document, open what it renders and read it, with no screen to invent.
    Then read the staged change with `git diff --staged` against the page, and ask the agent for every correction in the same session.
@@ -84,7 +84,7 @@ A project left after step 3 is ready for the kit: any later session reads its do
    You see one folder beside the code, with nothing sorted or summarized.
    Taught in [chapter 17](17-project-as-assistant.md), "The context folder".
 3. Open a fresh session, not the one that ran the install, and type `/analyze`, then answer its one round; each default is what the code already does.
-   You see the change shown before it is written, then the documents of the new project's step 2, a manual in `docs/manuals/` for each thing a person already does by hand, every inferred statement marked observed, and the agent naming `/propose <slug>`.
+   You see the change shown before it is written, then the documents of the new project's step 2, the manual of running the product from a fresh clone and one for each thing a person already does by hand, in `docs/manuals/`, every inferred statement marked observed, and the agent naming `/propose <slug>`.
    Taught in [chapter 9](09-starting-a-project.md), "`/analyze`: an existing project".
 4. Check every observed statement against the code, opening the file it names, then review and commit them as in the new project's step 3, staging by name only what the install and `/analyze` wrote, from a tree with no change of yours, with `/analyze` in the message.
    You see one commit holding the documents, `AGENTS.md`, `CLAUDE.md` and the kit's files in the host's folders, and none of your code.

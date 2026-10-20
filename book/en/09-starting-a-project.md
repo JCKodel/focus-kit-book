@@ -19,7 +19,7 @@ It talks one subject at a time, in this order, and moves on when it could write 
 2. **The vocabulary** (docs/03): the ten to twenty words the product cannot be described without, each with its name in code.
 3. **How it is built** (docs/01): the stack and the shape of the code, with the kit's two choices, FOCUS and the git strategy, each with the agent's recommendation for this stack.
 4. **The conventions** (docs/04): the documentation language and the identifier language, the style, where tests live.
-5. **The process slots** (docs/05): the verify command, the environments, how a screen is proven, when an environment beyond your machine is updated, whether `context/` is committed, the manuals (none yet, on a new project), and whether a second pair of eyes reads each delivery before it ends and the whole milestone at its close.
+5. **The process slots** (docs/05): the verify command, the environments, how a screen is proven, when an environment beyond your machine is updated, whether `context/` is committed, the manuals (the one of running the product, owed by the first delivery after which a person can run it; the rest none yet, on a new project), and whether a second pair of eyes reads each delivery before it ends and the whole milestone at its close.
 6. **The first milestone** (docs/06): three to eight deliveries, one line each, in order, then its review; the first ones are the skeleton the others stand on.
 
 Each slot it writes in docs/05 says what and the command, in a few lines, as docs/05 itself says ([chapter 7](07-the-documents.md)).
@@ -58,7 +58,8 @@ A stack where a mistake shows only at run time, on a screen, leaves that check t
 ### What it writes, and where it stops
 
 When the six subjects are covered, `/brainstorm` writes docs/00 to 06, one ADR for each decision a later session might undo (the stack, FOCUS or not, git, anything you hesitated on), `AGENTS.md`, `CLAUDE.md` holding the line `@AGENTS.md`, and `work/done/` with a `.gitkeep`, so the folder survives a clone.
-It writes no manual: `docs/manuals/` is created with the first one, by the delivery that adds something a person does by hand or a proof `/apply` runs on another machine.
+It writes no manual, and `docs/manuals/` is created with the first one.
+The Manuals slot names the manual of running the product as owed by the first delivery after which a person can run it, from installing what it needs to the first screen or call; the others come with the delivery that adds something a person does by hand or a proof `/apply` runs on another machine.
 Its first milestone, in docs/06, is a paragraph a person can check when the milestone closes and its lines, the skeleton first; [chapter 11](11-queue-and-milestones.md) shows the lending library's and teaches the queue.
 Then it shows the queue and stops.
 It writes no code, no configuration and no dependency file: the first delivery does that, with a page of its own, through `/propose` in a fresh session ([chapter 12](12-propose.md)).
@@ -87,7 +88,7 @@ One round, of six subjects only:
 6. The first milestone: three to eight deliveries, or where to read them from (issues, a TODO file, a roadmap), then its review.
 
 A rules file already there does not stay beside `AGENTS.md`: its rules move into `AGENTS.md`, and the file keeps only the line that imports it and what applies to its host alone.
-It writes the same documents as `/brainstorm`, plus a manual in `docs/manuals/` for each thing a person already does by hand there, such as a Makefile target, a deploy script or setup steps in a README, as the kit's file for the command says.
+It writes the same documents as `/brainstorm`, plus, in `docs/manuals/`, the manual of running the product from a fresh clone first, then one for each thing a person already does by hand there, such as a Makefile target, a deploy script or setup steps in a README, as the kit's file for the command says.
 The documents describe what exists, not what should exist.
 The agent shows the change before it writes, and it changes no code.
 
@@ -118,6 +119,7 @@ Check that:
 * every default the agent kept is one you accept knowingly; each one you reject is a correction now, before a delivery builds on it;
 * every ADR records a decision you took, or says it was the agent's call;
 * every slot of docs/05 says what and the command, with no steps and no pasted output; the steps are in a manual;
+* the Manuals slot names the manual of running the product: owed, and by which delivery, on a new project; written, in `docs/manuals/`, on an existing one;
 * on an existing project, every observed statement is true in the code (open the file it names), every open question is a contradiction the code really holds, and nothing describes what should exist instead of what does;
 * on an existing project, a person who read nothing else can follow every manual, and every command a manual gives exists in the repository.
 
@@ -136,7 +138,7 @@ The team starts its first delivery with the product, the vocabulary, the decisio
 * `/brainstorm` talks through six subjects in order (product, vocabulary, how it is built, conventions, process slots, first milestone) and writes the documents, the ADRs, `AGENTS.md` and `CLAUDE.md`, never code; the first delivery writes the code.
 * Every question comes with a default, so "your call" is a valid answer, and you check each default the agent kept.
 * Choose a stack by what the project needs, then by how much public code the agent learned from, then by whether types and tests let it check its own work.
-* `/analyze` reads the repository first, asks one round and writes a manual for each thing a person already does by hand; the default of each choice is what the code does, a contradiction becomes an open question, and legacy code can move to FOCUS as a strangler fig.
+* `/analyze` reads the repository first, asks one round and writes the manual of running the product first, then one for each thing a person already does by hand; the default of each choice is what the code does, a contradiction becomes an open question, and legacy code can move to FOCUS as a strangler fig.
 * Review before you commit, against your answers and against the code, and ask the agent for every fix.
 
 [^octoverse]: GitHub, "Octoverse: A new developer joins GitHub every second as AI leads TypeScript to #1", 2025, the latest report on 2026-09-28: monthly contributors on GitHub, August 2025. <https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/>

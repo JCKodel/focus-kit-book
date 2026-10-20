@@ -12,7 +12,7 @@ On Ninjobs a decision lived in six places, and keeping them in step cost more th
 ## One place per fact
 
 Each fact of the project lives in one place, and the agent reads it there.
-focus-kit gives those places a fixed shape: seven numbered documents, docs/00 to docs/06; a folder of decisions, `docs/adr/`; a folder of manuals, `docs/manuals/`, one per action of more than one command, done by hand outside a delivery or a proof `/apply` runs on another machine; the rules file, `AGENTS.md`; and `work/`, which holds one page per delivery.
+focus-kit gives those places a fixed shape: seven numbered documents, docs/00 to docs/06; a folder of decisions, `docs/adr/`; a folder of manuals, `docs/manuals/`, one per action of more than one command: running the product from a fresh clone, one done by hand outside a delivery, or a proof `/apply` runs on another machine; the rules file, `AGENTS.md`; and `work/`, which holds one page per delivery.
 The numbers are fixed because the commands cite them; the name after the number is in the documentation language, `00-Product.md` in a project documented in English and `00-Produto.md` in one documented in Portuguese.
 `/brainstorm`, which defines a new project by conversation, or `/analyze`, which reads an existing repository, writes them once; `/propose` and `/apply` read them before they act.
 
@@ -93,17 +93,20 @@ The next person who wants to change it again reads why it was so, and weighs the
 
 ## Manuals
 
-Some of a project's work is an action of more than one command, of two kinds.
-One is done by a person, by hand, outside any delivery: publishing the app, rolling back a release, rotating a secret, setting up a service.
-The other is a proof `/apply` runs on another machine: in the lending library's docs/05, written for this chapter, the Proof of a screen slot names the command that proves a screen and points to `docs/manuals/prove-on-the-test-server.md`, where `/apply` finds the steps to publish a preview to the test server and run the end-to-end tests there.
+Some of a project's work is an action of more than one command, of three kinds.
+The first is running the product from a fresh clone, from installing what it needs to the first screen or call, and every project owes it.
+Running a product is assembled over several deliveries, each adding a step, and what `/apply` says about using a delivery stays in its conversation; so, from the start, the Manuals slot of docs/05 names the manual of running it, the first delivery after which a person can run the product writes it, and every delivery that changes a step updates it.
+In the lending library, written for this chapter, the first delivery, `skeleton`, which builds the empty app and server, writes `docs/manuals/run-the-app-from-a-clone.md`; a later delivery that adds a database started before the server updates it in the same delivery, and one that adds a refusal to `lend-book` leaves it as it is.
+The second is done by a person, by hand, outside any delivery: publishing the app, rolling back a release, rotating a secret, setting up a service.
+The third is a proof `/apply` runs on another machine: in the lending library's docs/05, written for this chapter, the Proof of a screen slot names the command that proves a screen and points to `docs/manuals/prove-on-the-test-server.md`, where `/apply` finds the steps to publish a preview to the test server and run the end-to-end tests there.
 Each of these gets a manual, one file in `docs/manuals/`, named in the documentation language after what it does, so whoever needs it finds it by its name.
 A manual stands alone for whoever runs it, having read nothing else, and holds six things, as the kit's docs/05 says: what it does and when, what must be in place, the commands in order, how to tell it worked, how to undo it, and what breaks if a step is skipped.
 The slot says what and the command, and the manual holds the steps for whoever runs them.
 A single command, such as the one that verifies a delivery, needs no manual: it stays in its slot.
 
 In the same docs/05, the Environments slot names the command that publishes the app and points to `docs/manuals/publish-the-app.md`; the steps live only there.
-`/analyze` writes the manuals for what a repository already does by hand, `/apply` writes or updates one when a delivery adds or changes it, and `/brainstorm` writes none.
-The folder is created with the first manual, so there is no empty folder, and `AGENTS.md` points to it.
+`/analyze` writes the manual of running the product first, then those of what a repository already does by hand; `/apply` writes or updates one when a delivery adds or changes it; and `/brainstorm` writes none, and names the manual of running it as owed in the slot.
+The folder is created with the first manual, so there is no empty folder, and `AGENTS.md` points to it for running the product and for what is done by hand.
 
 ## AGENTS.md
 
@@ -133,7 +136,7 @@ A new fact has one owner, and you find it by asking these questions in order; th
    docs/04.
 6. Is it a fact of this project that the commands read: the verify command, the environments, whether `context/` is committed, how a delivery and a milestone are reviewed, git?
    A slot of docs/05, what and the command, in a few lines.
-7. Is it the steps a person follows by hand outside a delivery (publish, roll back, rotate a secret, set up a service), or those of a proof `/apply` runs on another machine?
+7. Is it how to run the product from a fresh clone, the steps a person follows by hand outside a delivery (publish, roll back, rotate a secret, set up a service), or those of a proof `/apply` runs on another machine?
    A manual in `docs/manuals/`, the slot keeping the command and pointing to it.
 8. Is it work to do?
    docs/06 holds its line, and the page in `work/` holds the delivery.
@@ -166,6 +169,7 @@ The library's docs/00 lists fines for late returns as open, so a page that touch
 The same answer in every session and for every person: a developer, a manager and a fresh agent who ask the loan period read one line in one document.
 With one place per fact, a change is written once and every later session reads it, where on Ninjobs every delivery paid to keep a decision's six copies in step.
 A manual puts the steps a person follows by hand where that person looks for them, in a file found by its name, and keeps a proof's steps out of the slot every `/apply` reads before its first edit.
+The manual of running the product, owed from the start, lets a person run what a milestone built without the conversations of the deliveries that each added a step to it.
 A team's own step, such as refreshing its board, lives in its own docs/05 and survives every update of the kit's commands, since an update writes only the kit's files and stops, writing nothing, on one that holds an edit it does not recognize.
 What I value most: every session and every person retrieves a fact from the same place, and in another focus-kit project from the same number.
 
@@ -173,7 +177,7 @@ What I value most: every session and every person retrieves a fact from the same
 
 * Each fact lives in one place: seven numbered documents, `docs/adr/`, `docs/manuals/`, `AGENTS.md` and `work/`; docs/00 is the product and its open decisions, docs/01 and docs/02 how it is built, docs/03 the vocabulary, docs/04 the conventions, docs/05 the process with the project's slots, each what and the command, the kit's ten and any the project adds that the commands follow, docs/06 the queue, whose rules are written once in docs/05 §4, with numbers fixed because the commands cite them, the same in every project.
 * The two choices, the architecture (FOCUS whole, the two principles, neither) and git (trunk, a branch or a worktree per delivery), are recorded in docs/01 and docs/05, each with an ADR that is amended, never rewritten; the method works the same under any of them.
-* An action of more than one command, done by hand outside a delivery or a proof `/apply` runs on another machine, has a manual in `docs/manuals/`, for whoever runs it, having read nothing else; the slot keeps the command and points to it, `/analyze` and `/apply` write the manuals, `/brainstorm` none.
+* Running the product from a fresh clone is the manual every project owes, written by the first delivery after which a person can run it; an action of more than one command done by hand outside a delivery, or a proof `/apply` runs on another machine, has one too, in `docs/manuals/`, for whoever runs it, having read nothing else; the slot keeps the command and points to it, `/analyze` writes the manual of running it first, `/apply` writes or updates one, and `/brainstorm` writes none and names the one of running it as owed.
 * A new fact goes to the first document whose question fits; one sentence can hold several facts, each with its own owner, and `AGENTS.md` only points at them, and tells the agent to answer what a delivery decided from its page and ADRs.
 * You change the documents by talking to the agent, and you interpret, guide and validate what it writes; an open decision makes it stop and ask.
 

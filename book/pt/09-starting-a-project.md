@@ -19,7 +19,7 @@ Ele conversa sobre um assunto de cada vez, nesta ordem, e passa ao seguinte quan
 2. **O vocabulário** (docs/03): as dez a vinte palavras sem as quais o produto não pode ser descrito, cada uma com seu nome no código.
 3. **Como ele é construído** (docs/01): a stack e a forma do código, com as duas escolhas do kit, o FOCUS e a estratégia de git, cada uma com a recomendação do agente para essa stack.
 4. **As convenções** (docs/04): a língua da documentação e a língua dos identificadores, o estilo, onde ficam os testes.
-5. **Os slots do processo** (docs/05): o comando de verificação, os ambientes, como uma tela é provada, quando um ambiente além da sua máquina é atualizado, se a pasta `context/` entra no commit, os manuais (nenhum ainda, em um projeto novo), e se um segundo par de olhos lê cada entrega antes de ela terminar e o marco inteiro quando ele fecha.
+5. **Os slots do processo** (docs/05): o comando de verificação, os ambientes, como uma tela é provada, quando um ambiente além da sua máquina é atualizado, se a pasta `context/` entra no commit, os manuais (o de rodar o produto, a cargo da primeira entrega depois da qual uma pessoa consegue rodá-lo; os outros nenhum ainda, em um projeto novo), e se um segundo par de olhos lê cada entrega antes de ela terminar e o marco inteiro quando ele fecha.
 6. **O primeiro marco** (docs/06): de três a oito entregas, uma linha cada, em ordem, e depois a revisão dele; as primeiras são o esqueleto em que as outras se apoiam.
 
 Cada slot que ele escreve no docs/05 diz o que e o comando, em poucas linhas, como diz o próprio docs/05 ([capítulo 7](07-the-documents.md)).
@@ -58,7 +58,8 @@ Uma stack em que um erro só aparece em tempo de execução, em uma tela, deixa 
 ### O que ele escreve, e onde para
 
 Quando os seis assuntos estão cobertos, o `/brainstorm` escreve o docs/00 a 06, um ADR para cada decisão que uma sessão futura poderia desfazer (a stack, FOCUS ou não, o git, qualquer coisa em que você hesitou), o `AGENTS.md`, o `CLAUDE.md` com a linha `@AGENTS.md`, e uma `work/done/` com um `.gitkeep`, para que a pasta sobreviva a um clone.
-Ele não escreve manual: a `docs/manuals/` é criada com o primeiro, pela entrega que acrescenta algo que uma pessoa faz à mão ou uma prova que o `/apply` roda em outra máquina.
+Ele não escreve manual, e a `docs/manuals/` é criada com o primeiro.
+O slot Manuals (manuais) nomeia o manual de rodar o produto como devido, a cargo da primeira entrega depois da qual uma pessoa consegue rodá-lo, de instalar o que ele precisa até a primeira tela ou chamada; os outros vêm com a entrega que acrescenta algo que uma pessoa faz à mão ou uma prova que o `/apply` roda em outra máquina.
 O primeiro marco, no docs/06, é um parágrafo que uma pessoa consegue conferir quando o marco fecha e as linhas dele, o esqueleto primeiro; o [capítulo 11](11-queue-and-milestones.md) mostra o da biblioteca de empréstimos e ensina a fila.
 Depois ele mostra a fila e para.
 Ele não escreve código, nem configuração, nem arquivo de dependências: a primeira entrega faz isso, com uma página própria, pelo `/propose` em uma sessão nova ([capítulo 12](12-propose.md)).
@@ -87,7 +88,7 @@ Uma rodada, de seis assuntos apenas:
 6. O primeiro marco: de três a oito entregas, ou de onde lê-las (issues, um arquivo TODO, um roadmap), e depois a revisão dele.
 
 Um arquivo de regras que já existe não fica ao lado do `AGENTS.md`: as regras dele passam para o `AGENTS.md`, e o arquivo guarda só a linha que o importa e o que vale apenas para o host dele (o programa que roda o agente).
-Ele escreve os mesmos documentos que o `/brainstorm`, e mais um manual em `docs/manuals/` para cada coisa que uma pessoa já faz à mão ali, como um alvo do Makefile, um script de deploy ou os passos de instalação de um README, como diz o arquivo do kit para o comando.
+Ele escreve os mesmos documentos que o `/brainstorm`, e mais, em `docs/manuals/`, primeiro o manual de rodar o produto a partir de um clone novo, depois um para cada coisa que uma pessoa já faz à mão ali, como um alvo do Makefile, um script de deploy ou os passos de instalação de um README, como diz o arquivo do kit para o comando.
 Os documentos descrevem o que existe, e não o que deveria existir.
 O agente mostra a mudança antes de escrever, e não muda código nenhum.
 
@@ -118,6 +119,7 @@ Confira que:
 * cada padrão que o agente manteve é um que você aceita sabendo; cada um que você rejeita é uma correção agora, antes que uma entrega se apoie nele;
 * cada ADR registra uma decisão que você tomou, ou diz que a escolha foi do agente;
 * cada slot do docs/05 diz o que e o comando, sem passos e sem saída colada; os passos estão num manual;
+* o slot Manuals nomeia o manual de rodar o produto: devido, e por qual entrega, em um projeto novo; escrito, em `docs/manuals/`, em um projeto existente;
 * em um projeto existente, cada afirmação observada é verdadeira no código (abra o arquivo que ela cita), cada questão em aberto é uma contradição que o código tem de fato, e nada descreve o que deveria existir em vez do que existe;
 * em um projeto existente, uma pessoa que não leu mais nada consegue seguir cada manual, e cada comando que um manual dá existe no repositório.
 
@@ -136,7 +138,7 @@ O time começa a primeira entrega com o produto, o vocabulário, as decisões e 
 * O `/brainstorm` conversa sobre seis assuntos em ordem (produto, vocabulário, como é construído, convenções, slots do processo, primeiro marco) e escreve os documentos, os ADRs, o `AGENTS.md` e o `CLAUDE.md`, nunca código; a primeira entrega escreve o código.
 * Toda pergunta vem com um padrão, então "your call" é uma resposta válida, e você confere cada padrão que o agente manteve.
 * Escolha uma stack pelo que o projeto precisa, depois por quanto código público o agente aprendeu, depois por os tipos e testes deixarem ou não o agente conferir o próprio trabalho.
-* O `/analyze` lê o repositório primeiro, pergunta em uma rodada e escreve um manual para cada coisa que uma pessoa já faz à mão; o padrão de cada escolha é o que o código faz, uma contradição vira uma questão em aberto, e um código legado pode passar para o FOCUS como strangler fig.
+* O `/analyze` lê o repositório primeiro, pergunta em uma rodada e escreve primeiro o manual de rodar o produto, depois um para cada coisa que uma pessoa já faz à mão; o padrão de cada escolha é o que o código faz, uma contradição vira uma questão em aberto, e um código legado pode passar para o FOCUS como strangler fig.
 * Revise antes do commit, contra as suas respostas e contra o código, e peça ao agente cada correção.
 
 [^octoverse]: GitHub, "Octoverse: A new developer joins GitHub every second as AI leads TypeScript to #1", 2025, o relatório mais recente em 2026-09-28: contribuidores mensais no GitHub, agosto de 2025. <https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/>
