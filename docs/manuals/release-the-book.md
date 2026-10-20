@@ -15,7 +15,7 @@ Release when `main` holds chapters you want readers to download; the site does n
 * At least one commit since the newest `vX.Y.Z` tag.
 * `make verify` green; `make release` runs it again and refuses when it fails.
 * `VERSION` naming the newest tag, as the last `make release` left it (`1.2.3 2026-10-16` for `v1.2.3`); edit it by hand only to fix that.
-* pandoc, weasyprint and pypdf installed, since `make release` builds the book before it asks (README, "Build locally").
+* pandoc, weasyprint and pypdf installed, since `make release` builds the book before it asks (`docs/manuals/build-the-book-from-a-clone.md`).
 * The secret `DISCLOSURE_DENYLIST` set in the repository, because the job `release` runs only after `verify` is green in Actions (`set-up-the-disclosure-list.md`).
 
 ## Steps

@@ -15,19 +15,15 @@ A free book that takes a reader who has never followed any process to running wh
 
 ## Build locally
 
-You need Python 3 and make, and Node.js 26.12.0 or later for `make verify`.
+You need Python 3 and make; `make verify` adds Node.js 26.12.0 or later, and `make book` pandoc, weasyprint and pypdf.
 
 * `make` lists its commands, one line each.
 * `make serve` opens the site at <http://127.0.0.1:8000/>.
-* `make verify` runs the checks. The disclosure scan needs a list only the author has; without it, the scan is skipped.
-  The examples check runs chapter 3's database-boundary examples, in both editions, with Node, and fails when Node is missing or older; the book's other examples are not run.
-  * any system: the 26.12.0 installer or binary for it from <https://nodejs.org/dist/v26.12.0/>
-  * macOS: `brew install node` also works: it installs the current release, 26.12.0 or later
-* `make release`, for the author only, publishes the book: on a clean `main`, not behind `origin/main`, with commits since the newest `v*` tag, `make verify` green and `VERSION` naming that tag, it writes the next version and today's date to `VERSION`, builds the book (pandoc, weasyprint and pypdf, as for `make book`) and asks; on `y` it commits `VERSION` alone and pushes `main` and the next tag (`BUMP=minor` or `BUMP=major` for a bigger step), and Actions attaches the PDF and EPUB of both editions to a new Release. The steps are in `docs/manuals/release-the-book.md`.
-* `make hooks`, run once in a clone, turns on the git hooks that run the disclosure scan on each commit's staged files and message. They refuse every commit when the list is missing, so only the author, who has the list, turns them on; with the list, `make verify` fails until they are on.
-* `make book` writes the PDF and the EPUB of both editions to `output/`, each opening on its cover. It needs pandoc, weasyprint and pypdf:
-  * macOS: `brew install pandoc weasyprint` and `pip install pypdf`
-  * Debian or Ubuntu: `sudo apt install pandoc weasyprint python3-pypdf`
+* `make verify` runs the checks; without the disclosure list, which only the author has, the scan is skipped.
+* `make book` writes the PDF and the EPUB of both editions to `output/`.
+* `make hooks`, `make scan` and `make release` are the author's.
+
+How to install each tool, how to tell each step worked and what breaks when one is skipped: [docs/manuals/build-the-book-from-a-clone.md](docs/manuals/build-the-book-from-a-clone.md).
 
 ## How it is written
 
