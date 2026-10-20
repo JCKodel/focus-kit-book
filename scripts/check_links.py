@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Check that every external URL a reader can follow still answers.
 
-Reads both editions of the book, both READMEs and mkdocs.yml; code, HTML comments and the
+Reads both editions of the book, both READMEs, the manuals in docs/manuals/ and mkdocs.yml; code, HTML comments and the
 front matter of a Markdown file are not read, because an artifact shown is real.
 Prints one line per finding as `file:line: links: <url>: <reason>`; exits 1 when anything is printed.
 Offline (every URL fails at DNS or connection) it is skipped locally and fails in Actions (`CI` set).
@@ -40,7 +40,7 @@ def site_url():
 def files():
     for path in repo_files():
         name = path.as_posix()
-        if (name.startswith("book/") and name.endswith(".md")) or name in READMES:
+        if (name.startswith(("book/", "docs/manuals/")) and name.endswith(".md")) or name in READMES:
             yield path, mask((ROOT / path).read_text(encoding="utf-8"), keep_targets=True)
         elif name == CONFIG:
             yield path, (ROOT / path).read_text(encoding="utf-8").split("\n")

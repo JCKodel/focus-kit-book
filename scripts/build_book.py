@@ -465,12 +465,12 @@ def main():
     release = sys.argv[1:] == ["--release"]
     for tool in ("pandoc", "weasyprint"):
         if shutil.which(tool) is None:
-            print(f"Makefile:1: book: {tool} not found; install it (see README)")
+            print(f"Makefile:1: book: {tool} not found; install it (see docs/manuals/build-the-book-from-a-clone.md)")
             return 1
     try:
         import pypdf  # noqa: F401
     except ImportError:
-        print("Makefile:1: book: pypdf not found; install it (see README)")
+        print("Makefile:1: book: pypdf not found; install it (see docs/manuals/build-the-book-from-a-clone.md)")
         return 1
     try:
         site = site_values()

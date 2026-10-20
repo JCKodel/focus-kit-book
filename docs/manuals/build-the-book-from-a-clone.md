@@ -24,7 +24,7 @@ Each of the three goals needs only the tools its own step names: the site needs 
 4. `make verify`.
 5. `make book`.
 
-`make hooks`, `make scan` and `make release` are the author's: the hooks and the scan in `docs/manuals/set-up-the-disclosure-list.md`, the release in `docs/manuals/release-the-book.md`.
+`make hooks`, `make scan` and `make release` are the author's: the hooks and the scan in `set-up-the-disclosure-list.md`, the release in `release-the-book.md`.
 
 ## How to tell it worked
 
@@ -39,12 +39,12 @@ Nothing outside the clone changes but what the package manager installed.
 
 ## What breaks if a step is skipped
 
-* No Node: `make verify` fails at the examples check with `Makefile:1: examples: node not found; install Node.js 26.12.0 or later (see README)`.
-* A Node older than 26.12.0: it fails there with `Makefile:1: examples: node <version> found; Node.js 26.12.0 or later is required (see README)`.
-* No pandoc, weasyprint or pypdf: `make book` prints `Makefile:1: book: <tool> not found; install it (see README)` and writes nothing.
+* No Node: `make verify` fails at the examples check with `Makefile:1: examples: node not found; install Node.js 26.12.0 or later (see docs/manuals/build-the-book-from-a-clone.md)`.
+* A Node older than 26.12.0: it fails there with `Makefile:1: examples: node <version> found; Node.js 26.12.0 or later is required (see docs/manuals/build-the-book-from-a-clone.md)`.
+* No pandoc, weasyprint or pypdf: `make book` prints `Makefile:1: book: <tool> not found; install it (see docs/manuals/build-the-book-from-a-clone.md)` and writes nothing.
 * Offline: the link check prints `links: skipped, no network` and `make verify` can still pass locally; in Actions the same check fails.
 * No `venv` module, as on Debian and Ubuntu without `python3-venv`: the first `make serve` stops at `python3 -m venv .venv`, before installing MkDocs; install the package, delete `.venv/` and run it again.
 * `make hooks` without the disclosure list: the hooks refuse every commit, so a person running the book does not run it.
 * The list on the machine and the hooks off, as for the author in a new clone: `make verify` fails with `Makefile:1: disclosure: hooks are off; run make hooks`.
 
-The author's setup for the last two is in `docs/manuals/set-up-the-disclosure-list.md`.
+The author's setup for the last two is in `set-up-the-disclosure-list.md`.

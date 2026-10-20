@@ -218,11 +218,11 @@ def node_finding():
     node = shutil.which("node")
     minimum = ".".join(map(str, NODE_MINIMUM))
     if node is None:
-        return f"Makefile:1: examples: node not found; install Node.js {minimum} or later (see README)"
+        return f"Makefile:1: examples: node not found; install Node.js {minimum} or later (see docs/manuals/build-the-book-from-a-clone.md)"
     version = subprocess.run([node, "--version"], capture_output=True, text=True).stdout.strip()
     match = re.fullmatch(r"v(\d+)\.(\d+)\.(\d+)", version)
     if not match or tuple(map(int, match.groups())) < NODE_MINIMUM:
-        return f"Makefile:1: examples: node {version or 'of unknown version'} found; Node.js {minimum} or later is required (see README)"
+        return f"Makefile:1: examples: node {version or 'of unknown version'} found; Node.js {minimum} or later is required (see docs/manuals/build-the-book-from-a-clone.md)"
     return None
 
 
