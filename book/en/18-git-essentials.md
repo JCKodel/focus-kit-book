@@ -22,7 +22,7 @@ Git merges a branch in four ways, and this is what each leaves and what undoing 
 | Squash merge | One new commit | `git revert <commit>` |
 | Rebase, then fast-forward | The commits, rewritten | One revert per commit |
 
-In the kit's branch per delivery, `/propose` checks the remote for the branch named after the slug, creates it and pushes it at once, so the line is taken in every clone, or reuses it when the definition resumes, and writes the page there; `/apply` builds on it; the page and every mark of its line in docs/06 are written on the branch, so `main`'s queue shows the line as it was until the merge ([chapter 14](14-queue-states.md) says where a board sees it); and by default the person merges page and build into `main`, or asks the agent to, in one merge, here a merge commit, through its pull request (chapter 20) or on the command line: the unit of work one `git revert -m 1 <merge>` takes back.
+In the kit's branch per delivery, `/propose` checks the remote, the copy of the repository the team shares on a server, for the branch named after the slug, creates it and pushes it at once, so the line is taken in every clone, or reuses it when the definition resumes, and writes the page there; `/apply` builds on it; the page and every mark of its line in docs/06 are written on the branch, so `main`'s queue shows the line as it was until the merge ([chapter 14](14-queue-states.md) says where a board sees it); and by default the person merges page and build into `main`, or asks the agent to, in one merge, here a merge commit, through its pull request (chapter 20) or on the command line: the unit of work one `git revert -m 1 <merge>` takes back.
 When the Git slot's word lets the agent merge, the agent takes that step and the person reviews the merge once it lands (chapter 20).
 For `lend-book`, a delivery of the lending library written for this chapter, the first two lines are what `/propose` does for you, `git switch lend-book` instead when the branch exists, and the last two are yours, once `/apply` is done and you have used the delivery and reviewed the branch:
 
@@ -34,6 +34,7 @@ git switch main
 git merge --no-ff lend-book
 ```
 
+`git push -u origin lend-book` sends the new branch to the remote named `origin`, and `-u` links your branch to it, so a later `git push` or `git pull` on that branch needs no names.
 A squash merge also leaves one step, one new commit an ordinary `git revert <commit>` takes back, but it is one of git's forms; the kit asks only that the delivery reach `main` in one merge, and this chapter uses a merge commit.
 A fast-forward or a rebase keeps one step only when the branch held one commit.
 The sections below define each term of the table: the four forms, then `git revert`.
@@ -68,7 +69,7 @@ By default, the agent stages that change and suggests the message; you use what 
 To stage is to write to the index, also called the staging area, the staged copy of the project a commit is made from: `git add <path>` writes a change to it, `git diff --cached` shows what it holds, and a plain `git commit` takes it whole, so what you stage is what the commit holds.
 One working folder has one index, shared by every session open in it; [chapter 19](19-worktrees.md) says what two sessions do about it.
 
-A remote is another copy of the repository that yours knows by name, usually on a server such as GitHub, named `origin` by convention: `git clone <url>` copies it to your machine with its whole history, `git push` sends your branch's new commits to it, and `git pull` brings its new commits into your branch.
+A remote is another copy of the repository that yours knows by name, usually on a server such as GitHub, named `origin` by convention: `git clone <url>` copies it to your machine with its whole history, `git push` sends your branch's new commits to it, `git fetch` brings its branches into your clone without changing yours, so you see the branches others pushed, as a session with a branch or a worktree per delivery does before it reads the queue ([chapter 14](14-queue-states.md)), and `git pull` brings its new commits into your branch.
 A team shares its work this way, and chapter 20's pull request, which asks for a pushed branch to be reviewed and merged, builds on it.
 
 ## Branches and tags
@@ -200,7 +201,7 @@ Every delivery lands as one commit on trunk or one merge otherwise, with its pag
 
 * One delivery, one step to undo: a delivery's page and build are one change, one commit on trunk or one merge otherwise, undone with `git revert <commit>` or `git revert -m 1 <merge>`; the revert undoes what git holds, and a migration run or a message sent is undone as the page's Done when says, or not at all.
 * Version control keeps every version of a project's files with who changed what and when; git, written in 2005 by Linus Torvalds and the Linux kernel's community, is distributed, so every copy holds the whole history.
-* A commit is a snapshot with its author, message and parents, named by a hash; a branch is a name that moves with each commit on it; a tag never moves; a remote is another copy you clone, push to and pull from; the index is the staged copy a commit is made from, one per working folder.
+* A commit is a snapshot with its author, message and parents, named by a hash; a branch is a name that moves with each commit on it; a tag never moves; a remote is another copy you clone, push to, fetch from and pull from; the index is the staged copy a commit is made from, one per working folder.
 * A fast-forward and a rebase leave a line of the branch's commits; a merge commit adds a commit with two parents; a squash merge leaves one new commit; never rebase commits someone else has.
 * Trunk fits one person, alone or with several sessions on free lines that touch different files; a branch per delivery fits sequential work reviewed by pull request; a worktree per delivery fits several people, or deliveries that touch the same files; with a branch or a worktree per delivery, the line's marks live on the delivery's branch until its merge; trunk-based development and git-flow, which fits software that ships versions, are practices outside the kit; the agent stages, the person decides each commit and merge, and the agent takes one of those steps only when the person names it or when the Git slot says it commits, and merges, by the slot's word.
 

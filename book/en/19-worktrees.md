@@ -176,7 +176,7 @@ Deletes the branch, which outlives its folder.
 A worktree per delivery is one of the git strategies a project can write in the Git slot of its docs/05, and in the kit it is the steps above with `/propose` and `/apply` in between.
 The slot may name the hidden folder and the branch prefix, and one that names neither means `.focus-kit/` and `focus-kit/`, the ones above; a slot that names `.wt/` and `wt/` puts `return-book` in `.wt/worktrees/return-book/` on `wt/return-book`.
 The kit's two names say what made the folder and the branch, so a person who finds them in a project knows where they came from.
-`/propose <slug>` checks the remote for `<prefix>/<slug>`, creates the worktree at `<hidden>/worktrees/<slug>/` on that branch, from the main branch's `HEAD`, and pushes the branch at once, so the line is taken in every clone, or reuses the one that exists, and writes the page there.
+`/propose <slug>` checks the remote for `<prefix>/<slug>`, creates the worktree at `<hidden>/worktrees/<slug>/` on that branch, from the main branch's `HEAD`, and pushes the branch at once, so the line is taken in every clone, or, when the definition resumes, reuses the worktree and branch that exist, and writes the page there.
 The line's `[~]` and every later mark are written in the worktree, on its branch, so `main/`'s queue shows the line as it was and each worktree's queue shows its own branch's state; the merge brings the marks in, which is why the queue meets at every merge, as the next section, on conflicts, shows.
 [Chapter 14](14-queue-states.md) says where a board sees them.
 A branch `<slug>` without the prefix is not the delivery's: it is someone else's.

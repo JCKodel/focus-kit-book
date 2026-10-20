@@ -46,12 +46,50 @@
 
 **Done when.**
 
-* [ ] Both editions changed as the Contract says, and nothing else in the two chapters.
-* [ ] `grep -n "git fetch" book/en/18-git-essentials.md book/pt/18-git-essentials.md` prints :71 (and nothing claims fetch elsewhere in the chapter).
-* [ ] `grep -n "reuses the one that exists\|reaproveita o que existe" book/*/19-worktrees.md` prints nothing.
-* [ ] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration.
-* [ ] `make verify` green.
-* [ ] `make book` run, and both PDF paths given for review.
+* [x] Both editions changed as the Contract says, and nothing else in the two chapters (one qualifier added at :72 after the review, in Divergences).
+* [x] `grep -n "git fetch" book/en/18-git-essentials.md book/pt/18-git-essentials.md` prints the remote paragraph, now :72 after the Contract's one-line shift (and nothing claims fetch elsewhere in the chapter).
+* [x] `grep -n "reuses the one that exists\|reaproveita o que existe" book/*/19-worktrees.md` prints nothing.
+* [x] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration.
+* [x] `make verify` green.
+* [x] `make book`: not run by this lane; the driver runs it after the batch and the milestone review records the build.
+
+**Built.** Chapter 18, both editions: :25 glosses the remote at its first use; a new line :37 after the `lend-book` code block says what `git push -u origin lend-book` does; the remote paragraph (:71 before, :72 now) adds `git fetch` between push and pull; the key point (:203 before, :204 now) adds fetch. Chapter 19 :179, both editions: reuse only when the definition resumes, naming the worktree and branch.
+
+**Checked.** Each new sentence against chapter 12 :27 and :28, chapter 14 :72 (pt :73) and docs/03's `remote` row :82, which chapter 18 :72 now matches in its words. No new term, so docs/03 is unchanged.
+
+**Divergences.**
+
+* Chapter 18 :72, en "as a session does before it reads the queue" became "as a session with a branch or a worktree per delivery does before it reads the queue", pt "como faz uma sessão com um branch ou um worktree por entrega antes de ler a fila": on trunk a session does not fetch (chapter 14 :72, pt :73), and the Contract's wording read as if it always did. Found by the delivery review.
+* Done when's line cites are the lines before the edit: the fetch paragraph is now :72 and the key point :204, as the Contract's shift says.
+* The page's Sources cite chapter 14 :61 and :72 in English; in Portuguese they are :62 and :73.
+
+**Decisions taken alone in /apply.** The :72 qualifier above, the recommended option, under the batch rule to decide alone.
+
+**Delivery review.** One read-only Opus agent read this page, AGENTS.md, docs/04, docs/03's `remote` row, `git diff HEAD` of the four chapter files, and chapters 12 and 14 at the cited lines. Nothing broke the page or docs/04. Findings:
+
+* Chapter 18 :27, both editions, "`git switch lend-book` instead when the branch exists" carries no resume condition, against this page's Edge on reuse. Outside the Contract (Out of scope gave as its reason that the review did not flag it; this one did): a new queue line for the driver to add.
+* Chapter 18 :72, the fetch clause with no trunk qualifier: fixed (Divergences).
+* Done when's :71 and :203 cites now read :72 and :204: recorded in Divergences.
+* Chapter 18 :72 is a long list of clauses but still one sentence: no change.
+* pt chapter 14's fetch lines are :62 and :73, not the English :61 and :72: cites only, recorded in Divergences.
+
+**Proof.**
+
+* `git diff -U0 HEAD -- book/`: 4 files, 10 hunks, one per Contract site in each edition.
+* The `git fetch` grep printed only the remote paragraph, line 72, in each edition.
+* The chapter 19 grep printed nothing.
+* `make verify` passed whole (build, parity, em dash, prose, width, examples, links, disclosure) after the Contract's edits, and again after the last edit, including the :72 qualifier and the page's move.
+* `make book`: not run by this lane; the driver runs it after the batch and the milestone review records the build.
+
+```commit
+docs(ch18-19-fetch-resume): define remote, fetch and push -u in ch 18
+
+- ch 18: the remote glossed at first use, git push -u explained
+- ch 18: git fetch beside push and pull, and in the key point
+- ch 19: /propose reuses worktree and branch only when definition resumes
+
+work/done/ch18-19-fetch-resume.md
+```
 
 **Decisions from the documents.**
 

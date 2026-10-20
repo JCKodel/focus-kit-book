@@ -22,7 +22,7 @@ O git faz o merge de um branch de quatro formas, e isto é o que cada uma deixa 
 | Squash merge | Um commit novo | `git revert <commit>` |
 | Rebase, depois fast-forward | Os commits, reescritos | Um `git revert` por commit |
 
-No branch por entrega do kit, o `/propose` consulta o remoto pelo branch com o nome do slug, cria o branch e dá push nele na hora, então a linha fica ocupada em todo clone, ou o reutiliza quando a definição é retomada, e escreve a página nele; o `/apply` constrói nele; a página e cada marca da sua linha no docs/06 são escritas no branch, então a fila do `main` mostra a linha como estava até o merge (o [capítulo 14](14-queue-states.md) diz onde um quadro a vê); e por padrão a pessoa faz o merge da página e da construção no `main`, ou pede ao agente que o faça, em um merge, aqui um commit de merge, pelo pull request do branch (capítulo 20) ou pela linha de comando: a unidade de trabalho que um `git revert -m 1 <merge>` desfaz.
+No branch por entrega do kit, o `/propose` consulta o remoto, a cópia do repositório que o time compartilha em um servidor, pelo branch com o nome do slug, cria o branch e dá push nele na hora, então a linha fica ocupada em todo clone, ou o reutiliza quando a definição é retomada, e escreve a página nele; o `/apply` constrói nele; a página e cada marca da sua linha no docs/06 são escritas no branch, então a fila do `main` mostra a linha como estava até o merge (o [capítulo 14](14-queue-states.md) diz onde um quadro a vê); e por padrão a pessoa faz o merge da página e da construção no `main`, ou pede ao agente que o faça, em um merge, aqui um commit de merge, pelo pull request do branch (capítulo 20) ou pela linha de comando: a unidade de trabalho que um `git revert -m 1 <merge>` desfaz.
 Quando a palavra do slot Git deixa o agente fazer o merge, o agente dá esse passo e a pessoa revisa o merge depois que ele entra (capítulo 20).
 Para `emprestar-livro`, uma entrega da biblioteca de empréstimos escrita para este capítulo, as duas primeiras linhas são o que o `/propose` faz por você, `git switch emprestar-livro` no lugar delas quando o branch existe, e as duas últimas são suas, quando o `/apply` termina e você usou a entrega e revisou o branch:
 
@@ -34,6 +34,7 @@ git switch main
 git merge --no-ff emprestar-livro
 ```
 
+`git push -u origin emprestar-livro` envia o branch novo para o remoto chamado `origin`, e o `-u` liga o seu branch a ele, então um `git push` ou `git pull` seguinte nesse branch não precisa de nomes.
 Um squash merge também deixa um passo, um commit novo que um `git revert <commit>` comum desfaz, mas ele é uma das formas do git; o kit pede só que a entrega chegue ao `main` em um merge, e este capítulo usa um commit de merge.
 Um fast-forward ou um rebase só mantém um passo quando o branch tinha um commit.
 As seções abaixo definem cada termo da tabela: as quatro formas, e depois o `git revert`.
@@ -68,7 +69,7 @@ Por padrão, o agente coloca essa mudança em stage e sugere a mensagem; você u
 Colocar em stage é escrever no índice, também chamado de staging area, a cópia em stage do projeto de onde o commit é feito: `git add <caminho>` escreve uma mudança nele, `git diff --cached` mostra o que ele guarda, e um `git commit` simples o leva inteiro, então o que você coloca em stage é o que o commit guarda.
 Uma pasta de trabalho tem um só índice, compartilhado por todas as sessões abertas nela; o [capítulo 19](19-worktrees.md) diz o que duas sessões fazem a respeito.
 
-Um remoto é outra cópia do repositório que a sua conhece por um nome, em geral em um servidor como o GitHub, chamado `origin` por convenção: `git clone <url>` o copia para a sua máquina com o histórico inteiro, `git push` envia para ele os commits novos do seu branch, e `git pull` traz os commits novos dele para o seu branch.
+Um remoto é outra cópia do repositório que a sua conhece por um nome, em geral em um servidor como o GitHub, chamado `origin` por convenção: `git clone <url>` o copia para a sua máquina com o histórico inteiro, `git push` envia para ele os commits novos do seu branch, `git fetch` traz os branches dele para o seu clone sem mudar os seus, então você vê os branches que outros enviaram, como faz uma sessão com um branch ou um worktree por entrega antes de ler a fila ([capítulo 14](14-queue-states.md)), e `git pull` traz os commits novos dele para o seu branch.
 Um time compartilha o seu trabalho assim, e o pull request do capítulo 20, que pede que um branch enviado seja revisado e passe por merge, parte daqui.
 
 ## Branches e tags
@@ -200,7 +201,7 @@ Cada entrega chega como um commit no trunk ou um merge nos outros casos, com a s
 
 * Uma entrega, um passo para desfazer: a página e a construção de uma entrega são uma mudança, um commit no trunk ou um merge nos outros casos, desfeita com `git revert <commit>` ou `git revert -m 1 <merge>`; o `git revert` desfaz o que o git guarda, e uma migração que rodou ou uma mensagem enviada se desfaz como diz o Pronto quando da página, ou não se desfaz.
 * Um controle de versão guarda cada versão dos arquivos de um projeto com quem mudou o quê e quando; o git, escrito em 2005 por Linus Torvalds e pela comunidade do kernel do Linux, é distribuído, então cada cópia guarda o histórico inteiro.
-* Um commit é uma foto com autor, mensagem e pais, com um hash como nome; um branch é um nome que anda com cada commit feito nele; uma tag nunca anda; um remoto é outra cópia que você clona, para a qual dá push e da qual dá pull; o índice é a cópia em stage de onde o commit é feito, um por pasta de trabalho.
+* Um commit é uma foto com autor, mensagem e pais, com um hash como nome; um branch é um nome que anda com cada commit feito nele; uma tag nunca anda; um remoto é outra cópia que você clona, para a qual dá push e da qual dá fetch e pull; o índice é a cópia em stage de onde o commit é feito, um por pasta de trabalho.
 * Um fast-forward e um rebase deixam uma linha com os commits do branch; um commit de merge acrescenta um commit com dois pais; um squash merge deixa um commit novo; nunca faça rebase de commits que outra pessoa tem.
 * O trunk serve a uma pessoa, sozinha ou com várias sessões em linhas livres que mexem em arquivos diferentes; um branch por entrega serve a trabalho em sequência revisado por pull request; um worktree por entrega serve a várias pessoas, ou a entregas que mexem nos mesmos arquivos; com um branch ou um worktree por entrega, as marcas da linha ficam no branch da entrega até o merge dele; o trunk-based development e o git-flow, que serve a software que lança versões, são práticas de fora do kit; o agente coloca em stage, a pessoa decide cada commit e cada merge, e o agente dá um desses passos só quando a pessoa o nomeia ou quando o slot Git diz que ele faz o commit, e o merge, pela palavra do slot.
 
