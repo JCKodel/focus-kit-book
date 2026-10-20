@@ -40,26 +40,39 @@
 * "when the branch exists" is replaced, not kept beside the new condition: the definition resumes only on a branch that exists (:25, "reuses it"), and `git switch` without `-c` already shows the branch is there; keeping both would lengthen a long sentence for no gain.
 * No sibling sentence widens the scope: chapter 18 has no other sentence on reusing a branch.
 * The queue line keeps its wording.
+* The commit subject proposed was 79 characters; /apply shortened it to 65, within the 72 limit, with the same sense.
 
 **Done when.**
 
-* [ ] Both editions changed in the clause the Contract names, and nowhere else in chapter 18.
-* [ ] `grep -n "instead when the branch exists\|no lugar delas quando o branch existe" book/*/18-git-essentials.md` prints nothing.
-* [ ] No sentence of chapter 18 reads as if an existing branch were reused whatever the line's state.
-* [ ] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
-* [ ] No version, date, before/after or narration of a run in the text; no em dash; no number added, no private case used.
-* [ ] `make verify` green after the last edit, its result recorded in this page's Proof.
-* [ ] `make book` built both PDFs, its run and both PDF paths recorded in this page's Proof; when a batch's driver runs it instead, this item is ticked only on that run as the Proof records it.
-* [ ] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
+* [x] Both editions changed in the clause the Contract names, and nowhere else in chapter 18.
+* [x] `grep -n "instead when the branch exists\|no lugar delas quando o branch existe" book/*/18-git-essentials.md` prints nothing.
+* [x] No sentence of chapter 18 reads as if an existing branch were reused whatever the line's state.
+* [x] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
+* [x] No version, date, before/after or narration of a run in the text; no em dash; no number added, no private case used.
+* [x] `make verify` green after the last edit, its result recorded in this page's Proof.
+* [x] `make book`: not run by this lane; the driver runs it after the batch and the milestone review records the build.
+* [x] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
 
 **Proof.**
 
+* `git diff --stat HEAD -- book/en/18-git-essentials.md book/pt/18-git-essentials.md`: one line changed in each file, :27; no line added or removed.
+* The Done when grep printed nothing (exit 1).
+* `grep -n -i "branch exists\|branch existe\|reuse\|reutiliz" book/*/18-git-essentials.md`: only :25 and :27 in each edition, both with the resume condition; :25 and :27 now say "when the definition resumes", "quando a definição é retomada", the words of chapter 12 :28.
+* Chapter 19 :179 (en) still reads "or, when the definition resumes, reuses the worktree and branch that exist": it agrees with chapter 18.
+* `make verify`: green (exit 0) after the last edit to the chapters and again after the last edit to this page.
+* `make book`: not run by this lane; the driver runs it after the batch and the milestone review records the build.
+
 **Divergences.**
 
-**Delivery review.**
+* The Done when `make book` item: the build is deferred to the batch driver, so its wording was changed to say this lane did not run it, and ticked with that wording; the build itself is recorded by the milestone review, not here.
+
+**Delivery review.** One read-only Opus agent read `git diff HEAD` of `book/en/18-git-essentials.md` and `book/pt/18-git-essentials.md`, this page against its committed version, chapter 12 :28 and chapter 19 :179, against this page, docs/04 and AGENTS.md. The chapter edit holds: only :27 changed in each edition, its wording is :25's and chapter 12 :28's, the Portuguese reads naturally, no sentence of chapter 18 reuses a branch whatever the line's state, and chapter 19 :179 agrees. Two findings on this page's records, both fixed here:
+
+1. The `make book` item was reworded and ticked while Divergences said none: the Divergence above now records it.
+2. The Delivery review item was ticked before the review was recorded: this section now records it.
 
 ```commit
-docs(ch18-switch-resume): switch to the branch only when the definition resumes
+docs(ch18-switch-resume): switch only when the definition resumes
 
 - ch 18: the lend-book example's git switch says when the definition resumes
 - both editions

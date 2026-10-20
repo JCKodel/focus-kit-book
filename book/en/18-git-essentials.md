@@ -24,7 +24,7 @@ Git merges a branch in four ways, and this is what each leaves and what undoing 
 
 In the kit's branch per delivery, `/propose` checks the remote, the copy of the repository the team shares on a server, for the branch named after the slug, creates it and pushes it at once, so the line is taken in every clone, or reuses it when the definition resumes, and writes the page there; `/apply` builds on it; the page and every mark of its line in docs/06 are written on the branch, so `main`'s queue shows the line as it was until the merge ([chapter 14](14-queue-states.md) says where a board sees it); and by default the person merges page and build into `main`, or asks the agent to, in one merge, here a merge commit, through its pull request (chapter 20) or on the command line: the unit of work one `git revert -m 1 <merge>` takes back.
 When the Git slot's word lets the agent merge, the agent takes that step and the person reviews the merge once it lands (chapter 20).
-For `lend-book`, a delivery of the lending library written for this chapter, the first two lines are what `/propose` does for you, `git switch lend-book` instead when the branch exists, and the last two are yours, once `/apply` is done and you have used the delivery and reviewed the branch:
+For `lend-book`, a delivery of the lending library written for this chapter, the first two lines are what `/propose` does for you, `git switch lend-book` instead when the definition resumes, and the last two are yours, once `/apply` is done and you have used the delivery and reviewed the branch:
 
 ```
 git switch -c lend-book
