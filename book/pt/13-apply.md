@@ -166,7 +166,7 @@ O `emprestar-livro` não muda nenhum passo dele, já que a sua migration roda co
 
 ## Por que ele para no stage
 
-O `/apply` nunca faz commit e nunca faz merge por conta própria, qualquer que seja a estratégia de git; um slot Git pode dizer que o agente faz o commit, e o merge, pela palavra do slot, que vale como o pedido, e a pessoa então revisa o commit ([capítulo 7](07-the-documents.md)).
+O `/apply` nunca faz commit e nunca faz merge por conta própria, qualquer que seja a estratégia de git; um slot Git pode dizer que o agente faz o commit, e o merge, pela palavra do slot, que vale como o pedido, e a pessoa então revisa o commit ou o merge ([capítulo 7](07-the-documents.md)).
 Por padrão ele coloca em stage só a sua entrega e entrega a mensagem a você; a decisão do commit é sua, e vem depois da sua revisão.
 O documento de processo do kit dá o fluxo em uma linha: o `/apply` "*constrói, prova, atualiza os documentos, coloca em stage e sugere o commit, nunca faz commit por conta própria*".
 O ponto está no *por conta própria*: depois que você usou e revisou a entrega, pode pedir ao agente que faça o commit dela, e ele dá esse passo e nenhum outro (a seção sobre o commit mostra como).

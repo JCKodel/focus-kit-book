@@ -166,7 +166,7 @@ A colleague with a fresh clone next month runs the library from `docs/manuals/ru
 
 ## Why it stops at the stage
 
-`/apply` never commits and never merges on its own, whatever the git strategy; a Git slot may say the agent commits, and merges, by the slot's word, which counts as the asking, and the person then reviews the commit ([chapter 7](07-the-documents.md)).
+`/apply` never commits and never merges on its own, whatever the git strategy; a Git slot may say the agent commits, and merges, by the slot's word, which counts as the asking, and the person then reviews the commit or the merge ([chapter 7](07-the-documents.md)).
 By default it stages only its delivery and hands you the message; the decision to commit is yours, and it comes after your review.
 The kit's process document gives the flow in one line: `/apply` "*builds, proves, updates the documents, stages and suggests the commit, never commits on its own*".
 *On its own* is the point: once you have used and reviewed the delivery, you may ask the agent to commit it, and it takes that step and no other (the section on the commit shows how).

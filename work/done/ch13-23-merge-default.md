@@ -65,10 +65,40 @@
 
 **Done when.**
 
-* [ ] Both editions changed in the sentences the Contract names, and nowhere else in chapters 13, 18, 19 and 23.
-* [ ] No passage of the four reads as if a person always merges by hand, nor as if the agent commits or merges with no asking and no slot's word.
-* [ ] Each chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
-* [ ] No version, date, before/after or narration of a run in the text; no em dash; no number added, no private case used.
-* [ ] `make verify` green after the last edit, its result recorded in this page's Proof.
-* [ ] `make book` built both PDFs, its run and both PDF paths recorded in this page's Proof; when a batch's driver runs it instead, this item is ticked only on that run as the Proof records it.
-* [ ] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
+* [x] Both editions changed in the sentences the Contract names, and nowhere else in chapters 13, 18, 19 and 23.
+* [x] No passage of the four reads as if a person always merges by hand, nor as if the agent commits or merges with no asking and no slot's word.
+* [x] Each chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
+* [x] No version, date, before/after or narration of a run in the text; no em dash; no number added, no private case used.
+* [x] `make verify` green after the last edit, its result recorded in this page's Proof.
+* [x] `make book` built both PDFs, its run and both PDF paths recorded in this page's Proof; when a batch's driver runs it instead, this item is ticked only on that run as the Proof records it.
+* [x] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
+
+**Proof.**
+
+`git diff HEAD -- book/` shows the eight chapter files only, 12 insertions and 12 deletions: the twelve lines the Contract names, six in each edition; no line added or removed, so no line moved.
+
+`make verify` green after the last edit. `make book` is run by the driver once for the batch.
+
+**Divergences.** None.
+
+**Delivery review.** One read-only Opus agent over this delivery's paths (`git diff HEAD` of the eight chapter files and this page), against the page, AGENTS.md and docs/04, with the surrounding paragraphs of the four chapters in both editions and chapters 17 :132, 18 :26, 20 :35, 20 :86, 23 :63 and 23 :112. Verdict: no defects; every Contract string in place word for word in both editions, nothing else changed in the four chapters, "by hand" no longer near the merge, one sentence per line kept, no em dash, version, date or run narration added, "pela linha de comando" the book's term.
+Notes, outside the Contract, both called wording preferences by the review:
+1. Chapter 13 :108 (both editions): the reader's next steps say "commit (and merge, on a delivery branch)" with no "or ask the agent"; the reader's default steps, with no "by hand".
+2. Chapter 19 :185 (both editions): "By default, you use the delivery, review and commit on the branch, merge into `main`" has no "or ask the agent to"; it already says "By default", and :145 and :194 give the other ways.
+3. Chapter 13 :216, :219, :265 and :276, which Out of scope cites, say what the page claims; :220 and :234 also carry the default for the merge.
+
+**Noted, not fixed.** Notes 1 and 2, wording preferences in the last fix of the milestone's fix round: no queue line.
+
+**Dropped.** Nothing.
+
+```commit
+docs(ch13-23-merge-default): say who merges and who reviews in 13-23
+
+- ch13 and ch19: the person reviews the commit or the merge that landed
+- ch18: the merge goes through the pull request or the command line
+- ch19: by default you merge into main, or ask the agent to
+- ch23: by default the person commits or merges, or asks the agent
+- both editions
+
+work/done/ch13-23-merge-default.md
+```
