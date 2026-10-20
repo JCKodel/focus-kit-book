@@ -80,7 +80,7 @@ O docs/01 registra a resposta, e um ADR registra o porquê.
 
 **A estratégia de git.** Três respostas, cada uma para um jeito de trabalhar: trunk, tudo no branch principal, para uma pessoa, sozinha ou com várias sessões em linhas livres (linhas da fila que não estão feitas, não estão esperando e não precisam de outra linha feita antes, já definidas ou não) que mexem em arquivos diferentes; um branch por entrega, integrado por um pull request revisado, para trabalho em sequência; um worktree por entrega, uma segunda pasta de trabalho no seu próprio branch, para várias pessoas, ou para uma pessoa cujas entregas mexem nos mesmos arquivos.
 Em todas, a página e a construção de uma entrega são uma mudança que se desfaz em um passo, e por padrão o agente coloca em stage e nunca faz commit nem merge por conta própria; quando pedem, ele dá o passo que a pessoa nomeia.
-O slot Git pode dizer, em vez disso, que o agente faz o commit, e o merge, pela palavra do slot, que vale como o pedido; a pessoa revisa o commit.
+O slot Git pode dizer, em vez disso, que o agente faz o commit, e o merge, pela palavra do slot, que vale como o pedido; a pessoa então revisa o commit ou o merge.
 A Parte III ensina as três.
 O slot Git do docs/05 registra a resposta, e um ADR registra o porquê.
 

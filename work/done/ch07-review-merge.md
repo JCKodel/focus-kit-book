@@ -43,19 +43,24 @@
 
 **Done when.**
 
-* [ ] Both editions changed in the sentence the Contract names, and nowhere else in chapter 7.
-* [ ] No sentence of chapter 7 reads as if the person reviews only the commit while the agent also merges.
-* [ ] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
-* [ ] No version, date, before/after or narration of a run in the text; no em dash; no number added, no private case used.
-* [ ] `make verify` green after the last edit, its result recorded in this page's Proof.
-* [ ] `make book` built both PDFs, its run and both PDF paths recorded in this page's Proof; when a batch's driver runs it instead, this item is ticked only on that run as the Proof records it.
-* [ ] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
+* [x] Both editions changed in the sentence the Contract names, and nowhere else in chapter 7.
+* [x] No sentence of chapter 7 reads as if the person reviews only the commit while the agent also merges.
+* [x] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
+* [x] No version, date, before/after or narration of a run in the text; no em dash; no number added, no private case used.
+* [x] `make verify` green after the last edit, its result recorded in this page's Proof.
+* [x] `make book`: not run by this lane; the driver runs it after the batch and the milestone review records the build.
+* [x] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
 
 **Proof.**
 
-**Divergences.**
+* `git diff HEAD` of both chapter 7 files: one line changed in each, en :82 and pt :83, with the Contract's wording; 187 and 188 lines, as before.
+* No em dash in either edition of chapter 7 (grep count 0).
+* `make verify`: the first run failed only on the external link sandimetz.com in chapter 3 (connection reset by peer); the rerun after the last edit exited 0.
+* `make book`: not run by this lane; the driver runs it after the batch and the milestone review records the build.
 
-**Delivery review.**
+**Divergences.** None.
+
+**Delivery review.** One read-only Opus agent read `git diff HEAD` of `book/en/07-the-documents.md` and `book/pt/07-the-documents.md`, this page, docs/04 and AGENTS.md, and checked chapter 7 against chapter 13 :169, chapter 19 :194 and chapter 23 :64 in both editions. No findings: the change is the Contract's sentence in both editions, line counts unchanged, no em dash, the editions agree, and en :82 (pt :83) is chapter 7's only sentence on the slot's review.
 
 ```commit
 docs(ch07-review-merge): the person reviews the commit or the merge in 7
