@@ -574,7 +574,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.19.2 and the repo
 [x] kit-2026-10-19-2         reinstall the kit at 2026.10.19.2 and apply its migration report to docs/05 §5, AGENTS.md and docs/manuals/ · after docs06-m21-opening
 [ ] ch08-update-2026-10-19-2 chapter 8: the update example and its report at 2026.10.19.2; both editions · after kit-2026-10-19-2
 [>] ch10-12-run-manual       chapters 7, 9 and 10: the manual of running it, always owed, named in the Manuals slot by /brainstorm, written by the first delivery after which a person can run the product and updated by the deliveries that change a step; both editions · after kit-2026-10-19-2
-[ ] ch13-apply-run-manual    chapter 13: /apply's next steps, use the delivery as its user, are the conversation's; the manual of running it is what survives it; both editions · after kit-2026-10-19-2
+[>] ch13-apply-run-manual    chapter 13: /apply's next steps, use the delivery as its user, are the conversation's; the manual of running it is what survives it; both editions · after kit-2026-10-19-2, ch10-12-run-manual
 [>] readme-run-manual        README.md and README.pt.md: "Build locally" points to docs/manuals/build-the-book-from-a-clone.md · after kit-2026-10-19-2
 [ ] m23-review               the review of M23 as docs/05 §8 says · after kit-2026-10-19-2, ch08-update-2026-10-19-2, ch10-12-run-manual, ch13-apply-run-manual, readme-run-manual
 ```
