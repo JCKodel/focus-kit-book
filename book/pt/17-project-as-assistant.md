@@ -121,11 +121,11 @@ Não existe comando de status, porque a fila já é o status.
 Perguntada "em que pé estamos?" na biblioteca de empréstimos, uma sessão responde assim, numa resposta escrita para este capítulo:
 
 ```text
-Marco 1, um bibliotecário empresta e recebe de volta: 4 de 7 feitas.
+Marco 1, um bibliotecário empresta e recebe de volta: 4 de 6 feitas.
 Em andamento: devolver-livro [*], sendo construída.
 Esperando: nenhuma.
-Próxima linha livre: formato-devolucao [ ], ainda sem página.
-Rode: /propose formato-devolucao (Codex: $propose formato-devolucao)
+Próxima linha livre: m1-review [ ], ainda sem página.
+Rode: /propose m1-review (Codex: $propose m1-review)
 ```
 
 Cada parte dela é lida do docs/06: a contagem do marco, a linha em andamento com a sua marca, as esperas, e a primeira linha livre, com o comando que a tabela do capítulo 8 dá para cada host.

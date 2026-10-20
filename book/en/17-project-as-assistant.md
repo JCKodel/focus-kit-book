@@ -121,11 +121,11 @@ There is no status command, because the queue already is the status.
 Asked "where are we?" on the lending library, a session answers this way, in an answer written for this chapter:
 
 ```text
-Milestone 1, a librarian lends and takes back: 4 of 7 lines done.
+Milestone 1, a librarian lends and takes back: 4 of 6 lines done.
 In flight: return-book [*], being built.
 Waiting: none.
-Next free line: due-date-format [ ], no page yet.
-Run: /propose due-date-format (Codex: $propose due-date-format)
+Next free line: m1-review [ ], no page yet.
+Run: /propose m1-review (Codex: $propose m1-review)
 ```
 
 Every part of it is read from docs/06: the milestone's count, the line in flight with its mark, the waits, and the first free line, with the command chapter 8's table gives for each host.
