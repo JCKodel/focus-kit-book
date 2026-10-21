@@ -103,15 +103,15 @@
 * [x] `grep -n "contêiner\|container" book/*/13-apply.md` prints nothing new: chapter 13 does not lay out the container.
 * [x] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version or date in chapter text.
 * [x] `make verify` green.
-* [x] `make book`: left to the driver after the batch; the milestone review records the build.
-* [x] Delivery review by one read-only Opus agent, with the advisor, over this page and `git diff HEAD` of the four chapter files, against docs/04 and AGENTS.md.
+* [x] `make book` exit 0, run by this lane after the second verify, with both PDF paths (Proof); the definition left it to the driver (Divergences).
+* [x] Delivery review by one read-only Opus agent, launched by this lane, over this page and `git diff HEAD` of the four chapter files, against docs/04 and AGENTS.md (Delivery review); nothing shows it kept the session's advisor, as docs/05 §5 asks (Divergences).
 * [x] Page moved to `work/done/`, covered by the last verify.
 
 **Divergences.**
 
 * Two sentences differ from the Contract's wording, after the delivery review: chapter 13 en's new line after :31 opens "The same holds for a session opened..." instead of "So does a session opened...", whose "So does" took the verb of "That refusal comes before any build" and read as the session coming before any build; the pt line, "O mesmo vale para...", already read so. In chapter 19's key point, both editions, "never in the container" ("nunca no contêiner") moved up beside "each session opens where it works", where it says that no session opens there, instead of following the stop.
-* `make book`: the Done when item leaves it to the driver; the batch's rules had this lane run it after the last verify, and the Proof records it.
-* The delivery review: the Done when item says "with the advisor"; it was one read-only Opus agent launched by this lane, and nothing shows it kept the session's advisor.
+* `make book`: the Done when item, as defined, left it to the driver; the batch's rules had this lane run it after the last verify, and the Proof records it. `m26-records-claims` gave the item the Proof's words.
+* The delivery review: the Done when item, as defined, said "with the advisor"; it was one read-only Opus agent launched by this lane, and nothing shows it kept the session's advisor. `m26-records-claims` gave the item these words.
 * New lines land where the Contract puts them; with them, chapter 13 has 280 lines and chapter 19 has 378 in both editions.
 
 **Decisions taken alone in /apply.**
@@ -127,7 +127,7 @@
 
 No new queue line.
 
-**Proof.** `make verify` was run after the chapter edits, after the review's fixes with the page moved to `work/done/`, and again after this Proof was written: exit 0 each time, every check passed, the link check included. The Done when greps print one `additionalDirectories` line per edition (19 :140, in the block after the manual), the footnote's use (:145) and definition (:378) in each edition, and no new `container` or `contêiner` line in chapter 13. This lane ran `make book` after the second verify, exit 0, both editions: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`. Nothing pushed; no environment changes.
+**Proof.** `make verify` was run after the chapter edits, after the review's fixes with the page moved to `work/done/`, and again after this Proof was written: exit 0 each time, every check passed, the link check included. The Done when greps print one `additionalDirectories` line per edition (19 :140, in the block after the manual), the footnote's use (:145) and definition (:378) in each edition, and no new `container` or `contêiner` line in chapter 13. This lane ran `make book` after the second verify, before its commit `51334ce`, in the one tree it shared with `ch08-update-2026-10-20-2`, committed at `e85f8ac`; whether that commit came before the build is not recorded. Exit 0, both editions: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`. `work/done/m26-review.md` records the build at `cfcfc9d`, whose `book/` is as `51334ce` left it, both lines' chapters included, with both paths. Nothing pushed; no environment changes.
 
 ```commit
 docs(ch13-19-session-folder): teach which folder each session opens in

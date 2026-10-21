@@ -49,7 +49,7 @@
 
 Terms of docs/03 used: `parallel token`, `dependency`, `waiting mark`, `free line`; none new. Sources: none new; the chapters cite no number here. Cases: none; every example is the lending library's, written for chapters 11 and 14, as they say.
 
-Neighbours: `ch08-23-branch-read` changes chapter 13 :28 and chapter 14 :62, :64 and :193 (and chapters 8, 12, 17 to 20, 23); this line changes chapter 13 :32 and chapter 14 :80, :97 (pt), :105 and :106, so no line is shared, and it is applied after this one, against these files as this delivery leaves them. `m25-records-claims` changes records only.
+Neighbours: `ch08-23-branch-read` changes chapter 13 :28 and chapter 14 :64 and :193 (and chapters 8, 12, 17 to 20, 23); this line changes chapter 13 :32 and chapter 14 :80, :97 (pt), :105 and :106, so no line is shared, and it is applied after this one, against these files as this delivery leaves them. `m25-records-claims` changes records only.
 
 **States.** Inapplicable: a chapter, no screen.
 
@@ -83,8 +83,8 @@ Neighbours: `ch08-23-branch-read` changes chapter 13 :28 and chapter 14 :62, :64
 * [x] Every change of the Contract made in both editions, and docs/03's row as written above; nothing else in those files changed.
 * [x] Each chapter still opens with its value; no filler and nothing useful cut; no number added; no em dash.
 * [x] `make verify` green.
-* [x] `make book` run after the last edit, with its commit and both PDF paths recorded in the Proof: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
-* [x] The Delivery review (docs/05 §5) read the changes against this page and docs/04, its reader and whether it kept the session's advisor recorded.
+* [x] `make book` run after the last edit, with the tree it built from and both PDF paths recorded under Verify and book after the last edit: HEAD `5a40864` with this delivery's unstaged edits in `book/`, before this lane's commit `414a0a4`; `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+* [x] Delivery review by one read-only Opus agent, over the nine files' `git diff HEAD` and this page (Delivery review): narrower than docs/05 §5, which has it read against docs/04, here not reread, nor AGENTS.md; its report says it consulted an advisor once, of which this session has no other record.
 
 **Built.** The eighteen replacements of the Contract, C1 to C4 and C7 to C9, each only the quoted words, in the nine files; `git diff --stat HEAD` of the nine shows one changed line per replacement and no other.
 

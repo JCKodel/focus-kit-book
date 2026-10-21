@@ -90,7 +90,7 @@
 * [x] Every edit of the Contract made in both editions, and nothing else in the nine chapters moves.
 * [x] `grep -n "worktree or\|worktree ou" ` over the edited sentences finds none; ADR-0010 is gone from chapter 8's block; every row of the block is within 74 columns.
 * [x] Both editions written, each opens with its value, no filler and nothing useful cut, every number sourced (no number added), no em dash.
-* [x] Delivery review as docs/05 §5 says.
+* [x] Delivery review by one read-only Opus agent, over this page and `git diff HEAD` of the eighteen chapter files (Delivery review): narrower than docs/05 §5, which has it read against docs/04, here, with AGENTS.md, taken from the context it was given and not opened as files; its report says it consulted an advisor once, of which this session has no other record.
 * [x] `make verify` green.
 * [x] `make book` exit 0, with `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
 
@@ -108,7 +108,7 @@
 
 **Proof.** `make verify` exit 0 after the Contract's edits (build, parity, em dash, prose, width, examples, links, disclosure). No added line of the diff holds "worktree or" or "worktree ou"; `ADR-0010` no longer appears in either chapter 8.
 
-**Divergences.** One, from the Delivery review: en chapter 14 :64 reads "a branch shows the mark once the mark is committed on it", not the Contract's "once it is committed on it", where "it" could be read as the branch; pt keeps the Contract's words, whose "ela" can only be the mark.
+**Divergences.** Two, both from the Delivery review: en chapter 14 :64 reads "a branch shows the mark once the mark is committed on it", not the Contract's "once it is committed on it", where "it" could be read as the branch; pt keeps the Contract's words, whose "ela" can only be the mark. And the Contract (:15) and the second Decision taken alone quote chapter 14 en :62 / pt :63 as "and the lines only a branch has" / "e as linhas que só um branch tem", which at `7664d02` read "adds the lines only a branch has" / "acrescenta as linhas que só um branch tem"; the edits carry the Contract's phrase, and the quotes stay as the plan wrote them.
 
 **Decisions taken by /apply.** Chapters 18 :25 and 19 :179 keep the Contract's "unless the definition resumes" beside the sentence's later "or reuses it when the definition resumes", as the page's decision on them chose, so the taken rule never reads as having no exception.
 

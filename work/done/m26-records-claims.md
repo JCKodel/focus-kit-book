@@ -107,10 +107,45 @@ Terms: record, Delivery review, queue line, as docs/03 and docs/05 have them; no
 
 **Done when.**
 
-* [ ] Each quoted text counted once in its page before any edit; the 22 replacements made word for word.
-* [ ] `git diff` of the seven pages shows only those replacements and the two new items.
-* [ ] A search of the seven pages finds no ticked "Delivery review as docs/05 §5 says" and no "with the advisor" on a review item, but in quotes of the old text (`ch13-19-session-folder` :114, `m25-records-claims`' Contract, :120 and :133), each hit recorded in the Proof.
-* [ ] Each of the seven pages' last fenced block is `commit`, and nothing follows it; no em dash; no Done when item of a record unticked.
-* [ ] `make verify` green after the last edit, its result in this page's Proof; a link that fails on a refused host is named with its link, not counted green.
-* [ ] `make book` exit 0 after the last verify, the Proof naming HEAD, `git status --short book/` and both PDF paths.
-* [ ] Delivery review by one read-only Opus agent this lane launches, over `git diff HEAD` of the seven pages and this page, against this page and docs/04; whether it keeps the session's advisor recorded as it is.
+* [x] Each quoted text counted once in its page before any edit; the 22 replacements made word for word.
+* [x] `git diff` of the seven pages shows only those replacements and the two new items.
+* [x] A search of the seven pages finds no ticked "Delivery review as docs/05 §5 says" and no "with the advisor" on a review item, but in quotes of the old text (`ch13-19-session-folder` :114, `m25-records-claims`' Contract, :120 and :133), each hit recorded in the Proof.
+* [x] Each of the seven pages' last fenced block is `commit`, and nothing follows it; no em dash; no Done when item of a record unticked.
+* [x] `make verify` green after the last edit, its result in this page's Proof; a link that fails on a refused host is named with its link, not counted green.
+* [x] `make book` exit 0 after the last verify, the Proof naming HEAD, `git status --short book/` and both PDF paths.
+* [x] Delivery review by one read-only Opus agent this lane launches, over `git diff HEAD` of the seven pages and this page, against this page and docs/04; whether it keeps the session's advisor recorded as it is.
+
+**Built.** The 22 replacements of the Contract in the seven record pages, each made with its quoted text as the anchor and its new text word for word; replacements 11 and 14 each change one line in two places, and replacements 2 and 19 each add one line. Before the edits, the facts the new texts assert were read again from their sources: the `52fe5f9` verify and review items of `kit-2026-10-20-2`, the `d738fe5` review item of `ch08-update-2026-10-20-2`, the Delivery review paragraphs of the five pages whose items now name who read (the counts of files, docs/04 not opened or not reread, the advisor), `ch09-14-token-wording`'s "Verify and book after the last edit" with HEAD `5a40864`, SETUP.md step 5 at `da29c25` (lines 105 to 111), the hunks of `git diff -U0 6daa835 d8b2df0` on chapters 13 and 14 (13 :28, 14 :64 and :193) and chapter 14 en :62 at `7664d02` ("adds the lines only a branch has"); each held.
+
+**Checked.** Over the seven pages: no em dash, no unticked Done when item, each page's last fenced block `commit` with nothing after it; the search hits are listed in the Proof.
+
+**Divergences.** None from the Contract.
+
+**Decisions taken alone in /apply.**
+
+* The review's second finding, on `ch08-update-2026-10-20-2` :98, is left as written: the text is the Contract's replacement 5, which this delivery makes word for word, and its "is not known" says what the paragraph's "is not recorded" says; that the item also gained "(Delivery review)" is reported to the driver as a possible line under M26.
+
+**Delivery review.** One read-only Opus agent, launched by this lane, over `git diff HEAD` of the seven pages and this page. Its report says it read AGENTS.md and this page, took docs/05 §5 and docs/04 from the brief it was given and did not open them as files, so it was narrower than docs/05 §5 asks; and it read the define and apply copies of the seven pages, their Delivery review and Proof paragraphs, `git log`, `git diff --stat 51334ce cfcfc9d -- book/`, `work/done/m26-review.md` :205 to :212, `git diff -U0 6daa835 d8b2df0` on chapters 13 and 14, `git show 7664d02` of chapter 14, SETUP.md at `da29c25` and `git show HEAD:docs/06-Queue.md`. Its report says it consulted an advisor once before reporting; this session has no other record of that. It found the 22 replacements word for word with nothing else changed (22 insertions, 20 deletions), only the three rewordings the page names missing from their Divergences, every search hit a quote of old text or not on a review item, no em dash, no unticked item, each last fenced block `commit`, and every slug and milestone in the committed docs/06. Findings and answers:
+
+* Checked points to a Proof the page did not yet have, and Done when item 3's list names :133, now :134, and not `ch08-update-2026-10-20-2` :98, `kit-2026-10-20-2` :28 or `kit-2026-10-20-1` :34: the Proof below lists the hits at their current lines.
+* `ch08-update-2026-10-20-2` :98 says "is not known" where its paragraph says "is not recorded", and the item gained "(Delivery review)" as well as losing "with the advisor": the Contract's words, kept (Decisions taken alone).
+
+**Proof.**
+
+* Each of the 24 anchors of the 22 replacements counted 1 in its page before any edit.
+* `git diff --numstat HEAD` of the seven pages: 22 insertions, 20 deletions, the 20 changed lines and the two added ones.
+* Search of the seven pages for "Delivery review as docs/05 §5 says": `m25-records-claims` :35, :48, :53, :64, :68 and :73 (its Contract's quotes), :120 (its search item) and :134 (its Divergences, :133 before replacement 19 added a line), all quotes of old text. For "with the advisor": `ch13-19-session-folder` :114 and `ch08-update-2026-10-20-2` :98 (Divergences quoting the old item), `m25-records-claims` :73, :120 and :129 (quotes), and `kit-2026-10-20-2` :28 and `kit-2026-10-20-1` :34, the kit's readers among the Kept project choices, not a review item.
+* No em dash in the seven pages or this page; no unticked Done when item in the seven; each one's last fenced block is `commit`, nothing after it.
+* `make verify` passed whole, links included, after the replacements, again after the page moved to `work/done/`, and again after this page's last edit.
+* `make book` exit 0 after that last verify, on HEAD `818011e` (`ch12-propose-worktree-path`'s commit, made while this lane ran) with `git status --short book/` empty, so no other lane's uncommitted chapter was in the tree. PDFs: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+```commit
+docs(m26-records-claims): make M26's records hold only what happened
+
+- review items say who read; the advisor recorded as it is
+- reworded Done when items listed in Divergences
+- make book lines name the tree, the commit and the build at cfcfc9d
+- SETUP and chapter 14 cites and quotes match what they cite
+
+work/done/m26-records-claims.md
+```
