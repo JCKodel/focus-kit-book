@@ -625,3 +625,48 @@ When this milestone closes, the book teaches focus-kit 2026.10.20.1 and the repo
 [x] ch08-23-branch-read (P-) chapters 8, 12, 13, 14, 17, 18, 19, 20 and 23 read each slug's line where docs/05 §4 says, with the lines only a branch has and an existing branch taken unless the definition resumes, and chapter 8's Git item paraphrases only what kit-2026-10-20-1 records; both editions · after m25-review
 [x] m25-records-claims (PA) the records of kit-2026-10-20-1, ch08-update-2026-10-20-1, ch12-14-parallel-token, ch07-review-merge, ch08-23-fetch-taken, ch18-19-fetch-resume, ch18-switch-resume, docs03-free-line-held and m24-records-crossrefs hold only what happened: make book with its commit, the Delivery review against docs/04 and its advisor as recorded, no slug or milestone the committed queue lacks, and counts, Contract quotes and Divergences that match, the page ending with its commit block · after m25-review
 ```
+
+## M26. focus-kit 2026.10.20.2
+
+When this milestone closes, the book teaches focus-kit 2026.10.20.2 and the repository runs on it: with a worktree per delivery each session opens where it works, /propose in `main/` and /apply in a fresh session inside the delivery's worktree, whose path /propose gives; /apply opened anywhere else stops before any edit and gives that path; the container's manual lets a session in `main/` edit the worktrees.
+
+```
+[ ] kit-2026-10-20-2         reinstall the kit at 2026.10.20.2 and apply its migration report · after kit-2026-10-20-1
+[ ] ch08-update-2026-10-20-2 chapter 8: the update example and its report at 2026.10.20.2; both editions · after kit-2026-10-20-2
+[ ] ch13-19-session-folder   chapters 13 and 19: where each session opens with a worktree per delivery, never the container, /propose giving the worktree's path, /apply stopping outside it, and the manual letting `main/`'s session edit the worktrees, Claude Code's `additionalDirectories` as the example; both editions · after kit-2026-10-20-2
+[ ] m26-review               the review of M26 as docs/05 §8 says · after kit-2026-10-20-2, ch08-update-2026-10-20-2, ch13-19-session-folder
+```
+
+## M27. focus-kit 2026.10.20.3
+
+When this milestone closes, the book teaches focus-kit 2026.10.20.3 and the repository runs on it: /propose and /apply typed with several slugs open one subagent per slug, in its worktree, together where `(PA)` and `after` allow, the flag kept because the person's command names every slug; a subagent reports its questions and the session relays them; the command may say to decide alone or to build as well, the page recording both.
+
+```
+[ ] kit-2026-10-20-3         reinstall the kit at 2026.10.20.3 and apply its migration report to docs/05 §§2 and 4 · after kit-2026-10-20-2
+[ ] ch08-update-2026-10-20-3 chapter 8: the update example and its report at 2026.10.20.3; both editions · after kit-2026-10-20-3
+[ ] ch12-14-18-several-slugs chapters 12, 13, 14 and 18: a command typed with several slugs, one subagent each in its worktree, the tokens obeyed, the flag kept and why, questions relayed by the session, deciding alone and building as well recorded on the page; both editions · after kit-2026-10-20-3
+[ ] m27-review               the review of M27 as docs/05 §8 says · after kit-2026-10-20-3, ch08-update-2026-10-20-3, ch12-14-18-several-slugs
+```
+
+## M28. focus-kit 2026.10.20.4
+
+When this milestone closes, the book teaches focus-kit 2026.10.20.4 and the repository runs on it: /propose claims the line with the kit's first script, run through git's own shell on every host, Windows without WSL included; the rule stays in docs/05 §2 and the steps live in the script, which prints the path the /apply session opens in.
+
+```
+[ ] kit-2026-10-20-4         reinstall the kit at 2026.10.20.4; the report names no migration · after kit-2026-10-20-3
+[ ] ch08-update-2026-10-20-4 chapter 8: the update example and its report at 2026.10.20.4, and the Windows requirement of the README; both editions · after kit-2026-10-20-4
+[ ] ch13-19-claim-script     chapters 13 and 19: the claim script, what it checks, creates, pushes and prints, the git alias that runs it on every host, Git for Windows' shell and the WSL recommendation; both editions · after kit-2026-10-20-4
+[ ] ch08-copilot-cli         chapter 8: the GitHub Copilot CLI as a host of its own, reading AGENTS.md and the skills from the terminal, apart from Copilot in VS Code and its prompt files; both editions · after kit-2026-10-20-4
+[ ] m28-review               the review of M28 as docs/05 §8 says · after kit-2026-10-20-4, ch08-update-2026-10-20-4, ch13-19-claim-script, ch08-copilot-cli
+```
+
+## M29. focus-kit 2026.10.20.5
+
+When this milestone closes, the book teaches focus-kit 2026.10.20.5 and the repository runs on it: setup writes into the repository the session works in, never beside a downloaded `SETUP.md`, and writes no `AGENTS.md` or docs/05, which /brainstorm and /analyze write; a page decided alone says the agent chose; `after` holds both commands until every line it names is `[x]` whatever the token says, and the kit's long sentences are split with no rule changed, docs/05 §4's four waiting cases now a list.
+
+```
+[ ] kit-2026-10-20-5         reinstall the kit at 2026.10.20.5; the report names no migration · after kit-2026-10-20-4
+[ ] ch08-update-2026-10-20-5 chapter 8: the update example and its report at 2026.10.20.5, setup writing only into the session's repository and never AGENTS.md; both editions · after kit-2026-10-20-5
+[ ] ch14-after-over-token    chapter 14: `after` holds /propose and /apply until every line it names is `[x]`, whatever the `(PA)` token says, with `shout (-A) · after farewell` as the example; both editions · after kit-2026-10-20-5
+[ ] m29-review               the review of M29 as docs/05 §8 says · after kit-2026-10-20-5, ch08-update-2026-10-20-5, ch14-after-over-token
+```
