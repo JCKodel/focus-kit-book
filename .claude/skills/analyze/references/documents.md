@@ -156,8 +156,9 @@ that it is not. The agent never commits or merges on its own:
   branch's HEAD, and pushes its branch at once, so the line is taken in
   every clone, or reuses the one that exists, and writes the page in it; a
   branch `<slug>` without the prefix is not the delivery's. `/apply` runs
-  in a session opened in it, never in `main/`; the container's manual lets
-  a session in `main/` edit `<hidden>/worktrees/`. The branch reaches the
+  in a session opened in it, or a subagent sent to its path, never in
+  `main/`; the container's manual lets a session in `main/` edit
+  `<hidden>/worktrees/`. The branch reaches the
   main branch in one merge, as above. For parallel work by several people,
   or by one person whose deliveries touch the same files: one branch does
   not touch another. Before running two at once, pick free lines
@@ -194,8 +195,8 @@ however small, becomes a `[ ]` line in docs/06; what was said that the
 line cannot hold goes into a draft `work/<slug>.md`. The answer stops
 there and names `/propose <slug>`, as this host invokes commands; the
 person runs it in this session, whose conversation the draft already
-holds, or in a fresh one. /apply always starts in a fresh session: it
-has only what the page says.
+holds, or in a fresh one. /apply always starts in a fresh session, a
+subagent being one: it has only what the page says.
 
 Before /propose changes the queue or the page, use §5's git strategy:
 create the branch or worktree named after the slug, push its branch, or
@@ -238,13 +239,13 @@ dropped, what the proof found, the decisions taken. It ends with the commit
 message /apply suggested, in a fenced block whose info string is `commit`.
 There is one final block: a resumed /apply replaces the earlier suggestion.
 
-A draft with unanswered scope questions is not ready for /apply, even
-when its file exists. Before marking `[>]`, every section above is filled
-or explicitly inapplicable and no scope decision remains open. Ask the
-person to review the page: Behaviour is checkable, Contract exact, Out of
-scope names what they assumed was included, and choices made on their
-behalf are explicit. Corrections happen in the /propose conversation;
-/apply starts in a fresh session afterwards.
+A draft with open scope questions is not ready for /apply, even when its
+file exists: before `[>]`, every section above is filled or explicitly
+inapplicable and no scope decision remains open. Ask the person to review
+the page: Behaviour checkable, Contract exact, Out of scope naming what
+they assumed was included, choices made on their behalf explicit.
+Corrections happen in the /propose conversation; /apply starts in a
+fresh session afterwards.
 
 ## 4. The queue
 
@@ -282,14 +283,14 @@ work changes, so the queue shows what is happening while it happens:
 
 A board may read the queue, and people pull work from it, so a mark
 changes at once: `[~]` is /propose's first edit, `[*]` is /apply's first,
-and `[x]` is /apply's last. On trunk the board sees it at once. With a
-branch or a worktree per delivery the mark lives on the delivery's
-branch, pushed when /propose creates it, and the main branch shows the
-line as it was until the merge: after `git fetch`, a line whose branch
-exists is taken, whatever main shows, and whoever reads the queue there,
-a board or a session picking free lines or resolving an `after`, takes
-each slug's line from that branch, local or remote, and the lines only a
-branch has, reconciled by slug as below.
+`[x]` is /apply's last. On trunk the board sees it at once. With a branch
+or a worktree per delivery the mark lives on the delivery's branch, pushed
+when /propose creates it, and the main branch shows the line as it was
+until the merge. After `git fetch`, a line whose branch exists is taken,
+whatever main shows. Whoever reads the queue there, a board or a session
+picking free lines or resolving an `after`, takes each slug's line from
+that branch, local or remote, and the lines only a branch has, reconciled
+by slug as below.
 
 A line waits when the person says it is blocked, when it needs an answer
 that was asked and not given, or when work already started finds it needs
@@ -314,17 +315,31 @@ undone; a line whose `after` names it is the person's to re-decide.
 
 Two sessions in one working tree, on free lines that touch different
 files, are the normal case of parallel work on trunk. Another line
-changing mark, another delivery's page or files appearing in the tree,
-and another session's index entries are that session's work, not a
-conflict: do not stop for them, do not touch them, change only this
-delivery's line and stage only this delivery's paths and hunks, including
-its own hunk of docs/06. A conflict is a line edited by both, or a
-file this page needs that the other delivery is changing; then stop and
-report. Two deliveries' edits in one hunk, each on its own line, as two
-neighbouring queue lines are, conflict in nothing: they are split when
-staged. In worktrees, change only this delivery's line; when branches are
-integrated, reconcile docs/06 by slug, keeping every line at its latest
-state, never one side's whole file.
+changing mark, another delivery's page or files in the tree and another
+session's index entries are that session's work, not a conflict: do not
+stop for them or touch them; change only this delivery's line and stage
+only its paths and hunks, its own hunk of docs/06 included. A conflict is
+a line edited by both, or a file this page needs that the other delivery
+is changing; then stop and report. Two deliveries' edits in one hunk, each
+on its own line, as neighbouring queue lines are, conflict in nothing: they
+are split when staged. In worktrees, change only this delivery's line; when
+branches are integrated, reconcile docs/06 by slug, keeping every line at
+its latest state, never one side's whole file.
+
+A command typed with several slugs opens one subagent per slug, each
+following the command's file with one slug, sent to the slug's worktree
+where §5's Git slot has one (/propose creates it). The subagents the
+tokens and `after` let run at once are opened at once, not one after
+another; a line still waiting when the others end is reported, not waited
+for. The session edits nothing itself. A subagent cannot ask the person: it reports the question
+with the context to answer it and stops; the session asks and sends the
+answer back, resuming it where the host can, else opening it again on the
+slug, whose `[~]` or `[*]` it resumes on the command's word. A command that
+says to decide alone has each question answered by its recommendation,
+written on the page as the agent's answer, so the review finds it; one
+that says to build as well has a new subagent run /apply when a page
+reaches `[>]`, the page saying it was built before the person read it,
+who reads the pages and the diffs at the end.
 
 ## 5. This project
 
@@ -423,8 +438,8 @@ complete, so one merge still holds the whole delivery.
 
 No formal spec, no spec delta, no change folder, no numbered tasks, no
 gate before implementation beyond a complete page, no review of a review,
-no specialized subagent beyond the reviews' readers and checker (§5's
-Delivery review, §8), no tool the deliveries did not ask for. When one of these is
+no subagent beyond a command's one per slug (§4) and the reviews' readers
+and checker (§5, §8), no tool the deliveries did not ask for. When one is
 proposed, the question is: which concrete error would it have caught? The
 answer names an error that happened.
 
@@ -444,32 +459,31 @@ the base the commit of the previous milestone's review, so the range
 holds the fixes of its findings, which get no second review, or the
 first commit for a first milestone, or, where no earlier review exists,
 the commit the page names and why; and the commit HEAD was when the
-reading started, so the range stays fixed while readers work; and it
-lists the paths `git diff --stat <base>..<that commit>` shows: always
-the range, since a bare commit reads that one commit. It costs, so the
-session says it is time and starts it only on the person's word. §5's
-Milestone review slot says who reads: the host's deep review, which the
-person launches over that range; or the kit's readers, one read-only
-agent per area of the slot, in parallel where the host runs agents, or
-one fresh session per area, opened by the person, where it does not;
-an area too large for one careful reading splits again. Each reader has
-the whole repository open and reads its area's changes for what no
-delivery's own review could see, one delivery's work against another's,
-a document against another, the whole against docs/01, and reports
-candidates by file and line and the paths it read. Either way, one
-checker, an agent or the review's session, opens each candidate's file
-and marks it seen (true in the file today), latent (nothing triggers it
-today) or weak (the claim does not hold as stated) before the person
-sees it. They fix nothing. When the paths read miss some of the range's,
-the page says which and the line waits as `[?]` with `· resume: apply`
-and `· blocked: <what was read>` (§4). A candidate the person confirms
-is a finding like the others.
+reading started, so the range stays fixed while readers work; and the
+paths `git diff --stat <base>..<that commit>` shows: always the range,
+since a bare commit reads that one commit. It costs, so the session says
+it is time and starts it only on the person's word. §5's Milestone review
+slot says who reads: the host's deep review, which the person launches
+over that range, or the kit's readers, one read-only agent per area of
+the slot, in parallel where the host runs agents, else one fresh session
+per area, opened by the person; an area too large for one careful reading
+splits again. Each reader has the whole repository open and reads its
+area's changes for what no delivery's own review could see, one
+delivery's work against another's, a document against another, the whole
+against docs/01, and reports candidates by file and line and the paths it
+read. Either way, one checker, an agent or the review's session, opens
+each candidate's file and marks it seen (true in the file today), latent
+(nothing triggers it today) or weak (the claim does not hold as stated)
+before the person sees it. They fix nothing. When the paths read miss
+some of the range's, the page says which and the line waits as `[?]` with
+`· resume: apply` and `· blocked: <what was read>` (§4). A candidate the
+person confirms is a finding like the others.
 
 Each finding becomes a `[ ]` line in the same milestone, under the review
-line, waiting for /propose. The milestone closes when those lines are
-`[x]`. They get no second review: each one passes through its own page,
-its proof and the person's commit, which is the review. A finding is
-never a fix in the middle of the next milestone.
+line, waiting for /propose; the milestone closes when they are `[x]`. They
+get no second review: each passes through its own page, its proof and the
+person's commit, which is the review; a finding is never a fix in the
+middle of the next milestone.
 ```
 
 ## AGENTS.md

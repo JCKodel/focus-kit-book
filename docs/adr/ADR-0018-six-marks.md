@@ -70,3 +70,7 @@ Since `kit-2026-10-20-1` the book runs focus-kit 2026.10.20.1; the six marks are
 ## Amendment, 2026-10-21 (kit-2026-10-20-2)
 
 Since `kit-2026-10-20-2` the book runs focus-kit 2026.10.20.2; the six marks are unchanged, and with a worktree per delivery each session opens where it works: /propose in `main/`, ending with the worktree's path, and /apply in a fresh session opened in that worktree, stopping before any edit anywhere else, the container's manual letting `main/`'s session edit the worktrees. The book stays on trunk, where no worktree exists: /propose gives no path, /apply runs in the one working tree as before, and no manual is owed (ADR-0010, docs/05 §5).
+
+## Amendment, 2026-10-21 (kit-2026-10-20-3)
+
+Since `kit-2026-10-20-3` the book runs focus-kit 2026.10.20.3; the six marks are unchanged, and /propose or /apply typed with several slugs opens one subagent per slug, a subagent being a fresh session, opened at once where the `(PA)` tokens and `after` allow, a line still waiting reported, not waited for; the session edits nothing itself, asks the person each question a subagent reports and sends the answer back, and a command that says to decide alone or to build as well has the page record it (docs/05 §§2, 4 and 7). The skills keep disabling model invocation, since the command the person typed names every slug. It applies on trunk as written: with no worktree, each subagent works in the one working tree, two sessions in one working tree being this queue's normal case (ADR-0010).

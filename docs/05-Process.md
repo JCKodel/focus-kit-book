@@ -26,8 +26,8 @@ however small, becomes a `[ ]` line in docs/06; what was said that the
 line cannot hold goes into a draft `work/<slug>.md`. The answer stops
 there and names `/propose <slug>`, as this host invokes commands; the
 person runs it in this session, whose conversation the draft already
-holds, or in a fresh one. /apply always starts in a fresh session: it
-has only what the page says.
+holds, or in a fresh one. /apply always starts in a fresh session, a
+subagent being one: it has only what the page says.
 
 Before /propose changes the queue or the page, use §5's git strategy:
 create the branch or worktree named after the slug, push its branch, or
@@ -162,10 +162,11 @@ waits in is that of 2026.10.18, and the ended and dropped lines are
 those of 2026.10.18.1, where a board sees a mark is that of
 2026.10.19, how the queue is read with a branch or a worktree per
 delivery is that of 2026.10.19.1, the branch as the claim of its line
-is that of 2026.10.20, and the `(PA)` token on queue lines is that of
-2026.10.20.1 (ADR-0018 and its amendments `kit-2026-10-18`,
+is that of 2026.10.20, the `(PA)` token on queue lines is that of
+2026.10.20.1, and a command typed with several slugs is that of
+2026.10.20.3 (ADR-0018 and its amendments `kit-2026-10-18`,
 `kit-2026-10-18-1`, `kit-2026-10-19`, `kit-2026-10-19-1`,
-`kit-2026-10-20` and `kit-2026-10-20-1`).
+`kit-2026-10-20`, `kit-2026-10-20-1` and `kit-2026-10-20-3`).
 
 Two sessions in one working tree, on free lines that touch different
 files, are the normal case of parallel work on trunk. Another line
@@ -186,6 +187,22 @@ file with one side or downgrade a completed line using a stale copy.
 Check the page at the expected path. A conflicting state or scope is
 reported for resolution, never guessed. Apply the same care to shared
 domain terms and ADRs.
+
+A command typed with several slugs opens one subagent per slug, each
+following the command's file with one slug, sent to the slug's worktree
+where §5's Git slot has one (/propose creates it). The subagents the
+tokens and `after` let run at once are opened at once, not one after
+another; a line still waiting when the others end is reported, not waited
+for. The session edits nothing itself. A subagent cannot ask the person:
+it reports the question with the context to answer it and stops; the
+session asks and sends the answer back, resuming it where the host can,
+else opening it again on the slug, whose `[~]` or `[*]` it resumes on the
+command's word. A command that says to decide alone has each question
+answered by its recommendation, written on the page as the agent's
+answer, so the review finds it; one that says to build as well has a new
+subagent run /apply when a page reaches `[>]`, the page saying it was
+built before the person read it, who reads the pages and the diffs at the
+end.
 
 ## 5. This project
 
@@ -350,8 +367,9 @@ the delivery is complete, so one merge still contains the whole delivery.
 
 No formal spec, no spec delta, no change folder, no numbered tasks, no
 gate before implementation beyond a complete page, no review of a review,
-no specialized subagent beyond the reviews' readers and checker (§5's
-Delivery review, §8), no tool the deliveries did not ask for. When one of these is proposed, the question
+no subagent beyond a command's one per slug (§4) and the reviews' readers
+and checker (§5's Delivery review, §8), no tool the deliveries did not ask
+for. When one of these is proposed, the question
 is: which concrete error would it have caught? The answer names an error
 that happened.
 

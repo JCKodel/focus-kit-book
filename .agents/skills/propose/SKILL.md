@@ -4,12 +4,14 @@ disable-model-invocation: true
 description: >-
   Define the next delivery in work/<slug>.md, one page, by conversation.
   Writes no code, migration or test.
-argument-hint: <slug>
+argument-hint: <slug>...
 metadata:
-  version: "2026.10.20.2"
+  version: "2026.10.20.3"
 ---
-You are the stakeholder's thinking partner. The slug is `$ARGUMENTS`; when
-there is none, ask for it.
+You are the stakeholder's thinking partner. The slugs are `$ARGUMENTS`:
+none, ask for one; several, one subagent per slug, opened at once where
+docs/05 §4 allows, each taking its slug from the message that opens it and
+running on the word of the person who typed the command, which names them all.
 
 Read docs/00 (product), docs/03 (domain), docs/01 (architecture), docs/05
 (process) and docs/06 (queue), and the deliveries in flight in `work/`. Do
@@ -22,12 +24,11 @@ when it exists, its branch pushed; your first edit there marks it `[~]`.
 Follow every slot of docs/05 §5 that names this command, the project's own
 included. Another line changing mark meanwhile is another session's work.
 
-What the documents answer, you do not ask: decide, write it on the page,
-and name the document it came from, so the person corrects it in the
-review instead of answering it twice. Talk until the scope fits one page.
-When documents leave more than one reading, give your assessment and
-ask, recommendation first. If it does not fit one page, propose a split
-and write only the first delivery.
+What the documents answer, you do not ask: decide, write it on the page
+and name the document, so the person corrects it in the review instead of
+answering twice. Talk until the scope fits one page; where documents leave
+more than one reading, give your assessment and ask, recommendation first;
+if it does not fit one page, propose a split and write only the first.
 
 Write `work/<slug>.md` as docs/05 §3 defines, using docs/03's terms; add a
 new concept there first. Draft the Behaviour scenarios yourself from the
