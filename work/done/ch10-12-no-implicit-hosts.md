@@ -69,11 +69,34 @@ No term of docs/03 is introduced (the host rows already hold Claude Code, the Co
 * Queue line wording: unchanged.
 * `(PA)` judged `(PA)`: the definition takes nothing from a line in flight (`m28-review` is `[x]`), and the build touches only chapters 10 and 12, which no line in flight edits.
 
+**Divergences.** None: the eight sentences went in word for word as the Contract writes them, at en 10 :33, pt 10 :33, en 12 :159, :160 and :192, and pt 12 :168, :169 and :201; no other line of chapters 10 or 12 moved. Chapter 8's cited lines did not move with `ch08-update-choice-outcome`: the claims are still at en 08 :132-135 and pt 08 :134-137.
+
+**Decisions taken by /apply.** Nothing was open. The queue line's wording is the driver's to change (the batch rules keep docs/06 out of this lane); it stands unchanged.
+
+**Proof.**
+
+* `make verify`: green, every check passed (build, parity, em dash, prose, width, examples, links, disclosure), exit 0, after the chapter edits and again after these records and the page's move to `work/done/`.
+* `make book`: run after the verify that followed the records, exit 0; the PDFs to review are `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`. `make verify` ran once more after this line, green, exit 0.
+
+**Delivery review.** One read-only Opus agent, launched by this /apply over this delivery's paths only (`git diff HEAD` of both editions of chapters 10 and 12), against this page, docs/04 and `AGENTS.md`, with chapter 8 en :128-137 and pt :130-139 for the claims. Its reply: no finding. All eight changed sentences match the Contract character for character (chapter 10 :33 in both editions; chapter 12 en :159, :160, :192 and pt :168, :169, :201); the diff is 8 insertions and 8 deletions across the four files, no other line touched; only Claude Code, the Copilot CLI and Codex are named, each backed by chapter 8 (en :132 / pt :134 for Codex's file, en :133-134 / pt :135-136 for the field and the Copilot CLI), and Copilot in VS Code and the other hosts are not named; no sentence says Codex honours `disable-model-invocation`; no source note, em dash, commit hash or run narration; the editions agree point for point, host names follow the page, and the Portuguese reads naturally; in both editions the section says "settings" and "Lifting one", and the summary bullet names both mechanisms. It ran neither verify nor the book, being read-only. No private case, so OD-3 approval is inapplicable.
+
 **Done when.**
 
-* [ ] Both editions of chapter 10 :33 changed as the Contract says, and nothing else in the chapter.
-* [ ] Both editions of chapter 12 changed at the three places the Contract says, and nothing else in the chapter.
-* [ ] Each chapter still opens with its value; no filler and nothing useful cut.
-* [ ] The claims trace to chapter 8 en :132-134 / pt :134-136.
-* [ ] No em dash, no commit hash, no run narration; disclosure scan green.
-* [ ] `make verify` green; `make book` run and both PDF paths given.
+* [x] Both editions of chapter 10 :33 changed as the Contract says, and nothing else in the chapter.
+* [x] Both editions of chapter 12 changed at the three places the Contract says, and nothing else in the chapter.
+* [x] Each chapter still opens with its value; no filler and nothing useful cut.
+* [x] The claims trace to chapter 8 en :132-134 / pt :134-136.
+* [x] No em dash, no commit hash, no run narration; disclosure scan green.
+* [x] `make verify` green; `make book` run and both PDF paths given.
+
+```commit
+docs(ch10-12-no-implicit-hosts): name Codex beside the other two hosts
+
+- chapter 10: a command runs only when named in Claude Code, the GitHub
+  Copilot CLI and Codex; both editions
+- chapter 12: the commands keep each host's setting, the field in Claude
+  Code and the Copilot CLI, the file beside each skill in Codex
+- chapter 12: the next sentence and the summary bullet agree
+
+work/done/ch10-12-no-implicit-hosts.md
+```

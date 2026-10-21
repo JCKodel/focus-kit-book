@@ -30,7 +30,7 @@ In another host, a command takes the form of chapter 8's table:
 | Jules, Junie, Warp, Kiro, Roo Code, Cline | by asking in words for `.agents/skills/propose/SKILL.md` |
 
 `/apply` takes the same form as `/propose`, with the slug of the delivery after it, or as the answer when the host asks for it, or, where neither works, in your message; `/brainstorm` and `/analyze` take it with no slug, `$brainstorm` in Codex.
-In Claude Code and the GitHub Copilot CLI a command runs only when you name it: a message that happens to match what it does starts nothing.
+In Claude Code, the GitHub Copilot CLI and Codex a command runs only when you name it: a message that happens to match what it does starts nothing.
 
 One choice is yours before the first `/propose`: the git strategy, trunk, a branch per delivery or a worktree per delivery.
 `/brainstorm` and `/analyze` ask it with a default and write your answer into docs/05: trunk for one person, and on a project with code, what the repository already does.
