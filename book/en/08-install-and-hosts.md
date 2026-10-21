@@ -43,7 +43,7 @@ The agent writes the kit's files as the setup file holds them now, and the chang
 It replaces a file only when that file matches one the kit shipped, in this version or an earlier one, and the earlier one is established from the kit's history, `git show <commit>:SETUP.md` in the kit's repository, or, without that history at hand, by your word that the file was never edited; a familiar name or a `metadata.version` line alone does not prove it.
 A command of your own in a host's folder, or an edit you made by hand to one of the kit's files, a line you added to `.claude/skills/propose/SKILL.md` say, stops the update before it writes or removes any file.
 The agent shows your edit as a diff against the kit file it was made on, and the kit's own change to that file since then apart and in short; it still reports the migrations and the next command, and you decide whether to keep your edit or replace it, knowing that a rule your edit added to a command can become a slot of docs/05 §5, which the commands follow (chapter 7).
-This check was tried on a copy of the book's kit files, made outside the book's repository: a line appended to `propose/SKILL.md` stopped the update to focus-kit 2026.10.20 this way, and every file of the copy was unchanged afterwards.
+This check was tried on a copy of the book's kit files, made outside the book's repository: a line appended to `propose/SKILL.md` stopped the update to focus-kit 2026.10.20.1 this way, and every file of the copy was unchanged afterwards.
 
 ## What an update reports
 
@@ -53,46 +53,39 @@ It compares the files with its own templates and reports each migration, a chang
 A migration may name a rule, a queue line or a slot.
 Your choices stay: a docs/05 whose §5 says "trunk, one session at a time" sees the wording for two sessions in one folder proposed, and keeps its own until the team accepts the change.
 
-Here is part of the report the update to focus-kit 2026.10.20 gave on this book's own repository, shortened and paraphrased from the record of that update, `work/done/kit-2026-10-20.md` in the book's repository:
+Here is part of the report the update to focus-kit 2026.10.20.1 gave on this book's own repository, shortened and paraphrased from the record of that update, `work/done/kit-2026-10-20-1.md` in the book's repository:
 
 ```
-Installed: focus-kit 2026.10.20, in every SKILL.md.
+Installed: focus-kit 2026.10.20.1, in every SKILL.md.
 Pending process migrations, by document and section, shortened:
 
 * docs/05, section numbers: match the template (§4 the queue,
   §5 the slots, §6 commit, §8 closing a milestone). None.
-* docs/05 §2: lacks "push its branch". Proposed: "Before /propose
-  changes the queue or the page, use §5's git strategy: create the
-  branch or worktree named after the slug, push its branch, or
-  reuse its existing one on resumption, bringing into it any draft
-  left for the slug."
-* docs/05 §4, where a board sees a mark and the branch as claim: does
-  not say the branch is pushed when /propose creates it, nor that a
-  line whose branch exists is taken. Proposed, from "On trunk the
-  board sees it at once." to the paragraph's end, the template's
-  text, which goes on: "With a branch or a worktree per delivery the
-  mark lives on the delivery's branch, pushed when /propose creates
-  it, and the main branch shows the line as it was until the merge:
-  after git fetch, a line whose branch exists is taken, whatever main
-  shows", and the rest as the template has it.
+* docs/05 §4, order as priority, after and the (PA) token on queue
+  lines: lacks the token. Proposed: the template's first paragraph
+  whole, which now says: "A line may carry (PA) after the slug:
+  whether its /propose and its /apply may run while the lines above
+  it are in flight. P: the definition takes nothing from their
+  pages; A: the build touches none of their files; - waits, for
+  every line above to be [>] or beyond before /propose, [x] before
+  /apply; after holds for both commands, with or without a token.
+  Whoever changes the queue re-judges the tokens it affects;
+  /propose corrects a token from the page." And its last paragraph
+  removed: its first sentence is in §8, its second in the new first
+  paragraph.
 * docs/05 §5, Git: a project choice, not a migration: trunk, ADR-0010,
   with the Publish policy, the agent never pushes. The kit's slot
   offers, for a branch or a worktree per delivery, /propose pushing
   the branch it creates; on trunk no branch is created. None.
-* AGENTS.md, the line on where things stand: lacks the delivery
-  branches. Proposed: "- Asked where things stand, answer from
-  docs/06 and work/, and with a branch or worktree per delivery from
-  the delivery branches after git fetch: the lines in flight, their
-  marks, and the next command, as this host invokes it."
 
-The other items cover docs/05 §3, the other slots of §5, §§6 to 8,
-docs/04 and docs/06.
-Next: /propose ch08-update-2026-10-20, once kit-2026-10-20 is [x].
+The other items cover docs/05 §§2 and 3, the other slots of §5,
+§§6 to 8, docs/04, docs/06 and AGENTS.md.
+Next: /propose ch08-update-2026-10-20-1, once kit-2026-10-20-1 is [x].
 ```
 
 Each item names a document and a section, and ends in one of three outcomes.
 It matches and needs nothing, and says so: `None`.
-It lacks something, and the item gives the wording the template proposes and where it goes, as for docs/05 §2.
+It lacks something, and the item gives the wording the template proposes and where it goes, as for docs/05 §4.
 Or it differs by a choice the project made and recorded with a date or an ADR, as the book's Git slot does: the item names that choice and what the kit says beside it, and asks for no change.
 Every item is reported, never done: the update writes none of these documents.
 
