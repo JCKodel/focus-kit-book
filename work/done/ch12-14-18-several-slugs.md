@@ -134,7 +134,7 @@
 * [x] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version, date or commit hash in chapter text, nothing implying Case B ran on the process.
 * [x] `make verify` green.
 * [x] `make book` run, both PDF paths recorded.
-* [x] Delivery review by a read-only agent over this page and `git diff HEAD` of the twelve chapter files and docs/03, against docs/04 and AGENTS.md.
+* [x] Delivery review by one read-only Opus agent, launched by this lane, over this page and `git diff HEAD` of the twelve chapter files and docs/03, given docs/04 and AGENTS.md (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 * [x] Page moved to `work/done/`, covered by the last verify.
 
 **Divergences.**
@@ -149,7 +149,7 @@
 * Of the review's four optional points, the two above are fixed, being text this delivery wrote that reads wrong; the other two are left as the Contract words them: "an agent it launches with a message, which is a fresh session" reads, in its place, as the agent being the session, and chapter 13's "read the page first" beside "Begin with the delivery, not the diff" the reviewer judged consistent and acceptable.
 * The review's observation on a branch per delivery, where the kit does not say how a command with several slugs behaves, is the kit's silence, not the book's; the book teaches the kit as it is, so no queue line.
 
-**Delivery review.** One read-only Opus agent, launched by this lane, over this page and `git diff HEAD` of the twelve chapter files and docs/03, given docs/04 and AGENTS.md. Its reply, as returned:
+**Delivery review.** One read-only Opus agent, launched by this lane, over this page and `git diff HEAD` of the twelve chapter files and docs/03, given docs/04 and AGENTS.md; whether it kept the session's advisor, as docs/05 §5 asks, is not recorded, its reply naming none. Its reply, as returned:
 
 > The delivery passes. Every change matches the Contract word for word in both editions, nothing outside the Contract changed in the 13 files, and `make verify` is green (exit 0). I found nothing that must be fixed and nothing that needs a new queue line; there are four small wording points and three observations below.
 >

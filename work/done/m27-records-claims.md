@@ -108,10 +108,44 @@ Terms: record, Delivery review, queue line, as docs/03 and docs/05 have them; no
 
 **Done when.**
 
-* [ ] Each quoted text counted once in its page before any edit; the 25 replacements made word for word.
-* [ ] `git diff` of the eight pages shows only those replacements, no line added or removed.
-* [ ] A search of the eight pages finds no ticked "as docs/05 §5 says" on a review item but in quotes of old text; no `make book` item ticked as left to the driver whose Proof says the lane ran it; and no build said to run "after the last verify" that its Proof places after an earlier one (`kit-2026-10-20-3` :86 and `m26-records-claims` :115 match their Proof, :151 and :140); each hit recorded in the Proof, as a quote or as true.
-* [ ] Each of the eight pages' last fenced block is `commit`, and nothing follows it; no em dash; no Done when item of a record unticked.
-* [ ] `make verify` green after the last edit, its result in this page's Proof; a link that fails on a refused host is named with its link, not counted green.
-* [ ] `make book` exit 0 after the last verify, the Proof naming HEAD, `git status --short book/` and both PDF paths.
-* [ ] Delivery review by one read-only Opus agent this lane launches, told to open docs/04 as a file and to list what it read, over `git diff HEAD` of the eight pages and this page, against this page and docs/04; ticked on what its paragraph records, the advisor recorded as it is.
+* [x] Each quoted text counted once in its page before any edit; the 25 replacements made word for word.
+* [x] `git diff` of the eight pages shows only those replacements, no line added or removed.
+* [x] A search of the eight pages finds no ticked "as docs/05 §5 says" on a review item but in quotes of old text; no `make book` item ticked as left to the driver whose Proof says the lane ran it; and no build said to run "after the last verify" that its Proof places after an earlier one (`kit-2026-10-20-3` :86 and `m26-records-claims` :115 match their Proof, :151 and :140); each hit recorded in the Proof, as a quote or as true.
+* [x] Each of the eight pages' last fenced block is `commit`, and nothing follows it; no em dash; no Done when item of a record unticked.
+* [x] `make verify` green after the last edit, its result in this page's Proof; a link that fails on a refused host is named with its link, not counted green.
+* [x] `make book` exit 0 after the last verify, the Proof naming HEAD, `git status --short book/` and both PDF paths.
+* [x] Delivery review by one read-only Opus agent this lane launches, told to open docs/04 as a file and to list what it read, over `git diff HEAD` of the eight pages and this page, against this page and docs/04; ticked on what its paragraph records, the advisor recorded as it is.
+
+**Built.** The 25 replacements of the Contract in the eight record pages, each made with its quoted text as the anchor and its new text word for word; replacements 3 and 4 change `ch08-update-2026-10-20-3` :106 in two places, and 19 and 20 change `m26-records-claims` :104 in two places. Before the edits, the facts the new texts assert were read again from git: `662dadd` at 11:37:51 and `c137b00` at 11:37:58 with parent `662dadd`, `2096a5f` with parent `c137b00`, `git diff --stat 662dadd c137b00 -- book/` empty; `818011e` (11:29:26) with parent `af2bc0a`, `c90ef6b` (11:22:15) with parent `460add8`; `9b37854:docs/06-Queue.md` :650 naming chapters 12, 13, 14 and 18, `61433bb`'s naming chapters 12, 13, 14, 16, 18 and 19 and docs/03; `af2bc0a:docs/06-Queue.md` :638 `[x] ch08-worktree-slot-manual` and :639 `[>] ch12-propose-worktree-path`.
+
+**Checked.** Over the eight pages: no em dash, no unticked Done when item, each page's last fenced block `commit` with nothing after it; the search hits are listed in the Proof.
+
+**Divergences.** None from the Contract. `make book` ran after the second of three verifies; the third, after the Proof recorded the build and the `commit` block was written, covers those last edits to this page, which no build reads.
+
+**Delivery review.** One read-only Opus agent, launched by this lane, told to open docs/04 as a file and to list what it read, over `git diff HEAD` of the eight pages and this page, against this page and docs/04. Its reply says it opened docs/04, `AGENTS.md` and this page whole, read excerpts of the eight pages, re-applied the 25 replacements to the HEAD text by script and found the eight files identical to the result, and checked the commits, times, parents and queue lines the new texts cite with `git log` and `git show`; to the question whether it consulted an advisor, it answered "No, I did not consult any advisor." Its one finding, as returned:
+
+> 1. `work/done/m27-records-claims.md:131`: the Proof calls "`m26-records-claims` :38, a quote of old text". But :38 holds "after the last verify" twice. One is the old text. The other is m26's own new text for `ch13-19-session-folder` :113, which this delivery's replacement 24 has just corrected, and which the Out of scope bullet at :77 keeps as history. Change it to: "`m26-records-claims` :38, its Contract's replacement 10, old and new text, kept as history (Out of scope)".
+
+Fixed as it says, at what is now :137, after this paragraph was added above it. Its two notes, on the verify line to rerun after the last edit and on the `make book` Proof and `commit` block still to come, were the page's remaining steps, done below.
+
+**Proof.**
+
+* Each of the 25 anchors counted 1 in its page and sat on the line the Contract names, before any edit; after them, each new text counted 1 on that same line.
+* `git diff --numstat HEAD` of the eight pages: 23 insertions and 23 deletions, the 23 changed lines; each page has as many lines as at HEAD.
+* Search of the eight pages for "as docs/05 §5 says": `m26-records-claims` :8 (Behaviour), :23, :44, :55 and :62 (its Contract's quotes), :72 (Out of scope), :112 (its search item) and :137 (its Proof), all quotes of old text or of the search; no review item ticks it.
+* Search for a `make book` left to the driver: `ch12-propose-worktree-path` :72 now says the lane ran it, and :78 says the definition left it; `ch13-19-session-folder` :106 and :113 say the same; `m26-records-claims` :36 and :38 are its Contract's quotes.
+* Search for "after the last verify": `kit-2026-10-20-3` :86, true by its Proof :151 (a build after the first verify and again after the last); `m26-records-claims` :115, true by its Proof :140; `m26-records-claims` :38, its Contract's replacement 10, old and new text, kept as history (Out of scope).
+* No em dash in the eight pages or this page; no unticked Done when item in the eight; each one's last fenced block is `commit`, nothing after it.
+* `make verify` passed whole, links included, after the 25 replacements, again after the review's fix, and a third time after the ticks and this page's last edit.
+* `make book` exit 0 after the second verify, on HEAD `d87f649` (`ch12-13-19-several-slugs-paths`' commit, made while this lane ran) with `git status --short book/` empty, so no other lane's uncommitted chapter was in the tree. PDFs: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+```commit
+docs(m27-records-claims): make M27's records hold only what happened
+
+- review items say who read, against what; the advisor as recorded
+- make book lines name the tree and the commit the build came before
+- counts, chapter lists and queue marks corrected as they were
+- reworded Done when items named in Divergences
+
+work/done/m27-records-claims.md
+```

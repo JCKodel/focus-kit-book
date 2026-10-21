@@ -110,7 +110,7 @@
 **Divergences.**
 
 * Two sentences differ from the Contract's wording, after the delivery review: chapter 13 en's new line after :31 opens "The same holds for a session opened..." instead of "So does a session opened...", whose "So does" took the verb of "That refusal comes before any build" and read as the session coming before any build; the pt line, "O mesmo vale para...", already read so. In chapter 19's key point, both editions, "never in the container" ("nunca no contêiner") moved up beside "each session opens where it works", where it says that no session opens there, instead of following the stop.
-* `make book`: the Done when item, as defined, left it to the driver; the batch's rules had this lane run it after the last verify, and the Proof records it. `m26-records-claims` gave the item the Proof's words.
+* `make book`: the Done when item, as defined, left it to the driver; the batch's rules had this lane run it after the second of its three verifies, and the Proof records it. `m26-records-claims` gave the item the Proof's words.
 * The delivery review: the Done when item, as defined, said "with the advisor"; it was one read-only Opus agent launched by this lane, and nothing shows it kept the session's advisor. `m26-records-claims` gave the item these words.
 * New lines land where the Contract puts them; with them, chapter 13 has 280 lines and chapter 19 has 378 in both editions.
 

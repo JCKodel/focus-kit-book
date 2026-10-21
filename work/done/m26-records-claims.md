@@ -101,7 +101,7 @@ Terms: record, Delivery review, queue line, as docs/03 and docs/05 have them; no
 * C22 and C26: "narrower than docs/05 §5", since both paragraphs say docs/04 was not opened or not reread.
 * The queue line keeps its wording.
 
-**Neighbouring lines.** `ch08-worktree-slot-manual` and `ch12-propose-worktree-path`, both under M26's review and `[~]`, touch chapters 8 and 12 only; this line touches seven pages in `work/done/` and this page, so none shares a file. Their uncommitted chapters may sit in the tree when this line runs `make book`; the Proof names them.
+**Neighbouring lines.** `ch08-worktree-slot-manual` and `ch12-propose-worktree-path`, both under M26's review, `[x]` and `[>]` in docs/06 at this page's define commit `af2bc0a`, touch chapters 8 and 12 only; this line touches seven pages in `work/done/` and this page, so none shares a file. The second's uncommitted chapter 12 may sit in the tree when this line runs `make book`; the Proof names what the tree held.
 
 **The token of this line.** `(PA)` holds: the definition takes nothing from the two lines' pages, and the build touches none of their files. No correction.
 
@@ -113,17 +113,17 @@ Terms: record, Delivery review, queue line, as docs/03 and docs/05 have them; no
 * [x] Each of the seven pages' last fenced block is `commit`, and nothing follows it; no em dash; no Done when item of a record unticked.
 * [x] `make verify` green after the last edit, its result in this page's Proof; a link that fails on a refused host is named with its link, not counted green.
 * [x] `make book` exit 0 after the last verify, the Proof naming HEAD, `git status --short book/` and both PDF paths.
-* [x] Delivery review by one read-only Opus agent this lane launches, over `git diff HEAD` of the seven pages and this page, against this page and docs/04; whether it keeps the session's advisor recorded as it is.
+* [x] Delivery review by one read-only Opus agent, launched by this lane, over `git diff HEAD` of the seven pages and this page (Delivery review): narrower than docs/05 §5, which has it read against docs/04, here taken from the brief it was given and not opened as a file; its report says it consulted an advisor once, of which this session has no other record.
 
 **Built.** The 22 replacements of the Contract in the seven record pages, each made with its quoted text as the anchor and its new text word for word; replacements 11 and 14 each change one line in two places, and replacements 2 and 19 each add one line. Before the edits, the facts the new texts assert were read again from their sources: the `52fe5f9` verify and review items of `kit-2026-10-20-2`, the `d738fe5` review item of `ch08-update-2026-10-20-2`, the Delivery review paragraphs of the five pages whose items now name who read (the counts of files, docs/04 not opened or not reread, the advisor), `ch09-14-token-wording`'s "Verify and book after the last edit" with HEAD `5a40864`, SETUP.md step 5 at `da29c25` (lines 105 to 111), the hunks of `git diff -U0 6daa835 d8b2df0` on chapters 13 and 14 (13 :28, 14 :64 and :193) and chapter 14 en :62 at `7664d02` ("adds the lines only a branch has"); each held.
 
 **Checked.** Over the seven pages: no em dash, no unticked Done when item, each page's last fenced block `commit` with nothing after it; the search hits are listed in the Proof.
 
-**Divergences.** None from the Contract.
+**Divergences.** None from the Contract. The Delivery review ran narrower than its Done when item, as defined, asked: docs/04 was taken from the brief and not opened (Delivery review); `m27-records-claims` gave the item the paragraph's words.
 
 **Decisions taken alone in /apply.**
 
-* The review's second finding, on `ch08-update-2026-10-20-2` :98, is left as written: the text is the Contract's replacement 5, which this delivery makes word for word, and its "is not known" says what the paragraph's "is not recorded" says; that the item also gained "(Delivery review)" is reported to the driver as a possible line under M26.
+* The review's second finding, on `ch08-update-2026-10-20-2` :98, is left as written: the text is the Contract's replacement 5, which this delivery makes word for word, and its "is not known" says what the paragraph's "is not recorded" says; that the item also gained "(Delivery review)" was reported to the driver as a possible line under M26; no line was added, and `m27-records-claims` has that Divergences sentence name both rewordings and the paragraph's "is not recorded".
 
 **Delivery review.** One read-only Opus agent, launched by this lane, over `git diff HEAD` of the seven pages and this page. Its report says it read AGENTS.md and this page, took docs/05 §5 and docs/04 from the brief it was given and did not open them as files, so it was narrower than docs/05 §5 asks; and it read the define and apply copies of the seven pages, their Delivery review and Proof paragraphs, `git log`, `git diff --stat 51334ce cfcfc9d -- book/`, `work/done/m26-review.md` :205 to :212, `git diff -U0 6daa835 d8b2df0` on chapters 13 and 14, `git show 7664d02` of chapter 14, SETUP.md at `da29c25` and `git show HEAD:docs/06-Queue.md`. Its report says it consulted an advisor once before reporting; this session has no other record of that. It found the 22 replacements word for word with nothing else changed (22 insertions, 20 deletions), only the three rewordings the page names missing from their Divergences, every search hit a quote of old text or not on a review item, no em dash, no unticked item, each last fenced block `commit`, and every slug and milestone in the committed docs/06. Findings and answers:
 

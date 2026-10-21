@@ -69,14 +69,14 @@
 * [x] `grep -n "worktree da entrega quando há um\|delivery's worktree when there is one" book/*/12-propose.md` prints :32 and :36 (as they are after the new line, :33 and :37) in each edition.
 * [x] The chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version or date in chapter text.
 * [x] `make verify` green.
-* [x] `make book`: left to the driver after the batch; the milestone review records the build.
-* [x] Delivery review by one read-only Opus agent over this page and `git diff HEAD` of the two chapter files, against docs/04 and AGENTS.md.
+* [x] `make book` exit 0, run by this lane after the second of its three verifies, with both PDF paths (Proof); the definition left it to the driver (Divergences).
+* [x] Delivery review by one read-only Opus agent, launched by this lane, over this page and `git diff HEAD` of the two chapter files, given docs/04 and AGENTS.md, which its reply does not name among what it read (Divergences); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 * [x] Page moved to `work/done/`, covered by the last verify.
 
 **Divergences.**
 
-* `make book`: the Done when item leaves it to the driver; the batch's rules had this lane run it after the last verify, and the Proof records it.
-* The delivery review: its reply lists the diff, this page, the propose skill and lines of chapters 13 and 19 as what it read, and does not name docs/04 or AGENTS.md among them, though its prompt gave both and it checked docs/04's prose rules.
+* `make book`: the Done when item, as defined, left it to the driver; the batch's rules had this lane run it after the second of its three verifies, and the Proof records it. `m27-records-claims` gave the item the Proof's words.
+* The delivery review: its reply lists the diff, this page, the propose skill and lines of chapters 13 and 19 as what it read, and does not name docs/04 or AGENTS.md among them, though its prompt gave both and it checked docs/04's prose rules; nor does it say whether the agent kept the session's advisor. `m27-records-claims` gave the item these words.
 
 **Omissions.** None: every change of the Contract is in both editions, with the wording it gives.
 
@@ -85,7 +85,7 @@
 * The links `([chapter 19](19-worktrees.md))` and `([chapter 13](13-apply.md))` are written as the Contract gives them, though chapter 12's own cross-references are plain "(chapter 14)": linked references are the book's form elsewhere (chapters 8 and 9), and the page names them.
 * The review's one observation, that the key point's appositive asks for a careful reading, is left as the Contract words it: the reviewer judged it grammatical and acceptable, so no fix and no queue line.
 
-**Delivery review.** One read-only Opus agent, launched by this lane, over `git diff HEAD` of `book/en/12-propose.md` and `book/pt/12-propose.md` and this page. Its reply, as returned:
+**Delivery review.** One read-only Opus agent, launched by this lane, over `git diff HEAD` of `book/en/12-propose.md` and `book/pt/12-propose.md` and this page; whether it kept the session's advisor, as docs/05 §5 asks, is not recorded. Its reply, as returned:
 
 > I found nothing to fix in `ch12-propose-worktree-path`.
 >
@@ -120,7 +120,7 @@
 
 No new queue line.
 
-**Proof.** `make verify` was run after the chapter edits, again with the review recorded and the page moved to `work/done/`, and once more after this Proof was written: exit 0 each time, every check passed, the link check included. The Done when greps print 2 `main/` lines per edition (:30, the new line, and :173 en, :182 pt, the key point) and the "when there is one" clause at :33 and :37 in each edition; the chapter has 178 lines in English and 187 in Portuguese. This lane ran `make book` after the second verify, exit 0, both editions: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`. Nothing pushed; no environment changes.
+**Proof.** `make verify` was run after the chapter edits, again with the review recorded and the page moved to `work/done/`, and once more after this Proof was written: exit 0 each time, every check passed, the link check included. The Done when greps print 2 `main/` lines per edition (:30, the new line, and :173 en, :182 pt, the key point) and the "when there is one" clause at :33 and :37 in each edition; the chapter has 178 lines in English and 187 in Portuguese. This lane ran `make book` after the second verify, before its commit `818011e`; the tree's HEAD and what it held of the other lanes' files are not recorded. Exit 0, both editions: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`. Nothing pushed; no environment changes.
 
 ```commit
 docs(ch12-propose-worktree-path): /propose stays in main/, gives path
