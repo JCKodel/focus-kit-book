@@ -17,7 +17,7 @@
 
 * `book/en/13-apply.md` and `book/pt/13-apply.md`, "What `/apply` does", the sentence that begins "On trunk the script creates, fetches and pushes nothing" (en :28) / "No trunk o script não cria, não busca e não dá push em nada" (pt :28), replaced whole by:
   * en: "On trunk the script creates, fetches and pushes nothing and prints the top of the repository, whichever of its folders the session runs in; with a branch per delivery it switches to the slug's own branch, the slug with no prefix, creating or reusing it and pushing it only when the remote lacks it ([chapter 18](18-git-essentials.md)); with a worktree per delivery it creates or reuses the worktree and, the same way, pushes its branch only when the remote lacks it, and the `path` it prints is that worktree's ([chapter 19](19-worktrees.md))."
-  * pt: "No trunk o script não cria, não busca e não dá push em nada e imprime o topo do repositório, seja qual for a pasta dele em que a sessão roda; com um branch por entrega ele troca para o branch do próprio slug, o slug sem prefixo, criando-o ou reaproveitando-o e dando push nele só quando o remoto não o tem ([capítulo 18](18-git-essentials.md)); com um worktree por entrega ele cria ou reaproveita o worktree e, do mesmo jeito, dá push no seu branch só quando o remoto não o tem, e o `path` que ele imprime é o desse worktree ([capítulo 19](19-worktrees.md))."
+  * pt: "No trunk o script não cria, não busca e não dá push em nada e imprime o topo do repositório, qualquer que seja a pasta do repositório em que a sessão rode; com um branch por entrega ele troca para o branch do próprio slug, o slug sem prefixo, criando-o ou reaproveitando-o e dando push nele só quando o remoto não o tem ([capítulo 18](18-git-essentials.md)); com um worktree por entrega ele cria ou reaproveita o worktree e, do mesmo jeito, dá push no seu branch só quando o remoto não o tem, e o `path` que ele imprime é o desse worktree ([capítulo 19](19-worktrees.md))."
   * Nothing else in the chapter changes.
 * `book/en/19-worktrees.md` and `book/pt/19-worktrees.md`:
   * "Worktrees in the kit", the sentence that begins "`/propose <slug>` checks the remote for" (en :192) / "O `/propose <slug>` consulta o remoto por" (pt :192): en "checks the remote for `<prefix>/<slug>`, a branch already there" becomes "checks the remote for `<prefix><slug>`, the prefix and the slug joined, `focus-kit/return-book` with the default prefix `focus-kit/`, a branch already there"; pt "consulta o remoto por `<prefixo>/<slug>`, já que um branch" becomes "consulta o remoto por `<prefixo><slug>`, o prefixo e o slug juntos, `focus-kit/devolver-livro` com o prefixo padrão `focus-kit/`, já que um branch"; the rest of the sentence stays.
@@ -67,14 +67,43 @@
 * Queue line: no wording change; it names what the page changes.
 * Token `(PA)`: every line above is `[x]`; the lines in flight beside it, `ch10-12-no-implicit-hosts` and `ch08-update-choice-outcome`, are below it and touch none of its files, and this page takes nothing from their pages; the only line touching one of its files, `ch13-16-several-slugs-sessions`, is below it and applied after it.
 
+**Divergences.** One, from the delivery review: chapter 13 pt :28's trunk clause reads "qualquer que seja a pasta do repositório em que a sessão rode" in place of the Contract's first wording, "seja qual for a pasta dele em que a sessão roda", whose "dele" could point to the script and whose verb wanted the subjunctive; the Contract above now carries the new wording. Every other sentence went in word for word as the Contract writes it, at chapter 13 :28, chapter 19 :192 and :381 in both editions, docs/03 :96 and :117 and ADR-0018 :80; the chapters keep 291/291 and 393/393 lines.
+
+**Decisions taken by /apply.** The Portuguese fix above, the reviewer's own wording, taken as recommended. Nothing else was open; the queue line stands unchanged (docs/06 is the driver's in this batch).
+
+**Proof.**
+
+* Every statement checked against `.claude/skills/propose/scripts/claim.sh`: `branch="$prefix$slug"` (:39), `branch) branch=$slug` (:41), `path: $top` on trunk (:27, `top` :15), the check of `refs/heads/$branch` (:63), pushes only where `remote` is 0 (:69-73, :74-82, :85-97).
+* `grep -rn -e '<prefix>/<slug>' -e '<prefixo>/<slug>' book docs` prints nothing; the "folder where the session runs" / "pasta onde a sessão roda" grep prints only :38 in each edition of chapter 13; the "pushes its branch only when" / "dá push no seu branch só quando" grep finds chapter 13 :28 in both editions and ADR-0018 :80.
+* No em dash in the added lines; no version, date, run or hash in chapter text.
+* `make verify`: green, every check passed, exit 0, after the edits, again after the Portuguese fix and the page's move to `work/done/`, and once more after these two lines.
+* `make book`: exit 0, after that verify; `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+**Delivery review.** One read-only Opus agent, launched by this /apply over this page and `git diff HEAD` of the six files, against the Contract, docs/04, docs/05 §§2 and 3, AGENTS.md and `claim.sh`. It read the page, the diff, `claim.sh` and grep output over `book/` and `docs/`; it did not reread docs/04, docs/05 or AGENTS.md beyond what was in its context, and it consulted no advisor. Its reply: one minor finding, chapter 13 pt :28's "seja qual for a pasta dele em que a sessão roda" reads awkwardly, "dele" able to point to the script and the verb wanting the subjunctive, suggesting "qualquer que seja a pasta do repositório em que a sessão rode", fix now with the Contract line; fixed as Divergences says. Otherwise no finding: all six files changed exactly as the Contract says and nothing else; every statement matches `claim.sh`; docs/03 :117's "checked first" is the claim check, the bare `refs/heads/<slug>` check at :59 only printing a note chapter 19 already covers; the three Done-when greps hold; no em dash, run narration, version, date or hash; both editions agree; nothing touches Case B.
+
 **Done when.**
 
-* [ ] Both editions changed as the Contract says in chapters 13 and 19, docs/03's two rows replaced and ADR-0018's sentence edited, nothing else in them.
-* [ ] `grep -rn -e '<prefix>/<slug>' -e '<prefixo>/<slug>' book docs` prints nothing; `grep -n "folder where the session runs\|pasta onde a sessão roda" book/*/13-apply.md` prints only :38's sentence in each edition.
-* [ ] `grep -n "pushes its branch only when\|dá push no seu branch só quando" book/*/13-apply.md docs/adr/ADR-0018-six-marks.md` finds chapter 13 in both editions and the ADR.
-* [ ] Every statement checked against `.claude/skills/propose/scripts/claim.sh`.
-* [ ] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version, date or commit hash in chapter text, nothing implying Case B ran on the process.
-* [ ] `make verify` green (docs/03's table rows included).
-* [ ] `make book` run, both PDF paths recorded.
-* [ ] Delivery review by one read-only Opus agent over this page and `git diff HEAD` of the six files, against docs/04, docs/05 §§2 and 3, AGENTS.md and `claim.sh`; what it read and whether an advisor was consulted recorded as they were.
-* [ ] Page moved to `work/done/`, covered by the last verify.
+* [x] Both editions changed as the Contract says in chapters 13 and 19, docs/03's two rows replaced and ADR-0018's sentence edited, nothing else in them.
+* [x] `grep -rn -e '<prefix>/<slug>' -e '<prefixo>/<slug>' book docs` prints nothing; `grep -n "folder where the session runs\|pasta onde a sessão roda" book/*/13-apply.md` prints only :38's sentence in each edition.
+* [x] `grep -n "pushes its branch only when\|dá push no seu branch só quando" book/*/13-apply.md docs/adr/ADR-0018-six-marks.md` finds chapter 13 in both editions and the ADR.
+* [x] Every statement checked against `.claude/skills/propose/scripts/claim.sh`.
+* [x] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version, date or commit hash in chapter text, nothing implying Case B ran on the process.
+* [x] `make verify` green (docs/03's table rows included).
+* [x] `make book` run, both PDF paths recorded.
+* [x] Delivery review by one read-only Opus agent over this page and `git diff HEAD` of the six files, against docs/04, docs/05 §§2 and 3, AGENTS.md and `claim.sh`; what it read and whether an advisor was consulted recorded as they were.
+* [x] Page moved to `work/done/`, covered by the last verify.
+
+```commit
+docs(m28-claim-wording): say what the claim script does as it does it
+
+- chapter 13: on trunk the script prints the top of the repository; it
+  pushes a branch only when the remote lacks it; both editions
+- chapter 19: the worktree's branch is <prefix><slug>,
+  focus-kit/return-book by default; both editions
+- docs/03: the container folder and claim rows name the ref each strategy
+  checks
+- ADR-0018: the kit-2026-10-20-4 amendment pushes only when the remote
+  lacks the branch
+
+work/done/m28-claim-wording.md
+```
