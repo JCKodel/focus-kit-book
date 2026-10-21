@@ -56,7 +56,8 @@ Ele compara os arquivos com os seus próprios modelos e relata cada migração, 
 Uma migração pode citar uma regra, uma linha da fila ou um slot.
 As suas escolhas ficam: um docs/05 cujo §5 diz "trunk, uma sessão por vez" vê proposto o texto para duas sessões numa pasta, e mantém o seu até o time aceitar a mudança.
 
-Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.20.5 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro são em inglês, e o relatório propôs o texto em inglês. O registro dessa atualização é o `work/done/kit-2026-10-20-5.md`, no repositório do livro.
+Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.20.5 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro são em inglês, e o relatório propôs o texto em inglês.
+O registro dessa atualização é o `work/done/kit-2026-10-20-5.md`, no repositório do livro.
 
 ```
 Instalado: focus-kit 2026.10.20.5, em cada SKILL.md.
@@ -76,15 +77,15 @@ Migrações de processo pendentes, por documento e seção, encurtadas:
 * docs/05 §5, Git: uma escolha do projeto, não uma migração: trunk,
   ADR-0010, com a Publish policy, o agente nunca envia. Nenhuma.
 
-Os outros itens cobrem o docs/05 §§2, 3 e 6 a 8, os outros slots do
-§5, o docs/04, o docs/06 e o AGENTS.md.
+Os outros itens cobrem o docs/05 §§2, 3 e 6 a 8, o resto do §4,
+os outros slots do §5, o docs/04, o docs/06 e o AGENTS.md.
 Próximo: /propose ch08-update-2026-10-20-5, quando
 kit-2026-10-20-5 estiver [x].
 ```
 
 Cada item cita um documento e uma seção, e termina num de três resultados.
 Ele bate e não precisa de nada, e diz isso: `Nenhuma`.
-Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra, como no docs/05 §4.
+Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra, como os dois itens do docs/05 §4 sobre o `after` e sobre um comando mandado decidir sozinho.
 Ou ele difere por uma escolha que o projeto fez e registrou com uma data ou um ADR, como o slot Git do livro: o item cita essa escolha, não pede mudança e também termina em `Nenhuma`.
 Todo item é relatado, nunca feito: a atualização não escreve nenhum desses documentos.
 
@@ -118,7 +119,7 @@ O que uma nova execução compara é o próprio passo 4 do arquivo de setup, uma
 
 Um host precisa de duas coisas do repositório: o arquivo de regras, `AGENTS.md`, e os comandos, o `/propose` e o `/apply` cada um com o slug que você digita depois dele, o nome da entrega em `work/<slug>.md` (capítulo 12).
 O `/brainstorm` e o `/analyze` começam um projeto, não uma entrega, então não levam slug; para definir ou construir `emprestar-livro`, você digita `/propose emprestar-livro` ou `/apply emprestar-livro`, ou, onde o host pede o slug, responde `emprestar-livro`.
-O arquivo de setup escreve o que cada host abaixo precisa:
+O arquivo de setup escreve os arquivos de comando de cada host e os ponteiros para o `AGENTS.md` no `GEMINI.md` e em `.agents/rules/focus-kit.md`; o `/brainstorm` ou o `/analyze` escreve o `AGENTS.md` e o `CLAUDE.md` com a sua importação (capítulo 9); a tabela diz onde cada host os lê:
 
 | Host | Lê as regras de | Lê os comandos de | Você digita |
 |---|---|---|---|
@@ -134,7 +135,7 @@ O arquivo de setup escreve o que cada host abaixo precisa:
 | Jules, Junie, Warp, Kiro, Roo Code, Cline | `AGENTS.md` | nenhuma | pedindo em palavras o `.agents/skills/propose/SKILL.md` |
 
 Cada comando é uma skill, uma pasta com um arquivo `SKILL.md` de instruções que o host carrega quando você a chama.[^claude-code-skills][^codex-skills][^copilot-skills]
-O Claude Code lê o `CLAUDE.md` no início de uma sessão, e uma linha `@AGENTS.md` nele importa o arquivo de regras; a partir da versão 2.1.277 ele lê o `AGENTS.md` sozinho, mas só num repositório sem `CLAUDE.md`, então o kit escreve o `CLAUDE.md` com a importação, que toda versão lê.[^claude-code-memory]
+O Claude Code lê o `CLAUDE.md` no início de uma sessão, e uma linha `@AGENTS.md` nele importa o arquivo de regras; a partir da versão 2.1.277 ele lê o `AGENTS.md` sozinho, mas só num repositório sem `CLAUDE.md`, então o `/brainstorm` ou o `/analyze` escreve o `CLAUDE.md` com a importação, que toda versão lê.[^claude-code-memory]
 O Codex, o Copilot no VS Code e o Devin Desktop, antes Windsurf, leem o `AGENTS.md` sozinhos.[^codex-agents-md][^copilot-instructions][^devin-rules]
 O GitHub Copilot CLI, o agente do GitHub no terminal, lê o `AGENTS.md`, o `CLAUDE.md` e o `GEMINI.md` juntos e os mescla, então o que o time escreve em qualquer dos outros dois também chega até ele.[^copilot-cli-reference]
 O Antigravity também lê o `AGENTS.md` direto; a regra que o kit escreve em `.agents/rules/focus-kit.md` é um ponteiro sempre ativo, sem regra própria, um caminho a mais até o `AGENTS.md`, não o único.

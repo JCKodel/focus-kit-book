@@ -94,11 +94,38 @@ No term of docs/03 is introduced; no source note is added (the excerpt already n
 * The second outcome names the two §4 items by their subjects, not by count alone, so the reader finds them in the excerpt.
 * `(PA)` judged `(PA)` by docs/05 §4 :103-106: no line above is in flight (`m29-review` is `[x]`), the definition takes nothing from another page, and the build touches only chapter 8, which neither neighbouring line edits.
 
+**Divergences.** None. The Portuguese split at :59 moves every later Portuguese line down by one, so the changed lines stand at pt :59-60, :80-81, :88, :122, :138 after the build; the Contract's numbers are as the files were before it.
+
+**Decisions taken by /apply.** None: the Contract left nothing open.
+
+**Proof.**
+
+* Each Contract item applied as worded, by exact replacement of the old text (each matched once): the diff of both chapter 8 files holds only these hunks, 12 insertions and 11 deletions; the footnote `[^claude-code-memory]` stays on the Claude Code line in each edition.
+* `work/done/kit-2026-10-20-5.md` :88 reads "docs/05 §4, every other item: matches since kit-2026-10-20-4", the basis of "the rest of §4".
+* `git -C ~/Projects/focus-kit show cc16f4e:SETUP.md`: :118-121, everything the four commands write (`docs/`, `work/`, `AGENTS.md`, `CLAUDE.md`) is never touched by this file; :275 and :350, `CLAUDE.md` holding `@AGENTS.md`; §3.11 `.agents/rules/focus-kit.md` at :1210 and §3.12 `GEMINI.md` at :1222, both written by the setup file.
+* Block lines measured: 64 and 54 columns en, 63 and 58 pt.
+* `make verify` exit 0 after the last edit to the chapters, every check passed, the external link included.
+* `make book` exit 0, on HEAD `b4c6228` with this delivery's changes and other lanes' uncommitted edits in the tree: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+**Delivery review.** One read-only Opus agent, launched by this /apply over this delivery's paths only (`git diff HEAD` of both chapter 8 files and this page, before these records), against this page, the record's lines 85 to 90, SETUP.md at `cc16f4e` (lines 116-123, 275, 350, 1208-1235) and chapter 8 en :38-43, :67-74, :86, :104, :139, :168 and :183; it did not open docs/04, using the conventions the brief and the page state, did not run `make verify`, and said it did not call any advisor tool. Its reply: "No findings." It found every Contract change in both editions as worded and nothing else in chapter 8 changed, the pt line shift from the split expected, the rewritten sentences consistent with en :40-42, :139, :168 and :183, the second outcome's two items at en :67 and :71 with the third §4 item at :74 ending in `None`, every claim supported by the record's line 88 and SETUP, no em dash, no commit hash, and block widths 64, 54, 63 and 58. No new queue line.
+
 **Done when.**
 
-* [ ] Both editions of chapter 8 changed at en :79-80, :86, :120, :136 / pt :59, :79-80, :87, :121, :137 as the Contract says, and nothing else in the chapter.
-* [ ] The chapter still opens with its value; no filler and nothing useful cut.
-* [ ] Every claim traces to `work/done/kit-2026-10-20-5.md` :88 or SETUP at focus-kit `cc16f4e` :118-121, :275, :350, §§3.11, 3.12.
-* [ ] No em dash, no commit hash, no run narration; every block line within 74 columns; disclosure scan green.
-* [ ] Delivery review as docs/05 §5 says, its record saying what the agent read and what its reply says of the advisor.
-* [ ] `make verify` green after the last edit; `make book` run, with its HEAD and tree named, and both PDF paths given.
+* [x] Both editions of chapter 8 changed at en :79-80, :86, :120, :136 / pt :59, :79-80, :87, :121, :137 as the Contract says, and nothing else in the chapter.
+* [x] The chapter still opens with its value; no filler and nothing useful cut.
+* [x] Every claim traces to `work/done/kit-2026-10-20-5.md` :88 or SETUP at focus-kit `cc16f4e` :118-121, :275, :350, §§3.11, 3.12.
+* [x] No em dash, no commit hash, no run narration; every block line within 74 columns; disclosure scan green.
+* [x] Delivery review as docs/05 §5 says, its record saying what the agent read and what its reply says of the advisor.
+* [x] `make verify` green after the last edit; `make book` run, with its HEAD and tree named, and both PDF paths given.
+
+```commit
+docs(ch08-other-items-claude-md): who writes CLAUDE.md, rest of §4
+
+- the second outcome points at the excerpt's two docs/05 §4 items
+- the excerpt's closing line names the rest of §4
+- the hosts lead-in and the Claude Code sentence: /brainstorm or
+  /analyze write AGENTS.md and CLAUDE.md, the setup file the rest
+- the Portuguese lead-in to the excerpt, one sentence per line
+
+work/done/ch08-other-items-claude-md.md
+```

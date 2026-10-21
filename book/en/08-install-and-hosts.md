@@ -76,14 +76,14 @@ Pending process migrations, by document and section, shortened:
 * docs/05 §5, Git: a project choice, not a migration: trunk, ADR-0010,
   with the Publish policy, the agent never pushes. None.
 
-The other items cover docs/05 §§2, 3 and 6 to 8, the other slots of
-§5, docs/04, docs/06 and AGENTS.md.
+The other items cover docs/05 §§2, 3 and 6 to 8, the rest of §4,
+the other slots of §5, docs/04, docs/06 and AGENTS.md.
 Next: /propose ch08-update-2026-10-20-5, once kit-2026-10-20-5 is [x].
 ```
 
 Each item names a document and a section, and ends in one of three outcomes.
 It matches and needs nothing, and says so: `None`.
-It lacks something, and the item gives the wording the template proposes and where it goes, as for docs/05 §4.
+It lacks something, and the item gives the wording the template proposes and where it goes, as the two docs/05 §4 items on `after` and on a command told to decide alone do.
 Or it differs by a choice the project made and recorded with a date or an ADR, as the book's Git slot does: the item names that choice, asks for no change, and ends in `None` too.
 Every item is reported, never done: the update writes none of these documents.
 
@@ -117,7 +117,7 @@ What a rerun compares is the setup file's own step 4, a list by document and sec
 
 A host needs two things from the repository: the rules file, `AGENTS.md`, and the commands, `/propose` and `/apply` each with the slug you type after it, the name of the delivery in `work/<slug>.md` (chapter 12).
 `/brainstorm` and `/analyze` start a project, not a delivery, so they take no slug; to define or build `lend-book`, you type `/propose lend-book` or `/apply lend-book`, or, where the host asks for the slug, you answer `lend-book`.
-The setup file writes what every host below needs:
+The setup file writes each host's command files and the pointers to `AGENTS.md` in `GEMINI.md` and `.agents/rules/focus-kit.md`; `/brainstorm` or `/analyze` writes `AGENTS.md` and `CLAUDE.md` with its import (chapter 9); the table says where each host reads them:
 
 | Host | Reads the rules from | Reads the commands from | You type |
 |---|---|---|---|
@@ -133,7 +133,7 @@ The setup file writes what every host below needs:
 | Jules, Junie, Warp, Kiro, Roo Code, Cline | `AGENTS.md` | none | by asking in words for `.agents/skills/propose/SKILL.md` |
 
 Each command is a skill, a folder with a `SKILL.md` file of instructions the host loads when you invoke it.[^claude-code-skills][^codex-skills][^copilot-skills]
-Claude Code reads `CLAUDE.md` at the start of a session, and a line `@AGENTS.md` in it imports the rules file; from version 2.1.277 it reads `AGENTS.md` alone, but only in a repository with no `CLAUDE.md`, so the kit writes `CLAUDE.md` with the import, which every version reads.[^claude-code-memory]
+Claude Code reads `CLAUDE.md` at the start of a session, and a line `@AGENTS.md` in it imports the rules file; from version 2.1.277 it reads `AGENTS.md` alone, but only in a repository with no `CLAUDE.md`, so `/brainstorm` or `/analyze` writes `CLAUDE.md` with the import, which every version reads.[^claude-code-memory]
 Codex, Copilot in VS Code and Devin Desktop, formerly Windsurf, read `AGENTS.md` on their own.[^codex-agents-md][^copilot-instructions][^devin-rules]
 The GitHub Copilot CLI, GitHub's agent in the terminal, reads `AGENTS.md`, `CLAUDE.md` and `GEMINI.md` together and merges them, so what the team writes in either of the other two reaches it as well.[^copilot-cli-reference]
 Antigravity reads `AGENTS.md` directly too; the rule the kit writes in `.agents/rules/focus-kit.md` is a pointer that is always on and holds no rule of its own, an extra path to `AGENTS.md`, not the only one.
