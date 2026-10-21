@@ -44,13 +44,13 @@ Neighbours: `ch12-propose-worktree-path` touches chapter 12 and `m26-records-cla
 
 **Done when.**
 
-* [ ] Both editions changed as the Contract says, and nothing else in them.
-* [ ] Opens with its value, no filler and nothing useful cut, every number sourced: unchanged by two clause edits and one ADR number.
-* [ ] No "gets a migration only when" / "recebe uma migração só quando" in chapter 8; ADR-0010 in both excerpts' Git item.
-* [ ] No em dash in the changed lines.
-* [ ] `make verify` green after the last edit, rule `width` included.
-* [ ] `make book` with its tree and commit, both PDF paths given.
-* [ ] Delivery review as docs/05 §5 says; only this delivery's paths and its docs/06 line staged; the page moved to `work/done/` and its commit message suggested.
+* [x] Both editions changed as the Contract says, and nothing else in them.
+* [x] Opens with its value, no filler and nothing useful cut, every number sourced: unchanged by two clause edits and one ADR number.
+* [x] No "gets a migration only when" / "recebe uma migração só quando" in chapter 8; ADR-0010 in both excerpts' Git item.
+* [x] No em dash in the changed lines.
+* [x] `make verify` green after the last edit, rule `width` included.
+* [x] `make book` with its tree and commit, both PDF paths given.
+* [x] Delivery review as docs/05 §5 says; only this delivery's paths and its docs/06 line staged; the page moved to `work/done/` and its commit message suggested.
 
 **Decisions from the documents.** The two checks are separate because SETUP step 4 at `da29c25` gives the manual its own clause ("and one with no manual"), so the fix narrows :94 to the folder and keeps :97. The excerpt is paraphrased from `work/done/kit-2026-10-20-2.md`, whose Git item names ADR-0010, so restoring the number keeps the excerpt faithful; `ch08-23-branch-read` removed it because the record it then quoted, `kit-2026-10-20-1` :84, did not name it, a reason that no longer holds, and `ch08-update-2026-10-20-2`'s own Behaviour (:7) expected "trunk, ADR-0010" in the excerpt. Both editions in one delivery (ADR-0004); 74 columns per row (docs/04).
 
@@ -61,3 +61,25 @@ Neighbours: `ch12-propose-worktree-path` touches chapter 12 and `m26-records-cla
 * The Portuguese Git item reflowed over its four rows, since "ADR-0010," does not fit on the first; the English one fits on its row.
 
 **Parallel token.** `(PA)` holds: the definition takes nothing from the pages of `ch12-propose-worktree-path` or `m26-records-claims`, and the build touches only the two chapter 8 files, which neither touches.
+
+**Divergences.**
+
+* The Done when item on staging: the batch's rules had this lane stage nothing and leave docs/06 to the driver, so nothing is staged and the line's mark is not this lane's edit.
+* None in the text: the four edits are the Contract's line for line, and nothing else in chapter 8 moved.
+
+**Decisions taken alone in /apply.** None beyond the definition's.
+
+**Delivery review.** One read-only Opus agent, launched by this lane, read this page, `git diff HEAD` of `book/en/08-install-and-hosts.md` and `book/pt/08-install-and-hosts.md`, `work/done/kit-2026-10-20-2.md` :18 and :76, and `SETUP.md` at `da29c25` of `~/Projects/focus-kit`. Its reply: "No findings." It found only the four lines the Contract names changed, the same two edits in both editions with natural Brazilian Portuguese, the excerpt rows at 70 columns (en) and 67, 69, 69 and 27 (pt), no em dash, en :94 / pt :96 limiting the container condition to the folder with the manual still reported "whatever the folder" in en :97 / pt :99 as SETUP step 4 says, "trunk, ADR-0010" faithful to the record's :18 and :76, and en :77 / pt :79 now pointing at an ADR the excerpt shows. No new queue line.
+
+**Proof.** `make verify` was run after the chapter edits and again after this record was written with the page moved to `work/done/`: exit 0 each time, every check passed, the link check included. The greps for "gets a migration only when" and "recebe uma migração só quando" print nothing in chapter 8, and neither file has an em dash. This lane ran `make book` on the tree at HEAD `460add8` with this delivery's edits unstaged, exit 0, both editions: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`. Nothing pushed; no environment changes.
+
+```commit
+docs(ch08-worktree-slot-manual): propose a folder only in a container
+
+- ch08: a worktree slot naming no folder has one proposed only in a
+  container; the manual is reported lacking whatever the folder
+- ch08: the excerpt's Git item names ADR-0010 again
+- both editions
+
+work/done/ch08-worktree-slot-manual.md
+```

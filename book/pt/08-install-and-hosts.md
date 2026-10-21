@@ -63,9 +63,9 @@ pendente.
 * docs/05, números de seção: batem com o modelo (§4 a fila,
   §5 os slots, §6 commit, §8 fechar um marco). Nenhuma.
 * docs/05 §5, Git: uma escolha do projeto, não uma migração: trunk,
-  com a Publish policy, o agente nunca envia. Um manual que deixe
-  uma sessão no main/ editar os worktrees só é pedido a um slot Git
-  de worktree. Nenhuma.
+  ADR-0010, com a Publish policy, o agente nunca envia. Um manual que
+  deixe uma sessão no main/ editar os worktrees só é pedido a um slot
+  Git de worktree. Nenhuma.
 
 Os outros itens cobrem o docs/05 §§2 a 4, os outros slots do §5,
 os §§6 a 8, o docs/04, o docs/06 e o AGENTS.md.
@@ -93,7 +93,7 @@ Ela cita em vez disso o comando que a primeira linha livre do docs/06 pede, na f
 No trunk essa linha é lida na fila da pasta; com um branch ou um worktree por entrega, o branch principal mostra cada linha como estava até o merge dela, então a atualização roda `git fetch` antes, toma como ocupada, antes mesmo de qualquer marca dela ser enviada, uma linha cujo branch existe, mostre o que mostrar o branch principal, e lê a linha de cada slug no branch dele, local ou remoto, e as linhas que só um branch tem, reconciliando-as pelo slug ([capítulo 14](14-queue-states.md)).
 Uma versão que não pede nada aos seus documentos não relata migração: uma versão que muda só os comandos, como o `/apply` mostrar a sua mensagem de commit também na conversa, não muda mais nada.
 Uma verificação que diz respeito a uma escolha que o projeto não fez também não pede nada a ele, como mostra o trecho acima: o manual é pedido a um slot Git de worktree, e o do livro é trunk.
-Um docs/05 cujo slot Git escolheu um worktree por entrega e não cita pasta recebe uma migração só quando o projeto já trabalha num contêiner, a pasta que o [capítulo 19](19-worktrees.md) organiza com o checkout e uma pasta oculta para o histórico e os worktrees, e essa pasta oculta guarda `repo.git/`.
+Um docs/05 cujo slot Git escolheu um worktree por entrega e não cita pasta só tem uma pasta proposta quando o projeto já trabalha num contêiner, a pasta que o [capítulo 19](19-worktrees.md) organiza com o checkout e uma pasta oculta para o histórico e os worktrees, e essa pasta oculta guarda `repo.git/`.
 O relatório então propõe escrever ali o nome dessa pasta e o prefixo que os branches das entregas já usam, para que nada mude de lugar.
 Sem contêiner ainda, o slot vale o padrão do kit, que esse capítulo cita, e o relatório não propõe pasta.
 Seja qual for a pasta, um slot Git de worktree cujo projeto não tem um manual que deixe uma sessão no `main/`, onde o `/propose` roda, editar os worktrees é relatado como faltando esse manual.

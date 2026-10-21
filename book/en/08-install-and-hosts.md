@@ -61,7 +61,7 @@ Process migrations, by document and section, shortened: none pending.
 
 * docs/05, section numbers: match the template (§4 the queue,
   §5 the slots, §6 commit, §8 closing a milestone). None.
-* docs/05 §5, Git: a project choice, not a migration: trunk,
+* docs/05 §5, Git: a project choice, not a migration: trunk, ADR-0010,
   with the Publish policy, the agent never pushes. A manual letting
   a session in main/ edit the worktrees is asked only of a worktree
   Git slot. None.
@@ -91,7 +91,7 @@ It names instead the command docs/06's first free line wants, in your host's for
 On trunk that line is read in the queue of the folder; with a branch or a worktree per delivery the main branch shows each line as it was until its merge, so the update runs `git fetch` first, counts a line whose branch exists as taken even before any of its marks is pushed, whatever the main branch shows, and reads each slug's line from its branch, local or remote, and the lines only a branch has, reconciling them by slug ([chapter 14](14-queue-states.md)).
 A version that asks nothing of your documents reports no migration: a version that changes only the commands, such as `/apply` showing its commit message in the conversation too, changes nothing else.
 A check that concerns a choice the project did not make asks nothing of it either, as the excerpt above shows: the manual is asked of a worktree Git slot, and the book's is trunk.
-A docs/05 whose Git slot chose a worktree per delivery and names no folder gets a migration only when the project already works in a container, the folder [chapter 19](19-worktrees.md) lays out with the checkout and a hidden folder for the history and the worktrees, and that hidden folder holds `repo.git/`.
+A docs/05 whose Git slot chose a worktree per delivery and names no folder has a folder proposed only when the project already works in a container, the folder [chapter 19](19-worktrees.md) lays out with the checkout and a hidden folder for the history and the worktrees, and that hidden folder holds `repo.git/`.
 The report then proposes writing in that folder's name and the prefix the delivery branches already use, so nothing moves.
 With no container yet, the slot means the kit's default, which that chapter names, and the report proposes no folder.
 Whatever the folder, a worktree Git slot whose project has no manual letting a session in `main/`, where `/propose` runs, edit the worktrees is reported as lacking it.
