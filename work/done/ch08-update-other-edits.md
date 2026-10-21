@@ -52,11 +52,11 @@ Sources: the record named in prose, `work/done/kit-2026-10-20-3.md`, read as com
 * [x] The sentence checked against `work/done/kit-2026-10-20-3.md` (its §7 disposition) and docs/05 :370 to :371.
 * [x] No version comparison, count, record line number, commit hash or em dash in the new sentence (grep).
 * [x] `make verify` green after the last edit; `make book` builds both editions, with both PDF paths.
-* [x] Delivery review as docs/05 §5 says, recording what its agent read and whether it kept the session's advisor. No private case, so OD-3 approval is inapplicable.
+* [x] Delivery review by one read-only Opus agent, launched by this lane, over `git diff HEAD` of the two chapter files and this page, against docs/04, AGENTS.md, the record and docs/05 §7 (Delivery review), recording what its agent read; whether it kept the session's advisor, as docs/05 §5 asks, is not recorded. No private case, so OD-3 approval is inapplicable.
 
 **Built.** The Contract's sentence is the new en :94 and pt :95, in the paragraph of en :93 / pt :94; `git diff --stat HEAD` on the two files shows one insertion each and nothing else. The facts match the record as committed (`work/done/kit-2026-10-20-3.md`, "The project's other dispositions", its §7 bullet, and the Migration report's §§6 and 7 item) and docs/05 :370 to :371, which read "no subagent beyond a command's one per slug (§4) and the reviews' readers and checker".
 
-**Divergences.** The Portuguese reads "na versão 2026.10.20.3" where the Contract wrote "na 2026.10.20.3", as the delivery review suggested, so the version is named as chapter 8 pt names it elsewhere ("o focus-kit 2026.10.20.3"). The page's line numbers were taken at HEAD `0534b1f`; chapter 8 and docs/05 had not changed since, re-checked before the edit.
+**Divergences.** The Portuguese reads "na versão 2026.10.20.3" where the Contract wrote "na 2026.10.20.3", as the delivery review suggested, so the version is named as chapter 8 pt names it elsewhere ("o focus-kit 2026.10.20.3"). The page's line numbers were taken at HEAD `0534b1f`; chapter 8 and docs/05 had not changed since, re-checked before the edit. The Delivery review item, as defined, ticked "as docs/05 §5 says", while whether its agent kept the session's advisor, which §5 asks, is not recorded (Delivery review); `m28-records-claims` gave the item the paragraph's words.
 
 **Omissions.** None.
 
@@ -64,9 +64,9 @@ Sources: the record named in prose, `work/done/kit-2026-10-20-3.md`, read as com
 
 * Greps on the new lines: no em dash in either file; none of "Applied:", "gained", "since" (pt "Aplicado:", "ganhou", "desde"), a hash-like token or a `:NN` line number in the new sentence.
 * `make verify`: exit 0, all checks passed, after the last chapter edit and again after the page's last edit before this line.
-* `make book`: exit 0, after the last verify; both editions built, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` (with their EPUBs).
+* `make book`: exit 0, after the last verify, before this delivery's commit `1c943dd`, whose parent is `506f8d7`, in the one tree it shared with `ch16-subagent-account` and `ch12-13-19-several-slugs-paths`, `[>]` beside it in docs/06 there; the tree's HEAD and what it held of their uncommitted chapters 16, 12, 13 and 19 are not recorded; both editions built, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` (with their EPUBs).
 
-**Delivery review.** One read-only Opus agent (an Explore subagent with model opus); it did not keep the session's advisor, since a subagent opened this way has none. It read `git diff HEAD` of the two chapter files, this page, docs/04, AGENTS.md, `work/done/kit-2026-10-20-3.md` as committed and docs/05 §7. Its reply, as returned:
+**Delivery review.** One read-only Opus agent (an Explore subagent with model opus); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded, its reply naming none: the page said it did not, since a subagent opened this way has none, which no record shows, M27's review's agents, launched as general-purpose agents on Opus, having each called an advisor tool once (`work/done/m27-review.md` :128), and none saying whether an Explore agent has one. It read `git diff HEAD` of the two chapter files, this page, docs/04, AGENTS.md, `work/done/kit-2026-10-20-3.md` as committed and docs/05 §7. Its reply, as returned:
 
 > I found no blocking findings. The delivery matches its page, docs/04, AGENTS.md and the sources.
 >

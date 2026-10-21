@@ -64,7 +64,7 @@
 * :4 stays: it speaks of the specialized kind, and is still true.
 * Token: `(PA)`, chapter 16 alone and no line above in flight touches it. The queue line's wording stays.
 
-**Divergences.** None: every change is in both editions with the wording the Contract gives.
+**Divergences.** None from the Contract: every change is in both editions with the wording the Contract gives. The Done when, as defined at `a9b8f8c`, held no Delivery review item, which docs/05 §5 asks before /apply ends; the review ran as its paragraph records (Delivery review).
 
 **Omissions.** None.
 
@@ -73,7 +73,7 @@
 * The review's three points are all optional and none breaks the page, docs/04 or the text this delivery wrote, so none is changed. Points 2 and 3 are the Contract's own wording, which reads correctly in its place.
 * Point 1, the second subagent per slug that a command told to build as well opens to run `/apply`, gets no queue line: it is also one the command opens for the slug, running a whole command, so §7's "a command's one per slug" and the chapter's "runs the whole command on its own line" cover it, and "launched only to plan, build or fix" does not read against it; the book teaches the kit as it is, and chapter 12 already teaches the build-as-well subagent.
 
-**Delivery review.** One read-only Opus agent, launched by this lane, over this page and `git diff HEAD` of `book/en/16-the-governor.md` and `book/pt/16-the-governor.md`, given docs/04, AGENTS.md, docs/05 §4 and §7 and docs/03's `subagent` row. Its reply, as returned:
+**Delivery review.** One read-only Opus agent, launched by this lane, over this page and `git diff HEAD` of `book/en/16-the-governor.md` and `book/pt/16-the-governor.md`, given docs/04, AGENTS.md, docs/05 §4 and §7 and docs/03's `subagent` row; its reply's "What I read" names neither docs/04 nor AGENTS.md, which only its "Rules" heading names, and whether it kept the session's advisor, as docs/05 §5 asks, is not recorded, its reply naming none. Its reply, as returned:
 
 > **Verdict:** the delivery passes. Every Contract change is in both editions with the wording given, nothing else in the chapter changed, and nothing needs fixing.
 >
@@ -116,7 +116,7 @@
 
 No fix and no new queue line, as the decisions above say. The line numbers in the reply are the reviewer's; rechecked, the per-slug sentence is :73 in both editions, the line that ends the paragraph ("launched only to plan, build or fix") :87, "specialized subagents in this chapter's sense" :76, the governor's line :78 and "The one exception" :106.
 
-**Proof.** `make verify` was run after the chapter edits, again with the review recorded and the page moved to `work/done/`, and once more after this Proof was written: exit 0 each time, every check passed, the link check included. The Done when greps find each phrase once per edition: the list item :67, "Three steps" / "Três passos" :72, "none of them is specialized" / "nenhum deles é especializado" :73, "launched only to plan, build or fix" / "lançado só para planejar, construir ou corrigir" :87; the three "prints nothing" greps print nothing; "eight things" / "oito coisas" is still :58 and the list still has eight items; no added line holds an em dash. This lane ran `make book` after the second verify, exit 0, both editions: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`. Nothing pushed; no environment changes.
+**Proof.** `make verify` was run after the chapter edits, again with the review recorded and the page moved to `work/done/`, and once more after this Proof was written: exit 0 each time, every check passed, the link check included. The Done when greps find each phrase once per edition: the list item :67, "Three steps" / "Três passos" :72, "none of them is specialized" / "nenhum deles é especializado" :73, "launched only to plan, build or fix" / "lançado só para planejar, construir ou corrigir" :87; the three "prints nothing" greps print nothing; "eight things" / "oito coisas" is still :58 and the list still has eight items; no added line holds an em dash. This lane ran `make book` after the second verify, before its commit `d554b12`, whose parent is `6777047`, in the one tree it shared with `ch12-13-19-several-slugs-paths` and `m27-records-claims`, `[>]` beside it in docs/06 there; the tree's HEAD and what it held of the first's uncommitted chapters 12, 13 and 19 are not recorded. Exit 0, both editions: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`. Nothing pushed; no environment changes.
 
 ```commit
 docs(ch16-subagent-account): give chapter 16 §7's subagent account

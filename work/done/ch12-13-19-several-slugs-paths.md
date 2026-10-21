@@ -81,12 +81,12 @@
 * [x] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version, date or commit hash in chapter text, nothing implying Case B ran on the process.
 * [x] `make verify` green.
 * [x] `make book` run, both PDF paths recorded.
-* [x] Delivery review by one read-only Opus agent over this page and `git diff HEAD` of the six chapter files, against docs/04, docs/05 §§3 and 4 and the kit skills, as its reply lists, which does not name AGENTS.md; it did not keep the session's advisor.
+* [x] Delivery review by one read-only Opus agent, launched by this lane, over this page and `git diff HEAD` of the six chapter files (Delivery review): narrower than docs/05 §5, which has it read against docs/04, here read by grep hits only; its reply lists docs/05 §4, the apply skill and grep hits in docs/05 §3, the propose skill and docs/04, and does not name AGENTS.md; whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 * [x] Page moved to `work/done/`, covered by the last verify.
 
 **Built.** The Contract's changes, in both editions: chapter 12 en :39, :139, :155, the new :158, :164, :192 and :194 (pt :39, :148, :164, the new :167, :173, :201 and :203); chapter 13 the new :21 and :35; chapter 19 :214, :296, :304 and :365. `git diff --stat HEAD` on the six files, before the review's fixes: 26 insertions and 22 deletions, one line added in chapter 12 and one in chapter 13 per edition, nothing else changed; the files now have 197/206, 283/283 and 377/377 lines.
 
-**Divergences.** The delivery review's five findings, all on text this delivery wrote, were fixed; the Contract above keeps the wording as defined, and the chapters read:
+**Divergences.** Two Done when items were reworded in /apply from their `506f8d7` text: the first gained "with the review's wording fixes in Divergences", and the review item, which asked for one "against docs/04 and AGENTS.md" and that "the record names the agent's model and whether it kept the session's advisor, and the tick says the same", named what its reply lists and the advisor as not kept; `m28-records-claims` gave the review item the paragraph's words. The delivery review's five findings, all on text this delivery wrote, were fixed; the Contract above keeps the wording as defined, and the chapters read:
 
 * Chapter 13 :35: en "or where the session that typed `/apply a b`, on your command's word, sends a subagent on the slug again."; pt "ou para onde a sessão que digitou `/apply a b`, pela palavra do seu comando, manda de novo um subagente no slug.", so the reopening is tied to the person's command, as the page's Edge asks, and both editions say where it is sent.
 * Chapter 13 :21: en opens "With several slugs and a worktree per delivery," and says "the session itself edits nothing"; pt opens "Com vários slugs e um worktree por entrega," and says "a própria sessão não edita nada", so the line does not read against :19, which is about the single command.
@@ -101,7 +101,7 @@
 * `make verify`: exit 0, all checks passed (the d-nb.info link included), after the chapters' last edit and again after this page's last edit and its move.
 * `make book`: exit 0, after the last verify; both editions built, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` (with their EPUBs).
 
-**Delivery review.** One read-only Opus agent (a general-purpose subagent with model opus); it did not keep the session's advisor, since a subagent opened this way has none. It read this page and `git diff HEAD` of the six chapter files, chapter 13 en :18 to :30 and chapter 19 en :270 to :305, docs/05 §4, the apply skill and grep hits in docs/05 §3, the propose skill and docs/04. Its reply, as returned:
+**Delivery review.** One read-only Opus agent (a general-purpose subagent with model opus); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded, its reply naming none: the page said it did not, since a subagent opened this way has none, which `work/done/m27-review.md` :128 contradicts, its general-purpose agents on Opus each having called an advisor tool once. It read this page and `git diff HEAD` of the six chapter files, chapter 13 en :18 to :30 and chapter 19 en :270 to :305, docs/05 §4, the apply skill and grep hits in docs/05 §3, the propose skill and docs/04. Its reply, as returned:
 
 > Five findings, all low or medium. The Contract is applied exactly in both editions, and nothing else in the six files changed.
 >

@@ -128,10 +128,52 @@ Terms: record, Delivery review, queue line, mark, as docs/03 and docs/05 have th
 
 **Done when.**
 
-* [ ] Each quoted text counted once in its page before any edit; the 34 replacements made word for word.
-* [ ] `git diff` of the nine pages shows only those replacements, no line added or removed (32 lines changed: `ch08-copilot-cli` :91 and `m27-records-claims` :105 take two each).
-* [ ] A search of the nine pages finds no ticked review item reading "as docs/05 §5 says" and no "a subagent opened this way has none" but in the replaced texts' own quotes; no `make book` said to run "after the last verify" that its Proof places after an earlier one; each hit recorded in the Proof, as a quote or as true.
-* [ ] Each of the nine pages' last fenced block is `commit`, and nothing follows it; no em dash; no Done when item of a record unticked.
-* [ ] `make verify` green after the last edit, its result in this page's Proof; a link that fails on a refused host is named with its link, not counted green.
-* [ ] `make book` exit 0 after the last verify, the Proof naming HEAD, `git status --short book/` and both PDF paths; if `make book` runs before a later verify, the item and Divergences say so.
-* [ ] Delivery review by one read-only Opus agent this lane launches, told to open docs/04 as a file, to list what it read and to say whether it consulted an advisor, over `git diff HEAD` of the nine pages and this page, against this page and docs/04; the tick and the paragraph record its reading and its answer on the advisor as given, and Divergences say so if it ran without the advisor docs/05 §5 asks.
+* [x] Each quoted text counted once in its page before any edit; the 34 replacements made word for word.
+* [x] `git diff` of the nine pages shows only those replacements, no line added or removed (32 lines changed: `ch08-copilot-cli` :91 and `m27-records-claims` :105 take two each).
+* [x] A search of the nine pages finds no ticked review item reading "as docs/05 §5 says" and no "a subagent opened this way has none" but in the replaced texts' own quotes; no `make book` said to run "after the last verify" that its Proof places after an earlier one; each hit recorded in the Proof, as a quote or as true.
+* [x] Each of the nine pages' last fenced block is `commit`, and nothing follows it; no em dash; no Done when item of a record unticked.
+* [x] `make verify` green after the last edit, its result in this page's Proof; a link that fails on a refused host is named with its link, not counted green.
+* [x] `make book` exit 0 after the last verify, the Proof naming HEAD, `git status --short book/` and both PDF paths; if `make book` runs before a later verify, the item and Divergences say so: it ran after the second of three verifies (Divergences).
+* [x] Delivery review by one read-only Opus agent this lane launches, told to open docs/04 as a file, to list what it read and to say whether it consulted an advisor, over `git diff HEAD` of the nine pages and this page, against this page and docs/04; the tick and the paragraph record its reading and its answer on the advisor as given, and Divergences say so if it ran without the advisor docs/05 §5 asks.
+
+**Built.** The 34 replacements of the Contract in the nine record pages, applied by a script that read each old and new text from this page's Contract, counted each old text once in its page before any edit and again just before its own replacement, and wrote the new text word for word; replacements 13 and 14 change `ch08-copilot-cli` :91 in two places, and 21 and 22 change `m27-records-claims` :105 in two places. Each change sat on the line the Contract names. After the Delivery review, replacement 28's new text in `ch08-update-other-edits` :69 was changed as Divergences say.
+
+**Checked.** Over the nine pages: no em dash, no unticked Done when item, each page's last fenced block `commit` with nothing after it; the search hits are listed in the Proof.
+
+**Divergences.** Two from the Contract, both from the Delivery review. Replacement 28's new text said the advisor tool was called by "agents launched by this batch's sessions as general-purpose agents on Opus", but `work/done/m27-review.md` :128 records M27's review's agents, whose session came before this batch; the text now reads "M27's review's agents, launched as general-purpose agents on Opus, having each called an advisor tool once"; the first two Done when items, ticked on the replacements as made, stand with this one change. The Behaviour's bullet on `ch08-update-other-edits`, `ch16-subagent-account` and `ch12-13-19-several-slugs-paths` has each `make book` name the commit it came before, but the Contract changes only the first two (replacements 27 and 31): `ch12-13-19-several-slugs-paths` :102 still names no commit nor the tree it shared, though true by its Proof :101; it is a new queue line, not this one. The Delivery review ran without the session's advisor, which docs/05 §5 asks it to keep: its agent answered that it consulted none (Delivery review). `make book` ran after the second of three verifies; the third, after the Proof recorded the build and the `commit` block was written, covers those last edits to this page, which no build reads.
+
+**Delivery review.** One read-only Opus agent (a general-purpose agent with model opus), launched by this lane, told to open docs/04 as a file, to list what it read and to say whether it consulted an advisor, over `git diff HEAD` of the nine pages and this page, against this page and docs/04. Its reply says it opened this page and docs/04 whole with the Read tool; re-applied the Contract's 34 replacements to the nine pages at HEAD by script and found each working file identical to the result, each old text once on its cited line; searched the nine pages for the Done when phrases; and checked the commits, parents, times, queue lines, chapter lines and Done when texts the new texts cite with `git show` and `git log`. To the question on the advisor, it answered "No, I did not consult an advisor tool during this review." Its findings, as returned:
+
+> **1. All 34 replacements went in exactly (meets the page and docs/04).** [...] The diff shows 32 changed lines (32 insertions, 32 deletions). Each page keeps its line count. [...]
+>
+> **2. Leftover phrases (no break, but the Proof must record two hits).** [...] "a subagent opened this way has none" is still at `work/done/ch08-update-other-edits.md:69` and `work/done/ch12-13-19-several-slugs-paths.md:104`. Both sit inside this delivery's new text (replacements 28 and 34) as reported speech, "the page said it did not, since a subagent opened this way has none", not in quotation marks. Read literally, Done when item 3 allows the phrase only "in the replaced texts' own quotes", so the Proof should record these two hits "as true", as that item allows.
+>
+> **3. A Behaviour line with no matching replacement (the page contradicts itself; the edits follow the Contract).** The Objective and Behaviour :13 say every `make book` in `ch08-update-other-edits`, `ch16-subagent-account` and `ch12-13-19-several-slugs-paths` names the commit it came before and the `[>]` lines beside it. The Contract covers only the first two (replacements 27 and 31). `work/done/ch12-13-19-several-slugs-paths.md:102` still reads "`make book`: exit 0, after the last verify; both editions built", with no commit and no shared tree. That tree was shared too: docs/06 at `506f8d7` holds :652 to :654 `[>]`. The line is true against its own Proof (:101 has verify run again after the page's last edit), so Done when item 3 holds, but Behaviour :13 is not met for this page.
+>
+> **4. A claim with no record behind it (in the new text, replacement 28, low).** `work/done/ch08-update-other-edits.md:69` now says "agents launched by this batch's sessions as general-purpose agents on Opus having each called an advisor tool once (`work/done/m27-review.md` :128)". Line :128 of m27-review does say each reader and the checker called the advisor tool once. But those agents belong to M27's review session (defined `93e458c` 12:40, committed `0534b1f` 13:17), which came before this fix-round batch (`506f8d7` 13:24 onward). No record shows that session as one of "this batch's sessions". Replacement 34 avoids the problem: "`m27-review.md` :128 contradicts, its general-purpose agents on Opus".
+>
+> **5. One reading rests on an ambiguous reply (informational).** Replacement 32 (`work/done/ch12-13-19-several-slugs-paths.md:84`) says docs/04 was "read by grep hits only". The reply's "What I read" (:108) says "grep hits in docs/05 §3, the propose skill and docs/04", which can also be read as grep hits in docs/05 §3 only. The page's reading is defensible, and the page's own Decisions (:102, :122) take it the same way.
+
+The elisions mark the reply's per-check detail and its list of spot-checked claims, which found every cited commit, parent, time, queue line and chapter line as the new texts state them. Finding 2 is recorded in the Proof; finding 3 in Divergences and as a new queue line; finding 4 fixed as Divergences say; finding 5 kept, the reading being this page's Decisions'.
+
+**Proof.**
+
+* Each of the 34 anchors counted 1 in its page and sat on the line the Contract names, before any edit and again just before its own replacement.
+* `git diff --numstat HEAD` of the nine pages: 32 insertions and 32 deletions, the 32 changed lines; each page has as many lines as at HEAD.
+* Search of the nine pages for "as docs/05 §5 says": `ch08-update-2026-10-20-4` :109 and `ch08-update-other-edits` :59, this delivery's Divergences quoting the old item; `m27-records-claims` :8, :20, :47, :113 and :135, its Behaviour, Contract quotes, search item and Proof; no review item ticks it.
+* Search for "opened this way has none": `ch08-update-other-edits` :69 and `ch12-13-19-several-slugs-paths` :104, this delivery's new texts reporting what the page said, true as reported speech.
+* Search for "after the last verify": `kit-2026-10-20-4` :63, true by its Proof :126 (a build after the second verify and again after the last); `ch10-copilot-cli-invocation` :55, true by :54; `ch08-update-other-edits` :67, true by :66; `ch12-13-19-several-slugs-paths` :102, true by :101; `m27-records-claims` :40 and :61 (its Contract's quotes), :113 (its search item), :127 (its review's quoted finding) and :137 (its Proof).
+* No em dash in the nine pages or this page; no unticked Done when item in the nine; each one's last fenced block is `commit`, nothing after it.
+* `make verify` passed whole, links included, after the 34 replacements, again after the review's fix, these records and the page's move to `work/done/`, and a third time after the build's record and the `commit` block, the last edit.
+* `make book` exit 0 after the second verify, on HEAD `f7ad94b` (`kit-2026-10-20-5`'s define commit, made while this lane ran) with `git status --short book/` empty, so no lane's uncommitted chapter was in the tree. PDFs: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+```commit
+docs(m28-records-claims): make M28's records hold only what happened
+
+- review items say who read, against what; the advisor as recorded
+- make book lines name the tree and the commit the build came before
+- line numbers, marks and neighbouring lines corrected as they were
+- reworded or missing Done when items named in Divergences
+
+work/done/m28-records-claims.md
+```
