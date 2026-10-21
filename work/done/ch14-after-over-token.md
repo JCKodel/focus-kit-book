@@ -74,13 +74,13 @@ Neighbours: `ch08-update-2026-10-20-5`, in flight in M29, touches chapter 8 and 
 
 **Done when.**
 
-* [ ] C1, C2 and C3 read as the Contract says in both editions, each quoted text found once before its edit; the rest of both files unchanged.
-* [ ] Both editions written, the same paragraph and line in each, Portuguese names in the Portuguese edition.
-* [ ] The chapter still opens with its value; no filler and nothing useful cut; no number added, so none to source; no private case used.
-* [ ] No em dash in the changed text; no run narration and no commit hash in the chapter.
-* [ ] The new block keeps to 74 columns in both editions.
-* [ ] `make verify` green after the last edit.
-* [ ] `make book` builds both editions after the last verify, both PDF paths recorded.
+* [x] C1, C2 and C3 read as the Contract says in both editions, each quoted text found once before its edit; the rest of both files unchanged.
+* [x] Both editions written, the same paragraph and line in each, Portuguese names in the Portuguese edition.
+* [x] The chapter still opens with its value; no filler and nothing useful cut; no number added, so none to source; no private case used.
+* [x] No em dash in the changed text; no run narration and no commit hash in the chapter.
+* [x] The new block keeps to 74 columns in both editions.
+* [x] `make verify` green after the last edit.
+* [x] `make book` builds both editions after the last verify, both PDF paths recorded.
 
 **Decisions from the documents.**
 
@@ -97,3 +97,69 @@ Neighbours: `ch08-update-2026-10-20-5`, in flight in M29, touches chapter 8 and 
 * The renewal notice's `-` first comes from its page taking `renew-loan`'s rule, its `A` from a folder of its own, `src/features/notices/`, and its `after` from needing renewals that exist: each letter and the order has a reason the reader can check.
 * The line's slug and sentence are short so the block keeps to 74 columns (docs/04, "Width of a block"; `scripts/check_width.py`): 74 in English, 71 in Portuguese.
 * The key point is spelled out too (C3), since "`after` holding both" would say less than the section above it.
+
+**Built.** C1 at en :92 / pt :93; C2 after the several-slugs sentence, en :109 to :118 / pt :110 to :119, a blank line before it and the "Chapter 19" / "capítulo 19" line after it; C3 in the free-line key point, en :218 / pt :219. Each quoted text was found once (`grep -cF`) before its edit. `git diff --stat HEAD` on the two files shows 13 insertions and 2 deletions in each, three hunks, and nothing else. The page's line numbers were taken at `6c8d56b`; chapter 14 was last changed in `6e37777`, earlier, and the lines were re-checked before the edit.
+
+**Divergences.**
+
+* C2 is set off by a blank line from the several-slugs sentence, since the Contract calls it "a new paragraph" and does not say whether a blank line precedes it.
+* The Portuguese reads "o `/propose` dela espera até toda linha acima estar `[>]` ou além" where the Contract wrote "espera toda linha acima estar", as the delivery review suggested, matching pt :93 and :105.
+
+**Omissions.** None.
+
+**Proof.**
+
+* Greps: no em dash in either file; the new block is 74 columns in English and 71 in Portuguese.
+* `make verify`: exit 0, all checks passed, after the chapter edits and again after the review's fix; the tree also held another delivery's uncommitted chapter 8, docs/06 and `work/ch08-update-2026-10-20-5.md`.
+* `make book`: exit 0, after the verify that followed the review's fix, the chapters' last edit, at HEAD `3c2a050`, in that same tree; both editions built, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` (with their EPUBs).
+* `make verify` once more after this page's last edit and its move to `work/done/`: exit 0.
+
+**Delivery review.** One read-only Opus agent (an Explore subagent with model opus), launched by this lane. It read `git diff HEAD` of the two chapter files, this page, AGENTS.md, docs/04, docs/05 §4 and §5, docs/03's `parallel token` and `free line` rows and `work/done/kit-2026-10-20-5.md`. Its reply, as returned:
+
+> I found no blocking issues. All five checks pass, apart from the minor points listed under optional.
+>
+> **Blocking findings**
+>
+> None.
+>
+> **What I checked**
+>
+> 1. **Contract text.** I checked each quoted text with a script, in both editions.
+>    - **C1:** the old sentence appears once at HEAD. After the edit only the new wording is there, at en:92 and pt:93.
+>    - **C2:** the paragraph and block on the page appear exactly once in each file. They sit after the several-slugs sentence, with a blank line before them, and before the "Chapter 19" / "capítulo 19" line.
+>    - **C3:** the key-point wording matches, at en:218 and pt:219 in the new files.
+>    - **Nothing else changed:** `git diff --stat` shows 3 hunks per file, 13+/2- each, and no other hunk.
+> 2. **Reasoning against docs/05 §4 (:103-109).** In the stated state, every line above `renewal-notice` is `[&gt;]` or beyond: `members` `[x]`, `lend-book` `[*]`, `search-catalog` `[x]`, `renew-loan` `[&gt;]`. So the `-` in first place lets `/propose` start. The `A` lets `/apply` run beside them because `src/features/notices/` is a different folder. `after renew-loan` holds both commands because `renew-loan` is `[&gt;]`, not `[x]`. "Free the moment `renew-loan` is `[x]`" matches the free-line definition in docs/03 and chapter 14 :74. The "waits on X, leaves the mark as it is, and stops" wording repeats the chapter's own phrasing at :106, and the reasoning matches the `shout` answer in work/done/kit-2026-10-20-5.md:16.
+> 3. **Agreement with the rest of chapter 14.** The new paragraph says "Later", so the four-line block and the sentences that use it (where `search-catalog` is `[ ]`) stay true. :71 ("do not start a line that is not free") and the "(--)" sentence at :103 are consistent with it. The docs/03 rows `parallel token` and `free line` still hold.
+> 4. **Portuguese.** It is faithful and uses Portuguese names: `aviso-renovacao`, `renovar-emprestimo`, `src/features/avisos/`. `after` and the marks are kept, as docs/04 requires.
+> 5. **docs/04 and AGENTS.md.**
+>    - The changed text has no em dash, no run narration and no commit hash.
+>    - It adds no number and uses no private case.
+>    - Both new passages say the line was "written for this chapter".
+>    - The block is 74 columns in English and 71 in Portuguese.
+>    - I saw nothing in the prose rules' patterns that would trigger.
+>
+> **Optional points**
+>
+> - en:118 and pt:119, "`/apply` would do the same": `renewal-notice` is still `[ ]`, so `/apply` would refuse first because the line isn't `[&gt;]`, before `after` even comes into it. Writing "and `/apply`, once its page is `[&gt;]`, would do the same" would make it exact. This is a hypothetical, as the page's Behaviour has it, so it is not wrong.
+> - pt:117, "o `/propose` dela espera toda linha acima estar `[&gt;]`": this reads a little awkwardly. "espera até toda linha acima estar" matches pt:93 and pt:105 and reads more naturally.
+> - pt:120, "no momento em que `renovar-emprestimo` está `[x]`": "fica `[x]`" would be more natural.
+> - pt:114, "avisa o vencimento" drops "a member", which the English has. The 74-column limit leaves only 3 spare columns, so restoring it would mean cutting something else.
+> - docs/04 "Context before an excerpt" says an excerpt is never "a loose line that leans on the lines around it". The one-line block does lean on the four-line queue, but the sentence before it sets it up explicitly. I judge it acceptable.
+>
+> **What I did not check**
+>
+> I didn't run `make verify` or `make book`, so the prose, parity and width checks have not actually run. I didn't re-read chapters 9, 11, 12 and 13, where the page says no sentence goes stale. I didn't check the whole of docs/04's prose-rule list against the full chapter, only against the changed lines.
+
+What was done with it: no blocking finding. The second point fixed (Divergences). The first kept: the sentence is the Contract's and the Behaviour's, a hypothetical the agent calls not wrong. The third kept: "está `[x]`" is the chapter's own phrasing for a mark. The fourth kept: the block's width. The fifth kept, as the agent judges. No new queue line.
+
+**Decisions at build.** Taken alone, by the batch rule to take the recommended option: the blank line before C2, and the review's points handled as above.
+
+```commit
+docs(ch14-after-over-token): after holds both commands, token or not
+
+- chapter 14: after holds /propose and /apply until its lines are [x]
+- the example: renewal-notice (-A) waits on renew-loan; both editions
+
+work/done/ch14-after-over-token.md
+```
