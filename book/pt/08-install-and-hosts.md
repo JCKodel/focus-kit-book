@@ -74,10 +74,7 @@ Migrações de processo pendentes, por documento e seção, encurtadas:
   o último parágrafo removido: a primeira frase está no §8, a
   segunda no novo primeiro parágrafo.
 * docs/05 §5, Git: uma escolha do projeto, não uma migração: trunk,
-  ADR-0010, com a Publish policy, o agente nunca envia. O slot
-  do kit oferece, para um branch ou um worktree por entrega, o
-  /propose enviar o branch que cria; no trunk nenhum branch é
-  criado. Nenhuma.
+  com a Publish policy, o agente nunca envia. Nenhuma.
 
 Os outros itens cobrem o docs/05 §§2 e 3, os outros slots do §5,
 os §§6 a 8, o docs/04, o docs/06 e o AGENTS.md.
@@ -88,7 +85,7 @@ kit-2026-10-20-1 estiver [x].
 Cada item cita um documento e uma seção, e termina num de três resultados.
 Ele bate e não precisa de nada, e diz isso: `Nenhuma`.
 Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra, como no docs/05 §4.
-Ou ele difere por uma escolha que o projeto fez e registrou com uma data ou um ADR, como o slot Git do livro: o item cita essa escolha e o que o kit diz ao lado dela, e não pede mudança.
+Ou ele difere por uma escolha que o projeto fez e registrou com uma data ou um ADR, como o slot Git do livro: o item cita essa escolha e não pede mudança.
 Todo item é relatado, nunca feito: a atualização não escreve nenhum desses documentos.
 
 Os números de seção vêm primeiro porque os comandos citam o docs/05 pelos números do modelo, o §4 para a fila, o §6 para o commit, e leem pelo número; um docs/05 numerado de outro jeito mandaria cada comando para a seção errada, então essa migração vem antes de qualquer outra, diga o que disser um ADR.
@@ -102,7 +99,7 @@ A atualização termina quando as migrações são aplicadas, como qualquer muda
 Num projeto já documentado, a atualização relata as migrações primeiro, ou diz que não há nenhuma.
 Ela nunca pede que você rode o `/brainstorm` ou o `/analyze` de novo: eles escrevem os documentos de um projeto do zero, e os seus existem.
 Ela cita em vez disso o comando que a primeira linha livre do docs/06 pede, na forma do seu host: o `/propose` e o seu slug para uma linha `[ ]`, o `/apply` e o seu slug para uma `[>]`.
-No trunk essa linha é lida na fila da pasta; com um branch ou um worktree por entrega, o branch principal mostra cada linha como estava até o merge dela, então a atualização roda `git fetch` antes, toma como ocupada, antes mesmo de qualquer marca dela ser enviada, uma linha cujo branch existe, mostre o que mostrar o branch principal, e lê a linha de cada slug no branch dele, local ou remoto, reconciliando-as pelo slug ([capítulo 14](14-queue-states.md)).
+No trunk essa linha é lida na fila da pasta; com um branch ou um worktree por entrega, o branch principal mostra cada linha como estava até o merge dela, então a atualização roda `git fetch` antes, toma como ocupada, antes mesmo de qualquer marca dela ser enviada, uma linha cujo branch existe, mostre o que mostrar o branch principal, e lê a linha de cada slug no branch dele, local ou remoto, e as linhas que só um branch tem, reconciliando-as pelo slug ([capítulo 14](14-queue-states.md)).
 Uma versão que não pede nada aos seus documentos não relata migração: uma versão que muda só os comandos, como o `/apply` mostrar a sua mensagem de commit também na conversa, não muda mais nada.
 Um docs/05 cujo slot Git escolheu um worktree por entrega e não cita pasta recebe uma migração só quando o projeto já trabalha num contêiner, a pasta que o [capítulo 19](19-worktrees.md) organiza com o checkout e uma pasta oculta para o histórico e os worktrees, e essa pasta oculta guarda `repo.git/`.
 O relatório então propõe escrever ali o nome dessa pasta e o prefixo que os branches das entregas já usam, para que nada mude de lugar.

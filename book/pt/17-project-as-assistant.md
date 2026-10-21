@@ -129,7 +129,7 @@ Rode: /propose m1-review (Codex: $propose m1-review)
 ```
 
 Cada parte dela é lida do docs/06: a contagem do marco, a linha em andamento com a sua marca, as esperas, e a primeira linha livre, com o comando que a tabela do capítulo 8 dá para cada host.
-No trunk essa é a fila da pasta onde a sessão roda; com um branch ou um worktree por entrega, o branch principal mostra cada linha como estava até o merge dela, então a sessão roda `git fetch`, toma como ocupada uma linha cujo branch existe, em andamento antes mesmo de qualquer marca dela ser enviada, e pega a linha de cada slug no branch dele, local ou remoto, reconciliando-as pelo slug (capítulo 14): só pela cópia do branch principal, `devolver-livro` leria `[ ]`, e "Em andamento" perderia a construção em curso.
+No trunk essa é a fila da pasta onde a sessão roda; com um branch ou um worktree por entrega, o branch principal mostra cada linha como estava até o merge dela, então a sessão roda `git fetch`, toma como ocupada uma linha cujo branch existe, em andamento antes mesmo de qualquer marca dela ser enviada, e pega a linha de cada slug no branch dele, local ou remoto, e as linhas que só um branch tem, reconciliando-as pelo slug (capítulo 14): só pela cópia do branch principal, `devolver-livro` leria `[ ]`, e "Em andamento" perderia a construção em curso.
 Uma linha `[?]` apareceria em "Esperando" com o seu motivo e a fase em que retoma, como a linha os guarda.
 Uma resposta tirada do que a sessão lembra, uma oferta de manter um arquivo de status, ou uma sugestão de criar um comando de status quer dizer que o agente não leu a fila: peça o arquivo por trás da resposta.
 

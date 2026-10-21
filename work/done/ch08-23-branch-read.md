@@ -87,12 +87,12 @@
 
 **Done when.**
 
-* [ ] Every edit of the Contract made in both editions, and nothing else in the nine chapters moves.
-* [ ] `grep -n "worktree or\|worktree ou" ` over the edited sentences finds none; ADR-0010 is gone from chapter 8's block; every row of the block is within 74 columns.
-* [ ] Both editions written, each opens with its value, no filler and nothing useful cut, every number sourced (no number added), no em dash.
-* [ ] Delivery review as docs/05 §5 says.
-* [ ] `make verify` green.
-* [ ] `make book` exit 0, with `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+* [x] Every edit of the Contract made in both editions, and nothing else in the nine chapters moves.
+* [x] `grep -n "worktree or\|worktree ou" ` over the edited sentences finds none; ADR-0010 is gone from chapter 8's block; every row of the block is within 74 columns.
+* [x] Both editions written, each opens with its value, no filler and nothing useful cut, every number sourced (no number added), no em dash.
+* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green.
+* [x] `make book` exit 0, with `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
 
 **Decisions taken alone.**
 
@@ -103,3 +103,26 @@
 * C6: the Git item is cut to what the record holds, and chapter 8 :89 / pt :91 drops "and what the kit says beside it", which would otherwise claim the excerpt shows a kit sentence it no longer holds. The kit's own rule (SETUP.md 2026.10.20.1 :42 to :44, "with what the kit says") is not retaught here.
 * The taken-unless-resuming wording in chapters 18 and 19 reuses chapter 12 :28's phrase, adding "unless the definition resumes" so that reuse on resumption does not read as a contradiction.
 * Token `(P-)` confirmed: the definition takes nothing from `ch09-14-token-wording`'s page; the build shares chapters 13 and 14 with it, so it waits for that line to be `[x]`.
+
+**Built.** The twenty-eight replacements of the Contract in the eighteen files, each matched on its quoted clause alone, every clause found once and at the line the Contract names (`ch09-14-token-wording` and `m25-records-claims` moved none of them). Chapter 8's Git item is two rows in each edition, en 60 and 56 characters, pt 67 and 54; the Contract's "61" counted `§` as two bytes. `git diff --stat HEAD -- book/` shows 29 insertions and 34 deletions over the eighteen files, the five lines fewer being chapter 8's two blocks.
+
+**Proof.** `make verify` exit 0 after the Contract's edits (build, parity, em dash, prose, width, examples, links, disclosure). No added line of the diff holds "worktree or" or "worktree ou"; `ADR-0010` no longer appears in either chapter 8.
+
+**Divergences.** One, from the Delivery review: en chapter 14 :64 reads "a branch shows the mark once the mark is committed on it", not the Contract's "once it is committed on it", where "it" could be read as the branch; pt keeps the Contract's words, whose "ela" can only be the mark.
+
+**Decisions taken by /apply.** Chapters 18 :25 and 19 :179 keep the Contract's "unless the definition resumes" beside the sentence's later "or reuses it when the definition resumes", as the page's decision on them chose, so the taken rule never reads as having no exception.
+
+**Delivery review.** One read-only Opus agent, launched with the eighteen chapter files and this page as the delivery's paths. It read this page, docs/05 :125 to :135, `work/done/kit-2026-10-20-1.md` :80 to :90, `git diff HEAD` of the eighteen files, the edited sentences in context (chapter 8 en :66 to :106 and pt :66 to :108, 12 :27 to :28, 14 en :62 to :64 and pt :63 to :65, 18 :25, 19 :179, 20 :62), `git show 7664d02` of chapter 14 :62, and grepped `book/` for em dashes, ADR-0010 and "worktree or/ou"; AGENTS.md and docs/04 it says came from the context it was given; it did not open them as files. Its report says it consulted an advisor once before reporting; this session has no other record of that. It found every replacement at its named line in both editions, nothing else moved, chapter 8's rows within 74 columns, and the edits agreeing with docs/05 §4 :128 to :133, chapter 12 :28 and chapter 14 :62. Findings: Built said twenty-six replacements for the Contract's twenty-eight, fixed above; chapters 18 and 19 state the resumption exception twice in one sentence, not taken, as Decisions taken by /apply says; en chapter 14 :64's "it" was ambiguous, taken as the Divergence above; the page's Contract quotes chapter 14 :62 as "and the lines only a branch has" while the line reads "adds the lines only a branch has", the edits' words being docs/05 §4 :133's, left as the page's history. Nothing false outside this delivery.
+
+**Verify and book after the last edit.** `make verify` exit 0 after the review's fixes; then `make book` exit 0, built from HEAD `6daa835` with this delivery's unstaged edits in `book/` and no other change there, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`. `make verify` exit 0 again after this page's last edit.
+
+```commit
+docs(ch08-23-branch-read): nine chapters read the queue as §4 says
+
+- Each slug's line from its branch, with the lines only a branch has
+- No reader promised a mark that is only in a worktree's file
+- Chapters 18 and 19: a branch on the remote means the line is taken
+- Chapter 8's Git item says only what kit-2026-10-20-1 records
+
+work/done/ch08-23-branch-read.md
+```

@@ -62,7 +62,7 @@ Com um branch ou um worktree por entrega, a marca mora no branch da entrega, env
 Depois de um `git fetch`, uma linha cujo branch existe está ocupada, mostre o que mostrar o branch principal: o branch é a reivindicação da linha, no remoto desde o momento em que o trabalho começa, antes de qualquer marca nele ser enviada, então a fila do branch principal só muda por merges.
 Então quem lê a fila, um quadro ou uma sessão que escolhe linhas livres ou resolve um `after`, pega a linha de cada slug no branch dele, local ou remoto, acrescenta as linhas que só um branch tem, e as reconcilia pelo slug, com cada linha no seu estado mais recente, nunca o arquivo inteiro de um branch.
 As marcas mudam na hora pelo mesmo motivo nos dois casos, um quadro de onde as pessoas puxam trabalho: no trunk o quadro lê a fila única, e com um branch ou um worktree por entrega lê a linha de cada slug onde ela mora.
-Onde a linha mora decide em quanto tempo quem lê vê a marca: o arquivo de um worktree mostra a marca no momento em que ela muda, um branch quando a marca entra em um commit nele, um branch remoto quando esse commit é enviado.
+Onde a linha mora decide em quanto tempo quem lê vê a marca: um branch mostra a marca quando ela entra em um commit nele, um branch remoto quando esse commit é enviado.
 Um espelho do próprio projeto numa só direção, atualizado pelos comandos quando uma marca muda, mostra a marca na hora, e com um branch ou um worktree por entrega envia a fila lida do mesmo jeito, então cada atualização leva a marca de cada entrega até onde consegue vê-la, não a cópia do próprio branch.
 
 ## A próxima linha, e quais rodam juntas
@@ -191,7 +191,7 @@ Nos dois casos, resolver o motivo tira os dois sufixos e, com eles, a etiqueta.
 O capítulo 20 mostra como um script espelha a fila no quadro do próprio time, numa só direção.
 
 Um quadro também pode ler a própria fila, sem nada a espelhar.
-Ele lê o docs/06 e as páginas em `work/` pelo slug, no trunk nos arquivos da própria pasta e com um branch ou um worktree por entrega no branch de cada slug, local ou remoto, e move os cartões conforme cada marca fica visível para ele enquanto o agente trabalha.
+Ele lê o docs/06 e as páginas em `work/` pelo slug, no trunk nos arquivos da própria pasta e com um branch ou um worktree por entrega no branch de cada slug, local ou remoto, com as linhas que só um branch tem, e move os cartões conforme cada marca fica visível para ele enquanto o agente trabalha.
 
 ## O que o time ganha
 

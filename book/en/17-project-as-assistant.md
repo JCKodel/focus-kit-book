@@ -129,7 +129,7 @@ Run: /propose m1-review (Codex: $propose m1-review)
 ```
 
 Every part of it is read from docs/06: the milestone's count, the line in flight with its mark, the waits, and the first free line, with the command chapter 8's table gives for each host.
-On trunk that is the queue of the folder where the session runs; with a branch or a worktree per delivery the main branch shows each line as it was until its merge, so the session runs `git fetch`, counts a line whose branch exists as taken, in flight even before any of its marks is pushed, and takes each slug's line from its branch, local or remote, reconciling them by slug (chapter 14): from the main branch's copy alone, `return-book` would read `[ ]`, and "In flight" would miss the build under way.
+On trunk that is the queue of the folder where the session runs; with a branch or a worktree per delivery the main branch shows each line as it was until its merge, so the session runs `git fetch`, counts a line whose branch exists as taken, in flight even before any of its marks is pushed, and takes each slug's line from its branch, local or remote, and the lines only a branch has, reconciling them by slug (chapter 14): from the main branch's copy alone, `return-book` would read `[ ]`, and "In flight" would miss the build under way.
 A `[?]` line would appear under "Waiting" with its reason and the phase it resumes in, as the line holds them.
 An answer from what the session remembers, an offer to keep a status file, or a suggestion to add a status command means the agent did not read the queue: ask for the file behind the answer.
 

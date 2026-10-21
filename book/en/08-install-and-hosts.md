@@ -73,10 +73,8 @@ Pending process migrations, by document and section, shortened:
   /propose corrects a token from the page." And its last paragraph
   removed: its first sentence is in §8, its second in the new first
   paragraph.
-* docs/05 §5, Git: a project choice, not a migration: trunk, ADR-0010,
-  with the Publish policy, the agent never pushes. The kit's slot
-  offers, for a branch or a worktree per delivery, /propose pushing
-  the branch it creates; on trunk no branch is created. None.
+* docs/05 §5, Git: a project choice, not a migration: trunk,
+  with the Publish policy, the agent never pushes. None.
 
 The other items cover docs/05 §§2 and 3, the other slots of §5,
 §§6 to 8, docs/04, docs/06 and AGENTS.md.
@@ -86,7 +84,7 @@ Next: /propose ch08-update-2026-10-20-1, once kit-2026-10-20-1 is [x].
 Each item names a document and a section, and ends in one of three outcomes.
 It matches and needs nothing, and says so: `None`.
 It lacks something, and the item gives the wording the template proposes and where it goes, as for docs/05 §4.
-Or it differs by a choice the project made and recorded with a date or an ADR, as the book's Git slot does: the item names that choice and what the kit says beside it, and asks for no change.
+Or it differs by a choice the project made and recorded with a date or an ADR, as the book's Git slot does: the item names that choice and asks for no change.
 Every item is reported, never done: the update writes none of these documents.
 
 Section numbers come first because the commands cite docs/05 by the template's numbers, §4 for the queue, §6 for the commit, and read by number; a docs/05 numbered otherwise would send every command to the wrong section, so that migration comes before any other, whatever an ADR says.
@@ -100,7 +98,7 @@ The update is done when the migrations are applied, as any change is: a queue li
 On a documented project the update reports the migrations first, or says there are none.
 It never asks you to run `/brainstorm` or `/analyze` again: those write a project's documents from nothing, and yours exist.
 It names instead the command docs/06's first free line wants, in your host's form: `/propose` and its slug for a `[ ]` line, `/apply` and its slug for a `[>]` one.
-On trunk that line is read in the queue of the folder; with a branch or a worktree per delivery the main branch shows each line as it was until its merge, so the update runs `git fetch` first, counts a line whose branch exists as taken even before any of its marks is pushed, whatever the main branch shows, and reads each slug's line from its branch, local or remote, reconciling them by slug ([chapter 14](14-queue-states.md)).
+On trunk that line is read in the queue of the folder; with a branch or a worktree per delivery the main branch shows each line as it was until its merge, so the update runs `git fetch` first, counts a line whose branch exists as taken even before any of its marks is pushed, whatever the main branch shows, and reads each slug's line from its branch, local or remote, and the lines only a branch has, reconciling them by slug ([chapter 14](14-queue-states.md)).
 A version that asks nothing of your documents reports no migration: a version that changes only the commands, such as `/apply` showing its commit message in the conversation too, changes nothing else.
 A docs/05 whose Git slot chose a worktree per delivery and names no folder gets a migration only when the project already works in a container, the folder [chapter 19](19-worktrees.md) lays out with the checkout and a hidden folder for the history and the worktrees, and that hidden folder holds `repo.git/`.
 The report then proposes writing in that folder's name and the prefix the delivery branches already use, so nothing moves.
