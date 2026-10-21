@@ -97,12 +97,45 @@
 
 **Done when.**
 
-* [ ] Both editions changed as the Contract says, and nothing else in the two chapters.
-* [ ] `grep -n "additionalDirectories" book/*/19-worktrees.md` prints one line per edition, in the block after :132's manual.
-* [ ] `grep -n "claude-code-permissions" book/*/19-worktrees.md` prints the use and the footnote in each edition, the footnote's page read on the day of the build.
-* [ ] `grep -n "contêiner\|container" book/*/13-apply.md` prints nothing new: chapter 13 does not lay out the container.
-* [ ] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version or date in chapter text.
-* [ ] `make verify` green.
-* [ ] `make book`: left to the driver after the batch; the milestone review records the build.
-* [ ] Delivery review by one read-only Opus agent, with the advisor, over this page and `git diff HEAD` of the four chapter files, against docs/04 and AGENTS.md.
-* [ ] Page moved to `work/done/`, covered by the last verify.
+* [x] Both editions changed as the Contract says, and nothing else in the two chapters.
+* [x] `grep -n "additionalDirectories" book/*/19-worktrees.md` prints one line per edition, in the block after :132's manual.
+* [x] `grep -n "claude-code-permissions" book/*/19-worktrees.md` prints the use and the footnote in each edition, the footnote's page read on the day of the build.
+* [x] `grep -n "contêiner\|container" book/*/13-apply.md` prints nothing new: chapter 13 does not lay out the container.
+* [x] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version or date in chapter text.
+* [x] `make verify` green.
+* [x] `make book`: left to the driver after the batch; the milestone review records the build.
+* [x] Delivery review by one read-only Opus agent, with the advisor, over this page and `git diff HEAD` of the four chapter files, against docs/04 and AGENTS.md.
+* [x] Page moved to `work/done/`, covered by the last verify.
+
+**Divergences.**
+
+* Two sentences differ from the Contract's wording, after the delivery review: chapter 13 en's new line after :31 opens "The same holds for a session opened..." instead of "So does a session opened...", whose "So does" took the verb of "That refusal comes before any build" and read as the session coming before any build; the pt line, "O mesmo vale para...", already read so. In chapter 19's key point, both editions, "never in the container" ("nunca no contêiner") moved up beside "each session opens where it works", where it says that no session opens there, instead of following the stop.
+* `make book`: the Done when item leaves it to the driver; the batch's rules had this lane run it after the last verify, and the Proof records it.
+* The delivery review: the Done when item says "with the advisor"; it was one read-only Opus agent launched by this lane, and nothing shows it kept the session's advisor.
+* New lines land where the Contract puts them; with them, chapter 13 has 280 lines and chapter 19 has 378 in both editions.
+
+**Decisions taken alone in /apply.**
+
+* The footnote's page was read on the day of the build, 2026-10-21, the date the Contract wrote: the section "Additional directories grant file access, not configuration" still says "Directories listed in `permissions.additionalDirectories` in a settings file grant file access only and don't load any of the configuration below", the configuration listing skills, command files and subagents, and its "Working directories" section says files in additional directories "follow the same permission rules as the original working directory". The anchor `#additional-directories-grant-file-access-not-configuration` is on the page.
+* Both review findings were in text this delivery wrote, so both were fixed here rather than queued.
+
+**Delivery review.** One read-only Opus agent, launched by this lane, read this page, `git diff HEAD` of `book/en/13-apply.md`, `book/pt/13-apply.md`, `book/en/19-worktrees.md` and `book/pt/19-worktrees.md`, docs/04, AGENTS.md and docs/03, the installed propose and apply skills, and Claude Code's permissions page. It found the diff the Contract's line for line in both editions and nothing else changed, parity and the Portuguese slugs right, no em dash, no version, date, run or incident in chapter text, the stop scoped to a worktree per delivery, the quote the documentation's words, both claims about Claude Code on the page, and the footnote in docs/04's format. Findings and answers:
+
+* `book/en/13-apply.md:31`: "So does" took the verb of the sentence before it, so read literally the session "comes before any build"; suggested "The same holds for a session opened...". Fixed.
+* `book/en/19-worktrees.md:366` and `book/pt/19-worktrees.md:366`, the key point: "never in the container" after the stop could read as "it never stops in the container"; suggested moving it beside "opens". Fixed in both editions.
+* An observation needing no fix: "same rules as `main/`" comes from the page's "Working directories" section, not the section the footnote names; one note per source opens the same page.
+
+No new queue line.
+
+**Proof.** `make verify` was run after the chapter edits, after the review's fixes with the page moved to `work/done/`, and again after this Proof was written: exit 0 each time, every check passed, the link check included. The Done when greps print one `additionalDirectories` line per edition (19 :140, in the block after the manual), the footnote's use (:145) and definition (:378) in each edition, and no new `container` or `contêiner` line in chapter 13. This lane ran `make book` after the second verify, exit 0, both editions: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`. Nothing pushed; no environment changes.
+
+```commit
+docs(ch13-19-session-folder): teach which folder each session opens in
+
+- ch13: with a worktree, /apply opens in it; elsewhere it stops, no edit
+- ch19: the container holds no kit; /propose gives the worktree's path
+- ch19: Claude Code's additionalDirectories lets main/ edit worktrees
+- both editions; footnote to Claude Code's permissions page
+
+work/done/ch13-19-session-folder.md
+```

@@ -128,8 +128,21 @@ git worktree add ../../main main
 
 Run inside `.focus-kit/repo.git`, creates `library/main/` on the branch `main`: the checkout, a worktree like the others, whose `.git` is a file that points to `.focus-kit/repo.git`.
 `git worktree list` now prints two lines, one ending in `library/.focus-kit/repo.git` marked `(bare)`, one ending in `library/main` on `[main]`.
+The container itself is not a checkout: it holds `main/` and `.focus-kit/`, but no `AGENTS.md`, no documents and no commands, so a session opened there has none of what the kit reads; every session opens in `main/` or in a worktree.
 
 A project that chooses this writes these steps in a manual of `docs/manuals/` ([chapter 7](07-the-documents.md)), so whoever clones it next makes the same container.
+
+The same manual says how your host lets a session in `main/` edit the worktrees, since `/propose` runs there and writes the page in the delivery's worktree; in Claude Code it is one setting in `main/`'s `.claude/settings.json`, where `../.focus-kit/worktrees` is the worktrees' folder seen from `main/`:
+
+```json
+{
+  "permissions": {
+    "additionalDirectories": ["../.focus-kit/worktrees"]
+  }
+}
+```
+
+It adds the worktrees to the folders the session reads and edits, under the same rules as `main/`, and loads none of the commands each worktree holds, which a session in `main/` already has: folders listed there "*grant file access only*".[^claude-code-permissions]
 
 Then six steps, run from `main/` except where the text says otherwise.
 A path given to `git worktree add` is relative to the folder you stand in, so the same command run elsewhere puts the folder elsewhere; from `main/`, `../.focus-kit/worktrees/<slug>` lands inside the container.
@@ -181,7 +194,10 @@ The line's `[~]` and every later mark are written in the worktree, on its branch
 [Chapter 14](14-queue-states.md) says where a board sees them.
 A branch `<slug>` without the prefix is not the delivery's: it is someone else's.
 You make the container once; the kit makes each worktree.
-`/apply <slug>` runs in a fresh session opened in that folder, builds the page, and stages the change.
+`/propose` ends by giving that folder's path, and `/apply <slug>` runs in a fresh session opened in it, builds the page, and stages the change.
+On the lending library, after `/propose return-book` in `main/`, you open that session in `library/.focus-kit/worktrees/return-book`, the folder `git worktree list` prints too, and type `/apply return-book` there.
+It opens there because the page and the line's `[>]` are on the delivery's branch, while `main/`'s queue shows the line as it was until the merge, and the index it stages into is the worktree's own.
+Opened in any other folder, `main/` included, `/apply` stops before any edit and gives the worktree's path ([chapter 13](13-apply.md)).
 By default, you use the delivery, review and commit on the branch, merge into `main` with `--no-ff`, remove the worktree and delete the branch.
 
 When `/apply return-book` blocks in its worktree on an answer nobody has given, it stops as chapter 13 says: it marks the line `[?]` with `· resume: apply · blocked: what if the copy comes back damaged?`, writes on the page what was built, and shows a partial message in a `commit` block.
@@ -195,7 +211,7 @@ The agent never commits, merges, pushes, resolves a conflict or removes a worktr
 Ask, and it takes any of them for you: it writes the commit message, resolves the conflict, commits, merges, pushes or removes the worktree, and knows the commands that undo a step, such as `git merge --abort` for a merge stopped by a conflict or `git revert` for a delivery to take back.
 By default, each step comes after your reading: ask for the commit once you have used the delivery and the staged diff holds only it, for the merge commit once the resolved file has no conflict marker left, and for the push once `git log` shows what will leave.
 After a merge it made, `git log --oneline --graph -3` in `main/` shows the merge commit and the branch it brought in.
-To run two deliveries at once in worktrees, open one session per folder: one in `main/` for each `/propose`, one in each worktree for its `/apply`.
+To run two deliveries at once in worktrees, open one session per folder: one in `main/` for each `/propose`, one in each worktree for its `/apply`, and none in the container.
 
 The kit gives every tool and every person this one shape because of an error: a `/propose` running in a worktree another tool made, in a folder of its own, writes the page where the next `/apply` does not look.
 
@@ -347,7 +363,7 @@ Proposes in a batch carry the parallel into definition: the agents write the pag
 * Two sessions share one folder on trunk when their lines are free and their files do not meet: each marks only its line, stages only its paths and its line of the queue, and you decide each commit, one delivery at a time.
 * Another line's mark, another delivery's page or files and another session's staged entries are not a conflict; neither are two neighbouring lines of the queue in one hunk; a line edited by both, or a file one page needs that the other is changing, is: stop, then order the lines or give one a worktree.
 * One folder has one index, so commit from it once it holds only that delivery: `git diff --cached --stat` names files, so read the staged diff of a shared file for its lines too; with another delivery staged, wait; and never select a delivery with `git commit -- <paths>`, which takes each named file whole from the folder, the other delivery's lines in a shared file included, staged or not.
-* A worktree per delivery pays for several people, or for deliveries that touch the same files: a container folder whose `main/` is the checkout keeps each delivery's worktree in `<hidden>/worktrees/<slug>/` on `<prefix>/<slug>`, `.focus-kit/` and `focus-kit/` by default; `git worktree add`, work there, `git merge --no-ff` from `main/`, `git worktree remove`, `git branch -d`; each worktree has its own index, `/propose` pushes the branch when it creates it, the line's claim, and the line's marks live on the branch until the merge; a blocked `/apply` there may stage its partial work for you to commit on the branch, which stays unmerged until the delivery is done; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
+* A worktree per delivery pays for several people, or for deliveries that touch the same files: a container folder whose `main/` is the checkout keeps each delivery's worktree in `<hidden>/worktrees/<slug>/` on `<prefix>/<slug>`, `.focus-kit/` and `focus-kit/` by default; `git worktree add`, work there, `git merge --no-ff` from `main/`, `git worktree remove`, `git branch -d`; each worktree has its own index, `/propose` pushes the branch when it creates it, the line's claim, and the line's marks live on the branch until the merge; each session opens where it works, never in the container: `/propose` in `main/`, which edits the worktrees by the container's manual, and `/apply` in a fresh session in the worktree whose path `/propose` gives, stopping before any edit anywhere else; a blocked `/apply` there may stage its partial work for you to commit on the branch, which stays unmerged until the delivery is done; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
 * Parallel pays while the deliveries' files do not meet, or meet only across worktrees whose merge you can decide, the machine's ports and databases do not collide, the disk holds each worktree's dependencies, and one person can still review each delivery; proposes can run in a batch on the recommended answers, staging nothing, each page listing what it decided alone for you to read before any `/apply`, each `/apply` staging its own delivery, and every commit stays your decision, made by you or asked of the agent after your review, or given once in the Git slot, with each commit or merge reviewed after it lands.
 
 [^git-commit]: Git, "git-commit", the documentation, option `--only`, accessed 2026-10-13. <https://git-scm.com/docs/git-commit>
@@ -359,3 +375,4 @@ Proposes in a batch carry the parallel into definition: the agents write the pag
 [^git-restore]: Git, "git-restore", the documentation, option `--patch`, accessed 2026-10-18. <https://git-scm.com/docs/git-restore>
 [^git-apply]: Git, "git-apply", the documentation, option `--cached`, accessed 2026-10-18. <https://git-scm.com/docs/git-apply>
 [^parallel-run]: J.C. Ködel, "One Page at a Time", the record of two deliveries built in parallel in two worktrees, 2026-09-30, in the book's repository. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/clinic-worktrees-run>
+[^claude-code-permissions]: Anthropic, "Configure permissions", Claude Code documentation, section "Additional directories grant file access, not configuration", accessed 2026-10-21. <https://code.claude.com/docs/en/permissions#additional-directories-grant-file-access-not-configuration>

@@ -16,6 +16,7 @@ And an agent that commits on its own puts its work in the project's history befo
 
 `/apply <slug>` builds the delivery that `work/<slug>.md` describes, completely, in one session: the code, the tests, the proof and the documents.
 It always starts in a fresh session, even when `/propose` ran in the conversation that asked for the change (chapter 11), so the page is all it takes from the conversation that wrote it, which is why chapter 12 asks you to read the page before this command runs.
+With a worktree per delivery, that fresh session opens in the delivery's worktree, the folder whose path `/propose` gives when it ends, because the page and the line's `[>]` are on the delivery's branch ([chapter 19](19-worktrees.md)).
 
 ### What it reads
 
@@ -29,6 +30,7 @@ On trunk it reads the queue of the folder where the session runs; with a branch 
 A file in `work/` does not make a page ready: only `/propose` marks the line `[>]`, when every section is filled or explicitly inapplicable and no scope question is left open (docs/05 §3).
 On a page that still has a question open, or whose line is `[ ]` or `[~]`, it refuses to build and points to `/propose`: in the lending library, in an example written for this chapter, `/apply lend-book` on a page whose Contract still has a question unanswered edits nothing and names `/propose lend-book`, where the question gets its answer.
 That refusal comes before any build, so it is not the stop that "When the work cannot go on" describes: nothing was built, and the line is not marked `[?]`.
+The same holds for a session opened, with a worktree per delivery, in any folder but the delivery's worktree, `main/` included: it refuses the same way, edits nothing, leaves the mark as it is, and gives the worktree's path, where you open the fresh session again.
 On a `[>]` line whose `after` names a line not yet `[x]`, or whose token has `-` second, `(P-)` or `(--)`, while a line above it is not yet `[x]`, it does not start either, says what it waits on, and leaves the mark as it is: an `after` is an order and a `-` a wait, and neither marks the line `[?]` (chapter 14).
 Only on a complete `[>]` line whose `after` lines are all `[x]` and whose token lets it build does it mark the line `[*]` in docs/06, as its first edit, so the queue shows the build under way.
 On a line that is `[?]`, it first says what the line waits on, and goes on only once the reason is resolved (chapter 14); then the line goes back by its resume phase: `resume: apply` returns it to `[>]`, ready to build, and `resume: propose` returns it to `[ ]`, with any draft kept, for `/propose` to finish, because removing the reason does not complete a definition.
@@ -269,7 +271,7 @@ So the page recorded the refinement, no write path reachable from the client, wh
 
 ## Key points
 
-* `/apply <slug>` builds the page in a fresh session, reads docs/00 and docs/03 with the rest, writes the code with docs/03's identifiers and follows every slot of docs/05 §5 literally, the project's own included: the page is the scope, with no dependency, layer or tool it did not name, and when the page contradicts a document it stops and says which, never resolving it silently.
+* `/apply <slug>` builds the page in a fresh session, opened in the delivery's worktree when there is one, reads docs/00 and docs/03 with the rest, writes the code with docs/03's identifiers and follows every slot of docs/05 §5 literally, the project's own included: the page is the scope, with no dependency, layer or tool it did not name, and when the page contradicts a document it stops and says which, never resolving it silently.
 * It marks the line `[*]` with its first edit, once the line's `after` and token let it build, `[x]` with its last, after the stage, and `[?]`, with what it waits on, when it must stop.
 * Green is not done: done is the whole list, from the documents updated before a review by a context that did not write the change, which reads the whole delivery, to verify green after the last edit and the line marked `[x]`.
 * It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, using what it built first, each command written out, said in the conversation and gone with it, while the manual of running the product, written by the first delivery after which the product runs and updated by each that changes a step, is what lasts; and, last of all, which environment is at which version and the command that updates the others.

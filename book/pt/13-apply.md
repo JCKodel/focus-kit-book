@@ -16,6 +16,7 @@ E um agente que faz commit por conta própria põe o trabalho dele no histórico
 
 O `/apply <slug>` constrói a entrega que `work/<slug>.md` descreve, por inteiro, em uma sessão: o código, os testes, a prova e os documentos.
 Ele sempre começa em uma sessão nova, mesmo quando o `/propose` rodou na conversa que pediu a mudança (capítulo 11), então a página é tudo o que ele leva da conversa que a escreveu, e é por isso que o capítulo 12 pede que você leia a página antes de este comando rodar.
+Com um worktree por entrega, essa sessão nova abre no worktree da entrega, a pasta cujo caminho o `/propose` dá ao terminar, porque a página e o `[>]` da linha estão no branch da entrega ([capítulo 19](19-worktrees.md)).
 
 ### O que ele lê
 
@@ -29,6 +30,7 @@ No trunk ele lê a fila da pasta onde a sessão roda; com um branch ou um worktr
 Um arquivo em `work/` não deixa uma página pronta: só o `/propose` marca a linha como `[>]`, quando cada seção está preenchida ou explicitamente inaplicável e nenhuma questão de escopo ficou aberta (docs/05 §3).
 Em uma página que ainda tem uma pergunta aberta, ou cuja linha está `[ ]` ou `[~]`, ele se recusa a construir e aponta para o `/propose`: na biblioteca, em um exemplo escrito para este capítulo, `/apply emprestar-livro` em uma página cujo Contrato ainda tem uma pergunta sem resposta não edita nada e nomeia `/propose emprestar-livro`, onde a pergunta recebe a sua resposta.
 Essa recusa vem antes de qualquer construção, então não é a parada que "Quando o trabalho não consegue seguir" descreve: nada foi construído, e a linha não é marcada como `[?]`.
+O mesmo vale para uma sessão aberta, com um worktree por entrega, em qualquer pasta que não o worktree da entrega, `main/` incluída: ela recusa do mesmo jeito, não edita nada, deixa a marca como está, e dá o caminho do worktree, onde você abre a sessão nova de novo.
 Em uma linha `[>]` cujo `after` nomeia uma linha que ainda não está `[x]`, ou cujo token tem `-` em segundo, `(P-)` ou `(--)`, enquanto uma linha acima dela ainda não está `[x]`, ele também não começa, diz o que espera, e deixa a marca como está: um `after` é uma ordem e um `-` uma espera, e nenhum dos dois marca a linha como `[?]` (capítulo 14).
 Só em uma linha `[>]` completa cujas linhas do `after` estão todas `[x]` e cujo token a deixa construir ele marca a linha como `[*]` no docs/06, como a sua primeira edição, para a fila mostrar a construção em andamento.
 Em uma linha que está `[?]`, ele primeiro diz o que a linha espera, e só segue quando o motivo se resolve (capítulo 14); então a linha volta pela fase de retomada: `resume: apply` a devolve para `[>]`, pronta para construir, e `resume: propose` a devolve para `[ ]`, mantendo qualquer rascunho, para o `/propose` terminar, porque tirar o motivo não completa uma definição.
@@ -269,7 +271,7 @@ Então a página registrou o ajuste, nenhum caminho de escrita alcançável pelo
 
 ## Pontos-chave
 
-* O `/apply <slug>` constrói a página em uma sessão nova, lê o docs/00 e o docs/03 com o resto, escreve o código com os identificadores do docs/03 e segue ao pé da letra cada slot do docs/05 §5, os do próprio projeto incluídos: a página é o escopo, sem dependência, camada ou ferramenta que ela não nomeou, e quando a página contradiz um documento ele para e diz qual, sem nunca resolver em silêncio.
+* O `/apply <slug>` constrói a página em uma sessão nova, aberta no worktree da entrega quando há um, lê o docs/00 e o docs/03 com o resto, escreve o código com os identificadores do docs/03 e segue ao pé da letra cada slot do docs/05 §5, os do próprio projeto incluídos: a página é o escopo, sem dependência, camada ou ferramenta que ela não nomeou, e quando a página contradiz um documento ele para e diz qual, sem nunca resolver em silêncio.
 * Ele marca a linha como `[*]` com a sua primeira edição, quando o `after` e o token da linha a deixam construir, `[x]` com a última, depois do stage, e `[?]`, com o que ela espera, quando precisa parar.
 * Verde não é pronto: pronto é a lista inteira, dos documentos atualizados antes de uma revisão por um contexto que não escreveu a mudança, que lê a entrega inteira, à verificação verde depois da última edição e à linha marcada `[x]`.
 * Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, primeiro usar o que ele construiu, cada comando escrito por extenso, ditos na conversa e que acabam com ela, enquanto o manual de rodar o produto, escrito pela primeira entrega depois da qual o produto roda e atualizado por cada uma que muda um passo, é o que fica; e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.

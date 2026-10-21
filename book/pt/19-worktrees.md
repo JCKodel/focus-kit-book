@@ -128,8 +128,21 @@ git worktree add ../../main main
 
 Rodado dentro de `.focus-kit/repo.git`, cria `biblioteca/main/` no branch `main`: o checkout, um worktree como os outros, cujo `.git` é um arquivo que aponta para `.focus-kit/repo.git`.
 `git worktree list` agora imprime duas linhas, uma terminando em `biblioteca/.focus-kit/repo.git` marcada `(bare)`, outra terminando em `biblioteca/main` em `[main]`.
+O próprio contêiner não é um checkout: ele guarda `main/` e `.focus-kit/`, mas nenhum `AGENTS.md`, nenhum documento e nenhum comando, então uma sessão aberta ali não tem nada do que o kit lê; toda sessão abre em `main/` ou em um worktree.
 
 Um projeto que escolhe isso escreve esses passos em um manual de `docs/manuals/` ([capítulo 7](07-the-documents.md)), para que quem o clonar depois monte o mesmo contêiner.
+
+O mesmo manual diz como o seu host deixa uma sessão em `main/` editar os worktrees, já que o `/propose` roda ali e escreve a página no worktree da entrega; no Claude Code é uma configuração no `.claude/settings.json` de `main/`, onde `../.focus-kit/worktrees` é a pasta dos worktrees vista de `main/`:
+
+```json
+{
+  "permissions": {
+    "additionalDirectories": ["../.focus-kit/worktrees"]
+  }
+}
+```
+
+Ela soma os worktrees às pastas que a sessão lê e edita, sob as mesmas regras de `main/`, e não carrega nenhum dos comandos que cada worktree guarda, que uma sessão em `main/` já tem: pastas listadas ali "*concedem só acesso a arquivos*".[^claude-code-permissions]
 
 Depois, seis passos, rodados em `main/`, exceto onde o texto diz outra coisa.
 Um caminho dado ao `git worktree add` é relativo à pasta em que você está, então o mesmo comando rodado em outro lugar põe a pasta em outro lugar; a partir de `main/`, `../.focus-kit/worktrees/<slug>` cai dentro do contêiner.
@@ -181,7 +194,10 @@ O `[~]` da linha e cada marca seguinte são escritos no worktree, no seu branch,
 O [capítulo 14](14-queue-states.md) diz onde um quadro as vê.
 Um branch `<slug>` sem o prefixo não é o da entrega: é de outra pessoa.
 Você monta o contêiner uma vez; o kit cria cada worktree.
-O `/apply <slug>` roda em uma sessão nova aberta naquela pasta, constrói a página, e coloca a mudança em stage.
+O `/propose` termina dando o caminho dessa pasta, e o `/apply <slug>` roda em uma sessão nova aberta nela, constrói a página, e coloca a mudança em stage.
+Na biblioteca, depois do `/propose devolver-livro` em `main/`, você abre essa sessão em `biblioteca/.focus-kit/worktrees/devolver-livro`, a pasta que o `git worktree list` também imprime, e digita `/apply devolver-livro` ali.
+Ela abre ali porque a página e o `[>]` da linha estão no branch da entrega, enquanto a fila de `main/` mostra a linha como estava até o merge, e o índice em que ela coloca a mudança em stage é o do worktree.
+Aberto em qualquer outra pasta, `main/` incluída, o `/apply` para antes de qualquer edição e dá o caminho do worktree ([capítulo 13](13-apply.md)).
 Por padrão, você usa a entrega, revisa e faz o commit no branch, faz o merge no `main` com `--no-ff`, remove o worktree e apaga o branch.
 
 Quando o `/apply devolver-livro` trava no seu worktree esperando uma resposta que ninguém deu, ele para como o capítulo 13 diz: marca a linha `[?]` com `· resume: apply · blocked: e se o exemplar voltar danificado?`, escreve na página o que foi construído, e mostra uma mensagem parcial em um bloco `commit`.
@@ -195,7 +211,7 @@ O agente nunca faz commit, merge ou push, nem resolve um conflito ou remove um w
 Peça, e ele dá qualquer um desses passos por você: escreve a mensagem de commit, resolve o conflito, faz o commit, o merge ou o push, remove o worktree, e conhece os comandos que desfazem um passo, como `git merge --abort` para um merge parado por um conflito ou `git revert` para uma entrega a desfazer.
 Por padrão, cada passo vem depois da sua leitura: peça o commit quando você tiver usado a entrega e o diff em stage tiver só ela, o commit de merge quando o arquivo resolvido não tiver nenhum marcador de conflito, e o push quando o `git log` mostrar o que vai sair.
 Depois de um merge que ele fez, `git log --oneline --graph -3` em `main/` mostra o commit de merge e o branch que ele trouxe.
-Para rodar duas entregas ao mesmo tempo em worktrees, abra uma sessão por pasta: uma em `main/` para cada `/propose`, uma em cada worktree para o seu `/apply`.
+Para rodar duas entregas ao mesmo tempo em worktrees, abra uma sessão por pasta: uma em `main/` para cada `/propose`, uma em cada worktree para o seu `/apply`, e nenhuma no contêiner.
 
 O kit dá essa forma única a toda ferramenta e toda pessoa por causa de um erro: um `/propose` rodando em um worktree que outra ferramenta criou, numa pasta própria, escreve a página onde o próximo `/apply` não procura.
 
@@ -347,7 +363,7 @@ O `/propose` em lote leva o paralelo para a definição: os agentes escrevem as 
 * Duas sessões dividem uma pasta no trunk quando as suas linhas estão livres e os seus arquivos não se encontram: cada uma marca só a sua linha, coloca em stage só os seus caminhos e a sua linha da fila, e você decide cada commit, uma entrega por vez.
 * A marca de outra linha, a página ou os arquivos de outra entrega e as entradas em stage de outra sessão não são conflito; nem duas linhas vizinhas da fila em um hunk; uma linha editada pelas duas, ou um arquivo de que uma página precisa e que a outra está mudando, é: pare, e então ordene as linhas ou dê a uma delas um worktree.
 * Uma pasta tem um só índice, então faça o commit a partir dele quando ele guarda só aquela entrega: `git diff --cached --stat` nomeia arquivos, então leia também o diff em stage de um arquivo compartilhado, pelas suas linhas; com outra entrega em stage, espere; e nunca escolha uma entrega com `git commit -- <caminhos>`, que pega cada arquivo nomeado inteiro da pasta, com as linhas da outra entrega em um arquivo compartilhado, em stage ou não.
-* Um worktree por entrega compensa para várias pessoas, ou para entregas que mexem nos mesmos arquivos: uma pasta contêiner cujo `main/` é o checkout guarda o worktree de cada entrega em `<oculta>/worktrees/<slug>/` no `<prefixo>/<slug>`, `.focus-kit/` e `focus-kit/` por padrão; `git worktree add`, trabalhe ali, `git merge --no-ff` em `main/`, `git worktree remove`, `git branch -d`; cada worktree tem o seu próprio índice, o `/propose` dá push no branch quando o cria, a reivindicação da linha, e as marcas da linha ficam no branch até o merge; um `/apply` travado ali pode colocar o seu trabalho parcial em stage para você fazer o commit no branch, que fica sem merge até a entrega estar pronta; um conflito deixa as duas versões entre marcadores, e `git diff --cached --check` pega qualquer um que sobrou antes do commit.
+* Um worktree por entrega compensa para várias pessoas, ou para entregas que mexem nos mesmos arquivos: uma pasta contêiner cujo `main/` é o checkout guarda o worktree de cada entrega em `<oculta>/worktrees/<slug>/` no `<prefixo>/<slug>`, `.focus-kit/` e `focus-kit/` por padrão; `git worktree add`, trabalhe ali, `git merge --no-ff` em `main/`, `git worktree remove`, `git branch -d`; cada worktree tem o seu próprio índice, o `/propose` dá push no branch quando o cria, a reivindicação da linha, e as marcas da linha ficam no branch até o merge; cada sessão abre onde trabalha, nunca no contêiner: o `/propose` em `main/`, que edita os worktrees pelo manual do contêiner, e o `/apply` em uma sessão nova no worktree cujo caminho o `/propose` dá, parando antes de qualquer edição em qualquer outro lugar; um `/apply` travado ali pode colocar o seu trabalho parcial em stage para você fazer o commit no branch, que fica sem merge até a entrega estar pronta; um conflito deixa as duas versões entre marcadores, e `git diff --cached --check` pega qualquer um que sobrou antes do commit.
 * O paralelo compensa enquanto os arquivos das entregas não se encontram, ou só se encontram entre worktrees cujo merge você consegue decidir, as portas e os bancos de dados da máquina não colidem, o disco comporta as dependências de cada worktree, e uma pessoa ainda consegue revisar cada entrega; o `/propose` pode rodar em lote nas respostas recomendadas, sem colocar nada em stage, cada página listando o que decidiu sozinha para você ler antes de qualquer `/apply`, cada `/apply` colocando a sua própria entrega em stage, e todo commit continua sendo decisão sua, feito por você ou pedido ao agente depois da sua revisão, ou dada uma vez no slot Git, com cada commit ou merge revisado depois que entra.
 
 [^git-commit]: Git, "git-commit", a documentação, opção `--only`, acesso em 2026-10-13. <https://git-scm.com/docs/git-commit>
@@ -359,3 +375,4 @@ O `/propose` em lote leva o paralelo para a definição: os agentes escrevem as 
 [^git-restore]: Git, "git-restore", a documentação, opção `--patch`, acesso em 2026-10-18. <https://git-scm.com/docs/git-restore>
 [^git-apply]: Git, "git-apply", a documentação, opção `--cached`, acesso em 2026-10-18. <https://git-scm.com/docs/git-apply>
 [^parallel-run]: J.C. Ködel, "One Page at a Time", o registro de duas entregas construídas em paralelo em dois worktrees, 2026-09-30, no repositório do livro. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/clinic-worktrees-run>
+[^claude-code-permissions]: Anthropic, "Configure permissions", documentação do Claude Code, seção "Additional directories grant file access, not configuration", acesso em 2026-10-21. <https://code.claude.com/docs/en/permissions#additional-directories-grant-file-access-not-configuration>
