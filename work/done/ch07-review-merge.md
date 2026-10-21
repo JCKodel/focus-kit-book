@@ -49,7 +49,7 @@
 * [x] No version, date, before/after or narration of a run in the text; no em dash; no number added, no private case used.
 * [x] `make verify` green after the last edit, its result recorded in this page's Proof.
 * [x] `make book`: not run by this lane; the driver runs it after the batch and the milestone review records the build.
-* [x] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
+* [x] Delivery review by one read-only Opus agent, over both chapter 7 files and this page, against docs/04 and AGENTS.md (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 
 **Proof.**
 

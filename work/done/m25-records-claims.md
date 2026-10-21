@@ -115,10 +115,50 @@ Terms: record, Delivery review, queue line, parallel token, as docs/03 and docs/
 
 **Done when.**
 
-* [ ] Rule A checked and its outcome recorded in the Proof; the replacements it leaves made word for word, each quoted text counted once in its page first.
-* [ ] `git diff` of the nine pages shows only those replacements, the three new items and the one moved block.
-* [ ] A search of the nine pages finds no `ch13-19-session-folder`, `ch12-14-18-several-slugs`, `ch13-19-claim-script`, `ch14-after-over-token`, `ch08-copilot-cli`, `2026-10-20-2` to `-5` or M26 to M29, but at `kit-2026-10-20-1` :118 (unless rule A kept them); no ticked "Delivery review as docs/05 §5 says"; no "with the advisor" on a review; "Ten files" only in `ch12-14-parallel-token`'s Divergences.
-* [ ] Each of the nine pages' last fenced block is `commit`, and nothing follows it.
-* [ ] No em dash; no Done when item of a record unticked.
-* [ ] `make verify` green after the last edit, its result in this page's Proof.
-* [ ] Delivery review by one read-only Opus agent this session launches, over `git diff HEAD` of the nine pages and this page, against this page and docs/04; whether it keeps the session's advisor recorded as it is.
+* [x] Rule A checked and its outcome recorded in the Proof; the replacements it leaves made word for word, each quoted text counted once in its page first.
+* [x] `git diff` of the nine pages shows only those replacements, the three new items and the one moved block.
+* [x] A search of the nine pages finds no `ch13-19-session-folder`, `ch12-14-18-several-slugs`, `ch13-19-claim-script`, `ch14-after-over-token`, `ch08-copilot-cli`, `2026-10-20-2` to `-5` or M26 to M29, but at `kit-2026-10-20-1` :118 (unless rule A kept them); no ticked "Delivery review as docs/05 §5 says"; no "with the advisor" on a review; "Ten files" only in `ch12-14-parallel-token`'s Divergences.
+* [x] Each of the nine pages' last fenced block is `commit`, and nothing follows it.
+* [x] No em dash; no Done when item of a record unticked.
+* [x] `make verify` green after the last edit, its result in this page's Proof.
+* [x] Delivery review by one read-only Opus agent this session launches, over `git diff HEAD` of the nine pages and this page, against this page and docs/04; whether it keeps the session's advisor recorded as it is.
+
+**Built.** The 26 replacements of the Contract in the nine record pages, each quoted text counted once in its page before any was made; replacement 21 moved `ch18-19-fetch-resume`'s two Decisions sections, unchanged, to before its Done when, so the page ends with its `commit` block.
+
+**Checked.** The Done when searches over the nine pages: no em dash, no unticked item, each page's last fenced block `commit` with nothing after it; "Ten files" only in `ch12-14-parallel-token`'s Divergences; the "with the advisor" left are `kit-2026-10-20-1` :34, the kit's readers in its kept choices, not a review, and `m24-records-crossrefs` :113's "With the advisor", its quote of the old item, which the Out of scope keeps. The slug search and the "as docs/05 §5 says" search hit what Divergences records.
+
+**Divergences.**
+
+* Done when's slug search exempts only `kit-2026-10-20-1` :118, but `m24-records-crossrefs` names the M26 to M29 slugs and milestones in its own Behaviour, rule A, Contract replacements (the text it removed), Done when search and Proof (:10, :13, :18, :24 to :45, :91, :98, :105). They are that page's plan and its quotes of what it removed, the category the Out of scope gives :118, and the Contract leaves them untouched; kept.
+* The Out of scope says `kit-2026-10-20-1` has no Delivery review item in its Done when; it has one, :65, ticked "Delivery review as docs/05 §5 says". The Contract does not touch it and changes no other line, so it stays; reported to the driver as a new line under M25. Behaviour's C13 and C14 bullets and the Out of scope carried these two facts wrong from the definition.
+
+**Decisions taken alone in /apply.**
+
+* The two hits above are left and recorded, not fixed: the Contract's "the rest of each page untouched" and Fails rule out a line it does not quote.
+
+**Delivery review.** One read-only Opus agent this session launched read AGENTS.md, docs/04, docs/05 §5, this page and `git diff HEAD` of the nine pages and this page, re-applied the 26 replacements to HEAD's copies and got the working-tree files byte for byte; it said it had the advisor tool and consulted it once. Findings:
+
+* Done when's slug and "as docs/05 §5 says" search does not hold as written (`m24-records-crossrefs`' own quotes, `kit-2026-10-20-1` :65): already in Divergences.
+* No `make verify` result in Proof yet: added below.
+* Divergences named a "NEWLINE" no queue line holds: rewritten as reported to the driver.
+* Checked missed `m24-records-crossrefs` :113's "With the advisor": added.
+* `ch08-23-fetch-taken`'s item does not say "narrower than docs/05 §5": the Contract allows it; no change.
+
+**Proof.**
+
+* Rule A: `git show HEAD:docs/06-Queue.md` at `5a40864` ends at :627, M25 at :615 its last heading, this line at :626; none of `ch08-update-2026-10-20-2` to `-5`, `ch13-19-session-folder`, `ch12-14-18-several-slugs`, `ch13-19-claim-script`, `ch08-copilot-cli` or `ch14-after-over-token` is there. So every replacement applied as written, none skipped.
+* Each of the 25 quoted texts counted 1 in its page, and replacement 21's two ends and its anchor counted 1, before the edits.
+* `git diff --stat HEAD -- work/done/`: the nine pages, 41 insertions and 38 deletions; `ch18-19-fetch-resume`'s diff is replacement 19, the block moved whole and the two new items.
+* `make verify` passed whole (build, parity, em dash, prose, width, examples, links, disclosure) after the Contract's edits, and again after the last edit, the records and the page's move included.
+* `make book` exit 0, run after that verify; PDFs: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+```commit
+docs(m25-records-claims): make M25's records hold only what happened
+
+- make book lines name the tree and commit, and the build at dae2358
+- review items say what ran; the advisor recorded as it is
+- no slug or milestone the committed queue lacks; counts match
+- ch18-19-fetch-resume ends with its commit block
+
+work/done/m25-records-claims.md
+```

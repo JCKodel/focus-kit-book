@@ -44,7 +44,7 @@
 * `book/pt/23-adoption.md` :66: `a linha de cada slug no worktree ou no branch dele, e quem deve uma resposta` becomes `` a linha de cada slug no branch dele depois de um `git fetch`, uma linha cujo branch existe contando como ocupada antes mesmo de qualquer marca dela ser enviada, e quem deve uma resposta ``.
 * Terms of docs/03: `free line` / `linha livre`, `claim` / `reivindicação`, `remote` / `remoto`, all present; "taken" / "ocupada" is plain language there, no row. No new row.
 * Sources: none added; the chapters already point to chapter 14 and docs/05 §4 where they do.
-* Neighbouring lines on the same files, all later in queue order, so this line is applied first and they write against its result: `ch08-update-2026-10-20-1`, `-2`, `-3`, `-4`, `-5` and `ch08-copilot-cli` (chapter 8; the first rewrites the excerpt that holds pt :71 and :77); `ch12-14-parallel-token`, `ch12-14-18-several-slugs`, `ch13-19-session-folder` and `ch13-19-claim-script` (chapters 13 and 14); `ch14-after-over-token` (chapter 14). The parallel lines `ch18-19-fetch-resume` (18, 19) and `ch07-review-merge` (7) touch none of these files; `docs03-free-line-held` touches docs/03 only.
+* Neighbouring lines on the same files, all later in queue order, so this line is applied first and they write against its result: `ch08-update-2026-10-20-1` (chapter 8; it rewrites the excerpt that holds pt :71 and :77) and later deliveries of the queue's plan on chapter 8, the update example at later kit versions and the Copilot CLI as a host; `ch12-14-parallel-token` and later deliveries on a command typed with several slugs, where each session opens and the claim script (chapters 13 and 14); a later delivery on `after` over the parallel token (chapter 14). The parallel lines `ch18-19-fetch-resume` (18, 19) and `ch07-review-merge` (7) touch none of these files; `docs03-free-line-held` touches docs/03 only.
 
 **States.** Inapplicable: prose, no screen.
 
@@ -81,7 +81,7 @@
 * [x] Both editions written, each chapter still opens with its value, no filler, nothing useful cut, every number sourced; nothing later than focus-kit 2026.10.20.
 * [x] `make verify` green after the last edit.
 * [x] `make book`: not run by this lane; the driver runs it after the batch and the milestone review records the build.
-* [x] The Delivery review as docs/05 §5 says, the Proof or the review paragraph naming who read (agent or advisor), what it read and what it found.
+* [x] Delivery review by one read-only Opus agent, over this page and `git diff -U0 HEAD` of the ten chapter files, with docs/04's em dash and width rules (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 
 **Built.** Every Contract site in both editions: chapter 8 :110 (pt :114) and pt 8's excerpt :71 and :77; chapter 13 :28; chapter 14 :62 and :172 (pt :63 and :173); chapter 17 :132 and :151; chapter 23 :66. All changes are within their lines, so no line number moved.
 

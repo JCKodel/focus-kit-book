@@ -13,7 +13,7 @@
 * Edge: if, when /apply starts, `git show HEAD:docs/06-Queue.md` holds `ch13-19-session-folder` under M26, `ch12-14-18-several-slugs` under M27, `ch13-19-claim-script` under M28 and `ch14-after-over-token` under M29, the P3 and S10 parts shrink to the milestone fixes only (Contract, rule A).
 * Fails: a replacement whose quoted text is not found; any other line of these pages changed; an em dash; a Done when item unticked; a chapter, docs/03, docs/05 or docs/06 touched.
 
-**Contract.** Exact replacements in eight record pages, found by the quoted text, not by line number (line numbers are at `69d980b`); the rest of each page untouched. `m24-records-proof` edits Done when, Proof, Divergences and Delivery review of several of these pages before this line; no replacement below sits in those sections.
+**Contract.** Exact replacements in eight record pages, found by the quoted text, not by line number (line numbers are at `69d980b`); the rest of each page untouched. `m24-records-proof` edits Done when, Proof, Divergences and Delivery review of several of these pages before this line; only replacement 16 sits in one, `ch08-next-free-line`'s Proof, on a clause `m24-records-proof` leaves as it is (its :134).
 
 Rule A, checked first. At `69d980b`, HEAD's docs/06 holds M24 and M25 and no M26 to M29 heading; those lines are staged by the driver, uncommitted, so P3 and S10 hold in full. /apply runs `git show HEAD:docs/06-Queue.md`: if it holds all four lines named in the Edge above, under those milestones, replacements 3, 4, 5 and 8 are skipped, and 11 and 12 become only "M24's `ch12-14-parallel-token`" to "M25's `ch12-14-parallel-token`" (11) and "M25's `ch13-19-session-folder`" to "M26's `ch13-19-session-folder`" (11 and 12). Otherwise every replacement applies as written.
 
@@ -98,7 +98,7 @@ Terms: record, slot, migration, as docs/03 has them; no new row. No chapter, no 
 * [x] A search of the eight pages finds no `ch13-19-session-folder`, `ch12-14-18-several-slugs`, `ch13-19-claim-script` or `ch14-after-over-token` (unless rule A kept them), no "M24's `ch12-14-parallel-token`", no "12, 14, 17 and 20" outside the Contracts and Objectives the Out of scope keeps, no "Merges and the unit of work" or "A pull request per delivery".
 * [x] No em dash; no Done when item of a record unticked.
 * [x] `make verify` green after the last edit, its result in this page's Proof.
-* [x] The Delivery review as docs/05 §5 says, recorded with who read what and with the advisor.
+* [x] Delivery review by one read-only Opus agent this session launched, recorded with who read what (Delivery review); the review agent had no advisor, which docs/05 §5 asks it to keep (Divergences).
 
 **Proof.**
 

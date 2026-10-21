@@ -30,7 +30,7 @@
 * Terms of docs/03: remote, branch, worktree, claim, trunk. No new term; no docs/03 row changes: the `remote` row (:82) already says "`git fetch` brings its branches into your clone without changing yours", and chapter 18 :71 now says it in the same words.
 * Sources: the finding `work/done/m24-review.md` (C1, C4, P1); chapter 12 :27 and :28 and chapter 14 :61 and :72 (fetch before reading the queue, the branch as claim, reuse on resume); chapter 18 :25 (the resume condition's wording); docs/03 :82. No footnote: the reader gains nothing to open.
 * Cases: none. No number.
-* Neighbouring lines on the same files, all later in queue order, which find these sentences as this delivery leaves them: M26's `ch13-19-session-folder` (chapter 19), M27's `ch12-14-18-several-slugs` (chapter 18), M28's `ch13-19-claim-script` (chapter 19). M24's parallel lines `ch08-23-fetch-taken` (chapters 8, 13, 14, 17, 23), `ch07-review-merge` (chapter 7) and `docs03-free-line-held` (docs/03's `free line` row) touch neither chapter 18 nor 19 nor the `remote` row.
+* Neighbouring lines on the same files, all later in queue order, which find these sentences as this delivery leaves them: later deliveries of the queue's plan, on where each session opens (chapter 19), a command typed with several slugs (chapter 18) and the claim script (chapter 19). M24's parallel lines `ch08-23-fetch-taken` (chapters 8, 13, 14, 17, 23), `ch07-review-merge` (chapter 7) and `docs03-free-line-held` (docs/03's `free line` row) touch neither chapter 18 nor 19 nor the `remote` row.
 
 **States.** Inapplicable: no screen.
 
@@ -44,6 +44,21 @@
 * Chapter 19 :120 to :123, the bare clone's fetch line: comes after chapter 18 and already says what it fixes.
 * `git switch` and the other commands of :27, defined at :78 in the same chapter: not in the finding.
 
+**Decisions from the documents.**
+
+* The remote is explained briefly at first use and in full where it is now: the author's brief for this line ("plainly, briefly, where first used") and docs/04's one sentence per line.
+* Fetch is worded as docs/03's `remote` row words it, so P1 closes without editing docs/03.
+* The resume condition in chapter 19 :179 uses chapter 18 :25's words ("when the definition resumes", "quando a definição é retomada") and chapter 12 :28's sense: a branch already there means the line is taken unless the definition resumes.
+* Taught as the kit is at 2026.10.20, with no version or "now": AGENTS.md and the M21 rule.
+
+**Decisions taken alone.**
+
+* :25 glosses only the remote, not `git fetch`: the chapters say a session fetches before it reads the queue (12 :27, 14 :72), and :25 is about the check for one branch, so saying "/propose runs `git fetch`" there would claim a step the chapters do not state; fetch is defined at :71, its first use in chapter 18.
+* `-u` is explained without the word "upstream", a term the book defines nowhere; "links your branch to it" says what it does for a non-developer.
+* The `-u` sentence is a new line after the code block, not a clause in :27, which is already long; chapter 18's lines from :37 on shift by one.
+* The key point :203 gains fetch: a sibling sentence that would go stale and belongs to no other line.
+* Chapter 19 :179 names "the worktree and branch" instead of "the one", since the sentence creates both.
+
 **Done when.**
 
 * [x] Both editions changed as the Contract says, and nothing else in the two chapters (one qualifier added at :72 after the review, in Divergences).
@@ -52,6 +67,8 @@
 * [x] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration.
 * [x] `make verify` green.
 * [x] `make book`: not run by this lane; the driver runs it after the batch and the milestone review records the build.
+* [x] Delivery review by one read-only Opus agent, over this page and `git diff HEAD` of the four chapter files, against docs/04 and AGENTS.md (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
+* [x] Page moved to `work/done/`, covered by the last verify (Proof).
 
 **Built.** Chapter 18, both editions: :25 glosses the remote at its first use; a new line :37 after the `lend-book` code block says what `git push -u origin lend-book` does; the remote paragraph (:71 before, :72 now) adds `git fetch` between push and pull; the key point (:203 before, :204 now) adds fetch. Chapter 19 :179, both editions: reuse only when the definition resumes, naming the worktree and branch.
 
@@ -90,18 +107,3 @@ docs(ch18-19-fetch-resume): define remote, fetch and push -u in ch 18
 
 work/done/ch18-19-fetch-resume.md
 ```
-
-**Decisions from the documents.**
-
-* The remote is explained briefly at first use and in full where it is now: the author's brief for this line ("plainly, briefly, where first used") and docs/04's one sentence per line.
-* Fetch is worded as docs/03's `remote` row words it, so P1 closes without editing docs/03.
-* The resume condition in chapter 19 :179 uses chapter 18 :25's words ("when the definition resumes", "quando a definição é retomada") and chapter 12 :28's sense: a branch already there means the line is taken unless the definition resumes.
-* Taught as the kit is at 2026.10.20, with no version or "now": AGENTS.md and the M21 rule.
-
-**Decisions taken alone.**
-
-* :25 glosses only the remote, not `git fetch`: the chapters say a session fetches before it reads the queue (12 :27, 14 :72), and :25 is about the check for one branch, so saying "/propose runs `git fetch`" there would claim a step the chapters do not state; fetch is defined at :71, its first use in chapter 18.
-* `-u` is explained without the word "upstream", a term the book defines nowhere; "links your branch to it" says what it does for a non-developer.
-* The `-u` sentence is a new line after the code block, not a clause in :27, which is already long; chapter 18's lines from :37 on shift by one.
-* The key point :203 gains fetch: a sibling sentence that would go stale and belongs to no other line.
-* Chapter 19 :179 names "the worktree and branch" instead of "the one", since the sentence creates both.

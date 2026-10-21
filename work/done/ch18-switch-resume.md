@@ -17,7 +17,7 @@
 * Terms of docs/03: branch, claim, remote. No new term; no docs/03 row.
 * Sources: the finding, `work/done/ch18-19-fetch-resume.md` (Delivery review, finding 1); chapter 18 en/pt :25 ("reuses it when the definition resumes", "o reutiliza quando a definição é retomada"); chapter 12 en/pt :28 ("reused when the definition resumes", "reutilizado quando a definição é retomada"). No footnote: the reader gains nothing to open.
 * Cases: none. No number.
-* Neighbouring lines on the same file: M27's `ch12-14-18-several-slugs` (chapters 12, 13, 14 and 18), later in queue order, finds :27 as this delivery leaves it. The lines proposed beside this one under m24-review (`ch07-review-merge`, `docs03-free-line-held`, `m24-records-proof`, `m24-records-crossrefs`) do not touch chapter 18.
+* Neighbouring lines on the same file: a later delivery of the queue's plan, on a command typed with several slugs (chapters 12, 13, 14 and 18), finds :27 as this delivery leaves it. The lines proposed beside this one under m24-review (`ch07-review-merge`, `docs03-free-line-held`, `m24-records-proof`, `m24-records-crossrefs`) do not touch chapter 18.
 
 **States.** Inapplicable: no screen.
 
@@ -51,7 +51,7 @@
 * [x] No version, date, before/after or narration of a run in the text; no em dash; no number added, no private case used.
 * [x] `make verify` green after the last edit, its result recorded in this page's Proof.
 * [x] `make book`: not run by this lane; the driver runs it after the batch and the milestone review records the build.
-* [x] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
+* [x] Delivery review by one read-only Opus agent, over both chapter 18 files and this page, against docs/04 and AGENTS.md (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 
 **Proof.**
 

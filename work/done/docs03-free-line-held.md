@@ -48,7 +48,7 @@
 * [x] The row agrees with chapter 14 en :185 and pt :186 on the next delivery.
 * [x] No em dash; no version, date or before/after in the row.
 * [x] `make verify` green after the last edit, its result recorded in this page's Proof.
-* [x] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
+* [x] Delivery review by one read-only Opus agent, over `git diff HEAD -- docs/03-Domain.md` against this page, docs/04 and chapter 14 (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 
 **Proof.**
 

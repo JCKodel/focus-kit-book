@@ -15,7 +15,7 @@
 * A person who does not code reads the letters as two permissions, one per command: "may I start talking it through now?" and "may I start building it now?".
 * Find it in the key points: chapter 11's line bullet, chapter 12's `/propose` bullet, chapter 13's `[*]` bullet, chapter 14's free-line bullet.
 
-**Contract.** Ten files, `book/en/` and `book/pt/` of `11-queue-and-milestones.md`, `12-propose.md`, `13-apply.md`, `14-queue-states.md`, the same change in both editions, one sentence per line as the chapters are laid out. Line numbers are en's today; pt's are named where they differ.
+**Contract.** Eight files, `book/en/` and `book/pt/` of `11-queue-and-milestones.md`, `12-propose.md`, `13-apply.md`, `14-queue-states.md`, the same change in both editions, one sentence per line as the chapters are laid out. Line numbers are en's today; pt's are named where they differ.
 
 * Chapter 14, opening (:3): "and say which lines can run at the same time" gains "and read the two letters a line may carry that say it".
 * Chapter 14, "Six marks" (:32): "and `/apply` builds it once every line its `after` names is `[x]`" gains "and its token lets it (below)".
@@ -87,7 +87,7 @@
 * `after` over the token with its own example: a later line of the queue (chapter 14), which deepens what sentence 5 states.
 * Tokens on this repository's own queue lines: the driver writes them.
 
-**Neighbouring lines on the same files**, applied after this one in queue order: `ch13-19-session-folder` (M26, chapter 13), `ch12-14-18-several-slugs` (M27, chapters 12, 13, 14), `ch14-after-over-token` (M29, chapter 14). This Contract is written against the files as they are today; chapter 14's new block moves its later lines down.
+**Neighbouring lines on the same files**, applied after this one in queue order: later deliveries of the queue's plan, on where each session opens (chapter 13), a command typed with several slugs (chapters 12, 13, 14) and `after` over the parallel token (chapter 14). This Contract is written against the files as they are today; chapter 14's new block moves its later lines down.
 
 **The token of this line.** `(PA)` holds: above it, every line is `[x]` but `ch08-update-2026-10-20-1`, chapter 8's update example; this definition takes nothing from its page, and this build touches none of its files (chapters 11 to 14 and this page). No correction.
 
@@ -113,17 +113,17 @@
 * At build: chapter 11 :179's pt sibling is pt :184, which the page did not name.
 * At build: the pt sentence 2 clause reads "as letras ficam P e A porque os comandos mantêm os nomes em inglês", in the same sentence, so the editions keep line parity.
 
-**Divergences.** None from the Contract. The Contract's "Ten files" counts eight: chapters 11 to 14 in two editions, as the queue line names them.
+**Divergences.** One from the Contract: chapter 12 :26's "and so on" shipped as "and likewise", a Delivery review note taken (Delivery review). The Contract said "Ten files" for the eight it names, chapters 11 to 14 in two editions, as the queue line names them; `m25-records-claims` corrected the count.
 
 **Omissions.** None.
 
 **Proof.**
 
 * `make verify` green (exit 0) after the last edit to the chapters.
-* `make book` exit 0; PDFs: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+* `make book` exit 0, run by this lane before its commit `395975a`, in the one tree it shared with `ch08-update-2026-10-20-1`, committed at `5a478e6`; whether that commit came before the build is not recorded. PDFs: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`. `work/done/m25-review.md` records the build at `dae2358`, whose `book/` is as `395975a` left it, both lines' chapters included, with both paths.
 * Verify's parity and width checks pass on all four chapters, the two new blocks included.
 
-**Delivery review.** One read-only Opus agent read `git diff HEAD` of the eight chapter files, the whole of en chapter 14's changed section, this page, docs/03's `queue line`, `free line` and `parallel token` rows and docs/05 §4; docs/04 it did not read directly, taking its rules from the brief and this page. It found nothing that breaks the page, docs/04 or the text. It noted six wording preferences: en 12 :26 "and so on" could read as "etc." (taken: "and likewise"); pt 14 "esperar X estar" (taken: "esperar até", in the counterfactual and the key point); the token's apposition in chapter 11 :16, the clause order of chapter 14 :3, "whose token lets it build" on a line without a token, and the back-reference of "A line can say it once" (all the Contract's wording, kept). One item outside the page: the chapter 9 link for `/brainstorm` writing tokens leads to a chapter silent on them, which this page's Out of scope already holds as silent, not false; no new queue line.
+**Delivery review.** One read-only Opus agent read `git diff HEAD` of the eight chapter files, the whole of en chapter 14's changed section, this page, docs/03's `queue line`, `free line` and `parallel token` rows and docs/05 §4; docs/04 it did not read directly, taking its rules from the brief and this page. It found nothing that breaks the page, docs/04 or the text. It noted six wording preferences: en 12 :26 "and so on" could read as "etc." (taken: "and likewise"); pt 14 "esperar X estar" (taken: "esperar até", in the counterfactual and the key point); the token's apposition in chapter 11 :16, the clause order of chapter 14 :3, "whose token lets it build" on a line without a token, and the back-reference of "A line can say it once" (all the Contract's wording, kept). One item outside the page: the chapter 9 link for `/brainstorm` writing tokens leads to a chapter silent on them, which this page's Out of scope already holds as silent, not false; no new queue line. Whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 
 **Done when.**
 
@@ -133,6 +133,7 @@
 * [x] The new blocks within 74 columns in both editions.
 * [x] `make verify` green.
 * [x] `make book` built both editions, with both PDF paths.
+* [x] Delivery review by one read-only Opus agent, over `git diff HEAD` of the eight chapter files and this page (Delivery review): narrower than docs/05 §5, which has it read against docs/04, here taken from the brief and this page; whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 
 ```commit
 docs(ch12-14-parallel-token): chapters 11 to 14 teach the (PA) token
