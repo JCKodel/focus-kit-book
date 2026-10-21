@@ -64,17 +64,18 @@ Cada trabalho ainda é feito, por algo que o processo já tem:
 * **Nenhuma tarefa numerada:** as linhas de Comportamento, cada uma um teste ou uma checagem.
 * **Nenhuma barreira antes da implementação além de uma página completa:** a página é a única barreira, lida pela pessoa antes do `/apply`, que pede o que falta; o `/apply` recusa uma página que não está completa e aponta o `/propose`.
 * **Nenhuma revisão de uma revisão:** cada linha que uma revisão de marco acrescenta passa pela sua própria página, pela sua prova e pelo commit da pessoa.
-* **Nenhum subagente especializado além dos leitores e do conferente das revisões**, um agente que outro agente lança para um papel estreito com as suas próprias instruções, como um planejador ou um revisor:[^claude-code-subagents] um agente só, que lê os documentos, planeja e constrói, e os leitores e o conferente das revisões são a exceção que a próxima seção explica.
+* **Nenhum subagente além do que um comando abre por slug e dos leitores e do conferente das revisões**, sendo um subagente um agente que outro agente lança, e um especializado um agente lançado para um papel estreito com as suas próprias instruções, como um planejador ou um revisor:[^claude-code-subagents] cada entrega tem um agente só, que lê os documentos, planeja e constrói, o que um comando abre para cada um dos seus slugs incluído, e os leitores e o conferente das revisões são o único tipo especializado, que a próxima seção explica.
 * **Nenhuma ferramenta que as entregas não pediram:** o próprio regulador, que a mantém de fora até uma entrega nomear o erro que ela teria pegado.
 
-## O subagente que ele admite
+## Os subagentes que ele admite
 
-Dois passos do processo podem lançar agentes próprios.
+Três passos do processo podem lançar agentes próprios.
+Um comando digitado com vários slugs ([capítulo 12](12-propose.md)) abre um subagente por slug, e nenhum deles é especializado: cada um roda o comando inteiro na sua própria linha, como uma sessão nova aberta por você rodaria, então cada entrega ainda tem um agente só, que lê, planeja e constrói, e não roda nenhum passo que o comando digitado sozinho não rodaria.
 A revisão da entrega do [capítulo 13](13-apply.md), onde o host não tem uma revisão própria, entrega as mudanças de uma entrega a um agente somente leitura, um contexto à parte, porque o agente que escreveu uma mudança a relê com o raciocínio que a escreveu.
 A revisão de marco do [capítulo 15](15-closing-a-milestone.md) entrega as mudanças de um marco a um leitor por área, um agente somente leitura onde o host roda agentes, e um conferente, um agente ou a própria sessão da revisão, marca cada candidato antes que a pessoa o veja.
 Esses leitores, e o conferente quando um agente faz esse trabalho, são subagentes especializados no sentido deste capítulo: a sessão lança cada um para um papel estreito, e ele lê arquivos e as mudanças e não edita nada.
 
-O regulador os deixou entrar do jeito que deixa entrar qualquer coisa, cada um com um erro que aconteceu, todos no próprio repositório deste livro, que é público:
+O regulador deixou entrar os leitores e o conferente do jeito que deixa entrar qualquer coisa, cada um com um erro que aconteceu, todos no próprio repositório deste livro, que é público:
 
 * **Os leitores.** Um leitor do código que monta o livro, com o repositório inteiro aberto, achou que a função que lista os arquivos do repositório descartava todo arquivo cujo nome tem uma letra fora do ASCII, como `café.md`, então toda verificação do `make verify` o pulava, a varredura que mantém nomes privados fora do livro incluída, e nenhuma delas conseguia ver isso, já que as verificações eram o que estava quebrado.[^m14-review]
 * **O leitor da revisão da entrega.** Essa falha estava no arquivo desde a entrega que o escreveu, lida antes do seu commit só pelo agente que a escreveu e pela pessoa que fez o commit, e, achada só na revisão de um marco, virou uma linha própria em vez de uma correção naquela entrega.
@@ -83,8 +84,7 @@ O regulador os deixou entrar do jeito que deixa entrar qualquer coisa, cada um c
 
 Eles leem e apontam candidatos, e os leitores do marco listam os caminhos que leram; o que se corrige é decidido pelo `/apply` ou pela pessoa, e os leitores e o conferente não corrigem nada.
 O conferente trabalha dentro da única revisão, antes que a pessoa veja um candidato, então o processo continua sem revisão de uma revisão: a pessoa decide o que conta.
-A exceção não abre mais nada: um subagente planejador, construtor ou corretor ainda precisa nomear o seu erro, e até um nomear, fica de fora.
-Um comando digitado com vários slugs abre um subagente por slug ([capítulo 12](12-propose.md)), e nenhum deles é especializado: cada um roda o comando inteiro na sua própria linha, como uma sessão nova aberta por você rodaria, então cada entrega ainda tem um agente só, que lê, planeja e constrói.
+A exceção não abre mais nada: um subagente lançado só para planejar, construir ou corrigir ainda precisa nomear o seu erro, e até um nomear, fica de fora.
 
 ## O erro que rendeu uma marca
 
@@ -110,7 +110,7 @@ A única exceção traz os erros que a justificam, então o time a confere do je
 * Pergunte a tudo o que quer entrar no processo, e a cada passo que já está nele: que erro concreto isso teria pegado?
 * A resposta nomeia um erro que aconteceu; um erro possível justifica qualquer coisa, e cada passo é pago por toda entrega depois dele.
 * Um passo que não nomeia erro nenhum sai, e uma lista de exceções reprova em uma entrada sem um aviso vivo; um limite no tamanho de um passo vem com limites nos arquivos para onde vão as suas palavras, e uma mudança que passaria de um deles remove tanto quanto acrescenta.
-* Cada uma das oito coisas que o processo não tem tem o seu trabalho feito por algo que ele tem: a página, os documentos, as linhas de Comportamento, a pessoa, o commit da pessoa, um agente só, e o próprio regulador; os leitores e o conferente das revisões são o único subagente especializado que ele admite, cada um com um erro que aconteceu.
+* Cada uma das oito coisas que o processo não tem tem o seu trabalho feito por algo que ele tem: a página, os documentos, as linhas de Comportamento, a pessoa, o commit da pessoa, um agente só, e o próprio regulador; os subagentes que ele admite são o que um comando abre por slug, cada um aquele agente só na sua própria linha, e os leitores e o conferente das revisões, o único tipo especializado, cada um com um erro que aconteceu.
 * O regulador decide em cada projeto, com um erro que aconteceu ali ou um que outro projeto documentou cujas condições ele compartilha, e compra a menor verificação que o pega: o `[?]` do Caso A entrou porque linhas em espera pareciam trabalho parado, e um time cujas linhas esperam alguém de fora pode acrescentá-lo sem esse erro antes.
 
 [^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>

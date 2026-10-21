@@ -64,17 +64,18 @@ Each job still gets done, by something the process already has:
 * **No numbered tasks:** the Behaviour lines, each one a test or a check.
 * **No gate before implementation beyond a complete page:** the page is the one gate, read by the person before `/apply`, who asks for what is missing; `/apply` refuses a page that is not complete and points to `/propose`.
 * **No review of a review:** each line a milestone review adds passes through its own page, its proof and the person's commit.
-* **No specialized subagent beyond the reviews' readers and checker**, an agent that another agent launches for one narrow role with its own instructions, such as a planner or a reviewer:[^claude-code-subagents] one agent that reads the documents, plans and builds, and the reviews' readers and checker are the exception the next section explains.
+* **No subagent beyond a command's one per slug and the reviews' readers and checker**, a subagent being an agent that another agent launches, and a specialized one an agent launched for one narrow role with its own instructions, such as a planner or a reviewer:[^claude-code-subagents] each delivery has one agent that reads the documents, plans and builds, the one a command opens for each of its slugs included, and the reviews' readers and checker are the one specialized kind, which the next section explains.
 * **No tool the deliveries did not ask for:** the governor itself, which keeps it out until a delivery names the error it would have caught.
 
-## The subagent it admits
+## The subagents it admits
 
-Two steps of the process can launch agents of their own.
+Three steps of the process can launch agents of their own.
+A command typed with several slugs ([chapter 12](12-propose.md)) opens one subagent per slug, and none of them is specialized: each runs the whole command on its own line, as a fresh session you opened would, so each delivery still has one agent that reads, plans and builds, and runs no step the command typed alone would not run.
 The delivery review of [chapter 13](13-apply.md), where the host has no review of its own, hands a delivery's changes to a read-only agent, a context apart, because the agent that wrote a change rereads it with the reasoning that wrote it.
 The milestone review of [chapter 15](15-closing-a-milestone.md) hands a milestone's changes to one reader per area, a read-only agent where the host runs agents, and a checker, an agent or the review's session, marks each candidate before the person sees it.
 These readers, and the checker when an agent does that job, are specialized subagents in this chapter's sense: the session launches each one for one narrow role, and it reads files and the changes and edits nothing.
 
-The governor let them in the way it lets in anything, each on an error that happened, all in this book's own repository, which is public:
+The governor let the readers and the checker in the way it lets in anything, each on an error that happened, all in this book's own repository, which is public:
 
 * **The readers.** A reader of the code that builds the book, with the whole repository open, found that the function listing the repository's files dropped every file whose name holds a non-ASCII letter, such as `café.md`, so every check of `make verify` skipped it, the scan that keeps private names out of the book included, and none of them could see it, since the checks were what was broken.[^m14-review]
 * **The delivery review's reader.** That fault sat in the file from the delivery that wrote it, read before its commit only by the agent that wrote it and the person who committed it, and, found only at a milestone's review, it became a line of its own instead of a fix in that delivery.
@@ -83,8 +84,7 @@ The governor let them in the way it lets in anything, each on an error that happ
 
 They read and report candidates, and the milestone's readers list the paths they read; what gets fixed is decided by `/apply` or the person, and the readers and the checker fix nothing.
 The checker works inside the one review, before the person sees a candidate, so the process still has no review of a review: the person decides what counts.
-The exception opens nothing else: a planner, a builder or a fixer subagent still has to name its error, and until one does, it stays out.
-A command typed with several slugs opens one subagent per slug ([chapter 12](12-propose.md)), and none of them is specialized: each runs the whole command on its own line, as a fresh session you opened would, so each delivery still has one agent that reads, plans and builds.
+The exception opens nothing else: a subagent launched only to plan, build or fix still has to name its error, and until one does, it stays out.
 
 ## The error that earned a mark
 
@@ -110,7 +110,7 @@ The one exception carries the errors that justify it, so the team checks it the 
 * Ask anything that wants to enter the process, and every step already in it: which concrete error would it have caught?
 * The answer names an error that happened; a possible error justifies anything, and every step is paid by every delivery after it.
 * A step that names no error leaves, and a list of exceptions fails on an entry with no live warning; a cap on a step's size goes with caps on the files its words move to, and a change that would pass one removes as much as it adds.
-* Each of the eight things the process does not have has its job done by something it has: the page, the documents, the Behaviour lines, the person, the person's commit, one agent, and the governor itself; the reviews' readers and checker are the one specialized subagent it admits, each on an error that happened.
+* Each of the eight things the process does not have has its job done by something it has: the page, the documents, the Behaviour lines, the person, the person's commit, one agent, and the governor itself; the subagents it admits are a command's one per slug, each that one agent on its own line, and the reviews' readers and checker, the one specialized kind, each on an error that happened.
 * The governor decides in each project, with an error that happened there or one another project documented whose conditions it shares, and buys the smallest check that catches it: Case A's `[?]` entered because waiting lines read as idle work, and a team whose lines wait on someone outside it can add it without that error first.
 
 [^openspec-glossary]: Fission AI, "Glossary", OpenSpec 1.13.2. <https://github.com/Fission-AI/OpenSpec/blob/v1.13.2/docs/glossary.md>
