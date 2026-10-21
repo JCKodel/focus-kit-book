@@ -272,8 +272,7 @@ Everything above runs `/apply` in parallel.
 A `/propose` feels slower, and the time goes to you, answering its questions, the hours of a person that, as [chapter 22](22-cost-and-where.md) shows, no token count sees.
 When you could answer each of those questions yourself, you can move that time to one reading instead of spending it in every conversation.
 
-That is a batch: one session per line, each running `/propose <slug>`, and each told, in the conversation, to take its own recommendation wherever it would ask.
-The kit has no command for it and needs none.
+That is a batch: one command naming every line, `/propose return-book overdue-list`, told to decide alone, which opens one subagent per line, each taking its own recommendation wherever it would ask ([chapter 12](12-propose.md)).
 `/propose` already asks with its recommendation first, and writes on the page each decision it takes with the document it came from (chapter 12); the kit's process asks that every choice made on your behalf be explicit on the page.
 The batch only answers its questions in advance.
 
@@ -294,7 +293,7 @@ Each item gives the question, the answer and its reason, and names docs/00 as th
 A page that answered nothing alone says so, or carries no list.
 
 The batch moves your decisions to the reading and removes none of them.
-Before the first `/apply`, read every page, this list first, and correct each one in its own conversation.
+Before the first `/apply`, read every page, this list first, and correct each one in the session that typed the command (chapter 12); a command that also said to build as well leaves this reading for the end, with the diffs (chapter 13).
 
 The recommendation covers only a question the documents leave open and you could answer.
 A question that belongs to someone else, a client or the library's director, is never answered on a recommendation: the page goes as far as it can, and the line waits as `[?]` with `· resume: propose`, as `due-reminder` waits on `· blocked: what provider?` in chapter 14.
@@ -364,7 +363,7 @@ Proposes in a batch carry the parallel into definition: the agents write the pag
 * Another line's mark, another delivery's page or files and another session's staged entries are not a conflict; neither are two neighbouring lines of the queue in one hunk; a line edited by both, or a file one page needs that the other is changing, is: stop, then order the lines or give one a worktree.
 * One folder has one index, so commit from it once it holds only that delivery: `git diff --cached --stat` names files, so read the staged diff of a shared file for its lines too; with another delivery staged, wait; and never select a delivery with `git commit -- <paths>`, which takes each named file whole from the folder, the other delivery's lines in a shared file included, staged or not.
 * A worktree per delivery pays for several people, or for deliveries that touch the same files: a container folder whose `main/` is the checkout keeps each delivery's worktree in `<hidden>/worktrees/<slug>/` on `<prefix>/<slug>`, `.focus-kit/` and `focus-kit/` by default; `git worktree add`, work there, `git merge --no-ff` from `main/`, `git worktree remove`, `git branch -d`; each worktree has its own index, `/propose` pushes the branch when it creates it, the line's claim, and the line's marks live on the branch until the merge; each session opens where it works, never in the container: `/propose` in `main/`, which edits the worktrees by the container's manual, and `/apply` in a fresh session in the worktree whose path `/propose` gives, stopping before any edit anywhere else; a blocked `/apply` there may stage its partial work for you to commit on the branch, which stays unmerged until the delivery is done; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
-* Parallel pays while the deliveries' files do not meet, or meet only across worktrees whose merge you can decide, the machine's ports and databases do not collide, the disk holds each worktree's dependencies, and one person can still review each delivery; proposes can run in a batch on the recommended answers, staging nothing, each page listing what it decided alone for you to read before any `/apply`, each `/apply` staging its own delivery, and every commit stays your decision, made by you or asked of the agent after your review, or given once in the Git slot, with each commit or merge reviewed after it lands.
+* Parallel pays while the deliveries' files do not meet, or meet only across worktrees whose merge you can decide, the machine's ports and databases do not collide, the disk holds each worktree's dependencies, and one person can still review each delivery; proposes can run in a batch, one command told to decide alone, staging nothing, each page listing what it decided alone for you to read before any `/apply`, each `/apply` staging its own delivery, and every commit stays your decision, made by you or asked of the agent after your review, or given once in the Git slot, with each commit or merge reviewed after it lands.
 
 [^git-commit]: Git, "git-commit", the documentation, option `--only`, accessed 2026-10-13. <https://git-scm.com/docs/git-commit>
 [^git-clone]: Git, "git-clone", the documentation, option `--bare`, accessed 2026-10-16. <https://git-scm.com/docs/git-clone>

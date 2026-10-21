@@ -128,11 +128,90 @@
 
 **Done when.**
 
-* [ ] Both editions changed as the Contract says in chapters 12, 13, 14, 16, 18 and 19, and nothing else in them; docs/03 has the `subagent` row.
-* [ ] `grep -n` finds, in both editions: chapter 12 "no subagent needs the setting lifted" / "nenhum subagente precisa que a configuração seja tirada"; chapter 13 "a subagent not sent to that worktree's path" / "um subagente não mandado para o caminho desse worktree"; chapter 14 "obeys the same tokens for each line" / "obedece aos mesmos tokens para cada linha"; chapter 16 "none of them is specialized" / "nenhum deles é especializado"; chapter 18 "its own worktree; a branch named only" / "o seu próprio worktree; um branch chamado só"; chapter 19 "told to decide alone" / "instruído a decidir sozinho".
-* [ ] `grep -n "no command for it\|não tem comando para isso" book/*/19-worktrees.md` prints nothing.
-* [ ] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version, date or commit hash in chapter text, nothing implying Case B ran on the process.
-* [ ] `make verify` green.
-* [ ] `make book` run, both PDF paths recorded.
-* [ ] Delivery review by a read-only agent over this page and `git diff HEAD` of the twelve chapter files and docs/03, against docs/04 and AGENTS.md.
-* [ ] Page moved to `work/done/`, covered by the last verify.
+* [x] Both editions changed as the Contract says in chapters 12, 13, 14, 16, 18 and 19, and nothing else in them; docs/03 has the `subagent` row.
+* [x] `grep -n` finds, in both editions: chapter 12 "no subagent needs the setting lifted" / "nenhum subagente precisa que a configuração seja tirada"; chapter 13 "a subagent not sent to that worktree's path" / "um subagente não mandado para o caminho desse worktree"; chapter 14 "obeys the same tokens for each line" / "obedece aos mesmos tokens para cada linha"; chapter 16 "none of them is specialized" / "nenhum deles é especializado"; chapter 18 "its own worktree; a branch named only" / "o seu próprio worktree; um branch chamado só"; chapter 19 "told to decide alone" / "instruído a decidir sozinho".
+* [x] `grep -n "no command for it\|não tem comando para isso" book/*/19-worktrees.md` prints nothing.
+* [x] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version, date or commit hash in chapter text, nothing implying Case B ran on the process.
+* [x] `make verify` green.
+* [x] `make book` run, both PDF paths recorded.
+* [x] Delivery review by a read-only agent over this page and `git diff HEAD` of the twelve chapter files and docs/03, against docs/04 and AGENTS.md.
+* [x] Page moved to `work/done/`, covered by the last verify.
+
+**Divergences.**
+
+* Chapter 12, en, sentence 3 of the new section begins "The session opens at once" where the Contract gives "It opens at once": the review found "It" first reads as the subagent of the sentence before; pt keeps "Ela abre", which the feminine "sessão" already makes clear.
+* Chapter 12's key-point bullet, both editions, ends "a command told to decide alone has each answer written on the page as the agent's, and one told to build as well has a new subagent run `/apply` on each `[>]` page" (pt "um comando instruído a decidir sozinho faz cada resposta ser escrita na página como do agente, e um instruído a construir também faz um novo subagente rodar o `/apply` em cada página `[>]`") where the Contract gives "told to decide alone, each answer is written ..., and told to build as well, a new subagent runs ...": the review found "told" dangling, since it belongs to the command, not to the answers.
+
+**Omissions.** None: every other change of the Contract is in both editions, with the wording it gives.
+
+**Decisions taken alone in /apply.**
+
+* Of the review's four optional points, the two above are fixed, being text this delivery wrote that reads wrong; the other two are left as the Contract words them: "an agent it launches with a message, which is a fresh session" reads, in its place, as the agent being the session, and chapter 13's "read the page first" beside "Begin with the delivery, not the diff" the reviewer judged consistent and acceptable.
+* The review's observation on a branch per delivery, where the kit does not say how a command with several slugs behaves, is the kit's silence, not the book's; the book teaches the kit as it is, so no queue line.
+
+**Delivery review.** One read-only Opus agent, launched by this lane, over this page and `git diff HEAD` of the twelve chapter files and docs/03, given docs/04 and AGENTS.md. Its reply, as returned:
+
+> The delivery passes. Every change matches the Contract word for word in both editions, nothing outside the Contract changed in the 13 files, and `make verify` is green (exit 0). I found nothing that must be fixed and nothing that needs a new queue line; there are four small wording points and three observations below.
+>
+> **What I read**
+> - `/Volumes/Data/Projects/focus-kit-book/work/ch12-14-18-several-slugs.md`
+> - `git diff HEAD` of the 12 chapter files and `docs/03-Domain.md`. The stat is 61 insertions and 18 deletions, all accounted for by the Contract.
+> - The surrounding text in each changed chapter:
+>   - `book/{en,pt}/12-propose.md`: 1–8, 130–196
+>   - `book/{en,pt}/13-apply.md`: 14–35, 176–184
+>   - `book/{en,pt}/14-queue-states.md`: 92–113
+>   - `book/en/16-the-governor.md`: every subagent and "specialized" line, plus 80–90
+>   - `book/en/18-git-essentials.md`: 168–192
+>   - `book/{en,pt}/19-worktrees.md`: 5, 26–239 (by grep), 270–300
+> - The sources:
+>   - `.claude/skills/propose/SKILL.md` and `.claude/skills/apply/SKILL.md`: header and first paragraphs
+>   - `docs/05-Process.md`: §2 :30, §4 :160–205, §7 :365–375
+>   - `docs/03-Domain.md`: 36–40
+>
+> **Contract match.** I checked each quoted new string with a script and read the diff by eye. All match exactly in both editions: the ch12 opening line, section, paragraph order with its blank line, and key-point bullet; ch13 :20, :34, :181, :276; ch14 :107/108, :207/208; ch16 :87; ch18 :172, :189; ch19 :275, :296, :366; the docs/03 row, which sits right after `fresh session`.
+>
+> **Claims against the sources**
+> - Every claim agrees with docs/05 §4, §7 and the two skills:
+>   - subagents opened at once, the rest reported
+>   - the session edits nothing
+>   - questions relayed back, to the same subagent or a new one on the slug
+>   - a reopened subagent resumes `[~]` (for `/propose`) or `[*]` (for `/apply`)
+>   - decide alone and build as well recorded on the page
+>   - `/apply` works at the worktree's path, every file and command there
+> - The ch14 example holds:
+>   - `search-catalog (PA)` can be built while `lend-book` is `[*]`.
+>   - `renew-loan (P-)` still waits for `search-catalog` to be `[x]`, so "reports that `renew-loan` waits, without waiting for it" is correct.
+> - docs/03 row: accurate to docs/05 §§4, 5, 7 and 8, and consistent with ch16 :4, :67 and :113 ("the one specialized subagent it admits").
+> - docs/04 and AGENTS.md rules: no em dash, no version, date, run or commit hash in chapter text, no Case B and no new number. The links resolve (check_links green).
+>
+> **Findings.** All four are optional. Each sits in Contract text, so changing it means changing the page's Contract in this delivery.
+> 1. `book/en/12-propose.md:152`: "an agent it launches with a message, which is a fresh session". The "which" can attach to "message". The pt (:161) has the same shape.
+> 2. `book/en/12-propose.md:153`: "It opens at once every subagent…" comes right after a clause whose "it" is the subagent, so "It" first reads as the subagent rather than the session. The pt "Ela abre" is unambiguous because "sessão" is feminine. Possible fix: "The session opens at once…".
+> 3. `book/en/12-propose.md:191` (pt :200): in the key point, "told to decide alone, each answer is written…" is a dangling modifier, since "told" belongs to the subagents, not the answers. pt "instruídos a decidir sozinhos, cada resposta…" has the same problem.
+> 4. `book/en/13-apply.md:180–181` (pt same): the new line says "read the page first… then use the delivery and read its diff", and the next existing line starts "Begin with the delivery, not the diff". It is consistent, but "first" next to "Begin" reads a little doubled. Acceptable as is.
+>
+> **Observations (no fix)**
+> - Where corrections happen now reads in three places, with no contradiction:
+>   - ch12 key point :193 says "in the session that wrote it"
+>   - ch12 :140 says "in the same conversation"
+>   - ch19 :296 now says "in the session that typed the command"
+> - ch18 :187 (branch per delivery): neither the kit nor the book says how a command with several slugs behaves under a branch per delivery, where subagents in one folder cannot each be on their own branch. The kit is silent too, and the page covers only trunk and a worktree per delivery, so this belongs to the kit, not the book.
+> - The pt edition reads naturally throughout. "relatada a você, não esperada" and "roda pela sua palavra" are acceptable.
+
+Points 2 and 3 fixed as Divergences says; no new queue line. The line numbers in the reply are the reviewer's; rechecked after the fixes, the "opens at once" line is en :154, pt :163, and the key-point bullet en :191, pt :200.
+
+**Proof.** `make verify` was run after the chapter edits, again after the review's two fixes with the review recorded and the page moved to `work/done/`, and once more after this Proof was written: exit 0 each time, every check passed, the link check included. The Done when greps find each phrase once per edition (chapter 12 en :158, pt :167; chapter 13 :34; chapter 14 en :107, pt :108; chapter 16 :87; chapter 18 :189; chapter 19 :275 and :366), and the "no command for it" grep prints nothing; no added line holds an em dash. This lane ran `make book` after the second verify, exit 0, both editions: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`. Nothing pushed; no environment changes.
+
+```commit
+docs(ch12-14-18-several-slugs): teach a command with several slugs
+
+- ch12: new section, one subagent per slug, decide alone, build as well
+- ch12: the flag kept and why; questions relayed by the session
+- ch13: /apply a b, subagent sent to the worktree, build-as-well review
+- ch14: several slugs obey each line's token; ch16: none specialized
+- ch18: subagents on trunk and in worktrees; ch19: batch is the command
+- docs/03: subagent row
+- both editions
+
+work/done/ch12-14-18-several-slugs.md
+```

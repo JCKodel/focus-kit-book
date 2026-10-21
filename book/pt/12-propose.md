@@ -3,6 +3,7 @@
 Depois deste capítulo você consegue transformar uma linha da fila em uma página com o `/propose`, ler a página como o registro do que o agente entendeu e do que o `/apply` vai construir, cobrir os buracos dela por conversa antes de existir qualquer código, e dividir uma entrega que não cabe em uma página.
 Você sabe que o `/propose` decide o que os documentos do projeto já respondem, nomeando a fonte na página, e rascunha as linhas de Comportamento com o que precisa falhar e os casos de borda, então o seu trabalho é corrigir a página, não escrevê-la.
 Você também consegue explorar um problema que ainda não entende conversando com o agente, antes de existir uma página.
+E consegue definir várias linhas em um comando, um subagente para cada, e dizer o que o comando pode deixar que eles decidam sozinhos ou construam.
 
 ## O problema
 
@@ -155,6 +156,22 @@ No Ninjobs, a página da entrega que calcula a pontuação de compatibilidade de
 
 Os hosts têm o seu próprio jeito de planejar dentro de uma sessão, como o modo de plano (plan mode) do Claude Code, em que "*o Claude lê arquivos e propõe um plano, mas não faz nenhuma edição até você aprovar*";[^claude-code-plan-mode] a página é o que sobrevive à sessão: um arquivo no repositório, escrito a partir dos documentos do projeto e com as palavras deles, marcado na fila, lido por uma sessão nova para construí-lo, e guardado em `work/done/` com o que aconteceu.
 
+## Várias linhas em um comando
+
+O `/propose` aceita mais de um slug: `/propose buscar-catalogo renovar-emprestimo`, em duas linhas da biblioteca do capítulo 14, define as duas em um comando.
+A sessão que o recebe abre um subagente por slug, um agente que ela lança com uma mensagem, que é uma sessão nova: ele só tem o que essa mensagem e os arquivos do projeto dizem, e roda o arquivo do comando no seu próprio slug, como `/propose renovar-emprestimo` digitado sozinho rodaria.
+Ela abre ao mesmo tempo todo subagente cuja linha os tokens e o `after` deixam começar, não um depois do outro, e uma linha que ainda espera quando os outros terminam é relatada a você, não esperada (capítulo 14).
+No trunk os subagentes dividem a pasta onde a sessão roda, cada um mudando só a sua linha e a sua página; com um worktree por entrega cada um escreve no worktree do seu slug, que ele cria a partir de `main/`, como faz um `/propose` digitado sozinho ([capítulo 19](19-worktrees.md)).
+A própria sessão não edita nada: as marcas, as páginas e os worktrees são trabalho dos subagentes.
+Um subagente não consegue perguntar a você: onde perguntaria, ele relata a pergunta com o que você precisa para respondê-la e para; a sessão pergunta a você e manda a sua resposta de volta, para esse subagente onde o host consegue retomá-lo, senão para um novo aberto no slug, que retoma o `[~]` da linha pela palavra do seu comando.
+Os comandos mantêm a configuração do capítulo 8 que impede o Claude Code de rodar uma skill por conta própria, `disable-model-invocation`: o comando que você digitou nomeia todos os slugs, e cada subagente tira o seu slug da mensagem que o abre e roda pela sua palavra, então nenhum subagente precisa que a configuração seja tirada.
+Tirá-la traria de volta o que ela impede: uma mensagem que só menciona um comando rodando esse comando (capítulo 8), e um agente a quem se pediu uma mudança seguindo para o `/propose` em vez de parar na linha da fila (capítulo 11).
+
+O seu comando também pode dizer duas coisas.
+Decidir sozinho: cada pergunta que um subagente teria feito é respondida pela sua própria recomendação e escrita na página como resposta do agente, a pergunta, a resposta e o porquê, então a sua leitura a encontra entre as escolhas que o agente fez por conta própria (o [capítulo 19](19-worktrees.md) mostra essa lista).
+Construir também: quando uma página chega a `[>]`, um novo subagente roda o `/apply` nela, e a página diz que foi construída antes de você a ler; você lê as páginas e os diffs no fim, e cada commit continua sendo seu, uma entrega por vez ([capítulo 13](13-apply.md)).
+Construir também abre mão da ordem barata acima: um buraco que a página mostraria em um turno custa, achado no diff, outro `/apply`.
+
 ## Quando não cabe
 
 Um escopo que não cabe em uma página são duas entregas: o `/propose` diz isso, propõe a divisão e escreve só a primeira página, e a segunda vira uma linha na fila, onde ela pertence.
@@ -180,6 +197,7 @@ E quando a construção termina, a mesma página registra o que aconteceu, entã
 
 * Uma entrega é a menor mudança com valor, com um slug como nome, e cabe em uma página; se não cabe, são duas.
 * O `/propose` decide o que os documentos respondem e nomeia a fonte na página, só pergunta onde eles deixam mais de uma leitura, com a recomendação primeiro, espera como o `after` e o token da sua linha dizem, julgando-os, fora do trunk, pelo branch de cada slug, começa no branch ou worktree da entrega, onde o slot Git do projeto põe um, um worktree escrito de uma sessão que fica em `main/`, enviando o seu branch no momento em que o cria, a reivindicação da linha, ou no trunk na pasta onde a sessão roda, e marca a linha `[~]` ali enquanto conversa e `[>]` quando a página está completamente definida, corrigindo o token pela página, ou `[?]` quando o escopo espera, nunca escreve código, e termina dando, com um worktree por entrega, o caminho do worktree, onde abre a sessão nova do `/apply`.
+* `/propose a b` abre um subagente por slug, uma sessão nova rodando o comando na sua própria linha, ao mesmo tempo onde os tokens e o `after` deixam, todos na única pasta no trunk ou cada um no seu worktree; a sessão não edita nada e repassa a você as perguntas de cada subagente; os comandos mantêm o `disable-model-invocation`, já que o seu comando nomeia todos os slugs; um comando instruído a decidir sozinho faz cada resposta ser escrita na página como do agente, e um instruído a construir também faz um novo subagente rodar o `/apply` em cada página `[>]`, que diz que foi construída antes de você a ler.
 * A página tem um formato fixo e é a superfície de revisão do time, para código e para qualquer outra coisa que caiba em uma página; o Contrato é a única seção exata, porque uma coluna errada é uma migration.
 * O `/propose` rascunha o Comportamento, incluídos o que precisa falhar e os casos de borda; você lê a página antes do `/apply`, na sessão que a escreveu, e a corrige pedindo ao agente, nunca à mão: um buraco na página custa um turno, depois do `/apply` custa outro `/apply`.
 * Quando ninguém sabe a resposta ainda, explore-a conversando com o agente, e termine com uma linha na fila, com um rascunho da página quando a linha não comporta o que você achou, uma decisão escrita onde ela pertence, ou nenhuma das duas; nada novo é preciso para isso.

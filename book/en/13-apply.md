@@ -17,6 +17,7 @@ And an agent that commits on its own puts its work in the project's history befo
 `/apply <slug>` builds the delivery that `work/<slug>.md` describes, completely, in one session: the code, the tests, the proof and the documents.
 It always starts in a fresh session, even when `/propose` ran in the conversation that asked for the change (chapter 11), so the page is all it takes from the conversation that wrote it, which is why chapter 12 asks you to read the page before this command runs.
 With a worktree per delivery, that fresh session opens in the delivery's worktree, the folder whose path `/propose` gives when it ends, because the page and the line's `[>]` are on the delivery's branch ([chapter 19](19-worktrees.md)).
+Typed with several slugs, `/apply a b` opens one subagent per slug as chapter 12 says of `/propose`, at once where the tokens and `after` let the lines build: on trunk they share the folder and its one index, each staging only its delivery; with a worktree per delivery each is sent to its slug's worktree and works with every file and command at that path; their questions come to you through the session, as there, and a subagent opened again on its slug resumes the line's `[*]`.
 
 ### What it reads
 
@@ -30,7 +31,7 @@ On trunk it reads the queue of the folder where the session runs; with a branch 
 A file in `work/` does not make a page ready: only `/propose` marks the line `[>]`, when every section is filled or explicitly inapplicable and no scope question is left open (docs/05 §3).
 On a page that still has a question open, or whose line is `[ ]` or `[~]`, it refuses to build and points to `/propose`: in the lending library, in an example written for this chapter, `/apply lend-book` on a page whose Contract still has a question unanswered edits nothing and names `/propose lend-book`, where the question gets its answer.
 That refusal comes before any build, so it is not the stop that "When the work cannot go on" describes: nothing was built, and the line is not marked `[?]`.
-The same holds for a session opened, with a worktree per delivery, in any folder but the delivery's worktree, `main/` included: it refuses the same way, edits nothing, leaves the mark as it is, and gives the worktree's path, where you open the fresh session again.
+The same holds for a session opened, with a worktree per delivery, in any folder but the delivery's worktree, `main/` included, and for a subagent not sent to that worktree's path: it refuses the same way, edits nothing, leaves the mark as it is, and gives the worktree's path, where you open the fresh session again.
 On a `[>]` line whose `after` names a line not yet `[x]`, or whose token has `-` second, `(P-)` or `(--)`, while a line above it is not yet `[x]`, it does not start either, says what it waits on, and leaves the mark as it is: an `after` is an order and a `-` a wait, and neither marks the line `[?]` (chapter 14).
 Only on a complete `[>]` line whose `after` lines are all `[x]` and whose token lets it build does it mark the line `[*]` in docs/06, as its first edit, so the queue shows the build under way.
 On a line that is `[?]`, it first says what the line waits on, and goes on only once the reason is resolved (chapter 14); then the line goes back by its resume phase: `resume: apply` returns it to `[>]`, ready to build, and `resume: propose` returns it to `[ ]`, with any draft kept, for `/propose` to finish, because removing the reason does not complete a definition.
@@ -176,6 +177,7 @@ The kit's process document gives the flow in one line: `/apply` "*builds, proves
 ## Review the staged change
 
 The staged change is what the agent says it did; your review checks that it did it.
+When your command told `/propose` to build as well, the page was built before you read it: read the page first, as chapter 12 asks, then use the delivery and read its diff, one delivery at a time, and what you would have corrected on the page is a correction of this delivery.
 Begin with the delivery, not the diff: use what it built as its user would, in the environment that `/apply`'s last sentence names as holding the delivery, going through what the page changed; for a document, open what it renders and read it.
 The tests prove what the page wrote and the review reads the code; only using the delivery shows whether it looks right, is easy to use and answers without keeping its user waiting.
 Using it does not replace reading the diff either: use shows what the build does, and the staged diff shows what the commit would hold, a file the page did not ask for or another session's entry, which no screen shows; and neither publishes the delivery nor commits it.
@@ -271,7 +273,7 @@ So the page recorded the refinement, no write path reachable from the client, wh
 
 ## Key points
 
-* `/apply <slug>` builds the page in a fresh session, opened in the delivery's worktree when there is one, reads docs/00 and docs/03 with the rest, writes the code with docs/03's identifiers and follows every slot of docs/05 §5 literally, the project's own included: the page is the scope, with no dependency, layer or tool it did not name, and when the page contradicts a document it stops and says which, never resolving it silently.
+* `/apply <slug>` builds the page in a fresh session, opened in the delivery's worktree when there is one, and `/apply a b` opens one subagent per slug, in the one folder on trunk or each sent to its worktree's path, reads docs/00 and docs/03 with the rest, writes the code with docs/03's identifiers and follows every slot of docs/05 §5 literally, the project's own included: the page is the scope, with no dependency, layer or tool it did not name, and when the page contradicts a document it stops and says which, never resolving it silently.
 * It marks the line `[*]` with its first edit, once the line's `after` and token let it build, `[x]` with its last, after the stage, and `[?]`, with what it waits on, when it must stop.
 * Green is not done: done is the whole list, from the documents updated before a review by a context that did not write the change, which reads the whole delivery, to verify green after the last edit and the line marked `[x]`.
 * It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, using what it built first, each command written out, said in the conversation and gone with it, while the manual of running the product, written by the first delivery after which the product runs and updated by each that changes a step, is what lasts; and, last of all, which environment is at which version and the command that updates the others.

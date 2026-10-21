@@ -84,6 +84,7 @@ The governor let them in the way it lets in anything, each on an error that happ
 They read and report candidates, and the milestone's readers list the paths they read; what gets fixed is decided by `/apply` or the person, and the readers and the checker fix nothing.
 The checker works inside the one review, before the person sees a candidate, so the process still has no review of a review: the person decides what counts.
 The exception opens nothing else: a planner, a builder or a fixer subagent still has to name its error, and until one does, it stays out.
+A command typed with several slugs opens one subagent per slug ([chapter 12](12-propose.md)), and none of them is specialized: each runs the whole command on its own line, as a fresh session you opened would, so each delivery still has one agent that reads, plans and builds.
 
 ## The error that earned a mark
 

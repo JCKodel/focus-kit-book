@@ -3,6 +3,7 @@
 After this chapter you can turn a queue line into a page with `/propose`, read the page as the record of what the agent understood and of what `/apply` will build, cover its holes by conversation before any code exists, and split a delivery that does not fit one page.
 You know that `/propose` decides what the project's documents already answer, naming the source on the page, and drafts the Behaviour lines with what must fail and the edges, so your work is to correct the page, not to write it.
 You can also explore a problem you do not understand yet by talking to the agent, before there is a page.
+And you can define several lines in one command, one subagent each, and say what the command may let them decide alone or build.
 
 ## The problem
 
@@ -146,6 +147,22 @@ On Ninjobs, the page of the delivery that computes a candidate's matching score 
 
 Hosts have their own way to plan inside one session, such as Claude Code's plan mode, where "*Claude reads files and proposes a plan but makes no edits until you approve*";[^claude-code-plan-mode] the page is what outlives the session: a file in the repository, written from the project's documents in their words, marked in the queue, read by a fresh session to build it, and kept in `work/done/` with what happened.
 
+## Several lines in one command
+
+`/propose` takes more than one slug: `/propose search-catalog renew-loan`, on two lines of chapter 14's library, defines both in one command.
+The session that receives it opens one subagent per slug, an agent it launches with a message, which is a fresh session: it has only what that message and the project's files say, and it runs the command's file on its own slug, as `/propose renew-loan` typed alone would.
+The session opens at once every subagent whose line the tokens and `after` let start, not one after another, and a line still waiting when the others end is reported to you, not waited for (chapter 14).
+On trunk the subagents share the folder where the session runs, each changing only its own line and page; with a worktree per delivery each writes in its slug's worktree, which it creates from `main/`, as a `/propose` typed alone does ([chapter 19](19-worktrees.md)).
+The session itself edits nothing: the marks, the pages and the worktrees are the subagents' work.
+A subagent cannot ask you: where it would ask, it reports the question with what you need to answer it and stops; the session asks you and sends your answer back, to that subagent where the host can resume it, else to a new one opened on the slug, which resumes the line's `[~]` on the word of your command.
+The commands keep the setting of chapter 8 that stops Claude Code from running a skill on its own, `disable-model-invocation`: the command you typed names every slug, and each subagent takes its slug from the message that opens it and runs on your word, so no subagent needs the setting lifted.
+Lifting it would bring back what it prevents: a message that only mentions a command running it (chapter 8), and an agent asked for a change going on into `/propose` instead of stopping at the queue line (chapter 11).
+
+Your command may also say two things.
+To decide alone: each question a subagent would have asked is answered by its own recommendation and written on the page as the agent's answer, the question, the answer and why, so your reading finds it among the choices the agent made on its own ([chapter 19](19-worktrees.md) shows that list).
+To build as well: when a page reaches `[>]`, a new subagent runs `/apply` on it, and the page says it was built before you read it; you read the pages and the diffs at the end, and each commit stays yours, one delivery at a time ([chapter 13](13-apply.md)).
+Building as well gives up the cheap order above: a hole the page would have shown in one turn costs, found in the diff, another `/apply`.
+
 ## When it does not fit
 
 A scope that does not fit one page is two deliveries: `/propose` says so, proposes the split and writes only the first page, and the second becomes a line in the queue, where it belongs.
@@ -171,6 +188,7 @@ And when the build ends, the same page records what happened, so the history of 
 
 * A delivery is the smallest change with value, named by a slug, and it fits on one page; if it does not, it is two.
 * `/propose` decides what the documents answer and names the source on the page, asks only where they leave more than one reading, recommendation first, waits as its line's `after` and token say, judging them off trunk from each slug's own branch, starts in the delivery's branch or worktree, where the project's Git slot puts one, a worktree written from a session that stays in `main/`, pushing its branch the moment it creates it, the line's claim, or on trunk in the folder where the session runs, and marks the line `[~]` there while it talks and `[>]` when the page is completely defined, correcting the token from the page, or `[?]` when the scope waits, never writes code, and ends by giving, with a worktree per delivery, the worktree's path, where `/apply`'s fresh session opens.
+* `/propose a b` opens one subagent per slug, a fresh session running the command on its own line, at once where the tokens and `after` allow, all in the one folder on trunk or each in its worktree; the session edits nothing and relays each subagent's questions to you; the commands keep `disable-model-invocation`, since your command names every slug; a command told to decide alone has each answer written on the page as the agent's, and one told to build as well has a new subagent run `/apply` on each `[>]` page, which says it was built before you read it.
 * The page has a fixed format and is the team's review surface, for code and for anything else that fits a page; the Contract is the one exact section, because a wrong column is a migration.
 * `/propose` drafts Behaviour, what must fail and the edges included; you read the page before `/apply`, in the session that wrote it, and correct it by asking the agent, never by hand: a hole on the page costs a turn, after `/apply` it costs another `/apply`.
 * When nobody knows the answer yet, explore it by talking to the agent, and end with a queue line, with a draft page when the line cannot hold what you found, a decision written where it belongs, or neither; nothing new is needed for it.

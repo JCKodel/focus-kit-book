@@ -169,7 +169,7 @@ O `git revert` é o jeito de desfazer qualquer commit já compartilhado.
 
 ## Trunk
 
-O trunk do kit é uma pessoa fazendo commits no `main`, um commit por entrega, sozinha ou com vários agentes abertos ao mesmo tempo em entregas que mexem em arquivos diferentes (capítulo 19): uma linha, onde cada commit é uma entrega e cada `git revert` desfaz uma.
+O trunk do kit é uma pessoa fazendo commits no `main`, um commit por entrega, sozinha ou com vários agentes abertos ao mesmo tempo em entregas que mexem em arquivos diferentes, os subagentes de um comando digitado com vários slugs entre eles, todos na mesma pasta (capítulo 19): uma linha, onde cada commit é uma entrega e cada `git revert` desfaz uma.
 Trunk-based development (desenvolvimento baseado no tronco) é uma prática de time com o mesmo nome, descrita por Paul Hammant: todos fazem o merge de mudanças pequenas no branch principal "*pelo menos uma vez a cada 24 horas*", muitas vezes por branches de vida curta revisados como pull requests.[^tbd]
 Essa prática não é uma das estratégias do kit, só a mesma palavra: a resposta do kit mais próxima é um branch por entrega com entregas pequenas, cada uma chegando ao `main` em um merge.
 
@@ -186,7 +186,7 @@ Um projeto escreve a sua escolha uma vez, no slot Git do seu docs/05, e todo com
 * **Trunk** serve a uma pessoa, sozinha ou com várias sessões abertas em linhas livres (linhas da fila que não estão feitas, não estão esperando e não precisam de outra linha feita antes, já definidas ou não; [capítulo 14](14-queue-states.md)) que mexem em arquivos diferentes: um commit por entrega no `main`, cada sessão colocando em stage só a sua entrega no único índice da pasta, e a pessoa decidindo cada commit, uma entrega por vez.
   Não serve a duas pessoas: as entregas delas dividem um branch, e um commit leva o trabalho pela metade da outra.
 * **Um branch por entrega** serve a trabalho em sequência revisado por pull request (capítulo 20): cada entrega no branch com o nome do seu slug, `emprestar-livro`, que chega ao `main` em um merge.
-* **Um worktree por entrega** serve a várias pessoas trabalhando ao mesmo tempo, ou a uma pessoa cujas entregas mexem nos mesmos arquivos ([capítulo 19](19-worktrees.md)): cada entrega na sua própria pasta, `.focus-kit/worktrees/<slug>/`, no `focus-kit/<slug>`, a menos que o slot nomeie outra pasta ou outro prefixo, com merge do mesmo jeito; um branch chamado só `<slug>` é de outra pessoa, não da entrega.
+* **Um worktree por entrega** serve a várias pessoas trabalhando ao mesmo tempo, ou a uma pessoa cujas entregas mexem nos mesmos arquivos ([capítulo 19](19-worktrees.md)): cada entrega na sua própria pasta, `.focus-kit/worktrees/<slug>/`, no `focus-kit/<slug>`, a menos que o slot nomeie outra pasta ou outro prefixo, com merge do mesmo jeito, um comando digitado com vários slugs dando ao subagente de cada entrega o seu próprio worktree; um branch chamado só `<slug>` é de outra pessoa, não da entrega.
 
 O git-flow fica fora do slot: ele serve a software que lança versões numeradas e mantém várias em uso, e um time que precisa dele o adota como fluxo próprio.
 

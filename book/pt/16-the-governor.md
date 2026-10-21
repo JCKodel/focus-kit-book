@@ -84,6 +84,7 @@ O regulador os deixou entrar do jeito que deixa entrar qualquer coisa, cada um c
 Eles leem e apontam candidatos, e os leitores do marco listam os caminhos que leram; o que se corrige é decidido pelo `/apply` ou pela pessoa, e os leitores e o conferente não corrigem nada.
 O conferente trabalha dentro da única revisão, antes que a pessoa veja um candidato, então o processo continua sem revisão de uma revisão: a pessoa decide o que conta.
 A exceção não abre mais nada: um subagente planejador, construtor ou corretor ainda precisa nomear o seu erro, e até um nomear, fica de fora.
+Um comando digitado com vários slugs abre um subagente por slug ([capítulo 12](12-propose.md)), e nenhum deles é especializado: cada um roda o comando inteiro na sua própria linha, como uma sessão nova aberta por você rodaria, então cada entrega ainda tem um agente só, que lê, planeja e constrói.
 
 ## O erro que rendeu uma marca
 

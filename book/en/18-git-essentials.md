@@ -169,7 +169,7 @@ Revert is the undo for any commit already shared.
 
 ## Trunk
 
-The kit's trunk is one person committing on `main`, one commit per delivery, alone or with several agents open at once on deliveries that touch different files (chapter 19): a line, where each commit is a delivery and each revert takes one back.
+The kit's trunk is one person committing on `main`, one commit per delivery, alone or with several agents open at once on deliveries that touch different files, the subagents of one command typed with several slugs among them, all in the one folder (chapter 19): a line, where each commit is a delivery and each revert takes one back.
 Trunk-based development is a team practice of the same name, described by Paul Hammant: everyone merges small changes into the main branch "*at least once every 24 hours*", often through short-lived branches reviewed as pull requests.[^tbd]
 That practice is not one of the kit's strategies, only the same word: its closest kit answer is a branch per delivery with small deliveries, each reaching `main` in one merge.
 
@@ -186,7 +186,7 @@ A project writes its choice once, in the Git slot of its docs/05, and every comm
 * **Trunk** fits one person, alone or with several sessions open on free lines (queue lines not done, not waiting and needing no other line done first, defined yet or not; [chapter 14](14-queue-states.md)) that touch different files: one commit per delivery on `main`, each session staging only its delivery in the folder's one index, and the person deciding each commit, one delivery at a time.
   It does not fit two people: their deliveries share one branch, and one commit carries the other's half-done work.
 * **A branch per delivery** fits sequential work reviewed by pull request (chapter 20): each delivery on the branch named after its slug, `lend-book`, which reaches `main` in one merge.
-* **A worktree per delivery** fits several people working at once, or one person whose deliveries touch the same files ([chapter 19](19-worktrees.md)): each delivery in its own folder, `.focus-kit/worktrees/<slug>/`, on `focus-kit/<slug>`, unless the slot names another folder or prefix, merged the same way; a branch named only `<slug>` is someone else's, not the delivery's.
+* **A worktree per delivery** fits several people working at once, or one person whose deliveries touch the same files ([chapter 19](19-worktrees.md)): each delivery in its own folder, `.focus-kit/worktrees/<slug>/`, on `focus-kit/<slug>`, unless the slot names another folder or prefix, merged the same way, a command typed with several slugs giving each delivery's subagent its own worktree; a branch named only `<slug>` is someone else's, not the delivery's.
 
 git-flow is outside the slot: it fits software that ships numbered versions and keeps several in use, and a team that needs it runs it as its own workflow.
 
