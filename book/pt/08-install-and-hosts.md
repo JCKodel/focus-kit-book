@@ -19,8 +19,9 @@ and do what it says.
 ```
 
 O endereço é o próprio arquivo, não a página que o GitHub desenha em volta dele, então o agente recebe o texto inteiro.
-Esse arquivo é o arquivo de setup do kit: um arquivo de instruções que o agente lê e transforma nos arquivos do kit, os quatro comandos e alguns pequenos arquivos-ponteiro para os hosts que precisam deles.
+Esse arquivo é o arquivo de setup do kit: um arquivo de instruções que o agente lê e transforma nos arquivos do kit, os quatro comandos, com o pequeno script que o `/propose` roda, e alguns pequenos arquivos-ponteiro para os hosts que precisam deles.
 Nada é instalado na sua máquina; o agente escreve arquivos no repositório, e é só isso.
+No Windows, mantenha o shell que o Git for Windows instala junto com o git, o padrão do instalador: o script que o `/propose` roda (capítulo 13) passa por ele, do PowerShell ou do cmd, sem WSL, e se o git não encontrar esse shell, o `/propose` diz que o Git for Windows foi instalado sem ele e para.
 O seu host pode perguntar antes de baixar o arquivo e antes de escrever na sua própria pasta dentro do repositório, `.claude/` no Claude Code: aprove os dois.
 
 O arquivo de setup manda o agente copiar cada arquivo byte a byte.
@@ -43,7 +44,7 @@ O agente escreve os arquivos do kit como o arquivo de setup os guarda agora, e a
 Ele substitui um arquivo só quando esse arquivo é igual a um que o kit entregou, nesta versão ou numa anterior, e a anterior se confirma pelo histórico do kit, `git show <commit>:SETUP.md` no repositório dele, ou, sem esse histórico à mão, pela sua palavra de que o arquivo nunca foi editado; um nome conhecido ou uma linha `metadata.version` sozinhos não provam isso.
 Um comando seu na pasta de um host, ou uma edição que você fez à mão num dos arquivos do kit, uma linha que você acrescentou ao `.claude/skills/propose/SKILL.md`, por exemplo, faz a atualização parar antes de escrever ou remover qualquer arquivo.
 O agente mostra a sua edição como um diff contra o arquivo do kit em que ela foi feita, e a mudança do próprio kit nesse arquivo desde então à parte e resumida; ele ainda relata as migrações e o próximo comando, e você decide se fica com a sua edição ou a substitui, sabendo que uma regra que a sua edição acrescentou a um comando pode virar um slot do docs/05 §5, que os comandos seguem (capítulo 7).
-Essa verificação foi testada numa cópia dos arquivos do kit do livro, feita fora do repositório do livro: uma linha acrescentada ao `.agents/skills/brainstorm/references/documents.md` parou assim a atualização para o focus-kit 2026.10.20.3, e todos os arquivos da cópia ficaram iguais depois.
+Essa verificação foi testada numa cópia dos arquivos do kit do livro, feita fora do repositório do livro: uma linha acrescentada ao `.agents/skills/propose/SKILL.md` parou assim a atualização para o focus-kit 2026.10.20.4, e todos os arquivos da cópia ficaram iguais depois.
 
 ## O que uma atualização relata
 
@@ -53,35 +54,29 @@ Ele compara os arquivos com os seus próprios modelos e relata cada migração, 
 Uma migração pode citar uma regra, uma linha da fila ou um slot.
 As suas escolhas ficam: um docs/05 cujo §5 diz "trunk, uma sessão por vez" vê proposto o texto para duas sessões numa pasta, e mantém o seu até o time aceitar a mudança.
 
-Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.20.3 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro são em inglês, e o relatório propôs o texto em inglês. O registro dessa atualização é o `work/done/kit-2026-10-20-3.md`, no repositório do livro.
+Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.20.4 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro e o relatório são em inglês. O registro dessa atualização é o `work/done/kit-2026-10-20-4.md`, no repositório do livro.
 
 ```
-Instalado: focus-kit 2026.10.20.3, em cada SKILL.md.
-Migrações de processo pendentes, por documento e seção, encurtadas:
+Instalado: focus-kit 2026.10.20.4, em cada SKILL.md.
+Migrações de processo, por documento e seção, encurtadas: nenhuma
+pendente.
 
 * docs/05, números de seção: batem com o modelo (§4 a fila,
   §5 os slots, §6 commit, §8 fechar um marco). Nenhuma.
-* docs/05 §2, o /apply numa sessão nova: falta o subagente.
-  Proposto: "O /apply sempre começa numa sessão nova, e um subagente
-  é uma: ele só tem o que a página diz."
-* docs/05 §4, um comando digitado com vários slugs: falta. Proposto:
-  o parágrafo do modelo que fecha o §4, inteiro, que começa assim:
-  "Um comando digitado com vários slugs abre um subagente por slug,
-  cada um seguindo o arquivo do comando com um slug, enviado ao
-  worktree do slug onde o slot Git do §5 tem um (o /propose o cria)."
-  No trunk, cada subagente trabalha na única árvore de trabalho.
+* docs/05 §2, o /propose e a estratégia git do §5: bate. A regra
+  está aqui; o script que o /propose roda a cumpre. Nenhuma.
 * docs/05 §5, Git: uma escolha do projeto, não uma migração: trunk,
   ADR-0010, com a Publish policy, o agente nunca envia. Nenhuma.
 
-Os outros itens cobrem o docs/05 §3, os outros slots do §5, os §§6
-a 8, o docs/04, o docs/06 e o AGENTS.md.
-Próximo: /propose ch08-update-2026-10-20-3, quando
-kit-2026-10-20-3 estiver [x].
+Os outros itens cobrem o docs/05 §§3, 4 e 6 a 8, os outros slots do
+§5, o docs/04, o docs/06 e o AGENTS.md.
+Próximo: /propose ch08-update-2026-10-20-4, quando
+kit-2026-10-20-4 estiver [x].
 ```
 
 Cada item cita um documento e uma seção, e termina num de três resultados.
 Ele bate e não precisa de nada, e diz isso: `Nenhuma`.
-Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra, como no docs/05 §2 e §4.
+Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra.
 Ou ele difere por uma escolha que o projeto fez e registrou com uma data ou um ADR, como o slot Git do livro: o item cita essa escolha e não pede mudança.
 Todo item é relatado, nunca feito: a atualização não escreve nenhum desses documentos.
 
@@ -92,7 +87,7 @@ O relatório dá a cada item um desses três resultados; ele compara os document
 
 A versão do kit é o `metadata.version` em cada `SKILL.md`; o processo é o que o docs/04, o docs/05 e o `AGENTS.md` dizem, porque todo comando os lê, então um kit atualizado cujas migrações não foram aplicadas ainda roda o processo antigo.
 A atualização termina quando as migrações são aplicadas, como qualquer mudança: uma linha da fila, definida com o `/propose` e construída com o `/apply`, para que a mudança nas suas regras ou na sua fila tenha uma página, verificação e a sua revisão.
-Aplicá-las pode pedir uma edição que nenhum item cita, quando o texto de uma migração contradiz uma frase que o relatório não confere: no repositório do livro, na versão 2026.10.20.3, o docs/05 §7 não admitia nenhum subagente especializado além dos leitores e do conferente das revisões, o que o parágrafo do §4 que o relatório propôs, sobre um comando digitado com vários slugs, contradizia, então a linha que aplicou o §2 e o §4 editou o §7 também, e o §7 hoje admite o subagente por slug de um comando junto com os leitores e o conferente das revisões.
+Aplicá-las pode pedir uma edição que nenhum item cita, quando o texto de uma migração contradiz uma frase que o relatório não confere: no repositório do livro, na versão 2026.10.20.3, o docs/05 §7 não admitia nenhum subagente especializado além dos leitores e do conferente das revisões, o que o parágrafo do §4 que o relatório dessa atualização propôs, sobre um comando digitado com vários slugs, contradizia, então a linha que aplicou o §2 e o §4 editou o §7 também, e o §7 hoje admite o subagente por slug de um comando junto com os leitores e o conferente das revisões.
 
 Num projeto já documentado, a atualização relata as migrações primeiro, ou diz que não há nenhuma.
 Ela nunca pede que você rode o `/brainstorm` ou o `/analyze` de novo: eles escrevem os documentos de um projeto do zero, e os seus existem.
@@ -172,7 +167,7 @@ E o próximo comando chega na forma que o seu host reconhece, porque um host pod
 
 ## Pontos-chave
 
-* Uma frase para o seu agente instala o focus-kit, e a mesma frase o atualiza; nada é instalado na sua máquina, nada é colocado em stage nem vai para um commit, e um arquivo do kit que você mudou faz a atualização parar antes de escrever, com a sua edição mostrada como um diff contra o arquivo do kit em que ela foi feita.
+* Uma frase para o seu agente instala o focus-kit, e a mesma frase o atualiza; nada é instalado na sua máquina, mas no Windows você mantém o shell que o Git for Windows instala, nada é colocado em stage nem vai para um commit, e um arquivo do kit que você mudou faz a atualização parar antes de escrever, com a sua edição mostrada como um diff contra o arquivo do kit em que ela foi feita.
 * O arquivo de setup escreve só os arquivos do kit e nunca toca `docs/`, `work/`, `AGENTS.md` ou `CLAUDE.md`; uma mudança de que o docs/04, o docs/05, o docs/06 ou o `AGENTS.md` precisa, uma regra, uma linha da fila ou um slot, vem como uma migração no relatório dele, uma lista por documento e seção em que uma escolha que o projeto registrou é relatada como essa escolha, e até o time aplicá-la como uma entrega o processo é o antigo.
 * O changelog do kit, a entrada mais nova primeiro, diz para cada versão o que mudou, o problema que causou a mudança e, num item que começa com `Migração:`, quando a entrada tem um, o que mudar nos documentos do projeto.
 * Cada host encontra as regras e os comandos nas suas próprias pastas: o Claude Code roda um comando como `/propose <slug>`, o Codex como `$propose <slug>`, o Copilot como `/propose`, que pede o slug, o Devin Desktop como `/propose`, e Jules, Junie, Warp, Kiro, Roo Code e Cline pedindo em palavras o arquivo da skill; o `/brainstorm` e o `/analyze` não levam slug; todo comando cita o próximo nessa forma; o Copilot pega uma skill de `.agents/skills/` antes de `.claude/skills/`, o mesmo arquivo nas duas.
