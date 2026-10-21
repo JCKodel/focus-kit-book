@@ -26,6 +26,7 @@ Your host may ask before it downloads the file and before it writes into its own
 
 The setup file tells the agent to copy every file byte for byte.
 Some hosts fetch a web page through a tool that hands the agent a summary of the page instead of its text; if yours does, ask the agent to download the file and read it whole.
+You can also download `SETUP.md` yourself, next to the repository, and point the agent at it; either way, every path the setup file names is in the repository the session works in, never in the folder the file was read from.
 
 The install does not stage or commit.
 By default you read what it wrote and then commit it, yourself or by asking the agent, as with every change the agent makes (chapter 13).
@@ -37,6 +38,7 @@ It writes the command as your host invokes it, with no slug, since these two tak
 
 The setup file writes the kit's files and nothing else.
 `docs/`, `work/`, `AGENTS.md` and `CLAUDE.md` belong to the project: the commands write them, starting with `/brainstorm` or `/analyze` (chapter 9), and the setup file never touches them.
+The kit's files carry the templates of `AGENTS.md` and docs/05, and the setup file writes neither from them: `/brainstorm` and `/analyze` do.
 A `GEMINI.md` that already holds the project's own text keeps it; the kit only adds one line at its top.
 
 To update the kit, say the same sentence again.
@@ -44,7 +46,7 @@ The agent writes the kit's files as the setup file holds them now, and the chang
 It replaces a file only when that file matches one the kit shipped, in this version or an earlier one, and the earlier one is established from the kit's history, `git show <commit>:SETUP.md` in the kit's repository, or, without that history at hand, by your word that the file was never edited; a familiar name or a `metadata.version` line alone does not prove it.
 A command of your own in a host's folder, or an edit you made by hand to one of the kit's files, a line you added to `.claude/skills/propose/SKILL.md` say, stops the update before it writes or removes any file.
 The agent shows your edit as a diff against the kit file it was made on, and the kit's own change to that file since then apart and in short; it still reports the migrations and the next command, and you decide whether to keep your edit or replace it, knowing that a rule your edit added to a command can become a slot of docs/05 §5, which the commands follow (chapter 7).
-This check was tried on a copy of the book's kit files, made outside the book's repository: a line appended to `.agents/skills/propose/SKILL.md` stopped the update to focus-kit 2026.10.20.4 this way, and every file of the copy was unchanged afterwards.
+This check was tried on a copy of the book's kit files, made outside the book's repository: a line appended to `.claude/skills/brainstorm/SKILL.md` stopped the update to focus-kit 2026.10.20.5 this way, and every file of the copy was unchanged afterwards.
 
 ## What an update reports
 
@@ -54,27 +56,34 @@ It compares the files with its own templates and reports each migration, a chang
 A migration may name a rule, a queue line or a slot.
 Your choices stay: a docs/05 whose §5 says "trunk, one session at a time" sees the wording for two sessions in one folder proposed, and keeps its own until the team accepts the change.
 
-Here is part of the report the update to focus-kit 2026.10.20.4 gave on this book's own repository, shortened and paraphrased from the record of that update, `work/done/kit-2026-10-20-4.md` in the book's repository:
+Here is part of the report the update to focus-kit 2026.10.20.5 gave on this book's own repository, shortened and paraphrased from the record of that update, `work/done/kit-2026-10-20-5.md` in the book's repository:
 
 ```
-Installed: focus-kit 2026.10.20.4, in every SKILL.md.
-Process migrations, by document and section, shortened: none pending.
+Installed: focus-kit 2026.10.20.5, in every SKILL.md.
+Pending process migrations, by document and section, shortened:
 
 * docs/05, section numbers: match the template (§4 the queue,
   §5 the slots, §6 commit, §8 closing a milestone). None.
-* docs/05 §2, /propose and §5's git strategy: matches. The rule
-  is here; the script /propose runs carries it out. None.
+* docs/05 §4, what after requires: lacks it. Proposed: "after holds
+  for both commands, with or without a token: neither /propose nor
+  /apply starts until every line it names is [x], whatever the
+  token says."
+* docs/05 §4, a command told to decide alone: lacks who chose.
+  Proposed: "written on the page as the agent's answer, saying the
+  agent chose it, so the review finds it".
+* docs/05 §4, the four cases a line waits in: match. The template
+  gives them as a list, with no rule changed. None.
 * docs/05 §5, Git: a project choice, not a migration: trunk, ADR-0010,
   with the Publish policy, the agent never pushes. None.
 
-The other items cover docs/05 §§3, 4 and 6 to 8, the other slots of
+The other items cover docs/05 §§2, 3 and 6 to 8, the other slots of
 §5, docs/04, docs/06 and AGENTS.md.
-Next: /propose ch08-update-2026-10-20-4, once kit-2026-10-20-4 is [x].
+Next: /propose ch08-update-2026-10-20-5, once kit-2026-10-20-5 is [x].
 ```
 
 Each item names a document and a section, and ends in one of three outcomes.
 It matches and needs nothing, and says so: `None`.
-It lacks something, and the item gives the wording the template proposes and where it goes.
+It lacks something, and the item gives the wording the template proposes and where it goes, as for docs/05 §4.
 Or it differs by a choice the project made and recorded with a date or an ADR, as the book's Git slot does: the item names that choice, asks for no change, and ends in `None` too.
 Every item is reported, never done: the update writes none of these documents.
 
@@ -92,6 +101,7 @@ It never asks you to run `/brainstorm` or `/analyze` again: those write a projec
 It names instead the command docs/06's first free line wants, in your host's form: `/propose` and its slug for a `[ ]` line, `/apply` and its slug for a `[>]` one.
 On trunk that line is read in the queue of the folder; with a branch or a worktree per delivery the main branch shows each line as it was until its merge, so the update runs `git fetch` first, counts a line whose branch exists as taken even before any of its marks is pushed, whatever the main branch shows, and reads each slug's line from its branch, local or remote, and the lines only a branch has, reconciling them by slug ([chapter 14](14-queue-states.md)).
 A version that asks nothing of your documents reports no migration: a version that changes only the commands, such as `/apply` showing its commit message in the conversation too, changes nothing else.
+Nor does a template that only splits a long sentence or turns one into a list, with no rule changed: the project keeps its own text, as the book's docs/05 §4 kept its sentence on the four cases a line waits in.
 A check that concerns a choice the project did not make asks nothing of it either: the manual letting a session in `main/` edit the worktrees is asked of a worktree Git slot, not of a trunk project such as the book's.
 A docs/05 whose Git slot chose a worktree per delivery and names no folder has a folder proposed only when the project already works in a container, the folder [chapter 19](19-worktrees.md) lays out with the checkout and a hidden folder for the history and the worktrees, and that hidden folder holds `repo.git/`.
 The report then proposes writing in that folder's name and the prefix the delivery branches already use, so nothing moves.
@@ -170,7 +180,7 @@ And the next command arrives in the form your host recognizes, because a host ma
 ## Key points
 
 * One sentence to your agent installs focus-kit, and the same sentence updates it; nothing is installed on your machine, though on Windows you keep the shell Git for Windows installs, nothing is staged or committed, and a kit file you changed stops the update before it writes, with your edit shown as a diff against the kit file it was made on.
-* The setup file writes only the kit's files and never touches `docs/`, `work/`, `AGENTS.md` or `CLAUDE.md`; a change docs/04, docs/05, docs/06 or `AGENTS.md` needs, a rule, a queue line or a slot, comes as a migration in its report, a list by document and section where a choice the project recorded is reported as that choice, and until the team applies it as a delivery the process is the old one.
+* The setup file writes only the kit's files, in the repository the session works in, and never touches `docs/`, `work/`, `AGENTS.md` or `CLAUDE.md`; a change docs/04, docs/05, docs/06 or `AGENTS.md` needs, a rule, a queue line or a slot, comes as a migration in its report, a list by document and section where a choice the project recorded is reported as that choice, and until the team applies it as a delivery the process is the old one.
 * The kit's changelog, newest first, says for each version what changed, the problem that caused it, and, in an item that starts with `Migration:` when the entry has one, what to change in the project's documents.
 * Each host finds the rules and the commands in its own folders: Claude Code runs a command as `/propose <slug>`, Codex as `$propose <slug>`, Copilot in VS Code as `/propose`, which asks for the slug, the Copilot CLI as `/propose`, Devin Desktop as `/propose`, and Jules, Junie, Warp, Kiro, Roo Code and Cline by asking in words for the skill's file; `/brainstorm` and `/analyze` take no slug; every command names the next one in that form; the Copilot CLI takes a skill from `.agents/skills/` before `.claude/skills/`, the same file in both.
 * Every host reads a rules file at the start, reads the files you point it at and writes files, and the method needs nothing more.

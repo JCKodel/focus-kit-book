@@ -26,6 +26,7 @@ O seu host pode perguntar antes de baixar o arquivo e antes de escrever na sua p
 
 O arquivo de setup manda o agente copiar cada arquivo byte a byte.
 Alguns hosts buscam uma página web por uma ferramenta que entrega ao agente um resumo da página em vez do seu texto; se o seu faz isso, peça ao agente que baixe o arquivo e o leia inteiro.
+Você também pode baixar o `SETUP.md` por conta própria, ao lado do repositório, e apontar o agente para ele; de um jeito ou de outro, todo caminho que o arquivo de setup cita fica no repositório em que a sessão trabalha, nunca na pasta de onde o arquivo foi lido.
 
 A instalação não coloca nada em stage nem faz commit.
 Por padrão você lê o que ela escreveu e então faz o commit, você mesmo ou pedindo ao agente, como em toda mudança que o agente faz (capítulo 13).
@@ -37,6 +38,7 @@ Ele escreve o comando como o seu host o invoca, sem slug, já que esses dois nã
 
 O arquivo de setup escreve os arquivos do kit e mais nada.
 `docs/`, `work/`, `AGENTS.md` e `CLAUDE.md` pertencem ao projeto: os comandos os escrevem, a começar pelo `/brainstorm` ou pelo `/analyze` (capítulo 9), e o arquivo de setup nunca os toca.
+Os arquivos do kit trazem os modelos do `AGENTS.md` e do docs/05, e o arquivo de setup não escreve nenhum dos dois a partir deles: quem os escreve é o `/brainstorm` ou o `/analyze`.
 Um `GEMINI.md` que já guarda o texto do próprio projeto o mantém; o kit só acrescenta uma linha no topo.
 
 Para atualizar o kit, diga a mesma frase de novo.
@@ -44,7 +46,7 @@ O agente escreve os arquivos do kit como o arquivo de setup os guarda agora, e a
 Ele substitui um arquivo só quando esse arquivo é igual a um que o kit entregou, nesta versão ou numa anterior, e a anterior se confirma pelo histórico do kit, `git show <commit>:SETUP.md` no repositório dele, ou, sem esse histórico à mão, pela sua palavra de que o arquivo nunca foi editado; um nome conhecido ou uma linha `metadata.version` sozinhos não provam isso.
 Um comando seu na pasta de um host, ou uma edição que você fez à mão num dos arquivos do kit, uma linha que você acrescentou ao `.claude/skills/propose/SKILL.md`, por exemplo, faz a atualização parar antes de escrever ou remover qualquer arquivo.
 O agente mostra a sua edição como um diff contra o arquivo do kit em que ela foi feita, e a mudança do próprio kit nesse arquivo desde então à parte e resumida; ele ainda relata as migrações e o próximo comando, e você decide se fica com a sua edição ou a substitui, sabendo que uma regra que a sua edição acrescentou a um comando pode virar um slot do docs/05 §5, que os comandos seguem (capítulo 7).
-Essa verificação foi testada numa cópia dos arquivos do kit do livro, feita fora do repositório do livro: uma linha acrescentada ao `.agents/skills/propose/SKILL.md` parou assim a atualização para o focus-kit 2026.10.20.4, e todos os arquivos da cópia ficaram iguais depois.
+Essa verificação foi testada numa cópia dos arquivos do kit do livro, feita fora do repositório do livro: uma linha acrescentada ao `.claude/skills/brainstorm/SKILL.md` parou assim a atualização para o focus-kit 2026.10.20.5, e todos os arquivos da cópia ficaram iguais depois.
 
 ## O que uma atualização relata
 
@@ -54,29 +56,35 @@ Ele compara os arquivos com os seus próprios modelos e relata cada migração, 
 Uma migração pode citar uma regra, uma linha da fila ou um slot.
 As suas escolhas ficam: um docs/05 cujo §5 diz "trunk, uma sessão por vez" vê proposto o texto para duas sessões numa pasta, e mantém o seu até o time aceitar a mudança.
 
-Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.20.4 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro e o relatório são em inglês. O registro dessa atualização é o `work/done/kit-2026-10-20-4.md`, no repositório do livro.
+Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.20.5 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro são em inglês, e o relatório propôs o texto em inglês. O registro dessa atualização é o `work/done/kit-2026-10-20-5.md`, no repositório do livro.
 
 ```
-Instalado: focus-kit 2026.10.20.4, em cada SKILL.md.
-Migrações de processo, por documento e seção, encurtadas: nenhuma
-pendente.
+Instalado: focus-kit 2026.10.20.5, em cada SKILL.md.
+Migrações de processo pendentes, por documento e seção, encurtadas:
 
 * docs/05, números de seção: batem com o modelo (§4 a fila,
   §5 os slots, §6 commit, §8 fechar um marco). Nenhuma.
-* docs/05 §2, o /propose e a estratégia git do §5: bate. A regra
-  está aqui; o script que o /propose roda a cumpre. Nenhuma.
+* docs/05 §4, o que o after exige: falta. Proposto: "o after
+  vale para os dois comandos, com token ou sem: nem o /propose nem
+  o /apply começa enquanto alguma linha que ele nomeia não está
+  [x], diga o token o que disser."
+* docs/05 §4, um comando mandado decidir sozinho: falta quem
+  escolheu. Proposto: "escrita na página como resposta do agente,
+  dizendo que o agente a escolheu, para que a revisão a encontre".
+* docs/05 §4, os quatro casos em que uma linha espera: batem. O
+  modelo os dá como uma lista, sem nenhuma regra mudada. Nenhuma.
 * docs/05 §5, Git: uma escolha do projeto, não uma migração: trunk,
   ADR-0010, com a Publish policy, o agente nunca envia. Nenhuma.
 
-Os outros itens cobrem o docs/05 §§3, 4 e 6 a 8, os outros slots do
+Os outros itens cobrem o docs/05 §§2, 3 e 6 a 8, os outros slots do
 §5, o docs/04, o docs/06 e o AGENTS.md.
-Próximo: /propose ch08-update-2026-10-20-4, quando
-kit-2026-10-20-4 estiver [x].
+Próximo: /propose ch08-update-2026-10-20-5, quando
+kit-2026-10-20-5 estiver [x].
 ```
 
 Cada item cita um documento e uma seção, e termina num de três resultados.
 Ele bate e não precisa de nada, e diz isso: `Nenhuma`.
-Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra.
+Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra, como no docs/05 §4.
 Ou ele difere por uma escolha que o projeto fez e registrou com uma data ou um ADR, como o slot Git do livro: o item cita essa escolha, não pede mudança e também termina em `Nenhuma`.
 Todo item é relatado, nunca feito: a atualização não escreve nenhum desses documentos.
 
@@ -94,6 +102,7 @@ Ela nunca pede que você rode o `/brainstorm` ou o `/analyze` de novo: eles escr
 Ela cita em vez disso o comando que a primeira linha livre do docs/06 pede, na forma do seu host: o `/propose` e o seu slug para uma linha `[ ]`, o `/apply` e o seu slug para uma `[>]`.
 No trunk essa linha é lida na fila da pasta; com um branch ou um worktree por entrega, o branch principal mostra cada linha como estava até o merge dela, então a atualização roda `git fetch` antes, toma como ocupada, antes mesmo de qualquer marca dela ser enviada, uma linha cujo branch existe, mostre o que mostrar o branch principal, e lê a linha de cada slug no branch dele, local ou remoto, e as linhas que só um branch tem, reconciliando-as pelo slug ([capítulo 14](14-queue-states.md)).
 Uma versão que não pede nada aos seus documentos não relata migração: uma versão que muda só os comandos, como o `/apply` mostrar a sua mensagem de commit também na conversa, não muda mais nada.
+Nem um modelo que só divide uma frase longa ou a transforma numa lista, sem nenhuma regra mudada: o projeto mantém o seu próprio texto, como o docs/05 §4 do livro manteve a sua frase sobre os quatro casos em que uma linha espera.
 Uma verificação que diz respeito a uma escolha que o projeto não fez também não pede nada a ele: o manual que deixa uma sessão no `main/` editar os worktrees é pedido a um slot Git de worktree, não a um projeto em trunk como o do livro.
 Um docs/05 cujo slot Git escolheu um worktree por entrega e não cita pasta só tem uma pasta proposta quando o projeto já trabalha num contêiner, a pasta que o [capítulo 19](19-worktrees.md) organiza com o checkout e uma pasta oculta para o histórico e os worktrees, e essa pasta oculta guarda `repo.git/`.
 O relatório então propõe escrever ali o nome dessa pasta e o prefixo que os branches das entregas já usam, para que nada mude de lugar.
@@ -172,7 +181,7 @@ E o próximo comando chega na forma que o seu host reconhece, porque um host pod
 ## Pontos-chave
 
 * Uma frase para o seu agente instala o focus-kit, e a mesma frase o atualiza; nada é instalado na sua máquina, mas no Windows você mantém o shell que o Git for Windows instala, nada é colocado em stage nem vai para um commit, e um arquivo do kit que você mudou faz a atualização parar antes de escrever, com a sua edição mostrada como um diff contra o arquivo do kit em que ela foi feita.
-* O arquivo de setup escreve só os arquivos do kit e nunca toca `docs/`, `work/`, `AGENTS.md` ou `CLAUDE.md`; uma mudança de que o docs/04, o docs/05, o docs/06 ou o `AGENTS.md` precisa, uma regra, uma linha da fila ou um slot, vem como uma migração no relatório dele, uma lista por documento e seção em que uma escolha que o projeto registrou é relatada como essa escolha, e até o time aplicá-la como uma entrega o processo é o antigo.
+* O arquivo de setup escreve só os arquivos do kit, no repositório em que a sessão trabalha, e nunca toca `docs/`, `work/`, `AGENTS.md` ou `CLAUDE.md`; uma mudança de que o docs/04, o docs/05, o docs/06 ou o `AGENTS.md` precisa, uma regra, uma linha da fila ou um slot, vem como uma migração no relatório dele, uma lista por documento e seção em que uma escolha que o projeto registrou é relatada como essa escolha, e até o time aplicá-la como uma entrega o processo é o antigo.
 * O changelog do kit, a entrada mais nova primeiro, diz para cada versão o que mudou, o problema que causou a mudança e, num item que começa com `Migração:`, quando a entrada tem um, o que mudar nos documentos do projeto.
 * Cada host encontra as regras e os comandos nas suas próprias pastas: o Claude Code roda um comando como `/propose <slug>`, o Codex como `$propose <slug>`, o Copilot no VS Code como `/propose`, que pede o slug, o Copilot CLI como `/propose`, o Devin Desktop como `/propose`, e Jules, Junie, Warp, Kiro, Roo Code e Cline pedindo em palavras o arquivo da skill; o `/brainstorm` e o `/analyze` não levam slug; todo comando cita o próximo nessa forma; o Copilot CLI pega uma skill de `.agents/skills/` antes de `.claude/skills/`, o mesmo arquivo nas duas.
 * Todo host lê um arquivo de regras no início, lê os arquivos para os quais você aponta e escreve arquivos, e o método não precisa de mais nada.
