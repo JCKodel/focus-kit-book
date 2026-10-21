@@ -631,7 +631,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.20.1 and the repo
 When this milestone closes, the book teaches focus-kit 2026.10.20.2 and the repository runs on it: with a worktree per delivery each session opens where it works, /propose in `main/` and /apply in a fresh session inside the delivery's worktree, whose path /propose gives; /apply opened anywhere else stops before any edit and gives that path; the container's manual lets a session in `main/` edit the worktrees.
 
 ```
-[>] kit-2026-10-20-2 (PA)    reinstall the kit at 2026.10.20.2 and record its migration report, which owes this trunk repository none · after kit-2026-10-20-1
+[x] kit-2026-10-20-2 (PA)    reinstall the kit at 2026.10.20.2 and record its migration report, which owes this trunk repository none · after kit-2026-10-20-1
 [ ] ch08-update-2026-10-20-2 chapter 8: the update example and its report at 2026.10.20.2; both editions · after kit-2026-10-20-2
 [ ] ch13-19-session-folder   chapters 13 and 19: where each session opens with a worktree per delivery, never the container, /propose giving the worktree's path, /apply stopping outside it, and the manual letting `main/`'s session edit the worktrees, Claude Code's `additionalDirectories` as the example; both editions · after kit-2026-10-20-2
 [ ] m26-review               the review of M26 as docs/05 §8 says · after kit-2026-10-20-2, ch08-update-2026-10-20-2, ch13-19-session-folder

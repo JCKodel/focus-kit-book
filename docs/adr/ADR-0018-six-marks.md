@@ -66,3 +66,7 @@ Since `kit-2026-10-20` the book runs focus-kit 2026.10.20; the six marks are unc
 ## Amendment, 2026-10-20 (kit-2026-10-20-1)
 
 Since `kit-2026-10-20-1` the book runs focus-kit 2026.10.20.1; the six marks are unchanged, and a queue line may carry the `(PA)` token after its slug: `P` lets its /propose and `A` its /apply run while the lines above it are in flight, `-` waits for them to be `[>]` or beyond before /propose and `[x]` before /apply, and `after` holds for both (docs/05 §4). It applies on trunk as written, two sessions in one working tree being this queue's normal case; whoever changes the queue re-judges the tokens it affects, and a line without one is judged from the pages as before.
+
+## Amendment, 2026-10-21 (kit-2026-10-20-2)
+
+Since `kit-2026-10-20-2` the book runs focus-kit 2026.10.20.2; the six marks are unchanged, and with a worktree per delivery each session opens where it works: /propose in `main/`, ending with the worktree's path, and /apply in a fresh session opened in that worktree, stopping before any edit anywhere else, the container's manual letting `main/`'s session edit the worktrees. The book stays on trunk, where no worktree exists: /propose gives no path, /apply runs in the one working tree as before, and no manual is owed (ADR-0010, docs/05 §5).

@@ -6,7 +6,7 @@ description: >-
   then stage and suggest the commit. Never commits on its own.
 argument-hint: <slug>
 metadata:
-  version: "2026.10.20.1"
+  version: "2026.10.20.2"
 ---
 Implement `work/$ARGUMENTS.md` in this session, completely. When the slug
 is missing, ask for it. The page is the scope; do not widen it.
@@ -15,7 +15,9 @@ Read the page, `AGENTS.md`, docs/00 (product), docs/01 (architecture),
 docs/03 (domain), docs/04 (conventions), docs/05 (process) and docs/06
 (queue). Follow every slot of docs/05 §5 literally, the project's own
 slots included. Before editing, inspect the working tree and index as
-docs/05 §6 says. Work on the branch or worktree /propose created, if any.
+docs/05 §6 says. Work on the branch /propose created, if any; with a
+worktree, only in a session opened in it: elsewhere, stop before any edit
+and give its path.
 
 If the page contradicts a document, stop and say which: the document changes
 in this delivery or the page is wrong. Do not resolve it silently. Follow
@@ -32,11 +34,9 @@ block, and follow docs/05 §6's blocked-work staging rule; report verify
 and environments, and stop without claiming completion.
 
 Build where docs/01 says, with its error convention and docs/03's
-identifiers. Write docs/04's tests;
-one too slow for verify goes with docs/05's slow tests and you say so,
-never into verify silently. Abstraction on the second concrete occurrence;
-the page names the first. Add no dependency, layer or tool the page did
-not name. No em dash in any text a user reads.
+identifiers. Write docs/04's tests; one too slow for verify goes with
+docs/05's slow tests and you say so, never into verify silently. Add no
+dependency, layer or tool the page did not name.
 
 Run verify until green. Prove the delivery as docs/05 says; list divergences
 and fix them until only what you can justify remains. Update the documents
