@@ -264,8 +264,9 @@ finding of the milestone's own review stays in it (§8). A line may carry
 the lines above it are in flight. `P`: the definition takes nothing from
 their pages; `A`: the build touches none of their files; `-` waits, for
 every line above to be `[>]` or beyond before /propose, `[x]` before
-/apply; `after` holds for both commands, with or without a token.
-Whoever changes the queue re-judges the tokens it affects; /propose
+/apply. `after` holds for both commands, with or without a token: neither
+/propose nor /apply starts until every line it names is `[x]`, whatever
+the token says. Whoever changes the queue re-judges the tokens it affects; /propose
 corrects a token from the page. Asked what can run at the same time,
 answer from the queue: the free lines, by their tokens where they have
 one, else the ones that touch different files, judged from their pages
@@ -292,10 +293,14 @@ picking free lines or resolving an `after`, takes each slug's line from
 that branch, local or remote, and the lines only a branch has, reconciled
 by slug as below.
 
-A line waits when the person says it is blocked, when it needs an answer
-that was asked and not given, or when work already started finds it needs
-another line done first, such as a fix found in the middle of an /apply,
-or when a milestone review's code reading missed part of its range (§8).
+A line waits in four cases:
+
+* the person says it is blocked;
+* it needs an answer that was asked and not given;
+* work already started finds it needs another line done first, such as a
+  fix found in the middle of an /apply;
+* a milestone review's code reading missed part of its range (§8).
+
 The line ends with the command that picks it up, `· resume: propose` or
 `· resume: apply`, then the reason, `· blocked: <reason>` or
 `· blocked: after <slug>, <slug>`. A dependency known when the line is
@@ -336,7 +341,8 @@ with the context to answer it and stops; the session asks and sends the
 answer back, resuming it where the host can, else opening it again on the
 slug, whose `[~]` or `[*]` it resumes on the command's word. A command that
 says to decide alone has each question answered by its recommendation,
-written on the page as the agent's answer, so the review finds it; one
+written on the page as the agent's answer, saying the agent chose it, so
+the review finds it; one
 that says to build as well has a new subagent run /apply when a page
 reaches `[>]`, the page saying it was built before the person read it,
 who reads the pages and the diffs at the end.
@@ -370,10 +376,10 @@ The project may add slots of its own; a slot that names /propose or
   staged and unstaged, the commits a blocked delivery already made on its
   branch or worktree, and the files it created; or: none>.
 * **Manuals:** `docs/manuals/`, one file per action that takes more than
-  one command, named after what it does: running the product from a fresh
-  clone, what a person does by hand outside a delivery (publish, roll
-  back, rotate a secret, set up a service) and a proof /apply runs on
-  another machine. Each stands alone for whoever runs it, having read
+  one command, named after what it does. That is running the product from
+  a fresh clone, what a person does by hand outside a delivery (publish,
+  roll back, rotate a secret, set up a service) and a proof /apply runs
+  on another machine. Each stands alone for whoever runs it, having read
   nothing else: what it does and when, what must be in place, the commands
   in order, how to tell it worked, how to undo it, what breaks if a step
   is skipped. A slot that names such a command points to its manual
@@ -413,9 +419,9 @@ and selective staging for mixed files; never `git add -A` or `git add .`.
 Inspect the staged diff afterwards and report any unrelated entries
 already staged, which a plain commit would include; do not unstage them.
 A commit must contain only this delivery for the one-change promise to
-hold: with two sessions on trunk, the person commits each delivery as its
-session ends, from an index that holds only it, never by naming paths on
-`git commit`, which takes each named file whole from the working tree and
+hold. With two sessions on trunk, the person commits each delivery as its
+session ends, from an index that holds only it. Never by naming paths on
+`git commit`: that takes each named file whole from the working tree and
 carries the other session's hunk of it, staged or not. One working tree
 has one index, so when the second session has already staged, the person
 sets its paths aside with `git restore --staged <paths>`, commits the

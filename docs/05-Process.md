@@ -104,13 +104,15 @@ finding of the milestone's own review stays in it (§8). A line may carry
 the lines above it are in flight. `P`: the definition takes nothing from
 their pages; `A`: the build touches none of their files; `-` waits, for
 every line above to be `[>]` or beyond before /propose, `[x]` before
-/apply; `after` holds for both commands, with or without a token.
-Whoever changes the queue re-judges the tokens it affects; /propose
-corrects a token from the page. Asked what can run at the same time,
-answer from the queue: the free lines, by their tokens where they have
-one, else the ones that touch different files, judged from their pages
-and docs/01. The line never leaves the queue; it changes mark as the
-work changes, so the queue shows what is happening while it happens:
+/apply. `after` holds for both commands, with or without a token:
+neither /propose nor /apply starts until every line it names is `[x]`,
+whatever the token says. Whoever changes the queue re-judges the tokens
+it affects; /propose corrects a token from the page. Asked what can run
+at the same time, answer from the queue: the free lines, by their tokens
+where they have one, else the ones that touch different files, judged
+from their pages and docs/01. The line never leaves the queue; it
+changes mark as the work changes, so the queue shows what is happening
+while it happens:
 
 | Mark | Means | Set by |
 |---|---|---|
@@ -159,14 +161,16 @@ end of the line, its page in `work/done/` saying what was built and
 undone; a line whose `after` names it is the person's to re-decide.
 These are the marks of focus-kit 2026.10.05, the fourth case a line
 waits in is that of 2026.10.18, and the ended and dropped lines are
-those of 2026.10.18.1, where a board sees a mark is that of
-2026.10.19, how the queue is read with a branch or a worktree per
-delivery is that of 2026.10.19.1, the branch as the claim of its line
-is that of 2026.10.20, the `(PA)` token on queue lines is that of
-2026.10.20.1, and a command typed with several slugs is that of
-2026.10.20.3 (ADR-0018 and its amendments `kit-2026-10-18`,
+those of 2026.10.18.1, where a board sees a mark is that of 2026.10.19,
+how the queue is read with a branch or a worktree per delivery is that
+of 2026.10.19.1, the branch as the claim of its line is that of
+2026.10.20, the `(PA)` token on queue lines is that of 2026.10.20.1, a
+command typed with several slugs is that of 2026.10.20.3, and what
+`after` holds and a page decided alone saying the agent chose are those
+of 2026.10.20.5 (ADR-0018 and its amendments `kit-2026-10-18`,
 `kit-2026-10-18-1`, `kit-2026-10-19`, `kit-2026-10-19-1`,
-`kit-2026-10-20`, `kit-2026-10-20-1` and `kit-2026-10-20-3`).
+`kit-2026-10-20`, `kit-2026-10-20-1`, `kit-2026-10-20-3` and
+`kit-2026-10-20-5`).
 
 Two sessions in one working tree, on free lines that touch different
 files, are the normal case of parallel work on trunk. Another line
@@ -199,10 +203,10 @@ session asks and sends the answer back, resuming it where the host can,
 else opening it again on the slug, whose `[~]` or `[*]` it resumes on the
 command's word. A command that says to decide alone has each question
 answered by its recommendation, written on the page as the agent's
-answer, so the review finds it; one that says to build as well has a new
-subagent run /apply when a page reaches `[>]`, the page saying it was
-built before the person read it, who reads the pages and the diffs at the
-end.
+answer, saying the agent chose it, so the review finds it; one that says
+to build as well has a new subagent run /apply when a page reaches
+`[>]`, the page saying it was built before the person read it, who reads
+the pages and the diffs at the end.
 
 ## 5. This project
 

@@ -7,7 +7,7 @@ description: >-
 argument-hint: <slug>...
 allowed-tools: Bash(git:*)
 metadata:
-  version: "2026.10.20.4"
+  version: "2026.10.20.5"
 ---
 You are the stakeholder's thinking partner. The slugs are `$ARGUMENTS`:
 none, ask for one; several, one subagent per slug, opened at once where
@@ -44,6 +44,6 @@ docs/05 §4 says, with `resume: propose`.
 Files in docs/05's documentation language; talk in the person's language.
 Write no code, migration, test or configuration. End by showing the
 page's queue line and asking the person to read and question the page as
-docs/05 §3 says, request corrections in this conversation, then run
-`/apply <slug>` in a fresh session, written as this host invokes commands,
+docs/05 §3 says, with corrections in this conversation. Then give
+`/apply <slug>` for a fresh session, written as this host invokes commands,
 opened in the delivery's worktree, if any, its path written out.

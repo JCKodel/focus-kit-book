@@ -6,7 +6,7 @@ description: >-
   then stage and suggest the commit. Never commits on its own.
 argument-hint: <slug>...
 metadata:
-  version: "2026.10.20.4"
+  version: "2026.10.20.5"
 ---
 The slugs are `$ARGUMENTS`: none, ask for one; several, one subagent per
 slug, opened at once where docs/05 §4 allows, each taking its slug from
