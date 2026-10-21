@@ -12,7 +12,7 @@
 * Edge: chapter 16 :72's "Three steps of the process" stays three: the command typed with several slugs is one step whether it opens one or two subagents per slug.
 * Edge: no em dash, no run narration, no version, date or commit hash in chapter text, nothing implying Case B ran on the process.
 
-**Contract.** Two chapters in both editions, against the working tree as it is now, which already carries `m28-claim-wording`'s chapter 13 :28 (the line above, `[*]`, applied before this one; it touches no other sentence of chapter 13). Line counts: chapter 13 291/291, chapter 16 117/118; no line added or removed. One sentence per line; anchors are quoted clauses.
+**Contract.** Two chapters in both editions, against the working tree as it is now, which already carries `m28-claim-wording`'s chapter 13 :28 (the line above, `[x]` in docs/06 at this page's define commit `dd570a4`, its commit `cbab6db` at 15:45, before that commit's 15:49, so applied before this one; it touches no other sentence of chapter 13). Line counts: chapter 13 291/291, chapter 16 117/118; no line added or removed. One sentence per line; anchors are quoted clauses.
 
 * `book/en/16-the-governor.md` and `book/pt/16-the-governor.md`:
   * :73, "The subagents it admits", replaced whole:
@@ -25,7 +25,7 @@
   * pt: "O mesmo vale, com um worktree por entrega, para `/apply <slug>` digitado em uma sessão em qualquer pasta que não o worktree da entrega, `main/` incluída, e para um subagente não mandado para o caminho desse worktree: recusa do mesmo jeito, não edita nada, deixa a marca como está, e dá o caminho do worktree, onde você abre a sessão nova de novo, ou para onde a sessão que digitou `/apply a b`, pela palavra do seu comando, manda de novo um subagente no slug; essa sessão, em `main/`, não recusa, já que ela mesma não edita nada e manda cada subagente para o worktree do seu slug."
   * :21 unchanged: it already says the session in `main/` edits nothing and sends each subagent to its slug's worktree. Nothing else in the chapter changes.
 * Terms of docs/03: `subagent`, fresh session, slug, worktree; no row added or changed. Sources: chapter 12 en :164 / pt :173, docs/05 §4 :191-204, `.claude/skills/apply/SKILL.md` :11-23 (several slugs, one subagent per slug; with a worktree, only a session opened in it or a subagent sent to its path builds); the finding, `work/done/m28-review.md` C34, C35. No new footnote. Cases: none.
-* Neighbouring lines: `m28-claim-wording` (`[*]`, above) touches chapter 13 :28 and chapter 19, docs/03, ADR-0018, and is applied first; `ch10-12-no-implicit-hosts` (chapters 10, 12) and `ch08-update-choice-outcome` (chapter 8) touch none of this page's files; `m28-records-claims` touches `work/done/` pages only.
+* Neighbouring lines: `m28-claim-wording` (above, `[x]` at `dd570a4`) touched chapter 13 :28 and chapter 19, docs/03, ADR-0018, and was applied first; `ch10-12-no-implicit-hosts` (chapters 10, 12) and `ch08-update-choice-outcome` (chapter 8) touch none of this page's files; `m28-records-claims` touches `work/done/` pages only.
 
 **Out of scope.**
 
@@ -46,11 +46,11 @@
 * :113 names both of a command's per-slug subagents, `/propose`'s and `/apply`'s, in one clause and keeps its structure; :67 stays, as its bold words quote docs/05 §7.
 * Chapter 13's fix is at :42, narrowed to `/apply <slug>` typed outside the worktree, with a closing clause saying the `main/` session does not refuse; :21 stays word for word.
 * Chapter 19 :200 left out (see Out of scope), so the queue line's wording stays: it names what the page changes.
-* Token `(P-)`, as the line has it: chapter 13 is shared with `m28-claim-wording`, `[*]` above, so /apply waits for every line above to be `[x]`; chapter 16 is shared with no line in flight.
+* Token `(P-)`, as the line has it: chapter 13 is shared with `m28-claim-wording`, above, `[x]` at `dd570a4`, so /apply's wait for every line above to be `[x]` was already met; chapter 16 is shared with no line in flight.
 
-**Divergences.** Two, from the delivery review, both in chapter 16 and both editions; the Contract above now carries the new wording and the fourth Done-when grep matches it. :113's clause first read "a command's one per slug, and the `/apply` one each slug gets after it when the command says to build as well" / "o que um comando abre por slug, e o do `/apply` que cada slug ganha depois dele quando o comando diz para construir também", which set the `/apply` subagent apart from "a command's one per slug", the words :67 uses to admit it, and whose "it" / "dele" could point to the command; it now reads "a command's one per slug, `/propose`'s and, when it says to build as well, `/apply`'s" / "o que um comando abre por slug, o do `/propose` e, quando ele diz para construir também, o do `/apply`", so :67 stays true as written. :73's "the `/propose` or the `/apply` your command names" / "que o seu comando nomeia" now reads "calls for" / "pede", since `/propose a b` told to build as well never types `/apply`. Every other sentence went in word for word as the Contract writes it; the chapters keep 291/291 and 117/118 lines.
+**Divergences.** Two, from the delivery review, both in chapter 16 and both editions; the Contract above now carries the new wording and the fourth Done-when grep matches it. :113's clause first read "a command's one per slug, and the `/apply` one each slug gets after it when the command says to build as well" / "o que um comando abre por slug, e o do `/apply` que cada slug ganha depois dele quando o comando diz para construir também", which set the `/apply` subagent apart from "a command's one per slug", the words :67 uses to admit it, and whose "it" / "dele" could point to the command; it now reads "a command's one per slug, `/propose`'s and, when it says to build as well, `/apply`'s" / "o que um comando abre por slug, o do `/propose` e, quando ele diz para construir também, o do `/apply`", so :67 stays true as written. :73's "the `/propose` or the `/apply` your command names" / "que o seu comando nomeia" now reads "calls for" / "pede", since `/propose a b` told to build as well never types `/apply`. Every other sentence went in word for word as the Contract writes it; the chapters keep 291/291 and 117/118 lines. The Delivery review ran without the session's advisor, which docs/05 §5 asks it to keep: it consulted none; and it read docs/04 by grep for two rules only and AGENTS.md only from its context, while its Done when item, as defined, ticked it as read against them (Delivery review); `m29-records-claims` gave the item the paragraph's words.
 
-**Decisions taken by /apply.** The three review findings fixed now, as recommended, since each is in text this delivery wrote; nothing else was open, and the queue line stands unchanged (docs/06 is the driver's in this batch).
+**Decisions taken by /apply.** The agent chose this one alone: the three review findings fixed now, as recommended, since each is in text this delivery wrote; nothing else was open, and the queue line stands unchanged (docs/06 is the driver's in this batch).
 
 **Proof.**
 
@@ -72,7 +72,7 @@
 * [x] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version, date or commit hash in chapter text, nothing implying Case B ran on the process.
 * [x] `make verify` green.
 * [x] `make book` run, both PDF paths recorded.
-* [x] Delivery review by one read-only Opus agent over this page and `git diff HEAD` of the four files, against docs/04, docs/05 §§2 and 3, AGENTS.md and `.claude/skills/apply/SKILL.md`; what it read and whether an advisor was consulted recorded as they were.
+* [x] Delivery review by one read-only Opus agent, launched by this /apply, over this page and `git diff HEAD` of the four files (Delivery review): narrower than docs/05 §5, which has it read against docs/04, here read by grep for the em dash and run-narration rules only; it read docs/05 at :188-206 with grep hits in §2 and :370, AGENTS.md only from its context and `.claude/skills/apply/SKILL.md` at :1-30, and consulted no advisor, which docs/05 §5 asks it to keep.
 * [x] Page moved to `work/done/`, covered by the last verify.
 
 ```commit

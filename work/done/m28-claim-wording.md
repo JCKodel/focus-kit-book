@@ -1,6 +1,6 @@
 # m28-claim-wording
 
-**Objective.** After chapters 13 and 19, docs/03's claim row and ADR-0018's `kit-2026-10-20-4` amendment, the reader reads what the kit's claim script does as `.claude/skills/propose/scripts/claim.sh` (2026.10.20.4) does it: the worktree's branch is the prefix and the slug joined, `focus-kit/return-book` by default, not two names with a slash between; on trunk the path it prints is the top of the repository; a branch already on the remote is reused and not pushed again; and with a branch per delivery the remote is checked for the slug's own branch.
+**Objective.** After chapters 13 and 19, docs/03's claim and container folder rows and ADR-0018's `kit-2026-10-20-4` amendment, the reader reads what the kit's claim script does as `.claude/skills/propose/scripts/claim.sh` (2026.10.20.4) does it: the worktree's branch is the prefix and the slug joined, `focus-kit/return-book` by default, not two names with a slash between; on trunk the path it prints is the top of the repository; a branch already on the remote is reused and not pushed again; and with a branch per delivery the remote is checked for the slug's own branch.
 
 **Behaviour.** What the reader can do or explain afterwards:
 
@@ -64,12 +64,12 @@
 * ADR-0018's amendment edited in place, not amended again: it describes the same version on the same day, and the change corrects a description, not a decision; no earlier finding line sets a precedent either way.
 * Chapter 13's worktree clause says "only when the remote lacks it", which covers both the new branch and the resumed one the remote never got; chapter 19 :207 already says the second, unchanged.
 * Chapter 13's branch clause gains "the slug's own branch, the slug with no prefix", so the reader of chapter 13 has the queue line's fourth fact without opening docs/03.
-* Queue line: no wording change; it names what the page changes.
+* Queue line: no wording change; it names docs/03's claim row, not the container folder row this page widens as a sibling (above).
 * Token `(PA)`: every line above is `[x]`; the lines in flight beside it, `ch10-12-no-implicit-hosts` and `ch08-update-choice-outcome`, are below it and touch none of its files, and this page takes nothing from their pages; the only line touching one of its files, `ch13-16-several-slugs-sessions`, is below it and applied after it.
 
-**Divergences.** One, from the delivery review: chapter 13 pt :28's trunk clause reads "qualquer que seja a pasta do repositório em que a sessão rode" in place of the Contract's first wording, "seja qual for a pasta dele em que a sessão roda", whose "dele" could point to the script and whose verb wanted the subjunctive; the Contract above now carries the new wording. Every other sentence went in word for word as the Contract writes it, at chapter 13 :28, chapter 19 :192 and :381 in both editions, docs/03 :96 and :117 and ADR-0018 :80; the chapters keep 291/291 and 393/393 lines.
+**Divergences.** One, from the delivery review: chapter 13 pt :28's trunk clause reads "qualquer que seja a pasta do repositório em que a sessão rode" in place of the Contract's first wording, "seja qual for a pasta dele em que a sessão roda", whose "dele" could point to the script and whose verb wanted the subjunctive; the Contract above now carries the new wording. Every other sentence went in word for word as the Contract writes it, at chapter 13 :28, chapter 19 :192 and :381 in both editions, docs/03 :96 and :117 and ADR-0018 :80; the chapters keep 291/291 and 393/393 lines. The Delivery review ran without the session's advisor, which docs/05 §5 asks it to keep: it consulted none; and it did not reread docs/04, docs/05 or AGENTS.md beyond what was in its context, while its Done when item, as defined, ticked it as read against them (Delivery review); `m29-records-claims` gave the item the paragraph's words. The commit message below, as `cbab6db` carries it, says docs/03's container folder and claim rows name the ref each strategy checks; only the claim row names the refs checked, the container folder row the branch a worktree is on, `<prefix><slug>`.
 
-**Decisions taken by /apply.** The Portuguese fix above, the reviewer's own wording, taken as recommended. Nothing else was open; the queue line stands unchanged (docs/06 is the driver's in this batch).
+**Decisions taken by /apply.** The agent chose this one alone: the Portuguese fix above, the reviewer's own wording, taken as recommended. Nothing else was open; the queue line stands unchanged (docs/06 is the driver's in this batch).
 
 **Proof.**
 
@@ -90,7 +90,7 @@
 * [x] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version, date or commit hash in chapter text, nothing implying Case B ran on the process.
 * [x] `make verify` green (docs/03's table rows included).
 * [x] `make book` run, both PDF paths recorded.
-* [x] Delivery review by one read-only Opus agent over this page and `git diff HEAD` of the six files, against docs/04, docs/05 §§2 and 3, AGENTS.md and `claim.sh`; what it read and whether an advisor was consulted recorded as they were.
+* [x] Delivery review by one read-only Opus agent, launched by this /apply, over this page and `git diff HEAD` of the six files (Delivery review): narrower than docs/05 §5, which has it read against docs/04, here not reread beyond what was in its context, nor docs/05 or AGENTS.md; it read the page, the diff, `claim.sh` and grep output over `book/` and `docs/`, and consulted no advisor, which docs/05 §5 asks it to keep.
 * [x] Page moved to `work/done/`, covered by the last verify.
 
 ```commit

@@ -80,7 +80,7 @@ Neighbours: `ch08-update-2026-10-20-5`, in flight in M29, touches chapter 8 and 
 * [x] No em dash in the changed text; no run narration and no commit hash in the chapter.
 * [x] The new block keeps to 74 columns in both editions.
 * [x] `make verify` green after the last edit.
-* [x] `make book` builds both editions after the last verify, both PDF paths recorded.
+* [x] `make book` builds both editions after the verify that followed the chapters' last edit, one more verify following it (Divergences), both PDF paths recorded.
 
 **Decisions from the documents.**
 
@@ -104,6 +104,7 @@ Neighbours: `ch08-update-2026-10-20-5`, in flight in M29, touches chapter 8 and 
 
 * C2 is set off by a blank line from the several-slugs sentence, since the Contract calls it "a new paragraph" and does not say whether a blank line precedes it.
 * The Portuguese reads "o `/propose` dela espera até toda linha acima estar `[>]` ou além" where the Contract wrote "espera toda linha acima estar", as the delivery review suggested, matching pt :93 and :105.
+* The Done when, as defined at `2faeb03`, held no Delivery review item, which docs/05 §5 asks before /apply ends; the review ran as its paragraph records, whether it kept the session's advisor not recorded (Delivery review). Its `make book` item said "after the last verify", while the Proof records the book after the verify that followed the review's fix and one more verify after it; `m29-records-claims` gave the item the Proof's words.
 
 **Omissions.** None.
 
@@ -114,7 +115,7 @@ Neighbours: `ch08-update-2026-10-20-5`, in flight in M29, touches chapter 8 and 
 * `make book`: exit 0, after the verify that followed the review's fix, the chapters' last edit, at HEAD `3c2a050`, in that same tree; both editions built, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` (with their EPUBs).
 * `make verify` once more after this page's last edit and its move to `work/done/`: exit 0.
 
-**Delivery review.** One read-only Opus agent (an Explore subagent with model opus), launched by this lane. It read `git diff HEAD` of the two chapter files, this page, AGENTS.md, docs/04, docs/05 §4 and §5, docs/03's `parallel token` and `free line` rows and `work/done/kit-2026-10-20-5.md`. Its reply, as returned:
+**Delivery review.** One read-only Opus agent (an Explore subagent with model opus), launched by this lane. It read `git diff HEAD` of the two chapter files, this page, AGENTS.md, docs/04, docs/05 §4 and §5, docs/03's `parallel token` and `free line` rows and `work/done/kit-2026-10-20-5.md`; whether it kept the session's advisor, as docs/05 §5 asks, is not recorded, its reply naming none. Its reply, as returned:
 
 > I found no blocking issues. All five checks pass, apart from the minor points listed under optional.
 >
@@ -153,7 +154,7 @@ Neighbours: `ch08-update-2026-10-20-5`, in flight in M29, touches chapter 8 and 
 
 What was done with it: no blocking finding. The second point fixed (Divergences). The first kept: the sentence is the Contract's and the Behaviour's, a hypothetical the agent calls not wrong. The third kept: "está `[x]`" is the chapter's own phrasing for a mark. The fourth kept: the block's width. The fifth kept, as the agent judges. No new queue line.
 
-**Decisions at build.** Taken alone, by the batch rule to take the recommended option: the blank line before C2, and the review's points handled as above.
+**Decisions at build.** The agent chose these alone, by the batch rule to take the recommended option: the blank line before C2, and the review's points handled as above.
 
 ```commit
 docs(ch14-after-over-token): after holds both commands, token or not
