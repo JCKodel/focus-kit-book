@@ -77,7 +77,7 @@ A line with two orders, `· after lend-book, members`, is free only when both ar
 A milestone's end sets priority, not whether a line is free.
 Chapter 11's `due-date-format` sits under milestone 2, below `m1-review`, and names no `after`: it is free, and does not wait for `m1-review`.
 But the next delivery is the first free line counting down the queue, so a session asked for the next one reaches it only once milestone 1 holds no free line.
-A line added later goes in the milestone whose paragraph needs it, never higher in the queue because it is new: its place is its priority, and the lines already there keep their order and their `after`, while whoever adds or moves a line re-judges the tokens of the lines below it, whose lines above changed (below).
+A line added later goes in the milestone whose paragraph needs it, never higher in the queue because it is new: its place is its priority, and the lines already there keep their order and their `after`, while whoever adds or moves a line re-judges the tokens the change affects: an added line's own and those of the lines below it, a moved line's own and those of the lines it passed, the lines whose lines above changed (below).
 
 `/propose` and `/apply` do not start a line that is not free: run `/propose my-loans` while `lend-book` is `[*]`, and it says what the line waits on and stops.
 
@@ -102,8 +102,8 @@ The same library, in four lines written for this chapter:
 `search-catalog`'s page takes nothing from `lend-book`'s and its build lives in `src/features/catalog/`, so both commands may run on it now.
 `renew-loan` can be talked through now, its rule being its own, but its build changes `src/features/loans/`, as `lend-book`'s does, so `/apply renew-loan` waits until every line above it is `[x]`, `search-catalog` included, which touches none of its files: a token reads against every line above.
 Had it been `(--)`, its `/propose` would wait for `search-catalog`, still `[ ]`, to be `[>]`; `lend-book`, `[*]`, already passes.
-Whoever changes the queue re-judges the tokens the change affects; `/propose` corrects a line's token from its page, once it knows what the page takes and which files the Contract touches; `/brainstorm` writes them for a first milestone that will run as several sessions ([chapter 9](09-starting-a-project.md)); a line without one is judged from the pages, as above.
-`/propose` and `/apply` wait as the token says: `/apply renew-loan` on its finished page while `lend-book` is `[*]` says what it waits on, leaves `[>]` as it is, and stops.
+Whoever changes the queue re-judges the tokens the change affects; `/propose` corrects a line's token from its page, once it knows what the page takes and which files the Contract touches; `/brainstorm` writes them on the first milestone's lines when lines will run at the same time ([chapter 9](09-starting-a-project.md)); a line without one is judged from the pages, as above.
+`/propose` and `/apply` wait as the token says: once `renew-loan`'s page is finished and its line `[>]`, `/apply renew-loan` while `lend-book` is `[*]` and `search-catalog` `[ ]` says it waits on both, leaves the mark as it is, and stops.
 
 [Chapter 19](19-worktrees.md) shows how two sessions run in one folder, and when they need two.
 

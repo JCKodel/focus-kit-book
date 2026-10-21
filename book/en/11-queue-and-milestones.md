@@ -13,10 +13,10 @@ The queue is one file, docs/06, that says what comes next, what is in flight and
 ## The line
 
 docs/06 holds the project's milestones, each with a paragraph saying what is true when it closes, and under each one line per delivery, in order.
-A line is the mark, the slug, its token when it has one, two letters that say what may run while the lines above it are in flight ([chapter 14](14-queue-states.md)), one sentence of what the delivery gives, and its suffixes, such as `· after <slug>`, which names a line that must be done before it:
+A line is the mark, the slug, its token when it has one, two letters that say whether its `/propose` and its `/apply` may run while the lines above it are in flight ([chapter 14](14-queue-states.md)), one sentence of what the delivery gives, and its suffixes, such as `· after <slug>`, which names a line that must be done before it:
 
 ```
-[ ] <slug>    <what it delivers, one sentence> · after <slug>
+[ ] <slug> (PA)  <what it delivers, one sentence> · after <slug>
 ```
 
 The slug is the delivery's name, in lowercase words joined by hyphens ([chapter 12](12-propose.md)).
@@ -176,7 +176,7 @@ Documents still change by conversation, in any session; the rule covers the code
 
 A milestone's paragraph or a line's description changes by conversation too, and the slug stays, since a page or a commit may already use it.
 Moving a line up or down is changing its priority, and it happens the same way: you ask the agent to move it.
-A move keeps the line's `· after` and re-judges its token and those of the lines below it, whose lines above changed (chapter 14), and a line moved into the current milestone needs a clause of its paragraph, or a paragraph you widened first, so a move never changes what a milestone promises without a word.
+A move keeps the line's `· after` and re-judges the tokens the change affects, its own and those of the lines it passed, whose lines above changed (chapter 14), and a line moved into the current milestone needs a clause of its paragraph, or a paragraph you widened first, so a move never changes what a milestone promises without a word.
 Lines also come from a milestone's review and, on an existing project, from its issues or roadmap.
 You read the change before you commit it, as with every document, and nobody edits the queue by hand.
 

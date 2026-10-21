@@ -20,7 +20,7 @@ It talks one subject at a time, in this order, and moves on when it could write 
 3. **How it is built** (docs/01): the stack and the shape of the code, with the kit's two choices, FOCUS and the git strategy, each with the agent's recommendation for this stack.
 4. **The conventions** (docs/04): the documentation language and the identifier language, the style, where tests live.
 5. **The process slots** (docs/05): the verify command and the slow tests kept out of it, the environments, how a screen is proven, when an environment beyond your machine is updated, whether `context/` is committed, the manuals (the one of running the product, owed by the first delivery after which a person can run it; the rest none yet, on a new project), and whether a second pair of eyes reads each delivery before it ends and the whole milestone at its close.
-6. **The first milestone** (docs/06): three to eight deliveries, one line each, in order, then its review; the first ones are the skeleton the others stand on.
+6. **The first milestone** (docs/06): three to eight deliveries, one line each, in order, each with its parallel token, two letters saying whether it may run beside the lines above it, when lines will run at the same time ([chapter 14](14-queue-states.md)), then its review; the first ones are the skeleton the others stand on.
 
 Each slot it writes in docs/05 says what and the command, in a few lines, as docs/05 itself says ([chapter 7](07-the-documents.md)).
 

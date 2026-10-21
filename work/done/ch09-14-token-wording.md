@@ -80,8 +80,32 @@ Neighbours: `ch08-23-branch-read` changes chapter 13 :28 and chapter 14 :62, :64
 
 **Done when.**
 
-* [ ] Every change of the Contract made in both editions, and docs/03's row as written above; nothing else in those files changed.
-* [ ] Each chapter still opens with its value; no filler and nothing useful cut; no number added; no em dash.
-* [ ] `make verify` green.
-* [ ] `make book` run after the last edit, with its commit and both PDF paths recorded in the Proof: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
-* [ ] The Delivery review (docs/05 §5) read the changes against this page and docs/04, its reader and whether it kept the session's advisor recorded.
+* [x] Every change of the Contract made in both editions, and docs/03's row as written above; nothing else in those files changed.
+* [x] Each chapter still opens with its value; no filler and nothing useful cut; no number added; no em dash.
+* [x] `make verify` green.
+* [x] `make book` run after the last edit, with its commit and both PDF paths recorded in the Proof: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+* [x] The Delivery review (docs/05 §5) read the changes against this page and docs/04, its reader and whether it kept the session's advisor recorded.
+
+**Built.** The eighteen replacements of the Contract, C1 to C4 and C7 to C9, each only the quoted words, in the nine files; `git diff --stat HEAD` of the nine shows one changed line per replacement and no other.
+
+**Proof.** `make verify` exit 0 after the Contract's edits (build, parity, em dash, prose, width, examples, links, disclosure). Chapter 11's template is wider by three characters in en and five in pt and passes the width check; pt chapter 14's block keeps its columns.
+
+**Divergences.** None from the Contract.
+
+**Decisions taken by /apply.** None beyond the page's.
+
+**Delivery review.** One read-only Opus agent, launched with the nine files' `git diff HEAD` and this page; it read the page and its records, the diff, chapter 14 :1 to :6, :84 to :110, :125 and :208 and chapter 11 :51 / :54, :88 and :194 in both editions, docs/03's `parallel token`, `dependency` and `waiting mark` rows, docs/05 §4, and the installed brainstorm skill :40 to :43 and apply skill :18 to :30; docs/04 and AGENTS.md it did not reread. Its report says it consulted an advisor once before reporting; this session has no other record of that. It found the eighteen replacements exact in both editions and nothing else changed in the nine files, the brainstorm wording the kit's, the move rule and the C4 example true against the token, and "cadastra" matching chapters 11 and 14. Findings: the Divergences said the advisor item was ticked while no box was, now reworded with the report's own words here; the Proof had no `make book` yet, which runs after the last verify, below; optional, chapter 13 :32's "a `-` a wait" gives "wait" a second sense beside chapter 14's `[?]`, not taken, since the clause after it says neither marks the line `[?]` and the page's Behaviour words it so. Nothing false outside this delivery.
+
+**Verify and book after the last edit.** `make verify` exit 0 after this page's last edit; then `make book` exit 0, built from HEAD `5a40864` with this delivery's unstaged edits in `book/` and no other change there, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+```commit
+docs(ch09-14-token-wording): four chapters say the token one way
+
+- Chapter 9: /brainstorm writes the token when lines run at once
+- Chapters 11 and 14: a change re-judges the tokens it affects
+- Chapter 13: `after` is an order, `-` a wait, neither is `[?]`
+- Chapter 11's template shows the token; ch 14's example fits
+- docs/03 parallel token row in the kit's words; pt "cadastra"
+
+work/done/ch09-14-token-wording.md
+```

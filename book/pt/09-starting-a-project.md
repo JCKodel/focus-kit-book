@@ -20,7 +20,7 @@ Ele conversa sobre um assunto de cada vez, nesta ordem, e passa ao seguinte quan
 3. **Como ele é construído** (docs/01): a stack e a forma do código, com as duas escolhas do kit, o FOCUS e a estratégia de git, cada uma com a recomendação do agente para essa stack.
 4. **As convenções** (docs/04): a língua da documentação e a língua dos identificadores, o estilo, onde ficam os testes.
 5. **Os slots do processo** (docs/05): o comando de verificação e os testes lentos que ficam fora dele, os ambientes, como uma tela é provada, quando um ambiente além da sua máquina é atualizado, se a pasta `context/` entra no commit, os manuais (o de rodar o produto, devido pela primeira entrega depois da qual uma pessoa consegue rodá-lo; os outros nenhum ainda, em um projeto novo), e se um segundo par de olhos lê cada entrega antes de ela terminar e o marco inteiro quando ele fecha.
-6. **O primeiro marco** (docs/06): de três a oito entregas, uma linha cada, em ordem, e depois a revisão dele; as primeiras são o esqueleto em que as outras se apoiam.
+6. **O primeiro marco** (docs/06): de três a oito entregas, uma linha cada, em ordem, cada uma com o seu token de paralelismo, duas letras que dizem se ela pode rodar ao lado das linhas acima dela, quando linhas vão rodar ao mesmo tempo ([capítulo 14](14-queue-states.md)), e depois a revisão dele; as primeiras são o esqueleto em que as outras se apoiam.
 
 Cada slot que ele escreve no docs/05 diz o que e o comando, em poucas linhas, como diz o próprio docs/05 ([capítulo 7](07-the-documents.md)).
 

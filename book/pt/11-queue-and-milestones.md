@@ -13,10 +13,10 @@ A fila é um arquivo, o docs/06, que diz o que vem a seguir, o que está em anda
 ## A linha
 
 O docs/06 guarda os marcos do projeto, cada um com um parágrafo que diz o que é verdade quando ele fecha, e sob cada um uma linha por entrega, em ordem.
-Uma linha é a marca, o slug, o seu token quando tem um, duas letras que dizem o que pode rodar enquanto as linhas acima dela estão em andamento ([capítulo 14](14-queue-states.md)), uma frase do que a entrega dá, e os seus sufixos, como `· after <slug>`, que nomeia uma linha que precisa estar feita antes dela:
+Uma linha é a marca, o slug, o seu token quando tem um, duas letras que dizem se o `/propose` e o `/apply` dela podem rodar enquanto as linhas acima dela estão em andamento ([capítulo 14](14-queue-states.md)), uma frase do que a entrega dá, e os seus sufixos, como `· after <slug>`, que nomeia uma linha que precisa estar feita antes dela:
 
 ```
-[ ] <slug>  <o que ela entrega, uma frase> · after <slug>
+[ ] <slug> (PA)  <o que ela entrega, uma frase> · after <slug>
 ```
 
 O `· after`, como o `· blocked:` do [capítulo 14](14-queue-states.md), fica em inglês, como o kit o escreve.
@@ -181,7 +181,7 @@ Os documentos continuam mudando conversando, em qualquer sessão; a regra cobre 
 
 O parágrafo de um marco ou a descrição de uma linha também muda conversando, e o slug fica, já que uma página ou um commit pode já usá-lo.
 Mover uma linha para cima ou para baixo é mudar a prioridade dela, e acontece do mesmo jeito: você pede ao agente para movê-la.
-Uma mudança de lugar mantém o `· after` da linha e rejulga o token dela e os das linhas abaixo dela, cujas linhas acima mudaram (capítulo 14), e uma linha levada para o marco atual precisa de uma cláusula do parágrafo dele, ou de um parágrafo que você ampliou antes, então mover nunca muda o que um marco promete sem uma palavra.
+Uma mudança de lugar mantém o `· after` da linha e rejulga os tokens que a mudança afeta, o dela e os das linhas por onde ela passou, cujas linhas acima mudaram (capítulo 14), e uma linha levada para o marco atual precisa de uma cláusula do parágrafo dele, ou de um parágrafo que você ampliou antes, então mover nunca muda o que um marco promete sem uma palavra.
 Linhas também vêm da revisão de um marco e, em um projeto existente, das issues ou do roadmap dele.
 Você lê a mudança antes do commit, como com todo documento, e ninguém edita a fila à mão.
 

@@ -78,7 +78,7 @@ Uma linha com duas ordens, `· after emprestar-livro, membros`, só fica livre q
 O fim de um marco define a prioridade, não se uma linha está livre.
 A `formato-devolucao` do capítulo 11 fica sob o marco 2, abaixo de `m1-review`, e não nomeia nenhum `after`: ela está livre, e não espera `m1-review`.
 Mas a próxima entrega é a primeira linha livre descendo a fila, então uma sessão a quem se pede a próxima só chega a ela quando o marco 1 não tem mais nenhuma linha livre.
-Uma linha acrescentada depois vai no marco cujo parágrafo precisa dela, nunca mais acima na fila por ser nova: o lugar dela é a sua prioridade, e as linhas que já estavam lá mantêm a ordem e o `after` delas, enquanto quem acrescenta ou move uma linha rejulga os tokens das linhas abaixo dela, cujas linhas acima mudaram (abaixo).
+Uma linha acrescentada depois vai no marco cujo parágrafo precisa dela, nunca mais acima na fila por ser nova: o lugar dela é a sua prioridade, e as linhas que já estavam lá mantêm a ordem e o `after` delas, enquanto quem acrescenta ou move uma linha rejulga os tokens que a mudança afeta: o da linha acrescentada e os das linhas abaixo dela, o da linha movida e os das linhas por onde ela passou, as linhas cujas linhas acima mudaram (abaixo).
 
 O `/propose` e o `/apply` não começam uma linha que não está livre: rode `/propose meus-emprestimos` com `emprestar-livro` em `[*]`, e ele diz o que a linha espera e para.
 
@@ -94,7 +94,7 @@ O `after` continua valendo para os dois comandos, com token ou sem.
 A mesma biblioteca, em quatro linhas escritas para este capítulo:
 
 ```
-[x] membros                  o bibliotecário registra e suspende membros
+[x] membros                  o bibliotecário cadastra e suspende membros
 [*] emprestar-livro          o bibliotecário empresta um exemplar
 [ ] buscar-catalogo (PA)     um membro busca no catálogo
 [ ] renovar-emprestimo (P-)  um membro renova um empréstimo uma vez
@@ -103,8 +103,8 @@ A mesma biblioteca, em quatro linhas escritas para este capítulo:
 A página de `buscar-catalogo` não tira nada da de `emprestar-livro` e a construção dela mora em `src/features/catalogo/`, então os dois comandos podem rodar nela agora.
 `renovar-emprestimo` pode ser conversada agora, já que a regra dela é só dela, mas a construção dela muda `src/features/emprestimos/`, como a de `emprestar-livro`, então `/apply renovar-emprestimo` espera até toda linha acima dela estar `[x]`, `buscar-catalogo` incluída, que não mexe em nenhum dos arquivos dela: um token se lê contra toda linha acima.
 Se ela fosse `(--)`, o `/propose` dela esperaria até `buscar-catalogo`, ainda `[ ]`, estar `[>]`; `emprestar-livro`, em `[*]`, já passa.
-Quem muda a fila rejulga os tokens que a mudança afeta; o `/propose` corrige o token de uma linha pela página dela, quando sabe o que a página tira e em que arquivos o Contrato mexe; o `/brainstorm` os escreve para um primeiro marco que vai rodar como várias sessões ([capítulo 9](09-starting-a-project.md)); uma linha sem token é julgada pelas páginas, como acima.
-O `/propose` e o `/apply` esperam como o token diz: `/apply renovar-emprestimo` na página pronta dela com `emprestar-livro` em `[*]` diz o que espera, deixa o `[>]` como está, e para.
+Quem muda a fila rejulga os tokens que a mudança afeta; o `/propose` corrige o token de uma linha pela página dela, quando sabe o que a página tira e em que arquivos o Contrato mexe; o `/brainstorm` os escreve nas linhas do primeiro marco quando linhas vão rodar ao mesmo tempo ([capítulo 9](09-starting-a-project.md)); uma linha sem token é julgada pelas páginas, como acima.
+O `/propose` e o `/apply` esperam como o token diz: quando a página de `renovar-emprestimo` está pronta e a linha dela em `[>]`, `/apply renovar-emprestimo` com `emprestar-livro` em `[*]` e `buscar-catalogo` em `[ ]` diz que espera as duas, deixa a marca como está, e para.
 
 O [capítulo 19](19-worktrees.md) mostra como duas sessões rodam em uma pasta, e quando elas precisam de duas.
 
