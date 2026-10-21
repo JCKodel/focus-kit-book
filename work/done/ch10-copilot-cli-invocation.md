@@ -45,10 +45,30 @@ No term of docs/03 is introduced (the host row already holds `copilot-cli`); no 
 * Queue line wording: the line cites "(en :32)"; the sentence is at :33 since ch08-copilot-cli added the CLI's row. Suggested wording: `chapter 10: "In Claude Code a command runs only when you name it" (en :33) names the Copilot CLI too, which honours the same field (chapter 8); both editions · after ch08-copilot-cli`.
 * `(PA)` judged `(PA)`: the definition takes nothing from a line in flight (`ch08-copilot-cli` is `[x]`), and the build touches only chapter 10, which no line above in flight edits.
 
+**Divergences.** None: both sentences went in word for word as the Contract writes them, at en :33 and pt :33; no other line of chapter 10 moved.
+
+**Decisions taken by /apply.** Nothing was open. The queue line's wording is the driver's to change (the batch rules keep docs/06 out of this lane); the suggested wording above stands for it.
+
+**Proof.**
+
+* `make verify`: green, every check passed (build, parity, em dash, prose, width, examples, links, disclosure), exit 0, before the review and again after the page's records and its move to `work/done/`.
+* `make book`: run after the last verify, exit 0; the PDFs to review are `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+**Delivery review.** One read-only Opus agent, launched by this /apply over this delivery's paths only (`git diff HEAD` of both editions of chapter 10, and this page before these records), against this page, docs/04 and `AGENTS.md`, with chapter 8 en :128-137 and pt :130-139 for the claim. Its reply: no finding. Each edition changes one line, en :33 and pt :33, word for word as the Contract asks, and no other line of chapter 10 changed; the claim matches chapter 8 en :133-134 and pt :135-136; "GitHub Copilot CLI" is the name of the table row at en :24 and pt :24; no em dash, no commit hash, no source note, no run narration, and Copilot in VS Code is not named; the Portuguese "No Claude Code e no GitHub Copilot CLI" reads naturally, its article matching chapter 8's masculine "O Copilot CLI". It ran neither verify nor the book, being read-only. No private case, so OD-3 approval is inapplicable.
+
 **Done when.**
 
-* [ ] Both editions of chapter 10 :33 changed as the Contract says, and nothing else in the chapter.
-* [ ] The chapter still opens with its value; no filler and nothing useful cut.
-* [ ] The claim traces to chapter 8 en :133-134 / pt :135-136.
-* [ ] No em dash, no commit hash, no run narration; disclosure scan green.
-* [ ] `make verify` green; `make book` run and both PDF paths given.
+* [x] Both editions of chapter 10 :33 changed as the Contract says, and nothing else in the chapter.
+* [x] The chapter still opens with its value; no filler and nothing useful cut.
+* [x] The claim traces to chapter 8 en :133-134 / pt :135-136.
+* [x] No em dash, no commit hash, no run narration; disclosure scan green.
+* [x] `make verify` green; `make book` run and both PDF paths given.
+
+```commit
+docs(ch10-copilot-cli-invocation): name the Copilot CLI in chapter 10
+
+- chapter 10: a command runs only when named in Claude Code and the
+  GitHub Copilot CLI, as chapter 8 says; both editions
+
+work/done/ch10-copilot-cli-invocation.md
+```

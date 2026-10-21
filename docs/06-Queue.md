@@ -664,7 +664,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.20.4 and the repo
 [x] ch08-update-2026-10-20-4 (PA) chapter 8: the update example and its report at 2026.10.20.4, and the Windows requirement of the README; both editions · after kit-2026-10-20-4
 [x] ch13-19-claim-script (PA) chapters 13 and 19: the claim script, what it checks, creates, pushes and prints, the git alias that runs it on every host, Git for Windows' shell and the WSL recommendation; both editions · after kit-2026-10-20-4
 [x] ch08-copilot-cli (P-)  chapters 8 and 10: the GitHub Copilot CLI as a host of its own, reading AGENTS.md and the skills from the terminal, apart from Copilot in VS Code and its prompt files; both editions · after kit-2026-10-20-4
-[>] ch10-copilot-cli-invocation (PA) chapter 10: "In Claude Code a command runs only when you name it" (en :33) names the Copilot CLI too, which honours the same field (chapter 8); both editions · after ch08-copilot-cli
+[x] ch10-copilot-cli-invocation (PA) chapter 10: "In Claude Code a command runs only when you name it" (en :33) names the Copilot CLI too, which honours the same field (chapter 8); both editions · after ch08-copilot-cli
 [ ] m28-review               the review of M28 as docs/05 §8 says · after kit-2026-10-20-4, ch08-update-2026-10-20-4, ch13-19-claim-script, ch08-copilot-cli, ch10-copilot-cli-invocation
 ```
 

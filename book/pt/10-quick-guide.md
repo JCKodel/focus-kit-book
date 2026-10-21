@@ -30,7 +30,7 @@ Em outro host, um comando toma a forma da tabela do capítulo 8:
 | Jules, Junie, Warp, Kiro, Roo Code, Cline | pedindo em palavras o `.agents/skills/propose/SKILL.md` |
 
 O `/apply` toma a mesma forma que o `/propose`, com o slug da entrega depois dele, ou como resposta quando o host o pede, ou, onde nenhum dos dois funciona, na sua mensagem; o `/brainstorm` e o `/analyze` a tomam sem slug, `$brainstorm` no Codex.
-No Claude Code um comando só roda quando você o nomeia: uma mensagem que por acaso bate com o que ele faz não inicia nada.
+No Claude Code e no GitHub Copilot CLI um comando só roda quando você o nomeia: uma mensagem que por acaso bate com o que ele faz não inicia nada.
 
 Uma escolha é sua antes do primeiro `/propose`: a estratégia de git, trunk, um branch por entrega ou um worktree por entrega.
 O `/brainstorm` e o `/analyze` perguntam com um padrão e escrevem a sua resposta no docs/05: trunk para uma pessoa, e, num projeto com código, o que o repositório já faz.
