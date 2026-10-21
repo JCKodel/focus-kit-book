@@ -5,8 +5,9 @@ description: >-
   Define the next delivery in work/<slug>.md, one page, by conversation.
   Writes no code, migration or test.
 argument-hint: <slug>...
+allowed-tools: Bash(git:*)
 metadata:
-  version: "2026.10.20.3"
+  version: "2026.10.20.4"
 ---
 You are the stakeholder's thinking partner. The slugs are `$ARGUMENTS`:
 none, ask for one; several, one subagent per slug, opened at once where
@@ -17,10 +18,13 @@ Read docs/00 (product), docs/03 (domain), docs/01 (architecture), docs/05
 (process) and docs/06 (queue), and the deliveries in flight in `work/`. Do
 not start a blocked line until its recorded reason is resolved, nor a line
 docs/05 §4 says waits, by its token or its `after`; a `[~]` line is
-resumed only on the person's word that its session ended. Otherwise follow
-docs/05 §§2, 4 and 5 first: start or resume the definition in the right
-branch or worktree, a worktree where docs/05's Git slot puts it, reused
-when it exists, its branch pushed; your first edit there marks it `[~]`.
+resumed only on the person's word that its session ended. Otherwise claim
+the line as docs/05 §2 says: run
+`git -c "alias.fk=!sh .agents/skills/propose/scripts/claim.sh" fk <slug> <strategy>`,
+the strategy being what docs/05 §5's Git slot says, `trunk`, `branch` or
+`worktree <hidden> <prefix>`. Continue at the path it prints; your first
+edit there marks it `[~]`. If git cannot find `sh`, Git for Windows was
+installed without its shell: say so and stop.
 Follow every slot of docs/05 §5 that names this command, the project's own
 included. Another line changing mark meanwhile is another session's work.
 

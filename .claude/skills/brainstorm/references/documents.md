@@ -150,12 +150,12 @@ that it is not. The agent never commits or merges on its own:
   (`<hidden>/repo.git/`) and each delivery's worktree in
   `<hidden>/worktrees/<slug>/`, on the branch `<prefix>/<slug>`; docs/05's
   Git slot names the hidden folder and the prefix, and a slot that names
-  neither means `.focus-kit/` and `focus-kit/`. `/propose` checks the
-  remote for the branch (`git ls-remote --exit-code --heads origin
-  <prefix>/<slug>`), creates the slug's worktree there, from the main
-  branch's HEAD, and pushes its branch at once, so the line is taken in
-  every clone, or reuses the one that exists, and writes the page in it; a
-  branch `<slug>` without the prefix is not the delivery's. `/apply` runs
+  neither means `.focus-kit/` and `focus-kit/`. `/propose` claims the
+  line with its `claim.sh`, which checks the remote for the branch,
+  creates the slug's worktree there from the main branch's HEAD and
+  pushes its branch at once, so the line is taken in every clone, or
+  reuses the one that exists, and prints the path; the page is written
+  in it. A branch `<slug>` without the prefix is not the delivery's. `/apply` runs
   in a session opened in it, or a subagent sent to its path, never in
   `main/`; the container's manual lets a session in `main/` edit
   `<hidden>/worktrees/`. The branch reaches the
