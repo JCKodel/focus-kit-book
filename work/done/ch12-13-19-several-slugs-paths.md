@@ -75,11 +75,85 @@
 
 **Done when.**
 
-* [ ] Both editions changed as the Contract says in chapters 12, 13 and 19, and nothing else in them.
-* [ ] `grep -n` finds, in both editions: chapter 12 "or reuses when it exists" / "ou reutiliza quando já existe", "You read and correct each page there too" / "Você também lê e corrige cada página ali", "sent to the delivery's worktree's path when there is one" / "mandado para o caminho do worktree da entrega quando há um"; chapter 13 "you type `/apply a b` in a session in `main/`" / "você digita `/apply a b` em uma sessão em `main/`", "sends a subagent on the slug again" / "manda de novo um subagente no slug"; chapter 19 "or one in `main/` for an `/apply a b`" / "ou uma em `main/` para um `/apply a b`", "which carries the correction to a subagent" / "que leva a correção a um subagente".
-* [ ] `grep -n "correct one of them in its conversation\|corrige uma delas na sua conversa" book/*/19-worktrees.md` prints nothing.
-* [ ] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version, date or commit hash in chapter text, nothing implying Case B ran on the process.
-* [ ] `make verify` green.
-* [ ] `make book` run, both PDF paths recorded.
-* [ ] Delivery review by a read-only Opus agent over this page and `git diff HEAD` of the six chapter files, against docs/04 and AGENTS.md; the record names the agent's model and whether it kept the session's advisor, and the tick says the same.
-* [ ] Page moved to `work/done/`, covered by the last verify.
+* [x] Both editions changed as the Contract says in chapters 12, 13 and 19, and nothing else in them, with the review's wording fixes in Divergences.
+* [x] `grep -n` finds, in both editions: chapter 12 "or reuses when it exists" / "ou reutiliza quando já existe", "You read and correct each page there too" / "Você também lê e corrige cada página ali", "sent to the delivery's worktree's path when there is one" / "mandado para o caminho do worktree da entrega quando há um"; chapter 13 "you type `/apply a b` in a session in `main/`" / "você digita `/apply a b` em uma sessão em `main/`", "sends a subagent on the slug again" / "manda de novo um subagente no slug"; chapter 19 "or one in `main/` for an `/apply a b`" / "ou uma em `main/` para um `/apply a b`", "which carries the correction to a subagent" / "que leva a correção a um subagente".
+* [x] `grep -n "correct one of them in its conversation\|corrige uma delas na sua conversa" book/*/19-worktrees.md` prints nothing.
+* [x] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version, date or commit hash in chapter text, nothing implying Case B ran on the process.
+* [x] `make verify` green.
+* [x] `make book` run, both PDF paths recorded.
+* [x] Delivery review by one read-only Opus agent over this page and `git diff HEAD` of the six chapter files, against docs/04, docs/05 §§3 and 4 and the kit skills, as its reply lists, which does not name AGENTS.md; it did not keep the session's advisor.
+* [x] Page moved to `work/done/`, covered by the last verify.
+
+**Built.** The Contract's changes, in both editions: chapter 12 en :39, :139, :155, the new :158, :164, :192 and :194 (pt :39, :148, :164, the new :167, :173, :201 and :203); chapter 13 the new :21 and :35; chapter 19 :214, :296, :304 and :365. `git diff --stat HEAD` on the six files, before the review's fixes: 26 insertions and 22 deletions, one line added in chapter 12 and one in chapter 13 per edition, nothing else changed; the files now have 197/206, 283/283 and 377/377 lines.
+
+**Divergences.** The delivery review's five findings, all on text this delivery wrote, were fixed; the Contract above keeps the wording as defined, and the chapters read:
+
+* Chapter 13 :35: en "or where the session that typed `/apply a b`, on your command's word, sends a subagent on the slug again."; pt "ou para onde a sessão que digitou `/apply a b`, pela palavra do seu comando, manda de novo um subagente no slug.", so the reopening is tied to the person's command, as the page's Edge asks, and both editions say where it is sent.
+* Chapter 13 :21: en opens "With several slugs and a worktree per delivery," and says "the session itself edits nothing"; pt opens "Com vários slugs e um worktree por entrega," and says "a própria sessão não edita nada", so the line does not read against :19, which is about the single command.
+* Chapter 12 pt :167: "e corrigir a página e qualquer documento que a correção toque é trabalho desse subagente."
+* Chapter 19 :214, both editions: the three folders separated by semicolons; pt :365 "ou mandados para cada um".
+
+**Omissions.** None.
+
+**Proof.**
+
+* The Done when greps print each phrase once per edition, at the lines in Built; the grep for the old chapter 19 :304 wording prints nothing; a grep for the em dash counts 0 in the six files.
+* `make verify`: exit 0, all checks passed (the d-nb.info link included), after the chapters' last edit and again after this page's last edit and its move.
+* `make book`: exit 0, after the last verify; both editions built, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` (with their EPUBs).
+
+**Delivery review.** One read-only Opus agent (a general-purpose subagent with model opus); it did not keep the session's advisor, since a subagent opened this way has none. It read this page and `git diff HEAD` of the six chapter files, chapter 13 en :18 to :30 and chapter 19 en :270 to :305, docs/05 §4, the apply skill and grep hits in docs/05 §3, the propose skill and docs/04. Its reply, as returned:
+
+> Five findings, all low or medium. The Contract is applied exactly in both editions, and nothing else in the six files changed.
+>
+> **What I read:** the page `work/ch12-13-19-several-slugs-paths.md` and `git diff HEAD` of the six chapter files. For context I read chapter 13 lines 18-30 and chapter 19 lines 270-305 (en), docs/05 §4, the apply skill lines 18-26, and grep hits in docs/05 §3, the propose skill and docs/04.
+>
+> **Contract and rules**
+> - Every Contract change is present word for word in en and pt, in the right places. The diff stat matches: 26 additions and 22 deletions over the six files.
+> - The added lines contain no em dash. There is no run narration, version, date or commit hash, nothing about Case B, and no new number. Each new sentence is on its own line.
+> - The changes agree with docs/05 §3 ("Corrections happen in the /propose conversation"), docs/05 §4 (the session edits nothing; a subagent is reopened on the command's word), the propose skill ("reused when it exists") and the apply skill ("a subagent sent to its path ... elsewhere, stop before any edit and give the path").
+> - The paragraph changed at chapter 19 :304 sits in the batch section, so "as above" points to :296 as intended.
+>
+> **Findings**
+>
+> 1. **`book/en/13-apply.md:35` and `book/pt/13-apply.md:35`. Severity: text this delivery wrote (medium).**
+>    - The new clause "or the session that typed `/apply a b` sends a subagent on the slug again" names no trigger. It reads as if the session reopens a subagent by itself, which the page's Edge forbids. Chapter 12 ties the same reopening to "the word of your command", and docs/05 §4 to "the command's word".
+>    - The two editions also differ. The pt says where the subagent goes ("para onde ... manda"). The en has no "there" and leans on the earlier "where".
+>    - Suggested fix (en): "or where the session that typed `/apply a b`, on your command's word, sends a subagent on the slug again".
+>    - Suggested fix (pt): "ou para onde a sessão que digitou `/apply a b`, pela palavra do seu comando, manda de novo um subagente no slug".
+>
+> 2. **`book/en/13-apply.md:21` and `book/pt/13-apply.md:21`. Severity: text this delivery wrote (low).**
+>    - The new line opens "With a worktree per delivery, ...", the same words as line 19, which says the fresh session opens in the delivery's worktree. Read quickly, the two lines contradict each other.
+>    - Line 35 then says a session in `main/` refuses. The page's "Decisions taken alone" covers that, but the repeated opening makes the clash worse.
+>    - Suggested fix: anchor the line to the command, e.g. "Typed this way with a worktree per delivery, `/apply a b` runs from a session in `main/`, as `/propose` does: ...". The pt would match.
+>
+> 3. **`book/pt/13-apply.md:21`. Severity: text this delivery wrote (low, Portuguese naturalness).**
+>    - "a sessão não edita nada ela mesma" is awkward Portuguese.
+>    - Chapter 12 pt :172 already says "A própria sessão não edita nada".
+>    - Suggested fix: "a própria sessão não edita nada e manda cada subagente para o worktree do seu slug".
+>
+> 4. **`book/pt/12-propose.md:167`. Severity: text this delivery wrote (low, Portuguese naturalness).**
+>    - The sentence says "correção" twice.
+>    - "que ela toque" could refer to the session or to the correction.
+>    - Suggested fix: "..., e corrigir a página e qualquer documento que a correção toque é trabalho desse subagente."
+>
+> 5. **`book/en/19-worktrees.md:214` and `book/pt/19-worktrees.md:214`. Severity: text this delivery wrote (low, readability).**
+>    - The list now nests commas inside items that are themselves separated by commas. It is hard to tell where the `main/` part ends and the worktree part begins.
+>    - Suggested fix: separate the three folders with semicolons, e.g. "one in `main/` for each `/propose`, or one for a `/propose a b` naming both, whose subagents write in each worktree; one in each worktree for its `/apply`, or one in `main/` for an `/apply a b`, which sends a subagent to each worktree's path; and none in the container." The pt would match.
+>    - Smaller point, pt :365 only: "ou mandados para ele" is awkward, since "ele" has to stand for "cada worktree". "ou mandados para cada um" reads better.
+>
+> If you take findings 1, 2 or 5, the page's Contract text needs the same edit so the page and the chapters stay identical.
+
+What was done with it: findings 1, 3, 4 and 5 fixed as suggested; finding 2 fixed by opening the line "With several slugs and a worktree per delivery," which keeps the Done when grep's "you type `/apply a b` in a session in `main/`"; the Contract keeps the wording as defined, and Divergences gives the chapters' text. No new queue line.
+
+**Decisions at build.** Taken alone, by the batch rule to take the recommended option: every review finding fixed, finding 2 in the wording that keeps the Done when grep; the Contract left as defined, with the fixes in Divergences, since records hold what happened.
+
+```commit
+docs(ch12-13-19-several-slugs-paths): where several-slug parts happen
+
+- chapter 12: a subagent's page is corrected in the command's session
+- chapter 12: worktree created or reused; /apply subagent sent there
+- chapter 13: /apply a b runs in main/ with a worktree per delivery
+- chapter 19: the sessions for several slugs, and where pages are fixed
+
+work/done/ch12-13-19-several-slugs-paths.md
+```
