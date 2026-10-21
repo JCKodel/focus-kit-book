@@ -64,11 +64,71 @@
 
 **Done when.**
 
-* [ ] Both editions changed as the Contract says, and nothing else in the chapter.
-* [ ] `grep -c "main/" book/en/12-propose.md book/pt/12-propose.md` prints 2 for each edition (today 0): the new line and the key point.
-* [ ] `grep -n "worktree da entrega quando há um\|delivery's worktree when there is one" book/*/12-propose.md` prints :32 and :36 (as they are after the new line, :33 and :37) in each edition.
-* [ ] The chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version or date in chapter text.
-* [ ] `make verify` green.
-* [ ] `make book`: left to the driver after the batch; the milestone review records the build.
-* [ ] Delivery review by one read-only Opus agent over this page and `git diff HEAD` of the two chapter files, against docs/04 and AGENTS.md.
-* [ ] Page moved to `work/done/`, covered by the last verify.
+* [x] Both editions changed as the Contract says, and nothing else in the chapter.
+* [x] `grep -c "main/" book/en/12-propose.md book/pt/12-propose.md` prints 2 for each edition (today 0): the new line and the key point.
+* [x] `grep -n "worktree da entrega quando há um\|delivery's worktree when there is one" book/*/12-propose.md` prints :32 and :36 (as they are after the new line, :33 and :37) in each edition.
+* [x] The chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version or date in chapter text.
+* [x] `make verify` green.
+* [x] `make book`: left to the driver after the batch; the milestone review records the build.
+* [x] Delivery review by one read-only Opus agent over this page and `git diff HEAD` of the two chapter files, against docs/04 and AGENTS.md.
+* [x] Page moved to `work/done/`, covered by the last verify.
+
+**Divergences.**
+
+* `make book`: the Done when item leaves it to the driver; the batch's rules had this lane run it after the last verify, and the Proof records it.
+* The delivery review: its reply lists the diff, this page, the propose skill and lines of chapters 13 and 19 as what it read, and does not name docs/04 or AGENTS.md among them, though its prompt gave both and it checked docs/04's prose rules.
+
+**Omissions.** None: every change of the Contract is in both editions, with the wording it gives.
+
+**Decisions taken alone in /apply.**
+
+* The links `([chapter 19](19-worktrees.md))` and `([chapter 13](13-apply.md))` are written as the Contract gives them, though chapter 12's own cross-references are plain "(chapter 14)": linked references are the book's form elsewhere (chapters 8 and 9), and the page names them.
+* The review's one observation, that the key point's appositive asks for a careful reading, is left as the Contract words it: the reviewer judged it grammatical and acceptable, so no fix and no queue line.
+
+**Delivery review.** One read-only Opus agent, launched by this lane, over `git diff HEAD` of `book/en/12-propose.md` and `book/pt/12-propose.md` and this page. Its reply, as returned:
+
+> I found nothing to fix in `ch12-propose-worktree-path`.
+>
+> **What I read**
+> - The diff of `book/en/12-propose.md` and `book/pt/12-propose.md` against `HEAD`, and the delivery page.
+> - The end of `.claude/skills/propose/SKILL.md`.
+> - Chapter 13 at :18, :19, :33 and :274.
+> - Chapter 19 at :130 to :137, :195 to :199, :212 to :216 and :366, plus the Portuguese twin's use of "contêiner".
+> - Every mention of `main/` and "fresh session" / "sessão nova" in chapter 12, in both editions.
+>
+> **Findings:** no findings.
+>
+> - **Matches the Contract:** each edition has 4 lines changed and 1 added, and nothing else changed. Both editions have the same changes. Line counts are now 178 (en) and 187 (pt), and `grep -c "main/"` gives 2 in each, as the Done-when expects.
+> - **True against the sources:**
+>   - The new line :30 matches the skill's last sentence ("opened in the delivery's worktree, if any, its path written out") and chapter 19 :135, :197 and :214.
+>   - :33 and :37 match chapter 13 :19 and :274.
+>   - The key point agrees with chapter 19 :214 ("one in `main/` for each `/propose`, one in each worktree for its `/apply`") and with chapter 19 :366.
+> - **No conflict elsewhere in chapter 12:**
+>   - The new line comes after the "Its first edit there" line, so that line's "there" / "ali" still points at the branch or worktree from :28.
+>   - :28 still reads correctly: "stands where... the worktree" is narrowed by :30.
+>   - :38's choice between the same conversation and a fresh session still holds.
+>   - The trunk `lend-book` ending is kept as it was, and the new clause starts with "when there is one".
+> - **Scoped to a worktree per delivery:** every new clause carries "when there is one", "with a worktree per delivery" or `main/`. Nothing new speaks for the branch-per-delivery case.
+> - **Grammar:** the key-point sentence still reads correctly after both insertions, in both editions.
+> - **Links:** `19-worktrees.md` and `13-apply.md` exist in both editions.
+> - **Prose rules:** no em dash in either file, and no version, date, run narration or "now" in the new text.
+> - **Portuguese:** reads naturally. "manual do contêiner" matches chapter 19's own term, and "cujo caminho ele escreve por extenso" is idiomatic.
+>
+> **Observations, no fix needed**
+> - In the key point, the appositive "a worktree written from a session that stays in `main/`" / "um worktree escrito de uma sessão que fica em `main/`" is grammatical but asks for a careful reading. It sits right after "puts one", in an already long sentence. It is acceptable as the Contract states it.
+> - I did not run `make verify`, because this review was read-only; it is still open on the Done-when list.
+
+No new queue line.
+
+**Proof.** `make verify` was run after the chapter edits, again with the review recorded and the page moved to `work/done/`, and once more after this Proof was written: exit 0 each time, every check passed, the link check included. The Done when greps print 2 `main/` lines per edition (:30, the new line, and :173 en, :182 pt, the key point) and the "when there is one" clause at :33 and :37 in each edition; the chapter has 178 lines in English and 187 in Portuguese. This lane ran `make book` after the second verify, exit 0, both editions: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`. Nothing pushed; no environment changes.
+
+```commit
+docs(ch12-propose-worktree-path): /propose stays in main/, gives path
+
+- ch12: with a worktree per delivery, /propose writes it from main/
+- ch12: /propose ends with the worktree's path for /apply's session
+- ch12: key point says both; links to chapters 13 and 19
+- both editions
+
+work/done/ch12-propose-worktree-path.md
+```
