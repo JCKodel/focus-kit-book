@@ -113,13 +113,44 @@
 
 **Done when.**
 
-* [ ] Both editions changed as the Contract says in chapters 13 and 19, and docs/03's row replaced, nothing else in them.
-* [ ] `grep -n` finds, in both editions: chapter 13 "claim.sh" (en/pt), "WSL", "[^git-config]" twice (call and note); chapter 19 "claim: new", "existing, branch pushed now", "finds it missing from the remote" / "não o encontra no remoto", "claims the line with the kit's script" / "reivindica a linha com o script do kit".
-* [ ] `grep -c "alias.fk" book/*/19-worktrees.md` prints 0 for each edition (the alias line lives in chapter 13).
-* [ ] The git-config quote checked against <https://git-scm.com/docs/git-config>, `alias.*`, the day the note is dated.
-* [ ] Every statement about the script checked against `.claude/skills/propose/scripts/claim.sh`; the Windows sentence against README.md at `ffbec72` (`git -C ~/Projects/focus-kit show ffbec72:README.md`).
-* [ ] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version, date or commit hash in chapter text, nothing implying Case B ran on the process.
-* [ ] `make verify` green (the width check over chapter 19's new block included).
-* [ ] `make book` run, both PDF paths recorded.
-* [ ] Delivery review by one read-only Opus agent over this page and `git diff HEAD` of the five files, against docs/04, docs/05 §§2 and 3, the propose skill and `claim.sh`.
-* [ ] Page moved to `work/done/`, covered by the last verify.
+* [x] Both editions changed as the Contract says in chapters 13 and 19, with the four wordings of Divergences, and docs/03's row replaced, nothing else in them.
+* [x] `grep -n` finds, in both editions: chapter 13 "claim.sh" (en/pt), "WSL", "[^git-config]" twice (call and note); chapter 19 "claim: new", "existing, branch pushed now", "finds it missing from the remote" / "não o encontra no remoto", "claims the line with the kit's script" / "reivindica a linha com o script do kit".
+* [x] `grep -c "alias.fk" book/*/19-worktrees.md` prints 0 for each edition (the alias line lives in chapter 13).
+* [x] The git-config quote checked against <https://git-scm.com/docs/git-config>, `alias.*`, the day the note is dated.
+* [x] Every statement about the script checked against `.claude/skills/propose/scripts/claim.sh`; the Windows sentence against README.md at `ffbec72` (`git -C ~/Projects/focus-kit show ffbec72:README.md`).
+* [x] Each chapter still opens with its value, no filler and nothing useful cut, no number added, no em dash, no run narration, no version, date or commit hash in chapter text, nothing implying Case B ran on the process.
+* [x] `make verify` green (the width check over chapter 19's new block included).
+* [x] `make book` run, both PDF paths recorded.
+* [x] Delivery review by one read-only Opus agent over this page and `git diff HEAD` of the five files, against docs/04, docs/05 §§2 and 3, the propose skill and `claim.sh`.
+* [x] Page moved to `work/done/`, covered by the last verify.
+
+**Divergences.** Four of the delivery review's findings changed the Contract's wording in both editions; the rest of the Contract is as written.
+
+* Chapter 13, sentence 4: the first "on every host" / "em todo host" dropped, so "every host" says once what it means, the agent's hosts, beside the path it explains.
+* Chapter 13, sentence 6: "creating and pushing it" / "criando-o e dando push nele" became "creating or reusing it and pushing it when the remote lacks it" / "criando-o ou reaproveitando-o e dando push nele quando o remoto não o tem", since `claim.sh` also reuses a branch already on the remote and pushes a local one the remote lacks.
+* Chapter 19, sentence 2: the refusals gain "when it cannot tell the default branch" / "quando não consegue saber qual é o branch padrão", the script's own refusal before the default-branch check; the usage and unknown-strategy refusals stay out, since `/propose` never makes them.
+* Chapter 19, key point: "run as a git alias ..., which refuses" became "which runs as a git alias ..., refuses" / "que roda como um alias ..., recusa", so "which" names the script and not Git for Windows' `sh`.
+
+**Decisions.** The footnote is dated 2026-10-21, the day the quote was checked, in the format of chapter 18's `[^git-commit]`.
+
+**Proof.**
+
+* The git-config quote, word for word in the local `man git-config` (`alias.*`) and at <https://git-scm.com/docs/git-config>, fetched 2026-10-21: "Shell commands will be executed from the top-level directory of a repository, which may not necessarily be the current directory."
+* Against `.claude/skills/propose/scripts/claim.sh`: the refusals (`die`, exit 2, `error:`) for a slug, a repository, a detached `HEAD`, a worktree or a delivery branch, `origin`, `git fetch`, the default branch; the two notes; the pushes of a new branch and of an existing one the remote lacks, each failing with "the line is not claimed"; trunk printing `claim: none, trunk` with no fetch or push; the output keys `claim`, `branch`, `path`, `draft`, and the worktree path `dirname(top)/<hidden>/worktrees/<slug>`; "Edits no document" in its header.
+* The command, the strategy words and the `sh` stop against `.claude/skills/propose/SKILL.md`'s claim paragraph; the Windows sentence against README.md at `ffbec72` :37-40.
+* Chapter 8's "(chapter 13)" / "(capítulo 13)" at en/pt :24 lands on chapter 13's Windows sentence, en/pt :27.
+* `make verify` exit 0 after the review's fixes and the page's move, every check passed, the external link included; `make book` exit 0, on HEAD `f84d8d9` with this delivery's changes in the tree: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+* Done when greps: chapter 13 "claim.sh" 2, "WSL" 1, "[^git-config]" 2 in each edition; chapter 19 "claim: new" 1, "existing, branch pushed now" 1, the :210 and key point wordings 1 each, "alias.fk" 0, in each edition; no em dash; en and pt at 291 and 393 lines.
+
+**Delivery review.** One read-only Opus agent (Explore type), launched by this /apply over this page and `git diff HEAD` of the five files, with docs/03 only the `claim` row, asked to read them against docs/04, docs/05 §§2 and 3, `AGENTS.md`, the propose skill, `claim.sh`, README.md at `ffbec72` :37-40 and `man git-config`. Its reply shows it read the page's Contract, the five files' diff, docs/04's width rule, the propose skill's :26-27, `claim.sh`, README.md at `ffbec72` :37-40 and `man git-config`; it did not say whether it opened `AGENTS.md` or docs/05. Its reply, in short: the text matched the Contract word for word in both editions, nothing else in the five files changed, line counts equal; no em dash, the only date in the footnote, no Case B; `alias.fk` 0 in chapter 19, `[^git-config]` 2 in each chapter 13; the block's longest line 62 columns; the quote, the Windows sentence and the `sh` stop matching their sources; every refusal, note, push and key holding against `claim.sh`. Findings: (1) chapter 13 :28, "creating and pushing it" says the script always creates the branch, while it also reuses one and pushes a local-only one; (2) chapter 19 :381, "which refuses" reads as referring to Git for Windows' `sh`; (3) chapter 13 :26, "on every host" twice; (4) chapter 19 :204, the refusal list leaves out "cannot tell the default branch"; (5) outside this delivery: in `claim.sh` :78-80, with a worktree per delivery, a branch that exists locally but not on the remote, with no worktree folder, makes `git worktree add -b` fail under `set -e` with git's own error, without `error:` or exit 2. Findings 1 to 4 fixed in both editions (Divergences); finding 5 is the kit's, a note for the person to add to `work/kit-proposals.md`, and the chapter's text stays true since that case is not among the refusals it lists.
+
+```commit
+docs(ch13-19-claim-script): teach the claim script in chapters 13 and 19
+
+- chapter 13: how /propose runs the claim script through git's sh
+- chapter 13: Windows runs it with Git for Windows' shell, WSL advised
+- chapter 19: what the script refuses, notes, pushes and prints
+- docs/03: the claim row names the script and the full ref
+
+work/done/ch13-19-claim-script.md
+```
