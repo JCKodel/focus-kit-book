@@ -111,11 +111,11 @@ O `after` não é o token, e o token nunca o suspende.
 Mais tarde, com `buscar-catalogo` em `[x]`, `emprestar-livro` ainda em `[*]` e `renovar-emprestimo` em `[>]`, uma linha é acrescentada abaixo delas, escrita para este capítulo como as quatro acima:
 
 ```
-[ ] aviso-renovacao (-A)  avisa o vencimento · after renovar-emprestimo
+[ ] aviso-renovacao (-A)  avisa membro do prazo · after renovar-emprestimo
 ```
 
 A página dela tira a regra da renovação da de `renovar-emprestimo`, então o `/propose` dela espera até toda linha acima estar `[>]` ou além, e todas estão; a construção dela mora em `src/features/avisos/`, então o `/apply` dela pode rodar ao lado delas; e ela precisa de renovações que existam, então foi escrita com `· after renovar-emprestimo`.
-O token deixa os dois comandos começarem, e nenhum começa: o `after` nomeia `renovar-emprestimo`, em `[>]` e não em `[x]`, então `/propose aviso-renovacao` diz que espera `renovar-emprestimo`, deixa a marca como está, e para, e o `/apply` faria o mesmo.
+O token deixa os dois comandos começarem, e nenhum começa: o `after` nomeia `renovar-emprestimo`, em `[>]` e não em `[x]`, então `/propose aviso-renovacao` diz que espera `renovar-emprestimo`, deixa a marca como está, e para; o `/apply aviso-renovacao` também não começa, mas primeiro pela marca: a linha está `[ ]`, não `[>]`, então ele se recusa a construir e aponta para o `/propose` ([capítulo 13](13-apply.md)), e se ela estivesse `[>]`, o `after` ainda o seguraria até `renovar-emprestimo` estar `[x]`.
 O `-` espera as linhas acima, o `after` as linhas que ele nomeia; `aviso-renovacao` fica livre no momento em que `renovar-emprestimo` está `[x]`.
 
 O [capítulo 19](19-worktrees.md) mostra como duas sessões rodam em uma pasta, e quando elas precisam de duas.

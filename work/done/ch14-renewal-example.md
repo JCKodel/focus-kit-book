@@ -37,13 +37,13 @@ Neighbours: `ch08-other-items-claude-md` touches chapter 8 and `m29-records-clai
 
 **Done when.**
 
-* [ ] C1 and C2 read as the Contract says, each quoted text found once before its edit; the rest of both files unchanged.
-* [ ] Both editions written, the same reasoning in each, Portuguese names in the Portuguese edition.
-* [ ] The chapter still opens with its value; no filler and nothing useful cut; no number added; no private case used.
-* [ ] No em dash in the changed text; no run narration and no commit hash in the chapter.
-* [ ] The Portuguese block row is 74 columns or fewer (`scripts/check_width.py`).
-* [ ] `make verify` green after the last edit.
-* [ ] `make book` builds both editions after the last verify, both PDF paths recorded.
+* [x] C1 and C2 read as the Contract says, each quoted text found once before its edit; the rest of both files unchanged.
+* [x] Both editions written, the same reasoning in each, Portuguese names in the Portuguese edition.
+* [x] The chapter still opens with its value; no filler and nothing useful cut; no number added; no private case used.
+* [x] No em dash in the changed text; no run narration and no commit hash in the chapter.
+* [x] The Portuguese block row is 74 columns or fewer (`scripts/check_width.py`).
+* [x] `make verify` green after the last edit.
+* [x] `make book` builds both editions after the last verify, both PDF paths recorded.
 
 **Decisions from the documents.**
 
@@ -59,3 +59,28 @@ Neighbours: `ch08-other-items-claude-md` touches chapter 8 and `m29-records-clai
 * The Portuguese row is "avisa membro do prazo", without the article, rather than "avisa um membro": with the slug, token and `after` fixed, 21 columns are left for the sentence; "avisa um membro do prazo" needs 24 and "avisa o membro do prazo" 23, and "avisa um membro" (15) would drop the due date the English row names, the same kind of loss the review found. A dropped article is style; a dropped noun is meaning.
 * "vencimento" becomes "prazo" for width; both render "due date" here.
 * C1 links chapter 13, as the section links chapters 9, 12 and 19, since the refusal of a `[ ]` line is taught there.
+
+**Divergences.** One, from the delivery review: C1's opening words "`/apply renewal-notice` refuses too" / "o `/apply aviso-renovacao` também se recusa" became "`/apply renewal-notice` does not start either" / "o `/apply aviso-renovacao` também não começa". "Too" said `/propose` had refused, and it had not: it waits on `renew-loan`, which chapter 13 keeps apart from a refusal (:40 refuses and points to `/propose`; :43 waits and says what it waits on). The rest of C1 and all of C2 are as the Contract words them.
+
+**Decisions taken by /apply.** The review's finding was fixed here rather than queued: it is in the text this delivery wrote, and the fix keeps the sentence's two reasons and its "neither does" opening true. Correct it in the review if the Contract's words were wanted.
+
+**Proof.**
+
+* Before the edits, `grep -nF` found each quoted text once: en :117, pt :118 for C1, pt :114 for C2. After the build, `git diff --stat HEAD` of the two chapter files shows 3 insertions and 3 deletions, en :117 and pt :114, :118, and nothing else.
+* Sibling sentences re-read: en :32 ("`/apply` builds it once every line its `after` names is `[x]` and its token lets it") and :106 still hold; the closing sentence en :118 / pt :119 ("free the moment `renew-loan` is `[x]`") stays docs/03's `free line`.
+* Block rows measured: en :113 and pt :114 are 74 columns each; `python3 scripts/check_width.py` exit 0.
+* `make verify` exit 0 after the last edit to the chapters and again after these records, every check passed, the external link included.
+* `make book` exit 0 after the last verify, on HEAD `a4f2cb9` with this delivery's changes and other lanes' uncommitted edits in the tree: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+**Delivery review.** One read-only Opus agent, launched by this /apply over this delivery's paths only (`git diff HEAD` of both chapter 14 files, before the review's fix and these records), against this page and docs/04's width rule; it read chapter 14 :88-122 and chapter 13 :36-44 in both editions, and said it did not call any advisor tool. Its reply, one finding: "`/apply renewal-notice` refuses too" (pt "também se recusa") says `/propose` refused, though it waits on `renew-loan` and leaves the mark, and chapter 13 keeps a refusal (:40) apart from a wait (:43); it suggested "`/apply renewal-notice` does not start either, but for its mark first: …" and "o `/apply aviso-renovacao` também não começa, mas primeiro pela marca: …", the rest as it is, and said it breaks neither the page nor docs/04, since the words were the Contract's own. Everything else checked out: C1 and C2 applied word for word with nothing else changed, the same reasoning in both editions with Portuguese names, the Portuguese correct and the dropped article acceptable in a block row, the pt row 74 columns naming member and due date, no em dash, run narration or commit hash, and the sentence agreeing with chapter 13 :40 and :43, the rule at :92 / :93 and the closing "free the moment" sentence. Fixed as its suggestion words it (Divergences). No new queue line.
+
+```commit
+docs(ch14-renewal-example): /apply stops first on the line's mark
+
+- chapter 14's renewal-notice example: /apply does not start
+  because the line is [ ], not [>], and after would hold it even so
+- the Portuguese block row names the member and the due date
+- both editions, within 74 columns
+
+work/done/ch14-renewal-example.md
+```

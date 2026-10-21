@@ -114,7 +114,7 @@ Later, with `search-catalog` `[x]`, `lend-book` still `[*]` and `renew-loan` `[>
 ```
 
 Its page takes the renewal's rule from `renew-loan`'s, so its `/propose` waits for every line above to be `[>]` or beyond, and they all are; its build lives in `src/features/notices/`, so its `/apply` may run beside them; and it needs renewals that exist, so it was written with `· after renew-loan`.
-The token lets both commands start, and neither does: `after` names `renew-loan`, `[>]` and not `[x]`, so `/propose renewal-notice` says it waits on `renew-loan`, leaves the mark as it is, and stops, and `/apply` would do the same.
+The token lets both commands start, and neither does: `after` names `renew-loan`, `[>]` and not `[x]`, so `/propose renewal-notice` says it waits on `renew-loan`, leaves the mark as it is, and stops; `/apply renewal-notice` does not start either, but for its mark first: the line is `[ ]`, not `[>]`, so it refuses to build and points to `/propose` ([chapter 13](13-apply.md)), and were it `[>]`, `after` would still hold it until `renew-loan` is `[x]`.
 The `-` waits for the lines above, `after` for the lines it names; `renewal-notice` is free the moment `renew-loan` is `[x]`.
 
 [Chapter 19](19-worktrees.md) shows how two sessions run in one folder, and when they need two.
