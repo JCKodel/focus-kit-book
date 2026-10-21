@@ -53,8 +53,8 @@
 * [x] `grep -n "língua da documentação" book/pt/07-the-documents.md` prints only :16 and :46; `grep -n "documentation language" book/en/07-the-documents.md` prints only :16 and :45.
 * [x] `grep -n "a cargo da" book/pt/0[789]-*.md` prints nothing.
 * [x] No numbers, no history of the kit, no run narrated; no em dash.
-* [x] `make verify` green; `make book` built both PDFs, their paths given to the author (`make book` run by the batch driver).
-* [x] Delivery review as docs/05 §5 says.
+* [x] `make verify` green; `make book` built both PDFs: the batch's driver ran it after the last M23 fix lane, at `16fdca6` (exit 0), and `work/done/m24-review.md` records the build at `2fccad2`, whose chapters 7 and 9 are the same, with both PDF paths.
+* [x] Delivery review by one read-only Opus agent this lane launched, over the three chapter files against this page and docs/04 (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 * [x] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging by paths and hunk are the driver's steps.
 
 **Decisions taken from the documents.**
@@ -70,9 +70,9 @@
 
 **Divergences.** None: the five lines are the Contract's.
 
-**Proof.** The three Done-when greps print what they say (pt 07 :16 and :46; en 07 :16 and :45; no "a cargo da" in pt 07 to 09); `make verify` green after the last edit; `make book` run by the batch driver.
+**Proof.** The three Done-when greps print what they say (pt 07 :16 and :46; en 07 :16 and :45; no "a cargo da" in pt 07 to 09); `make verify` green after the last edit; `make book` run by the batch's driver at `16fdca6` (exit 0), and `work/done/m24-review.md` records the build at `2fccad2`, the same chapters 7 and 9, with both PDF paths.
 
-**Delivery review:** a read-only Opus agent over the three chapter files against this page and docs/04: no findings; one stylistic note (pt 07:17 "tem o nome do que faz" beside pt 07:103 "com o nome do que ele faz"), both correct, no change.
+**Delivery review:** a read-only Opus agent, launched by this lane, over the three chapter files against this page and docs/04: no findings; one stylistic note (pt 07:17 "tem o nome do que faz" beside pt 07:103 "com o nome do que ele faz"), both correct, no change.
 
 ```commit
 docs(ch07-09-manual-wording): name a manual after what it does

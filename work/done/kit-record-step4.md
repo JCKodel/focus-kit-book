@@ -81,14 +81,14 @@ Neighbour: `m23-records-crossrefs` also edits this file, at lines 3 and 37, and 
 * [x] The new step 4 list matches chapter 8's excerpt item for item in both editions, which stay unchanged.
 * [x] No Done when item of the record unticked; no em dash; no private case, so OD-3 approval is inapplicable.
 * [x] `make verify` green after the last edit.
-* [x] Delivery review as docs/05 §5 says: one read-only agent on Opus with the session's advisor reads `git diff HEAD` of the record and this page against this page and docs/04.
+* [x] Delivery review by one read-only Opus agent this lane launched, over `git diff HEAD` of the record and this page against this page and docs/04 (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 * [x] The page moved to `work/done/` and its commit message suggested; the staging and the queue's marks are the driver's in this batch.
 
 **Divergences.** `make book` is not run: the batch's lane rules leave it to the driver, and no chapter changes. docs/06 is the driver's in this batch: it marks the line `[x]`. The staging and the commit are the driver's too: this session staged nothing.
 
 **Proof.** `git diff HEAD -- work/done/kit-2026-10-19-2.md` shows two hunks, :9 and :75 to :96: replacement 1 in the Behaviour line, its Step 5 sentence kept; replacement 2, five items under step 4 and six under "The project's other dispositions"; replacement 3 in Step 5. Lines 3 and 37 are untouched. Chapter 8's excerpt, en :60 to :84 and pt likewise, is unchanged and names Manuals, AGENTS.md, Milestone review as a project choice and "the other items" for §§2 to 4, the other slots of §5, §§6 to 8, docs/04 and docs/06, the new step 4 list item for item. No em dash in the record or this page. `make verify` green after the last edit: build, parity, em dash, prose, width, examples, links and disclosure.
 
-**Delivery review.** One read-only Opus agent read `git diff HEAD` of the record and this page against this page and docs/04, with SETUP.md and CHANGELOG.md at the kit's `44132c4` and chapter 8 in both editions. No findings: the three replacements word for word and nothing else, the step 4 list exactly what SETUP's step 4 checks, the changelog crediting only the AGENTS.md echo, chapter 8's excerpt agreeing item for item, and the record's :46 agreeing with the Environments item's new place. No new queue line.
+**Delivery review.** One read-only Opus agent, launched by this lane, read `git diff HEAD` of the record and this page against this page and docs/04, with SETUP.md and CHANGELOG.md at the kit's `44132c4` and chapter 8 in both editions. No findings: the three replacements word for word and nothing else, the step 4 list exactly what SETUP's step 4 checks, the changelog crediting only the AGENTS.md echo, chapter 8's excerpt agreeing item for item, and the record's :46 agreeing with the Environments item's new place. No new queue line.
 
 ```commit
 docs(kit-record-step4): split the record's step 4 report from the rest

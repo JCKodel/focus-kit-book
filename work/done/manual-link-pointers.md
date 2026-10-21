@@ -56,10 +56,10 @@ Neighbouring line on the same file: `manual-pypdf-install` changes `docs/manuals
 * [x] A scratch broken URL in a manual prints `docs/manuals/<file>.md:<line>: links: ...` and exit 1, recorded; the line removed.
 * [x] With `node` off the `PATH` the examples message, and with a missing tool the book message, print the new pointer, recorded.
 * [x] The build manual's :42-44 and docs/01 :92 match the scripts' strings byte for byte (grep recorded).
-* [x] `grep -n "docs/manuals/" docs/manuals/*.md` prints nothing (prints only the three quoted messages at :42-44; see Divergences).
+* [x] `grep -n "docs/manuals/" docs/manuals/*.md` prints only the build manual's :42-44, the three quoted messages, and no cross-reference between manuals (Proof; Divergences).
 * [x] docs/01 and docs/04 updated.
 * [x] `make verify` green, online, with the manuals' URLs fetched (`make book` run by the driver once for the batch).
-* [x] The Delivery review as docs/05 §5 says.
+* [x] Delivery review by one read-only Opus agent this lane launched, over the seven files and this page (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 
 **Decisions taken alone.**
 
@@ -121,7 +121,7 @@ Byte for byte, `grep -hoF` of each message's fixed tail over the scripts, the bu
 
 **Divergences.**
 
-* Done when says `grep -n "docs/manuals/" docs/manuals/*.md` prints nothing, but the page's own decision keeps the quoted messages at :42-44 byte for byte with what the scripts print, which now holds that path. The quotes win; the grep prints those three lines and no cross-reference between manuals.
+* Done when, as defined, said `grep -n "docs/manuals/" docs/manuals/*.md` prints nothing, but the page's own decision keeps the quoted messages at :42-44 byte for byte with what the scripts print, which now holds that path. The quotes win; the grep prints those three lines and no cross-reference between manuals.
 
 **Decisions.**
 
@@ -129,7 +129,7 @@ Byte for byte, `grep -hoF` of each message's fixed tail over the scripts, the bu
 * The missing-tool proof runs the scripts directly with a reduced `PATH`, not `make verify` or `make book`: `make` adds only the call, and the scripts print the line.
 * The broken-URL proof used `release-the-book.md`, a file of this delivery, so no other lane's file was touched even for a moment.
 
-**Delivery review.** One read-only Opus agent over this delivery's paths (`git diff HEAD` of the seven files and this page): nothing breaks the page, docs/04 or the text written; nothing outside the page. It confirmed the four messages changed only in the pointer, the quotes at :42-44 and docs/01 :92 match the scripts byte for byte, the sibling manuals are named by bare file name, docs/01 :33 and docs/04 :170 follow the Contract, and the Divergence is sound. It noted the docstring line of `check_links.py` at :4 is now longer than its neighbour, which docs/04 does not limit for Python; left as is.
+**Delivery review.** One read-only Opus agent, launched by this lane, over this delivery's paths (`git diff HEAD` of the seven files and this page): nothing breaks the page, docs/04 or the text written; nothing outside the page. It confirmed the four messages changed only in the pointer, the quotes at :42-44 and docs/01 :92 match the scripts byte for byte, the sibling manuals are named by bare file name, docs/01 :33 and docs/04 :170 follow the Contract, and the Divergence is sound. It noted the docstring line of `check_links.py` at :4 is now longer than its neighbour, which docs/04 does not limit for Python; left as is.
 
 **Noted, not fixed.** Nothing.
 

@@ -168,10 +168,41 @@ Exact replacements, each found by its page and quoted text, which occurs once on
 
 **Done when.**
 
-* [ ] The 56 replacements above made word for word, each quoted text found exactly once on its page, and nothing else in the eighteen pages changed (`git diff` of each shows only those lines).
-* [ ] The Contract's git checks rechecked at /apply: `2b66f27` to `2fccad2` empty on `book/`, `16fdca6` to `2fccad2` only chapters 8, 12, 14, 17, 18, 19 and 20.
-* [ ] A search of the eighteen pages finds no ticked "Delivery review as docs/05 §5 says", no "with the advisor" or "with the session's advisor" on a review, no "paths given to the author", "who reads the excerpt", "last line read in each" or "ticked on that word", and "once for the batch" only in the Out of scope places.
-* [ ] No em dash; no private case, so OD-3 approval is inapplicable.
-* [ ] `make verify` green after the last edit.
-* [ ] Delivery review by a read-only Opus agent this lane launched, over the diff of the eighteen pages and this page, against this page and docs/04; its findings recorded (Delivery review), and whether it kept the session's advisor recorded as it was.
-* [ ] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging are the batch driver's steps. No chapter changes, so `make book` is not this delivery's.
+* [x] The 56 replacements above made word for word, each quoted text found exactly once on its page, and nothing else in the eighteen pages changed (`git diff` of each shows only those lines); the pages are seventeen, and five replacements were then corrected after the Delivery review (Divergences).
+* [x] The Contract's git checks rechecked at /apply: `2b66f27` to `2fccad2` empty on `book/`, `16fdca6` to `2fccad2` only chapters 8, 12, 14, 17, 18, 19 and 20.
+* [x] A search of the eighteen pages finds no ticked "Delivery review as docs/05 §5 says", no "with the advisor" or "with the session's advisor" on a review, no "paths given to the author", "who reads the excerpt", "last line read in each" or "ticked on that word", and "once for the batch" only in the Out of scope places.
+* [x] No em dash; no private case, so OD-3 approval is inapplicable.
+* [x] `make verify` green after the last edit.
+* [x] Delivery review by a read-only Opus agent this lane launched, over the diff of the eighteen pages and this page, against this page and docs/04; its findings recorded (Delivery review), and whether it kept the session's advisor recorded as it was.
+* [x] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging are the batch driver's steps. No chapter changes, so `make book` is not this delivery's; this lane ran it anyway, as the batch asked (Proof).
+
+**Built.** The 56 replacements, applied by one script that counted each quoted text on the pristine page first and wrote nothing unless all 56 occurred exactly once; every one did, at the line the Contract gives. `git diff HEAD` of the seventeen pages showed 56 lines out and 56 in, nothing else (kit-2026-10-20 4, ch08-update-2026-10-20 4, ch12-14-17-20-branch-claim 3, ch08-next-free-line 5, ch14-board-visibility 5, ch17-23-git-slot-word 4, ch13-23-merge-default 4, ch17-next-free-line 4, ch07-09-manual-wording 4, ch09-slow-tests 3, manual-pypdf-install 4, manual-pip-floor 2, docs05-author-word 2, kit-record-step4 2, m22-records-commits 1, m23-records-crossrefs 1, manual-link-pointers 4). After the Delivery review, five of those lines changed again (Divergences); the count stays 56 and 56. No item unticked.
+
+**Checked.** At /apply (HEAD `65b0b1e`): the seventeen pages unchanged since `1c96493`; `git diff --stat 2b66f27 2fccad2 -- book/` empty; `git log 16fdca6..2fccad2 -- book/` lists `f969c48` and `2b66f27` only; `git diff --name-only 16fdca6 2fccad2 -- book/` lists chapters 8, 12, 14, 17, 18, 19 and 20, both editions; chapter 8 unchanged from `f969c48` to `2b66f27`; chapters 8, 14, 17 and 9 unchanged from `c42e106`, `f8ec9c7`, `4c52280` and `db68417` to `16fdca6`; `0b6105a`'s chapters changed after it only by `4c52280` and `16fdca6`, `7660dfc`'s pt 9 only by `db68417`. The search finds "with the advisor" only at `kit-2026-10-20` :34 and "once for the batch" only at `manual-pip-floor` :78, `manual-link-pointers` :61 and :120, and the records pages' "`make book` is the driver's, once for the batch" (`m22-records-commits` :90, `m23-records-crossrefs` :69), all Out of scope. No em dash in the seventeen pages or this page.
+
+**Divergences.**
+
+* The page says "eighteen pages" (Contract, Edges, Done when) but names seventeen; the seventeen named are the ones changed, and no eighteenth was sought.
+* Items 13, 35, 40 and 47 wrote that the review was "narrower than docs/05 §5, which also has it read this page", but the four paragraphs they describe (`ch08-next-free-line` :60, `ch07-09-manual-wording` :75, `ch09-slow-tests` :55, `docs05-author-word` :76) say the agent read against this page and docs/04, docs/05 §5's own wording, as `ch12-14-17-20-branch-claim` :110, which the page exempts. Behaviour applies the clause only where the agent read the files or hunks alone, so the clause is dropped: the three Done when items read "over ... against this page and docs/04 (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded", and `ch09-slow-tests` :55 keeps only "whether it kept the session's advisor is not recorded".
+* Item 4 left `kit-2026-10-20` :120 with "included; The batch's driver": the semicolon became a full stop.
+
+**Decisions taken alone in /apply.**
+
+* The two review findings were fixed in this delivery's text, the recommended option, since the Behaviour's own condition rules the clause out; if the author holds the Contract's words, items 13, 35, 40 and 47 go back to them.
+
+**Delivery review.** One read-only Opus agent, launched by this lane, read this page, AGENTS.md, docs/04, docs/05 §5's Delivery review slot, `work/done/m24-review.md` :118 to :127, the committed docs/06, the word diff and `-U0` diff of the seventeen pages, and the git history of `16fdca6`, `2b66f27`, `f969c48`, `2fccad2` and the fix-round commits. It found the 56 replacements word for word and nothing else changed, the Contract's git checks holding and the search clean, and noted the page's "eighteen" against seventeen. Two findings: the "narrower than docs/05 §5" clause false on four pages whose paragraphs say "against this page", and a capital after a semicolon at `kit-2026-10-20` :120; both fixed (Divergences). No queue line. Whether it kept the session's advisor is not recorded.
+
+**Proof.** `make verify` exited 0 after the 56 replacements (build, parity, em dash, prose, width, examples, links, disclosure), and again after the review's fixes, this page's last edit and its move. With `git status --short book/` empty, this lane ran `make book` at `65b0b1e` (exit 0); it built `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`, with their EPUBs. No person read them in this run.
+
+```commit
+docs(m24-records-proof): 17 pages tick only what their records hold
+
+- M24 pages: make book items name the driver's run at 2b66f27 and
+  m24-review's build at 2fccad2; review items say what ran
+- M23 fix-round pages: make book items name the driver's run at
+  16fdca6, and 2fccad2 where M24 changed the chapter since
+- Delivery review items and paragraphs: launched by the lane, its
+  advisor not recorded; manual-link-pointers' grep as it printed
+
+work/done/m24-records-proof.md
+```

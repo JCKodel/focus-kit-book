@@ -51,7 +51,7 @@ The `finding` (:35), `candidate` (:36) and `checker` (:37) rows and §5's Milest
 
 * [x] docs/05 §8 and docs/03's `milestone review` row say what the Contract says; no other line of either file changes.
 * [x] No em dash in the changed text; `make verify` green after the last edit.
-* [x] Delivery review as docs/05 §5 says; the page moved to `work/done/` and its commit message suggested; the staging by paths and the docs/06 hunk are the batch driver's steps (`make book` not needed: no chapter changes; the driver runs it once per batch).
+* [x] Delivery review by one read-only Opus agent this lane launched, over the two files' hunks against this page and docs/04 (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded; the page moved to `work/done/` and its commit message suggested; the staging by paths and the docs/06 hunk are the batch driver's steps (`make book` not needed: no chapter changes; the driver runs it once per batch).
 
 **Decisions from the documents.**
 
@@ -73,7 +73,7 @@ The `finding` (:35), `candidate` (:36) and `checker` (:37) rows and §5's Milest
 
 **Proof.** `git diff HEAD -- docs/05-Process.md docs/03-Domain.md`: docs/05 gains one paragraph of ten lines between :391 and the "Each finding becomes" paragraph, no other line touched; docs/03's :33 row gains the Contract's sentence, as Divergences loosens it, before its closing `|`, Portuguese column unchanged; no em dash in either hunk; `make verify` green after the last edit.
 
-**Delivery review:** a read-only Opus agent over the two files' hunks against this page and docs/04: pass with notes. L1, low, in this delivery's text: fixed at the batch driver's decision (Divergences). L2, low, in this delivery's text, recorded above as a decision for the author. L3, low, §8 now says "the person's word" at :371 (start the reading) and :393 (hand over the tests), a wording risk the paragraph's own qualifier mostly prevents: a stylistic note, no queue line. L4, note: the docs/03 row leaves the PDFs and the dropped list to docs/05 §8, which it cites.
+**Delivery review:** a read-only Opus agent, launched by this lane, over the two files' hunks against this page and docs/04: pass with notes. L1, low, in this delivery's text: fixed at the batch driver's decision (Divergences). L2, low, in this delivery's text, recorded above as a decision for the author. L3, low, §8 now says "the person's word" at :371 (start the reading) and :393 (hand over the tests), a wording risk the paragraph's own qualifier mostly prevents: a stylistic note, no queue line. L4, note: the docs/03 row leaves the PDFs and the dropped list to docs/05 §8, which it cites.
 
 ```commit
 docs(docs05-author-word): let the author's word hand a review its tests

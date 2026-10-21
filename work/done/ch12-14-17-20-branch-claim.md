@@ -91,7 +91,7 @@
 * [x] Each chapter still opens with its value; no filler and nothing useful cut.
 * [x] No number added; no em dash, version, date or commit hash in a chapter; no private case used, so no approval owed.
 * [x] `make verify` green.
-* [x] `make book`, with both PDF paths given to the person: run by the batch's driver, once per batch.
+* [x] `make book` built both editions: the batch's driver ran it after this lane, at `2b66f27`, this delivery's commit (exit 0), and `work/done/m24-review.md` records the build at `2fccad2`, the same `book/`, with both PDF paths.
 
 **Built.** Every Contract passage in both editions: chapter 12 :27, :28 and the `/propose` key point; chapter 14 :60, the new sentence after it on the branch as the claim, :71-72 and the free-line and kanban key points; chapter 17 :119, :132 and the manager key point; chapter 18 :25, :27 and `git push -u origin lend-book` (pt `emprestar-livro`) in the block; chapter 19 :179, :194 and the worktree key point; chapter 20 steps 1, 2 and 4 and the pull-request key point. Chapter 14's new sentence makes pt's later line numbers one more than before.
 
@@ -107,7 +107,7 @@
 * Chapter 19 :179 keeps "or reuses the one that exists" as the Contract fixes it; chapter 12 :28 and 18 :25 already say the reuse is for a definition that resumes.
 * For the driver: the queue line should name "chapters 12, 14, 17, 18, 19 and 20" (Decisions taken alone above).
 
-**Delivery review.** A read-only general-purpose agent on Opus read `git diff HEAD` of the twelve chapters against this page, docs/03, docs/04 and the kit source. Nothing broke the page or docs/04; six wording preferences:
+**Delivery review.** A read-only general-purpose agent on Opus, launched by this lane, read `git diff HEAD` of the twelve chapters against this page, docs/03, docs/04 and the kit source; whether it kept the session's advisor, as docs/05 §5 asks, is not recorded. Nothing broke the page or docs/04; six wording preferences:
 
 * en 14:72 "takes a line ... as taken": fixed, "counts a line whose branch exists as taken".
 * en and pt 19:350 "on it" / "nele" ambiguous: fixed, "on the branch" / "no branch".
@@ -116,7 +116,7 @@
 * en and pt 12:28, dense participle chain: kept, the Contract's structure; accurate.
 * pt 12 "enviado/enviando": kept, decided above.
 
-**Proof.** `make verify` passed whole (build, parity, em dash, prose, width, examples, links, disclosure) after the last edit, the page's move included. `make book` is run by the driver once per batch.
+**Proof.** `make verify` passed whole (build, parity, em dash, prose, width, examples, links, disclosure) after the last edit, the page's move included. The batch's driver ran `make book` at `2b66f27`, this delivery's commit (exit 0); `work/done/m24-review.md` records the build at `2fccad2`, the same `book/`, with both PDF paths.
 
 ```commit
 docs(ch12-14-17-20-branch-claim): teach the pushed branch as claim

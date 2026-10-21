@@ -59,15 +59,15 @@
 * [x] The chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
 * [x] No version, date, before/after or narration of a run in the text; no em dash; no private case used.
 * [x] `make verify` green after the last edit, its result recorded in this page's Proof.
-* [x] `make book` built both PDFs, its run and both PDF paths recorded in this page's Proof; when a batch's driver runs it instead, this item is ticked only on that run as the Proof records it.
-* [x] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
+* [x] `make book` built both PDFs: the batch's driver ran it after the last M23 fix lane, at `16fdca6` (exit 0), whose chapter 17 is as this delivery left it, and `work/done/m24-review.md` records the build at `2fccad2`, with both PDF paths, after M24 changed chapter 17 (Proof).
+* [x] Delivery review by one read-only Opus agent this lane launched, over chapter 17 and this page (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 
 **Proof.**
 
 `git diff HEAD -- book/` shows chapter 17 only, 6 insertions and 6 deletions: lines :124, :127 and :128 in each edition, with the strings the Contract names; no line moved.
 Both Done-when greps find nothing; no chapter still says "4 of 7" or "4 de 7".
 
-`make verify` green after the last edit. `make book` is run by the driver once for the batch.
+`make verify` green after the last edit. The batch's driver ran `make book` after the last M23 fix lane, at `16fdca6` (exit 0), whose chapter 17 is as this delivery left it; `work/done/m24-review.md` records the build at `2fccad2`, with both PDF paths, after M24 changed chapter 17.
 
 **Divergences.** None.
 
@@ -75,7 +75,7 @@ Both Done-when greps find nothing; no chapter still says "4 of 7" or "4 de 7".
 
 * The open branch of the queue line is taken with the recommended option, as the page's Decisions taken alone already say: the answer names `m1-review`.
 
-**Delivery review.** One read-only Opus agent over this delivery's paths (`git diff HEAD` of chapter 17 en and pt) and this page, against the page, docs/04 and AGENTS.md; it read chapter 11 en and pt :45 to :100, chapter 14 en and pt :64 to :80, docs/03's `free line` row, chapter 17 en and pt :110 to :140 and chapter 15 en by search. Verdict: passes, no findings; the Contract strings are in place in both editions and nothing else changed, `m1-review` is the first free line by chapter 14's rule, "4 of 6" matches chapter 11's six lines, :131 to :134 still hold, and `m1-review` stays in English in the pt edition as chapter 11 pt :57 and :96 write it.
+**Delivery review.** One read-only Opus agent, launched by this lane, over this delivery's paths (`git diff HEAD` of chapter 17 en and pt) and this page, against the page, docs/04 and AGENTS.md; it read chapter 11 en and pt :45 to :100, chapter 14 en and pt :64 to :80, docs/03's `free line` row, chapter 17 en and pt :110 to :140 and chapter 15 en by search. Verdict: passes, no findings; the Contract strings are in place in both editions and nothing else changed, `m1-review` is the first free line by chapter 14's rule, "4 of 6" matches chapter 11's six lines, :131 to :134 still hold, and `m1-review` stays in English in the pt edition as chapter 11 pt :57 and :96 write it.
 It noted, not as a finding, that the answer starts the milestone's review while `return-book` is still being built, which chapter 15 :25 and :128 allow.
 
 **Noted, not fixed.** Nothing.

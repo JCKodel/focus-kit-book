@@ -65,7 +65,7 @@
 * [x] A search of the four pages finds no "12 and 13", "and 12," or "and chapter 12" naming `ch10-12-run-manual`'s or M23's chapters, no `ch13-19-session-folder`, no "lines 250 to 253", and one account of who picked the Portuguese phrase.
 * [x] No em dash in the edited sentences.
 * [x] `make verify` green after the last edit.
-* [x] Delivery review as docs/05 §5 says: a read-only Opus agent with the advisor reads the diff against this page; its findings fixed or recorded (Delivery review). Whether it kept the advisor is not recorded.
+* [x] Delivery review by a read-only Opus agent this lane launched, over the diff against this page; its findings fixed or recorded (Delivery review). Whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 * [x] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging are the batch driver's steps. No chapter changes, so `make book` is the driver's, once for the batch.
 
 **Built.** The eight replacements, word for word, each found by its section and quoted text after `kit-record-step4` (`9bd46a2`) and `m23-records-proof` (`8eb5748`); the line numbers at `7e7fcae` still held. `git diff HEAD` of the four pages shows 8 lines out and 8 in, two per page, nothing else.

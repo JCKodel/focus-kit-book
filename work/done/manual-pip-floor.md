@@ -40,7 +40,7 @@ Neighbouring lines on the same file: none open. `manual-link-pointers` and `manu
 * [x] In the pip 23.0 venv, `pip install --dry-run pypdf` prints `Would install pypdf-...`, recorded.
 * [x] The manual's macOS bullet reads as Contract says; `git diff` of the manual shows only that line changed, recorded.
 * [x] `make verify` green.
-* [x] The Delivery review as docs/05 §5 says.
+* [x] Delivery review by one read-only Opus agent this lane launched, over the manual and this page (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 
 **Decisions taken alone.**
 
@@ -85,7 +85,7 @@ After the proof, the machine's `python3 -m pip --version` still prints `pip 26.2
 
 * The 3.14 failure changes nothing in the manual: it is about running an old pip on a new Python, not about the flag, and the 3.9 venvs show the floor exactly.
 
-**Delivery review.** One read-only Opus agent over this delivery's paths (`git diff HEAD` of the manual and this page against its committed version): nothing breaks the page, docs/04 or the text written. It confirmed :15 matches the Contract word for word and is the only changed line, the rest of the manual stays true, and the Proof reproduces in the same venvs; Apple's `/usr/bin/python3` is not externally managed, so dropping the flag holds there. The Divergence and the Decision are sound and the commit block follows docs/05 §6. Outside the page: nothing. Stylistic notes, kept: the page has both "Decisions taken alone." and "Decisions.", an established pattern; the 26.0.1 pip of `/usr/bin/python3` lives in the user site, not Apple's stock install.
+**Delivery review.** One read-only Opus agent, launched by this lane, over this delivery's paths (`git diff HEAD` of the manual and this page against its committed version): nothing breaks the page, docs/04 or the text written. It confirmed :15 matches the Contract word for word and is the only changed line, the rest of the manual stays true, and the Proof reproduces in the same venvs; Apple's `/usr/bin/python3` is not externally managed, so dropping the flag holds there. The Divergence and the Decision are sound and the commit block follows docs/05 §6. Outside the page: nothing. Stylistic notes, kept: the page has both "Decisions taken alone." and "Decisions.", an established pattern; the 26.0.1 pip of `/usr/bin/python3` lives in the user site, not Apple's stock install.
 
 ```commit
 docs(manual-pip-floor): say what to run when pip lacks the flag

@@ -41,9 +41,9 @@ Neighbouring line on the same file: `manual-link-pointers` edits this manual fir
 * [x] On this machine, `python3 -m pip install --dry-run pypdf` and `python3 -m pip install --dry-run --user pypdf` print `error: externally-managed-environment`, and `python3 -m pip install --dry-run --user --break-system-packages pypdf` prints `Would install pypdf-...`, recorded.
 * [x] `python3 -c "import pypdf"` exits 0, recorded.
 * [x] The manual's macOS sentence reads as Contract says; `grep -n "pip install" docs/manuals/build-the-book-from-a-clone.md` prints only that line, recorded.
-* [x] `make book` prints both PDF paths, recorded (run by the driver once for the batch).
+* [x] `make book` built both PDFs: the batch's driver ran it after the last M23 fix lane, at `16fdca6` (exit 0), and `work/done/m24-review.md` records the build at `2fccad2`, with both PDF paths.
 * [x] `make verify` green.
-* [x] The Delivery review as docs/05 §5 says.
+* [x] Delivery review by one read-only Opus agent this lane launched, over the manual and this page (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 
 **Decisions taken alone.**
 
@@ -73,7 +73,7 @@ $ grep -n "pip install" docs/manuals/build-the-book-from-a-clone.md
 15:  * macOS: `brew install pandoc weasyprint` and `python3 -m pip install --user --break-system-packages pypdf`, for the `python3` that `make book` runs; Homebrew's Python refuses a bare `pip install` and has no pypdf formula.
 ```
 
-`make verify` green. `make book` is run by the driver once for the batch.
+`make verify` green. The batch's driver ran `make book` after the last M23 fix lane, at `16fdca6` (exit 0); `work/done/m24-review.md` records the build at `2fccad2`, with both PDF paths.
 
 **Divergences.**
 
@@ -83,7 +83,7 @@ $ grep -n "pip install" docs/manuals/build-the-book-from-a-clone.md
 
 * `--ignore-installed` is used only in the proof, never in the manual: it shows what a machine without pypdf would get, without changing this one.
 
-**Delivery review.** One read-only Opus agent over this delivery's paths (`git diff HEAD` of the manual and this page against its committed version): nothing breaks the page, docs/04 or the text written. It confirmed :15 matches the Contract exactly and is the only changed line, the rest of the manual stays true, the Proof reproduces on this machine, the Divergence is sound and the commit block follows docs/05 §6. It noted the `make book` item is ticked before the driver's batch run; kept, as the batch rules say. Outside the page: Behaviour says the flag "is accepted and changes nothing" on a `python3` that is not externally managed, which holds for pip 23.0.1 or later; an older pip (Apple's `/usr/bin/python3` with its stock pip) rejects `--break-system-packages` as an unknown option. Not reproduced here (this machine's `/usr/bin/python3` has pip 26.0.1); a queue line of its own.
+**Delivery review.** One read-only Opus agent, launched by this lane, over this delivery's paths (`git diff HEAD` of the manual and this page against its committed version): nothing breaks the page, docs/04 or the text written. It confirmed :15 matches the Contract exactly and is the only changed line, the rest of the manual stays true, the Proof reproduces on this machine, the Divergence is sound and the commit block follows docs/05 §6. It noted the `make book` item is ticked before the driver's batch run; kept, as the batch rules say. Outside the page: Behaviour says the flag "is accepted and changes nothing" on a `python3` that is not externally managed, which holds for pip 23.0.1 or later; an older pip (Apple's `/usr/bin/python3` with its stock pip) rejects `--break-system-packages` as an unknown option. Not reproduced here (this machine's `/usr/bin/python3` has pip 26.0.1); a queue line of its own.
 
 **Noted, not fixed.** The pip 23.0.1 floor of `--break-system-packages`, a queue line of its own.
 

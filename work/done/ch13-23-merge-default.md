@@ -70,18 +70,18 @@
 * [x] Each chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
 * [x] No version, date, before/after or narration of a run in the text; no em dash; no number added, no private case used.
 * [x] `make verify` green after the last edit, its result recorded in this page's Proof.
-* [x] `make book` built both PDFs, its run and both PDF paths recorded in this page's Proof; when a batch's driver runs it instead, this item is ticked only on that run as the Proof records it.
-* [x] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
+* [x] `make book` built both PDFs: the batch's driver ran it after this lane, at `16fdca6`, this delivery's commit (exit 0), and `work/done/m24-review.md` records the build at `2fccad2`, with both PDF paths, after M24 changed chapters 18 and 19 (Proof).
+* [x] Delivery review by one read-only Opus agent this lane launched, over this delivery's paths (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 
 **Proof.**
 
 `git diff HEAD -- book/` shows the eight chapter files only, 12 insertions and 12 deletions: the twelve lines the Contract names, six in each edition; no line added or removed, so no line moved.
 
-`make verify` green after the last edit. `make book` is run by the driver once for the batch.
+`make verify` green after the last edit. The batch's driver ran `make book` at `16fdca6`, this delivery's commit (exit 0); `work/done/m24-review.md` records the build at `2fccad2`, with both PDF paths, after M24 changed chapters 18 and 19.
 
 **Divergences.** None.
 
-**Delivery review.** One read-only Opus agent over this delivery's paths (`git diff HEAD` of the eight chapter files and this page), against the page, AGENTS.md and docs/04, with the surrounding paragraphs of the four chapters in both editions and chapters 17 :132, 18 :26, 20 :35, 20 :86, 23 :63 and 23 :112. Verdict: no defects; every Contract string in place word for word in both editions, nothing else changed in the four chapters, "by hand" no longer near the merge, one sentence per line kept, no em dash, version, date or run narration added, "pela linha de comando" the book's term.
+**Delivery review.** One read-only Opus agent, launched by this lane, over this delivery's paths (`git diff HEAD` of the eight chapter files and this page), against the page, AGENTS.md and docs/04, with the surrounding paragraphs of the four chapters in both editions and chapters 17 :132, 18 :26, 20 :35, 20 :86, 23 :63 and 23 :112. Verdict: no defects; every Contract string in place word for word in both editions, nothing else changed in the four chapters, "by hand" no longer near the merge, one sentence per line kept, no em dash, version, date or run narration added, "pela linha de comando" the book's term.
 Notes, outside the Contract, both called wording preferences by the review:
 1. Chapter 13 :108 (both editions): the reader's next steps say "commit (and merge, on a delivery branch)" with no "or ask the agent"; the reader's default steps, with no "by hand".
 2. Chapter 19 :185 (both editions): "By default, you use the delivery, review and commit on the branch, merge into `main`" has no "or ask the agent to"; it already says "By default", and :145 and :194 give the other ways.

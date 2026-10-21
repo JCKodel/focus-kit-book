@@ -86,7 +86,7 @@ Exact replacements, each found by its section and quoted text (line numbers are 
 * [x] A search of the three pages finds no "What the install never touches" and no "Only this delivery's paths staged"; `ch20-merge-and-marks`'s Proof still says "three hunks" for its own.
 * [x] No em dash; no private case, so OD-3 approval is inapplicable.
 * [x] `make verify` green after the last edit.
-* [x] Delivery review as docs/05 §5 says: a read-only Opus agent with the session's advisor reads the diff of the three pages and this page against this page, docs/04 and the three commits; its findings fixed or recorded.
+* [x] Delivery review by a read-only Opus agent this lane launched, over the diff of the three pages and this page against this page, docs/04 and the three commits; its findings fixed or recorded (Delivery review). Whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 * [x] Page in `work/done/`, the commit suggested in a `commit` block; the line's `[x]` and the staging are the batch driver's steps. No chapter changes, so `make book` is the driver's, once for the batch.
 
 **Built.** The 7 replacements, matched by their quoted text; the line numbers at `aa828d6` still held, :67 of `ch20-merge-and-marks` among them after `m23-records-proof`. `git diff HEAD -U0` of the three pages shows 7 hunks (`ch08-13-17-next-line` 3, `ch20-merge-and-marks` 1, `ch08-13-20-default-review` 3), 4 in a plain `git diff HEAD`, 7 lines in and 6 out, nothing else; no item unticked.

@@ -71,15 +71,15 @@
 * [x] Each chapter still opens with its value; no filler, nothing useful cut; one sentence per line kept.
 * [x] No version, date, before/after or narration of a run in the text; no em dash; no number added, no private case used.
 * [x] `make verify` green after the last edit, its result recorded in this page's Proof.
-* [x] `make book` built both PDFs, its run and both PDF paths recorded in this page's Proof; when a batch's driver runs it instead, this item is ticked only on that run as the Proof records it.
-* [x] The Delivery review as docs/05 §5 says, recorded on this page with who read what.
+* [x] `make book` built both PDFs: the batch's driver ran it after the last M23 fix lane, at `16fdca6` (exit 0), whose chapters 17, 18, 19 and 23 are as M23's fix round left them, and `work/done/m24-review.md` records the build at `2fccad2`, with both PDF paths, after M24 changed chapters 17, 18 and 19 (Proof).
+* [x] Delivery review by one read-only Opus agent this lane launched, over this delivery's paths (Delivery review); whether it kept the session's advisor, as docs/05 §5 asks, is not recorded.
 
 **Proof.**
 
 `git diff HEAD -- book/` shows the eight chapter files only, 12 insertions and 10 deletions: ten edited lines and chapter 18's new line in each edition.
 Chapter 18's new line moves the sentences that stay: chapter 18 :190 and :203 are now :191 and :204; chapter 19 :194 and :351 and chapter 23 :63 have not moved.
 
-`make verify` green after the last edit. `make book` is run by the driver once for the batch.
+`make verify` green after the last edit. The batch's driver ran `make book` after the last M23 fix lane, at `16fdca6` (exit 0); `work/done/m24-review.md` records the build at `2fccad2`, with both PDF paths, after M24 changed chapters 17, 18 and 19.
 
 **Divergences.**
 
@@ -89,7 +89,7 @@ Chapter 18's new line moves the sentences that stay: chapter 18 :190 and :203 ar
 
 * The four review findings outside the page go to the queue as lines of their own, not widened here.
 
-**Delivery review.** One read-only Opus agent over this delivery's paths (`git diff HEAD` of the eight chapter files, word diff, and this page), against the page, AGENTS.md, docs/04, docs/05 §5, chapter 20 en/pt :8, :35, :85, :86, chapter 13 en/pt :169, :216, :265, and the neighbouring lines of chapters 18 and 19; it did not read docs/03, since the page adds no term. Verdict: passes; every Contract string in place word for word in both editions, nothing else changed in the four chapters, one sentence per line kept, the wording agrees with chapters 13 and 20, no em dash, number, private case, version, date or run narration added.
+**Delivery review.** One read-only Opus agent, launched by this lane, over this delivery's paths (`git diff HEAD` of the eight chapter files, word diff, and this page), against the page, AGENTS.md, docs/04, docs/05 §5, chapter 20 en/pt :8, :35, :85, :86, chapter 13 en/pt :169, :216, :265, and the neighbouring lines of chapters 18 and 19; it did not read docs/03, since the page adds no term. Verdict: passes; every Contract string in place word for word in both editions, nothing else changed in the four chapters, one sentence per line kept, the wording agrees with chapters 13 and 20, no em dash, number, private case, version, date or run narration added.
 Findings:
 1. Text written, minor: pt 23 :112 "que entram" reads better singular after "cada ... e cada ...". Fixed: "que entra", the Contract corrected.
 2. Outside the page: chapter 19 :103 (both editions), "When a delivery is done, you bring it into `main` from `main/` with a merge commit", says who merges with no "by default" or slot's word. A queue line.
