@@ -43,7 +43,7 @@ O agente escreve os arquivos do kit como o arquivo de setup os guarda agora, e a
 Ele substitui um arquivo só quando esse arquivo é igual a um que o kit entregou, nesta versão ou numa anterior, e a anterior se confirma pelo histórico do kit, `git show <commit>:SETUP.md` no repositório dele, ou, sem esse histórico à mão, pela sua palavra de que o arquivo nunca foi editado; um nome conhecido ou uma linha `metadata.version` sozinhos não provam isso.
 Um comando seu na pasta de um host, ou uma edição que você fez à mão num dos arquivos do kit, uma linha que você acrescentou ao `.claude/skills/propose/SKILL.md`, por exemplo, faz a atualização parar antes de escrever ou remover qualquer arquivo.
 O agente mostra a sua edição como um diff contra o arquivo do kit em que ela foi feita, e a mudança do próprio kit nesse arquivo desde então à parte e resumida; ele ainda relata as migrações e o próximo comando, e você decide se fica com a sua edição ou a substitui, sabendo que uma regra que a sua edição acrescentou a um comando pode virar um slot do docs/05 §5, que os comandos seguem (capítulo 7).
-Essa verificação foi testada numa cópia dos arquivos do kit do livro, feita fora do repositório do livro: uma linha acrescentada ao `propose/SKILL.md` parou assim a atualização para o focus-kit 2026.10.20.1, e todos os arquivos da cópia ficaram iguais depois.
+Essa verificação foi testada numa cópia dos arquivos do kit do livro, feita fora do repositório do livro: uma linha acrescentada ao `apply/SKILL.md` parou assim a atualização para o focus-kit 2026.10.20.2, e todos os arquivos da cópia ficaram iguais depois.
 
 ## O que uma atualização relata
 
@@ -53,38 +53,29 @@ Ele compara os arquivos com os seus próprios modelos e relata cada migração, 
 Uma migração pode citar uma regra, uma linha da fila ou um slot.
 As suas escolhas ficam: um docs/05 cujo §5 diz "trunk, uma sessão por vez" vê proposto o texto para duas sessões numa pasta, e mantém o seu até o time aceitar a mudança.
 
-Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.20.1 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro são em inglês, e o relatório propôs o texto em inglês. O registro dessa atualização é o `work/done/kit-2026-10-20-1.md`, no repositório do livro.
+Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.20.2 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro e o relatório são em inglês. O registro dessa atualização é o `work/done/kit-2026-10-20-2.md`, no repositório do livro.
 
 ```
-Instalado: focus-kit 2026.10.20.1, em cada SKILL.md.
-Migrações de processo pendentes, por documento e seção, encurtadas:
+Instalado: focus-kit 2026.10.20.2, em cada SKILL.md.
+Migrações de processo, por documento e seção, encurtadas: nenhuma
+pendente.
 
 * docs/05, números de seção: batem com o modelo (§4 a fila,
   §5 os slots, §6 commit, §8 fechar um marco). Nenhuma.
-* docs/05 §4, ordem como prioridade, after e o token (PA) nas
-  linhas da fila: falta o token. Proposto: o primeiro parágrafo
-  inteiro do modelo, que agora diz: "Uma linha pode levar (PA) depois
-  do slug: se o /propose e o /apply dela podem rodar enquanto as
-  linhas acima dela estão em andamento. P: a definição não tira
-  nada das páginas delas; A: a construção não toca nenhum arquivo
-  delas; - espera até que toda linha acima esteja [>] ou além antes
-  do /propose, [x] antes do /apply; o after vale para os dois
-  comandos, com ou sem token. Quem muda a fila rejulga os tokens
-  que a mudança afeta; o /propose corrige um token pela página." E
-  o último parágrafo removido: a primeira frase está no §8, a
-  segunda no novo primeiro parágrafo.
 * docs/05 §5, Git: uma escolha do projeto, não uma migração: trunk,
-  com a Publish policy, o agente nunca envia. Nenhuma.
+  com a Publish policy, o agente nunca envia. Um manual que deixe
+  uma sessão no main/ editar os worktrees só é pedido a um slot Git
+  de worktree. Nenhuma.
 
-Os outros itens cobrem o docs/05 §§2 e 3, os outros slots do §5,
+Os outros itens cobrem o docs/05 §§2 a 4, os outros slots do §5,
 os §§6 a 8, o docs/04, o docs/06 e o AGENTS.md.
-Próximo: /propose ch08-update-2026-10-20-1, quando
-kit-2026-10-20-1 estiver [x].
+Próximo: /propose ch08-update-2026-10-20-2, quando
+kit-2026-10-20-2 estiver [x].
 ```
 
 Cada item cita um documento e uma seção, e termina num de três resultados.
 Ele bate e não precisa de nada, e diz isso: `Nenhuma`.
-Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra, como no docs/05 §4.
+Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra.
 Ou ele difere por uma escolha que o projeto fez e registrou com uma data ou um ADR, como o slot Git do livro: o item cita essa escolha e não pede mudança.
 Todo item é relatado, nunca feito: a atualização não escreve nenhum desses documentos.
 
@@ -101,9 +92,11 @@ Ela nunca pede que você rode o `/brainstorm` ou o `/analyze` de novo: eles escr
 Ela cita em vez disso o comando que a primeira linha livre do docs/06 pede, na forma do seu host: o `/propose` e o seu slug para uma linha `[ ]`, o `/apply` e o seu slug para uma `[>]`.
 No trunk essa linha é lida na fila da pasta; com um branch ou um worktree por entrega, o branch principal mostra cada linha como estava até o merge dela, então a atualização roda `git fetch` antes, toma como ocupada, antes mesmo de qualquer marca dela ser enviada, uma linha cujo branch existe, mostre o que mostrar o branch principal, e lê a linha de cada slug no branch dele, local ou remoto, e as linhas que só um branch tem, reconciliando-as pelo slug ([capítulo 14](14-queue-states.md)).
 Uma versão que não pede nada aos seus documentos não relata migração: uma versão que muda só os comandos, como o `/apply` mostrar a sua mensagem de commit também na conversa, não muda mais nada.
+Uma verificação que diz respeito a uma escolha que o projeto não fez também não pede nada a ele, como mostra o trecho acima: o manual é pedido a um slot Git de worktree, e o do livro é trunk.
 Um docs/05 cujo slot Git escolheu um worktree por entrega e não cita pasta recebe uma migração só quando o projeto já trabalha num contêiner, a pasta que o [capítulo 19](19-worktrees.md) organiza com o checkout e uma pasta oculta para o histórico e os worktrees, e essa pasta oculta guarda `repo.git/`.
 O relatório então propõe escrever ali o nome dessa pasta e o prefixo que os branches das entregas já usam, para que nada mude de lugar.
-Sem contêiner ainda, o slot vale o padrão do kit, que esse capítulo cita, e o relatório não propõe nada.
+Sem contêiner ainda, o slot vale o padrão do kit, que esse capítulo cita, e o relatório não propõe pasta.
+Seja qual for a pasta, um slot Git de worktree cujo projeto não tem um manual que deixe uma sessão no `main/`, onde o `/propose` roda, editar os worktrees é relatado como faltando esse manual.
 
 Para saber por que uma migração existe, leia o changelog do kit, `CHANGELOG.md` no repositório dele, `CHANGELOG.pt.md` em português.
 Ele tem uma entrada por versão, a mais nova primeiro; a versão é a linha `Version:` do `SETUP.md`, o mesmo valor do `metadata.version` em cada `SKILL.md`.

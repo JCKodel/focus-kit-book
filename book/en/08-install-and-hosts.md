@@ -43,7 +43,7 @@ The agent writes the kit's files as the setup file holds them now, and the chang
 It replaces a file only when that file matches one the kit shipped, in this version or an earlier one, and the earlier one is established from the kit's history, `git show <commit>:SETUP.md` in the kit's repository, or, without that history at hand, by your word that the file was never edited; a familiar name or a `metadata.version` line alone does not prove it.
 A command of your own in a host's folder, or an edit you made by hand to one of the kit's files, a line you added to `.claude/skills/propose/SKILL.md` say, stops the update before it writes or removes any file.
 The agent shows your edit as a diff against the kit file it was made on, and the kit's own change to that file since then apart and in short; it still reports the migrations and the next command, and you decide whether to keep your edit or replace it, knowing that a rule your edit added to a command can become a slot of docs/05 §5, which the commands follow (chapter 7).
-This check was tried on a copy of the book's kit files, made outside the book's repository: a line appended to `propose/SKILL.md` stopped the update to focus-kit 2026.10.20.1 this way, and every file of the copy was unchanged afterwards.
+This check was tried on a copy of the book's kit files, made outside the book's repository: a line appended to `apply/SKILL.md` stopped the update to focus-kit 2026.10.20.2 this way, and every file of the copy was unchanged afterwards.
 
 ## What an update reports
 
@@ -53,37 +53,27 @@ It compares the files with its own templates and reports each migration, a chang
 A migration may name a rule, a queue line or a slot.
 Your choices stay: a docs/05 whose §5 says "trunk, one session at a time" sees the wording for two sessions in one folder proposed, and keeps its own until the team accepts the change.
 
-Here is part of the report the update to focus-kit 2026.10.20.1 gave on this book's own repository, shortened and paraphrased from the record of that update, `work/done/kit-2026-10-20-1.md` in the book's repository:
+Here is part of the report the update to focus-kit 2026.10.20.2 gave on this book's own repository, shortened and paraphrased from the record of that update, `work/done/kit-2026-10-20-2.md` in the book's repository:
 
 ```
-Installed: focus-kit 2026.10.20.1, in every SKILL.md.
-Pending process migrations, by document and section, shortened:
+Installed: focus-kit 2026.10.20.2, in every SKILL.md.
+Process migrations, by document and section, shortened: none pending.
 
 * docs/05, section numbers: match the template (§4 the queue,
   §5 the slots, §6 commit, §8 closing a milestone). None.
-* docs/05 §4, order as priority, after and the (PA) token on queue
-  lines: lacks the token. Proposed: the template's first paragraph
-  whole, which now says: "A line may carry (PA) after the slug:
-  whether its /propose and its /apply may run while the lines above
-  it are in flight. P: the definition takes nothing from their
-  pages; A: the build touches none of their files; - waits, for
-  every line above to be [>] or beyond before /propose, [x] before
-  /apply; after holds for both commands, with or without a token.
-  Whoever changes the queue re-judges the tokens it affects;
-  /propose corrects a token from the page." And its last paragraph
-  removed: its first sentence is in §8, its second in the new first
-  paragraph.
 * docs/05 §5, Git: a project choice, not a migration: trunk,
-  with the Publish policy, the agent never pushes. None.
+  with the Publish policy, the agent never pushes. A manual letting
+  a session in main/ edit the worktrees is asked only of a worktree
+  Git slot. None.
 
-The other items cover docs/05 §§2 and 3, the other slots of §5,
+The other items cover docs/05 §§2 to 4, the other slots of §5,
 §§6 to 8, docs/04, docs/06 and AGENTS.md.
-Next: /propose ch08-update-2026-10-20-1, once kit-2026-10-20-1 is [x].
+Next: /propose ch08-update-2026-10-20-2, once kit-2026-10-20-2 is [x].
 ```
 
 Each item names a document and a section, and ends in one of three outcomes.
 It matches and needs nothing, and says so: `None`.
-It lacks something, and the item gives the wording the template proposes and where it goes, as for docs/05 §4.
+It lacks something, and the item gives the wording the template proposes and where it goes.
 Or it differs by a choice the project made and recorded with a date or an ADR, as the book's Git slot does: the item names that choice and asks for no change.
 Every item is reported, never done: the update writes none of these documents.
 
@@ -100,9 +90,11 @@ It never asks you to run `/brainstorm` or `/analyze` again: those write a projec
 It names instead the command docs/06's first free line wants, in your host's form: `/propose` and its slug for a `[ ]` line, `/apply` and its slug for a `[>]` one.
 On trunk that line is read in the queue of the folder; with a branch or a worktree per delivery the main branch shows each line as it was until its merge, so the update runs `git fetch` first, counts a line whose branch exists as taken even before any of its marks is pushed, whatever the main branch shows, and reads each slug's line from its branch, local or remote, and the lines only a branch has, reconciling them by slug ([chapter 14](14-queue-states.md)).
 A version that asks nothing of your documents reports no migration: a version that changes only the commands, such as `/apply` showing its commit message in the conversation too, changes nothing else.
+A check that concerns a choice the project did not make asks nothing of it either, as the excerpt above shows: the manual is asked of a worktree Git slot, and the book's is trunk.
 A docs/05 whose Git slot chose a worktree per delivery and names no folder gets a migration only when the project already works in a container, the folder [chapter 19](19-worktrees.md) lays out with the checkout and a hidden folder for the history and the worktrees, and that hidden folder holds `repo.git/`.
 The report then proposes writing in that folder's name and the prefix the delivery branches already use, so nothing moves.
-With no container yet, the slot means the kit's default, which that chapter names, and the report proposes nothing.
+With no container yet, the slot means the kit's default, which that chapter names, and the report proposes no folder.
+Whatever the folder, a worktree Git slot whose project has no manual letting a session in `main/`, where `/propose` runs, edit the worktrees is reported as lacking it.
 
 To know why a migration exists, read the kit's changelog, `CHANGELOG.md` in its repository, `CHANGELOG.pt.md` in Portuguese.
 It has one entry per version, newest first; the version is the `Version:` line of `SETUP.md`, the same value as the `metadata.version` in each `SKILL.md`.
