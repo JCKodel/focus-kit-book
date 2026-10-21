@@ -89,21 +89,28 @@ private case is used, the author's approval of the anonymized text
 
 ## 4. The queue
 
-docs/06: one line per delivery, in order, under milestones. The order is
-the priority: the next delivery is the first free line, and the person
-reorders by conversation. A line is the mark, the slug, one sentence and
-its suffixes; what happened goes on the page, because /propose reads the
+docs/06: one line per delivery, in order, under milestones, edited by
+conversation in any session. The order is the priority: the next
+delivery is the first free line, and the person reorders by
+conversation. A line is the mark, the slug, one sentence and its
+suffixes; what happened goes on the page, because /propose reads the
 whole queue. A line that needs another done first ends with
 `· after <slug>`, written when the line is added; it is free when every
 line it names is `[x]`. A line that no clause of the current milestone's
 paragraph needs, whoever adds it, goes under the next milestone, created
 when missing with a paragraph that line answers and its review last; a
-finding of the milestone's own review stays in it (§8).
-Asked what can run at the same time, answer from
-the queue: the free lines, and among them the ones that touch different
-files, judged from their pages and docs/01. The line never
-leaves the queue; it changes mark, at the moment the work changes, so the
-queue shows what is happening while it happens:
+finding of the milestone's own review stays in it (§8). A line may carry
+`(PA)` after the slug: whether its /propose and its /apply may run while
+the lines above it are in flight. `P`: the definition takes nothing from
+their pages; `A`: the build touches none of their files; `-` waits, for
+every line above to be `[>]` or beyond before /propose, `[x]` before
+/apply; `after` holds for both commands, with or without a token.
+Whoever changes the queue re-judges the tokens it affects; /propose
+corrects a token from the page. Asked what can run at the same time,
+answer from the queue: the free lines, by their tokens where they have
+one, else the ones that touch different files, judged from their pages
+and docs/01. The line never leaves the queue; it changes mark as the
+work changes, so the queue shows what is happening while it happens:
 
 | Mark | Means | Set by |
 |---|---|---|
@@ -154,10 +161,11 @@ These are the marks of focus-kit 2026.10.05, the fourth case a line
 waits in is that of 2026.10.18, and the ended and dropped lines are
 those of 2026.10.18.1, where a board sees a mark is that of
 2026.10.19, how the queue is read with a branch or a worktree per
-delivery is that of 2026.10.19.1, and the branch as the claim of its
-line is that of 2026.10.20 (ADR-0018 and its amendments
-`kit-2026-10-18`, `kit-2026-10-18-1`, `kit-2026-10-19`,
-`kit-2026-10-19-1` and `kit-2026-10-20`).
+delivery is that of 2026.10.19.1, the branch as the claim of its line
+is that of 2026.10.20, and the `(PA)` token on queue lines is that of
+2026.10.20.1 (ADR-0018 and its amendments `kit-2026-10-18`,
+`kit-2026-10-18-1`, `kit-2026-10-19`, `kit-2026-10-19-1`,
+`kit-2026-10-20` and `kit-2026-10-20-1`).
 
 Two sessions in one working tree, on free lines that touch different
 files, are the normal case of parallel work on trunk. Another line
@@ -178,9 +186,6 @@ file with one side or downgrade a completed line using a stale copy.
 Check the page at the expected path. A conflicting state or scope is
 reported for resolution, never guessed. Apply the same care to shared
 domain terms and ADRs.
-
-Each milestone is planned with its review as the last line (§8). Edited by
-conversation in any session.
 
 ## 5. This project
 

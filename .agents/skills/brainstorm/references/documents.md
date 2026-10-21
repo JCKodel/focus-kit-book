@@ -49,12 +49,12 @@ its review (docs/05 §8):
 [ ] <slug>    <what it delivers, one line>
 ```
 
-A line holds the mark, the slug, one sentence and its suffixes; what
-happened goes on the page. The marks, the suffixes (`· after`,
-`· resume:`, `· blocked:`, `· dropped:`), the order as priority, the next
-milestone and what may run at the same time are docs/05 §4, written once
-there. What is not in the current milestone is not planned yet. The
-queue is edited by conversation in any session; no command owns it.
+A line holds the mark, the slug, a token, one sentence and its suffixes;
+what happened goes on the page. The marks, the token, the suffixes
+(`· after`, `· resume:`, `· blocked:`, `· dropped:`), the order as
+priority, the next milestone and what may run at the same time are
+docs/05 §4, written once there. What is not in the current milestone is
+not planned yet.
 
 **docs/adr/.** One file per decision, `ADR-NNNN-<slug>.md`: context, the
 decision, the consequences, the date. An ADR is amended, never rewritten.
@@ -179,8 +179,7 @@ How an idea becomes code in <project>.
 
 One delivery is one page, `work/<slug>.md`. If it does not fit one page,
 it is two deliveries. The page is not a concision goal: it is the test that
-the scope was understood. A scope that needs five pages has not been
-decided yet.
+the scope was understood.
 
 ## 2. The flow
 
@@ -249,21 +248,28 @@ behalf are explicit. Corrections happen in the /propose conversation;
 
 ## 4. The queue
 
-docs/06: one line per delivery, in order, under milestones. The order is
-the priority: the next delivery is the first free line, and the person
-reorders by conversation. A line is the mark, the slug, one sentence and
-its suffixes; what happened goes on the page, because /propose reads the
+docs/06: one line per delivery, in order, under milestones, edited by
+conversation in any session. The order is the priority: the next
+delivery is the first free line, and the person reorders by
+conversation. A line is the mark, the slug, one sentence and its
+suffixes; what happened goes on the page, because /propose reads the
 whole queue. A line that needs another done first ends with
 `· after <slug>`, written when the line is added; it is free when every
 line it names is `[x]`. A line that no clause of the current milestone's
 paragraph needs, whoever adds it, goes under the next milestone, created
 when missing with a paragraph that line answers and its review last; a
-finding of the milestone's own review stays in it (§8).
-Asked what can run at the same time, answer from
-the queue: the free lines, and among them the ones that touch different
-files, judged from their pages and docs/01. The line never
-leaves the queue; it changes mark, at the moment the work changes, so the
-queue shows what is happening while it happens:
+finding of the milestone's own review stays in it (§8). A line may carry
+`(PA)` after the slug: whether its /propose and its /apply may run while
+the lines above it are in flight. `P`: the definition takes nothing from
+their pages; `A`: the build touches none of their files; `-` waits, for
+every line above to be `[>]` or beyond before /propose, `[x]` before
+/apply; `after` holds for both commands, with or without a token.
+Whoever changes the queue re-judges the tokens it affects; /propose
+corrects a token from the page. Asked what can run at the same time,
+answer from the queue: the free lines, by their tokens where they have
+one, else the ones that touch different files, judged from their pages
+and docs/01. The line never leaves the queue; it changes mark as the
+work changes, so the queue shows what is happening while it happens:
 
 | Mark | Means | Set by |
 |---|---|---|
@@ -320,9 +326,6 @@ staged. In worktrees, change only this delivery's line; when branches are
 integrated, reconcile docs/06 by slug, keeping every line at its latest
 state, never one side's whole file.
 
-Each milestone is planned with its review as the last line (§8). Edited by
-conversation in any session.
-
 ## 5. This project
 
 A slot says what and the command, in a few lines: /apply reads it every
@@ -350,8 +353,7 @@ The project may add slots of its own; a slot that names /propose or
   delivery's paths; else a read-only agent on the session's model reading
   the whole delivery against its base: `git diff HEAD` of those paths,
   staged and unstaged, the commits a blocked delivery already made on its
-  branch or worktree, and the files it created, which no diff shows until
-  they are staged; or: none>.
+  branch or worktree, and the files it created; or: none>.
 * **Manuals:** `docs/manuals/`, one file per action that takes more than
   one command, named after what it does: running the product from a fresh
   clone, what a person does by hand outside a delivery (publish, roll
@@ -393,21 +395,18 @@ the paths; do not reset or stash them.
 Stage only this delivery's files or hunks, including the page move and its
 documentation changes. Use explicit paths for files wholly owned by it,
 and selective staging for mixed files; never `git add -A` or `git add .`.
-Inspect the staged diff afterwards and report any unrelated entries that
-were already staged, so the person knows a plain commit would include
-them. Do not unstage those entries yourself. A commit must contain only
-this delivery for the one-change promise to hold: with two sessions on
-trunk, the person commits each delivery as its session ends, from an
-index that holds only it, never by naming paths on `git commit`, which
-takes each named file whole from the working tree and carries the other
-session's hunk of it, staged or not. One working tree has one index, so
-when the second session has already staged, the person sets its paths
-aside with `git restore --staged <paths>`, commits the first, and stages
-them again.
+Inspect the staged diff afterwards and report any unrelated entries
+already staged, which a plain commit would include; do not unstage them.
+A commit must contain only this delivery for the one-change promise to
+hold: with two sessions on trunk, the person commits each delivery as its
+session ends, from an index that holds only it, never by naming paths on
+`git commit`, which takes each named file whole from the working tree and
+carries the other session's hunk of it, staged or not. One working tree
+has one index, so when the second session has already staged, the person
+sets its paths aside with `git restore --staged <paths>`, commits the
+first, and stages them again.
 
-The agent suggests the message; the person commits after reviewing, or
-asks the agent to.
-Imperative subject up to 72 characters, scope in parentheses
+The message: imperative subject up to 72 characters, scope in parentheses
 when it helps; body up to five one-line bullets, the highlights and not
 the reasoning; last line points to the page's actual path, where the
 reasoning lives: `work/done/<slug>.md` when done, `work/<slug>.md` when

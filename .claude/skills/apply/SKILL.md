@@ -6,7 +6,7 @@ description: >-
   then stage and suggest the commit. Never commits on its own.
 argument-hint: <slug>
 metadata:
-  version: "2026.10.20"
+  version: "2026.10.20.1"
 ---
 Implement `work/$ARGUMENTS.md` in this session, completely. When the slug
 is missing, ask for it. The page is the scope; do not widen it.
@@ -21,8 +21,8 @@ If the page contradicts a document, stop and say which: the document changes
 in this delivery or the page is wrong. Do not resolve it silently. Follow
 docs/05 §4 to resume a blocked line, or a `[*]` line the person says its
 session left; refuse an incomplete proposal and point to /propose. Otherwise
-only a fully defined `[>]` line whose `after` is done becomes `[*]`, your
-first edit. docs/05 §§4 and 6 say what a conflict is.
+only a fully defined `[>]` line that §4's token and `after` let build
+becomes `[*]`, your first edit. docs/05 §§4 and 6 say what a conflict is.
 
 When work cannot go on, record what was built and what it waits on, leave
 the page in `work/` and block it with `resume: apply` as docs/05 §4 says.

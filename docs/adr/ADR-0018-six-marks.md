@@ -62,3 +62,7 @@ Since `kit-2026-10-19-2` the book runs focus-kit 2026.10.19.2; the six marks are
 ## Amendment, 2026-10-20 (kit-2026-10-20)
 
 Since `kit-2026-10-20` the book runs focus-kit 2026.10.20; the six marks are unchanged, and with a branch or a worktree per delivery the delivery's branch, pushed by /propose when it creates it, is the claim of its line: after `git fetch` a line whose branch exists is taken, whatever the main branch's queue shows (docs/05 §4). The book stays on trunk, where no delivery branch is created and the agent never pushes (ADR-0010, docs/05 §5).
+
+## Amendment, 2026-10-20 (kit-2026-10-20-1)
+
+Since `kit-2026-10-20-1` the book runs focus-kit 2026.10.20.1; the six marks are unchanged, and a queue line may carry the `(PA)` token after its slug: `P` lets its /propose and `A` its /apply run while the lines above it are in flight, `-` waits for them to be `[>]` or beyond before /propose and `[x]` before /apply, and `after` holds for both (docs/05 §4). It applies on trunk as written, two sessions in one working tree being this queue's normal case; whoever changes the queue re-judges the tokens it affects, and a line without one is judged from the pages as before.

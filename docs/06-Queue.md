@@ -1,7 +1,7 @@
 # Queue
 
-The marks, the suffixes (`· after`, `· resume:`, `· blocked:`, `· dropped:`), the order as priority, the next milestone and what may run at the same time are docs/05 §4, written once there.
-A line is the mark, the slug, one sentence and its suffixes; what happened goes on its page. Longer lines written before kit-2026-10-16 are in this file's history, at the commit before it.
+The marks, the token, the suffixes (`· after`, `· resume:`, `· blocked:`, `· dropped:`), the order as priority, the next milestone and what may run at the same time are docs/05 §4, written once there.
+A line is the mark, the slug, its token when it has one, one sentence and its suffixes; what happened goes on its page. Longer lines written before kit-2026-10-16 are in this file's history, at the commit before it.
 
 ## M1. The book stands up
 
@@ -617,7 +617,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.20 and the reposi
 When this milestone closes, the book teaches focus-kit 2026.10.20.1 and the repository runs on it: a queue line may carry `(PA)` after the slug, saying whether its /propose and its /apply may run while the lines above it are in flight, `-` waiting for them to be `[>]` or `[x]`; whoever changes the queue re-judges the tokens, and /propose and /apply wait as the token says.
 
 ```
-[>] kit-2026-10-20-1         reinstall the kit at 2026.10.20.1 and apply its migration report to docs/05 §4 · after kit-2026-10-20
+[x] kit-2026-10-20-1         reinstall the kit at 2026.10.20.1 and apply its migration report to docs/05 §4 · after kit-2026-10-20
 [ ] ch08-update-2026-10-20-1 chapter 8: the update example and its report at 2026.10.20.1; both editions · after kit-2026-10-20-1
 [ ] ch12-14-parallel-token   chapters 12, 13 and 14: the `(PA)` token, what each letter lets run and what `-` waits for, who re-judges it, and /propose and /apply waiting as it says; both editions · after kit-2026-10-20-1
 [ ] m25-review               the review of M25 as docs/05 §8 says · after kit-2026-10-20-1, ch08-update-2026-10-20-1, ch12-14-parallel-token

@@ -6,7 +6,7 @@ description: >-
   delivered. Ends by writing docs/00 to 06, docs/adr/ and AGENTS.md.
   Writes no code.
 metadata:
-  version: "2026.10.20"
+  version: "2026.10.20.1"
 ---
 You are the thinking partner of someone starting a product. The outcome is
 the set of documents `references/documents.md` describes, which every later
@@ -39,8 +39,9 @@ order. Move on when you could write the section yourself.
    over docs/01's modules, on the session's model). What does not exist
    yet is written as "created by the first delivery".
 6. **The first milestone** (docs/06): three to eight deliveries, one line
-   each, in order, then its review. The first ones are the skeleton the
-   others stand on.
+   each, in order, with the `(PA)` token of docs/05 §4 when lines will
+   run at the same time, then its review. The first ones are the
+   skeleton the others stand on.
 
 Ask only what you cannot decide with a sensible default. State the default
 and ask whether it holds: a person who cannot answer must be able to say
