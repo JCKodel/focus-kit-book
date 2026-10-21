@@ -648,7 +648,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.20.3 and the repo
 [x] kit-2026-10-20-3 (PA)    reinstall the kit at 2026.10.20.3 and apply its migration report to docs/05 §§2, 4 and 7 · after kit-2026-10-20-2
 [x] ch08-update-2026-10-20-3 (PA) chapter 8: the update example and its report at 2026.10.20.3; both editions · after kit-2026-10-20-3
 [x] ch12-14-18-several-slugs (PA) chapters 12, 13, 14, 16, 18 and 19 and docs/03: a command typed with several slugs, one subagent each, in the one folder on trunk or each in its worktree, the tokens obeyed, the flag kept and why, questions relayed by the session, deciding alone and building as well recorded on the page, chapter 19's batch as that command and chapter 16's governor unchanged by it; both editions · after kit-2026-10-20-3
-[ ] m27-review               the review of M27 as docs/05 §8 says · after kit-2026-10-20-3, ch08-update-2026-10-20-3, ch12-14-18-several-slugs
+[>] m27-review (--)          the review of M27 as docs/05 §8 says · after kit-2026-10-20-3, ch08-update-2026-10-20-3, ch12-14-18-several-slugs
 ```
 
 ## M28. focus-kit 2026.10.20.4
