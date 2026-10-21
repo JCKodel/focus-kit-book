@@ -33,7 +33,7 @@
 * Terms of docs/03: Git slot, trunk, branch, worktree, the person's review. No new term; no docs/03 row.
 * Sources: chapter 18 :25 and :26 (the default merge, asked of the agent), chapter 20 :35 and :86 (the slot's word, the merge included), chapter 23 :64's second half and :112 (the commit or the merge reviewed), docs/05 §5's Git slot and AGENTS.md ("It never commits or merges on its own"). No footnote: the reader gains nothing to open.
 * Cases: none. No number.
-* Neighbouring lines on the same files, all later in queue order, which find these sentences as this delivery leaves them: M24's `ch12-14-parallel-token` (chapter 13); M25's `ch13-19-session-folder` (chapters 13 and 19); M27's `ch12-14-18-several-slugs` (chapters 13 and 18); M28's `ch13-19-claim-script` (chapters 13 and 19). None of them edits these sentences today.
+* Neighbouring lines on the same files, all later in queue order, which find these sentences as this delivery leaves them: M25's `ch12-14-parallel-token` (chapter 13); and later deliveries of the queue's plan, on where each session opens (chapters 13 and 19), a command typed with several slugs (chapters 13 and 18) and the claim script (chapters 13 and 19). None of them edits these sentences today.
 
 **States.** Inapplicable: no screen.
 

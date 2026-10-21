@@ -74,6 +74,7 @@ Neighbour: `m23-records-crossrefs` also edits this file, at lines 3 and 37, and 
 * Step 5's "those above" is changed as a sibling sentence that would go stale once the list splits; no other line touches it.
 * The Contract's line 15 stays: it is the plan, and its "dispositions of the step 4 report" holds once a disposition is read as what the report led to.
 * /apply, resumed in a fresh session after the first was stopped mid-run (docs/05 §4): the record's uncommitted hunks it found in the tree are this delivery's, checked against the Contract word for word, and kept as they were.
+* Corrected later (m24-review S3): the Environments pointer is a slot's shape, which step 4 checks (:64), so this page filed it wrongly under what step 4 does not check (:8, :71); `m24-records-crossrefs` changed the record's second heading to what the step 4 report did not name, and its item to say step 4 checks a slot's shape.
 
 **Done when.**
 

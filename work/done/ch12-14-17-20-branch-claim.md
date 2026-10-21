@@ -35,12 +35,12 @@
   * :132: "so the session takes each slug's line" becomes "so the session runs `git fetch` and takes each slug's line"; the rest stays.
   * Key points, the manager bullet (:151): "from each slug's worktree or branch" becomes "from the delivery branches after `git fetch`".
   * The example answer stays: it is on the lending library, whose answer the next sentence already reads off trunk.
-* Chapter 18, "Merges and the unit of work" (en and pt 25-33), widened as a sibling: :25 "creates the branch named after the slug, or reuses it when it exists" becomes "checks the remote for it, creates it and pushes it at once, so the line is taken in every clone, or reuses it when the definition resumes"; :27 "the first line is what `/propose` does for you" becomes "the first two lines"; the code block gains `git push -u origin lend-book` (pt `emprestar-livro`) right under `git switch -c lend-book`, in the same group, the blank line and the two merge lines unchanged.
+* Chapter 18, "One delivery, one step to undo" (en and pt 25-33), widened as a sibling: :25 "creates the branch named after the slug, or reuses it when it exists" becomes "checks the remote for it, creates it and pushes it at once, so the line is taken in every clone, or reuses it when the definition resumes"; :27 "the first line is what `/propose` does for you" becomes "the first two lines"; the code block gains `git push -u origin lend-book` (pt `emprestar-livro`) right under `git switch -c lend-book`, in the same group, the blank line and the two merge lines unchanged.
 * Chapter 19, "Worktrees in the kit", widened as siblings:
   * :179 "`/propose <slug>` creates the worktree ... or reuses the one that exists" becomes: checks the remote for `<prefix>/<slug>`, creates the worktree at `<hidden>/worktrees/<slug>/` on that branch from the main branch's `HEAD` and pushes the branch at once, so the line is taken in every clone, or reuses the one that exists, and writes the page there.
   * :194 "The agent never commits, merges, pushes, resolves a conflict or removes a worktree on its own" gains "apart from the branch `/propose` pushes when it creates it, the line's claim"; "the push, the conflict and the worktree stay yours to ask for" becomes "every later push, the conflict and the worktree stay yours to ask for".
   * Key points, the worktree bullet (:350): "and the line's marks live on its branch until the merge" becomes "`/propose` pushes the branch when it creates it, the line's claim, and the line's marks live on it until the merge".
-* Chapter 20, "A pull request per delivery" (en and pt 22-26):
+* Chapter 20, "The pull request as the team's review" (en and pt 22-26):
   * Step 1 gains: `/propose` pushes the branch the moment it creates it, so the line is taken for everyone who fetches.
   * Step 2's "Open the pull request as soon as it is pushed" becomes "as soon as the page's commit is pushed": two pushes, the branch's by `/propose` and the page's by the person or at their asking.
   * Step 4: "so the queue on the main branch holds what has landed" becomes "so the queue on the main branch changes only through merges and holds what has landed"; the rest stays.
@@ -58,14 +58,14 @@
 **Out of scope.**
 
 * Chapter 8: `ch08-update-2026-10-20`, in parallel.
-* Chapter 13 :28, how `/apply` weighs the next free line off trunk: true but silent on the claim; `ch12-14-parallel-token` (M25) and `ch13-19-claim-script` (M28) touch chapter 13 next, the latter on the claim itself. Reported to the driver.
+* Chapter 13 :28, how `/apply` weighs the next free line off trunk: true but silent on the claim; `ch12-14-parallel-token` (M25) and a later delivery of the queue's plan, on the kit's claim script, touch chapter 13 next, the latter on the claim itself. Reported to the driver.
 * Chapter 23 :66 (the manager reads each slug's line from its worktree or branch), chapter 7 :80-84 (the three git strategies, quoting no slot option), chapter 10 :34-36, and the free-line definitions in trunk contexts (chapter 7 :80, 18 :184, 19 :24): true as they stand.
 * The sentence "Without a board the marks cost nothing", which the kit removed: no chapter holds it (chapter 18 :76's "costs nothing" is about branches).
 * The kit's reason as a story, the near miss its changelog tells: the book teaches the kit as it is today, with no version or before and after; the reason enters only as the second reader of main's queue who would start the line again.
-* The claim script, its alias and Windows: `ch13-19-claim-script` (M28). Where each session opens: `ch13-19-session-folder` (M26).
+* The claim script, its alias and Windows, and where each session opens: later deliveries of the queue's plan.
 * This repository's own git: it stays on trunk and the agent never pushes (docs/05 §5).
 
-**Neighbouring lines on the same files**, applied after this one in queue order: `ch12-14-parallel-token` (M25: chapters 12, 13, 14), `ch13-19-session-folder` (M26: chapter 19 "Worktrees in the kit", the sentence at :179 included), `ch12-14-18-several-slugs` (M27: 12, 13, 14, 18), `ch13-19-claim-script` (M28: 19), `ch14-after-over-token` (M29: 14). This Contract is written against the files as they are today.
+**Neighbouring lines on the same files**, applied after this one in queue order: `ch12-14-parallel-token` (M25: chapters 12, 13, 14), and later deliveries of the queue's plan: where each session opens (chapter 19 "Worktrees in the kit", the sentence at :179 included), a command typed with several slugs (12, 13, 14, 18), the claim script (19), and `after` over the parallel token (14). This Contract is written against the files as they are today.
 
 **Decisions from the documents.**
 

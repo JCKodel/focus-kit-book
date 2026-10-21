@@ -34,7 +34,7 @@
 * Terms of docs/03: Git slot, trunk, branch, worktree, the person's review. No new term; no docs/03 row.
 * Sources: chapter 20 :8, :35, :85 and :86 (the reviewer by default and by the Git slot's word, the merge included), chapter 13 :169, docs/05 §5's Git slot and AGENTS.md ("The agent stages and suggests the commit message. It never commits or merges on its own"). No footnote: the reader gains nothing to open.
 * Cases: none. No number.
-* Neighbouring lines on the same files, applied after this one in queue order, which find these sentences as this delivery leaves them: `ch17-next-free-line` (M23, chapter 17 :124 to :128, not :137); M24's `ch12-14-17-20-branch-claim` (chapter 17); M25's `ch13-19-session-folder` (chapter 19); M27's `ch12-14-18-several-slugs` (chapter 18); M28's `ch13-19-claim-script` (chapter 19). None of them edits these sentences today.
+* Neighbouring lines on the same files, applied after this one in queue order, which find these sentences as this delivery leaves them: `ch17-next-free-line` (M23, chapter 17 :124 to :128, not :137); M24's `ch12-14-17-20-branch-claim` (chapter 17); and later deliveries of the queue's plan, on where each session opens (chapter 19), a command typed with several slugs (chapter 18) and the claim script (chapter 19). None of them edits these sentences today.
 
 **States.** Inapplicable: no screen.
 

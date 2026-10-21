@@ -93,18 +93,29 @@ Terms: record, slot, migration, as docs/03 has them; no new row. No chapter, no 
 
 **Done when.**
 
-* [ ] Rule A checked and its outcome recorded in the Proof; the replacements it leaves made word for word.
-* [ ] `git diff` of the eight pages shows only those replacements and the one new item.
-* [ ] A search of the eight pages finds no `ch13-19-session-folder`, `ch12-14-18-several-slugs`, `ch13-19-claim-script` or `ch14-after-over-token` (unless rule A kept them), no "M24's `ch12-14-parallel-token`", no "12, 14, 17 and 20" outside the Contracts and Objectives the Out of scope keeps, no "Merges and the unit of work" or "A pull request per delivery".
-* [ ] No em dash; no Done when item of a record unticked.
-* [ ] `make verify` green after the last edit, its result in this page's Proof.
-* [ ] The Delivery review as docs/05 §5 says, recorded with who read what and with the advisor.
+* [x] Rule A checked and its outcome recorded in the Proof; the replacements it leaves made word for word.
+* [x] `git diff` of the eight pages shows only those replacements and the one new item.
+* [x] A search of the eight pages finds no `ch13-19-session-folder`, `ch12-14-18-several-slugs`, `ch13-19-claim-script` or `ch14-after-over-token` (unless rule A kept them), no "M24's `ch12-14-parallel-token`", no "12, 14, 17 and 20" outside the Contracts and Objectives the Out of scope keeps, no "Merges and the unit of work" or "A pull request per delivery".
+* [x] No em dash; no Done when item of a record unticked.
+* [x] `make verify` green after the last edit, its result in this page's Proof.
+* [x] The Delivery review as docs/05 §5 says, recorded with who read what and with the advisor.
 
 **Proof.**
 
-**Divergences.**
+* Rule A: `git show HEAD:docs/06-Queue.md` at `730641f` has M24 at :597 and M25 at :615 as its last heading; `ch12-14-17-20-branch-claim` at :604 names chapters 12, 14, 17, 18, 19 and 20, `m24-records-crossrefs` is at :612 and `ch12-14-parallel-token` at :622 under M25; none of `ch13-19-session-folder`, `ch12-14-18-several-slugs`, `ch13-19-claim-script` or `ch14-after-over-token` is there. So every replacement applied as written, none skipped or shrunk.
+* Each quoted text was counted in its page before editing: all 19 found exactly once, at the lines the Contract names (the new item's anchor at `kit-record-step4.md` :76).
+* `git diff --numstat HEAD` of the eight pages: ch08-next-free-line 4/4, ch08-update-2026-10-20 2/2, ch12-14-17-20-branch-claim 5/5, ch13-23-merge-default 1/1, ch17-23-git-slot-word 1/1, kit-2026-10-19-2 2/2, kit-2026-10-20 2/2 (replacements 7 and 8 on one line), kit-record-step4 1/0.
+* The search of the eight pages after the edits printed one line, `ch12-14-17-20-branch-claim.md:3`, its Objective's "12, 14, 17 and 20", which the Out of scope keeps. `grep -c` of the em dash: 0 in each page; of `* [ ]`: 0 in each page.
+* The facts the new text states: `book/en/18-git-essentials.md` :12 "One delivery, one step to undo" and `book/en/20-team-tools.md` :14 "The pull request as the team's review"; `kit-2026-10-19-2.md` :93 is Step 5; `ch07-09-manual-wording.md` :32 "Chapter 8: no change"; `git show --stat 7660dfc`: en 07, pt 07, pt 09, docs/06 and the page.
+* `make verify` green after the last edit, this page's included and the page moved to `work/done/`: build, parity, em dash, prose, width, examples, links and disclosure.
+* `make book` exit 0 after that verify: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
 
-**Delivery review.**
+**Divergences.** The batch's lane rules leave docs/06, the staging and the commit to the driver: this session edited none of them. "With the advisor" is met by this session, which consulted its advisor before the edits and before reporting; the review agent had none. The review's note on `ch08-next-free-line.md` :24 is recorded below, left as the Contract wrote it and reported to the driver as a new line.
+
+**Delivery review.** One read-only Opus agent this session launched, over `git diff HEAD` of the eight record pages, and this page as committed, before its Proof was written, checking rule A against HEAD's docs/06, the 19 replacements word for word, and each new sentence against the chapters, the queue, `7660dfc` and `kit-record-step4.md` :8, :64 and :71. It found nothing to fix, and two notes:
+
+* `ch08-next-free-line.md` :24 cites `ch07-09-manual-wording` at docs/06 :585; HEAD has it at :586. The cite was true when the record was committed (:585 at `c42e106`) and is false at HEAD; replacement 15 kept it as the Contract wrote it, and it goes to the driver as a new line.
+* `ch17-23-git-slot-word.md` :37 reads "(chapter 17); and later deliveries": the Contract's words, kept.
 
 ```commit
 docs(m24-records-crossrefs): M24's records cite what exists
