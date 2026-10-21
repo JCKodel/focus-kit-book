@@ -680,6 +680,6 @@ When this milestone closes, the book teaches focus-kit 2026.10.20.5 and the repo
 ```
 [x] kit-2026-10-20-5 (PA)    reinstall the kit at 2026.10.20.5 and apply its migration report to docs/05 §4 · after kit-2026-10-20-4
 [ ] ch08-update-2026-10-20-5 chapter 8: the update example and its report at 2026.10.20.5, setup writing only into the session's repository and never AGENTS.md; both editions · after kit-2026-10-20-5
-[ ] ch14-after-over-token    chapter 14: `after` holds /propose and /apply until every line it names is `[x]`, whatever the `(PA)` token says, with `shout (-A) · after farewell` as the example; both editions · after kit-2026-10-20-5
+[>] ch14-after-over-token (PA) chapter 14: `after` holds /propose and /apply until every line it names is `[x]`, whatever the `(PA)` token says, with a library line whose token lets both commands start and whose `after` names a `[>]` line as the example; both editions · after kit-2026-10-20-5
 [ ] m29-review               the review of M29 as docs/05 §8 says · after kit-2026-10-20-5, ch08-update-2026-10-20-5, ch14-after-over-token
 ```
