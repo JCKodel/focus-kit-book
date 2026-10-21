@@ -16,7 +16,7 @@ A new concept enters here first, in both languages.
 | setup file | arquivo de setup | `SETUP.md` | The one file of focus-kit that an agent reads to install or update the kit's commands in a repository, for every host at once. |
 | migration | migração | none | A rule a newer kit version changes in a file that belongs to the project (docs/04, docs/05, `AGENTS.md`): the setup file reports it, with the path, the section and the proposed wording, and writes nothing there; the project applies it as a delivery. |
 | changelog | changelog | `CHANGELOG.md`, `CHANGELOG.pt.md` | The kit's record of what changed, newest first, one entry per version: what changed, the problem that caused it, and the migrations it brings. |
-| host | host | `claude-code`, `codex`, `copilot`, `cursor`, `gemini-cli`, `antigravity`, `devin-desktop` | The program that runs the coding agent. |
+| host | host | `claude-code`, `codex`, `copilot`, `copilot-cli`, `cursor`, `gemini-cli`, `antigravity`, `devin-desktop` | The program that runs the coding agent. |
 | command | comando | `/brainstorm`, `/analyze`, `/propose`, `/apply` | One of the four steps the kit installs. |
 | project documents | documentos do projeto | `docs/00` to `docs/06` | The project's memory, read before acting. |
 | rules file | arquivo de regras | `AGENTS.md` | What every agent reads when a session starts. |

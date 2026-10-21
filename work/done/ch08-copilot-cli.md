@@ -76,10 +76,35 @@ Sources: SETUP.md 2026.10.20.4, `git -C ~/Projects/focus-kit show ffbec72:SETUP.
 * The gain sentence for the CLI is the one this page gives (what the team writes in `CLAUDE.md` or `GEMINI.md` reaches it); "What the team gains" is unchanged, its "One repository opens ready in any host" covering the new row.
 * `(PA)` judged `(P-)`: the definition takes nothing from the pages above (`P`); the build touches docs/03, which `ch13-19-claim-script`, `[*]` above it, also edits (`-`, its /apply waits for that line's `[x]`). Dropping the docs/03 row would make it `(PA)`; the author may choose that in review.
 
+**Divergences.** None from the Contract: every edit went in word for word in both editions. The CLI's `disable-model-invocation` sentence stands on a line of its own after the Claude Code sentence, as the chapter keeps one sentence per line. After the edit the lines moved: the table rows are en 116-117 / pt 118-119, the CLI's rules sentence en 128 / pt 130, the prompt-file sentence en 130 / pt 132 and the CLI's skills sentence en 131 / pt 133, the field sentence en 134 / pt 136, the slug sentence en 136 / pt 138, the folder order en 137 / pt 139, the key point en 175 / pt 177, the note en 184 / pt 186; chapter 10's rows en 23-24 / pt 23-24; docs/03's host row :19.
+
+**Decisions taken by /apply.** Nothing was open. The queue line already reads "chapters 8 and 10", so the wording the definition asked for stands. The review's Portuguese style note on pt 132 ("tira") is left as the Contract wrote it: optional, and it breaks nothing.
+
+**Proof.**
+
+* SETUP.md at `ffbec72`, `git -C ~/Projects/focus-kit show ffbec72:SETUP.md`, SHA-256 `a8515b465a968b9e472bc4ac38d60991b01d681e74130184df07e6b843b1dc1e`: rows :133-134 ("GitHub Copilot in VS Code", "GitHub Copilot CLI": `AGENTS.md`, merged with `CLAUDE.md` and `GEMINI.md`; `.agents/skills/<name>/SKILL.md`; `/<name>`, the slug not documented) and :162-165 (the Copilot CLI's skills disable model invocation).
+* The CLI reference, fetched again 2026-10-21: "Custom instructions locations" ("loads custom instructions from these locations simultaneously (all are merged)", `CLAUDE.md`, `GEMINI.md`, `AGENTS.md` among them); "Skill locations" (`.agents/skills/` before `.claude/skills/`, "first found wins for duplicate names"); "Skill frontmatter fields" (`disable-model-invocation`, "Prevent the agent from automatically invoking this skill"; `argument-hint`, a hint shown in the picker, and no argument substitution).
+* Neither chapter 8 nor chapter 10 holds `.github/skills/`, `Free`, `(PA)`, a commit hash or an em dash (grep, no match).
+* `make verify` exit 0 after the last edit, every check passed, the external link included.
+* `make book` exit 0, on HEAD `bba2d20` with this delivery's changes in the tree: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+**Delivery review.** One read-only Opus agent, launched by this /apply over this delivery's paths only (`git diff HEAD` of both editions of chapters 8 and 10 and docs/03's host row, and this page before these records), against this page, SETUP.md at `ffbec72` (lines 110-180) and the CLI reference, fetched by the agent (its three sections), with en chapter 8 lines 98-150, 9 and 34, pt lines 9, 34 and 118, and both chapter 10 lines 10-40 for context; it did not list docs/04 or `AGENTS.md` among what it opened. Its reply: no finding that breaks the page, docs/04 or the text this delivery wrote; every edit matches the Contract in both editions, every CLI claim matches SETUP and the reference, nothing forbidden appears, and the unchanged en 9, en 34, "On the other hosts" and chapter 10's slug sentence still hold. Two notes: (1) en 10 :32 and its Portuguese, "In Claude Code a command runs only when you name it", now incomplete beside chapter 8's CLI sentence, outside the page: a new queue line; (2) pt 132 "tira" reads colloquial, "obtém" or "recebe" more natural, optional and the Contract's own wording: left as is. No private case, so OD-3 approval is inapplicable.
+
 **Done when.**
 
-* Both editions of chapters 8 and 10 changed as the Contract says, and docs/03's host row.
-* The chapter still opens with its value; no filler and nothing useful cut.
-* Every claim about the CLI traces to SETUP.md at `ffbec72` or the CLI reference accessed 2026-10-21.
-* No em dash, no commit hash, no run narration in the chapters; disclosure scan green.
-* `make verify` green; `make book` run and both PDF paths given.
+* [x] Both editions of chapters 8 and 10 changed as the Contract says, and docs/03's host row.
+* [x] The chapter still opens with its value; no filler and nothing useful cut.
+* [x] Every claim about the CLI traces to SETUP.md at `ffbec72` or the CLI reference accessed 2026-10-21.
+* [x] No em dash, no commit hash, no run narration in the chapters; disclosure scan green.
+* [x] `make verify` green; `make book` run and both PDF paths given.
+
+```commit
+docs(ch08-copilot-cli): the Copilot CLI as a host of its own
+
+- chapter 8: Copilot in VS Code and the Copilot CLI as two rows, with
+  the CLI's merged rules, skills folder, field and folder order
+- chapter 10: the same two rows in its table
+- docs/03: the host row gains copilot-cli
+
+work/done/ch08-copilot-cli.md
+```

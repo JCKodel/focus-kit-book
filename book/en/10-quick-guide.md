@@ -20,7 +20,8 @@ In another host, a command takes the form of chapter 8's table:
 |---|---|
 | Claude Code | `/propose <slug>` |
 | Codex | `$propose <slug>` |
-| GitHub Copilot | `/propose`, and it asks for the slug |
+| GitHub Copilot in VS Code | `/propose`, and it asks for the slug |
+| GitHub Copilot CLI | `/propose` |
 | Cursor | `/propose` |
 | Gemini CLI | `/propose <slug>` |
 | Google Antigravity | `/propose <slug>` |

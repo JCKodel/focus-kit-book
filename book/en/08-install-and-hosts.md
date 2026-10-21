@@ -113,7 +113,8 @@ The setup file writes what every host below needs:
 |---|---|---|---|
 | Claude Code | `CLAUDE.md`, which imports `AGENTS.md`; `AGENTS.md` alone only where no `CLAUDE.md` exists, from version 2.1.277 | `.claude/skills/` | `/propose <slug>` |
 | Codex | `AGENTS.md` | `.agents/skills/` | `$propose <slug>` |
-| GitHub Copilot | `AGENTS.md` | `.agents/skills/`, through a prompt file in `.github/prompts/` | `/propose`, and it asks for the slug |
+| GitHub Copilot in VS Code | `AGENTS.md` | `.agents/skills/`, through a prompt file in `.github/prompts/` | `/propose`, and it asks for the slug |
+| GitHub Copilot CLI | `AGENTS.md`, merged with `CLAUDE.md` and `GEMINI.md` | `.agents/skills/` | `/propose` |
 | Cursor | `AGENTS.md` | `.agents/skills/`, through a command file in `.cursor/commands/` | `/propose` |
 | Gemini CLI | `AGENTS.md`, through `GEMINI.md` | `.agents/skills/`, through a command file in `.gemini/commands/` | `/propose <slug>` |
 | Google Antigravity | `AGENTS.md` directly; `.agents/rules/focus-kit.md` is an always-on pointer | `.agents/skills/` | `/propose <slug>` |
@@ -123,14 +124,17 @@ The setup file writes what every host below needs:
 
 Each command is a skill, a folder with a `SKILL.md` file of instructions the host loads when you invoke it.[^claude-code-skills][^codex-skills][^copilot-skills]
 Claude Code reads `CLAUDE.md` at the start of a session, and a line `@AGENTS.md` in it imports the rules file; from version 2.1.277 it reads `AGENTS.md` alone, but only in a repository with no `CLAUDE.md`, so the kit writes `CLAUDE.md` with the import, which every version reads.[^claude-code-memory]
-Codex, Copilot and Devin Desktop, formerly Windsurf, read `AGENTS.md` on their own.[^codex-agents-md][^copilot-instructions][^devin-rules]
+Codex, Copilot in VS Code and Devin Desktop, formerly Windsurf, read `AGENTS.md` on their own.[^codex-agents-md][^copilot-instructions][^devin-rules]
+The GitHub Copilot CLI, GitHub's agent in the terminal, reads `AGENTS.md`, `CLAUDE.md` and `GEMINI.md` together and merges them, so what the team writes in either of the other two reaches it as well.[^copilot-cli-reference]
 Antigravity reads `AGENTS.md` directly too; the rule the kit writes in `.agents/rules/focus-kit.md` is a pointer that is always on and holds no rule of its own, an extra path to `AGENTS.md`, not the only one.
-Copilot's slash command comes from a prompt file that only tells the agent to read the skill and follow it, and asks you for the slug when you type the command.[^copilot-prompt-files]
+Copilot in VS Code takes its slash command from a prompt file that only tells the agent to read the skill and follow it, and asks you for the slug when you type the command.[^copilot-prompt-files]
+The Copilot CLI needs no such file: it reads the skills from `.agents/skills/` itself and runs one by its name, `/propose`.[^copilot-cli-reference]
 Codex may run a skill on its own when a message matches its description; a small file beside each skill turns that off, so a message that happens to say "apply" builds nothing you did not ask for.[^codex-skills]
 Claude Code's skills carry `disable-model-invocation: true`, which keeps Claude from running one on its own: a message that matches a skill's description is not enough, and the command runs only when you name it.[^claude-code-skills]
+The Copilot CLI honours the same field.[^copilot-cli-reference]
 On the other hosts, invoke the commands yourself; the kit does not claim that each host enforces the same.
-For Cursor and Devin Desktop, neither vendor's documentation says whether a slug typed after a command reaches it, so name the delivery in your message if it does not.
-Copilot reads both skills folders, and its CLI reference says what happens to a skill with the same name in both: `.agents/skills/` comes before `.claude/skills/` and the first found wins; the kit writes the same file in both, so either copy is the same command.[^copilot-cli-reference]
+For Cursor, Devin Desktop and the Copilot CLI, no vendor's documentation says whether a slug typed after a command reaches it, so name the delivery in your message if it does not.
+The Copilot CLI reads both skills folders, and its reference says what happens to a skill with the same name in both: `.agents/skills/` comes before `.claude/skills/` and the first found wins; the kit writes the same file in both, so either copy is the same command.[^copilot-cli-reference]
 Devin Desktop also reads `.windsurf/skills/`, the folder of its former name;[^devin-skills] the setup file writes nothing there and, on an update, removes the kit's own files from it, so the host never finds an older copy of a command beside the current one in `.agents/skills/`, and a file of yours there is reported and left.
 
 Every command ends by naming the next one, written as the host running it invokes it, the table's last column.
@@ -168,7 +172,7 @@ And the next command arrives in the form your host recognizes, because a host ma
 * One sentence to your agent installs focus-kit, and the same sentence updates it; nothing is installed on your machine, though on Windows you keep the shell Git for Windows installs, nothing is staged or committed, and a kit file you changed stops the update before it writes, with your edit shown as a diff against the kit file it was made on.
 * The setup file writes only the kit's files and never touches `docs/`, `work/`, `AGENTS.md` or `CLAUDE.md`; a change docs/04, docs/05, docs/06 or `AGENTS.md` needs, a rule, a queue line or a slot, comes as a migration in its report, a list by document and section where a choice the project recorded is reported as that choice, and until the team applies it as a delivery the process is the old one.
 * The kit's changelog, newest first, says for each version what changed, the problem that caused it, and, in an item that starts with `Migration:` when the entry has one, what to change in the project's documents.
-* Each host finds the rules and the commands in its own folders: Claude Code runs a command as `/propose <slug>`, Codex as `$propose <slug>`, Copilot as `/propose`, which asks for the slug, Devin Desktop as `/propose`, and Jules, Junie, Warp, Kiro, Roo Code and Cline by asking in words for the skill's file; `/brainstorm` and `/analyze` take no slug; every command names the next one in that form; Copilot takes a skill from `.agents/skills/` before `.claude/skills/`, the same file in both.
+* Each host finds the rules and the commands in its own folders: Claude Code runs a command as `/propose <slug>`, Codex as `$propose <slug>`, Copilot in VS Code as `/propose`, which asks for the slug, the Copilot CLI as `/propose`, Devin Desktop as `/propose`, and Jules, Junie, Warp, Kiro, Roo Code and Cline by asking in words for the skill's file; `/brainstorm` and `/analyze` take no slug; every command names the next one in that form; the Copilot CLI takes a skill from `.agents/skills/` before `.claude/skills/`, the same file in both.
 * Every host reads a rules file at the start, reads the files you point it at and writes files, and the method needs nothing more.
 
 [^claude-code-memory]: Anthropic, "How Claude remembers your project", Claude Code documentation, accessed 2026-10-18. <https://code.claude.com/docs/en/memory>
@@ -177,7 +181,7 @@ And the next command arrives in the form your host recognizes, because a host ma
 [^codex-skills]: OpenAI, "Build skills", Codex documentation, accessed 2026-09-30. <https://developers.openai.com/codex/skills>
 [^copilot-instructions]: GitHub, "Adding repository custom instructions for GitHub Copilot", GitHub Docs, accessed 2026-09-30. <https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions>
 [^copilot-skills]: GitHub, "About agent skills", GitHub Docs, accessed 2026-09-30. <https://docs.github.com/en/copilot/concepts/agents/about-agent-skills>
-[^copilot-cli-reference]: GitHub, "GitHub Copilot CLI command reference", GitHub Docs, accessed 2026-10-19. <https://docs.github.com/en/copilot/reference/cli-command-reference>
+[^copilot-cli-reference]: GitHub, "GitHub Copilot CLI command reference", GitHub Docs, accessed 2026-10-21. <https://docs.github.com/en/copilot/reference/cli-command-reference>
 [^copilot-prompt-files]: GitHub, "Your first prompt file", GitHub Docs, accessed 2026-09-30. <https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files/your-first-prompt-file>
 [^devin-skills]: Cognition, "Skills Overview", Devin Docs, accessed 2026-10-17. <https://docs.devin.ai/cli/extensibility/skills/overview>
 [^devin-rules]: Cognition, "Rules & AGENTS.md", Devin Docs, accessed 2026-10-17. <https://docs.devin.ai/cli/extensibility/rules>
