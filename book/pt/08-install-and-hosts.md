@@ -92,6 +92,7 @@ O relatório dá a cada item um desses três resultados; ele compara os document
 
 A versão do kit é o `metadata.version` em cada `SKILL.md`; o processo é o que o docs/04, o docs/05 e o `AGENTS.md` dizem, porque todo comando os lê, então um kit atualizado cujas migrações não foram aplicadas ainda roda o processo antigo.
 A atualização termina quando as migrações são aplicadas, como qualquer mudança: uma linha da fila, definida com o `/propose` e construída com o `/apply`, para que a mudança nas suas regras ou na sua fila tenha uma página, verificação e a sua revisão.
+Aplicá-las pode pedir uma edição que nenhum item cita, quando o texto de uma migração contradiz uma frase que o relatório não confere: no repositório do livro, na versão 2026.10.20.3, o docs/05 §7 não admitia nenhum subagente especializado além dos leitores e do conferente das revisões, o que o parágrafo do §4 que o relatório propôs, sobre um comando digitado com vários slugs, contradizia, então a linha que aplicou o §2 e o §4 editou o §7 também, e o §7 hoje admite o subagente por slug de um comando junto com os leitores e o conferente das revisões.
 
 Num projeto já documentado, a atualização relata as migrações primeiro, ou diz que não há nenhuma.
 Ela nunca pede que você rode o `/brainstorm` ou o `/analyze` de novo: eles escrevem os documentos de um projeto do zero, e os seus existem.

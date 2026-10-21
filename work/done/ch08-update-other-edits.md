@@ -48,14 +48,48 @@ Sources: the record named in prose, `work/done/kit-2026-10-20-3.md`, read as com
 
 **Done when.**
 
-* [ ] Both editions of chapter 8 hold the Contract's sentence after en 93 / pt 94, the Portuguese with Portuguese wording; nothing else in either file changed.
-* [ ] The sentence checked against `work/done/kit-2026-10-20-3.md` (its §7 disposition) and docs/05 :370 to :371.
-* [ ] No version comparison, count, record line number, commit hash or em dash in the new sentence (grep).
-* [ ] `make verify` green after the last edit; `make book` builds both editions, with both PDF paths.
-* [ ] Delivery review as docs/05 §5 says, recording what its agent read and whether it kept the session's advisor. No private case, so OD-3 approval is inapplicable.
+* [x] Both editions of chapter 8 hold the Contract's sentence after en 93 / pt 94, the Portuguese with Portuguese wording; nothing else in either file changed.
+* [x] The sentence checked against `work/done/kit-2026-10-20-3.md` (its §7 disposition) and docs/05 :370 to :371.
+* [x] No version comparison, count, record line number, commit hash or em dash in the new sentence (grep).
+* [x] `make verify` green after the last edit; `make book` builds both editions, with both PDF paths.
+* [x] Delivery review as docs/05 §5 says, recording what its agent read and whether it kept the session's advisor. No private case, so OD-3 approval is inapplicable.
+
+**Built.** The Contract's sentence is the new en :94 and pt :95, in the paragraph of en :93 / pt :94; `git diff --stat HEAD` on the two files shows one insertion each and nothing else. The facts match the record as committed (`work/done/kit-2026-10-20-3.md`, "The project's other dispositions", its §7 bullet, and the Migration report's §§6 and 7 item) and docs/05 :370 to :371, which read "no subagent beyond a command's one per slug (§4) and the reviews' readers and checker".
+
+**Divergences.** The Portuguese reads "na versão 2026.10.20.3" where the Contract wrote "na 2026.10.20.3", as the delivery review suggested, so the version is named as chapter 8 pt names it elsewhere ("o focus-kit 2026.10.20.3"). The page's line numbers were taken at HEAD `0534b1f`; chapter 8 and docs/05 had not changed since, re-checked before the edit.
+
+**Omissions.** None.
+
+**Proof.**
+
+* Greps on the new lines: no em dash in either file; none of "Applied:", "gained", "since" (pt "Aplicado:", "ganhou", "desde"), a hash-like token or a `:NN` line number in the new sentence.
+* `make verify`: exit 0, all checks passed, after the last chapter edit and again after the page's last edit before this line.
+* `make book`: exit 0, after the last verify; both editions built, `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf` (with their EPUBs).
+
+**Delivery review.** One read-only Opus agent (an Explore subagent with model opus); it did not keep the session's advisor, since a subagent opened this way has none. It read `git diff HEAD` of the two chapter files, this page, docs/04, AGENTS.md, `work/done/kit-2026-10-20-3.md` as committed and docs/05 §7. Its reply, as returned:
+
+> I found no blocking findings. The delivery matches its page, docs/04, AGENTS.md and the sources.
+>
+> **What checks out:**
+> - **Contract text:** The new sentence matches the Contract word for word in both editions, at book/en/08-install-and-hosts.md:94 and book/pt/08-install-and-hosts.md:95. A fixed-string whole-line grep finds each sentence exactly once, in its own edition.
+> - **Placement:** Each sentence sits in the same paragraph right after "The update is done when..." (en :93) and "A atualização termina quando..." (pt :94).
+> - **Nothing else changed:** The diff stat shows one insertion per file and nothing else, so the excerpt (en 58 to 79, pt 58 to 80) is untouched. There is no §7 or provenance item and no "Applied:".
+> - **Facts:** They agree with the committed record. Its other-dispositions §7 bullet is at work/done/kit-2026-10-20-3.md:117, the §§6 and 7 item at :109, and the record's §7 bullet at :48 quotes the old wording. §7 is quoted as docs/05:370 to :371 reads ("no subagent beyond a command's one per slug (§4) and the reviews' readers and checker"), not as chapter 16 :67 reads.
+> - **Fails list:** No em dash in either file. The new sentence has no version comparison ("gained", "since", "changed though"), no count, no record line number, no commit hash and no narrated run.
+> - **Parity:** Both editions changed. "conferente" and "subagente" follow pt :64 as the page decided.
+>
+> **Minor wording points (optional):** Both are wording points in the Contract itself, not departures by the delivery. A fix would change the page and both lines together.
+> 1. **book/pt/08-install-and-hosts.md:95, "na 2026.10.20.3":** This leaves "versão" unstated. Elsewhere chapter 8 pt writes "o focus-kit 2026.10.20.3" (:46, :56). Suggested fix: "na versão 2026.10.20.3" or "no focus-kit 2026.10.20.3".
+> 2. **book/pt/08-install-and-hosts.md:95, "o subagente por slug de um comando":** This drops the English "one" ("a command's one subagent per slug"). It is still natural and faithful, since "o ... por slug" carries the singular. Suggested fix, only if exact parity is wanted: "o único subagente por slug de um comando".
+>
+> **Not checked:** I did not run `make verify` or `make book`; the page's Done when still lists both. All 2026-10-20-3 record line numbers above refer to the copy committed at HEAD.
+
+What was done with it: point 1 fixed (Divergences); point 2 left as it is, since the agent itself calls it natural and faithful and "o subagente por slug" already says one per slug. No new queue line.
+
+**Decisions at build.** Taken alone, by the batch rule to take the recommended option: the review's point 1 fixed and point 2 kept, as above.
 
 ```commit
-docs(ch08-update-other-edits): an update's migrations can need other edits
+docs(ch08-update-other-edits): migrations can need other edits
 
 - chapter 8: applying migrations can edit a sentence no item names
 - the book's example: docs/05 §7 edited beside §2 and §4

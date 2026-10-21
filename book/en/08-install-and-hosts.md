@@ -91,6 +91,7 @@ The report gives each item one of those three outcomes; it compares the document
 
 The kit's version is the `metadata.version` in each `SKILL.md`; the process is what docs/04, docs/05 and `AGENTS.md` say, because every command reads them, so an updated kit whose migrations are not applied still runs the old process.
 The update is done when the migrations are applied, as any change is: a queue line, defined with `/propose` and built with `/apply`, so the change to your rules or your queue gets a page, verify and your review.
+Applying them can need an edit no item names, when a migration's wording contradicts a sentence the report does not check: on the book's repository at 2026.10.20.3, docs/05 §7 admitted no specialized subagent beyond the reviews' readers and checker, which the §4 paragraph the report proposed, on a command typed with several slugs, contradicted, so the line that applied §2 and §4 edited §7 too, and §7 now admits a command's one subagent per slug with the reviews' readers and checker.
 
 On a documented project the update reports the migrations first, or says there are none.
 It never asks you to run `/brainstorm` or `/analyze` again: those write a project's documents from nothing, and yours exist.
