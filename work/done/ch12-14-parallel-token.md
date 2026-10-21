@@ -107,12 +107,40 @@
 * `renew-loan` is `(P-)`, the hook chapter 14 :87 already gives; `(--)` taught in one sentence, to show `-` first waits for pages, not for builds.
 * For a non-developer, each letter as a permission for one command, in Behaviour only; the chapter's sentences 2 and 3 carry it.
 * No new number in "What the team gains": the kit's evidence is a project the book does not name, and the book teaches the kit as it is.
+* At build: chapter 14's new sentences go after en :86 / pt :87, the last sentence before the chapter 19 pointer; the page's "after :87" for en names the pointer itself, and "before the chapter 19 pointer" decides it. They form a paragraph of their own, set apart by blank lines.
+* At build: the block is introduced by one sentence, "The same library, in four lines written for this chapter", so the block says it was written for the chapter, as docs/04 asks of every example.
+* At build: chapter 12's key point reads "`[>]` when the page is completely defined, correcting the token from the page, or `[?]` when the scope waits", a participle so the list of marks keeps its "or".
+* At build: chapter 11 :179's pt sibling is pt :184, which the page did not name.
+* At build: the pt sentence 2 clause reads "as letras ficam P e A porque os comandos mantêm os nomes em inglês", in the same sentence, so the editions keep line parity.
+
+**Divergences.** None from the Contract. The Contract's "Ten files" counts eight: chapters 11 to 14 in two editions, as the queue line names them.
+
+**Omissions.** None.
+
+**Proof.**
+
+* `make verify` green (exit 0) after the last edit to the chapters.
+* `make book` exit 0; PDFs: `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+* Verify's parity and width checks pass on all four chapters, the two new blocks included.
+
+**Delivery review.** One read-only Opus agent read `git diff HEAD` of the eight chapter files, the whole of en chapter 14's changed section, this page, docs/03's `queue line`, `free line` and `parallel token` rows and docs/05 §4; docs/04 it did not read directly, taking its rules from the brief and this page. It found nothing that breaks the page, docs/04 or the text. It noted six wording preferences: en 12 :26 "and so on" could read as "etc." (taken: "and likewise"); pt 14 "esperar X estar" (taken: "esperar até", in the counterfactual and the key point); the token's apposition in chapter 11 :16, the clause order of chapter 14 :3, "whose token lets it build" on a line without a token, and the back-reference of "A line can say it once" (all the Contract's wording, kept). One item outside the page: the chapter 9 link for `/brainstorm` writing tokens leads to a chapter silent on them, which this page's Out of scope already holds as silent, not false; no new queue line.
 
 **Done when.**
 
-* [ ] Each passage of the Contract changed, both editions written; no other sentence changed.
-* [ ] Each chapter still opens with its value; no filler and nothing useful cut.
-* [ ] No number added; no em dash, version, date or commit hash in a chapter; no private case used, so no approval owed.
-* [ ] The new blocks within 74 columns in both editions.
-* [ ] `make verify` green.
-* [ ] `make book` built both editions, with both PDF paths.
+* [x] Each passage of the Contract changed, both editions written; no other sentence changed.
+* [x] Each chapter still opens with its value; no filler and nothing useful cut.
+* [x] No number added; no em dash, version, date or commit hash in a chapter; no private case used, so no approval owed.
+* [x] The new blocks within 74 columns in both editions.
+* [x] `make verify` green.
+* [x] `make book` built both editions, with both PDF paths.
+
+```commit
+docs(ch12-14-parallel-token): chapters 11 to 14 teach the (PA) token
+
+- chapter 14: the token, what each letter lets run, what - waits for
+- chapter 14: a four-line example and who re-judges a token
+- chapters 12 and 13: /propose and /apply wait as the token says
+- chapter 11: a line's token and a move re-judging the tokens below
+
+work/done/ch12-14-parallel-token.md
+```
