@@ -75,7 +75,7 @@ Next: /propose ch08-update-2026-10-20-4, once kit-2026-10-20-4 is [x].
 Each item names a document and a section, and ends in one of three outcomes.
 It matches and needs nothing, and says so: `None`.
 It lacks something, and the item gives the wording the template proposes and where it goes.
-Or it differs by a choice the project made and recorded with a date or an ADR, as the book's Git slot does: the item names that choice and asks for no change.
+Or it differs by a choice the project made and recorded with a date or an ADR, as the book's Git slot does: the item names that choice, asks for no change, and ends in `None` too.
 Every item is reported, never done: the update writes none of these documents.
 
 Section numbers come first because the commands cite docs/05 by the template's numbers, §4 for the queue, §6 for the commit, and read by number; a docs/05 numbered otherwise would send every command to the wrong section, so that migration comes before any other, whatever an ADR says.

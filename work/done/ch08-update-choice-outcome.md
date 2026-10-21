@@ -46,14 +46,25 @@ No term of docs/03 is introduced; no source note is added (the excerpt already n
 * Queue line wording: no change; it names the disagreement, and fixing the explanation makes the two agree.
 * `(PA)` judged `(PA)`: the definition takes nothing from a line in flight (`m28-review` is `[x]`), and the build touches only chapter 8, which no line in flight edits.
 
+**Divergences.** None: both sentences went in word for word as the Contract writes them, at en :78 and pt :80; no other line of chapter 8 moved.
+
+**Decisions taken by /apply.** Nothing was open. The batch rules keep docs/06 out of this lane, so the queue line's mark is the driver's.
+
+**Proof.**
+
+* `make verify`: green, every check passed (build, parity, em dash, prose, width, examples, links, disclosure), exit 0, before the review and again after the page's records and its move to `work/done/`.
+* `make book`: run after the last verify, exit 0, on HEAD `0ada2f1` with this delivery's two chapter lines and the other lanes' uncommitted edits in the tree; the PDFs to review are `output/one-page-at-a-time.pdf` and `output/uma-pagina-de-cada-vez.pdf`.
+
+**Delivery review.** One read-only Opus agent, launched by this /apply over this delivery's paths only (`git diff HEAD` of both editions of chapter 8), against this page, docs/04 and `AGENTS.md`, with `work/done/kit-2026-10-20-4.md` :27, :86 and SETUP.md §1 step 4 at focus-kit `ffbec72` for the claim. Its prompt asked for no advisor, and its reply names none. Its reply: no finding. Each edition changes one line, en :78 and pt :80, word for word as the Contract asks, and nothing else in chapter 8; the excerpt is unchanged, its Git item still ending "None."/"Nenhuma.", which the new third outcome agrees with; the record (:27, :86, "recorded project choice(s); none") and SETUP step 4 ("is a project choice: report it as such ... not as a migration") support the claim; the Portuguese list reads naturally and means the same as the English; no em dash, commit hash, run narration or private case, no docs/03 term and no source note added. It ran neither verify nor the book, being read-only.
+
 **Done when.**
 
-* [ ] Both editions of chapter 8 changed at en :78 / pt :80 as the Contract says, and nothing else in the chapter.
-* [ ] The chapter still opens with its value; no filler and nothing useful cut.
-* [ ] The claim traces to `work/done/kit-2026-10-20-4.md` :27, :86 and SETUP §1 step 4 at `ffbec72`.
-* [ ] No em dash, no commit hash, no run narration; disclosure scan green.
-* [ ] Delivery review as docs/05 §5 says, its record saying what the agent read and whether it consulted the advisor.
-* [ ] `make verify` green; `make book` run, with its HEAD and tree named, and both PDF paths given.
+* [x] Both editions of chapter 8 changed at en :78 / pt :80 as the Contract says, and nothing else in the chapter.
+* [x] The chapter still opens with its value; no filler and nothing useful cut.
+* [x] The claim traces to `work/done/kit-2026-10-20-4.md` :27, :86 and SETUP §1 step 4 at `ffbec72`.
+* [x] No em dash, no commit hash, no run narration; disclosure scan green.
+* [x] Delivery review as docs/05 §5 says, its record saying what the agent read and whether it consulted the advisor.
+* [x] `make verify` green; `make book` run, with its HEAD and tree named, and both PDF paths given.
 
 ```commit
 docs(ch08-update-choice-outcome): a recorded choice ends in None too
