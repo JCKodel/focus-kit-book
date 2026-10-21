@@ -661,7 +661,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.20.4 and the repo
 
 ```
 [x] kit-2026-10-20-4 (PA)    reinstall the kit at 2026.10.20.4; the report names no migration · after kit-2026-10-20-3
-[ ] ch08-update-2026-10-20-4 chapter 8: the update example and its report at 2026.10.20.4, and the Windows requirement of the README; both editions · after kit-2026-10-20-4
+[>] ch08-update-2026-10-20-4 (PA) chapter 8: the update example and its report at 2026.10.20.4, and the Windows requirement of the README; both editions · after kit-2026-10-20-4
 [ ] ch13-19-claim-script     chapters 13 and 19: the claim script, what it checks, creates, pushes and prints, the git alias that runs it on every host, Git for Windows' shell and the WSL recommendation; both editions · after kit-2026-10-20-4
 [ ] ch08-copilot-cli         chapter 8: the GitHub Copilot CLI as a host of its own, reading AGENTS.md and the skills from the terminal, apart from Copilot in VS Code and its prompt files; both editions · after kit-2026-10-20-4
 [ ] m28-review               the review of M28 as docs/05 §8 says · after kit-2026-10-20-4, ch08-update-2026-10-20-4, ch13-19-claim-script, ch08-copilot-cli
