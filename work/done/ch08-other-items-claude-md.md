@@ -94,7 +94,7 @@ No term of docs/03 is introduced; no source note is added (the excerpt already n
 * The second outcome names the two §4 items by their subjects, not by count alone, so the reader finds them in the excerpt.
 * `(PA)` judged `(PA)` by docs/05 §4 :103-106: no line above is in flight (`m29-review` is `[x]`), the definition takes nothing from another page, and the build touches only chapter 8, which neither neighbouring line edits.
 
-**Divergences.** None. The Portuguese split at :59 moves every later Portuguese line down by one, so the changed lines stand at pt :59-60, :80-81, :88, :122, :138 after the build; the Contract's numbers are as the files were before it.
+**Divergences.** None from the Contract. The Portuguese split at :59 moves every later Portuguese line down by one, so the changed lines stand at pt :59-60, :80-81, :88, :122, :138 after the build; the Contract's numbers are as the files were before it. The Delivery review ran without the session's advisor, which docs/05 §5 asks it to keep: its agent said it did not call any advisor tool; and it did not open docs/04, against which docs/05 §5 has it read, using the conventions the brief and the page state, while its Done when item, as defined at `f443055`, ticked it "as docs/05 §5 says" (Delivery review); `m30-records-claims` gave the item the paragraph's words.
 
 **Decisions taken by /apply.** None: the Contract left nothing open.
 
@@ -115,7 +115,7 @@ No term of docs/03 is introduced; no source note is added (the excerpt already n
 * [x] The chapter still opens with its value; no filler and nothing useful cut.
 * [x] Every claim traces to `work/done/kit-2026-10-20-5.md` :88 or SETUP at focus-kit `cc16f4e` :118-121, :275, :350, §§3.11, 3.12.
 * [x] No em dash, no commit hash, no run narration; every block line within 74 columns; disclosure scan green.
-* [x] Delivery review as docs/05 §5 says, its record saying what the agent read and what its reply says of the advisor.
+* [x] Delivery review by one read-only Opus agent, launched by this /apply, over `git diff HEAD` of both chapter 8 files and this page (Delivery review): narrower than docs/05 §5, which has it read against docs/04, here not opened; it read this page, the record's lines 85 to 90, SETUP.md at `cc16f4e` and chapter 8 by line, and consulted no advisor, which docs/05 §5 asks it to keep.
 * [x] `make verify` green after the last edit; `make book` run, with its HEAD and tree named, and both PDF paths given.
 
 ```commit
