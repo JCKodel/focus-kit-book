@@ -693,7 +693,9 @@ When this milestone closes, a reader of chapter 22 knows that the cache lasts on
 
 ```
 [x] ch22-cache-lifetime (PA) chapter 22: each cache hit renews the cache's lifetime, counted from the start of the request; after a longer pause the next call writes the whole context again at 1.25 times the input price for five minutes or 2 times for one hour, against a read of 0.1 times or less, so one turn after a coffee break can cost tens of times the turn before it; Claude Code gives the main conversation one hour on a subscription within the plan's usage and five minutes on an API key, a cloud provider or usage credits, subagents five minutes, and the `promptCacheTtl` setting changes it; sources Anthropic's pricing page and Claude Code's "How Claude Code uses prompt caching", accessed 2026-10-22; both editions
-[ ] m30-review (--)          the review of M30 as docs/05 §8 says · after ch22-cache-lifetime
+[x] m30-review (--)          the review of M30 as docs/05 §8 says · after ch22-cache-lifetime
+[ ] ch22-cache-service (PA) chapter 22 and docs/03's cache lifetime row say that the service keeps the stored context and writes it again after a pause, the host being the program that runs the agent (docs/03, chapter 22's own definition) and choosing the lifetime per request, in the new section and wherever the chapter has the host store the cache; both editions · after m30-review
+[ ] m30-records-claims (PA) the record of ch08-other-items-claude-md holds only what happened: its Delivery review tick matching what its agent read and what its report says of the advisor, the review without docs/04 or an advisor named in Divergences · after m30-review
 ```
 
 ## M31. The films
