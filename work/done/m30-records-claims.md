@@ -23,7 +23,7 @@ Terms: record, Delivery review, Done when, as docs/03 and docs/05 have them; no 
 
 **Out of scope.**
 
-* C14, the verify item at :119 against the Proof at :107, and every other candidate of `work/done/m30-review.md`: the author confirmed only C1 and C13 (:179, :183).
+* C14, the verify item at :119 against the Proof at :107, and every other candidate of `work/done/m30-review.md`: the author confirmed only C1 and C13 (:179, :181-182).
 * The review paragraph (:110): it says what happened, and the finding cites it as evidence, not as a line to change; its "did not run `make verify`" is a read-only reader's, which docs/05 §5 does not ask to run it.
 * "Decisions taken alone" (:89), which already says the agent chose, and "Decisions taken by /apply" (:99), which says nothing was open: no choice to attribute.
 * The `commit` block (:121 to :131): the message `a4f2cb9` carries.
@@ -60,7 +60,7 @@ Terms: record, Delivery review, Done when, as docs/03 and docs/05 have them; no 
 
 **Built.** The three replacements of the Contract in `work/done/ch08-other-items-claude-md.md`, each old text counted once in the file before any edit and replaced word for word by the Edit tool; nothing else in the record changed.
 
-**Divergences.** None from the Contract. The Delivery review ran without the session's advisor, which docs/05 §5 asks it to keep: its reply says it consulted none (Delivery review).
+**Divergences.** None from the Contract. The Delivery review ran without the session's advisor, which docs/05 §5 asks it to keep: its reply says it consulted none (Delivery review). The `commit` block below, as `9c65001` carries it, wraps its second bullet onto two lines, against docs/05 §6's one-line bullets; `m31-records-claims` left it as committed.
 
 **Decisions taken by /apply.** None: the Contract left nothing open. The review's one observation, that the item states "consulted no advisor" as fact where the record's :110 gives it as the agent's word, is the form Contract chose and the Divergences sentence keeps the attributed words; no change and no queue line comes of it.
 

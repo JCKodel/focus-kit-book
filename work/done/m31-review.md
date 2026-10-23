@@ -31,7 +31,7 @@ The queue line's promise beyond M31's paragraph, docs/00's Cases sentence, is te
 
 Why this base and not `8ddd77d`, so that `book-films`' own commit would be in M31's range: docs/05 §8 names another commit only "where no earlier review exists", and one will exist, since this line's `(--)` token holds its /apply until every line above it, m30-review included, is `[x]` (docs/05 §4). The smaller range loses nothing: `book-films` was read by m30-review's readers (Behaviour, the films' code reading). A base at `8ddd77d` would cost twice: it would read `book-films` a second time, and it would put m30-review's own commit and page inside M31's range, a reading of a review, which docs/05 §7 excludes and no earlier review's range has held, every base so far being a review's commit, which the diff leaves out. The agent chose this reading from the documents; the author overturns it in the review if `book-films` is to be read inside its own milestone's range whatever it costs.
 
-The range therefore holds M30's fix round, the lines m30-review's findings become, with their define commits, which get no second review (docs/05 §8), and this page's define commit; the clause tests above are M31's alone, while the readers read the whole range.
+The range therefore holds M30's fix round, the lines m30-review's findings become, which get no second review (docs/05 §8); no define commit was made for those lines or for this page, so none is in it (End commit); the clause tests above are M31's alone, while the readers read the whole range.
 
 **End.** The commit HEAD is when the reading starts; /apply records it before launching any reader, and nothing it records later moves it. This page's define commit may land before or after the base: m30-review's page anticipates both orders. If it lands before, it lies outside the range and the readers read `work/m31-review.md` at the end commit beside the range; if after, it is inside.
 
@@ -40,7 +40,7 @@ The range therefore holds M30's fix round, the lines m30-review's findings becom
 * **Build:** a path of the `Makefile`, `scripts/`, `README.md`, `README.pt.md`, `VERSION` or `docs/manuals/` that M30's fix round or a release touches; a release commit changing `VERSION` alone is read with no clause, as m30-review reads `18cdae4`.
 * **Chapters:** `book/{en,pt}/` paths of M30's fix round, `book/{en,pt}/index.md` included, read whole at the end commit where they hold a passage of the clause table.
 * **The kit's skills:** a path under `.claude/` or `.agents/`; none is expected, and with none no reader is planned for it and no comparison with the kit is made.
-* **The documents:** `docs/` paths, `docs/06-Queue.md` and this page among them, and the records under `work/done/` of M30's fix round.
+* **The documents:** `docs/` paths, `docs/06-Queue.md` among them, and the records under `work/done/` of M30's fix round; this page, uncommitted, was read from the working tree beside the range (End commit).
 
 **Readers.** Read-only readers on Opus, each keeping the session's advisor, Fable, then one read-only checker on Opus; each launch sets its model to Opus, no other model runs the review, and no agent runs on Fable itself (docs/05 §5, Milestone review). At most two of the review's agents run at a time. Planned, lean, by what the range holds at the end commit:
 
@@ -189,7 +189,7 @@ Each is one line in docs/06, wrapped here to fit the page.
 * The page asks for the working files in the session's scratchpad and the candidate table also in `m31-candidates.md`; the scratchpad went away during the session, after the readers launched, so no reader wrote notes and the table is on this page alone. The Done when item is reworded to say so.
 * The page asks for foreground Agent calls; each agent was called from this session and the host ran it in the background, its report reaching this session as its completion notice, as m29-review and m30-review recorded.
 * docs/05 §5 asks every agent to keep the session's advisor, Fable; each report says it consulted an advisor once and cannot name its model, as m30-review recorded.
-* Behaviour and End foresee this page's define commit before or after the base; neither happened (End commit, C8).
+* End (:36) foresaw this page's define commit before or after the base, and Readers' second case (:48) a range holding it; neither happened, and no define commit was made for M30's fix lines either, whose pages first entered git with their own commits, `9c65001` and `bc6fa75` (End commit, C8); `m31-records-claims` gave Base (:34) and Areas (:43) what happened.
 * "No word of the author for this review is quoted on this page" (Behaviour) no longer holds: the word is quoted above.
 
 **Decisions taken by /apply.** The agent chose each of these.
