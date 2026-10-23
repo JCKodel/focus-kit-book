@@ -2,6 +2,7 @@
 
 After this chapter you can read a token count from your host's logs, measure what one milestone's deliveries cost with a window and a set of sessions written down so your team can repeat the count, and say what a fresh session carries into its context and what it leaves out.
 You can also say where an agent pays for itself, where it pays less, and where it does not pay.
+And you can say why the first call after a long pause can cost many times the call before it, and set how long the cache lasts.
 
 ## The problem
 
@@ -21,7 +22,27 @@ The host, the program you run, bills every call to the model in tokens, and it c
 
 The model remembers nothing between calls, so the host sends the whole context again every time: its own instructions, the rules file, every file read so far and the conversation.
 The cache keeps that repeated part, so the next call reads it back at a fraction of the price of new input.
-Anthropic's pricing documentation gives the multipliers: a cache write costs 1.25 times a normal input token for a five-minute cache, and a cache read costs a tenth of one or less, depending on the model.[^anthropic-pricing]
+Anthropic's pricing documentation gives the multipliers: a cache write costs 1.25 times a normal input token for a five-minute cache and 2 times for a one-hour cache, and a cache read costs a tenth of one or less, depending on the model.[^anthropic-pricing]
+
+## How long the cache lasts
+
+The host keeps a stored context only for a while, the cache lifetime: five minutes or one hour, chosen when the context is written.[^anthropic-pricing]
+Every call that reads the cache renews that lifetime, so the cache stays while the conversation keeps working.[^claude-code-prompt-caching]
+The lifetime counts from the start of the call that wrote or read the cache, not from the end of its answer: an answer that takes 4 minutes to stream leaves about 1 minute of a five-minute cache for the next call.[^anthropic-prompt-caching]
+
+A pause past the lifetime has a price.
+The next call finds no cache, so the host writes the whole context again, at the write price instead of the read price.[^claude-code-prompt-caching]
+A write costs 1.25 times an input token for a five-minute cache or 2 times for a one-hour cache, and a read 0.1 times, or 0.05 or 0.025 times on the models the pricing page names.[^anthropic-pricing]
+Divide the write by the read, and the context of that first call after the pause costs 12.5 times what it cost on the call before it at the least (1.25 / 0.1) and 80 times at the most (2 / 0.025).
+The new text the call adds and the answer it writes cost what they cost on any call; the jump is in the context, which on a long session is most of what a call sends.
+
+Claude Code chooses the lifetime per request, in two groups.[^claude-code-prompt-caching]
+The main conversation, the one you type in, gets one hour on a Claude subscription while you are within the plan's usage, and five minutes with an API key, through a cloud provider, or once the plan draws on its usage credits.
+Subagents and most other requests outside the main conversation get five minutes.
+
+Two settings change it, from Claude Code v2.1.242: `promptCacheTtl` for the main conversation and `subagentPromptCacheTtl` for the rest, each set to `5m` or `1h`; Claude Code ignores any other value.[^claude-code-prompt-caching]
+The hour pays when you leave a session idle and come back to it, because the next call reads the context instead of writing it again.
+It costs more on short bursts of work that never pause past five minutes, where every write pays 2 times instead of 1.25 and the longer lifetime is never used.
 
 ## What Ninjobs recorded in tokens
 
@@ -101,13 +122,14 @@ Count soon after the milestone closes: the host deletes logs older than its rete
 
 Then compare milestones, not vendors.
 The second milestone against the first, on the same project, tells you whether the team's way of working got cheaper or dearer; a vendor's price list tells you the price of a token, and nothing about how many your work needs.
-When a number moves, the columns say why: output up means more was built, cache reads up means sessions grew.
+When a number moves, the columns say why: output up means more was built, cache reads up means sessions grew, cache writes up means the cache was rebuilt, by pauses past its lifetime or by new sessions.
 That is why I compare Ninjobs with nothing outside: I have no other project measured the same way, and a number from another team, another model or another price table would compare things that do not match.
 
 ## What the team gains
 
 A number per delivery that anyone on the team can repeat from the host's logs, because its window, its sessions and its deliveries are written down, in place of a feeling.
 In the sample Ninjobs recorded, 98.3% of the tokens were cache reads, the column the way a team works can move.
+The team also knows what a pause past the cache lifetime costs, from Anthropic's price multipliers, and sets the lifetime to how it works.[^anthropic-pricing]
 
 ## Key points
 
@@ -115,5 +137,8 @@ In the sample Ninjobs recorded, 98.3% of the tokens were cache reads, the column
 * Count cache reads apart, because they measure the context each call carried: a fresh session per delivery leaves earlier conversations out of it, and the queue, read whole, still adds a sentence per delivery to it.
 * An agent pays where the decision is written and the check is mechanical, pays less where the decision is still being made, and does not pay on a stack it has not seen.
 * Measure tokens per delivery on your own project for one milestone, from the host's logs, with its window, sessions and deliveries written down and unmatched work on its own line, and compare milestones, not vendors.
+* Keep the cache in use: every read renews it, and a pause past its lifetime makes the next call write the whole context again at the write price; Claude Code gives the main conversation an hour on a subscription within its usage and five minutes otherwise, and `promptCacheTtl` changes it.
 
-[^anthropic-pricing]: Anthropic, "Pricing", Claude Platform documentation, section "Prompt caching", accessed 2026-09-30. <https://docs.anthropic.com/en/docs/about-claude/pricing>
+[^anthropic-pricing]: Anthropic, "Pricing", Claude Platform documentation, section "Prompt caching", accessed 2026-10-22. <https://platform.claude.com/docs/en/about-claude/pricing>
+[^claude-code-prompt-caching]: Anthropic, "How Claude Code uses prompt caching", Claude Code documentation, section "Cache lifetime", accessed 2026-10-22. <https://code.claude.com/docs/en/prompt-caching>
+[^anthropic-prompt-caching]: Anthropic, "Prompt caching", Claude Platform documentation, section "How prompt caching works", accessed 2026-10-22. <https://platform.claude.com/docs/en/build-with-claude/prompt-caching>

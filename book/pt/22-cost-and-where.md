@@ -2,6 +2,7 @@
 
 Depois deste capítulo você consegue ler uma contagem de tokens nos logs do seu host, medir quanto custaram as entregas de um marco com uma janela e um conjunto de sessões anotados, para que o seu time consiga repetir a contagem, e dizer o que uma sessão nova leva para o seu contexto e o que ela deixa de fora.
 Você também consegue dizer onde um agente se paga, onde ele se paga menos e onde ele não se paga.
+E consegue dizer por que a primeira chamada depois de uma pausa longa pode custar muitas vezes a chamada anterior, e definir quanto tempo o cache dura.
 
 ## O problema
 
@@ -21,7 +22,28 @@ O host, o programa que você roda, cobra cada chamada ao modelo em tokens, e con
 
 O modelo não lembra nada entre uma chamada e outra, então o host manda o contexto inteiro de novo toda vez: as suas próprias instruções, o arquivo de regras, cada arquivo lido até ali e a conversa.
 O cache guarda essa parte repetida, e a chamada seguinte a lê de volta por uma fração do preço da entrada nova.
-A documentação de preços da Anthropic dá os multiplicadores: uma escrita no cache custa 1,25 vez um token de entrada normal, para um cache de cinco minutos, e uma leitura do cache custa um décimo disso ou menos, conforme o modelo.[^anthropic-pricing]
+A documentação de preços da Anthropic dá os multiplicadores: uma escrita no cache custa 1,25 vez um token de entrada normal para um cache de cinco minutos e 2 vezes para um cache de uma hora, e uma leitura do cache custa um décimo disso ou menos, conforme o modelo.[^anthropic-pricing]
+
+## Quanto tempo o cache dura
+
+O host guarda um contexto armazenado só por um tempo, o tempo de vida do cache: cinco minutos ou uma hora, escolhido quando o contexto é escrito.[^anthropic-pricing]
+Cada chamada que lê o cache renova esse tempo de vida, então o cache se mantém enquanto a conversa continua trabalhando.[^claude-code-prompt-caching]
+O tempo de vida conta a partir do começo da chamada que escreveu ou leu o cache, não do fim da sua resposta: uma resposta que leva 4 minutos para ser transmitida deixa cerca de 1 minuto de um cache de cinco minutos para a chamada seguinte.[^anthropic-prompt-caching]
+
+Uma pausa além do tempo de vida tem um preço.
+A chamada seguinte não encontra cache, então o host escreve o contexto inteiro de novo, pelo preço da escrita em vez do preço da leitura.[^claude-code-prompt-caching]
+Uma escrita custa 1,25 vez um token de entrada para um cache de cinco minutos ou 2 vezes para um cache de uma hora, e uma leitura 0,1 vez, ou 0,05 ou 0,025 vez nos modelos que a página de preços cita.[^anthropic-pricing]
+Divida a escrita pela leitura, e o contexto dessa primeira chamada depois da pausa custa 12,5 vezes o que custou na chamada anterior, no mínimo (1,25 / 0,1), e 80 vezes, no máximo (2 / 0,025).
+O texto novo que a chamada acrescenta e a resposta que ela escreve custam o que custam em qualquer chamada; o salto está no contexto, que numa sessão longa é a maior parte do que uma chamada manda.
+
+O Claude Code escolhe o tempo de vida por requisição, em dois grupos.[^claude-code-prompt-caching]
+A conversa principal, aquela em que você digita, recebe uma hora numa assinatura do Claude enquanto você está dentro do uso do plano, e cinco minutos com uma chave de API, por um provedor de nuvem, ou quando o plano passa a usar os seus créditos de uso.
+Os subagentes e a maior parte das outras requisições fora da conversa principal recebem cinco minutos.
+
+Duas configurações mudam isso, a partir do Claude Code v2.1.242: `promptCacheTtl` para a conversa principal e `subagentPromptCacheTtl` para o resto, cada uma com `5m` ou `1h`; o Claude Code ignora qualquer outro valor.[^claude-code-prompt-caching]
+Esses nomes e valores são os do próprio Claude Code, e por isso ficam em inglês.
+A hora compensa quando você deixa uma sessão parada e volta a ela, porque a chamada seguinte lê o contexto em vez de escrevê-lo de novo.
+Ela custa mais em rodadas curtas de trabalho que nunca param por mais de cinco minutos, em que cada escrita paga 2 vezes em vez de 1,25 e o tempo de vida maior nunca é usado.
 
 ## O que o Ninjobs registrou em tokens
 
@@ -102,13 +124,14 @@ Conte logo depois que o marco fecha: o host apaga os logs mais antigos que o seu
 
 Depois compare marcos, não fornecedores.
 O segundo marco contra o primeiro, no mesmo projeto, diz se o jeito de o time trabalhar ficou mais barato ou mais caro; a tabela de preços de um fornecedor diz o preço de um token, e nada sobre quantos o seu trabalho precisa.
-Quando um número muda, as colunas dizem por quê: saída maior quer dizer que mais coisa foi construída, leituras do cache maiores querem dizer que as sessões cresceram.
+Quando um número muda, as colunas dizem por quê: saída maior quer dizer que mais coisa foi construída, leituras do cache maiores querem dizer que as sessões cresceram, escritas no cache maiores querem dizer que o cache foi refeito, por pausas além do seu tempo de vida ou por sessões novas.
 É por isso que eu não comparo o Ninjobs com nada de fora: eu não tenho outro projeto medido do mesmo jeito, e um número de outro time, de outro modelo ou de outra tabela de preços compararia coisas que não se correspondem.
 
 ## O que o time ganha
 
 Um número por entrega que qualquer pessoa do time consegue repetir a partir dos logs do host, porque a sua janela, as suas sessões e as suas entregas estão anotadas, no lugar de uma sensação.
 Na amostra que o Ninjobs registrou, 98,3% dos tokens foram leituras do cache, a coluna que o jeito de o time trabalhar consegue mexer.
+O time também sabe quanto custa uma pausa além do tempo de vida do cache, pelos multiplicadores de preço da Anthropic, e ajusta o tempo de vida ao jeito como trabalha.[^anthropic-pricing]
 
 ## Pontos-chave
 
@@ -116,5 +139,8 @@ Na amostra que o Ninjobs registrou, 98,3% dos tokens foram leituras do cache, a 
 * Conte as leituras do cache à parte, porque elas medem o contexto que cada chamada carregou: uma sessão nova por entrega deixa as conversas anteriores fora dele, e a fila, lida inteira, ainda soma a ele uma frase por entrega.
 * Um agente compensa onde a decisão está escrita e a checagem é mecânica, compensa menos onde a decisão ainda está sendo tomada, e não compensa numa stack que ele não viu.
 * Meça os tokens por entrega no seu próprio projeto durante um marco, a partir dos logs do host, com a janela, as sessões e as entregas anotadas e o trabalho sem entrega numa linha própria, e compare marcos, não fornecedores.
+* Mantenha o cache em uso: cada leitura o renova, e uma pausa além do seu tempo de vida faz a chamada seguinte escrever o contexto inteiro de novo pelo preço da escrita; o Claude Code dá à conversa principal uma hora numa assinatura dentro do seu uso e cinco minutos nos outros casos, e `promptCacheTtl` muda isso.
 
-[^anthropic-pricing]: Anthropic, "Pricing", documentação da Claude Platform, seção "Prompt caching", acesso em 2026-09-30. <https://docs.anthropic.com/en/docs/about-claude/pricing>
+[^anthropic-pricing]: Anthropic, "Pricing", documentação da Claude Platform, seção "Prompt caching", acesso em 2026-10-22. <https://platform.claude.com/docs/en/about-claude/pricing>
+[^claude-code-prompt-caching]: Anthropic, "How Claude Code uses prompt caching", documentação do Claude Code, seção "Cache lifetime", acesso em 2026-10-22. <https://code.claude.com/docs/en/prompt-caching>
+[^anthropic-prompt-caching]: Anthropic, "Prompt caching", documentação da Claude Platform, seção "How prompt caching works", acesso em 2026-10-22. <https://platform.claude.com/docs/en/build-with-claude/prompt-caching>

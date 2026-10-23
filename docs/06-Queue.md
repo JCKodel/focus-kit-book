@@ -686,3 +686,12 @@ When this milestone closes, the book teaches focus-kit 2026.10.20.5 and the repo
 [x] ch14-renewal-example (PA) chapter 14's renewal-notice example says /apply refuses the line first because it is `[ ]` and not `[>]`, and that `after` would hold it even were it `[>]`, and the Portuguese block row names the member it warns, within 74 columns; both editions · after m29-review
 [x] m29-records-claims (PA) the records of ch14-after-over-token, ch08-update-2026-10-20-5, kit-2026-10-20-5, m28-records-claims, ch10-12-no-implicit-hosts, ch08-update-choice-outcome, m28-claim-wording and ch13-16-several-slugs-sessions hold only what happened: verify and make book in the order the Proof records, each Delivery review saying what its agent read and what its report says of the advisor, a Done when item reworded in /apply named in Divergences, every list of choices made alone saying the agent chose, marks, dates and section names as they were, and m28-records-claims' dropped review finding given the line it names or its real disposition; docs/03's migration row and kit-2026-10-20-5 agree on whether a migration reports an unchanged rule's sentence · after m29-review
 ```
+
+## M30. The cache that expires
+
+When this milestone closes, a reader of chapter 22 knows that the cache lasts only while the conversation keeps using it, and that a pause past its lifetime makes the next turn rebuild the whole context at the write price instead of reading it at the read price.
+
+```
+[x] ch22-cache-lifetime (PA) chapter 22: each cache hit renews the cache's lifetime, counted from the start of the request; after a longer pause the next call writes the whole context again at 1.25 times the input price for five minutes or 2 times for one hour, against a read of 0.1 times or less, so one turn after a coffee break can cost tens of times the turn before it; Claude Code gives the main conversation one hour on a subscription within the plan's usage and five minutes on an API key, a cloud provider or usage credits, subagents five minutes, and the `promptCacheTtl` setting changes it; sources Anthropic's pricing page and Claude Code's "How Claude Code uses prompt caching", accessed 2026-10-22; both editions
+[ ] m30-review (--)          the review of M30 as docs/05 §8 says · after ch22-cache-lifetime
+```
