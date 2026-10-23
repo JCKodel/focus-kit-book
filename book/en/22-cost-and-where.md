@@ -16,7 +16,7 @@ A model reads and writes tokens, the units of text [chapter 1](01-how-agents-see
 The host, the program you run, bills every call to the model in tokens, and it counts four kinds apart.
 
 * **Input**: new text the model reads for the first time in this call.
-* **Cache write**: text the host stores so that later calls can reuse it.
+* **Cache write**: text kept where the model runs, at the host's request, so that later calls can reuse it.
 * **Cache read**: stored text a later call reuses.
 * **Output**: the text the model writes, its answer and the commands it asks the host to run.
 
@@ -26,12 +26,13 @@ Anthropic's pricing documentation gives the multipliers: a cache write costs 1.2
 
 ## How long the cache lasts
 
-The host keeps a stored context only for a while, the cache lifetime: five minutes or one hour, chosen when the context is written.[^anthropic-pricing]
+The host sends the context, but the cache is kept where the model runs, not on your machine: on Anthropic's infrastructure with a Claude subscription or an API key, or on the cloud provider's when you reach the model through one.[^claude-code-prompt-caching]
+That infrastructure keeps a stored context only for a while, the cache lifetime: five minutes or one hour,[^anthropic-pricing] which the host chooses for each request.[^claude-code-prompt-caching]
 Every call that reads the cache renews that lifetime, so the cache stays while the conversation keeps working.[^claude-code-prompt-caching]
 The lifetime counts from the start of the call that wrote or read the cache, not from the end of its answer: an answer that takes 4 minutes to stream leaves about 1 minute of a five-minute cache for the next call.[^anthropic-prompt-caching]
 
 A pause past the lifetime has a price.
-The next call finds no cache, so the host writes the whole context again, at the write price instead of the read price.[^claude-code-prompt-caching]
+The next call finds no cache, so the whole context the host sends is written again, at the write price instead of the read price.[^claude-code-prompt-caching]
 A write costs 1.25 times an input token for a five-minute cache or 2 times for a one-hour cache, and a read 0.1 times, or 0.05 or 0.025 times on the models the pricing page names.[^anthropic-pricing]
 Divide the write by the read, and the context of that first call after the pause costs 12.5 times what it cost on the call before it at the least (1.25 / 0.1) and 80 times at the most (2 / 0.025).
 The new text the call adds and the answer it writes cost what they cost on any call; the jump is in the context, which on a long session is most of what a call sends.
@@ -140,5 +141,5 @@ The team also knows what a pause past the cache lifetime costs, from Anthropic's
 * Keep the cache in use: every read renews it, and a pause past its lifetime makes the next call write the whole context again at the write price; Claude Code gives the main conversation an hour on a subscription within its usage and five minutes otherwise, and `promptCacheTtl` changes it.
 
 [^anthropic-pricing]: Anthropic, "Pricing", Claude Platform documentation, section "Prompt caching", accessed 2026-10-22. <https://platform.claude.com/docs/en/about-claude/pricing>
-[^claude-code-prompt-caching]: Anthropic, "How Claude Code uses prompt caching", Claude Code documentation, section "Cache lifetime", accessed 2026-10-22. <https://code.claude.com/docs/en/prompt-caching>
+[^claude-code-prompt-caching]: Anthropic, "How Claude Code uses prompt caching", Claude Code documentation, sections "Where the cache lives" and "Cache lifetime", accessed 2026-10-23. <https://code.claude.com/docs/en/prompt-caching>
 [^anthropic-prompt-caching]: Anthropic, "Prompt caching", Claude Platform documentation, section "How prompt caching works", accessed 2026-10-22. <https://platform.claude.com/docs/en/build-with-claude/prompt-caching>

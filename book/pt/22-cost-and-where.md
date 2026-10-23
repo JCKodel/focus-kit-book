@@ -16,7 +16,7 @@ Um modelo lê e escreve tokens, as unidades de texto que o [capítulo 1](01-how-
 O host, o programa que você roda, cobra cada chamada ao modelo em tokens, e conta quatro tipos separados.
 
 * **Entrada**: texto novo que o modelo lê pela primeira vez nesta chamada.
-* **Escrita no cache**: texto que o host guarda para que chamadas seguintes possam reusá-lo.
+* **Escrita no cache**: texto guardado onde o modelo roda, a pedido do host, para que chamadas seguintes possam reusá-lo.
 * **Leitura do cache**: texto guardado que uma chamada seguinte reusa.
 * **Saída**: o texto que o modelo escreve, a sua resposta e os comandos que ele pede ao host para rodar.
 
@@ -26,12 +26,13 @@ A documentação de preços da Anthropic dá os multiplicadores: uma escrita no 
 
 ## Quanto tempo o cache dura
 
-O host guarda um contexto armazenado só por um tempo, o tempo de vida do cache: cinco minutos ou uma hora, escolhido quando o contexto é escrito.[^anthropic-pricing]
+O host manda o contexto, mas o cache fica onde o modelo roda, não na sua máquina: na infraestrutura da Anthropic com uma assinatura do Claude ou uma chave de API, ou na infraestrutura do provedor de nuvem quando você chega ao modelo por meio dele.[^claude-code-prompt-caching]
+Essa infraestrutura guarda um contexto armazenado só por um tempo, o tempo de vida do cache: cinco minutos ou uma hora,[^anthropic-pricing] que o host escolhe para cada requisição.[^claude-code-prompt-caching]
 Cada chamada que lê o cache renova esse tempo de vida, então o cache se mantém enquanto a conversa continua trabalhando.[^claude-code-prompt-caching]
 O tempo de vida conta a partir do começo da chamada que escreveu ou leu o cache, não do fim da sua resposta: uma resposta que leva 4 minutos para ser transmitida deixa cerca de 1 minuto de um cache de cinco minutos para a chamada seguinte.[^anthropic-prompt-caching]
 
 Uma pausa além do tempo de vida tem um preço.
-A chamada seguinte não encontra cache, então o host escreve o contexto inteiro de novo, pelo preço da escrita em vez do preço da leitura.[^claude-code-prompt-caching]
+A chamada seguinte não encontra cache, então o contexto inteiro que o host manda é escrito de novo, pelo preço da escrita em vez do preço da leitura.[^claude-code-prompt-caching]
 Uma escrita custa 1,25 vez um token de entrada para um cache de cinco minutos ou 2 vezes para um cache de uma hora, e uma leitura 0,1 vez, ou 0,05 ou 0,025 vez nos modelos que a página de preços cita.[^anthropic-pricing]
 Divida a escrita pela leitura, e o contexto dessa primeira chamada depois da pausa custa 12,5 vezes o que custou na chamada anterior, no mínimo (1,25 / 0,1), e 80 vezes, no máximo (2 / 0,025).
 O texto novo que a chamada acrescenta e a resposta que ela escreve custam o que custam em qualquer chamada; o salto está no contexto, que numa sessão longa é a maior parte do que uma chamada manda.
@@ -142,5 +143,5 @@ O time também sabe quanto custa uma pausa além do tempo de vida do cache, pelo
 * Mantenha o cache em uso: cada leitura o renova, e uma pausa além do seu tempo de vida faz a chamada seguinte escrever o contexto inteiro de novo pelo preço da escrita; o Claude Code dá à conversa principal uma hora numa assinatura dentro do seu uso e cinco minutos nos outros casos, e `promptCacheTtl` muda isso.
 
 [^anthropic-pricing]: Anthropic, "Pricing", documentação da Claude Platform, seção "Prompt caching", acesso em 2026-10-22. <https://platform.claude.com/docs/en/about-claude/pricing>
-[^claude-code-prompt-caching]: Anthropic, "How Claude Code uses prompt caching", documentação do Claude Code, seção "Cache lifetime", acesso em 2026-10-22. <https://code.claude.com/docs/en/prompt-caching>
+[^claude-code-prompt-caching]: Anthropic, "How Claude Code uses prompt caching", documentação do Claude Code, seções "Where the cache lives" e "Cache lifetime", acesso em 2026-10-23. <https://code.claude.com/docs/en/prompt-caching>
 [^anthropic-prompt-caching]: Anthropic, "Prompt caching", documentação da Claude Platform, seção "How prompt caching works", acesso em 2026-10-22. <https://platform.claude.com/docs/en/build-with-claude/prompt-caching>
