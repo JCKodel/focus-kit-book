@@ -26,8 +26,8 @@ A documentação de preços da Anthropic dá os multiplicadores: uma escrita no 
 
 ## Quanto tempo o cache dura
 
-O host manda o contexto, mas o cache fica onde o modelo roda, não na sua máquina: na infraestrutura da Anthropic com uma assinatura do Claude ou uma chave de API, ou na infraestrutura do provedor de nuvem quando você chega ao modelo por meio dele.[^claude-code-prompt-caching]
-Essa infraestrutura guarda um contexto armazenado só por um tempo, o tempo de vida do cache: cinco minutos ou uma hora,[^anthropic-pricing] que o host escolhe para cada requisição.[^claude-code-prompt-caching]
+O host manda o contexto, mas o cache fica onde o modelo roda, não na sua máquina, na infraestrutura que serve o modelo, seja qual for: a da Anthropic com uma assinatura do Claude, uma chave de API ou o Claude Platform on AWS, que é a API do Claude da própria Anthropic acessada com uma conta da AWS; a do próprio provedor de nuvem com o Amazon Bedrock ou o Agent Platform do Google Cloud, as plataformas pelas quais a Amazon e o Google servem o modelo eles mesmos.[^claude-code-prompt-caching]
+Essa infraestrutura guarda um contexto armazenado só por um tempo, o tempo de vida do cache: cinco minutos ou uma hora.[^anthropic-pricing]
 Cada chamada que lê o cache renova esse tempo de vida, então o cache se mantém enquanto a conversa continua trabalhando.[^claude-code-prompt-caching]
 O tempo de vida conta a partir do começo da chamada que escreveu ou leu o cache, não do fim da sua resposta: uma resposta que leva 4 minutos para ser transmitida deixa cerca de 1 minuto de um cache de cinco minutos para a chamada seguinte.[^anthropic-prompt-caching]
 

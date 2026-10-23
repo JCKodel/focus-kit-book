@@ -26,8 +26,8 @@ Anthropic's pricing documentation gives the multipliers: a cache write costs 1.2
 
 ## How long the cache lasts
 
-The host sends the context, but the cache is kept where the model runs, not on your machine: on Anthropic's infrastructure with a Claude subscription or an API key, or on the cloud provider's when you reach the model through one.[^claude-code-prompt-caching]
-That infrastructure keeps a stored context only for a while, the cache lifetime: five minutes or one hour,[^anthropic-pricing] which the host chooses for each request.[^claude-code-prompt-caching]
+The host sends the context, but the cache is kept where the model runs, not on your machine, in whichever infrastructure serves the model: Anthropic's with a Claude subscription, an API key or Claude Platform on AWS, which is Anthropic's Claude API reached with an AWS account; the cloud provider's own with Amazon Bedrock or Google Cloud's Agent Platform, the platforms through which Amazon and Google serve the model themselves.[^claude-code-prompt-caching]
+That infrastructure keeps a stored context only for a while, the cache lifetime: five minutes or one hour.[^anthropic-pricing]
 Every call that reads the cache renews that lifetime, so the cache stays while the conversation keeps working.[^claude-code-prompt-caching]
 The lifetime counts from the start of the call that wrote or read the cache, not from the end of its answer: an answer that takes 4 minutes to stream leaves about 1 minute of a five-minute cache for the next call.[^anthropic-prompt-caching]
 
