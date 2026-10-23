@@ -12,6 +12,8 @@ A free book that takes a reader who has never followed any process to running wh
 
 * The site: <https://jckodel.github.io/focus-kit-book/>
 * PDF and EPUB, in English and Portuguese: on this repository's [Releases](https://github.com/JCKodel/focus-kit-book/releases)
+* Two films of focus-kit at work, on YouTube: [the engineering film](https://youtu.be/Ywp1iUtEVyY) (the install and the kit's four commands) and [the business film](https://youtu.be/4cqpi5CfnVc) (the method on a project's documents, without code)
+* The films in Portuguese: [the Portuguese playlist](https://youtube.com/playlist?list=PLd13b_CIAdxo)
 
 ## Build locally
 

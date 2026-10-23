@@ -695,3 +695,12 @@ When this milestone closes, a reader of chapter 22 knows that the cache lasts on
 [x] ch22-cache-lifetime (PA) chapter 22: each cache hit renews the cache's lifetime, counted from the start of the request; after a longer pause the next call writes the whole context again at 1.25 times the input price for five minutes or 2 times for one hour, against a read of 0.1 times or less, so one turn after a coffee break can cost tens of times the turn before it; Claude Code gives the main conversation one hour on a subscription within the plan's usage and five minutes on an API key, a cloud provider or usage credits, subagents five minutes, and the `promptCacheTtl` setting changes it; sources Anthropic's pricing page and Claude Code's "How Claude Code uses prompt caching", accessed 2026-10-22; both editions
 [ ] m30-review (--)          the review of M30 as docs/05 §8 says · after ch22-cache-lifetime
 ```
+
+## M31. The films
+
+When this milestone closes, a reader of either edition finds the films that show focus-kit at work on real projects, in the edition's language, with the other language's playlist one link away.
+
+```
+[x] book-films (PA)          the book's README and site home link the engineering and business films in the edition's language and the other language's playlist, and chapter 8, after the install, links the edition's engineering film in a source note, describing neither the project the films show nor what they run; docs/00 §Cases says the films show a project outside the book's cases; both editions
+[ ] m31-review (--)          the review of M31 as docs/05 §8 says · after book-films
+```

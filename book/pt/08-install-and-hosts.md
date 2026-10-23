@@ -24,6 +24,8 @@ Nada é instalado na sua máquina; o agente escreve arquivos no repositório, e 
 No Windows, mantenha o shell que o Git for Windows instala junto com o git, o padrão do instalador: o script que o `/propose` roda (capítulo 13) passa por ele, do PowerShell ou do cmd, sem WSL, e se o git não encontrar esse shell, o `/propose` diz que o Git for Windows foi instalado sem ele e para.
 O seu host pode perguntar antes de baixar o arquivo e antes de escrever na sua própria pasta dentro do repositório, `.claude/` no Claude Code: aprove os dois.
 
+Um vídeo mostra esta instalação e os quatro comandos em uso.[^focus-kit-film]
+
 O arquivo de setup manda o agente copiar cada arquivo byte a byte.
 Alguns hosts buscam uma página web por uma ferramenta que entrega ao agente um resumo da página em vez do seu texto; se o seu faz isso, peça ao agente que baixe o arquivo e o leia inteiro.
 Você também pode baixar o `SETUP.md` por conta própria, ao lado do repositório, e apontar o agente para ele; de um jeito ou de outro, todo caminho que o arquivo de setup cita fica no repositório em que a sessão trabalha, nunca na pasta de onde o arquivo foi lido.
@@ -197,3 +199,4 @@ E o próximo comando chega na forma que o seu host reconhece, porque um host pod
 [^copilot-prompt-files]: GitHub, "Your first prompt file", GitHub Docs, acesso em 2026-09-30. <https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files/your-first-prompt-file>
 [^devin-skills]: Cognition, "Skills Overview", Devin Docs, acesso em 2026-10-17. <https://docs.devin.ai/cli/extensibility/skills/overview>
 [^devin-rules]: Cognition, "Rules & AGENTS.md", Devin Docs, acesso em 2026-10-17. <https://docs.devin.ai/cli/extensibility/rules>
+[^focus-kit-film]: J.C. Ködel, "focus-kit na prática: agentes de código com processo (engenharia)", 2026. <https://youtu.be/r0fk_yVHgO4>

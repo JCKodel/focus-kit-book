@@ -25,6 +25,7 @@ It argues for the method with real cases and measured results, and it doubles as
   Code examples are TypeScript written for the chapter, on one running example, a lending library, and the book says once that they are written for it.
   This repository, a book written with focus-kit, is the non-software example.
 * Cases: Ninjobs by name (the author's product, where the method was born), through its process artifacts and counted numbers; the author's company projects only as **Case A** (a client project on a low-code platform that ran on the process) and **Case B** (a consultancy's proposal for a client's adoption program, which did not run on the process and serves as the shape of a pitch and as a contrast), with no names and no business details.
+  The films that show focus-kit at work, linked from the READMEs and the site's home, the engineering film also from chapter 8, are the author's recordings on a client project that is none of these cases: the book links them and describes neither the project nor what the films run (decided by the author in `book-films`).
 
 ### Contents
 

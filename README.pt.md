@@ -12,6 +12,8 @@ Um livro gratuito que leva quem nunca seguiu processo algum a conduzir projetos 
 
 * O site: <https://jckodel.github.io/focus-kit-book/pt/>
 * PDF e EPUB, em português e inglês: nas [Releases](https://github.com/JCKodel/focus-kit-book/releases) deste repositório
+* Dois vídeos do focus-kit em uso, no YouTube: [o vídeo de engenharia](https://youtu.be/r0fk_yVHgO4) (a instalação e os quatro comandos do kit) e [o vídeo de negócio](https://youtu.be/gnLcNYOI2MU) (o método nos documentos de um projeto, sem código)
+* Os vídeos em inglês: [a playlist em inglês](https://youtube.com/playlist?list=PLCoT-CR09np8)
 
 ## Gerar localmente
 

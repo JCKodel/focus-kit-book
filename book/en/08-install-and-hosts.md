@@ -24,6 +24,8 @@ Nothing is installed on your machine; the agent writes files into the repository
 On Windows, keep the shell that Git for Windows installs with git, the installer's default: the script `/propose` runs (chapter 13) goes through it, from PowerShell or cmd, without WSL, and if git cannot find that shell, `/propose` says Git for Windows was installed without it and stops.
 Your host may ask before it downloads the file and before it writes into its own folder inside the repository, `.claude/` in Claude Code: approve both.
 
+A film shows this install and the four commands at work.[^focus-kit-film]
+
 The setup file tells the agent to copy every file byte for byte.
 Some hosts fetch a web page through a tool that hands the agent a summary of the page instead of its text; if yours does, ask the agent to download the file and read it whole.
 You can also download `SETUP.md` yourself, next to the repository, and point the agent at it; either way, every path the setup file names is in the repository the session works in, never in the folder the file was read from.
@@ -195,3 +197,4 @@ And the next command arrives in the form your host recognizes, because a host ma
 [^copilot-prompt-files]: GitHub, "Your first prompt file", GitHub Docs, accessed 2026-09-30. <https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files/your-first-prompt-file>
 [^devin-skills]: Cognition, "Skills Overview", Devin Docs, accessed 2026-10-17. <https://docs.devin.ai/cli/extensibility/skills/overview>
 [^devin-rules]: Cognition, "Rules & AGENTS.md", Devin Docs, accessed 2026-10-17. <https://docs.devin.ai/cli/extensibility/rules>
+[^focus-kit-film]: J.C. Ködel, "focus-kit in practice: coding agents with a process (engineering)", 2026. <https://youtu.be/Ywp1iUtEVyY>
