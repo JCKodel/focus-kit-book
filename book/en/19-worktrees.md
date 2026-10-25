@@ -192,6 +192,37 @@ The kit's two names say what made the folder and the branch, so a person who fin
 `/propose <slug>` checks the remote for `<prefix><slug>`, the prefix and the slug joined, `focus-kit/return-book` with the default prefix `focus-kit/`, a branch already there meaning the line is taken unless the definition resumes, creates the worktree at `<hidden>/worktrees/<slug>/` on that branch, from the main branch's `HEAD`, and pushes the branch at once, so the line is taken in every clone, or, when the definition resumes, reuses the worktree and branch that exist, and writes the page there.
 The line's `[~]` and every later mark are written in the worktree, on its branch, so `main/`'s queue shows the line as it was and each worktree's queue shows its own branch's state; the merge brings the marks in, which is why the queue meets at every merge, as the next section, on conflicts, shows.
 [Chapter 14](14-queue-states.md) says where a board sees them.
+
+So no folder's queue shows every delivery at once, and asking one of them which lines are taken gets a wrong answer: in `main/`, a line in flight on its branch still reads `[ ]`.
+The kit's queue script (chapter 14) reads every delivery's line at once, from `main/` or from any worktree, when it gets the Git slot's word: `git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq worktree .focus-kit focus-kit/`, or the hidden folder and prefix the slot names.
+It fetches origin, reads every line from the default branch on origin and each delivery's line from `origin/<prefix><slug>`, and edits nothing.
+Where the folder's copy, the default branch on origin and the delivery's branch disagree on a line, it keeps the mark furthest along the flow, so an older copy does not show a merged or in-flight line as free.
+On the lending library, with `return-book` being built in its worktree at `[*]`, `overdue-list` defined in its own at `[>]`, both branches pushed, and `main/`'s queue still showing both lines `[ ]`, the script run from `main/` prints this; the queue and the run are written for this chapter:
+
+```
+milestone: M2. Returns
+[*] return-book (PA) · in flight: apply
+[>] overdue-list (PA) · apply now
+ └[ ] m2-review + after return-book · waits: after overdue-list
+
+free for /apply, together: overdue-list
+free for /propose, together: none
+only on a branch:
+  damaged-copy (return-book)
+```
+
+Each delivery's line comes from its branch: `return-book` is in flight, `overdue-list` is free for `/apply`, and `m2-review`, the milestone's review, waits under `overdue-list` with `+ after return-book`.
+`damaged-copy` is a line `return-book`'s session added on its branch, in no queue of `main/` yet, so the script lists it apart, naming in brackets a branch that holds it.
+
+The mark further along counts in the worktrees too.
+Once `return-book` is merged into `main` and pushed, the queue in `overdue-list`'s worktree, whose branch started before the merge, still shows `return-book` as `[ ]`; the script finds it `[x]` on origin's `main`, keeps that mark, and leaves the line out of the tree.
+Typed with `trunk` in that worktree, the script fetches nothing and reads only the folder's own copy, so it offers `return-book`, already merged, as `propose now`: in a worktree layout the word must be the Git slot's.
+
+The script reads the branches on origin, as last fetched.
+A mark committed in a worktree and not pushed, or a branch never pushed, is not seen from another folder; when `git fetch` fails, the script prints `note: git fetch origin failed; branches as last fetched` and draws the tree from what it fetched before.
+And the tree shows marks, not claims: in the moment after `/propose` claims a line, before any mark on its branch is pushed, the line shows as the main branch has it, `[ ] · propose now`.
+The branch is the claim all the same, and the claim script answers the next `/propose` of that slug with `claim: existing`, so while a line's branch exists on origin, which `git branch -r` lists after the fetch, do not take the line as free from the tree alone.
+
 A branch `<slug>` without the prefix is not the delivery's: it is someone else's.
 You make the container once; the kit makes each worktree.
 `/propose` ends by giving that folder's path, and `/apply <slug>` runs in a fresh session opened in it, builds the page, and stages the change.
@@ -378,7 +409,7 @@ Proposes in a batch carry the parallel into definition: the agents write the pag
 * Two sessions share one folder on trunk when their lines are free and their files do not meet: each marks only its line, stages only its paths and its line of the queue, and you decide each commit, one delivery at a time.
 * Another line's mark, another delivery's page or files and another session's staged entries are not a conflict; neither are two neighbouring lines of the queue in one hunk; a line edited by both, or a file one page needs that the other is changing, is: stop, then order the lines or give one a worktree.
 * One folder has one index, so commit from it once it holds only that delivery: `git diff --cached --stat` names files, so read the staged diff of a shared file for its lines too; with another delivery staged, wait; and never select a delivery with `git commit -- <paths>`, which takes each named file whole from the folder, the other delivery's lines in a shared file included, staged or not.
-* A worktree per delivery pays for several people, or for deliveries that touch the same files: a container folder whose `main/` is the checkout keeps each delivery's worktree in `<hidden>/worktrees/<slug>/` on `<prefix><slug>`, `.focus-kit/` and `focus-kit/` by default; `git worktree add`, work there, `git merge --no-ff` from `main/`, `git worktree remove`, `git branch -d`; each worktree has its own index, `/propose` claims the line with the kit's script, which runs as a git alias through git's own `sh`, Git for Windows' on Windows, refuses outside `main/` and off the default branch, pushes the branch when it creates it or the remote lacks it, the line's claim, and prints the worktree's path, and the line's marks live on the branch until the merge; each session opens where it works, never in the container: `/propose` in `main/`, which edits the worktrees by the container's manual, a command typed with several slugs there too, its subagents writing in, or sent to, each worktree, and `/apply` in a fresh session in the worktree whose path `/propose` gives, stopping before any edit anywhere else; a blocked `/apply` there may stage its partial work for you to commit on the branch, which stays unmerged until the delivery is done; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
+* A worktree per delivery pays for several people, or for deliveries that touch the same files: a container folder whose `main/` is the checkout keeps each delivery's worktree in `<hidden>/worktrees/<slug>/` on `<prefix><slug>`, `.focus-kit/` and `focus-kit/` by default; `git worktree add`, work there, `git merge --no-ff` from `main/`, `git worktree remove`, `git branch -d`; each worktree has its own index, `/propose` claims the line with the kit's script, which runs as a git alias through git's own `sh`, Git for Windows' on Windows, refuses outside `main/` and off the default branch, pushes the branch when it creates it or the remote lacks it, the line's claim, and prints the worktree's path, and the line's marks live on the branch until the merge, and the queue script, typed with the slot's word from `main/` or any worktree, reads them from each delivery's branch on origin, keeping the mark further along and listing the lines only a branch has, though it sees no mark or branch not yet pushed; each session opens where it works, never in the container: `/propose` in `main/`, which edits the worktrees by the container's manual, a command typed with several slugs there too, its subagents writing in, or sent to, each worktree, and `/apply` in a fresh session in the worktree whose path `/propose` gives, stopping before any edit anywhere else; a blocked `/apply` there may stage its partial work for you to commit on the branch, which stays unmerged until the delivery is done; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
 * Parallel pays while the deliveries' files do not meet, or meet only across worktrees whose merge you can decide, the machine's ports and databases do not collide, the disk holds each worktree's dependencies, and one person can still review each delivery; proposes can run in a batch, one command told to decide alone, staging nothing, each page listing what it decided alone for you to read before any `/apply`, each `/apply` staging its own delivery, and every commit stays your decision, made by you or asked of the agent after your review, or given once in the Git slot, with each commit or merge reviewed after it lands.
 
 [^git-commit]: Git, "git-commit", the documentation, option `--only`, accessed 2026-10-13. <https://git-scm.com/docs/git-commit>
