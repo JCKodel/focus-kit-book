@@ -708,3 +708,15 @@ When this milestone closes, a reader of either edition finds the films that show
 [x] ch22-cache-route-host (PA) chapter 22 says where the cache lives by the infrastructure that serves the model, as docs/03's cache lifetime row and its source say, Claude Platform on AWS included, and says that the lifetime is chosen per request of the host its source names, Claude Code, in the chapter and the row; both editions · after m31-review
 [x] m31-records-claims (PA) the records of ch22-cache-service, m30-records-claims and m31-review hold only what happened: make book with its HEAD, tree and both PDF paths, the Delivery review tick saying what its agent read and what its report says of the advisor, line numbers as they were, docs/03 restated as it says, a commit body of one-line bullets, the define commits that were not made, and ch22-cache-service's line without docs/03's FOCUS term service · after m31-review
 ```
+
+## M32. focus-kit 2026.10.24
+
+When this milestone closes, the book teaches focus-kit 2026.10.24 and the repository runs on it: what may run now comes from the kit's `queue.sh`, a tree of the current milestone with each line under the last line it waits on and its state, ending with the lines free for /apply and for /propose together; /propose and /apply typed with no slug show it, /apply ends with it, and the free lines are offered as one command with several slugs, each slug one more agent at the cost of a session.
+
+```
+[ ] kit-2026-10-24 (PA)      reinstall the kit at 2026.10.24 and apply its migration report to docs/05 §4 · after m31-review
+[ ] ch08-update-2026-10-24 (PA) chapter 8: the update example and its report at 2026.10.24, sixteen files in the skills folders and the script at §3.7; both editions · after kit-2026-10-24
+[ ] ch11-14-queue-tree (PA)  chapters 11, 12, 13 and 14: `queue.sh` drawing the milestone as a tree, a line under the last line it waits on, the free lines for /apply and /propose, the lines without a token judged first, /propose and /apply with no slug showing it, and the offer of one command with several slugs and its cost; both editions · after kit-2026-10-24
+[ ] ch19-queue-branches (PA) chapter 19: with a worktree per delivery `queue.sh` reads each delivery's line from its branch on origin, keeping the further mark, and lists the lines only a branch has; both editions · after kit-2026-10-24
+[ ] m32-review (--)          the review of M32 as docs/05 §8 says · after kit-2026-10-24, ch08-update-2026-10-24, ch11-14-queue-tree, ch19-queue-branches
+```
