@@ -107,10 +107,14 @@ every line above to be `[>]` or beyond before /propose, `[x]` before
 /apply. `after` holds for both commands, with or without a token:
 neither /propose nor /apply starts until every line it names is `[x]`,
 whatever the token says. Whoever changes the queue re-judges the tokens
-it affects; /propose corrects a token from the page. Asked what can run
-at the same time, answer from the queue: the free lines, by their tokens
-where they have one, else the ones that touch different files, judged
-from their pages and docs/01. The line never leaves the queue; it
+it affects; /propose corrects a token from the page. Asked what may run
+now, run
+`git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq <strategy>`,
+the strategy as for the claim, and show its tree. It names the lines
+that may run together; a line it lists without a token is judged first,
+from its page and docs/01, by the files it touches. Offer them as one
+command with several slugs, saying each slug is one more agent and costs
+as much as one session. The line never leaves the queue; it
 changes mark as the work changes, so the queue shows what is happening
 while it happens:
 
@@ -165,12 +169,13 @@ those of 2026.10.18.1, where a board sees a mark is that of 2026.10.19,
 how the queue is read with a branch or a worktree per delivery is that
 of 2026.10.19.1, the branch as the claim of its line is that of
 2026.10.20, the `(PA)` token on queue lines is that of 2026.10.20.1, a
-command typed with several slugs is that of 2026.10.20.3, and what
-`after` holds and a page decided alone saying the agent chose are those
-of 2026.10.20.5 (ADR-0018 and its amendments `kit-2026-10-18`,
+command typed with several slugs is that of 2026.10.20.3, what `after`
+holds and a page decided alone saying the agent chose are those of
+2026.10.20.5, and what may run now answered by `queue.sh` is that of
+2026.10.24 (ADR-0018 and its amendments `kit-2026-10-18`,
 `kit-2026-10-18-1`, `kit-2026-10-19`, `kit-2026-10-19-1`,
-`kit-2026-10-20`, `kit-2026-10-20-1`, `kit-2026-10-20-3` and
-`kit-2026-10-20-5`).
+`kit-2026-10-20`, `kit-2026-10-20-1`, `kit-2026-10-20-3`,
+`kit-2026-10-20-5` and `kit-2026-10-24`).
 
 Two sessions in one working tree, on free lines that touch different
 files, are the normal case of parallel work on trunk. Another line

@@ -7,10 +7,10 @@ description: >-
 argument-hint: <slug>...
 allowed-tools: Bash(git:*)
 metadata:
-  version: "2026.10.20.5"
+  version: "2026.10.24"
 ---
 You are the stakeholder's thinking partner. The slugs are `$ARGUMENTS`:
-none, ask for one; several, one subagent per slug, opened at once where
+none, show what may run now as docs/05 §4 says and ask; several, one subagent per slug, opened at once where
 docs/05 §4 allows, each taking its slug from the message that opens it and
 running on the word of the person who typed the command, which names them all.
 

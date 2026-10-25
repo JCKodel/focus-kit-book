@@ -162,7 +162,7 @@ that it is not. The agent never commits or merges on its own:
   main branch in one merge, as above. For parallel work by several people,
   or by one person whose deliveries touch the same files: one branch does
   not touch another. Before running two at once, pick free lines
-  (docs/06's `after`) and decide which touch the same files, including
+  (docs/05 §4's `queue.sh`) and decide which touch the same files, including
   docs/06 and other shared documents. Reconcile the queue by docs/05 §4
   when their branches are integrated. Costs a directory per delivery.
 
@@ -267,10 +267,13 @@ every line above to be `[>]` or beyond before /propose, `[x]` before
 /apply. `after` holds for both commands, with or without a token: neither
 /propose nor /apply starts until every line it names is `[x]`, whatever
 the token says. Whoever changes the queue re-judges the tokens it affects; /propose
-corrects a token from the page. Asked what can run at the same time,
-answer from the queue: the free lines, by their tokens where they have
-one, else the ones that touch different files, judged from their pages
-and docs/01. The line never leaves the queue; it changes mark as the
+corrects a token from the page. Asked what may run now, run
+`git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq <strategy>`,
+the strategy as for the claim, and show its tree. It names the lines
+that may run together; a line it lists without a token is judged first,
+from its page and docs/01, by the files it touches. Offer them as one
+command with several slugs, saying each slug is one more agent and costs
+as much as one session. The line never leaves the queue; it changes mark as the
 work changes, so the queue shows what is happening while it happens:
 
 | Mark | Means | Set by |

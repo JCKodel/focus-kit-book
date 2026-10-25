@@ -82,3 +82,7 @@ Since `kit-2026-10-20-4` the book runs focus-kit 2026.10.20.4; the six marks are
 ## Amendment, 2026-10-21 (kit-2026-10-20-5)
 
 Since `kit-2026-10-20-5` the book runs focus-kit 2026.10.20.5; the six marks are unchanged. docs/05 §4 says what `after` requires: neither /propose nor /apply starts until every line it names is `[x]`, whatever the `(PA)` token says, the rule it held before written out; and a page decided alone says the agent chose each answer, so the review finds it. Setup writes only into the repository the session works in and writes no `AGENTS.md` or docs/05, which /brainstorm and /analyze write. On trunk both rules apply as written (ADR-0010).
+
+## Amendment, 2026-10-25 (kit-2026-10-24)
+
+Since `kit-2026-10-24` the book runs focus-kit 2026.10.24; the six marks are unchanged. What may run now comes from the kit's script `queue.sh`, run through git's own shell like `claim.sh` with the strategy of docs/05 §5's Git slot: it draws docs/06's current milestone as a tree, each line under the last line it waits on with its state, and ends with the lines free for /apply and for /propose together, the lines without a token judged first by the files they touch; it edits nothing. /propose and /apply typed with no slug show it and ask, /apply ends with it, and the free lines are offered as one command with several slugs, each slug one more agent costing as much as one session (docs/05 §4). docs/06 does not change. On trunk the script reads the one working tree's queue and fetches no branch (ADR-0010).

@@ -6,9 +6,10 @@ description: >-
   then stage and suggest the commit. Never commits on its own.
 argument-hint: <slug>...
 metadata:
-  version: "2026.10.20.5"
+  version: "2026.10.24"
 ---
-The slugs are `$ARGUMENTS`: none, ask for one; several, one subagent per
+The slugs are `$ARGUMENTS`: none, show what may run now as docs/05 §4
+says and ask; several, one subagent per
 slug, opened at once where docs/05 §4 allows, each taking its slug from
 the message that opens it and running on the word of the person who typed
 the command, which names them all. Implement `work/<slug>.md` in this
@@ -63,5 +64,5 @@ the person's language. Give the person's next steps, each command written
 as this host invokes commands: use what the delivery changed, as its user
 would, and ask here for what is wrong; review the staged diff; commit with
 the suggested message, merging a delivery branch as docs/05 §5 says; then
-the queue's next line and its command. End saying which environment is at
+what may run next, as docs/05 §4 says. End saying which environment is at
 which version and the command that updates the others; never end silent.
