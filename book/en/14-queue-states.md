@@ -1,6 +1,6 @@
 # 14. The queue while it happens
 
-After this chapter you can read any queue line's state among focus-kit's six marks, say who sets each one and at what moment, name the next delivery, and say which lines can run at the same time and read the two letters a line may carry that say it.
+After this chapter you can read any queue line's state among focus-kit's six marks, say who sets each one and at what moment, name the next delivery, say which lines can run at the same time from the queue tree the kit's script draws, and read the two letters a line may carry that say it.
 You can also tell an order written with a line, `· after`, from a wait found on the way, `[?]`, mark a line that waits with its reason and the phase to resume, and take it out again; and lay the queue out as a kanban board that shows the work while it happens, and say where each mark is seen.
 And you can resume a line whose session ended, and record a delivery the person cancels so that it never reads as built.
 
@@ -67,7 +67,7 @@ A project's own one-way mirror, refreshed by the commands when a mark changes, s
 ## The next line, and which run together
 
 A line is free when it is not `[x]` and not `[?]`, and every line its `after` names is `[x]` (an `[x]` that was cancelled asks the person first, below).
-In the milestone above, `lend-book`, `search-catalog` and `reservations` are free; `return-book` and `my-loans` are not, since `lend-book` is not `[x]` yet, and `due-reminder` waits.
+In the milestone above, `lend-book`, `search-catalog`, `reservations` and `m1-review` are free; `return-book` and `my-loans` are not, since `lend-book` is not `[x]` yet, and `due-reminder` waits.
 The next delivery is the first free line no session holds: a session is building `lend-book` and another is defining `reservations`, so a new session's next delivery is `search-catalog`.
 With a branch or a worktree per delivery, the session runs `git fetch` first, counts a line whose branch exists as taken, and judges free lines and `after` from each slug's line read as the section above says, so `return-book`'s `after` reads `lend-book`'s mark on `lend-book`'s branch.
 From the main branch's copy alone, `lend-book` would read `[ ]`, free and held by no one, and the answer would name a delivery another session is building; `lend-book`'s branch on the remote says it is taken even before any of its marks is pushed.
@@ -81,7 +81,7 @@ A line added later goes in the milestone whose paragraph needs it, never higher 
 
 `/propose` and `/apply` do not start a line that is not free: run `/propose my-loans` while `lend-book` is `[*]`, and it says what the line waits on and stops.
 
-Asked what can run at the same time, you answer from the queue: the free lines, by their tokens where they carry one, else those that touch different files, judged from their pages and from docs/01, which says where each part of the code lives.
+Free lines can run at the same time when they touch different files, judged from their pages and from docs/01, which says where each part of the code lives.
 `search-catalog` and `reservations`, in `src/features/catalog/` and `src/features/reservations/`, can.
 Two lines that both change `src/features/loans/`, as `lend-book` and a line to renew a loan would, cannot run together in one folder.
 
@@ -118,6 +118,33 @@ The token lets both commands start, and neither does: `after` names `renew-loan`
 The `-` waits for the lines above, `after` for the lines it names; `renewal-notice` is free the moment `renew-loan` is `[x]`.
 
 [Chapter 19](19-worktrees.md) shows how two sessions run in one folder, and when they need two.
+
+## What may run now
+
+Asked what may run now, the agent does not read every token and the end of every line for its `after`: it runs the kit's queue script, `propose/scripts/queue.sh`, in one line, `git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq <strategy>`, the same alias trick and the same strategy word as the claim script of [chapter 13](13-apply.md).
+The script reads docs/06 and edits nothing: on trunk the queue of the folder where the session runs, and with a branch or a worktree per delivery each delivery's line where it lives, as the section above says ([chapter 19](19-worktrees.md)).
+It draws the current milestone, the first with a line not `[x]`, as a tree, the queue tree: each line not yet `[x]`, under the last line it waits on, the one furthest down the queue of the pending lines its `after` names, with the others named after `+ after`, and its state; then the lines free for `/apply` and for `/propose` together, and the lines without a token, to judge first.
+On the milestone at the top of this chapter, chapter 11's milestone 1 with the lines written for this chapter, it prints this, the milestone's heading first:
+
+```
+milestone: Milestone 1: a librarian lends and takes back
+[*] lend-book · in flight: apply
+ └[ ] return-book · waits: after lend-book
+ └[ ] my-loans · waits: after lend-book
+[>] search-catalog · apply now, no token: judge
+[~] reservations · in flight: propose
+[?] due-reminder · blocked: what provider?, then propose
+[ ] m1-review · propose now, no token: judge
+
+free for /apply, together: none
+free for /propose, together: none
+judge first, no token: search-catalog m1-review
+```
+
+The `└` draws a line under the one it waits on: `return-book` and `my-loans` wait on `lend-book`, and say so; `lend-book` and `reservations` are in flight, under the command their mark names; `due-reminder` is blocked, with its reason and the command that resumes it; `search-catalog` may be built now and `m1-review` defined now.
+Neither carries a token, so no line is offered together, and the last line lists both to judge first, from the page and docs/01, by the files each touches: `search-catalog` builds in `src/features/catalog/`, which no line in flight touches, so it can be built beside them; `m1-review`'s page takes the milestone's paragraph clause by clause and names the delivery that answers each ([chapter 15](15-closing-a-milestone.md)), so it waits until the lines above are defined, as a `-` in its token's first place would say.
+On the four lines with tokens above, before `renewal-notice` was added, the script ends with `free for /propose, together: search-catalog renew-loan`, and the agent offers it as one command, `/propose search-catalog renew-loan`, saying each slug is one more agent and costs as much as one session ([chapter 12](12-propose.md)).
+`/propose` and `/apply` typed with no slug show the same tree and ask which line to take, and `/apply` ends with it.
 
 ## Waiting: `[?]`
 
@@ -210,12 +237,13 @@ A manager reads where every delivery stands, and what each waiting one waits on,
 On Case A, five lines blocked on the client read as idle work, and every delivery reached Doing only after its definition was over, counted by the author on the project's queue and board; a mark set when the work changes, and one for waiting, answer both.
 A request that proved impossible there was closed in the queue with its reason instead of left in silence ([chapter 23](23-adoption.md)), and the kit writes such a closure as `[x]` with `· dropped:`.
 
-The queue also says which lines can run together: without that, a person who wants two sessions has to work it out alone before opening the second; the free lines, their tokens and the files they touch answer it from the queue, without a meeting, and the person who knows which pages a line takes from and which files it touches writes it once, on the line, for every session that reads it.
+The queue also says which lines can run together: without that, a person who wants two sessions has to work it out alone before opening the second; the queue tree draws it from the queue, without a meeting, each line under what it waits on, and lists the lines to judge first, and the person who knows which pages a line takes from and which files it touches writes it once, on the line, for every session that reads it.
 
 ## Key points
 
 * Six marks, `[ ]` not defined, `[~]` being defined, `[>]` completely defined and ready for `/apply`, `[*]` being built, `[x]` done, `[?]` waiting, each changed when the work changes, not when a command ends: `/propose` sets `[~]` and `[>]`, `/apply` sets `[*]` and `[x]`, the person sets `[x]` with `· dropped: <reason>` when cancelling, any session sets `[?]`.
 * A line is free when it is not `[x]` nor `[?]` and every line its `after` names is `[x]`, and when one is cancelled the person re-decides the line; with a branch or a worktree per delivery, a line whose branch exists after `git fetch` is taken, whatever the main branch shows; the next delivery is the first free line no session holds, and free lines run at the same time as their `(PA)` tokens say, `P` for `/propose` and `A` for `/apply`, `-` waiting for every line above to be `[>]` or beyond before `/propose` and `[x]` before `/apply`, `after` holding both until every line it names is `[x]`, whatever the token says, and a command typed with several slugs opens at once the subagents they let run and reports the rest; whoever changes the queue re-judges the tokens, `/propose` corrects one from its page, and a line without one runs beside those that touch different files.
+* Asked what may run now, the agent runs the kit's queue script and shows its tree: the current milestone, each line not `[x]` under the last line it waits on with its state, then the lines free for `/apply` and for `/propose` together and the lines without a token, judged first by the files they touch; it offers the free lines as one command with several slugs, each slug one more agent costing as much as one session, and `/propose` and `/apply` typed with no slug show the tree and ask.
 * A line whose session ended keeps its mark, and its command resumes it on the person's word, inspecting the page, the folder and the index first; a cancelled delivery ends `[x] · dropped: <reason>`, its page in `work/done/` saying what was built and undone.
 * `· after` is an order written with the line, which keeps its mark; `[?]` with `· blocked: after` is a wait found after work started; a line waits when the person says so, when an answer was asked and not given, when work already started finds another line must be done first, or when a milestone review's code reading missed part of its range, with the phase to resume and the reason at its end, `· resume: apply · blocked: after <slug>`; when the reason is resolved, both suffixes go and it returns as that phase says, `resume: propose` to `[ ]` with any draft kept, `resume: apply` to `[>]`, and until then `/propose` and `/apply` stop on it, as on a line not free.
 * The queue is a kanban board, a column per mark, a `[?]` card in Waiting until it returns to `[ ]` or `[>]`; on this chapter's three columns, Doing holds `[~]`, `[>]` and `[*]`, and a `[?]` card is tagged blocked in the column its resume phase names, To Do for `propose`, Doing for `apply`; a board that reads the queue sees a mark at once on trunk, and with a branch or a worktree per delivery from each slug's own branch, local or remote, pushed when `/propose` creates it, since the main branch shows the line as it was until the merge.

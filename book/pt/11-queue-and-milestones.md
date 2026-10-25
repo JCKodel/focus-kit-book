@@ -89,6 +89,7 @@ Não há campo de prioridade nem etiqueta para manter em dia com a ordem.
 
 Quando você acrescenta uma linha e já sabe que ela precisa de outra feita antes, você escreve isso junto, no fim: uma devolução precisa de um empréstimo, então `devolver-livro` termina com `· after emprestar-livro`.
 Isso é uma ordem, não uma espera: a linha mantém a sua marca, `[ ]`, e fica livre para começar quando `emprestar-livro` estiver `[x]`.
+O script de fila do kit desenha essa ordem: enquanto `emprestar-livro` não está `[x]`, ele mostra `devolver-livro` sob `emprestar-livro`, cada linha sob a última linha que ela espera (o capítulo 14 lê a árvore).
 `emprestar-livro` não leva `after`: as linhas de que ela precisa, `catalogo` e `membros`, já estão `[x]`.
 
 ### A revisão, e os seus achados

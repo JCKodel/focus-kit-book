@@ -86,6 +86,7 @@ There is no priority field and no label to keep in step with the order.
 
 When you add a line and already know it needs another done first, you write that with it, at the end: a return needs a loan, so `return-book` ends with `· after lend-book`.
 That is an order, not a wait: the line keeps its mark, `[ ]`, and is free to start once `lend-book` is `[x]`.
+The kit's queue script draws that order: while `lend-book` is not `[x]`, it shows `return-book` under `lend-book`, each line under the last line it waits on (chapter 14 reads the tree).
 `lend-book` carries no `after`: the lines it needs, `catalog` and `members`, are already `[x]`.
 
 ### The review, and its findings
