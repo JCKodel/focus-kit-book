@@ -19,9 +19,9 @@ and do what it says.
 ```
 
 The address is the file itself, not the page GitHub draws around it, so the agent gets the whole text.
-That file is the kit's setup file: one file of instructions that the agent reads and turns into the kit's files, the four commands, with the small script `/propose` runs, and a few small pointer files for the hosts that need them.
+That file is the kit's setup file: one file of instructions that the agent reads and turns into the kit's files, the four commands, with two small scripts the commands run through git, and a few small pointer files for the hosts that need them.
 Nothing is installed on your machine; the agent writes files into the repository, and that is all.
-On Windows, keep the shell that Git for Windows installs with git, the installer's default: the script `/propose` runs (chapter 13) goes through it, from PowerShell or cmd, without WSL, and if git cannot find that shell, `/propose` says Git for Windows was installed without it and stops.
+On Windows, keep the shell that Git for Windows installs with git, the installer's default: the scripts the commands run (chapters 13 and 14) go through it, from PowerShell or cmd, without WSL, and if git cannot find that shell, `/propose` says Git for Windows was installed without it and stops.
 Your host may ask before it downloads the file and before it writes into its own folder inside the repository, `.claude/` in Claude Code: approve both.
 
 A film shows this install and the four commands at work.[^focus-kit-film]
@@ -48,7 +48,7 @@ The agent writes the kit's files as the setup file holds them now, and the chang
 It replaces a file only when that file matches one the kit shipped, in this version or an earlier one, and the earlier one is established from the kit's history, `git show <commit>:SETUP.md` in the kit's repository, or, without that history at hand, by your word that the file was never edited; a familiar name or a `metadata.version` line alone does not prove it.
 A command of your own in a host's folder, or an edit you made by hand to one of the kit's files, a line you added to `.claude/skills/propose/SKILL.md` say, stops the update before it writes or removes any file.
 The agent shows your edit as a diff against the kit file it was made on, and the kit's own change to that file since then apart and in short; it still reports the migrations and the next command, and you decide whether to keep your edit or replace it, knowing that a rule your edit added to a command can become a slot of docs/05 §5, which the commands follow (chapter 7).
-This check was tried on a copy of the book's kit files, made outside the book's repository: a line appended to `.claude/skills/brainstorm/SKILL.md` stopped the update to focus-kit 2026.10.20.5 this way, and every file of the copy was unchanged afterwards.
+This check was tried on a copy of the book's kit files, made outside the book's repository: a line appended to `.claude/skills/apply/SKILL.md` stopped the update to focus-kit 2026.10.24 this way, and every file of the copy was unchanged afterwards.
 
 ## What an update reports
 
@@ -58,34 +58,32 @@ It compares the files with its own templates and reports each migration, a chang
 A migration may name a rule, a queue line or a slot.
 Your choices stay: a docs/05 whose §5 says "trunk, one session at a time" sees the wording for two sessions in one folder proposed, and keeps its own until the team accepts the change.
 
-Here is part of the report the update to focus-kit 2026.10.20.5 gave on this book's own repository, shortened and paraphrased from the record of that update, `work/done/kit-2026-10-20-5.md` in the book's repository:
+Here is part of the report the update to focus-kit 2026.10.24 gave on this book's own repository, shortened and paraphrased from the record of that update, `work/done/kit-2026-10-24.md` in the book's repository:
 
 ```
-Installed: focus-kit 2026.10.20.5, in every SKILL.md.
+Installed: focus-kit 2026.10.24, in every SKILL.md.
 Pending process migrations, by document and section, shortened:
 
 * docs/05, section numbers: match the template (§4 the queue,
   §5 the slots, §6 commit, §8 closing a milestone). None.
-* docs/05 §4, what after requires: lacks it. Proposed: "after holds
-  for both commands, with or without a token: neither /propose nor
-  /apply starts until every line it names is [x], whatever the
-  token says."
-* docs/05 §4, a command told to decide alone: lacks who chose.
-  Proposed: "written on the page as the agent's answer, saying the
-  agent chose it, so the review finds it".
-* docs/05 §4, the four cases a line waits in: match. The template
-  gives them as a list, with no rule changed. None.
+* docs/05 §4, what may run now: lacks queue.sh. Proposed: run
+  queue.sh through git, the strategy as for the claim, and show its
+  tree. "It names the lines that may run together; a line it lists
+  without a token is judged first, from its page and docs/01, by the
+  files it touches. Offer them as one command with several slugs,
+  saying each slug is one more agent and costs as much as one
+  session."
 * docs/05 §5, Git: a project choice, not a migration: trunk, ADR-0010,
   with the Publish policy, the agent never pushes. None.
 
 The other items cover docs/05 §§2, 3 and 6 to 8, the rest of §4,
 the other slots of §5, docs/04, docs/06 and AGENTS.md.
-Next: /propose ch08-update-2026-10-20-5, once kit-2026-10-20-5 is [x].
+Next: /propose ch08-update-2026-10-24, once kit-2026-10-24 is [x].
 ```
 
 Each item names a document and a section, and ends in one of three outcomes.
 It matches and needs nothing, and says so: `None`.
-It lacks something, and the item gives the wording the template proposes and where it goes, as the two docs/05 §4 items on `after` and on a command told to decide alone do.
+It lacks something, and the item gives the wording the template proposes and where it goes, as the docs/05 §4 item on what may run now does.
 Or it differs by a choice the project made and recorded with a date or an ADR, as the book's Git slot does: the item names that choice, asks for no change, and ends in `None` too.
 Every item is reported, never done: the update writes none of these documents.
 
@@ -150,7 +148,7 @@ The Copilot CLI reads both skills folders, and its reference says what happens t
 Devin Desktop also reads `.windsurf/skills/`, the folder of its former name;[^devin-skills] the setup file writes nothing there and, on an update, removes the kit's own files from it, so the host never finds an older copy of a command beside the current one in `.agents/skills/`, and a file of yours there is reported and left.
 
 Every command ends by naming the next one, written as the host running it invokes it, the table's last column.
-The setup file names `/brainstorm` or `/analyze`, to run in a fresh session, `/propose` names `/apply` with the page's slug, and `/apply` names the queue's next line.
+The setup file names `/brainstorm` or `/analyze`, to run in a fresh session, `/propose` names `/apply` with the page's slug, and `/apply` names what may run next, the queue tree ([chapter 14](14-queue-states.md)).
 On the lending library, after `/propose lend-book`, Claude Code tells you to run `/apply lend-book` in a fresh session, and Codex tells you to run `$apply lend-book`, in a fresh session too.
 `/propose` may run in the conversation that asked for the change; `/apply` always starts in a fresh session, in every host (chapter 11).
 The kit's files are the same in both; the form follows the host that runs them.

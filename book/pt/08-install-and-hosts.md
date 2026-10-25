@@ -19,9 +19,9 @@ and do what it says.
 ```
 
 O endereço é o próprio arquivo, não a página que o GitHub desenha em volta dele, então o agente recebe o texto inteiro.
-Esse arquivo é o arquivo de setup do kit: um arquivo de instruções que o agente lê e transforma nos arquivos do kit, os quatro comandos, com o pequeno script que o `/propose` roda, e alguns pequenos arquivos-ponteiro para os hosts que precisam deles.
+Esse arquivo é o arquivo de setup do kit: um arquivo de instruções que o agente lê e transforma nos arquivos do kit, os quatro comandos, com dois pequenos scripts que os comandos rodam pelo git, e alguns pequenos arquivos-ponteiro para os hosts que precisam deles.
 Nada é instalado na sua máquina; o agente escreve arquivos no repositório, e é só isso.
-No Windows, mantenha o shell que o Git for Windows instala junto com o git, o padrão do instalador: o script que o `/propose` roda (capítulo 13) passa por ele, do PowerShell ou do cmd, sem WSL, e se o git não encontrar esse shell, o `/propose` diz que o Git for Windows foi instalado sem ele e para.
+No Windows, mantenha o shell que o Git for Windows instala junto com o git, o padrão do instalador: os scripts que os comandos rodam (capítulos 13 e 14) passam por ele, do PowerShell ou do cmd, sem WSL, e se o git não encontrar esse shell, o `/propose` diz que o Git for Windows foi instalado sem ele e para.
 O seu host pode perguntar antes de baixar o arquivo e antes de escrever na sua própria pasta dentro do repositório, `.claude/` no Claude Code: aprove os dois.
 
 Um vídeo mostra esta instalação e os quatro comandos em uso.[^focus-kit-film]
@@ -48,7 +48,7 @@ O agente escreve os arquivos do kit como o arquivo de setup os guarda agora, e a
 Ele substitui um arquivo só quando esse arquivo é igual a um que o kit entregou, nesta versão ou numa anterior, e a anterior se confirma pelo histórico do kit, `git show <commit>:SETUP.md` no repositório dele, ou, sem esse histórico à mão, pela sua palavra de que o arquivo nunca foi editado; um nome conhecido ou uma linha `metadata.version` sozinhos não provam isso.
 Um comando seu na pasta de um host, ou uma edição que você fez à mão num dos arquivos do kit, uma linha que você acrescentou ao `.claude/skills/propose/SKILL.md`, por exemplo, faz a atualização parar antes de escrever ou remover qualquer arquivo.
 O agente mostra a sua edição como um diff contra o arquivo do kit em que ela foi feita, e a mudança do próprio kit nesse arquivo desde então à parte e resumida; ele ainda relata as migrações e o próximo comando, e você decide se fica com a sua edição ou a substitui, sabendo que uma regra que a sua edição acrescentou a um comando pode virar um slot do docs/05 §5, que os comandos seguem (capítulo 7).
-Essa verificação foi testada numa cópia dos arquivos do kit do livro, feita fora do repositório do livro: uma linha acrescentada ao `.claude/skills/brainstorm/SKILL.md` parou assim a atualização para o focus-kit 2026.10.20.5, e todos os arquivos da cópia ficaram iguais depois.
+Essa verificação foi testada numa cópia dos arquivos do kit do livro, feita fora do repositório do livro: uma linha acrescentada ao `.claude/skills/apply/SKILL.md` parou assim a atualização para o focus-kit 2026.10.24, e todos os arquivos da cópia ficaram iguais depois.
 
 ## O que uma atualização relata
 
@@ -58,36 +58,34 @@ Ele compara os arquivos com os seus próprios modelos e relata cada migração, 
 Uma migração pode citar uma regra, uma linha da fila ou um slot.
 As suas escolhas ficam: um docs/05 cujo §5 diz "trunk, uma sessão por vez" vê proposto o texto para duas sessões numa pasta, e mantém o seu até o time aceitar a mudança.
 
-Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.20.5 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro são em inglês, e o relatório propôs o texto em inglês.
-O registro dessa atualização é o `work/done/kit-2026-10-20-5.md`, no repositório do livro.
+Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.24 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro são em inglês, e o relatório propôs o texto em inglês.
+O registro dessa atualização é o `work/done/kit-2026-10-24.md`, no repositório do livro.
 
 ```
-Instalado: focus-kit 2026.10.20.5, em cada SKILL.md.
+Instalado: focus-kit 2026.10.24, em cada SKILL.md.
 Migrações de processo pendentes, por documento e seção, encurtadas:
 
 * docs/05, números de seção: batem com o modelo (§4 a fila,
   §5 os slots, §6 commit, §8 fechar um marco). Nenhuma.
-* docs/05 §4, o que o after exige: falta. Proposto: "o after
-  vale para os dois comandos, com token ou sem: nem o /propose nem
-  o /apply começa enquanto alguma linha que ele nomeia não está
-  [x], diga o token o que disser."
-* docs/05 §4, um comando mandado decidir sozinho: falta quem
-  escolheu. Proposto: "escrita na página como resposta do agente,
-  dizendo que o agente a escolheu, para que a revisão a encontre".
-* docs/05 §4, os quatro casos em que uma linha espera: batem. O
-  modelo os dá como uma lista, sem nenhuma regra mudada. Nenhuma.
+* docs/05 §4, o que pode rodar agora: falta o queue.sh. Proposto:
+  rodar o queue.sh pelo git, com a estratégia da reivindicação, e
+  mostrar a sua árvore. "Ela cita as linhas que podem rodar juntas;
+  uma linha que ela lista sem token é julgada primeiro, pela sua
+  página e pelo docs/01, pelos arquivos que toca. Ofereça-as como um
+  só comando com vários slugs, dizendo que cada slug é mais um agente
+  e custa tanto quanto uma sessão."
 * docs/05 §5, Git: uma escolha do projeto, não uma migração: trunk,
   ADR-0010, com a Publish policy, o agente nunca envia. Nenhuma.
 
 Os outros itens cobrem o docs/05 §§2, 3 e 6 a 8, o resto do §4,
 os outros slots do §5, o docs/04, o docs/06 e o AGENTS.md.
-Próximo: /propose ch08-update-2026-10-20-5, quando
-kit-2026-10-20-5 estiver [x].
+Próximo: /propose ch08-update-2026-10-24, quando
+kit-2026-10-24 estiver [x].
 ```
 
 Cada item cita um documento e uma seção, e termina num de três resultados.
 Ele bate e não precisa de nada, e diz isso: `Nenhuma`.
-Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra, como os dois itens do docs/05 §4 sobre o `after` e sobre um comando mandado decidir sozinho.
+Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra, como o item do docs/05 §4 sobre o que pode rodar agora.
 Ou ele difere por uma escolha que o projeto fez e registrou com uma data ou um ADR, como o slot Git do livro: o item cita essa escolha, não pede mudança e também termina em `Nenhuma`.
 Todo item é relatado, nunca feito: a atualização não escreve nenhum desses documentos.
 
@@ -152,7 +150,7 @@ O Copilot CLI lê as duas pastas de skills, e a sua referência diz o que aconte
 O Devin Desktop também lê `.windsurf/skills/`, a pasta do seu nome anterior;[^devin-skills] o arquivo de setup não escreve nada ali e, numa atualização, remove dela os arquivos do próprio kit, para que o host nunca encontre uma cópia mais velha de um comando ao lado da atual em `.agents/skills/`, e um arquivo seu ali é relatado e mantido.
 
 Todo comando termina dizendo o próximo, escrito como o host que o roda o invoca, a última coluna da tabela.
-O arquivo de setup cita o `/brainstorm` ou o `/analyze`, para rodar numa sessão nova, o `/propose` cita o `/apply` com o slug da página, e o `/apply` cita a próxima linha da fila.
+O arquivo de setup cita o `/brainstorm` ou o `/analyze`, para rodar numa sessão nova, o `/propose` cita o `/apply` com o slug da página, e o `/apply` cita o que pode rodar a seguir, a árvore da fila ([capítulo 14](14-queue-states.md)).
 Na biblioteca de empréstimos, depois de `/propose emprestar-livro`, o Claude Code diz para você rodar `/apply emprestar-livro` numa sessão nova, e o Codex diz para rodar `$apply emprestar-livro`, também numa sessão nova.
 O `/propose` pode rodar na conversa que pediu a mudança; o `/apply` sempre começa numa sessão nova, em todo host (capítulo 11).
 Os arquivos do kit são os mesmos nos dois; a forma segue o host que os roda.
