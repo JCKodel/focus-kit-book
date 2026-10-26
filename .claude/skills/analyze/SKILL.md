@@ -6,7 +6,7 @@ description: >-
   docs/adr/ and AGENTS.md describing what is there, and asks only what the
   code cannot answer. Writes no code.
 metadata:
-  version: "2026.10.24"
+  version: "2026.10.27"
 ---
 You are documenting a repository so that every later session can act on it
 without rereading it. Read `references/documents.md` first, whole: it says
@@ -15,11 +15,12 @@ what each document holds.
 ## Read
 
 `context/`, whole, when it exists: what people said that the code cannot.
-The README and any existing docs; the manifests (package.json, pyproject,
-go.mod, *.csproj, pubspec.yaml, Cargo.toml, Gemfile, and the like); the
-folder tree two levels deep; the entry points; the tests and how they run;
-CI, and any Makefile or script a person runs by hand; the last fifty commit subjects; any agent rules file already there
-(CLAUDE.md, AGENTS.md, .github/copilot-instructions.md, .cursorrules).
+The README and any existing docs. The manifests: package.json, pyproject,
+go.mod, *.csproj, pubspec.yaml, Cargo.toml, Gemfile, and the like. The
+folder tree two levels deep, the entry points, the tests and how they
+run. CI, and any Makefile or script a person runs by hand. The last fifty
+commit subjects. Any agent rules file already there: CLAUDE.md,
+AGENTS.md, .github/copilot-instructions.md, .cursorrules.
 
 From that, infer the stack, how the code is organized, where business rules
 live, how errors travel, what the verify command is, which tests are slow
@@ -45,8 +46,13 @@ host's question form when it has one:
   paths, else a read-only agent; and the kit's readers over docs/01's
   modules on the session's model, or the host's deep review when the
   project already launches one;
+* where a screen's reference comes from, when there are screens: the
+  design files the repository or `context/` holds, a design delivery
+  before the next screen, or a prototype by choice. Default: what
+  exists, named;
 * the first milestone: three to eight deliveries, or where to read them
-  from (issues, a TODO file, a roadmap), then its review.
+  from (issues, a TODO file, a roadmap), `· after` where one needs
+  another first, then its review, `· after all`.
 
 Everything else you decide from the code and mark as observed. Where the
 code contradicts itself, the document records an open question; the person
@@ -54,13 +60,14 @@ is not asked to settle it now.
 
 ## Write
 
-In the documentation language: docs/00 to 06 describing what exists, not
-what should exist; docs/adr/ with the decisions the code already embodies
-and the ones this round took, one dated paragraph each; docs/manuals/,
-running it first, then one per thing a person already does by hand (a
-Makefile target, a deploy script, steps in a README), as docs/05 §5 says;
-`AGENTS.md` from the template; `CLAUDE.md` holding `@AGENTS.md`; and the folder
-`work/done/` with a `.gitkeep`. The rules live in `AGENTS.md`: what an
+In the documentation language, write docs/00 to 06 describing what
+exists, not what should exist. Write docs/adr/ with the decisions the
+code already embodies and the ones this round took, one dated paragraph
+each. Write docs/manuals/, running it first, then one per thing a person
+already does by hand, such as a Makefile target, a deploy script or
+steps in a README, as docs/05 §5 says. Write `AGENTS.md` from the
+template, `CLAUDE.md` holding `@AGENTS.md`, and the folder `work/done/`
+with a `.gitkeep`. The rules live in `AGENTS.md`: what an
 existing `CLAUDE.md`, `.github/copilot-instructions.md` or similar file
 already says moves into it, and that file becomes the import line (or,
 when its host cannot import, a one-line pointer to `AGENTS.md`), keeping
