@@ -1,7 +1,7 @@
 # Queue
 
-The marks, the token, the suffixes (`· after`, `· resume:`, `· blocked:`, `· dropped:`), the order as priority, the next milestone and what may run at the same time are docs/05 §4, written once there.
-A line is the mark, the slug, its token when it has one, one sentence and its suffixes; what happened goes on its page. Longer lines written before kit-2026-10-16 are in this file's history, at the commit before it.
+The marks, the suffixes (`· after`, `· after all`, `· resume:`, `· blocked:`, `· dropped:`), the order as priority, the next milestone and what may run at the same time are docs/05 §4, written once there.
+A line is the mark, the slug, one sentence and its suffixes, on one line; what happened goes on its page. Longer lines written before kit-2026-10-16 are in this file's history, at the commit before it.
 
 ## M1. The book stands up
 
@@ -50,7 +50,7 @@ When this milestone closes, a reader can install the kit, document a new or an e
 [x] closing-a-milestone    Chapter 12: the whole-milestone review of the clinic's milestone 1 with /code-review, findings become queue lines; Ninjobs' milestone review as the counter-example
 [x] useful-notes           a source note only where the reader gains something to open, one note per source in the PDF and the EPUB, with docs/04, docs/03, docs/01 and AGENTS.md saying the rule; both editions
 [x] the-governor           Chapter 13: which concrete error would it have caught, and what the process does not have
-[x] m3-review              the review of M3 as docs/05 §8 says: the Prologue to chapter 13 read end to end in both editions against M3's paragraph
+[x] m3-review              the review of M3 as docs/05 §8 says: the Prologue to chapter 13 read end to end in both editions against M3's paragraph · after all
 ```
 
 ## M3.1. What the review of M3 found
@@ -91,7 +91,7 @@ When this milestone closes, a reader can organize code by feature with exception
 [x] testing-and-agents     Chapter 16: testing each piece, and how the architecture helps an agent
 [x] kit-milestone-review   focus-kit bff8414 reinstalled in the book, the clinic and the fork, each milestone of the three queues ending with its review line
 [x] kit-milestone-review-chapters  Chapters 7, 8, 9 and 12 to 15 follow focus-kit bff8414: the review is the last line of every milestone and its findings open a milestone <M>.1; both editions
-[x] m4-review              the review of M4 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against M4's paragraph
+[x] m4-review              the review of M4 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against M4's paragraph · after all
 [x] m4-code-review         /code-review of the clinic's code from book-v1/closing-a-milestone to book-v1/four-pieces
 ```
 
@@ -121,7 +121,7 @@ When this milestone closes, every confirmed finding of the M4 review is settled:
 [x] clinic-update-type     the update type (current) => State and the starter shape are each declared once and shared, as the clinic's AGENTS.md asks, by a recorded run
 [x] clinic-event-shapes    the clinic's docs/01 names every shape an event with a call takes, by a recorded run
 [x] ch14-failure-kinds     Chapter 14: says what an error and an exception are without Dart's classes, and that a library's exception becomes the domain's value at the boundary; both editions
-[x] m4.1-review            the review of M4.1 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against M4.1's paragraph
+[x] m4.1-review            the review of M4.1 as docs/05 §8 says: the Prologue to chapter 16 read end to end in both editions against M4.1's paragraph · after all
 [x] m4.1-code-review       /code-review of the clinic's code that M4.1 changed, a3e2470...6edc9ad
 ```
 
@@ -144,7 +144,7 @@ When this milestone closes, every confirmed finding of the M4.1 review is settle
 [x] ch16-unit-test-fakes   Chapter 16: the definition of a unit test fits the event tests' fake repositories and the stubbed localStorage and fetch; both editions
 [x] clinic-busy-fields     the weekly hours editor's time inputs and the booking form's name and phone are disabled while a save or a booking is in flight, by a recorded run
 [x] clinic-hours-answer    load answers only a refusal or nothing and save only "saved", "failed" or a refusal, so no answer can leave the professionals section busy for good, by a recorded run
-[x] m4.2-review            the review of M4.2 as docs/05 §8 says for a last round of fixes: only what M4.2's lines changed, both editions, against M4.2's paragraph
+[x] m4.2-review            the review of M4.2 as docs/05 §8 says for a last round of fixes: only what M4.2's lines changed, both editions, against M4.2's paragraph · after all
 ```
 
 ## M5. Part IV, Git for agents and teams
@@ -157,7 +157,7 @@ When this milestone closes, a reader can choose between trunk, a branch per deli
 [x] worktrees              Chapter 18: worktrees and parallel agents, and where parallelism really stops
 [x] commit-as-review       Chapter 19: the agent stages, the person commits, and why
 [x] github-for-teams       Chapter 20: pull requests as the team's review, issues, Projects boards, and why the wiki is not docs/
-[x] m5-review              the review of M5 as docs/05 §8 says
+[x] m5-review              the review of M5 as docs/05 §8 says · after all
 ```
 
 ## M6. Part V, Beyond code
@@ -170,7 +170,7 @@ When this milestone closes, a reader can adapt the process to a team's tools, in
 [x] beyond-software        Chapter 23: analyses, proposals, codeless projects, client communication as a source of truth, data work, and this book
 [x] cost-and-where         Chapter 24: what coding agents cost, where they pay and where they do not, and how a team decides, with measured numbers
 [x] adoption               Chapter 25: taking the method to a team and a company
-[x] m6-review              the review of M6 as docs/05 §8 says
+[x] m6-review              the review of M6 as docs/05 §8 says · after all
 ```
 
 ## M7. Appendices and launch
@@ -183,7 +183,7 @@ When this milestone closes, version 1 is tagged, the PDF and EPUB are on its Git
 [x] workshop-map           Appendix: the parts mapped to workshop sessions, with timings
 [x] exercise-answers       Appendix: answers to every exercise, linked to the guided project's tags
 [x] cover                  make book puts each edition's cover on the PDF's first page and as the EPUB's cover image
-[x] m7-review              the review of M7 as docs/05 §8 says: the whole book and its appendices read end to end in both editions against M7's paragraph, before v1 is tagged
+[x] m7-review              the review of M7 as docs/05 §8 says: the whole book and its appendices read end to end in both editions against M7's paragraph, before v1 is tagged · after all
 [x] launch                 v1 tag and Release, so the PDFs and EPUBs have stable links, and focus-kit's README links the site and those files (OD-4)
 ```
 
@@ -198,7 +198,7 @@ When this milestone closes, the book is 25 chapters in both editions in three mo
 [x] pdf-design             the PDF of both editions in the design the author chose on the canvas (direction C), with the cover, the EPUB and the site unchanged
 [x] milestone-review-kit   chapters 13, 16 and 17 and docs/03 teach the milestone review as focus-kit d333348 defines it; both editions
 [x] milestone-review-process  the book's docs/05 §4, §7 and §8 follow focus-kit d333348's milestone review
-[x] m8-review              the author reads the rest of the book, chapter 6 on, and sends findings by conversation; each batch is fixed as an author-review-<n> line here, with no review of its own
+[x] m8-review              the author reads the rest of the book, chapter 6 on, and sends findings by conversation; each batch is fixed as an author-review-<n> line here, with no review of its own · after all
 ```
 
 ## M9. Asking for more
@@ -208,7 +208,7 @@ When this milestone closes, a reader knows why an agent's first answer feels fin
 ```
 [x] ask-for-more-experiment  three arms on the lending library, first answer against the challenge protocol, 3 runs per arm, judged blind by the author, recorded
 [x] ask-for-more-chapter     Chapter 25, alone in a new Part V, and a seed in the prologue: why the first answer feels final and the challenge protocol; both editions
-[x] m9-review                the review of M9: the prologue and chapter 25 read against M9's paragraph, clause by clause
+[x] m9-review                the review of M9: the prologue and chapter 25 read against M9's paragraph, clause by clause · after all
 [x] ch25-protocol-findable   a reader of chapter 25 knows what the challenge protocol is and where its four turns are written, and finds them again without rereading the section; both editions
 [x] ch25-cost-for-subscribers  a reader on a fixed subscription knows from chapter 25 what the protocol costs them, and no per-token price reads as the bill of their own session; both editions
 ```
@@ -220,7 +220,7 @@ When this milestone closes, a reader knows the six marks of focus-kit 2026.10.05
 ```
 [x] queue-states             a chapter of its own on the queue's six marks, who sets each and when, with chapters 13, 14, 15, 17, 18 and 21, docs/03, docs/05 §4 and this queue's header following the kit; both editions
 [x] context-slot             docs/05 §5 gains the kit's Context slot: `context/` listed in `.gitignore`, not created
-[x] m10-review               the review of M10 as docs/05 §8 says
+[x] m10-review               the review of M10 as docs/05 §8 says · after all
 [x] pdf-contents-one-page    the contents of each edition's PDF fit on one page, and a chapter's number in it is no larger than its page number; both editions
 [x] pdf-footnote-numbers     footnote numbers in each edition's PDF render as plain numbers beside their notes, with no coloured block behind them, in Preview too; both editions
 ```
@@ -231,7 +231,7 @@ When this milestone closes, a reader who hears that the page needs the whole ans
 
 ```
 [x] critique-fixes           chapters 10, 14 and 15: exploring by conversation before any page, the same page under any architecture, and automation bias with the review as its defence; both editions
-[x] m11-review               the review of M11 as docs/05 §8 says
+[x] m11-review               the review of M11 as docs/05 §8 says · after all
 ```
 
 ## M12. focus-kit 2026.10.13
@@ -248,7 +248,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.13 and the reposi
 [x] ch11-update-migrations    chapter 11: updating reports migrations for docs/04, docs/05 and AGENTS.md, the changelog, and each command naming the next; both editions · after kit-2026-10-13
 [x] ch10-commit-format        chapters 10 and 12: docs/04 no longer holds the format of a commit message, docs/05 §6 does; both editions · after ch10-12-manuals
 [x] ch18-19-only-apply        chapters 13 and 19: code changes only inside /apply, and AGENTS.md answers "where are we?" from the queue; both editions · after kit-2026-10-13
-[x] m12-review                the review of M12 as docs/05 §8 says
+[x] m12-review                the review of M12 as docs/05 §8 says · after all
 ```
 
 ## M13. focus-kit 2026.10.16
@@ -262,7 +262,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.16 and the reposi
 [x] ch10-12-slots-manuals    chapters 10 and 12: a slot says what and the command, and a manual also holds a proof /apply runs on another machine; both editions · after kit-2026-10-16
 [x] ch11-update-2026-10-16   chapter 11: the update example and its migration report at 2026.10.16; both editions · after kit-2026-10-16
 [x] ch21-container           chapter 21: a worktree per delivery in a container folder, as 2026.10.15 shapes it; both editions · after kit-2026-10-16
-[x] m13-review               the review of M13 as docs/05 §8 says
+[x] m13-review               the review of M13 as docs/05 §8 says · after all
 [x] kit-as-it-is             the book describes focus-kit as it is today, never comparing it with an earlier version of itself, and docs/04 says so; both editions
 [x] plain-numbers            no passage of the book reads as a run of numbers: each keeps the numbers that prove its point; both editions · after kit-as-it-is
 [x] ch21-worktree-first      chapter 21 says what a worktree is before it relies on the word; both editions
@@ -281,7 +281,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.16.2 and the repo
 [x] ch10-12-all-slots        chapters 10 and 12: every slot of docs/05 §5 where the book lists them, the questions /brainstorm and /analyze ask today, and what /analyze reads; both editions · after kit-2026-10-16-2
 [x] ch11-update-2026-10-16-2 chapter 11: the install sentence as the kit's README gives it, the update example and its report at 2026.10.16.2, and the worktree slot's migration; both editions · after kit-2026-10-16-2
 [x] ch14-18-kit-wording      chapters 14 and 18: the /propose sentence quoted as the kit writes it, the Contract's third reason, and the governor's "no gate beyond a complete page"; both editions · after kit-2026-10-16-2
-[x] m14-review               the review of M14 as docs/05 §8 says · after ch14-18-kit-wording
+[x] m14-review               the review of M14 as docs/05 §8 says · after all
 [x] repo-files-any-name      every check reads every tracked or untracked file, whatever characters its name has
 [x] site-build-anchors       the site build fails on a link to a heading that does not exist, and reports each broken link at its own line
 [x] book-build-links         the book build fails on a link to a heading that does not exist, links every note mention, and orders appendices by number · after parity-notes-readmes
@@ -323,7 +323,7 @@ When this milestone closes, a reader reaches the method in five chapters instead
 [x] ch22-26-team-cut         chapters 22 to 26: repeated sources, repeated gains and asides cut, the challenge protocol moved next to the story that needs it; both editions · after m14-review
 [x] one-gain-section         every chapter ends with one gain section and no key points that repeat it, and the lack of a baseline is said once, in the prologue; both editions · after prologue-and-why, ch8-testing-trim, method-said-once, ch20-21-git-cut, ch22-26-team-cut
 [x] review-slot-models       docs/05's Milestone review slot says how this repository's deep review runs and on which models, as the author decided after M14
-[x] m15-review               the review of M15 as docs/05 §8 says
+[x] m15-review               the review of M15 as docs/05 §8 says · after all
 [x] disclosure-docstring     check_disclosure.py's docstring says when the run fails as docs/01 does
 [x] docs01-empty-list        docs/01's make scan row says a list file with no entry fails the run even locally, as check_disclosure.py does
 [x] docs03-finding-and-gain  docs/03's finding row includes a finding the code review confirms, and its team gain row allows no sentence on a missing number
@@ -367,7 +367,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.17 and the reposi
 [x] batch-propose            chapter 19: proposes run in a batch on the recommended answers, each page listing what it decided alone, while applies stay parallel only on free lines and every commit stays the person's; both editions · after ch16-review-agents
 [x] ch08-10-devin-desktop    chapters 8 and 10 and docs/03: Devin Desktop, formerly Windsurf, its folder `.agents/skills/` and its `/propose <slug>`, and no `.windsurf/skills/`; both editions · after kit-2026-10-17
 [x] ch08-09-review-slot      chapters 8 and 9: the update example and its report at 2026.10.17, and the questions on the delivery review and on the milestone review's areas and model; both editions · after kit-2026-10-17
-[x] m16-review               the review of M16 as docs/05 §8 says · after ch13-delivery-review, ch15-review-by-areas, batch-propose, ch08-10-devin-desktop, ch08-09-review-slot, ch07-11-23-review-words
+[x] m16-review               the review of M16 as docs/05 §8 says · after all
 [x] docs04-width-rule        docs/04 names the width check among the tests, and docs/04 and `check_width.py` agree on which info strings go unmeasured
 [x] width-comment-fence      `check_width.py` measures no fence inside an HTML comment, as `mask` does
 [x] fence-commonmark         `markdown.py` opens and closes a fence where CommonMark does, and docs/01 says so
@@ -395,7 +395,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18 and the reposi
 [x] ch15-review-base         chapter 15: the base is the commit of the previous milestone's review, or the first commit; both editions · after kit-2026-10-18
 [x] ch14-resume-moment       chapter 14's fourth waiting case says the review was being built, so it resumes by `apply`; both editions
 [x] ch15-waiting-reason      chapter 15's review line waits with `· blocked: <what was read>` after `· resume: apply`; both editions · after ch15-review-base
-[x] m17-review               the review of M17 as docs/05 §8 says · after kit-2026-10-18, ch08-update-2026-10-18, ch13-created-files, ch14-four-waits, ch15-review-base, ch14-resume-moment, ch15-waiting-reason
+[x] m17-review               the review of M17 as docs/05 §8 says · after all
 [x] conflict-same-lines      chapter 19, docs/05 §4 and §6, and docs/03's conflict row define a conflict between two sessions in one way, so a batch's adjacent marks in one hunk of docs/06 are either staged or stopped for, consistently; both editions
 [x] ch19-adjacent-mark-staging  chapter 19 says who stages a batch's adjacent mark and how a session stages one line of a shared hunk without an editor; both editions
 [x] pt-ch19-index-word       the Portuguese chapter 19's key point says "a partir do índice", as chapter 13 and 19's batch paragraph say, not "a partir do stage"
@@ -441,7 +441,7 @@ When this milestone closes, a reader of chapters 0 to 7 learns each idea where i
 [x] ch19-agent-does-git      chapter 19 says the person can always ask the agent to do a git step for them, a commit message, a conflict, a commit, a merge or a push, and checks the result; both editions
 [x] ch19-git-step-wording   chapters 18 and 19 name only git steps and knots the book teaches where they say the agent acts on the person's word, say conflict marker, and give the Portuguese one phrase for the agent acting alone; both editions
 [x] docs04-code-layout       docs/04's rule for code says declarations and `{ }` blocks are set apart by blank lines, as the author writes code
-[x] m18-review               the review of M18 as docs/05 §8 says · after ch19-git-step-wording, ch14-face-prototype, try-before-commit, ch19-agent-does-git, docs04-code-layout, early-no-forward-links, pt-ninjobs-masculine, case-a-why-anonymous, agent-never-unsure, ch02-gain-less-to-read, pt-identifiers-choice, ch03-literal-type-comment, ch03-error-languages, ch04-focus-optional, ch04-uncle-bob, ch04-scalable-meaning, ch05-test-time, ch05-random-values, ch07-rag-and-numbers, ch07-talk-not-edit, ch11-queue-grows, ch11-agent-runs-propose, ch13-teach-the-agent
+[x] m18-review               the review of M18 as docs/05 §8 says · after all
 [x] copyright-version        the page with the copyright line says which version of the book this copy is and the date it was published, and asks the reader to check the book's GitHub repository for newer versions; `make release` writes them to a committed `VERSION` and builds the book before pushing; both editions
 ```
 
@@ -483,7 +483,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.18.1 and the repo
 [x] docs03-finding-slow-test docs/03: the finding term includes a failing slow test the milestone review runs, as the milestone review term already says
 [x] ch15-20-use-first        chapters 15 and 20: the short review sequences name using the delivery before reviewing the staged change and committing; both editions · after apply-use-first
 [x] ch13-scope-question-term chapter 13: the Portuguese edition says "questão de escopo", as chapters 12 and 14 do, and one word, "travado", for a blocked /apply, as chapter 19 does; the English already matches
-[x] m19-review               the review of M19 as docs/05 §8 says · after kit-2026-10-18-1, ch08-update-2026-10-18-1, ch05-13-slow-tests, ch11-next-milestone, propose-same-session, apply-use-first, agent-commits-asked, ch11-14-defined-mark, ch21-done-when, ch17-context-read, ch14-back-to-open, ch08-10-fresh-start, ch19-batch-staging, ch18-kit-branches, ch06-23-kit-rules, ch10-explicit-staging, ch08-hosts-details, ch09-empty-repo, ch13-refuse-incomplete, ch02-93-moment, ch19-commit-by-index, ch13-review-base, ch14-ended-and-dropped, ch18-revert-scope, ch15-review-head, ch07-ninjobs-focus, queue-legend-dropped, ch12-defined-mark, ch19-partial-branch-commits, ch16-six-rules-timeline, docs03-finding-slow-test, ch15-20-use-first, ch13-scope-question-term
+[x] m19-review               the review of M19 as docs/05 §8 says · after all
 [x] ch16-two-checks-stayed   chapter 16: at Ninjobs' restart two of the 29 checks stayed, both guarding privacy, as chapter 6 says, not two new ones in their place; both editions
 [x] ch13-next-milestone      chapter 13: a line the page did not ask for, suspension-end and the one asked after using the delivery, goes in the milestone whose paragraph needs it or under the next, as chapter 11 says; both editions
 [x] docs05-blocked-trunk     docs/05 §6: a blocked delivery on trunk stays uncommitted and its prerequisite becomes a line above it, as the kit's template says, with no move to a branch or worktree
@@ -509,7 +509,7 @@ When this milestone closes, every technical claim the audit of 2026-10-18 found 
 [x] ch14-blocked-column      chapter 14: a blocked line returns to `[ ]` or `[>]` as docs/05 §4 says, so the board shows it there and keeps no memory of a column; both editions · after ch14-back-to-open
 [x] verify-examples          `make verify` runs the executable examples extracted from the chapters, starting with chapter 3's `query` · after ch03-query-catch
 [x] ch04-remove-slice        chapter 4: removing a feature removes its folder and the imports other slices hold of it, as the member's page importing from loans/ shows; both editions
-[x] m20-review               the review of M20 as docs/05 §8 says · after ch03-query-catch, ch03-exhaustive-switch, ch12-scenario-levels, ch04-isolation-claims, ch01-recovery-not-immunity, ch24-protocol-phase, ch22-cost-method, ch16-prevention-evidence, ch14-blocked-column, verify-examples, m19-review, ch04-remove-slice · dropped: its range was read by m19-review
+[x] m20-review               the review of M20 as docs/05 §8 says · after all · dropped: its range was read by m19-review
 ```
 
 ## M21. focus-kit 2026.10.19
@@ -534,7 +534,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.19 and the reposi
 [x] ch20-reader-no-code      chapter 20: what the kit assumes of a reader who does not read code, who takes part in /propose, uses the delivery as its user, and asks where things stand or what a page decided; both editions · after kit-2026-10-19, ch20-one-person-assumed
 [x] ch13-19-commit-by-slot   chapters 13, 18, 19 and 23: the agent never commits on its own, and a Git slot that says it commits by its word is the asking, the person reviewing the commit; every sentence that says a person always commits holds under both forms; both editions · after kit-2026-10-19, ch13-apply-reads-00-03, ch18-19-one-index, ch07-review-git-slots
 [x] docs03-review-reads      docs/03: the `milestone review` row says the code is read by whoever the Milestone review slot names, on the person's word, as docs/05 §8 and chapter 15 say · after kit-2026-10-19, ch15-who-reads
-[x] m21-review               the review of M21 as docs/05 §8 says · after kit-2026-10-19, ch08-update-2026-10-19, ch07-slots-and-decided, ch09-second-pair-of-eyes, ch12-branch-then-mark, ch13-apply-reads-00-03, ch14-where-a-board-sees, ch15-who-reads, ch18-19-one-index, ch20-one-person-assumed, ch06-kit-after-ninjobs, ch16-ceiling-moves, ch07-review-git-slots, ch11-23-who-reads, ch20-reader-no-code, ch13-19-commit-by-slot, docs03-review-reads
+[x] m21-review               the review of M21 as docs/05 §8 says · after all
 [x] m21-git-slot-default     chapters 6, 8, 13, 18 and 19: every sentence that puts the person's reading before the commit says "by default", so it holds under the Git slot's commit form; both editions · after m21-review
 [x] ch20-roles-and-points    chapters 20 and 23: the roles chapter 20 assumes hold under both Git slot forms, the split of roles is the team's practice, and chapter 20 keeps five key points; both editions · after m21-review
 [x] ch14-20-board-branch     chapters 14 and 20: a board refreshed by a push shows the queue of the branch that pushed it; both editions · after m21-review, ch20-roles-and-points
@@ -554,7 +554,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.19.1 and the repo
 [x] ch14-20-read-branches    chapters 14 and 20: with a branch or worktree per delivery a board, or a session picking free lines or resolving an `after`, reads each slug's line from its worktree or branch, the main branch showing it as it was until the merge; both editions · after kit-2026-10-19-1
 [x] ch12-free-lines-branches chapter 12: /propose, starting its worktree from the main branch's HEAD, judges free lines and `after` from each slug's own branch; both editions · after kit-2026-10-19-1
 [x] make-help                `make` with no target prints the Makefile's commands, one line each saying what it does
-[x] m22-review               the review of M22 as docs/05 §8 says · after kit-2026-10-19-1, ch08-update-2026-10-19-1, ch14-20-read-branches, ch12-free-lines-branches, make-help
+[x] m22-review               the review of M22 as docs/05 §8 says · after all
 [x] ch08-13-17-next-line     chapters 8, 13, 17 and 23: with a branch or a worktree per delivery, the update's next command, /apply's `after` and next free line, and the manager's "where are we" take each slug's line from its worktree or branch, as chapter 14 says; both editions · after m22-review
 [x] ch20-merge-and-marks     chapter 20: a push reads each slug's line from its branch or worktree and carries the marks it can see, one sentence per line; both editions · after m22-review
 [x] ch08-13-20-default-review chapters 8, 13 and 20: every sentence that puts a person's review before the commit or the merge says "by default", and the reviewer is whoever decides the merge; both editions · after m22-review, ch08-13-17-next-line, ch20-merge-and-marks
@@ -576,7 +576,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.19.2 and the repo
 [x] ch10-12-run-manual       chapters 7, 9 and 10: the manual of running it, always owed, named in the Manuals slot by /brainstorm, written by the first delivery after which a person can run the product and updated by the deliveries that change a step; both editions · after kit-2026-10-19-2
 [x] ch13-apply-run-manual    chapter 13: /apply's next steps, use the delivery as its user, are the conversation's; the manual of running it is what survives it; both editions · after kit-2026-10-19-2, ch10-12-run-manual
 [x] readme-run-manual        README.md and README.pt.md: "Build locally" points to docs/manuals/build-the-book-from-a-clone.md · after kit-2026-10-19-2
-[x] m23-review               the review of M23 as docs/05 §8 says · after kit-2026-10-19-2, ch08-update-2026-10-19-2, ch10-12-run-manual, ch13-apply-run-manual, readme-run-manual
+[x] m23-review               the review of M23 as docs/05 §8 says · after all
 [x] kit-record-step4         the page of kit-2026-10-19-2: its "Migration report (step 4)" holds only what SETUP's step 4 checks, the project's other dispositions apart, agreeing with its Decisions on the Environments pointer, and the docs/manuals/ echo is not credited to the kit's changelog · after m23-review
 [x] ch08-next-free-line      chapter 8: the update excerpt's `Next:` keeps the record's condition, once kit-2026-10-19-2 is `[x]`, or stops calling ch08-update-2026-10-19-2 the queue's first free line; both editions · after m23-review
 [x] ch14-board-visibility    chapter 14: each refresh carries every delivery's mark as far as it can see it, and the board's cards move as each mark becomes visible, as :63 says; both editions · after m23-review
@@ -602,7 +602,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.20 and the reposi
 [x] kit-2026-10-20           reinstall the kit at 2026.10.20 and apply its migration report to docs/05 §§2, 4 and 5 and AGENTS.md · after kit-2026-10-19-2
 [x] ch08-update-2026-10-20   chapter 8: the update example and its report at 2026.10.20; both editions · after kit-2026-10-20
 [x] ch12-14-17-20-branch-claim chapters 12, 14, 17, 18, 19 and 20: /propose pushes the branch it creates and that branch is the claim of the line; a free line is one with no branch after a fetch, whatever main shows; "where are we" reads the delivery branches; both editions · after kit-2026-10-20
-[x] m24-review               the review of M24 as docs/05 §8 says · after kit-2026-10-20, ch08-update-2026-10-20, ch12-14-17-20-branch-claim
+[x] m24-review               the review of M24 as docs/05 §8 says · after all
 [x] ch08-23-fetch-taken      chapters 8, 13, 14, 17 and 23: wherever a session reads lines off trunk it runs `git fetch` first and counts a line whose branch exists as taken before any mark is pushed (C2, C3), chapter 14 :62 and :172 read each slug's line from its branch as its key point does (C6), and pt chapter 8's excerpt says "ocupada" (C5); both editions · after m24-review
 [x] ch18-19-fetch-resume     chapters 18 and 19: chapter 18 says what a remote, `git fetch` and `git push -u` are where it first uses them, so docs/03's `remote` row cites it truly (C4, P1), and chapter 19 :179 reuses an existing branch only when the definition resumes (C1); both editions · after m24-review
 [x] ch18-switch-resume     chapter 18 :27: "`git switch lend-book` instead when the branch exists" says when the definition resumes, so an existing branch is reused only then, as :25 and chapter 12 :28 say; both editions · after ch18-19-fetch-resume
@@ -618,12 +618,12 @@ When this milestone closes, the book teaches focus-kit 2026.10.20.1 and the repo
 
 ```
 [x] kit-2026-10-20-1         reinstall the kit at 2026.10.20.1 and apply its migration report to docs/05 §4 · after kit-2026-10-20
-[x] ch08-update-2026-10-20-1 (PA) chapter 8: the update example and its report at 2026.10.20.1; both editions · after kit-2026-10-20-1
-[x] ch12-14-parallel-token (PA) chapters 11, 12, 13 and 14: the `(PA)` token, what each letter lets run and what `-` waits for, who re-judges it, and /propose and /apply waiting as it says; both editions · after kit-2026-10-20-1
-[x] m25-review (--) the review of M25 as docs/05 §8 says · after kit-2026-10-20-1, ch08-update-2026-10-20-1, ch12-14-parallel-token
-[x] ch09-14-token-wording (PA) chapters 9, 11, 13 and 14 and docs/03 teach the token in one wording: chapter 9 shows /brainstorm writing it, a change re-judges the tokens it affects, `-` is a wait, chapter 11's line template carries the token, chapter 14's renew-loan example matches its block, and pt chapter 14 keeps one verb for members; both editions · after m25-review
-[x] ch08-23-branch-read (P-) chapters 8, 12, 13, 14, 17, 18, 19, 20 and 23 read each slug's line where docs/05 §4 says, with the lines only a branch has and an existing branch taken unless the definition resumes, and chapter 8's Git item paraphrases only what kit-2026-10-20-1 records; both editions · after m25-review
-[x] m25-records-claims (PA) the records of kit-2026-10-20-1, ch08-update-2026-10-20-1, ch12-14-parallel-token, ch07-review-merge, ch08-23-fetch-taken, ch18-19-fetch-resume, ch18-switch-resume, docs03-free-line-held and m24-records-crossrefs hold only what happened: make book with its commit, the Delivery review against docs/04 and its advisor as recorded, no slug or milestone the committed queue lacks, and counts, Contract quotes and Divergences that match, the page ending with its commit block · after m25-review
+[x] ch08-update-2026-10-20-1 chapter 8: the update example and its report at 2026.10.20.1; both editions · after kit-2026-10-20-1
+[x] ch12-14-parallel-token chapters 11, 12, 13 and 14: the `(PA)` token, what each letter lets run and what `-` waits for, who re-judges it, and /propose and /apply waiting as it says; both editions · after kit-2026-10-20-1
+[x] m25-review the review of M25 as docs/05 §8 says · after all
+[x] ch09-14-token-wording chapters 9, 11, 13 and 14 and docs/03 teach the token in one wording: chapter 9 shows /brainstorm writing it, a change re-judges the tokens it affects, `-` is a wait, chapter 11's line template carries the token, chapter 14's renew-loan example matches its block, and pt chapter 14 keeps one verb for members; both editions · after m25-review
+[x] ch08-23-branch-read chapters 8, 12, 13, 14, 17, 18, 19, 20 and 23 read each slug's line where docs/05 §4 says, with the lines only a branch has and an existing branch taken unless the definition resumes, and chapter 8's Git item paraphrases only what kit-2026-10-20-1 records; both editions · after m25-review
+[x] m25-records-claims the records of kit-2026-10-20-1, ch08-update-2026-10-20-1, ch12-14-parallel-token, ch07-review-merge, ch08-23-fetch-taken, ch18-19-fetch-resume, ch18-switch-resume, docs03-free-line-held and m24-records-crossrefs hold only what happened: make book with its commit, the Delivery review against docs/04 and its advisor as recorded, no slug or milestone the committed queue lacks, and counts, Contract quotes and Divergences that match, the page ending with its commit block · after m25-review
 ```
 
 ## M26. focus-kit 2026.10.20.2
@@ -631,13 +631,13 @@ When this milestone closes, the book teaches focus-kit 2026.10.20.1 and the repo
 When this milestone closes, the book teaches focus-kit 2026.10.20.2 and the repository runs on it: with a worktree per delivery each session opens where it works, /propose in `main/` and /apply in a fresh session inside the delivery's worktree, whose path /propose gives; /apply opened anywhere else stops before any edit and gives that path; the container's manual lets a session in `main/` edit the worktrees.
 
 ```
-[x] kit-2026-10-20-2 (PA)    reinstall the kit at 2026.10.20.2 and record its migration report, which owes this trunk repository none · after kit-2026-10-20-1
-[x] ch08-update-2026-10-20-2 (PA) chapter 8: the update example and its report at 2026.10.20.2; both editions · after kit-2026-10-20-2
-[x] ch13-19-session-folder (PA) chapters 13 and 19: where each session opens with a worktree per delivery, never the container, /propose giving the worktree's path, /apply stopping outside it, and the manual letting `main/`'s session edit the worktrees, Claude Code's `additionalDirectories` as the example; both editions · after kit-2026-10-20-2
-[x] m26-review (--)          the review of M26 as docs/05 §8 says · after kit-2026-10-20-2, ch08-update-2026-10-20-2, ch13-19-session-folder
-[x] ch08-worktree-slot-manual (PA) chapter 8's paragraph on worktree slots says the folder migration waits for a container while the manual is reported lacking whatever the folder, and the example after the excerpt of a choice recorded with a date or an ADR matches what the excerpt shows; both editions · after m26-review
-[x] ch12-propose-worktree-path (PA) chapter 12 says that with a worktree per delivery /propose runs in main/, writes the page in the worktree and ends by giving its path for /apply's fresh session, its key points included, as chapters 13 and 19 and the propose skill say; both editions · after m26-review
-[x] m26-records-claims (PA) the records of kit-2026-10-20-2, ch08-update-2026-10-20-2, ch13-19-session-folder, ch08-23-branch-read, ch09-14-token-wording, m25-records-claims and kit-2026-10-20-1 hold only what happened: each Done when tick matches its Proof and Delivery review, a reworded item listed in Divergences, make book with its tree and commit, cites and quotes that match what they cite, and no queue line claimed that docs/06 lacks · after m26-review
+[x] kit-2026-10-20-2    reinstall the kit at 2026.10.20.2 and record its migration report, which owes this trunk repository none · after kit-2026-10-20-1
+[x] ch08-update-2026-10-20-2 chapter 8: the update example and its report at 2026.10.20.2; both editions · after kit-2026-10-20-2
+[x] ch13-19-session-folder chapters 13 and 19: where each session opens with a worktree per delivery, never the container, /propose giving the worktree's path, /apply stopping outside it, and the manual letting `main/`'s session edit the worktrees, Claude Code's `additionalDirectories` as the example; both editions · after kit-2026-10-20-2
+[x] m26-review               the review of M26 as docs/05 §8 says · after all
+[x] ch08-worktree-slot-manual chapter 8's paragraph on worktree slots says the folder migration waits for a container while the manual is reported lacking whatever the folder, and the example after the excerpt of a choice recorded with a date or an ADR matches what the excerpt shows; both editions · after m26-review
+[x] ch12-propose-worktree-path chapter 12 says that with a worktree per delivery /propose runs in main/, writes the page in the worktree and ends by giving its path for /apply's fresh session, its key points included, as chapters 13 and 19 and the propose skill say; both editions · after m26-review
+[x] m26-records-claims the records of kit-2026-10-20-2, ch08-update-2026-10-20-2, ch13-19-session-folder, ch08-23-branch-read, ch09-14-token-wording, m25-records-claims and kit-2026-10-20-1 hold only what happened: each Done when tick matches its Proof and Delivery review, a reworded item listed in Divergences, make book with its tree and commit, cites and quotes that match what they cite, and no queue line claimed that docs/06 lacks · after m26-review
 ```
 
 ## M27. focus-kit 2026.10.20.3
@@ -645,14 +645,14 @@ When this milestone closes, the book teaches focus-kit 2026.10.20.2 and the repo
 When this milestone closes, the book teaches focus-kit 2026.10.20.3 and the repository runs on it: /propose and /apply typed with several slugs open one subagent per slug, in its worktree, together where `(PA)` and `after` allow, the flag kept because the person's command names every slug; a subagent reports its questions and the session relays them; the command may say to decide alone or to build as well, the page recording both.
 
 ```
-[x] kit-2026-10-20-3 (PA)    reinstall the kit at 2026.10.20.3 and apply its migration report to docs/05 §§2, 4 and 7 · after kit-2026-10-20-2
-[x] ch08-update-2026-10-20-3 (PA) chapter 8: the update example and its report at 2026.10.20.3; both editions · after kit-2026-10-20-3
-[x] ch12-14-18-several-slugs (PA) chapters 12, 13, 14, 16, 18 and 19 and docs/03: a command typed with several slugs, one subagent each, in the one folder on trunk or each in its worktree, the tokens obeyed, the flag kept and why, questions relayed by the session, deciding alone and building as well recorded on the page, chapter 19's batch as that command and chapter 16's governor unchanged by it; both editions · after kit-2026-10-20-3
-[x] m27-review (--)          the review of M27 as docs/05 §8 says · after kit-2026-10-20-3, ch08-update-2026-10-20-3, ch12-14-18-several-slugs
-[x] ch08-update-other-edits (PA) chapter 8 says that applying an update's migrations can need an edit no report item names, as docs/05 §7 needed beside §§2 and 4 at 2026.10.20.3, so "the update is done when the migrations are applied" holds of its own example; both editions · after m27-review
-[x] ch12-13-19-several-slugs-paths (PA) chapters 12, 13 and 19 say, for a command typed with several slugs, where the person corrects a page a subagent wrote while the session edits nothing, that a subagent's worktree is created or reused, that build as well sends /apply's subagent to the worktree's path, and where the session typing /apply a b opens with a worktree per delivery; both editions · after m27-review
-[x] ch16-subagent-account (PA) chapter 16's list of what the process does not have and its section on the subagent it admits give docs/05 §7's one account, no subagent beyond a command's one per slug and the reviews' readers and checker, the steps that launch agents counted with it; both editions · after m27-review
-[x] m27-records-claims (PA) the records of ch08-update-2026-10-20-3, ch12-14-18-several-slugs, kit-2026-10-20-3, ch12-propose-worktree-path, ch08-worktree-slot-manual, m26-records-claims, ch13-19-session-folder and ch08-update-2026-10-20-2 hold only what happened: each Delivery review tick matching what its agent read and whether it kept the session's advisor, make book with its tree, commit and moment, and counts, chapter lists and marks as they were · after m27-review
+[x] kit-2026-10-20-3    reinstall the kit at 2026.10.20.3 and apply its migration report to docs/05 §§2, 4 and 7 · after kit-2026-10-20-2
+[x] ch08-update-2026-10-20-3 chapter 8: the update example and its report at 2026.10.20.3; both editions · after kit-2026-10-20-3
+[x] ch12-14-18-several-slugs chapters 12, 13, 14, 16, 18 and 19 and docs/03: a command typed with several slugs, one subagent each, in the one folder on trunk or each in its worktree, the tokens obeyed, the flag kept and why, questions relayed by the session, deciding alone and building as well recorded on the page, chapter 19's batch as that command and chapter 16's governor unchanged by it; both editions · after kit-2026-10-20-3
+[x] m27-review               the review of M27 as docs/05 §8 says · after all
+[x] ch08-update-other-edits chapter 8 says that applying an update's migrations can need an edit no report item names, as docs/05 §7 needed beside §§2 and 4 at 2026.10.20.3, so "the update is done when the migrations are applied" holds of its own example; both editions · after m27-review
+[x] ch12-13-19-several-slugs-paths chapters 12, 13 and 19 say, for a command typed with several slugs, where the person corrects a page a subagent wrote while the session edits nothing, that a subagent's worktree is created or reused, that build as well sends /apply's subagent to the worktree's path, and where the session typing /apply a b opens with a worktree per delivery; both editions · after m27-review
+[x] ch16-subagent-account chapter 16's list of what the process does not have and its section on the subagent it admits give docs/05 §7's one account, no subagent beyond a command's one per slug and the reviews' readers and checker, the steps that launch agents counted with it; both editions · after m27-review
+[x] m27-records-claims the records of ch08-update-2026-10-20-3, ch12-14-18-several-slugs, kit-2026-10-20-3, ch12-propose-worktree-path, ch08-worktree-slot-manual, m26-records-claims, ch13-19-session-folder and ch08-update-2026-10-20-2 hold only what happened: each Delivery review tick matching what its agent read and whether it kept the session's advisor, make book with its tree, commit and moment, and counts, chapter lists and marks as they were · after m27-review
 ```
 
 ## M28. focus-kit 2026.10.20.4
@@ -660,17 +660,17 @@ When this milestone closes, the book teaches focus-kit 2026.10.20.3 and the repo
 When this milestone closes, the book teaches focus-kit 2026.10.20.4 and the repository runs on it: /propose claims the line with the kit's first script, run through git's own shell on every host, Windows without WSL included; the rule stays in docs/05 §2 and the steps live in the script, which prints the path the /apply session opens in.
 
 ```
-[x] kit-2026-10-20-4 (PA)    reinstall the kit at 2026.10.20.4; the report names no migration · after kit-2026-10-20-3
-[x] ch08-update-2026-10-20-4 (PA) chapter 8: the update example and its report at 2026.10.20.4, and the Windows requirement of the README; both editions · after kit-2026-10-20-4
-[x] ch13-19-claim-script (PA) chapters 13 and 19: the claim script, what it checks, creates, pushes and prints, the git alias that runs it on every host, Git for Windows' shell and the WSL recommendation; both editions · after kit-2026-10-20-4
-[x] ch08-copilot-cli (P-)  chapters 8 and 10: the GitHub Copilot CLI as a host of its own, reading AGENTS.md and the skills from the terminal, apart from Copilot in VS Code and its prompt files; both editions · after kit-2026-10-20-4
-[x] ch10-copilot-cli-invocation (PA) chapter 10: "In Claude Code a command runs only when you name it" (en :33) names the Copilot CLI too, which honours the same field (chapter 8); both editions · after ch08-copilot-cli
-[x] m28-review (--)          the review of M28 as docs/05 §8 says · after kit-2026-10-20-4, ch08-update-2026-10-20-4, ch13-19-claim-script, ch08-copilot-cli, ch10-copilot-cli-invocation
-[x] m28-claim-wording (PA) chapters 13 and 19, docs/03's claim row and ADR-0018's kit-2026-10-20-4 amendment say what claim.sh does as it does it: the branch is the prefix and the slug joined, on trunk the path printed is the repository's top level, a branch already on the remote is reused and not pushed again, and with a branch per delivery the remote is checked for the slug's own branch; both editions · after m28-review
-[x] ch13-16-several-slugs-sessions (P-) chapter 16 counts, for a command typed with several slugs and told to build as well, the /apply subagent each slug gets beside its /propose one, and chapter 13 says that with a worktree per delivery the session typing /apply a b in main/ edits nothing and sends each subagent to its worktree, so it is not the session that stops anywhere but the delivery's worktree; both editions · after m28-review
-[x] ch10-12-no-implicit-hosts (PA) chapter 10's "a command runs only when you name it" and chapter 12's setting that stops a host from running a skill on its own name every host chapter 8 says honours it, Claude Code, the Copilot CLI and Codex; both editions · after m28-review
-[x] ch08-update-choice-outcome (PA) chapter 8's update excerpt and the three outcomes explained after it agree on how an item that differs by a recorded project choice ends, the Git item's "None." being the word the explanation gives a match; both editions · after m28-review
-[x] m28-records-claims (PA) the records of kit-2026-10-20-4, ch08-update-2026-10-20-4, ch13-19-claim-script, ch08-copilot-cli, ch10-copilot-cli-invocation, m27-records-claims, ch08-update-other-edits, ch16-subagent-account and ch12-13-19-several-slugs-paths hold only what happened: each Delivery review tick matching what its agent read and what its report says of the advisor, a Done when item reworded in /apply named in Divergences, make book with its tree and commit, and line numbers, marks and neighbouring lines as they were · after m28-review
+[x] kit-2026-10-20-4    reinstall the kit at 2026.10.20.4; the report names no migration · after kit-2026-10-20-3
+[x] ch08-update-2026-10-20-4 chapter 8: the update example and its report at 2026.10.20.4, and the Windows requirement of the README; both editions · after kit-2026-10-20-4
+[x] ch13-19-claim-script chapters 13 and 19: the claim script, what it checks, creates, pushes and prints, the git alias that runs it on every host, Git for Windows' shell and the WSL recommendation; both editions · after kit-2026-10-20-4
+[x] ch08-copilot-cli  chapters 8 and 10: the GitHub Copilot CLI as a host of its own, reading AGENTS.md and the skills from the terminal, apart from Copilot in VS Code and its prompt files; both editions · after kit-2026-10-20-4
+[x] ch10-copilot-cli-invocation chapter 10: "In Claude Code a command runs only when you name it" (en :33) names the Copilot CLI too, which honours the same field (chapter 8); both editions · after ch08-copilot-cli
+[x] m28-review               the review of M28 as docs/05 §8 says · after all
+[x] m28-claim-wording chapters 13 and 19, docs/03's claim row and ADR-0018's kit-2026-10-20-4 amendment say what claim.sh does as it does it: the branch is the prefix and the slug joined, on trunk the path printed is the repository's top level, a branch already on the remote is reused and not pushed again, and with a branch per delivery the remote is checked for the slug's own branch; both editions · after m28-review
+[x] ch13-16-several-slugs-sessions chapter 16 counts, for a command typed with several slugs and told to build as well, the /apply subagent each slug gets beside its /propose one, and chapter 13 says that with a worktree per delivery the session typing /apply a b in main/ edits nothing and sends each subagent to its worktree, so it is not the session that stops anywhere but the delivery's worktree; both editions · after m28-review
+[x] ch10-12-no-implicit-hosts chapter 10's "a command runs only when you name it" and chapter 12's setting that stops a host from running a skill on its own name every host chapter 8 says honours it, Claude Code, the Copilot CLI and Codex; both editions · after m28-review
+[x] ch08-update-choice-outcome chapter 8's update excerpt and the three outcomes explained after it agree on how an item that differs by a recorded project choice ends, the Git item's "None." being the word the explanation gives a match; both editions · after m28-review
+[x] m28-records-claims the records of kit-2026-10-20-4, ch08-update-2026-10-20-4, ch13-19-claim-script, ch08-copilot-cli, ch10-copilot-cli-invocation, m27-records-claims, ch08-update-other-edits, ch16-subagent-account and ch12-13-19-several-slugs-paths hold only what happened: each Delivery review tick matching what its agent read and what its report says of the advisor, a Done when item reworded in /apply named in Divergences, make book with its tree and commit, and line numbers, marks and neighbouring lines as they were · after m28-review
 ```
 
 ## M29. focus-kit 2026.10.20.5
@@ -678,13 +678,13 @@ When this milestone closes, the book teaches focus-kit 2026.10.20.4 and the repo
 When this milestone closes, the book teaches focus-kit 2026.10.20.5 and the repository runs on it: setup writes into the repository the session works in, never beside a downloaded `SETUP.md`, and writes no `AGENTS.md` or docs/05, which /brainstorm and /analyze write; a page decided alone says the agent chose; `after` holds both commands until every line it names is `[x]` whatever the token says, and the kit's long sentences are split with no rule changed, docs/05 §4's four waiting cases now a list.
 
 ```
-[x] kit-2026-10-20-5 (PA)    reinstall the kit at 2026.10.20.5 and apply its migration report to docs/05 §4 · after kit-2026-10-20-4
-[x] ch08-update-2026-10-20-5 (PA) chapter 8: the update example and its report at 2026.10.20.5, setup writing only into the session's repository and never AGENTS.md; both editions · after kit-2026-10-20-5
-[x] ch14-after-over-token (PA) chapter 14: `after` holds /propose and /apply until every line it names is `[x]`, whatever the `(PA)` token says, with a library line whose token lets both commands start and whose `after` names a `[>]` line as the example; both editions · after kit-2026-10-20-5
-[x] m29-review (--)          the review of M29 as docs/05 §8 says · after kit-2026-10-20-5, ch08-update-2026-10-20-5, ch14-after-over-token
-[x] ch08-other-items-claude-md (PA) chapter 8's update explanation points at the excerpt's two docs/05 §4 items that lack something, the "other items" line names the §4 items the excerpt does not show, the hosts section's lead-in and its CLAUDE.md sentence say the setup file writes each host's command files and pointers and /brainstorm or /analyze AGENTS.md and CLAUDE.md with the import, as the install section and the key point say, and the Portuguese lead-in to the excerpt is one sentence per line; both editions · after m29-review
-[x] ch14-renewal-example (PA) chapter 14's renewal-notice example says /apply refuses the line first because it is `[ ]` and not `[>]`, and that `after` would hold it even were it `[>]`, and the Portuguese block row names the member it warns, within 74 columns; both editions · after m29-review
-[x] m29-records-claims (PA) the records of ch14-after-over-token, ch08-update-2026-10-20-5, kit-2026-10-20-5, m28-records-claims, ch10-12-no-implicit-hosts, ch08-update-choice-outcome, m28-claim-wording and ch13-16-several-slugs-sessions hold only what happened: verify and make book in the order the Proof records, each Delivery review saying what its agent read and what its report says of the advisor, a Done when item reworded in /apply named in Divergences, every list of choices made alone saying the agent chose, marks, dates and section names as they were, and m28-records-claims' dropped review finding given the line it names or its real disposition; docs/03's migration row and kit-2026-10-20-5 agree on whether a migration reports an unchanged rule's sentence · after m29-review
+[x] kit-2026-10-20-5    reinstall the kit at 2026.10.20.5 and apply its migration report to docs/05 §4 · after kit-2026-10-20-4
+[x] ch08-update-2026-10-20-5 chapter 8: the update example and its report at 2026.10.20.5, setup writing only into the session's repository and never AGENTS.md; both editions · after kit-2026-10-20-5
+[x] ch14-after-over-token chapter 14: `after` holds /propose and /apply until every line it names is `[x]`, whatever the `(PA)` token says, with a library line whose token lets both commands start and whose `after` names a `[>]` line as the example; both editions · after kit-2026-10-20-5
+[x] m29-review               the review of M29 as docs/05 §8 says · after all
+[x] ch08-other-items-claude-md chapter 8's update explanation points at the excerpt's two docs/05 §4 items that lack something, the "other items" line names the §4 items the excerpt does not show, the hosts section's lead-in and its CLAUDE.md sentence say the setup file writes each host's command files and pointers and /brainstorm or /analyze AGENTS.md and CLAUDE.md with the import, as the install section and the key point say, and the Portuguese lead-in to the excerpt is one sentence per line; both editions · after m29-review
+[x] ch14-renewal-example chapter 14's renewal-notice example says /apply refuses the line first because it is `[ ]` and not `[>]`, and that `after` would hold it even were it `[>]`, and the Portuguese block row names the member it warns, within 74 columns; both editions · after m29-review
+[x] m29-records-claims the records of ch14-after-over-token, ch08-update-2026-10-20-5, kit-2026-10-20-5, m28-records-claims, ch10-12-no-implicit-hosts, ch08-update-choice-outcome, m28-claim-wording and ch13-16-several-slugs-sessions hold only what happened: verify and make book in the order the Proof records, each Delivery review saying what its agent read and what its report says of the advisor, a Done when item reworded in /apply named in Divergences, every list of choices made alone saying the agent chose, marks, dates and section names as they were, and m28-records-claims' dropped review finding given the line it names or its real disposition; docs/03's migration row and kit-2026-10-20-5 agree on whether a migration reports an unchanged rule's sentence · after m29-review
 ```
 
 ## M30. The cache that expires
@@ -692,10 +692,10 @@ When this milestone closes, the book teaches focus-kit 2026.10.20.5 and the repo
 When this milestone closes, a reader of chapter 22 knows that the cache lasts only while the conversation keeps using it, and that a pause past its lifetime makes the next turn rebuild the whole context at the write price instead of reading it at the read price.
 
 ```
-[x] ch22-cache-lifetime (PA) chapter 22: each cache hit renews the cache's lifetime, counted from the start of the request; after a longer pause the next call writes the whole context again at 1.25 times the input price for five minutes or 2 times for one hour, against a read of 0.1 times or less, so one turn after a coffee break can cost tens of times the turn before it; Claude Code gives the main conversation one hour on a subscription within the plan's usage and five minutes on an API key, a cloud provider or usage credits, subagents five minutes, and the `promptCacheTtl` setting changes it; sources Anthropic's pricing page and Claude Code's "How Claude Code uses prompt caching", accessed 2026-10-22; both editions
-[x] m30-review (--)          the review of M30 as docs/05 §8 says · after ch22-cache-lifetime
-[x] ch22-cache-service (PA) chapter 22 and docs/03's cache lifetime row say that the stored context is kept where the model runs and written again after a pause, the host being the program that runs the agent (docs/03, chapter 22's own definition) and choosing the lifetime per request, in the new section and wherever the chapter has the host store the cache; both editions · after m30-review
-[x] m30-records-claims (PA) the record of ch08-other-items-claude-md holds only what happened: its Delivery review tick matching what its agent read and what its report says of the advisor, the review without docs/04 or an advisor named in Divergences · after m30-review
+[x] ch22-cache-lifetime chapter 22: each cache hit renews the cache's lifetime, counted from the start of the request; after a longer pause the next call writes the whole context again at 1.25 times the input price for five minutes or 2 times for one hour, against a read of 0.1 times or less, so one turn after a coffee break can cost tens of times the turn before it; Claude Code gives the main conversation one hour on a subscription within the plan's usage and five minutes on an API key, a cloud provider or usage credits, subagents five minutes, and the `promptCacheTtl` setting changes it; sources Anthropic's pricing page and Claude Code's "How Claude Code uses prompt caching", accessed 2026-10-22; both editions
+[x] m30-review               the review of M30 as docs/05 §8 says · after all
+[x] ch22-cache-service chapter 22 and docs/03's cache lifetime row say that the stored context is kept where the model runs and written again after a pause, the host being the program that runs the agent (docs/03, chapter 22's own definition) and choosing the lifetime per request, in the new section and wherever the chapter has the host store the cache; both editions · after m30-review
+[x] m30-records-claims the record of ch08-other-items-claude-md holds only what happened: its Delivery review tick matching what its agent read and what its report says of the advisor, the review without docs/04 or an advisor named in Divergences · after m30-review
 ```
 
 ## M31. The films
@@ -703,10 +703,10 @@ When this milestone closes, a reader of chapter 22 knows that the cache lasts on
 When this milestone closes, a reader of either edition finds the films that show focus-kit at work on real projects, in the edition's language, with the other language's playlist one link away.
 
 ```
-[x] book-films (PA)          the book's README and site home link the engineering and business films in the edition's language and the other language's playlist, and chapter 8, after the install, links the edition's engineering film in a source note, describing neither the project the films show nor what they run; docs/00 §Cases says the films show a project outside the book's cases; both editions
-[x] m31-review (--)          the review of M31 as docs/05 §8 says · after book-films
-[x] ch22-cache-route-host (PA) chapter 22 says where the cache lives by the infrastructure that serves the model, as docs/03's cache lifetime row and its source say, Claude Platform on AWS included, and says that the lifetime is chosen per request of the host its source names, Claude Code, in the chapter and the row; both editions · after m31-review
-[x] m31-records-claims (PA) the records of ch22-cache-service, m30-records-claims and m31-review hold only what happened: make book with its HEAD, tree and both PDF paths, the Delivery review tick saying what its agent read and what its report says of the advisor, line numbers as they were, docs/03 restated as it says, a commit body of one-line bullets, the define commits that were not made, and ch22-cache-service's line without docs/03's FOCUS term service · after m31-review
+[x] book-films          the book's README and site home link the engineering and business films in the edition's language and the other language's playlist, and chapter 8, after the install, links the edition's engineering film in a source note, describing neither the project the films show nor what they run; docs/00 §Cases says the films show a project outside the book's cases; both editions
+[x] m31-review               the review of M31 as docs/05 §8 says · after all
+[x] ch22-cache-route-host chapter 22 says where the cache lives by the infrastructure that serves the model, as docs/03's cache lifetime row and its source say, Claude Platform on AWS included, and says that the lifetime is chosen per request of the host its source names, Claude Code, in the chapter and the row; both editions · after m31-review
+[x] m31-records-claims the records of ch22-cache-service, m30-records-claims and m31-review hold only what happened: make book with its HEAD, tree and both PDF paths, the Delivery review tick saying what its agent read and what its report says of the advisor, line numbers as they were, docs/03 restated as it says, a commit body of one-line bullets, the define commits that were not made, and ch22-cache-service's line without docs/03's FOCUS term service · after m31-review
 ```
 
 ## M32. focus-kit 2026.10.24
@@ -714,13 +714,13 @@ When this milestone closes, a reader of either edition finds the films that show
 When this milestone closes, the book teaches focus-kit 2026.10.24 and the repository runs on it: what may run now comes from the kit's `queue.sh`, a tree of the current milestone with each line under the last line it waits on and its state, ending with the lines free for /apply and for /propose together; /propose and /apply typed with no slug show it, /apply ends with it, and the free lines are offered as one command with several slugs, each slug one more agent at the cost of a session.
 
 ```
-[x] kit-2026-10-24 (PA)      reinstall the kit at 2026.10.24 and apply its migration report to docs/05 §4 · after m31-review
-[x] ch08-update-2026-10-24 (PA) chapter 8: the update example and its report at 2026.10.24, sixteen files in the skills folders and the script at §3.7; both editions · after kit-2026-10-24
-[x] ch11-14-queue-tree (PA)  chapters 11, 12, 13 and 14: `queue.sh` drawing the milestone as a tree, a line under the last line it waits on, the free lines for /apply and /propose, the lines without a token judged first, /propose and /apply with no slug showing it, and the offer of one command with several slugs and its cost; both editions · after kit-2026-10-24
-[x] ch19-queue-branches (PA) chapter 19: with a worktree per delivery `queue.sh` reads each delivery's line from its branch on origin, keeping the further mark, and lists the lines only a branch has; both editions · after kit-2026-10-24
-[x] m32-review (--)          the review of M32 as docs/05 §8 says · after kit-2026-10-24, ch08-update-2026-10-24, ch11-14-queue-tree, ch19-queue-branches
-[ ] m32-records-claims (PA)  the records of kit-2026-10-24, ch08-update-2026-10-24, ch11-14-queue-tree and ch19-queue-branches hold only what happened: what `queue.sh` reads, docs/06 and not work/; the pt line of 2026.10.20.3; that the six screenshots show chapter 14 before its review's two fixes; the decision the fixture's token reverses; the changelog's words without "or in-flight" · after m32-review
-[ ] queue-tree-row-source (PA) docs/03's `queue tree` row and ADR-0018's `kit-2026-10-24` amendment cite for the no-slug rule and /apply's ending the skills that hold them, not docs/05 §4 · after m32-review
-[ ] ch14-key-points-pointers (PA) chapter 14 with at most five key points, as docs/04 says, and the forward pointers M32 added in chapters 8, 12, 13 and 14 once per chapter for each target, or docs/04's rule restated by the author; both editions · after m32-review
-[ ] ch19-example-marks (PA)  chapter 19's example: `overdue-list`'s token against the folder it shares with `return-book`, and how a mark reaches origin before the person's commit, which the tree from `main/` needs; both editions · after m32-review
+[x] kit-2026-10-24      reinstall the kit at 2026.10.24 and apply its migration report to docs/05 §4 · after m31-review
+[x] ch08-update-2026-10-24 chapter 8: the update example and its report at 2026.10.24, sixteen files in the skills folders and the script at §3.7; both editions · after kit-2026-10-24
+[x] ch11-14-queue-tree  chapters 11, 12, 13 and 14: `queue.sh` drawing the milestone as a tree, a line under the last line it waits on, the free lines for /apply and /propose, the lines without a token judged first, /propose and /apply with no slug showing it, and the offer of one command with several slugs and its cost; both editions · after kit-2026-10-24
+[x] ch19-queue-branches chapter 19: with a worktree per delivery `queue.sh` reads each delivery's line from its branch on origin, keeping the further mark, and lists the lines only a branch has; both editions · after kit-2026-10-24
+[x] m32-review               the review of M32 as docs/05 §8 says · after all
+[ ] m32-records-claims  the records of kit-2026-10-24, ch08-update-2026-10-24, ch11-14-queue-tree and ch19-queue-branches hold only what happened: what `queue.sh` reads, docs/06 and not work/; the pt line of 2026.10.20.3; that the six screenshots show chapter 14 before its review's two fixes; the decision the fixture's token reverses; the changelog's words without "or in-flight" · after m32-review
+[ ] queue-tree-row-source docs/03's `queue tree` row and ADR-0018's `kit-2026-10-24` amendment cite for the no-slug rule and /apply's ending the skills that hold them, not docs/05 §4 · after m32-review
+[ ] ch14-key-points-pointers chapter 14 with at most five key points, as docs/04 says, and the forward pointers M32 added in chapters 8, 12, 13 and 14 once per chapter for each target, or docs/04's rule restated by the author; both editions · after m32-review
+[ ] ch19-example-marks  chapter 19's example: `overdue-list`'s token against the folder it shares with `return-book`, and how a mark reaches origin before the person's commit, which the tree from `main/` needs; both editions · after m32-review
 ```

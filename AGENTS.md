@@ -18,7 +18,7 @@ A free, bilingual book that teaches a team the engineering practices behind the 
 - Case B did not run on the process; no passage implies it did (docs/00).
 - The book mentions none of the author's earlier books and copies no text from them (ADR-0005).
 - One delivery = one page in work/<slug>.md: /propose to define, /apply to build. Code changes only inside /apply: a change asked outside it, however small, becomes a `[ ]` line in docs/06, with a draft page for what the line cannot hold, and the answer stops there, naming /propose (docs/05 §2).
-- No em dash in any text a user reads.
+- No em dash in any text a user reads (docs/04).
 - The agent stages and suggests the commit message. It never commits or merges on its own; asked, it takes the step the person names.
 - Stage only this delivery's changes as docs/05 §6 says; preserve unrelated edits and existing index entries.
 
@@ -32,6 +32,6 @@ A free, bilingual book that teaches a team the engineering practices behind the 
 - Chapters are `book/<edition>/NN-<slug>.md`, same file name in both editions; scripts in `scripts/` (docs/01).
 - Every check prints `file:line: rule: message` and exits non-zero (docs/01).
 - `make verify` before declaring anything done.
-- Abstraction on the second concrete occurrence, and the delivery says which was the first.
+- Abstraction on the second concrete occurrence, and the delivery says which was the first (docs/01).
 - Ambiguity → ask. Documents are living: a delivery that changes behaviour updates the document that owns it, in the same delivery.
 - Asked where things stand, answer from docs/06 and work/, and with a branch or worktree per delivery from the delivery branches after `git fetch`: the lines in flight, their marks, and the next command, as this host invokes it. Asked what a delivery decided or why, answer from its page and the ADRs it names.

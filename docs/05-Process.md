@@ -29,9 +29,10 @@ person runs it in this session, whose conversation the draft already
 holds, or in a fresh one. /apply always starts in a fresh session, a
 subagent being one: it has only what the page says.
 
-Before /propose changes the queue or the page, use §5's git strategy:
-create the branch or worktree named after the slug, push its branch, or
-reuse its existing one on resumption, bringing into it any draft left
+Before /propose changes the queue or the page, claim the line as §5's
+Git slot says: `claim.sh` creates the branch or worktree on origin, or
+reopens the one this clone already has; one another clone created opens
+only on the person's word, with `resume`. Bring into it any draft left
 for the slug. Add a missing queue line where it belongs and say so.
 Start defining with `[~]`; start building only a completely defined `[>]`
 page, with `[*]`. Follow §4 for blocked lines and §6 before changing code
@@ -58,16 +59,18 @@ a missing process rule rather than falling back to a retired instruction.
     defaults". Only when there is a screen.
 
     **Visual reference.** Where the design is, and the viewports. Only when
-    there is a screen.
+    there is a screen. A screen whose reference does not exist yet gets
+    one as §5's Design slot says, before this page is `[>]`.
 
     **Out of scope.** What does not enter, half a line of reason each.
 
     **Done when.** A mechanical checklist: tests X pass; verify green;
     screenshot matches Y.
 
-After /apply the page also records what happened: what diverged, what was
-dropped, what the proof found, the decisions taken. It ends with the commit
-message /apply suggested, in a fenced block whose info string is `commit`.
+After /apply the page also records what happened, under a heading
+`## Outcome` below Done when, so the definition above stays as it was
+read: what diverged, what was dropped, what the proof found, the
+decisions taken. It ends with the commit message /apply suggested, in a fenced block whose info string is `commit`.
 There is one final block: a resumed /apply replaces the earlier suggestion.
 
 A draft with unanswered scope questions is not ready for /apply, even
@@ -93,30 +96,30 @@ docs/06: one line per delivery, in order, under milestones, edited by
 conversation in any session. The order is the priority: the next
 delivery is the first free line, and the person reorders by
 conversation. A line is the mark, the slug, one sentence and its
-suffixes; what happened goes on the page, because /propose reads the
-whole queue. A line that needs another done first ends with
-`· after <slug>`, written when the line is added; it is free when every
-line it names is `[x]`. A line that no clause of the current milestone's
-paragraph needs, whoever adds it, goes under the next milestone, created
-when missing with a paragraph that line answers and its review last; a
-finding of the milestone's own review stays in it (§8). A line may carry
-`(PA)` after the slug: whether its /propose and its /apply may run while
-the lines above it are in flight. `P`: the definition takes nothing from
-their pages; `A`: the build touches none of their files; `-` waits, for
-every line above to be `[>]` or beyond before /propose, `[x]` before
-/apply. `after` holds for both commands, with or without a token:
-neither /propose nor /apply starts until every line it names is `[x]`,
-whatever the token says. Whoever changes the queue re-judges the tokens
-it affects; /propose corrects a token from the page. Asked what may run
-now, run
+suffixes, on one line; what happened goes on the page, because /propose
+reads the whole queue. A line that needs another first ends with
+`· after <slug>`, written when the line is added, or `· after all`,
+every line above it in its milestone, which is how the review is
+written. `after` is read per command: /propose starts when every line
+it names is `[>]` or beyond, because the definition needs their pages;
+/apply starts when every line it names is integrated, because the build
+needs their code. Integrated is `[x]` on trunk; with a branch or a
+worktree per delivery it is the delivery merged into the main branch,
+and a `[x]` on its branch is built, awaiting integration. A line that
+no clause of the current milestone's paragraph needs, whoever adds it,
+goes under the next milestone, created when missing with a paragraph
+that line answers and its review last; a finding of the milestone's own
+review stays in it (§8). Asked what may run now, run
 `git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq <strategy>`,
-the strategy as for the claim, and show its tree. It names the lines
-that may run together; a line it lists without a token is judged first,
-from its page and docs/01, by the files it touches. Offer them as one
-command with several slugs, saying each slug is one more agent and costs
-as much as one session. The line never leaves the queue; it
-changes mark as the work changes, so the queue shows what is happening
-while it happens:
+the strategy as for the claim, and show its tree: each line under the
+last line it waits on, with its state, then the lines free for /apply
+and for /propose, in order, and the next one. Offer the free lines as
+one command with several slugs, saying each slug is one more agent and
+costs as much as one session. Two builds must not touch the same files:
+before its first edit, /apply compares the files its page touches with
+the in-flight and unintegrated builds (§6), and an overlap is a
+conflict, below. The line never leaves the queue; it changes mark as the
+work changes, so the queue shows what is happening while it happens:
 
 | Mark | Means | Set by |
 |---|---|---|
@@ -124,19 +127,25 @@ while it happens:
 | `[~]` | being defined | /propose, when it starts |
 | `[>]` | completely defined, page ready for /apply | /propose, when §3 is complete |
 | `[*]` | being built | /apply, when it starts |
-| `[x]` | done, page in `work/done/`; with `· dropped:`, cancelled | /apply, with verify green; the person, when cancelling |
+| `[x]` | done, page in `work/done/`; on a branch, built until merged; with `· dropped:`, cancelled | /apply, with verify green; the person, when cancelling |
 | `[?]` | waiting | any session, in the four cases below |
 
 A board may read the queue, and people pull work from it, so a mark
 changes at once: `[~]` is /propose's first edit, `[*]` is /apply's first,
-and `[x]` is /apply's last. On trunk the board sees it at once. With a
-branch or a worktree per delivery the mark lives on the delivery's
-branch, pushed when /propose creates it, and the main branch shows the
-line as it was until the merge: after `git fetch`, a line whose branch
-exists is taken, whatever main shows, and whoever reads the queue there,
-a board or a session picking free lines or resolving an `after`, takes
-each slug's line from that branch, local or remote, and the lines only a
-branch has, reconciled by slug as below.
+`[x]` is /apply's last. A mark is changed by running
+`git -c "alias.fm=!sh .agents/skills/propose/scripts/mark.sh" fm <slug> "<mark>"`,
+adding `stage` at the end when the line goes into the index, as /apply's
+`[x]` does. Any other edit to docs/06 is the host's file edit on the lines
+it changes, never a program that writes the whole file. On trunk the
+board sees a new mark at once. With a branch or a worktree per delivery
+the mark lives on the delivery's branch, which /propose creates on
+origin as the claim, and the main branch shows the line as it was until
+the merge. A line whose branch exists on origin is taken, whatever its
+copies say. The branch's copy of the line is the current one for its
+slug until the merge, main's after it; a `[?]` on any copy blocks; a
+line only a branch has belongs to its milestone. `queue.sh` reads them
+so; whoever reads by hand, a board or a session, reads the same way
+after `git fetch`.
 
 A line waits in four cases: the person says it is blocked; it needs an
 answer that was asked and not given; work already started finds it needs
@@ -152,8 +161,7 @@ Before that reason, record the phase to resume: `· resume: propose` for
 by /propose always uses `resume: propose` until §3 is complete.
 Any mark before `[x]` can become `[?]`. The line leaves `[?]` when the
 reason is resolved: the person says so, the session that records the
-answer clears it, or /apply clears it when it marks `[x]` the last line of
-an `after`. Remove both suffixes: `resume: propose` returns to `[ ]`,
+answer clears it, or the last line of an `after` is integrated. Remove both suffixes: `resume: propose` returns to `[ ]`,
 keeping any draft, and `resume: apply` to `[>]`.
 
 A `[~]` or `[*]` line whose session ended without blocking it (the host
@@ -168,14 +176,19 @@ waits in is that of 2026.10.18, and the ended and dropped lines are
 those of 2026.10.18.1, where a board sees a mark is that of 2026.10.19,
 how the queue is read with a branch or a worktree per delivery is that
 of 2026.10.19.1, the branch as the claim of its line is that of
-2026.10.20, the `(PA)` token on queue lines is that of 2026.10.20.1, a
-command typed with several slugs is that of 2026.10.20.3, what `after`
-holds and a page decided alone saying the agent chose are those of
-2026.10.20.5, and what may run now answered by `queue.sh` is that of
-2026.10.24 (ADR-0018 and its amendments `kit-2026-10-18`,
-`kit-2026-10-18-1`, `kit-2026-10-19`, `kit-2026-10-19-1`,
-`kit-2026-10-20`, `kit-2026-10-20-1`, `kit-2026-10-20-3`,
-`kit-2026-10-20-5` and `kit-2026-10-24`).
+2026.10.20, the `(PA)` token on queue lines was that of 2026.10.20.1
+until 2026.10.25 removed it, a command typed with several slugs is that
+of 2026.10.20.3, a page decided alone saying the agent chose is that of
+2026.10.20.5, what may run now answered by `queue.sh` is that of
+2026.10.24, `after` read per command, `after all`, integration, the
+claim by `claim.sh` and the current copy of a line are those of
+2026.10.25, a mark changed by `mark.sh` and docs/06 edited line by line
+are those of 2026.10.26, and `mark.sh` refusing a second start of one
+line is that of 2026.10.27 (ADR-0018 and its amendments
+`kit-2026-10-18`, `kit-2026-10-18-1`, `kit-2026-10-19`,
+`kit-2026-10-19-1`, `kit-2026-10-20`, `kit-2026-10-20-1`,
+`kit-2026-10-20-3`, `kit-2026-10-20-5`, `kit-2026-10-24`,
+`kit-2026-10-25`, `kit-2026-10-26` and `kit-2026-10-27`).
 
 Two sessions in one working tree, on free lines that touch different
 files, are the normal case of parallel work on trunk. Another line
@@ -187,21 +200,15 @@ its own hunk of docs/06. A conflict is a line edited by both, or a file
 this page needs that the other delivery is changing; then stop and
 report. Two deliveries' edits in one hunk, each on its own line, as two
 neighbouring queue lines are, conflict in nothing: they are split when
-staged, each session staging only its own line. In worktrees, each worktree's queue shows that branch's state,
-not a global live view. Change only the current delivery's line, its new
-findings and the dependent lines this session can resolve. When branches
-are integrated, reconcile docs/06 by slug: retain every delivery and
-finding, and each owning branch's latest state. Do not replace the whole
-file with one side or downgrade a completed line using a stale copy.
-Check the page at the expected path. A conflicting state or scope is
-reported for resolution, never guessed. Apply the same care to shared
-domain terms and ADRs.
+staged, each session staging only its own line. In worktrees, change
+only this delivery's line; when branches are integrated, reconcile
+docs/06 by slug, keeping every line at its latest state, never one
+side's whole file.
 
 A command typed with several slugs opens one subagent per slug, each
 following the command's file with one slug, sent to the slug's worktree
-where §5's Git slot has one (/propose creates it). The subagents the
-tokens and `after` let run at once are opened at once, not one after
-another; a line still waiting when the others end is reported, not waited
+where §5's Git slot has one (/propose creates it). The subagents `after`
+lets run at once are opened at once, not one after another; a line still waiting when the others end is reported, not waited
 for. The session edits nothing itself. A subagent cannot ask the person:
 it reports the question with the context to answer it and stops; the
 session asks and sends the answer back, resuming it where the host can,
@@ -238,6 +245,10 @@ The project may add slots of its own; a slot that names /propose or
   * GitHub Release: PDF and EPUB in both editions, built by Actions on a
     `v*` tag. Only the author tags, with `make release`
     (`docs/manuals/release-the-book.md`).
+* **Design:** prototype, no reference, by choice: the site's look is
+  MkDocs Material's theme (docs/01), and a toolchain delivery that
+  changes what the site shows is proved by Proof of a screen; a chapter
+  has no screen (ADR-0019).
 * **Proof of a screen:** for toolchain deliveries, a screenshot of the
   rendered site at 1280 and 390 pixels wide, in both editions, saved as
   `work/done/<slug>-<what>.png`; failures are captured too. For chapter
@@ -385,8 +396,9 @@ that happened.
 ## 8. Closing a milestone
 
 A milestone is planned with its review as its last line,
-`<milestone>-review`, a delivery like the others: /propose writes its
-page, /apply runs it. Its page takes the milestone's paragraph clause by
+`<milestone>-review · after all`, a delivery like the others: /propose
+writes its page when every line above is defined, /apply runs it when
+every line above is integrated. Its page takes the milestone's paragraph clause by
 clause and writes, for each, which delivery answers it and how a person
 tests it. It fixes nothing. It runs §5's slow tests, when the slot names
 them; a failing one is a finding. The person tests each

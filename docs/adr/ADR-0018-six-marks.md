@@ -86,3 +86,15 @@ Since `kit-2026-10-20-5` the book runs focus-kit 2026.10.20.5; the six marks are
 ## Amendment, 2026-10-25 (kit-2026-10-24)
 
 Since `kit-2026-10-24` the book runs focus-kit 2026.10.24; the six marks are unchanged. What may run now comes from the kit's script `queue.sh`, run through git's own shell like `claim.sh` with the strategy of docs/05 §5's Git slot: it draws docs/06's current milestone as a tree, each line under the last line it waits on with its state, and ends with the lines free for /apply and for /propose together, the lines without a token judged first by the files they touch; it edits nothing. /propose and /apply typed with no slug show it and ask, /apply ends with it, and the free lines are offered as one command with several slugs, each slug one more agent costing as much as one session (docs/05 §4). docs/06 does not change. On trunk the script reads the one working tree's queue and fetches no branch (ADR-0010).
+
+## Amendment, 2026-10-26 (kit-2026-10-25)
+
+Since `kit-2026-10-25` the book runs focus-kit 2026.10.25; the six marks are unchanged, and the `(PA)` token of `kit-2026-10-20-1` is gone: `after` is read per command, /propose starting when every line it names is `[>]` or beyond and /apply when every line it names is integrated, `[x]` on trunk, and the review line ends `· after all`. /apply checks the files its page touches against the builds in flight before its first edit; `claim.sh` creates the branch on origin or reopens this clone's, another clone's only with `resume`; with a branch or a worktree per delivery the branch's copy of a line is the current one until the merge. docs/05 gains the Design slot (ADR-0019) and the page's `## Outcome` heading, and docs/06 loses its tokens and ends every milestone review with `· after all` (docs/05 §§2, 3, 4, 5 and 8). On trunk the claim creates nothing and integration is the `[x]` itself (ADR-0010). Applied directly at the author's request on 2026-10-26, outside /propose and /apply.
+
+## Amendment, 2026-10-26 (kit-2026-10-26)
+
+Since `kit-2026-10-26` the book runs focus-kit 2026.10.26; the six marks are unchanged. A mark is changed by the kit's script `mark.sh`, one byte, staged with its line alone when /apply marks `[x]`; any other edit to docs/06 is the host's file edit on the lines it changes, never a program that writes the whole file (docs/05 §4). Applied directly at the author's request on 2026-10-26, outside /propose and /apply.
+
+## Amendment, 2026-10-26 (kit-2026-10-27)
+
+Since `kit-2026-10-27` the book runs focus-kit 2026.10.27; the six marks are unchanged, and `mark.sh` refuses a `[~]` on a line that is not `[ ]` and a `[*]` on one that is not `[>]`, so two sessions that start one line cannot both mark it. No document changes: the script alone does. Recorded at the author's request on 2026-10-26, outside /propose and /apply.
