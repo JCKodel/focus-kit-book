@@ -21,7 +21,7 @@ and do what it says.
 The address is the file itself, not the page GitHub draws around it, so the agent gets the whole text.
 That file is the kit's setup file: one file of instructions that the agent reads and turns into the kit's files, the four commands, with two small scripts the commands run through git, and a few small pointer files for the hosts that need them.
 Nothing is installed on your machine; the agent writes files into the repository, and that is all.
-On Windows, keep the shell that Git for Windows installs with git, the installer's default: the scripts the commands run (chapters 13 and 14) go through it, from PowerShell or cmd, without WSL, and if git cannot find that shell, `/propose` says Git for Windows was installed without it and stops.
+On Windows, keep the shell that Git for Windows installs with git, the installer's default: the scripts the commands run, such as the claim script of chapter 13, go through it, from PowerShell or cmd, without WSL, and if git cannot find that shell, `/propose` says Git for Windows was installed without it and stops.
 Your host may ask before it downloads the file and before it writes into its own folder inside the repository, `.claude/` in Claude Code: approve both.
 
 A film shows this install and the four commands at work.[^focus-kit-film]
@@ -148,7 +148,7 @@ The Copilot CLI reads both skills folders, and its reference says what happens t
 Devin Desktop also reads `.windsurf/skills/`, the folder of its former name;[^devin-skills] the setup file writes nothing there and, on an update, removes the kit's own files from it, so the host never finds an older copy of a command beside the current one in `.agents/skills/`, and a file of yours there is reported and left.
 
 Every command ends by naming the next one, written as the host running it invokes it, the table's last column.
-The setup file names `/brainstorm` or `/analyze`, to run in a fresh session, `/propose` names `/apply` with the page's slug, and `/apply` names what may run next, the queue tree ([chapter 14](14-queue-states.md)).
+The setup file names `/brainstorm` or `/analyze`, to run in a fresh session, `/propose` names `/apply` with the page's slug, and `/apply` names what may run next, the queue tree, the milestone's lines with their states and the lines free to run.
 On the lending library, after `/propose lend-book`, Claude Code tells you to run `/apply lend-book` in a fresh session, and Codex tells you to run `$apply lend-book`, in a fresh session too.
 `/propose` may run in the conversation that asked for the change; `/apply` always starts in a fresh session, in every host (chapter 11).
 The kit's files are the same in both; the form follows the host that runs them.

@@ -22,7 +22,7 @@ Se não cabe, o escopo ainda não foi entendido, e são duas entregas.
 
 O `/propose <slug>` conversa com você até o escopo caber em uma página, e o que os documentos do projeto já respondem, ele não pergunta: o arquivo do comando no kit manda decidir, escrever a decisão na página e nomear o documento de onde ela veio, então, se o documento estiver errado, você corrige uma vez, na revisão, em vez de responder a mesma pergunta duas vezes.
 Ele só pergunta onde os documentos deixam mais de uma leitura e nenhum a fecha: primeiro a avaliação dele, em prosa, e a recomendação dele primeiro em cada pergunta.
-Digitado sem slug, ele mostra o que pode rodar agora, a árvore da fila que o script do kit desenha a partir do docs/06 ([capítulo 14](14-queue-states.md)), e pergunta qual linha definir.
+Digitado sem slug, ele mostra o que pode rodar agora, a árvore da fila que o script do kit desenha a partir do docs/06, as linhas do marco com os seus estados e as linhas livres para rodar, e pergunta qual linha definir.
 
 Para decidir, ele lê antes de perguntar: o docs/00 para o produto e as suas regras, o docs/03 para as palavras que a página precisa usar, o docs/05 para os slots do projeto e o formato da página, o docs/06 para o que vem antes e depois da linha, `work/` para as entregas em andamento, e o docs/01 para onde a mudança mora no código.
 Em uma linha que já está `[?]`, ele diz o que a linha espera e só segue quando você diz que está resolvido; em uma linha cujo `after` nomeia uma linha que ainda não está `[x]`, ele diz o mesmo e não começa, e assim em uma linha cujo token tem `-` primeiro, `(-A)` ou `(--)`, enquanto uma linha acima dela ainda não está `[>]` ou além (capítulo 14).
@@ -163,7 +163,7 @@ O `/propose` aceita mais de um slug: `/propose buscar-catalogo renovar-emprestim
 A sessão que o recebe abre um subagente por slug, um agente que ela lança com uma mensagem, que é uma sessão nova: ele só tem o que essa mensagem e os arquivos do projeto dizem, e roda o arquivo do comando no seu próprio slug, como `/propose renovar-emprestimo` digitado sozinho rodaria.
 Ela abre ao mesmo tempo todo subagente cuja linha os tokens e o `after` deixam começar, não um depois do outro, e uma linha que ainda espera quando os outros terminam é relatada a você, não esperada (capítulo 14).
 Cada slug é um agente a mais, e cada um custa tanto quanto uma sessão própria.
-Perguntado o que pode rodar agora, ou digitado sem slug, o agente oferece as linhas livres como um comando assim, e diz isso (capítulo 14).
+Perguntado o que pode rodar agora, ou digitado sem slug, o agente oferece as linhas livres como um comando assim, e diz isso.
 No trunk os subagentes dividem a pasta onde a sessão roda, cada um mudando só a sua linha e a sua página; com um worktree por entrega cada um escreve no worktree do seu slug, que ele cria a partir de `main/`, ou reutiliza quando já existe, como faz um `/propose` digitado sozinho ([capítulo 19](19-worktrees.md)).
 A própria sessão não edita nada: as marcas, as páginas e os worktrees são trabalho dos subagentes.
 Um subagente não consegue perguntar a você: onde perguntaria, ele relata a pergunta com o que você precisa para respondê-la e para; a sessão pergunta a você e manda a sua resposta de volta, para esse subagente onde o host consegue retomá-lo, senão para um novo aberto no slug, que retoma o `[~]` da linha pela palavra do seu comando.

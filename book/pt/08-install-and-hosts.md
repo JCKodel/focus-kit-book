@@ -21,7 +21,7 @@ and do what it says.
 O endereço é o próprio arquivo, não a página que o GitHub desenha em volta dele, então o agente recebe o texto inteiro.
 Esse arquivo é o arquivo de setup do kit: um arquivo de instruções que o agente lê e transforma nos arquivos do kit, os quatro comandos, com dois pequenos scripts que os comandos rodam pelo git, e alguns pequenos arquivos-ponteiro para os hosts que precisam deles.
 Nada é instalado na sua máquina; o agente escreve arquivos no repositório, e é só isso.
-No Windows, mantenha o shell que o Git for Windows instala junto com o git, o padrão do instalador: os scripts que os comandos rodam (capítulos 13 e 14) passam por ele, do PowerShell ou do cmd, sem WSL, e se o git não encontrar esse shell, o `/propose` diz que o Git for Windows foi instalado sem ele e para.
+No Windows, mantenha o shell que o Git for Windows instala junto com o git, o padrão do instalador: os scripts que os comandos rodam, como o script de reivindicação do capítulo 13, passam por ele, do PowerShell ou do cmd, sem WSL, e se o git não encontrar esse shell, o `/propose` diz que o Git for Windows foi instalado sem ele e para.
 O seu host pode perguntar antes de baixar o arquivo e antes de escrever na sua própria pasta dentro do repositório, `.claude/` no Claude Code: aprove os dois.
 
 Um vídeo mostra esta instalação e os quatro comandos em uso.[^focus-kit-film]
@@ -150,7 +150,7 @@ O Copilot CLI lê as duas pastas de skills, e a sua referência diz o que aconte
 O Devin Desktop também lê `.windsurf/skills/`, a pasta do seu nome anterior;[^devin-skills] o arquivo de setup não escreve nada ali e, numa atualização, remove dela os arquivos do próprio kit, para que o host nunca encontre uma cópia mais velha de um comando ao lado da atual em `.agents/skills/`, e um arquivo seu ali é relatado e mantido.
 
 Todo comando termina dizendo o próximo, escrito como o host que o roda o invoca, a última coluna da tabela.
-O arquivo de setup cita o `/brainstorm` ou o `/analyze`, para rodar numa sessão nova, o `/propose` cita o `/apply` com o slug da página, e o `/apply` cita o que pode rodar a seguir, a árvore da fila ([capítulo 14](14-queue-states.md)).
+O arquivo de setup cita o `/brainstorm` ou o `/analyze`, para rodar numa sessão nova, o `/propose` cita o `/apply` com o slug da página, e o `/apply` cita o que pode rodar a seguir, a árvore da fila, as linhas do marco com os seus estados e as linhas livres para rodar.
 Na biblioteca de empréstimos, depois de `/propose emprestar-livro`, o Claude Code diz para você rodar `/apply emprestar-livro` numa sessão nova, e o Codex diz para rodar `$apply emprestar-livro`, também numa sessão nova.
 O `/propose` pode rodar na conversa que pediu a mudança; o `/apply` sempre começa numa sessão nova, em todo host (capítulo 11).
 Os arquivos do kit são os mesmos nos dois; a forma segue o host que os roda.

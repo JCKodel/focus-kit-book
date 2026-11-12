@@ -22,7 +22,7 @@ If it does not, the scope has not been understood yet, and it is two deliveries.
 
 `/propose <slug>` talks with you until the scope fits one page, and what the project's documents already answer, it does not ask: the kit's file for the command tells it to decide, write the decision on the page and name the document it came from, so if the document is wrong you correct it once, in the review, instead of answering the same question twice.
 It asks only where the documents leave more than one reading and none closes it, its assessment first, in prose, and its recommendation first in every question.
-Typed with no slug, it shows what may run now, the queue tree the kit's script draws from docs/06 ([chapter 14](14-queue-states.md)), and asks which line to define.
+Typed with no slug, it shows what may run now, the queue tree the kit's script draws from docs/06, the milestone's lines with their states and the lines free to run, and asks which line to define.
 
 To decide, it reads before it asks: docs/00 for the product and its rules, docs/03 for the words the page must use, docs/05 for the project's slots and the format of the page, docs/06 for what comes before and after the line, `work/` for the deliveries in flight, and docs/01 for where the change lives in the code.
 On a line already `[?]`, it says what the line waits on and goes on only when you say it is resolved; on a line whose `after` names a line not yet `[x]`, it says the same and does not start, and likewise on a line whose token has `-` first, `(-A)` or `(--)`, while a line above it is not yet `[>]` or beyond (chapter 14).
@@ -154,7 +154,7 @@ Hosts have their own way to plan inside one session, such as Claude Code's plan 
 The session that receives it opens one subagent per slug, an agent it launches with a message, which is a fresh session: it has only what that message and the project's files say, and it runs the command's file on its own slug, as `/propose renew-loan` typed alone would.
 The session opens at once every subagent whose line the tokens and `after` let start, not one after another, and a line still waiting when the others end is reported to you, not waited for (chapter 14).
 Each slug is one more agent, and each costs as much as one session of its own.
-Asked what may run now, or typed with no slug, the agent offers the free lines as one such command, and says so (chapter 14).
+Asked what may run now, or typed with no slug, the agent offers the free lines as one such command, and says so.
 On trunk the subagents share the folder where the session runs, each changing only its own line and page; with a worktree per delivery each writes in its slug's worktree, which it creates from `main/`, or reuses when it exists, as a `/propose` typed alone does ([chapter 19](19-worktrees.md)).
 The session itself edits nothing: the marks, the pages and the worktrees are the subagents' work.
 A subagent cannot ask you: where it would ask, it reports the question with what you need to answer it and stops; the session asks you and sends your answer back, to that subagent where the host can resume it, else to a new one opened on the slug, which resumes the line's `[~]` on the word of your command.
