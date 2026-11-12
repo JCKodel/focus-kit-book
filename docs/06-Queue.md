@@ -749,7 +749,8 @@ When this milestone closes, the book teaches focus-kit 2026.10.26 and the reposi
 [x] kit-2026-10-26          reinstall the kit at 2026.10.26 and apply its migration report: docs/05 §4's two sentences on `mark.sh` and on editing docs/06 line by line · after m33-review
 [x] ch12-14-mark            chapters 12, 13 and 14: /propose's `[~]`, /apply's `[*]` and its staged `[x]` through `mark.sh`, with the queue emptied by a script on 2026-10-18 and 2026-10-26 as the error; both editions · after kit-2026-10-26
 [x] ch19-mark-stage          chapter 19: each `/apply` staging its line of docs/06 with `mark.sh`'s `stage`, that line alone in the index, in one folder and in a batch's shared hunk, where the chapter teaches a patch given to `git apply --cached`; both editions · after kit-2026-10-26 · from ch12-14-mark
-[ ] m34-review               the review of M34 as docs/05 §8 says · after all
+[x] m34-review               the review of M34 as docs/05 §8 says · after all
+[ ] m34-fixes                the two medium findings of m34-review, each an item of its page: chapters 7 and 18's free line read with `after` per command, and chapter 11 keeping a grave finding in its own milestone; both editions · after m34-review · from m34-review
 ```
 
 ## M35. focus-kit 2026.10.27
