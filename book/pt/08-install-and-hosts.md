@@ -19,7 +19,7 @@ and do what it says.
 ```
 
 O endereço é o próprio arquivo, não a página que o GitHub desenha em volta dele, então o agente recebe o texto inteiro.
-Esse arquivo é o arquivo de setup do kit: um arquivo de instruções que o agente lê e transforma nos arquivos do kit, os quatro comandos, com dois pequenos scripts que os comandos rodam pelo git, e alguns pequenos arquivos-ponteiro para os hosts que precisam deles.
+Esse arquivo é o arquivo de setup do kit: um arquivo de instruções que o agente lê e transforma nos arquivos do kit, os quatro comandos, com três pequenos scripts que os comandos rodam pelo git, e alguns pequenos arquivos-ponteiro para os hosts que precisam deles.
 Nada é instalado na sua máquina; o agente escreve arquivos no repositório, e é só isso.
 No Windows, mantenha o shell que o Git for Windows instala junto com o git, o padrão do instalador: os scripts que os comandos rodam, como o script de reivindicação do capítulo 13, passam por ele, do PowerShell ou do cmd, sem WSL, e se o git não encontrar esse shell, o `/propose` diz que o Git for Windows foi instalado sem ele e para.
 O seu host pode perguntar antes de baixar o arquivo e antes de escrever na sua própria pasta dentro do repositório, `.claude/` no Claude Code: aprove os dois.
@@ -48,7 +48,7 @@ O agente escreve os arquivos do kit como o arquivo de setup os guarda agora, e a
 Ele substitui um arquivo só quando esse arquivo é igual a um que o kit entregou, nesta versão ou numa anterior, e a anterior se confirma pelo histórico do kit, `git show <commit>:SETUP.md` no repositório dele, ou, sem esse histórico à mão, pela sua palavra de que o arquivo nunca foi editado; um nome conhecido ou uma linha `metadata.version` sozinhos não provam isso.
 Um comando seu na pasta de um host, ou uma edição que você fez à mão num dos arquivos do kit, uma linha que você acrescentou ao `.claude/skills/propose/SKILL.md`, por exemplo, faz a atualização parar antes de escrever ou remover qualquer arquivo.
 O agente mostra a sua edição como um diff contra o arquivo do kit em que ela foi feita, e a mudança do próprio kit nesse arquivo desde então à parte e resumida; ele ainda relata as migrações e o próximo comando, e você decide se fica com a sua edição ou a substitui, sabendo que uma regra que a sua edição acrescentou a um comando pode virar um slot do docs/05 §5, que os comandos seguem (capítulo 7).
-Essa verificação foi testada numa cópia dos arquivos do kit do livro, feita fora do repositório do livro: uma linha acrescentada ao `.claude/skills/apply/SKILL.md` parou assim a atualização para o focus-kit 2026.10.24, e todos os arquivos da cópia ficaram iguais depois.
+Essa verificação foi testada numa cópia do repositório do livro, feita fora dele: uma linha acrescentada ao `.claude/skills/apply/SKILL.md` parou assim a atualização para o focus-kit 2026.11.12, e todos os arquivos da cópia ficaram iguais depois.
 
 ## O que uma atualização relata
 
@@ -58,38 +58,43 @@ Ele compara os arquivos com os seus próprios modelos e relata cada migração, 
 Uma migração pode citar uma regra, uma linha da fila ou um slot.
 As suas escolhas ficam: um docs/05 cujo §5 diz "trunk, uma sessão por vez" vê proposto o texto para duas sessões numa pasta, e mantém o seu até o time aceitar a mudança.
 
-Esta é uma parte do relatório que a atualização para o focus-kit 2026.10.24 deu no próprio repositório deste livro, encurtada e parafraseada, e traduzida aqui: os documentos do livro são em inglês, e o relatório propôs o texto em inglês.
-O registro dessa atualização é o `work/done/kit-2026-10-24.md`, no repositório do livro.
+Esta é uma parte do relatório que a atualização para o focus-kit 2026.11.12 deu numa cópia do repositório deste livro como ele estava antes dessa versão, encurtada e parafraseada, e traduzida aqui: os documentos do livro são em inglês, e o relatório propôs o texto em inglês.
+O registro dela é o `work/done/ch08-update-2026-10-25-run/update.md`, no repositório do livro.
 
 ```
-Instalado: focus-kit 2026.10.24, em cada SKILL.md.
+Instalado: focus-kit 2026.11.12, em cada SKILL.md; os documentos
+de processo ainda seguem a 2026.10.27.
 Migrações de processo pendentes, por documento e seção, encurtadas:
 
 * docs/05, números de seção: batem com o modelo (§4 a fila,
   §5 os slots, §6 commit, §8 fechar um marco). Nenhuma.
-* docs/05 §4, o que pode rodar agora: falta o queue.sh. Proposto:
-  rodar o queue.sh pelo git, com a estratégia da reivindicação, e
-  mostrar a sua árvore. "Ela cita as linhas que podem rodar juntas;
-  uma linha que ela lista sem token é julgada primeiro, pela sua
-  página e pelo docs/01, pelos arquivos que toca. Ofereça-as como um
-  só comando com vários slugs, dizendo que cada slug é mais um agente
-  e custa tanto quanto uma sessão."
-* docs/05 §5, Git: uma escolha do projeto, não uma migração: trunk,
-  ADR-0010, com a Publish policy, o agente nunca envia. Nenhuma.
+* docs/05 §4: falta o que é um achado. Proposto, o parágrafo do
+  modelo, que diz: "Um achado é grave quando quebra uma cláusula do
+  parágrafo do marco para uma pessoa no seu caminho habitual, perde
+  ou expõe dados, ou deixa a verificação vermelha." Um achado grave
+  vira uma linha [ ] terminada em · from <slug>; os demais são notas
+  na página da entrega que os achou.
+* docs/05 §5, Verify: falta um teto. Proposto: "O seu teto: cinco
+  minutos. O /apply diz quanto tempo a verificação levou."
+* docs/05 §6: uma escolha do projeto, ADR-0010: o assunto
+  <type>(<slug>): e o commit da release. Nenhuma.
 
-Os outros itens cobrem o docs/05 §§2, 3 e 6 a 8, o resto do §4,
-os outros slots do §5, o docs/04, o docs/06 e o AGENTS.md.
-Próximo: /propose ch08-update-2026-10-24, quando
-kit-2026-10-24 estiver [x].
+Os outros itens cobrem o docs/05 §§2, 3 e 7, o resto dos §§4, 5, 6
+e 8, o docs/04, o docs/06, o AGENTS.md e o docs/03.
+Próximo: a migração do docs/05, não um comando: até o §4 dizer o
+que é um achado e o §8 recolher as notas, o novo /apply deixa todo
+achado como uma nota que ninguém lê. Depois, /propose
+m32-records-claims, numa sessão nova.
 ```
 
 Cada item cita um documento e uma seção, e termina num de três resultados.
 Ele bate e não precisa de nada, e diz isso: `Nenhuma`.
-Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra, como o item do docs/05 §4 sobre o que pode rodar agora.
-Ou ele difere por uma escolha que o projeto fez e registrou com uma data ou um ADR, como o slot Git do livro: o item cita essa escolha, não pede mudança e também termina em `Nenhuma`.
+Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra, como o item do docs/05 §4 sobre os achados e o item Verify do §5; um achado é uma falha que um comando descobre fora do que a sua entrega construiu, e só um grave vira uma linha da fila, os outros notas na página da entrega para a revisão do marco.
+Ou ele difere por uma escolha que o projeto fez e registrou com uma data ou um ADR, como o item do docs/05 §6 do livro: o item cita essa escolha, não pede mudança e também termina em `Nenhuma`.
 Todo item é relatado, nunca feito: a atualização não escreve nenhum desses documentos.
 
-Os números de seção vêm primeiro porque os comandos citam o docs/05 pelos números do modelo, o §4 para a fila, o §6 para o commit, e leem pelo número; um docs/05 numerado de outro jeito mandaria cada comando para a seção errada, então essa migração vem antes de qualquer outra, diga o que disser um ADR.
+Os números de seção vêm primeiro porque os comandos citam o docs/05 pelos números do modelo, o §4 para a fila, o §6 para o commit, e leem pelo número; um docs/05 numerado de outro jeito mandaria cada comando para a seção errada, então essa migração vem antes de qualquer outra.
+Um time que mantém os seus próprios números por um ADR migra por uma linha sob o título do seu docs/05 que mapeia os números do kit para os seus, `§4 is §6 here`, que os comandos leem primeiro.
 Aplicar as migrações mantém as escolhas do time: a verificação continua `make verify` com as suas verificações, o revisor continua o que o slot cita, o Git continua trunk, e o Milestone review continua com os leitores do kit.
 
 O relatório dá a cada item um desses três resultados; ele compara os documentos com os modelos atuais, nunca uma versão do kit com outra.
@@ -101,7 +106,8 @@ Aplicá-las pode pedir uma edição que nenhum item cita, quando o texto de uma 
 Num projeto já documentado, a atualização relata as migrações primeiro, ou diz que não há nenhuma.
 Ela nunca pede que você rode o `/brainstorm` ou o `/analyze` de novo: eles escrevem os documentos de um projeto do zero, e os seus existem.
 Ela cita em vez disso o comando que a primeira linha livre do docs/06 pede, na forma do seu host: o `/propose` e o seu slug para uma linha `[ ]`, o `/apply` e o seu slug para uma `[>]`.
-No trunk essa linha é lida na fila da pasta; com um branch ou um worktree por entrega, o branch principal mostra cada linha como estava até o merge dela, então a atualização roda `git fetch` antes, toma como ocupada, antes mesmo de qualquer marca dela ser enviada, uma linha cujo branch existe, mostre o que mostrar o branch principal, e lê a linha de cada slug no branch dele, local ou remoto, e as linhas que só um branch tem, reconciliando-as pelo slug ([capítulo 14](14-queue-states.md)).
+Quando uma migração pendente é uma sem a qual os comandos não funcionam, os números de seção do docs/05 ou o que é um achado, a atualização cita essa migração como o próximo passo, antes de qualquer comando, como fazem as últimas linhas do trecho.
+No trunk a primeira linha livre é lida na fila da pasta; com um branch ou um worktree por entrega, o branch principal mostra cada linha como estava até o merge dela, então a atualização roda `git fetch` antes, toma como ocupada, antes mesmo de qualquer marca dela ser enviada, uma linha cujo branch existe no origin, mostre o que mostrar o branch principal, e pega a linha de cada slug no branch dele no origin, que guarda a cópia atual até o merge, a do branch principal depois dele, com as linhas que só um branch tem ([capítulo 14](14-queue-states.md)).
 Uma versão que não pede nada aos seus documentos não relata migração: uma versão que muda só os comandos, como o `/apply` mostrar a sua mensagem de commit também na conversa, não muda mais nada.
 Nem um modelo que só divide uma frase longa ou a transforma numa lista, sem nenhuma regra mudada: o projeto mantém o seu próprio texto, como o docs/05 §4 do livro manteve a sua frase sobre os quatro casos em que uma linha espera.
 Uma verificação que diz respeito a uma escolha que o projeto não fez também não pede nada a ele: o manual que deixa uma sessão no `main/` editar os worktrees é pedido a um slot Git de worktree, não a um projeto em trunk como o do livro.

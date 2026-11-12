@@ -19,7 +19,7 @@ and do what it says.
 ```
 
 The address is the file itself, not the page GitHub draws around it, so the agent gets the whole text.
-That file is the kit's setup file: one file of instructions that the agent reads and turns into the kit's files, the four commands, with two small scripts the commands run through git, and a few small pointer files for the hosts that need them.
+That file is the kit's setup file: one file of instructions that the agent reads and turns into the kit's files, the four commands, with three small scripts the commands run through git, and a few small pointer files for the hosts that need them.
 Nothing is installed on your machine; the agent writes files into the repository, and that is all.
 On Windows, keep the shell that Git for Windows installs with git, the installer's default: the scripts the commands run, such as the claim script of chapter 13, go through it, from PowerShell or cmd, without WSL, and if git cannot find that shell, `/propose` says Git for Windows was installed without it and stops.
 Your host may ask before it downloads the file and before it writes into its own folder inside the repository, `.claude/` in Claude Code: approve both.
@@ -48,7 +48,7 @@ The agent writes the kit's files as the setup file holds them now, and the chang
 It replaces a file only when that file matches one the kit shipped, in this version or an earlier one, and the earlier one is established from the kit's history, `git show <commit>:SETUP.md` in the kit's repository, or, without that history at hand, by your word that the file was never edited; a familiar name or a `metadata.version` line alone does not prove it.
 A command of your own in a host's folder, or an edit you made by hand to one of the kit's files, a line you added to `.claude/skills/propose/SKILL.md` say, stops the update before it writes or removes any file.
 The agent shows your edit as a diff against the kit file it was made on, and the kit's own change to that file since then apart and in short; it still reports the migrations and the next command, and you decide whether to keep your edit or replace it, knowing that a rule your edit added to a command can become a slot of docs/05 §5, which the commands follow (chapter 7).
-This check was tried on a copy of the book's kit files, made outside the book's repository: a line appended to `.claude/skills/apply/SKILL.md` stopped the update to focus-kit 2026.10.24 this way, and every file of the copy was unchanged afterwards.
+This check was tried on a copy of the book's repository, made outside it: a line appended to `.claude/skills/apply/SKILL.md` stopped the update to focus-kit 2026.11.12 this way, and every file of the copy was unchanged afterwards.
 
 ## What an update reports
 
@@ -58,36 +58,42 @@ It compares the files with its own templates and reports each migration, a chang
 A migration may name a rule, a queue line or a slot.
 Your choices stay: a docs/05 whose §5 says "trunk, one session at a time" sees the wording for two sessions in one folder proposed, and keeps its own until the team accepts the change.
 
-Here is part of the report the update to focus-kit 2026.10.24 gave on this book's own repository, shortened and paraphrased from the record of that update, `work/done/kit-2026-10-24.md` in the book's repository:
+Here is part of the report the update to focus-kit 2026.11.12 gave on a copy of this book's repository as it was before that version, shortened and paraphrased from its record, `work/done/ch08-update-2026-10-25-run/update.md` in the book's repository:
 
 ```
-Installed: focus-kit 2026.10.24, in every SKILL.md.
+Installed: focus-kit 2026.11.12, in every SKILL.md; the process
+documents still follow 2026.10.27.
 Pending process migrations, by document and section, shortened:
 
 * docs/05, section numbers: match the template (§4 the queue,
   §5 the slots, §6 commit, §8 closing a milestone). None.
-* docs/05 §4, what may run now: lacks queue.sh. Proposed: run
-  queue.sh through git, the strategy as for the claim, and show its
-  tree. "It names the lines that may run together; a line it lists
-  without a token is judged first, from its page and docs/01, by the
-  files it touches. Offer them as one command with several slugs,
-  saying each slug is one more agent and costs as much as one
-  session."
-* docs/05 §5, Git: a project choice, not a migration: trunk, ADR-0010,
-  with the Publish policy, the agent never pushes. None.
+* docs/05 §4: lacks what a finding is. Proposed, the template's
+  paragraph, which says: "A finding is grave when it breaks a clause
+  of the milestone's paragraph for a person on its usual path, loses
+  or exposes data, or leaves verify red." A grave one becomes a [ ]
+  line ending · from <slug>; every other is a note on the page of
+  the delivery that found it.
+* docs/05 §5, Verify: lacks a ceiling. Proposed: "Its ceiling: five
+  minutes. /apply says how long verify took."
+* docs/05 §6: a project choice, ADR-0010: the <type>(<slug>):
+  subject and the release commit. None.
 
-The other items cover docs/05 §§2, 3 and 6 to 8, the rest of §4,
-the other slots of §5, docs/04, docs/06 and AGENTS.md.
-Next: /propose ch08-update-2026-10-24, once kit-2026-10-24 is [x].
+The other items cover docs/05 §§2, 3 and 7, the rest of §§4, 5, 6
+and 8, docs/04, docs/06, AGENTS.md and docs/03.
+Next: the docs/05 migration, not a command: until §4 says what a
+finding is and §8 collects the notes, the new /apply leaves every
+finding as a note nobody reads. Then /propose m32-records-claims,
+in a fresh session.
 ```
 
 Each item names a document and a section, and ends in one of three outcomes.
 It matches and needs nothing, and says so: `None`.
-It lacks something, and the item gives the wording the template proposes and where it goes, as the docs/05 §4 item on what may run now does.
-Or it differs by a choice the project made and recorded with a date or an ADR, as the book's Git slot does: the item names that choice, asks for no change, and ends in `None` too.
+It lacks something, and the item gives the wording the template proposes and where it goes, as the docs/05 §4 item on findings and the §5 Verify item do; a finding is a flaw a command discovers outside what its delivery built, and only a grave one becomes a queue line, the others notes on the delivery's page for the milestone's review.
+Or it differs by a choice the project made and recorded with a date or an ADR, as the book's docs/05 §6 item does: the item names that choice, asks for no change, and ends in `None` too.
 Every item is reported, never done: the update writes none of these documents.
 
-Section numbers come first because the commands cite docs/05 by the template's numbers, §4 for the queue, §6 for the commit, and read by number; a docs/05 numbered otherwise would send every command to the wrong section, so that migration comes before any other, whatever an ADR says.
+Section numbers come first because the commands cite docs/05 by the template's numbers, §4 for the queue, §6 for the commit, and read by number; a docs/05 numbered otherwise would send every command to the wrong section, so that migration comes before any other.
+A team that keeps its own numbers by an ADR migrates by one line under the title of its docs/05 mapping the kit's numbers to its own, `§4 is §6 here`, which the commands read first.
 Applying the migrations keeps the team's choices: verify stays `make verify` with its checks, the reviewer stays the one the slot names, Git stays trunk, and the Milestone review keeps the kit's readers.
 
 The report gives each item one of those three outcomes; it compares the documents with the current templates, never one version of the kit with another.
@@ -99,7 +105,8 @@ Applying them can need an edit no item names, when a migration's wording contrad
 On a documented project the update reports the migrations first, or says there are none.
 It never asks you to run `/brainstorm` or `/analyze` again: those write a project's documents from nothing, and yours exist.
 It names instead the command docs/06's first free line wants, in your host's form: `/propose` and its slug for a `[ ]` line, `/apply` and its slug for a `[>]` one.
-On trunk that line is read in the queue of the folder; with a branch or a worktree per delivery the main branch shows each line as it was until its merge, so the update runs `git fetch` first, counts a line whose branch exists as taken even before any of its marks is pushed, whatever the main branch shows, and reads each slug's line from its branch, local or remote, and the lines only a branch has, reconciling them by slug ([chapter 14](14-queue-states.md)).
+When a pending migration is one the commands cannot work without, docs/05's section numbers or what a finding is, the update names that migration as the next step, before any command, as the excerpt's last lines do.
+On trunk the first free line is read in the queue of the folder; with a branch or a worktree per delivery the main branch shows each line as it was until its merge, so the update runs `git fetch` first, counts a line whose branch exists on origin as taken even before any of its marks is pushed, whatever the main branch shows, and takes each slug's line from its branch on origin, which holds the current copy until the merge, the main branch's after it, with the lines only a branch has ([chapter 14](14-queue-states.md)).
 A version that asks nothing of your documents reports no migration: a version that changes only the commands, such as `/apply` showing its commit message in the conversation too, changes nothing else.
 Nor does a template that only splits a long sentence or turns one into a list, with no rule changed: the project keeps its own text, as the book's docs/05 §4 kept its sentence on the four cases a line waits in.
 A check that concerns a choice the project did not make asks nothing of it either: the manual letting a session in `main/` edit the worktrees is asked of a worktree Git slot, not of a trunk project such as the book's.

@@ -735,7 +735,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.25 and the reposi
 [x] ch19-claim-integration  chapter 19: `claim.sh` create-only, taken and resume, here, the worktree from origin's main; `queue.sh` reading a branch as a claim, the current copy of a line, a `[?]` on any copy, a line only a branch has; both editions · after kit-2026-10-25
 [x] ch17-20-branch-on-origin chapters 17 and 20: the queue read from each slug's branch on origin after `git fetch`, no longer "local or remote", and the board seeing a mark once it is pushed; both editions · after kit-2026-10-25
 [x] ch09-design-slot         chapter 9: the Design slot, the design delivery and the page's Visual reference before `[>]`, with Ninjobs' rule and `chassi-desktop` as the error; the `## Outcome` heading; both editions · after kit-2026-10-25
-[ ] ch08-update-2026-10-25  chapter 8: the update example and its report at 2026.10.25, the numbering map line for a docs/05 kept by ADR, and the update reading each slug's line from its branch on origin, no longer "local or remote"; both editions · after kit-2026-10-25
+[x] ch08-update-2026-10-25  chapter 8: the update example and its report at 2026.11.12, the version the repository runs, the numbering map line for a docs/05 kept by ADR, and the update reading each slug's line from its branch on origin, no longer "local or remote"; both editions · after kit-2026-10-25
 [ ] m33-review               the review of M33 as docs/05 §8 says · after all
 ```
 
