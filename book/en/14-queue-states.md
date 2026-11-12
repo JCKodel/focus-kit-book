@@ -62,7 +62,7 @@ After `git fetch`, a line whose branch exists is taken, whatever the main branch
 So whoever reads the queue, a board or a session picking free lines or resolving an `after`, runs `git fetch` and takes each slug's line from its branch on origin, which holds the current copy until the merge, the main branch's after it, and adds the lines only a branch has, never one branch's whole file.
 The marks change at once for the same reason either way, a board people pull work from: on trunk the board reads the one queue, and with a branch or a worktree per delivery it reads each slug's line where that line lives.
 Where the line lives decides how soon a reader sees it: a reader sees the mark once its commit is pushed to the branch on origin and fetched.
-A project's own one-way mirror, refreshed by the commands when a mark changes, shows the mark at once, and with a branch or a worktree per delivery it pushes the queue read the same way, so each refresh carries every delivery's mark as far as it can see it, not its own branch's copy.
+A project's own one-way mirror, refreshed by the commands when a mark changes, shows the mark at once on trunk; with a branch or a worktree per delivery it pushes the queue read the same way, so it shows a mark at the first refresh after the mark is pushed to the delivery's branch, and each delivery's refresh carries every other delivery's mark pushed so far, never one branch's copy of the file.
 
 ## The next line, and which run together
 

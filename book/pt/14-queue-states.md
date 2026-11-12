@@ -63,7 +63,7 @@ Depois de um `git fetch`, uma linha cujo branch existe está ocupada, mostre o q
 Então quem lê a fila, um quadro ou uma sessão que escolhe linhas livres ou resolve um `after`, roda `git fetch` e pega a linha de cada slug no branch dele no origin, que guarda a cópia atual até o merge, a do branch principal depois dele, e acrescenta as linhas que só um branch tem, nunca o arquivo inteiro de um branch.
 As marcas mudam na hora pelo mesmo motivo nos dois casos, um quadro de onde as pessoas puxam trabalho: no trunk o quadro lê a fila única, e com um branch ou um worktree por entrega lê a linha de cada slug onde ela mora.
 Onde a linha mora decide em quanto tempo quem lê vê a marca: quem lê vê a marca quando o commit dela é enviado ao branch no origin e trazido por um `git fetch`.
-Um espelho do próprio projeto numa só direção, atualizado pelos comandos quando uma marca muda, mostra a marca na hora, e com um branch ou um worktree por entrega envia a fila lida do mesmo jeito, então cada atualização leva a marca de cada entrega até onde consegue vê-la, não a cópia do próprio branch.
+Um espelho do próprio projeto numa só direção, atualizado pelos comandos quando uma marca muda, mostra a marca na hora no trunk; com um branch ou um worktree por entrega envia a fila lida do mesmo jeito, então mostra uma marca na primeira atualização depois que a marca é enviada ao branch da entrega, e a atualização de cada entrega leva as marcas já enviadas de cada outra entrega, nunca a cópia do arquivo de um só branch.
 
 ## A próxima linha, e quais rodam juntas
 

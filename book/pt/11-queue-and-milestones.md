@@ -74,7 +74,7 @@ Um marco começa com as linhas de que o seu parágrafo precisa, e depois a revis
 As primeiras são o esqueleto em que as outras se apoiam: o `esqueleto` da biblioteca cria o `npm run verify`, que toda entrega seguinte roda.
 Depois cada linha vem após as linhas de que precisa: um bibliotecário não consegue emprestar um exemplar antes de o catálogo ter exemplares e de os membros existirem.
 
-Linhas são acrescentadas enquanto um marco anda: uma correção que uma entrega encontra fora da sua página, os achados da revisão, um problema que você encontra testando o produto.
+Linhas são acrescentadas enquanto um marco anda: uma falha grave que uma entrega encontra fora do que construiu, os achados da revisão que viram linhas (abaixo), um problema que você encontra testando o produto.
 Assim um marco fecha maior do que começou, e a fila muda com o trabalho.
 A fila deste próprio livro mostra isso: o marco M15 fechou com 42 linhas; a revisão dele foi a 14ª, com 28 sob ela.[^m15-queue]
 Um agente a quem você pergunta sobre um problema tende a responder com linhas, cada uma razoável, então, sem uma pessoa julgando, um marco cresce sem fim.
@@ -97,7 +97,11 @@ O script de fila do kit desenha essa ordem: enquanto `emprestar-livro` não est�
 
 Um marco é planejado com a sua revisão como a última linha, `<milestone>-review · after all` (em inglês, como o kit a escreve: `m1-review` para o primeiro marco), uma entrega como as outras, que espera as linhas acima dela e pega o parágrafo cláusula por cláusula ([capítulo 15](15-closing-a-milestone.md)).
 Ela não corrige nada: uma pessoa testa cada cláusula à mão e, com a palavra da pessoa, o código alterado desde a base do marco é lido por quem o slot Milestone review do docs/05 do projeto cita, quando cita alguém, a revisão profunda do host ou um agente somente leitura por área, e nos dois casos um conferente marca cada candidato antes que a pessoa o veja.
-Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, mesmo quando o marco seguinte já tem linhas, e essas linhas não têm segunda revisão.
+Os achados dela ficam no mesmo marco, sob a linha da revisão, mesmo quando o marco seguinte já tem linhas.
+Cada achado grave, que quebra uma cláusula do parágrafo para uma pessoa no seu caminho habitual, perde ou expõe dados, ou deixa a verificação vermelha, vira uma linha `[ ]` própria.
+Os médios, que uma pessoa encontra no uso comum enquanto a cláusula ainda vale, entram numa linha só, a linha de correções, `<milestone>-fixes`, quando você os escolhe.
+Os outros ficam listados na página da revisão, a menos que você escolha um.
+As linhas dos achados não têm segunda revisão.
 
 ## Mudando a fila
 
@@ -148,7 +152,8 @@ dia/mês/ano na tela do empréstimo.
 
 **Estados.** Os padrões.
 
-**Referência visual.** Nenhuma.
+**Referência visual.** A tela do empréstimo no arquivo de design, com
+390 e 1280 pixels de largura.
 
 **Fora do escopo.** As datas do catálogo, que mantêm ano-mês-dia; as datas
 da lista de atrasos, uma linha própria.
@@ -157,8 +162,8 @@ da lista de atrasos, uma linha própria.
 verificação está verde.
 ```
 
-Todas as seções estão lá, e três delas só dizem que não se aplicam; os dois detalhes do rascunho são uma linha de Comportamento e um item de Fora do escopo.
-Você lê a página e a corrige na sessão que a escreveu, e numa sessão nova o `/apply formato-devolucao` a constrói: ele muda a função que formata a data na tela do empréstimo e escreve um teste com as duas linhas de Comportamento, umas cinco linhas entre os dois, roda o verify até ficar verde, move a página para `work/done/`, coloca em stage os dois arquivos com a página e a linha da fila, e sugere a mensagem, também escrita para este capítulo (o capítulo 13 explica o formato dela):
+Todas as seções estão lá, e duas delas só dizem que não se aplicam ou ficam com os padrões; a Referência visual cita a tela que a mudança toca, no arquivo de design da biblioteca, e os dois detalhes do rascunho são uma linha de Comportamento e um item de Fora do escopo.
+Você lê a página e a corrige na sessão que a escreveu, e numa sessão nova o `/apply formato-devolucao` a constrói: ele muda a função que formata a data na tela do empréstimo e escreve um teste com as duas linhas de Comportamento, umas cinco linhas entre os dois, roda o verify até ficar verde, compara a tela do empréstimo que construiu com o design nas duas larguras, move a página para `work/done/`, coloca em stage os dois arquivos com a página e a linha da fila, e sugere a mensagem, também escrita para este capítulo (o capítulo 13 explica o formato dela):
 
 ```commit
 Mostrar a data de devolução como dia/mês/ano
@@ -178,7 +183,8 @@ Foi isso o que a regra custou: duas sessões curtas, uma revisão e um commit.
 Em troca, a fila diz que a mudança existe, a página diz o que ela faz e o que deixa de fora, e um teste falha se o formato um dia voltar ao que era.
 Uma edição feita na hora teria pulado a linha, a página, o teste e a revisão.
 A página é do tamanho da mudança: sete seções de uma ou duas linhas, e uma página que precisa de mais para uma mudança deste tamanho está definindo mais de uma entrega.
-A regra vale em toda sessão: durante o `/propose` a mudança é uma linha nova, a não ser que você a peça na página que está sendo escrita; durante o `/apply`, uma correção encontrada fora da sua página vira uma linha `[ ]`, e só uma correção de que a entrega precisa antes fica acima dela e a faz esperar (capítulo 14); e uma edição feita mesmo assim, para "só trocar o rótulo", é desfeita antes de qualquer commit.
+A regra vale em toda sessão: durante o `/propose` a mudança é uma linha nova, a não ser que você a peça na página que está sendo escrita; durante o `/apply`, uma falha encontrada fora do que a entrega construiu vira uma nota na página da entrega para a revisão do marco, ou uma linha `[ ]` quando é grave, e só uma correção de que a entrega precisa antes fica acima da linha da entrega e a faz esperar (capítulo 14).
+Uma edição feita mesmo assim, para "só trocar o rótulo", é desfeita antes de qualquer commit.
 Os documentos continuam mudando conversando, em qualquer sessão; a regra cobre o código: o fonte do app, os testes, uma migração, a configuração.
 
 O parágrafo de um marco ou a descrição de uma linha também muda conversando, e o slug fica, já que uma página ou um commit pode já usá-lo.
@@ -197,7 +203,7 @@ No Caso A, um projeto para um cliente em uma plataforma low-code, o Microsoft Po
 
 * O docs/06 guarda marcos, cada um com um parágrafo, e uma linha por entrega sob ele: uma marca, um slug, uma frase e os seus sufixos; o que aconteceu vai para a página.
 * A marca de uma linha diz onde a entrega dela está, de `[ ]`, não definida, a `[x]`, feita; uma linha nunca sai, então a fila é também o histórico.
-* O parágrafo de um marco é um teste que uma pessoa confere no produto, nunca um tema, sobre as entregas que o tornam verdade, de três a oito no primeiro marco: o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados viram linhas sob ela no mesmo marco; linhas são acrescentadas enquanto ele anda, e quem acrescenta uma a põe no marco que tem uma cláusula que precisa dela, ou sob o seguinte, criado quando falta com um parágrafo que a linha atende e a sua revisão por último.
+* O parágrafo de um marco é um teste que uma pessoa confere no produto, nunca um tema, sobre as entregas que o tornam verdade, de três a oito no primeiro marco: o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados graves viram uma linha cada sob ela no mesmo marco, e os médios que você escolhe dividem uma; linhas são acrescentadas enquanto ele anda, e quem acrescenta uma a põe no marco que tem uma cláusula que precisa dela, ou sob o seguinte, criado quando falta com um parágrafo que a linha atende e a sua revisão por último.
 * A ordem é a prioridade: a linha mais acima importa mais, mover uma linha muda a prioridade dela, e uma dependência conhecida quando a linha é acrescentada é escrita junto, `· after <slug>`, uma ordem, não uma espera, então a linha mantém `[ ]`.
 * Nenhum comando é dono da fila: linhas e parágrafos mudam conversando, em qualquer sessão, com o slug mantido; o código só muda dentro do `/apply`, até uma mudança de cinco linhas tem sua página, e uma mudança pedida em qualquer outro lugar vira uma linha, com um rascunho da página para o que a linha não comporta, e o `/propose` nessa sessão ou numa sessão nova, o `/apply` sempre numa sessão nova.
 

@@ -60,7 +60,8 @@ No docs/05 da biblioteca de empréstimos, escrito para este capítulo, um time q
 ```
 
 **docs/06, a fila.** Os marcos, cada um com um parágrafo dizendo o que é verdade quando ele fecha, e sob cada um uma linha por entrega, em ordem, com uma marca para o seu estado.
-Ele não guarda regras próprias: as marcas, os sufixos como `· after`, que segura uma linha até outra estar feita, a ordem e o que pode rodar ao mesmo tempo estão escritos uma vez, no docs/05 §4, e o cabeçalho do docs/06 aponta para lá, então nenhuma segunda cópia pode se afastar da primeira.
+Ele não guarda regras próprias: as marcas, os sufixos como `· after`, a ordem e o que pode rodar ao mesmo tempo estão escritos uma vez, no docs/05 §4, e o cabeçalho do docs/06 aponta para lá, então nenhuma segunda cópia pode se afastar da primeira.
+`· after` cita uma linha de que esta precisa antes, e é lido para cada comando: a definição espera a página dessa linha, a construção o código dela.
 É o documento em que você mais mexe: todo o trabalho do projeto, aumentado e editado todos os dias, por conversa.
 Ele faz o que um quadro kanban ou um backlog de work items faz num processo ágil, com uma diferença: o agente o lê.
 Todo documento é lido, e corrigido quando está errado; a fila é o que dá forma ao produto.

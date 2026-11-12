@@ -67,8 +67,8 @@ Instalado: focus-kit 2026.11.12, em cada SKILL.md; os documentos
 de processo ainda seguem a 2026.10.27.
 Migrações de processo pendentes, por documento e seção, encurtadas:
 
-* docs/05, números de seção: batem com o modelo (§4 a fila,
-  §5 os slots, §6 commit, §8 fechar um marco). Nenhuma.
+* docs/05, números de seção: já de acordo com o modelo (§4 a
+  fila, §5 os slots, §6 commit, §8 fechar um marco).
 * docs/05 §4: falta o que é um achado. Proposto, o parágrafo do
   modelo, que diz: "Um achado é grave quando quebra uma cláusula do
   parágrafo do marco para uma pessoa no seu caminho habitual, perde
@@ -77,8 +77,8 @@ Migrações de processo pendentes, por documento e seção, encurtadas:
   na página da entrega que os achou.
 * docs/05 §5, Verify: falta um teto. Proposto: "O seu teto: cinco
   minutos. O /apply diz quanto tempo a verificação levou."
-* docs/05 §6: uma escolha do projeto, ADR-0010: o assunto
-  <type>(<slug>): e o commit da release. Nenhuma.
+* docs/05 §6: uma escolha do projeto a manter, ADR-0010: o
+  assunto <type>(<slug>): e o commit da release.
 
 Os outros itens cobrem o docs/05 §§2, 3 e 7, o resto dos §§4, 5, 6
 e 8, o docs/04, o docs/06, o AGENTS.md e o docs/03.
@@ -88,10 +88,10 @@ achado como uma nota que ninguém lê. Depois, /propose
 m32-records-claims, numa sessão nova.
 ```
 
-Cada item cita um documento e uma seção, e termina num de três resultados.
-Ele bate e não precisa de nada, e diz isso: `Nenhuma`.
+Cada item cita um documento e uma seção, e tem um de três resultados.
+Ele bate e não precisa de nada, e o relatório diz que ele já está de acordo com o modelo, como diz dos números de seção do docs/05.
 Ele não tem alguma coisa, e o item dá o texto que o modelo propõe e onde ele entra, como o item do docs/05 §4 sobre os achados e o item Verify do §5; um achado é uma falha que um comando descobre fora do que a sua entrega construiu, e só um grave vira uma linha da fila, os outros notas na página da entrega para a revisão do marco.
-Ou ele difere por uma escolha que o projeto fez e registrou com uma data ou um ADR, como o item do docs/05 §6 do livro: o item cita essa escolha, não pede mudança e também termina em `Nenhuma`.
+Ou ele difere por uma escolha que o projeto fez e registrou com uma data ou um ADR, como o item do docs/05 §6 do livro: o relatório o lista entre as escolhas do projeto a manter, e o item cita essa escolha e não pede mudança.
 Todo item é relatado, nunca feito: a atualização não escreve nenhum desses documentos.
 
 Os números de seção vêm primeiro porque os comandos citam o docs/05 pelos números do modelo, o §4 para a fila, o §6 para o commit, e leem pelo número; um docs/05 numerado de outro jeito mandaria cada comando para a seção errada, então essa migração vem antes de qualquer outra.

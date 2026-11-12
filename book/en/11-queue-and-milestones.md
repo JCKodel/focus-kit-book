@@ -71,7 +71,7 @@ A milestone starts with the lines its paragraph needs, then its review; for the 
 The first ones are the skeleton the others stand on: the library's `skeleton` creates `npm run verify`, which every later delivery runs.
 Then each line comes after the lines it needs: a librarian cannot lend a copy before the catalog holds copies and the members exist.
 
-Lines are added while a milestone runs: a fix a delivery finds outside its page, the review's findings, a problem you find trying the product.
+Lines are added while a milestone runs: a grave flaw a delivery finds outside what it built, the review's findings that become lines (below), a problem you find trying the product.
 So a milestone closes larger than it started, and the queue changes with the work.
 This book's own queue shows it: its milestone M15 closed with 42 lines; its review was the 14th, with 28 under it.[^m15-queue]
 An agent asked about a problem tends to answer with lines, each one reasonable, so without a person judging, a milestone grows without end.
@@ -94,7 +94,11 @@ The kit's queue script draws that order: while `lend-book` is not `[x]`, it show
 
 A milestone is planned with its review as its last line, `<milestone>-review · after all`, a delivery like the others, which waits for the lines above it and takes the paragraph clause by clause ([chapter 15](15-closing-a-milestone.md)).
 It fixes nothing: a person tests each clause by hand and, on the person's word, the code changed since the milestone's base is read by whoever the Milestone review slot of the project's docs/05 names, when it names anyone, the host's deep review or one read-only agent per area, and either way a checker marks each candidate before the person sees it.
-Each finding becomes a `[ ]` line in the same milestone, under the review line, even when the next milestone already holds lines, and those lines get no second review.
+Its findings stay in the same milestone, under the review line, even when the next milestone already holds lines.
+Each grave one, which breaks a clause of the paragraph for a person on its usual path, loses or exposes data, or leaves verify red, becomes a `[ ]` line of its own.
+The medium ones, which a person meets in ordinary use while the clause still holds, enter one line, the fixes line, `<milestone>-fixes`, when you pick them.
+The others stay listed on the review's page, unless you pick one.
+The finding lines get no second review.
 
 ## Changing the queue
 
@@ -144,7 +148,8 @@ loan screen.
 
 **States.** The defaults.
 
-**Visual reference.** None.
+**Visual reference.** The loan screen in the design file, at 390 and
+1280 pixels wide.
 
 **Out of scope.** The catalog's dates, which keep year-month-day; the
 overdue list's dates, a line of its own.
@@ -152,8 +157,8 @@ overdue list's dates, a line of its own.
 **Done when.** The two Behaviour lines pass as tests; verify green.
 ```
 
-Every section is there, and three of them say only that they do not apply; the two details of the draft are a Behaviour line and an Out of scope item.
-You read the page and correct it in the session that wrote it, and in a fresh session `/apply due-date-format` builds it: it changes the function that formats the date on the loan screen and writes one test with the two Behaviour lines, about five lines between them, runs verify until it is green, moves the page to `work/done/`, stages the two files with the page and the queue line, and suggests the message, also written for this chapter (chapter 13 explains its shape):
+Every section is there, and two of them say only that they do not apply or take the defaults; the Visual reference names the screen the change touches, in the library's design file, and the two details of the draft are a Behaviour line and an Out of scope item.
+You read the page and correct it in the session that wrote it, and in a fresh session `/apply due-date-format` builds it: it changes the function that formats the date on the loan screen and writes one test with the two Behaviour lines, about five lines between them, runs verify until it is green, compares the loan screen it built with the design at both widths, moves the page to `work/done/`, stages the two files with the page and the queue line, and suggests the message, also written for this chapter (chapter 13 explains its shape):
 
 ```commit
 Show the due date as day/month/year
@@ -173,7 +178,8 @@ That is what the rule cost: two short sessions, one review and one commit.
 In return the queue says the change exists, the page says what it does and what it leaves out, and a test fails if the format ever changes back.
 An edit made on the spot would have skipped the line, the page, the test and the review.
 The page is as short as its change: seven sections of a line or two, and a page that needs more for a change this size is defining more than one delivery.
-The rule holds in every session: during `/propose` the change is a new line, unless you ask for it on the page being written; during `/apply`, a fix found outside its page becomes a `[ ]` line, and only a fix the delivery needs first goes above it and makes it wait (chapter 14); and an edit made anyway, to "just change the label", is reverted before anything is committed.
+The rule holds in every session: during `/propose` the change is a new line, unless you ask for it on the page being written; during `/apply`, a flaw found outside what the delivery built becomes a note on the delivery's page for the milestone's review, or a `[ ]` line when it is grave, and only a fix the delivery needs first goes above the delivery's line and makes it wait (chapter 14).
+An edit made anyway, to "just change the label", is reverted before anything is committed.
 Documents still change by conversation, in any session; the rule covers the code: the app's source, its tests, a migration, its configuration.
 
 A milestone's paragraph or a line's description changes by conversation too, and the slug stays, since a page or a commit may already use it.
@@ -192,7 +198,7 @@ On Case A, a client project on a low-code platform, Microsoft Power Apps with Co
 
 * docs/06 holds milestones, each with a paragraph, and one line per delivery under it: a mark, a slug, one sentence and its suffixes; what happened goes on the page.
 * A line's mark says where its delivery stands, from `[ ]`, not defined, to `[x]`, done; a line never leaves, so the queue is also the history.
-* A milestone paragraph is a test a person can check against the product, never a theme, over the deliveries that make it true, three to eight in the first milestone: the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone; lines are added while it runs, and whoever adds one puts it in the milestone whose paragraph has a clause that needs it, or under the next, created when missing with a paragraph the line answers and its review last.
+* A milestone paragraph is a test a person can check against the product, never a theme, over the deliveries that make it true, three to eight in the first milestone: the skeleton first, each line after the lines it needs, and last the review, whose grave findings become a line each under it in the same milestone, and the medium ones you pick share one; lines are added while it runs, and whoever adds one puts it in the milestone whose paragraph has a clause that needs it, or under the next, created when missing with a paragraph the line answers and its review last.
 * The order is the priority: the higher line matters more, moving a line changes its priority, and a dependency known when a line is added is written with it, `· after <slug>`, an order, not a wait, so the line keeps `[ ]`.
 * No command owns the queue: lines and paragraphs change by conversation, in any session, with the slug kept; code changes only inside `/apply`, even a five-line change gets its page, and a change asked anywhere else becomes a line, with a draft page for what the line cannot hold, and `/propose` in that session or a fresh one, `/apply` always in a fresh one.
 

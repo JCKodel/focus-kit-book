@@ -59,7 +59,8 @@ In the lending library's docs/05, written for this chapter, a team that follows 
 ```
 
 **docs/06, the queue.** The milestones, each with a paragraph saying what is true when it closes, and under each one line per delivery, in order, with a mark for its state.
-It holds no rules of its own: the marks, the suffixes such as `· after`, which holds a line until another is done, the order and what may run at the same time are written once, in docs/05 §4, and docs/06's header points there, so no second copy can drift from the first.
+It holds no rules of its own: the marks, the suffixes such as `· after`, the order and what may run at the same time are written once, in docs/05 §4, and docs/06's header points there, so no second copy can drift from the first.
+`· after` names a line this one needs first, and it is read for each command: the definition waits for that line's page, the build for its code.
 It is the document you touch most: the whole of the project's work, added to and edited every day, by conversation.
 It does what a kanban board or a backlog of work items does in an agile process, with one difference: the agent reads it.
 Every document is read, and corrected when it is wrong; the queue is the one that gives the product its shape.

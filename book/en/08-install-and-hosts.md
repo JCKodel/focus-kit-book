@@ -66,8 +66,8 @@ Installed: focus-kit 2026.11.12, in every SKILL.md; the process
 documents still follow 2026.10.27.
 Pending process migrations, by document and section, shortened:
 
-* docs/05, section numbers: match the template (§4 the queue,
-  §5 the slots, §6 commit, §8 closing a milestone). None.
+* docs/05, section numbers: already in line with the template
+  (§4 the queue, §5 the slots, §6 commit, §8 closing a milestone).
 * docs/05 §4: lacks what a finding is. Proposed, the template's
   paragraph, which says: "A finding is grave when it breaks a clause
   of the milestone's paragraph for a person on its usual path, loses
@@ -76,8 +76,8 @@ Pending process migrations, by document and section, shortened:
   the delivery that found it.
 * docs/05 §5, Verify: lacks a ceiling. Proposed: "Its ceiling: five
   minutes. /apply says how long verify took."
-* docs/05 §6: a project choice, ADR-0010: the <type>(<slug>):
-  subject and the release commit. None.
+* docs/05 §6: a project choice to keep, ADR-0010: the
+  <type>(<slug>): subject and the release commit.
 
 The other items cover docs/05 §§2, 3 and 7, the rest of §§4, 5, 6
 and 8, docs/04, docs/06, AGENTS.md and docs/03.
@@ -87,10 +87,10 @@ finding as a note nobody reads. Then /propose m32-records-claims,
 in a fresh session.
 ```
 
-Each item names a document and a section, and ends in one of three outcomes.
-It matches and needs nothing, and says so: `None`.
+Each item names a document and a section, and has one of three outcomes.
+It matches and needs nothing, and the report says it is already in line with the template, as it says of docs/05's section numbers.
 It lacks something, and the item gives the wording the template proposes and where it goes, as the docs/05 §4 item on findings and the §5 Verify item do; a finding is a flaw a command discovers outside what its delivery built, and only a grave one becomes a queue line, the others notes on the delivery's page for the milestone's review.
-Or it differs by a choice the project made and recorded with a date or an ADR, as the book's docs/05 §6 item does: the item names that choice, asks for no change, and ends in `None` too.
+Or it differs by a choice the project made and recorded with a date or an ADR, as the book's docs/05 §6 item does: the report lists it among the project's choices to keep, and the item names that choice and asks for no change.
 Every item is reported, never done: the update writes none of these documents.
 
 Section numbers come first because the commands cite docs/05 by the template's numbers, §4 for the queue, §6 for the commit, and read by number; a docs/05 numbered otherwise would send every command to the wrong section, so that migration comes before any other.
