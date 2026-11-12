@@ -1,6 +1,6 @@
 # Queue
 
-The marks, the suffixes (`· after`, `· after all`, `· resume:`, `· blocked:`, `· dropped:`), the order as priority, the next milestone and what may run at the same time are docs/05 §4, written once there.
+The marks, the suffixes (`· after`, `· after all`, `· resume:`, `· blocked:`, `· dropped:`, `· from`), the order as priority, the next milestone and what may run at the same time are docs/05 §4, written once there.
 A line is the mark, the slug, one sentence and its suffixes, on one line; what happened goes on its page. Longer lines written before kit-2026-10-16 are in this file's history, at the commit before it.
 
 ## M1. The book stands up
@@ -719,10 +719,10 @@ When this milestone closes, the book teaches focus-kit 2026.10.24 and the reposi
 [x] ch11-14-queue-tree  chapters 11, 12, 13 and 14: `queue.sh` drawing the milestone as a tree, a line under the last line it waits on, the free lines for /apply and /propose, the lines without a token judged first, /propose and /apply with no slug showing it, and the offer of one command with several slugs and its cost; both editions · after kit-2026-10-24
 [x] ch19-queue-branches chapter 19: with a worktree per delivery `queue.sh` reads each delivery's line from its branch on origin, keeping the further mark, and lists the lines only a branch has; both editions · after kit-2026-10-24
 [x] m32-review               the review of M32 as docs/05 §8 says · after all
-[ ] m32-records-claims  the records of kit-2026-10-24, ch08-update-2026-10-24, ch11-14-queue-tree and ch19-queue-branches hold only what happened: what `queue.sh` reads, docs/06 and not work/; the pt line of 2026.10.20.3; that the six screenshots show chapter 14 before its review's two fixes; the decision the fixture's token reverses; the changelog's words without "or in-flight" · after m32-review
-[ ] queue-tree-row-source docs/03's `queue tree` row and ADR-0018's `kit-2026-10-24` amendment cite for the no-slug rule and /apply's ending the skills that hold them, not docs/05 §4 · after m32-review
-[ ] ch14-key-points-pointers chapter 14 with at most five key points, as docs/04 says, and the forward pointers M32 added in chapters 8, 12, 13 and 14 once per chapter for each target, or docs/04's rule restated by the author; both editions · after m32-review
-[ ] ch19-example-marks  chapter 19's example: `overdue-list`'s token against the folder it shares with `return-book`, and how a mark reaches origin before the person's commit, which the tree from `main/` needs; both editions · after m32-review
+[ ] m32-records-claims  the records of kit-2026-10-24, ch08-update-2026-10-24, ch11-14-queue-tree and ch19-queue-branches hold only what happened: what `queue.sh` reads, docs/06 and not work/; the pt line of 2026.10.20.3; that the six screenshots show chapter 14 before its review's two fixes; the decision the fixture's token reverses; the changelog's words without "or in-flight" · after m32-review · from m32-review
+[ ] queue-tree-row-source docs/03's `queue tree` row and ADR-0018's `kit-2026-10-24` amendment cite for the no-slug rule and /apply's ending the skills that hold them, not docs/05 §4 · after m32-review · from m32-review
+[ ] ch14-key-points-pointers chapter 14 with at most five key points, as docs/04 says, and the forward pointers M32 added in chapters 8, 12, 13 and 14 once per chapter for each target, or docs/04's rule restated by the author; both editions · after m32-review · from m32-review
+[ ] ch19-example-marks  chapter 19's example: `overdue-list`'s token against the folder it shares with `return-book`, and how a mark reaches origin before the person's commit, which the tree from `main/` needs; both editions · after m32-review · from m32-review
 ```
 
 ## M33. focus-kit 2026.10.25
@@ -764,7 +764,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.27 and the reposi
 When this milestone closes, the book teaches focus-kit 2026.10.27.1 and the repository runs on it: `· after all` leaving out the milestone's dropped lines, so a review never waits on a line the person cancelled, while a line that names a dropped one still waits for the person to re-decide it.
 
 ```
-[ ] kit-2026-10-27-1        reinstall the kit at 2026.10.27.1 and apply its migration report: docs/05 §4's two sentences and §8's review start leaving dropped lines out · after m35-review
+[x] kit-2026-10-27-1        reinstall the kit at 2026.10.27.1 and apply its migration report: docs/05 §4's two sentences and §8's review start leaving dropped lines out · after m35-review
 [ ] ch14-15-after-all-dropped chapters 14 and 15: `after all` leaving out a cancelled line, a line naming one still re-decided by the person, with the Milestone 1 review of 2026-10-26 that had to list 27 slugs as the error; both editions · after kit-2026-10-27-1
 [ ] m36-review               the review of M36 as docs/05 §8 says · after all
 ```
@@ -774,7 +774,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.27.1 and the repo
 When this milestone closes, the book teaches focus-kit 2026.11.03 and the repository runs on it: `/apply` ending by telling the person each next step, and by running `queue.sh` though no one asked, its tree shown and its `next:` command written as the host invokes commands.
 
 ```
-[ ] kit-2026-11-03          reinstall the kit at 2026.11.03; the report lists no migration, /apply alone changes · after m36-review
+[x] kit-2026-11-03          reinstall the kit at 2026.11.03; the report lists no migration, /apply alone changes · after m36-review
 [ ] ch13-apply-next         chapter 13: /apply telling the person each next step, no longer bare sentences an agent read as its own orders, and running `queue.sh` at its end unasked, giving its `next:` in the host's form, with the report of 2026-11-03 that /apply had stopped naming the next command as the error; both editions · after kit-2026-11-03
 [ ] m37-review               the review of M37 as docs/05 §8 says · after all
 ```
@@ -784,7 +784,7 @@ When this milestone closes, the book teaches focus-kit 2026.11.03 and the reposi
 When this milestone closes, the book teaches focus-kit 2026.11.12 and the repository runs on it: `/apply` fixing in the delivery what its review finds wrong in what it built; a finding in anything else becoming a line only when grave, ending `· from <slug>`, the others notes on the delivery's own page; the milestone review copying those notes and grading them, grave a line each, the medium ones the person picks on one `-fixes` line, the small ones by the person's pick; `/apply` opening its last message with `🚨`, `⚠️` or `✅`; `queue.sh` counting the lines from a finding; and verify with a ceiling, tests only for what the page says and fixes, and each slow test run by the delivery that changes what it covers.
 
 ```
-[ ] kit-2026-11-12          reinstall the kit at 2026.11.12 and apply its migration report in the same session: docs/05 §3's `## For the review` heading, §4's findings paragraph, §5's Verify ceiling and slow tests, §8's grading, and `· from <slug>` on docs/06's finding lines · after m37-review
+[x] kit-2026-11-12          reinstall the kit at 2026.11.12 and apply its migration report in the same session: docs/05 §3's `## For the review` heading, §4's findings paragraph, §5's Verify ceiling and slow tests, §8's grading, and `· from <slug>` on docs/06's finding lines · after m37-review
 [ ] ch13-apply-findings     chapter 13: /apply fixing in the delivery what is wrong in what it built, a flaw it cannot fix a note or a `[?]`, a finding elsewhere a line only when grave, its last message opening with `🚨`, `⚠️` or `✅`, tests for what the page says and fixes, verify's ceiling and the slow tests that cover what the delivery changed, with the 32 of 130 lines of 2026-11-12 as the error · after kit-2026-11-12
 [ ] ch14-queue-findings     chapter 14: the `· from <slug>` suffix, where a grave line goes, a note on the delivery's page, a test or process line only on the person's word, and `queue.sh` printing `findings:` and its warning · after kit-2026-11-12
 [ ] ch15-review-grades      chapter 15: the milestone review copying the deliveries' notes and grading findings, grave a line each, the medium ones the person picks on one `<milestone>-fixes` line, the small ones listed · after kit-2026-11-12

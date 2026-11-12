@@ -98,3 +98,15 @@ Since `kit-2026-10-26` the book runs focus-kit 2026.10.26; the six marks are unc
 ## Amendment, 2026-10-26 (kit-2026-10-27)
 
 Since `kit-2026-10-27` the book runs focus-kit 2026.10.27; the six marks are unchanged, and `mark.sh` refuses a `[~]` on a line that is not `[ ]` and a `[*]` on one that is not `[>]`, so two sessions that start one line cannot both mark it. No document changes: the script alone does. Recorded at the author's request on 2026-10-26, outside /propose and /apply.
+
+## Amendment, 2026-11-12 (kit-2026-10-27-1)
+
+Since `kit-2026-10-27-1` the book runs focus-kit 2026.10.27.1; the six marks are unchanged. `· after all` leaves out the milestone's dropped lines, so a review waits on no line the person cancelled, while a line whose `after` names a dropped one still waits for the person to re-decide it (docs/05 §§4 and 8). Applied directly at the author's request on 2026-11-12, outside /propose and /apply.
+
+## Amendment, 2026-11-12 (kit-2026-11-03)
+
+Since `kit-2026-11-03` the book runs focus-kit 2026.11.03; the six marks are unchanged. /apply ends by telling the person each next step and by running `queue.sh` unasked, its `next:` written as the host invokes commands. No document changes: the skill alone does. Recorded at the author's request on 2026-11-12, outside /propose and /apply.
+
+## Amendment, 2026-11-12 (kit-2026-11-12)
+
+Since `kit-2026-11-12` the book runs focus-kit 2026.11.12; the six marks are unchanged. What /apply's review, proof or build finds wrong in what its delivery built or changed is fixed in that delivery. A flaw found in anything else is a finding: a grave one becomes a `[ ]` line ending `· from <slug>`, every other one a note under the page's `## For the review` heading, and a line for a test, a proof tool or a change to the process enters only on the person's word. The milestone review copies the notes and grades every confirmed finding, grave a line each, the medium ones the person picks on one `<milestone>-fixes` line, the small ones listed. The Verify slot names a ceiling of five minutes and its slow tests one line each, none here (docs/05 §§2, 3, 4, 5, 6 and 8; docs/06's four open M32 findings end `· from m32-review`). Applied directly at the author's request on 2026-11-12, outside /propose and /apply.
