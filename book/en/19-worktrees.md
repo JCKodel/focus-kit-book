@@ -26,7 +26,7 @@ A free line is a line of the queue that is not done, not waiting, and needs no o
 Say the lending library has two free lines: `return-book`, which touches `src/features/loans/`, and `overdue-list`, which touches `src/features/reports/`; the slugs and paths are an illustration, written for this chapter.
 Their code files do not meet.
 Both mark docs/06, the queue, but each marks only its own line.
-`git add -p` offers a file to stage in hunks, separate pieces of a change: two lines far apart are two hunks, two neighbouring lines are one, and each session still stages its own line alone (the section on the batch shows how).
+`git add -p` offers a file to stage in hunks, separate pieces of a change: two lines far apart are two hunks, two neighbouring lines are one, and each session still stages its own line alone, with the `stage` of the kit's mark script, which changes that line in the index and nothing else there ([chapter 14](14-queue-states.md)).
 So the two can run in one folder at once.
 
 Each session keeps to its delivery:
@@ -51,7 +51,7 @@ Then do not commit yet: the commit waits until the index holds only the delivery
 The session that found the other's entries already staged told you so and left them as they were; neither session removes the other's entries.
 The usual way to an index of one delivery is order: commit each delivery as its session ends, before the other stages anything.
 If both are staged already, sorting the index is yours: `git restore --staged <its paths>` takes the other's files out of the index and leaves them in the folder.
-The queue cannot be split with `s` when the two lines are neighbours, since `git restore --staged -p` divides a hunk as `git add -p` does;[^git-restore] so `git restore --staged docs/06-Queue.md` takes the whole file out, you ask this delivery's session to stage its own line again, and you commit.
+The queue cannot be split with `s` when the two lines are neighbours, since `git restore --staged -p` divides a hunk as `git add -p` does;[^git-restore] so `git restore --staged docs/06-Queue.md` takes the whole file out, you ask this delivery's session to stage its own line again, with the mark script's `stage`, and you commit.
 Then the other session stages its entries again, when you ask it.
 
 The trap is naming paths.
@@ -367,8 +367,7 @@ The applies that follow add no rule of their own: they run at once only on free 
 Each `/apply` stages its delivery when it completes: its page, what it built and its line of the queue, and the other proposals stay unstaged in the folder.
 That is where the shared hunk counts, and the session that owns a line stages its mark, never you.
 `git add -p` cannot do it here: it splits a hunk with `s` only where an unchanged line separates two changes, and its `e` opens the hunk in an editor, which a session does not drive.[^git-add]
-So the session writes a patch, the text `git diff` prints for a change, holding only its own line's `-` and `+`, next to each other, with the other lines as they stand in the index (the staged copy a commit is made from), unchanged, around them.
-It gives that patch to `git apply --cached`, which applies it to the index alone and leaves the files in the folder as they are.[^git-apply]
+So the session stages its `[x]`, its last edit, with the mark script's `stage`: the script changes that line's mark in the index (the staged copy a commit is made from), one byte, and leaves the other lines there as they were.
 Before each commit, `git diff --cached docs/06-Queue.md` shows this delivery's changes alone, its line's `-` and `+` side by side, and no change of another session.
 If the index already held another session's entries, the session tells you and leaves them as they were, and the commit waits until the index holds only this delivery, as earlier in this chapter.
 
@@ -385,7 +384,7 @@ And a wrong delivery that later ones built on reverts with a conflict wherever t
 In one folder or in worktrees, two deliveries at once still share whatever is not in their own files.
 Before starting two, check five things.
 
-**The queue.** In one folder it does not conflict: each session marks its own line, and each `/apply` stages that line alone, whether or not it shares a hunk with the other's.
+**The queue.** In one folder it does not conflict: each session marks its own line, and each `/apply` stages that line alone with the mark script's `stage`, whether or not it shares a hunk with the other's.
 Across worktrees it always conflicts at the merge, since every delivery marks its line, and it resolves the same way every time: keep both marks.
 
 **Files both change.** A code file that two deliveries both change is different.
@@ -413,7 +412,7 @@ Proposes in a batch carry the parallel into definition: the agents write the pag
 
 ## Key points
 
-* Two sessions share one folder on trunk when their lines are free and their files do not meet: each marks only its line, stages only its paths and its line of the queue, and you decide each commit, one delivery at a time.
+* Two sessions share one folder on trunk when their lines are free and their files do not meet: each marks only its line, stages only its paths and its line of the queue, the line with the mark script's `stage`, and you decide each commit, one delivery at a time.
 * Another line's mark, another delivery's page or files and another session's staged entries are not a conflict; neither are two neighbouring lines of the queue in one hunk; a line edited by both, or a file one page needs that the other is changing, is: stop, then order the lines with `· after`, since `/apply` makes the same check in a worktree.
 * One folder has one index, so commit from it once it holds only that delivery: `git diff --cached --stat` names files, so read the staged diff of a shared file for its lines too; with another delivery staged, wait; and never select a delivery with `git commit -- <paths>`, which takes each named file whole from the folder, the other delivery's lines in a shared file included, staged or not.
 * A worktree per delivery pays for several people, or for deliveries that touch the same files: a container folder whose `main/` is the checkout keeps each delivery's worktree in `<hidden>/worktrees/<slug>/` on `<prefix><slug>`, `.focus-kit/` and `focus-kit/` by default; `git worktree add`, work there, `git merge --no-ff` from `main/`, `git worktree remove`, `git branch -d`; each worktree has its own index, `/propose` claims the line with the kit's script, which runs as a git alias through git's own `sh`, Git for Windows' on Windows, runs from `main/` on the default branch, answering `here` in the slug's own worktree, creates the worktree from origin's main branch and the branch on origin only when origin has none, the line's claim, answers `taken` for another clone's branch unless told `resume`, and prints the worktree's path, and the line's marks live on the branch until the merge, and the queue script, typed with the slot's word from `main/` or any worktree, reads a branch on origin as the claim and each delivery's line from its branch until the merge, the main branch's copy after it, a `[?]` on any copy blocking, and shows a line only a branch has in its milestone, though it sees no mark not yet pushed; each session opens where it works, never in the container: `/propose` in `main/`, which edits the worktrees by the container's manual, a command typed with several slugs there too, its subagents writing in, or sent to, each worktree, and `/apply` in a fresh session in the worktree whose path `/propose` gives, stopping before any edit anywhere else; a blocked `/apply` there may stage its partial work for you to commit on the branch, which stays unmerged until the delivery is done; a conflict leaves both versions between markers, and `git diff --cached --check` catches any left before the commit.
@@ -426,6 +425,5 @@ Proposes in a batch carry the parallel into definition: the agents write the pag
 [^git-diff]: Git, "git-diff", the documentation, option `--check`, accessed 2026-09-30. <https://git-scm.com/docs/git-diff>
 [^git-add]: Git, "git-add", the documentation, section "Interactive mode", accessed 2026-10-18. <https://git-scm.com/docs/git-add>
 [^git-restore]: Git, "git-restore", the documentation, option `--patch`, accessed 2026-10-18. <https://git-scm.com/docs/git-restore>
-[^git-apply]: Git, "git-apply", the documentation, option `--cached`, accessed 2026-10-18. <https://git-scm.com/docs/git-apply>
 [^parallel-run]: J.C. Ködel, "One Page at a Time", the record of two deliveries built in parallel in two worktrees, 2026-09-30, in the book's repository. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/clinic-worktrees-run>
 [^claude-code-permissions]: Anthropic, "Configure permissions", Claude Code documentation, section "Additional directories grant file access, not configuration", accessed 2026-10-21. <https://code.claude.com/docs/en/permissions#additional-directories-grant-file-access-not-configuration>

@@ -26,7 +26,7 @@ Uma linha livre é uma linha da fila que não está feita, não está esperando,
 Digamos que a biblioteca de empréstimos tem duas linhas livres: `devolver-livro`, que mexe em `src/features/emprestimos/`, e `lista-de-atrasos`, que mexe em `src/features/relatorios/`; os slugs e os caminhos são uma ilustração, escrita para este capítulo.
 Os arquivos de código delas não se encontram.
 As duas marcam o docs/06, a fila, mas cada uma marca só a sua própria linha.
-O `git add -p` oferece um arquivo para o stage em hunks, pedaços separados de uma mudança: duas linhas distantes são dois hunks, duas linhas vizinhas são um, e cada sessão ainda coloca em stage só a sua própria linha (a seção do lote mostra como).
+O `git add -p` oferece um arquivo para o stage em hunks, pedaços separados de uma mudança: duas linhas distantes são dois hunks, duas linhas vizinhas são um, e cada sessão ainda coloca em stage só a sua própria linha, com o `stage` do script de marca do kit, que muda essa linha no índice e nada mais ali ([capítulo 14](14-queue-states.md)).
 Então as duas podem rodar em uma pasta ao mesmo tempo.
 
 Cada sessão se atém à sua entrega:
@@ -51,7 +51,7 @@ Então não faça o commit ainda: ele espera até o índice guardar só a entreg
 A sessão que encontrou as entradas da outra já em stage avisou você e as deixou como estavam; nenhuma sessão tira as entradas da outra.
 O caminho comum para um índice de uma entrega só é a ordem: faça o commit de cada entrega quando a sua sessão termina, antes que a outra coloque qualquer coisa em stage.
 Se as duas já estão em stage, arrumar o índice é com você: `git restore --staged <os caminhos dela>` tira os arquivos da outra do índice e os deixa na pasta.
-A fila não se divide com `s` quando as duas linhas são vizinhas, já que `git restore --staged -p` divide um hunk como o `git add -p` divide;[^git-restore] então `git restore --staged docs/06-Queue.md` tira o arquivo inteiro, você pede à sessão desta entrega que coloque a sua própria linha em stage de novo, e faz o commit.
+A fila não se divide com `s` quando as duas linhas são vizinhas, já que `git restore --staged -p` divide um hunk como o `git add -p` divide;[^git-restore] então `git restore --staged docs/06-Queue.md` tira o arquivo inteiro, você pede à sessão desta entrega que coloque a sua própria linha em stage de novo, com o `stage` do script de marca, e faz o commit.
 Depois a outra sessão coloca as suas entradas em stage de novo, quando você pedir.
 
 A armadilha é nomear caminhos.
@@ -367,8 +367,7 @@ Os `/apply` que vêm depois não acrescentam regra própria: rodam ao mesmo temp
 Cada `/apply` coloca a sua entrega em stage quando termina: a sua página, o que construiu e a sua linha da fila, e as outras propostas ficam fora do stage, na pasta.
 É aí que o hunk compartilhado conta, e quem coloca em stage a marca de uma linha é a sessão dona dela, nunca você.
 O `git add -p` não consegue fazer isso aqui: ele divide um hunk com `s` só onde uma linha sem mudança separa duas mudanças, e o `e` dele abre o hunk em um editor, que uma sessão não opera.[^git-add]
-Então a sessão escreve um patch, o texto que o `git diff` imprime para uma mudança, com só o `-` e o `+` da sua própria linha, um ao lado do outro, e as outras linhas como estão no índice (a cópia em stage de onde o commit é feito), sem mudança, em volta deles.
-Ela entrega esse patch ao `git apply --cached`, que o aplica só ao índice e deixa os arquivos da pasta como estão.[^git-apply]
+Então a sessão coloca em stage o seu `[x]`, a sua última edição, com o `stage` do script de marca: o script muda a marca dessa linha no índice (a cópia em stage de onde o commit é feito), um byte, e deixa as outras linhas ali como estavam.
 Antes de cada commit, `git diff --cached docs/06-Queue.md` mostra só as mudanças desta entrega, o `-` e o `+` da sua linha lado a lado, e nenhuma mudança de outra sessão.
 Se o índice já guardava entradas de outra sessão, a sessão avisa você e as deixa como estavam, e o commit espera até o índice guardar só esta entrega, como mais acima neste capítulo.
 
@@ -385,7 +384,7 @@ E uma entrega errada sobre a qual as seguintes construíram se desfaz com um con
 Em uma pasta ou em worktrees, duas entregas ao mesmo tempo ainda compartilham tudo o que não está nos seus próprios arquivos.
 Antes de começar duas, confira cinco coisas.
 
-**A fila.** Em uma pasta ela não dá conflito: cada sessão marca a sua própria linha, e cada `/apply` coloca em stage só essa linha, esteja ela no mesmo hunk que a da outra ou não.
+**A fila.** Em uma pasta ela não dá conflito: cada sessão marca a sua própria linha, e cada `/apply` coloca em stage só essa linha com o `stage` do script de marca, esteja ela no mesmo hunk que a da outra ou não.
 Entre worktrees ela sempre dá conflito no merge, já que cada entrega marca a sua linha, e se resolve do mesmo jeito toda vez: guarde as duas marcas.
 
 **Arquivos que as duas mudam.** Um arquivo de código que duas entregas mudam é diferente.
@@ -413,7 +412,7 @@ O `/propose` em lote leva o paralelo para a definição: os agentes escrevem as 
 
 ## Pontos-chave
 
-* Duas sessões dividem uma pasta no trunk quando as suas linhas estão livres e os seus arquivos não se encontram: cada uma marca só a sua linha, coloca em stage só os seus caminhos e a sua linha da fila, e você decide cada commit, uma entrega por vez.
+* Duas sessões dividem uma pasta no trunk quando as suas linhas estão livres e os seus arquivos não se encontram: cada uma marca só a sua linha, coloca em stage só os seus caminhos e a sua linha da fila, a linha com o `stage` do script de marca, e você decide cada commit, uma entrega por vez.
 * A marca de outra linha, a página ou os arquivos de outra entrega e as entradas em stage de outra sessão não são conflito; nem duas linhas vizinhas da fila em um hunk; uma linha editada pelas duas, ou um arquivo de que uma página precisa e que a outra está mudando, é: pare, e então ordene as linhas com `· after`, já que o `/apply` faz a mesma verificação em um worktree.
 * Uma pasta tem um só índice, então faça o commit a partir dele quando ele guarda só aquela entrega: `git diff --cached --stat` nomeia arquivos, então leia também o diff em stage de um arquivo compartilhado, pelas suas linhas; com outra entrega em stage, espere; e nunca escolha uma entrega com `git commit -- <caminhos>`, que pega cada arquivo nomeado inteiro da pasta, com as linhas da outra entrega em um arquivo compartilhado, em stage ou não.
 * Um worktree por entrega compensa para várias pessoas, ou para entregas que mexem nos mesmos arquivos: uma pasta contêiner cujo `main/` é o checkout guarda o worktree de cada entrega em `<oculta>/worktrees/<slug>/` no `<prefixo><slug>`, `.focus-kit/` e `focus-kit/` por padrão; `git worktree add`, trabalhe ali, `git merge --no-ff` em `main/`, `git worktree remove`, `git branch -d`; cada worktree tem o seu próprio índice, o `/propose` reivindica a linha com o script do kit, que roda como um alias do git pelo próprio `sh` do git, o do Git for Windows no Windows, roda a partir de `main/` no branch padrão, respondendo `here` no worktree do próprio slug, cria o worktree a partir do branch principal do origin e o branch no origin só quando o origin não tem nenhum, a reivindicação da linha, responde `taken` para o branch de outro clone a não ser com `resume`, e imprime o caminho do worktree, e as marcas da linha ficam no branch até o merge, e o script de fila, digitado com a palavra do slot em `main/` ou em qualquer worktree, lê um branch no origin como a reivindicação e a linha de cada entrega do seu branch até o merge, a cópia do branch principal depois dele, um `[?]` em qualquer cópia travando, e mostra uma linha que só um branch tem no seu marco, embora não veja marca que ainda não teve push; cada sessão abre onde trabalha, nunca no contêiner: o `/propose` em `main/`, que edita os worktrees pelo manual do contêiner, um comando digitado com vários slugs ali também, os subagentes dele escrevendo em cada worktree, ou mandados para cada um, e o `/apply` em uma sessão nova no worktree cujo caminho o `/propose` dá, parando antes de qualquer edição em qualquer outro lugar; um `/apply` travado ali pode colocar o seu trabalho parcial em stage para você fazer o commit no branch, que fica sem merge até a entrega estar pronta; um conflito deixa as duas versões entre marcadores, e `git diff --cached --check` pega qualquer um que sobrou antes do commit.
@@ -426,6 +425,5 @@ O `/propose` em lote leva o paralelo para a definição: os agentes escrevem as 
 [^git-diff]: Git, "git-diff", a documentação, opção `--check`, acesso em 2026-09-30. <https://git-scm.com/docs/git-diff>
 [^git-add]: Git, "git-add", a documentação, seção "Interactive mode", acesso em 2026-10-18. <https://git-scm.com/docs/git-add>
 [^git-restore]: Git, "git-restore", a documentação, opção `--patch`, acesso em 2026-10-18. <https://git-scm.com/docs/git-restore>
-[^git-apply]: Git, "git-apply", a documentação, opção `--cached`, acesso em 2026-10-18. <https://git-scm.com/docs/git-apply>
 [^parallel-run]: J.C. Ködel, "One Page at a Time", o registro de duas entregas construídas em paralelo em dois worktrees, 2026-09-30, no repositório do livro. <https://github.com/JCKodel/focus-kit-book/tree/main/work/done/clinic-worktrees-run>
 [^claude-code-permissions]: Anthropic, "Configure permissions", documentação do Claude Code, seção "Additional directories grant file access, not configuration", acesso em 2026-10-21. <https://code.claude.com/docs/en/permissions#additional-directories-grant-file-access-not-configuration>
