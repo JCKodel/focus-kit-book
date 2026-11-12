@@ -24,6 +24,11 @@ It talks one subject at a time, in this order, and moves on when it could write 
 
 Each slot it writes in docs/05 says what and the command, in a few lines, as docs/05 itself says ([chapter 7](07-the-documents.md)).
 
+One part of docs/05 is written only where it applies: the two paragraphs of §4 on parallel work, on two sessions in one folder and on a command typed with several slugs.
+The command writes them when the git strategy is a branch or a worktree per delivery ([chapter 18](18-git-essentials.md)), or when you say sessions will run at the same time; otherwise it leaves them out, and a later decision adds them.
+Every `/apply` reads §4, so a team that works one session at a time does not read, on each delivery, the rules for sessions it never runs.
+This book's docs/05 has them: its Git slot says two sessions may work in one folder on free lines.
+
 One question covers review: does a second pair of eyes read each delivery before it ends and the whole milestone at its close?
 The default is yes, and the one answer fills two slots.
 The Delivery review slot names who reads a delivery's changes before `/apply` ends, a context that did not write them ([chapter 13](13-apply.md)): the host's own review, a skill or a command the agent can run, when it can be kept to the delivery's paths, since another session may be working in the same folder; otherwise a read-only agent, one that reads files and edits none.

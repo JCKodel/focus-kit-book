@@ -24,6 +24,11 @@ Ele conversa sobre um assunto de cada vez, nesta ordem, e passa ao seguinte quan
 
 Cada slot que ele escreve no docs/05 diz o que e o comando, em poucas linhas, como diz o próprio docs/05 ([capítulo 7](07-the-documents.md)).
 
+Uma parte do docs/05 só é escrita onde se aplica: os dois parágrafos do §4 sobre trabalho em paralelo, sobre duas sessões numa pasta e sobre um comando digitado com vários slugs.
+O comando os escreve quando a estratégia de git é um branch ou um worktree por entrega ([capítulo 18](18-git-essentials.md)), ou quando você diz que sessões vão rodar ao mesmo tempo; senão ele os deixa de fora, e uma decisão posterior os acrescenta.
+Todo `/apply` lê o §4, então um time que trabalha com uma sessão por vez não lê, a cada entrega, as regras de sessões que ele nunca roda.
+O docs/05 deste livro os tem: o seu slot Git diz que duas sessões podem trabalhar numa pasta em linhas livres.
+
 Uma pergunta só cobre a revisão: um segundo par de olhos lê cada entrega antes de ela terminar e o marco inteiro quando ele fecha?
 O padrão é sim, e a resposta única preenche dois slots.
 O slot Delivery review cita quem lê as mudanças de uma entrega antes de o `/apply` terminar, um contexto que não as escreveu ([capítulo 13](13-apply.md)): a revisão do próprio host, uma skill ou um comando que o agente consegue rodar, quando ela pode ficar restrita aos caminhos da entrega, já que outra sessão pode estar trabalhando na mesma pasta; senão, um agente somente leitura, que lê arquivos e não edita nenhum.

@@ -56,7 +56,8 @@ O docs/04, o docs/05, o docs/06 e o `AGENTS.md` pertencem ao projeto: o time esc
 Quando uma versão nova do kit muda o que esses arquivos deveriam guardar, o arquivo de setup não o escreve.
 Ele compara os arquivos com os seus próprios modelos e relata cada migração, uma mudança de que os seus documentos ainda precisam: o caminho, a seção ou a linha, e o texto que ele propõe, na língua da documentação do projeto.
 Uma migração pode citar uma regra, uma linha da fila ou um slot.
-As suas escolhas ficam: um docs/05 cujo §5 diz "trunk, uma sessão por vez" vê proposto o texto para duas sessões numa pasta, e mantém o seu até o time aceitar a mudança.
+As suas escolhas ficam: um docs/05 cujo §5 diz "trunk, uma sessão por vez" continua assim, e a atualização não propõe para ele os parágrafos sobre trabalho em paralelo, que o kit só escreve onde sessões vão rodar ao mesmo tempo (capítulo 9).
+Uma migração que a atualização de fato propõe espera o time aceitá-la.
 
 Esta é uma parte do relatório que a atualização para o focus-kit 2026.11.12 deu numa cópia do repositório deste livro como ele estava antes dessa versão, encurtada e parafraseada, e traduzida aqui: os documentos do livro são em inglês, e o relatório propôs o texto em inglês.
 O registro dela é o `work/done/ch08-update-2026-10-25-run/update.md`, no repositório do livro.

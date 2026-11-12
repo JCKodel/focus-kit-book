@@ -56,7 +56,8 @@ docs/04, docs/05, docs/06 and `AGENTS.md` belong to the project: the team wrote 
 When a new kit version changes what those files should hold, the setup file does not write it.
 It compares the files with its own templates and reports each migration, a change your documents still need: the path, the section or the line, and the wording it proposes, in the project's documentation language.
 A migration may name a rule, a queue line or a slot.
-Your choices stay: a docs/05 whose §5 says "trunk, one session at a time" sees the wording for two sessions in one folder proposed, and keeps its own until the team accepts the change.
+Your choices stay: a docs/05 whose §5 says "trunk, one session at a time" keeps it, and the update proposes no paragraphs on parallel work for it, which the kit writes only where sessions will run at the same time (chapter 9).
+A migration the update does propose waits for the team to accept it.
 
 Here is part of the report the update to focus-kit 2026.11.12 gave on a copy of this book's repository as it was before that version, shortened and paraphrased from its record, `work/done/ch08-update-2026-10-25-run/update.md` in the book's repository:
 
