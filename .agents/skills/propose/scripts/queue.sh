@@ -7,6 +7,13 @@
 # its branch on origin, which is its own copy until the delivery is
 # integrated; a branch on origin is a claim; a [?] on any copy blocks. A
 # line goes under the last line it waits on; "+ after" names the others.
+# "after all" leaves out the milestone's dropped lines; a line that
+# names a dropped one waits for the person to re-decide.
+# "findings:" counts the milestone's lines that end "from <slug>", and a
+# warning names the open ones that stand ahead of an open planned line,
+# but not one an open line names in its "after" or "blocked: after".
+# A line only the local file has, as a fix written in a delivery's
+# worktree, is read from it.
 # A wrapped line is read whole. Edits nothing.
 set -eu
 
@@ -90,7 +97,7 @@ function parse(line, k,   rest, n, parts, i, p, deps, j, m) {
   rest = substr(line, 4); sub(/^[ \t]+/, "", rest)
   slug[k] = rest; sub(/[ \t].*/, "", slug[k])
   rest = substr(rest, length(slug[k]) + 1); sub(/^[ \t]+/, "", rest)
-  nafter[k] = 0; resume[k] = ""; blocked[k] = ""; dropped[k] = 0; all[k] = 0
+  nafter[k] = 0; resume[k] = ""; blocked[k] = ""; dropped[k] = 0; all[k] = 0; found[k] = 0
   n = split(rest, parts, " \302\267 ")
   for (i = 2; i <= n; i++) {
     p = parts[i]
@@ -102,6 +109,7 @@ function parse(line, k,   rest, n, parts, i, p, deps, j, m) {
     } else if (p ~ /^resume: /) { sub(/^resume: /, "", p); resume[k] = p }
     else if (p ~ /^blocked: /) { sub(/^blocked: /, "", p); blocked[k] = p }
     else if (p ~ /^dropped: /) dropped[k] = 1
+    else if (p ~ /^from [a-zA-Z0-9._-]+[ \t]*$/) found[k] = 1
   }
 }
 function add(s, line, ms, src,   k) {
@@ -117,7 +125,7 @@ function done(k) { return mark[k] == "x" && integrated[k] }
 function deps(k, i,   j, n) {
   n = 0
   for (j = 1; j <= nafter[k]; j++) dep[k, ++n] = after[k, j]
-  if (all[k]) for (j = 1; j < k; j++) if (mstone[j] == mstone[k]) dep[k, ++n] = slug[j]
+  if (all[k]) for (j = 1; j < k; j++) if (mstone[j] == mstone[k] && !dropped[j]) dep[k, ++n] = slug[j]
   ndep[k] = n
 }
 function few(list, n, what) { return ((n <= 3) ? list : list " and " (n - 3) " more") (what == "" ? "" : " " what) }
@@ -200,7 +208,8 @@ END {
     s = order[i]
     if ((s in own) && !(s in integ)) { line = own[s]; ms = ownms[s] }
     else if (s in base) { line = base[s]; ms = basems[s] }
-    else { line = own[s]; ms = ownms[s] }
+    else if (s in own) { line = own[s]; ms = ownms[s] }
+    else { line = local[s]; ms = localms[s] }
     if (ms == "" && (s in base)) ms = basems[s]
     add(s, line, ms, "")
   }
@@ -232,6 +241,27 @@ END {
     else root[k] = 1
   }
   print "milestone: " cur
+  nf = 0; nfo = 0; npo = 0; last = 0; above = 0; al = ""; asep = ""
+  for (i = 1; i <= n; i++) {
+    k = ord[i]
+    if (mstone[k] != cur || dropped[k]) continue
+    if (found[k]) { nf++; if (!done(k)) nfo++ }
+    else if (!done(k) && !all[k]) { npo++; last = i }
+    if (done(k)) continue
+    for (j = 1; j <= nafter[k]; j++) wanted[after[k, j]] = 1
+    if (blocked[k] ~ /^after /) {
+      w = blocked[k]; sub(/^after /, "", w)
+      nw = split(w, wl, /, */)
+      for (j = 1; j <= nw; j++) wanted[wl[j]] = 1
+    }
+  }
+  for (i = 1; i < last; i++) {
+    k = ord[i]
+    if (mstone[k] != cur || !found[k] || dropped[k] || done(k) || (slug[k] in wanted)) continue
+    above++; if (above <= 3) { al = al asep slug[k]; asep = ", " }
+  }
+  if (nf > 0) print "findings: " nfo " open of " nf " from a finding \302\267 " npo " planned open"
+  if (above > 0) print "\342\232\240\357\270\217 ahead of planned lines: " few(al, above, "")
   for (i = 1; i <= n; i++) { k = ord[i]; if (!done(k) && mstone[k] == cur) st[k] = state(k) }
   for (i = 1; i <= n; i++) { k = ord[i]; if (!done(k) && mstone[k] == cur && root[k] && !(k in seen)) show(k, 0) }
   for (i = 1; i <= n; i++) { k = ord[i]; if (!done(k) && mstone[k] == cur && !(k in seen)) show(k, 0) }

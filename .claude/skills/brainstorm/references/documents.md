@@ -55,7 +55,8 @@ its review (docs/05 §8):
 
 A line holds the mark, the slug, one sentence and its suffixes, on one
 line; what happened goes on the page. The marks, the suffixes
-(`· after`, `· after all`, `· resume:`, `· blocked:`, `· dropped:`), the
+(`· after`, `· after all`, `· resume:`, `· blocked:`, `· dropped:`,
+`· from`), the
 order as priority, the next milestone and what may run at the same time
 are docs/05 §4, written once there. What is not in the current milestone
 is not planned yet.
@@ -210,7 +211,8 @@ Before /propose changes the queue or the page, claim the line as §5's
 Git slot says: `claim.sh` creates the branch or worktree on origin, or
 reopens the one this clone already has; one another clone created opens
 only on the person's word, with `resume`. Bring into it any draft left
-for the slug. Add a missing queue line where it belongs and say so.
+for the slug. Add a missing queue line where it belongs and say so; a
+flaw found on the way is a finding, and §4 says whether it is a line.
 Start defining with `[~]`; start building only a completely defined `[>]`
 page, with `[*]`. Follow §4 for blocked lines and §6 before changing code
 or staging. Keep project slots and rules current before using them; report
@@ -249,7 +251,9 @@ After /apply the page also records what happened, under a heading
 read: what diverged, what was dropped, what the proof found, the
 decisions taken. It ends with the commit message /apply suggested, in a
 fenced block whose info string is `commit`. There is one final block: a
-resumed /apply replaces the earlier suggestion.
+resumed /apply replaces the earlier suggestion. Above that block a page
+may hold a heading `## For the review`: the notes §4 defines, one line
+each, written by the command that found them.
 
 A draft with open scope questions is not ready for /apply, even when its
 file exists: before `[>]`, every section above is filled or explicitly
@@ -268,9 +272,9 @@ conversation. A line is the mark, the slug, one sentence and its
 suffixes, on one line; what happened goes on the page, because /propose
 reads the whole queue. A line that needs another first ends with
 `· after <slug>`, written when the line is added, or `· after all`,
-every line above it in its milestone, which is how the review is
-written. `after` is read per command: /propose starts when every line
-it names is `[>]` or beyond, because the definition needs their pages;
+every line above it in its milestone but the dropped ones, which is how
+the review is written. `after` is read per command: /propose starts
+when every line it names is `[>]` or beyond, because the definition needs their pages;
 /apply starts when every line it names is integrated, because the build
 needs their code. Integrated is `[x]` on trunk; with a branch or a
 worktree per delivery it is the delivery merged into the main branch,
@@ -278,7 +282,32 @@ and a `[x]` on its branch is built, awaiting integration. A line that
 no clause of the current milestone's paragraph needs, whoever adds it,
 goes under the next milestone, created when missing with a paragraph
 that line answers and its review last; a finding of the milestone's own
-review stays in it (§8). Asked what may run now, run
+review stays in it (§8), and so does a grave finding, below.
+
+What /apply's review, proof or build discovers in what its delivery
+built or changed is fixed in that delivery, as /apply says, and is no
+finding here. A finding is a flaw a command discovers in anything else,
+/propose while it defines included. A flaw older than the delivery is
+one, even in a file the delivery edits. A finding is grave when it
+breaks a clause of the milestone's paragraph for a person on its usual
+path, loses or exposes data, or leaves verify red. So is a fix a
+delivery in flight cannot go on without. A grave finding becomes a `[ ]`
+line ending `· from <slug>`, the delivery that found it. The line goes
+above the open planned lines only when verify is red or one of them
+needs it. Otherwise it goes below them, above the review, or under the
+review once it ran. Every other finding is a note on the page of the
+delivery that found it, under `## For the review` (§3): the file and
+line, and what a person would see. A note is not a line and waits for
+the next milestone review to run (§8). A finding nobody can say is grave
+is a note. A flaw in what a delivery built, whose fix would widen its
+page or needs a decision no document answers, is a note too, with what
+the person may do. When that flaw is grave, or leaves a Done when item
+unticked, the line waits for the person's answer instead, the second
+case below. A line that delivers a test, a proof tool or a change to
+this process, and is not a grave finding, enters only on the person's
+word; without it, it is a note.
+
+Asked what may run now, run
 `git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq <strategy>`,
 the strategy as for the claim, and show its tree: each line under the
 last line it waits on, with its state, then the lines free for /apply
@@ -339,6 +368,7 @@ before editing. A delivery the person cancels, because it is impossible,
 refused or no longer wanted, ends `[x]` with `· dropped: <reason>` at the
 end of the line, its page in `work/done/` saying what was built and
 undone; a line whose `after` names it is the person's to re-decide.
+`after all` names none and leaves it out.
 
 <Written when §5's Git slot is a branch or a worktree per delivery, or
 when the person says sessions will run at the same time: the two
@@ -382,8 +412,12 @@ The project may add slots of its own; a slot that names /propose or
 * **Documentation language:** <language>. Identifiers in <language>.
 * **Verify:** `<command>`, which runs <what>, fast enough to run on every
   delivery. Green before anything is declared done. <Or: created by the
-  first delivery.> Slow tests: `<command>`, which runs <what>, run by the
-  milestone review (§8); <or: none>.
+  first delivery.> Its ceiling: <minutes, five unless the person says>.
+  /apply says how long verify took. Over the ceiling, that is a note for
+  the review (§4). The review says which tests go to the slow ones. Slow
+  tests, one line each: `<command>` and what it covers; <or: none>. The
+  milestone review runs them all (§8). /apply runs the ones that cover
+  what its delivery changed, and only those, before the delivery ends.
 * **Environments:** one line each: name, what runs there, what a delivery
   must leave up to date there, and the command that does it, or its
   manual when a person does it by hand.
@@ -487,9 +521,9 @@ answer names an error that happened.
 
 A milestone is planned with its review as its last line,
 `<milestone>-review · after all`, a delivery like the others: /propose
-writes its page when every line above is defined, /apply runs it when
-every line above is integrated. It takes the milestone's paragraph clause by clause
-and writes, for each, which delivery answers it and how a person tests it.
+writes its page when every line above but the dropped ones is defined,
+/apply runs it when every one of those is integrated. It takes the
+milestone's paragraph clause by clause and writes, for each, which delivery answers it and how a person tests it.
 It fixes nothing. It runs §5's slow tests, when the slot names them; a
 failing one is a finding. The person tests each clause by hand: a clause
 no delivery answers, or one that fails in the person's hands, is a finding.
@@ -521,8 +555,20 @@ some of the range's, the page says which and the line waits as `[?]` with
 `· resume: apply` and `· blocked: <what was read>` (§4). A candidate the
 person confirms is a finding like the others.
 
-Each finding becomes a `[ ]` line in the same milestone, under the review
-line, waiting for /propose; the milestone closes when they are `[x]`. They
+The review opens by copying onto its page the notes left since the
+previous review, from the `## For the review` heading of every page the
+range delivered (§4). The checker marks each as it marks a candidate.
+The review grades every confirmed finding. A grave one, as §4 defines
+it, becomes a `[ ]` line, one each. The others stay listed on the
+review's page. First come the medium ones, which a person meets in
+ordinary use while the clause still holds. Then come the small ones: a
+rare case, a latent or weak candidate, a cost nobody measured. The
+person says which medium ones enter the milestone's one line,
+`<milestone>-fixes`, each an item of its page. That page is their list
+and is not split, whatever its length. A small one becomes a line only
+when the person picks it. These lines end `· from <milestone>-review`,
+sit under the review line and wait for /propose; the milestone closes
+when they are `[x]`. They
 get no second review: each passes through its own page, its proof and the
 person's commit, which is the review; a finding is never a fix in the
 middle of the next milestone.
