@@ -109,7 +109,7 @@ A verificação diz que o código faz o que os testes dele dizem.
 Ela não diz nada sobre se a página foi atendida, se os documentos ainda valem, ou se alguém vai conseguir saber depois o que aconteceu.
 Então, antes de parar, o `/apply` faz tudo isto:
 
-* Escreve na página o que aconteceu: o que divergiu do plano e por quê, o que foi deixado de lado, o que a prova achou, o que a revisão da entrega achou e o que foi feito de cada candidato, e as decisões tomadas, com um ADR se foi preciso um.
+* Escreve na página o que aconteceu, sob um título `## Outcome` abaixo de Pronto quando, para que a definição acima fique como foi lida: o que divergiu do plano e por quê, o que foi deixado de lado, o que a prova achou, o que a revisão da entrega achou e o que foi feito de cada candidato, e as decisões tomadas, com um ADR se foi preciso um.
 * Antes da revisão, atualiza os documentos que a entrega mudou: um termo novo no docs/03, uma regra nova no documento que é dono dela, uma decisão em docs/adr/.
 * Antes da revisão também, quando a entrega acrescenta ou muda algo que uma pessoa faz à mão, como publicar o app, escreve ou atualiza o manual dele em `docs/manuals/` ([capítulo 7](07-the-documents.md)). Quando a entrega é a primeira depois da qual uma pessoa consegue rodar o produto, escreve o manual de rodá-lo, de um clone novo até a primeira tela ou chamada, e toda entrega posterior que muda um passo o atualiza.
 * A verificação está verde depois da última edição que ela cobre; uma edição depois dessa execução verde, qualquer que seja o motivo, a faz rodar de novo.

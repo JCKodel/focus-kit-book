@@ -22,7 +22,7 @@ A new concept enters here first, in both languages.
 | rules file | arquivo de regras | `AGENTS.md` | What every agent reads when a session starts. |
 | ADR | ADR (registro de decisão de arquitetura) | `docs/adr/ADR-NNNN-<slug>.md` | One dated decision; amended, never rewritten. |
 | delivery | entrega | `<slug>` | The smallest unit of work with value; it fits on one page. |
-| page | página | `work/<slug>.md` | The document of one delivery, from Objective to Done when. |
+| page | página | `work/<slug>.md` | The document of one delivery, from Objective to Done when; after /apply, what happened under `## Outcome` below it. |
 | draft page | rascunho da página | `work/<slug>.md` | A page written for a `[ ]` line, holding what the request said that the line cannot; `/propose` starts from it, in the session that asked for the change, whose conversation the draft already holds, or in a fresh one. |
 | unit of work | unidade de trabalho | none | A delivery's page and build as one change that reverts in one step: one commit on trunk, or, on a branch or worktree, any number of commits that reach the main branch in one merge. The step undoes what git holds; a delivery that acts outside git (a migration run, a message sent) says in its Done when how that is undone, or that it is not. |
 | queue | fila | `docs/06` | Milestones and delivery lines, in order. |
@@ -44,6 +44,7 @@ A new concept enters here first, in both languages.
 | verify | verificação | `make verify` | The command that must be green before anything is declared done, under the ceiling the Verify slot names, five minutes here (docs/05 §5). |
 | proof | prova | `work/done/<slug>-<step>.png` | Evidence that the result works, failures included. |
 | slot | slot | `docs/05 §5` | A project-specific fact the commands read: what and the command, in a few lines; steps go in a manual. A project may add one of its own, which /propose or /apply follows when it names that command, with no edit to the skill. |
+| design delivery | entrega de design | `docs/ui/` | One of the three forms the Design slot of docs/05 §5 gives a screen's reference, beside the person's design tool and a prototype by choice: a queue line before the screen's line whose deliverable is a static HTML or SVG mock the person opens and approves, kept in `docs/ui/` unless the slot says otherwise; a page with a screen and no reference is not `[>]` unless the slot says prototype (chapter 9). |
 | open decision | decisão em aberto | `OD-<n>` | A decision listed in docs/00 that nobody closes alone, so an agent never settles it by assumption. |
 | governor | regulador | none | The question every addition to the process must answer, and every step already in it again: which concrete error would it have caught? The answer names an error that happened; a step with none leaves. |
 | challenge protocol | protocolo de desafio | none | The fixed turns a person sends after an agent's first answer, so the agent asks what it needed, tests what it called impossible, fits the result to its reader and its cost, and adds what nobody asked for; measured by `ask-for-more-experiment`, taught by chapter 24. |

@@ -109,7 +109,7 @@ Verify tells you the code does what its tests say.
 It says nothing about whether the page was answered, whether the documents still hold, or whether anyone can tell later what happened.
 So before it stops, `/apply` does all of this:
 
-* It writes into the page what happened: what diverged from the plan and why, what was dropped, what the proof found, what the delivery review found and what became of each candidate, and the decisions taken, with an ADR if one was needed.
+* It writes into the page what happened, under a heading `## Outcome` below Done when, so the definition above stays as it was read: what diverged from the plan and why, what was dropped, what the proof found, what the delivery review found and what became of each candidate, and the decisions taken, with an ADR if one was needed.
 * Before the review, it updates the documents the delivery changed: a new term into docs/03, a new rule into the document that owns it, a decision into docs/adr/.
 * Before the review too, when the delivery adds or changes something a person does by hand, such as publishing the app, it writes or updates its manual in `docs/manuals/` ([chapter 7](07-the-documents.md)). When the delivery is the first after which a person can run the product, it writes the manual of running it, from a fresh clone to the first screen or call, and every later delivery that changes a step updates it.
 * Verify is green after the last edit it covers; an edit after that green run, whatever its reason, runs it again.

@@ -46,9 +46,11 @@ The format is fixed in the project's docs/05 §3 and is the same in every projec
 * **Behaviour.** Verifiable scenarios in user language, each an action with a concrete input and the result the user sees, the cases that must fail and the edges included; each line becomes a test or a manual check. `/propose` drafts them from the documents, and you correct them instead of writing them.
 * **Contract.** Data, schema, API, message shapes, or "none".
 * **States.** Empty, loading, error, offline, one line each, or "the defaults"; only when there is a screen.
-* **Visual reference.** Where the design is, and the viewports; only when there is a screen.
+* **Visual reference.** Where the design is, and the viewports; only when there is a screen. A screen whose design does not exist yet gets one as the project's Design slot says, before the page is `[>]` ([chapter 9](09-starting-a-project.md)).
 * **Out of scope.** What does not enter, with half a line of reason each.
 * **Done when.** A mechanical checklist: tests pass, verify green, screenshot matches.
+
+After the build, `/apply` writes what happened under a heading `## Outcome`, below Done when, so the definition above it stays as it was read.
 
 This is a page for the lending library of Part I, written for this chapter:
 

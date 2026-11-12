@@ -46,9 +46,11 @@ O formato é fixado no §3 do docs/05 do projeto e é o mesmo em todo projeto:
 * **Comportamento.** Cenários verificáveis na linguagem do usuário, cada um uma ação com uma entrada concreta e o resultado que o usuário vê, incluídos os casos que precisam falhar e os casos de borda; cada linha vira um teste ou uma checagem manual. O `/propose` os rascunha a partir dos documentos, e você os corrige em vez de escrevê-los.
 * **Contrato.** Dados, schema, API, formatos de mensagem, ou "nenhum".
 * **Estados.** Vazio, carregando, erro, offline, uma linha cada, ou "os padrões"; só quando há uma tela.
-* **Referência visual.** Onde está o design, e os tamanhos de tela; só quando há uma tela.
+* **Referência visual.** Onde está o design, e os tamanhos de tela; só quando há uma tela. Uma tela cujo design ainda não existe ganha um como diz o slot Design do projeto, antes de a página estar `[>]` ([capítulo 9](09-starting-a-project.md)).
 * **Fora do escopo.** O que não entra, com meia linha de motivo cada.
 * **Pronto quando.** Uma lista mecânica: os testes passam, a verificação está verde, o screenshot confere.
+
+Depois da construção, o `/apply` escreve o que aconteceu sob um título `## Outcome` (resultado), abaixo de Pronto quando, para que a definição acima dele fique como foi lida.
 
 Esta é uma página para a biblioteca de empréstimos da Parte I, escrita para este capítulo:
 

@@ -1,7 +1,7 @@
 # 9. Começando: `/brainstorm` e `/analyze`
 
 Depois deste capítulo você consegue começar um projeto novo com o `/brainstorm`, ou documentar um projeto existente com o `/analyze`, conversando, e revisar os documentos que cada comando escreve antes de fazer o commit deles (registrá-los no histórico do projeto).
-Você também consegue escolher uma stack pelo que o projeto precisa e por quanto o agente a conhece, e guardar o que o código não diz onde o agente lê.
+Você também consegue escolher uma stack pelo que o projeto precisa e por quanto o agente a conhece, guardar o que o código não diz onde o agente lê, e dizer de onde vem o design de cada tela antes que alguém a construa.
 
 ## O problema
 
@@ -19,8 +19,8 @@ Ele conversa sobre um assunto de cada vez, nesta ordem, e passa ao seguinte quan
 2. **O vocabulário** (docs/03): as dez a vinte palavras sem as quais o produto não pode ser descrito, cada uma com seu nome no código.
 3. **Como ele é construído** (docs/01): a stack e a forma do código, com as duas escolhas do kit, o FOCUS e a estratégia de git, cada uma com a recomendação do agente para essa stack.
 4. **As convenções** (docs/04): a língua da documentação e a língua dos identificadores, o estilo, onde ficam os testes.
-5. **Os slots do processo** (docs/05): o comando de verificação e os testes lentos que ficam fora dele, os ambientes, como uma tela é provada, quando um ambiente além da sua máquina é atualizado, se a pasta `context/` entra no commit, os manuais (o de rodar o produto, devido pela primeira entrega depois da qual uma pessoa consegue rodá-lo; os outros nenhum ainda, em um projeto novo), e se um segundo par de olhos lê cada entrega antes de ela terminar e o marco inteiro quando ele fecha.
-6. **O primeiro marco** (docs/06): de três a oito entregas, uma linha cada, em ordem, cada uma com o seu token de paralelismo, duas letras que dizem se ela pode rodar ao lado das linhas acima dela, quando linhas vão rodar ao mesmo tempo ([capítulo 14](14-queue-states.md)), e depois a revisão dele; as primeiras são o esqueleto em que as outras se apoiam.
+5. **Os slots do processo** (docs/05): o comando de verificação e os testes lentos que ficam fora dele, os ambientes, como uma tela é provada e de onde vem o design dela, quando um ambiente além da sua máquina é atualizado, se a pasta `context/` entra no commit, os manuais (o de rodar o produto, devido pela primeira entrega depois da qual uma pessoa consegue rodá-lo; os outros nenhum ainda, em um projeto novo), e se um segundo par de olhos lê cada entrega antes de ela terminar e o marco inteiro quando ele fecha.
+6. **O primeiro marco** (docs/06): de três a oito entregas, uma linha cada, em ordem, com `· after` na linha que precisa de outra antes, e depois a revisão dele, escrita `· after all`; as primeiras são o esqueleto em que as outras se apoiam.
 
 Cada slot que ele escreve no docs/05 diz o que e o comando, em poucas linhas, como diz o próprio docs/05 ([capítulo 7](07-the-documents.md)).
 
@@ -29,6 +29,22 @@ O padrão é sim, e a resposta única preenche dois slots.
 O slot Delivery review cita quem lê as mudanças de uma entrega antes de o `/apply` terminar, um contexto que não as escreveu ([capítulo 13](13-apply.md)): a revisão do próprio host, uma skill ou um comando que o agente consegue rodar, quando ela pode ficar restrita aos caminhos da entrega, já que outra sessão pode estar trabalhando na mesma pasta; senão, um agente somente leitura, que lê arquivos e não edita nenhum.
 O slot Milestone review cita quem lê o código ao fechar um marco ([capítulo 15](15-closing-a-milestone.md)): os leitores do kit sobre os módulos do docs/01, um leitor cada, porque as mudanças de um módulo se leem juntas, no modelo da sessão, o que você já usa.
 Você também pode dizer não: se alguém lê o seu trabalho é decisão sua.
+
+### De onde vem o design de uma tela
+
+O mesmo assunto pergunta de onde vem o design de uma tela, porque uma tela construída sem nada para seguir é o palpite do agente, e a prova dela só consegue comparar o palpite com ele mesmo.
+A resposta é o slot Design do docs/05, em uma de três formas:
+
+* **A sua ferramenta de design.** Você desenha as telas onde já desenha, e o slot cita a ferramenta e a exportação dela.
+* **Uma entrega de design.** Uma linha da fila antes da linha da tela, cujo resultado é um mock estático da tela em HTML ou SVG que você abre no navegador e aprova.
+* **Um protótipo, por escolha.** Nenhuma referência, e o slot diz isso.
+
+O padrão é uma entrega de design para um produto e um protótipo para uma ferramenta; um projeto sem telas diz isso no lugar, e a referência fica em `docs/ui/`, a menos que o slot cite outro lugar.
+O slot deste livro diz protótipo: o site dele veste o visual do tema, e um capítulo não tem tela.
+A menos que o slot diga protótipo, a página de uma entrega com uma tela e sem design para seguir não está completa, então o `/propose` não marca a linha dela `[>]`, pronta para construir; a Referência visual da página cita o design e as larguras de tela ([capítulo 12](12-propose.md)), e o `/apply` compara com ela o que construiu, corrigindo cada diferença ou escrevendo na página por que ela fica.
+
+No Ninjobs o processo diz desde o primeiro dia que uma tela sem design é desenhada primeiro, antes de ser construída.
+Uma entrega de lá mostra a regra em ação: ela pegou layouts de celular esticados por uma janela de desktop.
 
 ### Um padrão em cada pergunta
 
@@ -62,7 +78,7 @@ Ele não escreve manual, e a `docs/manuals/` é criada com o primeiro.
 O slot Manuals (manuais) nomeia o manual de rodar o produto como devido pela primeira entrega depois da qual uma pessoa consegue rodá-lo, de instalar o que ele precisa até a primeira tela ou chamada; os outros vêm com a entrega que acrescenta algo que uma pessoa faz à mão ou uma prova que o `/apply` roda em outra máquina.
 O primeiro marco, no docs/06, é um parágrafo que uma pessoa consegue conferir quando o marco fecha e as linhas dele, o esqueleto primeiro; o [capítulo 11](11-queue-and-milestones.md) mostra o da biblioteca de empréstimos e ensina a fila.
 Depois ele mostra a fila e para.
-Ele não escreve código, nem configuração, nem arquivo de dependências: a primeira entrega faz isso, com uma página própria, pelo `/propose` em uma sessão nova ([capítulo 12](12-propose.md)).
+Ele não escreve código, nem configuração, nem arquivo de dependências: a primeira entrega faz isso, com uma página própria, pelo `/propose` em uma sessão nova.
 
 ## `/analyze`: um projeto existente
 
@@ -78,14 +94,15 @@ O que o projeto não tem, ele pula.
 
 ### O que ele pergunta
 
-Uma rodada, de seis assuntos apenas:
+Uma rodada, de sete assuntos apenas:
 
 1. A língua da documentação. Padrão: a língua do README.
 2. O propósito e o público do produto nas suas palavras, só quando nenhum README os diz.
 3. O FOCUS e a estratégia de git. O padrão de cada um é o que o código já faz, e o agente diz o que é, então "your call" o mantém.
 4. Se a pasta `context/` entra no commit. Padrão: entra quando o repositório fica com o time, e vai para o `.gitignore` quando ele é entregue ou público.
 5. As revisões: se um segundo par de olhos lê cada entrega antes de ela terminar e o marco inteiro quando ele fecha. Padrão: sim; a revisão do próprio host quando ela pode ficar restrita aos caminhos de uma entrega, senão um agente somente leitura; e os leitores do kit sobre os módulos do docs/01 no modelo da sessão, ou a revisão profunda do host sobre o intervalo quando o projeto já roda uma ([capítulo 15](15-closing-a-milestone.md)).
-6. O primeiro marco: de três a oito entregas, ou de onde lê-las (issues, um arquivo TODO, um roadmap), e depois a revisão dele.
+6. De onde vem o design de uma tela, quando há telas: os arquivos de design que o repositório ou a pasta `context/` guarda, uma entrega de design antes da próxima tela, ou um protótipo por escolha. Padrão: o que existe, citado.
+7. O primeiro marco: de três a oito entregas, ou de onde lê-las (issues, um arquivo TODO, um roadmap), `· after` onde uma precisa de outra antes, e depois a revisão dele, `· after all`.
 
 Um arquivo de regras que já existe não fica ao lado do `AGENTS.md`: as regras dele passam para o `AGENTS.md`, e o arquivo guarda só a linha que o importa e o que vale apenas para o host dele (o programa que roda o agente).
 Ele escreve os mesmos documentos que o `/brainstorm`, e mais, em `docs/manuals/`, primeiro o manual de rodar o produto a partir de um clone novo, depois um para cada coisa que uma pessoa já faz à mão ali, como um alvo do Makefile, um script de deploy ou os passos de instalação de um README, como diz o arquivo do kit para o comando.
@@ -132,10 +149,11 @@ Só uma conferência contra o que você respondeu, ou contra o código, encontra
 
 Uma pessoa que não sabe responder a uma pergunta ainda recebe um bom documento, porque toda pergunta traz um padrão; e ninguém é perguntado sobre o que o código já diz, porque o `/analyze` o lê primeiro.
 O time começa a primeira entrega com o produto, o vocabulário, as decisões e a fila escritos, e toda contradição que o código tem registrada como pergunta em vez de resolvida por um palpite.
+E nenhuma tela é construída do nada: o design dela existe antes de a página estar completa, a menos que o time tenha escolhido prototipar.
 
 ## Pontos-chave
 
-* O `/brainstorm` conversa sobre seis assuntos em ordem (produto, vocabulário, como é construído, convenções, slots do processo, primeiro marco) e escreve os documentos, os ADRs, o `AGENTS.md` e o `CLAUDE.md`, nunca código; a primeira entrega escreve o código.
+* O `/brainstorm` conversa sobre seis assuntos em ordem (produto, vocabulário, como é construído, convenções, slots do processo, primeiro marco) e escreve os documentos, os ADRs, o `AGENTS.md` e o `CLAUDE.md`, nunca código; a primeira entrega escreve o código, e, como diz o slot Design, o design de uma tela vem da sua ferramenta ou de uma entrega de design antes de a página dela estar `[>]`, a menos que o slot diga protótipo.
 * Toda pergunta vem com um padrão, então "your call" é uma resposta válida, e você confere cada padrão que o agente manteve.
 * Escolha uma stack pelo que o projeto precisa, depois por quanto código público o agente aprendeu, depois por os tipos e testes deixarem ou não o agente conferir o próprio trabalho.
 * O `/analyze` lê o repositório primeiro, pergunta em uma rodada e escreve primeiro o manual de rodar o produto, depois um para cada coisa que uma pessoa já faz à mão; o padrão de cada escolha é o que o código faz, uma contradição vira uma questão em aberto, e um código legado pode passar para o FOCUS como strangler fig.

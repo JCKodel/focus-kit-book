@@ -1,7 +1,7 @@
 # 9. Starting: `/brainstorm` and `/analyze`
 
 After this chapter you can start a new project with `/brainstorm`, or document an existing one with `/analyze`, by conversation, and review the documents either command writes before you commit them.
-You can also choose a stack by what the project needs and by how well the agent knows it, and keep what the code cannot say where the agent reads it.
+You can also choose a stack by what the project needs and by how well the agent knows it, keep what the code cannot say where the agent reads it, and say where each screen's design comes from before anyone builds it.
 
 ## The problem
 
@@ -19,8 +19,8 @@ It talks one subject at a time, in this order, and moves on when it could write 
 2. **The vocabulary** (docs/03): the ten to twenty words the product cannot be described without, each with its name in code.
 3. **How it is built** (docs/01): the stack and the shape of the code, with the kit's two choices, FOCUS and the git strategy, each with the agent's recommendation for this stack.
 4. **The conventions** (docs/04): the documentation language and the identifier language, the style, where tests live.
-5. **The process slots** (docs/05): the verify command and the slow tests kept out of it, the environments, how a screen is proven, when an environment beyond your machine is updated, whether `context/` is committed, the manuals (the one of running the product, owed by the first delivery after which a person can run it; the rest none yet, on a new project), and whether a second pair of eyes reads each delivery before it ends and the whole milestone at its close.
-6. **The first milestone** (docs/06): three to eight deliveries, one line each, in order, each with its parallel token, two letters saying whether it may run beside the lines above it, when lines will run at the same time ([chapter 14](14-queue-states.md)), then its review; the first ones are the skeleton the others stand on.
+5. **The process slots** (docs/05): the verify command and the slow tests kept out of it, the environments, how a screen is proven and where its design comes from, when an environment beyond your machine is updated, whether `context/` is committed, the manuals (the one of running the product, owed by the first delivery after which a person can run it; the rest none yet, on a new project), and whether a second pair of eyes reads each delivery before it ends and the whole milestone at its close.
+6. **The first milestone** (docs/06): three to eight deliveries, one line each, in order, with `· after` on a line that needs another first, then its review, written `· after all`; the first ones are the skeleton the others stand on.
 
 Each slot it writes in docs/05 says what and the command, in a few lines, as docs/05 itself says ([chapter 7](07-the-documents.md)).
 
@@ -29,6 +29,22 @@ The default is yes, and the one answer fills two slots.
 The Delivery review slot names who reads a delivery's changes before `/apply` ends, a context that did not write them ([chapter 13](13-apply.md)): the host's own review, a skill or a command the agent can run, when it can be kept to the delivery's paths, since another session may be working in the same folder; otherwise a read-only agent, one that reads files and edits none.
 The Milestone review slot names who reads the code at a milestone's close ([chapter 15](15-closing-a-milestone.md)): the kit's readers over docs/01's modules, one reader each, because a module's changes are read together, on the session's model, the one you already work with.
 You can also say no: whether anyone reads your work is yours to decide.
+
+### Where a screen's design comes from
+
+The same subject asks where a screen's design comes from, because a screen built with nothing to follow is the agent's guess, and its proof can only compare the guess with itself.
+The answer is the Design slot of docs/05, in one of three forms:
+
+* **Your design tool.** You draw the screens where you already do, and the slot names the tool and its export.
+* **A design delivery.** A queue line before the screen's line, whose deliverable is a static HTML or SVG mock of the screen that you open in a browser and approve.
+* **A prototype, by choice.** No reference at all, and the slot says so.
+
+The default is a design delivery for a product and a prototype for a tool; a project with no screens says that instead, and the reference is kept in `docs/ui/` unless the slot names another place.
+This book's own slot says prototype: its site wears its theme's look, and a chapter has no screen.
+Unless the slot says prototype, a delivery's page with a screen and no design to follow is not complete, so `/propose` does not mark its line `[>]`, ready to build; the page's Visual reference names the design and the screen widths ([chapter 12](12-propose.md)), and `/apply` compares what it built with it, correcting each difference or writing on the page why it stays.
+
+On Ninjobs the process has said from its first day that a screen with no design is designed first, before it is built.
+A delivery there shows the rule at work: it caught phone layouts stretched across a desktop window.
 
 ### A default with every question
 
@@ -62,7 +78,7 @@ It writes no manual, and `docs/manuals/` is created with the first one.
 The Manuals slot names the manual of running the product as owed by the first delivery after which a person can run it, from installing what it needs to the first screen or call; the others come with the delivery that adds something a person does by hand or a proof `/apply` runs on another machine.
 Its first milestone, in docs/06, is a paragraph a person can check when the milestone closes and its lines, the skeleton first; [chapter 11](11-queue-and-milestones.md) shows the lending library's and teaches the queue.
 Then it shows the queue and stops.
-It writes no code, no configuration and no dependency file: the first delivery does that, with a page of its own, through `/propose` in a fresh session ([chapter 12](12-propose.md)).
+It writes no code, no configuration and no dependency file: the first delivery does that, with a page of its own, through `/propose` in a fresh session.
 
 ## `/analyze`: an existing project
 
@@ -78,14 +94,15 @@ What the project does not have, it skips.
 
 ### What it asks
 
-One round, of six subjects only:
+One round, of seven subjects only:
 
 1. The documentation language. Default: the language of the README.
 2. The product's purpose and audience in your words, only when no README says it.
 3. FOCUS and the git strategy. The default of each is what the code already does, and the agent says what that is, so "your call" keeps it.
 4. Whether `context/` is committed. Default: committed when the repository stays with the team, in `.gitignore` when it is delivered or public.
 5. The reviews: whether a second pair of eyes reads each delivery before it ends and the whole milestone at its close. Default: yes; the host's own review when it can be kept to a delivery's paths, otherwise a read-only agent; and the kit's readers over docs/01's modules on the session's model, or the host's deep review over the range when the project already launches one ([chapter 15](15-closing-a-milestone.md)).
-6. The first milestone: three to eight deliveries, or where to read them from (issues, a TODO file, a roadmap), then its review.
+6. Where a screen's design comes from, when there are screens: the design files the repository or `context/` holds, a design delivery before the next screen, or a prototype by choice. Default: what exists, named.
+7. The first milestone: three to eight deliveries, or where to read them from (issues, a TODO file, a roadmap), `· after` where one needs another first, then its review, `· after all`.
 
 A rules file already there does not stay beside `AGENTS.md`: its rules move into `AGENTS.md`, and the file keeps only the line that imports it and what applies to its host alone.
 It writes the same documents as `/brainstorm`, plus, in `docs/manuals/`, the manual of running the product from a fresh clone first, then one for each thing a person already does by hand there, such as a Makefile target, a deploy script or setup steps in a README, as the kit's file for the command says.
@@ -132,10 +149,11 @@ Only a check against what you answered, or against the code, finds either.
 
 A person who cannot answer a question still gets a good document, because every question carries a default; and nobody is asked what the code already says, because `/analyze` reads it first.
 The team starts its first delivery with the product, the vocabulary, the decisions and the queue written down, and every contradiction the code holds recorded as a question instead of settled by a guess.
+And no screen is built from nothing: its design exists before its page is complete, unless the team chose to prototype.
 
 ## Key points
 
-* `/brainstorm` talks through six subjects in order (product, vocabulary, how it is built, conventions, process slots, first milestone) and writes the documents, the ADRs, `AGENTS.md` and `CLAUDE.md`, never code; the first delivery writes the code.
+* `/brainstorm` talks through six subjects in order (product, vocabulary, how it is built, conventions, process slots, first milestone) and writes the documents, the ADRs, `AGENTS.md` and `CLAUDE.md`, never code; the first delivery writes the code, and, as the Design slot says, a screen's design comes from your tool or a design delivery before its page is `[>]`, unless the slot says prototype.
 * Every question comes with a default, so "your call" is a valid answer, and you check each default the agent kept.
 * Choose a stack by what the project needs, then by how much public code the agent learned from, then by whether types and tests let it check its own work.
 * `/analyze` reads the repository first, asks one round and writes the manual of running the product first, then one for each thing a person already does by hand; the default of each choice is what the code does, a contradiction becomes an open question, and legacy code can move to FOCUS as a strangler fig.
