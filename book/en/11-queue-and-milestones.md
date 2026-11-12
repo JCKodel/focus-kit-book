@@ -1,7 +1,7 @@
 # 11. The queue and milestones
 
 After this chapter you can read a queue and write a milestone paragraph a person can check.
-You can also write a line as one sentence with its suffixes, order a milestone so that its order is its priority, write on a line which line must be done before it, `· after <slug>`, add a line in the milestone whose paragraph needs it or under the next one, move or change a line by conversation, and turn a code change asked outside `/apply` into a line and a draft for its page.
+You can also write a line as one sentence with its suffixes, order a milestone so that its order is its priority, write on a line which line it needs first, `· after <slug>`, add a line in the milestone whose paragraph needs it or under the next one, move or change a line by conversation, and turn a code change asked outside `/apply` into a line and a draft for its page.
 And you can say what the smallest delivery costs, from its line to its commit.
 
 ## The problem
@@ -13,10 +13,10 @@ The queue is one file, docs/06, that says what comes next, what is in flight and
 ## The line
 
 docs/06 holds the project's milestones, each with a paragraph saying what is true when it closes, and under each one line per delivery, in order.
-A line is the mark, the slug, its token when it has one, two letters that say whether its `/propose` and its `/apply` may run while the lines above it are in flight ([chapter 14](14-queue-states.md)), one sentence of what the delivery gives, and its suffixes, such as `· after <slug>`, which names a line that must be done before it:
+A line is the mark, the slug, one sentence of what the delivery gives, and its suffixes, such as `· after <slug>`, which names a line it needs first:
 
 ```
-[ ] <slug> (PA)  <what it delivers, one sentence> · after <slug>
+[ ] <slug>  <what it delivers, one sentence> · after <slug>
 ```
 
 The slug is the delivery's name, in lowercase words joined by hyphens ([chapter 12](12-propose.md)).
@@ -51,7 +51,7 @@ an overdue book or a suspended membership is refused.
 [x] members       the librarian registers, suspends and reinstates members
 [>] lend-book     the librarian lends, and the rules may refuse
 [ ] return-book   records a return · after lend-book
-[ ] m1-review     the milestone checked against its paragraph
+[ ] m1-review     the milestone against its paragraph · after all
 ```
 ````
 
@@ -85,13 +85,14 @@ Asked which delivery matters most, you answer from the queue: the one higher in 
 There is no priority field and no label to keep in step with the order.
 
 When you add a line and already know it needs another done first, you write that with it, at the end: a return needs a loan, so `return-book` ends with `· after lend-book`.
-That is an order, not a wait: the line keeps its mark, `[ ]`, and is free to start once `lend-book` is `[x]`.
+That is an order, not a wait: the line keeps its mark, `[ ]`, and the order is read for each command.
+`/propose return-book` may start once `lend-book` is `[>]` or beyond, as it is now, since the definition needs `lend-book`'s page; `/apply return-book` waits until `lend-book` is integrated, `[x]` on trunk, since the build needs its code.
 The kit's queue script draws that order: while `lend-book` is not `[x]`, it shows `return-book` under `lend-book`, each line under the last line it waits on (chapter 14 reads the tree).
 `lend-book` carries no `after`: the lines it needs, `catalog` and `members`, are already `[x]`.
 
 ### The review, and its findings
 
-A milestone is planned with its review as its last line, `<milestone>-review`, a delivery like the others, which takes the paragraph clause by clause ([chapter 15](15-closing-a-milestone.md)).
+A milestone is planned with its review as its last line, `<milestone>-review · after all`, a delivery like the others, which waits for the lines above it and takes the paragraph clause by clause ([chapter 15](15-closing-a-milestone.md)).
 It fixes nothing: a person tests each clause by hand and, on the person's word, the code changed since the milestone's base is read by whoever the Milestone review slot of the project's docs/05 names, when it names anyone, the host's deep review or one read-only agent per area, and either way a checker marks each candidate before the person sees it.
 Each finding becomes a `[ ]` line in the same milestone, under the review line, even when the next milestone already holds lines, and those lines get no second review.
 
@@ -114,7 +115,7 @@ day/month/year, on a narrow screen too.
 
 ```
 [ ] due-date-format   the screen shows the due date as day/month/year
-[ ] m2-review         the milestone checked against its paragraph
+[ ] m2-review         the milestone against its paragraph · after all
 ```
 ````
 
@@ -177,7 +178,7 @@ Documents still change by conversation, in any session; the rule covers the code
 
 A milestone's paragraph or a line's description changes by conversation too, and the slug stays, since a page or a commit may already use it.
 Moving a line up or down is changing its priority, and it happens the same way: you ask the agent to move it.
-A move keeps the line's `· after` and re-judges the tokens the change affects, its own and those of the lines it passed, whose lines above changed (chapter 14), and a line moved into the current milestone needs a clause of its paragraph, or a paragraph you widened first, so a move never changes what a milestone promises without a word.
+A move keeps the line's `· after`, and a line moved into the current milestone needs a clause of its paragraph, or a paragraph you widened first, so a move never changes what a milestone promises without a word.
 Lines also come from a milestone's review and, on an existing project, from its issues or roadmap.
 You read the change before you commit it, as with every document, and nobody edits the queue by hand.
 
@@ -189,7 +190,7 @@ On Case A, a client project on a low-code platform, Microsoft Power Apps with Co
 
 ## Key points
 
-* docs/06 holds milestones, each with a paragraph, and one line per delivery under it: a mark, a slug, its token when it has one, one sentence and its suffixes; what happened goes on the page.
+* docs/06 holds milestones, each with a paragraph, and one line per delivery under it: a mark, a slug, one sentence and its suffixes; what happened goes on the page.
 * A line's mark says where its delivery stands, from `[ ]`, not defined, to `[x]`, done; a line never leaves, so the queue is also the history.
 * A milestone paragraph is a test a person can check against the product, never a theme, over the deliveries that make it true, three to eight in the first milestone: the skeleton first, each line after the lines it needs, and last the review, whose findings become lines under it in the same milestone; lines are added while it runs, and whoever adds one puts it in the milestone whose paragraph has a clause that needs it, or under the next, created when missing with a paragraph the line answers and its review last.
 * The order is the priority: the higher line matters more, moving a line changes its priority, and a dependency known when a line is added is written with it, `· after <slug>`, an order, not a wait, so the line keeps `[ ]`.

@@ -1,7 +1,7 @@
 # 11. A fila e os marcos
 
 Depois deste capítulo você consegue ler uma fila e escrever um parágrafo de marco que uma pessoa consegue conferir.
-Você também consegue escrever uma linha como uma frase com os seus sufixos, ordenar um marco de modo que a ordem seja a prioridade, escrever em uma linha qual linha precisa estar feita antes dela, `· after <slug>`, acrescentar uma linha no marco cujo parágrafo precisa dela ou sob o seguinte, mover ou mudar uma linha conversando, e transformar uma mudança de código pedida fora do `/apply` em uma linha e no rascunho da página dela.
+Você também consegue escrever uma linha como uma frase com os seus sufixos, ordenar um marco de modo que a ordem seja a prioridade, escrever em uma linha de qual linha ela precisa antes, `· after <slug>`, acrescentar uma linha no marco cujo parágrafo precisa dela ou sob o seguinte, mover ou mudar uma linha conversando, e transformar uma mudança de código pedida fora do `/apply` em uma linha e no rascunho da página dela.
 E consegue dizer quanto custa a menor entrega, da linha dela até o commit.
 
 ## O problema
@@ -13,10 +13,10 @@ A fila é um arquivo, o docs/06, que diz o que vem a seguir, o que está em anda
 ## A linha
 
 O docs/06 guarda os marcos do projeto, cada um com um parágrafo que diz o que é verdade quando ele fecha, e sob cada um uma linha por entrega, em ordem.
-Uma linha é a marca, o slug, o seu token quando tem um, duas letras que dizem se o `/propose` e o `/apply` dela podem rodar enquanto as linhas acima dela estão em andamento ([capítulo 14](14-queue-states.md)), uma frase do que a entrega dá, e os seus sufixos, como `· after <slug>`, que nomeia uma linha que precisa estar feita antes dela:
+Uma linha é a marca, o slug, uma frase do que a entrega dá, e os seus sufixos, como `· after <slug>`, que nomeia uma linha de que ela precisa antes:
 
 ```
-[ ] <slug> (PA)  <o que ela entrega, uma frase> · after <slug>
+[ ] <slug>  <o que ela entrega, uma frase> · after <slug>
 ```
 
 O `· after`, como o `· blocked:` do [capítulo 14](14-queue-states.md), fica em inglês, como o kit o escreve.
@@ -54,7 +54,7 @@ suspensa é recusado.
 [x] membros          o bibliotecário cadastra, suspende e reativa membros
 [>] emprestar-livro  o bibliotecário empresta, e as regras podem recusar
 [ ] devolver-livro   registra a devolução · after emprestar-livro
-[ ] m1-review        o marco conferido contra o parágrafo dele
+[ ] m1-review        o marco contra o parágrafo dele · after all
 ```
 ````
 
@@ -88,13 +88,14 @@ Perguntado qual entrega importa mais, você responde pela fila: a que está mais
 Não há campo de prioridade nem etiqueta para manter em dia com a ordem.
 
 Quando você acrescenta uma linha e já sabe que ela precisa de outra feita antes, você escreve isso junto, no fim: uma devolução precisa de um empréstimo, então `devolver-livro` termina com `· after emprestar-livro`.
-Isso é uma ordem, não uma espera: a linha mantém a sua marca, `[ ]`, e fica livre para começar quando `emprestar-livro` estiver `[x]`.
+Isso é uma ordem, não uma espera: a linha mantém a sua marca, `[ ]`, e a ordem é lida para cada comando.
+`/propose devolver-livro` pode começar quando `emprestar-livro` estiver `[>]` ou além, como está agora, já que a definição precisa da página de `emprestar-livro`; `/apply devolver-livro` espera até `emprestar-livro` estar integrada, `[x]` no trunk, já que a construção precisa do código dela.
 O script de fila do kit desenha essa ordem: enquanto `emprestar-livro` não está `[x]`, ele mostra `devolver-livro` sob `emprestar-livro`, cada linha sob a última linha que ela espera (o capítulo 14 lê a árvore).
 `emprestar-livro` não leva `after`: as linhas de que ela precisa, `catalogo` e `membros`, já estão `[x]`.
 
 ### A revisão, e os seus achados
 
-Um marco é planejado com a sua revisão como a última linha, `<milestone>-review` (em inglês, como o kit a escreve: `m1-review` para o primeiro marco), uma entrega como as outras, que pega o parágrafo cláusula por cláusula ([capítulo 15](15-closing-a-milestone.md)).
+Um marco é planejado com a sua revisão como a última linha, `<milestone>-review · after all` (em inglês, como o kit a escreve: `m1-review` para o primeiro marco), uma entrega como as outras, que espera as linhas acima dela e pega o parágrafo cláusula por cláusula ([capítulo 15](15-closing-a-milestone.md)).
 Ela não corrige nada: uma pessoa testa cada cláusula à mão e, com a palavra da pessoa, o código alterado desde a base do marco é lido por quem o slot Milestone review do docs/05 do projeto cita, quando cita alguém, a revisão profunda do host ou um agente somente leitura por área, e nos dois casos um conferente marca cada candidato antes que a pessoa o veja.
 Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, mesmo quando o marco seguinte já tem linhas, e essas linhas não têm segunda revisão.
 
@@ -117,7 +118,7 @@ como dia/mês/ano, numa tela estreita também.
 
 ```
 [ ] formato-devolucao   a tela mostra a data de devolução em dia/mês/ano
-[ ] m2-review           o marco conferido contra o parágrafo dele
+[ ] m2-review           o marco contra o parágrafo dele · after all
 ```
 ````
 
@@ -182,7 +183,7 @@ Os documentos continuam mudando conversando, em qualquer sessão; a regra cobre 
 
 O parágrafo de um marco ou a descrição de uma linha também muda conversando, e o slug fica, já que uma página ou um commit pode já usá-lo.
 Mover uma linha para cima ou para baixo é mudar a prioridade dela, e acontece do mesmo jeito: você pede ao agente para movê-la.
-Uma mudança de lugar mantém o `· after` da linha e rejulga os tokens que a mudança afeta, o dela e os das linhas por onde ela passou, cujas linhas acima mudaram (capítulo 14), e uma linha levada para o marco atual precisa de uma cláusula do parágrafo dele, ou de um parágrafo que você ampliou antes, então mover nunca muda o que um marco promete sem uma palavra.
+Uma mudança de lugar mantém o `· after` da linha, e uma linha levada para o marco atual precisa de uma cláusula do parágrafo dele, ou de um parágrafo que você ampliou antes, então mover nunca muda o que um marco promete sem uma palavra.
 Linhas também vêm da revisão de um marco e, em um projeto existente, das issues ou do roadmap dele.
 Você lê a mudança antes do commit, como com todo documento, e ninguém edita a fila à mão.
 
@@ -194,7 +195,7 @@ No Caso A, um projeto para um cliente em uma plataforma low-code, o Microsoft Po
 
 ## Pontos-chave
 
-* O docs/06 guarda marcos, cada um com um parágrafo, e uma linha por entrega sob ele: uma marca, um slug, o seu token quando tem um, uma frase e os seus sufixos; o que aconteceu vai para a página.
+* O docs/06 guarda marcos, cada um com um parágrafo, e uma linha por entrega sob ele: uma marca, um slug, uma frase e os seus sufixos; o que aconteceu vai para a página.
 * A marca de uma linha diz onde a entrega dela está, de `[ ]`, não definida, a `[x]`, feita; uma linha nunca sai, então a fila é também o histórico.
 * O parágrafo de um marco é um teste que uma pessoa confere no produto, nunca um tema, sobre as entregas que o tornam verdade, de três a oito no primeiro marco: o esqueleto primeiro, cada linha após as linhas de que precisa, e por último a revisão, cujos achados viram linhas sob ela no mesmo marco; linhas são acrescentadas enquanto ele anda, e quem acrescenta uma a põe no marco que tem uma cláusula que precisa dela, ou sob o seguinte, criado quando falta com um parágrafo que a linha atende e a sua revisão por último.
 * A ordem é a prioridade: a linha mais acima importa mais, mover uma linha muda a prioridade dela, e uma dependência conhecida quando a linha é acrescentada é escrita junto, `· after <slug>`, uma ordem, não uma espera, então a linha mantém `[ ]`.

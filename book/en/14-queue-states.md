@@ -1,7 +1,7 @@
 # 14. The queue while it happens
 
-After this chapter you can read any queue line's state among focus-kit's six marks, say who sets each one and at what moment, name the next delivery, say which lines can run at the same time from the queue tree the kit's script draws, and read the two letters a line may carry that say it.
-You can also tell an order written with a line, `· after`, from a wait found on the way, `[?]`, mark a line that waits with its reason and the phase to resume, and take it out again; and lay the queue out as a kanban board that shows the work while it happens, and say where each mark is seen.
+After this chapter you can read any queue line's state among focus-kit's six marks, say who sets each one and at what moment, name the next delivery, say which lines can run at the same time from the queue tree the kit's script draws, and say why a build stops on files another build is changing.
+You can also tell an order written with a line, `· after`, read for each command, from a wait found on the way, `[?]`, mark a line that waits with its reason and the phase to resume, and take it out again; and lay the queue out as a kanban board that shows the work while it happens, and say where each mark is seen.
 And you can resume a line whose session ended, and record a delivery the person cancels so that it never reads as built.
 
 ## The problem
@@ -29,7 +29,7 @@ focus-kit answers both with six marks, each set at the moment the work changes.
 `· dropped:` is a suffix on `[x]`, not a seventh mark: a cancelled delivery is closed like a built one, and the suffix says nothing was delivered (below).
 
 A page that exists is not yet `[>]`: a draft saved for a `[ ]` line is a file in `work/` too ([chapter 11](11-queue-and-milestones.md)).
-The page is complete when every section is filled or says it does not apply and no scope question is open; only then does `/propose` mark the line `[>]`, and `/apply` builds it once every line its `after` names is `[x]` and its token lets it (below).
+The page is complete when every section is filled or says it does not apply and no scope question is open; only then does `/propose` mark the line `[>]`, and `/apply` builds it once every line its `after` names is integrated (below).
 While a scope question is still being talked through, the line stays `[~]`; a question asked of someone who has not answered makes it wait, `[?]` (below).
 
 This is the lending library's first milestone on one afternoon, written for this chapter, with every mark in use:
@@ -43,7 +43,7 @@ This is the lending library's first milestone on one afternoon, written for this
 [~] reservations    a member reserves a copy that is on loan
 [ ] my-loans        a member sees their loans · after lend-book
 [?] due-reminder    a reminder · resume: propose · blocked: what provider?
-[ ] m1-review       the milestone checked against its paragraph
+[ ] m1-review       the milestone against its paragraph · after all
 ```
 
 Anyone reading it knows, without asking, that a session is building `lend-book`, that `search-catalog` is completely defined and ready for `/apply`, that someone is talking `reservations` through right now, that `return-book` and `my-loans` come after `lend-book`, and what `due-reminder` waits on and which command picks it up again.
@@ -59,91 +59,93 @@ Where a mark is seen depends on where the session works (chapter 18).
 On trunk, the mark changes in the queue of the folder where the session runs, a board that reads that queue sees it at once, and it reaches the history with the person's commit.
 With a branch or a worktree per delivery, the mark lives on the delivery's branch, pushed when `/propose` creates it, and the main branch shows the line as it was until the merge.
 After `git fetch`, a line whose branch exists is taken, whatever the main branch shows: the branch is the claim of the line, on the remote from the moment the work starts, before any mark on it is pushed, so the main branch's queue changes only through merges.
-So whoever reads the queue, a board or a session picking free lines or resolving an `after`, takes each slug's line from its branch, local or remote, adds the lines only a branch has, and reconciles them by slug, each line at its latest state, never one branch's whole file.
+So whoever reads the queue, a board or a session picking free lines or resolving an `after`, runs `git fetch` and takes each slug's line from its branch on origin, which holds the current copy until the merge, the main branch's after it, and adds the lines only a branch has, never one branch's whole file.
 The marks change at once for the same reason either way, a board people pull work from: on trunk the board reads the one queue, and with a branch or a worktree per delivery it reads each slug's line where that line lives.
-Where the line lives decides how soon a reader sees it: a branch shows the mark once the mark is committed on it, a remote branch once that commit is pushed.
+Where the line lives decides how soon a reader sees it: a reader sees the mark once its commit is pushed to the branch on origin and fetched.
 A project's own one-way mirror, refreshed by the commands when a mark changes, shows the mark at once, and with a branch or a worktree per delivery it pushes the queue read the same way, so each refresh carries every delivery's mark as far as it can see it, not its own branch's copy.
 
 ## The next line, and which run together
 
-A line is free when it is not `[x]` and not `[?]`, and every line its `after` names is `[x]` (an `[x]` that was cancelled asks the person first, below).
-In the milestone above, `lend-book`, `search-catalog`, `reservations` and `m1-review` are free; `return-book` and `my-loans` are not, since `lend-book` is not `[x]` yet, and `due-reminder` waits.
-The next delivery is the first free line no session holds: a session is building `lend-book` and another is defining `reservations`, so a new session's next delivery is `search-catalog`.
-With a branch or a worktree per delivery, the session runs `git fetch` first, counts a line whose branch exists as taken, and judges free lines and `after` from each slug's line read as the section above says, so `return-book`'s `after` reads `lend-book`'s mark on `lend-book`'s branch.
+A line is free for a command when it is not `[x]` and not `[?]` and its `after` lets that command start, and `after` is read for each command.
+`/propose` starts when every line its `after` names is `[>]` or beyond, because the definition needs their pages; `/apply` starts when every one is integrated, because the build needs their code.
+Integrated is `[x]` on trunk; with a branch or a worktree per delivery it is the delivery merged into the main branch, and an `[x]` on a branch not yet merged is built, awaiting integration (an `[x]` that was cancelled asks the person first, below).
+A milestone's review line is written `· after all`: every line above it in its milestone but the cancelled ones, so its `/propose` starts when they are all defined and its `/apply` when they are all integrated.
+
+In the milestone above, `return-book` and `my-loans` are free for `/propose` while `lend-book` is `[*]`: their pages can take what `lend-book`'s page says.
+Their `/apply` waits until `lend-book` is integrated, since a return needs the code of the loan.
+`search-catalog` is free for `/apply`; `m1-review` waits, with four lines above it not yet defined, and `due-reminder` waits on its reason.
+The next delivery is the first free line no session holds, counting down the queue, whichever command it takes: a session is building `lend-book` and another is defining `reservations`, and the first free line down the queue that neither holds is `return-book`, free for `/propose`, so a new session's next delivery is `/propose return-book`.
+With a branch or a worktree per delivery, the session runs `git fetch` first, counts a line whose branch exists as taken, and judges free lines and `after` from each slug's line read as the section above says, so `return-book`'s `after` reads `lend-book`'s mark on `lend-book`'s branch, and `return-book`'s build waits for `lend-book`'s merge, not for the `[x]` on its branch.
 From the main branch's copy alone, `lend-book` would read `[ ]`, free and held by no one, and the answer would name a delivery another session is building; `lend-book`'s branch on the remote says it is taken even before any of its marks is pushed.
-When `lend-book` becomes `[x]`, `return-book` and `my-loans` are free from that moment, with nothing to clear and no mark to change; the `· after` stays on the line as the record of the order.
-A line with two orders, `· after lend-book, members`, is free only when both are `[x]`.
+When `lend-book` is integrated, the builds of `return-book` and `my-loans` are free from that moment, with nothing to clear and no mark to change; the `· after` stays on the line as the record of the order.
+A line with two orders, `· after lend-book, members`, is free for a command only when both let it start.
 
 A milestone's end sets priority, not whether a line is free.
 Chapter 11's `due-date-format` sits under milestone 2, below `m1-review`, and names no `after`: it is free, and does not wait for `m1-review`.
 But the next delivery is the first free line counting down the queue, so a session asked for the next one reaches it only once milestone 1 holds no free line.
-A line added later goes in the milestone whose paragraph needs it, never higher in the queue because it is new: its place is its priority, and the lines already there keep their order and their `after`, while whoever adds or moves a line re-judges the tokens the change affects: an added line's own and those of the lines below it, a moved line's own and those of the lines it passed, the lines whose lines above changed (below).
+A line added later goes in the milestone whose paragraph needs it, never higher in the queue because it is new: its place is its priority, and the lines already there keep their order and their `after`.
 
-`/propose` and `/apply` do not start a line that is not free: run `/propose my-loans` while `lend-book` is `[*]`, and it says what the line waits on and stops.
+`/propose` and `/apply` do not start a line that is not free for them: once `my-loans`'s page is complete and its line `[>]`, run `/apply my-loans` while `lend-book` is `[*]`, and it says what the line waits on, leaves the mark as it is, and stops.
 
 Free lines can run at the same time when they touch different files, judged from their pages and from docs/01, which says where each part of the code lives.
 `search-catalog` and `reservations`, in `src/features/catalog/` and `src/features/reservations/`, can.
-Two lines that both change `src/features/loans/`, as `lend-book` and a line to renew a loan would, cannot run together in one folder.
+Two lines that both change `src/features/loans/`, as `lend-book` and a line to renew a loan would, cannot run together in one folder: the second build would edit files the first is still changing.
 
-A line can say it once, for everyone who reads the queue, with two letters in parentheses right after its slug, its parallel token, `(PA)`.
-The first place speaks for `/propose`, the second for `/apply`, and each says whether that command may run while the lines above are still in flight.
-`P`: the definition takes nothing from their pages, so it can be talked through now; `A`: the build touches none of their files, so it can be built now.
-A `-` in a place makes that command wait: in the first, until every line above is `[>]` or beyond; in the second, until every line above is `[x]`.
-`after` still holds both commands, token or not: neither `/propose` nor `/apply` starts until every line it names is `[x]`, whatever the token says.
+Which files a build touches is known only once its page exists, so the queue does not say it, and the check is `/apply`'s.
+Before its first edit, `/apply` compares the files its page touches with those of the builds in flight, `[*]`, and of the builds done and not yet integrated; a file both touch is a conflict, and it stops before marking its line `[*]`, names the other line and the files they share, and leaves the mark as it is.
 The same library, in four lines written for this chapter:
 
 ```
-[x] members              the librarian registers and suspends members
-[*] lend-book            the librarian lends a copy
-[ ] search-catalog (PA)  a member searches the catalog
-[ ] renew-loan (P-)      a member renews a loan once
+[x] members         the librarian registers and suspends members
+[*] lend-book       the librarian lends a copy
+[>] search-catalog  a member searches the catalog
+[>] renew-loan      a member renews a loan once
 ```
 
-`search-catalog`'s page takes nothing from `lend-book`'s and its build lives in `src/features/catalog/`, so both commands may run on it now.
-`renew-loan` can be talked through now, its rule being its own, but its build changes `src/features/loans/`, as `lend-book`'s does, so `/apply renew-loan` waits until every line above it is `[x]`, `search-catalog` included, which touches none of its files: a token reads against every line above.
-Had it been `(--)`, its `/propose` would wait for `search-catalog`, still `[ ]`, to be `[>]`; `lend-book`, `[*]`, already passes.
-Whoever changes the queue re-judges the tokens the change affects; `/propose` corrects a line's token from its page, once it knows what the page takes and which files the Contract touches; `/brainstorm` writes them on the first milestone's lines when lines will run at the same time ([chapter 9](09-starting-a-project.md)); a line without one is judged from the pages, as above.
-`/propose` and `/apply` wait as the token says: once `renew-loan`'s page is finished and its line `[>]`, `/apply renew-loan` while `lend-book` is `[*]` and `search-catalog` `[ ]` says it waits on both, leaves the mark as it is, and stops.
-A command typed with several slugs obeys the same tokens for each line: `/propose search-catalog renew-loan` opens both subagents at once, since both tokens start with `P`, and once both pages are `[>]`, `/apply search-catalog renew-loan` builds `search-catalog` and reports that `renew-loan` waits, without waiting for it ([chapter 12](12-propose.md)).
-
-`after` is not the token, and the token never lifts it.
-Later, with `search-catalog` `[x]`, `lend-book` still `[*]` and `renew-loan` `[>]`, a line is added below them, written for this chapter like the four above:
-
-```
-[ ] renewal-notice (-A)  warns a member of the due date · after renew-loan
-```
-
-Its page takes the renewal's rule from `renew-loan`'s, so its `/propose` waits for every line above to be `[>]` or beyond, and they all are; its build lives in `src/features/notices/`, so its `/apply` may run beside them; and it needs renewals that exist, so it was written with `· after renew-loan`.
-The token lets both commands start, and neither does: `after` names `renew-loan`, `[>]` and not `[x]`, so `/propose renewal-notice` says it waits on `renew-loan`, leaves the mark as it is, and stops; `/apply renewal-notice` does not start either, but for its mark first: the line is `[ ]`, not `[>]`, so it refuses to build and points to `/propose` ([chapter 13](13-apply.md)), and were it `[>]`, `after` would still hold it until `renew-loan` is `[x]`.
-The `-` waits for the lines above, `after` for the lines it names; `renewal-notice` is free the moment `renew-loan` is `[x]`.
+Neither `search-catalog` nor `renew-loan` names an `after`, so both are free for `/apply`.
+`search-catalog`'s build lives in `src/features/catalog/`, which `lend-book` does not touch, so it builds now.
+`renew-loan`'s page changes `src/features/loans/`, as `lend-book`'s does, so `/apply renew-loan` stops before its first edit, says it shares that folder with `lend-book`, and leaves the line `[>]`; it builds once `lend-book` is integrated.
+A command typed with several slugs makes the same check for each line: `/apply search-catalog renew-loan` builds `search-catalog` and reports that `renew-loan` stops on `lend-book`'s files, without waiting for it ([chapter 12](12-propose.md)).
 
 [Chapter 19](19-worktrees.md) shows how two sessions run in one folder, and when they need two.
 
 ## What may run now
 
-Asked what may run now, the agent does not read every token and the end of every line for its `after`: it runs the kit's queue script, `propose/scripts/queue.sh`, in one line, `git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq <strategy>`, the same alias trick and the same strategy word as the claim script of [chapter 13](13-apply.md).
-The script reads docs/06 and edits nothing: on trunk the queue of the folder where the session runs, and with a branch or a worktree per delivery each delivery's line where it lives, as the section above says.
-It draws the current milestone, the first with a line not `[x]`, as a tree, the queue tree: each line not yet `[x]`, under the last line it waits on, the one furthest down the queue of the pending lines its `after` names, with the others named after `+ after`, and its state; then the lines free for `/apply` and for `/propose` together, and the lines without a token, to judge first.
-On the milestone at the top of this chapter, chapter 11's milestone 1 with the lines written for this chapter, it prints this, the milestone's heading first:
+Asked what may run now, the agent does not read the end of every line for its `after`: it runs the kit's queue script, `propose/scripts/queue.sh`, in one line, `git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq <strategy>`, the same alias trick and the same strategy word as the claim script of [chapter 13](13-apply.md).
+The script reads docs/06 and edits nothing: on trunk the queue of the folder where the session runs, and with a branch or a worktree per delivery, after `git fetch`, each delivery's line from its branch on origin, as the section above says.
+It draws the current milestone, the first with a line not `[x]`, as a tree, the queue tree: each line not yet `[x]`, under the last line it waits on, the one furthest down the queue of the pending lines its `after` names, with the others named after `+ after`, and its state.
+On trunk, a state is one of these: in flight, by the command its mark names; `propose now` or `apply now`, free for that command; `waits:`, with what it waits on; or `blocked:`, with its reason and the command that resumes it.
+Then come the lines free for `/apply` and for `/propose`, each list in queue order, and last `next:`, the command for the first free line down the queue.
+Milestone 1 in six lines, written for this chapter like the four above, with `return-book` already defined:
+
+```
+[x] catalog         the librarian registers books and their copies
+[x] members         the librarian registers and suspends members
+[*] lend-book       the librarian lends a copy, or a rule refuses
+[>] return-book     records a return · after lend-book
+[>] search-catalog  a member searches the catalog
+[ ] m1-review       the milestone against its paragraph · after all
+```
+
+On them the script prints this, the milestone's heading first:
 
 ```
 milestone: Milestone 1: a librarian lends and takes back
 [*] lend-book · in flight: apply
- └[ ] return-book · waits: after lend-book
- └[ ] my-loans · waits: after lend-book
-[>] search-catalog · apply now, no token: judge
-[~] reservations · in flight: propose
-[?] due-reminder · blocked: what provider?, then propose
-[ ] m1-review · propose now, no token: judge
+ └[>] return-book · waits: after lend-book
+[>] search-catalog · apply now
+ └[ ] m1-review + after lend-book, return-book · propose now
 
-free for /apply, together: none
-free for /propose, together: none
-judge first, no token: search-catalog m1-review
+free for /apply, in order: search-catalog
+free for /propose, in order: m1-review
+next: /apply search-catalog
 ```
 
-The `└` draws a line under the one it waits on: `return-book` and `my-loans` wait on `lend-book`, and say so; `lend-book` and `reservations` are in flight, under the command their mark names; `due-reminder` is blocked, with its reason and the command that resumes it; `search-catalog` may be built now and `m1-review` defined now.
-Neither carries a token, so no line is offered together, and the last line lists both to judge first, from the page and docs/01, by the files each touches: `search-catalog` builds in `src/features/catalog/`, which no line in flight touches, so it can be built beside them; `m1-review`'s page takes the milestone's paragraph clause by clause and names the delivery that answers each, so it waits until the lines above are defined, as a `-` in its token's first place would say.
-On the four lines with tokens above, before `renewal-notice` was added, the script ends with `free for /propose, together: search-catalog renew-loan`, and the agent offers it as one command, `/propose search-catalog renew-loan`, saying each slug is one more agent and costs as much as one session ([chapter 12](12-propose.md)).
+The `└` draws a line under the one it waits on.
+`return-book`'s page is complete though `lend-book` is still being built, since its definition needed only `lend-book`'s page; its build waits until `lend-book` is integrated.
+`search-catalog` may be built now, and `m1-review` sits under it, the last line its `after all` names, with the other two after `+ after`: every line above it is defined, so it may be defined now, and its build waits until they are all integrated.
+The next delivery is `/apply search-catalog`, the first free line down the queue.
+When a list holds more than one line, as on the nine lines above, where the script prints `free for /propose, in order: return-book my-loans`, the agent offers them as one command, `/propose return-book my-loans`, saying each slug is one more agent and costs as much as one session ([chapter 12](12-propose.md)).
 `/propose` and `/apply` typed with no slug show the same tree and ask which line to take, and `/apply` ends with it.
 
 ## Waiting: `[?]`
@@ -165,7 +167,7 @@ Any mark before `[x]` can become `[?]`: a line can wait before anyone defines it
 Writing `[?] my-loans ... · blocked: after lend-book` when the line is added is wrong: the line is queued, not stuck, and on a board it would carry a blocked tag that tells a manager something went wrong when nothing did.
 
 A line leaves `[?]` when the reason is resolved.
-The person says so; or the session that records the answer clears it, as when the director names the provider and the name becomes a line of docs/00; or `/apply` clears it when it marks `[x]` the last line an `after` names.
+The person says so; or the session that records the answer clears it, as when the director names the provider and the name becomes a line of docs/00; or it is cleared once the last line its `after` names is integrated, which on trunk is when `/apply` marks that line `[x]`.
 Both suffixes go, `resume` and `blocked`, and the resume phase says where the line goes back.
 `due-reminder`, with `resume: propose`, goes back to `[ ]`, and any draft of its page stays for `/propose` to finish: a draft is a page begun, not a definition complete.
 A line with `resume: apply` goes back to `[>]`.
@@ -194,7 +196,7 @@ The library wanted the librarian to print a member's card from the browser, and 
 
 `[x]` alone says the delivery's promise holds, with verify green; `[x]` with `· dropped:` says the decision is taken and the promise does not exist.
 The person sets it, not `/apply`, because cancelling is a decision about scope, and the line stays so that nobody later asks whether `print-card` was forgotten.
-By the free rule alone, `reprint-card` is free once `print-card` is `[x]`, and that is the trap: the `[x]` it names is a decision, not a card printer that works.
+By the free rule alone, `reprint-card`'s build is free once `print-card` is `[x]`, and that is the trap: the `[x]` it names is a decision, not a card printer that works.
 So a line whose `after` names a cancelled delivery is the person's to re-decide: drop it too, as `reprint-card` would be, or rewrite it on what does exist.
 
 ## The queue as a kanban board
@@ -229,7 +231,7 @@ Either way, resolving the reason removes both suffixes and the tag with them.
 Chapter 20 shows how a script mirrors the queue to a team's own board, one way.
 
 A board can also read the queue itself, with nothing to mirror.
-It reads docs/06 and the pages in `work/` by slug, on trunk from the folder's own files and with a branch or a worktree per delivery from each slug's own branch, local or remote, with the lines only a branch has, and moves its cards as each mark becomes visible to it while the agent works.
+It reads docs/06 and the pages in `work/` by slug, on trunk from the folder's own files and with a branch or a worktree per delivery from each slug's own branch on origin, after `git fetch`, with the lines only a branch has, and moves its cards as each mark becomes visible to it while the agent works.
 
 ## What the team gains
 
@@ -237,15 +239,15 @@ A manager reads where every delivery stands, and what each waiting one waits on,
 On Case A, five lines blocked on the client read as idle work, and every delivery reached Doing only after its definition was over, counted by the author on the project's queue and board; a mark set when the work changes, and one for waiting, answer both.
 A request that proved impossible there was closed in the queue with its reason instead of left in silence ([chapter 23](23-adoption.md)), and the kit writes such a closure as `[x]` with `· dropped:`.
 
-The queue also says which lines can run together: without that, a person who wants two sessions has to work it out alone before opening the second; the queue tree draws it from the queue, without a meeting, each line under what it waits on, and lists the lines to judge first, and the person who knows which pages a line takes from and which files it touches writes it once, on the line, for every session that reads it.
+The queue also says which lines can run together: without that, a person who wants two sessions has to work it out alone before opening the second; the queue tree draws it from the queue, without a meeting, each line under what it waits on, and ends with the command to run next, and `/apply` checks the files before its first edit, so two builds never change the same file at once.
 
 ## Key points
 
 * Six marks, `[ ]` not defined, `[~]` being defined, `[>]` completely defined and ready for `/apply`, `[*]` being built, `[x]` done, `[?]` waiting, each changed when the work changes, not when a command ends: `/propose` sets `[~]` and `[>]`, `/apply` sets `[*]` and `[x]`, the person sets `[x]` with `· dropped: <reason>` when cancelling, any session sets `[?]`; a line whose session ended keeps its mark, and its command resumes it on the person's word, inspecting the page, the folder and the index first, and a cancelled delivery's page in `work/done/` says what was built and undone.
-* A line is free when it is not `[x]` nor `[?]` and every line its `after` names is `[x]`, and when one is cancelled the person re-decides the line; with a branch or a worktree per delivery, a line whose branch exists after `git fetch` is taken, whatever the main branch shows; the next delivery is the first free line no session holds, and free lines run at the same time as their `(PA)` tokens say, `P` for `/propose` and `A` for `/apply`, `-` waiting for every line above to be `[>]` or beyond before `/propose` and `[x]` before `/apply`, `after` holding both until every line it names is `[x]`, whatever the token says, and a command typed with several slugs opens at once the subagents they let run and reports the rest; whoever changes the queue re-judges the tokens, `/propose` corrects one from its page, and a line without one runs beside those that touch different files.
-* Asked what may run now, the agent runs the kit's queue script and shows its tree: the current milestone, each line not `[x]` under the last line it waits on with its state, then the lines free for `/apply` and for `/propose` together and the lines without a token, judged first by the files they touch; it offers the free lines as one command with several slugs, each slug one more agent costing as much as one session, and `/propose` and `/apply` typed with no slug show the tree and ask.
+* A line is free for a command when it is not `[x]` nor `[?]` and its `after` lets that command start: `/propose` when every line it names is `[>]` or beyond, `/apply` when every one is integrated, `[x]` on trunk, merged into the main branch with a branch or a worktree per delivery; the review line's `· after all` names every line above it in its milestone but the cancelled ones, and a line whose `after` names a cancelled one is the person's to re-decide; with a branch or a worktree per delivery, a line whose branch exists after `git fetch` is taken, whatever the main branch shows; the next delivery is the first free line no session holds, and before its first edit `/apply` stops on a file a build in flight or not yet integrated is changing.
+* Asked what may run now, the agent runs the kit's queue script and shows its tree: the current milestone, each line not `[x]` under the last line it waits on with its state, then the lines free for `/apply` and for `/propose`, in order, and `next:`, the command for the first; it offers the free lines as one command with several slugs, each slug one more agent costing as much as one session, and `/propose` and `/apply` typed with no slug show the tree and ask.
 * `· after` is an order written with the line, which keeps its mark; `[?]` with `· blocked: after` is a wait found after work started; a line waits when the person says so, when an answer was asked and not given, when work already started finds another line must be done first, or when a milestone review's code reading missed part of its range, with the phase to resume and the reason at its end, `· resume: apply · blocked: after <slug>`; when the reason is resolved, both suffixes go and it returns as that phase says, `resume: propose` to `[ ]` with any draft kept, `resume: apply` to `[>]`, and until then `/propose` and `/apply` stop on it, as on a line not free.
-* The queue is a kanban board, a column per mark, a `[?]` card in Waiting until it returns to `[ ]` or `[>]`; on this chapter's three columns, Doing holds `[~]`, `[>]` and `[*]`, and a `[?]` card is tagged blocked in the column its resume phase names, To Do for `propose`, Doing for `apply`; a board that reads the queue sees a mark at once on trunk, and with a branch or a worktree per delivery from each slug's own branch, local or remote, pushed when `/propose` creates it, since the main branch shows the line as it was until the merge.
+* The queue is a kanban board, a column per mark, a `[?]` card in Waiting until it returns to `[ ]` or `[>]`; on this chapter's three columns, Doing holds `[~]`, `[>]` and `[*]`, and a `[?]` card is tagged blocked in the column its resume phase names, To Do for `propose`, Doing for `apply`; a board that reads the queue sees a mark at once on trunk, and with a branch or a worktree per delivery from each slug's own branch on origin, after `git fetch`, pushed when `/propose` creates it, since the main branch shows the line as it was until the merge.
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", accessed 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>
 [^azure-kanban]: Microsoft Learn, "About Kanban boards", Azure Boards, accessed 2026-09-30. <https://learn.microsoft.com/en-us/azure/devops/boards/boards/kanban-overview>
