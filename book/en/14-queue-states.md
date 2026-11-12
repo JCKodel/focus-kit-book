@@ -1,6 +1,6 @@
 # 14. The queue while it happens
 
-After this chapter you can read any queue line's state among focus-kit's six marks, say who sets each one and at what moment, name the next delivery, say which lines can run at the same time from the queue tree the kit's script draws, and say why a build stops on files another build is changing.
+After this chapter you can read any queue line's state among focus-kit's six marks, say who sets each one, at what moment, and how, one byte through the kit's mark script while every other edit of the queue changes only its own lines, since a program that writes the whole queue can empty it, name the next delivery, say which lines can run at the same time from the queue tree the kit's script draws, and say why a build stops on files another build is changing.
 You can also tell an order written with a line, `· after`, read for each command, from a wait found on the way, `[?]`, mark a line that waits with its reason and the phase to resume, and take it out again; and lay the queue out as a kanban board that shows the work while it happens, and say where each mark is seen.
 And you can resume a line whose session ended, and record a delivery the person cancels so that it never reads as built.
 
@@ -63,6 +63,21 @@ So whoever reads the queue, a board or a session picking free lines or resolving
 The marks change at once for the same reason either way, a board people pull work from: on trunk the board reads the one queue, and with a branch or a worktree per delivery it reads each slug's line where that line lives.
 Where the line lives decides how soon a reader sees it: a reader sees the mark once its commit is pushed to the branch on origin and fetched.
 A project's own one-way mirror, refreshed by the commands when a mark changes, shows the mark at once on trunk; with a branch or a worktree per delivery it pushes the queue read the same way, so it shows a mark at the first refresh after the mark is pushed to the delivery's branch, and each delivery's refresh carries every other delivery's mark pushed so far, never one branch's copy of the file.
+
+## How a mark changes
+
+The queue is one file that every session edits, each its own line, often at the same time, while a board reads it.
+An agent that changes its mark with a small program of its own, one that reads docs/06, replaces the mark and writes the file back, can lose the whole queue: a program that opens the file for writing before it reads it empties the file first.
+On 2026-10-18 in one project and on 2026-10-26 in another, a subagent marking its line ran such a one-line program: the write emptied docs/06 before the read, and the queue was left at zero bytes.
+Both subagents were staging their own hunk of a queue that other sessions also edit, a hunk being the piece of a file that git stages as one change.
+
+So a mark changes one way only: the agent runs the kit's mark script, `propose/scripts/mark.sh`, through git's own shell, as the claim script of chapter 13 is run, `git -c "alias.fm=!sh .agents/skills/propose/scripts/mark.sh" fm <slug> "<mark>"`.
+The six marks differ only in the character between the brackets, so a mark is one byte.
+The script finds the slug's one line, changes that byte, writes the result to a file beside the queue and renames it over the queue, so the queue itself is never opened for writing; and it refuses before it writes the queue unless the result keeps the queue's size and differs from it in at most that byte.
+With `stage` at the end, it changes the same line in the index and nothing else there, so another session's staged lines stay as they were: that is how `/apply` stages its `[x]`, even when another session changed the line next to its own.
+
+Every other edit to docs/06 is the host's own file edit, the tool the agent changes a file's lines with, on the lines it changes, never a program that writes the whole file: a line added, a suffix such as `· blocked:` or `· dropped:`, a line moved to change its priority.
+So putting a line on hold, below, is two edits: `[?]` by the script, its reason and its phase to resume by the file edit.
 
 ## The next line, and which run together
 
@@ -240,10 +255,11 @@ On Case A, five lines blocked on the client read as idle work, and every deliver
 A request that proved impossible there was closed in the queue with its reason instead of left in silence ([chapter 23](23-adoption.md)), and the kit writes such a closure as `[x]` with `· dropped:`.
 
 The queue also says which lines can run together: without that, a person who wants two sessions has to work it out alone before opening the second; the queue tree draws it from the queue, without a meeting, each line under what it waits on, and ends with the command to run next, and `/apply` checks the files before its first edit, so two builds never change the same file at once.
+And no session marking its line can leave the queue empty under the board and the other sessions: a mark is one byte, changed whole or not at all.
 
 ## Key points
 
-* Six marks, `[ ]` not defined, `[~]` being defined, `[>]` completely defined and ready for `/apply`, `[*]` being built, `[x]` done, `[?]` waiting, each changed when the work changes, not when a command ends: `/propose` sets `[~]` and `[>]`, `/apply` sets `[*]` and `[x]`, the person sets `[x]` with `· dropped: <reason>` when cancelling, any session sets `[?]`; a line whose session ended keeps its mark, and its command resumes it on the person's word, inspecting the page, the folder and the index first, and a cancelled delivery's page in `work/done/` says what was built and undone.
+* Six marks, `[ ]` not defined, `[~]` being defined, `[>]` completely defined and ready for `/apply`, `[*]` being built, `[x]` done, `[?]` waiting, each changed when the work changes, not when a command ends: `/propose` sets `[~]` and `[>]`, `/apply` sets `[*]` and `[x]`, the person sets `[x]` with `· dropped: <reason>` when cancelling, any session sets `[?]`; every mark changes through the kit's mark script, one byte, `/apply`'s `[x]` staged on its line alone with `stage`, and any other edit to the queue is the host's file edit on its lines, never a program that writes the whole file; a line whose session ended keeps its mark, and its command resumes it on the person's word, inspecting the page, the folder and the index first, and a cancelled delivery's page in `work/done/` says what was built and undone.
 * A line is free for a command when it is not `[x]` nor `[?]` and its `after` lets that command start: `/propose` when every line it names is `[>]` or beyond, `/apply` when every one is integrated, `[x]` on trunk, merged into the main branch with a branch or a worktree per delivery; the review line's `· after all` names every line above it in its milestone but the cancelled ones, and a line whose `after` names a cancelled one is the person's to re-decide; with a branch or a worktree per delivery, a line whose branch exists after `git fetch` is taken, whatever the main branch shows; the next delivery is the first free line no session holds, and before its first edit `/apply` stops on a file a build in flight or not yet integrated is changing.
 * Asked what may run now, the agent runs the kit's queue script and shows its tree: the current milestone, each line not `[x]` under the last line it waits on with its state, then the lines free for `/apply` and for `/propose`, in order, and `next:`, the command for the first; it offers the free lines as one command with several slugs, each slug one more agent costing as much as one session, and `/propose` and `/apply` typed with no slug show the tree and ask.
 * `· after` is an order written with the line, which keeps its mark; `[?]` with `· blocked: after` is a wait found after work started; a line waits when the person says so, when an answer was asked and not given, when work already started finds another line must be done first, or when a milestone review's code reading missed part of its range, with the phase to resume and the reason at its end, `· resume: apply · blocked: after <slug>`; when the reason is resolved, both suffixes go and it returns as that phase says, `resume: propose` to `[ ]` with any draft kept, `resume: apply` to `[>]`, and until then `/propose` and `/apply` stop on it, as on a line not free.
