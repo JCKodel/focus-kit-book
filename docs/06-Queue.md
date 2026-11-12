@@ -736,7 +736,9 @@ When this milestone closes, the book teaches focus-kit 2026.10.25 and the reposi
 [x] ch17-20-branch-on-origin chapters 17 and 20: the queue read from each slug's branch on origin after `git fetch`, no longer "local or remote", and the board seeing a mark once it is pushed; both editions · after kit-2026-10-25
 [x] ch09-design-slot         chapter 9: the Design slot, the design delivery and the page's Visual reference before `[>]`, with Ninjobs' rule and `chassi-desktop` as the error; the `## Outcome` heading; both editions · after kit-2026-10-25
 [x] ch08-update-2026-10-25  chapter 8: the update example and its report at 2026.11.12, the version the repository runs, the numbering map line for a docs/05 kept by ADR, and the update reading each slug's line from its branch on origin, no longer "local or remote"; both editions · after kit-2026-10-25
-[ ] m33-review               the review of M33 as docs/05 §8 says · after all
+[x] m33-review               the review of M33 as docs/05 §8 says · after all
+[ ] ch08-09-parallel-paragraphs chapters 8 and 9: `/brainstorm` writes docs/05 §4's two paragraphs on parallel work only when the Git slot is a branch or a worktree per delivery or the person says sessions will run at the same time, and chapter 8's example of a choice kept no longer says a trunk docs/05 of one session at a time sees the two-session wording proposed; both editions · after m33-review · from m33-review
+[ ] m33-fixes                the six medium findings of m33-review, each an item of its page: chapter 11 on which findings become lines and its page with a screen and no Visual reference, chapter 13's claim with `taken` and `resume`, chapter 14's mirror seeing a branch's mark once pushed, chapter 7's `· after` read per command, chapter 8's excerpt without `None`; both editions · after m33-review · from m33-review
 ```
 
 ## M34. focus-kit 2026.10.26
