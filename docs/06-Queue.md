@@ -724,3 +724,69 @@ When this milestone closes, the book teaches focus-kit 2026.10.24 and the reposi
 [ ] ch14-key-points-pointers chapter 14 with at most five key points, as docs/04 says, and the forward pointers M32 added in chapters 8, 12, 13 and 14 once per chapter for each target, or docs/04's rule restated by the author; both editions · after m32-review
 [ ] ch19-example-marks  chapter 19's example: `overdue-list`'s token against the folder it shares with `return-book`, and how a mark reaches origin before the person's commit, which the tree from `main/` needs; both editions · after m32-review
 ```
+
+## M33. focus-kit 2026.10.25
+
+When this milestone closes, the book teaches focus-kit 2026.10.25 and the repository runs on it: the queue without the `(PA)` token, `· after` read per command, `· after all` on the review line, integration as what frees a build, `queue.sh` reading a branch as a claim and a merge as the integration, `claim.sh` create-only and resumable, the Design slot and the design delivery, the `## Outcome` heading, and the parallel paragraphs of §4 written only where sessions overlap.
+
+```
+[x] kit-2026-10-25          reinstall the kit at 2026.10.25 and apply its migration report: tokens out of this queue, `· after all` on the review lines, docs/05 §4 with each slug's line read from its branch on origin, no longer "local or remote", the same in docs/03's kanban board row, the Design slot, the Outcome heading · after m32-review
+[ ] ch11-14-after            chapters 11, 12, 13 and 14: `· after` read per command, `· after all`, integration freeing a build, the file check before /apply's first edit, `queue.sh`'s tree with its states, free lists and `next:`, and each slug's line read from its branch on origin after `git fetch`, no longer "local or remote"; both editions · after kit-2026-10-25
+[ ] ch19-claim-integration  chapter 19: `claim.sh` create-only, taken and resume, here, the worktree from origin's main; `queue.sh` reading a branch as a claim, the current copy of a line, a `[?]` on any copy, a line only a branch has; both editions · after kit-2026-10-25
+[ ] ch17-20-branch-on-origin chapters 17 and 20: the queue read from each slug's branch on origin after `git fetch`, no longer "local or remote", and the board seeing a mark once it is pushed; both editions · after kit-2026-10-25
+[ ] ch09-design-slot         chapter 9: the Design slot, the design delivery and the page's Visual reference before `[>]`, with Ninjobs' rule and `chassi-desktop` as the error; the `## Outcome` heading; both editions · after kit-2026-10-25
+[ ] ch08-update-2026-10-25  chapter 8: the update example and its report at 2026.10.25, the numbering map line for a docs/05 kept by ADR, and the update reading each slug's line from its branch on origin, no longer "local or remote"; both editions · after kit-2026-10-25
+[ ] m33-review               the review of M33 as docs/05 §8 says · after all
+```
+
+## M34. focus-kit 2026.10.26
+
+When this milestone closes, the book teaches focus-kit 2026.10.26 and the repository runs on it: a mark changed by `mark.sh`, one byte, and staged with it on its line alone; any other edit to docs/06 made by the host's file edit, never by a program that writes the queue whole.
+
+```
+[x] kit-2026-10-26          reinstall the kit at 2026.10.26 and apply its migration report: docs/05 §4's two sentences on `mark.sh` and on editing docs/06 line by line · after m33-review
+[ ] ch12-14-mark            chapters 12, 13 and 14: /propose's `[~]`, /apply's `[*]` and its staged `[x]` through `mark.sh`, with the queue emptied by a script on 2026-10-18 and 2026-10-26 as the error; both editions · after kit-2026-10-26
+[ ] m34-review               the review of M34 as docs/05 §8 says · after all
+```
+
+## M35. focus-kit 2026.10.27
+
+When this milestone closes, the book teaches focus-kit 2026.10.27 and the repository runs on it: `mark.sh` refusing a `[~]` on a line that is not `[ ]` and a `[*]` on one that is not `[>]`, so two sessions that start one line cannot both mark it.
+
+```
+[x] kit-2026-10-27          reinstall the kit at 2026.10.27; the report lists no migration, the script alone changes · after m34-review
+[ ] ch12-14-mark-refused    chapters 12, 13 and 14: `mark.sh` refusing a second `[~]` or `[*]` on one line, with the two `/apply` of one slug six seconds apart on 2026-10-26 as the error; both editions · after kit-2026-10-27
+[ ] m35-review               the review of M35 as docs/05 §8 says · after all
+```
+
+## M36. focus-kit 2026.10.27.1
+
+When this milestone closes, the book teaches focus-kit 2026.10.27.1 and the repository runs on it: `· after all` leaving out the milestone's dropped lines, so a review never waits on a line the person cancelled, while a line that names a dropped one still waits for the person to re-decide it.
+
+```
+[ ] kit-2026-10-27-1        reinstall the kit at 2026.10.27.1 and apply its migration report: docs/05 §4's two sentences and §8's review start leaving dropped lines out · after m35-review
+[ ] ch14-15-after-all-dropped chapters 14 and 15: `after all` leaving out a cancelled line, a line naming one still re-decided by the person, with the Milestone 1 review of 2026-10-26 that had to list 27 slugs as the error; both editions · after kit-2026-10-27-1
+[ ] m36-review               the review of M36 as docs/05 §8 says · after all
+```
+
+## M37. focus-kit 2026.11.03
+
+When this milestone closes, the book teaches focus-kit 2026.11.03 and the repository runs on it: `/apply` ending by telling the person each next step, and by running `queue.sh` though no one asked, its tree shown and its `next:` command written as the host invokes commands.
+
+```
+[ ] kit-2026-11-03          reinstall the kit at 2026.11.03; the report lists no migration, /apply alone changes · after m36-review
+[ ] ch13-apply-next         chapter 13: /apply telling the person each next step, no longer bare sentences an agent read as its own orders, and running `queue.sh` at its end unasked, giving its `next:` in the host's form, with the report of 2026-11-03 that /apply had stopped naming the next command as the error; both editions · after kit-2026-11-03
+[ ] m37-review               the review of M37 as docs/05 §8 says · after all
+```
+
+## M38. focus-kit 2026.11.12
+
+When this milestone closes, the book teaches focus-kit 2026.11.12 and the repository runs on it: `/apply` fixing in the delivery what its review finds wrong in what it built; a finding in anything else becoming a line only when grave, ending `· from <slug>`, the others notes on the delivery's own page; the milestone review copying those notes and grading them, grave a line each, the medium ones the person picks on one `-fixes` line, the small ones by the person's pick; `/apply` opening its last message with `🚨`, `⚠️` or `✅`; `queue.sh` counting the lines from a finding; and verify with a ceiling, tests only for what the page says and fixes, and each slow test run by the delivery that changes what it covers.
+
+```
+[ ] kit-2026-11-12          reinstall the kit at 2026.11.12 and apply its migration report in the same session: docs/05 §3's `## For the review` heading, §4's findings paragraph, §5's Verify ceiling and slow tests, §8's grading, and `· from <slug>` on docs/06's finding lines · after m37-review
+[ ] ch13-apply-findings     chapter 13: /apply fixing in the delivery what is wrong in what it built, a flaw it cannot fix a note or a `[?]`, a finding elsewhere a line only when grave, its last message opening with `🚨`, `⚠️` or `✅`, tests for what the page says and fixes, verify's ceiling and the slow tests that cover what the delivery changed, with the 32 of 130 lines of 2026-11-12 as the error · after kit-2026-11-12
+[ ] ch14-queue-findings     chapter 14: the `· from <slug>` suffix, where a grave line goes, a note on the delivery's page, a test or process line only on the person's word, and `queue.sh` printing `findings:` and its warning · after kit-2026-11-12
+[ ] ch15-review-grades      chapter 15: the milestone review copying the deliveries' notes and grading findings, grave a line each, the medium ones the person picks on one `<milestone>-fixes` line, the small ones listed · after kit-2026-11-12
+[ ] m38-review               the review of M38 as docs/05 §8 says · after all
+```
