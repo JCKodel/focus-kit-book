@@ -78,7 +78,7 @@ Duas coisas são um conflito:
 * as duas entregas editam a mesma linha, de `src/features/emprestimos/regras.ts`, por exemplo, ou da fila;
 * esta página precisa de um arquivo que a outra entrega está mudando, como quando `devolver-livro` precisa de `src/features/emprestimos/` enquanto outra entrega o reorganiza.
 
-Então a sessão para e relata, e a decisão é sua: ordenar as duas linhas, escrevendo `· after <slug>` na que precisa esperar a outra, ou dar a uma delas um worktree.
+Então a sessão para e relata, e a decisão é sua: ordenar as duas linhas, escrevendo `· after <slug>` na que precisa esperar a outra; um worktree não o desfaz, já que o `/apply` faz a mesma verificação em um worktree.
 
 ## O que é um worktree e quando ele compensa
 
@@ -90,14 +90,14 @@ Todos os worktrees compartilham o histórico; cada um tem os seus próprios arqu
 Então um commit feito em um worktree aparece na hora em todos os outros, sem push e sem pull, enquanto o que você muda ou coloca em stage em um nunca aparece em outro.
 O git também se recusa a fazer checkout de um branch em dois worktrees, então duas pastas nunca escrevem no mesmo branch.[^git-worktree]
 
-Um worktree por entrega compensa em dois casos: várias pessoas trabalhando ao mesmo tempo, já que um commit em um branch compartilhado levaria o trabalho pela metade de outra pessoa; e uma pessoa cujas entregas mexem nos mesmos arquivos, para que cada uma seja construída à parte e as suas mudanças só se encontrem no merge.
+Um worktree por entrega compensa em dois casos: várias pessoas trabalhando ao mesmo tempo, já que um commit em um branch compartilhado levaria o trabalho pela metade de outra pessoa; e uma pessoa cujas entregas mexem nos mesmos arquivos, para que cada uma seja definida e construída no seu próprio branch e as suas mudanças só se encontrem no merge, uma construção depois da outra, já que o `/apply` não começa em arquivos que outra construção está mudando, em um worktree como em uma pasta ([capítulo 14](14-queue-states.md)).
 Um branch por entrega em uma pasta não basta: a pasta guarda um branch por vez, e trocar de branch enquanto um agente tem trabalho ainda sem commit leva esse trabalho junto ou para até o `git stash` guardá-lo de lado.
 Um segundo clone dá a cada agente a sua própria pasta, mas com a sua própria cópia do histórico inteiro no disco, que só encontra a do outro por um push e um pull.
 
 Digamos que `devolver-livro` e `lista-de-atrasos` precisam as duas de `src/features/emprestimos/`, na pasta da biblioteca de empréstimos, `biblioteca/`, cujo `main/` guarda o branch `main` (a próxima seção a monta):
 
 * O agente que constrói `devolver-livro` trabalha em `biblioteca/.focus-kit/worktrees/devolver-livro`, no branch `focus-kit/devolver-livro`; ele vê só as mudanças dessa entrega, e o commit que você faz ali guarda essa entrega e nada mais.
-* O agente que constrói `lista-de-atrasos` faz o mesmo em `biblioteca/.focus-kit/worktrees/lista-de-atrasos`, no `focus-kit/lista-de-atrasos`, ao mesmo tempo.
+* A `lista-de-atrasos` é definida enquanto isso em `biblioteca/.focus-kit/worktrees/lista-de-atrasos`, no `focus-kit/lista-de-atrasos`, e o `/apply` dela ali para antes da primeira edição enquanto a construção de `devolver-livro` está em andamento ou ainda sem merge, já que as duas tocam `src/features/emprestimos/`; ela é construída quando `devolver-livro` passa pelo merge em `main`.
 * Ninguém troca de branch, então nada precisa de stash, e nenhum agente vê os arquivos pela metade do outro.
 
 Quando uma entrega está pronta, por padrão você a traz para o `main` a partir de `main/`, ou pede ao agente que o faça, com um commit de merge, `git merge --no-ff`, para que ela continue uma unidade de trabalho, desfeita em um passo com `git revert -m 1 <merge>`.
@@ -189,41 +189,44 @@ Apaga o branch, que sobrevive à sua pasta.
 Um worktree por entrega é uma das estratégias de git que um projeto pode escrever no slot Git do seu docs/05, e no kit são os passos acima com o `/propose` e o `/apply` no meio.
 O slot pode nomear a pasta oculta e o prefixo do branch, e um que não nomeia nenhum dos dois vale `.focus-kit/` e `focus-kit/`, os de acima; um slot que nomeia `.wt/` e `wt/` põe `devolver-livro` em `.wt/worktrees/devolver-livro/` no `wt/devolver-livro`.
 Os dois nomes do kit dizem o que criou a pasta e o branch, então quem os encontra em um projeto sabe de onde vieram.
-O `/propose <slug>` consulta o remoto por `<prefixo><slug>`, o prefixo e o slug juntos, `focus-kit/devolver-livro` com o prefixo padrão `focus-kit/`, já que um branch que já está lá quer dizer que a linha está ocupada, a não ser que a definição seja retomada, cria o worktree em `<oculta>/worktrees/<slug>/` nesse branch, a partir do `HEAD` do branch principal, e dá push no branch na hora, então a linha fica ocupada em todo clone, ou, quando a definição é retomada, reaproveita o worktree e o branch que existem, e escreve a página ali.
+O `/propose <slug>` faz fetch do origin e procura ali `<prefixo><slug>`, o prefixo e o slug juntos, `focus-kit/devolver-livro` com o prefixo padrão `focus-kit/`; quando o origin não tem esse branch, ele cria o worktree em `<oculta>/worktrees/<slug>/` nele, a partir do branch principal do origin como acabou de buscar, então um clone que não fez pull parte mesmo assim do que está integrado, e dá push no branch na hora, então a linha fica ocupada em todo clone; ele reabre um worktree que este clone já tem, e escreve a página ali.
 O `[~]` da linha e cada marca seguinte são escritos no worktree, no seu branch, então a fila de `main/` mostra a linha como estava e a fila de cada worktree mostra o estado do seu próprio branch; o merge traz as marcas, e é por isso que a fila se encontra em todo merge, como a próxima seção, sobre conflitos, mostra.
 O [capítulo 14](14-queue-states.md) diz onde um quadro as vê.
 
 Então nenhuma fila de pasta mostra todas as entregas de uma vez, e perguntar a uma delas quais linhas estão ocupadas dá uma resposta errada: em `main/`, uma linha em andamento no seu branch ainda aparece `[ ]`.
 O script de fila do kit (capítulo 14) lê a linha de cada entrega de uma vez, de `main/` ou de qualquer worktree, quando recebe a palavra do slot Git: `git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq worktree .focus-kit focus-kit/`, ou a pasta oculta e o prefixo que o slot nomeia.
-Ele faz fetch do origin, lê cada linha do branch padrão no origin e a linha de cada entrega de `origin/<prefixo><slug>`, e não edita nada.
-Onde a cópia da pasta, o branch padrão no origin e o branch da entrega discordam sobre uma linha, ele fica com a marca mais adiante no fluxo, então uma cópia mais velha não mostra como livre uma linha com merge ou em andamento.
+Ele faz fetch do origin, lê cada linha da cópia do branch principal, a própria fila de `main/` quando roda em `main/` e o branch padrão no origin quando roda em um worktree, e a linha de cada entrega de `origin/<prefixo><slug>`, e não edita nada.
+Um branch no origin é a reivindicação: uma linha cujo branch existe está ocupada, e enquanto a cópia do branch ainda diz `[ ]`, já que o `[~]` nunca precisa ter commit, a árvore a mostra `claimed, progress unknown: propose in flight`.
+A cópia que o branch tem da linha do seu slug é a atual até o merge do branch no branch principal do origin, e a cópia do branch principal depois dele, então em `main/` faça pull depois de um merge; um `[?]` em qualquer cópia, a do branch principal ou a de um branch, mostra a linha travada até ela estar `[x]`.
+Um `[x]` em um branch ainda sem merge aparece `built, awaiting integration`, e uma linha cujo `after` o nomeia espera com `devolver-livro built, not integrated`, por exemplo, já que a construção dela precisa desse código no branch principal.
 Na biblioteca, com `devolver-livro` sendo construída no seu worktree em `[*]`, `lista-de-atrasos` definida no dela em `[>]`, cada marca com commit no branch da linha e push feitos por você, e a fila de `main/` ainda mostrando as duas linhas `[ ]`, o script rodado em `main/` imprime isto; a fila e a execução foram escritas para este capítulo:
 
 ```
 milestone: M2. Devoluções
-[*] devolver-livro (PA) · in flight: apply
-[>] lista-de-atrasos (P-) · waits: the lines above are done
- └[ ] m2-review + after devolver-livro · waits: after lista-de-atrasos
+[*] devolver-livro · in flight: apply
+[>] lista-de-atrasos · apply now
+ └[ ] m2-review + after devolver-livro · propose now
+[ ] exemplar-danificado (only on branch devolver-livro) · propose now
 
-free for /apply, together: none
-free for /propose, together: none
-only on a branch:
-  exemplar-danificado (devolver-livro)
+free for /apply, in order: lista-de-atrasos
+free for /propose, in order: m2-review exemplar-danificado
+next: /apply lista-de-atrasos
 ```
 
-A linha de cada entrega vem do seu branch: `devolver-livro` está em andamento, `lista-de-atrasos` está definida e espera, e `m2-review`, a revisão do marco, espera sob `lista-de-atrasos` com `+ after devolver-livro`.
-`lista-de-atrasos` leva `(P-)`, já que a construção dela divide `src/features/emprestimos/` com a de `devolver-livro`: o `-` segura o `/apply` dela até toda linha acima estar `[x]`, o que o script imprime como `waits: the lines above are done`, então nenhuma linha está livre para o `/apply`.
-`exemplar-danificado` é uma linha que a sessão de `devolver-livro` acrescentou no seu branch, ainda em nenhuma fila de `main/`, então o script a lista à parte, nomeando entre parênteses um branch que a tem.
+A linha de cada entrega vem do seu branch: `devolver-livro` está em andamento, e `lista-de-atrasos` está definida e livre para o `/apply`, a primeira linha livre, então o `next:` a nomeia.
+O script lê marcas e `after`, não arquivos: o `/apply lista-de-atrasos`, aberto no worktree dela, compara os arquivos da sua página com a construção de `devolver-livro`, encontra `src/features/emprestimos/` nas duas, e para antes da primeira edição, deixando a linha `[>]`; ela é construída quando `devolver-livro` passa pelo merge, como em uma pasta (capítulo 14).
+`m2-review`, a revisão do marco, fica sob `lista-de-atrasos` com `+ after devolver-livro`, livre para o `/propose`, já que toda linha que o seu `after all` nomeia está definida.
+`exemplar-danificado` é uma linha que a sessão de `devolver-livro` acrescentou no seu branch, ainda em nenhuma fila de `main/`: o script a mostra no fim do seu marco, nomeando entre parênteses um branch que a tem, e a oferece como qualquer outra linha.
 
-A marca mais adiante conta nos worktrees também.
-Depois que `devolver-livro` passa pelo merge em `main` e pelo push, a fila no worktree de `lista-de-atrasos`, cujo branch começou antes do merge, ainda mostra `devolver-livro` como `[ ]`; o script a encontra `[x]` no `main` do origin, fica com essa marca e deixa a linha fora da árvore.
+A cópia atual conta nos worktrees também.
+Depois que `devolver-livro` passa pelo merge em `main` e pelo push, a fila no worktree de `lista-de-atrasos`, cujo branch começou antes do merge, ainda mostra `devolver-livro` como `[ ]`; o script lê a cópia do branch principal no origin, agora a atual, a encontra `[x]` e deixa a linha fora da árvore.
 Digitado com `trunk` nesse worktree, o script não faz fetch de nada e lê só a cópia da própria pasta, então oferece `devolver-livro`, já com merge, como `propose now`: em um layout de worktrees, a palavra tem de ser a do slot Git.
 
 O script lê os branches no origin, como no último fetch.
 Uma marca com commit em um worktree e sem push, ou um branch que nunca teve push, não são vistos de outra pasta; quando o `git fetch` falha, o script imprime `note: git fetch origin failed; branches as last fetched` e desenha a árvore com o que buscou antes.
-E a árvore mostra as marcas que chegaram ao origin, não reivindicações, e por padrão nenhuma marca chega ao origin antes de você fazer o commit no branch da entrega e o push dele: o `/propose` e o `/apply` escrevem cada marca no worktree e não fazem commit de nada por conta própria, e depois da reivindicação só você faz push, ou pede um.
-As marcas do exemplo chegaram lá por esse passo, seu e fora do padrão; sem ele, da reivindicação até o seu commit e push, uma linha aparece como o branch principal a tem, `[ ] · propose now`.
-O branch é a reivindicação do mesmo jeito, e o script de reivindicação responde ao próximo `/propose` desse slug com `claim: existing`, então, enquanto o branch de uma linha existe no origin, o que o `git branch -r` lista depois do fetch, não tome a linha como livre só pela árvore.
+E por padrão nenhuma marca chega ao origin antes de você fazer o commit no branch da entrega e o push dele: o `/propose` e o `/apply` escrevem cada marca no worktree e não fazem commit de nada por conta própria, e depois da reivindicação só você faz push, ou pede um.
+As marcas do exemplo chegaram lá por esse passo, seu e fora do padrão; sem ele, da reivindicação até o seu commit e push, a árvore lê só o branch e imprime `[ ] lista-de-atrasos · claimed, progress unknown: propose in flight`, livre para nenhum comando.
+Uma linha cujo branch está no origin nunca está livre para o `/propose`, digam o que disserem as marcas dela; o que o script de reivindicação responde para ela vem adiante.
 
 Um branch `<slug>` sem o prefixo não é o da entrega: é de outra pessoa.
 Você monta o contêiner uma vez; o kit cria cada worktree.
@@ -235,9 +238,11 @@ Por padrão, você usa a entrega, revisa e faz o commit no branch, faz o merge n
 
 A consulta ao remoto, o worktree, o seu branch e o push são um script só, o script de reivindicação do kit, que o `/propose` roda como o [capítulo 13](13-apply.md) mostra, com `worktree .focus-kit focus-kit/`, ou a pasta oculta e o prefixo que o slot nomeia.
 Antes de mudar qualquer coisa o script recusa, imprimindo `error:` com o motivo e saindo com 2 em vez de 0: fora de um repositório, com o `HEAD` destacado, para um slug com um caractere que um nome de branch não aceita, sem um remoto `origin`, quando o `git fetch` falha, quando não consegue saber qual é o branch padrão, e em qualquer branch que não seja o padrão.
-Ele recusa também em um worktree ou em um branch de entrega: roda a partir de `main/`, como o `/propose`.
-Sem parar, ele avisa quando o `main` está atrás do remoto, a entrega partindo do `HEAD` local mesmo assim, e quando um branch `devolver-livro` sem o prefixo está no remoto, que não é o da entrega.
+Ele recusa também no worktree de outro slug ou em um branch de entrega: roda a partir de `main/`, como o `/propose`; rodado no worktree do próprio slug, responde `claim: here` com o caminho dessa pasta e não cria nada.
+Sem parar, ele avisa quando o `main` está atrás ou à frente do origin, a entrega partindo do branch principal do origin mesmo assim, então commits do `main` ainda sem push não estão nela, e quando um branch `devolver-livro` sem o prefixo está no remoto, que não é o da entrega.
 Quando o worktree existe mas o seu branch nunca chegou ao remoto, ele dá push no branch então, e quando um push falha ele diz que a linha não foi reivindicada.
+Um branch no origin do qual este clone não tem branch é a linha de outro clone: o script responde `claim: taken`, sai com 2 e não cria nada, e só a abre quando o comando termina com `resume`, que o `/propose` acrescenta com a sua palavra, como quando você continua, nesta máquina, uma definição começada em outra; então ele imprime `claim: resumed`.
+Um clone feito com `git clone --bare` guarda como seus todos os branches que o origin tinha naquele momento, então em um contêiner montado depois da reivindicação de uma linha o script encontra esse branch aqui e responde `existing`.
 Ele imprime algumas linhas `chave: valor`, aqui para `devolver-livro`, nova, em um exemplo escrito para este capítulo:
 
 ```
@@ -247,7 +252,7 @@ path: /projetos/biblioteca/.focus-kit/worktrees/devolver-livro
 draft: none
 ```
 
-O `claim` é `new`, `existing` quando o worktree ou o seu branch já estava lá, ou `existing, branch pushed now`; o `path` é a pasta em que a sessão do `/apply` abre; e o `draft` é `none` ou nomeia um rascunho da página que `main/` guarda para o slug, que o `/propose` traz para a entrega.
+O `claim` é `new`; `existing` quando o worktree ou o branch deste clone já estava lá; `existing, branch pushed now`; `resumed`; ou `here`; o `path` é a pasta em que a sessão do `/apply` abre; e o `draft` é `none` ou nomeia um rascunho da página que `main/` guarda para o slug, que o `/propose` traz para a entrega.
 
 Quando o `/apply devolver-livro` trava no seu worktree esperando uma resposta que ninguém deu, ele para como o capítulo 13 diz: marca a linha `[?]` com `· resume: apply · blocked: e se o exemplar voltar danificado?`, escreve na página o que foi construído, e mostra uma mensagem parcial em um bloco `commit`.
 Ali ele também pode colocar o trabalho parcial em stage para você fazer o commit no `focus-kit/devolver-livro` quando quiser, com essa mensagem: ela diz que é parcial, nomeia o que trava, nunca dá a entender que a verificação passou ou que a entrega está pronta, e a sua última linha é `work/devolver-livro.md`, onde a página espera.
@@ -384,8 +389,8 @@ Antes de começar duas, confira cinco coisas.
 Entre worktrees ela sempre dá conflito no merge, já que cada entrega marca a sua linha, e se resolve do mesmo jeito toda vez: guarde as duas marcas.
 
 **Arquivos que as duas mudam.** Um arquivo de código que duas entregas mudam é diferente.
-Em uma pasta a sessão para quando encontra a mudança da outra; entre worktrees o merge para, e resolvê-lo é uma decisão sobre o código: quem a toma precisa entender as duas mudanças.
-Então liste os arquivos que cada entrega vai tocar, a partir da sua linha da fila, do docs/01 e do código que ela nomeia: entregas cujos arquivos não se encontram podem dividir uma pasta; entregas cujos arquivos se encontram rodam ao mesmo tempo só em worktrees, e só quando você consegue tomar a decisão do merge; senão, ordene-as com `· after <slug>`.
+Antes da primeira edição, o `/apply` compara os arquivos da sua página com os de toda construção em andamento ou ainda não integrada e para em um arquivo que as duas tocam, em uma pasta ou em worktrees, então a segunda construção espera a primeira ser integrada; onde o branch dela começou antes desse merge, as duas mudanças ainda se encontram no merge dela, e resolvê-lo é uma decisão sobre o código: quem a toma precisa entender as duas mudanças.
+Então liste os arquivos que cada entrega vai tocar, a partir da sua linha da fila, do docs/01 e do código que ela nomeia: entregas cujos arquivos não se encontram podem ser construídas ao mesmo tempo, em uma pasta ou em worktrees; entregas cujos arquivos se encontram são construídas uma depois da outra em qualquer dos dois, e um `· after <slug>` na segunda diz isso na fila.
 
 **Portas e bancos de dados compartilhados.** Duas sessões compartilham a máquina nas duas formas: as suas portas, um banco de dados de teste em uma pasta comum.
 Em uma pasta elas também compartilham a própria pasta, o seu banco de dados de teste e a saída do seu build.
@@ -409,10 +414,10 @@ O `/propose` em lote leva o paralelo para a definição: os agentes escrevem as 
 ## Pontos-chave
 
 * Duas sessões dividem uma pasta no trunk quando as suas linhas estão livres e os seus arquivos não se encontram: cada uma marca só a sua linha, coloca em stage só os seus caminhos e a sua linha da fila, e você decide cada commit, uma entrega por vez.
-* A marca de outra linha, a página ou os arquivos de outra entrega e as entradas em stage de outra sessão não são conflito; nem duas linhas vizinhas da fila em um hunk; uma linha editada pelas duas, ou um arquivo de que uma página precisa e que a outra está mudando, é: pare, e então ordene as linhas ou dê a uma delas um worktree.
+* A marca de outra linha, a página ou os arquivos de outra entrega e as entradas em stage de outra sessão não são conflito; nem duas linhas vizinhas da fila em um hunk; uma linha editada pelas duas, ou um arquivo de que uma página precisa e que a outra está mudando, é: pare, e então ordene as linhas com `· after`, já que o `/apply` faz a mesma verificação em um worktree.
 * Uma pasta tem um só índice, então faça o commit a partir dele quando ele guarda só aquela entrega: `git diff --cached --stat` nomeia arquivos, então leia também o diff em stage de um arquivo compartilhado, pelas suas linhas; com outra entrega em stage, espere; e nunca escolha uma entrega com `git commit -- <caminhos>`, que pega cada arquivo nomeado inteiro da pasta, com as linhas da outra entrega em um arquivo compartilhado, em stage ou não.
-* Um worktree por entrega compensa para várias pessoas, ou para entregas que mexem nos mesmos arquivos: uma pasta contêiner cujo `main/` é o checkout guarda o worktree de cada entrega em `<oculta>/worktrees/<slug>/` no `<prefixo><slug>`, `.focus-kit/` e `focus-kit/` por padrão; `git worktree add`, trabalhe ali, `git merge --no-ff` em `main/`, `git worktree remove`, `git branch -d`; cada worktree tem o seu próprio índice, o `/propose` reivindica a linha com o script do kit, que roda como um alias do git pelo próprio `sh` do git, o do Git for Windows no Windows, recusa fora de `main/` e fora do branch padrão, dá push no branch quando o cria ou quando o remoto não o tem, a reivindicação da linha, e imprime o caminho do worktree, e as marcas da linha ficam no branch até o merge, e o script de fila, digitado com a palavra do slot em `main/` ou em qualquer worktree, as lê do branch de cada entrega no origin, ficando com a marca mais adiante e listando as linhas que só um branch tem, embora não veja marca nem branch que ainda não teve push; cada sessão abre onde trabalha, nunca no contêiner: o `/propose` em `main/`, que edita os worktrees pelo manual do contêiner, um comando digitado com vários slugs ali também, os subagentes dele escrevendo em cada worktree, ou mandados para cada um, e o `/apply` em uma sessão nova no worktree cujo caminho o `/propose` dá, parando antes de qualquer edição em qualquer outro lugar; um `/apply` travado ali pode colocar o seu trabalho parcial em stage para você fazer o commit no branch, que fica sem merge até a entrega estar pronta; um conflito deixa as duas versões entre marcadores, e `git diff --cached --check` pega qualquer um que sobrou antes do commit.
-* O paralelo compensa enquanto os arquivos das entregas não se encontram, ou só se encontram entre worktrees cujo merge você consegue decidir, as portas e os bancos de dados da máquina não colidem, o disco comporta as dependências de cada worktree, e uma pessoa ainda consegue revisar cada entrega; o `/propose` pode rodar em lote, um comando instruído a decidir sozinho, sem colocar nada em stage, cada página listando o que decidiu sozinha para você ler antes de qualquer `/apply`, cada `/apply` colocando a sua própria entrega em stage, e todo commit continua sendo decisão sua, feito por você ou pedido ao agente depois da sua revisão, ou dada uma vez no slot Git, com cada commit ou merge revisado depois que entra.
+* Um worktree por entrega compensa para várias pessoas, ou para entregas que mexem nos mesmos arquivos: uma pasta contêiner cujo `main/` é o checkout guarda o worktree de cada entrega em `<oculta>/worktrees/<slug>/` no `<prefixo><slug>`, `.focus-kit/` e `focus-kit/` por padrão; `git worktree add`, trabalhe ali, `git merge --no-ff` em `main/`, `git worktree remove`, `git branch -d`; cada worktree tem o seu próprio índice, o `/propose` reivindica a linha com o script do kit, que roda como um alias do git pelo próprio `sh` do git, o do Git for Windows no Windows, roda a partir de `main/` no branch padrão, respondendo `here` no worktree do próprio slug, cria o worktree a partir do branch principal do origin e o branch no origin só quando o origin não tem nenhum, a reivindicação da linha, responde `taken` para o branch de outro clone a não ser com `resume`, e imprime o caminho do worktree, e as marcas da linha ficam no branch até o merge, e o script de fila, digitado com a palavra do slot em `main/` ou em qualquer worktree, lê um branch no origin como a reivindicação e a linha de cada entrega do seu branch até o merge, a cópia do branch principal depois dele, um `[?]` em qualquer cópia travando, e mostra uma linha que só um branch tem no seu marco, embora não veja marca que ainda não teve push; cada sessão abre onde trabalha, nunca no contêiner: o `/propose` em `main/`, que edita os worktrees pelo manual do contêiner, um comando digitado com vários slugs ali também, os subagentes dele escrevendo em cada worktree, ou mandados para cada um, e o `/apply` em uma sessão nova no worktree cujo caminho o `/propose` dá, parando antes de qualquer edição em qualquer outro lugar; um `/apply` travado ali pode colocar o seu trabalho parcial em stage para você fazer o commit no branch, que fica sem merge até a entrega estar pronta; um conflito deixa as duas versões entre marcadores, e `git diff --cached --check` pega qualquer um que sobrou antes do commit.
+* O paralelo compensa enquanto as construções das entregas não tocam os mesmos arquivos, o que o `/apply` verifica em uma pasta e em worktrees do mesmo jeito, as portas e os bancos de dados da máquina não colidem, o disco comporta as dependências de cada worktree, e uma pessoa ainda consegue revisar cada entrega; o `/propose` pode rodar em lote, um comando instruído a decidir sozinho, sem colocar nada em stage, cada página listando o que decidiu sozinha para você ler antes de qualquer `/apply`, cada `/apply` colocando a sua própria entrega em stage, e todo commit continua sendo decisão sua, feito por você ou pedido ao agente depois da sua revisão, ou dada uma vez no slot Git, com cada commit ou merge revisado depois que entra.
 
 [^git-commit]: Git, "git-commit", a documentação, opção `--only`, acesso em 2026-10-13. <https://git-scm.com/docs/git-commit>
 [^git-clone]: Git, "git-clone", a documentação, opção `--bare`, acesso em 2026-10-16. <https://git-scm.com/docs/git-clone>
