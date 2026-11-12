@@ -197,21 +197,22 @@ So no folder's queue shows every delivery at once, and asking one of them which 
 The kit's queue script (chapter 14) reads every delivery's line at once, from `main/` or from any worktree, when it gets the Git slot's word: `git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq worktree .focus-kit focus-kit/`, or the hidden folder and prefix the slot names.
 It fetches origin, reads every line from the default branch on origin and each delivery's line from `origin/<prefix><slug>`, and edits nothing.
 Where the folder's copy, the default branch on origin and the delivery's branch disagree on a line, it keeps the mark furthest along the flow, so an older copy does not show a merged or in-flight line as free.
-On the lending library, with `return-book` being built in its worktree at `[*]`, `overdue-list` defined in its own at `[>]`, both branches pushed, and `main/`'s queue still showing both lines `[ ]`, the script run from `main/` prints this; the queue and the run are written for this chapter:
+On the lending library, with `return-book` being built in its worktree at `[*]`, `overdue-list` defined in its own at `[>]`, each mark committed on its branch and pushed by you, and `main/`'s queue still showing both lines `[ ]`, the script run from `main/` prints this; the queue and the run are written for this chapter:
 
 ```
 milestone: M2. Returns
 [*] return-book (PA) · in flight: apply
-[>] overdue-list (PA) · apply now
+[>] overdue-list (P-) · waits: the lines above are done
  └[ ] m2-review + after return-book · waits: after overdue-list
 
-free for /apply, together: overdue-list
+free for /apply, together: none
 free for /propose, together: none
 only on a branch:
   damaged-copy (return-book)
 ```
 
-Each delivery's line comes from its branch: `return-book` is in flight, `overdue-list` is free for `/apply`, and `m2-review`, the milestone's review, waits under `overdue-list` with `+ after return-book`.
+Each delivery's line comes from its branch: `return-book` is in flight, `overdue-list` is defined and waits, and `m2-review`, the milestone's review, waits under `overdue-list` with `+ after return-book`.
+`overdue-list` carries `(P-)`, since its build shares `src/features/loans/` with `return-book`'s: the `-` holds its `/apply` until every line above is `[x]`, which the script prints as `waits: the lines above are done`, so no line is free for `/apply`.
 `damaged-copy` is a line `return-book`'s session added on its branch, in no queue of `main/` yet, so the script lists it apart, naming in brackets a branch that holds it.
 
 The mark further along counts in the worktrees too.
@@ -220,7 +221,8 @@ Typed with `trunk` in that worktree, the script fetches nothing and reads only t
 
 The script reads the branches on origin, as last fetched.
 A mark committed in a worktree and not pushed, or a branch never pushed, is not seen from another folder; when `git fetch` fails, the script prints `note: git fetch origin failed; branches as last fetched` and draws the tree from what it fetched before.
-And the tree shows marks, not claims: in the moment after `/propose` claims a line, before any mark on its branch is pushed, the line shows as the main branch has it, `[ ] · propose now`.
+And the tree shows the marks that reached origin, not claims, and by default no mark reaches origin before you commit on the delivery's branch and push it: `/propose` and `/apply` write each mark in the worktree and commit nothing on their own, and after the claim only you push, or ask for a push.
+The example's marks got there by that step, yours and outside the default; without it, from the claim until your commit and push, a line shows as the main branch has it, `[ ] · propose now`.
 The branch is the claim all the same, and the claim script answers the next `/propose` of that slug with `claim: existing`, so while a line's branch exists on origin, which `git branch -r` lists after the fetch, do not take the line as free from the tree alone.
 
 A branch `<slug>` without the prefix is not the delivery's: it is someone else's.

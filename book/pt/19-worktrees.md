@@ -197,21 +197,22 @@ Então nenhuma fila de pasta mostra todas as entregas de uma vez, e perguntar a 
 O script de fila do kit (capítulo 14) lê a linha de cada entrega de uma vez, de `main/` ou de qualquer worktree, quando recebe a palavra do slot Git: `git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq worktree .focus-kit focus-kit/`, ou a pasta oculta e o prefixo que o slot nomeia.
 Ele faz fetch do origin, lê cada linha do branch padrão no origin e a linha de cada entrega de `origin/<prefixo><slug>`, e não edita nada.
 Onde a cópia da pasta, o branch padrão no origin e o branch da entrega discordam sobre uma linha, ele fica com a marca mais adiante no fluxo, então uma cópia mais velha não mostra como livre uma linha com merge ou em andamento.
-Na biblioteca, com `devolver-livro` sendo construída no seu worktree em `[*]`, `lista-de-atrasos` definida no dela em `[>]`, os dois branches com push, e a fila de `main/` ainda mostrando as duas linhas `[ ]`, o script rodado em `main/` imprime isto; a fila e a execução foram escritas para este capítulo:
+Na biblioteca, com `devolver-livro` sendo construída no seu worktree em `[*]`, `lista-de-atrasos` definida no dela em `[>]`, cada marca com commit no branch da linha e push feitos por você, e a fila de `main/` ainda mostrando as duas linhas `[ ]`, o script rodado em `main/` imprime isto; a fila e a execução foram escritas para este capítulo:
 
 ```
 milestone: M2. Devoluções
 [*] devolver-livro (PA) · in flight: apply
-[>] lista-de-atrasos (PA) · apply now
+[>] lista-de-atrasos (P-) · waits: the lines above are done
  └[ ] m2-review + after devolver-livro · waits: after lista-de-atrasos
 
-free for /apply, together: lista-de-atrasos
+free for /apply, together: none
 free for /propose, together: none
 only on a branch:
   exemplar-danificado (devolver-livro)
 ```
 
-A linha de cada entrega vem do seu branch: `devolver-livro` está em andamento, `lista-de-atrasos` está livre para o `/apply`, e `m2-review`, a revisão do marco, espera sob `lista-de-atrasos` com `+ after devolver-livro`.
+A linha de cada entrega vem do seu branch: `devolver-livro` está em andamento, `lista-de-atrasos` está definida e espera, e `m2-review`, a revisão do marco, espera sob `lista-de-atrasos` com `+ after devolver-livro`.
+`lista-de-atrasos` leva `(P-)`, já que a construção dela divide `src/features/emprestimos/` com a de `devolver-livro`: o `-` segura o `/apply` dela até toda linha acima estar `[x]`, o que o script imprime como `waits: the lines above are done`, então nenhuma linha está livre para o `/apply`.
 `exemplar-danificado` é uma linha que a sessão de `devolver-livro` acrescentou no seu branch, ainda em nenhuma fila de `main/`, então o script a lista à parte, nomeando entre parênteses um branch que a tem.
 
 A marca mais adiante conta nos worktrees também.
@@ -220,7 +221,8 @@ Digitado com `trunk` nesse worktree, o script não faz fetch de nada e lê só a
 
 O script lê os branches no origin, como no último fetch.
 Uma marca com commit em um worktree e sem push, ou um branch que nunca teve push, não são vistos de outra pasta; quando o `git fetch` falha, o script imprime `note: git fetch origin failed; branches as last fetched` e desenha a árvore com o que buscou antes.
-E a árvore mostra marcas, não reivindicações: no momento depois que o `/propose` reivindica uma linha, antes de qualquer marca no branch dela ter push, a linha aparece como o branch principal a tem, `[ ] · propose now`.
+E a árvore mostra as marcas que chegaram ao origin, não reivindicações, e por padrão nenhuma marca chega ao origin antes de você fazer o commit no branch da entrega e o push dele: o `/propose` e o `/apply` escrevem cada marca no worktree e não fazem commit de nada por conta própria, e depois da reivindicação só você faz push, ou pede um.
+As marcas do exemplo chegaram lá por esse passo, seu e fora do padrão; sem ele, da reivindicação até o seu commit e push, uma linha aparece como o branch principal a tem, `[ ] · propose now`.
 O branch é a reivindicação do mesmo jeito, e o script de reivindicação responde ao próximo `/propose` desse slug com `claim: existing`, então, enquanto o branch de uma linha existe no origin, o que o `git branch -r` lista depois do fetch, não tome a linha como livre só pela árvore.
 
 Um branch `<slug>` sem o prefixo não é o da entrega: é de outra pessoa.

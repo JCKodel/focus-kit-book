@@ -722,7 +722,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.24 and the reposi
 [x] m32-records-claims  the records of kit-2026-10-24, ch08-update-2026-10-24, ch11-14-queue-tree and ch19-queue-branches hold only what happened: what `queue.sh` reads, docs/06 and not work/; the pt line of 2026.10.20.3; that the six screenshots show chapter 14 before its review's two fixes; the decision the fixture's token reverses; the changelog's words without "or in-flight" · after m32-review · from m32-review
 [x] queue-tree-row-source docs/03's `queue tree` row and ADR-0018's `kit-2026-10-24` amendment cite for the no-slug rule and /apply's ending the skills that hold them, not docs/05 §4 · after m32-review · from m32-review
 [x] ch14-key-points-pointers chapter 14 with at most five key points, as docs/04 says, and the forward pointers M32 added in chapters 8, 12, 13 and 14 once per chapter for each target, or docs/04's rule restated by the author; both editions · after m32-review · from m32-review
-[ ] ch19-example-marks  chapter 19's example: `overdue-list`'s token against the folder it shares with `return-book`, and how a mark reaches origin before the person's commit, which the tree from `main/` needs; both editions · after m32-review · from m32-review
+[x] ch19-example-marks  chapter 19's example: `overdue-list`'s token against the folder it shares with `return-book`, and how a mark reaches origin before the person's commit, which the tree from `main/` needs; both editions · after m32-review · from m32-review
 ```
 
 ## M33. focus-kit 2026.10.25
