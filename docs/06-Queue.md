@@ -794,3 +794,15 @@ When this milestone closes, the book teaches focus-kit 2026.11.12 and the reposi
 [ ] ch15-review-grades      chapter 15: the milestone review copying the deliveries' notes and grading findings, grave a line each, the medium ones the person picks on one `<milestone>-fixes` line, the small ones listed · after kit-2026-11-12
 [ ] m38-review               the review of M38 as docs/05 §8 says · after all
 ```
+
+## M39. focus-kit 2026.11.13
+
+When this milestone closes, the book teaches focus-kit 2026.11.13 and the repository runs on it: a line that needs another line first ending `· after <slug>` and keeping `[ ]` or `[>]`, never `[?]`, also when work already started finds the need; a line waiting as `[?]` in three cases, none of them another line; `/apply` no longer resolving dependent lines; `queue.sh` showing a claimed line that still waits as `waits` and reading a delivery's own line from its worktree; `queue.sh` drawing every open milestone, so a blocked one hides no free line of the next; a milestone told by main's heading, whatever a branch's wording of it; and a `[?]` blocking on the copy that put it.
+
+```
+[ ] kit-2026-11-13          reinstall the kit at 2026.11.13 and apply its migration report in the same session: docs/05 §4's three cases of waiting and its paragraph on `after`, its sentences on which copy's `[?]` blocks and on the trees, one per open milestone, and any `[?]` line of docs/06 ending `· blocked: after <slug>` · after m38-review
+[ ] ch13-apply-after        chapter 13: /apply returning a line that waits on a prerequisite fix to `[>]` with `· after <slug>` instead of blocking it, and no longer resolving dependent lines at its end · after kit-2026-11-13
+[ ] ch14-after-never-waits  chapter 14: `[?]` in three cases and never on another line, a line that needs another ending `· after <slug>` at `[ ]` or `[>]` whenever the need is found, what `after` read per command costs, and `queue.sh` showing such a line as `waits`, with the two `[?]` lines of 2026-11-13 as the error · after kit-2026-11-13
+[ ] ch14-queue-every-milestone chapter 14: `queue.sh` drawing every open milestone and offering the free lines across them, with the `next: none` of 2026-11-13 over seven free lines as the error; a milestone told by main's heading when a branch rewords it; and a `[?]` blocking on the copy that put it, with the inherited `[?]` of 2026-11-09 as the error · after kit-2026-11-13
+[ ] m39-review               the review of M39 as docs/05 §8 says · after all
+```
