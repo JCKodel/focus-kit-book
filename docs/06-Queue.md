@@ -759,7 +759,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.27 and the reposi
 
 ```
 [x] kit-2026-10-27          reinstall the kit at 2026.10.27; the report lists no migration, the script alone changes · after m34-review
-[ ] ch12-14-mark-refused    chapters 12, 13 and 14: `mark.sh` refusing a second `[~]` or `[*]` on one line, with the two `/apply` of one slug six seconds apart on 2026-10-26 as the error; both editions · after kit-2026-10-27
+[x] ch12-14-mark-refused    chapters 12, 13 and 14: `mark.sh` refusing a second `[~]` or `[*]` on one line, with the two `/apply` of one slug six seconds apart on 2026-10-26 as the error; both editions · after kit-2026-10-27
 [ ] m35-review               the review of M35 as docs/05 §8 says · after all
 ```
 
