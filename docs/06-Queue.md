@@ -771,7 +771,8 @@ When this milestone closes, the book teaches focus-kit 2026.10.27.1 and the repo
 ```
 [x] kit-2026-10-27-1        reinstall the kit at 2026.10.27.1 and apply its migration report: docs/05 §4's two sentences and §8's review start leaving dropped lines out · after m35-review
 [x] ch14-15-after-all-dropped chapters 14 and 15: `after all` leaving out a cancelled line, a line naming one still re-decided by the person, with the Milestone 1 review of 2026-10-26 that had to list 27 slugs as the error; both editions · after kit-2026-10-27-1
-[ ] m36-review               the review of M36 as docs/05 §8 says · after all
+[x] m36-review               the review of M36 as docs/05 §8 says · after all
+[ ] m36-fixes                the two medium findings of m36-review, each an item of its page: chapter 14's reason that a review is neither dropped nor rewritten on what exists, against the next sentence's 27-slug list and a dropped review, and chapter 15's "re-decide it" read as the cancelled line; both editions · after m36-review · from m36-review
 ```
 
 ## M37. focus-kit 2026.11.03
