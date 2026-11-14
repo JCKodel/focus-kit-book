@@ -47,7 +47,7 @@ Um arquivo em `work/` não deixa uma página pronta: só o `/propose` marca a li
 Em uma página que ainda tem uma pergunta aberta, ou cuja linha está `[ ]` ou `[~]`, ele se recusa a construir e aponta para o `/propose`: na biblioteca, em um exemplo escrito para este capítulo, `/apply emprestar-livro` em uma página cujo Contrato ainda tem uma pergunta sem resposta não edita nada e nomeia `/propose emprestar-livro`, onde a pergunta recebe a sua resposta.
 Essa recusa vem antes de qualquer construção, então não é nenhuma das paradas que "Quando o trabalho não consegue seguir" descreve: nada foi construído, e a linha não é marcada como `[?]`.
 O mesmo vale, com um worktree por entrega, para `/apply <slug>` digitado em uma sessão em qualquer pasta que não o worktree da entrega, `main/` incluída, e para um subagente não mandado para o caminho desse worktree: recusa do mesmo jeito, não edita nada, deixa a marca como está, e dá o caminho do worktree, onde você abre a sessão nova de novo, ou para onde a sessão que digitou `/apply a b`, pela palavra do seu comando, manda de novo um subagente no slug; essa sessão, em `main/`, não recusa, já que ela mesma não edita nada e manda cada subagente para o worktree do seu slug.
-Em uma linha `[>]` cujo `after` nomeia uma linha ainda não integrada (`[x]` no trunk; com um branch ou um worktree por entrega, com merge no branch principal), ele também não começa, diz o que espera, e deixa a marca como está: um `after` é uma ordem, não uma espera, e não marca a linha como `[?]`.
+Em uma linha `[>]` cujo `after` nomeia uma linha ainda não integrada (`[x]` no trunk; com um branch ou um worktree por entrega, com merge no branch principal), ele também não começa, nomeia essa linha, e deixa a marca como está: um `after` é uma ordem, não uma espera, e não marca a linha como `[?]`.
 Nem começa em arquivos que outra construção está mudando: ele compara os arquivos em que a sua página mexe com os das construções em andamento e das feitas e ainda não integradas, e um arquivo em que as duas mexem é um conflito, então ele para, nomeia a outra linha e os arquivos, e deixa a marca como está (capítulo 14).
 Só em uma linha `[>]` completa cujas linhas do `after` estão todas integradas e cujos arquivos nenhuma outra construção está mudando ele marca a linha como `[*]` no docs/06, pelo script de marca, como a sua primeira edição, para a fila mostrar a construção em andamento.
 O script põe `[*]` só numa linha `[>]`, então um segundo `/apply` do slug, digitado em outra sessão, é recusado ali e para sem construir, já que a linha é de outra sessão.
@@ -77,7 +77,7 @@ Esta linha então recebe o slug daquela no seu `after`, ao lado de qualquer slug
 Ela não está esperando, então essa parada não põe `[?]` nela.
 O `[>]` nomeia o seu próximo comando, o `/apply`, e o `after` diz quando esse comando pode rodar: quando toda linha que ele nomeia estiver integrada.
 Quem lê a fila vê as duas coisas na linha.
-Qualquer que seja a parada, ele escreve na página o que foi construído e o que ela espera, e deixa a página em `work/`.
+Qualquer que seja a parada, ele escreve na página o que foi construído e aquilo de que a linha precisa, e deixa a página em `work/`.
 Ele termina a página com uma mensagem parcial em um bloco `commit` e mostra o mesmo bloco na conversa.
 No trunk ele não coloca nada em stage: o trabalho fica sem commit, e fora do índice, até estar inteiro.
 Em um branch da entrega ele pode colocar o trabalho parcial em stage para você fazer o commit lá, e o branch fica sem merge até a entrega estar pronta (capítulo 19).
@@ -220,7 +220,7 @@ free for /propose, in order: devolver-livro m2-review
 next: /propose devolver-livro
 ```
 
-`devolver-livro` está livre para o `/propose`, como está desde que `emprestar-livro` ficou `[>]`, e `m1-review`, escrita `· after all`, espera até `devolver-livro` estar definida.
+`devolver-livro` está livre para o `/propose`, como está desde que `emprestar-livro` ficou `[>]`, e `m1-review`, escrita `· after all`, só fica livre quando `devolver-livro` estiver definida.
 `m2-review`, a revisão do marco 2, também está livre para o `/propose`, já que `formato-devolucao` está `[x]`.
 Ela está na árvore porque o script desenha cada marco aberto e oferece as linhas livres dele depois das do marco 1 (capítulo 14); então as linhas livres vêm como um comando, `/propose devolver-livro m2-review`, cada slug um agente a mais, e o `next:` nomeia a primeira, `/propose devolver-livro`, em uma sessão nova, no Claude Code, ou `$propose devolver-livro` no Codex (a tabela do capítulo 8).
 Um fim que espera a pergunta não diz o próximo comando: em 2026-11-03 uma pessoa relatou que o `/apply` tinha terminado sem dizer o próximo comando.

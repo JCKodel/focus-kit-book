@@ -166,7 +166,7 @@ Um pequeno espera a pessoa porque o seu custo é um palpite.
 
 ## Uma linha, e não uma correção
 
-A linha de um achado grave, a linha de correções e a linha de um pequeno que a pessoa escolheu vão para o mesmo marco, sob a linha da revisão, esperando o `/propose`.
+A linha de um achado grave, a linha de correções e a linha de um pequeno que a pessoa escolheu ficam no mesmo marco, sob a linha da revisão, e passam pelo `/propose`.
 Cada linha diz o que vai ser verdade, nunca como corrigir.
 Com o exemplar devolvido entre os empréstimos do membro e o achado médio escolhido, as linhas do marco terminariam assim, escritas para este capítulo:
 

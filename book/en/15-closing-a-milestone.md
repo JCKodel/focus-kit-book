@@ -162,7 +162,7 @@ A small one waits for the person because its cost is a guess.
 
 ## A line, and not a fix
 
-A grave finding's line, the fixes line and the line of a small one the person picked go in the same milestone, under the review line, waiting for `/propose`.
+A grave finding's line, the fixes line and the line of a small one the person picked sit in the same milestone, under the review line, and go through `/propose`.
 Each line says what will be true, never how to fix it.
 With the returned copy among the member's loans and the medium finding picked, the milestone's lines would end this way, written for this chapter:
 

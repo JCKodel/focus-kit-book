@@ -47,7 +47,7 @@ A file in `work/` does not make a page ready: only `/propose` marks the line `[>
 On a page that still has a question open, or whose line is `[ ]` or `[~]`, it refuses to build and points to `/propose`: in the lending library, in an example written for this chapter, `/apply lend-book` on a page whose Contract still has a question unanswered edits nothing and names `/propose lend-book`, where the question gets its answer.
 That refusal comes before any build, so it is none of the stops that "When the work cannot go on" describes: nothing was built, and the line is not marked `[?]`.
 The same holds, with a worktree per delivery, for `/apply <slug>` typed in a session in any folder but the delivery's worktree, `main/` included, and for a subagent not sent to that worktree's path: it refuses the same way, edits nothing, leaves the mark as it is, and gives the worktree's path, where you open the fresh session again, or where the session that typed `/apply a b`, on your command's word, sends a subagent on the slug again; that session, in `main/`, does not refuse, since it edits nothing itself and sends each subagent to its slug's worktree.
-On a `[>]` line whose `after` names a line not yet integrated, `[x]` on trunk, merged into the main branch with a branch or a worktree per delivery, it does not start either, says what it waits on, and leaves the mark as it is: an `after` is an order, not a wait, and does not mark the line `[?]`.
+On a `[>]` line whose `after` names a line not yet integrated, `[x]` on trunk, merged into the main branch with a branch or a worktree per delivery, it does not start either, names that line, and leaves the mark as it is: an `after` is an order, not a wait, and does not mark the line `[?]`.
 Nor does it start on files another build is changing: it compares the files its page touches with those of the builds in flight and of those done and not yet integrated, and a file both touch is a conflict, so it stops, names the other line and the files, and leaves the mark as it is (chapter 14).
 Only on a complete `[>]` line whose `after` lines are all integrated and whose files no other build is changing does it mark the line `[*]` in docs/06, through the mark script, as its first edit, so the queue shows the build under way.
 The script sets `[*]` only on a `[>]` line, so a second `/apply` of the slug, typed in another session, is refused there and stops without building, the line being another session's.
@@ -77,7 +77,7 @@ This line then takes that line's slug as its `after`, beside any slug its `after
 It is not waiting, so this stop puts no `[?]` on it.
 The `[>]` names its next command, `/apply`, and the `after` says when that command may run: once every line it names is integrated.
 Whoever reads the queue sees both on the line.
-Whichever the stop, it writes on the page what was built and what it waits on, and leaves the page in `work/`.
+Whichever the stop, it writes on the page what was built and what the line needs, and leaves the page in `work/`.
 It ends the page with a partial message in a `commit` block and shows the same block in the conversation.
 On trunk it stages nothing: the work stays uncommitted, and out of the index, until it is whole.
 On a delivery branch it may stage the partial work for you to commit there, and the branch stays unmerged until the delivery is done (chapter 19).
@@ -220,7 +220,7 @@ free for /propose, in order: return-book m2-review
 next: /propose return-book
 ```
 
-`return-book` is free for `/propose`, as it has been since `lend-book` was `[>]`, and `m1-review`, written `· after all`, waits until `return-book` is defined.
+`return-book` is free for `/propose`, as it has been since `lend-book` was `[>]`, and `m1-review`, written `· after all`, is not free until `return-book` is defined.
 `m2-review`, milestone 2's review, is free for `/propose` too, since `due-date-format` is `[x]`.
 It is in the tree because the script draws every open milestone and offers its free lines after milestone 1's (chapter 14); so the free lines come as one command, `/propose return-book m2-review`, each slug one more agent, and `next:` names the first, `/propose return-book`, in a fresh session, in Claude Code, or `$propose return-book` in Codex (chapter 8's table).
 An ending that waits to be asked names no next command: on 2026-11-03 a person reported that `/apply` had ended without naming the next command.

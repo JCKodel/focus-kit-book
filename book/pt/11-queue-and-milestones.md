@@ -58,7 +58,7 @@ suspensa é recusado.
 ```
 ````
 
-Qualquer pessoa lê o estado nele: três entregas feitas, `emprestar-livro` está completamente definida e espera o `/apply`, e duas linhas ainda não estão definidas, das quais `devolver-livro` vem depois de `emprestar-livro`, já que um exemplar só é devolvido depois de ter sido emprestado.
+Qualquer pessoa lê o estado nele: três entregas feitas, `emprestar-livro` está completamente definida e pronta para o `/apply`, e duas linhas ainda não estão definidas, das quais `devolver-livro` vem depois de `emprestar-livro`, já que um exemplar só é devolvido depois de ter sido emprestado.
 
 ## Marcos
 
@@ -90,12 +90,12 @@ Não há campo de prioridade nem etiqueta para manter em dia com a ordem.
 Quando você acrescenta uma linha e já sabe que ela precisa de outra feita antes, você escreve isso junto, no fim: uma devolução precisa de um empréstimo, então `devolver-livro` termina com `· after emprestar-livro`.
 Isso é uma ordem, não uma espera: a linha mantém a sua marca, `[ ]`, e a ordem é lida para cada comando.
 `/propose devolver-livro` pode começar quando `emprestar-livro` estiver `[>]` ou além, como está agora, já que a definição precisa da página de `emprestar-livro`; `/apply devolver-livro` espera até `emprestar-livro` estar integrada, `[x]` no trunk, já que a construção precisa do código dela.
-O script de fila do kit desenha essa ordem: enquanto `emprestar-livro` não está `[x]`, ele mostra `devolver-livro` sob `emprestar-livro`, cada linha sob a última linha que ela espera (o capítulo 14 lê a árvore).
+O script de fila do kit desenha essa ordem: enquanto `emprestar-livro` não está `[x]`, ele mostra `devolver-livro` sob `emprestar-livro`, cada linha sob a última linha depois da qual ela vem (o capítulo 14 lê a árvore).
 `emprestar-livro` não leva `after`: as linhas de que ela precisa, `catalogo` e `membros`, já estão `[x]`.
 
 ### A revisão, e os seus achados
 
-Um marco é planejado com a sua revisão como a última linha, `<milestone>-review · after all` (em inglês, como o kit a escreve: `m1-review` para o primeiro marco), uma entrega como as outras, que espera as linhas acima dela e pega o parágrafo cláusula por cláusula ([capítulo 15](15-closing-a-milestone.md)).
+Um marco é planejado com a sua revisão como a última linha, `<milestone>-review · after all` (em inglês, como o kit a escreve: `m1-review` para o primeiro marco), uma entrega como as outras, que vem depois das linhas acima dela e pega o parágrafo cláusula por cláusula ([capítulo 15](15-closing-a-milestone.md)).
 Ela não corrige nada: uma pessoa testa cada cláusula à mão e, com a palavra da pessoa, o código alterado desde a base do marco é lido por quem o slot Milestone review do docs/05 do projeto cita, quando cita alguém, a revisão profunda do host ou um agente somente leitura por área, e nos dois casos um conferente marca cada candidato antes que a pessoa o veja.
 Os achados dela ficam no mesmo marco, sob a linha da revisão, mesmo quando o marco seguinte já tem linhas.
 Cada achado grave, que quebra uma cláusula do parágrafo para uma pessoa no seu caminho habitual, perde ou expõe dados, deixa a verificação vermelha, ou é uma correção sem a qual uma entrega em andamento não consegue seguir, vira uma linha `[ ]` própria.
@@ -183,7 +183,7 @@ Foi isso o que a regra custou: duas sessões curtas, uma revisão e um commit.
 Em troca, a fila diz que a mudança existe, a página diz o que ela faz e o que deixa de fora, e um teste falha se o formato um dia voltar ao que era.
 Uma edição feita na hora teria pulado a linha, a página, o teste e a revisão.
 A página é do tamanho da mudança: sete seções de uma ou duas linhas, e uma página que precisa de mais para uma mudança deste tamanho está definindo mais de uma entrega.
-A regra vale em toda sessão: durante o `/propose` a mudança é uma linha nova, a não ser que você a peça na página que está sendo escrita; durante o `/apply`, uma falha encontrada fora do que a entrega construiu vira uma nota na página da entrega para a revisão do marco, ou uma linha `[ ]` quando é grave, e só uma correção de que a entrega precisa antes fica acima da linha da entrega e a faz esperar (capítulo 14).
+A regra vale em toda sessão: durante o `/propose` a mudança é uma linha nova, a não ser que você a peça na página que está sendo escrita; durante o `/apply`, uma falha encontrada fora do que a entrega construiu vira uma nota na página da entrega para a revisão do marco, ou uma linha `[ ]` quando é grave, e só uma correção de que a entrega precisa antes fica acima da linha da entrega, que a recebe no seu `after` (capítulo 14).
 Uma edição feita mesmo assim, para "só trocar o rótulo", é desfeita antes de qualquer commit.
 Os documentos continuam mudando conversando, em qualquer sessão; a regra cobre o código: o fonte do app, os testes, uma migração, a configuração.
 

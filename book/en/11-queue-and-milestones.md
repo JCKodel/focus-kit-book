@@ -55,7 +55,7 @@ an overdue book or a suspended membership is refused.
 ```
 ````
 
-Anyone can read the state from it: three deliveries done, `lend-book` is completely defined and waits for `/apply`, and two lines are not defined yet, of which `return-book` comes after `lend-book`, since a copy is returned only after it was lent.
+Anyone can read the state from it: three deliveries done, `lend-book` is completely defined and ready for `/apply`, and two lines are not defined yet, of which `return-book` comes after `lend-book`, since a copy is returned only after it was lent.
 
 ## Milestones
 
@@ -87,12 +87,12 @@ There is no priority field and no label to keep in step with the order.
 When you add a line and already know it needs another done first, you write that with it, at the end: a return needs a loan, so `return-book` ends with `· after lend-book`.
 That is an order, not a wait: the line keeps its mark, `[ ]`, and the order is read for each command.
 `/propose return-book` may start once `lend-book` is `[>]` or beyond, as it is now, since the definition needs `lend-book`'s page; `/apply return-book` waits until `lend-book` is integrated, `[x]` on trunk, since the build needs its code.
-The kit's queue script draws that order: while `lend-book` is not `[x]`, it shows `return-book` under `lend-book`, each line under the last line it waits on (chapter 14 reads the tree).
+The kit's queue script draws that order: while `lend-book` is not `[x]`, it shows `return-book` under `lend-book`, each line under the last line it comes after (chapter 14 reads the tree).
 `lend-book` carries no `after`: the lines it needs, `catalog` and `members`, are already `[x]`.
 
 ### The review, and its findings
 
-A milestone is planned with its review as its last line, `<milestone>-review · after all`, a delivery like the others, which waits for the lines above it and takes the paragraph clause by clause ([chapter 15](15-closing-a-milestone.md)).
+A milestone is planned with its review as its last line, `<milestone>-review · after all`, a delivery like the others, which comes after the lines above it and takes the paragraph clause by clause ([chapter 15](15-closing-a-milestone.md)).
 It fixes nothing: a person tests each clause by hand and, on the person's word, the code changed since the milestone's base is read by whoever the Milestone review slot of the project's docs/05 names, when it names anyone, the host's deep review or one read-only agent per area, and either way a checker marks each candidate before the person sees it.
 Its findings stay in the same milestone, under the review line, even when the next milestone already holds lines.
 Each grave one, which breaks a clause of the paragraph for a person on its usual path, loses or exposes data, leaves verify red, or is a fix a delivery in flight cannot go on without, becomes a `[ ]` line of its own.
@@ -178,7 +178,7 @@ That is what the rule cost: two short sessions, one review and one commit.
 In return the queue says the change exists, the page says what it does and what it leaves out, and a test fails if the format ever changes back.
 An edit made on the spot would have skipped the line, the page, the test and the review.
 The page is as short as its change: seven sections of a line or two, and a page that needs more for a change this size is defining more than one delivery.
-The rule holds in every session: during `/propose` the change is a new line, unless you ask for it on the page being written; during `/apply`, a flaw found outside what the delivery built becomes a note on the delivery's page for the milestone's review, or a `[ ]` line when it is grave, and only a fix the delivery needs first goes above the delivery's line and makes it wait (chapter 14).
+The rule holds in every session: during `/propose` the change is a new line, unless you ask for it on the page being written; during `/apply`, a flaw found outside what the delivery built becomes a note on the delivery's page for the milestone's review, or a `[ ]` line when it is grave, and only a fix the delivery needs first goes above the delivery's line, which takes it as its `after` (chapter 14).
 An edit made anyway, to "just change the label", is reverted before anything is committed.
 Documents still change by conversation, in any session; the rule covers the code: the app's source, its tests, a migration, its configuration.
 
