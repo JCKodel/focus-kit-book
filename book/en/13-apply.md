@@ -205,19 +205,24 @@ Then it tells you your next steps:
 2. Review the staged diff: `git diff --staged`.
 3. Commit with the suggested message: `git commit`, and paste the block.
 
-Then, though you did not ask, it runs the queue script and shows its tree, drawn from chapter 11's milestone 1 with `lend-book` now `[x]`, in an example written for this chapter:
+Then, though you did not ask, it runs the queue script and shows its tree, drawn from chapter 11's queue, its two milestones, with `lend-book` now `[x]`, in an example written for this chapter:
 
 ```
 milestone: Milestone 1: a librarian lends and takes back
 [ ] return-book · propose now
  └[ ] m1-review · waits: return-book not defined
 
+milestone: Milestone 2: loan dates read at a glance
+[ ] m2-review · propose now
+
 free for /apply, in order: none
-free for /propose, in order: return-book
+free for /propose, in order: return-book m2-review
 next: /propose return-book
 ```
 
-`return-book` is free for `/propose`, as it has been since `lend-book` was `[>]`, and `m1-review`, written `· after all`, waits until `return-book` is defined; the command is `/propose return-book`, in a fresh session, in Claude Code, or `$propose return-book` in Codex (chapter 8's table).
+`return-book` is free for `/propose`, as it has been since `lend-book` was `[>]`, and `m1-review`, written `· after all`, waits until `return-book` is defined.
+`m2-review`, milestone 2's review, is free for `/propose` too, since `due-date-format` is `[x]`.
+It is in the tree because the script draws every open milestone and offers its free lines after milestone 1's (chapter 14); so the free lines come as one command, `/propose return-book m2-review`, each slug one more agent, and `next:` names the first, `/propose return-book`, in a fresh session, in Claude Code, or `$propose return-book` in Codex (chapter 8's table).
 An ending that waits to be asked names no next command: on 2026-11-03 a person reported that `/apply` had ended without naming the next command.
 If a session ends without the tree, it did not end as the kit says; ask it for the tree, which it draws by running the queue script.
 

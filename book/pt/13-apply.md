@@ -205,19 +205,24 @@ Depois ele diz a você os seus próximos passos:
 2. Revise o diff em stage: `git diff --staged`.
 3. Faça o commit com a mensagem sugerida: `git commit`, e cole o bloco.
 
-Depois, mesmo sem você pedir, ele roda o script de fila e mostra a árvore dele, desenhada a partir do marco 1 do capítulo 11 com `emprestar-livro` já `[x]`, em um exemplo escrito para este capítulo, e as palavras do script ficam em inglês, como o kit as imprime:
+Depois, mesmo sem você pedir, ele roda o script de fila e mostra a árvore dele, desenhada a partir da fila do capítulo 11, os seus dois marcos, com `emprestar-livro` já `[x]`, em um exemplo escrito para este capítulo, e as palavras do script ficam em inglês, como o kit as imprime:
 
 ```
 milestone: Marco 1: um bibliotecário empresta e recebe de volta
 [ ] devolver-livro · propose now
  └[ ] m1-review · waits: devolver-livro not defined
 
+milestone: Marco 2: datas de empréstimo lidas de relance
+[ ] m2-review · propose now
+
 free for /apply, in order: none
-free for /propose, in order: devolver-livro
+free for /propose, in order: devolver-livro m2-review
 next: /propose devolver-livro
 ```
 
-`devolver-livro` está livre para o `/propose`, como está desde que `emprestar-livro` ficou `[>]`, e `m1-review`, escrita `· after all`, espera até `devolver-livro` estar definida; o comando é `/propose devolver-livro`, em uma sessão nova, no Claude Code, ou `$propose devolver-livro` no Codex (a tabela do capítulo 8).
+`devolver-livro` está livre para o `/propose`, como está desde que `emprestar-livro` ficou `[>]`, e `m1-review`, escrita `· after all`, espera até `devolver-livro` estar definida.
+`m2-review`, a revisão do marco 2, também está livre para o `/propose`, já que `formato-devolucao` está `[x]`.
+Ela está na árvore porque o script desenha cada marco aberto e oferece as linhas livres dele depois das do marco 1 (capítulo 14); então as linhas livres vêm como um comando, `/propose devolver-livro m2-review`, cada slug um agente a mais, e o `next:` nomeia a primeira, `/propose devolver-livro`, em uma sessão nova, no Claude Code, ou `$propose devolver-livro` no Codex (a tabela do capítulo 8).
 Um fim que espera a pergunta não diz o próximo comando: em 2026-11-03 uma pessoa relatou que o `/apply` tinha terminado sem dizer o próximo comando.
 Se uma sessão termina sem a árvore, ela não terminou como o kit diz; peça a árvore a ela, que a desenha rodando o script de fila.
 

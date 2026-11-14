@@ -1,6 +1,6 @@
 # 14. The queue while it happens
 
-After this chapter you can read any queue line's state among focus-kit's six marks, say who sets each one, at what moment, and how, one byte through the kit's mark script while every other edit of the queue changes only its own lines, since a program that writes the whole queue can empty it, and why the script refuses a second start of one line, name the next delivery, list every open line of a queue with one search, say which lines can run at the same time from the queue tree the kit's script draws, and say why a build stops on files another build is changing.
+After this chapter you can read any queue line's state among focus-kit's six marks, say who sets each one, at what moment, and how, one byte through the kit's mark script while every other edit of the queue changes only its own lines, since a program that writes the whole queue can empty it, and why the script refuses a second start of one line, name the next delivery, even past a milestone that waits, list every open line of a queue with one search, say which lines can run at the same time from the queue tree the kit's script draws, and say why a build stops on files another build is changing.
 You can also write that a line needs another first, `· after`, whenever the need is found, read for each command and never a wait, mark a line that waits, `[?]`, in its three cases, with its reason and the phase to resume, and take it out again; tell a line from a finding by its `· from <slug>`, say where it goes in its milestone and why every other finding is a note and not a line, and read the `findings:` line the queue script prints; and lay the queue out as a kanban board that shows the work while it happens, and say where each mark is seen.
 And you can resume a line whose session ended, and record a delivery the person cancels so that it never reads as built nor keeps the milestone's review waiting.
 
@@ -138,11 +138,11 @@ A command typed with several slugs makes the same check for each line: `/apply s
 ## What may run now
 
 Asked what may run now, the agent does not read the end of every line for its `after`: it runs the kit's queue script, `propose/scripts/queue.sh`, in one line, `git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq <strategy>`, the same alias trick and the same strategy word as the claim script of [chapter 13](13-apply.md).
-The script reads docs/06 and edits nothing: on trunk the queue of the folder where the session runs, and with a branch or a worktree per delivery, after `git fetch`, each delivery's line from its branch on origin, as the section above says.
-It draws the current milestone, the first with a line not `[x]`, as a tree, the queue tree: each line not yet `[x]`, under the last line it waits on, the one furthest down the queue of the pending lines its `after` names, with the others named after `+ after`, and its state.
+The script reads docs/06 and edits nothing: on trunk the queue of the folder where the session runs, and with a branch or a worktree per delivery, after `git fetch`, each delivery's line from its branch on origin, as the section above says, and chapter 19 says which copy counts in a delivery's own worktree and for a `[?]`, and which heading counts when a branch rewords one.
+It draws every milestone with a line not `[x]`, each under its own `milestone:` line, as a tree, the queue tree: each line not yet `[x]`, under the last line it waits on, the one furthest down the queue of the pending lines its `after` names, with the others named after `+ after`, and its state.
 On trunk, a state is one of these: in flight, by the command its mark names; `propose now` or `apply now`, free for that command; `waits:`, with what it waits on; or `blocked:`, with its reason and the command that resumes it.
-When the milestone holds a line from a finding, two more lines may come between the heading and the tree, `findings:` and a warning, read in the section on findings below.
-Then come the lines free for `/apply` and for `/propose`, each list in queue order, and last `next:`, the command for the first free line down the queue.
+When a milestone holds a line from a finding, two more lines may come between its heading and its tree, `findings:` and a warning, read in the section on findings below.
+Then come the lines free for `/apply` and for `/propose`, each list in queue order across the milestones, and last `next:`, the command for the first free line down the queue.
 Milestone 1 in six lines, written for this chapter like the four above, with `return-book` already defined:
 
 ```
@@ -174,6 +174,27 @@ The `└` draws a line under the one it waits on.
 The next delivery is `/apply search-catalog`, the first free line down the queue.
 When a list holds more than one line, as on the nine lines above, where the script prints `free for /propose, in order: return-book my-loans`, the agent offers them as one command, `/propose return-book my-loans`, saying each slug is one more agent and costs as much as one session ([chapter 12](12-propose.md)).
 `/propose` and `/apply` typed with no slug show the same tree and ask which line to take, and `/apply` ends with it.
+
+A milestone that waits hides no free line of the next one.
+On the library, in an example written for this chapter, every other line of milestone 1 is integrated and its review is defined, `[>]`, when the director wants to try the product before the review is built, so the person says `m1-review` is blocked, and it waits as `[?]`, ending `· resume: apply · blocked: the director tries it on Monday`; milestone 2, chapter 11's, holds `due-date-format`, not yet defined, and its review, `· after all`.
+On that queue the script prints this:
+
+```
+milestone: Milestone 1: a librarian lends and takes back
+[?] m1-review · blocked: the director tries it on Monday, then apply
+
+milestone: Milestone 2: loan dates read at a glance
+[ ] due-date-format · propose now
+ └[ ] m2-review · waits: due-date-format not defined
+
+free for /apply, in order: none
+free for /propose, in order: due-date-format
+next: /propose due-date-format
+```
+
+`m1-review` waits on the director, so milestone 1 holds nothing free, and the script draws milestone 2 under its own `milestone:` line and offers its first free line: `next:` is `/propose due-date-format`.
+A free line of a later milestone comes after every free line of the milestones above it, in the queue's order, since a milestone's end sets priority (above), so a line parked under the next milestone is offered, and offered last.
+A tree of the first open milestone alone would end at its waiting review: in one project, on 2026-11-13, a tree drawn that way answered `next: none` over a review waiting as `[?]` on an acceptance outside the team, while seven lines of the next milestone were free for `/propose`.
 
 ## Waiting: `[?]`
 
@@ -365,13 +386,14 @@ A request that proved impossible there was closed in the queue with its reason i
 The queue also says which lines can run together: without that, a person who wants two sessions has to work it out alone before opening the second; the queue tree draws it from the queue, without a meeting, each line under what it waits on, and ends with the command to run next, and `/apply` checks the files before its first edit, so two builds never change the same file at once.
 A line that needs another keeps the mark of its next command, so the queue shows no blocked line where nothing went wrong.
 The tree also says how much of the milestone came from findings and names a finding line standing ahead of planned work, so the drift shows the day it starts; and a finding that is not grave waits on its delivery's page for the review instead of entering the queue.
+Every open milestone is drawn, so a milestone waiting on someone outside the team hides none of the work after it.
 And no session marking its line can leave the queue empty under the board and the other sessions, nor can two sessions that start one line both build it: a mark is one byte, changed whole or not at all, and a start on a line already taken is refused.
 
 ## Key points
 
 * Six marks, `[ ]` not defined, `[~]` being defined, `[>]` completely defined and ready for `/apply`, `[*]` being built, `[x]` done, `[?]` waiting, each changed when the work changes, not when a command ends: `/propose` sets `[~]` and `[>]`, `/apply` sets `[*]` and `[x]`, the person sets `[x]` with `· dropped: <reason>` when cancelling, any session sets `[?]`; every mark changes through the kit's mark script, one byte, `[~]` only on a `[ ]` line and `[*]` only on a `[>]` one, `/apply`'s `[x]` staged on its line alone with `stage`, and any other edit to the queue is the host's file edit on its lines, never a program that writes the whole file; a line whose session ended keeps its mark, and its command resumes it on the person's word, inspecting the page, the folder and the index first, and a cancelled delivery's page in `work/done/` says what was built and undone.
 * A line is free for a command when it is not `[x]` nor `[?]` and its `after` lets that command start: `/propose` when every line it names is `[>]` or beyond, `/apply` when every one is integrated, `[x]` on trunk, merged into the main branch with a branch or a worktree per delivery; the review line's `· after all` names every line above it in its milestone but the cancelled ones, and a line whose `after` names a cancelled one is the person's to re-decide; with a branch or a worktree per delivery, a line whose branch exists after `git fetch` is taken, whatever the main branch shows; the next delivery is the first free line no session holds, and before its first edit `/apply` stops on a file a build in flight or not yet integrated is changing.
-* Asked what may run now, the agent runs the kit's queue script and shows its tree: the current milestone, with `findings:` and its `⚠️` warning under the heading when the milestone holds a line from a finding, each line not `[x]` under the last line it waits on with its state, then the lines free for `/apply` and for `/propose`, in order, and `next:`, the command for the first; it offers the free lines as one command with several slugs, each slug one more agent costing as much as one session, and `/propose` and `/apply` typed with no slug show the tree and ask.
+* Asked what may run now, the agent runs the kit's queue script and shows its tree: every open milestone under its own `milestone:` line, with `findings:` and its `⚠️` warning under a milestone's heading when it holds a line from a finding, each line not `[x]` under the last line it waits on with its state, then the lines free for `/apply` and for `/propose`, in the queue's order across the milestones, so a milestone that waits hides no free line of the next, and `next:`, the command for the first; it offers the free lines as one command with several slugs, each slug one more agent costing as much as one session, and `/propose` and `/apply` typed with no slug show the tree and ask.
 * `· after` is an order, written with the line or by the work that finds the need, which returns `[~]` to `[ ]` with the draft kept or `[*]` to `[>]`, never `[?]`; it is read per command, and where a definition needs the other line built, docs/05 says so; a line waits in three cases, when the person says so, when an answer was asked and not given, or when a milestone review's code reading missed part of its range, with the phase to resume and the reason in words at its end, `· resume: propose · blocked: what provider?`; when the reason is resolved, both suffixes go and it returns as that phase says, `resume: propose` to `[ ]` with any draft kept, `resume: apply` to `[>]`, and until then `/propose` and `/apply` stop on it, as on a line not free; a grave finding is a `[ ]` line ending `· from <slug>`, above the open planned lines only when verify is red or one of them needs it, every other finding a note under `## For the review` on the page of the delivery that found it, and a line that delivers a test, a proof tool or a change to the process enters only on the person's word.
 * The queue is a kanban board, a column per mark, a `[?]` card in Waiting until it returns to `[ ]` or `[>]`; on this chapter's three columns, Doing holds `[~]`, `[>]` and `[*]`, and a `[?]` card is tagged blocked in the column its resume phase names, To Do for `propose`, Doing for `apply`; a board that reads the queue sees a mark at once on trunk, and with a branch or a worktree per delivery from each slug's own branch on origin, after `git fetch`, pushed when `/propose` creates it, since the main branch shows the line as it was until the merge.
 
