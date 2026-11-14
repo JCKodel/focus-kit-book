@@ -781,7 +781,7 @@ When this milestone closes, the book teaches focus-kit 2026.11.03 and the reposi
 
 ```
 [x] kit-2026-11-03          reinstall the kit at 2026.11.03; the report lists no migration, /apply alone changes · after m36-review
-[ ] ch13-apply-next         chapter 13: /apply telling the person each next step, no longer bare sentences an agent read as its own orders, and running `queue.sh` at its end unasked, giving its `next:` in the host's form, with the report of 2026-11-03 that /apply had stopped naming the next command as the error; both editions · after kit-2026-11-03
+[x] ch13-apply-next         chapter 13: /apply telling the person each next step, no longer bare sentences an agent read as its own orders, and running `queue.sh` at its end unasked, giving its `next:` in the host's form, with the report of 2026-11-03 that /apply had stopped naming the next command as the error; both editions · after kit-2026-11-03
 [ ] m37-review               the review of M37 as docs/05 §8 says · after all
 ```
 

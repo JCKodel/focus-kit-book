@@ -2,7 +2,7 @@
 
 After this chapter you can follow a reviewed page to a staged change with `/apply`, and say what "done" means: verify green, a proof, a review by a context that did not write the change, the documents updated, the page moved and its line marked.
 You can then, by default, use what `/apply` built and review the staged change against the page, which is the human review of the process, and then commit it, yourself or by asking the agent.
-And you can say how `/apply` ends: only its delivery staged, the suggested message in a `commit` block on the page and in the conversation, your next steps written out and, last of all, which environment is at which version.
+And you can say how `/apply` ends: only its delivery staged, the suggested message in a `commit` block on the page and in the conversation, your next steps told to you, the queue tree with the next command and, last of all, which environment is at which version.
 
 ## The problem
 
@@ -125,7 +125,8 @@ So before it stops, `/apply` does all of this:
 * It stages only this delivery's paths and hunks, never with `git add -A` or `git add .`, and reports what someone else had already staged without unstaging it.
 * It ends the page with the suggested commit message in a `commit` block, in the format docs/05 defines, and shows the same block in the conversation, where a fenced block stands apart from the rest of the reply. There is one block: a resumed `/apply` replaces the earlier one.
 * Its last edit marks the line `[x]` in docs/06 with the mark script and `stage`, which changes that line in the index and nothing else there, so another session's staged lines stay as they were; it comes after everything else is staged, so a line marked `[x]` with nothing staged is a session that stopped early.
-* Its last words are your next steps: use what the delivery changed as its user would, and say in that session what is wrong; review the staged diff; commit (and merge, on a delivery branch); and then what may run next: the queue tree, with its free lines offered as one command written as your host invokes it, for a fresh session, so a person new to the kit does not search the documentation for what comes after. These steps are said in the conversation and end with it, and when another agent runs the session on your behalf they may never reach you; what still holds how to run the product, for the next person, is the manual of running it, from the bullet above. The last thing it says is which environment is at which version and the command that updates the others, and it never ends silent about it.
+* Its last words are your next steps, each told to you: use what the delivery changed as its user would, and say in that session what is wrong; review the staged diff; commit with the suggested message (and merge, on a delivery branch). The kit's file for the command words them so, "*Tell them to review the staged diff, then to commit with the suggested message*", because a step written as a bare order in the agent's own instructions is the agent's to follow, and a bare "commit" there would contradict its "never commit"; with each step told to you, the agent says them all and takes none. These steps are said in the conversation and end with it, and when another agent runs the session on your behalf they may never reach you; what still holds how to run the product, for the next person, is the manual of running it, from the bullet above.
+* Then, though no one asked, it runs the kit's queue script and shows its tree (chapter 14), what may run next, with its free lines offered as one command written as your host invokes it, for a fresh session, and its `next:`, the first free line's command, written the same way, so a person new to the kit does not search the documentation for what comes after. It runs the script unasked because the script answers whoever asks what may run now, and at the end of `/apply` no one has asked: an ending that waited for the question would name no next command. The last thing it says is which environment is at which version and the command that updates the others, and it never ends silent about it.
 
 Done is the review and that whole list.
 
@@ -169,12 +170,27 @@ Lend a copy to a member
 work/done/lend-book.md
 ```
 
-Then it gives your next steps:
+Then it tells you your next steps:
 
 1. In the development environment, which the sentence below names, use what changed: lend a copy to a member and see its due date 21 days ahead, then try the refusals the page lists, a member with an overdue book, a suspended member and the last copy already lent, and tell this session what is wrong.
 2. Review the staged diff: `git diff --staged`.
 3. Commit with the suggested message: `git commit`, and paste the block.
-4. What may run next, from the queue tree, which ends `next: /propose return-book`: `return-book` is free for `/propose`, as it has been since `lend-book` was `[>]`, and `m1-review`, written `· after all`, waits until `return-book` is defined; the command is `/propose return-book`, in a fresh session, in Claude Code, or `$propose return-book` in Codex (chapter 8's table).
+
+Then, though you did not ask, it runs the queue script and shows its tree, drawn from chapter 11's milestone 1 with `lend-book` now `[x]`, in an example written for this chapter:
+
+```
+milestone: Milestone 1: a librarian lends and takes back
+[ ] return-book · propose now
+ └[ ] m1-review · waits: return-book not defined
+
+free for /apply, in order: none
+free for /propose, in order: return-book
+next: /propose return-book
+```
+
+`return-book` is free for `/propose`, as it has been since `lend-book` was `[>]`, and `m1-review`, written `· after all`, waits until `return-book` is defined; the command is `/propose return-book`, in a fresh session, in Claude Code, or `$propose return-book` in Codex (chapter 8's table).
+An ending that waits to be asked names no next command: on 2026-11-03 a person reported that `/apply` had ended without naming the next command.
+If a session ends without the tree, it did not end as the kit says; ask it for the tree, which it draws by running the queue script.
 
 And it ends, last of all, on the environments, in a sentence also written for this chapter: "The development database has this delivery's migration; the staging environment is still at the previous delivery, and `npm run migrate -- staging` updates it."
 If a session ends without that sentence, it did not end as the kit says; ask it for the sentence.
@@ -293,7 +309,7 @@ So the page recorded the refinement, no write path reachable from the client, wh
 * `/apply <slug>` builds the page in a fresh session, opened in the delivery's worktree when there is one, and `/apply a b` opens one subagent per slug, in the one folder on trunk or each sent to its worktree's path, and `/apply` with no slug shows the queue tree and asks, reads docs/00 and docs/03 with the rest, writes the code with docs/03's identifiers and follows every slot of docs/05 §5 literally, the project's own included: the page is the scope, with no dependency, layer or tool it did not name, and when the page contradicts a document it stops and says which, never resolving it silently.
 * It marks the line, through the kit's mark script, `[*]` with its first edit, only on a `[>]` line, once the lines its `after` names are integrated and no other build is changing its files, `[x]` with its last, once the rest is staged, with `stage`, so that line alone goes into the index, and `[?]`, with what it waits on, when it must stop.
 * Green is not done: done is the whole list, from the documents updated before a review by a context that did not write the change, which reads the whole delivery, to verify green after the last edit and the line marked `[x]`.
-* It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, using what it built first and what may run next last, the queue tree, each command written out, said in the conversation and gone with it, while the manual of running the product, written by the first delivery after which the product runs and updated by each that changes a step, is what lasts; and, last of all, which environment is at which version and the command that updates the others.
+* It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, each told to you, from using what it built to the commit, and then the queue tree, which it draws with the kit's queue script though no one asked, its `next:` written as your host invokes commands; both are said in the conversation and gone with it, while the manual of running the product, written by the first delivery after which the product runs and updated by each that changes a step, is what lasts; and, last of all, which environment is at which version and the command that updates the others.
 * Use what was built as its user would, review the staged change against the page, ask for each correction in the same session, saying what you want instead and why, make what the page did not ask a line of the queue, where its milestone's paragraph puts it, and then commit it, yourself or by asking the agent, or, when the Git slot let it commit, review that commit: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>

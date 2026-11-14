@@ -2,7 +2,7 @@
 
 Depois deste capítulo você consegue levar uma página revisada até uma mudança em stage (marcada para o próximo commit, o registro salvo no histórico do projeto) com o `/apply`, e dizer o que "pronto" significa: a verificação verde, uma prova, uma revisão por um contexto que não escreveu a mudança, os documentos atualizados, a página movida e a sua linha marcada.
 Então você consegue, por padrão, usar o que o `/apply` construiu e revisar a mudança em stage contra a página, que é a revisão humana do processo, e então fazer o commit, você mesmo ou pedindo ao agente.
-E consegue dizer como o `/apply` termina: só a sua entrega em stage, a mensagem sugerida em um bloco `commit` na página e na conversa, os seus próximos passos escritos por extenso e, por último, qual ambiente está em qual versão.
+E consegue dizer como o `/apply` termina: só a sua entrega em stage, a mensagem sugerida em um bloco `commit` na página e na conversa, os seus próximos passos ditos a você, a árvore da fila com o próximo comando e, por último, qual ambiente está em qual versão.
 
 ## O problema
 
@@ -125,7 +125,8 @@ Então, antes de parar, o `/apply` faz tudo isto:
 * Coloca em stage só os caminhos e trechos desta entrega, nunca com `git add -A` ou `git add .`, e avisa o que outra pessoa já tinha colocado em stage, sem tirar do stage.
 * Termina a página com a mensagem de commit sugerida em um bloco `commit`, no formato que o docs/05 define, e mostra o mesmo bloco na conversa, onde um bloco cercado fica à parte do resto da resposta. Há um bloco só: um `/apply` retomado substitui o anterior.
 * A sua última edição marca a linha como `[x]` no docs/06 com o script de marca e `stage`, que muda essa linha no índice e nada mais ali, então as linhas que outra sessão já colocou em stage ficam como estavam; ela vem depois de todo o resto estar em stage, então uma linha `[x]` sem nada em stage é uma sessão que parou antes da hora.
-* As últimas palavras dele são os seus próximos passos: usar o que a entrega mudou como o usuário dela usaria, e dizer naquela sessão o que está errado; revisar o diff em stage; fazer o commit (e o merge, em um branch da entrega); e depois o que pode rodar em seguida: a árvore da fila, com as linhas livres oferecidas como um comando escrito como o seu host o invoca, para uma sessão nova, para que uma pessoa nova no kit não procure na documentação o que vem depois. Esses passos são ditos na conversa e acabam com ela, e quando outro agente roda a sessão por você eles podem nunca chegar até você; o que ainda guarda como rodar o produto, para a próxima pessoa, é o manual de rodá-lo, do item acima. A última coisa que diz é qual ambiente está em qual versão e o comando que atualiza os outros, e ele nunca termina calado sobre isso.
+* As últimas palavras dele são os seus próximos passos, cada um dito a você: usar o que a entrega mudou como o usuário dela usaria, e dizer naquela sessão o que está errado; revisar o diff em stage; fazer o commit com a mensagem sugerida (e o merge, em um branch da entrega). O arquivo do comando no kit os escreve assim, "*Diga à pessoa que revise o diff em stage e depois faça o commit com a mensagem sugerida*", porque um passo escrito como ordem seca nas instruções do próprio agente cabe ao agente cumprir, e um "faça o commit" seco ali contradiria o seu "nunca faça commit"; com cada passo dito a você, o agente os diz e não dá nenhum. Esses passos são ditos na conversa e acabam com ela, e quando outro agente roda a sessão por você eles podem nunca chegar até você; o que ainda guarda como rodar o produto, para a próxima pessoa, é o manual de rodá-lo, do item acima.
+* Depois, mesmo sem ninguém pedir, ele roda o script de fila do kit e mostra a árvore dele (capítulo 14), o que pode rodar em seguida, com as linhas livres oferecidas como um comando escrito como o seu host o invoca, para uma sessão nova, e o comando de `next:`, o da primeira linha livre, escrito do mesmo jeito, para que uma pessoa nova no kit não procure na documentação o que vem depois. Ele roda o script sem ninguém pedir porque o script responde a quem pergunta o que pode rodar agora, e no fim do `/apply` ninguém perguntou: um fim que esperasse a pergunta não diria o próximo comando. A última coisa que diz é qual ambiente está em qual versão e o comando que atualiza os outros, e ele nunca termina calado sobre isso.
 
 Pronto é a revisão e essa lista inteira.
 
@@ -169,12 +170,27 @@ Emprestar um exemplar a um membro
 work/done/emprestar-livro.md
 ```
 
-Depois ele dá os seus próximos passos:
+Depois ele diz a você os seus próximos passos:
 
 1. No ambiente de desenvolvimento, que a frase abaixo nomeia, use o que mudou: empreste um exemplar a um membro e veja a data de devolução 21 dias depois, então tente as recusas que a página lista, um membro com livro atrasado, um membro suspenso e o último exemplar já emprestado, e diga a esta sessão o que está errado.
 2. Revise o diff em stage: `git diff --staged`.
 3. Faça o commit com a mensagem sugerida: `git commit`, e cole o bloco.
-4. O que pode rodar em seguida, pela árvore da fila, que termina com `next: /propose devolver-livro`: `devolver-livro` está livre para o `/propose`, como está desde que `emprestar-livro` ficou `[>]`, e `m1-review`, escrita `· after all`, espera até `devolver-livro` estar definida; o comando é `/propose devolver-livro`, em uma sessão nova, no Claude Code, ou `$propose devolver-livro` no Codex (a tabela do capítulo 8).
+
+Depois, mesmo sem você pedir, ele roda o script de fila e mostra a árvore dele, desenhada a partir do marco 1 do capítulo 11 com `emprestar-livro` já `[x]`, em um exemplo escrito para este capítulo, e as palavras do script ficam em inglês, como o kit as imprime:
+
+```
+milestone: Marco 1: um bibliotecário empresta e recebe de volta
+[ ] devolver-livro · propose now
+ └[ ] m1-review · waits: devolver-livro not defined
+
+free for /apply, in order: none
+free for /propose, in order: devolver-livro
+next: /propose devolver-livro
+```
+
+`devolver-livro` está livre para o `/propose`, como está desde que `emprestar-livro` ficou `[>]`, e `m1-review`, escrita `· after all`, espera até `devolver-livro` estar definida; o comando é `/propose devolver-livro`, em uma sessão nova, no Claude Code, ou `$propose devolver-livro` no Codex (a tabela do capítulo 8).
+Um fim que espera a pergunta não diz o próximo comando: em 2026-11-03 uma pessoa relatou que o `/apply` tinha terminado sem dizer o próximo comando.
+Se uma sessão termina sem a árvore, ela não terminou como o kit diz; peça a árvore a ela, que a desenha rodando o script de fila.
 
 E termina, por último, nos ambientes, com uma frase também escrita para este capítulo: "O banco de dados de desenvolvimento já tem a migration desta entrega; o ambiente de staging ainda está na entrega anterior, e `npm run migrate -- staging` o atualiza."
 Se uma sessão termina sem essa frase, ela não terminou como o kit diz; peça a frase a ela.
@@ -293,7 +309,7 @@ Então a página registrou o ajuste, nenhum caminho de escrita alcançável pelo
 * O `/apply <slug>` constrói a página em uma sessão nova, aberta no worktree da entrega quando há um, e `/apply a b` abre um subagente por slug, na única pasta no trunk ou cada um mandado para o caminho do seu worktree, e o `/apply` sem slug mostra a árvore da fila e pergunta, lê o docs/00 e o docs/03 com o resto, escreve o código com os identificadores do docs/03 e segue ao pé da letra cada slot do docs/05 §5, os do próprio projeto incluídos: a página é o escopo, sem dependência, camada ou ferramenta que ela não nomeou, e quando a página contradiz um documento ele para e diz qual, sem nunca resolver em silêncio.
 * Ele marca a linha, pelo script de marca do kit, como `[*]` com a sua primeira edição, só numa linha `[>]`, quando as linhas que o seu `after` nomeia estão integradas e nenhuma outra construção está mudando os arquivos dela, `[x]` com a última, quando o resto já está em stage, com `stage`, então só essa linha vai para o índice, e `[?]`, com o que ela espera, quando precisa parar.
 * Verde não é pronto: pronto é a lista inteira, dos documentos atualizados antes de uma revisão por um contexto que não escreveu a mudança, que lê a entrega inteira, à verificação verde depois da última edição e à linha marcada `[x]`.
-* Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, primeiro usar o que ele construiu e por último o que pode rodar em seguida, a árvore da fila, cada comando escrito por extenso, ditos na conversa e que acabam com ela, enquanto o manual de rodar o produto, escrito pela primeira entrega depois da qual o produto roda e atualizado por cada uma que muda um passo, é o que fica; e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
+* Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, cada um dito a você, de usar o que ele construiu até o commit, e depois a árvore da fila, que ele desenha com o script de fila do kit mesmo sem ninguém pedir, o seu `next:` escrito como o seu host invoca os comandos; os dois são ditos na conversa e acabam com ela, enquanto o manual de rodar o produto, escrito pela primeira entrega depois da qual o produto roda e atualizado por cada uma que muda um passo, é o que fica; e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
 * Use o que foi construído como o usuário usaria, revise a mudança em stage contra a página, peça cada correção na mesma sessão, dizendo o que quer no lugar e por quê, transforme o que a página não pediu em uma linha da fila, onde o parágrafo do seu marco a põe, e então faça o commit, você mesmo ou pedindo ao agente, ou revise o commit que o slot Git deixou o agente fazer: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>
