@@ -1,8 +1,8 @@
 # 13. `/apply`: build, verify, prove, never commit on its own
 
-After this chapter you can follow a reviewed page to a staged change with `/apply`, and say what "done" means: verify green, a proof, a review by a context that did not write the change, the documents updated, the page moved and its line marked.
+After this chapter you can follow a reviewed page to a staged change with `/apply`, say what "done" means: verify green, a proof, a review by a context that did not write the change, the documents updated, the page moved and its line marked, and what `/apply` does with a flaw: fixed in the delivery when the delivery built it, a note otherwise, a line only when grave.
 You can then, by default, use what `/apply` built and review the staged change against the page, which is the human review of the process, and then commit it, yourself or by asking the agent.
-And you can say how `/apply` ends: only its delivery staged, the suggested message in a `commit` block on the page and in the conversation, your next steps told to you, the queue tree with the next command and, last of all, which environment is at which version.
+And you can say how `/apply` ends: its last message opening with what the delivery left, only its delivery staged, the suggested message in a `commit` block on the page and in the conversation, your next steps told to you, the queue tree with the next command and, last of all, which environment is at which version.
 
 ## The problem
 
@@ -56,7 +56,8 @@ On a line that is `[?]`, it first says what the line waits on, and goes on only 
 ### The page is the scope
 
 What the page asks is what gets built, and nothing around it.
-The kit's file for the command says it in one line: "*The page is the scope; do not widen it.*"
+The kit's file for the command says it in two sentences: "*the page is the scope: do not widen it. Fixing what this delivery built is not widening it.*"
+The second means that a flaw in what the delivery built or changed, a case the page did not name included, is fixed in that delivery: the delivery wrote what the fix touches, so the fix stays inside its page.
 So `/apply` adds no dependency, layer or tool the page did not name, and writes an abstraction only on the second concrete occurrence, saying which was the first (chapter 3).
 A package the page did not name is a question for the person, never a choice for the agent.
 
@@ -68,7 +69,8 @@ A silent choice would leave a page and a document that disagree, and the next se
 
 ### When the work cannot go on
 
-It stops when the build needs an answer nobody has given yet, when another line must be done first (a fix it found becomes a `[ ]` line above this one), when you say it is blocked, or, in a milestone's review, when the reading of the code changed since the milestone's base left part of it unread.
+It stops when the build needs an answer nobody has given yet, when another line must be done first (a fix it found becomes a `[ ]` line above this one, ending `· from` and this delivery's slug, a suffix chapter 14 explains), when you say it is blocked, or, in a milestone's review, when the reading of the code changed since the milestone's base left part of it unread.
+A flaw in what it built that it cannot fix without widening the page, or without a decision no document answers, waits for your answer the same way when it is grave or leaves an item of Done when unticked.
 It writes on the page what was built and what it waits on, leaves the page in `work/`, marks the line `[?]` with that reason at its end (chapter 14).
 It ends the page with a partial message in a `commit` block and shows the same block in the conversation.
 On trunk it stages nothing: the work stays uncommitted, and out of the index, until it is whole.
@@ -76,9 +78,13 @@ On a delivery branch it may stage the partial work for you to commit there, and 
 
 ### Verify and the proof
 
-It writes the tests docs/04 names for each piece (chapter 5); one too slow for verify goes with the slow tests, whose command docs/05's Verify slot names and the milestone review runs (chapter 15), and `/apply` tells you so, because a test moved there in silence would look like coverage dropped.
+It writes the tests docs/04 asks for what the page says (chapter 5) and for each flaw this delivery fixes, and no others; one too slow for verify goes with the slow tests, which docs/05's Verify slot lists one line each, the command and what it covers, and `/apply` tells you so, because a test moved there in silence would look like coverage dropped.
 Moving it deletes no test and waives none of this delivery's own proof, and it changes neither where a rule lives, in a pure use case, nor the level of test that proves each scenario.
-It then runs the verify command until it is green.
+It then runs the verify command until it is green, and tells you how long verify took, against the ceiling the Verify slot names, five minutes unless you say otherwise.
+Over the ceiling, that is a note on the page for the milestone review, which says which tests go to the slow ones.
+A suite grows with every delivery, and nothing stops it but a number: I have seen test suites grow until verify took thirty minutes and delayed every delivery.
+Before the delivery ends, it runs the slow tests the slot lists that cover what the delivery changed, and only those; the milestone review runs them all (chapter 15).
+A slow test run only at the milestone review finds a break far from the delivery that made it, so a team keeps it inside verify to be safe, and every delivery pays for it: in one project, timed on 2026-11-12, verify took 357 seconds, 322 of them an end-to-end suite of 414 tests that every delivery ran whole.
 Then it proves the delivery the way docs/05 says: a screenshot against the design, a run from end to end, or a check by hand.
 It lists what diverges from the reference and fixes it, until only what it can justify remains.
 A failure is part of the proof and is recorded, never hidden.
@@ -102,10 +108,15 @@ Another session's files in the same folder, the ones it created included, are no
 The reviewer brings what the writer's own reread lacks, a context free of the reasoning that wrote the change, and measures the change against the page and docs/04.
 
 The reviewer reports candidates, faults it suspects, and fixes nothing itself.
-A candidate that breaks the page, docs/04 or the text this delivery wrote is fixed in this session, and verify runs again.
+What the review, the proof or the build finds wrong in what the delivery built or changed, a case the page did not name included, is fixed in this session, with a test for the fix, and verify runs again.
 That holds for any edit verify covers made after its last green run, a review's fix or a document changed late: a green run speaks for the files as they were when it ran, so the later edit runs it once more.
-Anything else, a fault in code the delivery did not touch or a wish the page did not ask for, becomes a `[ ]` line in the queue, because the page is the scope.
 The reviewer stays read-only because the session that built the change knows why it made each choice, so that session makes the fix and the change keeps one writer.
+What the session cannot fix without widening the page, or without a decision no document answers, is not fixed and not guessed: it is a note on the page, with what you may do; when it is grave, or leaves an item of Done when unticked, the line waits as `[?]` for your answer instead, as the section on when the work cannot go on says.
+A flaw in anything else, one older than the delivery in a file it edits included, is a finding.
+A finding that is grave, by chapter 11's three tests, becomes a `[ ]` line ending `· from <slug>`, the delivery that found it (chapter 14 says where the line goes).
+Every other finding, and one nobody can say is grave, is a note on the page under the heading `## For the review`, one line with the file and line and what a person would see, which the next milestone review copies onto its page (chapter 15).
+A process that makes every finding a line fills the milestone with repairs, each delivery's review finding the next: in one project, on 2026-11-12, 32 of the 130 lines of its first milestone had come from a finding, 22 of them from a delivery review.
+Twenty-four in a row were findings or the design line of one, most about one screen and several a flaw in what the delivery before had just built; each had its own page, proof and review, which found the next, seven generations deep, all above the line that answers the milestone's first clause.
 
 Your use of the delivery, your review and your commit still come after it: it is one more check before you use the delivery and read the diff.
 And it reads one delivery while that delivery is open, where the milestone review reads across the milestone's deliveries ([chapter 15](15-closing-a-milestone.md)).
@@ -116,16 +127,17 @@ Verify tells you the code does what its tests say.
 It says nothing about whether the page was answered, whether the documents still hold, or whether anyone can tell later what happened.
 So before it stops, `/apply` does all of this:
 
-* It writes into the page what happened, under a heading `## Outcome` below Done when, so the definition above stays as it was read: what diverged from the plan and why, what was dropped, what the proof found, what the delivery review found and what became of each candidate, and the decisions taken, with an ADR if one was needed.
+* It writes into the page what happened, under a heading `## Outcome` below Done when, so the definition above stays as it was read: what diverged from the plan and why, what was dropped, what the proof found, what the delivery review found and what became of each candidate, each fix with its test, and the decisions taken, with an ADR if one was needed; and, above the `commit` block, the notes under `## For the review`.
 * Before the review, it updates the documents the delivery changed: a new term into docs/03, a new rule into the document that owns it, a decision into docs/adr/.
 * Before the review too, when the delivery adds or changes something a person does by hand, such as publishing the app, it writes or updates its manual in `docs/manuals/` ([chapter 7](07-the-documents.md)). When the delivery is the first after which a person can run the product, it writes the manual of running it, from a fresh clone to the first screen or call, and every later delivery that changes a step updates it.
-* Verify is green after the last edit it covers; an edit after that green run, whatever its reason, runs it again.
+* Verify is green after the last edit it covers, and the agent has said how long it took; an edit after that green run, whatever its reason, runs it again; and the slow tests that cover the change have run.
 * It ticks every item of Done when.
 * It moves the page to `work/done/`; a `[?]` line that waits only on this one, or on lines already integrated, goes back by its resume phase ([chapter 14](14-queue-states.md)).
 * It stages only this delivery's paths and hunks, never with `git add -A` or `git add .`, and reports what someone else had already staged without unstaging it.
 * It ends the page with the suggested commit message in a `commit` block, in the format docs/05 defines, and shows the same block in the conversation, where a fenced block stands apart from the rest of the reply. There is one block: a resumed `/apply` replaces the earlier one.
 * Its last edit marks the line `[x]` in docs/06 with the mark script and `stage`, which changes that line in the index and nothing else there, so another session's staged lines stay as they were; it comes after everything else is staged, so a line marked `[x]` with nothing staged is a session that stopped early.
-* Its last words are your next steps, each told to you: use what the delivery changed as its user would, and say in that session what is wrong; review the staged diff; commit with the suggested message (and merge, on a delivery branch). The kit's file for the command words them so, "*Tell them to review the staged diff, then to commit with the suggested message*", because a step written as a bare order in the agent's own instructions is the agent's to follow, and a bare "commit" there would contradict its "never commit"; with each step told to you, the agent says them all and takes none. These steps are said in the conversation and end with it, and when another agent runs the session on your behalf they may never reach you; what still holds how to run the product, for the next person, is the manual of running it, from the bullet above.
+* Its last message opens with what the delivery left, done or blocked: `🚨`, a siren, before each new line and each flaw that blocked the delivery; `⚠️`, a warning sign, before each note and a verify over its ceiling; `✅`, a check mark, when the delivery is done and left none. A delivery that left one note opens with `⚠️`, never `✅`. In the project of the twenty-four lines above, each command named the lines it added in a last message shaped like every other, and the person saw the repairs pile up ahead of the milestone's work only after the twenty-four; with the mark, and the queue tree at the end of `/apply` (chapter 14 reads its findings), it shows the same day.
+* After that opening, its last words are your next steps, each told to you: use what the delivery changed as its user would, and say in that session what is wrong; review the staged diff; commit with the suggested message (and merge, on a delivery branch). The kit's file for the command words them so, "*Tell them to review the staged diff, then to commit with the suggested message*", because a step written as a bare order in the agent's own instructions is the agent's to follow, and a bare "commit" there would contradict its "never commit"; with each step told to you, the agent says them all and takes none. These steps are said in the conversation and end with it, and when another agent runs the session on your behalf they may never reach you; what still holds how to run the product, for the next person, is the manual of running it, from the bullet above.
 * Then, though no one asked, it runs the kit's queue script and shows its tree (chapter 14), what may run next, with its free lines offered as one command written as your host invokes it, for a fresh session, and its `next:`, the first free line's command, written the same way, so a person new to the kit does not search the documentation for what comes after. It runs the script unasked because the script answers whoever asks what may run now, and at the end of `/apply` no one has asked: an ending that waited for the question would name no next command. The last thing it says is which environment is at which version and the command that updates the others, and it never ends silent about it.
 
 Done is the review and that whole list.
@@ -148,11 +160,12 @@ If a button wraps at the narrow width, it gets fixed; if the design file gives n
 The delivery changed the schema, so before any review it adds the table `loan` to the document that lists the schema.
 Then a read-only agent reads the files the delivery created, the migration and everything in `src/features/loans/`, and `git diff HEAD` of what the delivery edited, the schema document included, against the page and docs/04, in a review also written for this chapter, and reports two candidates.
 The first draft of `insertLoan` turned every failure of the write into `AlreadyLent`, while the library's docs/04 holds chapter 3's boundary: the unique index's failure becomes `AlreadyLent`, and any other failure of the write stays `DatabaseFailed`.
-No test triggers it, since in the tests only the unique index ever fails, and it sits in the text this delivery wrote, so the agent narrows the catch to the unique index's error and runs verify again; the repository call chapters 3 and 4 describe is the fixed one.
+No test triggers it, since in the tests only the unique index ever fails, and it sits in what this delivery built, so the agent narrows the catch to the unique index's error, writes the test the fix needs, a write failing for another reason staying `DatabaseFailed`, and runs verify again; the repository call chapters 3 and 4 describe is the fixed one.
 `insertLoan` lives in a file this delivery created, so a review of the diff alone would have read nothing of it.
 The second candidate: the refusal for a suspended member does not say until when.
-The page never asked for that, and no clause of milestone 1's paragraph needs it: the paragraph promises the refusal, not its end date.
-So it becomes the line `suspension-end`, under the next milestone, created when there is none, as chapter 11 says, and `return-book` stays the next free line.
+It is in what the delivery built, but saying until when needs a decision no document answers, whether a suspension has an end and where it is kept, so the agent cannot fix it without guessing, and does not guess.
+It is not grave and leaves no item of Done when unticked: the page never asked for it, and no clause of milestone 1's paragraph needs it, since the paragraph promises the refusal, not its end date.
+So it is a note on the page under `## For the review`, with what you may do, add a line for it by conversation (chapter 11), and `return-book` stays the next free line.
 Then it writes what happened on the page, both candidates and what became of each included, ticks Done when, moves the page to `work/done/lend-book.md`, stages only this delivery's paths, and, as its last edit, marks the line `[x]` with the mark script and `stage`, which stages that line of docs/06 alone.
 If another session's edit to `src/features/members/` sits in the tree, or its line of docs/06 is already staged, the agent leaves both as they are and tells you about the staged one (chapter 19).
 
@@ -169,6 +182,15 @@ Lend a copy to a member
 
 work/done/lend-book.md
 ```
+
+Its last message opens with what the delivery left, in lines also written for this chapter:
+
+```
+⚠️ note: src/features/loans/rules.ts:18, a suspended member is
+   refused and not told until when; a line for it is yours to add
+```
+
+The delivery is done and left one note, so the message opens with `⚠️` and no `✅`, and you know before anything else that there is something on the page for you to decide.
 
 Then it tells you your next steps:
 
@@ -223,12 +245,13 @@ Then read the staged change against the page:
 
 * Is every Behaviour line answered, each by its test or a recorded check?
 * Is anything built that the page did not ask for: a file, a dependency, a layer?
-* Do verify and the proof run green for you, and if a test went to the slow tests, did the agent say so, and does the slow-test command in the Verify slot run it?
+* Do verify and the proof run green for you, did the agent say how long verify took, and did the slow tests that cover the change run; and if a test went to the slow tests, did the agent say so, and does the slow-test command in the Verify slot run it?
+* Does each fix have its test, and is there no test the page and its fixes did not ask for?
 * Did the documents the delivery changed get updated, and only those?
 * If this delivery is the first after which the product runs, or changed a step of running it, does the manual of running it say so, so that someone with a fresh clone and nothing else can run it?
 * Does the staged diff hold only this delivery, and did the agent report anything already staged?
 * Is the suggested message in the `commit` block at the end of the page right: the subject, the bullets, the last line?
-* What did the delivery review find, and was each candidate fixed or turned into a `[ ]` line?
+* What did the delivery review find, and was each candidate fixed with its test, written as a note, or, when grave, made a line ending `· from <slug>`; and does the last message open with the mark that says so?
 * Did the review read the whole delivery, its created files and any commits it already made on its branch included, and did verify run again after the last edit it covers?
 
 If the page records no review and docs/05's slot names one, the delivery did not end as the kit says; ask the agent for the review.
@@ -301,15 +324,16 @@ If your agent answers with `git commit -m` lines and no `commit` block on the pa
 
 Nothing ships without a check and a person: verify and the proof check the build, and a person reads the change, by default the diff before it exists in the history, or, by the Git slot's word, the commit once it lands.
 A fault a delivery wrote is found by a reader that did not write it, and fixed in that delivery, before you read the diff.
+The planned work stays ahead of the findings in the queue, since only a grave one becomes a line, and the first line of each last message tells you what the delivery left.
 And what diverged from the plan is written where the next person reads it: on Ninjobs, the page of the delivery that lets a user delete their account said the table recording a pending deletion would have no write rule at all, and the build found that a table with no write rule accepts writes from nobody, the database's own functions included.
 So the page recorded the refinement, no write path reachable from the client, which the access-rules test now proves, and the commit that shipped it points to that page.
 
 ## Key points
 
-* `/apply <slug>` builds the page in a fresh session, opened in the delivery's worktree when there is one, and `/apply a b` opens one subagent per slug, in the one folder on trunk or each sent to its worktree's path, and `/apply` with no slug shows the queue tree and asks, reads docs/00 and docs/03 with the rest, writes the code with docs/03's identifiers and follows every slot of docs/05 §5 literally, the project's own included: the page is the scope, with no dependency, layer or tool it did not name, and when the page contradicts a document it stops and says which, never resolving it silently.
+* `/apply <slug>` builds the page in a fresh session, opened in the delivery's worktree when there is one, and `/apply a b` opens one subagent per slug, in the one folder on trunk or each sent to its worktree's path, and `/apply` with no slug shows the queue tree and asks, reads docs/00 and docs/03 with the rest, writes the code with docs/03's identifiers and follows every slot of docs/05 §5 literally, the project's own included: the page is the scope, with no dependency, layer or tool it did not name, and fixing what it built is not widening it, and when the page contradicts a document it stops and says which, never resolving it silently.
 * It marks the line, through the kit's mark script, `[*]` with its first edit, only on a `[>]` line, once the lines its `after` names are integrated and no other build is changing its files, `[x]` with its last, once the rest is staged, with `stage`, so that line alone goes into the index, and `[?]`, with what it waits on, when it must stop.
-* Green is not done: done is the whole list, from the documents updated before a review by a context that did not write the change, which reads the whole delivery, to verify green after the last edit and the line marked `[x]`.
-* It ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, each told to you, from using what it built to the commit, and then the queue tree, which it draws with the kit's queue script though no one asked, its `next:` written as your host invokes commands; both are said in the conversation and gone with it, while the manual of running the product, written by the first delivery after which the product runs and updated by each that changes a step, is what lasts; and, last of all, which environment is at which version and the command that updates the others.
+* Green is not done: done is the whole list, from the tests for what the page says and for each fix, and no others, verify's time against its ceiling and the slow tests that cover the change, and the documents updated before a review by a context that did not write the change, which reads the whole delivery, to verify green after the last edit and the line marked `[x]`; what the review finds in what the delivery built is fixed with a test, a flaw it cannot fix is a note or a `[?]`, and a finding elsewhere is a note, a line only when grave.
+* Its last message opens with `🚨`, `⚠️` or `✅`, for what the delivery left; it ends the page with the suggested message in a `commit` block and shows the same block in the conversation, also when it stops blocked; its last words are your next steps, each told to you, from using what it built to the commit, and then the queue tree, which it draws with the kit's queue script though no one asked, its `next:` written as your host invokes commands; both are said in the conversation and gone with it, while the manual of running the product, written by the first delivery after which the product runs and updated by each that changes a step, is what lasts; and, last of all, which environment is at which version and the command that updates the others.
 * Use what was built as its user would, review the staged change against the page, ask for each correction in the same session, saying what you want instead and why, make what the page did not ask a line of the queue, where its milestone's paragraph puts it, and then commit it, yourself or by asking the agent, or, when the Git slot let it commit, review that commit: that review is the defence against automation bias, the habit of trusting the agent after many good deliveries.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>

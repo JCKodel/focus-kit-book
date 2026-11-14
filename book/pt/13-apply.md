@@ -1,8 +1,8 @@
 # 13. `/apply`: construir, verificar, provar, nunca fazer commit por conta própria
 
-Depois deste capítulo você consegue levar uma página revisada até uma mudança em stage (marcada para o próximo commit, o registro salvo no histórico do projeto) com o `/apply`, e dizer o que "pronto" significa: a verificação verde, uma prova, uma revisão por um contexto que não escreveu a mudança, os documentos atualizados, a página movida e a sua linha marcada.
+Depois deste capítulo você consegue levar uma página revisada até uma mudança em stage (marcada para o próximo commit, o registro salvo no histórico do projeto) com o `/apply`, dizer o que "pronto" significa: a verificação verde, uma prova, uma revisão por um contexto que não escreveu a mudança, os documentos atualizados, a página movida e a sua linha marcada, e o que o `/apply` faz com um defeito: corrigido na entrega quando a entrega o construiu, uma nota nos outros casos, uma linha só quando é grave.
 Então você consegue, por padrão, usar o que o `/apply` construiu e revisar a mudança em stage contra a página, que é a revisão humana do processo, e então fazer o commit, você mesmo ou pedindo ao agente.
-E consegue dizer como o `/apply` termina: só a sua entrega em stage, a mensagem sugerida em um bloco `commit` na página e na conversa, os seus próximos passos ditos a você, a árvore da fila com o próximo comando e, por último, qual ambiente está em qual versão.
+E consegue dizer como o `/apply` termina: a sua última mensagem abrindo com o que a entrega deixou, só a sua entrega em stage, a mensagem sugerida em um bloco `commit` na página e na conversa, os seus próximos passos ditos a você, a árvore da fila com o próximo comando e, por último, qual ambiente está em qual versão.
 
 ## O problema
 
@@ -56,7 +56,8 @@ Em uma linha que está `[?]`, ele primeiro diz o que a linha espera, e só segue
 ### A página é o escopo
 
 O que a página pede é o que se constrói, e nada em volta.
-O arquivo do comando no kit diz isso em uma linha: "*A página é o escopo; não a amplie.*"
+O arquivo do comando no kit diz isso em duas frases: "*a página é o escopo: não a amplie. Corrigir o que esta entrega construiu não é ampliá-la.*"
+A segunda quer dizer que um defeito no que a entrega construiu ou mudou, um caso que a página não nomeou incluído, é corrigido nessa entrega: a entrega escreveu o que a correção toca, então a correção fica dentro da sua página.
 Então o `/apply` não acrescenta dependência, camada nem ferramenta que a página não nomeou, e só escreve uma abstração na segunda ocorrência concreta, dizendo qual foi a primeira (capítulo 3).
 Um pacote que a página não nomeou é uma pergunta para a pessoa, nunca uma escolha do agente.
 
@@ -68,7 +69,8 @@ Uma escolha em silêncio deixaria uma página e um documento discordando, e a pr
 
 ### Quando o trabalho não consegue seguir
 
-Ele para quando a construção precisa de uma resposta que ninguém deu ainda, quando outra linha precisa ser feita antes (uma correção que ele achou vira uma linha `[ ]` acima desta), quando você diz que ela está travada, ou, na revisão de um marco, quando a leitura do código alterado desde a base do marco deixou parte dele sem ler.
+Ele para quando a construção precisa de uma resposta que ninguém deu ainda, quando outra linha precisa ser feita antes (uma correção que ele achou vira uma linha `[ ]` acima desta, terminada em `· from` e no slug desta entrega, um sufixo que o capítulo 14 explica), quando você diz que ela está travada, ou, na revisão de um marco, quando a leitura do código alterado desde a base do marco deixou parte dele sem ler.
+Um defeito no que ele construiu que ele não consegue corrigir sem ampliar a página, ou sem uma decisão que nenhum documento responde, espera a sua resposta do mesmo jeito quando é grave ou deixa um item do Pronto quando sem marcar.
 Ele escreve na página o que foi construído e o que ela espera, deixa a página em `work/`, marca a linha como `[?]` com esse motivo no fim dela (capítulo 14).
 Ele termina a página com uma mensagem parcial em um bloco `commit` e mostra o mesmo bloco na conversa.
 No trunk ele não coloca nada em stage: o trabalho fica sem commit, e fora do índice, até estar inteiro.
@@ -76,9 +78,13 @@ Em um branch da entrega ele pode colocar o trabalho parcial em stage para você 
 
 ### A verificação e a prova
 
-Ele escreve os testes que o docs/04 cita para cada peça (capítulo 5); um lento demais para a verificação vai para os testes lentos, cujo comando o slot Verify do docs/05 cita e a revisão de marco roda (capítulo 15), e o `/apply` avisa você, porque um teste movido em silêncio pareceria cobertura perdida.
+Ele escreve os testes que o docs/04 pede para o que a página diz (capítulo 5) e para cada defeito que esta entrega corrige, e nenhum outro; um lento demais para a verificação vai para os testes lentos, que o slot Verify do docs/05 lista um por linha, o comando e o que ele cobre, e o `/apply` avisa você, porque um teste movido em silêncio pareceria cobertura perdida.
 Movê-lo não apaga teste nenhum nem dispensa a própria prova desta entrega, e não muda onde uma regra mora, em um caso de uso puro, nem o nível de teste que prova cada cenário.
-Em seguida ele roda o comando de verificação até ficar verde.
+Em seguida ele roda o comando de verificação até ficar verde, e diz a você quanto tempo a verificação levou, contra o teto que o slot Verify nomeia, cinco minutos se você não disser outro.
+Acima do teto, isso é uma nota na página para a revisão de marco, que diz quais testes vão para os lentos.
+Uma suíte cresce a cada entrega, e nada a para senão um número: eu já vi suítes de teste crescerem até a verificação levar trinta minutos e atrasar cada entrega.
+Antes de a entrega terminar, ele roda os testes lentos que o slot lista e que cobrem o que a entrega mudou, e só esses; a revisão de marco roda todos (capítulo 15).
+Um teste lento rodado só na revisão de marco acha uma quebra longe da entrega que a fez, então um time o mantém dentro da verificação por segurança, e toda entrega paga por ele: num projeto, medido em 2026-11-12, a verificação levava 357 segundos, 322 deles de uma suíte ponta a ponta de 414 testes que toda entrega rodava inteira.
 Depois prova a entrega do jeito que o docs/05 diz: um screenshot contra o design, uma execução ponta a ponta, ou uma checagem à mão.
 Ele lista o que diverge da referência e corrige, até restar só o que ele consegue justificar.
 Uma falha faz parte da prova e é registrada, nunca escondida.
@@ -102,10 +108,15 @@ Os arquivos de outra sessão na mesma pasta, os que ela criou incluídos, não s
 O revisor traz o que a releitura de quem escreveu não tem, um contexto livre do raciocínio que escreveu a mudança, e mede a mudança contra a página e o docs/04.
 
 O revisor aponta candidatos, defeitos de que suspeita, e não corrige nada ele mesmo.
-Um candidato que quebra a página, o docs/04 ou o texto que esta entrega escreveu é corrigido nesta sessão, e a verificação roda de novo.
+O que a revisão, a prova ou a construção acha de errado no que a entrega construiu ou mudou, um caso que a página não nomeou incluído, é corrigido nesta sessão, com um teste para a correção, e a verificação roda de novo.
 Isso vale para qualquer edição que a verificação cobre feita depois da sua última execução verde, uma correção da revisão ou um documento mudado tarde: uma execução verde fala pelos arquivos como estavam quando ela rodou, então a edição posterior a faz rodar mais uma vez.
-Todo o resto, um defeito em código que a entrega não tocou ou um desejo que a página não pediu, vira uma linha `[ ]` na fila, porque a página é o escopo.
 O revisor fica somente leitura porque a sessão que construiu a mudança sabe por que fez cada escolha, então é essa sessão que faz a correção, e a mudança tem um só autor.
+O que a sessão não consegue corrigir sem ampliar a página, ou sem uma decisão que nenhum documento responde, não é corrigido nem adivinhado: é uma nota na página, com o que você pode fazer; quando é grave, ou deixa um item do Pronto quando sem marcar, a linha espera como `[?]` pela sua resposta em vez disso, como diz a seção sobre quando o trabalho não consegue seguir.
+Um defeito em qualquer outra coisa, um defeito mais antigo que a entrega num arquivo que ela edita incluído, é um achado.
+Um achado grave, pelos três testes do capítulo 11, vira uma linha `[ ]` terminada em `· from <slug>`, a entrega que o achou (o capítulo 14 diz onde a linha vai).
+Qualquer outro achado, e um que ninguém consegue dizer se é grave, é uma nota na página sob o título `## For the review` (para a revisão, em inglês como o kit o escreve), uma linha com o arquivo e a linha e o que uma pessoa veria, que a próxima revisão de marco copia para a sua página (capítulo 15).
+Um processo que faz de todo achado uma linha enche o marco de consertos, a revisão de cada entrega achando o próximo: num projeto, em 2026-11-12, 32 das 130 linhas do seu primeiro marco tinham vindo de um achado, 22 delas de uma revisão da entrega.
+Vinte e quatro seguidas eram achados ou a linha de design de um, a maioria sobre uma tela e várias um defeito no que a entrega anterior tinha acabado de construir; cada uma teve a sua página, prova e revisão, que achou a seguinte, até a sétima geração, todas acima da linha que atende a primeira cláusula do marco.
 
 O seu uso da entrega, a sua revisão e o seu commit continuam vindo depois dela: ela é uma checagem a mais antes de você usar a entrega e ler o diff.
 E ela lê uma entrega enquanto essa entrega está aberta, enquanto a revisão de marco lê juntas as entregas do marco ([capítulo 15](15-closing-a-milestone.md)).
@@ -116,16 +127,17 @@ A verificação diz que o código faz o que os testes dele dizem.
 Ela não diz nada sobre se a página foi atendida, se os documentos ainda valem, ou se alguém vai conseguir saber depois o que aconteceu.
 Então, antes de parar, o `/apply` faz tudo isto:
 
-* Escreve na página o que aconteceu, sob um título `## Outcome` abaixo de Pronto quando, para que a definição acima fique como foi lida: o que divergiu do plano e por quê, o que foi deixado de lado, o que a prova achou, o que a revisão da entrega achou e o que foi feito de cada candidato, e as decisões tomadas, com um ADR se foi preciso um.
+* Escreve na página o que aconteceu, sob um título `## Outcome` abaixo de Pronto quando, para que a definição acima fique como foi lida: o que divergiu do plano e por quê, o que foi deixado de lado, o que a prova achou, o que a revisão da entrega achou e o que foi feito de cada candidato, cada correção com o seu teste, e as decisões tomadas, com um ADR se foi preciso um; e, acima do bloco `commit`, as notas sob `## For the review`.
 * Antes da revisão, atualiza os documentos que a entrega mudou: um termo novo no docs/03, uma regra nova no documento que é dono dela, uma decisão em docs/adr/.
 * Antes da revisão também, quando a entrega acrescenta ou muda algo que uma pessoa faz à mão, como publicar o app, escreve ou atualiza o manual dele em `docs/manuals/` ([capítulo 7](07-the-documents.md)). Quando a entrega é a primeira depois da qual uma pessoa consegue rodar o produto, escreve o manual de rodá-lo, de um clone novo até a primeira tela ou chamada, e toda entrega posterior que muda um passo o atualiza.
-* A verificação está verde depois da última edição que ela cobre; uma edição depois dessa execução verde, qualquer que seja o motivo, a faz rodar de novo.
+* A verificação está verde depois da última edição que ela cobre, e o agente disse quanto tempo ela levou; uma edição depois dessa execução verde, qualquer que seja o motivo, a faz rodar de novo; e os testes lentos que cobrem a mudança rodaram.
 * Marca cada item do Pronto quando.
 * Move a página para `work/done/`; uma linha `[?]` que espera só por esta, ou por linhas já integradas, volta pela fase de retomada ([capítulo 14](14-queue-states.md)).
 * Coloca em stage só os caminhos e trechos desta entrega, nunca com `git add -A` ou `git add .`, e avisa o que outra pessoa já tinha colocado em stage, sem tirar do stage.
 * Termina a página com a mensagem de commit sugerida em um bloco `commit`, no formato que o docs/05 define, e mostra o mesmo bloco na conversa, onde um bloco cercado fica à parte do resto da resposta. Há um bloco só: um `/apply` retomado substitui o anterior.
 * A sua última edição marca a linha como `[x]` no docs/06 com o script de marca e `stage`, que muda essa linha no índice e nada mais ali, então as linhas que outra sessão já colocou em stage ficam como estavam; ela vem depois de todo o resto estar em stage, então uma linha `[x]` sem nada em stage é uma sessão que parou antes da hora.
-* As últimas palavras dele são os seus próximos passos, cada um dito a você: usar o que a entrega mudou como o usuário dela usaria, e dizer naquela sessão o que está errado; revisar o diff em stage; fazer o commit com a mensagem sugerida (e o merge, em um branch da entrega). O arquivo do comando no kit os escreve assim, "*Diga à pessoa que revise o diff em stage e depois faça o commit com a mensagem sugerida*", porque um passo escrito como ordem seca nas instruções do próprio agente cabe ao agente cumprir, e um "faça o commit" seco ali contradiria o seu "nunca faça commit"; com cada passo dito a você, o agente os diz e não dá nenhum. Esses passos são ditos na conversa e acabam com ela, e quando outro agente roda a sessão por você eles podem nunca chegar até você; o que ainda guarda como rodar o produto, para a próxima pessoa, é o manual de rodá-lo, do item acima.
+* A sua última mensagem abre com o que a entrega deixou, pronta ou travada: `🚨`, uma sirene, antes de cada linha nova e de cada defeito que travou a entrega; `⚠️`, um sinal de aviso, antes de cada nota e de uma verificação acima do teto; `✅`, um sinal de visto, quando a entrega está pronta e não deixou nada disso. Uma entrega que deixou uma nota abre com `⚠️`, nunca com `✅`. No projeto das vinte e quatro linhas acima, cada comando nomeava as linhas que acrescentava numa última mensagem com a mesma forma de todas as outras, e a pessoa só viu os consertos se acumularem à frente do trabalho do marco depois das vinte e quatro; com a marca, e a árvore da fila no fim do `/apply` (o capítulo 14 lê os achados dela), isso aparece no mesmo dia.
+* Depois dessa abertura, as últimas palavras dele são os seus próximos passos, cada um dito a você: usar o que a entrega mudou como o usuário dela usaria, e dizer naquela sessão o que está errado; revisar o diff em stage; fazer o commit com a mensagem sugerida (e o merge, em um branch da entrega). O arquivo do comando no kit os escreve assim, "*Diga à pessoa que revise o diff em stage e depois faça o commit com a mensagem sugerida*", porque um passo escrito como ordem seca nas instruções do próprio agente cabe ao agente cumprir, e um "faça o commit" seco ali contradiria o seu "nunca faça commit"; com cada passo dito a você, o agente os diz e não dá nenhum. Esses passos são ditos na conversa e acabam com ela, e quando outro agente roda a sessão por você eles podem nunca chegar até você; o que ainda guarda como rodar o produto, para a próxima pessoa, é o manual de rodá-lo, do item acima.
 * Depois, mesmo sem ninguém pedir, ele roda o script de fila do kit e mostra a árvore dele (capítulo 14), o que pode rodar em seguida, com as linhas livres oferecidas como um comando escrito como o seu host o invoca, para uma sessão nova, e o comando de `next:`, o da primeira linha livre, escrito do mesmo jeito, para que uma pessoa nova no kit não procure na documentação o que vem depois. Ele roda o script sem ninguém pedir porque o script responde a quem pergunta o que pode rodar agora, e no fim do `/apply` ninguém perguntou: um fim que esperasse a pergunta não diria o próximo comando. A última coisa que diz é qual ambiente está em qual versão e o comando que atualiza os outros, e ele nunca termina calado sobre isso.
 
 Pronto é a revisão e essa lista inteira.
@@ -148,11 +160,12 @@ Se um botão quebra linha na largura estreita, ele é corrigido; se o arquivo de
 A entrega mudou o schema, então antes de qualquer revisão ele acrescenta a tabela `emprestimo` ao documento que lista o schema.
 Depois um agente somente leitura lê os arquivos que a entrega criou, a migration e tudo em `src/features/emprestimos/`, e o `git diff HEAD` do que ela editou, o documento do schema incluído, contra a página e o docs/04, em uma revisão também escrita para este capítulo, e aponta dois candidatos.
 O primeiro rascunho de `inserirEmprestimo` transformava toda falha da escrita em `JaEmprestado`, enquanto o docs/04 da biblioteca guarda a fronteira do capítulo 3: a falha do índice único vira `JaEmprestado`, e qualquer outra falha da escrita continua `BancoDeDadosFalhou`.
-Nenhum teste dispara isso, já que nos testes só o índice único falha, e está no texto que esta entrega escreveu, então o agente restringe a captura ao erro do índice único e roda a verificação de novo; a chamada do repositório que os capítulos 3 e 4 descrevem é a corrigida.
+Nenhum teste dispara isso, já que nos testes só o índice único falha, e está no que esta entrega construiu, então o agente restringe a captura ao erro do índice único, escreve o teste de que a correção precisa, uma escrita que falha por outro motivo continuando `BancoDeDadosFalhou`, e roda a verificação de novo; a chamada do repositório que os capítulos 3 e 4 descrevem é a corrigida.
 `inserirEmprestimo` fica em um arquivo que esta entrega criou, então uma revisão só do diff não teria lido nada dele.
 O segundo candidato: a recusa para um membro suspenso não diz até quando.
-A página nunca pediu isso, e nenhuma cláusula do parágrafo do marco 1 precisa disso: o parágrafo promete a recusa, não a data em que ela termina.
-Então vira a linha `fim-da-suspensao`, sob o próximo marco, criado quando não há nenhum, como o capítulo 11 diz, e `devolver-livro` continua sendo a próxima linha livre.
+Está no que a entrega construiu, mas dizer até quando precisa de uma decisão que nenhum documento responde, se uma suspensão tem fim e onde ele fica guardado, então o agente não consegue corrigir isso sem adivinhar, e não adivinha.
+Não é grave e não deixa item do Pronto quando sem marcar: a página nunca pediu isso, e nenhuma cláusula do parágrafo do marco 1 precisa disso, já que o parágrafo promete a recusa, não a data em que ela termina.
+Então é uma nota na página sob `## For the review`, com o que você pode fazer, acrescentar uma linha para isso por conversa (capítulo 11), e `devolver-livro` continua sendo a próxima linha livre.
 Então ele escreve na página o que aconteceu, com os dois candidatos e o que foi feito de cada um, marca o Pronto quando, move a página para `work/done/emprestar-livro.md`, coloca em stage só os caminhos desta entrega e, como a sua última edição, marca a linha `[x]` com o script de marca e `stage`, que coloca em stage só essa linha do docs/06.
 Se uma edição de outra sessão em `src/features/membros/` está na árvore, ou se a linha dela do docs/06 já está em stage, o agente deixa os dois como estão e avisa você do que está em stage (capítulo 19).
 
@@ -169,6 +182,15 @@ Emprestar um exemplar a um membro
 
 work/done/emprestar-livro.md
 ```
+
+A sua última mensagem abre com o que a entrega deixou, em linhas também escritas para este capítulo:
+
+```
+⚠️ nota: src/features/emprestimos/regras.ts:18, um membro suspenso é
+   recusado sem saber até quando; uma linha para isso é você quem cria
+```
+
+A entrega está pronta e deixou uma nota, então a mensagem abre com `⚠️` e não com `✅`, e você sabe antes de tudo que há algo na página para você decidir.
 
 Depois ele diz a você os seus próximos passos:
 
@@ -223,12 +245,13 @@ Depois leia a mudança em stage contra a página:
 
 * Cada linha de Comportamento foi atendida, cada uma pelo seu teste ou por uma checagem registrada?
 * Foi construída alguma coisa que a página não pediu: um arquivo, uma dependência, uma camada?
-* A verificação e a prova ficam verdes para você, e, se um teste foi para os testes lentos, o agente avisou, e o comando dos testes lentos no slot Verify o roda?
+* A verificação e a prova ficam verdes para você, o agente disse quanto tempo a verificação levou, e os testes lentos que cobrem a mudança rodaram; e, se um teste foi para os testes lentos, o agente avisou, e o comando dos testes lentos no slot Verify o roda?
+* Cada correção tem o seu teste, e não há teste que a página e as suas correções não pediram?
 * Os documentos que a entrega mudou foram atualizados, e só eles?
 * Se esta entrega é a primeira depois da qual o produto roda, ou mudou um passo para rodá-lo, o manual de rodá-lo diz isso, para que alguém com um clone novo e mais nada consiga rodar o produto?
 * O diff em stage tem só esta entrega, e o agente avisou o que já estava em stage?
 * A mensagem sugerida no bloco `commit` no fim da página está certa: o assunto, os tópicos, a última linha?
-* O que a revisão da entrega achou, e cada candidato foi corrigido ou virou uma linha `[ ]`?
+* O que a revisão da entrega achou, e cada candidato foi corrigido com o seu teste, escrito como uma nota ou, quando grave, feito uma linha terminada em `· from <slug>`; e a última mensagem abre com a marca que diz isso?
 * A revisão leu a entrega inteira, com os arquivos que ela criou e os commits que ela tenha feito no seu branch, e a verificação rodou de novo depois da última edição que ela cobre?
 
 Se a página não registra revisão nenhuma e o slot do docs/05 nomeia uma, a entrega não terminou como o kit diz; peça a revisão ao agente.
@@ -301,15 +324,16 @@ Se o seu agente responde com linhas de `git commit -m` e nenhum bloco `commit` n
 
 Nada é publicado sem uma checagem e uma pessoa: a verificação e a prova conferem a construção, e uma pessoa lê a mudança, por padrão o diff antes de ele existir no histórico, ou, pela palavra do slot Git, o commit depois que ele entra.
 Um defeito que uma entrega escreveu é achado por um leitor que não o escreveu, e corrigido nessa entrega, antes de você ler o diff.
+O trabalho planejado fica à frente dos achados na fila, já que só um grave vira uma linha, e a primeira linha de cada última mensagem diz a você o que a entrega deixou.
 E o que divergiu do plano fica escrito onde a próxima pessoa lê: no Ninjobs, a página da entrega que permite a um usuário excluir a própria conta dizia que a tabela que registra uma exclusão pendente não teria regra de escrita nenhuma, e a construção descobriu que uma tabela sem regra de escrita não aceita escrita de ninguém, nem das funções do próprio banco de dados.
 Então a página registrou o ajuste, nenhum caminho de escrita alcançável pelo cliente, o que o teste das regras de acesso agora prova, e o commit que a publicou aponta para essa página.
 
 ## Pontos-chave
 
-* O `/apply <slug>` constrói a página em uma sessão nova, aberta no worktree da entrega quando há um, e `/apply a b` abre um subagente por slug, na única pasta no trunk ou cada um mandado para o caminho do seu worktree, e o `/apply` sem slug mostra a árvore da fila e pergunta, lê o docs/00 e o docs/03 com o resto, escreve o código com os identificadores do docs/03 e segue ao pé da letra cada slot do docs/05 §5, os do próprio projeto incluídos: a página é o escopo, sem dependência, camada ou ferramenta que ela não nomeou, e quando a página contradiz um documento ele para e diz qual, sem nunca resolver em silêncio.
+* O `/apply <slug>` constrói a página em uma sessão nova, aberta no worktree da entrega quando há um, e `/apply a b` abre um subagente por slug, na única pasta no trunk ou cada um mandado para o caminho do seu worktree, e o `/apply` sem slug mostra a árvore da fila e pergunta, lê o docs/00 e o docs/03 com o resto, escreve o código com os identificadores do docs/03 e segue ao pé da letra cada slot do docs/05 §5, os do próprio projeto incluídos: a página é o escopo, sem dependência, camada ou ferramenta que ela não nomeou, e corrigir o que ele construiu não é ampliá-la, e quando a página contradiz um documento ele para e diz qual, sem nunca resolver em silêncio.
 * Ele marca a linha, pelo script de marca do kit, como `[*]` com a sua primeira edição, só numa linha `[>]`, quando as linhas que o seu `after` nomeia estão integradas e nenhuma outra construção está mudando os arquivos dela, `[x]` com a última, quando o resto já está em stage, com `stage`, então só essa linha vai para o índice, e `[?]`, com o que ela espera, quando precisa parar.
-* Verde não é pronto: pronto é a lista inteira, dos documentos atualizados antes de uma revisão por um contexto que não escreveu a mudança, que lê a entrega inteira, à verificação verde depois da última edição e à linha marcada `[x]`.
-* Ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, cada um dito a você, de usar o que ele construiu até o commit, e depois a árvore da fila, que ele desenha com o script de fila do kit mesmo sem ninguém pedir, o seu `next:` escrito como o seu host invoca os comandos; os dois são ditos na conversa e acabam com ela, enquanto o manual de rodar o produto, escrito pela primeira entrega depois da qual o produto roda e atualizado por cada uma que muda um passo, é o que fica; e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
+* Verde não é pronto: pronto é a lista inteira, dos testes para o que a página diz e para cada correção, e nenhum outro, do tempo da verificação contra o seu teto e dos testes lentos que cobrem a mudança, e dos documentos atualizados antes de uma revisão por um contexto que não escreveu a mudança, que lê a entrega inteira, à verificação verde depois da última edição e à linha marcada `[x]`; o que a revisão acha no que a entrega construiu é corrigido com um teste, um defeito que ela não consegue corrigir é uma nota ou um `[?]`, e um achado em outro lugar é uma nota, uma linha só quando é grave.
+* A sua última mensagem abre com `🚨`, `⚠️` ou `✅`, pelo que a entrega deixou; ele termina a página com a mensagem sugerida em um bloco `commit` e mostra o mesmo bloco na conversa, também quando para travado; as últimas palavras dele são os seus próximos passos, cada um dito a você, de usar o que ele construiu até o commit, e depois a árvore da fila, que ele desenha com o script de fila do kit mesmo sem ninguém pedir, o seu `next:` escrito como o seu host invoca os comandos; os dois são ditos na conversa e acabam com ela, enquanto o manual de rodar o produto, escrito pela primeira entrega depois da qual o produto roda e atualizado por cada uma que muda um passo, é o que fica; e, por último, qual ambiente está em qual versão e o comando que atualiza os outros.
 * Use o que foi construído como o usuário usaria, revise a mudança em stage contra a página, peça cada correção na mesma sessão, dizendo o que quer no lugar e por quê, transforme o que a página não pediu em uma linha da fila, onde o parágrafo do seu marco a põe, e então faça o commit, você mesmo ou pedindo ao agente, ou revise o commit que o slot Git deixou o agente fazer: essa revisão é a defesa contra o viés de automação, o hábito de confiar no agente depois de muitas entregas boas.
 
 [^huang-2024]: Jie Huang et al., "Large Language Models Cannot Self-Correct Reasoning Yet", 2024. <https://arxiv.org/abs/2310.01798>
