@@ -1,6 +1,6 @@
 # 15. Closing a milestone
 
-After this chapter you can close a milestone: plan its review as the milestone's last line (written `· after all`, so a line the person cancelled never keeps it waiting), test each clause of its paragraph by hand, run the slow tests the project keeps out of verify, and turn each finding into a `[ ]` line in the same milestone, under the review, even when the next milestone is already in the queue.
+After this chapter you can close a milestone: plan its review as the milestone's last line (written `· after all`, so a line the person cancelled never keeps it waiting), test each clause of its paragraph by hand, run the slow tests the project keeps out of verify, copy onto the review's page the notes the deliveries left, and grade every confirmed finding: a grave one a `[ ]` line of its own, the medium ones you pick on one `<milestone>-fixes` line, the small ones listed, every line in the same milestone, under the review, even when the next milestone is already in the queue.
 You can also say what that review reads, the paragraph by hand and, on the person's word, the code changed from the milestone's base to the commit its reading started at, read by whoever docs/05's Milestone review slot names, the host's deep review or one read-only agent per area, with a checker either way before the person sees a candidate, and why its findings get no review of their own.
 That range stays fixed while new commits arrive, so every reader's diff is the same.
 
@@ -18,7 +18,7 @@ A milestone is planned with its review as its last line, `<milestone>-review`, a
 Its line ends `· after all`, every line above it in its milestone but the cancelled ones, so `/propose` writes its page when every one of those is defined and `/apply` runs it when every one is integrated; a line the person cancelled never keeps it waiting, and a line whose `after` names a cancelled one waits, and the review with it, until the person re-decides that line.
 Its page takes the milestone's paragraph clause by clause and writes, for each, which delivery answers it and how a person tests it.
 It fixes nothing.
-It runs the slow tests docs/05's Verify slot names, the ones kept out of verify because they take too long for every delivery, when the slot names any; a failing one is a finding, so the milestone does not close while its line is open.
+It runs the slow tests docs/05's Verify slot names, the ones kept out of verify because they take too long for every delivery, when the slot names any; a failing one is a finding, graded like the others (below).
 The review also reads the code, the one look at the whole instead of a delivery, because every page can be right and the whole wrong.
 Its page names as the base the commit of the previous milestone's review, or, for a first milestone, the project's first commit, or, where no earlier review exists, a commit the page names with the reason it chose it, and as its end the commit `HEAD` was when the reading started, and lists the paths that range changed, by the areas docs/05's Milestone review slot names when the kit's readers read it.
 A project whose earlier milestones closed with no review line names, for instance, the commit that closed the last of them, because nothing after it was read as a whole; that example is written for this chapter.
@@ -108,21 +108,69 @@ src/features/loans/return/repository.server.ts:18
 The seen and the latent candidates each sit across two slices, which no delivery's review reads together, and the weak one, unchecked, would have spent the person's time on a claim the file refutes.
 
 The readers, the deep review and the checker fix nothing.
-A candidate becomes a finding only when the person confirms it, and then it is a finding like the others, a `[ ]` line under the review line.
+A candidate becomes a finding only when the person confirms it, and then it is a finding like the others, graded with them (below).
 A project whose Milestone review slot says none has no code reading, and the hand test still runs.
+
+## The notes the deliveries left
+
+While a milestone runs, its deliveries meet flaws outside what they build, such as a screen another delivery built that loses what the person typed.
+A flaw that is not grave does not become a line: it waits as a note on that delivery's page, under the heading `## For the review`, one line with the file and line and what a person would see (chapter 14 shows the note).
+The review is where those notes are looked at.
+
+It opens by copying onto its page the notes of every page its range delivered, the pages committed between its base and `<review-head>`; a delivery whose page holds no notes adds none.
+The checker marks each note as it marks a candidate, seen, latent or weak, because a note says what was true when it was written, and a later delivery of the range may have changed that file since.
+The person confirms a note as they confirm a candidate.
+
+One note on the lending library, written for this chapter, on `return-book`'s page: "`src/features/loans/LendView.tsx:31`: after a refused loan the form clears the member's card number, and the librarian types it again".
+`return-book`'s `/propose` or its `/apply` found it in the lending screen, outside what `return-book` builds, so it stayed a note.
+
+## Grave, medium, small
+
+Findings differ in weight: one breaks the promise the paragraph makes, another is a rare case or a cost nobody measured.
+A review that made every finding a line would fill its milestone with lines, each with its own page, proof and commit before the milestone closes, a rare case beside a broken promise, while the next milestone's work waits behind them.
+
+So the review grades every confirmed finding.
+A grave one breaks a clause of the paragraph for a person on its usual path, loses or exposes data, or leaves verify red, and becomes a `[ ]` line of its own.
+The others stay listed on the review's page: first the medium ones, which a person meets in ordinary use while the clause still holds; then the small ones, a rare case, a latent or weak candidate, a cost nobody measured.
+The person says which medium ones enter the milestone's one fixes line, `<milestone>-fixes`, each an item of its page.
+That page is their list and is not split, whatever its length, since split it would be the many lines again.
+A small one becomes a line only when the person picks it.
+These lines end `· from <milestone>-review`, the delivery that found them (chapter 14 shows the suffix), and sit under the review line.
+
+Suppose the hand test failed on the lending library: a returned copy stays among the member's loans.
+With that failure, the note on the lending screen, which the checker marked seen and the person confirmed, and the three candidates the checker marked above, the review's page grades them this way, written for this chapter:
+
+```
+Grave
+  returned-loan: a returned copy stays among the member's loans
+Medium
+  1. LendView.tsx:31, a note of return-book: a refused loan
+     clears the member's card, and the librarian types it again
+Small
+  2. myLoans.server.ts:12, seen: my-loans reads the table loan
+  3. myLoans.server.ts:14 and repository.server.ts:21, latent
+  4. repository.server.ts:18, weak
+```
+
+The failure breaks a clause on its usual path, so it is grave and already named as its line; the note is medium, met while lending still works; the seen candidate is small, a cost nobody measured, since no person meets it in use, and the latent and the weak ones are small by their marks.
+
+A grave finding is a line of its own because it is a promise broken, and its own page is small enough to read before it is built and to check after.
+The medium ones share one page because each is a fix a person would want and none breaks the promise.
+A small one waits for the person because its cost is a guess.
 
 ## A line, and not a fix
 
-Each finding becomes a `[ ]` line in the same milestone, under the review line, waiting for `/propose`.
+A grave finding's line, the fixes line and the line of a small one the person picked go in the same milestone, under the review line, waiting for `/propose`.
 Each line says what will be true, never how to fix it.
-If the returned copy stayed among the member's loans, the milestone's lines would end this way, written for this chapter:
+With the returned copy among the member's loans and the medium finding picked, the milestone's lines would end this way, written for this chapter:
 
 ```
 [x] lend-book      the librarian lends a copy
 [x] return-book    the librarian records a return
 [x] my-loans       a member sees their loans and due dates
 [x] m1-review      the paragraph tested by hand, the code read
-[ ] returned-loan  a returned copy leaves the member's loans
+[ ] returned-loan  a returned copy leaves the loans · from m1-review
+[ ] m1-fixes       the review's medium finding · from m1-review
 ```
 
 Each finding line is a delivery: `/propose` will write its page and `/apply` will build it.
@@ -131,8 +179,8 @@ The milestone closes when those lines are `[x]`, each with its proof.
 A line, and not a fix, because a fix made in the middle of the next milestone has no page and no review.
 Nobody reads its scope before it is built, nobody checks it against a page afterwards, and it lands in a milestone whose paragraph does not mention it.
 As a line it waits its turn, and gets both.
-And it stays in the milestone whose paragraph it fails, so that milestone closes only when its paragraph holds.
-It stays there when the next milestone already exists: with a milestone 2 already below it, holding its own lines and `m2-review`, `returned-loan` still goes under `m1-review`, not into milestone 2, with its own `/propose` and `/apply` and no review of its own.
+And it stays in the milestone whose review found it, so a grave one keeps that milestone open until its paragraph holds.
+It stays there when the next milestone already exists: with a milestone 2 already below it, holding its own lines and `m2-review`, `returned-loan` still goes under `m1-review`, and so does `m1-fixes`, not into milestone 2, each with its own `/propose` and `/apply` and no review of its own.
 
 ## No second review
 
@@ -152,20 +200,20 @@ Its page says, in its own words, that it does not fit a page and that it breaks 
 The fixes held: the page measured job triage at about 620 ms on the development database when the work began, and at 94 ms when it ended.
 But when I checked the result myself, I found faults its tests had not caught.
 The process was not the cause; my choice was.
-Eight lines would have been eight pages, each small enough to read before it was built and to check after.
+The grades would have given each grave one its own page, small enough to read before it was built and to check after, and the rest one shared list at most; my page put all eight on one and graded none.
 
 ## What the team gains
 
 A hand test of the whole product sees what no single delivery's check can: a clause no delivery took on, a step that fails once the deliveries run together, met the way a user will meet them, before users do.
 The read of the whole code adds what no hand test can see, the kind of fault the review at the Ninjobs opening found.
 The checker spends the person's time on the candidates that hold, and, when the kit's readers read, the paths each one lists, checked against the one range the page recorded, make a part of the milestone left unread show on the page instead of passing as read.
-And because each finding becomes a line, the team sees the cost of the milestone's gaps in the queue, next to everything else it plans, instead of in fixes nobody reviewed.
+And because the review grades its findings, the queue shows as lines the ones that break the milestone's promise and one line for what the person picked to fix, next to everything else the team plans, and the rest stays listed on the review's page, never in fixes nobody reviewed.
 
 ## Key points
 
 * A milestone review looks at what the deliveries add up to, which no review of a single page or staged change can see.
 * A milestone is planned with its review as its last line, `<milestone>-review`, written `· after all`, an `after` that leaves out the cancelled lines, run with `/propose` and `/apply`: its page names as the base the commit of the previous milestone's review, or the project's first commit for a first milestone, or, where no earlier review exists, the commit the page names and why, and as its end `<review-head>`, the commit `HEAD` was when the reading started.
   It writes for each clause of the paragraph the delivery that answers it and how a person tests it, and fixes nothing; the review runs the slow tests the Verify slot names.
-* The person tests each clause by hand, and on the person's word the range from the base to `<review-head>` is read by the host's deep review or by the kit's readers, one read-only agent per area of the slot, each listing the paths it read, all on those two recorded commits, and a checker marks each candidate; a clause no delivery answers, one that fails in the person's hands, a slow test that fails, or a candidate the person confirms is a finding.
-* Each finding becomes a `[ ]` line in the same milestone, under the review line, even when the next milestone already exists, never a fix in the middle of the next milestone; the milestone closes when those lines are `[x]`.
+* The person tests each clause by hand, and on the person's word the range from the base to `<review-head>` is read by the host's deep review or by the kit's readers, one read-only agent per area of the slot, each listing the paths it read, all on those two recorded commits, and a checker marks each candidate; a clause no delivery answers, one that fails in the person's hands, a slow test that fails, or a candidate the person confirms is a finding; the review opens by copying the notes the range's pages left under `## For the review`, which the checker marks like candidates and the person confirms like them.
+* The review grades every finding: a grave one a `[ ]` line of its own; the medium ones the person picks on one `<milestone>-fixes` line, whose page is their list and is not split; the small ones listed, a line only when the person picks one; every line ending `· from <milestone>-review` under the review line, even when the next milestone already exists, never a fix in the middle of the next milestone; the milestone closes when those lines are `[x]`.
 * The finding lines get no review of their own: each passes through its own page, its proof and the person's use, review and commit.

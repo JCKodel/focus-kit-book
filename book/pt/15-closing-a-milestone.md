@@ -1,6 +1,6 @@
 # 15. Fechando um marco
 
-Depois deste capítulo você consegue fechar um marco: planejar a sua revisão como a última linha do marco (escrita `· after all`, então uma linha que a pessoa cancelou nunca a faz esperar), testar à mão cada cláusula do seu parágrafo, rodar os testes lentos que o projeto deixa fora da verificação, e transformar cada achado em uma linha `[ ]` no mesmo marco, sob a revisão, mesmo quando o marco seguinte já está na fila.
+Depois deste capítulo você consegue fechar um marco: planejar a sua revisão como a última linha do marco (escrita `· after all`, então uma linha que a pessoa cancelou nunca a faz esperar), testar à mão cada cláusula do seu parágrafo, rodar os testes lentos que o projeto deixa fora da verificação, copiar para a página da revisão as notas que as entregas deixaram, e classificar todo achado confirmado: um grave vira uma linha `[ ]` própria, os médios que você escolhe entram em uma linha `<milestone>-fixes`, os pequenos ficam listados, toda linha no mesmo marco, sob a revisão, mesmo quando o marco seguinte já está na fila.
 Você também consegue dizer o que essa revisão lê, o parágrafo à mão e, com a palavra da pessoa, o código alterado da base do marco até o commit em que a sua leitura começou, lido por quem o slot Milestone review do docs/05 cita, a revisão profunda do host ou um agente somente leitura por área, com um conferente nos dois casos antes que a pessoa veja um candidato, e por que os seus achados não têm revisão própria.
 Esse intervalo fica fixo enquanto chegam commits novos, então o diff de todo leitor é o mesmo.
 
@@ -18,7 +18,7 @@ Um marco é planejado com a sua revisão como a última linha, `<milestone>-revi
 A linha dela termina em `· after all`, toda linha acima dela no seu marco menos as canceladas, então o `/propose` escreve a sua página quando todas essas estão definidas e o `/apply` a executa quando todas estão integradas; uma linha que a pessoa cancelou nunca a faz esperar, e uma linha cujo `after` nomeia uma cancelada espera, e a revisão com ela, até a pessoa redecidir essa linha.
 A página dela pega o parágrafo do marco cláusula por cláusula e escreve, para cada uma, qual entrega a atende e como uma pessoa a testa.
 Ela não corrige nada.
-Ela roda os testes lentos que o slot Verify do docs/05 cita, os que ficam fora da verificação porque demoram demais para toda entrega, quando o slot cita algum; um que falha é um achado, então o marco não fecha enquanto a linha dele estiver aberta.
+Ela roda os testes lentos que o slot Verify do docs/05 cita, os que ficam fora da verificação porque demoram demais para toda entrega, quando o slot cita algum; um que falha é um achado, classificado como os outros (abaixo).
 A revisão também lê o código, o único olhar sobre o todo em vez de sobre uma entrega, porque cada página pode estar certa e o todo errado.
 A página dela cita como base o commit da revisão do marco anterior, ou, para um primeiro marco, o primeiro commit do projeto, ou, onde não existe revisão anterior, um commit que a página cita com o motivo de tê-lo escolhido, e como o seu fim o commit em que o `HEAD` estava quando a leitura começou, e lista os caminhos que esse intervalo alterou, pelas áreas que o slot Milestone review (revisão de marco) do docs/05 cita quando os leitores do kit o leem.
 Um projeto cujos marcos anteriores fecharam sem linha de revisão cita, por exemplo, o commit que fechou o último deles, porque nada depois dele foi lido como um todo; esse exemplo foi escrito para este capítulo.
@@ -111,21 +111,70 @@ src/features/emprestimos/devolucao/repositorio.server.ts:18
 O visto e o latente ficam cada um entre duas fatias, que a revisão de nenhuma entrega lê juntas, e o fraco, sem conferência, gastaria o tempo da pessoa com uma afirmação que o arquivo desmente.
 
 Os leitores, a revisão profunda e o conferente não corrigem nada.
-Um candidato só vira achado quando a pessoa o confirma, e então é um achado como os outros, uma linha `[ ]` sob a linha da revisão.
+Um candidato só vira achado quando a pessoa o confirma, e então é um achado como os outros, classificado com eles (abaixo).
 Um projeto cujo slot Milestone review diz none (nenhuma) não tem leitura do código, e o teste à mão continua rodando.
+
+## As notas que as entregas deixaram
+
+Enquanto um marco roda, as suas entregas encontram falhas fora do que constroem, como uma tela que outra entrega construiu e que perde o que a pessoa digitou.
+Uma falha que não é grave não vira uma linha: ela espera como uma nota na página dessa entrega, sob o título `## For the review` (para a revisão, em inglês como o kit o escreve), uma linha com o arquivo e a linha e o que uma pessoa veria (o capítulo 14 mostra a nota).
+A revisão é onde essas notas são olhadas.
+
+Ela abre copiando para a sua página as notas de toda página que o seu intervalo entregou, as páginas com commit entre a sua base e o `<head-da-revisao>`; uma entrega cuja página não tem notas não acrescenta nenhuma.
+O conferente marca cada nota como marca um candidato, visto, latente ou fraco, porque uma nota diz o que era verdade quando foi escrita, e uma entrega posterior do intervalo pode ter mudado esse arquivo desde então.
+A pessoa confirma uma nota como confirma um candidato.
+
+Uma nota da biblioteca de empréstimos, escrita para este capítulo, na página de `devolver-livro`: "`src/features/emprestimos/TelaDeEmprestimo.tsx:31`: depois de um empréstimo recusado, o formulário apaga o número da carteirinha do membro, e o bibliotecário o digita de novo".
+O `/propose` ou o `/apply` de `devolver-livro` a achou na tela de empréstimo, fora do que `devolver-livro` constrói, então ela ficou como nota.
+
+## Grave, médio, pequeno
+
+Os achados diferem em peso: um quebra a promessa que o parágrafo faz, outro é um caso raro ou um custo que ninguém mediu.
+Uma revisão que fizesse de cada achado uma linha encheria o seu marco de linhas, cada uma com a sua própria página, prova e commit antes de o marco fechar, um caso raro ao lado de uma promessa quebrada, enquanto o trabalho do marco seguinte espera atrás delas.
+
+Então a revisão classifica todo achado confirmado.
+Um grave quebra uma cláusula do parágrafo para uma pessoa no seu caminho habitual, perde ou expõe dados, ou deixa a verificação vermelha, e vira uma linha `[ ]` própria.
+Os outros ficam listados na página da revisão: primeiro os médios, que uma pessoa encontra no uso comum enquanto a cláusula ainda vale; depois os pequenos, um caso raro, um candidato latente ou fraco, um custo que ninguém mediu.
+A pessoa diz quais médios entram na única linha de correções do marco, `<milestone>-fixes`, cada um como um item da página dela.
+Essa página é a lista deles e não se divide, seja qual for o seu tamanho, porque dividida ela seria as muitas linhas de novo.
+Um pequeno só vira linha quando a pessoa o escolhe.
+Essas linhas terminam em `· from <milestone>-review`, a entrega que as achou (o capítulo 14 mostra o sufixo), e ficam sob a linha da revisão.
+
+Suponha que o teste à mão falhou na biblioteca de empréstimos: um exemplar devolvido continua entre os empréstimos do membro.
+Com essa falha, a nota da tela de empréstimo, que o conferente marcou como vista e a pessoa confirmou, e os três candidatos que o conferente marcou acima, a página da revisão os classifica assim, escrita para este capítulo:
+
+```
+Grave
+  emprestimo-devolvido: o exemplar devolvido fica nos empréstimos
+Médios
+  1. TelaDeEmprestimo.tsx:31, uma nota de devolver-livro: um empréstimo
+     recusado apaga a carteirinha, e o bibliotecário a digita de novo
+Pequenos
+  2. meusEmprestimos.server.ts:12, visto: meus-emprestimos lê a tabela
+     emprestimo
+  3. meusEmprestimos.server.ts:14 e repositorio.server.ts:21, latente
+  4. repositorio.server.ts:18, fraco
+```
+
+A falha quebra uma cláusula no seu caminho habitual, então é grave e já tem o nome da sua linha; a nota é média, encontrada enquanto o empréstimo ainda funciona; o candidato visto é pequeno, um custo que ninguém mediu, porque nenhuma pessoa o encontra no uso, e o latente e o fraco são pequenos pelas suas marcas.
+
+Um achado grave é uma linha própria porque é uma promessa quebrada, e a sua própria página é pequena o bastante para ser lida antes de ser construída e conferida depois.
+Os médios dividem uma página porque cada um é uma correção que uma pessoa gostaria de ter e nenhum quebra a promessa.
+Um pequeno espera a pessoa porque o seu custo é um palpite.
 
 ## Uma linha, e não uma correção
 
-Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, esperando o `/propose`.
+A linha de um achado grave, a linha de correções e a linha de um pequeno que a pessoa escolheu vão para o mesmo marco, sob a linha da revisão, esperando o `/propose`.
 Cada linha diz o que vai ser verdade, nunca como corrigir.
-Se o exemplar devolvido continuasse entre os empréstimos do membro, as linhas do marco terminariam assim, escritas para este capítulo:
+Com o exemplar devolvido entre os empréstimos do membro e o achado médio escolhido, as linhas do marco terminariam assim, escritas para este capítulo:
 
 ```
 [x] emprestar-livro      o bibliotecário empresta um exemplar
 [x] devolver-livro       o bibliotecário registra uma devolução
 [x] meus-emprestimos     um membro vê os seus empréstimos e as datas
 [x] m1-review            o parágrafo testado à mão, o código lido
-[ ] emprestimo-devolvido o exemplar devolvido sai da lista do membro
+[ ] emprestimo-devolvido o devolvido sai dos empréstimos · from m1-review
+[ ] m1-fixes             o achado médio da revisão · from m1-review
 ```
 
 Cada linha de achado é uma entrega: o `/propose` vai escrever a sua página e o `/apply` vai construí-la.
@@ -134,8 +183,8 @@ O marco fecha quando essas linhas estão `[x]`, cada uma com a sua prova.
 Uma linha, e não uma correção, porque uma correção feita no meio do marco seguinte não tem página nem revisão.
 Ninguém lê o escopo dela antes de ela ser construída, ninguém a confere contra uma página depois, e ela cai em um marco cujo parágrafo não a menciona.
 Como linha, ela espera a sua vez, e ganha as duas coisas.
-E ela fica no marco cujo parágrafo ela reprova, então esse marco só fecha quando o seu parágrafo se sustenta.
-Ela fica ali quando o marco seguinte já existe: com um marco 2 já abaixo dele, com as suas próprias linhas e `m2-review`, `emprestimo-devolvido` vai mesmo assim sob `m1-review`, não para o marco 2, com o seu próprio `/propose` e `/apply` e nenhuma revisão própria.
+E ela fica no marco cuja revisão a achou, então a de um achado grave mantém esse marco aberto até o seu parágrafo se sustentar.
+Ela fica ali quando o marco seguinte já existe: com um marco 2 já abaixo dele, com as suas próprias linhas e `m2-review`, `emprestimo-devolvido` vai mesmo assim sob `m1-review`, e `m1-fixes` também, não para o marco 2, cada uma com o seu próprio `/propose` e `/apply` e nenhuma revisão própria.
 
 ## Nenhuma segunda revisão
 
@@ -155,20 +204,20 @@ A página dela diz, com as suas próprias palavras, que não cabe em uma página
 As correções se sustentaram: a página mediu a triagem de vagas em cerca de 620 ms no banco de dados de desenvolvimento quando o trabalho começou, e em 94 ms quando terminou.
 Mas quando eu mesmo conferi o resultado, achei falhas que os testes dela não tinham pegado.
 A causa não foi o processo; foi a minha escolha.
-Oito linhas teriam sido oito páginas, cada uma pequena o bastante para ser lida antes de ser construída e conferida depois.
+As classificações teriam dado a cada achado grave a sua própria página, pequena o bastante para ser lida antes de ser construída e conferida depois, e ao resto no máximo uma lista em comum; a minha página pôs os oito em uma e não classificou nenhum.
 
 ## O que o time ganha
 
 Um teste à mão do produto inteiro vê o que a checagem de nenhuma entrega sozinha consegue ver: uma cláusula que nenhuma entrega assumiu, um passo que falha quando as entregas rodam juntas, encontrados do jeito que um usuário vai encontrá-los, antes dos usuários.
 A leitura do código inteiro soma o que nenhum teste à mão consegue ver, o tipo de falha que a revisão na abertura do Ninjobs achou.
 O conferente gasta o tempo da pessoa com os candidatos que se sustentam, e, quando os leitores do kit leem, os caminhos que cada um lista, conferidos contra o único intervalo que a página registrou, fazem uma parte do marco deixada sem ler aparecer na página, em vez de passar como lida.
-E como cada achado vira uma linha, o time vê o custo das brechas do marco na fila, ao lado de tudo o que planeja, e não em correções que ninguém revisou.
+E como a revisão classifica os seus achados, a fila mostra como linhas os que quebram a promessa do marco e uma linha para o que a pessoa escolheu corrigir, ao lado de tudo o que o time planeja, e o resto fica listado na página da revisão, nunca em correções que ninguém revisou.
 
 ## Pontos-chave
 
 * Uma revisão de marco olha para o que as entregas somam, o que nenhuma revisão de uma página ou de uma mudança em stage consegue ver.
 * Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, escrita `· after all`, um `after` que deixa de fora as linhas canceladas, rodada com o `/propose` e o `/apply`: a página dela cita como base o commit da revisão do marco anterior, ou o primeiro commit do projeto para um primeiro marco, ou, onde não existe revisão anterior, o commit que a página cita e o porquê, e como o seu fim o `<head-da-revisao>`, o commit em que o `HEAD` estava quando a leitura começou.
   Ela escreve para cada cláusula do parágrafo a entrega que a atende e como uma pessoa a testa, e não corrige nada; a revisão roda os testes lentos que o slot Verify cita.
-* A pessoa testa cada cláusula à mão e, com a palavra da pessoa, o intervalo da base até o `<head-da-revisao>` é lido pela revisão profunda do host ou pelos leitores do kit, um agente somente leitura por área do slot, cada um listando os caminhos que leu, todos sobre esses dois commits registrados, e um conferente marca cada candidato; uma cláusula que nenhuma entrega atende, uma que falha nas mãos da pessoa, um teste lento que falha, ou um candidato que a pessoa confirma é um achado.
-* Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, mesmo quando o marco seguinte já existe, nunca uma correção no meio do marco seguinte; o marco fecha quando essas linhas estão `[x]`.
+* A pessoa testa cada cláusula à mão e, com a palavra da pessoa, o intervalo da base até o `<head-da-revisao>` é lido pela revisão profunda do host ou pelos leitores do kit, um agente somente leitura por área do slot, cada um listando os caminhos que leu, todos sobre esses dois commits registrados, e um conferente marca cada candidato; uma cláusula que nenhuma entrega atende, uma que falha nas mãos da pessoa, um teste lento que falha, ou um candidato que a pessoa confirma é um achado; a revisão abre copiando as notas que as páginas do intervalo deixaram sob `## For the review`, que o conferente marca como candidatos e a pessoa confirma como eles.
+* A revisão classifica todo achado: um grave vira uma linha `[ ]` própria; os médios que a pessoa escolhe entram na linha de correções `<milestone>-fixes`, cuja página é a lista deles e não se divide; os pequenos ficam listados, uma linha só quando a pessoa escolhe um; toda linha terminando em `· from <milestone>-review` sob a linha da revisão, mesmo quando o marco seguinte já existe, nunca uma correção no meio do marco seguinte; o marco fecha quando essas linhas estão `[x]`.
 * As linhas de achado não têm revisão própria: cada uma passa pela sua própria página, pela sua prova e pelo uso, pela revisão e pelo commit da pessoa.
