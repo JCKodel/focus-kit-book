@@ -793,7 +793,7 @@ When this milestone closes, the book teaches focus-kit 2026.11.12 and the reposi
 ```
 [x] kit-2026-11-12          reinstall the kit at 2026.11.12 and apply its migration report in the same session: docs/05 §3's `## For the review` heading, §4's findings paragraph, §5's Verify ceiling and slow tests, §8's grading, and `· from <slug>` on docs/06's finding lines · after m37-review
 [ ] ch13-apply-findings     chapter 13: /apply fixing in the delivery what is wrong in what it built, a flaw it cannot fix a note or a `[?]`, a finding elsewhere a line only when grave, its last message opening with `🚨`, `⚠️` or `✅`, tests for what the page says and fixes, verify's ceiling and the slow tests that cover what the delivery changed, with the 32 of 130 lines of 2026-11-12 as the error · after kit-2026-11-12
-[ ] ch14-queue-findings     chapter 14: the `· from <slug>` suffix, where a grave line goes, a note on the delivery's page, a test or process line only on the person's word, and `queue.sh` printing `findings:` and its warning · after kit-2026-11-12
+[x] ch14-queue-findings     chapter 14: the `· from <slug>` suffix, where a grave line goes, a note on the delivery's page, a test or process line only on the person's word, and `queue.sh` printing `findings:` and its warning · after kit-2026-11-12
 [x] ch15-review-grades      chapter 15: the milestone review copying the deliveries' notes and grading findings, grave a line each, the medium ones the person picks on one `<milestone>-fixes` line, the small ones listed · after kit-2026-11-12
 [ ] m38-review               the review of M38 as docs/05 §8 says · after all
 ```
