@@ -1,6 +1,6 @@
 # 15. Closing a milestone
 
-After this chapter you can close a milestone: plan its review as the milestone's last line, test each clause of its paragraph by hand, run the slow tests the project keeps out of verify, and turn each finding into a `[ ]` line in the same milestone, under the review, even when the next milestone is already in the queue.
+After this chapter you can close a milestone: plan its review as the milestone's last line (written `· after all`, so a line the person cancelled never keeps it waiting), test each clause of its paragraph by hand, run the slow tests the project keeps out of verify, and turn each finding into a `[ ]` line in the same milestone, under the review, even when the next milestone is already in the queue.
 You can also say what that review reads, the paragraph by hand and, on the person's word, the code changed from the milestone's base to the commit its reading started at, read by whoever docs/05's Milestone review slot names, the host's deep review or one read-only agent per area, with a checker either way before the person sees a candidate, and why its findings get no review of their own.
 That range stays fixed while new commits arrive, so every reader's diff is the same.
 
@@ -15,6 +15,7 @@ A claim of the milestone that no delivery took on, a step that works on its own 
 
 The kit closes that gap in one rule, §8 of the process document it writes, docs/05.
 A milestone is planned with its review as its last line, `<milestone>-review`, a delivery like the others: `/propose` writes its page, and `/apply` runs it.
+Its line ends `· after all`, every line above it in its milestone but the cancelled ones, so `/propose` writes its page when every one of those is defined and `/apply` runs it when every one is integrated; a line the person cancelled never keeps it waiting, and a line whose `after` names a cancelled one waits for the person to re-decide it, and the review waits with it.
 Its page takes the milestone's paragraph clause by clause and writes, for each, which delivery answers it and how a person tests it.
 It fixes nothing.
 It runs the slow tests docs/05's Verify slot names, the ones kept out of verify because they take too long for every delivery, when the slot names any; a failing one is a finding, so the milestone does not close while its line is open.
@@ -163,7 +164,7 @@ And because each finding becomes a line, the team sees the cost of the milestone
 ## Key points
 
 * A milestone review looks at what the deliveries add up to, which no review of a single page or staged change can see.
-* A milestone is planned with its review as its last line, `<milestone>-review`, run with `/propose` and `/apply`: its page names as the base the commit of the previous milestone's review, or the project's first commit for a first milestone, or, where no earlier review exists, the commit the page names and why, and as its end `<review-head>`, the commit `HEAD` was when the reading started.
+* A milestone is planned with its review as its last line, `<milestone>-review`, written `· after all`, an `after` that leaves out the cancelled lines, run with `/propose` and `/apply`: its page names as the base the commit of the previous milestone's review, or the project's first commit for a first milestone, or, where no earlier review exists, the commit the page names and why, and as its end `<review-head>`, the commit `HEAD` was when the reading started.
   It writes for each clause of the paragraph the delivery that answers it and how a person tests it, and fixes nothing; the review runs the slow tests the Verify slot names.
 * The person tests each clause by hand, and on the person's word the range from the base to `<review-head>` is read by the host's deep review or by the kit's readers, one read-only agent per area of the slot, each listing the paths it read, all on those two recorded commits, and a checker marks each candidate; a clause no delivery answers, one that fails in the person's hands, a slow test that fails, or a candidate the person confirms is a finding.
 * Each finding becomes a `[ ]` line in the same milestone, under the review line, even when the next milestone already exists, never a fix in the middle of the next milestone; the milestone closes when those lines are `[x]`.

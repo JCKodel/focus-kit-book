@@ -2,7 +2,7 @@
 
 After this chapter you can read any queue line's state among focus-kit's six marks, say who sets each one, at what moment, and how, one byte through the kit's mark script while every other edit of the queue changes only its own lines, since a program that writes the whole queue can empty it, and why the script refuses a second start of one line, name the next delivery, say which lines can run at the same time from the queue tree the kit's script draws, and say why a build stops on files another build is changing.
 You can also tell an order written with a line, `· after`, read for each command, from a wait found on the way, `[?]`, mark a line that waits with its reason and the phase to resume, and take it out again; and lay the queue out as a kanban board that shows the work while it happens, and say where each mark is seen.
-And you can resume a line whose session ended, and record a delivery the person cancels so that it never reads as built.
+And you can resume a line whose session ended, and record a delivery the person cancels so that it never reads as built nor keeps the milestone's review waiting.
 
 ## The problem
 
@@ -219,6 +219,15 @@ The person sets it, not `/apply`, because cancelling is a decision about scope, 
 By the free rule alone, `reprint-card`'s build is free once `print-card` is `[x]`, and that is the trap: the `[x]` it names is a decision, not a card printer that works.
 So a line whose `after` names a cancelled delivery is the person's to re-decide: drop it too, as `reprint-card` would be, or rewrite it on what does exist.
 
+A milestone's review would have no such way out.
+A review that named every line above it would name the cancelled one too and wait, as `reprint-card` does, on a line only the person's decision clears; but a review is neither dropped nor rewritten on what exists, so no re-decision of its own would clear it.
+On 2026-10-26, in one project, a Milestone 1 review waited on a line the person had dropped: the queue script answered `after <slug>, dropped: re-decide`, nothing the person could write freed it, and the review's `after all` was replaced by a list of the other 27 slugs.
+So `after all` names no cancelled line: it is every line above the review in its milestone but the cancelled ones, and it leaves them out.
+Suppose the two lines above, written for this chapter, sit in the library's milestone 1, above `m1-review`.
+`after all` leaves `print-card` out, so the cancelled line never keeps the review waiting.
+`reprint-card` is not cancelled, so `after all` counts it: the queue tree prints it with `waits: after print-card, dropped: re-decide`, and the review waits with it until the person re-decides it.
+Dropped too, it leaves the review's `after all` as well; rewritten on what exists, the review waits for it like any other line.
+
 ## The queue as a kanban board
 
 A kanban board shows work as cards in columns, one column per state, and a card moves from column to column as its state changes.
@@ -257,7 +266,7 @@ It reads docs/06 and the pages in `work/` by slug, on trunk from the folder's ow
 
 A manager reads where every delivery stands, and what each waiting one waits on, without asking anyone and without a status meeting.
 On Case A, five lines blocked on the client read as idle work, and every delivery reached Doing only after its definition was over, counted by the author on the project's queue and board; a mark set when the work changes, and one for waiting, answer both.
-A request that proved impossible there was closed in the queue with its reason instead of left in silence ([chapter 23](23-adoption.md)), and the kit writes such a closure as `[x]` with `· dropped:`.
+A request that proved impossible there was closed in the queue with its reason instead of left in silence ([chapter 23](23-adoption.md)), and the kit writes such a closure as `[x]` with `· dropped:`, and a line closed that way keeps no review waiting.
 
 The queue also says which lines can run together: without that, a person who wants two sessions has to work it out alone before opening the second; the queue tree draws it from the queue, without a meeting, each line under what it waits on, and ends with the command to run next, and `/apply` checks the files before its first edit, so two builds never change the same file at once.
 And no session marking its line can leave the queue empty under the board and the other sessions, nor can two sessions that start one line both build it: a mark is one byte, changed whole or not at all, and a start on a line already taken is refused.

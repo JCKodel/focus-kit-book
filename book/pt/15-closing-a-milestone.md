@@ -1,6 +1,6 @@
 # 15. Fechando um marco
 
-Depois deste capítulo você consegue fechar um marco: planejar a sua revisão como a última linha do marco, testar à mão cada cláusula do seu parágrafo, rodar os testes lentos que o projeto deixa fora da verificação, e transformar cada achado em uma linha `[ ]` no mesmo marco, sob a revisão, mesmo quando o marco seguinte já está na fila.
+Depois deste capítulo você consegue fechar um marco: planejar a sua revisão como a última linha do marco (escrita `· after all`, então uma linha que a pessoa cancelou nunca a faz esperar), testar à mão cada cláusula do seu parágrafo, rodar os testes lentos que o projeto deixa fora da verificação, e transformar cada achado em uma linha `[ ]` no mesmo marco, sob a revisão, mesmo quando o marco seguinte já está na fila.
 Você também consegue dizer o que essa revisão lê, o parágrafo à mão e, com a palavra da pessoa, o código alterado da base do marco até o commit em que a sua leitura começou, lido por quem o slot Milestone review do docs/05 cita, a revisão profunda do host ou um agente somente leitura por área, com um conferente nos dois casos antes que a pessoa veja um candidato, e por que os seus achados não têm revisão própria.
 Esse intervalo fica fixo enquanto chegam commits novos, então o diff de todo leitor é o mesmo.
 
@@ -15,6 +15,7 @@ Uma afirmação do marco que nenhuma entrega assumiu, um passo que funciona sozi
 
 O kit fecha essa brecha com uma regra, o §8 do documento de processo que ele escreve, o docs/05.
 Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, uma entrega como as outras: o `/propose` escreve a sua página, e o `/apply` a executa.
+A linha dela termina em `· after all`, toda linha acima dela no seu marco menos as canceladas, então o `/propose` escreve a sua página quando todas essas estão definidas e o `/apply` a executa quando todas estão integradas; uma linha que a pessoa cancelou nunca a faz esperar, e uma linha cujo `after` nomeia uma cancelada espera a pessoa redecidi-la, e a revisão espera com ela.
 A página dela pega o parágrafo do marco cláusula por cláusula e escreve, para cada uma, qual entrega a atende e como uma pessoa a testa.
 Ela não corrige nada.
 Ela roda os testes lentos que o slot Verify do docs/05 cita, os que ficam fora da verificação porque demoram demais para toda entrega, quando o slot cita algum; um que falha é um achado, então o marco não fecha enquanto a linha dele estiver aberta.
@@ -166,7 +167,7 @@ E como cada achado vira uma linha, o time vê o custo das brechas do marco na fi
 ## Pontos-chave
 
 * Uma revisão de marco olha para o que as entregas somam, o que nenhuma revisão de uma página ou de uma mudança em stage consegue ver.
-* Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, rodada com o `/propose` e o `/apply`: a página dela cita como base o commit da revisão do marco anterior, ou o primeiro commit do projeto para um primeiro marco, ou, onde não existe revisão anterior, o commit que a página cita e o porquê, e como o seu fim o `<head-da-revisao>`, o commit em que o `HEAD` estava quando a leitura começou.
+* Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, escrita `· after all`, um `after` que deixa de fora as linhas canceladas, rodada com o `/propose` e o `/apply`: a página dela cita como base o commit da revisão do marco anterior, ou o primeiro commit do projeto para um primeiro marco, ou, onde não existe revisão anterior, o commit que a página cita e o porquê, e como o seu fim o `<head-da-revisao>`, o commit em que o `HEAD` estava quando a leitura começou.
   Ela escreve para cada cláusula do parágrafo a entrega que a atende e como uma pessoa a testa, e não corrige nada; a revisão roda os testes lentos que o slot Verify cita.
 * A pessoa testa cada cláusula à mão e, com a palavra da pessoa, o intervalo da base até o `<head-da-revisao>` é lido pela revisão profunda do host ou pelos leitores do kit, um agente somente leitura por área do slot, cada um listando os caminhos que leu, todos sobre esses dois commits registrados, e um conferente marca cada candidato; uma cláusula que nenhuma entrega atende, uma que falha nas mãos da pessoa, um teste lento que falha, ou um candidato que a pessoa confirma é um achado.
 * Cada achado vira uma linha `[ ]` no mesmo marco, sob a linha da revisão, mesmo quando o marco seguinte já existe, nunca uma correção no meio do marco seguinte; o marco fecha quando essas linhas estão `[x]`.

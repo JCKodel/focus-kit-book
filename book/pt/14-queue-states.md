@@ -2,7 +2,7 @@
 
 Depois deste capítulo você consegue ler o estado de qualquer linha da fila entre as seis marcas do focus-kit, dizer quem põe cada uma, em que momento, e como, um byte pelo script de marca do kit enquanto toda outra edição da fila muda só as próprias linhas, já que um programa que escreve a fila inteira pode esvaziá-la, e por que o script recusa um segundo começo de uma mesma linha, dizer qual é a próxima entrega, dizer quais linhas podem rodar ao mesmo tempo pela árvore da fila que o script do kit desenha, e dizer por que uma construção para em arquivos que outra construção está mudando.
 Você também consegue distinguir uma ordem escrita com a linha, `· after`, lida para cada comando, de uma espera descoberta no caminho, `[?]`, marcar uma linha que espera com o seu motivo e a fase de retomada, e tirá-la de lá de novo; e dispor a fila como um quadro kanban que mostra o trabalho enquanto ele acontece, e dizer onde cada marca é vista.
-E você consegue retomar uma linha cuja sessão terminou, e registrar uma entrega que a pessoa cancela de modo que ela nunca pareça construída.
+E você consegue retomar uma linha cuja sessão terminou, e registrar uma entrega que a pessoa cancela de modo que ela nunca pareça construída nem faça a revisão do marco esperar.
 
 ## O problema
 
@@ -221,6 +221,15 @@ Quem o põe é a pessoa, não o `/apply`, porque cancelar é uma decisão de esc
 Só pela regra de linha livre, a construção de `reimprimir-cartao` fica livre quando `imprimir-cartao` está `[x]`, e essa é a armadilha: o `[x]` que ela nomeia é uma decisão, não uma impressora de cartões que funciona.
 Então uma linha cujo `after` nomeia uma entrega cancelada cabe à pessoa redecidir: cancelá-la também, como seria `reimprimir-cartao`, ou reescrevê-la sobre o que existe.
 
+A revisão de um marco não teria essa saída.
+Uma revisão que nomeasse toda linha acima dela nomearia também a cancelada e esperaria, como `reimprimir-cartao` espera, por uma linha que só a decisão da pessoa libera; mas uma revisão não é cancelada nem reescrita sobre o que existe, então nenhuma redecisão dela mesma a liberaria.
+Em 2026-10-26, num projeto, a revisão de um Marco 1 esperou uma linha que a pessoa tinha cancelado: o script de fila respondia `after <slug>, dropped: re-decide`, nada que a pessoa escrevesse a liberava, e o `after all` da revisão foi trocado por uma lista dos outros 27 slugs.
+Então o `after all` não nomeia nenhuma linha cancelada: ele é toda linha acima da revisão no seu marco menos as canceladas, e as deixa de fora.
+Suponha que as duas linhas acima, escritas para este capítulo, fiquem no marco 1 da biblioteca, acima de `m1-review`.
+O `after all` deixa `imprimir-cartao` de fora, então a linha cancelada nunca faz a revisão esperar.
+`reimprimir-cartao` não está cancelada, então o `after all` a conta: a árvore da fila a imprime com `waits: after imprimir-cartao, dropped: re-decide`, e a revisão espera com ela até a pessoa redecidi-la.
+Cancelada também, ela sai do `after all` da revisão; reescrita sobre o que existe, a revisão espera por ela como por qualquer outra linha.
+
 ## A fila como quadro kanban
 
 Um quadro kanban mostra o trabalho como cartões em colunas, uma coluna por estado, e um cartão passa de coluna em coluna conforme o estado dele muda.
@@ -259,7 +268,7 @@ Ele lê o docs/06 e as páginas em `work/` pelo slug, no trunk nos arquivos da p
 
 Um gerente lê onde cada entrega está, e o que cada uma em espera espera, sem perguntar a ninguém e sem reunião de status.
 No Caso A, cinco linhas travadas no cliente pareciam trabalho parado, e cada entrega só chegava a Doing depois de a definição dela ter acabado, contado pelo autor na fila e no quadro do projeto; uma marca posta quando o trabalho muda, e uma para a espera, respondem aos dois.
-Um pedido que se provou impossível ali foi encerrado na fila com o seu motivo em vez de deixado em silêncio ([capítulo 23](23-adoption.md)), e o kit escreve um encerramento assim como `[x]` com `· dropped:`.
+Um pedido que se provou impossível ali foi encerrado na fila com o seu motivo em vez de deixado em silêncio ([capítulo 23](23-adoption.md)), e o kit escreve um encerramento assim como `[x]` com `· dropped:`, e uma linha encerrada assim não faz nenhuma revisão esperar.
 
 A fila também diz quais linhas podem rodar juntas: sem isso, uma pessoa que quer duas sessões tem de descobrir sozinha antes de abrir a segunda; a árvore da fila desenha isso pela fila, sem reunião, cada linha sob o que ela espera, e termina com o comando a rodar em seguida, e o `/apply` verifica os arquivos antes da primeira edição, então duas construções nunca mudam o mesmo arquivo ao mesmo tempo.
 E nenhuma sessão marcando a sua linha consegue deixar a fila vazia sob o quadro e as outras sessões, nem duas sessões que começam uma mesma linha conseguem ambas construí-la: uma marca é um byte, mudado inteiro ou não mudado, e um começo numa linha já ocupada é recusado.
