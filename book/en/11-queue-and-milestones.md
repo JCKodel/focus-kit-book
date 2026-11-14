@@ -78,7 +78,7 @@ An agent asked about a problem tends to answer with lines, each one reasonable, 
 The paragraph decides where a line goes, whoever adds it, you or the agent: a line that a clause of the current milestone's paragraph needs goes in that milestone, and any other, but for the two kinds of the next sentence, goes under the next milestone, which the agent creates when there is none, with a paragraph the line answers and its review last.
 Two kinds of line stay in the milestone they were found in, even when no clause needs them and the next milestone is already in the queue: a grave finding, a flaw a delivery finds outside what it built, and a finding of the milestone's own review, under the review (below).
 On the lending library, once `return-book` is built, you try the product and find that a copy whose loan is overdue cannot be taken back; the fix, a line written for this chapter, `fix-overdue-return`, stays in milestone 1, above `m1-review`, because the paragraph promises to record the return.
-What you decide is the paragraph: a line enters the current milestone only through a clause, so to bring one in you widen the paragraph by conversation first, and the line then answers the new clause.
+What you decide is the paragraph: except for a grave finding and a finding of the milestone's own review, a line enters the current milestone only through a clause, so to bring one in you widen the paragraph by conversation first, and the line then answers the new clause.
 
 The order is the priority.
 Asked which delivery matters most, you answer from the queue: the one higher in it; the next delivery is the first one free to start ([chapter 14](14-queue-states.md)).

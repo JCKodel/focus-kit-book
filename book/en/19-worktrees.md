@@ -21,7 +21,7 @@ The first case is avoided by choosing which deliveries run together; the second,
 ## Two sessions in one folder
 
 Two sessions can share one folder when they build free lines that touch different files.
-A free line is a line of the queue that is not done, not waiting, and needs no other line done first ([chapter 14](14-queue-states.md) teaches the queue's marks).
+A free line is a queue line not done, not waiting, whose `· after` lets its next command start ([chapter 14](14-queue-states.md) teaches the queue's marks).
 
 Say the lending library has two free lines: `return-book`, which touches `src/features/loans/`, and `overdue-list`, which touches `src/features/reports/`; the slugs and paths are an illustration, written for this chapter.
 Their code files do not meet.

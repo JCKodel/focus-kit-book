@@ -81,7 +81,7 @@ Um agente a quem você pergunta sobre um problema tende a responder com linhas, 
 O parágrafo decide onde uma linha vai, seja quem for que a acrescente, você ou o agente: uma linha de que uma cláusula do parágrafo do marco atual precisa vai nesse marco, e qualquer outra, fora os dois tipos da frase seguinte, vai sob o marco seguinte, que o agente cria quando não há nenhum, com um parágrafo que a linha atende e a sua revisão por último.
 Dois tipos de linha ficam no marco em que foram encontrados, mesmo quando nenhuma cláusula precisa deles e o marco seguinte já está na fila: um achado grave, uma falha que uma entrega encontra fora do que construiu, e um achado da revisão do próprio marco, sob a revisão (abaixo).
 Na biblioteca, depois de `devolver-livro` construída, você testa o produto e descobre que um exemplar cujo empréstimo está atrasado não consegue ser recebido de volta; a correção, uma linha escrita para este capítulo, `corrigir-devolucao-atrasada`, fica no marco 1, acima de `m1-review`, porque o parágrafo promete registrar a devolução.
-O que você decide é o parágrafo: uma linha só entra no marco atual por uma cláusula, então para trazer uma você amplia o parágrafo conversando antes, e a linha passa a atender a cláusula nova.
+O que você decide é o parágrafo: fora um achado grave e um achado da revisão do próprio marco, uma linha só entra no marco atual por uma cláusula, então para trazer uma você amplia o parágrafo conversando antes, e a linha passa a atender a cláusula nova.
 
 A ordem é a prioridade.
 Perguntado qual entrega importa mais, você responde pela fila: a que está mais acima nela; a próxima entrega é a primeira livre para começar ([capítulo 14](14-queue-states.md)).

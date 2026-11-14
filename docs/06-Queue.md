@@ -761,7 +761,7 @@ When this milestone closes, the book teaches focus-kit 2026.10.27 and the reposi
 [x] kit-2026-10-27          reinstall the kit at 2026.10.27; the report lists no migration, the script alone changes · after m34-review
 [x] ch12-14-mark-refused    chapters 12, 13 and 14: `mark.sh` refusing a second `[~]` or `[*]` on one line, with the two `/apply` of one slug six seconds apart on 2026-10-26 as the error; both editions · after kit-2026-10-27
 [x] m35-review               the review of M35 as docs/05 §8 says · after all
-[ ] m35-fixes                the three medium findings of m35-review, each an item of its page: chapter 11's grave finding against "only through a clause", chapter 19's free line read with `after` per command, and chapter 12's resumed `/propose` keeping its `[~]`; both editions · after m35-review · from m35-review
+[x] m35-fixes                the three medium findings of m35-review, each an item of its page: chapter 11's grave finding against "only through a clause", chapter 19's free line read with `after` per command, and chapter 12's resumed `/propose` keeping its `[~]`; both editions · after m35-review · from m35-review
 ```
 
 ## M36. focus-kit 2026.10.27.1
