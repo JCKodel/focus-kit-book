@@ -227,7 +227,7 @@ Em 2026-10-26, num projeto, a revisão de um Marco 1 esperou uma linha que a pes
 Então o `after all` não nomeia nenhuma linha cancelada: ele é toda linha acima da revisão no seu marco menos as canceladas, e as deixa de fora.
 Suponha que as duas linhas acima, escritas para este capítulo, fiquem no marco 1 da biblioteca, acima de `m1-review`.
 O `after all` deixa `imprimir-cartao` de fora, então a linha cancelada nunca faz a revisão esperar.
-`reimprimir-cartao` não está cancelada, então o `after all` a conta: a árvore da fila a imprime com `waits: after imprimir-cartao, dropped: re-decide`, e a revisão espera com ela até a pessoa redecidi-la.
+`reimprimir-cartao` não está cancelada, então o `after all` a conta: a árvore da fila a imprime com `waits: after imprimir-cartao, dropped: re-decide`, e a revisão espera com ela até a pessoa redecidir `reimprimir-cartao`.
 Cancelada também, ela sai do `after all` da revisão; reescrita sobre o que existe, a revisão espera por ela como por qualquer outra linha.
 
 ## A fila como quadro kanban

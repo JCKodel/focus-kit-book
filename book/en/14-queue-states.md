@@ -225,7 +225,7 @@ On 2026-10-26, in one project, a Milestone 1 review waited on a line the person 
 So `after all` names no cancelled line: it is every line above the review in its milestone but the cancelled ones, and it leaves them out.
 Suppose the two lines above, written for this chapter, sit in the library's milestone 1, above `m1-review`.
 `after all` leaves `print-card` out, so the cancelled line never keeps the review waiting.
-`reprint-card` is not cancelled, so `after all` counts it: the queue tree prints it with `waits: after print-card, dropped: re-decide`, and the review waits with it until the person re-decides it.
+`reprint-card` is not cancelled, so `after all` counts it: the queue tree prints it with `waits: after print-card, dropped: re-decide`, and the review waits with it until the person re-decides `reprint-card`.
 Dropped too, it leaves the review's `after all` as well; rewritten on what exists, the review waits for it like any other line.
 
 ## The queue as a kanban board
