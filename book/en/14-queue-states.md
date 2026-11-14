@@ -1,6 +1,6 @@
 # 14. The queue while it happens
 
-After this chapter you can read any queue line's state among focus-kit's six marks, say who sets each one, at what moment, and how, one byte through the kit's mark script while every other edit of the queue changes only its own lines, since a program that writes the whole queue can empty it, and why the script refuses a second start of one line, name the next delivery, say which lines can run at the same time from the queue tree the kit's script draws, and say why a build stops on files another build is changing.
+After this chapter you can read any queue line's state among focus-kit's six marks, say who sets each one, at what moment, and how, one byte through the kit's mark script while every other edit of the queue changes only its own lines, since a program that writes the whole queue can empty it, and why the script refuses a second start of one line, name the next delivery, list every open line of a queue with one search, say which lines can run at the same time from the queue tree the kit's script draws, and say why a build stops on files another build is changing.
 You can also write that a line needs another first, `· after`, whenever the need is found, read for each command and never a wait, mark a line that waits, `[?]`, in its three cases, with its reason and the phase to resume, and take it out again; tell a line from a finding by its `· from <slug>`, say where it goes in its milestone and why every other finding is a note and not a line, and read the `findings:` line the queue script prints; and lay the queue out as a kanban board that shows the work while it happens, and say where each mark is seen.
 And you can resume a line whose session ended, and record a delivery the person cancels so that it never reads as built nor keeps the milestone's review waiting.
 
@@ -47,6 +47,12 @@ This is the lending library's first milestone on one afternoon, written for this
 ```
 
 Anyone reading it knows, without asking, that a session is building `lend-book`, that `search-catalog` is completely defined and ready for `/apply`, that someone is talking `reservations` through right now, that `return-book` and `my-loans` come after `lend-book`, and what `due-reminder` waits on and which command picks it up again.
+
+> **Note.** To see every open line of a queue at once, search docs/06 for the regular expression `^\[[^x]\]`, a pattern that a search matches against each line.
+> `^` is the start of a line, `\[` and `\]` are the brackets themselves, and `[^x]` is any one character but `x`, so it finds every line that starts with a mark other than `[x]`: not defined, being defined, defined, being built and waiting; a cancelled line is `[x]` with `· dropped:`, and is left out like a done one.
+> Turn on regular expressions in an editor's search, or run `grep -nE '^\[[^x]\]' docs/06-Queue.md` in a terminal: `grep`, on every Unix-like system and in the shell Git for Windows installs, prints the lines of a file that match a pattern, and `-n` adds each line's number.
+> On the nine lines above it finds seven, all but `catalog` and `members`; on 2026-11-14 this book's own queue held 515 lines, 509 of them `[x]`, and the search showed the other six.
+> The search reads no `after` and only the copy of the file in front of you, so what may run now is still the queue tree's answer (below).
 
 ## At the moment the work changes
 

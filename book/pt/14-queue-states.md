@@ -1,6 +1,6 @@
 # 14. A fila enquanto acontece
 
-Depois deste capítulo você consegue ler o estado de qualquer linha da fila entre as seis marcas do focus-kit, dizer quem põe cada uma, em que momento, e como, um byte pelo script de marca do kit enquanto toda outra edição da fila muda só as próprias linhas, já que um programa que escreve a fila inteira pode esvaziá-la, e por que o script recusa um segundo começo de uma mesma linha, dizer qual é a próxima entrega, dizer quais linhas podem rodar ao mesmo tempo pela árvore da fila que o script do kit desenha, e dizer por que uma construção para em arquivos que outra construção está mudando.
+Depois deste capítulo você consegue ler o estado de qualquer linha da fila entre as seis marcas do focus-kit, dizer quem põe cada uma, em que momento, e como, um byte pelo script de marca do kit enquanto toda outra edição da fila muda só as próprias linhas, já que um programa que escreve a fila inteira pode esvaziá-la, e por que o script recusa um segundo começo de uma mesma linha, dizer qual é a próxima entrega, listar toda linha aberta de uma fila com uma busca, dizer quais linhas podem rodar ao mesmo tempo pela árvore da fila que o script do kit desenha, e dizer por que uma construção para em arquivos que outra construção está mudando.
 Você também consegue escrever que uma linha precisa de outra antes, `· after`, em qualquer momento em que a necessidade apareça, lido para cada comando e nunca uma espera, marcar uma linha que espera, `[?]`, nos seus três casos, com o seu motivo e a fase de retomada, e tirá-la de lá de novo; reconhecer uma linha vinda de um achado pelo seu `· from <slug>`, dizer onde ela fica no seu marco e por que todo outro achado é uma nota e não uma linha, e ler a linha `findings:` que o script de fila imprime; e dispor a fila como um quadro kanban que mostra o trabalho enquanto ele acontece, e dizer onde cada marca é vista.
 E você consegue retomar uma linha cuja sessão terminou, e registrar uma entrega que a pessoa cancela de modo que ela nunca pareça construída nem faça a revisão do marco esperar.
 
@@ -48,6 +48,12 @@ Os sufixos `· after`, `· resume:`, `· blocked:` e `· dropped:` ficam em ingl
 ```
 
 Quem a lê sabe, sem perguntar, que uma sessão está construindo `emprestar-livro`, que `buscar-catalogo` está completamente definida e pronta para o `/apply`, que alguém está conversando `reservas` agora mesmo, que `devolver-livro` e `meus-emprestimos` vêm depois de `emprestar-livro`, e o que `aviso-prazo` espera e qual comando a retoma.
+
+> **Nota.** Para ver de uma vez toda linha aberta de uma fila, busque no docs/06 a expressão regular `^\[[^x]\]`, um padrão que a busca compara com cada linha.
+> `^` é o começo da linha, `\[` e `\]` são os próprios colchetes, e `[^x]` é um caractere qualquer, menos `x`, então ela acha toda linha que começa com uma marca que não seja `[x]`: não definida, sendo definida, definida, sendo construída e esperando; uma linha cancelada é `[x]` com `· dropped:`, e fica de fora como uma linha feita.
+> Ligue as expressões regulares na busca de um editor, ou rode `grep -nE '^\[[^x]\]' docs/06-Queue.md` num terminal: o `grep`, presente em todo sistema do tipo Unix e no shell que o Git for Windows instala, imprime as linhas de um arquivo que casam com um padrão, e o `-n` acrescenta o número de cada linha.
+> Nas nove linhas acima ela acha sete, todas menos `catalogo` e `membros`; em 2026-11-14 a própria fila deste livro tinha 515 linhas, 509 delas `[x]`, e a busca mostrou as outras seis.
+> A busca não lê o `after` e lê só a cópia do arquivo à sua frente, então o que pode rodar agora continua sendo a resposta da árvore da fila (abaixo).
 
 ## No momento em que o trabalho muda
 
