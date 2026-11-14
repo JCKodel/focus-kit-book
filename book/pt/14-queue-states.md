@@ -1,7 +1,7 @@
 # 14. A fila enquanto acontece
 
 Depois deste capítulo você consegue ler o estado de qualquer linha da fila entre as seis marcas do focus-kit, dizer quem põe cada uma, em que momento, e como, um byte pelo script de marca do kit enquanto toda outra edição da fila muda só as próprias linhas, já que um programa que escreve a fila inteira pode esvaziá-la, e por que o script recusa um segundo começo de uma mesma linha, dizer qual é a próxima entrega, dizer quais linhas podem rodar ao mesmo tempo pela árvore da fila que o script do kit desenha, e dizer por que uma construção para em arquivos que outra construção está mudando.
-Você também consegue distinguir uma ordem escrita com a linha, `· after`, lida para cada comando, de uma espera descoberta no caminho, `[?]`, marcar uma linha que espera com o seu motivo e a fase de retomada, e tirá-la de lá de novo; reconhecer uma linha vinda de um achado pelo seu `· from <slug>`, dizer onde ela fica no seu marco e por que todo outro achado é uma nota e não uma linha, e ler a linha `findings:` que o script de fila imprime; e dispor a fila como um quadro kanban que mostra o trabalho enquanto ele acontece, e dizer onde cada marca é vista.
+Você também consegue escrever que uma linha precisa de outra antes, `· after`, em qualquer momento em que a necessidade apareça, lido para cada comando e nunca uma espera, marcar uma linha que espera, `[?]`, nos seus três casos, com o seu motivo e a fase de retomada, e tirá-la de lá de novo; reconhecer uma linha vinda de um achado pelo seu `· from <slug>`, dizer onde ela fica no seu marco e por que todo outro achado é uma nota e não uma linha, e ler a linha `findings:` que o script de fila imprime; e dispor a fila como um quadro kanban que mostra o trabalho enquanto ele acontece, e dizer onde cada marca é vista.
 E você consegue retomar uma linha cuja sessão terminou, e registrar uma entrega que a pessoa cancela de modo que ela nunca pareça construída nem faça a revisão do marco esperar.
 
 ## O problema
@@ -24,7 +24,7 @@ O focus-kit responde aos dois com seis marcas, cada uma posta no momento em que 
 | `[>]` | completamente definida: a página está pronta para o `/apply` | o `/propose`, quando a página está completa |
 | `[*]` | sendo construída | o `/apply`, quando começa |
 | `[x]` | feita: a página está em `work/done/`; com `· dropped:`, cancelada | o `/apply`, com a verificação verde; a pessoa, ao cancelar |
-| `[?]` | esperando | qualquer sessão, nos quatro casos abaixo |
+| `[?]` | esperando, nunca por outra linha | qualquer sessão, nos três casos abaixo |
 
 `· dropped:` é um sufixo do `[x]`, não uma sétima marca: uma entrega cancelada é encerrada como uma construída, e o sufixo diz que nada foi entregue (abaixo).
 
@@ -173,30 +173,60 @@ O `/propose` e o `/apply` digitados sem slug mostram a mesma árvore e perguntam
 
 ## Esperando: `[?]`
 
-Uma linha espera em quatro casos:
+Uma linha espera em três casos, nunca por outra linha:
 
 * **A pessoa diz que ela está travada.** A biblioteca ainda não comprou os leitores de código de barras, então o bibliotecário pede para segurar `escanear-exemplar`: `· resume: propose · blocked: sem leitores ainda`.
 * **Uma resposta foi pedida e não veio.** `aviso-prazo` precisa de um provedor de SMS, a pergunta foi para a diretora da biblioteca, e ninguém respondeu: `· resume: propose · blocked: qual provedor?`.
-* **Outra linha precisa ser feita antes, descoberto depois de o trabalho começar.** No meio de `/apply meus-emprestimos`, a construção descobre que `emprestar-livro` põe a data de devolução um dia antes no fim de um mês; a correção vira uma linha `[ ]` acima dela, `corrigir-devolucao`, terminada em `· from meus-emprestimos`, e `meus-emprestimos` espera: `· resume: apply · blocked: after corrigir-devolucao`.
 * **A leitura do código de uma revisão de marco não cobriu parte do seu intervalo.** A revisão que fecha um marco lê, com a palavra da pessoa, toda mudança desde a base do marco, dividida em áreas com um leitor cada que lista os caminhos que leu ([capítulo 15](15-closing-a-milestone.md)), e um leitor que leu parte da sua área aponta do mesmo jeito que um que a leu inteira, então quando, no meio de `/apply m1-review`, os leitores da revisão não listam nenhum caminho de `src/features/catalogo/`, a linha espera com o que foi lido como motivo: `· resume: apply · blocked: lidos todos menos catalogo/`.
 
-O motivo vai no fim da linha, em palavras, `· blocked: <motivo>`, ou como as linhas que precisam estar `[x]` antes, `· blocked: after <slug>, <slug>`.
+O motivo vai no fim da linha, em palavras, `· blocked: <motivo>`, nunca outra linha.
 Antes dele vai a fase de retomada, `· resume: propose` para uma linha que estava `[ ]` ou `[~]`, `· resume: apply` para uma que estava `[>]` ou `[*]`, para que a sessão que retoma a linha saiba de qual comando ela precisa.
 Qualquer marca antes de `[x]` pode virar `[?]`: uma linha pode esperar antes de alguém defini-la, enquanto a página dela está sendo escrita, ou no meio da construção.
 
-`· after` e `· blocked: after` se parecem e dizem coisas diferentes.
-`· after` é uma ordem conhecida quando a linha é escrita: `meus-emprestimos` precisa de empréstimos para mostrar, então foi acrescentada como `[ ] meus-emprestimos ... · after emprestar-livro`, e mantém `[ ]`.
-`· blocked: after` é uma espera descoberta depois de o trabalho começar, como foi `corrigir-devolucao`.
-Escrever `[?] meus-emprestimos ... · blocked: after emprestar-livro` quando a linha é acrescentada está errado: a linha está na fila, não travada, e em um quadro levaria uma etiqueta de travada que diz a um gerente que algo deu errado quando nada deu.
-
 Uma linha sai de `[?]` quando o motivo se resolve.
-A pessoa diz isso; ou a sessão que registra a resposta a tira, como quando a diretora diz o provedor e o nome vira uma linha do docs/00; ou ela sai quando a última linha que o `after` dela nomeia fica integrada, o que no trunk é quando o `/apply` marca essa linha `[x]`.
+A pessoa diz isso; ou a sessão que registra a resposta a tira, como quando a diretora diz o provedor e o nome vira uma linha do docs/00.
 Os dois sufixos saem, `resume` e `blocked`, e a fase de retomada diz para onde a linha volta.
 `aviso-prazo`, com `resume: propose`, volta para `[ ]`, e qualquer rascunho da página dela fica para o `/propose` terminar: um rascunho é uma página começada, não uma definição completa.
 Uma linha com `resume: apply` volta para `[>]`.
 
-O `/propose` e o `/apply` param os dois em uma linha `[?]`: dizem o que ela espera, e só seguem depois que o motivo se resolve, por um desses três caminhos.
+O `/propose` e o `/apply` param os dois em uma linha `[?]`: dizem o que ela espera, e só seguem depois que o motivo se resolve, por um desses dois caminhos.
 Um comando que passasse por cima do motivo construiria sobre uma resposta que ninguém deu.
+
+## Uma linha que precisa de outra
+
+Uma linha que precisa de outra linha antes não está esperando: ela termina em `· after <slug>` e mantém a marca que nomeia o seu próximo comando, então só a marca já diz se vem o `/propose` ou o `/apply`.
+Quando a dependência é conhecida ao acrescentar a linha, o sufixo é escrito nesse momento: `meus-emprestimos` precisa de empréstimos para mostrar, então foi acrescentada como `[ ] meus-emprestimos ... · after emprestar-livro`.
+Quando um trabalho já começado descobre a dependência, a sessão acrescenta o slug ao `after` da linha e a devolve, de `[~]` para `[ ]` com o rascunho mantido, ou de `[*]` para `[>]` com a página dizendo o que foi construído e o que ela espera (o capítulo 13 diz o que acontece com os arquivos já construídos).
+São duas edições: a marca pelo script, o sufixo pela edição de arquivo.
+
+No meio de `/apply meus-emprestimos`, a construção descobre que `emprestar-livro` põe a data de devolução um dia antes no fim de um mês.
+A correção vira uma linha `[ ]` acima de `meus-emprestimos`, `corrigir-devolucao`, terminada em `· from meus-emprestimos`, e `meus-emprestimos` volta para `[>]`, terminada em `· after emprestar-livro, corrigir-devolucao`.
+No meio de `/propose reservas`, a definição descobre que precisa de `buscar-catalogo` antes: a linha volta para `[ ]`, terminada em `· after buscar-catalogo`, e o rascunho dela fica.
+
+Um `[?]` no lugar delas esconde o próximo comando.
+Num projeto, em 2026-11-13, uma sessão que descobriu que duas linhas precisavam de outra antes deixou as duas em `[?]`, terminadas em `· after <slug> · resume: propose · blocked: after <slug>`: lendo a fila, a pessoa não conseguia dizer pela marca se vinha o `/propose` ou o `/apply`, e uma mesma linha dizia "after" de dois jeitos; a fila de outro projeto tinha quatro linhas assim.
+
+O marco 1 da biblioteca depois que as duas linhas voltaram, escrito para este capítulo: `catalogo`, `membros` e `emprestar-livro` integradas, `corrigir-devolucao` e `meus-emprestimos` como acima, `buscar-catalogo` definida e `reservas` devolvida a `[ ]`.
+O script de fila o desenha assim:
+
+```
+milestone: Marco 1: um bibliotecário empresta e recebe de volta
+findings: 1 open of 1 from a finding · 3 planned open
+[ ] corrigir-devolucao · propose now
+ └[>] meus-emprestimos · waits: after corrigir-devolucao
+[>] buscar-catalogo · apply now
+ └[ ] reservas · propose now
+
+free for /apply, in order: buscar-catalogo
+free for /propose, in order: corrigir-devolucao reservas
+next: /propose corrigir-devolucao
+```
+
+`meus-emprestimos` mantém `[>]` sob `corrigir-devolucao`, e `waits:` é a palavra da árvore para um `after` que ainda não deixa o próximo comando começar, enquanto uma linha `[?]` mostra `blocked:`; quando `corrigir-devolucao` fica integrada, `meus-emprestimos` fica livre para o `/apply` sem nada para tirar.
+
+Esse é o custo de ler o `after` para cada comando: `reservas` fica livre para o `/propose` assim que a página de `buscar-catalogo` está completa, como aqui, não quando o código dela fica integrado.
+Onde uma definição precisa da outra linha construída, o docs/05 do projeto diz isso, e o script de fila não sabe.
+Com um branch ou um worktree por entrega, o branch de uma linha devolvida continua a reivindicação dela, e a árvore a mostra `waits:` enquanto o `after` dela espera.
 
 ## Uma linha de um achado
 
@@ -210,7 +240,7 @@ Um empréstimo a um membro suspenso é um que uma regra deveria negar, passando 
 
 O lugar de um achado é a sua prioridade, como o de qualquer linha acrescentada depois, e o trabalho que o parágrafo pediu vem primeiro.
 Uma linha planejada é uma linha do marco que não vem de um achado e não é a sua revisão: as linhas que as cláusulas do parágrafo pediram.
-Um achado grave vai acima das linhas planejadas abertas só quando a verificação está vermelha ou uma delas precisa dele, como `corrigir-devolucao` fica acima de `meus-emprestimos`, que a nomeia no seu `blocked: after`.
+Um achado grave vai acima das linhas planejadas abertas só quando a verificação está vermelha ou uma delas precisa dele, como `corrigir-devolucao` fica acima de `meus-emprestimos`, que a nomeia no seu `after`.
 Senão ele vai abaixo delas, acima da revisão, ou sob a revisão depois que ela rodou.
 A verificação está verde e nem `devolver-livro` nem `buscar-catalogo` precisam de `corrigir-suspenso`, então ela vai abaixo de `buscar-catalogo`, acima de `m1-review`.
 
@@ -251,7 +281,7 @@ findings: 1 open of 1 from a finding · 2 planned open
 O `findings:` conta as linhas do marco terminadas em `· from <slug>`, depois quantas delas estão abertas, uma linha de achado já `[x]` ficando só no primeiro número, depois as linhas planejadas abertas; a revisão e uma linha cancelada não entram na conta.
 O aviso nomeia `corrigir-suspenso`, uma linha de achado aberta à frente de `devolver-livro` e de `buscar-catalogo`, embora nenhuma das duas precise dela, e a árvore termina com `next: /propose corrigir-suspenso`: o reparo vem antes do trabalho planejado.
 Movida para baixo de `buscar-catalogo`, acima de `m1-review`, a linha não fica mais à frente e o aviso some, o `findings:` fica como está, e o `next:` é `/apply devolver-livro`.
-Uma linha de achado que uma linha aberta nomeia no seu `after` ou `blocked: after` fica fora do aviso: `corrigir-devolucao`, que `meus-emprestimos` nomeia, fica acima porque uma linha planejada precisa dela.
+Uma linha de achado que uma linha aberta nomeia no seu `after` fica fora do aviso: `corrigir-devolucao`, que `meus-emprestimos` nomeia, fica acima porque uma linha planejada precisa dela.
 O aviso é um olhar, não um veredito: um achado que deixa a verificação vermelha fica à frente e também avisa, e a pessoa lê qual dos dois ele é, um de que a verificação precisa ou um que deveria descer.
 Como o `/apply` termina com a árvore, o desvio aparece no fim de toda construção sem ninguém pedir.
 
@@ -314,8 +344,8 @@ m1-review
 `reservas` está em Fazendo desde o primeiro minuto da conversa dela, que era o erro do quadro do Caso A.
 
 Se `reservas` travasse no meio da definição, o seu `resume: propose` a levaria de Fazendo para A fazer, etiquetada como travada; resolvida, ela fica em A fazer como `[ ]`, com o rascunho mantido e sem etiqueta.
-`meus-emprestimos`, esperando `corrigir-devolucao` no meio da construção, ficaria em Fazendo pelo seu `resume: apply`, etiquetada como travada; resolvida, ela fica em Fazendo como `[>]`, não como um `[*]` que nenhuma sessão está construindo.
-Nos dois casos, resolver o motivo tira os dois sufixos e, com eles, a etiqueta.
+Resolver o motivo tira os dois sufixos e, com eles, a etiqueta.
+`meus-emprestimos`, de volta a `[>]` quando a construção dela descobriu que precisa de `corrigir-devolucao`, fica em Fazendo sem etiqueta, como `[>]` e não como um `[*]` que nenhuma sessão está construindo: ela está na fila, não travada.
 
 O capítulo 20 mostra como um script espelha a fila no quadro do próprio time, numa só direção.
 
@@ -329,6 +359,7 @@ No Caso A, cinco linhas travadas no cliente pareciam trabalho parado, e cada ent
 Um pedido que se provou impossível ali foi encerrado na fila com o seu motivo em vez de deixado em silêncio ([capítulo 23](23-adoption.md)), e o kit escreve um encerramento assim como `[x]` com `· dropped:`, e uma linha encerrada assim não faz nenhuma revisão esperar.
 
 A fila também diz quais linhas podem rodar juntas: sem isso, uma pessoa que quer duas sessões tem de descobrir sozinha antes de abrir a segunda; a árvore da fila desenha isso pela fila, sem reunião, cada linha sob o que ela espera, e termina com o comando a rodar em seguida, e o `/apply` verifica os arquivos antes da primeira edição, então duas construções nunca mudam o mesmo arquivo ao mesmo tempo.
+Uma linha que precisa de outra mantém a marca do seu próximo comando, então a fila não mostra linha travada onde nada deu errado.
 A árvore também diz quanto do marco veio de achados e nomeia uma linha de achado à frente do trabalho planejado, então o desvio aparece no dia em que começa; e um achado que não é grave espera na página da sua entrega pela revisão em vez de entrar na fila.
 E nenhuma sessão marcando a sua linha consegue deixar a fila vazia sob o quadro e as outras sessões, nem duas sessões que começam uma mesma linha conseguem ambas construí-la: uma marca é um byte, mudado inteiro ou não mudado, e um começo numa linha já ocupada é recusado.
 
@@ -337,7 +368,7 @@ E nenhuma sessão marcando a sua linha consegue deixar a fila vazia sob o quadro
 * Seis marcas, `[ ]` não definida, `[~]` sendo definida, `[>]` completamente definida e pronta para o `/apply`, `[*]` sendo construída, `[x]` feita, `[?]` esperando, cada uma mudada quando o trabalho muda, não quando um comando termina: o `/propose` põe `[~]` e `[>]`, o `/apply` põe `[*]` e `[x]`, a pessoa põe `[x]` com `· dropped: <motivo>` ao cancelar, qualquer sessão põe `[?]`; toda marca muda pelo script de marca do kit, um byte, `[~]` só numa linha `[ ]` e `[*]` só numa `[>]`, o `[x]` do `/apply` colocado em stage só na sua linha com `stage`, e toda outra edição da fila é a edição de arquivo do host nas linhas dela, nunca um programa que escreve o arquivo inteiro; uma linha cuja sessão terminou mantém a sua marca, e o seu comando a retoma com a palavra da pessoa, inspecionando antes a página, a pasta e o índice, e a página de uma entrega cancelada em `work/done/` diz o que foi construído e desfeito.
 * Uma linha está livre para um comando quando não está `[x]` nem `[?]` e o `after` dela deixa esse comando começar: o `/propose` quando toda linha que ele nomeia está `[>]` ou além, o `/apply` quando todas estão integradas, `[x]` no trunk, com merge no branch principal com um branch ou um worktree por entrega; o `· after all` da linha da revisão nomeia toda linha acima dela no seu marco menos as canceladas, e uma linha cujo `after` nomeia uma cancelada cabe à pessoa redecidir; com um branch ou um worktree por entrega, uma linha cujo branch existe depois de um `git fetch` está ocupada, mostre o que mostrar o branch principal; a próxima entrega é a primeira linha livre que nenhuma sessão pegou, e antes da primeira edição o `/apply` para em um arquivo que uma construção em andamento ou ainda não integrada está mudando.
 * Perguntado o que pode rodar agora, o agente roda o script de fila do kit e mostra a árvore dele: o marco atual, com o `findings:` e o seu aviso `⚠️` sob o título quando o marco tem uma linha vinda de um achado, cada linha que não está `[x]` sob a última linha que ela espera com o seu estado, depois as linhas livres para o `/apply` e para o `/propose`, na ordem, e o `next:`, o comando da primeira; ele oferece as linhas livres como um comando com vários slugs, cada slug um agente a mais que custa tanto quanto uma sessão, e o `/propose` e o `/apply` digitados sem slug mostram a árvore e perguntam.
-* `· after` é uma ordem escrita com a linha, que mantém a sua marca; `[?]` com `· blocked: after` é uma espera descoberta depois de o trabalho começar; uma linha espera quando a pessoa diz, quando uma resposta foi pedida e não veio, quando o trabalho já começado descobre que outra linha precisa ser feita antes, ou quando a leitura do código de uma revisão de marco não cobriu parte do seu intervalo, com a fase de retomada e o motivo no fim, `· resume: apply · blocked: after <slug>`; quando o motivo se resolve, os dois sufixos saem e ela volta conforme essa fase, `resume: propose` para `[ ]` com qualquer rascunho mantido, `resume: apply` para `[>]`, e até lá o `/propose` e o `/apply` param nela, como numa linha que não está livre; um achado grave é uma linha `[ ]` terminada em `· from <slug>`, acima das linhas planejadas abertas só quando a verificação está vermelha ou uma delas precisa dele, todo outro achado uma nota sob `## For the review` na página da entrega que o achou, e uma linha que entrega um teste, uma ferramenta de prova ou uma mudança no processo só entra com a palavra da pessoa.
+* `· after` é uma ordem, escrita com a linha ou pelo trabalho que descobre a dependência, que devolve `[~]` a `[ ]` com o rascunho mantido ou `[*]` a `[>]`, nunca `[?]`; ele é lido para cada comando, e onde uma definição precisa da outra linha construída, o docs/05 diz isso; uma linha espera em três casos, quando a pessoa diz, quando uma resposta foi pedida e não veio, ou quando a leitura do código de uma revisão de marco não cobriu parte do seu intervalo, com a fase de retomada e o motivo em palavras no fim, `· resume: propose · blocked: qual provedor?`; quando o motivo se resolve, os dois sufixos saem e ela volta conforme essa fase, `resume: propose` para `[ ]` com qualquer rascunho mantido, `resume: apply` para `[>]`, e até lá o `/propose` e o `/apply` param nela, como numa linha que não está livre; um achado grave é uma linha `[ ]` terminada em `· from <slug>`, acima das linhas planejadas abertas só quando a verificação está vermelha ou uma delas precisa dele, todo outro achado uma nota sob `## For the review` na página da entrega que o achou, e uma linha que entrega um teste, uma ferramenta de prova ou uma mudança no processo só entra com a palavra da pessoa.
 * A fila é um quadro kanban, uma coluna por marca, um cartão `[?]` em Esperando até voltar a `[ ]` ou `[>]`; nas três colunas deste capítulo, Fazendo guarda `[~]`, `[>]` e `[*]`, e um cartão `[?]` é etiquetado como travado na coluna que a sua fase de retomada nomeia, A fazer para `propose`, Fazendo para `apply`; um quadro que lê a fila vê uma marca na hora no trunk, e com um branch ou um worktree por entrega pela linha de cada slug no branch dele no origin, depois de um `git fetch`, enviado quando o `/propose` o cria, já que o branch principal mostra a linha como ela estava até o merge.
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", acesso em 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>

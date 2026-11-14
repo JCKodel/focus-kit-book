@@ -1,7 +1,7 @@
 # 14. The queue while it happens
 
 After this chapter you can read any queue line's state among focus-kit's six marks, say who sets each one, at what moment, and how, one byte through the kit's mark script while every other edit of the queue changes only its own lines, since a program that writes the whole queue can empty it, and why the script refuses a second start of one line, name the next delivery, say which lines can run at the same time from the queue tree the kit's script draws, and say why a build stops on files another build is changing.
-You can also tell an order written with a line, `· after`, read for each command, from a wait found on the way, `[?]`, mark a line that waits with its reason and the phase to resume, and take it out again; tell a line from a finding by its `· from <slug>`, say where it goes in its milestone and why every other finding is a note and not a line, and read the `findings:` line the queue script prints; and lay the queue out as a kanban board that shows the work while it happens, and say where each mark is seen.
+You can also write that a line needs another first, `· after`, whenever the need is found, read for each command and never a wait, mark a line that waits, `[?]`, in its three cases, with its reason and the phase to resume, and take it out again; tell a line from a finding by its `· from <slug>`, say where it goes in its milestone and why every other finding is a note and not a line, and read the `findings:` line the queue script prints; and lay the queue out as a kanban board that shows the work while it happens, and say where each mark is seen.
 And you can resume a line whose session ended, and record a delivery the person cancels so that it never reads as built nor keeps the milestone's review waiting.
 
 ## The problem
@@ -24,7 +24,7 @@ focus-kit answers both with six marks, each set at the moment the work changes.
 | `[>]` | completely defined: the page is ready for `/apply` | `/propose`, when the page is complete |
 | `[*]` | being built | `/apply`, when it starts |
 | `[x]` | done: the page is in `work/done/`; with `· dropped:`, cancelled | `/apply`, with verify green; the person, when cancelling |
-| `[?]` | waiting | any session, in the four cases below |
+| `[?]` | waiting, never on another line | any session, in the three cases below |
 
 `· dropped:` is a suffix on `[x]`, not a seventh mark: a cancelled delivery is closed like a built one, and the suffix says nothing was delivered (below).
 
@@ -171,30 +171,60 @@ When a list holds more than one line, as on the nine lines above, where the scri
 
 ## Waiting: `[?]`
 
-A line waits in four cases:
+A line waits in three cases, never on another line:
 
 * **The person says it is blocked.** The library has not bought its barcode scanners yet, so the librarian asks to hold `scan-copy`: `· resume: propose · blocked: no scanners yet`.
 * **An answer was asked and not given.** `due-reminder` needs a text-message provider, the question went to the library's director, and nobody has answered: `· resume: propose · blocked: what provider?`.
-* **Another line must be done first, found after work started.** In the middle of `/apply my-loans`, the build finds that `lend-book` sets the due date one day early at the end of a month; the fix becomes a `[ ]` line above it, `fix-due-date`, ending `· from my-loans`, and `my-loans` waits: `· resume: apply · blocked: after fix-due-date`.
 * **A milestone review's code reading missed part of its range.** The review that closes a milestone reads, on the person's word, every change since the milestone's base, split into areas with one reader each that lists the paths it read ([chapter 15](15-closing-a-milestone.md)), and a reader that read part of its area reports the same way as one that read it all, so when, in the middle of `/apply m1-review`, the review's readers list no path of `src/features/catalog/`, the line waits with what was read as its reason: `· resume: apply · blocked: read all but catalog/`.
 
-The reason goes at the end of the line, in words, `· blocked: <reason>`, or as the lines that must be `[x]` first, `· blocked: after <slug>, <slug>`.
+The reason goes at the end of the line, in words, `· blocked: <reason>`, never another line.
 Before it goes the phase to resume, `· resume: propose` for a line that was `[ ]` or `[~]`, `· resume: apply` for one that was `[>]` or `[*]`, so the session that takes the line up again knows which command it needs.
 Any mark before `[x]` can become `[?]`: a line can wait before anyone defines it, while its page is being written, or halfway through its build.
 
-`· after` and `· blocked: after` look alike and say different things.
-`· after` is an order known when the line is written: `my-loans` needs loans to show, so it was added as `[ ] my-loans ... · after lend-book`, and it keeps `[ ]`.
-`· blocked: after` is a wait found after work started, as `fix-due-date` was.
-Writing `[?] my-loans ... · blocked: after lend-book` when the line is added is wrong: the line is queued, not stuck, and on a board it would carry a blocked tag that tells a manager something went wrong when nothing did.
-
 A line leaves `[?]` when the reason is resolved.
-The person says so; or the session that records the answer clears it, as when the director names the provider and the name becomes a line of docs/00; or it is cleared once the last line its `after` names is integrated, which on trunk is when `/apply` marks that line `[x]`.
+The person says so; or the session that records the answer clears it, as when the director names the provider and the name becomes a line of docs/00.
 Both suffixes go, `resume` and `blocked`, and the resume phase says where the line goes back.
 `due-reminder`, with `resume: propose`, goes back to `[ ]`, and any draft of its page stays for `/propose` to finish: a draft is a page begun, not a definition complete.
 A line with `resume: apply` goes back to `[>]`.
 
-`/propose` and `/apply` both stop on a `[?]` line: they say what it waits on, and go on only once the reason is resolved, in one of those three ways.
+`/propose` and `/apply` both stop on a `[?]` line: they say what it waits on, and go on only once the reason is resolved, in one of those two ways.
 A command that ran past the reason would build on an answer nobody gave.
+
+## A line that needs another
+
+A line that needs another line first is not waiting: it ends `· after <slug>` and keeps the mark that names its next command, so the mark alone says whether `/propose` or `/apply` comes next.
+When the need is known as the line is added, the suffix is written then: `my-loans` needs loans to show, so it was added as `[ ] my-loans ... · after lend-book`.
+When work already started finds the need, the session adds the slug to the line's `after` and returns the line, from `[~]` to `[ ]` with its draft kept, or from `[*]` to `[>]` with its page saying what was built and what it waits on (chapter 13 says what happens to the files already built).
+That is two edits: the mark by the script, the suffix by the file edit.
+
+In the middle of `/apply my-loans`, the build finds that `lend-book` sets the due date one day early at the end of a month.
+The fix becomes a `[ ]` line above `my-loans`, `fix-due-date`, ending `· from my-loans`, and `my-loans` goes back to `[>]`, ending `· after lend-book, fix-due-date`.
+In the middle of `/propose reservations`, the definition finds it needs `search-catalog` first: the line goes back to `[ ]`, ending `· after search-catalog`, and its draft stays.
+
+A `[?]` in their place hides the next command.
+In one project, on 2026-11-13, a session that found two lines needed another first left both at `[?]`, ending `· after <slug> · resume: propose · blocked: after <slug>`: reading the queue, the person could not tell from the mark whether `/propose` or `/apply` came next, and a single line said "after" in two ways; another project's queue held four such lines.
+
+The library's milestone 1 once both lines went back, written for this chapter: `catalog`, `members` and `lend-book` integrated, `fix-due-date` and `my-loans` as above, `search-catalog` defined and `reservations` returned to `[ ]`.
+The queue script draws it so:
+
+```
+milestone: Milestone 1: a librarian lends and takes back
+findings: 1 open of 1 from a finding · 3 planned open
+[ ] fix-due-date · propose now
+ └[>] my-loans · waits: after fix-due-date
+[>] search-catalog · apply now
+ └[ ] reservations · propose now
+
+free for /apply, in order: search-catalog
+free for /propose, in order: fix-due-date reservations
+next: /propose fix-due-date
+```
+
+`my-loans` keeps `[>]` under `fix-due-date`, and `waits:` is the tree's word for an `after` that does not let the next command start yet, where a `[?]` line shows `blocked:`; once `fix-due-date` is integrated, `my-loans` is free for `/apply` with nothing to clear.
+
+That is the cost of reading `after` per command: `reservations` is free for `/propose` as soon as `search-catalog`'s page is complete, as here, not once its code is integrated.
+Where a definition needs the other line built, the project's docs/05 says so, and the queue script does not know it.
+With a branch or a worktree per delivery, a returned line's branch is still its claim, and the tree shows it `waits:` for as long as its `after` waits.
 
 ## A line from a finding
 
@@ -208,7 +238,7 @@ A loan to a suspended member is one a rule should refuse, going through on the l
 
 A finding's place is its priority, as for any line added later, and the work the paragraph asked for comes first.
 A planned line is a line of the milestone that is not from a finding and is not its review: the lines the paragraph's clauses asked for.
-A grave finding goes above the open planned lines only when verify is red or one of them needs it, as `fix-due-date` stands above `my-loans`, which names it in its `blocked: after`.
+A grave finding goes above the open planned lines only when verify is red or one of them needs it, as `fix-due-date` stands above `my-loans`, which names it in its `after`.
 Otherwise it goes below them, above the review, or under the review once the review ran.
 Verify is green and neither `return-book` nor `search-catalog` needs `fix-suspended`, so it goes below `search-catalog`, above `m1-review`.
 
@@ -249,7 +279,7 @@ findings: 1 open of 1 from a finding · 2 planned open
 `findings:` counts the milestone's lines ending `· from <slug>`, then how many of them are open, a finding line already `[x]` staying in the first number only, then the open planned lines; the review and a cancelled line are not counted.
 The warning names `fix-suspended`, an open finding line standing ahead of `return-book` and `search-catalog`, though neither needs it, and the tree ends with `next: /propose fix-suspended`: the repair comes before the planned work.
 Moved below `search-catalog`, above `m1-review`, the line no longer stands ahead and the warning goes, `findings:` stays as it is, and `next:` is `/apply return-book`.
-A finding line an open line names in its `after` or `blocked: after` is left out of the warning: `fix-due-date`, which `my-loans` names, stands above because a planned line needs it.
+A finding line an open line names in its `after` is left out of the warning: `fix-due-date`, which `my-loans` names, stands above because a planned line needs it.
 The warning is a look, not a verdict: a finding that leaves verify red stands ahead and warns too, and the person reads which it is, one verify needs or one that should move below.
 Since `/apply` ends with the tree, the drift shows at the end of every build without anyone asking.
 
@@ -312,8 +342,8 @@ m1-review
 `reservations` is in Doing from the first minute of its conversation, which is the error Case A's board had.
 
 If `reservations` were blocked in the middle of its definition, its `resume: propose` would take it from Doing to To Do, tagged blocked; resolved, it stays in To Do as `[ ]`, with its draft kept and no tag.
-`my-loans`, waiting on `fix-due-date` in the middle of its build, would stay in Doing by its `resume: apply`, tagged blocked; resolved, it stays in Doing as `[>]`, not as a `[*]` that no session is building.
-Either way, resolving the reason removes both suffixes and the tag with them.
+Resolving the reason removes both suffixes and the tag with them.
+`my-loans`, back at `[>]` when its build found it needs `fix-due-date`, stays in Doing with no tag, as `[>]` and not as a `[*]` no session is building: it is queued, not stuck.
 
 Chapter 20 shows how a script mirrors the queue to a team's own board, one way.
 
@@ -327,6 +357,7 @@ On Case A, five lines blocked on the client read as idle work, and every deliver
 A request that proved impossible there was closed in the queue with its reason instead of left in silence ([chapter 23](23-adoption.md)), and the kit writes such a closure as `[x]` with `· dropped:`, and a line closed that way keeps no review waiting.
 
 The queue also says which lines can run together: without that, a person who wants two sessions has to work it out alone before opening the second; the queue tree draws it from the queue, without a meeting, each line under what it waits on, and ends with the command to run next, and `/apply` checks the files before its first edit, so two builds never change the same file at once.
+A line that needs another keeps the mark of its next command, so the queue shows no blocked line where nothing went wrong.
 The tree also says how much of the milestone came from findings and names a finding line standing ahead of planned work, so the drift shows the day it starts; and a finding that is not grave waits on its delivery's page for the review instead of entering the queue.
 And no session marking its line can leave the queue empty under the board and the other sessions, nor can two sessions that start one line both build it: a mark is one byte, changed whole or not at all, and a start on a line already taken is refused.
 
@@ -335,7 +366,7 @@ And no session marking its line can leave the queue empty under the board and th
 * Six marks, `[ ]` not defined, `[~]` being defined, `[>]` completely defined and ready for `/apply`, `[*]` being built, `[x]` done, `[?]` waiting, each changed when the work changes, not when a command ends: `/propose` sets `[~]` and `[>]`, `/apply` sets `[*]` and `[x]`, the person sets `[x]` with `· dropped: <reason>` when cancelling, any session sets `[?]`; every mark changes through the kit's mark script, one byte, `[~]` only on a `[ ]` line and `[*]` only on a `[>]` one, `/apply`'s `[x]` staged on its line alone with `stage`, and any other edit to the queue is the host's file edit on its lines, never a program that writes the whole file; a line whose session ended keeps its mark, and its command resumes it on the person's word, inspecting the page, the folder and the index first, and a cancelled delivery's page in `work/done/` says what was built and undone.
 * A line is free for a command when it is not `[x]` nor `[?]` and its `after` lets that command start: `/propose` when every line it names is `[>]` or beyond, `/apply` when every one is integrated, `[x]` on trunk, merged into the main branch with a branch or a worktree per delivery; the review line's `· after all` names every line above it in its milestone but the cancelled ones, and a line whose `after` names a cancelled one is the person's to re-decide; with a branch or a worktree per delivery, a line whose branch exists after `git fetch` is taken, whatever the main branch shows; the next delivery is the first free line no session holds, and before its first edit `/apply` stops on a file a build in flight or not yet integrated is changing.
 * Asked what may run now, the agent runs the kit's queue script and shows its tree: the current milestone, with `findings:` and its `⚠️` warning under the heading when the milestone holds a line from a finding, each line not `[x]` under the last line it waits on with its state, then the lines free for `/apply` and for `/propose`, in order, and `next:`, the command for the first; it offers the free lines as one command with several slugs, each slug one more agent costing as much as one session, and `/propose` and `/apply` typed with no slug show the tree and ask.
-* `· after` is an order written with the line, which keeps its mark; `[?]` with `· blocked: after` is a wait found after work started; a line waits when the person says so, when an answer was asked and not given, when work already started finds another line must be done first, or when a milestone review's code reading missed part of its range, with the phase to resume and the reason at its end, `· resume: apply · blocked: after <slug>`; when the reason is resolved, both suffixes go and it returns as that phase says, `resume: propose` to `[ ]` with any draft kept, `resume: apply` to `[>]`, and until then `/propose` and `/apply` stop on it, as on a line not free; a grave finding is a `[ ]` line ending `· from <slug>`, above the open planned lines only when verify is red or one of them needs it, every other finding a note under `## For the review` on the page of the delivery that found it, and a line that delivers a test, a proof tool or a change to the process enters only on the person's word.
+* `· after` is an order, written with the line or by the work that finds the need, which returns `[~]` to `[ ]` with the draft kept or `[*]` to `[>]`, never `[?]`; it is read per command, and where a definition needs the other line built, docs/05 says so; a line waits in three cases, when the person says so, when an answer was asked and not given, or when a milestone review's code reading missed part of its range, with the phase to resume and the reason in words at its end, `· resume: propose · blocked: what provider?`; when the reason is resolved, both suffixes go and it returns as that phase says, `resume: propose` to `[ ]` with any draft kept, `resume: apply` to `[>]`, and until then `/propose` and `/apply` stop on it, as on a line not free; a grave finding is a `[ ]` line ending `· from <slug>`, above the open planned lines only when verify is red or one of them needs it, every other finding a note under `## For the review` on the page of the delivery that found it, and a line that delivers a test, a proof tool or a change to the process enters only on the person's word.
 * The queue is a kanban board, a column per mark, a `[?]` card in Waiting until it returns to `[ ]` or `[>]`; on this chapter's three columns, Doing holds `[~]`, `[>]` and `[*]`, and a `[?]` card is tagged blocked in the column its resume phase names, To Do for `propose`, Doing for `apply`; a board that reads the queue sees a mark at once on trunk, and with a branch or a worktree per delivery from each slug's own branch on origin, after `git fetch`, pushed when `/propose` creates it, since the main branch shows the line as it was until the merge.
 
 [^toyota-kanban]: Toyota Motor Corporation, "75 Years of Toyota", Part 2, Chapter 1, Section 4, Item 4, "Development and Deployment of the Toyota Production System", accessed 2026-10-05. <https://www.toyota-global.com/company/history_of_toyota/75years/text/entering_the_automotive_business/chapter1/section4/item4.html>
