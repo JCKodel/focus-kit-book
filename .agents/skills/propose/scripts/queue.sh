@@ -1,6 +1,6 @@
 #!/bin/sh
-# focus-kit: draw every open milestone of docs/06 as a tree of what waits
-# on what, and say what may run now, as docs/05 §4 says. Run it through git:
+# focus-kit: draw every open milestone of docs/06 as a tree of what comes
+# after what, and say what may run now, as docs/05 §4 says. Run it through git:
 #   git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq <strategy>
 # <strategy> is the Git slot of docs/05: trunk | branch | worktree <hidden> <prefix>
 # With a branch or worktree per delivery, each delivery's line is read from
@@ -13,13 +13,14 @@
 # default branch's blocks unless the copy of the line's own slug changed
 # the line. None blocks a winning [x]. When several hold, the reason shown
 # is the default branch's, then the other branches' by name, then the own
-# copy's.
+# copy's. A [?] the own copy left the default branch with, which no copy
+# put, is cleared when the default branch clears it: its line is read there.
 # A milestone is the base's heading. A line only a branch or a worktree
 # has takes the base's heading of the lines that share its heading in
 # that copy, so a copy that rewords a heading keeps its lines in place.
-# A line goes under the last line it waits on; "+ after" names the others.
-# "after all" leaves out the milestone's dropped lines; a line that
-# names a dropped one waits for the person to re-decide.
+# A line goes under the last open line it comes after; "+ after" names
+# the others. "after all" leaves out the milestone's dropped lines; a line
+# that names a dropped one is the person's to re-decide.
 # "findings:" counts the milestone's lines that end "from <slug>", and a
 # warning names the open ones that stand ahead of an open planned line,
 # but not one an open line names in its "after" or "blocked: after".
@@ -121,7 +122,7 @@ awk "$join" "$queue" | awk -F '\t' -v strategy="$strategy" -v here="$here" '
 # A [?] shows the line blocked unless the winner is [x], when the copy that
 # holds it put it there (docs/05 §4; see blocking() below). A branch
 # on origin whose winning copy is still [ ] is claimed, progress unknown,
-# once nothing in its after is left to wait on.
+# once nothing in its after holds it.
 function sl(line,   s) { s = line; sub(/^\[.\][ \t]+/, "", s); sub(/[ \t].*/, "", s); return s }
 function isline(s) { return s ~ /^\[[ ~>*x?]\][ \t]+[^ \t]/ }
 function parse(line, k,   rest, n, parts, i, p, deps, j, m) {
@@ -286,7 +287,12 @@ END {
   if (here != "") for (s in obase) if (!(s in local)) order[++no] = s
   for (i = 1; i <= no; i++) {
     s = order[i]
-    if ((s in own) && (!(s in integ) || (s == here && basemark[s] != "x"))) { line = own[s]; ms = home(s, ownms[s]) }
+    if ((s in own) && (!(s in integ) || (s == here && basemark[s] != "x"))) {
+      line = own[s]; ms = home(s, ownms[s])
+      # A [?] the own copy holds and no copy put is the one it left the
+      # base with, cleared there since: the base'"'"'s line is the current one.
+      if (asks(line) && !(s in blockedcopy) && (s in base)) line = base[s]
+    }
     else if (s in base) line = base[s]
     else if (s in own) { line = own[s]; ms = home(s, ownms[s]) }
     else { line = local[s]; ms = home(here, localms[s]) }
@@ -367,8 +373,8 @@ END {
     if (done(k)) continue
     for (j = 1; j <= ndep[k]; j++) {
       s = dep[k, j]
-      if (s == slug[k]) { nerr++; err[nerr] = slug[k] " waits on itself" }
-      else if (!(s in at)) { nerr++; err[nerr] = slug[k] " waits on " s ", which is not in the queue" }
+      if (s == slug[k]) { nerr++; err[nerr] = slug[k] " names itself in its after" }
+      else if (!(s in at)) { nerr++; err[nerr] = slug[k] " names " s " in its after, which is not in the queue" }
     }
     if (cycle(k, k)) { nerr++; err[nerr] = slug[k] " is in a cycle of after" }
   }

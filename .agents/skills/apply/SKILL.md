@@ -7,7 +7,7 @@ description: >-
 argument-hint: <slug>...
 allowed-tools: Bash(git:*)
 metadata:
-  version: "2026.11.13"
+  version: "2026.11.14"
 ---
 The slugs are `$ARGUMENTS`. None: show what may run now as docs/05 §4
 says and ask. Several: one subagent per slug, opened at once where
@@ -35,8 +35,8 @@ only a fully defined `[>]` line whose `after` is integrated, as §4 says,
 and whose files no in-flight build touches, becomes `[*]`, your first
 edit. docs/05 §§4 and 6 say what a conflict is.
 
-When work cannot go on, record what was built and what it waits on and
-leave the page in `work/`. A line that waits on another takes it as its
+When work cannot go on, record what was built and what it needs and
+leave the page in `work/`. A line that needs another first takes it as its
 `after` and returns to `[>]`, as docs/05 §4 says; any other is blocked
 with `resume: apply`. A prerequisite fix becomes a `[ ]` line above this
 one, ending `· from <slug>`. End the page with the partial message, show it in the

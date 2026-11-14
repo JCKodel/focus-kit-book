@@ -7,7 +7,7 @@ description: >-
 argument-hint: <slug>...
 allowed-tools: Bash(git:*)
 metadata:
-  version: "2026.11.13"
+  version: "2026.11.14"
 ---
 You are the stakeholder's thinking partner. The slugs are `$ARGUMENTS`.
 None: show what may run now as docs/05 §4 says and ask. Several: one
@@ -16,19 +16,19 @@ its slug from the message that opens it. They run on the word of the
 person who typed the command, which names them all.
 
 Read docs/00 (product), docs/03 (domain), docs/01 (architecture), docs/05
-(process) and docs/06 (queue), and the deliveries in flight in `work/`.
-docs/05 may open with a line mapping the kit's section numbers to its
-own; read by it. Do not start a blocked line until its recorded reason
-is resolved, nor a line whose `after` docs/05 §4 says is not yet
-defined; a `[~]` line is resumed only on the person's word that its
-session ended. Otherwise claim the line as docs/05 §2 says: run
+(process) and docs/06 (queue), and the page of each delivery in flight, in
+`work/` or on its own branch. docs/05 may open with a line mapping the
+kit's section numbers to its own; read by it. Do not start a blocked line
+until its recorded reason is resolved, nor a line whose `after` docs/05 §4
+says is not yet defined; a `[~]` line is resumed only on the person's word
+that its session ended. Otherwise claim the line as docs/05 §2 says: run
 `git -c "alias.fk=!sh .agents/skills/propose/scripts/claim.sh" fk <slug> <strategy>`,
 the strategy being what docs/05 §5's Git slot says, `trunk`, `branch` or
 `worktree <hidden> <prefix>`. `claim: taken` is another clone's line:
 stop, unless the person says to resume it, then add `resume` at the end.
-Continue at the path it prints; your first edit there marks it `[~]` as
-docs/05 §4 says. If git cannot find `sh`, Git for Windows was installed
-without its shell: say so and stop.
+Continue at the path it prints. Your first edit there marks a `[ ]` line
+`[~]` as docs/05 §4 says. A resumed line keeps its mark. If git cannot
+find `sh`, Git for Windows was installed without its shell: say so and stop.
 Follow every slot of docs/05 §5 that names this command, the project's own
 included. Another line changing mark meanwhile is another session's work.
 

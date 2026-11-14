@@ -113,9 +113,11 @@ is chapter 4 of the book One Page at a Time by J.C. Ködel
 
 * **FOCUS whole:** the four pieces, exceptions as values, vertical slices.
   docs/01 gets the responsibility table below and names the pieces a slice
-  has in this stack. Ninjobs chose this;
+  has in this stack. Ninjobs required this on every feature until its
+  restart on 2026-08-29;
 * **the two principles only:** vertical slices and exceptions as values,
-  with whatever structure the stack favors;
+  with whatever structure the stack favors. Ninjobs kept these after its
+  restart, without the four pieces on every feature;
 * **neither:** the project's own conventions, written in docs/01.
 
 On a repository with code the default is what the code already does.
@@ -167,7 +169,7 @@ that it is not. The agent never commits or merges on its own:
   `main/`; the container's manual lets a session in `main/` edit
   `<hidden>/worktrees/`. The branch reaches the
   main branch in one merge, as above, and only then is the delivery
-  integrated for the lines that wait on it. For parallel work by several
+  integrated for the lines that come after it. For parallel work by several
   people, or by one person whose deliveries touch the same files: one
   branch does not touch another. `queue.sh` says which lines are free,
   and `/apply` checks before its first edit that no in-flight build
@@ -310,7 +312,7 @@ word; without it, it is a note.
 Asked what may run now, run
 `git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq <strategy>`,
 the strategy as for the claim, and show its trees, one per open
-milestone: each line under the last line it waits on, with its state.
+milestone: each line under the last line it comes after, with its state.
 Then come the lines free for /apply and for /propose, in the queue's
 order across the milestones, and the next one. Offer the free lines as
 one command with several slugs, saying each slug is one more agent and
@@ -367,8 +369,8 @@ A line that needs another line first is not waiting. It ends
 when the line is added, the suffix is written then. Found by work
 already started, such as a fix in the middle of an /apply, the session
 adds the suffix and returns the line to `[ ]` from `[~]`, keeping the
-draft, or to `[>]` from `[*]`. Its page says what was built and what it
-waits on, and /apply continues from there.
+draft, or to `[>]` from `[*]`. Its page says what was built and which
+line it needs, and /apply continues from there.
 
 A `[~]` or `[*]` line whose session ended without blocking it (the host
 closed, the connection or its limit) keeps its mark; its command resumes
@@ -401,7 +403,7 @@ A command typed with several slugs opens one subagent per slug, each
 following the command's file with one slug, sent to the slug's worktree
 where §5's Git slot has one (/propose creates it). The subagents `after`
 lets run at once are opened at once, not one after another; a line
-still waiting when the others end is reported, not waited for. The session edits nothing itself. A subagent cannot ask the person: it reports the question
+its `after` still holds when the others end is reported, not waited for. The session edits nothing itself. A subagent cannot ask the person: it reports the question
 with the context to answer it and stops; the session asks and sends the
 answer back, resuming it where the host can, else opening it again on the
 slug, whose `[~]` or `[*]` it resumes on the command's word. A command that
@@ -539,12 +541,14 @@ no delivery answers, or one that fails in the person's hands, is a finding.
 
 The review also reads the code, the one look at the whole instead of a
 delivery: every page can be right and the whole wrong. Its page names
-the base and the end of the range. The base is the commit of the
-previous milestone's review, so the range holds the fixes of its
-findings, which get no second review; for a first milestone, the first
-commit; where no earlier review exists, a commit the page names and
-says why. The end is the commit HEAD was when the reading started, so
-the range stays fixed while readers work. The paths are what
+the base and the end of the range. The base is the end named by the
+page of the last review that ran, the commit its reading started at,
+not that review's own commit. So the range holds what was committed
+while that review read, and the fixes of its findings, which get no
+second review. For a first milestone the base is the first commit;
+where no earlier review ran, a commit the page names and says why. The
+end is the commit HEAD was when the reading started, so the range stays
+fixed while readers work. The paths are what
 `git diff --stat <base>..<end>` shows: always the range, since a bare
 commit reads that one commit. It costs, so the session says
 it is time and starts it only on the person's word. §5's Milestone review
@@ -562,7 +566,10 @@ each candidate's file and marks it seen (true in the file today), latent
 before the person sees it. They fix nothing. When the paths read miss
 some of the range's, the page says which and the line waits as `[?]` with
 `· resume: apply` and `· blocked: <what was read>` (§4). A candidate the
-person confirms is a finding like the others.
+person confirms is a finding like the others. A slot that says none has
+no code reading: the page still names the range, its end the commit
+HEAD was when the review started, and the person still tests each
+clause.
 
 The review opens by copying onto its page the notes left since the
 previous review, from the `## For the review` heading of every page the
@@ -576,7 +583,7 @@ person says which medium ones enter the milestone's one line,
 `<milestone>-fixes`, each an item of its page. That page is their list
 and is not split, whatever its length. A small one becomes a line only
 when the person picks it. These lines end `· from <milestone>-review`,
-sit under the review line and wait for /propose; the milestone closes
+sit under the review line and go through /propose; the milestone closes
 when they are `[x]`. They
 get no second review: each passes through its own page, its proof and the
 person's commit, which is the review; a finding is never a fix in the
