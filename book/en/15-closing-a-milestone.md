@@ -1,6 +1,6 @@
 # 15. Closing a milestone
 
-After this chapter you can close a milestone: plan its review as the milestone's last line (written `· after all`, so a line the person cancelled never keeps it waiting), test each clause of its paragraph by hand, run the slow tests the project keeps out of verify, copy onto the review's page the notes the deliveries left, and grade every confirmed finding: a grave one a `[ ]` line of its own, the medium ones you pick on one `<milestone>-fixes` line, the small ones listed, every line in the same milestone, under the review, even when the next milestone is already in the queue.
+After this chapter you can close a milestone: plan its review as the milestone's last line (written `· after all`, so a line the person cancelled never holds it back), test each clause of its paragraph by hand, run the slow tests the project keeps out of verify, copy onto the review's page the notes the deliveries left, and grade every confirmed finding: a grave one a `[ ]` line of its own, the medium ones you pick on one `<milestone>-fixes` line, the small ones listed, every line in the same milestone, under the review, even when the next milestone is already in the queue.
 You can also say what that review reads, the paragraph by hand and, on the person's word, the code changed from the milestone's base to the commit its reading started at, read by whoever docs/05's Milestone review slot names, the host's deep review or one read-only agent per area, with a checker either way before the person sees a candidate, and why its findings get no review of their own.
 That range stays fixed while new commits arrive, so every reader's diff is the same.
 
@@ -15,15 +15,17 @@ A claim of the milestone that no delivery took on, a step that works on its own 
 
 The kit closes that gap in one rule, §8 of the process document it writes, docs/05.
 A milestone is planned with its review as its last line, `<milestone>-review`, a delivery like the others: `/propose` writes its page, and `/apply` runs it.
-Its line ends `· after all`, every line above it in its milestone but the cancelled ones, so `/propose` writes its page when every one of those is defined and `/apply` runs it when every one is integrated; a line the person cancelled never keeps it waiting, and a line whose `after` names a cancelled one waits, and the review with it, until the person re-decides that line.
+Its line ends `· after all`, every line above it in its milestone but the cancelled ones, so `/propose` writes its page when every one of those is defined and `/apply` runs it when every one is integrated; a line the person cancelled never holds it back, and a line whose `after` names a cancelled one stays held by it, and the review with it, until the person re-decides that line.
 Its page takes the milestone's paragraph clause by clause and writes, for each, which delivery answers it and how a person tests it.
 It fixes nothing.
 It runs the slow tests docs/05's Verify slot names, the ones kept out of verify because they take too long for every delivery, when the slot names any; a failing one is a finding, graded like the others (below); and when a delivery noted verify over its ceiling, the review says which tests go to the slow ones.
 The review also reads the code, the one look at the whole instead of a delivery, because every page can be right and the whole wrong.
-Its page names as the base the commit of the previous milestone's review, or, for a first milestone, the project's first commit, or, where no earlier review exists, a commit the page names with the reason it chose it, and as its end the commit `HEAD` was when the reading started, and lists the paths that range changed, by the areas docs/05's Milestone review slot names when the kit's readers read it.
+Its page names as the base the end named by the page of the last review that ran, the commit that review's reading started at and not that review's own commit, or, for a first milestone, the project's first commit, or, where no earlier review ran, a commit the page names with the reason it chose it, and as its end the commit `HEAD` was when the reading started, and lists the paths that range changed, by the areas docs/05's Milestone review slot names when the kit's readers read it.
 A project whose earlier milestones closed with no review line names, for instance, the commit that closed the last of them, because nothing after it was read as a whole; that example is written for this chapter.
-The range from the previous review's commit holds every commit made after it up to that end: all the fixes of that review's findings, which close after it, and the next milestone's deliveries that landed after it.
-A free line of the next milestone does not wait for the review (chapter 14), so a delivery committed before the review's commit is outside the range from it.
+The range from that base holds every commit made after it up to the review's own end: what was committed while the last review read, that review's own commit, which adds its page, all the fixes of its findings, which close after it, and the next milestone's deliveries.
+A free line of the next milestone does not come after the review (chapter 14), so a delivery can be committed while a review reads, after that review's end and before that review's own commit: outside that review's range, it falls in the next one, which starts at that end.
+A base at the last review's own commit would leave such a delivery in neither range, so no review would copy its notes or read its code; on 2026-11-14 a delivery of this book noted that gap on its page, before any delivery had fallen into it.
+The end of the last review that ran is also the base after a cancelled one: with `m2-review` cancelled on the lending library, `m3-review` names as its base the end `m1-review`'s page names, so milestone 2's deliveries are read with milestone 3's.
 The reading costs, so the session says when it is time, and it starts only on the person's word; who reads is the slot's choice, the host's deep review or a reader per area, and the section on reading the code, below, says how.
 A first milestone's range, from the project's first commit, holds every change made after that commit and not the commit itself, just as a range from a base the page names leaves that base out; recording the end changes where the range stops, not that exclusion.
 What the first commit added, on a new project the kit's files and the documents (chapter 10), is in no diff of the range: the readers see it only as the repository they read their areas against, and the person read the documents before committing them.
@@ -109,7 +111,7 @@ The seen and the latent candidates each sit across two slices, which no delivery
 
 The readers, the deep review and the checker fix nothing.
 A candidate becomes a finding only when the person confirms it, and then it is a finding like the others, graded with them (below).
-A project whose Milestone review slot says none has no code reading, and the hand test still runs.
+A project whose Milestone review slot says none has no code reading, and the hand test still runs; the review's page still names the range, its end, `<review-head>`, the commit `HEAD` was when the review started, because the notes it copies come from the pages that range delivered and the next review's base is that end.
 
 ## The notes the deliveries left
 
@@ -186,7 +188,7 @@ It stays there when the next milestone already exists: with a milestone 2 alread
 
 The finding lines get no review of their own.
 Each one passes through its own page, its proof and the person's use, review and commit.
-Their code is still read with the whole: the next milestone's review names this review's commit as its base, so on the lending library `m2-review`'s range starts at `m1-review`'s commit and holds `returned-loan`'s fix.
+Their code is still read with the whole: the next milestone's review names this review's `<review-head>` as its base, so on the lending library `m2-review`'s range starts at `m1-review`'s `<review-head>` and holds `returned-loan`'s fix.
 I keep it that way because a review of the fixes finds findings of its own, and a review of those finds more, and a milestone that keeps opening rounds of fixes never closes.
 
 ## When the findings became one delivery
@@ -212,7 +214,7 @@ And because the review grades its findings, the queue shows as lines the ones th
 ## Key points
 
 * A milestone review looks at what the deliveries add up to, which no review of a single page or staged change can see.
-* A milestone is planned with its review as its last line, `<milestone>-review`, written `· after all`, an `after` that leaves out the cancelled lines, run with `/propose` and `/apply`: its page names as the base the commit of the previous milestone's review, or the project's first commit for a first milestone, or, where no earlier review exists, the commit the page names and why, and as its end `<review-head>`, the commit `HEAD` was when the reading started.
+* A milestone is planned with its review as its last line, `<milestone>-review`, written `· after all`, an `after` that leaves out the cancelled lines, run with `/propose` and `/apply`: its page names as the base the `<review-head>` of the last review that ran, never that review's own commit, or the project's first commit for a first milestone, or, where no earlier review ran, the commit the page names and why, and as its end `<review-head>`, the commit `HEAD` was when the reading started.
   It writes for each clause of the paragraph the delivery that answers it and how a person tests it, and fixes nothing; the review runs the slow tests the Verify slot names.
 * The person tests each clause by hand, and on the person's word the range from the base to `<review-head>` is read by the host's deep review or by the kit's readers, one read-only agent per area of the slot, each listing the paths it read, all on those two recorded commits, and a checker marks each candidate; a clause no delivery answers, one that fails in the person's hands, a slow test that fails, or a candidate the person confirms is a finding; the review opens by copying the notes the range's pages left under `## For the review`, which the checker marks like candidates and the person confirms like them.
 * The review grades every finding: a grave one a `[ ]` line of its own; the medium ones the person picks on one `<milestone>-fixes` line, whose page is their list and is not split; the small ones listed, a line only when the person picks one; every line ending `· from <milestone>-review` under the review line, even when the next milestone already exists, never a fix in the middle of the next milestone; the milestone closes when those lines are `[x]`.
