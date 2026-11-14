@@ -114,3 +114,7 @@ Since `kit-2026-11-12` the book runs focus-kit 2026.11.12; the six marks are unc
 ## Amendment, 2026-11-14 (kit-2026-11-13)
 
 Since `kit-2026-11-13` the book runs focus-kit 2026.11.13; the six marks are unchanged. `[?]` waits in three cases and never on another line: a line that needs another first ends `· after <slug>` and keeps the mark that names its next command, whether the need is known when the line is added or found by work already started, which returns the line to `[ ]` from `[~]`, keeping the draft, or to `[>]` from `[*]`; `· blocked: after <slug>` is retired, and /apply no longer clears dependent lines at its end. A `[?]` blocks on the copy that put it, a line only a branch has sits under main's heading of its milestone, and `queue.sh` draws every open milestone, offering the free lines across them in the queue's order (docs/05 §§4 and 6; docs/03; docs/06 held no `[?]` line ending `· blocked: after`). Applied directly at the author's request of 2026-11-13, outside /propose and /apply.
+
+## Amendment, 2026-11-14 (kit-2026-11-14)
+
+Since `kit-2026-11-14` the book runs focus-kit 2026.11.14; the six marks are unchanged. A line held by `after` is told as coming after the other line, needing it, or held by its `after`, never as waiting; "wait" stays for a `[?]` line and `waits:` for the tree's word. `queue.sh` names an `after` in its two error lines and no longer shows a `[?]` a line's own branch inherited once main cleared it (docs/05 §4; docs/03). Applied directly at the author's request of 2026-11-14, outside /propose and /apply.

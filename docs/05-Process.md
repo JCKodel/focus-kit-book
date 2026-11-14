@@ -140,7 +140,7 @@ word; without it, it is a note.
 Asked what may run now, run
 `git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq <strategy>`,
 the strategy as for the claim, and show its trees, one per open
-milestone: each line under the last line it waits on, with its state.
+milestone: each line under the last line it comes after, with its state.
 Then come the lines free for /apply and for /propose, in the queue's
 order across the milestones, and the next one. Offer the free lines as
 one command with several slugs, saying each slug is one more agent and
@@ -200,8 +200,8 @@ A line that needs another line first is not waiting. It ends
 when the line is added, the suffix is written then. Found by work
 already started, such as a fix in the middle of an /apply, the session
 adds the suffix and returns the line to `[ ]` from `[~]`, keeping the
-draft, or to `[>]` from `[*]`. Its page says what was built and what it
-waits on, and /apply continues from there.
+draft, or to `[>]` from `[*]`. Its page says what was built and which
+line it needs, and /apply continues from there.
 
 A `[~]` or `[*]` line whose session ended without blocking it (the host
 closed, the connection or its limit) keeps its mark; its command resumes
@@ -231,12 +231,14 @@ finding a note are those of 2026.11.12, and the three cases a line
 waits in, a line that needs another ending `· after <slug>` and never
 `[?]`, a `[?]` blocking on the copy that put it, a branch's line under
 main's heading and the trees, one per open milestone, are those of
-2026.11.13 (ADR-0018 and its amendments
+2026.11.13, and a line held by `after` told as coming after the other,
+never as waiting, is that of 2026.11.14 (ADR-0018 and its amendments
 `kit-2026-10-18`, `kit-2026-10-18-1`, `kit-2026-10-19`,
 `kit-2026-10-19-1`, `kit-2026-10-20`, `kit-2026-10-20-1`,
 `kit-2026-10-20-3`, `kit-2026-10-20-5`, `kit-2026-10-24`,
 `kit-2026-10-25`, `kit-2026-10-26`, `kit-2026-10-27`,
-`kit-2026-10-27-1`, `kit-2026-11-12` and `kit-2026-11-13`).
+`kit-2026-10-27-1`, `kit-2026-11-12`, `kit-2026-11-13` and
+`kit-2026-11-14`).
 
 Two sessions in one working tree, on free lines that touch different
 files, are the normal case of parallel work on trunk. Another line
@@ -256,7 +258,7 @@ side's whole file.
 A command typed with several slugs opens one subagent per slug, each
 following the command's file with one slug, sent to the slug's worktree
 where §5's Git slot has one (/propose creates it). The subagents `after`
-lets run at once are opened at once, not one after another; a line still waiting when the others end is reported, not waited
+lets run at once are opened at once, not one after another; a line whose `after` still holds when the others end is reported, not waited
 for. The session edits nothing itself. A subagent cannot ask the person:
 it reports the question with the context to answer it and stops; the
 session asks and sends the answer back, resuming it where the host can,
@@ -460,12 +462,15 @@ clause by hand: a clause no delivery answers, or one that fails in the
 person's hands, is a finding.
 
 The review also reads the code, the one look at the whole instead of a
-delivery: every page can be right and the whole wrong. Its page names as
-the base the commit of the previous milestone's review, so the range
-holds the fixes of its findings, which get no second review, or the
-first commit for a first milestone, or, where no earlier review exists,
-the commit the page names and why; and the commit HEAD was when the
-reading started, so the range stays fixed while readers work; and it
+delivery: every page can be right and the whole wrong. Its page names
+the base and the end of the range. The base is the end named by the
+page of the last review that ran, the commit its reading started at,
+not that review's own commit. So the range holds what was committed
+while that review read, and the fixes of its findings, which get no
+second review. For a first milestone the base is the first commit;
+where no earlier review ran, a commit the page names and says why. The
+end is the commit HEAD was when the reading started, so the range stays
+fixed while readers work; and the page
 lists the paths `git diff --stat <base>..<that commit>` shows: always
 the range, since a bare commit reads that one commit. It costs, so the
 session says it is time and starts it only on the person's word. §5's
@@ -484,7 +489,9 @@ today) or weak (the claim does not hold as stated) before the person
 sees it. They fix nothing. When the paths read miss some of the range's,
 the page says which and the line waits as `[?]` with `· resume: apply`
 and `· blocked: <what was read>` (§4). A candidate the person confirms
-is a finding like the others.
+is a finding like the others. A slot that says none has no code
+reading: the page still names the range, its end the commit HEAD was
+when the review started, and the person still tests each clause.
 
 For a milestone of chapters, testing by hand is the author reading, in
 the PDF of both editions, the passages the page names, and answering the
@@ -513,7 +520,7 @@ person says which medium ones enter the milestone's one line,
 `<milestone>-fixes`, each an item of its page. That page is their list
 and is not split, whatever its length. A small one becomes a line only when
 the person picks it. These lines end `· from <milestone>-review`, sit
-under the review line and wait for /propose; the milestone closes when
+under the review line and go through /propose; the milestone closes when
 they are `[x]`. They get no second review: each passes through its own
 page, its proof and the person's commit, which is the review; a finding
 is never a fix in the middle of the next milestone.
