@@ -156,7 +156,7 @@ The Copilot CLI reads both skills folders, and its reference says what happens t
 Devin Desktop also reads `.windsurf/skills/`, the folder of its former name;[^devin-skills] the setup file writes nothing there and, on an update, removes the kit's own files from it, so the host never finds an older copy of a command beside the current one in `.agents/skills/`, and a file of yours there is reported and left.
 
 Every command ends by naming the next one, written as the host running it invokes it, the table's last column.
-The setup file names `/brainstorm` or `/analyze`, to run in a fresh session, `/propose` names `/apply` with the page's slug, and `/apply` names what may run next, the queue tree, the milestone's lines with their states and the lines free to run.
+The setup file names `/brainstorm` or `/analyze`, to run in a fresh session, `/propose` names `/apply` with the page's slug, and `/apply` names what may run next, the queue tree, every open milestone's lines with their states and the lines free to run.
 On the lending library, after `/propose lend-book`, Claude Code tells you to run `/apply lend-book` in a fresh session, and Codex tells you to run `$apply lend-book`, in a fresh session too.
 `/propose` may run in the conversation that asked for the change; `/apply` always starts in a fresh session, in every host (chapter 11).
 The kit's files are the same in both; the form follows the host that runs them.

@@ -78,7 +78,7 @@ Duas coisas são um conflito:
 * as duas entregas editam a mesma linha, de `src/features/emprestimos/regras.ts`, por exemplo, ou da fila;
 * esta página precisa de um arquivo que a outra entrega está mudando, como quando `devolver-livro` precisa de `src/features/emprestimos/` enquanto outra entrega o reorganiza.
 
-Então a sessão para e relata, e a decisão é sua: ordenar as duas linhas, escrevendo `· after <slug>` na que precisa esperar a outra; um worktree não o desfaz, já que o `/apply` faz a mesma verificação em um worktree.
+Então a sessão para e relata, e a decisão é sua: ordenar as duas linhas, escrevendo `· after <slug>` na que precisa vir depois da outra; um worktree não o desfaz, já que o `/apply` faz a mesma verificação em um worktree.
 
 ## O que é um worktree e quando ele compensa
 
@@ -196,10 +196,10 @@ O [capítulo 14](14-queue-states.md) diz onde um quadro as vê.
 Então nenhuma fila de pasta mostra todas as entregas de uma vez, e perguntar a uma delas quais linhas estão ocupadas dá uma resposta errada: em `main/`, uma linha em andamento no seu branch ainda aparece `[ ]`.
 O script de fila do kit (capítulo 14) lê a linha de cada entrega de uma vez, de `main/` ou de qualquer worktree, quando recebe a palavra do slot Git: `git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq worktree .focus-kit focus-kit/`, ou a pasta oculta e o prefixo que o slot nomeia.
 Ele faz fetch do origin, lê cada linha da cópia do branch principal, a própria fila de `main/` quando roda em `main/` e o branch padrão no origin quando roda em um worktree, e a linha de cada entrega de `origin/<prefixo><slug>`, mas, no worktree da própria entrega, a linha dela do arquivo da própria pasta, e não edita nada.
-Um branch no origin é a reivindicação: uma linha cujo branch existe está ocupada, e enquanto a cópia do branch ainda diz `[ ]`, já que o `[~]` nunca precisa ter commit, a árvore a mostra `claimed, progress unknown: propose in flight` quando nada no `after` dela resta a esperar, e antes disso `waits:` com o que ela espera, como `waits: devolver-livro not defined` para uma linha cujo `after` nomeia uma `devolver-livro` ainda `[ ]`.
+Um branch no origin é a reivindicação: uma linha cujo branch existe está ocupada, e enquanto a cópia do branch ainda diz `[ ]`, já que o `[~]` nunca precisa ter commit, a árvore a mostra `claimed, progress unknown: propose in flight` quando o `after` dela deixa o `/propose` começar, e antes disso `waits:`, a palavra da árvore para um `after` ainda não cumprido, com o que ela ainda pede, como `waits: devolver-livro not defined` para uma linha cujo `after` nomeia uma `devolver-livro` ainda `[ ]`.
 A cópia que o branch tem da linha do seu slug é a atual até o merge do branch no branch principal do origin, e a cópia do branch principal depois dele, então em `main/` faça pull depois de um merge; a marca de espera `[?]` trava a linha na cópia que a pôs: a de um branch quando o branch mudou a linha depois de sair do branch principal, a do branch principal a não ser que o próprio branch da linha a tenha mudado, e nenhuma quando a cópia atual da linha está `[x]`.
 Num projeto, em 2026-11-09, um branch aberto antes de o branch principal tirar o `[?]` de linhas cujas perguntas foram respondidas manteve a marca de espera antiga, e uma árvore que lia um `[?]` em qualquer cópia mostrou duas linhas travadas em perguntas já respondidas.
-Um `[x]` em um branch ainda sem merge aparece `built, awaiting integration`, e uma linha cujo `after` o nomeia espera com `devolver-livro built, not integrated`, por exemplo, já que a construção dela precisa desse código no branch principal.
+Um `[x]` em um branch ainda sem merge aparece `built, awaiting integration`, e uma linha cujo `after` o nomeia aparece com `waits: devolver-livro built, not integrated`, por exemplo, já que a construção dela precisa desse código no branch principal.
 Na biblioteca, com `devolver-livro` sendo construída no seu worktree em `[*]`, `lista-de-atrasos` definida no dela em `[>]`, cada marca com commit no branch da linha e push feitos por você, e a fila de `main/` ainda mostrando as duas linhas `[ ]`, o script rodado em `main/` imprime isto; a fila e a execução foram escritas para este capítulo:
 
 ```

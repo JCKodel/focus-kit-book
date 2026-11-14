@@ -157,7 +157,7 @@ O Copilot CLI lê as duas pastas de skills, e a sua referência diz o que aconte
 O Devin Desktop também lê `.windsurf/skills/`, a pasta do seu nome anterior;[^devin-skills] o arquivo de setup não escreve nada ali e, numa atualização, remove dela os arquivos do próprio kit, para que o host nunca encontre uma cópia mais velha de um comando ao lado da atual em `.agents/skills/`, e um arquivo seu ali é relatado e mantido.
 
 Todo comando termina dizendo o próximo, escrito como o host que o roda o invoca, a última coluna da tabela.
-O arquivo de setup cita o `/brainstorm` ou o `/analyze`, para rodar numa sessão nova, o `/propose` cita o `/apply` com o slug da página, e o `/apply` cita o que pode rodar a seguir, a árvore da fila, as linhas do marco com os seus estados e as linhas livres para rodar.
+O arquivo de setup cita o `/brainstorm` ou o `/analyze`, para rodar numa sessão nova, o `/propose` cita o `/apply` com o slug da página, e o `/apply` cita o que pode rodar a seguir, a árvore da fila, as linhas de cada marco aberto com os seus estados e as linhas livres para rodar.
 Na biblioteca de empréstimos, depois de `/propose emprestar-livro`, o Claude Code diz para você rodar `/apply emprestar-livro` numa sessão nova, e o Codex diz para rodar `$apply emprestar-livro`, também numa sessão nova.
 O `/propose` pode rodar na conversa que pediu a mudança; o `/apply` sempre começa numa sessão nova, em todo host (capítulo 11).
 Os arquivos do kit são os mesmos nos dois; a forma segue o host que os roda.

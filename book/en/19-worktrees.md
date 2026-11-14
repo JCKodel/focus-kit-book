@@ -78,7 +78,7 @@ Two things are a conflict:
 * both deliveries edit the same line, of `src/features/loans/rules.ts`, say, or of the queue;
 * this page needs a file the other delivery is changing, as when `return-book` needs `src/features/loans/` while another delivery reshapes it.
 
-Then the session stops and reports, and the decision is yours: order the two lines, by writing `· after <slug>` on the one that must wait for the other; a worktree does not lift it, since `/apply` makes the same check in a worktree.
+Then the session stops and reports, and the decision is yours: order the two lines, by writing `· after <slug>` on the one that must come after the other; a worktree does not lift it, since `/apply` makes the same check in a worktree.
 
 ## What a worktree is and when it pays
 
@@ -196,10 +196,10 @@ The line's `[~]` and every later mark are written in the worktree, on its branch
 So no folder's queue shows every delivery at once, and asking one of them which lines are taken gets a wrong answer: in `main/`, a line in flight on its branch still reads `[ ]`.
 The kit's queue script (chapter 14) reads every delivery's line at once, from `main/` or from any worktree, when it gets the Git slot's word: `git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq worktree .focus-kit focus-kit/`, or the hidden folder and prefix the slot names.
 It fetches origin, reads every line from the main branch's copy, `main/`'s own queue when run from `main/` and the default branch on origin when run in a worktree, and each delivery's line from `origin/<prefix><slug>`, but, in a delivery's own worktree, that delivery's line from the folder's own file, and edits nothing.
-A branch on origin is the claim: a line whose branch exists is taken, and while the branch's copy still says `[ ]`, since the `[~]` need never be committed, the tree shows it `claimed, progress unknown: propose in flight` once nothing in its `after` is left to wait on, and before that `waits:` with what it waits on, such as `waits: return-book not defined` for a line whose `after` names a `return-book` still `[ ]`.
+A branch on origin is the claim: a line whose branch exists is taken, and while the branch's copy still says `[ ]`, since the `[~]` need never be committed, the tree shows it `claimed, progress unknown: propose in flight` once its `after` lets `/propose` start, and before that `waits:`, the tree's word for an `after` not yet met, with what it still needs, such as `waits: return-book not defined` for a line whose `after` names a `return-book` still `[ ]`.
 The branch's copy of its slug's line is the current one until the branch is merged into the main branch on origin, and the main branch's copy after it, so in `main/` pull after a merge; a `[?]` blocks on the copy that put it: a branch's when the branch changed the line after it left the main branch, the main branch's unless the line's own branch changed it, and none once the line's current copy is `[x]`.
 In one project, on 2026-11-09, a branch opened before the main branch took the `[?]` off lines whose questions were answered kept the old `[?]`, and a tree that read a `[?]` on any copy showed two lines waiting on questions already answered.
-A `[x]` on a branch not yet merged shows `built, awaiting integration`, and a line whose `after` names it waits with `return-book built, not integrated`, say, since its build needs that code in the main branch.
+A `[x]` on a branch not yet merged shows `built, awaiting integration`, and a line whose `after` names it shows `waits: return-book built, not integrated`, say, since its build needs that code in the main branch.
 On the lending library, with `return-book` being built in its worktree at `[*]`, `overdue-list` defined in its own at `[>]`, each mark committed on its branch and pushed by you, and `main/`'s queue still showing both lines `[ ]`, the script run from `main/` prints this; the queue and the run are written for this chapter:
 
 ```

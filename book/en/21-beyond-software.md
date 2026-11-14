@@ -1,7 +1,7 @@
 # 21. Projects that are not software
 
 After this chapter you can run a proposal, an analysis, a handover document, a data rule or a book as deliveries, each done only when every item of its page's Done when has its evidence and `/apply` has ticked it.
-You can also say why a finding with no line in a queue gets lost.
+You can also say why a finding that nothing carries, no line and no note on a page, gets lost.
 
 ## The problem
 
@@ -98,7 +98,6 @@ On Case A, about 16 of its 73 done lines were questions to people or documents, 
 * A delivery is anything with value that fits a page, code or not.
 * For a document, Behaviour is what its reader can do, the Contract is its structure, and Done when is a checklist of machine checks and manual checks.
 * A check only a person can make stays the person's; `/apply` records what they report and ticks every item, and never one without its evidence.
-* A question to a person is a delivery too, done when the answer arrives.
-* A database rule is a delivery with a test, enforced where every client meets it.
+* A question to a person is a delivery too, done when the answer arrives, and so is a database rule, with a test, enforced where every client meets it.
 * Give every finding something that carries it, a line when it is grave and a note on a page otherwise (chapter 14), or it gets lost.
 

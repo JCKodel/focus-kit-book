@@ -1,7 +1,7 @@
 # 21. Projetos que não são software
 
 Depois deste capítulo você consegue conduzir uma proposta, uma análise, um documento de passagem de projeto, uma regra de dados ou um livro como entregas, cada uma pronta só depois que cada item do Pronto quando da sua página tiver a sua evidência e tiver sido marcado pelo `/apply`.
-Você também consegue dizer por que um achado sem linha numa fila se perde.
+Você também consegue dizer por que um achado sem nada que o carregue, nem linha nem nota numa página, se perde.
 
 ## O problema
 
@@ -98,7 +98,6 @@ No Caso A, cerca de 16 das suas 73 linhas concluídas foram perguntas a pessoas 
 * Uma entrega é qualquer coisa com valor que cabe numa página, seja código ou não.
 * Para um documento, o Comportamento é o que o seu leitor consegue fazer, o Contrato é a sua estrutura, e o Pronto quando é uma lista de checagens de máquina e checagens manuais.
 * Uma checagem que só uma pessoa consegue fazer continua sendo da pessoa; o `/apply` registra o que ela relata e marca cada item, e nunca um sem a sua evidência.
-* Uma pergunta a uma pessoa também é uma entrega, pronta quando a resposta chega.
-* Uma regra do banco de dados é uma entrega com um teste, garantida onde todo cliente a encontra.
+* Uma pergunta a uma pessoa também é uma entrega, pronta quando a resposta chega, e uma regra do banco de dados também, com um teste, garantida onde todo cliente a encontra.
 * Dê a cada achado algo que o carregue, uma linha quando ele é grave e uma nota numa página quando não é (capítulo 14), ou ele se perde.
 
