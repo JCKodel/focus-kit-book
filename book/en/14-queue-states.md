@@ -219,9 +219,9 @@ The person sets it, not `/apply`, because cancelling is a decision about scope, 
 By the free rule alone, `reprint-card`'s build is free once `print-card` is `[x]`, and that is the trap: the `[x]` it names is a decision, not a card printer that works.
 So a line whose `after` names a cancelled delivery is the person's to re-decide: drop it too, as `reprint-card` would be, or rewrite it on what does exist.
 
-A milestone's review would have no such way out.
-A review that named every line above it would name the cancelled one too and wait, as `reprint-card` does, on a line only the person's decision clears; but a review is neither dropped nor rewritten on what exists, so no re-decision of its own would clear it.
-On 2026-10-26, in one project, a Milestone 1 review waited on a line the person had dropped: the queue script answered `after <slug>, dropped: re-decide`, nothing the person could write freed it, and the review's `after all` was replaced by a list of the other 27 slugs.
+A milestone's review would have no good way out.
+A review that named every line above it would name the cancelled one too and wait, as `reprint-card` does, on a line only the person's decision clears; and of the person's ways out, dropping the review loses the test of the milestone's paragraph, and rewriting it on what exists turns its `after all` into a list of every other line above it.
+On 2026-10-26, in one project, a Milestone 1 review waited on a line the person had dropped: the queue script answered `after <slug>, dropped: re-decide`, and the review's `after all` was replaced by a list of the other 27 slugs.
 So `after all` names no cancelled line: it is every line above the review in its milestone but the cancelled ones, and it leaves them out.
 Suppose the two lines above, written for this chapter, sit in the library's milestone 1, above `m1-review`.
 `after all` leaves `print-card` out, so the cancelled line never keeps the review waiting.

@@ -221,9 +221,9 @@ Quem o põe é a pessoa, não o `/apply`, porque cancelar é uma decisão de esc
 Só pela regra de linha livre, a construção de `reimprimir-cartao` fica livre quando `imprimir-cartao` está `[x]`, e essa é a armadilha: o `[x]` que ela nomeia é uma decisão, não uma impressora de cartões que funciona.
 Então uma linha cujo `after` nomeia uma entrega cancelada cabe à pessoa redecidir: cancelá-la também, como seria `reimprimir-cartao`, ou reescrevê-la sobre o que existe.
 
-A revisão de um marco não teria essa saída.
-Uma revisão que nomeasse toda linha acima dela nomearia também a cancelada e esperaria, como `reimprimir-cartao` espera, por uma linha que só a decisão da pessoa libera; mas uma revisão não é cancelada nem reescrita sobre o que existe, então nenhuma redecisão dela mesma a liberaria.
-Em 2026-10-26, num projeto, a revisão de um Marco 1 esperou uma linha que a pessoa tinha cancelado: o script de fila respondia `after <slug>, dropped: re-decide`, nada que a pessoa escrevesse a liberava, e o `after all` da revisão foi trocado por uma lista dos outros 27 slugs.
+A revisão de um marco não teria uma boa saída.
+Uma revisão que nomeasse toda linha acima dela nomearia também a cancelada e esperaria, como `reimprimir-cartao` espera, por uma linha que só a decisão da pessoa libera; e das saídas da pessoa, cancelar a revisão perde o teste do parágrafo do marco, e reescrevê-la sobre o que existe troca o `after all` dela por uma lista de todas as outras linhas acima dela.
+Em 2026-10-26, num projeto, a revisão de um Marco 1 esperou uma linha que a pessoa tinha cancelado: o script de fila respondia `after <slug>, dropped: re-decide`, e o `after all` da revisão foi trocado por uma lista dos outros 27 slugs.
 Então o `after all` não nomeia nenhuma linha cancelada: ele é toda linha acima da revisão no seu marco menos as canceladas, e as deixa de fora.
 Suponha que as duas linhas acima, escritas para este capítulo, fiquem no marco 1 da biblioteca, acima de `m1-review`.
 O `after all` deixa `imprimir-cartao` de fora, então a linha cancelada nunca faz a revisão esperar.

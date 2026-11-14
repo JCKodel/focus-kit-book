@@ -15,7 +15,7 @@ Uma afirmação do marco que nenhuma entrega assumiu, um passo que funciona sozi
 
 O kit fecha essa brecha com uma regra, o §8 do documento de processo que ele escreve, o docs/05.
 Um marco é planejado com a sua revisão como a última linha, `<milestone>-review`, uma entrega como as outras: o `/propose` escreve a sua página, e o `/apply` a executa.
-A linha dela termina em `· after all`, toda linha acima dela no seu marco menos as canceladas, então o `/propose` escreve a sua página quando todas essas estão definidas e o `/apply` a executa quando todas estão integradas; uma linha que a pessoa cancelou nunca a faz esperar, e uma linha cujo `after` nomeia uma cancelada espera a pessoa redecidi-la, e a revisão espera com ela.
+A linha dela termina em `· after all`, toda linha acima dela no seu marco menos as canceladas, então o `/propose` escreve a sua página quando todas essas estão definidas e o `/apply` a executa quando todas estão integradas; uma linha que a pessoa cancelou nunca a faz esperar, e uma linha cujo `after` nomeia uma cancelada espera, e a revisão com ela, até a pessoa redecidir essa linha.
 A página dela pega o parágrafo do marco cláusula por cláusula e escreve, para cada uma, qual entrega a atende e como uma pessoa a testa.
 Ela não corrige nada.
 Ela roda os testes lentos que o slot Verify do docs/05 cita, os que ficam fora da verificação porque demoram demais para toda entrega, quando o slot cita algum; um que falha é um achado, então o marco não fecha enquanto a linha dele estiver aberta.

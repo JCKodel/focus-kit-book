@@ -15,7 +15,7 @@ A claim of the milestone that no delivery took on, a step that works on its own 
 
 The kit closes that gap in one rule, §8 of the process document it writes, docs/05.
 A milestone is planned with its review as its last line, `<milestone>-review`, a delivery like the others: `/propose` writes its page, and `/apply` runs it.
-Its line ends `· after all`, every line above it in its milestone but the cancelled ones, so `/propose` writes its page when every one of those is defined and `/apply` runs it when every one is integrated; a line the person cancelled never keeps it waiting, and a line whose `after` names a cancelled one waits for the person to re-decide it, and the review waits with it.
+Its line ends `· after all`, every line above it in its milestone but the cancelled ones, so `/propose` writes its page when every one of those is defined and `/apply` runs it when every one is integrated; a line the person cancelled never keeps it waiting, and a line whose `after` names a cancelled one waits, and the review with it, until the person re-decides that line.
 Its page takes the milestone's paragraph clause by clause and writes, for each, which delivery answers it and how a person tests it.
 It fixes nothing.
 It runs the slow tests docs/05's Verify slot names, the ones kept out of verify because they take too long for every delivery, when the slot names any; a failing one is a finding, so the milestone does not close while its line is open.
