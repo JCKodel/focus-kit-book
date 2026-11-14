@@ -271,7 +271,7 @@ delivery is the first free line, and the person reorders by
 conversation. A line is the mark, the slug, one sentence and its
 suffixes, on one line; what happened goes on the page, because /propose
 reads the whole queue. A line that needs another first ends with
-`· after <slug>`, written when the line is added, or `· after all`,
+`· after <slug>`, or `· after all`,
 every line above it in its milestone but the dropped ones, which is how
 the review is written. `after` is read per command: /propose starts
 when every line it names is `[>]` or beyond, because the definition needs their pages;
@@ -309,9 +309,10 @@ word; without it, it is a note.
 
 Asked what may run now, run
 `git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq <strategy>`,
-the strategy as for the claim, and show its tree: each line under the
-last line it waits on, with its state, then the lines free for /apply
-and for /propose, in order, and the next one. Offer the free lines as
+the strategy as for the claim, and show its trees, one per open
+milestone: each line under the last line it waits on, with its state.
+Then come the lines free for /apply and for /propose, in the queue's
+order across the milestones, and the next one. Offer the free lines as
 one command with several slugs, saying each slug is one more agent and
 costs as much as one session. Two builds must not touch the same files:
 before its first edit, /apply compares the files its page touches with
@@ -326,7 +327,7 @@ work changes, so the queue shows what is happening while it happens:
 | `[>]` | completely defined, page ready for /apply | /propose, when §3 is complete |
 | `[*]` | being built | /apply, when it starts |
 | `[x]` | done, page in `work/done/`; on a branch, built until merged; with `· dropped:`, cancelled | /apply, with verify green; the person, when cancelling |
-| `[?]` | waiting | any session, in the four cases below |
+| `[?]` | waiting, never on another line | any session, in the three cases below |
 
 A board may read the queue, and people pull work from it, so a mark
 changes at once: `[~]` is /propose's first edit, `[*]` is /apply's first,
@@ -339,27 +340,35 @@ board sees a new mark at once. With a branch or a worktree per delivery the mark
 /propose creates on origin as the claim, and the main branch shows the
 line as it was until the merge. A line whose branch exists on origin is
 taken, whatever its copies say. The branch's copy of the line is the
-current one for its slug until the merge, main's after it; a `[?]` on
-any copy blocks; a line only a branch has belongs to its milestone.
+current one for its slug until the merge, main's after it. A `[?]`
+blocks on the copy that put it. A branch's blocks when the branch
+changed the line after it left main: the line differs from the one at
+their merge-base, or was not there. Main's blocks unless the line's own
+branch changed the line. None blocks a line whose current copy is
+`[x]`. A line only a branch has belongs to its milestone, under main's
+wording of the heading when the branch reworded it.
 `queue.sh` reads them so; whoever reads by hand, a board or a session,
 reads the same way after `git fetch`.
 
-A line waits in four cases:
+A line waits in three cases, never on another line:
 
 * the person says it is blocked;
 * it needs an answer that was asked and not given;
-* work already started finds it needs another line done first, such as a
-  fix found in the middle of an /apply;
 * a milestone review's code reading missed part of its range (§8).
 
 The line ends with the command that picks it up, `· resume: propose` or
-`· resume: apply`, then the reason, `· blocked: <reason>` or
-`· blocked: after <slug>, <slug>`. A dependency known when the line is
-added is `· after <slug>` alone, without `[?]`: an order, not an
-interruption. When the reason is resolved (the person says so, the
-session that records the answer clears it, or the last line of an
-`after` is integrated), remove both suffixes: `resume: propose` returns
-to `[ ]`, keeping any draft, and `resume: apply` to `[>]`.
+`· resume: apply`, then the reason, `· blocked: <reason>`. When the
+reason is resolved (the person says so, or the session that records the
+answer clears it), remove both suffixes: `resume: propose` returns to
+`[ ]`, keeping any draft, and `resume: apply` to `[>]`.
+
+A line that needs another line first is not waiting. It ends
+`· after <slug>` and keeps the mark that names its next command. Known
+when the line is added, the suffix is written then. Found by work
+already started, such as a fix in the middle of an /apply, the session
+adds the suffix and returns the line to `[ ]` from `[~]`, keeping the
+draft, or to `[>]` from `[*]`. Its page says what was built and what it
+waits on, and /apply continues from there.
 
 A `[~]` or `[*]` line whose session ended without blocking it (the host
 closed, the connection or its limit) keeps its mark; its command resumes

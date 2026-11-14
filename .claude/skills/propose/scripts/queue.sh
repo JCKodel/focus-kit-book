@@ -1,12 +1,23 @@
 #!/bin/sh
-# focus-kit: draw docs/06's current milestone as a tree of what waits on
-# what, and say what may run now, as docs/05 §4 says. Run it through git:
+# focus-kit: draw every open milestone of docs/06 as a tree of what waits
+# on what, and say what may run now, as docs/05 §4 says. Run it through git:
 #   git -c "alias.fq=!sh .agents/skills/propose/scripts/queue.sh" fq <strategy>
 # <strategy> is the Git slot of docs/05: trunk | branch | worktree <hidden> <prefix>
 # With a branch or worktree per delivery, each delivery's line is read from
 # its branch on origin, which is its own copy until the delivery is
-# integrated; a branch on origin is a claim; a [?] on any copy blocks. A
-# line goes under the last line it waits on; "+ after" names the others.
+# integrated; a branch on origin is a claim.
+# A [?] blocks on the copy that put it, as docs/05 §4 says. A branch's or
+# a worktree's blocks when that copy changed the line since it left the
+# default branch: the line differs from the one at their merge-base, or
+# was not there. With no merge-base, every line counts as changed. The
+# default branch's blocks unless the copy of the line's own slug changed
+# the line. None blocks a winning [x]. When several hold, the reason shown
+# is the default branch's, then the other branches' by name, then the own
+# copy's.
+# A milestone is the base's heading. A line only a branch or a worktree
+# has takes the base's heading of the lines that share its heading in
+# that copy, so a copy that rewords a heading keeps its lines in place.
+# A line goes under the last line it waits on; "+ after" names the others.
 # "after all" leaves out the milestone's dropped lines; a line that
 # names a dropped one waits for the person to re-decide.
 # "findings:" counts the milestone's lines that end "from <slug>", and a
@@ -77,9 +88,25 @@ if [ "$strategy" != trunk ] && git remote get-url origin >/dev/null 2>&1; then
       if [ -n "$default" ] && git merge-base --is-ancestor "$ref" "refs/remotes/origin/$default" 2>/dev/null; then
         printf '%s\t@integrated\t\n' "$slug" >> "$overlay"
       fi
+      # The queue where the branch left the default branch, tagged "^slug";
+      # the local tree stands for the branch of its own slug, below.
+      if [ -n "$default" ] && [ "$slug" != "$here" ]; then
+        mb=$(git merge-base "$ref" "refs/remotes/origin/$default" 2>/dev/null) || mb=
+        if [ -n "$mb" ]; then
+          git show "$mb:$rel" 2>/dev/null | awk "$join" | awk -v s="^$slug" "$tag" >> "$overlay" || true
+        fi
+      fi
     fi
     git show "$ref:$rel" 2>/dev/null | awk "$join" | awk -v s="$slug" "$tag" >> "$overlay" || true
   done
+  # In a worktree or on a branch, the local tree is the own copy: its
+  # queue where HEAD left the default branch.
+  if [ -n "$here" ] && [ -n "$default" ]; then
+    mb=$(git merge-base HEAD "refs/remotes/origin/$default" 2>/dev/null) || mb=
+    if [ -n "$mb" ]; then
+      git show "$mb:$rel" 2>/dev/null | awk "$join" | awk -v s="^$here" "$tag" >> "$overlay" || true
+    fi
+  fi
 fi
 
 awk "$join" "$queue" | awk -F '\t' -v strategy="$strategy" -v here="$here" '
@@ -88,8 +115,13 @@ awk "$join" "$queue" | awk -F '\t' -v strategy="$strategy" -v here="$here" '
 # delivery branch on origin holds its own slug'"'"'s copy, and the local file
 # is the own copy of the slug whose worktree or branch this is. The own copy
 # wins for its slug until the delivery is integrated, then the base wins.
-# Any copy at [?] shows the line blocked unless the winner is [x]. A branch
-# on origin whose winning copy is still [ ] is claimed, progress unknown.
+# A branch still where the claim created it is an ancestor of the base
+# without being integrated: there the local copy wins until the base says
+# [x], and its own [x] is built, awaiting integration.
+# A [?] shows the line blocked unless the winner is [x], when the copy that
+# holds it put it there (docs/05 §4; see blocking() below). A branch
+# on origin whose winning copy is still [ ] is claimed, progress unknown,
+# once nothing in its after is left to wait on.
 function sl(line,   s) { s = line; sub(/^\[.\][ \t]+/, "", s); sub(/[ \t].*/, "", s); return s }
 function isline(s) { return s ~ /^\[[ ~>*x?]\][ \t]+[^ \t]/ }
 function parse(line, k,   rest, n, parts, i, p, deps, j, m) {
@@ -116,9 +148,41 @@ function add(s, line, ms, src,   k) {
   k = ++nq; parse(line, k); at[s] = k; mstone[k] = ms; from[k] = src
   if (s in blockedcopy && mark[k] != "x") { parse(blockedcopy[s], k); mstone[k] = ms }
   if (strategy == "trunk") integrated[k] = (mark[k] == "x")
-  else integrated[k] = ((s in basemark) && basemark[s] == "x") || (s in integ)
+  else integrated[k] = ((s in basemark) && basemark[s] == "x") || ((s in integ) && s != here)
   if (mark[k] == "x" && !integrated[k]) built[k] = 1
   if (mark[k] == " " && (s in claimed)) claimedk[k] = 1
+}
+# A copy changed a line when its mark or its text after the slug differs
+# from the line at the copy'"'"'s merge-base, or the line was not there.
+function key(l,   r) { r = l; sub(/^\[.\][ \t]+[^ \t]+[ \t]*/, "", r); return substr(l, 2, 1) " " r }
+function asks(l) { return substr(l, 2, 1) == "?" }
+function lineof(c, s) {
+  if (here != "" && c == here) return (s in local) ? local[s] : ""
+  return ((c, s) in copyl) ? copyl[c, s] : ""
+}
+# A copy may reword a milestone'"'"'s heading, as a branch that moved its
+# dates did: a line the base lacks takes the base'"'"'s heading of the lines
+# that share its heading in that copy.
+function home(c, t) { return ((c, t) in tr) ? tr[c, t] : t }
+function changed(c, s, l) { return !((c, s) in mb) || mb[c, s] != key(l) }
+# The [?] that blocks slug s, or "": the default branch'"'"'s (the local file
+# too, in main/ and on trunk) unless the own copy changed the line; then
+# each other copy that changed it, by branch name; then the own copy.
+function blocking(s,   o, ownc, i, c, l) {
+  o = (s in iscopy) ? lineof(s, s) : ""
+  ownc = (o != "") && changed(s, s, o)
+  if (!ownc) {
+    if (here == "" && (s in local) && asks(local[s])) return local[s]
+    if ((s in obase) && asks(obase[s])) return obase[s]
+  }
+  for (i = 1; i <= ncopy; i++) {
+    c = copies[i]
+    if (c == s) continue
+    l = lineof(c, s)
+    if (l != "" && asks(l) && changed(c, s, l)) return l
+  }
+  if (ownc && asks(o)) return o
+  return ""
 }
 function defined(k) { return mark[k] ~ /[>*x]/ || (mark[k] == "?" && resume[k] == "apply") }
 function done(k) { return mark[k] == "x" && integrated[k] }
@@ -134,7 +198,6 @@ function state(k,   i, s, d, why, sep, ok, nd, dl, ds, nb, bl, bs, nw, wl, ws) {
   if (mark[k] == "*") return "in flight: apply"
   if (mark[k] == "?") return "blocked: " blocked[k] (resume[k] != "" ? ", then " resume[k] : "")
   if (built[k]) return "built, awaiting integration"
-  if (claimedk[k]) return "claimed, progress unknown: propose in flight"
   cmd[k] = (mark[k] == ">") ? "apply" : "propose"
   why = ""; sep = ""; nd = 0; dl = ""; ds = ""; nb = 0; bl = ""; bs = ""; nw = 0; wl = ""; ws = ""
   for (i = 1; i <= ndep[k]; i++) {
@@ -153,6 +216,7 @@ function state(k,   i, s, d, why, sep, ok, nd, dl, ds, nb, bl, bs, nw, wl, ws) {
   if (nb > 0) { why = why sep few(bl, nb, "built, not integrated"); sep = "; " }
   if (nd > 0) { why = why sep few(dl, nd, "not defined"); sep = "; " }
   if (why != "") { cmd[k] = ""; return "waits: " why }
+  if (claimedk[k]) { cmd[k] = ""; return "claimed, progress unknown: propose in flight" }
   return cmd[k] " now"
 }
 function show(k, depth,   pad, i, c, extra, sep, line, n) {
@@ -184,10 +248,16 @@ FILENAME == ARGV[1] {
   if (ms == "@integrated") { integ[b] = 1; next }
   if (!isline(l)) next
   s = sl(l)
+  if (substr(b, 1, 1) == "^") { mb[substr(b, 2), s] = key(l); next }
   if (b == "*") { obase[s] = l; obasems[s] = ms }
   else if (s == b) { own[s] = l; ownms[s] = ms }
   else if (!(s in other)) { other[s] = l; otherms[s] = ms; otherfrom[s] = b }
-  if (substr(l, 2, 1) == "?" && !(s in blockedcopy)) blockedcopy[s] = l
+  if (b != "*") {
+    if (!(b in iscopy)) { iscopy[b] = 1; copies[++ncopy] = b }
+    copyl[b, s] = l
+    cq[++ncq] = b; sq[ncq] = s; mq[ncq] = ms
+  }
+  slugs[s] = 1
   next
 }
 /^## / { lms = substr($0, 4); next }
@@ -195,25 +265,35 @@ isline($0) {
   s = sl($0)
   if (s in local) { nerr++; err[nerr] = s " appears twice; the second line is ignored"; next }
   local[s] = $0; localms[s] = lms; lorder[++nl] = s
-  if (substr($0, 2, 1) == "?" && !(s in blockedcopy)) blockedcopy[s] = $0
+  slugs[s] = 1
 }
 END {
+  # The local tree is the copy of the branch whose worktree this is.
+  if (here != "" && !(here in iscopy)) { iscopy[here] = 1; copies[++ncopy] = here }
+  for (s in slugs) { l = blocking(s); if (l != "") blockedcopy[s] = l }
   # The base copy of every slug, then the order of the lines.
   if (here != "") { for (s in obase) { basemark[s] = substr(obase[s], 2, 1); base[s] = obase[s]; basems[s] = obasems[s] } }
   else { for (s in local) { basemark[s] = substr(local[s], 2, 1); base[s] = local[s]; basems[s] = localms[s] } }
   if (here != "" && (here in local)) { own[here] = local[here]; ownms[here] = localms[here] }
+  if (here != "") for (i = 1; i <= nl; i++) { cq[++ncq] = here; sq[ncq] = lorder[i]; mq[ncq] = localms[lorder[i]] }
+  for (i = 1; i <= ncq; i++) {
+    s = sq[i]
+    if (!(s in base)) continue
+    v = ++vote[cq[i], mq[i], basems[s]]
+    if (v > top[cq[i], mq[i]]) { top[cq[i], mq[i]] = v; tr[cq[i], mq[i]] = basems[s] }
+  }
   for (i = 1; i <= nl; i++) order[++no] = lorder[i]
   if (here != "") for (s in obase) if (!(s in local)) order[++no] = s
   for (i = 1; i <= no; i++) {
     s = order[i]
-    if ((s in own) && !(s in integ)) { line = own[s]; ms = ownms[s] }
-    else if (s in base) { line = base[s]; ms = basems[s] }
-    else if (s in own) { line = own[s]; ms = ownms[s] }
-    else { line = local[s]; ms = localms[s] }
-    if (ms == "" && (s in base)) ms = basems[s]
+    if ((s in own) && (!(s in integ) || (s == here && basemark[s] != "x"))) { line = own[s]; ms = home(s, ownms[s]) }
+    else if (s in base) line = base[s]
+    else if (s in own) { line = own[s]; ms = home(s, ownms[s]) }
+    else { line = local[s]; ms = home(here, localms[s]) }
+    if (s in base) ms = basems[s]
     add(s, line, ms, "")
   }
-  for (s in other) if (!(s in at)) { add(s, other[s], otherms[s], otherfrom[s]); xtra[nq] = 1 }
+  for (s in other) if (!(s in at)) { add(s, other[s], home(otherfrom[s], otherms[s]), otherfrom[s]); xtra[nq] = 1 }
   # A line only a branch has goes at the end of its milestone.
   n = 0
   for (k = 1; k <= nq; k++) if (!(k in xtra)) ord[++n] = k
@@ -225,9 +305,11 @@ END {
   }
   for (i = 1; i <= n; i++) { k = ord[i]; nm[k] = i }
   for (k = 1; k <= nq; k++) at[slug[k]] = k
-  cur = ""
-  for (i = 1; i <= n; i++) { k = ord[i]; if (!done(k)) { cur = mstone[k]; break } }
-  if (cur == "" && nq > 0) { print "milestone: none open; every line is [x]"; exit }
+  # The open milestones, in order.
+  nms = 0
+  for (i = 1; i <= n; i++) { k = ord[i]; if (!done(k) && !(mstone[k] in isopen)) { isopen[mstone[k]] = 1; msl[++nms] = mstone[k] } }
+  if (nms == 0 && nq > 0) { print "milestone: none open; every line is [x]"; exit }
+  if (nms == 0) msl[++nms] = ""
   for (i = 1; i <= n; i++) {
     k = ord[i]
     if (done(k)) continue
@@ -239,15 +321,6 @@ END {
     }
     if (best > 0 && best < i && mstone[ord[best]] == mstone[k]) kid[ord[best], ++nkid[ord[best]]] = k
     else root[k] = 1
-  }
-  print "milestone: " cur
-  nf = 0; nfo = 0; npo = 0; last = 0; above = 0; al = ""; asep = ""
-  for (i = 1; i <= n; i++) {
-    k = ord[i]
-    if (mstone[k] != cur || dropped[k]) continue
-    if (found[k]) { nf++; if (!done(k)) nfo++ }
-    else if (!done(k) && !all[k]) { npo++; last = i }
-    if (done(k)) continue
     for (j = 1; j <= nafter[k]; j++) wanted[after[k, j]] = 1
     if (blocked[k] ~ /^after /) {
       w = blocked[k]; sub(/^after /, "", w)
@@ -255,22 +328,35 @@ END {
       for (j = 1; j <= nw; j++) wanted[wl[j]] = 1
     }
   }
-  for (i = 1; i < last; i++) {
-    k = ord[i]
-    if (mstone[k] != cur || !found[k] || dropped[k] || done(k) || (slug[k] in wanted)) continue
-    above++; if (above <= 3) { al = al asep slug[k]; asep = ", " }
-  }
-  if (nf > 0) print "findings: " nfo " open of " nf " from a finding \302\267 " npo " planned open"
-  if (above > 0) print "\342\232\240\357\270\217 ahead of planned lines: " few(al, above, "")
-  for (i = 1; i <= n; i++) { k = ord[i]; if (!done(k) && mstone[k] == cur) st[k] = state(k) }
-  for (i = 1; i <= n; i++) { k = ord[i]; if (!done(k) && mstone[k] == cur && root[k] && !(k in seen)) show(k, 0) }
-  for (i = 1; i <= n; i++) { k = ord[i]; if (!done(k) && mstone[k] == cur && !(k in seen)) show(k, 0) }
+  # Every open milestone is drawn, so a blocked one hides no free line.
   np = ""; na = ""; next_slug = ""
-  for (i = 1; i <= n; i++) {
-    k = ord[i]
-    if (mstone[k] != cur || done(k) || st[k] !~ / now$/) continue
-    if (cmd[k] == "propose") np = np " " slug[k]; else na = na " " slug[k]
-    if (next_slug == "") next_slug = "/" cmd[k] " " slug[k]
+  for (m = 1; m <= nms; m++) {
+    cur = msl[m]
+    if (m > 1) print ""
+    print "milestone: " cur
+    nf = 0; nfo = 0; npo = 0; last = 0; above = 0; al = ""; asep = ""
+    for (i = 1; i <= n; i++) {
+      k = ord[i]
+      if (mstone[k] != cur || dropped[k]) continue
+      if (found[k]) { nf++; if (!done(k)) nfo++ }
+      else if (!done(k) && !all[k]) { npo++; last = i }
+    }
+    for (i = 1; i < last; i++) {
+      k = ord[i]
+      if (mstone[k] != cur || !found[k] || dropped[k] || done(k) || (slug[k] in wanted)) continue
+      above++; if (above <= 3) { al = al asep slug[k]; asep = ", " }
+    }
+    if (nf > 0) print "findings: " nfo " open of " nf " from a finding \302\267 " npo " planned open"
+    if (above > 0) print "\342\232\240\357\270\217 ahead of planned lines: " few(al, above, "")
+    for (i = 1; i <= n; i++) { k = ord[i]; if (!done(k) && mstone[k] == cur) st[k] = state(k) }
+    for (i = 1; i <= n; i++) { k = ord[i]; if (!done(k) && mstone[k] == cur && root[k] && !(k in seen)) show(k, 0) }
+    for (i = 1; i <= n; i++) { k = ord[i]; if (!done(k) && mstone[k] == cur && !(k in seen)) show(k, 0) }
+    for (i = 1; i <= n; i++) {
+      k = ord[i]
+      if (mstone[k] != cur || done(k) || st[k] !~ / now$/) continue
+      if (cmd[k] == "propose") np = np " " slug[k]; else na = na " " slug[k]
+      if (next_slug == "") next_slug = "/" cmd[k] " " slug[k]
+    }
   }
   print ""
   print "free for /apply, in order:" (na == "" ? " none" : na)
@@ -278,7 +364,7 @@ END {
   print "next: " (next_slug == "" ? "none" : next_slug)
   for (i = 1; i <= n; i++) {
     k = ord[i]
-    if (done(k) || mstone[k] != cur) continue
+    if (done(k)) continue
     for (j = 1; j <= ndep[k]; j++) {
       s = dep[k, j]
       if (s == slug[k]) { nerr++; err[nerr] = slug[k] " waits on itself" }

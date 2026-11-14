@@ -7,7 +7,7 @@ description: >-
 argument-hint: <slug>...
 allowed-tools: Bash(git:*)
 metadata:
-  version: "2026.11.12"
+  version: "2026.11.13"
 ---
 The slugs are `$ARGUMENTS`. None: show what may run now as docs/05 §4
 says and ask. Several: one subagent per slug, opened at once where
@@ -35,10 +35,11 @@ only a fully defined `[>]` line whose `after` is integrated, as §4 says,
 and whose files no in-flight build touches, becomes `[*]`, your first
 edit. docs/05 §§4 and 6 say what a conflict is.
 
-When work cannot go on, record what was built and what it waits on, leave
-the page in `work/` and block it with `resume: apply` as docs/05 §4 says.
-A prerequisite fix becomes a `[ ]` line above this one, ending
-`· from <slug>`. End the page with the partial message, show it in the
+When work cannot go on, record what was built and what it waits on and
+leave the page in `work/`. A line that waits on another takes it as its
+`after` and returns to `[>]`, as docs/05 §4 says; any other is blocked
+with `resume: apply`. A prerequisite fix becomes a `[ ]` line above this
+one, ending `· from <slug>`. End the page with the partial message, show it in the
 conversation in the same `commit` block, and follow docs/05 §6's
 blocked-work staging rule; report verify and environments, and stop
 without claiming completion.
@@ -65,8 +66,7 @@ is grave, the note goes under Outcome, and the last message says docs/05
 awaits its migration. A later edit to anything verify covers runs it once more. Leave
 environments as required. Record divergences, omissions, proof, the
 review, each fix and the decisions on the page, however long it grows.
-Tick every Done when item, move the page to `work/done/` and resolve
-dependent lines as docs/05 §4 says.
+Tick every Done when item and move the page to `work/done/`.
 
 End the page with one final `commit` block in docs/05 §6's format, replacing
 any earlier one; stage only this delivery's changes as that section says;
@@ -82,6 +82,6 @@ them to use what the delivery changed, as its user would, and to say
 here what is wrong. Tell them to review the staged diff, then to commit
 with the suggested message, merging a delivery branch as docs/05 §5
 says. Then run the queue script of docs/05 §4, though no one asked, and
-show its tree as §4 says, its `next:` command written for this host.
+show its trees as §4 says, its `next:` command written for this host.
 End saying which environment is at which version and the command that
 updates the others; never end silent.

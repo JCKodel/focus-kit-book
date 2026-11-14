@@ -7,7 +7,7 @@ description: >-
 argument-hint: <slug>...
 allowed-tools: Bash(git:*)
 metadata:
-  version: "2026.11.12"
+  version: "2026.11.13"
 ---
 You are the stakeholder's thinking partner. The slugs are `$ARGUMENTS`.
 None: show what may run now as docs/05 §4 says and ask. Several: one
@@ -42,8 +42,9 @@ Write `work/<slug>.md` as docs/05 §3 defines, using docs/03's terms; add a
 new concept there first. Draft the Behaviour scenarios yourself from the
 documents, failures and edges included; the person corrects them and does
 not write them. Mark `[>]` only when the definition is complete.
-If an answer or a dependency is missing, save the draft and block it as
-docs/05 §4 says, with `resume: propose`.
+If an answer is missing, save the draft and block it as docs/05 §4
+says, with `resume: propose`. If another line must come first, save the
+draft and add its `after` as §4 says.
 
 Files in docs/05's documentation language; talk in the person's language.
 Write no code, migration, test or configuration. End by showing the
