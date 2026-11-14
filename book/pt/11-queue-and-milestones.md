@@ -98,7 +98,7 @@ O script de fila do kit desenha essa ordem: enquanto `emprestar-livro` não est�
 Um marco é planejado com a sua revisão como a última linha, `<milestone>-review · after all` (em inglês, como o kit a escreve: `m1-review` para o primeiro marco), uma entrega como as outras, que espera as linhas acima dela e pega o parágrafo cláusula por cláusula ([capítulo 15](15-closing-a-milestone.md)).
 Ela não corrige nada: uma pessoa testa cada cláusula à mão e, com a palavra da pessoa, o código alterado desde a base do marco é lido por quem o slot Milestone review do docs/05 do projeto cita, quando cita alguém, a revisão profunda do host ou um agente somente leitura por área, e nos dois casos um conferente marca cada candidato antes que a pessoa o veja.
 Os achados dela ficam no mesmo marco, sob a linha da revisão, mesmo quando o marco seguinte já tem linhas.
-Cada achado grave, que quebra uma cláusula do parágrafo para uma pessoa no seu caminho habitual, perde ou expõe dados, ou deixa a verificação vermelha, vira uma linha `[ ]` própria.
+Cada achado grave, que quebra uma cláusula do parágrafo para uma pessoa no seu caminho habitual, perde ou expõe dados, deixa a verificação vermelha, ou é uma correção sem a qual uma entrega em andamento não consegue seguir, vira uma linha `[ ]` própria.
 Os médios, que uma pessoa encontra no uso comum enquanto a cláusula ainda vale, entram numa linha só, a linha de correções, `<milestone>-fixes`, quando você os escolhe.
 Os outros ficam listados na página da revisão, a menos que você escolha um.
 As linhas dos achados não têm segunda revisão.

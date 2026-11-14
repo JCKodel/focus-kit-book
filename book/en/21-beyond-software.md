@@ -100,5 +100,5 @@ On Case A, about 16 of its 73 done lines were questions to people or documents, 
 * A check only a person can make stays the person's; `/apply` records what they report and ticks every item, and never one without its evidence.
 * A question to a person is a delivery too, done when the answer arrives.
 * A database rule is a delivery with a test, enforced where every client meets it.
-* Give every finding a line, or it gets lost.
+* Give every finding something that carries it, a line when it is grave and a note on a page otherwise (chapter 14), or it gets lost.
 

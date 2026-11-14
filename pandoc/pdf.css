@@ -8,6 +8,8 @@
 @font-face { font-family: "Instrument Serif"; src: url("fonts/InstrumentSerif-Regular.ttf"); font-weight: 400; font-style: normal; }
 @font-face { font-family: "Instrument Serif"; src: url("fonts/InstrumentSerif-Italic.ttf"); font-weight: 400; font-style: italic; }
 @font-face { font-family: "Iosevka Term"; src: url("fonts/IosevkaTerm-Regular.ttf"); }
+/* The marks 🚨, ⚠️ and ✅: without this font they fall to the machine's emoji font, whose bitmaps weasyprint draws above their place. */
+@font-face { font-family: "Noto Color Emoji"; src: url("fonts/NotoColorEmoji-Regular.ttf"); }
 
 @page {
   size: A5;
@@ -53,7 +55,7 @@
 }
 
 html {
-  font-family: "Merriweather";
+  font-family: "Merriweather", "Noto Color Emoji";
   font-size: 9pt;
   line-height: 1.55;
   hyphens: auto;
@@ -86,7 +88,7 @@ a { color: #1A4F8B; text-decoration: none; }
 /* A pointer to a chapter prints in the text's color: on paper a blue "(chapter 7)" is noise, and the numbered title finds the chapter. */
 a[href*="__chapter-"] { color: inherit; }
 
-code, pre { font-family: "Iosevka Term"; font-style: normal; hyphens: manual; }
+code, pre { font-family: "Iosevka Term", "Noto Color Emoji"; font-style: normal; hyphens: manual; }
 code { font-size: 0.95em; }
 
 /* A chapter opens on a night-blue block that bleeds to the top, left and right edges of the page:

@@ -18,7 +18,7 @@ Um marco é planejado com a sua revisão como a última linha, `<milestone>-revi
 A linha dela termina em `· after all`, toda linha acima dela no seu marco menos as canceladas, então o `/propose` escreve a sua página quando todas essas estão definidas e o `/apply` a executa quando todas estão integradas; uma linha que a pessoa cancelou nunca a faz esperar, e uma linha cujo `after` nomeia uma cancelada espera, e a revisão com ela, até a pessoa redecidir essa linha.
 A página dela pega o parágrafo do marco cláusula por cláusula e escreve, para cada uma, qual entrega a atende e como uma pessoa a testa.
 Ela não corrige nada.
-Ela roda os testes lentos que o slot Verify do docs/05 cita, os que ficam fora da verificação porque demoram demais para toda entrega, quando o slot cita algum; um que falha é um achado, classificado como os outros (abaixo).
+Ela roda os testes lentos que o slot Verify do docs/05 cita, os que ficam fora da verificação porque demoram demais para toda entrega, quando o slot cita algum; um que falha é um achado, classificado como os outros (abaixo); e quando uma entrega anotou a verificação acima do teto, a revisão diz quais testes vão para os lentos.
 A revisão também lê o código, o único olhar sobre o todo em vez de sobre uma entrega, porque cada página pode estar certa e o todo errado.
 A página dela cita como base o commit da revisão do marco anterior, ou, para um primeiro marco, o primeiro commit do projeto, ou, onde não existe revisão anterior, um commit que a página cita com o motivo de tê-lo escolhido, e como o seu fim o commit em que o `HEAD` estava quando a leitura começou, e lista os caminhos que esse intervalo alterou, pelas áreas que o slot Milestone review (revisão de marco) do docs/05 cita quando os leitores do kit o leem.
 Um projeto cujos marcos anteriores fecharam sem linha de revisão cita, por exemplo, o commit que fechou o último deles, porque nada depois dele foi lido como um todo; esse exemplo foi escrito para este capítulo.
@@ -133,7 +133,7 @@ Os achados diferem em peso: um quebra a promessa que o parágrafo faz, outro é 
 Uma revisão que fizesse de cada achado uma linha encheria o seu marco de linhas, cada uma com a sua própria página, prova e commit antes de o marco fechar, um caso raro ao lado de uma promessa quebrada, enquanto o trabalho do marco seguinte espera atrás delas.
 
 Então a revisão classifica todo achado confirmado.
-Um grave quebra uma cláusula do parágrafo para uma pessoa no seu caminho habitual, perde ou expõe dados, ou deixa a verificação vermelha, e vira uma linha `[ ]` própria.
+Um grave quebra uma cláusula do parágrafo para uma pessoa no seu caminho habitual, perde ou expõe dados, deixa a verificação vermelha, ou é uma correção sem a qual uma entrega em andamento não consegue seguir, e vira uma linha `[ ]` própria.
 Os outros ficam listados na página da revisão: primeiro os médios, que uma pessoa encontra no uso comum enquanto a cláusula ainda vale; depois os pequenos, um caso raro, um candidato latente ou fraco, um custo que ninguém mediu.
 A pessoa diz quais médios entram na única linha de correções do marco, `<milestone>-fixes`, cada um como um item da página dela.
 Essa página é a lista deles e não se divide, seja qual for o seu tamanho, porque dividida ela seria as muitas linhas de novo.

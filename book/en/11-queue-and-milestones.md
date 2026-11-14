@@ -95,7 +95,7 @@ The kit's queue script draws that order: while `lend-book` is not `[x]`, it show
 A milestone is planned with its review as its last line, `<milestone>-review · after all`, a delivery like the others, which waits for the lines above it and takes the paragraph clause by clause ([chapter 15](15-closing-a-milestone.md)).
 It fixes nothing: a person tests each clause by hand and, on the person's word, the code changed since the milestone's base is read by whoever the Milestone review slot of the project's docs/05 names, when it names anyone, the host's deep review or one read-only agent per area, and either way a checker marks each candidate before the person sees it.
 Its findings stay in the same milestone, under the review line, even when the next milestone already holds lines.
-Each grave one, which breaks a clause of the paragraph for a person on its usual path, loses or exposes data, or leaves verify red, becomes a `[ ]` line of its own.
+Each grave one, which breaks a clause of the paragraph for a person on its usual path, loses or exposes data, leaves verify red, or is a fix a delivery in flight cannot go on without, becomes a `[ ]` line of its own.
 The medium ones, which a person meets in ordinary use while the clause still holds, enter one line, the fixes line, `<milestone>-fixes`, when you pick them.
 The others stay listed on the review's page, unless you pick one.
 The finding lines get no second review.

@@ -100,5 +100,5 @@ No Caso A, cerca de 16 das suas 73 linhas concluídas foram perguntas a pessoas 
 * Uma checagem que só uma pessoa consegue fazer continua sendo da pessoa; o `/apply` registra o que ela relata e marca cada item, e nunca um sem a sua evidência.
 * Uma pergunta a uma pessoa também é uma entrega, pronta quando a resposta chega.
 * Uma regra do banco de dados é uma entrega com um teste, garantida onde todo cliente a encontra.
-* Dê uma linha a cada achado, ou ele se perde.
+* Dê a cada achado algo que o carregue, uma linha quando ele é grave e uma nota numa página quando não é (capítulo 14), ou ele se perde.
 

@@ -200,7 +200,7 @@ Um comando que passasse por cima do motivo construiria sobre uma resposta que ni
 
 ## Uma linha de um achado
 
-Uma entrega lê código que não escreveu, e às vezes acha uma falha ali: o `/propose devolver-livro`, lendo o código de `emprestar-livro`, descobre que um membro suspenso ainda consegue pegar um livro emprestado.
+Uma entrega lê código que não escreveu, e às vezes acha uma falha ali: o `/propose devolver-livro`, lendo o código de `emprestar-livro`, descobre que um membro suspenso pela tela de membros ainda consegue pegar um livro emprestado: `emprestar` recusa um membro cujo `suspenso` é verdadeiro, como os testes dele provam com um membro construído assim, mas suspender um membro por essa tela registra isso em outro campo, que `buscarMembro` não lê.
 Uma falha que uma entrega acha no que ela mesma construiu é corrigida nessa entrega; um achado é uma falha que ela acha em qualquer outro lugar, o `/propose` enquanto define incluído.
 Cada achado transformado em linha parece razoável sozinho, e linhas vindas de achados, acrescentadas uma a uma, podem ficar à frente do trabalho que o parágrafo do marco pede, e o marco se enche de reparos enquanto as suas features esperam (o capítulo 13 conta onde isso deu errado).
 

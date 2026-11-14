@@ -45,5 +45,5 @@ Contribuições são aceitas sob a licença do arquivo que alteram.
 |---|---|---|
 | O texto e as figuras do livro (`book/`), os documentos do projeto (`docs/`, `work/`) e estes READMEs | CC BY-SA 4.0 | [`LICENSE-TEXT`](LICENSE-TEXT) |
 | Scripts, build e configuração do site (`scripts/`, `Makefile`, `mkdocs.yml`, `overrides/`, `book/assets/site.css`, `pandoc/*.css`) | AGPL-3.0-only | [`LICENSE`](LICENSE) |
-| As fontes do PDF (`pandoc/fonts/`): Merriweather, Instrument Serif, Iosevka Term | SIL Open Font License 1.1 | `pandoc/fonts/<Família>-OFL.txt` |
+| As fontes do PDF (`pandoc/fonts/`): Merriweather, Instrument Serif, Iosevka Term, Noto Color Emoji | SIL Open Font License 1.1 | `pandoc/fonts/<Família>-OFL.txt` |
 | Os arquivos de comando instalados pelo focus-kit | AGPL-3.0-only, nos termos do focus-kit | [`LICENSE`](LICENSE) |

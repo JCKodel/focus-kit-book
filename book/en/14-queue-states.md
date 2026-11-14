@@ -198,7 +198,7 @@ A command that ran past the reason would build on an answer nobody gave.
 
 ## A line from a finding
 
-A delivery reads code it did not write, and sometimes finds a flaw there: `/propose return-book`, reading `lend-book`'s code, finds that a suspended member can still borrow.
+A delivery reads code it did not write, and sometimes finds a flaw there: `/propose return-book`, reading `lend-book`'s code, finds that a member suspended from the members screen can still borrow: `lend` refuses a member whose `suspended` is true, as its tests prove with a member built that way, but suspending a member from that screen records it in another field, which `findMember` does not read.
 A flaw a delivery finds in what it built itself is fixed in that delivery; a finding is a flaw it finds anywhere else, `/propose` while it defines included.
 Each finding made a line looks reasonable on its own, and lines from findings, added one by one, can stand ahead of the work the milestone's paragraph asks for, so the milestone fills with repairs while its features wait (chapter 13 tells where it went wrong).
 

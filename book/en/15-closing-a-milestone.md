@@ -18,7 +18,7 @@ A milestone is planned with its review as its last line, `<milestone>-review`, a
 Its line ends `· after all`, every line above it in its milestone but the cancelled ones, so `/propose` writes its page when every one of those is defined and `/apply` runs it when every one is integrated; a line the person cancelled never keeps it waiting, and a line whose `after` names a cancelled one waits, and the review with it, until the person re-decides that line.
 Its page takes the milestone's paragraph clause by clause and writes, for each, which delivery answers it and how a person tests it.
 It fixes nothing.
-It runs the slow tests docs/05's Verify slot names, the ones kept out of verify because they take too long for every delivery, when the slot names any; a failing one is a finding, graded like the others (below).
+It runs the slow tests docs/05's Verify slot names, the ones kept out of verify because they take too long for every delivery, when the slot names any; a failing one is a finding, graded like the others (below); and when a delivery noted verify over its ceiling, the review says which tests go to the slow ones.
 The review also reads the code, the one look at the whole instead of a delivery, because every page can be right and the whole wrong.
 Its page names as the base the commit of the previous milestone's review, or, for a first milestone, the project's first commit, or, where no earlier review exists, a commit the page names with the reason it chose it, and as its end the commit `HEAD` was when the reading started, and lists the paths that range changed, by the areas docs/05's Milestone review slot names when the kit's readers read it.
 A project whose earlier milestones closed with no review line names, for instance, the commit that closed the last of them, because nothing after it was read as a whole; that example is written for this chapter.
@@ -130,7 +130,7 @@ Findings differ in weight: one breaks the promise the paragraph makes, another i
 A review that made every finding a line would fill its milestone with lines, each with its own page, proof and commit before the milestone closes, a rare case beside a broken promise, while the next milestone's work waits behind them.
 
 So the review grades every confirmed finding.
-A grave one breaks a clause of the paragraph for a person on its usual path, loses or exposes data, or leaves verify red, and becomes a `[ ]` line of its own.
+A grave one breaks a clause of the paragraph for a person on its usual path, loses or exposes data, leaves verify red, or is a fix a delivery in flight cannot go on without, and becomes a `[ ]` line of its own.
 The others stay listed on the review's page: first the medium ones, which a person meets in ordinary use while the clause still holds; then the small ones, a rare case, a latent or weak candidate, a cost nobody measured.
 The person says which medium ones enter the milestone's one fixes line, `<milestone>-fixes`, each an item of its page.
 That page is their list and is not split, whatever its length, since split it would be the many lines again.

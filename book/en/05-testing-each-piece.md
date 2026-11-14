@@ -36,9 +36,10 @@ End-to-end tests are few because each one is slow and fails for many reasons; Mi
 Keeping the tests in order, run time included, is your job; the agent will not do it unless you ask.
 It is one more reason to keep a rule in a pure use case: its test is a call with data, the fastest test the project has.
 End-to-end tests, and any test that needs the application or a network, are written only where they prove something the fast ones cannot.
-What every delivery runs is the project's verify command, the command that must pass before a delivery is called done, and you decide what it runs.
+What every delivery runs is the project's verify command, the command that must pass before a delivery is called done, and you decide what it runs and its ceiling, how long it may take, five minutes unless you say otherwise.
 A slow test that proves what the fast ones cannot may stay out of it, and is then kept, not deleted: next to the verify command, the project writes the command that runs the slow tests and what they prove, or that there are none.
-A milestone is a group of deliveries with a paragraph saying what is true when it closes, and the review that closes it runs those slow tests; one that fails keeps the milestone open until its fix is done.
+A milestone is a group of deliveries with a paragraph saying what is true when it closes; each delivery runs the slow tests that cover what it changed, so a break shows in the delivery that made it, and the review that closes the milestone runs them all and, when verify ran past its ceiling, says which tests go to the slow ones.
+A slow test that fails at that review keeps the milestone open until its fix is done.
 
 ## What a fake is
 
