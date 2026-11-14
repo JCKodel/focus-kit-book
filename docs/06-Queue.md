@@ -795,7 +795,8 @@ When this milestone closes, the book teaches focus-kit 2026.11.12 and the reposi
 [x] ch13-apply-findings     chapter 13: /apply fixing in the delivery what is wrong in what it built, a flaw it cannot fix a note or a `[?]`, a finding elsewhere a line only when grave, its last message opening with `🚨`, `⚠️` or `✅`, tests for what the page says and fixes, verify's ceiling and the slow tests that cover what the delivery changed, with the 32 of 130 lines of 2026-11-12 as the error · after kit-2026-11-12
 [x] ch14-queue-findings     chapter 14: the `· from <slug>` suffix, where a grave line goes, a note on the delivery's page, a test or process line only on the person's word, and `queue.sh` printing `findings:` and its warning · after kit-2026-11-12
 [x] ch15-review-grades      chapter 15: the milestone review copying the deliveries' notes and grading findings, grave a line each, the medium ones the person picks on one `<milestone>-fixes` line, the small ones listed · after kit-2026-11-12
-[ ] m38-review               the review of M38 as docs/05 §8 says · after all
+[x] m38-review               the review of M38 as docs/05 §8 says · after all
+[ ] m38-fixes                the six medium findings of m38-review, each an item of its page: grave told with three tests in chapters 11, 13 and 15 and docs/03 against chapter 14's and docs/05's four; the PDF build drawing `🚨`, `⚠️` and `✅` above their place, a toolchain change to `pandoc/pdf.css` proved by docs/05 §5's Proof of a screen, with chapter 13's marks in its example's last message and in key point 4 given no word beside them; chapter 5's slow tests told as the review's only; chapter 14's `fix-suspended` against chapter 13's tested refusal for a suspended member; chapter 21's key point giving every finding a line; chapter 10's quick guide leaving out the mark `/apply`'s last message opens with; both editions · after m38-review · from m38-review
 ```
 
 ## M39. focus-kit 2026.11.13
