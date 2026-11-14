@@ -357,7 +357,7 @@ Uma pergunta que pertence a outra pessoa, um cliente ou a diretora da biblioteca
 O Caso A deu a uma pergunta assim uma linha própria, uma entrega de pergunta, cujo único resultado é uma resposta escrita; ela é uma customização do próprio Caso A, não um passo do kit (capítulo 20).
 
 Páginas escritas ao mesmo tempo não leem umas às outras.
-O `/propose` lê as entregas em andamento em `work/` quando começa, e uma página sendo escrita ao mesmo tempo ainda não está lá: duas páginas podem decidir a mesma pergunta de dois jeitos, ou cada uma pedir ao docs/03 o mesmo termo novo.
+O `/propose` lê a página de cada entrega em andamento, em `work/` ou no branch dela, quando começa, e uma página sendo escrita ao mesmo tempo ainda não está lá: duas páginas podem decidir a mesma pergunta de dois jeitos, ou cada uma pedir ao docs/03 o mesmo termo novo.
 Você encontra isso lendo as páginas lado a lado, e corrige uma delas na sessão que digitou o comando, como acima.
 
 Cada `/propose` escreve a sua página e a marca da sua linha e não coloca nada em stage: a proposta fica na pasta, sem commit, e o que o índice já guardava fica como estava.

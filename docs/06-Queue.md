@@ -821,6 +821,6 @@ When this milestone closes, the book teaches focus-kit 2026.11.14 and the reposi
 ```
 [x] kit-2026-11-14          reinstall the kit at 2026.11.14 and apply its migration report in the same session: docs/05 §8's base and its sentence on a slot that says none, §4's sentences that say a line held by `after` waits, and `work/kit-proposals.md` telling entries 9 to 13 and 15 as taken by 2026.11.14 · after m39-review
 [x] ch15-base-last-end      chapter 15: the base of a review's range as the end the last review's page names, not that review's commit, with the gap `ch15-review-grades` noted on 2026-11-14 as the error, a delivery committed while a review reads falling in neither range, and the base after a dropped review; both editions · after kit-2026-11-14
-[ ] ch12-pages-on-branches  chapters 12 and 19: `/propose` reading the page of each delivery in flight in `work/` or on its own branch; both editions · after kit-2026-11-14
+[x] ch12-pages-on-branches  chapters 12 and 19: `/propose` reading the page of each delivery in flight in `work/` or on its own branch; both editions · after kit-2026-11-14
 [ ] m40-review               the review of M40 as docs/05 §8 says · after all
 ```

@@ -357,7 +357,7 @@ A question that belongs to someone else, a client or the library's director, is 
 Case A gave such a question a line of its own, a question delivery, whose only output is a written answer; it is Case A's own customization, not a step of the kit (chapter 20).
 
 Pages written at once do not read each other.
-`/propose` reads the deliveries in flight in `work/` when it starts, and a page being written at the same time is not there yet: two pages may settle the same question two ways, or each ask docs/03 for the same new term.
+`/propose` reads the page of each delivery in flight, in `work/` or on its own branch, when it starts, and a page being written at the same time is not there yet: two pages may settle the same question two ways, or each ask docs/03 for the same new term.
 You find it by reading the pages side by side, and you correct one of them in the session that typed the command, as above.
 
 Each `/propose` writes its page and its line's mark and stages nothing: the proposal stays in the folder, uncommitted, and whatever the index already held stays as it was.
